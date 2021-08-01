@@ -1,1 +1,0 @@
-{ age: u8; name: string }

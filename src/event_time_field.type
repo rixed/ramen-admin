@@ -1,5 +1,0 @@
-( // TODO: make this a record
-  $field_name; // name
-  [ OutputField | Parameter ];  // source
-  float  // scale
-)

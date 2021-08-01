@@ -1,6 +1,0 @@
-// Identifies a function (fully qualified name)
-{
-  site : $site_name;
-  program: $program_name;
-  func: $function_name;
-}

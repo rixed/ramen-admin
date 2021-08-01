@@ -1,4 +1,0 @@
-// What to do on commit
-// TODO: should be inlined in raql_operation, and given a name for
-// interfacing with RamenOperation.ml
-[ reset | never ]

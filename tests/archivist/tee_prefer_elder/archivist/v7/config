@@ -1,6 +1,0 @@
-{
-  size_limit = 4000000;
-  retentions = {
-    "local:children/a" => { duration = 3600 };
-  };
-}

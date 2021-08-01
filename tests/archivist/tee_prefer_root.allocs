@@ -1,9 +1,0 @@
-{
-	(
-		"local", "children/b"
-	) => 0; (
-		"local", "children/a"
-	) => 0; (
-		"local", "root"
-	) => 4000000
-}

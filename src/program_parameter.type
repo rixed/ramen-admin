@@ -1,5 +1,0 @@
-// Specification of command line parameters of a program
-{
-  ptyp: $field_type;
-  value: $raql_value;
-}

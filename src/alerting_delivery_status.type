@@ -1,6 +1,0 @@
-[ StartToBeSent
-| StartToBeSentThenStopped
-| StartSent
-| StartAcked
-| StopToBeSent
-| StopSent ]

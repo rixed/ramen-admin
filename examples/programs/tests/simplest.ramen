@@ -1,3 +1,0 @@
--- vim: ft=sql
-
-define f as yield 1 as one;

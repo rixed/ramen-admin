@@ -1,5 +1,0 @@
-[ NewNotification [ Duplicate | Inhibited | STFU | StartEscalation ]
-| Outcry (string; u32)	// contact name * previous number of attempts
-| Ack string
-| Stop [ Notification | Manual string | Timeout string ]
-| Cancel string ]

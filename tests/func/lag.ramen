@@ -1,5 +1,0 @@
--- vim: ft=sql expandtab
-
-DEFINE f AS
-  FROM fixtures/n123/csv
-  SELECT n, lag globally n AS lag1, lag globally (2, n) AS lag2;

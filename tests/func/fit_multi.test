@@ -1,9 +1,0 @@
-{
-  programs = [
-    { src = "fit_multi.ramen" };
-    { src = "fixtures/cars.ramen" };
-  ];
-  outputs = {
-    "fit_multi/f" => {
-      present = [ { "h_pred" => "281.898168902" } ]}}
-}

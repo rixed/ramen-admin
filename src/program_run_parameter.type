@@ -1,7 +1,0 @@
-// A ramen program can be parameterized at launch time.
-// This is the command line of a given entry of the target config.
-// For the specification of all possible parameters, see $program_parameter.
-{
-  name: $field_name;
-  value: $raql_value;
-}

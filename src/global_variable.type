@@ -1,5 +1,0 @@
-{
-  scope: [ Program | Site | Global ];
-  name: $field_name;
-  typ: $raql_type;
-}

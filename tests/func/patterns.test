@@ -1,8 +1,0 @@
-{
-  programs = [
-    { src = "patterns.ramen" };
-    { src = "fixtures/cars.ramen" };
-  ];
-  outputs = {
-    "patterns/f" => { present = [ { "count" => "118" } ] } };
-}

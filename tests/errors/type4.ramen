@@ -1,1 +1,0 @@
-SELECT IF "true" THEN 1 ELSE 2 AS x;

@@ -1,2 +1,0 @@
-{ name: { first: string[]; last: string[]? } ;
-  birthdate: { year: i32; month: (string; u8) } }?

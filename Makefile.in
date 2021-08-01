@@ -1,31 +1,10 @@
 # Configuration
 
 VERSION = @PACKAGE_VERSION@
-BUNDLE_DIR = bundle
 
-DUPS_IN  = $(shell ocamlfind query compiler-libs)
-OCAMLC   = OCAMLPATH=$(OCAMLPATH) OCAMLRUNPARAM= OCAMLFIND_IGNORE_DUPS_IN="$(DUPS_IN)" ocamlfind ocamlc
-OCAMLOPT = OCAMLPATH=$(OCAMLPATH) OCAMLRUNPARAM= OCAMLFIND_IGNORE_DUPS_IN="$(DUPS_IN)" ocamlfind ocamlopt
-OCAMLDEP = OCAMLPATH=$(OCAMLPATH) OCAMLRUNPARAM= OCAMLFIND_IGNORE_DUPS_IN="$(DUPS_IN)" ocamlfind ocamldep
-QTEST    = qtest
+DESSSERC = ocamlfind dessser/dessserc
 LINUXDEPLOY = linuxdeploy-x86_64.AppImage
-WGET     = wget --quiet
 
-WARNS    = -w -40-58+27
-OCAMLOPTFLAGS = @OCAMLOPTFLAGS@ -thread -I src -I $(BUNDLE_DIR)/lib $(WARNS) -annot -bin-annot
-OCAMLCFLAGS = @OCAMLCFLAGS@ -thread -I src -I $(BUNDLE_DIR)/lib $(WARNS) -annot
-
-ifneq (@QMAKE@,)
-ifneq (@CONVERT@,)
-BUILD_RMADMIN = 1
-else
-BUILD_RMADMIN =
-endif
-else
-BUILD_RMADMIN =
-endif
-
-CFLAGS   += -std=gnu11   -Wall -W -Wno-parentheses -fPIC
 CXXFLAGS += -std=gnu++17 -Wall -W -Wno-parentheses -fPIC
 CPPFLAGS += -D_GNU_SOURCE \
             -I '@OCAMLLIB@' \
@@ -34,977 +13,129 @@ CPPFLAGS += -D_GNU_SOURCE \
             -I '$(shell ocamlfind query stdint)'
 
 ifdef NDEBUG
-OCAMLOPTFLAGS += -noassert -O2
-OCAMLCFLAGS += -noassert -O2
 CPPFLAGS += -DNDEBUG
-CFLAGS += -O3
 CXXFLAGS += -DNDEBUG -O3
 QMAKE_EXTRA = "CONFIG+=release"
 STRIP_BIN = 1
 CMAKE_BUILD_TYPE = "RELEASE"
 else
-OCAMLOPTFLAGS += -g
-OCAMLCFLAGS += -g
 CPPFLAGS += -g
-CFLAGS += -O0
 CXXFLAGS += -O0 -g
 QMAKE_EXTRA = "CONFIG+=debug"
 CMAKE_BUILD_TYPE = "DEBUG"
 endif
 
-BORINGTUN_DEB = boringtun_0.2.0+1903281651-bf310c7~buster_amd64.deb
-
-# parsercombinator is used by string to IP conversion :(
-META_REQUIRES = \
-	batteries \
-	binocle \
-	binocle.thread \
-	dessser \
-	findlib \
-	kafka \
-	lacaml \
-	lmdb \
-	parsercombinator \
-	pfds \
-	ppp \
-	ppp.unix \
-	smt2 \
-	sodium \
-	stdint \
-	syslog \
-	threads \
-	zmq
-# The above are the dependencies required when ramen is running.
-# To build ramen you will also need:
-#   unix num js_of_ocaml js_of_ocaml-ppx cmdliner sqlite3
-#   compiler-libs compiler-libs.common
-#   compiler-libs.bytecomp compiler-libs.optcomp
-
-PACKAGES = \
-	batteries \
-	binocle \
-	binocle.thread \
-	cmdliner \
-	compiler-libs \
-	compiler-libs.bytecomp \
-	compiler-libs.common \
-	compiler-libs.optcomp \
-	dessser \
-	kafka \
-	lacaml \
-	lmdb \
-	parsercombinator \
-	pfds \
-	net_codecs \
-	num \
-	ppp \
-	ppp.ppx \
-	ppp.unix \
-	smt2 \
-	sodium \
-	sqlite3 \
-	stdint \
-	syslog \
-	threads \
-	unix \
-	uuidm \
-	zmq
-
-ifeq ($(shell uname),Darwin)
-FILE_NOTIFIER = src/RamenFileNotify_Poller.ml
-else
-FILE_NOTIFIER = src/RamenFileNotify_Inotify.ml
-META_REQUIRES += inotify
-PACKAGES += inotify
-endif
-
-# `make` should compile and install everything, yet to build the deb or
-# tarball RmAdmin is not needed:
-PACKAGED_BIN = src/ramen
+PACKAGED_BIN = src/RmAdmin
 INSTALLED_BIN = $(PACKAGED_BIN)
-ifeq ($(BUILD_RMADMIN),1)
-INSTALLED_BIN += rmadmin/RmAdmin
-endif
-
-INSTALLED_LIB = \
-	src/codegen.cmxa src/codegen.a \
-	$(filter %.cmi, $(CODEGENLIB_SOURCES:.ml=.cmi)) \
-	$(filter %.cmx, $(CODEGENLIB_SOURCES:.ml=.cmx)) \
-	src/libringbuf.a src/libcollectd.a src/libnetflow.a \
-	src/liborchelp.a src/libcountry.a
-INSTALLED = $(INSTALLED_BIN) $(INSTALLED_LIB) META
-
-ifneq (@HAVE_ORC@,1)
-BUNDLE_LIBORC = $(BUNDLE_DIR)/lib/liborc.a
-else
-BUNDLE_LIBORC =
-endif
+INSTALLED = $(INSTALLED_BIN)
 
 prefix = @prefix@
 exec_prefix = @exec_prefix@
-bin_dir ?= @bindir@
-# Where the deb (or other non-opam) version of ramen will get the libraries
-# bundle from. This is important that the ramen package is compiled with the
-# correct path as we use opam installed libs to build the non-opam bundle,
-# or RamenCompilConfig will be incompatible).
-lib_dir ?= @libexecdir@
+bindir ?= @bindir@
 
-# Where examples are installed
-sample_dir ?= @sharedstatedir@
-
-# Where to install systemd configuration
-systemd_dir ?= /lib/systemd/system
-sysconf_dir ?= /etc/default
-
-all: $(INSTALLED) bundle
+all: $(INSTALLED)
 
 # Generic rules
 
-.SUFFIXES: .ml .mli .cmi .cmx .cmo .cmxs .cmt .top .html .adoc .ramen .x .test .success .type
-.PHONY: clean clean-temp clean-dist clean-dessserc-gen \
-        all dep bundle doc deb tarball bundle check \
-        func-check unit-check ringbuf-check cli-check err-check arc-check \
-        orc-check comp-check \
-        install install-bundle install-examples install-systemd uninstall reinstall \
-        docker docker-dev docker-push appimage coverity bench
+.SUFFIXES: .type
+.PHONY: clean clean-dist clean-dessserc-gen \
+        all check install uninstall reinstall \
+        appimage coverity
 
-%.cmi: %.mli
-	@echo 'Compiling $@ (interface)'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -package "$(PACKAGES)" -c $<
-
-%.cmi: %.cmx
-	@true
-
-#src/RamenName.cmi: src/RamenName.mli
-#	@echo 'Compiling $@ (interface)'
-#	$(OCAMLOPT) $(OCAMLOPTFLAGS) -package "$(PACKAGES)" -c $<
-
-%.cmx %.cmt: %.ml
-	@echo 'Compiling $@ (native)'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -package "$(PACKAGES)" -c $<
-
-%.cmo %.cmt: %.ml
-	@echo 'Compiling $@ (bytecode)'
-	$(OCAMLC) $(OCAMLCFLAGS) -package "$(PACKAGES)" -c $<
-
-%.html: %.adoc
-	@echo 'Building documentation $@'
-	asciidoc -a data-uri -a icons -a toc -a max-width=55em --theme volnitsky -o $@ $<
-
-%.ml: %.type
+%.cc: %.type
 	@echo 'Generating code for type $<'
 	@extra=""; \
-	if test -n "$(findstring $<, $(TYPE_NEED_SEXPR))"; then \
-	  extra="--input-encoding s-expression --output-encoding s-expression $$extra" ;\
-	fi ;\
-	if test -n "$(findstring $<, $(TYPE_NEED_JSON))"; then \
-	  extra="--input-encoding json --output-encoding json $$extra" ;\
-	fi ;\
-	ocamlfind dessser/dessserc lib --quiet --fieldmask=both -O3 \
+	$(DESSSERC) lib --quiet --fieldmask=without -O3 \
 	  --input-encoding row-binary --output-encoding row-binary \
-	  --language=OCaml --schema=@$< \
-	  $$extra -o $@
+	  --language=C++ --schema=@$< \
+	  -o $@
 
-# BEWARE that raql_type is not automatically generated
+# For all *_wire types we will have to create a non-wire alias
 TYPE_SOURCES = \
-	src/field_name_wire.type \
-	src/field_name.ml \
-	src/function_name_wire.type \
-	src/function_name.ml \
-	src/program_name_wire.type \
-	src/program_name.ml \
-	src/fq_name_wire.type \
-	src/fq_name.ml \
-	src/site_name_wire.type \
-	src/site_name.ml \
-	src/file_path_wire.type \
-	src/file_path.ml \
-	src/src_path_wire.type \
-	src/src_path.ml \
-	src/fieldmask_wire.type \
-	src/fieldmask.ml \
-	src/fq_function_name.type \
-	src/event_time_field.type \
-	src/event_time.type \
-	src/raql_type_wire.type \
-	src/raql_type.ml \
-	src/raql_value_wire.type \
-	src/raql_value.ml \
-	src/func_ref.type \
-	src/worker.type \
-	src/units.type \
-	src/global_variable.type \
-	src/field_type.type \
-	src/program_run_parameter.type \
-	src/program_parameter.type \
-	src/target_config.type \
-	src/raql_variable.type \
-	src/raql_path_comp.type \
-	src/raql_top_output.type \
-	src/raql_binding_key.type \
-	src/raql_expr.type \
-	src/raql_net_protocol.type \
-	src/raql_select_field.type \
-	src/raql_flush_method.type \
-	src/raql_operation.type \
-	src/retention.type \
-	src/source_info.type \
-	src/simple_filter.type \
-	src/alert.type \
-	src/runtime_stats.type \
-	src/time_range.type \
-	src/replay.type \
-	src/replay_request.type \
-	src/replayer.type \
-	src/output_specs_wire.type \
-	src/output_specs.ml \
-	src/dashboard_widget.type \
-	src/alerting_contact.type \
-	src/alerting_notification.type \
-	src/alerting_delivery_status.type \
-	src/alerting_log.type \
-	src/alerting_inhibition.type \
-	src/sync_user_id.type \
-	src/sync_selector.type \
-	src/sync_socket.type \
-	src/sync_value.type \
-	src/sync_key.type \
-	src/sync_client_cmd.type \
-	src/sync_client_msg.type \
-	src/sync_server_msg.type
-
-TYPE_NEED_SEXPR = \
-	src/raql_value.type
-
-TYPE_NEED_JSON = \
-	src/fq_name_wire.type \
-	src/site_name_wire.type \
-	src/function_name_wire.type \
-	src/program_name_wire.type \
-	src/alerting_contact.type \
-	src/alerting_notification.type \
-	src/field_name_wire.type \
-	src/simple_filter.type \
-	src/alert.type
-
-RAMEN_SOURCES = \
-	src/RamenVersions.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.mli \
-	src/RamenName.ml \
-	src/RamenConsts.ml \
-	src/RamenConstsContentTypes.ml \
-	src/RamenConstsMetric.ml \
-	src/RamenConstsCliInfo.ml \
-	src/RamenConstsWorkerCommands.ml \
-	src/RamenConstsWorkerArgv0.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConstsFieldDocs.ml \
-	src/RamenConstsServiceNames.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenConstsObjectSuffixes.ml \
-	src/RamenConstsEntryPoints.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	$(filter %.mli, $(TYPE_SOURCES:.type=.mli)) \
-	$(filter %.ml, $(TYPE_SOURCES:.type=.ml)) \
-	src/RamenBitmask.ml \
-	src/RamenChannel.ml \
-	src/RamenTimeRange.ml \
-	src/RamenTypes.ml \
-	src/RamenGlobalVariables.ml \
-	src/RamenParams.ml \
-	src/RamenAdvLock.ml \
-	src/RamenEventTime.ml \
-	src/RamenUnits.ml \
-	src/RamenTuple.ml \
-	src/RamenFieldOrder.ml \
-	src/RamenCollectd.ml \
-	src/RamenCollectdSerialization.ml \
-	src/RamenNetflow.ml \
-	src/RamenNetflowSerialization.ml \
-	src/RamenGraphiteSink.ml \
-	src/RamenProtocols.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenVariable.ml \
-	src/RamenLang.ml \
-	src/RingBuf.ml \
-	src/RingBufLib.ml \
-	src/RamenOrc.ml \
-	src/RamenExpr.ml \
-	src/Globs.ml \
-	src/RamenOperation.ml \
-	src/RamenFieldMask.ml \
-	src/RamenFieldMaskLib.ml \
-	src/RamenCompilConfig.ml \
-	src/RamenRetention.ml \
-	src/RamenSerialization.ml \
-	src/RamenWatchdog.ml \
-	src/HeavyHitters.ml \
-	src/RamenDepLibs.ml \
-	src/RamenSyncTree.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenSyncClient.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenSmtParser.ml \
-	src/RamenSmt.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	src/RamenConf.ml \
-	src/RamenTypingHelpers.ml \
-	src/RamenTypingErrors.ml \
-	src/RamenTyping.ml \
-	src/RamenProgram.ml \
-	src/RamenOCamlCompiler.ml \
-	src/CodeGen_Helpers.ml \
-	src/CodeGen_OCaml.ml \
-	src/CodeGen_OCamlEnv.ml \
-	src/CodeGen_RaQL2DIL.ml \
-	src/CodeGen_Dessser.ml \
-	src/RamenSyncHelpers.ml \
-	src/RamenPaths.ml \
-	src/RamenSyncUsers.ml \
-	src/RamenOutRef.ml \
-	src/RamenServices.ml \
-	src/RamenFileNotify.ml \
-	src/RamenProcesses.ml \
-	src/RamenSubcommands.ml \
-	src/RamenCompiler.ml \
-	src/RamenReplay.ml \
-	src/RamenArchivist.ml \
-	src/RamenExport.ml \
-	src/RamenTimeseries.ml \
-	src/RamenHttpHelpers.ml \
-	src/RamenGc.ml \
-	src/RamenRun.ml \
-	src/RamenGraphite.ml \
-	src/CodeGen_Alert2RaQL.ml \
-	src/RamenMake.ml \
-	src/RamenSupervisor.ml \
-	src/RamenHeap.ml \
-	src/RamenSzHeap.ml \
-	src/SqliteHelpers.ml \
-	src/RamenStringExpansion.ml \
-	src/RamenAlerter.ml \
-	src/TermTable.ml \
-	src/RamenHttpd.ml \
-	src/RamenCopy.ml \
-	src/RamenCopySrv.ml \
-	src/RamenSyncServer.ml \
-	src/RamenSourceExamples.ml \
-	src/RamenSyncZMQServer.ml \
-	src/RamenChoreographer.ml \
-	src/RamenReplayService.ml \
-	src/RamenPrecompserver.ml \
-	src/RamenExecompserver.ml \
-	src/RamenConfClient.ml \
-	src/RamenCliCheck.ml \
-	src/RamenTestAlert.ml \
-	src/RamenCliCmd.ml \
-	src/RingBufCmd.ml \
-	src/RamenCompletion.ml \
-	src/RamenTests.ml \
-	src/ramen.ml
-
-CODEGENLIB_SOURCES = \
-	src/RamenVersions.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.mli \
-	src/RamenName.ml \
-	src/RamenConsts.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConstsMetric.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenConstsFieldDocs.ml \
-	src/RamenConstsWorkerCommands.ml \
-	src/RamenConstsWorkerArgv0.ml \
-	src/Globs.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	$(filter %.mli, $(TYPE_SOURCES:.type=.mli)) \
-	$(filter %.ml, $(TYPE_SOURCES:.type=.ml)) \
-	src/RamenChannel.ml \
-	src/CountryOfIp.ml \
-	src/RamenTypes.ml \
-	src/RamenGlobalVariables.ml \
-	src/RamenWatchdog.ml \
-	src/RamenAdvLock.ml \
-	src/RamenFieldMask.ml \
-	src/RamenEventTime.ml \
-	src/RamenUnits.ml \
-	src/RingBuf.ml \
-	src/RamenTypeConverters.ml \
-	src/RingBufLib.ml \
-	src/RamenOrc.ml \
-	src/RamenTuple.ml \
-	src/RamenFieldOrder.ml \
-	src/RamenCollectd.ml \
-	src/RamenCollectdSerialization.ml \
-	src/RamenNetflow.ml \
-	src/RamenNetflowSerialization.ml \
-	src/RamenGraphiteSink.ml \
-	src/RamenBloomFilter.ml \
-	src/RamenSampling.ml \
-	src/RamenFileNotify.ml \
-	src/RamenParams.ml \
-	src/RamenVariable.ml \
-	src/RamenLang.ml \
-	src/RamenExpr.ml \
-	src/RamenProtocols.ml \
-	src/RamenOperation.ml \
-	src/RamenSyncTree.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenSyncClient.ml \
-	src/RamenTimeRange.ml \
-	src/RamenRetention.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	src/RamenCompilConfig.ml \
-	src/RamenConf.ml \
-	src/RamenHeap.ml \
-	src/RamenSzHeap.ml \
-	src/RamenSortBuf.ml \
-	src/HeavyHitters.ml \
-	src/RamenOutRef.ml \
-	src/CodeGenLib.ml \
-	src/CodeGenLib_Config.ml \
-	src/CodeGenLib_Factors.ml \
-	src/CodeGenLib_Stats.ml \
-	src/CodeGenLib_IO.ml \
-	src/CodeGenLib_State.ml \
-	src/CodeGenLib_Casing.ml \
-	src/CodeGenLib_Publish.ml \
-	src/CodeGenLib_Globals.ml \
-	src/CodeGenLib_Dessser.ml \
-	src/RamenCopy.ml \
-	src/RamenCopyClt.ml \
-	src/CodeGenLib_Skeletons.ml
-
-RMADMIN_SOURCES = \
-	src/RamenVersions.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.mli \
-	src/RamenName.ml \
-	src/RamenConsts.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConstsMetric.ml \
-	src/RamenConstsFieldDocs.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	$(filter %.mli, $(TYPE_SOURCES:.type=.mli)) \
-	$(filter %.ml, $(TYPE_SOURCES:.type=.ml)) \
-	src/RamenTimeRange.ml \
-	src/Globs.ml \
-	src/RamenTypes.ml \
-	src/RamenGlobalVariables.ml \
-	src/RamenParams.ml \
-	src/RamenEventTime.ml \
-	src/RamenUnits.ml \
-	src/RamenVariable.ml \
-	src/RamenLang.ml \
-	src/RamenExpr.ml \
-	src/RamenRetention.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenChannel.ml \
-	src/RamenTuple.ml \
-	src/RamenFieldOrder.ml \
-	src/RamenCollectd.ml \
-	src/RamenGraphiteSink.ml \
-	src/RamenNetflow.ml \
-	src/RamenProtocols.ml \
-	src/RamenEventTime.ml \
-	src/RamenOperation.ml \
-	src/RamenFieldMask.ml \
-	src/RamenSyncTree.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenSyncClient.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	rmadmin/GuiHelper.ml
-
-LIBRINGBUF_SOURCES = \
-	src/config.h \
-	src/ringbuf/archive.h \
-	src/ringbuf/archive.c \
-	src/ringbuf/miscmacs.h \
-	src/ringbuf/ringbuf.h \
-	src/ringbuf/ringbuf.c \
-	src/ringbuf/wrappers.c
-
-LIBCOLLECTD_SOURCES = \
-	src/collectd/collectd.h \
-	src/collectd/collectd.c \
-	src/collectd/wrappers.c
-
-LIBNETFLOW_SOURCES = \
-	src/netflow/v5.c
-
-LIBORC_SOURCES = \
-	src/orc/wrappers.cc
-
-LIBCOUNTRY_SOURCES = \
-	src/country_of_ip/country_of_ip.h \
-	src/country_of_ip/country_of_ip.c \
-	src/country_of_ip/db.h \
-	src/country_of_ip/db_v4.h \
-	src/country_of_ip/db_v4.c \
-	src/country_of_ip/db_v6.h \
-	src/country_of_ip/db_v6.c \
-	src/country_of_ip/wrapper.c
-
-ORCWRITER_SOURCES = \
-	src/RamenVersions.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.mli \
-	src/RamenName.ml \
-	src/RamenConsts.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConstsMetric.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenConstsFieldDocs.ml \
-	src/RamenConstsObjectSuffixes.ml \
-	src/RamenConstsEntryPoints.ml \
-	src/RamenConstsWorkerCommands.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	$(filter %.mli, $(TYPE_SOURCES:.type=.mli)) \
-	$(filter %.ml, $(TYPE_SOURCES:.type=.ml)) \
-	src/RamenTimeRange.ml \
-	src/Globs.ml \
-	src/RamenChannel.ml \
-	src/RamenTypes.ml \
-	src/RamenGlobalVariables.ml \
-	src/RamenParams.ml \
-	src/RamenAdvLock.ml \
-	src/RamenEventTime.ml \
-	src/RamenUnits.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenTuple.ml \
-	src/RamenFieldOrder.ml \
-	src/RamenCollectd.ml \
-	src/RamenCollectdSerialization.ml \
-	src/RamenNetflow.ml \
-	src/RamenNetflowSerialization.ml \
-	src/RamenGraphiteSink.ml \
-	src/RamenProtocols.ml \
-	src/RamenVariable.ml \
-	src/RamenLang.ml \
-	src/RingBuf.ml \
-	src/RingBufLib.ml \
-	src/RamenOrc.ml \
-	src/RamenExpr.ml \
-	src/RamenOperation.ml \
-	src/RamenFieldMask.ml \
-	src/RamenFieldMaskLib.ml \
-	src/RamenCompilConfig.ml \
-	src/RamenRetention.ml \
-	src/RamenSerialization.ml \
-	src/RamenDepLibs.ml \
-	src/RamenSyncTree.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenSyncClient.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenSmtParser.ml \
-	src/RamenSmt.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	src/RamenConf.ml \
-	src/RamenTypingErrors.ml \
-	src/RamenTypingHelpers.ml \
-	src/RamenTyping.ml \
-	src/RamenProgram.ml \
-	src/RamenOCamlCompiler.ml \
-	src/CodeGen_Helpers.ml \
-	src/CodeGen_OCaml.ml \
-	src/CodeGen_OCamlEnv.ml \
-	src/CodeGen_RaQL2DIL.ml \
-	src/CodeGen_Dessser.ml \
-	src/RamenOutRef.ml \
-	src/RamenPaths.ml \
-	src/RamenProcesses.ml \
-	src/RamenCompiler.ml \
-	src/orc/orc_writer.ml
-
-TESTONLY_SOURCES = \
-	src/TestHelpers.ml \
-	src/ringbuf_test.ml \
-	src/heavyhitters_test.ml \
-	src/ringbuf/test.c
-
-TOOLS_SOURCES = \
-	tools/ipcsv.ml \
-	tools/gen_reader_test.ml
-
-SOURCES = $(sort \
-	$(RAMEN_SOURCES) \
-	$(CODEGENLIB_SOURCES) \
-	$(RMADMIN_SOURCES) \
-	$(LIBRINGBUF_SOURCES) \
-	$(LIBRINGBUF_OCAML_SOURCES) \
-	$(LIBCOLLECTD_SOURCES) \
-	$(LIBNETFLOW_SOURCES) \
-	$(ORCWRITER_SOURCES) \
-	$(LIBORC_SOURCES) \
-	$(TESTONLY_SOURCES) \
-	$(LIBCOUNTRY_SOURCES) \
-	$(TOOLS_SOURCES) \
-)
-
-
-# Dependencies
-
-dep: $(patsubst %.type, %.ml, $(filter %.type, $(TYPE_SOURCES)))
-	$(RM) depend
-	$(OCAMLDEP) -I src -package "$(PACKAGES)" $(filter %.ml, $(SOURCES)) $(filter %.mli, $(SOURCES)) > depend
-	@for f in $(filter %.c, $(SOURCES)); do \
-	  $(CC) $(CFLAGS) $(CPPFLAGS) -MM -MT "$$(dirname $$f)/$$(basename $$f .c).o" $$f >> depend ;\
-	done
-
-include depend
-
-# Also the deps of some test programs to help individual compilation
-
-tests/func/basic_aggr.x: tests/func/fixtures/cars.x tests/func/fixtures/n123.x
-tests/func/case.x: tests/func/fixtures/n123.x
-tests/func/commit_before.x: tests/func/fixtures/n123.x tests/func/fixtures/cars.x
-tests/func/count.x: tests/func/fixtures/cars.x
-tests/func/count_lines.x: tests/func/fixtures/n123.x
-tests/func/fit_multi.x: tests/func/fixtures/cars.x
-tests/func/fun_with_funcs.x: tests/func/fixtures/cars.x
-tests/func/globals_program.x: tests/func/fixtures/cars.x
-tests/func/groups.x: tests/func/fixtures/cars.x
-tests/func/histogram.x: tests/func/fixtures/cars.x
-tests/func/ip.x: tests/func/fixtures/mixture.x
-tests/func/lag.x: tests/func/fixtures/n123.x
-tests/func/last.x: tests/func/fixtures/earthquakes.x tests/func/fixtures/cars.x
-tests/func/local_state_in_where_slow.x: tests/func/fixtures/cars.x
-tests/func/moveavg.x: tests/func/fixtures/n123.x
-tests/func/params.x: tests/func/fixtures/earthquakes.x
-tests/func/past.x: tests/func/fixtures/earthquakes.x
-tests/func/patterns.x: tests/func/fixtures/cars.x
-tests/func/port_scan.x: tests/func/fixtures/port_scan.x
-tests/func/rowbinary.x: tests/func/fixtures/udp.x
-tests/func/sample.x: tests/func/fixtures/n123.x
-tests/func/season.x: tests/func/fixtures/earthquakes.x
-tests/func/sort.x: tests/func/fixtures/earthquakes.x
-tests/func/top_expr.x: tests/func/fixtures/cars.x
-tests/func/tuples.x: tests/func/fixtures/n123.x
-
-# Documentation
-
-doc: docs/tutorial.html docs/manual.html docs/roadmap.html
-
-docs/tutorial.html: docs/tutorial_group_by.svg docs/sample_chart1.svg
-
-
-# GeoIP database
-# We use the one from http://software77.net/geo-ip/
-
-IpToCountry.csv.gz:
-	@echo 'Downloading $@'
-	@$(WGET) 'http://software77.net/geo-ip/?DL=1' -O $@
-
-IpToCountry.csv: IpToCountry.csv.gz
-	@echo 'Uncompressing $@'
-	@gunzip --keep $< && touch $@
-
-src/country_of_ip/db_v4.c: IpToCountry.csv
-	@echo 'Generating $@'
-	@echo '/* Generated by Makefile - edition is futile */' > $@
-	@echo >> $@
-	@echo '#include "db.h"' >> $@
-	@echo 'struct db_entry_v4 db_v4[] = {' >> $@
-	@sed -ne 's/^ *"\([0-9]\+\)","\([0-9]\+\)",.*,\(".."\),"[^"]*","[^"]*" *$$/  { \1, \2, \3 },/p' < $< >> $@
-	@echo '};' >> $@
-
-src/country_of_ip/db_v4.h: src/country_of_ip/db_v4.c
-	@echo 'Generating $@'
-	@echo '/* Generated by Makefile - edition is futile */' > $@
-	@echo '#ifndef DB_V4_h_200417' >> $@
-	@echo '#define DB_V4_h_200417' >> $@
-	@echo '#include "db.h"' >> $@
-	@echo >> $@
-	@echo 'struct db_entry_v4 db_v4[' $$(grep -c '^  {' $<) '];' >> $@
-	@echo >> $@
-	@echo '#endif' >> $@
-
-IpToCountry.6R.csv.gz:
-	@echo 'Downloading $@'
-	@$(WGET) 'http://software77.net/geo-ip/?DL=7' -O $@
-
-IpToCountry.6R.csv: IpToCountry.6R.csv.gz
-	@echo 'Uncompressing $@'
-	@gunzip --keep $< && touch $@
-
-tools/ipcsv.opt: tools/ipcsv.ml
-	@echo 'Compiling $@'
-	$(OCAMLOPT) -linkpkg -package ipaddr,csv,str -o $@ $<
-
-src/country_of_ip/db_v6.c: IpToCountry.6R.csv tools/ipcsv.opt
-	@echo '/* Generated by Makefile - edition is futile */' > $@
-	tools/ipcsv.opt $< >> $@
-
-src/country_of_ip/db_v6.h: src/country_of_ip/db_v6.c
-	@echo 'Generating $@'
-	@echo '/* Generated by Makefile - edition is futile */' > $@
-	@echo '#ifndef DB_V6_h_200417' >> $@
-	@echo '#define DB_V6_h_200417' >> $@
-	@echo '#include "db.h"' >> $@
-	@echo >> $@
-	@echo 'struct db_entry_v6 db_v6[' $$(grep -c '^  {' $<) '];' >> $@
-	@echo >> $@
-	@echo '#endif' >> $@
-
-
-# Compile Ramen
-
-src/RamenFileNotify.ml: $(FILE_NOTIFIER)
-	@echo 'Using implementation $(FILE_NOTIFIER) for new file notifications'
-	@ln -sf $(notdir $<) $@
-	@touch $@
-
-src/libringbuf.a: $(patsubst %.c,%.o,$(filter %.c, $(LIBRINGBUF_SOURCES)))
-	@echo 'Building ringbuf library'
-	@sleep 1 # ar truncate mtime !?
-	@$(AR) rs $@ $^ >/dev/null
-
-src/libcollectd.a: $(patsubst %.c,%.o,$(filter %.c, $(LIBCOLLECTD_SOURCES)))
-	@echo 'Building collectd library'
-	@sleep 1 # ar truncate mtime !?
-	@$(AR) rs $@ $^ >/dev/null
-
-src/libnetflow.a: $(patsubst %.c,%.o,$(filter %.c, $(LIBNETFLOW_SOURCES)))
-	@echo 'Building netflow library'
-	@sleep 1 # ar truncate mtime !?
-	@$(AR) rs $@ $^ >/dev/null
-
-src/liborchelp.a: $(patsubst %.cc,%.o,$(filter %.cc, $(LIBORC_SOURCES)))
-	@echo 'Building orc helper library'
-	@sleep 1 # ar truncate mtime !?
-	@$(AR) rs $@ $^ >/dev/null
-
-src/libcountry.a: $(patsubst %.c,%.o,$(filter %.c, $(LIBCOUNTRY_SOURCES)))
-	@echo 'Building geolocation library'
-	@sleep 1 # ar truncate mtime !?
-	@$(AR) rs $@ $^ >/dev/null
-
-submodules/orc/NOTICE: .gitmodules
-	@echo "Getting submodules"
-	@git submodule init
-	@git submodule update --depth 1
-	@touch $@
-
-ifneq (@HAVE_ORC@,1)
-# We need the ORC include files to be installed for that one:
-src/orc/wrappers.o: $(BUNDLE_DIR)/lib/liborc.a
-
-$(BUNDLE_DIR)/lib/liborc.a: $(BUNDLE_DIR)/date submodules/orc/NOTICE
-	@echo 'Building liborc'
-	@mkdir -p submodules/orc/build
-	@cd submodules/orc/build &&\
-	 CPPFLAGS='$(CFLAGS) $(CPPFLAGS)' cmake .. \
-	    -DBUILD_JAVA=OFF \
-	    -DBUILD_LIBHDFSPP=OFF \
-	    -DBUILD_CPP_TESTS=OFF \
-	    -DBUILD_TOOLS=OFF \
-	    -DCMAKE_BUILD_TYPE=$(CMAKE_BUILD_TYPE) \
-	    -DCMAKE_INSTALL_PREFIX:PATH=$(CURDIR)/$(BUNDLE_DIR) \
-	    -DSTOP_BUILD_ON_WARNING=OFF &&\
-	 make install
-	@touch $@
-endif
-
-$(BUNDLE_DIR)/include/caml:
-	@echo 'Copying OCaml headers'
-	@install -d $(BUNDLE_DIR)/include
-	@cp -r $(shell ocamlfind ocamlc -where)/caml $(BUNDLE_DIR)/include
-
-$(BUNDLE_DIR)/include/dessser:
-	@echo 'Copying Dessser headers'
-	@install -d $(BUNDLE_DIR)/include/dessser
-	@cp $(wildcard $(shell ocamlfind query dessser)/*.h) $(BUNDLE_DIR)/include/dessser/
-
-# We have to force -cclib -lstdint_stubs right after -cclib wrap_ringbuf.o
-# otherwise -package stdint would put it before and gcc would not include the
-# symbols we need as we are the only users.
-MOREFLAGS = \
-	-package "$(PACKAGES)" \
-	-cclib -lstdint_stubs \
-	-cclib -lorchelp \
-	-cclib -lringbuf \
-	-cclib -lcollectd \
-	-cclib -lnetflow \
-	-cclib -lorc \
-	-cclib -lcountry \
-	-cclib -llz4 \
-	-cclib -lprotobuf \
-	-cclib -lzstd \
-	-cclib -lsnappy \
-	-cclib -lz \
-	-cclib -lsasl2
+	field_name_wire.type \
+	function_name_wire.type \
+	program_name_wire.type \
+	fq_name_wire.type \
+	site_name_wire.type \
+	file_path_wire.type \
+	src_path_wire.type \
+	fieldmask_wire.type \
+	fq_function_name.type \
+	event_time_field.type \
+	event_time.type \
+	raql_type_wire.type \
+	raql_value_wire.type \
+	func_ref.type \
+	worker.type \
+	units.type \
+	global_variable.type \
+	field_type.type \
+	program_run_parameter.type \
+	program_parameter.type \
+	target_config.type \
+	raql_variable.type \
+	raql_path_comp.type \
+	raql_top_output.type \
+	raql_binding_key.type \
+	raql_expr.type \
+	raql_net_protocol.type \
+	raql_select_field.type \
+	raql_flush_method.type \
+	raql_operation.type \
+	retention.type \
+	source_info.type \
+	simple_filter.type \
+	alert.type \
+	runtime_stats.type \
+	time_range.type \
+	replay.type \
+	replay_request.type \
+	replayer.type \
+	output_specs_wire.type \
+	dashboard_widget.type \
+	alerting_contact.type \
+	alerting_notification.type \
+	alerting_delivery_status.type \
+	alerting_log.type \
+	alerting_inhibition.type \
+	sync_user_id.type \
+	sync_selector.type \
+	sync_socket.type \
+	sync_value.type \
+	sync_key.type \
+	sync_client_cmd.type \
+	sync_client_msg.type \
+	sync_server_msg.type
 
 ifeq ($(shell uname),Darwin)
-MOREFLAGS += \
-	-cclib -lstdc++
-else
-MOREFLAGS += \
-	-cclib -lcrypto \
-	-cclib -lstdc++
-endif
-
-src/orc/orc_writer: \
-		$(patsubst %.mli,%.cmi,$(filter %.mli, $(ORCWRITER_SOURCES))) \
-		$(patsubst %.ml,%.cmx,$(filter %.ml, $(ORCWRITER_SOURCES))) \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_DIR)/include/caml \
-		$(BUNDLE_LIBORC)
-	@echo 'Linking $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $(MOREFLAGS) $(filter %.cmx, $^) -o $@
-
-src/ramen: \
-		$(patsubst %.mli,%.cmi,$(filter %.mli, $(RAMEN_SOURCES))) \
-		$(patsubst %.ml,%.cmx,$(filter %.ml, $(RAMEN_SOURCES))) \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_LIBORC)
-	@echo 'Linking $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $(MOREFLAGS) $(filter %.cmx, $^) -o $@
-
-src/ramen.byte: \
-		$(patsubst %.mli,%.cmi,$(filter %.mli, $(RAMEN_SOURCES))) \
-		$(patsubst %.ml,%.cmo,$(filter %.ml, $(RAMEN_SOURCES))) \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a
-	@echo 'Linking $@'
-	$(OCAMLC) $(OCAMLCFLAGS) -linkpkg $(MOREFLAGS) -cclib -lsodium -cclib -lsodium_stubs $(filter %.cmo, $^) -o $@
-
-src/codegen.cmxa: \
-		$(filter %.cmx,$(CODEGENLIB_SOURCES:.ml=.cmx)) \
-		$(filter %.cmi,$(CODEGENLIB_SOURCES:.ml=.cmi)) \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a
-	@echo 'Linking runtime library $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -a $(MOREFLAGS) $(filter %.cmx, $^) -o $@
-
-src/codegen.cma: \
-		$(filter %.cmo,$(CODEGENLIB_SOURCES:.ml=.cmo)) \
-		$(filter %.cmi,$(CODEGENLIB_SOURCES:.ml=.cmi)) \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a
-	@echo 'Linking runtime library $@'
-	$(OCAMLC) $(OCAMLCFLAGS) -a $(MOREFLAGS) $(filter %.cmo, $^) -o $@
-
-src/codegen.a: src/codegen.cmxa
-
-
-# RmAdmin
-
-RMADMIN_FLAGS = \
-	-package batteries,stdint,syslog,cmdliner,zmq,sodium \
-	-package ppp,ppp.ppx,ppp.unix,binocle,parsercombinator
-
-rmadmin/GuiHelper.o: \
-		$(patsubst %.mli,%.cmi,$(filter %.mli, $(RMADMIN_SOURCES))) \
-		$(patsubst %.ml,%.cmx,$(filter-out rmadmin/GuiHelper.ml,$(filter %.ml, $(RMADMIN_SOURCES)))) \
-		rmadmin/GuiHelper.ml
-	@echo 'Generating OCaml GUI helper $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $(RMADMIN_FLAGS) -package dessser,pfds $(filter %.cmx, $^) $(filter %.ml, $^) -output-obj -o rmadmin/GuiHelper_tmp.o
-	mv rmadmin/GuiHelper_tmp.o $@
-	@# Also helps `qmake Makefile` to notice the dependency:
-	touch rmadmin/main.cpp
-
-rmadmin/qcustomplot.cpp:
-	@echo 'Downloading qcustomplot'
-	$(WGET) https://www.qcustomplot.com/release/2.0.1/QCustomPlot-source.tar.gz -O - | \
-	  tar xz -C rmadmin -U --strip-components=1 \
-	    qcustomplot-source/qcustomplot.h qcustomplot-source/qcustomplot.cpp
-
-ifeq ($(shell uname),Darwin)
-EXTRA_ICON_FILES = rmadmin/rmadmin.icns
+EXTRA_ICON_FILES = src/rmadmin.icns
 else
 EXTRA_ICON_FILES =
 endif
 
-rmadmin/RmAdmin: \
-		rmadmin/GuiHelper.o \
-		rmadmin/rmadmin.ico \
+src/RmAdmin: \
+		src/rmadmin.ico \
 		$(EXTRA_ICON_FILES) \
-		rmadmin/rmadmin.pro \
-		rmadmin/qcustomplot.cpp \
-		$(wildcard rmadmin/*.cpp) \
-		$(wildcard rmadmin/*.h)
+		src/rmadmin.pro \
+		$(wildcard src/*.cpp) \
+		$(wildcard src/*.h) \
+		$(filter %.cc, $(TYPE_SOURCES:.type=.cc)) \
+		$(filter %.h, $(TYPE_SOURCES:.type=.h))
 	@echo 'Generating RmAdmin $@'
-	cd rmadmin && @QMAKE@ $(QMAKE_EXTRA)
-	$(MAKE) -C rmadmin
-	@if ! test -e $@ && test -e rmadmin/RmAdmin.app ; then \
+	cd src && @QMAKE@ $(QMAKE_EXTRA)
+	$(MAKE) -C src
+	@if ! test -e $@ && test -e src/RmAdmin.app ; then \
 	  echo '#!/bin/sh' > $@ ;\
-	  echo 'exec ./rmadmin/RmAdmin.app/Contents/MacOS/RmAdmin' >> $@ ;\
+	  echo 'exec ./src/RmAdmin.app/Contents/MacOS/RmAdmin' >> $@ ;\
 	  chmod a+x $@ ;\
 	fi
 
 # This ico file is used for Windows app icon and internally by RmAdmin (in the about window):
-rmadmin/rmadmin.ico: site/icon.png
+src/rmadmin.ico: site/icon.png
 	@echo 'Generating $@'
 	@CONVERT@ $< $@
 
-rmadmin/rmadmin.icns: site/icon.png
+src/rmadmin.icns: site/icon.png
 	@echo 'Generating $@'
 	$(RM) -r icon.iconset
 	mkdir icon.iconset
@@ -1024,856 +155,89 @@ rmadmin/rmadmin.icns: site/icon.png
 # are visible in the app, unless it is fixed by hand.
 # See https://forum.qt.io/topic/87518/macdeployqt-strips-resources-from-deployed-binary/13
 QTDIR ?= /usr/local/Cellar/qt/5.14.1
-rmadmin/RmAdmin.dmg: rmadmin/rmadmin.icns rmadmin/RmAdmin rmadmin/rmadmin.ico
+src/RmAdmin.dmg: src/rmadmin.icns src/RmAdmin src/rmadmin.ico
 	@echo 'Generating MacOS disk image $@'
-	@cd rmadmin &&\
+	@cd src &&\
 	 mkdir -p RmAdmin.app/Contents/Frameworks &&\
 	 cp @OCAMLLIB@/libasmrun_shared.so RmAdmin.app/Contents/Frameworks &&\
 	 install_name_tool -change libasmrun_shared.so @executable_path/../Frameworks/libasmrun_shared.so RmAdmin.app/Contents/MacOS/RmAdmin &&\
 	 $(RM) RmAdmin.dmg
 	@echo 'Fixing SVG framework...'
-	@mkdir -p rmadmin/RmAdmin.app/Contents/PlugIns/imageformats &&\
-	 cd rmadmin/RmAdmin.app/Contents/PlugIns/imageformats &&\
+	@mkdir -p src/RmAdmin.app/Contents/PlugIns/imageformats &&\
+	 cd src/RmAdmin.app/Contents/PlugIns/imageformats &&\
 	 cp $(QTDIR)/plugins/imageformats/libqsvg.dylib . &&\
 	 install_name_tool -change $(QTDIR)/lib/QtGui.framework/Versions/5/QtGui @executable_path/../Frameworks/QtGui.framework/Versions/5/QtGui libqsvg.dylib &&\
 	 install_name_tool -change $(QTDIR)/lib/QtWidgets.framework/Versions/5/QtWidgets @executable_path/../Frameworks/QtWidgets.framework/Versions/5/QtWidgets libqsvg.dylib &&\
 	 install_name_tool -change $(QTDIR)/lib/QtSvg.framework/Versions/5/QtSvg @executable_path/../Frameworks/QtSvg.framework/Versions/5/QtSvg libqsvg.dylib &&\
 	 install_name_tool -change $(QTDIR)/lib/QtCore.framework/Versions/5/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/5/QtCore libqsvg.dylib
 	@echo 'Build DMG'
-	@cd rmadmin &&\
+	@cd src &&\
 	 macdeployqt RmAdmin.app -libpath=/usr/local/lib -dmg
 
 # Better not relying on linuxdeploy for anything but gathering the libs
-rmadmin/AppDir/usr/share/applications/RmAdmin.desktop: rmadmin/RmAdmin.desktop
+src/AppDir/usr/share/applications/RmAdmin.desktop: src/RmAdmin.desktop
 	mkdir -p $(dir $@)
 	cp -f $< $@
 
-rmadmin/AppDir/usr/bin/RmAdmin: rmadmin/RmAdmin
+src/AppDir/usr/bin/RmAdmin: src/RmAdmin
 	mkdir -p $(dir $@)
 	cp -f $< $@
 
-rmadmin/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png: site/icon.png
+src/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png: site/icon.png
 	mkdir -p $(dir $@)
 	cp -f $< $@
 
-appimage: rmadmin/RmAdmin.$(VERSION).AppImage
+appimage: src/RmAdmin.$(VERSION).AppImage
 
-rmadmin/RmAdmin.$(VERSION).AppImage: \
-		rmadmin/AppDir/usr/share/applications/RmAdmin.desktop \
-		rmadmin/AppDir/usr/bin/RmAdmin \
-		rmadmin/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png
+src/RmAdmin.$(VERSION).AppImage: \
+		src/AppDir/usr/share/applications/RmAdmin.desktop \
+		src/AppDir/usr/bin/RmAdmin \
+		src/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png
 	@echo 'Generating Linux AppImage into $@'
-	LD_LIBRARY_PATH=@OCAMLLIB@ OUTPUT=$@ $(LINUXDEPLOY) --appdir=rmadmin/AppDir --plugin qt --output appimage
+	OUTPUT=$@ $(LINUXDEPLOY) --appdir=src/AppDir --plugin qt --output appimage
 
 coverity:
 	@echo 'Building and uploading coverity analysis'
 	@test `whoami` = rixed
 	@test -r .coverity_token
-	@$(MAKE) -C rmadmin clean
-	@cd rmadmin && \
+	@$(MAKE) -C src clean
+	@cd src && \
 	 cov-build --dir cov-int make && \
 	 tar czvf ramen.tgz cov-int
 	@curl \
 	   --form token=`cat .coverity_token` \
 	   --form email=rixed@free.fr \
-	   --form file=rmadmin/ramen.tgz \
+	   --form file=src/ramen.tgz \
 	   --form version="$(VERSION)" \
 	   --form description="$(shell git rev-parse --short HEAD)" \
 	   https://scan.coverity.com/builds?project=rixed%2Framen
-
-
-# Bundle directory
-
-# embedded compiler version: build a bundle of all libraries
-OCAML_WHERE = $(shell dirname $(shell ocamlfind ocamlc -where))
-# cut -c X- means to takes all from X, 1st char being 1, thus the leading _:
-OCAML_WHERE_LEN = $(shell printf '_%s/' $(OCAML_WHERE) | wc -m | xargs echo)
-
-META: Makefile
-	@echo 'Building findlib configuration (META) for Ramen'
-	@echo 'description = "Event processor tailored for human-scale monitoring"' > $@
-	@echo 'version = "$(VERSION)"' >> $@
-	@echo 'archive(native) = "codegen.cmxa"' >> $@
-	@echo 'requires = "$(META_REQUIRES)"' >> $@
-
-bundle: \
-		$(BUNDLE_LIBORC) \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_DIR)/include/caml \
-		$(BUNDLE_DIR)/include/dessser
-
-$(BUNDLE_DIR)/date:
-	@echo '!!! REBUILDING $(BUNDLE_DIR) !!!'
-	$(RM) -r '$(BUNDLE_DIR)'
-	mkdir -p '$(BUNDLE_DIR)'
-	touch $@
-
-$(BUNDLE_DIR)/ramen/codegen.a: $(BUNDLE_DIR)/date $(INSTALLED_LIB)
-	@echo 'Bundling libs together into $(BUNDLE_DIR)'
-	$(RM) -r '$(BUNDLE_DIR).tmp'
-	mkdir '$(BUNDLE_DIR).tmp'
-	@set -e ;\
-	 deps=$$( \
-	   for p in $(META_REQUIRES) ; do \
-	     ocamlfind query -recursive -predicates native,mt -format '%d' $$p ;\
-	   done | sort -u | grep -v /findlib) ;\
-	 for d in $$deps ; do cp -r "$$d" '$(BUNDLE_DIR).tmp/' ; done
-	mkdir $(BUNDLE_DIR).tmp/ramen
-	cp $(INSTALLED_LIB) $(BUNDLE_DIR).tmp/ramen
-	find '$(BUNDLE_DIR).tmp' -type f -not '(' \
-	    -name '*.cmx*' -o -name '*.cmi' -o -name '*.a' -o \
-	    -name '*.so' -o -name '*.o' -o -name META \
-	  ')' -delete
-	find '$(BUNDLE_DIR).tmp' -empty -delete
-	@# Delete some of the biggest unused files:
-	$(RM) $(BUNDLE_DIR).tmp/batteries/batteriesExceptionless.cm*
-	$(RM) -r $(BUNDLE_DIR).tmp/ocaml/compiler-libs
-	$(RM) -r $(BUNDLE_DIR).tmp/ocaml/camlp4
-	$(RM) -r $(BUNDLE_DIR).tmp/ocaml/ocamldoc
-	$(RM) -r $(BUNDLE_DIR).tmp/ocaml/thread
-	$(RM) -r $(BUNDLE_DIR).tmp/ocaml/ocplib*
-	$(RM) $(BUNDLE_DIR).tmp/ocaml/camlinternalFormat.*
-	$(RM) $(BUNDLE_DIR).tmp/ocaml/*spacetime*
-	@# Delete everything that's not from liborc:
-	mkdir -p '$(BUNDLE_DIR)'
-	find '$(BUNDLE_DIR)' -maxdepth 1 -mindepth 1 -type d -not '(' \
-	    -name lib -o -name include \
-		')' -exec rm -rf '{}' \;
-	mv $(BUNDLE_DIR).tmp/* $(BUNDLE_DIR)/
-	$(RM) -r $(BUNDLE_DIR).tmp
-	touch $@
-
-# Bootstrapping this is a bit special as ocamlfind needs to know the ramen
-# package first. Therefore this file is included with the source package for
-# simplicity.
-src/RamenDepLibs.ml.frominst:
-	@echo '(* Generated by Makefile - edition is futile *)' > $@
-	@echo 'module N = RamenName' >> $@
-	@echo 'let incdirs = [' >> $@
-	set -e ; for d in $$(ocamlfind query -recursive -predicates native,mt -format '%d' ramen | sort -u | grep -v -e compiler-libs -e ppx_tools -e /findlib) ; do \
-	  echo $$d | cut -c $(OCAML_WHERE_LEN)- | \
-	  sed -e 's,^\(.*\)$$,  N.path "\1" ;,' >> $@ ;\
-	done ;
-# Equivalent to -threads:
-	@echo '  N.path "ocaml/threads" ;' >> $@
-	@echo ']' >> $@
-	@echo 'let objfiles = [' >> $@
-	set -e ; for d in $$(ocamlfind query -recursive -predicates native,mt -format '%+a' ramen | uniq | grep -v -e compiler-libs -e ppx_tools -e /findlib) ; do \
-	  echo $$d | cut -c $(OCAML_WHERE_LEN)- | \
-	  sed -e 's,^\(.*\)$$,  N.path "\1" ;,' >> $@ ;\
-	done ;
-	@echo ']' >> $@
-# Equivalent to -threads, must come right after unix.cmxa:
-	sed -i -e '/ocaml\/unix.cmxa/a \ \ N.path "ocaml/threads/threads.cmxa" ;' $@
-
-src/RamenDepLibs.ml: src/RamenDepLibs.ml.frominst Makefile
-ifeq ($(shell uname),Darwin)
-	sed -e '/inotify/d' $< > $@
-else
-	cp $< $@
-endif
-
-src/RamenCompilConfig.ml: Makefile
-	@echo '(* Generated by Makefile - edition is futile *)' > $@
-	@echo 'module N = RamenName' >> $@
-	@echo 'let default_bundle_dir = N.path "$(abspath $(lib_dir))/$(BUNDLE_DIR)/"' >> $@
-	@echo 'let ocaml_version = "@OCAMLVERSION@"' >> $@
-	@echo 'let build_path = "$(PATH)"' >> $@
-	@echo 'let ocamlfind = N.path "@OCAMLFIND@"' >> $@
-	@echo 'let ocamlpath = "$(OCAMLPATH)"' >> $@
-	@echo 'let cpp_compiler = "@CXX@"' >> $@
-	@echo 'let z3_path = "@Z3@"' >> $@
-	@echo 'let build_date = "$(shell date -R)"' >> $@
-	@echo 'let build_host = "$(shell hostname)"' >> $@
-
-src/RamenSourceExamples.ml: \
-		Makefile \
-		examples/programs/monitoring/network/security.ramen \
-		examples/programs/monitoring/network/hosts.ramen \
-		examples/programs/monitoring/network/traffic.ramen \
-		examples/programs/monitoring/generated/logs.ramen \
-		examples/programs/monitoring/generated/aggregated.ramen \
-		examples/programs/monitoring/generated/alerts/error_rate.alert
-	@echo 'Generating $@'
-	@echo '(* Generated by Makefile - edition is futile *)' > $@
-	@echo >> $@
-	@echo 'module Monitoring = struct' >> $@
-	@echo '  module Network = struct' >> $@
-	@echo '    let security = {|' >> $@
-	cat examples/programs/monitoring/network/security.ramen >> $@
-	@echo '|}' >> $@
-	@echo >> $@
-	@echo '    let hosts = {|' >> $@
-	cat examples/programs/monitoring/network/hosts.ramen >> $@
-	@echo '|}' >> $@
-	@echo >> $@
-	@echo '    let traffic = {|' >> $@
-	cat examples/programs/monitoring/network/traffic.ramen >> $@
-	@echo '|}' >> $@
-	@echo '  end' >> $@
-	@echo >> $@
-	@echo '  module Generated = struct' >> $@
-	@echo '    let logs = {|' >> $@
-	cat examples/programs/monitoring/generated/logs.ramen >> $@
-	@echo '|}' >> $@
-	@echo >> $@
-	@echo '    let aggregated = {|' >> $@
-	cat examples/programs/monitoring/generated/aggregated.ramen >> $@
-	@echo '|}' >> $@
-	@echo >> $@
-	@echo '    let error_rate = {|' >> $@
-	@cat examples/programs/monitoring/generated/alerts/error_rate.alert >> $@
-	@echo '|}' >> $@
-	@echo '  end' >> $@
-	@echo 'end' >> $@
-	sed -i -e ':x /{|$$/{N;s/\n//g; bx}' $@
-
-src/RamenSubcommands.ml: genRamenSubcommands.opt
-	@echo 'Generating $@'
-	./genRamenSubcommands.opt > $@.tmp && mv $@.tmp $@
-
-genRamenSubcommands.opt: \
-		src/RamenVersions.cmx \
-		src/RamenHelpersNoLog.cmx \
-		src/RamenConstsCliInfo.cmx \
-		src/genRamenSubcommands.ml
-	@echo 'Linking $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg -package batteries,dessser,stdint,binocle $^ -o $@
-
 
 #
 # Tests
 #
 
-tools/ip2num_csv.opt: tools/ip2num_csv.ml
-	@echo 'Compiling $@'
-	$(OCAMLOPT) -linkpkg -package batteries -o $@ $<
-
-TESTABLE_SOURCES = \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	src/RamenTypes.ml \
-	src/RamenName.ml \
-	src/RamenTimeRange.ml \
-	src/RamenExpr.ml \
-	src/RamenGraphiteSink.ml \
-	src/Globs.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenOperation.ml \
-	src/RamenFieldMask.ml \
-	src/RamenFieldMaskLib.ml \
-	src/RamenTypingHelpers.ml \
-	src/RamenProgram.ml \
-	src/HeavyHitters.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenBloomFilter.ml \
-	src/CodeGen_OCaml.ml \
-	src/CodeGen_RaQL2DIL.ml \
-	src/CodeGen_Dessser.ml \
-	src/RamenSortBuf.ml \
-	src/RamenGraphite.ml \
-	src/RingBufLib.ml \
-	src/RamenOrc.ml \
-	src/RamenSerialization.ml \
-	src/RamenSmtParser.ml \
-	src/RamenUnits.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenServices.ml \
-	src/RamenProcesses.ml \
-	src/RamenReplay.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenSyncClient.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	src/RamenMake.ml \
-	src/RamenSupervisor.ml \
-	src/RamenSampling.ml \
-	src/CodeGenLib.ml \
-	src/RamenOutRef.ml \
-	src/RamenOCamlCompiler.ml \
-	src/RamenStringExpansion.ml \
-	src/RamenAlerter.ml
-
-# For the actual command line building all_tests.opt:
-LINKED_FOR_TESTS = \
-	src/RamenVersions.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.mli \
-	src/RamenName.ml \
-	src/RamenConsts.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConstsMetric.ml \
-	src/RamenConstsFieldDocs.ml \
-	src/RamenConstsDefault.ml \
-	src/RamenConstsObjectSuffixes.ml \
-	src/RamenConstsEntryPoints.ml \
-	src/RamenConstsContentTypes.ml \
-	src/RamenConstsWorkerCommands.ml \
-	src/RamenConstsWorkerArgv0.ml \
-	src/RamenConstsServiceNames.ml \
-	src/RamenHelpers.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenEthAddr.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/RamenIp.ml \
-	$(filter %.mli, $(TYPE_SOURCES:.type=.mli)) \
-	$(filter %.ml, $(TYPE_SOURCES:.type=.ml)) \
-	src/RamenTimeRange.ml \
-	src/HeavyHitters.ml \
-	src/RamenChannel.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenTypes.ml \
-	src/RamenGlobalVariables.ml \
-	src/RamenAdvLock.ml \
-	src/RamenEventTime.ml \
-	src/RamenUnits.ml \
-	src/RamenTypeConverters.ml \
-	src/RamenTuple.ml \
-	src/RamenFieldOrder.ml \
-	src/RamenCollectd.ml \
-	src/RamenCollectdSerialization.ml \
-	src/RamenNetflow.ml \
-	src/RamenNetflowSerialization.ml \
-	src/RamenGraphiteSink.ml \
-	src/RamenProtocols.ml \
-	src/RamenVariable.ml \
-	src/RamenLang.ml \
-	src/RamenExpr.ml \
-	src/RamenWatchdog.ml \
-	src/RingBuf.ml \
-	src/RingBufLib.ml \
-	src/RamenOrc.ml \
-	src/Globs.ml \
-	src/RamenOperation.ml \
-	src/RamenFieldMask.ml \
-	src/RamenFieldMaskLib.ml \
-	src/RamenParams.ml \
-	src/RamenCompilConfig.ml \
-	src/RamenRetention.ml \
-	src/RamenDepLibs.ml \
-	src/RamenHeap.ml \
-	src/RamenSortBuf.ml \
-	src/RamenSyncTree.ml \
-	src/RamenSyncIntf.ml \
-	src/RamenBitmask.ml \
-	src/RamenSerialization.ml \
-	src/HeavyHitters.ml \
-	src/RamenSyncClient.ml \
-	src/RamenSyncUser.ml \
-	src/RamenSync.ml \
-	src/RamenSmtParser.ml \
-	src/RamenSmt.ml \
-	src/RamenAuthn.ml \
-	src/RamenSyncZMQClient.ml \
-	src/RamenConf.ml \
-	src/RamenTypingHelpers.ml \
-	src/RamenTypingErrors.ml \
-	src/RamenTyping.ml \
-	src/RamenProgram.ml \
-	src/RamenOCamlCompiler.ml \
-	src/CodeGen_Helpers.ml \
-	src/CodeGen_OCaml.ml \
-	src/CodeGen_OCamlEnv.ml \
-	src/CodeGen_RaQL2DIL.ml \
-	src/CodeGen_Dessser.ml \
-	src/RamenSyncHelpers.ml \
-	src/RamenOutRef.ml \
-	src/RamenPaths.ml \
-	src/RamenProcesses.ml \
-	src/RamenCompiler.ml \
-	src/RamenReplay.ml \
-	src/RamenServices.ml \
-	src/RamenArchivist.ml \
-	src/RamenExport.ml \
-	src/RamenTimeseries.ml \
-	src/RamenRun.ml \
-	src/RamenHttpHelpers.ml \
-	src/CodeGen_Alert2RaQL.ml \
-	src/RamenMake.ml \
-	src/RamenFileNotify.ml \
-	src/RamenSupervisor.ml \
-	src/RamenBloomFilter.ml \
-	src/RamenGraphite.ml \
-	src/TestHelpers.ml \
-	src/RamenSampling.ml \
-	src/CodeGenLib.ml \
-	src/CodeGenLib_IO.ml \
-	src/RamenStringExpansion.ml \
-	src/SqliteHelpers.ml \
-	src/RamenAlerter.ml
-
-src/all_tests.ml: $(TESTABLE_SOURCES)
-	@echo 'Generating unit tests into $@'
-	$(QTEST) --shuffle -o $@ extract $^
-
-all_tests.opt: \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a \
-		$(filter %.cmx,$(LINKED_FOR_TESTS:.ml=.cmx)) \
-		src/all_tests.ml
-	@echo 'Building unit tests into $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $(MOREFLAGS) -package qcheck $(filter %.cmx, $^) $(filter %.a, $^) $(filter %.ml, $^) -o $@
-
-ringbuf_test.opt: \
-		src/RamenVersions.cmx \
-		src/RamenAtomic.cmx \
-		src/RamenHelpersNoLog.cmx \
-		src/RamenLog.cmx \
-		src/RamenName.cmx \
-		src/RamenConsts.cmx \
-		src/RamenConstsExitCodes.cmx \
-		src/RamenConstsDefault.cmx \
-		src/RamenConstsExitCodes.cmx \
-		src/RamenHelpers.cmx \
-		src/RamenFiles.cmx \
-		src/RamenExperiments.cmx \
-		src/RamenParsing.cmx \
-		src/RamenEthAddr.cmx \
-		src/RamenIpv4.cmx \
-		src/RamenIpv6.cmx \
-		src/RamenIp.cmx \
-		$(filter %.cmi, $(patsubst %.mli, %.cmi, $(TYPE_SOURCES:.type=.mli))) \
-		$(filter %.cmx, $(patsubst %.ml, %.cmx, $(TYPE_SOURCES:.type=.ml))) \
-		src/RamenChannel.cmx \
-		src/RamenTypeConverters.cmx \
-		src/RamenTypes.cmx \
-		src/RamenAdvLock.cmx \
-		src/RamenFieldMask.cmx \
-		src/RamenUnits.cmx \
-		src/RamenTuple.cmx \
-		src/RingBuf.cmx \
-		src/RingBufLib.cmx \
-		src/RamenOrc.cmx \
-		src/ringbuf_test.cmx \
-		src/libringbuf.a \
-		src/libcollectd.a \
-		src/libnetflow.a \
-		src/liborchelp.a \
-		src/libcountry.a
-	@echo 'Building ringbuf tests into $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg $(MOREFLAGS) $(filter %.cmx, $^) -o $@
-
-src/ringbuf/test: src/ringbuf/test.c src/libringbuf.a
-	@echo 'Building ringbuf load test into $@'
-	$(CC) $(CFLAGS) $(CPPFLAGS) -O0 -g $^ -o $@
-
-heavyhitters_test.opt: \
-		src/RamenAtomic.cmx \
-		src/RamenHelpersNoLog.cmx \
-		src/RamenLog.cmx \
-		src/HeavyHitters.cmx \
-		src/heavyhitters_test.cmx
-	@echo 'Building $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg -package "$(PACKAGES)" $(filter %.cmx, $^) -o $@
-
-check: unit-check ringbuf-check cli-check func-check comp-check arc-check orc-check
-
-unit-check: all_tests.opt
-	@echo 'Running unit tests...'
-	@TZ=CET OCAMLRUNPARAM=b ./all_tests.opt -bt
-
-ringbuf-check: ringbuf_test.opt
-	@echo 'Running ringbuffer tests...'
-	@timeout 30 ./ringbuf_test.opt
-
-cli-check: src/ramen bundle
-	@echo 'Running CLI tests...'
-	mkdir -p tests/results/cli-check
-	cd tests && cucumber -f pretty -f junit -o results/cli-check/junit.xml
-
-RAMEN_FUNC_TESTS = $(wildcard tests/func/*.test)
-RAMEN_ALERTER_TESTS = $(wildcard tests/alerter/*.test)
-
-%.x: \
-		%.ramen \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_DIR)/include/caml \
-		$(BUNDLE_DIR)/include/dessser \
-		src/ramen \
-		src/codegen.cmxa
-	@echo 'Compiling ramen program $@'
-	RAMEN_CONFSERVER= src/ramen compile --bundle=bundle -L . -L src -L tests/func $< -o $@
-
-# Special generated test to check the speed of CSV parsing:
-
-tools/gen_reader_test.opt: src/codegen.cmxa tools/gen_reader_test.ml
-	@echo 'Compiling $@'
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -linkpkg -package cmdliner,batteries,binocle,dessser,ppp,qcheck,syslog $^ -o $@
-
-tests/func/generated.type: tools/gen_reader_test.opt
-	@echo 'Generating a random type for CSV reader speed test'
-	@tools/gen_reader_test.opt type --max-depth=3 --format=CSV > $@.tmp && mv $@.tmp $@
-
-tests/func/generated.ramen: tests/func/generated.type tools/gen_reader_test.opt
-	@echo 'Generating a random CSV reader'
-	@tools/gen_reader_test.opt reader --format=CSV --files=fixtures/generated.csv "$$(cat $<)" > $@.tmp &&\
-	 echo >> $@.tmp &&\
-	 echo 'DEFINE counter AS SELECT *, SUM globally 1 AS count FROM reader;' \
-	   >> $@.tmp &&\
-	 mv $@.tmp $@
-
-tests/func/fixtures/generated.csv: tests/func/generated.type tools/gen_reader_test.opt
-	@echo 'Generating a random CSV file'
-	@tools/gen_reader_test.opt data --format=CSV --length=100000 "$$(cat $<)" > $@.tmp && mv $@.tmp $@
-
-tests/func/generated.success: tests/func/generated.test tests/func/fixtures/generated.csv tests/func/generated.ramen
-
-FORCED_DESSSER = \
-	;any_ext;basename;basic_aggr;bits;\
-	;case;casts;changed;char;count;count_lines;\
-	;fit;from;fun_with_funcs;\
-	;generated;gets;globals_function;globals_program;groups;\
-	;in;kahan_sum;lag;list_aggr;local_state_in_where_slow;\
-	;min_max;nan_vs_null;nulls;peek;port_scan;rowbinary;\
-	;sample;simplest;simplest_aggr;sort;stress;strings;top_expr;
-
-# FIXME: Missing deps on the sources. `ramen test -MM` should output those.
-%.success: %.test src/ramen
-	@echo 'Running test $(basename $< .test)'
-	@$(RM) $@
-	@if echo '$<' | grep -q /func/; then \
-	  RAMEN_DESSSER_CODE_GENERATOR=$(if $(findstring ;$(notdir $(basename $< .test));,$(FORCED_DESSSER)),force,never) \
-	  RAMEN_OPTIMIZATION_LEVEL=3 \
-	  src/ramen test --bundle-dir=bundle '$<' && touch $@ ;\
-	else \
-	  src/ramen test-alert '$<' && touch $@ ;\
-	fi
-
-func-check: \
-	$(RAMEN_FUNC_TESTS:.test=.success) \
-	$(RAMEN_ALERTER_TESTS:.test=.success)
-
-# Order does matter:
-COMPTEST_PROGRAMS = \
-	tests/programs/nonreg_0_0.ramen \
-	tests/programs/nonreg_0_1.alert \
-	tests/programs/nonreg_0_2.alert \
-	tests/programs/nullability_0_0.ramen \
-	tests/programs/nullability_0_1.alert
-
-comp-check: \
-		src/ramen \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(COMPTEST_PROGRAMS)
-	@echo 'Checking compilation of predefined programs'
-	@set -e; \
-	for f in $(COMPTEST_PROGRAMS); do \
-	  echo "  Compiling $$f..." ;\
-	  RAMEN_CONFSERVER= src/ramen compile --quiet --bundle=bundle -L tests/programs $$f ;\
-	done ;\
-	echo "\033[1;32mSUCCESS\033[0m"
-
-err-check: \
-		src/ramen \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_LIBORC) \
-		$(wildcard tests/errors/*.ramen) \
-		$(wildcard tests/errors/*.err)
-	@echo 'Running parsing/typing error tests'
-	@for f in $(wildcard tests/errors/*.ramen); do \
-	  t=$$(mktemp) ;\
-	  RAMEN_CONFSERVER= src/ramen compile --quiet --bundle=bundle -L tests/errors $$f 2>$$t >/dev/null ;\
-	  if ! diff -q $$f.err $$t ; then \
-	    echo "\033[1;31mFAILURE\033[0m: $$f" ;\
-	    exit 1 ;\
-	  fi ;\
-	  $(RM) $$t ;\
-	done ;\
-	echo "\033[1;32mSUCCESS\033[0m"
-
-RAMEN_ARCHIVIST_TESTS = $(wildcard tests/archivist/*.allocs)
-
-arc-check: src/ramen $(RAMEN_ARCHIVIST_TESTS)
-	@echo 'Running storage allocation tests'
-	@echo 'TODO: make it possible to upload the stats file in the confserver'
-
-orc-check: src/orc/orc_writer $(wildcard tests/orc/*.type) $(wildcard tests/orc/*.data)
-	@echo 'Checking ORC writes...'
-	@failed="" ;\
-	 for t in $(wildcard tests/orc/*.type); do \
-	   base="$$(basename $$t .type)" ;\
-	   echo "  Checking $$base" ;\
-	   typ=$$(cat "$$t") ;\
-	   data="$$(dirname $$t)/$$base.data" ;\
-	   writer="/tmp/$$base" ;\
-	   orc="/tmp/$$base.orc" ;\
-	   csv="/tmp/$$base.csv" ;\
-	   if ! (\
-	     src/orc/orc_writer "$$writer" "$$typ" &&\
-	     "$$writer" write "$$orc" < "$$data" &&\
-	     "$$writer" read  "$$orc" > "$$csv" ;\
-	   ) then \
-	     echo "\033[1;31mFAILURE\033[0m: Cannot create CSV file for $$base" ;\
-	     failed="$$failed $$base" ;\
-	   else \
-	     if diff -q "$$data" "$$csv"; then \
-	       echo "\033[1;32mSUCCESS\033[0m" ;\
-	     else \
-	       echo "\033[1;31mFAILURE\033[0m: $$data and $$csv differ:" ;\
-	       diff "$$data" "$$csv" ;\
-	       failed="$$failed $$base" ;\
-	     fi ;\
-	   fi ;\
-	 done ;\
-	 if test -n "$$failed"; then \
-	   echo "\033[1;31mFAILURE\033[0m:$$failed" ;\
-	   exit 1 ;\
-	 fi
-
-LINKED_FOR_BENCH = \
-	src/RamenHelpersNoLog.ml \
-	src/RamenLog.ml \
-	src/RamenName.ml \
-	src/RamenConstsExitCodes.ml \
-	src/RamenConsts.ml \
-	src/RamenAtomic.ml \
-	src/RamenHelpers.ml \
-	src/RamenVersions.ml \
-	src/RamenFiles.ml \
-	src/RamenExperiments.ml \
-	src/RamenParsing.ml \
-	src/RamenIpv4.ml \
-	src/RamenIpv6.ml \
-	src/HeavyHitters.ml \
-	src/RamenBloomFilter.ml \
-	src/RamenSampling.ml \
-	src/RamenHeap.ml \
-	src/CodeGenLib.ml
-
-benchmarks.opt: \
-		src/libringbuf.a \
-		$(filter %.cmx,$(LINKED_FOR_BENCH:.ml=.cmx))
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) \
-		-package batteries,benchmark,binocle,dessser,lacaml,parsercombinator,ppp,stdint,syslog \
-		-linkpkg -cclib -lringbuf $(filter %.cmx, $^) src/benchmarks.ml -o $@
-
-bench: benchmarks.opt
-	./benchmarks.opt
-
+#
 # Installation
+#
 
-install: $(INSTALLED) install-bundle
-	ocamlfind install ramen $(INSTALLED_LIB) META
-	@echo 'Installing binaries into $(bin_dir)'
-	install -d $(bin_dir)
-	install $(INSTALLED_BIN) $(bin_dir)/
-ifdef STRIP_BIN
-	for f in $(INSTALLED_BIN); do \
-	   strip $(bin_dir)/$$(basename $$f) || true ;\
-	done
-endif
-
-# We need ocamlfind to find ramen package before we can install the lib bundle.
-# Therefore we simply build it as a separate, optional step (that's only
-# required if you intend to use the embedded compiler).
-install-bundle: bundle
-	@echo 'Installing libraries bundle into $(DESTDIR)$(lib_dir)'
-	install -d $(DESTDIR)$(lib_dir)
-	cp -r $(BUNDLE_DIR) $(DESTDIR)$(lib_dir)/
-
-install-examples:
-	@echo 'Installing examples into $(DESTDIR)$(sample_dir)'
-	install -d $(DESTDIR)$(sample_dir)
-	cd examples/programs &&\
-	 find . -type f -name '*.ramen' \
-	   -exec sh -c 'mkdir -p $(DESTDIR)$(sample_dir)/$$(dirname {})' \; \
-	   -exec sh -c 'cp {} $(DESTDIR)$(sample_dir)/$$(dirname {})' \;
-
-install-systemd:
-	@echo 'Installing systemd configuration into $(DESTDIR)$(systemd_dir)'
-	install -d $(DESTDIR)$(systemd_dir)
-	install -d $(DESTDIR)$(sysconf_dir)
-	cp systemd/*.target systemd/*.service $(DESTDIR)$(systemd_dir)
-	cp systemd/ramen $(DESTDIR)$(sysconf_dir)
-
-uninstall: uninstall-bundle
-	@echo 'Uninstalling binaries'
-	# In case the bundle has been installed there, which would cause
-	# `ocamlfind remove` to fail:
-	$(RM) -r $(shell ocamlfind query ramen)/bundle
-	ocamlfind remove ramen
-	$(RM) $(bin_dir)/ramen
-
-uninstall-bundle:
-	@echo 'Uninstalling libraries bundle'
-	$(RM) -r $(DESTDIR)$(lib_dir)/$(BUNDLE_DIR)
-
-reinstall:
-	$(MAKE) uninstall && \
-	$(MAKE) install
-
-# Debian package
-
-deb: ramen.$(VERSION).deb
-
-tarball: ramen.$(VERSION).tgz
-
-ramen.$(VERSION).deb: \
-		$(PACKAGED_BIN) \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_LIBORC) \
-		debian.control
-	@echo 'Building debian package $@'
-	$(RM) -r debtmp
-	install -d debtmp/usr/bin
-	install $(PACKAGED_BIN) debtmp/usr/bin
-ifdef STRIP_BIN
-	for f in $(PACKAGED_BIN); do strip debtmp/usr/bin/$$(basename $$f); done
-endif
-	$(MAKE) DESTDIR=$(CURDIR)/debtmp sample_dir=/var/lib/ramen/examples install-examples
-	$(MAKE) DESTDIR=$(CURDIR)/debtmp lib_dir=/var/lib/ramen install-bundle
-	$(MAKE) DESTDIR=$(CURDIR)/debtmp systemd_dir=/lib/systemd/system install-systemd
-	mkdir -p debtmp/DEBIAN
-	cp debian.control debtmp/DEBIAN/control
-	chmod -R a+x debtmp/usr
-	fakeroot dpkg --build debtmp
-	mv debtmp.deb $@
-	$(RM) -r debtmp
-
-ramen.$(VERSION).tgz: \
-		$(PACKAGED_BIN) \
-		$(BUNDLE_DIR)/ramen/codegen.a \
-		$(BUNDLE_LIBORC)
-	@echo 'Building tarball $@'
-	$(RM) -r tmp/ramen
-	install -d tmp/ramen
-	install $(PACKAGED_BIN) tmp/ramen/
-	install @Z3@ tmp/ramen/
-ifdef STRIP_BIN
-	for f in $(PACKAGED_BIN); do strip tmp/ramen/$$(basename $$f); done
-endif
-	chmod -R a+x tmp/ramen/*
-	$(MAKE) DESTDIR=$(CURDIR)/tmp/ramen/ lib_dir=/ sample_dir=/examples systemd_dir=/systemd sysconf_dir=/defaults install-examples
-	$(MAKE) DESTDIR=$(CURDIR)/tmp/ramen/ lib_dir=/ sample_dir=/examples systemd_dir=/systemd sysconf_dir=/defaults install-bundle
-	$(MAKE) DESTDIR=$(CURDIR)/tmp/ramen/ lib_dir=/ sample_dir=/examples systemd_dir=/systemd sysconf_dir=/defaults install-systemd
-	tar c -C tmp ramen | gzip > $@
-	$(RM) -r tmp
-
-# Docker images:
-# - docker builds the ramen docker image;
-# - docker-dev builds the docker-dev image.
-
-docker: docker/Dockerfile docker/ramen.$(VERSION).deb docker/$(BORINGTUN_DEB)
-	@echo 'Building docker image for testing DEB version'
-	docker build -t rixed/ramen:latest --squash -f $< docker/
-	@echo 'Pushing to local hub as localhost:5000/ramen'
-	docker tag rixed/ramen localhost:5000/ramen
-	docker push localhost:5000/ramen
-
-DISTRIB_TAGS = \
-	debian:buster,buster
-
-docker-dev: docker/Dockerfile-dev
-	@for distrib_tag in $(DISTRIB_TAGS) ; do \
-	  distrib=`echo $$distrib_tag | cut -d, -f1` ;\
-	  tag=`echo $$distrib_tag | cut -d, -f2` ;\
-	  echo 'Building ramen-dev docker image from '$$distrib ;\
-	  docker build -t rixed/ramen-dev:$$tag \
-                 -f docker/Dockerfile-dev \
-                 --build-arg distrib=$$distrib docker/ ;\
-	done
-
-# The docker image is build from the debian package:
-docker/ramen.$(VERSION).deb: ramen.$(VERSION).deb
-	@echo 'Copying debian package into docker/'
-	cp $< $@
-
-# Also for the docker image only. docker-dev builds its own z3.
-docker/z3: @Z3@
-	@echo 'Copying z3 from system into docker/'
-	cp $< $@
-
-# docker-push target will tag and push the images:
-docker-push:
-	@echo 'Tagging latest docker image to v$(VERSION)'
-	docker tag rixed/ramen:latest rixed/ramen:v$(VERSION)
-	@echo 'Uploading docker images'
-	docker push rixed/ramen:v$(VERSION)
-	docker push rixed/ramen-dev:stretch
-	docker push rixed/ramen-dev:buster
-
-# For documentation:
-boringtun.zip:
-	@echo 'Obtaining boringtun debian package'
-	$(WGET) https://gitlab.com/debian-build/boringtun-debian/-/jobs/186197265/artifacts/download?file_type=archive -O $@
-
-docker/$(BORINGTUN_DEB): boringtun.zip
-	unzip -o boringtun.zip dist/$(BORINGTUN_DEB) -d /tmp && \
-	mv /tmp/dist/$(BORINGTUN_DEB) $@
-
+#
 # Cleaning
-
-clean-temp:
-	@echo 'Cleaning ramen compiler temp files'
-	for d in tests examples ; do\
-	   find $$d -\( -name '*.cc' -o -name '*.ml' -o -name '*.cmx' \
-	                -o -name '*.o' -o -name '*.annot' -o -name '*.cmt' \
-	                -o -name '*.cmti' -o -name '*.x' -o -name '*.s' \
-	                -o -name '*.cmi' -o -name '*.smt2' -o -name '*.info' -\) \
-	            -delete ;\
-	 done
+#
 
 clean-dist: clean clean-temp
 	@echo 'Cleaning all build files'
-	$(RM) doc/tutorial.html doc/manual.html doc/roadmap.html
-	find tests -name '*.success' -delete
-	$(RM) -r $(BUNDLE_DIR)
-	$(RM) -r debtmp
-	$(RM) -r tmp
-	$(RM) -r submodules/orc
-	$(RM) ramen.*.deb ramen.*.tgz
-	$(RM) rmadmin/RmAdmin rmadmin/rmadmin.ico rmadmin/rmadmin.icns
-	$(RM) -r rmadmin/RmAdmin.app
-	$(RM) $(PAGES)
-	$(RM) META
-	$(RM) src/country_of_ip/db_v4.c src/country_of_ip/db_v6.c
-	$(RM) IpToCountry.csv.gz IpToCountry.6R.csv.gz
-	$(RM) boringtun.zip
+	$(RM) src/RmAdmin src/rmadmin.ico src/rmadmin.icns
+	$(RM) -r src/RmAdmin.app
+	$(RM) src/*.dmg
 
 clean: clean-dessserc-gen
 	@echo 'Cleaning result'
-	$(RM) src/*.s src/*.annot src/*.cmt src/*.cmti src/*.o
-	$(RM) *.opt src/all_tests.* perf.data* gmon.out
-	$(RM) src/ringbuf/*.o src/orc/*.o
-	$(RM) src/*.cmx src/*.cmxa src/*.cmxs src/*.cmi src/*.cmo
-	$(RM) src/orc/*.cmx src/orc/*.annot src/orc/*.cmt src/orc/*.cmxs src/orc/*.cmi
-	$(RM) src/oUnit-anon.cache src/qtest.targets.log
-	$(RM) src/*.opt src/*.byte
-	$(RM) src/RamenDepLibs.ml src/RamenSubcommands.ml
-	$(RM) src/RamenFileNotify.ml src/RamenCompilConfig.ml
-	$(RM) src/ramen src/codegen.cmxa src/libringbuf.a src/liborchelp.a
-	$(RM) tools/*.opt tools/*.s tools/*.annot tools/*.cmt tools/*.cmti
-	$(RM) tools/*.o tools/*.cmx tools/*.cmi
-ifeq ($(BUILD_RMADMIN),1)
-	if test -e rmadmin/Makefile; then $(MAKE) -C rmadmin clean; fi
-endif
-	$(RM) rmadmin/*.o rmadmin/*.s rmadmin/*.annot rmadmin/*.cmx rmadmin/*.cmi
-	$(RM) rmadmin/Makefile rmadmin/moc_* rmadmin/*.dmg
-	$(RM) src/libcollectd.a src/libnetflow.a src/codegen.a
-	$(RM) src/libcountry.a IpToCountry.csv IpToCountry.6R.csv
-	$(RM) tests/func/generated.type tests/func/fixtures/generated.csv tests/func/generated.ramen
+	$(RM) src/*.s src/*.o
+	$(RM) perf.data* gmon.out
+	@if test -e src/Makefile; then $(MAKE) -C src clean; fi
+	$(RM) src/Makefile src/moc_*
 
 clean-dessserc-gen:
 	# Do not delete raql_type.ml*!
-	$(RM) $(patsubst %.type, %.mli, $(filter %.type, $(TYPE_SOURCES)))
-	$(RM) $(patsubst %.type, %.ml, $(filter %.type, $(TYPE_SOURCES)))
-
-authn: src/RamenAuthn.cmx
-	$(OCAMLOPT) $(OCAMLOPTFLAGS) -package batteries,zmq,sodium -linkpkg $(filter %.cmx, $^) -o $@
+	$(RM) $(patsubst %.type, %.cc, $(filter %.type, $(TYPE_SOURCES)))
+	$(RM) $(patsubst %.type, %.h, $(filter %.type, $(TYPE_SOURCES)))

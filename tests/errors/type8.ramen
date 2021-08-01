@@ -1,1 +1,0 @@
-SELECT 1 + (IF true THEN "glop" ELSE "pas glop") AS x;
