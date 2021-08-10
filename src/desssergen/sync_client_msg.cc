@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::sync_client_msg {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -32,7 +34,7 @@ struct t {
   uint32_t seq;
   bool confirm_success;
   bool echo;
-  *sync_client_cmd cmd;
+  dessser::gen::sync_client_cmd::t cmd;
   bool operator==(t const &other) const {
     return seq == other.seq && confirm_success == other.confirm_success && echo == other.echo && cmd == other.cmd;
   }
@@ -68,7 +70,7 @@ typedef std::tuple<
 > f2a48a42f9c827f487e53ee52a4e9e2f;
 
 typedef std::tuple<
-  *sync_client_cmd,
+  dessser::gen::sync_client_cmd::t,
   Pointer
 > v_902a7f39de6379bcb4d58e786fb18fc9;
 
@@ -106,8 +108,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
     Pointer let_res_11;
     {
       Pointer srec_dst_86 { let_res_7 };
-      std::function<Pointer(*sync_client_cmd,Pointer)> id_12 { dessser_gen::sync_client_cmd.to_row_binary };
-      *sync_client_cmd id_13 { p_0.cmd };
+      std::function<Pointer(dessser::gen::sync_client_cmd::t,Pointer)> id_12 { dessser::gen::sync_client_cmd::to_row_binary };
+      dessser::gen::sync_client_cmd::t id_13 { p_0.cmd };
       Pointer id_14 { id_12(id_13, srec_dst_86) };
       let_res_11 = id_14;
     }
@@ -125,8 +127,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun15 { [&fun15](t p_0) {
     Size id_16 { 6UL };
-    std::function<Size(*sync_client_cmd)> id_17 { dessser_gen::sync_client_cmd.sersize_of_row_binary };
-    *sync_client_cmd id_18 { p_0.cmd };
+    std::function<Size(dessser::gen::sync_client_cmd::t)> id_17 { dessser::gen::sync_client_cmd::sersize_of_row_binary };
+    dessser::gen::sync_client_cmd::t id_18 { p_0.cmd };
     Size id_19 { id_17(id_18) };
     Size id_20 { Size(id_16 + id_19) };
     return id_20;
@@ -202,7 +204,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               {
                 auto drec_fst_72 { std::get<0>(drec_71) };
                 auto drec_snd_73 { std::get<1>(drec_71) };
-                std::function<v_902a7f39de6379bcb4d58e786fb18fc9(Pointer)> id_43 { dessser_gen::sync_client_cmd.of_row_binary };
+                std::function<v_902a7f39de6379bcb4d58e786fb18fc9(Pointer)> id_43 { dessser::gen::sync_client_cmd::of_row_binary };
                 v_902a7f39de6379bcb4d58e786fb18fc9 id_44 { id_43(drec_snd_73) };
                 f63f919559f0d70225bd0da5dd9bcafc letpair_res_45;
                 {

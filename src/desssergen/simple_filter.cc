@@ -23,13 +23,15 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::simple_filter {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *field_name lhs;
+  dessser::gen::field_name::t lhs;
   std::string rhs;
   std::string op;
   bool operator==(t const &other) const {
@@ -51,7 +53,7 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   Pointer
 > c50aa083fa818c6eeca389b0025dda98;
 
@@ -112,8 +114,8 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*field_name,Pointer)> id_1 { dessser_gen::field_name.to_row_binary };
-    *field_name id_2 { p_0.lhs };
+    std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_1 { dessser::gen::field_name::to_row_binary };
+    dessser::gen::field_name::t id_2 { p_0.lhs };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
@@ -274,8 +276,8 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun86 { [&fun86](t p_0) {
-    std::function<Size(*field_name)> id_87 { dessser_gen::field_name.sersize_of_row_binary };
-    *field_name id_88 { p_0.lhs };
+    std::function<Size(dessser::gen::field_name::t)> id_87 { dessser::gen::field_name::sersize_of_row_binary };
+    dessser::gen::field_name::t id_88 { p_0.lhs };
     Size id_89 { id_87(id_88) };
     Size let_res_90;
     {
@@ -422,7 +424,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun150 { [&fun150](Pointer p_0) {
-    std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_151 { dessser_gen::field_name.of_row_binary };
+    std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_151 { dessser::gen::field_name::of_row_binary };
     c50aa083fa818c6eeca389b0025dda98 id_152 { id_151(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_153;
     {

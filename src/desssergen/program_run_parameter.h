@@ -6,14 +6,16 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::program_run_parameter {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *field_name name;
-  *raql_value value;
+  dessser::gen::field_name::t name;
+  dessser::gen::raql_value::t value;
   bool operator==(t const &other) const {
     return name == other.name && value == other.value;
   }

@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_value {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -65,11 +67,17 @@ std::ostream &operator<<(std::ostream &os, v_15f8f12566613b8539906fe1981330fe co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
   std::string,
   t*
 > v_7fc8d7a0a67813ab72751cde815990fd;
 
+struct t;
+struct t;
 typedef std::tuple<
   t*,
   t*

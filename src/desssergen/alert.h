@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::alert {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -59,24 +61,24 @@ std::ostream &operator<<(std::ostream &os, v_61ea399b3f4cf5e20f4606674ff2217c co
 }
 
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   std::string
 > b0391754a7662c5a5541af429d4123b4;
 
 struct t {
-  *fq_name table;
-  *field_name column;
+  dessser::gen::fq_name::t table;
+  dessser::gen::field_name::t column;
   bool enabled;
-  Lst<*simple_filter> where;
-  std::optional<Lst<*field_name>> group_by;
-  Lst<*simple_filter> having;
+  Lst<dessser::gen::simple_filter::t> where;
+  std::optional<Lst<dessser::gen::field_name::t>> group_by;
+  Lst<dessser::gen::simple_filter::t> having;
   v_61ea399b3f4cf5e20f4606674ff2217c threshold;
   double hysteresis;
   double duration;
   double ratio;
   double time_step;
-  Lst<*field_name> tops;
-  Lst<*field_name> carry_fields;
+  Lst<dessser::gen::field_name::t> tops;
+  Lst<dessser::gen::field_name::t> carry_fields;
   Lst<b0391754a7662c5a5541af429d4123b4> carry_csts;
   std::string id;
   std::string desc_title;

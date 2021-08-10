@@ -6,16 +6,23 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_expr {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
+struct t;
+struct t;
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   t*
 > v_4ec9e9432e07cae1458c03426a194a1a;
 
+struct t;
+struct t;
+struct t;
 struct a1a2ab208d8a8e56a609f18e422bdf88 {
   t* case_cond;
   t* case_cons;
@@ -31,20 +38,21 @@ std::ostream &operator<<(std::ostream &os, a1a2ab208d8a8e56a609f18e422bdf88 cons
   return os;
 }
 
+struct t;
 typedef std::tuple<
   Lst<a1a2ab208d8a8e56a609f18e422bdf88>,
   std::optional<t*>
 > v_7df1ef9c4e82bfdd017031822619493c;
 
 struct b02d571406bf80b296e55bb93213ea59 : public std::variant<
-  *raql_value,
-  *raql_variable,
-  *raql_binding_key,
+  dessser::gen::raql_value::t,
+  dessser::gen::raql_variable::t,
+  dessser::gen::raql_binding_key::t,
   Void,
   Void,
   Void,
   Void,
-  Lst<*raql_path_comp>,
+  Lst<dessser::gen::raql_path_comp::t>,
   Void
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, b02d571406bf80b296e55bb93213ea59 const &v) {
@@ -75,13 +83,13 @@ std::ostream &operator<<(std::ostream &os, b31ee7e2e15bec4cfa9176ec3d86152e cons
 }
 
 typedef std::tuple<
-  *raql_type,
+  dessser::gen::raql_type::t,
   b31ee7e2e15bec4cfa9176ec3d86152e
 > v_562760c1b2585f63d315bb555b64832c;
 
 struct v_1d6ee587a956ed7717b51cc22dd3b087 : public std::variant<
   Void,
-  *raql_type,
+  dessser::gen::raql_type::t,
   Void,
   v_562760c1b2585f63d315bb555b64832c,
   Void,
@@ -169,6 +177,7 @@ std::ostream &operator<<(std::ostream &os, v_1d6ee587a956ed7717b51cc22dd3b087 co
   return os;
 }
 
+struct t;
 typedef std::tuple<
   v_1d6ee587a956ed7717b51cc22dd3b087,
   t*
@@ -190,6 +199,7 @@ std::ostream &operator<<(std::ostream &os, v_38879d3066416481efb8a2cff1fd95bb co
   return os;
 }
 
+struct t;
 typedef std::tuple<
   v_38879d3066416481efb8a2cff1fd95bb,
   Lst<t*>
@@ -255,6 +265,8 @@ std::ostream &operator<<(std::ostream &os, v_20bb2b786e4d41528e682385744fec03 co
   return os;
 }
 
+struct t;
+struct t;
 struct v_8987bf3ba5adfaa68384b9fde66ab651 : public std::tuple<
   v_20bb2b786e4d41528e682385744fec03,
   t*,
@@ -281,6 +293,9 @@ std::ostream &operator<<(std::ostream &os, v_4b68f284ffe696cb6936ca2f6880b08a co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
 struct v_3d59f26fb89fa3ef8dc792c2f4609b32 : public std::tuple<
   v_4b68f284ffe696cb6936ca2f6880b08a,
   t*,
@@ -379,6 +394,7 @@ std::ostream &operator<<(std::ostream &os, v_04da9e7d4c0ea0d028b50b2b2bf068b2 co
   return os;
 }
 
+struct t;
 typedef std::tuple<
   v_04da9e7d4c0ea0d028b50b2b2bf068b2,
   t*
@@ -400,6 +416,8 @@ std::ostream &operator<<(std::ostream &os, v_1bafb672d5db6e6c81afc008103c3a63 co
   return os;
 }
 
+struct t;
+struct t;
 struct bd090e444c05c1e6fea8a3c1c0be1d01 : public std::tuple<
   v_1bafb672d5db6e6c81afc008103c3a63,
   t*,
@@ -428,6 +446,9 @@ std::ostream &operator<<(std::ostream &os, bf5e3bf9cedd12797481a910416c04b9 cons
   return os;
 }
 
+struct t;
+struct t;
+struct t;
 struct bf3bba49b7fb7fb20a2d18c9ba46e6e9 : public std::tuple<
   bf5e3bf9cedd12797481a910416c04b9,
   t*,
@@ -456,6 +477,10 @@ std::ostream &operator<<(std::ostream &os, v_87b032206ceea8867a37c2e0aaee953e co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
 struct v_853c6bada9e3fde79da0a65d1b1d1c9a : public std::tuple<
   v_87b032206ceea8867a37c2e0aaee953e,
   t*,
@@ -501,6 +526,10 @@ std::ostream &operator<<(std::ostream &os, v_40203346c83d9d499f90ff16996e8968 co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
 struct d48e39cf1002fefa9b2dd8287b9e36b3 : public std::tuple<
   v_40203346c83d9d499f90ff16996e8968,
   t*,
@@ -529,6 +558,12 @@ std::ostream &operator<<(std::ostream &os, d137ffedb0c351c86760c7f124759f50 cons
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 struct v_28696cf4b42cc9ab09b392e5143f2f25 : public std::tuple<
   d137ffedb0c351c86760c7f124759f50,
   t*,
@@ -551,8 +586,15 @@ std::ostream &operator<<(std::ostream &os, v_28696cf4b42cc9ab09b392e5143f2f25 co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 struct v_2da729c5f96e51679cb6e2c06e6ceb25 {
-  *raql_top_output output;
+  dessser::gen::raql_top_output::t output;
   t* size;
   std::optional<t*> max_size;
   t* what;
@@ -578,6 +620,10 @@ std::ostream &operator<<(std::ostream &os, v_2da729c5f96e51679cb6e2c06e6ceb25 co
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
 struct v_148d37e471eb6790a77b16fc96041a20 {
   t* what;
   t* time;
@@ -637,6 +683,8 @@ std::ostream &operator<<(std::ostream &os, v_58c653b3fc47800248b5c8f49e80fabb co
   return os;
 }
 
+struct t;
+struct t;
 typedef std::tuple<
   t*,
   t*
@@ -677,8 +725,8 @@ std::ostream &operator<<(std::ostream &os, dc31f5cc689133a6f12d16478388e785 cons
 struct t {
   dc31f5cc689133a6f12d16478388e785 text;
   uint32_t uniq_num;
-  *raql_type typ;
-  std::optional<*units> units;
+  dessser::gen::raql_type::t typ;
+  std::optional<dessser::gen::units::t> units;
   bool operator==(t const &other) const {
     return text == other.text && uniq_num == other.uniq_num && typ == other.typ && units == other.units;
   }

@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::target_config {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -15,8 +17,8 @@ struct v_13778ae74488ba3447259adc9816e04e {
   bool enabled;
   bool debug;
   double report_period;
-  *file_path cwd;
-  Arr<*program_run_parameter> params;
+  dessser::gen::file_path::t cwd;
+  Arr<dessser::gen::program_run_parameter::t> params;
   std::string on_site;
   bool automatic;
   bool operator==(v_13778ae74488ba3447259adc9816e04e const &other) const {
@@ -37,20 +39,21 @@ std::ostream &operator<<(std::ostream &os, v_13778ae74488ba3447259adc9816e04e co
 }
 
 typedef std::tuple<
-  *program_name,
+  dessser::gen::program_name::t,
   v_13778ae74488ba3447259adc9816e04e
 > cc18b22dfb71145a271a6ff24f6a72b1;
 
+typedef Arr<cc18b22dfb71145a271a6ff24f6a72b1> t;
 typedef std::tuple<
-  Arr<cc18b22dfb71145a271a6ff24f6a72b1>,
+  t,
   Pointer
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(Arr<cc18b22dfb71145a271a6ff24f6a72b1>&,Pointer)> to_row_binary;
-std::function<Size(Arr<cc18b22dfb71145a271a6ff24f6a72b1>&)> sersize_of_row_binary;
+std::function<Pointer(t&,Pointer)> to_row_binary;
+std::function<Size(t&)> sersize_of_row_binary;
 std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
 
 }

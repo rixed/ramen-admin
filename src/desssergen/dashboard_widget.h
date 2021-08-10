@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::dashboard_widget {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -90,7 +92,7 @@ std::ostream &operator<<(std::ostream &os, v_67a0e55ce68284d9f234903bf8ef7907 co
 }
 
 struct b057734d3828999a4e463dd04964f728 {
-  *fq_function_name name;
+  dessser::gen::fq_function_name::t name;
   bool visible;
   Arr<v_67a0e55ce68284d9f234903bf8ef7907> fields;
   bool operator==(b057734d3828999a4e463dd04964f728 const &other) const {

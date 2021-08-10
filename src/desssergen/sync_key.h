@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_key {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -27,7 +29,7 @@ typedef std::tuple<
 > bb7a1af56c56ee3850e41d7e7bbfd8d3;
 
 typedef std::tuple<
-  *src_path,
+  dessser::gen::src_path::t,
   std::string
 > c404d7e7dfb3057f4a4f6b6766eeb900;
 
@@ -104,7 +106,7 @@ std::ostream &operator<<(std::ostream &os, v_8c6c9edc5b1d709b5094571801c00912 co
 }
 
 typedef std::tuple<
-  *fq_name,
+  dessser::gen::fq_name::t,
   v_8c6c9edc5b1d709b5094571801c00912
 > v_0fab8a04cd41fd489e58d011ef6f08ad;
 
@@ -140,7 +142,7 @@ std::ostream &operator<<(std::ostream &os, v_320dee9bcc93c7ed0c75cc7db8b85d9b co
 }
 
 typedef std::tuple<
-  *site_name,
+  dessser::gen::site_name::t,
   v_320dee9bcc93c7ed0c75cc7db8b85d9b
 > v_26540a608fe059393cc3cd282be43df3;
 
@@ -171,8 +173,8 @@ std::ostream &operator<<(std::ostream &os, v_6c1c7418355e363a303990cad40945dd co
 }
 
 struct v_3a6e990115d17bf3eefa1b91b13ca80b : public std::tuple<
-  *site_name,
-  *fq_name,
+  dessser::gen::site_name::t,
+  dessser::gen::fq_name::t,
   std::string,
   v_6c1c7418355e363a303990cad40945dd
 > { using tuple::tuple; };
@@ -199,10 +201,11 @@ std::ostream &operator<<(std::ostream &os, v_90e4213e12fd850ebf8d15b08342b17e co
 }
 
 typedef std::tuple<
-  *sync_socket,
+  dessser::gen::sync_socket::t,
   v_90e4213e12fd850ebf8d15b08342b17e
 > v_287d43b770d826e060b1e65a4d07e0b0;
 
+struct per_dash_key;
 typedef std::tuple<
   std::string,
   v_808252496816a9c094ed1ddb199861d1*
@@ -294,7 +297,7 @@ struct t : public std::variant<
   v_60ff76b761c62e00eb6df04e7d00fbc8,
   v_3a6e990115d17bf3eefa1b91b13ca80b,
   uint16_t,
-  std::optional<*sync_socket>,
+  std::optional<dessser::gen::sync_socket::t>,
   Void,
   v_287d43b770d826e060b1e65a4d07e0b0,
   ea82132cbdaf05c9cc56869f7b4529c3,

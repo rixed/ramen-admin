@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::replayer {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *time_range time_range;
+  dessser::gen::time_range::t time_range;
   double creation;
   std::optional<uint32_t> pid;
   double last_killed;

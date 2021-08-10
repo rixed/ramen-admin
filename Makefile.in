@@ -6,11 +6,7 @@ DESSSERC = ocamlfind dessser/dessserc
 LINUXDEPLOY = linuxdeploy-x86_64.AppImage
 
 CXXFLAGS += -std=gnu++17 -Wall -W -Wno-parentheses -fPIC
-CPPFLAGS += -D_GNU_SOURCE \
-            -I '@OCAMLLIB@' \
-            -I '$(BUNDLE_DIR)/include' \
-            -DHAVE_INT128 \
-            -I '$(shell ocamlfind query stdint)'
+CPPFLAGS += -D_GNU_SOURCE -I '@DESSSER_INC@'
 
 ifdef NDEBUG
 CPPFLAGS += -DNDEBUG
@@ -52,19 +48,19 @@ all: $(INSTALLED)
 	  -o $@
 
 TYPE_SOURCES = \
-	field_name_wire.type \
-	function_name_wire.type \
-	program_name_wire.type \
-	fq_name_wire.type \
-	site_name_wire.type \
-	file_path_wire.type \
-	src_path_wire.type \
-	fieldmask_wire.type \
+	field_name.type \
+	function_name.type \
+	program_name.type \
+	fq_name.type \
+	site_name.type \
+	file_path.type \
+	src_path.type \
+	fieldmask.type \
 	fq_function_name.type \
 	event_time_field.type \
 	event_time.type \
-	raql_type_wire.type \
-	raql_value_wire.type \
+	raql_type.type \
+	raql_value.type \
 	func_ref.type \
 	worker.type \
 	units.type \
@@ -91,7 +87,7 @@ TYPE_SOURCES = \
 	replay.type \
 	replay_request.type \
 	replayer.type \
-	output_specs_wire.type \
+	output_specs.type \
 	dashboard_widget.type \
 	alerting_contact.type \
 	alerting_notification.type \
@@ -107,62 +103,50 @@ TYPE_SOURCES = \
 	sync_client_msg.type \
 	sync_server_msg.type
 
-# We do not need the distinction between wire/non-wire types here, so
-# we use the _wire types directly as the type.
-ALIASED_TYPE_SOURCES = \
-	field_name_wire.type \
-	function_name_wire.type \
-	program_name_wire.type \
-	fq_name_wire.type \
-	site_name_wire.type \
-	file_path_wire.type \
-	src_path_wire.type \
-	fieldmask_wire.type \
-	raql_type_wire.type \
-	raql_value_wire.type \
-	output_specs_wire.type
-
 src/desssergen/.created:
 	mkdir -p src/desssergen
 	touch $@
 
-# For all *_wire types we will have to create a non-wire alias
+# We do not need the distinction between wire/non-wire types here, so
+# we use the _wire types directly as the type.
+# (Note: cp rather than ln because 1. timestamps need to be greater and
+# 2. might not be the same FS)
 src/desssergen/field_name.type: $(RAMEN_SRC)/field_name_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/function_name.type: $(RAMEN_SRC)/function_name_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/program_name.type: $(RAMEN_SRC)/program_name_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/fq_name.type: $(RAMEN_SRC)/fq_name_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/site_name.type: $(RAMEN_SRC)/site_name_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/file_path.type: $(RAMEN_SRC)/file_path_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/src_path.type: $(RAMEN_SRC)/src_path_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/fieldmask.type: $(RAMEN_SRC)/fieldmask_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/raql_type.type: $(RAMEN_SRC)/raql_type_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/raql_value.type: $(RAMEN_SRC)/raql_value_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 src/desssergen/output_specs.type: $(RAMEN_SRC)/output_specs_wire.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 # Others are copied
 src/desssergen/%.type: $(RAMEN_SRC)/%.type src/desssergen/.created
-	ln $< $@
+	cp $< $@
 
 ifeq ($(shell uname),Darwin)
 EXTRA_ICON_FILES = src/rmadmin.icns
@@ -215,9 +199,6 @@ QTDIR ?= /usr/local/Cellar/qt/5.14.1
 src/RmAdmin.dmg: src/rmadmin.icns src/RmAdmin src/rmadmin.ico
 	@echo 'Generating MacOS disk image $@'
 	@cd src &&\
-	 mkdir -p RmAdmin.app/Contents/Frameworks &&\
-	 cp @OCAMLLIB@/libasmrun_shared.so RmAdmin.app/Contents/Frameworks &&\
-	 install_name_tool -change libasmrun_shared.so @executable_path/../Frameworks/libasmrun_shared.so RmAdmin.app/Contents/MacOS/RmAdmin &&\
 	 $(RM) RmAdmin.dmg
 	@echo 'Fixing SVG framework...'
 	@mkdir -p src/RmAdmin.app/Contents/PlugIns/imageformats &&\

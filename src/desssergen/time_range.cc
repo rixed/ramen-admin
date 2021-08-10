@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::time_range {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -45,8 +47,9 @@ std::ostream &operator<<(std::ostream &os, v_1d53ca1dfc33d45608c16f60daf686b4 co
   return os;
 }
 
+typedef Arr<v_1d53ca1dfc33d45608c16f60daf686b4> t;
 typedef std::tuple<
-  Arr<v_1d53ca1dfc33d45608c16f60daf686b4>,
+  t,
   Pointer
 > f63f919559f0d70225bd0da5dd9bcafc;
 
@@ -105,9 +108,9 @@ typedef std::tuple<
                 (set-vec (u8 0) (identifier "n_ref_110") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_110")))))) 
             (unsafe-nth (u8 0) (identifier "dst_ref_109"))))))
  */
-static std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> to_row_binary_init()
+static std::function<Pointer(t&,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> fun0 { [&fun0](Arr<v_1d53ca1dfc33d45608c16f60daf686b4>& p_0, Pointer p_1) {
+  std::function<Pointer(t&,Pointer)> fun0 { [&fun0](t& p_0, Pointer p_1) {
     uint32_t id_1 { p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -218,7 +221,7 @@ static std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> 
    };
   return fun0;
 }
-std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t&,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{since: FLOAT; until: FLOAT; growing: BOOL}[]")
@@ -237,9 +240,9 @@ std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> to_row_
                 (set-vec (u8 0) (identifier "repeat_n_103") (add (unsafe-nth (u8 0) (identifier "repeat_n_103")) (i32 1)))))) 
           (unsafe-nth (u8 0) (identifier "sz_ref_102")))))
  */
-static std::function<Size(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&)> sersize_of_row_binary_init()
+static std::function<Size(t&)> sersize_of_row_binary_init()
 {
-  std::function<Size(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&)> fun66 { [&fun66](Arr<v_1d53ca1dfc33d45608c16f60daf686b4>& p_0) {
+  std::function<Size(t&)> fun66 { [&fun66](t& p_0) {
     uint32_t id_67 { p_0.size() };
     Vec<1, uint32_t> id_68 {  id_67  };
     Size let_res_69;
@@ -321,7 +324,7 @@ static std::function<Size(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&)> sersize_of_
    };
   return fun66;
 }
-std::function<Size(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t&)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -543,7 +546,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
     {
       auto dlist4_fst_95 { std::get<0>(let_res_159) };
       auto dlist4_snd_96 { std::get<1>(let_res_159) };
-      Arr<v_1d53ca1dfc33d45608c16f60daf686b4> id_205 { dlist4_fst_95.toListRev() };
+      t id_205 { dlist4_fst_95.toListRev() };
       f63f919559f0d70225bd0da5dd9bcafc id_206 {  id_205, dlist4_snd_96  };
       letpair_res_204 = id_206;
     }

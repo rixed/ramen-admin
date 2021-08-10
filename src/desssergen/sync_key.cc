@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::sync_key {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -54,7 +56,7 @@ typedef std::tuple<
 > ac0fbd05039f742d2f1d9ac182e392ab;
 
 typedef std::tuple<
-  *src_path,
+  dessser::gen::src_path::t,
   std::string
 > c404d7e7dfb3057f4a4f6b6766eeb900;
 
@@ -131,7 +133,7 @@ std::ostream &operator<<(std::ostream &os, v_8c6c9edc5b1d709b5094571801c00912 co
 }
 
 typedef std::tuple<
-  *fq_name,
+  dessser::gen::fq_name::t,
   v_8c6c9edc5b1d709b5094571801c00912
 > v_0fab8a04cd41fd489e58d011ef6f08ad;
 
@@ -167,7 +169,7 @@ std::ostream &operator<<(std::ostream &os, v_320dee9bcc93c7ed0c75cc7db8b85d9b co
 }
 
 typedef std::tuple<
-  *site_name,
+  dessser::gen::site_name::t,
   v_320dee9bcc93c7ed0c75cc7db8b85d9b
 > v_26540a608fe059393cc3cd282be43df3;
 
@@ -198,8 +200,8 @@ std::ostream &operator<<(std::ostream &os, v_6c1c7418355e363a303990cad40945dd co
 }
 
 struct v_3a6e990115d17bf3eefa1b91b13ca80b : public std::tuple<
-  *site_name,
-  *fq_name,
+  dessser::gen::site_name::t,
+  dessser::gen::fq_name::t,
   std::string,
   v_6c1c7418355e363a303990cad40945dd
 > { using tuple::tuple; };
@@ -226,10 +228,11 @@ std::ostream &operator<<(std::ostream &os, v_90e4213e12fd850ebf8d15b08342b17e co
 }
 
 typedef std::tuple<
-  *sync_socket,
+  dessser::gen::sync_socket::t,
   v_90e4213e12fd850ebf8d15b08342b17e
 > v_287d43b770d826e060b1e65a4d07e0b0;
 
+struct per_dash_key;
 typedef std::tuple<
   std::string,
   v_808252496816a9c094ed1ddb199861d1*
@@ -321,7 +324,7 @@ struct t : public std::variant<
   v_60ff76b761c62e00eb6df04e7d00fbc8,
   v_3a6e990115d17bf3eefa1b91b13ca80b,
   uint16_t,
-  std::optional<*sync_socket>,
+  std::optional<dessser::gen::sync_socket::t>,
   Void,
   v_287d43b770d826e060b1e65a4d07e0b0,
   ea82132cbdaf05c9cc56869f7b4529c3,
@@ -372,12 +375,12 @@ typedef std::tuple<
 > f921d1e0a170c3c04148c21704db9c45;
 
 typedef std::tuple<
-  *src_path,
+  dessser::gen::src_path::t,
   Pointer
 > v_630c8a213597275b9f8880113825c98a;
 
 typedef std::tuple<
-  *site_name,
+  dessser::gen::site_name::t,
   Pointer
 > ddf7cb48181332ead2f60a5f4bb1a8de;
 
@@ -397,7 +400,7 @@ typedef std::tuple<
 > v_767414c116ccecff2dddf58db4b75b83;
 
 typedef std::tuple<
-  *fq_name,
+  dessser::gen::fq_name::t,
   Pointer
 > v_41ac8303016d6ac19fef26d484dd5164;
 
@@ -422,12 +425,12 @@ typedef std::tuple<
 > ac0dff677d9c1c0e84201364a0cada0d;
 
 typedef std::tuple<
-  std::optional<*sync_socket>,
+  std::optional<dessser::gen::sync_socket::t>,
   Pointer
 > v_13905691a95334749d572078b5658ba9;
 
 typedef std::tuple<
-  *sync_socket,
+  dessser::gen::sync_socket::t,
   Pointer
 > v_7036a8b0fbd8a7ca699aed2c44f6fdba;
 
@@ -461,6 +464,8 @@ typedef std::tuple<
   Pointer
 > v_41a5a8cf414de9bfdc6375241fcc910a;
 
+struct per_dash_key;
+struct per_dash_key;
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -1462,7 +1467,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               bool id_97 { bool(id_96 == dsum1_fst_81) };
               f63f919559f0d70225bd0da5dd9bcafc choose_res_98;
               if (id_97) {
-                std::function<v_630c8a213597275b9f8880113825c98a(Pointer)> id_99 { dessser_gen::src_path.of_row_binary };
+                std::function<v_630c8a213597275b9f8880113825c98a(Pointer)> id_99 { dessser::gen::src_path::of_row_binary };
                 v_630c8a213597275b9f8880113825c98a id_100 { id_99(dsum1_snd_82) };
                 f63f919559f0d70225bd0da5dd9bcafc let_res_101;
                 {
@@ -1578,7 +1583,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   bool id_158 { bool(id_157 == dsum1_fst_81) };
                   f63f919559f0d70225bd0da5dd9bcafc choose_res_159;
                   if (id_158) {
-                    std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_160 { dessser_gen::site_name.of_row_binary };
+                    std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_160 { dessser::gen::site_name::of_row_binary };
                     ddf7cb48181332ead2f60a5f4bb1a8de id_161 { id_160(dsum1_snd_82) };
                     f63f919559f0d70225bd0da5dd9bcafc let_res_162;
                     {
@@ -1761,7 +1766,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 bool id_246 { bool(id_245 == dsum1_fst_429) };
                                 e8a9e5263837de1dc85029fd46dec174 choose_res_247;
                                 if (id_246) {
-                                  std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_248 { dessser_gen::fq_name.of_row_binary };
+                                  std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_248 { dessser::gen::fq_name::of_row_binary };
                                   v_41ac8303016d6ac19fef26d484dd5164 id_249 { id_248(dsum1_snd_430) };
                                   e8a9e5263837de1dc85029fd46dec174 let_res_250;
                                   {
@@ -2395,7 +2400,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       bool id_545 { bool(id_544 == dsum1_fst_81) };
                       f63f919559f0d70225bd0da5dd9bcafc choose_res_546;
                       if (id_545) {
-                        std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_547 { dessser_gen::site_name.of_row_binary };
+                        std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_547 { dessser::gen::site_name::of_row_binary };
                         ddf7cb48181332ead2f60a5f4bb1a8de id_548 { id_547(dsum1_snd_82) };
                         f63f919559f0d70225bd0da5dd9bcafc let_res_549;
                         {
@@ -2404,7 +2409,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           {
                             auto dtup_fst_330 { std::get<0>(dtup_329) };
                             auto dtup_snd_331 { std::get<1>(dtup_329) };
-                            std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_551 { dessser_gen::fq_name.of_row_binary };
+                            std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_551 { dessser::gen::fq_name::of_row_binary };
                             v_41ac8303016d6ac19fef26d484dd5164 id_552 { id_551(dtup_snd_331) };
                             f63f919559f0d70225bd0da5dd9bcafc let_res_553;
                             {
@@ -2682,13 +2687,13 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             bool id_684 { bool(id_682 == id_683) };
                             v_13905691a95334749d572078b5658ba9 choose_res_685;
                             if (id_684) {
-                              std::optional<*sync_socket> id_686 { std::nullopt };
+                              std::optional<dessser::gen::sync_socket::t> id_686 { std::nullopt };
                               Size id_687 { 1UL };
                               Pointer id_688 { dsum1_snd_82.skip(id_687) };
                               v_13905691a95334749d572078b5658ba9 id_689 {  id_686, id_688  };
                               choose_res_685 = id_689;
                             } else {
-                              std::function<v_7036a8b0fbd8a7ca699aed2c44f6fdba(Pointer)> id_690 { dessser_gen::sync_socket.of_row_binary };
+                              std::function<v_7036a8b0fbd8a7ca699aed2c44f6fdba(Pointer)> id_690 { dessser::gen::sync_socket::of_row_binary };
                               Size id_691 { 1UL };
                               Pointer id_692 { dsum1_snd_82.skip(id_691) };
                               v_7036a8b0fbd8a7ca699aed2c44f6fdba id_693 { id_690(id_692) };
@@ -2696,7 +2701,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                               {
                                 auto make1_1_fst_318 { std::get<0>(id_693) };
                                 auto make1_1_snd_319 { std::get<1>(id_693) };
-                                std::optional<*sync_socket> id_695 { make1_1_fst_318 };
+                                std::optional<dessser::gen::sync_socket::t> id_695 { make1_1_fst_318 };
                                 v_13905691a95334749d572078b5658ba9 id_696 {  id_695, make1_1_snd_319  };
                                 letpair_res_694 = id_696;
                               }
@@ -2724,7 +2729,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                               bool id_706 { bool(id_705 == dsum1_fst_81) };
                               f63f919559f0d70225bd0da5dd9bcafc choose_res_707;
                               if (id_706) {
-                                std::function<v_7036a8b0fbd8a7ca699aed2c44f6fdba(Pointer)> id_708 { dessser_gen::sync_socket.of_row_binary };
+                                std::function<v_7036a8b0fbd8a7ca699aed2c44f6fdba(Pointer)> id_708 { dessser::gen::sync_socket::of_row_binary };
                                 v_7036a8b0fbd8a7ca699aed2c44f6fdba id_709 { id_708(dsum1_snd_82) };
                                 f63f919559f0d70225bd0da5dd9bcafc let_res_710;
                                 {
@@ -4116,9 +4121,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size choose_res_1248;
             if (id_1247) {
               Size id_1249 { 2UL };
-              std::function<Size(*src_path)> id_1250 { dessser_gen::src_path.sersize_of_row_binary };
+              std::function<Size(dessser::gen::src_path::t)> id_1250 { dessser::gen::src_path::sersize_of_row_binary };
               c404d7e7dfb3057f4a4f6b6766eeb900 id_1251 { std::get<3>(p_0) };
-              *src_path id_1252 { std::get<0>(id_1251) };
+              dessser::gen::src_path::t id_1252 { std::get<0>(id_1251) };
               Size id_1253 { id_1250(id_1252) };
               Size id_1254 { Size(id_1249 + id_1253) };
               Size let_res_1255;
@@ -4184,9 +4189,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 Size choose_res_1293;
                 if (id_1292) {
                   Size id_1294 { 2UL };
-                  std::function<Size(*site_name)> id_1295 { dessser_gen::site_name.sersize_of_row_binary };
+                  std::function<Size(dessser::gen::site_name::t)> id_1295 { dessser::gen::site_name::sersize_of_row_binary };
                   v_26540a608fe059393cc3cd282be43df3 id_1296 { std::get<5>(p_0) };
-                  *site_name id_1297 { std::get<0>(id_1296) };
+                  dessser::gen::site_name::t id_1297 { std::get<0>(id_1296) };
                   Size id_1298 { id_1295(id_1297) };
                   Size id_1299 { Size(id_1294 + id_1298) };
                   Size let_res_1300;
@@ -4301,11 +4306,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                         if (id_1377) {
                           Size id_1379 { 2UL };
                           Size id_1380 { Size(sz_711 + id_1379) };
-                          std::function<Size(*fq_name)> id_1381 { dessser_gen::fq_name.sersize_of_row_binary };
+                          std::function<Size(dessser::gen::fq_name::t)> id_1381 { dessser::gen::fq_name::sersize_of_row_binary };
                           v_26540a608fe059393cc3cd282be43df3 id_1382 { std::get<5>(p_0) };
                           v_320dee9bcc93c7ed0c75cc7db8b85d9b id_1383 { std::get<1>(id_1382) };
                           v_0fab8a04cd41fd489e58d011ef6f08ad id_1384 { std::get<2>(id_1383) };
-                          *fq_name id_1385 { std::get<0>(id_1384) };
+                          dessser::gen::fq_name::t id_1385 { std::get<0>(id_1384) };
                           Size id_1386 { id_1381(id_1385) };
                           Size id_1387 { Size(id_1380 + id_1386) };
                           Size let_res_1388;
@@ -4720,17 +4725,17 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     Size choose_res_1638;
                     if (id_1637) {
                       Size id_1639 { 2UL };
-                      std::function<Size(*site_name)> id_1640 { dessser_gen::site_name.sersize_of_row_binary };
+                      std::function<Size(dessser::gen::site_name::t)> id_1640 { dessser::gen::site_name::sersize_of_row_binary };
                       v_3a6e990115d17bf3eefa1b91b13ca80b id_1641 { std::get<7>(p_0) };
-                      *site_name id_1642 { std::get<0>(id_1641) };
+                      dessser::gen::site_name::t id_1642 { std::get<0>(id_1641) };
                       Size id_1643 { id_1640(id_1642) };
                       Size id_1644 { Size(id_1639 + id_1643) };
                       Size let_res_1645;
                       {
                         Size sz_696 { id_1644 };
-                        std::function<Size(*fq_name)> id_1646 { dessser_gen::fq_name.sersize_of_row_binary };
+                        std::function<Size(dessser::gen::fq_name::t)> id_1646 { dessser::gen::fq_name::sersize_of_row_binary };
                         v_3a6e990115d17bf3eefa1b91b13ca80b id_1647 { std::get<7>(p_0) };
-                        *fq_name id_1648 { std::get<1>(id_1647) };
+                        dessser::gen::fq_name::t id_1648 { std::get<1>(id_1647) };
                         Size id_1649 { id_1646(id_1648) };
                         Size id_1650 { Size(sz_696 + id_1649) };
                         let_res_1645 = id_1650;
@@ -4871,7 +4876,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                         bool id_1740 { bool(id_1739 == label2_657) };
                         Size choose_res_1741;
                         if (id_1740) {
-                          std::optional<*sync_socket> id_1742 { std::get<9>(p_0) };
+                          std::optional<dessser::gen::sync_socket::t> id_1742 { std::get<9>(p_0) };
                           bool id_1743 { !(id_1742.has_value ()) };
                           Size choose_res_1744;
                           if (id_1743) {
@@ -4879,9 +4884,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                             choose_res_1744 = id_1745;
                           } else {
                             Size id_1746 { 2UL };
-                            std::function<Size(*sync_socket)> id_1747 { dessser_gen::sync_socket.sersize_of_row_binary };
-                            std::optional<*sync_socket> id_1748 { std::get<9>(p_0) };
-                            *sync_socket id_1749 { id_1748.value() };
+                            std::function<Size(dessser::gen::sync_socket::t)> id_1747 { dessser::gen::sync_socket::sersize_of_row_binary };
+                            std::optional<dessser::gen::sync_socket::t> id_1748 { std::get<9>(p_0) };
+                            dessser::gen::sync_socket::t id_1749 { id_1748.value() };
                             Size id_1750 { id_1747(id_1749) };
                             Size id_1751 { Size(id_1746 + id_1750) };
                             Size id_1752 { 1UL };
@@ -4902,9 +4907,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                             Size choose_res_1760;
                             if (id_1759) {
                               Size id_1761 { 2UL };
-                              std::function<Size(*sync_socket)> id_1762 { dessser_gen::sync_socket.sersize_of_row_binary };
+                              std::function<Size(dessser::gen::sync_socket::t)> id_1762 { dessser::gen::sync_socket::sersize_of_row_binary };
                               v_287d43b770d826e060b1e65a4d07e0b0 id_1763 { std::get<11>(p_0) };
-                              *sync_socket id_1764 { std::get<0>(id_1763) };
+                              dessser::gen::sync_socket::t id_1764 { std::get<0>(id_1763) };
                               Size id_1765 { id_1762(id_1764) };
                               Size id_1766 { Size(id_1761 + id_1765) };
                               Size let_res_1767;
@@ -6005,9 +6010,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               bool id_2195 { bool(id_2194 == label1_744) };
               Pointer choose_res_2196;
               if (id_2195) {
-                std::function<Pointer(*src_path,Pointer)> id_2197 { dessser_gen::src_path.to_row_binary };
+                std::function<Pointer(dessser::gen::src_path::t,Pointer)> id_2197 { dessser::gen::src_path::to_row_binary };
                 c404d7e7dfb3057f4a4f6b6766eeb900 id_2198 { std::get<3>(p_0) };
-                *src_path id_2199 { std::get<0>(id_2198) };
+                dessser::gen::src_path::t id_2199 { std::get<0>(id_2198) };
                 Pointer id_2200 { id_2197(id_2199, ssum_dst_745) };
                 Pointer let_res_2201;
                 {
@@ -6086,9 +6091,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   bool id_2248 { bool(id_2247 == label1_744) };
                   Pointer choose_res_2249;
                   if (id_2248) {
-                    std::function<Pointer(*site_name,Pointer)> id_2250 { dessser_gen::site_name.to_row_binary };
+                    std::function<Pointer(dessser::gen::site_name::t,Pointer)> id_2250 { dessser::gen::site_name::to_row_binary };
                     v_26540a608fe059393cc3cd282be43df3 id_2251 { std::get<5>(p_0) };
-                    *site_name id_2252 { std::get<0>(id_2251) };
+                    dessser::gen::site_name::t id_2252 { std::get<0>(id_2251) };
                     Pointer id_2253 { id_2250(id_2252, ssum_dst_745) };
                     Pointer let_res_2254;
                     {
@@ -6226,11 +6231,11 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                             bool id_2346 { bool(id_2342 == id_2345) };
                             Pointer choose_res_2347;
                             if (id_2346) {
-                              std::function<Pointer(*fq_name,Pointer)> id_2348 { dessser_gen::fq_name.to_row_binary };
+                              std::function<Pointer(dessser::gen::fq_name::t,Pointer)> id_2348 { dessser::gen::fq_name::to_row_binary };
                               v_26540a608fe059393cc3cd282be43df3 id_2349 { std::get<5>(p_0) };
                               v_320dee9bcc93c7ed0c75cc7db8b85d9b id_2350 { std::get<1>(id_2349) };
                               v_0fab8a04cd41fd489e58d011ef6f08ad id_2351 { std::get<2>(id_2350) };
-                              *fq_name id_2352 { std::get<0>(id_2351) };
+                              dessser::gen::fq_name::t id_2352 { std::get<0>(id_2351) };
                               Pointer id_2353 { id_2348(id_2352, ssum_dst_789) };
                               Pointer let_res_2354;
                               {
@@ -6687,16 +6692,16 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       bool id_2614 { bool(id_2613 == label1_744) };
                       Pointer choose_res_2615;
                       if (id_2614) {
-                        std::function<Pointer(*site_name,Pointer)> id_2616 { dessser_gen::site_name.to_row_binary };
+                        std::function<Pointer(dessser::gen::site_name::t,Pointer)> id_2616 { dessser::gen::site_name::to_row_binary };
                         v_3a6e990115d17bf3eefa1b91b13ca80b id_2617 { std::get<7>(p_0) };
-                        *site_name id_2618 { std::get<0>(id_2617) };
+                        dessser::gen::site_name::t id_2618 { std::get<0>(id_2617) };
                         Pointer id_2619 { id_2616(id_2618, ssum_dst_745) };
                         Pointer let_res_2620;
                         {
                           Pointer stup_dst_774 { id_2619 };
-                          std::function<Pointer(*fq_name,Pointer)> id_2621 { dessser_gen::fq_name.to_row_binary };
+                          std::function<Pointer(dessser::gen::fq_name::t,Pointer)> id_2621 { dessser::gen::fq_name::to_row_binary };
                           v_3a6e990115d17bf3eefa1b91b13ca80b id_2622 { std::get<7>(p_0) };
-                          *fq_name id_2623 { std::get<1>(id_2622) };
+                          dessser::gen::fq_name::t id_2623 { std::get<1>(id_2622) };
                           Pointer id_2624 { id_2621(id_2623, stup_dst_774) };
                           let_res_2620 = id_2624;
                         }
@@ -6876,7 +6881,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                           bool id_2740 { bool(id_2739 == label1_744) };
                           Pointer choose_res_2741;
                           if (id_2740) {
-                            std::optional<*sync_socket> id_2742 { std::get<9>(p_0) };
+                            std::optional<dessser::gen::sync_socket::t> id_2742 { std::get<9>(p_0) };
                             bool id_2743 { !(id_2742.has_value ()) };
                             Pointer choose_res_2744;
                             if (id_2743) {
@@ -6884,9 +6889,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                               Pointer id_2746 { ssum_dst_745.writeU8(id_2745) };
                               choose_res_2744 = id_2746;
                             } else {
-                              std::function<Pointer(*sync_socket,Pointer)> id_2747 { dessser_gen::sync_socket.to_row_binary };
-                              std::optional<*sync_socket> id_2748 { std::get<9>(p_0) };
-                              *sync_socket id_2749 { id_2748.value() };
+                              std::function<Pointer(dessser::gen::sync_socket::t,Pointer)> id_2747 { dessser::gen::sync_socket::to_row_binary };
+                              std::optional<dessser::gen::sync_socket::t> id_2748 { std::get<9>(p_0) };
+                              dessser::gen::sync_socket::t id_2749 { id_2748.value() };
                               uint8_t id_2750 { 0 };
                               Pointer id_2751 { ssum_dst_745.writeU8(id_2750) };
                               Pointer id_2752 { id_2747(id_2749, id_2751) };
@@ -6904,9 +6909,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                               bool id_2757 { bool(id_2756 == label1_744) };
                               Pointer choose_res_2758;
                               if (id_2757) {
-                                std::function<Pointer(*sync_socket,Pointer)> id_2759 { dessser_gen::sync_socket.to_row_binary };
+                                std::function<Pointer(dessser::gen::sync_socket::t,Pointer)> id_2759 { dessser::gen::sync_socket::to_row_binary };
                                 v_287d43b770d826e060b1e65a4d07e0b0 id_2760 { std::get<11>(p_0) };
-                                *sync_socket id_2761 { std::get<0>(id_2760) };
+                                dessser::gen::sync_socket::t id_2761 { std::get<0>(id_2760) };
                                 Pointer id_2762 { id_2759(id_2761, ssum_dst_745) };
                                 Pointer let_res_2763;
                                 {

@@ -6,24 +6,26 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_client_cmd {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 typedef std::tuple<
-  *sync_user_id,
+  dessser::gen::sync_user_id::t,
   double
 > dbf2e0bf3a7180017cc36adb825f391b;
 
 typedef std::tuple<
-  *sync_key,
-  *sync_value
+  dessser::gen::sync_key::t,
+  dessser::gen::sync_value::t
 > v_576cf0b907acee9866e8dcab8f842c70;
 
 struct b4834b9b54082be3172ea167d55892f5 : public std::tuple<
-  *sync_key,
-  *sync_value,
+  dessser::gen::sync_key::t,
+  dessser::gen::sync_value::t,
   double,
   bool
 > { using tuple::tuple; };
@@ -38,7 +40,7 @@ std::ostream &operator<<(std::ostream &os, b4834b9b54082be3172ea167d55892f5 cons
 }
 
 struct e23ab991ab36f2a4daa504088db7bf59 : public std::tuple<
-  *sync_key,
+  dessser::gen::sync_key::t,
   double,
   bool
 > { using tuple::tuple; };
@@ -53,14 +55,14 @@ std::ostream &operator<<(std::ostream &os, e23ab991ab36f2a4daa504088db7bf59 cons
 
 struct t : public std::variant<
   dbf2e0bf3a7180017cc36adb825f391b,
-  *sync_selector,
+  dessser::gen::sync_selector::t,
   v_576cf0b907acee9866e8dcab8f842c70,
   b4834b9b54082be3172ea167d55892f5,
   v_576cf0b907acee9866e8dcab8f842c70,
-  *sync_key,
+  dessser::gen::sync_key::t,
   e23ab991ab36f2a4daa504088db7bf59,
   e23ab991ab36f2a4daa504088db7bf59,
-  *sync_key,
+  dessser::gen::sync_key::t,
   Void
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {

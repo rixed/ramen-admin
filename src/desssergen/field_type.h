@@ -6,15 +6,17 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::field_type {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *field_name name;
-  *raql_type typ;
-  std::optional<*units> units;
+  dessser::gen::field_name::t name;
+  dessser::gen::raql_type::t typ;
+  std::optional<dessser::gen::units::t> units;
   std::string doc;
   std::optional<std::string> aggr;
   bool operator==(t const &other) const {

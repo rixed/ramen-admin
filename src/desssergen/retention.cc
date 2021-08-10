@@ -23,13 +23,15 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::retention {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *raql_expr duration;
+  dessser::gen::raql_expr::t duration;
   double period;
   bool operator==(t const &other) const {
     return duration == other.duration && period == other.period;
@@ -49,7 +51,7 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *raql_expr,
+  dessser::gen::raql_expr::t,
   Pointer
 > v_3501be1aaefb5944279c6a13f6d0d43f;
 
@@ -68,8 +70,8 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*raql_expr,Pointer)> id_1 { dessser_gen::raql_expr.to_row_binary };
-    *raql_expr id_2 { p_0.duration };
+    std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_1 { dessser::gen::raql_expr::to_row_binary };
+    dessser::gen::raql_expr::t id_2 { p_0.duration };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
@@ -92,8 +94,8 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun8 { [&fun8](t p_0) {
-    std::function<Size(*raql_expr)> id_9 { dessser_gen::raql_expr.sersize_of_row_binary };
-    *raql_expr id_10 { p_0.duration };
+    std::function<Size(dessser::gen::raql_expr::t)> id_9 { dessser::gen::raql_expr::sersize_of_row_binary };
+    dessser::gen::raql_expr::t id_10 { p_0.duration };
     Size id_11 { id_9(id_10) };
     Size id_12 { 8UL };
     Size id_13 { Size(id_11 + id_12) };
@@ -114,7 +116,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun14 { [&fun14](Pointer p_0) {
-    std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_15 { dessser_gen::raql_expr.of_row_binary };
+    std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_15 { dessser::gen::raql_expr::of_row_binary };
     v_3501be1aaefb5944279c6a13f6d0d43f id_16 { id_15(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_17;
     {

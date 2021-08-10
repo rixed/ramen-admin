@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_value {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -42,25 +44,25 @@ std::ostream &operator<<(std::ostream &os, c1f1a0a3126e49b1726165cc5452d8cb cons
 
 struct t : public std::variant<
   v_07ada2d1213092d3daac69767fb06478,
-  *worker,
-  *retention,
-  *time_range,
+  dessser::gen::worker::t,
+  dessser::gen::retention::t,
+  dessser::gen::time_range::t,
   Arr<c1f1a0a3126e49b1726165cc5452d8cb>,
-  *raql_value,
-  *target_config,
-  *source_info,
-  *runtime_stats,
-  *replay,
-  *replayer,
-  *replay_request,
-  *alert,
-  *output_specs,
-  *dashboard_widget,
-  *alerting_contact,
-  *alerting_notification,
-  *alerting_delivery_status,
-  *alerting_log,
-  *alerting_inhibition
+  dessser::gen::raql_value::t,
+  dessser::gen::target_config::t,
+  dessser::gen::source_info::t,
+  dessser::gen::runtime_stats::t,
+  dessser::gen::replay::t,
+  dessser::gen::replayer::t,
+  dessser::gen::replay_request::t,
+  dessser::gen::alert::t,
+  dessser::gen::output_specs::t,
+  dessser::gen::dashboard_widget::t,
+  dessser::gen::alerting_contact::t,
+  dessser::gen::alerting_notification::t,
+  dessser::gen::alerting_delivery_status::t,
+  dessser::gen::alerting_log::t,
+  dessser::gen::alerting_inhibition::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {

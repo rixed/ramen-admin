@@ -23,13 +23,15 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::output_specs {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct ef03b54a365ad221a03e049955658b7b : public std::variant<
-  *file_path,
+  dessser::gen::file_path::t,
   std::string,
   std::string
 > { using variant::variant; };
@@ -73,7 +75,7 @@ std::ostream &operator<<(std::ostream &os, v_18d04b7ea857ab950a4107886a579c47 co
 
 typedef std::tuple<
   uint16_t,
-  Arr<*raql_value>
+  Arr<dessser::gen::raql_value::t>
 > bdfcb86aee1b5624e0990e13acb37f3d;
 
 struct c6ce9cb69d610f4c0bcb5bf84f534f8a : public std::tuple<
@@ -97,7 +99,7 @@ typedef std::tuple<
 
 struct ff86648a206e9a3c6ff0423baf23a3a5 {
   v_18d04b7ea857ab950a4107886a579c47 file_type;
-  *fieldmask fieldmask;
+  dessser::gen::fieldmask::t fieldmask;
   Arr<bdfcb86aee1b5624e0990e13acb37f3d> filters;
   Arr<c6e7176b6a7a6739584314d753c4b1c9> channels;
   bool operator==(ff86648a206e9a3c6ff0423baf23a3a5 const &other) const {
@@ -119,8 +121,9 @@ typedef std::tuple<
   ff86648a206e9a3c6ff0423baf23a3a5
 > badedfcce4cfd1443322e6435c2cc493;
 
+typedef Arr<badedfcce4cfd1443322e6435c2cc493> t;
 typedef std::tuple<
-  Arr<badedfcce4cfd1443322e6435c2cc493>,
+  t,
   Pointer
 > f63f919559f0d70225bd0da5dd9bcafc;
 
@@ -150,7 +153,7 @@ typedef std::tuple<
 > v_5a69a726755bdc17305411e6d8e65a45;
 
 typedef std::tuple<
-  *file_path,
+  dessser::gen::file_path::t,
   Pointer
 > f0ce35c43c556a289e4bbac0d50849f5;
 
@@ -175,7 +178,7 @@ typedef std::tuple<
 > f2a48a42f9c827f487e53ee52a4e9e2f;
 
 typedef std::tuple<
-  *fieldmask,
+  dessser::gen::fieldmask::t,
   Pointer
 > v_19e33a322efe04b1a6dea9a9948a2872;
 
@@ -185,12 +188,12 @@ typedef std::tuple<
 > v_343887ba9d80c787d2219041da50c6b0;
 
 typedef std::tuple<
-  Lst<*raql_value>,
+  Lst<dessser::gen::raql_value::t>,
   Pointer
 > v_676b8c6606603984b2fa85fa48884373;
 
 typedef std::tuple<
-  *raql_value,
+  dessser::gen::raql_value::t,
   Pointer
 > ba3b596d6a5cbc29dc62e6e6a46440d5;
 
@@ -365,9 +368,9 @@ typedef std::tuple<
                 (set-vec (u8 0) (identifier "n_ref_323") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_323")))))) 
             (unsafe-nth (u8 0) (identifier "dst_ref_322"))))))
  */
-static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to_row_binary_init()
+static std::function<Pointer(t&,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> fun0 { [&fun0](Arr<badedfcce4cfd1443322e6435c2cc493>& p_0, Pointer p_1) {
+  std::function<Pointer(t&,Pointer)> fun0 { [&fun0](t& p_0, Pointer p_1) {
     uint32_t id_1 { p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -450,9 +453,9 @@ static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to
               bool id_53 { bool(id_50 == id_52) };
               Pointer choose_res_54;
               if (id_53) {
-                std::function<Pointer(*file_path,Pointer)> id_55 { dessser_gen::file_path.to_row_binary };
+                std::function<Pointer(dessser::gen::file_path::t,Pointer)> id_55 { dessser::gen::file_path::to_row_binary };
                 ef03b54a365ad221a03e049955658b7b id_56 { std::get<0>(x_324) };
-                *file_path id_57 { std::get<0>(id_56) };
+                dessser::gen::file_path::t id_57 { std::get<0>(id_56) };
                 Pointer id_58 { id_55(id_57, ssum_dst_327) };
                 choose_res_54 = id_58;
               } else {
@@ -655,9 +658,9 @@ static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to
             Pointer let_res_189;
             {
               Pointer srec_dst_337 { let_res_158 };
-              std::function<Pointer(*fieldmask,Pointer)> id_190 { dessser_gen::fieldmask.to_row_binary };
+              std::function<Pointer(dessser::gen::fieldmask::t,Pointer)> id_190 { dessser::gen::fieldmask::to_row_binary };
               ff86648a206e9a3c6ff0423baf23a3a5 id_191 { std::get<1>(x_324) };
-              *fieldmask id_192 { id_191.fieldmask };
+              dessser::gen::fieldmask::t id_192 { id_191.fieldmask };
               Pointer id_193 { id_190(id_192, srec_dst_337) };
               let_res_189 = id_193;
             }
@@ -745,7 +748,7 @@ static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to
                     Pointer let_res_246;
                     {
                       Pointer stup_dst_345 { let_res_243 };
-                      Arr<*raql_value> id_247 { std::get<1>(x_343) };
+                      Arr<dessser::gen::raql_value::t> id_247 { std::get<1>(x_343) };
                       uint32_t id_248 { id_247.size() };
                       Vec<1, uint32_t> id_249 {  id_248  };
                       Pointer let_res_250;
@@ -809,10 +812,10 @@ static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to
                         Pointer let_res_288;
                         {
                           Vec<1, int32_t> n_ref_349 { id_287 };
-                          Arr<*raql_value> id_289 { std::get<1>(x_343) };
-                          for (*raql_value x_350 : id_289) {
+                          Arr<dessser::gen::raql_value::t> id_289 { std::get<1>(x_343) };
+                          for (dessser::gen::raql_value::t x_350 : id_289) {
                             uint8_t id_290 { 0 };
-                            std::function<Pointer(*raql_value,Pointer)> id_291 { dessser_gen::raql_value.to_row_binary };
+                            std::function<Pointer(dessser::gen::raql_value::t,Pointer)> id_291 { dessser::gen::raql_value::to_row_binary };
                             uint8_t id_292 { 0 };
                             Pointer id_293 { dst_ref_348[id_292] };
                             Pointer id_294 { id_291(x_350, id_293) };
@@ -992,7 +995,7 @@ static std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to
    };
   return fun0;
 }
-std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t&,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("([DirectFile $file_path | IndirectFile STRING | SyncKey STRING]; {file_type: [RingBuf Void | Orc {with_index: BOOL; batch_size: U32; num_batches: U32}]; fieldmask: $fieldmask; filters: (U16; $raql_value[])[]; channels: (U16; (FLOAT; I16; U32))[]})[]")
@@ -1109,9 +1112,9 @@ std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to_row_bi
                 (set-vec (u8 0) (identifier "repeat_n_283") (add (unsafe-nth (u8 0) (identifier "repeat_n_283")) (i32 1)))))) 
           (unsafe-nth (u8 0) (identifier "sz_ref_282")))))
  */
-static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_row_binary_init()
+static std::function<Size(t&)> sersize_of_row_binary_init()
 {
-  std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> fun397 { [&fun397](Arr<badedfcce4cfd1443322e6435c2cc493>& p_0) {
+  std::function<Size(t&)> fun397 { [&fun397](t& p_0) {
     uint32_t id_398 { p_0.size() };
     Vec<1, uint32_t> id_399 {  id_398  };
     Size let_res_400;
@@ -1185,12 +1188,12 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
                 if (id_442) {
                   Size id_444 { 2UL };
                   Size id_445 { Size(sz_284 + id_444) };
-                  std::function<Size(*file_path)> id_446 { dessser_gen::file_path.sersize_of_row_binary };
+                  std::function<Size(dessser::gen::file_path::t)> id_446 { dessser::gen::file_path::sersize_of_row_binary };
                   uint8_t id_447 { 0 };
                   int32_t id_448 { repeat_n_283[id_447] };
                   badedfcce4cfd1443322e6435c2cc493 id_449 { p_0[id_448] };
                   ef03b54a365ad221a03e049955658b7b id_450 { std::get<0>(id_449) };
-                  *file_path id_451 { std::get<0>(id_450) };
+                  dessser::gen::file_path::t id_451 { std::get<0>(id_450) };
                   Size id_452 { id_446(id_451) };
                   Size id_453 { Size(id_445 + id_452) };
                   choose_res_443 = id_453;
@@ -1352,12 +1355,12 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
               Size let_res_552;
               {
                 Size sz_298 { let_res_535 };
-                std::function<Size(*fieldmask)> id_553 { dessser_gen::fieldmask.sersize_of_row_binary };
+                std::function<Size(dessser::gen::fieldmask::t)> id_553 { dessser::gen::fieldmask::sersize_of_row_binary };
                 uint8_t id_554 { 0 };
                 int32_t id_555 { repeat_n_283[id_554] };
                 badedfcce4cfd1443322e6435c2cc493 id_556 { p_0[id_555] };
                 ff86648a206e9a3c6ff0423baf23a3a5 id_557 { std::get<1>(id_556) };
-                *fieldmask id_558 { id_557.fieldmask };
+                dessser::gen::fieldmask::t id_558 { id_557.fieldmask };
                 Size id_559 { id_553(id_558) };
                 Size id_560 { Size(sz_298 + id_559) };
                 let_res_552 = id_560;
@@ -1445,7 +1448,7 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
                           ff86648a206e9a3c6ff0423baf23a3a5 id_617 { std::get<1>(id_616) };
                           Arr<bdfcb86aee1b5624e0990e13acb37f3d> id_618 { id_617.filters };
                           bdfcb86aee1b5624e0990e13acb37f3d id_619 { id_618[id_613] };
-                          Arr<*raql_value> id_620 { std::get<1>(id_619) };
+                          Arr<dessser::gen::raql_value::t> id_620 { std::get<1>(id_619) };
                           uint32_t id_621 { id_620.size() };
                           Vec<1, uint32_t> id_622 {  id_621  };
                           Size let_res_623;
@@ -1501,7 +1504,7 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
                                 ff86648a206e9a3c6ff0423baf23a3a5 id_655 { std::get<1>(id_654) };
                                 Arr<bdfcb86aee1b5624e0990e13acb37f3d> id_656 { id_655.filters };
                                 bdfcb86aee1b5624e0990e13acb37f3d id_657 { id_656[id_651] };
-                                Arr<*raql_value> id_658 { std::get<1>(id_657) };
+                                Arr<dessser::gen::raql_value::t> id_658 { std::get<1>(id_657) };
                                 uint32_t id_659 { id_658.size() };
                                 int32_t id_660 { int32_t(id_659) };
                                 uint8_t id_661 { 0 };
@@ -1512,7 +1515,7 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
                                   uint8_t id_664 { 0 };
                                   uint8_t id_665 { 0 };
                                   Size id_666 { sz_ref_308[id_665] };
-                                  std::function<Size(*raql_value)> id_667 { dessser_gen::raql_value.sersize_of_row_binary };
+                                  std::function<Size(dessser::gen::raql_value::t)> id_667 { dessser::gen::raql_value::sersize_of_row_binary };
                                   uint8_t id_668 { 0 };
                                   int32_t id_669 { repeat_n_309[id_668] };
                                   uint8_t id_670 { 0 };
@@ -1523,8 +1526,8 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
                                   ff86648a206e9a3c6ff0423baf23a3a5 id_675 { std::get<1>(id_674) };
                                   Arr<bdfcb86aee1b5624e0990e13acb37f3d> id_676 { id_675.filters };
                                   bdfcb86aee1b5624e0990e13acb37f3d id_677 { id_676[id_671] };
-                                  Arr<*raql_value> id_678 { std::get<1>(id_677) };
-                                  *raql_value id_679 { id_678[id_669] };
+                                  Arr<dessser::gen::raql_value::t> id_678 { std::get<1>(id_677) };
+                                  dessser::gen::raql_value::t id_679 { id_678[id_669] };
                                   Size id_680 { id_667(id_679) };
                                   Size id_681 { Size(id_666 + id_680) };
                                   Void id_682 { ((void)(sz_ref_308[id_664] = id_681), VOID) };
@@ -1674,7 +1677,7 @@ static std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_ro
    };
   return fun397;
 }
-std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t&)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2089,7 +2092,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         bool id_837 { bool(id_836 == dsum1_fst_80) };
                         v_5a69a726755bdc17305411e6d8e65a45 choose_res_838;
                         if (id_837) {
-                          std::function<f0ce35c43c556a289e4bbac0d50849f5(Pointer)> id_839 { dessser_gen::file_path.of_row_binary };
+                          std::function<f0ce35c43c556a289e4bbac0d50849f5(Pointer)> id_839 { dessser::gen::file_path::of_row_binary };
                           f0ce35c43c556a289e4bbac0d50849f5 id_840 { id_839(dsum1_snd_81) };
                           v_5a69a726755bdc17305411e6d8e65a45 letpair_res_841;
                           {
@@ -2391,7 +2394,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           {
                             auto drec_fst_152 { std::get<0>(drec_151) };
                             auto drec_snd_153 { std::get<1>(drec_151) };
-                            std::function<v_19e33a322efe04b1a6dea9a9948a2872(Pointer)> id_981 { dessser_gen::fieldmask.of_row_binary };
+                            std::function<v_19e33a322efe04b1a6dea9a9948a2872(Pointer)> id_981 { dessser::gen::fieldmask::of_row_binary };
                             v_19e33a322efe04b1a6dea9a9948a2872 id_982 { id_981(drec_snd_153) };
                             v_41a55ffdc86f735cd27d9b10fad2d020 let_res_983;
                             {
@@ -2587,7 +2590,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                       {
                                                         auto dlist1_fst_190 { std::get<0>(dlist1_189) };
                                                         auto dlist1_snd_191 { std::get<1>(dlist1_189) };
-                                                        Lst<*raql_value> endoflist_1088;
+                                                        Lst<dessser::gen::raql_value::t> endoflist_1088;
                                                         v_676b8c6606603984b2fa85fa48884373 id_1089 {  endoflist_1088, dlist1_snd_191  };
                                                         Vec<1, v_676b8c6606603984b2fa85fa48884373> id_1090 {  id_1089  };
                                                         v_676b8c6606603984b2fa85fa48884373 let_res_1091;
@@ -2613,13 +2616,13 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                     auto dlist2_fst_195 { std::get<0>(dlist2_194) };
                                                                     auto dlist2_snd_196 { std::get<1>(dlist2_194) };
                                                                     uint8_t id_1101 { 0 };
-                                                                    std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_1102 { dessser_gen::raql_value.of_row_binary };
+                                                                    std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_1102 { dessser::gen::raql_value::of_row_binary };
                                                                     ba3b596d6a5cbc29dc62e6e6a46440d5 id_1103 { id_1102(dlist2_snd_196) };
                                                                     v_676b8c6606603984b2fa85fa48884373 letpair_res_1104;
                                                                     {
                                                                       auto dlist3_fst_198 { std::get<0>(id_1103) };
                                                                       auto dlist3_snd_199 { std::get<1>(id_1103) };
-                                                                      Lst<*raql_value> id_1105 { dlist3_fst_198, dlist2_fst_195 };
+                                                                      Lst<dessser::gen::raql_value::t> id_1105 { dlist3_fst_198, dlist2_fst_195 };
                                                                       v_676b8c6606603984b2fa85fa48884373 id_1106 {  id_1105, dlist3_snd_199  };
                                                                       letpair_res_1104 = id_1106;
                                                                     }
@@ -2647,7 +2650,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                     {
                                                       auto dlist4_fst_201 { std::get<0>(let_res_1086) };
                                                       auto dlist4_snd_202 { std::get<1>(let_res_1086) };
-                                                      Arr<*raql_value> id_1117 { dlist4_fst_201.toListRev() };
+                                                      Arr<dessser::gen::raql_value::t> id_1117 { dlist4_fst_201.toListRev() };
                                                       bdfcb86aee1b5624e0990e13acb37f3d id_1118 {  dtup_fst_178, id_1117  };
                                                       Lst<bdfcb86aee1b5624e0990e13acb37f3d> id_1119 { id_1118, dlist2_fst_172 };
                                                       v_343887ba9d80c787d2219041da50c6b0 id_1120 {  id_1119, dlist4_snd_202  };
@@ -2932,7 +2935,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
     {
       auto dlist4_fst_275 { std::get<0>(let_res_815) };
       auto dlist4_snd_276 { std::get<1>(let_res_815) };
-      Arr<badedfcce4cfd1443322e6435c2cc493> id_1239 { dlist4_fst_275.toListRev() };
+      t id_1239 { dlist4_fst_275.toListRev() };
       f63f919559f0d70225bd0da5dd9bcafc id_1240 {  id_1239, dlist4_snd_276  };
       letpair_res_1238 = id_1240;
     }

@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::output_specs {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct ef03b54a365ad221a03e049955658b7b : public std::variant<
-  *file_path,
+  dessser::gen::file_path::t,
   std::string,
   std::string
 > { using variant::variant; };
@@ -56,7 +58,7 @@ std::ostream &operator<<(std::ostream &os, v_18d04b7ea857ab950a4107886a579c47 co
 
 typedef std::tuple<
   uint16_t,
-  Arr<*raql_value>
+  Arr<dessser::gen::raql_value::t>
 > bdfcb86aee1b5624e0990e13acb37f3d;
 
 struct c6ce9cb69d610f4c0bcb5bf84f534f8a : public std::tuple<
@@ -80,7 +82,7 @@ typedef std::tuple<
 
 struct ff86648a206e9a3c6ff0423baf23a3a5 {
   v_18d04b7ea857ab950a4107886a579c47 file_type;
-  *fieldmask fieldmask;
+  dessser::gen::fieldmask::t fieldmask;
   Arr<bdfcb86aee1b5624e0990e13acb37f3d> filters;
   Arr<c6e7176b6a7a6739584314d753c4b1c9> channels;
   bool operator==(ff86648a206e9a3c6ff0423baf23a3a5 const &other) const {
@@ -102,16 +104,17 @@ typedef std::tuple<
   ff86648a206e9a3c6ff0423baf23a3a5
 > badedfcce4cfd1443322e6435c2cc493;
 
+typedef Arr<badedfcce4cfd1443322e6435c2cc493> t;
 typedef std::tuple<
-  Arr<badedfcce4cfd1443322e6435c2cc493>,
+  t,
   Pointer
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(Arr<badedfcce4cfd1443322e6435c2cc493>&,Pointer)> to_row_binary;
-std::function<Size(Arr<badedfcce4cfd1443322e6435c2cc493>&)> sersize_of_row_binary;
+std::function<Pointer(t&,Pointer)> to_row_binary;
+std::function<Size(t&)> sersize_of_row_binary;
 std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
 
 }

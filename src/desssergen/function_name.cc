@@ -23,13 +23,16 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::function_name {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
+typedef std::string t;
 typedef std::tuple<
-  std::string,
+  t,
   Pointer
 > v_46a5e81c2410b000ff0adea6dc198147;
 
@@ -67,9 +70,9 @@ typedef std::tuple<
                 (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_75"))))) 
         (bytes-of-string (param 0))))
  */
-static std::function<Pointer(std::string,Pointer)> to_row_binary_init()
+static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::string,Pointer)> fun0 { [&fun0](std::string p_0, Pointer p_1) {
+  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
     uint32_t id_1 { (uint32_t)p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -131,7 +134,7 @@ static std::function<Pointer(std::string,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(std::string,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("STRING")
@@ -144,9 +147,9 @@ std::function<Pointer(std::string,Pointer)> to_row_binary(to_row_binary_init());
               (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_73")))))) 
         (size-of-u32 (string-length (param 0)))))
  */
-static std::function<Size(std::string)> sersize_of_row_binary_init()
+static std::function<Size(t)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::string)> fun39 { [&fun39](std::string p_0) {
+  std::function<Size(t)> fun39 { [&fun39](t p_0) {
     uint32_t id_40 { (uint32_t)p_0.size() };
     Vec<1, uint32_t> id_41 {  id_40  };
     Size let_res_42;
@@ -191,7 +194,7 @@ static std::function<Size(std::string)> sersize_of_row_binary_init()
    };
   return fun39;
 }
-std::function<Size(std::string)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -294,7 +297,7 @@ static std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary_
         {
           auto dstring2_fst_66 { std::get<0>(id_110) };
           auto dstring2_snd_67 { std::get<1>(id_110) };
-          std::string id_112 { dstring2_fst_66.toString() };
+          t id_112 { dstring2_fst_66.toString() };
           v_46a5e81c2410b000ff0adea6dc198147 id_113 {  id_112, dstring2_snd_67  };
           letpair_res_111 = id_113;
         }

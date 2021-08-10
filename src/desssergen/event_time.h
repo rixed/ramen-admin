@@ -6,15 +6,17 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::event_time {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct v_7dc4293225aede806bbbfec766da77a3 : public std::variant<
   double,
-  *event_time_field,
-  *event_time_field
+  dessser::gen::event_time_field::t,
+  dessser::gen::event_time_field::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 const &v) {
   switch (v.index()) {
@@ -26,7 +28,7 @@ std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 co
 }
 
 typedef std::tuple<
-  *event_time_field,
+  dessser::gen::event_time_field::t,
   v_7dc4293225aede806bbbfec766da77a3
 > t;
 

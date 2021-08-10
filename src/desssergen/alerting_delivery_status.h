@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::alerting_delivery_status {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */

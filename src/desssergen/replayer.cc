@@ -23,13 +23,15 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::replayer {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *time_range time_range;
+  dessser::gen::time_range::t time_range;
   double creation;
   std::optional<uint32_t> pid;
   double last_killed;
@@ -57,7 +59,7 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *time_range,
+  dessser::gen::time_range::t,
   Pointer
 > v_4b60a4a70e6b1dfeee3bc23533d93277;
 
@@ -161,8 +163,8 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*time_range,Pointer)> id_1 { dessser_gen::time_range.to_row_binary };
-    *time_range id_2 { p_0.time_range };
+    std::function<Pointer(dessser::gen::time_range::t,Pointer)> id_1 { dessser::gen::time_range::to_row_binary };
+    dessser::gen::time_range::t id_2 { p_0.time_range };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
@@ -412,8 +414,8 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun130 { [&fun130](t p_0) {
-    std::function<Size(*time_range)> id_131 { dessser_gen::time_range.sersize_of_row_binary };
-    *time_range id_132 { p_0.time_range };
+    std::function<Size(dessser::gen::time_range::t)> id_131 { dessser::gen::time_range::sersize_of_row_binary };
+    dessser::gen::time_range::t id_132 { p_0.time_range };
     Size id_133 { id_131(id_132) };
     Size id_134 { 8UL };
     Size id_135 { Size(id_133 + id_134) };
@@ -667,7 +669,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun238 { [&fun238](Pointer p_0) {
-    std::function<v_4b60a4a70e6b1dfeee3bc23533d93277(Pointer)> id_239 { dessser_gen::time_range.of_row_binary };
+    std::function<v_4b60a4a70e6b1dfeee3bc23533d93277(Pointer)> id_239 { dessser::gen::time_range::of_row_binary };
     v_4b60a4a70e6b1dfeee3bc23533d93277 id_240 { id_239(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_241;
     {

@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::alerting_notification {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -34,8 +36,8 @@ typedef std::tuple<
 > d135bed341a046f128507720bca94ebf;
 
 struct t {
-  *site_name site;
-  *fq_name worker;
+  dessser::gen::site_name::t site;
+  dessser::gen::fq_name::t worker;
   bool test;
   double sent_time;
   std::optional<double> event_time;
@@ -72,12 +74,12 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *site_name,
+  dessser::gen::site_name::t,
   Pointer
 > ddf7cb48181332ead2f60a5f4bb1a8de;
 
 typedef std::tuple<
-  *fq_name,
+  dessser::gen::fq_name::t,
   Pointer
 > v_41ac8303016d6ac19fef26d484dd5164;
 
@@ -226,14 +228,14 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*site_name,Pointer)> id_1 { dessser_gen::site_name.to_row_binary };
-    *site_name id_2 { p_0.site };
+    std::function<Pointer(dessser::gen::site_name::t,Pointer)> id_1 { dessser::gen::site_name::to_row_binary };
+    dessser::gen::site_name::t id_2 { p_0.site };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_207 { id_3 };
-      std::function<Pointer(*fq_name,Pointer)> id_5 { dessser_gen::fq_name.to_row_binary };
-      *fq_name id_6 { p_0.worker };
+      std::function<Pointer(dessser::gen::fq_name::t,Pointer)> id_5 { dessser::gen::fq_name::to_row_binary };
+      dessser::gen::fq_name::t id_6 { p_0.worker };
       Pointer id_7 { id_5(id_6, srec_dst_207) };
       let_res_4 = id_7;
     }
@@ -656,14 +658,14 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun223 { [&fun223](t p_0) {
-    std::function<Size(*site_name)> id_224 { dessser_gen::site_name.sersize_of_row_binary };
-    *site_name id_225 { p_0.site };
+    std::function<Size(dessser::gen::site_name::t)> id_224 { dessser::gen::site_name::sersize_of_row_binary };
+    dessser::gen::site_name::t id_225 { p_0.site };
     Size id_226 { id_224(id_225) };
     Size let_res_227;
     {
       Size sz_182 { id_226 };
-      std::function<Size(*fq_name)> id_228 { dessser_gen::fq_name.sersize_of_row_binary };
-      *fq_name id_229 { p_0.worker };
+      std::function<Size(dessser::gen::fq_name::t)> id_228 { dessser::gen::fq_name::sersize_of_row_binary };
+      dessser::gen::fq_name::t id_229 { p_0.worker };
       Size id_230 { id_228(id_229) };
       Size id_231 { Size(sz_182 + id_230) };
       let_res_227 = id_231;
@@ -1126,7 +1128,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun399 { [&fun399](Pointer p_0) {
-    std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_400 { dessser_gen::site_name.of_row_binary };
+    std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_400 { dessser::gen::site_name::of_row_binary };
     ddf7cb48181332ead2f60a5f4bb1a8de id_401 { id_400(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_402;
     {
@@ -1135,7 +1137,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
-        std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_404 { dessser_gen::fq_name.of_row_binary };
+        std::function<v_41ac8303016d6ac19fef26d484dd5164(Pointer)> id_404 { dessser::gen::fq_name::of_row_binary };
         v_41ac8303016d6ac19fef26d484dd5164 id_405 { id_404(drec_snd_58) };
         f63f919559f0d70225bd0da5dd9bcafc let_res_406;
         {

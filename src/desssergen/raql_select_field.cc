@@ -23,14 +23,16 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::raql_select_field {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *raql_expr expr;
-  *field_name alias;
+  dessser::gen::raql_expr::t expr;
+  dessser::gen::field_name::t alias;
   std::string doc;
   std::optional<std::string> aggr;
   bool operator==(t const &other) const {
@@ -53,12 +55,12 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *raql_expr,
+  dessser::gen::raql_expr::t,
   Pointer
 > v_3501be1aaefb5944279c6a13f6d0d43f;
 
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   Pointer
 > c50aa083fa818c6eeca389b0025dda98;
 
@@ -126,14 +128,14 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*raql_expr,Pointer)> id_1 { dessser_gen::raql_expr.to_row_binary };
-    *raql_expr id_2 { p_0.expr };
+    std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_1 { dessser::gen::raql_expr::to_row_binary };
+    dessser::gen::raql_expr::t id_2 { p_0.expr };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_108 { id_3 };
-      std::function<Pointer(*field_name,Pointer)> id_5 { dessser_gen::field_name.to_row_binary };
-      *field_name id_6 { p_0.alias };
+      std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_5 { dessser::gen::field_name::to_row_binary };
+      dessser::gen::field_name::t id_6 { p_0.alias };
       Pointer id_7 { id_5(id_6, srec_dst_108) };
       let_res_4 = id_7;
     }
@@ -314,14 +316,14 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun99 { [&fun99](t p_0) {
-    std::function<Size(*raql_expr)> id_100 { dessser_gen::raql_expr.sersize_of_row_binary };
-    *raql_expr id_101 { p_0.expr };
+    std::function<Size(dessser::gen::raql_expr::t)> id_100 { dessser::gen::raql_expr::sersize_of_row_binary };
+    dessser::gen::raql_expr::t id_101 { p_0.expr };
     Size id_102 { id_100(id_101) };
     Size let_res_103;
     {
       Size sz_99 { id_102 };
-      std::function<Size(*field_name)> id_104 { dessser_gen::field_name.sersize_of_row_binary };
-      *field_name id_105 { p_0.alias };
+      std::function<Size(dessser::gen::field_name::t)> id_104 { dessser::gen::field_name::sersize_of_row_binary };
+      dessser::gen::field_name::t id_105 { p_0.alias };
       Size id_106 { id_104(id_105) };
       Size id_107 { Size(sz_99 + id_106) };
       let_res_103 = id_107;
@@ -496,7 +498,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun177 { [&fun177](Pointer p_0) {
-    std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_178 { dessser_gen::raql_expr.of_row_binary };
+    std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_178 { dessser::gen::raql_expr::of_row_binary };
     v_3501be1aaefb5944279c6a13f6d0d43f id_179 { id_178(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_180;
     {
@@ -505,7 +507,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
-        std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_182 { dessser_gen::field_name.of_row_binary };
+        std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_182 { dessser::gen::field_name::of_row_binary };
         c50aa083fa818c6eeca389b0025dda98 id_183 { id_182(drec_snd_58) };
         f63f919559f0d70225bd0da5dd9bcafc let_res_184;
         {

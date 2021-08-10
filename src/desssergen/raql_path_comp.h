@@ -6,14 +6,16 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_path_comp {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
   uint32_t,
-  *field_name
+  dessser::gen::field_name::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {

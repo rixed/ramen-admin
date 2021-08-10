@@ -1,33 +1,38 @@
 #ifndef SYNCSTATUS_H_20190503
 #define SYNCSTATUS_H_20190503
 #include <string>
+#include <QDebug>
 #include <QtWidgets>
-extern "C" {
-# include <caml/mlvalues.h>
-// Defined by OCaml mlvalues but conflicting with further Qt includes:
-# undef alloc
-# undef flush
-}
 
 class SyncStatus {
   std::string msg;
 
 public:
   enum Status {
-    Undef, InitStart, InitOk, InitFail, Ok, Fail
+    Undef,
+    Resolving,
+    Connecting,
+    Authenticating,
+    Synchronizing,
+    Synchronized,
+    Closing,
+    Failed
   } status;
 
-  SyncStatus();
-  SyncStatus(value s_);
-
+  SyncStatus(Status = Undef);
   ~SyncStatus();
 
-  QString message();
+  QString message() const;
 
-  bool isError() const;
-
-  bool isOk() const;
+  bool operator==(SyncStatus const &other) {
+    return status == other.status;
+  }
+  bool operator!=(SyncStatus const &other) {
+    return status != other.status;
+  }
 };
+
+QDebug operator<<(QDebug, SyncStatus const &);
 
 Q_DECLARE_METATYPE(SyncStatus);
 

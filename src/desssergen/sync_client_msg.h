@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_client_msg {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -15,7 +17,7 @@ struct t {
   uint32_t seq;
   bool confirm_success;
   bool echo;
-  *sync_client_cmd cmd;
+  dessser::gen::sync_client_cmd::t cmd;
   bool operator==(t const &other) const {
     return seq == other.seq && confirm_success == other.confirm_success && echo == other.echo && cmd == other.cmd;
   }

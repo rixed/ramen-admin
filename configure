@@ -583,6 +583,7 @@ PACKAGE_URL=''
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+DESSSER_INC
 RAMEN_SRC
 CONVERT
 QMAKE
@@ -639,6 +640,7 @@ ac_subst_files=''
 ac_user_opts='
 enable_option_checking
 with_ramen
+with_dessser
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1271,6 +1273,7 @@ Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
   --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
   --with-ramen            Where to find ramen source *.type files
+  --with-dessser          Where to find dessser include files
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -3038,6 +3041,17 @@ else
 fi
 
 RAMEN_SRC=$with_ramen
+
+
+
+# Check whether --with-dessser was given.
+if test "${with_dessser+set}" = set; then :
+  withval=$with_dessser;
+else
+  with_dessser=../dessser/src
+fi
+
+DESSSER_INC=$(realpath $with_dessser)
 
 
 ac_config_files="$ac_config_files Makefile src/rmadmin.pro"

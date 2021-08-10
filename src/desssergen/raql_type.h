@@ -6,21 +6,29 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_type {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
+struct t;
+struct t;
 typedef std::tuple<
   uint32_t,
   t*
 > v_21d42a88cbfa8d217bab3e5ff3c8293a;
 
+struct t;
+struct t;
 typedef std::tuple<
   std::string,
   t*
 > v_7fc8d7a0a67813ab72751cde815990fd;
 
+struct t;
+struct t;
 typedef std::tuple<
   t*,
   t*

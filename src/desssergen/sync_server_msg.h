@@ -6,14 +6,16 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_server_msg {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct v_940f244208f0d3b12c9ae508dcaea75c {
-  *sync_key k;
-  *sync_value v;
+  dessser::gen::sync_key::t k;
+  dessser::gen::sync_value::t v;
   std::string uid;
   double mtime;
   bool operator==(v_940f244208f0d3b12c9ae508dcaea75c const &other) const {
@@ -31,8 +33,8 @@ std::ostream &operator<<(std::ostream &os, v_940f244208f0d3b12c9ae508dcaea75c co
 }
 
 struct v_5e1953df5130fdcab794186d201fd5e8 {
-  *sync_key k;
-  *sync_value v;
+  dessser::gen::sync_key::t k;
+  dessser::gen::sync_value::t v;
   std::string uid;
   double mtime;
   bool can_write;
@@ -58,7 +60,7 @@ std::ostream &operator<<(std::ostream &os, v_5e1953df5130fdcab794186d201fd5e8 co
 }
 
 struct v_3cca14702fcf070f776a6badc4224e9d {
-  *sync_key k;
+  dessser::gen::sync_key::t k;
   std::string owner;
   double expiry;
   bool operator==(v_3cca14702fcf070f776a6badc4224e9d const &other) const {
@@ -75,13 +77,13 @@ std::ostream &operator<<(std::ostream &os, v_3cca14702fcf070f776a6badc4224e9d co
 }
 
 struct t : public std::variant<
-  *sync_socket,
+  dessser::gen::sync_socket::t,
   std::string,
   v_940f244208f0d3b12c9ae508dcaea75c,
   v_5e1953df5130fdcab794186d201fd5e8,
-  *sync_key,
+  dessser::gen::sync_key::t,
   v_3cca14702fcf070f776a6badc4224e9d,
-  *sync_key
+  dessser::gen::sync_key::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {

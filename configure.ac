@@ -20,6 +20,12 @@ AC_ARG_WITH([ramen],
   [with_ramen=../ramen/src])
 AC_SUBST(RAMEN_SRC, [$with_ramen])
 
+AC_ARG_WITH([dessser],
+  AC_HELP_STRING([--with-dessser], [Where to find dessser include files]),
+  [],
+  [with_dessser=../dessser/src])
+AC_SUBST(DESSSER_INC, [$(realpath $with_dessser)])
+
 AC_CONFIG_FILES([
   Makefile
   src/rmadmin.pro

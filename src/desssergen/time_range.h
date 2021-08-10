@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::time_range {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -28,16 +30,17 @@ std::ostream &operator<<(std::ostream &os, v_1d53ca1dfc33d45608c16f60daf686b4 co
   return os;
 }
 
+typedef Arr<v_1d53ca1dfc33d45608c16f60daf686b4> t;
 typedef std::tuple<
-  Arr<v_1d53ca1dfc33d45608c16f60daf686b4>,
+  t,
   Pointer
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&,Pointer)> to_row_binary;
-std::function<Size(Arr<v_1d53ca1dfc33d45608c16f60daf686b4>&)> sersize_of_row_binary;
+std::function<Pointer(t&,Pointer)> to_row_binary;
+std::function<Size(t&)> sersize_of_row_binary;
 std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
 
 }

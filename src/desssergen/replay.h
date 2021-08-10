@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::replay {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct ed5c0948580fc7adda63d975e64ca75f : public std::variant<
-  *file_path,
+  dessser::gen::file_path::t,
   std::string
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, ed5c0948580fc7adda63d975e64ca75f const &v) {
@@ -24,18 +26,18 @@ std::ostream &operator<<(std::ostream &os, ed5c0948580fc7adda63d975e64ca75f cons
 }
 
 typedef std::tuple<
-  *fq_function_name,
-  *fq_function_name
+  dessser::gen::fq_function_name::t,
+  dessser::gen::fq_function_name::t
 > v_350131e9cf91ccd34558b5986f609d67;
 
 struct t {
   uint16_t channel;
-  *fq_function_name target;
+  dessser::gen::fq_function_name::t target;
   std::string target_fieldmask;
   double since;
   double until;
   ed5c0948580fc7adda63d975e64ca75f recipient;
-  Arr<*fq_function_name> sources;
+  Arr<dessser::gen::fq_function_name::t> sources;
   Arr<v_350131e9cf91ccd34558b5986f609d67> links;
   double timeout_date;
   bool operator==(t const &other) const {

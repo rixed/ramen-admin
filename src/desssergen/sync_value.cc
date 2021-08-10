@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::sync_value {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -59,25 +61,25 @@ std::ostream &operator<<(std::ostream &os, c1f1a0a3126e49b1726165cc5452d8cb cons
 
 struct t : public std::variant<
   v_07ada2d1213092d3daac69767fb06478,
-  *worker,
-  *retention,
-  *time_range,
+  dessser::gen::worker::t,
+  dessser::gen::retention::t,
+  dessser::gen::time_range::t,
   Arr<c1f1a0a3126e49b1726165cc5452d8cb>,
-  *raql_value,
-  *target_config,
-  *source_info,
-  *runtime_stats,
-  *replay,
-  *replayer,
-  *replay_request,
-  *alert,
-  *output_specs,
-  *dashboard_widget,
-  *alerting_contact,
-  *alerting_notification,
-  *alerting_delivery_status,
-  *alerting_log,
-  *alerting_inhibition
+  dessser::gen::raql_value::t,
+  dessser::gen::target_config::t,
+  dessser::gen::source_info::t,
+  dessser::gen::runtime_stats::t,
+  dessser::gen::replay::t,
+  dessser::gen::replayer::t,
+  dessser::gen::replay_request::t,
+  dessser::gen::alert::t,
+  dessser::gen::output_specs::t,
+  dessser::gen::dashboard_widget::t,
+  dessser::gen::alerting_contact::t,
+  dessser::gen::alerting_notification::t,
+  dessser::gen::alerting_delivery_status::t,
+  dessser::gen::alerting_log::t,
+  dessser::gen::alerting_inhibition::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
@@ -146,17 +148,17 @@ typedef std::tuple<
 > f921d1e0a170c3c04148c21704db9c45;
 
 typedef std::tuple<
-  *worker,
+  dessser::gen::worker::t,
   Pointer
 > f7624fbd7a09599953e1295791529a77;
 
 typedef std::tuple<
-  *retention,
+  dessser::gen::retention::t,
   Pointer
 > v_371090eb4646cc70f1029ba30f9305da;
 
 typedef std::tuple<
-  *time_range,
+  dessser::gen::time_range::t,
   Pointer
 > v_4b60a4a70e6b1dfeee3bc23533d93277;
 
@@ -166,77 +168,77 @@ typedef std::tuple<
 > ca2ba47be950eca0a36de614af417907;
 
 typedef std::tuple<
-  *raql_value,
+  dessser::gen::raql_value::t,
   Pointer
 > ba3b596d6a5cbc29dc62e6e6a46440d5;
 
 typedef std::tuple<
-  *target_config,
+  dessser::gen::target_config::t,
   Pointer
 > d9a2b3eafa7a8846e102c4c5caba99ec;
 
 typedef std::tuple<
-  *source_info,
+  dessser::gen::source_info::t,
   Pointer
 > d159e6605b03eb55895de2efe6d0a8c0;
 
 typedef std::tuple<
-  *runtime_stats,
+  dessser::gen::runtime_stats::t,
   Pointer
 > c103e668680401c199cc9dd2f89f51b4;
 
 typedef std::tuple<
-  *replay,
+  dessser::gen::replay::t,
   Pointer
 > v_09f87cec186e0cb60a8fce13469f513f;
 
 typedef std::tuple<
-  *replayer,
+  dessser::gen::replayer::t,
   Pointer
 > a9357042939e8b0f227486faaba4fcfb;
 
 typedef std::tuple<
-  *replay_request,
+  dessser::gen::replay_request::t,
   Pointer
 > cadcce10e6117fd50b402ee4d1cb38a4;
 
 typedef std::tuple<
-  *alert,
+  dessser::gen::alert::t,
   Pointer
 > feae865b6fd982b54eeb0d676df0c187;
 
 typedef std::tuple<
-  *output_specs,
+  dessser::gen::output_specs::t,
   Pointer
 > v_5d3df5ef82bef4373702ab960e6235b2;
 
 typedef std::tuple<
-  *dashboard_widget,
+  dessser::gen::dashboard_widget::t,
   Pointer
 > v_5c6f406543b9e67fefffd08643986d36;
 
 typedef std::tuple<
-  *alerting_contact,
+  dessser::gen::alerting_contact::t,
   Pointer
 > v_132ca8e3dcf1135f5d129336ff188b57;
 
 typedef std::tuple<
-  *alerting_notification,
+  dessser::gen::alerting_notification::t,
   Pointer
 > v_85f680f1694fafb59f9004d40323f6b5;
 
 typedef std::tuple<
-  *alerting_delivery_status,
+  dessser::gen::alerting_delivery_status::t,
   Pointer
 > v_9a0fce1a343f193cd07dec4c309db5e5;
 
 typedef std::tuple<
-  *alerting_log,
+  dessser::gen::alerting_log::t,
   Pointer
 > v_419eac713b7b9b379f1f3222b985b0e6;
 
 typedef std::tuple<
-  *alerting_inhibition,
+  dessser::gen::alerting_inhibition::t,
   Pointer
 > v_79b7af3dcb201c3fb0f035e41221ecaa;
 
@@ -433,8 +435,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           bool id_60 { bool(id_59 == label1_212) };
           Pointer choose_res_61;
           if (id_60) {
-            std::function<Pointer(*worker,Pointer)> id_62 { dessser_gen::worker.to_row_binary };
-            *worker id_63 { std::get<1>(p_0) };
+            std::function<Pointer(dessser::gen::worker::t,Pointer)> id_62 { dessser::gen::worker::to_row_binary };
+            dessser::gen::worker::t id_63 { std::get<1>(p_0) };
             Pointer id_64 { id_62(id_63, ssum_dst_213) };
             choose_res_61 = id_64;
           } else {
@@ -442,8 +444,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             bool id_66 { bool(id_65 == label1_212) };
             Pointer choose_res_67;
             if (id_66) {
-              std::function<Pointer(*retention,Pointer)> id_68 { dessser_gen::retention.to_row_binary };
-              *retention id_69 { std::get<2>(p_0) };
+              std::function<Pointer(dessser::gen::retention::t,Pointer)> id_68 { dessser::gen::retention::to_row_binary };
+              dessser::gen::retention::t id_69 { std::get<2>(p_0) };
               Pointer id_70 { id_68(id_69, ssum_dst_213) };
               choose_res_67 = id_70;
             } else {
@@ -451,8 +453,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               bool id_72 { bool(id_71 == label1_212) };
               Pointer choose_res_73;
               if (id_72) {
-                std::function<Pointer(*time_range,Pointer)> id_74 { dessser_gen::time_range.to_row_binary };
-                *time_range id_75 { std::get<3>(p_0) };
+                std::function<Pointer(dessser::gen::time_range::t,Pointer)> id_74 { dessser::gen::time_range::to_row_binary };
+                dessser::gen::time_range::t id_75 { std::get<3>(p_0) };
                 Pointer id_76 { id_74(id_75, ssum_dst_213) };
                 choose_res_73 = id_76;
               } else {
@@ -619,8 +621,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   bool id_180 { bool(id_179 == label1_212) };
                   Pointer choose_res_181;
                   if (id_180) {
-                    std::function<Pointer(*raql_value,Pointer)> id_182 { dessser_gen::raql_value.to_row_binary };
-                    *raql_value id_183 { std::get<5>(p_0) };
+                    std::function<Pointer(dessser::gen::raql_value::t,Pointer)> id_182 { dessser::gen::raql_value::to_row_binary };
+                    dessser::gen::raql_value::t id_183 { std::get<5>(p_0) };
                     Pointer id_184 { id_182(id_183, ssum_dst_213) };
                     choose_res_181 = id_184;
                   } else {
@@ -628,8 +630,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     bool id_186 { bool(id_185 == label1_212) };
                     Pointer choose_res_187;
                     if (id_186) {
-                      std::function<Pointer(*target_config,Pointer)> id_188 { dessser_gen::target_config.to_row_binary };
-                      *target_config id_189 { std::get<6>(p_0) };
+                      std::function<Pointer(dessser::gen::target_config::t,Pointer)> id_188 { dessser::gen::target_config::to_row_binary };
+                      dessser::gen::target_config::t id_189 { std::get<6>(p_0) };
                       Pointer id_190 { id_188(id_189, ssum_dst_213) };
                       choose_res_187 = id_190;
                     } else {
@@ -637,8 +639,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       bool id_192 { bool(id_191 == label1_212) };
                       Pointer choose_res_193;
                       if (id_192) {
-                        std::function<Pointer(*source_info,Pointer)> id_194 { dessser_gen::source_info.to_row_binary };
-                        *source_info id_195 { std::get<7>(p_0) };
+                        std::function<Pointer(dessser::gen::source_info::t,Pointer)> id_194 { dessser::gen::source_info::to_row_binary };
+                        dessser::gen::source_info::t id_195 { std::get<7>(p_0) };
                         Pointer id_196 { id_194(id_195, ssum_dst_213) };
                         choose_res_193 = id_196;
                       } else {
@@ -646,8 +648,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         bool id_198 { bool(id_197 == label1_212) };
                         Pointer choose_res_199;
                         if (id_198) {
-                          std::function<Pointer(*runtime_stats,Pointer)> id_200 { dessser_gen::runtime_stats.to_row_binary };
-                          *runtime_stats id_201 { std::get<8>(p_0) };
+                          std::function<Pointer(dessser::gen::runtime_stats::t,Pointer)> id_200 { dessser::gen::runtime_stats::to_row_binary };
+                          dessser::gen::runtime_stats::t id_201 { std::get<8>(p_0) };
                           Pointer id_202 { id_200(id_201, ssum_dst_213) };
                           choose_res_199 = id_202;
                         } else {
@@ -655,8 +657,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                           bool id_204 { bool(id_203 == label1_212) };
                           Pointer choose_res_205;
                           if (id_204) {
-                            std::function<Pointer(*replay,Pointer)> id_206 { dessser_gen::replay.to_row_binary };
-                            *replay id_207 { std::get<9>(p_0) };
+                            std::function<Pointer(dessser::gen::replay::t,Pointer)> id_206 { dessser::gen::replay::to_row_binary };
+                            dessser::gen::replay::t id_207 { std::get<9>(p_0) };
                             Pointer id_208 { id_206(id_207, ssum_dst_213) };
                             choose_res_205 = id_208;
                           } else {
@@ -664,8 +666,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                             bool id_210 { bool(id_209 == label1_212) };
                             Pointer choose_res_211;
                             if (id_210) {
-                              std::function<Pointer(*replayer,Pointer)> id_212 { dessser_gen::replayer.to_row_binary };
-                              *replayer id_213 { std::get<10>(p_0) };
+                              std::function<Pointer(dessser::gen::replayer::t,Pointer)> id_212 { dessser::gen::replayer::to_row_binary };
+                              dessser::gen::replayer::t id_213 { std::get<10>(p_0) };
                               Pointer id_214 { id_212(id_213, ssum_dst_213) };
                               choose_res_211 = id_214;
                             } else {
@@ -673,8 +675,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                               bool id_216 { bool(id_215 == label1_212) };
                               Pointer choose_res_217;
                               if (id_216) {
-                                std::function<Pointer(*replay_request,Pointer)> id_218 { dessser_gen::replay_request.to_row_binary };
-                                *replay_request id_219 { std::get<11>(p_0) };
+                                std::function<Pointer(dessser::gen::replay_request::t,Pointer)> id_218 { dessser::gen::replay_request::to_row_binary };
+                                dessser::gen::replay_request::t id_219 { std::get<11>(p_0) };
                                 Pointer id_220 { id_218(id_219, ssum_dst_213) };
                                 choose_res_217 = id_220;
                               } else {
@@ -682,8 +684,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                 bool id_222 { bool(id_221 == label1_212) };
                                 Pointer choose_res_223;
                                 if (id_222) {
-                                  std::function<Pointer(*alert,Pointer)> id_224 { dessser_gen::alert.to_row_binary };
-                                  *alert id_225 { std::get<12>(p_0) };
+                                  std::function<Pointer(dessser::gen::alert::t,Pointer)> id_224 { dessser::gen::alert::to_row_binary };
+                                  dessser::gen::alert::t id_225 { std::get<12>(p_0) };
                                   Pointer id_226 { id_224(id_225, ssum_dst_213) };
                                   choose_res_223 = id_226;
                                 } else {
@@ -691,8 +693,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                   bool id_228 { bool(id_227 == label1_212) };
                                   Pointer choose_res_229;
                                   if (id_228) {
-                                    std::function<Pointer(*output_specs,Pointer)> id_230 { dessser_gen::output_specs.to_row_binary };
-                                    *output_specs id_231 { std::get<13>(p_0) };
+                                    std::function<Pointer(dessser::gen::output_specs::t,Pointer)> id_230 { dessser::gen::output_specs::to_row_binary };
+                                    dessser::gen::output_specs::t id_231 { std::get<13>(p_0) };
                                     Pointer id_232 { id_230(id_231, ssum_dst_213) };
                                     choose_res_229 = id_232;
                                   } else {
@@ -700,8 +702,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                     bool id_234 { bool(id_233 == label1_212) };
                                     Pointer choose_res_235;
                                     if (id_234) {
-                                      std::function<Pointer(*dashboard_widget,Pointer)> id_236 { dessser_gen::dashboard_widget.to_row_binary };
-                                      *dashboard_widget id_237 { std::get<14>(p_0) };
+                                      std::function<Pointer(dessser::gen::dashboard_widget::t,Pointer)> id_236 { dessser::gen::dashboard_widget::to_row_binary };
+                                      dessser::gen::dashboard_widget::t id_237 { std::get<14>(p_0) };
                                       Pointer id_238 { id_236(id_237, ssum_dst_213) };
                                       choose_res_235 = id_238;
                                     } else {
@@ -709,8 +711,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                       bool id_240 { bool(id_239 == label1_212) };
                                       Pointer choose_res_241;
                                       if (id_240) {
-                                        std::function<Pointer(*alerting_contact,Pointer)> id_242 { dessser_gen::alerting_contact.to_row_binary };
-                                        *alerting_contact id_243 { std::get<15>(p_0) };
+                                        std::function<Pointer(dessser::gen::alerting_contact::t,Pointer)> id_242 { dessser::gen::alerting_contact::to_row_binary };
+                                        dessser::gen::alerting_contact::t id_243 { std::get<15>(p_0) };
                                         Pointer id_244 { id_242(id_243, ssum_dst_213) };
                                         choose_res_241 = id_244;
                                       } else {
@@ -718,8 +720,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                         bool id_246 { bool(id_245 == label1_212) };
                                         Pointer choose_res_247;
                                         if (id_246) {
-                                          std::function<Pointer(*alerting_notification,Pointer)> id_248 { dessser_gen::alerting_notification.to_row_binary };
-                                          *alerting_notification id_249 { std::get<16>(p_0) };
+                                          std::function<Pointer(dessser::gen::alerting_notification::t,Pointer)> id_248 { dessser::gen::alerting_notification::to_row_binary };
+                                          dessser::gen::alerting_notification::t id_249 { std::get<16>(p_0) };
                                           Pointer id_250 { id_248(id_249, ssum_dst_213) };
                                           choose_res_247 = id_250;
                                         } else {
@@ -727,8 +729,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                           bool id_252 { bool(id_251 == label1_212) };
                                           Pointer choose_res_253;
                                           if (id_252) {
-                                            std::function<Pointer(*alerting_delivery_status,Pointer)> id_254 { dessser_gen::alerting_delivery_status.to_row_binary };
-                                            *alerting_delivery_status id_255 { std::get<17>(p_0) };
+                                            std::function<Pointer(dessser::gen::alerting_delivery_status::t,Pointer)> id_254 { dessser::gen::alerting_delivery_status::to_row_binary };
+                                            dessser::gen::alerting_delivery_status::t id_255 { std::get<17>(p_0) };
                                             Pointer id_256 { id_254(id_255, ssum_dst_213) };
                                             choose_res_253 = id_256;
                                           } else {
@@ -736,16 +738,16 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                             bool id_258 { bool(id_257 == label1_212) };
                                             Pointer choose_res_259;
                                             if (id_258) {
-                                              std::function<Pointer(*alerting_log,Pointer)> id_260 { dessser_gen::alerting_log.to_row_binary };
-                                              *alerting_log id_261 { std::get<18>(p_0) };
+                                              std::function<Pointer(dessser::gen::alerting_log::t,Pointer)> id_260 { dessser::gen::alerting_log::to_row_binary };
+                                              dessser::gen::alerting_log::t id_261 { std::get<18>(p_0) };
                                               Pointer id_262 { id_260(id_261, ssum_dst_213) };
                                               choose_res_259 = id_262;
                                             } else {
                                               uint16_t id_263 { 19 };
                                               bool id_264 { bool(label1_212 == id_263) };
                                               Void id_265 { ((void)(assert(id_264)), VOID) };
-                                              std::function<Pointer(*alerting_inhibition,Pointer)> id_266 { dessser_gen::alerting_inhibition.to_row_binary };
-                                              *alerting_inhibition id_267 { std::get<19>(p_0) };
+                                              std::function<Pointer(dessser::gen::alerting_inhibition::t,Pointer)> id_266 { dessser::gen::alerting_inhibition::to_row_binary };
+                                              dessser::gen::alerting_inhibition::t id_267 { std::get<19>(p_0) };
                                               Pointer id_268 { id_266(id_267, ssum_dst_213) };
                                               choose_res_259 = id_268;
                                             }
@@ -928,8 +930,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         Size choose_res_309;
         if (id_308) {
           Size id_310 { 2UL };
-          std::function<Size(*worker)> id_311 { dessser_gen::worker.sersize_of_row_binary };
-          *worker id_312 { std::get<1>(p_0) };
+          std::function<Size(dessser::gen::worker::t)> id_311 { dessser::gen::worker::sersize_of_row_binary };
+          dessser::gen::worker::t id_312 { std::get<1>(p_0) };
           Size id_313 { id_311(id_312) };
           Size id_314 { Size(id_310 + id_313) };
           choose_res_309 = id_314;
@@ -939,8 +941,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size choose_res_317;
           if (id_316) {
             Size id_318 { 2UL };
-            std::function<Size(*retention)> id_319 { dessser_gen::retention.sersize_of_row_binary };
-            *retention id_320 { std::get<2>(p_0) };
+            std::function<Size(dessser::gen::retention::t)> id_319 { dessser::gen::retention::sersize_of_row_binary };
+            dessser::gen::retention::t id_320 { std::get<2>(p_0) };
             Size id_321 { id_319(id_320) };
             Size id_322 { Size(id_318 + id_321) };
             choose_res_317 = id_322;
@@ -950,8 +952,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size choose_res_325;
             if (id_324) {
               Size id_326 { 2UL };
-              std::function<Size(*time_range)> id_327 { dessser_gen::time_range.sersize_of_row_binary };
-              *time_range id_328 { std::get<3>(p_0) };
+              std::function<Size(dessser::gen::time_range::t)> id_327 { dessser::gen::time_range::sersize_of_row_binary };
+              dessser::gen::time_range::t id_328 { std::get<3>(p_0) };
               Size id_329 { id_327(id_328) };
               Size id_330 { Size(id_326 + id_329) };
               choose_res_325 = id_330;
@@ -1097,8 +1099,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 Size choose_res_420;
                 if (id_419) {
                   Size id_421 { 2UL };
-                  std::function<Size(*raql_value)> id_422 { dessser_gen::raql_value.sersize_of_row_binary };
-                  *raql_value id_423 { std::get<5>(p_0) };
+                  std::function<Size(dessser::gen::raql_value::t)> id_422 { dessser::gen::raql_value::sersize_of_row_binary };
+                  dessser::gen::raql_value::t id_423 { std::get<5>(p_0) };
                   Size id_424 { id_422(id_423) };
                   Size id_425 { Size(id_421 + id_424) };
                   choose_res_420 = id_425;
@@ -1108,8 +1110,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   Size choose_res_428;
                   if (id_427) {
                     Size id_429 { 2UL };
-                    std::function<Size(*target_config)> id_430 { dessser_gen::target_config.sersize_of_row_binary };
-                    *target_config id_431 { std::get<6>(p_0) };
+                    std::function<Size(dessser::gen::target_config::t)> id_430 { dessser::gen::target_config::sersize_of_row_binary };
+                    dessser::gen::target_config::t id_431 { std::get<6>(p_0) };
                     Size id_432 { id_430(id_431) };
                     Size id_433 { Size(id_429 + id_432) };
                     choose_res_428 = id_433;
@@ -1119,8 +1121,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     Size choose_res_436;
                     if (id_435) {
                       Size id_437 { 2UL };
-                      std::function<Size(*source_info)> id_438 { dessser_gen::source_info.sersize_of_row_binary };
-                      *source_info id_439 { std::get<7>(p_0) };
+                      std::function<Size(dessser::gen::source_info::t)> id_438 { dessser::gen::source_info::sersize_of_row_binary };
+                      dessser::gen::source_info::t id_439 { std::get<7>(p_0) };
                       Size id_440 { id_438(id_439) };
                       Size id_441 { Size(id_437 + id_440) };
                       choose_res_436 = id_441;
@@ -1130,8 +1132,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       Size choose_res_444;
                       if (id_443) {
                         Size id_445 { 2UL };
-                        std::function<Size(*runtime_stats)> id_446 { dessser_gen::runtime_stats.sersize_of_row_binary };
-                        *runtime_stats id_447 { std::get<8>(p_0) };
+                        std::function<Size(dessser::gen::runtime_stats::t)> id_446 { dessser::gen::runtime_stats::sersize_of_row_binary };
+                        dessser::gen::runtime_stats::t id_447 { std::get<8>(p_0) };
                         Size id_448 { id_446(id_447) };
                         Size id_449 { Size(id_445 + id_448) };
                         choose_res_444 = id_449;
@@ -1141,8 +1143,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                         Size choose_res_452;
                         if (id_451) {
                           Size id_453 { 2UL };
-                          std::function<Size(*replay)> id_454 { dessser_gen::replay.sersize_of_row_binary };
-                          *replay id_455 { std::get<9>(p_0) };
+                          std::function<Size(dessser::gen::replay::t)> id_454 { dessser::gen::replay::sersize_of_row_binary };
+                          dessser::gen::replay::t id_455 { std::get<9>(p_0) };
                           Size id_456 { id_454(id_455) };
                           Size id_457 { Size(id_453 + id_456) };
                           choose_res_452 = id_457;
@@ -1152,8 +1154,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                           Size choose_res_460;
                           if (id_459) {
                             Size id_461 { 2UL };
-                            std::function<Size(*replayer)> id_462 { dessser_gen::replayer.sersize_of_row_binary };
-                            *replayer id_463 { std::get<10>(p_0) };
+                            std::function<Size(dessser::gen::replayer::t)> id_462 { dessser::gen::replayer::sersize_of_row_binary };
+                            dessser::gen::replayer::t id_463 { std::get<10>(p_0) };
                             Size id_464 { id_462(id_463) };
                             Size id_465 { Size(id_461 + id_464) };
                             choose_res_460 = id_465;
@@ -1163,8 +1165,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                             Size choose_res_468;
                             if (id_467) {
                               Size id_469 { 2UL };
-                              std::function<Size(*replay_request)> id_470 { dessser_gen::replay_request.sersize_of_row_binary };
-                              *replay_request id_471 { std::get<11>(p_0) };
+                              std::function<Size(dessser::gen::replay_request::t)> id_470 { dessser::gen::replay_request::sersize_of_row_binary };
+                              dessser::gen::replay_request::t id_471 { std::get<11>(p_0) };
                               Size id_472 { id_470(id_471) };
                               Size id_473 { Size(id_469 + id_472) };
                               choose_res_468 = id_473;
@@ -1174,8 +1176,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                               Size choose_res_476;
                               if (id_475) {
                                 Size id_477 { 2UL };
-                                std::function<Size(*alert)> id_478 { dessser_gen::alert.sersize_of_row_binary };
-                                *alert id_479 { std::get<12>(p_0) };
+                                std::function<Size(dessser::gen::alert::t)> id_478 { dessser::gen::alert::sersize_of_row_binary };
+                                dessser::gen::alert::t id_479 { std::get<12>(p_0) };
                                 Size id_480 { id_478(id_479) };
                                 Size id_481 { Size(id_477 + id_480) };
                                 choose_res_476 = id_481;
@@ -1185,8 +1187,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                 Size choose_res_484;
                                 if (id_483) {
                                   Size id_485 { 2UL };
-                                  std::function<Size(*output_specs)> id_486 { dessser_gen::output_specs.sersize_of_row_binary };
-                                  *output_specs id_487 { std::get<13>(p_0) };
+                                  std::function<Size(dessser::gen::output_specs::t)> id_486 { dessser::gen::output_specs::sersize_of_row_binary };
+                                  dessser::gen::output_specs::t id_487 { std::get<13>(p_0) };
                                   Size id_488 { id_486(id_487) };
                                   Size id_489 { Size(id_485 + id_488) };
                                   choose_res_484 = id_489;
@@ -1196,8 +1198,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                   Size choose_res_492;
                                   if (id_491) {
                                     Size id_493 { 2UL };
-                                    std::function<Size(*dashboard_widget)> id_494 { dessser_gen::dashboard_widget.sersize_of_row_binary };
-                                    *dashboard_widget id_495 { std::get<14>(p_0) };
+                                    std::function<Size(dessser::gen::dashboard_widget::t)> id_494 { dessser::gen::dashboard_widget::sersize_of_row_binary };
+                                    dessser::gen::dashboard_widget::t id_495 { std::get<14>(p_0) };
                                     Size id_496 { id_494(id_495) };
                                     Size id_497 { Size(id_493 + id_496) };
                                     choose_res_492 = id_497;
@@ -1207,8 +1209,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                     Size choose_res_500;
                                     if (id_499) {
                                       Size id_501 { 2UL };
-                                      std::function<Size(*alerting_contact)> id_502 { dessser_gen::alerting_contact.sersize_of_row_binary };
-                                      *alerting_contact id_503 { std::get<15>(p_0) };
+                                      std::function<Size(dessser::gen::alerting_contact::t)> id_502 { dessser::gen::alerting_contact::sersize_of_row_binary };
+                                      dessser::gen::alerting_contact::t id_503 { std::get<15>(p_0) };
                                       Size id_504 { id_502(id_503) };
                                       Size id_505 { Size(id_501 + id_504) };
                                       choose_res_500 = id_505;
@@ -1218,8 +1220,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                       Size choose_res_508;
                                       if (id_507) {
                                         Size id_509 { 2UL };
-                                        std::function<Size(*alerting_notification)> id_510 { dessser_gen::alerting_notification.sersize_of_row_binary };
-                                        *alerting_notification id_511 { std::get<16>(p_0) };
+                                        std::function<Size(dessser::gen::alerting_notification::t)> id_510 { dessser::gen::alerting_notification::sersize_of_row_binary };
+                                        dessser::gen::alerting_notification::t id_511 { std::get<16>(p_0) };
                                         Size id_512 { id_510(id_511) };
                                         Size id_513 { Size(id_509 + id_512) };
                                         choose_res_508 = id_513;
@@ -1229,8 +1231,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                         Size choose_res_516;
                                         if (id_515) {
                                           Size id_517 { 2UL };
-                                          std::function<Size(*alerting_delivery_status)> id_518 { dessser_gen::alerting_delivery_status.sersize_of_row_binary };
-                                          *alerting_delivery_status id_519 { std::get<17>(p_0) };
+                                          std::function<Size(dessser::gen::alerting_delivery_status::t)> id_518 { dessser::gen::alerting_delivery_status::sersize_of_row_binary };
+                                          dessser::gen::alerting_delivery_status::t id_519 { std::get<17>(p_0) };
                                           Size id_520 { id_518(id_519) };
                                           Size id_521 { Size(id_517 + id_520) };
                                           choose_res_516 = id_521;
@@ -1240,8 +1242,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                           Size choose_res_524;
                                           if (id_523) {
                                             Size id_525 { 2UL };
-                                            std::function<Size(*alerting_log)> id_526 { dessser_gen::alerting_log.sersize_of_row_binary };
-                                            *alerting_log id_527 { std::get<18>(p_0) };
+                                            std::function<Size(dessser::gen::alerting_log::t)> id_526 { dessser::gen::alerting_log::sersize_of_row_binary };
+                                            dessser::gen::alerting_log::t id_527 { std::get<18>(p_0) };
                                             Size id_528 { id_526(id_527) };
                                             Size id_529 { Size(id_525 + id_528) };
                                             choose_res_524 = id_529;
@@ -1250,8 +1252,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                             bool id_531 { bool(label2_196 == id_530) };
                                             Void id_532 { ((void)(assert(id_531)), VOID) };
                                             Size id_533 { 2UL };
-                                            std::function<Size(*alerting_inhibition)> id_534 { dessser_gen::alerting_inhibition.sersize_of_row_binary };
-                                            *alerting_inhibition id_535 { std::get<19>(p_0) };
+                                            std::function<Size(dessser::gen::alerting_inhibition::t)> id_534 { dessser::gen::alerting_inhibition::sersize_of_row_binary };
+                                            dessser::gen::alerting_inhibition::t id_535 { std::get<19>(p_0) };
                                             Size id_536 { id_534(id_535) };
                                             Size id_537 { Size(id_533 + id_536) };
                                             choose_res_524 = id_537;
@@ -1670,7 +1672,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
           bool id_608 { bool(id_607 == dsum1_fst_63) };
           f63f919559f0d70225bd0da5dd9bcafc choose_res_609;
           if (id_608) {
-            std::function<f7624fbd7a09599953e1295791529a77(Pointer)> id_610 { dessser_gen::worker.of_row_binary };
+            std::function<f7624fbd7a09599953e1295791529a77(Pointer)> id_610 { dessser::gen::worker::of_row_binary };
             f7624fbd7a09599953e1295791529a77 id_611 { id_610(dsum1_snd_64) };
             f63f919559f0d70225bd0da5dd9bcafc letpair_res_612;
             {
@@ -1686,7 +1688,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
             bool id_616 { bool(id_615 == dsum1_fst_63) };
             f63f919559f0d70225bd0da5dd9bcafc choose_res_617;
             if (id_616) {
-              std::function<v_371090eb4646cc70f1029ba30f9305da(Pointer)> id_618 { dessser_gen::retention.of_row_binary };
+              std::function<v_371090eb4646cc70f1029ba30f9305da(Pointer)> id_618 { dessser::gen::retention::of_row_binary };
               v_371090eb4646cc70f1029ba30f9305da id_619 { id_618(dsum1_snd_64) };
               f63f919559f0d70225bd0da5dd9bcafc letpair_res_620;
               {
@@ -1702,7 +1704,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               bool id_624 { bool(id_623 == dsum1_fst_63) };
               f63f919559f0d70225bd0da5dd9bcafc choose_res_625;
               if (id_624) {
-                std::function<v_4b60a4a70e6b1dfeee3bc23533d93277(Pointer)> id_626 { dessser_gen::time_range.of_row_binary };
+                std::function<v_4b60a4a70e6b1dfeee3bc23533d93277(Pointer)> id_626 { dessser::gen::time_range::of_row_binary };
                 v_4b60a4a70e6b1dfeee3bc23533d93277 id_627 { id_626(dsum1_snd_64) };
                 f63f919559f0d70225bd0da5dd9bcafc letpair_res_628;
                 {
@@ -1959,7 +1961,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   bool id_757 { bool(id_756 == dsum1_fst_63) };
                   f63f919559f0d70225bd0da5dd9bcafc choose_res_758;
                   if (id_757) {
-                    std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_759 { dessser_gen::raql_value.of_row_binary };
+                    std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_759 { dessser::gen::raql_value::of_row_binary };
                     ba3b596d6a5cbc29dc62e6e6a46440d5 id_760 { id_759(dsum1_snd_64) };
                     f63f919559f0d70225bd0da5dd9bcafc letpair_res_761;
                     {
@@ -1975,7 +1977,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     bool id_765 { bool(id_764 == dsum1_fst_63) };
                     f63f919559f0d70225bd0da5dd9bcafc choose_res_766;
                     if (id_765) {
-                      std::function<d9a2b3eafa7a8846e102c4c5caba99ec(Pointer)> id_767 { dessser_gen::target_config.of_row_binary };
+                      std::function<d9a2b3eafa7a8846e102c4c5caba99ec(Pointer)> id_767 { dessser::gen::target_config::of_row_binary };
                       d9a2b3eafa7a8846e102c4c5caba99ec id_768 { id_767(dsum1_snd_64) };
                       f63f919559f0d70225bd0da5dd9bcafc letpair_res_769;
                       {
@@ -1991,7 +1993,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       bool id_773 { bool(id_772 == dsum1_fst_63) };
                       f63f919559f0d70225bd0da5dd9bcafc choose_res_774;
                       if (id_773) {
-                        std::function<d159e6605b03eb55895de2efe6d0a8c0(Pointer)> id_775 { dessser_gen::source_info.of_row_binary };
+                        std::function<d159e6605b03eb55895de2efe6d0a8c0(Pointer)> id_775 { dessser::gen::source_info::of_row_binary };
                         d159e6605b03eb55895de2efe6d0a8c0 id_776 { id_775(dsum1_snd_64) };
                         f63f919559f0d70225bd0da5dd9bcafc letpair_res_777;
                         {
@@ -2007,7 +2009,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         bool id_781 { bool(id_780 == dsum1_fst_63) };
                         f63f919559f0d70225bd0da5dd9bcafc choose_res_782;
                         if (id_781) {
-                          std::function<c103e668680401c199cc9dd2f89f51b4(Pointer)> id_783 { dessser_gen::runtime_stats.of_row_binary };
+                          std::function<c103e668680401c199cc9dd2f89f51b4(Pointer)> id_783 { dessser::gen::runtime_stats::of_row_binary };
                           c103e668680401c199cc9dd2f89f51b4 id_784 { id_783(dsum1_snd_64) };
                           f63f919559f0d70225bd0da5dd9bcafc letpair_res_785;
                           {
@@ -2023,7 +2025,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           bool id_789 { bool(id_788 == dsum1_fst_63) };
                           f63f919559f0d70225bd0da5dd9bcafc choose_res_790;
                           if (id_789) {
-                            std::function<v_09f87cec186e0cb60a8fce13469f513f(Pointer)> id_791 { dessser_gen::replay.of_row_binary };
+                            std::function<v_09f87cec186e0cb60a8fce13469f513f(Pointer)> id_791 { dessser::gen::replay::of_row_binary };
                             v_09f87cec186e0cb60a8fce13469f513f id_792 { id_791(dsum1_snd_64) };
                             f63f919559f0d70225bd0da5dd9bcafc letpair_res_793;
                             {
@@ -2039,7 +2041,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             bool id_797 { bool(id_796 == dsum1_fst_63) };
                             f63f919559f0d70225bd0da5dd9bcafc choose_res_798;
                             if (id_797) {
-                              std::function<a9357042939e8b0f227486faaba4fcfb(Pointer)> id_799 { dessser_gen::replayer.of_row_binary };
+                              std::function<a9357042939e8b0f227486faaba4fcfb(Pointer)> id_799 { dessser::gen::replayer::of_row_binary };
                               a9357042939e8b0f227486faaba4fcfb id_800 { id_799(dsum1_snd_64) };
                               f63f919559f0d70225bd0da5dd9bcafc letpair_res_801;
                               {
@@ -2055,7 +2057,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                               bool id_805 { bool(id_804 == dsum1_fst_63) };
                               f63f919559f0d70225bd0da5dd9bcafc choose_res_806;
                               if (id_805) {
-                                std::function<cadcce10e6117fd50b402ee4d1cb38a4(Pointer)> id_807 { dessser_gen::replay_request.of_row_binary };
+                                std::function<cadcce10e6117fd50b402ee4d1cb38a4(Pointer)> id_807 { dessser::gen::replay_request::of_row_binary };
                                 cadcce10e6117fd50b402ee4d1cb38a4 id_808 { id_807(dsum1_snd_64) };
                                 f63f919559f0d70225bd0da5dd9bcafc letpair_res_809;
                                 {
@@ -2071,7 +2073,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 bool id_813 { bool(id_812 == dsum1_fst_63) };
                                 f63f919559f0d70225bd0da5dd9bcafc choose_res_814;
                                 if (id_813) {
-                                  std::function<feae865b6fd982b54eeb0d676df0c187(Pointer)> id_815 { dessser_gen::alert.of_row_binary };
+                                  std::function<feae865b6fd982b54eeb0d676df0c187(Pointer)> id_815 { dessser::gen::alert::of_row_binary };
                                   feae865b6fd982b54eeb0d676df0c187 id_816 { id_815(dsum1_snd_64) };
                                   f63f919559f0d70225bd0da5dd9bcafc letpair_res_817;
                                   {
@@ -2087,7 +2089,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   bool id_821 { bool(id_820 == dsum1_fst_63) };
                                   f63f919559f0d70225bd0da5dd9bcafc choose_res_822;
                                   if (id_821) {
-                                    std::function<v_5d3df5ef82bef4373702ab960e6235b2(Pointer)> id_823 { dessser_gen::output_specs.of_row_binary };
+                                    std::function<v_5d3df5ef82bef4373702ab960e6235b2(Pointer)> id_823 { dessser::gen::output_specs::of_row_binary };
                                     v_5d3df5ef82bef4373702ab960e6235b2 id_824 { id_823(dsum1_snd_64) };
                                     f63f919559f0d70225bd0da5dd9bcafc letpair_res_825;
                                     {
@@ -2103,7 +2105,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     bool id_829 { bool(id_828 == dsum1_fst_63) };
                                     f63f919559f0d70225bd0da5dd9bcafc choose_res_830;
                                     if (id_829) {
-                                      std::function<v_5c6f406543b9e67fefffd08643986d36(Pointer)> id_831 { dessser_gen::dashboard_widget.of_row_binary };
+                                      std::function<v_5c6f406543b9e67fefffd08643986d36(Pointer)> id_831 { dessser::gen::dashboard_widget::of_row_binary };
                                       v_5c6f406543b9e67fefffd08643986d36 id_832 { id_831(dsum1_snd_64) };
                                       f63f919559f0d70225bd0da5dd9bcafc letpair_res_833;
                                       {
@@ -2119,7 +2121,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                       bool id_837 { bool(id_836 == dsum1_fst_63) };
                                       f63f919559f0d70225bd0da5dd9bcafc choose_res_838;
                                       if (id_837) {
-                                        std::function<v_132ca8e3dcf1135f5d129336ff188b57(Pointer)> id_839 { dessser_gen::alerting_contact.of_row_binary };
+                                        std::function<v_132ca8e3dcf1135f5d129336ff188b57(Pointer)> id_839 { dessser::gen::alerting_contact::of_row_binary };
                                         v_132ca8e3dcf1135f5d129336ff188b57 id_840 { id_839(dsum1_snd_64) };
                                         f63f919559f0d70225bd0da5dd9bcafc letpair_res_841;
                                         {
@@ -2135,7 +2137,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                         bool id_845 { bool(id_844 == dsum1_fst_63) };
                                         f63f919559f0d70225bd0da5dd9bcafc choose_res_846;
                                         if (id_845) {
-                                          std::function<v_85f680f1694fafb59f9004d40323f6b5(Pointer)> id_847 { dessser_gen::alerting_notification.of_row_binary };
+                                          std::function<v_85f680f1694fafb59f9004d40323f6b5(Pointer)> id_847 { dessser::gen::alerting_notification::of_row_binary };
                                           v_85f680f1694fafb59f9004d40323f6b5 id_848 { id_847(dsum1_snd_64) };
                                           f63f919559f0d70225bd0da5dd9bcafc letpair_res_849;
                                           {
@@ -2151,7 +2153,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                           bool id_853 { bool(id_852 == dsum1_fst_63) };
                                           f63f919559f0d70225bd0da5dd9bcafc choose_res_854;
                                           if (id_853) {
-                                            std::function<v_9a0fce1a343f193cd07dec4c309db5e5(Pointer)> id_855 { dessser_gen::alerting_delivery_status.of_row_binary };
+                                            std::function<v_9a0fce1a343f193cd07dec4c309db5e5(Pointer)> id_855 { dessser::gen::alerting_delivery_status::of_row_binary };
                                             v_9a0fce1a343f193cd07dec4c309db5e5 id_856 { id_855(dsum1_snd_64) };
                                             f63f919559f0d70225bd0da5dd9bcafc letpair_res_857;
                                             {
@@ -2167,7 +2169,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                             bool id_861 { bool(id_860 == dsum1_fst_63) };
                                             f63f919559f0d70225bd0da5dd9bcafc choose_res_862;
                                             if (id_861) {
-                                              std::function<v_419eac713b7b9b379f1f3222b985b0e6(Pointer)> id_863 { dessser_gen::alerting_log.of_row_binary };
+                                              std::function<v_419eac713b7b9b379f1f3222b985b0e6(Pointer)> id_863 { dessser::gen::alerting_log::of_row_binary };
                                               v_419eac713b7b9b379f1f3222b985b0e6 id_864 { id_863(dsum1_snd_64) };
                                               f63f919559f0d70225bd0da5dd9bcafc letpair_res_865;
                                               {
@@ -2182,7 +2184,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                               uint16_t id_868 { 19 };
                                               bool id_869 { bool(dsum1_fst_63 == id_868) };
                                               Void id_870 { ((void)(assert(id_869)), VOID) };
-                                              std::function<v_79b7af3dcb201c3fb0f035e41221ecaa(Pointer)> id_871 { dessser_gen::alerting_inhibition.of_row_binary };
+                                              std::function<v_79b7af3dcb201c3fb0f035e41221ecaa(Pointer)> id_871 { dessser::gen::alerting_inhibition::of_row_binary };
                                               v_79b7af3dcb201c3fb0f035e41221ecaa id_872 { id_871(dsum1_snd_64) };
                                               f63f919559f0d70225bd0da5dd9bcafc letpair_res_873;
                                               {

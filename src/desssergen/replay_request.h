@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::replay_request {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *fq_function_name target;
+  dessser::gen::fq_function_name::t target;
   double since;
   double until;
   bool explain;

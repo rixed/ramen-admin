@@ -23,7 +23,9 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::runtime_stats {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */

@@ -6,14 +6,16 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_select_field {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *raql_expr expr;
-  *field_name alias;
+  dessser::gen::raql_expr::t expr;
+  dessser::gen::field_name::t alias;
   std::string doc;
   std::optional<std::string> aggr;
   bool operator==(t const &other) const {

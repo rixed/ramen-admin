@@ -23,14 +23,16 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::program_run_parameter {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *field_name name;
-  *raql_value value;
+  dessser::gen::field_name::t name;
+  dessser::gen::raql_value::t value;
   bool operator==(t const &other) const {
     return name == other.name && value == other.value;
   }
@@ -49,12 +51,12 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   Pointer
 > c50aa083fa818c6eeca389b0025dda98;
 
 typedef std::tuple<
-  *raql_value,
+  dessser::gen::raql_value::t,
   Pointer
 > ba3b596d6a5cbc29dc62e6e6a46440d5;
 
@@ -68,14 +70,14 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*field_name,Pointer)> id_1 { dessser_gen::field_name.to_row_binary };
-    *field_name id_2 { p_0.name };
+    std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_1 { dessser::gen::field_name::to_row_binary };
+    dessser::gen::field_name::t id_2 { p_0.name };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_67 { id_3 };
-      std::function<Pointer(*raql_value,Pointer)> id_5 { dessser_gen::raql_value.to_row_binary };
-      *raql_value id_6 { p_0.value };
+      std::function<Pointer(dessser::gen::raql_value::t,Pointer)> id_5 { dessser::gen::raql_value::to_row_binary };
+      dessser::gen::raql_value::t id_6 { p_0.value };
       Pointer id_7 { id_5(id_6, srec_dst_67) };
       let_res_4 = id_7;
     }
@@ -93,14 +95,14 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun8 { [&fun8](t p_0) {
-    std::function<Size(*field_name)> id_9 { dessser_gen::field_name.sersize_of_row_binary };
-    *field_name id_10 { p_0.name };
+    std::function<Size(dessser::gen::field_name::t)> id_9 { dessser::gen::field_name::sersize_of_row_binary };
+    dessser::gen::field_name::t id_10 { p_0.name };
     Size id_11 { id_9(id_10) };
     Size let_res_12;
     {
       Size sz_66 { id_11 };
-      std::function<Size(*raql_value)> id_13 { dessser_gen::raql_value.sersize_of_row_binary };
-      *raql_value id_14 { p_0.value };
+      std::function<Size(dessser::gen::raql_value::t)> id_13 { dessser::gen::raql_value::sersize_of_row_binary };
+      dessser::gen::raql_value::t id_14 { p_0.value };
       Size id_15 { id_13(id_14) };
       Size id_16 { Size(sz_66 + id_15) };
       let_res_12 = id_16;
@@ -122,7 +124,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun17 { [&fun17](Pointer p_0) {
-    std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_18 { dessser_gen::field_name.of_row_binary };
+    std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_18 { dessser::gen::field_name::of_row_binary };
     c50aa083fa818c6eeca389b0025dda98 id_19 { id_18(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_20;
     {
@@ -131,7 +133,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
-        std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_22 { dessser_gen::raql_value.of_row_binary };
+        std::function<ba3b596d6a5cbc29dc62e6e6a46440d5(Pointer)> id_22 { dessser::gen::raql_value::of_row_binary };
         ba3b596d6a5cbc29dc62e6e6a46440d5 id_23 { id_22(drec_snd_58) };
         f63f919559f0d70225bd0da5dd9bcafc letpair_res_24;
         {

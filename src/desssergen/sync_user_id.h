@@ -6,21 +6,24 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::sync_user_id {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
+typedef std::string t;
 typedef std::tuple<
-  std::string,
+  t,
   Pointer
 > v_46a5e81c2410b000ff0adea6dc198147;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(std::string,Pointer)> to_row_binary;
-std::function<Size(std::string)> sersize_of_row_binary;
+std::function<Pointer(t,Pointer)> to_row_binary;
+std::function<Size(t)> sersize_of_row_binary;
 std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary;
 
 }

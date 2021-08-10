@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::retention {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *raql_expr duration;
+  dessser::gen::raql_expr::t duration;
   double period;
   bool operator==(t const &other) const {
     return duration == other.duration && period == other.period;

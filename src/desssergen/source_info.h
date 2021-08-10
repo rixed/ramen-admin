@@ -6,19 +6,21 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::source_info {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct v_3688294421a0ac74c89eed28ac0b000d {
-  *function_name name;
-  std::optional<*retention> retention;
+  dessser::gen::function_name::t name;
+  std::optional<dessser::gen::retention::t> retention;
   bool is_lazy;
   std::string doc;
-  *raql_operation operation;
-  *raql_type out_record;
-  Lst<*field_name> factors;
+  dessser::gen::raql_operation::t operation;
+  dessser::gen::raql_type::t out_record;
+  Lst<dessser::gen::field_name::t> factors;
   std::string signature;
   std::string in_signature;
   bool operator==(v_3688294421a0ac74c89eed28ac0b000d const &other) const {
@@ -41,9 +43,9 @@ std::ostream &operator<<(std::ostream &os, v_3688294421a0ac74c89eed28ac0b000d co
 }
 
 struct a9adb622935fb3e63633e15c6e6f64d4 {
-  Lst<*program_parameter> default_params;
-  *raql_expr condition;
-  Lst<*global_variable> globals;
+  Lst<dessser::gen::program_parameter::t> default_params;
+  dessser::gen::raql_expr::t condition;
+  Lst<dessser::gen::global_variable::t> globals;
   Lst<v_3688294421a0ac74c89eed28ac0b000d> funcs;
   bool operator==(a9adb622935fb3e63633e15c6e6f64d4 const &other) const {
     return default_params == other.default_params && condition == other.condition && globals == other.globals && funcs == other.funcs;
@@ -61,7 +63,7 @@ std::ostream &operator<<(std::ostream &os, a9adb622935fb3e63633e15c6e6f64d4 cons
 
 struct v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 {
   std::string err_msg;
-  std::optional<*src_path> depends_on;
+  std::optional<dessser::gen::src_path::t> depends_on;
   bool operator==(v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 const &other) const {
     return err_msg == other.err_msg && depends_on == other.depends_on;
   }

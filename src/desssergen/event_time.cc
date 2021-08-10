@@ -23,15 +23,17 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::event_time {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct v_7dc4293225aede806bbbfec766da77a3 : public std::variant<
   double,
-  *event_time_field,
-  *event_time_field
+  dessser::gen::event_time_field::t,
+  dessser::gen::event_time_field::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 const &v) {
   switch (v.index()) {
@@ -43,7 +45,7 @@ std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 co
 }
 
 typedef std::tuple<
-  *event_time_field,
+  dessser::gen::event_time_field::t,
   v_7dc4293225aede806bbbfec766da77a3
 > t;
 
@@ -53,7 +55,7 @@ typedef std::tuple<
 > f63f919559f0d70225bd0da5dd9bcafc;
 
 typedef std::tuple<
-  *event_time_field,
+  dessser::gen::event_time_field::t,
   Pointer
 > b26187d8135d00c78067efbf3a549d7a;
 
@@ -86,8 +88,8 @@ typedef std::tuple<
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(*event_time_field,Pointer)> id_1 { dessser_gen::event_time_field.to_row_binary };
-    *event_time_field id_2 { std::get<0>(p_0) };
+    std::function<Pointer(dessser::gen::event_time_field::t,Pointer)> id_1 { dessser::gen::event_time_field::to_row_binary };
+    dessser::gen::event_time_field::t id_2 { std::get<0>(p_0) };
     Pointer id_3 { id_1(id_2, p_1) };
     Pointer let_res_4;
     {
@@ -116,9 +118,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           bool id_21 { bool(id_18 == id_20) };
           Pointer choose_res_22;
           if (id_21) {
-            std::function<Pointer(*event_time_field,Pointer)> id_23 { dessser_gen::event_time_field.to_row_binary };
+            std::function<Pointer(dessser::gen::event_time_field::t,Pointer)> id_23 { dessser::gen::event_time_field::to_row_binary };
             v_7dc4293225aede806bbbfec766da77a3 id_24 { std::get<1>(p_0) };
-            *event_time_field id_25 { std::get<1>(id_24) };
+            dessser::gen::event_time_field::t id_25 { std::get<1>(id_24) };
             Pointer id_26 { id_23(id_25, ssum_dst_91) };
             choose_res_22 = id_26;
           } else {
@@ -127,9 +129,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             uint16_t id_29 { 2 };
             bool id_30 { bool(id_28 == id_29) };
             Void id_31 { ((void)(assert(id_30)), VOID) };
-            std::function<Pointer(*event_time_field,Pointer)> id_32 { dessser_gen::event_time_field.to_row_binary };
+            std::function<Pointer(dessser::gen::event_time_field::t,Pointer)> id_32 { dessser::gen::event_time_field::to_row_binary };
             v_7dc4293225aede806bbbfec766da77a3 id_33 { std::get<1>(p_0) };
-            *event_time_field id_34 { std::get<2>(id_33) };
+            dessser::gen::event_time_field::t id_34 { std::get<2>(id_33) };
             Pointer id_35 { id_32(id_34, ssum_dst_91) };
             choose_res_22 = id_35;
           }
@@ -156,8 +158,8 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
   std::function<Size(t)> fun36 { [&fun36](t p_0) {
-    std::function<Size(*event_time_field)> id_37 { dessser_gen::event_time_field.sersize_of_row_binary };
-    *event_time_field id_38 { std::get<0>(p_0) };
+    std::function<Size(dessser::gen::event_time_field::t)> id_37 { dessser::gen::event_time_field::sersize_of_row_binary };
+    dessser::gen::event_time_field::t id_38 { std::get<0>(p_0) };
     Size id_39 { id_37(id_38) };
     Size let_res_40;
     {
@@ -182,9 +184,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         if (id_53) {
           Size id_55 { 2UL };
           Size id_56 { Size(sz_87 + id_55) };
-          std::function<Size(*event_time_field)> id_57 { dessser_gen::event_time_field.sersize_of_row_binary };
+          std::function<Size(dessser::gen::event_time_field::t)> id_57 { dessser::gen::event_time_field::sersize_of_row_binary };
           v_7dc4293225aede806bbbfec766da77a3 id_58 { std::get<1>(p_0) };
-          *event_time_field id_59 { std::get<1>(id_58) };
+          dessser::gen::event_time_field::t id_59 { std::get<1>(id_58) };
           Size id_60 { id_57(id_59) };
           Size id_61 { Size(id_56 + id_60) };
           choose_res_54 = id_61;
@@ -196,9 +198,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Void id_66 { ((void)(assert(id_65)), VOID) };
           Size id_67 { 2UL };
           Size id_68 { Size(sz_87 + id_67) };
-          std::function<Size(*event_time_field)> id_69 { dessser_gen::event_time_field.sersize_of_row_binary };
+          std::function<Size(dessser::gen::event_time_field::t)> id_69 { dessser::gen::event_time_field::sersize_of_row_binary };
           v_7dc4293225aede806bbbfec766da77a3 id_70 { std::get<1>(p_0) };
-          *event_time_field id_71 { std::get<2>(id_70) };
+          dessser::gen::event_time_field::t id_71 { std::get<2>(id_70) };
           Size id_72 { id_69(id_71) };
           Size id_73 { Size(id_68 + id_72) };
           choose_res_54 = id_73;
@@ -235,7 +237,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
 static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
 {
   std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun74 { [&fun74](Pointer p_0) {
-    std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_75 { dessser_gen::event_time_field.of_row_binary };
+    std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_75 { dessser::gen::event_time_field::of_row_binary };
     b26187d8135d00c78067efbf3a549d7a id_76 { id_75(p_0) };
     f63f919559f0d70225bd0da5dd9bcafc let_res_77;
     {
@@ -279,7 +281,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               bool id_93 { bool(id_92 == dsum1_fst_66) };
               v_10981afae22b180f98bb66f7917e15b5 choose_res_94;
               if (id_93) {
-                std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_95 { dessser_gen::event_time_field.of_row_binary };
+                std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_95 { dessser::gen::event_time_field::of_row_binary };
                 b26187d8135d00c78067efbf3a549d7a id_96 { id_95(dsum1_snd_67) };
                 v_10981afae22b180f98bb66f7917e15b5 letpair_res_97;
                 {
@@ -294,7 +296,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                 uint16_t id_100 { 2 };
                 bool id_101 { bool(dsum1_fst_66 == id_100) };
                 Void id_102 { ((void)(assert(id_101)), VOID) };
-                std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_103 { dessser_gen::event_time_field.of_row_binary };
+                std::function<b26187d8135d00c78067efbf3a549d7a(Pointer)> id_103 { dessser::gen::event_time_field::of_row_binary };
                 b26187d8135d00c78067efbf3a549d7a id_104 { id_103(dsum1_snd_67) };
                 v_10981afae22b180f98bb66f7917e15b5 letpair_res_105;
                 {

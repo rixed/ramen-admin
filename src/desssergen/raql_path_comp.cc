@@ -23,14 +23,16 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser_gen {
+namespace dessser::gen::raql_path_comp {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
   uint32_t,
-  *field_name
+  dessser::gen::field_name::t
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
@@ -56,7 +58,7 @@ typedef std::tuple<
 > ac0fbd05039f742d2f1d9ac182e392ab;
 
 typedef std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   Pointer
 > c50aa083fa818c6eeca389b0025dda98;
 
@@ -90,8 +92,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         uint16_t id_11 { 1 };
         bool id_12 { bool(id_10 == id_11) };
         Void id_13 { ((void)(assert(id_12)), VOID) };
-        std::function<Pointer(*field_name,Pointer)> id_14 { dessser_gen::field_name.to_row_binary };
-        *field_name id_15 { std::get<1>(p_0) };
+        std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_14 { dessser::gen::field_name::to_row_binary };
+        dessser::gen::field_name::t id_15 { std::get<1>(p_0) };
         Pointer id_16 { id_14(id_15, ssum_dst_79) };
         choose_res_7 = id_16;
       }
@@ -124,8 +126,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       bool id_25 { bool(id_23 == id_24) };
       Void id_26 { ((void)(assert(id_25)), VOID) };
       Size id_27 { 2UL };
-      std::function<Size(*field_name)> id_28 { dessser_gen::field_name.sersize_of_row_binary };
-      *field_name id_29 { std::get<1>(p_0) };
+      std::function<Size(dessser::gen::field_name::t)> id_28 { dessser::gen::field_name::sersize_of_row_binary };
+      dessser::gen::field_name::t id_29 { std::get<1>(p_0) };
       Size id_30 { id_28(id_29) };
       Size id_31 { Size(id_27 + id_30) };
       choose_res_21 = id_31;
@@ -185,7 +187,7 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
           uint16_t id_45 { 1 };
           bool id_46 { bool(dsum1_fst_63 == id_45) };
           Void id_47 { ((void)(assert(id_46)), VOID) };
-          std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_48 { dessser_gen::field_name.of_row_binary };
+          std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_48 { dessser::gen::field_name::of_row_binary };
           c50aa083fa818c6eeca389b0025dda98 id_49 { id_48(dsum1_snd_64) };
           f63f919559f0d70225bd0da5dd9bcafc letpair_res_50;
           {

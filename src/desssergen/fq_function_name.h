@@ -6,15 +6,17 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::fq_function_name {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *site_name site;
-  *program_name program;
-  *function_name function;
+  dessser::gen::site_name::t site;
+  dessser::gen::program_name::t program;
+  dessser::gen::function_name::t function;
   bool operator==(t const &other) const {
     return site == other.site && program == other.program && function == other.function;
   }

@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::event_time_field {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -24,7 +26,7 @@ std::ostream &operator<<(std::ostream &os, v_64660864bf56047273029a6984f64662 co
 }
 
 struct t : public std::tuple<
-  *field_name,
+  dessser::gen::field_name::t,
   v_64660864bf56047273029a6984f64662,
   double
 > { using tuple::tuple; };

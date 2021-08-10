@@ -6,20 +6,22 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_binding_key {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 typedef std::tuple<
-  *raql_variable,
-  *field_name
+  dessser::gen::raql_variable::t,
+  dessser::gen::field_name::t
 > f10e5874917150999e26a0252e84cb27;
 
 struct t : public std::variant<
   uint32_t,
   f10e5874917150999e26a0252e84cb27,
-  *raql_variable,
+  dessser::gen::raql_variable::t,
   std::string
 > { using variant::variant; };
 std::ostream &operator<<(std::ostream &os, t const &v) {

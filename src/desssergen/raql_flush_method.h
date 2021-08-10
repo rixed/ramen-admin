@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::raql_flush_method {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */

@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::alerting_notification {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -17,8 +19,8 @@ typedef std::tuple<
 > d135bed341a046f128507720bca94ebf;
 
 struct t {
-  *site_name site;
-  *fq_name worker;
+  dessser::gen::site_name::t site;
+  dessser::gen::fq_name::t worker;
   bool test;
   double sent_time;
   std::optional<double> event_time;

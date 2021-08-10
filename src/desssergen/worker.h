@@ -6,14 +6,16 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::worker {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 typedef std::tuple<
-  *field_name,
-  *raql_value
+  dessser::gen::field_name::t,
+  dessser::gen::raql_value::t
 > v_7a08095eeded42b6cde638d4d53dd964;
 
 struct f4f9cb35168f81f8ec0d29afee065aaa {
@@ -49,15 +51,15 @@ struct t {
   bool enabled;
   bool debug;
   double report_period;
-  *file_path cwd;
+  dessser::gen::file_path::t cwd;
   std::string worker_signature;
   std::string info_signature;
   bool is_used;
   Arr<v_7a08095eeded42b6cde638d4d53dd964> params;
-  Arr<*field_name> envvars;
+  Arr<dessser::gen::field_name::t> envvars;
   e1503df6dd01643870ca1bf95113afdf role;
-  std::optional<Arr<*func_ref>> parents;
-  Arr<*func_ref> children;
+  std::optional<Arr<dessser::gen::func_ref::t>> parents;
+  Arr<dessser::gen::func_ref::t> children;
   bool operator==(t const &other) const {
     return enabled == other.enabled && debug == other.debug && report_period == other.report_period && cwd == other.cwd && worker_signature == other.worker_signature && info_signature == other.info_signature && is_used == other.is_used && params == other.params && envvars == other.envvars && role == other.role && parents == other.parents && children == other.children;
   }

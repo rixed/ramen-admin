@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::runtime_stats {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */

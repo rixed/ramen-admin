@@ -6,7 +6,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::global_variable {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -27,8 +29,8 @@ std::ostream &operator<<(std::ostream &os, c1cc8a2c9779db1c5df618b834848368 cons
 
 struct t {
   c1cc8a2c9779db1c5df618b834848368 scope;
-  *field_name name;
-  *raql_type typ;
+  dessser::gen::field_name::t name;
+  dessser::gen::raql_type::t typ;
   bool operator==(t const &other) const {
     return scope == other.scope && name == other.name && typ == other.typ;
   }

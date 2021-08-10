@@ -6,13 +6,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-namespace dessser_gen {
+namespace dessser::gen::simple_filter {
+// don't ask me why:
+using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  *field_name lhs;
+  dessser::gen::field_name::t lhs;
   std::string rhs;
   std::string op;
   bool operator==(t const &other) const {
