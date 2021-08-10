@@ -14,6 +14,12 @@ AS_IF([test -z "$CONVERT"], [AC_MSG_ERROR([Cannot find convert.])])
 AC_LANG([C++])
 CXXFLAGS="$CFLAGS -std=c++17"
 
+AC_ARG_WITH([ramen],
+  AC_HELP_STRING([--with-ramen], [Where to find ramen source *.type files]),
+  [],
+  [with_ramen=../ramen/src])
+AC_SUBST(RAMEN_SRC, [$with_ramen])
+
 AC_CONFIG_FILES([
   Makefile
   src/rmadmin.pro

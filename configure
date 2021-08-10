@@ -583,6 +583,7 @@ PACKAGE_URL=''
 
 ac_subst_vars='LTLIBOBJS
 LIBOBJS
+RAMEN_SRC
 CONVERT
 QMAKE
 ac_ct_CC
@@ -637,6 +638,7 @@ SHELL'
 ac_subst_files=''
 ac_user_opts='
 enable_option_checking
+with_ramen
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1264,6 +1266,11 @@ if test -n "$ac_init_help"; then
      short | recursive ) echo "Configuration of rmadmin 7.0.0:";;
    esac
   cat <<\_ACEOF
+
+Optional Packages:
+  --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
+  --without-PACKAGE       do not use PACKAGE (same as --with-PACKAGE=no)
+  --with-ramen            Where to find ramen source *.type files
 
 Some influential environment variables:
   CXX         C++ compiler command
@@ -3021,6 +3028,17 @@ ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ex
 ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
 
 CXXFLAGS="$CFLAGS -std=c++17"
+
+
+# Check whether --with-ramen was given.
+if test "${with_ramen+set}" = set; then :
+  withval=$with_ramen;
+else
+  with_ramen=../ramen/src
+fi
+
+RAMEN_SRC=$with_ramen
+
 
 ac_config_files="$ac_config_files Makefile src/rmadmin.pro"
 

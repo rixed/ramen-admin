@@ -29,6 +29,7 @@ PACKAGED_BIN = src/RmAdmin
 INSTALLED_BIN = $(PACKAGED_BIN)
 INSTALLED = $(INSTALLED_BIN)
 
+RAMEN_SRC = @RAMEN_SRC@
 prefix = @prefix@
 exec_prefix = @exec_prefix@
 bindir ?= @bindir@
@@ -50,7 +51,6 @@ all: $(INSTALLED)
 	  --language=C++ --schema=@$< \
 	  -o $@
 
-# For all *_wire types we will have to create a non-wire alias
 TYPE_SOURCES = \
 	field_name_wire.type \
 	function_name_wire.type \
@@ -107,6 +107,63 @@ TYPE_SOURCES = \
 	sync_client_msg.type \
 	sync_server_msg.type
 
+# We do not need the distinction between wire/non-wire types here, so
+# we use the _wire types directly as the type.
+ALIASED_TYPE_SOURCES = \
+	field_name_wire.type \
+	function_name_wire.type \
+	program_name_wire.type \
+	fq_name_wire.type \
+	site_name_wire.type \
+	file_path_wire.type \
+	src_path_wire.type \
+	fieldmask_wire.type \
+	raql_type_wire.type \
+	raql_value_wire.type \
+	output_specs_wire.type
+
+src/desssergen/.created:
+	mkdir -p src/desssergen
+	touch $@
+
+# For all *_wire types we will have to create a non-wire alias
+src/desssergen/field_name.type: $(RAMEN_SRC)/field_name_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/function_name.type: $(RAMEN_SRC)/function_name_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/program_name.type: $(RAMEN_SRC)/program_name_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/fq_name.type: $(RAMEN_SRC)/fq_name_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/site_name.type: $(RAMEN_SRC)/site_name_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/file_path.type: $(RAMEN_SRC)/file_path_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/src_path.type: $(RAMEN_SRC)/src_path_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/fieldmask.type: $(RAMEN_SRC)/fieldmask_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/raql_type.type: $(RAMEN_SRC)/raql_type_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/raql_value.type: $(RAMEN_SRC)/raql_value_wire.type src/desssergen/.created
+	ln $< $@
+
+src/desssergen/output_specs.type: $(RAMEN_SRC)/output_specs_wire.type src/desssergen/.created
+	ln $< $@
+
+# Others are copied
+src/desssergen/%.type: $(RAMEN_SRC)/%.type src/desssergen/.created
+	ln $< $@
+
 ifeq ($(shell uname),Darwin)
 EXTRA_ICON_FILES = src/rmadmin.icns
 else
@@ -119,8 +176,8 @@ src/RmAdmin: \
 		src/rmadmin.pro \
 		$(wildcard src/*.cpp) \
 		$(wildcard src/*.h) \
-		$(filter %.cc, $(TYPE_SOURCES:.type=.cc)) \
-		$(filter %.h, $(TYPE_SOURCES:.type=.h))
+		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
+		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
 	@echo 'Generating RmAdmin $@'
 	cd src && @QMAKE@ $(QMAKE_EXTRA)
 	$(MAKE) -C src
@@ -238,6 +295,4 @@ clean: clean-dessserc-gen
 	$(RM) src/Makefile src/moc_*
 
 clean-dessserc-gen:
-	# Do not delete raql_type.ml*!
-	$(RM) $(patsubst %.type, %.cc, $(filter %.type, $(TYPE_SOURCES)))
-	$(RM) $(patsubst %.type, %.h, $(filter %.type, $(TYPE_SOURCES)))
+	$(RM) -rf src/desssergen
