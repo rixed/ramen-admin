@@ -188,11 +188,11 @@ src/RmAdmin: \
 	fi
 
 # This ico file is used for Windows app icon and internally by RmAdmin (in the about window):
-src/rmadmin.ico: site/icon.png
+src/rmadmin.ico: src/icon.png
 	@echo 'Generating $@'
 	@CONVERT@ $< $@
 
-src/rmadmin.icns: site/icon.png
+src/rmadmin.icns: src/icon.png
 	@echo 'Generating $@'
 	$(RM) -r icon.iconset
 	mkdir icon.iconset
@@ -240,7 +240,7 @@ src/AppDir/usr/bin/RmAdmin: src/RmAdmin
 	mkdir -p $(dir $@)
 	cp -f $< $@
 
-src/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png: site/icon.png
+src/AppDir/usr/share/icons/hicolor/128x128/apps/RmAdmin.png: src/icon.png
 	mkdir -p $(dir $@)
 	cp -f $< $@
 
