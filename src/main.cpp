@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cstdlib>
+#include <QAbstractSocket>
 #include <QApplication>
 #include <QDebug>
 #include <QCommandLineParser>
@@ -35,6 +36,7 @@ int main(int argc, char *argv[])
       qgetenv("HOME") + QString("/.config/rmadmin") :
       QString("/etc/rmadmin");
 
+  qRegisterMetaType<QAbstractSocket::SocketError>();
   qRegisterMetaType<SyncStatus>();
 
   int ret = app.exec();

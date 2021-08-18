@@ -15,7 +15,7 @@ ConfClient::ConfClient(QString const &target, QString const &username, UserIdent
     tcpSocket(new QTcpSocket(this)),
     syncStatus(SyncStatus::Undef)
 {
-  connect(tcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
+  connect(tcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
           this, &ConfClient::onTcpError);
   connect(tcpSocket, &QAbstractSocket::stateChanged,
           this, &ConfClient::onStateChange);
