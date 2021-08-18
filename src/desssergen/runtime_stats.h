@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_runtime_stats
+#define DESSSER_GEN_runtime_stats
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,7 +9,6 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::runtime_stats {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
@@ -45,7 +46,7 @@ struct t {
     return stats_time == other.stats_time && first_startup == other.first_startup && last_startup == other.last_startup && min_etime == other.min_etime && max_etime == other.max_etime && first_input == other.first_input && last_input == other.last_input && first_output == other.first_output && last_output == other.last_output && tot_in_tuples == other.tot_in_tuples && tot_sel_tuples == other.tot_sel_tuples && tot_out_filtered == other.tot_out_filtered && tot_out_tuples == other.tot_out_tuples && tot_out_errs == other.tot_out_errs && tot_full_bytes == other.tot_full_bytes && tot_full_bytes_samples == other.tot_full_bytes_samples && cur_groups == other.cur_groups && max_groups == other.max_groups && tot_in_bytes == other.tot_in_bytes && tot_out_bytes == other.tot_out_bytes && tot_wait_in == other.tot_wait_in && tot_wait_out == other.tot_wait_out && tot_firing_notifs == other.tot_firing_notifs && tot_extinguished_notifs == other.tot_extinguished_notifs && tot_cpu == other.tot_cpu && cur_ram == other.cur_ram && max_ram == other.max_ram;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "stats_time:" << r.stats_time << ',';
   os << "first_startup:" << r.first_startup << ',';
@@ -79,15 +80,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

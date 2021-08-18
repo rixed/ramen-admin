@@ -6,9 +6,9 @@
 
 #include <dessser/Pointer.h>
 
+#include "desssergen/sync_server_msg.h"
 #include "ConfClient.h"
 #include "UserIdentity.h"
-#include "dessser_types.h"
 
 ConfClient::ConfClient(QString const &target, QString const &username, UserIdentity const *id, KVStore *kvs_)
   : kvs(kvs_),

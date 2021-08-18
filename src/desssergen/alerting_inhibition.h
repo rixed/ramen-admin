@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_alerting_inhibition
+#define DESSSER_GEN_alerting_inhibition
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,7 +9,6 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::alerting_inhibition {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
@@ -23,7 +24,7 @@ struct t {
     return what == other.what && start_date == other.start_date && stop_date == other.stop_date && who == other.who && why == other.why;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "what:" << r.what << ',';
   os << "start_date:" << r.start_date << ',';
@@ -35,15 +36,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

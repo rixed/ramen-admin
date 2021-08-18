@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_replay
+#define DESSSER_GEN_replay
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,19 +7,23 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/fq_function_name.h"
+#include "desssergen/fq_function_name.h"
+#include "desssergen/fq_function_name.h"
+#include "desssergen/file_path.h"
+#include "desssergen/fq_function_name.h"
 
 namespace dessser::gen::replay {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct ed5c0948580fc7adda63d975e64ca75f : public std::variant<
-  dessser::gen::file_path::t,
+struct tc170c819a643f08a9bdcc6f98064cf69 : public std::variant<
+  dessser::gen::file_path::t_ext,
   std::string
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, ed5c0948580fc7adda63d975e64ca75f const &v) {
+inline std::ostream &operator<<(std::ostream &os, tc170c819a643f08a9bdcc6f98064cf69 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -26,25 +32,25 @@ std::ostream &operator<<(std::ostream &os, ed5c0948580fc7adda63d975e64ca75f cons
 }
 
 typedef std::tuple<
-  dessser::gen::fq_function_name::t,
-  dessser::gen::fq_function_name::t
-> v_350131e9cf91ccd34558b5986f609d67;
+  dessser::gen::fq_function_name::t_ext,
+  dessser::gen::fq_function_name::t_ext
+> tf40d0e33ee7e61244eb0d101d73f35d2;
 
 struct t {
   uint16_t channel;
-  dessser::gen::fq_function_name::t target;
+  dessser::gen::fq_function_name::t_ext target;
   std::string target_fieldmask;
   double since;
   double until;
-  ed5c0948580fc7adda63d975e64ca75f recipient;
-  Arr<dessser::gen::fq_function_name::t> sources;
-  Arr<v_350131e9cf91ccd34558b5986f609d67> links;
+  tc170c819a643f08a9bdcc6f98064cf69 recipient;
+  Arr<dessser::gen::fq_function_name::t_ext> sources;
+  Arr<tf40d0e33ee7e61244eb0d101d73f35d2> links;
   double timeout_date;
   bool operator==(t const &other) const {
     return channel == other.channel && target == other.target && target_fieldmask == other.target_fieldmask && since == other.since && until == other.until && recipient == other.recipient && sources == other.sources && links == other.links && timeout_date == other.timeout_date;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "channel:" << r.channel << ',';
   os << "target:" << r.target << ',';
@@ -60,15 +66,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

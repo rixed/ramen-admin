@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_sync_client_cmd
+#define DESSSER_GEN_sync_client_cmd
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,31 +7,42 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_selector.h"
+#include "desssergen/sync_user_id.h"
 
 namespace dessser::gen::sync_client_cmd {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 typedef std::tuple<
-  dessser::gen::sync_user_id::t,
+  dessser::gen::sync_user_id::t_ext,
   double
-> dbf2e0bf3a7180017cc36adb825f391b;
+> td17298225a9b57dc7469fe7682403a40;
 
 typedef std::tuple<
-  dessser::gen::sync_key::t,
-  dessser::gen::sync_value::t
-> v_576cf0b907acee9866e8dcab8f842c70;
+  dessser::gen::sync_key::t_ext,
+  dessser::gen::sync_value::t_ext
+> t08ff092200f210c10792e73a746a4bfd;
 
-struct b4834b9b54082be3172ea167d55892f5 : public std::tuple<
-  dessser::gen::sync_key::t,
-  dessser::gen::sync_value::t,
+struct t2887a6d9058ae0e0e681d62129c69c50 : public std::tuple<
+  dessser::gen::sync_key::t_ext,
+  dessser::gen::sync_value::t_ext,
   double,
   bool
 > { using tuple::tuple; };
-std::ostream &operator<<(std::ostream &os, b4834b9b54082be3172ea167d55892f5 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t2887a6d9058ae0e0e681d62129c69c50 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -39,12 +52,12 @@ std::ostream &operator<<(std::ostream &os, b4834b9b54082be3172ea167d55892f5 cons
   return os;
 }
 
-struct e23ab991ab36f2a4daa504088db7bf59 : public std::tuple<
-  dessser::gen::sync_key::t,
+struct t3fa061ec66599e2b8b3b5d44d886f101 : public std::tuple<
+  dessser::gen::sync_key::t_ext,
   double,
   bool
 > { using tuple::tuple; };
-std::ostream &operator<<(std::ostream &os, e23ab991ab36f2a4daa504088db7bf59 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t3fa061ec66599e2b8b3b5d44d886f101 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -54,18 +67,18 @@ std::ostream &operator<<(std::ostream &os, e23ab991ab36f2a4daa504088db7bf59 cons
 }
 
 struct t : public std::variant<
-  dbf2e0bf3a7180017cc36adb825f391b,
-  dessser::gen::sync_selector::t,
-  v_576cf0b907acee9866e8dcab8f842c70,
-  b4834b9b54082be3172ea167d55892f5,
-  v_576cf0b907acee9866e8dcab8f842c70,
-  dessser::gen::sync_key::t,
-  e23ab991ab36f2a4daa504088db7bf59,
-  e23ab991ab36f2a4daa504088db7bf59,
-  dessser::gen::sync_key::t,
+  td17298225a9b57dc7469fe7682403a40,
+  dessser::gen::sync_selector::t_ext,
+  t08ff092200f210c10792e73a746a4bfd,
+  t2887a6d9058ae0e0e681d62129c69c50,
+  t08ff092200f210c10792e73a746a4bfd,
+  dessser::gen::sync_key::t_ext,
+  t3fa061ec66599e2b8b3b5d44d886f101,
+  t3fa061ec66599e2b8b3b5d44d886f101,
+  dessser::gen::sync_key::t_ext,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -82,15 +95,17 @@ std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_retention
+#define DESSSER_GEN_retention
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,22 +7,22 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/raql_expr.h"
 
 namespace dessser::gen::retention {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::raql_expr::t duration;
+  dessser::gen::raql_expr::t_ext duration;
   double period;
   bool operator==(t const &other) const {
     return duration == other.duration && period == other.period;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "duration:" << r.duration << ',';
   os << "period:" << r.period;
@@ -29,15 +31,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_alerting_contact
+#define DESSSER_GEN_alerting_contact
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,21 +9,20 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::alerting_contact {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct f6f331efc660707e57f0e15ccf4fd321 {
+struct t8168c0cbfe27e0636debcd4584da2f46 {
   std::string file;
   std::string insert;
   std::string create;
-  bool operator==(f6f331efc660707e57f0e15ccf4fd321 const &other) const {
+  bool operator==(t8168c0cbfe27e0636debcd4584da2f46 const &other) const {
     return file == other.file && insert == other.insert && create == other.create;
   }
 };
-std::ostream &operator<<(std::ostream &os, f6f331efc660707e57f0e15ccf4fd321 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t8168c0cbfe27e0636debcd4584da2f46 const &r) {
   os << '{';
   os << "file:" << r.file << ',';
   os << "insert:" << r.insert << ',';
@@ -33,18 +34,18 @@ std::ostream &operator<<(std::ostream &os, f6f331efc660707e57f0e15ccf4fd321 cons
 typedef std::tuple<
   std::string,
   std::string
-> d135bed341a046f128507720bca94ebf;
+> t8961925d22ebc35140986110e41bc2a4;
 
-struct e952f334fe511c004f72c55ab7164557 {
-  Lst<d135bed341a046f128507720bca94ebf> options;
+struct t33f81fdc8a31c3bb7fa1e41b40b7bf7e {
+  Lst<t8961925d22ebc35140986110e41bc2a4> options;
   std::string topic;
   uint16_t partition;
   std::string text;
-  bool operator==(e952f334fe511c004f72c55ab7164557 const &other) const {
+  bool operator==(t33f81fdc8a31c3bb7fa1e41b40b7bf7e const &other) const {
     return options == other.options && topic == other.topic && partition == other.partition && text == other.text;
   }
 };
-std::ostream &operator<<(std::ostream &os, e952f334fe511c004f72c55ab7164557 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t33f81fdc8a31c3bb7fa1e41b40b7bf7e const &r) {
   os << '{';
   os << "options:" << r.options << ',';
   os << "topic:" << r.topic << ',';
@@ -54,14 +55,14 @@ std::ostream &operator<<(std::ostream &os, e952f334fe511c004f72c55ab7164557 cons
   return os;
 }
 
-struct d575d47fd9161b749ff8b023ef1235a9 : public std::variant<
+struct td1d0857ca32957475d057baccdf24fb1 : public std::variant<
   Void,
   std::string,
   std::string,
-  f6f331efc660707e57f0e15ccf4fd321,
-  e952f334fe511c004f72c55ab7164557
+  t8168c0cbfe27e0636debcd4584da2f46,
+  t33f81fdc8a31c3bb7fa1e41b40b7bf7e
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, d575d47fd9161b749ff8b023ef1235a9 const &v) {
+inline std::ostream &operator<<(std::ostream &os, td1d0857ca32957475d057baccdf24fb1 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -73,13 +74,13 @@ std::ostream &operator<<(std::ostream &os, d575d47fd9161b749ff8b023ef1235a9 cons
 }
 
 struct t {
-  d575d47fd9161b749ff8b023ef1235a9 via;
+  td1d0857ca32957475d057baccdf24fb1 via;
   double timeout;
   bool operator==(t const &other) const {
     return via == other.via && timeout == other.timeout;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "via:" << r.via << ',';
   os << "timeout:" << r.timeout;
@@ -88,15 +89,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

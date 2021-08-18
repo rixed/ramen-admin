@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_alerting_log
+#define DESSSER_GEN_alerting_log
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,19 +9,18 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::alerting_log {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_53c0e376e5645c9395bb7436d28074f2 : public std::variant<
+struct t7ae9bb09a1a0070adced41151deef93f : public std::variant<
   Void,
   Void,
   Void,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_53c0e376e5645c9395bb7436d28074f2 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t7ae9bb09a1a0070adced41151deef93f const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -32,14 +33,14 @@ std::ostream &operator<<(std::ostream &os, v_53c0e376e5645c9395bb7436d28074f2 co
 typedef std::tuple<
   std::string,
   uint32_t
-> c9034d297e61f13fa539d402e882ed63;
+> t8fac3da053db9cb461751be833f41f86;
 
-struct f5612b432a19dbfc96bbe5b8c2733ed3 : public std::variant<
+struct t8347e1c22520ce64e4427c2d53263f64 : public std::variant<
   Void,
   std::string,
   std::string
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, f5612b432a19dbfc96bbe5b8c2733ed3 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8347e1c22520ce64e4427c2d53263f64 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -49,13 +50,13 @@ std::ostream &operator<<(std::ostream &os, f5612b432a19dbfc96bbe5b8c2733ed3 cons
 }
 
 struct t : public std::variant<
-  v_53c0e376e5645c9395bb7436d28074f2,
-  c9034d297e61f13fa539d402e882ed63,
+  t7ae9bb09a1a0070adced41151deef93f,
+  t8fac3da053db9cb461751be833f41f86,
   std::string,
-  f5612b432a19dbfc96bbe5b8c2733ed3,
+  t8347e1c22520ce64e4427c2d53263f64,
   std::string
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -67,15 +68,17 @@ std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

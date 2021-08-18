@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_raql_type
+#define DESSSER_GEN_raql_type
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,7 +9,6 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::raql_type {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
@@ -15,26 +16,38 @@ using dessser::operator<<;
 /* ------------ */
 struct t;
 struct t;
+struct t;
 typedef std::tuple<
   uint32_t,
   t*
-> v_21d42a88cbfa8d217bab3e5ff3c8293a;
+> t9327d6336842c469509b67056a719df9;
 
+struct t;
 struct t;
 struct t;
 typedef std::tuple<
   std::string,
   t*
-> v_7fc8d7a0a67813ab72751cde815990fd;
+> t100b7e5cf4b9a621db7a39d7f1d01e5c;
 
+struct t;
+struct t;
+struct t;
 struct t;
 struct t;
 typedef std::tuple<
   t*,
   t*
-> v_88361d7e3c5fc5844d2ff9213ba400b1;
+> t7411897bdb6c9b6e00a01b4eb6506ccf;
 
-struct af7296d43d3d217e0560bba37ac4a9f7 : public std::variant<
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t82f0fed4e9a4095dda4e6566499e3c0d : public std::variant<
   Void,
   Void,
   Void,
@@ -66,13 +79,13 @@ struct af7296d43d3d217e0560bba37ac4a9f7 : public std::variant<
   Void,
   Void,
   Arr<t*>,
-  v_21d42a88cbfa8d217bab3e5ff3c8293a,
+  t9327d6336842c469509b67056a719df9,
   t*,
-  Arr<v_7fc8d7a0a67813ab72751cde815990fd>,
-  Arr<v_7fc8d7a0a67813ab72751cde815990fd>,
-  v_88361d7e3c5fc5844d2ff9213ba400b1
+  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  t7411897bdb6c9b6e00a01b4eb6506ccf
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, af7296d43d3d217e0560bba37ac4a9f7 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t82f0fed4e9a4095dda4e6566499e3c0d const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -114,14 +127,21 @@ std::ostream &operator<<(std::ostream &os, af7296d43d3d217e0560bba37ac4a9f7 cons
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 struct t {
-  af7296d43d3d217e0560bba37ac4a9f7 type;
+  t82f0fed4e9a4095dda4e6566499e3c0d type;
   bool nullable;
   bool operator==(t const &other) const {
     return type == other.type && nullable == other.nullable;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "type:" << r.type << ',';
   os << "nullable:" << r.nullable;
@@ -129,16 +149,39 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

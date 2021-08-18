@@ -16,6 +16,13 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/function_name.h"
+#include "desssergen/program_name.h"
+#include "desssergen/site_name.h"
+
+
+namespace dessser::gen::func_ref {
+using dessser::operator<<;
 
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
@@ -23,49 +30,36 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser::gen::func_ref {
-// don't ask me why:
-using dessser::operator<<;
-
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::site_name::t site;
-  dessser::gen::program_name::t program;
-  dessser::gen::function_name::t func;
+  dessser::gen::site_name::t_ext site;
+  dessser::gen::program_name::t_ext program;
+  dessser::gen::function_name::t_ext func;
   bool operator==(t const &other) const {
     return site == other.site && program == other.program && func == other.func;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
-  os << '{';
-  os << "site:" << r.site << ',';
-  os << "program:" << r.program << ',';
-  os << "func:" << r.func;
-  os << '}';
-  return os;
-}
+typedef std::tuple<
+  t*,
+  Pointer
+> t45217dce3db5a9a49037839afd0048e8;
 
 typedef std::tuple<
-  t,
+  dessser::gen::site_name::t_ext,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> tb31a43e42345099d489759a9c141b1b9;
 
 typedef std::tuple<
-  dessser::gen::site_name::t,
+  dessser::gen::program_name::t_ext,
   Pointer
-> ddf7cb48181332ead2f60a5f4bb1a8de;
+> tb2e42d4897c18582b07eacd83dd7412d;
 
 typedef std::tuple<
-  dessser::gen::program_name::t,
+  dessser::gen::function_name::t_ext,
   Pointer
-> f6e2f55e3ebc4a068d1f568f5860423e;
-
-typedef std::tuple<
-  dessser::gen::function_name::t,
-  Pointer
-> v_382b80697fdeb5158d298be4e9fcf65e;
+> tc7d3fcfd06c0f02b3732e1754a18402b;
 
 /* ----------- */
 /* Definitions */
@@ -76,26 +70,26 @@ typedef std::tuple<
         (let "srec_dst_71" (apply (ext-identifier site_name to-row-binary) (get-field "site" (param 0)) (param 1)) (apply (ext-identifier program_name to-row-binary) (get-field "program" (param 0)) (identifier "srec_dst_71")))
         (apply (ext-identifier function_name to-row-binary) (get-field "func" (param 0)) (identifier "srec_dst_72"))))
  */
-static std::function<Pointer(t,Pointer)> to_row_binary_init()
+static std::function<Pointer(t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(dessser::gen::site_name::t,Pointer)> id_1 { dessser::gen::site_name::to_row_binary };
-    dessser::gen::site_name::t id_2 { p_0.site };
-    Pointer id_3 { id_1(id_2, p_1) };
+  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+    auto fun1 { dessser::gen::site_name::to_row_binary };
+    dessser::gen::site_name::t_ext id_2 { p_0->site };
+    Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_71 { id_3 };
-      std::function<Pointer(dessser::gen::program_name::t,Pointer)> id_5 { dessser::gen::program_name::to_row_binary };
-      dessser::gen::program_name::t id_6 { p_0.program };
-      Pointer id_7 { id_5(id_6, srec_dst_71) };
+      auto fun5 { dessser::gen::program_name::to_row_binary };
+      dessser::gen::program_name::t_ext id_6 { p_0->program };
+      Pointer id_7 { fun5(id_6, srec_dst_71) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_72 { let_res_4 };
-      std::function<Pointer(dessser::gen::function_name::t,Pointer)> id_9 { dessser::gen::function_name::to_row_binary };
-      dessser::gen::function_name::t id_10 { p_0.func };
-      Pointer id_11 { id_9(id_10, srec_dst_72) };
+      auto fun9 { dessser::gen::function_name::to_row_binary };
+      dessser::gen::function_name::t_ext id_10 { p_0->func };
+      Pointer id_11 { fun9(id_10, srec_dst_72) };
       let_res_8 = id_11;
     }
     return let_res_8;
@@ -103,7 +97,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{site: $site_name; program: $program_name; func: $function_name}")
@@ -111,27 +105,27 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
         (let "sz_69" (apply (ext-identifier site_name sersize-of-row-binary) (get-field "site" (param 0))) (add (identifier "sz_69") (apply (ext-identifier program_name sersize-of-row-binary) (get-field "program" (param 0)))))
         (add (identifier "sz_70") (apply (ext-identifier function_name sersize-of-row-binary) (get-field "func" (param 0))))))
  */
-static std::function<Size(t)> sersize_of_row_binary_init()
+static std::function<Size(t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun12 { [&fun12](t p_0) {
-    std::function<Size(dessser::gen::site_name::t)> id_13 { dessser::gen::site_name::sersize_of_row_binary };
-    dessser::gen::site_name::t id_14 { p_0.site };
-    Size id_15 { id_13(id_14) };
+  std::function<Size(t*)> fun12 { [&fun12](t* p_0) {
+    auto fun13 { dessser::gen::site_name::sersize_of_row_binary };
+    dessser::gen::site_name::t_ext id_14 { p_0->site };
+    Size id_15 { fun13(id_14) };
     Size let_res_16;
     {
       Size sz_69 { id_15 };
-      std::function<Size(dessser::gen::program_name::t)> id_17 { dessser::gen::program_name::sersize_of_row_binary };
-      dessser::gen::program_name::t id_18 { p_0.program };
-      Size id_19 { id_17(id_18) };
+      auto fun17 { dessser::gen::program_name::sersize_of_row_binary };
+      dessser::gen::program_name::t_ext id_18 { p_0->program };
+      Size id_19 { fun17(id_18) };
       Size id_20 { Size(sz_69 + id_19) };
       let_res_16 = id_20;
     }
     Size let_res_21;
     {
       Size sz_70 { let_res_16 };
-      std::function<Size(dessser::gen::function_name::t)> id_22 { dessser::gen::function_name::sersize_of_row_binary };
-      dessser::gen::function_name::t id_23 { p_0.func };
-      Size id_24 { id_22(id_23) };
+      auto fun22 { dessser::gen::function_name::sersize_of_row_binary };
+      dessser::gen::function_name::t_ext id_23 { p_0->func };
+      Size id_24 { fun22(id_23) };
       Size id_25 { Size(sz_70 + id_24) };
       let_res_21 = id_25;
     }
@@ -140,7 +134,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
    };
   return fun12;
 }
-std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -151,35 +145,35 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
               (let-pair "drec_fst_63" "drec_snd_64" (apply (ext-identifier function_name of-row-binary) (identifier "drec_snd_61"))
                 (make-tup (make-rec (string "site") (identifier "drec_fst_57") (string "program") (identifier "drec_fst_60") (string "func") (identifier "drec_fst_63")) (identifier "drec_snd_64"))))))))
  */
-static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
+static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
 {
-  std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun26 { [&fun26](Pointer p_0) {
-    std::function<ddf7cb48181332ead2f60a5f4bb1a8de(Pointer)> id_27 { dessser::gen::site_name::of_row_binary };
-    ddf7cb48181332ead2f60a5f4bb1a8de id_28 { id_27(p_0) };
-    f63f919559f0d70225bd0da5dd9bcafc let_res_29;
+  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun26 { [&fun26](Pointer p_0) {
+    auto fun27 { dessser::gen::site_name::of_row_binary };
+    tb31a43e42345099d489759a9c141b1b9 id_28 { fun27(p_0) };
+    t45217dce3db5a9a49037839afd0048e8 let_res_29;
     {
-      ddf7cb48181332ead2f60a5f4bb1a8de drec_56 { id_28 };
-      f63f919559f0d70225bd0da5dd9bcafc letpair_res_30;
+      tb31a43e42345099d489759a9c141b1b9 drec_56 { id_28 };
+      t45217dce3db5a9a49037839afd0048e8 letpair_res_30;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
-        std::function<f6e2f55e3ebc4a068d1f568f5860423e(Pointer)> id_31 { dessser::gen::program_name::of_row_binary };
-        f6e2f55e3ebc4a068d1f568f5860423e id_32 { id_31(drec_snd_58) };
-        f63f919559f0d70225bd0da5dd9bcafc let_res_33;
+        auto fun31 { dessser::gen::program_name::of_row_binary };
+        tb2e42d4897c18582b07eacd83dd7412d id_32 { fun31(drec_snd_58) };
+        t45217dce3db5a9a49037839afd0048e8 let_res_33;
         {
-          f6e2f55e3ebc4a068d1f568f5860423e drec_59 { id_32 };
-          f63f919559f0d70225bd0da5dd9bcafc letpair_res_34;
+          tb2e42d4897c18582b07eacd83dd7412d drec_59 { id_32 };
+          t45217dce3db5a9a49037839afd0048e8 letpair_res_34;
           {
             auto drec_fst_60 { std::get<0>(drec_59) };
             auto drec_snd_61 { std::get<1>(drec_59) };
-            std::function<v_382b80697fdeb5158d298be4e9fcf65e(Pointer)> id_35 { dessser::gen::function_name::of_row_binary };
-            v_382b80697fdeb5158d298be4e9fcf65e id_36 { id_35(drec_snd_61) };
-            f63f919559f0d70225bd0da5dd9bcafc letpair_res_37;
+            auto fun35 { dessser::gen::function_name::of_row_binary };
+            tc7d3fcfd06c0f02b3732e1754a18402b id_36 { fun35(drec_snd_61) };
+            t45217dce3db5a9a49037839afd0048e8 letpair_res_37;
             {
               auto drec_fst_63 { std::get<0>(id_36) };
               auto drec_snd_64 { std::get<1>(id_36) };
-              t id_38 {  .site = drec_fst_57, .program = drec_fst_60, .func = drec_fst_63  };
-              f63f919559f0d70225bd0da5dd9bcafc id_39 {  id_38, drec_snd_64  };
+              t* id_38 { new t({ .site = drec_fst_57, .program = drec_fst_60, .func = drec_fst_63 }) };
+              t45217dce3db5a9a49037839afd0048e8 id_39 { id_38, drec_snd_64 };
               letpair_res_37 = id_39;
             }
             letpair_res_34 = letpair_res_37;
@@ -195,7 +189,8 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
    };
   return fun26;
 }
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t *t_ext;
 
 }

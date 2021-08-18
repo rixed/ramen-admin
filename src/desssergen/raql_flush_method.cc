@@ -17,15 +17,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
+
+namespace dessser::gen::raql_flush_method {
+using dessser::operator<<;
+
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
 std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
-
-namespace dessser::gen::raql_flush_method {
-// don't ask me why:
-using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -34,23 +34,15 @@ struct t : public std::variant<
   Void,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-  }
-  return os;
-}
-
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 typedef std::tuple<
   uint16_t,
   Pointer
-> v_362f9d9108a6902af48b6c83d5377ea1;
+> t22a32080ad88ab548b80077a17b7dd46;
 
 /* ----------- */
 /* Definitions */
@@ -59,25 +51,26 @@ typedef std::tuple<
     (fun ("[reset Void | never Void]" "Ptr")
       (let "ssum_dst_76" (write-u16 little-endian (param 1) (label-of (param 0))) (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_76") (seq (assert (eq (label-of (param 0)) (u16 1))) (identifier "ssum_dst_76")))))
  */
-static std::function<Pointer(t,Pointer)> to_row_binary_init()
+static std::function<Pointer(t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+    uint16_t id_1 { uint16_t(p_0->index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_76 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0->index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_76;
       } else {
-        uint16_t id_8 { uint16_t(p_0.index()) };
+        uint16_t id_8 { uint16_t(p_0->index()) };
         uint16_t id_9 { 1 };
         bool id_10 { bool(id_8 == id_9) };
         Void id_11 { ((void)(assert(id_10)), VOID) };
+        (void)id_11;
         choose_res_7 = ssum_dst_76;
       }
       let_res_3 = choose_res_7;
@@ -87,26 +80,27 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[reset Void | never Void]") (if (eq (u16 0) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 1))) (size 2))))
  */
-static std::function<Size(t)> sersize_of_row_binary_init()
+static std::function<Size(t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun12 { [&fun12](t p_0) {
+  std::function<Size(t*)> fun12 { [&fun12](t* p_0) {
     uint16_t id_13 { 0 };
-    uint16_t id_14 { uint16_t(p_0.index()) };
+    uint16_t id_14 { uint16_t(p_0->index()) };
     bool id_15 { bool(id_13 == id_14) };
     Size choose_res_16;
     if (id_15) {
       Size id_17 { 2UL };
       choose_res_16 = id_17;
     } else {
-      uint16_t id_18 { uint16_t(p_0.index()) };
+      uint16_t id_18 { uint16_t(p_0->index()) };
       uint16_t id_19 { 1 };
       bool id_20 { bool(id_18 == id_19) };
       Void id_21 { ((void)(assert(id_20)), VOID) };
+      (void)id_21;
       Size id_22 { 2UL };
       choose_res_16 = id_22;
     }
@@ -115,7 +109,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
    };
   return fun12;
 }
-std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -126,48 +120,51 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
               (seq (assert (eq (identifier "dsum1_fst_63") (u16 1))) (make-tup (construct "[reset Void | never Void]" 1 (nop)) (identifier "dsum1_snd_64")))))) 
         (make-tup (identifier "make_fst_72") (identifier "make_snd_73"))))
  */
-static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
+static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
 {
-  std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun23 { [&fun23](Pointer p_0) {
-    v_362f9d9108a6902af48b6c83d5377ea1 id_24 { p_0.readU16Le() };
-    v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_25;
+  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun23 { [&fun23](Pointer p_0) {
+    t22a32080ad88ab548b80077a17b7dd46 id_24 { p_0.readU16Le() };
+    t22a32080ad88ab548b80077a17b7dd46 letpair_res_25;
     {
       auto du16_fst_57 { std::get<0>(id_24) };
       auto du16_snd_58 { std::get<1>(id_24) };
-      v_362f9d9108a6902af48b6c83d5377ea1 id_26 {  du16_fst_57, du16_snd_58  };
+      t22a32080ad88ab548b80077a17b7dd46 id_26 { du16_fst_57, du16_snd_58 };
       letpair_res_25 = id_26;
     }
-    f63f919559f0d70225bd0da5dd9bcafc let_res_27;
+    t45217dce3db5a9a49037839afd0048e8 let_res_27;
     {
-      v_362f9d9108a6902af48b6c83d5377ea1 dsum1_62 { letpair_res_25 };
-      f63f919559f0d70225bd0da5dd9bcafc letpair_res_28;
+      t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_25 };
+      t45217dce3db5a9a49037839afd0048e8 letpair_res_28;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_29 { 0 };
         bool id_30 { bool(id_29 == dsum1_fst_63) };
-        f63f919559f0d70225bd0da5dd9bcafc choose_res_31;
+        t45217dce3db5a9a49037839afd0048e8 choose_res_31;
         if (id_30) {
-          t id_32 { std::in_place_index<0>, VOID };
-          f63f919559f0d70225bd0da5dd9bcafc id_33 {  id_32, dsum1_snd_64  };
+          (void)VOID;
+          t* id_32 { new t(std::in_place_index<0>, VOID) };
+          t45217dce3db5a9a49037839afd0048e8 id_33 { id_32, dsum1_snd_64 };
           choose_res_31 = id_33;
         } else {
           uint16_t id_34 { 1 };
           bool id_35 { bool(dsum1_fst_63 == id_34) };
           Void id_36 { ((void)(assert(id_35)), VOID) };
-          t id_37 { std::in_place_index<1>, VOID };
-          f63f919559f0d70225bd0da5dd9bcafc id_38 {  id_37, dsum1_snd_64  };
+          (void)id_36;
+          (void)VOID;
+          t* id_37 { new t(std::in_place_index<1>, VOID) };
+          t45217dce3db5a9a49037839afd0048e8 id_38 { id_37, dsum1_snd_64 };
           choose_res_31 = id_38;
         }
         letpair_res_28 = choose_res_31;
       }
       let_res_27 = letpair_res_28;
     }
-    f63f919559f0d70225bd0da5dd9bcafc letpair_res_39;
+    t45217dce3db5a9a49037839afd0048e8 letpair_res_39;
     {
       auto make_fst_72 { std::get<0>(let_res_27) };
       auto make_snd_73 { std::get<1>(let_res_27) };
-      f63f919559f0d70225bd0da5dd9bcafc id_40 {  make_fst_72, make_snd_73  };
+      t45217dce3db5a9a49037839afd0048e8 id_40 { make_fst_72, make_snd_73 };
       letpair_res_39 = id_40;
     }
     return letpair_res_39;
@@ -175,7 +172,8 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
    };
   return fun23;
 }
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t *t_ext;
 
 }

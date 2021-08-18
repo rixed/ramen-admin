@@ -17,15 +17,15 @@
 #include <vector>
 #include "dessser/runtime.h"
 
+
+namespace dessser::gen::field_name {
+using dessser::operator<<;
+
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
 std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
-
-namespace dessser::gen::field_name {
-// don't ask me why:
-using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
@@ -34,22 +34,22 @@ typedef std::string t;
 typedef std::tuple<
   t,
   Pointer
-> v_46a5e81c2410b000ff0adea6dc198147;
+> t519c57b31160411c6989716f3a9782e0;
 
 typedef std::tuple<
   Size,
   Pointer
-> v_41b0681ed7f1f185fd3e6c4dcdc13110;
+> t8beb80162423aee37bd383e9b6834c9c;
 
 typedef std::tuple<
   uint8_t,
   Pointer
-> v_1d5843897434feb24d158f3793db9189;
+> tb3f98ea670610d40658a618de3ec7b90;
 
 typedef std::tuple<
   Bytes,
   Pointer
-> f921d1e0a170c3c04148c21704db9c45;
+> t188345aa49abd0cb47ff73fedc219f08;
 
 /* ----------- */
 /* Definitions */
@@ -107,20 +107,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           }
           Pointer id_23 { id_9.writeU8(choose_res_14) };
           Void id_24 { ((void)(leb128_ptr_75[id_7] = id_23), VOID) };
+          (void)id_24;
           uint8_t id_25 { 0 };
           uint8_t id_26 { 0 };
           uint32_t id_27 { leb128_sz_74[id_26] };
           uint8_t id_28 { 7 };
           uint32_t id_29 { uint32_t(id_27 >> id_28) };
           Void id_30 { ((void)(leb128_sz_74[id_25] = id_29), VOID) };
+          (void)id_30;
           uint8_t id_31 { 0 };
           uint32_t id_32 { leb128_sz_74[id_31] };
           uint32_t id_33 { 0U };
           bool id_34 { bool(id_32 > id_33) };
           while_flag_6 = id_34;
           if (while_flag_6) {
+            (void)VOID;
           }
         } while (while_flag_6);
+        (void)VOID;
         uint8_t id_35 { 0 };
         Pointer id_36 { leb128_ptr_75[id_35] };
         let_res_5 = id_36;
@@ -177,8 +181,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             uint32_t id_57 { 1U };
             uint32_t id_58 { uint32_t(id_56 + id_57) };
             Void id_59 { ((void)(lebsz_ref_73[id_54] = id_58), VOID) };
+            (void)id_59;
           }
         } while (while_flag_46);
+        (void)VOID;
         uint8_t id_60 { 0 };
         uint32_t id_61 { lebsz_ref_73[id_60] };
         Size id_62 { Size(id_61) };
@@ -215,37 +221,38 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
         (let-pair "dstring1_fst_63" "dstring1_snd_64" (identifier "dstring1_62")
           (let-pair "dstring2_fst_66" "dstring2_snd_67" (read-bytes (identifier "dstring1_snd_64") (identifier "dstring1_fst_63")) (make-tup (string-of-bytes (identifier "dstring2_fst_66")) (identifier "dstring2_snd_67"))))))
  */
-static std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary_init()
+static std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary_init()
 {
-  std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> fun66 { [&fun66](Pointer p_0) {
+  std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> fun66 { [&fun66](Pointer p_0) {
     uint32_t id_67 { 0U };
     Vec<1, uint32_t> id_68 {  id_67  };
-    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_69;
+    t8beb80162423aee37bd383e9b6834c9c let_res_69;
     {
       Vec<1, uint32_t> leb_ref_56 { id_68 };
       uint8_t id_70 { 0 };
       Vec<1, uint8_t> id_71 {  id_70  };
-      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_72;
+      t8beb80162423aee37bd383e9b6834c9c let_res_72;
       {
         Vec<1, uint8_t> shft_ref_57 { id_71 };
         Vec<1, Pointer> id_73 {  p_0  };
-        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_74;
+        t8beb80162423aee37bd383e9b6834c9c let_res_74;
         {
           Vec<1, Pointer> p_ref_58 { id_73 };
           bool while_flag_75 { true };
           do {
             uint8_t id_76 { 0 };
             Pointer id_77 { p_ref_58[id_76] };
-            v_1d5843897434feb24d158f3793db9189 id_78 { id_77.readU8() };
+            tb3f98ea670610d40658a618de3ec7b90 id_78 { id_77.readU8() };
             bool let_res_79;
             {
-              v_1d5843897434feb24d158f3793db9189 leb128_59 { id_78 };
+              tb3f98ea670610d40658a618de3ec7b90 leb128_59 { id_78 };
               bool letpair_res_80;
               {
                 auto leb128_fst_60 { std::get<0>(leb128_59) };
                 auto leb128_snd_61 { std::get<1>(leb128_59) };
                 uint8_t id_81 { 0 };
                 Void id_82 { ((void)(p_ref_58[id_81] = leb128_snd_61), VOID) };
+                (void)id_82;
                 uint8_t id_83 { 0 };
                 uint8_t id_84 { 127 };
                 uint8_t id_85 { uint8_t(leb128_fst_60 & id_84) };
@@ -257,12 +264,14 @@ static std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary_
                 uint32_t id_91 { leb_ref_56[id_90] };
                 uint32_t id_92 { uint32_t(id_89 | id_91) };
                 Void id_93 { ((void)(leb_ref_56[id_83] = id_92), VOID) };
+                (void)id_93;
                 uint8_t id_94 { 0 };
                 uint8_t id_95 { 0 };
                 uint8_t id_96 { shft_ref_57[id_95] };
                 uint8_t id_97 { 7 };
                 uint8_t id_98 { uint8_t(id_96 + id_97) };
                 Void id_99 { ((void)(shft_ref_57[id_94] = id_98), VOID) };
+                (void)id_99;
                 uint8_t id_100 { 128 };
                 bool id_101 { bool(leb128_fst_60 >= id_100) };
                 letpair_res_80 = id_101;
@@ -271,34 +280,36 @@ static std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary_
             }
             while_flag_75 = let_res_79;
             if (while_flag_75) {
+              (void)VOID;
             }
           } while (while_flag_75);
+          (void)VOID;
           uint8_t id_102 { 0 };
           uint32_t id_103 { leb_ref_56[id_102] };
           Size id_104 { Size(id_103) };
           uint8_t id_105 { 0 };
           Pointer id_106 { p_ref_58[id_105] };
-          v_41b0681ed7f1f185fd3e6c4dcdc13110 id_107 {  id_104, id_106  };
+          t8beb80162423aee37bd383e9b6834c9c id_107 { id_104, id_106 };
           let_res_74 = id_107;
         }
         let_res_72 = let_res_74;
       }
       let_res_69 = let_res_72;
     }
-    v_46a5e81c2410b000ff0adea6dc198147 let_res_108;
+    t519c57b31160411c6989716f3a9782e0 let_res_108;
     {
-      v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_62 { let_res_69 };
-      v_46a5e81c2410b000ff0adea6dc198147 letpair_res_109;
+      t8beb80162423aee37bd383e9b6834c9c dstring1_62 { let_res_69 };
+      t519c57b31160411c6989716f3a9782e0 letpair_res_109;
       {
         auto dstring1_fst_63 { std::get<0>(dstring1_62) };
         auto dstring1_snd_64 { std::get<1>(dstring1_62) };
-        f921d1e0a170c3c04148c21704db9c45 id_110 { dstring1_snd_64.readBytes(dstring1_fst_63) };
-        v_46a5e81c2410b000ff0adea6dc198147 letpair_res_111;
+        t188345aa49abd0cb47ff73fedc219f08 id_110 { dstring1_snd_64.readBytes(dstring1_fst_63) };
+        t519c57b31160411c6989716f3a9782e0 letpair_res_111;
         {
           auto dstring2_fst_66 { std::get<0>(id_110) };
           auto dstring2_snd_67 { std::get<1>(id_110) };
           t id_112 { dstring2_fst_66.toString() };
-          v_46a5e81c2410b000ff0adea6dc198147 id_113 {  id_112, dstring2_snd_67  };
+          t519c57b31160411c6989716f3a9782e0 id_113 { id_112, dstring2_snd_67 };
           letpair_res_111 = id_113;
         }
         letpair_res_109 = letpair_res_111;
@@ -310,7 +321,8 @@ static std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary_
    };
   return fun66;
 }
-std::function<v_46a5e81c2410b000ff0adea6dc198147(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t t_ext;
 
 }

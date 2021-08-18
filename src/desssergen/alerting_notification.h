@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_alerting_notification
+#define DESSSER_GEN_alerting_notification
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,9 +7,10 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/fq_name.h"
+#include "desssergen/site_name.h"
 
 namespace dessser::gen::alerting_notification {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
@@ -16,11 +19,11 @@ using dessser::operator<<;
 typedef std::tuple<
   std::string,
   std::string
-> d135bed341a046f128507720bca94ebf;
+> t8961925d22ebc35140986110e41bc2a4;
 
 struct t {
-  dessser::gen::site_name::t site;
-  dessser::gen::fq_name::t worker;
+  dessser::gen::site_name::t_ext site;
+  dessser::gen::fq_name::t_ext worker;
   bool test;
   double sent_time;
   std::optional<double> event_time;
@@ -29,12 +32,12 @@ struct t {
   double certainty;
   double debounce;
   double timeout;
-  Lst<d135bed341a046f128507720bca94ebf> parameters;
+  Lst<t8961925d22ebc35140986110e41bc2a4> parameters;
   bool operator==(t const &other) const {
     return site == other.site && worker == other.worker && test == other.test && sent_time == other.sent_time && event_time == other.event_time && name == other.name && firing == other.firing && certainty == other.certainty && debounce == other.debounce && timeout == other.timeout && parameters == other.parameters;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "site:" << r.site << ',';
   os << "worker:" << r.worker << ',';
@@ -52,15 +55,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

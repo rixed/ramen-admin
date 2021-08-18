@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_raql_value
+#define DESSSER_GEN_raql_value
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,17 +9,16 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::raql_value {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct cc9ac153fc4d8a1128cc88896605e565 : public std::variant<
+struct t2dfffd4312923e34e0c3ba0f8d708626 : public std::variant<
   uint32_t,
   uint128_t
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, cc9ac153fc4d8a1128cc88896605e565 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708626 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -25,14 +26,14 @@ std::ostream &operator<<(std::ostream &os, cc9ac153fc4d8a1128cc88896605e565 cons
   return os;
 }
 
-struct v_02f625c0a7ec8df42167994cc126588a {
+struct t0e8fd8e4985161b0a31c95457a9d7013 {
   uint32_t ip;
   uint8_t mask;
-  bool operator==(v_02f625c0a7ec8df42167994cc126588a const &other) const {
+  bool operator==(t0e8fd8e4985161b0a31c95457a9d7013 const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_02f625c0a7ec8df42167994cc126588a const &r) {
+inline std::ostream &operator<<(std::ostream &os, t0e8fd8e4985161b0a31c95457a9d7013 const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "mask:" << r.mask;
@@ -40,14 +41,14 @@ std::ostream &operator<<(std::ostream &os, v_02f625c0a7ec8df42167994cc126588a co
   return os;
 }
 
-struct e71a8d193957147ef8ce48ce7c420601 {
+struct t51bc874aa6932e2400d81510c260c7c1 {
   uint128_t ip;
   uint8_t mask;
-  bool operator==(e71a8d193957147ef8ce48ce7c420601 const &other) const {
+  bool operator==(t51bc874aa6932e2400d81510c260c7c1 const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-std::ostream &operator<<(std::ostream &os, e71a8d193957147ef8ce48ce7c420601 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t51bc874aa6932e2400d81510c260c7c1 const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "mask:" << r.mask;
@@ -55,11 +56,11 @@ std::ostream &operator<<(std::ostream &os, e71a8d193957147ef8ce48ce7c420601 cons
   return os;
 }
 
-struct v_15f8f12566613b8539906fe1981330fe : public std::variant<
-  v_02f625c0a7ec8df42167994cc126588a,
-  e71a8d193957147ef8ce48ce7c420601
+struct t0ad6dd9e2a8cc9b8c03e7324c11a5d6e : public std::variant<
+  t0e8fd8e4985161b0a31c95457a9d7013,
+  t51bc874aa6932e2400d81510c260c7c1
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_15f8f12566613b8539906fe1981330fe const &v) {
+inline std::ostream &operator<<(std::ostream &os, t0ad6dd9e2a8cc9b8c03e7324c11a5d6e const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -67,6 +68,7 @@ std::ostream &operator<<(std::ostream &os, v_15f8f12566613b8539906fe1981330fe co
   return os;
 }
 
+struct t;
 struct t;
 struct t;
 struct t;
@@ -74,15 +76,23 @@ struct t;
 typedef std::tuple<
   std::string,
   t*
-> v_7fc8d7a0a67813ab72751cde815990fd;
+> t100b7e5cf4b9a621db7a39d7f1d01e5c;
 
+struct t;
+struct t;
 struct t;
 struct t;
 typedef std::tuple<
   t*,
   t*
-> v_88361d7e3c5fc5844d2ff9213ba400b1;
+> t7411897bdb6c9b6e00a01b4eb6506ccf;
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 struct t : public std::variant<
   Void,
   Void,
@@ -111,17 +121,17 @@ struct t : public std::variant<
   uint64_t,
   uint32_t,
   uint128_t,
-  cc9ac153fc4d8a1128cc88896605e565,
-  v_02f625c0a7ec8df42167994cc126588a,
-  e71a8d193957147ef8ce48ce7c420601,
-  v_15f8f12566613b8539906fe1981330fe,
+  t2dfffd4312923e34e0c3ba0f8d708626,
+  t0e8fd8e4985161b0a31c95457a9d7013,
+  t51bc874aa6932e2400d81510c260c7c1,
+  t0ad6dd9e2a8cc9b8c03e7324c11a5d6e,
   Arr<t*>,
   Arr<t*>,
   Arr<t*>,
-  Arr<v_7fc8d7a0a67813ab72751cde815990fd>,
-  Arr<v_88361d7e3c5fc5844d2ff9213ba400b1>
+  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  Arr<t7411897bdb6c9b6e00a01b4eb6506ccf>
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -163,16 +173,36 @@ std::ostream &operator<<(std::ostream &os, t const &v) {
   return os;
 }
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

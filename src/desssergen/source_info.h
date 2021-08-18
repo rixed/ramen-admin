@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_source_info
+#define DESSSER_GEN_source_info
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,29 +7,37 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/src_path.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/raql_operation.h"
+#include "desssergen/retention.h"
+#include "desssergen/function_name.h"
+#include "desssergen/global_variable.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/program_parameter.h"
 
 namespace dessser::gen::source_info {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_3688294421a0ac74c89eed28ac0b000d {
-  dessser::gen::function_name::t name;
-  std::optional<dessser::gen::retention::t> retention;
+struct t185e415437847a4ccee8fa28534b6c9a {
+  dessser::gen::function_name::t_ext name;
+  std::optional<dessser::gen::retention::t_ext> retention;
   bool is_lazy;
   std::string doc;
-  dessser::gen::raql_operation::t operation;
-  dessser::gen::raql_type::t out_record;
-  Lst<dessser::gen::field_name::t> factors;
+  dessser::gen::raql_operation::t_ext operation;
+  dessser::gen::raql_type::t_ext out_record;
+  Lst<dessser::gen::field_name::t_ext> factors;
   std::string signature;
   std::string in_signature;
-  bool operator==(v_3688294421a0ac74c89eed28ac0b000d const &other) const {
+  bool operator==(t185e415437847a4ccee8fa28534b6c9a const &other) const {
     return name == other.name && retention == other.retention && is_lazy == other.is_lazy && doc == other.doc && operation == other.operation && out_record == other.out_record && factors == other.factors && signature == other.signature && in_signature == other.in_signature;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_3688294421a0ac74c89eed28ac0b000d const &r) {
+inline std::ostream &operator<<(std::ostream &os, t185e415437847a4ccee8fa28534b6c9a const &r) {
   os << '{';
   os << "name:" << r.name << ',';
   os << "retention:" << r.retention << ',';
@@ -42,16 +52,16 @@ std::ostream &operator<<(std::ostream &os, v_3688294421a0ac74c89eed28ac0b000d co
   return os;
 }
 
-struct a9adb622935fb3e63633e15c6e6f64d4 {
-  Lst<dessser::gen::program_parameter::t> default_params;
-  dessser::gen::raql_expr::t condition;
-  Lst<dessser::gen::global_variable::t> globals;
-  Lst<v_3688294421a0ac74c89eed28ac0b000d> funcs;
-  bool operator==(a9adb622935fb3e63633e15c6e6f64d4 const &other) const {
+struct tb501b6391922b49ec9aa6664744fde2c {
+  Lst<dessser::gen::program_parameter::t_ext> default_params;
+  dessser::gen::raql_expr::t_ext condition;
+  Lst<dessser::gen::global_variable::t_ext> globals;
+  Lst<t185e415437847a4ccee8fa28534b6c9a> funcs;
+  bool operator==(tb501b6391922b49ec9aa6664744fde2c const &other) const {
     return default_params == other.default_params && condition == other.condition && globals == other.globals && funcs == other.funcs;
   }
 };
-std::ostream &operator<<(std::ostream &os, a9adb622935fb3e63633e15c6e6f64d4 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tb501b6391922b49ec9aa6664744fde2c const &r) {
   os << '{';
   os << "default_params:" << r.default_params << ',';
   os << "condition:" << r.condition << ',';
@@ -61,14 +71,14 @@ std::ostream &operator<<(std::ostream &os, a9adb622935fb3e63633e15c6e6f64d4 cons
   return os;
 }
 
-struct v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 {
+struct t8d05ccd34a6cf5f753650c0c5505a8a0 {
   std::string err_msg;
-  std::optional<dessser::gen::src_path::t> depends_on;
-  bool operator==(v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 const &other) const {
+  std::optional<dessser::gen::src_path::t_ext> depends_on;
+  bool operator==(t8d05ccd34a6cf5f753650c0c5505a8a0 const &other) const {
     return err_msg == other.err_msg && depends_on == other.depends_on;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t8d05ccd34a6cf5f753650c0c5505a8a0 const &r) {
   os << '{';
   os << "err_msg:" << r.err_msg << ',';
   os << "depends_on:" << r.depends_on;
@@ -76,11 +86,11 @@ std::ostream &operator<<(std::ostream &os, v_31d6b3b8d8b6f074fb3bcffbc5b1aa90 co
   return os;
 }
 
-struct v_1d526b39e597fcea4e0328d0a7f6426a : public std::variant<
-  a9adb622935fb3e63633e15c6e6f64d4,
-  v_31d6b3b8d8b6f074fb3bcffbc5b1aa90
+struct tfd2aaf02e0ffa8d9573c7521d96be93a : public std::variant<
+  tb501b6391922b49ec9aa6664744fde2c,
+  t8d05ccd34a6cf5f753650c0c5505a8a0
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_1d526b39e597fcea4e0328d0a7f6426a const &v) {
+inline std::ostream &operator<<(std::ostream &os, tfd2aaf02e0ffa8d9573c7521d96be93a const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -91,12 +101,12 @@ std::ostream &operator<<(std::ostream &os, v_1d526b39e597fcea4e0328d0a7f6426a co
 struct t {
   std::string src_ext;
   Lst<std::string> md5s;
-  v_1d526b39e597fcea4e0328d0a7f6426a detail;
+  tfd2aaf02e0ffa8d9573c7521d96be93a detail;
   bool operator==(t const &other) const {
     return src_ext == other.src_ext && md5s == other.md5s && detail == other.detail;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "src_ext:" << r.src_ext << ',';
   os << "md5s:" << r.md5s << ',';
@@ -106,15 +116,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

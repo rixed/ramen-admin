@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_replayer
+#define DESSSER_GEN_replayer
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,16 +7,16 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/time_range.h"
 
 namespace dessser::gen::replayer {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::time_range::t time_range;
+  dessser::gen::time_range::t_ext time_range;
   double creation;
   std::optional<uint32_t> pid;
   double last_killed;
@@ -24,7 +26,7 @@ struct t {
     return time_range == other.time_range && creation == other.creation && pid == other.pid && last_killed == other.last_killed && exit_status == other.exit_status && channels == other.channels;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "time_range:" << r.time_range << ',';
   os << "creation:" << r.creation << ',';
@@ -37,15 +39,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

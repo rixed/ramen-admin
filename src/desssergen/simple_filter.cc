@@ -16,6 +16,11 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/field_name.h"
+
+
+namespace dessser::gen::simple_filter {
+using dessser::operator<<;
 
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
@@ -23,59 +28,46 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser::gen::simple_filter {
-// don't ask me why:
-using dessser::operator<<;
-
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::field_name::t lhs;
+  dessser::gen::field_name::t_ext lhs;
   std::string rhs;
   std::string op;
   bool operator==(t const &other) const {
     return lhs == other.lhs && rhs == other.rhs && op == other.op;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
-  os << '{';
-  os << "lhs:" << r.lhs << ',';
-  os << "rhs:" << r.rhs << ',';
-  os << "op:" << r.op;
-  os << '}';
-  return os;
-}
+typedef std::tuple<
+  t*,
+  Pointer
+> t45217dce3db5a9a49037839afd0048e8;
 
 typedef std::tuple<
-  t,
+  dessser::gen::field_name::t_ext,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
-
-typedef std::tuple<
-  dessser::gen::field_name::t,
-  Pointer
-> c50aa083fa818c6eeca389b0025dda98;
+> t273a2b7978f5b466a128a51c1cc4a27b;
 
 typedef std::tuple<
   Size,
   Pointer
-> v_41b0681ed7f1f185fd3e6c4dcdc13110;
+> t8beb80162423aee37bd383e9b6834c9c;
 
 typedef std::tuple<
   uint8_t,
   Pointer
-> v_1d5843897434feb24d158f3793db9189;
+> tb3f98ea670610d40658a618de3ec7b90;
 
 typedef std::tuple<
   std::string,
   Pointer
-> v_46a5e81c2410b000ff0adea6dc198147;
+> tef94b55d8809251f13165d9a05bd9d0e;
 
 typedef std::tuple<
   Bytes,
   Pointer
-> f921d1e0a170c3c04148c21704db9c45;
+> t188345aa49abd0cb47ff73fedc219f08;
 
 /* ----------- */
 /* Definitions */
@@ -111,16 +103,16 @@ typedef std::tuple<
                   (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_106"))))) 
           (bytes-of-string (get-field "op" (param 0))))))
  */
-static std::function<Pointer(t,Pointer)> to_row_binary_init()
+static std::function<Pointer(t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t id_2 { p_0.lhs };
-    Pointer id_3 { id_1(id_2, p_1) };
+  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+    auto fun1 { dessser::gen::field_name::to_row_binary };
+    dessser::gen::field_name::t_ext id_2 { p_0->lhs };
+    Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_101 { id_3 };
-      std::string id_5 { p_0.rhs };
+      std::string id_5 { p_0->rhs };
       uint32_t id_6 { (uint32_t)id_5.size() };
       Vec<1, uint32_t> id_7 {  id_6  };
       Pointer let_res_8;
@@ -155,27 +147,31 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             }
             Pointer id_28 { id_14.writeU8(choose_res_19) };
             Void id_29 { ((void)(leb128_ptr_103[id_12] = id_28), VOID) };
+            (void)id_29;
             uint8_t id_30 { 0 };
             uint8_t id_31 { 0 };
             uint32_t id_32 { leb128_sz_102[id_31] };
             uint8_t id_33 { 7 };
             uint32_t id_34 { uint32_t(id_32 >> id_33) };
             Void id_35 { ((void)(leb128_sz_102[id_30] = id_34), VOID) };
+            (void)id_35;
             uint8_t id_36 { 0 };
             uint32_t id_37 { leb128_sz_102[id_36] };
             uint32_t id_38 { 0U };
             bool id_39 { bool(id_37 > id_38) };
             while_flag_11 = id_39;
             if (while_flag_11) {
+              (void)VOID;
             }
           } while (while_flag_11);
+          (void)VOID;
           uint8_t id_40 { 0 };
           Pointer id_41 { leb128_ptr_103[id_40] };
           let_res_10 = id_41;
         }
         let_res_8 = let_res_10;
       }
-      std::string id_42 { p_0.rhs };
+      std::string id_42 { p_0->rhs };
       Bytes id_43 { id_42 };
       Pointer id_44 { let_res_8.writeBytes(id_43) };
       let_res_4 = id_44;
@@ -183,7 +179,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
     Pointer let_res_45;
     {
       Pointer srec_dst_104 { let_res_4 };
-      std::string id_46 { p_0.op };
+      std::string id_46 { p_0->op };
       uint32_t id_47 { (uint32_t)id_46.size() };
       Vec<1, uint32_t> id_48 {  id_47  };
       Pointer let_res_49;
@@ -218,27 +214,31 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             }
             Pointer id_69 { id_55.writeU8(choose_res_60) };
             Void id_70 { ((void)(leb128_ptr_106[id_53] = id_69), VOID) };
+            (void)id_70;
             uint8_t id_71 { 0 };
             uint8_t id_72 { 0 };
             uint32_t id_73 { leb128_sz_105[id_72] };
             uint8_t id_74 { 7 };
             uint32_t id_75 { uint32_t(id_73 >> id_74) };
             Void id_76 { ((void)(leb128_sz_105[id_71] = id_75), VOID) };
+            (void)id_76;
             uint8_t id_77 { 0 };
             uint32_t id_78 { leb128_sz_105[id_77] };
             uint32_t id_79 { 0U };
             bool id_80 { bool(id_78 > id_79) };
             while_flag_52 = id_80;
             if (while_flag_52) {
+              (void)VOID;
             }
           } while (while_flag_52);
+          (void)VOID;
           uint8_t id_81 { 0 };
           Pointer id_82 { leb128_ptr_106[id_81] };
           let_res_51 = id_82;
         }
         let_res_49 = let_res_51;
       }
-      std::string id_83 { p_0.op };
+      std::string id_83 { p_0->op };
       Bytes id_84 { id_83 };
       Pointer id_85 { let_res_49.writeBytes(id_84) };
       let_res_45 = id_85;
@@ -248,7 +248,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{lhs: $field_name; rhs: STRING; op: STRING}")
@@ -273,16 +273,16 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
                   (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_100")))))) 
             (size-of-u32 (string-length (get-field "op" (param 0))))))))
  */
-static std::function<Size(t)> sersize_of_row_binary_init()
+static std::function<Size(t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun86 { [&fun86](t p_0) {
-    std::function<Size(dessser::gen::field_name::t)> id_87 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t id_88 { p_0.lhs };
-    Size id_89 { id_87(id_88) };
+  std::function<Size(t*)> fun86 { [&fun86](t* p_0) {
+    auto fun87 { dessser::gen::field_name::sersize_of_row_binary };
+    dessser::gen::field_name::t_ext id_88 { p_0->lhs };
+    Size id_89 { fun87(id_88) };
     Size let_res_90;
     {
       Size sz_93 { id_89 };
-      std::string id_91 { p_0.rhs };
+      std::string id_91 { p_0->rhs };
       uint32_t id_92 { (uint32_t)id_91.size() };
       Vec<1, uint32_t> id_93 {  id_92  };
       Size let_res_94;
@@ -310,8 +310,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               uint32_t id_109 { 1U };
               uint32_t id_110 { uint32_t(id_108 + id_109) };
               Void id_111 { ((void)(lebsz_ref_96[id_106] = id_110), VOID) };
+              (void)id_111;
             }
           } while (while_flag_98);
+          (void)VOID;
           uint8_t id_112 { 0 };
           uint32_t id_113 { lebsz_ref_96[id_112] };
           Size id_114 { Size(id_113) };
@@ -319,7 +321,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         }
         let_res_94 = let_res_97;
       }
-      std::string id_115 { p_0.rhs };
+      std::string id_115 { p_0->rhs };
       uint32_t id_116 { (uint32_t)id_115.size() };
       Size id_117 { Size(id_116) };
       Size id_118 { Size(let_res_94 + id_117) };
@@ -329,7 +331,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
     Size let_res_120;
     {
       Size sz_97 { let_res_90 };
-      std::string id_121 { p_0.op };
+      std::string id_121 { p_0->op };
       uint32_t id_122 { (uint32_t)id_121.size() };
       Vec<1, uint32_t> id_123 {  id_122  };
       Size let_res_124;
@@ -357,8 +359,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               uint32_t id_139 { 1U };
               uint32_t id_140 { uint32_t(id_138 + id_139) };
               Void id_141 { ((void)(lebsz_ref_100[id_136] = id_140), VOID) };
+              (void)id_141;
             }
           } while (while_flag_128);
+          (void)VOID;
           uint8_t id_142 { 0 };
           uint32_t id_143 { lebsz_ref_100[id_142] };
           Size id_144 { Size(id_143) };
@@ -366,7 +370,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         }
         let_res_124 = let_res_127;
       }
-      std::string id_145 { p_0.op };
+      std::string id_145 { p_0->op };
       uint32_t id_146 { (uint32_t)id_145.size() };
       Size id_147 { Size(id_146) };
       Size id_148 { Size(let_res_124 + id_147) };
@@ -378,7 +382,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
    };
   return fun86;
 }
-std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -421,46 +425,47 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
                   (let-pair "dstring2_fst_84" "dstring2_snd_85" (read-bytes (identifier "dstring1_snd_82") (identifier "dstring1_fst_81"))
                     (make-tup (make-rec (string "lhs") (identifier "drec_fst_57") (string "rhs") (identifier "drec_fst_72") (string "op") (string-of-bytes (identifier "dstring2_fst_84"))) (identifier "dstring2_snd_85"))))))))))
  */
-static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
+static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
 {
-  std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun150 { [&fun150](Pointer p_0) {
-    std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_151 { dessser::gen::field_name::of_row_binary };
-    c50aa083fa818c6eeca389b0025dda98 id_152 { id_151(p_0) };
-    f63f919559f0d70225bd0da5dd9bcafc let_res_153;
+  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun150 { [&fun150](Pointer p_0) {
+    auto fun151 { dessser::gen::field_name::of_row_binary };
+    t273a2b7978f5b466a128a51c1cc4a27b id_152 { fun151(p_0) };
+    t45217dce3db5a9a49037839afd0048e8 let_res_153;
     {
-      c50aa083fa818c6eeca389b0025dda98 drec_56 { id_152 };
-      f63f919559f0d70225bd0da5dd9bcafc letpair_res_154;
+      t273a2b7978f5b466a128a51c1cc4a27b drec_56 { id_152 };
+      t45217dce3db5a9a49037839afd0048e8 letpair_res_154;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
         uint32_t id_155 { 0U };
         Vec<1, uint32_t> id_156 {  id_155  };
-        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_157;
+        t8beb80162423aee37bd383e9b6834c9c let_res_157;
         {
           Vec<1, uint32_t> leb_ref_59 { id_156 };
           uint8_t id_158 { 0 };
           Vec<1, uint8_t> id_159 {  id_158  };
-          v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_160;
+          t8beb80162423aee37bd383e9b6834c9c let_res_160;
           {
             Vec<1, uint8_t> shft_ref_60 { id_159 };
             Vec<1, Pointer> id_161 {  drec_snd_58  };
-            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_162;
+            t8beb80162423aee37bd383e9b6834c9c let_res_162;
             {
               Vec<1, Pointer> p_ref_61 { id_161 };
               bool while_flag_163 { true };
               do {
                 uint8_t id_164 { 0 };
                 Pointer id_165 { p_ref_61[id_164] };
-                v_1d5843897434feb24d158f3793db9189 id_166 { id_165.readU8() };
+                tb3f98ea670610d40658a618de3ec7b90 id_166 { id_165.readU8() };
                 bool let_res_167;
                 {
-                  v_1d5843897434feb24d158f3793db9189 leb128_62 { id_166 };
+                  tb3f98ea670610d40658a618de3ec7b90 leb128_62 { id_166 };
                   bool letpair_res_168;
                   {
                     auto leb128_fst_63 { std::get<0>(leb128_62) };
                     auto leb128_snd_64 { std::get<1>(leb128_62) };
                     uint8_t id_169 { 0 };
                     Void id_170 { ((void)(p_ref_61[id_169] = leb128_snd_64), VOID) };
+                    (void)id_170;
                     uint8_t id_171 { 0 };
                     uint8_t id_172 { 127 };
                     uint8_t id_173 { uint8_t(leb128_fst_63 & id_172) };
@@ -472,12 +477,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     uint32_t id_179 { leb_ref_59[id_178] };
                     uint32_t id_180 { uint32_t(id_177 | id_179) };
                     Void id_181 { ((void)(leb_ref_59[id_171] = id_180), VOID) };
+                    (void)id_181;
                     uint8_t id_182 { 0 };
                     uint8_t id_183 { 0 };
                     uint8_t id_184 { shft_ref_60[id_183] };
                     uint8_t id_185 { 7 };
                     uint8_t id_186 { uint8_t(id_184 + id_185) };
                     Void id_187 { ((void)(shft_ref_60[id_182] = id_186), VOID) };
+                    (void)id_187;
                     uint8_t id_188 { 128 };
                     bool id_189 { bool(leb128_fst_63 >= id_188) };
                     letpair_res_168 = id_189;
@@ -486,75 +493,78 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                 }
                 while_flag_163 = let_res_167;
                 if (while_flag_163) {
+                  (void)VOID;
                 }
               } while (while_flag_163);
+              (void)VOID;
               uint8_t id_190 { 0 };
               uint32_t id_191 { leb_ref_59[id_190] };
               Size id_192 { Size(id_191) };
               uint8_t id_193 { 0 };
               Pointer id_194 { p_ref_61[id_193] };
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 id_195 {  id_192, id_194  };
+              t8beb80162423aee37bd383e9b6834c9c id_195 { id_192, id_194 };
               let_res_162 = id_195;
             }
             let_res_160 = let_res_162;
           }
           let_res_157 = let_res_160;
         }
-        v_46a5e81c2410b000ff0adea6dc198147 let_res_196;
+        tef94b55d8809251f13165d9a05bd9d0e let_res_196;
         {
-          v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_65 { let_res_157 };
-          v_46a5e81c2410b000ff0adea6dc198147 letpair_res_197;
+          t8beb80162423aee37bd383e9b6834c9c dstring1_65 { let_res_157 };
+          tef94b55d8809251f13165d9a05bd9d0e letpair_res_197;
           {
             auto dstring1_fst_66 { std::get<0>(dstring1_65) };
             auto dstring1_snd_67 { std::get<1>(dstring1_65) };
-            f921d1e0a170c3c04148c21704db9c45 id_198 { dstring1_snd_67.readBytes(dstring1_fst_66) };
-            v_46a5e81c2410b000ff0adea6dc198147 letpair_res_199;
+            t188345aa49abd0cb47ff73fedc219f08 id_198 { dstring1_snd_67.readBytes(dstring1_fst_66) };
+            tef94b55d8809251f13165d9a05bd9d0e letpair_res_199;
             {
               auto dstring2_fst_69 { std::get<0>(id_198) };
               auto dstring2_snd_70 { std::get<1>(id_198) };
               std::string id_200 { dstring2_fst_69.toString() };
-              v_46a5e81c2410b000ff0adea6dc198147 id_201 {  id_200, dstring2_snd_70  };
+              tef94b55d8809251f13165d9a05bd9d0e id_201 { id_200, dstring2_snd_70 };
               letpair_res_199 = id_201;
             }
             letpair_res_197 = letpair_res_199;
           }
           let_res_196 = letpair_res_197;
         }
-        f63f919559f0d70225bd0da5dd9bcafc let_res_202;
+        t45217dce3db5a9a49037839afd0048e8 let_res_202;
         {
-          v_46a5e81c2410b000ff0adea6dc198147 drec_71 { let_res_196 };
-          f63f919559f0d70225bd0da5dd9bcafc letpair_res_203;
+          tef94b55d8809251f13165d9a05bd9d0e drec_71 { let_res_196 };
+          t45217dce3db5a9a49037839afd0048e8 letpair_res_203;
           {
             auto drec_fst_72 { std::get<0>(drec_71) };
             auto drec_snd_73 { std::get<1>(drec_71) };
             uint32_t id_204 { 0U };
             Vec<1, uint32_t> id_205 {  id_204  };
-            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_206;
+            t8beb80162423aee37bd383e9b6834c9c let_res_206;
             {
               Vec<1, uint32_t> leb_ref_74 { id_205 };
               uint8_t id_207 { 0 };
               Vec<1, uint8_t> id_208 {  id_207  };
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_209;
+              t8beb80162423aee37bd383e9b6834c9c let_res_209;
               {
                 Vec<1, uint8_t> shft_ref_75 { id_208 };
                 Vec<1, Pointer> id_210 {  drec_snd_73  };
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_211;
+                t8beb80162423aee37bd383e9b6834c9c let_res_211;
                 {
                   Vec<1, Pointer> p_ref_76 { id_210 };
                   bool while_flag_212 { true };
                   do {
                     uint8_t id_213 { 0 };
                     Pointer id_214 { p_ref_76[id_213] };
-                    v_1d5843897434feb24d158f3793db9189 id_215 { id_214.readU8() };
+                    tb3f98ea670610d40658a618de3ec7b90 id_215 { id_214.readU8() };
                     bool let_res_216;
                     {
-                      v_1d5843897434feb24d158f3793db9189 leb128_77 { id_215 };
+                      tb3f98ea670610d40658a618de3ec7b90 leb128_77 { id_215 };
                       bool letpair_res_217;
                       {
                         auto leb128_fst_78 { std::get<0>(leb128_77) };
                         auto leb128_snd_79 { std::get<1>(leb128_77) };
                         uint8_t id_218 { 0 };
                         Void id_219 { ((void)(p_ref_76[id_218] = leb128_snd_79), VOID) };
+                        (void)id_219;
                         uint8_t id_220 { 0 };
                         uint8_t id_221 { 127 };
                         uint8_t id_222 { uint8_t(leb128_fst_78 & id_221) };
@@ -566,12 +576,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         uint32_t id_228 { leb_ref_74[id_227] };
                         uint32_t id_229 { uint32_t(id_226 | id_228) };
                         Void id_230 { ((void)(leb_ref_74[id_220] = id_229), VOID) };
+                        (void)id_230;
                         uint8_t id_231 { 0 };
                         uint8_t id_232 { 0 };
                         uint8_t id_233 { shft_ref_75[id_232] };
                         uint8_t id_234 { 7 };
                         uint8_t id_235 { uint8_t(id_233 + id_234) };
                         Void id_236 { ((void)(shft_ref_75[id_231] = id_235), VOID) };
+                        (void)id_236;
                         uint8_t id_237 { 128 };
                         bool id_238 { bool(leb128_fst_78 >= id_237) };
                         letpair_res_217 = id_238;
@@ -580,35 +592,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     }
                     while_flag_212 = let_res_216;
                     if (while_flag_212) {
+                      (void)VOID;
                     }
                   } while (while_flag_212);
+                  (void)VOID;
                   uint8_t id_239 { 0 };
                   uint32_t id_240 { leb_ref_74[id_239] };
                   Size id_241 { Size(id_240) };
                   uint8_t id_242 { 0 };
                   Pointer id_243 { p_ref_76[id_242] };
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 id_244 {  id_241, id_243  };
+                  t8beb80162423aee37bd383e9b6834c9c id_244 { id_241, id_243 };
                   let_res_211 = id_244;
                 }
                 let_res_209 = let_res_211;
               }
               let_res_206 = let_res_209;
             }
-            f63f919559f0d70225bd0da5dd9bcafc let_res_245;
+            t45217dce3db5a9a49037839afd0048e8 let_res_245;
             {
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_80 { let_res_206 };
-              f63f919559f0d70225bd0da5dd9bcafc letpair_res_246;
+              t8beb80162423aee37bd383e9b6834c9c dstring1_80 { let_res_206 };
+              t45217dce3db5a9a49037839afd0048e8 letpair_res_246;
               {
                 auto dstring1_fst_81 { std::get<0>(dstring1_80) };
                 auto dstring1_snd_82 { std::get<1>(dstring1_80) };
-                f921d1e0a170c3c04148c21704db9c45 id_247 { dstring1_snd_82.readBytes(dstring1_fst_81) };
-                f63f919559f0d70225bd0da5dd9bcafc letpair_res_248;
+                t188345aa49abd0cb47ff73fedc219f08 id_247 { dstring1_snd_82.readBytes(dstring1_fst_81) };
+                t45217dce3db5a9a49037839afd0048e8 letpair_res_248;
                 {
                   auto dstring2_fst_84 { std::get<0>(id_247) };
                   auto dstring2_snd_85 { std::get<1>(id_247) };
                   std::string id_249 { dstring2_fst_84.toString() };
-                  t id_250 {  .lhs = drec_fst_57, .rhs = drec_fst_72, .op = id_249  };
-                  f63f919559f0d70225bd0da5dd9bcafc id_251 {  id_250, dstring2_snd_85  };
+                  t* id_250 { new t({ .lhs = drec_fst_57, .rhs = drec_fst_72, .op = id_249 }) };
+                  t45217dce3db5a9a49037839afd0048e8 id_251 { id_250, dstring2_snd_85 };
                   letpair_res_248 = id_251;
                 }
                 letpair_res_246 = letpair_res_248;
@@ -628,7 +642,8 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
    };
   return fun150;
 }
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t *t_ext;
 
 }

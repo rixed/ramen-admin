@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_alert
+#define DESSSER_GEN_alert
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,19 +7,26 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/field_name.h"
+#include "desssergen/field_name.h"
+#include "desssergen/field_name.h"
+#include "desssergen/simple_filter.h"
+#include "desssergen/field_name.h"
+#include "desssergen/simple_filter.h"
+#include "desssergen/field_name.h"
+#include "desssergen/fq_name.h"
 
 namespace dessser::gen::alert {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_6bc058134828a7663c6e9878f9b39a3c : public std::variant<
+struct t8bc49a7c0845592f1da677dadb19d7b9 : public std::variant<
   double,
   double
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_6bc058134828a7663c6e9878f9b39a3c const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8bc49a7c0845592f1da677dadb19d7b9 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -25,18 +34,18 @@ std::ostream &operator<<(std::ostream &os, v_6bc058134828a7663c6e9878f9b39a3c co
   return os;
 }
 
-struct v_3803b7ae191c648b9c5667fedf347d4e {
+struct t544a15e8f8751dfc49c4f9b48bdf42f0 {
   double avg_window;
   uint32_t sample_size;
   double percentile;
   uint32_t seasonality;
   double smooth_factor;
-  v_6bc058134828a7663c6e9878f9b39a3c max_distance;
-  bool operator==(v_3803b7ae191c648b9c5667fedf347d4e const &other) const {
+  t8bc49a7c0845592f1da677dadb19d7b9 max_distance;
+  bool operator==(t544a15e8f8751dfc49c4f9b48bdf42f0 const &other) const {
     return avg_window == other.avg_window && sample_size == other.sample_size && percentile == other.percentile && seasonality == other.seasonality && smooth_factor == other.smooth_factor && max_distance == other.max_distance;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_3803b7ae191c648b9c5667fedf347d4e const &r) {
+inline std::ostream &operator<<(std::ostream &os, t544a15e8f8751dfc49c4f9b48bdf42f0 const &r) {
   os << '{';
   os << "avg_window:" << r.avg_window << ',';
   os << "sample_size:" << r.sample_size << ',';
@@ -48,11 +57,11 @@ std::ostream &operator<<(std::ostream &os, v_3803b7ae191c648b9c5667fedf347d4e co
   return os;
 }
 
-struct v_61ea399b3f4cf5e20f4606674ff2217c : public std::variant<
+struct t0dfb4ea024145a5cd5544ed59acd06d6 : public std::variant<
   double,
-  v_3803b7ae191c648b9c5667fedf347d4e
+  t544a15e8f8751dfc49c4f9b48bdf42f0
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_61ea399b3f4cf5e20f4606674ff2217c const &v) {
+inline std::ostream &operator<<(std::ostream &os, t0dfb4ea024145a5cd5544ed59acd06d6 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -61,25 +70,25 @@ std::ostream &operator<<(std::ostream &os, v_61ea399b3f4cf5e20f4606674ff2217c co
 }
 
 typedef std::tuple<
-  dessser::gen::field_name::t,
+  dessser::gen::field_name::t_ext,
   std::string
-> b0391754a7662c5a5541af429d4123b4;
+> t7d737a471b58c17b56f5c31f8c6e717d;
 
 struct t {
-  dessser::gen::fq_name::t table;
-  dessser::gen::field_name::t column;
+  dessser::gen::fq_name::t_ext table;
+  dessser::gen::field_name::t_ext column;
   bool enabled;
-  Lst<dessser::gen::simple_filter::t> where;
-  std::optional<Lst<dessser::gen::field_name::t>> group_by;
-  Lst<dessser::gen::simple_filter::t> having;
-  v_61ea399b3f4cf5e20f4606674ff2217c threshold;
+  Lst<dessser::gen::simple_filter::t_ext> where;
+  std::optional<Lst<dessser::gen::field_name::t_ext>> group_by;
+  Lst<dessser::gen::simple_filter::t_ext> having;
+  t0dfb4ea024145a5cd5544ed59acd06d6 threshold;
   double hysteresis;
   double duration;
   double ratio;
   double time_step;
-  Lst<dessser::gen::field_name::t> tops;
-  Lst<dessser::gen::field_name::t> carry_fields;
-  Lst<b0391754a7662c5a5541af429d4123b4> carry_csts;
+  Lst<dessser::gen::field_name::t_ext> tops;
+  Lst<dessser::gen::field_name::t_ext> carry_fields;
+  Lst<t7d737a471b58c17b56f5c31f8c6e717d> carry_csts;
   std::string id;
   std::string desc_title;
   std::string desc_firing;
@@ -88,7 +97,7 @@ struct t {
     return table == other.table && column == other.column && enabled == other.enabled && where == other.where && group_by == other.group_by && having == other.having && threshold == other.threshold && hysteresis == other.hysteresis && duration == other.duration && ratio == other.ratio && time_step == other.time_step && tops == other.tops && carry_fields == other.carry_fields && carry_csts == other.carry_csts && id == other.id && desc_title == other.desc_title && desc_firing == other.desc_firing && desc_recovery == other.desc_recovery;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "table:" << r.table << ',';
   os << "column:" << r.column << ',';
@@ -113,15 +122,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

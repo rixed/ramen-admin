@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_time_range
+#define DESSSER_GEN_time_range
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,21 +9,20 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::time_range {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_1d53ca1dfc33d45608c16f60daf686b4 {
+struct tf32344673bb22ed5e3097268b352679e {
   double since;
   double until;
   bool growing;
-  bool operator==(v_1d53ca1dfc33d45608c16f60daf686b4 const &other) const {
+  bool operator==(tf32344673bb22ed5e3097268b352679e const &other) const {
     return since == other.since && until == other.until && growing == other.growing;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_1d53ca1dfc33d45608c16f60daf686b4 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tf32344673bb22ed5e3097268b352679e const &r) {
   os << '{';
   os << "since:" << r.since << ',';
   os << "until:" << r.until << ',';
@@ -30,17 +31,19 @@ std::ostream &operator<<(std::ostream &os, v_1d53ca1dfc33d45608c16f60daf686b4 co
   return os;
 }
 
-typedef Arr<v_1d53ca1dfc33d45608c16f60daf686b4> t;
+typedef Arr<tf32344673bb22ed5e3097268b352679e> t;
 typedef std::tuple<
   t,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t519c57b31160411c6989716f3a9782e0;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t&,Pointer)> to_row_binary;
-std::function<Size(t&)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t&,Pointer)> to_row_binary;
+extern std::function<Size(t&)> sersize_of_row_binary;
+extern std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary;
+typedef t t_ext;
 
 }
+#endif

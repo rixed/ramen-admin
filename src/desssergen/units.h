@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_units
+#define DESSSER_GEN_units
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,7 +9,6 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::units {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
@@ -16,24 +17,26 @@ using dessser::operator<<;
 typedef std::tuple<
   double,
   bool
-> v_1a724825aad0221aa9e0a09417bb3c5f;
+> tea0eebdc0b2e9b51f69e77168901ab2f;
 
 typedef std::tuple<
   std::string,
-  v_1a724825aad0221aa9e0a09417bb3c5f
-> e845b33138a56d15c346dc169018381f;
+  tea0eebdc0b2e9b51f69e77168901ab2f
+> t3a9ea1f12a4e632b6e111d6d47b80632;
 
-typedef Arr<e845b33138a56d15c346dc169018381f> t;
+typedef Arr<t3a9ea1f12a4e632b6e111d6d47b80632> t;
 typedef std::tuple<
   t,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t519c57b31160411c6989716f3a9782e0;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t&,Pointer)> to_row_binary;
-std::function<Size(t&)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t&,Pointer)> to_row_binary;
+extern std::function<Size(t&)> sersize_of_row_binary;
+extern std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary;
+typedef t t_ext;
 
 }
+#endif

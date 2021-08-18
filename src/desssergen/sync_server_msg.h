@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_sync_server_msg
+#define DESSSER_GEN_sync_server_msg
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,24 +7,31 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_socket.h"
 
 namespace dessser::gen::sync_server_msg {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_940f244208f0d3b12c9ae508dcaea75c {
-  dessser::gen::sync_key::t k;
-  dessser::gen::sync_value::t v;
+struct td69b18863d7c63937f8798ddedc78b80 {
+  dessser::gen::sync_key::t_ext k;
+  dessser::gen::sync_value::t_ext v;
   std::string uid;
   double mtime;
-  bool operator==(v_940f244208f0d3b12c9ae508dcaea75c const &other) const {
+  bool operator==(td69b18863d7c63937f8798ddedc78b80 const &other) const {
     return k == other.k && v == other.v && uid == other.uid && mtime == other.mtime;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_940f244208f0d3b12c9ae508dcaea75c const &r) {
+inline std::ostream &operator<<(std::ostream &os, td69b18863d7c63937f8798ddedc78b80 const &r) {
   os << '{';
   os << "k:" << r.k << ',';
   os << "v:" << r.v << ',';
@@ -32,20 +41,20 @@ std::ostream &operator<<(std::ostream &os, v_940f244208f0d3b12c9ae508dcaea75c co
   return os;
 }
 
-struct v_5e1953df5130fdcab794186d201fd5e8 {
-  dessser::gen::sync_key::t k;
-  dessser::gen::sync_value::t v;
+struct tf4b1f78fa23e7e2322a6e3241589000c {
+  dessser::gen::sync_key::t_ext k;
+  dessser::gen::sync_value::t_ext v;
   std::string uid;
   double mtime;
   bool can_write;
   bool can_del;
   std::string owner;
   double expiry;
-  bool operator==(v_5e1953df5130fdcab794186d201fd5e8 const &other) const {
+  bool operator==(tf4b1f78fa23e7e2322a6e3241589000c const &other) const {
     return k == other.k && v == other.v && uid == other.uid && mtime == other.mtime && can_write == other.can_write && can_del == other.can_del && owner == other.owner && expiry == other.expiry;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_5e1953df5130fdcab794186d201fd5e8 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tf4b1f78fa23e7e2322a6e3241589000c const &r) {
   os << '{';
   os << "k:" << r.k << ',';
   os << "v:" << r.v << ',';
@@ -59,15 +68,15 @@ std::ostream &operator<<(std::ostream &os, v_5e1953df5130fdcab794186d201fd5e8 co
   return os;
 }
 
-struct v_3cca14702fcf070f776a6badc4224e9d {
-  dessser::gen::sync_key::t k;
+struct t1861dadd357f09584a634ac54a194ddc {
+  dessser::gen::sync_key::t_ext k;
   std::string owner;
   double expiry;
-  bool operator==(v_3cca14702fcf070f776a6badc4224e9d const &other) const {
+  bool operator==(t1861dadd357f09584a634ac54a194ddc const &other) const {
     return k == other.k && owner == other.owner && expiry == other.expiry;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_3cca14702fcf070f776a6badc4224e9d const &r) {
+inline std::ostream &operator<<(std::ostream &os, t1861dadd357f09584a634ac54a194ddc const &r) {
   os << '{';
   os << "k:" << r.k << ',';
   os << "owner:" << r.owner << ',';
@@ -77,15 +86,15 @@ std::ostream &operator<<(std::ostream &os, v_3cca14702fcf070f776a6badc4224e9d co
 }
 
 struct t : public std::variant<
-  dessser::gen::sync_socket::t,
+  dessser::gen::sync_socket::t_ext,
   std::string,
-  v_940f244208f0d3b12c9ae508dcaea75c,
-  v_5e1953df5130fdcab794186d201fd5e8,
-  dessser::gen::sync_key::t,
-  v_3cca14702fcf070f776a6badc4224e9d,
-  dessser::gen::sync_key::t
+  td69b18863d7c63937f8798ddedc78b80,
+  tf4b1f78fa23e7e2322a6e3241589000c,
+  dessser::gen::sync_key::t_ext,
+  t1861dadd357f09584a634ac54a194ddc,
+  dessser::gen::sync_key::t_ext
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -99,15 +108,17 @@ std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_sync_socket
+#define DESSSER_GEN_sync_socket
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -7,17 +9,16 @@
 #include "dessser/runtime.h"
 
 namespace dessser::gen::sync_socket {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct cc9ac153fc4d8a1128cc88896605e565 : public std::variant<
+struct t2dfffd4312923e34e0c3ba0f8d708626 : public std::variant<
   uint32_t,
   uint128_t
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, cc9ac153fc4d8a1128cc88896605e565 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708626 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -26,13 +27,13 @@ std::ostream &operator<<(std::ostream &os, cc9ac153fc4d8a1128cc88896605e565 cons
 }
 
 struct t {
-  cc9ac153fc4d8a1128cc88896605e565 ip;
+  t2dfffd4312923e34e0c3ba0f8d708626 ip;
   uint16_t port;
   bool operator==(t const &other) const {
     return ip == other.ip && port == other.port;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "port:" << r.port;
@@ -41,15 +42,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

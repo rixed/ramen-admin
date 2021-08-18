@@ -44,7 +44,7 @@ all: $(INSTALLED)
 	@extra=""; \
 	$(DESSSERC) lib --quiet --fieldmask=without -O3 \
 	  --input-encoding row-binary --output-encoding row-binary \
-	  --language=C++ --schema=@$< \
+	  --language=C++ --include-base=desssergen --schema=@$< \
 	  -o $@
 
 TYPE_SOURCES = \

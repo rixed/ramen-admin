@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_dashboard_widget
+#define DESSSER_GEN_dashboard_widget
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,29 +7,29 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/fq_function_name.h"
 
 namespace dessser::gen::dashboard_widget {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct ed606adbafa604d06597791e201d008c : public std::variant<
+struct tafdc15d083fb8c2b34d5c9537c7c3b35 : public std::variant<
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, ed606adbafa604d06597791e201d008c const &v) {
+inline std::ostream &operator<<(std::ostream &os, tafdc15d083fb8c2b34d5c9537c7c3b35 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
   }
   return os;
 }
 
-struct v_64020630bdd04b37ed2ef6f539d0c800 : public std::variant<
+struct t2dbd741445d7e42b47d58662914c784b : public std::variant<
   Void,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_64020630bdd04b37ed2ef6f539d0c800 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t2dbd741445d7e42b47d58662914c784b const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -35,15 +37,15 @@ std::ostream &operator<<(std::ostream &os, v_64020630bdd04b37ed2ef6f539d0c800 co
   return os;
 }
 
-struct v_5fc1c30a943a0c1ef8da3535f3079eba {
+struct tc9794b1ac9bbf493d6865b43481eb540 {
   bool left;
   bool force_zero;
-  v_64020630bdd04b37ed2ef6f539d0c800 scale;
-  bool operator==(v_5fc1c30a943a0c1ef8da3535f3079eba const &other) const {
+  t2dbd741445d7e42b47d58662914c784b scale;
+  bool operator==(tc9794b1ac9bbf493d6865b43481eb540 const &other) const {
     return left == other.left && force_zero == other.force_zero && scale == other.scale;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_5fc1c30a943a0c1ef8da3535f3079eba const &r) {
+inline std::ostream &operator<<(std::ostream &os, tc9794b1ac9bbf493d6865b43481eb540 const &r) {
   os << '{';
   os << "left:" << r.left << ',';
   os << "force_zero:" << r.force_zero << ',';
@@ -52,13 +54,13 @@ std::ostream &operator<<(std::ostream &os, v_5fc1c30a943a0c1ef8da3535f3079eba co
   return os;
 }
 
-struct e5c3611dd9d3a05067d08e10507ebe28 : public std::variant<
+struct t7ae9bb09a1a0070adced41151deef93f : public std::variant<
   Void,
   Void,
   Void,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, e5c3611dd9d3a05067d08e10507ebe28 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t7ae9bb09a1a0070adced41151deef93f const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -68,18 +70,18 @@ std::ostream &operator<<(std::ostream &os, e5c3611dd9d3a05067d08e10507ebe28 cons
   return os;
 }
 
-struct v_67a0e55ce68284d9f234903bf8ef7907 {
+struct t7e17ba75dba75985229ebaad844892a6 {
   double opacity;
   uint32_t color;
-  e5c3611dd9d3a05067d08e10507ebe28 representation;
+  t7ae9bb09a1a0070adced41151deef93f representation;
   std::string column;
   Arr<std::string> factors;
   uint8_t axis;
-  bool operator==(v_67a0e55ce68284d9f234903bf8ef7907 const &other) const {
+  bool operator==(t7e17ba75dba75985229ebaad844892a6 const &other) const {
     return opacity == other.opacity && color == other.color && representation == other.representation && column == other.column && factors == other.factors && axis == other.axis;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_67a0e55ce68284d9f234903bf8ef7907 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t7e17ba75dba75985229ebaad844892a6 const &r) {
   os << '{';
   os << "opacity:" << r.opacity << ',';
   os << "color:" << r.color << ',';
@@ -91,15 +93,15 @@ std::ostream &operator<<(std::ostream &os, v_67a0e55ce68284d9f234903bf8ef7907 co
   return os;
 }
 
-struct b057734d3828999a4e463dd04964f728 {
-  dessser::gen::fq_function_name::t name;
+struct t5d631a64ea9c402d0c5d7cfc444ea81f {
+  dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  Arr<v_67a0e55ce68284d9f234903bf8ef7907> fields;
-  bool operator==(b057734d3828999a4e463dd04964f728 const &other) const {
+  Arr<t7e17ba75dba75985229ebaad844892a6> fields;
+  bool operator==(t5d631a64ea9c402d0c5d7cfc444ea81f const &other) const {
     return name == other.name && visible == other.visible && fields == other.fields;
   }
 };
-std::ostream &operator<<(std::ostream &os, b057734d3828999a4e463dd04964f728 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t5d631a64ea9c402d0c5d7cfc444ea81f const &r) {
   os << '{';
   os << "name:" << r.name << ',';
   os << "visible:" << r.visible << ',';
@@ -108,16 +110,16 @@ std::ostream &operator<<(std::ostream &os, b057734d3828999a4e463dd04964f728 cons
   return os;
 }
 
-struct ec882bee7facda78cc914d658392c714 {
+struct td2824ba1e2122bef42fbf431cc11ae12 {
   std::string title;
-  ed606adbafa604d06597791e201d008c type;
-  Arr<v_5fc1c30a943a0c1ef8da3535f3079eba> axis;
-  Arr<b057734d3828999a4e463dd04964f728> sources;
-  bool operator==(ec882bee7facda78cc914d658392c714 const &other) const {
+  tafdc15d083fb8c2b34d5c9537c7c3b35 type;
+  Arr<tc9794b1ac9bbf493d6865b43481eb540> axis;
+  Arr<t5d631a64ea9c402d0c5d7cfc444ea81f> sources;
+  bool operator==(td2824ba1e2122bef42fbf431cc11ae12 const &other) const {
     return title == other.title && type == other.type && axis == other.axis && sources == other.sources;
   }
 };
-std::ostream &operator<<(std::ostream &os, ec882bee7facda78cc914d658392c714 const &r) {
+inline std::ostream &operator<<(std::ostream &os, td2824ba1e2122bef42fbf431cc11ae12 const &r) {
   os << '{';
   os << "title:" << r.title << ',';
   os << "type:" << r.type << ',';
@@ -129,9 +131,9 @@ std::ostream &operator<<(std::ostream &os, ec882bee7facda78cc914d658392c714 cons
 
 struct t : public std::variant<
   std::string,
-  ec882bee7facda78cc914d658392c714
+  td2824ba1e2122bef42fbf431cc11ae12
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -140,15 +142,17 @@ std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_worker
+#define DESSSER_GEN_worker
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,28 +7,33 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/func_ref.h"
+#include "desssergen/func_ref.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/field_name.h"
+#include "desssergen/file_path.h"
 
 namespace dessser::gen::worker {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 typedef std::tuple<
-  dessser::gen::field_name::t,
-  dessser::gen::raql_value::t
-> v_7a08095eeded42b6cde638d4d53dd964;
+  dessser::gen::field_name::t_ext,
+  dessser::gen::raql_value::t_ext
+> t83d220ac6cd554303ec130a90b325374;
 
-struct f4f9cb35168f81f8ec0d29afee065aaa {
+struct t57bafbdb4cb972c46a36425455535e06 {
   std::string tunneld_host;
   uint16_t tunneld_port;
   uint32_t parent_num;
-  bool operator==(f4f9cb35168f81f8ec0d29afee065aaa const &other) const {
+  bool operator==(t57bafbdb4cb972c46a36425455535e06 const &other) const {
     return tunneld_host == other.tunneld_host && tunneld_port == other.tunneld_port && parent_num == other.parent_num;
   }
 };
-std::ostream &operator<<(std::ostream &os, f4f9cb35168f81f8ec0d29afee065aaa const &r) {
+inline std::ostream &operator<<(std::ostream &os, t57bafbdb4cb972c46a36425455535e06 const &r) {
   os << '{';
   os << "tunneld_host:" << r.tunneld_host << ',';
   os << "tunneld_port:" << r.tunneld_port << ',';
@@ -35,11 +42,11 @@ std::ostream &operator<<(std::ostream &os, f4f9cb35168f81f8ec0d29afee065aaa cons
   return os;
 }
 
-struct e1503df6dd01643870ca1bf95113afdf : public std::variant<
+struct t8e7941b7e3893616560afdc4ab6263e6 : public std::variant<
   Void,
-  Arr<f4f9cb35168f81f8ec0d29afee065aaa>
+  Arr<t57bafbdb4cb972c46a36425455535e06>
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, e1503df6dd01643870ca1bf95113afdf const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8e7941b7e3893616560afdc4ab6263e6 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -51,20 +58,20 @@ struct t {
   bool enabled;
   bool debug;
   double report_period;
-  dessser::gen::file_path::t cwd;
+  dessser::gen::file_path::t_ext cwd;
   std::string worker_signature;
   std::string info_signature;
   bool is_used;
-  Arr<v_7a08095eeded42b6cde638d4d53dd964> params;
-  Arr<dessser::gen::field_name::t> envvars;
-  e1503df6dd01643870ca1bf95113afdf role;
-  std::optional<Arr<dessser::gen::func_ref::t>> parents;
-  Arr<dessser::gen::func_ref::t> children;
+  Arr<t83d220ac6cd554303ec130a90b325374> params;
+  Arr<dessser::gen::field_name::t_ext> envvars;
+  t8e7941b7e3893616560afdc4ab6263e6 role;
+  std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
+  Arr<dessser::gen::func_ref::t_ext> children;
   bool operator==(t const &other) const {
     return enabled == other.enabled && debug == other.debug && report_period == other.report_period && cwd == other.cwd && worker_signature == other.worker_signature && info_signature == other.info_signature && is_used == other.is_used && params == other.params && envvars == other.envvars && role == other.role && parents == other.parents && children == other.children;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "enabled:" << r.enabled << ',';
   os << "debug:" << r.debug << ',';
@@ -83,15 +90,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

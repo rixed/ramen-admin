@@ -17,142 +17,104 @@
 #include <vector>
 #include "dessser/runtime.h"
 
+
+namespace dessser::gen::alerting_contact {
+using dessser::operator<<;
+
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
 std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser::gen::alerting_contact {
-// don't ask me why:
-using dessser::operator<<;
-
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct f6f331efc660707e57f0e15ccf4fd321 {
+struct tecf2aac7cb6b403c5b4d278526f0494a {
   std::string file;
   std::string insert;
   std::string create;
-  bool operator==(f6f331efc660707e57f0e15ccf4fd321 const &other) const {
+  bool operator==(tecf2aac7cb6b403c5b4d278526f0494a const &other) const {
     return file == other.file && insert == other.insert && create == other.create;
   }
 };
-std::ostream &operator<<(std::ostream &os, f6f331efc660707e57f0e15ccf4fd321 const &r) {
-  os << '{';
-  os << "file:" << r.file << ',';
-  os << "insert:" << r.insert << ',';
-  os << "create:" << r.create;
-  os << '}';
-  return os;
-}
-
 typedef std::tuple<
   std::string,
   std::string
-> d135bed341a046f128507720bca94ebf;
+> t8961925d22ebc35140986110e41bc2a4;
 
-struct e952f334fe511c004f72c55ab7164557 {
-  Lst<d135bed341a046f128507720bca94ebf> options;
+struct t31d24e591f0a4b7928f5d849a60c7860 {
+  Lst<t8961925d22ebc35140986110e41bc2a4> options;
   std::string topic;
   uint16_t partition;
   std::string text;
-  bool operator==(e952f334fe511c004f72c55ab7164557 const &other) const {
+  bool operator==(t31d24e591f0a4b7928f5d849a60c7860 const &other) const {
     return options == other.options && topic == other.topic && partition == other.partition && text == other.text;
   }
 };
-std::ostream &operator<<(std::ostream &os, e952f334fe511c004f72c55ab7164557 const &r) {
-  os << '{';
-  os << "options:" << r.options << ',';
-  os << "topic:" << r.topic << ',';
-  os << "partition:" << r.partition << ',';
-  os << "text:" << r.text;
-  os << '}';
-  return os;
-}
-
-struct d575d47fd9161b749ff8b023ef1235a9 : public std::variant<
+struct t9640504389656a224d425d2dbbc18557 : public std::variant<
   Void,
   std::string,
   std::string,
-  f6f331efc660707e57f0e15ccf4fd321,
-  e952f334fe511c004f72c55ab7164557
+  tecf2aac7cb6b403c5b4d278526f0494a,
+  t31d24e591f0a4b7928f5d849a60c7860
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, d575d47fd9161b749ff8b023ef1235a9 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-  }
-  return os;
-}
-
 struct t {
-  d575d47fd9161b749ff8b023ef1235a9 via;
+  t9640504389656a224d425d2dbbc18557 via;
   double timeout;
   bool operator==(t const &other) const {
     return via == other.via && timeout == other.timeout;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
-  os << '{';
-  os << "via:" << r.via << ',';
-  os << "timeout:" << r.timeout;
-  os << '}';
-  return os;
-}
-
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 typedef std::tuple<
   uint16_t,
   Pointer
-> v_362f9d9108a6902af48b6c83d5377ea1;
+> t22a32080ad88ab548b80077a17b7dd46;
 
 typedef std::tuple<
-  d575d47fd9161b749ff8b023ef1235a9,
+  t9640504389656a224d425d2dbbc18557,
   Pointer
-> v_72d68d8dcb9365eec102a4e9857551b4;
+> tdd341930f33648a475e5179bf4efb0c2;
 
 typedef std::tuple<
   Size,
   Pointer
-> v_41b0681ed7f1f185fd3e6c4dcdc13110;
+> t8beb80162423aee37bd383e9b6834c9c;
 
 typedef std::tuple<
   uint8_t,
   Pointer
-> v_1d5843897434feb24d158f3793db9189;
+> tb3f98ea670610d40658a618de3ec7b90;
 
 typedef std::tuple<
   Bytes,
   Pointer
-> f921d1e0a170c3c04148c21704db9c45;
+> t188345aa49abd0cb47ff73fedc219f08;
 
 typedef std::tuple<
   std::string,
   Pointer
-> v_46a5e81c2410b000ff0adea6dc198147;
+> tef94b55d8809251f13165d9a05bd9d0e;
 
 typedef std::tuple<
   uint32_t,
   Pointer
-> ac0fbd05039f742d2f1d9ac182e392ab;
+> t405eb186408556fed8f2c41523c07d13;
 
 typedef std::tuple<
-  Lst<d135bed341a046f128507720bca94ebf>,
+  Lst<t8961925d22ebc35140986110e41bc2a4>,
   Pointer
-> v_4a73cde273fc238c87e6c6ed8cf570ce;
+> tbbee6c25156a69bfb121b9a9dfe9be4d;
 
 typedef std::tuple<
   uint64_t,
   Pointer
-> b62e103e7915a76f45f02f7c6f667c79;
+> t7a47220550fc5126a7b79f1e0c10c645;
 
 /* ----------- */
 /* Definitions */
@@ -334,17 +296,17 @@ typedef std::tuple<
                         (bytes-of-string (get-field "text" (get-alt "Kafka" (get-field "via" (param 0))))))))))))) 
         (write-u64 little-endian (identifier "srec_dst_328") (u64-of-float (get-field "timeout" (param 0))))))
  */
-static std::function<Pointer(t,Pointer)> to_row_binary_init()
+static std::function<Pointer(t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    d575d47fd9161b749ff8b023ef1235a9 id_1 { p_0.via };
+  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+    t9640504389656a224d425d2dbbc18557 id_1 { p_0->via };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
     Pointer let_res_4;
     {
       Pointer ssum_dst_297 { id_3 };
       uint16_t id_5 { 0 };
-      d575d47fd9161b749ff8b023ef1235a9 id_6 { p_0.via };
+      t9640504389656a224d425d2dbbc18557 id_6 { p_0->via };
       uint16_t id_7 { uint16_t(id_6.index()) };
       bool id_8 { bool(id_5 == id_7) };
       Pointer choose_res_9;
@@ -352,12 +314,12 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         choose_res_9 = ssum_dst_297;
       } else {
         uint16_t id_10 { 1 };
-        d575d47fd9161b749ff8b023ef1235a9 id_11 { p_0.via };
+        t9640504389656a224d425d2dbbc18557 id_11 { p_0->via };
         uint16_t id_12 { uint16_t(id_11.index()) };
         bool id_13 { bool(id_10 == id_12) };
         Pointer choose_res_14;
         if (id_13) {
-          d575d47fd9161b749ff8b023ef1235a9 id_15 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_15 { p_0->via };
           std::string id_16 { std::get<1>(id_15) };
           uint32_t id_17 { (uint32_t)id_16.size() };
           Vec<1, uint32_t> id_18 {  id_17  };
@@ -393,39 +355,43 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_39 { id_25.writeU8(choose_res_30) };
                 Void id_40 { ((void)(leb128_ptr_327[id_23] = id_39), VOID) };
+                (void)id_40;
                 uint8_t id_41 { 0 };
                 uint8_t id_42 { 0 };
                 uint32_t id_43 { leb128_sz_326[id_42] };
                 uint8_t id_44 { 7 };
                 uint32_t id_45 { uint32_t(id_43 >> id_44) };
                 Void id_46 { ((void)(leb128_sz_326[id_41] = id_45), VOID) };
+                (void)id_46;
                 uint8_t id_47 { 0 };
                 uint32_t id_48 { leb128_sz_326[id_47] };
                 uint32_t id_49 { 0U };
                 bool id_50 { bool(id_48 > id_49) };
                 while_flag_22 = id_50;
                 if (while_flag_22) {
+                  (void)VOID;
                 }
               } while (while_flag_22);
+              (void)VOID;
               uint8_t id_51 { 0 };
               Pointer id_52 { leb128_ptr_327[id_51] };
               let_res_21 = id_52;
             }
             let_res_19 = let_res_21;
           }
-          d575d47fd9161b749ff8b023ef1235a9 id_53 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_53 { p_0->via };
           std::string id_54 { std::get<1>(id_53) };
           Bytes id_55 { id_54 };
           Pointer id_56 { let_res_19.writeBytes(id_55) };
           choose_res_14 = id_56;
         } else {
           uint16_t id_57 { 2 };
-          d575d47fd9161b749ff8b023ef1235a9 id_58 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_58 { p_0->via };
           uint16_t id_59 { uint16_t(id_58.index()) };
           bool id_60 { bool(id_57 == id_59) };
           Pointer choose_res_61;
           if (id_60) {
-            d575d47fd9161b749ff8b023ef1235a9 id_62 { p_0.via };
+            t9640504389656a224d425d2dbbc18557 id_62 { p_0->via };
             std::string id_63 { std::get<2>(id_62) };
             uint32_t id_64 { (uint32_t)id_63.size() };
             Vec<1, uint32_t> id_65 {  id_64  };
@@ -461,40 +427,44 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   }
                   Pointer id_86 { id_72.writeU8(choose_res_77) };
                   Void id_87 { ((void)(leb128_ptr_325[id_70] = id_86), VOID) };
+                  (void)id_87;
                   uint8_t id_88 { 0 };
                   uint8_t id_89 { 0 };
                   uint32_t id_90 { leb128_sz_324[id_89] };
                   uint8_t id_91 { 7 };
                   uint32_t id_92 { uint32_t(id_90 >> id_91) };
                   Void id_93 { ((void)(leb128_sz_324[id_88] = id_92), VOID) };
+                  (void)id_93;
                   uint8_t id_94 { 0 };
                   uint32_t id_95 { leb128_sz_324[id_94] };
                   uint32_t id_96 { 0U };
                   bool id_97 { bool(id_95 > id_96) };
                   while_flag_69 = id_97;
                   if (while_flag_69) {
+                    (void)VOID;
                   }
                 } while (while_flag_69);
+                (void)VOID;
                 uint8_t id_98 { 0 };
                 Pointer id_99 { leb128_ptr_325[id_98] };
                 let_res_68 = id_99;
               }
               let_res_66 = let_res_68;
             }
-            d575d47fd9161b749ff8b023ef1235a9 id_100 { p_0.via };
+            t9640504389656a224d425d2dbbc18557 id_100 { p_0->via };
             std::string id_101 { std::get<2>(id_100) };
             Bytes id_102 { id_101 };
             Pointer id_103 { let_res_66.writeBytes(id_102) };
             choose_res_61 = id_103;
           } else {
             uint16_t id_104 { 3 };
-            d575d47fd9161b749ff8b023ef1235a9 id_105 { p_0.via };
+            t9640504389656a224d425d2dbbc18557 id_105 { p_0->via };
             uint16_t id_106 { uint16_t(id_105.index()) };
             bool id_107 { bool(id_104 == id_106) };
             Pointer choose_res_108;
             if (id_107) {
-              d575d47fd9161b749ff8b023ef1235a9 id_109 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_110 { std::get<3>(id_109) };
+              t9640504389656a224d425d2dbbc18557 id_109 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_110 { std::get<3>(id_109) };
               std::string id_111 { id_110.file };
               uint32_t id_112 { (uint32_t)id_111.size() };
               Vec<1, uint32_t> id_113 {  id_112  };
@@ -530,36 +500,40 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     }
                     Pointer id_134 { id_120.writeU8(choose_res_125) };
                     Void id_135 { ((void)(leb128_ptr_317[id_118] = id_134), VOID) };
+                    (void)id_135;
                     uint8_t id_136 { 0 };
                     uint8_t id_137 { 0 };
                     uint32_t id_138 { leb128_sz_316[id_137] };
                     uint8_t id_139 { 7 };
                     uint32_t id_140 { uint32_t(id_138 >> id_139) };
                     Void id_141 { ((void)(leb128_sz_316[id_136] = id_140), VOID) };
+                    (void)id_141;
                     uint8_t id_142 { 0 };
                     uint32_t id_143 { leb128_sz_316[id_142] };
                     uint32_t id_144 { 0U };
                     bool id_145 { bool(id_143 > id_144) };
                     while_flag_117 = id_145;
                     if (while_flag_117) {
+                      (void)VOID;
                     }
                   } while (while_flag_117);
+                  (void)VOID;
                   uint8_t id_146 { 0 };
                   Pointer id_147 { leb128_ptr_317[id_146] };
                   let_res_116 = id_147;
                 }
                 let_res_114 = let_res_116;
               }
-              d575d47fd9161b749ff8b023ef1235a9 id_148 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_149 { std::get<3>(id_148) };
+              t9640504389656a224d425d2dbbc18557 id_148 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_149 { std::get<3>(id_148) };
               std::string id_150 { id_149.file };
               Bytes id_151 { id_150 };
               Pointer id_152 { let_res_114.writeBytes(id_151) };
               Pointer let_res_153;
               {
                 Pointer srec_dst_318 { id_152 };
-                d575d47fd9161b749ff8b023ef1235a9 id_154 { p_0.via };
-                f6f331efc660707e57f0e15ccf4fd321 id_155 { std::get<3>(id_154) };
+                t9640504389656a224d425d2dbbc18557 id_154 { p_0->via };
+                tecf2aac7cb6b403c5b4d278526f0494a id_155 { std::get<3>(id_154) };
                 std::string id_156 { id_155.insert };
                 uint32_t id_157 { (uint32_t)id_156.size() };
                 Vec<1, uint32_t> id_158 {  id_157  };
@@ -595,28 +569,32 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       }
                       Pointer id_179 { id_165.writeU8(choose_res_170) };
                       Void id_180 { ((void)(leb128_ptr_320[id_163] = id_179), VOID) };
+                      (void)id_180;
                       uint8_t id_181 { 0 };
                       uint8_t id_182 { 0 };
                       uint32_t id_183 { leb128_sz_319[id_182] };
                       uint8_t id_184 { 7 };
                       uint32_t id_185 { uint32_t(id_183 >> id_184) };
                       Void id_186 { ((void)(leb128_sz_319[id_181] = id_185), VOID) };
+                      (void)id_186;
                       uint8_t id_187 { 0 };
                       uint32_t id_188 { leb128_sz_319[id_187] };
                       uint32_t id_189 { 0U };
                       bool id_190 { bool(id_188 > id_189) };
                       while_flag_162 = id_190;
                       if (while_flag_162) {
+                        (void)VOID;
                       }
                     } while (while_flag_162);
+                    (void)VOID;
                     uint8_t id_191 { 0 };
                     Pointer id_192 { leb128_ptr_320[id_191] };
                     let_res_161 = id_192;
                   }
                   let_res_159 = let_res_161;
                 }
-                d575d47fd9161b749ff8b023ef1235a9 id_193 { p_0.via };
-                f6f331efc660707e57f0e15ccf4fd321 id_194 { std::get<3>(id_193) };
+                t9640504389656a224d425d2dbbc18557 id_193 { p_0->via };
+                tecf2aac7cb6b403c5b4d278526f0494a id_194 { std::get<3>(id_193) };
                 std::string id_195 { id_194.insert };
                 Bytes id_196 { id_195 };
                 Pointer id_197 { let_res_159.writeBytes(id_196) };
@@ -625,8 +603,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_198;
               {
                 Pointer srec_dst_321 { let_res_153 };
-                d575d47fd9161b749ff8b023ef1235a9 id_199 { p_0.via };
-                f6f331efc660707e57f0e15ccf4fd321 id_200 { std::get<3>(id_199) };
+                t9640504389656a224d425d2dbbc18557 id_199 { p_0->via };
+                tecf2aac7cb6b403c5b4d278526f0494a id_200 { std::get<3>(id_199) };
                 std::string id_201 { id_200.create };
                 uint32_t id_202 { (uint32_t)id_201.size() };
                 Vec<1, uint32_t> id_203 {  id_202  };
@@ -662,28 +640,32 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       }
                       Pointer id_224 { id_210.writeU8(choose_res_215) };
                       Void id_225 { ((void)(leb128_ptr_323[id_208] = id_224), VOID) };
+                      (void)id_225;
                       uint8_t id_226 { 0 };
                       uint8_t id_227 { 0 };
                       uint32_t id_228 { leb128_sz_322[id_227] };
                       uint8_t id_229 { 7 };
                       uint32_t id_230 { uint32_t(id_228 >> id_229) };
                       Void id_231 { ((void)(leb128_sz_322[id_226] = id_230), VOID) };
+                      (void)id_231;
                       uint8_t id_232 { 0 };
                       uint32_t id_233 { leb128_sz_322[id_232] };
                       uint32_t id_234 { 0U };
                       bool id_235 { bool(id_233 > id_234) };
                       while_flag_207 = id_235;
                       if (while_flag_207) {
+                        (void)VOID;
                       }
                     } while (while_flag_207);
+                    (void)VOID;
                     uint8_t id_236 { 0 };
                     Pointer id_237 { leb128_ptr_323[id_236] };
                     let_res_206 = id_237;
                   }
                   let_res_204 = let_res_206;
                 }
-                d575d47fd9161b749ff8b023ef1235a9 id_238 { p_0.via };
-                f6f331efc660707e57f0e15ccf4fd321 id_239 { std::get<3>(id_238) };
+                t9640504389656a224d425d2dbbc18557 id_238 { p_0->via };
+                tecf2aac7cb6b403c5b4d278526f0494a id_239 { std::get<3>(id_238) };
                 std::string id_240 { id_239.create };
                 Bytes id_241 { id_240 };
                 Pointer id_242 { let_res_204.writeBytes(id_241) };
@@ -691,14 +673,15 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               }
               choose_res_108 = let_res_198;
             } else {
-              d575d47fd9161b749ff8b023ef1235a9 id_243 { p_0.via };
+              t9640504389656a224d425d2dbbc18557 id_243 { p_0->via };
               uint16_t id_244 { uint16_t(id_243.index()) };
               uint16_t id_245 { 4 };
               bool id_246 { bool(id_244 == id_245) };
               Void id_247 { ((void)(assert(id_246)), VOID) };
-              d575d47fd9161b749ff8b023ef1235a9 id_248 { p_0.via };
-              e952f334fe511c004f72c55ab7164557 id_249 { std::get<4>(id_248) };
-              Lst<d135bed341a046f128507720bca94ebf> id_250 { id_249.options };
+              (void)id_247;
+              t9640504389656a224d425d2dbbc18557 id_248 { p_0->via };
+              t31d24e591f0a4b7928f5d849a60c7860 id_249 { std::get<4>(id_248) };
+              Lst<t8961925d22ebc35140986110e41bc2a4> id_250 { id_249.options };
               uint32_t id_251 { id_250.size() };
               Vec<1, uint32_t> id_252 {  id_251  };
               Pointer let_res_253;
@@ -733,20 +716,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     }
                     Pointer id_273 { id_259.writeU8(choose_res_264) };
                     Void id_274 { ((void)(leb128_ptr_299[id_257] = id_273), VOID) };
+                    (void)id_274;
                     uint8_t id_275 { 0 };
                     uint8_t id_276 { 0 };
                     uint32_t id_277 { leb128_sz_298[id_276] };
                     uint8_t id_278 { 7 };
                     uint32_t id_279 { uint32_t(id_277 >> id_278) };
                     Void id_280 { ((void)(leb128_sz_298[id_275] = id_279), VOID) };
+                    (void)id_280;
                     uint8_t id_281 { 0 };
                     uint32_t id_282 { leb128_sz_298[id_281] };
                     uint32_t id_283 { 0U };
                     bool id_284 { bool(id_282 > id_283) };
                     while_flag_256 = id_284;
                     if (while_flag_256) {
+                      (void)VOID;
                     }
                   } while (while_flag_256);
+                  (void)VOID;
                   uint8_t id_285 { 0 };
                   Pointer id_286 { leb128_ptr_299[id_285] };
                   let_res_255 = id_286;
@@ -762,10 +749,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_291;
                 {
                   Vec<1, int32_t> n_ref_301 { id_290 };
-                  d575d47fd9161b749ff8b023ef1235a9 id_292 { p_0.via };
-                  e952f334fe511c004f72c55ab7164557 id_293 { std::get<4>(id_292) };
-                  Lst<d135bed341a046f128507720bca94ebf> id_294 { id_293.options };
-                  for (d135bed341a046f128507720bca94ebf x_302 : id_294) {
+                  t9640504389656a224d425d2dbbc18557 id_292 { p_0->via };
+                  t31d24e591f0a4b7928f5d849a60c7860 id_293 { std::get<4>(id_292) };
+                  Lst<t8961925d22ebc35140986110e41bc2a4> id_294 { id_293.options };
+                  for (t8961925d22ebc35140986110e41bc2a4 x_302 : id_294) {
                     uint8_t id_295 { 0 };
                     uint8_t id_296 { 0 };
                     Pointer id_297 { dst_ref_300[id_296] };
@@ -807,20 +794,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                             }
                             Pointer id_322 { id_308.writeU8(choose_res_313) };
                             Void id_323 { ((void)(leb128_ptr_305[id_306] = id_322), VOID) };
+                            (void)id_323;
                             uint8_t id_324 { 0 };
                             uint8_t id_325 { 0 };
                             uint32_t id_326 { leb128_sz_304[id_325] };
                             uint8_t id_327 { 7 };
                             uint32_t id_328 { uint32_t(id_326 >> id_327) };
                             Void id_329 { ((void)(leb128_sz_304[id_324] = id_328), VOID) };
+                            (void)id_329;
                             uint8_t id_330 { 0 };
                             uint32_t id_331 { leb128_sz_304[id_330] };
                             uint32_t id_332 { 0U };
                             bool id_333 { bool(id_331 > id_332) };
                             while_flag_305 = id_333;
                             if (while_flag_305) {
+                              (void)VOID;
                             }
                           } while (while_flag_305);
+                          (void)VOID;
                           uint8_t id_334 { 0 };
                           Pointer id_335 { leb128_ptr_305[id_334] };
                           let_res_304 = id_335;
@@ -870,20 +861,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                             }
                             Pointer id_363 { id_349.writeU8(choose_res_354) };
                             Void id_364 { ((void)(leb128_ptr_308[id_347] = id_363), VOID) };
+                            (void)id_364;
                             uint8_t id_365 { 0 };
                             uint8_t id_366 { 0 };
                             uint32_t id_367 { leb128_sz_307[id_366] };
                             uint8_t id_368 { 7 };
                             uint32_t id_369 { uint32_t(id_367 >> id_368) };
                             Void id_370 { ((void)(leb128_sz_307[id_365] = id_369), VOID) };
+                            (void)id_370;
                             uint8_t id_371 { 0 };
                             uint32_t id_372 { leb128_sz_307[id_371] };
                             uint32_t id_373 { 0U };
                             bool id_374 { bool(id_372 > id_373) };
                             while_flag_346 = id_374;
                             if (while_flag_346) {
+                              (void)VOID;
                             }
                           } while (while_flag_346);
+                          (void)VOID;
                           uint8_t id_375 { 0 };
                           Pointer id_376 { leb128_ptr_308[id_375] };
                           let_res_345 = id_376;
@@ -896,13 +891,17 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       let_res_339 = id_379;
                     }
                     Void id_380 { ((void)(dst_ref_300[id_295] = let_res_339), VOID) };
+                    (void)id_380;
                     uint8_t id_381 { 0 };
                     int32_t id_382 { 1L };
                     uint8_t id_383 { 0 };
                     int32_t id_384 { n_ref_301[id_383] };
                     int32_t id_385 { int32_t(id_382 + id_384) };
                     Void id_386 { ((void)(n_ref_301[id_381] = id_385), VOID) };
+                    (void)id_386;
+                    (void)id_386;
                   }
+                  (void)VOID;
                   uint8_t id_387 { 0 };
                   Pointer id_388 { dst_ref_300[id_387] };
                   let_res_291 = id_388;
@@ -912,8 +911,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_389;
               {
                 Pointer srec_dst_309 { let_res_288 };
-                d575d47fd9161b749ff8b023ef1235a9 id_390 { p_0.via };
-                e952f334fe511c004f72c55ab7164557 id_391 { std::get<4>(id_390) };
+                t9640504389656a224d425d2dbbc18557 id_390 { p_0->via };
+                t31d24e591f0a4b7928f5d849a60c7860 id_391 { std::get<4>(id_390) };
                 std::string id_392 { id_391.topic };
                 uint32_t id_393 { (uint32_t)id_392.size() };
                 Vec<1, uint32_t> id_394 {  id_393  };
@@ -949,28 +948,32 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       }
                       Pointer id_415 { id_401.writeU8(choose_res_406) };
                       Void id_416 { ((void)(leb128_ptr_311[id_399] = id_415), VOID) };
+                      (void)id_416;
                       uint8_t id_417 { 0 };
                       uint8_t id_418 { 0 };
                       uint32_t id_419 { leb128_sz_310[id_418] };
                       uint8_t id_420 { 7 };
                       uint32_t id_421 { uint32_t(id_419 >> id_420) };
                       Void id_422 { ((void)(leb128_sz_310[id_417] = id_421), VOID) };
+                      (void)id_422;
                       uint8_t id_423 { 0 };
                       uint32_t id_424 { leb128_sz_310[id_423] };
                       uint32_t id_425 { 0U };
                       bool id_426 { bool(id_424 > id_425) };
                       while_flag_398 = id_426;
                       if (while_flag_398) {
+                        (void)VOID;
                       }
                     } while (while_flag_398);
+                    (void)VOID;
                     uint8_t id_427 { 0 };
                     Pointer id_428 { leb128_ptr_311[id_427] };
                     let_res_397 = id_428;
                   }
                   let_res_395 = let_res_397;
                 }
-                d575d47fd9161b749ff8b023ef1235a9 id_429 { p_0.via };
-                e952f334fe511c004f72c55ab7164557 id_430 { std::get<4>(id_429) };
+                t9640504389656a224d425d2dbbc18557 id_429 { p_0->via };
+                t31d24e591f0a4b7928f5d849a60c7860 id_430 { std::get<4>(id_429) };
                 std::string id_431 { id_430.topic };
                 Bytes id_432 { id_431 };
                 Pointer id_433 { let_res_395.writeBytes(id_432) };
@@ -979,8 +982,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_434;
               {
                 Pointer srec_dst_312 { let_res_389 };
-                d575d47fd9161b749ff8b023ef1235a9 id_435 { p_0.via };
-                e952f334fe511c004f72c55ab7164557 id_436 { std::get<4>(id_435) };
+                t9640504389656a224d425d2dbbc18557 id_435 { p_0->via };
+                t31d24e591f0a4b7928f5d849a60c7860 id_436 { std::get<4>(id_435) };
                 uint16_t id_437 { id_436.partition };
                 Pointer id_438 { srec_dst_312.writeU16Le(id_437) };
                 let_res_434 = id_438;
@@ -988,8 +991,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_439;
               {
                 Pointer srec_dst_313 { let_res_434 };
-                d575d47fd9161b749ff8b023ef1235a9 id_440 { p_0.via };
-                e952f334fe511c004f72c55ab7164557 id_441 { std::get<4>(id_440) };
+                t9640504389656a224d425d2dbbc18557 id_440 { p_0->via };
+                t31d24e591f0a4b7928f5d849a60c7860 id_441 { std::get<4>(id_440) };
                 std::string id_442 { id_441.text };
                 uint32_t id_443 { (uint32_t)id_442.size() };
                 Vec<1, uint32_t> id_444 {  id_443  };
@@ -1025,28 +1028,32 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       }
                       Pointer id_465 { id_451.writeU8(choose_res_456) };
                       Void id_466 { ((void)(leb128_ptr_315[id_449] = id_465), VOID) };
+                      (void)id_466;
                       uint8_t id_467 { 0 };
                       uint8_t id_468 { 0 };
                       uint32_t id_469 { leb128_sz_314[id_468] };
                       uint8_t id_470 { 7 };
                       uint32_t id_471 { uint32_t(id_469 >> id_470) };
                       Void id_472 { ((void)(leb128_sz_314[id_467] = id_471), VOID) };
+                      (void)id_472;
                       uint8_t id_473 { 0 };
                       uint32_t id_474 { leb128_sz_314[id_473] };
                       uint32_t id_475 { 0U };
                       bool id_476 { bool(id_474 > id_475) };
                       while_flag_448 = id_476;
                       if (while_flag_448) {
+                        (void)VOID;
                       }
                     } while (while_flag_448);
+                    (void)VOID;
                     uint8_t id_477 { 0 };
                     Pointer id_478 { leb128_ptr_315[id_477] };
                     let_res_447 = id_478;
                   }
                   let_res_445 = let_res_447;
                 }
-                d575d47fd9161b749ff8b023ef1235a9 id_479 { p_0.via };
-                e952f334fe511c004f72c55ab7164557 id_480 { std::get<4>(id_479) };
+                t9640504389656a224d425d2dbbc18557 id_479 { p_0->via };
+                t31d24e591f0a4b7928f5d849a60c7860 id_480 { std::get<4>(id_479) };
                 std::string id_481 { id_480.text };
                 Bytes id_482 { id_481 };
                 Pointer id_483 { let_res_445.writeBytes(id_482) };
@@ -1065,7 +1072,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
     Pointer let_res_484;
     {
       Pointer srec_dst_328 { let_res_4 };
-      double id_485 { p_0.timeout };
+      double id_485 { p_0->timeout };
       uint64_t id_486 { qword_of_float(id_485) };
       Pointer id_487 { srec_dst_328.writeU64Le(id_486) };
       let_res_484 = id_487;
@@ -1075,7 +1082,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{via: [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]; timeout: FLOAT}")
@@ -1195,11 +1202,11 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
                         (size-of-u32 (string-length (get-field "text" (get-alt "Kafka" (get-field "via" (param 0)))))))))))))) 
         (size 8)))
  */
-static std::function<Size(t)> sersize_of_row_binary_init()
+static std::function<Size(t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun488 { [&fun488](t p_0) {
+  std::function<Size(t*)> fun488 { [&fun488](t* p_0) {
     uint16_t id_489 { 0 };
-    d575d47fd9161b749ff8b023ef1235a9 id_490 { p_0.via };
+    t9640504389656a224d425d2dbbc18557 id_490 { p_0->via };
     uint16_t id_491 { uint16_t(id_490.index()) };
     bool id_492 { bool(id_489 == id_491) };
     Size choose_res_493;
@@ -1208,13 +1215,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       choose_res_493 = id_494;
     } else {
       uint16_t id_495 { 1 };
-      d575d47fd9161b749ff8b023ef1235a9 id_496 { p_0.via };
+      t9640504389656a224d425d2dbbc18557 id_496 { p_0->via };
       uint16_t id_497 { uint16_t(id_496.index()) };
       bool id_498 { bool(id_495 == id_497) };
       Size choose_res_499;
       if (id_498) {
         Size id_500 { 2UL };
-        d575d47fd9161b749ff8b023ef1235a9 id_501 { p_0.via };
+        t9640504389656a224d425d2dbbc18557 id_501 { p_0->via };
         std::string id_502 { std::get<1>(id_501) };
         uint32_t id_503 { (uint32_t)id_502.size() };
         Vec<1, uint32_t> id_504 {  id_503  };
@@ -1243,8 +1250,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_520 { 1U };
                 uint32_t id_521 { uint32_t(id_519 + id_520) };
                 Void id_522 { ((void)(lebsz_ref_294[id_517] = id_521), VOID) };
+                (void)id_522;
               }
             } while (while_flag_509);
+            (void)VOID;
             uint8_t id_523 { 0 };
             uint32_t id_524 { lebsz_ref_294[id_523] };
             Size id_525 { Size(id_524) };
@@ -1252,7 +1261,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           }
           let_res_505 = let_res_508;
         }
-        d575d47fd9161b749ff8b023ef1235a9 id_526 { p_0.via };
+        t9640504389656a224d425d2dbbc18557 id_526 { p_0->via };
         std::string id_527 { std::get<1>(id_526) };
         uint32_t id_528 { (uint32_t)id_527.size() };
         Size id_529 { Size(id_528) };
@@ -1261,13 +1270,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         choose_res_499 = id_531;
       } else {
         uint16_t id_532 { 2 };
-        d575d47fd9161b749ff8b023ef1235a9 id_533 { p_0.via };
+        t9640504389656a224d425d2dbbc18557 id_533 { p_0->via };
         uint16_t id_534 { uint16_t(id_533.index()) };
         bool id_535 { bool(id_532 == id_534) };
         Size choose_res_536;
         if (id_535) {
           Size id_537 { 2UL };
-          d575d47fd9161b749ff8b023ef1235a9 id_538 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_538 { p_0->via };
           std::string id_539 { std::get<2>(id_538) };
           uint32_t id_540 { (uint32_t)id_539.size() };
           Vec<1, uint32_t> id_541 {  id_540  };
@@ -1296,8 +1305,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint32_t id_557 { 1U };
                   uint32_t id_558 { uint32_t(id_556 + id_557) };
                   Void id_559 { ((void)(lebsz_ref_291[id_554] = id_558), VOID) };
+                  (void)id_559;
                 }
               } while (while_flag_546);
+              (void)VOID;
               uint8_t id_560 { 0 };
               uint32_t id_561 { lebsz_ref_291[id_560] };
               Size id_562 { Size(id_561) };
@@ -1305,7 +1316,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             }
             let_res_542 = let_res_545;
           }
-          d575d47fd9161b749ff8b023ef1235a9 id_563 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_563 { p_0->via };
           std::string id_564 { std::get<2>(id_563) };
           uint32_t id_565 { (uint32_t)id_564.size() };
           Size id_566 { Size(id_565) };
@@ -1314,14 +1325,14 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           choose_res_536 = id_568;
         } else {
           uint16_t id_569 { 3 };
-          d575d47fd9161b749ff8b023ef1235a9 id_570 { p_0.via };
+          t9640504389656a224d425d2dbbc18557 id_570 { p_0->via };
           uint16_t id_571 { uint16_t(id_570.index()) };
           bool id_572 { bool(id_569 == id_571) };
           Size choose_res_573;
           if (id_572) {
             Size id_574 { 2UL };
-            d575d47fd9161b749ff8b023ef1235a9 id_575 { p_0.via };
-            f6f331efc660707e57f0e15ccf4fd321 id_576 { std::get<3>(id_575) };
+            t9640504389656a224d425d2dbbc18557 id_575 { p_0->via };
+            tecf2aac7cb6b403c5b4d278526f0494a id_576 { std::get<3>(id_575) };
             std::string id_577 { id_576.file };
             uint32_t id_578 { (uint32_t)id_577.size() };
             Vec<1, uint32_t> id_579 {  id_578  };
@@ -1350,8 +1361,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint32_t id_595 { 1U };
                     uint32_t id_596 { uint32_t(id_594 + id_595) };
                     Void id_597 { ((void)(lebsz_ref_280[id_592] = id_596), VOID) };
+                    (void)id_597;
                   }
                 } while (while_flag_584);
+                (void)VOID;
                 uint8_t id_598 { 0 };
                 uint32_t id_599 { lebsz_ref_280[id_598] };
                 Size id_600 { Size(id_599) };
@@ -1359,8 +1372,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               }
               let_res_580 = let_res_583;
             }
-            d575d47fd9161b749ff8b023ef1235a9 id_601 { p_0.via };
-            f6f331efc660707e57f0e15ccf4fd321 id_602 { std::get<3>(id_601) };
+            t9640504389656a224d425d2dbbc18557 id_601 { p_0->via };
+            tecf2aac7cb6b403c5b4d278526f0494a id_602 { std::get<3>(id_601) };
             std::string id_603 { id_602.file };
             uint32_t id_604 { (uint32_t)id_603.size() };
             Size id_605 { Size(id_604) };
@@ -1369,8 +1382,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_608;
             {
               Size sz_281 { id_607 };
-              d575d47fd9161b749ff8b023ef1235a9 id_609 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_610 { std::get<3>(id_609) };
+              t9640504389656a224d425d2dbbc18557 id_609 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_610 { std::get<3>(id_609) };
               std::string id_611 { id_610.insert };
               uint32_t id_612 { (uint32_t)id_611.size() };
               Vec<1, uint32_t> id_613 {  id_612  };
@@ -1399,8 +1412,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_629 { 1U };
                       uint32_t id_630 { uint32_t(id_628 + id_629) };
                       Void id_631 { ((void)(lebsz_ref_284[id_626] = id_630), VOID) };
+                      (void)id_631;
                     }
                   } while (while_flag_618);
+                  (void)VOID;
                   uint8_t id_632 { 0 };
                   uint32_t id_633 { lebsz_ref_284[id_632] };
                   Size id_634 { Size(id_633) };
@@ -1408,8 +1423,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 }
                 let_res_614 = let_res_617;
               }
-              d575d47fd9161b749ff8b023ef1235a9 id_635 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_636 { std::get<3>(id_635) };
+              t9640504389656a224d425d2dbbc18557 id_635 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_636 { std::get<3>(id_635) };
               std::string id_637 { id_636.insert };
               uint32_t id_638 { (uint32_t)id_637.size() };
               Size id_639 { Size(id_638) };
@@ -1420,8 +1435,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_642;
             {
               Size sz_285 { let_res_608 };
-              d575d47fd9161b749ff8b023ef1235a9 id_643 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_644 { std::get<3>(id_643) };
+              t9640504389656a224d425d2dbbc18557 id_643 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_644 { std::get<3>(id_643) };
               std::string id_645 { id_644.create };
               uint32_t id_646 { (uint32_t)id_645.size() };
               Vec<1, uint32_t> id_647 {  id_646  };
@@ -1450,8 +1465,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_663 { 1U };
                       uint32_t id_664 { uint32_t(id_662 + id_663) };
                       Void id_665 { ((void)(lebsz_ref_288[id_660] = id_664), VOID) };
+                      (void)id_665;
                     }
                   } while (while_flag_652);
+                  (void)VOID;
                   uint8_t id_666 { 0 };
                   uint32_t id_667 { lebsz_ref_288[id_666] };
                   Size id_668 { Size(id_667) };
@@ -1459,8 +1476,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 }
                 let_res_648 = let_res_651;
               }
-              d575d47fd9161b749ff8b023ef1235a9 id_669 { p_0.via };
-              f6f331efc660707e57f0e15ccf4fd321 id_670 { std::get<3>(id_669) };
+              t9640504389656a224d425d2dbbc18557 id_669 { p_0->via };
+              tecf2aac7cb6b403c5b4d278526f0494a id_670 { std::get<3>(id_669) };
               std::string id_671 { id_670.create };
               uint32_t id_672 { (uint32_t)id_671.size() };
               Size id_673 { Size(id_672) };
@@ -1470,15 +1487,16 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             }
             choose_res_573 = let_res_642;
           } else {
-            d575d47fd9161b749ff8b023ef1235a9 id_676 { p_0.via };
+            t9640504389656a224d425d2dbbc18557 id_676 { p_0->via };
             uint16_t id_677 { uint16_t(id_676.index()) };
             uint16_t id_678 { 4 };
             bool id_679 { bool(id_677 == id_678) };
             Void id_680 { ((void)(assert(id_679)), VOID) };
+            (void)id_680;
             Size id_681 { 2UL };
-            d575d47fd9161b749ff8b023ef1235a9 id_682 { p_0.via };
-            e952f334fe511c004f72c55ab7164557 id_683 { std::get<4>(id_682) };
-            Lst<d135bed341a046f128507720bca94ebf> id_684 { id_683.options };
+            t9640504389656a224d425d2dbbc18557 id_682 { p_0->via };
+            t31d24e591f0a4b7928f5d849a60c7860 id_683 { std::get<4>(id_682) };
+            Lst<t8961925d22ebc35140986110e41bc2a4> id_684 { id_683.options };
             uint32_t id_685 { id_684.size() };
             Vec<1, uint32_t> id_686 {  id_685  };
             Size let_res_687;
@@ -1506,8 +1524,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint32_t id_702 { 1U };
                     uint32_t id_703 { uint32_t(id_701 + id_702) };
                     Void id_704 { ((void)(lebsz_ref_257[id_699] = id_703), VOID) };
+                    (void)id_704;
                   }
                 } while (while_flag_691);
+                (void)VOID;
                 uint8_t id_705 { 0 };
                 uint32_t id_706 { lebsz_ref_257[id_705] };
                 Size id_707 { Size(id_706) };
@@ -1526,9 +1546,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 Vec<1, int32_t> repeat_n_259 { id_712 };
                 bool while_flag_713 { true };
                 do {
-                  d575d47fd9161b749ff8b023ef1235a9 id_714 { p_0.via };
-                  e952f334fe511c004f72c55ab7164557 id_715 { std::get<4>(id_714) };
-                  Lst<d135bed341a046f128507720bca94ebf> id_716 { id_715.options };
+                  t9640504389656a224d425d2dbbc18557 id_714 { p_0->via };
+                  t31d24e591f0a4b7928f5d849a60c7860 id_715 { std::get<4>(id_714) };
+                  Lst<t8961925d22ebc35140986110e41bc2a4> id_716 { id_715.options };
                   uint32_t id_717 { id_716.size() };
                   int32_t id_718 { int32_t(id_717) };
                   uint8_t id_719 { 0 };
@@ -1544,10 +1564,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       Size sz_260 { id_724 };
                       uint8_t id_726 { 0 };
                       int32_t id_727 { repeat_n_259[id_726] };
-                      d575d47fd9161b749ff8b023ef1235a9 id_728 { p_0.via };
-                      e952f334fe511c004f72c55ab7164557 id_729 { std::get<4>(id_728) };
-                      Lst<d135bed341a046f128507720bca94ebf> id_730 { id_729.options };
-                      d135bed341a046f128507720bca94ebf id_731 { id_730[id_727] };
+                      t9640504389656a224d425d2dbbc18557 id_728 { p_0->via };
+                      t31d24e591f0a4b7928f5d849a60c7860 id_729 { std::get<4>(id_728) };
+                      Lst<t8961925d22ebc35140986110e41bc2a4> id_730 { id_729.options };
+                      t8961925d22ebc35140986110e41bc2a4 id_731 { id_730[id_727] };
                       std::string id_732 { std::get<0>(id_731) };
                       uint32_t id_733 { (uint32_t)id_732.size() };
                       Size let_res_734;
@@ -1579,8 +1599,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                 uint32_t id_751 { 1U };
                                 uint32_t id_752 { uint32_t(id_750 + id_751) };
                                 Void id_753 { ((void)(lebsz_ref_263[id_748] = id_752), VOID) };
+                                (void)id_753;
                               }
                             } while (while_flag_740);
+                            (void)VOID;
                             uint8_t id_754 { 0 };
                             uint32_t id_755 { lebsz_ref_263[id_754] };
                             Size id_756 { Size(id_755) };
@@ -1600,10 +1622,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       Size sz_264 { let_res_725 };
                       uint8_t id_761 { 0 };
                       int32_t id_762 { repeat_n_259[id_761] };
-                      d575d47fd9161b749ff8b023ef1235a9 id_763 { p_0.via };
-                      e952f334fe511c004f72c55ab7164557 id_764 { std::get<4>(id_763) };
-                      Lst<d135bed341a046f128507720bca94ebf> id_765 { id_764.options };
-                      d135bed341a046f128507720bca94ebf id_766 { id_765[id_762] };
+                      t9640504389656a224d425d2dbbc18557 id_763 { p_0->via };
+                      t31d24e591f0a4b7928f5d849a60c7860 id_764 { std::get<4>(id_763) };
+                      Lst<t8961925d22ebc35140986110e41bc2a4> id_765 { id_764.options };
+                      t8961925d22ebc35140986110e41bc2a4 id_766 { id_765[id_762] };
                       std::string id_767 { std::get<1>(id_766) };
                       uint32_t id_768 { (uint32_t)id_767.size() };
                       Size let_res_769;
@@ -1635,8 +1657,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                 uint32_t id_786 { 1U };
                                 uint32_t id_787 { uint32_t(id_785 + id_786) };
                                 Void id_788 { ((void)(lebsz_ref_267[id_783] = id_787), VOID) };
+                                (void)id_788;
                               }
                             } while (while_flag_775);
+                            (void)VOID;
                             uint8_t id_789 { 0 };
                             uint32_t id_790 { lebsz_ref_267[id_789] };
                             Size id_791 { Size(id_790) };
@@ -1652,15 +1676,20 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       let_res_760 = id_794;
                     }
                     Void id_795 { ((void)(sz_ref_258[id_722] = let_res_760), VOID) };
+                    (void)id_795;
                     uint8_t id_796 { 0 };
                     uint8_t id_797 { 0 };
                     int32_t id_798 { repeat_n_259[id_797] };
                     int32_t id_799 { 1L };
                     int32_t id_800 { int32_t(id_798 + id_799) };
                     Void id_801 { ((void)(repeat_n_259[id_796] = id_800), VOID) };
+                    (void)id_801;
+                    (void)id_801;
                   }
                 } while (while_flag_713);
+                (void)VOID;
               }
+              (void)VOID;
               uint8_t id_802 { 0 };
               Size id_803 { sz_ref_258[id_802] };
               let_res_710 = id_803;
@@ -1668,8 +1697,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_804;
             {
               Size sz_268 { let_res_710 };
-              d575d47fd9161b749ff8b023ef1235a9 id_805 { p_0.via };
-              e952f334fe511c004f72c55ab7164557 id_806 { std::get<4>(id_805) };
+              t9640504389656a224d425d2dbbc18557 id_805 { p_0->via };
+              t31d24e591f0a4b7928f5d849a60c7860 id_806 { std::get<4>(id_805) };
               std::string id_807 { id_806.topic };
               uint32_t id_808 { (uint32_t)id_807.size() };
               Vec<1, uint32_t> id_809 {  id_808  };
@@ -1698,8 +1727,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_825 { 1U };
                       uint32_t id_826 { uint32_t(id_824 + id_825) };
                       Void id_827 { ((void)(lebsz_ref_271[id_822] = id_826), VOID) };
+                      (void)id_827;
                     }
                   } while (while_flag_814);
+                  (void)VOID;
                   uint8_t id_828 { 0 };
                   uint32_t id_829 { lebsz_ref_271[id_828] };
                   Size id_830 { Size(id_829) };
@@ -1707,8 +1738,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 }
                 let_res_810 = let_res_813;
               }
-              d575d47fd9161b749ff8b023ef1235a9 id_831 { p_0.via };
-              e952f334fe511c004f72c55ab7164557 id_832 { std::get<4>(id_831) };
+              t9640504389656a224d425d2dbbc18557 id_831 { p_0->via };
+              t31d24e591f0a4b7928f5d849a60c7860 id_832 { std::get<4>(id_831) };
               std::string id_833 { id_832.topic };
               uint32_t id_834 { (uint32_t)id_833.size() };
               Size id_835 { Size(id_834) };
@@ -1721,8 +1752,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_840;
             {
               Size sz_273 { id_839 };
-              d575d47fd9161b749ff8b023ef1235a9 id_841 { p_0.via };
-              e952f334fe511c004f72c55ab7164557 id_842 { std::get<4>(id_841) };
+              t9640504389656a224d425d2dbbc18557 id_841 { p_0->via };
+              t31d24e591f0a4b7928f5d849a60c7860 id_842 { std::get<4>(id_841) };
               std::string id_843 { id_842.text };
               uint32_t id_844 { (uint32_t)id_843.size() };
               Vec<1, uint32_t> id_845 {  id_844  };
@@ -1751,8 +1782,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_861 { 1U };
                       uint32_t id_862 { uint32_t(id_860 + id_861) };
                       Void id_863 { ((void)(lebsz_ref_276[id_858] = id_862), VOID) };
+                      (void)id_863;
                     }
                   } while (while_flag_850);
+                  (void)VOID;
                   uint8_t id_864 { 0 };
                   uint32_t id_865 { lebsz_ref_276[id_864] };
                   Size id_866 { Size(id_865) };
@@ -1760,8 +1793,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 }
                 let_res_846 = let_res_849;
               }
-              d575d47fd9161b749ff8b023ef1235a9 id_867 { p_0.via };
-              e952f334fe511c004f72c55ab7164557 id_868 { std::get<4>(id_867) };
+              t9640504389656a224d425d2dbbc18557 id_867 { p_0->via };
+              t31d24e591f0a4b7928f5d849a60c7860 id_868 { std::get<4>(id_867) };
               std::string id_869 { id_868.text };
               uint32_t id_870 { (uint32_t)id_869.size() };
               Size id_871 { Size(id_870) };
@@ -1784,7 +1817,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
    };
   return fun488;
 }
-std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2058,64 +2091,66 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
           (let-pair "dfloat_fst_245" "dfloat_snd_246" (read-u64 little-endian (identifier "drec_snd_243"))
             (make-tup (make-rec (string "via") (identifier "drec_fst_242") (string "timeout") (float-of-u64 (identifier "dfloat_fst_245"))) (identifier "dfloat_snd_246"))))))
  */
-static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
+static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
 {
-  std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun876 { [&fun876](Pointer p_0) {
-    v_362f9d9108a6902af48b6c83d5377ea1 id_877 { p_0.readU16Le() };
-    v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_878;
+  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun876 { [&fun876](Pointer p_0) {
+    t22a32080ad88ab548b80077a17b7dd46 id_877 { p_0.readU16Le() };
+    t22a32080ad88ab548b80077a17b7dd46 letpair_res_878;
     {
       auto du16_fst_57 { std::get<0>(id_877) };
       auto du16_snd_58 { std::get<1>(id_877) };
-      v_362f9d9108a6902af48b6c83d5377ea1 id_879 {  du16_fst_57, du16_snd_58  };
+      t22a32080ad88ab548b80077a17b7dd46 id_879 { du16_fst_57, du16_snd_58 };
       letpair_res_878 = id_879;
     }
-    v_72d68d8dcb9365eec102a4e9857551b4 let_res_880;
+    tdd341930f33648a475e5179bf4efb0c2 let_res_880;
     {
-      v_362f9d9108a6902af48b6c83d5377ea1 dsum1_62 { letpair_res_878 };
-      v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_881;
+      t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_878 };
+      tdd341930f33648a475e5179bf4efb0c2 letpair_res_881;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_882 { 0 };
         bool id_883 { bool(id_882 == dsum1_fst_63) };
-        v_72d68d8dcb9365eec102a4e9857551b4 choose_res_884;
+        tdd341930f33648a475e5179bf4efb0c2 choose_res_884;
         if (id_883) {
-          d575d47fd9161b749ff8b023ef1235a9 id_885 { std::in_place_index<0>, VOID };
-          v_72d68d8dcb9365eec102a4e9857551b4 id_886 {  id_885, dsum1_snd_64  };
+          (void)VOID;
+          t9640504389656a224d425d2dbbc18557 id_885 { std::in_place_index<0>, VOID };
+          tdd341930f33648a475e5179bf4efb0c2 id_886 { id_885, dsum1_snd_64 };
           choose_res_884 = id_886;
         } else {
           uint16_t id_887 { 1 };
           bool id_888 { bool(id_887 == dsum1_fst_63) };
-          v_72d68d8dcb9365eec102a4e9857551b4 choose_res_889;
+          tdd341930f33648a475e5179bf4efb0c2 choose_res_889;
           if (id_888) {
             uint32_t id_890 { 0U };
             Vec<1, uint32_t> id_891 {  id_890  };
-            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_892;
+            t8beb80162423aee37bd383e9b6834c9c let_res_892;
             {
               Vec<1, uint32_t> leb_ref_223 { id_891 };
               uint8_t id_893 { 0 };
               Vec<1, uint8_t> id_894 {  id_893  };
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_895;
+              t8beb80162423aee37bd383e9b6834c9c let_res_895;
               {
                 Vec<1, uint8_t> shft_ref_224 { id_894 };
                 Vec<1, Pointer> id_896 {  dsum1_snd_64  };
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_897;
+                t8beb80162423aee37bd383e9b6834c9c let_res_897;
                 {
                   Vec<1, Pointer> p_ref_225 { id_896 };
                   bool while_flag_898 { true };
                   do {
                     uint8_t id_899 { 0 };
                     Pointer id_900 { p_ref_225[id_899] };
-                    v_1d5843897434feb24d158f3793db9189 id_901 { id_900.readU8() };
+                    tb3f98ea670610d40658a618de3ec7b90 id_901 { id_900.readU8() };
                     bool let_res_902;
                     {
-                      v_1d5843897434feb24d158f3793db9189 leb128_226 { id_901 };
+                      tb3f98ea670610d40658a618de3ec7b90 leb128_226 { id_901 };
                       bool letpair_res_903;
                       {
                         auto leb128_fst_227 { std::get<0>(leb128_226) };
                         auto leb128_snd_228 { std::get<1>(leb128_226) };
                         uint8_t id_904 { 0 };
                         Void id_905 { ((void)(p_ref_225[id_904] = leb128_snd_228), VOID) };
+                        (void)id_905;
                         uint8_t id_906 { 0 };
                         uint8_t id_907 { 127 };
                         uint8_t id_908 { uint8_t(leb128_fst_227 & id_907) };
@@ -2127,12 +2162,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         uint32_t id_914 { leb_ref_223[id_913] };
                         uint32_t id_915 { uint32_t(id_912 | id_914) };
                         Void id_916 { ((void)(leb_ref_223[id_906] = id_915), VOID) };
+                        (void)id_916;
                         uint8_t id_917 { 0 };
                         uint8_t id_918 { 0 };
                         uint8_t id_919 { shft_ref_224[id_918] };
                         uint8_t id_920 { 7 };
                         uint8_t id_921 { uint8_t(id_919 + id_920) };
                         Void id_922 { ((void)(shft_ref_224[id_917] = id_921), VOID) };
+                        (void)id_922;
                         uint8_t id_923 { 128 };
                         bool id_924 { bool(leb128_fst_227 >= id_923) };
                         letpair_res_903 = id_924;
@@ -2141,35 +2178,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     }
                     while_flag_898 = let_res_902;
                     if (while_flag_898) {
+                      (void)VOID;
                     }
                   } while (while_flag_898);
+                  (void)VOID;
                   uint8_t id_925 { 0 };
                   uint32_t id_926 { leb_ref_223[id_925] };
                   Size id_927 { Size(id_926) };
                   uint8_t id_928 { 0 };
                   Pointer id_929 { p_ref_225[id_928] };
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 id_930 {  id_927, id_929  };
+                  t8beb80162423aee37bd383e9b6834c9c id_930 { id_927, id_929 };
                   let_res_897 = id_930;
                 }
                 let_res_895 = let_res_897;
               }
               let_res_892 = let_res_895;
             }
-            v_72d68d8dcb9365eec102a4e9857551b4 let_res_931;
+            tdd341930f33648a475e5179bf4efb0c2 let_res_931;
             {
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_229 { let_res_892 };
-              v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_932;
+              t8beb80162423aee37bd383e9b6834c9c dstring1_229 { let_res_892 };
+              tdd341930f33648a475e5179bf4efb0c2 letpair_res_932;
               {
                 auto dstring1_fst_230 { std::get<0>(dstring1_229) };
                 auto dstring1_snd_231 { std::get<1>(dstring1_229) };
-                f921d1e0a170c3c04148c21704db9c45 id_933 { dstring1_snd_231.readBytes(dstring1_fst_230) };
-                v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_934;
+                t188345aa49abd0cb47ff73fedc219f08 id_933 { dstring1_snd_231.readBytes(dstring1_fst_230) };
+                tdd341930f33648a475e5179bf4efb0c2 letpair_res_934;
                 {
                   auto dstring2_fst_233 { std::get<0>(id_933) };
                   auto dstring2_snd_234 { std::get<1>(id_933) };
                   std::string id_935 { dstring2_fst_233.toString() };
-                  d575d47fd9161b749ff8b023ef1235a9 id_936 { std::in_place_index<1>, id_935 };
-                  v_72d68d8dcb9365eec102a4e9857551b4 id_937 {  id_936, dstring2_snd_234  };
+                  t9640504389656a224d425d2dbbc18557 id_936 { std::in_place_index<1>, id_935 };
+                  tdd341930f33648a475e5179bf4efb0c2 id_937 { id_936, dstring2_snd_234 };
                   letpair_res_934 = id_937;
                 }
                 letpair_res_932 = letpair_res_934;
@@ -2180,36 +2219,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
           } else {
             uint16_t id_938 { 2 };
             bool id_939 { bool(id_938 == dsum1_fst_63) };
-            v_72d68d8dcb9365eec102a4e9857551b4 choose_res_940;
+            tdd341930f33648a475e5179bf4efb0c2 choose_res_940;
             if (id_939) {
               uint32_t id_941 { 0U };
               Vec<1, uint32_t> id_942 {  id_941  };
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_943;
+              t8beb80162423aee37bd383e9b6834c9c let_res_943;
               {
                 Vec<1, uint32_t> leb_ref_208 { id_942 };
                 uint8_t id_944 { 0 };
                 Vec<1, uint8_t> id_945 {  id_944  };
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_946;
+                t8beb80162423aee37bd383e9b6834c9c let_res_946;
                 {
                   Vec<1, uint8_t> shft_ref_209 { id_945 };
                   Vec<1, Pointer> id_947 {  dsum1_snd_64  };
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_948;
+                  t8beb80162423aee37bd383e9b6834c9c let_res_948;
                   {
                     Vec<1, Pointer> p_ref_210 { id_947 };
                     bool while_flag_949 { true };
                     do {
                       uint8_t id_950 { 0 };
                       Pointer id_951 { p_ref_210[id_950] };
-                      v_1d5843897434feb24d158f3793db9189 id_952 { id_951.readU8() };
+                      tb3f98ea670610d40658a618de3ec7b90 id_952 { id_951.readU8() };
                       bool let_res_953;
                       {
-                        v_1d5843897434feb24d158f3793db9189 leb128_211 { id_952 };
+                        tb3f98ea670610d40658a618de3ec7b90 leb128_211 { id_952 };
                         bool letpair_res_954;
                         {
                           auto leb128_fst_212 { std::get<0>(leb128_211) };
                           auto leb128_snd_213 { std::get<1>(leb128_211) };
                           uint8_t id_955 { 0 };
                           Void id_956 { ((void)(p_ref_210[id_955] = leb128_snd_213), VOID) };
+                          (void)id_956;
                           uint8_t id_957 { 0 };
                           uint8_t id_958 { 127 };
                           uint8_t id_959 { uint8_t(leb128_fst_212 & id_958) };
@@ -2221,12 +2261,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           uint32_t id_965 { leb_ref_208[id_964] };
                           uint32_t id_966 { uint32_t(id_963 | id_965) };
                           Void id_967 { ((void)(leb_ref_208[id_957] = id_966), VOID) };
+                          (void)id_967;
                           uint8_t id_968 { 0 };
                           uint8_t id_969 { 0 };
                           uint8_t id_970 { shft_ref_209[id_969] };
                           uint8_t id_971 { 7 };
                           uint8_t id_972 { uint8_t(id_970 + id_971) };
                           Void id_973 { ((void)(shft_ref_209[id_968] = id_972), VOID) };
+                          (void)id_973;
                           uint8_t id_974 { 128 };
                           bool id_975 { bool(leb128_fst_212 >= id_974) };
                           letpair_res_954 = id_975;
@@ -2235,35 +2277,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       }
                       while_flag_949 = let_res_953;
                       if (while_flag_949) {
+                        (void)VOID;
                       }
                     } while (while_flag_949);
+                    (void)VOID;
                     uint8_t id_976 { 0 };
                     uint32_t id_977 { leb_ref_208[id_976] };
                     Size id_978 { Size(id_977) };
                     uint8_t id_979 { 0 };
                     Pointer id_980 { p_ref_210[id_979] };
-                    v_41b0681ed7f1f185fd3e6c4dcdc13110 id_981 {  id_978, id_980  };
+                    t8beb80162423aee37bd383e9b6834c9c id_981 { id_978, id_980 };
                     let_res_948 = id_981;
                   }
                   let_res_946 = let_res_948;
                 }
                 let_res_943 = let_res_946;
               }
-              v_72d68d8dcb9365eec102a4e9857551b4 let_res_982;
+              tdd341930f33648a475e5179bf4efb0c2 let_res_982;
               {
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_214 { let_res_943 };
-                v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_983;
+                t8beb80162423aee37bd383e9b6834c9c dstring1_214 { let_res_943 };
+                tdd341930f33648a475e5179bf4efb0c2 letpair_res_983;
                 {
                   auto dstring1_fst_215 { std::get<0>(dstring1_214) };
                   auto dstring1_snd_216 { std::get<1>(dstring1_214) };
-                  f921d1e0a170c3c04148c21704db9c45 id_984 { dstring1_snd_216.readBytes(dstring1_fst_215) };
-                  v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_985;
+                  t188345aa49abd0cb47ff73fedc219f08 id_984 { dstring1_snd_216.readBytes(dstring1_fst_215) };
+                  tdd341930f33648a475e5179bf4efb0c2 letpair_res_985;
                   {
                     auto dstring2_fst_218 { std::get<0>(id_984) };
                     auto dstring2_snd_219 { std::get<1>(id_984) };
                     std::string id_986 { dstring2_fst_218.toString() };
-                    d575d47fd9161b749ff8b023ef1235a9 id_987 { std::in_place_index<2>, id_986 };
-                    v_72d68d8dcb9365eec102a4e9857551b4 id_988 {  id_987, dstring2_snd_219  };
+                    t9640504389656a224d425d2dbbc18557 id_987 { std::in_place_index<2>, id_986 };
+                    tdd341930f33648a475e5179bf4efb0c2 id_988 { id_987, dstring2_snd_219 };
                     letpair_res_985 = id_988;
                   }
                   letpair_res_983 = letpair_res_985;
@@ -2274,36 +2318,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
             } else {
               uint16_t id_989 { 3 };
               bool id_990 { bool(id_989 == dsum1_fst_63) };
-              v_72d68d8dcb9365eec102a4e9857551b4 choose_res_991;
+              tdd341930f33648a475e5179bf4efb0c2 choose_res_991;
               if (id_990) {
                 uint32_t id_992 { 0U };
                 Vec<1, uint32_t> id_993 {  id_992  };
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_994;
+                t8beb80162423aee37bd383e9b6834c9c let_res_994;
                 {
                   Vec<1, uint32_t> leb_ref_160 { id_993 };
                   uint8_t id_995 { 0 };
                   Vec<1, uint8_t> id_996 {  id_995  };
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_997;
+                  t8beb80162423aee37bd383e9b6834c9c let_res_997;
                   {
                     Vec<1, uint8_t> shft_ref_161 { id_996 };
                     Vec<1, Pointer> id_998 {  dsum1_snd_64  };
-                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_999;
+                    t8beb80162423aee37bd383e9b6834c9c let_res_999;
                     {
                       Vec<1, Pointer> p_ref_162 { id_998 };
                       bool while_flag_1000 { true };
                       do {
                         uint8_t id_1001 { 0 };
                         Pointer id_1002 { p_ref_162[id_1001] };
-                        v_1d5843897434feb24d158f3793db9189 id_1003 { id_1002.readU8() };
+                        tb3f98ea670610d40658a618de3ec7b90 id_1003 { id_1002.readU8() };
                         bool let_res_1004;
                         {
-                          v_1d5843897434feb24d158f3793db9189 leb128_163 { id_1003 };
+                          tb3f98ea670610d40658a618de3ec7b90 leb128_163 { id_1003 };
                           bool letpair_res_1005;
                           {
                             auto leb128_fst_164 { std::get<0>(leb128_163) };
                             auto leb128_snd_165 { std::get<1>(leb128_163) };
                             uint8_t id_1006 { 0 };
                             Void id_1007 { ((void)(p_ref_162[id_1006] = leb128_snd_165), VOID) };
+                            (void)id_1007;
                             uint8_t id_1008 { 0 };
                             uint8_t id_1009 { 127 };
                             uint8_t id_1010 { uint8_t(leb128_fst_164 & id_1009) };
@@ -2315,12 +2360,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             uint32_t id_1016 { leb_ref_160[id_1015] };
                             uint32_t id_1017 { uint32_t(id_1014 | id_1016) };
                             Void id_1018 { ((void)(leb_ref_160[id_1008] = id_1017), VOID) };
+                            (void)id_1018;
                             uint8_t id_1019 { 0 };
                             uint8_t id_1020 { 0 };
                             uint8_t id_1021 { shft_ref_161[id_1020] };
                             uint8_t id_1022 { 7 };
                             uint8_t id_1023 { uint8_t(id_1021 + id_1022) };
                             Void id_1024 { ((void)(shft_ref_161[id_1019] = id_1023), VOID) };
+                            (void)id_1024;
                             uint8_t id_1025 { 128 };
                             bool id_1026 { bool(leb128_fst_164 >= id_1025) };
                             letpair_res_1005 = id_1026;
@@ -2329,75 +2376,78 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         }
                         while_flag_1000 = let_res_1004;
                         if (while_flag_1000) {
+                          (void)VOID;
                         }
                       } while (while_flag_1000);
+                      (void)VOID;
                       uint8_t id_1027 { 0 };
                       uint32_t id_1028 { leb_ref_160[id_1027] };
                       Size id_1029 { Size(id_1028) };
                       uint8_t id_1030 { 0 };
                       Pointer id_1031 { p_ref_162[id_1030] };
-                      v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1032 {  id_1029, id_1031  };
+                      t8beb80162423aee37bd383e9b6834c9c id_1032 { id_1029, id_1031 };
                       let_res_999 = id_1032;
                     }
                     let_res_997 = let_res_999;
                   }
                   let_res_994 = let_res_997;
                 }
-                v_46a5e81c2410b000ff0adea6dc198147 let_res_1033;
+                tef94b55d8809251f13165d9a05bd9d0e let_res_1033;
                 {
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_166 { let_res_994 };
-                  v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1034;
+                  t8beb80162423aee37bd383e9b6834c9c dstring1_166 { let_res_994 };
+                  tef94b55d8809251f13165d9a05bd9d0e letpair_res_1034;
                   {
                     auto dstring1_fst_167 { std::get<0>(dstring1_166) };
                     auto dstring1_snd_168 { std::get<1>(dstring1_166) };
-                    f921d1e0a170c3c04148c21704db9c45 id_1035 { dstring1_snd_168.readBytes(dstring1_fst_167) };
-                    v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1036;
+                    t188345aa49abd0cb47ff73fedc219f08 id_1035 { dstring1_snd_168.readBytes(dstring1_fst_167) };
+                    tef94b55d8809251f13165d9a05bd9d0e letpair_res_1036;
                     {
                       auto dstring2_fst_170 { std::get<0>(id_1035) };
                       auto dstring2_snd_171 { std::get<1>(id_1035) };
                       std::string id_1037 { dstring2_fst_170.toString() };
-                      v_46a5e81c2410b000ff0adea6dc198147 id_1038 {  id_1037, dstring2_snd_171  };
+                      tef94b55d8809251f13165d9a05bd9d0e id_1038 { id_1037, dstring2_snd_171 };
                       letpair_res_1036 = id_1038;
                     }
                     letpair_res_1034 = letpair_res_1036;
                   }
                   let_res_1033 = letpair_res_1034;
                 }
-                v_72d68d8dcb9365eec102a4e9857551b4 let_res_1039;
+                tdd341930f33648a475e5179bf4efb0c2 let_res_1039;
                 {
-                  v_46a5e81c2410b000ff0adea6dc198147 drec_172 { let_res_1033 };
-                  v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1040;
+                  tef94b55d8809251f13165d9a05bd9d0e drec_172 { let_res_1033 };
+                  tdd341930f33648a475e5179bf4efb0c2 letpair_res_1040;
                   {
                     auto drec_fst_173 { std::get<0>(drec_172) };
                     auto drec_snd_174 { std::get<1>(drec_172) };
                     uint32_t id_1041 { 0U };
                     Vec<1, uint32_t> id_1042 {  id_1041  };
-                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1043;
+                    t8beb80162423aee37bd383e9b6834c9c let_res_1043;
                     {
                       Vec<1, uint32_t> leb_ref_175 { id_1042 };
                       uint8_t id_1044 { 0 };
                       Vec<1, uint8_t> id_1045 {  id_1044  };
-                      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1046;
+                      t8beb80162423aee37bd383e9b6834c9c let_res_1046;
                       {
                         Vec<1, uint8_t> shft_ref_176 { id_1045 };
                         Vec<1, Pointer> id_1047 {  drec_snd_174  };
-                        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1048;
+                        t8beb80162423aee37bd383e9b6834c9c let_res_1048;
                         {
                           Vec<1, Pointer> p_ref_177 { id_1047 };
                           bool while_flag_1049 { true };
                           do {
                             uint8_t id_1050 { 0 };
                             Pointer id_1051 { p_ref_177[id_1050] };
-                            v_1d5843897434feb24d158f3793db9189 id_1052 { id_1051.readU8() };
+                            tb3f98ea670610d40658a618de3ec7b90 id_1052 { id_1051.readU8() };
                             bool let_res_1053;
                             {
-                              v_1d5843897434feb24d158f3793db9189 leb128_178 { id_1052 };
+                              tb3f98ea670610d40658a618de3ec7b90 leb128_178 { id_1052 };
                               bool letpair_res_1054;
                               {
                                 auto leb128_fst_179 { std::get<0>(leb128_178) };
                                 auto leb128_snd_180 { std::get<1>(leb128_178) };
                                 uint8_t id_1055 { 0 };
                                 Void id_1056 { ((void)(p_ref_177[id_1055] = leb128_snd_180), VOID) };
+                                (void)id_1056;
                                 uint8_t id_1057 { 0 };
                                 uint8_t id_1058 { 127 };
                                 uint8_t id_1059 { uint8_t(leb128_fst_179 & id_1058) };
@@ -2409,12 +2459,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 uint32_t id_1065 { leb_ref_175[id_1064] };
                                 uint32_t id_1066 { uint32_t(id_1063 | id_1065) };
                                 Void id_1067 { ((void)(leb_ref_175[id_1057] = id_1066), VOID) };
+                                (void)id_1067;
                                 uint8_t id_1068 { 0 };
                                 uint8_t id_1069 { 0 };
                                 uint8_t id_1070 { shft_ref_176[id_1069] };
                                 uint8_t id_1071 { 7 };
                                 uint8_t id_1072 { uint8_t(id_1070 + id_1071) };
                                 Void id_1073 { ((void)(shft_ref_176[id_1068] = id_1072), VOID) };
+                                (void)id_1073;
                                 uint8_t id_1074 { 128 };
                                 bool id_1075 { bool(leb128_fst_179 >= id_1074) };
                                 letpair_res_1054 = id_1075;
@@ -2423,75 +2475,78 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             }
                             while_flag_1049 = let_res_1053;
                             if (while_flag_1049) {
+                              (void)VOID;
                             }
                           } while (while_flag_1049);
+                          (void)VOID;
                           uint8_t id_1076 { 0 };
                           uint32_t id_1077 { leb_ref_175[id_1076] };
                           Size id_1078 { Size(id_1077) };
                           uint8_t id_1079 { 0 };
                           Pointer id_1080 { p_ref_177[id_1079] };
-                          v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1081 {  id_1078, id_1080  };
+                          t8beb80162423aee37bd383e9b6834c9c id_1081 { id_1078, id_1080 };
                           let_res_1048 = id_1081;
                         }
                         let_res_1046 = let_res_1048;
                       }
                       let_res_1043 = let_res_1046;
                     }
-                    v_46a5e81c2410b000ff0adea6dc198147 let_res_1082;
+                    tef94b55d8809251f13165d9a05bd9d0e let_res_1082;
                     {
-                      v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_181 { let_res_1043 };
-                      v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1083;
+                      t8beb80162423aee37bd383e9b6834c9c dstring1_181 { let_res_1043 };
+                      tef94b55d8809251f13165d9a05bd9d0e letpair_res_1083;
                       {
                         auto dstring1_fst_182 { std::get<0>(dstring1_181) };
                         auto dstring1_snd_183 { std::get<1>(dstring1_181) };
-                        f921d1e0a170c3c04148c21704db9c45 id_1084 { dstring1_snd_183.readBytes(dstring1_fst_182) };
-                        v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1085;
+                        t188345aa49abd0cb47ff73fedc219f08 id_1084 { dstring1_snd_183.readBytes(dstring1_fst_182) };
+                        tef94b55d8809251f13165d9a05bd9d0e letpair_res_1085;
                         {
                           auto dstring2_fst_185 { std::get<0>(id_1084) };
                           auto dstring2_snd_186 { std::get<1>(id_1084) };
                           std::string id_1086 { dstring2_fst_185.toString() };
-                          v_46a5e81c2410b000ff0adea6dc198147 id_1087 {  id_1086, dstring2_snd_186  };
+                          tef94b55d8809251f13165d9a05bd9d0e id_1087 { id_1086, dstring2_snd_186 };
                           letpair_res_1085 = id_1087;
                         }
                         letpair_res_1083 = letpair_res_1085;
                       }
                       let_res_1082 = letpair_res_1083;
                     }
-                    v_72d68d8dcb9365eec102a4e9857551b4 let_res_1088;
+                    tdd341930f33648a475e5179bf4efb0c2 let_res_1088;
                     {
-                      v_46a5e81c2410b000ff0adea6dc198147 drec_187 { let_res_1082 };
-                      v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1089;
+                      tef94b55d8809251f13165d9a05bd9d0e drec_187 { let_res_1082 };
+                      tdd341930f33648a475e5179bf4efb0c2 letpair_res_1089;
                       {
                         auto drec_fst_188 { std::get<0>(drec_187) };
                         auto drec_snd_189 { std::get<1>(drec_187) };
                         uint32_t id_1090 { 0U };
                         Vec<1, uint32_t> id_1091 {  id_1090  };
-                        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1092;
+                        t8beb80162423aee37bd383e9b6834c9c let_res_1092;
                         {
                           Vec<1, uint32_t> leb_ref_190 { id_1091 };
                           uint8_t id_1093 { 0 };
                           Vec<1, uint8_t> id_1094 {  id_1093  };
-                          v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1095;
+                          t8beb80162423aee37bd383e9b6834c9c let_res_1095;
                           {
                             Vec<1, uint8_t> shft_ref_191 { id_1094 };
                             Vec<1, Pointer> id_1096 {  drec_snd_189  };
-                            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1097;
+                            t8beb80162423aee37bd383e9b6834c9c let_res_1097;
                             {
                               Vec<1, Pointer> p_ref_192 { id_1096 };
                               bool while_flag_1098 { true };
                               do {
                                 uint8_t id_1099 { 0 };
                                 Pointer id_1100 { p_ref_192[id_1099] };
-                                v_1d5843897434feb24d158f3793db9189 id_1101 { id_1100.readU8() };
+                                tb3f98ea670610d40658a618de3ec7b90 id_1101 { id_1100.readU8() };
                                 bool let_res_1102;
                                 {
-                                  v_1d5843897434feb24d158f3793db9189 leb128_193 { id_1101 };
+                                  tb3f98ea670610d40658a618de3ec7b90 leb128_193 { id_1101 };
                                   bool letpair_res_1103;
                                   {
                                     auto leb128_fst_194 { std::get<0>(leb128_193) };
                                     auto leb128_snd_195 { std::get<1>(leb128_193) };
                                     uint8_t id_1104 { 0 };
                                     Void id_1105 { ((void)(p_ref_192[id_1104] = leb128_snd_195), VOID) };
+                                    (void)id_1105;
                                     uint8_t id_1106 { 0 };
                                     uint8_t id_1107 { 127 };
                                     uint8_t id_1108 { uint8_t(leb128_fst_194 & id_1107) };
@@ -2503,12 +2558,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     uint32_t id_1114 { leb_ref_190[id_1113] };
                                     uint32_t id_1115 { uint32_t(id_1112 | id_1114) };
                                     Void id_1116 { ((void)(leb_ref_190[id_1106] = id_1115), VOID) };
+                                    (void)id_1116;
                                     uint8_t id_1117 { 0 };
                                     uint8_t id_1118 { 0 };
                                     uint8_t id_1119 { shft_ref_191[id_1118] };
                                     uint8_t id_1120 { 7 };
                                     uint8_t id_1121 { uint8_t(id_1119 + id_1120) };
                                     Void id_1122 { ((void)(shft_ref_191[id_1117] = id_1121), VOID) };
+                                    (void)id_1122;
                                     uint8_t id_1123 { 128 };
                                     bool id_1124 { bool(leb128_fst_194 >= id_1123) };
                                     letpair_res_1103 = id_1124;
@@ -2517,36 +2574,38 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 }
                                 while_flag_1098 = let_res_1102;
                                 if (while_flag_1098) {
+                                  (void)VOID;
                                 }
                               } while (while_flag_1098);
+                              (void)VOID;
                               uint8_t id_1125 { 0 };
                               uint32_t id_1126 { leb_ref_190[id_1125] };
                               Size id_1127 { Size(id_1126) };
                               uint8_t id_1128 { 0 };
                               Pointer id_1129 { p_ref_192[id_1128] };
-                              v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1130 {  id_1127, id_1129  };
+                              t8beb80162423aee37bd383e9b6834c9c id_1130 { id_1127, id_1129 };
                               let_res_1097 = id_1130;
                             }
                             let_res_1095 = let_res_1097;
                           }
                           let_res_1092 = let_res_1095;
                         }
-                        v_72d68d8dcb9365eec102a4e9857551b4 let_res_1131;
+                        tdd341930f33648a475e5179bf4efb0c2 let_res_1131;
                         {
-                          v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_196 { let_res_1092 };
-                          v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1132;
+                          t8beb80162423aee37bd383e9b6834c9c dstring1_196 { let_res_1092 };
+                          tdd341930f33648a475e5179bf4efb0c2 letpair_res_1132;
                           {
                             auto dstring1_fst_197 { std::get<0>(dstring1_196) };
                             auto dstring1_snd_198 { std::get<1>(dstring1_196) };
-                            f921d1e0a170c3c04148c21704db9c45 id_1133 { dstring1_snd_198.readBytes(dstring1_fst_197) };
-                            v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1134;
+                            t188345aa49abd0cb47ff73fedc219f08 id_1133 { dstring1_snd_198.readBytes(dstring1_fst_197) };
+                            tdd341930f33648a475e5179bf4efb0c2 letpair_res_1134;
                             {
                               auto dstring2_fst_200 { std::get<0>(id_1133) };
                               auto dstring2_snd_201 { std::get<1>(id_1133) };
                               std::string id_1135 { dstring2_fst_200.toString() };
-                              f6f331efc660707e57f0e15ccf4fd321 id_1136 {  .file = drec_fst_173, .insert = drec_fst_188, .create = id_1135  };
-                              d575d47fd9161b749ff8b023ef1235a9 id_1137 { std::in_place_index<3>, id_1136 };
-                              v_72d68d8dcb9365eec102a4e9857551b4 id_1138 {  id_1137, dstring2_snd_201  };
+                              tecf2aac7cb6b403c5b4d278526f0494a id_1136 { .file = drec_fst_173, .insert = drec_fst_188, .create = id_1135 };
+                              t9640504389656a224d425d2dbbc18557 id_1137 { std::in_place_index<3>, id_1136 };
+                              tdd341930f33648a475e5179bf4efb0c2 id_1138 { id_1137, dstring2_snd_201 };
                               letpair_res_1134 = id_1138;
                             }
                             letpair_res_1132 = letpair_res_1134;
@@ -2566,34 +2625,36 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                 uint16_t id_1139 { 4 };
                 bool id_1140 { bool(dsum1_fst_63 == id_1139) };
                 Void id_1141 { ((void)(assert(id_1140)), VOID) };
+                (void)id_1141;
                 uint32_t id_1142 { 0U };
                 Vec<1, uint32_t> id_1143 {  id_1142  };
-                ac0fbd05039f742d2f1d9ac182e392ab let_res_1144;
+                t405eb186408556fed8f2c41523c07d13 let_res_1144;
                 {
                   Vec<1, uint32_t> leb_ref_65 { id_1143 };
                   uint8_t id_1145 { 0 };
                   Vec<1, uint8_t> id_1146 {  id_1145  };
-                  ac0fbd05039f742d2f1d9ac182e392ab let_res_1147;
+                  t405eb186408556fed8f2c41523c07d13 let_res_1147;
                   {
                     Vec<1, uint8_t> shft_ref_66 { id_1146 };
                     Vec<1, Pointer> id_1148 {  dsum1_snd_64  };
-                    ac0fbd05039f742d2f1d9ac182e392ab let_res_1149;
+                    t405eb186408556fed8f2c41523c07d13 let_res_1149;
                     {
                       Vec<1, Pointer> p_ref_67 { id_1148 };
                       bool while_flag_1150 { true };
                       do {
                         uint8_t id_1151 { 0 };
                         Pointer id_1152 { p_ref_67[id_1151] };
-                        v_1d5843897434feb24d158f3793db9189 id_1153 { id_1152.readU8() };
+                        tb3f98ea670610d40658a618de3ec7b90 id_1153 { id_1152.readU8() };
                         bool let_res_1154;
                         {
-                          v_1d5843897434feb24d158f3793db9189 leb128_68 { id_1153 };
+                          tb3f98ea670610d40658a618de3ec7b90 leb128_68 { id_1153 };
                           bool letpair_res_1155;
                           {
                             auto leb128_fst_69 { std::get<0>(leb128_68) };
                             auto leb128_snd_70 { std::get<1>(leb128_68) };
                             uint8_t id_1156 { 0 };
                             Void id_1157 { ((void)(p_ref_67[id_1156] = leb128_snd_70), VOID) };
+                            (void)id_1157;
                             uint8_t id_1158 { 0 };
                             uint8_t id_1159 { 127 };
                             uint8_t id_1160 { uint8_t(leb128_fst_69 & id_1159) };
@@ -2605,12 +2666,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             uint32_t id_1166 { leb_ref_65[id_1165] };
                             uint32_t id_1167 { uint32_t(id_1164 | id_1166) };
                             Void id_1168 { ((void)(leb_ref_65[id_1158] = id_1167), VOID) };
+                            (void)id_1168;
                             uint8_t id_1169 { 0 };
                             uint8_t id_1170 { 0 };
                             uint8_t id_1171 { shft_ref_66[id_1170] };
                             uint8_t id_1172 { 7 };
                             uint8_t id_1173 { uint8_t(id_1171 + id_1172) };
                             Void id_1174 { ((void)(shft_ref_66[id_1169] = id_1173), VOID) };
+                            (void)id_1174;
                             uint8_t id_1175 { 128 };
                             bool id_1176 { bool(leb128_fst_69 >= id_1175) };
                             letpair_res_1155 = id_1176;
@@ -2619,32 +2682,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         }
                         while_flag_1150 = let_res_1154;
                         if (while_flag_1150) {
+                          (void)VOID;
                         }
                       } while (while_flag_1150);
+                      (void)VOID;
                       uint8_t id_1177 { 0 };
                       uint32_t id_1178 { leb_ref_65[id_1177] };
                       uint8_t id_1179 { 0 };
                       Pointer id_1180 { p_ref_67[id_1179] };
-                      ac0fbd05039f742d2f1d9ac182e392ab id_1181 {  id_1178, id_1180  };
+                      t405eb186408556fed8f2c41523c07d13 id_1181 { id_1178, id_1180 };
                       let_res_1149 = id_1181;
                     }
                     let_res_1147 = let_res_1149;
                   }
                   let_res_1144 = let_res_1147;
                 }
-                v_4a73cde273fc238c87e6c6ed8cf570ce let_res_1182;
+                tbbee6c25156a69bfb121b9a9dfe9be4d let_res_1182;
                 {
-                  ac0fbd05039f742d2f1d9ac182e392ab dlist1_74 { let_res_1144 };
-                  v_4a73cde273fc238c87e6c6ed8cf570ce letpair_res_1183;
+                  t405eb186408556fed8f2c41523c07d13 dlist1_74 { let_res_1144 };
+                  tbbee6c25156a69bfb121b9a9dfe9be4d letpair_res_1183;
                   {
                     auto dlist1_fst_75 { std::get<0>(dlist1_74) };
                     auto dlist1_snd_76 { std::get<1>(dlist1_74) };
-                    Lst<d135bed341a046f128507720bca94ebf> endoflist_1184;
-                    v_4a73cde273fc238c87e6c6ed8cf570ce id_1185 {  endoflist_1184, dlist1_snd_76  };
-                    Vec<1, v_4a73cde273fc238c87e6c6ed8cf570ce> id_1186 {  id_1185  };
-                    v_4a73cde273fc238c87e6c6ed8cf570ce let_res_1187;
+                    Lst<t8961925d22ebc35140986110e41bc2a4> endoflist_1184;
+                    tbbee6c25156a69bfb121b9a9dfe9be4d id_1185 { endoflist_1184, dlist1_snd_76 };
+                    Vec<1, tbbee6c25156a69bfb121b9a9dfe9be4d> id_1186 {  id_1185  };
+                    tbbee6c25156a69bfb121b9a9dfe9be4d let_res_1187;
                     {
-                      Vec<1, v_4a73cde273fc238c87e6c6ed8cf570ce> inits_src_ref_77 { id_1186 };
+                      Vec<1, tbbee6c25156a69bfb121b9a9dfe9be4d> inits_src_ref_77 { id_1186 };
                       int32_t id_1188 { 0L };
                       Vec<1, int32_t> id_1189 {  id_1188  };
                       {
@@ -2658,41 +2723,42 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           while_flag_1190 = id_1194;
                           if (while_flag_1190) {
                             uint8_t id_1195 { 0 };
-                            v_4a73cde273fc238c87e6c6ed8cf570ce id_1196 { inits_src_ref_77[id_1195] };
+                            tbbee6c25156a69bfb121b9a9dfe9be4d id_1196 { inits_src_ref_77[id_1195] };
                             {
-                              v_4a73cde273fc238c87e6c6ed8cf570ce dlist2_79 { id_1196 };
+                              tbbee6c25156a69bfb121b9a9dfe9be4d dlist2_79 { id_1196 };
                               {
                                 auto dlist2_fst_80 { std::get<0>(dlist2_79) };
                                 auto dlist2_snd_81 { std::get<1>(dlist2_79) };
                                 uint8_t id_1197 { 0 };
                                 uint32_t id_1198 { 0U };
                                 Vec<1, uint32_t> id_1199 {  id_1198  };
-                                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1200;
+                                t8beb80162423aee37bd383e9b6834c9c let_res_1200;
                                 {
                                   Vec<1, uint32_t> leb_ref_82 { id_1199 };
                                   uint8_t id_1201 { 0 };
                                   Vec<1, uint8_t> id_1202 {  id_1201  };
-                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1203;
+                                  t8beb80162423aee37bd383e9b6834c9c let_res_1203;
                                   {
                                     Vec<1, uint8_t> shft_ref_83 { id_1202 };
                                     Vec<1, Pointer> id_1204 {  dlist2_snd_81  };
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1205;
+                                    t8beb80162423aee37bd383e9b6834c9c let_res_1205;
                                     {
                                       Vec<1, Pointer> p_ref_84 { id_1204 };
                                       bool while_flag_1206 { true };
                                       do {
                                         uint8_t id_1207 { 0 };
                                         Pointer id_1208 { p_ref_84[id_1207] };
-                                        v_1d5843897434feb24d158f3793db9189 id_1209 { id_1208.readU8() };
+                                        tb3f98ea670610d40658a618de3ec7b90 id_1209 { id_1208.readU8() };
                                         bool let_res_1210;
                                         {
-                                          v_1d5843897434feb24d158f3793db9189 leb128_85 { id_1209 };
+                                          tb3f98ea670610d40658a618de3ec7b90 leb128_85 { id_1209 };
                                           bool letpair_res_1211;
                                           {
                                             auto leb128_fst_86 { std::get<0>(leb128_85) };
                                             auto leb128_snd_87 { std::get<1>(leb128_85) };
                                             uint8_t id_1212 { 0 };
                                             Void id_1213 { ((void)(p_ref_84[id_1212] = leb128_snd_87), VOID) };
+                                            (void)id_1213;
                                             uint8_t id_1214 { 0 };
                                             uint8_t id_1215 { 127 };
                                             uint8_t id_1216 { uint8_t(leb128_fst_86 & id_1215) };
@@ -2704,12 +2770,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                             uint32_t id_1222 { leb_ref_82[id_1221] };
                                             uint32_t id_1223 { uint32_t(id_1220 | id_1222) };
                                             Void id_1224 { ((void)(leb_ref_82[id_1214] = id_1223), VOID) };
+                                            (void)id_1224;
                                             uint8_t id_1225 { 0 };
                                             uint8_t id_1226 { 0 };
                                             uint8_t id_1227 { shft_ref_83[id_1226] };
                                             uint8_t id_1228 { 7 };
                                             uint8_t id_1229 { uint8_t(id_1227 + id_1228) };
                                             Void id_1230 { ((void)(shft_ref_83[id_1225] = id_1229), VOID) };
+                                            (void)id_1230;
                                             uint8_t id_1231 { 128 };
                                             bool id_1232 { bool(leb128_fst_86 >= id_1231) };
                                             letpair_res_1211 = id_1232;
@@ -2718,75 +2786,78 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                         }
                                         while_flag_1206 = let_res_1210;
                                         if (while_flag_1206) {
+                                          (void)VOID;
                                         }
                                       } while (while_flag_1206);
+                                      (void)VOID;
                                       uint8_t id_1233 { 0 };
                                       uint32_t id_1234 { leb_ref_82[id_1233] };
                                       Size id_1235 { Size(id_1234) };
                                       uint8_t id_1236 { 0 };
                                       Pointer id_1237 { p_ref_84[id_1236] };
-                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1238 {  id_1235, id_1237  };
+                                      t8beb80162423aee37bd383e9b6834c9c id_1238 { id_1235, id_1237 };
                                       let_res_1205 = id_1238;
                                     }
                                     let_res_1203 = let_res_1205;
                                   }
                                   let_res_1200 = let_res_1203;
                                 }
-                                v_46a5e81c2410b000ff0adea6dc198147 let_res_1239;
+                                tef94b55d8809251f13165d9a05bd9d0e let_res_1239;
                                 {
-                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_88 { let_res_1200 };
-                                  v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1240;
+                                  t8beb80162423aee37bd383e9b6834c9c dstring1_88 { let_res_1200 };
+                                  tef94b55d8809251f13165d9a05bd9d0e letpair_res_1240;
                                   {
                                     auto dstring1_fst_89 { std::get<0>(dstring1_88) };
                                     auto dstring1_snd_90 { std::get<1>(dstring1_88) };
-                                    f921d1e0a170c3c04148c21704db9c45 id_1241 { dstring1_snd_90.readBytes(dstring1_fst_89) };
-                                    v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1242;
+                                    t188345aa49abd0cb47ff73fedc219f08 id_1241 { dstring1_snd_90.readBytes(dstring1_fst_89) };
+                                    tef94b55d8809251f13165d9a05bd9d0e letpair_res_1242;
                                     {
                                       auto dstring2_fst_92 { std::get<0>(id_1241) };
                                       auto dstring2_snd_93 { std::get<1>(id_1241) };
                                       std::string id_1243 { dstring2_fst_92.toString() };
-                                      v_46a5e81c2410b000ff0adea6dc198147 id_1244 {  id_1243, dstring2_snd_93  };
+                                      tef94b55d8809251f13165d9a05bd9d0e id_1244 { id_1243, dstring2_snd_93 };
                                       letpair_res_1242 = id_1244;
                                     }
                                     letpair_res_1240 = letpair_res_1242;
                                   }
                                   let_res_1239 = letpair_res_1240;
                                 }
-                                v_4a73cde273fc238c87e6c6ed8cf570ce let_res_1245;
+                                tbbee6c25156a69bfb121b9a9dfe9be4d let_res_1245;
                                 {
-                                  v_46a5e81c2410b000ff0adea6dc198147 dtup_94 { let_res_1239 };
-                                  v_4a73cde273fc238c87e6c6ed8cf570ce letpair_res_1246;
+                                  tef94b55d8809251f13165d9a05bd9d0e dtup_94 { let_res_1239 };
+                                  tbbee6c25156a69bfb121b9a9dfe9be4d letpair_res_1246;
                                   {
                                     auto dtup_fst_95 { std::get<0>(dtup_94) };
                                     auto dtup_snd_96 { std::get<1>(dtup_94) };
                                     uint32_t id_1247 { 0U };
                                     Vec<1, uint32_t> id_1248 {  id_1247  };
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1249;
+                                    t8beb80162423aee37bd383e9b6834c9c let_res_1249;
                                     {
                                       Vec<1, uint32_t> leb_ref_97 { id_1248 };
                                       uint8_t id_1250 { 0 };
                                       Vec<1, uint8_t> id_1251 {  id_1250  };
-                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1252;
+                                      t8beb80162423aee37bd383e9b6834c9c let_res_1252;
                                       {
                                         Vec<1, uint8_t> shft_ref_98 { id_1251 };
                                         Vec<1, Pointer> id_1253 {  dtup_snd_96  };
-                                        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1254;
+                                        t8beb80162423aee37bd383e9b6834c9c let_res_1254;
                                         {
                                           Vec<1, Pointer> p_ref_99 { id_1253 };
                                           bool while_flag_1255 { true };
                                           do {
                                             uint8_t id_1256 { 0 };
                                             Pointer id_1257 { p_ref_99[id_1256] };
-                                            v_1d5843897434feb24d158f3793db9189 id_1258 { id_1257.readU8() };
+                                            tb3f98ea670610d40658a618de3ec7b90 id_1258 { id_1257.readU8() };
                                             bool let_res_1259;
                                             {
-                                              v_1d5843897434feb24d158f3793db9189 leb128_100 { id_1258 };
+                                              tb3f98ea670610d40658a618de3ec7b90 leb128_100 { id_1258 };
                                               bool letpair_res_1260;
                                               {
                                                 auto leb128_fst_101 { std::get<0>(leb128_100) };
                                                 auto leb128_snd_102 { std::get<1>(leb128_100) };
                                                 uint8_t id_1261 { 0 };
                                                 Void id_1262 { ((void)(p_ref_99[id_1261] = leb128_snd_102), VOID) };
+                                                (void)id_1262;
                                                 uint8_t id_1263 { 0 };
                                                 uint8_t id_1264 { 127 };
                                                 uint8_t id_1265 { uint8_t(leb128_fst_101 & id_1264) };
@@ -2798,12 +2869,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                 uint32_t id_1271 { leb_ref_97[id_1270] };
                                                 uint32_t id_1272 { uint32_t(id_1269 | id_1271) };
                                                 Void id_1273 { ((void)(leb_ref_97[id_1263] = id_1272), VOID) };
+                                                (void)id_1273;
                                                 uint8_t id_1274 { 0 };
                                                 uint8_t id_1275 { 0 };
                                                 uint8_t id_1276 { shft_ref_98[id_1275] };
                                                 uint8_t id_1277 { 7 };
                                                 uint8_t id_1278 { uint8_t(id_1276 + id_1277) };
                                                 Void id_1279 { ((void)(shft_ref_98[id_1274] = id_1278), VOID) };
+                                                (void)id_1279;
                                                 uint8_t id_1280 { 128 };
                                                 bool id_1281 { bool(leb128_fst_101 >= id_1280) };
                                                 letpair_res_1260 = id_1281;
@@ -2812,36 +2885,38 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                             }
                                             while_flag_1255 = let_res_1259;
                                             if (while_flag_1255) {
+                                              (void)VOID;
                                             }
                                           } while (while_flag_1255);
+                                          (void)VOID;
                                           uint8_t id_1282 { 0 };
                                           uint32_t id_1283 { leb_ref_97[id_1282] };
                                           Size id_1284 { Size(id_1283) };
                                           uint8_t id_1285 { 0 };
                                           Pointer id_1286 { p_ref_99[id_1285] };
-                                          v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1287 {  id_1284, id_1286  };
+                                          t8beb80162423aee37bd383e9b6834c9c id_1287 { id_1284, id_1286 };
                                           let_res_1254 = id_1287;
                                         }
                                         let_res_1252 = let_res_1254;
                                       }
                                       let_res_1249 = let_res_1252;
                                     }
-                                    v_4a73cde273fc238c87e6c6ed8cf570ce let_res_1288;
+                                    tbbee6c25156a69bfb121b9a9dfe9be4d let_res_1288;
                                     {
-                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_103 { let_res_1249 };
-                                      v_4a73cde273fc238c87e6c6ed8cf570ce letpair_res_1289;
+                                      t8beb80162423aee37bd383e9b6834c9c dstring1_103 { let_res_1249 };
+                                      tbbee6c25156a69bfb121b9a9dfe9be4d letpair_res_1289;
                                       {
                                         auto dstring1_fst_104 { std::get<0>(dstring1_103) };
                                         auto dstring1_snd_105 { std::get<1>(dstring1_103) };
-                                        f921d1e0a170c3c04148c21704db9c45 id_1290 { dstring1_snd_105.readBytes(dstring1_fst_104) };
-                                        v_4a73cde273fc238c87e6c6ed8cf570ce letpair_res_1291;
+                                        t188345aa49abd0cb47ff73fedc219f08 id_1290 { dstring1_snd_105.readBytes(dstring1_fst_104) };
+                                        tbbee6c25156a69bfb121b9a9dfe9be4d letpair_res_1291;
                                         {
                                           auto dstring2_fst_107 { std::get<0>(id_1290) };
                                           auto dstring2_snd_108 { std::get<1>(id_1290) };
                                           std::string id_1292 { dstring2_fst_107.toString() };
-                                          d135bed341a046f128507720bca94ebf id_1293 {  dtup_fst_95, id_1292  };
-                                          Lst<d135bed341a046f128507720bca94ebf> id_1294 { id_1293, dlist2_fst_80 };
-                                          v_4a73cde273fc238c87e6c6ed8cf570ce id_1295 {  id_1294, dstring2_snd_108  };
+                                          t8961925d22ebc35140986110e41bc2a4 id_1293 { dtup_fst_95, id_1292 };
+                                          Lst<t8961925d22ebc35140986110e41bc2a4> id_1294 { id_1293, dlist2_fst_80 };
+                                          tbbee6c25156a69bfb121b9a9dfe9be4d id_1295 { id_1294, dstring2_snd_108 };
                                           letpair_res_1291 = id_1295;
                                         }
                                         letpair_res_1289 = letpair_res_1291;
@@ -2853,67 +2928,75 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   let_res_1245 = letpair_res_1246;
                                 }
                                 Void id_1296 { ((void)(inits_src_ref_77[id_1197] = let_res_1245), VOID) };
+                                (void)id_1296;
                               }
+                              (void)VOID;
                             }
+                            (void)VOID;
                             uint8_t id_1297 { 0 };
                             uint8_t id_1298 { 0 };
                             int32_t id_1299 { repeat_n_78[id_1298] };
                             int32_t id_1300 { 1L };
                             int32_t id_1301 { int32_t(id_1299 + id_1300) };
                             Void id_1302 { ((void)(repeat_n_78[id_1297] = id_1301), VOID) };
+                            (void)id_1302;
+                            (void)id_1302;
                           }
                         } while (while_flag_1190);
+                        (void)VOID;
                       }
+                      (void)VOID;
                       uint8_t id_1303 { 0 };
-                      v_4a73cde273fc238c87e6c6ed8cf570ce id_1304 { inits_src_ref_77[id_1303] };
+                      tbbee6c25156a69bfb121b9a9dfe9be4d id_1304 { inits_src_ref_77[id_1303] };
                       let_res_1187 = id_1304;
                     }
                     letpair_res_1183 = let_res_1187;
                   }
                   let_res_1182 = letpair_res_1183;
                 }
-                v_4a73cde273fc238c87e6c6ed8cf570ce letpair_res_1305;
+                tbbee6c25156a69bfb121b9a9dfe9be4d letpair_res_1305;
                 {
                   auto dlist4_fst_116 { std::get<0>(let_res_1182) };
                   auto dlist4_snd_117 { std::get<1>(let_res_1182) };
-                  v_4a73cde273fc238c87e6c6ed8cf570ce id_1306 {  dlist4_fst_116, dlist4_snd_117  };
+                  tbbee6c25156a69bfb121b9a9dfe9be4d id_1306 { dlist4_fst_116, dlist4_snd_117 };
                   letpair_res_1305 = id_1306;
                 }
-                v_72d68d8dcb9365eec102a4e9857551b4 let_res_1307;
+                tdd341930f33648a475e5179bf4efb0c2 let_res_1307;
                 {
-                  v_4a73cde273fc238c87e6c6ed8cf570ce drec_118 { letpair_res_1305 };
-                  v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1308;
+                  tbbee6c25156a69bfb121b9a9dfe9be4d drec_118 { letpair_res_1305 };
+                  tdd341930f33648a475e5179bf4efb0c2 letpair_res_1308;
                   {
                     auto drec_fst_119 { std::get<0>(drec_118) };
                     auto drec_snd_120 { std::get<1>(drec_118) };
                     uint32_t id_1309 { 0U };
                     Vec<1, uint32_t> id_1310 {  id_1309  };
-                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1311;
+                    t8beb80162423aee37bd383e9b6834c9c let_res_1311;
                     {
                       Vec<1, uint32_t> leb_ref_121 { id_1310 };
                       uint8_t id_1312 { 0 };
                       Vec<1, uint8_t> id_1313 {  id_1312  };
-                      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1314;
+                      t8beb80162423aee37bd383e9b6834c9c let_res_1314;
                       {
                         Vec<1, uint8_t> shft_ref_122 { id_1313 };
                         Vec<1, Pointer> id_1315 {  drec_snd_120  };
-                        v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1316;
+                        t8beb80162423aee37bd383e9b6834c9c let_res_1316;
                         {
                           Vec<1, Pointer> p_ref_123 { id_1315 };
                           bool while_flag_1317 { true };
                           do {
                             uint8_t id_1318 { 0 };
                             Pointer id_1319 { p_ref_123[id_1318] };
-                            v_1d5843897434feb24d158f3793db9189 id_1320 { id_1319.readU8() };
+                            tb3f98ea670610d40658a618de3ec7b90 id_1320 { id_1319.readU8() };
                             bool let_res_1321;
                             {
-                              v_1d5843897434feb24d158f3793db9189 leb128_124 { id_1320 };
+                              tb3f98ea670610d40658a618de3ec7b90 leb128_124 { id_1320 };
                               bool letpair_res_1322;
                               {
                                 auto leb128_fst_125 { std::get<0>(leb128_124) };
                                 auto leb128_snd_126 { std::get<1>(leb128_124) };
                                 uint8_t id_1323 { 0 };
                                 Void id_1324 { ((void)(p_ref_123[id_1323] = leb128_snd_126), VOID) };
+                                (void)id_1324;
                                 uint8_t id_1325 { 0 };
                                 uint8_t id_1326 { 127 };
                                 uint8_t id_1327 { uint8_t(leb128_fst_125 & id_1326) };
@@ -2925,12 +3008,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 uint32_t id_1333 { leb_ref_121[id_1332] };
                                 uint32_t id_1334 { uint32_t(id_1331 | id_1333) };
                                 Void id_1335 { ((void)(leb_ref_121[id_1325] = id_1334), VOID) };
+                                (void)id_1335;
                                 uint8_t id_1336 { 0 };
                                 uint8_t id_1337 { 0 };
                                 uint8_t id_1338 { shft_ref_122[id_1337] };
                                 uint8_t id_1339 { 7 };
                                 uint8_t id_1340 { uint8_t(id_1338 + id_1339) };
                                 Void id_1341 { ((void)(shft_ref_122[id_1336] = id_1340), VOID) };
+                                (void)id_1341;
                                 uint8_t id_1342 { 128 };
                                 bool id_1343 { bool(leb128_fst_125 >= id_1342) };
                                 letpair_res_1322 = id_1343;
@@ -2939,90 +3024,93 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             }
                             while_flag_1317 = let_res_1321;
                             if (while_flag_1317) {
+                              (void)VOID;
                             }
                           } while (while_flag_1317);
+                          (void)VOID;
                           uint8_t id_1344 { 0 };
                           uint32_t id_1345 { leb_ref_121[id_1344] };
                           Size id_1346 { Size(id_1345) };
                           uint8_t id_1347 { 0 };
                           Pointer id_1348 { p_ref_123[id_1347] };
-                          v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1349 {  id_1346, id_1348  };
+                          t8beb80162423aee37bd383e9b6834c9c id_1349 { id_1346, id_1348 };
                           let_res_1316 = id_1349;
                         }
                         let_res_1314 = let_res_1316;
                       }
                       let_res_1311 = let_res_1314;
                     }
-                    v_46a5e81c2410b000ff0adea6dc198147 let_res_1350;
+                    tef94b55d8809251f13165d9a05bd9d0e let_res_1350;
                     {
-                      v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_127 { let_res_1311 };
-                      v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1351;
+                      t8beb80162423aee37bd383e9b6834c9c dstring1_127 { let_res_1311 };
+                      tef94b55d8809251f13165d9a05bd9d0e letpair_res_1351;
                       {
                         auto dstring1_fst_128 { std::get<0>(dstring1_127) };
                         auto dstring1_snd_129 { std::get<1>(dstring1_127) };
-                        f921d1e0a170c3c04148c21704db9c45 id_1352 { dstring1_snd_129.readBytes(dstring1_fst_128) };
-                        v_46a5e81c2410b000ff0adea6dc198147 letpair_res_1353;
+                        t188345aa49abd0cb47ff73fedc219f08 id_1352 { dstring1_snd_129.readBytes(dstring1_fst_128) };
+                        tef94b55d8809251f13165d9a05bd9d0e letpair_res_1353;
                         {
                           auto dstring2_fst_131 { std::get<0>(id_1352) };
                           auto dstring2_snd_132 { std::get<1>(id_1352) };
                           std::string id_1354 { dstring2_fst_131.toString() };
-                          v_46a5e81c2410b000ff0adea6dc198147 id_1355 {  id_1354, dstring2_snd_132  };
+                          tef94b55d8809251f13165d9a05bd9d0e id_1355 { id_1354, dstring2_snd_132 };
                           letpair_res_1353 = id_1355;
                         }
                         letpair_res_1351 = letpair_res_1353;
                       }
                       let_res_1350 = letpair_res_1351;
                     }
-                    v_72d68d8dcb9365eec102a4e9857551b4 let_res_1356;
+                    tdd341930f33648a475e5179bf4efb0c2 let_res_1356;
                     {
-                      v_46a5e81c2410b000ff0adea6dc198147 drec_133 { let_res_1350 };
-                      v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1357;
+                      tef94b55d8809251f13165d9a05bd9d0e drec_133 { let_res_1350 };
+                      tdd341930f33648a475e5179bf4efb0c2 letpair_res_1357;
                       {
                         auto drec_fst_134 { std::get<0>(drec_133) };
                         auto drec_snd_135 { std::get<1>(drec_133) };
-                        v_362f9d9108a6902af48b6c83d5377ea1 id_1358 { drec_snd_135.readU16Le() };
-                        v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_1359;
+                        t22a32080ad88ab548b80077a17b7dd46 id_1358 { drec_snd_135.readU16Le() };
+                        t22a32080ad88ab548b80077a17b7dd46 letpair_res_1359;
                         {
                           auto du16_fst_137 { std::get<0>(id_1358) };
                           auto du16_snd_138 { std::get<1>(id_1358) };
-                          v_362f9d9108a6902af48b6c83d5377ea1 id_1360 {  du16_fst_137, du16_snd_138  };
+                          t22a32080ad88ab548b80077a17b7dd46 id_1360 { du16_fst_137, du16_snd_138 };
                           letpair_res_1359 = id_1360;
                         }
-                        v_72d68d8dcb9365eec102a4e9857551b4 let_res_1361;
+                        tdd341930f33648a475e5179bf4efb0c2 let_res_1361;
                         {
-                          v_362f9d9108a6902af48b6c83d5377ea1 drec_139 { letpair_res_1359 };
-                          v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1362;
+                          t22a32080ad88ab548b80077a17b7dd46 drec_139 { letpair_res_1359 };
+                          tdd341930f33648a475e5179bf4efb0c2 letpair_res_1362;
                           {
                             auto drec_fst_140 { std::get<0>(drec_139) };
                             auto drec_snd_141 { std::get<1>(drec_139) };
                             uint32_t id_1363 { 0U };
                             Vec<1, uint32_t> id_1364 {  id_1363  };
-                            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1365;
+                            t8beb80162423aee37bd383e9b6834c9c let_res_1365;
                             {
                               Vec<1, uint32_t> leb_ref_142 { id_1364 };
                               uint8_t id_1366 { 0 };
                               Vec<1, uint8_t> id_1367 {  id_1366  };
-                              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1368;
+                              t8beb80162423aee37bd383e9b6834c9c let_res_1368;
                               {
                                 Vec<1, uint8_t> shft_ref_143 { id_1367 };
                                 Vec<1, Pointer> id_1369 {  drec_snd_141  };
-                                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_1370;
+                                t8beb80162423aee37bd383e9b6834c9c let_res_1370;
                                 {
                                   Vec<1, Pointer> p_ref_144 { id_1369 };
                                   bool while_flag_1371 { true };
                                   do {
                                     uint8_t id_1372 { 0 };
                                     Pointer id_1373 { p_ref_144[id_1372] };
-                                    v_1d5843897434feb24d158f3793db9189 id_1374 { id_1373.readU8() };
+                                    tb3f98ea670610d40658a618de3ec7b90 id_1374 { id_1373.readU8() };
                                     bool let_res_1375;
                                     {
-                                      v_1d5843897434feb24d158f3793db9189 leb128_145 { id_1374 };
+                                      tb3f98ea670610d40658a618de3ec7b90 leb128_145 { id_1374 };
                                       bool letpair_res_1376;
                                       {
                                         auto leb128_fst_146 { std::get<0>(leb128_145) };
                                         auto leb128_snd_147 { std::get<1>(leb128_145) };
                                         uint8_t id_1377 { 0 };
                                         Void id_1378 { ((void)(p_ref_144[id_1377] = leb128_snd_147), VOID) };
+                                        (void)id_1378;
                                         uint8_t id_1379 { 0 };
                                         uint8_t id_1380 { 127 };
                                         uint8_t id_1381 { uint8_t(leb128_fst_146 & id_1380) };
@@ -3034,12 +3122,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                         uint32_t id_1387 { leb_ref_142[id_1386] };
                                         uint32_t id_1388 { uint32_t(id_1385 | id_1387) };
                                         Void id_1389 { ((void)(leb_ref_142[id_1379] = id_1388), VOID) };
+                                        (void)id_1389;
                                         uint8_t id_1390 { 0 };
                                         uint8_t id_1391 { 0 };
                                         uint8_t id_1392 { shft_ref_143[id_1391] };
                                         uint8_t id_1393 { 7 };
                                         uint8_t id_1394 { uint8_t(id_1392 + id_1393) };
                                         Void id_1395 { ((void)(shft_ref_143[id_1390] = id_1394), VOID) };
+                                        (void)id_1395;
                                         uint8_t id_1396 { 128 };
                                         bool id_1397 { bool(leb128_fst_146 >= id_1396) };
                                         letpair_res_1376 = id_1397;
@@ -3048,36 +3138,38 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     }
                                     while_flag_1371 = let_res_1375;
                                     if (while_flag_1371) {
+                                      (void)VOID;
                                     }
                                   } while (while_flag_1371);
+                                  (void)VOID;
                                   uint8_t id_1398 { 0 };
                                   uint32_t id_1399 { leb_ref_142[id_1398] };
                                   Size id_1400 { Size(id_1399) };
                                   uint8_t id_1401 { 0 };
                                   Pointer id_1402 { p_ref_144[id_1401] };
-                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 id_1403 {  id_1400, id_1402  };
+                                  t8beb80162423aee37bd383e9b6834c9c id_1403 { id_1400, id_1402 };
                                   let_res_1370 = id_1403;
                                 }
                                 let_res_1368 = let_res_1370;
                               }
                               let_res_1365 = let_res_1368;
                             }
-                            v_72d68d8dcb9365eec102a4e9857551b4 let_res_1404;
+                            tdd341930f33648a475e5179bf4efb0c2 let_res_1404;
                             {
-                              v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_148 { let_res_1365 };
-                              v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1405;
+                              t8beb80162423aee37bd383e9b6834c9c dstring1_148 { let_res_1365 };
+                              tdd341930f33648a475e5179bf4efb0c2 letpair_res_1405;
                               {
                                 auto dstring1_fst_149 { std::get<0>(dstring1_148) };
                                 auto dstring1_snd_150 { std::get<1>(dstring1_148) };
-                                f921d1e0a170c3c04148c21704db9c45 id_1406 { dstring1_snd_150.readBytes(dstring1_fst_149) };
-                                v_72d68d8dcb9365eec102a4e9857551b4 letpair_res_1407;
+                                t188345aa49abd0cb47ff73fedc219f08 id_1406 { dstring1_snd_150.readBytes(dstring1_fst_149) };
+                                tdd341930f33648a475e5179bf4efb0c2 letpair_res_1407;
                                 {
                                   auto dstring2_fst_152 { std::get<0>(id_1406) };
                                   auto dstring2_snd_153 { std::get<1>(id_1406) };
                                   std::string id_1408 { dstring2_fst_152.toString() };
-                                  e952f334fe511c004f72c55ab7164557 id_1409 {  .options = drec_fst_119, .topic = drec_fst_134, .partition = drec_fst_140, .text = id_1408  };
-                                  d575d47fd9161b749ff8b023ef1235a9 id_1410 { std::in_place_index<4>, id_1409 };
-                                  v_72d68d8dcb9365eec102a4e9857551b4 id_1411 {  id_1410, dstring2_snd_153  };
+                                  t31d24e591f0a4b7928f5d849a60c7860 id_1409 { .options = drec_fst_119, .topic = drec_fst_134, .partition = drec_fst_140, .text = id_1408 };
+                                  t9640504389656a224d425d2dbbc18557 id_1410 { std::in_place_index<4>, id_1409 };
+                                  tdd341930f33648a475e5179bf4efb0c2 id_1411 { id_1410, dstring2_snd_153 };
                                   letpair_res_1407 = id_1411;
                                 }
                                 letpair_res_1405 = letpair_res_1407;
@@ -3108,21 +3200,21 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
       }
       let_res_880 = letpair_res_881;
     }
-    f63f919559f0d70225bd0da5dd9bcafc let_res_1412;
+    t45217dce3db5a9a49037839afd0048e8 let_res_1412;
     {
-      v_72d68d8dcb9365eec102a4e9857551b4 drec_241 { let_res_880 };
-      f63f919559f0d70225bd0da5dd9bcafc letpair_res_1413;
+      tdd341930f33648a475e5179bf4efb0c2 drec_241 { let_res_880 };
+      t45217dce3db5a9a49037839afd0048e8 letpair_res_1413;
       {
         auto drec_fst_242 { std::get<0>(drec_241) };
         auto drec_snd_243 { std::get<1>(drec_241) };
-        b62e103e7915a76f45f02f7c6f667c79 id_1414 { drec_snd_243.readU64Le() };
-        f63f919559f0d70225bd0da5dd9bcafc letpair_res_1415;
+        t7a47220550fc5126a7b79f1e0c10c645 id_1414 { drec_snd_243.readU64Le() };
+        t45217dce3db5a9a49037839afd0048e8 letpair_res_1415;
         {
           auto dfloat_fst_245 { std::get<0>(id_1414) };
           auto dfloat_snd_246 { std::get<1>(id_1414) };
           double id_1416 { float_of_qword(dfloat_fst_245) };
-          t id_1417 {  .via = drec_fst_242, .timeout = id_1416  };
-          f63f919559f0d70225bd0da5dd9bcafc id_1418 {  id_1417, dfloat_snd_246  };
+          t* id_1417 { new t({ .via = drec_fst_242, .timeout = id_1416 }) };
+          t45217dce3db5a9a49037839afd0048e8 id_1418 { id_1417, dfloat_snd_246 };
           letpair_res_1415 = id_1418;
         }
         letpair_res_1413 = letpair_res_1415;
@@ -3134,7 +3226,8 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
    };
   return fun876;
 }
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t *t_ext;
 
 }

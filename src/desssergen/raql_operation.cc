@@ -16,6 +16,38 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_net_protocol.h"
+#include "desssergen/field_name.h"
+#include "desssergen/event_time.h"
+#include "desssergen/field_type.h"
+#include "desssergen/field_type.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/function_name.h"
+#include "desssergen/raql_flush_method.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/event_time.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/raql_expr.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_select_field.h"
+
+
+namespace dessser::gen::raql_operation {
+using dessser::operator<<;
 
 std::uniform_real_distribution<double> _random_float_(0, 1);
 std::uniform_int_distribution<uint8_t> _random_u8_(0);
@@ -23,445 +55,474 @@ std::uniform_int_distribution<uint32_t> _random_u32_(0);
 std::uniform_int_distribution<uint64_t> _random_u64_(0);
 std::default_random_engine _random_engine_;
 
-namespace dessser::gen::raql_operation {
-// don't ask me why:
-using dessser::operator<<;
-
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct b48f9480e4991d15124ad477c5cb330e : public std::tuple<
+struct tf0c8d4f3070907529cc1a83f8baf6fab : public std::tuple<
   uint32_t,
-  std::optional<dessser::gen::raql_expr::t>,
-  Lst<dessser::gen::raql_expr::t>
+  std::optional<dessser::gen::raql_expr::t_ext>,
+  Lst<dessser::gen::raql_expr::t_ext>
 > { using tuple::tuple; };
-std::ostream &operator<<(std::ostream &os, b48f9480e4991d15124ad477c5cb330e const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
-  return os;
-}
-
-struct v_3cd54ea1158497be65dc13cca6d4b046 : public std::variant<
+struct te10a95f610a64bfb7ccea542c54f0a25 : public std::variant<
   Void,
   std::string,
   Void
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_3cd54ea1158497be65dc13cca6d4b046 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-  }
-  return os;
-}
-
-struct v_9054563dd112d3f48469dddea6b8194e : public std::tuple<
-  v_3cd54ea1158497be65dc13cca6d4b046,
+struct t9b471a57e45588f3795bf9ca91c31ff6 : public std::tuple<
+  te10a95f610a64bfb7ccea542c54f0a25,
   std::optional<std::string>,
-  dessser::gen::function_name::t
+  dessser::gen::function_name::t_ext
 > { using tuple::tuple; };
-std::ostream &operator<<(std::ostream &os, v_9054563dd112d3f48469dddea6b8194e const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
-  return os;
-}
-
 struct t;
-struct ee20956156b3a0bf3ed4185051a85c84 : public std::variant<
-  v_9054563dd112d3f48469dddea6b8194e,
+struct t;
+struct t7c6bbe37b66fb3a66c00c4bd1bfc4369 : public std::variant<
+  t9b471a57e45588f3795bf9ca91c31ff6,
   t*
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, ee20956156b3a0bf3ed4185051a85c84 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-  }
-  return os;
-}
-
-struct v_41bb77c6ca1cb4242e451c68e9cdbd6c {
-  Lst<dessser::gen::raql_select_field::t> fields;
-  std::optional<Lst<dessser::gen::field_name::t>> and_all_others;
-  std::optional<b48f9480e4991d15124ad477c5cb330e> sort;
-  dessser::gen::raql_expr::t where;
-  std::optional<dessser::gen::event_time::t> event_time;
-  Lst<dessser::gen::raql_expr::t> notifications;
-  Lst<dessser::gen::raql_expr::t> key;
-  dessser::gen::raql_expr::t commit_cond;
+struct t;
+struct ta2fe18cae70948742cabb6081fd22a0c {
+  Lst<dessser::gen::raql_select_field::t_ext> fields;
+  std::optional<Lst<dessser::gen::field_name::t_ext>> and_all_others;
+  std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> sort;
+  dessser::gen::raql_expr::t_ext where;
+  std::optional<dessser::gen::event_time::t_ext> event_time;
+  Lst<dessser::gen::raql_expr::t_ext> notifications;
+  Lst<dessser::gen::raql_expr::t_ext> key;
+  dessser::gen::raql_expr::t_ext commit_cond;
   bool commit_before;
-  dessser::gen::raql_flush_method::t flush_how;
-  Lst<ee20956156b3a0bf3ed4185051a85c84> from;
-  std::optional<dessser::gen::raql_expr::t> every;
-  Lst<dessser::gen::field_name::t> factors;
-  bool operator==(v_41bb77c6ca1cb4242e451c68e9cdbd6c const &other) const {
+  dessser::gen::raql_flush_method::t_ext flush_how;
+  Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> from;
+  std::optional<dessser::gen::raql_expr::t_ext> every;
+  Lst<dessser::gen::field_name::t_ext> factors;
+  bool operator==(ta2fe18cae70948742cabb6081fd22a0c const &other) const {
     return fields == other.fields && and_all_others == other.and_all_others && sort == other.sort && where == other.where && event_time == other.event_time && notifications == other.notifications && key == other.key && commit_cond == other.commit_cond && commit_before == other.commit_before && flush_how == other.flush_how && from == other.from && every == other.every && factors == other.factors;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_41bb77c6ca1cb4242e451c68e9cdbd6c const &r) {
-  os << '{';
-  os << "fields:" << r.fields << ',';
-  os << "and_all_others:" << r.and_all_others << ',';
-  os << "sort:" << r.sort << ',';
-  os << "where:" << r.where << ',';
-  os << "event_time:" << r.event_time << ',';
-  os << "notifications:" << r.notifications << ',';
-  os << "key:" << r.key << ',';
-  os << "commit_cond:" << r.commit_cond << ',';
-  os << "commit_before:" << r.commit_before << ',';
-  os << "flush_how:" << r.flush_how << ',';
-  os << "from:" << r.from << ',';
-  os << "every:" << r.every << ',';
-  os << "factors:" << r.factors;
-  os << '}';
-  return os;
-}
-
-struct v_65abbca6f6205aebd6740de88f9e9235 {
-  dessser::gen::raql_expr::t fname;
-  std::optional<dessser::gen::raql_expr::t> preprocessor;
-  dessser::gen::raql_expr::t unlink;
-  bool operator==(v_65abbca6f6205aebd6740de88f9e9235 const &other) const {
+struct ta828a76692b94aa6a15973ace224bedc {
+  dessser::gen::raql_expr::t_ext fname;
+  std::optional<dessser::gen::raql_expr::t_ext> preprocessor;
+  dessser::gen::raql_expr::t_ext unlink;
+  bool operator==(ta828a76692b94aa6a15973ace224bedc const &other) const {
     return fname == other.fname && preprocessor == other.preprocessor && unlink == other.unlink;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_65abbca6f6205aebd6740de88f9e9235 const &r) {
-  os << '{';
-  os << "fname:" << r.fname << ',';
-  os << "preprocessor:" << r.preprocessor << ',';
-  os << "unlink:" << r.unlink;
-  os << '}';
-  return os;
-}
-
 typedef std::tuple<
   std::string,
-  dessser::gen::raql_expr::t
-> df398bbef680305e3e9f5137633156fb;
+  dessser::gen::raql_expr::t_ext
+> tcd17c85cefeae7a860c0732c05eaeaed;
 
-struct e1d3e929c0a104569907bf46832d32c2 {
-  dessser::gen::raql_expr::t after_max_secs;
-  dessser::gen::raql_expr::t after_max_events;
-  bool operator==(e1d3e929c0a104569907bf46832d32c2 const &other) const {
+struct tee7dccc2726e2723462077a878a69c99 {
+  dessser::gen::raql_expr::t_ext after_max_secs;
+  dessser::gen::raql_expr::t_ext after_max_events;
+  bool operator==(tee7dccc2726e2723462077a878a69c99 const &other) const {
     return after_max_secs == other.after_max_secs && after_max_events == other.after_max_events;
   }
 };
-std::ostream &operator<<(std::ostream &os, e1d3e929c0a104569907bf46832d32c2 const &r) {
-  os << '{';
-  os << "after_max_secs:" << r.after_max_secs << ',';
-  os << "after_max_events:" << r.after_max_events;
-  os << '}';
-  return os;
-}
-
-struct v_39cf200fa778e5fa84401746e9b5ba70 : public std::variant<
+struct t6f8c1c936ce8cf2fe9dc881177aa3e62 : public std::variant<
   Void,
-  dessser::gen::raql_expr::t,
+  dessser::gen::raql_expr::t_ext,
   Void,
-  e1d3e929c0a104569907bf46832d32c2
+  tee7dccc2726e2723462077a878a69c99
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_39cf200fa778e5fa84401746e9b5ba70 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-  }
-  return os;
-}
-
-struct v_81cd54ad1d16b1060af71b31d87d9f09 {
-  Lst<df398bbef680305e3e9f5137633156fb> options;
-  dessser::gen::raql_expr::t topic;
-  std::optional<dessser::gen::raql_expr::t> partitions;
-  v_39cf200fa778e5fa84401746e9b5ba70 restart_from;
-  bool operator==(v_81cd54ad1d16b1060af71b31d87d9f09 const &other) const {
+struct te6ac276a1b6044b9474a56a7da93a611 {
+  Lst<tcd17c85cefeae7a860c0732c05eaeaed> options;
+  dessser::gen::raql_expr::t_ext topic;
+  std::optional<dessser::gen::raql_expr::t_ext> partitions;
+  t6f8c1c936ce8cf2fe9dc881177aa3e62 restart_from;
+  bool operator==(te6ac276a1b6044b9474a56a7da93a611 const &other) const {
     return options == other.options && topic == other.topic && partitions == other.partitions && restart_from == other.restart_from;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_81cd54ad1d16b1060af71b31d87d9f09 const &r) {
-  os << '{';
-  os << "options:" << r.options << ',';
-  os << "topic:" << r.topic << ',';
-  os << "partitions:" << r.partitions << ',';
-  os << "restart_from:" << r.restart_from;
-  os << '}';
-  return os;
-}
-
-struct v_8c0c938be0fcefc45cc5b9cf52c46f04 : public std::variant<
-  v_65abbca6f6205aebd6740de88f9e9235,
-  v_81cd54ad1d16b1060af71b31d87d9f09
+struct tf708b6568b9bac184e3f5da3a64f4419 : public std::variant<
+  ta828a76692b94aa6a15973ace224bedc,
+  te6ac276a1b6044b9474a56a7da93a611
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_8c0c938be0fcefc45cc5b9cf52c46f04 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-  }
-  return os;
-}
-
-struct v_951168fd627e4197ab60b5fba89b770b {
+struct tc1ee34cdd9bdb8371d318bb284a788a8 {
   char separator;
   std::string null;
   bool may_quote;
   std::string escape_seq;
-  Lst<dessser::gen::field_type::t> fields;
+  Lst<dessser::gen::field_type::t_ext> fields;
   bool vectors_of_chars_as_string;
   bool clickhouse_syntax;
-  bool operator==(v_951168fd627e4197ab60b5fba89b770b const &other) const {
+  bool operator==(tc1ee34cdd9bdb8371d318bb284a788a8 const &other) const {
     return separator == other.separator && null == other.null && may_quote == other.may_quote && escape_seq == other.escape_seq && fields == other.fields && vectors_of_chars_as_string == other.vectors_of_chars_as_string && clickhouse_syntax == other.clickhouse_syntax;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_951168fd627e4197ab60b5fba89b770b const &r) {
-  os << '{';
-  os << "separator:" << r.separator << ',';
-  os << "null:" << r.null << ',';
-  os << "may_quote:" << r.may_quote << ',';
-  os << "escape_seq:" << r.escape_seq << ',';
-  os << "fields:" << r.fields << ',';
-  os << "vectors_of_chars_as_string:" << r.vectors_of_chars_as_string << ',';
-  os << "clickhouse_syntax:" << r.clickhouse_syntax;
-  os << '}';
-  return os;
-}
-
-struct v_21e8c6eca31cc038e9faa45d5b86bfa4 : public std::variant<
-  v_951168fd627e4197ab60b5fba89b770b,
-  Lst<dessser::gen::field_type::t>
+struct t570dd118e4f520aece0574b2f62e7634 : public std::variant<
+  tc1ee34cdd9bdb8371d318bb284a788a8,
+  Lst<dessser::gen::field_type::t_ext>
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_21e8c6eca31cc038e9faa45d5b86bfa4 const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-  }
-  return os;
-}
-
-struct c1efb28eecd443c961e69845a587fe0d {
-  v_8c0c938be0fcefc45cc5b9cf52c46f04 source;
-  v_21e8c6eca31cc038e9faa45d5b86bfa4 format;
-  std::optional<dessser::gen::event_time::t> event_time;
-  Lst<dessser::gen::field_name::t> factors;
-  bool operator==(c1efb28eecd443c961e69845a587fe0d const &other) const {
+struct t1d5c57287ee550c3ccac78b88bba5862 {
+  tf708b6568b9bac184e3f5da3a64f4419 source;
+  t570dd118e4f520aece0574b2f62e7634 format;
+  std::optional<dessser::gen::event_time::t_ext> event_time;
+  Lst<dessser::gen::field_name::t_ext> factors;
+  bool operator==(t1d5c57287ee550c3ccac78b88bba5862 const &other) const {
     return source == other.source && format == other.format && event_time == other.event_time && factors == other.factors;
   }
 };
-std::ostream &operator<<(std::ostream &os, c1efb28eecd443c961e69845a587fe0d const &r) {
-  os << '{';
-  os << "source:" << r.source << ',';
-  os << "format:" << r.format << ',';
-  os << "event_time:" << r.event_time << ',';
-  os << "factors:" << r.factors;
-  os << '}';
-  return os;
-}
-
-struct v_00380e3ab86a3786288b2307b930623c {
+struct t9ddff9e1963b15ba493db1f8dadd34fb {
   std::string net_addr;
   uint16_t port;
-  dessser::gen::raql_net_protocol::t proto;
-  Lst<dessser::gen::field_name::t> factors;
-  bool operator==(v_00380e3ab86a3786288b2307b930623c const &other) const {
+  dessser::gen::raql_net_protocol::t_ext proto;
+  Lst<dessser::gen::field_name::t_ext> factors;
+  bool operator==(t9ddff9e1963b15ba493db1f8dadd34fb const &other) const {
     return net_addr == other.net_addr && port == other.port && proto == other.proto && factors == other.factors;
   }
 };
-std::ostream &operator<<(std::ostream &os, v_00380e3ab86a3786288b2307b930623c const &r) {
-  os << '{';
-  os << "net_addr:" << r.net_addr << ',';
-  os << "port:" << r.port << ',';
-  os << "proto:" << r.proto << ',';
-  os << "factors:" << r.factors;
-  os << '}';
-  return os;
-}
-
+struct t;
 struct t : public std::variant<
-  v_41bb77c6ca1cb4242e451c68e9cdbd6c,
-  c1efb28eecd443c961e69845a587fe0d,
-  v_00380e3ab86a3786288b2307b930623c
+  ta2fe18cae70948742cabb6081fd22a0c,
+  t1d5c57287ee550c3ccac78b88bba5862,
+  t9ddff9e1963b15ba493db1f8dadd34fb
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-  }
-  return os;
-}
-
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 struct t;
 struct t;
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
+struct t;
 typedef std::tuple<
   uint16_t,
   Pointer
-> v_362f9d9108a6902af48b6c83d5377ea1;
+> t22a32080ad88ab548b80077a17b7dd46;
 
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
   uint32_t,
   Pointer
-> ac0fbd05039f742d2f1d9ac182e392ab;
+> t405eb186408556fed8f2c41523c07d13;
 
 typedef std::tuple<
   uint8_t,
   Pointer
-> v_1d5843897434feb24d158f3793db9189;
+> tb3f98ea670610d40658a618de3ec7b90;
 
 typedef std::tuple<
-  Lst<dessser::gen::raql_select_field::t>,
+  Lst<dessser::gen::raql_select_field::t_ext>,
   Pointer
-> v_1e2289a3c247a8df69df2696e666d447;
+> ta9047710b0a6cdbb6cf02e2ae071242e;
 
 typedef std::tuple<
-  dessser::gen::raql_select_field::t,
+  dessser::gen::raql_select_field::t_ext,
   Pointer
-> v_657d94925809b2af1dfd7eba664f6bb7;
+> t385fc99bd06c53216a5de778dea0dc6e;
+
+struct t;
+struct t;
+typedef std::tuple<
+  std::optional<Lst<dessser::gen::field_name::t_ext>>,
+  Pointer
+> t885b8962b524dff3368f7a529f1d466b;
 
 typedef std::tuple<
-  std::optional<Lst<dessser::gen::field_name::t>>,
+  Lst<dessser::gen::field_name::t_ext>,
   Pointer
-> v_9a05bd7196057130155d6e5fc24b484f;
+> t0dfa866705b76efff53e4aa97228a967;
 
 typedef std::tuple<
-  Lst<dessser::gen::field_name::t>,
+  dessser::gen::field_name::t_ext,
   Pointer
-> v_73b9a8533327ef50c5288ee51f32bdb3;
+> t273a2b7978f5b466a128a51c1cc4a27b;
+
+struct t;
+struct t;
+typedef std::tuple<
+  std::optional<tf0c8d4f3070907529cc1a83f8baf6fab>,
+  Pointer
+> t3b4feade6f60da4ba5d645f756688083;
 
 typedef std::tuple<
-  dessser::gen::field_name::t,
+  std::optional<dessser::gen::raql_expr::t_ext>,
   Pointer
-> c50aa083fa818c6eeca389b0025dda98;
+> tf1063a6af8c1fb72f0e0ee089d43d040;
 
 typedef std::tuple<
-  std::optional<b48f9480e4991d15124ad477c5cb330e>,
+  dessser::gen::raql_expr::t_ext,
   Pointer
-> b4c4b8bd0a1e7b037b5f7cd76229322d;
+> t1113e6691818baaf60a775527f6cc1ac;
 
 typedef std::tuple<
-  std::optional<dessser::gen::raql_expr::t>,
+  Lst<dessser::gen::raql_expr::t_ext>,
   Pointer
-> b8de1a5ea94913283815cebff1d39083;
+> t0067a338c0fc91b6a811c8df70d4c87a;
+
+struct t;
+struct t;
+struct t;
+struct t;
+typedef std::tuple<
+  std::optional<dessser::gen::event_time::t_ext>,
+  Pointer
+> te3858ac581a2bb69ede2f45fc6f9aff4;
 
 typedef std::tuple<
-  dessser::gen::raql_expr::t,
+  dessser::gen::event_time::t_ext,
   Pointer
-> v_3501be1aaefb5944279c6a13f6d0d43f;
+> te8ff255b34432f8503a86cf675cbafe6;
 
-typedef std::tuple<
-  Lst<dessser::gen::raql_expr::t>,
-  Pointer
-> v_89798a0a125fff44cf18e3d1fbb6ddc8;
-
-typedef std::tuple<
-  std::optional<dessser::gen::event_time::t>,
-  Pointer
-> v_640ffd570a38fa81256c323a616f666c;
-
-typedef std::tuple<
-  dessser::gen::event_time::t,
-  Pointer
-> v_3171d2c768002071c5128a227625b3a2;
-
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
   bool,
   Pointer
-> f2a48a42f9c827f487e53ee52a4e9e2f;
+> t4138de986e20d18b01e4c493dc9d5451;
 
+struct t;
+struct t;
 typedef std::tuple<
-  dessser::gen::raql_flush_method::t,
+  dessser::gen::raql_flush_method::t_ext,
   Pointer
-> v_68e5da68a9e4906037dc9368c64e5eb0;
+> t01507690afb11d3b148862b712bad5a5;
 
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
-  Lst<ee20956156b3a0bf3ed4185051a85c84>,
+  Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369>,
   Pointer
-> v_247379ec39e2989b4b695cd1aea84f44;
+> t5c362d56d9dbfb12c2e68c4ed4a25c50;
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
-  ee20956156b3a0bf3ed4185051a85c84,
+  t7c6bbe37b66fb3a66c00c4bd1bfc4369,
   Pointer
-> a49dc6d89baceade4654099f663625ec;
+> t2a2e361c672135221e41ae1e54a712a2;
 
+struct t;
+struct t;
 typedef std::tuple<
-  v_3cd54ea1158497be65dc13cca6d4b046,
+  te10a95f610a64bfb7ccea542c54f0a25,
   Pointer
-> v_2e906d20bdc8e493b443243209e3e3eb;
+> tf0d49dee148c406cd202993cce2a4a2d;
 
 typedef std::tuple<
   Size,
   Pointer
-> v_41b0681ed7f1f185fd3e6c4dcdc13110;
+> t8beb80162423aee37bd383e9b6834c9c;
 
 typedef std::tuple<
   Bytes,
   Pointer
-> f921d1e0a170c3c04148c21704db9c45;
+> t188345aa49abd0cb47ff73fedc219f08;
 
+struct t;
+struct t;
 typedef std::tuple<
   std::optional<std::string>,
   Pointer
-> fe18be5220bdca71492df7686dadc3c2;
+> t3fbff88eef4e4c8bc42b06e5ad07ea51;
+
+struct t;
+struct t;
+typedef std::tuple<
+  dessser::gen::function_name::t_ext,
+  Pointer
+> tc7d3fcfd06c0f02b3732e1754a18402b;
+
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+typedef std::tuple<
+  tf708b6568b9bac184e3f5da3a64f4419,
+  Pointer
+> t1313b4ee18248dd765ed6ae8b0058504;
 
 typedef std::tuple<
-  dessser::gen::function_name::t,
+  Lst<tcd17c85cefeae7a860c0732c05eaeaed>,
   Pointer
-> v_382b80697fdeb5158d298be4e9fcf65e;
-
-typedef std::tuple<
-  v_8c0c938be0fcefc45cc5b9cf52c46f04,
-  Pointer
-> v_26a7856c13c8c419d187250936cafd80;
-
-typedef std::tuple<
-  Lst<df398bbef680305e3e9f5137633156fb>,
-  Pointer
-> v_6bba7c01a5e2d76afdf20d53912164f2;
+> t20007ff08d465535358862e7faf3b556;
 
 typedef std::tuple<
   std::string,
   Pointer
-> v_46a5e81c2410b000ff0adea6dc198147;
+> tef94b55d8809251f13165d9a05bd9d0e;
 
 typedef std::tuple<
-  v_39cf200fa778e5fa84401746e9b5ba70,
+  t6f8c1c936ce8cf2fe9dc881177aa3e62,
   Pointer
-> v_42875bc32d3471e3da6c6b29c921056e;
+> tae0102a98baabe959d4e6cb1e047e44b;
 
+struct t;
+struct t;
 typedef std::tuple<
-  v_21e8c6eca31cc038e9faa45d5b86bfa4,
+  t570dd118e4f520aece0574b2f62e7634,
   Pointer
-> v_3e5c9d57d2ea7ab21f644c4920676340;
+> t61bdb3f643c3108bb612fc36951fce20;
 
 typedef std::tuple<
   char,
   Pointer
-> v_8918042b739b29ed611b63fbda84666e;
+> t9c427530664aa522ce95ad420b884056;
 
 typedef std::tuple<
-  Lst<dessser::gen::field_type::t>,
+  Lst<dessser::gen::field_type::t_ext>,
   Pointer
-> v_095c3de60a557af15ef637104c21dbea;
+> tfba505af7788ece275315330d94bba2e;
 
 typedef std::tuple<
-  dessser::gen::field_type::t,
+  dessser::gen::field_type::t_ext,
   Pointer
-> v_03ddfabda296f7bff76f03d4225eaf1a;
+> t2f09fa79b0bdf1902e3b53bc7e485604;
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 typedef std::tuple<
-  dessser::gen::raql_net_protocol::t,
+  dessser::gen::raql_net_protocol::t_ext,
   Pointer
-> v_495a0c712724a24307658df553642300;
+> t09401f6cfd6a52d2f08b29ed5a55a113;
 
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
+struct t;
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -929,21 +990,21 @@ typedef std::tuple<
                           (set-vec (u8 0) (identifier "n_ref_819") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_819")))))) 
                       (unsafe-nth (u8 0) (identifier "dst_ref_818")))))))))))
  */
-static std::function<Pointer(t,Pointer)> to_row_binary_init()
+static std::function<Pointer(t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+    uint16_t id_1 { uint16_t(p_0->index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_810 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0->index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_8 { std::get<0>(p_0) };
-        Lst<dessser::gen::raql_select_field::t> id_9 { id_8.fields };
+        ta2fe18cae70948742cabb6081fd22a0c id_8 { std::get<0>(*p_0) };
+        Lst<dessser::gen::raql_select_field::t_ext> id_9 { id_8.fields };
         uint32_t id_10 { id_9.size() };
         Vec<1, uint32_t> id_11 {  id_10  };
         Pointer let_res_12;
@@ -978,20 +1039,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               }
               Pointer id_32 { id_18.writeU8(choose_res_23) };
               Void id_33 { ((void)(leb128_ptr_871[id_16] = id_32), VOID) };
+              (void)id_33;
               uint8_t id_34 { 0 };
               uint8_t id_35 { 0 };
               uint32_t id_36 { leb128_sz_870[id_35] };
               uint8_t id_37 { 7 };
               uint32_t id_38 { uint32_t(id_36 >> id_37) };
               Void id_39 { ((void)(leb128_sz_870[id_34] = id_38), VOID) };
+              (void)id_39;
               uint8_t id_40 { 0 };
               uint32_t id_41 { leb128_sz_870[id_40] };
               uint32_t id_42 { 0U };
               bool id_43 { bool(id_41 > id_42) };
               while_flag_15 = id_43;
               if (while_flag_15) {
+                (void)VOID;
               }
             } while (while_flag_15);
+            (void)VOID;
             uint8_t id_44 { 0 };
             Pointer id_45 { leb128_ptr_871[id_44] };
             let_res_14 = id_45;
@@ -1007,22 +1072,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           Pointer let_res_50;
           {
             Vec<1, int32_t> n_ref_873 { id_49 };
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_51 { std::get<0>(p_0) };
-            Lst<dessser::gen::raql_select_field::t> id_52 { id_51.fields };
-            for (dessser::gen::raql_select_field::t x_874 : id_52) {
+            ta2fe18cae70948742cabb6081fd22a0c id_51 { std::get<0>(*p_0) };
+            Lst<dessser::gen::raql_select_field::t_ext> id_52 { id_51.fields };
+            for (dessser::gen::raql_select_field::t_ext x_874 : id_52) {
               uint8_t id_53 { 0 };
-              std::function<Pointer(dessser::gen::raql_select_field::t,Pointer)> id_54 { dessser::gen::raql_select_field::to_row_binary };
+              auto fun54 { dessser::gen::raql_select_field::to_row_binary };
               uint8_t id_55 { 0 };
               Pointer id_56 { dst_ref_872[id_55] };
-              Pointer id_57 { id_54(x_874, id_56) };
+              Pointer id_57 { fun54(x_874, id_56) };
               Void id_58 { ((void)(dst_ref_872[id_53] = id_57), VOID) };
+              (void)id_58;
               uint8_t id_59 { 0 };
               int32_t id_60 { 1L };
               uint8_t id_61 { 0 };
               int32_t id_62 { n_ref_873[id_61] };
               int32_t id_63 { int32_t(id_60 + id_62) };
               Void id_64 { ((void)(n_ref_873[id_59] = id_63), VOID) };
+              (void)id_64;
+              (void)id_64;
             }
+            (void)VOID;
             uint8_t id_65 { 0 };
             Pointer id_66 { dst_ref_872[id_65] };
             let_res_50 = id_66;
@@ -1032,8 +1101,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_67;
         {
           Pointer srec_dst_875 { let_res_47 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_68 { std::get<0>(p_0) };
-          std::optional<Lst<dessser::gen::field_name::t>> id_69 { id_68.and_all_others };
+          ta2fe18cae70948742cabb6081fd22a0c id_68 { std::get<0>(*p_0) };
+          std::optional<Lst<dessser::gen::field_name::t_ext>> id_69 { id_68.and_all_others };
           bool id_70 { !(id_69.has_value ()) };
           Pointer choose_res_71;
           if (id_70) {
@@ -1041,9 +1110,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer id_73 { srec_dst_875.writeU8(id_72) };
             choose_res_71 = id_73;
           } else {
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_74 { std::get<0>(p_0) };
-            std::optional<Lst<dessser::gen::field_name::t>> id_75 { id_74.and_all_others };
-            Lst<dessser::gen::field_name::t> id_76 { id_75.value() };
+            ta2fe18cae70948742cabb6081fd22a0c id_74 { std::get<0>(*p_0) };
+            std::optional<Lst<dessser::gen::field_name::t_ext>> id_75 { id_74.and_all_others };
+            Lst<dessser::gen::field_name::t_ext> id_76 { id_75.value() };
             uint32_t id_77 { id_76.size() };
             Vec<1, uint32_t> id_78 {  id_77  };
             Pointer let_res_79;
@@ -1080,20 +1149,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   }
                   Pointer id_101 { id_87.writeU8(choose_res_92) };
                   Void id_102 { ((void)(leb128_ptr_877[id_85] = id_101), VOID) };
+                  (void)id_102;
                   uint8_t id_103 { 0 };
                   uint8_t id_104 { 0 };
                   uint32_t id_105 { leb128_sz_876[id_104] };
                   uint8_t id_106 { 7 };
                   uint32_t id_107 { uint32_t(id_105 >> id_106) };
                   Void id_108 { ((void)(leb128_sz_876[id_103] = id_107), VOID) };
+                  (void)id_108;
                   uint8_t id_109 { 0 };
                   uint32_t id_110 { leb128_sz_876[id_109] };
                   uint32_t id_111 { 0U };
                   bool id_112 { bool(id_110 > id_111) };
                   while_flag_84 = id_112;
                   if (while_flag_84) {
+                    (void)VOID;
                   }
                 } while (while_flag_84);
+                (void)VOID;
                 uint8_t id_113 { 0 };
                 Pointer id_114 { leb128_ptr_877[id_113] };
                 let_res_83 = id_114;
@@ -1109,23 +1182,27 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_119;
               {
                 Vec<1, int32_t> n_ref_879 { id_118 };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_120 { std::get<0>(p_0) };
-                std::optional<Lst<dessser::gen::field_name::t>> id_121 { id_120.and_all_others };
-                Lst<dessser::gen::field_name::t> id_122 { id_121.value() };
-                for (dessser::gen::field_name::t x_880 : id_122) {
+                ta2fe18cae70948742cabb6081fd22a0c id_120 { std::get<0>(*p_0) };
+                std::optional<Lst<dessser::gen::field_name::t_ext>> id_121 { id_120.and_all_others };
+                Lst<dessser::gen::field_name::t_ext> id_122 { id_121.value() };
+                for (dessser::gen::field_name::t_ext x_880 : id_122) {
                   uint8_t id_123 { 0 };
-                  std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_124 { dessser::gen::field_name::to_row_binary };
+                  auto fun124 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_125 { 0 };
                   Pointer id_126 { dst_ref_878[id_125] };
-                  Pointer id_127 { id_124(x_880, id_126) };
+                  Pointer id_127 { fun124(x_880, id_126) };
                   Void id_128 { ((void)(dst_ref_878[id_123] = id_127), VOID) };
+                  (void)id_128;
                   uint8_t id_129 { 0 };
                   int32_t id_130 { 1L };
                   uint8_t id_131 { 0 };
                   int32_t id_132 { n_ref_879[id_131] };
                   int32_t id_133 { int32_t(id_130 + id_132) };
                   Void id_134 { ((void)(n_ref_879[id_129] = id_133), VOID) };
+                  (void)id_134;
+                  (void)id_134;
                 }
+                (void)VOID;
                 uint8_t id_135 { 0 };
                 Pointer id_136 { dst_ref_878[id_135] };
                 let_res_119 = id_136;
@@ -1139,8 +1216,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_137;
         {
           Pointer srec_dst_881 { let_res_67 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_138 { std::get<0>(p_0) };
-          std::optional<b48f9480e4991d15124ad477c5cb330e> id_139 { id_138.sort };
+          ta2fe18cae70948742cabb6081fd22a0c id_138 { std::get<0>(*p_0) };
+          std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_139 { id_138.sort };
           bool id_140 { !(id_139.has_value ()) };
           Pointer choose_res_141;
           if (id_140) {
@@ -1153,9 +1230,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_146;
             {
               Pointer stup_dst_882 { id_145 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_147 { std::get<0>(p_0) };
-              std::optional<b48f9480e4991d15124ad477c5cb330e> id_148 { id_147.sort };
-              b48f9480e4991d15124ad477c5cb330e id_149 { id_148.value() };
+              ta2fe18cae70948742cabb6081fd22a0c id_147 { std::get<0>(*p_0) };
+              std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_148 { id_147.sort };
+              tf0c8d4f3070907529cc1a83f8baf6fab id_149 { id_148.value() };
               uint32_t id_150 { std::get<0>(id_149) };
               Pointer id_151 { stup_dst_882.writeU32Le(id_150) };
               let_res_146 = id_151;
@@ -1163,10 +1240,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_152;
             {
               Pointer stup_dst_883 { let_res_146 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_153 { std::get<0>(p_0) };
-              std::optional<b48f9480e4991d15124ad477c5cb330e> id_154 { id_153.sort };
-              b48f9480e4991d15124ad477c5cb330e id_155 { id_154.value() };
-              std::optional<dessser::gen::raql_expr::t> id_156 { std::get<1>(id_155) };
+              ta2fe18cae70948742cabb6081fd22a0c id_153 { std::get<0>(*p_0) };
+              std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_154 { id_153.sort };
+              tf0c8d4f3070907529cc1a83f8baf6fab id_155 { id_154.value() };
+              std::optional<dessser::gen::raql_expr::t_ext> id_156 { std::get<1>(id_155) };
               bool id_157 { !(id_156.has_value ()) };
               Pointer choose_res_158;
               if (id_157) {
@@ -1174,15 +1251,15 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer id_160 { stup_dst_883.writeU8(id_159) };
                 choose_res_158 = id_160;
               } else {
-                std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_161 { dessser::gen::raql_expr::to_row_binary };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_162 { std::get<0>(p_0) };
-                std::optional<b48f9480e4991d15124ad477c5cb330e> id_163 { id_162.sort };
-                b48f9480e4991d15124ad477c5cb330e id_164 { id_163.value() };
-                std::optional<dessser::gen::raql_expr::t> id_165 { std::get<1>(id_164) };
-                dessser::gen::raql_expr::t id_166 { id_165.value() };
+                auto fun161 { dessser::gen::raql_expr::to_row_binary };
+                ta2fe18cae70948742cabb6081fd22a0c id_162 { std::get<0>(*p_0) };
+                std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_163 { id_162.sort };
+                tf0c8d4f3070907529cc1a83f8baf6fab id_164 { id_163.value() };
+                std::optional<dessser::gen::raql_expr::t_ext> id_165 { std::get<1>(id_164) };
+                dessser::gen::raql_expr::t_ext id_166 { id_165.value() };
                 uint8_t id_167 { 0 };
                 Pointer id_168 { stup_dst_883.writeU8(id_167) };
-                Pointer id_169 { id_161(id_166, id_168) };
+                Pointer id_169 { fun161(id_166, id_168) };
                 choose_res_158 = id_169;
               }
               let_res_152 = choose_res_158;
@@ -1190,10 +1267,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_170;
             {
               Pointer stup_dst_884 { let_res_152 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_171 { std::get<0>(p_0) };
-              std::optional<b48f9480e4991d15124ad477c5cb330e> id_172 { id_171.sort };
-              b48f9480e4991d15124ad477c5cb330e id_173 { id_172.value() };
-              Lst<dessser::gen::raql_expr::t> id_174 { std::get<2>(id_173) };
+              ta2fe18cae70948742cabb6081fd22a0c id_171 { std::get<0>(*p_0) };
+              std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_172 { id_171.sort };
+              tf0c8d4f3070907529cc1a83f8baf6fab id_173 { id_172.value() };
+              Lst<dessser::gen::raql_expr::t_ext> id_174 { std::get<2>(id_173) };
               uint32_t id_175 { id_174.size() };
               Vec<1, uint32_t> id_176 {  id_175  };
               Pointer let_res_177;
@@ -1228,20 +1305,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     }
                     Pointer id_197 { id_183.writeU8(choose_res_188) };
                     Void id_198 { ((void)(leb128_ptr_886[id_181] = id_197), VOID) };
+                    (void)id_198;
                     uint8_t id_199 { 0 };
                     uint8_t id_200 { 0 };
                     uint32_t id_201 { leb128_sz_885[id_200] };
                     uint8_t id_202 { 7 };
                     uint32_t id_203 { uint32_t(id_201 >> id_202) };
                     Void id_204 { ((void)(leb128_sz_885[id_199] = id_203), VOID) };
+                    (void)id_204;
                     uint8_t id_205 { 0 };
                     uint32_t id_206 { leb128_sz_885[id_205] };
                     uint32_t id_207 { 0U };
                     bool id_208 { bool(id_206 > id_207) };
                     while_flag_180 = id_208;
                     if (while_flag_180) {
+                      (void)VOID;
                     }
                   } while (while_flag_180);
+                  (void)VOID;
                   uint8_t id_209 { 0 };
                   Pointer id_210 { leb128_ptr_886[id_209] };
                   let_res_179 = id_210;
@@ -1257,24 +1338,28 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_215;
                 {
                   Vec<1, int32_t> n_ref_888 { id_214 };
-                  v_41bb77c6ca1cb4242e451c68e9cdbd6c id_216 { std::get<0>(p_0) };
-                  std::optional<b48f9480e4991d15124ad477c5cb330e> id_217 { id_216.sort };
-                  b48f9480e4991d15124ad477c5cb330e id_218 { id_217.value() };
-                  Lst<dessser::gen::raql_expr::t> id_219 { std::get<2>(id_218) };
-                  for (dessser::gen::raql_expr::t x_889 : id_219) {
+                  ta2fe18cae70948742cabb6081fd22a0c id_216 { std::get<0>(*p_0) };
+                  std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_217 { id_216.sort };
+                  tf0c8d4f3070907529cc1a83f8baf6fab id_218 { id_217.value() };
+                  Lst<dessser::gen::raql_expr::t_ext> id_219 { std::get<2>(id_218) };
+                  for (dessser::gen::raql_expr::t_ext x_889 : id_219) {
                     uint8_t id_220 { 0 };
-                    std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_221 { dessser::gen::raql_expr::to_row_binary };
+                    auto fun221 { dessser::gen::raql_expr::to_row_binary };
                     uint8_t id_222 { 0 };
                     Pointer id_223 { dst_ref_887[id_222] };
-                    Pointer id_224 { id_221(x_889, id_223) };
+                    Pointer id_224 { fun221(x_889, id_223) };
                     Void id_225 { ((void)(dst_ref_887[id_220] = id_224), VOID) };
+                    (void)id_225;
                     uint8_t id_226 { 0 };
                     int32_t id_227 { 1L };
                     uint8_t id_228 { 0 };
                     int32_t id_229 { n_ref_888[id_228] };
                     int32_t id_230 { int32_t(id_227 + id_229) };
                     Void id_231 { ((void)(n_ref_888[id_226] = id_230), VOID) };
+                    (void)id_231;
+                    (void)id_231;
                   }
+                  (void)VOID;
                   uint8_t id_232 { 0 };
                   Pointer id_233 { dst_ref_887[id_232] };
                   let_res_215 = id_233;
@@ -1290,17 +1375,17 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_234;
         {
           Pointer srec_dst_890 { let_res_137 };
-          std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_235 { dessser::gen::raql_expr::to_row_binary };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_236 { std::get<0>(p_0) };
-          dessser::gen::raql_expr::t id_237 { id_236.where };
-          Pointer id_238 { id_235(id_237, srec_dst_890) };
+          auto fun235 { dessser::gen::raql_expr::to_row_binary };
+          ta2fe18cae70948742cabb6081fd22a0c id_236 { std::get<0>(*p_0) };
+          dessser::gen::raql_expr::t_ext id_237 { id_236.where };
+          Pointer id_238 { fun235(id_237, srec_dst_890) };
           let_res_234 = id_238;
         }
         Pointer let_res_239;
         {
           Pointer srec_dst_891 { let_res_234 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_240 { std::get<0>(p_0) };
-          std::optional<dessser::gen::event_time::t> id_241 { id_240.event_time };
+          ta2fe18cae70948742cabb6081fd22a0c id_240 { std::get<0>(*p_0) };
+          std::optional<dessser::gen::event_time::t_ext> id_241 { id_240.event_time };
           bool id_242 { !(id_241.has_value ()) };
           Pointer choose_res_243;
           if (id_242) {
@@ -1308,13 +1393,13 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer id_245 { srec_dst_891.writeU8(id_244) };
             choose_res_243 = id_245;
           } else {
-            std::function<Pointer(dessser::gen::event_time::t,Pointer)> id_246 { dessser::gen::event_time::to_row_binary };
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_247 { std::get<0>(p_0) };
-            std::optional<dessser::gen::event_time::t> id_248 { id_247.event_time };
-            dessser::gen::event_time::t id_249 { id_248.value() };
+            auto fun246 { dessser::gen::event_time::to_row_binary };
+            ta2fe18cae70948742cabb6081fd22a0c id_247 { std::get<0>(*p_0) };
+            std::optional<dessser::gen::event_time::t_ext> id_248 { id_247.event_time };
+            dessser::gen::event_time::t_ext id_249 { id_248.value() };
             uint8_t id_250 { 0 };
             Pointer id_251 { srec_dst_891.writeU8(id_250) };
-            Pointer id_252 { id_246(id_249, id_251) };
+            Pointer id_252 { fun246(id_249, id_251) };
             choose_res_243 = id_252;
           }
           let_res_239 = choose_res_243;
@@ -1322,8 +1407,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_253;
         {
           Pointer srec_dst_892 { let_res_239 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_254 { std::get<0>(p_0) };
-          Lst<dessser::gen::raql_expr::t> id_255 { id_254.notifications };
+          ta2fe18cae70948742cabb6081fd22a0c id_254 { std::get<0>(*p_0) };
+          Lst<dessser::gen::raql_expr::t_ext> id_255 { id_254.notifications };
           uint32_t id_256 { id_255.size() };
           Vec<1, uint32_t> id_257 {  id_256  };
           Pointer let_res_258;
@@ -1358,20 +1443,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_278 { id_264.writeU8(choose_res_269) };
                 Void id_279 { ((void)(leb128_ptr_894[id_262] = id_278), VOID) };
+                (void)id_279;
                 uint8_t id_280 { 0 };
                 uint8_t id_281 { 0 };
                 uint32_t id_282 { leb128_sz_893[id_281] };
                 uint8_t id_283 { 7 };
                 uint32_t id_284 { uint32_t(id_282 >> id_283) };
                 Void id_285 { ((void)(leb128_sz_893[id_280] = id_284), VOID) };
+                (void)id_285;
                 uint8_t id_286 { 0 };
                 uint32_t id_287 { leb128_sz_893[id_286] };
                 uint32_t id_288 { 0U };
                 bool id_289 { bool(id_287 > id_288) };
                 while_flag_261 = id_289;
                 if (while_flag_261) {
+                  (void)VOID;
                 }
               } while (while_flag_261);
+              (void)VOID;
               uint8_t id_290 { 0 };
               Pointer id_291 { leb128_ptr_894[id_290] };
               let_res_260 = id_291;
@@ -1387,22 +1476,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_296;
             {
               Vec<1, int32_t> n_ref_896 { id_295 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_297 { std::get<0>(p_0) };
-              Lst<dessser::gen::raql_expr::t> id_298 { id_297.notifications };
-              for (dessser::gen::raql_expr::t x_897 : id_298) {
+              ta2fe18cae70948742cabb6081fd22a0c id_297 { std::get<0>(*p_0) };
+              Lst<dessser::gen::raql_expr::t_ext> id_298 { id_297.notifications };
+              for (dessser::gen::raql_expr::t_ext x_897 : id_298) {
                 uint8_t id_299 { 0 };
-                std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_300 { dessser::gen::raql_expr::to_row_binary };
+                auto fun300 { dessser::gen::raql_expr::to_row_binary };
                 uint8_t id_301 { 0 };
                 Pointer id_302 { dst_ref_895[id_301] };
-                Pointer id_303 { id_300(x_897, id_302) };
+                Pointer id_303 { fun300(x_897, id_302) };
                 Void id_304 { ((void)(dst_ref_895[id_299] = id_303), VOID) };
+                (void)id_304;
                 uint8_t id_305 { 0 };
                 int32_t id_306 { 1L };
                 uint8_t id_307 { 0 };
                 int32_t id_308 { n_ref_896[id_307] };
                 int32_t id_309 { int32_t(id_306 + id_308) };
                 Void id_310 { ((void)(n_ref_896[id_305] = id_309), VOID) };
+                (void)id_310;
+                (void)id_310;
               }
+              (void)VOID;
               uint8_t id_311 { 0 };
               Pointer id_312 { dst_ref_895[id_311] };
               let_res_296 = id_312;
@@ -1414,8 +1507,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_313;
         {
           Pointer srec_dst_898 { let_res_253 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_314 { std::get<0>(p_0) };
-          Lst<dessser::gen::raql_expr::t> id_315 { id_314.key };
+          ta2fe18cae70948742cabb6081fd22a0c id_314 { std::get<0>(*p_0) };
+          Lst<dessser::gen::raql_expr::t_ext> id_315 { id_314.key };
           uint32_t id_316 { id_315.size() };
           Vec<1, uint32_t> id_317 {  id_316  };
           Pointer let_res_318;
@@ -1450,20 +1543,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_338 { id_324.writeU8(choose_res_329) };
                 Void id_339 { ((void)(leb128_ptr_900[id_322] = id_338), VOID) };
+                (void)id_339;
                 uint8_t id_340 { 0 };
                 uint8_t id_341 { 0 };
                 uint32_t id_342 { leb128_sz_899[id_341] };
                 uint8_t id_343 { 7 };
                 uint32_t id_344 { uint32_t(id_342 >> id_343) };
                 Void id_345 { ((void)(leb128_sz_899[id_340] = id_344), VOID) };
+                (void)id_345;
                 uint8_t id_346 { 0 };
                 uint32_t id_347 { leb128_sz_899[id_346] };
                 uint32_t id_348 { 0U };
                 bool id_349 { bool(id_347 > id_348) };
                 while_flag_321 = id_349;
                 if (while_flag_321) {
+                  (void)VOID;
                 }
               } while (while_flag_321);
+              (void)VOID;
               uint8_t id_350 { 0 };
               Pointer id_351 { leb128_ptr_900[id_350] };
               let_res_320 = id_351;
@@ -1479,22 +1576,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_356;
             {
               Vec<1, int32_t> n_ref_902 { id_355 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_357 { std::get<0>(p_0) };
-              Lst<dessser::gen::raql_expr::t> id_358 { id_357.key };
-              for (dessser::gen::raql_expr::t x_903 : id_358) {
+              ta2fe18cae70948742cabb6081fd22a0c id_357 { std::get<0>(*p_0) };
+              Lst<dessser::gen::raql_expr::t_ext> id_358 { id_357.key };
+              for (dessser::gen::raql_expr::t_ext x_903 : id_358) {
                 uint8_t id_359 { 0 };
-                std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_360 { dessser::gen::raql_expr::to_row_binary };
+                auto fun360 { dessser::gen::raql_expr::to_row_binary };
                 uint8_t id_361 { 0 };
                 Pointer id_362 { dst_ref_901[id_361] };
-                Pointer id_363 { id_360(x_903, id_362) };
+                Pointer id_363 { fun360(x_903, id_362) };
                 Void id_364 { ((void)(dst_ref_901[id_359] = id_363), VOID) };
+                (void)id_364;
                 uint8_t id_365 { 0 };
                 int32_t id_366 { 1L };
                 uint8_t id_367 { 0 };
                 int32_t id_368 { n_ref_902[id_367] };
                 int32_t id_369 { int32_t(id_366 + id_368) };
                 Void id_370 { ((void)(n_ref_902[id_365] = id_369), VOID) };
+                (void)id_370;
+                (void)id_370;
               }
+              (void)VOID;
               uint8_t id_371 { 0 };
               Pointer id_372 { dst_ref_901[id_371] };
               let_res_356 = id_372;
@@ -1506,16 +1607,16 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_373;
         {
           Pointer srec_dst_904 { let_res_313 };
-          std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_374 { dessser::gen::raql_expr::to_row_binary };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_375 { std::get<0>(p_0) };
-          dessser::gen::raql_expr::t id_376 { id_375.commit_cond };
-          Pointer id_377 { id_374(id_376, srec_dst_904) };
+          auto fun374 { dessser::gen::raql_expr::to_row_binary };
+          ta2fe18cae70948742cabb6081fd22a0c id_375 { std::get<0>(*p_0) };
+          dessser::gen::raql_expr::t_ext id_376 { id_375.commit_cond };
+          Pointer id_377 { fun374(id_376, srec_dst_904) };
           let_res_373 = id_377;
         }
         Pointer let_res_378;
         {
           Pointer srec_dst_905 { let_res_373 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_379 { std::get<0>(p_0) };
+          ta2fe18cae70948742cabb6081fd22a0c id_379 { std::get<0>(*p_0) };
           bool id_380 { id_379.commit_before };
           uint8_t id_381 { uint8_t(id_380) };
           Pointer id_382 { srec_dst_905.writeU8(id_381) };
@@ -1524,17 +1625,17 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_383;
         {
           Pointer srec_dst_906 { let_res_378 };
-          std::function<Pointer(dessser::gen::raql_flush_method::t,Pointer)> id_384 { dessser::gen::raql_flush_method::to_row_binary };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_385 { std::get<0>(p_0) };
-          dessser::gen::raql_flush_method::t id_386 { id_385.flush_how };
-          Pointer id_387 { id_384(id_386, srec_dst_906) };
+          auto fun384 { dessser::gen::raql_flush_method::to_row_binary };
+          ta2fe18cae70948742cabb6081fd22a0c id_385 { std::get<0>(*p_0) };
+          dessser::gen::raql_flush_method::t_ext id_386 { id_385.flush_how };
+          Pointer id_387 { fun384(id_386, srec_dst_906) };
           let_res_383 = id_387;
         }
         Pointer let_res_388;
         {
           Pointer srec_dst_907 { let_res_383 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_389 { std::get<0>(p_0) };
-          Lst<ee20956156b3a0bf3ed4185051a85c84> id_390 { id_389.from };
+          ta2fe18cae70948742cabb6081fd22a0c id_389 { std::get<0>(*p_0) };
+          Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_390 { id_389.from };
           uint32_t id_391 { id_390.size() };
           Vec<1, uint32_t> id_392 {  id_391  };
           Pointer let_res_393;
@@ -1569,20 +1670,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_413 { id_399.writeU8(choose_res_404) };
                 Void id_414 { ((void)(leb128_ptr_909[id_397] = id_413), VOID) };
+                (void)id_414;
                 uint8_t id_415 { 0 };
                 uint8_t id_416 { 0 };
                 uint32_t id_417 { leb128_sz_908[id_416] };
                 uint8_t id_418 { 7 };
                 uint32_t id_419 { uint32_t(id_417 >> id_418) };
                 Void id_420 { ((void)(leb128_sz_908[id_415] = id_419), VOID) };
+                (void)id_420;
                 uint8_t id_421 { 0 };
                 uint32_t id_422 { leb128_sz_908[id_421] };
                 uint32_t id_423 { 0U };
                 bool id_424 { bool(id_422 > id_423) };
                 while_flag_396 = id_424;
                 if (while_flag_396) {
+                  (void)VOID;
                 }
               } while (while_flag_396);
+              (void)VOID;
               uint8_t id_425 { 0 };
               Pointer id_426 { leb128_ptr_909[id_425] };
               let_res_395 = id_426;
@@ -1598,9 +1703,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_431;
             {
               Vec<1, int32_t> n_ref_911 { id_430 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_432 { std::get<0>(p_0) };
-              Lst<ee20956156b3a0bf3ed4185051a85c84> id_433 { id_432.from };
-              for (ee20956156b3a0bf3ed4185051a85c84 x_912 : id_433) {
+              ta2fe18cae70948742cabb6081fd22a0c id_432 { std::get<0>(*p_0) };
+              Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_433 { id_432.from };
+              for (t7c6bbe37b66fb3a66c00c4bd1bfc4369 x_912 : id_433) {
                 uint8_t id_434 { 0 };
                 uint8_t id_435 { 0 };
                 Pointer id_436 { dst_ref_910[id_435] };
@@ -1614,16 +1719,16 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   bool id_442 { bool(id_440 == id_441) };
                   Pointer choose_res_443;
                   if (id_442) {
-                    v_9054563dd112d3f48469dddea6b8194e id_444 { std::get<0>(x_912) };
-                    v_3cd54ea1158497be65dc13cca6d4b046 id_445 { std::get<0>(id_444) };
+                    t9b471a57e45588f3795bf9ca91c31ff6 id_444 { std::get<0>(x_912) };
+                    te10a95f610a64bfb7ccea542c54f0a25 id_445 { std::get<0>(id_444) };
                     uint16_t id_446 { uint16_t(id_445.index()) };
                     Pointer id_447 { ssum_dst_914.writeU16Le(id_446) };
                     Pointer let_res_448;
                     {
                       Pointer ssum_dst_916 { id_447 };
                       uint16_t id_449 { 0 };
-                      v_9054563dd112d3f48469dddea6b8194e id_450 { std::get<0>(x_912) };
-                      v_3cd54ea1158497be65dc13cca6d4b046 id_451 { std::get<0>(id_450) };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_450 { std::get<0>(x_912) };
+                      te10a95f610a64bfb7ccea542c54f0a25 id_451 { std::get<0>(id_450) };
                       uint16_t id_452 { uint16_t(id_451.index()) };
                       bool id_453 { bool(id_449 == id_452) };
                       Pointer choose_res_454;
@@ -1631,14 +1736,14 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         choose_res_454 = ssum_dst_916;
                       } else {
                         uint16_t id_455 { 1 };
-                        v_9054563dd112d3f48469dddea6b8194e id_456 { std::get<0>(x_912) };
-                        v_3cd54ea1158497be65dc13cca6d4b046 id_457 { std::get<0>(id_456) };
+                        t9b471a57e45588f3795bf9ca91c31ff6 id_456 { std::get<0>(x_912) };
+                        te10a95f610a64bfb7ccea542c54f0a25 id_457 { std::get<0>(id_456) };
                         uint16_t id_458 { uint16_t(id_457.index()) };
                         bool id_459 { bool(id_455 == id_458) };
                         Pointer choose_res_460;
                         if (id_459) {
-                          v_9054563dd112d3f48469dddea6b8194e id_461 { std::get<0>(x_912) };
-                          v_3cd54ea1158497be65dc13cca6d4b046 id_462 { std::get<0>(id_461) };
+                          t9b471a57e45588f3795bf9ca91c31ff6 id_461 { std::get<0>(x_912) };
+                          te10a95f610a64bfb7ccea542c54f0a25 id_462 { std::get<0>(id_461) };
                           std::string id_463 { std::get<1>(id_462) };
                           uint32_t id_464 { (uint32_t)id_463.size() };
                           Vec<1, uint32_t> id_465 {  id_464  };
@@ -1674,39 +1779,44 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                                 }
                                 Pointer id_486 { id_472.writeU8(choose_res_477) };
                                 Void id_487 { ((void)(leb128_ptr_918[id_470] = id_486), VOID) };
+                                (void)id_487;
                                 uint8_t id_488 { 0 };
                                 uint8_t id_489 { 0 };
                                 uint32_t id_490 { leb128_sz_917[id_489] };
                                 uint8_t id_491 { 7 };
                                 uint32_t id_492 { uint32_t(id_490 >> id_491) };
                                 Void id_493 { ((void)(leb128_sz_917[id_488] = id_492), VOID) };
+                                (void)id_493;
                                 uint8_t id_494 { 0 };
                                 uint32_t id_495 { leb128_sz_917[id_494] };
                                 uint32_t id_496 { 0U };
                                 bool id_497 { bool(id_495 > id_496) };
                                 while_flag_469 = id_497;
                                 if (while_flag_469) {
+                                  (void)VOID;
                                 }
                               } while (while_flag_469);
+                              (void)VOID;
                               uint8_t id_498 { 0 };
                               Pointer id_499 { leb128_ptr_918[id_498] };
                               let_res_468 = id_499;
                             }
                             let_res_466 = let_res_468;
                           }
-                          v_9054563dd112d3f48469dddea6b8194e id_500 { std::get<0>(x_912) };
-                          v_3cd54ea1158497be65dc13cca6d4b046 id_501 { std::get<0>(id_500) };
+                          t9b471a57e45588f3795bf9ca91c31ff6 id_500 { std::get<0>(x_912) };
+                          te10a95f610a64bfb7ccea542c54f0a25 id_501 { std::get<0>(id_500) };
                           std::string id_502 { std::get<1>(id_501) };
                           Bytes id_503 { id_502 };
                           Pointer id_504 { let_res_466.writeBytes(id_503) };
                           choose_res_460 = id_504;
                         } else {
-                          v_9054563dd112d3f48469dddea6b8194e id_505 { std::get<0>(x_912) };
-                          v_3cd54ea1158497be65dc13cca6d4b046 id_506 { std::get<0>(id_505) };
+                          t9b471a57e45588f3795bf9ca91c31ff6 id_505 { std::get<0>(x_912) };
+                          te10a95f610a64bfb7ccea542c54f0a25 id_506 { std::get<0>(id_505) };
                           uint16_t id_507 { uint16_t(id_506.index()) };
                           uint16_t id_508 { 2 };
                           bool id_509 { bool(id_507 == id_508) };
                           Void id_510 { ((void)(assert(id_509)), VOID) };
+                          (void)id_510;
                           choose_res_460 = ssum_dst_916;
                         }
                         choose_res_454 = choose_res_460;
@@ -1716,7 +1826,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     Pointer let_res_511;
                     {
                       Pointer stup_dst_919 { let_res_448 };
-                      v_9054563dd112d3f48469dddea6b8194e id_512 { std::get<0>(x_912) };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_512 { std::get<0>(x_912) };
                       std::optional<std::string> id_513 { std::get<1>(id_512) };
                       bool id_514 { !(id_513.has_value ()) };
                       Pointer choose_res_515;
@@ -1725,7 +1835,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         Pointer id_517 { stup_dst_919.writeU8(id_516) };
                         choose_res_515 = id_517;
                       } else {
-                        v_9054563dd112d3f48469dddea6b8194e id_518 { std::get<0>(x_912) };
+                        t9b471a57e45588f3795bf9ca91c31ff6 id_518 { std::get<0>(x_912) };
                         std::optional<std::string> id_519 { std::get<1>(id_518) };
                         std::string id_520 { id_519.value() };
                         uint32_t id_521 { (uint32_t)id_520.size() };
@@ -1764,27 +1874,31 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                               }
                               Pointer id_545 { id_531.writeU8(choose_res_536) };
                               Void id_546 { ((void)(leb128_ptr_921[id_529] = id_545), VOID) };
+                              (void)id_546;
                               uint8_t id_547 { 0 };
                               uint8_t id_548 { 0 };
                               uint32_t id_549 { leb128_sz_920[id_548] };
                               uint8_t id_550 { 7 };
                               uint32_t id_551 { uint32_t(id_549 >> id_550) };
                               Void id_552 { ((void)(leb128_sz_920[id_547] = id_551), VOID) };
+                              (void)id_552;
                               uint8_t id_553 { 0 };
                               uint32_t id_554 { leb128_sz_920[id_553] };
                               uint32_t id_555 { 0U };
                               bool id_556 { bool(id_554 > id_555) };
                               while_flag_528 = id_556;
                               if (while_flag_528) {
+                                (void)VOID;
                               }
                             } while (while_flag_528);
+                            (void)VOID;
                             uint8_t id_557 { 0 };
                             Pointer id_558 { leb128_ptr_921[id_557] };
                             let_res_527 = id_558;
                           }
                           let_res_523 = let_res_527;
                         }
-                        v_9054563dd112d3f48469dddea6b8194e id_559 { std::get<0>(x_912) };
+                        t9b471a57e45588f3795bf9ca91c31ff6 id_559 { std::get<0>(x_912) };
                         std::optional<std::string> id_560 { std::get<1>(id_559) };
                         std::string id_561 { id_560.value() };
                         Bytes id_562 { id_561 };
@@ -1796,10 +1910,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     Pointer let_res_564;
                     {
                       Pointer stup_dst_922 { let_res_511 };
-                      std::function<Pointer(dessser::gen::function_name::t,Pointer)> id_565 { dessser::gen::function_name::to_row_binary };
-                      v_9054563dd112d3f48469dddea6b8194e id_566 { std::get<0>(x_912) };
-                      dessser::gen::function_name::t id_567 { std::get<2>(id_566) };
-                      Pointer id_568 { id_565(id_567, stup_dst_922) };
+                      auto fun565 { dessser::gen::function_name::to_row_binary };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_566 { std::get<0>(x_912) };
+                      dessser::gen::function_name::t_ext id_567 { std::get<2>(id_566) };
+                      Pointer id_568 { fun565(id_567, stup_dst_922) };
                       let_res_564 = id_568;
                     }
                     choose_res_443 = let_res_564;
@@ -1808,6 +1922,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     uint16_t id_570 { 1 };
                     bool id_571 { bool(id_569 == id_570) };
                     Void id_572 { ((void)(assert(id_571)), VOID) };
+                    (void)id_572;
                     t* id_573 { std::get<1>(x_912) };
                     Pointer id_574 { fun0(id_573, ssum_dst_914) };
                     choose_res_443 = id_574;
@@ -1815,13 +1930,17 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   let_res_439 = choose_res_443;
                 }
                 Void id_575 { ((void)(dst_ref_910[id_434] = let_res_439), VOID) };
+                (void)id_575;
                 uint8_t id_576 { 0 };
                 int32_t id_577 { 1L };
                 uint8_t id_578 { 0 };
                 int32_t id_579 { n_ref_911[id_578] };
                 int32_t id_580 { int32_t(id_577 + id_579) };
                 Void id_581 { ((void)(n_ref_911[id_576] = id_580), VOID) };
+                (void)id_581;
+                (void)id_581;
               }
+              (void)VOID;
               uint8_t id_582 { 0 };
               Pointer id_583 { dst_ref_910[id_582] };
               let_res_431 = id_583;
@@ -1833,8 +1952,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_584;
         {
           Pointer srec_dst_923 { let_res_388 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_585 { std::get<0>(p_0) };
-          std::optional<dessser::gen::raql_expr::t> id_586 { id_585.every };
+          ta2fe18cae70948742cabb6081fd22a0c id_585 { std::get<0>(*p_0) };
+          std::optional<dessser::gen::raql_expr::t_ext> id_586 { id_585.every };
           bool id_587 { !(id_586.has_value ()) };
           Pointer choose_res_588;
           if (id_587) {
@@ -1842,13 +1961,13 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer id_590 { srec_dst_923.writeU8(id_589) };
             choose_res_588 = id_590;
           } else {
-            std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_591 { dessser::gen::raql_expr::to_row_binary };
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_592 { std::get<0>(p_0) };
-            std::optional<dessser::gen::raql_expr::t> id_593 { id_592.every };
-            dessser::gen::raql_expr::t id_594 { id_593.value() };
+            auto fun591 { dessser::gen::raql_expr::to_row_binary };
+            ta2fe18cae70948742cabb6081fd22a0c id_592 { std::get<0>(*p_0) };
+            std::optional<dessser::gen::raql_expr::t_ext> id_593 { id_592.every };
+            dessser::gen::raql_expr::t_ext id_594 { id_593.value() };
             uint8_t id_595 { 0 };
             Pointer id_596 { srec_dst_923.writeU8(id_595) };
-            Pointer id_597 { id_591(id_594, id_596) };
+            Pointer id_597 { fun591(id_594, id_596) };
             choose_res_588 = id_597;
           }
           let_res_584 = choose_res_588;
@@ -1856,8 +1975,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         Pointer let_res_598;
         {
           Pointer srec_dst_924 { let_res_584 };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_599 { std::get<0>(p_0) };
-          Lst<dessser::gen::field_name::t> id_600 { id_599.factors };
+          ta2fe18cae70948742cabb6081fd22a0c id_599 { std::get<0>(*p_0) };
+          Lst<dessser::gen::field_name::t_ext> id_600 { id_599.factors };
           uint32_t id_601 { id_600.size() };
           Vec<1, uint32_t> id_602 {  id_601  };
           Pointer let_res_603;
@@ -1892,20 +2011,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_623 { id_609.writeU8(choose_res_614) };
                 Void id_624 { ((void)(leb128_ptr_926[id_607] = id_623), VOID) };
+                (void)id_624;
                 uint8_t id_625 { 0 };
                 uint8_t id_626 { 0 };
                 uint32_t id_627 { leb128_sz_925[id_626] };
                 uint8_t id_628 { 7 };
                 uint32_t id_629 { uint32_t(id_627 >> id_628) };
                 Void id_630 { ((void)(leb128_sz_925[id_625] = id_629), VOID) };
+                (void)id_630;
                 uint8_t id_631 { 0 };
                 uint32_t id_632 { leb128_sz_925[id_631] };
                 uint32_t id_633 { 0U };
                 bool id_634 { bool(id_632 > id_633) };
                 while_flag_606 = id_634;
                 if (while_flag_606) {
+                  (void)VOID;
                 }
               } while (while_flag_606);
+              (void)VOID;
               uint8_t id_635 { 0 };
               Pointer id_636 { leb128_ptr_926[id_635] };
               let_res_605 = id_636;
@@ -1921,22 +2044,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
             Pointer let_res_641;
             {
               Vec<1, int32_t> n_ref_928 { id_640 };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_642 { std::get<0>(p_0) };
-              Lst<dessser::gen::field_name::t> id_643 { id_642.factors };
-              for (dessser::gen::field_name::t x_929 : id_643) {
+              ta2fe18cae70948742cabb6081fd22a0c id_642 { std::get<0>(*p_0) };
+              Lst<dessser::gen::field_name::t_ext> id_643 { id_642.factors };
+              for (dessser::gen::field_name::t_ext x_929 : id_643) {
                 uint8_t id_644 { 0 };
-                std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_645 { dessser::gen::field_name::to_row_binary };
+                auto fun645 { dessser::gen::field_name::to_row_binary };
                 uint8_t id_646 { 0 };
                 Pointer id_647 { dst_ref_927[id_646] };
-                Pointer id_648 { id_645(x_929, id_647) };
+                Pointer id_648 { fun645(x_929, id_647) };
                 Void id_649 { ((void)(dst_ref_927[id_644] = id_648), VOID) };
+                (void)id_649;
                 uint8_t id_650 { 0 };
                 int32_t id_651 { 1L };
                 uint8_t id_652 { 0 };
                 int32_t id_653 { n_ref_928[id_652] };
                 int32_t id_654 { int32_t(id_651 + id_653) };
                 Void id_655 { ((void)(n_ref_928[id_650] = id_654), VOID) };
+                (void)id_655;
+                (void)id_655;
               }
+              (void)VOID;
               uint8_t id_656 { 0 };
               Pointer id_657 { dst_ref_927[id_656] };
               let_res_641 = id_657;
@@ -1948,37 +2075,37 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
         choose_res_7 = let_res_598;
       } else {
         uint16_t id_658 { 1 };
-        uint16_t id_659 { uint16_t(p_0.index()) };
+        uint16_t id_659 { uint16_t(p_0->index()) };
         bool id_660 { bool(id_658 == id_659) };
         Pointer choose_res_661;
         if (id_660) {
-          c1efb28eecd443c961e69845a587fe0d id_662 { std::get<1>(p_0) };
-          v_8c0c938be0fcefc45cc5b9cf52c46f04 id_663 { id_662.source };
+          t1d5c57287ee550c3ccac78b88bba5862 id_662 { std::get<1>(*p_0) };
+          tf708b6568b9bac184e3f5da3a64f4419 id_663 { id_662.source };
           uint16_t id_664 { uint16_t(id_663.index()) };
           Pointer id_665 { ssum_dst_810.writeU16Le(id_664) };
           Pointer let_res_666;
           {
             Pointer ssum_dst_822 { id_665 };
             uint16_t id_667 { 0 };
-            c1efb28eecd443c961e69845a587fe0d id_668 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_669 { id_668.source };
+            t1d5c57287ee550c3ccac78b88bba5862 id_668 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_669 { id_668.source };
             uint16_t id_670 { uint16_t(id_669.index()) };
             bool id_671 { bool(id_667 == id_670) };
             Pointer choose_res_672;
             if (id_671) {
-              std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_673 { dessser::gen::raql_expr::to_row_binary };
-              c1efb28eecd443c961e69845a587fe0d id_674 { std::get<1>(p_0) };
-              v_8c0c938be0fcefc45cc5b9cf52c46f04 id_675 { id_674.source };
-              v_65abbca6f6205aebd6740de88f9e9235 id_676 { std::get<0>(id_675) };
-              dessser::gen::raql_expr::t id_677 { id_676.fname };
-              Pointer id_678 { id_673(id_677, ssum_dst_822) };
+              auto fun673 { dessser::gen::raql_expr::to_row_binary };
+              t1d5c57287ee550c3ccac78b88bba5862 id_674 { std::get<1>(*p_0) };
+              tf708b6568b9bac184e3f5da3a64f4419 id_675 { id_674.source };
+              ta828a76692b94aa6a15973ace224bedc id_676 { std::get<0>(id_675) };
+              dessser::gen::raql_expr::t_ext id_677 { id_676.fname };
+              Pointer id_678 { fun673(id_677, ssum_dst_822) };
               Pointer let_res_679;
               {
                 Pointer srec_dst_838 { id_678 };
-                c1efb28eecd443c961e69845a587fe0d id_680 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_681 { id_680.source };
-                v_65abbca6f6205aebd6740de88f9e9235 id_682 { std::get<0>(id_681) };
-                std::optional<dessser::gen::raql_expr::t> id_683 { id_682.preprocessor };
+                t1d5c57287ee550c3ccac78b88bba5862 id_680 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_681 { id_680.source };
+                ta828a76692b94aa6a15973ace224bedc id_682 { std::get<0>(id_681) };
+                std::optional<dessser::gen::raql_expr::t_ext> id_683 { id_682.preprocessor };
                 bool id_684 { !(id_683.has_value ()) };
                 Pointer choose_res_685;
                 if (id_684) {
@@ -1986,15 +2113,15 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   Pointer id_687 { srec_dst_838.writeU8(id_686) };
                   choose_res_685 = id_687;
                 } else {
-                  std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_688 { dessser::gen::raql_expr::to_row_binary };
-                  c1efb28eecd443c961e69845a587fe0d id_689 { std::get<1>(p_0) };
-                  v_8c0c938be0fcefc45cc5b9cf52c46f04 id_690 { id_689.source };
-                  v_65abbca6f6205aebd6740de88f9e9235 id_691 { std::get<0>(id_690) };
-                  std::optional<dessser::gen::raql_expr::t> id_692 { id_691.preprocessor };
-                  dessser::gen::raql_expr::t id_693 { id_692.value() };
+                  auto fun688 { dessser::gen::raql_expr::to_row_binary };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_689 { std::get<1>(*p_0) };
+                  tf708b6568b9bac184e3f5da3a64f4419 id_690 { id_689.source };
+                  ta828a76692b94aa6a15973ace224bedc id_691 { std::get<0>(id_690) };
+                  std::optional<dessser::gen::raql_expr::t_ext> id_692 { id_691.preprocessor };
+                  dessser::gen::raql_expr::t_ext id_693 { id_692.value() };
                   uint8_t id_694 { 0 };
                   Pointer id_695 { srec_dst_838.writeU8(id_694) };
-                  Pointer id_696 { id_688(id_693, id_695) };
+                  Pointer id_696 { fun688(id_693, id_695) };
                   choose_res_685 = id_696;
                 }
                 let_res_679 = choose_res_685;
@@ -2002,26 +2129,27 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_697;
               {
                 Pointer srec_dst_839 { let_res_679 };
-                std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_698 { dessser::gen::raql_expr::to_row_binary };
-                c1efb28eecd443c961e69845a587fe0d id_699 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_700 { id_699.source };
-                v_65abbca6f6205aebd6740de88f9e9235 id_701 { std::get<0>(id_700) };
-                dessser::gen::raql_expr::t id_702 { id_701.unlink };
-                Pointer id_703 { id_698(id_702, srec_dst_839) };
+                auto fun698 { dessser::gen::raql_expr::to_row_binary };
+                t1d5c57287ee550c3ccac78b88bba5862 id_699 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_700 { id_699.source };
+                ta828a76692b94aa6a15973ace224bedc id_701 { std::get<0>(id_700) };
+                dessser::gen::raql_expr::t_ext id_702 { id_701.unlink };
+                Pointer id_703 { fun698(id_702, srec_dst_839) };
                 let_res_697 = id_703;
               }
               choose_res_672 = let_res_697;
             } else {
-              c1efb28eecd443c961e69845a587fe0d id_704 { std::get<1>(p_0) };
-              v_8c0c938be0fcefc45cc5b9cf52c46f04 id_705 { id_704.source };
+              t1d5c57287ee550c3ccac78b88bba5862 id_704 { std::get<1>(*p_0) };
+              tf708b6568b9bac184e3f5da3a64f4419 id_705 { id_704.source };
               uint16_t id_706 { uint16_t(id_705.index()) };
               uint16_t id_707 { 1 };
               bool id_708 { bool(id_706 == id_707) };
               Void id_709 { ((void)(assert(id_708)), VOID) };
-              c1efb28eecd443c961e69845a587fe0d id_710 { std::get<1>(p_0) };
-              v_8c0c938be0fcefc45cc5b9cf52c46f04 id_711 { id_710.source };
-              v_81cd54ad1d16b1060af71b31d87d9f09 id_712 { std::get<1>(id_711) };
-              Lst<df398bbef680305e3e9f5137633156fb> id_713 { id_712.options };
+              (void)id_709;
+              t1d5c57287ee550c3ccac78b88bba5862 id_710 { std::get<1>(*p_0) };
+              tf708b6568b9bac184e3f5da3a64f4419 id_711 { id_710.source };
+              te6ac276a1b6044b9474a56a7da93a611 id_712 { std::get<1>(id_711) };
+              Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_713 { id_712.options };
               uint32_t id_714 { id_713.size() };
               Vec<1, uint32_t> id_715 {  id_714  };
               Pointer let_res_716;
@@ -2056,20 +2184,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     }
                     Pointer id_736 { id_722.writeU8(choose_res_727) };
                     Void id_737 { ((void)(leb128_ptr_824[id_720] = id_736), VOID) };
+                    (void)id_737;
                     uint8_t id_738 { 0 };
                     uint8_t id_739 { 0 };
                     uint32_t id_740 { leb128_sz_823[id_739] };
                     uint8_t id_741 { 7 };
                     uint32_t id_742 { uint32_t(id_740 >> id_741) };
                     Void id_743 { ((void)(leb128_sz_823[id_738] = id_742), VOID) };
+                    (void)id_743;
                     uint8_t id_744 { 0 };
                     uint32_t id_745 { leb128_sz_823[id_744] };
                     uint32_t id_746 { 0U };
                     bool id_747 { bool(id_745 > id_746) };
                     while_flag_719 = id_747;
                     if (while_flag_719) {
+                      (void)VOID;
                     }
                   } while (while_flag_719);
+                  (void)VOID;
                   uint8_t id_748 { 0 };
                   Pointer id_749 { leb128_ptr_824[id_748] };
                   let_res_718 = id_749;
@@ -2085,11 +2217,11 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_754;
                 {
                   Vec<1, int32_t> n_ref_826 { id_753 };
-                  c1efb28eecd443c961e69845a587fe0d id_755 { std::get<1>(p_0) };
-                  v_8c0c938be0fcefc45cc5b9cf52c46f04 id_756 { id_755.source };
-                  v_81cd54ad1d16b1060af71b31d87d9f09 id_757 { std::get<1>(id_756) };
-                  Lst<df398bbef680305e3e9f5137633156fb> id_758 { id_757.options };
-                  for (df398bbef680305e3e9f5137633156fb x_827 : id_758) {
+                  t1d5c57287ee550c3ccac78b88bba5862 id_755 { std::get<1>(*p_0) };
+                  tf708b6568b9bac184e3f5da3a64f4419 id_756 { id_755.source };
+                  te6ac276a1b6044b9474a56a7da93a611 id_757 { std::get<1>(id_756) };
+                  Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_758 { id_757.options };
+                  for (tcd17c85cefeae7a860c0732c05eaeaed x_827 : id_758) {
                     uint8_t id_759 { 0 };
                     uint8_t id_760 { 0 };
                     Pointer id_761 { dst_ref_825[id_760] };
@@ -2131,20 +2263,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                             }
                             Pointer id_786 { id_772.writeU8(choose_res_777) };
                             Void id_787 { ((void)(leb128_ptr_830[id_770] = id_786), VOID) };
+                            (void)id_787;
                             uint8_t id_788 { 0 };
                             uint8_t id_789 { 0 };
                             uint32_t id_790 { leb128_sz_829[id_789] };
                             uint8_t id_791 { 7 };
                             uint32_t id_792 { uint32_t(id_790 >> id_791) };
                             Void id_793 { ((void)(leb128_sz_829[id_788] = id_792), VOID) };
+                            (void)id_793;
                             uint8_t id_794 { 0 };
                             uint32_t id_795 { leb128_sz_829[id_794] };
                             uint32_t id_796 { 0U };
                             bool id_797 { bool(id_795 > id_796) };
                             while_flag_769 = id_797;
                             if (while_flag_769) {
+                              (void)VOID;
                             }
                           } while (while_flag_769);
+                          (void)VOID;
                           uint8_t id_798 { 0 };
                           Pointer id_799 { leb128_ptr_830[id_798] };
                           let_res_768 = id_799;
@@ -2159,19 +2295,23 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     Pointer let_res_803;
                     {
                       Pointer stup_dst_831 { let_res_762 };
-                      std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_804 { dessser::gen::raql_expr::to_row_binary };
-                      dessser::gen::raql_expr::t id_805 { std::get<1>(x_827) };
-                      Pointer id_806 { id_804(id_805, stup_dst_831) };
+                      auto fun804 { dessser::gen::raql_expr::to_row_binary };
+                      dessser::gen::raql_expr::t_ext id_805 { std::get<1>(x_827) };
+                      Pointer id_806 { fun804(id_805, stup_dst_831) };
                       let_res_803 = id_806;
                     }
                     Void id_807 { ((void)(dst_ref_825[id_759] = let_res_803), VOID) };
+                    (void)id_807;
                     uint8_t id_808 { 0 };
                     int32_t id_809 { 1L };
                     uint8_t id_810 { 0 };
                     int32_t id_811 { n_ref_826[id_810] };
                     int32_t id_812 { int32_t(id_809 + id_811) };
                     Void id_813 { ((void)(n_ref_826[id_808] = id_812), VOID) };
+                    (void)id_813;
+                    (void)id_813;
                   }
+                  (void)VOID;
                   uint8_t id_814 { 0 };
                   Pointer id_815 { dst_ref_825[id_814] };
                   let_res_754 = id_815;
@@ -2181,21 +2321,21 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_816;
               {
                 Pointer srec_dst_832 { let_res_751 };
-                std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_817 { dessser::gen::raql_expr::to_row_binary };
-                c1efb28eecd443c961e69845a587fe0d id_818 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_819 { id_818.source };
-                v_81cd54ad1d16b1060af71b31d87d9f09 id_820 { std::get<1>(id_819) };
-                dessser::gen::raql_expr::t id_821 { id_820.topic };
-                Pointer id_822 { id_817(id_821, srec_dst_832) };
+                auto fun817 { dessser::gen::raql_expr::to_row_binary };
+                t1d5c57287ee550c3ccac78b88bba5862 id_818 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_819 { id_818.source };
+                te6ac276a1b6044b9474a56a7da93a611 id_820 { std::get<1>(id_819) };
+                dessser::gen::raql_expr::t_ext id_821 { id_820.topic };
+                Pointer id_822 { fun817(id_821, srec_dst_832) };
                 let_res_816 = id_822;
               }
               Pointer let_res_823;
               {
                 Pointer srec_dst_833 { let_res_816 };
-                c1efb28eecd443c961e69845a587fe0d id_824 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_825 { id_824.source };
-                v_81cd54ad1d16b1060af71b31d87d9f09 id_826 { std::get<1>(id_825) };
-                std::optional<dessser::gen::raql_expr::t> id_827 { id_826.partitions };
+                t1d5c57287ee550c3ccac78b88bba5862 id_824 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_825 { id_824.source };
+                te6ac276a1b6044b9474a56a7da93a611 id_826 { std::get<1>(id_825) };
+                std::optional<dessser::gen::raql_expr::t_ext> id_827 { id_826.partitions };
                 bool id_828 { !(id_827.has_value ()) };
                 Pointer choose_res_829;
                 if (id_828) {
@@ -2203,15 +2343,15 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   Pointer id_831 { srec_dst_833.writeU8(id_830) };
                   choose_res_829 = id_831;
                 } else {
-                  std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_832 { dessser::gen::raql_expr::to_row_binary };
-                  c1efb28eecd443c961e69845a587fe0d id_833 { std::get<1>(p_0) };
-                  v_8c0c938be0fcefc45cc5b9cf52c46f04 id_834 { id_833.source };
-                  v_81cd54ad1d16b1060af71b31d87d9f09 id_835 { std::get<1>(id_834) };
-                  std::optional<dessser::gen::raql_expr::t> id_836 { id_835.partitions };
-                  dessser::gen::raql_expr::t id_837 { id_836.value() };
+                  auto fun832 { dessser::gen::raql_expr::to_row_binary };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_833 { std::get<1>(*p_0) };
+                  tf708b6568b9bac184e3f5da3a64f4419 id_834 { id_833.source };
+                  te6ac276a1b6044b9474a56a7da93a611 id_835 { std::get<1>(id_834) };
+                  std::optional<dessser::gen::raql_expr::t_ext> id_836 { id_835.partitions };
+                  dessser::gen::raql_expr::t_ext id_837 { id_836.value() };
                   uint8_t id_838 { 0 };
                   Pointer id_839 { srec_dst_833.writeU8(id_838) };
-                  Pointer id_840 { id_832(id_837, id_839) };
+                  Pointer id_840 { fun832(id_837, id_839) };
                   choose_res_829 = id_840;
                 }
                 let_res_823 = choose_res_829;
@@ -2219,10 +2359,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_841;
               {
                 Pointer srec_dst_834 { let_res_823 };
-                c1efb28eecd443c961e69845a587fe0d id_842 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_843 { id_842.source };
-                v_81cd54ad1d16b1060af71b31d87d9f09 id_844 { std::get<1>(id_843) };
-                v_39cf200fa778e5fa84401746e9b5ba70 id_845 { id_844.restart_from };
+                t1d5c57287ee550c3ccac78b88bba5862 id_842 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_843 { id_842.source };
+                te6ac276a1b6044b9474a56a7da93a611 id_844 { std::get<1>(id_843) };
+                t6f8c1c936ce8cf2fe9dc881177aa3e62 id_845 { id_844.restart_from };
                 uint16_t id_846 { uint16_t(id_845.index()) };
                 Pointer let_res_847;
                 {
@@ -2241,13 +2381,13 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       bool id_854 { bool(id_853 == label1_835) };
                       Pointer choose_res_855;
                       if (id_854) {
-                        std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_856 { dessser::gen::raql_expr::to_row_binary };
-                        c1efb28eecd443c961e69845a587fe0d id_857 { std::get<1>(p_0) };
-                        v_8c0c938be0fcefc45cc5b9cf52c46f04 id_858 { id_857.source };
-                        v_81cd54ad1d16b1060af71b31d87d9f09 id_859 { std::get<1>(id_858) };
-                        v_39cf200fa778e5fa84401746e9b5ba70 id_860 { id_859.restart_from };
-                        dessser::gen::raql_expr::t id_861 { std::get<1>(id_860) };
-                        Pointer id_862 { id_856(id_861, ssum_dst_836) };
+                        auto fun856 { dessser::gen::raql_expr::to_row_binary };
+                        t1d5c57287ee550c3ccac78b88bba5862 id_857 { std::get<1>(*p_0) };
+                        tf708b6568b9bac184e3f5da3a64f4419 id_858 { id_857.source };
+                        te6ac276a1b6044b9474a56a7da93a611 id_859 { std::get<1>(id_858) };
+                        t6f8c1c936ce8cf2fe9dc881177aa3e62 id_860 { id_859.restart_from };
+                        dessser::gen::raql_expr::t_ext id_861 { std::get<1>(id_860) };
+                        Pointer id_862 { fun856(id_861, ssum_dst_836) };
                         choose_res_855 = id_862;
                       } else {
                         uint16_t id_863 { 2 };
@@ -2259,25 +2399,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                           uint16_t id_866 { 3 };
                           bool id_867 { bool(label1_835 == id_866) };
                           Void id_868 { ((void)(assert(id_867)), VOID) };
-                          std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_869 { dessser::gen::raql_expr::to_row_binary };
-                          c1efb28eecd443c961e69845a587fe0d id_870 { std::get<1>(p_0) };
-                          v_8c0c938be0fcefc45cc5b9cf52c46f04 id_871 { id_870.source };
-                          v_81cd54ad1d16b1060af71b31d87d9f09 id_872 { std::get<1>(id_871) };
-                          v_39cf200fa778e5fa84401746e9b5ba70 id_873 { id_872.restart_from };
-                          e1d3e929c0a104569907bf46832d32c2 id_874 { std::get<3>(id_873) };
-                          dessser::gen::raql_expr::t id_875 { id_874.after_max_secs };
-                          Pointer id_876 { id_869(id_875, ssum_dst_836) };
+                          (void)id_868;
+                          auto fun869 { dessser::gen::raql_expr::to_row_binary };
+                          t1d5c57287ee550c3ccac78b88bba5862 id_870 { std::get<1>(*p_0) };
+                          tf708b6568b9bac184e3f5da3a64f4419 id_871 { id_870.source };
+                          te6ac276a1b6044b9474a56a7da93a611 id_872 { std::get<1>(id_871) };
+                          t6f8c1c936ce8cf2fe9dc881177aa3e62 id_873 { id_872.restart_from };
+                          tee7dccc2726e2723462077a878a69c99 id_874 { std::get<3>(id_873) };
+                          dessser::gen::raql_expr::t_ext id_875 { id_874.after_max_secs };
+                          Pointer id_876 { fun869(id_875, ssum_dst_836) };
                           Pointer let_res_877;
                           {
                             Pointer srec_dst_837 { id_876 };
-                            std::function<Pointer(dessser::gen::raql_expr::t,Pointer)> id_878 { dessser::gen::raql_expr::to_row_binary };
-                            c1efb28eecd443c961e69845a587fe0d id_879 { std::get<1>(p_0) };
-                            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_880 { id_879.source };
-                            v_81cd54ad1d16b1060af71b31d87d9f09 id_881 { std::get<1>(id_880) };
-                            v_39cf200fa778e5fa84401746e9b5ba70 id_882 { id_881.restart_from };
-                            e1d3e929c0a104569907bf46832d32c2 id_883 { std::get<3>(id_882) };
-                            dessser::gen::raql_expr::t id_884 { id_883.after_max_events };
-                            Pointer id_885 { id_878(id_884, srec_dst_837) };
+                            auto fun878 { dessser::gen::raql_expr::to_row_binary };
+                            t1d5c57287ee550c3ccac78b88bba5862 id_879 { std::get<1>(*p_0) };
+                            tf708b6568b9bac184e3f5da3a64f4419 id_880 { id_879.source };
+                            te6ac276a1b6044b9474a56a7da93a611 id_881 { std::get<1>(id_880) };
+                            t6f8c1c936ce8cf2fe9dc881177aa3e62 id_882 { id_881.restart_from };
+                            tee7dccc2726e2723462077a878a69c99 id_883 { std::get<3>(id_882) };
+                            dessser::gen::raql_expr::t_ext id_884 { id_883.after_max_events };
+                            Pointer id_885 { fun878(id_884, srec_dst_837) };
                             let_res_877 = id_885;
                           }
                           choose_res_865 = let_res_877;
@@ -2299,32 +2440,32 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           Pointer let_res_886;
           {
             Pointer srec_dst_840 { let_res_666 };
-            c1efb28eecd443c961e69845a587fe0d id_887 { std::get<1>(p_0) };
-            v_21e8c6eca31cc038e9faa45d5b86bfa4 id_888 { id_887.format };
+            t1d5c57287ee550c3ccac78b88bba5862 id_887 { std::get<1>(*p_0) };
+            t570dd118e4f520aece0574b2f62e7634 id_888 { id_887.format };
             uint16_t id_889 { uint16_t(id_888.index()) };
             Pointer id_890 { srec_dst_840.writeU16Le(id_889) };
             Pointer let_res_891;
             {
               Pointer ssum_dst_842 { id_890 };
               uint16_t id_892 { 0 };
-              c1efb28eecd443c961e69845a587fe0d id_893 { std::get<1>(p_0) };
-              v_21e8c6eca31cc038e9faa45d5b86bfa4 id_894 { id_893.format };
+              t1d5c57287ee550c3ccac78b88bba5862 id_893 { std::get<1>(*p_0) };
+              t570dd118e4f520aece0574b2f62e7634 id_894 { id_893.format };
               uint16_t id_895 { uint16_t(id_894.index()) };
               bool id_896 { bool(id_892 == id_895) };
               Pointer choose_res_897;
               if (id_896) {
-                c1efb28eecd443c961e69845a587fe0d id_898 { std::get<1>(p_0) };
-                v_21e8c6eca31cc038e9faa45d5b86bfa4 id_899 { id_898.format };
-                v_951168fd627e4197ab60b5fba89b770b id_900 { std::get<0>(id_899) };
+                t1d5c57287ee550c3ccac78b88bba5862 id_898 { std::get<1>(*p_0) };
+                t570dd118e4f520aece0574b2f62e7634 id_899 { id_898.format };
+                tc1ee34cdd9bdb8371d318bb284a788a8 id_900 { std::get<0>(id_899) };
                 char id_901 { id_900.separator };
                 uint8_t id_902 { uint8_t(id_901) };
                 Pointer id_903 { ssum_dst_842.writeU8(id_902) };
                 Pointer let_res_904;
                 {
                   Pointer srec_dst_848 { id_903 };
-                  c1efb28eecd443c961e69845a587fe0d id_905 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_906 { id_905.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_907 { std::get<0>(id_906) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_905 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_906 { id_905.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_907 { std::get<0>(id_906) };
                   std::string id_908 { id_907.null };
                   uint32_t id_909 { (uint32_t)id_908.size() };
                   Vec<1, uint32_t> id_910 {  id_909  };
@@ -2360,29 +2501,33 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         }
                         Pointer id_931 { id_917.writeU8(choose_res_922) };
                         Void id_932 { ((void)(leb128_ptr_850[id_915] = id_931), VOID) };
+                        (void)id_932;
                         uint8_t id_933 { 0 };
                         uint8_t id_934 { 0 };
                         uint32_t id_935 { leb128_sz_849[id_934] };
                         uint8_t id_936 { 7 };
                         uint32_t id_937 { uint32_t(id_935 >> id_936) };
                         Void id_938 { ((void)(leb128_sz_849[id_933] = id_937), VOID) };
+                        (void)id_938;
                         uint8_t id_939 { 0 };
                         uint32_t id_940 { leb128_sz_849[id_939] };
                         uint32_t id_941 { 0U };
                         bool id_942 { bool(id_940 > id_941) };
                         while_flag_914 = id_942;
                         if (while_flag_914) {
+                          (void)VOID;
                         }
                       } while (while_flag_914);
+                      (void)VOID;
                       uint8_t id_943 { 0 };
                       Pointer id_944 { leb128_ptr_850[id_943] };
                       let_res_913 = id_944;
                     }
                     let_res_911 = let_res_913;
                   }
-                  c1efb28eecd443c961e69845a587fe0d id_945 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_946 { id_945.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_947 { std::get<0>(id_946) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_945 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_946 { id_945.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_947 { std::get<0>(id_946) };
                   std::string id_948 { id_947.null };
                   Bytes id_949 { id_948 };
                   Pointer id_950 { let_res_911.writeBytes(id_949) };
@@ -2391,9 +2536,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_951;
                 {
                   Pointer srec_dst_851 { let_res_904 };
-                  c1efb28eecd443c961e69845a587fe0d id_952 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_953 { id_952.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_954 { std::get<0>(id_953) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_952 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_953 { id_952.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_954 { std::get<0>(id_953) };
                   bool id_955 { id_954.may_quote };
                   uint8_t id_956 { uint8_t(id_955) };
                   Pointer id_957 { srec_dst_851.writeU8(id_956) };
@@ -2402,9 +2547,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_958;
                 {
                   Pointer srec_dst_852 { let_res_951 };
-                  c1efb28eecd443c961e69845a587fe0d id_959 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_960 { id_959.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_961 { std::get<0>(id_960) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_959 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_960 { id_959.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_961 { std::get<0>(id_960) };
                   std::string id_962 { id_961.escape_seq };
                   uint32_t id_963 { (uint32_t)id_962.size() };
                   Vec<1, uint32_t> id_964 {  id_963  };
@@ -2440,29 +2585,33 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         }
                         Pointer id_985 { id_971.writeU8(choose_res_976) };
                         Void id_986 { ((void)(leb128_ptr_854[id_969] = id_985), VOID) };
+                        (void)id_986;
                         uint8_t id_987 { 0 };
                         uint8_t id_988 { 0 };
                         uint32_t id_989 { leb128_sz_853[id_988] };
                         uint8_t id_990 { 7 };
                         uint32_t id_991 { uint32_t(id_989 >> id_990) };
                         Void id_992 { ((void)(leb128_sz_853[id_987] = id_991), VOID) };
+                        (void)id_992;
                         uint8_t id_993 { 0 };
                         uint32_t id_994 { leb128_sz_853[id_993] };
                         uint32_t id_995 { 0U };
                         bool id_996 { bool(id_994 > id_995) };
                         while_flag_968 = id_996;
                         if (while_flag_968) {
+                          (void)VOID;
                         }
                       } while (while_flag_968);
+                      (void)VOID;
                       uint8_t id_997 { 0 };
                       Pointer id_998 { leb128_ptr_854[id_997] };
                       let_res_967 = id_998;
                     }
                     let_res_965 = let_res_967;
                   }
-                  c1efb28eecd443c961e69845a587fe0d id_999 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1000 { id_999.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_1001 { std::get<0>(id_1000) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_999 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_1000 { id_999.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_1001 { std::get<0>(id_1000) };
                   std::string id_1002 { id_1001.escape_seq };
                   Bytes id_1003 { id_1002 };
                   Pointer id_1004 { let_res_965.writeBytes(id_1003) };
@@ -2471,10 +2620,10 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_1005;
                 {
                   Pointer srec_dst_855 { let_res_958 };
-                  c1efb28eecd443c961e69845a587fe0d id_1006 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1007 { id_1006.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_1008 { std::get<0>(id_1007) };
-                  Lst<dessser::gen::field_type::t> id_1009 { id_1008.fields };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_1006 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_1007 { id_1006.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_1008 { std::get<0>(id_1007) };
+                  Lst<dessser::gen::field_type::t_ext> id_1009 { id_1008.fields };
                   uint32_t id_1010 { id_1009.size() };
                   Vec<1, uint32_t> id_1011 {  id_1010  };
                   Pointer let_res_1012;
@@ -2509,20 +2658,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                         }
                         Pointer id_1032 { id_1018.writeU8(choose_res_1023) };
                         Void id_1033 { ((void)(leb128_ptr_857[id_1016] = id_1032), VOID) };
+                        (void)id_1033;
                         uint8_t id_1034 { 0 };
                         uint8_t id_1035 { 0 };
                         uint32_t id_1036 { leb128_sz_856[id_1035] };
                         uint8_t id_1037 { 7 };
                         uint32_t id_1038 { uint32_t(id_1036 >> id_1037) };
                         Void id_1039 { ((void)(leb128_sz_856[id_1034] = id_1038), VOID) };
+                        (void)id_1039;
                         uint8_t id_1040 { 0 };
                         uint32_t id_1041 { leb128_sz_856[id_1040] };
                         uint32_t id_1042 { 0U };
                         bool id_1043 { bool(id_1041 > id_1042) };
                         while_flag_1015 = id_1043;
                         if (while_flag_1015) {
+                          (void)VOID;
                         }
                       } while (while_flag_1015);
+                      (void)VOID;
                       uint8_t id_1044 { 0 };
                       Pointer id_1045 { leb128_ptr_857[id_1044] };
                       let_res_1014 = id_1045;
@@ -2538,24 +2691,28 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                     Pointer let_res_1050;
                     {
                       Vec<1, int32_t> n_ref_859 { id_1049 };
-                      c1efb28eecd443c961e69845a587fe0d id_1051 { std::get<1>(p_0) };
-                      v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1052 { id_1051.format };
-                      v_951168fd627e4197ab60b5fba89b770b id_1053 { std::get<0>(id_1052) };
-                      Lst<dessser::gen::field_type::t> id_1054 { id_1053.fields };
-                      for (dessser::gen::field_type::t x_860 : id_1054) {
+                      t1d5c57287ee550c3ccac78b88bba5862 id_1051 { std::get<1>(*p_0) };
+                      t570dd118e4f520aece0574b2f62e7634 id_1052 { id_1051.format };
+                      tc1ee34cdd9bdb8371d318bb284a788a8 id_1053 { std::get<0>(id_1052) };
+                      Lst<dessser::gen::field_type::t_ext> id_1054 { id_1053.fields };
+                      for (dessser::gen::field_type::t_ext x_860 : id_1054) {
                         uint8_t id_1055 { 0 };
-                        std::function<Pointer(dessser::gen::field_type::t,Pointer)> id_1056 { dessser::gen::field_type::to_row_binary };
+                        auto fun1056 { dessser::gen::field_type::to_row_binary };
                         uint8_t id_1057 { 0 };
                         Pointer id_1058 { dst_ref_858[id_1057] };
-                        Pointer id_1059 { id_1056(x_860, id_1058) };
+                        Pointer id_1059 { fun1056(x_860, id_1058) };
                         Void id_1060 { ((void)(dst_ref_858[id_1055] = id_1059), VOID) };
+                        (void)id_1060;
                         uint8_t id_1061 { 0 };
                         int32_t id_1062 { 1L };
                         uint8_t id_1063 { 0 };
                         int32_t id_1064 { n_ref_859[id_1063] };
                         int32_t id_1065 { int32_t(id_1062 + id_1064) };
                         Void id_1066 { ((void)(n_ref_859[id_1061] = id_1065), VOID) };
+                        (void)id_1066;
+                        (void)id_1066;
                       }
+                      (void)VOID;
                       uint8_t id_1067 { 0 };
                       Pointer id_1068 { dst_ref_858[id_1067] };
                       let_res_1050 = id_1068;
@@ -2567,9 +2724,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_1069;
                 {
                   Pointer srec_dst_861 { let_res_1005 };
-                  c1efb28eecd443c961e69845a587fe0d id_1070 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1071 { id_1070.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_1072 { std::get<0>(id_1071) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_1070 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_1071 { id_1070.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_1072 { std::get<0>(id_1071) };
                   bool id_1073 { id_1072.vectors_of_chars_as_string };
                   uint8_t id_1074 { uint8_t(id_1073) };
                   Pointer id_1075 { srec_dst_861.writeU8(id_1074) };
@@ -2578,9 +2735,9 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 Pointer let_res_1076;
                 {
                   Pointer srec_dst_862 { let_res_1069 };
-                  c1efb28eecd443c961e69845a587fe0d id_1077 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1078 { id_1077.format };
-                  v_951168fd627e4197ab60b5fba89b770b id_1079 { std::get<0>(id_1078) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_1077 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_1078 { id_1077.format };
+                  tc1ee34cdd9bdb8371d318bb284a788a8 id_1079 { std::get<0>(id_1078) };
                   bool id_1080 { id_1079.clickhouse_syntax };
                   uint8_t id_1081 { uint8_t(id_1080) };
                   Pointer id_1082 { srec_dst_862.writeU8(id_1081) };
@@ -2588,15 +2745,16 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 choose_res_897 = let_res_1076;
               } else {
-                c1efb28eecd443c961e69845a587fe0d id_1083 { std::get<1>(p_0) };
-                v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1084 { id_1083.format };
+                t1d5c57287ee550c3ccac78b88bba5862 id_1083 { std::get<1>(*p_0) };
+                t570dd118e4f520aece0574b2f62e7634 id_1084 { id_1083.format };
                 uint16_t id_1085 { uint16_t(id_1084.index()) };
                 uint16_t id_1086 { 1 };
                 bool id_1087 { bool(id_1085 == id_1086) };
                 Void id_1088 { ((void)(assert(id_1087)), VOID) };
-                c1efb28eecd443c961e69845a587fe0d id_1089 { std::get<1>(p_0) };
-                v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1090 { id_1089.format };
-                Lst<dessser::gen::field_type::t> id_1091 { std::get<1>(id_1090) };
+                (void)id_1088;
+                t1d5c57287ee550c3ccac78b88bba5862 id_1089 { std::get<1>(*p_0) };
+                t570dd118e4f520aece0574b2f62e7634 id_1090 { id_1089.format };
+                Lst<dessser::gen::field_type::t_ext> id_1091 { std::get<1>(id_1090) };
                 uint32_t id_1092 { id_1091.size() };
                 Vec<1, uint32_t> id_1093 {  id_1092  };
                 Pointer let_res_1094;
@@ -2631,20 +2789,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                       }
                       Pointer id_1114 { id_1100.writeU8(choose_res_1105) };
                       Void id_1115 { ((void)(leb128_ptr_844[id_1098] = id_1114), VOID) };
+                      (void)id_1115;
                       uint8_t id_1116 { 0 };
                       uint8_t id_1117 { 0 };
                       uint32_t id_1118 { leb128_sz_843[id_1117] };
                       uint8_t id_1119 { 7 };
                       uint32_t id_1120 { uint32_t(id_1118 >> id_1119) };
                       Void id_1121 { ((void)(leb128_sz_843[id_1116] = id_1120), VOID) };
+                      (void)id_1121;
                       uint8_t id_1122 { 0 };
                       uint32_t id_1123 { leb128_sz_843[id_1122] };
                       uint32_t id_1124 { 0U };
                       bool id_1125 { bool(id_1123 > id_1124) };
                       while_flag_1097 = id_1125;
                       if (while_flag_1097) {
+                        (void)VOID;
                       }
                     } while (while_flag_1097);
+                    (void)VOID;
                     uint8_t id_1126 { 0 };
                     Pointer id_1127 { leb128_ptr_844[id_1126] };
                     let_res_1096 = id_1127;
@@ -2660,23 +2822,27 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   Pointer let_res_1132;
                   {
                     Vec<1, int32_t> n_ref_846 { id_1131 };
-                    c1efb28eecd443c961e69845a587fe0d id_1133 { std::get<1>(p_0) };
-                    v_21e8c6eca31cc038e9faa45d5b86bfa4 id_1134 { id_1133.format };
-                    Lst<dessser::gen::field_type::t> id_1135 { std::get<1>(id_1134) };
-                    for (dessser::gen::field_type::t x_847 : id_1135) {
+                    t1d5c57287ee550c3ccac78b88bba5862 id_1133 { std::get<1>(*p_0) };
+                    t570dd118e4f520aece0574b2f62e7634 id_1134 { id_1133.format };
+                    Lst<dessser::gen::field_type::t_ext> id_1135 { std::get<1>(id_1134) };
+                    for (dessser::gen::field_type::t_ext x_847 : id_1135) {
                       uint8_t id_1136 { 0 };
-                      std::function<Pointer(dessser::gen::field_type::t,Pointer)> id_1137 { dessser::gen::field_type::to_row_binary };
+                      auto fun1137 { dessser::gen::field_type::to_row_binary };
                       uint8_t id_1138 { 0 };
                       Pointer id_1139 { dst_ref_845[id_1138] };
-                      Pointer id_1140 { id_1137(x_847, id_1139) };
+                      Pointer id_1140 { fun1137(x_847, id_1139) };
                       Void id_1141 { ((void)(dst_ref_845[id_1136] = id_1140), VOID) };
+                      (void)id_1141;
                       uint8_t id_1142 { 0 };
                       int32_t id_1143 { 1L };
                       uint8_t id_1144 { 0 };
                       int32_t id_1145 { n_ref_846[id_1144] };
                       int32_t id_1146 { int32_t(id_1143 + id_1145) };
                       Void id_1147 { ((void)(n_ref_846[id_1142] = id_1146), VOID) };
+                      (void)id_1147;
+                      (void)id_1147;
                     }
+                    (void)VOID;
                     uint8_t id_1148 { 0 };
                     Pointer id_1149 { dst_ref_845[id_1148] };
                     let_res_1132 = id_1149;
@@ -2692,8 +2858,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           Pointer let_res_1150;
           {
             Pointer srec_dst_863 { let_res_886 };
-            c1efb28eecd443c961e69845a587fe0d id_1151 { std::get<1>(p_0) };
-            std::optional<dessser::gen::event_time::t> id_1152 { id_1151.event_time };
+            t1d5c57287ee550c3ccac78b88bba5862 id_1151 { std::get<1>(*p_0) };
+            std::optional<dessser::gen::event_time::t_ext> id_1152 { id_1151.event_time };
             bool id_1153 { !(id_1152.has_value ()) };
             Pointer choose_res_1154;
             if (id_1153) {
@@ -2701,13 +2867,13 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer id_1156 { srec_dst_863.writeU8(id_1155) };
               choose_res_1154 = id_1156;
             } else {
-              std::function<Pointer(dessser::gen::event_time::t,Pointer)> id_1157 { dessser::gen::event_time::to_row_binary };
-              c1efb28eecd443c961e69845a587fe0d id_1158 { std::get<1>(p_0) };
-              std::optional<dessser::gen::event_time::t> id_1159 { id_1158.event_time };
-              dessser::gen::event_time::t id_1160 { id_1159.value() };
+              auto fun1157 { dessser::gen::event_time::to_row_binary };
+              t1d5c57287ee550c3ccac78b88bba5862 id_1158 { std::get<1>(*p_0) };
+              std::optional<dessser::gen::event_time::t_ext> id_1159 { id_1158.event_time };
+              dessser::gen::event_time::t_ext id_1160 { id_1159.value() };
               uint8_t id_1161 { 0 };
               Pointer id_1162 { srec_dst_863.writeU8(id_1161) };
-              Pointer id_1163 { id_1157(id_1160, id_1162) };
+              Pointer id_1163 { fun1157(id_1160, id_1162) };
               choose_res_1154 = id_1163;
             }
             let_res_1150 = choose_res_1154;
@@ -2715,8 +2881,8 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           Pointer let_res_1164;
           {
             Pointer srec_dst_864 { let_res_1150 };
-            c1efb28eecd443c961e69845a587fe0d id_1165 { std::get<1>(p_0) };
-            Lst<dessser::gen::field_name::t> id_1166 { id_1165.factors };
+            t1d5c57287ee550c3ccac78b88bba5862 id_1165 { std::get<1>(*p_0) };
+            Lst<dessser::gen::field_name::t_ext> id_1166 { id_1165.factors };
             uint32_t id_1167 { id_1166.size() };
             Vec<1, uint32_t> id_1168 {  id_1167  };
             Pointer let_res_1169;
@@ -2751,20 +2917,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   }
                   Pointer id_1189 { id_1175.writeU8(choose_res_1180) };
                   Void id_1190 { ((void)(leb128_ptr_866[id_1173] = id_1189), VOID) };
+                  (void)id_1190;
                   uint8_t id_1191 { 0 };
                   uint8_t id_1192 { 0 };
                   uint32_t id_1193 { leb128_sz_865[id_1192] };
                   uint8_t id_1194 { 7 };
                   uint32_t id_1195 { uint32_t(id_1193 >> id_1194) };
                   Void id_1196 { ((void)(leb128_sz_865[id_1191] = id_1195), VOID) };
+                  (void)id_1196;
                   uint8_t id_1197 { 0 };
                   uint32_t id_1198 { leb128_sz_865[id_1197] };
                   uint32_t id_1199 { 0U };
                   bool id_1200 { bool(id_1198 > id_1199) };
                   while_flag_1172 = id_1200;
                   if (while_flag_1172) {
+                    (void)VOID;
                   }
                 } while (while_flag_1172);
+                (void)VOID;
                 uint8_t id_1201 { 0 };
                 Pointer id_1202 { leb128_ptr_866[id_1201] };
                 let_res_1171 = id_1202;
@@ -2780,22 +2950,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_1207;
               {
                 Vec<1, int32_t> n_ref_868 { id_1206 };
-                c1efb28eecd443c961e69845a587fe0d id_1208 { std::get<1>(p_0) };
-                Lst<dessser::gen::field_name::t> id_1209 { id_1208.factors };
-                for (dessser::gen::field_name::t x_869 : id_1209) {
+                t1d5c57287ee550c3ccac78b88bba5862 id_1208 { std::get<1>(*p_0) };
+                Lst<dessser::gen::field_name::t_ext> id_1209 { id_1208.factors };
+                for (dessser::gen::field_name::t_ext x_869 : id_1209) {
                   uint8_t id_1210 { 0 };
-                  std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_1211 { dessser::gen::field_name::to_row_binary };
+                  auto fun1211 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_1212 { 0 };
                   Pointer id_1213 { dst_ref_867[id_1212] };
-                  Pointer id_1214 { id_1211(x_869, id_1213) };
+                  Pointer id_1214 { fun1211(x_869, id_1213) };
                   Void id_1215 { ((void)(dst_ref_867[id_1210] = id_1214), VOID) };
+                  (void)id_1215;
                   uint8_t id_1216 { 0 };
                   int32_t id_1217 { 1L };
                   uint8_t id_1218 { 0 };
                   int32_t id_1219 { n_ref_868[id_1218] };
                   int32_t id_1220 { int32_t(id_1217 + id_1219) };
                   Void id_1221 { ((void)(n_ref_868[id_1216] = id_1220), VOID) };
+                  (void)id_1221;
+                  (void)id_1221;
                 }
+                (void)VOID;
                 uint8_t id_1222 { 0 };
                 Pointer id_1223 { dst_ref_867[id_1222] };
                 let_res_1207 = id_1223;
@@ -2806,11 +2980,12 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           }
           choose_res_661 = let_res_1164;
         } else {
-          uint16_t id_1224 { uint16_t(p_0.index()) };
+          uint16_t id_1224 { uint16_t(p_0->index()) };
           uint16_t id_1225 { 2 };
           bool id_1226 { bool(id_1224 == id_1225) };
           Void id_1227 { ((void)(assert(id_1226)), VOID) };
-          v_00380e3ab86a3786288b2307b930623c id_1228 { std::get<2>(p_0) };
+          (void)id_1227;
+          t9ddff9e1963b15ba493db1f8dadd34fb id_1228 { std::get<2>(*p_0) };
           std::string id_1229 { id_1228.net_addr };
           uint32_t id_1230 { (uint32_t)id_1229.size() };
           Vec<1, uint32_t> id_1231 {  id_1230  };
@@ -2846,34 +3021,38 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                 }
                 Pointer id_1252 { id_1238.writeU8(choose_res_1243) };
                 Void id_1253 { ((void)(leb128_ptr_812[id_1236] = id_1252), VOID) };
+                (void)id_1253;
                 uint8_t id_1254 { 0 };
                 uint8_t id_1255 { 0 };
                 uint32_t id_1256 { leb128_sz_811[id_1255] };
                 uint8_t id_1257 { 7 };
                 uint32_t id_1258 { uint32_t(id_1256 >> id_1257) };
                 Void id_1259 { ((void)(leb128_sz_811[id_1254] = id_1258), VOID) };
+                (void)id_1259;
                 uint8_t id_1260 { 0 };
                 uint32_t id_1261 { leb128_sz_811[id_1260] };
                 uint32_t id_1262 { 0U };
                 bool id_1263 { bool(id_1261 > id_1262) };
                 while_flag_1235 = id_1263;
                 if (while_flag_1235) {
+                  (void)VOID;
                 }
               } while (while_flag_1235);
+              (void)VOID;
               uint8_t id_1264 { 0 };
               Pointer id_1265 { leb128_ptr_812[id_1264] };
               let_res_1234 = id_1265;
             }
             let_res_1232 = let_res_1234;
           }
-          v_00380e3ab86a3786288b2307b930623c id_1266 { std::get<2>(p_0) };
+          t9ddff9e1963b15ba493db1f8dadd34fb id_1266 { std::get<2>(*p_0) };
           std::string id_1267 { id_1266.net_addr };
           Bytes id_1268 { id_1267 };
           Pointer id_1269 { let_res_1232.writeBytes(id_1268) };
           Pointer let_res_1270;
           {
             Pointer srec_dst_813 { id_1269 };
-            v_00380e3ab86a3786288b2307b930623c id_1271 { std::get<2>(p_0) };
+            t9ddff9e1963b15ba493db1f8dadd34fb id_1271 { std::get<2>(*p_0) };
             uint16_t id_1272 { id_1271.port };
             Pointer id_1273 { srec_dst_813.writeU16Le(id_1272) };
             let_res_1270 = id_1273;
@@ -2881,17 +3060,17 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
           Pointer let_res_1274;
           {
             Pointer srec_dst_814 { let_res_1270 };
-            std::function<Pointer(dessser::gen::raql_net_protocol::t,Pointer)> id_1275 { dessser::gen::raql_net_protocol::to_row_binary };
-            v_00380e3ab86a3786288b2307b930623c id_1276 { std::get<2>(p_0) };
-            dessser::gen::raql_net_protocol::t id_1277 { id_1276.proto };
-            Pointer id_1278 { id_1275(id_1277, srec_dst_814) };
+            auto fun1275 { dessser::gen::raql_net_protocol::to_row_binary };
+            t9ddff9e1963b15ba493db1f8dadd34fb id_1276 { std::get<2>(*p_0) };
+            dessser::gen::raql_net_protocol::t_ext id_1277 { id_1276.proto };
+            Pointer id_1278 { fun1275(id_1277, srec_dst_814) };
             let_res_1274 = id_1278;
           }
           Pointer let_res_1279;
           {
             Pointer srec_dst_815 { let_res_1274 };
-            v_00380e3ab86a3786288b2307b930623c id_1280 { std::get<2>(p_0) };
-            Lst<dessser::gen::field_name::t> id_1281 { id_1280.factors };
+            t9ddff9e1963b15ba493db1f8dadd34fb id_1280 { std::get<2>(*p_0) };
+            Lst<dessser::gen::field_name::t_ext> id_1281 { id_1280.factors };
             uint32_t id_1282 { id_1281.size() };
             Vec<1, uint32_t> id_1283 {  id_1282  };
             Pointer let_res_1284;
@@ -2926,20 +3105,24 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
                   }
                   Pointer id_1304 { id_1290.writeU8(choose_res_1295) };
                   Void id_1305 { ((void)(leb128_ptr_817[id_1288] = id_1304), VOID) };
+                  (void)id_1305;
                   uint8_t id_1306 { 0 };
                   uint8_t id_1307 { 0 };
                   uint32_t id_1308 { leb128_sz_816[id_1307] };
                   uint8_t id_1309 { 7 };
                   uint32_t id_1310 { uint32_t(id_1308 >> id_1309) };
                   Void id_1311 { ((void)(leb128_sz_816[id_1306] = id_1310), VOID) };
+                  (void)id_1311;
                   uint8_t id_1312 { 0 };
                   uint32_t id_1313 { leb128_sz_816[id_1312] };
                   uint32_t id_1314 { 0U };
                   bool id_1315 { bool(id_1313 > id_1314) };
                   while_flag_1287 = id_1315;
                   if (while_flag_1287) {
+                    (void)VOID;
                   }
                 } while (while_flag_1287);
+                (void)VOID;
                 uint8_t id_1316 { 0 };
                 Pointer id_1317 { leb128_ptr_817[id_1316] };
                 let_res_1286 = id_1317;
@@ -2955,22 +3138,26 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
               Pointer let_res_1322;
               {
                 Vec<1, int32_t> n_ref_819 { id_1321 };
-                v_00380e3ab86a3786288b2307b930623c id_1323 { std::get<2>(p_0) };
-                Lst<dessser::gen::field_name::t> id_1324 { id_1323.factors };
-                for (dessser::gen::field_name::t x_820 : id_1324) {
+                t9ddff9e1963b15ba493db1f8dadd34fb id_1323 { std::get<2>(*p_0) };
+                Lst<dessser::gen::field_name::t_ext> id_1324 { id_1323.factors };
+                for (dessser::gen::field_name::t_ext x_820 : id_1324) {
                   uint8_t id_1325 { 0 };
-                  std::function<Pointer(dessser::gen::field_name::t,Pointer)> id_1326 { dessser::gen::field_name::to_row_binary };
+                  auto fun1326 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_1327 { 0 };
                   Pointer id_1328 { dst_ref_818[id_1327] };
-                  Pointer id_1329 { id_1326(x_820, id_1328) };
+                  Pointer id_1329 { fun1326(x_820, id_1328) };
                   Void id_1330 { ((void)(dst_ref_818[id_1325] = id_1329), VOID) };
+                  (void)id_1330;
                   uint8_t id_1331 { 0 };
                   int32_t id_1332 { 1L };
                   uint8_t id_1333 { 0 };
                   int32_t id_1334 { n_ref_819[id_1333] };
                   int32_t id_1335 { int32_t(id_1332 + id_1334) };
                   Void id_1336 { ((void)(n_ref_819[id_1331] = id_1335), VOID) };
+                  (void)id_1336;
+                  (void)id_1336;
                 }
+                (void)VOID;
                 uint8_t id_1337 { 0 };
                 Pointer id_1338 { dst_ref_818[id_1337] };
                 let_res_1322 = id_1338;
@@ -2990,7 +3177,7 @@ static std::function<Pointer(t,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[Aggregate {fields: $raql_select_field[[]]; and_all_others: $field_name[[]]?; sort: (U32; $raql_expr?; $raql_expr[[]])?; where: $raql_expr; event_time: $event_time?; notifications: $raql_expr[[]]; key: $raql_expr[[]]; commit_cond: $raql_expr; commit_before: BOOL; flush_how: $raql_flush_method; from: [NamedOperation ([AllSites Void | TheseSites STRING | ThisSite Void]; STRING?; $function_name) | SubQuery THIS][[]]; every: $raql_expr?; factors: $field_name[[]]} | ReadExternal {source: [File {fname: $raql_expr; preprocessor: $raql_expr?; unlink: $raql_expr} | Kafka {options: (STRING; $raql_expr)[[]]; topic: $raql_expr; partitions: $raql_expr?; restart_from: [Beginning Void | OffsetFromEnd $raql_expr | SaveInState Void | UseKafkaGroupCoordinator {after_max_secs: $raql_expr; after_max_events: $raql_expr}]}]; format: [CSV {separator: CHAR; null: STRING; may_quote: BOOL; escape_seq: STRING; fields: $field_type[[]]; vectors_of_chars_as_string: BOOL; clickhouse_syntax: BOOL} | RowBinary $field_type[[]]]; event_time: $event_time?; factors: $field_name[[]]} | ListenFor {net_addr: STRING; port: U16; proto: $raql_net_protocol; factors: $field_name[[]]}]")
@@ -3384,17 +3571,17 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
                         (set-vec (u8 0) (identifier "repeat_n_703") (add (unsafe-nth (u8 0) (identifier "repeat_n_703")) (i32 1)))))) 
                   (unsafe-nth (u8 0) (identifier "sz_ref_702")))))))))
  */
-static std::function<Size(t)> sersize_of_row_binary_init()
+static std::function<Size(t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun1339 { [&fun1339](t p_0) {
+  std::function<Size(t*)> fun1339 { [&fun1339](t* p_0) {
     uint16_t id_1340 { 0 };
-    uint16_t id_1341 { uint16_t(p_0.index()) };
+    uint16_t id_1341 { uint16_t(p_0->index()) };
     bool id_1342 { bool(id_1340 == id_1341) };
     Size choose_res_1343;
     if (id_1342) {
       Size id_1344 { 2UL };
-      v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1345 { std::get<0>(p_0) };
-      Lst<dessser::gen::raql_select_field::t> id_1346 { id_1345.fields };
+      ta2fe18cae70948742cabb6081fd22a0c id_1345 { std::get<0>(*p_0) };
+      Lst<dessser::gen::raql_select_field::t_ext> id_1346 { id_1345.fields };
       uint32_t id_1347 { id_1346.size() };
       Vec<1, uint32_t> id_1348 {  id_1347  };
       Size let_res_1349;
@@ -3422,8 +3609,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               uint32_t id_1364 { 1U };
               uint32_t id_1365 { uint32_t(id_1363 + id_1364) };
               Void id_1366 { ((void)(lebsz_ref_756[id_1361] = id_1365), VOID) };
+              (void)id_1366;
             }
           } while (while_flag_1353);
+          (void)VOID;
           uint8_t id_1367 { 0 };
           uint32_t id_1368 { lebsz_ref_756[id_1367] };
           Size id_1369 { Size(id_1368) };
@@ -3442,8 +3631,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Vec<1, int32_t> repeat_n_758 { id_1374 };
           bool while_flag_1375 { true };
           do {
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1376 { std::get<0>(p_0) };
-            Lst<dessser::gen::raql_select_field::t> id_1377 { id_1376.fields };
+            ta2fe18cae70948742cabb6081fd22a0c id_1376 { std::get<0>(*p_0) };
+            Lst<dessser::gen::raql_select_field::t_ext> id_1377 { id_1376.fields };
             uint32_t id_1378 { id_1377.size() };
             int32_t id_1379 { int32_t(id_1378) };
             uint8_t id_1380 { 0 };
@@ -3454,24 +3643,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               uint8_t id_1383 { 0 };
               uint8_t id_1384 { 0 };
               Size id_1385 { sz_ref_757[id_1384] };
-              std::function<Size(dessser::gen::raql_select_field::t)> id_1386 { dessser::gen::raql_select_field::sersize_of_row_binary };
+              auto fun1386 { dessser::gen::raql_select_field::sersize_of_row_binary };
               uint8_t id_1387 { 0 };
               int32_t id_1388 { repeat_n_758[id_1387] };
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1389 { std::get<0>(p_0) };
-              Lst<dessser::gen::raql_select_field::t> id_1390 { id_1389.fields };
-              dessser::gen::raql_select_field::t id_1391 { id_1390[id_1388] };
-              Size id_1392 { id_1386(id_1391) };
+              ta2fe18cae70948742cabb6081fd22a0c id_1389 { std::get<0>(*p_0) };
+              Lst<dessser::gen::raql_select_field::t_ext> id_1390 { id_1389.fields };
+              dessser::gen::raql_select_field::t_ext id_1391 { id_1390[id_1388] };
+              Size id_1392 { fun1386(id_1391) };
               Size id_1393 { Size(id_1385 + id_1392) };
               Void id_1394 { ((void)(sz_ref_757[id_1383] = id_1393), VOID) };
+              (void)id_1394;
               uint8_t id_1395 { 0 };
               uint8_t id_1396 { 0 };
               int32_t id_1397 { repeat_n_758[id_1396] };
               int32_t id_1398 { 1L };
               int32_t id_1399 { int32_t(id_1397 + id_1398) };
               Void id_1400 { ((void)(repeat_n_758[id_1395] = id_1399), VOID) };
+              (void)id_1400;
+              (void)id_1400;
             }
           } while (while_flag_1375);
+          (void)VOID;
         }
+        (void)VOID;
         uint8_t id_1401 { 0 };
         Size id_1402 { sz_ref_757[id_1401] };
         let_res_1372 = id_1402;
@@ -3479,8 +3673,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1403;
       {
         Size sz_759 { let_res_1372 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1404 { std::get<0>(p_0) };
-        std::optional<Lst<dessser::gen::field_name::t>> id_1405 { id_1404.and_all_others };
+        ta2fe18cae70948742cabb6081fd22a0c id_1404 { std::get<0>(*p_0) };
+        std::optional<Lst<dessser::gen::field_name::t_ext>> id_1405 { id_1404.and_all_others };
         bool id_1406 { !(id_1405.has_value ()) };
         Size choose_res_1407;
         if (id_1406) {
@@ -3488,9 +3682,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size id_1409 { Size(sz_759 + id_1408) };
           choose_res_1407 = id_1409;
         } else {
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1410 { std::get<0>(p_0) };
-          std::optional<Lst<dessser::gen::field_name::t>> id_1411 { id_1410.and_all_others };
-          Lst<dessser::gen::field_name::t> id_1412 { id_1411.value() };
+          ta2fe18cae70948742cabb6081fd22a0c id_1410 { std::get<0>(*p_0) };
+          std::optional<Lst<dessser::gen::field_name::t_ext>> id_1411 { id_1410.and_all_others };
+          Lst<dessser::gen::field_name::t_ext> id_1412 { id_1411.value() };
           uint32_t id_1413 { id_1412.size() };
           Vec<1, uint32_t> id_1414 {  id_1413  };
           Size let_res_1415;
@@ -3518,8 +3712,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint32_t id_1430 { 1U };
                   uint32_t id_1431 { uint32_t(id_1429 + id_1430) };
                   Void id_1432 { ((void)(lebsz_ref_761[id_1427] = id_1431), VOID) };
+                  (void)id_1432;
                 }
               } while (while_flag_1419);
+              (void)VOID;
               uint8_t id_1433 { 0 };
               uint32_t id_1434 { lebsz_ref_761[id_1433] };
               Size id_1435 { Size(id_1434) };
@@ -3538,9 +3734,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Vec<1, int32_t> repeat_n_763 { id_1440 };
               bool while_flag_1441 { true };
               do {
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1442 { std::get<0>(p_0) };
-                std::optional<Lst<dessser::gen::field_name::t>> id_1443 { id_1442.and_all_others };
-                Lst<dessser::gen::field_name::t> id_1444 { id_1443.value() };
+                ta2fe18cae70948742cabb6081fd22a0c id_1442 { std::get<0>(*p_0) };
+                std::optional<Lst<dessser::gen::field_name::t_ext>> id_1443 { id_1442.and_all_others };
+                Lst<dessser::gen::field_name::t_ext> id_1444 { id_1443.value() };
                 uint32_t id_1445 { id_1444.size() };
                 int32_t id_1446 { int32_t(id_1445) };
                 uint8_t id_1447 { 0 };
@@ -3551,25 +3747,30 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint8_t id_1450 { 0 };
                   uint8_t id_1451 { 0 };
                   Size id_1452 { sz_ref_762[id_1451] };
-                  std::function<Size(dessser::gen::field_name::t)> id_1453 { dessser::gen::field_name::sersize_of_row_binary };
+                  auto fun1453 { dessser::gen::field_name::sersize_of_row_binary };
                   uint8_t id_1454 { 0 };
                   int32_t id_1455 { repeat_n_763[id_1454] };
-                  v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1456 { std::get<0>(p_0) };
-                  std::optional<Lst<dessser::gen::field_name::t>> id_1457 { id_1456.and_all_others };
-                  Lst<dessser::gen::field_name::t> id_1458 { id_1457.value() };
-                  dessser::gen::field_name::t id_1459 { id_1458[id_1455] };
-                  Size id_1460 { id_1453(id_1459) };
+                  ta2fe18cae70948742cabb6081fd22a0c id_1456 { std::get<0>(*p_0) };
+                  std::optional<Lst<dessser::gen::field_name::t_ext>> id_1457 { id_1456.and_all_others };
+                  Lst<dessser::gen::field_name::t_ext> id_1458 { id_1457.value() };
+                  dessser::gen::field_name::t_ext id_1459 { id_1458[id_1455] };
+                  Size id_1460 { fun1453(id_1459) };
                   Size id_1461 { Size(id_1452 + id_1460) };
                   Void id_1462 { ((void)(sz_ref_762[id_1450] = id_1461), VOID) };
+                  (void)id_1462;
                   uint8_t id_1463 { 0 };
                   uint8_t id_1464 { 0 };
                   int32_t id_1465 { repeat_n_763[id_1464] };
                   int32_t id_1466 { 1L };
                   int32_t id_1467 { int32_t(id_1465 + id_1466) };
                   Void id_1468 { ((void)(repeat_n_763[id_1463] = id_1467), VOID) };
+                  (void)id_1468;
+                  (void)id_1468;
                 }
               } while (while_flag_1441);
+              (void)VOID;
             }
+            (void)VOID;
             uint8_t id_1469 { 0 };
             Size id_1470 { sz_ref_762[id_1469] };
             let_res_1438 = id_1470;
@@ -3583,8 +3784,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1473;
       {
         Size sz_764 { let_res_1403 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1474 { std::get<0>(p_0) };
-        std::optional<b48f9480e4991d15124ad477c5cb330e> id_1475 { id_1474.sort };
+        ta2fe18cae70948742cabb6081fd22a0c id_1474 { std::get<0>(*p_0) };
+        std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1475 { id_1474.sort };
         bool id_1476 { !(id_1475.has_value ()) };
         Size choose_res_1477;
         if (id_1476) {
@@ -3592,10 +3793,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size id_1479 { Size(sz_764 + id_1478) };
           choose_res_1477 = id_1479;
         } else {
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1480 { std::get<0>(p_0) };
-          std::optional<b48f9480e4991d15124ad477c5cb330e> id_1481 { id_1480.sort };
-          b48f9480e4991d15124ad477c5cb330e id_1482 { id_1481.value() };
-          std::optional<dessser::gen::raql_expr::t> id_1483 { std::get<1>(id_1482) };
+          ta2fe18cae70948742cabb6081fd22a0c id_1480 { std::get<0>(*p_0) };
+          std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1481 { id_1480.sort };
+          tf0c8d4f3070907529cc1a83f8baf6fab id_1482 { id_1481.value() };
+          std::optional<dessser::gen::raql_expr::t_ext> id_1483 { std::get<1>(id_1482) };
           bool id_1484 { !(id_1483.has_value ()) };
           Size choose_res_1485;
           if (id_1484) {
@@ -3607,13 +3808,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           } else {
             Size id_1490 { 4UL };
             Size id_1491 { Size(sz_764 + id_1490) };
-            std::function<Size(dessser::gen::raql_expr::t)> id_1492 { dessser::gen::raql_expr::sersize_of_row_binary };
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1493 { std::get<0>(p_0) };
-            std::optional<b48f9480e4991d15124ad477c5cb330e> id_1494 { id_1493.sort };
-            b48f9480e4991d15124ad477c5cb330e id_1495 { id_1494.value() };
-            std::optional<dessser::gen::raql_expr::t> id_1496 { std::get<1>(id_1495) };
-            dessser::gen::raql_expr::t id_1497 { id_1496.value() };
-            Size id_1498 { id_1492(id_1497) };
+            auto fun1492 { dessser::gen::raql_expr::sersize_of_row_binary };
+            ta2fe18cae70948742cabb6081fd22a0c id_1493 { std::get<0>(*p_0) };
+            std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1494 { id_1493.sort };
+            tf0c8d4f3070907529cc1a83f8baf6fab id_1495 { id_1494.value() };
+            std::optional<dessser::gen::raql_expr::t_ext> id_1496 { std::get<1>(id_1495) };
+            dessser::gen::raql_expr::t_ext id_1497 { id_1496.value() };
+            Size id_1498 { fun1492(id_1497) };
             Size id_1499 { Size(id_1491 + id_1498) };
             Size id_1500 { 1UL };
             Size id_1501 { Size(id_1499 + id_1500) };
@@ -3622,10 +3823,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size let_res_1502;
           {
             Size sz_767 { choose_res_1485 };
-            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1503 { std::get<0>(p_0) };
-            std::optional<b48f9480e4991d15124ad477c5cb330e> id_1504 { id_1503.sort };
-            b48f9480e4991d15124ad477c5cb330e id_1505 { id_1504.value() };
-            Lst<dessser::gen::raql_expr::t> id_1506 { std::get<2>(id_1505) };
+            ta2fe18cae70948742cabb6081fd22a0c id_1503 { std::get<0>(*p_0) };
+            std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1504 { id_1503.sort };
+            tf0c8d4f3070907529cc1a83f8baf6fab id_1505 { id_1504.value() };
+            Lst<dessser::gen::raql_expr::t_ext> id_1506 { std::get<2>(id_1505) };
             uint32_t id_1507 { id_1506.size() };
             Vec<1, uint32_t> id_1508 {  id_1507  };
             Size let_res_1509;
@@ -3653,8 +3854,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint32_t id_1524 { 1U };
                     uint32_t id_1525 { uint32_t(id_1523 + id_1524) };
                     Void id_1526 { ((void)(lebsz_ref_769[id_1521] = id_1525), VOID) };
+                    (void)id_1526;
                   }
                 } while (while_flag_1513);
+                (void)VOID;
                 uint8_t id_1527 { 0 };
                 uint32_t id_1528 { lebsz_ref_769[id_1527] };
                 Size id_1529 { Size(id_1528) };
@@ -3673,10 +3876,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 Vec<1, int32_t> repeat_n_771 { id_1534 };
                 bool while_flag_1535 { true };
                 do {
-                  v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1536 { std::get<0>(p_0) };
-                  std::optional<b48f9480e4991d15124ad477c5cb330e> id_1537 { id_1536.sort };
-                  b48f9480e4991d15124ad477c5cb330e id_1538 { id_1537.value() };
-                  Lst<dessser::gen::raql_expr::t> id_1539 { std::get<2>(id_1538) };
+                  ta2fe18cae70948742cabb6081fd22a0c id_1536 { std::get<0>(*p_0) };
+                  std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1537 { id_1536.sort };
+                  tf0c8d4f3070907529cc1a83f8baf6fab id_1538 { id_1537.value() };
+                  Lst<dessser::gen::raql_expr::t_ext> id_1539 { std::get<2>(id_1538) };
                   uint32_t id_1540 { id_1539.size() };
                   int32_t id_1541 { int32_t(id_1540) };
                   uint8_t id_1542 { 0 };
@@ -3687,26 +3890,31 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint8_t id_1545 { 0 };
                     uint8_t id_1546 { 0 };
                     Size id_1547 { sz_ref_770[id_1546] };
-                    std::function<Size(dessser::gen::raql_expr::t)> id_1548 { dessser::gen::raql_expr::sersize_of_row_binary };
+                    auto fun1548 { dessser::gen::raql_expr::sersize_of_row_binary };
                     uint8_t id_1549 { 0 };
                     int32_t id_1550 { repeat_n_771[id_1549] };
-                    v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1551 { std::get<0>(p_0) };
-                    std::optional<b48f9480e4991d15124ad477c5cb330e> id_1552 { id_1551.sort };
-                    b48f9480e4991d15124ad477c5cb330e id_1553 { id_1552.value() };
-                    Lst<dessser::gen::raql_expr::t> id_1554 { std::get<2>(id_1553) };
-                    dessser::gen::raql_expr::t id_1555 { id_1554[id_1550] };
-                    Size id_1556 { id_1548(id_1555) };
+                    ta2fe18cae70948742cabb6081fd22a0c id_1551 { std::get<0>(*p_0) };
+                    std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_1552 { id_1551.sort };
+                    tf0c8d4f3070907529cc1a83f8baf6fab id_1553 { id_1552.value() };
+                    Lst<dessser::gen::raql_expr::t_ext> id_1554 { std::get<2>(id_1553) };
+                    dessser::gen::raql_expr::t_ext id_1555 { id_1554[id_1550] };
+                    Size id_1556 { fun1548(id_1555) };
                     Size id_1557 { Size(id_1547 + id_1556) };
                     Void id_1558 { ((void)(sz_ref_770[id_1545] = id_1557), VOID) };
+                    (void)id_1558;
                     uint8_t id_1559 { 0 };
                     uint8_t id_1560 { 0 };
                     int32_t id_1561 { repeat_n_771[id_1560] };
                     int32_t id_1562 { 1L };
                     int32_t id_1563 { int32_t(id_1561 + id_1562) };
                     Void id_1564 { ((void)(repeat_n_771[id_1559] = id_1563), VOID) };
+                    (void)id_1564;
+                    (void)id_1564;
                   }
                 } while (while_flag_1535);
+                (void)VOID;
               }
+              (void)VOID;
               uint8_t id_1565 { 0 };
               Size id_1566 { sz_ref_770[id_1565] };
               let_res_1532 = id_1566;
@@ -3722,18 +3930,18 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1569;
       {
         Size sz_772 { let_res_1473 };
-        std::function<Size(dessser::gen::raql_expr::t)> id_1570 { dessser::gen::raql_expr::sersize_of_row_binary };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1571 { std::get<0>(p_0) };
-        dessser::gen::raql_expr::t id_1572 { id_1571.where };
-        Size id_1573 { id_1570(id_1572) };
+        auto fun1570 { dessser::gen::raql_expr::sersize_of_row_binary };
+        ta2fe18cae70948742cabb6081fd22a0c id_1571 { std::get<0>(*p_0) };
+        dessser::gen::raql_expr::t_ext id_1572 { id_1571.where };
+        Size id_1573 { fun1570(id_1572) };
         Size id_1574 { Size(sz_772 + id_1573) };
         let_res_1569 = id_1574;
       }
       Size let_res_1575;
       {
         Size sz_773 { let_res_1569 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1576 { std::get<0>(p_0) };
-        std::optional<dessser::gen::event_time::t> id_1577 { id_1576.event_time };
+        ta2fe18cae70948742cabb6081fd22a0c id_1576 { std::get<0>(*p_0) };
+        std::optional<dessser::gen::event_time::t_ext> id_1577 { id_1576.event_time };
         bool id_1578 { !(id_1577.has_value ()) };
         Size choose_res_1579;
         if (id_1578) {
@@ -3741,11 +3949,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size id_1581 { Size(sz_773 + id_1580) };
           choose_res_1579 = id_1581;
         } else {
-          std::function<Size(dessser::gen::event_time::t)> id_1582 { dessser::gen::event_time::sersize_of_row_binary };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1583 { std::get<0>(p_0) };
-          std::optional<dessser::gen::event_time::t> id_1584 { id_1583.event_time };
-          dessser::gen::event_time::t id_1585 { id_1584.value() };
-          Size id_1586 { id_1582(id_1585) };
+          auto fun1582 { dessser::gen::event_time::sersize_of_row_binary };
+          ta2fe18cae70948742cabb6081fd22a0c id_1583 { std::get<0>(*p_0) };
+          std::optional<dessser::gen::event_time::t_ext> id_1584 { id_1583.event_time };
+          dessser::gen::event_time::t_ext id_1585 { id_1584.value() };
+          Size id_1586 { fun1582(id_1585) };
           Size id_1587 { Size(sz_773 + id_1586) };
           Size id_1588 { 1UL };
           Size id_1589 { Size(id_1587 + id_1588) };
@@ -3756,8 +3964,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1590;
       {
         Size sz_774 { let_res_1575 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1591 { std::get<0>(p_0) };
-        Lst<dessser::gen::raql_expr::t> id_1592 { id_1591.notifications };
+        ta2fe18cae70948742cabb6081fd22a0c id_1591 { std::get<0>(*p_0) };
+        Lst<dessser::gen::raql_expr::t_ext> id_1592 { id_1591.notifications };
         uint32_t id_1593 { id_1592.size() };
         Vec<1, uint32_t> id_1594 {  id_1593  };
         Size let_res_1595;
@@ -3785,8 +3993,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_1610 { 1U };
                 uint32_t id_1611 { uint32_t(id_1609 + id_1610) };
                 Void id_1612 { ((void)(lebsz_ref_776[id_1607] = id_1611), VOID) };
+                (void)id_1612;
               }
             } while (while_flag_1599);
+            (void)VOID;
             uint8_t id_1613 { 0 };
             uint32_t id_1614 { lebsz_ref_776[id_1613] };
             Size id_1615 { Size(id_1614) };
@@ -3805,8 +4015,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Vec<1, int32_t> repeat_n_778 { id_1620 };
             bool while_flag_1621 { true };
             do {
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1622 { std::get<0>(p_0) };
-              Lst<dessser::gen::raql_expr::t> id_1623 { id_1622.notifications };
+              ta2fe18cae70948742cabb6081fd22a0c id_1622 { std::get<0>(*p_0) };
+              Lst<dessser::gen::raql_expr::t_ext> id_1623 { id_1622.notifications };
               uint32_t id_1624 { id_1623.size() };
               int32_t id_1625 { int32_t(id_1624) };
               uint8_t id_1626 { 0 };
@@ -3817,24 +4027,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint8_t id_1629 { 0 };
                 uint8_t id_1630 { 0 };
                 Size id_1631 { sz_ref_777[id_1630] };
-                std::function<Size(dessser::gen::raql_expr::t)> id_1632 { dessser::gen::raql_expr::sersize_of_row_binary };
+                auto fun1632 { dessser::gen::raql_expr::sersize_of_row_binary };
                 uint8_t id_1633 { 0 };
                 int32_t id_1634 { repeat_n_778[id_1633] };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1635 { std::get<0>(p_0) };
-                Lst<dessser::gen::raql_expr::t> id_1636 { id_1635.notifications };
-                dessser::gen::raql_expr::t id_1637 { id_1636[id_1634] };
-                Size id_1638 { id_1632(id_1637) };
+                ta2fe18cae70948742cabb6081fd22a0c id_1635 { std::get<0>(*p_0) };
+                Lst<dessser::gen::raql_expr::t_ext> id_1636 { id_1635.notifications };
+                dessser::gen::raql_expr::t_ext id_1637 { id_1636[id_1634] };
+                Size id_1638 { fun1632(id_1637) };
                 Size id_1639 { Size(id_1631 + id_1638) };
                 Void id_1640 { ((void)(sz_ref_777[id_1629] = id_1639), VOID) };
+                (void)id_1640;
                 uint8_t id_1641 { 0 };
                 uint8_t id_1642 { 0 };
                 int32_t id_1643 { repeat_n_778[id_1642] };
                 int32_t id_1644 { 1L };
                 int32_t id_1645 { int32_t(id_1643 + id_1644) };
                 Void id_1646 { ((void)(repeat_n_778[id_1641] = id_1645), VOID) };
+                (void)id_1646;
+                (void)id_1646;
               }
             } while (while_flag_1621);
+            (void)VOID;
           }
+          (void)VOID;
           uint8_t id_1647 { 0 };
           Size id_1648 { sz_ref_777[id_1647] };
           let_res_1618 = id_1648;
@@ -3844,8 +4059,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1649;
       {
         Size sz_779 { let_res_1590 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1650 { std::get<0>(p_0) };
-        Lst<dessser::gen::raql_expr::t> id_1651 { id_1650.key };
+        ta2fe18cae70948742cabb6081fd22a0c id_1650 { std::get<0>(*p_0) };
+        Lst<dessser::gen::raql_expr::t_ext> id_1651 { id_1650.key };
         uint32_t id_1652 { id_1651.size() };
         Vec<1, uint32_t> id_1653 {  id_1652  };
         Size let_res_1654;
@@ -3873,8 +4088,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_1669 { 1U };
                 uint32_t id_1670 { uint32_t(id_1668 + id_1669) };
                 Void id_1671 { ((void)(lebsz_ref_781[id_1666] = id_1670), VOID) };
+                (void)id_1671;
               }
             } while (while_flag_1658);
+            (void)VOID;
             uint8_t id_1672 { 0 };
             uint32_t id_1673 { lebsz_ref_781[id_1672] };
             Size id_1674 { Size(id_1673) };
@@ -3893,8 +4110,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Vec<1, int32_t> repeat_n_783 { id_1679 };
             bool while_flag_1680 { true };
             do {
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1681 { std::get<0>(p_0) };
-              Lst<dessser::gen::raql_expr::t> id_1682 { id_1681.key };
+              ta2fe18cae70948742cabb6081fd22a0c id_1681 { std::get<0>(*p_0) };
+              Lst<dessser::gen::raql_expr::t_ext> id_1682 { id_1681.key };
               uint32_t id_1683 { id_1682.size() };
               int32_t id_1684 { int32_t(id_1683) };
               uint8_t id_1685 { 0 };
@@ -3905,24 +4122,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint8_t id_1688 { 0 };
                 uint8_t id_1689 { 0 };
                 Size id_1690 { sz_ref_782[id_1689] };
-                std::function<Size(dessser::gen::raql_expr::t)> id_1691 { dessser::gen::raql_expr::sersize_of_row_binary };
+                auto fun1691 { dessser::gen::raql_expr::sersize_of_row_binary };
                 uint8_t id_1692 { 0 };
                 int32_t id_1693 { repeat_n_783[id_1692] };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1694 { std::get<0>(p_0) };
-                Lst<dessser::gen::raql_expr::t> id_1695 { id_1694.key };
-                dessser::gen::raql_expr::t id_1696 { id_1695[id_1693] };
-                Size id_1697 { id_1691(id_1696) };
+                ta2fe18cae70948742cabb6081fd22a0c id_1694 { std::get<0>(*p_0) };
+                Lst<dessser::gen::raql_expr::t_ext> id_1695 { id_1694.key };
+                dessser::gen::raql_expr::t_ext id_1696 { id_1695[id_1693] };
+                Size id_1697 { fun1691(id_1696) };
                 Size id_1698 { Size(id_1690 + id_1697) };
                 Void id_1699 { ((void)(sz_ref_782[id_1688] = id_1698), VOID) };
+                (void)id_1699;
                 uint8_t id_1700 { 0 };
                 uint8_t id_1701 { 0 };
                 int32_t id_1702 { repeat_n_783[id_1701] };
                 int32_t id_1703 { 1L };
                 int32_t id_1704 { int32_t(id_1702 + id_1703) };
                 Void id_1705 { ((void)(repeat_n_783[id_1700] = id_1704), VOID) };
+                (void)id_1705;
+                (void)id_1705;
               }
             } while (while_flag_1680);
+            (void)VOID;
           }
+          (void)VOID;
           uint8_t id_1706 { 0 };
           Size id_1707 { sz_ref_782[id_1706] };
           let_res_1677 = id_1707;
@@ -3932,10 +4154,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1708;
       {
         Size sz_784 { let_res_1649 };
-        std::function<Size(dessser::gen::raql_expr::t)> id_1709 { dessser::gen::raql_expr::sersize_of_row_binary };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1710 { std::get<0>(p_0) };
-        dessser::gen::raql_expr::t id_1711 { id_1710.commit_cond };
-        Size id_1712 { id_1709(id_1711) };
+        auto fun1709 { dessser::gen::raql_expr::sersize_of_row_binary };
+        ta2fe18cae70948742cabb6081fd22a0c id_1710 { std::get<0>(*p_0) };
+        dessser::gen::raql_expr::t_ext id_1711 { id_1710.commit_cond };
+        Size id_1712 { fun1709(id_1711) };
         Size id_1713 { Size(sz_784 + id_1712) };
         let_res_1708 = id_1713;
       }
@@ -3944,18 +4166,18 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1716;
       {
         Size sz_786 { id_1715 };
-        std::function<Size(dessser::gen::raql_flush_method::t)> id_1717 { dessser::gen::raql_flush_method::sersize_of_row_binary };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1718 { std::get<0>(p_0) };
-        dessser::gen::raql_flush_method::t id_1719 { id_1718.flush_how };
-        Size id_1720 { id_1717(id_1719) };
+        auto fun1717 { dessser::gen::raql_flush_method::sersize_of_row_binary };
+        ta2fe18cae70948742cabb6081fd22a0c id_1718 { std::get<0>(*p_0) };
+        dessser::gen::raql_flush_method::t_ext id_1719 { id_1718.flush_how };
+        Size id_1720 { fun1717(id_1719) };
         Size id_1721 { Size(sz_786 + id_1720) };
         let_res_1716 = id_1721;
       }
       Size let_res_1722;
       {
         Size sz_787 { let_res_1716 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1723 { std::get<0>(p_0) };
-        Lst<ee20956156b3a0bf3ed4185051a85c84> id_1724 { id_1723.from };
+        ta2fe18cae70948742cabb6081fd22a0c id_1723 { std::get<0>(*p_0) };
+        Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1724 { id_1723.from };
         uint32_t id_1725 { id_1724.size() };
         Vec<1, uint32_t> id_1726 {  id_1725  };
         Size let_res_1727;
@@ -3983,8 +4205,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_1742 { 1U };
                 uint32_t id_1743 { uint32_t(id_1741 + id_1742) };
                 Void id_1744 { ((void)(lebsz_ref_789[id_1739] = id_1743), VOID) };
+                (void)id_1744;
               }
             } while (while_flag_1731);
+            (void)VOID;
             uint8_t id_1745 { 0 };
             uint32_t id_1746 { lebsz_ref_789[id_1745] };
             Size id_1747 { Size(id_1746) };
@@ -4003,8 +4227,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Vec<1, int32_t> repeat_n_791 { id_1752 };
             bool while_flag_1753 { true };
             do {
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1754 { std::get<0>(p_0) };
-              Lst<ee20956156b3a0bf3ed4185051a85c84> id_1755 { id_1754.from };
+              ta2fe18cae70948742cabb6081fd22a0c id_1754 { std::get<0>(*p_0) };
+              Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1755 { id_1754.from };
               uint32_t id_1756 { id_1755.size() };
               int32_t id_1757 { int32_t(id_1756) };
               uint8_t id_1758 { 0 };
@@ -4015,9 +4239,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint8_t id_1761 { 0 };
                 uint8_t id_1762 { 0 };
                 int32_t id_1763 { repeat_n_791[id_1762] };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1764 { std::get<0>(p_0) };
-                Lst<ee20956156b3a0bf3ed4185051a85c84> id_1765 { id_1764.from };
-                ee20956156b3a0bf3ed4185051a85c84 id_1766 { id_1765[id_1763] };
+                ta2fe18cae70948742cabb6081fd22a0c id_1764 { std::get<0>(*p_0) };
+                Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1765 { id_1764.from };
+                t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1766 { id_1765[id_1763] };
                 uint16_t id_1767 { uint16_t(id_1766.index()) };
                 Size let_res_1768;
                 {
@@ -4035,11 +4259,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       Size sz_793 { id_1775 };
                       uint8_t id_1777 { 0 };
                       int32_t id_1778 { repeat_n_791[id_1777] };
-                      v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1779 { std::get<0>(p_0) };
-                      Lst<ee20956156b3a0bf3ed4185051a85c84> id_1780 { id_1779.from };
-                      ee20956156b3a0bf3ed4185051a85c84 id_1781 { id_1780[id_1778] };
-                      v_9054563dd112d3f48469dddea6b8194e id_1782 { std::get<0>(id_1781) };
-                      v_3cd54ea1158497be65dc13cca6d4b046 id_1783 { std::get<0>(id_1782) };
+                      ta2fe18cae70948742cabb6081fd22a0c id_1779 { std::get<0>(*p_0) };
+                      Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1780 { id_1779.from };
+                      t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1781 { id_1780[id_1778] };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_1782 { std::get<0>(id_1781) };
+                      te10a95f610a64bfb7ccea542c54f0a25 id_1783 { std::get<0>(id_1782) };
                       uint16_t id_1784 { uint16_t(id_1783.index()) };
                       Size let_res_1785;
                       {
@@ -4060,11 +4284,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                             Size id_1795 { Size(sz_793 + id_1794) };
                             uint8_t id_1796 { 0 };
                             int32_t id_1797 { repeat_n_791[id_1796] };
-                            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1798 { std::get<0>(p_0) };
-                            Lst<ee20956156b3a0bf3ed4185051a85c84> id_1799 { id_1798.from };
-                            ee20956156b3a0bf3ed4185051a85c84 id_1800 { id_1799[id_1797] };
-                            v_9054563dd112d3f48469dddea6b8194e id_1801 { std::get<0>(id_1800) };
-                            v_3cd54ea1158497be65dc13cca6d4b046 id_1802 { std::get<0>(id_1801) };
+                            ta2fe18cae70948742cabb6081fd22a0c id_1798 { std::get<0>(*p_0) };
+                            Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1799 { id_1798.from };
+                            t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1800 { id_1799[id_1797] };
+                            t9b471a57e45588f3795bf9ca91c31ff6 id_1801 { std::get<0>(id_1800) };
+                            te10a95f610a64bfb7ccea542c54f0a25 id_1802 { std::get<0>(id_1801) };
                             std::string id_1803 { std::get<1>(id_1802) };
                             uint32_t id_1804 { (uint32_t)id_1803.size() };
                             Size let_res_1805;
@@ -4096,8 +4320,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                       uint32_t id_1822 { 1U };
                                       uint32_t id_1823 { uint32_t(id_1821 + id_1822) };
                                       Void id_1824 { ((void)(lebsz_ref_797[id_1819] = id_1823), VOID) };
+                                      (void)id_1824;
                                     }
                                   } while (while_flag_1811);
+                                  (void)VOID;
                                   uint8_t id_1825 { 0 };
                                   uint32_t id_1826 { lebsz_ref_797[id_1825] };
                                   Size id_1827 { Size(id_1826) };
@@ -4115,6 +4341,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                             uint16_t id_1831 { 2 };
                             bool id_1832 { bool(label2_794 == id_1831) };
                             Void id_1833 { ((void)(assert(id_1832)), VOID) };
+                            (void)id_1833;
                             Size id_1834 { 2UL };
                             Size id_1835 { Size(sz_793 + id_1834) };
                             choose_res_1793 = id_1835;
@@ -4130,10 +4357,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       Size sz_798 { let_res_1776 };
                       uint8_t id_1837 { 0 };
                       int32_t id_1838 { repeat_n_791[id_1837] };
-                      v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1839 { std::get<0>(p_0) };
-                      Lst<ee20956156b3a0bf3ed4185051a85c84> id_1840 { id_1839.from };
-                      ee20956156b3a0bf3ed4185051a85c84 id_1841 { id_1840[id_1838] };
-                      v_9054563dd112d3f48469dddea6b8194e id_1842 { std::get<0>(id_1841) };
+                      ta2fe18cae70948742cabb6081fd22a0c id_1839 { std::get<0>(*p_0) };
+                      Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1840 { id_1839.from };
+                      t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1841 { id_1840[id_1838] };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_1842 { std::get<0>(id_1841) };
                       std::optional<std::string> id_1843 { std::get<1>(id_1842) };
                       bool id_1844 { !(id_1843.has_value ()) };
                       Size choose_res_1845;
@@ -4144,10 +4371,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       } else {
                         uint8_t id_1848 { 0 };
                         int32_t id_1849 { repeat_n_791[id_1848] };
-                        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1850 { std::get<0>(p_0) };
-                        Lst<ee20956156b3a0bf3ed4185051a85c84> id_1851 { id_1850.from };
-                        ee20956156b3a0bf3ed4185051a85c84 id_1852 { id_1851[id_1849] };
-                        v_9054563dd112d3f48469dddea6b8194e id_1853 { std::get<0>(id_1852) };
+                        ta2fe18cae70948742cabb6081fd22a0c id_1850 { std::get<0>(*p_0) };
+                        Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1851 { id_1850.from };
+                        t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1852 { id_1851[id_1849] };
+                        t9b471a57e45588f3795bf9ca91c31ff6 id_1853 { std::get<0>(id_1852) };
                         std::optional<std::string> id_1854 { std::get<1>(id_1853) };
                         std::string id_1855 { id_1854.value() };
                         uint32_t id_1856 { (uint32_t)id_1855.size() };
@@ -4180,8 +4407,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                                   uint32_t id_1874 { 1U };
                                   uint32_t id_1875 { uint32_t(id_1873 + id_1874) };
                                   Void id_1876 { ((void)(lebsz_ref_801[id_1871] = id_1875), VOID) };
+                                  (void)id_1876;
                                 }
                               } while (while_flag_1863);
+                              (void)VOID;
                               uint8_t id_1877 { 0 };
                               uint32_t id_1878 { lebsz_ref_801[id_1877] };
                               Size id_1879 { Size(id_1878) };
@@ -4203,15 +4432,15 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     Size let_res_1885;
                     {
                       Size sz_802 { let_res_1836 };
-                      std::function<Size(dessser::gen::function_name::t)> id_1886 { dessser::gen::function_name::sersize_of_row_binary };
+                      auto fun1886 { dessser::gen::function_name::sersize_of_row_binary };
                       uint8_t id_1887 { 0 };
                       int32_t id_1888 { repeat_n_791[id_1887] };
-                      v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1889 { std::get<0>(p_0) };
-                      Lst<ee20956156b3a0bf3ed4185051a85c84> id_1890 { id_1889.from };
-                      ee20956156b3a0bf3ed4185051a85c84 id_1891 { id_1890[id_1888] };
-                      v_9054563dd112d3f48469dddea6b8194e id_1892 { std::get<0>(id_1891) };
-                      dessser::gen::function_name::t id_1893 { std::get<2>(id_1892) };
-                      Size id_1894 { id_1886(id_1893) };
+                      ta2fe18cae70948742cabb6081fd22a0c id_1889 { std::get<0>(*p_0) };
+                      Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1890 { id_1889.from };
+                      t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1891 { id_1890[id_1888] };
+                      t9b471a57e45588f3795bf9ca91c31ff6 id_1892 { std::get<0>(id_1891) };
+                      dessser::gen::function_name::t_ext id_1893 { std::get<2>(id_1892) };
+                      Size id_1894 { fun1886(id_1893) };
                       Size id_1895 { Size(sz_802 + id_1894) };
                       let_res_1885 = id_1895;
                     }
@@ -4220,15 +4449,16 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint16_t id_1896 { 1 };
                     bool id_1897 { bool(label2_792 == id_1896) };
                     Void id_1898 { ((void)(assert(id_1897)), VOID) };
+                    (void)id_1898;
                     uint8_t id_1899 { 0 };
                     Size id_1900 { sz_ref_790[id_1899] };
                     Size id_1901 { 2UL };
                     Size id_1902 { Size(id_1900 + id_1901) };
                     uint8_t id_1903 { 0 };
                     int32_t id_1904 { repeat_n_791[id_1903] };
-                    v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1905 { std::get<0>(p_0) };
-                    Lst<ee20956156b3a0bf3ed4185051a85c84> id_1906 { id_1905.from };
-                    ee20956156b3a0bf3ed4185051a85c84 id_1907 { id_1906[id_1904] };
+                    ta2fe18cae70948742cabb6081fd22a0c id_1905 { std::get<0>(*p_0) };
+                    Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_1906 { id_1905.from };
+                    t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_1907 { id_1906[id_1904] };
                     t* id_1908 { std::get<1>(id_1907) };
                     Size id_1909 { fun1339(id_1908) };
                     Size id_1910 { Size(id_1902 + id_1909) };
@@ -4237,15 +4467,20 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   let_res_1768 = choose_res_1771;
                 }
                 Void id_1911 { ((void)(sz_ref_790[id_1761] = let_res_1768), VOID) };
+                (void)id_1911;
                 uint8_t id_1912 { 0 };
                 uint8_t id_1913 { 0 };
                 int32_t id_1914 { repeat_n_791[id_1913] };
                 int32_t id_1915 { 1L };
                 int32_t id_1916 { int32_t(id_1914 + id_1915) };
                 Void id_1917 { ((void)(repeat_n_791[id_1912] = id_1916), VOID) };
+                (void)id_1917;
+                (void)id_1917;
               }
             } while (while_flag_1753);
+            (void)VOID;
           }
+          (void)VOID;
           uint8_t id_1918 { 0 };
           Size id_1919 { sz_ref_790[id_1918] };
           let_res_1750 = id_1919;
@@ -4255,8 +4490,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1920;
       {
         Size sz_803 { let_res_1722 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1921 { std::get<0>(p_0) };
-        std::optional<dessser::gen::raql_expr::t> id_1922 { id_1921.every };
+        ta2fe18cae70948742cabb6081fd22a0c id_1921 { std::get<0>(*p_0) };
+        std::optional<dessser::gen::raql_expr::t_ext> id_1922 { id_1921.every };
         bool id_1923 { !(id_1922.has_value ()) };
         Size choose_res_1924;
         if (id_1923) {
@@ -4264,11 +4499,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size id_1926 { Size(sz_803 + id_1925) };
           choose_res_1924 = id_1926;
         } else {
-          std::function<Size(dessser::gen::raql_expr::t)> id_1927 { dessser::gen::raql_expr::sersize_of_row_binary };
-          v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1928 { std::get<0>(p_0) };
-          std::optional<dessser::gen::raql_expr::t> id_1929 { id_1928.every };
-          dessser::gen::raql_expr::t id_1930 { id_1929.value() };
-          Size id_1931 { id_1927(id_1930) };
+          auto fun1927 { dessser::gen::raql_expr::sersize_of_row_binary };
+          ta2fe18cae70948742cabb6081fd22a0c id_1928 { std::get<0>(*p_0) };
+          std::optional<dessser::gen::raql_expr::t_ext> id_1929 { id_1928.every };
+          dessser::gen::raql_expr::t_ext id_1930 { id_1929.value() };
+          Size id_1931 { fun1927(id_1930) };
           Size id_1932 { Size(sz_803 + id_1931) };
           Size id_1933 { 1UL };
           Size id_1934 { Size(id_1932 + id_1933) };
@@ -4279,8 +4514,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       Size let_res_1935;
       {
         Size sz_804 { let_res_1920 };
-        v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1936 { std::get<0>(p_0) };
-        Lst<dessser::gen::field_name::t> id_1937 { id_1936.factors };
+        ta2fe18cae70948742cabb6081fd22a0c id_1936 { std::get<0>(*p_0) };
+        Lst<dessser::gen::field_name::t_ext> id_1937 { id_1936.factors };
         uint32_t id_1938 { id_1937.size() };
         Vec<1, uint32_t> id_1939 {  id_1938  };
         Size let_res_1940;
@@ -4308,8 +4543,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_1955 { 1U };
                 uint32_t id_1956 { uint32_t(id_1954 + id_1955) };
                 Void id_1957 { ((void)(lebsz_ref_806[id_1952] = id_1956), VOID) };
+                (void)id_1957;
               }
             } while (while_flag_1944);
+            (void)VOID;
             uint8_t id_1958 { 0 };
             uint32_t id_1959 { lebsz_ref_806[id_1958] };
             Size id_1960 { Size(id_1959) };
@@ -4328,8 +4565,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Vec<1, int32_t> repeat_n_808 { id_1965 };
             bool while_flag_1966 { true };
             do {
-              v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1967 { std::get<0>(p_0) };
-              Lst<dessser::gen::field_name::t> id_1968 { id_1967.factors };
+              ta2fe18cae70948742cabb6081fd22a0c id_1967 { std::get<0>(*p_0) };
+              Lst<dessser::gen::field_name::t_ext> id_1968 { id_1967.factors };
               uint32_t id_1969 { id_1968.size() };
               int32_t id_1970 { int32_t(id_1969) };
               uint8_t id_1971 { 0 };
@@ -4340,24 +4577,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint8_t id_1974 { 0 };
                 uint8_t id_1975 { 0 };
                 Size id_1976 { sz_ref_807[id_1975] };
-                std::function<Size(dessser::gen::field_name::t)> id_1977 { dessser::gen::field_name::sersize_of_row_binary };
+                auto fun1977 { dessser::gen::field_name::sersize_of_row_binary };
                 uint8_t id_1978 { 0 };
                 int32_t id_1979 { repeat_n_808[id_1978] };
-                v_41bb77c6ca1cb4242e451c68e9cdbd6c id_1980 { std::get<0>(p_0) };
-                Lst<dessser::gen::field_name::t> id_1981 { id_1980.factors };
-                dessser::gen::field_name::t id_1982 { id_1981[id_1979] };
-                Size id_1983 { id_1977(id_1982) };
+                ta2fe18cae70948742cabb6081fd22a0c id_1980 { std::get<0>(*p_0) };
+                Lst<dessser::gen::field_name::t_ext> id_1981 { id_1980.factors };
+                dessser::gen::field_name::t_ext id_1982 { id_1981[id_1979] };
+                Size id_1983 { fun1977(id_1982) };
                 Size id_1984 { Size(id_1976 + id_1983) };
                 Void id_1985 { ((void)(sz_ref_807[id_1974] = id_1984), VOID) };
+                (void)id_1985;
                 uint8_t id_1986 { 0 };
                 uint8_t id_1987 { 0 };
                 int32_t id_1988 { repeat_n_808[id_1987] };
                 int32_t id_1989 { 1L };
                 int32_t id_1990 { int32_t(id_1988 + id_1989) };
                 Void id_1991 { ((void)(repeat_n_808[id_1986] = id_1990), VOID) };
+                (void)id_1991;
+                (void)id_1991;
               }
             } while (while_flag_1966);
+            (void)VOID;
           }
+          (void)VOID;
           uint8_t id_1992 { 0 };
           Size id_1993 { sz_ref_807[id_1992] };
           let_res_1963 = id_1993;
@@ -4367,32 +4609,32 @@ static std::function<Size(t)> sersize_of_row_binary_init()
       choose_res_1343 = let_res_1935;
     } else {
       uint16_t id_1994 { 1 };
-      uint16_t id_1995 { uint16_t(p_0.index()) };
+      uint16_t id_1995 { uint16_t(p_0->index()) };
       bool id_1996 { bool(id_1994 == id_1995) };
       Size choose_res_1997;
       if (id_1996) {
         uint16_t id_1998 { 0 };
-        c1efb28eecd443c961e69845a587fe0d id_1999 { std::get<1>(p_0) };
-        v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2000 { id_1999.source };
+        t1d5c57287ee550c3ccac78b88bba5862 id_1999 { std::get<1>(*p_0) };
+        tf708b6568b9bac184e3f5da3a64f4419 id_2000 { id_1999.source };
         uint16_t id_2001 { uint16_t(id_2000.index()) };
         bool id_2002 { bool(id_1998 == id_2001) };
         Size choose_res_2003;
         if (id_2002) {
           Size id_2004 { 4UL };
-          std::function<Size(dessser::gen::raql_expr::t)> id_2005 { dessser::gen::raql_expr::sersize_of_row_binary };
-          c1efb28eecd443c961e69845a587fe0d id_2006 { std::get<1>(p_0) };
-          v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2007 { id_2006.source };
-          v_65abbca6f6205aebd6740de88f9e9235 id_2008 { std::get<0>(id_2007) };
-          dessser::gen::raql_expr::t id_2009 { id_2008.fname };
-          Size id_2010 { id_2005(id_2009) };
+          auto fun2005 { dessser::gen::raql_expr::sersize_of_row_binary };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2006 { std::get<1>(*p_0) };
+          tf708b6568b9bac184e3f5da3a64f4419 id_2007 { id_2006.source };
+          ta828a76692b94aa6a15973ace224bedc id_2008 { std::get<0>(id_2007) };
+          dessser::gen::raql_expr::t_ext id_2009 { id_2008.fname };
+          Size id_2010 { fun2005(id_2009) };
           Size id_2011 { Size(id_2004 + id_2010) };
           Size let_res_2012;
           {
             Size sz_723 { id_2011 };
-            c1efb28eecd443c961e69845a587fe0d id_2013 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2014 { id_2013.source };
-            v_65abbca6f6205aebd6740de88f9e9235 id_2015 { std::get<0>(id_2014) };
-            std::optional<dessser::gen::raql_expr::t> id_2016 { id_2015.preprocessor };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2013 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_2014 { id_2013.source };
+            ta828a76692b94aa6a15973ace224bedc id_2015 { std::get<0>(id_2014) };
+            std::optional<dessser::gen::raql_expr::t_ext> id_2016 { id_2015.preprocessor };
             bool id_2017 { !(id_2016.has_value ()) };
             Size choose_res_2018;
             if (id_2017) {
@@ -4400,13 +4642,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Size id_2020 { Size(sz_723 + id_2019) };
               choose_res_2018 = id_2020;
             } else {
-              std::function<Size(dessser::gen::raql_expr::t)> id_2021 { dessser::gen::raql_expr::sersize_of_row_binary };
-              c1efb28eecd443c961e69845a587fe0d id_2022 { std::get<1>(p_0) };
-              v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2023 { id_2022.source };
-              v_65abbca6f6205aebd6740de88f9e9235 id_2024 { std::get<0>(id_2023) };
-              std::optional<dessser::gen::raql_expr::t> id_2025 { id_2024.preprocessor };
-              dessser::gen::raql_expr::t id_2026 { id_2025.value() };
-              Size id_2027 { id_2021(id_2026) };
+              auto fun2021 { dessser::gen::raql_expr::sersize_of_row_binary };
+              t1d5c57287ee550c3ccac78b88bba5862 id_2022 { std::get<1>(*p_0) };
+              tf708b6568b9bac184e3f5da3a64f4419 id_2023 { id_2022.source };
+              ta828a76692b94aa6a15973ace224bedc id_2024 { std::get<0>(id_2023) };
+              std::optional<dessser::gen::raql_expr::t_ext> id_2025 { id_2024.preprocessor };
+              dessser::gen::raql_expr::t_ext id_2026 { id_2025.value() };
+              Size id_2027 { fun2021(id_2026) };
               Size id_2028 { Size(sz_723 + id_2027) };
               Size id_2029 { 1UL };
               Size id_2030 { Size(id_2028 + id_2029) };
@@ -4417,28 +4659,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size let_res_2031;
           {
             Size sz_724 { let_res_2012 };
-            std::function<Size(dessser::gen::raql_expr::t)> id_2032 { dessser::gen::raql_expr::sersize_of_row_binary };
-            c1efb28eecd443c961e69845a587fe0d id_2033 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2034 { id_2033.source };
-            v_65abbca6f6205aebd6740de88f9e9235 id_2035 { std::get<0>(id_2034) };
-            dessser::gen::raql_expr::t id_2036 { id_2035.unlink };
-            Size id_2037 { id_2032(id_2036) };
+            auto fun2032 { dessser::gen::raql_expr::sersize_of_row_binary };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2033 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_2034 { id_2033.source };
+            ta828a76692b94aa6a15973ace224bedc id_2035 { std::get<0>(id_2034) };
+            dessser::gen::raql_expr::t_ext id_2036 { id_2035.unlink };
+            Size id_2037 { fun2032(id_2036) };
             Size id_2038 { Size(sz_724 + id_2037) };
             let_res_2031 = id_2038;
           }
           choose_res_2003 = let_res_2031;
         } else {
-          c1efb28eecd443c961e69845a587fe0d id_2039 { std::get<1>(p_0) };
-          v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2040 { id_2039.source };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2039 { std::get<1>(*p_0) };
+          tf708b6568b9bac184e3f5da3a64f4419 id_2040 { id_2039.source };
           uint16_t id_2041 { uint16_t(id_2040.index()) };
           uint16_t id_2042 { 1 };
           bool id_2043 { bool(id_2041 == id_2042) };
           Void id_2044 { ((void)(assert(id_2043)), VOID) };
+          (void)id_2044;
           Size id_2045 { 4UL };
-          c1efb28eecd443c961e69845a587fe0d id_2046 { std::get<1>(p_0) };
-          v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2047 { id_2046.source };
-          v_81cd54ad1d16b1060af71b31d87d9f09 id_2048 { std::get<1>(id_2047) };
-          Lst<df398bbef680305e3e9f5137633156fb> id_2049 { id_2048.options };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2046 { std::get<1>(*p_0) };
+          tf708b6568b9bac184e3f5da3a64f4419 id_2047 { id_2046.source };
+          te6ac276a1b6044b9474a56a7da93a611 id_2048 { std::get<1>(id_2047) };
+          Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_2049 { id_2048.options };
           uint32_t id_2050 { id_2049.size() };
           Vec<1, uint32_t> id_2051 {  id_2050  };
           Size let_res_2052;
@@ -4466,8 +4709,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint32_t id_2067 { 1U };
                   uint32_t id_2068 { uint32_t(id_2066 + id_2067) };
                   Void id_2069 { ((void)(lebsz_ref_708[id_2064] = id_2068), VOID) };
+                  (void)id_2069;
                 }
               } while (while_flag_2056);
+              (void)VOID;
               uint8_t id_2070 { 0 };
               uint32_t id_2071 { lebsz_ref_708[id_2070] };
               Size id_2072 { Size(id_2071) };
@@ -4486,10 +4731,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Vec<1, int32_t> repeat_n_710 { id_2077 };
               bool while_flag_2078 { true };
               do {
-                c1efb28eecd443c961e69845a587fe0d id_2079 { std::get<1>(p_0) };
-                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2080 { id_2079.source };
-                v_81cd54ad1d16b1060af71b31d87d9f09 id_2081 { std::get<1>(id_2080) };
-                Lst<df398bbef680305e3e9f5137633156fb> id_2082 { id_2081.options };
+                t1d5c57287ee550c3ccac78b88bba5862 id_2079 { std::get<1>(*p_0) };
+                tf708b6568b9bac184e3f5da3a64f4419 id_2080 { id_2079.source };
+                te6ac276a1b6044b9474a56a7da93a611 id_2081 { std::get<1>(id_2080) };
+                Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_2082 { id_2081.options };
                 uint32_t id_2083 { id_2082.size() };
                 int32_t id_2084 { int32_t(id_2083) };
                 uint8_t id_2085 { 0 };
@@ -4505,11 +4750,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     Size sz_711 { id_2090 };
                     uint8_t id_2092 { 0 };
                     int32_t id_2093 { repeat_n_710[id_2092] };
-                    c1efb28eecd443c961e69845a587fe0d id_2094 { std::get<1>(p_0) };
-                    v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2095 { id_2094.source };
-                    v_81cd54ad1d16b1060af71b31d87d9f09 id_2096 { std::get<1>(id_2095) };
-                    Lst<df398bbef680305e3e9f5137633156fb> id_2097 { id_2096.options };
-                    df398bbef680305e3e9f5137633156fb id_2098 { id_2097[id_2093] };
+                    t1d5c57287ee550c3ccac78b88bba5862 id_2094 { std::get<1>(*p_0) };
+                    tf708b6568b9bac184e3f5da3a64f4419 id_2095 { id_2094.source };
+                    te6ac276a1b6044b9474a56a7da93a611 id_2096 { std::get<1>(id_2095) };
+                    Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_2097 { id_2096.options };
+                    tcd17c85cefeae7a860c0732c05eaeaed id_2098 { id_2097[id_2093] };
                     std::string id_2099 { std::get<0>(id_2098) };
                     uint32_t id_2100 { (uint32_t)id_2099.size() };
                     Size let_res_2101;
@@ -4541,8 +4786,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                               uint32_t id_2118 { 1U };
                               uint32_t id_2119 { uint32_t(id_2117 + id_2118) };
                               Void id_2120 { ((void)(lebsz_ref_714[id_2115] = id_2119), VOID) };
+                              (void)id_2120;
                             }
                           } while (while_flag_2107);
+                          (void)VOID;
                           uint8_t id_2121 { 0 };
                           uint32_t id_2122 { lebsz_ref_714[id_2121] };
                           Size id_2123 { Size(id_2122) };
@@ -4560,29 +4807,34 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   Size let_res_2127;
                   {
                     Size sz_715 { let_res_2091 };
-                    std::function<Size(dessser::gen::raql_expr::t)> id_2128 { dessser::gen::raql_expr::sersize_of_row_binary };
+                    auto fun2128 { dessser::gen::raql_expr::sersize_of_row_binary };
                     uint8_t id_2129 { 0 };
                     int32_t id_2130 { repeat_n_710[id_2129] };
-                    c1efb28eecd443c961e69845a587fe0d id_2131 { std::get<1>(p_0) };
-                    v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2132 { id_2131.source };
-                    v_81cd54ad1d16b1060af71b31d87d9f09 id_2133 { std::get<1>(id_2132) };
-                    Lst<df398bbef680305e3e9f5137633156fb> id_2134 { id_2133.options };
-                    df398bbef680305e3e9f5137633156fb id_2135 { id_2134[id_2130] };
-                    dessser::gen::raql_expr::t id_2136 { std::get<1>(id_2135) };
-                    Size id_2137 { id_2128(id_2136) };
+                    t1d5c57287ee550c3ccac78b88bba5862 id_2131 { std::get<1>(*p_0) };
+                    tf708b6568b9bac184e3f5da3a64f4419 id_2132 { id_2131.source };
+                    te6ac276a1b6044b9474a56a7da93a611 id_2133 { std::get<1>(id_2132) };
+                    Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_2134 { id_2133.options };
+                    tcd17c85cefeae7a860c0732c05eaeaed id_2135 { id_2134[id_2130] };
+                    dessser::gen::raql_expr::t_ext id_2136 { std::get<1>(id_2135) };
+                    Size id_2137 { fun2128(id_2136) };
                     Size id_2138 { Size(sz_715 + id_2137) };
                     let_res_2127 = id_2138;
                   }
                   Void id_2139 { ((void)(sz_ref_709[id_2088] = let_res_2127), VOID) };
+                  (void)id_2139;
                   uint8_t id_2140 { 0 };
                   uint8_t id_2141 { 0 };
                   int32_t id_2142 { repeat_n_710[id_2141] };
                   int32_t id_2143 { 1L };
                   int32_t id_2144 { int32_t(id_2142 + id_2143) };
                   Void id_2145 { ((void)(repeat_n_710[id_2140] = id_2144), VOID) };
+                  (void)id_2145;
+                  (void)id_2145;
                 }
               } while (while_flag_2078);
+              (void)VOID;
             }
+            (void)VOID;
             uint8_t id_2146 { 0 };
             Size id_2147 { sz_ref_709[id_2146] };
             let_res_2075 = id_2147;
@@ -4590,22 +4842,22 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size let_res_2148;
           {
             Size sz_716 { let_res_2075 };
-            std::function<Size(dessser::gen::raql_expr::t)> id_2149 { dessser::gen::raql_expr::sersize_of_row_binary };
-            c1efb28eecd443c961e69845a587fe0d id_2150 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2151 { id_2150.source };
-            v_81cd54ad1d16b1060af71b31d87d9f09 id_2152 { std::get<1>(id_2151) };
-            dessser::gen::raql_expr::t id_2153 { id_2152.topic };
-            Size id_2154 { id_2149(id_2153) };
+            auto fun2149 { dessser::gen::raql_expr::sersize_of_row_binary };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2150 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_2151 { id_2150.source };
+            te6ac276a1b6044b9474a56a7da93a611 id_2152 { std::get<1>(id_2151) };
+            dessser::gen::raql_expr::t_ext id_2153 { id_2152.topic };
+            Size id_2154 { fun2149(id_2153) };
             Size id_2155 { Size(sz_716 + id_2154) };
             let_res_2148 = id_2155;
           }
           Size let_res_2156;
           {
             Size sz_717 { let_res_2148 };
-            c1efb28eecd443c961e69845a587fe0d id_2157 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2158 { id_2157.source };
-            v_81cd54ad1d16b1060af71b31d87d9f09 id_2159 { std::get<1>(id_2158) };
-            std::optional<dessser::gen::raql_expr::t> id_2160 { id_2159.partitions };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2157 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_2158 { id_2157.source };
+            te6ac276a1b6044b9474a56a7da93a611 id_2159 { std::get<1>(id_2158) };
+            std::optional<dessser::gen::raql_expr::t_ext> id_2160 { id_2159.partitions };
             bool id_2161 { !(id_2160.has_value ()) };
             Size choose_res_2162;
             if (id_2161) {
@@ -4613,13 +4865,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Size id_2164 { Size(sz_717 + id_2163) };
               choose_res_2162 = id_2164;
             } else {
-              std::function<Size(dessser::gen::raql_expr::t)> id_2165 { dessser::gen::raql_expr::sersize_of_row_binary };
-              c1efb28eecd443c961e69845a587fe0d id_2166 { std::get<1>(p_0) };
-              v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2167 { id_2166.source };
-              v_81cd54ad1d16b1060af71b31d87d9f09 id_2168 { std::get<1>(id_2167) };
-              std::optional<dessser::gen::raql_expr::t> id_2169 { id_2168.partitions };
-              dessser::gen::raql_expr::t id_2170 { id_2169.value() };
-              Size id_2171 { id_2165(id_2170) };
+              auto fun2165 { dessser::gen::raql_expr::sersize_of_row_binary };
+              t1d5c57287ee550c3ccac78b88bba5862 id_2166 { std::get<1>(*p_0) };
+              tf708b6568b9bac184e3f5da3a64f4419 id_2167 { id_2166.source };
+              te6ac276a1b6044b9474a56a7da93a611 id_2168 { std::get<1>(id_2167) };
+              std::optional<dessser::gen::raql_expr::t_ext> id_2169 { id_2168.partitions };
+              dessser::gen::raql_expr::t_ext id_2170 { id_2169.value() };
+              Size id_2171 { fun2165(id_2170) };
               Size id_2172 { Size(sz_717 + id_2171) };
               Size id_2173 { 1UL };
               Size id_2174 { Size(id_2172 + id_2173) };
@@ -4630,10 +4882,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           Size let_res_2175;
           {
             Size sz_718 { let_res_2156 };
-            c1efb28eecd443c961e69845a587fe0d id_2176 { std::get<1>(p_0) };
-            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2177 { id_2176.source };
-            v_81cd54ad1d16b1060af71b31d87d9f09 id_2178 { std::get<1>(id_2177) };
-            v_39cf200fa778e5fa84401746e9b5ba70 id_2179 { id_2178.restart_from };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2176 { std::get<1>(*p_0) };
+            tf708b6568b9bac184e3f5da3a64f4419 id_2177 { id_2176.source };
+            te6ac276a1b6044b9474a56a7da93a611 id_2178 { std::get<1>(id_2177) };
+            t6f8c1c936ce8cf2fe9dc881177aa3e62 id_2179 { id_2178.restart_from };
             uint16_t id_2180 { uint16_t(id_2179.index()) };
             Size let_res_2181;
             {
@@ -4652,13 +4904,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 if (id_2188) {
                   Size id_2190 { 2UL };
                   Size id_2191 { Size(sz_718 + id_2190) };
-                  std::function<Size(dessser::gen::raql_expr::t)> id_2192 { dessser::gen::raql_expr::sersize_of_row_binary };
-                  c1efb28eecd443c961e69845a587fe0d id_2193 { std::get<1>(p_0) };
-                  v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2194 { id_2193.source };
-                  v_81cd54ad1d16b1060af71b31d87d9f09 id_2195 { std::get<1>(id_2194) };
-                  v_39cf200fa778e5fa84401746e9b5ba70 id_2196 { id_2195.restart_from };
-                  dessser::gen::raql_expr::t id_2197 { std::get<1>(id_2196) };
-                  Size id_2198 { id_2192(id_2197) };
+                  auto fun2192 { dessser::gen::raql_expr::sersize_of_row_binary };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_2193 { std::get<1>(*p_0) };
+                  tf708b6568b9bac184e3f5da3a64f4419 id_2194 { id_2193.source };
+                  te6ac276a1b6044b9474a56a7da93a611 id_2195 { std::get<1>(id_2194) };
+                  t6f8c1c936ce8cf2fe9dc881177aa3e62 id_2196 { id_2195.restart_from };
+                  dessser::gen::raql_expr::t_ext id_2197 { std::get<1>(id_2196) };
+                  Size id_2198 { fun2192(id_2197) };
                   Size id_2199 { Size(id_2191 + id_2198) };
                   choose_res_2189 = id_2199;
                 } else {
@@ -4673,28 +4925,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint16_t id_2205 { 3 };
                     bool id_2206 { bool(label2_719 == id_2205) };
                     Void id_2207 { ((void)(assert(id_2206)), VOID) };
+                    (void)id_2207;
                     Size id_2208 { 2UL };
                     Size id_2209 { Size(sz_718 + id_2208) };
-                    std::function<Size(dessser::gen::raql_expr::t)> id_2210 { dessser::gen::raql_expr::sersize_of_row_binary };
-                    c1efb28eecd443c961e69845a587fe0d id_2211 { std::get<1>(p_0) };
-                    v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2212 { id_2211.source };
-                    v_81cd54ad1d16b1060af71b31d87d9f09 id_2213 { std::get<1>(id_2212) };
-                    v_39cf200fa778e5fa84401746e9b5ba70 id_2214 { id_2213.restart_from };
-                    e1d3e929c0a104569907bf46832d32c2 id_2215 { std::get<3>(id_2214) };
-                    dessser::gen::raql_expr::t id_2216 { id_2215.after_max_secs };
-                    Size id_2217 { id_2210(id_2216) };
+                    auto fun2210 { dessser::gen::raql_expr::sersize_of_row_binary };
+                    t1d5c57287ee550c3ccac78b88bba5862 id_2211 { std::get<1>(*p_0) };
+                    tf708b6568b9bac184e3f5da3a64f4419 id_2212 { id_2211.source };
+                    te6ac276a1b6044b9474a56a7da93a611 id_2213 { std::get<1>(id_2212) };
+                    t6f8c1c936ce8cf2fe9dc881177aa3e62 id_2214 { id_2213.restart_from };
+                    tee7dccc2726e2723462077a878a69c99 id_2215 { std::get<3>(id_2214) };
+                    dessser::gen::raql_expr::t_ext id_2216 { id_2215.after_max_secs };
+                    Size id_2217 { fun2210(id_2216) };
                     Size id_2218 { Size(id_2209 + id_2217) };
                     Size let_res_2219;
                     {
                       Size sz_721 { id_2218 };
-                      std::function<Size(dessser::gen::raql_expr::t)> id_2220 { dessser::gen::raql_expr::sersize_of_row_binary };
-                      c1efb28eecd443c961e69845a587fe0d id_2221 { std::get<1>(p_0) };
-                      v_8c0c938be0fcefc45cc5b9cf52c46f04 id_2222 { id_2221.source };
-                      v_81cd54ad1d16b1060af71b31d87d9f09 id_2223 { std::get<1>(id_2222) };
-                      v_39cf200fa778e5fa84401746e9b5ba70 id_2224 { id_2223.restart_from };
-                      e1d3e929c0a104569907bf46832d32c2 id_2225 { std::get<3>(id_2224) };
-                      dessser::gen::raql_expr::t id_2226 { id_2225.after_max_events };
-                      Size id_2227 { id_2220(id_2226) };
+                      auto fun2220 { dessser::gen::raql_expr::sersize_of_row_binary };
+                      t1d5c57287ee550c3ccac78b88bba5862 id_2221 { std::get<1>(*p_0) };
+                      tf708b6568b9bac184e3f5da3a64f4419 id_2222 { id_2221.source };
+                      te6ac276a1b6044b9474a56a7da93a611 id_2223 { std::get<1>(id_2222) };
+                      t6f8c1c936ce8cf2fe9dc881177aa3e62 id_2224 { id_2223.restart_from };
+                      tee7dccc2726e2723462077a878a69c99 id_2225 { std::get<3>(id_2224) };
+                      dessser::gen::raql_expr::t_ext id_2226 { id_2225.after_max_events };
+                      Size id_2227 { fun2220(id_2226) };
                       Size id_2228 { Size(sz_721 + id_2227) };
                       let_res_2219 = id_2228;
                     }
@@ -4714,8 +4967,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         {
           Size sz_725 { choose_res_2003 };
           uint16_t id_2230 { 0 };
-          c1efb28eecd443c961e69845a587fe0d id_2231 { std::get<1>(p_0) };
-          v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2232 { id_2231.format };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2231 { std::get<1>(*p_0) };
+          t570dd118e4f520aece0574b2f62e7634 id_2232 { id_2231.format };
           uint16_t id_2233 { uint16_t(id_2232.index()) };
           bool id_2234 { bool(id_2230 == id_2233) };
           Size choose_res_2235;
@@ -4724,9 +4977,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size id_2237 { Size(sz_725 + id_2236) };
             Size id_2238 { 1UL };
             Size id_2239 { Size(id_2237 + id_2238) };
-            c1efb28eecd443c961e69845a587fe0d id_2240 { std::get<1>(p_0) };
-            v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2241 { id_2240.format };
-            v_951168fd627e4197ab60b5fba89b770b id_2242 { std::get<0>(id_2241) };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2240 { std::get<1>(*p_0) };
+            t570dd118e4f520aece0574b2f62e7634 id_2241 { id_2240.format };
+            tc1ee34cdd9bdb8371d318bb284a788a8 id_2242 { std::get<0>(id_2241) };
             std::string id_2243 { id_2242.null };
             uint32_t id_2244 { (uint32_t)id_2243.size() };
             Vec<1, uint32_t> id_2245 {  id_2244  };
@@ -4755,8 +5008,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint32_t id_2261 { 1U };
                     uint32_t id_2262 { uint32_t(id_2260 + id_2261) };
                     Void id_2263 { ((void)(lebsz_ref_735[id_2258] = id_2262), VOID) };
+                    (void)id_2263;
                   }
                 } while (while_flag_2250);
+                (void)VOID;
                 uint8_t id_2264 { 0 };
                 uint32_t id_2265 { lebsz_ref_735[id_2264] };
                 Size id_2266 { Size(id_2265) };
@@ -4764,9 +5019,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               }
               let_res_2246 = let_res_2249;
             }
-            c1efb28eecd443c961e69845a587fe0d id_2267 { std::get<1>(p_0) };
-            v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2268 { id_2267.format };
-            v_951168fd627e4197ab60b5fba89b770b id_2269 { std::get<0>(id_2268) };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2267 { std::get<1>(*p_0) };
+            t570dd118e4f520aece0574b2f62e7634 id_2268 { id_2267.format };
+            tc1ee34cdd9bdb8371d318bb284a788a8 id_2269 { std::get<0>(id_2268) };
             std::string id_2270 { id_2269.null };
             uint32_t id_2271 { (uint32_t)id_2270.size() };
             Size id_2272 { Size(id_2271) };
@@ -4777,9 +5032,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_2277;
             {
               Size sz_737 { id_2276 };
-              c1efb28eecd443c961e69845a587fe0d id_2278 { std::get<1>(p_0) };
-              v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2279 { id_2278.format };
-              v_951168fd627e4197ab60b5fba89b770b id_2280 { std::get<0>(id_2279) };
+              t1d5c57287ee550c3ccac78b88bba5862 id_2278 { std::get<1>(*p_0) };
+              t570dd118e4f520aece0574b2f62e7634 id_2279 { id_2278.format };
+              tc1ee34cdd9bdb8371d318bb284a788a8 id_2280 { std::get<0>(id_2279) };
               std::string id_2281 { id_2280.escape_seq };
               uint32_t id_2282 { (uint32_t)id_2281.size() };
               Vec<1, uint32_t> id_2283 {  id_2282  };
@@ -4808,8 +5063,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_2299 { 1U };
                       uint32_t id_2300 { uint32_t(id_2298 + id_2299) };
                       Void id_2301 { ((void)(lebsz_ref_740[id_2296] = id_2300), VOID) };
+                      (void)id_2301;
                     }
                   } while (while_flag_2288);
+                  (void)VOID;
                   uint8_t id_2302 { 0 };
                   uint32_t id_2303 { lebsz_ref_740[id_2302] };
                   Size id_2304 { Size(id_2303) };
@@ -4817,9 +5074,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 }
                 let_res_2284 = let_res_2287;
               }
-              c1efb28eecd443c961e69845a587fe0d id_2305 { std::get<1>(p_0) };
-              v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2306 { id_2305.format };
-              v_951168fd627e4197ab60b5fba89b770b id_2307 { std::get<0>(id_2306) };
+              t1d5c57287ee550c3ccac78b88bba5862 id_2305 { std::get<1>(*p_0) };
+              t570dd118e4f520aece0574b2f62e7634 id_2306 { id_2305.format };
+              tc1ee34cdd9bdb8371d318bb284a788a8 id_2307 { std::get<0>(id_2306) };
               std::string id_2308 { id_2307.escape_seq };
               uint32_t id_2309 { (uint32_t)id_2308.size() };
               Size id_2310 { Size(id_2309) };
@@ -4830,10 +5087,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size let_res_2313;
             {
               Size sz_741 { let_res_2277 };
-              c1efb28eecd443c961e69845a587fe0d id_2314 { std::get<1>(p_0) };
-              v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2315 { id_2314.format };
-              v_951168fd627e4197ab60b5fba89b770b id_2316 { std::get<0>(id_2315) };
-              Lst<dessser::gen::field_type::t> id_2317 { id_2316.fields };
+              t1d5c57287ee550c3ccac78b88bba5862 id_2314 { std::get<1>(*p_0) };
+              t570dd118e4f520aece0574b2f62e7634 id_2315 { id_2314.format };
+              tc1ee34cdd9bdb8371d318bb284a788a8 id_2316 { std::get<0>(id_2315) };
+              Lst<dessser::gen::field_type::t_ext> id_2317 { id_2316.fields };
               uint32_t id_2318 { id_2317.size() };
               Vec<1, uint32_t> id_2319 {  id_2318  };
               Size let_res_2320;
@@ -4861,8 +5118,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint32_t id_2335 { 1U };
                       uint32_t id_2336 { uint32_t(id_2334 + id_2335) };
                       Void id_2337 { ((void)(lebsz_ref_743[id_2332] = id_2336), VOID) };
+                      (void)id_2337;
                     }
                   } while (while_flag_2324);
+                  (void)VOID;
                   uint8_t id_2338 { 0 };
                   uint32_t id_2339 { lebsz_ref_743[id_2338] };
                   Size id_2340 { Size(id_2339) };
@@ -4881,10 +5140,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   Vec<1, int32_t> repeat_n_745 { id_2345 };
                   bool while_flag_2346 { true };
                   do {
-                    c1efb28eecd443c961e69845a587fe0d id_2347 { std::get<1>(p_0) };
-                    v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2348 { id_2347.format };
-                    v_951168fd627e4197ab60b5fba89b770b id_2349 { std::get<0>(id_2348) };
-                    Lst<dessser::gen::field_type::t> id_2350 { id_2349.fields };
+                    t1d5c57287ee550c3ccac78b88bba5862 id_2347 { std::get<1>(*p_0) };
+                    t570dd118e4f520aece0574b2f62e7634 id_2348 { id_2347.format };
+                    tc1ee34cdd9bdb8371d318bb284a788a8 id_2349 { std::get<0>(id_2348) };
+                    Lst<dessser::gen::field_type::t_ext> id_2350 { id_2349.fields };
                     uint32_t id_2351 { id_2350.size() };
                     int32_t id_2352 { int32_t(id_2351) };
                     uint8_t id_2353 { 0 };
@@ -4895,26 +5154,31 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                       uint8_t id_2356 { 0 };
                       uint8_t id_2357 { 0 };
                       Size id_2358 { sz_ref_744[id_2357] };
-                      std::function<Size(dessser::gen::field_type::t)> id_2359 { dessser::gen::field_type::sersize_of_row_binary };
+                      auto fun2359 { dessser::gen::field_type::sersize_of_row_binary };
                       uint8_t id_2360 { 0 };
                       int32_t id_2361 { repeat_n_745[id_2360] };
-                      c1efb28eecd443c961e69845a587fe0d id_2362 { std::get<1>(p_0) };
-                      v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2363 { id_2362.format };
-                      v_951168fd627e4197ab60b5fba89b770b id_2364 { std::get<0>(id_2363) };
-                      Lst<dessser::gen::field_type::t> id_2365 { id_2364.fields };
-                      dessser::gen::field_type::t id_2366 { id_2365[id_2361] };
-                      Size id_2367 { id_2359(id_2366) };
+                      t1d5c57287ee550c3ccac78b88bba5862 id_2362 { std::get<1>(*p_0) };
+                      t570dd118e4f520aece0574b2f62e7634 id_2363 { id_2362.format };
+                      tc1ee34cdd9bdb8371d318bb284a788a8 id_2364 { std::get<0>(id_2363) };
+                      Lst<dessser::gen::field_type::t_ext> id_2365 { id_2364.fields };
+                      dessser::gen::field_type::t_ext id_2366 { id_2365[id_2361] };
+                      Size id_2367 { fun2359(id_2366) };
                       Size id_2368 { Size(id_2358 + id_2367) };
                       Void id_2369 { ((void)(sz_ref_744[id_2356] = id_2368), VOID) };
+                      (void)id_2369;
                       uint8_t id_2370 { 0 };
                       uint8_t id_2371 { 0 };
                       int32_t id_2372 { repeat_n_745[id_2371] };
                       int32_t id_2373 { 1L };
                       int32_t id_2374 { int32_t(id_2372 + id_2373) };
                       Void id_2375 { ((void)(repeat_n_745[id_2370] = id_2374), VOID) };
+                      (void)id_2375;
+                      (void)id_2375;
                     }
                   } while (while_flag_2346);
+                  (void)VOID;
                 }
+                (void)VOID;
                 uint8_t id_2376 { 0 };
                 Size id_2377 { sz_ref_744[id_2376] };
                 let_res_2343 = id_2377;
@@ -4927,17 +5191,18 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size id_2381 { Size(id_2379 + id_2380) };
             choose_res_2235 = id_2381;
           } else {
-            c1efb28eecd443c961e69845a587fe0d id_2382 { std::get<1>(p_0) };
-            v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2383 { id_2382.format };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2382 { std::get<1>(*p_0) };
+            t570dd118e4f520aece0574b2f62e7634 id_2383 { id_2382.format };
             uint16_t id_2384 { uint16_t(id_2383.index()) };
             uint16_t id_2385 { 1 };
             bool id_2386 { bool(id_2384 == id_2385) };
             Void id_2387 { ((void)(assert(id_2386)), VOID) };
+            (void)id_2387;
             Size id_2388 { 2UL };
             Size id_2389 { Size(sz_725 + id_2388) };
-            c1efb28eecd443c961e69845a587fe0d id_2390 { std::get<1>(p_0) };
-            v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2391 { id_2390.format };
-            Lst<dessser::gen::field_type::t> id_2392 { std::get<1>(id_2391) };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2390 { std::get<1>(*p_0) };
+            t570dd118e4f520aece0574b2f62e7634 id_2391 { id_2390.format };
+            Lst<dessser::gen::field_type::t_ext> id_2392 { std::get<1>(id_2391) };
             uint32_t id_2393 { id_2392.size() };
             Vec<1, uint32_t> id_2394 {  id_2393  };
             Size let_res_2395;
@@ -4965,8 +5230,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint32_t id_2410 { 1U };
                     uint32_t id_2411 { uint32_t(id_2409 + id_2410) };
                     Void id_2412 { ((void)(lebsz_ref_728[id_2407] = id_2411), VOID) };
+                    (void)id_2412;
                   }
                 } while (while_flag_2399);
+                (void)VOID;
                 uint8_t id_2413 { 0 };
                 uint32_t id_2414 { lebsz_ref_728[id_2413] };
                 Size id_2415 { Size(id_2414) };
@@ -4985,9 +5252,9 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 Vec<1, int32_t> repeat_n_730 { id_2420 };
                 bool while_flag_2421 { true };
                 do {
-                  c1efb28eecd443c961e69845a587fe0d id_2422 { std::get<1>(p_0) };
-                  v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2423 { id_2422.format };
-                  Lst<dessser::gen::field_type::t> id_2424 { std::get<1>(id_2423) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_2422 { std::get<1>(*p_0) };
+                  t570dd118e4f520aece0574b2f62e7634 id_2423 { id_2422.format };
+                  Lst<dessser::gen::field_type::t_ext> id_2424 { std::get<1>(id_2423) };
                   uint32_t id_2425 { id_2424.size() };
                   int32_t id_2426 { int32_t(id_2425) };
                   uint8_t id_2427 { 0 };
@@ -4998,25 +5265,30 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                     uint8_t id_2430 { 0 };
                     uint8_t id_2431 { 0 };
                     Size id_2432 { sz_ref_729[id_2431] };
-                    std::function<Size(dessser::gen::field_type::t)> id_2433 { dessser::gen::field_type::sersize_of_row_binary };
+                    auto fun2433 { dessser::gen::field_type::sersize_of_row_binary };
                     uint8_t id_2434 { 0 };
                     int32_t id_2435 { repeat_n_730[id_2434] };
-                    c1efb28eecd443c961e69845a587fe0d id_2436 { std::get<1>(p_0) };
-                    v_21e8c6eca31cc038e9faa45d5b86bfa4 id_2437 { id_2436.format };
-                    Lst<dessser::gen::field_type::t> id_2438 { std::get<1>(id_2437) };
-                    dessser::gen::field_type::t id_2439 { id_2438[id_2435] };
-                    Size id_2440 { id_2433(id_2439) };
+                    t1d5c57287ee550c3ccac78b88bba5862 id_2436 { std::get<1>(*p_0) };
+                    t570dd118e4f520aece0574b2f62e7634 id_2437 { id_2436.format };
+                    Lst<dessser::gen::field_type::t_ext> id_2438 { std::get<1>(id_2437) };
+                    dessser::gen::field_type::t_ext id_2439 { id_2438[id_2435] };
+                    Size id_2440 { fun2433(id_2439) };
                     Size id_2441 { Size(id_2432 + id_2440) };
                     Void id_2442 { ((void)(sz_ref_729[id_2430] = id_2441), VOID) };
+                    (void)id_2442;
                     uint8_t id_2443 { 0 };
                     uint8_t id_2444 { 0 };
                     int32_t id_2445 { repeat_n_730[id_2444] };
                     int32_t id_2446 { 1L };
                     int32_t id_2447 { int32_t(id_2445 + id_2446) };
                     Void id_2448 { ((void)(repeat_n_730[id_2443] = id_2447), VOID) };
+                    (void)id_2448;
+                    (void)id_2448;
                   }
                 } while (while_flag_2421);
+                (void)VOID;
               }
+              (void)VOID;
               uint8_t id_2449 { 0 };
               Size id_2450 { sz_ref_729[id_2449] };
               let_res_2418 = id_2450;
@@ -5028,8 +5300,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         Size let_res_2451;
         {
           Size sz_748 { let_res_2229 };
-          c1efb28eecd443c961e69845a587fe0d id_2452 { std::get<1>(p_0) };
-          std::optional<dessser::gen::event_time::t> id_2453 { id_2452.event_time };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2452 { std::get<1>(*p_0) };
+          std::optional<dessser::gen::event_time::t_ext> id_2453 { id_2452.event_time };
           bool id_2454 { !(id_2453.has_value ()) };
           Size choose_res_2455;
           if (id_2454) {
@@ -5037,11 +5309,11 @@ static std::function<Size(t)> sersize_of_row_binary_init()
             Size id_2457 { Size(sz_748 + id_2456) };
             choose_res_2455 = id_2457;
           } else {
-            std::function<Size(dessser::gen::event_time::t)> id_2458 { dessser::gen::event_time::sersize_of_row_binary };
-            c1efb28eecd443c961e69845a587fe0d id_2459 { std::get<1>(p_0) };
-            std::optional<dessser::gen::event_time::t> id_2460 { id_2459.event_time };
-            dessser::gen::event_time::t id_2461 { id_2460.value() };
-            Size id_2462 { id_2458(id_2461) };
+            auto fun2458 { dessser::gen::event_time::sersize_of_row_binary };
+            t1d5c57287ee550c3ccac78b88bba5862 id_2459 { std::get<1>(*p_0) };
+            std::optional<dessser::gen::event_time::t_ext> id_2460 { id_2459.event_time };
+            dessser::gen::event_time::t_ext id_2461 { id_2460.value() };
+            Size id_2462 { fun2458(id_2461) };
             Size id_2463 { Size(sz_748 + id_2462) };
             Size id_2464 { 1UL };
             Size id_2465 { Size(id_2463 + id_2464) };
@@ -5052,8 +5324,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         Size let_res_2466;
         {
           Size sz_749 { let_res_2451 };
-          c1efb28eecd443c961e69845a587fe0d id_2467 { std::get<1>(p_0) };
-          Lst<dessser::gen::field_name::t> id_2468 { id_2467.factors };
+          t1d5c57287ee550c3ccac78b88bba5862 id_2467 { std::get<1>(*p_0) };
+          Lst<dessser::gen::field_name::t_ext> id_2468 { id_2467.factors };
           uint32_t id_2469 { id_2468.size() };
           Vec<1, uint32_t> id_2470 {  id_2469  };
           Size let_res_2471;
@@ -5081,8 +5353,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint32_t id_2486 { 1U };
                   uint32_t id_2487 { uint32_t(id_2485 + id_2486) };
                   Void id_2488 { ((void)(lebsz_ref_751[id_2483] = id_2487), VOID) };
+                  (void)id_2488;
                 }
               } while (while_flag_2475);
+              (void)VOID;
               uint8_t id_2489 { 0 };
               uint32_t id_2490 { lebsz_ref_751[id_2489] };
               Size id_2491 { Size(id_2490) };
@@ -5101,8 +5375,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Vec<1, int32_t> repeat_n_753 { id_2496 };
               bool while_flag_2497 { true };
               do {
-                c1efb28eecd443c961e69845a587fe0d id_2498 { std::get<1>(p_0) };
-                Lst<dessser::gen::field_name::t> id_2499 { id_2498.factors };
+                t1d5c57287ee550c3ccac78b88bba5862 id_2498 { std::get<1>(*p_0) };
+                Lst<dessser::gen::field_name::t_ext> id_2499 { id_2498.factors };
                 uint32_t id_2500 { id_2499.size() };
                 int32_t id_2501 { int32_t(id_2500) };
                 uint8_t id_2502 { 0 };
@@ -5113,24 +5387,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint8_t id_2505 { 0 };
                   uint8_t id_2506 { 0 };
                   Size id_2507 { sz_ref_752[id_2506] };
-                  std::function<Size(dessser::gen::field_name::t)> id_2508 { dessser::gen::field_name::sersize_of_row_binary };
+                  auto fun2508 { dessser::gen::field_name::sersize_of_row_binary };
                   uint8_t id_2509 { 0 };
                   int32_t id_2510 { repeat_n_753[id_2509] };
-                  c1efb28eecd443c961e69845a587fe0d id_2511 { std::get<1>(p_0) };
-                  Lst<dessser::gen::field_name::t> id_2512 { id_2511.factors };
-                  dessser::gen::field_name::t id_2513 { id_2512[id_2510] };
-                  Size id_2514 { id_2508(id_2513) };
+                  t1d5c57287ee550c3ccac78b88bba5862 id_2511 { std::get<1>(*p_0) };
+                  Lst<dessser::gen::field_name::t_ext> id_2512 { id_2511.factors };
+                  dessser::gen::field_name::t_ext id_2513 { id_2512[id_2510] };
+                  Size id_2514 { fun2508(id_2513) };
                   Size id_2515 { Size(id_2507 + id_2514) };
                   Void id_2516 { ((void)(sz_ref_752[id_2505] = id_2515), VOID) };
+                  (void)id_2516;
                   uint8_t id_2517 { 0 };
                   uint8_t id_2518 { 0 };
                   int32_t id_2519 { repeat_n_753[id_2518] };
                   int32_t id_2520 { 1L };
                   int32_t id_2521 { int32_t(id_2519 + id_2520) };
                   Void id_2522 { ((void)(repeat_n_753[id_2517] = id_2521), VOID) };
+                  (void)id_2522;
+                  (void)id_2522;
                 }
               } while (while_flag_2497);
+              (void)VOID;
             }
+            (void)VOID;
             uint8_t id_2523 { 0 };
             Size id_2524 { sz_ref_752[id_2523] };
             let_res_2494 = id_2524;
@@ -5139,12 +5418,13 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         }
         choose_res_1997 = let_res_2466;
       } else {
-        uint16_t id_2525 { uint16_t(p_0.index()) };
+        uint16_t id_2525 { uint16_t(p_0->index()) };
         uint16_t id_2526 { 2 };
         bool id_2527 { bool(id_2525 == id_2526) };
         Void id_2528 { ((void)(assert(id_2527)), VOID) };
+        (void)id_2528;
         Size id_2529 { 2UL };
-        v_00380e3ab86a3786288b2307b930623c id_2530 { std::get<2>(p_0) };
+        t9ddff9e1963b15ba493db1f8dadd34fb id_2530 { std::get<2>(*p_0) };
         std::string id_2531 { id_2530.net_addr };
         uint32_t id_2532 { (uint32_t)id_2531.size() };
         Vec<1, uint32_t> id_2533 {  id_2532  };
@@ -5173,8 +5453,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                 uint32_t id_2549 { 1U };
                 uint32_t id_2550 { uint32_t(id_2548 + id_2549) };
                 Void id_2551 { ((void)(lebsz_ref_696[id_2546] = id_2550), VOID) };
+                (void)id_2551;
               }
             } while (while_flag_2538);
+            (void)VOID;
             uint8_t id_2552 { 0 };
             uint32_t id_2553 { lebsz_ref_696[id_2552] };
             Size id_2554 { Size(id_2553) };
@@ -5182,7 +5464,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
           }
           let_res_2534 = let_res_2537;
         }
-        v_00380e3ab86a3786288b2307b930623c id_2555 { std::get<2>(p_0) };
+        t9ddff9e1963b15ba493db1f8dadd34fb id_2555 { std::get<2>(*p_0) };
         std::string id_2556 { id_2555.net_addr };
         uint32_t id_2557 { (uint32_t)id_2556.size() };
         Size id_2558 { Size(id_2557) };
@@ -5193,18 +5475,18 @@ static std::function<Size(t)> sersize_of_row_binary_init()
         Size let_res_2563;
         {
           Size sz_698 { id_2562 };
-          std::function<Size(dessser::gen::raql_net_protocol::t)> id_2564 { dessser::gen::raql_net_protocol::sersize_of_row_binary };
-          v_00380e3ab86a3786288b2307b930623c id_2565 { std::get<2>(p_0) };
-          dessser::gen::raql_net_protocol::t id_2566 { id_2565.proto };
-          Size id_2567 { id_2564(id_2566) };
+          auto fun2564 { dessser::gen::raql_net_protocol::sersize_of_row_binary };
+          t9ddff9e1963b15ba493db1f8dadd34fb id_2565 { std::get<2>(*p_0) };
+          dessser::gen::raql_net_protocol::t_ext id_2566 { id_2565.proto };
+          Size id_2567 { fun2564(id_2566) };
           Size id_2568 { Size(sz_698 + id_2567) };
           let_res_2563 = id_2568;
         }
         Size let_res_2569;
         {
           Size sz_699 { let_res_2563 };
-          v_00380e3ab86a3786288b2307b930623c id_2570 { std::get<2>(p_0) };
-          Lst<dessser::gen::field_name::t> id_2571 { id_2570.factors };
+          t9ddff9e1963b15ba493db1f8dadd34fb id_2570 { std::get<2>(*p_0) };
+          Lst<dessser::gen::field_name::t_ext> id_2571 { id_2570.factors };
           uint32_t id_2572 { id_2571.size() };
           Vec<1, uint32_t> id_2573 {  id_2572  };
           Size let_res_2574;
@@ -5232,8 +5514,10 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint32_t id_2589 { 1U };
                   uint32_t id_2590 { uint32_t(id_2588 + id_2589) };
                   Void id_2591 { ((void)(lebsz_ref_701[id_2586] = id_2590), VOID) };
+                  (void)id_2591;
                 }
               } while (while_flag_2578);
+              (void)VOID;
               uint8_t id_2592 { 0 };
               uint32_t id_2593 { lebsz_ref_701[id_2592] };
               Size id_2594 { Size(id_2593) };
@@ -5252,8 +5536,8 @@ static std::function<Size(t)> sersize_of_row_binary_init()
               Vec<1, int32_t> repeat_n_703 { id_2599 };
               bool while_flag_2600 { true };
               do {
-                v_00380e3ab86a3786288b2307b930623c id_2601 { std::get<2>(p_0) };
-                Lst<dessser::gen::field_name::t> id_2602 { id_2601.factors };
+                t9ddff9e1963b15ba493db1f8dadd34fb id_2601 { std::get<2>(*p_0) };
+                Lst<dessser::gen::field_name::t_ext> id_2602 { id_2601.factors };
                 uint32_t id_2603 { id_2602.size() };
                 int32_t id_2604 { int32_t(id_2603) };
                 uint8_t id_2605 { 0 };
@@ -5264,24 +5548,29 @@ static std::function<Size(t)> sersize_of_row_binary_init()
                   uint8_t id_2608 { 0 };
                   uint8_t id_2609 { 0 };
                   Size id_2610 { sz_ref_702[id_2609] };
-                  std::function<Size(dessser::gen::field_name::t)> id_2611 { dessser::gen::field_name::sersize_of_row_binary };
+                  auto fun2611 { dessser::gen::field_name::sersize_of_row_binary };
                   uint8_t id_2612 { 0 };
                   int32_t id_2613 { repeat_n_703[id_2612] };
-                  v_00380e3ab86a3786288b2307b930623c id_2614 { std::get<2>(p_0) };
-                  Lst<dessser::gen::field_name::t> id_2615 { id_2614.factors };
-                  dessser::gen::field_name::t id_2616 { id_2615[id_2613] };
-                  Size id_2617 { id_2611(id_2616) };
+                  t9ddff9e1963b15ba493db1f8dadd34fb id_2614 { std::get<2>(*p_0) };
+                  Lst<dessser::gen::field_name::t_ext> id_2615 { id_2614.factors };
+                  dessser::gen::field_name::t_ext id_2616 { id_2615[id_2613] };
+                  Size id_2617 { fun2611(id_2616) };
                   Size id_2618 { Size(id_2610 + id_2617) };
                   Void id_2619 { ((void)(sz_ref_702[id_2608] = id_2618), VOID) };
+                  (void)id_2619;
                   uint8_t id_2620 { 0 };
                   uint8_t id_2621 { 0 };
                   int32_t id_2622 { repeat_n_703[id_2621] };
                   int32_t id_2623 { 1L };
                   int32_t id_2624 { int32_t(id_2622 + id_2623) };
                   Void id_2625 { ((void)(repeat_n_703[id_2620] = id_2624), VOID) };
+                  (void)id_2625;
+                  (void)id_2625;
                 }
               } while (while_flag_2600);
+              (void)VOID;
             }
+            (void)VOID;
             uint8_t id_2626 { 0 };
             Size id_2627 { sz_ref_702[id_2626] };
             let_res_2597 = id_2627;
@@ -5297,7 +5586,7 @@ static std::function<Size(t)> sersize_of_row_binary_init()
    };
   return fun1339;
 }
-std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -6197,56 +6486,57 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
                                   (identifier "dlist4_snd_111")))))))))))))) 
         (make-tup (identifier "make_fst_690") (identifier "make_snd_691"))))
  */
-static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_init()
+static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
 {
-  std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> fun2628 { [&fun2628](Pointer p_0) {
-    v_362f9d9108a6902af48b6c83d5377ea1 id_2629 { p_0.readU16Le() };
-    v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_2630;
+  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun2628 { [&fun2628](Pointer p_0) {
+    t22a32080ad88ab548b80077a17b7dd46 id_2629 { p_0.readU16Le() };
+    t22a32080ad88ab548b80077a17b7dd46 letpair_res_2630;
     {
       auto du16_fst_57 { std::get<0>(id_2629) };
       auto du16_snd_58 { std::get<1>(id_2629) };
-      v_362f9d9108a6902af48b6c83d5377ea1 id_2631 {  du16_fst_57, du16_snd_58  };
+      t22a32080ad88ab548b80077a17b7dd46 id_2631 { du16_fst_57, du16_snd_58 };
       letpair_res_2630 = id_2631;
     }
-    f63f919559f0d70225bd0da5dd9bcafc let_res_2632;
+    t45217dce3db5a9a49037839afd0048e8 let_res_2632;
     {
-      v_362f9d9108a6902af48b6c83d5377ea1 dsum1_62 { letpair_res_2630 };
-      f63f919559f0d70225bd0da5dd9bcafc letpair_res_2633;
+      t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_2630 };
+      t45217dce3db5a9a49037839afd0048e8 letpair_res_2633;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_2634 { 0 };
         bool id_2635 { bool(id_2634 == dsum1_fst_63) };
-        f63f919559f0d70225bd0da5dd9bcafc choose_res_2636;
+        t45217dce3db5a9a49037839afd0048e8 choose_res_2636;
         if (id_2635) {
           uint32_t id_2637 { 0U };
           Vec<1, uint32_t> id_2638 {  id_2637  };
-          ac0fbd05039f742d2f1d9ac182e392ab let_res_2639;
+          t405eb186408556fed8f2c41523c07d13 let_res_2639;
           {
             Vec<1, uint32_t> leb_ref_387 { id_2638 };
             uint8_t id_2640 { 0 };
             Vec<1, uint8_t> id_2641 {  id_2640  };
-            ac0fbd05039f742d2f1d9ac182e392ab let_res_2642;
+            t405eb186408556fed8f2c41523c07d13 let_res_2642;
             {
               Vec<1, uint8_t> shft_ref_388 { id_2641 };
               Vec<1, Pointer> id_2643 {  dsum1_snd_64  };
-              ac0fbd05039f742d2f1d9ac182e392ab let_res_2644;
+              t405eb186408556fed8f2c41523c07d13 let_res_2644;
               {
                 Vec<1, Pointer> p_ref_389 { id_2643 };
                 bool while_flag_2645 { true };
                 do {
                   uint8_t id_2646 { 0 };
                   Pointer id_2647 { p_ref_389[id_2646] };
-                  v_1d5843897434feb24d158f3793db9189 id_2648 { id_2647.readU8() };
+                  tb3f98ea670610d40658a618de3ec7b90 id_2648 { id_2647.readU8() };
                   bool let_res_2649;
                   {
-                    v_1d5843897434feb24d158f3793db9189 leb128_390 { id_2648 };
+                    tb3f98ea670610d40658a618de3ec7b90 leb128_390 { id_2648 };
                     bool letpair_res_2650;
                     {
                       auto leb128_fst_391 { std::get<0>(leb128_390) };
                       auto leb128_snd_392 { std::get<1>(leb128_390) };
                       uint8_t id_2651 { 0 };
                       Void id_2652 { ((void)(p_ref_389[id_2651] = leb128_snd_392), VOID) };
+                      (void)id_2652;
                       uint8_t id_2653 { 0 };
                       uint8_t id_2654 { 127 };
                       uint8_t id_2655 { uint8_t(leb128_fst_391 & id_2654) };
@@ -6258,12 +6548,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       uint32_t id_2661 { leb_ref_387[id_2660] };
                       uint32_t id_2662 { uint32_t(id_2659 | id_2661) };
                       Void id_2663 { ((void)(leb_ref_387[id_2653] = id_2662), VOID) };
+                      (void)id_2663;
                       uint8_t id_2664 { 0 };
                       uint8_t id_2665 { 0 };
                       uint8_t id_2666 { shft_ref_388[id_2665] };
                       uint8_t id_2667 { 7 };
                       uint8_t id_2668 { uint8_t(id_2666 + id_2667) };
                       Void id_2669 { ((void)(shft_ref_388[id_2664] = id_2668), VOID) };
+                      (void)id_2669;
                       uint8_t id_2670 { 128 };
                       bool id_2671 { bool(leb128_fst_391 >= id_2670) };
                       letpair_res_2650 = id_2671;
@@ -6272,32 +6564,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   }
                   while_flag_2645 = let_res_2649;
                   if (while_flag_2645) {
+                    (void)VOID;
                   }
                 } while (while_flag_2645);
+                (void)VOID;
                 uint8_t id_2672 { 0 };
                 uint32_t id_2673 { leb_ref_387[id_2672] };
                 uint8_t id_2674 { 0 };
                 Pointer id_2675 { p_ref_389[id_2674] };
-                ac0fbd05039f742d2f1d9ac182e392ab id_2676 {  id_2673, id_2675  };
+                t405eb186408556fed8f2c41523c07d13 id_2676 { id_2673, id_2675 };
                 let_res_2644 = id_2676;
               }
               let_res_2642 = let_res_2644;
             }
             let_res_2639 = let_res_2642;
           }
-          v_1e2289a3c247a8df69df2696e666d447 let_res_2677;
+          ta9047710b0a6cdbb6cf02e2ae071242e let_res_2677;
           {
-            ac0fbd05039f742d2f1d9ac182e392ab dlist1_396 { let_res_2639 };
-            v_1e2289a3c247a8df69df2696e666d447 letpair_res_2678;
+            t405eb186408556fed8f2c41523c07d13 dlist1_396 { let_res_2639 };
+            ta9047710b0a6cdbb6cf02e2ae071242e letpair_res_2678;
             {
               auto dlist1_fst_397 { std::get<0>(dlist1_396) };
               auto dlist1_snd_398 { std::get<1>(dlist1_396) };
-              Lst<dessser::gen::raql_select_field::t> endoflist_2679;
-              v_1e2289a3c247a8df69df2696e666d447 id_2680 {  endoflist_2679, dlist1_snd_398  };
-              Vec<1, v_1e2289a3c247a8df69df2696e666d447> id_2681 {  id_2680  };
-              v_1e2289a3c247a8df69df2696e666d447 let_res_2682;
+              Lst<dessser::gen::raql_select_field::t_ext> endoflist_2679;
+              ta9047710b0a6cdbb6cf02e2ae071242e id_2680 { endoflist_2679, dlist1_snd_398 };
+              Vec<1, ta9047710b0a6cdbb6cf02e2ae071242e> id_2681 {  id_2680  };
+              ta9047710b0a6cdbb6cf02e2ae071242e let_res_2682;
               {
-                Vec<1, v_1e2289a3c247a8df69df2696e666d447> inits_src_ref_399 { id_2681 };
+                Vec<1, ta9047710b0a6cdbb6cf02e2ae071242e> inits_src_ref_399 { id_2681 };
                 int32_t id_2683 { 0L };
                 Vec<1, int32_t> id_2684 {  id_2683  };
                 {
@@ -6311,54 +6605,61 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     while_flag_2685 = id_2689;
                     if (while_flag_2685) {
                       uint8_t id_2690 { 0 };
-                      v_1e2289a3c247a8df69df2696e666d447 id_2691 { inits_src_ref_399[id_2690] };
+                      ta9047710b0a6cdbb6cf02e2ae071242e id_2691 { inits_src_ref_399[id_2690] };
                       {
-                        v_1e2289a3c247a8df69df2696e666d447 dlist2_401 { id_2691 };
+                        ta9047710b0a6cdbb6cf02e2ae071242e dlist2_401 { id_2691 };
                         {
                           auto dlist2_fst_402 { std::get<0>(dlist2_401) };
                           auto dlist2_snd_403 { std::get<1>(dlist2_401) };
                           uint8_t id_2692 { 0 };
-                          std::function<v_657d94925809b2af1dfd7eba664f6bb7(Pointer)> id_2693 { dessser::gen::raql_select_field::of_row_binary };
-                          v_657d94925809b2af1dfd7eba664f6bb7 id_2694 { id_2693(dlist2_snd_403) };
-                          v_1e2289a3c247a8df69df2696e666d447 letpair_res_2695;
+                          auto fun2693 { dessser::gen::raql_select_field::of_row_binary };
+                          t385fc99bd06c53216a5de778dea0dc6e id_2694 { fun2693(dlist2_snd_403) };
+                          ta9047710b0a6cdbb6cf02e2ae071242e letpair_res_2695;
                           {
                             auto dlist3_fst_405 { std::get<0>(id_2694) };
                             auto dlist3_snd_406 { std::get<1>(id_2694) };
-                            Lst<dessser::gen::raql_select_field::t> id_2696 { dlist3_fst_405, dlist2_fst_402 };
-                            v_1e2289a3c247a8df69df2696e666d447 id_2697 {  id_2696, dlist3_snd_406  };
+                            Lst<dessser::gen::raql_select_field::t_ext> id_2696 { dlist3_fst_405, dlist2_fst_402 };
+                            ta9047710b0a6cdbb6cf02e2ae071242e id_2697 { id_2696, dlist3_snd_406 };
                             letpair_res_2695 = id_2697;
                           }
                           Void id_2698 { ((void)(inits_src_ref_399[id_2692] = letpair_res_2695), VOID) };
+                          (void)id_2698;
                         }
+                        (void)VOID;
                       }
+                      (void)VOID;
                       uint8_t id_2699 { 0 };
                       uint8_t id_2700 { 0 };
                       int32_t id_2701 { repeat_n_400[id_2700] };
                       int32_t id_2702 { 1L };
                       int32_t id_2703 { int32_t(id_2701 + id_2702) };
                       Void id_2704 { ((void)(repeat_n_400[id_2699] = id_2703), VOID) };
+                      (void)id_2704;
+                      (void)id_2704;
                     }
                   } while (while_flag_2685);
+                  (void)VOID;
                 }
+                (void)VOID;
                 uint8_t id_2705 { 0 };
-                v_1e2289a3c247a8df69df2696e666d447 id_2706 { inits_src_ref_399[id_2705] };
+                ta9047710b0a6cdbb6cf02e2ae071242e id_2706 { inits_src_ref_399[id_2705] };
                 let_res_2682 = id_2706;
               }
               letpair_res_2678 = let_res_2682;
             }
             let_res_2677 = letpair_res_2678;
           }
-          v_1e2289a3c247a8df69df2696e666d447 letpair_res_2707;
+          ta9047710b0a6cdbb6cf02e2ae071242e letpair_res_2707;
           {
             auto dlist4_fst_408 { std::get<0>(let_res_2677) };
             auto dlist4_snd_409 { std::get<1>(let_res_2677) };
-            v_1e2289a3c247a8df69df2696e666d447 id_2708 {  dlist4_fst_408, dlist4_snd_409  };
+            ta9047710b0a6cdbb6cf02e2ae071242e id_2708 { dlist4_fst_408, dlist4_snd_409 };
             letpair_res_2707 = id_2708;
           }
-          f63f919559f0d70225bd0da5dd9bcafc let_res_2709;
+          t45217dce3db5a9a49037839afd0048e8 let_res_2709;
           {
-            v_1e2289a3c247a8df69df2696e666d447 drec_410 { letpair_res_2707 };
-            f63f919559f0d70225bd0da5dd9bcafc letpair_res_2710;
+            ta9047710b0a6cdbb6cf02e2ae071242e drec_410 { letpair_res_2707 };
+            t45217dce3db5a9a49037839afd0048e8 letpair_res_2710;
             {
               auto drec_fst_411 { std::get<0>(drec_410) };
               auto drec_snd_412 { std::get<1>(drec_410) };
@@ -6366,44 +6667,45 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               uint8_t id_2712 { drec_snd_412.peekU8(id_2711) };
               uint8_t id_2713 { 1 };
               bool id_2714 { bool(id_2712 == id_2713) };
-              v_9a05bd7196057130155d6e5fc24b484f choose_res_2715;
+              t885b8962b524dff3368f7a529f1d466b choose_res_2715;
               if (id_2714) {
-                std::optional<Lst<dessser::gen::field_name::t>> id_2716 { std::nullopt };
+                std::optional<Lst<dessser::gen::field_name::t_ext>> id_2716 { std::nullopt };
                 Size id_2717 { 1UL };
                 Pointer id_2718 { drec_snd_412.skip(id_2717) };
-                v_9a05bd7196057130155d6e5fc24b484f id_2719 {  id_2716, id_2718  };
+                t885b8962b524dff3368f7a529f1d466b id_2719 { id_2716, id_2718 };
                 choose_res_2715 = id_2719;
               } else {
                 uint32_t id_2720 { 0U };
                 Vec<1, uint32_t> id_2721 {  id_2720  };
-                ac0fbd05039f742d2f1d9ac182e392ab let_res_2722;
+                t405eb186408556fed8f2c41523c07d13 let_res_2722;
                 {
                   Vec<1, uint32_t> leb_ref_413 { id_2721 };
                   uint8_t id_2723 { 0 };
                   Vec<1, uint8_t> id_2724 {  id_2723  };
-                  ac0fbd05039f742d2f1d9ac182e392ab let_res_2725;
+                  t405eb186408556fed8f2c41523c07d13 let_res_2725;
                   {
                     Vec<1, uint8_t> shft_ref_414 { id_2724 };
                     Size id_2726 { 1UL };
                     Pointer id_2727 { drec_snd_412.skip(id_2726) };
                     Vec<1, Pointer> id_2728 {  id_2727  };
-                    ac0fbd05039f742d2f1d9ac182e392ab let_res_2729;
+                    t405eb186408556fed8f2c41523c07d13 let_res_2729;
                     {
                       Vec<1, Pointer> p_ref_415 { id_2728 };
                       bool while_flag_2730 { true };
                       do {
                         uint8_t id_2731 { 0 };
                         Pointer id_2732 { p_ref_415[id_2731] };
-                        v_1d5843897434feb24d158f3793db9189 id_2733 { id_2732.readU8() };
+                        tb3f98ea670610d40658a618de3ec7b90 id_2733 { id_2732.readU8() };
                         bool let_res_2734;
                         {
-                          v_1d5843897434feb24d158f3793db9189 leb128_416 { id_2733 };
+                          tb3f98ea670610d40658a618de3ec7b90 leb128_416 { id_2733 };
                           bool letpair_res_2735;
                           {
                             auto leb128_fst_417 { std::get<0>(leb128_416) };
                             auto leb128_snd_418 { std::get<1>(leb128_416) };
                             uint8_t id_2736 { 0 };
                             Void id_2737 { ((void)(p_ref_415[id_2736] = leb128_snd_418), VOID) };
+                            (void)id_2737;
                             uint8_t id_2738 { 0 };
                             uint8_t id_2739 { 127 };
                             uint8_t id_2740 { uint8_t(leb128_fst_417 & id_2739) };
@@ -6415,12 +6717,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             uint32_t id_2746 { leb_ref_413[id_2745] };
                             uint32_t id_2747 { uint32_t(id_2744 | id_2746) };
                             Void id_2748 { ((void)(leb_ref_413[id_2738] = id_2747), VOID) };
+                            (void)id_2748;
                             uint8_t id_2749 { 0 };
                             uint8_t id_2750 { 0 };
                             uint8_t id_2751 { shft_ref_414[id_2750] };
                             uint8_t id_2752 { 7 };
                             uint8_t id_2753 { uint8_t(id_2751 + id_2752) };
                             Void id_2754 { ((void)(shft_ref_414[id_2749] = id_2753), VOID) };
+                            (void)id_2754;
                             uint8_t id_2755 { 128 };
                             bool id_2756 { bool(leb128_fst_417 >= id_2755) };
                             letpair_res_2735 = id_2756;
@@ -6429,32 +6733,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         }
                         while_flag_2730 = let_res_2734;
                         if (while_flag_2730) {
+                          (void)VOID;
                         }
                       } while (while_flag_2730);
+                      (void)VOID;
                       uint8_t id_2757 { 0 };
                       uint32_t id_2758 { leb_ref_413[id_2757] };
                       uint8_t id_2759 { 0 };
                       Pointer id_2760 { p_ref_415[id_2759] };
-                      ac0fbd05039f742d2f1d9ac182e392ab id_2761 {  id_2758, id_2760  };
+                      t405eb186408556fed8f2c41523c07d13 id_2761 { id_2758, id_2760 };
                       let_res_2729 = id_2761;
                     }
                     let_res_2725 = let_res_2729;
                   }
                   let_res_2722 = let_res_2725;
                 }
-                v_73b9a8533327ef50c5288ee51f32bdb3 let_res_2762;
+                t0dfa866705b76efff53e4aa97228a967 let_res_2762;
                 {
-                  ac0fbd05039f742d2f1d9ac182e392ab dlist1_422 { let_res_2722 };
-                  v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_2763;
+                  t405eb186408556fed8f2c41523c07d13 dlist1_422 { let_res_2722 };
+                  t0dfa866705b76efff53e4aa97228a967 letpair_res_2763;
                   {
                     auto dlist1_fst_423 { std::get<0>(dlist1_422) };
                     auto dlist1_snd_424 { std::get<1>(dlist1_422) };
-                    Lst<dessser::gen::field_name::t> endoflist_2764;
-                    v_73b9a8533327ef50c5288ee51f32bdb3 id_2765 {  endoflist_2764, dlist1_snd_424  };
-                    Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> id_2766 {  id_2765  };
-                    v_73b9a8533327ef50c5288ee51f32bdb3 let_res_2767;
+                    Lst<dessser::gen::field_name::t_ext> endoflist_2764;
+                    t0dfa866705b76efff53e4aa97228a967 id_2765 { endoflist_2764, dlist1_snd_424 };
+                    Vec<1, t0dfa866705b76efff53e4aa97228a967> id_2766 {  id_2765  };
+                    t0dfa866705b76efff53e4aa97228a967 let_res_2767;
                     {
-                      Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> inits_src_ref_425 { id_2766 };
+                      Vec<1, t0dfa866705b76efff53e4aa97228a967> inits_src_ref_425 { id_2766 };
                       int32_t id_2768 { 0L };
                       Vec<1, int32_t> id_2769 {  id_2768  };
                       {
@@ -6468,57 +6774,64 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           while_flag_2770 = id_2774;
                           if (while_flag_2770) {
                             uint8_t id_2775 { 0 };
-                            v_73b9a8533327ef50c5288ee51f32bdb3 id_2776 { inits_src_ref_425[id_2775] };
+                            t0dfa866705b76efff53e4aa97228a967 id_2776 { inits_src_ref_425[id_2775] };
                             {
-                              v_73b9a8533327ef50c5288ee51f32bdb3 dlist2_427 { id_2776 };
+                              t0dfa866705b76efff53e4aa97228a967 dlist2_427 { id_2776 };
                               {
                                 auto dlist2_fst_428 { std::get<0>(dlist2_427) };
                                 auto dlist2_snd_429 { std::get<1>(dlist2_427) };
                                 uint8_t id_2777 { 0 };
-                                std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_2778 { dessser::gen::field_name::of_row_binary };
-                                c50aa083fa818c6eeca389b0025dda98 id_2779 { id_2778(dlist2_snd_429) };
-                                v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_2780;
+                                auto fun2778 { dessser::gen::field_name::of_row_binary };
+                                t273a2b7978f5b466a128a51c1cc4a27b id_2779 { fun2778(dlist2_snd_429) };
+                                t0dfa866705b76efff53e4aa97228a967 letpair_res_2780;
                                 {
                                   auto dlist3_fst_431 { std::get<0>(id_2779) };
                                   auto dlist3_snd_432 { std::get<1>(id_2779) };
-                                  Lst<dessser::gen::field_name::t> id_2781 { dlist3_fst_431, dlist2_fst_428 };
-                                  v_73b9a8533327ef50c5288ee51f32bdb3 id_2782 {  id_2781, dlist3_snd_432  };
+                                  Lst<dessser::gen::field_name::t_ext> id_2781 { dlist3_fst_431, dlist2_fst_428 };
+                                  t0dfa866705b76efff53e4aa97228a967 id_2782 { id_2781, dlist3_snd_432 };
                                   letpair_res_2780 = id_2782;
                                 }
                                 Void id_2783 { ((void)(inits_src_ref_425[id_2777] = letpair_res_2780), VOID) };
+                                (void)id_2783;
                               }
+                              (void)VOID;
                             }
+                            (void)VOID;
                             uint8_t id_2784 { 0 };
                             uint8_t id_2785 { 0 };
                             int32_t id_2786 { repeat_n_426[id_2785] };
                             int32_t id_2787 { 1L };
                             int32_t id_2788 { int32_t(id_2786 + id_2787) };
                             Void id_2789 { ((void)(repeat_n_426[id_2784] = id_2788), VOID) };
+                            (void)id_2789;
+                            (void)id_2789;
                           }
                         } while (while_flag_2770);
+                        (void)VOID;
                       }
+                      (void)VOID;
                       uint8_t id_2790 { 0 };
-                      v_73b9a8533327ef50c5288ee51f32bdb3 id_2791 { inits_src_ref_425[id_2790] };
+                      t0dfa866705b76efff53e4aa97228a967 id_2791 { inits_src_ref_425[id_2790] };
                       let_res_2767 = id_2791;
                     }
                     letpair_res_2763 = let_res_2767;
                   }
                   let_res_2762 = letpair_res_2763;
                 }
-                v_9a05bd7196057130155d6e5fc24b484f letpair_res_2792;
+                t885b8962b524dff3368f7a529f1d466b letpair_res_2792;
                 {
                   auto dlist4_fst_434 { std::get<0>(let_res_2762) };
                   auto dlist4_snd_435 { std::get<1>(let_res_2762) };
-                  std::optional<Lst<dessser::gen::field_name::t>> id_2793 { dlist4_fst_434 };
-                  v_9a05bd7196057130155d6e5fc24b484f id_2794 {  id_2793, dlist4_snd_435  };
+                  std::optional<Lst<dessser::gen::field_name::t_ext>> id_2793 { dlist4_fst_434 };
+                  t885b8962b524dff3368f7a529f1d466b id_2794 { id_2793, dlist4_snd_435 };
                   letpair_res_2792 = id_2794;
                 }
                 choose_res_2715 = letpair_res_2792;
               }
-              f63f919559f0d70225bd0da5dd9bcafc let_res_2795;
+              t45217dce3db5a9a49037839afd0048e8 let_res_2795;
               {
-                v_9a05bd7196057130155d6e5fc24b484f drec_439 { choose_res_2715 };
-                f63f919559f0d70225bd0da5dd9bcafc letpair_res_2796;
+                t885b8962b524dff3368f7a529f1d466b drec_439 { choose_res_2715 };
+                t45217dce3db5a9a49037839afd0048e8 letpair_res_2796;
                 {
                   auto drec_fst_440 { std::get<0>(drec_439) };
                   auto drec_snd_441 { std::get<1>(drec_439) };
@@ -6526,28 +6839,28 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   uint8_t id_2798 { drec_snd_441.peekU8(id_2797) };
                   uint8_t id_2799 { 1 };
                   bool id_2800 { bool(id_2798 == id_2799) };
-                  b4c4b8bd0a1e7b037b5f7cd76229322d choose_res_2801;
+                  t3b4feade6f60da4ba5d645f756688083 choose_res_2801;
                   if (id_2800) {
-                    std::optional<b48f9480e4991d15124ad477c5cb330e> id_2802 { std::nullopt };
+                    std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_2802 { std::nullopt };
                     Size id_2803 { 1UL };
                     Pointer id_2804 { drec_snd_441.skip(id_2803) };
-                    b4c4b8bd0a1e7b037b5f7cd76229322d id_2805 {  id_2802, id_2804  };
+                    t3b4feade6f60da4ba5d645f756688083 id_2805 { id_2802, id_2804 };
                     choose_res_2801 = id_2805;
                   } else {
                     Size id_2806 { 1UL };
                     Pointer id_2807 { drec_snd_441.skip(id_2806) };
-                    ac0fbd05039f742d2f1d9ac182e392ab id_2808 { id_2807.readU32Le() };
-                    ac0fbd05039f742d2f1d9ac182e392ab letpair_res_2809;
+                    t405eb186408556fed8f2c41523c07d13 id_2808 { id_2807.readU32Le() };
+                    t405eb186408556fed8f2c41523c07d13 letpair_res_2809;
                     {
                       auto du32_fst_443 { std::get<0>(id_2808) };
                       auto du32_snd_444 { std::get<1>(id_2808) };
-                      ac0fbd05039f742d2f1d9ac182e392ab id_2810 {  du32_fst_443, du32_snd_444  };
+                      t405eb186408556fed8f2c41523c07d13 id_2810 { du32_fst_443, du32_snd_444 };
                       letpair_res_2809 = id_2810;
                     }
-                    b4c4b8bd0a1e7b037b5f7cd76229322d let_res_2811;
+                    t3b4feade6f60da4ba5d645f756688083 let_res_2811;
                     {
-                      ac0fbd05039f742d2f1d9ac182e392ab dtup_445 { letpair_res_2809 };
-                      b4c4b8bd0a1e7b037b5f7cd76229322d letpair_res_2812;
+                      t405eb186408556fed8f2c41523c07d13 dtup_445 { letpair_res_2809 };
+                      t3b4feade6f60da4ba5d645f756688083 letpair_res_2812;
                       {
                         auto dtup_fst_446 { std::get<0>(dtup_445) };
                         auto dtup_snd_447 { std::get<1>(dtup_445) };
@@ -6555,63 +6868,64 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         uint8_t id_2814 { dtup_snd_447.peekU8(id_2813) };
                         uint8_t id_2815 { 1 };
                         bool id_2816 { bool(id_2814 == id_2815) };
-                        b8de1a5ea94913283815cebff1d39083 choose_res_2817;
+                        tf1063a6af8c1fb72f0e0ee089d43d040 choose_res_2817;
                         if (id_2816) {
-                          std::optional<dessser::gen::raql_expr::t> id_2818 { std::nullopt };
+                          std::optional<dessser::gen::raql_expr::t_ext> id_2818 { std::nullopt };
                           Size id_2819 { 1UL };
                           Pointer id_2820 { dtup_snd_447.skip(id_2819) };
-                          b8de1a5ea94913283815cebff1d39083 id_2821 {  id_2818, id_2820  };
+                          tf1063a6af8c1fb72f0e0ee089d43d040 id_2821 { id_2818, id_2820 };
                           choose_res_2817 = id_2821;
                         } else {
-                          std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_2822 { dessser::gen::raql_expr::of_row_binary };
+                          auto fun2822 { dessser::gen::raql_expr::of_row_binary };
                           Size id_2823 { 1UL };
                           Pointer id_2824 { dtup_snd_447.skip(id_2823) };
-                          v_3501be1aaefb5944279c6a13f6d0d43f id_2825 { id_2822(id_2824) };
-                          b8de1a5ea94913283815cebff1d39083 letpair_res_2826;
+                          t1113e6691818baaf60a775527f6cc1ac id_2825 { fun2822(id_2824) };
+                          tf1063a6af8c1fb72f0e0ee089d43d040 letpair_res_2826;
                           {
                             auto make1_1_fst_449 { std::get<0>(id_2825) };
                             auto make1_1_snd_450 { std::get<1>(id_2825) };
-                            std::optional<dessser::gen::raql_expr::t> id_2827 { make1_1_fst_449 };
-                            b8de1a5ea94913283815cebff1d39083 id_2828 {  id_2827, make1_1_snd_450  };
+                            std::optional<dessser::gen::raql_expr::t_ext> id_2827 { make1_1_fst_449 };
+                            tf1063a6af8c1fb72f0e0ee089d43d040 id_2828 { id_2827, make1_1_snd_450 };
                             letpair_res_2826 = id_2828;
                           }
                           choose_res_2817 = letpair_res_2826;
                         }
-                        b4c4b8bd0a1e7b037b5f7cd76229322d let_res_2829;
+                        t3b4feade6f60da4ba5d645f756688083 let_res_2829;
                         {
-                          b8de1a5ea94913283815cebff1d39083 dtup_451 { choose_res_2817 };
-                          b4c4b8bd0a1e7b037b5f7cd76229322d letpair_res_2830;
+                          tf1063a6af8c1fb72f0e0ee089d43d040 dtup_451 { choose_res_2817 };
+                          t3b4feade6f60da4ba5d645f756688083 letpair_res_2830;
                           {
                             auto dtup_fst_452 { std::get<0>(dtup_451) };
                             auto dtup_snd_453 { std::get<1>(dtup_451) };
                             uint32_t id_2831 { 0U };
                             Vec<1, uint32_t> id_2832 {  id_2831  };
-                            ac0fbd05039f742d2f1d9ac182e392ab let_res_2833;
+                            t405eb186408556fed8f2c41523c07d13 let_res_2833;
                             {
                               Vec<1, uint32_t> leb_ref_454 { id_2832 };
                               uint8_t id_2834 { 0 };
                               Vec<1, uint8_t> id_2835 {  id_2834  };
-                              ac0fbd05039f742d2f1d9ac182e392ab let_res_2836;
+                              t405eb186408556fed8f2c41523c07d13 let_res_2836;
                               {
                                 Vec<1, uint8_t> shft_ref_455 { id_2835 };
                                 Vec<1, Pointer> id_2837 {  dtup_snd_453  };
-                                ac0fbd05039f742d2f1d9ac182e392ab let_res_2838;
+                                t405eb186408556fed8f2c41523c07d13 let_res_2838;
                                 {
                                   Vec<1, Pointer> p_ref_456 { id_2837 };
                                   bool while_flag_2839 { true };
                                   do {
                                     uint8_t id_2840 { 0 };
                                     Pointer id_2841 { p_ref_456[id_2840] };
-                                    v_1d5843897434feb24d158f3793db9189 id_2842 { id_2841.readU8() };
+                                    tb3f98ea670610d40658a618de3ec7b90 id_2842 { id_2841.readU8() };
                                     bool let_res_2843;
                                     {
-                                      v_1d5843897434feb24d158f3793db9189 leb128_457 { id_2842 };
+                                      tb3f98ea670610d40658a618de3ec7b90 leb128_457 { id_2842 };
                                       bool letpair_res_2844;
                                       {
                                         auto leb128_fst_458 { std::get<0>(leb128_457) };
                                         auto leb128_snd_459 { std::get<1>(leb128_457) };
                                         uint8_t id_2845 { 0 };
                                         Void id_2846 { ((void)(p_ref_456[id_2845] = leb128_snd_459), VOID) };
+                                        (void)id_2846;
                                         uint8_t id_2847 { 0 };
                                         uint8_t id_2848 { 127 };
                                         uint8_t id_2849 { uint8_t(leb128_fst_458 & id_2848) };
@@ -6623,12 +6937,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                         uint32_t id_2855 { leb_ref_454[id_2854] };
                                         uint32_t id_2856 { uint32_t(id_2853 | id_2855) };
                                         Void id_2857 { ((void)(leb_ref_454[id_2847] = id_2856), VOID) };
+                                        (void)id_2857;
                                         uint8_t id_2858 { 0 };
                                         uint8_t id_2859 { 0 };
                                         uint8_t id_2860 { shft_ref_455[id_2859] };
                                         uint8_t id_2861 { 7 };
                                         uint8_t id_2862 { uint8_t(id_2860 + id_2861) };
                                         Void id_2863 { ((void)(shft_ref_455[id_2858] = id_2862), VOID) };
+                                        (void)id_2863;
                                         uint8_t id_2864 { 128 };
                                         bool id_2865 { bool(leb128_fst_458 >= id_2864) };
                                         letpair_res_2844 = id_2865;
@@ -6637,32 +6953,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     }
                                     while_flag_2839 = let_res_2843;
                                     if (while_flag_2839) {
+                                      (void)VOID;
                                     }
                                   } while (while_flag_2839);
+                                  (void)VOID;
                                   uint8_t id_2866 { 0 };
                                   uint32_t id_2867 { leb_ref_454[id_2866] };
                                   uint8_t id_2868 { 0 };
                                   Pointer id_2869 { p_ref_456[id_2868] };
-                                  ac0fbd05039f742d2f1d9ac182e392ab id_2870 {  id_2867, id_2869  };
+                                  t405eb186408556fed8f2c41523c07d13 id_2870 { id_2867, id_2869 };
                                   let_res_2838 = id_2870;
                                 }
                                 let_res_2836 = let_res_2838;
                               }
                               let_res_2833 = let_res_2836;
                             }
-                            v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_2871;
+                            t0067a338c0fc91b6a811c8df70d4c87a let_res_2871;
                             {
-                              ac0fbd05039f742d2f1d9ac182e392ab dlist1_463 { let_res_2833 };
-                              v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_2872;
+                              t405eb186408556fed8f2c41523c07d13 dlist1_463 { let_res_2833 };
+                              t0067a338c0fc91b6a811c8df70d4c87a letpair_res_2872;
                               {
                                 auto dlist1_fst_464 { std::get<0>(dlist1_463) };
                                 auto dlist1_snd_465 { std::get<1>(dlist1_463) };
-                                Lst<dessser::gen::raql_expr::t> endoflist_2873;
-                                v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2874 {  endoflist_2873, dlist1_snd_465  };
-                                Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> id_2875 {  id_2874  };
-                                v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_2876;
+                                Lst<dessser::gen::raql_expr::t_ext> endoflist_2873;
+                                t0067a338c0fc91b6a811c8df70d4c87a id_2874 { endoflist_2873, dlist1_snd_465 };
+                                Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> id_2875 {  id_2874  };
+                                t0067a338c0fc91b6a811c8df70d4c87a let_res_2876;
                                 {
-                                  Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> inits_src_ref_466 { id_2875 };
+                                  Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> inits_src_ref_466 { id_2875 };
                                   int32_t id_2877 { 0L };
                                   Vec<1, int32_t> id_2878 {  id_2877  };
                                   {
@@ -6676,50 +6994,57 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                       while_flag_2879 = id_2883;
                                       if (while_flag_2879) {
                                         uint8_t id_2884 { 0 };
-                                        v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2885 { inits_src_ref_466[id_2884] };
+                                        t0067a338c0fc91b6a811c8df70d4c87a id_2885 { inits_src_ref_466[id_2884] };
                                         {
-                                          v_89798a0a125fff44cf18e3d1fbb6ddc8 dlist2_468 { id_2885 };
+                                          t0067a338c0fc91b6a811c8df70d4c87a dlist2_468 { id_2885 };
                                           {
                                             auto dlist2_fst_469 { std::get<0>(dlist2_468) };
                                             auto dlist2_snd_470 { std::get<1>(dlist2_468) };
                                             uint8_t id_2886 { 0 };
-                                            std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_2887 { dessser::gen::raql_expr::of_row_binary };
-                                            v_3501be1aaefb5944279c6a13f6d0d43f id_2888 { id_2887(dlist2_snd_470) };
-                                            v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_2889;
+                                            auto fun2887 { dessser::gen::raql_expr::of_row_binary };
+                                            t1113e6691818baaf60a775527f6cc1ac id_2888 { fun2887(dlist2_snd_470) };
+                                            t0067a338c0fc91b6a811c8df70d4c87a letpair_res_2889;
                                             {
                                               auto dlist3_fst_472 { std::get<0>(id_2888) };
                                               auto dlist3_snd_473 { std::get<1>(id_2888) };
-                                              Lst<dessser::gen::raql_expr::t> id_2890 { dlist3_fst_472, dlist2_fst_469 };
-                                              v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2891 {  id_2890, dlist3_snd_473  };
+                                              Lst<dessser::gen::raql_expr::t_ext> id_2890 { dlist3_fst_472, dlist2_fst_469 };
+                                              t0067a338c0fc91b6a811c8df70d4c87a id_2891 { id_2890, dlist3_snd_473 };
                                               letpair_res_2889 = id_2891;
                                             }
                                             Void id_2892 { ((void)(inits_src_ref_466[id_2886] = letpair_res_2889), VOID) };
+                                            (void)id_2892;
                                           }
+                                          (void)VOID;
                                         }
+                                        (void)VOID;
                                         uint8_t id_2893 { 0 };
                                         uint8_t id_2894 { 0 };
                                         int32_t id_2895 { repeat_n_467[id_2894] };
                                         int32_t id_2896 { 1L };
                                         int32_t id_2897 { int32_t(id_2895 + id_2896) };
                                         Void id_2898 { ((void)(repeat_n_467[id_2893] = id_2897), VOID) };
+                                        (void)id_2898;
+                                        (void)id_2898;
                                       }
                                     } while (while_flag_2879);
+                                    (void)VOID;
                                   }
+                                  (void)VOID;
                                   uint8_t id_2899 { 0 };
-                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2900 { inits_src_ref_466[id_2899] };
+                                  t0067a338c0fc91b6a811c8df70d4c87a id_2900 { inits_src_ref_466[id_2899] };
                                   let_res_2876 = id_2900;
                                 }
                                 letpair_res_2872 = let_res_2876;
                               }
                               let_res_2871 = letpair_res_2872;
                             }
-                            b4c4b8bd0a1e7b037b5f7cd76229322d letpair_res_2901;
+                            t3b4feade6f60da4ba5d645f756688083 letpair_res_2901;
                             {
                               auto dlist4_fst_475 { std::get<0>(let_res_2871) };
                               auto dlist4_snd_476 { std::get<1>(let_res_2871) };
-                              b48f9480e4991d15124ad477c5cb330e id_2902 {  dtup_fst_446, dtup_fst_452, dlist4_fst_475  };
-                              std::optional<b48f9480e4991d15124ad477c5cb330e> id_2903 { id_2902 };
-                              b4c4b8bd0a1e7b037b5f7cd76229322d id_2904 {  id_2903, dlist4_snd_476  };
+                              tf0c8d4f3070907529cc1a83f8baf6fab id_2902 { dtup_fst_446, dtup_fst_452, dlist4_fst_475 };
+                              std::optional<tf0c8d4f3070907529cc1a83f8baf6fab> id_2903 { id_2902 };
+                              t3b4feade6f60da4ba5d645f756688083 id_2904 { id_2903, dlist4_snd_476 };
                               letpair_res_2901 = id_2904;
                             }
                             letpair_res_2830 = letpair_res_2901;
@@ -6732,19 +7057,19 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     }
                     choose_res_2801 = let_res_2811;
                   }
-                  f63f919559f0d70225bd0da5dd9bcafc let_res_2905;
+                  t45217dce3db5a9a49037839afd0048e8 let_res_2905;
                   {
-                    b4c4b8bd0a1e7b037b5f7cd76229322d drec_483 { choose_res_2801 };
-                    f63f919559f0d70225bd0da5dd9bcafc letpair_res_2906;
+                    t3b4feade6f60da4ba5d645f756688083 drec_483 { choose_res_2801 };
+                    t45217dce3db5a9a49037839afd0048e8 letpair_res_2906;
                     {
                       auto drec_fst_484 { std::get<0>(drec_483) };
                       auto drec_snd_485 { std::get<1>(drec_483) };
-                      std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_2907 { dessser::gen::raql_expr::of_row_binary };
-                      v_3501be1aaefb5944279c6a13f6d0d43f id_2908 { id_2907(drec_snd_485) };
-                      f63f919559f0d70225bd0da5dd9bcafc let_res_2909;
+                      auto fun2907 { dessser::gen::raql_expr::of_row_binary };
+                      t1113e6691818baaf60a775527f6cc1ac id_2908 { fun2907(drec_snd_485) };
+                      t45217dce3db5a9a49037839afd0048e8 let_res_2909;
                       {
-                        v_3501be1aaefb5944279c6a13f6d0d43f drec_486 { id_2908 };
-                        f63f919559f0d70225bd0da5dd9bcafc letpair_res_2910;
+                        t1113e6691818baaf60a775527f6cc1ac drec_486 { id_2908 };
+                        t45217dce3db5a9a49037839afd0048e8 letpair_res_2910;
                         {
                           auto drec_fst_487 { std::get<0>(drec_486) };
                           auto drec_snd_488 { std::get<1>(drec_486) };
@@ -6752,63 +7077,64 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           uint8_t id_2912 { drec_snd_488.peekU8(id_2911) };
                           uint8_t id_2913 { 1 };
                           bool id_2914 { bool(id_2912 == id_2913) };
-                          v_640ffd570a38fa81256c323a616f666c choose_res_2915;
+                          te3858ac581a2bb69ede2f45fc6f9aff4 choose_res_2915;
                           if (id_2914) {
-                            std::optional<dessser::gen::event_time::t> id_2916 { std::nullopt };
+                            std::optional<dessser::gen::event_time::t_ext> id_2916 { std::nullopt };
                             Size id_2917 { 1UL };
                             Pointer id_2918 { drec_snd_488.skip(id_2917) };
-                            v_640ffd570a38fa81256c323a616f666c id_2919 {  id_2916, id_2918  };
+                            te3858ac581a2bb69ede2f45fc6f9aff4 id_2919 { id_2916, id_2918 };
                             choose_res_2915 = id_2919;
                           } else {
-                            std::function<v_3171d2c768002071c5128a227625b3a2(Pointer)> id_2920 { dessser::gen::event_time::of_row_binary };
+                            auto fun2920 { dessser::gen::event_time::of_row_binary };
                             Size id_2921 { 1UL };
                             Pointer id_2922 { drec_snd_488.skip(id_2921) };
-                            v_3171d2c768002071c5128a227625b3a2 id_2923 { id_2920(id_2922) };
-                            v_640ffd570a38fa81256c323a616f666c letpair_res_2924;
+                            te8ff255b34432f8503a86cf675cbafe6 id_2923 { fun2920(id_2922) };
+                            te3858ac581a2bb69ede2f45fc6f9aff4 letpair_res_2924;
                             {
                               auto make1_1_fst_490 { std::get<0>(id_2923) };
                               auto make1_1_snd_491 { std::get<1>(id_2923) };
-                              std::optional<dessser::gen::event_time::t> id_2925 { make1_1_fst_490 };
-                              v_640ffd570a38fa81256c323a616f666c id_2926 {  id_2925, make1_1_snd_491  };
+                              std::optional<dessser::gen::event_time::t_ext> id_2925 { make1_1_fst_490 };
+                              te3858ac581a2bb69ede2f45fc6f9aff4 id_2926 { id_2925, make1_1_snd_491 };
                               letpair_res_2924 = id_2926;
                             }
                             choose_res_2915 = letpair_res_2924;
                           }
-                          f63f919559f0d70225bd0da5dd9bcafc let_res_2927;
+                          t45217dce3db5a9a49037839afd0048e8 let_res_2927;
                           {
-                            v_640ffd570a38fa81256c323a616f666c drec_492 { choose_res_2915 };
-                            f63f919559f0d70225bd0da5dd9bcafc letpair_res_2928;
+                            te3858ac581a2bb69ede2f45fc6f9aff4 drec_492 { choose_res_2915 };
+                            t45217dce3db5a9a49037839afd0048e8 letpair_res_2928;
                             {
                               auto drec_fst_493 { std::get<0>(drec_492) };
                               auto drec_snd_494 { std::get<1>(drec_492) };
                               uint32_t id_2929 { 0U };
                               Vec<1, uint32_t> id_2930 {  id_2929  };
-                              ac0fbd05039f742d2f1d9ac182e392ab let_res_2931;
+                              t405eb186408556fed8f2c41523c07d13 let_res_2931;
                               {
                                 Vec<1, uint32_t> leb_ref_495 { id_2930 };
                                 uint8_t id_2932 { 0 };
                                 Vec<1, uint8_t> id_2933 {  id_2932  };
-                                ac0fbd05039f742d2f1d9ac182e392ab let_res_2934;
+                                t405eb186408556fed8f2c41523c07d13 let_res_2934;
                                 {
                                   Vec<1, uint8_t> shft_ref_496 { id_2933 };
                                   Vec<1, Pointer> id_2935 {  drec_snd_494  };
-                                  ac0fbd05039f742d2f1d9ac182e392ab let_res_2936;
+                                  t405eb186408556fed8f2c41523c07d13 let_res_2936;
                                   {
                                     Vec<1, Pointer> p_ref_497 { id_2935 };
                                     bool while_flag_2937 { true };
                                     do {
                                       uint8_t id_2938 { 0 };
                                       Pointer id_2939 { p_ref_497[id_2938] };
-                                      v_1d5843897434feb24d158f3793db9189 id_2940 { id_2939.readU8() };
+                                      tb3f98ea670610d40658a618de3ec7b90 id_2940 { id_2939.readU8() };
                                       bool let_res_2941;
                                       {
-                                        v_1d5843897434feb24d158f3793db9189 leb128_498 { id_2940 };
+                                        tb3f98ea670610d40658a618de3ec7b90 leb128_498 { id_2940 };
                                         bool letpair_res_2942;
                                         {
                                           auto leb128_fst_499 { std::get<0>(leb128_498) };
                                           auto leb128_snd_500 { std::get<1>(leb128_498) };
                                           uint8_t id_2943 { 0 };
                                           Void id_2944 { ((void)(p_ref_497[id_2943] = leb128_snd_500), VOID) };
+                                          (void)id_2944;
                                           uint8_t id_2945 { 0 };
                                           uint8_t id_2946 { 127 };
                                           uint8_t id_2947 { uint8_t(leb128_fst_499 & id_2946) };
@@ -6820,12 +7146,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                           uint32_t id_2953 { leb_ref_495[id_2952] };
                                           uint32_t id_2954 { uint32_t(id_2951 | id_2953) };
                                           Void id_2955 { ((void)(leb_ref_495[id_2945] = id_2954), VOID) };
+                                          (void)id_2955;
                                           uint8_t id_2956 { 0 };
                                           uint8_t id_2957 { 0 };
                                           uint8_t id_2958 { shft_ref_496[id_2957] };
                                           uint8_t id_2959 { 7 };
                                           uint8_t id_2960 { uint8_t(id_2958 + id_2959) };
                                           Void id_2961 { ((void)(shft_ref_496[id_2956] = id_2960), VOID) };
+                                          (void)id_2961;
                                           uint8_t id_2962 { 128 };
                                           bool id_2963 { bool(leb128_fst_499 >= id_2962) };
                                           letpair_res_2942 = id_2963;
@@ -6834,32 +7162,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                       }
                                       while_flag_2937 = let_res_2941;
                                       if (while_flag_2937) {
+                                        (void)VOID;
                                       }
                                     } while (while_flag_2937);
+                                    (void)VOID;
                                     uint8_t id_2964 { 0 };
                                     uint32_t id_2965 { leb_ref_495[id_2964] };
                                     uint8_t id_2966 { 0 };
                                     Pointer id_2967 { p_ref_497[id_2966] };
-                                    ac0fbd05039f742d2f1d9ac182e392ab id_2968 {  id_2965, id_2967  };
+                                    t405eb186408556fed8f2c41523c07d13 id_2968 { id_2965, id_2967 };
                                     let_res_2936 = id_2968;
                                   }
                                   let_res_2934 = let_res_2936;
                                 }
                                 let_res_2931 = let_res_2934;
                               }
-                              v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_2969;
+                              t0067a338c0fc91b6a811c8df70d4c87a let_res_2969;
                               {
-                                ac0fbd05039f742d2f1d9ac182e392ab dlist1_504 { let_res_2931 };
-                                v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_2970;
+                                t405eb186408556fed8f2c41523c07d13 dlist1_504 { let_res_2931 };
+                                t0067a338c0fc91b6a811c8df70d4c87a letpair_res_2970;
                                 {
                                   auto dlist1_fst_505 { std::get<0>(dlist1_504) };
                                   auto dlist1_snd_506 { std::get<1>(dlist1_504) };
-                                  Lst<dessser::gen::raql_expr::t> endoflist_2971;
-                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2972 {  endoflist_2971, dlist1_snd_506  };
-                                  Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> id_2973 {  id_2972  };
-                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_2974;
+                                  Lst<dessser::gen::raql_expr::t_ext> endoflist_2971;
+                                  t0067a338c0fc91b6a811c8df70d4c87a id_2972 { endoflist_2971, dlist1_snd_506 };
+                                  Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> id_2973 {  id_2972  };
+                                  t0067a338c0fc91b6a811c8df70d4c87a let_res_2974;
                                   {
-                                    Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> inits_src_ref_507 { id_2973 };
+                                    Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> inits_src_ref_507 { id_2973 };
                                     int32_t id_2975 { 0L };
                                     Vec<1, int32_t> id_2976 {  id_2975  };
                                     {
@@ -6873,85 +7203,93 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                         while_flag_2977 = id_2981;
                                         if (while_flag_2977) {
                                           uint8_t id_2982 { 0 };
-                                          v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2983 { inits_src_ref_507[id_2982] };
+                                          t0067a338c0fc91b6a811c8df70d4c87a id_2983 { inits_src_ref_507[id_2982] };
                                           {
-                                            v_89798a0a125fff44cf18e3d1fbb6ddc8 dlist2_509 { id_2983 };
+                                            t0067a338c0fc91b6a811c8df70d4c87a dlist2_509 { id_2983 };
                                             {
                                               auto dlist2_fst_510 { std::get<0>(dlist2_509) };
                                               auto dlist2_snd_511 { std::get<1>(dlist2_509) };
                                               uint8_t id_2984 { 0 };
-                                              std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_2985 { dessser::gen::raql_expr::of_row_binary };
-                                              v_3501be1aaefb5944279c6a13f6d0d43f id_2986 { id_2985(dlist2_snd_511) };
-                                              v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_2987;
+                                              auto fun2985 { dessser::gen::raql_expr::of_row_binary };
+                                              t1113e6691818baaf60a775527f6cc1ac id_2986 { fun2985(dlist2_snd_511) };
+                                              t0067a338c0fc91b6a811c8df70d4c87a letpair_res_2987;
                                               {
                                                 auto dlist3_fst_513 { std::get<0>(id_2986) };
                                                 auto dlist3_snd_514 { std::get<1>(id_2986) };
-                                                Lst<dessser::gen::raql_expr::t> id_2988 { dlist3_fst_513, dlist2_fst_510 };
-                                                v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2989 {  id_2988, dlist3_snd_514  };
+                                                Lst<dessser::gen::raql_expr::t_ext> id_2988 { dlist3_fst_513, dlist2_fst_510 };
+                                                t0067a338c0fc91b6a811c8df70d4c87a id_2989 { id_2988, dlist3_snd_514 };
                                                 letpair_res_2987 = id_2989;
                                               }
                                               Void id_2990 { ((void)(inits_src_ref_507[id_2984] = letpair_res_2987), VOID) };
+                                              (void)id_2990;
                                             }
+                                            (void)VOID;
                                           }
+                                          (void)VOID;
                                           uint8_t id_2991 { 0 };
                                           uint8_t id_2992 { 0 };
                                           int32_t id_2993 { repeat_n_508[id_2992] };
                                           int32_t id_2994 { 1L };
                                           int32_t id_2995 { int32_t(id_2993 + id_2994) };
                                           Void id_2996 { ((void)(repeat_n_508[id_2991] = id_2995), VOID) };
+                                          (void)id_2996;
+                                          (void)id_2996;
                                         }
                                       } while (while_flag_2977);
+                                      (void)VOID;
                                     }
+                                    (void)VOID;
                                     uint8_t id_2997 { 0 };
-                                    v_89798a0a125fff44cf18e3d1fbb6ddc8 id_2998 { inits_src_ref_507[id_2997] };
+                                    t0067a338c0fc91b6a811c8df70d4c87a id_2998 { inits_src_ref_507[id_2997] };
                                     let_res_2974 = id_2998;
                                   }
                                   letpair_res_2970 = let_res_2974;
                                 }
                                 let_res_2969 = letpair_res_2970;
                               }
-                              v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_2999;
+                              t0067a338c0fc91b6a811c8df70d4c87a letpair_res_2999;
                               {
                                 auto dlist4_fst_516 { std::get<0>(let_res_2969) };
                                 auto dlist4_snd_517 { std::get<1>(let_res_2969) };
-                                v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3000 {  dlist4_fst_516, dlist4_snd_517  };
+                                t0067a338c0fc91b6a811c8df70d4c87a id_3000 { dlist4_fst_516, dlist4_snd_517 };
                                 letpair_res_2999 = id_3000;
                               }
-                              f63f919559f0d70225bd0da5dd9bcafc let_res_3001;
+                              t45217dce3db5a9a49037839afd0048e8 let_res_3001;
                               {
-                                v_89798a0a125fff44cf18e3d1fbb6ddc8 drec_518 { letpair_res_2999 };
-                                f63f919559f0d70225bd0da5dd9bcafc letpair_res_3002;
+                                t0067a338c0fc91b6a811c8df70d4c87a drec_518 { letpair_res_2999 };
+                                t45217dce3db5a9a49037839afd0048e8 letpair_res_3002;
                                 {
                                   auto drec_fst_519 { std::get<0>(drec_518) };
                                   auto drec_snd_520 { std::get<1>(drec_518) };
                                   uint32_t id_3003 { 0U };
                                   Vec<1, uint32_t> id_3004 {  id_3003  };
-                                  ac0fbd05039f742d2f1d9ac182e392ab let_res_3005;
+                                  t405eb186408556fed8f2c41523c07d13 let_res_3005;
                                   {
                                     Vec<1, uint32_t> leb_ref_521 { id_3004 };
                                     uint8_t id_3006 { 0 };
                                     Vec<1, uint8_t> id_3007 {  id_3006  };
-                                    ac0fbd05039f742d2f1d9ac182e392ab let_res_3008;
+                                    t405eb186408556fed8f2c41523c07d13 let_res_3008;
                                     {
                                       Vec<1, uint8_t> shft_ref_522 { id_3007 };
                                       Vec<1, Pointer> id_3009 {  drec_snd_520  };
-                                      ac0fbd05039f742d2f1d9ac182e392ab let_res_3010;
+                                      t405eb186408556fed8f2c41523c07d13 let_res_3010;
                                       {
                                         Vec<1, Pointer> p_ref_523 { id_3009 };
                                         bool while_flag_3011 { true };
                                         do {
                                           uint8_t id_3012 { 0 };
                                           Pointer id_3013 { p_ref_523[id_3012] };
-                                          v_1d5843897434feb24d158f3793db9189 id_3014 { id_3013.readU8() };
+                                          tb3f98ea670610d40658a618de3ec7b90 id_3014 { id_3013.readU8() };
                                           bool let_res_3015;
                                           {
-                                            v_1d5843897434feb24d158f3793db9189 leb128_524 { id_3014 };
+                                            tb3f98ea670610d40658a618de3ec7b90 leb128_524 { id_3014 };
                                             bool letpair_res_3016;
                                             {
                                               auto leb128_fst_525 { std::get<0>(leb128_524) };
                                               auto leb128_snd_526 { std::get<1>(leb128_524) };
                                               uint8_t id_3017 { 0 };
                                               Void id_3018 { ((void)(p_ref_523[id_3017] = leb128_snd_526), VOID) };
+                                              (void)id_3018;
                                               uint8_t id_3019 { 0 };
                                               uint8_t id_3020 { 127 };
                                               uint8_t id_3021 { uint8_t(leb128_fst_525 & id_3020) };
@@ -6963,12 +7301,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                               uint32_t id_3027 { leb_ref_521[id_3026] };
                                               uint32_t id_3028 { uint32_t(id_3025 | id_3027) };
                                               Void id_3029 { ((void)(leb_ref_521[id_3019] = id_3028), VOID) };
+                                              (void)id_3029;
                                               uint8_t id_3030 { 0 };
                                               uint8_t id_3031 { 0 };
                                               uint8_t id_3032 { shft_ref_522[id_3031] };
                                               uint8_t id_3033 { 7 };
                                               uint8_t id_3034 { uint8_t(id_3032 + id_3033) };
                                               Void id_3035 { ((void)(shft_ref_522[id_3030] = id_3034), VOID) };
+                                              (void)id_3035;
                                               uint8_t id_3036 { 128 };
                                               bool id_3037 { bool(leb128_fst_525 >= id_3036) };
                                               letpair_res_3016 = id_3037;
@@ -6977,32 +7317,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                           }
                                           while_flag_3011 = let_res_3015;
                                           if (while_flag_3011) {
+                                            (void)VOID;
                                           }
                                         } while (while_flag_3011);
+                                        (void)VOID;
                                         uint8_t id_3038 { 0 };
                                         uint32_t id_3039 { leb_ref_521[id_3038] };
                                         uint8_t id_3040 { 0 };
                                         Pointer id_3041 { p_ref_523[id_3040] };
-                                        ac0fbd05039f742d2f1d9ac182e392ab id_3042 {  id_3039, id_3041  };
+                                        t405eb186408556fed8f2c41523c07d13 id_3042 { id_3039, id_3041 };
                                         let_res_3010 = id_3042;
                                       }
                                       let_res_3008 = let_res_3010;
                                     }
                                     let_res_3005 = let_res_3008;
                                   }
-                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_3043;
+                                  t0067a338c0fc91b6a811c8df70d4c87a let_res_3043;
                                   {
-                                    ac0fbd05039f742d2f1d9ac182e392ab dlist1_530 { let_res_3005 };
-                                    v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_3044;
+                                    t405eb186408556fed8f2c41523c07d13 dlist1_530 { let_res_3005 };
+                                    t0067a338c0fc91b6a811c8df70d4c87a letpair_res_3044;
                                     {
                                       auto dlist1_fst_531 { std::get<0>(dlist1_530) };
                                       auto dlist1_snd_532 { std::get<1>(dlist1_530) };
-                                      Lst<dessser::gen::raql_expr::t> endoflist_3045;
-                                      v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3046 {  endoflist_3045, dlist1_snd_532  };
-                                      Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> id_3047 {  id_3046  };
-                                      v_89798a0a125fff44cf18e3d1fbb6ddc8 let_res_3048;
+                                      Lst<dessser::gen::raql_expr::t_ext> endoflist_3045;
+                                      t0067a338c0fc91b6a811c8df70d4c87a id_3046 { endoflist_3045, dlist1_snd_532 };
+                                      Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> id_3047 {  id_3046  };
+                                      t0067a338c0fc91b6a811c8df70d4c87a let_res_3048;
                                       {
-                                        Vec<1, v_89798a0a125fff44cf18e3d1fbb6ddc8> inits_src_ref_533 { id_3047 };
+                                        Vec<1, t0067a338c0fc91b6a811c8df70d4c87a> inits_src_ref_533 { id_3047 };
                                         int32_t id_3049 { 0L };
                                         Vec<1, int32_t> id_3050 {  id_3049  };
                                         {
@@ -7016,121 +7358,129 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                             while_flag_3051 = id_3055;
                                             if (while_flag_3051) {
                                               uint8_t id_3056 { 0 };
-                                              v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3057 { inits_src_ref_533[id_3056] };
+                                              t0067a338c0fc91b6a811c8df70d4c87a id_3057 { inits_src_ref_533[id_3056] };
                                               {
-                                                v_89798a0a125fff44cf18e3d1fbb6ddc8 dlist2_535 { id_3057 };
+                                                t0067a338c0fc91b6a811c8df70d4c87a dlist2_535 { id_3057 };
                                                 {
                                                   auto dlist2_fst_536 { std::get<0>(dlist2_535) };
                                                   auto dlist2_snd_537 { std::get<1>(dlist2_535) };
                                                   uint8_t id_3058 { 0 };
-                                                  std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3059 { dessser::gen::raql_expr::of_row_binary };
-                                                  v_3501be1aaefb5944279c6a13f6d0d43f id_3060 { id_3059(dlist2_snd_537) };
-                                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_3061;
+                                                  auto fun3059 { dessser::gen::raql_expr::of_row_binary };
+                                                  t1113e6691818baaf60a775527f6cc1ac id_3060 { fun3059(dlist2_snd_537) };
+                                                  t0067a338c0fc91b6a811c8df70d4c87a letpair_res_3061;
                                                   {
                                                     auto dlist3_fst_539 { std::get<0>(id_3060) };
                                                     auto dlist3_snd_540 { std::get<1>(id_3060) };
-                                                    Lst<dessser::gen::raql_expr::t> id_3062 { dlist3_fst_539, dlist2_fst_536 };
-                                                    v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3063 {  id_3062, dlist3_snd_540  };
+                                                    Lst<dessser::gen::raql_expr::t_ext> id_3062 { dlist3_fst_539, dlist2_fst_536 };
+                                                    t0067a338c0fc91b6a811c8df70d4c87a id_3063 { id_3062, dlist3_snd_540 };
                                                     letpair_res_3061 = id_3063;
                                                   }
                                                   Void id_3064 { ((void)(inits_src_ref_533[id_3058] = letpair_res_3061), VOID) };
+                                                  (void)id_3064;
                                                 }
+                                                (void)VOID;
                                               }
+                                              (void)VOID;
                                               uint8_t id_3065 { 0 };
                                               uint8_t id_3066 { 0 };
                                               int32_t id_3067 { repeat_n_534[id_3066] };
                                               int32_t id_3068 { 1L };
                                               int32_t id_3069 { int32_t(id_3067 + id_3068) };
                                               Void id_3070 { ((void)(repeat_n_534[id_3065] = id_3069), VOID) };
+                                              (void)id_3070;
+                                              (void)id_3070;
                                             }
                                           } while (while_flag_3051);
+                                          (void)VOID;
                                         }
+                                        (void)VOID;
                                         uint8_t id_3071 { 0 };
-                                        v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3072 { inits_src_ref_533[id_3071] };
+                                        t0067a338c0fc91b6a811c8df70d4c87a id_3072 { inits_src_ref_533[id_3071] };
                                         let_res_3048 = id_3072;
                                       }
                                       letpair_res_3044 = let_res_3048;
                                     }
                                     let_res_3043 = letpair_res_3044;
                                   }
-                                  v_89798a0a125fff44cf18e3d1fbb6ddc8 letpair_res_3073;
+                                  t0067a338c0fc91b6a811c8df70d4c87a letpair_res_3073;
                                   {
                                     auto dlist4_fst_542 { std::get<0>(let_res_3043) };
                                     auto dlist4_snd_543 { std::get<1>(let_res_3043) };
-                                    v_89798a0a125fff44cf18e3d1fbb6ddc8 id_3074 {  dlist4_fst_542, dlist4_snd_543  };
+                                    t0067a338c0fc91b6a811c8df70d4c87a id_3074 { dlist4_fst_542, dlist4_snd_543 };
                                     letpair_res_3073 = id_3074;
                                   }
-                                  f63f919559f0d70225bd0da5dd9bcafc let_res_3075;
+                                  t45217dce3db5a9a49037839afd0048e8 let_res_3075;
                                   {
-                                    v_89798a0a125fff44cf18e3d1fbb6ddc8 drec_544 { letpair_res_3073 };
-                                    f63f919559f0d70225bd0da5dd9bcafc letpair_res_3076;
+                                    t0067a338c0fc91b6a811c8df70d4c87a drec_544 { letpair_res_3073 };
+                                    t45217dce3db5a9a49037839afd0048e8 letpair_res_3076;
                                     {
                                       auto drec_fst_545 { std::get<0>(drec_544) };
                                       auto drec_snd_546 { std::get<1>(drec_544) };
-                                      std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3077 { dessser::gen::raql_expr::of_row_binary };
-                                      v_3501be1aaefb5944279c6a13f6d0d43f id_3078 { id_3077(drec_snd_546) };
-                                      f63f919559f0d70225bd0da5dd9bcafc let_res_3079;
+                                      auto fun3077 { dessser::gen::raql_expr::of_row_binary };
+                                      t1113e6691818baaf60a775527f6cc1ac id_3078 { fun3077(drec_snd_546) };
+                                      t45217dce3db5a9a49037839afd0048e8 let_res_3079;
                                       {
-                                        v_3501be1aaefb5944279c6a13f6d0d43f drec_547 { id_3078 };
-                                        f63f919559f0d70225bd0da5dd9bcafc letpair_res_3080;
+                                        t1113e6691818baaf60a775527f6cc1ac drec_547 { id_3078 };
+                                        t45217dce3db5a9a49037839afd0048e8 letpair_res_3080;
                                         {
                                           auto drec_fst_548 { std::get<0>(drec_547) };
                                           auto drec_snd_549 { std::get<1>(drec_547) };
-                                          v_1d5843897434feb24d158f3793db9189 id_3081 { drec_snd_549.readU8() };
-                                          f2a48a42f9c827f487e53ee52a4e9e2f letpair_res_3082;
+                                          tb3f98ea670610d40658a618de3ec7b90 id_3081 { drec_snd_549.readU8() };
+                                          t4138de986e20d18b01e4c493dc9d5451 letpair_res_3082;
                                           {
                                             auto dbool_fst_551 { std::get<0>(id_3081) };
                                             auto dbool_snd_552 { std::get<1>(id_3081) };
                                             uint8_t id_3083 { 0 };
                                             bool id_3084 { bool(dbool_fst_551 == id_3083) };
                                             bool id_3085 { ! id_3084 };
-                                            f2a48a42f9c827f487e53ee52a4e9e2f id_3086 {  id_3085, dbool_snd_552  };
+                                            t4138de986e20d18b01e4c493dc9d5451 id_3086 { id_3085, dbool_snd_552 };
                                             letpair_res_3082 = id_3086;
                                           }
-                                          f63f919559f0d70225bd0da5dd9bcafc let_res_3087;
+                                          t45217dce3db5a9a49037839afd0048e8 let_res_3087;
                                           {
-                                            f2a48a42f9c827f487e53ee52a4e9e2f drec_553 { letpair_res_3082 };
-                                            f63f919559f0d70225bd0da5dd9bcafc letpair_res_3088;
+                                            t4138de986e20d18b01e4c493dc9d5451 drec_553 { letpair_res_3082 };
+                                            t45217dce3db5a9a49037839afd0048e8 letpair_res_3088;
                                             {
                                               auto drec_fst_554 { std::get<0>(drec_553) };
                                               auto drec_snd_555 { std::get<1>(drec_553) };
-                                              std::function<v_68e5da68a9e4906037dc9368c64e5eb0(Pointer)> id_3089 { dessser::gen::raql_flush_method::of_row_binary };
-                                              v_68e5da68a9e4906037dc9368c64e5eb0 id_3090 { id_3089(drec_snd_555) };
-                                              f63f919559f0d70225bd0da5dd9bcafc let_res_3091;
+                                              auto fun3089 { dessser::gen::raql_flush_method::of_row_binary };
+                                              t01507690afb11d3b148862b712bad5a5 id_3090 { fun3089(drec_snd_555) };
+                                              t45217dce3db5a9a49037839afd0048e8 let_res_3091;
                                               {
-                                                v_68e5da68a9e4906037dc9368c64e5eb0 drec_556 { id_3090 };
-                                                f63f919559f0d70225bd0da5dd9bcafc letpair_res_3092;
+                                                t01507690afb11d3b148862b712bad5a5 drec_556 { id_3090 };
+                                                t45217dce3db5a9a49037839afd0048e8 letpair_res_3092;
                                                 {
                                                   auto drec_fst_557 { std::get<0>(drec_556) };
                                                   auto drec_snd_558 { std::get<1>(drec_556) };
                                                   uint32_t id_3093 { 0U };
                                                   Vec<1, uint32_t> id_3094 {  id_3093  };
-                                                  ac0fbd05039f742d2f1d9ac182e392ab let_res_3095;
+                                                  t405eb186408556fed8f2c41523c07d13 let_res_3095;
                                                   {
                                                     Vec<1, uint32_t> leb_ref_559 { id_3094 };
                                                     uint8_t id_3096 { 0 };
                                                     Vec<1, uint8_t> id_3097 {  id_3096  };
-                                                    ac0fbd05039f742d2f1d9ac182e392ab let_res_3098;
+                                                    t405eb186408556fed8f2c41523c07d13 let_res_3098;
                                                     {
                                                       Vec<1, uint8_t> shft_ref_560 { id_3097 };
                                                       Vec<1, Pointer> id_3099 {  drec_snd_558  };
-                                                      ac0fbd05039f742d2f1d9ac182e392ab let_res_3100;
+                                                      t405eb186408556fed8f2c41523c07d13 let_res_3100;
                                                       {
                                                         Vec<1, Pointer> p_ref_561 { id_3099 };
                                                         bool while_flag_3101 { true };
                                                         do {
                                                           uint8_t id_3102 { 0 };
                                                           Pointer id_3103 { p_ref_561[id_3102] };
-                                                          v_1d5843897434feb24d158f3793db9189 id_3104 { id_3103.readU8() };
+                                                          tb3f98ea670610d40658a618de3ec7b90 id_3104 { id_3103.readU8() };
                                                           bool let_res_3105;
                                                           {
-                                                            v_1d5843897434feb24d158f3793db9189 leb128_562 { id_3104 };
+                                                            tb3f98ea670610d40658a618de3ec7b90 leb128_562 { id_3104 };
                                                             bool letpair_res_3106;
                                                             {
                                                               auto leb128_fst_563 { std::get<0>(leb128_562) };
                                                               auto leb128_snd_564 { std::get<1>(leb128_562) };
                                                               uint8_t id_3107 { 0 };
                                                               Void id_3108 { ((void)(p_ref_561[id_3107] = leb128_snd_564), VOID) };
+                                                              (void)id_3108;
                                                               uint8_t id_3109 { 0 };
                                                               uint8_t id_3110 { 127 };
                                                               uint8_t id_3111 { uint8_t(leb128_fst_563 & id_3110) };
@@ -7142,12 +7492,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                               uint32_t id_3117 { leb_ref_559[id_3116] };
                                                               uint32_t id_3118 { uint32_t(id_3115 | id_3117) };
                                                               Void id_3119 { ((void)(leb_ref_559[id_3109] = id_3118), VOID) };
+                                                              (void)id_3119;
                                                               uint8_t id_3120 { 0 };
                                                               uint8_t id_3121 { 0 };
                                                               uint8_t id_3122 { shft_ref_560[id_3121] };
                                                               uint8_t id_3123 { 7 };
                                                               uint8_t id_3124 { uint8_t(id_3122 + id_3123) };
                                                               Void id_3125 { ((void)(shft_ref_560[id_3120] = id_3124), VOID) };
+                                                              (void)id_3125;
                                                               uint8_t id_3126 { 128 };
                                                               bool id_3127 { bool(leb128_fst_563 >= id_3126) };
                                                               letpair_res_3106 = id_3127;
@@ -7156,32 +7508,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                           }
                                                           while_flag_3101 = let_res_3105;
                                                           if (while_flag_3101) {
+                                                            (void)VOID;
                                                           }
                                                         } while (while_flag_3101);
+                                                        (void)VOID;
                                                         uint8_t id_3128 { 0 };
                                                         uint32_t id_3129 { leb_ref_559[id_3128] };
                                                         uint8_t id_3130 { 0 };
                                                         Pointer id_3131 { p_ref_561[id_3130] };
-                                                        ac0fbd05039f742d2f1d9ac182e392ab id_3132 {  id_3129, id_3131  };
+                                                        t405eb186408556fed8f2c41523c07d13 id_3132 { id_3129, id_3131 };
                                                         let_res_3100 = id_3132;
                                                       }
                                                       let_res_3098 = let_res_3100;
                                                     }
                                                     let_res_3095 = let_res_3098;
                                                   }
-                                                  v_247379ec39e2989b4b695cd1aea84f44 let_res_3133;
+                                                  t5c362d56d9dbfb12c2e68c4ed4a25c50 let_res_3133;
                                                   {
-                                                    ac0fbd05039f742d2f1d9ac182e392ab dlist1_568 { let_res_3095 };
-                                                    v_247379ec39e2989b4b695cd1aea84f44 letpair_res_3134;
+                                                    t405eb186408556fed8f2c41523c07d13 dlist1_568 { let_res_3095 };
+                                                    t5c362d56d9dbfb12c2e68c4ed4a25c50 letpair_res_3134;
                                                     {
                                                       auto dlist1_fst_569 { std::get<0>(dlist1_568) };
                                                       auto dlist1_snd_570 { std::get<1>(dlist1_568) };
-                                                      Lst<ee20956156b3a0bf3ed4185051a85c84> endoflist_3135;
-                                                      v_247379ec39e2989b4b695cd1aea84f44 id_3136 {  endoflist_3135, dlist1_snd_570  };
-                                                      Vec<1, v_247379ec39e2989b4b695cd1aea84f44> id_3137 {  id_3136  };
-                                                      v_247379ec39e2989b4b695cd1aea84f44 let_res_3138;
+                                                      Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> endoflist_3135;
+                                                      t5c362d56d9dbfb12c2e68c4ed4a25c50 id_3136 { endoflist_3135, dlist1_snd_570 };
+                                                      Vec<1, t5c362d56d9dbfb12c2e68c4ed4a25c50> id_3137 {  id_3136  };
+                                                      t5c362d56d9dbfb12c2e68c4ed4a25c50 let_res_3138;
                                                       {
-                                                        Vec<1, v_247379ec39e2989b4b695cd1aea84f44> inits_src_ref_571 { id_3137 };
+                                                        Vec<1, t5c362d56d9dbfb12c2e68c4ed4a25c50> inits_src_ref_571 { id_3137 };
                                                         int32_t id_3139 { 0L };
                                                         Vec<1, int32_t> id_3140 {  id_3139  };
                                                         {
@@ -7195,87 +7549,89 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                             while_flag_3141 = id_3145;
                                                             if (while_flag_3141) {
                                                               uint8_t id_3146 { 0 };
-                                                              v_247379ec39e2989b4b695cd1aea84f44 id_3147 { inits_src_ref_571[id_3146] };
+                                                              t5c362d56d9dbfb12c2e68c4ed4a25c50 id_3147 { inits_src_ref_571[id_3146] };
                                                               {
-                                                                v_247379ec39e2989b4b695cd1aea84f44 dlist2_573 { id_3147 };
+                                                                t5c362d56d9dbfb12c2e68c4ed4a25c50 dlist2_573 { id_3147 };
                                                                 {
                                                                   auto dlist2_fst_574 { std::get<0>(dlist2_573) };
                                                                   auto dlist2_snd_575 { std::get<1>(dlist2_573) };
                                                                   uint8_t id_3148 { 0 };
-                                                                  v_362f9d9108a6902af48b6c83d5377ea1 id_3149 { dlist2_snd_575.readU16Le() };
-                                                                  v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_3150;
+                                                                  t22a32080ad88ab548b80077a17b7dd46 id_3149 { dlist2_snd_575.readU16Le() };
+                                                                  t22a32080ad88ab548b80077a17b7dd46 letpair_res_3150;
                                                                   {
                                                                     auto du16_fst_577 { std::get<0>(id_3149) };
                                                                     auto du16_snd_578 { std::get<1>(id_3149) };
-                                                                    v_362f9d9108a6902af48b6c83d5377ea1 id_3151 {  du16_fst_577, du16_snd_578  };
+                                                                    t22a32080ad88ab548b80077a17b7dd46 id_3151 { du16_fst_577, du16_snd_578 };
                                                                     letpair_res_3150 = id_3151;
                                                                   }
-                                                                  a49dc6d89baceade4654099f663625ec let_res_3152;
+                                                                  t2a2e361c672135221e41ae1e54a712a2 let_res_3152;
                                                                   {
-                                                                    v_362f9d9108a6902af48b6c83d5377ea1 dsum1_582 { letpair_res_3150 };
-                                                                    a49dc6d89baceade4654099f663625ec letpair_res_3153;
+                                                                    t22a32080ad88ab548b80077a17b7dd46 dsum1_582 { letpair_res_3150 };
+                                                                    t2a2e361c672135221e41ae1e54a712a2 letpair_res_3153;
                                                                     {
                                                                       auto dsum1_fst_583 { std::get<0>(dsum1_582) };
                                                                       auto dsum1_snd_584 { std::get<1>(dsum1_582) };
                                                                       uint16_t id_3154 { 0 };
                                                                       bool id_3155 { bool(id_3154 == dsum1_fst_583) };
-                                                                      a49dc6d89baceade4654099f663625ec choose_res_3156;
+                                                                      t2a2e361c672135221e41ae1e54a712a2 choose_res_3156;
                                                                       if (id_3155) {
-                                                                        v_362f9d9108a6902af48b6c83d5377ea1 id_3157 { dsum1_snd_584.readU16Le() };
-                                                                        v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_3158;
+                                                                        t22a32080ad88ab548b80077a17b7dd46 id_3157 { dsum1_snd_584.readU16Le() };
+                                                                        t22a32080ad88ab548b80077a17b7dd46 letpair_res_3158;
                                                                         {
                                                                           auto du16_fst_589 { std::get<0>(id_3157) };
                                                                           auto du16_snd_590 { std::get<1>(id_3157) };
-                                                                          v_362f9d9108a6902af48b6c83d5377ea1 id_3159 {  du16_fst_589, du16_snd_590  };
+                                                                          t22a32080ad88ab548b80077a17b7dd46 id_3159 { du16_fst_589, du16_snd_590 };
                                                                           letpair_res_3158 = id_3159;
                                                                         }
-                                                                        v_2e906d20bdc8e493b443243209e3e3eb let_res_3160;
+                                                                        tf0d49dee148c406cd202993cce2a4a2d let_res_3160;
                                                                         {
-                                                                          v_362f9d9108a6902af48b6c83d5377ea1 dsum1_594 { letpair_res_3158 };
-                                                                          v_2e906d20bdc8e493b443243209e3e3eb letpair_res_3161;
+                                                                          t22a32080ad88ab548b80077a17b7dd46 dsum1_594 { letpair_res_3158 };
+                                                                          tf0d49dee148c406cd202993cce2a4a2d letpair_res_3161;
                                                                           {
                                                                             auto dsum1_fst_595 { std::get<0>(dsum1_594) };
                                                                             auto dsum1_snd_596 { std::get<1>(dsum1_594) };
                                                                             uint16_t id_3162 { 0 };
                                                                             bool id_3163 { bool(id_3162 == dsum1_fst_595) };
-                                                                            v_2e906d20bdc8e493b443243209e3e3eb choose_res_3164;
+                                                                            tf0d49dee148c406cd202993cce2a4a2d choose_res_3164;
                                                                             if (id_3163) {
-                                                                              v_3cd54ea1158497be65dc13cca6d4b046 id_3165 { std::in_place_index<0>, VOID };
-                                                                              v_2e906d20bdc8e493b443243209e3e3eb id_3166 {  id_3165, dsum1_snd_596  };
+                                                                              (void)VOID;
+                                                                              te10a95f610a64bfb7ccea542c54f0a25 id_3165 { std::in_place_index<0>, VOID };
+                                                                              tf0d49dee148c406cd202993cce2a4a2d id_3166 { id_3165, dsum1_snd_596 };
                                                                               choose_res_3164 = id_3166;
                                                                             } else {
                                                                               uint16_t id_3167 { 1 };
                                                                               bool id_3168 { bool(id_3167 == dsum1_fst_595) };
-                                                                              v_2e906d20bdc8e493b443243209e3e3eb choose_res_3169;
+                                                                              tf0d49dee148c406cd202993cce2a4a2d choose_res_3169;
                                                                               if (id_3168) {
                                                                                 uint32_t id_3170 { 0U };
                                                                                 Vec<1, uint32_t> id_3171 {  id_3170  };
-                                                                                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3172;
+                                                                                t8beb80162423aee37bd383e9b6834c9c let_res_3172;
                                                                                 {
                                                                                   Vec<1, uint32_t> leb_ref_600 { id_3171 };
                                                                                   uint8_t id_3173 { 0 };
                                                                                   Vec<1, uint8_t> id_3174 {  id_3173  };
-                                                                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3175;
+                                                                                  t8beb80162423aee37bd383e9b6834c9c let_res_3175;
                                                                                   {
                                                                                     Vec<1, uint8_t> shft_ref_601 { id_3174 };
                                                                                     Vec<1, Pointer> id_3176 {  dsum1_snd_596  };
-                                                                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3177;
+                                                                                    t8beb80162423aee37bd383e9b6834c9c let_res_3177;
                                                                                     {
                                                                                       Vec<1, Pointer> p_ref_602 { id_3176 };
                                                                                       bool while_flag_3178 { true };
                                                                                       do {
                                                                                         uint8_t id_3179 { 0 };
                                                                                         Pointer id_3180 { p_ref_602[id_3179] };
-                                                                                        v_1d5843897434feb24d158f3793db9189 id_3181 { id_3180.readU8() };
+                                                                                        tb3f98ea670610d40658a618de3ec7b90 id_3181 { id_3180.readU8() };
                                                                                         bool let_res_3182;
                                                                                         {
-                                                                                          v_1d5843897434feb24d158f3793db9189 leb128_603 { id_3181 };
+                                                                                          tb3f98ea670610d40658a618de3ec7b90 leb128_603 { id_3181 };
                                                                                           bool letpair_res_3183;
                                                                                           {
                                                                                             auto leb128_fst_604 { std::get<0>(leb128_603) };
                                                                                             auto leb128_snd_605 { std::get<1>(leb128_603) };
                                                                                             uint8_t id_3184 { 0 };
                                                                                             Void id_3185 { ((void)(p_ref_602[id_3184] = leb128_snd_605), VOID) };
+                                                                                            (void)id_3185;
                                                                                             uint8_t id_3186 { 0 };
                                                                                             uint8_t id_3187 { 127 };
                                                                                             uint8_t id_3188 { uint8_t(leb128_fst_604 & id_3187) };
@@ -7287,12 +7643,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                                             uint32_t id_3194 { leb_ref_600[id_3193] };
                                                                                             uint32_t id_3195 { uint32_t(id_3192 | id_3194) };
                                                                                             Void id_3196 { ((void)(leb_ref_600[id_3186] = id_3195), VOID) };
+                                                                                            (void)id_3196;
                                                                                             uint8_t id_3197 { 0 };
                                                                                             uint8_t id_3198 { 0 };
                                                                                             uint8_t id_3199 { shft_ref_601[id_3198] };
                                                                                             uint8_t id_3200 { 7 };
                                                                                             uint8_t id_3201 { uint8_t(id_3199 + id_3200) };
                                                                                             Void id_3202 { ((void)(shft_ref_601[id_3197] = id_3201), VOID) };
+                                                                                            (void)id_3202;
                                                                                             uint8_t id_3203 { 128 };
                                                                                             bool id_3204 { bool(leb128_fst_604 >= id_3203) };
                                                                                             letpair_res_3183 = id_3204;
@@ -7301,35 +7659,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                                         }
                                                                                         while_flag_3178 = let_res_3182;
                                                                                         if (while_flag_3178) {
+                                                                                          (void)VOID;
                                                                                         }
                                                                                       } while (while_flag_3178);
+                                                                                      (void)VOID;
                                                                                       uint8_t id_3205 { 0 };
                                                                                       uint32_t id_3206 { leb_ref_600[id_3205] };
                                                                                       Size id_3207 { Size(id_3206) };
                                                                                       uint8_t id_3208 { 0 };
                                                                                       Pointer id_3209 { p_ref_602[id_3208] };
-                                                                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 id_3210 {  id_3207, id_3209  };
+                                                                                      t8beb80162423aee37bd383e9b6834c9c id_3210 { id_3207, id_3209 };
                                                                                       let_res_3177 = id_3210;
                                                                                     }
                                                                                     let_res_3175 = let_res_3177;
                                                                                   }
                                                                                   let_res_3172 = let_res_3175;
                                                                                 }
-                                                                                v_2e906d20bdc8e493b443243209e3e3eb let_res_3211;
+                                                                                tf0d49dee148c406cd202993cce2a4a2d let_res_3211;
                                                                                 {
-                                                                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_606 { let_res_3172 };
-                                                                                  v_2e906d20bdc8e493b443243209e3e3eb letpair_res_3212;
+                                                                                  t8beb80162423aee37bd383e9b6834c9c dstring1_606 { let_res_3172 };
+                                                                                  tf0d49dee148c406cd202993cce2a4a2d letpair_res_3212;
                                                                                   {
                                                                                     auto dstring1_fst_607 { std::get<0>(dstring1_606) };
                                                                                     auto dstring1_snd_608 { std::get<1>(dstring1_606) };
-                                                                                    f921d1e0a170c3c04148c21704db9c45 id_3213 { dstring1_snd_608.readBytes(dstring1_fst_607) };
-                                                                                    v_2e906d20bdc8e493b443243209e3e3eb letpair_res_3214;
+                                                                                    t188345aa49abd0cb47ff73fedc219f08 id_3213 { dstring1_snd_608.readBytes(dstring1_fst_607) };
+                                                                                    tf0d49dee148c406cd202993cce2a4a2d letpair_res_3214;
                                                                                     {
                                                                                       auto dstring2_fst_610 { std::get<0>(id_3213) };
                                                                                       auto dstring2_snd_611 { std::get<1>(id_3213) };
                                                                                       std::string id_3215 { dstring2_fst_610.toString() };
-                                                                                      v_3cd54ea1158497be65dc13cca6d4b046 id_3216 { std::in_place_index<1>, id_3215 };
-                                                                                      v_2e906d20bdc8e493b443243209e3e3eb id_3217 {  id_3216, dstring2_snd_611  };
+                                                                                      te10a95f610a64bfb7ccea542c54f0a25 id_3216 { std::in_place_index<1>, id_3215 };
+                                                                                      tf0d49dee148c406cd202993cce2a4a2d id_3217 { id_3216, dstring2_snd_611 };
                                                                                       letpair_res_3214 = id_3217;
                                                                                     }
                                                                                     letpair_res_3212 = letpair_res_3214;
@@ -7341,8 +7701,10 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                                 uint16_t id_3218 { 2 };
                                                                                 bool id_3219 { bool(dsum1_fst_595 == id_3218) };
                                                                                 Void id_3220 { ((void)(assert(id_3219)), VOID) };
-                                                                                v_3cd54ea1158497be65dc13cca6d4b046 id_3221 { std::in_place_index<2>, VOID };
-                                                                                v_2e906d20bdc8e493b443243209e3e3eb id_3222 {  id_3221, dsum1_snd_596  };
+                                                                                (void)id_3220;
+                                                                                (void)VOID;
+                                                                                te10a95f610a64bfb7ccea542c54f0a25 id_3221 { std::in_place_index<2>, VOID };
+                                                                                tf0d49dee148c406cd202993cce2a4a2d id_3222 { id_3221, dsum1_snd_596 };
                                                                                 choose_res_3169 = id_3222;
                                                                               }
                                                                               choose_res_3164 = choose_res_3169;
@@ -7351,10 +7713,10 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                           }
                                                                           let_res_3160 = letpair_res_3161;
                                                                         }
-                                                                        a49dc6d89baceade4654099f663625ec let_res_3223;
+                                                                        t2a2e361c672135221e41ae1e54a712a2 let_res_3223;
                                                                         {
-                                                                          v_2e906d20bdc8e493b443243209e3e3eb dtup_618 { let_res_3160 };
-                                                                          a49dc6d89baceade4654099f663625ec letpair_res_3224;
+                                                                          tf0d49dee148c406cd202993cce2a4a2d dtup_618 { let_res_3160 };
+                                                                          t2a2e361c672135221e41ae1e54a712a2 letpair_res_3224;
                                                                           {
                                                                             auto dtup_fst_619 { std::get<0>(dtup_618) };
                                                                             auto dtup_snd_620 { std::get<1>(dtup_618) };
@@ -7362,44 +7724,45 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                             uint8_t id_3226 { dtup_snd_620.peekU8(id_3225) };
                                                                             uint8_t id_3227 { 1 };
                                                                             bool id_3228 { bool(id_3226 == id_3227) };
-                                                                            fe18be5220bdca71492df7686dadc3c2 choose_res_3229;
+                                                                            t3fbff88eef4e4c8bc42b06e5ad07ea51 choose_res_3229;
                                                                             if (id_3228) {
                                                                               std::optional<std::string> id_3230 { std::nullopt };
                                                                               Size id_3231 { 1UL };
                                                                               Pointer id_3232 { dtup_snd_620.skip(id_3231) };
-                                                                              fe18be5220bdca71492df7686dadc3c2 id_3233 {  id_3230, id_3232  };
+                                                                              t3fbff88eef4e4c8bc42b06e5ad07ea51 id_3233 { id_3230, id_3232 };
                                                                               choose_res_3229 = id_3233;
                                                                             } else {
                                                                               uint32_t id_3234 { 0U };
                                                                               Vec<1, uint32_t> id_3235 {  id_3234  };
-                                                                              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3236;
+                                                                              t8beb80162423aee37bd383e9b6834c9c let_res_3236;
                                                                               {
                                                                                 Vec<1, uint32_t> leb_ref_621 { id_3235 };
                                                                                 uint8_t id_3237 { 0 };
                                                                                 Vec<1, uint8_t> id_3238 {  id_3237  };
-                                                                                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3239;
+                                                                                t8beb80162423aee37bd383e9b6834c9c let_res_3239;
                                                                                 {
                                                                                   Vec<1, uint8_t> shft_ref_622 { id_3238 };
                                                                                   Size id_3240 { 1UL };
                                                                                   Pointer id_3241 { dtup_snd_620.skip(id_3240) };
                                                                                   Vec<1, Pointer> id_3242 {  id_3241  };
-                                                                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3243;
+                                                                                  t8beb80162423aee37bd383e9b6834c9c let_res_3243;
                                                                                   {
                                                                                     Vec<1, Pointer> p_ref_623 { id_3242 };
                                                                                     bool while_flag_3244 { true };
                                                                                     do {
                                                                                       uint8_t id_3245 { 0 };
                                                                                       Pointer id_3246 { p_ref_623[id_3245] };
-                                                                                      v_1d5843897434feb24d158f3793db9189 id_3247 { id_3246.readU8() };
+                                                                                      tb3f98ea670610d40658a618de3ec7b90 id_3247 { id_3246.readU8() };
                                                                                       bool let_res_3248;
                                                                                       {
-                                                                                        v_1d5843897434feb24d158f3793db9189 leb128_624 { id_3247 };
+                                                                                        tb3f98ea670610d40658a618de3ec7b90 leb128_624 { id_3247 };
                                                                                         bool letpair_res_3249;
                                                                                         {
                                                                                           auto leb128_fst_625 { std::get<0>(leb128_624) };
                                                                                           auto leb128_snd_626 { std::get<1>(leb128_624) };
                                                                                           uint8_t id_3250 { 0 };
                                                                                           Void id_3251 { ((void)(p_ref_623[id_3250] = leb128_snd_626), VOID) };
+                                                                                          (void)id_3251;
                                                                                           uint8_t id_3252 { 0 };
                                                                                           uint8_t id_3253 { 127 };
                                                                                           uint8_t id_3254 { uint8_t(leb128_fst_625 & id_3253) };
@@ -7411,12 +7774,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                                           uint32_t id_3260 { leb_ref_621[id_3259] };
                                                                                           uint32_t id_3261 { uint32_t(id_3258 | id_3260) };
                                                                                           Void id_3262 { ((void)(leb_ref_621[id_3252] = id_3261), VOID) };
+                                                                                          (void)id_3262;
                                                                                           uint8_t id_3263 { 0 };
                                                                                           uint8_t id_3264 { 0 };
                                                                                           uint8_t id_3265 { shft_ref_622[id_3264] };
                                                                                           uint8_t id_3266 { 7 };
                                                                                           uint8_t id_3267 { uint8_t(id_3265 + id_3266) };
                                                                                           Void id_3268 { ((void)(shft_ref_622[id_3263] = id_3267), VOID) };
+                                                                                          (void)id_3268;
                                                                                           uint8_t id_3269 { 128 };
                                                                                           bool id_3270 { bool(leb128_fst_625 >= id_3269) };
                                                                                           letpair_res_3249 = id_3270;
@@ -7425,35 +7790,37 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                                       }
                                                                                       while_flag_3244 = let_res_3248;
                                                                                       if (while_flag_3244) {
+                                                                                        (void)VOID;
                                                                                       }
                                                                                     } while (while_flag_3244);
+                                                                                    (void)VOID;
                                                                                     uint8_t id_3271 { 0 };
                                                                                     uint32_t id_3272 { leb_ref_621[id_3271] };
                                                                                     Size id_3273 { Size(id_3272) };
                                                                                     uint8_t id_3274 { 0 };
                                                                                     Pointer id_3275 { p_ref_623[id_3274] };
-                                                                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 id_3276 {  id_3273, id_3275  };
+                                                                                    t8beb80162423aee37bd383e9b6834c9c id_3276 { id_3273, id_3275 };
                                                                                     let_res_3243 = id_3276;
                                                                                   }
                                                                                   let_res_3239 = let_res_3243;
                                                                                 }
                                                                                 let_res_3236 = let_res_3239;
                                                                               }
-                                                                              fe18be5220bdca71492df7686dadc3c2 let_res_3277;
+                                                                              t3fbff88eef4e4c8bc42b06e5ad07ea51 let_res_3277;
                                                                               {
-                                                                                v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_627 { let_res_3236 };
-                                                                                fe18be5220bdca71492df7686dadc3c2 letpair_res_3278;
+                                                                                t8beb80162423aee37bd383e9b6834c9c dstring1_627 { let_res_3236 };
+                                                                                t3fbff88eef4e4c8bc42b06e5ad07ea51 letpair_res_3278;
                                                                                 {
                                                                                   auto dstring1_fst_628 { std::get<0>(dstring1_627) };
                                                                                   auto dstring1_snd_629 { std::get<1>(dstring1_627) };
-                                                                                  f921d1e0a170c3c04148c21704db9c45 id_3279 { dstring1_snd_629.readBytes(dstring1_fst_628) };
-                                                                                  fe18be5220bdca71492df7686dadc3c2 letpair_res_3280;
+                                                                                  t188345aa49abd0cb47ff73fedc219f08 id_3279 { dstring1_snd_629.readBytes(dstring1_fst_628) };
+                                                                                  t3fbff88eef4e4c8bc42b06e5ad07ea51 letpair_res_3280;
                                                                                   {
                                                                                     auto dstring2_fst_631 { std::get<0>(id_3279) };
                                                                                     auto dstring2_snd_632 { std::get<1>(id_3279) };
                                                                                     std::string id_3281 { dstring2_fst_631.toString() };
                                                                                     std::optional<std::string> id_3282 { id_3281 };
-                                                                                    fe18be5220bdca71492df7686dadc3c2 id_3283 {  id_3282, dstring2_snd_632  };
+                                                                                    t3fbff88eef4e4c8bc42b06e5ad07ea51 id_3283 { id_3282, dstring2_snd_632 };
                                                                                     letpair_res_3280 = id_3283;
                                                                                   }
                                                                                   letpair_res_3278 = letpair_res_3280;
@@ -7462,22 +7829,22 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                               }
                                                                               choose_res_3229 = let_res_3277;
                                                                             }
-                                                                            a49dc6d89baceade4654099f663625ec let_res_3284;
+                                                                            t2a2e361c672135221e41ae1e54a712a2 let_res_3284;
                                                                             {
-                                                                              fe18be5220bdca71492df7686dadc3c2 dtup_636 { choose_res_3229 };
-                                                                              a49dc6d89baceade4654099f663625ec letpair_res_3285;
+                                                                              t3fbff88eef4e4c8bc42b06e5ad07ea51 dtup_636 { choose_res_3229 };
+                                                                              t2a2e361c672135221e41ae1e54a712a2 letpair_res_3285;
                                                                               {
                                                                                 auto dtup_fst_637 { std::get<0>(dtup_636) };
                                                                                 auto dtup_snd_638 { std::get<1>(dtup_636) };
-                                                                                std::function<v_382b80697fdeb5158d298be4e9fcf65e(Pointer)> id_3286 { dessser::gen::function_name::of_row_binary };
-                                                                                v_382b80697fdeb5158d298be4e9fcf65e id_3287 { id_3286(dtup_snd_638) };
-                                                                                a49dc6d89baceade4654099f663625ec letpair_res_3288;
+                                                                                auto fun3286 { dessser::gen::function_name::of_row_binary };
+                                                                                tc7d3fcfd06c0f02b3732e1754a18402b id_3287 { fun3286(dtup_snd_638) };
+                                                                                t2a2e361c672135221e41ae1e54a712a2 letpair_res_3288;
                                                                                 {
                                                                                   auto dtup_fst_640 { std::get<0>(id_3287) };
                                                                                   auto dtup_snd_641 { std::get<1>(id_3287) };
-                                                                                  v_9054563dd112d3f48469dddea6b8194e id_3289 {  dtup_fst_619, dtup_fst_637, dtup_fst_640  };
-                                                                                  ee20956156b3a0bf3ed4185051a85c84 id_3290 { std::in_place_index<0>, id_3289 };
-                                                                                  a49dc6d89baceade4654099f663625ec id_3291 {  id_3290, dtup_snd_641  };
+                                                                                  t9b471a57e45588f3795bf9ca91c31ff6 id_3289 { dtup_fst_619, dtup_fst_637, dtup_fst_640 };
+                                                                                  t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_3290 { std::in_place_index<0>, id_3289 };
+                                                                                  t2a2e361c672135221e41ae1e54a712a2 id_3291 { id_3290, dtup_snd_641 };
                                                                                   letpair_res_3288 = id_3291;
                                                                                 }
                                                                                 letpair_res_3285 = letpair_res_3288;
@@ -7493,13 +7860,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                         uint16_t id_3292 { 1 };
                                                                         bool id_3293 { bool(dsum1_fst_583 == id_3292) };
                                                                         Void id_3294 { ((void)(assert(id_3293)), VOID) };
-                                                                        f63f919559f0d70225bd0da5dd9bcafc id_3295 { fun2628(dsum1_snd_584) };
-                                                                        a49dc6d89baceade4654099f663625ec letpair_res_3296;
+                                                                        (void)id_3294;
+                                                                        t45217dce3db5a9a49037839afd0048e8 id_3295 { fun2628(dsum1_snd_584) };
+                                                                        t2a2e361c672135221e41ae1e54a712a2 letpair_res_3296;
                                                                         {
                                                                           auto dsum2_fst_586 { std::get<0>(id_3295) };
                                                                           auto dsum2_snd_587 { std::get<1>(id_3295) };
-                                                                          ee20956156b3a0bf3ed4185051a85c84 id_3297 { std::in_place_index<1>, dsum2_fst_586 };
-                                                                          a49dc6d89baceade4654099f663625ec id_3298 {  id_3297, dsum2_snd_587  };
+                                                                          t7c6bbe37b66fb3a66c00c4bd1bfc4369 id_3297 { std::in_place_index<1>, dsum2_fst_586 };
+                                                                          t2a2e361c672135221e41ae1e54a712a2 id_3298 { id_3297, dsum2_snd_587 };
                                                                           letpair_res_3296 = id_3298;
                                                                         }
                                                                         choose_res_3156 = letpair_res_3296;
@@ -7508,45 +7876,52 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                     }
                                                                     let_res_3152 = letpair_res_3153;
                                                                   }
-                                                                  v_247379ec39e2989b4b695cd1aea84f44 letpair_res_3299;
+                                                                  t5c362d56d9dbfb12c2e68c4ed4a25c50 letpair_res_3299;
                                                                   {
                                                                     auto dlist3_fst_646 { std::get<0>(let_res_3152) };
                                                                     auto dlist3_snd_647 { std::get<1>(let_res_3152) };
-                                                                    Lst<ee20956156b3a0bf3ed4185051a85c84> id_3300 { dlist3_fst_646, dlist2_fst_574 };
-                                                                    v_247379ec39e2989b4b695cd1aea84f44 id_3301 {  id_3300, dlist3_snd_647  };
+                                                                    Lst<t7c6bbe37b66fb3a66c00c4bd1bfc4369> id_3300 { dlist3_fst_646, dlist2_fst_574 };
+                                                                    t5c362d56d9dbfb12c2e68c4ed4a25c50 id_3301 { id_3300, dlist3_snd_647 };
                                                                     letpair_res_3299 = id_3301;
                                                                   }
                                                                   Void id_3302 { ((void)(inits_src_ref_571[id_3148] = letpair_res_3299), VOID) };
+                                                                  (void)id_3302;
                                                                 }
+                                                                (void)VOID;
                                                               }
+                                                              (void)VOID;
                                                               uint8_t id_3303 { 0 };
                                                               uint8_t id_3304 { 0 };
                                                               int32_t id_3305 { repeat_n_572[id_3304] };
                                                               int32_t id_3306 { 1L };
                                                               int32_t id_3307 { int32_t(id_3305 + id_3306) };
                                                               Void id_3308 { ((void)(repeat_n_572[id_3303] = id_3307), VOID) };
+                                                              (void)id_3308;
+                                                              (void)id_3308;
                                                             }
                                                           } while (while_flag_3141);
+                                                          (void)VOID;
                                                         }
+                                                        (void)VOID;
                                                         uint8_t id_3309 { 0 };
-                                                        v_247379ec39e2989b4b695cd1aea84f44 id_3310 { inits_src_ref_571[id_3309] };
+                                                        t5c362d56d9dbfb12c2e68c4ed4a25c50 id_3310 { inits_src_ref_571[id_3309] };
                                                         let_res_3138 = id_3310;
                                                       }
                                                       letpair_res_3134 = let_res_3138;
                                                     }
                                                     let_res_3133 = letpair_res_3134;
                                                   }
-                                                  v_247379ec39e2989b4b695cd1aea84f44 letpair_res_3311;
+                                                  t5c362d56d9dbfb12c2e68c4ed4a25c50 letpair_res_3311;
                                                   {
                                                     auto dlist4_fst_649 { std::get<0>(let_res_3133) };
                                                     auto dlist4_snd_650 { std::get<1>(let_res_3133) };
-                                                    v_247379ec39e2989b4b695cd1aea84f44 id_3312 {  dlist4_fst_649, dlist4_snd_650  };
+                                                    t5c362d56d9dbfb12c2e68c4ed4a25c50 id_3312 { dlist4_fst_649, dlist4_snd_650 };
                                                     letpair_res_3311 = id_3312;
                                                   }
-                                                  f63f919559f0d70225bd0da5dd9bcafc let_res_3313;
+                                                  t45217dce3db5a9a49037839afd0048e8 let_res_3313;
                                                   {
-                                                    v_247379ec39e2989b4b695cd1aea84f44 drec_651 { letpair_res_3311 };
-                                                    f63f919559f0d70225bd0da5dd9bcafc letpair_res_3314;
+                                                    t5c362d56d9dbfb12c2e68c4ed4a25c50 drec_651 { letpair_res_3311 };
+                                                    t45217dce3db5a9a49037839afd0048e8 letpair_res_3314;
                                                     {
                                                       auto drec_fst_652 { std::get<0>(drec_651) };
                                                       auto drec_snd_653 { std::get<1>(drec_651) };
@@ -7554,63 +7929,64 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                       uint8_t id_3316 { drec_snd_653.peekU8(id_3315) };
                                                       uint8_t id_3317 { 1 };
                                                       bool id_3318 { bool(id_3316 == id_3317) };
-                                                      b8de1a5ea94913283815cebff1d39083 choose_res_3319;
+                                                      tf1063a6af8c1fb72f0e0ee089d43d040 choose_res_3319;
                                                       if (id_3318) {
-                                                        std::optional<dessser::gen::raql_expr::t> id_3320 { std::nullopt };
+                                                        std::optional<dessser::gen::raql_expr::t_ext> id_3320 { std::nullopt };
                                                         Size id_3321 { 1UL };
                                                         Pointer id_3322 { drec_snd_653.skip(id_3321) };
-                                                        b8de1a5ea94913283815cebff1d39083 id_3323 {  id_3320, id_3322  };
+                                                        tf1063a6af8c1fb72f0e0ee089d43d040 id_3323 { id_3320, id_3322 };
                                                         choose_res_3319 = id_3323;
                                                       } else {
-                                                        std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3324 { dessser::gen::raql_expr::of_row_binary };
+                                                        auto fun3324 { dessser::gen::raql_expr::of_row_binary };
                                                         Size id_3325 { 1UL };
                                                         Pointer id_3326 { drec_snd_653.skip(id_3325) };
-                                                        v_3501be1aaefb5944279c6a13f6d0d43f id_3327 { id_3324(id_3326) };
-                                                        b8de1a5ea94913283815cebff1d39083 letpair_res_3328;
+                                                        t1113e6691818baaf60a775527f6cc1ac id_3327 { fun3324(id_3326) };
+                                                        tf1063a6af8c1fb72f0e0ee089d43d040 letpair_res_3328;
                                                         {
                                                           auto make1_1_fst_655 { std::get<0>(id_3327) };
                                                           auto make1_1_snd_656 { std::get<1>(id_3327) };
-                                                          std::optional<dessser::gen::raql_expr::t> id_3329 { make1_1_fst_655 };
-                                                          b8de1a5ea94913283815cebff1d39083 id_3330 {  id_3329, make1_1_snd_656  };
+                                                          std::optional<dessser::gen::raql_expr::t_ext> id_3329 { make1_1_fst_655 };
+                                                          tf1063a6af8c1fb72f0e0ee089d43d040 id_3330 { id_3329, make1_1_snd_656 };
                                                           letpair_res_3328 = id_3330;
                                                         }
                                                         choose_res_3319 = letpair_res_3328;
                                                       }
-                                                      f63f919559f0d70225bd0da5dd9bcafc let_res_3331;
+                                                      t45217dce3db5a9a49037839afd0048e8 let_res_3331;
                                                       {
-                                                        b8de1a5ea94913283815cebff1d39083 drec_657 { choose_res_3319 };
-                                                        f63f919559f0d70225bd0da5dd9bcafc letpair_res_3332;
+                                                        tf1063a6af8c1fb72f0e0ee089d43d040 drec_657 { choose_res_3319 };
+                                                        t45217dce3db5a9a49037839afd0048e8 letpair_res_3332;
                                                         {
                                                           auto drec_fst_658 { std::get<0>(drec_657) };
                                                           auto drec_snd_659 { std::get<1>(drec_657) };
                                                           uint32_t id_3333 { 0U };
                                                           Vec<1, uint32_t> id_3334 {  id_3333  };
-                                                          ac0fbd05039f742d2f1d9ac182e392ab let_res_3335;
+                                                          t405eb186408556fed8f2c41523c07d13 let_res_3335;
                                                           {
                                                             Vec<1, uint32_t> leb_ref_660 { id_3334 };
                                                             uint8_t id_3336 { 0 };
                                                             Vec<1, uint8_t> id_3337 {  id_3336  };
-                                                            ac0fbd05039f742d2f1d9ac182e392ab let_res_3338;
+                                                            t405eb186408556fed8f2c41523c07d13 let_res_3338;
                                                             {
                                                               Vec<1, uint8_t> shft_ref_661 { id_3337 };
                                                               Vec<1, Pointer> id_3339 {  drec_snd_659  };
-                                                              ac0fbd05039f742d2f1d9ac182e392ab let_res_3340;
+                                                              t405eb186408556fed8f2c41523c07d13 let_res_3340;
                                                               {
                                                                 Vec<1, Pointer> p_ref_662 { id_3339 };
                                                                 bool while_flag_3341 { true };
                                                                 do {
                                                                   uint8_t id_3342 { 0 };
                                                                   Pointer id_3343 { p_ref_662[id_3342] };
-                                                                  v_1d5843897434feb24d158f3793db9189 id_3344 { id_3343.readU8() };
+                                                                  tb3f98ea670610d40658a618de3ec7b90 id_3344 { id_3343.readU8() };
                                                                   bool let_res_3345;
                                                                   {
-                                                                    v_1d5843897434feb24d158f3793db9189 leb128_663 { id_3344 };
+                                                                    tb3f98ea670610d40658a618de3ec7b90 leb128_663 { id_3344 };
                                                                     bool letpair_res_3346;
                                                                     {
                                                                       auto leb128_fst_664 { std::get<0>(leb128_663) };
                                                                       auto leb128_snd_665 { std::get<1>(leb128_663) };
                                                                       uint8_t id_3347 { 0 };
                                                                       Void id_3348 { ((void)(p_ref_662[id_3347] = leb128_snd_665), VOID) };
+                                                                      (void)id_3348;
                                                                       uint8_t id_3349 { 0 };
                                                                       uint8_t id_3350 { 127 };
                                                                       uint8_t id_3351 { uint8_t(leb128_fst_664 & id_3350) };
@@ -7622,12 +7998,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                       uint32_t id_3357 { leb_ref_660[id_3356] };
                                                                       uint32_t id_3358 { uint32_t(id_3355 | id_3357) };
                                                                       Void id_3359 { ((void)(leb_ref_660[id_3349] = id_3358), VOID) };
+                                                                      (void)id_3359;
                                                                       uint8_t id_3360 { 0 };
                                                                       uint8_t id_3361 { 0 };
                                                                       uint8_t id_3362 { shft_ref_661[id_3361] };
                                                                       uint8_t id_3363 { 7 };
                                                                       uint8_t id_3364 { uint8_t(id_3362 + id_3363) };
                                                                       Void id_3365 { ((void)(shft_ref_661[id_3360] = id_3364), VOID) };
+                                                                      (void)id_3365;
                                                                       uint8_t id_3366 { 128 };
                                                                       bool id_3367 { bool(leb128_fst_664 >= id_3366) };
                                                                       letpair_res_3346 = id_3367;
@@ -7636,32 +8014,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                   }
                                                                   while_flag_3341 = let_res_3345;
                                                                   if (while_flag_3341) {
+                                                                    (void)VOID;
                                                                   }
                                                                 } while (while_flag_3341);
+                                                                (void)VOID;
                                                                 uint8_t id_3368 { 0 };
                                                                 uint32_t id_3369 { leb_ref_660[id_3368] };
                                                                 uint8_t id_3370 { 0 };
                                                                 Pointer id_3371 { p_ref_662[id_3370] };
-                                                                ac0fbd05039f742d2f1d9ac182e392ab id_3372 {  id_3369, id_3371  };
+                                                                t405eb186408556fed8f2c41523c07d13 id_3372 { id_3369, id_3371 };
                                                                 let_res_3340 = id_3372;
                                                               }
                                                               let_res_3338 = let_res_3340;
                                                             }
                                                             let_res_3335 = let_res_3338;
                                                           }
-                                                          v_73b9a8533327ef50c5288ee51f32bdb3 let_res_3373;
+                                                          t0dfa866705b76efff53e4aa97228a967 let_res_3373;
                                                           {
-                                                            ac0fbd05039f742d2f1d9ac182e392ab dlist1_669 { let_res_3335 };
-                                                            v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_3374;
+                                                            t405eb186408556fed8f2c41523c07d13 dlist1_669 { let_res_3335 };
+                                                            t0dfa866705b76efff53e4aa97228a967 letpair_res_3374;
                                                             {
                                                               auto dlist1_fst_670 { std::get<0>(dlist1_669) };
                                                               auto dlist1_snd_671 { std::get<1>(dlist1_669) };
-                                                              Lst<dessser::gen::field_name::t> endoflist_3375;
-                                                              v_73b9a8533327ef50c5288ee51f32bdb3 id_3376 {  endoflist_3375, dlist1_snd_671  };
-                                                              Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> id_3377 {  id_3376  };
-                                                              v_73b9a8533327ef50c5288ee51f32bdb3 let_res_3378;
+                                                              Lst<dessser::gen::field_name::t_ext> endoflist_3375;
+                                                              t0dfa866705b76efff53e4aa97228a967 id_3376 { endoflist_3375, dlist1_snd_671 };
+                                                              Vec<1, t0dfa866705b76efff53e4aa97228a967> id_3377 {  id_3376  };
+                                                              t0dfa866705b76efff53e4aa97228a967 let_res_3378;
                                                               {
-                                                                Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> inits_src_ref_672 { id_3377 };
+                                                                Vec<1, t0dfa866705b76efff53e4aa97228a967> inits_src_ref_672 { id_3377 };
                                                                 int32_t id_3379 { 0L };
                                                                 Vec<1, int32_t> id_3380 {  id_3379  };
                                                                 {
@@ -7675,50 +8055,57 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                                     while_flag_3381 = id_3385;
                                                                     if (while_flag_3381) {
                                                                       uint8_t id_3386 { 0 };
-                                                                      v_73b9a8533327ef50c5288ee51f32bdb3 id_3387 { inits_src_ref_672[id_3386] };
+                                                                      t0dfa866705b76efff53e4aa97228a967 id_3387 { inits_src_ref_672[id_3386] };
                                                                       {
-                                                                        v_73b9a8533327ef50c5288ee51f32bdb3 dlist2_674 { id_3387 };
+                                                                        t0dfa866705b76efff53e4aa97228a967 dlist2_674 { id_3387 };
                                                                         {
                                                                           auto dlist2_fst_675 { std::get<0>(dlist2_674) };
                                                                           auto dlist2_snd_676 { std::get<1>(dlist2_674) };
                                                                           uint8_t id_3388 { 0 };
-                                                                          std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_3389 { dessser::gen::field_name::of_row_binary };
-                                                                          c50aa083fa818c6eeca389b0025dda98 id_3390 { id_3389(dlist2_snd_676) };
-                                                                          v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_3391;
+                                                                          auto fun3389 { dessser::gen::field_name::of_row_binary };
+                                                                          t273a2b7978f5b466a128a51c1cc4a27b id_3390 { fun3389(dlist2_snd_676) };
+                                                                          t0dfa866705b76efff53e4aa97228a967 letpair_res_3391;
                                                                           {
                                                                             auto dlist3_fst_678 { std::get<0>(id_3390) };
                                                                             auto dlist3_snd_679 { std::get<1>(id_3390) };
-                                                                            Lst<dessser::gen::field_name::t> id_3392 { dlist3_fst_678, dlist2_fst_675 };
-                                                                            v_73b9a8533327ef50c5288ee51f32bdb3 id_3393 {  id_3392, dlist3_snd_679  };
+                                                                            Lst<dessser::gen::field_name::t_ext> id_3392 { dlist3_fst_678, dlist2_fst_675 };
+                                                                            t0dfa866705b76efff53e4aa97228a967 id_3393 { id_3392, dlist3_snd_679 };
                                                                             letpair_res_3391 = id_3393;
                                                                           }
                                                                           Void id_3394 { ((void)(inits_src_ref_672[id_3388] = letpair_res_3391), VOID) };
+                                                                          (void)id_3394;
                                                                         }
+                                                                        (void)VOID;
                                                                       }
+                                                                      (void)VOID;
                                                                       uint8_t id_3395 { 0 };
                                                                       uint8_t id_3396 { 0 };
                                                                       int32_t id_3397 { repeat_n_673[id_3396] };
                                                                       int32_t id_3398 { 1L };
                                                                       int32_t id_3399 { int32_t(id_3397 + id_3398) };
                                                                       Void id_3400 { ((void)(repeat_n_673[id_3395] = id_3399), VOID) };
+                                                                      (void)id_3400;
+                                                                      (void)id_3400;
                                                                     }
                                                                   } while (while_flag_3381);
+                                                                  (void)VOID;
                                                                 }
+                                                                (void)VOID;
                                                                 uint8_t id_3401 { 0 };
-                                                                v_73b9a8533327ef50c5288ee51f32bdb3 id_3402 { inits_src_ref_672[id_3401] };
+                                                                t0dfa866705b76efff53e4aa97228a967 id_3402 { inits_src_ref_672[id_3401] };
                                                                 let_res_3378 = id_3402;
                                                               }
                                                               letpair_res_3374 = let_res_3378;
                                                             }
                                                             let_res_3373 = letpair_res_3374;
                                                           }
-                                                          f63f919559f0d70225bd0da5dd9bcafc letpair_res_3403;
+                                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_3403;
                                                           {
                                                             auto dlist4_fst_681 { std::get<0>(let_res_3373) };
                                                             auto dlist4_snd_682 { std::get<1>(let_res_3373) };
-                                                            v_41bb77c6ca1cb4242e451c68e9cdbd6c id_3404 {  .fields = drec_fst_411, .and_all_others = drec_fst_440, .sort = drec_fst_484, .where = drec_fst_487, .event_time = drec_fst_493, .notifications = drec_fst_519, .key = drec_fst_545, .commit_cond = drec_fst_548, .commit_before = drec_fst_554, .flush_how = drec_fst_557, .from = drec_fst_652, .every = drec_fst_658, .factors = dlist4_fst_681  };
-                                                            t id_3405 { std::in_place_index<0>, id_3404 };
-                                                            f63f919559f0d70225bd0da5dd9bcafc id_3406 {  id_3405, dlist4_snd_682  };
+                                                            ta2fe18cae70948742cabb6081fd22a0c id_3404 { .fields = drec_fst_411, .and_all_others = drec_fst_440, .sort = drec_fst_484, .where = drec_fst_487, .event_time = drec_fst_493, .notifications = drec_fst_519, .key = drec_fst_545, .commit_cond = drec_fst_548, .commit_before = drec_fst_554, .flush_how = drec_fst_557, .from = drec_fst_652, .every = drec_fst_658, .factors = dlist4_fst_681 };
+                                                            t* id_3405 { new t(std::in_place_index<0>, id_3404) };
+                                                            t45217dce3db5a9a49037839afd0048e8 id_3406 { id_3405, dlist4_snd_682 };
                                                             letpair_res_3403 = id_3406;
                                                           }
                                                           letpair_res_3332 = letpair_res_3403;
@@ -7773,33 +8160,33 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
         } else {
           uint16_t id_3407 { 1 };
           bool id_3408 { bool(id_3407 == dsum1_fst_63) };
-          f63f919559f0d70225bd0da5dd9bcafc choose_res_3409;
+          t45217dce3db5a9a49037839afd0048e8 choose_res_3409;
           if (id_3408) {
-            v_362f9d9108a6902af48b6c83d5377ea1 id_3410 { dsum1_snd_64.readU16Le() };
-            v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_3411;
+            t22a32080ad88ab548b80077a17b7dd46 id_3410 { dsum1_snd_64.readU16Le() };
+            t22a32080ad88ab548b80077a17b7dd46 letpair_res_3411;
             {
               auto du16_fst_119 { std::get<0>(id_3410) };
               auto du16_snd_120 { std::get<1>(id_3410) };
-              v_362f9d9108a6902af48b6c83d5377ea1 id_3412 {  du16_fst_119, du16_snd_120  };
+              t22a32080ad88ab548b80077a17b7dd46 id_3412 { du16_fst_119, du16_snd_120 };
               letpair_res_3411 = id_3412;
             }
-            v_26a7856c13c8c419d187250936cafd80 let_res_3413;
+            t1313b4ee18248dd765ed6ae8b0058504 let_res_3413;
             {
-              v_362f9d9108a6902af48b6c83d5377ea1 dsum1_124 { letpair_res_3411 };
-              v_26a7856c13c8c419d187250936cafd80 letpair_res_3414;
+              t22a32080ad88ab548b80077a17b7dd46 dsum1_124 { letpair_res_3411 };
+              t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3414;
               {
                 auto dsum1_fst_125 { std::get<0>(dsum1_124) };
                 auto dsum1_snd_126 { std::get<1>(dsum1_124) };
                 uint16_t id_3415 { 0 };
                 bool id_3416 { bool(id_3415 == dsum1_fst_125) };
-                v_26a7856c13c8c419d187250936cafd80 choose_res_3417;
+                t1313b4ee18248dd765ed6ae8b0058504 choose_res_3417;
                 if (id_3416) {
-                  std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3418 { dessser::gen::raql_expr::of_row_binary };
-                  v_3501be1aaefb5944279c6a13f6d0d43f id_3419 { id_3418(dsum1_snd_126) };
-                  v_26a7856c13c8c419d187250936cafd80 let_res_3420;
+                  auto fun3418 { dessser::gen::raql_expr::of_row_binary };
+                  t1113e6691818baaf60a775527f6cc1ac id_3419 { fun3418(dsum1_snd_126) };
+                  t1313b4ee18248dd765ed6ae8b0058504 let_res_3420;
                   {
-                    v_3501be1aaefb5944279c6a13f6d0d43f drec_213 { id_3419 };
-                    v_26a7856c13c8c419d187250936cafd80 letpair_res_3421;
+                    t1113e6691818baaf60a775527f6cc1ac drec_213 { id_3419 };
+                    t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3421;
                     {
                       auto drec_fst_214 { std::get<0>(drec_213) };
                       auto drec_snd_215 { std::get<1>(drec_213) };
@@ -7807,44 +8194,44 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       uint8_t id_3423 { drec_snd_215.peekU8(id_3422) };
                       uint8_t id_3424 { 1 };
                       bool id_3425 { bool(id_3423 == id_3424) };
-                      b8de1a5ea94913283815cebff1d39083 choose_res_3426;
+                      tf1063a6af8c1fb72f0e0ee089d43d040 choose_res_3426;
                       if (id_3425) {
-                        std::optional<dessser::gen::raql_expr::t> id_3427 { std::nullopt };
+                        std::optional<dessser::gen::raql_expr::t_ext> id_3427 { std::nullopt };
                         Size id_3428 { 1UL };
                         Pointer id_3429 { drec_snd_215.skip(id_3428) };
-                        b8de1a5ea94913283815cebff1d39083 id_3430 {  id_3427, id_3429  };
+                        tf1063a6af8c1fb72f0e0ee089d43d040 id_3430 { id_3427, id_3429 };
                         choose_res_3426 = id_3430;
                       } else {
-                        std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3431 { dessser::gen::raql_expr::of_row_binary };
+                        auto fun3431 { dessser::gen::raql_expr::of_row_binary };
                         Size id_3432 { 1UL };
                         Pointer id_3433 { drec_snd_215.skip(id_3432) };
-                        v_3501be1aaefb5944279c6a13f6d0d43f id_3434 { id_3431(id_3433) };
-                        b8de1a5ea94913283815cebff1d39083 letpair_res_3435;
+                        t1113e6691818baaf60a775527f6cc1ac id_3434 { fun3431(id_3433) };
+                        tf1063a6af8c1fb72f0e0ee089d43d040 letpair_res_3435;
                         {
                           auto make1_1_fst_217 { std::get<0>(id_3434) };
                           auto make1_1_snd_218 { std::get<1>(id_3434) };
-                          std::optional<dessser::gen::raql_expr::t> id_3436 { make1_1_fst_217 };
-                          b8de1a5ea94913283815cebff1d39083 id_3437 {  id_3436, make1_1_snd_218  };
+                          std::optional<dessser::gen::raql_expr::t_ext> id_3436 { make1_1_fst_217 };
+                          tf1063a6af8c1fb72f0e0ee089d43d040 id_3437 { id_3436, make1_1_snd_218 };
                           letpair_res_3435 = id_3437;
                         }
                         choose_res_3426 = letpair_res_3435;
                       }
-                      v_26a7856c13c8c419d187250936cafd80 let_res_3438;
+                      t1313b4ee18248dd765ed6ae8b0058504 let_res_3438;
                       {
-                        b8de1a5ea94913283815cebff1d39083 drec_219 { choose_res_3426 };
-                        v_26a7856c13c8c419d187250936cafd80 letpair_res_3439;
+                        tf1063a6af8c1fb72f0e0ee089d43d040 drec_219 { choose_res_3426 };
+                        t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3439;
                         {
                           auto drec_fst_220 { std::get<0>(drec_219) };
                           auto drec_snd_221 { std::get<1>(drec_219) };
-                          std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3440 { dessser::gen::raql_expr::of_row_binary };
-                          v_3501be1aaefb5944279c6a13f6d0d43f id_3441 { id_3440(drec_snd_221) };
-                          v_26a7856c13c8c419d187250936cafd80 letpair_res_3442;
+                          auto fun3440 { dessser::gen::raql_expr::of_row_binary };
+                          t1113e6691818baaf60a775527f6cc1ac id_3441 { fun3440(drec_snd_221) };
+                          t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3442;
                           {
                             auto drec_fst_223 { std::get<0>(id_3441) };
                             auto drec_snd_224 { std::get<1>(id_3441) };
-                            v_65abbca6f6205aebd6740de88f9e9235 id_3443 {  .fname = drec_fst_214, .preprocessor = drec_fst_220, .unlink = drec_fst_223  };
-                            v_8c0c938be0fcefc45cc5b9cf52c46f04 id_3444 { std::in_place_index<0>, id_3443 };
-                            v_26a7856c13c8c419d187250936cafd80 id_3445 {  id_3444, drec_snd_224  };
+                            ta828a76692b94aa6a15973ace224bedc id_3443 { .fname = drec_fst_214, .preprocessor = drec_fst_220, .unlink = drec_fst_223 };
+                            tf708b6568b9bac184e3f5da3a64f4419 id_3444 { std::in_place_index<0>, id_3443 };
+                            t1313b4ee18248dd765ed6ae8b0058504 id_3445 { id_3444, drec_snd_224 };
                             letpair_res_3442 = id_3445;
                           }
                           letpair_res_3439 = letpair_res_3442;
@@ -7860,34 +8247,36 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   uint16_t id_3446 { 1 };
                   bool id_3447 { bool(dsum1_fst_125 == id_3446) };
                   Void id_3448 { ((void)(assert(id_3447)), VOID) };
+                  (void)id_3448;
                   uint32_t id_3449 { 0U };
                   Vec<1, uint32_t> id_3450 {  id_3449  };
-                  ac0fbd05039f742d2f1d9ac182e392ab let_res_3451;
+                  t405eb186408556fed8f2c41523c07d13 let_res_3451;
                   {
                     Vec<1, uint32_t> leb_ref_127 { id_3450 };
                     uint8_t id_3452 { 0 };
                     Vec<1, uint8_t> id_3453 {  id_3452  };
-                    ac0fbd05039f742d2f1d9ac182e392ab let_res_3454;
+                    t405eb186408556fed8f2c41523c07d13 let_res_3454;
                     {
                       Vec<1, uint8_t> shft_ref_128 { id_3453 };
                       Vec<1, Pointer> id_3455 {  dsum1_snd_126  };
-                      ac0fbd05039f742d2f1d9ac182e392ab let_res_3456;
+                      t405eb186408556fed8f2c41523c07d13 let_res_3456;
                       {
                         Vec<1, Pointer> p_ref_129 { id_3455 };
                         bool while_flag_3457 { true };
                         do {
                           uint8_t id_3458 { 0 };
                           Pointer id_3459 { p_ref_129[id_3458] };
-                          v_1d5843897434feb24d158f3793db9189 id_3460 { id_3459.readU8() };
+                          tb3f98ea670610d40658a618de3ec7b90 id_3460 { id_3459.readU8() };
                           bool let_res_3461;
                           {
-                            v_1d5843897434feb24d158f3793db9189 leb128_130 { id_3460 };
+                            tb3f98ea670610d40658a618de3ec7b90 leb128_130 { id_3460 };
                             bool letpair_res_3462;
                             {
                               auto leb128_fst_131 { std::get<0>(leb128_130) };
                               auto leb128_snd_132 { std::get<1>(leb128_130) };
                               uint8_t id_3463 { 0 };
                               Void id_3464 { ((void)(p_ref_129[id_3463] = leb128_snd_132), VOID) };
+                              (void)id_3464;
                               uint8_t id_3465 { 0 };
                               uint8_t id_3466 { 127 };
                               uint8_t id_3467 { uint8_t(leb128_fst_131 & id_3466) };
@@ -7899,12 +8288,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                               uint32_t id_3473 { leb_ref_127[id_3472] };
                               uint32_t id_3474 { uint32_t(id_3471 | id_3473) };
                               Void id_3475 { ((void)(leb_ref_127[id_3465] = id_3474), VOID) };
+                              (void)id_3475;
                               uint8_t id_3476 { 0 };
                               uint8_t id_3477 { 0 };
                               uint8_t id_3478 { shft_ref_128[id_3477] };
                               uint8_t id_3479 { 7 };
                               uint8_t id_3480 { uint8_t(id_3478 + id_3479) };
                               Void id_3481 { ((void)(shft_ref_128[id_3476] = id_3480), VOID) };
+                              (void)id_3481;
                               uint8_t id_3482 { 128 };
                               bool id_3483 { bool(leb128_fst_131 >= id_3482) };
                               letpair_res_3462 = id_3483;
@@ -7913,32 +8304,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           }
                           while_flag_3457 = let_res_3461;
                           if (while_flag_3457) {
+                            (void)VOID;
                           }
                         } while (while_flag_3457);
+                        (void)VOID;
                         uint8_t id_3484 { 0 };
                         uint32_t id_3485 { leb_ref_127[id_3484] };
                         uint8_t id_3486 { 0 };
                         Pointer id_3487 { p_ref_129[id_3486] };
-                        ac0fbd05039f742d2f1d9ac182e392ab id_3488 {  id_3485, id_3487  };
+                        t405eb186408556fed8f2c41523c07d13 id_3488 { id_3485, id_3487 };
                         let_res_3456 = id_3488;
                       }
                       let_res_3454 = let_res_3456;
                     }
                     let_res_3451 = let_res_3454;
                   }
-                  v_6bba7c01a5e2d76afdf20d53912164f2 let_res_3489;
+                  t20007ff08d465535358862e7faf3b556 let_res_3489;
                   {
-                    ac0fbd05039f742d2f1d9ac182e392ab dlist1_136 { let_res_3451 };
-                    v_6bba7c01a5e2d76afdf20d53912164f2 letpair_res_3490;
+                    t405eb186408556fed8f2c41523c07d13 dlist1_136 { let_res_3451 };
+                    t20007ff08d465535358862e7faf3b556 letpair_res_3490;
                     {
                       auto dlist1_fst_137 { std::get<0>(dlist1_136) };
                       auto dlist1_snd_138 { std::get<1>(dlist1_136) };
-                      Lst<df398bbef680305e3e9f5137633156fb> endoflist_3491;
-                      v_6bba7c01a5e2d76afdf20d53912164f2 id_3492 {  endoflist_3491, dlist1_snd_138  };
-                      Vec<1, v_6bba7c01a5e2d76afdf20d53912164f2> id_3493 {  id_3492  };
-                      v_6bba7c01a5e2d76afdf20d53912164f2 let_res_3494;
+                      Lst<tcd17c85cefeae7a860c0732c05eaeaed> endoflist_3491;
+                      t20007ff08d465535358862e7faf3b556 id_3492 { endoflist_3491, dlist1_snd_138 };
+                      Vec<1, t20007ff08d465535358862e7faf3b556> id_3493 {  id_3492  };
+                      t20007ff08d465535358862e7faf3b556 let_res_3494;
                       {
-                        Vec<1, v_6bba7c01a5e2d76afdf20d53912164f2> inits_src_ref_139 { id_3493 };
+                        Vec<1, t20007ff08d465535358862e7faf3b556> inits_src_ref_139 { id_3493 };
                         int32_t id_3495 { 0L };
                         Vec<1, int32_t> id_3496 {  id_3495  };
                         {
@@ -7952,41 +8345,42 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                             while_flag_3497 = id_3501;
                             if (while_flag_3497) {
                               uint8_t id_3502 { 0 };
-                              v_6bba7c01a5e2d76afdf20d53912164f2 id_3503 { inits_src_ref_139[id_3502] };
+                              t20007ff08d465535358862e7faf3b556 id_3503 { inits_src_ref_139[id_3502] };
                               {
-                                v_6bba7c01a5e2d76afdf20d53912164f2 dlist2_141 { id_3503 };
+                                t20007ff08d465535358862e7faf3b556 dlist2_141 { id_3503 };
                                 {
                                   auto dlist2_fst_142 { std::get<0>(dlist2_141) };
                                   auto dlist2_snd_143 { std::get<1>(dlist2_141) };
                                   uint8_t id_3504 { 0 };
                                   uint32_t id_3505 { 0U };
                                   Vec<1, uint32_t> id_3506 {  id_3505  };
-                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3507;
+                                  t8beb80162423aee37bd383e9b6834c9c let_res_3507;
                                   {
                                     Vec<1, uint32_t> leb_ref_144 { id_3506 };
                                     uint8_t id_3508 { 0 };
                                     Vec<1, uint8_t> id_3509 {  id_3508  };
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3510;
+                                    t8beb80162423aee37bd383e9b6834c9c let_res_3510;
                                     {
                                       Vec<1, uint8_t> shft_ref_145 { id_3509 };
                                       Vec<1, Pointer> id_3511 {  dlist2_snd_143  };
-                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3512;
+                                      t8beb80162423aee37bd383e9b6834c9c let_res_3512;
                                       {
                                         Vec<1, Pointer> p_ref_146 { id_3511 };
                                         bool while_flag_3513 { true };
                                         do {
                                           uint8_t id_3514 { 0 };
                                           Pointer id_3515 { p_ref_146[id_3514] };
-                                          v_1d5843897434feb24d158f3793db9189 id_3516 { id_3515.readU8() };
+                                          tb3f98ea670610d40658a618de3ec7b90 id_3516 { id_3515.readU8() };
                                           bool let_res_3517;
                                           {
-                                            v_1d5843897434feb24d158f3793db9189 leb128_147 { id_3516 };
+                                            tb3f98ea670610d40658a618de3ec7b90 leb128_147 { id_3516 };
                                             bool letpair_res_3518;
                                             {
                                               auto leb128_fst_148 { std::get<0>(leb128_147) };
                                               auto leb128_snd_149 { std::get<1>(leb128_147) };
                                               uint8_t id_3519 { 0 };
                                               Void id_3520 { ((void)(p_ref_146[id_3519] = leb128_snd_149), VOID) };
+                                              (void)id_3520;
                                               uint8_t id_3521 { 0 };
                                               uint8_t id_3522 { 127 };
                                               uint8_t id_3523 { uint8_t(leb128_fst_148 & id_3522) };
@@ -7998,12 +8392,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                               uint32_t id_3529 { leb_ref_144[id_3528] };
                                               uint32_t id_3530 { uint32_t(id_3527 | id_3529) };
                                               Void id_3531 { ((void)(leb_ref_144[id_3521] = id_3530), VOID) };
+                                              (void)id_3531;
                                               uint8_t id_3532 { 0 };
                                               uint8_t id_3533 { 0 };
                                               uint8_t id_3534 { shft_ref_145[id_3533] };
                                               uint8_t id_3535 { 7 };
                                               uint8_t id_3536 { uint8_t(id_3534 + id_3535) };
                                               Void id_3537 { ((void)(shft_ref_145[id_3532] = id_3536), VOID) };
+                                              (void)id_3537;
                                               uint8_t id_3538 { 128 };
                                               bool id_3539 { bool(leb128_fst_148 >= id_3538) };
                                               letpair_res_3518 = id_3539;
@@ -8012,56 +8408,58 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                           }
                                           while_flag_3513 = let_res_3517;
                                           if (while_flag_3513) {
+                                            (void)VOID;
                                           }
                                         } while (while_flag_3513);
+                                        (void)VOID;
                                         uint8_t id_3540 { 0 };
                                         uint32_t id_3541 { leb_ref_144[id_3540] };
                                         Size id_3542 { Size(id_3541) };
                                         uint8_t id_3543 { 0 };
                                         Pointer id_3544 { p_ref_146[id_3543] };
-                                        v_41b0681ed7f1f185fd3e6c4dcdc13110 id_3545 {  id_3542, id_3544  };
+                                        t8beb80162423aee37bd383e9b6834c9c id_3545 { id_3542, id_3544 };
                                         let_res_3512 = id_3545;
                                       }
                                       let_res_3510 = let_res_3512;
                                     }
                                     let_res_3507 = let_res_3510;
                                   }
-                                  v_46a5e81c2410b000ff0adea6dc198147 let_res_3546;
+                                  tef94b55d8809251f13165d9a05bd9d0e let_res_3546;
                                   {
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_150 { let_res_3507 };
-                                    v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3547;
+                                    t8beb80162423aee37bd383e9b6834c9c dstring1_150 { let_res_3507 };
+                                    tef94b55d8809251f13165d9a05bd9d0e letpair_res_3547;
                                     {
                                       auto dstring1_fst_151 { std::get<0>(dstring1_150) };
                                       auto dstring1_snd_152 { std::get<1>(dstring1_150) };
-                                      f921d1e0a170c3c04148c21704db9c45 id_3548 { dstring1_snd_152.readBytes(dstring1_fst_151) };
-                                      v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3549;
+                                      t188345aa49abd0cb47ff73fedc219f08 id_3548 { dstring1_snd_152.readBytes(dstring1_fst_151) };
+                                      tef94b55d8809251f13165d9a05bd9d0e letpair_res_3549;
                                       {
                                         auto dstring2_fst_154 { std::get<0>(id_3548) };
                                         auto dstring2_snd_155 { std::get<1>(id_3548) };
                                         std::string id_3550 { dstring2_fst_154.toString() };
-                                        v_46a5e81c2410b000ff0adea6dc198147 id_3551 {  id_3550, dstring2_snd_155  };
+                                        tef94b55d8809251f13165d9a05bd9d0e id_3551 { id_3550, dstring2_snd_155 };
                                         letpair_res_3549 = id_3551;
                                       }
                                       letpair_res_3547 = letpair_res_3549;
                                     }
                                     let_res_3546 = letpair_res_3547;
                                   }
-                                  v_6bba7c01a5e2d76afdf20d53912164f2 let_res_3552;
+                                  t20007ff08d465535358862e7faf3b556 let_res_3552;
                                   {
-                                    v_46a5e81c2410b000ff0adea6dc198147 dtup_156 { let_res_3546 };
-                                    v_6bba7c01a5e2d76afdf20d53912164f2 letpair_res_3553;
+                                    tef94b55d8809251f13165d9a05bd9d0e dtup_156 { let_res_3546 };
+                                    t20007ff08d465535358862e7faf3b556 letpair_res_3553;
                                     {
                                       auto dtup_fst_157 { std::get<0>(dtup_156) };
                                       auto dtup_snd_158 { std::get<1>(dtup_156) };
-                                      std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3554 { dessser::gen::raql_expr::of_row_binary };
-                                      v_3501be1aaefb5944279c6a13f6d0d43f id_3555 { id_3554(dtup_snd_158) };
-                                      v_6bba7c01a5e2d76afdf20d53912164f2 letpair_res_3556;
+                                      auto fun3554 { dessser::gen::raql_expr::of_row_binary };
+                                      t1113e6691818baaf60a775527f6cc1ac id_3555 { fun3554(dtup_snd_158) };
+                                      t20007ff08d465535358862e7faf3b556 letpair_res_3556;
                                       {
                                         auto dtup_fst_160 { std::get<0>(id_3555) };
                                         auto dtup_snd_161 { std::get<1>(id_3555) };
-                                        df398bbef680305e3e9f5137633156fb id_3557 {  dtup_fst_157, dtup_fst_160  };
-                                        Lst<df398bbef680305e3e9f5137633156fb> id_3558 { id_3557, dlist2_fst_142 };
-                                        v_6bba7c01a5e2d76afdf20d53912164f2 id_3559 {  id_3558, dtup_snd_161  };
+                                        tcd17c85cefeae7a860c0732c05eaeaed id_3557 { dtup_fst_157, dtup_fst_160 };
+                                        Lst<tcd17c85cefeae7a860c0732c05eaeaed> id_3558 { id_3557, dlist2_fst_142 };
+                                        t20007ff08d465535358862e7faf3b556 id_3559 { id_3558, dtup_snd_161 };
                                         letpair_res_3556 = id_3559;
                                       }
                                       letpair_res_3553 = letpair_res_3556;
@@ -8069,45 +8467,52 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     let_res_3552 = letpair_res_3553;
                                   }
                                   Void id_3560 { ((void)(inits_src_ref_139[id_3504] = let_res_3552), VOID) };
+                                  (void)id_3560;
                                 }
+                                (void)VOID;
                               }
+                              (void)VOID;
                               uint8_t id_3561 { 0 };
                               uint8_t id_3562 { 0 };
                               int32_t id_3563 { repeat_n_140[id_3562] };
                               int32_t id_3564 { 1L };
                               int32_t id_3565 { int32_t(id_3563 + id_3564) };
                               Void id_3566 { ((void)(repeat_n_140[id_3561] = id_3565), VOID) };
+                              (void)id_3566;
+                              (void)id_3566;
                             }
                           } while (while_flag_3497);
+                          (void)VOID;
                         }
+                        (void)VOID;
                         uint8_t id_3567 { 0 };
-                        v_6bba7c01a5e2d76afdf20d53912164f2 id_3568 { inits_src_ref_139[id_3567] };
+                        t20007ff08d465535358862e7faf3b556 id_3568 { inits_src_ref_139[id_3567] };
                         let_res_3494 = id_3568;
                       }
                       letpair_res_3490 = let_res_3494;
                     }
                     let_res_3489 = letpair_res_3490;
                   }
-                  v_6bba7c01a5e2d76afdf20d53912164f2 letpair_res_3569;
+                  t20007ff08d465535358862e7faf3b556 letpair_res_3569;
                   {
                     auto dlist4_fst_166 { std::get<0>(let_res_3489) };
                     auto dlist4_snd_167 { std::get<1>(let_res_3489) };
-                    v_6bba7c01a5e2d76afdf20d53912164f2 id_3570 {  dlist4_fst_166, dlist4_snd_167  };
+                    t20007ff08d465535358862e7faf3b556 id_3570 { dlist4_fst_166, dlist4_snd_167 };
                     letpair_res_3569 = id_3570;
                   }
-                  v_26a7856c13c8c419d187250936cafd80 let_res_3571;
+                  t1313b4ee18248dd765ed6ae8b0058504 let_res_3571;
                   {
-                    v_6bba7c01a5e2d76afdf20d53912164f2 drec_168 { letpair_res_3569 };
-                    v_26a7856c13c8c419d187250936cafd80 letpair_res_3572;
+                    t20007ff08d465535358862e7faf3b556 drec_168 { letpair_res_3569 };
+                    t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3572;
                     {
                       auto drec_fst_169 { std::get<0>(drec_168) };
                       auto drec_snd_170 { std::get<1>(drec_168) };
-                      std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3573 { dessser::gen::raql_expr::of_row_binary };
-                      v_3501be1aaefb5944279c6a13f6d0d43f id_3574 { id_3573(drec_snd_170) };
-                      v_26a7856c13c8c419d187250936cafd80 let_res_3575;
+                      auto fun3573 { dessser::gen::raql_expr::of_row_binary };
+                      t1113e6691818baaf60a775527f6cc1ac id_3574 { fun3573(drec_snd_170) };
+                      t1313b4ee18248dd765ed6ae8b0058504 let_res_3575;
                       {
-                        v_3501be1aaefb5944279c6a13f6d0d43f drec_171 { id_3574 };
-                        v_26a7856c13c8c419d187250936cafd80 letpair_res_3576;
+                        t1113e6691818baaf60a775527f6cc1ac drec_171 { id_3574 };
+                        t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3576;
                         {
                           auto drec_fst_172 { std::get<0>(drec_171) };
                           auto drec_snd_173 { std::get<1>(drec_171) };
@@ -8115,103 +8520,106 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                           uint8_t id_3578 { drec_snd_173.peekU8(id_3577) };
                           uint8_t id_3579 { 1 };
                           bool id_3580 { bool(id_3578 == id_3579) };
-                          b8de1a5ea94913283815cebff1d39083 choose_res_3581;
+                          tf1063a6af8c1fb72f0e0ee089d43d040 choose_res_3581;
                           if (id_3580) {
-                            std::optional<dessser::gen::raql_expr::t> id_3582 { std::nullopt };
+                            std::optional<dessser::gen::raql_expr::t_ext> id_3582 { std::nullopt };
                             Size id_3583 { 1UL };
                             Pointer id_3584 { drec_snd_173.skip(id_3583) };
-                            b8de1a5ea94913283815cebff1d39083 id_3585 {  id_3582, id_3584  };
+                            tf1063a6af8c1fb72f0e0ee089d43d040 id_3585 { id_3582, id_3584 };
                             choose_res_3581 = id_3585;
                           } else {
-                            std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3586 { dessser::gen::raql_expr::of_row_binary };
+                            auto fun3586 { dessser::gen::raql_expr::of_row_binary };
                             Size id_3587 { 1UL };
                             Pointer id_3588 { drec_snd_173.skip(id_3587) };
-                            v_3501be1aaefb5944279c6a13f6d0d43f id_3589 { id_3586(id_3588) };
-                            b8de1a5ea94913283815cebff1d39083 letpair_res_3590;
+                            t1113e6691818baaf60a775527f6cc1ac id_3589 { fun3586(id_3588) };
+                            tf1063a6af8c1fb72f0e0ee089d43d040 letpair_res_3590;
                             {
                               auto make1_1_fst_175 { std::get<0>(id_3589) };
                               auto make1_1_snd_176 { std::get<1>(id_3589) };
-                              std::optional<dessser::gen::raql_expr::t> id_3591 { make1_1_fst_175 };
-                              b8de1a5ea94913283815cebff1d39083 id_3592 {  id_3591, make1_1_snd_176  };
+                              std::optional<dessser::gen::raql_expr::t_ext> id_3591 { make1_1_fst_175 };
+                              tf1063a6af8c1fb72f0e0ee089d43d040 id_3592 { id_3591, make1_1_snd_176 };
                               letpair_res_3590 = id_3592;
                             }
                             choose_res_3581 = letpair_res_3590;
                           }
-                          v_26a7856c13c8c419d187250936cafd80 let_res_3593;
+                          t1313b4ee18248dd765ed6ae8b0058504 let_res_3593;
                           {
-                            b8de1a5ea94913283815cebff1d39083 drec_177 { choose_res_3581 };
-                            v_26a7856c13c8c419d187250936cafd80 letpair_res_3594;
+                            tf1063a6af8c1fb72f0e0ee089d43d040 drec_177 { choose_res_3581 };
+                            t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3594;
                             {
                               auto drec_fst_178 { std::get<0>(drec_177) };
                               auto drec_snd_179 { std::get<1>(drec_177) };
-                              v_362f9d9108a6902af48b6c83d5377ea1 id_3595 { drec_snd_179.readU16Le() };
-                              v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_3596;
+                              t22a32080ad88ab548b80077a17b7dd46 id_3595 { drec_snd_179.readU16Le() };
+                              t22a32080ad88ab548b80077a17b7dd46 letpair_res_3596;
                               {
                                 auto du16_fst_181 { std::get<0>(id_3595) };
                                 auto du16_snd_182 { std::get<1>(id_3595) };
-                                v_362f9d9108a6902af48b6c83d5377ea1 id_3597 {  du16_fst_181, du16_snd_182  };
+                                t22a32080ad88ab548b80077a17b7dd46 id_3597 { du16_fst_181, du16_snd_182 };
                                 letpair_res_3596 = id_3597;
                               }
-                              v_42875bc32d3471e3da6c6b29c921056e let_res_3598;
+                              tae0102a98baabe959d4e6cb1e047e44b let_res_3598;
                               {
-                                v_362f9d9108a6902af48b6c83d5377ea1 dsum1_186 { letpair_res_3596 };
-                                v_42875bc32d3471e3da6c6b29c921056e letpair_res_3599;
+                                t22a32080ad88ab548b80077a17b7dd46 dsum1_186 { letpair_res_3596 };
+                                tae0102a98baabe959d4e6cb1e047e44b letpair_res_3599;
                                 {
                                   auto dsum1_fst_187 { std::get<0>(dsum1_186) };
                                   auto dsum1_snd_188 { std::get<1>(dsum1_186) };
                                   uint16_t id_3600 { 0 };
                                   bool id_3601 { bool(id_3600 == dsum1_fst_187) };
-                                  v_42875bc32d3471e3da6c6b29c921056e choose_res_3602;
+                                  tae0102a98baabe959d4e6cb1e047e44b choose_res_3602;
                                   if (id_3601) {
-                                    v_39cf200fa778e5fa84401746e9b5ba70 id_3603 { std::in_place_index<0>, VOID };
-                                    v_42875bc32d3471e3da6c6b29c921056e id_3604 {  id_3603, dsum1_snd_188  };
+                                    (void)VOID;
+                                    t6f8c1c936ce8cf2fe9dc881177aa3e62 id_3603 { std::in_place_index<0>, VOID };
+                                    tae0102a98baabe959d4e6cb1e047e44b id_3604 { id_3603, dsum1_snd_188 };
                                     choose_res_3602 = id_3604;
                                   } else {
                                     uint16_t id_3605 { 1 };
                                     bool id_3606 { bool(id_3605 == dsum1_fst_187) };
-                                    v_42875bc32d3471e3da6c6b29c921056e choose_res_3607;
+                                    tae0102a98baabe959d4e6cb1e047e44b choose_res_3607;
                                     if (id_3606) {
-                                      std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3608 { dessser::gen::raql_expr::of_row_binary };
-                                      v_3501be1aaefb5944279c6a13f6d0d43f id_3609 { id_3608(dsum1_snd_188) };
-                                      v_42875bc32d3471e3da6c6b29c921056e letpair_res_3610;
+                                      auto fun3608 { dessser::gen::raql_expr::of_row_binary };
+                                      t1113e6691818baaf60a775527f6cc1ac id_3609 { fun3608(dsum1_snd_188) };
+                                      tae0102a98baabe959d4e6cb1e047e44b letpair_res_3610;
                                       {
                                         auto dsum2_fst_202 { std::get<0>(id_3609) };
                                         auto dsum2_snd_203 { std::get<1>(id_3609) };
-                                        v_39cf200fa778e5fa84401746e9b5ba70 id_3611 { std::in_place_index<1>, dsum2_fst_202 };
-                                        v_42875bc32d3471e3da6c6b29c921056e id_3612 {  id_3611, dsum2_snd_203  };
+                                        t6f8c1c936ce8cf2fe9dc881177aa3e62 id_3611 { std::in_place_index<1>, dsum2_fst_202 };
+                                        tae0102a98baabe959d4e6cb1e047e44b id_3612 { id_3611, dsum2_snd_203 };
                                         letpair_res_3610 = id_3612;
                                       }
                                       choose_res_3607 = letpair_res_3610;
                                     } else {
                                       uint16_t id_3613 { 2 };
                                       bool id_3614 { bool(id_3613 == dsum1_fst_187) };
-                                      v_42875bc32d3471e3da6c6b29c921056e choose_res_3615;
+                                      tae0102a98baabe959d4e6cb1e047e44b choose_res_3615;
                                       if (id_3614) {
-                                        v_39cf200fa778e5fa84401746e9b5ba70 id_3616 { std::in_place_index<2>, VOID };
-                                        v_42875bc32d3471e3da6c6b29c921056e id_3617 {  id_3616, dsum1_snd_188  };
+                                        (void)VOID;
+                                        t6f8c1c936ce8cf2fe9dc881177aa3e62 id_3616 { std::in_place_index<2>, VOID };
+                                        tae0102a98baabe959d4e6cb1e047e44b id_3617 { id_3616, dsum1_snd_188 };
                                         choose_res_3615 = id_3617;
                                       } else {
                                         uint16_t id_3618 { 3 };
                                         bool id_3619 { bool(dsum1_fst_187 == id_3618) };
                                         Void id_3620 { ((void)(assert(id_3619)), VOID) };
-                                        std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3621 { dessser::gen::raql_expr::of_row_binary };
-                                        v_3501be1aaefb5944279c6a13f6d0d43f id_3622 { id_3621(dsum1_snd_188) };
-                                        v_42875bc32d3471e3da6c6b29c921056e let_res_3623;
+                                        (void)id_3620;
+                                        auto fun3621 { dessser::gen::raql_expr::of_row_binary };
+                                        t1113e6691818baaf60a775527f6cc1ac id_3622 { fun3621(dsum1_snd_188) };
+                                        tae0102a98baabe959d4e6cb1e047e44b let_res_3623;
                                         {
-                                          v_3501be1aaefb5944279c6a13f6d0d43f drec_189 { id_3622 };
-                                          v_42875bc32d3471e3da6c6b29c921056e letpair_res_3624;
+                                          t1113e6691818baaf60a775527f6cc1ac drec_189 { id_3622 };
+                                          tae0102a98baabe959d4e6cb1e047e44b letpair_res_3624;
                                           {
                                             auto drec_fst_190 { std::get<0>(drec_189) };
                                             auto drec_snd_191 { std::get<1>(drec_189) };
-                                            std::function<v_3501be1aaefb5944279c6a13f6d0d43f(Pointer)> id_3625 { dessser::gen::raql_expr::of_row_binary };
-                                            v_3501be1aaefb5944279c6a13f6d0d43f id_3626 { id_3625(drec_snd_191) };
-                                            v_42875bc32d3471e3da6c6b29c921056e letpair_res_3627;
+                                            auto fun3625 { dessser::gen::raql_expr::of_row_binary };
+                                            t1113e6691818baaf60a775527f6cc1ac id_3626 { fun3625(drec_snd_191) };
+                                            tae0102a98baabe959d4e6cb1e047e44b letpair_res_3627;
                                             {
                                               auto drec_fst_193 { std::get<0>(id_3626) };
                                               auto drec_snd_194 { std::get<1>(id_3626) };
-                                              e1d3e929c0a104569907bf46832d32c2 id_3628 {  .after_max_secs = drec_fst_190, .after_max_events = drec_fst_193  };
-                                              v_39cf200fa778e5fa84401746e9b5ba70 id_3629 { std::in_place_index<3>, id_3628 };
-                                              v_42875bc32d3471e3da6c6b29c921056e id_3630 {  id_3629, drec_snd_194  };
+                                              tee7dccc2726e2723462077a878a69c99 id_3628 { .after_max_secs = drec_fst_190, .after_max_events = drec_fst_193 };
+                                              t6f8c1c936ce8cf2fe9dc881177aa3e62 id_3629 { std::in_place_index<3>, id_3628 };
+                                              tae0102a98baabe959d4e6cb1e047e44b id_3630 { id_3629, drec_snd_194 };
                                               letpair_res_3627 = id_3630;
                                             }
                                             letpair_res_3624 = letpair_res_3627;
@@ -8228,13 +8636,13 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 }
                                 let_res_3598 = letpair_res_3599;
                               }
-                              v_26a7856c13c8c419d187250936cafd80 letpair_res_3631;
+                              t1313b4ee18248dd765ed6ae8b0058504 letpair_res_3631;
                               {
                                 auto drec_fst_208 { std::get<0>(let_res_3598) };
                                 auto drec_snd_209 { std::get<1>(let_res_3598) };
-                                v_81cd54ad1d16b1060af71b31d87d9f09 id_3632 {  .options = drec_fst_169, .topic = drec_fst_172, .partitions = drec_fst_178, .restart_from = drec_fst_208  };
-                                v_8c0c938be0fcefc45cc5b9cf52c46f04 id_3633 { std::in_place_index<1>, id_3632 };
-                                v_26a7856c13c8c419d187250936cafd80 id_3634 {  id_3633, drec_snd_209  };
+                                te6ac276a1b6044b9474a56a7da93a611 id_3632 { .options = drec_fst_169, .topic = drec_fst_172, .partitions = drec_fst_178, .restart_from = drec_fst_208 };
+                                tf708b6568b9bac184e3f5da3a64f4419 id_3633 { std::in_place_index<1>, id_3632 };
+                                t1313b4ee18248dd765ed6ae8b0058504 id_3634 { id_3633, drec_snd_209 };
                                 letpair_res_3631 = id_3634;
                               }
                               letpair_res_3594 = letpair_res_3631;
@@ -8255,76 +8663,77 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
               }
               let_res_3413 = letpair_res_3414;
             }
-            f63f919559f0d70225bd0da5dd9bcafc let_res_3635;
+            t45217dce3db5a9a49037839afd0048e8 let_res_3635;
             {
-              v_26a7856c13c8c419d187250936cafd80 drec_228 { let_res_3413 };
-              f63f919559f0d70225bd0da5dd9bcafc letpair_res_3636;
+              t1313b4ee18248dd765ed6ae8b0058504 drec_228 { let_res_3413 };
+              t45217dce3db5a9a49037839afd0048e8 letpair_res_3636;
               {
                 auto drec_fst_229 { std::get<0>(drec_228) };
                 auto drec_snd_230 { std::get<1>(drec_228) };
-                v_362f9d9108a6902af48b6c83d5377ea1 id_3637 { drec_snd_230.readU16Le() };
-                v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_3638;
+                t22a32080ad88ab548b80077a17b7dd46 id_3637 { drec_snd_230.readU16Le() };
+                t22a32080ad88ab548b80077a17b7dd46 letpair_res_3638;
                 {
                   auto du16_fst_232 { std::get<0>(id_3637) };
                   auto du16_snd_233 { std::get<1>(id_3637) };
-                  v_362f9d9108a6902af48b6c83d5377ea1 id_3639 {  du16_fst_232, du16_snd_233  };
+                  t22a32080ad88ab548b80077a17b7dd46 id_3639 { du16_fst_232, du16_snd_233 };
                   letpair_res_3638 = id_3639;
                 }
-                v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3640;
+                t61bdb3f643c3108bb612fc36951fce20 let_res_3640;
                 {
-                  v_362f9d9108a6902af48b6c83d5377ea1 dsum1_237 { letpair_res_3638 };
-                  v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3641;
+                  t22a32080ad88ab548b80077a17b7dd46 dsum1_237 { letpair_res_3638 };
+                  t61bdb3f643c3108bb612fc36951fce20 letpair_res_3641;
                   {
                     auto dsum1_fst_238 { std::get<0>(dsum1_237) };
                     auto dsum1_snd_239 { std::get<1>(dsum1_237) };
                     uint16_t id_3642 { 0 };
                     bool id_3643 { bool(id_3642 == dsum1_fst_238) };
-                    v_3e5c9d57d2ea7ab21f644c4920676340 choose_res_3644;
+                    t61bdb3f643c3108bb612fc36951fce20 choose_res_3644;
                     if (id_3643) {
-                      v_1d5843897434feb24d158f3793db9189 id_3645 { dsum1_snd_239.readU8() };
-                      v_8918042b739b29ed611b63fbda84666e letpair_res_3646;
+                      tb3f98ea670610d40658a618de3ec7b90 id_3645 { dsum1_snd_239.readU8() };
+                      t9c427530664aa522ce95ad420b884056 letpair_res_3646;
                       {
                         auto dchar_fst_267 { std::get<0>(id_3645) };
                         auto dchar_snd_268 { std::get<1>(id_3645) };
                         char id_3647 { char(dchar_fst_267) };
-                        v_8918042b739b29ed611b63fbda84666e id_3648 {  id_3647, dchar_snd_268  };
+                        t9c427530664aa522ce95ad420b884056 id_3648 { id_3647, dchar_snd_268 };
                         letpair_res_3646 = id_3648;
                       }
-                      v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3649;
+                      t61bdb3f643c3108bb612fc36951fce20 let_res_3649;
                       {
-                        v_8918042b739b29ed611b63fbda84666e drec_269 { letpair_res_3646 };
-                        v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3650;
+                        t9c427530664aa522ce95ad420b884056 drec_269 { letpair_res_3646 };
+                        t61bdb3f643c3108bb612fc36951fce20 letpair_res_3650;
                         {
                           auto drec_fst_270 { std::get<0>(drec_269) };
                           auto drec_snd_271 { std::get<1>(drec_269) };
                           uint32_t id_3651 { 0U };
                           Vec<1, uint32_t> id_3652 {  id_3651  };
-                          v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3653;
+                          t8beb80162423aee37bd383e9b6834c9c let_res_3653;
                           {
                             Vec<1, uint32_t> leb_ref_272 { id_3652 };
                             uint8_t id_3654 { 0 };
                             Vec<1, uint8_t> id_3655 {  id_3654  };
-                            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3656;
+                            t8beb80162423aee37bd383e9b6834c9c let_res_3656;
                             {
                               Vec<1, uint8_t> shft_ref_273 { id_3655 };
                               Vec<1, Pointer> id_3657 {  drec_snd_271  };
-                              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3658;
+                              t8beb80162423aee37bd383e9b6834c9c let_res_3658;
                               {
                                 Vec<1, Pointer> p_ref_274 { id_3657 };
                                 bool while_flag_3659 { true };
                                 do {
                                   uint8_t id_3660 { 0 };
                                   Pointer id_3661 { p_ref_274[id_3660] };
-                                  v_1d5843897434feb24d158f3793db9189 id_3662 { id_3661.readU8() };
+                                  tb3f98ea670610d40658a618de3ec7b90 id_3662 { id_3661.readU8() };
                                   bool let_res_3663;
                                   {
-                                    v_1d5843897434feb24d158f3793db9189 leb128_275 { id_3662 };
+                                    tb3f98ea670610d40658a618de3ec7b90 leb128_275 { id_3662 };
                                     bool letpair_res_3664;
                                     {
                                       auto leb128_fst_276 { std::get<0>(leb128_275) };
                                       auto leb128_snd_277 { std::get<1>(leb128_275) };
                                       uint8_t id_3665 { 0 };
                                       Void id_3666 { ((void)(p_ref_274[id_3665] = leb128_snd_277), VOID) };
+                                      (void)id_3666;
                                       uint8_t id_3667 { 0 };
                                       uint8_t id_3668 { 127 };
                                       uint8_t id_3669 { uint8_t(leb128_fst_276 & id_3668) };
@@ -8336,12 +8745,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                       uint32_t id_3675 { leb_ref_272[id_3674] };
                                       uint32_t id_3676 { uint32_t(id_3673 | id_3675) };
                                       Void id_3677 { ((void)(leb_ref_272[id_3667] = id_3676), VOID) };
+                                      (void)id_3677;
                                       uint8_t id_3678 { 0 };
                                       uint8_t id_3679 { 0 };
                                       uint8_t id_3680 { shft_ref_273[id_3679] };
                                       uint8_t id_3681 { 7 };
                                       uint8_t id_3682 { uint8_t(id_3680 + id_3681) };
                                       Void id_3683 { ((void)(shft_ref_273[id_3678] = id_3682), VOID) };
+                                      (void)id_3683;
                                       uint8_t id_3684 { 128 };
                                       bool id_3685 { bool(leb128_fst_276 >= id_3684) };
                                       letpair_res_3664 = id_3685;
@@ -8350,93 +8761,96 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   }
                                   while_flag_3659 = let_res_3663;
                                   if (while_flag_3659) {
+                                    (void)VOID;
                                   }
                                 } while (while_flag_3659);
+                                (void)VOID;
                                 uint8_t id_3686 { 0 };
                                 uint32_t id_3687 { leb_ref_272[id_3686] };
                                 Size id_3688 { Size(id_3687) };
                                 uint8_t id_3689 { 0 };
                                 Pointer id_3690 { p_ref_274[id_3689] };
-                                v_41b0681ed7f1f185fd3e6c4dcdc13110 id_3691 {  id_3688, id_3690  };
+                                t8beb80162423aee37bd383e9b6834c9c id_3691 { id_3688, id_3690 };
                                 let_res_3658 = id_3691;
                               }
                               let_res_3656 = let_res_3658;
                             }
                             let_res_3653 = let_res_3656;
                           }
-                          v_46a5e81c2410b000ff0adea6dc198147 let_res_3692;
+                          tef94b55d8809251f13165d9a05bd9d0e let_res_3692;
                           {
-                            v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_278 { let_res_3653 };
-                            v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3693;
+                            t8beb80162423aee37bd383e9b6834c9c dstring1_278 { let_res_3653 };
+                            tef94b55d8809251f13165d9a05bd9d0e letpair_res_3693;
                             {
                               auto dstring1_fst_279 { std::get<0>(dstring1_278) };
                               auto dstring1_snd_280 { std::get<1>(dstring1_278) };
-                              f921d1e0a170c3c04148c21704db9c45 id_3694 { dstring1_snd_280.readBytes(dstring1_fst_279) };
-                              v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3695;
+                              t188345aa49abd0cb47ff73fedc219f08 id_3694 { dstring1_snd_280.readBytes(dstring1_fst_279) };
+                              tef94b55d8809251f13165d9a05bd9d0e letpair_res_3695;
                               {
                                 auto dstring2_fst_282 { std::get<0>(id_3694) };
                                 auto dstring2_snd_283 { std::get<1>(id_3694) };
                                 std::string id_3696 { dstring2_fst_282.toString() };
-                                v_46a5e81c2410b000ff0adea6dc198147 id_3697 {  id_3696, dstring2_snd_283  };
+                                tef94b55d8809251f13165d9a05bd9d0e id_3697 { id_3696, dstring2_snd_283 };
                                 letpair_res_3695 = id_3697;
                               }
                               letpair_res_3693 = letpair_res_3695;
                             }
                             let_res_3692 = letpair_res_3693;
                           }
-                          v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3698;
+                          t61bdb3f643c3108bb612fc36951fce20 let_res_3698;
                           {
-                            v_46a5e81c2410b000ff0adea6dc198147 drec_284 { let_res_3692 };
-                            v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3699;
+                            tef94b55d8809251f13165d9a05bd9d0e drec_284 { let_res_3692 };
+                            t61bdb3f643c3108bb612fc36951fce20 letpair_res_3699;
                             {
                               auto drec_fst_285 { std::get<0>(drec_284) };
                               auto drec_snd_286 { std::get<1>(drec_284) };
-                              v_1d5843897434feb24d158f3793db9189 id_3700 { drec_snd_286.readU8() };
-                              f2a48a42f9c827f487e53ee52a4e9e2f letpair_res_3701;
+                              tb3f98ea670610d40658a618de3ec7b90 id_3700 { drec_snd_286.readU8() };
+                              t4138de986e20d18b01e4c493dc9d5451 letpair_res_3701;
                               {
                                 auto dbool_fst_288 { std::get<0>(id_3700) };
                                 auto dbool_snd_289 { std::get<1>(id_3700) };
                                 uint8_t id_3702 { 0 };
                                 bool id_3703 { bool(dbool_fst_288 == id_3702) };
                                 bool id_3704 { ! id_3703 };
-                                f2a48a42f9c827f487e53ee52a4e9e2f id_3705 {  id_3704, dbool_snd_289  };
+                                t4138de986e20d18b01e4c493dc9d5451 id_3705 { id_3704, dbool_snd_289 };
                                 letpair_res_3701 = id_3705;
                               }
-                              v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3706;
+                              t61bdb3f643c3108bb612fc36951fce20 let_res_3706;
                               {
-                                f2a48a42f9c827f487e53ee52a4e9e2f drec_290 { letpair_res_3701 };
-                                v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3707;
+                                t4138de986e20d18b01e4c493dc9d5451 drec_290 { letpair_res_3701 };
+                                t61bdb3f643c3108bb612fc36951fce20 letpair_res_3707;
                                 {
                                   auto drec_fst_291 { std::get<0>(drec_290) };
                                   auto drec_snd_292 { std::get<1>(drec_290) };
                                   uint32_t id_3708 { 0U };
                                   Vec<1, uint32_t> id_3709 {  id_3708  };
-                                  v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3710;
+                                  t8beb80162423aee37bd383e9b6834c9c let_res_3710;
                                   {
                                     Vec<1, uint32_t> leb_ref_293 { id_3709 };
                                     uint8_t id_3711 { 0 };
                                     Vec<1, uint8_t> id_3712 {  id_3711  };
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3713;
+                                    t8beb80162423aee37bd383e9b6834c9c let_res_3713;
                                     {
                                       Vec<1, uint8_t> shft_ref_294 { id_3712 };
                                       Vec<1, Pointer> id_3714 {  drec_snd_292  };
-                                      v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_3715;
+                                      t8beb80162423aee37bd383e9b6834c9c let_res_3715;
                                       {
                                         Vec<1, Pointer> p_ref_295 { id_3714 };
                                         bool while_flag_3716 { true };
                                         do {
                                           uint8_t id_3717 { 0 };
                                           Pointer id_3718 { p_ref_295[id_3717] };
-                                          v_1d5843897434feb24d158f3793db9189 id_3719 { id_3718.readU8() };
+                                          tb3f98ea670610d40658a618de3ec7b90 id_3719 { id_3718.readU8() };
                                           bool let_res_3720;
                                           {
-                                            v_1d5843897434feb24d158f3793db9189 leb128_296 { id_3719 };
+                                            tb3f98ea670610d40658a618de3ec7b90 leb128_296 { id_3719 };
                                             bool letpair_res_3721;
                                             {
                                               auto leb128_fst_297 { std::get<0>(leb128_296) };
                                               auto leb128_snd_298 { std::get<1>(leb128_296) };
                                               uint8_t id_3722 { 0 };
                                               Void id_3723 { ((void)(p_ref_295[id_3722] = leb128_snd_298), VOID) };
+                                              (void)id_3723;
                                               uint8_t id_3724 { 0 };
                                               uint8_t id_3725 { 127 };
                                               uint8_t id_3726 { uint8_t(leb128_fst_297 & id_3725) };
@@ -8448,12 +8862,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                               uint32_t id_3732 { leb_ref_293[id_3731] };
                                               uint32_t id_3733 { uint32_t(id_3730 | id_3732) };
                                               Void id_3734 { ((void)(leb_ref_293[id_3724] = id_3733), VOID) };
+                                              (void)id_3734;
                                               uint8_t id_3735 { 0 };
                                               uint8_t id_3736 { 0 };
                                               uint8_t id_3737 { shft_ref_294[id_3736] };
                                               uint8_t id_3738 { 7 };
                                               uint8_t id_3739 { uint8_t(id_3737 + id_3738) };
                                               Void id_3740 { ((void)(shft_ref_294[id_3735] = id_3739), VOID) };
+                                              (void)id_3740;
                                               uint8_t id_3741 { 128 };
                                               bool id_3742 { bool(leb128_fst_297 >= id_3741) };
                                               letpair_res_3721 = id_3742;
@@ -8462,75 +8878,78 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                           }
                                           while_flag_3716 = let_res_3720;
                                           if (while_flag_3716) {
+                                            (void)VOID;
                                           }
                                         } while (while_flag_3716);
+                                        (void)VOID;
                                         uint8_t id_3743 { 0 };
                                         uint32_t id_3744 { leb_ref_293[id_3743] };
                                         Size id_3745 { Size(id_3744) };
                                         uint8_t id_3746 { 0 };
                                         Pointer id_3747 { p_ref_295[id_3746] };
-                                        v_41b0681ed7f1f185fd3e6c4dcdc13110 id_3748 {  id_3745, id_3747  };
+                                        t8beb80162423aee37bd383e9b6834c9c id_3748 { id_3745, id_3747 };
                                         let_res_3715 = id_3748;
                                       }
                                       let_res_3713 = let_res_3715;
                                     }
                                     let_res_3710 = let_res_3713;
                                   }
-                                  v_46a5e81c2410b000ff0adea6dc198147 let_res_3749;
+                                  tef94b55d8809251f13165d9a05bd9d0e let_res_3749;
                                   {
-                                    v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_299 { let_res_3710 };
-                                    v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3750;
+                                    t8beb80162423aee37bd383e9b6834c9c dstring1_299 { let_res_3710 };
+                                    tef94b55d8809251f13165d9a05bd9d0e letpair_res_3750;
                                     {
                                       auto dstring1_fst_300 { std::get<0>(dstring1_299) };
                                       auto dstring1_snd_301 { std::get<1>(dstring1_299) };
-                                      f921d1e0a170c3c04148c21704db9c45 id_3751 { dstring1_snd_301.readBytes(dstring1_fst_300) };
-                                      v_46a5e81c2410b000ff0adea6dc198147 letpair_res_3752;
+                                      t188345aa49abd0cb47ff73fedc219f08 id_3751 { dstring1_snd_301.readBytes(dstring1_fst_300) };
+                                      tef94b55d8809251f13165d9a05bd9d0e letpair_res_3752;
                                       {
                                         auto dstring2_fst_303 { std::get<0>(id_3751) };
                                         auto dstring2_snd_304 { std::get<1>(id_3751) };
                                         std::string id_3753 { dstring2_fst_303.toString() };
-                                        v_46a5e81c2410b000ff0adea6dc198147 id_3754 {  id_3753, dstring2_snd_304  };
+                                        tef94b55d8809251f13165d9a05bd9d0e id_3754 { id_3753, dstring2_snd_304 };
                                         letpair_res_3752 = id_3754;
                                       }
                                       letpair_res_3750 = letpair_res_3752;
                                     }
                                     let_res_3749 = letpair_res_3750;
                                   }
-                                  v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3755;
+                                  t61bdb3f643c3108bb612fc36951fce20 let_res_3755;
                                   {
-                                    v_46a5e81c2410b000ff0adea6dc198147 drec_305 { let_res_3749 };
-                                    v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3756;
+                                    tef94b55d8809251f13165d9a05bd9d0e drec_305 { let_res_3749 };
+                                    t61bdb3f643c3108bb612fc36951fce20 letpair_res_3756;
                                     {
                                       auto drec_fst_306 { std::get<0>(drec_305) };
                                       auto drec_snd_307 { std::get<1>(drec_305) };
                                       uint32_t id_3757 { 0U };
                                       Vec<1, uint32_t> id_3758 {  id_3757  };
-                                      ac0fbd05039f742d2f1d9ac182e392ab let_res_3759;
+                                      t405eb186408556fed8f2c41523c07d13 let_res_3759;
                                       {
                                         Vec<1, uint32_t> leb_ref_308 { id_3758 };
                                         uint8_t id_3760 { 0 };
                                         Vec<1, uint8_t> id_3761 {  id_3760  };
-                                        ac0fbd05039f742d2f1d9ac182e392ab let_res_3762;
+                                        t405eb186408556fed8f2c41523c07d13 let_res_3762;
                                         {
                                           Vec<1, uint8_t> shft_ref_309 { id_3761 };
                                           Vec<1, Pointer> id_3763 {  drec_snd_307  };
-                                          ac0fbd05039f742d2f1d9ac182e392ab let_res_3764;
+                                          t405eb186408556fed8f2c41523c07d13 let_res_3764;
                                           {
                                             Vec<1, Pointer> p_ref_310 { id_3763 };
                                             bool while_flag_3765 { true };
                                             do {
                                               uint8_t id_3766 { 0 };
                                               Pointer id_3767 { p_ref_310[id_3766] };
-                                              v_1d5843897434feb24d158f3793db9189 id_3768 { id_3767.readU8() };
+                                              tb3f98ea670610d40658a618de3ec7b90 id_3768 { id_3767.readU8() };
                                               bool let_res_3769;
                                               {
-                                                v_1d5843897434feb24d158f3793db9189 leb128_311 { id_3768 };
+                                                tb3f98ea670610d40658a618de3ec7b90 leb128_311 { id_3768 };
                                                 bool letpair_res_3770;
                                                 {
                                                   auto leb128_fst_312 { std::get<0>(leb128_311) };
                                                   auto leb128_snd_313 { std::get<1>(leb128_311) };
                                                   uint8_t id_3771 { 0 };
                                                   Void id_3772 { ((void)(p_ref_310[id_3771] = leb128_snd_313), VOID) };
+                                                  (void)id_3772;
                                                   uint8_t id_3773 { 0 };
                                                   uint8_t id_3774 { 127 };
                                                   uint8_t id_3775 { uint8_t(leb128_fst_312 & id_3774) };
@@ -8542,12 +8961,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                   uint32_t id_3781 { leb_ref_308[id_3780] };
                                                   uint32_t id_3782 { uint32_t(id_3779 | id_3781) };
                                                   Void id_3783 { ((void)(leb_ref_308[id_3773] = id_3782), VOID) };
+                                                  (void)id_3783;
                                                   uint8_t id_3784 { 0 };
                                                   uint8_t id_3785 { 0 };
                                                   uint8_t id_3786 { shft_ref_309[id_3785] };
                                                   uint8_t id_3787 { 7 };
                                                   uint8_t id_3788 { uint8_t(id_3786 + id_3787) };
                                                   Void id_3789 { ((void)(shft_ref_309[id_3784] = id_3788), VOID) };
+                                                  (void)id_3789;
                                                   uint8_t id_3790 { 128 };
                                                   bool id_3791 { bool(leb128_fst_312 >= id_3790) };
                                                   letpair_res_3770 = id_3791;
@@ -8556,32 +8977,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                               }
                                               while_flag_3765 = let_res_3769;
                                               if (while_flag_3765) {
+                                                (void)VOID;
                                               }
                                             } while (while_flag_3765);
+                                            (void)VOID;
                                             uint8_t id_3792 { 0 };
                                             uint32_t id_3793 { leb_ref_308[id_3792] };
                                             uint8_t id_3794 { 0 };
                                             Pointer id_3795 { p_ref_310[id_3794] };
-                                            ac0fbd05039f742d2f1d9ac182e392ab id_3796 {  id_3793, id_3795  };
+                                            t405eb186408556fed8f2c41523c07d13 id_3796 { id_3793, id_3795 };
                                             let_res_3764 = id_3796;
                                           }
                                           let_res_3762 = let_res_3764;
                                         }
                                         let_res_3759 = let_res_3762;
                                       }
-                                      v_095c3de60a557af15ef637104c21dbea let_res_3797;
+                                      tfba505af7788ece275315330d94bba2e let_res_3797;
                                       {
-                                        ac0fbd05039f742d2f1d9ac182e392ab dlist1_317 { let_res_3759 };
-                                        v_095c3de60a557af15ef637104c21dbea letpair_res_3798;
+                                        t405eb186408556fed8f2c41523c07d13 dlist1_317 { let_res_3759 };
+                                        tfba505af7788ece275315330d94bba2e letpair_res_3798;
                                         {
                                           auto dlist1_fst_318 { std::get<0>(dlist1_317) };
                                           auto dlist1_snd_319 { std::get<1>(dlist1_317) };
-                                          Lst<dessser::gen::field_type::t> endoflist_3799;
-                                          v_095c3de60a557af15ef637104c21dbea id_3800 {  endoflist_3799, dlist1_snd_319  };
-                                          Vec<1, v_095c3de60a557af15ef637104c21dbea> id_3801 {  id_3800  };
-                                          v_095c3de60a557af15ef637104c21dbea let_res_3802;
+                                          Lst<dessser::gen::field_type::t_ext> endoflist_3799;
+                                          tfba505af7788ece275315330d94bba2e id_3800 { endoflist_3799, dlist1_snd_319 };
+                                          Vec<1, tfba505af7788ece275315330d94bba2e> id_3801 {  id_3800  };
+                                          tfba505af7788ece275315330d94bba2e let_res_3802;
                                           {
-                                            Vec<1, v_095c3de60a557af15ef637104c21dbea> inits_src_ref_320 { id_3801 };
+                                            Vec<1, tfba505af7788ece275315330d94bba2e> inits_src_ref_320 { id_3801 };
                                             int32_t id_3803 { 0L };
                                             Vec<1, int32_t> id_3804 {  id_3803  };
                                             {
@@ -8595,86 +9018,93 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                                 while_flag_3805 = id_3809;
                                                 if (while_flag_3805) {
                                                   uint8_t id_3810 { 0 };
-                                                  v_095c3de60a557af15ef637104c21dbea id_3811 { inits_src_ref_320[id_3810] };
+                                                  tfba505af7788ece275315330d94bba2e id_3811 { inits_src_ref_320[id_3810] };
                                                   {
-                                                    v_095c3de60a557af15ef637104c21dbea dlist2_322 { id_3811 };
+                                                    tfba505af7788ece275315330d94bba2e dlist2_322 { id_3811 };
                                                     {
                                                       auto dlist2_fst_323 { std::get<0>(dlist2_322) };
                                                       auto dlist2_snd_324 { std::get<1>(dlist2_322) };
                                                       uint8_t id_3812 { 0 };
-                                                      std::function<v_03ddfabda296f7bff76f03d4225eaf1a(Pointer)> id_3813 { dessser::gen::field_type::of_row_binary };
-                                                      v_03ddfabda296f7bff76f03d4225eaf1a id_3814 { id_3813(dlist2_snd_324) };
-                                                      v_095c3de60a557af15ef637104c21dbea letpair_res_3815;
+                                                      auto fun3813 { dessser::gen::field_type::of_row_binary };
+                                                      t2f09fa79b0bdf1902e3b53bc7e485604 id_3814 { fun3813(dlist2_snd_324) };
+                                                      tfba505af7788ece275315330d94bba2e letpair_res_3815;
                                                       {
                                                         auto dlist3_fst_326 { std::get<0>(id_3814) };
                                                         auto dlist3_snd_327 { std::get<1>(id_3814) };
-                                                        Lst<dessser::gen::field_type::t> id_3816 { dlist3_fst_326, dlist2_fst_323 };
-                                                        v_095c3de60a557af15ef637104c21dbea id_3817 {  id_3816, dlist3_snd_327  };
+                                                        Lst<dessser::gen::field_type::t_ext> id_3816 { dlist3_fst_326, dlist2_fst_323 };
+                                                        tfba505af7788ece275315330d94bba2e id_3817 { id_3816, dlist3_snd_327 };
                                                         letpair_res_3815 = id_3817;
                                                       }
                                                       Void id_3818 { ((void)(inits_src_ref_320[id_3812] = letpair_res_3815), VOID) };
+                                                      (void)id_3818;
                                                     }
+                                                    (void)VOID;
                                                   }
+                                                  (void)VOID;
                                                   uint8_t id_3819 { 0 };
                                                   uint8_t id_3820 { 0 };
                                                   int32_t id_3821 { repeat_n_321[id_3820] };
                                                   int32_t id_3822 { 1L };
                                                   int32_t id_3823 { int32_t(id_3821 + id_3822) };
                                                   Void id_3824 { ((void)(repeat_n_321[id_3819] = id_3823), VOID) };
+                                                  (void)id_3824;
+                                                  (void)id_3824;
                                                 }
                                               } while (while_flag_3805);
+                                              (void)VOID;
                                             }
+                                            (void)VOID;
                                             uint8_t id_3825 { 0 };
-                                            v_095c3de60a557af15ef637104c21dbea id_3826 { inits_src_ref_320[id_3825] };
+                                            tfba505af7788ece275315330d94bba2e id_3826 { inits_src_ref_320[id_3825] };
                                             let_res_3802 = id_3826;
                                           }
                                           letpair_res_3798 = let_res_3802;
                                         }
                                         let_res_3797 = letpair_res_3798;
                                       }
-                                      v_095c3de60a557af15ef637104c21dbea letpair_res_3827;
+                                      tfba505af7788ece275315330d94bba2e letpair_res_3827;
                                       {
                                         auto dlist4_fst_329 { std::get<0>(let_res_3797) };
                                         auto dlist4_snd_330 { std::get<1>(let_res_3797) };
-                                        v_095c3de60a557af15ef637104c21dbea id_3828 {  dlist4_fst_329, dlist4_snd_330  };
+                                        tfba505af7788ece275315330d94bba2e id_3828 { dlist4_fst_329, dlist4_snd_330 };
                                         letpair_res_3827 = id_3828;
                                       }
-                                      v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3829;
+                                      t61bdb3f643c3108bb612fc36951fce20 let_res_3829;
                                       {
-                                        v_095c3de60a557af15ef637104c21dbea drec_331 { letpair_res_3827 };
-                                        v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3830;
+                                        tfba505af7788ece275315330d94bba2e drec_331 { letpair_res_3827 };
+                                        t61bdb3f643c3108bb612fc36951fce20 letpair_res_3830;
                                         {
                                           auto drec_fst_332 { std::get<0>(drec_331) };
                                           auto drec_snd_333 { std::get<1>(drec_331) };
-                                          v_1d5843897434feb24d158f3793db9189 id_3831 { drec_snd_333.readU8() };
-                                          f2a48a42f9c827f487e53ee52a4e9e2f letpair_res_3832;
+                                          tb3f98ea670610d40658a618de3ec7b90 id_3831 { drec_snd_333.readU8() };
+                                          t4138de986e20d18b01e4c493dc9d5451 letpair_res_3832;
                                           {
                                             auto dbool_fst_335 { std::get<0>(id_3831) };
                                             auto dbool_snd_336 { std::get<1>(id_3831) };
                                             uint8_t id_3833 { 0 };
                                             bool id_3834 { bool(dbool_fst_335 == id_3833) };
                                             bool id_3835 { ! id_3834 };
-                                            f2a48a42f9c827f487e53ee52a4e9e2f id_3836 {  id_3835, dbool_snd_336  };
+                                            t4138de986e20d18b01e4c493dc9d5451 id_3836 { id_3835, dbool_snd_336 };
                                             letpair_res_3832 = id_3836;
                                           }
-                                          v_3e5c9d57d2ea7ab21f644c4920676340 let_res_3837;
+                                          t61bdb3f643c3108bb612fc36951fce20 let_res_3837;
                                           {
-                                            f2a48a42f9c827f487e53ee52a4e9e2f drec_337 { letpair_res_3832 };
-                                            v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3838;
+                                            t4138de986e20d18b01e4c493dc9d5451 drec_337 { letpair_res_3832 };
+                                            t61bdb3f643c3108bb612fc36951fce20 letpair_res_3838;
                                             {
                                               auto drec_fst_338 { std::get<0>(drec_337) };
                                               auto drec_snd_339 { std::get<1>(drec_337) };
-                                              v_1d5843897434feb24d158f3793db9189 id_3839 { drec_snd_339.readU8() };
-                                              v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3840;
+                                              tb3f98ea670610d40658a618de3ec7b90 id_3839 { drec_snd_339.readU8() };
+                                              t61bdb3f643c3108bb612fc36951fce20 letpair_res_3840;
                                               {
                                                 auto dbool_fst_341 { std::get<0>(id_3839) };
                                                 auto dbool_snd_342 { std::get<1>(id_3839) };
                                                 uint8_t id_3841 { 0 };
                                                 bool id_3842 { bool(dbool_fst_341 == id_3841) };
                                                 bool id_3843 { ! id_3842 };
-                                                v_951168fd627e4197ab60b5fba89b770b id_3844 {  .separator = drec_fst_270, .null = drec_fst_285, .may_quote = drec_fst_291, .escape_seq = drec_fst_306, .fields = drec_fst_332, .vectors_of_chars_as_string = drec_fst_338, .clickhouse_syntax = id_3843  };
-                                                v_21e8c6eca31cc038e9faa45d5b86bfa4 id_3845 { std::in_place_index<0>, id_3844 };
-                                                v_3e5c9d57d2ea7ab21f644c4920676340 id_3846 {  id_3845, dbool_snd_342  };
+                                                tc1ee34cdd9bdb8371d318bb284a788a8 id_3844 { .separator = drec_fst_270, .null = drec_fst_285, .may_quote = drec_fst_291, .escape_seq = drec_fst_306, .fields = drec_fst_332, .vectors_of_chars_as_string = drec_fst_338, .clickhouse_syntax = id_3843 };
+                                                t570dd118e4f520aece0574b2f62e7634 id_3845 { std::in_place_index<0>, id_3844 };
+                                                t61bdb3f643c3108bb612fc36951fce20 id_3846 { id_3845, dbool_snd_342 };
                                                 letpair_res_3840 = id_3846;
                                               }
                                               letpair_res_3838 = letpair_res_3840;
@@ -8706,34 +9136,36 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                       uint16_t id_3847 { 1 };
                       bool id_3848 { bool(dsum1_fst_238 == id_3847) };
                       Void id_3849 { ((void)(assert(id_3848)), VOID) };
+                      (void)id_3849;
                       uint32_t id_3850 { 0U };
                       Vec<1, uint32_t> id_3851 {  id_3850  };
-                      ac0fbd05039f742d2f1d9ac182e392ab let_res_3852;
+                      t405eb186408556fed8f2c41523c07d13 let_res_3852;
                       {
                         Vec<1, uint32_t> leb_ref_240 { id_3851 };
                         uint8_t id_3853 { 0 };
                         Vec<1, uint8_t> id_3854 {  id_3853  };
-                        ac0fbd05039f742d2f1d9ac182e392ab let_res_3855;
+                        t405eb186408556fed8f2c41523c07d13 let_res_3855;
                         {
                           Vec<1, uint8_t> shft_ref_241 { id_3854 };
                           Vec<1, Pointer> id_3856 {  dsum1_snd_239  };
-                          ac0fbd05039f742d2f1d9ac182e392ab let_res_3857;
+                          t405eb186408556fed8f2c41523c07d13 let_res_3857;
                           {
                             Vec<1, Pointer> p_ref_242 { id_3856 };
                             bool while_flag_3858 { true };
                             do {
                               uint8_t id_3859 { 0 };
                               Pointer id_3860 { p_ref_242[id_3859] };
-                              v_1d5843897434feb24d158f3793db9189 id_3861 { id_3860.readU8() };
+                              tb3f98ea670610d40658a618de3ec7b90 id_3861 { id_3860.readU8() };
                               bool let_res_3862;
                               {
-                                v_1d5843897434feb24d158f3793db9189 leb128_243 { id_3861 };
+                                tb3f98ea670610d40658a618de3ec7b90 leb128_243 { id_3861 };
                                 bool letpair_res_3863;
                                 {
                                   auto leb128_fst_244 { std::get<0>(leb128_243) };
                                   auto leb128_snd_245 { std::get<1>(leb128_243) };
                                   uint8_t id_3864 { 0 };
                                   Void id_3865 { ((void)(p_ref_242[id_3864] = leb128_snd_245), VOID) };
+                                  (void)id_3865;
                                   uint8_t id_3866 { 0 };
                                   uint8_t id_3867 { 127 };
                                   uint8_t id_3868 { uint8_t(leb128_fst_244 & id_3867) };
@@ -8745,12 +9177,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   uint32_t id_3874 { leb_ref_240[id_3873] };
                                   uint32_t id_3875 { uint32_t(id_3872 | id_3874) };
                                   Void id_3876 { ((void)(leb_ref_240[id_3866] = id_3875), VOID) };
+                                  (void)id_3876;
                                   uint8_t id_3877 { 0 };
                                   uint8_t id_3878 { 0 };
                                   uint8_t id_3879 { shft_ref_241[id_3878] };
                                   uint8_t id_3880 { 7 };
                                   uint8_t id_3881 { uint8_t(id_3879 + id_3880) };
                                   Void id_3882 { ((void)(shft_ref_241[id_3877] = id_3881), VOID) };
+                                  (void)id_3882;
                                   uint8_t id_3883 { 128 };
                                   bool id_3884 { bool(leb128_fst_244 >= id_3883) };
                                   letpair_res_3863 = id_3884;
@@ -8759,32 +9193,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                               }
                               while_flag_3858 = let_res_3862;
                               if (while_flag_3858) {
+                                (void)VOID;
                               }
                             } while (while_flag_3858);
+                            (void)VOID;
                             uint8_t id_3885 { 0 };
                             uint32_t id_3886 { leb_ref_240[id_3885] };
                             uint8_t id_3887 { 0 };
                             Pointer id_3888 { p_ref_242[id_3887] };
-                            ac0fbd05039f742d2f1d9ac182e392ab id_3889 {  id_3886, id_3888  };
+                            t405eb186408556fed8f2c41523c07d13 id_3889 { id_3886, id_3888 };
                             let_res_3857 = id_3889;
                           }
                           let_res_3855 = let_res_3857;
                         }
                         let_res_3852 = let_res_3855;
                       }
-                      v_095c3de60a557af15ef637104c21dbea let_res_3890;
+                      tfba505af7788ece275315330d94bba2e let_res_3890;
                       {
-                        ac0fbd05039f742d2f1d9ac182e392ab dlist1_249 { let_res_3852 };
-                        v_095c3de60a557af15ef637104c21dbea letpair_res_3891;
+                        t405eb186408556fed8f2c41523c07d13 dlist1_249 { let_res_3852 };
+                        tfba505af7788ece275315330d94bba2e letpair_res_3891;
                         {
                           auto dlist1_fst_250 { std::get<0>(dlist1_249) };
                           auto dlist1_snd_251 { std::get<1>(dlist1_249) };
-                          Lst<dessser::gen::field_type::t> endoflist_3892;
-                          v_095c3de60a557af15ef637104c21dbea id_3893 {  endoflist_3892, dlist1_snd_251  };
-                          Vec<1, v_095c3de60a557af15ef637104c21dbea> id_3894 {  id_3893  };
-                          v_095c3de60a557af15ef637104c21dbea let_res_3895;
+                          Lst<dessser::gen::field_type::t_ext> endoflist_3892;
+                          tfba505af7788ece275315330d94bba2e id_3893 { endoflist_3892, dlist1_snd_251 };
+                          Vec<1, tfba505af7788ece275315330d94bba2e> id_3894 {  id_3893  };
+                          tfba505af7788ece275315330d94bba2e let_res_3895;
                           {
-                            Vec<1, v_095c3de60a557af15ef637104c21dbea> inits_src_ref_252 { id_3894 };
+                            Vec<1, tfba505af7788ece275315330d94bba2e> inits_src_ref_252 { id_3894 };
                             int32_t id_3896 { 0L };
                             Vec<1, int32_t> id_3897 {  id_3896  };
                             {
@@ -8798,49 +9234,56 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 while_flag_3898 = id_3902;
                                 if (while_flag_3898) {
                                   uint8_t id_3903 { 0 };
-                                  v_095c3de60a557af15ef637104c21dbea id_3904 { inits_src_ref_252[id_3903] };
+                                  tfba505af7788ece275315330d94bba2e id_3904 { inits_src_ref_252[id_3903] };
                                   {
-                                    v_095c3de60a557af15ef637104c21dbea dlist2_254 { id_3904 };
+                                    tfba505af7788ece275315330d94bba2e dlist2_254 { id_3904 };
                                     {
                                       auto dlist2_fst_255 { std::get<0>(dlist2_254) };
                                       auto dlist2_snd_256 { std::get<1>(dlist2_254) };
                                       uint8_t id_3905 { 0 };
-                                      std::function<v_03ddfabda296f7bff76f03d4225eaf1a(Pointer)> id_3906 { dessser::gen::field_type::of_row_binary };
-                                      v_03ddfabda296f7bff76f03d4225eaf1a id_3907 { id_3906(dlist2_snd_256) };
-                                      v_095c3de60a557af15ef637104c21dbea letpair_res_3908;
+                                      auto fun3906 { dessser::gen::field_type::of_row_binary };
+                                      t2f09fa79b0bdf1902e3b53bc7e485604 id_3907 { fun3906(dlist2_snd_256) };
+                                      tfba505af7788ece275315330d94bba2e letpair_res_3908;
                                       {
                                         auto dlist3_fst_258 { std::get<0>(id_3907) };
                                         auto dlist3_snd_259 { std::get<1>(id_3907) };
-                                        Lst<dessser::gen::field_type::t> id_3909 { dlist3_fst_258, dlist2_fst_255 };
-                                        v_095c3de60a557af15ef637104c21dbea id_3910 {  id_3909, dlist3_snd_259  };
+                                        Lst<dessser::gen::field_type::t_ext> id_3909 { dlist3_fst_258, dlist2_fst_255 };
+                                        tfba505af7788ece275315330d94bba2e id_3910 { id_3909, dlist3_snd_259 };
                                         letpair_res_3908 = id_3910;
                                       }
                                       Void id_3911 { ((void)(inits_src_ref_252[id_3905] = letpair_res_3908), VOID) };
+                                      (void)id_3911;
                                     }
+                                    (void)VOID;
                                   }
+                                  (void)VOID;
                                   uint8_t id_3912 { 0 };
                                   uint8_t id_3913 { 0 };
                                   int32_t id_3914 { repeat_n_253[id_3913] };
                                   int32_t id_3915 { 1L };
                                   int32_t id_3916 { int32_t(id_3914 + id_3915) };
                                   Void id_3917 { ((void)(repeat_n_253[id_3912] = id_3916), VOID) };
+                                  (void)id_3917;
+                                  (void)id_3917;
                                 }
                               } while (while_flag_3898);
+                              (void)VOID;
                             }
+                            (void)VOID;
                             uint8_t id_3918 { 0 };
-                            v_095c3de60a557af15ef637104c21dbea id_3919 { inits_src_ref_252[id_3918] };
+                            tfba505af7788ece275315330d94bba2e id_3919 { inits_src_ref_252[id_3918] };
                             let_res_3895 = id_3919;
                           }
                           letpair_res_3891 = let_res_3895;
                         }
                         let_res_3890 = letpair_res_3891;
                       }
-                      v_3e5c9d57d2ea7ab21f644c4920676340 letpair_res_3920;
+                      t61bdb3f643c3108bb612fc36951fce20 letpair_res_3920;
                       {
                         auto dlist4_fst_261 { std::get<0>(let_res_3890) };
                         auto dlist4_snd_262 { std::get<1>(let_res_3890) };
-                        v_21e8c6eca31cc038e9faa45d5b86bfa4 id_3921 { std::in_place_index<1>, dlist4_fst_261 };
-                        v_3e5c9d57d2ea7ab21f644c4920676340 id_3922 {  id_3921, dlist4_snd_262  };
+                        t570dd118e4f520aece0574b2f62e7634 id_3921 { std::in_place_index<1>, dlist4_fst_261 };
+                        t61bdb3f643c3108bb612fc36951fce20 id_3922 { id_3921, dlist4_snd_262 };
                         letpair_res_3920 = id_3922;
                       }
                       choose_res_3644 = letpair_res_3920;
@@ -8849,10 +9292,10 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                   }
                   let_res_3640 = letpair_res_3641;
                 }
-                f63f919559f0d70225bd0da5dd9bcafc let_res_3923;
+                t45217dce3db5a9a49037839afd0048e8 let_res_3923;
                 {
-                  v_3e5c9d57d2ea7ab21f644c4920676340 drec_349 { let_res_3640 };
-                  f63f919559f0d70225bd0da5dd9bcafc letpair_res_3924;
+                  t61bdb3f643c3108bb612fc36951fce20 drec_349 { let_res_3640 };
+                  t45217dce3db5a9a49037839afd0048e8 letpair_res_3924;
                   {
                     auto drec_fst_350 { std::get<0>(drec_349) };
                     auto drec_snd_351 { std::get<1>(drec_349) };
@@ -8860,63 +9303,64 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     uint8_t id_3926 { drec_snd_351.peekU8(id_3925) };
                     uint8_t id_3927 { 1 };
                     bool id_3928 { bool(id_3926 == id_3927) };
-                    v_640ffd570a38fa81256c323a616f666c choose_res_3929;
+                    te3858ac581a2bb69ede2f45fc6f9aff4 choose_res_3929;
                     if (id_3928) {
-                      std::optional<dessser::gen::event_time::t> id_3930 { std::nullopt };
+                      std::optional<dessser::gen::event_time::t_ext> id_3930 { std::nullopt };
                       Size id_3931 { 1UL };
                       Pointer id_3932 { drec_snd_351.skip(id_3931) };
-                      v_640ffd570a38fa81256c323a616f666c id_3933 {  id_3930, id_3932  };
+                      te3858ac581a2bb69ede2f45fc6f9aff4 id_3933 { id_3930, id_3932 };
                       choose_res_3929 = id_3933;
                     } else {
-                      std::function<v_3171d2c768002071c5128a227625b3a2(Pointer)> id_3934 { dessser::gen::event_time::of_row_binary };
+                      auto fun3934 { dessser::gen::event_time::of_row_binary };
                       Size id_3935 { 1UL };
                       Pointer id_3936 { drec_snd_351.skip(id_3935) };
-                      v_3171d2c768002071c5128a227625b3a2 id_3937 { id_3934(id_3936) };
-                      v_640ffd570a38fa81256c323a616f666c letpair_res_3938;
+                      te8ff255b34432f8503a86cf675cbafe6 id_3937 { fun3934(id_3936) };
+                      te3858ac581a2bb69ede2f45fc6f9aff4 letpair_res_3938;
                       {
                         auto make1_1_fst_353 { std::get<0>(id_3937) };
                         auto make1_1_snd_354 { std::get<1>(id_3937) };
-                        std::optional<dessser::gen::event_time::t> id_3939 { make1_1_fst_353 };
-                        v_640ffd570a38fa81256c323a616f666c id_3940 {  id_3939, make1_1_snd_354  };
+                        std::optional<dessser::gen::event_time::t_ext> id_3939 { make1_1_fst_353 };
+                        te3858ac581a2bb69ede2f45fc6f9aff4 id_3940 { id_3939, make1_1_snd_354 };
                         letpair_res_3938 = id_3940;
                       }
                       choose_res_3929 = letpair_res_3938;
                     }
-                    f63f919559f0d70225bd0da5dd9bcafc let_res_3941;
+                    t45217dce3db5a9a49037839afd0048e8 let_res_3941;
                     {
-                      v_640ffd570a38fa81256c323a616f666c drec_355 { choose_res_3929 };
-                      f63f919559f0d70225bd0da5dd9bcafc letpair_res_3942;
+                      te3858ac581a2bb69ede2f45fc6f9aff4 drec_355 { choose_res_3929 };
+                      t45217dce3db5a9a49037839afd0048e8 letpair_res_3942;
                       {
                         auto drec_fst_356 { std::get<0>(drec_355) };
                         auto drec_snd_357 { std::get<1>(drec_355) };
                         uint32_t id_3943 { 0U };
                         Vec<1, uint32_t> id_3944 {  id_3943  };
-                        ac0fbd05039f742d2f1d9ac182e392ab let_res_3945;
+                        t405eb186408556fed8f2c41523c07d13 let_res_3945;
                         {
                           Vec<1, uint32_t> leb_ref_358 { id_3944 };
                           uint8_t id_3946 { 0 };
                           Vec<1, uint8_t> id_3947 {  id_3946  };
-                          ac0fbd05039f742d2f1d9ac182e392ab let_res_3948;
+                          t405eb186408556fed8f2c41523c07d13 let_res_3948;
                           {
                             Vec<1, uint8_t> shft_ref_359 { id_3947 };
                             Vec<1, Pointer> id_3949 {  drec_snd_357  };
-                            ac0fbd05039f742d2f1d9ac182e392ab let_res_3950;
+                            t405eb186408556fed8f2c41523c07d13 let_res_3950;
                             {
                               Vec<1, Pointer> p_ref_360 { id_3949 };
                               bool while_flag_3951 { true };
                               do {
                                 uint8_t id_3952 { 0 };
                                 Pointer id_3953 { p_ref_360[id_3952] };
-                                v_1d5843897434feb24d158f3793db9189 id_3954 { id_3953.readU8() };
+                                tb3f98ea670610d40658a618de3ec7b90 id_3954 { id_3953.readU8() };
                                 bool let_res_3955;
                                 {
-                                  v_1d5843897434feb24d158f3793db9189 leb128_361 { id_3954 };
+                                  tb3f98ea670610d40658a618de3ec7b90 leb128_361 { id_3954 };
                                   bool letpair_res_3956;
                                   {
                                     auto leb128_fst_362 { std::get<0>(leb128_361) };
                                     auto leb128_snd_363 { std::get<1>(leb128_361) };
                                     uint8_t id_3957 { 0 };
                                     Void id_3958 { ((void)(p_ref_360[id_3957] = leb128_snd_363), VOID) };
+                                    (void)id_3958;
                                     uint8_t id_3959 { 0 };
                                     uint8_t id_3960 { 127 };
                                     uint8_t id_3961 { uint8_t(leb128_fst_362 & id_3960) };
@@ -8928,12 +9372,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     uint32_t id_3967 { leb_ref_358[id_3966] };
                                     uint32_t id_3968 { uint32_t(id_3965 | id_3967) };
                                     Void id_3969 { ((void)(leb_ref_358[id_3959] = id_3968), VOID) };
+                                    (void)id_3969;
                                     uint8_t id_3970 { 0 };
                                     uint8_t id_3971 { 0 };
                                     uint8_t id_3972 { shft_ref_359[id_3971] };
                                     uint8_t id_3973 { 7 };
                                     uint8_t id_3974 { uint8_t(id_3972 + id_3973) };
                                     Void id_3975 { ((void)(shft_ref_359[id_3970] = id_3974), VOID) };
+                                    (void)id_3975;
                                     uint8_t id_3976 { 128 };
                                     bool id_3977 { bool(leb128_fst_362 >= id_3976) };
                                     letpair_res_3956 = id_3977;
@@ -8942,32 +9388,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 }
                                 while_flag_3951 = let_res_3955;
                                 if (while_flag_3951) {
+                                  (void)VOID;
                                 }
                               } while (while_flag_3951);
+                              (void)VOID;
                               uint8_t id_3978 { 0 };
                               uint32_t id_3979 { leb_ref_358[id_3978] };
                               uint8_t id_3980 { 0 };
                               Pointer id_3981 { p_ref_360[id_3980] };
-                              ac0fbd05039f742d2f1d9ac182e392ab id_3982 {  id_3979, id_3981  };
+                              t405eb186408556fed8f2c41523c07d13 id_3982 { id_3979, id_3981 };
                               let_res_3950 = id_3982;
                             }
                             let_res_3948 = let_res_3950;
                           }
                           let_res_3945 = let_res_3948;
                         }
-                        v_73b9a8533327ef50c5288ee51f32bdb3 let_res_3983;
+                        t0dfa866705b76efff53e4aa97228a967 let_res_3983;
                         {
-                          ac0fbd05039f742d2f1d9ac182e392ab dlist1_367 { let_res_3945 };
-                          v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_3984;
+                          t405eb186408556fed8f2c41523c07d13 dlist1_367 { let_res_3945 };
+                          t0dfa866705b76efff53e4aa97228a967 letpair_res_3984;
                           {
                             auto dlist1_fst_368 { std::get<0>(dlist1_367) };
                             auto dlist1_snd_369 { std::get<1>(dlist1_367) };
-                            Lst<dessser::gen::field_name::t> endoflist_3985;
-                            v_73b9a8533327ef50c5288ee51f32bdb3 id_3986 {  endoflist_3985, dlist1_snd_369  };
-                            Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> id_3987 {  id_3986  };
-                            v_73b9a8533327ef50c5288ee51f32bdb3 let_res_3988;
+                            Lst<dessser::gen::field_name::t_ext> endoflist_3985;
+                            t0dfa866705b76efff53e4aa97228a967 id_3986 { endoflist_3985, dlist1_snd_369 };
+                            Vec<1, t0dfa866705b76efff53e4aa97228a967> id_3987 {  id_3986  };
+                            t0dfa866705b76efff53e4aa97228a967 let_res_3988;
                             {
-                              Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> inits_src_ref_370 { id_3987 };
+                              Vec<1, t0dfa866705b76efff53e4aa97228a967> inits_src_ref_370 { id_3987 };
                               int32_t id_3989 { 0L };
                               Vec<1, int32_t> id_3990 {  id_3989  };
                               {
@@ -8981,50 +9429,57 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   while_flag_3991 = id_3995;
                                   if (while_flag_3991) {
                                     uint8_t id_3996 { 0 };
-                                    v_73b9a8533327ef50c5288ee51f32bdb3 id_3997 { inits_src_ref_370[id_3996] };
+                                    t0dfa866705b76efff53e4aa97228a967 id_3997 { inits_src_ref_370[id_3996] };
                                     {
-                                      v_73b9a8533327ef50c5288ee51f32bdb3 dlist2_372 { id_3997 };
+                                      t0dfa866705b76efff53e4aa97228a967 dlist2_372 { id_3997 };
                                       {
                                         auto dlist2_fst_373 { std::get<0>(dlist2_372) };
                                         auto dlist2_snd_374 { std::get<1>(dlist2_372) };
                                         uint8_t id_3998 { 0 };
-                                        std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_3999 { dessser::gen::field_name::of_row_binary };
-                                        c50aa083fa818c6eeca389b0025dda98 id_4000 { id_3999(dlist2_snd_374) };
-                                        v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_4001;
+                                        auto fun3999 { dessser::gen::field_name::of_row_binary };
+                                        t273a2b7978f5b466a128a51c1cc4a27b id_4000 { fun3999(dlist2_snd_374) };
+                                        t0dfa866705b76efff53e4aa97228a967 letpair_res_4001;
                                         {
                                           auto dlist3_fst_376 { std::get<0>(id_4000) };
                                           auto dlist3_snd_377 { std::get<1>(id_4000) };
-                                          Lst<dessser::gen::field_name::t> id_4002 { dlist3_fst_376, dlist2_fst_373 };
-                                          v_73b9a8533327ef50c5288ee51f32bdb3 id_4003 {  id_4002, dlist3_snd_377  };
+                                          Lst<dessser::gen::field_name::t_ext> id_4002 { dlist3_fst_376, dlist2_fst_373 };
+                                          t0dfa866705b76efff53e4aa97228a967 id_4003 { id_4002, dlist3_snd_377 };
                                           letpair_res_4001 = id_4003;
                                         }
                                         Void id_4004 { ((void)(inits_src_ref_370[id_3998] = letpair_res_4001), VOID) };
+                                        (void)id_4004;
                                       }
+                                      (void)VOID;
                                     }
+                                    (void)VOID;
                                     uint8_t id_4005 { 0 };
                                     uint8_t id_4006 { 0 };
                                     int32_t id_4007 { repeat_n_371[id_4006] };
                                     int32_t id_4008 { 1L };
                                     int32_t id_4009 { int32_t(id_4007 + id_4008) };
                                     Void id_4010 { ((void)(repeat_n_371[id_4005] = id_4009), VOID) };
+                                    (void)id_4010;
+                                    (void)id_4010;
                                   }
                                 } while (while_flag_3991);
+                                (void)VOID;
                               }
+                              (void)VOID;
                               uint8_t id_4011 { 0 };
-                              v_73b9a8533327ef50c5288ee51f32bdb3 id_4012 { inits_src_ref_370[id_4011] };
+                              t0dfa866705b76efff53e4aa97228a967 id_4012 { inits_src_ref_370[id_4011] };
                               let_res_3988 = id_4012;
                             }
                             letpair_res_3984 = let_res_3988;
                           }
                           let_res_3983 = letpair_res_3984;
                         }
-                        f63f919559f0d70225bd0da5dd9bcafc letpair_res_4013;
+                        t45217dce3db5a9a49037839afd0048e8 letpair_res_4013;
                         {
                           auto dlist4_fst_379 { std::get<0>(let_res_3983) };
                           auto dlist4_snd_380 { std::get<1>(let_res_3983) };
-                          c1efb28eecd443c961e69845a587fe0d id_4014 {  .source = drec_fst_229, .format = drec_fst_350, .event_time = drec_fst_356, .factors = dlist4_fst_379  };
-                          t id_4015 { std::in_place_index<1>, id_4014 };
-                          f63f919559f0d70225bd0da5dd9bcafc id_4016 {  id_4015, dlist4_snd_380  };
+                          t1d5c57287ee550c3ccac78b88bba5862 id_4014 { .source = drec_fst_229, .format = drec_fst_350, .event_time = drec_fst_356, .factors = dlist4_fst_379 };
+                          t* id_4015 { new t(std::in_place_index<1>, id_4014) };
+                          t45217dce3db5a9a49037839afd0048e8 id_4016 { id_4015, dlist4_snd_380 };
                           letpair_res_4013 = id_4016;
                         }
                         letpair_res_3942 = letpair_res_4013;
@@ -9044,34 +9499,36 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
             uint16_t id_4017 { 2 };
             bool id_4018 { bool(dsum1_fst_63 == id_4017) };
             Void id_4019 { ((void)(assert(id_4018)), VOID) };
+            (void)id_4019;
             uint32_t id_4020 { 0U };
             Vec<1, uint32_t> id_4021 {  id_4020  };
-            v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_4022;
+            t8beb80162423aee37bd383e9b6834c9c let_res_4022;
             {
               Vec<1, uint32_t> leb_ref_65 { id_4021 };
               uint8_t id_4023 { 0 };
               Vec<1, uint8_t> id_4024 {  id_4023  };
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_4025;
+              t8beb80162423aee37bd383e9b6834c9c let_res_4025;
               {
                 Vec<1, uint8_t> shft_ref_66 { id_4024 };
                 Vec<1, Pointer> id_4026 {  dsum1_snd_64  };
-                v_41b0681ed7f1f185fd3e6c4dcdc13110 let_res_4027;
+                t8beb80162423aee37bd383e9b6834c9c let_res_4027;
                 {
                   Vec<1, Pointer> p_ref_67 { id_4026 };
                   bool while_flag_4028 { true };
                   do {
                     uint8_t id_4029 { 0 };
                     Pointer id_4030 { p_ref_67[id_4029] };
-                    v_1d5843897434feb24d158f3793db9189 id_4031 { id_4030.readU8() };
+                    tb3f98ea670610d40658a618de3ec7b90 id_4031 { id_4030.readU8() };
                     bool let_res_4032;
                     {
-                      v_1d5843897434feb24d158f3793db9189 leb128_68 { id_4031 };
+                      tb3f98ea670610d40658a618de3ec7b90 leb128_68 { id_4031 };
                       bool letpair_res_4033;
                       {
                         auto leb128_fst_69 { std::get<0>(leb128_68) };
                         auto leb128_snd_70 { std::get<1>(leb128_68) };
                         uint8_t id_4034 { 0 };
                         Void id_4035 { ((void)(p_ref_67[id_4034] = leb128_snd_70), VOID) };
+                        (void)id_4035;
                         uint8_t id_4036 { 0 };
                         uint8_t id_4037 { 127 };
                         uint8_t id_4038 { uint8_t(leb128_fst_69 & id_4037) };
@@ -9083,12 +9540,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                         uint32_t id_4044 { leb_ref_65[id_4043] };
                         uint32_t id_4045 { uint32_t(id_4042 | id_4044) };
                         Void id_4046 { ((void)(leb_ref_65[id_4036] = id_4045), VOID) };
+                        (void)id_4046;
                         uint8_t id_4047 { 0 };
                         uint8_t id_4048 { 0 };
                         uint8_t id_4049 { shft_ref_66[id_4048] };
                         uint8_t id_4050 { 7 };
                         uint8_t id_4051 { uint8_t(id_4049 + id_4050) };
                         Void id_4052 { ((void)(shft_ref_66[id_4047] = id_4051), VOID) };
+                        (void)id_4052;
                         uint8_t id_4053 { 128 };
                         bool id_4054 { bool(leb128_fst_69 >= id_4053) };
                         letpair_res_4033 = id_4054;
@@ -9097,99 +9556,102 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                     }
                     while_flag_4028 = let_res_4032;
                     if (while_flag_4028) {
+                      (void)VOID;
                     }
                   } while (while_flag_4028);
+                  (void)VOID;
                   uint8_t id_4055 { 0 };
                   uint32_t id_4056 { leb_ref_65[id_4055] };
                   Size id_4057 { Size(id_4056) };
                   uint8_t id_4058 { 0 };
                   Pointer id_4059 { p_ref_67[id_4058] };
-                  v_41b0681ed7f1f185fd3e6c4dcdc13110 id_4060 {  id_4057, id_4059  };
+                  t8beb80162423aee37bd383e9b6834c9c id_4060 { id_4057, id_4059 };
                   let_res_4027 = id_4060;
                 }
                 let_res_4025 = let_res_4027;
               }
               let_res_4022 = let_res_4025;
             }
-            v_46a5e81c2410b000ff0adea6dc198147 let_res_4061;
+            tef94b55d8809251f13165d9a05bd9d0e let_res_4061;
             {
-              v_41b0681ed7f1f185fd3e6c4dcdc13110 dstring1_71 { let_res_4022 };
-              v_46a5e81c2410b000ff0adea6dc198147 letpair_res_4062;
+              t8beb80162423aee37bd383e9b6834c9c dstring1_71 { let_res_4022 };
+              tef94b55d8809251f13165d9a05bd9d0e letpair_res_4062;
               {
                 auto dstring1_fst_72 { std::get<0>(dstring1_71) };
                 auto dstring1_snd_73 { std::get<1>(dstring1_71) };
-                f921d1e0a170c3c04148c21704db9c45 id_4063 { dstring1_snd_73.readBytes(dstring1_fst_72) };
-                v_46a5e81c2410b000ff0adea6dc198147 letpair_res_4064;
+                t188345aa49abd0cb47ff73fedc219f08 id_4063 { dstring1_snd_73.readBytes(dstring1_fst_72) };
+                tef94b55d8809251f13165d9a05bd9d0e letpair_res_4064;
                 {
                   auto dstring2_fst_75 { std::get<0>(id_4063) };
                   auto dstring2_snd_76 { std::get<1>(id_4063) };
                   std::string id_4065 { dstring2_fst_75.toString() };
-                  v_46a5e81c2410b000ff0adea6dc198147 id_4066 {  id_4065, dstring2_snd_76  };
+                  tef94b55d8809251f13165d9a05bd9d0e id_4066 { id_4065, dstring2_snd_76 };
                   letpair_res_4064 = id_4066;
                 }
                 letpair_res_4062 = letpair_res_4064;
               }
               let_res_4061 = letpair_res_4062;
             }
-            f63f919559f0d70225bd0da5dd9bcafc let_res_4067;
+            t45217dce3db5a9a49037839afd0048e8 let_res_4067;
             {
-              v_46a5e81c2410b000ff0adea6dc198147 drec_77 { let_res_4061 };
-              f63f919559f0d70225bd0da5dd9bcafc letpair_res_4068;
+              tef94b55d8809251f13165d9a05bd9d0e drec_77 { let_res_4061 };
+              t45217dce3db5a9a49037839afd0048e8 letpair_res_4068;
               {
                 auto drec_fst_78 { std::get<0>(drec_77) };
                 auto drec_snd_79 { std::get<1>(drec_77) };
-                v_362f9d9108a6902af48b6c83d5377ea1 id_4069 { drec_snd_79.readU16Le() };
-                v_362f9d9108a6902af48b6c83d5377ea1 letpair_res_4070;
+                t22a32080ad88ab548b80077a17b7dd46 id_4069 { drec_snd_79.readU16Le() };
+                t22a32080ad88ab548b80077a17b7dd46 letpair_res_4070;
                 {
                   auto du16_fst_81 { std::get<0>(id_4069) };
                   auto du16_snd_82 { std::get<1>(id_4069) };
-                  v_362f9d9108a6902af48b6c83d5377ea1 id_4071 {  du16_fst_81, du16_snd_82  };
+                  t22a32080ad88ab548b80077a17b7dd46 id_4071 { du16_fst_81, du16_snd_82 };
                   letpair_res_4070 = id_4071;
                 }
-                f63f919559f0d70225bd0da5dd9bcafc let_res_4072;
+                t45217dce3db5a9a49037839afd0048e8 let_res_4072;
                 {
-                  v_362f9d9108a6902af48b6c83d5377ea1 drec_83 { letpair_res_4070 };
-                  f63f919559f0d70225bd0da5dd9bcafc letpair_res_4073;
+                  t22a32080ad88ab548b80077a17b7dd46 drec_83 { letpair_res_4070 };
+                  t45217dce3db5a9a49037839afd0048e8 letpair_res_4073;
                   {
                     auto drec_fst_84 { std::get<0>(drec_83) };
                     auto drec_snd_85 { std::get<1>(drec_83) };
-                    std::function<v_495a0c712724a24307658df553642300(Pointer)> id_4074 { dessser::gen::raql_net_protocol::of_row_binary };
-                    v_495a0c712724a24307658df553642300 id_4075 { id_4074(drec_snd_85) };
-                    f63f919559f0d70225bd0da5dd9bcafc let_res_4076;
+                    auto fun4074 { dessser::gen::raql_net_protocol::of_row_binary };
+                    t09401f6cfd6a52d2f08b29ed5a55a113 id_4075 { fun4074(drec_snd_85) };
+                    t45217dce3db5a9a49037839afd0048e8 let_res_4076;
                     {
-                      v_495a0c712724a24307658df553642300 drec_86 { id_4075 };
-                      f63f919559f0d70225bd0da5dd9bcafc letpair_res_4077;
+                      t09401f6cfd6a52d2f08b29ed5a55a113 drec_86 { id_4075 };
+                      t45217dce3db5a9a49037839afd0048e8 letpair_res_4077;
                       {
                         auto drec_fst_87 { std::get<0>(drec_86) };
                         auto drec_snd_88 { std::get<1>(drec_86) };
                         uint32_t id_4078 { 0U };
                         Vec<1, uint32_t> id_4079 {  id_4078  };
-                        ac0fbd05039f742d2f1d9ac182e392ab let_res_4080;
+                        t405eb186408556fed8f2c41523c07d13 let_res_4080;
                         {
                           Vec<1, uint32_t> leb_ref_89 { id_4079 };
                           uint8_t id_4081 { 0 };
                           Vec<1, uint8_t> id_4082 {  id_4081  };
-                          ac0fbd05039f742d2f1d9ac182e392ab let_res_4083;
+                          t405eb186408556fed8f2c41523c07d13 let_res_4083;
                           {
                             Vec<1, uint8_t> shft_ref_90 { id_4082 };
                             Vec<1, Pointer> id_4084 {  drec_snd_88  };
-                            ac0fbd05039f742d2f1d9ac182e392ab let_res_4085;
+                            t405eb186408556fed8f2c41523c07d13 let_res_4085;
                             {
                               Vec<1, Pointer> p_ref_91 { id_4084 };
                               bool while_flag_4086 { true };
                               do {
                                 uint8_t id_4087 { 0 };
                                 Pointer id_4088 { p_ref_91[id_4087] };
-                                v_1d5843897434feb24d158f3793db9189 id_4089 { id_4088.readU8() };
+                                tb3f98ea670610d40658a618de3ec7b90 id_4089 { id_4088.readU8() };
                                 bool let_res_4090;
                                 {
-                                  v_1d5843897434feb24d158f3793db9189 leb128_92 { id_4089 };
+                                  tb3f98ea670610d40658a618de3ec7b90 leb128_92 { id_4089 };
                                   bool letpair_res_4091;
                                   {
                                     auto leb128_fst_93 { std::get<0>(leb128_92) };
                                     auto leb128_snd_94 { std::get<1>(leb128_92) };
                                     uint8_t id_4092 { 0 };
                                     Void id_4093 { ((void)(p_ref_91[id_4092] = leb128_snd_94), VOID) };
+                                    (void)id_4093;
                                     uint8_t id_4094 { 0 };
                                     uint8_t id_4095 { 127 };
                                     uint8_t id_4096 { uint8_t(leb128_fst_93 & id_4095) };
@@ -9201,12 +9663,14 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                     uint32_t id_4102 { leb_ref_89[id_4101] };
                                     uint32_t id_4103 { uint32_t(id_4100 | id_4102) };
                                     Void id_4104 { ((void)(leb_ref_89[id_4094] = id_4103), VOID) };
+                                    (void)id_4104;
                                     uint8_t id_4105 { 0 };
                                     uint8_t id_4106 { 0 };
                                     uint8_t id_4107 { shft_ref_90[id_4106] };
                                     uint8_t id_4108 { 7 };
                                     uint8_t id_4109 { uint8_t(id_4107 + id_4108) };
                                     Void id_4110 { ((void)(shft_ref_90[id_4105] = id_4109), VOID) };
+                                    (void)id_4110;
                                     uint8_t id_4111 { 128 };
                                     bool id_4112 { bool(leb128_fst_93 >= id_4111) };
                                     letpair_res_4091 = id_4112;
@@ -9215,32 +9679,34 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                 }
                                 while_flag_4086 = let_res_4090;
                                 if (while_flag_4086) {
+                                  (void)VOID;
                                 }
                               } while (while_flag_4086);
+                              (void)VOID;
                               uint8_t id_4113 { 0 };
                               uint32_t id_4114 { leb_ref_89[id_4113] };
                               uint8_t id_4115 { 0 };
                               Pointer id_4116 { p_ref_91[id_4115] };
-                              ac0fbd05039f742d2f1d9ac182e392ab id_4117 {  id_4114, id_4116  };
+                              t405eb186408556fed8f2c41523c07d13 id_4117 { id_4114, id_4116 };
                               let_res_4085 = id_4117;
                             }
                             let_res_4083 = let_res_4085;
                           }
                           let_res_4080 = let_res_4083;
                         }
-                        v_73b9a8533327ef50c5288ee51f32bdb3 let_res_4118;
+                        t0dfa866705b76efff53e4aa97228a967 let_res_4118;
                         {
-                          ac0fbd05039f742d2f1d9ac182e392ab dlist1_98 { let_res_4080 };
-                          v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_4119;
+                          t405eb186408556fed8f2c41523c07d13 dlist1_98 { let_res_4080 };
+                          t0dfa866705b76efff53e4aa97228a967 letpair_res_4119;
                           {
                             auto dlist1_fst_99 { std::get<0>(dlist1_98) };
                             auto dlist1_snd_100 { std::get<1>(dlist1_98) };
-                            Lst<dessser::gen::field_name::t> endoflist_4120;
-                            v_73b9a8533327ef50c5288ee51f32bdb3 id_4121 {  endoflist_4120, dlist1_snd_100  };
-                            Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> id_4122 {  id_4121  };
-                            v_73b9a8533327ef50c5288ee51f32bdb3 let_res_4123;
+                            Lst<dessser::gen::field_name::t_ext> endoflist_4120;
+                            t0dfa866705b76efff53e4aa97228a967 id_4121 { endoflist_4120, dlist1_snd_100 };
+                            Vec<1, t0dfa866705b76efff53e4aa97228a967> id_4122 {  id_4121  };
+                            t0dfa866705b76efff53e4aa97228a967 let_res_4123;
                             {
-                              Vec<1, v_73b9a8533327ef50c5288ee51f32bdb3> inits_src_ref_101 { id_4122 };
+                              Vec<1, t0dfa866705b76efff53e4aa97228a967> inits_src_ref_101 { id_4122 };
                               int32_t id_4124 { 0L };
                               Vec<1, int32_t> id_4125 {  id_4124  };
                               {
@@ -9254,50 +9720,57 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
                                   while_flag_4126 = id_4130;
                                   if (while_flag_4126) {
                                     uint8_t id_4131 { 0 };
-                                    v_73b9a8533327ef50c5288ee51f32bdb3 id_4132 { inits_src_ref_101[id_4131] };
+                                    t0dfa866705b76efff53e4aa97228a967 id_4132 { inits_src_ref_101[id_4131] };
                                     {
-                                      v_73b9a8533327ef50c5288ee51f32bdb3 dlist2_103 { id_4132 };
+                                      t0dfa866705b76efff53e4aa97228a967 dlist2_103 { id_4132 };
                                       {
                                         auto dlist2_fst_104 { std::get<0>(dlist2_103) };
                                         auto dlist2_snd_105 { std::get<1>(dlist2_103) };
                                         uint8_t id_4133 { 0 };
-                                        std::function<c50aa083fa818c6eeca389b0025dda98(Pointer)> id_4134 { dessser::gen::field_name::of_row_binary };
-                                        c50aa083fa818c6eeca389b0025dda98 id_4135 { id_4134(dlist2_snd_105) };
-                                        v_73b9a8533327ef50c5288ee51f32bdb3 letpair_res_4136;
+                                        auto fun4134 { dessser::gen::field_name::of_row_binary };
+                                        t273a2b7978f5b466a128a51c1cc4a27b id_4135 { fun4134(dlist2_snd_105) };
+                                        t0dfa866705b76efff53e4aa97228a967 letpair_res_4136;
                                         {
                                           auto dlist3_fst_107 { std::get<0>(id_4135) };
                                           auto dlist3_snd_108 { std::get<1>(id_4135) };
-                                          Lst<dessser::gen::field_name::t> id_4137 { dlist3_fst_107, dlist2_fst_104 };
-                                          v_73b9a8533327ef50c5288ee51f32bdb3 id_4138 {  id_4137, dlist3_snd_108  };
+                                          Lst<dessser::gen::field_name::t_ext> id_4137 { dlist3_fst_107, dlist2_fst_104 };
+                                          t0dfa866705b76efff53e4aa97228a967 id_4138 { id_4137, dlist3_snd_108 };
                                           letpair_res_4136 = id_4138;
                                         }
                                         Void id_4139 { ((void)(inits_src_ref_101[id_4133] = letpair_res_4136), VOID) };
+                                        (void)id_4139;
                                       }
+                                      (void)VOID;
                                     }
+                                    (void)VOID;
                                     uint8_t id_4140 { 0 };
                                     uint8_t id_4141 { 0 };
                                     int32_t id_4142 { repeat_n_102[id_4141] };
                                     int32_t id_4143 { 1L };
                                     int32_t id_4144 { int32_t(id_4142 + id_4143) };
                                     Void id_4145 { ((void)(repeat_n_102[id_4140] = id_4144), VOID) };
+                                    (void)id_4145;
+                                    (void)id_4145;
                                   }
                                 } while (while_flag_4126);
+                                (void)VOID;
                               }
+                              (void)VOID;
                               uint8_t id_4146 { 0 };
-                              v_73b9a8533327ef50c5288ee51f32bdb3 id_4147 { inits_src_ref_101[id_4146] };
+                              t0dfa866705b76efff53e4aa97228a967 id_4147 { inits_src_ref_101[id_4146] };
                               let_res_4123 = id_4147;
                             }
                             letpair_res_4119 = let_res_4123;
                           }
                           let_res_4118 = letpair_res_4119;
                         }
-                        f63f919559f0d70225bd0da5dd9bcafc letpair_res_4148;
+                        t45217dce3db5a9a49037839afd0048e8 letpair_res_4148;
                         {
                           auto dlist4_fst_110 { std::get<0>(let_res_4118) };
                           auto dlist4_snd_111 { std::get<1>(let_res_4118) };
-                          v_00380e3ab86a3786288b2307b930623c id_4149 {  .net_addr = drec_fst_78, .port = drec_fst_84, .proto = drec_fst_87, .factors = dlist4_fst_110  };
-                          t id_4150 { std::in_place_index<2>, id_4149 };
-                          f63f919559f0d70225bd0da5dd9bcafc id_4151 {  id_4150, dlist4_snd_111  };
+                          t9ddff9e1963b15ba493db1f8dadd34fb id_4149 { .net_addr = drec_fst_78, .port = drec_fst_84, .proto = drec_fst_87, .factors = dlist4_fst_110 };
+                          t* id_4150 { new t(std::in_place_index<2>, id_4149) };
+                          t45217dce3db5a9a49037839afd0048e8 id_4151 { id_4150, dlist4_snd_111 };
                           letpair_res_4148 = id_4151;
                         }
                         letpair_res_4077 = letpair_res_4148;
@@ -9320,11 +9793,11 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
       }
       let_res_2632 = letpair_res_2633;
     }
-    f63f919559f0d70225bd0da5dd9bcafc letpair_res_4152;
+    t45217dce3db5a9a49037839afd0048e8 letpair_res_4152;
     {
       auto make_fst_690 { std::get<0>(let_res_2632) };
       auto make_snd_691 { std::get<1>(let_res_2632) };
-      f63f919559f0d70225bd0da5dd9bcafc id_4153 {  make_fst_690, make_snd_691  };
+      t45217dce3db5a9a49037839afd0048e8 id_4153 { make_fst_690, make_snd_691 };
       letpair_res_4152 = id_4153;
     }
     return letpair_res_4152;
@@ -9332,7 +9805,8 @@ static std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary_in
    };
   return fun2628;
 }
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary(of_row_binary_init());
+std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
 
+typedef t *t_ext;
 
 }

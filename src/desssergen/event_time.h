@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_event_time
+#define DESSSER_GEN_event_time
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,20 +7,22 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/event_time_field.h"
+#include "desssergen/event_time_field.h"
+#include "desssergen/event_time_field.h"
 
 namespace dessser::gen::event_time {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct v_7dc4293225aede806bbbfec766da77a3 : public std::variant<
+struct t1a52f882c9037437cef3177237d6aa2c : public std::variant<
   double,
-  dessser::gen::event_time_field::t,
-  dessser::gen::event_time_field::t
+  dessser::gen::event_time_field::t_ext,
+  dessser::gen::event_time_field::t_ext
 > { using variant::variant; };
-std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t1a52f882c9037437cef3177237d6aa2c const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -28,20 +32,22 @@ std::ostream &operator<<(std::ostream &os, v_7dc4293225aede806bbbfec766da77a3 co
 }
 
 typedef std::tuple<
-  dessser::gen::event_time_field::t,
-  v_7dc4293225aede806bbbfec766da77a3
+  dessser::gen::event_time_field::t_ext,
+  t1a52f882c9037437cef3177237d6aa2c
 > t;
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

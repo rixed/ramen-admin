@@ -1,3 +1,5 @@
+#ifndef DESSSER_GEN_raql_select_field
+#define DESSSER_GEN_raql_select_field
 #include <arpa/inet.h>
 #include <functional>
 #include <optional>
@@ -5,24 +7,25 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/field_name.h"
+#include "desssergen/raql_expr.h"
 
 namespace dessser::gen::raql_select_field {
-// don't ask me why:
 using dessser::operator<<;
 
 /* ------------ */
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::raql_expr::t expr;
-  dessser::gen::field_name::t alias;
+  dessser::gen::raql_expr::t_ext expr;
+  dessser::gen::field_name::t_ext alias;
   std::string doc;
   std::optional<std::string> aggr;
   bool operator==(t const &other) const {
     return expr == other.expr && alias == other.alias && doc == other.doc && aggr == other.aggr;
   }
 };
-std::ostream &operator<<(std::ostream &os, t const &r) {
+inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "expr:" << r.expr << ',';
   os << "alias:" << r.alias << ',';
@@ -33,15 +36,17 @@ std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t,
+  t*,
   Pointer
-> f63f919559f0d70225bd0da5dd9bcafc;
+> t45217dce3db5a9a49037839afd0048e8;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-std::function<Pointer(t,Pointer)> to_row_binary;
-std::function<Size(t)> sersize_of_row_binary;
-std::function<f63f919559f0d70225bd0da5dd9bcafc(Pointer)> of_row_binary;
+extern std::function<Pointer(t*,Pointer)> to_row_binary;
+extern std::function<Size(t*)> sersize_of_row_binary;
+extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+typedef t *t_ext;
 
 }
+#endif

@@ -5,23 +5,32 @@
 #include <optional>
 #include <string>
 #include <QString>
+
 #include "UserIdentity.h"
 
 namespace conf {
   class Value;
-};
+}
+
+namespace dessser {
+  namespace gen {
+    namespace sync_value {
+      struct t;
+    }
+  }
+}
 
 struct KValue
 {
-  std::shared_ptr<conf::Value> val; // always set
+  std::shared_ptr<dessser::gen::sync_value::t> val;
   QString uid;  // Of the user who has set this value
   double mtime;
   std::optional<QString> owner;
   double expiry;  // if owner above is set
   bool can_write, can_del;
 
-  KValue(std::shared_ptr<conf::Value> v, QString const &u, double mt,
-         bool cw, bool cd) :
+  KValue(std::shared_ptr<dessser::gen::sync_value::t> v,
+         QString const &u, double mt, bool cw, bool cd) :
     val(v), uid(u), mtime(mt), expiry(0.), can_write(cw), can_del(cd)
   {}
 
@@ -29,7 +38,8 @@ struct KValue
     mtime(0.), expiry(0.), can_write(false), can_del(false)
   {}
 
-  void set(std::shared_ptr<conf::Value> v, QString const &u, double mt)
+  void set(std::shared_ptr<dessser::gen::sync_value::t> v,
+           QString const &u, double mt)
   {
     val = v;
     uid = u;
@@ -51,6 +61,7 @@ struct KValue
   bool isLocked() const {
     return owner.has_value();
   }
+
   bool isMine() const {
     return isLocked() && *owner == my_uid;
   }
