@@ -16,35 +16,35 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  uint32_t seq;
+  dessser::gen::sync_client_cmd::t_ext cmd;
   bool confirm_success;
   bool echo;
-  dessser::gen::sync_client_cmd::t_ext cmd;
+  uint32_t seq;
   bool operator==(t const &other) const {
-    return seq == other.seq && confirm_success == other.confirm_success && echo == other.echo && cmd == other.cmd;
+    return cmd == other.cmd && confirm_success == other.confirm_success && echo == other.echo && seq == other.seq;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "seq:" << r.seq << ',';
+  os << "cmd:" << r.cmd << ',';
   os << "confirm_success:" << r.confirm_success << ',';
   os << "echo:" << r.echo << ',';
-  os << "cmd:" << r.cmd;
+  os << "seq:" << r.seq;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::sync_client_msg::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> tee47ac205e59d38f92971045d62a4c13;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_client_msg::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_client_msg::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_client_msg::tee47ac205e59d38f92971045d62a4c13(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

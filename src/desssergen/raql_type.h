@@ -47,7 +47,7 @@ struct t;
 struct t;
 struct t;
 struct t;
-struct t82f0fed4e9a4095dda4e6566499e3c0d : public std::variant<
+struct t90c8a0d2bbcf528f6fcdb9d24234c023 : public std::variant<
   Void,
   Void,
   Void,
@@ -79,13 +79,13 @@ struct t82f0fed4e9a4095dda4e6566499e3c0d : public std::variant<
   Void,
   Void,
   Arr<t*>,
-  t9327d6336842c469509b67056a719df9,
+  ::dessser::gen::raql_type::t9327d6336842c469509b67056a719df9,
   t*,
-  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
-  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
-  t7411897bdb6c9b6e00a01b4eb6506ccf
+  Arr<::dessser::gen::raql_type::t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  Arr<::dessser::gen::raql_type::t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  ::dessser::gen::raql_type::t7411897bdb6c9b6e00a01b4eb6506ccf
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t82f0fed4e9a4095dda4e6566499e3c0d const &v) {
+inline std::ostream &operator<<(std::ostream &os, t90c8a0d2bbcf528f6fcdb9d24234c023 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -135,16 +135,16 @@ struct t;
 struct t;
 struct t;
 struct t {
-  t82f0fed4e9a4095dda4e6566499e3c0d type;
   bool nullable;
+  ::dessser::gen::raql_type::t90c8a0d2bbcf528f6fcdb9d24234c023 type;
   bool operator==(t const &other) const {
-    return type == other.type && nullable == other.nullable;
+    return nullable == other.nullable && type == other.type;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "type:" << r.type << ',';
-  os << "nullable:" << r.nullable;
+  os << "nullable:" << r.nullable << ',';
+  os << "type:" << r.type;
   os << '}';
   return os;
 }
@@ -171,16 +171,16 @@ struct t;
 struct t;
 struct t;
 typedef std::tuple<
-  t*,
+  ::dessser::gen::raql_type::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> tfafddb6af18e2fa33b782eb359ee7c77;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::raql_type::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::raql_type::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_type::tfafddb6af18e2fa33b782eb359ee7c77(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

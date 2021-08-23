@@ -22,65 +22,65 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct td69b18863d7c63937f8798ddedc78b80 {
+struct tdf5c8f0315e72acddb131eb06c27ddd0 {
   dessser::gen::sync_key::t_ext k;
-  dessser::gen::sync_value::t_ext v;
-  std::string uid;
   double mtime;
-  bool operator==(td69b18863d7c63937f8798ddedc78b80 const &other) const {
-    return k == other.k && v == other.v && uid == other.uid && mtime == other.mtime;
+  std::string uid;
+  dessser::gen::sync_value::t_ext v;
+  bool operator==(tdf5c8f0315e72acddb131eb06c27ddd0 const &other) const {
+    return k == other.k && mtime == other.mtime && uid == other.uid && v == other.v;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, td69b18863d7c63937f8798ddedc78b80 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tdf5c8f0315e72acddb131eb06c27ddd0 const &r) {
   os << '{';
   os << "k:" << r.k << ',';
-  os << "v:" << r.v << ',';
-  os << "uid:" << r.uid << ',';
-  os << "mtime:" << r.mtime;
-  os << '}';
-  return os;
-}
-
-struct tf4b1f78fa23e7e2322a6e3241589000c {
-  dessser::gen::sync_key::t_ext k;
-  dessser::gen::sync_value::t_ext v;
-  std::string uid;
-  double mtime;
-  bool can_write;
-  bool can_del;
-  std::string owner;
-  double expiry;
-  bool operator==(tf4b1f78fa23e7e2322a6e3241589000c const &other) const {
-    return k == other.k && v == other.v && uid == other.uid && mtime == other.mtime && can_write == other.can_write && can_del == other.can_del && owner == other.owner && expiry == other.expiry;
-  }
-};
-inline std::ostream &operator<<(std::ostream &os, tf4b1f78fa23e7e2322a6e3241589000c const &r) {
-  os << '{';
-  os << "k:" << r.k << ',';
-  os << "v:" << r.v << ',';
-  os << "uid:" << r.uid << ',';
   os << "mtime:" << r.mtime << ',';
-  os << "can_write:" << r.can_write << ',';
-  os << "can_del:" << r.can_del << ',';
-  os << "owner:" << r.owner << ',';
-  os << "expiry:" << r.expiry;
+  os << "uid:" << r.uid << ',';
+  os << "v:" << r.v;
   os << '}';
   return os;
 }
 
-struct t1861dadd357f09584a634ac54a194ddc {
-  dessser::gen::sync_key::t_ext k;
-  std::string owner;
+struct t23d3fc58ccfe0cce25245c2b6a703c09 {
+  bool can_del;
+  bool can_write;
   double expiry;
-  bool operator==(t1861dadd357f09584a634ac54a194ddc const &other) const {
-    return k == other.k && owner == other.owner && expiry == other.expiry;
+  dessser::gen::sync_key::t_ext k;
+  double mtime;
+  std::string owner;
+  std::string uid;
+  dessser::gen::sync_value::t_ext v;
+  bool operator==(t23d3fc58ccfe0cce25245c2b6a703c09 const &other) const {
+    return can_del == other.can_del && can_write == other.can_write && expiry == other.expiry && k == other.k && mtime == other.mtime && owner == other.owner && uid == other.uid && v == other.v;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t1861dadd357f09584a634ac54a194ddc const &r) {
+inline std::ostream &operator<<(std::ostream &os, t23d3fc58ccfe0cce25245c2b6a703c09 const &r) {
   os << '{';
+  os << "can_del:" << r.can_del << ',';
+  os << "can_write:" << r.can_write << ',';
+  os << "expiry:" << r.expiry << ',';
   os << "k:" << r.k << ',';
+  os << "mtime:" << r.mtime << ',';
   os << "owner:" << r.owner << ',';
-  os << "expiry:" << r.expiry;
+  os << "uid:" << r.uid << ',';
+  os << "v:" << r.v;
+  os << '}';
+  return os;
+}
+
+struct ta33518bab5ce39f29507a4782b59d374 {
+  double expiry;
+  dessser::gen::sync_key::t_ext k;
+  std::string owner;
+  bool operator==(ta33518bab5ce39f29507a4782b59d374 const &other) const {
+    return expiry == other.expiry && k == other.k && owner == other.owner;
+  }
+};
+inline std::ostream &operator<<(std::ostream &os, ta33518bab5ce39f29507a4782b59d374 const &r) {
+  os << '{';
+  os << "expiry:" << r.expiry << ',';
+  os << "k:" << r.k << ',';
+  os << "owner:" << r.owner;
   os << '}';
   return os;
 }
@@ -88,10 +88,10 @@ inline std::ostream &operator<<(std::ostream &os, t1861dadd357f09584a634ac54a194
 struct t : public std::variant<
   dessser::gen::sync_socket::t_ext,
   std::string,
-  td69b18863d7c63937f8798ddedc78b80,
-  tf4b1f78fa23e7e2322a6e3241589000c,
+  ::dessser::gen::sync_server_msg::tdf5c8f0315e72acddb131eb06c27ddd0,
+  ::dessser::gen::sync_server_msg::t23d3fc58ccfe0cce25245c2b6a703c09,
   dessser::gen::sync_key::t_ext,
-  t1861dadd357f09584a634ac54a194ddc,
+  ::dessser::gen::sync_server_msg::ta33518bab5ce39f29507a4782b59d374,
   dessser::gen::sync_key::t_ext
 > { using variant::variant; };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
@@ -108,16 +108,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::sync_server_msg::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> tc6c292a6f74c55e16d68a655860c47c2;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_server_msg::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_server_msg::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_server_msg::tc6c292a6f74c55e16d68a655860c47c2(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

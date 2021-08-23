@@ -25,28 +25,28 @@ typedef std::tuple<
   dessser::gen::raql_value::t_ext
 > t83d220ac6cd554303ec130a90b325374;
 
-struct t57bafbdb4cb972c46a36425455535e06 {
+struct t8fc31e51f4d30b966d0aba41171f4da5 {
+  uint32_t parent_num;
   std::string tunneld_host;
   uint16_t tunneld_port;
-  uint32_t parent_num;
-  bool operator==(t57bafbdb4cb972c46a36425455535e06 const &other) const {
-    return tunneld_host == other.tunneld_host && tunneld_port == other.tunneld_port && parent_num == other.parent_num;
+  bool operator==(t8fc31e51f4d30b966d0aba41171f4da5 const &other) const {
+    return parent_num == other.parent_num && tunneld_host == other.tunneld_host && tunneld_port == other.tunneld_port;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t57bafbdb4cb972c46a36425455535e06 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t8fc31e51f4d30b966d0aba41171f4da5 const &r) {
   os << '{';
+  os << "parent_num:" << r.parent_num << ',';
   os << "tunneld_host:" << r.tunneld_host << ',';
-  os << "tunneld_port:" << r.tunneld_port << ',';
-  os << "parent_num:" << r.parent_num;
+  os << "tunneld_port:" << r.tunneld_port;
   os << '}';
   return os;
 }
 
-struct t8e7941b7e3893616560afdc4ab6263e6 : public std::variant<
+struct t313b9867db010cca466a30c76e768a91 : public std::variant<
   Void,
-  Arr<t57bafbdb4cb972c46a36425455535e06>
+  Arr<::dessser::gen::worker::t8fc31e51f4d30b966d0aba41171f4da5>
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t8e7941b7e3893616560afdc4ab6263e6 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t313b9867db010cca466a30c76e768a91 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -55,51 +55,51 @@ inline std::ostream &operator<<(std::ostream &os, t8e7941b7e3893616560afdc4ab626
 }
 
 struct t {
-  bool enabled;
-  bool debug;
-  double report_period;
+  Arr<dessser::gen::func_ref::t_ext> children;
   dessser::gen::file_path::t_ext cwd;
-  std::string worker_signature;
+  bool debug;
+  bool enabled;
+  Arr<dessser::gen::field_name::t_ext> envvars;
   std::string info_signature;
   bool is_used;
-  Arr<t83d220ac6cd554303ec130a90b325374> params;
-  Arr<dessser::gen::field_name::t_ext> envvars;
-  t8e7941b7e3893616560afdc4ab6263e6 role;
+  Arr<::dessser::gen::worker::t83d220ac6cd554303ec130a90b325374> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
-  Arr<dessser::gen::func_ref::t_ext> children;
+  double report_period;
+  ::dessser::gen::worker::t313b9867db010cca466a30c76e768a91 role;
+  std::string worker_signature;
   bool operator==(t const &other) const {
-    return enabled == other.enabled && debug == other.debug && report_period == other.report_period && cwd == other.cwd && worker_signature == other.worker_signature && info_signature == other.info_signature && is_used == other.is_used && params == other.params && envvars == other.envvars && role == other.role && parents == other.parents && children == other.children;
+    return children == other.children && cwd == other.cwd && debug == other.debug && enabled == other.enabled && envvars == other.envvars && info_signature == other.info_signature && is_used == other.is_used && params == other.params && parents == other.parents && report_period == other.report_period && role == other.role && worker_signature == other.worker_signature;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "enabled:" << r.enabled << ',';
-  os << "debug:" << r.debug << ',';
-  os << "report_period:" << r.report_period << ',';
+  os << "children:" << r.children << ',';
   os << "cwd:" << r.cwd << ',';
-  os << "worker_signature:" << r.worker_signature << ',';
+  os << "debug:" << r.debug << ',';
+  os << "enabled:" << r.enabled << ',';
+  os << "envvars:" << r.envvars << ',';
   os << "info_signature:" << r.info_signature << ',';
   os << "is_used:" << r.is_used << ',';
   os << "params:" << r.params << ',';
-  os << "envvars:" << r.envvars << ',';
-  os << "role:" << r.role << ',';
   os << "parents:" << r.parents << ',';
-  os << "children:" << r.children;
+  os << "report_period:" << r.report_period << ',';
+  os << "role:" << r.role << ',';
+  os << "worker_signature:" << r.worker_signature;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::worker::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t2153f894ec0d3c3ed0ba5ddc0b3fd576;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::worker::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::worker::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::worker::t2153f894ec0d3c3ed0ba5ddc0b3fd576(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

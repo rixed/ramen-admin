@@ -221,31 +221,31 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
         (let-pair "dstring1_fst_63" "dstring1_snd_64" (identifier "dstring1_62")
           (let-pair "dstring2_fst_66" "dstring2_snd_67" (read-bytes (identifier "dstring1_snd_64") (identifier "dstring1_fst_63")) (make-tup (string-of-bytes (identifier "dstring2_fst_66")) (identifier "dstring2_snd_67"))))))
  */
-static std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary_init()
 {
-  std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> fun66 { [&fun66](Pointer p_0) {
+  std::function<::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0(Pointer)> fun66 { [&fun66](Pointer p_0) {
     uint32_t id_67 { 0U };
     Vec<1, uint32_t> id_68 {  id_67  };
-    t8beb80162423aee37bd383e9b6834c9c let_res_69;
+    ::dessser::gen::file_path::t8beb80162423aee37bd383e9b6834c9c let_res_69;
     {
       Vec<1, uint32_t> leb_ref_56 { id_68 };
       uint8_t id_70 { 0 };
       Vec<1, uint8_t> id_71 {  id_70  };
-      t8beb80162423aee37bd383e9b6834c9c let_res_72;
+      ::dessser::gen::file_path::t8beb80162423aee37bd383e9b6834c9c let_res_72;
       {
         Vec<1, uint8_t> shft_ref_57 { id_71 };
         Vec<1, Pointer> id_73 {  p_0  };
-        t8beb80162423aee37bd383e9b6834c9c let_res_74;
+        ::dessser::gen::file_path::t8beb80162423aee37bd383e9b6834c9c let_res_74;
         {
           Vec<1, Pointer> p_ref_58 { id_73 };
           bool while_flag_75 { true };
           do {
             uint8_t id_76 { 0 };
             Pointer id_77 { p_ref_58[id_76] };
-            tb3f98ea670610d40658a618de3ec7b90 id_78 { id_77.readU8() };
+            ::dessser::gen::file_path::tb3f98ea670610d40658a618de3ec7b90 id_78 { id_77.readU8() };
             bool let_res_79;
             {
-              tb3f98ea670610d40658a618de3ec7b90 leb128_59 { id_78 };
+              ::dessser::gen::file_path::tb3f98ea670610d40658a618de3ec7b90 leb128_59 { id_78 };
               bool letpair_res_80;
               {
                 auto leb128_fst_60 { std::get<0>(leb128_59) };
@@ -289,27 +289,27 @@ static std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary_i
           Size id_104 { Size(id_103) };
           uint8_t id_105 { 0 };
           Pointer id_106 { p_ref_58[id_105] };
-          t8beb80162423aee37bd383e9b6834c9c id_107 { id_104, id_106 };
+          ::dessser::gen::file_path::t8beb80162423aee37bd383e9b6834c9c id_107 { id_104, id_106 };
           let_res_74 = id_107;
         }
         let_res_72 = let_res_74;
       }
       let_res_69 = let_res_72;
     }
-    t519c57b31160411c6989716f3a9782e0 let_res_108;
+    ::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0 let_res_108;
     {
-      t8beb80162423aee37bd383e9b6834c9c dstring1_62 { let_res_69 };
-      t519c57b31160411c6989716f3a9782e0 letpair_res_109;
+      ::dessser::gen::file_path::t8beb80162423aee37bd383e9b6834c9c dstring1_62 { let_res_69 };
+      ::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0 letpair_res_109;
       {
         auto dstring1_fst_63 { std::get<0>(dstring1_62) };
         auto dstring1_snd_64 { std::get<1>(dstring1_62) };
-        t188345aa49abd0cb47ff73fedc219f08 id_110 { dstring1_snd_64.readBytes(dstring1_fst_63) };
-        t519c57b31160411c6989716f3a9782e0 letpair_res_111;
+        ::dessser::gen::file_path::t188345aa49abd0cb47ff73fedc219f08 id_110 { dstring1_snd_64.readBytes(dstring1_fst_63) };
+        ::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0 letpair_res_111;
         {
           auto dstring2_fst_66 { std::get<0>(id_110) };
           auto dstring2_snd_67 { std::get<1>(id_110) };
           t id_112 { dstring2_fst_66.toString() };
-          t519c57b31160411c6989716f3a9782e0 id_113 { id_112, dstring2_snd_67 };
+          ::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0 id_113 { id_112, dstring2_snd_67 };
           letpair_res_111 = id_113;
         }
         letpair_res_109 = letpair_res_111;
@@ -321,7 +321,7 @@ static std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary_i
    };
   return fun66;
 }
-std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::file_path::t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t t_ext;
 

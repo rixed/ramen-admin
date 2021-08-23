@@ -16,12 +16,12 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t1dcff2c3eac99ab32bfc006552be8787 : public std::variant<
+struct t3b29732d115083d9f2d943d1afa3690d : public std::variant<
   Void,
   Void,
   Void
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t1dcff2c3eac99ab32bfc006552be8787 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t3b29732d115083d9f2d943d1afa3690d const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -31,33 +31,33 @@ inline std::ostream &operator<<(std::ostream &os, t1dcff2c3eac99ab32bfc006552be8
 }
 
 struct t {
-  t1dcff2c3eac99ab32bfc006552be8787 scope;
   dessser::gen::field_name::t_ext name;
+  ::dessser::gen::global_variable::t3b29732d115083d9f2d943d1afa3690d scope;
   dessser::gen::raql_type::t_ext typ;
   bool operator==(t const &other) const {
-    return scope == other.scope && name == other.name && typ == other.typ;
+    return name == other.name && scope == other.scope && typ == other.typ;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "scope:" << r.scope << ',';
   os << "name:" << r.name << ',';
+  os << "scope:" << r.scope << ',';
   os << "typ:" << r.typ;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::global_variable::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t5cd24a9f87710319310e9dd0c1e1d2fb;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::global_variable::t5cd24a9f87710319310e9dd0c1e1d2fb(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

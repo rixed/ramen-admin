@@ -14,13 +14,13 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t7ae9bb09a1a0070adced41151deef93f : public std::variant<
+struct t94d3f63f7a6f4439feec5972b0434d93 : public std::variant<
   Void,
   Void,
   Void,
   Void
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t7ae9bb09a1a0070adced41151deef93f const &v) {
+inline std::ostream &operator<<(std::ostream &os, t94d3f63f7a6f4439feec5972b0434d93 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -35,12 +35,12 @@ typedef std::tuple<
   uint32_t
 > t8fac3da053db9cb461751be833f41f86;
 
-struct t8347e1c22520ce64e4427c2d53263f64 : public std::variant<
+struct t2e2e392d252acd9be53198082dfdc293 : public std::variant<
   Void,
   std::string,
   std::string
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t8347e1c22520ce64e4427c2d53263f64 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t2e2e392d252acd9be53198082dfdc293 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -50,10 +50,10 @@ inline std::ostream &operator<<(std::ostream &os, t8347e1c22520ce64e4427c2d53263
 }
 
 struct t : public std::variant<
-  t7ae9bb09a1a0070adced41151deef93f,
-  t8fac3da053db9cb461751be833f41f86,
+  ::dessser::gen::alerting_log::t94d3f63f7a6f4439feec5972b0434d93,
+  ::dessser::gen::alerting_log::t8fac3da053db9cb461751be833f41f86,
   std::string,
-  t8347e1c22520ce64e4427c2d53263f64,
+  ::dessser::gen::alerting_log::t2e2e392d252acd9be53198082dfdc293,
   std::string
 > { using variant::variant; };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
@@ -68,16 +68,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::alerting_log::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t7ed4ba740a9d377e5cafe90b9af62314;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::alerting_log::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::alerting_log::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_log::t7ed4ba740a9d377e5cafe90b9af62314(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

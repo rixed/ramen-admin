@@ -36,9 +36,9 @@ struct t : public std::variant<
   dessser::gen::field_name::t_ext
 > { using variant::variant; };
 typedef std::tuple<
-  t*,
+  ::dessser::gen::raql_path_comp::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> td126b489ead23b1cdc9c388bd4ee24bc;
 
 typedef std::tuple<
   uint16_t,
@@ -64,9 +64,9 @@ typedef std::tuple<
         (if (eq (u16 0) (label-of (param 0))) (write-u32 little-endian (identifier "ssum_dst_79") (get-alt "Idx" (param 0)))
           (seq (assert (eq (label-of (param 0)) (u16 1))) (apply (ext-identifier field_name to-row-binary) (get-alt "Name" (param 0)) (identifier "ssum_dst_79"))))))
  */
-static std::function<Pointer(t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_path_comp::t* p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t(p_0->index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -98,15 +98,15 @@ static std::function<Pointer(t*,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[Idx U32 | Name $field_name]")
       (if (eq (u16 0) (label-of (param 0))) (size 6) (seq (assert (eq (label-of (param 0)) (u16 1))) (add (size 2) (apply (ext-identifier field_name sersize-of-row-binary) (get-alt "Name" (param 0)))))))
  */
-static std::function<Size(t*)> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t*)> fun17 { [&fun17](t* p_0) {
+  std::function<Size(::dessser::gen::raql_path_comp::t*)> fun17 { [&fun17](::dessser::gen::raql_path_comp::t* p_0) {
     uint16_t id_18 { 0 };
     uint16_t id_19 { uint16_t(p_0->index()) };
     bool id_20 { bool(id_18 == id_19) };
@@ -132,7 +132,7 @@ static std::function<Size(t*)> sersize_of_row_binary_init()
    };
   return fun17;
 }
-std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -146,35 +146,35 @@ std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
                   (make-tup (construct "[Idx U32 | Name $field_name]" 1 (identifier "dsum2_fst_66")) (identifier "dsum2_snd_67"))))))) 
         (make-tup (identifier "make_fst_75") (identifier "make_snd_76"))))
  */
-static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc(Pointer)> of_row_binary_init()
 {
-  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun32 { [&fun32](Pointer p_0) {
-    t22a32080ad88ab548b80077a17b7dd46 id_33 { p_0.readU16Le() };
-    t22a32080ad88ab548b80077a17b7dd46 letpair_res_34;
+  std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc(Pointer)> fun32 { [&fun32](Pointer p_0) {
+    ::dessser::gen::raql_path_comp::t22a32080ad88ab548b80077a17b7dd46 id_33 { p_0.readU16Le() };
+    ::dessser::gen::raql_path_comp::t22a32080ad88ab548b80077a17b7dd46 letpair_res_34;
     {
       auto du16_fst_57 { std::get<0>(id_33) };
       auto du16_snd_58 { std::get<1>(id_33) };
-      t22a32080ad88ab548b80077a17b7dd46 id_35 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_path_comp::t22a32080ad88ab548b80077a17b7dd46 id_35 { du16_fst_57, du16_snd_58 };
       letpair_res_34 = id_35;
     }
-    t45217dce3db5a9a49037839afd0048e8 let_res_36;
+    ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc let_res_36;
     {
-      t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_34 };
-      t45217dce3db5a9a49037839afd0048e8 letpair_res_37;
+      ::dessser::gen::raql_path_comp::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_34 };
+      ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc letpair_res_37;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_38 { 0 };
         bool id_39 { bool(id_38 == dsum1_fst_63) };
-        t45217dce3db5a9a49037839afd0048e8 choose_res_40;
+        ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc choose_res_40;
         if (id_39) {
-          t405eb186408556fed8f2c41523c07d13 id_41 { dsum1_snd_64.readU32Le() };
-          t45217dce3db5a9a49037839afd0048e8 letpair_res_42;
+          ::dessser::gen::raql_path_comp::t405eb186408556fed8f2c41523c07d13 id_41 { dsum1_snd_64.readU32Le() };
+          ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc letpair_res_42;
           {
             auto du32_fst_69 { std::get<0>(id_41) };
             auto du32_snd_70 { std::get<1>(id_41) };
-            t* id_43 { new t(std::in_place_index<0>, du32_fst_69) };
-            t45217dce3db5a9a49037839afd0048e8 id_44 { id_43, du32_snd_70 };
+            ::dessser::gen::raql_path_comp::t* id_43 { new ::dessser::gen::raql_path_comp::t(std::in_place_index<0>, du32_fst_69) };
+            ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc id_44 { id_43, du32_snd_70 };
             letpair_res_42 = id_44;
           }
           choose_res_40 = letpair_res_42;
@@ -184,13 +184,13 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
           Void id_47 { ((void)(assert(id_46)), VOID) };
           (void)id_47;
           auto fun48 { dessser::gen::field_name::of_row_binary };
-          t273a2b7978f5b466a128a51c1cc4a27b id_49 { fun48(dsum1_snd_64) };
-          t45217dce3db5a9a49037839afd0048e8 letpair_res_50;
+          ::dessser::gen::raql_path_comp::t273a2b7978f5b466a128a51c1cc4a27b id_49 { fun48(dsum1_snd_64) };
+          ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc letpair_res_50;
           {
             auto dsum2_fst_66 { std::get<0>(id_49) };
             auto dsum2_snd_67 { std::get<1>(id_49) };
-            t* id_51 { new t(std::in_place_index<1>, dsum2_fst_66) };
-            t45217dce3db5a9a49037839afd0048e8 id_52 { id_51, dsum2_snd_67 };
+            ::dessser::gen::raql_path_comp::t* id_51 { new ::dessser::gen::raql_path_comp::t(std::in_place_index<1>, dsum2_fst_66) };
+            ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc id_52 { id_51, dsum2_snd_67 };
             letpair_res_50 = id_52;
           }
           choose_res_40 = letpair_res_50;
@@ -199,11 +199,11 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
       }
       let_res_36 = letpair_res_37;
     }
-    t45217dce3db5a9a49037839afd0048e8 letpair_res_53;
+    ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc letpair_res_53;
     {
       auto make_fst_75 { std::get<0>(let_res_36) };
       auto make_snd_76 { std::get<1>(let_res_36) };
-      t45217dce3db5a9a49037839afd0048e8 id_54 { make_fst_75, make_snd_76 };
+      ::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc id_54 { make_fst_75, make_snd_76 };
       letpair_res_53 = id_54;
     }
     return letpair_res_53;
@@ -211,7 +211,7 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
    };
   return fun32;
 }
-std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 

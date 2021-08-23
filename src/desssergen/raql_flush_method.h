@@ -27,16 +27,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::raql_flush_method::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> tcbc153db83c60379b0035bb8ccfee2da;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

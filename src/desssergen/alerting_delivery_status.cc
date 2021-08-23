@@ -39,9 +39,9 @@ struct t : public std::variant<
   Void
 > { using variant::variant; };
 typedef std::tuple<
-  t*,
+  ::dessser::gen::alerting_delivery_status::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t70d102344d070f394857c83a5a1198d3;
 
 typedef std::tuple<
   uint16_t,
@@ -59,9 +59,9 @@ typedef std::tuple<
             (if (eq (u16 2) (label-of (param 0))) (identifier "ssum_dst_88")
               (if (eq (u16 3) (label-of (param 0))) (identifier "ssum_dst_88") (if (eq (u16 4) (label-of (param 0))) (identifier "ssum_dst_88") (seq (assert (eq (label-of (param 0)) (u16 5))) (identifier "ssum_dst_88")))))))))
  */
-static std::function<Pointer(t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_delivery_status::t* p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t(p_0->index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -124,7 +124,7 @@ static std::function<Pointer(t*,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[StartToBeSent Void | StartToBeSentThenStopped Void | StartSent Void | StartAcked Void | StopToBeSent Void | StopSent Void]")
@@ -132,9 +132,9 @@ std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
         (if (eq (u16 1) (label-of (param 0))) (size 2)
           (if (eq (u16 2) (label-of (param 0))) (size 2) (if (eq (u16 3) (label-of (param 0))) (size 2) (if (eq (u16 4) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 5))) (size 2))))))))
  */
-static std::function<Size(t*)> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t*)> fun28 { [&fun28](t* p_0) {
+  std::function<Size(::dessser::gen::alerting_delivery_status::t*)> fun28 { [&fun28](::dessser::gen::alerting_delivery_status::t* p_0) {
     uint16_t id_29 { 0 };
     uint16_t id_30 { uint16_t(p_0->index()) };
     bool id_31 { bool(id_29 == id_30) };
@@ -196,7 +196,7 @@ static std::function<Size(t*)> sersize_of_row_binary_init()
    };
   return fun28;
 }
-std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -217,67 +217,67 @@ std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
                         (make-tup (construct "[StartToBeSent Void | StartToBeSentThenStopped Void | StartSent Void | StartAcked Void | StopToBeSent Void | StopSent Void]" 5 (nop)) (identifier "dsum1_snd_64"))))))))))
         (make-tup (identifier "make_fst_84") (identifier "make_snd_85"))))
  */
-static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary_init()
 {
-  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun59 { [&fun59](Pointer p_0) {
-    t22a32080ad88ab548b80077a17b7dd46 id_60 { p_0.readU16Le() };
-    t22a32080ad88ab548b80077a17b7dd46 letpair_res_61;
+  std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> fun59 { [&fun59](Pointer p_0) {
+    ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 id_60 { p_0.readU16Le() };
+    ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 letpair_res_61;
     {
       auto du16_fst_57 { std::get<0>(id_60) };
       auto du16_snd_58 { std::get<1>(id_60) };
-      t22a32080ad88ab548b80077a17b7dd46 id_62 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 id_62 { du16_fst_57, du16_snd_58 };
       letpair_res_61 = id_62;
     }
-    t45217dce3db5a9a49037839afd0048e8 let_res_63;
+    ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 let_res_63;
     {
-      t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_61 };
-      t45217dce3db5a9a49037839afd0048e8 letpair_res_64;
+      ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_61 };
+      ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 letpair_res_64;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_65 { 0 };
         bool id_66 { bool(id_65 == dsum1_fst_63) };
-        t45217dce3db5a9a49037839afd0048e8 choose_res_67;
+        ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_67;
         if (id_66) {
           (void)VOID;
-          t* id_68 { new t(std::in_place_index<0>, VOID) };
-          t45217dce3db5a9a49037839afd0048e8 id_69 { id_68, dsum1_snd_64 };
+          ::dessser::gen::alerting_delivery_status::t* id_68 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<0>, VOID) };
+          ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_69 { id_68, dsum1_snd_64 };
           choose_res_67 = id_69;
         } else {
           uint16_t id_70 { 1 };
           bool id_71 { bool(id_70 == dsum1_fst_63) };
-          t45217dce3db5a9a49037839afd0048e8 choose_res_72;
+          ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_72;
           if (id_71) {
             (void)VOID;
-            t* id_73 { new t(std::in_place_index<1>, VOID) };
-            t45217dce3db5a9a49037839afd0048e8 id_74 { id_73, dsum1_snd_64 };
+            ::dessser::gen::alerting_delivery_status::t* id_73 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<1>, VOID) };
+            ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_74 { id_73, dsum1_snd_64 };
             choose_res_72 = id_74;
           } else {
             uint16_t id_75 { 2 };
             bool id_76 { bool(id_75 == dsum1_fst_63) };
-            t45217dce3db5a9a49037839afd0048e8 choose_res_77;
+            ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_77;
             if (id_76) {
               (void)VOID;
-              t* id_78 { new t(std::in_place_index<2>, VOID) };
-              t45217dce3db5a9a49037839afd0048e8 id_79 { id_78, dsum1_snd_64 };
+              ::dessser::gen::alerting_delivery_status::t* id_78 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<2>, VOID) };
+              ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_79 { id_78, dsum1_snd_64 };
               choose_res_77 = id_79;
             } else {
               uint16_t id_80 { 3 };
               bool id_81 { bool(id_80 == dsum1_fst_63) };
-              t45217dce3db5a9a49037839afd0048e8 choose_res_82;
+              ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_82;
               if (id_81) {
                 (void)VOID;
-                t* id_83 { new t(std::in_place_index<3>, VOID) };
-                t45217dce3db5a9a49037839afd0048e8 id_84 { id_83, dsum1_snd_64 };
+                ::dessser::gen::alerting_delivery_status::t* id_83 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<3>, VOID) };
+                ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_84 { id_83, dsum1_snd_64 };
                 choose_res_82 = id_84;
               } else {
                 uint16_t id_85 { 4 };
                 bool id_86 { bool(id_85 == dsum1_fst_63) };
-                t45217dce3db5a9a49037839afd0048e8 choose_res_87;
+                ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_87;
                 if (id_86) {
                   (void)VOID;
-                  t* id_88 { new t(std::in_place_index<4>, VOID) };
-                  t45217dce3db5a9a49037839afd0048e8 id_89 { id_88, dsum1_snd_64 };
+                  ::dessser::gen::alerting_delivery_status::t* id_88 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<4>, VOID) };
+                  ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_89 { id_88, dsum1_snd_64 };
                   choose_res_87 = id_89;
                 } else {
                   uint16_t id_90 { 5 };
@@ -285,8 +285,8 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                   Void id_92 { ((void)(assert(id_91)), VOID) };
                   (void)id_92;
                   (void)VOID;
-                  t* id_93 { new t(std::in_place_index<5>, VOID) };
-                  t45217dce3db5a9a49037839afd0048e8 id_94 { id_93, dsum1_snd_64 };
+                  ::dessser::gen::alerting_delivery_status::t* id_93 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<5>, VOID) };
+                  ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_94 { id_93, dsum1_snd_64 };
                   choose_res_87 = id_94;
                 }
                 choose_res_82 = choose_res_87;
@@ -301,11 +301,11 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
       }
       let_res_63 = letpair_res_64;
     }
-    t45217dce3db5a9a49037839afd0048e8 letpair_res_95;
+    ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 letpair_res_95;
     {
       auto make_fst_84 { std::get<0>(let_res_63) };
       auto make_snd_85 { std::get<1>(let_res_63) };
-      t45217dce3db5a9a49037839afd0048e8 id_96 { make_fst_84, make_snd_85 };
+      ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_96 { make_fst_84, make_snd_85 };
       letpair_res_95 = id_96;
     }
     return letpair_res_95;
@@ -313,7 +313,7 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
    };
   return fun59;
 }
-std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 

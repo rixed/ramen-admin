@@ -16,37 +16,37 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::fq_function_name::t_ext target;
-  double since;
-  double until;
   bool explain;
   std::string resp_key;
+  double since;
+  dessser::gen::fq_function_name::t_ext target;
+  double until;
   bool operator==(t const &other) const {
-    return target == other.target && since == other.since && until == other.until && explain == other.explain && resp_key == other.resp_key;
+    return explain == other.explain && resp_key == other.resp_key && since == other.since && target == other.target && until == other.until;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "target:" << r.target << ',';
-  os << "since:" << r.since << ',';
-  os << "until:" << r.until << ',';
   os << "explain:" << r.explain << ',';
-  os << "resp_key:" << r.resp_key;
+  os << "resp_key:" << r.resp_key << ',';
+  os << "since:" << r.since << ',';
+  os << "target:" << r.target << ',';
+  os << "until:" << r.until;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::replay_request::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t27e849e988795ad71224ab90ab2a0c4c;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::replay_request::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::replay_request::t27e849e988795ad71224ab90ab2a0c4c(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

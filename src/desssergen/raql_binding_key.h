@@ -24,7 +24,7 @@ typedef std::tuple<
 
 struct t : public std::variant<
   uint32_t,
-  t269f127ed3b1b265bbc0b9043d333314,
+  ::dessser::gen::raql_binding_key::t269f127ed3b1b265bbc0b9043d333314,
   dessser::gen::raql_variable::t_ext,
   std::string
 > { using variant::variant; };
@@ -39,16 +39,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::raql_binding_key::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t2fb89294d169d1b8c1dc7c9181c50762;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::raql_binding_key::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::raql_binding_key::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_binding_key::t2fb89294d169d1b8c1dc7c9181c50762(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

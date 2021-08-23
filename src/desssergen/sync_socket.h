@@ -14,11 +14,11 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t2dfffd4312923e34e0c3ba0f8d708626 : public std::variant<
+struct t8ce7f646add6f67a97a24392bb6169f0 : public std::variant<
   uint32_t,
   uint128_t
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708626 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8ce7f646add6f67a97a24392bb6169f0 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -27,7 +27,7 @@ inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708
 }
 
 struct t {
-  t2dfffd4312923e34e0c3ba0f8d708626 ip;
+  ::dessser::gen::sync_socket::t8ce7f646add6f67a97a24392bb6169f0 ip;
   uint16_t port;
   bool operator==(t const &other) const {
     return ip == other.ip && port == other.port;
@@ -42,16 +42,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::sync_socket::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t886d61cb117071bcf543729e568957a2;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_socket::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_socket::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_socket::t886d61cb117071bcf543729e568957a2(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

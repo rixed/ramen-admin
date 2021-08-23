@@ -18,37 +18,37 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
+  std::optional<std::string> aggr;
+  std::string doc;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
-  std::string doc;
-  std::optional<std::string> aggr;
   bool operator==(t const &other) const {
-    return name == other.name && typ == other.typ && units == other.units && doc == other.doc && aggr == other.aggr;
+    return aggr == other.aggr && doc == other.doc && name == other.name && typ == other.typ && units == other.units;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
+  os << "aggr:" << r.aggr << ',';
+  os << "doc:" << r.doc << ',';
   os << "name:" << r.name << ',';
   os << "typ:" << r.typ << ',';
-  os << "units:" << r.units << ',';
-  os << "doc:" << r.doc << ',';
-  os << "aggr:" << r.aggr;
+  os << "units:" << r.units;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::field_type::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> ta9083c6ab4999123f9c30be0def4cf3a;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::field_type::ta9083c6ab4999123f9c30be0def4cf3a(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

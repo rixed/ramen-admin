@@ -22,49 +22,49 @@ typedef std::tuple<
 > t8961925d22ebc35140986110e41bc2a4;
 
 struct t {
-  dessser::gen::site_name::t_ext site;
-  dessser::gen::fq_name::t_ext worker;
-  bool test;
-  double sent_time;
-  std::optional<double> event_time;
-  std::string name;
-  bool firing;
   double certainty;
   double debounce;
+  std::optional<double> event_time;
+  bool firing;
+  std::string name;
+  Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> parameters;
+  double sent_time;
+  dessser::gen::site_name::t_ext site;
+  bool test;
   double timeout;
-  Lst<t8961925d22ebc35140986110e41bc2a4> parameters;
+  dessser::gen::fq_name::t_ext worker;
   bool operator==(t const &other) const {
-    return site == other.site && worker == other.worker && test == other.test && sent_time == other.sent_time && event_time == other.event_time && name == other.name && firing == other.firing && certainty == other.certainty && debounce == other.debounce && timeout == other.timeout && parameters == other.parameters;
+    return certainty == other.certainty && debounce == other.debounce && event_time == other.event_time && firing == other.firing && name == other.name && parameters == other.parameters && sent_time == other.sent_time && site == other.site && test == other.test && timeout == other.timeout && worker == other.worker;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "site:" << r.site << ',';
-  os << "worker:" << r.worker << ',';
-  os << "test:" << r.test << ',';
-  os << "sent_time:" << r.sent_time << ',';
-  os << "event_time:" << r.event_time << ',';
-  os << "name:" << r.name << ',';
-  os << "firing:" << r.firing << ',';
   os << "certainty:" << r.certainty << ',';
   os << "debounce:" << r.debounce << ',';
+  os << "event_time:" << r.event_time << ',';
+  os << "firing:" << r.firing << ',';
+  os << "name:" << r.name << ',';
+  os << "parameters:" << r.parameters << ',';
+  os << "sent_time:" << r.sent_time << ',';
+  os << "site:" << r.site << ',';
+  os << "test:" << r.test << ',';
   os << "timeout:" << r.timeout << ',';
-  os << "parameters:" << r.parameters;
+  os << "worker:" << r.worker;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::alerting_notification::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t281c4a1c5bbc4c0959c7fb563f217845;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_notification::t281c4a1c5bbc4c0959c7fb563f217845(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

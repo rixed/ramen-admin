@@ -39,9 +39,9 @@ struct t {
   }
 };
 typedef std::tuple<
-  t*,
+  ::dessser::gen::retention::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> td879f0124877ae7a41564ce519541045;
 
 typedef std::tuple<
   dessser::gen::raql_expr::t_ext,
@@ -60,9 +60,9 @@ typedef std::tuple<
     (fun ("{duration: $raql_expr; period: FLOAT}" "Ptr")
       (let "srec_dst_70" (apply (ext-identifier raql_expr to-row-binary) (get-field "duration" (param 0)) (param 1)) (write-u64 little-endian (identifier "srec_dst_70") (u64-of-float (get-field "period" (param 0))))))
  */
-static std::function<Pointer(t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::retention::t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::retention::t*,Pointer)> fun0 { [&fun0](::dessser::gen::retention::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::raql_expr::to_row_binary };
     dessser::gen::raql_expr::t_ext id_2 { p_0->duration };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -79,14 +79,14 @@ static std::function<Pointer(t*,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::retention::t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{duration: $raql_expr; period: FLOAT}") (add (apply (ext-identifier raql_expr sersize-of-row-binary) (get-field "duration" (param 0))) (size 8)))
  */
-static std::function<Size(t*)> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::retention::t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t*)> fun8 { [&fun8](t* p_0) {
+  std::function<Size(::dessser::gen::retention::t*)> fun8 { [&fun8](::dessser::gen::retention::t* p_0) {
     auto fun9 { dessser::gen::raql_expr::sersize_of_row_binary };
     dessser::gen::raql_expr::t_ext id_10 { p_0->duration };
     Size id_11 { fun9(id_10) };
@@ -97,35 +97,35 @@ static std::function<Size(t*)> sersize_of_row_binary_init()
    };
   return fun8;
 }
-std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::retention::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
       (let "drec_56" (apply (ext-identifier raql_expr of-row-binary) (param 0))
         (let-pair "drec_fst_57" "drec_snd_58" (identifier "drec_56")
           (let-pair "dfloat_fst_60" "dfloat_snd_61" (read-u64 little-endian (identifier "drec_snd_58"))
-            (make-tup (make-rec (string "duration") (identifier "drec_fst_57") (string "period") (float-of-u64 (identifier "dfloat_fst_60"))) (identifier "dfloat_snd_61"))))))
+            (make-tup (make-rec (string "period") (float-of-u64 (identifier "dfloat_fst_60")) (string "duration") (identifier "drec_fst_57")) (identifier "dfloat_snd_61"))))))
  */
-static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::retention::td879f0124877ae7a41564ce519541045(Pointer)> of_row_binary_init()
 {
-  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun14 { [&fun14](Pointer p_0) {
+  std::function<::dessser::gen::retention::td879f0124877ae7a41564ce519541045(Pointer)> fun14 { [&fun14](Pointer p_0) {
     auto fun15 { dessser::gen::raql_expr::of_row_binary };
-    t1113e6691818baaf60a775527f6cc1ac id_16 { fun15(p_0) };
-    t45217dce3db5a9a49037839afd0048e8 let_res_17;
+    ::dessser::gen::retention::t1113e6691818baaf60a775527f6cc1ac id_16 { fun15(p_0) };
+    ::dessser::gen::retention::td879f0124877ae7a41564ce519541045 let_res_17;
     {
-      t1113e6691818baaf60a775527f6cc1ac drec_56 { id_16 };
-      t45217dce3db5a9a49037839afd0048e8 letpair_res_18;
+      ::dessser::gen::retention::t1113e6691818baaf60a775527f6cc1ac drec_56 { id_16 };
+      ::dessser::gen::retention::td879f0124877ae7a41564ce519541045 letpair_res_18;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
-        t7a47220550fc5126a7b79f1e0c10c645 id_19 { drec_snd_58.readU64Le() };
-        t45217dce3db5a9a49037839afd0048e8 letpair_res_20;
+        ::dessser::gen::retention::t7a47220550fc5126a7b79f1e0c10c645 id_19 { drec_snd_58.readU64Le() };
+        ::dessser::gen::retention::td879f0124877ae7a41564ce519541045 letpair_res_20;
         {
           auto dfloat_fst_60 { std::get<0>(id_19) };
           auto dfloat_snd_61 { std::get<1>(id_19) };
           double id_21 { float_of_qword(dfloat_fst_60) };
-          t* id_22 { new t({ .duration = drec_fst_57, .period = id_21 }) };
-          t45217dce3db5a9a49037839afd0048e8 id_23 { id_22, dfloat_snd_61 };
+          ::dessser::gen::retention::t* id_22 { new ::dessser::gen::retention::t({ .duration = drec_fst_57, .period = id_21 }) };
+          ::dessser::gen::retention::td879f0124877ae7a41564ce519541045 id_23 { id_22, dfloat_snd_61 };
           letpair_res_20 = id_23;
         }
         letpair_res_18 = letpair_res_20;
@@ -137,7 +137,7 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
    };
   return fun14;
 }
-std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::retention::td879f0124877ae7a41564ce519541045(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 

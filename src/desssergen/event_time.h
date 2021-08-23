@@ -17,12 +17,12 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t1a52f882c9037437cef3177237d6aa2c : public std::variant<
+struct t85cb3b3308973b3caab409eac4f91fe4 : public std::variant<
   double,
   dessser::gen::event_time_field::t_ext,
   dessser::gen::event_time_field::t_ext
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t1a52f882c9037437cef3177237d6aa2c const &v) {
+inline std::ostream &operator<<(std::ostream &os, t85cb3b3308973b3caab409eac4f91fe4 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -33,20 +33,20 @@ inline std::ostream &operator<<(std::ostream &os, t1a52f882c9037437cef3177237d6a
 
 typedef std::tuple<
   dessser::gen::event_time_field::t_ext,
-  t1a52f882c9037437cef3177237d6aa2c
+  ::dessser::gen::event_time::t85cb3b3308973b3caab409eac4f91fe4
 > t;
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::event_time::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> tdaa6372439c84e43d057c41d9a934bcd;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::event_time::tdaa6372439c84e43d057c41d9a934bcd(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

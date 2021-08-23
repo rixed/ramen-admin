@@ -36,13 +36,13 @@ typedef std::tuple<
   dessser::gen::sync_value::t_ext
 > t08ff092200f210c10792e73a746a4bfd;
 
-struct t2887a6d9058ae0e0e681d62129c69c50 : public std::tuple<
+struct tfc0555375d80915de4624dcd8c201c5f : public std::tuple<
   dessser::gen::sync_key::t_ext,
   dessser::gen::sync_value::t_ext,
   double,
   bool
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t2887a6d9058ae0e0e681d62129c69c50 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tfc0555375d80915de4624dcd8c201c5f const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -52,12 +52,12 @@ inline std::ostream &operator<<(std::ostream &os, t2887a6d9058ae0e0e681d62129c69
   return os;
 }
 
-struct t3fa061ec66599e2b8b3b5d44d886f101 : public std::tuple<
+struct t81abd9e69301921b46b0f740c15d406c : public std::tuple<
   dessser::gen::sync_key::t_ext,
   double,
   bool
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t3fa061ec66599e2b8b3b5d44d886f101 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t81abd9e69301921b46b0f740c15d406c const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -67,14 +67,14 @@ inline std::ostream &operator<<(std::ostream &os, t3fa061ec66599e2b8b3b5d44d886f
 }
 
 struct t : public std::variant<
-  td17298225a9b57dc7469fe7682403a40,
+  ::dessser::gen::sync_client_cmd::td17298225a9b57dc7469fe7682403a40,
   dessser::gen::sync_selector::t_ext,
-  t08ff092200f210c10792e73a746a4bfd,
-  t2887a6d9058ae0e0e681d62129c69c50,
-  t08ff092200f210c10792e73a746a4bfd,
+  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd,
+  ::dessser::gen::sync_client_cmd::tfc0555375d80915de4624dcd8c201c5f,
+  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd,
   dessser::gen::sync_key::t_ext,
-  t3fa061ec66599e2b8b3b5d44d886f101,
-  t3fa061ec66599e2b8b3b5d44d886f101,
+  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c,
+  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c,
   dessser::gen::sync_key::t_ext,
   Void
 > { using variant::variant; };
@@ -95,16 +95,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::sync_client_cmd::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t00ab01b091bd44a04eff4657d2007412;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_client_cmd::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_client_cmd::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_client_cmd::t00ab01b091bd44a04eff4657d2007412(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

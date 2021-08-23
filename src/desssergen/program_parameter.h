@@ -32,16 +32,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::program_parameter::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t571f6c411143ec709060fca7e7f9ac08;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::program_parameter::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::program_parameter::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

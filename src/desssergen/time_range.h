@@ -14,24 +14,24 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tf32344673bb22ed5e3097268b352679e {
+struct tf7123493969c2e2f90159f6551344447 {
+  bool growing;
   double since;
   double until;
-  bool growing;
-  bool operator==(tf32344673bb22ed5e3097268b352679e const &other) const {
-    return since == other.since && until == other.until && growing == other.growing;
+  bool operator==(tf7123493969c2e2f90159f6551344447 const &other) const {
+    return growing == other.growing && since == other.since && until == other.until;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, tf32344673bb22ed5e3097268b352679e const &r) {
+inline std::ostream &operator<<(std::ostream &os, tf7123493969c2e2f90159f6551344447 const &r) {
   os << '{';
+  os << "growing:" << r.growing << ',';
   os << "since:" << r.since << ',';
-  os << "until:" << r.until << ',';
-  os << "growing:" << r.growing;
+  os << "until:" << r.until;
   os << '}';
   return os;
 }
 
-typedef Arr<tf32344673bb22ed5e3097268b352679e> t;
+typedef Arr<::dessser::gen::time_range::tf7123493969c2e2f90159f6551344447> t;
 typedef std::tuple<
   t,
   Pointer
@@ -42,7 +42,7 @@ typedef std::tuple<
 /* ----------- */
 extern std::function<Pointer(t&,Pointer)> to_row_binary;
 extern std::function<Size(t&)> sersize_of_row_binary;
-extern std::function<t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::time_range::t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary;
 typedef t t_ext;
 
 }

@@ -40,9 +40,9 @@ struct t {
   }
 };
 typedef std::tuple<
-  t*,
+  ::dessser::gen::program_parameter::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t571f6c411143ec709060fca7e7f9ac08;
 
 typedef std::tuple<
   dessser::gen::field_type::t_ext,
@@ -61,9 +61,9 @@ typedef std::tuple<
     (fun ("{ptyp: $field_type; value: $raql_value}" "Ptr")
       (let "srec_dst_67" (apply (ext-identifier field_type to-row-binary) (get-field "ptyp" (param 0)) (param 1)) (apply (ext-identifier raql_value to-row-binary) (get-field "value" (param 0)) (identifier "srec_dst_67"))))
  */
-static std::function<Pointer(t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::program_parameter::t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::program_parameter::t*,Pointer)> fun0 { [&fun0](::dessser::gen::program_parameter::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_type::to_row_binary };
     dessser::gen::field_type::t_ext id_2 { p_0->ptyp };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -80,15 +80,15 @@ static std::function<Pointer(t*,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::program_parameter::t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{ptyp: $field_type; value: $raql_value}")
       (let "sz_66" (apply (ext-identifier field_type sersize-of-row-binary) (get-field "ptyp" (param 0))) (add (identifier "sz_66") (apply (ext-identifier raql_value sersize-of-row-binary) (get-field "value" (param 0))))))
  */
-static std::function<Size(t*)> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::program_parameter::t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t*)> fun8 { [&fun8](t* p_0) {
+  std::function<Size(::dessser::gen::program_parameter::t*)> fun8 { [&fun8](::dessser::gen::program_parameter::t* p_0) {
     auto fun9 { dessser::gen::field_type::sersize_of_row_binary };
     dessser::gen::field_type::t_ext id_10 { p_0->ptyp };
     Size id_11 { fun9(id_10) };
@@ -106,35 +106,35 @@ static std::function<Size(t*)> sersize_of_row_binary_init()
    };
   return fun8;
 }
-std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::program_parameter::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
       (let "drec_56" (apply (ext-identifier field_type of-row-binary) (param 0))
         (let-pair "drec_fst_57" "drec_snd_58" (identifier "drec_56")
           (let-pair "drec_fst_60" "drec_snd_61" (apply (ext-identifier raql_value of-row-binary) (identifier "drec_snd_58"))
-            (make-tup (make-rec (string "ptyp") (identifier "drec_fst_57") (string "value") (identifier "drec_fst_60")) (identifier "drec_snd_61"))))))
+            (make-tup (make-rec (string "value") (identifier "drec_fst_60") (string "ptyp") (identifier "drec_fst_57")) (identifier "drec_snd_61"))))))
  */
-static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> of_row_binary_init()
 {
-  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun17 { [&fun17](Pointer p_0) {
+  std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> fun17 { [&fun17](Pointer p_0) {
     auto fun18 { dessser::gen::field_type::of_row_binary };
-    t2f09fa79b0bdf1902e3b53bc7e485604 id_19 { fun18(p_0) };
-    t45217dce3db5a9a49037839afd0048e8 let_res_20;
+    ::dessser::gen::program_parameter::t2f09fa79b0bdf1902e3b53bc7e485604 id_19 { fun18(p_0) };
+    ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 let_res_20;
     {
-      t2f09fa79b0bdf1902e3b53bc7e485604 drec_56 { id_19 };
-      t45217dce3db5a9a49037839afd0048e8 letpair_res_21;
+      ::dessser::gen::program_parameter::t2f09fa79b0bdf1902e3b53bc7e485604 drec_56 { id_19 };
+      ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 letpair_res_21;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
         auto fun22 { dessser::gen::raql_value::of_row_binary };
-        t9cfa78b25ddcb5afc14daf6a802a6f88 id_23 { fun22(drec_snd_58) };
-        t45217dce3db5a9a49037839afd0048e8 letpair_res_24;
+        ::dessser::gen::program_parameter::t9cfa78b25ddcb5afc14daf6a802a6f88 id_23 { fun22(drec_snd_58) };
+        ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 letpair_res_24;
         {
           auto drec_fst_60 { std::get<0>(id_23) };
           auto drec_snd_61 { std::get<1>(id_23) };
-          t* id_25 { new t({ .ptyp = drec_fst_57, .value = drec_fst_60 }) };
-          t45217dce3db5a9a49037839afd0048e8 id_26 { id_25, drec_snd_61 };
+          ::dessser::gen::program_parameter::t* id_25 { new ::dessser::gen::program_parameter::t({ .ptyp = drec_fst_57, .value = drec_fst_60 }) };
+          ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 id_26 { id_25, drec_snd_61 };
           letpair_res_24 = id_26;
         }
         letpair_res_21 = letpair_res_24;
@@ -146,7 +146,7 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
    };
   return fun17;
 }
-std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 

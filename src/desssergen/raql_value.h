@@ -14,11 +14,11 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t2dfffd4312923e34e0c3ba0f8d708626 : public std::variant<
+struct t8ce7f646add6f67a97a24392bb6169f0 : public std::variant<
   uint32_t,
   uint128_t
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708626 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8ce7f646add6f67a97a24392bb6169f0 const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -26,14 +26,14 @@ inline std::ostream &operator<<(std::ostream &os, t2dfffd4312923e34e0c3ba0f8d708
   return os;
 }
 
-struct t0e8fd8e4985161b0a31c95457a9d7013 {
+struct t7390d537af046160d39b674f33e01fc7 {
   uint32_t ip;
   uint8_t mask;
-  bool operator==(t0e8fd8e4985161b0a31c95457a9d7013 const &other) const {
+  bool operator==(t7390d537af046160d39b674f33e01fc7 const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t0e8fd8e4985161b0a31c95457a9d7013 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t7390d537af046160d39b674f33e01fc7 const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "mask:" << r.mask;
@@ -41,14 +41,14 @@ inline std::ostream &operator<<(std::ostream &os, t0e8fd8e4985161b0a31c95457a9d7
   return os;
 }
 
-struct t51bc874aa6932e2400d81510c260c7c1 {
+struct t3e9b102ed27e7e8bc762d9474f81358a {
   uint128_t ip;
   uint8_t mask;
-  bool operator==(t51bc874aa6932e2400d81510c260c7c1 const &other) const {
+  bool operator==(t3e9b102ed27e7e8bc762d9474f81358a const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t51bc874aa6932e2400d81510c260c7c1 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t3e9b102ed27e7e8bc762d9474f81358a const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "mask:" << r.mask;
@@ -56,11 +56,11 @@ inline std::ostream &operator<<(std::ostream &os, t51bc874aa6932e2400d81510c260c
   return os;
 }
 
-struct t0ad6dd9e2a8cc9b8c03e7324c11a5d6e : public std::variant<
-  t0e8fd8e4985161b0a31c95457a9d7013,
-  t51bc874aa6932e2400d81510c260c7c1
+struct t10d3d081101b5830926b8883febadc8e : public std::variant<
+  ::dessser::gen::raql_value::t7390d537af046160d39b674f33e01fc7,
+  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t0ad6dd9e2a8cc9b8c03e7324c11a5d6e const &v) {
+inline std::ostream &operator<<(std::ostream &os, t10d3d081101b5830926b8883febadc8e const &v) {
   switch (v.index()) {
     case 0: os << std::get<0>(v); break;
     case 1: os << std::get<1>(v); break;
@@ -121,15 +121,15 @@ struct t : public std::variant<
   uint64_t,
   uint32_t,
   uint128_t,
-  t2dfffd4312923e34e0c3ba0f8d708626,
-  t0e8fd8e4985161b0a31c95457a9d7013,
-  t51bc874aa6932e2400d81510c260c7c1,
-  t0ad6dd9e2a8cc9b8c03e7324c11a5d6e,
+  ::dessser::gen::raql_value::t8ce7f646add6f67a97a24392bb6169f0,
+  ::dessser::gen::raql_value::t7390d537af046160d39b674f33e01fc7,
+  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a,
+  ::dessser::gen::raql_value::t10d3d081101b5830926b8883febadc8e,
   Arr<t*>,
   Arr<t*>,
   Arr<t*>,
-  Arr<t100b7e5cf4b9a621db7a39d7f1d01e5c>,
-  Arr<t7411897bdb6c9b6e00a01b4eb6506ccf>
+  Arr<::dessser::gen::raql_value::t100b7e5cf4b9a621db7a39d7f1d01e5c>,
+  Arr<::dessser::gen::raql_value::t7411897bdb6c9b6e00a01b4eb6506ccf>
 > { using variant::variant; };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
@@ -192,16 +192,16 @@ struct t;
 struct t;
 struct t;
 typedef std::tuple<
-  t*,
+  ::dessser::gen::raql_value::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t85eb9b4ae6397e976e7bd6d60235f8d0;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::raql_value::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8d0(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

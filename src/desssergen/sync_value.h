@@ -32,12 +32,12 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t8503862224be821877d19a3abe14dd09 : public std::tuple<
+struct tde68d14dd253c0005e157424dd8fc48d : public std::tuple<
   double,
   uint32_t,
   std::string
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t8503862224be821877d19a3abe14dd09 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tde68d14dd253c0005e157424dd8fc48d const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -46,14 +46,14 @@ inline std::ostream &operator<<(std::ostream &os, t8503862224be821877d19a3abe14d
   return os;
 }
 
-struct ta60101b15d1583586bdf843100adc51a {
+struct t3f15553b4c4a090da807c33b6aa2aa71 {
   uint32_t skipped;
   Bytes values;
-  bool operator==(ta60101b15d1583586bdf843100adc51a const &other) const {
+  bool operator==(t3f15553b4c4a090da807c33b6aa2aa71 const &other) const {
     return skipped == other.skipped && values == other.values;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, ta60101b15d1583586bdf843100adc51a const &r) {
+inline std::ostream &operator<<(std::ostream &os, t3f15553b4c4a090da807c33b6aa2aa71 const &r) {
   os << '{';
   os << "skipped:" << r.skipped << ',';
   os << "values:" << r.values;
@@ -62,11 +62,11 @@ inline std::ostream &operator<<(std::ostream &os, ta60101b15d1583586bdf843100adc
 }
 
 struct t : public std::variant<
-  t8503862224be821877d19a3abe14dd09,
+  ::dessser::gen::sync_value::tde68d14dd253c0005e157424dd8fc48d,
   dessser::gen::worker::t_ext,
   dessser::gen::retention::t_ext,
   dessser::gen::time_range::t_ext,
-  Arr<ta60101b15d1583586bdf843100adc51a>,
+  Arr<::dessser::gen::sync_value::t3f15553b4c4a090da807c33b6aa2aa71>,
   dessser::gen::raql_value::t_ext,
   dessser::gen::target_config::t_ext,
   dessser::gen::source_info::t_ext,
@@ -110,16 +110,16 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::sync_value::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t5a4f9375f61f65c3413a01c7d782b657;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_value::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_value::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_value::t5a4f9375f61f65c3413a01c7d782b657(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }

@@ -31,41 +31,41 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  double stats_time;
-  double first_startup;
-  double last_startup;
-  std::optional<double> min_etime;
-  std::optional<double> max_etime;
+  uint64_t cur_groups;
+  uint64_t cur_ram;
   std::optional<double> first_input;
-  std::optional<double> last_input;
   std::optional<double> first_output;
+  double first_startup;
+  std::optional<double> last_input;
   std::optional<double> last_output;
-  uint64_t tot_in_tuples;
-  uint64_t tot_sel_tuples;
-  uint64_t tot_out_filtered;
-  uint64_t tot_out_tuples;
-  uint64_t tot_out_errs;
+  double last_startup;
+  std::optional<double> max_etime;
+  uint64_t max_groups;
+  uint64_t max_ram;
+  std::optional<double> min_etime;
+  double stats_time;
+  double tot_cpu;
+  uint64_t tot_extinguished_notifs;
+  uint64_t tot_firing_notifs;
   uint64_t tot_full_bytes;
   uint64_t tot_full_bytes_samples;
-  uint64_t cur_groups;
-  uint64_t max_groups;
   uint64_t tot_in_bytes;
+  uint64_t tot_in_tuples;
   uint64_t tot_out_bytes;
+  uint64_t tot_out_errs;
+  uint64_t tot_out_filtered;
+  uint64_t tot_out_tuples;
+  uint64_t tot_sel_tuples;
   double tot_wait_in;
   double tot_wait_out;
-  uint64_t tot_firing_notifs;
-  uint64_t tot_extinguished_notifs;
-  double tot_cpu;
-  uint64_t cur_ram;
-  uint64_t max_ram;
   bool operator==(t const &other) const {
-    return stats_time == other.stats_time && first_startup == other.first_startup && last_startup == other.last_startup && min_etime == other.min_etime && max_etime == other.max_etime && first_input == other.first_input && last_input == other.last_input && first_output == other.first_output && last_output == other.last_output && tot_in_tuples == other.tot_in_tuples && tot_sel_tuples == other.tot_sel_tuples && tot_out_filtered == other.tot_out_filtered && tot_out_tuples == other.tot_out_tuples && tot_out_errs == other.tot_out_errs && tot_full_bytes == other.tot_full_bytes && tot_full_bytes_samples == other.tot_full_bytes_samples && cur_groups == other.cur_groups && max_groups == other.max_groups && tot_in_bytes == other.tot_in_bytes && tot_out_bytes == other.tot_out_bytes && tot_wait_in == other.tot_wait_in && tot_wait_out == other.tot_wait_out && tot_firing_notifs == other.tot_firing_notifs && tot_extinguished_notifs == other.tot_extinguished_notifs && tot_cpu == other.tot_cpu && cur_ram == other.cur_ram && max_ram == other.max_ram;
+    return cur_groups == other.cur_groups && cur_ram == other.cur_ram && first_input == other.first_input && first_output == other.first_output && first_startup == other.first_startup && last_input == other.last_input && last_output == other.last_output && last_startup == other.last_startup && max_etime == other.max_etime && max_groups == other.max_groups && max_ram == other.max_ram && min_etime == other.min_etime && stats_time == other.stats_time && tot_cpu == other.tot_cpu && tot_extinguished_notifs == other.tot_extinguished_notifs && tot_firing_notifs == other.tot_firing_notifs && tot_full_bytes == other.tot_full_bytes && tot_full_bytes_samples == other.tot_full_bytes_samples && tot_in_bytes == other.tot_in_bytes && tot_in_tuples == other.tot_in_tuples && tot_out_bytes == other.tot_out_bytes && tot_out_errs == other.tot_out_errs && tot_out_filtered == other.tot_out_filtered && tot_out_tuples == other.tot_out_tuples && tot_sel_tuples == other.tot_sel_tuples && tot_wait_in == other.tot_wait_in && tot_wait_out == other.tot_wait_out;
   }
 };
 typedef std::tuple<
-  t*,
+  ::dessser::gen::runtime_stats::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> td7d9e9b8a490b2a0e053496659aaee30;
 
 typedef std::tuple<
   uint64_t,
@@ -153,9 +153,9 @@ typedef std::tuple<
           (write-u64 little-endian (identifier "srec_dst_290") (get-field "cur_ram" (param 0)))) 
         (write-u64 little-endian (identifier "srec_dst_291") (get-field "max_ram" (param 0)))))
  */
-static std::function<Pointer(t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t*,Pointer)> fun0 { [&fun0](t* p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> fun0 { [&fun0](::dessser::gen::runtime_stats::t* p_0, Pointer p_1) {
     double id_1 { p_0->stats_time };
     uint64_t id_2 { qword_of_float(id_1) };
     Pointer id_3 { p_1.writeU64Le(id_2) };
@@ -435,7 +435,7 @@ static std::function<Pointer(t*,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{stats_time: FLOAT; first_startup: FLOAT; last_startup: FLOAT; min_etime: FLOAT?; max_etime: FLOAT?; first_input: FLOAT?; last_input: FLOAT?; first_output: FLOAT?; last_output: FLOAT?; tot_in_tuples: U64; tot_sel_tuples: U64; tot_out_filtered: U64; tot_out_tuples: U64; tot_out_errs: U64; tot_full_bytes: U64; tot_full_bytes_samples: U64; cur_groups: U64; max_groups: U64; tot_in_bytes: U64; tot_out_bytes: U64; tot_wait_in: FLOAT; tot_wait_out: FLOAT; tot_firing_notifs: U64; tot_extinguished_notifs: U64; tot_cpu: FLOAT; cur_ram: U64; max_ram: U64}")
@@ -473,9 +473,9 @@ std::function<Pointer(t*,Pointer)> to_row_binary(to_row_binary_init());
                             (size 8)) (size 8)) (size 8)) (size 8)) (size 8)) 
                   (size 8)) (size 8)) (size 8)) (size 8)) (size 8)) (size 8)))
  */
-static std::function<Size(t*)> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_binary_init()
 {
-  std::function<Size(t*)> fun141 { [&fun141](t* p_0) {
+  std::function<Size(::dessser::gen::runtime_stats::t*)> fun141 { [&fun141](::dessser::gen::runtime_stats::t* p_0) {
     std::optional<double> id_142 { p_0->max_etime };
     bool id_143 { !(id_142.has_value ()) };
     Size choose_res_144;
@@ -627,7 +627,7 @@ static std::function<Size(t*)> sersize_of_row_binary_init()
    };
   return fun141;
 }
-std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -755,110 +755,110 @@ std::function<Size(t*)> sersize_of_row_binary(sersize_of_row_binary_init());
                                                                     (read-u64 little-endian (identifier "drec_snd_229"))
                                                                     (make-tup
                                                                     (make-rec 
-                                                                    (string "stats_time") 
-                                                                    (identifier "drec_fst_60") 
-                                                                    (string "first_startup") 
-                                                                    (identifier "drec_fst_66") 
-                                                                    (string "last_startup") 
-                                                                    (identifier "drec_fst_72") 
-                                                                    (string "min_etime") 
-                                                                    (identifier "drec_fst_81") 
-                                                                    (string "max_etime") 
-                                                                    (identifier "drec_fst_90") 
-                                                                    (string "first_input") 
-                                                                    (identifier "drec_fst_99") 
-                                                                    (string "last_input") 
-                                                                    (identifier "drec_fst_108") 
-                                                                    (string "first_output") 
-                                                                    (identifier "drec_fst_117") 
-                                                                    (string "last_output") 
-                                                                    (identifier "drec_fst_126") 
-                                                                    (string "tot_in_tuples") 
-                                                                    (identifier "drec_fst_132") 
-                                                                    (string "tot_sel_tuples") 
-                                                                    (identifier "drec_fst_138") 
-                                                                    (string "tot_out_filtered") 
-                                                                    (identifier "drec_fst_144") 
-                                                                    (string "tot_out_tuples") 
-                                                                    (identifier "drec_fst_150") 
-                                                                    (string "tot_out_errs") 
-                                                                    (identifier "drec_fst_156") 
-                                                                    (string "tot_full_bytes") 
-                                                                    (identifier "drec_fst_162") 
-                                                                    (string "tot_full_bytes_samples") 
-                                                                    (identifier "drec_fst_168") 
-                                                                    (string "cur_groups") 
-                                                                    (identifier "drec_fst_174") 
-                                                                    (string "max_groups") 
-                                                                    (identifier "drec_fst_180") 
-                                                                    (string "tot_in_bytes") 
-                                                                    (identifier "drec_fst_186") 
-                                                                    (string "tot_out_bytes") 
-                                                                    (identifier "drec_fst_192") 
-                                                                    (string "tot_wait_in") 
-                                                                    (identifier "drec_fst_198") 
-                                                                    (string "tot_wait_out") 
-                                                                    (identifier "drec_fst_204") 
-                                                                    (string "tot_firing_notifs") 
-                                                                    (identifier "drec_fst_210") 
-                                                                    (string "tot_extinguished_notifs") 
-                                                                    (identifier "drec_fst_216") 
-                                                                    (string "tot_cpu") 
-                                                                    (identifier "drec_fst_222") 
+                                                                    (string "max_ram") 
+                                                                    (identifier "du64_fst_231") 
                                                                     (string "cur_ram") 
                                                                     (identifier "drec_fst_228") 
-                                                                    (string "max_ram") 
-                                                                    (identifier "du64_fst_231")) 
+                                                                    (string "tot_cpu") 
+                                                                    (identifier "drec_fst_222") 
+                                                                    (string "tot_extinguished_notifs") 
+                                                                    (identifier "drec_fst_216") 
+                                                                    (string "tot_firing_notifs") 
+                                                                    (identifier "drec_fst_210") 
+                                                                    (string "tot_wait_out") 
+                                                                    (identifier "drec_fst_204") 
+                                                                    (string "tot_wait_in") 
+                                                                    (identifier "drec_fst_198") 
+                                                                    (string "tot_out_bytes") 
+                                                                    (identifier "drec_fst_192") 
+                                                                    (string "tot_in_bytes") 
+                                                                    (identifier "drec_fst_186") 
+                                                                    (string "max_groups") 
+                                                                    (identifier "drec_fst_180") 
+                                                                    (string "cur_groups") 
+                                                                    (identifier "drec_fst_174") 
+                                                                    (string "tot_full_bytes_samples") 
+                                                                    (identifier "drec_fst_168") 
+                                                                    (string "tot_full_bytes") 
+                                                                    (identifier "drec_fst_162") 
+                                                                    (string "tot_out_errs") 
+                                                                    (identifier "drec_fst_156") 
+                                                                    (string "tot_out_tuples") 
+                                                                    (identifier "drec_fst_150") 
+                                                                    (string "tot_out_filtered") 
+                                                                    (identifier "drec_fst_144") 
+                                                                    (string "tot_sel_tuples") 
+                                                                    (identifier "drec_fst_138") 
+                                                                    (string "tot_in_tuples") 
+                                                                    (identifier "drec_fst_132") 
+                                                                    (string "last_output") 
+                                                                    (identifier "drec_fst_126") 
+                                                                    (string "first_output") 
+                                                                    (identifier "drec_fst_117") 
+                                                                    (string "last_input") 
+                                                                    (identifier "drec_fst_108") 
+                                                                    (string "first_input") 
+                                                                    (identifier "drec_fst_99") 
+                                                                    (string "max_etime") 
+                                                                    (identifier "drec_fst_90") 
+                                                                    (string "min_etime") 
+                                                                    (identifier "drec_fst_81") 
+                                                                    (string "last_startup") 
+                                                                    (identifier "drec_fst_72") 
+                                                                    (string "first_startup") 
+                                                                    (identifier "drec_fst_66") 
+                                                                    (string "stats_time") 
+                                                                    (identifier "drec_fst_60")) 
                                                                     (identifier "du64_snd_232"))))))))))))))))))))))))))))))))))))))))))))))))))))))))
  */
-static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30(Pointer)> of_row_binary_init()
 {
-  std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> fun237 { [&fun237](Pointer p_0) {
-    t7a47220550fc5126a7b79f1e0c10c645 id_238 { p_0.readU64Le() };
-    taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_239;
+  std::function<::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30(Pointer)> fun237 { [&fun237](Pointer p_0) {
+    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_238 { p_0.readU64Le() };
+    ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_239;
     {
       auto dfloat_fst_57 { std::get<0>(id_238) };
       auto dfloat_snd_58 { std::get<1>(id_238) };
       double id_240 { float_of_qword(dfloat_fst_57) };
-      taebed00ad7fdb3f7ced11d3cfd58aade id_241 { id_240, dfloat_snd_58 };
+      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_241 { id_240, dfloat_snd_58 };
       letpair_res_239 = id_241;
     }
-    t45217dce3db5a9a49037839afd0048e8 let_res_242;
+    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_242;
     {
-      taebed00ad7fdb3f7ced11d3cfd58aade drec_59 { letpair_res_239 };
-      t45217dce3db5a9a49037839afd0048e8 letpair_res_243;
+      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_59 { letpair_res_239 };
+      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_243;
       {
         auto drec_fst_60 { std::get<0>(drec_59) };
         auto drec_snd_61 { std::get<1>(drec_59) };
-        t7a47220550fc5126a7b79f1e0c10c645 id_244 { drec_snd_61.readU64Le() };
-        taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_245;
+        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_244 { drec_snd_61.readU64Le() };
+        ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_245;
         {
           auto dfloat_fst_63 { std::get<0>(id_244) };
           auto dfloat_snd_64 { std::get<1>(id_244) };
           double id_246 { float_of_qword(dfloat_fst_63) };
-          taebed00ad7fdb3f7ced11d3cfd58aade id_247 { id_246, dfloat_snd_64 };
+          ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_247 { id_246, dfloat_snd_64 };
           letpair_res_245 = id_247;
         }
-        t45217dce3db5a9a49037839afd0048e8 let_res_248;
+        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_248;
         {
-          taebed00ad7fdb3f7ced11d3cfd58aade drec_65 { letpair_res_245 };
-          t45217dce3db5a9a49037839afd0048e8 letpair_res_249;
+          ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_65 { letpair_res_245 };
+          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_249;
           {
             auto drec_fst_66 { std::get<0>(drec_65) };
             auto drec_snd_67 { std::get<1>(drec_65) };
-            t7a47220550fc5126a7b79f1e0c10c645 id_250 { drec_snd_67.readU64Le() };
-            taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_251;
+            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_250 { drec_snd_67.readU64Le() };
+            ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_251;
             {
               auto dfloat_fst_69 { std::get<0>(id_250) };
               auto dfloat_snd_70 { std::get<1>(id_250) };
               double id_252 { float_of_qword(dfloat_fst_69) };
-              taebed00ad7fdb3f7ced11d3cfd58aade id_253 { id_252, dfloat_snd_70 };
+              ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_253 { id_252, dfloat_snd_70 };
               letpair_res_251 = id_253;
             }
-            t45217dce3db5a9a49037839afd0048e8 let_res_254;
+            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_254;
             {
-              taebed00ad7fdb3f7ced11d3cfd58aade drec_71 { letpair_res_251 };
-              t45217dce3db5a9a49037839afd0048e8 letpair_res_255;
+              ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_71 { letpair_res_251 };
+              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_255;
               {
                 auto drec_fst_72 { std::get<0>(drec_71) };
                 auto drec_snd_73 { std::get<1>(drec_71) };
@@ -866,32 +866,32 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                 uint8_t id_257 { drec_snd_73.peekU8(id_256) };
                 uint8_t id_258 { 1 };
                 bool id_259 { bool(id_257 == id_258) };
-                t8e3604f06d829584296ed84bc534700a choose_res_260;
+                ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_260;
                 if (id_259) {
                   std::optional<double> id_261 { std::nullopt };
                   Size id_262 { 1UL };
                   Pointer id_263 { drec_snd_73.skip(id_262) };
-                  t8e3604f06d829584296ed84bc534700a id_264 { id_261, id_263 };
+                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_264 { id_261, id_263 };
                   choose_res_260 = id_264;
                 } else {
                   Size id_265 { 1UL };
                   Pointer id_266 { drec_snd_73.skip(id_265) };
-                  t7a47220550fc5126a7b79f1e0c10c645 id_267 { id_266.readU64Le() };
-                  t8e3604f06d829584296ed84bc534700a letpair_res_268;
+                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_267 { id_266.readU64Le() };
+                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_268;
                   {
                     auto dfloat_fst_75 { std::get<0>(id_267) };
                     auto dfloat_snd_76 { std::get<1>(id_267) };
                     double id_269 { float_of_qword(dfloat_fst_75) };
                     std::optional<double> id_270 { id_269 };
-                    t8e3604f06d829584296ed84bc534700a id_271 { id_270, dfloat_snd_76 };
+                    ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_271 { id_270, dfloat_snd_76 };
                     letpair_res_268 = id_271;
                   }
                   choose_res_260 = letpair_res_268;
                 }
-                t45217dce3db5a9a49037839afd0048e8 let_res_272;
+                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_272;
                 {
-                  t8e3604f06d829584296ed84bc534700a drec_80 { choose_res_260 };
-                  t45217dce3db5a9a49037839afd0048e8 letpair_res_273;
+                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_80 { choose_res_260 };
+                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_273;
                   {
                     auto drec_fst_81 { std::get<0>(drec_80) };
                     auto drec_snd_82 { std::get<1>(drec_80) };
@@ -899,32 +899,32 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                     uint8_t id_275 { drec_snd_82.peekU8(id_274) };
                     uint8_t id_276 { 1 };
                     bool id_277 { bool(id_275 == id_276) };
-                    t8e3604f06d829584296ed84bc534700a choose_res_278;
+                    ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_278;
                     if (id_277) {
                       std::optional<double> id_279 { std::nullopt };
                       Size id_280 { 1UL };
                       Pointer id_281 { drec_snd_82.skip(id_280) };
-                      t8e3604f06d829584296ed84bc534700a id_282 { id_279, id_281 };
+                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_282 { id_279, id_281 };
                       choose_res_278 = id_282;
                     } else {
                       Size id_283 { 1UL };
                       Pointer id_284 { drec_snd_82.skip(id_283) };
-                      t7a47220550fc5126a7b79f1e0c10c645 id_285 { id_284.readU64Le() };
-                      t8e3604f06d829584296ed84bc534700a letpair_res_286;
+                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_285 { id_284.readU64Le() };
+                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_286;
                       {
                         auto dfloat_fst_84 { std::get<0>(id_285) };
                         auto dfloat_snd_85 { std::get<1>(id_285) };
                         double id_287 { float_of_qword(dfloat_fst_84) };
                         std::optional<double> id_288 { id_287 };
-                        t8e3604f06d829584296ed84bc534700a id_289 { id_288, dfloat_snd_85 };
+                        ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_289 { id_288, dfloat_snd_85 };
                         letpair_res_286 = id_289;
                       }
                       choose_res_278 = letpair_res_286;
                     }
-                    t45217dce3db5a9a49037839afd0048e8 let_res_290;
+                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_290;
                     {
-                      t8e3604f06d829584296ed84bc534700a drec_89 { choose_res_278 };
-                      t45217dce3db5a9a49037839afd0048e8 letpair_res_291;
+                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_89 { choose_res_278 };
+                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_291;
                       {
                         auto drec_fst_90 { std::get<0>(drec_89) };
                         auto drec_snd_91 { std::get<1>(drec_89) };
@@ -932,32 +932,32 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                         uint8_t id_293 { drec_snd_91.peekU8(id_292) };
                         uint8_t id_294 { 1 };
                         bool id_295 { bool(id_293 == id_294) };
-                        t8e3604f06d829584296ed84bc534700a choose_res_296;
+                        ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_296;
                         if (id_295) {
                           std::optional<double> id_297 { std::nullopt };
                           Size id_298 { 1UL };
                           Pointer id_299 { drec_snd_91.skip(id_298) };
-                          t8e3604f06d829584296ed84bc534700a id_300 { id_297, id_299 };
+                          ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_300 { id_297, id_299 };
                           choose_res_296 = id_300;
                         } else {
                           Size id_301 { 1UL };
                           Pointer id_302 { drec_snd_91.skip(id_301) };
-                          t7a47220550fc5126a7b79f1e0c10c645 id_303 { id_302.readU64Le() };
-                          t8e3604f06d829584296ed84bc534700a letpair_res_304;
+                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_303 { id_302.readU64Le() };
+                          ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_304;
                           {
                             auto dfloat_fst_93 { std::get<0>(id_303) };
                             auto dfloat_snd_94 { std::get<1>(id_303) };
                             double id_305 { float_of_qword(dfloat_fst_93) };
                             std::optional<double> id_306 { id_305 };
-                            t8e3604f06d829584296ed84bc534700a id_307 { id_306, dfloat_snd_94 };
+                            ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_307 { id_306, dfloat_snd_94 };
                             letpair_res_304 = id_307;
                           }
                           choose_res_296 = letpair_res_304;
                         }
-                        t45217dce3db5a9a49037839afd0048e8 let_res_308;
+                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_308;
                         {
-                          t8e3604f06d829584296ed84bc534700a drec_98 { choose_res_296 };
-                          t45217dce3db5a9a49037839afd0048e8 letpair_res_309;
+                          ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_98 { choose_res_296 };
+                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_309;
                           {
                             auto drec_fst_99 { std::get<0>(drec_98) };
                             auto drec_snd_100 { std::get<1>(drec_98) };
@@ -965,32 +965,32 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                             uint8_t id_311 { drec_snd_100.peekU8(id_310) };
                             uint8_t id_312 { 1 };
                             bool id_313 { bool(id_311 == id_312) };
-                            t8e3604f06d829584296ed84bc534700a choose_res_314;
+                            ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_314;
                             if (id_313) {
                               std::optional<double> id_315 { std::nullopt };
                               Size id_316 { 1UL };
                               Pointer id_317 { drec_snd_100.skip(id_316) };
-                              t8e3604f06d829584296ed84bc534700a id_318 { id_315, id_317 };
+                              ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_318 { id_315, id_317 };
                               choose_res_314 = id_318;
                             } else {
                               Size id_319 { 1UL };
                               Pointer id_320 { drec_snd_100.skip(id_319) };
-                              t7a47220550fc5126a7b79f1e0c10c645 id_321 { id_320.readU64Le() };
-                              t8e3604f06d829584296ed84bc534700a letpair_res_322;
+                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_321 { id_320.readU64Le() };
+                              ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_322;
                               {
                                 auto dfloat_fst_102 { std::get<0>(id_321) };
                                 auto dfloat_snd_103 { std::get<1>(id_321) };
                                 double id_323 { float_of_qword(dfloat_fst_102) };
                                 std::optional<double> id_324 { id_323 };
-                                t8e3604f06d829584296ed84bc534700a id_325 { id_324, dfloat_snd_103 };
+                                ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_325 { id_324, dfloat_snd_103 };
                                 letpair_res_322 = id_325;
                               }
                               choose_res_314 = letpair_res_322;
                             }
-                            t45217dce3db5a9a49037839afd0048e8 let_res_326;
+                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_326;
                             {
-                              t8e3604f06d829584296ed84bc534700a drec_107 { choose_res_314 };
-                              t45217dce3db5a9a49037839afd0048e8 letpair_res_327;
+                              ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_107 { choose_res_314 };
+                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_327;
                               {
                                 auto drec_fst_108 { std::get<0>(drec_107) };
                                 auto drec_snd_109 { std::get<1>(drec_107) };
@@ -998,32 +998,32 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                                 uint8_t id_329 { drec_snd_109.peekU8(id_328) };
                                 uint8_t id_330 { 1 };
                                 bool id_331 { bool(id_329 == id_330) };
-                                t8e3604f06d829584296ed84bc534700a choose_res_332;
+                                ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_332;
                                 if (id_331) {
                                   std::optional<double> id_333 { std::nullopt };
                                   Size id_334 { 1UL };
                                   Pointer id_335 { drec_snd_109.skip(id_334) };
-                                  t8e3604f06d829584296ed84bc534700a id_336 { id_333, id_335 };
+                                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_336 { id_333, id_335 };
                                   choose_res_332 = id_336;
                                 } else {
                                   Size id_337 { 1UL };
                                   Pointer id_338 { drec_snd_109.skip(id_337) };
-                                  t7a47220550fc5126a7b79f1e0c10c645 id_339 { id_338.readU64Le() };
-                                  t8e3604f06d829584296ed84bc534700a letpair_res_340;
+                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_339 { id_338.readU64Le() };
+                                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_340;
                                   {
                                     auto dfloat_fst_111 { std::get<0>(id_339) };
                                     auto dfloat_snd_112 { std::get<1>(id_339) };
                                     double id_341 { float_of_qword(dfloat_fst_111) };
                                     std::optional<double> id_342 { id_341 };
-                                    t8e3604f06d829584296ed84bc534700a id_343 { id_342, dfloat_snd_112 };
+                                    ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_343 { id_342, dfloat_snd_112 };
                                     letpair_res_340 = id_343;
                                   }
                                   choose_res_332 = letpair_res_340;
                                 }
-                                t45217dce3db5a9a49037839afd0048e8 let_res_344;
+                                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_344;
                                 {
-                                  t8e3604f06d829584296ed84bc534700a drec_116 { choose_res_332 };
-                                  t45217dce3db5a9a49037839afd0048e8 letpair_res_345;
+                                  ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_116 { choose_res_332 };
+                                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_345;
                                   {
                                     auto drec_fst_117 { std::get<0>(drec_116) };
                                     auto drec_snd_118 { std::get<1>(drec_116) };
@@ -1031,300 +1031,300 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
                                     uint8_t id_347 { drec_snd_118.peekU8(id_346) };
                                     uint8_t id_348 { 1 };
                                     bool id_349 { bool(id_347 == id_348) };
-                                    t8e3604f06d829584296ed84bc534700a choose_res_350;
+                                    ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a choose_res_350;
                                     if (id_349) {
                                       std::optional<double> id_351 { std::nullopt };
                                       Size id_352 { 1UL };
                                       Pointer id_353 { drec_snd_118.skip(id_352) };
-                                      t8e3604f06d829584296ed84bc534700a id_354 { id_351, id_353 };
+                                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_354 { id_351, id_353 };
                                       choose_res_350 = id_354;
                                     } else {
                                       Size id_355 { 1UL };
                                       Pointer id_356 { drec_snd_118.skip(id_355) };
-                                      t7a47220550fc5126a7b79f1e0c10c645 id_357 { id_356.readU64Le() };
-                                      t8e3604f06d829584296ed84bc534700a letpair_res_358;
+                                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_357 { id_356.readU64Le() };
+                                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a letpair_res_358;
                                       {
                                         auto dfloat_fst_120 { std::get<0>(id_357) };
                                         auto dfloat_snd_121 { std::get<1>(id_357) };
                                         double id_359 { float_of_qword(dfloat_fst_120) };
                                         std::optional<double> id_360 { id_359 };
-                                        t8e3604f06d829584296ed84bc534700a id_361 { id_360, dfloat_snd_121 };
+                                        ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a id_361 { id_360, dfloat_snd_121 };
                                         letpair_res_358 = id_361;
                                       }
                                       choose_res_350 = letpair_res_358;
                                     }
-                                    t45217dce3db5a9a49037839afd0048e8 let_res_362;
+                                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_362;
                                     {
-                                      t8e3604f06d829584296ed84bc534700a drec_125 { choose_res_350 };
-                                      t45217dce3db5a9a49037839afd0048e8 letpair_res_363;
+                                      ::dessser::gen::runtime_stats::t8e3604f06d829584296ed84bc534700a drec_125 { choose_res_350 };
+                                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_363;
                                       {
                                         auto drec_fst_126 { std::get<0>(drec_125) };
                                         auto drec_snd_127 { std::get<1>(drec_125) };
-                                        t7a47220550fc5126a7b79f1e0c10c645 id_364 { drec_snd_127.readU64Le() };
-                                        t7a47220550fc5126a7b79f1e0c10c645 letpair_res_365;
+                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_364 { drec_snd_127.readU64Le() };
+                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_365;
                                         {
                                           auto du64_fst_129 { std::get<0>(id_364) };
                                           auto du64_snd_130 { std::get<1>(id_364) };
-                                          t7a47220550fc5126a7b79f1e0c10c645 id_366 { du64_fst_129, du64_snd_130 };
+                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_366 { du64_fst_129, du64_snd_130 };
                                           letpair_res_365 = id_366;
                                         }
-                                        t45217dce3db5a9a49037839afd0048e8 let_res_367;
+                                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_367;
                                         {
-                                          t7a47220550fc5126a7b79f1e0c10c645 drec_131 { letpair_res_365 };
-                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_368;
+                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_131 { letpair_res_365 };
+                                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_368;
                                           {
                                             auto drec_fst_132 { std::get<0>(drec_131) };
                                             auto drec_snd_133 { std::get<1>(drec_131) };
-                                            t7a47220550fc5126a7b79f1e0c10c645 id_369 { drec_snd_133.readU64Le() };
-                                            t7a47220550fc5126a7b79f1e0c10c645 letpair_res_370;
+                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_369 { drec_snd_133.readU64Le() };
+                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_370;
                                             {
                                               auto du64_fst_135 { std::get<0>(id_369) };
                                               auto du64_snd_136 { std::get<1>(id_369) };
-                                              t7a47220550fc5126a7b79f1e0c10c645 id_371 { du64_fst_135, du64_snd_136 };
+                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_371 { du64_fst_135, du64_snd_136 };
                                               letpair_res_370 = id_371;
                                             }
-                                            t45217dce3db5a9a49037839afd0048e8 let_res_372;
+                                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_372;
                                             {
-                                              t7a47220550fc5126a7b79f1e0c10c645 drec_137 { letpair_res_370 };
-                                              t45217dce3db5a9a49037839afd0048e8 letpair_res_373;
+                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_137 { letpair_res_370 };
+                                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_373;
                                               {
                                                 auto drec_fst_138 { std::get<0>(drec_137) };
                                                 auto drec_snd_139 { std::get<1>(drec_137) };
-                                                t7a47220550fc5126a7b79f1e0c10c645 id_374 { drec_snd_139.readU64Le() };
-                                                t7a47220550fc5126a7b79f1e0c10c645 letpair_res_375;
+                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_374 { drec_snd_139.readU64Le() };
+                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_375;
                                                 {
                                                   auto du64_fst_141 { std::get<0>(id_374) };
                                                   auto du64_snd_142 { std::get<1>(id_374) };
-                                                  t7a47220550fc5126a7b79f1e0c10c645 id_376 { du64_fst_141, du64_snd_142 };
+                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_376 { du64_fst_141, du64_snd_142 };
                                                   letpair_res_375 = id_376;
                                                 }
-                                                t45217dce3db5a9a49037839afd0048e8 let_res_377;
+                                                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_377;
                                                 {
-                                                  t7a47220550fc5126a7b79f1e0c10c645 drec_143 { letpair_res_375 };
-                                                  t45217dce3db5a9a49037839afd0048e8 letpair_res_378;
+                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_143 { letpair_res_375 };
+                                                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_378;
                                                   {
                                                     auto drec_fst_144 { std::get<0>(drec_143) };
                                                     auto drec_snd_145 { std::get<1>(drec_143) };
-                                                    t7a47220550fc5126a7b79f1e0c10c645 id_379 { drec_snd_145.readU64Le() };
-                                                    t7a47220550fc5126a7b79f1e0c10c645 letpair_res_380;
+                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_379 { drec_snd_145.readU64Le() };
+                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_380;
                                                     {
                                                       auto du64_fst_147 { std::get<0>(id_379) };
                                                       auto du64_snd_148 { std::get<1>(id_379) };
-                                                      t7a47220550fc5126a7b79f1e0c10c645 id_381 { du64_fst_147, du64_snd_148 };
+                                                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_381 { du64_fst_147, du64_snd_148 };
                                                       letpair_res_380 = id_381;
                                                     }
-                                                    t45217dce3db5a9a49037839afd0048e8 let_res_382;
+                                                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_382;
                                                     {
-                                                      t7a47220550fc5126a7b79f1e0c10c645 drec_149 { letpair_res_380 };
-                                                      t45217dce3db5a9a49037839afd0048e8 letpair_res_383;
+                                                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_149 { letpair_res_380 };
+                                                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_383;
                                                       {
                                                         auto drec_fst_150 { std::get<0>(drec_149) };
                                                         auto drec_snd_151 { std::get<1>(drec_149) };
-                                                        t7a47220550fc5126a7b79f1e0c10c645 id_384 { drec_snd_151.readU64Le() };
-                                                        t7a47220550fc5126a7b79f1e0c10c645 letpair_res_385;
+                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_384 { drec_snd_151.readU64Le() };
+                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_385;
                                                         {
                                                           auto du64_fst_153 { std::get<0>(id_384) };
                                                           auto du64_snd_154 { std::get<1>(id_384) };
-                                                          t7a47220550fc5126a7b79f1e0c10c645 id_386 { du64_fst_153, du64_snd_154 };
+                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_386 { du64_fst_153, du64_snd_154 };
                                                           letpair_res_385 = id_386;
                                                         }
-                                                        t45217dce3db5a9a49037839afd0048e8 let_res_387;
+                                                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_387;
                                                         {
-                                                          t7a47220550fc5126a7b79f1e0c10c645 drec_155 { letpair_res_385 };
-                                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_388;
+                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_155 { letpair_res_385 };
+                                                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_388;
                                                           {
                                                             auto drec_fst_156 { std::get<0>(drec_155) };
                                                             auto drec_snd_157 { std::get<1>(drec_155) };
-                                                            t7a47220550fc5126a7b79f1e0c10c645 id_389 { drec_snd_157.readU64Le() };
-                                                            t7a47220550fc5126a7b79f1e0c10c645 letpair_res_390;
+                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_389 { drec_snd_157.readU64Le() };
+                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_390;
                                                             {
                                                               auto du64_fst_159 { std::get<0>(id_389) };
                                                               auto du64_snd_160 { std::get<1>(id_389) };
-                                                              t7a47220550fc5126a7b79f1e0c10c645 id_391 { du64_fst_159, du64_snd_160 };
+                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_391 { du64_fst_159, du64_snd_160 };
                                                               letpair_res_390 = id_391;
                                                             }
-                                                            t45217dce3db5a9a49037839afd0048e8 let_res_392;
+                                                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_392;
                                                             {
-                                                              t7a47220550fc5126a7b79f1e0c10c645 drec_161 { letpair_res_390 };
-                                                              t45217dce3db5a9a49037839afd0048e8 letpair_res_393;
+                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_161 { letpair_res_390 };
+                                                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_393;
                                                               {
                                                                 auto drec_fst_162 { std::get<0>(drec_161) };
                                                                 auto drec_snd_163 { std::get<1>(drec_161) };
-                                                                t7a47220550fc5126a7b79f1e0c10c645 id_394 { drec_snd_163.readU64Le() };
-                                                                t7a47220550fc5126a7b79f1e0c10c645 letpair_res_395;
+                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_394 { drec_snd_163.readU64Le() };
+                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_395;
                                                                 {
                                                                   auto du64_fst_165 { std::get<0>(id_394) };
                                                                   auto du64_snd_166 { std::get<1>(id_394) };
-                                                                  t7a47220550fc5126a7b79f1e0c10c645 id_396 { du64_fst_165, du64_snd_166 };
+                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_396 { du64_fst_165, du64_snd_166 };
                                                                   letpair_res_395 = id_396;
                                                                 }
-                                                                t45217dce3db5a9a49037839afd0048e8 let_res_397;
+                                                                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_397;
                                                                 {
-                                                                  t7a47220550fc5126a7b79f1e0c10c645 drec_167 { letpair_res_395 };
-                                                                  t45217dce3db5a9a49037839afd0048e8 letpair_res_398;
+                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_167 { letpair_res_395 };
+                                                                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_398;
                                                                   {
                                                                     auto drec_fst_168 { std::get<0>(drec_167) };
                                                                     auto drec_snd_169 { std::get<1>(drec_167) };
-                                                                    t7a47220550fc5126a7b79f1e0c10c645 id_399 { drec_snd_169.readU64Le() };
-                                                                    t7a47220550fc5126a7b79f1e0c10c645 letpair_res_400;
+                                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_399 { drec_snd_169.readU64Le() };
+                                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_400;
                                                                     {
                                                                       auto du64_fst_171 { std::get<0>(id_399) };
                                                                       auto du64_snd_172 { std::get<1>(id_399) };
-                                                                      t7a47220550fc5126a7b79f1e0c10c645 id_401 { du64_fst_171, du64_snd_172 };
+                                                                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_401 { du64_fst_171, du64_snd_172 };
                                                                       letpair_res_400 = id_401;
                                                                     }
-                                                                    t45217dce3db5a9a49037839afd0048e8 let_res_402;
+                                                                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_402;
                                                                     {
-                                                                      t7a47220550fc5126a7b79f1e0c10c645 drec_173 { letpair_res_400 };
-                                                                      t45217dce3db5a9a49037839afd0048e8 letpair_res_403;
+                                                                      ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_173 { letpair_res_400 };
+                                                                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_403;
                                                                       {
                                                                         auto drec_fst_174 { std::get<0>(drec_173) };
                                                                         auto drec_snd_175 { std::get<1>(drec_173) };
-                                                                        t7a47220550fc5126a7b79f1e0c10c645 id_404 { drec_snd_175.readU64Le() };
-                                                                        t7a47220550fc5126a7b79f1e0c10c645 letpair_res_405;
+                                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_404 { drec_snd_175.readU64Le() };
+                                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_405;
                                                                         {
                                                                           auto du64_fst_177 { std::get<0>(id_404) };
                                                                           auto du64_snd_178 { std::get<1>(id_404) };
-                                                                          t7a47220550fc5126a7b79f1e0c10c645 id_406 { du64_fst_177, du64_snd_178 };
+                                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_406 { du64_fst_177, du64_snd_178 };
                                                                           letpair_res_405 = id_406;
                                                                         }
-                                                                        t45217dce3db5a9a49037839afd0048e8 let_res_407;
+                                                                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_407;
                                                                         {
-                                                                          t7a47220550fc5126a7b79f1e0c10c645 drec_179 { letpair_res_405 };
-                                                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_408;
+                                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_179 { letpair_res_405 };
+                                                                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_408;
                                                                           {
                                                                             auto drec_fst_180 { std::get<0>(drec_179) };
                                                                             auto drec_snd_181 { std::get<1>(drec_179) };
-                                                                            t7a47220550fc5126a7b79f1e0c10c645 id_409 { drec_snd_181.readU64Le() };
-                                                                            t7a47220550fc5126a7b79f1e0c10c645 letpair_res_410;
+                                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_409 { drec_snd_181.readU64Le() };
+                                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_410;
                                                                             {
                                                                               auto du64_fst_183 { std::get<0>(id_409) };
                                                                               auto du64_snd_184 { std::get<1>(id_409) };
-                                                                              t7a47220550fc5126a7b79f1e0c10c645 id_411 { du64_fst_183, du64_snd_184 };
+                                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_411 { du64_fst_183, du64_snd_184 };
                                                                               letpair_res_410 = id_411;
                                                                             }
-                                                                            t45217dce3db5a9a49037839afd0048e8 let_res_412;
+                                                                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_412;
                                                                             {
-                                                                              t7a47220550fc5126a7b79f1e0c10c645 drec_185 { letpair_res_410 };
-                                                                              t45217dce3db5a9a49037839afd0048e8 letpair_res_413;
+                                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_185 { letpair_res_410 };
+                                                                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_413;
                                                                               {
                                                                                 auto drec_fst_186 { std::get<0>(drec_185) };
                                                                                 auto drec_snd_187 { std::get<1>(drec_185) };
-                                                                                t7a47220550fc5126a7b79f1e0c10c645 id_414 { drec_snd_187.readU64Le() };
-                                                                                t7a47220550fc5126a7b79f1e0c10c645 letpair_res_415;
+                                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_414 { drec_snd_187.readU64Le() };
+                                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_415;
                                                                                 {
                                                                                   auto du64_fst_189 { std::get<0>(id_414) };
                                                                                   auto du64_snd_190 { std::get<1>(id_414) };
-                                                                                  t7a47220550fc5126a7b79f1e0c10c645 id_416 { du64_fst_189, du64_snd_190 };
+                                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_416 { du64_fst_189, du64_snd_190 };
                                                                                   letpair_res_415 = id_416;
                                                                                 }
-                                                                                t45217dce3db5a9a49037839afd0048e8 let_res_417;
+                                                                                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_417;
                                                                                 {
-                                                                                  t7a47220550fc5126a7b79f1e0c10c645 drec_191 { letpair_res_415 };
-                                                                                  t45217dce3db5a9a49037839afd0048e8 letpair_res_418;
+                                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_191 { letpair_res_415 };
+                                                                                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_418;
                                                                                   {
                                                                                     auto drec_fst_192 { std::get<0>(drec_191) };
                                                                                     auto drec_snd_193 { std::get<1>(drec_191) };
-                                                                                    t7a47220550fc5126a7b79f1e0c10c645 id_419 { drec_snd_193.readU64Le() };
-                                                                                    taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_420;
+                                                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_419 { drec_snd_193.readU64Le() };
+                                                                                    ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_420;
                                                                                     {
                                                                                       auto dfloat_fst_195 { std::get<0>(id_419) };
                                                                                       auto dfloat_snd_196 { std::get<1>(id_419) };
                                                                                       double id_421 { float_of_qword(dfloat_fst_195) };
-                                                                                      taebed00ad7fdb3f7ced11d3cfd58aade id_422 { id_421, dfloat_snd_196 };
+                                                                                      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_422 { id_421, dfloat_snd_196 };
                                                                                       letpair_res_420 = id_422;
                                                                                     }
-                                                                                    t45217dce3db5a9a49037839afd0048e8 let_res_423;
+                                                                                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_423;
                                                                                     {
-                                                                                      taebed00ad7fdb3f7ced11d3cfd58aade drec_197 { letpair_res_420 };
-                                                                                      t45217dce3db5a9a49037839afd0048e8 letpair_res_424;
+                                                                                      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_197 { letpair_res_420 };
+                                                                                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_424;
                                                                                       {
                                                                                         auto drec_fst_198 { std::get<0>(drec_197) };
                                                                                         auto drec_snd_199 { std::get<1>(drec_197) };
-                                                                                        t7a47220550fc5126a7b79f1e0c10c645 id_425 { drec_snd_199.readU64Le() };
-                                                                                        taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_426;
+                                                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_425 { drec_snd_199.readU64Le() };
+                                                                                        ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_426;
                                                                                         {
                                                                                           auto dfloat_fst_201 { std::get<0>(id_425) };
                                                                                           auto dfloat_snd_202 { std::get<1>(id_425) };
                                                                                           double id_427 { float_of_qword(dfloat_fst_201) };
-                                                                                          taebed00ad7fdb3f7ced11d3cfd58aade id_428 { id_427, dfloat_snd_202 };
+                                                                                          ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_428 { id_427, dfloat_snd_202 };
                                                                                           letpair_res_426 = id_428;
                                                                                         }
-                                                                                        t45217dce3db5a9a49037839afd0048e8 let_res_429;
+                                                                                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_429;
                                                                                         {
-                                                                                          taebed00ad7fdb3f7ced11d3cfd58aade drec_203 { letpair_res_426 };
-                                                                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_430;
+                                                                                          ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_203 { letpair_res_426 };
+                                                                                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_430;
                                                                                           {
                                                                                             auto drec_fst_204 { std::get<0>(drec_203) };
                                                                                             auto drec_snd_205 { std::get<1>(drec_203) };
-                                                                                            t7a47220550fc5126a7b79f1e0c10c645 id_431 { drec_snd_205.readU64Le() };
-                                                                                            t7a47220550fc5126a7b79f1e0c10c645 letpair_res_432;
+                                                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_431 { drec_snd_205.readU64Le() };
+                                                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_432;
                                                                                             {
                                                                                               auto du64_fst_207 { std::get<0>(id_431) };
                                                                                               auto du64_snd_208 { std::get<1>(id_431) };
-                                                                                              t7a47220550fc5126a7b79f1e0c10c645 id_433 { du64_fst_207, du64_snd_208 };
+                                                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_433 { du64_fst_207, du64_snd_208 };
                                                                                               letpair_res_432 = id_433;
                                                                                             }
-                                                                                            t45217dce3db5a9a49037839afd0048e8 let_res_434;
+                                                                                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_434;
                                                                                             {
-                                                                                              t7a47220550fc5126a7b79f1e0c10c645 drec_209 { letpair_res_432 };
-                                                                                              t45217dce3db5a9a49037839afd0048e8 letpair_res_435;
+                                                                                              ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_209 { letpair_res_432 };
+                                                                                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_435;
                                                                                               {
                                                                                                 auto drec_fst_210 { std::get<0>(drec_209) };
                                                                                                 auto drec_snd_211 { std::get<1>(drec_209) };
-                                                                                                t7a47220550fc5126a7b79f1e0c10c645 id_436 { drec_snd_211.readU64Le() };
-                                                                                                t7a47220550fc5126a7b79f1e0c10c645 letpair_res_437;
+                                                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_436 { drec_snd_211.readU64Le() };
+                                                                                                ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_437;
                                                                                                 {
                                                                                                   auto du64_fst_213 { std::get<0>(id_436) };
                                                                                                   auto du64_snd_214 { std::get<1>(id_436) };
-                                                                                                  t7a47220550fc5126a7b79f1e0c10c645 id_438 { du64_fst_213, du64_snd_214 };
+                                                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_438 { du64_fst_213, du64_snd_214 };
                                                                                                   letpair_res_437 = id_438;
                                                                                                 }
-                                                                                                t45217dce3db5a9a49037839afd0048e8 let_res_439;
+                                                                                                ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_439;
                                                                                                 {
-                                                                                                  t7a47220550fc5126a7b79f1e0c10c645 drec_215 { letpair_res_437 };
-                                                                                                  t45217dce3db5a9a49037839afd0048e8 letpair_res_440;
+                                                                                                  ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_215 { letpair_res_437 };
+                                                                                                  ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_440;
                                                                                                   {
                                                                                                     auto drec_fst_216 { std::get<0>(drec_215) };
                                                                                                     auto drec_snd_217 { std::get<1>(drec_215) };
-                                                                                                    t7a47220550fc5126a7b79f1e0c10c645 id_441 { drec_snd_217.readU64Le() };
-                                                                                                    taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_442;
+                                                                                                    ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_441 { drec_snd_217.readU64Le() };
+                                                                                                    ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade letpair_res_442;
                                                                                                     {
                                                                                                       auto dfloat_fst_219 { std::get<0>(id_441) };
                                                                                                       auto dfloat_snd_220 { std::get<1>(id_441) };
                                                                                                       double id_443 { float_of_qword(dfloat_fst_219) };
-                                                                                                      taebed00ad7fdb3f7ced11d3cfd58aade id_444 { id_443, dfloat_snd_220 };
+                                                                                                      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade id_444 { id_443, dfloat_snd_220 };
                                                                                                       letpair_res_442 = id_444;
                                                                                                     }
-                                                                                                    t45217dce3db5a9a49037839afd0048e8 let_res_445;
+                                                                                                    ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_445;
                                                                                                     {
-                                                                                                      taebed00ad7fdb3f7ced11d3cfd58aade drec_221 { letpair_res_442 };
-                                                                                                      t45217dce3db5a9a49037839afd0048e8 letpair_res_446;
+                                                                                                      ::dessser::gen::runtime_stats::taebed00ad7fdb3f7ced11d3cfd58aade drec_221 { letpair_res_442 };
+                                                                                                      ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_446;
                                                                                                       {
                                                                                                         auto drec_fst_222 { std::get<0>(drec_221) };
                                                                                                         auto drec_snd_223 { std::get<1>(drec_221) };
-                                                                                                        t7a47220550fc5126a7b79f1e0c10c645 id_447 { drec_snd_223.readU64Le() };
-                                                                                                        t7a47220550fc5126a7b79f1e0c10c645 letpair_res_448;
+                                                                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_447 { drec_snd_223.readU64Le() };
+                                                                                                        ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 letpair_res_448;
                                                                                                         {
                                                                                                           auto du64_fst_225 { std::get<0>(id_447) };
                                                                                                           auto du64_snd_226 { std::get<1>(id_447) };
-                                                                                                          t7a47220550fc5126a7b79f1e0c10c645 id_449 { du64_fst_225, du64_snd_226 };
+                                                                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_449 { du64_fst_225, du64_snd_226 };
                                                                                                           letpair_res_448 = id_449;
                                                                                                         }
-                                                                                                        t45217dce3db5a9a49037839afd0048e8 let_res_450;
+                                                                                                        ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 let_res_450;
                                                                                                         {
-                                                                                                          t7a47220550fc5126a7b79f1e0c10c645 drec_227 { letpair_res_448 };
-                                                                                                          t45217dce3db5a9a49037839afd0048e8 letpair_res_451;
+                                                                                                          ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 drec_227 { letpair_res_448 };
+                                                                                                          ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_451;
                                                                                                           {
                                                                                                             auto drec_fst_228 { std::get<0>(drec_227) };
                                                                                                             auto drec_snd_229 { std::get<1>(drec_227) };
-                                                                                                            t7a47220550fc5126a7b79f1e0c10c645 id_452 { drec_snd_229.readU64Le() };
-                                                                                                            t45217dce3db5a9a49037839afd0048e8 letpair_res_453;
+                                                                                                            ::dessser::gen::runtime_stats::t7a47220550fc5126a7b79f1e0c10c645 id_452 { drec_snd_229.readU64Le() };
+                                                                                                            ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 letpair_res_453;
                                                                                                             {
                                                                                                               auto du64_fst_231 { std::get<0>(id_452) };
                                                                                                               auto du64_snd_232 { std::get<1>(id_452) };
-                                                                                                              t* id_454 { new t({ .stats_time = drec_fst_60, .first_startup = drec_fst_66, .last_startup = drec_fst_72, .min_etime = drec_fst_81, .max_etime = drec_fst_90, .first_input = drec_fst_99, .last_input = drec_fst_108, .first_output = drec_fst_117, .last_output = drec_fst_126, .tot_in_tuples = drec_fst_132, .tot_sel_tuples = drec_fst_138, .tot_out_filtered = drec_fst_144, .tot_out_tuples = drec_fst_150, .tot_out_errs = drec_fst_156, .tot_full_bytes = drec_fst_162, .tot_full_bytes_samples = drec_fst_168, .cur_groups = drec_fst_174, .max_groups = drec_fst_180, .tot_in_bytes = drec_fst_186, .tot_out_bytes = drec_fst_192, .tot_wait_in = drec_fst_198, .tot_wait_out = drec_fst_204, .tot_firing_notifs = drec_fst_210, .tot_extinguished_notifs = drec_fst_216, .tot_cpu = drec_fst_222, .cur_ram = drec_fst_228, .max_ram = du64_fst_231 }) };
-                                                                                                              t45217dce3db5a9a49037839afd0048e8 id_455 { id_454, du64_snd_232 };
+                                                                                                              ::dessser::gen::runtime_stats::t* id_454 { new ::dessser::gen::runtime_stats::t({ .cur_groups = drec_fst_174, .cur_ram = drec_fst_228, .first_input = drec_fst_99, .first_output = drec_fst_117, .first_startup = drec_fst_66, .last_input = drec_fst_108, .last_output = drec_fst_126, .last_startup = drec_fst_72, .max_etime = drec_fst_90, .max_groups = drec_fst_180, .max_ram = du64_fst_231, .min_etime = drec_fst_81, .stats_time = drec_fst_60, .tot_cpu = drec_fst_222, .tot_extinguished_notifs = drec_fst_216, .tot_firing_notifs = drec_fst_210, .tot_full_bytes = drec_fst_162, .tot_full_bytes_samples = drec_fst_168, .tot_in_bytes = drec_fst_186, .tot_in_tuples = drec_fst_132, .tot_out_bytes = drec_fst_192, .tot_out_errs = drec_fst_156, .tot_out_filtered = drec_fst_144, .tot_out_tuples = drec_fst_150, .tot_sel_tuples = drec_fst_138, .tot_wait_in = drec_fst_198, .tot_wait_out = drec_fst_204 }) };
+                                                                                                              ::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30 id_455 { id_454, du64_snd_232 };
                                                                                                               letpair_res_453 = id_455;
                                                                                                             }
                                                                                                             letpair_res_451 = letpair_res_453;
@@ -1436,7 +1436,7 @@ static std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary_i
    };
   return fun237;
 }
-std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 

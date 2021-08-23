@@ -18,33 +18,33 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::site_name::t_ext site;
-  dessser::gen::program_name::t_ext program;
   dessser::gen::function_name::t_ext function;
+  dessser::gen::program_name::t_ext program;
+  dessser::gen::site_name::t_ext site;
   bool operator==(t const &other) const {
-    return site == other.site && program == other.program && function == other.function;
+    return function == other.function && program == other.program && site == other.site;
   }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "site:" << r.site << ',';
+  os << "function:" << r.function << ',';
   os << "program:" << r.program << ',';
-  os << "function:" << r.function;
+  os << "site:" << r.site;
   os << '}';
   return os;
 }
 
 typedef std::tuple<
-  t*,
+  ::dessser::gen::fq_function_name::t*,
   Pointer
-> t45217dce3db5a9a49037839afd0048e8;
+> t024adea80a7aaa8777363d4a16b0f33f;
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t*,Pointer)> to_row_binary;
-extern std::function<Size(t*)> sersize_of_row_binary;
-extern std::function<t45217dce3db5a9a49037839afd0048e8(Pointer)> of_row_binary;
+extern std::function<Pointer(::dessser::gen::fq_function_name::t*,Pointer)> to_row_binary;
+extern std::function<Size(::dessser::gen::fq_function_name::t*)> sersize_of_row_binary;
+extern std::function<::dessser::gen::fq_function_name::t024adea80a7aaa8777363d4a16b0f33f(Pointer)> of_row_binary;
 typedef t *t_ext;
 
 }
