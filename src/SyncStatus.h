@@ -9,7 +9,7 @@ class SyncStatus {
 
 public:
   enum Status {
-    Undef,
+    Disconnected,
     Resolving,
     Connecting,
     Authenticating,
@@ -19,7 +19,7 @@ public:
     Failed
   } status;
 
-  SyncStatus(Status = Undef);
+  SyncStatus(Status = Disconnected);
   ~SyncStatus();
 
   QString message() const;

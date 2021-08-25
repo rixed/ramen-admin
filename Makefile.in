@@ -254,6 +254,11 @@ coverity:
 # Tests
 #
 
+check:
+	cd tests && /usr/bin/qmake
+	$(MAKE) -C tests
+	tests/test
+
 #
 # Installation
 #

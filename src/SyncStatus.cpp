@@ -12,8 +12,8 @@ SyncStatus::~SyncStatus()
 QString SyncStatus::message() const
 {
   switch(status) {
-    case Undef:
-      return QCoreApplication::translate("QMainWindow", "undefined");
+    case Disconnected:
+      return QCoreApplication::translate("QMainWindow", "Disconnected");
     case Resolving:
       return QCoreApplication::translate("QMainWindow", "Resolving...");
     case Connecting:

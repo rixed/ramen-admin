@@ -10,10 +10,21 @@
 #include "ConfClient.h"
 #include "UserIdentity.h"
 
-ConfClient::ConfClient(QString const &target, QString const &username, UserIdentity const *id, KVStore *kvs_)
+void ConfClient::fatalErr(QString const &errString)
+{
+  // Emit the signal with the status we were in before the error occurred:
+  emit connectionFatalError(syncStatus, errString);
+  syncStatus = SyncStatus::Failed;
+}
+
+#include "ConfClientTools.cpp"
+
+ConfClient::ConfClient(QString const &target, QString const &username_, std::shared_ptr<UserIdentity const> id_, std::shared_ptr<KVStore> kvs_)
   : kvs(kvs_),
     tcpSocket(new QTcpSocket(this)),
-    syncStatus(SyncStatus::Undef)
+    syncStatus(SyncStatus::Disconnected),
+    username(username_),
+    id(id_)
 {
   connect(tcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
           this, &ConfClient::onTcpError);
@@ -21,7 +32,13 @@ ConfClient::ConfClient(QString const &target, QString const &username, UserIdent
           this, &ConfClient::onStateChange);
   connect(tcpSocket, &QIODevice::readyRead, this, &ConfClient::onDataReady);
 
-  (void)target; // TODO
+  QString host;
+  quint16 port;
+  if (0 != parseUrl(host, port, target)) {
+    fatalErr("Cannot parse configuration server URL: " + target);
+  } else {
+    tcpSocket->connectToHost(host, port);
+  }
   (void)username;
   (void)id;
 }
@@ -45,8 +62,7 @@ void ConfClient::onTcpError(QAbstractSocket::SocketError err)
   }
 
   if (isFatal) {
-    emit connectionFatalError(syncStatus, errString);
-    syncStatus = SyncStatus::Failed;
+    fatalErr(errString);
   } else {
     emit connectionNonFatalError(syncStatus, errString);
   }

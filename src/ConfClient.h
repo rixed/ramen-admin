@@ -4,6 +4,7 @@
  * starts the synchronization and feed the designated KVStore with changes. */
 
 #include <cstddef>
+#include <memory>
 #include <string>
 #include <QAbstractSocket>
 #include <QObject>
@@ -19,7 +20,7 @@ class ConfClient : public QObject
 {
   Q_OBJECT
 
-  KVStore *kvs;
+  std::shared_ptr<KVStore> kvs;
 
   /*
    * Connection state:
@@ -28,9 +29,17 @@ class ConfClient : public QObject
   QTcpSocket *tcpSocket;
   SyncStatus syncStatus;
 
+  QString const username;
+  std::shared_ptr<UserIdentity const> id;
+
+private:
+  void fatalErr(QString const &errString);
+
 public:
   // confserver as in "host:port"
-  ConfClient(QString const &server, QString const &username, UserIdentity const *id, KVStore *);
+  ConfClient(QString const &server, QString const &username,
+             std::shared_ptr<UserIdentity const>,
+             std::shared_ptr<KVStore>);
 
 signals:
   void connectionProgressed(SyncStatus newStage);
