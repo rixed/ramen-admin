@@ -52,7 +52,7 @@ void ConfClient::onTcpError(QAbstractSocket::SocketError err)
   switch (err) {
     case QAbstractSocket::UnfinishedSocketOperationError:
       // Should not happen
-      // pass
+      [[fallthrough]];
     case QAbstractSocket::TemporaryError:
       // Just ignore it
       isFatal = false;

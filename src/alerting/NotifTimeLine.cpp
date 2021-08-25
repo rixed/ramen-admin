@@ -53,12 +53,12 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
 
       switch (log->tickKind) {
         case conf::IncidentLog::TickStop:
-          // pass
+          [[fallthrough]];
         case conf::IncidentLog::TickCancel:
           painter.setBrush(Qt::NoBrush);
           break;
         case conf::IncidentLog::TickDup:
-          // pass
+          [[fallthrough]];
         case conf::IncidentLog::TickStart:
           painter.setBrush(Qt::white);
           break;
@@ -66,7 +66,7 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
           painter.setBrush(Qt::red);
           break;
         case conf::IncidentLog::TickInhibited:
-          // pass
+          [[fallthrough]];
         case conf::IncidentLog::TickAck:
           painter.setBrush(Qt::yellow);
           break;

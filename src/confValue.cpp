@@ -1654,7 +1654,7 @@ IncidentLog::IncidentLog(value v_)
           tickKind = TickDup;
           break;
         case IncidentLog::Inhibited:
-          // pass
+          [[fallthrough]];
         case IncidentLog::STFU:
           tickKind = TickInhibited;
           break;
