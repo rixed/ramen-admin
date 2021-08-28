@@ -42,14 +42,20 @@ inline std::ostream &operator<<(std::ostream &os, t8fc31e51f4d30b966d0aba41171f4
   return os;
 }
 
-struct t313b9867db010cca466a30c76e768a91 : public std::variant<
-  Void,
-  Arr<::dessser::gen::worker::t8fc31e51f4d30b966d0aba41171f4da5>
+struct t49acac2035e89444204637843e637fce : public std::variant<
+  Void, // Whole
+  Arr<::dessser::gen::worker::t8fc31e51f4d30b966d0aba41171f4da5> // TopHalf
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t313b9867db010cca466a30c76e768a91 const &v) {
+
+enum Constr_t49acac2035e89444204637843e637fce {
+  Whole,
+  TopHalf,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t49acac2035e89444204637843e637fce const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "Whole " << std::get<0>(v); break;
+    case 1: os << "TopHalf " << std::get<1>(v); break;
   }
   return os;
 }
@@ -65,7 +71,7 @@ struct t {
   Arr<::dessser::gen::worker::t83d220ac6cd554303ec130a90b325374> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   double report_period;
-  ::dessser::gen::worker::t313b9867db010cca466a30c76e768a91 role;
+  ::dessser::gen::worker::t49acac2035e89444204637843e637fce role;
   std::string worker_signature;
   bool operator==(t const &other) const {
     return children == other.children && cwd == other.cwd && debug == other.debug && enabled == other.enabled && envvars == other.envvars && info_signature == other.info_signature && is_used == other.is_used && params == other.params && parents == other.parents && report_period == other.report_period && role == other.role && worker_signature == other.worker_signature;

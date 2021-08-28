@@ -25,18 +25,26 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
   dessser::gen::field_name::t_ext,
   t*
 > t5b91ba1a37fd19816559f3dabb32e8b5;
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct taa24bd22284a38a2aa5417ddcf68dc02 {
   t* case_cond;
   t* case_cons;
@@ -46,305 +54,477 @@ struct taa24bd22284a38a2aa5417ddcf68dc02 {
 };
 inline std::ostream &operator<<(std::ostream &os, taa24bd22284a38a2aa5417ddcf68dc02 const &r) {
   os << '{';
-  os << "case_cond:" << r.case_cond << ',';
-  os << "case_cons:" << r.case_cons;
+  os << "case_cond:" << *r.case_cond << ',';
+  os << "case_cons:" << *r.case_cons;
   os << '}';
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
   Lst<::dessser::gen::raql_expr::taa24bd22284a38a2aa5417ddcf68dc02>,
   std::optional<t*>
 > t72e501d49719761ba8ff88c3982af245;
 
-struct t302ca6fb40d94197a91ec3595c5b0d3b : public std::variant<
-  dessser::gen::raql_value::t_ext,
-  dessser::gen::raql_variable::t_ext,
-  dessser::gen::raql_binding_key::t_ext,
-  Void,
-  Void,
-  Void,
-  Void,
-  Lst<dessser::gen::raql_path_comp::t_ext>,
-  Void
+struct tf7ae7db1c515d769014dcb9b31531498 : public std::variant<
+  dessser::gen::raql_value::t_ext, // Const
+  dessser::gen::raql_variable::t_ext, // Variable
+  dessser::gen::raql_binding_key::t_ext, // Binding
+  Void, // Now
+  Void, // Random
+  Void, // EventStart
+  Void, // EventStop
+  Lst<dessser::gen::raql_path_comp::t_ext>, // Path
+  Void // Pi
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t302ca6fb40d94197a91ec3595c5b0d3b const &v) {
+
+enum Constr_tf7ae7db1c515d769014dcb9b31531498 {
+  Const,
+  Variable,
+  Binding,
+  Now,
+  Random,
+  EventStart,
+  EventStop,
+  Path,
+  Pi,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tf7ae7db1c515d769014dcb9b31531498 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
+    case 0: os << "Const " << std::get<0>(v); break;
+    case 1: os << "Variable " << std::get<1>(v); break;
+    case 2: os << "Binding " << std::get<2>(v); break;
+    case 3: os << "Now " << std::get<3>(v); break;
+    case 4: os << "Random " << std::get<4>(v); break;
+    case 5: os << "EventStart " << std::get<5>(v); break;
+    case 6: os << "EventStop " << std::get<6>(v); break;
+    case 7: os << "Path " << std::get<7>(v); break;
+    case 8: os << "Pi " << std::get<8>(v); break;
   }
   return os;
 }
 
-struct t48b79f232880b7b4f6fa63fb49447c29 : public std::variant<
-  Void,
-  Void
+struct tc847b6b1db0945d7ec695a4564143cf9 : public std::variant<
+  Void, // LittleEndian
+  Void // BigEndian
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t48b79f232880b7b4f6fa63fb49447c29 const &v) {
+
+enum Constr_tc847b6b1db0945d7ec695a4564143cf9 {
+  LittleEndian,
+  BigEndian,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tc847b6b1db0945d7ec695a4564143cf9 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "LittleEndian " << std::get<0>(v); break;
+    case 1: os << "BigEndian " << std::get<1>(v); break;
   }
   return os;
 }
 
 typedef std::tuple<
   dessser::gen::raql_type::t_ext,
-  ::dessser::gen::raql_expr::t48b79f232880b7b4f6fa63fb49447c29
-> tc0b7eee4e32fb5400edd291164ac1e81;
+  ::dessser::gen::raql_expr::tc847b6b1db0945d7ec695a4564143cf9
+> tb0402ef6eb0c00c8a2b51d497e491ff8;
 
-struct t13d510ae314aa88e35c3706532ac9488 : public std::variant<
-  Void,
-  dessser::gen::raql_type::t_ext,
-  Void,
-  ::dessser::gen::raql_expr::tc0b7eee4e32fb5400edd291164ac1e81,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  std::string,
-  Void,
-  Void,
-  Void,
-  Void
+struct t133df32a784c216f0d970b5805a6b8b8 : public std::variant<
+  Void, // Age
+  dessser::gen::raql_type::t_ext, // Cast
+  Void, // Force
+  ::dessser::gen::raql_expr::tb0402ef6eb0c00c8a2b51d497e491ff8, // Peek
+  Void, // Length
+  Void, // Lower
+  Void, // Upper
+  Void, // UuidOfU128
+  Void, // Not
+  Void, // Abs
+  Void, // Minus
+  Void, // Defined
+  Void, // Exp
+  Void, // Log
+  Void, // Log10
+  Void, // Sqrt
+  Void, // Sq
+  Void, // Ceil
+  Void, // Floor
+  Void, // Round
+  Void, // Cos
+  Void, // Sin
+  Void, // Tan
+  Void, // ACos
+  Void, // ASin
+  Void, // ATan
+  Void, // CosH
+  Void, // SinH
+  Void, // TanH
+  Void, // Hash
+  Void, // BeginOfRange
+  Void, // EndOfRange
+  Void, // Sparkline
+  Void, // Strptime
+  Void, // Variant
+  Void, // Chr
+  std::string, // Like
+  Void, // Fit
+  Void, // CountryCode
+  Void, // IpFamily
+  Void // Basename
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t13d510ae314aa88e35c3706532ac9488 const &v) {
+
+enum Constr_t133df32a784c216f0d970b5805a6b8b8 {
+  Age,
+  Cast,
+  Force,
+  Peek,
+  Length,
+  Lower,
+  Upper,
+  UuidOfU128,
+  Not,
+  Abs,
+  Minus,
+  Defined,
+  Exp,
+  Log,
+  Log10,
+  Sqrt,
+  Sq,
+  Ceil,
+  Floor,
+  Round,
+  Cos,
+  Sin,
+  Tan,
+  ACos,
+  ASin,
+  ATan,
+  CosH,
+  SinH,
+  TanH,
+  Hash,
+  BeginOfRange,
+  EndOfRange,
+  Sparkline,
+  Strptime,
+  Variant,
+  Chr,
+  Like,
+  Fit,
+  CountryCode,
+  IpFamily,
+  Basename,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t133df32a784c216f0d970b5805a6b8b8 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
-    case 9: os << std::get<9>(v); break;
-    case 10: os << std::get<10>(v); break;
-    case 11: os << std::get<11>(v); break;
-    case 12: os << std::get<12>(v); break;
-    case 13: os << std::get<13>(v); break;
-    case 14: os << std::get<14>(v); break;
-    case 15: os << std::get<15>(v); break;
-    case 16: os << std::get<16>(v); break;
-    case 17: os << std::get<17>(v); break;
-    case 18: os << std::get<18>(v); break;
-    case 19: os << std::get<19>(v); break;
-    case 20: os << std::get<20>(v); break;
-    case 21: os << std::get<21>(v); break;
-    case 22: os << std::get<22>(v); break;
-    case 23: os << std::get<23>(v); break;
-    case 24: os << std::get<24>(v); break;
-    case 25: os << std::get<25>(v); break;
-    case 26: os << std::get<26>(v); break;
-    case 27: os << std::get<27>(v); break;
-    case 28: os << std::get<28>(v); break;
-    case 29: os << std::get<29>(v); break;
-    case 30: os << std::get<30>(v); break;
-    case 31: os << std::get<31>(v); break;
-    case 32: os << std::get<32>(v); break;
-    case 33: os << std::get<33>(v); break;
-    case 34: os << std::get<34>(v); break;
-    case 35: os << std::get<35>(v); break;
-    case 36: os << std::get<36>(v); break;
-    case 37: os << std::get<37>(v); break;
-    case 38: os << std::get<38>(v); break;
-    case 39: os << std::get<39>(v); break;
-    case 40: os << std::get<40>(v); break;
+    case 0: os << "Age " << std::get<0>(v); break;
+    case 1: os << "Cast " << std::get<1>(v); break;
+    case 2: os << "Force " << std::get<2>(v); break;
+    case 3: os << "Peek " << std::get<3>(v); break;
+    case 4: os << "Length " << std::get<4>(v); break;
+    case 5: os << "Lower " << std::get<5>(v); break;
+    case 6: os << "Upper " << std::get<6>(v); break;
+    case 7: os << "UuidOfU128 " << std::get<7>(v); break;
+    case 8: os << "Not " << std::get<8>(v); break;
+    case 9: os << "Abs " << std::get<9>(v); break;
+    case 10: os << "Minus " << std::get<10>(v); break;
+    case 11: os << "Defined " << std::get<11>(v); break;
+    case 12: os << "Exp " << std::get<12>(v); break;
+    case 13: os << "Log " << std::get<13>(v); break;
+    case 14: os << "Log10 " << std::get<14>(v); break;
+    case 15: os << "Sqrt " << std::get<15>(v); break;
+    case 16: os << "Sq " << std::get<16>(v); break;
+    case 17: os << "Ceil " << std::get<17>(v); break;
+    case 18: os << "Floor " << std::get<18>(v); break;
+    case 19: os << "Round " << std::get<19>(v); break;
+    case 20: os << "Cos " << std::get<20>(v); break;
+    case 21: os << "Sin " << std::get<21>(v); break;
+    case 22: os << "Tan " << std::get<22>(v); break;
+    case 23: os << "ACos " << std::get<23>(v); break;
+    case 24: os << "ASin " << std::get<24>(v); break;
+    case 25: os << "ATan " << std::get<25>(v); break;
+    case 26: os << "CosH " << std::get<26>(v); break;
+    case 27: os << "SinH " << std::get<27>(v); break;
+    case 28: os << "TanH " << std::get<28>(v); break;
+    case 29: os << "Hash " << std::get<29>(v); break;
+    case 30: os << "BeginOfRange " << std::get<30>(v); break;
+    case 31: os << "EndOfRange " << std::get<31>(v); break;
+    case 32: os << "Sparkline " << std::get<32>(v); break;
+    case 33: os << "Strptime " << std::get<33>(v); break;
+    case 34: os << "Variant " << std::get<34>(v); break;
+    case 35: os << "Chr " << std::get<35>(v); break;
+    case 36: os << "Like " << std::get<36>(v); break;
+    case 37: os << "Fit " << std::get<37>(v); break;
+    case 38: os << "CountryCode " << std::get<38>(v); break;
+    case 39: os << "IpFamily " << std::get<39>(v); break;
+    case 40: os << "Basename " << std::get<40>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
-  ::dessser::gen::raql_expr::t13d510ae314aa88e35c3706532ac9488,
+  ::dessser::gen::raql_expr::t133df32a784c216f0d970b5805a6b8b8,
   t*
-> t89cf11a8d9e6bf81ab17d6aed4247182;
+> te187493dde7c4904748658f3fab36344;
 
-struct t94d3f63f7a6f4439feec5972b0434d93 : public std::variant<
-  Void,
-  Void,
-  Void,
-  Void
+struct t0714e951accff7f9c7ebbbf55cde5e2d : public std::variant<
+  Void, // Max
+  Void, // Min
+  Void, // Print
+  Void // Coalesce
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t94d3f63f7a6f4439feec5972b0434d93 const &v) {
+
+enum Constr_t0714e951accff7f9c7ebbbf55cde5e2d {
+  Max,
+  Min,
+  Print,
+  Coalesce,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t0714e951accff7f9c7ebbbf55cde5e2d const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
+    case 0: os << "Max " << std::get<0>(v); break;
+    case 1: os << "Min " << std::get<1>(v); break;
+    case 2: os << "Print " << std::get<2>(v); break;
+    case 3: os << "Coalesce " << std::get<3>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
-  ::dessser::gen::raql_expr::t94d3f63f7a6f4439feec5972b0434d93,
+  ::dessser::gen::raql_expr::t0714e951accff7f9c7ebbbf55cde5e2d,
   Lst<t*>
-> t3b727565b3ae9f61fd29a5836b55e8e7;
+> t1e1d1f41f4901a81e40d15f719d91e36;
 
-struct t132110d5e7d86d2e99c17ebeb895e5fe : public std::variant<
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void
+struct t58dafdea9146e1796e71a181a3397bec : public std::variant<
+  Void, // Add
+  Void, // Sub
+  Void, // Mul
+  Void, // Div
+  Void, // IDiv
+  Void, // Mod
+  Void, // Pow
+  Void, // Trunc
+  Void, // Reldiff
+  Void, // And
+  Void, // Or
+  Void, // Ge
+  Void, // Gt
+  Void, // Eq
+  Void, // Concat
+  Void, // StartsWith
+  Void, // EndsWith
+  Void, // BitAnd
+  Void, // BitOr
+  Void, // BitXor
+  Void, // BitShift
+  Void, // Get
+  Void, // In
+  Void, // Strftime
+  Void, // Index
+  Void // Percentile
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t132110d5e7d86d2e99c17ebeb895e5fe const &v) {
+
+enum Constr_t58dafdea9146e1796e71a181a3397bec {
+  Add,
+  Sub,
+  Mul,
+  Div,
+  IDiv,
+  Mod,
+  Pow,
+  Trunc,
+  Reldiff,
+  And,
+  Or,
+  Ge,
+  Gt,
+  Eq,
+  Concat,
+  StartsWith,
+  EndsWith,
+  BitAnd,
+  BitOr,
+  BitXor,
+  BitShift,
+  Get,
+  In,
+  Strftime,
+  Index,
+  Percentile,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t58dafdea9146e1796e71a181a3397bec const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
-    case 9: os << std::get<9>(v); break;
-    case 10: os << std::get<10>(v); break;
-    case 11: os << std::get<11>(v); break;
-    case 12: os << std::get<12>(v); break;
-    case 13: os << std::get<13>(v); break;
-    case 14: os << std::get<14>(v); break;
-    case 15: os << std::get<15>(v); break;
-    case 16: os << std::get<16>(v); break;
-    case 17: os << std::get<17>(v); break;
-    case 18: os << std::get<18>(v); break;
-    case 19: os << std::get<19>(v); break;
-    case 20: os << std::get<20>(v); break;
-    case 21: os << std::get<21>(v); break;
-    case 22: os << std::get<22>(v); break;
-    case 23: os << std::get<23>(v); break;
-    case 24: os << std::get<24>(v); break;
-    case 25: os << std::get<25>(v); break;
+    case 0: os << "Add " << std::get<0>(v); break;
+    case 1: os << "Sub " << std::get<1>(v); break;
+    case 2: os << "Mul " << std::get<2>(v); break;
+    case 3: os << "Div " << std::get<3>(v); break;
+    case 4: os << "IDiv " << std::get<4>(v); break;
+    case 5: os << "Mod " << std::get<5>(v); break;
+    case 6: os << "Pow " << std::get<6>(v); break;
+    case 7: os << "Trunc " << std::get<7>(v); break;
+    case 8: os << "Reldiff " << std::get<8>(v); break;
+    case 9: os << "And " << std::get<9>(v); break;
+    case 10: os << "Or " << std::get<10>(v); break;
+    case 11: os << "Ge " << std::get<11>(v); break;
+    case 12: os << "Gt " << std::get<12>(v); break;
+    case 13: os << "Eq " << std::get<13>(v); break;
+    case 14: os << "Concat " << std::get<14>(v); break;
+    case 15: os << "StartsWith " << std::get<15>(v); break;
+    case 16: os << "EndsWith " << std::get<16>(v); break;
+    case 17: os << "BitAnd " << std::get<17>(v); break;
+    case 18: os << "BitOr " << std::get<18>(v); break;
+    case 19: os << "BitXor " << std::get<19>(v); break;
+    case 20: os << "BitShift " << std::get<20>(v); break;
+    case 21: os << "Get " << std::get<21>(v); break;
+    case 22: os << "In " << std::get<22>(v); break;
+    case 23: os << "Strftime " << std::get<23>(v); break;
+    case 24: os << "Index " << std::get<24>(v); break;
+    case 25: os << "Percentile " << std::get<25>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct tf6d60f65b15932c045d2a92fc1c17c59 : public std::tuple<
-  ::dessser::gen::raql_expr::t132110d5e7d86d2e99c17ebeb895e5fe,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct ta9eb4fce65081acc55eb3ed855903623 : public std::tuple<
+  ::dessser::gen::raql_expr::t58dafdea9146e1796e71a181a3397bec,
   t*,
   t*
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, tf6d60f65b15932c045d2a92fc1c17c59 const &t) {
+inline std::ostream &operator<<(std::ostream &os, ta9eb4fce65081acc55eb3ed855903623 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t)
      << '>';
   return os;
 }
 
-struct t;
-struct t;
-struct t;
-struct t;
-struct t;
-struct t;
-struct t40bdb8406d714c5cd0be4e7af25144fb : public std::tuple<
-  ::dessser::gen::raql_expr::t48b79f232880b7b4f6fa63fb49447c29,
-  t*,
-  t*,
-  t*
-> { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t40bdb8406d714c5cd0be4e7af25144fb const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t)
-     << '>';
-  return os;
-}
-
-struct t;
-struct t;
-struct t;
-struct t;
-struct t;
-struct t;
-struct t;
-struct tbd346f57da21609965082cdc361f8fbf : public std::variant<
-  ::dessser::gen::raql_expr::t302ca6fb40d94197a91ec3595c5b0d3b,
-  ::dessser::gen::raql_expr::t89cf11a8d9e6bf81ab17d6aed4247182,
-  ::dessser::gen::raql_expr::t3b727565b3ae9f61fd29a5836b55e8e7,
-  ::dessser::gen::raql_expr::tf6d60f65b15932c045d2a92fc1c17c59,
-  ::dessser::gen::raql_expr::t40bdb8406d714c5cd0be4e7af25144fb
+struct t29b2bb83c49c2dd7652b8b5187b1f015 : public std::variant<
+  Void, // SubString
+  Void // MapSet
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, tbd346f57da21609965082cdc361f8fbf const &v) {
+
+enum Constr_t29b2bb83c49c2dd7652b8b5187b1f015 {
+  SubString,
+  MapSet,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t29b2bb83c49c2dd7652b8b5187b1f015 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
+    case 0: os << "SubString " << std::get<0>(v); break;
+    case 1: os << "MapSet " << std::get<1>(v); break;
+  }
+  return os;
+}
+
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t794ab464927988d666f9919732c3239c : public std::tuple<
+  ::dessser::gen::raql_expr::t29b2bb83c49c2dd7652b8b5187b1f015,
+  t*,
+  t*,
+  t*
+> { using tuple::tuple; };
+inline std::ostream &operator<<(std::ostream &os, t794ab464927988d666f9919732c3239c const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t) << ", "
+     << *std::get<3>(t)
+     << '>';
+  return os;
+}
+
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t9dca13408164b9b878af2f494a648c1a : public std::variant<
+  ::dessser::gen::raql_expr::tf7ae7db1c515d769014dcb9b31531498, // SL0
+  ::dessser::gen::raql_expr::te187493dde7c4904748658f3fab36344, // SL1
+  ::dessser::gen::raql_expr::t1e1d1f41f4901a81e40d15f719d91e36, // SL1s
+  ::dessser::gen::raql_expr::ta9eb4fce65081acc55eb3ed855903623, // SL2
+  ::dessser::gen::raql_expr::t794ab464927988d666f9919732c3239c // SL3
+> { using variant::variant; };
+
+enum Constr_t9dca13408164b9b878af2f494a648c1a {
+  SL0,
+  SL1,
+  SL1s,
+  SL2,
+  SL3,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t9dca13408164b9b878af2f494a648c1a const &v) {
+  switch (v.index()) {
+    case 0: os << "SL0 " << std::get<0>(v); break;
+    case 1: os << "SL1 " << std::get<1>(v); break;
+    case 2: os << "SL1s " << std::get<2>(v); break;
+    case 3: os << "SL2 " << std::get<3>(v); break;
+    case 4: os << "SL3 " << std::get<4>(v); break;
+  }
+  return os;
+}
+
+struct t9aeb08fceb6eb1d5796a64c8fddd436c : public std::variant<
+  Void, // LocalState
+  Void // GlobalState
+> { using variant::variant; };
+
+enum Constr_t9aeb08fceb6eb1d5796a64c8fddd436c {
+  LocalState,
+  GlobalState,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t9aeb08fceb6eb1d5796a64c8fddd436c const &v) {
+  switch (v.index()) {
+    case 0: os << "LocalState " << std::get<0>(v); break;
+    case 1: os << "GlobalState " << std::get<1>(v); break;
   }
   return os;
 }
@@ -363,139 +543,215 @@ inline std::ostream &operator<<(std::ostream &os, t7a94101e0d1c22c7ddfebd959d737
   return os;
 }
 
-struct t0bfb6ea47ab5b6963434216ffdbf1c4b : public std::variant<
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  ::dessser::gen::raql_expr::t7a94101e0d1c22c7ddfebd959d73730a,
-  Void,
-  Void,
-  Void
+struct t82ed0b4d8276434c22a0ca15ade92062 : public std::variant<
+  Void, // AggrMin
+  Void, // AggrMax
+  Void, // AggrSum
+  Void, // AggrAvg
+  Void, // AggrAnd
+  Void, // AggrOr
+  Void, // AggrBitAnd
+  Void, // AggrBitOr
+  Void, // AggrBitXor
+  Void, // AggrFirst
+  Void, // AggrLast
+  ::dessser::gen::raql_expr::t7a94101e0d1c22c7ddfebd959d73730a, // AggrHistogram
+  Void, // Group
+  Void, // Count
+  Void // Distinct
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t0bfb6ea47ab5b6963434216ffdbf1c4b const &v) {
+
+enum Constr_t82ed0b4d8276434c22a0ca15ade92062 {
+  AggrMin,
+  AggrMax,
+  AggrSum,
+  AggrAvg,
+  AggrAnd,
+  AggrOr,
+  AggrBitAnd,
+  AggrBitOr,
+  AggrBitXor,
+  AggrFirst,
+  AggrLast,
+  AggrHistogram,
+  Group,
+  Count,
+  Distinct,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t82ed0b4d8276434c22a0ca15ade92062 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
-    case 9: os << std::get<9>(v); break;
-    case 10: os << std::get<10>(v); break;
-    case 11: os << std::get<11>(v); break;
-    case 12: os << std::get<12>(v); break;
-    case 13: os << std::get<13>(v); break;
-    case 14: os << std::get<14>(v); break;
+    case 0: os << "AggrMin " << std::get<0>(v); break;
+    case 1: os << "AggrMax " << std::get<1>(v); break;
+    case 2: os << "AggrSum " << std::get<2>(v); break;
+    case 3: os << "AggrAvg " << std::get<3>(v); break;
+    case 4: os << "AggrAnd " << std::get<4>(v); break;
+    case 5: os << "AggrOr " << std::get<5>(v); break;
+    case 6: os << "AggrBitAnd " << std::get<6>(v); break;
+    case 7: os << "AggrBitOr " << std::get<7>(v); break;
+    case 8: os << "AggrBitXor " << std::get<8>(v); break;
+    case 9: os << "AggrFirst " << std::get<9>(v); break;
+    case 10: os << "AggrLast " << std::get<10>(v); break;
+    case 11: os << "AggrHistogram " << std::get<11>(v); break;
+    case 12: os << "Group " << std::get<12>(v); break;
+    case 13: os << "Count " << std::get<13>(v); break;
+    case 14: os << "Distinct " << std::get<14>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
-  ::dessser::gen::raql_expr::t0bfb6ea47ab5b6963434216ffdbf1c4b,
+  ::dessser::gen::raql_expr::t82ed0b4d8276434c22a0ca15ade92062,
   t*
-> t4e68126c7ef14bc7c3816b834301e131;
+> t797b5289cecf30b53b722bff0d1083a8;
 
-struct t;
-struct t;
-struct t;
-struct t;
-struct t29ad70980c1ed0de607f154b2cf37079 : public std::tuple<
-  ::dessser::gen::raql_expr::t94d3f63f7a6f4439feec5972b0434d93,
-  t*,
-  t*
-> { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t29ad70980c1ed0de607f154b2cf37079 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
-  return os;
-}
-
-struct tdcc895625422a22e36d3aaa6c06c106d : public std::variant<
-  Void,
-  Void,
-  bool
+struct ta7ffb229534f504804e1c24f742166d6 : public std::variant<
+  Void, // Lag
+  Void, // ExpSmooth
+  Void, // Sample
+  Void // OneOutOf
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, tdcc895625422a22e36d3aaa6c06c106d const &v) {
+
+enum Constr_ta7ffb229534f504804e1c24f742166d6 {
+  Lag,
+  ExpSmooth,
+  Sample,
+  OneOutOf,
+};
+
+inline std::ostream &operator<<(std::ostream &os, ta7ffb229534f504804e1c24f742166d6 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "Lag " << std::get<0>(v); break;
+    case 1: os << "ExpSmooth " << std::get<1>(v); break;
+    case 2: os << "Sample " << std::get<2>(v); break;
+    case 3: os << "OneOutOf " << std::get<3>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t;
-struct t;
-struct t6fd96f32806a7be149cf6aeb65c52003 : public std::tuple<
-  ::dessser::gen::raql_expr::tdcc895625422a22e36d3aaa6c06c106d,
-  t*,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct tab0dcdfe0a2d58ff7fba6f4496f1629d : public std::tuple<
+  ::dessser::gen::raql_expr::ta7ffb229534f504804e1c24f742166d6,
   t*,
   t*
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t6fd96f32806a7be149cf6aeb65c52003 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tab0dcdfe0a2d58ff7fba6f4496f1629d const &t) {
   os << '<'
      << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t)
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t)
      << '>';
   return os;
 }
 
-struct t921af81efb70732ad0db1d0c7dcad5c6 : public std::variant<
-  Void,
-  bool
+struct t213fd001439b7e9763630d054b30bb45 : public std::variant<
+  Void, // MovingAvg
+  Void, // Hysteresis
+  bool // OnceEvery
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t921af81efb70732ad0db1d0c7dcad5c6 const &v) {
+
+enum Constr_t213fd001439b7e9763630d054b30bb45 {
+  MovingAvg,
+  Hysteresis,
+  OnceEvery,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t213fd001439b7e9763630d054b30bb45 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "MovingAvg " << std::get<0>(v); break;
+    case 1: os << "Hysteresis " << std::get<1>(v); break;
+    case 2: os << "OnceEvery " << std::get<2>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t680c3184893bd6b56c0f5481ac3d4cb6 : public std::tuple<
+  ::dessser::gen::raql_expr::t213fd001439b7e9763630d054b30bb45,
+  t*,
+  t*,
+  t*
+> { using tuple::tuple; };
+inline std::ostream &operator<<(std::ostream &os, t680c3184893bd6b56c0f5481ac3d4cb6 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t) << ", "
+     << *std::get<3>(t)
+     << '>';
+  return os;
+}
+
+struct t2e68ed7bcde629b79efcf8cb23da3dd3 : public std::variant<
+  Void, // DampedHolt
+  bool // Remember
+> { using variant::variant; };
+
+enum Constr_t2e68ed7bcde629b79efcf8cb23da3dd3 {
+  DampedHolt,
+  Remember,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t2e68ed7bcde629b79efcf8cb23da3dd3 const &v) {
+  switch (v.index()) {
+    case 0: os << "DampedHolt " << std::get<0>(v); break;
+    case 1: os << "Remember " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t5eea0d7071354d8574d1d288be2da03c : public std::tuple<
-  ::dessser::gen::raql_expr::t921af81efb70732ad0db1d0c7dcad5c6,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t801b86950988d4a9ab0f917a16c686fa : public std::tuple<
+  ::dessser::gen::raql_expr::t2e68ed7bcde629b79efcf8cb23da3dd3,
   t*,
   t*,
   t*,
   t*
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t5eea0d7071354d8574d1d288be2da03c const &t) {
+inline std::ostream &operator<<(std::ostream &os, t801b86950988d4a9ab0f917a16c686fa const &t) {
   os << '<'
      << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t) << ", "
-     << std::get<4>(t)
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t) << ", "
+     << *std::get<3>(t) << ", "
+     << *std::get<4>(t)
      << '>';
   return os;
 }
@@ -515,68 +771,99 @@ inline std::ostream &operator<<(std::ostream &os, tf4054221050c951844715a915de49
   return os;
 }
 
-struct tfb1d24d1e7b7f70fdb5d555af94ff2cc : public std::variant<
-  Void,
-  ::dessser::gen::raql_expr::tf4054221050c951844715a915de49acf
+struct tfcec70150a4f77b2551ecf8cde769b80 : public std::variant<
+  Void, // MultiLinReg
+  ::dessser::gen::raql_expr::tf4054221050c951844715a915de49acf // Largest
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, tfb1d24d1e7b7f70fdb5d555af94ff2cc const &v) {
+
+enum Constr_tfcec70150a4f77b2551ecf8cde769b80 {
+  MultiLinReg,
+  Largest,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tfcec70150a4f77b2551ecf8cde769b80 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "MultiLinReg " << std::get<0>(v); break;
+    case 1: os << "Largest " << std::get<1>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct tfc88680f34dff428e51a593a8371a47c : public std::tuple<
-  ::dessser::gen::raql_expr::tfb1d24d1e7b7f70fdb5d555af94ff2cc,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t0d5e168d84ff2f5b5792fdfdfbb57a3f : public std::tuple<
+  ::dessser::gen::raql_expr::tfcec70150a4f77b2551ecf8cde769b80,
   t*,
   t*,
   t*,
   Lst<t*>
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, tfc88680f34dff428e51a593a8371a47c const &t) {
+inline std::ostream &operator<<(std::ostream &os, t0d5e168d84ff2f5b5792fdfdfbb57a3f const &t) {
   os << '<'
      << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t) << ", "
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t) << ", "
+     << *std::get<3>(t) << ", "
      << std::get<4>(t)
      << '>';
   return os;
 }
 
-struct t113d89516a2c18ae050fd882eee5a84a : public std::variant<
-  Void
+struct ta020e7823506dcf58037dc373380c189 : public std::variant<
+  Void // DampedHoltWinter
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t113d89516a2c18ae050fd882eee5a84a const &v) {
+
+enum Constr_ta020e7823506dcf58037dc373380c189 {
+  DampedHoltWinter,
+};
+
+inline std::ostream &operator<<(std::ostream &os, ta020e7823506dcf58037dc373380c189 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
+    case 0: os << "DampedHoltWinter " << std::get<0>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct te0a08dc040b97d85619e928e4be8c242 : public std::tuple<
-  ::dessser::gen::raql_expr::t113d89516a2c18ae050fd882eee5a84a,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t6b77256fcb81f65e6f93d323c46fc1f9 : public std::tuple<
+  ::dessser::gen::raql_expr::ta020e7823506dcf58037dc373380c189,
   t*,
   t*,
   t*,
@@ -584,68 +871,90 @@ struct te0a08dc040b97d85619e928e4be8c242 : public std::tuple<
   t*,
   t*
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, te0a08dc040b97d85619e928e4be8c242 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t6b77256fcb81f65e6f93d323c46fc1f9 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t) << ", "
-     << std::get<4>(t) << ", "
-     << std::get<5>(t) << ", "
-     << std::get<6>(t)
+     << *std::get<1>(t) << ", "
+     << *std::get<2>(t) << ", "
+     << *std::get<3>(t) << ", "
+     << *std::get<4>(t) << ", "
+     << *std::get<5>(t) << ", "
+     << *std::get<6>(t)
      << '>';
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t29f7627e1294ce8b01bedbbca5e648c9 {
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t017efb4c954859eec207f915a67e66e6 {
   t* by;
   t* duration;
   std::optional<t*> max_size;
   dessser::gen::raql_top_output::t_ext output;
   t* sigmas;
   t* size;
-  t* time;
-  t* what;
-  bool operator==(t29f7627e1294ce8b01bedbbca5e648c9 const &other) const {
-    return by == other.by && duration == other.duration && max_size == other.max_size && output == other.output && sigmas == other.sigmas && size == other.size && time == other.time && what == other.what;
+  t* Top_time;
+  t* Top_what;
+  bool operator==(t017efb4c954859eec207f915a67e66e6 const &other) const {
+    return by == other.by && duration == other.duration && max_size == other.max_size && output == other.output && sigmas == other.sigmas && size == other.size && Top_time == other.Top_time && Top_what == other.Top_what;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t29f7627e1294ce8b01bedbbca5e648c9 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t017efb4c954859eec207f915a67e66e6 const &r) {
   os << '{';
-  os << "by:" << r.by << ',';
-  os << "duration:" << r.duration << ',';
-  os << "max_size:" << r.max_size << ',';
+  os << "by:" << *r.by << ',';
+  os << "duration:" << *r.duration << ',';
+  os << "max_size:" << *r.max_size << ',';
   os << "output:" << r.output << ',';
-  os << "sigmas:" << r.sigmas << ',';
-  os << "size:" << r.size << ',';
-  os << "time:" << r.time << ',';
-  os << "what:" << r.what;
+  os << "sigmas:" << *r.sigmas << ',';
+  os << "size:" << *r.size << ',';
+  os << "Top_time:" << *r.Top_time << ',';
+  os << "Top_what:" << *r.Top_what;
   os << '}';
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t14d4670eeb12d711128d8053596f780b {
   t* max_age;
   std::optional<t*> sample_size;
@@ -658,107 +967,181 @@ struct t14d4670eeb12d711128d8053596f780b {
 };
 inline std::ostream &operator<<(std::ostream &os, t14d4670eeb12d711128d8053596f780b const &r) {
   os << '{';
-  os << "max_age:" << r.max_age << ',';
-  os << "sample_size:" << r.sample_size << ',';
-  os << "time:" << r.time << ',';
+  os << "max_age:" << *r.max_age << ',';
+  os << "sample_size:" << *r.sample_size << ',';
+  os << "time:" << *r.time << ',';
   os << "tumbling:" << r.tumbling << ',';
-  os << "what:" << r.what;
+  os << "what:" << *r.what;
   os << '}';
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct td8f2c9359fa7d29a6d812dc03d98c395 : public std::variant<
-  ::dessser::gen::raql_expr::t4e68126c7ef14bc7c3816b834301e131,
-  ::dessser::gen::raql_expr::t29ad70980c1ed0de607f154b2cf37079,
-  ::dessser::gen::raql_expr::t6fd96f32806a7be149cf6aeb65c52003,
-  ::dessser::gen::raql_expr::t5eea0d7071354d8574d1d288be2da03c,
-  ::dessser::gen::raql_expr::tfc88680f34dff428e51a593a8371a47c,
-  ::dessser::gen::raql_expr::te0a08dc040b97d85619e928e4be8c242,
-  ::dessser::gen::raql_expr::t29f7627e1294ce8b01bedbbca5e648c9,
-  ::dessser::gen::raql_expr::t14d4670eeb12d711128d8053596f780b
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct tb91e9fd057d03bb12e499caffa960fe5 : public std::variant<
+  ::dessser::gen::raql_expr::t797b5289cecf30b53b722bff0d1083a8, // SF1
+  ::dessser::gen::raql_expr::tab0dcdfe0a2d58ff7fba6f4496f1629d, // SF2
+  ::dessser::gen::raql_expr::t680c3184893bd6b56c0f5481ac3d4cb6, // SF3
+  ::dessser::gen::raql_expr::t801b86950988d4a9ab0f917a16c686fa, // SF4
+  ::dessser::gen::raql_expr::t0d5e168d84ff2f5b5792fdfdfbb57a3f, // SF4s
+  ::dessser::gen::raql_expr::t6b77256fcb81f65e6f93d323c46fc1f9, // SF6
+  ::dessser::gen::raql_expr::t017efb4c954859eec207f915a67e66e6, // Top
+  ::dessser::gen::raql_expr::t14d4670eeb12d711128d8053596f780b // Past
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, td8f2c9359fa7d29a6d812dc03d98c395 const &v) {
+
+enum Constr_tb91e9fd057d03bb12e499caffa960fe5 {
+  SF1,
+  SF2,
+  SF3,
+  SF4,
+  SF4s,
+  SF6,
+  Top,
+  Past,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tb91e9fd057d03bb12e499caffa960fe5 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
+    case 0: os << "SF1 " << std::get<0>(v); break;
+    case 1: os << "SF2 " << std::get<1>(v); break;
+    case 2: os << "SF3 " << std::get<2>(v); break;
+    case 3: os << "SF4 " << std::get<3>(v); break;
+    case 4: os << "SF4s " << std::get<4>(v); break;
+    case 5: os << "SF6 " << std::get<5>(v); break;
+    case 6: os << "Top " << std::get<6>(v); break;
+    case 7: os << "Past " << std::get<7>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t7af95785d470bcc8d4f6cb645267c5ab : public std::tuple<
-  ::dessser::gen::raql_expr::t48b79f232880b7b4f6fa63fb49447c29,
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct tb26c0e86ea03b0afde0bda1d85806608 : public std::tuple<
+  ::dessser::gen::raql_expr::t9aeb08fceb6eb1d5796a64c8fddd436c,
   bool,
-  ::dessser::gen::raql_expr::td8f2c9359fa7d29a6d812dc03d98c395
+  ::dessser::gen::raql_expr::tb91e9fd057d03bb12e499caffa960fe5
 > { using tuple::tuple; };
-inline std::ostream &operator<<(std::ostream &os, t7af95785d470bcc8d4f6cb645267c5ab const &t) {
+inline std::ostream &operator<<(std::ostream &os, tb26c0e86ea03b0afde0bda1d85806608 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -768,142 +1151,256 @@ inline std::ostream &operator<<(std::ostream &os, t7af95785d470bcc8d4f6cb645267c
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
   t*,
   t*
 > t7411897bdb6c9b6e00a01b4eb6506ccf;
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t6c44ef6a580b31684bea6cc68702bc6b : public std::variant<
-  ::dessser::gen::raql_expr::t7411897bdb6c9b6e00a01b4eb6506ccf
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t9fb75ec5c85706195b12b035eb776a06 : public std::variant<
+  ::dessser::gen::raql_expr::t7411897bdb6c9b6e00a01b4eb6506ccf // Split
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t6c44ef6a580b31684bea6cc68702bc6b const &v) {
+
+enum Constr_t9fb75ec5c85706195b12b035eb776a06 {
+  Split,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t9fb75ec5c85706195b12b035eb776a06 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
+    case 0: os << "Split " << std::get<0>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
-struct t7721f259aab20be1dffc9fa06a1108cf : public std::variant<
-  Lst<t*>,
-  Lst<::dessser::gen::raql_expr::t5b91ba1a37fd19816559f3dabb32e8b5>,
-  Lst<t*>,
-  ::dessser::gen::raql_expr::t72e501d49719761ba8ff88c3982af245,
-  ::dessser::gen::raql_expr::tbd346f57da21609965082cdc361f8fbf,
-  ::dessser::gen::raql_expr::t7af95785d470bcc8d4f6cb645267c5ab,
-  ::dessser::gen::raql_expr::t6c44ef6a580b31684bea6cc68702bc6b
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+struct t5f01dc34cfa6dfc79212f31d881cc898 : public std::variant<
+  Lst<t*>, // Tuple
+  Lst<::dessser::gen::raql_expr::t5b91ba1a37fd19816559f3dabb32e8b5>, // Record
+  Lst<t*>, // Vector
+  ::dessser::gen::raql_expr::t72e501d49719761ba8ff88c3982af245, // Case
+  ::dessser::gen::raql_expr::t9dca13408164b9b878af2f494a648c1a, // Stateless
+  ::dessser::gen::raql_expr::tb26c0e86ea03b0afde0bda1d85806608, // Stateful
+  ::dessser::gen::raql_expr::t9fb75ec5c85706195b12b035eb776a06 // Generator
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t7721f259aab20be1dffc9fa06a1108cf const &v) {
+
+enum Constr_t5f01dc34cfa6dfc79212f31d881cc898 {
+  Tuple,
+  Record,
+  Vector,
+  Case,
+  Stateless,
+  Stateful,
+  Generator,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t5f01dc34cfa6dfc79212f31d881cc898 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
+    case 0: os << "Tuple " << std::get<0>(v); break;
+    case 1: os << "Record " << std::get<1>(v); break;
+    case 2: os << "Vector " << std::get<2>(v); break;
+    case 3: os << "Case " << std::get<3>(v); break;
+    case 4: os << "Stateless " << std::get<4>(v); break;
+    case 5: os << "Stateful " << std::get<5>(v); break;
+    case 6: os << "Generator " << std::get<6>(v); break;
   }
   return os;
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t {
-  ::dessser::gen::raql_expr::t7721f259aab20be1dffc9fa06a1108cf text;
+  ::dessser::gen::raql_expr::t5f01dc34cfa6dfc79212f31d881cc898 text;
   dessser::gen::raql_type::t_ext typ;
   uint32_t uniq_num;
   std::optional<dessser::gen::units::t_ext> units;
@@ -922,143 +1419,281 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
   ::dessser::gen::raql_expr::t*,
   Pointer

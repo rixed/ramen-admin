@@ -86,20 +86,26 @@ inline std::ostream &operator<<(std::ostream &os, tcf61baf1ca251368717dff4345cd4
   return os;
 }
 
-struct tcf76014a9522120e6e529735be1a3f44 : public std::variant<
-  ::dessser::gen::source_info::compiled_program*,
-  ::dessser::gen::source_info::tcf61baf1ca251368717dff4345cd4bfb
+struct t6ac3210567b19e88b41ebcefc5642eee : public std::variant<
+  ::dessser::gen::source_info::compiled_program*, // Compiled
+  ::dessser::gen::source_info::tcf61baf1ca251368717dff4345cd4bfb // Failed
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, tcf76014a9522120e6e529735be1a3f44 const &v) {
+
+enum Constr_t6ac3210567b19e88b41ebcefc5642eee {
+  Compiled,
+  Failed,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t6ac3210567b19e88b41ebcefc5642eee const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "Compiled " << std::get<0>(v); break;
+    case 1: os << "Failed " << std::get<1>(v); break;
   }
   return os;
 }
 
 struct t {
-  ::dessser::gen::source_info::tcf76014a9522120e6e529735be1a3f44 detail;
+  ::dessser::gen::source_info::t6ac3210567b19e88b41ebcefc5642eee detail;
   Lst<std::string> md5s;
   std::string src_ext;
   bool operator==(t const &other) const {

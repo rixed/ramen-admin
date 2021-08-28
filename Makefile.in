@@ -101,7 +101,8 @@ TYPE_SOURCES = \
 	sync_key.type \
 	sync_client_cmd.type \
 	sync_client_msg.type \
-	sync_server_msg.type
+	sync_server_msg.type \
+	sync_msg.type
 
 src/desssergen/.created:
 	mkdir -p src/desssergen

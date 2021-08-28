@@ -55,27 +55,36 @@ inline std::ostream &operator<<(std::ostream &os, t69017581c1f2e755676a8d0209b65
   return os;
 }
 
-struct t41efd77a12030055a0a0a45dc889f810 : public std::variant<
-  Void,
-  std::string,
-  std::string,
-  ::dessser::gen::alerting_contact::t6856af1ea1ed3febe9b67e297a8e0a96,
-  ::dessser::gen::alerting_contact::t69017581c1f2e755676a8d0209b65424
+struct tfc1ed51556c0dcb5f30eeb6eb99a25a4 : public std::variant<
+  Void, // Ignore
+  std::string, // Exec
+  std::string, // SysLog
+  ::dessser::gen::alerting_contact::t6856af1ea1ed3febe9b67e297a8e0a96, // Sqlite
+  ::dessser::gen::alerting_contact::t69017581c1f2e755676a8d0209b65424 // Kafka
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t41efd77a12030055a0a0a45dc889f810 const &v) {
+
+enum Constr_tfc1ed51556c0dcb5f30eeb6eb99a25a4 {
+  Ignore,
+  Exec,
+  SysLog,
+  Sqlite,
+  Kafka,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tfc1ed51556c0dcb5f30eeb6eb99a25a4 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
+    case 0: os << "Ignore " << std::get<0>(v); break;
+    case 1: os << "Exec " << std::get<1>(v); break;
+    case 2: os << "SysLog " << std::get<2>(v); break;
+    case 3: os << "Sqlite " << std::get<3>(v); break;
+    case 4: os << "Kafka " << std::get<4>(v); break;
   }
   return os;
 }
 
 struct t {
   double timeout;
-  ::dessser::gen::alerting_contact::t41efd77a12030055a0a0a45dc889f810 via;
+  ::dessser::gen::alerting_contact::tfc1ed51556c0dcb5f30eeb6eb99a25a4 via;
   bool operator==(t const &other) const {
     return timeout == other.timeout && via == other.via;
   }

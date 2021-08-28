@@ -15,21 +15,27 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t48b79f232880b7b4f6fa63fb49447c29 : public std::variant<
-  Void,
-  Void
+struct t48a2d544f23c6703dc0a88c42484f480 : public std::variant<
+  Void, // OutputField
+  Void // Parameter
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t48b79f232880b7b4f6fa63fb49447c29 const &v) {
+
+enum Constr_t48a2d544f23c6703dc0a88c42484f480 {
+  OutputField,
+  Parameter,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t48a2d544f23c6703dc0a88c42484f480 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "OutputField " << std::get<0>(v); break;
+    case 1: os << "Parameter " << std::get<1>(v); break;
   }
   return os;
 }
 
 struct t : public std::tuple<
   dessser::gen::field_name::t_ext,
-  ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29,
+  ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480,
   double
 > { using tuple::tuple; };
 inline std::ostream &operator<<(std::ostream &os, t const &t) {

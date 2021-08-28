@@ -15,15 +15,22 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void
+  Void, // Collectd
+  Void, // NetflowV5
+  Void // Graphite
 > { using variant::variant; };
+
+enum Constr_t {
+  Collectd,
+  NetflowV5,
+  Graphite,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "Collectd " << std::get<0>(v); break;
+    case 1: os << "NetflowV5 " << std::get<1>(v); break;
+    case 2: os << "Graphite " << std::get<2>(v); break;
   }
   return os;
 }

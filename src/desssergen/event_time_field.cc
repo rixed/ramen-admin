@@ -31,13 +31,14 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t48b79f232880b7b4f6fa63fb49447c29 : public std::variant<
-  Void,
-  Void
+struct t48a2d544f23c6703dc0a88c42484f480 : public std::variant<
+  Void, // OutputField
+  Void // Parameter
 > { using variant::variant; };
+
 struct t : public std::tuple<
   dessser::gen::field_name::t_ext,
-  ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29,
+  ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480,
   double
 > { using tuple::tuple; };
 typedef std::tuple<
@@ -56,9 +57,9 @@ typedef std::tuple<
 > t22a32080ad88ab548b80077a17b7dd46;
 
 typedef std::tuple<
-  ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29,
+  ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480,
   Pointer
-> t594308eace3ed30ba26fd660337f929e;
+> t824b744a65290d27045e0dac0ca89408;
 
 typedef std::tuple<
   uint64_t,
@@ -85,21 +86,21 @@ static std::function<Pointer(::dessser::gen::event_time_field::t*,Pointer)> to_r
     Pointer let_res_4;
     {
       Pointer stup_dst_90 { id_3 };
-      ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_5 { std::get<1>(*p_0) };
+      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_5 { std::get<1>(*p_0) };
       uint16_t id_6 { uint16_t(id_5.index()) };
       Pointer id_7 { stup_dst_90.writeU16Le(id_6) };
       Pointer let_res_8;
       {
         Pointer ssum_dst_92 { id_7 };
         uint16_t id_9 { 0 };
-        ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_10 { std::get<1>(*p_0) };
+        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_10 { std::get<1>(*p_0) };
         uint16_t id_11 { uint16_t(id_10.index()) };
         bool id_12 { bool(id_9 == id_11) };
         Pointer choose_res_13;
         if (id_12) {
           choose_res_13 = ssum_dst_92;
         } else {
-          ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_14 { std::get<1>(*p_0) };
+          ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_14 { std::get<1>(*p_0) };
           uint16_t id_15 { uint16_t(id_14.index()) };
           uint16_t id_16 { 1 };
           bool id_17 { bool(id_15 == id_16) };
@@ -143,7 +144,7 @@ static std::function<Size(::dessser::gen::event_time_field::t*)> sersize_of_row_
     {
       Size sz_87 { id_26 };
       uint16_t id_28 { 0 };
-      ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_29 { std::get<1>(*p_0) };
+      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_29 { std::get<1>(*p_0) };
       uint16_t id_30 { uint16_t(id_29.index()) };
       bool id_31 { bool(id_28 == id_30) };
       Size choose_res_32;
@@ -152,7 +153,7 @@ static std::function<Size(::dessser::gen::event_time_field::t*)> sersize_of_row_
         Size id_34 { Size(sz_87 + id_33) };
         choose_res_32 = id_34;
       } else {
-        ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_35 { std::get<1>(*p_0) };
+        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_35 { std::get<1>(*p_0) };
         uint16_t id_36 { uint16_t(id_35.index()) };
         uint16_t id_37 { 1 };
         bool id_38 { bool(id_36 == id_37) };
@@ -206,20 +207,20 @@ static std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f7
           ::dessser::gen::event_time_field::t22a32080ad88ab548b80077a17b7dd46 id_51 { du16_fst_60, du16_snd_61 };
           letpair_res_50 = id_51;
         }
-        ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e let_res_52;
+        ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 let_res_52;
         {
           ::dessser::gen::event_time_field::t22a32080ad88ab548b80077a17b7dd46 dsum1_65 { letpair_res_50 };
-          ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e letpair_res_53;
+          ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 letpair_res_53;
           {
             auto dsum1_fst_66 { std::get<0>(dsum1_65) };
             auto dsum1_snd_67 { std::get<1>(dsum1_65) };
             uint16_t id_54 { 0 };
             bool id_55 { bool(id_54 == dsum1_fst_66) };
-            ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e choose_res_56;
+            ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 choose_res_56;
             if (id_55) {
               (void)VOID;
-              ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_57 { std::in_place_index<0>, VOID };
-              ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e id_58 { id_57, dsum1_snd_67 };
+              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_57 { std::in_place_index<0>, VOID };
+              ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 id_58 { id_57, dsum1_snd_67 };
               choose_res_56 = id_58;
             } else {
               uint16_t id_59 { 1 };
@@ -227,8 +228,8 @@ static std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f7
               Void id_61 { ((void)(assert(id_60)), VOID) };
               (void)id_61;
               (void)VOID;
-              ::dessser::gen::event_time_field::t48b79f232880b7b4f6fa63fb49447c29 id_62 { std::in_place_index<1>, VOID };
-              ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e id_63 { id_62, dsum1_snd_67 };
+              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_62 { std::in_place_index<1>, VOID };
+              ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 id_63 { id_62, dsum1_snd_67 };
               choose_res_56 = id_63;
             }
             letpair_res_53 = choose_res_56;
@@ -237,7 +238,7 @@ static std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f7
         }
         ::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f76e27ff99 let_res_64;
         {
-          ::dessser::gen::event_time_field::t594308eace3ed30ba26fd660337f929e dtup_74 { let_res_52 };
+          ::dessser::gen::event_time_field::t824b744a65290d27045e0dac0ca89408 dtup_74 { let_res_52 };
           ::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f76e27ff99 letpair_res_65;
           {
             auto dtup_fst_75 { std::get<0>(dtup_74) };

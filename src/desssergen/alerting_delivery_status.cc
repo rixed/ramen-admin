@@ -31,13 +31,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void
+  Void, // StartToBeSent
+  Void, // StartToBeSentThenStopped
+  Void, // StartSent
+  Void, // StartAcked
+  Void, // StopToBeSent
+  Void // StopSent
 > { using variant::variant; };
+
 typedef std::tuple<
   ::dessser::gen::alerting_delivery_status::t*,
   Pointer

@@ -73,6 +73,7 @@ HEADERS += \
   desssergen/sync_client_cmd.h \
   desssergen/sync_client_msg.h \
   desssergen/sync_server_msg.h \
+  desssergen/sync_msg.h \
   misc.h \
   UserIdentity.h \
   rec_shared_mutex.h \
@@ -136,6 +137,7 @@ SOURCES += \
   desssergen/sync_client_cmd.cc \
   desssergen/sync_client_msg.cc \
   desssergen/sync_server_msg.cc \
+  desssergen/sync_msg.cc \
   misc.cpp \
   UserIdentity.cpp \
   rec_shared_mutex.cpp \

@@ -67,29 +67,43 @@ inline std::ostream &operator<<(std::ostream &os, t81abd9e69301921b46b0f740c15d4
 }
 
 struct t : public std::variant<
-  ::dessser::gen::sync_client_cmd::td17298225a9b57dc7469fe7682403a40,
-  dessser::gen::sync_selector::t_ext,
-  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd,
-  ::dessser::gen::sync_client_cmd::tfc0555375d80915de4624dcd8c201c5f,
-  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd,
-  dessser::gen::sync_key::t_ext,
-  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c,
-  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c,
-  dessser::gen::sync_key::t_ext,
-  Void
+  ::dessser::gen::sync_client_cmd::td17298225a9b57dc7469fe7682403a40, // Auth
+  dessser::gen::sync_selector::t_ext, // StartSync
+  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd, // SetKey
+  ::dessser::gen::sync_client_cmd::tfc0555375d80915de4624dcd8c201c5f, // NewKey
+  ::dessser::gen::sync_client_cmd::t08ff092200f210c10792e73a746a4bfd, // UpdKey
+  dessser::gen::sync_key::t_ext, // DelKey
+  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c, // LockKey
+  ::dessser::gen::sync_client_cmd::t81abd9e69301921b46b0f740c15d406c, // LockOrCreateKey
+  dessser::gen::sync_key::t_ext, // UnlockKey
+  Void // Bye
 > { using variant::variant; };
+
+enum Constr_t {
+  Auth,
+  StartSync,
+  SetKey,
+  NewKey,
+  UpdKey,
+  DelKey,
+  LockKey,
+  LockOrCreateKey,
+  UnlockKey,
+  Bye,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
-    case 9: os << std::get<9>(v); break;
+    case 0: os << "Auth " << std::get<0>(v); break;
+    case 1: os << "StartSync " << std::get<1>(v); break;
+    case 2: os << "SetKey " << std::get<2>(v); break;
+    case 3: os << "NewKey " << std::get<3>(v); break;
+    case 4: os << "UpdKey " << std::get<4>(v); break;
+    case 5: os << "DelKey " << std::get<5>(v); break;
+    case 6: os << "LockKey " << std::get<6>(v); break;
+    case 7: os << "LockOrCreateKey " << std::get<7>(v); break;
+    case 8: os << "UnlockKey " << std::get<8>(v); break;
+    case 9: os << "Bye " << std::get<9>(v); break;
   }
   return os;
 }

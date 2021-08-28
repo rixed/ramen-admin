@@ -62,49 +62,73 @@ inline std::ostream &operator<<(std::ostream &os, t3f15553b4c4a090da807c33b6aa2a
 }
 
 struct t : public std::variant<
-  ::dessser::gen::sync_value::tde68d14dd253c0005e157424dd8fc48d,
-  dessser::gen::worker::t_ext,
-  dessser::gen::retention::t_ext,
-  dessser::gen::time_range::t_ext,
-  Arr<::dessser::gen::sync_value::t3f15553b4c4a090da807c33b6aa2aa71>,
-  dessser::gen::raql_value::t_ext,
-  dessser::gen::target_config::t_ext,
-  dessser::gen::source_info::t_ext,
-  dessser::gen::runtime_stats::t_ext,
-  dessser::gen::replay::t_ext,
-  dessser::gen::replayer::t_ext,
-  dessser::gen::replay_request::t_ext,
-  dessser::gen::alert::t_ext,
-  dessser::gen::output_specs::t_ext,
-  dessser::gen::dashboard_widget::t_ext,
-  dessser::gen::alerting_contact::t_ext,
-  dessser::gen::alerting_notification::t_ext,
-  dessser::gen::alerting_delivery_status::t_ext,
-  dessser::gen::alerting_log::t_ext,
-  dessser::gen::alerting_inhibition::t_ext
+  ::dessser::gen::sync_value::tde68d14dd253c0005e157424dd8fc48d, // Error
+  dessser::gen::worker::t_ext, // Worker
+  dessser::gen::retention::t_ext, // Retention
+  dessser::gen::time_range::t_ext, // TimeRange
+  Arr<::dessser::gen::sync_value::t3f15553b4c4a090da807c33b6aa2aa71>, // Tuples
+  dessser::gen::raql_value::t_ext, // RamenValue
+  dessser::gen::target_config::t_ext, // TargetConfig
+  dessser::gen::source_info::t_ext, // SourceInfo
+  dessser::gen::runtime_stats::t_ext, // RuntimeStats
+  dessser::gen::replay::t_ext, // Replay
+  dessser::gen::replayer::t_ext, // Replayer
+  dessser::gen::replay_request::t_ext, // ReplayRequest
+  dessser::gen::alert::t_ext, // Alert
+  dessser::gen::output_specs::t_ext, // OutputSpecs
+  dessser::gen::dashboard_widget::t_ext, // DashboardWidget
+  dessser::gen::alerting_contact::t_ext, // AlertingContact
+  dessser::gen::alerting_notification::t_ext, // Notification
+  dessser::gen::alerting_delivery_status::t_ext, // DeliveryStatus
+  dessser::gen::alerting_log::t_ext, // IncidentLog
+  dessser::gen::alerting_inhibition::t_ext // Inhibition
 > { using variant::variant; };
+
+enum Constr_t {
+  Error,
+  Worker,
+  Retention,
+  TimeRange,
+  Tuples,
+  RamenValue,
+  TargetConfig,
+  SourceInfo,
+  RuntimeStats,
+  Replay,
+  Replayer,
+  ReplayRequest,
+  Alert,
+  OutputSpecs,
+  DashboardWidget,
+  AlertingContact,
+  Notification,
+  DeliveryStatus,
+  IncidentLog,
+  Inhibition,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
-    case 4: os << std::get<4>(v); break;
-    case 5: os << std::get<5>(v); break;
-    case 6: os << std::get<6>(v); break;
-    case 7: os << std::get<7>(v); break;
-    case 8: os << std::get<8>(v); break;
-    case 9: os << std::get<9>(v); break;
-    case 10: os << std::get<10>(v); break;
-    case 11: os << std::get<11>(v); break;
-    case 12: os << std::get<12>(v); break;
-    case 13: os << std::get<13>(v); break;
-    case 14: os << std::get<14>(v); break;
-    case 15: os << std::get<15>(v); break;
-    case 16: os << std::get<16>(v); break;
-    case 17: os << std::get<17>(v); break;
-    case 18: os << std::get<18>(v); break;
-    case 19: os << std::get<19>(v); break;
+    case 0: os << "Error " << std::get<0>(v); break;
+    case 1: os << "Worker " << std::get<1>(v); break;
+    case 2: os << "Retention " << std::get<2>(v); break;
+    case 3: os << "TimeRange " << std::get<3>(v); break;
+    case 4: os << "Tuples " << std::get<4>(v); break;
+    case 5: os << "RamenValue " << std::get<5>(v); break;
+    case 6: os << "TargetConfig " << std::get<6>(v); break;
+    case 7: os << "SourceInfo " << std::get<7>(v); break;
+    case 8: os << "RuntimeStats " << std::get<8>(v); break;
+    case 9: os << "Replay " << std::get<9>(v); break;
+    case 10: os << "Replayer " << std::get<10>(v); break;
+    case 11: os << "ReplayRequest " << std::get<11>(v); break;
+    case 12: os << "Alert " << std::get<12>(v); break;
+    case 13: os << "OutputSpecs " << std::get<13>(v); break;
+    case 14: os << "DashboardWidget " << std::get<14>(v); break;
+    case 15: os << "AlertingContact " << std::get<15>(v); break;
+    case 16: os << "Notification " << std::get<16>(v); break;
+    case 17: os << "DeliveryStatus " << std::get<17>(v); break;
+    case 18: os << "IncidentLog " << std::get<18>(v); break;
+    case 19: os << "Inhibition " << std::get<19>(v); break;
   }
   return os;
 }

@@ -7,7 +7,9 @@
 #include <QDebug>
 #include <QCommandLineParser>
 #include <QVector>
+
 #include "ConfClient.h"
+#include "UserIdentity.h"
 #include "config.h"
 
 int main(int argc, char *argv[])
@@ -38,6 +40,16 @@ int main(int argc, char *argv[])
 
   qRegisterMetaType<QAbstractSocket::SocketError>();
   qRegisterMetaType<SyncStatus>();
+
+  // test ConfClient:
+  QString const idFile { configDir + "/identity" };
+  QFile file(idFile);
+  std::shared_ptr<UserIdentity> id = std::make_shared<UserIdentity>(file);
+  if (! id->isValid) {
+    qCritical() << "Identity file" << idFile << "is not valid";
+    return 1;
+  }
+  ConfClient *client = new ConfClient("localhost:29340", "rixed", id, nullptr);
 
   int ret = app.exec();
 

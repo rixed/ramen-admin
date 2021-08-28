@@ -17,23 +17,30 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t85cb3b3308973b3caab409eac4f91fe4 : public std::variant<
-  double,
-  dessser::gen::event_time_field::t_ext,
-  dessser::gen::event_time_field::t_ext
+struct tb22291137390f6968b7c7852ed4b8408 : public std::variant<
+  double, // DurationConst
+  dessser::gen::event_time_field::t_ext, // DurationField
+  dessser::gen::event_time_field::t_ext // StopField
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t85cb3b3308973b3caab409eac4f91fe4 const &v) {
+
+enum Constr_tb22291137390f6968b7c7852ed4b8408 {
+  DurationConst,
+  DurationField,
+  StopField,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tb22291137390f6968b7c7852ed4b8408 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "DurationConst " << std::get<0>(v); break;
+    case 1: os << "DurationField " << std::get<1>(v); break;
+    case 2: os << "StopField " << std::get<2>(v); break;
   }
   return os;
 }
 
 typedef std::tuple<
   dessser::gen::event_time_field::t_ext,
-  ::dessser::gen::event_time::t85cb3b3308973b3caab409eac4f91fe4
+  ::dessser::gen::event_time::tb22291137390f6968b7c7852ed4b8408
 > t;
 
 typedef std::tuple<

@@ -31,20 +31,21 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void,
-  Void
+  Void, // Unknown
+  Void, // In
+  Void, // GroupState
+  Void, // GlobalState
+  Void, // OutPrevious
+  Void, // Out
+  Void, // SortFirst
+  Void, // SortSmallest
+  Void, // SortGreatest
+  Void, // Param
+  Void, // Env
+  Void, // Record
+  Void // GlobalVar
 > { using variant::variant; };
+
 typedef std::tuple<
   ::dessser::gen::raql_variable::t*,
   Pointer

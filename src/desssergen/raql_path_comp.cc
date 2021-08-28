@@ -32,9 +32,10 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  uint32_t,
-  dessser::gen::field_name::t_ext
+  uint32_t, // Idx
+  dessser::gen::field_name::t_ext // Name
 > { using variant::variant; };
+
 typedef std::tuple<
   ::dessser::gen::raql_path_comp::t*,
   Pointer
@@ -77,7 +78,7 @@ static std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
-        uint32_t id_8 { std::get<0>(*p_0) };
+        uint32_t id_8 { std::get<0 /* Idx */>(*p_0) };
         Pointer id_9 { ssum_dst_79.writeU32Le(id_8) };
         choose_res_7 = id_9;
       } else {
@@ -87,7 +88,7 @@ static std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row
         Void id_13 { ((void)(assert(id_12)), VOID) };
         (void)id_13;
         auto fun14 { dessser::gen::field_name::to_row_binary };
-        dessser::gen::field_name::t_ext id_15 { std::get<1>(*p_0) };
+        dessser::gen::field_name::t_ext id_15 { std::get<1 /* Name */>(*p_0) };
         Pointer id_16 { fun14(id_15, ssum_dst_79) };
         choose_res_7 = id_16;
       }
@@ -122,7 +123,7 @@ static std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_bi
       (void)id_26;
       Size id_27 { 2UL };
       auto fun28 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_29 { std::get<1>(*p_0) };
+      dessser::gen::field_name::t_ext id_29 { std::get<1 /* Name */>(*p_0) };
       Size id_30 { fun28(id_29) };
       Size id_31 { Size(id_27 + id_30) };
       choose_res_21 = id_31;

@@ -15,13 +15,19 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void
+  Void, // reset
+  Void // never
 > { using variant::variant; };
+
+enum Constr_t {
+  reset,
+  never,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "reset " << std::get<0>(v); break;
+    case 1: os << "never " << std::get<1>(v); break;
   }
   return os;
 }

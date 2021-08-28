@@ -49,27 +49,40 @@ inline std::ostream &operator<<(std::ostream &os, t16c4cfbc5913dcc373c4d91afa31a
 }
 
 struct file_type : public std::variant<
-  Void,
-  ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d
+  Void, // RingBuf
+  ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d // Orc
 > { using variant::variant; };
+
+enum Constr_file_type {
+  RingBuf,
+  Orc,
+};
+
 inline std::ostream &operator<<(std::ostream &os, file_type const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "RingBuf " << std::get<0>(v); break;
+    case 1: os << "Orc " << std::get<1>(v); break;
   }
   return os;
 }
 
 struct recipient : public std::variant<
-  dessser::gen::file_path::t_ext,
-  std::string,
-  std::string
+  dessser::gen::file_path::t_ext, // DirectFile
+  std::string, // IndirectFile
+  std::string // SyncKey
 > { using variant::variant; };
+
+enum Constr_recipient {
+  DirectFile,
+  IndirectFile,
+  SyncKey,
+};
+
 inline std::ostream &operator<<(std::ostream &os, recipient const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "DirectFile " << std::get<0>(v); break;
+    case 1: os << "IndirectFile " << std::get<1>(v); break;
+    case 2: os << "SyncKey " << std::get<2>(v); break;
   }
   return os;
 }

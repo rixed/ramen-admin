@@ -15,15 +15,22 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void
+  Void, // Membership
+  Void, // Rank
+  Void // List
 > { using variant::variant; };
+
+enum Constr_t {
+  Membership,
+  Rank,
+  List,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "Membership " << std::get<0>(v); break;
+    case 1: os << "Rank " << std::get<1>(v); break;
+    case 2: os << "List " << std::get<2>(v); break;
   }
   return os;
 }

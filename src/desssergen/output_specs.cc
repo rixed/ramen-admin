@@ -47,14 +47,16 @@ struct t16c4cfbc5913dcc373c4d91afa31a65d {
   }
 };
 struct file_type : public std::variant<
-  Void,
-  ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d
+  Void, // RingBuf
+  ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d // Orc
 > { using variant::variant; };
+
 struct recipient : public std::variant<
-  dessser::gen::file_path::t_ext,
-  std::string,
-  std::string
+  dessser::gen::file_path::t_ext, // DirectFile
+  std::string, // IndirectFile
+  std::string // SyncKey
 > { using variant::variant; };
+
 typedef std::tuple<
   uint16_t,
   ::dessser::gen::output_specs::channel_specs*
@@ -251,14 +253,14 @@ static std::function<Pointer(::dessser::gen::output_specs::file_type*,Pointer)> 
         bool id_21 { bool(id_19 == id_20) };
         Void id_22 { ((void)(assert(id_21)), VOID) };
         (void)id_22;
-        ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_23 { std::get<1>(*p_0) };
+        ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_23 { std::get<1 /* Orc */>(*p_0) };
         bool id_24 { id_23.with_index };
         uint8_t id_25 { uint8_t(id_24) };
         Pointer id_26 { ssum_dst_336.writeU8(id_25) };
         Pointer let_res_27;
         {
           Pointer srec_dst_337 { id_26 };
-          ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_28 { std::get<1>(*p_0) };
+          ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_28 { std::get<1 /* Orc */>(*p_0) };
           uint32_t id_29 { id_28.batch_size };
           Pointer id_30 { srec_dst_337.writeU32Le(id_29) };
           let_res_27 = id_30;
@@ -266,7 +268,7 @@ static std::function<Pointer(::dessser::gen::output_specs::file_type*,Pointer)> 
         Pointer let_res_31;
         {
           Pointer srec_dst_338 { let_res_27 };
-          ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_32 { std::get<1>(*p_0) };
+          ::dessser::gen::output_specs::t16c4cfbc5913dcc373c4d91afa31a65d id_32 { std::get<1 /* Orc */>(*p_0) };
           uint32_t id_33 { id_32.num_batches };
           Pointer id_34 { srec_dst_338.writeU32Le(id_33) };
           let_res_31 = id_34;
@@ -331,7 +333,7 @@ static std::function<Pointer(::dessser::gen::output_specs::recipient*,Pointer)> 
       Pointer choose_res_42;
       if (id_41) {
         auto fun43 { dessser::gen::file_path::to_row_binary };
-        dessser::gen::file_path::t_ext id_44 { std::get<0>(*p_0) };
+        dessser::gen::file_path::t_ext id_44 { std::get<0 /* DirectFile */>(*p_0) };
         Pointer id_45 { fun43(id_44, ssum_dst_330) };
         choose_res_42 = id_45;
       } else {
@@ -340,7 +342,7 @@ static std::function<Pointer(::dessser::gen::output_specs::recipient*,Pointer)> 
         bool id_48 { bool(id_46 == id_47) };
         Pointer choose_res_49;
         if (id_48) {
-          std::string id_50 { std::get<1>(*p_0) };
+          std::string id_50 { std::get<1 /* IndirectFile */>(*p_0) };
           uint32_t id_51 { (uint32_t)id_50.size() };
           Vec<1, uint32_t> id_52 {  id_51  };
           Pointer let_res_53;
@@ -399,7 +401,7 @@ static std::function<Pointer(::dessser::gen::output_specs::recipient*,Pointer)> 
             }
             let_res_53 = let_res_55;
           }
-          std::string id_87 { std::get<1>(*p_0) };
+          std::string id_87 { std::get<1 /* IndirectFile */>(*p_0) };
           Bytes id_88 { id_87 };
           Pointer id_89 { let_res_53.writeBytes(id_88) };
           choose_res_49 = id_89;
@@ -409,7 +411,7 @@ static std::function<Pointer(::dessser::gen::output_specs::recipient*,Pointer)> 
           bool id_92 { bool(id_90 == id_91) };
           Void id_93 { ((void)(assert(id_92)), VOID) };
           (void)id_93;
-          std::string id_94 { std::get<2>(*p_0) };
+          std::string id_94 { std::get<2 /* SyncKey */>(*p_0) };
           uint32_t id_95 { (uint32_t)id_94.size() };
           Vec<1, uint32_t> id_96 {  id_95  };
           Pointer let_res_97;
@@ -468,7 +470,7 @@ static std::function<Pointer(::dessser::gen::output_specs::recipient*,Pointer)> 
             }
             let_res_97 = let_res_99;
           }
-          std::string id_131 { std::get<2>(*p_0) };
+          std::string id_131 { std::get<2 /* SyncKey */>(*p_0) };
           Bytes id_132 { id_131 };
           Pointer id_133 { let_res_97.writeBytes(id_132) };
           choose_res_49 = id_133;
@@ -1095,7 +1097,7 @@ static std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_s
     if (id_399) {
       Size id_401 { 2UL };
       auto fun402 { dessser::gen::file_path::sersize_of_row_binary };
-      dessser::gen::file_path::t_ext id_403 { std::get<0>(*p_0) };
+      dessser::gen::file_path::t_ext id_403 { std::get<0 /* DirectFile */>(*p_0) };
       Size id_404 { fun402(id_403) };
       Size id_405 { Size(id_401 + id_404) };
       choose_res_400 = id_405;
@@ -1106,7 +1108,7 @@ static std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_s
       Size choose_res_409;
       if (id_408) {
         Size id_410 { 2UL };
-        std::string id_411 { std::get<1>(*p_0) };
+        std::string id_411 { std::get<1 /* IndirectFile */>(*p_0) };
         uint32_t id_412 { (uint32_t)id_411.size() };
         Vec<1, uint32_t> id_413 {  id_412  };
         Size let_res_414;
@@ -1145,7 +1147,7 @@ static std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_s
           }
           let_res_414 = let_res_417;
         }
-        std::string id_435 { std::get<1>(*p_0) };
+        std::string id_435 { std::get<1 /* IndirectFile */>(*p_0) };
         uint32_t id_436 { (uint32_t)id_435.size() };
         Size id_437 { Size(id_436) };
         Size id_438 { Size(let_res_414 + id_437) };
@@ -1158,7 +1160,7 @@ static std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_s
         Void id_443 { ((void)(assert(id_442)), VOID) };
         (void)id_443;
         Size id_444 { 2UL };
-        std::string id_445 { std::get<2>(*p_0) };
+        std::string id_445 { std::get<2 /* SyncKey */>(*p_0) };
         uint32_t id_446 { (uint32_t)id_445.size() };
         Vec<1, uint32_t> id_447 {  id_446  };
         Size let_res_448;
@@ -1197,7 +1199,7 @@ static std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_s
           }
           let_res_448 = let_res_451;
         }
-        std::string id_469 { std::get<2>(*p_0) };
+        std::string id_469 { std::get<2 /* SyncKey */>(*p_0) };
         uint32_t id_470 { (uint32_t)id_469.size() };
         Size id_471 { Size(id_470) };
         Size id_472 { Size(let_res_448 + id_471) };

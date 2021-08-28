@@ -23,17 +23,25 @@ typedef std::tuple<
 > t269f127ed3b1b265bbc0b9043d333314;
 
 struct t : public std::variant<
-  uint32_t,
-  ::dessser::gen::raql_binding_key::t269f127ed3b1b265bbc0b9043d333314,
-  dessser::gen::raql_variable::t_ext,
-  std::string
+  uint32_t, // State
+  ::dessser::gen::raql_binding_key::t269f127ed3b1b265bbc0b9043d333314, // RecordField
+  dessser::gen::raql_variable::t_ext, // RecordValue
+  std::string // Direct
 > { using variant::variant; };
+
+enum Constr_t {
+  State,
+  RecordField,
+  RecordValue,
+  Direct,
+};
+
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
-    case 3: os << std::get<3>(v); break;
+    case 0: os << "State " << std::get<0>(v); break;
+    case 1: os << "RecordField " << std::get<1>(v); break;
+    case 2: os << "RecordValue " << std::get<2>(v); break;
+    case 3: os << "Direct " << std::get<3>(v); break;
   }
   return os;
 }

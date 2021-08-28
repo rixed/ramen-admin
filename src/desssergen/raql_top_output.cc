@@ -31,10 +31,11 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void
+  Void, // Membership
+  Void, // Rank
+  Void // List
 > { using variant::variant; };
+
 typedef std::tuple<
   ::dessser::gen::raql_top_output::t*,
   Pointer

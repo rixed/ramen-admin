@@ -31,10 +31,11 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t : public std::variant<
-  Void,
-  Void,
-  Void
+  Void, // Collectd
+  Void, // NetflowV5
+  Void // Graphite
 > { using variant::variant; };
+
 typedef std::tuple<
   ::dessser::gen::raql_net_protocol::t*,
   Pointer

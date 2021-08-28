@@ -24,14 +24,20 @@ typedef std::tuple<
   dessser::gen::fq_function_name::t_ext
 > tf40d0e33ee7e61244eb0d101d73f35d2;
 
-struct tdb74c4acee71fb13194723c985502b12 : public std::variant<
-  dessser::gen::file_path::t_ext,
-  std::string
+struct t2dcaaead53e2477949a964d6de829472 : public std::variant<
+  dessser::gen::file_path::t_ext, // RingBuf
+  std::string // SyncKey
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, tdb74c4acee71fb13194723c985502b12 const &v) {
+
+enum Constr_t2dcaaead53e2477949a964d6de829472 {
+  RingBuf,
+  SyncKey,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t2dcaaead53e2477949a964d6de829472 const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
+    case 0: os << "RingBuf " << std::get<0>(v); break;
+    case 1: os << "SyncKey " << std::get<1>(v); break;
   }
   return os;
 }
@@ -39,7 +45,7 @@ inline std::ostream &operator<<(std::ostream &os, tdb74c4acee71fb13194723c985502
 struct t {
   uint16_t channel;
   Arr<::dessser::gen::replay::tf40d0e33ee7e61244eb0d101d73f35d2> links;
-  ::dessser::gen::replay::tdb74c4acee71fb13194723c985502b12 recipient;
+  ::dessser::gen::replay::t2dcaaead53e2477949a964d6de829472 recipient;
   double since;
   Arr<dessser::gen::fq_function_name::t_ext> sources;
   dessser::gen::fq_function_name::t_ext target;

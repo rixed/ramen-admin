@@ -16,23 +16,30 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t3b29732d115083d9f2d943d1afa3690d : public std::variant<
-  Void,
-  Void,
-  Void
+struct t652f68aa23f2c18d61b70156eeb125ea : public std::variant<
+  Void, // Program
+  Void, // Site
+  Void // Global
 > { using variant::variant; };
-inline std::ostream &operator<<(std::ostream &os, t3b29732d115083d9f2d943d1afa3690d const &v) {
+
+enum Constr_t652f68aa23f2c18d61b70156eeb125ea {
+  Program,
+  Site,
+  Global,
+};
+
+inline std::ostream &operator<<(std::ostream &os, t652f68aa23f2c18d61b70156eeb125ea const &v) {
   switch (v.index()) {
-    case 0: os << std::get<0>(v); break;
-    case 1: os << std::get<1>(v); break;
-    case 2: os << std::get<2>(v); break;
+    case 0: os << "Program " << std::get<0>(v); break;
+    case 1: os << "Site " << std::get<1>(v); break;
+    case 2: os << "Global " << std::get<2>(v); break;
   }
   return os;
 }
 
 struct t {
   dessser::gen::field_name::t_ext name;
-  ::dessser::gen::global_variable::t3b29732d115083d9f2d943d1afa3690d scope;
+  ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea scope;
   dessser::gen::raql_type::t_ext typ;
   bool operator==(t const &other) const {
     return name == other.name && scope == other.scope && typ == other.typ;
