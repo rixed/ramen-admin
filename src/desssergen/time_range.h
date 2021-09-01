@@ -14,15 +14,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tf7123493969c2e2f90159f6551344447 {
+struct tbc074f24e1fc732e4a138e805dac931f {
   bool growing;
   double since;
   double until;
-  bool operator==(tf7123493969c2e2f90159f6551344447 const &other) const {
+  tbc074f24e1fc732e4a138e805dac931f(bool growing_, double since_, double until_) : growing(growing_), since(since_), until(until_) {}
+  tbc074f24e1fc732e4a138e805dac931f() = default;
+  bool operator==(tbc074f24e1fc732e4a138e805dac931f const &other) const {
     return growing == other.growing && since == other.since && until == other.until;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, tf7123493969c2e2f90159f6551344447 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tbc074f24e1fc732e4a138e805dac931f const &r) {
   os << '{';
   os << "growing:" << r.growing << ',';
   os << "since:" << r.since << ',';
@@ -31,7 +33,7 @@ inline std::ostream &operator<<(std::ostream &os, tf7123493969c2e2f90159f6551344
   return os;
 }
 
-typedef Arr<::dessser::gen::time_range::tf7123493969c2e2f90159f6551344447> t;
+typedef Arr<::dessser::gen::time_range::tbc074f24e1fc732e4a138e805dac931f> t;
 typedef std::tuple<
   t,
   Pointer

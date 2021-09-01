@@ -9,6 +9,7 @@
 #include <QAbstractSocket>
 #include <QObject>
 #include <QString>
+#include <sodium.h>
 
 #include "SyncStatus.h"
 
@@ -51,13 +52,20 @@ private:
    * some are with a specific socket). */
   std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
 
+  // Used for secure channel (using libsodium)
+  unsigned char nonce[crypto_box_NONCEBYTES];
+  unsigned char srv_pub_key[crypto_box_PUBLICKEYBYTES];
+  unsigned char clt_pub_key[crypto_box_PUBLICKEYBYTES];
+  unsigned char clt_priv_key[crypto_box_SECRETKEYBYTES];
+  bool keySent = false;
+
   void fatalErr(QString const &errString);
 
   int sendAuth();
 
   int sendCmd(
     dessser::gen::sync_client_cmd::t const &,
-    bool confirm_success = true,
+    bool confirm_success = false,
     bool echo = true);
 
   int sendMsg(dessser::gen::sync_client_msg::t const &);
@@ -91,6 +99,8 @@ private:
   int recvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
   int startSynchronization();
+
+  bool isCrypted() const;
 
 public:
   // confserver as in "host:port"

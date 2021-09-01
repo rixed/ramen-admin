@@ -46,14 +46,16 @@ inline std::ostream &operator<<(std::ostream &os, tde68d14dd253c0005e157424dd8fc
   return os;
 }
 
-struct t3f15553b4c4a090da807c33b6aa2aa71 {
+struct t953aab1fe1aba5b6c1cf1af5981bef40 {
   uint32_t skipped;
   Bytes values;
-  bool operator==(t3f15553b4c4a090da807c33b6aa2aa71 const &other) const {
+  t953aab1fe1aba5b6c1cf1af5981bef40(uint32_t skipped_, Bytes values_) : skipped(skipped_), values(values_) {}
+  t953aab1fe1aba5b6c1cf1af5981bef40() = default;
+  bool operator==(t953aab1fe1aba5b6c1cf1af5981bef40 const &other) const {
     return skipped == other.skipped && values == other.values;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t3f15553b4c4a090da807c33b6aa2aa71 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t953aab1fe1aba5b6c1cf1af5981bef40 const &r) {
   os << '{';
   os << "skipped:" << r.skipped << ',';
   os << "values:" << r.values;
@@ -66,7 +68,7 @@ struct t : public std::variant<
   dessser::gen::worker::t_ext, // Worker
   dessser::gen::retention::t_ext, // Retention
   dessser::gen::time_range::t_ext, // TimeRange
-  Arr<::dessser::gen::sync_value::t3f15553b4c4a090da807c33b6aa2aa71>, // Tuples
+  Arr<::dessser::gen::sync_value::t953aab1fe1aba5b6c1cf1af5981bef40>, // Tuples
   dessser::gen::raql_value::t_ext, // RamenValue
   dessser::gen::target_config::t_ext, // TargetConfig
   dessser::gen::source_info::t_ext, // SourceInfo

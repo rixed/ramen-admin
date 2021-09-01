@@ -35,6 +35,8 @@ struct t {
   dessser::gen::field_name::t_ext lhs;
   std::string op;
   std::string rhs;
+  t(dessser::gen::field_name::t_ext lhs_, std::string op_, std::string rhs_) : lhs(lhs_), op(op_), rhs(rhs_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return lhs == other.lhs && op == other.op && rhs == other.rhs;
   }

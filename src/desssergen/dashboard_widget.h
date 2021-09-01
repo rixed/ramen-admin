@@ -33,15 +33,17 @@ inline std::ostream &operator<<(std::ostream &os, tf285c6d4be19a8e3e994b3792fed4
   return os;
 }
 
-struct tba7ef6a2b89382f283b750ac4fbf5e6d {
+struct td829267f693347bdfd48821a09eebaae {
   bool force_zero;
   bool left;
   ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale;
-  bool operator==(tba7ef6a2b89382f283b750ac4fbf5e6d const &other) const {
+  td829267f693347bdfd48821a09eebaae(bool force_zero_, bool left_, ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
+  td829267f693347bdfd48821a09eebaae() = default;
+  bool operator==(td829267f693347bdfd48821a09eebaae const &other) const {
     return force_zero == other.force_zero && left == other.left && scale == other.scale;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, tba7ef6a2b89382f283b750ac4fbf5e6d const &r) {
+inline std::ostream &operator<<(std::ostream &os, td829267f693347bdfd48821a09eebaae const &r) {
   os << '{';
   os << "force_zero:" << r.force_zero << ',';
   os << "left:" << r.left << ',';
@@ -74,18 +76,20 @@ inline std::ostream &operator<<(std::ostream &os, tc758d36a6b58d564436d5e1104817
   return os;
 }
 
-struct t4419d30cb2b0a80e59ffc034e0c20136 {
+struct tb51b41a880c2ae6dd20d6e8d4b27e71f {
   uint8_t axis;
   uint32_t color;
   std::string column;
   Arr<std::string> factors;
   double opacity;
   ::dessser::gen::dashboard_widget::tc758d36a6b58d564436d5e1104817704 representation;
-  bool operator==(t4419d30cb2b0a80e59ffc034e0c20136 const &other) const {
+  tb51b41a880c2ae6dd20d6e8d4b27e71f(uint8_t axis_, uint32_t color_, std::string column_, Arr<std::string> factors_, double opacity_, ::dessser::gen::dashboard_widget::tc758d36a6b58d564436d5e1104817704 representation_) : axis(axis_), color(color_), column(column_), factors(factors_), opacity(opacity_), representation(representation_) {}
+  tb51b41a880c2ae6dd20d6e8d4b27e71f() = default;
+  bool operator==(tb51b41a880c2ae6dd20d6e8d4b27e71f const &other) const {
     return axis == other.axis && color == other.color && column == other.column && factors == other.factors && opacity == other.opacity && representation == other.representation;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t4419d30cb2b0a80e59ffc034e0c20136 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tb51b41a880c2ae6dd20d6e8d4b27e71f const &r) {
   os << '{';
   os << "axis:" << r.axis << ',';
   os << "color:" << r.color << ',';
@@ -97,15 +101,17 @@ inline std::ostream &operator<<(std::ostream &os, t4419d30cb2b0a80e59ffc034e0c20
   return os;
 }
 
-struct te656ad6c7a50d20bed39c72121f1bc2d {
-  Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> fields;
+struct t2958b4be951f2940fe1f4fe3e7336e60 {
+  Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> fields;
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  bool operator==(te656ad6c7a50d20bed39c72121f1bc2d const &other) const {
+  t2958b4be951f2940fe1f4fe3e7336e60(Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
+  t2958b4be951f2940fe1f4fe3e7336e60() = default;
+  bool operator==(t2958b4be951f2940fe1f4fe3e7336e60 const &other) const {
     return fields == other.fields && name == other.name && visible == other.visible;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, te656ad6c7a50d20bed39c72121f1bc2d const &r) {
+inline std::ostream &operator<<(std::ostream &os, t2958b4be951f2940fe1f4fe3e7336e60 const &r) {
   os << '{';
   os << "fields:" << r.fields << ',';
   os << "name:" << r.name << ',';
@@ -129,16 +135,18 @@ inline std::ostream &operator<<(std::ostream &os, t3ef59f16a0cdd3a9e330e7c5bf93b
   return os;
 }
 
-struct ta1f207834d08b85ce654fc130a9cb3fc {
-  Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> Chart_axis;
-  Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> sources;
+struct t5383e291bb0cfc4e60684e58d6fb9e1a {
+  Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> Chart_axis;
+  Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> sources;
   std::string title;
   ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type;
-  bool operator==(ta1f207834d08b85ce654fc130a9cb3fc const &other) const {
+  t5383e291bb0cfc4e60684e58d6fb9e1a(Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> Chart_axis_, Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> sources_, std::string title_, ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type_) : Chart_axis(Chart_axis_), sources(sources_), title(title_), type(type_) {}
+  t5383e291bb0cfc4e60684e58d6fb9e1a() = default;
+  bool operator==(t5383e291bb0cfc4e60684e58d6fb9e1a const &other) const {
     return Chart_axis == other.Chart_axis && sources == other.sources && title == other.title && type == other.type;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, ta1f207834d08b85ce654fc130a9cb3fc const &r) {
+inline std::ostream &operator<<(std::ostream &os, t5383e291bb0cfc4e60684e58d6fb9e1a const &r) {
   os << '{';
   os << "Chart_axis:" << r.Chart_axis << ',';
   os << "sources:" << r.sources << ',';
@@ -150,7 +158,7 @@ inline std::ostream &operator<<(std::ostream &os, ta1f207834d08b85ce654fc130a9cb
 
 struct t : public std::variant<
   std::string, // Text
-  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc // Chart
+  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a // Chart
 > { using variant::variant; };
 
 enum Constr_t {

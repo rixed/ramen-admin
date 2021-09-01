@@ -52,6 +52,8 @@ struct t {
   std::string target_fieldmask;
   double timeout_date;
   double until;
+  t(uint16_t channel_, Arr<::dessser::gen::replay::tf40d0e33ee7e61244eb0d101d73f35d2> links_, ::dessser::gen::replay::t2dcaaead53e2477949a964d6de829472 recipient_, double since_, Arr<dessser::gen::fq_function_name::t_ext> sources_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double timeout_date_, double until_) : channel(channel_), links(links_), recipient(recipient_), since(since_), sources(sources_), target(target_), target_fieldmask(target_fieldmask_), timeout_date(timeout_date_), until(until_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return channel == other.channel && links == other.links && recipient == other.recipient && since == other.since && sources == other.sources && target == other.target && target_fieldmask == other.target_fieldmask && timeout_date == other.timeout_date && until == other.until;
   }

@@ -36,6 +36,8 @@ struct t {
   std::string what;
   std::string who;
   std::string why;
+  t(double start_date_, double stop_date_, std::string what_, std::string who_, std::string why_) : start_date(start_date_), stop_date(stop_date_), what(what_), who(who_), why(why_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return start_date == other.start_date && stop_date == other.stop_date && what == other.what && who == other.who && why == other.why;
   }

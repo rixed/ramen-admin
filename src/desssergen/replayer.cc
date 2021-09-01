@@ -38,6 +38,8 @@ struct t {
   double last_killed;
   std::optional<uint32_t> pid;
   dessser::gen::time_range::t_ext time_range;
+  t(Arr<uint16_t> channels_, double creation_, std::optional<std::string> exit_status_, double last_killed_, std::optional<uint32_t> pid_, dessser::gen::time_range::t_ext time_range_) : channels(channels_), creation(creation_), exit_status(exit_status_), last_killed(last_killed_), pid(pid_), time_range(time_range_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return channels == other.channels && creation == other.creation && exit_status == other.exit_status && last_killed == other.last_killed && pid == other.pid && time_range == other.time_range;
   }

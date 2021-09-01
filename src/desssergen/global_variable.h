@@ -41,6 +41,8 @@ struct t {
   dessser::gen::field_name::t_ext name;
   ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea scope;
   dessser::gen::raql_type::t_ext typ;
+  t(dessser::gen::field_name::t_ext name_, ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea scope_, dessser::gen::raql_type::t_ext typ_) : name(name_), scope(scope_), typ(typ_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return name == other.name && scope == other.scope && typ == other.typ;
   }

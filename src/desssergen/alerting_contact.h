@@ -14,15 +14,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t6856af1ea1ed3febe9b67e297a8e0a96 {
+struct tedc744b39731429fd332c70a96eff197 {
   std::string create;
   std::string file;
   std::string insert;
-  bool operator==(t6856af1ea1ed3febe9b67e297a8e0a96 const &other) const {
+  tedc744b39731429fd332c70a96eff197(std::string create_, std::string file_, std::string insert_) : create(create_), file(file_), insert(insert_) {}
+  tedc744b39731429fd332c70a96eff197() = default;
+  bool operator==(tedc744b39731429fd332c70a96eff197 const &other) const {
     return create == other.create && file == other.file && insert == other.insert;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t6856af1ea1ed3febe9b67e297a8e0a96 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tedc744b39731429fd332c70a96eff197 const &r) {
   os << '{';
   os << "create:" << r.create << ',';
   os << "file:" << r.file << ',';
@@ -36,16 +38,18 @@ typedef std::tuple<
   std::string
 > t8961925d22ebc35140986110e41bc2a4;
 
-struct t69017581c1f2e755676a8d0209b65424 {
+struct ta162576a07cfd299a8ff50304d654002 {
   Lst<::dessser::gen::alerting_contact::t8961925d22ebc35140986110e41bc2a4> options;
   uint16_t partition;
   std::string text;
   std::string topic;
-  bool operator==(t69017581c1f2e755676a8d0209b65424 const &other) const {
+  ta162576a07cfd299a8ff50304d654002(Lst<::dessser::gen::alerting_contact::t8961925d22ebc35140986110e41bc2a4> options_, uint16_t partition_, std::string text_, std::string topic_) : options(options_), partition(partition_), text(text_), topic(topic_) {}
+  ta162576a07cfd299a8ff50304d654002() = default;
+  bool operator==(ta162576a07cfd299a8ff50304d654002 const &other) const {
     return options == other.options && partition == other.partition && text == other.text && topic == other.topic;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t69017581c1f2e755676a8d0209b65424 const &r) {
+inline std::ostream &operator<<(std::ostream &os, ta162576a07cfd299a8ff50304d654002 const &r) {
   os << '{';
   os << "options:" << r.options << ',';
   os << "partition:" << r.partition << ',';
@@ -55,15 +59,15 @@ inline std::ostream &operator<<(std::ostream &os, t69017581c1f2e755676a8d0209b65
   return os;
 }
 
-struct tfc1ed51556c0dcb5f30eeb6eb99a25a4 : public std::variant<
+struct t6bd20739e5344fd740c540830f53c5c4 : public std::variant<
   Void, // Ignore
   std::string, // Exec
   std::string, // SysLog
-  ::dessser::gen::alerting_contact::t6856af1ea1ed3febe9b67e297a8e0a96, // Sqlite
-  ::dessser::gen::alerting_contact::t69017581c1f2e755676a8d0209b65424 // Kafka
+  ::dessser::gen::alerting_contact::tedc744b39731429fd332c70a96eff197, // Sqlite
+  ::dessser::gen::alerting_contact::ta162576a07cfd299a8ff50304d654002 // Kafka
 > { using variant::variant; };
 
-enum Constr_tfc1ed51556c0dcb5f30eeb6eb99a25a4 {
+enum Constr_t6bd20739e5344fd740c540830f53c5c4 {
   Ignore,
   Exec,
   SysLog,
@@ -71,7 +75,7 @@ enum Constr_tfc1ed51556c0dcb5f30eeb6eb99a25a4 {
   Kafka,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tfc1ed51556c0dcb5f30eeb6eb99a25a4 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t6bd20739e5344fd740c540830f53c5c4 const &v) {
   switch (v.index()) {
     case 0: os << "Ignore " << std::get<0>(v); break;
     case 1: os << "Exec " << std::get<1>(v); break;
@@ -84,7 +88,9 @@ inline std::ostream &operator<<(std::ostream &os, tfc1ed51556c0dcb5f30eeb6eb99a2
 
 struct t {
   double timeout;
-  ::dessser::gen::alerting_contact::tfc1ed51556c0dcb5f30eeb6eb99a25a4 via;
+  ::dessser::gen::alerting_contact::t6bd20739e5344fd740c540830f53c5c4 via;
+  t(double timeout_, ::dessser::gen::alerting_contact::t6bd20739e5344fd740c540830f53c5c4 via_) : timeout(timeout_), via(via_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return timeout == other.timeout && via == other.via;
   }

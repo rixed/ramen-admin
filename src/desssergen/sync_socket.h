@@ -35,6 +35,8 @@ inline std::ostream &operator<<(std::ostream &os, tb689860ac91fca7822797a026958e
 struct t {
   ::dessser::gen::sync_socket::tb689860ac91fca7822797a026958e891 ip;
   uint16_t port;
+  t(::dessser::gen::sync_socket::tb689860ac91fca7822797a026958e891 ip_, uint16_t port_) : ip(ip_), port(port_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return ip == other.ip && port == other.port;
   }

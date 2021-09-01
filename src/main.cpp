@@ -1,12 +1,13 @@
 #include <cassert>
+#include <cstdlib>
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include <QAbstractSocket>
 #include <QApplication>
 #include <QDebug>
 #include <QCommandLineParser>
 #include <QVector>
+#include <sodium.h>
 
 #include "ConfClient.h"
 #include "UserIdentity.h"
@@ -14,6 +15,11 @@
 
 int main(int argc, char *argv[])
 {
+  if (sodium_init() < 0) {
+    std::cerr << "Cannot initialize libsodium!?" << std::endl;
+    return 1;
+  }
+
   QApplication app(argc, argv);
   QCoreApplication::setOrganizationName("Accedian");
   QCoreApplication::setOrganizationDomain("accedian.com");
@@ -49,7 +55,7 @@ int main(int argc, char *argv[])
     qCritical() << "Identity file" << idFile << "is not valid";
     return 1;
   }
-  ConfClient *client = new ConfClient("localhost:29340", "rixed", id, nullptr);
+  ConfClient *client = new ConfClient("localhost:29341", "rixed", id, nullptr);
 
   int ret = app.exec();
 

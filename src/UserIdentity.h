@@ -12,6 +12,7 @@ struct UserIdentity
 {
   bool isValid;
   QString username;
+  // All keys are kept in z85 encoded format (for the day they become editable):
   QString srv_pub_key;
   QString clt_pub_key;
   QString clt_priv_key;

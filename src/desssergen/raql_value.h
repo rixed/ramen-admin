@@ -32,14 +32,16 @@ inline std::ostream &operator<<(std::ostream &os, tb689860ac91fca7822797a026958e
   return os;
 }
 
-struct t074fe1006a6c676e40bcb7eaac3b15fb {
+struct t7ccce890087e1d1590c7df50bbb5dedc {
   uint32_t Cidr4_ip;
   uint8_t Cidr4_mask;
-  bool operator==(t074fe1006a6c676e40bcb7eaac3b15fb const &other) const {
+  t7ccce890087e1d1590c7df50bbb5dedc(uint32_t Cidr4_ip_, uint8_t Cidr4_mask_) : Cidr4_ip(Cidr4_ip_), Cidr4_mask(Cidr4_mask_) {}
+  t7ccce890087e1d1590c7df50bbb5dedc() = default;
+  bool operator==(t7ccce890087e1d1590c7df50bbb5dedc const &other) const {
     return Cidr4_ip == other.Cidr4_ip && Cidr4_mask == other.Cidr4_mask;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t074fe1006a6c676e40bcb7eaac3b15fb const &r) {
+inline std::ostream &operator<<(std::ostream &os, t7ccce890087e1d1590c7df50bbb5dedc const &r) {
   os << '{';
   os << "Cidr4_ip:" << r.Cidr4_ip << ',';
   os << "Cidr4_mask:" << r.Cidr4_mask;
@@ -47,14 +49,16 @@ inline std::ostream &operator<<(std::ostream &os, t074fe1006a6c676e40bcb7eaac3b1
   return os;
 }
 
-struct t3e9b102ed27e7e8bc762d9474f81358a {
+struct t7d6e94f701896afa22229dc87f5225a1 {
   uint128_t ip;
   uint8_t mask;
-  bool operator==(t3e9b102ed27e7e8bc762d9474f81358a const &other) const {
+  t7d6e94f701896afa22229dc87f5225a1(uint128_t ip_, uint8_t mask_) : ip(ip_), mask(mask_) {}
+  t7d6e94f701896afa22229dc87f5225a1() = default;
+  bool operator==(t7d6e94f701896afa22229dc87f5225a1 const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t3e9b102ed27e7e8bc762d9474f81358a const &r) {
+inline std::ostream &operator<<(std::ostream &os, t7d6e94f701896afa22229dc87f5225a1 const &r) {
   os << '{';
   os << "ip:" << r.ip << ',';
   os << "mask:" << r.mask;
@@ -62,17 +66,17 @@ inline std::ostream &operator<<(std::ostream &os, t3e9b102ed27e7e8bc762d9474f813
   return os;
 }
 
-struct t448a9c4ace50114e6f15d3f43eab32d1 : public std::variant<
-  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb, // v4
-  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a // v6
+struct tbb8f59fe54579f629154765675a23df7 : public std::variant<
+  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc, // v4
+  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 // v6
 > { using variant::variant; };
 
-enum Constr_t448a9c4ace50114e6f15d3f43eab32d1 {
+enum Constr_tbb8f59fe54579f629154765675a23df7 {
   v4,
   v6,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t448a9c4ace50114e6f15d3f43eab32d1 const &v) {
+inline std::ostream &operator<<(std::ostream &os, tbb8f59fe54579f629154765675a23df7 const &v) {
   switch (v.index()) {
     case 0: os << "v4 " << std::get<0>(v); break;
     case 1: os << "v6 " << std::get<1>(v); break;
@@ -149,9 +153,9 @@ struct t : public std::variant<
   uint32_t, // VIpv4
   uint128_t, // VIpv6
   ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891, // VIp
-  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb, // VCidrv4
-  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a, // VCidrv6
-  ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1, // VCidr
+  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc, // VCidrv4
+  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1, // VCidrv6
+  ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7, // VCidr
   Arr<t*>, // VTup
   Arr<t*>, // VVec
   Arr<t*>, // VLst

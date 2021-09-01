@@ -21,6 +21,8 @@ struct t {
   double since;
   dessser::gen::fq_function_name::t_ext target;
   double until;
+  t(bool explain_, std::string resp_key_, double since_, dessser::gen::fq_function_name::t_ext target_, double until_) : explain(explain_), resp_key(resp_key_), since(since_), target(target_), until(until_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return explain == other.explain && resp_key == other.resp_key && since == other.since && target == other.target && until == other.until;
   }

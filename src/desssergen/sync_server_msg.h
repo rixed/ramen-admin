@@ -22,16 +22,18 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t5164a104e605b6dce54d0f57d22a5894 {
+struct tdede7dcfe50dc5829e84b1a223a9ca56 {
   dessser::gen::sync_key::t_ext SetKey_k;
   double SetKey_mtime;
   std::string SetKey_uid;
   dessser::gen::sync_value::t_ext SetKey_v;
-  bool operator==(t5164a104e605b6dce54d0f57d22a5894 const &other) const {
+  tdede7dcfe50dc5829e84b1a223a9ca56(dessser::gen::sync_key::t_ext SetKey_k_, double SetKey_mtime_, std::string SetKey_uid_, dessser::gen::sync_value::t_ext SetKey_v_) : SetKey_k(SetKey_k_), SetKey_mtime(SetKey_mtime_), SetKey_uid(SetKey_uid_), SetKey_v(SetKey_v_) {}
+  tdede7dcfe50dc5829e84b1a223a9ca56() = default;
+  bool operator==(tdede7dcfe50dc5829e84b1a223a9ca56 const &other) const {
     return SetKey_k == other.SetKey_k && SetKey_mtime == other.SetKey_mtime && SetKey_uid == other.SetKey_uid && SetKey_v == other.SetKey_v;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t5164a104e605b6dce54d0f57d22a5894 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tdede7dcfe50dc5829e84b1a223a9ca56 const &r) {
   os << '{';
   os << "SetKey_k:" << r.SetKey_k << ',';
   os << "SetKey_mtime:" << r.SetKey_mtime << ',';
@@ -41,7 +43,7 @@ inline std::ostream &operator<<(std::ostream &os, t5164a104e605b6dce54d0f57d22a5
   return os;
 }
 
-struct td7f54760c6b35c56c79efedd08574240 {
+struct t3a18f48c3a115a4f3bfc2673fde8256e {
   bool can_del;
   bool can_write;
   double NewKey_expiry;
@@ -50,11 +52,13 @@ struct td7f54760c6b35c56c79efedd08574240 {
   std::string NewKey_owner;
   std::string uid;
   dessser::gen::sync_value::t_ext v;
-  bool operator==(td7f54760c6b35c56c79efedd08574240 const &other) const {
+  t3a18f48c3a115a4f3bfc2673fde8256e(bool can_del_, bool can_write_, double NewKey_expiry_, dessser::gen::sync_key::t_ext NewKey_k_, double mtime_, std::string NewKey_owner_, std::string uid_, dessser::gen::sync_value::t_ext v_) : can_del(can_del_), can_write(can_write_), NewKey_expiry(NewKey_expiry_), NewKey_k(NewKey_k_), mtime(mtime_), NewKey_owner(NewKey_owner_), uid(uid_), v(v_) {}
+  t3a18f48c3a115a4f3bfc2673fde8256e() = default;
+  bool operator==(t3a18f48c3a115a4f3bfc2673fde8256e const &other) const {
     return can_del == other.can_del && can_write == other.can_write && NewKey_expiry == other.NewKey_expiry && NewKey_k == other.NewKey_k && mtime == other.mtime && NewKey_owner == other.NewKey_owner && uid == other.uid && v == other.v;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, td7f54760c6b35c56c79efedd08574240 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t3a18f48c3a115a4f3bfc2673fde8256e const &r) {
   os << '{';
   os << "can_del:" << r.can_del << ',';
   os << "can_write:" << r.can_write << ',';
@@ -68,15 +72,17 @@ inline std::ostream &operator<<(std::ostream &os, td7f54760c6b35c56c79efedd08574
   return os;
 }
 
-struct ta33518bab5ce39f29507a4782b59d374 {
+struct t029dea8edf53c9683800a1dd54e0f222 {
   double expiry;
   dessser::gen::sync_key::t_ext k;
   std::string owner;
-  bool operator==(ta33518bab5ce39f29507a4782b59d374 const &other) const {
+  t029dea8edf53c9683800a1dd54e0f222(double expiry_, dessser::gen::sync_key::t_ext k_, std::string owner_) : expiry(expiry_), k(k_), owner(owner_) {}
+  t029dea8edf53c9683800a1dd54e0f222() = default;
+  bool operator==(t029dea8edf53c9683800a1dd54e0f222 const &other) const {
     return expiry == other.expiry && k == other.k && owner == other.owner;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, ta33518bab5ce39f29507a4782b59d374 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t029dea8edf53c9683800a1dd54e0f222 const &r) {
   os << '{';
   os << "expiry:" << r.expiry << ',';
   os << "k:" << r.k << ',';
@@ -88,10 +94,10 @@ inline std::ostream &operator<<(std::ostream &os, ta33518bab5ce39f29507a4782b59d
 struct t : public std::variant<
   dessser::gen::sync_socket::t_ext, // AuthOk
   std::string, // AuthErr
-  ::dessser::gen::sync_server_msg::t5164a104e605b6dce54d0f57d22a5894, // SetKey
-  ::dessser::gen::sync_server_msg::td7f54760c6b35c56c79efedd08574240, // NewKey
+  ::dessser::gen::sync_server_msg::tdede7dcfe50dc5829e84b1a223a9ca56, // SetKey
+  ::dessser::gen::sync_server_msg::t3a18f48c3a115a4f3bfc2673fde8256e, // NewKey
   dessser::gen::sync_key::t_ext, // DelKey
-  ::dessser::gen::sync_server_msg::ta33518bab5ce39f29507a4782b59d374, // LockKey
+  ::dessser::gen::sync_server_msg::t029dea8edf53c9683800a1dd54e0f222, // LockKey
   dessser::gen::sync_key::t_ext // UnlockKey
 > { using variant::variant; };
 

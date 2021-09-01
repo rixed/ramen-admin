@@ -14,41 +14,28 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tdb9685b762777dddeea8bb04805eb8cf {
-  Bytes SendSessionKey_message;
-  Bytes SendSessionKey_nonce;
+struct t8e318f9b56dd08757b5d842d3860cfce {
+  Bytes message;
+  Bytes nonce;
   Bytes public_key;
-  bool operator==(tdb9685b762777dddeea8bb04805eb8cf const &other) const {
-    return SendSessionKey_message == other.SendSessionKey_message && SendSessionKey_nonce == other.SendSessionKey_nonce && public_key == other.public_key;
+  t8e318f9b56dd08757b5d842d3860cfce(Bytes message_, Bytes nonce_, Bytes public_key_) : message(message_), nonce(nonce_), public_key(public_key_) {}
+  t8e318f9b56dd08757b5d842d3860cfce() = default;
+  bool operator==(t8e318f9b56dd08757b5d842d3860cfce const &other) const {
+    return message == other.message && nonce == other.nonce && public_key == other.public_key;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, tdb9685b762777dddeea8bb04805eb8cf const &r) {
+inline std::ostream &operator<<(std::ostream &os, t8e318f9b56dd08757b5d842d3860cfce const &r) {
   os << '{';
-  os << "SendSessionKey_message:" << r.SendSessionKey_message << ',';
-  os << "SendSessionKey_nonce:" << r.SendSessionKey_nonce << ',';
+  os << "message:" << r.message << ',';
+  os << "nonce:" << r.nonce << ',';
   os << "public_key:" << r.public_key;
   os << '}';
   return os;
 }
 
-struct t10b7d87ea3b6637868bb9b5cc57e7b11 {
-  Bytes message;
-  Bytes nonce;
-  bool operator==(t10b7d87ea3b6637868bb9b5cc57e7b11 const &other) const {
-    return message == other.message && nonce == other.nonce;
-  }
-};
-inline std::ostream &operator<<(std::ostream &os, t10b7d87ea3b6637868bb9b5cc57e7b11 const &r) {
-  os << '{';
-  os << "message:" << r.message << ',';
-  os << "nonce:" << r.nonce;
-  os << '}';
-  return os;
-}
-
 struct t : public std::variant<
-  ::dessser::gen::sync_msg::tdb9685b762777dddeea8bb04805eb8cf, // SendSessionKey
-  ::dessser::gen::sync_msg::t10b7d87ea3b6637868bb9b5cc57e7b11, // Crypted
+  ::dessser::gen::sync_msg::t8e318f9b56dd08757b5d842d3860cfce, // SendSessionKey
+  Bytes, // Crypted
   Bytes, // ClearText
   std::string // Error
 > { using variant::variant; };

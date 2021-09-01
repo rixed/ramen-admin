@@ -37,6 +37,8 @@ struct t {
   dessser::gen::field_name::t_ext alias;
   std::string doc;
   dessser::gen::raql_expr::t_ext expr;
+  t(std::optional<std::string> aggr_, dessser::gen::field_name::t_ext alias_, std::string doc_, dessser::gen::raql_expr::t_ext expr_) : aggr(aggr_), alias(alias_), doc(doc_), expr(expr_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return aggr == other.aggr && alias == other.alias && doc == other.doc && expr == other.expr;
   }

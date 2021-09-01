@@ -19,6 +19,8 @@ using dessser::operator<<;
 struct t {
   dessser::gen::field_type::t_ext ptyp;
   dessser::gen::raql_value::t_ext value;
+  t(dessser::gen::field_type::t_ext ptyp_, dessser::gen::raql_value::t_ext value_) : ptyp(ptyp_), value(value_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return ptyp == other.ptyp && value == other.value;
   }

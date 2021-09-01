@@ -21,6 +21,8 @@ struct t {
   dessser::gen::function_name::t_ext func;
   dessser::gen::program_name::t_ext program;
   dessser::gen::site_name::t_ext site;
+  t(dessser::gen::function_name::t_ext func_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : func(func_), program(program_), site(site_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return func == other.func && program == other.program && site == other.site;
   }

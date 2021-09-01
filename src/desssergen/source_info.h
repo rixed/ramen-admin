@@ -33,6 +33,8 @@ struct compiled_func {
   dessser::gen::raql_type::t_ext out_record;
   std::optional<dessser::gen::retention::t_ext> retention;
   std::string signature;
+  compiled_func(std::string doc_, Lst<dessser::gen::field_name::t_ext> factors_, std::string in_signature_, bool is_lazy_, dessser::gen::function_name::t_ext name_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, std::optional<dessser::gen::retention::t_ext> retention_, std::string signature_) : doc(doc_), factors(factors_), in_signature(in_signature_), is_lazy(is_lazy_), name(name_), operation(operation_), out_record(out_record_), retention(retention_), signature(signature_) {}
+  compiled_func() = default;
   bool operator==(compiled_func const &other) const {
     return doc == other.doc && factors == other.factors && in_signature == other.in_signature && is_lazy == other.is_lazy && name == other.name && operation == other.operation && out_record == other.out_record && retention == other.retention && signature == other.signature;
   }
@@ -57,6 +59,8 @@ struct compiled_program {
   Lst<dessser::gen::program_parameter::t_ext> default_params;
   Lst<::dessser::gen::source_info::compiled_func*> funcs;
   Lst<dessser::gen::global_variable::t_ext> globals;
+  compiled_program(dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::program_parameter::t_ext> default_params_, Lst<::dessser::gen::source_info::compiled_func*> funcs_, Lst<dessser::gen::global_variable::t_ext> globals_) : condition(condition_), default_params(default_params_), funcs(funcs_), globals(globals_) {}
+  compiled_program() = default;
   bool operator==(compiled_program const &other) const {
     return condition == other.condition && default_params == other.default_params && funcs == other.funcs && globals == other.globals;
   }
@@ -71,14 +75,16 @@ inline std::ostream &operator<<(std::ostream &os, compiled_program const &r) {
   return os;
 }
 
-struct tcf61baf1ca251368717dff4345cd4bfb {
+struct t8100aa66a1cd239db571dfaa7d44577b {
   std::optional<dessser::gen::src_path::t_ext> depends_on;
   std::string err_msg;
-  bool operator==(tcf61baf1ca251368717dff4345cd4bfb const &other) const {
+  t8100aa66a1cd239db571dfaa7d44577b(std::optional<dessser::gen::src_path::t_ext> depends_on_, std::string err_msg_) : depends_on(depends_on_), err_msg(err_msg_) {}
+  t8100aa66a1cd239db571dfaa7d44577b() = default;
+  bool operator==(t8100aa66a1cd239db571dfaa7d44577b const &other) const {
     return depends_on == other.depends_on && err_msg == other.err_msg;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, tcf61baf1ca251368717dff4345cd4bfb const &r) {
+inline std::ostream &operator<<(std::ostream &os, t8100aa66a1cd239db571dfaa7d44577b const &r) {
   os << '{';
   os << "depends_on:" << r.depends_on << ',';
   os << "err_msg:" << r.err_msg;
@@ -86,17 +92,17 @@ inline std::ostream &operator<<(std::ostream &os, tcf61baf1ca251368717dff4345cd4
   return os;
 }
 
-struct t6ac3210567b19e88b41ebcefc5642eee : public std::variant<
+struct t5f384f7916a2ad2c8006a89d10acc591 : public std::variant<
   ::dessser::gen::source_info::compiled_program*, // Compiled
-  ::dessser::gen::source_info::tcf61baf1ca251368717dff4345cd4bfb // Failed
+  ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b // Failed
 > { using variant::variant; };
 
-enum Constr_t6ac3210567b19e88b41ebcefc5642eee {
+enum Constr_t5f384f7916a2ad2c8006a89d10acc591 {
   Compiled,
   Failed,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t6ac3210567b19e88b41ebcefc5642eee const &v) {
+inline std::ostream &operator<<(std::ostream &os, t5f384f7916a2ad2c8006a89d10acc591 const &v) {
   switch (v.index()) {
     case 0: os << "Compiled " << std::get<0>(v); break;
     case 1: os << "Failed " << std::get<1>(v); break;
@@ -105,9 +111,11 @@ inline std::ostream &operator<<(std::ostream &os, t6ac3210567b19e88b41ebcefc5642
 }
 
 struct t {
-  ::dessser::gen::source_info::t6ac3210567b19e88b41ebcefc5642eee detail;
+  ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 detail;
   Lst<std::string> md5s;
   std::string src_ext;
+  t(::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return detail == other.detail && md5s == other.md5s && src_ext == other.src_ext;
   }

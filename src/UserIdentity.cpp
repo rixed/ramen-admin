@@ -45,7 +45,7 @@ UserIdentity::UserIdentity(QFile &file)
       complain(file, "Cannot find/parse " name); \
       break; \
     } \
-    field = obj[name].toString();
+    field = obj[name].toString()
 
     GET(username, "username");
     GET(srv_pub_key, "server_public_key");

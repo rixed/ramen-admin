@@ -49,6 +49,8 @@ struct t {
   bool test;
   double timeout;
   dessser::gen::fq_name::t_ext worker;
+  t(double certainty_, double debounce_, std::optional<double> event_time_, bool firing_, std::string name_, Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> parameters_, double sent_time_, dessser::gen::site_name::t_ext site_, bool test_, double timeout_, dessser::gen::fq_name::t_ext worker_) : certainty(certainty_), debounce(debounce_), event_time(event_time_), firing(firing_), name(name_), parameters(parameters_), sent_time(sent_time_), site(site_), test(test_), timeout(timeout_), worker(worker_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return certainty == other.certainty && debounce == other.debounce && event_time == other.event_time && firing == other.firing && name == other.name && parameters == other.parameters && sent_time == other.sent_time && site == other.site && test == other.test && timeout == other.timeout && worker == other.worker;
   }

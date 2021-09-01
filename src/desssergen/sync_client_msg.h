@@ -20,6 +20,8 @@ struct t {
   bool confirm_success;
   bool echo;
   uint32_t seq;
+  t(dessser::gen::sync_client_cmd::t_ext cmd_, bool confirm_success_, bool echo_, uint32_t seq_) : cmd(cmd_), confirm_success(confirm_success_), echo(echo_), seq(seq_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return cmd == other.cmd && confirm_success == other.confirm_success && echo == other.echo && seq == other.seq;
   }

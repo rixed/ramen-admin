@@ -35,23 +35,27 @@ struct tb689860ac91fca7822797a026958e891 : public std::variant<
   uint128_t // v6
 > { using variant::variant; };
 
-struct t074fe1006a6c676e40bcb7eaac3b15fb {
+struct t7ccce890087e1d1590c7df50bbb5dedc {
   uint32_t Cidr4_ip;
   uint8_t Cidr4_mask;
-  bool operator==(t074fe1006a6c676e40bcb7eaac3b15fb const &other) const {
+  t7ccce890087e1d1590c7df50bbb5dedc(uint32_t Cidr4_ip_, uint8_t Cidr4_mask_) : Cidr4_ip(Cidr4_ip_), Cidr4_mask(Cidr4_mask_) {}
+  t7ccce890087e1d1590c7df50bbb5dedc() = default;
+  bool operator==(t7ccce890087e1d1590c7df50bbb5dedc const &other) const {
     return Cidr4_ip == other.Cidr4_ip && Cidr4_mask == other.Cidr4_mask;
   }
 };
-struct t3e9b102ed27e7e8bc762d9474f81358a {
+struct t7d6e94f701896afa22229dc87f5225a1 {
   uint128_t ip;
   uint8_t mask;
-  bool operator==(t3e9b102ed27e7e8bc762d9474f81358a const &other) const {
+  t7d6e94f701896afa22229dc87f5225a1(uint128_t ip_, uint8_t mask_) : ip(ip_), mask(mask_) {}
+  t7d6e94f701896afa22229dc87f5225a1() = default;
+  bool operator==(t7d6e94f701896afa22229dc87f5225a1 const &other) const {
     return ip == other.ip && mask == other.mask;
   }
 };
-struct t448a9c4ace50114e6f15d3f43eab32d1 : public std::variant<
-  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb, // v4
-  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a // v6
+struct tbb8f59fe54579f629154765675a23df7 : public std::variant<
+  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc, // v4
+  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 // v6
 > { using variant::variant; };
 
 struct t;
@@ -123,9 +127,9 @@ struct t : public std::variant<
   uint32_t, // VIpv4
   uint128_t, // VIpv6
   ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891, // VIp
-  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb, // VCidrv4
-  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a, // VCidrv6
-  ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1, // VCidr
+  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc, // VCidrv4
+  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1, // VCidrv6
+  ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7, // VCidr
   Arr<t*>, // VTup
   Arr<t*>, // VVec
   Arr<t*>, // VLst
@@ -2267,9 +2271,9 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 typedef std::tuple<
-  ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1,
+  ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7,
   Pointer
-> t020f72b3101537a8c8a76274db2dd236;
+> t60e63ebfe97b1202adfad6fb1d25b0a6;
 
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
@@ -3498,13 +3502,13 @@ static std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_bin
                                                                 bool id_219 { bool(id_218 == label1_569) };
                                                                 Pointer choose_res_220;
                                                                 if (id_219) {
-                                                                  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_221 { std::get<28 /* VCidrv4 */>(*p_0) };
+                                                                  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_221 { std::get<28 /* VCidrv4 */>(*p_0) };
                                                                   uint32_t id_222 { id_221.Cidr4_ip };
                                                                   Pointer id_223 { ssum_dst_570.writeU32Le(id_222) };
                                                                   Pointer let_res_224;
                                                                   {
                                                                     Pointer srec_dst_607 { id_223 };
-                                                                    ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_225 { std::get<28 /* VCidrv4 */>(*p_0) };
+                                                                    ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_225 { std::get<28 /* VCidrv4 */>(*p_0) };
                                                                     uint8_t id_226 { id_225.Cidr4_mask };
                                                                     Pointer id_227 { srec_dst_607.writeU8(id_226) };
                                                                     let_res_224 = id_227;
@@ -3515,13 +3519,13 @@ static std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_bin
                                                                   bool id_229 { bool(id_228 == label1_569) };
                                                                   Pointer choose_res_230;
                                                                   if (id_229) {
-                                                                    ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_231 { std::get<29 /* VCidrv6 */>(*p_0) };
+                                                                    ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_231 { std::get<29 /* VCidrv6 */>(*p_0) };
                                                                     uint128_t id_232 { id_231.ip };
                                                                     Pointer id_233 { ssum_dst_570.writeU128Le(id_232) };
                                                                     Pointer let_res_234;
                                                                     {
                                                                       Pointer srec_dst_606 { id_233 };
-                                                                      ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_235 { std::get<29 /* VCidrv6 */>(*p_0) };
+                                                                      ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_235 { std::get<29 /* VCidrv6 */>(*p_0) };
                                                                       uint8_t id_236 { id_235.mask };
                                                                       Pointer id_237 { srec_dst_606.writeU8(id_236) };
                                                                       let_res_234 = id_237;
@@ -3532,48 +3536,48 @@ static std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_bin
                                                                     bool id_239 { bool(id_238 == label1_569) };
                                                                     Pointer choose_res_240;
                                                                     if (id_239) {
-                                                                      ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_241 { std::get<30 /* VCidr */>(*p_0) };
+                                                                      ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_241 { std::get<30 /* VCidr */>(*p_0) };
                                                                       uint16_t id_242 { uint16_t(id_241.index()) };
                                                                       Pointer id_243 { ssum_dst_570.writeU16Le(id_242) };
                                                                       Pointer let_res_244;
                                                                       {
                                                                         Pointer ssum_dst_603 { id_243 };
                                                                         uint16_t id_245 { 0 };
-                                                                        ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_246 { std::get<30 /* VCidr */>(*p_0) };
+                                                                        ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_246 { std::get<30 /* VCidr */>(*p_0) };
                                                                         uint16_t id_247 { uint16_t(id_246.index()) };
                                                                         bool id_248 { bool(id_245 == id_247) };
                                                                         Pointer choose_res_249;
                                                                         if (id_248) {
-                                                                          ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_250 { std::get<30 /* VCidr */>(*p_0) };
-                                                                          ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_251 { std::get<0 /* v4 */>(id_250) };
+                                                                          ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_250 { std::get<30 /* VCidr */>(*p_0) };
+                                                                          ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_251 { std::get<0 /* v4 */>(id_250) };
                                                                           uint32_t id_252 { id_251.Cidr4_ip };
                                                                           Pointer id_253 { ssum_dst_603.writeU32Le(id_252) };
                                                                           Pointer let_res_254;
                                                                           {
                                                                             Pointer srec_dst_605 { id_253 };
-                                                                            ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_255 { std::get<30 /* VCidr */>(*p_0) };
-                                                                            ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_256 { std::get<0 /* v4 */>(id_255) };
+                                                                            ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_255 { std::get<30 /* VCidr */>(*p_0) };
+                                                                            ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_256 { std::get<0 /* v4 */>(id_255) };
                                                                             uint8_t id_257 { id_256.Cidr4_mask };
                                                                             Pointer id_258 { srec_dst_605.writeU8(id_257) };
                                                                             let_res_254 = id_258;
                                                                           }
                                                                           choose_res_249 = let_res_254;
                                                                         } else {
-                                                                          ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_259 { std::get<30 /* VCidr */>(*p_0) };
+                                                                          ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_259 { std::get<30 /* VCidr */>(*p_0) };
                                                                           uint16_t id_260 { uint16_t(id_259.index()) };
                                                                           uint16_t id_261 { 1 };
                                                                           bool id_262 { bool(id_260 == id_261) };
                                                                           Void id_263 { ((void)(assert(id_262)), VOID) };
                                                                           (void)id_263;
-                                                                          ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_264 { std::get<30 /* VCidr */>(*p_0) };
-                                                                          ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_265 { std::get<1 /* v6 */>(id_264) };
+                                                                          ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_264 { std::get<30 /* VCidr */>(*p_0) };
+                                                                          ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_265 { std::get<1 /* v6 */>(id_264) };
                                                                           uint128_t id_266 { id_265.ip };
                                                                           Pointer id_267 { ssum_dst_603.writeU128Le(id_266) };
                                                                           Pointer let_res_268;
                                                                           {
                                                                             Pointer srec_dst_604 { id_267 };
-                                                                            ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_269 { std::get<30 /* VCidr */>(*p_0) };
-                                                                            ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_270 { std::get<1 /* v6 */>(id_269) };
+                                                                            ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_269 { std::get<30 /* VCidr */>(*p_0) };
+                                                                            ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_270 { std::get<1 /* v6 */>(id_269) };
                                                                             uint8_t id_271 { id_270.mask };
                                                                             Pointer id_272 { srec_dst_604.writeU8(id_271) };
                                                                             let_res_268 = id_272;
@@ -4738,7 +4742,7 @@ static std::function<Size(::dessser::gen::raql_value::t*)> sersize_of_row_binary
                                                                   Size choose_res_778;
                                                                   if (id_777) {
                                                                     uint16_t id_779 { 0 };
-                                                                    ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_780 { std::get<30 /* VCidr */>(*p_0) };
+                                                                    ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_780 { std::get<30 /* VCidr */>(*p_0) };
                                                                     uint16_t id_781 { uint16_t(id_780.index()) };
                                                                     bool id_782 { bool(id_779 == id_781) };
                                                                     Size choose_res_783;
@@ -4746,7 +4750,7 @@ static std::function<Size(::dessser::gen::raql_value::t*)> sersize_of_row_binary
                                                                       Size id_784 { 9UL };
                                                                       choose_res_783 = id_784;
                                                                     } else {
-                                                                      ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_785 { std::get<30 /* VCidr */>(*p_0) };
+                                                                      ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_785 { std::get<30 /* VCidr */>(*p_0) };
                                                                       uint16_t id_786 { uint16_t(id_785.index()) };
                                                                       uint16_t id_787 { 1 };
                                                                       bool id_788 { bool(id_786 == id_787) };
@@ -6593,12 +6597,12 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                       {
                                                                         auto du8_fst_307 { std::get<0>(id_1425) };
                                                                         auto du8_snd_308 { std::get<1>(id_1425) };
-                                                                        std::function<::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb(::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb)> fun1427 { [&fun1427](::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb p_0) {
+                                                                        std::function<::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc(::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc)> fun1427 { [&fun1427](::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc p_0) {
                                                                           return p_0;
                                                                         }
                                                                          };
-                                                                        ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_1428 { .Cidr4_ip = drec_fst_304, .Cidr4_mask = du8_fst_307 };
-                                                                        ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_1429 { fun1427(id_1428) };
+                                                                        ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_1428 { .Cidr4_ip = drec_fst_304, .Cidr4_mask = du8_fst_307 };
+                                                                        ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_1429 { fun1427(id_1428) };
                                                                         ::dessser::gen::raql_value::t* id_1430 { new ::dessser::gen::raql_value::t(std::in_place_index<28>, id_1429) };
                                                                         ::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8d0 id_1431 { id_1430, du8_snd_308 };
                                                                         letpair_res_1426 = id_1431;
@@ -6638,12 +6642,12 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                         {
                                                                           auto du8_fst_286 { std::get<0>(id_1442) };
                                                                           auto du8_snd_287 { std::get<1>(id_1442) };
-                                                                          std::function<::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a(::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a)> fun1444 { [&fun1444](::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a p_0) {
+                                                                          std::function<::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1(::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1)> fun1444 { [&fun1444](::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 p_0) {
                                                                             return p_0;
                                                                           }
                                                                            };
-                                                                          ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_1445 { .ip = drec_fst_283, .mask = du8_fst_286 };
-                                                                          ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_1446 { fun1444(id_1445) };
+                                                                          ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_1445 { .ip = drec_fst_283, .mask = du8_fst_286 };
+                                                                          ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_1446 { fun1444(id_1445) };
                                                                           ::dessser::gen::raql_value::t* id_1447 { new ::dessser::gen::raql_value::t(std::in_place_index<29>, id_1446) };
                                                                           ::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8d0 id_1448 { id_1447, du8_snd_287 };
                                                                           letpair_res_1443 = id_1448;
@@ -6666,16 +6670,16 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                         ::dessser::gen::raql_value::t22a32080ad88ab548b80077a17b7dd46 id_1454 { du16_fst_220, du16_snd_221 };
                                                                         letpair_res_1453 = id_1454;
                                                                       }
-                                                                      ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 let_res_1455;
+                                                                      ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 let_res_1455;
                                                                       {
                                                                         ::dessser::gen::raql_value::t22a32080ad88ab548b80077a17b7dd46 dsum1_225 { letpair_res_1453 };
-                                                                        ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 letpair_res_1456;
+                                                                        ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 letpair_res_1456;
                                                                         {
                                                                           auto dsum1_fst_226 { std::get<0>(dsum1_225) };
                                                                           auto dsum1_snd_227 { std::get<1>(dsum1_225) };
                                                                           uint16_t id_1457 { 0 };
                                                                           bool id_1458 { bool(id_1457 == dsum1_fst_226) };
-                                                                          ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 choose_res_1459;
+                                                                          ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 choose_res_1459;
                                                                           if (id_1458) {
                                                                             ::dessser::gen::raql_value::t405eb186408556fed8f2c41523c07d13 id_1460 { dsum1_snd_227.readU32Le() };
                                                                             ::dessser::gen::raql_value::t405eb186408556fed8f2c41523c07d13 letpair_res_1461;
@@ -6690,26 +6694,26 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                               ::dessser::gen::raql_value::t405eb186408556fed8f2c41523c07d13 id_1464 { id_1463, du32_snd_251 };
                                                                               letpair_res_1461 = id_1464;
                                                                             }
-                                                                            ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 let_res_1465;
+                                                                            ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 let_res_1465;
                                                                             {
                                                                               ::dessser::gen::raql_value::t405eb186408556fed8f2c41523c07d13 drec_255 { letpair_res_1461 };
-                                                                              ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 letpair_res_1466;
+                                                                              ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 letpair_res_1466;
                                                                               {
                                                                                 auto drec_fst_256 { std::get<0>(drec_255) };
                                                                                 auto drec_snd_257 { std::get<1>(drec_255) };
                                                                                 ::dessser::gen::raql_value::tb3f98ea670610d40658a618de3ec7b90 id_1467 { drec_snd_257.readU8() };
-                                                                                ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 letpair_res_1468;
+                                                                                ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 letpair_res_1468;
                                                                                 {
                                                                                   auto du8_fst_259 { std::get<0>(id_1467) };
                                                                                   auto du8_snd_260 { std::get<1>(id_1467) };
-                                                                                  std::function<::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb(::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb)> fun1469 { [&fun1469](::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb p_0) {
+                                                                                  std::function<::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc(::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc)> fun1469 { [&fun1469](::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc p_0) {
                                                                                     return p_0;
                                                                                   }
                                                                                    };
-                                                                                  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_1470 { .Cidr4_ip = drec_fst_256, .Cidr4_mask = du8_fst_259 };
-                                                                                  ::dessser::gen::raql_value::t074fe1006a6c676e40bcb7eaac3b15fb id_1471 { fun1469(id_1470) };
-                                                                                  ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_1472 { std::in_place_index<0>, id_1471 };
-                                                                                  ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 id_1473 { id_1472, du8_snd_260 };
+                                                                                  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_1470 { .Cidr4_ip = drec_fst_256, .Cidr4_mask = du8_fst_259 };
+                                                                                  ::dessser::gen::raql_value::t7ccce890087e1d1590c7df50bbb5dedc id_1471 { fun1469(id_1470) };
+                                                                                  ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_1472 { std::in_place_index<0>, id_1471 };
+                                                                                  ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 id_1473 { id_1472, du8_snd_260 };
                                                                                   letpair_res_1468 = id_1473;
                                                                                 }
                                                                                 letpair_res_1466 = letpair_res_1468;
@@ -6735,26 +6739,26 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                               ::dessser::gen::raql_value::t5d72eb1f6edf58d2d6a63eca47034564 id_1481 { id_1480, di128_snd_230 };
                                                                               letpair_res_1478 = id_1481;
                                                                             }
-                                                                            ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 let_res_1482;
+                                                                            ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 let_res_1482;
                                                                             {
                                                                               ::dessser::gen::raql_value::t5d72eb1f6edf58d2d6a63eca47034564 drec_234 { letpair_res_1478 };
-                                                                              ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 letpair_res_1483;
+                                                                              ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 letpair_res_1483;
                                                                               {
                                                                                 auto drec_fst_235 { std::get<0>(drec_234) };
                                                                                 auto drec_snd_236 { std::get<1>(drec_234) };
                                                                                 ::dessser::gen::raql_value::tb3f98ea670610d40658a618de3ec7b90 id_1484 { drec_snd_236.readU8() };
-                                                                                ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 letpair_res_1485;
+                                                                                ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 letpair_res_1485;
                                                                                 {
                                                                                   auto du8_fst_238 { std::get<0>(id_1484) };
                                                                                   auto du8_snd_239 { std::get<1>(id_1484) };
-                                                                                  std::function<::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a(::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a)> fun1486 { [&fun1486](::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a p_0) {
+                                                                                  std::function<::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1(::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1)> fun1486 { [&fun1486](::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 p_0) {
                                                                                     return p_0;
                                                                                   }
                                                                                    };
-                                                                                  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_1487 { .ip = drec_fst_235, .mask = du8_fst_238 };
-                                                                                  ::dessser::gen::raql_value::t3e9b102ed27e7e8bc762d9474f81358a id_1488 { fun1486(id_1487) };
-                                                                                  ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_1489 { std::in_place_index<1>, id_1488 };
-                                                                                  ::dessser::gen::raql_value::t020f72b3101537a8c8a76274db2dd236 id_1490 { id_1489, du8_snd_239 };
+                                                                                  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_1487 { .ip = drec_fst_235, .mask = du8_fst_238 };
+                                                                                  ::dessser::gen::raql_value::t7d6e94f701896afa22229dc87f5225a1 id_1488 { fun1486(id_1487) };
+                                                                                  ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_1489 { std::in_place_index<1>, id_1488 };
+                                                                                  ::dessser::gen::raql_value::t60e63ebfe97b1202adfad6fb1d25b0a6 id_1490 { id_1489, du8_snd_239 };
                                                                                   letpair_res_1485 = id_1490;
                                                                                 }
                                                                                 letpair_res_1483 = letpair_res_1485;
@@ -6771,11 +6775,11 @@ static std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8
                                                                       {
                                                                         auto des_usr_type_fst_271 { std::get<0>(let_res_1455) };
                                                                         auto des_usr_type_snd_272 { std::get<1>(let_res_1455) };
-                                                                        std::function<::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1(::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1)> fun1492 { [&fun1492](::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 p_0) {
+                                                                        std::function<::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7(::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7)> fun1492 { [&fun1492](::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 p_0) {
                                                                           return p_0;
                                                                         }
                                                                          };
-                                                                        ::dessser::gen::raql_value::t448a9c4ace50114e6f15d3f43eab32d1 id_1493 { fun1492(des_usr_type_fst_271) };
+                                                                        ::dessser::gen::raql_value::tbb8f59fe54579f629154765675a23df7 id_1493 { fun1492(des_usr_type_fst_271) };
                                                                         ::dessser::gen::raql_value::t* id_1494 { new ::dessser::gen::raql_value::t(std::in_place_index<30>, id_1493) };
                                                                         ::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8d0 id_1495 { id_1494, des_usr_type_snd_272 };
                                                                         letpair_res_1491 = id_1495;

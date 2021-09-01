@@ -17,7 +17,7 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t8b7b7f2e45a59c7a5e57aa598aae9cc3 {
+struct tf01325f3a925d9c7cd3d957caae4a135 {
   bool automatic;
   dessser::gen::file_path::t_ext cwd;
   bool debug;
@@ -25,11 +25,13 @@ struct t8b7b7f2e45a59c7a5e57aa598aae9cc3 {
   std::string on_site;
   Arr<dessser::gen::program_run_parameter::t_ext> params;
   double report_period;
-  bool operator==(t8b7b7f2e45a59c7a5e57aa598aae9cc3 const &other) const {
+  tf01325f3a925d9c7cd3d957caae4a135(bool automatic_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, std::string on_site_, Arr<dessser::gen::program_run_parameter::t_ext> params_, double report_period_) : automatic(automatic_), cwd(cwd_), debug(debug_), enabled(enabled_), on_site(on_site_), params(params_), report_period(report_period_) {}
+  tf01325f3a925d9c7cd3d957caae4a135() = default;
+  bool operator==(tf01325f3a925d9c7cd3d957caae4a135 const &other) const {
     return automatic == other.automatic && cwd == other.cwd && debug == other.debug && enabled == other.enabled && on_site == other.on_site && params == other.params && report_period == other.report_period;
   }
 };
-inline std::ostream &operator<<(std::ostream &os, t8b7b7f2e45a59c7a5e57aa598aae9cc3 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tf01325f3a925d9c7cd3d957caae4a135 const &r) {
   os << '{';
   os << "automatic:" << r.automatic << ',';
   os << "cwd:" << r.cwd << ',';
@@ -44,10 +46,10 @@ inline std::ostream &operator<<(std::ostream &os, t8b7b7f2e45a59c7a5e57aa598aae9
 
 typedef std::tuple<
   dessser::gen::program_name::t_ext,
-  ::dessser::gen::target_config::t8b7b7f2e45a59c7a5e57aa598aae9cc3
-> t40f989d069ce927274ad1cacebd87ee1;
+  ::dessser::gen::target_config::tf01325f3a925d9c7cd3d957caae4a135
+> t26020e587cf9d18680a94d3e28fcf25d;
 
-typedef Arr<::dessser::gen::target_config::t40f989d069ce927274ad1cacebd87ee1> t;
+typedef Arr<::dessser::gen::target_config::t26020e587cf9d18680a94d3e28fcf25d> t;
 typedef std::tuple<
   t,
   Pointer

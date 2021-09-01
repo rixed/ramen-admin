@@ -35,6 +35,8 @@ std::default_random_engine _random_engine_;
 struct t {
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_value::t_ext value;
+  t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_value::t_ext value_) : name(name_), value(value_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return name == other.name && value == other.value;
   }

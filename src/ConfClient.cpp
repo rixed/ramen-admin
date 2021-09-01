@@ -1,9 +1,11 @@
 #include <cstdlib>
 #include <memory>
 #include <sstream>
+#include <QByteArray>
 #include <QDebug>
 #include <QTcpSocket>
 #include <QtGlobal>
+#include <sodium.h>
 
 #include <dessser/Pointer.h>
 #include <dessser/Bytes.h>
@@ -11,8 +13,9 @@
 #include "desssergen/sync_server_msg.h"
 #include "desssergen/sync_client_msg.h"
 #include "desssergen/sync_msg.h"
-#include "ConfClient.h"
 #include "UserIdentity.h"
+#include "z85.h"
+#include "ConfClient.h"
 
 void ConfClient::fatalErr(QString const &errString)
 {
@@ -43,6 +46,26 @@ ConfClient::ConfClient(QString const &target, QString const &username_, std::sha
     fatalErr("Cannot parse configuration server URL: " + target);
   } else {
     tcpSocket->connectToHost(host, port);
+  }
+
+  if (isCrypted()) {
+    size_t const pub_capa { sizeof srv_pub_key };
+    if (z85_decode(id->srv_pub_key.length(),
+                   (unsigned char const *)id->srv_pub_key.toStdString().c_str(),
+                   pub_capa, srv_pub_key) != pub_capa) {
+      qCritical() << "Invalid server public key";
+    }
+    if (z85_decode(id->clt_pub_key.length(),
+                   (unsigned char const *)id->clt_pub_key.toStdString().c_str(),
+                   pub_capa, clt_pub_key) != pub_capa) {
+      qCritical() << "Invalid client public key";
+    }
+    size_t const priv_capa { sizeof clt_priv_key };
+    if (z85_decode(id->clt_priv_key.length(),
+                   (unsigned char const *)id->clt_priv_key.toStdString().c_str(),
+                   priv_capa, clt_priv_key) != priv_capa) {
+      qCritical() << "Invalid client private key";
+    }
   }
 }
 
@@ -397,17 +420,69 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
 
   qDebug().nospace() << "Sending:" << msg << " (" << ser_sz << " bytes)";
 
-  /* Second serialization: Wrap the message into an Authn message
-   * TODO: non ClearText */
-  dessser::Bytes clearText { std::get<0>(ptr.readBytes(act_sz)) };
-  dessser::gen::sync_msg::t auth {
-    std::in_place_index<dessser::gen::sync_msg::ClearText>,
-    clearText };
+  /* Second serialization: Wrap the message into an Authn message */
+  dessser::Bytes const text { std::get<0>(ptr.readBytes(act_sz)) };
+  dessser::gen::sync_msg::t auth;
+  /* Prepare all the buffers that may appear in the sent message: */
+  size_t text_len { text.length() };
+  /* clear_text must have some zeros header:
+   * "crypto_box() takes a pointer to 32 bytes before the message, and stores
+   *  the ciphertext 16 bytes after the destination pointer, the first 16 bytes being
+   *  overwritten with zeros. crypto_box_open() takes a pointer to 16 bytes before
+   *  the ciphertext and stores the message 32 bytes after the destination pointer,
+   *  overwriting the first 32 bytes with zeros."
+   * So long for NaCl being misuse-resistant. */
+  Q_ASSERT(crypto_box_ZEROBYTES == 32 && crypto_box_BOXZEROBYTES == 16);
+  unsigned char clear_text[crypto_box_ZEROBYTES + text_len];
+  /* Size for cipher_text is not crypto_box_BOXZEROBYTES + text_len, as there
+   * will be 16 zeros + MAC (16 bytes) + encrypted. */
+  unsigned char cipher_text[sizeof clear_text];
 
-  dessser::gen::sync_msg::t *auth_ { const_cast<dessser::gen::sync_msg::t *>(&auth) };
-  size_t const auth_ser_sz { dessser::gen::sync_msg::sersize_of_row_binary(auth_) };
+  if (isCrypted()) {
+    if (keySent) {  // encrypt
+      qCritical() << "TODO: encrypt";
+      return -1;
+    } else {
+      /* Pick a nonce */
+      randombytes_buf(nonce, sizeof nonce);
+      /* Encrypt using server public key and that nonce: */
+      qDebug() << "Encrypting" << text_len << "bytes";
+      bzero(clear_text, crypto_box_ZEROBYTES);
+      memcpy(clear_text + crypto_box_ZEROBYTES,
+             reinterpret_cast<unsigned char const *>(text.toString().c_str()),
+             text_len);
+      if (crypto_box(cipher_text, clear_text, crypto_box_ZEROBYTES + text_len,
+                     nonce, srv_pub_key, clt_priv_key) < 0) {
+        qCritical() << "Cannot encrypt message";
+        return -1;
+      }
+      dessser::Bytes const send_msg {
+        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(cipher_text + crypto_box_BOXZEROBYTES),
+                                 /* Do not delete for real: */[](uint8_t *){}),
+        sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0) };
+      dessser::Bytes const send_nonce {
+        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(nonce),
+                                 [](uint8_t *){}),
+        sizeof(nonce), size_t(0) };
+      dessser::Bytes const send_clt_pub_key {
+        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_pub_key),
+                                 [](uint8_t *){}),
+        sizeof(clt_pub_key), size_t(0) };
+      auth = dessser::gen::sync_msg::t {
+        std::in_place_index<dessser::gen::sync_msg::SendSessionKey>,
+        send_msg, send_nonce, send_clt_pub_key };
+      keySent = true;
+    }
+  } else {
+    auth = dessser::gen::sync_msg::t {
+      std::in_place_index<dessser::gen::sync_msg::ClearText>,
+      text };
+  }
+
+  Q_ASSERT(!auth.valueless_by_exception());
+  size_t const auth_ser_sz { dessser::gen::sync_msg::sersize_of_row_binary(&auth) };
   dessser::Pointer auth_ptr { auth_ser_sz };
-  dessser::Pointer const auth_end { dessser::gen::sync_msg::to_row_binary(auth_, auth_ptr) };
+  dessser::Pointer const auth_end { dessser::gen::sync_msg::to_row_binary(&auth, auth_ptr) };
   size_t const auth_act_sz { auth_end.getOffset() };
 
   if (auth_act_sz > auth_ser_sz) {
@@ -422,11 +497,19 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
   // FIXME: This assumes little endian
   uint16_t lenPrefix = auth_act_sz;
   // Note: A TcpSocket buffers internally and never short writes
-  if (0 == sendBytes(reinterpret_cast<char const *>(&lenPrefix), 2) &&
-      0 == sendBytes(reinterpret_cast<char const *>(auth_ptr.buffer.get()), auth_act_sz))
-    return 0;
+  if (0 != sendBytes(reinterpret_cast<char const *>(&lenPrefix), 2) ||
+      0 != sendBytes(reinterpret_cast<char const *>(auth_ptr.buffer.get()), auth_act_sz))
+    return -1;
 
-  return -1;
+  // If we have used the nonce, increment it (*AFTER* it's serialized!)
+  if (isCrypted()) sodium_increment(nonce, sizeof nonce);
+
+  return 0;
+}
+
+bool ConfClient::isCrypted() const
+{
+  return !id->srv_pub_key.isEmpty();
 }
 
 int ConfClient::sendBytes(char const *bytes, size_t sz)

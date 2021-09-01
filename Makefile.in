@@ -36,7 +36,7 @@ all: $(INSTALLED)
 
 .SUFFIXES: .type
 .PHONY: clean clean-dist clean-dessserc-gen \
-        all check install uninstall reinstall \
+        all check check-crypto check-qt install uninstall reinstall \
         appimage coverity
 
 %.cc: %.type
@@ -255,10 +255,18 @@ coverity:
 # Tests
 #
 
-check:
+tests/test_crypto: tests/test_crypto.c
+	$(CC) -O0 -g -o $@ $< -lsodium
+
+check-crypto: tests/test_crypto
+	tests/test_crypto
+
+check-qt:
 	cd tests && /usr/bin/qmake
 	$(MAKE) -C tests
 	tests/test
+
+check: check-crypto check-qt
 
 #
 # Installation

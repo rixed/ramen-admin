@@ -34,6 +34,8 @@ std::default_random_engine _random_engine_;
 struct t {
   dessser::gen::raql_expr::t_ext duration;
   double period;
+  t(dessser::gen::raql_expr::t_ext duration_, double period_) : duration(duration_), period(period_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return duration == other.duration && period == other.period;
   }

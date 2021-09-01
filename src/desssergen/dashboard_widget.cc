@@ -36,11 +36,13 @@ struct tf285c6d4be19a8e3e994b3792fed4f11 : public std::variant<
   Void // Logarithmic
 > { using variant::variant; };
 
-struct tba7ef6a2b89382f283b750ac4fbf5e6d {
+struct td829267f693347bdfd48821a09eebaae {
   bool force_zero;
   bool left;
   ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale;
-  bool operator==(tba7ef6a2b89382f283b750ac4fbf5e6d const &other) const {
+  td829267f693347bdfd48821a09eebaae(bool force_zero_, bool left_, ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
+  td829267f693347bdfd48821a09eebaae() = default;
+  bool operator==(td829267f693347bdfd48821a09eebaae const &other) const {
     return force_zero == other.force_zero && left == other.left && scale == other.scale;
   }
 };
@@ -51,22 +53,26 @@ struct tc758d36a6b58d564436d5e1104817704 : public std::variant<
   Void // StackCentered
 > { using variant::variant; };
 
-struct t4419d30cb2b0a80e59ffc034e0c20136 {
+struct tb51b41a880c2ae6dd20d6e8d4b27e71f {
   uint8_t axis;
   uint32_t color;
   std::string column;
   Arr<std::string> factors;
   double opacity;
   ::dessser::gen::dashboard_widget::tc758d36a6b58d564436d5e1104817704 representation;
-  bool operator==(t4419d30cb2b0a80e59ffc034e0c20136 const &other) const {
+  tb51b41a880c2ae6dd20d6e8d4b27e71f(uint8_t axis_, uint32_t color_, std::string column_, Arr<std::string> factors_, double opacity_, ::dessser::gen::dashboard_widget::tc758d36a6b58d564436d5e1104817704 representation_) : axis(axis_), color(color_), column(column_), factors(factors_), opacity(opacity_), representation(representation_) {}
+  tb51b41a880c2ae6dd20d6e8d4b27e71f() = default;
+  bool operator==(tb51b41a880c2ae6dd20d6e8d4b27e71f const &other) const {
     return axis == other.axis && color == other.color && column == other.column && factors == other.factors && opacity == other.opacity && representation == other.representation;
   }
 };
-struct te656ad6c7a50d20bed39c72121f1bc2d {
-  Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> fields;
+struct t2958b4be951f2940fe1f4fe3e7336e60 {
+  Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> fields;
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  bool operator==(te656ad6c7a50d20bed39c72121f1bc2d const &other) const {
+  t2958b4be951f2940fe1f4fe3e7336e60(Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
+  t2958b4be951f2940fe1f4fe3e7336e60() = default;
+  bool operator==(t2958b4be951f2940fe1f4fe3e7336e60 const &other) const {
     return fields == other.fields && name == other.name && visible == other.visible;
   }
 };
@@ -74,18 +80,20 @@ struct t3ef59f16a0cdd3a9e330e7c5bf93b091 : public std::variant<
   Void // Plot
 > { using variant::variant; };
 
-struct ta1f207834d08b85ce654fc130a9cb3fc {
-  Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> Chart_axis;
-  Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> sources;
+struct t5383e291bb0cfc4e60684e58d6fb9e1a {
+  Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> Chart_axis;
+  Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> sources;
   std::string title;
   ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type;
-  bool operator==(ta1f207834d08b85ce654fc130a9cb3fc const &other) const {
+  t5383e291bb0cfc4e60684e58d6fb9e1a(Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> Chart_axis_, Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> sources_, std::string title_, ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type_) : Chart_axis(Chart_axis_), sources(sources_), title(title_), type(type_) {}
+  t5383e291bb0cfc4e60684e58d6fb9e1a() = default;
+  bool operator==(t5383e291bb0cfc4e60684e58d6fb9e1a const &other) const {
     return Chart_axis == other.Chart_axis && sources == other.sources && title == other.title && type == other.type;
   }
 };
 struct t : public std::variant<
   std::string, // Text
-  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc // Chart
+  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a // Chart
 > { using variant::variant; };
 
 typedef std::tuple<
@@ -129,9 +137,9 @@ typedef std::tuple<
 > t405eb186408556fed8f2c41523c07d13;
 
 typedef std::tuple<
-  Lst<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d>,
+  Lst<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae>,
   Pointer
-> tf44b7bd18fee6d1063a2a34e384797c1;
+> t4efe89915bdc1bffa3c32a560e3556f3;
 
 typedef std::tuple<
   bool,
@@ -144,14 +152,14 @@ typedef std::tuple<
 > t18f962e0b602b25173933adabf09c5e6;
 
 typedef std::tuple<
-  Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d>,
+  Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae>,
   Pointer
-> t6e5f92224d0c60ba2eb1a27953548261;
+> tccc9402294e33857bf94022b5ed9853b;
 
 typedef std::tuple<
-  Lst<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d>,
+  Lst<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60>,
   Pointer
-> td7e8d9777d799f3d0dbc61bd9fa4daef;
+> t73b4836483f2e9858e6094ea33cbc890;
 
 typedef std::tuple<
   dessser::gen::fq_function_name::t_ext,
@@ -159,9 +167,9 @@ typedef std::tuple<
 > taa97936972d3c557dfc41dd27d2203f0;
 
 typedef std::tuple<
-  Lst<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136>,
+  Lst<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f>,
   Pointer
-> t0afe31eb443a5eb04153d7c29205290e;
+> t4e28daf0f0a0e09c529a6c4776cc9894;
 
 typedef std::tuple<
   uint64_t,
@@ -472,7 +480,7 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
         bool id_50 { bool(id_48 == id_49) };
         Void id_51 { ((void)(assert(id_50)), VOID) };
         (void)id_51;
-        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_52 { std::get<1 /* Chart */>(*p_0) };
+        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_52 { std::get<1 /* Chart */>(*p_0) };
         std::string id_53 { id_52.title };
         uint32_t id_54 { (uint32_t)id_53.size() };
         Vec<1, uint32_t> id_55 {  id_54  };
@@ -532,21 +540,21 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
           }
           let_res_56 = let_res_58;
         }
-        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_90 { std::get<1 /* Chart */>(*p_0) };
+        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_90 { std::get<1 /* Chart */>(*p_0) };
         std::string id_91 { id_90.title };
         Bytes id_92 { id_91 };
         Pointer id_93 { let_res_56.writeBytes(id_92) };
         Pointer let_res_94;
         {
           Pointer srec_dst_380 { id_93 };
-          ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_95 { std::get<1 /* Chart */>(*p_0) };
+          ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_95 { std::get<1 /* Chart */>(*p_0) };
           ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 id_96 { id_95.type };
           uint16_t id_97 { uint16_t(id_96.index()) };
           Pointer id_98 { srec_dst_380.writeU16Le(id_97) };
           Pointer let_res_99;
           {
             Pointer ssum_dst_382 { id_98 };
-            ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_100 { std::get<1 /* Chart */>(*p_0) };
+            ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_100 { std::get<1 /* Chart */>(*p_0) };
             ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 id_101 { id_100.type };
             uint16_t id_102 { uint16_t(id_101.index()) };
             uint16_t id_103 { 0 };
@@ -560,8 +568,8 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
         Pointer let_res_106;
         {
           Pointer srec_dst_383 { let_res_94 };
-          ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_107 { std::get<1 /* Chart */>(*p_0) };
-          Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_108 { id_107.Chart_axis };
+          ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_107 { std::get<1 /* Chart */>(*p_0) };
+          Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_108 { id_107.Chart_axis };
           uint32_t id_109 { id_108.size() };
           Vec<1, uint32_t> id_110 {  id_109  };
           Pointer let_res_111;
@@ -629,9 +637,9 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
             Pointer let_res_149;
             {
               Vec<1, int32_t> n_ref_387 { id_148 };
-              ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_150 { std::get<1 /* Chart */>(*p_0) };
-              Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_151 { id_150.Chart_axis };
-              for (::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d x_388 : id_151) {
+              ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_150 { std::get<1 /* Chart */>(*p_0) };
+              Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_151 { id_150.Chart_axis };
+              for (::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae x_388 : id_151) {
                 uint8_t id_152 { 0 };
                 uint8_t id_153 { 0 };
                 Pointer id_154 { dst_ref_386[id_153] };
@@ -703,8 +711,8 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
         Pointer let_res_187;
         {
           Pointer srec_dst_394 { let_res_106 };
-          ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_188 { std::get<1 /* Chart */>(*p_0) };
-          Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_189 { id_188.sources };
+          ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_188 { std::get<1 /* Chart */>(*p_0) };
+          Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_189 { id_188.sources };
           uint32_t id_190 { id_189.size() };
           Vec<1, uint32_t> id_191 {  id_190  };
           Pointer let_res_192;
@@ -772,9 +780,9 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
             Pointer let_res_230;
             {
               Vec<1, int32_t> n_ref_398 { id_229 };
-              ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_231 { std::get<1 /* Chart */>(*p_0) };
-              Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_232 { id_231.sources };
-              for (::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d x_399 : id_232) {
+              ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_231 { std::get<1 /* Chart */>(*p_0) };
+              Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_232 { id_231.sources };
+              for (::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 x_399 : id_232) {
                 uint8_t id_233 { 0 };
                 uint8_t id_234 { 0 };
                 Pointer id_235 { dst_ref_397[id_234] };
@@ -797,7 +805,7 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
                 Pointer let_res_244;
                 {
                   Pointer srec_dst_402 { let_res_240 };
-                  Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_245 { x_399.fields };
+                  Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_245 { x_399.fields };
                   uint32_t id_246 { id_245.size() };
                   Vec<1, uint32_t> id_247 {  id_246  };
                   Pointer let_res_248;
@@ -865,8 +873,8 @@ static std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_r
                     Pointer let_res_286;
                     {
                       Vec<1, int32_t> n_ref_406 { id_285 };
-                      Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_287 { x_399.fields };
-                      for (::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 x_407 : id_287) {
+                      Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_287 { x_399.fields };
+                      for (::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f x_407 : id_287) {
                         uint8_t id_288 { 0 };
                         uint8_t id_289 { 0 };
                         Pointer id_290 { dst_ref_405[id_289] };
@@ -1441,7 +1449,7 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
       Void id_517 { ((void)(assert(id_516)), VOID) };
       (void)id_517;
       Size id_518 { 2UL };
-      ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_519 { std::get<1 /* Chart */>(*p_0) };
+      ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_519 { std::get<1 /* Chart */>(*p_0) };
       std::string id_520 { id_519.title };
       uint32_t id_521 { (uint32_t)id_520.size() };
       Vec<1, uint32_t> id_522 {  id_521  };
@@ -1481,7 +1489,7 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
         }
         let_res_523 = let_res_526;
       }
-      ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_544 { std::get<1 /* Chart */>(*p_0) };
+      ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_544 { std::get<1 /* Chart */>(*p_0) };
       std::string id_545 { id_544.title };
       uint32_t id_546 { (uint32_t)id_545.size() };
       Size id_547 { Size(id_546) };
@@ -1490,7 +1498,7 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
       Size let_res_550;
       {
         Size sz_333 { id_549 };
-        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_551 { std::get<1 /* Chart */>(*p_0) };
+        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_551 { std::get<1 /* Chart */>(*p_0) };
         ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 id_552 { id_551.type };
         uint16_t id_553 { uint16_t(id_552.index()) };
         uint16_t id_554 { 0 };
@@ -1504,8 +1512,8 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
       Size let_res_559;
       {
         Size sz_335 { let_res_550 };
-        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_560 { std::get<1 /* Chart */>(*p_0) };
-        Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_561 { id_560.Chart_axis };
+        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_560 { std::get<1 /* Chart */>(*p_0) };
+        Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_561 { id_560.Chart_axis };
         uint32_t id_562 { id_561.size() };
         Vec<1, uint32_t> id_563 {  id_562  };
         Size let_res_564;
@@ -1555,8 +1563,8 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
             Vec<1, int32_t> repeat_n_339 { id_589 };
             bool while_flag_590 { true };
             do {
-              ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_591 { std::get<1 /* Chart */>(*p_0) };
-              Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_592 { id_591.Chart_axis };
+              ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_591 { std::get<1 /* Chart */>(*p_0) };
+              Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_592 { id_591.Chart_axis };
               uint32_t id_593 { id_592.size() };
               int32_t id_594 { int32_t(id_593) };
               uint8_t id_595 { 0 };
@@ -1576,9 +1584,9 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                   Size sz_342 { id_604 };
                   uint8_t id_606 { 0 };
                   int32_t id_607 { repeat_n_339[id_606] };
-                  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_608 { std::get<1 /* Chart */>(*p_0) };
-                  Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_609 { id_608.Chart_axis };
-                  ::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d id_610 { id_609[id_607] };
+                  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_608 { std::get<1 /* Chart */>(*p_0) };
+                  Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_609 { id_608.Chart_axis };
+                  ::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae id_610 { id_609[id_607] };
                   ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 id_611 { id_610.scale };
                   uint16_t id_612 { uint16_t(id_611.index()) };
                   Size let_res_613;
@@ -1628,8 +1636,8 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
       Size let_res_633;
       {
         Size sz_344 { let_res_559 };
-        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_634 { std::get<1 /* Chart */>(*p_0) };
-        Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_635 { id_634.sources };
+        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_634 { std::get<1 /* Chart */>(*p_0) };
+        Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_635 { id_634.sources };
         uint32_t id_636 { id_635.size() };
         Vec<1, uint32_t> id_637 {  id_636  };
         Size let_res_638;
@@ -1679,8 +1687,8 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
             Vec<1, int32_t> repeat_n_348 { id_663 };
             bool while_flag_664 { true };
             do {
-              ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_665 { std::get<1 /* Chart */>(*p_0) };
-              Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_666 { id_665.sources };
+              ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_665 { std::get<1 /* Chart */>(*p_0) };
+              Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_666 { id_665.sources };
               uint32_t id_667 { id_666.size() };
               int32_t id_668 { int32_t(id_667) };
               uint8_t id_669 { 0 };
@@ -1697,9 +1705,9 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                   auto fun676 { dessser::gen::fq_function_name::sersize_of_row_binary };
                   uint8_t id_677 { 0 };
                   int32_t id_678 { repeat_n_348[id_677] };
-                  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_679 { std::get<1 /* Chart */>(*p_0) };
-                  Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_680 { id_679.sources };
-                  ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_681 { id_680[id_678] };
+                  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_679 { std::get<1 /* Chart */>(*p_0) };
+                  Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_680 { id_679.sources };
+                  ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_681 { id_680[id_678] };
                   dessser::gen::fq_function_name::t_ext id_682 { id_681.name };
                   Size id_683 { fun676(id_682) };
                   Size id_684 { Size(sz_349 + id_683) };
@@ -1712,10 +1720,10 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                   Size sz_351 { id_686 };
                   uint8_t id_688 { 0 };
                   int32_t id_689 { repeat_n_348[id_688] };
-                  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_690 { std::get<1 /* Chart */>(*p_0) };
-                  Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_691 { id_690.sources };
-                  ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_692 { id_691[id_689] };
-                  Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_693 { id_692.fields };
+                  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_690 { std::get<1 /* Chart */>(*p_0) };
+                  Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_691 { id_690.sources };
+                  ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_692 { id_691[id_689] };
+                  Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_693 { id_692.fields };
                   uint32_t id_694 { id_693.size() };
                   Vec<1, uint32_t> id_695 {  id_694  };
                   Size let_res_696;
@@ -1767,10 +1775,10 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                       do {
                         uint8_t id_723 { 0 };
                         int32_t id_724 { repeat_n_348[id_723] };
-                        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_725 { std::get<1 /* Chart */>(*p_0) };
-                        Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_726 { id_725.sources };
-                        ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_727 { id_726[id_724] };
-                        Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_728 { id_727.fields };
+                        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_725 { std::get<1 /* Chart */>(*p_0) };
+                        Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_726 { id_725.sources };
+                        ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_727 { id_726[id_724] };
+                        Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_728 { id_727.fields };
                         uint32_t id_729 { id_728.size() };
                         int32_t id_730 { int32_t(id_729) };
                         uint8_t id_731 { 0 };
@@ -1792,11 +1800,11 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                             int32_t id_743 { repeat_n_355[id_742] };
                             uint8_t id_744 { 0 };
                             int32_t id_745 { repeat_n_348[id_744] };
-                            ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_746 { std::get<1 /* Chart */>(*p_0) };
-                            Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_747 { id_746.sources };
-                            ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_748 { id_747[id_745] };
-                            Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_749 { id_748.fields };
-                            ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_750 { id_749[id_743] };
+                            ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_746 { std::get<1 /* Chart */>(*p_0) };
+                            Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_747 { id_746.sources };
+                            ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_748 { id_747[id_745] };
+                            Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_749 { id_748.fields };
+                            ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_750 { id_749[id_743] };
                             ::dessser::gen::dashboard_widget::tc758d36a6b58d564436d5e1104817704 id_751 { id_750.representation };
                             uint16_t id_752 { uint16_t(id_751.index()) };
                             Size let_res_753;
@@ -1849,11 +1857,11 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                             int32_t id_776 { repeat_n_355[id_775] };
                             uint8_t id_777 { 0 };
                             int32_t id_778 { repeat_n_348[id_777] };
-                            ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_779 { std::get<1 /* Chart */>(*p_0) };
-                            Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_780 { id_779.sources };
-                            ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_781 { id_780[id_778] };
-                            Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_782 { id_781.fields };
-                            ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_783 { id_782[id_776] };
+                            ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_779 { std::get<1 /* Chart */>(*p_0) };
+                            Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_780 { id_779.sources };
+                            ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_781 { id_780[id_778] };
+                            Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_782 { id_781.fields };
+                            ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_783 { id_782[id_776] };
                             std::string id_784 { id_783.column };
                             uint32_t id_785 { (uint32_t)id_784.size() };
                             Size let_res_786;
@@ -1910,11 +1918,11 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                             int32_t id_814 { repeat_n_355[id_813] };
                             uint8_t id_815 { 0 };
                             int32_t id_816 { repeat_n_348[id_815] };
-                            ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_817 { std::get<1 /* Chart */>(*p_0) };
-                            Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_818 { id_817.sources };
-                            ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_819 { id_818[id_816] };
-                            Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_820 { id_819.fields };
-                            ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_821 { id_820[id_814] };
+                            ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_817 { std::get<1 /* Chart */>(*p_0) };
+                            Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_818 { id_817.sources };
+                            ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_819 { id_818[id_816] };
+                            Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_820 { id_819.fields };
+                            ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_821 { id_820[id_814] };
                             Arr<std::string> id_822 { id_821.factors };
                             uint32_t id_823 { id_822.size() };
                             Vec<1, uint32_t> id_824 {  id_823  };
@@ -1969,11 +1977,11 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                                   int32_t id_853 { repeat_n_355[id_852] };
                                   uint8_t id_854 { 0 };
                                   int32_t id_855 { repeat_n_348[id_854] };
-                                  ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_856 { std::get<1 /* Chart */>(*p_0) };
-                                  Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_857 { id_856.sources };
-                                  ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_858 { id_857[id_855] };
-                                  Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_859 { id_858.fields };
-                                  ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_860 { id_859[id_853] };
+                                  ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_856 { std::get<1 /* Chart */>(*p_0) };
+                                  Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_857 { id_856.sources };
+                                  ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_858 { id_857[id_855] };
+                                  Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_859 { id_858.fields };
+                                  ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_860 { id_859[id_853] };
                                   Arr<std::string> id_861 { id_860.factors };
                                   uint32_t id_862 { id_861.size() };
                                   int32_t id_863 { int32_t(id_862) };
@@ -1991,11 +1999,11 @@ static std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_
                                     int32_t id_873 { repeat_n_355[id_872] };
                                     uint8_t id_874 { 0 };
                                     int32_t id_875 { repeat_n_348[id_874] };
-                                    ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_876 { std::get<1 /* Chart */>(*p_0) };
-                                    Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_877 { id_876.sources };
-                                    ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_878 { id_877[id_875] };
-                                    Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_879 { id_878.fields };
-                                    ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_880 { id_879[id_873] };
+                                    ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_876 { std::get<1 /* Chart */>(*p_0) };
+                                    Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_877 { id_876.sources };
+                                    ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_878 { id_877[id_875] };
+                                    Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_879 { id_878.fields };
+                                    ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_880 { id_879[id_873] };
                                     Arr<std::string> id_881 { id_880.factors };
                                     std::string id_882 { id_881[id_871] };
                                     uint32_t id_883 { (uint32_t)id_882.size() };
@@ -2814,19 +2822,19 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                     }
                     let_res_1062 = let_res_1065;
                   }
-                  ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 let_res_1100;
+                  ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 let_res_1100;
                   {
                     ::dessser::gen::dashboard_widget::t405eb186408556fed8f2c41523c07d13 dlist1_104 { let_res_1062 };
-                    ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 letpair_res_1101;
+                    ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 letpair_res_1101;
                     {
                       auto dlist1_fst_105 { std::get<0>(dlist1_104) };
                       auto dlist1_snd_106 { std::get<1>(dlist1_104) };
-                      Lst<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> endoflist_1102;
-                      ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 id_1103 { endoflist_1102, dlist1_snd_106 };
-                      Vec<1, ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1> id_1104 {  id_1103  };
-                      ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 let_res_1105;
+                      Lst<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> endoflist_1102;
+                      ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 id_1103 { endoflist_1102, dlist1_snd_106 };
+                      Vec<1, ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3> id_1104 {  id_1103  };
+                      ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 let_res_1105;
                       {
-                        Vec<1, ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1> inits_src_ref_107 { id_1104 };
+                        Vec<1, ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3> inits_src_ref_107 { id_1104 };
                         int32_t id_1106 { 0L };
                         Vec<1, int32_t> id_1107 {  id_1106  };
                         {
@@ -2840,9 +2848,9 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                             while_flag_1108 = id_1112;
                             if (while_flag_1108) {
                               uint8_t id_1113 { 0 };
-                              ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 id_1114 { inits_src_ref_107[id_1113] };
+                              ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 id_1114 { inits_src_ref_107[id_1113] };
                               {
-                                ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 dlist2_109 { id_1114 };
+                                ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 dlist2_109 { id_1114 };
                                 {
                                   auto dlist2_fst_110 { std::get<0>(dlist2_109) };
                                   auto dlist2_snd_111 { std::get<1>(dlist2_109) };
@@ -2858,10 +2866,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                     ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 id_1121 { id_1120, dbool_snd_114 };
                                     letpair_res_1117 = id_1121;
                                   }
-                                  ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 let_res_1122;
+                                  ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 let_res_1122;
                                   {
                                     ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 drec_115 { letpair_res_1117 };
-                                    ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 letpair_res_1123;
+                                    ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 letpair_res_1123;
                                     {
                                       auto drec_fst_116 { std::get<0>(drec_115) };
                                       auto drec_snd_117 { std::get<1>(drec_115) };
@@ -2876,10 +2884,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                         ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 id_1129 { id_1128, dbool_snd_120 };
                                         letpair_res_1125 = id_1129;
                                       }
-                                      ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 let_res_1130;
+                                      ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 let_res_1130;
                                       {
                                         ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 drec_121 { letpair_res_1125 };
-                                        ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 letpair_res_1131;
+                                        ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 letpair_res_1131;
                                         {
                                           auto drec_fst_122 { std::get<0>(drec_121) };
                                           auto drec_snd_123 { std::get<1>(drec_121) };
@@ -2920,13 +2928,13 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                             }
                                             let_res_1135 = letpair_res_1136;
                                           }
-                                          ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 letpair_res_1147;
+                                          ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 letpair_res_1147;
                                           {
                                             auto drec_fst_140 { std::get<0>(let_res_1135) };
                                             auto drec_snd_141 { std::get<1>(let_res_1135) };
-                                            ::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d id_1148 { .force_zero = drec_fst_122, .left = drec_fst_116, .scale = drec_fst_140 };
-                                            Lst<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_1149 { id_1148, dlist2_fst_110 };
-                                            ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 id_1150 { id_1149, drec_snd_141 };
+                                            ::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae id_1148 { .force_zero = drec_fst_122, .left = drec_fst_116, .scale = drec_fst_140 };
+                                            Lst<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_1149 { id_1148, dlist2_fst_110 };
+                                            ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 id_1150 { id_1149, drec_snd_141 };
                                             letpair_res_1147 = id_1150;
                                           }
                                           letpair_res_1131 = letpair_res_1147;
@@ -2957,24 +2965,24 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                         }
                         (void)VOID;
                         uint8_t id_1158 { 0 };
-                        ::dessser::gen::dashboard_widget::tf44b7bd18fee6d1063a2a34e384797c1 id_1159 { inits_src_ref_107[id_1158] };
+                        ::dessser::gen::dashboard_widget::t4efe89915bdc1bffa3c32a560e3556f3 id_1159 { inits_src_ref_107[id_1158] };
                         let_res_1105 = id_1159;
                       }
                       letpair_res_1101 = let_res_1105;
                     }
                     let_res_1100 = letpair_res_1101;
                   }
-                  ::dessser::gen::dashboard_widget::t6e5f92224d0c60ba2eb1a27953548261 letpair_res_1160;
+                  ::dessser::gen::dashboard_widget::tccc9402294e33857bf94022b5ed9853b letpair_res_1160;
                   {
                     auto dlist4_fst_146 { std::get<0>(let_res_1100) };
                     auto dlist4_snd_147 { std::get<1>(let_res_1100) };
-                    Arr<::dessser::gen::dashboard_widget::tba7ef6a2b89382f283b750ac4fbf5e6d> id_1161 { dlist4_fst_146.toListRev() };
-                    ::dessser::gen::dashboard_widget::t6e5f92224d0c60ba2eb1a27953548261 id_1162 { id_1161, dlist4_snd_147 };
+                    Arr<::dessser::gen::dashboard_widget::td829267f693347bdfd48821a09eebaae> id_1161 { dlist4_fst_146.toListRev() };
+                    ::dessser::gen::dashboard_widget::tccc9402294e33857bf94022b5ed9853b id_1162 { id_1161, dlist4_snd_147 };
                     letpair_res_1160 = id_1162;
                   }
                   ::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1cf1a79d1 let_res_1163;
                   {
-                    ::dessser::gen::dashboard_widget::t6e5f92224d0c60ba2eb1a27953548261 drec_148 { letpair_res_1160 };
+                    ::dessser::gen::dashboard_widget::tccc9402294e33857bf94022b5ed9853b drec_148 { letpair_res_1160 };
                     ::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1cf1a79d1 letpair_res_1164;
                     {
                       auto drec_fst_149 { std::get<0>(drec_148) };
@@ -3050,19 +3058,19 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                         }
                         let_res_1167 = let_res_1170;
                       }
-                      ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef let_res_1205;
+                      ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 let_res_1205;
                       {
                         ::dessser::gen::dashboard_widget::t405eb186408556fed8f2c41523c07d13 dlist1_160 { let_res_1167 };
-                        ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef letpair_res_1206;
+                        ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 letpair_res_1206;
                         {
                           auto dlist1_fst_161 { std::get<0>(dlist1_160) };
                           auto dlist1_snd_162 { std::get<1>(dlist1_160) };
-                          Lst<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> endoflist_1207;
-                          ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef id_1208 { endoflist_1207, dlist1_snd_162 };
-                          Vec<1, ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef> id_1209 {  id_1208  };
-                          ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef let_res_1210;
+                          Lst<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> endoflist_1207;
+                          ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 id_1208 { endoflist_1207, dlist1_snd_162 };
+                          Vec<1, ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890> id_1209 {  id_1208  };
+                          ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 let_res_1210;
                           {
-                            Vec<1, ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef> inits_src_ref_163 { id_1209 };
+                            Vec<1, ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890> inits_src_ref_163 { id_1209 };
                             int32_t id_1211 { 0L };
                             Vec<1, int32_t> id_1212 {  id_1211  };
                             {
@@ -3076,19 +3084,19 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                 while_flag_1213 = id_1217;
                                 if (while_flag_1213) {
                                   uint8_t id_1218 { 0 };
-                                  ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef id_1219 { inits_src_ref_163[id_1218] };
+                                  ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 id_1219 { inits_src_ref_163[id_1218] };
                                   {
-                                    ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef dlist2_165 { id_1219 };
+                                    ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 dlist2_165 { id_1219 };
                                     {
                                       auto dlist2_fst_166 { std::get<0>(dlist2_165) };
                                       auto dlist2_snd_167 { std::get<1>(dlist2_165) };
                                       uint8_t id_1220 { 0 };
                                       auto fun1221 { dessser::gen::fq_function_name::of_row_binary };
                                       ::dessser::gen::dashboard_widget::taa97936972d3c557dfc41dd27d2203f0 id_1222 { fun1221(dlist2_snd_167) };
-                                      ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef let_res_1223;
+                                      ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 let_res_1223;
                                       {
                                         ::dessser::gen::dashboard_widget::taa97936972d3c557dfc41dd27d2203f0 drec_168 { id_1222 };
-                                        ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef letpair_res_1224;
+                                        ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 letpair_res_1224;
                                         {
                                           auto drec_fst_169 { std::get<0>(drec_168) };
                                           auto drec_snd_170 { std::get<1>(drec_168) };
@@ -3103,10 +3111,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                             ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 id_1230 { id_1229, dbool_snd_173 };
                                             letpair_res_1226 = id_1230;
                                           }
-                                          ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef let_res_1231;
+                                          ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 let_res_1231;
                                           {
                                             ::dessser::gen::dashboard_widget::t4138de986e20d18b01e4c493dc9d5451 drec_174 { letpair_res_1226 };
-                                            ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef letpair_res_1232;
+                                            ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 letpair_res_1232;
                                             {
                                               auto drec_fst_175 { std::get<0>(drec_174) };
                                               auto drec_snd_176 { std::get<1>(drec_174) };
@@ -3181,19 +3189,19 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                 }
                                                 let_res_1235 = let_res_1238;
                                               }
-                                              ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1273;
+                                              ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1273;
                                               {
                                                 ::dessser::gen::dashboard_widget::t405eb186408556fed8f2c41523c07d13 dlist1_186 { let_res_1235 };
-                                                ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1274;
+                                                ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1274;
                                                 {
                                                   auto dlist1_fst_187 { std::get<0>(dlist1_186) };
                                                   auto dlist1_snd_188 { std::get<1>(dlist1_186) };
-                                                  Lst<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> endoflist_1275;
-                                                  ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e id_1276 { endoflist_1275, dlist1_snd_188 };
-                                                  Vec<1, ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e> id_1277 {  id_1276  };
-                                                  ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1278;
+                                                  Lst<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> endoflist_1275;
+                                                  ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 id_1276 { endoflist_1275, dlist1_snd_188 };
+                                                  Vec<1, ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894> id_1277 {  id_1276  };
+                                                  ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1278;
                                                   {
-                                                    Vec<1, ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e> inits_src_ref_189 { id_1277 };
+                                                    Vec<1, ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894> inits_src_ref_189 { id_1277 };
                                                     int32_t id_1279 { 0L };
                                                     Vec<1, int32_t> id_1280 {  id_1279  };
                                                     {
@@ -3207,9 +3215,9 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                         while_flag_1281 = id_1285;
                                                         if (while_flag_1281) {
                                                           uint8_t id_1286 { 0 };
-                                                          ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e id_1287 { inits_src_ref_189[id_1286] };
+                                                          ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 id_1287 { inits_src_ref_189[id_1286] };
                                                           {
-                                                            ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e dlist2_191 { id_1287 };
+                                                            ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 dlist2_191 { id_1287 };
                                                             {
                                                               auto dlist2_fst_192 { std::get<0>(dlist2_191) };
                                                               auto dlist2_snd_193 { std::get<1>(dlist2_191) };
@@ -3223,10 +3231,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                                 ::dessser::gen::dashboard_widget::taebed00ad7fdb3f7ced11d3cfd58aade id_1292 { id_1291, dfloat_snd_196 };
                                                                 letpair_res_1290 = id_1292;
                                                               }
-                                                              ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1293;
+                                                              ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1293;
                                                               {
                                                                 ::dessser::gen::dashboard_widget::taebed00ad7fdb3f7ced11d3cfd58aade drec_197 { letpair_res_1290 };
-                                                                ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1294;
+                                                                ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1294;
                                                                 {
                                                                   auto drec_fst_198 { std::get<0>(drec_197) };
                                                                   auto drec_snd_199 { std::get<1>(drec_197) };
@@ -3238,10 +3246,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                                     ::dessser::gen::dashboard_widget::t405eb186408556fed8f2c41523c07d13 id_1297 { du32_fst_201, du32_snd_202 };
                                                                     letpair_res_1296 = id_1297;
                                                                   }
-                                                                  ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1298;
+                                                                  ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1298;
                                                                   {
                                                                     ::dessser::gen::dashboard_widget::t405eb186408556fed8f2c41523c07d13 drec_203 { letpair_res_1296 };
-                                                                    ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1299;
+                                                                    ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1299;
                                                                     {
                                                                       auto drec_fst_204 { std::get<0>(drec_203) };
                                                                       auto drec_snd_205 { std::get<1>(drec_203) };
@@ -3304,10 +3312,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                                         }
                                                                         let_res_1303 = letpair_res_1304;
                                                                       }
-                                                                      ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1325;
+                                                                      ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1325;
                                                                       {
                                                                         ::dessser::gen::dashboard_widget::t456f791d00acb0124553dcfd0d592389 drec_227 { let_res_1303 };
-                                                                        ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1326;
+                                                                        ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1326;
                                                                         {
                                                                           auto drec_fst_228 { std::get<0>(drec_227) };
                                                                           auto drec_snd_229 { std::get<1>(drec_227) };
@@ -3403,10 +3411,10 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                                             }
                                                                             let_res_1368 = letpair_res_1369;
                                                                           }
-                                                                          ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1374;
+                                                                          ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1374;
                                                                           {
                                                                             ::dessser::gen::dashboard_widget::tef94b55d8809251f13165d9a05bd9d0e drec_242 { let_res_1368 };
-                                                                            ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1375;
+                                                                            ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1375;
                                                                             {
                                                                               auto drec_fst_243 { std::get<0>(drec_242) };
                                                                               auto drec_snd_244 { std::get<1>(drec_242) };
@@ -3642,21 +3650,21 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                                                 ::dessser::gen::dashboard_widget::t1beb4adb76e17aefcfb1b276e44e61db id_1491 { id_1490, dlist4_snd_279 };
                                                                                 letpair_res_1489 = id_1491;
                                                                               }
-                                                                              ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e let_res_1492;
+                                                                              ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 let_res_1492;
                                                                               {
                                                                                 ::dessser::gen::dashboard_widget::t1beb4adb76e17aefcfb1b276e44e61db drec_280 { letpair_res_1489 };
-                                                                                ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1493;
+                                                                                ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1493;
                                                                                 {
                                                                                   auto drec_fst_281 { std::get<0>(drec_280) };
                                                                                   auto drec_snd_282 { std::get<1>(drec_280) };
                                                                                   ::dessser::gen::dashboard_widget::tb3f98ea670610d40658a618de3ec7b90 id_1494 { drec_snd_282.readU8() };
-                                                                                  ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e letpair_res_1495;
+                                                                                  ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 letpair_res_1495;
                                                                                   {
                                                                                     auto du8_fst_284 { std::get<0>(id_1494) };
                                                                                     auto du8_snd_285 { std::get<1>(id_1494) };
-                                                                                    ::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136 id_1496 { .axis = du8_fst_284, .color = drec_fst_204, .column = drec_fst_243, .factors = drec_fst_281, .opacity = drec_fst_198, .representation = drec_fst_228 };
-                                                                                    Lst<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_1497 { id_1496, dlist2_fst_192 };
-                                                                                    ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e id_1498 { id_1497, du8_snd_285 };
+                                                                                    ::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f id_1496 { .axis = du8_fst_284, .color = drec_fst_204, .column = drec_fst_243, .factors = drec_fst_281, .opacity = drec_fst_198, .representation = drec_fst_228 };
+                                                                                    Lst<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_1497 { id_1496, dlist2_fst_192 };
+                                                                                    ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 id_1498 { id_1497, du8_snd_285 };
                                                                                     letpair_res_1495 = id_1498;
                                                                                   }
                                                                                   letpair_res_1493 = letpair_res_1495;
@@ -3699,21 +3707,21 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                                                     }
                                                     (void)VOID;
                                                     uint8_t id_1506 { 0 };
-                                                    ::dessser::gen::dashboard_widget::t0afe31eb443a5eb04153d7c29205290e id_1507 { inits_src_ref_189[id_1506] };
+                                                    ::dessser::gen::dashboard_widget::t4e28daf0f0a0e09c529a6c4776cc9894 id_1507 { inits_src_ref_189[id_1506] };
                                                     let_res_1278 = id_1507;
                                                   }
                                                   letpair_res_1274 = let_res_1278;
                                                 }
                                                 let_res_1273 = letpair_res_1274;
                                               }
-                                              ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef letpair_res_1508;
+                                              ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 letpair_res_1508;
                                               {
                                                 auto dlist4_fst_293 { std::get<0>(let_res_1273) };
                                                 auto dlist4_snd_294 { std::get<1>(let_res_1273) };
-                                                Arr<::dessser::gen::dashboard_widget::t4419d30cb2b0a80e59ffc034e0c20136> id_1509 { dlist4_fst_293.toListRev() };
-                                                ::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d id_1510 { .fields = id_1509, .name = drec_fst_169, .visible = drec_fst_175 };
-                                                Lst<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_1511 { id_1510, dlist2_fst_166 };
-                                                ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef id_1512 { id_1511, dlist4_snd_294 };
+                                                Arr<::dessser::gen::dashboard_widget::tb51b41a880c2ae6dd20d6e8d4b27e71f> id_1509 { dlist4_fst_293.toListRev() };
+                                                ::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60 id_1510 { .fields = id_1509, .name = drec_fst_169, .visible = drec_fst_175 };
+                                                Lst<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_1511 { id_1510, dlist2_fst_166 };
+                                                ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 id_1512 { id_1511, dlist4_snd_294 };
                                                 letpair_res_1508 = id_1512;
                                               }
                                               letpair_res_1232 = letpair_res_1508;
@@ -3744,7 +3752,7 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                             }
                             (void)VOID;
                             uint8_t id_1520 { 0 };
-                            ::dessser::gen::dashboard_widget::td7e8d9777d799f3d0dbc61bd9fa4daef id_1521 { inits_src_ref_163[id_1520] };
+                            ::dessser::gen::dashboard_widget::t73b4836483f2e9858e6094ea33cbc890 id_1521 { inits_src_ref_163[id_1520] };
                             let_res_1210 = id_1521;
                           }
                           letpair_res_1206 = let_res_1210;
@@ -3755,8 +3763,8 @@ static std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1
                       {
                         auto dlist4_fst_302 { std::get<0>(let_res_1205) };
                         auto dlist4_snd_303 { std::get<1>(let_res_1205) };
-                        Arr<::dessser::gen::dashboard_widget::te656ad6c7a50d20bed39c72121f1bc2d> id_1523 { dlist4_fst_302.toListRev() };
-                        ::dessser::gen::dashboard_widget::ta1f207834d08b85ce654fc130a9cb3fc id_1524 { .Chart_axis = drec_fst_149, .sources = id_1523, .title = drec_fst_78, .type = drec_fst_93 };
+                        Arr<::dessser::gen::dashboard_widget::t2958b4be951f2940fe1f4fe3e7336e60> id_1523 { dlist4_fst_302.toListRev() };
+                        ::dessser::gen::dashboard_widget::t5383e291bb0cfc4e60684e58d6fb9e1a id_1524 { .Chart_axis = drec_fst_149, .sources = id_1523, .title = drec_fst_78, .type = drec_fst_93 };
                         ::dessser::gen::dashboard_widget::t* id_1525 { new ::dessser::gen::dashboard_widget::t(std::in_place_index<1>, id_1524) };
                         ::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1cf1a79d1 id_1526 { id_1525, dlist4_snd_303 };
                         letpair_res_1522 = id_1526;

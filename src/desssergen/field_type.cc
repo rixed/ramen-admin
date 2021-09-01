@@ -39,6 +39,8 @@ struct t {
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
+  t(std::optional<std::string> aggr_, std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : aggr(aggr_), doc(doc_), name(name_), typ(typ_), units(units_) {}
+  t() = default;
   bool operator==(t const &other) const {
     return aggr == other.aggr && doc == other.doc && name == other.name && typ == other.typ && units == other.units;
   }
