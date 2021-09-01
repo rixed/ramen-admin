@@ -53,8 +53,13 @@ private:
   std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
 
   // Used for secure channel (using libsodium)
-  unsigned char nonce[crypto_box_NONCEBYTES];
+  unsigned char clt_nonce[crypto_box_NONCEBYTES];
+  unsigned char srv_nonce[crypto_box_NONCEBYTES];
+  /* srv_pub_key starts with the well known server public key and is replaced
+   * by a session public key after SendSessionKey have been received: */
   unsigned char srv_pub_key[crypto_box_PUBLICKEYBYTES];
+  // Also whenever the server keys are received this is precomputed:
+  unsigned char channel_key[crypto_box_BEFORENMBYTES];
   unsigned char clt_pub_key[crypto_box_PUBLICKEYBYTES];
   unsigned char clt_priv_key[crypto_box_SECRETKEYBYTES];
   bool keySent = false;
@@ -73,6 +78,13 @@ private:
   int sendBytes(char const *, size_t);
 
   int readSrvMsg(dessser::Bytes const &);
+
+  int recvdSessionKey(
+        dessser::Bytes const &public_key,
+        dessser::Bytes const &nonce,
+        dessser::Bytes const &message);
+
+  int decrypt(dessser::Bytes const &in, dessser::Bytes &out);
 
   int recvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const>);
 

@@ -198,35 +198,92 @@ cannot_decode:
                  << dec_sz << "bytes out of" << msg_sz;
       goto cannot_decode;
     }
-    std::shared_ptr<dessser::gen::sync_msg::t> auth { std::get<0>(t_ptr) };
+    std::shared_ptr<dessser::gen::sync_msg::t> authn { std::get<0>(t_ptr) };
 
-    switch ((dessser::gen::sync_msg::Constr_t)auth->index()) {
+    switch ((dessser::gen::sync_msg::Constr_t)authn->index()) {
       case dessser::gen::sync_msg::SendSessionKey:
-        qDebug() << "TODO: Received session keys";
+        {
+          auto const sess_keys { std::get<dessser::gen::sync_msg::SendSessionKey>(*authn) };
+          if (0 != recvdSessionKey(sess_keys.public_key, sess_keys.nonce, sess_keys.message))
+            goto cannot_decode;
+        }
         break;
       case dessser::gen::sync_msg::Crypted:
         qDebug() << "TODO: decrypting";
         break;
       case dessser::gen::sync_msg::ClearText:
         {
-          dessser::Bytes const msg { std::get<dessser::gen::sync_msg::ClearText>(*auth) };
+          dessser::Bytes const msg { std::get<dessser::gen::sync_msg::ClearText>(*authn) };
           if (0 != readSrvMsg(msg)) goto cannot_decode;
         }
         break;
       case dessser::gen::sync_msg::Error:
         {
           QString errMsg {
-            QString::fromStdString(std::get<dessser::gen::sync_msg::Error>(*auth)) };
+            QString::fromStdString(std::get<dessser::gen::sync_msg::Error>(*authn)) };
           qCritical() << "Error from confserver:" << errMsg;
           emit connectionNonFatalError(syncStatus, errMsg);
         }
         break;
       default:
-        qCritical() << "Invalid auth message type";
+        qCritical() << "Invalid authenticated message type";
         goto cannot_decode;
     }
 
   } while (avail_sz > 0);
+}
+
+int ConfClient::recvdSessionKey(
+      dessser::Bytes const &public_key,
+      dessser::Bytes const &nonce,
+      dessser::Bytes const &message)
+{
+  if (! keySent) {
+    qCritical() << "Received session keys too early!";
+    return -1;
+  }
+  // Replace server public key with that one:
+  if (public_key.length() != sizeof srv_pub_key) {
+    qCritical() << "Bad length for public key:" << public_key.length()
+                << "Instead of" << sizeof srv_pub_key;
+    return -1;
+  }
+  memcpy(srv_pub_key, public_key.get(), sizeof srv_pub_key);
+  // precompute the channel key:
+  if (0 != crypto_box_beforenm(channel_key, srv_pub_key, clt_priv_key)) {
+    qCritical() << "Cannot crypto_box_beforenm";
+    return -1;
+  }
+  // decrypt the message:
+  memcpy(srv_nonce, nonce.get(), nonce.length());
+  uint8_t clear_buffer[crypto_box_BOXZEROBYTES + message.length()];
+  dessser::Bytes msg {
+    // Points after padding and mac:
+    std::shared_ptr<uint8_t>(clear_buffer, [](uint8_t *){}),
+    sizeof clear_buffer - crypto_box_ZEROBYTES, size_t(crypto_box_ZEROBYTES) };
+  if (0 != decrypt(message, msg)) return -1;
+  return readSrvMsg(msg);
+}
+
+/* Assumes srv_nonce and channel_key are up to date:
+ * clear must have capacity for the clear text, ie. crypto_box_BOXZEROBYTES longer
+ * than cipher (cipher is MAC + message, NaCl wants 32 zeros) */
+int ConfClient::decrypt(dessser::Bytes const &cipher, dessser::Bytes &clear)
+{
+  Q_ASSERT(clear.capa >= cipher.length() + crypto_box_BOXZEROBYTES);
+  Q_ASSERT(clear.length() == cipher.length() - crypto_box_BOXZEROBYTES);
+  bzero(clear.buffer.get(), crypto_box_ZEROBYTES);
+  // Have to copy cipher for 0 headers:
+  unsigned char cipher_[crypto_box_BOXZEROBYTES + cipher.length()];
+  bzero(cipher_, crypto_box_BOXZEROBYTES);
+  memcpy(cipher_ + crypto_box_BOXZEROBYTES, cipher.get(), cipher.length());
+  if (0 != crypto_box_open_afternm(clear.buffer.get(), cipher_, sizeof cipher_,
+                                   srv_nonce, channel_key)) {
+    qCritical() << "Cannot crypto_box_open_afternm";
+    return -1;
+  }
+
+  return 0;
 }
 
 int ConfClient::startSynchronization()
@@ -444,7 +501,7 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
       return -1;
     } else {
       /* Pick a nonce */
-      randombytes_buf(nonce, sizeof nonce);
+      randombytes_buf(clt_nonce, sizeof clt_nonce);
       /* Encrypt using server public key and that nonce: */
       qDebug() << "Encrypting" << text_len << "bytes";
       bzero(clear_text, crypto_box_ZEROBYTES);
@@ -452,7 +509,7 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
              reinterpret_cast<unsigned char const *>(text.toString().c_str()),
              text_len);
       if (crypto_box(cipher_text, clear_text, crypto_box_ZEROBYTES + text_len,
-                     nonce, srv_pub_key, clt_priv_key) < 0) {
+                     clt_nonce, srv_pub_key, clt_priv_key) < 0) {
         qCritical() << "Cannot encrypt message";
         return -1;
       }
@@ -461,9 +518,9 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
                                  /* Do not delete for real: */[](uint8_t *){}),
         sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0) };
       dessser::Bytes const send_nonce {
-        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(nonce),
+        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_nonce),
                                  [](uint8_t *){}),
-        sizeof(nonce), size_t(0) };
+        sizeof(clt_nonce), size_t(0) };
       dessser::Bytes const send_clt_pub_key {
         std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_pub_key),
                                  [](uint8_t *){}),
@@ -502,7 +559,7 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
     return -1;
 
   // If we have used the nonce, increment it (*AFTER* it's serialized!)
-  if (isCrypted()) sodium_increment(nonce, sizeof nonce);
+  if (isCrypted()) sodium_increment(clt_nonce, sizeof clt_nonce);
 
   return 0;
 }
