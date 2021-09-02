@@ -84,7 +84,8 @@ private:
         dessser::Bytes const &nonce,
         dessser::Bytes const &message);
 
-  int decrypt(dessser::Bytes const &in, dessser::Bytes &out);
+  // Decrypt the given message and call readSrvMsg:
+  int readCrypted(dessser::Bytes const &);
 
   int recvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const>);
 

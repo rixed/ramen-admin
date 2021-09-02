@@ -49,6 +49,9 @@ ConfClient::ConfClient(QString const &target, QString const &username_, std::sha
   }
 
   if (isCrypted()) {
+    /* Pick a nonce */
+    randombytes_buf(clt_nonce, sizeof clt_nonce);
+    /* Prepare keys: */
     size_t const pub_capa { sizeof srv_pub_key };
     if (z85_decode(id->srv_pub_key.length(),
                    (unsigned char const *)id->srv_pub_key.toStdString().c_str(),
@@ -209,7 +212,10 @@ cannot_decode:
         }
         break;
       case dessser::gen::sync_msg::Crypted:
-        qDebug() << "TODO: decrypting";
+        {
+          dessser::Bytes const cipher { std::get<dessser::gen::sync_msg::Crypted>(*authn) };
+          if (0 != readCrypted(cipher)) goto cannot_decode;
+        }
         break;
       case dessser::gen::sync_msg::ClearText:
         {
@@ -256,34 +262,48 @@ int ConfClient::recvdSessionKey(
   }
   // decrypt the message:
   memcpy(srv_nonce, nonce.get(), nonce.length());
-  uint8_t clear_buffer[crypto_box_BOXZEROBYTES + message.length()];
-  dessser::Bytes msg {
-    // Points after padding and mac:
-    std::shared_ptr<uint8_t>(clear_buffer, [](uint8_t *){}),
-    sizeof clear_buffer - crypto_box_ZEROBYTES, size_t(crypto_box_ZEROBYTES) };
-  if (0 != decrypt(message, msg)) return -1;
-  return readSrvMsg(msg);
+  return readCrypted(message);
 }
 
-/* Assumes srv_nonce and channel_key are up to date:
- * clear must have capacity for the clear text, ie. crypto_box_BOXZEROBYTES longer
- * than cipher (cipher is MAC + message, NaCl wants 32 zeros) */
-int ConfClient::decrypt(dessser::Bytes const &cipher, dessser::Bytes &clear)
+/* OCaml binding to libsodium implements its own version of increment for some
+ * reason, and does so in a way that's incompatible with libsodium v1.0.18.
+ * Namely, it increments from the end whereas libsodium increments from the
+ * beginning. So let's implement the same increment here: */
+static void sodium_increment_rev(unsigned char *b, size_t sz)
 {
-  Q_ASSERT(clear.capa >= cipher.length() + crypto_box_BOXZEROBYTES);
-  Q_ASSERT(clear.length() == cipher.length() - crypto_box_BOXZEROBYTES);
-  bzero(clear.buffer.get(), crypto_box_ZEROBYTES);
+  while (sz-- != 0) [[likely]] {
+    uint_fast16_t const c { (uint_fast16_t)b[sz] + 1 };
+    b[sz] = c;
+    if (! (c & 0x100)) [[likely]] break;
+  }
+}
+
+/* Assumes srv_nonce and channel_key are up to date: */
+int ConfClient::readCrypted(dessser::Bytes const &cipher)
+{
+  /* clear must have capacity for the clear text, ie. crypto_box_BOXZEROBYTES longer
+   * than cipher (cipher is MAC + message, NaCl wants 32 zeros) */
+  uint8_t clear_buffer[crypto_box_BOXZEROBYTES + cipher.length()];
+  bzero(clear_buffer, crypto_box_ZEROBYTES);
   // Have to copy cipher for 0 headers:
   unsigned char cipher_[crypto_box_BOXZEROBYTES + cipher.length()];
   bzero(cipher_, crypto_box_BOXZEROBYTES);
   memcpy(cipher_ + crypto_box_BOXZEROBYTES, cipher.get(), cipher.length());
-  if (0 != crypto_box_open_afternm(clear.buffer.get(), cipher_, sizeof cipher_,
+  if (0 != crypto_box_open_afternm(clear_buffer, cipher_, sizeof cipher_,
                                    srv_nonce, channel_key)) {
     qCritical() << "Cannot crypto_box_open_afternm";
     return -1;
   }
 
-  return 0;
+  // Increment server nonce:
+  sodium_increment_rev(srv_nonce, sizeof srv_nonce);
+
+  dessser::Bytes msg {
+    // Points after padding and mac:
+    std::shared_ptr<uint8_t>(clear_buffer, [](uint8_t *){}),
+    sizeof clear_buffer - crypto_box_ZEROBYTES, size_t(crypto_box_ZEROBYTES) };
+
+  return readSrvMsg(msg);
 }
 
 int ConfClient::startSynchronization()
@@ -496,27 +516,26 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
   unsigned char cipher_text[sizeof clear_text];
 
   if (isCrypted()) {
-    if (keySent) {  // encrypt
-      qCritical() << "TODO: encrypt";
+    /* Encrypt using server public key and that nonce: */
+    qDebug() << "Encrypting" << text_len << "bytes";
+    bzero(clear_text, crypto_box_ZEROBYTES);
+    memcpy(clear_text + crypto_box_ZEROBYTES,
+           reinterpret_cast<unsigned char const *>(text.toString().c_str()),
+           text_len);
+    if (crypto_box(cipher_text, clear_text, crypto_box_ZEROBYTES + text_len,
+                   clt_nonce, srv_pub_key, clt_priv_key) < 0) {
+      qCritical() << "Cannot encrypt message";
       return -1;
+    }
+    dessser::Bytes const send_msg {
+      std::shared_ptr<uint8_t>(
+        reinterpret_cast<uint8_t *>(cipher_text + crypto_box_BOXZEROBYTES),
+        /* Do not delete for real: */[](uint8_t *){}),
+      sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0) };
+    if (keySent) {  // encrypt
+      auth = dessser::gen::sync_msg::t {
+        std::in_place_index<dessser::gen::sync_msg::Crypted>, send_msg };
     } else {
-      /* Pick a nonce */
-      randombytes_buf(clt_nonce, sizeof clt_nonce);
-      /* Encrypt using server public key and that nonce: */
-      qDebug() << "Encrypting" << text_len << "bytes";
-      bzero(clear_text, crypto_box_ZEROBYTES);
-      memcpy(clear_text + crypto_box_ZEROBYTES,
-             reinterpret_cast<unsigned char const *>(text.toString().c_str()),
-             text_len);
-      if (crypto_box(cipher_text, clear_text, crypto_box_ZEROBYTES + text_len,
-                     clt_nonce, srv_pub_key, clt_priv_key) < 0) {
-        qCritical() << "Cannot encrypt message";
-        return -1;
-      }
-      dessser::Bytes const send_msg {
-        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(cipher_text + crypto_box_BOXZEROBYTES),
-                                 /* Do not delete for real: */[](uint8_t *){}),
-        sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0) };
       dessser::Bytes const send_nonce {
         std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_nonce),
                                  [](uint8_t *){}),
@@ -559,7 +578,7 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
     return -1;
 
   // If we have used the nonce, increment it (*AFTER* it's serialized!)
-  if (isCrypted()) sodium_increment(clt_nonce, sizeof clt_nonce);
+  if (isCrypted()) sodium_increment_rev(clt_nonce, sizeof clt_nonce);
 
   return 0;
 }
