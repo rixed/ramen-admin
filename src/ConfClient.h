@@ -4,8 +4,11 @@
  * starts the synchronization and feed the designated KVStore with changes. */
 
 #include <cstddef>
+#include <functional>
 #include <memory>
+#include <optional>
 #include <string>
+#include <list>
 #include <QAbstractSocket>
 #include <QObject>
 #include <QString>
@@ -37,7 +40,6 @@ class ConfClient : public QObject
 
   std::shared_ptr<KVStore> kvs;
 
-private:
   QTcpSocket *tcpSocket;
   SyncStatus syncStatus;
 
@@ -51,6 +53,7 @@ private:
    * connection (although most configuration objects are associated to a user name,
    * some are with a specific socket). */
   std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
+  std::shared_ptr<dessser::gen::sync_key::t const> myErrKey;
 
   // Used for secure channel (using libsodium)
   unsigned char clt_nonce[crypto_box_NONCEBYTES];
@@ -63,15 +66,22 @@ private:
   unsigned char clt_pub_key[crypto_box_PUBLICKEYBYTES];
   unsigned char clt_priv_key[crypto_box_SECRETKEYBYTES];
   bool keySent = false;
+  // Used for applicative keep-alive (0 means not ready yet)
+  qint64 lastSent = 0U;
+
+  struct OnDoneCallback {
+    uint32_t seq;
+    std::function<int(std::string const &)> callback;
+
+    OnDoneCallback(uint32_t seq_, std::function<int(std::string const &)> callback_)
+      : seq(seq_), callback(callback_) {}
+  };
+
+  std::list<OnDoneCallback> onDoneCallbacks;
 
   void fatalErr(QString const &errString);
 
   int sendAuth();
-
-  int sendCmd(
-    dessser::gen::sync_client_cmd::t const &,
-    bool confirm_success = false,
-    bool echo = true);
 
   int sendMsg(dessser::gen::sync_client_msg::t const &);
 
@@ -115,11 +125,23 @@ private:
 
   bool isCrypted() const;
 
+  // Checks whether we had a call-back for that key and execute it
+  int checkDones(
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::shared_ptr<dessser::gen::sync_value::t const>);
+
 public:
   // confserver as in "host:port"
   ConfClient(QString const &server, QString const &username,
              std::shared_ptr<UserIdentity const>,
              std::shared_ptr<KVStore>);
+
+  int sendCmd(
+    dessser::gen::sync_client_cmd::t const &,
+    /* Register what should happen when the result is received (with err message,
+     * empty if no error). */
+    std::optional<std::function<int(std::string const &)>> = std::nullopt,
+    bool echo = true);
 
 signals:
   void connectionProgressed(SyncStatus newStage);

@@ -57,26 +57,26 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::raql_net_protocol::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_net_protocol::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_net_protocol::t* p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0->index()) };
+    uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_79 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0->index()) };
+      uint16_t id_5 { uint16_t((*p_0).index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_79;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0->index()) };
+        uint16_t id_9 { uint16_t((*p_0).index()) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_79;
         } else {
-          uint16_t id_12 { uint16_t(p_0->index()) };
+          uint16_t id_12 { uint16_t((*p_0).index()) };
           uint16_t id_13 { 2 };
           bool id_14 { bool(id_12 == id_13) };
           Void id_15 { ((void)(assert(id_14)), VOID) };
@@ -101,7 +101,7 @@ static std::function<Size(::dessser::gen::raql_net_protocol::t*)> sersize_of_row
 {
   std::function<Size(::dessser::gen::raql_net_protocol::t*)> fun16 { [&fun16](::dessser::gen::raql_net_protocol::t* p_0) {
     uint16_t id_17 { 0 };
-    uint16_t id_18 { uint16_t(p_0->index()) };
+    uint16_t id_18 { uint16_t((*p_0).index()) };
     bool id_19 { bool(id_17 == id_18) };
     Size choose_res_20;
     if (id_19) {
@@ -109,14 +109,14 @@ static std::function<Size(::dessser::gen::raql_net_protocol::t*)> sersize_of_row
       choose_res_20 = id_21;
     } else {
       uint16_t id_22 { 1 };
-      uint16_t id_23 { uint16_t(p_0->index()) };
+      uint16_t id_23 { uint16_t((*p_0).index()) };
       bool id_24 { bool(id_22 == id_23) };
       Size choose_res_25;
       if (id_24) {
         Size id_26 { 2UL };
         choose_res_25 = id_26;
       } else {
-        uint16_t id_27 { uint16_t(p_0->index()) };
+        uint16_t id_27 { uint16_t((*p_0).index()) };
         uint16_t id_28 { 2 };
         bool id_29 { bool(id_27 == id_28) };
         Void id_30 { ((void)(assert(id_29)), VOID) };
@@ -209,5 +209,6 @@ static std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316
 std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

@@ -38,9 +38,6 @@ struct t {
   uint32_t seq;
   t(dessser::gen::sync_client_cmd::t_ext cmd_, bool confirm_success_, bool echo_, uint32_t seq_) : cmd(cmd_), confirm_success(confirm_success_), echo(echo_), seq(seq_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return cmd == other.cmd && confirm_success == other.confirm_success && echo == other.echo && seq == other.seq;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::sync_client_msg::t*,
@@ -80,12 +77,12 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::sync_client_msg::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::sync_client_msg::t*,Pointer)> fun0 { [&fun0](::dessser::gen::sync_client_msg::t* p_0, Pointer p_1) {
-    uint32_t id_1 { p_0->seq };
+    uint32_t id_1 { (*p_0).seq };
     Pointer id_2 { p_1.writeU32Le(id_1) };
     Pointer let_res_3;
     {
       Pointer srec_dst_84 { id_2 };
-      bool id_4 { p_0->confirm_success };
+      bool id_4 { (*p_0).confirm_success };
       uint8_t id_5 { uint8_t(id_4) };
       Pointer id_6 { srec_dst_84.writeU8(id_5) };
       let_res_3 = id_6;
@@ -93,7 +90,7 @@ static std::function<Pointer(::dessser::gen::sync_client_msg::t*,Pointer)> to_ro
     Pointer let_res_7;
     {
       Pointer srec_dst_85 { let_res_3 };
-      bool id_8 { p_0->echo };
+      bool id_8 { (*p_0).echo };
       uint8_t id_9 { uint8_t(id_8) };
       Pointer id_10 { srec_dst_85.writeU8(id_9) };
       let_res_7 = id_10;
@@ -102,7 +99,7 @@ static std::function<Pointer(::dessser::gen::sync_client_msg::t*,Pointer)> to_ro
     {
       Pointer srec_dst_86 { let_res_7 };
       auto fun12 { dessser::gen::sync_client_cmd::to_row_binary };
-      dessser::gen::sync_client_cmd::t_ext id_13 { p_0->cmd };
+      dessser::gen::sync_client_cmd::t_ext id_13 { (*p_0).cmd };
       Pointer id_14 { fun12(id_13, srec_dst_86) };
       let_res_11 = id_14;
     }
@@ -121,7 +118,7 @@ static std::function<Size(::dessser::gen::sync_client_msg::t*)> sersize_of_row_b
   std::function<Size(::dessser::gen::sync_client_msg::t*)> fun15 { [&fun15](::dessser::gen::sync_client_msg::t* p_0) {
     Size id_16 { 6UL };
     auto fun17 { dessser::gen::sync_client_cmd::sersize_of_row_binary };
-    dessser::gen::sync_client_cmd::t_ext id_18 { p_0->cmd };
+    dessser::gen::sync_client_cmd::t_ext id_18 { (*p_0).cmd };
     Size id_19 { fun17(id_18) };
     Size id_20 { Size(id_16 + id_19) };
     return id_20;
@@ -227,5 +224,6 @@ static std::function<::dessser::gen::sync_client_msg::tee47ac205e59d38f92971045d
 std::function<::dessser::gen::sync_client_msg::tee47ac205e59d38f92971045d62a4c13(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

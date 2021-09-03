@@ -39,9 +39,6 @@ struct t {
   dessser::gen::raql_expr::t_ext expr;
   t(std::optional<std::string> aggr_, dessser::gen::field_name::t_ext alias_, std::string doc_, dessser::gen::raql_expr::t_ext expr_) : aggr(aggr_), alias(alias_), doc(doc_), expr(expr_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return aggr == other.aggr && alias == other.alias && doc == other.doc && expr == other.expr;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::raql_select_field::t*,
@@ -123,20 +120,20 @@ static std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_
 {
   std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_select_field::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::raql_expr::to_row_binary };
-    dessser::gen::raql_expr::t_ext id_2 { p_0->expr };
+    dessser::gen::raql_expr::t_ext id_2 { (*p_0).expr };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_108 { id_3 };
       auto fun5 { dessser::gen::field_name::to_row_binary };
-      dessser::gen::field_name::t_ext id_6 { p_0->alias };
+      dessser::gen::field_name::t_ext id_6 { (*p_0).alias };
       Pointer id_7 { fun5(id_6, srec_dst_108) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_109 { let_res_4 };
-      std::string id_9 { p_0->doc };
+      std::string id_9 { (*p_0).doc };
       uint32_t id_10 { (uint32_t)id_9.size() };
       Vec<1, uint32_t> id_11 {  id_10  };
       Pointer let_res_12;
@@ -195,7 +192,7 @@ static std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_
         }
         let_res_12 = let_res_14;
       }
-      std::string id_46 { p_0->doc };
+      std::string id_46 { (*p_0).doc };
       Bytes id_47 { id_46 };
       Pointer id_48 { let_res_12.writeBytes(id_47) };
       let_res_8 = id_48;
@@ -203,7 +200,7 @@ static std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_
     Pointer let_res_49;
     {
       Pointer srec_dst_112 { let_res_8 };
-      std::optional<std::string> id_50 { p_0->aggr };
+      std::optional<std::string> id_50 { (*p_0).aggr };
       bool id_51 { !(id_50.has_value ()) };
       Pointer choose_res_52;
       if (id_51) {
@@ -211,7 +208,7 @@ static std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_
         Pointer id_54 { srec_dst_112.writeU8(id_53) };
         choose_res_52 = id_54;
       } else {
-        std::optional<std::string> id_55 { p_0->aggr };
+        std::optional<std::string> id_55 { (*p_0).aggr };
         std::string id_56 { id_55.value() };
         uint32_t id_57 { (uint32_t)id_56.size() };
         Vec<1, uint32_t> id_58 {  id_57  };
@@ -273,7 +270,7 @@ static std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_
           }
           let_res_59 = let_res_63;
         }
-        std::optional<std::string> id_95 { p_0->aggr };
+        std::optional<std::string> id_95 { (*p_0).aggr };
         std::string id_96 { id_95.value() };
         Bytes id_97 { id_96 };
         Pointer id_98 { let_res_59.writeBytes(id_97) };
@@ -319,13 +316,13 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
 {
   std::function<Size(::dessser::gen::raql_select_field::t*)> fun99 { [&fun99](::dessser::gen::raql_select_field::t* p_0) {
     auto fun100 { dessser::gen::raql_expr::sersize_of_row_binary };
-    dessser::gen::raql_expr::t_ext id_101 { p_0->expr };
+    dessser::gen::raql_expr::t_ext id_101 { (*p_0).expr };
     Size id_102 { fun100(id_101) };
     Size let_res_103;
     {
       Size sz_99 { id_102 };
       auto fun104 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_105 { p_0->alias };
+      dessser::gen::field_name::t_ext id_105 { (*p_0).alias };
       Size id_106 { fun104(id_105) };
       Size id_107 { Size(sz_99 + id_106) };
       let_res_103 = id_107;
@@ -333,7 +330,7 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
     Size let_res_108;
     {
       Size sz_100 { let_res_103 };
-      std::string id_109 { p_0->doc };
+      std::string id_109 { (*p_0).doc };
       uint32_t id_110 { (uint32_t)id_109.size() };
       Vec<1, uint32_t> id_111 {  id_110  };
       Size let_res_112;
@@ -372,7 +369,7 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
         }
         let_res_112 = let_res_115;
       }
-      std::string id_133 { p_0->doc };
+      std::string id_133 { (*p_0).doc };
       uint32_t id_134 { (uint32_t)id_133.size() };
       Size id_135 { Size(id_134) };
       Size id_136 { Size(let_res_112 + id_135) };
@@ -382,7 +379,7 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
     Size let_res_138;
     {
       Size sz_104 { let_res_108 };
-      std::optional<std::string> id_139 { p_0->aggr };
+      std::optional<std::string> id_139 { (*p_0).aggr };
       bool id_140 { !(id_139.has_value ()) };
       Size choose_res_141;
       if (id_140) {
@@ -390,7 +387,7 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
         Size id_143 { Size(sz_104 + id_142) };
         choose_res_141 = id_143;
       } else {
-        std::optional<std::string> id_144 { p_0->aggr };
+        std::optional<std::string> id_144 { (*p_0).aggr };
         std::string id_145 { id_144.value() };
         uint32_t id_146 { (uint32_t)id_145.size() };
         Vec<1, uint32_t> id_147 {  id_146  };
@@ -430,7 +427,7 @@ static std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row
           }
           let_res_148 = let_res_151;
         }
-        std::optional<std::string> id_169 { p_0->aggr };
+        std::optional<std::string> id_169 { (*p_0).aggr };
         std::string id_170 { id_169.value() };
         uint32_t id_171 { (uint32_t)id_170.size() };
         Size id_172 { Size(id_171) };
@@ -758,5 +755,6 @@ static std::function<::dessser::gen::raql_select_field::t36d901fa3ebe9f1e6f4e29b
 std::function<::dessser::gen::raql_select_field::t36d901fa3ebe9f1e6f4e29b46ea83b2b(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

@@ -39,9 +39,6 @@ struct t {
   double until;
   t(bool explain_, std::string resp_key_, double since_, dessser::gen::fq_function_name::t_ext target_, double until_) : explain(explain_), resp_key(resp_key_), since(since_), target(target_), until(until_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return explain == other.explain && resp_key == other.resp_key && since == other.since && target == other.target && until == other.until;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::replay_request::t*,
@@ -112,12 +109,12 @@ static std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row
 {
   std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> fun0 { [&fun0](::dessser::gen::replay_request::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::fq_function_name::to_row_binary };
-    dessser::gen::fq_function_name::t_ext id_2 { p_0->target };
+    dessser::gen::fq_function_name::t_ext id_2 { (*p_0).target };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_103 { id_3 };
-      double id_5 { p_0->since };
+      double id_5 { (*p_0).since };
       uint64_t id_6 { qword_of_float(id_5) };
       Pointer id_7 { srec_dst_103.writeU64Le(id_6) };
       let_res_4 = id_7;
@@ -125,7 +122,7 @@ static std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row
     Pointer let_res_8;
     {
       Pointer srec_dst_104 { let_res_4 };
-      double id_9 { p_0->until };
+      double id_9 { (*p_0).until };
       uint64_t id_10 { qword_of_float(id_9) };
       Pointer id_11 { srec_dst_104.writeU64Le(id_10) };
       let_res_8 = id_11;
@@ -133,7 +130,7 @@ static std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row
     Pointer let_res_12;
     {
       Pointer srec_dst_105 { let_res_8 };
-      bool id_13 { p_0->explain };
+      bool id_13 { (*p_0).explain };
       uint8_t id_14 { uint8_t(id_13) };
       Pointer id_15 { srec_dst_105.writeU8(id_14) };
       let_res_12 = id_15;
@@ -141,7 +138,7 @@ static std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row
     Pointer let_res_16;
     {
       Pointer srec_dst_106 { let_res_12 };
-      std::string id_17 { p_0->resp_key };
+      std::string id_17 { (*p_0).resp_key };
       uint32_t id_18 { (uint32_t)id_17.size() };
       Vec<1, uint32_t> id_19 {  id_18  };
       Pointer let_res_20;
@@ -200,7 +197,7 @@ static std::function<Pointer(::dessser::gen::replay_request::t*,Pointer)> to_row
         }
         let_res_20 = let_res_22;
       }
-      std::string id_54 { p_0->resp_key };
+      std::string id_54 { (*p_0).resp_key };
       Bytes id_55 { id_54 };
       Pointer id_56 { let_res_20.writeBytes(id_55) };
       let_res_16 = id_56;
@@ -229,7 +226,7 @@ static std::function<Size(::dessser::gen::replay_request::t*)> sersize_of_row_bi
 {
   std::function<Size(::dessser::gen::replay_request::t*)> fun57 { [&fun57](::dessser::gen::replay_request::t* p_0) {
     auto fun58 { dessser::gen::fq_function_name::sersize_of_row_binary };
-    dessser::gen::fq_function_name::t_ext id_59 { p_0->target };
+    dessser::gen::fq_function_name::t_ext id_59 { (*p_0).target };
     Size id_60 { fun58(id_59) };
     Size id_61 { 8UL };
     Size id_62 { Size(id_60 + id_61) };
@@ -240,7 +237,7 @@ static std::function<Size(::dessser::gen::replay_request::t*)> sersize_of_row_bi
     Size let_res_67;
     {
       Size sz_99 { id_66 };
-      std::string id_68 { p_0->resp_key };
+      std::string id_68 { (*p_0).resp_key };
       uint32_t id_69 { (uint32_t)id_68.size() };
       Vec<1, uint32_t> id_70 {  id_69  };
       Size let_res_71;
@@ -279,7 +276,7 @@ static std::function<Size(::dessser::gen::replay_request::t*)> sersize_of_row_bi
         }
         let_res_71 = let_res_74;
       }
-      std::string id_92 { p_0->resp_key };
+      std::string id_92 { (*p_0).resp_key };
       uint32_t id_93 { (uint32_t)id_92.size() };
       Size id_94 { Size(id_93) };
       Size id_95 { Size(let_res_71 + id_94) };
@@ -509,5 +506,6 @@ static std::function<::dessser::gen::replay_request::t27e849e988795ad71224ab90ab
 std::function<::dessser::gen::replay_request::t27e849e988795ad71224ab90ab2a0c4c(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

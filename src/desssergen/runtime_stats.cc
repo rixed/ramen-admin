@@ -60,9 +60,6 @@ struct t {
   double tot_wait_out;
   t(uint64_t cur_groups_, uint64_t cur_ram_, std::optional<double> first_input_, std::optional<double> first_output_, double first_startup_, std::optional<double> last_input_, std::optional<double> last_output_, double last_startup_, std::optional<double> max_etime_, uint64_t max_groups_, uint64_t max_ram_, std::optional<double> min_etime_, double stats_time_, double tot_cpu_, uint64_t tot_extinguished_notifs_, uint64_t tot_firing_notifs_, uint64_t tot_full_bytes_, uint64_t tot_full_bytes_samples_, uint64_t tot_in_bytes_, uint64_t tot_in_tuples_, uint64_t tot_out_bytes_, uint64_t tot_out_errs_, uint64_t tot_out_filtered_, uint64_t tot_out_tuples_, uint64_t tot_sel_tuples_, double tot_wait_in_, double tot_wait_out_) : cur_groups(cur_groups_), cur_ram(cur_ram_), first_input(first_input_), first_output(first_output_), first_startup(first_startup_), last_input(last_input_), last_output(last_output_), last_startup(last_startup_), max_etime(max_etime_), max_groups(max_groups_), max_ram(max_ram_), min_etime(min_etime_), stats_time(stats_time_), tot_cpu(tot_cpu_), tot_extinguished_notifs(tot_extinguished_notifs_), tot_firing_notifs(tot_firing_notifs_), tot_full_bytes(tot_full_bytes_), tot_full_bytes_samples(tot_full_bytes_samples_), tot_in_bytes(tot_in_bytes_), tot_in_tuples(tot_in_tuples_), tot_out_bytes(tot_out_bytes_), tot_out_errs(tot_out_errs_), tot_out_filtered(tot_out_filtered_), tot_out_tuples(tot_out_tuples_), tot_sel_tuples(tot_sel_tuples_), tot_wait_in(tot_wait_in_), tot_wait_out(tot_wait_out_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return cur_groups == other.cur_groups && cur_ram == other.cur_ram && first_input == other.first_input && first_output == other.first_output && first_startup == other.first_startup && last_input == other.last_input && last_output == other.last_output && last_startup == other.last_startup && max_etime == other.max_etime && max_groups == other.max_groups && max_ram == other.max_ram && min_etime == other.min_etime && stats_time == other.stats_time && tot_cpu == other.tot_cpu && tot_extinguished_notifs == other.tot_extinguished_notifs && tot_firing_notifs == other.tot_firing_notifs && tot_full_bytes == other.tot_full_bytes && tot_full_bytes_samples == other.tot_full_bytes_samples && tot_in_bytes == other.tot_in_bytes && tot_in_tuples == other.tot_in_tuples && tot_out_bytes == other.tot_out_bytes && tot_out_errs == other.tot_out_errs && tot_out_filtered == other.tot_out_filtered && tot_out_tuples == other.tot_out_tuples && tot_sel_tuples == other.tot_sel_tuples && tot_wait_in == other.tot_wait_in && tot_wait_out == other.tot_wait_out;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::runtime_stats::t*,
@@ -158,13 +155,13 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> fun0 { [&fun0](::dessser::gen::runtime_stats::t* p_0, Pointer p_1) {
-    double id_1 { p_0->stats_time };
+    double id_1 { (*p_0).stats_time };
     uint64_t id_2 { qword_of_float(id_1) };
     Pointer id_3 { p_1.writeU64Le(id_2) };
     Pointer let_res_4;
     {
       Pointer srec_dst_266 { id_3 };
-      double id_5 { p_0->first_startup };
+      double id_5 { (*p_0).first_startup };
       uint64_t id_6 { qword_of_float(id_5) };
       Pointer id_7 { srec_dst_266.writeU64Le(id_6) };
       let_res_4 = id_7;
@@ -172,7 +169,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_8;
     {
       Pointer srec_dst_267 { let_res_4 };
-      double id_9 { p_0->last_startup };
+      double id_9 { (*p_0).last_startup };
       uint64_t id_10 { qword_of_float(id_9) };
       Pointer id_11 { srec_dst_267.writeU64Le(id_10) };
       let_res_8 = id_11;
@@ -180,7 +177,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_12;
     {
       Pointer srec_dst_268 { let_res_8 };
-      std::optional<double> id_13 { p_0->min_etime };
+      std::optional<double> id_13 { (*p_0).min_etime };
       bool id_14 { !(id_13.has_value ()) };
       Pointer choose_res_15;
       if (id_14) {
@@ -190,7 +187,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_18 { 0 };
         Pointer id_19 { srec_dst_268.writeU8(id_18) };
-        std::optional<double> id_20 { p_0->min_etime };
+        std::optional<double> id_20 { (*p_0).min_etime };
         double id_21 { id_20.value() };
         uint64_t id_22 { qword_of_float(id_21) };
         Pointer id_23 { id_19.writeU64Le(id_22) };
@@ -201,7 +198,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_24;
     {
       Pointer srec_dst_269 { let_res_12 };
-      std::optional<double> id_25 { p_0->max_etime };
+      std::optional<double> id_25 { (*p_0).max_etime };
       bool id_26 { !(id_25.has_value ()) };
       Pointer choose_res_27;
       if (id_26) {
@@ -211,7 +208,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_30 { 0 };
         Pointer id_31 { srec_dst_269.writeU8(id_30) };
-        std::optional<double> id_32 { p_0->max_etime };
+        std::optional<double> id_32 { (*p_0).max_etime };
         double id_33 { id_32.value() };
         uint64_t id_34 { qword_of_float(id_33) };
         Pointer id_35 { id_31.writeU64Le(id_34) };
@@ -222,7 +219,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_36;
     {
       Pointer srec_dst_270 { let_res_24 };
-      std::optional<double> id_37 { p_0->first_input };
+      std::optional<double> id_37 { (*p_0).first_input };
       bool id_38 { !(id_37.has_value ()) };
       Pointer choose_res_39;
       if (id_38) {
@@ -232,7 +229,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_42 { 0 };
         Pointer id_43 { srec_dst_270.writeU8(id_42) };
-        std::optional<double> id_44 { p_0->first_input };
+        std::optional<double> id_44 { (*p_0).first_input };
         double id_45 { id_44.value() };
         uint64_t id_46 { qword_of_float(id_45) };
         Pointer id_47 { id_43.writeU64Le(id_46) };
@@ -243,7 +240,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_48;
     {
       Pointer srec_dst_271 { let_res_36 };
-      std::optional<double> id_49 { p_0->last_input };
+      std::optional<double> id_49 { (*p_0).last_input };
       bool id_50 { !(id_49.has_value ()) };
       Pointer choose_res_51;
       if (id_50) {
@@ -253,7 +250,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_54 { 0 };
         Pointer id_55 { srec_dst_271.writeU8(id_54) };
-        std::optional<double> id_56 { p_0->last_input };
+        std::optional<double> id_56 { (*p_0).last_input };
         double id_57 { id_56.value() };
         uint64_t id_58 { qword_of_float(id_57) };
         Pointer id_59 { id_55.writeU64Le(id_58) };
@@ -264,7 +261,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_60;
     {
       Pointer srec_dst_272 { let_res_48 };
-      std::optional<double> id_61 { p_0->first_output };
+      std::optional<double> id_61 { (*p_0).first_output };
       bool id_62 { !(id_61.has_value ()) };
       Pointer choose_res_63;
       if (id_62) {
@@ -274,7 +271,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_66 { 0 };
         Pointer id_67 { srec_dst_272.writeU8(id_66) };
-        std::optional<double> id_68 { p_0->first_output };
+        std::optional<double> id_68 { (*p_0).first_output };
         double id_69 { id_68.value() };
         uint64_t id_70 { qword_of_float(id_69) };
         Pointer id_71 { id_67.writeU64Le(id_70) };
@@ -285,7 +282,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_72;
     {
       Pointer srec_dst_273 { let_res_60 };
-      std::optional<double> id_73 { p_0->last_output };
+      std::optional<double> id_73 { (*p_0).last_output };
       bool id_74 { !(id_73.has_value ()) };
       Pointer choose_res_75;
       if (id_74) {
@@ -295,7 +292,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
       } else {
         uint8_t id_78 { 0 };
         Pointer id_79 { srec_dst_273.writeU8(id_78) };
-        std::optional<double> id_80 { p_0->last_output };
+        std::optional<double> id_80 { (*p_0).last_output };
         double id_81 { id_80.value() };
         uint64_t id_82 { qword_of_float(id_81) };
         Pointer id_83 { id_79.writeU64Le(id_82) };
@@ -306,84 +303,84 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_84;
     {
       Pointer srec_dst_274 { let_res_72 };
-      uint64_t id_85 { p_0->tot_in_tuples };
+      uint64_t id_85 { (*p_0).tot_in_tuples };
       Pointer id_86 { srec_dst_274.writeU64Le(id_85) };
       let_res_84 = id_86;
     }
     Pointer let_res_87;
     {
       Pointer srec_dst_275 { let_res_84 };
-      uint64_t id_88 { p_0->tot_sel_tuples };
+      uint64_t id_88 { (*p_0).tot_sel_tuples };
       Pointer id_89 { srec_dst_275.writeU64Le(id_88) };
       let_res_87 = id_89;
     }
     Pointer let_res_90;
     {
       Pointer srec_dst_276 { let_res_87 };
-      uint64_t id_91 { p_0->tot_out_filtered };
+      uint64_t id_91 { (*p_0).tot_out_filtered };
       Pointer id_92 { srec_dst_276.writeU64Le(id_91) };
       let_res_90 = id_92;
     }
     Pointer let_res_93;
     {
       Pointer srec_dst_277 { let_res_90 };
-      uint64_t id_94 { p_0->tot_out_tuples };
+      uint64_t id_94 { (*p_0).tot_out_tuples };
       Pointer id_95 { srec_dst_277.writeU64Le(id_94) };
       let_res_93 = id_95;
     }
     Pointer let_res_96;
     {
       Pointer srec_dst_278 { let_res_93 };
-      uint64_t id_97 { p_0->tot_out_errs };
+      uint64_t id_97 { (*p_0).tot_out_errs };
       Pointer id_98 { srec_dst_278.writeU64Le(id_97) };
       let_res_96 = id_98;
     }
     Pointer let_res_99;
     {
       Pointer srec_dst_279 { let_res_96 };
-      uint64_t id_100 { p_0->tot_full_bytes };
+      uint64_t id_100 { (*p_0).tot_full_bytes };
       Pointer id_101 { srec_dst_279.writeU64Le(id_100) };
       let_res_99 = id_101;
     }
     Pointer let_res_102;
     {
       Pointer srec_dst_280 { let_res_99 };
-      uint64_t id_103 { p_0->tot_full_bytes_samples };
+      uint64_t id_103 { (*p_0).tot_full_bytes_samples };
       Pointer id_104 { srec_dst_280.writeU64Le(id_103) };
       let_res_102 = id_104;
     }
     Pointer let_res_105;
     {
       Pointer srec_dst_281 { let_res_102 };
-      uint64_t id_106 { p_0->cur_groups };
+      uint64_t id_106 { (*p_0).cur_groups };
       Pointer id_107 { srec_dst_281.writeU64Le(id_106) };
       let_res_105 = id_107;
     }
     Pointer let_res_108;
     {
       Pointer srec_dst_282 { let_res_105 };
-      uint64_t id_109 { p_0->max_groups };
+      uint64_t id_109 { (*p_0).max_groups };
       Pointer id_110 { srec_dst_282.writeU64Le(id_109) };
       let_res_108 = id_110;
     }
     Pointer let_res_111;
     {
       Pointer srec_dst_283 { let_res_108 };
-      uint64_t id_112 { p_0->tot_in_bytes };
+      uint64_t id_112 { (*p_0).tot_in_bytes };
       Pointer id_113 { srec_dst_283.writeU64Le(id_112) };
       let_res_111 = id_113;
     }
     Pointer let_res_114;
     {
       Pointer srec_dst_284 { let_res_111 };
-      uint64_t id_115 { p_0->tot_out_bytes };
+      uint64_t id_115 { (*p_0).tot_out_bytes };
       Pointer id_116 { srec_dst_284.writeU64Le(id_115) };
       let_res_114 = id_116;
     }
     Pointer let_res_117;
     {
       Pointer srec_dst_285 { let_res_114 };
-      double id_118 { p_0->tot_wait_in };
+      double id_118 { (*p_0).tot_wait_in };
       uint64_t id_119 { qword_of_float(id_118) };
       Pointer id_120 { srec_dst_285.writeU64Le(id_119) };
       let_res_117 = id_120;
@@ -391,7 +388,7 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_121;
     {
       Pointer srec_dst_286 { let_res_117 };
-      double id_122 { p_0->tot_wait_out };
+      double id_122 { (*p_0).tot_wait_out };
       uint64_t id_123 { qword_of_float(id_122) };
       Pointer id_124 { srec_dst_286.writeU64Le(id_123) };
       let_res_121 = id_124;
@@ -399,21 +396,21 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_125;
     {
       Pointer srec_dst_287 { let_res_121 };
-      uint64_t id_126 { p_0->tot_firing_notifs };
+      uint64_t id_126 { (*p_0).tot_firing_notifs };
       Pointer id_127 { srec_dst_287.writeU64Le(id_126) };
       let_res_125 = id_127;
     }
     Pointer let_res_128;
     {
       Pointer srec_dst_288 { let_res_125 };
-      uint64_t id_129 { p_0->tot_extinguished_notifs };
+      uint64_t id_129 { (*p_0).tot_extinguished_notifs };
       Pointer id_130 { srec_dst_288.writeU64Le(id_129) };
       let_res_128 = id_130;
     }
     Pointer let_res_131;
     {
       Pointer srec_dst_289 { let_res_128 };
-      double id_132 { p_0->tot_cpu };
+      double id_132 { (*p_0).tot_cpu };
       uint64_t id_133 { qword_of_float(id_132) };
       Pointer id_134 { srec_dst_289.writeU64Le(id_133) };
       let_res_131 = id_134;
@@ -421,14 +418,14 @@ static std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_
     Pointer let_res_135;
     {
       Pointer srec_dst_290 { let_res_131 };
-      uint64_t id_136 { p_0->cur_ram };
+      uint64_t id_136 { (*p_0).cur_ram };
       Pointer id_137 { srec_dst_290.writeU64Le(id_136) };
       let_res_135 = id_137;
     }
     Pointer let_res_138;
     {
       Pointer srec_dst_291 { let_res_135 };
-      uint64_t id_139 { p_0->max_ram };
+      uint64_t id_139 { (*p_0).max_ram };
       Pointer id_140 { srec_dst_291.writeU64Le(id_139) };
       let_res_138 = id_140;
     }
@@ -478,11 +475,11 @@ std::function<Pointer(::dessser::gen::runtime_stats::t*,Pointer)> to_row_binary(
 static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::runtime_stats::t*)> fun141 { [&fun141](::dessser::gen::runtime_stats::t* p_0) {
-    std::optional<double> id_142 { p_0->max_etime };
+    std::optional<double> id_142 { (*p_0).max_etime };
     bool id_143 { !(id_142.has_value ()) };
     Size choose_res_144;
     if (id_143) {
-      std::optional<double> id_145 { p_0->min_etime };
+      std::optional<double> id_145 { (*p_0).min_etime };
       bool id_146 { !(id_145.has_value ()) };
       Size choose_res_147;
       if (id_146) {
@@ -496,7 +493,7 @@ static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_bin
       Size id_151 { Size(choose_res_147 + id_150) };
       choose_res_144 = id_151;
     } else {
-      std::optional<double> id_152 { p_0->min_etime };
+      std::optional<double> id_152 { (*p_0).min_etime };
       bool id_153 { !(id_152.has_value ()) };
       Size choose_res_154;
       if (id_153) {
@@ -515,7 +512,7 @@ static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_bin
     Size let_res_161;
     {
       Size sz_244 { choose_res_144 };
-      std::optional<double> id_162 { p_0->first_input };
+      std::optional<double> id_162 { (*p_0).first_input };
       bool id_163 { !(id_162.has_value ()) };
       Size choose_res_164;
       if (id_163) {
@@ -534,7 +531,7 @@ static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_bin
     Size let_res_171;
     {
       Size sz_245 { let_res_161 };
-      std::optional<double> id_172 { p_0->last_input };
+      std::optional<double> id_172 { (*p_0).last_input };
       bool id_173 { !(id_172.has_value ()) };
       Size choose_res_174;
       if (id_173) {
@@ -553,7 +550,7 @@ static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_bin
     Size let_res_181;
     {
       Size sz_246 { let_res_171 };
-      std::optional<double> id_182 { p_0->first_output };
+      std::optional<double> id_182 { (*p_0).first_output };
       bool id_183 { !(id_182.has_value ()) };
       Size choose_res_184;
       if (id_183) {
@@ -572,7 +569,7 @@ static std::function<Size(::dessser::gen::runtime_stats::t*)> sersize_of_row_bin
     Size let_res_191;
     {
       Size sz_247 { let_res_181 };
-      std::optional<double> id_192 { p_0->last_output };
+      std::optional<double> id_192 { (*p_0).last_output };
       bool id_193 { !(id_192.has_value ()) };
       Size choose_res_194;
       if (id_193) {
@@ -1441,5 +1438,6 @@ static std::function<::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659a
 std::function<::dessser::gen::runtime_stats::td7d9e9b8a490b2a0e053496659aaee30(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

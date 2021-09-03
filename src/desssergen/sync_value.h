@@ -37,6 +37,12 @@ struct tde68d14dd253c0005e157424dd8fc48d : public std::tuple<
   uint32_t,
   std::string
 > { using tuple::tuple; };
+inline bool operator==(tde68d14dd253c0005e157424dd8fc48d const &a, tde68d14dd253c0005e157424dd8fc48d const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
+}
+inline bool operator!=(tde68d14dd253c0005e157424dd8fc48d const &a, tde68d14dd253c0005e157424dd8fc48d const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, tde68d14dd253c0005e157424dd8fc48d const &t) {
   os << '<'
      << std::get<0>(t) << ", "
@@ -46,29 +52,32 @@ inline std::ostream &operator<<(std::ostream &os, tde68d14dd253c0005e157424dd8fc
   return os;
 }
 
-struct t953aab1fe1aba5b6c1cf1af5981bef40 {
+struct te83fa7fcadeeebdddedfae1b0cf34bd2 {
   uint32_t skipped;
   Bytes values;
-  t953aab1fe1aba5b6c1cf1af5981bef40(uint32_t skipped_, Bytes values_) : skipped(skipped_), values(values_) {}
-  t953aab1fe1aba5b6c1cf1af5981bef40() = default;
-  bool operator==(t953aab1fe1aba5b6c1cf1af5981bef40 const &other) const {
-    return skipped == other.skipped && values == other.values;
-  }
+  te83fa7fcadeeebdddedfae1b0cf34bd2(uint32_t skipped_, Bytes values_) : skipped(skipped_), values(values_) {}
+  te83fa7fcadeeebdddedfae1b0cf34bd2() = default;
 };
-inline std::ostream &operator<<(std::ostream &os, t953aab1fe1aba5b6c1cf1af5981bef40 const &r) {
+inline std::ostream &operator<<(std::ostream &os, te83fa7fcadeeebdddedfae1b0cf34bd2 const &r) {
   os << '{';
   os << "skipped:" << r.skipped << ',';
   os << "values:" << r.values;
   os << '}';
   return os;
 }
+inline bool operator==(te83fa7fcadeeebdddedfae1b0cf34bd2 const &a, te83fa7fcadeeebdddedfae1b0cf34bd2 const &b) {
+  return a.skipped == b.skipped && a.values == b.values;
+}
 
+inline bool operator!=(te83fa7fcadeeebdddedfae1b0cf34bd2 const &a, te83fa7fcadeeebdddedfae1b0cf34bd2 const &b) {
+  return !operator==(a, b);
+}
 struct t : public std::variant<
   ::dessser::gen::sync_value::tde68d14dd253c0005e157424dd8fc48d, // Error
   dessser::gen::worker::t_ext, // Worker
   dessser::gen::retention::t_ext, // Retention
   dessser::gen::time_range::t_ext, // TimeRange
-  Arr<::dessser::gen::sync_value::t953aab1fe1aba5b6c1cf1af5981bef40>, // Tuples
+  Arr<::dessser::gen::sync_value::te83fa7fcadeeebdddedfae1b0cf34bd2>, // Tuples
   dessser::gen::raql_value::t_ext, // RamenValue
   dessser::gen::target_config::t_ext, // TargetConfig
   dessser::gen::source_info::t_ext, // SourceInfo
@@ -109,28 +118,57 @@ enum Constr_t {
   Inhibition,
 };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Error
+    case 1: return ::dessser::gen::worker::Deref(std::get<1>(a)) == ::dessser::gen::worker::Deref(std::get<1>(b)); // Worker
+    case 2: return ::dessser::gen::retention::Deref(std::get<2>(a)) == ::dessser::gen::retention::Deref(std::get<2>(b)); // Retention
+    case 3: return ::dessser::gen::time_range::Deref(std::get<3>(a)) == ::dessser::gen::time_range::Deref(std::get<3>(b)); // TimeRange
+    case 4: return std::get<4>(a) == std::get<4>(b); // Tuples
+    case 5: return ::dessser::gen::raql_value::Deref(std::get<5>(a)) == ::dessser::gen::raql_value::Deref(std::get<5>(b)); // RamenValue
+    case 6: return ::dessser::gen::target_config::Deref(std::get<6>(a)) == ::dessser::gen::target_config::Deref(std::get<6>(b)); // TargetConfig
+    case 7: return ::dessser::gen::source_info::Deref(std::get<7>(a)) == ::dessser::gen::source_info::Deref(std::get<7>(b)); // SourceInfo
+    case 8: return ::dessser::gen::runtime_stats::Deref(std::get<8>(a)) == ::dessser::gen::runtime_stats::Deref(std::get<8>(b)); // RuntimeStats
+    case 9: return ::dessser::gen::replay::Deref(std::get<9>(a)) == ::dessser::gen::replay::Deref(std::get<9>(b)); // Replay
+    case 10: return ::dessser::gen::replayer::Deref(std::get<10>(a)) == ::dessser::gen::replayer::Deref(std::get<10>(b)); // Replayer
+    case 11: return ::dessser::gen::replay_request::Deref(std::get<11>(a)) == ::dessser::gen::replay_request::Deref(std::get<11>(b)); // ReplayRequest
+    case 12: return ::dessser::gen::alert::Deref(std::get<12>(a)) == ::dessser::gen::alert::Deref(std::get<12>(b)); // Alert
+    case 13: return ::dessser::gen::output_specs::Deref(std::get<13>(a)) == ::dessser::gen::output_specs::Deref(std::get<13>(b)); // OutputSpecs
+    case 14: return ::dessser::gen::dashboard_widget::Deref(std::get<14>(a)) == ::dessser::gen::dashboard_widget::Deref(std::get<14>(b)); // DashboardWidget
+    case 15: return ::dessser::gen::alerting_contact::Deref(std::get<15>(a)) == ::dessser::gen::alerting_contact::Deref(std::get<15>(b)); // AlertingContact
+    case 16: return ::dessser::gen::alerting_notification::Deref(std::get<16>(a)) == ::dessser::gen::alerting_notification::Deref(std::get<16>(b)); // Notification
+    case 17: return ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(a)) == ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(b)); // DeliveryStatus
+    case 18: return ::dessser::gen::alerting_log::Deref(std::get<18>(a)) == ::dessser::gen::alerting_log::Deref(std::get<18>(b)); // IncidentLog
+    case 19: return ::dessser::gen::alerting_inhibition::Deref(std::get<19>(a)) == ::dessser::gen::alerting_inhibition::Deref(std::get<19>(b)); // Inhibition
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Error " << std::get<0>(v); break;
-    case 1: os << "Worker " << std::get<1>(v); break;
-    case 2: os << "Retention " << std::get<2>(v); break;
-    case 3: os << "TimeRange " << std::get<3>(v); break;
+    case 1: os << "Worker " << ::dessser::gen::worker::Deref(std::get<1>(v)); break;
+    case 2: os << "Retention " << ::dessser::gen::retention::Deref(std::get<2>(v)); break;
+    case 3: os << "TimeRange " << ::dessser::gen::time_range::Deref(std::get<3>(v)); break;
     case 4: os << "Tuples " << std::get<4>(v); break;
-    case 5: os << "RamenValue " << std::get<5>(v); break;
-    case 6: os << "TargetConfig " << std::get<6>(v); break;
-    case 7: os << "SourceInfo " << std::get<7>(v); break;
-    case 8: os << "RuntimeStats " << std::get<8>(v); break;
-    case 9: os << "Replay " << std::get<9>(v); break;
-    case 10: os << "Replayer " << std::get<10>(v); break;
-    case 11: os << "ReplayRequest " << std::get<11>(v); break;
-    case 12: os << "Alert " << std::get<12>(v); break;
-    case 13: os << "OutputSpecs " << std::get<13>(v); break;
-    case 14: os << "DashboardWidget " << std::get<14>(v); break;
-    case 15: os << "AlertingContact " << std::get<15>(v); break;
-    case 16: os << "Notification " << std::get<16>(v); break;
-    case 17: os << "DeliveryStatus " << std::get<17>(v); break;
-    case 18: os << "IncidentLog " << std::get<18>(v); break;
-    case 19: os << "Inhibition " << std::get<19>(v); break;
+    case 5: os << "RamenValue " << ::dessser::gen::raql_value::Deref(std::get<5>(v)); break;
+    case 6: os << "TargetConfig " << ::dessser::gen::target_config::Deref(std::get<6>(v)); break;
+    case 7: os << "SourceInfo " << ::dessser::gen::source_info::Deref(std::get<7>(v)); break;
+    case 8: os << "RuntimeStats " << ::dessser::gen::runtime_stats::Deref(std::get<8>(v)); break;
+    case 9: os << "Replay " << ::dessser::gen::replay::Deref(std::get<9>(v)); break;
+    case 10: os << "Replayer " << ::dessser::gen::replayer::Deref(std::get<10>(v)); break;
+    case 11: os << "ReplayRequest " << ::dessser::gen::replay_request::Deref(std::get<11>(v)); break;
+    case 12: os << "Alert " << ::dessser::gen::alert::Deref(std::get<12>(v)); break;
+    case 13: os << "OutputSpecs " << ::dessser::gen::output_specs::Deref(std::get<13>(v)); break;
+    case 14: os << "DashboardWidget " << ::dessser::gen::dashboard_widget::Deref(std::get<14>(v)); break;
+    case 15: os << "AlertingContact " << ::dessser::gen::alerting_contact::Deref(std::get<15>(v)); break;
+    case 16: os << "Notification " << ::dessser::gen::alerting_notification::Deref(std::get<16>(v)); break;
+    case 17: os << "DeliveryStatus " << ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(v)); break;
+    case 18: os << "IncidentLog " << ::dessser::gen::alerting_log::Deref(std::get<18>(v)); break;
+    case 19: os << "Inhibition " << ::dessser::gen::alerting_inhibition::Deref(std::get<19>(v)); break;
   }
   return os;
 }
@@ -147,6 +185,7 @@ extern std::function<Pointer(::dessser::gen::sync_value::t*,Pointer)> to_row_bin
 extern std::function<Size(::dessser::gen::sync_value::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::sync_value::t5a4f9375f61f65c3413a01c7d782b657(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

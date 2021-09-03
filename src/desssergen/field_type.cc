@@ -41,9 +41,6 @@ struct t {
   std::optional<dessser::gen::units::t_ext> units;
   t(std::optional<std::string> aggr_, std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : aggr(aggr_), doc(doc_), name(name_), typ(typ_), units(units_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return aggr == other.aggr && doc == other.doc && name == other.name && typ == other.typ && units == other.units;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::field_type::t*,
@@ -138,20 +135,20 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
 {
   std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> fun0 { [&fun0](::dessser::gen::field_type::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { p_0->name };
+    dessser::gen::field_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_115 { id_3 };
       auto fun5 { dessser::gen::raql_type::to_row_binary };
-      dessser::gen::raql_type::t_ext id_6 { p_0->typ };
+      dessser::gen::raql_type::t_ext id_6 { (*p_0).typ };
       Pointer id_7 { fun5(id_6, srec_dst_115) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_116 { let_res_4 };
-      std::optional<dessser::gen::units::t_ext> id_9 { p_0->units };
+      std::optional<dessser::gen::units::t_ext> id_9 { (*p_0).units };
       bool id_10 { !(id_9.has_value ()) };
       Pointer choose_res_11;
       if (id_10) {
@@ -160,7 +157,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
         choose_res_11 = id_13;
       } else {
         auto fun14 { dessser::gen::units::to_row_binary };
-        std::optional<dessser::gen::units::t_ext> id_15 { p_0->units };
+        std::optional<dessser::gen::units::t_ext> id_15 { (*p_0).units };
         dessser::gen::units::t_ext id_16 { id_15.value() };
         uint8_t id_17 { 0 };
         Pointer id_18 { srec_dst_116.writeU8(id_17) };
@@ -172,7 +169,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
     Pointer let_res_20;
     {
       Pointer srec_dst_117 { let_res_8 };
-      std::string id_21 { p_0->doc };
+      std::string id_21 { (*p_0).doc };
       uint32_t id_22 { (uint32_t)id_21.size() };
       Vec<1, uint32_t> id_23 {  id_22  };
       Pointer let_res_24;
@@ -231,7 +228,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
         }
         let_res_24 = let_res_26;
       }
-      std::string id_58 { p_0->doc };
+      std::string id_58 { (*p_0).doc };
       Bytes id_59 { id_58 };
       Pointer id_60 { let_res_24.writeBytes(id_59) };
       let_res_20 = id_60;
@@ -239,7 +236,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
     Pointer let_res_61;
     {
       Pointer srec_dst_120 { let_res_20 };
-      std::optional<std::string> id_62 { p_0->aggr };
+      std::optional<std::string> id_62 { (*p_0).aggr };
       bool id_63 { !(id_62.has_value ()) };
       Pointer choose_res_64;
       if (id_63) {
@@ -247,7 +244,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
         Pointer id_66 { srec_dst_120.writeU8(id_65) };
         choose_res_64 = id_66;
       } else {
-        std::optional<std::string> id_67 { p_0->aggr };
+        std::optional<std::string> id_67 { (*p_0).aggr };
         std::string id_68 { id_67.value() };
         uint32_t id_69 { (uint32_t)id_68.size() };
         Vec<1, uint32_t> id_70 {  id_69  };
@@ -309,7 +306,7 @@ static std::function<Pointer(::dessser::gen::field_type::t*,Pointer)> to_row_bin
           }
           let_res_71 = let_res_75;
         }
-        std::optional<std::string> id_107 { p_0->aggr };
+        std::optional<std::string> id_107 { (*p_0).aggr };
         std::string id_108 { id_107.value() };
         Bytes id_109 { id_108 };
         Pointer id_110 { let_res_71.writeBytes(id_109) };
@@ -357,13 +354,13 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
 {
   std::function<Size(::dessser::gen::field_type::t*)> fun111 { [&fun111](::dessser::gen::field_type::t* p_0) {
     auto fun112 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_113 { p_0->name };
+    dessser::gen::field_name::t_ext id_113 { (*p_0).name };
     Size id_114 { fun112(id_113) };
     Size let_res_115;
     {
       Size sz_105 { id_114 };
       auto fun116 { dessser::gen::raql_type::sersize_of_row_binary };
-      dessser::gen::raql_type::t_ext id_117 { p_0->typ };
+      dessser::gen::raql_type::t_ext id_117 { (*p_0).typ };
       Size id_118 { fun116(id_117) };
       Size id_119 { Size(sz_105 + id_118) };
       let_res_115 = id_119;
@@ -371,7 +368,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
     Size let_res_120;
     {
       Size sz_106 { let_res_115 };
-      std::optional<dessser::gen::units::t_ext> id_121 { p_0->units };
+      std::optional<dessser::gen::units::t_ext> id_121 { (*p_0).units };
       bool id_122 { !(id_121.has_value ()) };
       Size choose_res_123;
       if (id_122) {
@@ -380,7 +377,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
         choose_res_123 = id_125;
       } else {
         auto fun126 { dessser::gen::units::sersize_of_row_binary };
-        std::optional<dessser::gen::units::t_ext> id_127 { p_0->units };
+        std::optional<dessser::gen::units::t_ext> id_127 { (*p_0).units };
         dessser::gen::units::t_ext id_128 { id_127.value() };
         Size id_129 { fun126(id_128) };
         Size id_130 { Size(sz_106 + id_129) };
@@ -393,7 +390,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
     Size let_res_133;
     {
       Size sz_107 { let_res_120 };
-      std::string id_134 { p_0->doc };
+      std::string id_134 { (*p_0).doc };
       uint32_t id_135 { (uint32_t)id_134.size() };
       Vec<1, uint32_t> id_136 {  id_135  };
       Size let_res_137;
@@ -432,7 +429,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
         }
         let_res_137 = let_res_140;
       }
-      std::string id_158 { p_0->doc };
+      std::string id_158 { (*p_0).doc };
       uint32_t id_159 { (uint32_t)id_158.size() };
       Size id_160 { Size(id_159) };
       Size id_161 { Size(let_res_137 + id_160) };
@@ -442,7 +439,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
     Size let_res_163;
     {
       Size sz_111 { let_res_133 };
-      std::optional<std::string> id_164 { p_0->aggr };
+      std::optional<std::string> id_164 { (*p_0).aggr };
       bool id_165 { !(id_164.has_value ()) };
       Size choose_res_166;
       if (id_165) {
@@ -450,7 +447,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
         Size id_168 { Size(sz_111 + id_167) };
         choose_res_166 = id_168;
       } else {
-        std::optional<std::string> id_169 { p_0->aggr };
+        std::optional<std::string> id_169 { (*p_0).aggr };
         std::string id_170 { id_169.value() };
         uint32_t id_171 { (uint32_t)id_170.size() };
         Vec<1, uint32_t> id_172 {  id_171  };
@@ -490,7 +487,7 @@ static std::function<Size(::dessser::gen::field_type::t*)> sersize_of_row_binary
           }
           let_res_173 = let_res_176;
         }
-        std::optional<std::string> id_194 { p_0->aggr };
+        std::optional<std::string> id_194 { (*p_0).aggr };
         std::string id_195 { id_194.value() };
         uint32_t id_196 { (uint32_t)id_195.size() };
         Size id_197 { Size(id_196) };
@@ -867,5 +864,6 @@ static std::function<::dessser::gen::field_type::ta9083c6ab4999123f9c30be0def4cf
 std::function<::dessser::gen::field_type::ta9083c6ab4999123f9c30be0def4cf3a(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

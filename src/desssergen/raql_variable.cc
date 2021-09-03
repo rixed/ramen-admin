@@ -81,7 +81,7 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::raql_variable::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_variable::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_variable::t* p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0->index()) };
+    uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer let_res_2;
     {
       uint16_t label1_108 { id_1 };
@@ -218,7 +218,7 @@ std::function<Pointer(::dessser::gen::raql_variable::t*,Pointer)> to_row_binary(
 static std::function<Size(::dessser::gen::raql_variable::t*)> sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::raql_variable::t*)> fun44 { [&fun44](::dessser::gen::raql_variable::t* p_0) {
-    uint16_t id_45 { uint16_t(p_0->index()) };
+    uint16_t id_45 { uint16_t((*p_0).index()) };
     Size let_res_46;
     {
       uint16_t label2_107 { id_45 };
@@ -579,5 +579,6 @@ static std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732
 std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

@@ -44,9 +44,6 @@ struct t {
   dessser::gen::raql_type::t_ext typ;
   t(dessser::gen::field_name::t_ext name_, ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea scope_, dessser::gen::raql_type::t_ext typ_) : name(name_), scope(scope_), typ(typ_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return name == other.name && scope == other.scope && typ == other.typ;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::global_variable::t*,
@@ -89,14 +86,14 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> fun0 { [&fun0](::dessser::gen::global_variable::t* p_0, Pointer p_1) {
-    ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_1 { p_0->scope };
+    ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_1 { (*p_0).scope };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
     Pointer let_res_4;
     {
       Pointer ssum_dst_91 { id_3 };
       uint16_t id_5 { 0 };
-      ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_6 { p_0->scope };
+      ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_6 { (*p_0).scope };
       uint16_t id_7 { uint16_t(id_6.index()) };
       bool id_8 { bool(id_5 == id_7) };
       Pointer choose_res_9;
@@ -104,14 +101,14 @@ static std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_ro
         choose_res_9 = ssum_dst_91;
       } else {
         uint16_t id_10 { 1 };
-        ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_11 { p_0->scope };
+        ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_11 { (*p_0).scope };
         uint16_t id_12 { uint16_t(id_11.index()) };
         bool id_13 { bool(id_10 == id_12) };
         Pointer choose_res_14;
         if (id_13) {
           choose_res_14 = ssum_dst_91;
         } else {
-          ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_15 { p_0->scope };
+          ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_15 { (*p_0).scope };
           uint16_t id_16 { uint16_t(id_15.index()) };
           uint16_t id_17 { 2 };
           bool id_18 { bool(id_16 == id_17) };
@@ -127,7 +124,7 @@ static std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_ro
     {
       Pointer srec_dst_92 { let_res_4 };
       auto fun21 { dessser::gen::field_name::to_row_binary };
-      dessser::gen::field_name::t_ext id_22 { p_0->name };
+      dessser::gen::field_name::t_ext id_22 { (*p_0).name };
       Pointer id_23 { fun21(id_22, srec_dst_92) };
       let_res_20 = id_23;
     }
@@ -135,7 +132,7 @@ static std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_ro
     {
       Pointer srec_dst_93 { let_res_20 };
       auto fun25 { dessser::gen::raql_type::to_row_binary };
-      dessser::gen::raql_type::t_ext id_26 { p_0->typ };
+      dessser::gen::raql_type::t_ext id_26 { (*p_0).typ };
       Pointer id_27 { fun25(id_26, srec_dst_93) };
       let_res_24 = id_27;
     }
@@ -158,7 +155,7 @@ static std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_b
 {
   std::function<Size(::dessser::gen::global_variable::t*)> fun28 { [&fun28](::dessser::gen::global_variable::t* p_0) {
     uint16_t id_29 { 0 };
-    ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_30 { p_0->scope };
+    ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_30 { (*p_0).scope };
     uint16_t id_31 { uint16_t(id_30.index()) };
     bool id_32 { bool(id_29 == id_31) };
     Size choose_res_33;
@@ -167,7 +164,7 @@ static std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_b
       choose_res_33 = id_34;
     } else {
       uint16_t id_35 { 1 };
-      ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_36 { p_0->scope };
+      ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_36 { (*p_0).scope };
       uint16_t id_37 { uint16_t(id_36.index()) };
       bool id_38 { bool(id_35 == id_37) };
       Size choose_res_39;
@@ -175,7 +172,7 @@ static std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_b
         Size id_40 { 2UL };
         choose_res_39 = id_40;
       } else {
-        ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_41 { p_0->scope };
+        ::dessser::gen::global_variable::t652f68aa23f2c18d61b70156eeb125ea id_41 { (*p_0).scope };
         uint16_t id_42 { uint16_t(id_41.index()) };
         uint16_t id_43 { 2 };
         bool id_44 { bool(id_42 == id_43) };
@@ -190,7 +187,7 @@ static std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_b
     {
       Size sz_88 { choose_res_33 };
       auto fun48 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_49 { p_0->name };
+      dessser::gen::field_name::t_ext id_49 { (*p_0).name };
       Size id_50 { fun48(id_49) };
       Size id_51 { Size(sz_88 + id_50) };
       let_res_47 = id_51;
@@ -199,7 +196,7 @@ static std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_b
     {
       Size sz_89 { let_res_47 };
       auto fun53 { dessser::gen::raql_type::sersize_of_row_binary };
-      dessser::gen::raql_type::t_ext id_54 { p_0->typ };
+      dessser::gen::raql_type::t_ext id_54 { (*p_0).typ };
       Size id_55 { fun53(id_54) };
       Size id_56 { Size(sz_89 + id_55) };
       let_res_52 = id_56;
@@ -318,5 +315,6 @@ static std::function<::dessser::gen::global_variable::t5cd24a9f87710319310e9dd0c
 std::function<::dessser::gen::global_variable::t5cd24a9f87710319310e9dd0c1e1d2fb(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

@@ -68,27 +68,27 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_path_comp::t* p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0->index()) };
+    uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_79 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0->index()) };
+      uint16_t id_5 { uint16_t((*p_0).index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
-        uint32_t id_8 { std::get<0 /* Idx */>(*p_0) };
+        uint32_t id_8 { std::get<0 /* Idx */>((*p_0)) };
         Pointer id_9 { ssum_dst_79.writeU32Le(id_8) };
         choose_res_7 = id_9;
       } else {
-        uint16_t id_10 { uint16_t(p_0->index()) };
+        uint16_t id_10 { uint16_t((*p_0).index()) };
         uint16_t id_11 { 1 };
         bool id_12 { bool(id_10 == id_11) };
         Void id_13 { ((void)(assert(id_12)), VOID) };
         (void)id_13;
         auto fun14 { dessser::gen::field_name::to_row_binary };
-        dessser::gen::field_name::t_ext id_15 { std::get<1 /* Name */>(*p_0) };
+        dessser::gen::field_name::t_ext id_15 { std::get<1 /* Name */>((*p_0)) };
         Pointer id_16 { fun14(id_15, ssum_dst_79) };
         choose_res_7 = id_16;
       }
@@ -109,21 +109,21 @@ static std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_bi
 {
   std::function<Size(::dessser::gen::raql_path_comp::t*)> fun17 { [&fun17](::dessser::gen::raql_path_comp::t* p_0) {
     uint16_t id_18 { 0 };
-    uint16_t id_19 { uint16_t(p_0->index()) };
+    uint16_t id_19 { uint16_t((*p_0).index()) };
     bool id_20 { bool(id_18 == id_19) };
     Size choose_res_21;
     if (id_20) {
       Size id_22 { 6UL };
       choose_res_21 = id_22;
     } else {
-      uint16_t id_23 { uint16_t(p_0->index()) };
+      uint16_t id_23 { uint16_t((*p_0).index()) };
       uint16_t id_24 { 1 };
       bool id_25 { bool(id_23 == id_24) };
       Void id_26 { ((void)(assert(id_25)), VOID) };
       (void)id_26;
       Size id_27 { 2UL };
       auto fun28 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_29 { std::get<1 /* Name */>(*p_0) };
+      dessser::gen::field_name::t_ext id_29 { std::get<1 /* Name */>((*p_0)) };
       Size id_30 { fun28(id_29) };
       Size id_31 { Size(id_27 + id_30) };
       choose_res_21 = id_31;
@@ -215,5 +215,6 @@ static std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4
 std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

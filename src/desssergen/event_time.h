@@ -29,11 +29,23 @@ enum Constr_tb22291137390f6968b7c7852ed4b8408 {
   StopField,
 };
 
+inline bool operator==(tb22291137390f6968b7c7852ed4b8408 const &a, tb22291137390f6968b7c7852ed4b8408 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // DurationConst
+    case 1: return ::dessser::gen::event_time_field::Deref(std::get<1>(a)) == ::dessser::gen::event_time_field::Deref(std::get<1>(b)); // DurationField
+    case 2: return ::dessser::gen::event_time_field::Deref(std::get<2>(a)) == ::dessser::gen::event_time_field::Deref(std::get<2>(b)); // StopField
+  };
+  return false;
+}
+inline bool operator!=(tb22291137390f6968b7c7852ed4b8408 const &a, tb22291137390f6968b7c7852ed4b8408 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, tb22291137390f6968b7c7852ed4b8408 const &v) {
   switch (v.index()) {
     case 0: os << "DurationConst " << std::get<0>(v); break;
-    case 1: os << "DurationField " << std::get<1>(v); break;
-    case 2: os << "StopField " << std::get<2>(v); break;
+    case 1: os << "DurationField " << ::dessser::gen::event_time_field::Deref(std::get<1>(v)); break;
+    case 2: os << "StopField " << ::dessser::gen::event_time_field::Deref(std::get<2>(v)); break;
   }
   return os;
 }
@@ -55,6 +67,7 @@ extern std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_bin
 extern std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::event_time::tdaa6372439c84e43d057c41d9a934bcd(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

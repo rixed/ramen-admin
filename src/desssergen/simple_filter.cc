@@ -37,9 +37,6 @@ struct t {
   std::string rhs;
   t(dessser::gen::field_name::t_ext lhs_, std::string op_, std::string rhs_) : lhs(lhs_), op(op_), rhs(rhs_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return lhs == other.lhs && op == other.op && rhs == other.rhs;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::simple_filter::t*,
@@ -109,12 +106,12 @@ static std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> to_row_
 {
   std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> fun0 { [&fun0](::dessser::gen::simple_filter::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { p_0->lhs };
+    dessser::gen::field_name::t_ext id_2 { (*p_0).lhs };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_101 { id_3 };
-      std::string id_5 { p_0->rhs };
+      std::string id_5 { (*p_0).rhs };
       uint32_t id_6 { (uint32_t)id_5.size() };
       Vec<1, uint32_t> id_7 {  id_6  };
       Pointer let_res_8;
@@ -173,7 +170,7 @@ static std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> to_row_
         }
         let_res_8 = let_res_10;
       }
-      std::string id_42 { p_0->rhs };
+      std::string id_42 { (*p_0).rhs };
       Bytes id_43 { id_42 };
       Pointer id_44 { let_res_8.writeBytes(id_43) };
       let_res_4 = id_44;
@@ -181,7 +178,7 @@ static std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> to_row_
     Pointer let_res_45;
     {
       Pointer srec_dst_104 { let_res_4 };
-      std::string id_46 { p_0->op };
+      std::string id_46 { (*p_0).op };
       uint32_t id_47 { (uint32_t)id_46.size() };
       Vec<1, uint32_t> id_48 {  id_47  };
       Pointer let_res_49;
@@ -240,7 +237,7 @@ static std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> to_row_
         }
         let_res_49 = let_res_51;
       }
-      std::string id_83 { p_0->op };
+      std::string id_83 { (*p_0).op };
       Bytes id_84 { id_83 };
       Pointer id_85 { let_res_49.writeBytes(id_84) };
       let_res_45 = id_85;
@@ -279,12 +276,12 @@ static std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_bin
 {
   std::function<Size(::dessser::gen::simple_filter::t*)> fun86 { [&fun86](::dessser::gen::simple_filter::t* p_0) {
     auto fun87 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_88 { p_0->lhs };
+    dessser::gen::field_name::t_ext id_88 { (*p_0).lhs };
     Size id_89 { fun87(id_88) };
     Size let_res_90;
     {
       Size sz_93 { id_89 };
-      std::string id_91 { p_0->rhs };
+      std::string id_91 { (*p_0).rhs };
       uint32_t id_92 { (uint32_t)id_91.size() };
       Vec<1, uint32_t> id_93 {  id_92  };
       Size let_res_94;
@@ -323,7 +320,7 @@ static std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_bin
         }
         let_res_94 = let_res_97;
       }
-      std::string id_115 { p_0->rhs };
+      std::string id_115 { (*p_0).rhs };
       uint32_t id_116 { (uint32_t)id_115.size() };
       Size id_117 { Size(id_116) };
       Size id_118 { Size(let_res_94 + id_117) };
@@ -333,7 +330,7 @@ static std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_bin
     Size let_res_120;
     {
       Size sz_97 { let_res_90 };
-      std::string id_121 { p_0->op };
+      std::string id_121 { (*p_0).op };
       uint32_t id_122 { (uint32_t)id_121.size() };
       Vec<1, uint32_t> id_123 {  id_122  };
       Size let_res_124;
@@ -372,7 +369,7 @@ static std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_bin
         }
         let_res_124 = let_res_127;
       }
-      std::string id_145 { p_0->op };
+      std::string id_145 { (*p_0).op };
       uint32_t id_146 { (uint32_t)id_145.size() };
       Size id_147 { Size(id_146) };
       Size id_148 { Size(let_res_124 + id_147) };
@@ -647,5 +644,6 @@ static std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af
 std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

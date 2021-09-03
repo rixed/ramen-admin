@@ -51,9 +51,6 @@ struct compiled_func {
   std::string signature;
   compiled_func(std::string doc_, Lst<dessser::gen::field_name::t_ext> factors_, std::string in_signature_, bool is_lazy_, dessser::gen::function_name::t_ext name_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, std::optional<dessser::gen::retention::t_ext> retention_, std::string signature_) : doc(doc_), factors(factors_), in_signature(in_signature_), is_lazy(is_lazy_), name(name_), operation(operation_), out_record(out_record_), retention(retention_), signature(signature_) {}
   compiled_func() = default;
-  bool operator==(compiled_func const &other) const {
-    return doc == other.doc && factors == other.factors && in_signature == other.in_signature && is_lazy == other.is_lazy && name == other.name && operation == other.operation && out_record == other.out_record && retention == other.retention && signature == other.signature;
-  }
 };
 struct compiled_program {
   dessser::gen::raql_expr::t_ext condition;
@@ -62,33 +59,24 @@ struct compiled_program {
   Lst<dessser::gen::global_variable::t_ext> globals;
   compiled_program(dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::program_parameter::t_ext> default_params_, Lst<::dessser::gen::source_info::compiled_func*> funcs_, Lst<dessser::gen::global_variable::t_ext> globals_) : condition(condition_), default_params(default_params_), funcs(funcs_), globals(globals_) {}
   compiled_program() = default;
-  bool operator==(compiled_program const &other) const {
-    return condition == other.condition && default_params == other.default_params && funcs == other.funcs && globals == other.globals;
-  }
 };
-struct t8100aa66a1cd239db571dfaa7d44577b {
+struct t88a6703da8448662bc6d4e57390c3cfd {
   std::optional<dessser::gen::src_path::t_ext> depends_on;
   std::string err_msg;
-  t8100aa66a1cd239db571dfaa7d44577b(std::optional<dessser::gen::src_path::t_ext> depends_on_, std::string err_msg_) : depends_on(depends_on_), err_msg(err_msg_) {}
-  t8100aa66a1cd239db571dfaa7d44577b() = default;
-  bool operator==(t8100aa66a1cd239db571dfaa7d44577b const &other) const {
-    return depends_on == other.depends_on && err_msg == other.err_msg;
-  }
+  t88a6703da8448662bc6d4e57390c3cfd(std::optional<dessser::gen::src_path::t_ext> depends_on_, std::string err_msg_) : depends_on(depends_on_), err_msg(err_msg_) {}
+  t88a6703da8448662bc6d4e57390c3cfd() = default;
 };
-struct t5f384f7916a2ad2c8006a89d10acc591 : public std::variant<
+struct t8c0427df1968ef96f97bb2464a520b4c : public std::variant<
   ::dessser::gen::source_info::compiled_program*, // Compiled
-  ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b // Failed
+  ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd // Failed
 > { using variant::variant; };
 
 struct t {
-  ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 detail;
+  ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c detail;
   Lst<std::string> md5s;
   std::string src_ext;
-  t(::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
+  t(::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return detail == other.detail && md5s == other.md5s && src_ext == other.src_ext;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::source_info::compiled_func*,
@@ -211,9 +199,9 @@ typedef std::tuple<
 > t22a32080ad88ab548b80077a17b7dd46;
 
 typedef std::tuple<
-  ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591,
+  ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c,
   Pointer
-> t12f58d20d4023ea0320bcc3610e46fed;
+> t731622066fe28bc88f69f6ba54d1a288;
 
 typedef std::tuple<
   std::optional<dessser::gen::src_path::t_ext>,
@@ -310,12 +298,12 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
 {
   std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer)> fun0 { [&fun0](::dessser::gen::source_info::compiled_func* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::function_name::to_row_binary };
-    dessser::gen::function_name::t_ext id_2 { p_0->name };
+    dessser::gen::function_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_387 { id_3 };
-      std::optional<dessser::gen::retention::t_ext> id_5 { p_0->retention };
+      std::optional<dessser::gen::retention::t_ext> id_5 { (*p_0).retention };
       bool id_6 { !(id_5.has_value ()) };
       Pointer choose_res_7;
       if (id_6) {
@@ -324,7 +312,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
         choose_res_7 = id_9;
       } else {
         auto fun10 { dessser::gen::retention::to_row_binary };
-        std::optional<dessser::gen::retention::t_ext> id_11 { p_0->retention };
+        std::optional<dessser::gen::retention::t_ext> id_11 { (*p_0).retention };
         dessser::gen::retention::t_ext id_12 { id_11.value() };
         uint8_t id_13 { 0 };
         Pointer id_14 { srec_dst_387.writeU8(id_13) };
@@ -336,7 +324,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     Pointer let_res_16;
     {
       Pointer srec_dst_388 { let_res_4 };
-      bool id_17 { p_0->is_lazy };
+      bool id_17 { (*p_0).is_lazy };
       uint8_t id_18 { uint8_t(id_17) };
       Pointer id_19 { srec_dst_388.writeU8(id_18) };
       let_res_16 = id_19;
@@ -344,7 +332,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     Pointer let_res_20;
     {
       Pointer srec_dst_389 { let_res_16 };
-      std::string id_21 { p_0->doc };
+      std::string id_21 { (*p_0).doc };
       uint32_t id_22 { (uint32_t)id_21.size() };
       Vec<1, uint32_t> id_23 {  id_22  };
       Pointer let_res_24;
@@ -403,7 +391,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
         }
         let_res_24 = let_res_26;
       }
-      std::string id_58 { p_0->doc };
+      std::string id_58 { (*p_0).doc };
       Bytes id_59 { id_58 };
       Pointer id_60 { let_res_24.writeBytes(id_59) };
       let_res_20 = id_60;
@@ -412,7 +400,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     {
       Pointer srec_dst_392 { let_res_20 };
       auto fun62 { dessser::gen::raql_operation::to_row_binary };
-      dessser::gen::raql_operation::t_ext id_63 { p_0->operation };
+      dessser::gen::raql_operation::t_ext id_63 { (*p_0).operation };
       Pointer id_64 { fun62(id_63, srec_dst_392) };
       let_res_61 = id_64;
     }
@@ -420,14 +408,14 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     {
       Pointer srec_dst_393 { let_res_61 };
       auto fun66 { dessser::gen::raql_type::to_row_binary };
-      dessser::gen::raql_type::t_ext id_67 { p_0->out_record };
+      dessser::gen::raql_type::t_ext id_67 { (*p_0).out_record };
       Pointer id_68 { fun66(id_67, srec_dst_393) };
       let_res_65 = id_68;
     }
     Pointer let_res_69;
     {
       Pointer srec_dst_394 { let_res_65 };
-      Lst<dessser::gen::field_name::t_ext> id_70 { p_0->factors };
+      Lst<dessser::gen::field_name::t_ext> id_70 { (*p_0).factors };
       uint32_t id_71 { id_70.size() };
       Vec<1, uint32_t> id_72 {  id_71  };
       Pointer let_res_73;
@@ -495,7 +483,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
         Pointer let_res_111;
         {
           Vec<1, int32_t> n_ref_398 { id_110 };
-          Lst<dessser::gen::field_name::t_ext> id_112 { p_0->factors };
+          Lst<dessser::gen::field_name::t_ext> id_112 { (*p_0).factors };
           for (dessser::gen::field_name::t_ext x_399 : id_112) {
             uint8_t id_113 { 0 };
             auto fun114 { dessser::gen::field_name::to_row_binary };
@@ -525,7 +513,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     Pointer let_res_127;
     {
       Pointer srec_dst_400 { let_res_69 };
-      std::string id_128 { p_0->signature };
+      std::string id_128 { (*p_0).signature };
       uint32_t id_129 { (uint32_t)id_128.size() };
       Vec<1, uint32_t> id_130 {  id_129  };
       Pointer let_res_131;
@@ -584,7 +572,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
         }
         let_res_131 = let_res_133;
       }
-      std::string id_165 { p_0->signature };
+      std::string id_165 { (*p_0).signature };
       Bytes id_166 { id_165 };
       Pointer id_167 { let_res_131.writeBytes(id_166) };
       let_res_127 = id_167;
@@ -592,7 +580,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
     Pointer let_res_168;
     {
       Pointer srec_dst_403 { let_res_127 };
-      std::string id_169 { p_0->in_signature };
+      std::string id_169 { (*p_0).in_signature };
       uint32_t id_170 { (uint32_t)id_169.size() };
       Vec<1, uint32_t> id_171 {  id_170  };
       Pointer let_res_172;
@@ -651,7 +639,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer
         }
         let_res_172 = let_res_174;
       }
-      std::string id_206 { p_0->in_signature };
+      std::string id_206 { (*p_0).in_signature };
       Bytes id_207 { id_206 };
       Pointer id_208 { let_res_172.writeBytes(id_207) };
       let_res_168 = id_208;
@@ -731,7 +719,7 @@ std::function<Pointer(::dessser::gen::source_info::compiled_func*,Pointer)> comp
 static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Pointer)> compiled_program_to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::source_info::compiled_program*,Pointer)> fun209 { [&fun209](::dessser::gen::source_info::compiled_program* p_0, Pointer p_1) {
-    Lst<dessser::gen::program_parameter::t_ext> id_210 { p_0->default_params };
+    Lst<dessser::gen::program_parameter::t_ext> id_210 { (*p_0).default_params };
     uint32_t id_211 { id_210.size() };
     Vec<1, uint32_t> id_212 {  id_211  };
     Pointer let_res_213;
@@ -799,7 +787,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Poin
       Pointer let_res_251;
       {
         Vec<1, int32_t> n_ref_409 { id_250 };
-        Lst<dessser::gen::program_parameter::t_ext> id_252 { p_0->default_params };
+        Lst<dessser::gen::program_parameter::t_ext> id_252 { (*p_0).default_params };
         for (dessser::gen::program_parameter::t_ext x_410 : id_252) {
           uint8_t id_253 { 0 };
           auto fun254 { dessser::gen::program_parameter::to_row_binary };
@@ -828,14 +816,14 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Poin
     {
       Pointer srec_dst_411 { let_res_248 };
       auto fun268 { dessser::gen::raql_expr::to_row_binary };
-      dessser::gen::raql_expr::t_ext id_269 { p_0->condition };
+      dessser::gen::raql_expr::t_ext id_269 { (*p_0).condition };
       Pointer id_270 { fun268(id_269, srec_dst_411) };
       let_res_267 = id_270;
     }
     Pointer let_res_271;
     {
       Pointer srec_dst_412 { let_res_267 };
-      Lst<dessser::gen::global_variable::t_ext> id_272 { p_0->globals };
+      Lst<dessser::gen::global_variable::t_ext> id_272 { (*p_0).globals };
       uint32_t id_273 { id_272.size() };
       Vec<1, uint32_t> id_274 {  id_273  };
       Pointer let_res_275;
@@ -903,7 +891,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Poin
         Pointer let_res_313;
         {
           Vec<1, int32_t> n_ref_416 { id_312 };
-          Lst<dessser::gen::global_variable::t_ext> id_314 { p_0->globals };
+          Lst<dessser::gen::global_variable::t_ext> id_314 { (*p_0).globals };
           for (dessser::gen::global_variable::t_ext x_417 : id_314) {
             uint8_t id_315 { 0 };
             auto fun316 { dessser::gen::global_variable::to_row_binary };
@@ -933,7 +921,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Poin
     Pointer let_res_329;
     {
       Pointer srec_dst_418 { let_res_271 };
-      Lst<::dessser::gen::source_info::compiled_func*> id_330 { p_0->funcs };
+      Lst<::dessser::gen::source_info::compiled_func*> id_330 { (*p_0).funcs };
       uint32_t id_331 { id_330.size() };
       Vec<1, uint32_t> id_332 {  id_331  };
       Pointer let_res_333;
@@ -1001,7 +989,7 @@ static std::function<Pointer(::dessser::gen::source_info::compiled_program*,Poin
         Pointer let_res_371;
         {
           Vec<1, int32_t> n_ref_422 { id_370 };
-          Lst<::dessser::gen::source_info::compiled_func*> id_372 { p_0->funcs };
+          Lst<::dessser::gen::source_info::compiled_func*> id_372 { (*p_0).funcs };
           for (::dessser::gen::source_info::compiled_func* x_423 : id_372) {
             uint8_t id_373 { 0 };
             uint8_t id_374 { 0 };
@@ -1112,7 +1100,7 @@ std::function<Pointer(::dessser::gen::source_info::compiled_program*,Pointer)> c
 static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> fun386 { [&fun386](::dessser::gen::source_info::t* p_0, Pointer p_1) {
-    std::string id_387 { p_0->src_ext };
+    std::string id_387 { (*p_0).src_ext };
     uint32_t id_388 { (uint32_t)id_387.size() };
     Vec<1, uint32_t> id_389 {  id_388  };
     Pointer let_res_390;
@@ -1171,13 +1159,13 @@ static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_bi
       }
       let_res_390 = let_res_392;
     }
-    std::string id_424 { p_0->src_ext };
+    std::string id_424 { (*p_0).src_ext };
     Bytes id_425 { id_424 };
     Pointer id_426 { let_res_390.writeBytes(id_425) };
     Pointer let_res_427;
     {
       Pointer srec_dst_426 { id_426 };
-      Lst<std::string> id_428 { p_0->md5s };
+      Lst<std::string> id_428 { (*p_0).md5s };
       uint32_t id_429 { id_428.size() };
       Vec<1, uint32_t> id_430 {  id_429  };
       Pointer let_res_431;
@@ -1245,7 +1233,7 @@ static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_bi
         Pointer let_res_469;
         {
           Vec<1, int32_t> n_ref_430 { id_468 };
-          Lst<std::string> id_470 { p_0->md5s };
+          Lst<std::string> id_470 { (*p_0).md5s };
           for (std::string x_431 : id_470) {
             uint8_t id_471 { 0 };
             uint32_t id_472 { (uint32_t)x_431.size() };
@@ -1333,31 +1321,31 @@ static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_bi
     Pointer let_res_521;
     {
       Pointer srec_dst_434 { let_res_427 };
-      ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_522 { p_0->detail };
+      ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_522 { (*p_0).detail };
       uint16_t id_523 { uint16_t(id_522.index()) };
       Pointer id_524 { srec_dst_434.writeU16Le(id_523) };
       Pointer let_res_525;
       {
         Pointer ssum_dst_436 { id_524 };
         uint16_t id_526 { 0 };
-        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_527 { p_0->detail };
+        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_527 { (*p_0).detail };
         uint16_t id_528 { uint16_t(id_527.index()) };
         bool id_529 { bool(id_526 == id_528) };
         Pointer choose_res_530;
         if (id_529) {
-          ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_531 { p_0->detail };
+          ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_531 { (*p_0).detail };
           ::dessser::gen::source_info::compiled_program* id_532 { std::get<0 /* Compiled */>(id_531) };
           Pointer id_533 { compiled_program_to_row_binary(id_532, ssum_dst_436) };
           choose_res_530 = id_533;
         } else {
-          ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_534 { p_0->detail };
+          ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_534 { (*p_0).detail };
           uint16_t id_535 { uint16_t(id_534.index()) };
           uint16_t id_536 { 1 };
           bool id_537 { bool(id_535 == id_536) };
           Void id_538 { ((void)(assert(id_537)), VOID) };
           (void)id_538;
-          ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_539 { p_0->detail };
-          ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_540 { std::get<1 /* Failed */>(id_539) };
+          ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_539 { (*p_0).detail };
+          ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_540 { std::get<1 /* Failed */>(id_539) };
           std::string id_541 { id_540.err_msg };
           uint32_t id_542 { (uint32_t)id_541.size() };
           Vec<1, uint32_t> id_543 {  id_542  };
@@ -1417,16 +1405,16 @@ static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_bi
             }
             let_res_544 = let_res_546;
           }
-          ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_578 { p_0->detail };
-          ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_579 { std::get<1 /* Failed */>(id_578) };
+          ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_578 { (*p_0).detail };
+          ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_579 { std::get<1 /* Failed */>(id_578) };
           std::string id_580 { id_579.err_msg };
           Bytes id_581 { id_580 };
           Pointer id_582 { let_res_544.writeBytes(id_581) };
           Pointer let_res_583;
           {
             Pointer srec_dst_439 { id_582 };
-            ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_584 { p_0->detail };
-            ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_585 { std::get<1 /* Failed */>(id_584) };
+            ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_584 { (*p_0).detail };
+            ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_585 { std::get<1 /* Failed */>(id_584) };
             std::optional<dessser::gen::src_path::t_ext> id_586 { id_585.depends_on };
             bool id_587 { !(id_586.has_value ()) };
             Pointer choose_res_588;
@@ -1436,8 +1424,8 @@ static std::function<Pointer(::dessser::gen::source_info::t*,Pointer)> to_row_bi
               choose_res_588 = id_590;
             } else {
               auto fun591 { dessser::gen::src_path::to_row_binary };
-              ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_592 { p_0->detail };
-              ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_593 { std::get<1 /* Failed */>(id_592) };
+              ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_592 { (*p_0).detail };
+              ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_593 { std::get<1 /* Failed */>(id_592) };
               std::optional<dessser::gen::src_path::t_ext> id_594 { id_593.depends_on };
               dessser::gen::src_path::t_ext id_595 { id_594.value() };
               uint8_t id_596 { 0 };
@@ -1524,12 +1512,12 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
 {
   std::function<Size(::dessser::gen::source_info::compiled_func*)> fun599 { [&fun599](::dessser::gen::source_info::compiled_func* p_0) {
     auto fun600 { dessser::gen::function_name::sersize_of_row_binary };
-    dessser::gen::function_name::t_ext id_601 { p_0->name };
+    dessser::gen::function_name::t_ext id_601 { (*p_0).name };
     Size id_602 { fun600(id_601) };
     Size let_res_603;
     {
       Size sz_331 { id_602 };
-      std::optional<dessser::gen::retention::t_ext> id_604 { p_0->retention };
+      std::optional<dessser::gen::retention::t_ext> id_604 { (*p_0).retention };
       bool id_605 { !(id_604.has_value ()) };
       Size choose_res_606;
       if (id_605) {
@@ -1538,7 +1526,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
         choose_res_606 = id_608;
       } else {
         auto fun609 { dessser::gen::retention::sersize_of_row_binary };
-        std::optional<dessser::gen::retention::t_ext> id_610 { p_0->retention };
+        std::optional<dessser::gen::retention::t_ext> id_610 { (*p_0).retention };
         dessser::gen::retention::t_ext id_611 { id_610.value() };
         Size id_612 { fun609(id_611) };
         Size id_613 { Size(sz_331 + id_612) };
@@ -1553,7 +1541,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     Size let_res_618;
     {
       Size sz_333 { id_617 };
-      std::string id_619 { p_0->doc };
+      std::string id_619 { (*p_0).doc };
       uint32_t id_620 { (uint32_t)id_619.size() };
       Vec<1, uint32_t> id_621 {  id_620  };
       Size let_res_622;
@@ -1592,7 +1580,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
         }
         let_res_622 = let_res_625;
       }
-      std::string id_643 { p_0->doc };
+      std::string id_643 { (*p_0).doc };
       uint32_t id_644 { (uint32_t)id_643.size() };
       Size id_645 { Size(id_644) };
       Size id_646 { Size(let_res_622 + id_645) };
@@ -1603,7 +1591,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     {
       Size sz_337 { let_res_618 };
       auto fun649 { dessser::gen::raql_operation::sersize_of_row_binary };
-      dessser::gen::raql_operation::t_ext id_650 { p_0->operation };
+      dessser::gen::raql_operation::t_ext id_650 { (*p_0).operation };
       Size id_651 { fun649(id_650) };
       Size id_652 { Size(sz_337 + id_651) };
       let_res_648 = id_652;
@@ -1612,7 +1600,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     {
       Size sz_338 { let_res_648 };
       auto fun654 { dessser::gen::raql_type::sersize_of_row_binary };
-      dessser::gen::raql_type::t_ext id_655 { p_0->out_record };
+      dessser::gen::raql_type::t_ext id_655 { (*p_0).out_record };
       Size id_656 { fun654(id_655) };
       Size id_657 { Size(sz_338 + id_656) };
       let_res_653 = id_657;
@@ -1620,7 +1608,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     Size let_res_658;
     {
       Size sz_339 { let_res_653 };
-      Lst<dessser::gen::field_name::t_ext> id_659 { p_0->factors };
+      Lst<dessser::gen::field_name::t_ext> id_659 { (*p_0).factors };
       uint32_t id_660 { id_659.size() };
       Vec<1, uint32_t> id_661 {  id_660  };
       Size let_res_662;
@@ -1670,7 +1658,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
           Vec<1, int32_t> repeat_n_343 { id_687 };
           bool while_flag_688 { true };
           do {
-            Lst<dessser::gen::field_name::t_ext> id_689 { p_0->factors };
+            Lst<dessser::gen::field_name::t_ext> id_689 { (*p_0).factors };
             uint32_t id_690 { id_689.size() };
             int32_t id_691 { int32_t(id_690) };
             uint8_t id_692 { 0 };
@@ -1684,7 +1672,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
               auto fun698 { dessser::gen::field_name::sersize_of_row_binary };
               uint8_t id_699 { 0 };
               int32_t id_700 { repeat_n_343[id_699] };
-              Lst<dessser::gen::field_name::t_ext> id_701 { p_0->factors };
+              Lst<dessser::gen::field_name::t_ext> id_701 { (*p_0).factors };
               dessser::gen::field_name::t_ext id_702 { id_701[id_700] };
               Size id_703 { fun698(id_702) };
               Size id_704 { Size(id_697 + id_703) };
@@ -1712,7 +1700,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     Size let_res_714;
     {
       Size sz_344 { let_res_658 };
-      std::string id_715 { p_0->signature };
+      std::string id_715 { (*p_0).signature };
       uint32_t id_716 { (uint32_t)id_715.size() };
       Vec<1, uint32_t> id_717 {  id_716  };
       Size let_res_718;
@@ -1751,7 +1739,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
         }
         let_res_718 = let_res_721;
       }
-      std::string id_739 { p_0->signature };
+      std::string id_739 { (*p_0).signature };
       uint32_t id_740 { (uint32_t)id_739.size() };
       Size id_741 { Size(id_740) };
       Size id_742 { Size(let_res_718 + id_741) };
@@ -1761,7 +1749,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
     Size let_res_744;
     {
       Size sz_348 { let_res_714 };
-      std::string id_745 { p_0->in_signature };
+      std::string id_745 { (*p_0).in_signature };
       uint32_t id_746 { (uint32_t)id_745.size() };
       Vec<1, uint32_t> id_747 {  id_746  };
       Size let_res_748;
@@ -1800,7 +1788,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled
         }
         let_res_748 = let_res_751;
       }
-      std::string id_769 { p_0->in_signature };
+      std::string id_769 { (*p_0).in_signature };
       uint32_t id_770 { (uint32_t)id_769.size() };
       Size id_771 { Size(id_770) };
       Size id_772 { Size(let_res_748 + id_771) };
@@ -1874,7 +1862,7 @@ std::function<Size(::dessser::gen::source_info::compiled_func*)> compiled_func_s
 static std::function<Size(::dessser::gen::source_info::compiled_program*)> compiled_program_sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::source_info::compiled_program*)> fun774 { [&fun774](::dessser::gen::source_info::compiled_program* p_0) {
-    Lst<dessser::gen::program_parameter::t_ext> id_775 { p_0->default_params };
+    Lst<dessser::gen::program_parameter::t_ext> id_775 { (*p_0).default_params };
     uint32_t id_776 { id_775.size() };
     Vec<1, uint32_t> id_777 {  id_776  };
     Size let_res_778;
@@ -1923,7 +1911,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
         Vec<1, int32_t> repeat_n_356 { id_802 };
         bool while_flag_803 { true };
         do {
-          Lst<dessser::gen::program_parameter::t_ext> id_804 { p_0->default_params };
+          Lst<dessser::gen::program_parameter::t_ext> id_804 { (*p_0).default_params };
           uint32_t id_805 { id_804.size() };
           int32_t id_806 { int32_t(id_805) };
           uint8_t id_807 { 0 };
@@ -1937,7 +1925,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
             auto fun813 { dessser::gen::program_parameter::sersize_of_row_binary };
             uint8_t id_814 { 0 };
             int32_t id_815 { repeat_n_356[id_814] };
-            Lst<dessser::gen::program_parameter::t_ext> id_816 { p_0->default_params };
+            Lst<dessser::gen::program_parameter::t_ext> id_816 { (*p_0).default_params };
             dessser::gen::program_parameter::t_ext id_817 { id_816[id_815] };
             Size id_818 { fun813(id_817) };
             Size id_819 { Size(id_812 + id_818) };
@@ -1964,7 +1952,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
     {
       Size sz_357 { let_res_800 };
       auto fun830 { dessser::gen::raql_expr::sersize_of_row_binary };
-      dessser::gen::raql_expr::t_ext id_831 { p_0->condition };
+      dessser::gen::raql_expr::t_ext id_831 { (*p_0).condition };
       Size id_832 { fun830(id_831) };
       Size id_833 { Size(sz_357 + id_832) };
       let_res_829 = id_833;
@@ -1972,7 +1960,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
     Size let_res_834;
     {
       Size sz_358 { let_res_829 };
-      Lst<dessser::gen::global_variable::t_ext> id_835 { p_0->globals };
+      Lst<dessser::gen::global_variable::t_ext> id_835 { (*p_0).globals };
       uint32_t id_836 { id_835.size() };
       Vec<1, uint32_t> id_837 {  id_836  };
       Size let_res_838;
@@ -2022,7 +2010,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
           Vec<1, int32_t> repeat_n_362 { id_863 };
           bool while_flag_864 { true };
           do {
-            Lst<dessser::gen::global_variable::t_ext> id_865 { p_0->globals };
+            Lst<dessser::gen::global_variable::t_ext> id_865 { (*p_0).globals };
             uint32_t id_866 { id_865.size() };
             int32_t id_867 { int32_t(id_866) };
             uint8_t id_868 { 0 };
@@ -2036,7 +2024,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
               auto fun874 { dessser::gen::global_variable::sersize_of_row_binary };
               uint8_t id_875 { 0 };
               int32_t id_876 { repeat_n_362[id_875] };
-              Lst<dessser::gen::global_variable::t_ext> id_877 { p_0->globals };
+              Lst<dessser::gen::global_variable::t_ext> id_877 { (*p_0).globals };
               dessser::gen::global_variable::t_ext id_878 { id_877[id_876] };
               Size id_879 { fun874(id_878) };
               Size id_880 { Size(id_873 + id_879) };
@@ -2064,7 +2052,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
     Size let_res_890;
     {
       Size sz_363 { let_res_834 };
-      Lst<::dessser::gen::source_info::compiled_func*> id_891 { p_0->funcs };
+      Lst<::dessser::gen::source_info::compiled_func*> id_891 { (*p_0).funcs };
       uint32_t id_892 { id_891.size() };
       Vec<1, uint32_t> id_893 {  id_892  };
       Size let_res_894;
@@ -2114,7 +2102,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
           Vec<1, int32_t> repeat_n_367 { id_919 };
           bool while_flag_920 { true };
           do {
-            Lst<::dessser::gen::source_info::compiled_func*> id_921 { p_0->funcs };
+            Lst<::dessser::gen::source_info::compiled_func*> id_921 { (*p_0).funcs };
             uint32_t id_922 { id_921.size() };
             int32_t id_923 { int32_t(id_922) };
             uint8_t id_924 { 0 };
@@ -2127,7 +2115,7 @@ static std::function<Size(::dessser::gen::source_info::compiled_program*)> compi
               Size id_929 { sz_ref_366[id_928] };
               uint8_t id_930 { 0 };
               int32_t id_931 { repeat_n_367[id_930] };
-              Lst<::dessser::gen::source_info::compiled_func*> id_932 { p_0->funcs };
+              Lst<::dessser::gen::source_info::compiled_func*> id_932 { (*p_0).funcs };
               ::dessser::gen::source_info::compiled_func* id_933 { id_932[id_931] };
               Size id_934 { compiled_func_sersize_of_row_binary(id_933) };
               Size id_935 { Size(id_929 + id_934) };
@@ -2216,7 +2204,7 @@ std::function<Size(::dessser::gen::source_info::compiled_program*)> compiled_pro
 static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::source_info::t*)> fun945 { [&fun945](::dessser::gen::source_info::t* p_0) {
-    std::string id_946 { p_0->src_ext };
+    std::string id_946 { (*p_0).src_ext };
     uint32_t id_947 { (uint32_t)id_946.size() };
     Vec<1, uint32_t> id_948 {  id_947  };
     Size let_res_949;
@@ -2255,14 +2243,14 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
       }
       let_res_949 = let_res_952;
     }
-    std::string id_970 { p_0->src_ext };
+    std::string id_970 { (*p_0).src_ext };
     uint32_t id_971 { (uint32_t)id_970.size() };
     Size id_972 { Size(id_971) };
     Size id_973 { Size(let_res_949 + id_972) };
     Size let_res_974;
     {
       Size sz_372 { id_973 };
-      Lst<std::string> id_975 { p_0->md5s };
+      Lst<std::string> id_975 { (*p_0).md5s };
       uint32_t id_976 { id_975.size() };
       Vec<1, uint32_t> id_977 {  id_976  };
       Size let_res_978;
@@ -2312,7 +2300,7 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
           Vec<1, int32_t> repeat_n_376 { id_1003 };
           bool while_flag_1004 { true };
           do {
-            Lst<std::string> id_1005 { p_0->md5s };
+            Lst<std::string> id_1005 { (*p_0).md5s };
             uint32_t id_1006 { id_1005.size() };
             int32_t id_1007 { int32_t(id_1006) };
             uint8_t id_1008 { 0 };
@@ -2325,7 +2313,7 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
               Size id_1013 { sz_ref_375[id_1012] };
               uint8_t id_1014 { 0 };
               int32_t id_1015 { repeat_n_376[id_1014] };
-              Lst<std::string> id_1016 { p_0->md5s };
+              Lst<std::string> id_1016 { (*p_0).md5s };
               std::string id_1017 { id_1016[id_1015] };
               uint32_t id_1018 { (uint32_t)id_1017.size() };
               Size let_res_1019;
@@ -2398,20 +2386,20 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
     {
       Size sz_380 { let_res_974 };
       uint16_t id_1055 { 0 };
-      ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1056 { p_0->detail };
+      ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1056 { (*p_0).detail };
       uint16_t id_1057 { uint16_t(id_1056.index()) };
       bool id_1058 { bool(id_1055 == id_1057) };
       Size choose_res_1059;
       if (id_1058) {
         Size id_1060 { 2UL };
         Size id_1061 { Size(sz_380 + id_1060) };
-        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1062 { p_0->detail };
+        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1062 { (*p_0).detail };
         ::dessser::gen::source_info::compiled_program* id_1063 { std::get<0 /* Compiled */>(id_1062) };
         Size id_1064 { compiled_program_sersize_of_row_binary(id_1063) };
         Size id_1065 { Size(id_1061 + id_1064) };
         choose_res_1059 = id_1065;
       } else {
-        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1066 { p_0->detail };
+        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1066 { (*p_0).detail };
         uint16_t id_1067 { uint16_t(id_1066.index()) };
         uint16_t id_1068 { 1 };
         bool id_1069 { bool(id_1067 == id_1068) };
@@ -2419,8 +2407,8 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
         (void)id_1070;
         Size id_1071 { 2UL };
         Size id_1072 { Size(sz_380 + id_1071) };
-        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1073 { p_0->detail };
-        ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_1074 { std::get<1 /* Failed */>(id_1073) };
+        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1073 { (*p_0).detail };
+        ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1074 { std::get<1 /* Failed */>(id_1073) };
         std::string id_1075 { id_1074.err_msg };
         uint32_t id_1076 { (uint32_t)id_1075.size() };
         Vec<1, uint32_t> id_1077 {  id_1076  };
@@ -2460,8 +2448,8 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
           }
           let_res_1078 = let_res_1081;
         }
-        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1099 { p_0->detail };
-        ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_1100 { std::get<1 /* Failed */>(id_1099) };
+        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1099 { (*p_0).detail };
+        ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1100 { std::get<1 /* Failed */>(id_1099) };
         std::string id_1101 { id_1100.err_msg };
         uint32_t id_1102 { (uint32_t)id_1101.size() };
         Size id_1103 { Size(id_1102) };
@@ -2470,8 +2458,8 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
         Size let_res_1106;
         {
           Size sz_386 { id_1105 };
-          ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1107 { p_0->detail };
-          ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_1108 { std::get<1 /* Failed */>(id_1107) };
+          ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1107 { (*p_0).detail };
+          ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1108 { std::get<1 /* Failed */>(id_1107) };
           std::optional<dessser::gen::src_path::t_ext> id_1109 { id_1108.depends_on };
           bool id_1110 { !(id_1109.has_value ()) };
           Size choose_res_1111;
@@ -2481,8 +2469,8 @@ static std::function<Size(::dessser::gen::source_info::t*)> sersize_of_row_binar
             choose_res_1111 = id_1113;
           } else {
             auto fun1114 { dessser::gen::src_path::sersize_of_row_binary };
-            ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1115 { p_0->detail };
-            ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_1116 { std::get<1 /* Failed */>(id_1115) };
+            ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1115 { (*p_0).detail };
+            ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1116 { std::get<1 /* Failed */>(id_1115) };
             std::optional<dessser::gen::src_path::t_ext> id_1117 { id_1116.depends_on };
             dessser::gen::src_path::t_ext id_1118 { id_1117.value() };
             Size id_1119 { fun1114(id_1118) };
@@ -4271,24 +4259,24 @@ static std::function<::dessser::gen::source_info::ta38848586446dac711443ba2fdd12
               ::dessser::gen::source_info::t22a32080ad88ab548b80077a17b7dd46 id_1776 { du16_fst_289, du16_snd_290 };
               letpair_res_1775 = id_1776;
             }
-            ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed let_res_1777;
+            ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 let_res_1777;
             {
               ::dessser::gen::source_info::t22a32080ad88ab548b80077a17b7dd46 dsum1_294 { letpair_res_1775 };
-              ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed letpair_res_1778;
+              ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 letpair_res_1778;
               {
                 auto dsum1_fst_295 { std::get<0>(dsum1_294) };
                 auto dsum1_snd_296 { std::get<1>(dsum1_294) };
                 uint16_t id_1779 { 0 };
                 bool id_1780 { bool(id_1779 == dsum1_fst_295) };
-                ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed choose_res_1781;
+                ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 choose_res_1781;
                 if (id_1780) {
                   ::dessser::gen::source_info::t5cd1bbfb4f9f8bb51dadea9dbddee4df id_1782 { compiled_program_of_row_binary(dsum1_snd_296) };
-                  ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed letpair_res_1783;
+                  ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 letpair_res_1783;
                   {
                     auto dsum2_fst_322 { std::get<0>(id_1782) };
                     auto dsum2_snd_323 { std::get<1>(id_1782) };
-                    ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1784 { std::in_place_index<0>, dsum2_fst_322 };
-                    ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed id_1785 { id_1784, dsum2_snd_323 };
+                    ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1784 { std::in_place_index<0>, dsum2_fst_322 };
+                    ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 id_1785 { id_1784, dsum2_snd_323 };
                     letpair_res_1783 = id_1785;
                   }
                   choose_res_1781 = letpair_res_1783;
@@ -4389,10 +4377,10 @@ static std::function<::dessser::gen::source_info::ta38848586446dac711443ba2fdd12
                     }
                     let_res_1830 = letpair_res_1831;
                   }
-                  ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed let_res_1836;
+                  ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 let_res_1836;
                   {
                     ::dessser::gen::source_info::tef94b55d8809251f13165d9a05bd9d0e drec_309 { let_res_1830 };
-                    ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed letpair_res_1837;
+                    ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 letpair_res_1837;
                     {
                       auto drec_fst_310 { std::get<0>(drec_309) };
                       auto drec_snd_311 { std::get<1>(drec_309) };
@@ -4422,13 +4410,13 @@ static std::function<::dessser::gen::source_info::ta38848586446dac711443ba2fdd12
                         }
                         choose_res_1842 = letpair_res_1851;
                       }
-                      ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed letpair_res_1854;
+                      ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 letpair_res_1854;
                       {
                         auto drec_fst_316 { std::get<0>(choose_res_1842) };
                         auto drec_snd_317 { std::get<1>(choose_res_1842) };
-                        ::dessser::gen::source_info::t8100aa66a1cd239db571dfaa7d44577b id_1855 { .depends_on = drec_fst_316, .err_msg = drec_fst_310 };
-                        ::dessser::gen::source_info::t5f384f7916a2ad2c8006a89d10acc591 id_1856 { std::in_place_index<1>, id_1855 };
-                        ::dessser::gen::source_info::t12f58d20d4023ea0320bcc3610e46fed id_1857 { id_1856, drec_snd_317 };
+                        ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1855 { .depends_on = drec_fst_316, .err_msg = drec_fst_310 };
+                        ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1856 { std::in_place_index<1>, id_1855 };
+                        ::dessser::gen::source_info::t731622066fe28bc88f69f6ba54d1a288 id_1857 { id_1856, drec_snd_317 };
                         letpair_res_1854 = id_1857;
                       }
                       letpair_res_1837 = letpair_res_1854;
@@ -4465,5 +4453,6 @@ static std::function<::dessser::gen::source_info::ta38848586446dac711443ba2fdd12
 std::function<::dessser::gen::source_info::ta38848586446dac711443ba2fdd1244d(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

@@ -36,11 +36,24 @@ enum Constr_t {
   Direct,
 };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // State
+    case 1: return std::get<1>(a) == std::get<1>(b); // RecordField
+    case 2: return ::dessser::gen::raql_variable::Deref(std::get<2>(a)) == ::dessser::gen::raql_variable::Deref(std::get<2>(b)); // RecordValue
+    case 3: return std::get<3>(a) == std::get<3>(b); // Direct
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "State " << std::get<0>(v); break;
     case 1: os << "RecordField " << std::get<1>(v); break;
-    case 2: os << "RecordValue " << std::get<2>(v); break;
+    case 2: os << "RecordValue " << ::dessser::gen::raql_variable::Deref(std::get<2>(v)); break;
     case 3: os << "Direct " << std::get<3>(v); break;
   }
   return os;
@@ -58,6 +71,7 @@ extern std::function<Pointer(::dessser::gen::raql_binding_key::t*,Pointer)> to_r
 extern std::function<Size(::dessser::gen::raql_binding_key::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::raql_binding_key::t2fb89294d169d1b8c1dc7c9181c50762(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

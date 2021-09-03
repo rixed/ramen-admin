@@ -37,9 +37,6 @@ struct t {
   dessser::gen::raql_value::t_ext value;
   t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_value::t_ext value_) : name(name_), value(value_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return name == other.name && value == other.value;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::program_run_parameter::t*,
@@ -67,13 +64,13 @@ static std::function<Pointer(::dessser::gen::program_run_parameter::t*,Pointer)>
 {
   std::function<Pointer(::dessser::gen::program_run_parameter::t*,Pointer)> fun0 { [&fun0](::dessser::gen::program_run_parameter::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { p_0->name };
+    dessser::gen::field_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_67 { id_3 };
       auto fun5 { dessser::gen::raql_value::to_row_binary };
-      dessser::gen::raql_value::t_ext id_6 { p_0->value };
+      dessser::gen::raql_value::t_ext id_6 { (*p_0).value };
       Pointer id_7 { fun5(id_6, srec_dst_67) };
       let_res_4 = id_7;
     }
@@ -92,13 +89,13 @@ static std::function<Size(::dessser::gen::program_run_parameter::t*)> sersize_of
 {
   std::function<Size(::dessser::gen::program_run_parameter::t*)> fun8 { [&fun8](::dessser::gen::program_run_parameter::t* p_0) {
     auto fun9 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_10 { p_0->name };
+    dessser::gen::field_name::t_ext id_10 { (*p_0).name };
     Size id_11 { fun9(id_10) };
     Size let_res_12;
     {
       Size sz_66 { id_11 };
       auto fun13 { dessser::gen::raql_value::sersize_of_row_binary };
-      dessser::gen::raql_value::t_ext id_14 { p_0->value };
+      dessser::gen::raql_value::t_ext id_14 { (*p_0).value };
       Size id_15 { fun13(id_14) };
       Size id_16 { Size(sz_66 + id_15) };
       let_res_12 = id_16;
@@ -151,5 +148,6 @@ static std::function<::dessser::gen::program_run_parameter::tc5822b22d45d47f34b2
 std::function<::dessser::gen::program_run_parameter::tc5822b22d45d47f34b2c7bbfc44824d9(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

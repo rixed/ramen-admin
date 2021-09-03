@@ -46,6 +46,28 @@ enum Constr_t {
   GlobalVar,
 };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Unknown
+    case 1: return std::get<1>(a) == std::get<1>(b); // In
+    case 2: return std::get<2>(a) == std::get<2>(b); // GroupState
+    case 3: return std::get<3>(a) == std::get<3>(b); // GlobalState
+    case 4: return std::get<4>(a) == std::get<4>(b); // OutPrevious
+    case 5: return std::get<5>(a) == std::get<5>(b); // Out
+    case 6: return std::get<6>(a) == std::get<6>(b); // SortFirst
+    case 7: return std::get<7>(a) == std::get<7>(b); // SortSmallest
+    case 8: return std::get<8>(a) == std::get<8>(b); // SortGreatest
+    case 9: return std::get<9>(a) == std::get<9>(b); // Param
+    case 10: return std::get<10>(a) == std::get<10>(b); // Env
+    case 11: return std::get<11>(a) == std::get<11>(b); // Record
+    case 12: return std::get<12>(a) == std::get<12>(b); // GlobalVar
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Unknown " << std::get<0>(v); break;
@@ -77,6 +99,7 @@ extern std::function<Pointer(::dessser::gen::raql_variable::t*,Pointer)> to_row_
 extern std::function<Size(::dessser::gen::raql_variable::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

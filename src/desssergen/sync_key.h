@@ -29,6 +29,16 @@ enum Constr_per_dash_key {
   Widgets,
 };
 
+inline bool operator==(per_dash_key const &a, per_dash_key const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Widgets
+  };
+  return false;
+}
+inline bool operator!=(per_dash_key const &a, per_dash_key const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, per_dash_key const &v) {
   switch (v.index()) {
     case 0: os << "Widgets " << std::get<0>(v); break;
@@ -51,6 +61,17 @@ enum Constr_t32def300158106bfcc2bfd2015d1a3a9 {
   Port,
 };
 
+inline bool operator==(t32def300158106bfcc2bfd2015d1a3a9 const &a, t32def300158106bfcc2bfd2015d1a3a9 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Host
+    case 1: return std::get<1>(a) == std::get<1>(b); // Port
+  };
+  return false;
+}
+inline bool operator!=(t32def300158106bfcc2bfd2015d1a3a9 const &a, t32def300158106bfcc2bfd2015d1a3a9 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t32def300158106bfcc2bfd2015d1a3a9 const &v) {
   switch (v.index()) {
     case 0: os << "Host " << std::get<0>(v); break;
@@ -86,6 +107,23 @@ enum Constr_t082c1c733e68c2b9334f218f8c5aeccb {
   QuarantineUntil,
 };
 
+inline bool operator==(t082c1c733e68c2b9334f218f8c5aeccb const &a, t082c1c733e68c2b9334f218f8c5aeccb const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // StateFile
+    case 1: return std::get<1>(a) == std::get<1>(b); // InputRingFile
+    case 2: return std::get<2>(a) == std::get<2>(b); // Pid
+    case 3: return std::get<3>(a) == std::get<3>(b); // LastKilled
+    case 4: return std::get<4>(a) == std::get<4>(b); // LastExit
+    case 5: return std::get<5>(a) == std::get<5>(b); // LastExitStatus
+    case 6: return std::get<6>(a) == std::get<6>(b); // SuccessiveFailures
+    case 7: return std::get<7>(a) == std::get<7>(b); // QuarantineUntil
+  };
+  return false;
+}
+inline bool operator!=(t082c1c733e68c2b9334f218f8c5aeccb const &a, t082c1c733e68c2b9334f218f8c5aeccb const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t082c1c733e68c2b9334f218f8c5aeccb const &v) {
   switch (v.index()) {
     case 0: os << "StateFile " << std::get<0>(v); break;
@@ -129,6 +167,24 @@ enum Constr_t794aebb012043f26d004aebd5966b350 {
   OutputSpecs,
 };
 
+inline bool operator==(t794aebb012043f26d004aebd5966b350 const &a, t794aebb012043f26d004aebd5966b350 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // RuntimeStats
+    case 1: return std::get<1>(a) == std::get<1>(b); // ArchivedTimes
+    case 2: return std::get<2>(a) == std::get<2>(b); // NumArcFiles
+    case 3: return std::get<3>(a) == std::get<3>(b); // NumArcBytes
+    case 4: return std::get<4>(a) == std::get<4>(b); // AllocedArcBytes
+    case 5: return std::get<5>(a) == std::get<5>(b); // Worker
+    case 6: return std::get<6>(a) == std::get<6>(b); // PerInstance
+    case 7: return std::get<7>(a) == std::get<7>(b); // PerReplayer
+    case 8: return std::get<8>(a) == std::get<8>(b); // OutputSpecs
+  };
+  return false;
+}
+inline bool operator!=(t794aebb012043f26d004aebd5966b350 const &a, t794aebb012043f26d004aebd5966b350 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t794aebb012043f26d004aebd5966b350 const &v) {
   switch (v.index()) {
     case 0: os << "RuntimeStats " << std::get<0>(v); break;
@@ -157,6 +213,16 @@ enum Constr_t73ec97d1f82a1880f5d2693e3a0558b1 {
   Executable,
 };
 
+inline bool operator==(t73ec97d1f82a1880f5d2693e3a0558b1 const &a, t73ec97d1f82a1880f5d2693e3a0558b1 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Executable
+  };
+  return false;
+}
+inline bool operator!=(t73ec97d1f82a1880f5d2693e3a0558b1 const &a, t73ec97d1f82a1880f5d2693e3a0558b1 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t73ec97d1f82a1880f5d2693e3a0558b1 const &v) {
   switch (v.index()) {
     case 0: os << "Executable " << std::get<0>(v); break;
@@ -183,6 +249,19 @@ enum Constr_td886436745a4631e1e780c597e2e1fe9 {
   PerProgram,
 };
 
+inline bool operator==(td886436745a4631e1e780c597e2e1fe9 const &a, td886436745a4631e1e780c597e2e1fe9 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // IsMaster
+    case 1: return std::get<1>(a) == std::get<1>(b); // PerService
+    case 2: return std::get<2>(a) == std::get<2>(b); // PerWorker
+    case 3: return std::get<3>(a) == std::get<3>(b); // PerProgram
+  };
+  return false;
+}
+inline bool operator!=(td886436745a4631e1e780c597e2e1fe9 const &a, td886436745a4631e1e780c597e2e1fe9 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, td886436745a4631e1e780c597e2e1fe9 const &v) {
   switch (v.index()) {
     case 0: os << "IsMaster " << std::get<0>(v); break;
@@ -210,6 +289,18 @@ enum Constr_t1fb80ba5a0eef0b970838ab3e8e6bce4 {
   RetentionsOverride,
 };
 
+inline bool operator==(t1fb80ba5a0eef0b970838ab3e8e6bce4 const &a, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // TotalSize
+    case 1: return std::get<1>(a) == std::get<1>(b); // RecallCost
+    case 2: return std::get<2>(a) == std::get<2>(b); // RetentionsOverride
+  };
+  return false;
+}
+inline bool operator!=(t1fb80ba5a0eef0b970838ab3e8e6bce4 const &a, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &v) {
   switch (v.index()) {
     case 0: os << "TotalSize " << std::get<0>(v); break;
@@ -229,6 +320,17 @@ enum Constr_tc93e19385f89f334cffc47ceb4a894b8 {
   LastTuple,
 };
 
+inline bool operator==(tc93e19385f89f334cffc47ceb4a894b8 const &a, tc93e19385f89f334cffc47ceb4a894b8 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Subscriber
+    case 1: return std::get<1>(a) == std::get<1>(b); // LastTuple
+  };
+  return false;
+}
+inline bool operator!=(tc93e19385f89f334cffc47ceb4a894b8 const &a, tc93e19385f89f334cffc47ceb4a894b8 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, tc93e19385f89f334cffc47ceb4a894b8 const &v) {
   switch (v.index()) {
     case 0: os << "Subscriber " << std::get<0>(v); break;
@@ -243,6 +345,12 @@ struct t9d781e6e3c7478a3c57f805b8c82ba57 : public std::tuple<
   std::string,
   ::dessser::gen::sync_key::tc93e19385f89f334cffc47ceb4a894b8
 > { using tuple::tuple; };
+inline bool operator==(t9d781e6e3c7478a3c57f805b8c82ba57 const &a, t9d781e6e3c7478a3c57f805b8c82ba57 const &b) {
+  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && std::get<3>(a) == std::get<3>(b);
+}
+inline bool operator!=(t9d781e6e3c7478a3c57f805b8c82ba57 const &a, t9d781e6e3c7478a3c57f805b8c82ba57 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t9d781e6e3c7478a3c57f805b8c82ba57 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
@@ -263,6 +371,17 @@ enum Constr_t34440d69278f78fc117a9719151dac05 {
   Scratchpad,
 };
 
+inline bool operator==(t34440d69278f78fc117a9719151dac05 const &a, t34440d69278f78fc117a9719151dac05 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Response
+    case 1: return std::get<1>(a) == std::get<1>(b); // Scratchpad
+  };
+  return false;
+}
+inline bool operator!=(t34440d69278f78fc117a9719151dac05 const &a, t34440d69278f78fc117a9719151dac05 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t34440d69278f78fc117a9719151dac05 const &v) {
   switch (v.index()) {
     case 0: os << "Response " << std::get<0>(v); break;
@@ -278,8 +397,12 @@ typedef std::tuple<
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 typedef std::tuple<
   std::string,
   per_dash_key*
@@ -295,6 +418,17 @@ enum Constr_t8bc7bba8a815a55f85ed48e95de5ac1f {
   Inhibition,
 };
 
+inline bool operator==(t8bc7bba8a815a55f85ed48e95de5ac1f const &a, t8bc7bba8a815a55f85ed48e95de5ac1f const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Contacts
+    case 1: return std::get<1>(a) == std::get<1>(b); // Inhibition
+  };
+  return false;
+}
+inline bool operator!=(t8bc7bba8a815a55f85ed48e95de5ac1f const &a, t8bc7bba8a815a55f85ed48e95de5ac1f const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t8bc7bba8a815a55f85ed48e95de5ac1f const &v) {
   switch (v.index()) {
     case 0: os << "Contacts " << std::get<0>(v); break;
@@ -328,6 +462,22 @@ enum Constr_t7cca840d7e40b13b976d995ba9f9fd5b {
   Ack,
 };
 
+inline bool operator==(t7cca840d7e40b13b976d995ba9f9fd5b const &a, t7cca840d7e40b13b976d995ba9f9fd5b const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // NumDeliveryAttempts
+    case 1: return std::get<1>(a) == std::get<1>(b); // FirstDeliveryAttempt
+    case 2: return std::get<2>(a) == std::get<2>(b); // LastDeliveryAttempt
+    case 3: return std::get<3>(a) == std::get<3>(b); // NextScheduled
+    case 4: return std::get<4>(a) == std::get<4>(b); // NextSend
+    case 5: return std::get<5>(a) == std::get<5>(b); // DeliveryStatus
+    case 6: return std::get<6>(a) == std::get<6>(b); // Ack
+  };
+  return false;
+}
+inline bool operator!=(t7cca840d7e40b13b976d995ba9f9fd5b const &a, t7cca840d7e40b13b976d995ba9f9fd5b const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t7cca840d7e40b13b976d995ba9f9fd5b const &v) {
   switch (v.index()) {
     case 0: os << "NumDeliveryAttempts " << std::get<0>(v); break;
@@ -371,6 +521,22 @@ enum Constr_t14a5e3eba11a1198d8e17aba65f08825 {
   Journal,
 };
 
+inline bool operator==(t14a5e3eba11a1198d8e17aba65f08825 const &a, t14a5e3eba11a1198d8e17aba65f08825 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // FirstStartNotif
+    case 1: return std::get<1>(a) == std::get<1>(b); // LastStartNotif
+    case 2: return std::get<2>(a) == std::get<2>(b); // LastStopNotif
+    case 3: return std::get<3>(a) == std::get<3>(b); // LastStateChangeNotif
+    case 4: return std::get<4>(a) == std::get<4>(b); // Team
+    case 5: return std::get<5>(a) == std::get<5>(b); // Dialogs
+    case 6: return std::get<6>(a) == std::get<6>(b); // Journal
+  };
+  return false;
+}
+inline bool operator!=(t14a5e3eba11a1198d8e17aba65f08825 const &a, t14a5e3eba11a1198d8e17aba65f08825 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t14a5e3eba11a1198d8e17aba65f08825 const &v) {
   switch (v.index()) {
     case 0: os << "FirstStartNotif " << std::get<0>(v); break;
@@ -391,6 +557,8 @@ typedef std::tuple<
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t : public std::variant<
   Void, // DevNull
   Void, // Time
@@ -429,6 +597,31 @@ enum Constr_t {
   Incidents,
 };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // DevNull
+    case 1: return std::get<1>(a) == std::get<1>(b); // Time
+    case 2: return std::get<2>(a) == std::get<2>(b); // Versions
+    case 3: return std::get<3>(a) == std::get<3>(b); // Sources
+    case 4: return std::get<4>(a) == std::get<4>(b); // TargetConfig
+    case 5: return std::get<5>(a) == std::get<5>(b); // PerSite
+    case 6: return std::get<6>(a) == std::get<6>(b); // Storage
+    case 7: return std::get<7>(a) == std::get<7>(b); // Tails
+    case 8: return std::get<8>(a) == std::get<8>(b); // Replays
+    case 9: return (std::get<9>(a) && std::get<9>(b) && ::dessser::gen::sync_socket::Deref(std::get<9>(a).value()) == ::dessser::gen::sync_socket::Deref(std::get<9>(b).value())) || (!std::get<9>(a) && !std::get<9>(b)); // Error
+    case 10: return std::get<10>(a) == std::get<10>(b); // ReplayRequests
+    case 11: return std::get<11>(a) == std::get<11>(b); // PerClient
+    case 12: return std::get<12>(a) == std::get<12>(b); // Dashboards
+    case 13: return std::get<13>(a) == std::get<13>(b); // Notifications
+    case 14: return std::get<14>(a) == std::get<14>(b); // Teams
+    case 15: return std::get<15>(a) == std::get<15>(b); // Incidents
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "DevNull " << std::get<0>(v); break;
@@ -440,7 +633,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
     case 6: os << "Storage " << std::get<6>(v); break;
     case 7: os << "Tails " << std::get<7>(v); break;
     case 8: os << "Replays " << std::get<8>(v); break;
-    case 9: os << "Error " << std::get<9>(v); break;
+    case 9: if (std::get<9>(v)) os << "Error " << ::dessser::gen::sync_socket::Deref(std::get<9>(v).value()); break;
     case 10: os << "ReplayRequests " << std::get<10>(v); break;
     case 11: os << "PerClient " << std::get<11>(v); break;
     case 12: os << "Dashboards " << std::get<12>(v); break;
@@ -453,6 +646,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 typedef std::tuple<
   ::dessser::gen::sync_key::per_dash_key*,
   Pointer
@@ -460,8 +655,12 @@ typedef std::tuple<
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
+inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 typedef std::tuple<
   ::dessser::gen::sync_key::t*,
   Pointer
@@ -477,6 +676,7 @@ extern std::function<Size(::dessser::gen::sync_key::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t74d8a287d0a13dbe7e14118a085f0fb9(Pointer)> per_dash_key_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t3161399693367e6234a99fd179dbbb5d(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

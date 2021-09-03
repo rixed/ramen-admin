@@ -63,47 +63,47 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_delivery_status::t* p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0->index()) };
+    uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_88 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0->index()) };
+      uint16_t id_5 { uint16_t((*p_0).index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_88;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0->index()) };
+        uint16_t id_9 { uint16_t((*p_0).index()) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_88;
         } else {
           uint16_t id_12 { 2 };
-          uint16_t id_13 { uint16_t(p_0->index()) };
+          uint16_t id_13 { uint16_t((*p_0).index()) };
           bool id_14 { bool(id_12 == id_13) };
           Pointer choose_res_15;
           if (id_14) {
             choose_res_15 = ssum_dst_88;
           } else {
             uint16_t id_16 { 3 };
-            uint16_t id_17 { uint16_t(p_0->index()) };
+            uint16_t id_17 { uint16_t((*p_0).index()) };
             bool id_18 { bool(id_16 == id_17) };
             Pointer choose_res_19;
             if (id_18) {
               choose_res_19 = ssum_dst_88;
             } else {
               uint16_t id_20 { 4 };
-              uint16_t id_21 { uint16_t(p_0->index()) };
+              uint16_t id_21 { uint16_t((*p_0).index()) };
               bool id_22 { bool(id_20 == id_21) };
               Pointer choose_res_23;
               if (id_22) {
                 choose_res_23 = ssum_dst_88;
               } else {
-                uint16_t id_24 { uint16_t(p_0->index()) };
+                uint16_t id_24 { uint16_t((*p_0).index()) };
                 uint16_t id_25 { 5 };
                 bool id_26 { bool(id_24 == id_25) };
                 Void id_27 { ((void)(assert(id_26)), VOID) };
@@ -137,7 +137,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize
 {
   std::function<Size(::dessser::gen::alerting_delivery_status::t*)> fun28 { [&fun28](::dessser::gen::alerting_delivery_status::t* p_0) {
     uint16_t id_29 { 0 };
-    uint16_t id_30 { uint16_t(p_0->index()) };
+    uint16_t id_30 { uint16_t((*p_0).index()) };
     bool id_31 { bool(id_29 == id_30) };
     Size choose_res_32;
     if (id_31) {
@@ -145,7 +145,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize
       choose_res_32 = id_33;
     } else {
       uint16_t id_34 { 1 };
-      uint16_t id_35 { uint16_t(p_0->index()) };
+      uint16_t id_35 { uint16_t((*p_0).index()) };
       bool id_36 { bool(id_34 == id_35) };
       Size choose_res_37;
       if (id_36) {
@@ -153,7 +153,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize
         choose_res_37 = id_38;
       } else {
         uint16_t id_39 { 2 };
-        uint16_t id_40 { uint16_t(p_0->index()) };
+        uint16_t id_40 { uint16_t((*p_0).index()) };
         bool id_41 { bool(id_39 == id_40) };
         Size choose_res_42;
         if (id_41) {
@@ -161,7 +161,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize
           choose_res_42 = id_43;
         } else {
           uint16_t id_44 { 3 };
-          uint16_t id_45 { uint16_t(p_0->index()) };
+          uint16_t id_45 { uint16_t((*p_0).index()) };
           bool id_46 { bool(id_44 == id_45) };
           Size choose_res_47;
           if (id_46) {
@@ -169,14 +169,14 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize
             choose_res_47 = id_48;
           } else {
             uint16_t id_49 { 4 };
-            uint16_t id_50 { uint16_t(p_0->index()) };
+            uint16_t id_50 { uint16_t((*p_0).index()) };
             bool id_51 { bool(id_49 == id_50) };
             Size choose_res_52;
             if (id_51) {
               Size id_53 { 2UL };
               choose_res_52 = id_53;
             } else {
-              uint16_t id_54 { uint16_t(p_0->index()) };
+              uint16_t id_54 { uint16_t((*p_0).index()) };
               uint16_t id_55 { 5 };
               bool id_56 { bool(id_54 == id_55) };
               Void id_57 { ((void)(assert(id_56)), VOID) };
@@ -317,5 +317,6 @@ static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f39
 std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

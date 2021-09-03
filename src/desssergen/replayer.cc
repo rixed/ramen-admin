@@ -40,9 +40,6 @@ struct t {
   dessser::gen::time_range::t_ext time_range;
   t(Arr<uint16_t> channels_, double creation_, std::optional<std::string> exit_status_, double last_killed_, std::optional<uint32_t> pid_, dessser::gen::time_range::t_ext time_range_) : channels(channels_), creation(creation_), exit_status(exit_status_), last_killed(last_killed_), pid(pid_), time_range(time_range_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return channels == other.channels && creation == other.creation && exit_status == other.exit_status && last_killed == other.last_killed && pid == other.pid && time_range == other.time_range;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::replayer::t*,
@@ -155,12 +152,12 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
 {
   std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> fun0 { [&fun0](::dessser::gen::replayer::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::time_range::to_row_binary };
-    dessser::gen::time_range::t_ext id_2 { p_0->time_range };
+    dessser::gen::time_range::t_ext id_2 { (*p_0).time_range };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_143 { id_3 };
-      double id_5 { p_0->creation };
+      double id_5 { (*p_0).creation };
       uint64_t id_6 { qword_of_float(id_5) };
       Pointer id_7 { srec_dst_143.writeU64Le(id_6) };
       let_res_4 = id_7;
@@ -168,7 +165,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
     Pointer let_res_8;
     {
       Pointer srec_dst_144 { let_res_4 };
-      std::optional<uint32_t> id_9 { p_0->pid };
+      std::optional<uint32_t> id_9 { (*p_0).pid };
       bool id_10 { !(id_9.has_value ()) };
       Pointer choose_res_11;
       if (id_10) {
@@ -178,7 +175,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
       } else {
         uint8_t id_14 { 0 };
         Pointer id_15 { srec_dst_144.writeU8(id_14) };
-        std::optional<uint32_t> id_16 { p_0->pid };
+        std::optional<uint32_t> id_16 { (*p_0).pid };
         uint32_t id_17 { id_16.value() };
         Pointer id_18 { id_15.writeU32Le(id_17) };
         choose_res_11 = id_18;
@@ -188,7 +185,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
     Pointer let_res_19;
     {
       Pointer srec_dst_145 { let_res_8 };
-      double id_20 { p_0->last_killed };
+      double id_20 { (*p_0).last_killed };
       uint64_t id_21 { qword_of_float(id_20) };
       Pointer id_22 { srec_dst_145.writeU64Le(id_21) };
       let_res_19 = id_22;
@@ -196,7 +193,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
     Pointer let_res_23;
     {
       Pointer srec_dst_146 { let_res_19 };
-      std::optional<std::string> id_24 { p_0->exit_status };
+      std::optional<std::string> id_24 { (*p_0).exit_status };
       bool id_25 { !(id_24.has_value ()) };
       Pointer choose_res_26;
       if (id_25) {
@@ -204,7 +201,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
         Pointer id_28 { srec_dst_146.writeU8(id_27) };
         choose_res_26 = id_28;
       } else {
-        std::optional<std::string> id_29 { p_0->exit_status };
+        std::optional<std::string> id_29 { (*p_0).exit_status };
         std::string id_30 { id_29.value() };
         uint32_t id_31 { (uint32_t)id_30.size() };
         Vec<1, uint32_t> id_32 {  id_31  };
@@ -266,7 +263,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
           }
           let_res_33 = let_res_37;
         }
-        std::optional<std::string> id_69 { p_0->exit_status };
+        std::optional<std::string> id_69 { (*p_0).exit_status };
         std::string id_70 { id_69.value() };
         Bytes id_71 { id_70 };
         Pointer id_72 { let_res_33.writeBytes(id_71) };
@@ -277,7 +274,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
     Pointer let_res_73;
     {
       Pointer srec_dst_149 { let_res_23 };
-      Arr<uint16_t> id_74 { p_0->channels };
+      Arr<uint16_t> id_74 { (*p_0).channels };
       uint32_t id_75 { id_74.size() };
       Vec<1, uint32_t> id_76 {  id_75  };
       Pointer let_res_77;
@@ -345,7 +342,7 @@ static std::function<Pointer(::dessser::gen::replayer::t*,Pointer)> to_row_binar
         Pointer let_res_115;
         {
           Vec<1, int32_t> n_ref_153 { id_114 };
-          Arr<uint16_t> id_116 { p_0->channels };
+          Arr<uint16_t> id_116 { (*p_0).channels };
           for (uint16_t x_154 : id_116) {
             uint8_t id_117 { 0 };
             uint8_t id_118 { 0 };
@@ -418,14 +415,14 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
 {
   std::function<Size(::dessser::gen::replayer::t*)> fun130 { [&fun130](::dessser::gen::replayer::t* p_0) {
     auto fun131 { dessser::gen::time_range::sersize_of_row_binary };
-    dessser::gen::time_range::t_ext id_132 { p_0->time_range };
+    dessser::gen::time_range::t_ext id_132 { (*p_0).time_range };
     Size id_133 { fun131(id_132) };
     Size id_134 { 8UL };
     Size id_135 { Size(id_133 + id_134) };
     Size let_res_136;
     {
       Size sz_132 { id_135 };
-      std::optional<uint32_t> id_137 { p_0->pid };
+      std::optional<uint32_t> id_137 { (*p_0).pid };
       bool id_138 { !(id_137.has_value ()) };
       Size choose_res_139;
       if (id_138) {
@@ -446,7 +443,7 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
     Size let_res_148;
     {
       Size sz_134 { id_147 };
-      std::optional<std::string> id_149 { p_0->exit_status };
+      std::optional<std::string> id_149 { (*p_0).exit_status };
       bool id_150 { !(id_149.has_value ()) };
       Size choose_res_151;
       if (id_150) {
@@ -454,7 +451,7 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
         Size id_153 { Size(sz_134 + id_152) };
         choose_res_151 = id_153;
       } else {
-        std::optional<std::string> id_154 { p_0->exit_status };
+        std::optional<std::string> id_154 { (*p_0).exit_status };
         std::string id_155 { id_154.value() };
         uint32_t id_156 { (uint32_t)id_155.size() };
         Vec<1, uint32_t> id_157 {  id_156  };
@@ -494,7 +491,7 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
           }
           let_res_158 = let_res_161;
         }
-        std::optional<std::string> id_179 { p_0->exit_status };
+        std::optional<std::string> id_179 { (*p_0).exit_status };
         std::string id_180 { id_179.value() };
         uint32_t id_181 { (uint32_t)id_180.size() };
         Size id_182 { Size(id_181) };
@@ -509,7 +506,7 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
     Size let_res_187;
     {
       Size sz_138 { let_res_148 };
-      Arr<uint16_t> id_188 { p_0->channels };
+      Arr<uint16_t> id_188 { (*p_0).channels };
       uint32_t id_189 { id_188.size() };
       Vec<1, uint32_t> id_190 {  id_189  };
       Size let_res_191;
@@ -559,7 +556,7 @@ static std::function<Size(::dessser::gen::replayer::t*)> sersize_of_row_binary_i
           Vec<1, int32_t> repeat_n_142 { id_216 };
           bool while_flag_217 { true };
           do {
-            Arr<uint16_t> id_218 { p_0->channels };
+            Arr<uint16_t> id_218 { (*p_0).channels };
             uint32_t id_219 { id_218.size() };
             int32_t id_220 { int32_t(id_219) };
             uint8_t id_221 { 0 };
@@ -1047,5 +1044,6 @@ static std::function<::dessser::gen::replayer::t93389eb2d4b902a099441781e878b2f7
 std::function<::dessser::gen::replayer::t93389eb2d4b902a099441781e878b2f7(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

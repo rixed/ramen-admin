@@ -2,6 +2,7 @@
 #include <memory>
 #include <sstream>
 #include <QByteArray>
+#include <QDateTime>
 #include <QDebug>
 #include <QTcpSocket>
 #include <QtGlobal>
@@ -13,6 +14,7 @@
 #include "desssergen/sync_server_msg.h"
 #include "desssergen/sync_client_msg.h"
 #include "desssergen/sync_msg.h"
+#include "KVStore.h"
 #include "UserIdentity.h"
 #include "z85.h"
 #include "ConfClient.h"
@@ -27,7 +29,9 @@ void ConfClient::fatalErr(QString const &errString)
 
 #include "ConfClientTools.cpp"
 
-ConfClient::ConfClient(QString const &target, QString const &username_, std::shared_ptr<UserIdentity const> id_, std::shared_ptr<KVStore> kvs_)
+ConfClient::ConfClient(
+  QString const &target, QString const &username_,
+  std::shared_ptr<UserIdentity const> id_, std::shared_ptr<KVStore> kvs_)
   : kvs(kvs_),
     tcpSocket(new QTcpSocket(this)),
     syncStatus(SyncStatus::Disconnected),
@@ -313,7 +317,18 @@ int ConfClient::startSynchronization()
     std::in_place_index<dessser::gen::sync_client_cmd::StartSync>,
     std::string("*") };
 
-  return sendCmd(start_sync);
+  return sendCmd(start_sync, [this](std::string const &err) {
+    if (err.empty()) {
+      qDebug() << "Synchronisation completed";
+      lastSent = QDateTime::currentMSecsSinceEpoch();
+      return 0;
+    } else {
+      qCritical() << "Cannot synchronize:" << QString::fromStdString(err);
+      return -1;
+    }
+  });
+
+  return 0;
 }
 
 int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
@@ -395,6 +410,15 @@ int ConfClient::recvdAuthErr(QString const &err)
 int ConfClient::recvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const> sync_socket)
 {
   syncSocket = sync_socket;
+  // Also precompute our error key for faster comparison when messages are received:
+  myErrKey = std::make_shared<dessser::gen::sync_key::t const>(
+               std::in_place_index<dessser::gen::sync_key::Error>,
+               /* WARNING: the variant takes a *pointer* to the socket. Here we
+                * reuse the one in syncSocket, which lifespan is the same as
+                * myErrKey. */
+               std::optional<dessser::gen::sync_socket::t_ext>(
+                 // dessser requires non-const although does not modify t:
+                 const_cast<dessser::gen::sync_socket::t_ext>(syncSocket.get())));
   return startSynchronization();
 }
 
@@ -404,9 +428,20 @@ int ConfClient::recvdSetKey(
       QString const &set_by_uid,
       double const mtime)
 {
-  qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime;
-  // TODO, let's pretend for now.
-  return 0;
+  /* If that key already exists, change its value, otherwise create it: */
+  auto const it { kvs->map.find(*k) };
+  if (it == kvs->map.end()) [[unlikely]] {
+    qDebug() << *k << "<=" << *v << "set by" << set_by_uid << "at" << mtime;
+    // TODO: can_write/del ?
+    kvs->map.emplace(
+      std::piecewise_construct,
+      std::forward_as_tuple(*k),
+      std::forward_as_tuple(v, set_by_uid, mtime, false, false));
+  } else {
+    qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime;
+    it->second.set(v, set_by_uid, mtime);
+  }
+  return checkDones(k, v);
 }
 
 int ConfClient::recvdNewKey(
@@ -421,12 +456,27 @@ int ConfClient::recvdNewKey(
   qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime
            << "owned by" << owner << "expiring at" << expiry
            << "can_write" << can_write << "can_del" << can_del;
-  return 0;
+  auto const it {
+    kvs->map.try_emplace(*k, v, set_by_uid, mtime, can_write, can_del)
+  };
+  if (it.second) [[likely]] {
+    it.first->second.setLock(owner, expiry);
+    return checkDones(k, v);
+  } else {
+    // Not supposed to happen but harmless
+    qCritical() << "NewKey was not new, keeping previous value!";
+    return -1;
+  }
 }
 
 int ConfClient::recvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   qDebug() << "del" << *k;
+  if (0 == kvs->map.erase(*k)) {
+    // Not supposed to happen but harmless
+    qCritical() << "Cannot delete unbound key" << *k;
+  }
+
   return 0;
 }
 
@@ -435,12 +485,26 @@ int ConfClient::recvdLockKey(
       double const expiry)
 {
   qDebug() << "lock" << *k << "owned by" << owner << "expiring at" << expiry;
+  auto const it { kvs->map.find(*k) };
+  if (it == kvs->map.end()) {
+    qCritical() << "Cannot lock unbound key" << *k;
+    return -1;
+  }
+  it->second.setLock(owner, expiry);
+
   return 0;
 }
 
 int ConfClient::recvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   qDebug() << "unlock" << *k;
+  auto const it { kvs->map.find(*k) };
+  if (it == kvs->map.end()) {
+    qCritical() << "Cannot unlock unbound key" << *k;
+    return -1;
+  }
+  it->second.setUnlock();
+
   return 0;
 }
 
@@ -457,14 +521,23 @@ int ConfClient::sendAuth()
 
 int ConfClient::sendCmd(
       dessser::gen::sync_client_cmd::t const &cmd,
-      bool confirm_success,
+      std::optional<std::function<int(std::string const &)>> onDone,
       bool echo)
 {
   dessser::gen::sync_client_msg::t msg {
     .cmd = const_cast<dessser::gen::sync_client_cmd::t *>(&cmd),
-    .confirm_success = confirm_success,
+    .confirm_success = onDone.has_value(),
     .echo = echo,
-    .seq = seq++ };
+    .seq = seq };
+
+  if (onDone.has_value()) {
+    onDoneCallbacks.emplace_back(seq, *onDone);
+    // TODO: timeout old callbacks
+    if (onDoneCallbacks.size() > 10)
+      qWarning() << "onDoneCallbacks:" << onDoneCallbacks.size() << "entries";
+  }
+
+  seq++;
 
   return sendMsg(msg);
 }
@@ -597,6 +670,33 @@ int ConfClient::sendBytes(char const *bytes, size_t sz)
   }
   Q_ASSERT(written == (qint64)sz);
 
+  return 0;
+}
+
+int ConfClient::checkDones(
+      std::shared_ptr<dessser::gen::sync_key::t const> k,
+      std::shared_ptr<dessser::gen::sync_value::t const> v)
+{
+  if (!myErrKey || *k != *myErrKey) return 0;
+
+  if (v->index() != dessser::gen::sync_value::Error) {
+    qCritical() << "Not an error value in" << *k;
+    return -1;
+  }
+  auto const err { std::get<dessser::gen::sync_value::Error>(*v) };
+  uint32_t const err_seq { std::get<1>(err) };
+  std::string const &err_msg { std::get<2>(err) };
+
+  for (auto it = onDoneCallbacks.begin(); it != onDoneCallbacks.end(); it++) {
+    if (it->seq != err_seq) continue;
+
+    qDebug() << "onDone callback found for" << err_seq;
+    int const ret { it->callback(err_msg) };
+    onDoneCallbacks.erase(it);
+    return ret;
+  }
+
+  qDebug() << "No callback was found for" << err_seq;
   return 0;
 }
 

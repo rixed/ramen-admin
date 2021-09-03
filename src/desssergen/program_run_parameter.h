@@ -21,18 +21,21 @@ struct t {
   dessser::gen::raql_value::t_ext value;
   t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_value::t_ext value_) : name(name_), value(value_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return name == other.name && value == other.value;
-  }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "name:" << r.name << ',';
-  os << "value:" << r.value;
+  os << "name:" << ::dessser::gen::field_name::Deref(r.name) << ',';
+  os << "value:" << ::dessser::gen::raql_value::Deref(r.value);
   os << '}';
   return os;
 }
+inline bool operator==(t const &a, t const &b) {
+  return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
+}
 
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 typedef std::tuple<
   ::dessser::gen::program_run_parameter::t*,
   Pointer
@@ -45,6 +48,7 @@ extern std::function<Pointer(::dessser::gen::program_run_parameter::t*,Pointer)>
 extern std::function<Size(::dessser::gen::program_run_parameter::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::program_run_parameter::tc5822b22d45d47f34b2c7bbfc44824d9(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

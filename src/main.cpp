@@ -10,6 +10,7 @@
 #include <sodium.h>
 
 #include "ConfClient.h"
+#include "KVStore.h"
 #include "UserIdentity.h"
 #include "config.h"
 
@@ -55,7 +56,9 @@ int main(int argc, char *argv[])
     qCritical() << "Identity file" << idFile << "is not valid";
     return 1;
   }
-  ConfClient *client = new ConfClient("localhost:29341", "rixed", id, nullptr);
+
+  std::shared_ptr<KVStore> kvs { std::make_shared<KVStore>() };
+  ConfClient *client = new ConfClient("localhost:29341", "rixed", id, kvs);
 
   int ret = app.exec();
 

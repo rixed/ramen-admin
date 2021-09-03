@@ -25,6 +25,17 @@ enum Constr_t48a2d544f23c6703dc0a88c42484f480 {
   Parameter,
 };
 
+inline bool operator==(t48a2d544f23c6703dc0a88c42484f480 const &a, t48a2d544f23c6703dc0a88c42484f480 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // OutputField
+    case 1: return std::get<1>(a) == std::get<1>(b); // Parameter
+  };
+  return false;
+}
+inline bool operator!=(t48a2d544f23c6703dc0a88c42484f480 const &a, t48a2d544f23c6703dc0a88c42484f480 const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t48a2d544f23c6703dc0a88c42484f480 const &v) {
   switch (v.index()) {
     case 0: os << "OutputField " << std::get<0>(v); break;
@@ -38,6 +49,12 @@ struct t : public std::tuple<
   ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480,
   double
 > { using tuple::tuple; };
+inline bool operator==(t const &a, t const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &t) {
   os << '<'
      << std::get<0>(t) << ", "
@@ -59,6 +76,7 @@ extern std::function<Pointer(::dessser::gen::event_time_field::t*,Pointer)> to_r
 extern std::function<Size(::dessser::gen::event_time_field::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f76e27ff99(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

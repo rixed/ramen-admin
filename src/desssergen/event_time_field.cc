@@ -81,26 +81,26 @@ static std::function<Pointer(::dessser::gen::event_time_field::t*,Pointer)> to_r
 {
   std::function<Pointer(::dessser::gen::event_time_field::t*,Pointer)> fun0 { [&fun0](::dessser::gen::event_time_field::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { std::get<0>(*p_0) };
+    dessser::gen::field_name::t_ext id_2 { std::get<0>((*p_0)) };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer stup_dst_90 { id_3 };
-      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_5 { std::get<1>(*p_0) };
+      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_5 { std::get<1>((*p_0)) };
       uint16_t id_6 { uint16_t(id_5.index()) };
       Pointer id_7 { stup_dst_90.writeU16Le(id_6) };
       Pointer let_res_8;
       {
         Pointer ssum_dst_92 { id_7 };
         uint16_t id_9 { 0 };
-        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_10 { std::get<1>(*p_0) };
+        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_10 { std::get<1>((*p_0)) };
         uint16_t id_11 { uint16_t(id_10.index()) };
         bool id_12 { bool(id_9 == id_11) };
         Pointer choose_res_13;
         if (id_12) {
           choose_res_13 = ssum_dst_92;
         } else {
-          ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_14 { std::get<1>(*p_0) };
+          ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_14 { std::get<1>((*p_0)) };
           uint16_t id_15 { uint16_t(id_14.index()) };
           uint16_t id_16 { 1 };
           bool id_17 { bool(id_15 == id_16) };
@@ -115,7 +115,7 @@ static std::function<Pointer(::dessser::gen::event_time_field::t*,Pointer)> to_r
     Pointer let_res_19;
     {
       Pointer stup_dst_93 { let_res_4 };
-      double id_20 { std::get<2>(*p_0) };
+      double id_20 { std::get<2>((*p_0)) };
       uint64_t id_21 { qword_of_float(id_20) };
       Pointer id_22 { stup_dst_93.writeU64Le(id_21) };
       let_res_19 = id_22;
@@ -138,13 +138,13 @@ static std::function<Size(::dessser::gen::event_time_field::t*)> sersize_of_row_
 {
   std::function<Size(::dessser::gen::event_time_field::t*)> fun23 { [&fun23](::dessser::gen::event_time_field::t* p_0) {
     auto fun24 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_25 { std::get<0>(*p_0) };
+    dessser::gen::field_name::t_ext id_25 { std::get<0>((*p_0)) };
     Size id_26 { fun24(id_25) };
     Size let_res_27;
     {
       Size sz_87 { id_26 };
       uint16_t id_28 { 0 };
-      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_29 { std::get<1>(*p_0) };
+      ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_29 { std::get<1>((*p_0)) };
       uint16_t id_30 { uint16_t(id_29.index()) };
       bool id_31 { bool(id_28 == id_30) };
       Size choose_res_32;
@@ -153,7 +153,7 @@ static std::function<Size(::dessser::gen::event_time_field::t*)> sersize_of_row_
         Size id_34 { Size(sz_87 + id_33) };
         choose_res_32 = id_34;
       } else {
-        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_35 { std::get<1>(*p_0) };
+        ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_35 { std::get<1>((*p_0)) };
         uint16_t id_36 { uint16_t(id_35.index()) };
         uint16_t id_37 { 1 };
         bool id_38 { bool(id_36 == id_37) };
@@ -269,5 +269,6 @@ static std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f7
 std::function<::dessser::gen::event_time_field::tb006f453c9f72d09177fd3f76e27ff99(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

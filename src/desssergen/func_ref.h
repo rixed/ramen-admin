@@ -23,19 +23,22 @@ struct t {
   dessser::gen::site_name::t_ext site;
   t(dessser::gen::function_name::t_ext func_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : func(func_), program(program_), site(site_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return func == other.func && program == other.program && site == other.site;
-  }
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "func:" << r.func << ',';
-  os << "program:" << r.program << ',';
-  os << "site:" << r.site;
+  os << "func:" << ::dessser::gen::function_name::Deref(r.func) << ',';
+  os << "program:" << ::dessser::gen::program_name::Deref(r.program) << ',';
+  os << "site:" << ::dessser::gen::site_name::Deref(r.site);
   os << '}';
   return os;
 }
+inline bool operator==(t const &a, t const &b) {
+  return ::dessser::gen::function_name::Deref(a.func) == ::dessser::gen::function_name::Deref(b.func) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site);
+}
 
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 typedef std::tuple<
   ::dessser::gen::func_ref::t*,
   Pointer
@@ -48,6 +51,7 @@ extern std::function<Pointer(::dessser::gen::func_ref::t*,Pointer)> to_row_binar
 extern std::function<Size(::dessser::gen::func_ref::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::func_ref::tffa98ef3b236ed523827b79a069afe00(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

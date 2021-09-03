@@ -51,9 +51,6 @@ struct t {
   dessser::gen::fq_name::t_ext worker;
   t(double certainty_, double debounce_, std::optional<double> event_time_, bool firing_, std::string name_, Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> parameters_, double sent_time_, dessser::gen::site_name::t_ext site_, bool test_, double timeout_, dessser::gen::fq_name::t_ext worker_) : certainty(certainty_), debounce(debounce_), event_time(event_time_), firing(firing_), name(name_), parameters(parameters_), sent_time(sent_time_), site(site_), test(test_), timeout(timeout_), worker(worker_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return certainty == other.certainty && debounce == other.debounce && event_time == other.event_time && firing == other.firing && name == other.name && parameters == other.parameters && sent_time == other.sent_time && site == other.site && test == other.test && timeout == other.timeout && worker == other.worker;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::alerting_notification::t*,
@@ -216,20 +213,20 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
 {
   std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_notification::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::site_name::to_row_binary };
-    dessser::gen::site_name::t_ext id_2 { p_0->site };
+    dessser::gen::site_name::t_ext id_2 { (*p_0).site };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_207 { id_3 };
       auto fun5 { dessser::gen::fq_name::to_row_binary };
-      dessser::gen::fq_name::t_ext id_6 { p_0->worker };
+      dessser::gen::fq_name::t_ext id_6 { (*p_0).worker };
       Pointer id_7 { fun5(id_6, srec_dst_207) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_208 { let_res_4 };
-      bool id_9 { p_0->test };
+      bool id_9 { (*p_0).test };
       uint8_t id_10 { uint8_t(id_9) };
       Pointer id_11 { srec_dst_208.writeU8(id_10) };
       let_res_8 = id_11;
@@ -237,7 +234,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_12;
     {
       Pointer srec_dst_209 { let_res_8 };
-      double id_13 { p_0->sent_time };
+      double id_13 { (*p_0).sent_time };
       uint64_t id_14 { qword_of_float(id_13) };
       Pointer id_15 { srec_dst_209.writeU64Le(id_14) };
       let_res_12 = id_15;
@@ -245,7 +242,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_16;
     {
       Pointer srec_dst_210 { let_res_12 };
-      std::optional<double> id_17 { p_0->event_time };
+      std::optional<double> id_17 { (*p_0).event_time };
       bool id_18 { !(id_17.has_value ()) };
       Pointer choose_res_19;
       if (id_18) {
@@ -255,7 +252,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
       } else {
         uint8_t id_22 { 0 };
         Pointer id_23 { srec_dst_210.writeU8(id_22) };
-        std::optional<double> id_24 { p_0->event_time };
+        std::optional<double> id_24 { (*p_0).event_time };
         double id_25 { id_24.value() };
         uint64_t id_26 { qword_of_float(id_25) };
         Pointer id_27 { id_23.writeU64Le(id_26) };
@@ -266,7 +263,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_28;
     {
       Pointer srec_dst_211 { let_res_16 };
-      std::string id_29 { p_0->name };
+      std::string id_29 { (*p_0).name };
       uint32_t id_30 { (uint32_t)id_29.size() };
       Vec<1, uint32_t> id_31 {  id_30  };
       Pointer let_res_32;
@@ -325,7 +322,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
         }
         let_res_32 = let_res_34;
       }
-      std::string id_66 { p_0->name };
+      std::string id_66 { (*p_0).name };
       Bytes id_67 { id_66 };
       Pointer id_68 { let_res_32.writeBytes(id_67) };
       let_res_28 = id_68;
@@ -333,7 +330,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_69;
     {
       Pointer srec_dst_214 { let_res_28 };
-      bool id_70 { p_0->firing };
+      bool id_70 { (*p_0).firing };
       uint8_t id_71 { uint8_t(id_70) };
       Pointer id_72 { srec_dst_214.writeU8(id_71) };
       let_res_69 = id_72;
@@ -341,7 +338,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_73;
     {
       Pointer srec_dst_215 { let_res_69 };
-      double id_74 { p_0->certainty };
+      double id_74 { (*p_0).certainty };
       uint64_t id_75 { qword_of_float(id_74) };
       Pointer id_76 { srec_dst_215.writeU64Le(id_75) };
       let_res_73 = id_76;
@@ -349,7 +346,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_77;
     {
       Pointer srec_dst_216 { let_res_73 };
-      double id_78 { p_0->debounce };
+      double id_78 { (*p_0).debounce };
       uint64_t id_79 { qword_of_float(id_78) };
       Pointer id_80 { srec_dst_216.writeU64Le(id_79) };
       let_res_77 = id_80;
@@ -357,7 +354,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_81;
     {
       Pointer srec_dst_217 { let_res_77 };
-      double id_82 { p_0->timeout };
+      double id_82 { (*p_0).timeout };
       uint64_t id_83 { qword_of_float(id_82) };
       Pointer id_84 { srec_dst_217.writeU64Le(id_83) };
       let_res_81 = id_84;
@@ -365,7 +362,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
     Pointer let_res_85;
     {
       Pointer srec_dst_218 { let_res_81 };
-      Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_86 { p_0->parameters };
+      Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_86 { (*p_0).parameters };
       uint32_t id_87 { id_86.size() };
       Vec<1, uint32_t> id_88 {  id_87  };
       Pointer let_res_89;
@@ -433,7 +430,7 @@ static std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)>
         Pointer let_res_127;
         {
           Vec<1, int32_t> n_ref_222 { id_126 };
-          Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_128 { p_0->parameters };
+          Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_128 { (*p_0).parameters };
           for (::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4 x_223 : id_128) {
             uint8_t id_129 { 0 };
             uint8_t id_130 { 0 };
@@ -666,13 +663,13 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
 {
   std::function<Size(::dessser::gen::alerting_notification::t*)> fun223 { [&fun223](::dessser::gen::alerting_notification::t* p_0) {
     auto fun224 { dessser::gen::site_name::sersize_of_row_binary };
-    dessser::gen::site_name::t_ext id_225 { p_0->site };
+    dessser::gen::site_name::t_ext id_225 { (*p_0).site };
     Size id_226 { fun224(id_225) };
     Size let_res_227;
     {
       Size sz_182 { id_226 };
       auto fun228 { dessser::gen::fq_name::sersize_of_row_binary };
-      dessser::gen::fq_name::t_ext id_229 { p_0->worker };
+      dessser::gen::fq_name::t_ext id_229 { (*p_0).worker };
       Size id_230 { fun228(id_229) };
       Size id_231 { Size(sz_182 + id_230) };
       let_res_227 = id_231;
@@ -684,7 +681,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
     Size let_res_236;
     {
       Size sz_185 { id_235 };
-      std::optional<double> id_237 { p_0->event_time };
+      std::optional<double> id_237 { (*p_0).event_time };
       bool id_238 { !(id_237.has_value ()) };
       Size choose_res_239;
       if (id_238) {
@@ -703,7 +700,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
     Size let_res_246;
     {
       Size sz_186 { let_res_236 };
-      std::string id_247 { p_0->name };
+      std::string id_247 { (*p_0).name };
       uint32_t id_248 { (uint32_t)id_247.size() };
       Vec<1, uint32_t> id_249 {  id_248  };
       Size let_res_250;
@@ -742,7 +739,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
         }
         let_res_250 = let_res_253;
       }
-      std::string id_271 { p_0->name };
+      std::string id_271 { (*p_0).name };
       uint32_t id_272 { (uint32_t)id_271.size() };
       Size id_273 { Size(id_272) };
       Size id_274 { Size(let_res_250 + id_273) };
@@ -760,7 +757,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
     Size let_res_284;
     {
       Size sz_194 { id_283 };
-      Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_285 { p_0->parameters };
+      Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_285 { (*p_0).parameters };
       uint32_t id_286 { id_285.size() };
       Vec<1, uint32_t> id_287 {  id_286  };
       Size let_res_288;
@@ -810,7 +807,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
           Vec<1, int32_t> repeat_n_198 { id_313 };
           bool while_flag_314 { true };
           do {
-            Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_315 { p_0->parameters };
+            Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_315 { (*p_0).parameters };
             uint32_t id_316 { id_315.size() };
             int32_t id_317 { int32_t(id_316) };
             uint8_t id_318 { 0 };
@@ -826,7 +823,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
                 Size sz_199 { id_323 };
                 uint8_t id_325 { 0 };
                 int32_t id_326 { repeat_n_198[id_325] };
-                Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_327 { p_0->parameters };
+                Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_327 { (*p_0).parameters };
                 ::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4 id_328 { id_327[id_326] };
                 std::string id_329 { std::get<0>(id_328) };
                 uint32_t id_330 { (uint32_t)id_329.size() };
@@ -882,7 +879,7 @@ static std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of
                 Size sz_203 { let_res_324 };
                 uint8_t id_358 { 0 };
                 int32_t id_359 { repeat_n_198[id_358] };
-                Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_360 { p_0->parameters };
+                Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> id_360 { (*p_0).parameters };
                 ::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4 id_361 { id_360[id_359] };
                 std::string id_362 { std::get<1>(id_361) };
                 uint32_t id_363 { (uint32_t)id_362.size() };
@@ -1781,5 +1778,6 @@ static std::function<::dessser::gen::alerting_notification::t281c4a1c5bbc4c0959c
 std::function<::dessser::gen::alerting_notification::t281c4a1c5bbc4c0959c7fb563f217845(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

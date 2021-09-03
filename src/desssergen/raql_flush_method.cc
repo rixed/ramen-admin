@@ -55,19 +55,19 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_flush_method::t* p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0->index()) };
+    uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_76 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0->index()) };
+      uint16_t id_5 { uint16_t((*p_0).index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_76;
       } else {
-        uint16_t id_8 { uint16_t(p_0->index()) };
+        uint16_t id_8 { uint16_t((*p_0).index()) };
         uint16_t id_9 { 1 };
         bool id_10 { bool(id_8 == id_9) };
         Void id_11 { ((void)(assert(id_10)), VOID) };
@@ -90,14 +90,14 @@ static std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row
 {
   std::function<Size(::dessser::gen::raql_flush_method::t*)> fun12 { [&fun12](::dessser::gen::raql_flush_method::t* p_0) {
     uint16_t id_13 { 0 };
-    uint16_t id_14 { uint16_t(p_0->index()) };
+    uint16_t id_14 { uint16_t((*p_0).index()) };
     bool id_15 { bool(id_13 == id_14) };
     Size choose_res_16;
     if (id_15) {
       Size id_17 { 2UL };
       choose_res_16 = id_17;
     } else {
-      uint16_t id_18 { uint16_t(p_0->index()) };
+      uint16_t id_18 { uint16_t((*p_0).index()) };
       uint16_t id_19 { 1 };
       bool id_20 { bool(id_18 == id_19) };
       Void id_21 { ((void)(assert(id_20)), VOID) };
@@ -176,5 +176,6 @@ static std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb
 std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

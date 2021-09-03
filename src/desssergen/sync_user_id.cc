@@ -324,5 +324,6 @@ static std::function<::dessser::gen::sync_user_id::t519c57b31160411c6989716f3a97
 std::function<::dessser::gen::sync_user_id::t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }

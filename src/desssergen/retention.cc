@@ -36,9 +36,6 @@ struct t {
   double period;
   t(dessser::gen::raql_expr::t_ext duration_, double period_) : duration(duration_), period(period_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return duration == other.duration && period == other.period;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::retention::t*,
@@ -66,12 +63,12 @@ static std::function<Pointer(::dessser::gen::retention::t*,Pointer)> to_row_bina
 {
   std::function<Pointer(::dessser::gen::retention::t*,Pointer)> fun0 { [&fun0](::dessser::gen::retention::t* p_0, Pointer p_1) {
     auto fun1 { dessser::gen::raql_expr::to_row_binary };
-    dessser::gen::raql_expr::t_ext id_2 { p_0->duration };
+    dessser::gen::raql_expr::t_ext id_2 { (*p_0).duration };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_70 { id_3 };
-      double id_5 { p_0->period };
+      double id_5 { (*p_0).period };
       uint64_t id_6 { qword_of_float(id_5) };
       Pointer id_7 { srec_dst_70.writeU64Le(id_6) };
       let_res_4 = id_7;
@@ -90,7 +87,7 @@ static std::function<Size(::dessser::gen::retention::t*)> sersize_of_row_binary_
 {
   std::function<Size(::dessser::gen::retention::t*)> fun8 { [&fun8](::dessser::gen::retention::t* p_0) {
     auto fun9 { dessser::gen::raql_expr::sersize_of_row_binary };
-    dessser::gen::raql_expr::t_ext id_10 { p_0->duration };
+    dessser::gen::raql_expr::t_ext id_10 { (*p_0).duration };
     Size id_11 { fun9(id_10) };
     Size id_12 { 8UL };
     Size id_13 { Size(id_11 + id_12) };
@@ -142,5 +139,6 @@ static std::function<::dessser::gen::retention::td879f0124877ae7a41564ce51954104
 std::function<::dessser::gen::retention::td879f0124877ae7a41564ce519541045(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

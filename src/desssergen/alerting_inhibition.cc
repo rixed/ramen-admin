@@ -38,9 +38,6 @@ struct t {
   std::string why;
   t(double start_date_, double stop_date_, std::string what_, std::string who_, std::string why_) : start_date(start_date_), stop_date(stop_date_), what(what_), who(who_), why(why_) {}
   t() = default;
-  bool operator==(t const &other) const {
-    return start_date == other.start_date && stop_date == other.stop_date && what == other.what && who == other.who && why == other.why;
-  }
 };
 typedef std::tuple<
   ::dessser::gen::alerting_inhibition::t*,
@@ -132,7 +129,7 @@ typedef std::tuple<
 static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_inhibition::t* p_0, Pointer p_1) {
-    std::string id_1 { p_0->what };
+    std::string id_1 { (*p_0).what };
     uint32_t id_2 { (uint32_t)id_1.size() };
     Vec<1, uint32_t> id_3 {  id_2  };
     Pointer let_res_4;
@@ -191,13 +188,13 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
       }
       let_res_4 = let_res_6;
     }
-    std::string id_38 { p_0->what };
+    std::string id_38 { (*p_0).what };
     Bytes id_39 { id_38 };
     Pointer id_40 { let_res_4.writeBytes(id_39) };
     Pointer let_res_41;
     {
       Pointer srec_dst_132 { id_40 };
-      double id_42 { p_0->start_date };
+      double id_42 { (*p_0).start_date };
       uint64_t id_43 { qword_of_float(id_42) };
       Pointer id_44 { srec_dst_132.writeU64Le(id_43) };
       let_res_41 = id_44;
@@ -205,7 +202,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
     Pointer let_res_45;
     {
       Pointer srec_dst_133 { let_res_41 };
-      double id_46 { p_0->stop_date };
+      double id_46 { (*p_0).stop_date };
       uint64_t id_47 { qword_of_float(id_46) };
       Pointer id_48 { srec_dst_133.writeU64Le(id_47) };
       let_res_45 = id_48;
@@ -213,7 +210,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
     Pointer let_res_49;
     {
       Pointer srec_dst_134 { let_res_45 };
-      std::string id_50 { p_0->who };
+      std::string id_50 { (*p_0).who };
       uint32_t id_51 { (uint32_t)id_50.size() };
       Vec<1, uint32_t> id_52 {  id_51  };
       Pointer let_res_53;
@@ -272,7 +269,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
         }
         let_res_53 = let_res_55;
       }
-      std::string id_87 { p_0->who };
+      std::string id_87 { (*p_0).who };
       Bytes id_88 { id_87 };
       Pointer id_89 { let_res_53.writeBytes(id_88) };
       let_res_49 = id_89;
@@ -280,7 +277,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
     Pointer let_res_90;
     {
       Pointer srec_dst_137 { let_res_49 };
-      std::string id_91 { p_0->why };
+      std::string id_91 { (*p_0).why };
       uint32_t id_92 { (uint32_t)id_91.size() };
       Vec<1, uint32_t> id_93 {  id_92  };
       Pointer let_res_94;
@@ -339,7 +336,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
         }
         let_res_94 = let_res_96;
       }
-      std::string id_128 { p_0->why };
+      std::string id_128 { (*p_0).why };
       Bytes id_129 { id_128 };
       Pointer id_130 { let_res_94.writeBytes(id_129) };
       let_res_90 = id_130;
@@ -388,7 +385,7 @@ std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_b
 static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::alerting_inhibition::t*)> fun131 { [&fun131](::dessser::gen::alerting_inhibition::t* p_0) {
-    std::string id_132 { p_0->what };
+    std::string id_132 { (*p_0).what };
     uint32_t id_133 { (uint32_t)id_132.size() };
     Vec<1, uint32_t> id_134 {  id_133  };
     Size let_res_135;
@@ -427,7 +424,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
       }
       let_res_135 = let_res_138;
     }
-    std::string id_156 { p_0->what };
+    std::string id_156 { (*p_0).what };
     uint32_t id_157 { (uint32_t)id_156.size() };
     Size id_158 { Size(id_157) };
     Size id_159 { Size(let_res_135 + id_158) };
@@ -438,7 +435,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
     Size let_res_164;
     {
       Size sz_122 { id_163 };
-      std::string id_165 { p_0->who };
+      std::string id_165 { (*p_0).who };
       uint32_t id_166 { (uint32_t)id_165.size() };
       Vec<1, uint32_t> id_167 {  id_166  };
       Size let_res_168;
@@ -477,7 +474,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
         }
         let_res_168 = let_res_171;
       }
-      std::string id_189 { p_0->who };
+      std::string id_189 { (*p_0).who };
       uint32_t id_190 { (uint32_t)id_189.size() };
       Size id_191 { Size(id_190) };
       Size id_192 { Size(let_res_168 + id_191) };
@@ -487,7 +484,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
     Size let_res_194;
     {
       Size sz_126 { let_res_164 };
-      std::string id_195 { p_0->why };
+      std::string id_195 { (*p_0).why };
       uint32_t id_196 { (uint32_t)id_195.size() };
       Vec<1, uint32_t> id_197 {  id_196  };
       Size let_res_198;
@@ -526,7 +523,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
         }
         let_res_198 = let_res_201;
       }
-      std::string id_219 { p_0->why };
+      std::string id_219 { (*p_0).why };
       uint32_t id_220 { (uint32_t)id_219.size() };
       Size id_221 { Size(id_220) };
       Size id_222 { Size(let_res_198 + id_221) };
@@ -962,5 +959,6 @@ static std::function<::dessser::gen::alerting_inhibition::te874c4175d788e6c14b0c
 std::function<::dessser::gen::alerting_inhibition::te874c4175d788e6c14b0c0f5681c0ac9(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }

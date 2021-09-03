@@ -25,10 +25,21 @@ enum Constr_t {
   Name,
 };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Idx
+    case 1: return ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b)); // Name
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Idx " << std::get<0>(v); break;
-    case 1: os << "Name " << std::get<1>(v); break;
+    case 1: os << "Name " << ::dessser::gen::field_name::Deref(std::get<1>(v)); break;
   }
   return os;
 }
@@ -45,6 +56,7 @@ extern std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row
 extern std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_binary;
 extern std::function<::dessser::gen::raql_path_comp::td126b489ead23b1cdc9c388bd4ee24bc(Pointer)> of_row_binary;
 typedef t *t_ext;
+inline t Deref(t_ext x) { return *x; }
 
 }
 #endif

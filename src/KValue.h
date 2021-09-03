@@ -22,14 +22,14 @@ namespace dessser {
 
 struct KValue
 {
-  std::shared_ptr<dessser::gen::sync_value::t> val;
+  std::shared_ptr<dessser::gen::sync_value::t const> val;
   QString uid;  // Of the user who has set this value
   double mtime;
   std::optional<QString> owner;
   double expiry;  // if owner above is set
   bool can_write, can_del;
 
-  KValue(std::shared_ptr<dessser::gen::sync_value::t> v,
+  KValue(std::shared_ptr<dessser::gen::sync_value::t const> v,
          QString const &u, double mt, bool cw, bool cd) :
     val(v), uid(u), mtime(mt), expiry(0.), can_write(cw), can_del(cd)
   {}
@@ -38,7 +38,7 @@ struct KValue
     mtime(0.), expiry(0.), can_write(false), can_del(false)
   {}
 
-  void set(std::shared_ptr<dessser::gen::sync_value::t> v,
+  void set(std::shared_ptr<dessser::gen::sync_value::t const> v,
            QString const &u, double mt)
   {
     val = v;
