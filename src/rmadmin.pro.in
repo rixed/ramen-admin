@@ -81,7 +81,18 @@ HEADERS += \
   SyncStatus.h \
   KValue.h \
   KVStore.h \
-  ConfClient.h
+  ConfClient.h \
+  KErrorMsg.h \
+  SavedWindow.h \
+  Resources.h \
+  AboutDialog.h \
+  Logger.h \
+  LogModel.h \
+  LoggerView.h \
+  LoggerWin.h \
+  LoginWidget.h \
+  LoginWin.h \
+  Menu.h
 
 SOURCES += \
   desssergen/field_name.cc \
@@ -147,6 +158,17 @@ SOURCES += \
   KValue.cpp \
   KVStore.cpp \
   ConfClient.cpp \
+  KErrorMsg.cpp \
+  SavedWindow.cpp \
+  Resources.cpp \
+  AboutDialog.cpp \
+  Logger.cpp \
+  LogModel.cpp \
+  LoggerView.cpp \
+  LoggerWin.cpp \
+  LoginWidget.cpp \
+  LoginWin.cpp \
+  Menu.cpp \
   main.cpp
 
 RESOURCES = resources.qrc

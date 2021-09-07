@@ -6,24 +6,27 @@
 
 #include "dashboard/tools.h"
 
-std::pair<QString const, std::string const> dashboardNameAndPrefOfKey(
-  std::string const &key)
+// FIXME: returns the name of the dashboard and a function to return the widget key
+std::pair<std::string const, uint32_t const> dashboardNameAndPrefOfKey(
+  dessser::gen::sync_key::t const &key)
 {
-  assert(my_socket);
+  assert(client && client->syncSocket);
 
-  if (startsWith(key, "dashboards/")) {
-    std::string::size_type l = key.rfind('/');
-    if (l == std::string::npos || l <= 8) goto err;
-    if (0 != key.compare(l - 8, 8, "/widgets")) goto err;
-    assert(l > 11 + 8);
-    return std::make_pair(QString::fromStdString(key.substr(11, l - 8 - 11)),
-                          key.substr(0, l - 8));
-  } else if (startsWith(key, "clients/") &&
-             0 == key.compare(8, my_socket->size(), *my_socket) &&
-             0 == key.compare(8 + my_socket->size(), 19, "/scratchpad/widgets")
-  ) {
-    return std::make_pair(QString("scratchpad"),
-                          key.substr(0, 8 + my_socket->size() + 11));
+  if (key.index() == dessser::gen::sync_key::Dashboards) {
+    auto const &dashboards {
+      std::get<dessser::gen::sync_key::Dashboards>(key) };
+    Q_ASSERT(dashboards.index() == dessser::gen::sync_key::Widgets);
+    auto const &widgets {
+      std::get<dessser::gen::sync_key::Widgets>(dashboards) };
+    return std::make_pair(std::get<0>(dashboards),
+                          std::get<0>(widgets));
+  } else if (key.index() == dessser::gen::sync_key::PerClient) {
+    auto const &per_client {
+      std::get<dessser::gen::sync_key::PerClient>(key) };
+    if (*client->syncSocket == *std::get<0>(per_client) &&
+        std::get<1>(per_client).index() == dessser::gen::sync_key::Scratchpad) {
+      return std::make_pair(QString("scratchpad"),
+                            client_scratchpad);
   }
 err:
   return std::make_pair(QString(), std::string());

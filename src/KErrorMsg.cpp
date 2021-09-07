@@ -1,14 +1,17 @@
 #include <cassert>
 #include <QtGlobal>
 #include <QDebug>
-#include "conf.h"
-#include "confValue.h"
+
+#include "ConfClient.h" // for sync_key printers
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
 #include "KErrorMsg.h"
 
 KErrorMsg::KErrorMsg(QWidget *parent) :
   QLabel(parent)
 {
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &KErrorMsg::onChange);
 }
 
@@ -22,6 +25,7 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
         setValueFromStore(change.key, change.kv);
         break;
       case KeyDeleted:
+        // Our error key is deleted as part of server timeouting us:
         warnTimeout(change.key, change.kv);
         break;
       default:
@@ -35,10 +39,10 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
  * Second, and more importantly, this can (and will) be called before the key
  * is present in kvs (as the string here is taken from the answer to the
  * Auth message)! */
-void KErrorMsg::setKey(std::string const &k)
+void KErrorMsg::setKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  assert(key.length() == 0);
-  qDebug() << "KErrorMsg: setting key to" << QString::fromStdString(k);
+  assert(! key);
+  qDebug() << "KErrorMsg: setting key to" << *k;
   key = k;
 }
 
@@ -51,23 +55,23 @@ void KErrorMsg::displayError(QString const &str)
   QLabel::setText(str);
 }
 
-void KErrorMsg::setValueFromStore(std::string const &k, KValue const &kv)
+void KErrorMsg::setValueFromStore(dessser::gen::sync_key::t const &k, KValue const &kv)
 {
-  if (key.length() == 0 || key != k) return;
+  if (! key || *key != k) return;
 
-  std::shared_ptr<conf::Error const> err =
-    std::dynamic_pointer_cast<conf::Error const>(kv.val);
-  if (err) {
-    displayError(QString::fromStdString(err->msg));
-  } else {
-    qCritical() << "Error is not an error, and that's an error!";
-    // One wonder how software manage to work sometime
+  if (kv.val->index() != dessser::gen::sync_value::Error) {
+    qCritical() << "Error value is not an error!?";
+    return;
   }
+
+  auto const err {
+    std::get<dessser::gen::sync_value::Error>(*kv.val) };
+  displayError(QString::fromStdString(std::get<2>(err)));
 }
 
-void KErrorMsg::warnTimeout(std::string const &k, KValue const &)
+void KErrorMsg::warnTimeout(dessser::gen::sync_key::t const &k, KValue const &)
 {
-  if (key.length() == 0 || key != k) return;
+  if (! key || *key != k) return;
 
   displayError(tr("Server timed us out!"));
 }

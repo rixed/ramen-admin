@@ -1,6 +1,7 @@
 #ifndef KVSTORE_H_210812
 #define KVSTORE_H_210812
 #include <functional>
+#include <memory>
 #include <mutex>
 #include <sstream>
 #include <unordered_map>
@@ -13,6 +14,9 @@
 #include "rec_shared_mutex.h"
 
 enum ConfChangeOp { KeyCreated, KeyChanged, KeyLocked, KeyUnlocked, KeyDeleted };
+
+/* In order to increase UI reactivity, several configuration changes notifications are
+ * batched into a single signal, as a QList of ConfChange items. */
 
 struct ConfChange {
   ConfChangeOp op;
@@ -61,5 +65,11 @@ private slots:
 signals:
   void keyChanged(QList<ConfChange> const &changes) const;
 };
+
+Q_DECLARE_METATYPE(ConfChange);
+
+/* There is a single one, created by main, so that QObjects can connect to it even
+ * before connection to confserver is established: */
+extern std::shared_ptr<KVStore> kvs;
 
 #endif

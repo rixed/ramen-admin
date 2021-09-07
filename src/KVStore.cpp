@@ -5,6 +5,8 @@
 
 static bool const verbose { false };
 
+std::shared_ptr<KVStore> kvs;
+
 KVStore::KVStore(QObject *parent) : QObject(parent)
 {
   signalTimer = new QTimer(this);

@@ -19,6 +19,8 @@
 #include "z85.h"
 #include "ConfClient.h"
 
+static bool verbose { true };
+
 void ConfClient::fatalErr(QString const &errString)
 {
   // Emit the signal with the status we were in before the error occurred:
@@ -31,11 +33,12 @@ void ConfClient::fatalErr(QString const &errString)
 
 ConfClient::ConfClient(
   QString const &target, QString const &username_,
-  std::shared_ptr<UserIdentity const> id_, std::shared_ptr<KVStore> kvs_)
+  std::shared_ptr<UserIdentity const> id_,
+  std::shared_ptr<KVStore> kvs_)
   : kvs(kvs_),
     tcpSocket(new QTcpSocket(this)),
     syncStatus(SyncStatus::Disconnected),
-    username(username_),
+    clearUsername(username_),
     id(id_)
 {
   connect(tcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::errorOccurred),
@@ -85,7 +88,7 @@ void ConfClient::onTcpError(QAbstractSocket::SocketError err)
   switch (err) {
     case QAbstractSocket::UnfinishedSocketOperationError:
       // Should not happen
-      qDebug("ConfClient::onTcpError(UnfinishedSocketOperationError)?!");
+      qCritical() << "ConfClient::onTcpError(UnfinishedSocketOperationError)?!";
       [[fallthrough]];
     case QAbstractSocket::TemporaryError:
       // Just ignore it
@@ -134,7 +137,8 @@ void ConfClient::onStateChange(QAbstractSocket::SocketState sockState)
   }
 
   if (syncStatus != oldStage) {
-    qDebug() << "ConfClient::onStateChange(" << sockState << ")";
+    if (verbose)
+      qDebug() << "ConfClient::onStateChange(" << sockState << ")";
     emit connectionProgressed(syncStatus);
   }
 }
@@ -153,7 +157,8 @@ void ConfClient::readMsg()
 
   do {
     if (avail_sz < 2) {
-      qDebug() << "Only" << avail_sz << "bytes available to read, will wait.";
+      if (verbose)
+        qDebug() << "Only" << avail_sz << "bytes available to read, will wait.";
       break;
     }
 
@@ -176,7 +181,8 @@ cannot_decode:
 
     // Do not read until the whole message is there:
     if ((size_t)avail_sz < 2 + msg_sz) {
-      qDebug() << "Have to wait for" << (2 + msg_sz) - avail_sz << "more bytes.";
+      if (verbose)
+        qDebug() << "Have to wait for" << (2 + msg_sz) - avail_sz << "more bytes.";
       break;
     }
 
@@ -312,6 +318,9 @@ int ConfClient::readCrypted(dessser::Bytes const &cipher)
 
 int ConfClient::startSynchronization()
 {
+  syncStatus = SyncStatus::Synchronizing;
+  emit connectionProgressed(syncStatus);
+
   /* Subscribe to all keys for now: */
   dessser::gen::sync_client_cmd::t const start_sync {
     std::in_place_index<dessser::gen::sync_client_cmd::StartSync>,
@@ -319,8 +328,12 @@ int ConfClient::startSynchronization()
 
   return sendCmd(start_sync, [this](std::string const &err) {
     if (err.empty()) {
-      qDebug() << "Synchronisation completed";
+      if (verbose)
+        qDebug() << "Synchronisation completed";
       lastSent = QDateTime::currentMSecsSinceEpoch();
+      Q_ASSERT(syncStatus == SyncStatus::Synchronizing);
+      syncStatus = SyncStatus::Synchronized;
+      emit connectionProgressed(syncStatus);
       return 0;
     } else {
       qCritical() << "Cannot synchronize:" << QString::fromStdString(err);
@@ -343,7 +356,7 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
   }
 
   std::shared_ptr<dessser::gen::sync_server_msg::t> msg { std::get<0>(t_ptr) };
-  qDebug() << "Received:" << *msg;
+  if (verbose) qDebug() << "Received:" << *msg;
 
   switch ((dessser::gen::sync_server_msg::Constr_t)msg->index()) {
     case dessser::gen::sync_server_msg::AuthOk:
@@ -419,6 +432,7 @@ int ConfClient::recvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const> 
                std::optional<dessser::gen::sync_socket::t_ext>(
                  // dessser requires non-const although does not modify t:
                  const_cast<dessser::gen::sync_socket::t_ext>(syncSocket.get())));
+  emit knownErrKey(myErrKey);
   return startSynchronization();
 }
 
@@ -428,19 +442,32 @@ int ConfClient::recvdSetKey(
       QString const &set_by_uid,
       double const mtime)
 {
+  kvs->lock.lock();
+
   /* If that key already exists, change its value, otherwise create it: */
-  auto const it { kvs->map.find(*k) };
-  if (it == kvs->map.end()) [[unlikely]] {
-    qDebug() << *k << "<=" << *v << "set by" << set_by_uid << "at" << mtime;
-    // TODO: can_write/del ?
+  // TODO: can_write/del ?
+  auto const &[it, inserted] =
     kvs->map.emplace(
       std::piecewise_construct,
       std::forward_as_tuple(*k),
       std::forward_as_tuple(v, set_by_uid, mtime, false, false));
+  if (inserted) {
+    if (verbose)
+      qDebug() << *k << "<=" << *v << "set by" << set_by_uid << "at" << mtime;
   } else {
-    qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime;
+    if (verbose)
+      qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime;
     it->second.set(v, set_by_uid, mtime);
   }
+
+  {
+    // Prepare the ConfChange to be signaled:
+    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    kvs->confChanges.append({ KeyCreated, it->first, it->second });
+  }
+
+  kvs->lock.unlock();
+
   return checkDones(k, v);
 }
 
@@ -453,29 +480,53 @@ int ConfClient::recvdNewKey(
       QString const &owner,
       double const expiry)
 {
-  qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime
-           << "owned by" << owner << "expiring at" << expiry
-           << "can_write" << can_write << "can_del" << can_del;
+  if (verbose)
+    qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime
+             << "owned by" << owner << "expiring at" << expiry
+             << "can_write" << can_write << "can_del" << can_del;
+
+  kvs->lock.lock();
+  int ret { -1 };
+
   auto const it {
     kvs->map.try_emplace(*k, v, set_by_uid, mtime, can_write, can_del)
   };
   if (it.second) [[likely]] {
     it.first->second.setLock(owner, expiry);
-    return checkDones(k, v);
+    ret = checkDones(k, v);
   } else {
     // Not supposed to happen but harmless
     qCritical() << "NewKey was not new, keeping previous value!";
-    return -1;
   }
+
+  {
+    // Prepare the ConfChange to be signaled:
+    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    kvs->confChanges.append({ KeyCreated, it.first->first, it.first->second });
+  }
+
+  kvs->lock.unlock();
+
+  return ret;
 }
 
 int ConfClient::recvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  qDebug() << "del" << *k;
-  if (0 == kvs->map.erase(*k)) {
-    // Not supposed to happen but harmless
+  if (verbose) qDebug() << "del" << *k;
+
+  kvs->lock.lock();
+
+  auto it { kvs->map.find(*k) };
+  if (it == kvs->map.end()) {
+    // Not supposed to happen but harmless:
     qCritical() << "Cannot delete unbound key" << *k;
+  } else {
+    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    kvs->confChanges.append({ KeyDeleted, it->first, it->second });
+    kvs->map.erase(it);
   }
+
+  kvs->lock.unlock();
 
   return 0;
 }
@@ -484,39 +535,144 @@ int ConfClient::recvdLockKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k, QString const &owner,
       double const expiry)
 {
-  qDebug() << "lock" << *k << "owned by" << owner << "expiring at" << expiry;
+  if (verbose)
+    qDebug() << "lock" << *k << "owned by" << owner << "expiring at" << expiry;
+
+  int ret { -1 };
+  kvs->lock.lock();
+
   auto const it { kvs->map.find(*k) };
   if (it == kvs->map.end()) {
     qCritical() << "Cannot lock unbound key" << *k;
-    return -1;
+  } else {
+    it->second.setLock(owner, expiry);
+    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    kvs->confChanges.append({ KeyLocked, it->first, it->second });
+    ret = 0;
   }
-  it->second.setLock(owner, expiry);
 
-  return 0;
+  kvs->lock.unlock();
+
+  return ret;
 }
 
 int ConfClient::recvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  qDebug() << "unlock" << *k;
+  if (verbose) qDebug() << "unlock" << *k;
+
+  int ret { -1 };
+  kvs->lock.lock();
+
   auto const it { kvs->map.find(*k) };
   if (it == kvs->map.end()) {
     qCritical() << "Cannot unlock unbound key" << *k;
-    return -1;
+  } else {
+    it->second.setUnlock();
+    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    kvs->confChanges.append({ KeyUnlocked, it->first, it->second });
+    ret = 0;
   }
-  it->second.setUnlock();
 
-  return 0;
+  kvs->lock.unlock();
+  return ret;
 }
 
 int ConfClient::sendAuth()
 {
+  if (verbose) qDebug() << "ConfClient::sendAuth";
+
   double const sessionTimeout { 300. };
   dessser::gen::sync_client_cmd::t const auth {
     std::in_place_index<dessser::gen::sync_client_cmd::Auth>,
-    id->username.toStdString(),
+    username().toStdString(),
     sessionTimeout };
 
   return sendCmd(auth);
+}
+
+int ConfClient::sendNew(
+      std::shared_ptr<dessser::gen::sync_key::t const> key,
+      std::shared_ptr<dessser::gen::sync_value::t const> val,
+      double timeout)
+{
+  if (verbose)
+    qDebug() << "ConfClient::sendNew:" << *key << "=" << *val;
+
+  // Set a placeholder null value by default:
+  static dessser::gen::raql_value::t vnull {
+    std::in_place_index<dessser::gen::raql_value::VNull>, VOID };
+  static std::shared_ptr<dessser::gen::sync_value::t const> nullVal {
+    std::make_shared<dessser::gen::sync_value::t const>(
+      std::in_place_index<dessser::gen::sync_value::RamenValue>,
+      static_cast<dessser::gen::raql_value::t *>(&vnull)) };
+  if (! val)
+    val = std::static_pointer_cast<dessser::gen::sync_value::t const>(nullVal);
+
+  dessser::gen::sync_client_cmd::t const cmd {
+    std::in_place_index<dessser::gen::sync_client_cmd::NewKey>,
+    const_cast<dessser::gen::sync_key::t *>(key.get()),
+    const_cast<dessser::gen::sync_value::t *>(val.get()),
+    timeout,
+    false /* TODO: also pass recurs */ };
+
+  return sendCmd(cmd);
+}
+
+int ConfClient::sendSet(
+      std::shared_ptr<dessser::gen::sync_key::t const> key,
+      std::shared_ptr<dessser::gen::sync_value::t const> val)
+{
+  if (verbose)
+    qDebug() << "ConfClient::sendSet:" << *key << "=" << *val;
+
+  dessser::gen::sync_client_cmd::t const cmd {
+    std::in_place_index<dessser::gen::sync_client_cmd::SetKey>,
+    const_cast<dessser::gen::sync_key::t *>(key.get()),
+    const_cast<dessser::gen::sync_value::t *>(val.get()) };
+
+  return sendCmd(cmd);
+}
+
+int ConfClient::sendLock(
+    std::shared_ptr<dessser::gen::sync_key::t const> key,
+    double timeout)
+{
+  if (verbose)
+    qDebug() << "ConfClient::sendLock:" << *key;
+
+  dessser::gen::sync_client_cmd::t const cmd {
+    std::in_place_index<dessser::gen::sync_client_cmd::LockKey>,
+    const_cast<dessser::gen::sync_key::t *>(key.get()),
+    timeout,
+    false /* TODO: alsp pass recurs */ };
+
+  return sendCmd(cmd);
+}
+
+int ConfClient::sendUnlock(
+      std::shared_ptr<dessser::gen::sync_key::t const> key)
+{
+  if (verbose)
+    qDebug() << "ConfClient::sendUnlock:" << *key;
+
+  dessser::gen::sync_client_cmd::t const cmd {
+    std::in_place_index<dessser::gen::sync_client_cmd::UnlockKey>,
+    const_cast<dessser::gen::sync_key::t *>(key.get()) };
+
+  return sendCmd(cmd);
+}
+
+int ConfClient::sendDel(
+      std::shared_ptr<dessser::gen::sync_key::t const> key)
+{
+  if (verbose)
+    qDebug() << "ConfClient::sendDel:" << *key;
+
+  dessser::gen::sync_client_cmd::t const cmd {
+    std::in_place_index<dessser::gen::sync_client_cmd::DelKey>,
+    const_cast<dessser::gen::sync_key::t *>(key.get()) };
+
+  return sendCmd(cmd);
 }
 
 int ConfClient::sendCmd(
@@ -658,7 +814,16 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
 
 bool ConfClient::isCrypted() const
 {
-  return !id->srv_pub_key.isEmpty();
+  return id && !id->srv_pub_key.isEmpty();
+}
+
+QString const ConfClient::username() const
+{
+  if (isCrypted()) {
+    return id->username;
+  } else {
+    return clearUsername;
+  }
 }
 
 int ConfClient::sendBytes(char const *bytes, size_t sz)

@@ -9,8 +9,9 @@
 #include <QVector>
 #include <sodium.h>
 
-#include "ConfClient.h"
 #include "KVStore.h"
+#include "Menu.h"
+#include "SyncStatus.h"
 #include "UserIdentity.h"
 #include "config.h"
 
@@ -45,22 +46,19 @@ int main(int argc, char *argv[])
       qgetenv("HOME") + QString("/.config/rmadmin") :
       QString("/etc/rmadmin");
 
+  qRegisterMetaType<KValue>();
   qRegisterMetaType<QAbstractSocket::SocketError>();
+  qRegisterMetaType<QList<ConfChange>>();
   qRegisterMetaType<SyncStatus>();
 
-  // test ConfClient:
-  QString const idFile { configDir + "/identity" };
-  QFile file(idFile);
-  std::shared_ptr<UserIdentity> id = std::make_shared<UserIdentity>(file);
-  if (! id->isValid) {
-    qCritical() << "Identity file" << idFile << "is not valid";
-    return 1;
-  }
+  kvs = std::make_shared<KVStore>();
 
-  std::shared_ptr<KVStore> kvs { std::make_shared<KVStore>() };
-  ConfClient *client = new ConfClient("localhost:29341", "rixed", id, kvs);
+  Menu::initLoginWin(configDir);
+  Menu::openLoginWin();
 
   int ret = app.exec();
+
+  Menu::deleteDialogs();
 
   return ret;
 }

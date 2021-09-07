@@ -39,21 +39,15 @@ class ConfClient : public QObject
   Q_OBJECT
 
   std::shared_ptr<KVStore> kvs;
-
   QTcpSocket *tcpSocket;
   SyncStatus syncStatus;
 
-  QString const username;
+  // Either one or the other:
+  QString const clearUsername;
   std::shared_ptr<UserIdentity const> id;
 
   // Sequence number used for outgoing messages:
   uint32_t seq = 0;
-
-  /* Configuration server's representation of my socket, identifying this
-   * connection (although most configuration objects are associated to a user name,
-   * some are with a specific socket). */
-  std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
-  std::shared_ptr<dessser::gen::sync_key::t const> myErrKey;
 
   // Used for secure channel (using libsodium)
   unsigned char clt_nonce[crypto_box_NONCEBYTES];
@@ -82,6 +76,26 @@ class ConfClient : public QObject
   void fatalErr(QString const &errString);
 
   int sendAuth();
+
+  int sendNew(
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::shared_ptr<dessser::gen::sync_value::t const>,
+        double timeout = 0.);
+
+  int sendSet(
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::shared_ptr<dessser::gen::sync_value::t const>);
+
+# define DEFAULT_LOCK_TIMEOUT 600.
+  int sendLock(
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        double timeout = DEFAULT_LOCK_TIMEOUT);
+
+  int sendUnlock(
+        std::shared_ptr<dessser::gen::sync_key::t const>);
+
+  int sendDel(
+        std::shared_ptr<dessser::gen::sync_key::t const>);
 
   int sendMsg(dessser::gen::sync_client_msg::t const &);
 
@@ -125,12 +139,20 @@ class ConfClient : public QObject
 
   bool isCrypted() const;
 
+  QString const username() const;
+
   // Checks whether we had a call-back for that key and execute it
   int checkDones(
         std::shared_ptr<dessser::gen::sync_key::t const>,
         std::shared_ptr<dessser::gen::sync_value::t const>);
 
 public:
+  /* Configuration server's representation of my socket, identifying this
+   * connection (although most configuration objects are associated to a user name,
+   * some are with a specific socket). */
+  std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
+  std::shared_ptr<dessser::gen::sync_key::t const> myErrKey;
+
   // confserver as in "host:port"
   ConfClient(QString const &server, QString const &username,
              std::shared_ptr<UserIdentity const>,
@@ -145,8 +167,9 @@ public:
 
 signals:
   void connectionProgressed(SyncStatus newStage);
-  void connectionNonFatalError(SyncStatus currentStatus, QString const error);
-  void connectionFatalError(SyncStatus currentStatus, QString const error);
+  void connectionNonFatalError(SyncStatus currentStatus, QString const &error);
+  void connectionFatalError(SyncStatus currentStatus, QString const &error);
+  void knownErrKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
 private slots:
   void onTcpError(QAbstractSocket::SocketError);

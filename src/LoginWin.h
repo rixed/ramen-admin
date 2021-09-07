@@ -13,14 +13,13 @@
  * submitted, and the menu is properly populated when authentication is
  * successful.
  * The only widget for now in there is the LoginWidget. */
-#include <thread>
 #include <QString>
 #include "KErrorMsg.h"
 #include "SavedWindow.h"
 #include "SyncStatus.h"
 
+class ConfClient;
 struct UserIdentity;
-class KErrorMsg;
 class LoginWidget;
 
 class LoginWin : public SavedWindow
@@ -29,15 +28,17 @@ class LoginWin : public SavedWindow
 
   LoginWidget *loginWidget;
 
-  SyncStatus connStatus, authStatus, syncStatus;
+  ConfClient *client;
+
+  // FIXME: those two are now redundant with client
+  SyncStatus syncStatus;
+  QString errMsg;
+
   void setStatusMsg();
   KErrorMsg *errorMessage;
 
   // Once set by the loginWidget:
   QString const server;
-
-  std::thread sync_thread;
-  void waitForOCaml();   // wait for the sync thread to terminate
 
 public:
   LoginWin(QString const configDir, QWidget *parent = nullptr);
@@ -52,10 +53,8 @@ protected slots:
   void exitApp();
 
 public slots:
-  void connProgress(SyncStatus);
-  void authProgress(SyncStatus);
   void syncProgress(SyncStatus);
-  void setErrorKey(std::string const key) { errorMessage->setKey(key); }
+  void syncFailed(SyncStatus, QString const &);
 
 signals:
   void authenticated();
