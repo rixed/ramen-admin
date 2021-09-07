@@ -92,6 +92,8 @@ HEADERS += \
   LoggerWin.h \
   LoginWidget.h \
   LoginWin.h \
+  ServerInfoWidget.h \
+  ServerInfoWin.h \
   Menu.h
 
 SOURCES += \
@@ -168,6 +170,8 @@ SOURCES += \
   LoggerWin.cpp \
   LoginWidget.cpp \
   LoginWin.cpp \
+  ServerInfoWidget.cpp \
+  ServerInfoWin.cpp \
   Menu.cpp \
   main.cpp
 

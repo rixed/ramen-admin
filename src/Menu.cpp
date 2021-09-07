@@ -40,9 +40,7 @@
 #include "RCEditorDialog.h"
 #endif
 #include "SavedWindow.h"
-#ifdef WITH_SERVERINFO
 #include "ServerInfoWin.h"
-# endif
 #ifdef WITH_SOURCES
 #include "SourcesWin.h"
 #endif
@@ -85,9 +83,7 @@ NamesTreeWin *Menu::namesTreeWin;
 #ifdef WITH_STORAGE
 StorageWin *Menu::storageWin;
 #endif
-#ifdef WITH_SERVERINFO
 ServerInfoWin *Menu::serverInfoWin;
-#endif
 #ifdef WITH_NAMESTREE
 OperationsWin *Menu::operationsWin;
 # endif
@@ -141,10 +137,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create StorageWin...";
   if (! storageWin) storageWin = new StorageWin;
 # endif
-# ifdef WITH_SERVERINFO
   if (verbose) qDebug() << "Create ServerInfoWin...";
   if (! serverInfoWin) serverInfoWin = new ServerInfoWin(srvUrl);
-# endif
 # ifdef WITH_NAMESTREE
   if (verbose) qDebug() << "Create OperationsWin...";
   if (! operationsWin) operationsWin = new OperationsWin;
@@ -215,9 +209,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_STORAGE
   danceOfDelLater<StorageWin>(&storageWin);
 # endif
-# ifdef WITH_SERVERINFO
   danceOfDelLater<ServerInfoWin>(&serverInfoWin);
-# endif
 # ifdef WITH_NAMESTREE
   danceOfDelLater<OperationsWin>(&operationsWin);
 # endif
@@ -320,12 +312,10 @@ void Menu::populateMenu(bool basic, bool extended)
       this, &Menu::openAlertingWin);
 #   endif
 
-#   ifdef WITH_SERVERINFO
     /* The Server Information window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Server Information…"),
       this, &Menu::openServerInfoWin);
-#   endif
 
     /* The Logger window */
     windowMenu->addAction(
@@ -492,12 +482,10 @@ void Menu::openStorageWin()
 }
 #endif
 
-#ifdef WITH_SERVERINFO
 void Menu::openServerInfoWin()
 {
   showRaised(serverInfoWin);
 }
-#endif
 
 #ifdef WITH_NAMESTREE
 void Menu::openOperationsWin()

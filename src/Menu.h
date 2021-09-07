@@ -34,9 +34,7 @@ class QMenuBar;
 #ifdef WITH_RC_EDITOR
 class RCEditorDialog;
 #endif
-#ifdef WITH_SERVERINFO
 class ServerInfoWin;
-#endif
 #ifdef WITH_SOURCES
 class SourcesWin;
 #endif
@@ -109,9 +107,7 @@ public:
 # ifdef WITH_STORAGE
   static StorageWin *storageWin;
 # endif
-# ifdef WITH_SERVERINFO
   static ServerInfoWin *serverInfoWin;
-# endif
 # ifdef WITH_NAMESTREE
   static OperationsWin *operationsWin;
 # endif
@@ -160,9 +156,7 @@ public slots:
 # ifdef WITH_ALERTING
   static void openAlertingWin();
 # endif
-# ifdef WITH_SERVERINFO
   static void openServerInfoWin();
-# endif
 # ifdef WITH_NAMESTREE
   static void openOperationsWin();
 # endif

@@ -2,13 +2,22 @@
 #define SERVERINFOWIDGET_H_190923
 #include <memory>
 #include <QWidget>
-#include "conf.h"
+
+#include "KVStore.h"  // for ConfChange
 
 class QFormLayout;
 struct KValue;
-namespace conf {
-  class Value;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key {
+      struct t;
+    }
+    namespace sync_value {
+      struct t;
+    }
+  }
+}
 
 class ServerInfoWidget : public QWidget
 {
@@ -16,8 +25,8 @@ class ServerInfoWidget : public QWidget
 
   QFormLayout *layout;
 
-  void setKey(std::string const &, KValue const &);
-  void setLabel(std::string const &, std::shared_ptr<conf::Value const>);
+  void setKey(dessser::gen::sync_key::t const &, KValue const &);
+  void setLabel(QString const &, std::shared_ptr<dessser::gen::sync_value::t const>);
 
 public:
   ServerInfoWidget(QString const &srvUrl, QWidget *parent = nullptr);

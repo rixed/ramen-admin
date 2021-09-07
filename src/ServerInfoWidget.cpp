@@ -2,9 +2,10 @@
 #include <QDebug>
 #include <QFormLayout>
 #include <QLabel>
+
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
 #include "misc.h"
-#include "conf.h"
-#include "confValue.h"
 #include "ServerInfoWidget.h"
 
 static bool const verbose(false);
@@ -19,7 +20,7 @@ ServerInfoWidget::ServerInfoWidget(QString const &srvUrl, QWidget *parent) :
 
   setLayout(layout);
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &ServerInfoWidget::onChange);
 }
 
@@ -40,40 +41,57 @@ void ServerInfoWidget::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void ServerInfoWidget::setKey(std::string const &key, KValue const &kv)
+void ServerInfoWidget::setKey(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
-  if (key == "time") {
-    setLabel(key, kv.val);
-  } else {
-    static std::string const key_prefix = "versions/";
-    if (! startsWith(key, key_prefix)) return;
-    setLabel(key.substr(key_prefix.length()), kv.val);
+  if (key.index() == dessser::gen::sync_key::Time) {
+    setLabel(QString("Time"), kv.val);
+  } else if (key.index() == dessser::gen::sync_key::Versions) {
+    std::string const what { std::get<dessser::gen::sync_key::Versions>(key) };
+    setLabel(QString::fromStdString(what), kv.val);
   }
 }
 
 void ServerInfoWidget::setLabel(
-  std::string const &label_, std::shared_ptr<conf::Value const> value_)
+  QString const &label,
+  std::shared_ptr<dessser::gen::sync_value::t const> value)
 {
-  QString const label = QString::fromStdString(label_) + ":";
-  QString const value = value_->toQString(label_);
+  if (value->index() != dessser::gen::sync_value::RamenValue) {
+err:
+    qCritical() << "ServerInfoWidget::setLabel: value is not a string?!";
+    return;
+  }
+  dessser::gen::raql_value::t const *val {
+    std::get<dessser::gen::sync_value::RamenValue>(*value) };
+
+  QString str;
+
+  switch (val->index()) {
+    case dessser::gen::raql_value::VString:
+      str = QString::fromStdString(std::get<dessser::gen::raql_value::VString>(*val));
+      break;
+    case dessser::gen::raql_value::VFloat:
+      str = stringOfDate(std::get<dessser::gen::raql_value::VFloat>(*val));
+      break;
+    default:
+      goto err;
+  }
 
   for (int row = 0; row < layout->rowCount(); row ++) {
     QLabel const *l =
       dynamic_cast<QLabel const *>(
         layout->itemAt(row, QFormLayout::LabelRole)->widget());
     if (l) {
-      if (l->text() == label) {
-        // Update the value:
-        QLabel *v =
-          dynamic_cast<QLabel *>(
-            layout->itemAt(row, QFormLayout::FieldRole)->widget());
-        if (v) {
-          v->setText(value);
-        } else {
-          qCritical() << "ServerInfoWidget has a value that's not a label!?";
-        }
-        return;
+      if (l->text() != label) continue;
+
+      QLabel *v =
+        dynamic_cast<QLabel *>(
+          layout->itemAt(row, QFormLayout::FieldRole)->widget());
+      if (v) {
+        v->setText(str);
+      } else {
+        qCritical() << "ServerInfoWidget has a value that's not a label!?";
       }
+      return;
     } else {
       qCritical() << "ServerInfoWidget has a label that's not a label!?";
     }
@@ -81,9 +99,7 @@ void ServerInfoWidget::setLabel(
 
   // Create a new label:
   if (verbose)
-    qDebug() << "ServerInfoWidget:: Creating new server info label for"
-             << QString::fromStdString(label_);
+    qDebug() << "ServerInfoWidget:: Creating new server info label for" << label;
 
-  layout->addRow(new QLabel(label),
-                 new QLabel(value));
+  layout->addRow(new QLabel(label), new QLabel(str));
 }
