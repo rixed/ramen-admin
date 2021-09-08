@@ -5,6 +5,7 @@
 
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
+#include "KVStore.h"
 #include "misc.h"
 #include "ServerInfoWidget.h"
 

@@ -2,7 +2,7 @@
 #define NEWPROGRAMDIALOG_H_190731
 #include <memory>
 #include <QDialog>
-#include "KVStore.h"  // for ConfChange
+#include "ConfChange.h"
 
 class QPushButton;
 class RCEntryEditor;

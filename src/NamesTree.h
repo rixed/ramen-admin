@@ -14,12 +14,20 @@
  */
 #include <utility>
 #include <QAbstractItemModel>
-#include "conf.h"
+#include "ConfChange.h"
 #include "ConfTreeModel.h"
 
 struct KValue;
 class QStringList;
 class ConfSubTree;
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key {
+      struct t;
+    }
+  }
+}
 
 /*
  * The NamesTree is a model. A proxy could restrict it to some subtree (and,
@@ -30,8 +38,8 @@ class NamesTree : public ConfTreeModel
 {
   Q_OBJECT
 
-  void updateNames(std::string const &, KValue const &);
-  void deleteNames(std::string const &, KValue const &);
+  void updateNames(dessser::gen::sync_key::t const &, KValue const &);
+  void deleteNames(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   bool withSites;
@@ -43,7 +51,7 @@ public:
 
   bool isField(QModelIndex const &i) const { return isTerm(i); }
 
-  /* Return the fq and field name of the given index.
+  /* Return the FQ and field name of the given index.
    * Second item will be empty if the index points at a function.
    * First will also be empty is the index does not even reach a
    * fq. */

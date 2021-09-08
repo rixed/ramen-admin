@@ -11,6 +11,8 @@
 
 #include "KVStore.h"
 #include "Menu.h"
+#include "misc.h"
+#include "NamesTree.h"
 #include "SyncStatus.h"
 #include "UserIdentity.h"
 #include "config.h"
@@ -51,7 +53,10 @@ int main(int argc, char *argv[])
   qRegisterMetaType<QList<ConfChange>>();
   qRegisterMetaType<SyncStatus>();
 
+  // Creates the global kvs (store of keys) before widgets start to use it:
   kvs = std::make_shared<KVStore>();
+
+  NamesTree::globalNamesTree = new NamesTree(true);
 
   Menu::initLoginWin(configDir);
   Menu::openLoginWin();
@@ -59,6 +64,7 @@ int main(int argc, char *argv[])
   int ret = app.exec();
 
   Menu::deleteDialogs();
+  danceOfDelLater<NamesTree>(&NamesTree::globalNamesTree);
 
   return ret;
 }

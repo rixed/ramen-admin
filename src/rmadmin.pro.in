@@ -80,6 +80,7 @@ HEADERS += \
   rec_shared_mutex.h \
   SyncStatus.h \
   KValue.h \
+  ConfChange.h \
   KVStore.h \
   ConfClient.h \
   KErrorMsg.h \
@@ -94,6 +95,10 @@ HEADERS += \
   LoginWin.h \
   ServerInfoWidget.h \
   ServerInfoWin.h \
+  ConfSubTree.h \
+  ConfTreeModel.h \
+  NamesTree.h \
+  NamesTreeWin.h \
   Menu.h
 
 SOURCES += \
@@ -172,6 +177,10 @@ SOURCES += \
   LoginWin.cpp \
   ServerInfoWidget.cpp \
   ServerInfoWin.cpp \
+  ConfSubTree.cpp \
+  ConfTreeModel.cpp \
+  NamesTree.cpp \
+  NamesTreeWin.cpp \
   Menu.cpp \
   main.cpp
 

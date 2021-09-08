@@ -6,7 +6,7 @@
 
 #include "ConfTreeModel.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 ConfTreeModel::ConfTreeModel(QObject *parent)
   : QAbstractItemModel(parent)
@@ -86,7 +86,7 @@ QVariant ConfTreeModel::data(QModelIndex const &index, int role) const
 QModelIndex ConfTreeModel::find(std::string const &path) const
 {
   QStringList names(QString::fromStdString(path).
-                    split('/', QString::SkipEmptyParts));
+                    split('/', Qt::SkipEmptyParts));
 
   QModelIndex idx;
   ConfSubTree const *parent = root;

@@ -11,9 +11,7 @@ class ConfTreeDialog;
 struct KValue;
 class LoggerWin;
 class LoginWin;
-#ifdef WITH_NAMESTREE
 class NamesTreeWin;
-#endif
 #ifdef WITH_DASHBOARDS
 class NewDashboardDialog;
 #endif
@@ -101,14 +99,12 @@ public:
 # ifdef WITH_RC_EDITOR
   static RCEditorDialog *rcEditorDialog;
 # endif
-# ifdef WITH_NAMESTREE
   static NamesTreeWin *namesTreeWin;
-# endif
 # ifdef WITH_STORAGE
   static StorageWin *storageWin;
 # endif
   static ServerInfoWin *serverInfoWin;
-# ifdef WITH_NAMESTREE
+# ifdef WITH_OPERATIONS
   static OperationsWin *operationsWin;
 # endif
   static LoginWin *loginWin;
@@ -147,9 +143,7 @@ public slots:
   static void openConfTreeDialog();
 # endif
   static void openAboutDialog();
-# ifdef WITH_NAMESTREE
   static void openNamesTreeWin();
-# endif
 # ifdef WITH_STORAGE
   static void openStorageWin();
 # endif
@@ -157,7 +151,7 @@ public slots:
   static void openAlertingWin();
 # endif
   static void openServerInfoWin();
-# ifdef WITH_NAMESTREE
+# ifdef WITH_OPERATIONS
   static void openOperationsWin();
 # endif
   static void openLoginWin();

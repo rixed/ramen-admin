@@ -9,20 +9,10 @@
 #include <QObject>
 #include <QString>
 
+#include "ConfChange.h"
 #include "KValue.h"
 #include "desssergen/sync_key.h"
 #include "rec_shared_mutex.h"
-
-enum ConfChangeOp { KeyCreated, KeyChanged, KeyLocked, KeyUnlocked, KeyDeleted };
-
-/* In order to increase UI reactivity, several configuration changes notifications are
- * batched into a single signal, as a QList of ConfChange items. */
-
-struct ConfChange {
-  ConfChangeOp op;
-  dessser::gen::sync_key::t key;
-  KValue kv;
-};
 
 /* For some reason the (better) technique of injecting a hash specialization
  * into the namespace std does not work, so the map is constructed explicitly

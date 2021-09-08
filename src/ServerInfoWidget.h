@@ -3,7 +3,7 @@
 #include <memory>
 #include <QWidget>
 
-#include "KVStore.h"  // for ConfChange
+#include "ConfChange.h"
 
 class QFormLayout;
 struct KValue;

@@ -3,12 +3,15 @@
 #include <QDebug>
 #include <QtGlobal>
 #include <QVariant>
-#include "conf.h"
+
+#include "ConfClient.h" // for printers
 #include "ConfSubTree.h"
-#include "confValue.h"
-#include "confWorkerRole.h"
+#include "desssergen/source_info.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/worker.h"
+#include "KVStore.h"
 #include "misc.h"
-#include "RamenType.h"
 
 #include "NamesTree.h"
 
@@ -27,7 +30,7 @@ NamesTree *NamesTree::globalNamesTreeAnySites;
 NamesTree::NamesTree(bool withSites_, QObject *parent)
   : ConfTreeModel(parent), withSites(withSites_)
 {
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &NamesTree::onChange);
 }
 
@@ -52,7 +55,7 @@ void NamesTree::onChange(QList<ConfChange> const &changes)
 std::pair<std::string, std::string> NamesTree::pathOfIndex(
   QModelIndex const &index) const
 {
-  std::pair<std::string, std::string> ret { std::string(), std::string() };
+  std::pair<std::string, std::string> ret; // { std::string(), std::string() };
 
   if (! index.isValid()) return ret;
 
@@ -71,60 +74,95 @@ std::pair<std::string, std::string> NamesTree::pathOfIndex(
   return ret;
 }
 
-static bool isAWorker(std::string const &key)
+static bool isAWorker(dessser::gen::sync_key::t const &key)
 {
-  return startsWith(key, "sites/") && endsWith(key, "/worker");
+  if (key.index() != dessser::gen::sync_key::PerSite) return false;
+  auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(key) };
+  auto const &key_ { std::get<1>(per_site) };
+  if (key_.index() != dessser::gen::sync_key::PerWorker) return false;
+  auto const &per_worker { std::get<dessser::gen::sync_key::PerWorker>(key_) };
+  auto const &key__ { std::get<1>(per_worker) };
+  return key__.index() == dessser::gen::sync_key::Worker;
 }
 
-void NamesTree::updateNames(std::string const &key, KValue const &kv)
+int numColumns(dessser::gen::raql_type::t const &t)
 {
-  if (! isAWorker(key)) return;
+  switch (t.type.index()) {
+    case dessser::gen::raql_type::Tup:
+      {
+        auto const &tup { std::get<dessser::gen::raql_type::Tup>(t.type) };
+        return tup.size();
+      }
+    case dessser::gen::raql_type::Vec:
+      {
+        auto const &vec { std::get<dessser::gen::raql_type::Vec>(t.type) };
+        return std::get<0>(vec);
+      }
+    case dessser::gen::raql_type::Rec:
+      {
+        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
+        return rec.size();
+      }
+    default:
+      return 1;
+  }
+}
 
-  std::shared_ptr<conf::Worker const> worker =
-    std::dynamic_pointer_cast<conf::Worker const>(kv.val);
-  if (! worker) {
+QString const columnName(dessser::gen::raql_type::t const &t, int i)
+{
+  switch (t.type.index()) {
+    case dessser::gen::raql_type::Tup:
+    case dessser::gen::raql_type::Vec:
+      return QString("#") + QString::number(i);
+    case dessser::gen::raql_type::Rec:
+      {
+        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
+        return QString::fromStdString(std::get<0>(rec[i]));
+      }
+    default:
+      return QString();
+  }
+}
+
+void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &kv)
+{
+  if (key.index() != dessser::gen::sync_key::PerSite) return;
+  auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(key) };
+  std::string const &site_name { std::get<0>(per_site) };
+  auto const &key_ { std::get<1>(per_site) };
+  if (key_.index() != dessser::gen::sync_key::PerWorker) return;
+  auto const &per_worker { std::get<dessser::gen::sync_key::PerWorker>(key_) };
+  std::string const &fq_name { std::get<0>(per_worker) };
+  auto const &key__ { std::get<1>(per_worker) };
+  if (key__.index() != dessser::gen::sync_key::Worker) return;
+
+  if (kv.val->index() != dessser::gen::sync_value::Worker) [[unlikely]] {
     qCritical() << "Not a worker!?";
     return;
   }
+  std::shared_ptr<dessser::gen::worker::t const> worker {
+    kv.val, std::get<dessser::gen::sync_value::Worker>(*kv.val) };
 
-  if (worker->role->isTopHalf) return;
+  if (worker->role.index() != dessser::gen::worker::Whole) return;
 
   /* Get the site name, program name list and function name: */
 
-  size_t const prefix_len = sizeof "sites/" - 1;
-  size_t const workers_len = sizeof "/workers/" - 1;
-  size_t const suffix_len = sizeof "/worker" - 1;
-  size_t const min_names = sizeof "s/p/f" - 1;
+  QString const site { QString::fromStdString(site_name) };
 
-  if (key.length() < prefix_len + workers_len + suffix_len + min_names) {
-invalid_key:
-    qCritical() << "Invalid worker key:" << QString::fromStdString(key);
+  // Locate the function name at the end:
+  size_t const j { fq_name.rfind('/') };
+  if (j == std::string::npos || j == 0 || j >= fq_name.size() - 1) {
+    qCritical() << "Invalid fq_name:" << QString::fromStdString(fq_name);
     return;
   }
 
-  size_t const end = key.length() - suffix_len;
-
-  size_t i = key.find('/', prefix_len);
-  if (i >= end) goto invalid_key;
-  QString const site =
-    QString::fromStdString(key.substr(prefix_len, i - prefix_len));
-
-  // Skip "/workers/"
-  i = key.find('/', i+1);
-  if (i >= end) goto invalid_key;
-
-  // Locate the function name at the end:
-  size_t j = key.rfind('/', end - 1);
-  if (j <= i) goto invalid_key;
-
   // Everything in between in the program name:
-  std::string const programName(key.substr(i + 1, j - i - 1));
-  std::string const srcPath = srcPathFromProgramName(programName);
-  QString const programs = QString::fromStdString(programName);
-  QStringList const program =
-    programs.split('/', QString::SkipEmptyParts);
-  QString const function =
-    QString::fromStdString(key.substr(j + 1, end - j - 1));
+  std::string const prog_name { fq_name.substr(0, j) };
+  std::string const src_path { srcPathFromProgramName(prog_name) };
+  QString const programs { QString::fromStdString(prog_name) };
+  QStringList const program { programs.split('/', Qt::SkipEmptyParts) };
+  std::string const function_name { fq_name.substr(j + 1) };
+  QString const function { QString::fromStdString(function_name) };
 
   if (verbose)
     qDebug() << "NamesTree: found" << site << "/ "
@@ -133,52 +171,62 @@ invalid_key:
   QStringList names(QStringList(site) << program << function);
   if (! withSites) names.removeFirst();
 
-  ConfSubTree *func = findOrCreate(root, names, QString());
+  ConfSubTree *func { findOrCreate(root, names, QString()) };
 
   /* Now get the field names */
 
   /* In theory keys are synced in the same order as created so we should
    * received the source info before any worker using it during a sync: */
-  std::string infoKey =
-    "sources/" + srcPath + "/info";
+  dessser::gen::sync_key::t const infoKey {
+    std::in_place_index<dessser::gen::sync_key::Sources>,
+    src_path,
+    "info" };
 
-  std::shared_ptr<conf::SourceInfo const> sourceInfos;
+  std::shared_ptr<dessser::gen::source_info::t const> sourceInfos;
 
   kvs->lock.lock_shared();
   auto it = kvs->map.find(infoKey);
   if (it != kvs->map.end()) {
-    sourceInfos = std::dynamic_pointer_cast<conf::SourceInfo const>(it->second.val);
-    if (! sourceInfos)
-      qCritical() << "NamesTree: Not a SourceInfo!?";
+    std::shared_ptr<dessser::gen::sync_value::t const> v { it->second.val };
+    if (v->index() == dessser::gen::sync_value::SourceInfo) [[likely]] {
+      sourceInfos = std::shared_ptr<dessser::gen::source_info::t const>(
+                      v, std::get<dessser::gen::sync_value::SourceInfo>(*v));
+    } else {
+      qCritical() << "Not a SourceInfo!?";
+    }
   }
   kvs->lock.unlock_shared();
 
   if (! sourceInfos) {
     if (verbose)
-      qDebug() << "NamesTree: No source info yet for"
-               << QString::fromStdString(infoKey);
+      qDebug() << "NamesTree: No source info yet for" << infoKey;
     return;
   }
 
-  if (sourceInfos->isError()) {
+  if (sourceInfos->detail.index() != dessser::gen::source_info::Compiled) {
     if (verbose)
-      qDebug() << "NamesTree:" << QString::fromStdString(infoKey)
-               << "not compiled yet";
+      qDebug() << "NamesTree:" << infoKey << "not compiled yet";
     return;
   }
+
+  std::shared_ptr<dessser::gen::source_info::compiled_program> compiled {
+    sourceInfos, std::get<dessser::gen::source_info::Compiled>(sourceInfos->detail) };
 
   /* In the sourceInfos all functions of that program could be found, but for
    * simplicity let's add only the one we came for: */
-  for (auto &info : sourceInfos->infos) {
-    if (info->name != function) continue;
-    std::shared_ptr<DessserValueType> s(info->outType->vtyp);
+  for (dessser::gen::source_info::compiled_func const *info : compiled->funcs) {
+    if (info->name != function_name) continue;
+
+    dessser::gen::raql_type::t const &out_record { *info->out_record };
+    int const num_cols { numColumns(out_record) };
     /* FIXME: Each column could have subcolumns and all should be inserted
      * hierarchically. */
     /* Some type info for the field (stored in the model as UserType+... would
      * come handy, for instance to determine if a field is numeric, or a
      * factor, etc */
-    for (int c = 0; c < s->numColumns(); c ++) {
-      QStringList names(s->columnName(c));
+    for (int i = 0; i < num_cols; i++) {
+      QString const col { columnName(out_record, i) };
+      QStringList names(col);
       (void)findOrCreate(func, names, names.last());
     }
     break;
@@ -190,7 +238,7 @@ invalid_key:
   }*/
 }
 
-void NamesTree::deleteNames(std::string const &key, KValue const &)
+void NamesTree::deleteNames(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (! isAWorker(key)) return;
 

@@ -21,16 +21,14 @@
 #include "LoggerWin.h"
 #include "LoginWin.h"
 #include "misc.h"
-#ifdef WITH_NAMESTREE
 #include "NamesTreeWin.h"
-#endif
 #ifdef WITH_SOURCES
 #include "NewSourceDialog.h"
 #endif
 #ifdef WITH_PROGRAMS
 #include "NewProgramDialog.h"
 #endif
-#ifdef WITH_NAMESTREE
+#ifdef WITH_OPERATIONS
 #include "OperationsWin.h"
 #endif
 #ifdef WITH_PROCESSES
@@ -77,14 +75,12 @@ ProcessesDialog *Menu::processesDialog;
 #ifdef WITH_RC_EDITOR
 RCEditorDialog *Menu::rcEditorDialog;
 #endif
-#ifdef WITH_NAMESTREE
 NamesTreeWin *Menu::namesTreeWin;
-#endif
 #ifdef WITH_STORAGE
 StorageWin *Menu::storageWin;
 #endif
 ServerInfoWin *Menu::serverInfoWin;
-#ifdef WITH_NAMESTREE
+#ifdef WITH_OPERATIONS
 OperationsWin *Menu::operationsWin;
 # endif
 LoginWin *Menu::loginWin;
@@ -129,17 +125,15 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create RCEditorDialog...";
   if (! rcEditorDialog) rcEditorDialog = new RCEditorDialog;
 # endif
-# ifdef WITH_NAMESTREE
   if (verbose) qDebug() << "Create NamesTreeWin...";
   if (! namesTreeWin) namesTreeWin = new NamesTreeWin;
-# endif
 # ifdef WITH_STORAGE
   if (verbose) qDebug() << "Create StorageWin...";
   if (! storageWin) storageWin = new StorageWin;
 # endif
   if (verbose) qDebug() << "Create ServerInfoWin...";
   if (! serverInfoWin) serverInfoWin = new ServerInfoWin(srvUrl);
-# ifdef WITH_NAMESTREE
+# ifdef WITH_OPERATIONS
   if (verbose) qDebug() << "Create OperationsWin...";
   if (! operationsWin) operationsWin = new OperationsWin;
 # endif
@@ -203,14 +197,12 @@ void Menu::deleteDialogs()
 # ifdef WITH_RC_EDITOR
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
 # endif
-# ifdef WITH_NAMESTREE
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
-# endif
 # ifdef WITH_STORAGE
   danceOfDelLater<StorageWin>(&storageWin);
 # endif
   danceOfDelLater<ServerInfoWin>(&serverInfoWin);
-# ifdef WITH_NAMESTREE
+# ifdef WITH_OPERATIONS
   danceOfDelLater<OperationsWin>(&operationsWin);
 # endif
 # ifdef WITH_ALERTING
@@ -276,7 +268,7 @@ void Menu::populateMenu(bool basic, bool extended)
       this, &Menu::openSourceEditor);
 #   endif
 
-#   ifdef WITH_NAMESTREE
+#   ifdef WITH_OPERATIONS
     /* The graph of operations window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Graph of Operations…"),
@@ -378,12 +370,10 @@ void Menu::populateMenu(bool basic, bool extended)
     (void)alertMenu;
 #   endif
 
-#   ifdef WITH_NAMESTREE
     /* DEBUG: the list of all names, to test autocompletion: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Completable Names…"),
       this, &Menu::openNamesTreeWin);
-#   endif
   }
 }
 
@@ -468,12 +458,10 @@ void Menu::openAboutDialog()
    showRaised(aboutDialog);
 }
 
-#ifdef WITH_NAMESTREE
 void Menu::openNamesTreeWin()
 {
   showRaised(namesTreeWin);
 }
-#endif
 
 #ifdef WITH_STORAGE
 void Menu::openStorageWin()
@@ -487,7 +475,7 @@ void Menu::openServerInfoWin()
   showRaised(serverInfoWin);
 }
 
-#ifdef WITH_NAMESTREE
+#ifdef WITH_OPERATIONS
 void Menu::openOperationsWin()
 {
   showRaised(operationsWin);

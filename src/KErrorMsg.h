@@ -6,7 +6,7 @@
 #include <string>
 #include <QLabel>
 
-#include "KVStore.h"  // for ConfChange
+#include "ConfChange.h"
 
 struct KValue;
 

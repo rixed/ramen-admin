@@ -301,7 +301,7 @@ struct TRecord : DessserValueType {
   QString const toQString() const;
   RamenValue *unserialize(uint32_t const *&start, uint32_t const *max, bool topLevel) const;
   int numColumns() const { return fields.size(); }
-  QString columnName(int i) const;
+  QString columnName(int) const;
   std::shared_ptr<RamenType const> columnType(int i) const;
   size_t nullmaskWidth(bool) const;
 };
