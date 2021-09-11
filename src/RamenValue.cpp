@@ -107,9 +107,7 @@ QString const VFloat::toQString(std::string const &key) const
   if (
     key == "time" ||
     endsWith(key, "/last_exit") ||
-    endsWith(key, "/quarantine_until") ||
     endsWith(key, "/last_killed") ||
-    endsWith(key, "/last_exit") ||
     endsWith(key, "/quarantine_until") ||
     endsWith(key, "/first_attempt") ||
     endsWith(key, "/last_attempt") ||

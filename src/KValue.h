@@ -8,10 +8,6 @@
 
 #include "UserIdentity.h"
 
-namespace conf {
-  class Value;
-}
-
 namespace dessser {
   namespace gen {
     namespace sync_value {

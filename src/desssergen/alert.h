@@ -22,10 +22,27 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-typedef std::tuple<
+struct t596d48bd9128124b3701d75ab095e574 : public std::tuple<
   dessser::gen::field_name::t_ext,
   std::string
-> t7d737a471b58c17b56f5c31f8c6e717d;
+> {
+  using tuple::tuple;
+  t596d48bd9128124b3701d75ab095e574(std::tuple<dessser::gen::field_name::t_ext, std::string> p)
+    : std::tuple<dessser::gen::field_name::t_ext, std::string>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t596d48bd9128124b3701d75ab095e574 const &a, t596d48bd9128124b3701d75ab095e574 const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t596d48bd9128124b3701d75ab095e574 const &a, t596d48bd9128124b3701d75ab095e574 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t596d48bd9128124b3701d75ab095e574 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t131662737cd7ca0ff4503bc447b90c1f : public std::variant<
   double, // Absolute
@@ -36,6 +53,14 @@ enum Constr_t131662737cd7ca0ff4503bc447b90c1f {
   Absolute,
   Relative,
 };
+
+inline std::ostream &operator<<(std::ostream &os, t131662737cd7ca0ff4503bc447b90c1f const &v) {
+  switch (v.index()) {
+    case 0: os << "Absolute " << std::get<0>(v); break;
+    case 1: os << "Relative " << std::get<1>(v); break;
+  }
+  return os;
+}
 
 inline bool operator==(t131662737cd7ca0ff4503bc447b90c1f const &a, t131662737cd7ca0ff4503bc447b90c1f const &b) {
   if (a.index() != b.index()) return false;
@@ -48,14 +73,6 @@ inline bool operator==(t131662737cd7ca0ff4503bc447b90c1f const &a, t131662737cd7
 inline bool operator!=(t131662737cd7ca0ff4503bc447b90c1f const &a, t131662737cd7ca0ff4503bc447b90c1f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t131662737cd7ca0ff4503bc447b90c1f const &v) {
-  switch (v.index()) {
-    case 0: os << "Absolute " << std::get<0>(v); break;
-    case 1: os << "Relative " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct tbea317b67d84f7d9cf6a71dc11d82f92 {
   double avg_window;
   ::dessser::gen::alert::t131662737cd7ca0ff4503bc447b90c1f max_distance;
@@ -94,6 +111,14 @@ enum Constr_t7a02edca1273055c3c437ebec83c4409 {
   Baseline,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t7a02edca1273055c3c437ebec83c4409 const &v) {
+  switch (v.index()) {
+    case 0: os << "Constant " << std::get<0>(v); break;
+    case 1: os << "Baseline " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t7a02edca1273055c3c437ebec83c4409 const &a, t7a02edca1273055c3c437ebec83c4409 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -105,16 +130,8 @@ inline bool operator==(t7a02edca1273055c3c437ebec83c4409 const &a, t7a02edca1273
 inline bool operator!=(t7a02edca1273055c3c437ebec83c4409 const &a, t7a02edca1273055c3c437ebec83c4409 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7a02edca1273055c3c437ebec83c4409 const &v) {
-  switch (v.index()) {
-    case 0: os << "Constant " << std::get<0>(v); break;
-    case 1: os << "Baseline " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t {
-  Lst<::dessser::gen::alert::t7d737a471b58c17b56f5c31f8c6e717d> carry_csts;
+  Lst<::dessser::gen::alert::t596d48bd9128124b3701d75ab095e574> carry_csts;
   Lst<dessser::gen::field_name::t_ext> carry_fields;
   dessser::gen::field_name::t_ext column;
   std::string desc_firing;
@@ -132,7 +149,7 @@ struct t {
   double time_step;
   Lst<dessser::gen::field_name::t_ext> tops;
   Lst<dessser::gen::simple_filter::t_ext> where;
-  t(Lst<::dessser::gen::alert::t7d737a471b58c17b56f5c31f8c6e717d> carry_csts_, Lst<dessser::gen::field_name::t_ext> carry_fields_, dessser::gen::field_name::t_ext column_, std::string desc_firing_, std::string desc_recovery_, std::string desc_title_, double duration_, bool enabled_, std::optional<Lst<dessser::gen::field_name::t_ext>> group_by_, Lst<dessser::gen::simple_filter::t_ext> having_, double hysteresis_, std::string id_, double ratio_, dessser::gen::fq_name::t_ext table_, ::dessser::gen::alert::t7a02edca1273055c3c437ebec83c4409 threshold_, double time_step_, Lst<dessser::gen::field_name::t_ext> tops_, Lst<dessser::gen::simple_filter::t_ext> where_) : carry_csts(carry_csts_), carry_fields(carry_fields_), column(column_), desc_firing(desc_firing_), desc_recovery(desc_recovery_), desc_title(desc_title_), duration(duration_), enabled(enabled_), group_by(group_by_), having(having_), hysteresis(hysteresis_), id(id_), ratio(ratio_), table(table_), threshold(threshold_), time_step(time_step_), tops(tops_), where(where_) {}
+  t(Lst<::dessser::gen::alert::t596d48bd9128124b3701d75ab095e574> carry_csts_, Lst<dessser::gen::field_name::t_ext> carry_fields_, dessser::gen::field_name::t_ext column_, std::string desc_firing_, std::string desc_recovery_, std::string desc_title_, double duration_, bool enabled_, std::optional<Lst<dessser::gen::field_name::t_ext>> group_by_, Lst<dessser::gen::simple_filter::t_ext> having_, double hysteresis_, std::string id_, double ratio_, dessser::gen::fq_name::t_ext table_, ::dessser::gen::alert::t7a02edca1273055c3c437ebec83c4409 threshold_, double time_step_, Lst<dessser::gen::field_name::t_ext> tops_, Lst<dessser::gen::simple_filter::t_ext> where_) : carry_csts(carry_csts_), carry_fields(carry_fields_), column(column_), desc_firing(desc_firing_), desc_recovery(desc_recovery_), desc_title(desc_title_), duration(duration_), enabled(enabled_), group_by(group_by_), having(having_), hysteresis(hysteresis_), id(id_), ratio(ratio_), table(table_), threshold(threshold_), time_step(time_step_), tops(tops_), where(where_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -165,17 +182,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-typedef std::tuple<
+struct tdce58e386f2f7074ab8981efbc4d05ee : public std::tuple<
   ::dessser::gen::alert::t*,
   Pointer
-> t9dbb79f443cdcf3340bfdfbf1b06c337;
+> {
+  using tuple::tuple;
+  tdce58e386f2f7074ab8981efbc4d05ee(std::tuple<::dessser::gen::alert::t*, Pointer> p)
+    : std::tuple<::dessser::gen::alert::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tdce58e386f2f7074ab8981efbc4d05ee const &a, tdce58e386f2f7074ab8981efbc4d05ee const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tdce58e386f2f7074ab8981efbc4d05ee const &a, tdce58e386f2f7074ab8981efbc4d05ee const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tdce58e386f2f7074ab8981efbc4d05ee const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::alert::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::alert::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alert::t9dbb79f443cdcf3340bfdfbf1b06c337(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

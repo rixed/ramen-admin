@@ -22,13 +22,20 @@
 #include <functional>
 #include <list>
 #include <memory>
+#include <mutex>
 #include <utility>
 #include <QObject>
-#include "RamenValue.h"
+
 #include "ReplayRequest.h"
 
+namespace dessser {
+  namespace gen {
+    namespace raql_type { struct t; }
+    namespace raql_value { struct t; }
+  }
+}
+
 struct EventTime;
-struct RamenType;
 
 class PastData : public QObject
 {
@@ -58,14 +65,14 @@ public:
    * This is where the data is eventually stored. */
   std::list<ReplayRequest> replayRequests;
 
-  std::shared_ptr<RamenType const> type;
+  std::shared_ptr<dessser::gen::raql_type::t const> type;
   std::shared_ptr<EventTime const> eventTime;
 
   double maxTime = NAN;
 
   PastData(std::string const &site, std::string const &program,
            std::string const &function,
-           std::shared_ptr<RamenType const>,
+           std::shared_ptr<dessser::gen::raql_type::t const>,
            std::shared_ptr<EventTime const>,
            double maxTime_ = NAN,
            QObject *parent = nullptr);
@@ -77,7 +84,7 @@ public:
    * range: */
   void iterTuples(
     double since, double until, bool onePast,
-    std::function<void(double, std::shared_ptr<RamenValue const>)>);
+    std::function<void(double, std::shared_ptr<dessser::gen::raql_value::t const>)>);
 
 protected slots:
   void replayEnded();

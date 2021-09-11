@@ -38,36 +38,97 @@ struct t {
   t(dessser::gen::field_name::t_ext lhs_, std::string op_, std::string rhs_) : lhs(lhs_), op(op_), rhs(rhs_) {}
   t() = default;
 };
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  return ::dessser::gen::field_name::Deref(a.lhs) == ::dessser::gen::field_name::Deref(b.lhs) && a.op == b.op && a.rhs == b.rhs;
+}
+
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct tf255fe6e5b49b611c7370ea969e9caba : public std::tuple<
   ::dessser::gen::simple_filter::t*,
   Pointer
-> t5ec462bd9f9d5a838e7e865b5af804fe;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  tf255fe6e5b49b611c7370ea969e9caba(std::tuple<::dessser::gen::simple_filter::t*, Pointer> p)
+    : std::tuple<::dessser::gen::simple_filter::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tf255fe6e5b49b611c7370ea969e9caba const &a, tf255fe6e5b49b611c7370ea969e9caba const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tf255fe6e5b49b611c7370ea969e9caba const &a, tf255fe6e5b49b611c7370ea969e9caba const &b) {
+  return !operator==(a, b);
+}
+struct tacdfdbd490062d58073ca57b70932e6d : public std::tuple<
   dessser::gen::field_name::t_ext,
   Pointer
-> t273a2b7978f5b466a128a51c1cc4a27b;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  tacdfdbd490062d58073ca57b70932e6d(std::tuple<dessser::gen::field_name::t_ext, Pointer> p)
+    : std::tuple<dessser::gen::field_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tacdfdbd490062d58073ca57b70932e6d const &a, tacdfdbd490062d58073ca57b70932e6d const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tacdfdbd490062d58073ca57b70932e6d const &a, tacdfdbd490062d58073ca57b70932e6d const &b) {
+  return !operator==(a, b);
+}
+struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
   Size,
   Pointer
-> t8beb80162423aee37bd383e9b6834c9c;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t044960e524fd6ec1bfc06410ce526709(std::tuple<Size, Pointer> p)
+    : std::tuple<Size, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
+  return !operator==(a, b);
+}
+struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
   uint8_t,
   Pointer
-> tb3f98ea670610d40658a618de3ec7b90;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t1566bd611d8a2b90669c241f5e8d6ff1(std::tuple<uint8_t, Pointer> p)
+    : std::tuple<uint8_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
+  return !operator==(a, b);
+}
+struct t3fd8221434e489b54b5c4356ebff5005 : public std::tuple<
   std::string,
   Pointer
-> tef94b55d8809251f13165d9a05bd9d0e;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t3fd8221434e489b54b5c4356ebff5005(std::tuple<std::string, Pointer> p)
+    : std::tuple<std::string, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t3fd8221434e489b54b5c4356ebff5005 const &a, t3fd8221434e489b54b5c4356ebff5005 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t3fd8221434e489b54b5c4356ebff5005 const &a, t3fd8221434e489b54b5c4356ebff5005 const &b) {
+  return !operator==(a, b);
+}
+struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
   Bytes,
   Pointer
-> t188345aa49abd0cb47ff73fedc219f08;
-
+> {
+  using tuple::tuple;
+  t5887709cc43c8c8e24d28211e8c970a2(std::tuple<Bytes, Pointer> p)
+    : std::tuple<Bytes, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -424,40 +485,40 @@ std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_binary(ser
                   (let-pair "dstring2_fst_84" "dstring2_snd_85" (read-bytes (identifier "dstring1_snd_82") (identifier "dstring1_fst_81"))
                     (make-tup (make-rec (string "op") (string-of-bytes (identifier "dstring2_fst_84")) (string "rhs") (identifier "drec_fst_72") (string "lhs") (identifier "drec_fst_57")) (identifier "dstring2_snd_85"))))))))))
  */
-static std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe(Pointer)> fun150 { [&fun150](Pointer p_0) {
+  std::function<::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba(Pointer)> fun150 { [&fun150](Pointer p_0) {
     auto fun151 { dessser::gen::field_name::of_row_binary };
-    ::dessser::gen::simple_filter::t273a2b7978f5b466a128a51c1cc4a27b id_152 { fun151(p_0) };
-    ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe let_res_153;
+    ::dessser::gen::simple_filter::tacdfdbd490062d58073ca57b70932e6d id_152 { fun151(p_0) };
+    ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba let_res_153;
     {
-      ::dessser::gen::simple_filter::t273a2b7978f5b466a128a51c1cc4a27b drec_56 { id_152 };
-      ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe letpair_res_154;
+      ::dessser::gen::simple_filter::tacdfdbd490062d58073ca57b70932e6d drec_56 { id_152 };
+      ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba letpair_res_154;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
         uint32_t id_155 { 0U };
         Vec<1, uint32_t> id_156 {  id_155  };
-        ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_157;
+        ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_157;
         {
           Vec<1, uint32_t> leb_ref_59 { id_156 };
           uint8_t id_158 { 0 };
           Vec<1, uint8_t> id_159 {  id_158  };
-          ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_160;
+          ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_160;
           {
             Vec<1, uint8_t> shft_ref_60 { id_159 };
             Vec<1, Pointer> id_161 {  drec_snd_58  };
-            ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_162;
+            ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_162;
             {
               Vec<1, Pointer> p_ref_61 { id_161 };
               bool while_flag_163 { true };
               do {
                 uint8_t id_164 { 0 };
                 Pointer id_165 { p_ref_61[id_164] };
-                ::dessser::gen::simple_filter::tb3f98ea670610d40658a618de3ec7b90 id_166 { id_165.readU8() };
+                ::dessser::gen::simple_filter::t1566bd611d8a2b90669c241f5e8d6ff1 id_166 { id_165.readU8() };
                 bool let_res_167;
                 {
-                  ::dessser::gen::simple_filter::tb3f98ea670610d40658a618de3ec7b90 leb128_62 { id_166 };
+                  ::dessser::gen::simple_filter::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_62 { id_166 };
                   bool letpair_res_168;
                   {
                     auto leb128_fst_63 { std::get<0>(leb128_62) };
@@ -501,62 +562,62 @@ static std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af
               Size id_192 { Size(id_191) };
               uint8_t id_193 { 0 };
               Pointer id_194 { p_ref_61[id_193] };
-              ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c id_195 { id_192, id_194 };
+              ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 id_195 { id_192, id_194 };
               let_res_162 = id_195;
             }
             let_res_160 = let_res_162;
           }
           let_res_157 = let_res_160;
         }
-        ::dessser::gen::simple_filter::tef94b55d8809251f13165d9a05bd9d0e let_res_196;
+        ::dessser::gen::simple_filter::t3fd8221434e489b54b5c4356ebff5005 let_res_196;
         {
-          ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c dstring1_65 { let_res_157 };
-          ::dessser::gen::simple_filter::tef94b55d8809251f13165d9a05bd9d0e letpair_res_197;
+          ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 dstring1_65 { let_res_157 };
+          ::dessser::gen::simple_filter::t3fd8221434e489b54b5c4356ebff5005 letpair_res_197;
           {
             auto dstring1_fst_66 { std::get<0>(dstring1_65) };
             auto dstring1_snd_67 { std::get<1>(dstring1_65) };
-            ::dessser::gen::simple_filter::t188345aa49abd0cb47ff73fedc219f08 id_198 { dstring1_snd_67.readBytes(dstring1_fst_66) };
-            ::dessser::gen::simple_filter::tef94b55d8809251f13165d9a05bd9d0e letpair_res_199;
+            ::dessser::gen::simple_filter::t5887709cc43c8c8e24d28211e8c970a2 id_198 { dstring1_snd_67.readBytes(dstring1_fst_66) };
+            ::dessser::gen::simple_filter::t3fd8221434e489b54b5c4356ebff5005 letpair_res_199;
             {
               auto dstring2_fst_69 { std::get<0>(id_198) };
               auto dstring2_snd_70 { std::get<1>(id_198) };
               std::string id_200 { dstring2_fst_69.toString() };
-              ::dessser::gen::simple_filter::tef94b55d8809251f13165d9a05bd9d0e id_201 { id_200, dstring2_snd_70 };
+              ::dessser::gen::simple_filter::t3fd8221434e489b54b5c4356ebff5005 id_201 { id_200, dstring2_snd_70 };
               letpair_res_199 = id_201;
             }
             letpair_res_197 = letpair_res_199;
           }
           let_res_196 = letpair_res_197;
         }
-        ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe let_res_202;
+        ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba let_res_202;
         {
-          ::dessser::gen::simple_filter::tef94b55d8809251f13165d9a05bd9d0e drec_71 { let_res_196 };
-          ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe letpair_res_203;
+          ::dessser::gen::simple_filter::t3fd8221434e489b54b5c4356ebff5005 drec_71 { let_res_196 };
+          ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba letpair_res_203;
           {
             auto drec_fst_72 { std::get<0>(drec_71) };
             auto drec_snd_73 { std::get<1>(drec_71) };
             uint32_t id_204 { 0U };
             Vec<1, uint32_t> id_205 {  id_204  };
-            ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_206;
+            ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_206;
             {
               Vec<1, uint32_t> leb_ref_74 { id_205 };
               uint8_t id_207 { 0 };
               Vec<1, uint8_t> id_208 {  id_207  };
-              ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_209;
+              ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_209;
               {
                 Vec<1, uint8_t> shft_ref_75 { id_208 };
                 Vec<1, Pointer> id_210 {  drec_snd_73  };
-                ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c let_res_211;
+                ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 let_res_211;
                 {
                   Vec<1, Pointer> p_ref_76 { id_210 };
                   bool while_flag_212 { true };
                   do {
                     uint8_t id_213 { 0 };
                     Pointer id_214 { p_ref_76[id_213] };
-                    ::dessser::gen::simple_filter::tb3f98ea670610d40658a618de3ec7b90 id_215 { id_214.readU8() };
+                    ::dessser::gen::simple_filter::t1566bd611d8a2b90669c241f5e8d6ff1 id_215 { id_214.readU8() };
                     bool let_res_216;
                     {
-                      ::dessser::gen::simple_filter::tb3f98ea670610d40658a618de3ec7b90 leb128_77 { id_215 };
+                      ::dessser::gen::simple_filter::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_77 { id_215 };
                       bool letpair_res_217;
                       {
                         auto leb128_fst_78 { std::get<0>(leb128_77) };
@@ -600,28 +661,28 @@ static std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af
                   Size id_241 { Size(id_240) };
                   uint8_t id_242 { 0 };
                   Pointer id_243 { p_ref_76[id_242] };
-                  ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c id_244 { id_241, id_243 };
+                  ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 id_244 { id_241, id_243 };
                   let_res_211 = id_244;
                 }
                 let_res_209 = let_res_211;
               }
               let_res_206 = let_res_209;
             }
-            ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe let_res_245;
+            ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba let_res_245;
             {
-              ::dessser::gen::simple_filter::t8beb80162423aee37bd383e9b6834c9c dstring1_80 { let_res_206 };
-              ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe letpair_res_246;
+              ::dessser::gen::simple_filter::t044960e524fd6ec1bfc06410ce526709 dstring1_80 { let_res_206 };
+              ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba letpair_res_246;
               {
                 auto dstring1_fst_81 { std::get<0>(dstring1_80) };
                 auto dstring1_snd_82 { std::get<1>(dstring1_80) };
-                ::dessser::gen::simple_filter::t188345aa49abd0cb47ff73fedc219f08 id_247 { dstring1_snd_82.readBytes(dstring1_fst_81) };
-                ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe letpair_res_248;
+                ::dessser::gen::simple_filter::t5887709cc43c8c8e24d28211e8c970a2 id_247 { dstring1_snd_82.readBytes(dstring1_fst_81) };
+                ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba letpair_res_248;
                 {
                   auto dstring2_fst_84 { std::get<0>(id_247) };
                   auto dstring2_snd_85 { std::get<1>(id_247) };
                   std::string id_249 { dstring2_fst_84.toString() };
                   ::dessser::gen::simple_filter::t* id_250 { new ::dessser::gen::simple_filter::t({ .lhs = drec_fst_57, .op = id_249, .rhs = drec_fst_72 }) };
-                  ::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe id_251 { id_250, dstring2_snd_85 };
+                  ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba id_251 { id_250, dstring2_snd_85 };
                   letpair_res_248 = id_251;
                 }
                 letpair_res_246 = letpair_res_248;
@@ -641,7 +702,7 @@ static std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af
    };
   return fun150;
 }
-std::function<::dessser::gen::simple_filter::t5ec462bd9f9d5a838e7e865b5af804fe(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

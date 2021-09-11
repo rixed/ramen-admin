@@ -1,3 +1,4 @@
+#error "DEPRECATED"
 #ifndef CONFVALUE_H_190504
 #define CONFVALUE_H_190504
 #include <cassert>

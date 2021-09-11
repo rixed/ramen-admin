@@ -75,6 +75,7 @@ HEADERS += \
   desssergen/sync_server_msg.h \
   desssergen/sync_msg.h \
   misc.h \
+  misc_dessser.h \
   z85.h \
   UserIdentity.h \
   rec_shared_mutex.h \
@@ -99,7 +100,21 @@ HEADERS += \
   ConfTreeModel.h \
   NamesTree.h \
   NamesTreeWin.h \
-  Menu.h
+  GraphModel.h \
+  GraphViewSettings.h \
+  GraphItem.h \
+  GraphArrow.h \
+  EventTime.h \
+  Menu.h \
+  TailModel.h \
+  ReplayRequest.h \
+  PastData.h \
+  FunctionItem.h \
+  ProgramItem.h \
+  SiteItem.h \
+  layout.h \
+  GraphView.h \
+  colorOfString.h
 
 SOURCES += \
   desssergen/field_name.cc \
@@ -158,6 +173,7 @@ SOURCES += \
   desssergen/sync_server_msg.cc \
   desssergen/sync_msg.cc \
   misc.cpp \
+  misc_dessser.cpp \
   z85.cpp \
   UserIdentity.cpp \
   rec_shared_mutex.cpp \
@@ -181,7 +197,21 @@ SOURCES += \
   ConfTreeModel.cpp \
   NamesTree.cpp \
   NamesTreeWin.cpp \
+  GraphModel.cpp \
+  GraphViewSettings.cpp \
+  GraphItem.cpp \
+  GraphArrow.cpp \
+  EventTime.cpp \
   Menu.cpp \
+  TailModel.cpp \
+  ReplayRequest.cpp \
+  PastData.cpp \
+  FunctionItem.cpp \
+  ProgramItem.cpp \
+  SiteItem.cpp \
+  layout.cpp \
+  GraphView.cpp \
+  colorOfString.cpp \
   main.cpp
 
 RESOURCES = resources.qrc

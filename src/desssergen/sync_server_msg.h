@@ -120,6 +120,19 @@ enum Constr_t {
   UnlockKey,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "AuthOk " << ::dessser::gen::sync_socket::Deref(std::get<0>(v)); break;
+    case 1: os << "AuthErr " << std::get<1>(v); break;
+    case 2: os << "SetKey " << std::get<2>(v); break;
+    case 3: os << "NewKey " << std::get<3>(v); break;
+    case 4: os << "DelKey " << ::dessser::gen::sync_key::Deref(std::get<4>(v)); break;
+    case 5: os << "LockKey " << std::get<5>(v); break;
+    case 6: os << "UnlockKey " << ::dessser::gen::sync_key::Deref(std::get<6>(v)); break;
+  }
+  return os;
+}
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -136,30 +149,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "AuthOk " << ::dessser::gen::sync_socket::Deref(std::get<0>(v)); break;
-    case 1: os << "AuthErr " << std::get<1>(v); break;
-    case 2: os << "SetKey " << std::get<2>(v); break;
-    case 3: os << "NewKey " << std::get<3>(v); break;
-    case 4: os << "DelKey " << ::dessser::gen::sync_key::Deref(std::get<4>(v)); break;
-    case 5: os << "LockKey " << std::get<5>(v); break;
-    case 6: os << "UnlockKey " << ::dessser::gen::sync_key::Deref(std::get<6>(v)); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct tc420411c3211fa528e6f332144c4bd15 : public std::tuple<
   ::dessser::gen::sync_server_msg::t*,
   Pointer
-> tc6c292a6f74c55e16d68a655860c47c2;
+> {
+  using tuple::tuple;
+  tc420411c3211fa528e6f332144c4bd15(std::tuple<::dessser::gen::sync_server_msg::t*, Pointer> p)
+    : std::tuple<::dessser::gen::sync_server_msg::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tc420411c3211fa528e6f332144c4bd15 const &a, tc420411c3211fa528e6f332144c4bd15 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tc420411c3211fa528e6f332144c4bd15 const &a, tc420411c3211fa528e6f332144c4bd15 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tc420411c3211fa528e6f332144c4bd15 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::sync_server_msg::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::sync_server_msg::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_server_msg::tc6c292a6f74c55e16d68a655860c47c2(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::sync_server_msg::tc420411c3211fa528e6f332144c4bd15(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

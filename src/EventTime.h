@@ -4,19 +4,23 @@
  * of a tuple's event time: */
 #include <optional>
 
-struct RamenType;
-struct RamenValue;
+namespace dessser {
+  namespace gen {
+    namespace raql_type { struct t; }
+    namespace raql_value { struct t; }
+  }
+}
 
 struct EventTime
 {
   /* No support for old-style event-time (esp. since it could depend on
    * parameters which we cannot easily have access to from here). */
-  EventTime(RamenType const &);
+  EventTime(dessser::gen::raql_type::t const &);
 
   bool isValid() const;
 
-  std::optional<double> startOfTuple(RamenValue const &) const;
-  std::optional<double> stopOfTuple(RamenValue const &) const;
+  std::optional<double> startOfTuple(dessser::gen::raql_value::t const &) const;
+  std::optional<double> stopOfTuple(dessser::gen::raql_value::t const &) const;
 
   /* Record the location of the start/stop field in the tuple, or -1 if
    * they are not present. */

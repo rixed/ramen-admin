@@ -1,3 +1,4 @@
+#error "DEPRECATED"
 #ifndef RAMENTYPE_H_190716
 #define RAMENTYPE_H_190716
 // A RamenType represents a RamenTypes.t aka a Dessser.maybe_nullable

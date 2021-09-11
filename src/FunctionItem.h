@@ -6,12 +6,24 @@
 #include <vector>
 #include <QObject>
 #include <QString>
-#include "confValue.h"
+
+#include "desssergen/time_range.h"  // no "struct t;" that could be declared
 #include "GraphItem.h"
 #include "PastData.h"
 
 class GraphViewSettings;
 class TailModel;
+
+namespace dessser {
+  namespace gen {
+    namespace worker { struct t; }
+    namespace runtime_stats { struct t; }
+    namespace source_info {
+      struct t;
+      struct compiled_func;
+    }
+  }
+}
 
 class Function : public QObject, public GraphData
 {
@@ -24,20 +36,20 @@ class Function : public QObject, public GraphData
   /* All past data that will ever be asked for this function.
    * Shared pointer anyway, since some callee might want to keep it longer
    * than the lifetime of this FunctionItem.
-   * Null until we get the EventTime. */
+   * Null until we get the event-time. */
   std::shared_ptr<PastData> pastData;
 
 public:
-  QString const siteName, programName;
+  std::string const siteName, programName;
   /* In addition to the name we want the fqName to be available
    * when all we have is a shared_ptr<Function>: */
-  QString const fqName;
+  std::string const fqName;
   /* And the srcPath: */
   std::string const srcPath;
 
-  std::shared_ptr<conf::Worker const> worker;
-  std::shared_ptr<conf::RuntimeStats const> runtimeStats;
-  std::shared_ptr<conf::TimeRange const> archivedTimes;
+  std::shared_ptr<dessser::gen::worker::t const> worker;
+  std::shared_ptr<dessser::gen::runtime_stats::t const> runtimeStats;
+  std::shared_ptr<dessser::gen::time_range::t const> archivedTimes;
   std::optional<int64_t> numArcFiles;
   std::optional<int64_t> numArcBytes;
   std::optional<int64_t> allocArcBytes;
@@ -56,18 +68,19 @@ public:
   std::optional<QString> instanceSignature;
 
   Function(
-    QString const &site, QString const &program, QString const &function,
+    std::string const &site, std::string const &program, std::string const &function,
     std::string const &srcPath);
 
   std::shared_ptr<TailModel> getTail() const { return tailModel; };
   std::shared_ptr<TailModel> getOrCreateTail();
 
   // Returns nullptr if the info is not available yet
-  std::shared_ptr<CompiledFunctionInfo const> compiledInfo() const;
+  std::shared_ptr<dessser::gen::source_info::compiled_func const> compiledInfo() const;
   // Returns nullptr is the type is still unknown:
-  std::shared_ptr<RamenType const> outType() const;
+  std::shared_ptr<dessser::gen::raql_type::t const> outType() const;
   // Returns nullptr if the info is not available yet
   std::shared_ptr<EventTime const> getTime() const;
+  std::shared_ptr<dessser::gen::event_time::t const> get_event_time() const;
   // Returns the pastData if possible:
   std::shared_ptr<PastData> getPast();
 
@@ -77,9 +90,9 @@ public:
    * (useful to draw line plots) */
   void iterValues(
     double since, double until, bool onePast, std::vector<int> const &columns,
-    /* TODO: document the lifespan on those pointers to RamenValue. Is
+    /* TODO: document the lifespan on those pointers to raql_value. Is
      * it safe to store? If not, shouldn't they be shared_ptr? */
-    std::function<void (double, std::vector<RamenValue const *> const)>);
+    std::function<void (double, std::vector<dessser::gen::raql_value::t const *> const)>);
 
   void resetInstanceData();
   void checkTail();

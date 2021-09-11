@@ -2,14 +2,23 @@
 #include <list>
 #include <QDebug>
 #include <QRegularExpression>
-#include "GraphModel.h"
-#include "confValue.h"
-#include "conf.h"
+
+#include "ConfChange.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/runtime_stats.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/time_range.h"
+#include "desssergen/worker.h"
 #include "FunctionItem.h"
+#include "KVStore.h"
+#include "misc.h"
+#include "misc_dessser.h"
 #include "ProgramItem.h"
 #include "SiteItem.h"
 
-static bool const verbose(false);
+#include "GraphModel.h"
+
+static bool const verbose { false };
 
 GraphModel *GraphModel::globalGraphModel;
 
@@ -17,7 +26,7 @@ GraphModel::GraphModel(GraphViewSettings const *settings_, QObject *parent) :
   QAbstractItemModel(parent),
   settings(settings_)
 {
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &GraphModel::onChange);
 }
 
@@ -251,47 +260,112 @@ void GraphModel::reorder()
   }
 }
 
+/* FIXME: ParsedKey is now obsolete, we could use the key directly! */
 class ParsedKey {
 public:
   bool valid;
   QString site, program, function, property, instanceSignature;
-  ParsedKey(std::string const &k)
+
+  ParsedKey(dessser::gen::sync_key::t const &k)
   {
-    static QRegularExpression re(
-      "^sites/(?<site>[^/]+)/"
-      "("
-        "workers/(?<program>.+)/"
-        "(?<function>[^/]+)/"
-        "(?<function_property>"
-          "worker|"
-          "stats/runtime|"
-          "archives/(times|num_files|current_size|alloc_size)|"
-          "instances/(?<signature>[^/]+)/(?<instance_property>[^/]+)"
-        ")"
-      "|"
-        "(?<site_property>is_master)"
-      ")$"
-      ,
-      QRegularExpression::DontCaptureOption
-    );
-    assert(re.isValid());
-    QString subject = QString::fromStdString(k);
-    QRegularExpressionMatch match = re.match(subject);
-    valid = match.hasMatch();
-    if (valid) {
-      site = match.captured("site");
-      program = match.captured("program");
-      function = match.captured("function");
-      // Try the deepest first:
-      instanceSignature = match.captured("signature");
-      if (instanceSignature.isNull()) {
-        property = match.captured("function_property");
-      } else {
-        property = match.captured("instance_property");
-      }
-      if (property.isNull()) {
-        property = match.captured("site_property");
-      }
+    valid = false;
+
+    switch (k.index()) {
+      case dessser::gen::sync_key::PerSite:
+        {
+          auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(k) };
+          site = QString::fromStdString(std::get<0>(per_site));
+          auto const &per_site_prop { std::get<1>(per_site) };
+          switch (per_site_prop.index()) {
+            case dessser::gen::sync_key::PerWorker:
+              {
+                auto const &per_worker {
+                  std::get<dessser::gen::sync_key::PerWorker>(per_site_prop) };
+                std::string const &fq_name { std::get<0>(per_worker) };
+                size_t const l { fq_name.rfind('/') };
+                if (l == std::string::npos || l == 0 || l >= fq_name.size() - 1) return;
+                program = QString::fromStdString(fq_name.substr(0, l));
+                function = QString::fromStdString(fq_name.substr(l + 1));
+                auto const &per_worker_prop { std::get<1>(per_worker) };
+                switch (per_worker_prop.index()) {
+                  case dessser::gen::sync_key::Worker:
+                    property = QString("worker");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::RuntimeStats:
+                    property = QString("stats/runtime");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::ArchivedTimes:
+                    property = QString("archives/times");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::NumArcFiles:
+                    property = QString("archives/num_files");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::NumArcBytes:
+                    property = QString("archives/current_size");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::AllocedArcBytes:
+                    property = QString("archives/alloc_size");
+                    valid = true;
+                    break;
+                  case dessser::gen::sync_key::PerInstance:
+                    {
+                      auto const &per_inst {
+                        std::get<dessser::gen::sync_key::PerInstance>(per_worker_prop) };
+                      instanceSignature = QString::fromStdString(std::get<0>(per_inst));
+                      auto const &per_inst_prop { std::get<1>(per_inst) };
+                      valid = true;
+                      switch (per_inst_prop.index()) {
+                        case dessser::gen::sync_key::StateFile:
+                          property = QString("state_file");
+                          break;
+                        case dessser::gen::sync_key::InputRingFile:
+                          property = QString("input_ringbuf");
+                          break;
+                        case dessser::gen::sync_key::Pid:
+                          property = QString("pid");
+                          break;
+                        case dessser::gen::sync_key::LastKilled:
+                          property = QString("last_killed");
+                          break;
+                        case dessser::gen::sync_key::LastExit:
+                          property = QString("last_exit");
+                          break;
+                        case dessser::gen::sync_key::LastExitStatus:
+                          property = QString("last_exit_status");
+                          break;
+                        case dessser::gen::sync_key::SuccessiveFailures:
+                          property = QString("successive_failures");
+                          break;
+                        case dessser::gen::sync_key::QuarantineUntil:
+                          property = QString("quarantine_until");
+                          break;
+                        default:
+                          valid = false;
+                          break;
+                      }
+                    }
+                    break;
+                  default:
+                    break;
+                }
+              }
+              break;
+            case dessser::gen::sync_key::IsMaster:
+              property = QString("is_master");
+              valid = true;
+              break;
+            default:
+              break;
+          }
+          break;
+        }
+      default:
+        break;
     }
   }
 };
@@ -385,7 +459,7 @@ void GraphModel::retryAddParents()
 void GraphModel::setFunctionProperty(
   SiteItem const *siteItem, ProgramItem const *programItem,
   FunctionItem *functionItem, ParsedKey const &pk,
-  std::shared_ptr<conf::Value const> v)
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (verbose)
     qDebug() << "setFunctionProperty for" << pk.property;
@@ -408,7 +482,8 @@ void GraphModel::setFunctionProperty(
      * confserver sends the key in chronological order, then if we add an
      * instance before a worker it can safely be ignored. */
     if (! function->worker ||
-        pk.instanceSignature != function->worker->workerSign) {
+        pk.instanceSignature !=
+          QString::fromStdString(function->worker->worker_signature)) {
       if (verbose)
         qDebug() << "Ignoring new instance for "
                  << pk.instanceSignature << "because "
@@ -430,98 +505,100 @@ void GraphModel::setFunctionProperty(
   }
 
   QString prevWorkerSign {
-    function->worker ? function->worker->workerSign : QString() };
+    function->worker ?
+      QString::fromStdString(function->worker->worker_signature) : QString() };
 
   if (pk.property == "worker") {
-    std::shared_ptr<conf::Worker const> cf =
-      std::dynamic_pointer_cast<conf::Worker const>(v);
-    if (cf) {
+    if (v->index() == dessser::gen::sync_value::Worker) [[likely]] {
+      function->worker =
+        std::shared_ptr<dessser::gen::worker::t const>(
+          v, std::get<dessser::gen::sync_value::Worker>(*v));
+
       std::shared_ptr<Site> site =
         std::static_pointer_cast<Site>(siteItem->shared);
       std::shared_ptr<Program> program =
         std::static_pointer_cast<Program>(programItem->shared);
 
-      function->worker = cf;
       changed |= WORKER_CHANGED;
 
       if (verbose)
-        qDebug() << "Setting worker to "
-                 << function->worker->workerSign;
+        qDebug() << "Setting worker to " << function->worker->worker_signature;
 
-      for (auto const &ref : cf->parent_refs) {
-        /* If the parent is not local then assume the existence of a top-half
-         * for this function running on the remote site: */
-        QString psite, pprog, pfunc;
-        if (ref->site == site->name) {
-          psite = ref->site;
-          pprog = ref->program;
-          pfunc = ref->function;
-        } else {
-          psite = ref->site;
-          pprog = program->name;
-          pfunc = function->name;
-        }
-        /* Try to locate the GraphItem of this parent. If it's not
-         * there yet, enqueue this worker somewhere and revisit this
-         * once a new function appears. */
-        FunctionItem *parent = find(psite, pprog, pfunc);
-        if (parent) {
-          if (verbose) qDebug() << "Set immediate parent";
-          addFunctionParent(parent, functionItem);
-        } else {
-          if (verbose) qDebug() << "Set delayed parent";
-          delayAddFunctionParent(functionItem, psite, pprog, pfunc);
+      if (function->worker->parents) [[likely]] {
+        for (auto const &p : *function->worker->parents) {
+          /* If the parent is not local then assume the existence of a top-half
+           * for this function running on the remote site: */
+          QString psite, pprog, pfunc;
+          if (QString::fromStdString(p->site) == site->name) {
+            psite = QString::fromStdString(p->site);
+            pprog = QString::fromStdString(p->program);
+            pfunc = QString::fromStdString(p->func);
+          } else {
+            psite = QString::fromStdString(p->site);
+            pprog = program->name;
+            pfunc = function->name;
+          }
+          /* Try to locate the GraphItem of this parent. If it's not
+           * there yet, enqueue this worker somewhere and revisit this
+           * once a new function appears. */
+          FunctionItem *parent = find(psite, pprog, pfunc);
+          if (parent) {
+            if (verbose) qDebug() << "Set immediate parent";
+            addFunctionParent(parent, functionItem);
+          } else {
+            if (verbose) qDebug() << "Set delayed parent";
+            delayAddFunctionParent(functionItem, psite, pprog, pfunc);
+          }
         }
       }
       changed |= STORAGE_CHANGED;
     }
   } else if (pk.property == "stats/runtime") {
-    std::shared_ptr<conf::RuntimeStats const> stats =
-      std::dynamic_pointer_cast<conf::RuntimeStats const>(v);
-    if (stats) {
-      function->runtimeStats = stats;
+    if (v->index() == dessser::gen::sync_value::RuntimeStats) {
+      function->runtimeStats =
+        std::shared_ptr<dessser::gen::runtime_stats::t const>(
+          v, std::get<dessser::gen::sync_value::RuntimeStats>(*v));
       changed |= PROPERTY_CHANGED;
     }
   } else if (pk.property == "archives/times") {
-    std::shared_ptr<conf::TimeRange const> times =
-      std::dynamic_pointer_cast<conf::TimeRange const>(v);
-    if (times) {
-      function->archivedTimes = times;
+    if (v->index() == dessser::gen::sync_value::TimeRange) {
+      function->archivedTimes =
+        std::shared_ptr<dessser::gen::time_range::t const>(
+          v, &std::get<dessser::gen::sync_value::TimeRange>(*v));
       changed |= STORAGE_CHANGED;
     }
   } else if (pk.property == "archives/num_files") {
-#   define SET_RAMENVALUE(type, var, whatChanged) do { \
-      std::shared_ptr<conf::RamenValueValue const> cf = \
-        std::dynamic_pointer_cast<conf::RamenValueValue const>(v); \
-      if (cf) { \
-        std::shared_ptr<type const> v = \
-          std::dynamic_pointer_cast<type const>(cf->v); \
-        if (v) { \
-          function->var = v->v; \
-          changed |= whatChanged; \
+    // All the following keys values are RamenValues
+#   define SET_RAMENVALUE(type, var, conv, whatChanged) do { \
+      if (v->index() == dessser::gen::sync_value::RamenValue) { \
+        std::shared_ptr<dessser::gen::raql_value::t const> rv { \
+          v, std::get<dessser::gen::sync_value::RamenValue>(*v) }; \
+        if (rv->index() == dessser::gen::raql_value::type) { \
+          function->var = \
+              conv(std::get<dessser::gen::raql_value::type>(*rv)); \
         } \
       } \
     } while (0)
 
-    SET_RAMENVALUE(VI64, numArcFiles, STORAGE_CHANGED);
+    SET_RAMENVALUE(VI64, numArcFiles, , STORAGE_CHANGED);
   } else if (pk.property == "archives/current_size") {
-    SET_RAMENVALUE(VI64, numArcBytes, STORAGE_CHANGED);
+    SET_RAMENVALUE(VI64, numArcBytes, , STORAGE_CHANGED);
   } else if (pk.property == "archives/alloc_size") {
-    SET_RAMENVALUE(VI64, allocArcBytes, STORAGE_CHANGED);
+    SET_RAMENVALUE(VI64, allocArcBytes, , STORAGE_CHANGED);
   } else if (pk.property == "pid") {
     /* Worker did not really change, but everything that requires the process list
      * to be invalidated must emit that signal: */
-    SET_RAMENVALUE(VU32, pid, PROPERTY_CHANGED | WORKER_CHANGED);
+    SET_RAMENVALUE(VU32, pid, , PROPERTY_CHANGED | WORKER_CHANGED);
   } else if (pk.property == "last_killed") {
-    SET_RAMENVALUE(VFloat, lastKilled, PROPERTY_CHANGED | WORKER_CHANGED);
+    SET_RAMENVALUE(VFloat, lastKilled, , PROPERTY_CHANGED | WORKER_CHANGED);
   } else if (pk.property == "last_exit") {
-    SET_RAMENVALUE(VFloat, lastExit, PROPERTY_CHANGED | WORKER_CHANGED);
+    SET_RAMENVALUE(VFloat, lastExit, , PROPERTY_CHANGED | WORKER_CHANGED);
   } else if (pk.property == "last_exit_status") {
-    SET_RAMENVALUE(VString, lastExitStatus, PROPERTY_CHANGED | WORKER_CHANGED);
+    SET_RAMENVALUE(VString, lastExitStatus, QString::fromStdString, PROPERTY_CHANGED | WORKER_CHANGED);
   } else if (pk.property == "successive_failures") {
-    SET_RAMENVALUE(VI64, successiveFailures, PROPERTY_CHANGED);
+    SET_RAMENVALUE(VI64, successiveFailures, , PROPERTY_CHANGED);
   } else if (pk.property == "quarantine_until") {
-    SET_RAMENVALUE(VFloat, quarantineUntil, PROPERTY_CHANGED);
+    SET_RAMENVALUE(VFloat, quarantineUntil, , PROPERTY_CHANGED);
   } else {
     if (verbose)
       qDebug() << "Useless property" << pk.property;
@@ -541,7 +618,8 @@ void GraphModel::setFunctionProperty(
     function->checkTail();
     emit workerChanged(
       prevWorkerSign,
-      function->worker ? function->worker->workerSign : QString());
+      function->worker ?
+        QString::fromStdString(function->worker->worker_signature) : QString());
   }
 }
 
@@ -565,8 +643,8 @@ void GraphModel::delFunctionProperty(
       changed |= STORAGE_CHANGED;
       if (verbose)
         qDebug() << "Resetting worker "
-                 << function->worker->workerSign;
-      prevWorkerSign = function->worker->workerSign;
+                 << function->worker->worker_signature;
+      prevWorkerSign = QString::fromStdString(function->worker->worker_signature);
       function->worker.reset();
       changed |= WORKER_CHANGED;
     }
@@ -629,7 +707,8 @@ void GraphModel::delFunctionProperty(
   }
 }
 
-void GraphModel::setProgramProperty(ProgramItem *, ParsedKey const &, std::shared_ptr<conf::Value const>)
+void GraphModel::setProgramProperty(
+  ProgramItem *, ParsedKey const &, std::shared_ptr<dessser::gen::sync_value::t const>)
 {
 }
 
@@ -638,20 +717,19 @@ void GraphModel::delProgramProperty(ProgramItem *, ParsedKey const &)
 }
 
 void GraphModel::setSiteProperty(
-  SiteItem *siteItem, ParsedKey const &pk, std::shared_ptr<conf::Value const> v)
+  SiteItem *siteItem, ParsedKey const &pk,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (pk.property == "is_master") {
-    std::shared_ptr<Site> site =
-      std::static_pointer_cast<Site>(siteItem->shared);
+    if (v->index() == dessser::gen::sync_value::RamenValue) {
+      std::shared_ptr<dessser::gen::raql_value::t const> rv {
+        v, std::get<dessser::gen::sync_value::RamenValue>(*v) };
 
-    std::shared_ptr<conf::RamenValueValue const> rv =
-      std::dynamic_pointer_cast<conf::RamenValueValue const>(v);
+      if (rv->index() == dessser::gen::raql_value::VBool) {
+        std::shared_ptr<Site> site =
+          std::static_pointer_cast<Site>(siteItem->shared);
 
-    if (rv) {
-      std::shared_ptr<VBool const> v =
-        std::dynamic_pointer_cast<VBool const>(rv->v);
-      if (v) {
-        site->isMaster = v->v;
+        site->isMaster = std::get<dessser::gen::raql_value::VBool>(*rv);
         /* Signal that the name has changed, although it's still TODO */
         QModelIndex index(siteItem->index(this, 0));
         emit dataChanged(index, index, { Qt::DisplayRole });
@@ -673,13 +751,13 @@ void GraphModel::delSiteProperty(SiteItem *siteItem, ParsedKey const &pk)
   emit dataChanged(index, index, { Qt::DisplayRole });
 }
 
-void GraphModel::updateKey(std::string const &key, KValue const &kv)
+void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
-  ParsedKey pk(key);
+  ParsedKey pk { key };
   if (! pk.valid) return;
 
   if (verbose)
-    qDebug() << "GraphModel key" << QString::fromStdString(key) << "set to value "
+    qDebug() << "GraphModel key" << key << "set to value "
              << *kv.val << "is valid:" << pk.valid;
 
   assert(pk.site.length() > 0);
@@ -739,14 +817,15 @@ void GraphModel::updateKey(std::string const &key, KValue const &kv)
         if (verbose)
           qDebug() << "Creating a new Function" << pk.function;
 
-        QString const fqName(programItem->fqName() + "/" + pk.function);
-        std::string srcPath(srcPathFromProgramName(
-          programItem->shared->name.toStdString()));
+        std::string srcPath { srcPathFromProgramName(
+          programItem->shared->name.toStdString()) };
         functionItem =
           new FunctionItem(
             programItem,
             std::make_unique<Function>(
-              siteItem->shared->name, programItem->shared->name, pk.function, srcPath),
+              siteItem->shared->name.toStdString(),
+              programItem->shared->name.toStdString(),
+              pk.function.toStdString(), srcPath),
             settings);
         int idx = programItem->functions.size();
         QModelIndex parent =
@@ -769,13 +848,13 @@ void GraphModel::updateKey(std::string const &key, KValue const &kv)
   }
 }
 
-void GraphModel::deleteKey(std::string const &key, KValue const &)
+void GraphModel::deleteKey(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  ParsedKey pk(key);
+  ParsedKey pk { key };
   if (! pk.valid) return;
 
   if (verbose)
-    qDebug() << "GraphModel key" << QString::fromStdString(key) << "deleted, is valid:"
+    qDebug() << "GraphModel key" << key << "deleted, is valid:"
              << pk.valid;
 
   assert(pk.site.length() > 0);

@@ -61,6 +61,10 @@ void LoginWin::startApp(
     }
   }
 
+  // Set the global my_uid
+  my_uid = username;
+  if (id && id->isValid) my_uid = id->username;
+
   /* Create the windows that will connect to the kvs->map keys *before*
    * the connection is attempted: */
   Menu::initDialogs(server);

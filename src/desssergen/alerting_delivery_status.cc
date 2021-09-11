@@ -39,16 +39,49 @@ struct t : public std::variant<
   Void // StopSent
 > { using variant::variant; };
 
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // StartToBeSent
+    case 1: return std::get<1>(a) == std::get<1>(b); // StartToBeSentThenStopped
+    case 2: return std::get<2>(a) == std::get<2>(b); // StartSent
+    case 3: return std::get<3>(a) == std::get<3>(b); // StartAcked
+    case 4: return std::get<4>(a) == std::get<4>(b); // StopToBeSent
+    case 5: return std::get<5>(a) == std::get<5>(b); // StopSent
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct tec8dd05d08a833eba987e623943a6c52 : public std::tuple<
   ::dessser::gen::alerting_delivery_status::t*,
   Pointer
-> t70d102344d070f394857c83a5a1198d3;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  tec8dd05d08a833eba987e623943a6c52(std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+  return !operator==(a, b);
+}
+struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
-> t22a32080ad88ab548b80077a17b7dd46;
-
+> {
+  using tuple::tuple;
+  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+    : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -218,67 +251,67 @@ std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize_of_row
                         (make-tup (construct "[StartToBeSent Void | StartToBeSentThenStopped Void | StartSent Void | StartAcked Void | StopToBeSent Void | StopSent Void]" 5 (nop)) (identifier "dsum1_snd_64"))))))))))
         (make-tup (identifier "make_fst_84") (identifier "make_snd_85"))))
  */
-static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> fun59 { [&fun59](Pointer p_0) {
-    ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 id_60 { p_0.readU16Le() };
-    ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 letpair_res_61;
+  std::function<::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52(Pointer)> fun59 { [&fun59](Pointer p_0) {
+    ::dessser::gen::alerting_delivery_status::t7609d344c1ba69d0f80fec236d4c216b id_60 { p_0.readU16Le() };
+    ::dessser::gen::alerting_delivery_status::t7609d344c1ba69d0f80fec236d4c216b letpair_res_61;
     {
       auto du16_fst_57 { std::get<0>(id_60) };
       auto du16_snd_58 { std::get<1>(id_60) };
-      ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 id_62 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::alerting_delivery_status::t7609d344c1ba69d0f80fec236d4c216b id_62 { du16_fst_57, du16_snd_58 };
       letpair_res_61 = id_62;
     }
-    ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 let_res_63;
+    ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 let_res_63;
     {
-      ::dessser::gen::alerting_delivery_status::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_61 };
-      ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 letpair_res_64;
+      ::dessser::gen::alerting_delivery_status::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_61 };
+      ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 letpair_res_64;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_65 { 0 };
         bool id_66 { bool(id_65 == dsum1_fst_63) };
-        ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_67;
+        ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 choose_res_67;
         if (id_66) {
           (void)VOID;
           ::dessser::gen::alerting_delivery_status::t* id_68 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_69 { id_68, dsum1_snd_64 };
+          ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_69 { id_68, dsum1_snd_64 };
           choose_res_67 = id_69;
         } else {
           uint16_t id_70 { 1 };
           bool id_71 { bool(id_70 == dsum1_fst_63) };
-          ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_72;
+          ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 choose_res_72;
           if (id_71) {
             (void)VOID;
             ::dessser::gen::alerting_delivery_status::t* id_73 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<1>, VOID) };
-            ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_74 { id_73, dsum1_snd_64 };
+            ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_74 { id_73, dsum1_snd_64 };
             choose_res_72 = id_74;
           } else {
             uint16_t id_75 { 2 };
             bool id_76 { bool(id_75 == dsum1_fst_63) };
-            ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_77;
+            ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 choose_res_77;
             if (id_76) {
               (void)VOID;
               ::dessser::gen::alerting_delivery_status::t* id_78 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<2>, VOID) };
-              ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_79 { id_78, dsum1_snd_64 };
+              ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_79 { id_78, dsum1_snd_64 };
               choose_res_77 = id_79;
             } else {
               uint16_t id_80 { 3 };
               bool id_81 { bool(id_80 == dsum1_fst_63) };
-              ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_82;
+              ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 choose_res_82;
               if (id_81) {
                 (void)VOID;
                 ::dessser::gen::alerting_delivery_status::t* id_83 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<3>, VOID) };
-                ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_84 { id_83, dsum1_snd_64 };
+                ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_84 { id_83, dsum1_snd_64 };
                 choose_res_82 = id_84;
               } else {
                 uint16_t id_85 { 4 };
                 bool id_86 { bool(id_85 == dsum1_fst_63) };
-                ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 choose_res_87;
+                ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 choose_res_87;
                 if (id_86) {
                   (void)VOID;
                   ::dessser::gen::alerting_delivery_status::t* id_88 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<4>, VOID) };
-                  ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_89 { id_88, dsum1_snd_64 };
+                  ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_89 { id_88, dsum1_snd_64 };
                   choose_res_87 = id_89;
                 } else {
                   uint16_t id_90 { 5 };
@@ -287,7 +320,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f39
                   (void)id_92;
                   (void)VOID;
                   ::dessser::gen::alerting_delivery_status::t* id_93 { new ::dessser::gen::alerting_delivery_status::t(std::in_place_index<5>, VOID) };
-                  ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_94 { id_93, dsum1_snd_64 };
+                  ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_94 { id_93, dsum1_snd_64 };
                   choose_res_87 = id_94;
                 }
                 choose_res_82 = choose_res_87;
@@ -302,11 +335,11 @@ static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f39
       }
       let_res_63 = letpair_res_64;
     }
-    ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 letpair_res_95;
+    ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 letpair_res_95;
     {
       auto make_fst_84 { std::get<0>(let_res_63) };
       auto make_snd_85 { std::get<1>(let_res_63) };
-      ::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3 id_96 { make_fst_84, make_snd_85 };
+      ::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52 id_96 { make_fst_84, make_snd_85 };
       letpair_res_95 = id_96;
     }
     return letpair_res_95;
@@ -314,7 +347,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f39
    };
   return fun59;
 }
-std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

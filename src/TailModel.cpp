@@ -4,49 +4,66 @@
 #include <memory>
 #include <QDebug>
 #include <QtGlobal>
-#include "conf.h"
-#include "confValue.h"
+
+#include "ConfChange.h"
+#include "ConfClient.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/sync_value.h"
 #include "EventTime.h"
-#include "RamenType.h"
+#include "KVStore.h"
+#include "Menu.h"
+#include "misc_dessser.h"
+
 #include "TailModel.h"
 
 TailModel::TailModel(
-  QString const &fqName_, QString const &workerSign_,
-  std::shared_ptr<RamenType const> type_,
+  std::string const &siteName_, std::string const &fqName_, std::string const &workerSign_,
+  std::shared_ptr<dessser::gen::raql_type::t const> type_,
   std::shared_ptr<EventTime const> eventTime_,
   QObject *parent)
   : QAbstractTableModel(parent),
     eventTime(eventTime_),
+    siteName(siteName_),
     fqName(fqName_),
     workerSign(workerSign_),
-    keyPrefix("tails/" + fqName.toStdString() + "/" +
-              workerSign.toStdString() + "/lasts/"),
     type(type_)
 {
   tuples.reserve(500);
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &TailModel::onChange);
 
   // Subscribe
-  std::string k(subscriberKey());
-  // TODO: have a VoidType
-  std::shared_ptr<conf::Value> v(new conf::RamenValueValue(new VBool(true)));
-  askSet(k, v);
+  dessser::gen::sync_key::t const k { subscriberKey() };
+  static dessser::gen::raql_value::t const dummy {
+    std::in_place_index<dessser::gen::raql_value::VNull>,
+    VOID };
+  static dessser::gen::sync_value::t v {
+    std::in_place_index<dessser::gen::sync_value::RamenValue>,
+    const_cast<dessser::gen::raql_value::t *>(&dummy) };
+  Menu::getClient()->sendSet(&k, &v);
 }
 
 TailModel::~TailModel()
 {
   // Unsubscribe
-  std::string k(subscriberKey());
-  askDel(k);
+  dessser::gen::sync_key::t const k { subscriberKey() };
+  Menu::getClient()->sendDel(&k);
 }
 
-std::string TailModel::subscriberKey() const
+dessser::gen::sync_key::t TailModel::subscriberKey() const
 {
-  return std::string(
-    "tails/" + fqName.toStdString() + "/" +
-    workerSign.toStdString() + "/users/" + my_uid->toStdString());
+  dessser::gen::sync_key::per_tail sub {
+    std::in_place_index<dessser::gen::sync_key::Subscriber>,
+    my_uid->toStdString() };
+
+  return dessser::gen::sync_key::t(
+    std::in_place_index<dessser::gen::sync_key::Tails>,
+    siteName,
+    fqName,
+    workerSign,
+    &sub);
 }
 
 void TailModel::onChange(QList<ConfChange> const &changes)
@@ -63,17 +80,25 @@ void TailModel::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void TailModel::addTuple(std::string const &key, KValue const &kv)
+void TailModel::addTuple(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
-  if (! startsWith(key, keyPrefix)) return;
+  if (key.index() != dessser::gen::sync_key::Tails) return;
+  auto const &tails { std::get<dessser::gen::sync_key::Tails>(key) };
+  if (std::get<0>(tails) != siteName ||
+      std::get<1>(tails) != fqName ||
+      std::get<2>(tails) != workerSign) return;
+  dessser::gen::sync_key::per_tail const *per_tail { std::get<3>(tails) };
+  if (per_tail->index() != dessser::gen::sync_key::LastTuple) return;
 
-  std::shared_ptr<conf::Tuples const> batch =
-    std::dynamic_pointer_cast<conf::Tuples const>(kv.val);
-
-  if (! batch) {
+  if (kv.val->index() != dessser::gen::sync_value::Tuples) {
     qCritical() << "Received tuples that are not tuples:" << *kv.val;
     return;
   }
+
+  // TODO: deserialize those tuples that are still encoded as RawBinary!
+# if 0
+  std::shared_ptr<dessser::gen::sync_value::conf::Tuples const> batch =
+    std::dynamic_pointer_cast<conf::Tuples const>(kv.val);
 
   size_t const numTuples(batch->tuples.size());
   if (0 == numTuples) return;
@@ -81,7 +106,7 @@ void TailModel::addTuple(std::string const &key, KValue const &kv)
   beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + numTuples - 1);
 
   for (conf::Tuples::Tuple const &tuple : batch->tuples) {
-    std::shared_ptr<RamenValue const> val(tuple.unserialize(type));
+    std::shared_ptr<dessser::gen::raql_value::t const> val(tuple.unserialize(type));
     if (! val) {
       qCritical() << "Cannot unserialize tuple from batch";
       continue;
@@ -100,6 +125,7 @@ void TailModel::addTuple(std::string const &key, KValue const &kv)
     tuples.emplace_back(start, val);
   }
   endInsertRows();
+# endif
 }
 
 int TailModel::rowCount(QModelIndex const &parent) const
@@ -111,7 +137,7 @@ int TailModel::rowCount(QModelIndex const &parent) const
 int TailModel::columnCount(QModelIndex const &parent) const
 {
   if (parent.isValid()) return 0;
-  return type->vtyp->numColumns();
+  return numColumns(*type);
 }
 
 QVariant TailModel::data(QModelIndex const &index, int role) const
@@ -127,8 +153,10 @@ QVariant TailModel::data(QModelIndex const &index, int role) const
 
   switch (role) {
     case Qt::DisplayRole:
-      return
-        QVariant(tuples[row].second->columnValue(column)->toQString(std::string()));
+      {
+        dessser::gen::raql_value::t const *v { columnValue(*tuples[row].second, column) };
+        return v ? QVariant(toQString(*v)) : QVariant();
+      }
     case Qt::ToolTipRole:
       // TODO
       return QVariant(QString("Column #") + QString::number(column));
@@ -145,7 +173,7 @@ QVariant TailModel::headerData(int section, Qt::Orientation orient, int role) co
   switch (orient) {
     case Qt::Horizontal:
       if (section < 0 || section >= columnCount()) return QVariant();
-      return type->vtyp->columnName(section);
+      return columnName(*type, section);
     case Qt::Vertical:
       if (section < 0 || section >= rowCount()) return QVariant();
       return QVariant(QString::number(section));
@@ -155,5 +183,6 @@ QVariant TailModel::headerData(int section, Qt::Orientation orient, int role) co
 
 bool TailModel::isNumeric(int column) const
 {
-  return type->vtyp->columnType(column)->vtyp->isNumeric();
+  dessser::gen::raql_type::t const *t { columnType(*type, column) };
+  return t ? ::isNumeric(*t) : false;
 }

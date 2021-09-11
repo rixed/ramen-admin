@@ -1,9 +1,10 @@
 #include <QMarginsF>
+
 #include "FunctionItem.h"
-#include "ProgramItem.h"
-#include "Resources.h"
 #include "GraphModel.h"
 #include "GraphView.h"
+#include "Resources.h"
+#include "ProgramItem.h"
 
 ProgramItem::ProgramItem(
   GraphItem *treeParent, std::unique_ptr<Program> program,

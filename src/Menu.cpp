@@ -627,3 +627,8 @@ void Menu::openDashboard(QString const &name, std::string const &key_prefix)
   lock.unlock();
 }
 # endif
+
+ConfClient *Menu::getClient()
+{
+  return loginWin->client;
+}

@@ -38,21 +38,55 @@ struct t {
   t(dessser::gen::field_type::t_ext ptyp_, dessser::gen::raql_value::t_ext value_) : ptyp(ptyp_), value(value_) {}
   t() = default;
 };
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  return ::dessser::gen::field_type::Deref(a.ptyp) == ::dessser::gen::field_type::Deref(b.ptyp) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
+}
+
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct td2a63c4a6d459d282fa7d9d9ae75b4d2 : public std::tuple<
   ::dessser::gen::program_parameter::t*,
   Pointer
-> t571f6c411143ec709060fca7e7f9ac08;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  td2a63c4a6d459d282fa7d9d9ae75b4d2(std::tuple<::dessser::gen::program_parameter::t*, Pointer> p)
+    : std::tuple<::dessser::gen::program_parameter::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(td2a63c4a6d459d282fa7d9d9ae75b4d2 const &a, td2a63c4a6d459d282fa7d9d9ae75b4d2 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(td2a63c4a6d459d282fa7d9d9ae75b4d2 const &a, td2a63c4a6d459d282fa7d9d9ae75b4d2 const &b) {
+  return !operator==(a, b);
+}
+struct t6d425349bbb8a0175d827ed2ef05e5db : public std::tuple<
   dessser::gen::field_type::t_ext,
   Pointer
-> t2f09fa79b0bdf1902e3b53bc7e485604;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t6d425349bbb8a0175d827ed2ef05e5db(std::tuple<dessser::gen::field_type::t_ext, Pointer> p)
+    : std::tuple<dessser::gen::field_type::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t6d425349bbb8a0175d827ed2ef05e5db const &a, t6d425349bbb8a0175d827ed2ef05e5db const &b) {
+  return ::dessser::gen::field_type::Deref(std::get<0>(a)) == ::dessser::gen::field_type::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t6d425349bbb8a0175d827ed2ef05e5db const &a, t6d425349bbb8a0175d827ed2ef05e5db const &b) {
+  return !operator==(a, b);
+}
+struct td46b7b5194a84c2e11400d9ca5d84700 : public std::tuple<
   dessser::gen::raql_value::t_ext,
   Pointer
-> t9cfa78b25ddcb5afc14daf6a802a6f88;
-
+> {
+  using tuple::tuple;
+  td46b7b5194a84c2e11400d9ca5d84700(std::tuple<dessser::gen::raql_value::t_ext, Pointer> p)
+    : std::tuple<dessser::gen::raql_value::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(td46b7b5194a84c2e11400d9ca5d84700 const &a, td46b7b5194a84c2e11400d9ca5d84700 const &b) {
+  return ::dessser::gen::raql_value::Deref(std::get<0>(a)) == ::dessser::gen::raql_value::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(td46b7b5194a84c2e11400d9ca5d84700 const &a, td46b7b5194a84c2e11400d9ca5d84700 const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -114,26 +148,26 @@ std::function<Size(::dessser::gen::program_parameter::t*)> sersize_of_row_binary
           (let-pair "drec_fst_60" "drec_snd_61" (apply (ext-identifier raql_value of-row-binary) (identifier "drec_snd_58"))
             (make-tup (make-rec (string "value") (identifier "drec_fst_60") (string "ptyp") (identifier "drec_fst_57")) (identifier "drec_snd_61"))))))
  */
-static std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> fun17 { [&fun17](Pointer p_0) {
+  std::function<::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2(Pointer)> fun17 { [&fun17](Pointer p_0) {
     auto fun18 { dessser::gen::field_type::of_row_binary };
-    ::dessser::gen::program_parameter::t2f09fa79b0bdf1902e3b53bc7e485604 id_19 { fun18(p_0) };
-    ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 let_res_20;
+    ::dessser::gen::program_parameter::t6d425349bbb8a0175d827ed2ef05e5db id_19 { fun18(p_0) };
+    ::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2 let_res_20;
     {
-      ::dessser::gen::program_parameter::t2f09fa79b0bdf1902e3b53bc7e485604 drec_56 { id_19 };
-      ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 letpair_res_21;
+      ::dessser::gen::program_parameter::t6d425349bbb8a0175d827ed2ef05e5db drec_56 { id_19 };
+      ::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2 letpair_res_21;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
         auto fun22 { dessser::gen::raql_value::of_row_binary };
-        ::dessser::gen::program_parameter::t9cfa78b25ddcb5afc14daf6a802a6f88 id_23 { fun22(drec_snd_58) };
-        ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 letpair_res_24;
+        ::dessser::gen::program_parameter::td46b7b5194a84c2e11400d9ca5d84700 id_23 { fun22(drec_snd_58) };
+        ::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2 letpair_res_24;
         {
           auto drec_fst_60 { std::get<0>(id_23) };
           auto drec_snd_61 { std::get<1>(id_23) };
           ::dessser::gen::program_parameter::t* id_25 { new ::dessser::gen::program_parameter::t({ .ptyp = drec_fst_57, .value = drec_fst_60 }) };
-          ::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08 id_26 { id_25, drec_snd_61 };
+          ::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2 id_26 { id_25, drec_snd_61 };
           letpair_res_24 = id_26;
         }
         letpair_res_21 = letpair_res_24;
@@ -145,7 +179,7 @@ static std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca
    };
   return fun17;
 }
-std::function<::dessser::gen::program_parameter::t571f6c411143ec709060fca7e7f9ac08(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::program_parameter::td2a63c4a6d459d282fa7d9d9ae75b4d2(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

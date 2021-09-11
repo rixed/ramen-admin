@@ -1,22 +1,25 @@
 #include <cassert>
 #include <QDebug>
 #include <QString>
+
+#include "desssergen/raql_type.h"
+#include "desssergen/raql_value.h"
+#include "misc_dessser.h"
+
 #include "EventTime.h"
-#include "RamenType.h"
-#include "RamenValue.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-EventTime::EventTime(RamenType const &type) :
+EventTime::EventTime(dessser::gen::raql_type::t const &type) :
   startColumn(-1),
   stopColumn(-1)
 {
-  if (! type.vtyp->isScalar()) {
-    for (int column = 0; column < type.vtyp->numColumns(); column ++) {
-      std::shared_ptr<RamenType const> subType =
-        type.vtyp->columnType(column);
-      if (subType && subType->vtyp->isScalar()) {
-        QString const name = type.vtyp->columnName(column);
+  if (! isScalar(type)) {
+    int const num_cols { numColumns(type) };
+    for (int column = 0; column < num_cols; column ++) {
+      dessser::gen::raql_type::t const *subType { columnType(type, column) };
+      if (subType && isScalar(*subType)) {
+        QString const name { columnName(type, column) };
         if (name == "start") {
           startColumn = column;
           if (verbose)
@@ -38,18 +41,18 @@ bool EventTime::isValid() const
   return startColumn >= 0;
 }
 
-std::optional<double> EventTime::startOfTuple(RamenValue const &tuple) const
+std::optional<double> EventTime::startOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
-  RamenValue const *startVal = tuple.columnValue(startColumn);
+  dessser::gen::raql_value::t const *startVal { columnValue(tuple, startColumn) };
   if (! startVal) return std::nullopt;
-  return startVal->toDouble();
+  return toDouble(*startVal);
 }
 
-std::optional<double> EventTime::stopOfTuple(RamenValue const &tuple) const
+std::optional<double> EventTime::stopOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
-  RamenValue const *stopVal = tuple.columnValue(stopColumn);
+  dessser::gen::raql_value::t const *stopVal { columnValue(tuple, stopColumn) };
   if (! stopVal) return std::nullopt;
-  return stopVal->toDouble();
+  return toDouble(*stopVal);
 }
 
 QDebug operator<<(QDebug debug, EventTime const &v)

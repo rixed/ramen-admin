@@ -16,10 +16,27 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-typedef std::tuple<
+struct t284e07c4f4868d983fec7971424a1df8 : public std::tuple<
   std::string,
   std::string
-> t8961925d22ebc35140986110e41bc2a4;
+> {
+  using tuple::tuple;
+  t284e07c4f4868d983fec7971424a1df8(std::tuple<std::string, std::string> p)
+    : std::tuple<std::string, std::string>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t284e07c4f4868d983fec7971424a1df8 const &a, t284e07c4f4868d983fec7971424a1df8 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t284e07c4f4868d983fec7971424a1df8 const &a, t284e07c4f4868d983fec7971424a1df8 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t284e07c4f4868d983fec7971424a1df8 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t {
   double certainty;
@@ -27,13 +44,13 @@ struct t {
   std::optional<double> event_time;
   bool firing;
   std::string name;
-  Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> parameters;
+  Lst<::dessser::gen::alerting_notification::t284e07c4f4868d983fec7971424a1df8> parameters;
   double sent_time;
   dessser::gen::site_name::t_ext site;
   bool test;
   double timeout;
   dessser::gen::fq_name::t_ext worker;
-  t(double certainty_, double debounce_, std::optional<double> event_time_, bool firing_, std::string name_, Lst<::dessser::gen::alerting_notification::t8961925d22ebc35140986110e41bc2a4> parameters_, double sent_time_, dessser::gen::site_name::t_ext site_, bool test_, double timeout_, dessser::gen::fq_name::t_ext worker_) : certainty(certainty_), debounce(debounce_), event_time(event_time_), firing(firing_), name(name_), parameters(parameters_), sent_time(sent_time_), site(site_), test(test_), timeout(timeout_), worker(worker_) {}
+  t(double certainty_, double debounce_, std::optional<double> event_time_, bool firing_, std::string name_, Lst<::dessser::gen::alerting_notification::t284e07c4f4868d983fec7971424a1df8> parameters_, double sent_time_, dessser::gen::site_name::t_ext site_, bool test_, double timeout_, dessser::gen::fq_name::t_ext worker_) : certainty(certainty_), debounce(debounce_), event_time(event_time_), firing(firing_), name(name_), parameters(parameters_), sent_time(sent_time_), site(site_), test(test_), timeout(timeout_), worker(worker_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -59,17 +76,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-typedef std::tuple<
+struct te8ad757749fae6294b10eb09007d1f7d : public std::tuple<
   ::dessser::gen::alerting_notification::t*,
   Pointer
-> t281c4a1c5bbc4c0959c7fb563f217845;
+> {
+  using tuple::tuple;
+  te8ad757749fae6294b10eb09007d1f7d(std::tuple<::dessser::gen::alerting_notification::t*, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_notification::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(te8ad757749fae6294b10eb09007d1f7d const &a, te8ad757749fae6294b10eb09007d1f7d const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(te8ad757749fae6294b10eb09007d1f7d const &a, te8ad757749fae6294b10eb09007d1f7d const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, te8ad757749fae6294b10eb09007d1f7d const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_notification::t281c4a1c5bbc4c0959c7fb563f217845(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::alerting_notification::te8ad757749fae6294b10eb09007d1f7d(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

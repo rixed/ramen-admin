@@ -2,10 +2,11 @@
 #include <QtGlobal>
 #include <QDebug>
 
-#include "ConfClient.h" // for sync_key printers
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "KVStore.h"
+#include "misc_dessser.h"
+
 #include "KErrorMsg.h"
 
 KErrorMsg::KErrorMsg(QWidget *parent) :

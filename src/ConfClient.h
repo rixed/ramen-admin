@@ -77,26 +77,6 @@ class ConfClient : public QObject
 
   int sendAuth();
 
-  int sendNew(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>,
-        double timeout = 0.);
-
-  int sendSet(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>);
-
-# define DEFAULT_LOCK_TIMEOUT 600.
-  int sendLock(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        double timeout = DEFAULT_LOCK_TIMEOUT);
-
-  int sendUnlock(
-        std::shared_ptr<dessser::gen::sync_key::t const>);
-
-  int sendDel(
-        std::shared_ptr<dessser::gen::sync_key::t const>);
-
   int sendMsg(dessser::gen::sync_client_msg::t const &);
 
   int sendBytes(char const *, size_t);
@@ -158,6 +138,24 @@ public:
              std::shared_ptr<UserIdentity const>,
              std::shared_ptr<KVStore>);
 
+  int sendNew(
+        dessser::gen::sync_key::t const *,
+        dessser::gen::sync_value::t const * = nullptr,
+        double timeout = 0.);
+
+  int sendSet(
+        dessser::gen::sync_key::t const *,
+        dessser::gen::sync_value::t const *);
+
+# define DEFAULT_LOCK_TIMEOUT 600.
+  int sendLock(
+        dessser::gen::sync_key::t const *,
+        double timeout = DEFAULT_LOCK_TIMEOUT);
+
+  int sendUnlock(dessser::gen::sync_key::t const *);
+
+  int sendDel(dessser::gen::sync_key::t const *);
+
   int sendCmd(
     dessser::gen::sync_client_cmd::t const &,
     /* Register what should happen when the result is received (with err message,
@@ -176,15 +174,5 @@ private slots:
   void onStateChange(QAbstractSocket::SocketState);
   void readMsg();
 };
-
-/* Printer for some dessser generated types: */
-
-QDebug operator<<(QDebug, dessser::gen::sync_client_cmd::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_client_msg::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_server_msg::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_msg::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_socket::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_key::t const &);
-QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 
 #endif

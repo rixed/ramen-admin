@@ -9,6 +9,7 @@
 #include "dessser/runtime.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/fieldmask.h"
+#include "desssergen/sync_key.h"
 #include "desssergen/file_path.h"
 
 namespace dessser::gen::output_specs {
@@ -21,7 +22,9 @@ struct channel_specs : public std::tuple<
   double,
   int16_t,
   uint32_t
-> { using tuple::tuple; };
+> {
+  using tuple::tuple;
+};
 inline bool operator==(channel_specs const &a, channel_specs const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
 }
@@ -69,6 +72,14 @@ enum Constr_file_type {
   Orc,
 };
 
+inline std::ostream &operator<<(std::ostream &os, file_type const &v) {
+  switch (v.index()) {
+    case 0: os << "RingBuf " << std::get<0>(v); break;
+    case 1: os << "Orc " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(file_type const &a, file_type const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -80,18 +91,10 @@ inline bool operator==(file_type const &a, file_type const &b) {
 inline bool operator!=(file_type const &a, file_type const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, file_type const &v) {
-  switch (v.index()) {
-    case 0: os << "RingBuf " << std::get<0>(v); break;
-    case 1: os << "Orc " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct recipient : public std::variant<
   dessser::gen::file_path::t_ext, // DirectFile
   std::string, // IndirectFile
-  std::string // SyncKey
+  dessser::gen::sync_key::t_ext // SyncKey
 > { using variant::variant; };
 
 enum Constr_recipient {
@@ -100,46 +103,80 @@ enum Constr_recipient {
   SyncKey,
 };
 
+inline std::ostream &operator<<(std::ostream &os, recipient const &v) {
+  switch (v.index()) {
+    case 0: os << "DirectFile " << ::dessser::gen::file_path::Deref(std::get<0>(v)); break;
+    case 1: os << "IndirectFile " << std::get<1>(v); break;
+    case 2: os << "SyncKey " << ::dessser::gen::sync_key::Deref(std::get<2>(v)); break;
+  }
+  return os;
+}
+
 inline bool operator==(recipient const &a, recipient const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return ::dessser::gen::file_path::Deref(std::get<0>(a)) == ::dessser::gen::file_path::Deref(std::get<0>(b)); // DirectFile
     case 1: return std::get<1>(a) == std::get<1>(b); // IndirectFile
-    case 2: return std::get<2>(a) == std::get<2>(b); // SyncKey
+    case 2: return ::dessser::gen::sync_key::Deref(std::get<2>(a)) == ::dessser::gen::sync_key::Deref(std::get<2>(b)); // SyncKey
   };
   return false;
 }
 inline bool operator!=(recipient const &a, recipient const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, recipient const &v) {
-  switch (v.index()) {
-    case 0: os << "DirectFile " << ::dessser::gen::file_path::Deref(std::get<0>(v)); break;
-    case 1: os << "IndirectFile " << std::get<1>(v); break;
-    case 2: os << "SyncKey " << std::get<2>(v); break;
-  }
+struct te4c4fc93d886f75ad3a4c47dcf350bfe : public std::tuple<
+  uint16_t,
+  ::dessser::gen::output_specs::channel_specs*
+> {
+  using tuple::tuple;
+  te4c4fc93d886f75ad3a4c47dcf350bfe(std::tuple<uint16_t, ::dessser::gen::output_specs::channel_specs*> p)
+    : std::tuple<uint16_t, ::dessser::gen::output_specs::channel_specs*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(te4c4fc93d886f75ad3a4c47dcf350bfe const &a, te4c4fc93d886f75ad3a4c47dcf350bfe const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(te4c4fc93d886f75ad3a4c47dcf350bfe const &a, te4c4fc93d886f75ad3a4c47dcf350bfe const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, te4c4fc93d886f75ad3a4c47dcf350bfe const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
   return os;
 }
 
-typedef std::tuple<
-  uint16_t,
-  ::dessser::gen::output_specs::channel_specs*
-> t0e5aeccd6bdb25fe3e41dac725c20413;
-
-typedef std::tuple<
+struct t0b14edd3739ead719254746b30f1350c : public std::tuple<
   uint16_t,
   Arr<dessser::gen::raql_value::t_ext>
-> t4b7f8f0e420ffe218b8bc466a29068c5;
+> {
+  using tuple::tuple;
+  t0b14edd3739ead719254746b30f1350c(std::tuple<uint16_t, Arr<dessser::gen::raql_value::t_ext>> p)
+    : std::tuple<uint16_t, Arr<dessser::gen::raql_value::t_ext>>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t0b14edd3739ead719254746b30f1350c const &a, t0b14edd3739ead719254746b30f1350c const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t0b14edd3739ead719254746b30f1350c const &a, t0b14edd3739ead719254746b30f1350c const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t0b14edd3739ead719254746b30f1350c const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
-struct t0580f3cfb08cb32041a63b1331642ca4 {
-  Arr<::dessser::gen::output_specs::t0e5aeccd6bdb25fe3e41dac725c20413> channels;
+struct t09ed983fbf58eb1b2ba3e79aee535b96 {
+  Arr<::dessser::gen::output_specs::te4c4fc93d886f75ad3a4c47dcf350bfe> channels;
   dessser::gen::fieldmask::t_ext fieldmask;
   ::dessser::gen::output_specs::file_type* file_type;
-  Arr<::dessser::gen::output_specs::t4b7f8f0e420ffe218b8bc466a29068c5> filters;
-  t0580f3cfb08cb32041a63b1331642ca4(Arr<::dessser::gen::output_specs::t0e5aeccd6bdb25fe3e41dac725c20413> channels_, dessser::gen::fieldmask::t_ext fieldmask_, ::dessser::gen::output_specs::file_type* file_type_, Arr<::dessser::gen::output_specs::t4b7f8f0e420ffe218b8bc466a29068c5> filters_) : channels(channels_), fieldmask(fieldmask_), file_type(file_type_), filters(filters_) {}
-  t0580f3cfb08cb32041a63b1331642ca4() = default;
+  Arr<::dessser::gen::output_specs::t0b14edd3739ead719254746b30f1350c> filters;
+  t09ed983fbf58eb1b2ba3e79aee535b96(Arr<::dessser::gen::output_specs::te4c4fc93d886f75ad3a4c47dcf350bfe> channels_, dessser::gen::fieldmask::t_ext fieldmask_, ::dessser::gen::output_specs::file_type* file_type_, Arr<::dessser::gen::output_specs::t0b14edd3739ead719254746b30f1350c> filters_) : channels(channels_), fieldmask(fieldmask_), file_type(file_type_), filters(filters_) {}
+  t09ed983fbf58eb1b2ba3e79aee535b96() = default;
 };
-inline std::ostream &operator<<(std::ostream &os, t0580f3cfb08cb32041a63b1331642ca4 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t09ed983fbf58eb1b2ba3e79aee535b96 const &r) {
   os << '{';
   os << "channels:" << r.channels << ',';
   os << "fieldmask:" << ::dessser::gen::fieldmask::Deref(r.fieldmask) << ',';
@@ -148,38 +185,123 @@ inline std::ostream &operator<<(std::ostream &os, t0580f3cfb08cb32041a63b1331642
   os << '}';
   return os;
 }
-inline bool operator==(t0580f3cfb08cb32041a63b1331642ca4 const &a, t0580f3cfb08cb32041a63b1331642ca4 const &b) {
+inline bool operator==(t09ed983fbf58eb1b2ba3e79aee535b96 const &a, t09ed983fbf58eb1b2ba3e79aee535b96 const &b) {
   return a.channels == b.channels && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && a.file_type == b.file_type && a.filters == b.filters;
 }
 
-inline bool operator!=(t0580f3cfb08cb32041a63b1331642ca4 const &a, t0580f3cfb08cb32041a63b1331642ca4 const &b) {
+inline bool operator!=(t09ed983fbf58eb1b2ba3e79aee535b96 const &a, t09ed983fbf58eb1b2ba3e79aee535b96 const &b) {
   return !operator==(a, b);
 }
-typedef std::tuple<
+struct t1ef03b4a7a480e0e4d46675869c6a594 : public std::tuple<
   ::dessser::gen::output_specs::recipient*,
-  ::dessser::gen::output_specs::t0580f3cfb08cb32041a63b1331642ca4
-> t46f7bc657e31d987d610677185800303;
+  ::dessser::gen::output_specs::t09ed983fbf58eb1b2ba3e79aee535b96
+> {
+  using tuple::tuple;
+  t1ef03b4a7a480e0e4d46675869c6a594(std::tuple<::dessser::gen::output_specs::recipient*, ::dessser::gen::output_specs::t09ed983fbf58eb1b2ba3e79aee535b96> p)
+    : std::tuple<::dessser::gen::output_specs::recipient*, ::dessser::gen::output_specs::t09ed983fbf58eb1b2ba3e79aee535b96>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t1ef03b4a7a480e0e4d46675869c6a594 const &a, t1ef03b4a7a480e0e4d46675869c6a594 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t1ef03b4a7a480e0e4d46675869c6a594 const &a, t1ef03b4a7a480e0e4d46675869c6a594 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t1ef03b4a7a480e0e4d46675869c6a594 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
-typedef Arr<::dessser::gen::output_specs::t46f7bc657e31d987d610677185800303> t;
-typedef std::tuple<
+typedef Arr<::dessser::gen::output_specs::t1ef03b4a7a480e0e4d46675869c6a594> t;
+struct t908e3cf486ffb78b83b72354d2605714 : public std::tuple<
   ::dessser::gen::output_specs::channel_specs*,
   Pointer
-> t6df20c301dedeef88b07b4e609cf70cc;
+> {
+  using tuple::tuple;
+  t908e3cf486ffb78b83b72354d2605714(std::tuple<::dessser::gen::output_specs::channel_specs*, Pointer> p)
+    : std::tuple<::dessser::gen::output_specs::channel_specs*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t908e3cf486ffb78b83b72354d2605714 const &a, t908e3cf486ffb78b83b72354d2605714 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t908e3cf486ffb78b83b72354d2605714 const &a, t908e3cf486ffb78b83b72354d2605714 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t908e3cf486ffb78b83b72354d2605714 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
-typedef std::tuple<
+struct tc6e0a3d92ad1a0dc71b26f93d6511bba : public std::tuple<
   ::dessser::gen::output_specs::file_type*,
   Pointer
-> tc1a246d65b8ec8a1b6abc7902e02e4ae;
+> {
+  using tuple::tuple;
+  tc6e0a3d92ad1a0dc71b26f93d6511bba(std::tuple<::dessser::gen::output_specs::file_type*, Pointer> p)
+    : std::tuple<::dessser::gen::output_specs::file_type*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tc6e0a3d92ad1a0dc71b26f93d6511bba const &a, tc6e0a3d92ad1a0dc71b26f93d6511bba const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tc6e0a3d92ad1a0dc71b26f93d6511bba const &a, tc6e0a3d92ad1a0dc71b26f93d6511bba const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tc6e0a3d92ad1a0dc71b26f93d6511bba const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
-typedef std::tuple<
+struct tb36c3ec530eb035831e04b4c5a579751 : public std::tuple<
   ::dessser::gen::output_specs::recipient*,
   Pointer
-> tef522899602bf7c23a3b80730ab356df;
+> {
+  using tuple::tuple;
+  tb36c3ec530eb035831e04b4c5a579751(std::tuple<::dessser::gen::output_specs::recipient*, Pointer> p)
+    : std::tuple<::dessser::gen::output_specs::recipient*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb36c3ec530eb035831e04b4c5a579751 const &a, tb36c3ec530eb035831e04b4c5a579751 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tb36c3ec530eb035831e04b4c5a579751 const &a, tb36c3ec530eb035831e04b4c5a579751 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb36c3ec530eb035831e04b4c5a579751 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
-typedef std::tuple<
+struct tf6138ae5919ddcb1cb9a935a9dc7190a : public std::tuple<
   t,
   Pointer
-> t519c57b31160411c6989716f3a9782e0;
+> {
+  using tuple::tuple;
+  tf6138ae5919ddcb1cb9a935a9dc7190a(std::tuple<t, Pointer> p)
+    : std::tuple<t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc7190a const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
@@ -192,10 +314,10 @@ extern std::function<Size(::dessser::gen::output_specs::channel_specs*)> channel
 extern std::function<Size(::dessser::gen::output_specs::file_type*)> file_type_sersize_of_row_binary;
 extern std::function<Size(::dessser::gen::output_specs::recipient*)> recipient_sersize_of_row_binary;
 extern std::function<Size(t&)> sersize_of_row_binary;
-extern std::function<::dessser::gen::output_specs::t6df20c301dedeef88b07b4e609cf70cc(Pointer)> channel_specs_of_row_binary;
-extern std::function<::dessser::gen::output_specs::tc1a246d65b8ec8a1b6abc7902e02e4ae(Pointer)> file_type_of_row_binary;
-extern std::function<::dessser::gen::output_specs::tef522899602bf7c23a3b80730ab356df(Pointer)> recipient_of_row_binary;
-extern std::function<::dessser::gen::output_specs::t519c57b31160411c6989716f3a9782e0(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::output_specs::t908e3cf486ffb78b83b72354d2605714(Pointer)> channel_specs_of_row_binary;
+extern std::function<::dessser::gen::output_specs::tc6e0a3d92ad1a0dc71b26f93d6511bba(Pointer)> file_type_of_row_binary;
+extern std::function<::dessser::gen::output_specs::tb36c3ec530eb035831e04b4c5a579751(Pointer)> recipient_of_row_binary;
+extern std::function<::dessser::gen::output_specs::tf6138ae5919ddcb1cb9a935a9dc7190a(Pointer)> of_row_binary;
 typedef t t_ext;
 inline t Deref(t_ext x) { return x; }
 

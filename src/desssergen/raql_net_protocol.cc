@@ -36,16 +36,46 @@ struct t : public std::variant<
   Void // Graphite
 > { using variant::variant; };
 
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
+    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
+    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct t836e37d51e6f62fde58e17756aec5ede : public std::tuple<
   ::dessser::gen::raql_net_protocol::t*,
   Pointer
-> t50e4258f843117afd411316037767879;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t836e37d51e6f62fde58e17756aec5ede(std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+  return !operator==(a, b);
+}
+struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
-> t22a32080ad88ab548b80077a17b7dd46;
-
+> {
+  using tuple::tuple;
+  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+    : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -143,40 +173,40 @@ std::function<Size(::dessser::gen::raql_net_protocol::t*)> sersize_of_row_binary
                 (seq (assert (eq (identifier "dsum1_fst_63") (u16 2))) (make-tup (construct "[Collectd Void | NetflowV5 Void | Graphite Void]" 2 (nop)) (identifier "dsum1_snd_64")))))))
         (make-tup (identifier "make_fst_75") (identifier "make_snd_76"))))
  */
-static std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879(Pointer)> fun32 { [&fun32](Pointer p_0) {
-    ::dessser::gen::raql_net_protocol::t22a32080ad88ab548b80077a17b7dd46 id_33 { p_0.readU16Le() };
-    ::dessser::gen::raql_net_protocol::t22a32080ad88ab548b80077a17b7dd46 letpair_res_34;
+  std::function<::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede(Pointer)> fun32 { [&fun32](Pointer p_0) {
+    ::dessser::gen::raql_net_protocol::t7609d344c1ba69d0f80fec236d4c216b id_33 { p_0.readU16Le() };
+    ::dessser::gen::raql_net_protocol::t7609d344c1ba69d0f80fec236d4c216b letpair_res_34;
     {
       auto du16_fst_57 { std::get<0>(id_33) };
       auto du16_snd_58 { std::get<1>(id_33) };
-      ::dessser::gen::raql_net_protocol::t22a32080ad88ab548b80077a17b7dd46 id_35 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_net_protocol::t7609d344c1ba69d0f80fec236d4c216b id_35 { du16_fst_57, du16_snd_58 };
       letpair_res_34 = id_35;
     }
-    ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 let_res_36;
+    ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede let_res_36;
     {
-      ::dessser::gen::raql_net_protocol::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_34 };
-      ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 letpair_res_37;
+      ::dessser::gen::raql_net_protocol::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_34 };
+      ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede letpair_res_37;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_38 { 0 };
         bool id_39 { bool(id_38 == dsum1_fst_63) };
-        ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 choose_res_40;
+        ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede choose_res_40;
         if (id_39) {
           (void)VOID;
           ::dessser::gen::raql_net_protocol::t* id_41 { new ::dessser::gen::raql_net_protocol::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 id_42 { id_41, dsum1_snd_64 };
+          ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede id_42 { id_41, dsum1_snd_64 };
           choose_res_40 = id_42;
         } else {
           uint16_t id_43 { 1 };
           bool id_44 { bool(id_43 == dsum1_fst_63) };
-          ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 choose_res_45;
+          ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede choose_res_45;
           if (id_44) {
             (void)VOID;
             ::dessser::gen::raql_net_protocol::t* id_46 { new ::dessser::gen::raql_net_protocol::t(std::in_place_index<1>, VOID) };
-            ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 id_47 { id_46, dsum1_snd_64 };
+            ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede id_47 { id_46, dsum1_snd_64 };
             choose_res_45 = id_47;
           } else {
             uint16_t id_48 { 2 };
@@ -185,7 +215,7 @@ static std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316
             (void)id_50;
             (void)VOID;
             ::dessser::gen::raql_net_protocol::t* id_51 { new ::dessser::gen::raql_net_protocol::t(std::in_place_index<2>, VOID) };
-            ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 id_52 { id_51, dsum1_snd_64 };
+            ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede id_52 { id_51, dsum1_snd_64 };
             choose_res_45 = id_52;
           }
           choose_res_40 = choose_res_45;
@@ -194,11 +224,11 @@ static std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316
       }
       let_res_36 = letpair_res_37;
     }
-    ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 letpair_res_53;
+    ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede letpair_res_53;
     {
       auto make_fst_75 { std::get<0>(let_res_36) };
       auto make_snd_76 { std::get<1>(let_res_36) };
-      ::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879 id_54 { make_fst_75, make_snd_76 };
+      ::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede id_54 { make_fst_75, make_snd_76 };
       letpair_res_53 = id_54;
     }
     return letpair_res_53;
@@ -206,7 +236,7 @@ static std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316
    };
   return fun32;
 }
-std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

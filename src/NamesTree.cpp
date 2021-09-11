@@ -4,7 +4,6 @@
 #include <QtGlobal>
 #include <QVariant>
 
-#include "ConfClient.h" // for printers
 #include "ConfSubTree.h"
 #include "desssergen/source_info.h"
 #include "desssergen/sync_key.h"
@@ -12,6 +11,7 @@
 #include "desssergen/worker.h"
 #include "KVStore.h"
 #include "misc.h"
+#include "misc_dessser.h"
 
 #include "NamesTree.h"
 
@@ -72,56 +72,6 @@ std::pair<std::string, std::string> NamesTree::pathOfIndex(
   }
 
   return ret;
-}
-
-static bool isAWorker(dessser::gen::sync_key::t const &key)
-{
-  if (key.index() != dessser::gen::sync_key::PerSite) return false;
-  auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(key) };
-  auto const &key_ { std::get<1>(per_site) };
-  if (key_.index() != dessser::gen::sync_key::PerWorker) return false;
-  auto const &per_worker { std::get<dessser::gen::sync_key::PerWorker>(key_) };
-  auto const &key__ { std::get<1>(per_worker) };
-  return key__.index() == dessser::gen::sync_key::Worker;
-}
-
-int numColumns(dessser::gen::raql_type::t const &t)
-{
-  switch (t.type.index()) {
-    case dessser::gen::raql_type::Tup:
-      {
-        auto const &tup { std::get<dessser::gen::raql_type::Tup>(t.type) };
-        return tup.size();
-      }
-    case dessser::gen::raql_type::Vec:
-      {
-        auto const &vec { std::get<dessser::gen::raql_type::Vec>(t.type) };
-        return std::get<0>(vec);
-      }
-    case dessser::gen::raql_type::Rec:
-      {
-        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
-        return rec.size();
-      }
-    default:
-      return 1;
-  }
-}
-
-QString const columnName(dessser::gen::raql_type::t const &t, int i)
-{
-  switch (t.type.index()) {
-    case dessser::gen::raql_type::Tup:
-    case dessser::gen::raql_type::Vec:
-      return QString("#") + QString::number(i);
-    case dessser::gen::raql_type::Rec:
-      {
-        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
-        return QString::fromStdString(std::get<0>(rec[i]));
-      }
-    default:
-      return QString();
-  }
 }
 
 void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &kv)

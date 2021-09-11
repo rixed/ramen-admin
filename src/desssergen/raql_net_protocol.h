@@ -26,6 +26,15 @@ enum Constr_t {
   Graphite,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "Collectd " << std::get<0>(v); break;
+    case 1: os << "NetflowV5 " << std::get<1>(v); break;
+    case 2: os << "Graphite " << std::get<2>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -38,26 +47,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "Collectd " << std::get<0>(v); break;
-    case 1: os << "NetflowV5 " << std::get<1>(v); break;
-    case 2: os << "Graphite " << std::get<2>(v); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct t836e37d51e6f62fde58e17756aec5ede : public std::tuple<
   ::dessser::gen::raql_net_protocol::t*,
   Pointer
-> t50e4258f843117afd411316037767879;
+> {
+  using tuple::tuple;
+  t836e37d51e6f62fde58e17756aec5ede(std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t836e37d51e6f62fde58e17756aec5ede const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::raql_net_protocol::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::raql_net_protocol::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_net_protocol::t50e4258f843117afd411316037767879(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

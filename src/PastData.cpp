@@ -1,6 +1,13 @@
 #include <algorithm>
 #include <functional>
 #include <QDebug>
+
+#include "desssergen/event_time.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/raql_value.h"
+#include "misc_dessser.h"
+#include "ReplayRequest.h"
+
 #include "PastData.h"
 
 static bool const verbose(false);
@@ -12,7 +19,7 @@ static double const minGapBetweenReplays(10.);
 
 PastData::PastData(std::string const &site_, std::string const &program_,
                    std::string const &function_,
-                   std::shared_ptr<RamenType const> type_,
+                   std::shared_ptr<dessser::gen::raql_type::t const> type_,
                    std::shared_ptr<EventTime const> eventTime_,
                    double maxTime_,
                    QObject *parent) :
@@ -67,8 +74,7 @@ bool PastData::merge(
 
   if (verbose)
     qDebug() << qSetRealNumberPrecision(13) << "PastData: Enlarging ReplayRequest"
-             << QString::fromStdString(r.respKey) << "to"
-             << r.since << r.until;
+             << r.respKey << "to" << r.since << r.until;
 
   check();
   return true;
@@ -184,10 +190,10 @@ bool PastData::request(double since, double until, bool canPostpone)
 
 void PastData::iterTuples(
   double since, double until, bool onePast,
-  std::function<void (double, std::shared_ptr<RamenValue const>)> cb)
+  std::function<void (double, std::shared_ptr<dessser::gen::raql_value::t const>)> cb)
 {
   double lastTime;
-  std::shared_ptr<RamenValue const> last;
+  std::shared_ptr<dessser::gen::raql_value::t const> last;
 
   check();
 
@@ -197,7 +203,7 @@ void PastData::iterTuples(
     if (c.since >= until) break;
     if (c.until <= since) continue;
 
-    for (std::pair<double, std::shared_ptr<RamenValue const>> const &tuple :
+    for (std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>> const &tuple :
            c.tuples) {
       if (tuple.first < since) {
         if (onePast) {

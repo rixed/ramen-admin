@@ -24,6 +24,14 @@ enum Constr_tb689860ac91fca7822797a026958e891 {
   Ip_v6,
 };
 
+inline std::ostream &operator<<(std::ostream &os, tb689860ac91fca7822797a026958e891 const &v) {
+  switch (v.index()) {
+    case 0: os << "v4 " << std::get<0>(v); break;
+    case 1: os << "v6 " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(tb689860ac91fca7822797a026958e891 const &a, tb689860ac91fca7822797a026958e891 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -35,14 +43,6 @@ inline bool operator==(tb689860ac91fca7822797a026958e891 const &a, tb689860ac91f
 inline bool operator!=(tb689860ac91fca7822797a026958e891 const &a, tb689860ac91fca7822797a026958e891 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tb689860ac91fca7822797a026958e891 const &v) {
-  switch (v.index()) {
-    case 0: os << "v4 " << std::get<0>(v); break;
-    case 1: os << "v6 " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t81f779acbcb9180b1df9b88e2d8ce982 {
   uint32_t Cidr4_ip;
   uint8_t Cidr4_mask;
@@ -93,6 +93,14 @@ enum Constr_t086a8e00718450baf3e88e60b5e42a27 {
   v6,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t086a8e00718450baf3e88e60b5e42a27 const &v) {
+  switch (v.index()) {
+    case 0: os << "v4 " << std::get<0>(v); break;
+    case 1: os << "v6 " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e00718450baf3e88e60b5e42a27 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -104,11 +112,53 @@ inline bool operator==(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e007184
 inline bool operator!=(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e00718450baf3e88e60b5e42a27 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t086a8e00718450baf3e88e60b5e42a27 const &v) {
-  switch (v.index()) {
-    case 0: os << "v4 " << std::get<0>(v); break;
-    case 1: os << "v6 " << std::get<1>(v); break;
-  }
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t283d6c4a825a1e3b55be4835188780e8 : public std::tuple<
+  std::string,
+  t*
+> {
+  using tuple::tuple;
+  t283d6c4a825a1e3b55be4835188780e8(std::tuple<std::string, t*> p)
+    : std::tuple<std::string, t*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t283d6c4a825a1e3b55be4835188780e8 const &a, t283d6c4a825a1e3b55be4835188780e8 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
+}
+inline bool operator!=(t283d6c4a825a1e3b55be4835188780e8 const &a, t283d6c4a825a1e3b55be4835188780e8 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t283d6c4a825a1e3b55be4835188780e8 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
   return os;
 }
 
@@ -132,11 +182,6 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
-  std::string,
-  t*
-> t100b7e5cf4b9a621db7a39d7f1d01e5c;
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -149,15 +194,40 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t904326184a165aa7b5c8e6ffafa090a8 : public std::tuple<
   t*,
   t*
-> t7411897bdb6c9b6e00a01b4eb6506ccf;
+> {
+  using tuple::tuple;
+  t904326184a165aa7b5c8e6ffafa090a8(std::tuple<t*, t*> p)
+    : std::tuple<t*, t*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
+}
+inline bool operator!=(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t904326184a165aa7b5c8e6ffafa090a8 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
+  return os;
+}
 
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -217,8 +287,8 @@ struct t : public std::variant<
   Arr<t*>, // VTup
   Arr<t*>, // VVec
   Arr<t*>, // VLst
-  Arr<::dessser::gen::raql_value::t100b7e5cf4b9a621db7a39d7f1d01e5c>, // VRec
-  Arr<::dessser::gen::raql_value::t7411897bdb6c9b6e00a01b4eb6506ccf> // VMap
+  Arr<::dessser::gen::raql_value::t283d6c4a825a1e3b55be4835188780e8>, // VRec
+  Arr<::dessser::gen::raql_value::t904326184a165aa7b5c8e6ffafa090a8> // VMap
 > { using variant::variant; };
 
 enum Constr_t {
@@ -259,6 +329,48 @@ enum Constr_t {
   VRec,
   VMap,
 };
+
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "VNull " << std::get<0>(v); break;
+    case 1: os << "VUnit " << std::get<1>(v); break;
+    case 2: os << "VFloat " << std::get<2>(v); break;
+    case 3: os << "VString " << std::get<3>(v); break;
+    case 4: os << "VBool " << std::get<4>(v); break;
+    case 5: os << "VChar " << std::get<5>(v); break;
+    case 6: os << "VU8 " << std::get<6>(v); break;
+    case 7: os << "VU16 " << std::get<7>(v); break;
+    case 8: os << "VU24 " << std::get<8>(v); break;
+    case 9: os << "VU32 " << std::get<9>(v); break;
+    case 10: os << "VU40 " << std::get<10>(v); break;
+    case 11: os << "VU48 " << std::get<11>(v); break;
+    case 12: os << "VU56 " << std::get<12>(v); break;
+    case 13: os << "VU64 " << std::get<13>(v); break;
+    case 14: os << "VU128 " << std::get<14>(v); break;
+    case 15: os << "VI8 " << std::get<15>(v); break;
+    case 16: os << "VI16 " << std::get<16>(v); break;
+    case 17: os << "VI24 " << std::get<17>(v); break;
+    case 18: os << "VI32 " << std::get<18>(v); break;
+    case 19: os << "VI40 " << std::get<19>(v); break;
+    case 20: os << "VI48 " << std::get<20>(v); break;
+    case 21: os << "VI56 " << std::get<21>(v); break;
+    case 22: os << "VI64 " << std::get<22>(v); break;
+    case 23: os << "VI128 " << std::get<23>(v); break;
+    case 24: os << "VEth " << std::get<24>(v); break;
+    case 25: os << "VIpv4 " << std::get<25>(v); break;
+    case 26: os << "VIpv6 " << std::get<26>(v); break;
+    case 27: os << "VIp " << std::get<27>(v); break;
+    case 28: os << "VCidrv4 " << std::get<28>(v); break;
+    case 29: os << "VCidrv6 " << std::get<29>(v); break;
+    case 30: os << "VCidr " << std::get<30>(v); break;
+    case 31: os << "VTup " << std::get<31>(v); break;
+    case 32: os << "VVec " << std::get<32>(v); break;
+    case 33: os << "VLst " << std::get<33>(v); break;
+    case 34: os << "VRec " << std::get<34>(v); break;
+    case 35: os << "VMap " << std::get<35>(v); break;
+  }
+  return os;
+}
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -305,48 +417,6 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "VNull " << std::get<0>(v); break;
-    case 1: os << "VUnit " << std::get<1>(v); break;
-    case 2: os << "VFloat " << std::get<2>(v); break;
-    case 3: os << "VString " << std::get<3>(v); break;
-    case 4: os << "VBool " << std::get<4>(v); break;
-    case 5: os << "VChar " << std::get<5>(v); break;
-    case 6: os << "VU8 " << std::get<6>(v); break;
-    case 7: os << "VU16 " << std::get<7>(v); break;
-    case 8: os << "VU24 " << std::get<8>(v); break;
-    case 9: os << "VU32 " << std::get<9>(v); break;
-    case 10: os << "VU40 " << std::get<10>(v); break;
-    case 11: os << "VU48 " << std::get<11>(v); break;
-    case 12: os << "VU56 " << std::get<12>(v); break;
-    case 13: os << "VU64 " << std::get<13>(v); break;
-    case 14: os << "VU128 " << std::get<14>(v); break;
-    case 15: os << "VI8 " << std::get<15>(v); break;
-    case 16: os << "VI16 " << std::get<16>(v); break;
-    case 17: os << "VI24 " << std::get<17>(v); break;
-    case 18: os << "VI32 " << std::get<18>(v); break;
-    case 19: os << "VI40 " << std::get<19>(v); break;
-    case 20: os << "VI48 " << std::get<20>(v); break;
-    case 21: os << "VI56 " << std::get<21>(v); break;
-    case 22: os << "VI64 " << std::get<22>(v); break;
-    case 23: os << "VI128 " << std::get<23>(v); break;
-    case 24: os << "VEth " << std::get<24>(v); break;
-    case 25: os << "VIpv4 " << std::get<25>(v); break;
-    case 26: os << "VIpv6 " << std::get<26>(v); break;
-    case 27: os << "VIp " << std::get<27>(v); break;
-    case 28: os << "VCidrv4 " << std::get<28>(v); break;
-    case 29: os << "VCidrv6 " << std::get<29>(v); break;
-    case 30: os << "VCidr " << std::get<30>(v); break;
-    case 31: os << "VTup " << std::get<31>(v); break;
-    case 32: os << "VVec " << std::get<32>(v); break;
-    case 33: os << "VLst " << std::get<33>(v); break;
-    case 34: os << "VRec " << std::get<34>(v); break;
-    case 35: os << "VMap " << std::get<35>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -419,17 +489,142 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct ta6d704ca45a3aca7e9aa07ee44b553ac : public std::tuple<
   ::dessser::gen::raql_value::t*,
   Pointer
-> t85eb9b4ae6397e976e7bd6d60235f8d0;
+> {
+  using tuple::tuple;
+  ta6d704ca45a3aca7e9aa07ee44b553ac(std::tuple<::dessser::gen::raql_value::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_value::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(ta6d704ca45a3aca7e9aa07ee44b553ac const &a, ta6d704ca45a3aca7e9aa07ee44b553ac const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(ta6d704ca45a3aca7e9aa07ee44b553ac const &a, ta6d704ca45a3aca7e9aa07ee44b553ac const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, ta6d704ca45a3aca7e9aa07ee44b553ac const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::raql_value::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_value::t85eb9b4ae6397e976e7bd6d60235f8d0(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553ac(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

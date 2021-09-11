@@ -20,10 +20,27 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-typedef std::tuple<
+struct tbb6b5f61a720ca930638180f8a3d0d1a : public std::tuple<
   dessser::gen::field_name::t_ext,
   dessser::gen::raql_value::t_ext
-> t83d220ac6cd554303ec130a90b325374;
+> {
+  using tuple::tuple;
+  tbb6b5f61a720ca930638180f8a3d0d1a(std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext> p)
+    : std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tbb6b5f61a720ca930638180f8a3d0d1a const &a, tbb6b5f61a720ca930638180f8a3d0d1a const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && ::dessser::gen::raql_value::Deref(std::get<1>(a)) == ::dessser::gen::raql_value::Deref(std::get<1>(b));
+}
+inline bool operator!=(tbb6b5f61a720ca930638180f8a3d0d1a const &a, tbb6b5f61a720ca930638180f8a3d0d1a const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tbb6b5f61a720ca930638180f8a3d0d1a const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct tdc75c022089b23d508b703f7fd52f8cc {
   uint32_t parent_num;
@@ -57,6 +74,14 @@ enum Constr_tcea6add784d8acf1d66fabc567856768 {
   TopHalf,
 };
 
+inline std::ostream &operator<<(std::ostream &os, tcea6add784d8acf1d66fabc567856768 const &v) {
+  switch (v.index()) {
+    case 0: os << "Whole " << std::get<0>(v); break;
+    case 1: os << "TopHalf " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8acf1d66fabc567856768 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -68,14 +93,6 @@ inline bool operator==(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8
 inline bool operator!=(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8acf1d66fabc567856768 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tcea6add784d8acf1d66fabc567856768 const &v) {
-  switch (v.index()) {
-    case 0: os << "Whole " << std::get<0>(v); break;
-    case 1: os << "TopHalf " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t {
   Arr<dessser::gen::func_ref::t_ext> children;
   dessser::gen::file_path::t_ext cwd;
@@ -84,12 +101,12 @@ struct t {
   Arr<dessser::gen::field_name::t_ext> envvars;
   std::string info_signature;
   bool is_used;
-  Arr<::dessser::gen::worker::t83d220ac6cd554303ec130a90b325374> params;
+  Arr<::dessser::gen::worker::tbb6b5f61a720ca930638180f8a3d0d1a> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   double report_period;
   ::dessser::gen::worker::tcea6add784d8acf1d66fabc567856768 role;
   std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t83d220ac6cd554303ec130a90b325374> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tcea6add784d8acf1d66fabc567856768 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::tbb6b5f61a720ca930638180f8a3d0d1a> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tcea6add784d8acf1d66fabc567856768 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -116,17 +133,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-typedef std::tuple<
+struct t880e090806568021cc11b70fc209293e : public std::tuple<
   ::dessser::gen::worker::t*,
   Pointer
-> t2153f894ec0d3c3ed0ba5ddc0b3fd576;
+> {
+  using tuple::tuple;
+  t880e090806568021cc11b70fc209293e(std::tuple<::dessser::gen::worker::t*, Pointer> p)
+    : std::tuple<::dessser::gen::worker::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t880e090806568021cc11b70fc209293e const &a, t880e090806568021cc11b70fc209293e const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t880e090806568021cc11b70fc209293e const &a, t880e090806568021cc11b70fc209293e const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t880e090806568021cc11b70fc209293e const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::worker::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::worker::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::worker::t2153f894ec0d3c3ed0ba5ddc0b3fd576(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::worker::t880e090806568021cc11b70fc209293e(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

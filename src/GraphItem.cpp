@@ -4,7 +4,6 @@
 #include <QPropertyAnimation>
 #include "GraphItem.h"
 #include "GraphModel.h"
-#include "GraphView.h"
 #include "colorOfString.h"
 
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,

@@ -46,16 +46,56 @@ struct t : public std::variant<
   Void // GlobalVar
 > { using variant::variant; };
 
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Unknown
+    case 1: return std::get<1>(a) == std::get<1>(b); // In
+    case 2: return std::get<2>(a) == std::get<2>(b); // GroupState
+    case 3: return std::get<3>(a) == std::get<3>(b); // GlobalState
+    case 4: return std::get<4>(a) == std::get<4>(b); // OutPrevious
+    case 5: return std::get<5>(a) == std::get<5>(b); // Out
+    case 6: return std::get<6>(a) == std::get<6>(b); // SortFirst
+    case 7: return std::get<7>(a) == std::get<7>(b); // SortSmallest
+    case 8: return std::get<8>(a) == std::get<8>(b); // SortGreatest
+    case 9: return std::get<9>(a) == std::get<9>(b); // Param
+    case 10: return std::get<10>(a) == std::get<10>(b); // Env
+    case 11: return std::get<11>(a) == std::get<11>(b); // Record
+    case 12: return std::get<12>(a) == std::get<12>(b); // GlobalVar
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct t87038ef54fe257dd167046e75b43b9c5 : public std::tuple<
   ::dessser::gen::raql_variable::t*,
   Pointer
-> tbc8330b08ecf0c6a983540ff732694a2;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  t87038ef54fe257dd167046e75b43b9c5(std::tuple<::dessser::gen::raql_variable::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_variable::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t87038ef54fe257dd167046e75b43b9c5 const &a, t87038ef54fe257dd167046e75b43b9c5 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t87038ef54fe257dd167046e75b43b9c5 const &a, t87038ef54fe257dd167046e75b43b9c5 const &b) {
+  return !operator==(a, b);
+}
+struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
-> t22a32080ad88ab548b80077a17b7dd46;
-
+> {
+  using tuple::tuple;
+  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+    : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -403,130 +443,130 @@ std::function<Size(::dessser::gen::raql_variable::t*)> sersize_of_row_binary(ser
                                           (nop)) (identifier "dsum1_snd_64"))))))))))))))))) 
         (make-tup (identifier "make_fst_105") (identifier "make_snd_106"))))
  */
-static std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2(Pointer)> fun99 { [&fun99](Pointer p_0) {
-    ::dessser::gen::raql_variable::t22a32080ad88ab548b80077a17b7dd46 id_100 { p_0.readU16Le() };
-    ::dessser::gen::raql_variable::t22a32080ad88ab548b80077a17b7dd46 letpair_res_101;
+  std::function<::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5(Pointer)> fun99 { [&fun99](Pointer p_0) {
+    ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b id_100 { p_0.readU16Le() };
+    ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b letpair_res_101;
     {
       auto du16_fst_57 { std::get<0>(id_100) };
       auto du16_snd_58 { std::get<1>(id_100) };
-      ::dessser::gen::raql_variable::t22a32080ad88ab548b80077a17b7dd46 id_102 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b id_102 { du16_fst_57, du16_snd_58 };
       letpair_res_101 = id_102;
     }
-    ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 let_res_103;
+    ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 let_res_103;
     {
-      ::dessser::gen::raql_variable::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_101 };
-      ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 letpair_res_104;
+      ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_101 };
+      ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 letpair_res_104;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_105 { 0 };
         bool id_106 { bool(id_105 == dsum1_fst_63) };
-        ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_107;
+        ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_107;
         if (id_106) {
           (void)VOID;
           ::dessser::gen::raql_variable::t* id_108 { new ::dessser::gen::raql_variable::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_109 { id_108, dsum1_snd_64 };
+          ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_109 { id_108, dsum1_snd_64 };
           choose_res_107 = id_109;
         } else {
           uint16_t id_110 { 1 };
           bool id_111 { bool(id_110 == dsum1_fst_63) };
-          ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_112;
+          ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_112;
           if (id_111) {
             (void)VOID;
             ::dessser::gen::raql_variable::t* id_113 { new ::dessser::gen::raql_variable::t(std::in_place_index<1>, VOID) };
-            ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_114 { id_113, dsum1_snd_64 };
+            ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_114 { id_113, dsum1_snd_64 };
             choose_res_112 = id_114;
           } else {
             uint16_t id_115 { 2 };
             bool id_116 { bool(id_115 == dsum1_fst_63) };
-            ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_117;
+            ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_117;
             if (id_116) {
               (void)VOID;
               ::dessser::gen::raql_variable::t* id_118 { new ::dessser::gen::raql_variable::t(std::in_place_index<2>, VOID) };
-              ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_119 { id_118, dsum1_snd_64 };
+              ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_119 { id_118, dsum1_snd_64 };
               choose_res_117 = id_119;
             } else {
               uint16_t id_120 { 3 };
               bool id_121 { bool(id_120 == dsum1_fst_63) };
-              ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_122;
+              ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_122;
               if (id_121) {
                 (void)VOID;
                 ::dessser::gen::raql_variable::t* id_123 { new ::dessser::gen::raql_variable::t(std::in_place_index<3>, VOID) };
-                ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_124 { id_123, dsum1_snd_64 };
+                ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_124 { id_123, dsum1_snd_64 };
                 choose_res_122 = id_124;
               } else {
                 uint16_t id_125 { 4 };
                 bool id_126 { bool(id_125 == dsum1_fst_63) };
-                ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_127;
+                ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_127;
                 if (id_126) {
                   (void)VOID;
                   ::dessser::gen::raql_variable::t* id_128 { new ::dessser::gen::raql_variable::t(std::in_place_index<4>, VOID) };
-                  ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_129 { id_128, dsum1_snd_64 };
+                  ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_129 { id_128, dsum1_snd_64 };
                   choose_res_127 = id_129;
                 } else {
                   uint16_t id_130 { 5 };
                   bool id_131 { bool(id_130 == dsum1_fst_63) };
-                  ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_132;
+                  ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_132;
                   if (id_131) {
                     (void)VOID;
                     ::dessser::gen::raql_variable::t* id_133 { new ::dessser::gen::raql_variable::t(std::in_place_index<5>, VOID) };
-                    ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_134 { id_133, dsum1_snd_64 };
+                    ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_134 { id_133, dsum1_snd_64 };
                     choose_res_132 = id_134;
                   } else {
                     uint16_t id_135 { 6 };
                     bool id_136 { bool(id_135 == dsum1_fst_63) };
-                    ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_137;
+                    ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_137;
                     if (id_136) {
                       (void)VOID;
                       ::dessser::gen::raql_variable::t* id_138 { new ::dessser::gen::raql_variable::t(std::in_place_index<6>, VOID) };
-                      ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_139 { id_138, dsum1_snd_64 };
+                      ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_139 { id_138, dsum1_snd_64 };
                       choose_res_137 = id_139;
                     } else {
                       uint16_t id_140 { 7 };
                       bool id_141 { bool(id_140 == dsum1_fst_63) };
-                      ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_142;
+                      ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_142;
                       if (id_141) {
                         (void)VOID;
                         ::dessser::gen::raql_variable::t* id_143 { new ::dessser::gen::raql_variable::t(std::in_place_index<7>, VOID) };
-                        ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_144 { id_143, dsum1_snd_64 };
+                        ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_144 { id_143, dsum1_snd_64 };
                         choose_res_142 = id_144;
                       } else {
                         uint16_t id_145 { 8 };
                         bool id_146 { bool(id_145 == dsum1_fst_63) };
-                        ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_147;
+                        ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_147;
                         if (id_146) {
                           (void)VOID;
                           ::dessser::gen::raql_variable::t* id_148 { new ::dessser::gen::raql_variable::t(std::in_place_index<8>, VOID) };
-                          ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_149 { id_148, dsum1_snd_64 };
+                          ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_149 { id_148, dsum1_snd_64 };
                           choose_res_147 = id_149;
                         } else {
                           uint16_t id_150 { 9 };
                           bool id_151 { bool(id_150 == dsum1_fst_63) };
-                          ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_152;
+                          ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_152;
                           if (id_151) {
                             (void)VOID;
                             ::dessser::gen::raql_variable::t* id_153 { new ::dessser::gen::raql_variable::t(std::in_place_index<9>, VOID) };
-                            ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_154 { id_153, dsum1_snd_64 };
+                            ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_154 { id_153, dsum1_snd_64 };
                             choose_res_152 = id_154;
                           } else {
                             uint16_t id_155 { 10 };
                             bool id_156 { bool(id_155 == dsum1_fst_63) };
-                            ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_157;
+                            ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_157;
                             if (id_156) {
                               (void)VOID;
                               ::dessser::gen::raql_variable::t* id_158 { new ::dessser::gen::raql_variable::t(std::in_place_index<10>, VOID) };
-                              ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_159 { id_158, dsum1_snd_64 };
+                              ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_159 { id_158, dsum1_snd_64 };
                               choose_res_157 = id_159;
                             } else {
                               uint16_t id_160 { 11 };
                               bool id_161 { bool(id_160 == dsum1_fst_63) };
-                              ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 choose_res_162;
+                              ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 choose_res_162;
                               if (id_161) {
                                 (void)VOID;
                                 ::dessser::gen::raql_variable::t* id_163 { new ::dessser::gen::raql_variable::t(std::in_place_index<11>, VOID) };
-                                ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_164 { id_163, dsum1_snd_64 };
+                                ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_164 { id_163, dsum1_snd_64 };
                                 choose_res_162 = id_164;
                               } else {
                                 uint16_t id_165 { 12 };
@@ -535,7 +575,7 @@ static std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732
                                 (void)id_167;
                                 (void)VOID;
                                 ::dessser::gen::raql_variable::t* id_168 { new ::dessser::gen::raql_variable::t(std::in_place_index<12>, VOID) };
-                                ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_169 { id_168, dsum1_snd_64 };
+                                ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_169 { id_168, dsum1_snd_64 };
                                 choose_res_162 = id_169;
                               }
                               choose_res_157 = choose_res_162;
@@ -564,11 +604,11 @@ static std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732
       }
       let_res_103 = letpair_res_104;
     }
-    ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 letpair_res_170;
+    ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 letpair_res_170;
     {
       auto make_fst_105 { std::get<0>(let_res_103) };
       auto make_snd_106 { std::get<1>(let_res_103) };
-      ::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2 id_171 { make_fst_105, make_snd_106 };
+      ::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5 id_171 { make_fst_105, make_snd_106 };
       letpair_res_170 = id_171;
     }
     return letpair_res_170;
@@ -576,7 +616,7 @@ static std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732
    };
   return fun99;
 }
-std::function<::dessser::gen::raql_variable::tbc8330b08ecf0c6a983540ff732694a2(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_variable::t87038ef54fe257dd167046e75b43b9c5(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

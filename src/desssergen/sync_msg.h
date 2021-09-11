@@ -50,6 +50,16 @@ enum Constr_t {
   Error,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "SendSessionKey " << std::get<0>(v); break;
+    case 1: os << "Crypted " << std::get<1>(v); break;
+    case 2: os << "ClearText " << std::get<2>(v); break;
+    case 3: os << "Error " << std::get<3>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -63,27 +73,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "SendSessionKey " << std::get<0>(v); break;
-    case 1: os << "Crypted " << std::get<1>(v); break;
-    case 2: os << "ClearText " << std::get<2>(v); break;
-    case 3: os << "Error " << std::get<3>(v); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct td335ba805bbc6c81afca7fd8487e603c : public std::tuple<
   ::dessser::gen::sync_msg::t*,
   Pointer
-> t225ef9f1e97f4882d6b6a9f870881a23;
+> {
+  using tuple::tuple;
+  td335ba805bbc6c81afca7fd8487e603c(std::tuple<::dessser::gen::sync_msg::t*, Pointer> p)
+    : std::tuple<::dessser::gen::sync_msg::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(td335ba805bbc6c81afca7fd8487e603c const &a, td335ba805bbc6c81afca7fd8487e603c const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(td335ba805bbc6c81afca7fd8487e603c const &a, td335ba805bbc6c81afca7fd8487e603c const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, td335ba805bbc6c81afca7fd8487e603c const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::sync_msg::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::sync_msg::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_msg::t225ef9f1e97f4882d6b6a9f870881a23(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::sync_msg::td335ba805bbc6c81afca7fd8487e603c(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

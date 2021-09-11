@@ -10,10 +10,17 @@
 #include <QPoint>
 #include <QString>
 #include <QVariant>
-#include "confValue.h"
 #include "GraphViewSettings.h"
 
 class GraphModel;
+
+namespace dessser {
+  namespace gen {
+    namespace raql_value {
+      struct t;
+    }
+  }
+}
 
 /* GraphItem is an Item in the GraphModel *and* in the scene of the GraphView.
  * This is the address of the GraphItem that is stored in QModelIndex
@@ -84,7 +91,8 @@ public:
   virtual QVariant data(int col, int role) const;
   // Reorder the children after some has been added/removed
   virtual void reorder(GraphModel const *) {};
-  virtual void setProperty(QString const &, std::shared_ptr<conf::Value const>) {};
+  virtual void setProperty(QString const &,
+                           std::shared_ptr<dessser::gen::raql_value::t const>) {};
   QModelIndex index(GraphModel const *, int) const;
   bool isCollapsed() const;
   virtual bool isTopHalf() const = 0;

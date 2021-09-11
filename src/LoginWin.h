@@ -28,8 +28,6 @@ class LoginWin : public SavedWindow
 
   LoginWidget *loginWidget;
 
-  ConfClient *client;
-
   // FIXME: those two are now redundant with client
   SyncStatus syncStatus;
   QString errMsg;
@@ -41,6 +39,8 @@ class LoginWin : public SavedWindow
   QString const server;
 
 public:
+  ConfClient *client;
+
   LoginWin(QString const configDir, QWidget *parent = nullptr);
   ~LoginWin();
   void focusSubmit();

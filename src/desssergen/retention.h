@@ -35,17 +35,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-typedef std::tuple<
+struct t3c1a4fa343f4d41a3f7803e33483ce83 : public std::tuple<
   ::dessser::gen::retention::t*,
   Pointer
-> td879f0124877ae7a41564ce519541045;
+> {
+  using tuple::tuple;
+  t3c1a4fa343f4d41a3f7803e33483ce83(std::tuple<::dessser::gen::retention::t*, Pointer> p)
+    : std::tuple<::dessser::gen::retention::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t3c1a4fa343f4d41a3f7803e33483ce83 const &a, t3c1a4fa343f4d41a3f7803e33483ce83 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t3c1a4fa343f4d41a3f7803e33483ce83 const &a, t3c1a4fa343f4d41a3f7803e33483ce83 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t3c1a4fa343f4d41a3f7803e33483ce83 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::retention::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::retention::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::retention::td879f0124877ae7a41564ce519541045(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::retention::t3c1a4fa343f4d41a3f7803e33483ce83(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

@@ -5,6 +5,7 @@
 #include "KVStore.h"
 
 class AboutDialog;
+class ConfClient;
 #ifdef WITH_CONFTREE
 class ConfTreeDialog;
 #endif
@@ -160,6 +161,7 @@ public slots:
 # ifdef WITH_DASHBOARDS
   static void openDashboard(QString const &, std::string const &);
 # endif
+  static ConfClient *getClient();
 
 protected slots:
   void onChange(QList<ConfChange> const &);

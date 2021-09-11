@@ -3,7 +3,6 @@
 #include <vector>
 #include <QAbstractItemModel>
 #include <QPointF>
-#include "conf.h"
 #include "GraphItem.h"
 
 /* The "Graph" described here is the graph of
@@ -35,12 +34,20 @@
  * [positionChanged].
  */
 
+struct ConfChange;
 class FunctionItem;
 class GraphViewSettings;
 struct KValue;
 class ParsedKey;
 class ProgramItem;
 class SiteItem;
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class GraphModel : public QAbstractItemModel
 {
@@ -67,17 +74,19 @@ class GraphModel : public QAbstractItemModel
 
   void setFunctionProperty(
     SiteItem const *, ProgramItem const *, FunctionItem *, ParsedKey const &p,
-    std::shared_ptr<conf::Value const>);
+    std::shared_ptr<dessser::gen::sync_value::t const>);
   void setProgramProperty(
-    ProgramItem *, ParsedKey const &p, std::shared_ptr<conf::Value const>);
+    ProgramItem *, ParsedKey const &p,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
   void setSiteProperty(
-    SiteItem *, ParsedKey const &p, std::shared_ptr<conf::Value const>);
+    SiteItem *, ParsedKey const &p,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
   void delFunctionProperty(FunctionItem *, ParsedKey const &p);
   void delProgramProperty(ProgramItem *, ParsedKey const &p);
   void delSiteProperty(SiteItem *, ParsedKey const &p);
 
-  void updateKey(std::string const &, KValue const &);
-  void deleteKey(std::string const &, KValue const &);
+  void updateKey(dessser::gen::sync_key::t const &, KValue const &);
+  void deleteKey(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   GraphViewSettings const *settings;

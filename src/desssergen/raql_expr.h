@@ -36,10 +36,35 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct tddfc646ae3827db7d4914729994bdbb1 : public std::tuple<
   dessser::gen::field_name::t_ext,
   t*
-> t5b91ba1a37fd19816559f3dabb32e8b5;
+> {
+  using tuple::tuple;
+  tddfc646ae3827db7d4914729994bdbb1(std::tuple<dessser::gen::field_name::t_ext, t*> p)
+    : std::tuple<dessser::gen::field_name::t_ext, t*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tddfc646ae3827db7d4914729994bdbb1 const &a, tddfc646ae3827db7d4914729994bdbb1 const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
+}
+inline bool operator!=(tddfc646ae3827db7d4914729994bdbb1 const &a, tddfc646ae3827db7d4914729994bdbb1 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tddfc646ae3827db7d4914729994bdbb1 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
@@ -121,10 +146,67 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct td73e40f734c89c38f2d6352e81bfc1af : public std::tuple<
   Lst<::dessser::gen::raql_expr::t39d6b38be34658e00b272e1147f8bf0c>,
   std::optional<t*>
-> t26be19fb82ef1d2f9c7b2c0aa1ec46bd;
+> {
+  using tuple::tuple;
+  td73e40f734c89c38f2d6352e81bfc1af(std::tuple<Lst<::dessser::gen::raql_expr::t39d6b38be34658e00b272e1147f8bf0c>, std::optional<t*>> p)
+    : std::tuple<Lst<::dessser::gen::raql_expr::t39d6b38be34658e00b272e1147f8bf0c>, std::optional<t*>>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(td73e40f734c89c38f2d6352e81bfc1af const &a, td73e40f734c89c38f2d6352e81bfc1af const &b) {
+  return std::get<0>(a) == std::get<0>(b) && ((std::get<1>(a) && std::get<1>(b) && (*std::get<1>(a).value()) == (*std::get<1>(b).value())) || (!std::get<1>(a) && !std::get<1>(b)));
+}
+inline bool operator!=(td73e40f734c89c38f2d6352e81bfc1af const &a, td73e40f734c89c38f2d6352e81bfc1af const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, td73e40f734c89c38f2d6352e81bfc1af const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct tf7ae7db1c515d769014dcb9b31531498 : public std::variant<
   dessser::gen::raql_value::t_ext, // Const
@@ -150,6 +232,21 @@ enum Constr_tf7ae7db1c515d769014dcb9b31531498 {
   Pi,
 };
 
+inline std::ostream &operator<<(std::ostream &os, tf7ae7db1c515d769014dcb9b31531498 const &v) {
+  switch (v.index()) {
+    case 0: os << "Const " << ::dessser::gen::raql_value::Deref(std::get<0>(v)); break;
+    case 1: os << "Variable " << ::dessser::gen::raql_variable::Deref(std::get<1>(v)); break;
+    case 2: os << "Binding " << ::dessser::gen::raql_binding_key::Deref(std::get<2>(v)); break;
+    case 3: os << "Now " << std::get<3>(v); break;
+    case 4: os << "Random " << std::get<4>(v); break;
+    case 5: os << "EventStart " << std::get<5>(v); break;
+    case 6: os << "EventStop " << std::get<6>(v); break;
+    case 7: os << "Path " << std::get<7>(v); break;
+    case 8: os << "Pi " << std::get<8>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(tf7ae7db1c515d769014dcb9b31531498 const &a, tf7ae7db1c515d769014dcb9b31531498 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -168,21 +265,6 @@ inline bool operator==(tf7ae7db1c515d769014dcb9b31531498 const &a, tf7ae7db1c515
 inline bool operator!=(tf7ae7db1c515d769014dcb9b31531498 const &a, tf7ae7db1c515d769014dcb9b31531498 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf7ae7db1c515d769014dcb9b31531498 const &v) {
-  switch (v.index()) {
-    case 0: os << "Const " << ::dessser::gen::raql_value::Deref(std::get<0>(v)); break;
-    case 1: os << "Variable " << ::dessser::gen::raql_variable::Deref(std::get<1>(v)); break;
-    case 2: os << "Binding " << ::dessser::gen::raql_binding_key::Deref(std::get<2>(v)); break;
-    case 3: os << "Now " << std::get<3>(v); break;
-    case 4: os << "Random " << std::get<4>(v); break;
-    case 5: os << "EventStart " << std::get<5>(v); break;
-    case 6: os << "EventStop " << std::get<6>(v); break;
-    case 7: os << "Path " << std::get<7>(v); break;
-    case 8: os << "Pi " << std::get<8>(v); break;
-  }
-  return os;
-}
-
 struct tc847b6b1db0945d7ec695a4564143cf9 : public std::variant<
   Void, // LittleEndian
   Void // BigEndian
@@ -192,6 +274,14 @@ enum Constr_tc847b6b1db0945d7ec695a4564143cf9 {
   LittleEndian,
   BigEndian,
 };
+
+inline std::ostream &operator<<(std::ostream &os, tc847b6b1db0945d7ec695a4564143cf9 const &v) {
+  switch (v.index()) {
+    case 0: os << "LittleEndian " << std::get<0>(v); break;
+    case 1: os << "BigEndian " << std::get<1>(v); break;
+  }
+  return os;
+}
 
 inline bool operator==(tc847b6b1db0945d7ec695a4564143cf9 const &a, tc847b6b1db0945d7ec695a4564143cf9 const &b) {
   if (a.index() != b.index()) return false;
@@ -204,24 +294,33 @@ inline bool operator==(tc847b6b1db0945d7ec695a4564143cf9 const &a, tc847b6b1db09
 inline bool operator!=(tc847b6b1db0945d7ec695a4564143cf9 const &a, tc847b6b1db0945d7ec695a4564143cf9 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tc847b6b1db0945d7ec695a4564143cf9 const &v) {
-  switch (v.index()) {
-    case 0: os << "LittleEndian " << std::get<0>(v); break;
-    case 1: os << "BigEndian " << std::get<1>(v); break;
-  }
+struct te0e199631746ade8fdd411b7e499dc4a : public std::tuple<
+  dessser::gen::raql_type::t_ext,
+  ::dessser::gen::raql_expr::tc847b6b1db0945d7ec695a4564143cf9
+> {
+  using tuple::tuple;
+  te0e199631746ade8fdd411b7e499dc4a(std::tuple<dessser::gen::raql_type::t_ext, ::dessser::gen::raql_expr::tc847b6b1db0945d7ec695a4564143cf9> p)
+    : std::tuple<dessser::gen::raql_type::t_ext, ::dessser::gen::raql_expr::tc847b6b1db0945d7ec695a4564143cf9>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(te0e199631746ade8fdd411b7e499dc4a const &a, te0e199631746ade8fdd411b7e499dc4a const &b) {
+  return ::dessser::gen::raql_type::Deref(std::get<0>(a)) == ::dessser::gen::raql_type::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(te0e199631746ade8fdd411b7e499dc4a const &a, te0e199631746ade8fdd411b7e499dc4a const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, te0e199631746ade8fdd411b7e499dc4a const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
   return os;
 }
 
-typedef std::tuple<
-  dessser::gen::raql_type::t_ext,
-  ::dessser::gen::raql_expr::tc847b6b1db0945d7ec695a4564143cf9
-> tb0402ef6eb0c00c8a2b51d497e491ff8;
-
-struct t133df32a784c216f0d970b5805a6b8b8 : public std::variant<
+struct t55f3c32df481113125a05cab83e4d003 : public std::variant<
   Void, // Age
   dessser::gen::raql_type::t_ext, // Cast
   Void, // Force
-  ::dessser::gen::raql_expr::tb0402ef6eb0c00c8a2b51d497e491ff8, // Peek
+  ::dessser::gen::raql_expr::te0e199631746ade8fdd411b7e499dc4a, // Peek
   Void, // Length
   Void, // Lower
   Void, // Upper
@@ -261,7 +360,7 @@ struct t133df32a784c216f0d970b5805a6b8b8 : public std::variant<
   Void // Basename
 > { using variant::variant; };
 
-enum Constr_t133df32a784c216f0d970b5805a6b8b8 {
+enum Constr_t55f3c32df481113125a05cab83e4d003 {
   Age,
   Cast,
   Force,
@@ -305,57 +404,7 @@ enum Constr_t133df32a784c216f0d970b5805a6b8b8 {
   Basename,
 };
 
-inline bool operator==(t133df32a784c216f0d970b5805a6b8b8 const &a, t133df32a784c216f0d970b5805a6b8b8 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Age
-    case 1: return ::dessser::gen::raql_type::Deref(std::get<1>(a)) == ::dessser::gen::raql_type::Deref(std::get<1>(b)); // Cast
-    case 2: return std::get<2>(a) == std::get<2>(b); // Force
-    case 3: return std::get<3>(a) == std::get<3>(b); // Peek
-    case 4: return std::get<4>(a) == std::get<4>(b); // Length
-    case 5: return std::get<5>(a) == std::get<5>(b); // Lower
-    case 6: return std::get<6>(a) == std::get<6>(b); // Upper
-    case 7: return std::get<7>(a) == std::get<7>(b); // UuidOfU128
-    case 8: return std::get<8>(a) == std::get<8>(b); // Not
-    case 9: return std::get<9>(a) == std::get<9>(b); // Abs
-    case 10: return std::get<10>(a) == std::get<10>(b); // Minus
-    case 11: return std::get<11>(a) == std::get<11>(b); // Defined
-    case 12: return std::get<12>(a) == std::get<12>(b); // Exp
-    case 13: return std::get<13>(a) == std::get<13>(b); // Log
-    case 14: return std::get<14>(a) == std::get<14>(b); // Log10
-    case 15: return std::get<15>(a) == std::get<15>(b); // Sqrt
-    case 16: return std::get<16>(a) == std::get<16>(b); // Sq
-    case 17: return std::get<17>(a) == std::get<17>(b); // Ceil
-    case 18: return std::get<18>(a) == std::get<18>(b); // Floor
-    case 19: return std::get<19>(a) == std::get<19>(b); // Round
-    case 20: return std::get<20>(a) == std::get<20>(b); // Cos
-    case 21: return std::get<21>(a) == std::get<21>(b); // Sin
-    case 22: return std::get<22>(a) == std::get<22>(b); // Tan
-    case 23: return std::get<23>(a) == std::get<23>(b); // ACos
-    case 24: return std::get<24>(a) == std::get<24>(b); // ASin
-    case 25: return std::get<25>(a) == std::get<25>(b); // ATan
-    case 26: return std::get<26>(a) == std::get<26>(b); // CosH
-    case 27: return std::get<27>(a) == std::get<27>(b); // SinH
-    case 28: return std::get<28>(a) == std::get<28>(b); // TanH
-    case 29: return std::get<29>(a) == std::get<29>(b); // Hash
-    case 30: return std::get<30>(a) == std::get<30>(b); // BeginOfRange
-    case 31: return std::get<31>(a) == std::get<31>(b); // EndOfRange
-    case 32: return std::get<32>(a) == std::get<32>(b); // Sparkline
-    case 33: return std::get<33>(a) == std::get<33>(b); // Strptime
-    case 34: return std::get<34>(a) == std::get<34>(b); // Variant
-    case 35: return std::get<35>(a) == std::get<35>(b); // Chr
-    case 36: return std::get<36>(a) == std::get<36>(b); // Like
-    case 37: return std::get<37>(a) == std::get<37>(b); // Fit
-    case 38: return std::get<38>(a) == std::get<38>(b); // CountryCode
-    case 39: return std::get<39>(a) == std::get<39>(b); // IpFamily
-    case 40: return std::get<40>(a) == std::get<40>(b); // Basename
-  };
-  return false;
-}
-inline bool operator!=(t133df32a784c216f0d970b5805a6b8b8 const &a, t133df32a784c216f0d970b5805a6b8b8 const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, t133df32a784c216f0d970b5805a6b8b8 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t55f3c32df481113125a05cab83e4d003 const &v) {
   switch (v.index()) {
     case 0: os << "Age " << std::get<0>(v); break;
     case 1: os << "Cast " << ::dessser::gen::raql_type::Deref(std::get<1>(v)); break;
@@ -402,6 +451,56 @@ inline std::ostream &operator<<(std::ostream &os, t133df32a784c216f0d970b5805a6b
   return os;
 }
 
+inline bool operator==(t55f3c32df481113125a05cab83e4d003 const &a, t55f3c32df481113125a05cab83e4d003 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Age
+    case 1: return ::dessser::gen::raql_type::Deref(std::get<1>(a)) == ::dessser::gen::raql_type::Deref(std::get<1>(b)); // Cast
+    case 2: return std::get<2>(a) == std::get<2>(b); // Force
+    case 3: return std::get<3>(a) == std::get<3>(b); // Peek
+    case 4: return std::get<4>(a) == std::get<4>(b); // Length
+    case 5: return std::get<5>(a) == std::get<5>(b); // Lower
+    case 6: return std::get<6>(a) == std::get<6>(b); // Upper
+    case 7: return std::get<7>(a) == std::get<7>(b); // UuidOfU128
+    case 8: return std::get<8>(a) == std::get<8>(b); // Not
+    case 9: return std::get<9>(a) == std::get<9>(b); // Abs
+    case 10: return std::get<10>(a) == std::get<10>(b); // Minus
+    case 11: return std::get<11>(a) == std::get<11>(b); // Defined
+    case 12: return std::get<12>(a) == std::get<12>(b); // Exp
+    case 13: return std::get<13>(a) == std::get<13>(b); // Log
+    case 14: return std::get<14>(a) == std::get<14>(b); // Log10
+    case 15: return std::get<15>(a) == std::get<15>(b); // Sqrt
+    case 16: return std::get<16>(a) == std::get<16>(b); // Sq
+    case 17: return std::get<17>(a) == std::get<17>(b); // Ceil
+    case 18: return std::get<18>(a) == std::get<18>(b); // Floor
+    case 19: return std::get<19>(a) == std::get<19>(b); // Round
+    case 20: return std::get<20>(a) == std::get<20>(b); // Cos
+    case 21: return std::get<21>(a) == std::get<21>(b); // Sin
+    case 22: return std::get<22>(a) == std::get<22>(b); // Tan
+    case 23: return std::get<23>(a) == std::get<23>(b); // ACos
+    case 24: return std::get<24>(a) == std::get<24>(b); // ASin
+    case 25: return std::get<25>(a) == std::get<25>(b); // ATan
+    case 26: return std::get<26>(a) == std::get<26>(b); // CosH
+    case 27: return std::get<27>(a) == std::get<27>(b); // SinH
+    case 28: return std::get<28>(a) == std::get<28>(b); // TanH
+    case 29: return std::get<29>(a) == std::get<29>(b); // Hash
+    case 30: return std::get<30>(a) == std::get<30>(b); // BeginOfRange
+    case 31: return std::get<31>(a) == std::get<31>(b); // EndOfRange
+    case 32: return std::get<32>(a) == std::get<32>(b); // Sparkline
+    case 33: return std::get<33>(a) == std::get<33>(b); // Strptime
+    case 34: return std::get<34>(a) == std::get<34>(b); // Variant
+    case 35: return std::get<35>(a) == std::get<35>(b); // Chr
+    case 36: return std::get<36>(a) == std::get<36>(b); // Like
+    case 37: return std::get<37>(a) == std::get<37>(b); // Fit
+    case 38: return std::get<38>(a) == std::get<38>(b); // CountryCode
+    case 39: return std::get<39>(a) == std::get<39>(b); // IpFamily
+    case 40: return std::get<40>(a) == std::get<40>(b); // Basename
+  };
+  return false;
+}
+inline bool operator!=(t55f3c32df481113125a05cab83e4d003 const &a, t55f3c32df481113125a05cab83e4d003 const &b) {
+  return !operator==(a, b);
+}
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -410,10 +509,35 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
-  ::dessser::gen::raql_expr::t133df32a784c216f0d970b5805a6b8b8,
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t317de84c4263132c81b0c1329184a44e : public std::tuple<
+  ::dessser::gen::raql_expr::t55f3c32df481113125a05cab83e4d003,
   t*
-> te187493dde7c4904748658f3fab36344;
+> {
+  using tuple::tuple;
+  t317de84c4263132c81b0c1329184a44e(std::tuple<::dessser::gen::raql_expr::t55f3c32df481113125a05cab83e4d003, t*> p)
+    : std::tuple<::dessser::gen::raql_expr::t55f3c32df481113125a05cab83e4d003, t*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t317de84c4263132c81b0c1329184a44e const &a, t317de84c4263132c81b0c1329184a44e const &b) {
+  return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
+}
+inline bool operator!=(t317de84c4263132c81b0c1329184a44e const &a, t317de84c4263132c81b0c1329184a44e const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t317de84c4263132c81b0c1329184a44e const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t0714e951accff7f9c7ebbbf55cde5e2d : public std::variant<
   Void, // Max
@@ -429,6 +553,16 @@ enum Constr_t0714e951accff7f9c7ebbbf55cde5e2d {
   Coalesce,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t0714e951accff7f9c7ebbbf55cde5e2d const &v) {
+  switch (v.index()) {
+    case 0: os << "Max " << std::get<0>(v); break;
+    case 1: os << "Min " << std::get<1>(v); break;
+    case 2: os << "Print " << std::get<2>(v); break;
+    case 3: os << "Coalesce " << std::get<3>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t0714e951accff7f9c7ebbbf55cde5e2d const &a, t0714e951accff7f9c7ebbbf55cde5e2d const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -442,16 +576,6 @@ inline bool operator==(t0714e951accff7f9c7ebbbf55cde5e2d const &a, t0714e951accf
 inline bool operator!=(t0714e951accff7f9c7ebbbf55cde5e2d const &a, t0714e951accff7f9c7ebbbf55cde5e2d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t0714e951accff7f9c7ebbbf55cde5e2d const &v) {
-  switch (v.index()) {
-    case 0: os << "Max " << std::get<0>(v); break;
-    case 1: os << "Min " << std::get<1>(v); break;
-    case 2: os << "Print " << std::get<2>(v); break;
-    case 3: os << "Coalesce " << std::get<3>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -460,10 +584,35 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct tc1369d4853f822ab78c808b3836300ae : public std::tuple<
   ::dessser::gen::raql_expr::t0714e951accff7f9c7ebbbf55cde5e2d,
   Lst<t*>
-> t1e1d1f41f4901a81e40d15f719d91e36;
+> {
+  using tuple::tuple;
+  tc1369d4853f822ab78c808b3836300ae(std::tuple<::dessser::gen::raql_expr::t0714e951accff7f9c7ebbbf55cde5e2d, Lst<t*>> p)
+    : std::tuple<::dessser::gen::raql_expr::t0714e951accff7f9c7ebbbf55cde5e2d, Lst<t*>>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tc1369d4853f822ab78c808b3836300ae const &a, tc1369d4853f822ab78c808b3836300ae const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tc1369d4853f822ab78c808b3836300ae const &a, tc1369d4853f822ab78c808b3836300ae const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tc1369d4853f822ab78c808b3836300ae const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t58dafdea9146e1796e71a181a3397bec : public std::variant<
   Void, // Add
@@ -523,6 +672,38 @@ enum Constr_t58dafdea9146e1796e71a181a3397bec {
   Percentile,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t58dafdea9146e1796e71a181a3397bec const &v) {
+  switch (v.index()) {
+    case 0: os << "Add " << std::get<0>(v); break;
+    case 1: os << "Sub " << std::get<1>(v); break;
+    case 2: os << "Mul " << std::get<2>(v); break;
+    case 3: os << "Div " << std::get<3>(v); break;
+    case 4: os << "IDiv " << std::get<4>(v); break;
+    case 5: os << "Mod " << std::get<5>(v); break;
+    case 6: os << "Pow " << std::get<6>(v); break;
+    case 7: os << "Trunc " << std::get<7>(v); break;
+    case 8: os << "Reldiff " << std::get<8>(v); break;
+    case 9: os << "And " << std::get<9>(v); break;
+    case 10: os << "Or " << std::get<10>(v); break;
+    case 11: os << "Ge " << std::get<11>(v); break;
+    case 12: os << "Gt " << std::get<12>(v); break;
+    case 13: os << "Eq " << std::get<13>(v); break;
+    case 14: os << "Concat " << std::get<14>(v); break;
+    case 15: os << "StartsWith " << std::get<15>(v); break;
+    case 16: os << "EndsWith " << std::get<16>(v); break;
+    case 17: os << "BitAnd " << std::get<17>(v); break;
+    case 18: os << "BitOr " << std::get<18>(v); break;
+    case 19: os << "BitXor " << std::get<19>(v); break;
+    case 20: os << "BitShift " << std::get<20>(v); break;
+    case 21: os << "Get " << std::get<21>(v); break;
+    case 22: os << "In " << std::get<22>(v); break;
+    case 23: os << "Strftime " << std::get<23>(v); break;
+    case 24: os << "Index " << std::get<24>(v); break;
+    case 25: os << "Percentile " << std::get<25>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t58dafdea9146e1796e71a181a3397bec const &a, t58dafdea9146e1796e71a181a3397bec const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -558,38 +739,6 @@ inline bool operator==(t58dafdea9146e1796e71a181a3397bec const &a, t58dafdea9146
 inline bool operator!=(t58dafdea9146e1796e71a181a3397bec const &a, t58dafdea9146e1796e71a181a3397bec const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t58dafdea9146e1796e71a181a3397bec const &v) {
-  switch (v.index()) {
-    case 0: os << "Add " << std::get<0>(v); break;
-    case 1: os << "Sub " << std::get<1>(v); break;
-    case 2: os << "Mul " << std::get<2>(v); break;
-    case 3: os << "Div " << std::get<3>(v); break;
-    case 4: os << "IDiv " << std::get<4>(v); break;
-    case 5: os << "Mod " << std::get<5>(v); break;
-    case 6: os << "Pow " << std::get<6>(v); break;
-    case 7: os << "Trunc " << std::get<7>(v); break;
-    case 8: os << "Reldiff " << std::get<8>(v); break;
-    case 9: os << "And " << std::get<9>(v); break;
-    case 10: os << "Or " << std::get<10>(v); break;
-    case 11: os << "Ge " << std::get<11>(v); break;
-    case 12: os << "Gt " << std::get<12>(v); break;
-    case 13: os << "Eq " << std::get<13>(v); break;
-    case 14: os << "Concat " << std::get<14>(v); break;
-    case 15: os << "StartsWith " << std::get<15>(v); break;
-    case 16: os << "EndsWith " << std::get<16>(v); break;
-    case 17: os << "BitAnd " << std::get<17>(v); break;
-    case 18: os << "BitOr " << std::get<18>(v); break;
-    case 19: os << "BitXor " << std::get<19>(v); break;
-    case 20: os << "BitShift " << std::get<20>(v); break;
-    case 21: os << "Get " << std::get<21>(v); break;
-    case 22: os << "In " << std::get<22>(v); break;
-    case 23: os << "Strftime " << std::get<23>(v); break;
-    case 24: os << "Index " << std::get<24>(v); break;
-    case 25: os << "Percentile " << std::get<25>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -606,18 +755,20 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct ta9eb4fce65081acc55eb3ed855903623 : public std::tuple<
+struct t1449747958ef85e652b082157a6cdb3f : public std::tuple<
   ::dessser::gen::raql_expr::t58dafdea9146e1796e71a181a3397bec,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(ta9eb4fce65081acc55eb3ed855903623 const &a, ta9eb4fce65081acc55eb3ed855903623 const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(t1449747958ef85e652b082157a6cdb3f const &a, t1449747958ef85e652b082157a6cdb3f const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b));
 }
-inline bool operator!=(ta9eb4fce65081acc55eb3ed855903623 const &a, ta9eb4fce65081acc55eb3ed855903623 const &b) {
+inline bool operator!=(t1449747958ef85e652b082157a6cdb3f const &a, t1449747958ef85e652b082157a6cdb3f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta9eb4fce65081acc55eb3ed855903623 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t1449747958ef85e652b082157a6cdb3f const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -636,6 +787,14 @@ enum Constr_t29b2bb83c49c2dd7652b8b5187b1f015 {
   MapSet,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t29b2bb83c49c2dd7652b8b5187b1f015 const &v) {
+  switch (v.index()) {
+    case 0: os << "SubString " << std::get<0>(v); break;
+    case 1: os << "MapSet " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t29b2bb83c49c2dd7652b8b5187b1f015 const &a, t29b2bb83c49c2dd7652b8b5187b1f015 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -647,14 +806,6 @@ inline bool operator==(t29b2bb83c49c2dd7652b8b5187b1f015 const &a, t29b2bb83c49c
 inline bool operator!=(t29b2bb83c49c2dd7652b8b5187b1f015 const &a, t29b2bb83c49c2dd7652b8b5187b1f015 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t29b2bb83c49c2dd7652b8b5187b1f015 const &v) {
-  switch (v.index()) {
-    case 0: os << "SubString " << std::get<0>(v); break;
-    case 1: os << "MapSet " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -679,19 +830,21 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t794ab464927988d666f9919732c3239c : public std::tuple<
+struct t11f260516b98fafae85b63c599a34c8b : public std::tuple<
   ::dessser::gen::raql_expr::t29b2bb83c49c2dd7652b8b5187b1f015,
   t*,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(t794ab464927988d666f9919732c3239c const &a, t794ab464927988d666f9919732c3239c const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(t11f260516b98fafae85b63c599a34c8b const &a, t11f260516b98fafae85b63c599a34c8b const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b)) && (*std::get<3>(a)) == (*std::get<3>(b));
 }
-inline bool operator!=(t794ab464927988d666f9919732c3239c const &a, t794ab464927988d666f9919732c3239c const &b) {
+inline bool operator!=(t11f260516b98fafae85b63c599a34c8b const &a, t11f260516b98fafae85b63c599a34c8b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t794ab464927988d666f9919732c3239c const &t) {
+inline std::ostream &operator<<(std::ostream &os, t11f260516b98fafae85b63c599a34c8b const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -729,15 +882,23 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t9dca13408164b9b878af2f494a648c1a : public std::variant<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t74bec7fc82b0955e5415aed5697bdf75 : public std::variant<
   ::dessser::gen::raql_expr::tf7ae7db1c515d769014dcb9b31531498, // SL0
-  ::dessser::gen::raql_expr::te187493dde7c4904748658f3fab36344, // SL1
-  ::dessser::gen::raql_expr::t1e1d1f41f4901a81e40d15f719d91e36, // SL1s
-  ::dessser::gen::raql_expr::ta9eb4fce65081acc55eb3ed855903623, // SL2
-  ::dessser::gen::raql_expr::t794ab464927988d666f9919732c3239c // SL3
+  ::dessser::gen::raql_expr::t317de84c4263132c81b0c1329184a44e, // SL1
+  ::dessser::gen::raql_expr::tc1369d4853f822ab78c808b3836300ae, // SL1s
+  ::dessser::gen::raql_expr::t1449747958ef85e652b082157a6cdb3f, // SL2
+  ::dessser::gen::raql_expr::t11f260516b98fafae85b63c599a34c8b // SL3
 > { using variant::variant; };
 
-enum Constr_t9dca13408164b9b878af2f494a648c1a {
+enum Constr_t74bec7fc82b0955e5415aed5697bdf75 {
   SL0,
   SL1,
   SL1s,
@@ -745,21 +906,7 @@ enum Constr_t9dca13408164b9b878af2f494a648c1a {
   SL3,
 };
 
-inline bool operator==(t9dca13408164b9b878af2f494a648c1a const &a, t9dca13408164b9b878af2f494a648c1a const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // SL0
-    case 1: return std::get<1>(a) == std::get<1>(b); // SL1
-    case 2: return std::get<2>(a) == std::get<2>(b); // SL1s
-    case 3: return std::get<3>(a) == std::get<3>(b); // SL2
-    case 4: return std::get<4>(a) == std::get<4>(b); // SL3
-  };
-  return false;
-}
-inline bool operator!=(t9dca13408164b9b878af2f494a648c1a const &a, t9dca13408164b9b878af2f494a648c1a const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, t9dca13408164b9b878af2f494a648c1a const &v) {
+inline std::ostream &operator<<(std::ostream &os, t74bec7fc82b0955e5415aed5697bdf75 const &v) {
   switch (v.index()) {
     case 0: os << "SL0 " << std::get<0>(v); break;
     case 1: os << "SL1 " << std::get<1>(v); break;
@@ -770,6 +917,20 @@ inline std::ostream &operator<<(std::ostream &os, t9dca13408164b9b878af2f494a648
   return os;
 }
 
+inline bool operator==(t74bec7fc82b0955e5415aed5697bdf75 const &a, t74bec7fc82b0955e5415aed5697bdf75 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // SL0
+    case 1: return std::get<1>(a) == std::get<1>(b); // SL1
+    case 2: return std::get<2>(a) == std::get<2>(b); // SL1s
+    case 3: return std::get<3>(a) == std::get<3>(b); // SL2
+    case 4: return std::get<4>(a) == std::get<4>(b); // SL3
+  };
+  return false;
+}
+inline bool operator!=(t74bec7fc82b0955e5415aed5697bdf75 const &a, t74bec7fc82b0955e5415aed5697bdf75 const &b) {
+  return !operator==(a, b);
+}
 struct t9aeb08fceb6eb1d5796a64c8fddd436c : public std::variant<
   Void, // LocalState
   Void // GlobalState
@@ -779,6 +940,14 @@ enum Constr_t9aeb08fceb6eb1d5796a64c8fddd436c {
   LocalState,
   GlobalState,
 };
+
+inline std::ostream &operator<<(std::ostream &os, t9aeb08fceb6eb1d5796a64c8fddd436c const &v) {
+  switch (v.index()) {
+    case 0: os << "LocalState " << std::get<0>(v); break;
+    case 1: os << "GlobalState " << std::get<1>(v); break;
+  }
+  return os;
+}
 
 inline bool operator==(t9aeb08fceb6eb1d5796a64c8fddd436c const &a, t9aeb08fceb6eb1d5796a64c8fddd436c const &b) {
   if (a.index() != b.index()) return false;
@@ -791,26 +960,20 @@ inline bool operator==(t9aeb08fceb6eb1d5796a64c8fddd436c const &a, t9aeb08fceb6e
 inline bool operator!=(t9aeb08fceb6eb1d5796a64c8fddd436c const &a, t9aeb08fceb6eb1d5796a64c8fddd436c const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t9aeb08fceb6eb1d5796a64c8fddd436c const &v) {
-  switch (v.index()) {
-    case 0: os << "LocalState " << std::get<0>(v); break;
-    case 1: os << "GlobalState " << std::get<1>(v); break;
-  }
-  return os;
-}
-
-struct t7a94101e0d1c22c7ddfebd959d73730a : public std::tuple<
+struct tc1c4317cb65c5b1b0f16657e46216582 : public std::tuple<
   double,
   double,
   uint32_t
-> { using tuple::tuple; };
-inline bool operator==(t7a94101e0d1c22c7ddfebd959d73730a const &a, t7a94101e0d1c22c7ddfebd959d73730a const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(tc1c4317cb65c5b1b0f16657e46216582 const &a, tc1c4317cb65c5b1b0f16657e46216582 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
 }
-inline bool operator!=(t7a94101e0d1c22c7ddfebd959d73730a const &a, t7a94101e0d1c22c7ddfebd959d73730a const &b) {
+inline bool operator!=(tc1c4317cb65c5b1b0f16657e46216582 const &a, tc1c4317cb65c5b1b0f16657e46216582 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7a94101e0d1c22c7ddfebd959d73730a const &t) {
+inline std::ostream &operator<<(std::ostream &os, tc1c4317cb65c5b1b0f16657e46216582 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -819,7 +982,7 @@ inline std::ostream &operator<<(std::ostream &os, t7a94101e0d1c22c7ddfebd959d737
   return os;
 }
 
-struct t82ed0b4d8276434c22a0ca15ade92062 : public std::variant<
+struct t82fe136ba20c37a9f3853622f9acef6d : public std::variant<
   Void, // AggrMin
   Void, // AggrMax
   Void, // AggrSum
@@ -831,13 +994,13 @@ struct t82ed0b4d8276434c22a0ca15ade92062 : public std::variant<
   Void, // AggrBitXor
   Void, // AggrFirst
   Void, // AggrLast
-  ::dessser::gen::raql_expr::t7a94101e0d1c22c7ddfebd959d73730a, // AggrHistogram
+  ::dessser::gen::raql_expr::tc1c4317cb65c5b1b0f16657e46216582, // AggrHistogram
   Void, // Group
   Void, // Count
   Void // Distinct
 > { using variant::variant; };
 
-enum Constr_t82ed0b4d8276434c22a0ca15ade92062 {
+enum Constr_t82fe136ba20c37a9f3853622f9acef6d {
   AggrMin,
   AggrMax,
   AggrSum,
@@ -855,31 +1018,7 @@ enum Constr_t82ed0b4d8276434c22a0ca15ade92062 {
   Distinct,
 };
 
-inline bool operator==(t82ed0b4d8276434c22a0ca15ade92062 const &a, t82ed0b4d8276434c22a0ca15ade92062 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // AggrMin
-    case 1: return std::get<1>(a) == std::get<1>(b); // AggrMax
-    case 2: return std::get<2>(a) == std::get<2>(b); // AggrSum
-    case 3: return std::get<3>(a) == std::get<3>(b); // AggrAvg
-    case 4: return std::get<4>(a) == std::get<4>(b); // AggrAnd
-    case 5: return std::get<5>(a) == std::get<5>(b); // AggrOr
-    case 6: return std::get<6>(a) == std::get<6>(b); // AggrBitAnd
-    case 7: return std::get<7>(a) == std::get<7>(b); // AggrBitOr
-    case 8: return std::get<8>(a) == std::get<8>(b); // AggrBitXor
-    case 9: return std::get<9>(a) == std::get<9>(b); // AggrFirst
-    case 10: return std::get<10>(a) == std::get<10>(b); // AggrLast
-    case 11: return std::get<11>(a) == std::get<11>(b); // AggrHistogram
-    case 12: return std::get<12>(a) == std::get<12>(b); // Group
-    case 13: return std::get<13>(a) == std::get<13>(b); // Count
-    case 14: return std::get<14>(a) == std::get<14>(b); // Distinct
-  };
-  return false;
-}
-inline bool operator!=(t82ed0b4d8276434c22a0ca15ade92062 const &a, t82ed0b4d8276434c22a0ca15ade92062 const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, t82ed0b4d8276434c22a0ca15ade92062 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t82fe136ba20c37a9f3853622f9acef6d const &v) {
   switch (v.index()) {
     case 0: os << "AggrMin " << std::get<0>(v); break;
     case 1: os << "AggrMax " << std::get<1>(v); break;
@@ -900,6 +1039,30 @@ inline std::ostream &operator<<(std::ostream &os, t82ed0b4d8276434c22a0ca15ade92
   return os;
 }
 
+inline bool operator==(t82fe136ba20c37a9f3853622f9acef6d const &a, t82fe136ba20c37a9f3853622f9acef6d const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // AggrMin
+    case 1: return std::get<1>(a) == std::get<1>(b); // AggrMax
+    case 2: return std::get<2>(a) == std::get<2>(b); // AggrSum
+    case 3: return std::get<3>(a) == std::get<3>(b); // AggrAvg
+    case 4: return std::get<4>(a) == std::get<4>(b); // AggrAnd
+    case 5: return std::get<5>(a) == std::get<5>(b); // AggrOr
+    case 6: return std::get<6>(a) == std::get<6>(b); // AggrBitAnd
+    case 7: return std::get<7>(a) == std::get<7>(b); // AggrBitOr
+    case 8: return std::get<8>(a) == std::get<8>(b); // AggrBitXor
+    case 9: return std::get<9>(a) == std::get<9>(b); // AggrFirst
+    case 10: return std::get<10>(a) == std::get<10>(b); // AggrLast
+    case 11: return std::get<11>(a) == std::get<11>(b); // AggrHistogram
+    case 12: return std::get<12>(a) == std::get<12>(b); // Group
+    case 13: return std::get<13>(a) == std::get<13>(b); // Count
+    case 14: return std::get<14>(a) == std::get<14>(b); // Distinct
+  };
+  return false;
+}
+inline bool operator!=(t82fe136ba20c37a9f3853622f9acef6d const &a, t82fe136ba20c37a9f3853622f9acef6d const &b) {
+  return !operator==(a, b);
+}
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -908,10 +1071,35 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
-  ::dessser::gen::raql_expr::t82ed0b4d8276434c22a0ca15ade92062,
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct tb2d8dbe6ccfb536023cbb663cf40a704 : public std::tuple<
+  ::dessser::gen::raql_expr::t82fe136ba20c37a9f3853622f9acef6d,
   t*
-> t797b5289cecf30b53b722bff0d1083a8;
+> {
+  using tuple::tuple;
+  tb2d8dbe6ccfb536023cbb663cf40a704(std::tuple<::dessser::gen::raql_expr::t82fe136ba20c37a9f3853622f9acef6d, t*> p)
+    : std::tuple<::dessser::gen::raql_expr::t82fe136ba20c37a9f3853622f9acef6d, t*>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb2d8dbe6ccfb536023cbb663cf40a704 const &a, tb2d8dbe6ccfb536023cbb663cf40a704 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
+}
+inline bool operator!=(tb2d8dbe6ccfb536023cbb663cf40a704 const &a, tb2d8dbe6ccfb536023cbb663cf40a704 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb2d8dbe6ccfb536023cbb663cf40a704 const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct ta7ffb229534f504804e1c24f742166d6 : public std::variant<
   Void, // Lag
@@ -927,6 +1115,16 @@ enum Constr_ta7ffb229534f504804e1c24f742166d6 {
   OneOutOf,
 };
 
+inline std::ostream &operator<<(std::ostream &os, ta7ffb229534f504804e1c24f742166d6 const &v) {
+  switch (v.index()) {
+    case 0: os << "Lag " << std::get<0>(v); break;
+    case 1: os << "ExpSmooth " << std::get<1>(v); break;
+    case 2: os << "Sample " << std::get<2>(v); break;
+    case 3: os << "OneOutOf " << std::get<3>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(ta7ffb229534f504804e1c24f742166d6 const &a, ta7ffb229534f504804e1c24f742166d6 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -940,16 +1138,6 @@ inline bool operator==(ta7ffb229534f504804e1c24f742166d6 const &a, ta7ffb229534f
 inline bool operator!=(ta7ffb229534f504804e1c24f742166d6 const &a, ta7ffb229534f504804e1c24f742166d6 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta7ffb229534f504804e1c24f742166d6 const &v) {
-  switch (v.index()) {
-    case 0: os << "Lag " << std::get<0>(v); break;
-    case 1: os << "ExpSmooth " << std::get<1>(v); break;
-    case 2: os << "Sample " << std::get<2>(v); break;
-    case 3: os << "OneOutOf " << std::get<3>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -966,18 +1154,20 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct tab0dcdfe0a2d58ff7fba6f4496f1629d : public std::tuple<
+struct t6ca11fcc3293480822dee749868fd0f3 : public std::tuple<
   ::dessser::gen::raql_expr::ta7ffb229534f504804e1c24f742166d6,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(tab0dcdfe0a2d58ff7fba6f4496f1629d const &a, tab0dcdfe0a2d58ff7fba6f4496f1629d const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(t6ca11fcc3293480822dee749868fd0f3 const &a, t6ca11fcc3293480822dee749868fd0f3 const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b));
 }
-inline bool operator!=(tab0dcdfe0a2d58ff7fba6f4496f1629d const &a, tab0dcdfe0a2d58ff7fba6f4496f1629d const &b) {
+inline bool operator!=(t6ca11fcc3293480822dee749868fd0f3 const &a, t6ca11fcc3293480822dee749868fd0f3 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tab0dcdfe0a2d58ff7fba6f4496f1629d const &t) {
+inline std::ostream &operator<<(std::ostream &os, t6ca11fcc3293480822dee749868fd0f3 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -998,6 +1188,15 @@ enum Constr_t213fd001439b7e9763630d054b30bb45 {
   OnceEvery,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t213fd001439b7e9763630d054b30bb45 const &v) {
+  switch (v.index()) {
+    case 0: os << "MovingAvg " << std::get<0>(v); break;
+    case 1: os << "Hysteresis " << std::get<1>(v); break;
+    case 2: os << "OnceEvery " << std::get<2>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t213fd001439b7e9763630d054b30bb45 const &a, t213fd001439b7e9763630d054b30bb45 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -1010,15 +1209,6 @@ inline bool operator==(t213fd001439b7e9763630d054b30bb45 const &a, t213fd001439b
 inline bool operator!=(t213fd001439b7e9763630d054b30bb45 const &a, t213fd001439b7e9763630d054b30bb45 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t213fd001439b7e9763630d054b30bb45 const &v) {
-  switch (v.index()) {
-    case 0: os << "MovingAvg " << std::get<0>(v); break;
-    case 1: os << "Hysteresis " << std::get<1>(v); break;
-    case 2: os << "OnceEvery " << std::get<2>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -1043,19 +1233,21 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t680c3184893bd6b56c0f5481ac3d4cb6 : public std::tuple<
+struct tb5f0bb83ac029015b6b4ee8cd11bbc9e : public std::tuple<
   ::dessser::gen::raql_expr::t213fd001439b7e9763630d054b30bb45,
   t*,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(t680c3184893bd6b56c0f5481ac3d4cb6 const &a, t680c3184893bd6b56c0f5481ac3d4cb6 const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(tb5f0bb83ac029015b6b4ee8cd11bbc9e const &a, tb5f0bb83ac029015b6b4ee8cd11bbc9e const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b)) && (*std::get<3>(a)) == (*std::get<3>(b));
 }
-inline bool operator!=(t680c3184893bd6b56c0f5481ac3d4cb6 const &a, t680c3184893bd6b56c0f5481ac3d4cb6 const &b) {
+inline bool operator!=(tb5f0bb83ac029015b6b4ee8cd11bbc9e const &a, tb5f0bb83ac029015b6b4ee8cd11bbc9e const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t680c3184893bd6b56c0f5481ac3d4cb6 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tb5f0bb83ac029015b6b4ee8cd11bbc9e const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -1075,6 +1267,14 @@ enum Constr_t2e68ed7bcde629b79efcf8cb23da3dd3 {
   Remember,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t2e68ed7bcde629b79efcf8cb23da3dd3 const &v) {
+  switch (v.index()) {
+    case 0: os << "DampedHolt " << std::get<0>(v); break;
+    case 1: os << "Remember " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t2e68ed7bcde629b79efcf8cb23da3dd3 const &a, t2e68ed7bcde629b79efcf8cb23da3dd3 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -1086,14 +1286,6 @@ inline bool operator==(t2e68ed7bcde629b79efcf8cb23da3dd3 const &a, t2e68ed7bcde6
 inline bool operator!=(t2e68ed7bcde629b79efcf8cb23da3dd3 const &a, t2e68ed7bcde629b79efcf8cb23da3dd3 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t2e68ed7bcde629b79efcf8cb23da3dd3 const &v) {
-  switch (v.index()) {
-    case 0: os << "DampedHolt " << std::get<0>(v); break;
-    case 1: os << "Remember " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -1126,20 +1318,22 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t801b86950988d4a9ab0f917a16c686fa : public std::tuple<
+struct tbbe1592e503b04515498e1841d4ef53f : public std::tuple<
   ::dessser::gen::raql_expr::t2e68ed7bcde629b79efcf8cb23da3dd3,
   t*,
   t*,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(t801b86950988d4a9ab0f917a16c686fa const &a, t801b86950988d4a9ab0f917a16c686fa const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(tbbe1592e503b04515498e1841d4ef53f const &a, tbbe1592e503b04515498e1841d4ef53f const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b)) && (*std::get<3>(a)) == (*std::get<3>(b)) && (*std::get<4>(a)) == (*std::get<4>(b));
 }
-inline bool operator!=(t801b86950988d4a9ab0f917a16c686fa const &a, t801b86950988d4a9ab0f917a16c686fa const &b) {
+inline bool operator!=(tbbe1592e503b04515498e1841d4ef53f const &a, tbbe1592e503b04515498e1841d4ef53f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t801b86950988d4a9ab0f917a16c686fa const &t) {
+inline std::ostream &operator<<(std::ostream &os, tbbe1592e503b04515498e1841d4ef53f const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -1180,6 +1374,14 @@ enum Constr_t7f41e7341759d79e67af6acb8e5b5a38 {
   Largest,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t7f41e7341759d79e67af6acb8e5b5a38 const &v) {
+  switch (v.index()) {
+    case 0: os << "MultiLinReg " << std::get<0>(v); break;
+    case 1: os << "Largest " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t7f41e7341759d79e67af6acb8e5b5a38 const &a, t7f41e7341759d79e67af6acb8e5b5a38 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -1191,14 +1393,6 @@ inline bool operator==(t7f41e7341759d79e67af6acb8e5b5a38 const &a, t7f41e7341759
 inline bool operator!=(t7f41e7341759d79e67af6acb8e5b5a38 const &a, t7f41e7341759d79e67af6acb8e5b5a38 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7f41e7341759d79e67af6acb8e5b5a38 const &v) {
-  switch (v.index()) {
-    case 0: os << "MultiLinReg " << std::get<0>(v); break;
-    case 1: os << "Largest " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -1231,20 +1425,22 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t48c877c7f8eec929bb2b07bb025d9400 : public std::tuple<
+struct t70c931bd7b4850d7fd1d2f0b15785f7c : public std::tuple<
   ::dessser::gen::raql_expr::t7f41e7341759d79e67af6acb8e5b5a38,
   t*,
   t*,
   t*,
   Lst<t*>
-> { using tuple::tuple; };
-inline bool operator==(t48c877c7f8eec929bb2b07bb025d9400 const &a, t48c877c7f8eec929bb2b07bb025d9400 const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(t70c931bd7b4850d7fd1d2f0b15785f7c const &a, t70c931bd7b4850d7fd1d2f0b15785f7c const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b)) && (*std::get<3>(a)) == (*std::get<3>(b)) && std::get<4>(a) == std::get<4>(b);
 }
-inline bool operator!=(t48c877c7f8eec929bb2b07bb025d9400 const &a, t48c877c7f8eec929bb2b07bb025d9400 const &b) {
+inline bool operator!=(t70c931bd7b4850d7fd1d2f0b15785f7c const &a, t70c931bd7b4850d7fd1d2f0b15785f7c const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t48c877c7f8eec929bb2b07bb025d9400 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t70c931bd7b4850d7fd1d2f0b15785f7c const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -1263,6 +1459,13 @@ enum Constr_ta020e7823506dcf58037dc373380c189 {
   DampedHoltWinter,
 };
 
+inline std::ostream &operator<<(std::ostream &os, ta020e7823506dcf58037dc373380c189 const &v) {
+  switch (v.index()) {
+    case 0: os << "DampedHoltWinter " << std::get<0>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(ta020e7823506dcf58037dc373380c189 const &a, ta020e7823506dcf58037dc373380c189 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -1273,13 +1476,6 @@ inline bool operator==(ta020e7823506dcf58037dc373380c189 const &a, ta020e7823506
 inline bool operator!=(ta020e7823506dcf58037dc373380c189 const &a, ta020e7823506dcf58037dc373380c189 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta020e7823506dcf58037dc373380c189 const &v) {
-  switch (v.index()) {
-    case 0: os << "DampedHoltWinter " << std::get<0>(v); break;
-  }
-  return os;
-}
-
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -1328,7 +1524,7 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t6b77256fcb81f65e6f93d323c46fc1f9 : public std::tuple<
+struct te6925d16e5bcfe16da1b529df8649844 : public std::tuple<
   ::dessser::gen::raql_expr::ta020e7823506dcf58037dc373380c189,
   t*,
   t*,
@@ -1336,14 +1532,16 @@ struct t6b77256fcb81f65e6f93d323c46fc1f9 : public std::tuple<
   t*,
   t*,
   t*
-> { using tuple::tuple; };
-inline bool operator==(t6b77256fcb81f65e6f93d323c46fc1f9 const &a, t6b77256fcb81f65e6f93d323c46fc1f9 const &b) {
+> {
+  using tuple::tuple;
+};
+inline bool operator==(te6925d16e5bcfe16da1b529df8649844 const &a, te6925d16e5bcfe16da1b529df8649844 const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b)) && (*std::get<2>(a)) == (*std::get<2>(b)) && (*std::get<3>(a)) == (*std::get<3>(b)) && (*std::get<4>(a)) == (*std::get<4>(b)) && (*std::get<5>(a)) == (*std::get<5>(b)) && (*std::get<6>(a)) == (*std::get<6>(b));
 }
-inline bool operator!=(t6b77256fcb81f65e6f93d323c46fc1f9 const &a, t6b77256fcb81f65e6f93d323c46fc1f9 const &b) {
+inline bool operator!=(te6925d16e5bcfe16da1b529df8649844 const &a, te6925d16e5bcfe16da1b529df8649844 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t6b77256fcb81f65e6f93d323c46fc1f9 const &t) {
+inline std::ostream &operator<<(std::ostream &os, te6925d16e5bcfe16da1b529df8649844 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t) << ", "
@@ -1758,18 +1956,22 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct te849bff45ea487552f06db0d2eb6118f : public std::variant<
-  ::dessser::gen::raql_expr::t797b5289cecf30b53b722bff0d1083a8, // SF1
-  ::dessser::gen::raql_expr::tab0dcdfe0a2d58ff7fba6f4496f1629d, // SF2
-  ::dessser::gen::raql_expr::t680c3184893bd6b56c0f5481ac3d4cb6, // SF3
-  ::dessser::gen::raql_expr::t801b86950988d4a9ab0f917a16c686fa, // SF4
-  ::dessser::gen::raql_expr::t48c877c7f8eec929bb2b07bb025d9400, // SF4s
-  ::dessser::gen::raql_expr::t6b77256fcb81f65e6f93d323c46fc1f9, // SF6
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct tbf52983c99e6494329934c4a28dcf071 : public std::variant<
+  ::dessser::gen::raql_expr::tb2d8dbe6ccfb536023cbb663cf40a704, // SF1
+  ::dessser::gen::raql_expr::t6ca11fcc3293480822dee749868fd0f3, // SF2
+  ::dessser::gen::raql_expr::tb5f0bb83ac029015b6b4ee8cd11bbc9e, // SF3
+  ::dessser::gen::raql_expr::tbbe1592e503b04515498e1841d4ef53f, // SF4
+  ::dessser::gen::raql_expr::t70c931bd7b4850d7fd1d2f0b15785f7c, // SF4s
+  ::dessser::gen::raql_expr::te6925d16e5bcfe16da1b529df8649844, // SF6
   ::dessser::gen::raql_expr::t779c3e3eae2a4b246fb5314d03e1dcac, // Top
   ::dessser::gen::raql_expr::tc56215e23eb52ef2b8bf1bb867c7e0a2 // Past
 > { using variant::variant; };
 
-enum Constr_te849bff45ea487552f06db0d2eb6118f {
+enum Constr_tbf52983c99e6494329934c4a28dcf071 {
   SF1,
   SF2,
   SF3,
@@ -1780,24 +1982,7 @@ enum Constr_te849bff45ea487552f06db0d2eb6118f {
   Past,
 };
 
-inline bool operator==(te849bff45ea487552f06db0d2eb6118f const &a, te849bff45ea487552f06db0d2eb6118f const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // SF1
-    case 1: return std::get<1>(a) == std::get<1>(b); // SF2
-    case 2: return std::get<2>(a) == std::get<2>(b); // SF3
-    case 3: return std::get<3>(a) == std::get<3>(b); // SF4
-    case 4: return std::get<4>(a) == std::get<4>(b); // SF4s
-    case 5: return std::get<5>(a) == std::get<5>(b); // SF6
-    case 6: return std::get<6>(a) == std::get<6>(b); // Top
-    case 7: return std::get<7>(a) == std::get<7>(b); // Past
-  };
-  return false;
-}
-inline bool operator!=(te849bff45ea487552f06db0d2eb6118f const &a, te849bff45ea487552f06db0d2eb6118f const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, te849bff45ea487552f06db0d2eb6118f const &v) {
+inline std::ostream &operator<<(std::ostream &os, tbf52983c99e6494329934c4a28dcf071 const &v) {
   switch (v.index()) {
     case 0: os << "SF1 " << std::get<0>(v); break;
     case 1: os << "SF2 " << std::get<1>(v); break;
@@ -1811,186 +1996,209 @@ inline std::ostream &operator<<(std::ostream &os, te849bff45ea487552f06db0d2eb61
   return os;
 }
 
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t3e66b8983318df845f51716c56819236 : public std::tuple<
-  ::dessser::gen::raql_expr::t9aeb08fceb6eb1d5796a64c8fddd436c,
-  bool,
-  ::dessser::gen::raql_expr::te849bff45ea487552f06db0d2eb6118f
-> { using tuple::tuple; };
-inline bool operator==(t3e66b8983318df845f51716c56819236 const &a, t3e66b8983318df845f51716c56819236 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
+inline bool operator==(tbf52983c99e6494329934c4a28dcf071 const &a, tbf52983c99e6494329934c4a28dcf071 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // SF1
+    case 1: return std::get<1>(a) == std::get<1>(b); // SF2
+    case 2: return std::get<2>(a) == std::get<2>(b); // SF3
+    case 3: return std::get<3>(a) == std::get<3>(b); // SF4
+    case 4: return std::get<4>(a) == std::get<4>(b); // SF4s
+    case 5: return std::get<5>(a) == std::get<5>(b); // SF6
+    case 6: return std::get<6>(a) == std::get<6>(b); // Top
+    case 7: return std::get<7>(a) == std::get<7>(b); // Past
+  };
+  return false;
 }
-inline bool operator!=(t3e66b8983318df845f51716c56819236 const &a, t3e66b8983318df845f51716c56819236 const &b) {
+inline bool operator!=(tbf52983c99e6494329934c4a28dcf071 const &a, tbf52983c99e6494329934c4a28dcf071 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t3e66b8983318df845f51716c56819236 const &t) {
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t300ed380327f6325b25c9ea8678c67f9 : public std::tuple<
+  ::dessser::gen::raql_expr::t9aeb08fceb6eb1d5796a64c8fddd436c,
+  bool,
+  ::dessser::gen::raql_expr::tbf52983c99e6494329934c4a28dcf071
+> {
+  using tuple::tuple;
+};
+inline bool operator==(t300ed380327f6325b25c9ea8678c67f9 const &a, t300ed380327f6325b25c9ea8678c67f9 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
+}
+inline bool operator!=(t300ed380327f6325b25c9ea8678c67f9 const &a, t300ed380327f6325b25c9ea8678c67f9 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t300ed380327f6325b25c9ea8678c67f9 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -2015,41 +2223,41 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t904326184a165aa7b5c8e6ffafa090a8 : public std::tuple<
   t*,
   t*
-> t7411897bdb6c9b6e00a01b4eb6506ccf;
-
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t9fb75ec5c85706195b12b035eb776a06 : public std::variant<
-  ::dessser::gen::raql_expr::t7411897bdb6c9b6e00a01b4eb6506ccf // Split
-> { using variant::variant; };
-
-enum Constr_t9fb75ec5c85706195b12b035eb776a06 {
-  Split,
+> {
+  using tuple::tuple;
+  t904326184a165aa7b5c8e6ffafa090a8(std::tuple<t*, t*> p)
+    : std::tuple<t*, t*>(std::get<0>(p), std::get<1>(p)) {}
 };
-
-inline bool operator==(t9fb75ec5c85706195b12b035eb776a06 const &a, t9fb75ec5c85706195b12b035eb776a06 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Split
-  };
-  return false;
+inline bool operator==(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t9fb75ec5c85706195b12b035eb776a06 const &a, t9fb75ec5c85706195b12b035eb776a06 const &b) {
+inline bool operator!=(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t9fb75ec5c85706195b12b035eb776a06 const &v) {
-  switch (v.index()) {
-    case 0: os << "Split " << std::get<0>(v); break;
-  }
+inline std::ostream &operator<<(std::ostream &os, t904326184a165aa7b5c8e6ffafa090a8 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << *std::get<1>(t)
+     << '>';
   return os;
 }
 
@@ -2069,237 +2277,322 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct tecefd36df7fb0a2edee147cf4733c99e : public std::variant<
-  Lst<t*>, // Tuple
-  Lst<::dessser::gen::raql_expr::t5b91ba1a37fd19816559f3dabb32e8b5>, // Record
-  Lst<t*>, // Vector
-  ::dessser::gen::raql_expr::t26be19fb82ef1d2f9c7b2c0aa1ec46bd, // Case
-  ::dessser::gen::raql_expr::t9dca13408164b9b878af2f494a648c1a, // Stateless
-  ::dessser::gen::raql_expr::t3e66b8983318df845f51716c56819236, // Stateful
-  ::dessser::gen::raql_expr::t9fb75ec5c85706195b12b035eb776a06 // Generator
+struct tbcd1dc8722e46cce4ab285b33e4a2b47 : public std::variant<
+  ::dessser::gen::raql_expr::t904326184a165aa7b5c8e6ffafa090a8 // Split
 > { using variant::variant; };
 
-enum Constr_tecefd36df7fb0a2edee147cf4733c99e {
+enum Constr_tbcd1dc8722e46cce4ab285b33e4a2b47 {
+  Split,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tbcd1dc8722e46cce4ab285b33e4a2b47 const &v) {
+  switch (v.index()) {
+    case 0: os << "Split " << std::get<0>(v); break;
+  }
+  return os;
+}
+
+inline bool operator==(tbcd1dc8722e46cce4ab285b33e4a2b47 const &a, tbcd1dc8722e46cce4ab285b33e4a2b47 const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Split
+  };
+  return false;
+}
+inline bool operator!=(tbcd1dc8722e46cce4ab285b33e4a2b47 const &a, tbcd1dc8722e46cce4ab285b33e4a2b47 const &b) {
+  return !operator==(a, b);
+}
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t25167b1d73a9200430f74833c3ed0c2c : public std::variant<
+  Lst<t*>, // Tuple
+  Lst<::dessser::gen::raql_expr::tddfc646ae3827db7d4914729994bdbb1>, // Record
+  Lst<t*>, // Vector
+  ::dessser::gen::raql_expr::td73e40f734c89c38f2d6352e81bfc1af, // Case
+  ::dessser::gen::raql_expr::t74bec7fc82b0955e5415aed5697bdf75, // Stateless
+  ::dessser::gen::raql_expr::t300ed380327f6325b25c9ea8678c67f9, // Stateful
+  ::dessser::gen::raql_expr::tbcd1dc8722e46cce4ab285b33e4a2b47 // Generator
+> { using variant::variant; };
+
+enum Constr_t25167b1d73a9200430f74833c3ed0c2c {
   Tuple,
   Record,
   Vector,
@@ -2309,23 +2602,7 @@ enum Constr_tecefd36df7fb0a2edee147cf4733c99e {
   Generator,
 };
 
-inline bool operator==(tecefd36df7fb0a2edee147cf4733c99e const &a, tecefd36df7fb0a2edee147cf4733c99e const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Tuple
-    case 1: return std::get<1>(a) == std::get<1>(b); // Record
-    case 2: return std::get<2>(a) == std::get<2>(b); // Vector
-    case 3: return std::get<3>(a) == std::get<3>(b); // Case
-    case 4: return std::get<4>(a) == std::get<4>(b); // Stateless
-    case 5: return std::get<5>(a) == std::get<5>(b); // Stateful
-    case 6: return std::get<6>(a) == std::get<6>(b); // Generator
-  };
-  return false;
-}
-inline bool operator!=(tecefd36df7fb0a2edee147cf4733c99e const &a, tecefd36df7fb0a2edee147cf4733c99e const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, tecefd36df7fb0a2edee147cf4733c99e const &v) {
+inline std::ostream &operator<<(std::ostream &os, t25167b1d73a9200430f74833c3ed0c2c const &v) {
   switch (v.index()) {
     case 0: os << "Tuple " << std::get<0>(v); break;
     case 1: os << "Record " << std::get<1>(v); break;
@@ -2338,6 +2615,154 @@ inline std::ostream &operator<<(std::ostream &os, tecefd36df7fb0a2edee147cf4733c
   return os;
 }
 
+inline bool operator==(t25167b1d73a9200430f74833c3ed0c2c const &a, t25167b1d73a9200430f74833c3ed0c2c const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Tuple
+    case 1: return std::get<1>(a) == std::get<1>(b); // Record
+    case 2: return std::get<2>(a) == std::get<2>(b); // Vector
+    case 3: return std::get<3>(a) == std::get<3>(b); // Case
+    case 4: return std::get<4>(a) == std::get<4>(b); // Stateless
+    case 5: return std::get<5>(a) == std::get<5>(b); // Stateful
+    case 6: return std::get<6>(a) == std::get<6>(b); // Generator
+  };
+  return false;
+}
+inline bool operator!=(t25167b1d73a9200430f74833c3ed0c2c const &a, t25167b1d73a9200430f74833c3ed0c2c const &b) {
+  return !operator==(a, b);
+}
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
@@ -3047,11 +3472,11 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t {
-  ::dessser::gen::raql_expr::tecefd36df7fb0a2edee147cf4733c99e text;
+  ::dessser::gen::raql_expr::t25167b1d73a9200430f74833c3ed0c2c text;
   dessser::gen::raql_type::t_ext typ;
   uint32_t uniq_num;
   std::optional<dessser::gen::units::t_ext> units;
-  t(::dessser::gen::raql_expr::tecefd36df7fb0a2edee147cf4733c99e text_, dessser::gen::raql_type::t_ext typ_, uint32_t uniq_num_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), typ(typ_), uniq_num(uniq_num_), units(units_) {}
+  t(::dessser::gen::raql_expr::t25167b1d73a9200430f74833c3ed0c2c text_, dessser::gen::raql_type::t_ext typ_, uint32_t uniq_num_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), typ(typ_), uniq_num(uniq_num_), units(units_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -4486,17 +4911,1418 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-typedef std::tuple<
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct tb7593e4df5df7703a4ff8aa31f13df0d : public std::tuple<
   ::dessser::gen::raql_expr::t*,
   Pointer
-> t5fc112a96748292611657700222a91a6;
+> {
+  using tuple::tuple;
+  tb7593e4df5df7703a4ff8aa31f13df0d(std::tuple<::dessser::gen::raql_expr::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_expr::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb7593e4df5df7703a4ff8aa31f13df0d const &a, tb7593e4df5df7703a4ff8aa31f13df0d const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tb7593e4df5df7703a4ff8aa31f13df0d const &a, tb7593e4df5df7703a4ff8aa31f13df0d const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb7593e4df5df7703a4ff8aa31f13df0d const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::raql_expr::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::raql_expr::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_expr::t5fc112a96748292611657700222a91a6(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_expr::tb7593e4df5df7703a4ff8aa31f13df0d(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

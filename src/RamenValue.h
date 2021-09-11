@@ -1,3 +1,4 @@
+#error "DEPRECATED"
 #ifndef RAMENVALUE_H_190603
 #define RAMENVALUE_H_190603
 #include <cassert>

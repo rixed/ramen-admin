@@ -35,16 +35,45 @@ struct t : public std::variant<
   Void // never
 > { using variant::variant; };
 
-typedef std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // reset
+    case 1: return std::get<1>(a) == std::get<1>(b); // never
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct tb3a89096758ec6cf20bf4ee069398ed5 : public std::tuple<
   ::dessser::gen::raql_flush_method::t*,
   Pointer
-> tcbc153db83c60379b0035bb8ccfee2da;
-
-typedef std::tuple<
+> {
+  using tuple::tuple;
+  tb3a89096758ec6cf20bf4ee069398ed5(std::tuple<::dessser::gen::raql_flush_method::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_flush_method::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+  return !operator==(a, b);
+}
+struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
-> t22a32080ad88ab548b80077a17b7dd46;
-
+> {
+  using tuple::tuple;
+  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+    : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -121,31 +150,31 @@ std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary
               (seq (assert (eq (identifier "dsum1_fst_63") (u16 1))) (make-tup (construct "[reset Void | never Void]" 1 (nop)) (identifier "dsum1_snd_64")))))) 
         (make-tup (identifier "make_fst_72") (identifier "make_snd_73"))))
  */
-static std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da(Pointer)> fun23 { [&fun23](Pointer p_0) {
-    ::dessser::gen::raql_flush_method::t22a32080ad88ab548b80077a17b7dd46 id_24 { p_0.readU16Le() };
-    ::dessser::gen::raql_flush_method::t22a32080ad88ab548b80077a17b7dd46 letpair_res_25;
+  std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> fun23 { [&fun23](Pointer p_0) {
+    ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b id_24 { p_0.readU16Le() };
+    ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b letpair_res_25;
     {
       auto du16_fst_57 { std::get<0>(id_24) };
       auto du16_snd_58 { std::get<1>(id_24) };
-      ::dessser::gen::raql_flush_method::t22a32080ad88ab548b80077a17b7dd46 id_26 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b id_26 { du16_fst_57, du16_snd_58 };
       letpair_res_25 = id_26;
     }
-    ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da let_res_27;
+    ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 let_res_27;
     {
-      ::dessser::gen::raql_flush_method::t22a32080ad88ab548b80077a17b7dd46 dsum1_62 { letpair_res_25 };
-      ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da letpair_res_28;
+      ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_25 };
+      ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 letpair_res_28;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_29 { 0 };
         bool id_30 { bool(id_29 == dsum1_fst_63) };
-        ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da choose_res_31;
+        ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 choose_res_31;
         if (id_30) {
           (void)VOID;
           ::dessser::gen::raql_flush_method::t* id_32 { new ::dessser::gen::raql_flush_method::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da id_33 { id_32, dsum1_snd_64 };
+          ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_33 { id_32, dsum1_snd_64 };
           choose_res_31 = id_33;
         } else {
           uint16_t id_34 { 1 };
@@ -154,18 +183,18 @@ static std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb
           (void)id_36;
           (void)VOID;
           ::dessser::gen::raql_flush_method::t* id_37 { new ::dessser::gen::raql_flush_method::t(std::in_place_index<1>, VOID) };
-          ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da id_38 { id_37, dsum1_snd_64 };
+          ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_38 { id_37, dsum1_snd_64 };
           choose_res_31 = id_38;
         }
         letpair_res_28 = choose_res_31;
       }
       let_res_27 = letpair_res_28;
     }
-    ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da letpair_res_39;
+    ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 letpair_res_39;
     {
       auto make_fst_72 { std::get<0>(let_res_27) };
       auto make_snd_73 { std::get<1>(let_res_27) };
-      ::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da id_40 { make_fst_72, make_snd_73 };
+      ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_40 { make_fst_72, make_snd_73 };
       letpair_res_39 = id_40;
     }
     return letpair_res_39;
@@ -173,7 +202,7 @@ static std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb
    };
   return fun23;
 }
-std::function<::dessser::gen::raql_flush_method::tcbc153db83c60379b0035bb8ccfee2da(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> of_row_binary(of_row_binary_init());
 
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }

@@ -7,7 +7,8 @@
 #include <QAbstractItemModel>
 #include <QString>
 #include <QStringList>
-#include "conf.h"
+
+#include "desssergen/sync_key.h"
 
 /* The model representing lines of tuples, with possibly some tuples skipped
  * in between 2 lines. The model stores *all* tuples and is owned by a
@@ -25,13 +26,15 @@
  * tuples that have one, or 0) and the unserialized RamenValues.
  */
 
+struct ConfChange;
 struct EventTime;
 struct KValue;
-struct RamenValue;
-struct RamenType;
-namespace conf {
-  class Value;
-};
+namespace dessser {
+  namespace gen {
+    namespace raql_type { struct t; }
+    namespace raql_value { struct t; }
+  }
+}
 
 class TailModel : public QAbstractTableModel
 {
@@ -42,30 +45,32 @@ class TailModel : public QAbstractTableModel
   double minEventTime_ = NAN;
   double maxEventTime_ = NAN;
 
-  void addTuple(std::string const &, KValue const &);
+  void addTuple(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
-  QString const fqName;
-  QString workerSign;
-  std::string const keyPrefix;
+  std::string const siteName;
+  std::string const fqName;
+  std::string const workerSign;
 
   /* Unlike for Replayrequests, for tails we actually want to know in which orders
    * are the tuples emitted (plus, they could have no event-time at all).
    * Therefore we keep both a vector and a multimap: */
-  std::vector<std::pair<double, std::shared_ptr<RamenValue const>>> tuples;
+  std::vector<std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>>> tuples;
   std::multimap<double, size_t> order;
 
-  std::shared_ptr<RamenType const> type;
+  std::shared_ptr<dessser::gen::raql_type::t const> type;
 
   TailModel(
-    QString const &fqName, QString const &workerSign,
-    std::shared_ptr<RamenType const> type,
+    std::string const &siteName,
+    std::string const &fqName,
+    std::string const &workerSign,
+    std::shared_ptr<dessser::gen::raql_type::t const> type,
     std::shared_ptr<EventTime const>,
     QObject *parent = nullptr);
 
   ~TailModel();
 
-  std::string subscriberKey() const;
+  dessser::gen::sync_key::t subscriberKey() const;
 
   int rowCount(QModelIndex const &parent = QModelIndex()) const override;
   int columnCount(QModelIndex const &parent = QModelIndex()) const override;

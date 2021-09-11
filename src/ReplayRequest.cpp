@@ -1,35 +1,48 @@
 #include <algorithm>
-#include <cassert>
 #include <cstdlib>
 #include <mutex>
 #include <unistd.h>
 #include <QtGlobal>
 #include <QTimer>
 #include <QDebug>
-#include "conf.h"
-#include "confValue.h"
+
+#include "ConfClient.h"
+#include "desssergen/event_time.h"
+#include "desssergen/fq_function_name.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/replay_request.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
 #include "EventTime.h"
+#include "Menu.h"
 #include "misc.h"
+#include "misc_dessser.h"
+
 #include "ReplayRequest.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-static std::chrono::milliseconds const batchReplaysForMs(2000);
-
-static unsigned respKeySeq;
-static std::mutex respKeySeqLock;
+static std::chrono::milliseconds const batchReplaysForMs { 2000 };
 
 std::string const respKeyPrefix(
   std::to_string(getpid()) + "_" + std::to_string(std::rand()) + "_");
 
-static std::string const nextRespKey()
-{
-  assert(my_socket);
+static unsigned respKeySeq;
+static std::mutex respKeySeqLock;
 
+static dessser::gen::sync_key::t const nextRespKey()
+{
   std::lock_guard<std::mutex> guard(respKeySeqLock);
 
-  return "clients/" + *my_socket + "/response/" + respKeyPrefix +
-         std::to_string(respKeySeq++);
+  dessser::gen::sync_key::per_client resp {
+    std::in_place_index<dessser::gen::sync_key::Response>,
+    respKeyPrefix + std::to_string(respKeySeq++) };
+
+  return dessser::gen::sync_key::t(
+    std::in_place_index<dessser::gen::sync_key::PerClient>,
+    const_cast<dessser::gen::sync_socket::t_ext>(Menu::getClient()->syncSocket.get()),
+    &resp);
 }
 
 ReplayRequest::ReplayRequest(
@@ -37,7 +50,7 @@ ReplayRequest::ReplayRequest(
   std::string const &program_,
   std::string const &function_,
   double since_, double until_,
-  std::shared_ptr<RamenType const> type_,
+  std::shared_ptr<dessser::gen::raql_type::t const> type_,
   std::shared_ptr<EventTime const> eventTime_,
   QObject *parent)
   : QObject(parent),
@@ -53,7 +66,7 @@ ReplayRequest::ReplayRequest(
     until(until_)
 {
   // Prepare to receive the values:
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &ReplayRequest::onChange);
 
   timer = new QTimer(this);
@@ -98,12 +111,22 @@ void ReplayRequest::sendRequest()
   status = Sent;
 
   // Create the response key:
-  askNew(respKey);
+  Menu::getClient()->sendNew(&respKey);
 
   // Then the replay request:
-  std::shared_ptr<conf::ReplayRequest const> req =
-    std::make_shared<conf::ReplayRequest const>(
-      site, program, function, since, until, false, respKey);
+  dessser::gen::fq_function_name::t const fq_target {
+    function, program, site };
+
+  dessser::gen::replay_request::t const req {
+    false, // explain
+    const_cast<dessser::gen::sync_key::t *>(&respKey),
+    since,
+    const_cast<dessser::gen::fq_function_name::t *>(&fq_target),
+    until };
+
+  dessser::gen::sync_value::t const val {
+    std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
+    const_cast<dessser::gen::replay_request::t *>(&req) };
 
   if (verbose)
     qDebug() << "ReplayRequest::sendRequest:"
@@ -111,45 +134,48 @@ void ReplayRequest::sendRequest()
               << QString::fromStdString(function)
               << qSetRealNumberPrecision(13)
               << "from" << since << "to" << until
-              << "respKey" << QString::fromStdString(respKey);
+              << "respKey" << respKey;
 
-  askSet("replay_requests", req);
+  dessser::gen::sync_key::t const key {
+    std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
+    VOID };
+  Menu::getClient()->sendSet(&key, &val);
 }
 
-void ReplayRequest::receiveValue(std::string const &key, KValue const &kv)
+void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (key != respKey) return;
 
-  std::shared_ptr<conf::Tuples const> batch(
-    std::dynamic_pointer_cast<conf::Tuples const>(kv.val));
-
-  if (! batch) {
+  // Values are received in batches (Tuples)
+  if (kv.val->index() != dessser::gen::sync_value::Tuples) {
     // Probably the VNull placeholder:
-    std::shared_ptr<conf::RamenValueValue const> vnull(
-      std::dynamic_pointer_cast<conf::RamenValueValue const>(kv.val));
-    if (! vnull || ! vnull->isNull())
-      qCritical() << "ReplayRequest::receiveValue: a"
-                  << conf::stringOfValueType(kv.val->valueType)
-                  << "?!";
+    if (kv.val->index() != dessser::gen::sync_value::RamenValue ||
+        std::get<dessser::gen::sync_value::RamenValue>(*kv.val)->index() !=
+          dessser::gen::raql_value::VNull)
+      qCritical() << "ReplayRequest::receiveValue: invalid type:" << *kv.val;
     return;
   }
 
-  bool hadTuple(false);
+  auto const &batch { std::get<dessser::gen::sync_value::Tuples>(*kv.val) };
+
+  bool hadTuple { false };
 
   {
     std::lock_guard<std::mutex> guard(lock);
 
     if (status != ReplayRequest::Sent) {
-      qCritical() << "Replay" << QString::fromStdString(respKey)
+      qCritical() << "Replay" << respKey
                   << "received a tuple while " << qstringOfStatus(status);
       // Will not be ordered properly, but better than nothing
     }
 
     if (verbose)
-      qDebug() << "Received a batch of" << batch->tuples.size() << "tuples";
+      qDebug() << "Received a batch of" << batch.size() << "tuples";
 
-    for (conf::Tuples::Tuple const &tuple : batch->tuples) {
-      RamenValue const *val = tuple.unserialize(type);
+    for (dessser::gen::sync_value::tuple const *tuple : batch) {
+      /* TODO: tuple should carry a raql_value directly instead of bytes! */
+#     if 0
+      dessser::gen::raql_value const *val { tuple.unserialize(type) };
       if (! val) {
         qCritical() << "Cannot unserialize tuple:" << *kv.val;
         continue;
@@ -175,19 +201,21 @@ void ReplayRequest::receiveValue(std::string const &key, KValue const &kv)
                       << "is not within" << since << "..." << until;
         }
       }
+#     else
+      qDebug() << "Tuple: skipped" << tuple->skipped;
+#     endif
     }
   } // destroy guard
 
   if (hadTuple) emit tupleBatchReceived();
 }
 
-void ReplayRequest::endReplay(std::string const &key, KValue const &)
+void ReplayRequest::endReplay(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (key != respKey) return;
 
   if (verbose)
-    qDebug() << "ReplayRequest::endReplay"
-             << QString::fromStdString(respKey);
+    qDebug() << "ReplayRequest::endReplay" << key;
 
   {
     std::lock_guard<std::mutex> guard(lock);

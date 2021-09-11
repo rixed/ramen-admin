@@ -32,6 +32,18 @@ enum Constr_t {
   StopSent,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "StartToBeSent " << std::get<0>(v); break;
+    case 1: os << "StartToBeSentThenStopped " << std::get<1>(v); break;
+    case 2: os << "StartSent " << std::get<2>(v); break;
+    case 3: os << "StartAcked " << std::get<3>(v); break;
+    case 4: os << "StopToBeSent " << std::get<4>(v); break;
+    case 5: os << "StopSent " << std::get<5>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -47,29 +59,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "StartToBeSent " << std::get<0>(v); break;
-    case 1: os << "StartToBeSentThenStopped " << std::get<1>(v); break;
-    case 2: os << "StartSent " << std::get<2>(v); break;
-    case 3: os << "StartAcked " << std::get<3>(v); break;
-    case 4: os << "StopToBeSent " << std::get<4>(v); break;
-    case 5: os << "StopSent " << std::get<5>(v); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct tec8dd05d08a833eba987e623943a6c52 : public std::tuple<
   ::dessser::gen::alerting_delivery_status::t*,
   Pointer
-> t70d102344d070f394857c83a5a1198d3;
+> {
+  using tuple::tuple;
+  tec8dd05d08a833eba987e623943a6c52(std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tec8dd05d08a833eba987e623943a6c52 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_delivery_status::t70d102344d070f394857c83a5a1198d3(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

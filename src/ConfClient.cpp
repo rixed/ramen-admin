@@ -1,6 +1,5 @@
 #include <cstdlib>
 #include <memory>
-#include <sstream>
 #include <QByteArray>
 #include <QDateTime>
 #include <QDebug>
@@ -15,6 +14,7 @@
 #include "desssergen/sync_client_msg.h"
 #include "desssergen/sync_msg.h"
 #include "KVStore.h"
+#include "misc_dessser.h"
 #include "UserIdentity.h"
 #include "z85.h"
 #include "ConfClient.h"
@@ -591,8 +591,8 @@ int ConfClient::sendAuth()
 }
 
 int ConfClient::sendNew(
-      std::shared_ptr<dessser::gen::sync_key::t const> key,
-      std::shared_ptr<dessser::gen::sync_value::t const> val,
+      dessser::gen::sync_key::t const *key,
+      dessser::gen::sync_value::t const *val,
       double timeout)
 {
   if (verbose)
@@ -601,17 +601,16 @@ int ConfClient::sendNew(
   // Set a placeholder null value by default:
   static dessser::gen::raql_value::t vnull {
     std::in_place_index<dessser::gen::raql_value::VNull>, VOID };
-  static std::shared_ptr<dessser::gen::sync_value::t const> nullVal {
-    std::make_shared<dessser::gen::sync_value::t const>(
-      std::in_place_index<dessser::gen::sync_value::RamenValue>,
-      static_cast<dessser::gen::raql_value::t *>(&vnull)) };
+  static dessser::gen::sync_value::t const nullVal {
+    std::in_place_index<dessser::gen::sync_value::RamenValue>,
+    static_cast<dessser::gen::raql_value::t *>(&vnull) };
   if (! val)
-    val = std::static_pointer_cast<dessser::gen::sync_value::t const>(nullVal);
+    val = static_cast<dessser::gen::sync_value::t const *>(&nullVal);
 
   dessser::gen::sync_client_cmd::t const cmd {
     std::in_place_index<dessser::gen::sync_client_cmd::NewKey>,
-    const_cast<dessser::gen::sync_key::t *>(key.get()),
-    const_cast<dessser::gen::sync_value::t *>(val.get()),
+    const_cast<dessser::gen::sync_key::t *>(key),
+    const_cast<dessser::gen::sync_value::t *>(val),
     timeout,
     false /* TODO: also pass recurs */ };
 
@@ -619,22 +618,22 @@ int ConfClient::sendNew(
 }
 
 int ConfClient::sendSet(
-      std::shared_ptr<dessser::gen::sync_key::t const> key,
-      std::shared_ptr<dessser::gen::sync_value::t const> val)
+      dessser::gen::sync_key::t const *key,
+      dessser::gen::sync_value::t const *val)
 {
   if (verbose)
     qDebug() << "ConfClient::sendSet:" << *key << "=" << *val;
 
   dessser::gen::sync_client_cmd::t const cmd {
     std::in_place_index<dessser::gen::sync_client_cmd::SetKey>,
-    const_cast<dessser::gen::sync_key::t *>(key.get()),
-    const_cast<dessser::gen::sync_value::t *>(val.get()) };
+    const_cast<dessser::gen::sync_key::t *>(key),
+    const_cast<dessser::gen::sync_value::t *>(val) };
 
   return sendCmd(cmd);
 }
 
 int ConfClient::sendLock(
-    std::shared_ptr<dessser::gen::sync_key::t const> key,
+    dessser::gen::sync_key::t const *key,
     double timeout)
 {
   if (verbose)
@@ -642,7 +641,7 @@ int ConfClient::sendLock(
 
   dessser::gen::sync_client_cmd::t const cmd {
     std::in_place_index<dessser::gen::sync_client_cmd::LockKey>,
-    const_cast<dessser::gen::sync_key::t *>(key.get()),
+    const_cast<dessser::gen::sync_key::t *>(key),
     timeout,
     false /* TODO: alsp pass recurs */ };
 
@@ -650,27 +649,27 @@ int ConfClient::sendLock(
 }
 
 int ConfClient::sendUnlock(
-      std::shared_ptr<dessser::gen::sync_key::t const> key)
+      dessser::gen::sync_key::t const *key)
 {
   if (verbose)
     qDebug() << "ConfClient::sendUnlock:" << *key;
 
   dessser::gen::sync_client_cmd::t const cmd {
     std::in_place_index<dessser::gen::sync_client_cmd::UnlockKey>,
-    const_cast<dessser::gen::sync_key::t *>(key.get()) };
+    const_cast<dessser::gen::sync_key::t *>(key) };
 
   return sendCmd(cmd);
 }
 
 int ConfClient::sendDel(
-      std::shared_ptr<dessser::gen::sync_key::t const> key)
+      dessser::gen::sync_key::t const *key)
 {
   if (verbose)
     qDebug() << "ConfClient::sendDel:" << *key;
 
   dessser::gen::sync_client_cmd::t const cmd {
     std::in_place_index<dessser::gen::sync_client_cmd::DelKey>,
-    const_cast<dessser::gen::sync_key::t *>(key.get()) };
+    const_cast<dessser::gen::sync_key::t *>(key) };
 
   return sendCmd(cmd);
 }
@@ -863,50 +862,4 @@ int ConfClient::checkDones(
 
   qDebug() << "No callback was found for" << err_seq;
   return 0;
-}
-
-/* Generic qDebug printer using stringstream: */
-template<typename T>
-QDebug printerOfStream(QDebug debug, T const &t)
-{
-  QDebugStateSaver saver(debug);
-  std::ostringstream s;
-  s << t;
-  debug << QString::fromStdString(s.str());
-  return debug;
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_client_cmd::t const &cmd)
-{
-  return printerOfStream<dessser::gen::sync_client_cmd::t>(debug, cmd);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_client_msg::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_client_msg::t>(debug, msg);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_server_msg::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_server_msg::t>(debug, msg);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_msg::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_msg::t>(debug, msg);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_socket::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_socket::t>(debug, msg);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_key::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_key::t>(debug, msg);
-}
-
-QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &msg)
-{
-  return printerOfStream<dessser::gen::sync_value::t>(debug, msg);
 }

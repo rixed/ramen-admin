@@ -25,6 +25,14 @@ enum Constr_tf285c6d4be19a8e3e994b3792fed4f11 {
   Logarithmic,
 };
 
+inline std::ostream &operator<<(std::ostream &os, tf285c6d4be19a8e3e994b3792fed4f11 const &v) {
+  switch (v.index()) {
+    case 0: os << "Linear " << std::get<0>(v); break;
+    case 1: os << "Logarithmic " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(tf285c6d4be19a8e3e994b3792fed4f11 const &a, tf285c6d4be19a8e3e994b3792fed4f11 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -36,14 +44,6 @@ inline bool operator==(tf285c6d4be19a8e3e994b3792fed4f11 const &a, tf285c6d4be19
 inline bool operator!=(tf285c6d4be19a8e3e994b3792fed4f11 const &a, tf285c6d4be19a8e3e994b3792fed4f11 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf285c6d4be19a8e3e994b3792fed4f11 const &v) {
-  switch (v.index()) {
-    case 0: os << "Linear " << std::get<0>(v); break;
-    case 1: os << "Logarithmic " << std::get<1>(v); break;
-  }
-  return os;
-}
-
 struct t7a73277e81021fc63d7d1b63bc3beba6 {
   bool force_zero;
   bool left;
@@ -80,6 +80,16 @@ enum Constr_tc758d36a6b58d564436d5e1104817704 {
   StackCentered,
 };
 
+inline std::ostream &operator<<(std::ostream &os, tc758d36a6b58d564436d5e1104817704 const &v) {
+  switch (v.index()) {
+    case 0: os << "Unused " << std::get<0>(v); break;
+    case 1: os << "Independent " << std::get<1>(v); break;
+    case 2: os << "Stacked " << std::get<2>(v); break;
+    case 3: os << "StackCentered " << std::get<3>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(tc758d36a6b58d564436d5e1104817704 const &a, tc758d36a6b58d564436d5e1104817704 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -93,16 +103,6 @@ inline bool operator==(tc758d36a6b58d564436d5e1104817704 const &a, tc758d36a6b58
 inline bool operator!=(tc758d36a6b58d564436d5e1104817704 const &a, tc758d36a6b58d564436d5e1104817704 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tc758d36a6b58d564436d5e1104817704 const &v) {
-  switch (v.index()) {
-    case 0: os << "Unused " << std::get<0>(v); break;
-    case 1: os << "Independent " << std::get<1>(v); break;
-    case 2: os << "Stacked " << std::get<2>(v); break;
-    case 3: os << "StackCentered " << std::get<3>(v); break;
-  }
-  return os;
-}
-
 struct t4014451f4abcdfd5489869fefe1eca82 {
   uint8_t axis;
   uint32_t color;
@@ -161,6 +161,13 @@ enum Constr_t3ef59f16a0cdd3a9e330e7c5bf93b091 {
   Plot,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &v) {
+  switch (v.index()) {
+    case 0: os << "Plot " << std::get<0>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t3ef59f16a0cdd3a9e330e7c5bf93b091 const &a, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -171,13 +178,6 @@ inline bool operator==(t3ef59f16a0cdd3a9e330e7c5bf93b091 const &a, t3ef59f16a0cd
 inline bool operator!=(t3ef59f16a0cdd3a9e330e7c5bf93b091 const &a, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &v) {
-  switch (v.index()) {
-    case 0: os << "Plot " << std::get<0>(v); break;
-  }
-  return os;
-}
-
 struct ta3280375be63ffe37d86976d93bf0304 {
   Arr<::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6> Chart_axis;
   Arr<::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225> sources;
@@ -212,6 +212,14 @@ enum Constr_t {
   Chart,
 };
 
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "Text " << std::get<0>(v); break;
+    case 1: os << "Chart " << std::get<1>(v); break;
+  }
+  return os;
+}
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -223,25 +231,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "Text " << std::get<0>(v); break;
-    case 1: os << "Chart " << std::get<1>(v); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct t2ebbcd7179991b0888025f2470c8d7b2 : public std::tuple<
   ::dessser::gen::dashboard_widget::t*,
   Pointer
-> t1a99c61debfb8ac5db5347b1cf1a79d1;
+> {
+  using tuple::tuple;
+  t2ebbcd7179991b0888025f2470c8d7b2(std::tuple<::dessser::gen::dashboard_widget::t*, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t2ebbcd7179991b0888025f2470c8d7b2 const &a, t2ebbcd7179991b0888025f2470c8d7b2 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t2ebbcd7179991b0888025f2470c8d7b2 const &a, t2ebbcd7179991b0888025f2470c8d7b2 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t2ebbcd7179991b0888025f2470c8d7b2 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::dashboard_widget::t1a99c61debfb8ac5db5347b1cf1a79d1(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f2470c8d7b2(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

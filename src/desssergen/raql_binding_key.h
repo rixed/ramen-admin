@@ -17,14 +17,31 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-typedef std::tuple<
+struct t40f56917851bc62b1c9e1a72700c3bed : public std::tuple<
   dessser::gen::raql_variable::t_ext,
   dessser::gen::field_name::t_ext
-> t269f127ed3b1b265bbc0b9043d333314;
+> {
+  using tuple::tuple;
+  t40f56917851bc62b1c9e1a72700c3bed(std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext> p)
+    : std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t40f56917851bc62b1c9e1a72700c3bed const &a, t40f56917851bc62b1c9e1a72700c3bed const &b) {
+  return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b));
+}
+inline bool operator!=(t40f56917851bc62b1c9e1a72700c3bed const &a, t40f56917851bc62b1c9e1a72700c3bed const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t40f56917851bc62b1c9e1a72700c3bed const &t) {
+  os << '<'
+     << std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 struct t : public std::variant<
   uint32_t, // State
-  ::dessser::gen::raql_binding_key::t269f127ed3b1b265bbc0b9043d333314, // RecordField
+  ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed, // RecordField
   dessser::gen::raql_variable::t_ext, // RecordValue
   std::string // Direct
 > { using variant::variant; };
@@ -35,6 +52,16 @@ enum Constr_t {
   RecordValue,
   Direct,
 };
+
+inline std::ostream &operator<<(std::ostream &os, t const &v) {
+  switch (v.index()) {
+    case 0: os << "State " << std::get<0>(v); break;
+    case 1: os << "RecordField " << std::get<1>(v); break;
+    case 2: os << "RecordValue " << ::dessser::gen::raql_variable::Deref(std::get<2>(v)); break;
+    case 3: os << "Direct " << std::get<3>(v); break;
+  }
+  return os;
+}
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -49,27 +76,34 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "State " << std::get<0>(v); break;
-    case 1: os << "RecordField " << std::get<1>(v); break;
-    case 2: os << "RecordValue " << ::dessser::gen::raql_variable::Deref(std::get<2>(v)); break;
-    case 3: os << "Direct " << std::get<3>(v); break;
-  }
-  return os;
-}
-
-typedef std::tuple<
+struct tc07e51d9b9f88bd1eb75ad3990101d02 : public std::tuple<
   ::dessser::gen::raql_binding_key::t*,
   Pointer
-> t2fb89294d169d1b8c1dc7c9181c50762;
+> {
+  using tuple::tuple;
+  tc07e51d9b9f88bd1eb75ad3990101d02(std::tuple<::dessser::gen::raql_binding_key::t*, Pointer> p)
+    : std::tuple<::dessser::gen::raql_binding_key::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tc07e51d9b9f88bd1eb75ad3990101d02 const &a, tc07e51d9b9f88bd1eb75ad3990101d02 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tc07e51d9b9f88bd1eb75ad3990101d02 const &a, tc07e51d9b9f88bd1eb75ad3990101d02 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tc07e51d9b9f88bd1eb75ad3990101d02 const &t) {
+  os << '<'
+     << *std::get<0>(t) << ", "
+     << std::get<1>(t)
+     << '>';
+  return os;
+}
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(::dessser::gen::raql_binding_key::t*,Pointer)> to_row_binary;
 extern std::function<Size(::dessser::gen::raql_binding_key::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_binding_key::t2fb89294d169d1b8c1dc7c9181c50762(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_binding_key::tc07e51d9b9f88bd1eb75ad3990101d02(Pointer)> of_row_binary;
 typedef t *t_ext;
 inline t Deref(t_ext x) { return *x; }
 

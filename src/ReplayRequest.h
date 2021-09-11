@@ -8,13 +8,21 @@
 #include <mutex>
 #include <string>
 #include <QObject>
-#include "conf.h"
 
-struct EventTime;
+#include "ConfChange.h"
+
 class QTimer;
+struct EventTime;
 struct KValue;
-struct RamenType;
-struct RamenValue;
+
+namespace dessser {
+  namespace gen {
+    namespace raql_type { struct t; }
+    namespace raql_value { struct t; }
+    namespace event_time { struct t; }
+    namespace sync_key { struct t; }
+  }
+}
 
 extern std::string const respKeyPrefix;
 
@@ -26,17 +34,17 @@ class ReplayRequest : public QObject
 
   std::string const site, program, function;
 
-  void receiveValue(std::string const &, KValue const &);
-  void endReplay(std::string const &, KValue const &);
+  void receiveValue(dessser::gen::sync_key::t const &, KValue const &);
+  void endReplay(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   // Protects status, since, until and tuples:
   std::mutex lock;
 
   std::time_t started; // When the query was sent (for timeout)
-  std::string const respKey; // Used to identify a single request
+  dessser::gen::sync_key::t const respKey; // Used to identify a single request
 
-  std::shared_ptr<RamenType const> type;
+  std::shared_ptr<dessser::gen::raql_type::t const> type;
   std::shared_ptr<EventTime const> eventTime;
 
   enum Status { Waiting, Sent, Completed } status;
@@ -46,13 +54,15 @@ public:
   double since, until;
 
   /* Where the results are stored (in event time order. */
-  std::multimap<double, std::shared_ptr<RamenValue const>> tuples;
+  std::multimap<double, std::shared_ptr<dessser::gen::raql_value::t const>> tuples;
 
   /* Also start the actual request: */
   ReplayRequest(
-    std::string const &site, std::string const &program,
-    std::string const &function, double since_, double until_,
-    std::shared_ptr<RamenType const> type_,
+    std::string const &site,
+    std::string const &program,
+    std::string const &function,
+    double since_, double until_,
+    std::shared_ptr<dessser::gen::raql_type::t const> type_,
     std::shared_ptr<EventTime const>,
     QObject *parent = nullptr);
 
