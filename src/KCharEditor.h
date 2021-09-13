@@ -5,9 +5,12 @@
 class KCharEditor : public KIntEditor {
 
 public:
-  KCharEditor(std::function<RamenValue *(QString const &)> v,
-              QWidget *parent = nullptr) :
-    KIntEditor(v, parent, std::numeric_limits<char>::min(), std::numeric_limits<char>::max()) {}
+  KCharEditor(
+    std::function<std::shared_ptr<dessser::gen::sync_value::t>(QString const &)> v,
+    QWidget *parent = nullptr)
+    : KIntEditor(v, parent, std::numeric_limits<char>::min(),
+                 std::numeric_limits<char>::max())
+  {}
 };
 
 #endif

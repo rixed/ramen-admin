@@ -155,8 +155,9 @@ QVariant TailModel::data(QModelIndex const &index, int role) const
     case Qt::DisplayRole:
       {
         dessser::gen::raql_value::t const *v { columnValue(*tuples[row].second, column) };
-        return v ? QVariant(toQString(*v)) : QVariant();
+        return v ? QVariant(raqlToQString(*v)) : QVariant();
       }
+      break;
     case Qt::ToolTipRole:
       // TODO
       return QVariant(QString("Column #") + QString::number(column));

@@ -7,6 +7,8 @@
 
 namespace dessser {
   namespace gen {
+    namespace raql_type { struct t; }
+    namespace raql_value { struct t; }
     namespace sync_client_cmd { struct t; }
     namespace sync_client_msg { struct t; }
     namespace sync_server_msg { struct t; }
@@ -40,9 +42,19 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &);
 
 /* Returns the string representation of that value (the optional key gives a hint about
  * the type of conversion desired) */
-QString toQString(
-    dessser::gen::raql_value::t const &,
-    dessser::gen::sync_key::t const * = nullptr);
+QString raqlToQString(
+  dessser::gen::raql_value::t const &,
+  dessser::gen::sync_key::t const &);
+
+QString raqlToQString(dessser::gen::raql_value::t const &);
+
+QString valToQString(
+  dessser::gen::sync_value::t const &,
+  dessser::gen::sync_key::t const &);
+
+QString valToQString(dessser::gen::sync_value::t const &);
+
+QString keyToQString(dessser::gen::sync_key::t const &);
 
 /* Printer for some dessser generated types: */
 

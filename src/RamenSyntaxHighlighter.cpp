@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QTextCharFormat>
 #include <QRegularExpression>
+
 #include "RamenSyntaxHighlighter.h"
 
 RamenSyntaxHighlighter::RamenSyntaxHighlighter(QTextDocument *parent) :

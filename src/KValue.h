@@ -10,9 +10,7 @@
 
 namespace dessser {
   namespace gen {
-    namespace sync_value {
-      struct t;
-    }
+    namespace sync_value { struct t; }
   }
 }
 

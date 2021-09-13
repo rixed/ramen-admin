@@ -9,9 +9,7 @@
 #include <QKeySequence>
 #include "AboutDialog.h"
 #include "ConfClient.h"
-#ifdef WITH_CONFTREE
 #include "ConfTreeDialog.h"
-#endif
 #ifdef WITH_DASHBOARDS
 # include "dashboard/DashboardWindow.h"
 # include "dashboard/NewDashboardDialog.h"
@@ -57,9 +55,7 @@ AboutDialog *Menu::aboutDialog;
 #ifdef WITH_SOURCES
 SourcesWin *Menu::sourcesWin;
 #endif
-#ifdef WITH_CONFTREE
 ConfTreeDialog *Menu::confTreeDialog;
-#endif
 #ifdef WITH_SOURCES
 NewSourceDialog *Menu::newSourceDialog;
 #endif
@@ -101,10 +97,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create SourceEditor...";
   if (! sourcesWin) sourcesWin = new SourcesWin;
 # endif
-# ifdef WITH_CONFTREE
   if (verbose) qDebug() << "Create ConfTreeDialog...";
   if (!confTreeDialog) confTreeDialog = new ConfTreeDialog;
-# endif
 # ifdef WITH_SOURCES
   if (verbose) qDebug() << "Create NewSourceDialog...";
   if (! newSourceDialog) newSourceDialog = new NewSourceDialog;
@@ -153,9 +147,7 @@ void Menu::showSomething()
 # ifdef WITH_SOURCES
   someOpened |= sourcesWin->isVisible();
 # endif
-# ifdef WITH_CONFTREE
   someOpened |= confTreeDialog->isVisible();
-# endif
 # ifdef WITH_PROCESSES
   someOpened |= processesDialog->isVisible();
 # endif
@@ -179,9 +171,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_SOURCES
   danceOfDelLater<SourcesWin>(&sourcesWin);
 # endif
-# ifdef WITH_CONFTREE
   danceOfDelLater<ConfTreeDialog>(&confTreeDialog);
-# endif
 # ifdef WITH_SOURCES
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
 # endif
@@ -314,12 +304,10 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "Log messages…"),
       this, &Menu::openLoggerWin);
 
-#   ifdef WITH_CONFTREE
     /* As a last resort, a raw edition window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Raw Configuration…"),
       this, &Menu::openConfTreeDialog);
-#   endif
   }
 
   if (basic) {
@@ -445,12 +433,10 @@ void Menu::openRCEditor()
 }
 #endif
 
-#ifdef WITH_CONFTREE
 void Menu::openConfTreeDialog()
 {
   showRaised(confTreeDialog);
 }
-#endif
 
 void Menu::openAboutDialog()
 {

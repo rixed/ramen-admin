@@ -6,9 +6,7 @@
 
 class AboutDialog;
 class ConfClient;
-#ifdef WITH_CONFTREE
 class ConfTreeDialog;
-#endif
 struct KValue;
 class LoggerWin;
 class LoginWin;
@@ -82,9 +80,7 @@ public:
 # ifdef WITH_SOURCES
   static SourcesWin *sourcesWin;
 # endif
-# ifdef WITH_CONFTREE
   static ConfTreeDialog *confTreeDialog;
-# endif
 # ifdef WITH_SOURCES
   static NewSourceDialog *newSourceDialog;
 # endif
@@ -140,9 +136,7 @@ public slots:
 # ifdef WITH_RC_EDITOR
   static void openRCEditor();
 # endif
-# ifdef WITH_CONFTREE
   static void openConfTreeDialog();
-# endif
   static void openAboutDialog();
   static void openNamesTreeWin();
 # ifdef WITH_STORAGE

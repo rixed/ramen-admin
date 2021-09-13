@@ -2,6 +2,8 @@
 #define CONFTREEEDITORDIALOG_H_190729
 #include <QDialog>
 
+#include "desssergen/sync_key.h"
+
 class AtomicWidget;
 
 class ConfTreeEditorDialog : public QDialog
@@ -9,11 +11,11 @@ class ConfTreeEditorDialog : public QDialog
   Q_OBJECT
 
   AtomicWidget *editor;
-  std::string const key;
+  dessser::gen::sync_key::t const key;
   bool can_write;
 
 public:
-  ConfTreeEditorDialog(std::string const &k, QWidget *parent = nullptr);
+  ConfTreeEditorDialog(dessser::gen::sync_key::t const &k, QWidget *parent = nullptr);
 
 private slots:
   void save();

@@ -5,15 +5,20 @@
 #include <QMessageBox>
 #include <QKeyEvent>
 #include <QStackedLayout>
-#include "conf.h"
+
+#include "ConfClient.h"
+#include "ConfTreeEditorDialog.h"
 #include "ConfTreeItem.h"
-#include "Resources.h"
+#include "desssergen/sync_value.h"
 #include "KFloatEditor.h"
 #include "KShortLabel.h"
-#include "ConfTreeEditorDialog.h"
+#include "Menu.h"
+#include "misc_dessser.h"
+#include "Resources.h"
+
 #include "ConfTreeWidget.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 ConfTreeItem *ConfTreeWidget::findItem(QString const &name, ConfTreeItem *parent) const
 {
@@ -33,20 +38,21 @@ ConfTreeItem *ConfTreeWidget::findItem(QString const &name, ConfTreeItem *parent
   return nullptr;
 }
 
-static bool isASubscriber(std::string const &key)
+static bool isASubscriber(dessser::gen::sync_key::t const &key)
 {
-  std::string::size_type l = key.rfind('/');
-  if (l == std::string::npos) return false;
-  return l > 6 && 0 == key.compare(l - 6, 6, "/users");
+  if (key.index() != dessser::gen::sync_key::Tails) return false;
+  auto const &tail { std::get<dessser::gen::sync_key::Tails>(key) };
+  auto const *per_tail { std::get<3>(tail) };
+  return per_tail->index() == dessser::gen::sync_key::Subscriber;
 }
 
-static bool betterSkipKey(std::string const &key)
+static bool betterSkipKey(dessser::gen::sync_key::t const &key)
 {
-  return startsWith(key, "tails/") && !isASubscriber(key);
+  return key.index() == dessser::gen::sync_key::Tails && !isASubscriber(key);
 }
 
 // Slot to propagates editor valueChanged into the item emitDatachanged
-void ConfTreeWidget::editedValueChangedFromStore(std::string const &key, KValue const &kv)
+void ConfTreeWidget::editedValueChangedFromStore(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (betterSkipKey(key)) return;
 
@@ -54,7 +60,7 @@ void ConfTreeWidget::editedValueChangedFromStore(std::string const &key, KValue 
 }
 
 void ConfTreeWidget::editedValueChanged(
-  std::string const &key, std::shared_ptr<conf::Value const>)
+  dessser::gen::sync_key::t const &key, std::shared_ptr<dessser::gen::sync_value::t const>)
 {
   ConfTreeItem *item = itemOfKey(key);
   if (item) {
@@ -65,7 +71,7 @@ void ConfTreeWidget::editedValueChanged(
   }
 }
 
-void ConfTreeWidget::deleteItem(std::string const &key, KValue const &)
+void ConfTreeWidget::deleteItem(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (betterSkipKey(key)) return;
 
@@ -74,26 +80,26 @@ void ConfTreeWidget::deleteItem(std::string const &key, KValue const &)
   delete itemOfKey(key);
 }
 
-void ConfTreeWidget::deleteClicked(std::string const &key)
+void ConfTreeWidget::deleteClicked(dessser::gen::sync_key::t const &key)
 {
   QMessageBox msg;
   msg.setText(tr("Are you sure?"));
   msg.setInformativeText(
     tr("Key %1 will be lost forever, there is no undo")
-      .arg(QString::fromStdString(key)));
+      .arg(keyToQString(key)));
   msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
   msg.setDefaultButton(QMessageBox::Cancel);
   msg.setIcon(QMessageBox::Warning);
-  if (QMessageBox::Ok == msg.exec()) askDel(key);
+  if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(&key);
 }
 
-void ConfTreeWidget::openEditorWindow(std::string const &key)
+void ConfTreeWidget::openEditorWindow(dessser::gen::sync_key::t const &key)
 {
   QDialog *editor = new ConfTreeEditorDialog(key);
   editor->show();
 }
 
-QWidget *ConfTreeWidget::actionWidget(std::string const &key, bool canWrite, bool canDel)
+QWidget *ConfTreeWidget::actionWidget(dessser::gen::sync_key::t const &key, bool canWrite, bool canDel)
 {
   // The widget for the "Actions" column:
   QWidget *widget = new QWidget;
@@ -139,7 +145,7 @@ QWidget *ConfTreeWidget::fillerWidget()
  * and return the leaf one.
  * Will not create it if kv is null. */
 void ConfTreeWidget::createItemByNames(
-  QStringList &names, std::string const &key, KValue const &kv, ConfTreeItem *parent, bool topLevel)
+  QStringList &names, dessser::gen::sync_key::t const &key, KValue const &kv, ConfTreeItem *parent, bool topLevel)
 {
   int const len = names.count();
   assert(len >= 1);
@@ -157,7 +163,7 @@ void ConfTreeWidget::createItemByNames(
   item =
     1 == len ?
       new ConfTreeItem(key, name, parent, nullptr) : // TODO: sort
-      new ConfTreeItem(std::string(), name, parent, nullptr); // TODO: sort
+      new ConfTreeItem(std::nullopt, name, parent, nullptr); // TODO: sort
 
   if (! item) return;
 
@@ -185,20 +191,20 @@ void ConfTreeWidget::createItemByNames(
   }
 }
 
-void ConfTreeWidget::createItem(std::string const &key, KValue const &kv)
+void ConfTreeWidget::createItem(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (betterSkipKey(key)) return;
 
   if (verbose)
-    qDebug() << "ConfTreeWidget: createItem for key" << QString::fromStdString(key);
+    qDebug() << "ConfTreeWidget: createItem for key" << key;
 
   /* We have a new key.
    * Add it to the tree and connect any value change for that value to a
    * slot that will retrieve the item and call it's emitDataChanged function
    * (which will itself call the underlying model to signal a change).
    */
-  QString keyName = QString::fromStdString(key);
-  QStringList names = keyName.split("/", QString::SkipEmptyParts);
+  QString const keyName { keyToQString(key) };
+  QStringList names { keyName.split("/", Qt::SkipEmptyParts) };
   createItemByNames(names, key, kv, nullptr, true);
 }
 
@@ -210,17 +216,17 @@ void ConfTreeWidget::activateItem(QTreeWidgetItem *item_, int)
     return;
   }
 
-  if (item->key.length() > 0) {
-    openEditorWindow(item->key);
+  if (item->key) {
+    openEditorWindow(*item->key);
   } else {
     item->setExpanded(! item->isExpanded());
   }
 }
 
-ConfTreeItem *ConfTreeWidget::itemOfKey(std::string const &key)
+ConfTreeItem *ConfTreeWidget::itemOfKey(dessser::gen::sync_key::t const &key)
 {
-  QString keyName = QString::fromStdString(key);
-  QStringList names = keyName.split("/", QString::SkipEmptyParts);
+  QString const keyName { keyToQString(key) };
+  QStringList names { keyName.split("/", Qt::SkipEmptyParts) };
   return findItemByNames(names);
 }
 
@@ -263,7 +269,7 @@ ConfTreeWidget::ConfTreeWidget(QWidget *parent) :
           this, &ConfTreeWidget::activateItem);
 
   /* Register to every change in the kvs: */
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &ConfTreeWidget::onChange);
 }
 

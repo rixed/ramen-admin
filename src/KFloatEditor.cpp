@@ -1,5 +1,11 @@
 #include <cassert>
+
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "MakeSyncValue.h"
+#include "misc_dessser.h"
 #include "RangeDoubleValidator.h"
+
 #include "KFloatEditor.h"
 
 KFloatEditor::KFloatEditor(QWidget *parent, double min, double max) :
@@ -12,10 +18,9 @@ KFloatEditor::KFloatEditor(QWidget *parent, double min, double max) :
           this, &KFloatEditor::inputChanged);
 }
 
-std::shared_ptr<conf::Value const> KFloatEditor::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> KFloatEditor::getValue() const
 {
-  VFloat *v = new VFloat(lineEdit->text().toDouble());
-  return std::shared_ptr<conf::Value const>(new conf::RamenValueValue(v));
+  return floatOfQString(lineEdit->text());
 }
 
 void KFloatEditor::setEnabled(bool enabled)
@@ -26,9 +31,10 @@ void KFloatEditor::setEnabled(bool enabled)
 /* TODO: returning an actual error message that could be used in the error
  * label would be better */
 bool KFloatEditor::setValue(
-  std::string const &k, std::shared_ptr<conf::Value const> v)
+  dessser::gen::sync_key::t const &k,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v(v->toQString(k));
+  QString new_v { valToQString(*v, k) };
 
   if (new_v != lineEdit->text()) {
     lineEdit->setText(new_v);

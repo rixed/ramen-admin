@@ -1,7 +1,9 @@
 #include <QPainter>
 #include <QFontMetrics>
 #include <QTextLayout>
-#include "confValue.h"
+
+#include "desssergen/sync_value.h"
+#include "misc_dessser.h"
 #include "KShortLabel.h"
 
 KShortLabel::KShortLabel(QWidget *parent)
@@ -12,9 +14,10 @@ KShortLabel::KShortLabel(QWidget *parent)
 }
 
 bool KShortLabel::setValue(
-  std::string const &k, std::shared_ptr<conf::Value const> v)
+  dessser::gen::sync_key::t const &k,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v(v->toQString(k));
+  QString new_v { valToQString(*v, k) };
 
   if (new_v != text) {
     text = new_v;

@@ -16,13 +16,15 @@ class KTextEdit : public AtomicWidget
 public:
   KTextEdit(QWidget *parent = nullptr);
 
-  std::shared_ptr<conf::Value const> getValue() const;
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
   QSize sizeHint() const;
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
+  bool setValue(
+    dessser::gen::sync_key::t const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

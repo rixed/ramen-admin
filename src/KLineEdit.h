@@ -1,9 +1,7 @@
 #ifndef KLINEEDIT_H_190505
 #define KLINEEDIT_H_190505
-#include <memory>
 #include <QLineEdit>
 #include "AtomicWidget.h"
-#include "confValue.h"
 
 class KLineEdit : public AtomicWidget
 {
@@ -18,11 +16,13 @@ public:
     lineEdit->setPlaceholderText(s);
   }
 
-  std::shared_ptr<conf::Value const> getValue() const;
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
+  bool setValue(
+    dessser::gen::sync_key::t const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

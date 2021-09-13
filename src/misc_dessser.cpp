@@ -218,7 +218,7 @@ static QString arrToQString(dessser::Arr<dessser::gen::raql_value::t *> const &a
   QString s;
   for (dessser::gen::raql_value::t *v : arr) {
     if (s.length() > 0) s += ", ";
-    s += toQString(*v);
+    s += raqlToQString(*v);
   }
   return s;
 }
@@ -243,20 +243,20 @@ static QString qstringOfIpv6(uint128_t const v)
   return QString(inet_ntop(AF_INET6, &ip, buf, sizeof buf));
 }
 
-
-QString toQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const *k)
+// Handle the cases where we do have a specialization for that key:
+static QString toQStringSpecKey(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
 {
   // Try some special formats first:
   switch (v.index()) {
     case dessser::gen::raql_value::VFloat:
-      if (k) { // Many float are actually dates:
+      { // Many float are actually dates:
         double const f { std::get<dessser::gen::raql_value::VFloat>(v) };
-        switch (k->index()) {
+        switch (k.index()) {
           case dessser::gen::sync_key::Time:
             return stringOfDate(f);
           case dessser::gen::sync_key::PerSite:
             {
-              auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(*k) };
+              auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(k) };
               auto const &per_site_key { std::get<1>(per_site) };
               switch (per_site_key.index()) {
                 case dessser::gen::sync_key::PerWorker:
@@ -290,7 +290,7 @@ QString toQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::
             }
           case dessser::gen::sync_key::Incidents:
             {
-              auto const &per_inc { std::get<dessser::gen::sync_key::Incidents>(*k) };
+              auto const &per_inc { std::get<dessser::gen::sync_key::Incidents>(k) };
               auto const &per_inc_key { std::get<1>(per_inc) };
               switch (per_inc_key.index()) {
                 case dessser::gen::sync_key::Dialogs:
@@ -318,7 +318,18 @@ QString toQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::
               break;
         }
         break;
-      } else break;
+      }
+    default:
+      break;
+  }
+
+  return QString();
+}
+
+QString raqlToQString(dessser::gen::raql_value::t const &v)
+{
+  // Special format according to type:
+  switch (v.index()) {
     case dessser::gen::raql_value::VBool:
       if (std::get<dessser::gen::raql_value::VBool>(v))
         return QCoreApplication::translate("QMainWindow", "true");
@@ -393,7 +404,7 @@ QString toQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::
           if (s.length() > 0) s += ", ";
           s += QString::fromStdString(std::get<0>(v)) +
                QString(":") +
-               toQString(*std::get<1>(v));
+               raqlToQString(*std::get<1>(v));
         }
         return QString("{") + s + QString("}");
       }
@@ -404,6 +415,44 @@ QString toQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::
   // Fallback to default:
   std::ostringstream s;
   s << v;
+  return QString::fromStdString(s.str());
+}
+
+QString raqlToQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
+{
+  QString spec { toQStringSpecKey(v, k) };
+  if (! spec.isEmpty()) return spec;
+
+  return raqlToQString(v);
+}
+
+QString valToQString(dessser::gen::sync_value::t const &v)
+{
+  if (v.index() == dessser::gen::sync_value::RamenValue) {
+    dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
+    return raqlToQString(*rv);
+  }
+
+  // Fallback to default:
+  std::ostringstream s;
+  s << v;
+  return QString::fromStdString(s.str());
+}
+
+QString valToQString(dessser::gen::sync_value::t const &v, dessser::gen::sync_key::t const &k)
+{
+  if (v.index() == dessser::gen::sync_value::RamenValue) {
+    dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
+    return raqlToQString(*rv, k);
+  }
+
+  return valToQString(v);
+}
+
+QString keyToQString(dessser::gen::sync_key::t const &k)
+{
+  std::ostringstream s;
+  s << k;
   return QString::fromStdString(s.str());
 }
 

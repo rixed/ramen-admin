@@ -1,8 +1,16 @@
 #ifndef CONFTREEITEM_H_190715
 #define CONFTREEITEM_H_190715
+#include <optional>
 #include <QPixmap>
 #include <QString>
+
 #include <QTreeWidgetItem>
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+  }
+}
 
 class ConfTreeItem : public QTreeWidgetItem
 {
@@ -17,9 +25,13 @@ public:
    * Therefore we build yet another representation of the tree of keys as a
    * simple tree of strings. */
   QString const name;
-  std::string const key; // empty if not a key
+  std::optional<dessser::gen::sync_key::t const> key;
 
-  ConfTreeItem(std::string const &key, QString const, ConfTreeItem *parent = nullptr, ConfTreeItem *preceding = nullptr);
+  ConfTreeItem(
+    std::optional<dessser::gen::sync_key::t const>,
+    QString const,
+    ConfTreeItem *parent = nullptr,
+    ConfTreeItem *preceding = nullptr);
 
   QVariant data(int column, int role) const;
 };

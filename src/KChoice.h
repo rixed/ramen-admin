@@ -12,16 +12,24 @@ class KChoice : public AtomicWidget
 {
   Q_OBJECT
 
-  std::vector<std::pair<QRadioButton *, std::shared_ptr<conf::Value const>>> choices;
+  std::vector<
+    std::pair<QRadioButton *, std::shared_ptr<dessser::gen::sync_value::t const>>
+  > choices;
 
 public:
-  KChoice(std::vector<std::pair<QString const, std::shared_ptr<conf::Value const>>> labels, QWidget *parent = nullptr);
+  KChoice(
+    std::vector<
+      std::pair<QString const, std::shared_ptr<dessser::gen::sync_value::t const>>
+    > labels,
+    QWidget *parent = nullptr);
 
-  std::shared_ptr<conf::Value const> getValue() const;
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const> v);
+  bool setValue(
+    dessser::gen::sync_key::t const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

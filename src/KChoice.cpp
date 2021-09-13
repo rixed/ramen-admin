@@ -2,12 +2,17 @@
 #include <QDebug>
 #include <QRadioButton>
 #include <QVBoxLayout>
-#include "confValue.h"
+
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "MakeSyncValue.h"
+#include "misc_dessser.h"
+
 #include "KChoice.h"
 
 KChoice::KChoice(
   std::vector<std::pair<QString const,
-  std::shared_ptr<conf::Value const>>> labels,
+  std::shared_ptr<dessser::gen::sync_value::t const>>> labels,
   QWidget *parent)
   : AtomicWidget(parent)
 {
@@ -27,7 +32,7 @@ KChoice::KChoice(
   relayoutWidget(w);
 }
 
-std::shared_ptr<conf::Value const> KChoice::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> KChoice::getValue() const
 {
   for (size_t i = 0; i < choices.size(); i++) {
     if (choices[i].first->isChecked())
@@ -39,7 +44,8 @@ std::shared_ptr<conf::Value const> KChoice::getValue() const
 }
 
 bool KChoice::setValue(
-  std::string const &k, std::shared_ptr<conf::Value const> v)
+  dessser::gen::sync_key::t const &k,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   for (unsigned i = 0; i < choices.size(); i ++) {
     if (*choices[i].second == *v) {

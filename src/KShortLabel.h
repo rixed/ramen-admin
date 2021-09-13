@@ -6,6 +6,12 @@
 #include <QString>
 #include "AtomicWidget.h"
 
+namespace dessser {
+  namespace gen {
+    namespace sync_value { struct t; }
+  }
+}
+
 class KShortLabel : public AtomicWidget
 {
   Q_OBJECT
@@ -25,7 +31,8 @@ protected:
   void paintEvent(QPaintEvent *event);
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
+  bool setValue(dessser::gen::sync_key::t const &,
+                std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

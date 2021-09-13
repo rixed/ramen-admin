@@ -105,6 +105,25 @@ HEADERS += \
   GraphItem.h \
   GraphArrow.h \
   EventTime.h \
+  AtomicWidget.h \
+  MakeSyncValue.h \
+  RangeDoubleValidator.h \
+  KFloatEditor.h \
+  KShortLabel.h \
+  RangeIntValidator.h \
+  KIntEditor.h \
+  KCharEditor.h \
+  KLabel.h \
+  KLineEdit.h \
+  RamenSyntaxHighlighter.h \
+  KTextEdit.h \
+  KChoice.h \
+  KBool.h \
+  EditorWidget.h \
+  ConfTreeItem.h \
+  ConfTreeEditorDialog.h \
+  ConfTreeWidget.h \
+  ConfTreeDialog.h \
   Menu.h \
   TailModel.h \
   ReplayRequest.h \
@@ -202,6 +221,25 @@ SOURCES += \
   GraphItem.cpp \
   GraphArrow.cpp \
   EventTime.cpp \
+  AtomicWidget.cpp \
+  MakeSyncValue.cpp \
+  RangeDoubleValidator.cpp \
+  KFloatEditor.cpp \
+  KShortLabel.cpp \
+  RangeIntValidator.cpp \
+  KIntEditor.cpp \
+  KCharEditor.cpp \
+  KLabel.cpp \
+  KLineEdit.cpp \
+  RamenSyntaxHighlighter.cpp \
+  KTextEdit.cpp \
+  KChoice.cpp \
+  KBool.cpp \
+  EditorWidget.cpp \
+  ConfTreeItem.cpp \
+  ConfTreeEditorDialog.cpp \
+  ConfTreeWidget.cpp \
+  ConfTreeDialog.cpp \
   Menu.cpp \
   TailModel.cpp \
   ReplayRequest.cpp \

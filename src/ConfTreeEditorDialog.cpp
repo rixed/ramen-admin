@@ -4,17 +4,24 @@
 #include <QVBoxLayout>
 #include <QFormLayout>
 #include <QLineEdit>
-#include "misc.h"
-#include "conf.h"
-#include "KValue.h"
-#include "confValue.h"
+
 #include "AtomicWidget.h"
+#include "ConfClient.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "EditorWidget.h"
+#include "KValue.h"
+#include "KVStore.h"
+#include "Menu.h"
+#include "misc.h"
+#include "misc_dessser.h"
+
 #include "ConfTreeEditorDialog.h"
 
 ConfTreeEditorDialog::ConfTreeEditorDialog(
-  std::string const &key_, QWidget *parent) :
-  QDialog(parent),
-  key(key_)
+  dessser::gen::sync_key::t const &key_, QWidget *parent)
+  : QDialog(parent),
+    key(key_)
 {
   /* Locate the value in the kvs: */
   KValue const *kv = nullptr;
@@ -29,25 +36,25 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
   /* The header: */
   QFormLayout *headerLayout = new QFormLayout;
-  QLabel *keyName = new QLabel(QString::fromStdString(key));
+  QLabel *keyName { new QLabel(keyToQString(key)) };
   keyName->setWordWrap(true);
   headerLayout->addRow(tr("Key:"), keyName);
-  QLabel *setter = new QLabel(kv->uid);
+  QLabel *setter { new QLabel(kv->uid) };
   headerLayout->addRow(tr("Last Modified By:"), setter);
-  QLabel *mtime = new QLabel(stringOfDate(kv->mtime));
+  QLabel *mtime { new QLabel(stringOfDate(kv->mtime)) };
   headerLayout->addRow(tr("Last Modified At:"), mtime);
   if (kv->isLocked()) {
-    QLabel *locker = new QLabel(*kv->owner);
+    QLabel *locker { new QLabel(*kv->owner) };
     headerLayout->addRow(tr("Locked By:"), locker);
-    QLabel *expiry = new QLabel(stringOfDate(kv->expiry));
+    QLabel *expiry { new QLabel(stringOfDate(kv->expiry)) };
     headerLayout->addRow(tr("Expiry:"), expiry);
   }
 
-  editor = kv->val->editorWidget(key);
-  QDialogButtonBox *buttonBox =
+  editor = newEditorWidget(key, kv->val);
+  QDialogButtonBox *buttonBox {
     new QDialogButtonBox(
       can_write ? QDialogButtonBox::Ok | QDialogButtonBox::Cancel :
-                  QDialogButtonBox::Close);  // Note: Close will reject
+                  QDialogButtonBox::Close) };  // Note: Close will reject
 
   if (can_write)
     connect(buttonBox, &QDialogButtonBox::accepted,
@@ -63,11 +70,11 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   /* The editor will start in read-only mode (unless we already own the
    * value). Reception of the lock ack from the confserver will turn it
    * into read-write mode: */
-  if (can_write) askLock(key);
+  if (can_write) Menu::getClient()->sendLock(&key);
 
   /* Now the layout: */
-  QVBoxLayout *mainLayout = new QVBoxLayout;
-  QFrame* header = new QFrame;
+  QVBoxLayout *mainLayout { new QVBoxLayout };
+  QFrame* header { new QFrame };
   header->setFrameShape(QFrame::Panel);
   header->setFrameShadow(QFrame::Raised);
   header->setLayout(headerLayout);
@@ -83,13 +90,14 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
 void ConfTreeEditorDialog::save()
 {
-  std::shared_ptr<conf::Value const> v(editor->getValue());
-  if (v) askSet(key, v); // read-only editors return no value
-  if (can_write) askUnlock(key);
+  std::shared_ptr<dessser::gen::sync_value::t const> v { editor->getValue() };
+  ConfClient *client = Menu::getClient();
+  if (v) client->sendSet(&key, v.get()); // read-only editors return no value
+  if (can_write) client->sendUnlock(&key);
   emit QDialog::accept();
 }
 
 void ConfTreeEditorDialog::cancel()
 {
-  if (can_write) askUnlock(key);
+  if (can_write) Menu::getClient()->sendUnlock(&key);
 }
