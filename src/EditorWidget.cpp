@@ -11,6 +11,7 @@
 #include "KLineEdit.h"
 #include "KTextEdit.h"
 #include "MakeSyncValue.h"
+#include "WorkerViewer.h"
 
 #include "EditorWidget.h"
 
@@ -131,10 +132,10 @@ AtomicWidget *newEditorWidget(
         }
         break;
       }
-#   if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::Worker:
       editor = new WorkerViewer(parent);
       break;
+#   if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::TimeRange:
       editor = new TimeRangeViewer(parent);
       break;

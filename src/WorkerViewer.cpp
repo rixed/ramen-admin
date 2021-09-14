@@ -3,10 +3,16 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QCheckBox>
+
+#include "desssergen/func_ref.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "desssergen/worker.h"
+#include "MakeSyncValue.h"
 #include "misc.h"
-#include "confWorkerRole.h"
-#include "confRCEntryParam.h"
-#include "confValue.h"
+#include "misc_dessser.h"
+#include "RangeDoubleValidator.h"
+
 #include "WorkerViewer.h"
 
 WorkerViewer::WorkerViewer(QWidget *parent) :
@@ -56,42 +62,61 @@ void WorkerViewer::setEnabled(bool enabled_)
   used->setEnabled(enabled_);
 }
 
+static QString const qstringOfRole(dessser::gen::worker::t const &worker)
+{
+  if (worker.role.index() == dessser::gen::worker::Whole)
+    return QString("normal");
+  else
+    return QString("top-half");
+}
+
+static QString const qstringOfRef(dessser::gen::func_ref::t const &ref)
+{
+  QString const fq {
+    QString::fromStdString(ref.program) + "/" +
+    QString::fromStdString(ref.func) };
+  if (ref.site.size() == 0) return fq;
+  return QString::fromStdString(ref.site) + ":" + fq;
+}
+
 bool WorkerViewer::setValue(
-  std::string const &, std::shared_ptr<conf::Value const> v)
+  dessser::gen::sync_key::t const &,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous params/parents layouts: */
   while (params->count() > 0) params->removeRow(0);
   emptyLayout(parents);
 
-  std::shared_ptr<conf::Worker const> w =
-    std::dynamic_pointer_cast<conf::Worker const>(v);
-  if (w) {
+  if (v->index() == dessser::gen::sync_value::Worker) {
+    dessser::gen::worker::t const *w {
+      std::get<dessser::gen::sync_value::Worker>(*v) };
+
     enabled->setChecked(w->enabled);
     debug->setChecked(w->debug);
-    used->setChecked(w->used);
-    reportPeriod->setText(stringOfDuration(w->reportPeriod));
-    cwd->setText(w->cwd);
-    workerSign->setText(w->workerSign);
-    binSign->setText(w->binSign);
-    role->setText(w->role->toQString());
+    used->setChecked(w->is_used);
+    reportPeriod->setText(stringOfDuration(w->report_period));
+    cwd->setText(QString::fromStdString(w->cwd));
+    workerSign->setText(QString::fromStdString(w->worker_signature));
+    binSign->setText(QString::fromStdString(w->info_signature));
+    role->setText(qstringOfRole(*w));
     if (w->params.size() == 0) {
       QLabel *none = new QLabel("<i>" + tr("none") + "</i>");
       none->setAlignment(Qt::AlignCenter);
       params->addRow(none);
     } else {
-      for (auto p : w->params) {
+      for (auto &p : w->params) {
         params->addRow(
-          QString::fromStdString(p->name) + QString(":"),
-          new QLabel (p->val ? p->val->toQString(std::string()) : QString()));
+          QString::fromStdString(std::get<0>(p)) + QString(":"),
+          new QLabel(raqlToQString(*std::get<1>(p))));
       }
     }
-    if (w->parent_refs.size() == 0) {
+    if (!w->parents || w->parents->size() == 0) {
       QLabel *none = new QLabel("<i>" + tr("none") + "</i>");
       none->setAlignment(Qt::AlignCenter);
       parents->addWidget(none);
     } else {
-      for (auto const &p : w->parent_refs) {
-        QLabel *l = new QLabel(p->toQString());
+      for (auto const &p : *w->parents) {
+        QLabel *l { new QLabel(qstringOfRef(*p)) };
         l->setAlignment(Qt::AlignCenter);
         parents->addWidget(l);
       }

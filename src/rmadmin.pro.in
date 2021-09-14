@@ -119,6 +119,7 @@ HEADERS += \
   KTextEdit.h \
   KChoice.h \
   KBool.h \
+  WorkerViewer.h \
   EditorWidget.h \
   ConfTreeItem.h \
   ConfTreeEditorDialog.h \
@@ -235,6 +236,7 @@ SOURCES += \
   KTextEdit.cpp \
   KChoice.cpp \
   KBool.cpp \
+  WorkerViewer.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
   ConfTreeEditorDialog.cpp \
