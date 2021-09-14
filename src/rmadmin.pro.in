@@ -120,6 +120,7 @@ HEADERS += \
   KChoice.h \
   KBool.h \
   WorkerViewer.h \
+  TimeRangeViewer.h \
   EditorWidget.h \
   ConfTreeItem.h \
   ConfTreeEditorDialog.h \
@@ -237,6 +238,7 @@ SOURCES += \
   KChoice.cpp \
   KBool.cpp \
   WorkerViewer.cpp \
+  TimeRangeViewer.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
   ConfTreeEditorDialog.cpp \
