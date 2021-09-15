@@ -86,7 +86,7 @@ void ConfTreeWidget::deleteClicked(dessser::gen::sync_key::t const &key)
   msg.setText(tr("Are you sure?"));
   msg.setInformativeText(
     tr("Key %1 will be lost forever, there is no undo")
-      .arg(keyToQString(key)));
+      .arg(syncKeyToQString(key)));
   msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
   msg.setDefaultButton(QMessageBox::Cancel);
   msg.setIcon(QMessageBox::Warning);
@@ -203,7 +203,7 @@ void ConfTreeWidget::createItem(dessser::gen::sync_key::t const &key, KValue con
    * slot that will retrieve the item and call it's emitDataChanged function
    * (which will itself call the underlying model to signal a change).
    */
-  QString const keyName { keyToQString(key) };
+  QString const keyName { syncKeyToQString(key) };
   QStringList names { keyName.split("/", Qt::SkipEmptyParts) };
   createItemByNames(names, key, kv, nullptr, true);
 }
@@ -225,7 +225,7 @@ void ConfTreeWidget::activateItem(QTreeWidgetItem *item_, int)
 
 ConfTreeItem *ConfTreeWidget::itemOfKey(dessser::gen::sync_key::t const &key)
 {
-  QString const keyName { keyToQString(key) };
+  QString const keyName { syncKeyToQString(key) };
   QStringList names { keyName.split("/", Qt::SkipEmptyParts) };
   return findItemByNames(names);
 }

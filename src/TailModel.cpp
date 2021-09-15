@@ -155,7 +155,7 @@ QVariant TailModel::data(QModelIndex const &index, int role) const
     case Qt::DisplayRole:
       {
         dessser::gen::raql_value::t const *v { columnValue(*tuples[row].second, column) };
-        return v ? QVariant(raqlToQString(*v)) : QVariant();
+        return v ? QVariant(raqlValToQString(*v)) : QVariant();
       }
       break;
     case Qt::ToolTipRole:
@@ -174,7 +174,7 @@ QVariant TailModel::headerData(int section, Qt::Orientation orient, int role) co
   switch (orient) {
     case Qt::Horizontal:
       if (section < 0 || section >= columnCount()) return QVariant();
-      return columnName(*type, section);
+      return QVariant(QString::fromStdString(columnName(*type, section)));
     case Qt::Vertical:
       if (section < 0 || section >= rowCount()) return QVariant();
       return QVariant(QString::number(section));

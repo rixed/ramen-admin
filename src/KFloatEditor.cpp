@@ -34,7 +34,7 @@ bool KFloatEditor::setValue(
   dessser::gen::sync_key::t const &k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v { valToQString(*v, k) };
+  QString new_v { syncValToQString(*v, k) };
 
   if (new_v != lineEdit->text()) {
     lineEdit->setText(new_v);

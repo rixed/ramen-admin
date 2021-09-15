@@ -121,6 +121,7 @@ HEADERS += \
   KBool.h \
   WorkerViewer.h \
   TimeRangeViewer.h \
+  SourceInfoViewer.h \
   EditorWidget.h \
   ConfTreeItem.h \
   ConfTreeEditorDialog.h \
@@ -239,6 +240,7 @@ SOURCES += \
   KBool.cpp \
   WorkerViewer.cpp \
   TimeRangeViewer.cpp \
+  SourceInfoViewer.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
   ConfTreeEditorDialog.cpp \

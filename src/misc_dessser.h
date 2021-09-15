@@ -7,6 +7,7 @@
 
 namespace dessser {
   namespace gen {
+    namespace raql_expr { struct t; }
     namespace raql_type { struct t; }
     namespace raql_value { struct t; }
     namespace sync_client_cmd { struct t; }
@@ -27,9 +28,9 @@ bool isNumeric(dessser::gen::raql_type::t const &);
 
 bool isAWorker(dessser::gen::sync_key::t const &);
 
-int numColumns(dessser::gen::raql_type::t const &);
+unsigned numColumns(dessser::gen::raql_type::t const &);
 
-QString const columnName(dessser::gen::raql_type::t const &, size_t);
+std::string const columnName(dessser::gen::raql_type::t const &, size_t);
 
 // Returns a pointer into the passed type (or nullptr):
 dessser::gen::raql_type::t const *columnType(dessser::gen::raql_type::t const &, size_t);
@@ -42,19 +43,23 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &);
 
 /* Returns the string representation of that value (the optional key gives a hint about
  * the type of conversion desired) */
-QString raqlToQString(
+QString raqlValToQString(
   dessser::gen::raql_value::t const &,
   dessser::gen::sync_key::t const &);
 
-QString raqlToQString(dessser::gen::raql_value::t const &);
+QString raqlValToQString(dessser::gen::raql_value::t const &);
 
-QString valToQString(
+QString raqlTypeToQString(dessser::gen::raql_type::t const &);
+
+QString raqlExprToQString(dessser::gen::raql_expr::t const &);
+
+QString syncValToQString(
   dessser::gen::sync_value::t const &,
   dessser::gen::sync_key::t const &);
 
-QString valToQString(dessser::gen::sync_value::t const &);
+QString syncValToQString(dessser::gen::sync_value::t const &);
 
-QString keyToQString(dessser::gen::sync_key::t const &);
+QString syncKeyToQString(dessser::gen::sync_key::t const &);
 
 /* Printer for some dessser generated types: */
 

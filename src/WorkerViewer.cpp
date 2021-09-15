@@ -107,7 +107,7 @@ bool WorkerViewer::setValue(
       for (auto &p : w->params) {
         params->addRow(
           QString::fromStdString(std::get<0>(p)) + QString(":"),
-          new QLabel(raqlToQString(*std::get<1>(p))));
+          new QLabel(raqlValToQString(*std::get<1>(p))));
       }
     }
     if (!w->parents || w->parents->size() == 0) {

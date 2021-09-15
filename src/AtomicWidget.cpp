@@ -57,7 +57,7 @@ void AtomicWidget::relayoutWidget(QWidget *w)
 QString AtomicWidget::dbgId() const
 {
   return QString("AtomicWidget[") +
-         (key() ? keyToQString(*key()) : QString("unset")) +
+         (key() ? syncKeyToQString(*key()) : QString("unset")) +
          QString("]");
 }
 
@@ -67,7 +67,7 @@ bool AtomicWidget::setKey(std::optional<dessser::gen::sync_key::t const> newKey)
 
   if (verbose)
     qDebug() << dbgId() << ": changing key to"
-             << (newKey ? keyToQString(*newKey) : QString("unset"));
+             << (newKey ? syncKeyToQString(*newKey) : QString("unset"));
 
   std::optional<dessser::gen::sync_key::t const> oldKey { key() };
   saveKey(newKey);

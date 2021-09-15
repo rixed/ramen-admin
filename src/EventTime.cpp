@@ -15,11 +15,11 @@ EventTime::EventTime(dessser::gen::raql_type::t const &type) :
   stopColumn(-1)
 {
   if (! isScalar(type)) {
-    int const num_cols { numColumns(type) };
-    for (int column = 0; column < num_cols; column ++) {
+    unsigned const num_cols { numColumns(type) };
+    for (unsigned column = 0; column < num_cols; column ++) {
       dessser::gen::raql_type::t const *subType { columnType(type, column) };
       if (subType && isScalar(*subType)) {
-        QString const name { columnName(type, column) };
+        std::string const name { columnName(type, column) };
         if (name == "start") {
           startColumn = column;
           if (verbose)

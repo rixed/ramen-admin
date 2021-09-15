@@ -168,14 +168,14 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
     if (info->name != function_name) continue;
 
     dessser::gen::raql_type::t const &out_record { *info->out_record };
-    int const num_cols { numColumns(out_record) };
+    unsigned const num_cols { numColumns(out_record) };
     /* FIXME: Each column could have subcolumns and all should be inserted
      * hierarchically. */
     /* Some type info for the field (stored in the model as UserType+... would
      * come handy, for instance to determine if a field is numeric, or a
      * factor, etc */
-    for (int i = 0; i < num_cols; i++) {
-      QString const col { columnName(out_record, i) };
+    for (unsigned i = 0; i < num_cols; i++) {
+      QString const col { QString::fromStdString(columnName(out_record, i)) };
       QStringList names(col);
       (void)findOrCreate(func, names, names.last());
     }

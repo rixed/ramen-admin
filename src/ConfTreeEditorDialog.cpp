@@ -36,7 +36,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
   /* The header: */
   QFormLayout *headerLayout = new QFormLayout;
-  QLabel *keyName { new QLabel(keyToQString(key)) };
+  QLabel *keyName { new QLabel(syncKeyToQString(key)) };
   keyName->setWordWrap(true);
   headerLayout->addRow(tr("Key:"), keyName);
   QLabel *setter { new QLabel(kv->uid) };

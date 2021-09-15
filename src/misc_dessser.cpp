@@ -70,7 +70,7 @@ bool isAWorker(dessser::gen::sync_key::t const &key)
   return key__.index() == dessser::gen::sync_key::Worker;
 }
 
-int numColumns(dessser::gen::raql_type::t const &t)
+unsigned numColumns(dessser::gen::raql_type::t const &t)
 {
   switch (t.type.index()) {
     case dessser::gen::raql_type::Tup:
@@ -93,19 +93,19 @@ int numColumns(dessser::gen::raql_type::t const &t)
   }
 }
 
-QString const columnName(dessser::gen::raql_type::t const &t, size_t i)
+std::string const columnName(dessser::gen::raql_type::t const &t, size_t i)
 {
   switch (t.type.index()) {
     case dessser::gen::raql_type::Tup:
     case dessser::gen::raql_type::Vec:
-      return QString("#") + QString::number(i);
+      return std::string("#") + std::to_string(i);
     case dessser::gen::raql_type::Rec:
       {
         auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
-        return QString::fromStdString(std::get<0>(rec[i]));
+        return std::get<0>(rec[i]);
       }
     default:
-      return QString();
+      return std::string();
   }
 }
 
@@ -218,7 +218,7 @@ static QString arrToQString(dessser::Arr<dessser::gen::raql_value::t *> const &a
   QString s;
   for (dessser::gen::raql_value::t *v : arr) {
     if (s.length() > 0) s += ", ";
-    s += raqlToQString(*v);
+    s += raqlValToQString(*v);
   }
   return s;
 }
@@ -326,7 +326,7 @@ static QString toQStringSpecKey(dessser::gen::raql_value::t const &v, dessser::g
   return QString();
 }
 
-QString raqlToQString(dessser::gen::raql_value::t const &v)
+QString raqlValToQString(dessser::gen::raql_value::t const &v)
 {
   // Special format according to type:
   switch (v.index()) {
@@ -404,7 +404,7 @@ QString raqlToQString(dessser::gen::raql_value::t const &v)
           if (s.length() > 0) s += ", ";
           s += QString::fromStdString(std::get<0>(v)) +
                QString(":") +
-               raqlToQString(*std::get<1>(v));
+               raqlValToQString(*std::get<1>(v));
         }
         return QString("{") + s + QString("}");
       }
@@ -418,19 +418,33 @@ QString raqlToQString(dessser::gen::raql_value::t const &v)
   return QString::fromStdString(s.str());
 }
 
-QString raqlToQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
+QString raqlValToQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
 {
   QString spec { toQStringSpecKey(v, k) };
   if (! spec.isEmpty()) return spec;
 
-  return raqlToQString(v);
+  return raqlValToQString(v);
 }
 
-QString valToQString(dessser::gen::sync_value::t const &v)
+QString raqlTypeToQString(dessser::gen::raql_type::t const &t)
+{
+  std::ostringstream s;
+  s << t;
+  return QString::fromStdString(s.str());
+}
+
+QString raqlExprToQString(dessser::gen::raql_expr::t const &e)
+{
+  std::ostringstream s;
+  s << e;
+  return QString::fromStdString(s.str());
+}
+
+QString syncValToQString(dessser::gen::sync_value::t const &v)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
     dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
-    return raqlToQString(*rv);
+    return raqlValToQString(*rv);
   }
 
   // Fallback to default:
@@ -439,17 +453,17 @@ QString valToQString(dessser::gen::sync_value::t const &v)
   return QString::fromStdString(s.str());
 }
 
-QString valToQString(dessser::gen::sync_value::t const &v, dessser::gen::sync_key::t const &k)
+QString syncValToQString(dessser::gen::sync_value::t const &v, dessser::gen::sync_key::t const &k)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
     dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
-    return raqlToQString(*rv, k);
+    return raqlValToQString(*rv, k);
   }
 
-  return valToQString(v);
+  return syncValToQString(v);
 }
 
-QString keyToQString(dessser::gen::sync_key::t const &k)
+QString syncKeyToQString(dessser::gen::sync_key::t const &k)
 {
   std::ostringstream s;
   s << k;
