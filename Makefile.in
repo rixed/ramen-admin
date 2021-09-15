@@ -68,7 +68,7 @@ TYPE_SOURCES = \
 	field_type.type \
 	program_run_parameter.type \
 	program_parameter.type \
-	target_config.type \
+	rc_entry.type \
 	raql_variable.type \
 	raql_path_comp.type \
 	raql_top_output.type \

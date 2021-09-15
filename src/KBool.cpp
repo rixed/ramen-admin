@@ -1,6 +1,7 @@
 #include <QRadioButton>
 #include <QVBoxLayout>
 
+#include "desssergen/sync_value.h"
 #include "MakeSyncValue.h"
 
 #include "KBool.h"

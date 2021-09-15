@@ -50,7 +50,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
     headerLayout->addRow(tr("Expiry:"), expiry);
   }
 
-  editor = newEditorWidget(key, kv->val);
+  editor = newEditorWidget(*kv->val, &key);
   QDialogButtonBox *buttonBox {
     new QDialogButtonBox(
       can_write ? QDialogButtonBox::Ok | QDialogButtonBox::Cancel :

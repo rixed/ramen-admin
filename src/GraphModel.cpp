@@ -522,7 +522,8 @@ void GraphModel::setFunctionProperty(
       changed |= WORKER_CHANGED;
 
       if (verbose)
-        qDebug() << "Setting worker to " << function->worker->worker_signature;
+        qDebug() << "Setting worker to "
+                 << QString::fromStdString(function->worker->worker_signature);
 
       if (function->worker->parents) [[likely]] {
         for (auto const &p : *function->worker->parents) {
@@ -643,7 +644,7 @@ void GraphModel::delFunctionProperty(
       changed |= STORAGE_CHANGED;
       if (verbose)
         qDebug() << "Resetting worker "
-                 << function->worker->worker_signature;
+                 << QString::fromStdString(function->worker->worker_signature);
       prevWorkerSign = QString::fromStdString(function->worker->worker_signature);
       function->worker.reset();
       changed |= WORKER_CHANGED;

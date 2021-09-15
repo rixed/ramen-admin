@@ -5,23 +5,28 @@
 #include <QWidget>
 #include <QMap>
 #include <QCheckBox>
-#include "conf.h"
 
 /* An editor for a single entry of the target configuration.
  * The actual TargetConfigEditor, bound to the TargetConfig entry in the
  * config tree, will use many of those in a QToolBox. */
 
-struct CompiledProgramParam;
+struct ConfChange;
 struct KValue;
 class QFormLayout;
 class QLabel;
 class QComboBox;
 class QLineEdit;
-struct RamenValue;
-namespace conf {
-  class Key;
-  struct RCEntry;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace program_parameter { struct t; }
+    namespace raql_value { struct t; }
+    namespace rc_entry { struct t; }
+    namespace source_info { struct t; }
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class RCEntryEditor : public QWidget
 {
@@ -41,23 +46,21 @@ protected:
   QLineEdit *reportEdit;
   QLineEdit *cwdEdit;
 
-  /* The SourceInfo defines the possible parameters (as CompiledProgramParam
-   * objects), with a name, a doc and a default value. On top of that, the
-   * conf::RCEntry comes with a set of conf::RCEntryParams overwriting the
-   * defaults.
-   * The form must offer to edit every defined param for that source, taking
-   * values from all defined RCEntryParams and then CompiledProgramParam.
-   * When the sourceBox is changed, the set of defined parameters change,
-   * yet we keep the former values for the RCEntryParams, so no value is
-   * ever lost by changing this combobox.
-   * When computing the value of the RCEntryEditor, though, we take only the
-   * parameters that are defined in the selected source. */
+  /* The SourceInfo defines the possible parameters, with a name, a doc and a
+   * default value. On top of that, the rc-entry comes with a set of parameters
+   * overwriting the defaults.  The form must offer to edit every defined param
+   * for that source.  When the sourceBox is changed, the set of defined
+   * parameters change, yet we keep the former values for the RCEntryParams, so
+   * no value is ever lost by changing this combobox.  When computing the value
+   * of the RCEntryEditor, though, we take only the parameters that are defined
+   * in the selected source. */
   // Returned value still owned by the callee
-  std::shared_ptr<RamenValue const> paramValue(
-    std::shared_ptr<CompiledProgramParam const>) const;
+  std::shared_ptr<dessser::gen::raql_value::t const> paramValue(
+    std::shared_ptr<dessser::gen::program_parameter::t const>) const;
 
   // Bag of previously set parameter values:
-  static QMap<std::string, std::shared_ptr<RamenValue const>> setParamValues;
+  static QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const>>
+    setParamValues;
 
   /* Keep the layout so it can be reset and also the widget and param
    * names can be retrieved: */
@@ -66,9 +69,9 @@ protected:
   /* Whether the edition of this RC entry is currently enabled or not: */
   bool enabled;
 
-  void addSourceFromStore(std::string const &, KValue const &);
-  void updateSourceFromStore(std::string const &, KValue const &);
-  void removeSourceFromStore(std::string const &, KValue const &);
+  void addSourceFromStore(dessser::gen::sync_key::t const &, KValue const &);
+  void updateSourceFromStore(dessser::gen::sync_key::t const &, KValue const &);
+  void removeSourceFromStore(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   bool sourceEditable;
@@ -89,7 +92,7 @@ public:
   /* Both addSource and findOrAddSourceName return the position in the select
    * box where the name has been inserted/found (so it can be programmatically
    * selected), or -1 if it has not been inserted. */
-  int addSource(std::string const &);
+  int addSource(dessser::gen::sync_key::t const &);
   int findOrAddSourceName(QString const &);
 
   void updateSourceWarnings();
@@ -101,7 +104,7 @@ public:
 
   /* Build a new RCEntry according to current content.
    * Caller takes ownership */
-  conf::RCEntry *getValue() const;
+  std::unique_ptr<dessser::gen::rc_entry::t> getValue() const;
 
   bool programIsEnabled() const { return enabledBox && enabledBox->isChecked(); }
 
@@ -116,7 +119,7 @@ private:
    * Used to reset the parameter table */
   void resetParams();
   // Set the form values according to this RCEntry:
-  void setValue(conf::RCEntry const &);
+  void setValue(dessser::gen::rc_entry::t const &);
 };
 
 #endif

@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 #include "AtomicWidget.h"
+#include "desssergen/rc_entry.h"
 
 /* An editor for the RC file (or any TargetConfig value).
  *
@@ -13,9 +14,6 @@ class QComboBox;
 class QLabel;
 class QStackedLayout;
 class RCEntryEditor;
-namespace conf {
-  struct RCEntry;
-};
 
 class TargetConfigEditor : public AtomicWidget
 {
@@ -30,17 +28,19 @@ public:
   QLabel *noSelectionText;
   QStackedLayout *stackedLayout;
   int entryEditorIdx, noSelectionIdx;
-  std::vector<std::shared_ptr<conf::RCEntry>> rcEntries;
+  std::vector<dessser::gen::rc_entry::t> rcEntries;
 
   TargetConfigEditor(QWidget *parent = nullptr);
 
   void setEnabled(bool);
-  std::shared_ptr<conf::Value const> getValue() const;
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
 
   void removeCurrentEntry();
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
+  bool setValue(
+    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
 
   void preselect(QString const &programName);
 

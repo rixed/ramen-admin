@@ -18,8 +18,8 @@ namespace dessser {
  * consider that Value can have "styles" depending on their key, which
  * allow them to customize their editor and/or other members. */
 AtomicWidget *newEditorWidget(
-  dessser::gen::sync_key::t const &,
-  std::shared_ptr<dessser::gen::sync_value::t const>,
+  dessser::gen::sync_value::t const &,
+  dessser::gen::sync_key::t const * = nullptr,
   QWidget *parent = nullptr);
 
 #endif

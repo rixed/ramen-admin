@@ -62,13 +62,13 @@ public:
     return key() && k == *key();
   }
 
-  bool sameKey(std::optional<dessser::gen::sync_key::t const> &k) const
+  bool sameKey(std::optional<dessser::gen::sync_key::t const> const &k) const
   {
     return k == key();
   }
 
   // Called by setKey to actually save that new key:
-  virtual void saveKey(std::optional<dessser::gen::sync_key::t const> &newKey)
+  virtual void saveKey(std::optional<dessser::gen::sync_key::t const> const &newKey)
   {
     _key = newKey;
   }
@@ -87,7 +87,8 @@ public:
    * copy. */
   // TODO: replace the widget with an error message then.
   virtual bool setValue(
-    dessser::gen::sync_key::t const &, std::shared_ptr<dessser::gen::sync_value::t const>) = 0;
+    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>) = 0;
 
   virtual bool hasValidInput() const { return true; }
 
@@ -108,11 +109,11 @@ public slots:
 
 signals:
   // Triggered when the key is changed:
-  void keyChanged(std::optional<dessser::gen::sync_key::t const> &old,
-                  std::optional<dessser::gen::sync_key::t const> &new_);
+  void keyChanged(std::optional<dessser::gen::sync_key::t const> const &old,
+                  std::optional<dessser::gen::sync_key::t const> const &new_);
 
   // Triggered when the underlying value is changed
-  void valueChanged(dessser::gen::sync_key::t const &,
+  void valueChanged(std::optional<dessser::gen::sync_key::t const> const &,
                     std::shared_ptr<dessser::gen::sync_value::t const>);
 
   // Triggered when the edited value is changed

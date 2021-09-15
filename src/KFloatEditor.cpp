@@ -31,7 +31,7 @@ void KFloatEditor::setEnabled(bool enabled)
 /* TODO: returning an actual error message that could be used in the error
  * label would be better */
 bool KFloatEditor::setValue(
-  dessser::gen::sync_key::t const &k,
+  std::optional<dessser::gen::sync_key::t const> const &k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   QString new_v { syncValToQString(*v, k) };

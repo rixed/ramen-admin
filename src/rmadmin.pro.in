@@ -39,7 +39,7 @@ HEADERS += \
   desssergen/field_type.h \
   desssergen/program_run_parameter.h \
   desssergen/program_parameter.h \
-  desssergen/target_config.h \
+  desssergen/rc_entry.h \
   desssergen/raql_variable.h \
   desssergen/raql_path_comp.h \
   desssergen/raql_top_output.h \
@@ -122,6 +122,10 @@ HEADERS += \
   WorkerViewer.h \
   TimeRangeViewer.h \
   SourceInfoViewer.h \
+  SourcesModel.h \
+  PathSuffixValidator.h \
+  RCEntryEditor.h \
+  TargetConfigEditor.h \
   EditorWidget.h \
   ConfTreeItem.h \
   ConfTreeEditorDialog.h \
@@ -159,7 +163,7 @@ SOURCES += \
   desssergen/field_type.cc \
   desssergen/program_run_parameter.cc \
   desssergen/program_parameter.cc \
-  desssergen/target_config.cc \
+  desssergen/rc_entry.cc \
   desssergen/raql_variable.cc \
   desssergen/raql_path_comp.cc \
   desssergen/raql_top_output.cc \
@@ -241,6 +245,10 @@ SOURCES += \
   WorkerViewer.cpp \
   TimeRangeViewer.cpp \
   SourceInfoViewer.cpp \
+  SourcesModel.cpp \
+  PathSuffixValidator.cpp \
+  RCEntryEditor.cpp \
+  TargetConfigEditor.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
   ConfTreeEditorDialog.cpp \

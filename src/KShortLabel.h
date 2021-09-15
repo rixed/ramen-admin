@@ -31,8 +31,9 @@ protected:
   void paintEvent(QPaintEvent *event);
 
 public slots:
-  bool setValue(dessser::gen::sync_key::t const &,
-                std::shared_ptr<dessser::gen::sync_value::t const>);
+  bool setValue(
+    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

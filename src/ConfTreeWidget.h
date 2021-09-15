@@ -45,7 +45,9 @@ protected:
 
 protected slots:
   void onChange(QList<ConfChange> const &);
-  void editedValueChanged(dessser::gen::sync_key::t const &, std::shared_ptr<dessser::gen::sync_value::t const>);
+  void editedValueChanged(
+    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_value::t const>);
   void deleteClicked(dessser::gen::sync_key::t const &);
   void activateItem(QTreeWidgetItem *item, int column);
   void openEditorWindow(dessser::gen::sync_key::t const &);

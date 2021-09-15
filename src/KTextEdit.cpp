@@ -51,7 +51,7 @@ void KTextEdit::setEnabled(bool enabled)
 }
 
 bool KTextEdit::setValue(
-  dessser::gen::sync_key::t const &k,
+  std::optional<dessser::gen::sync_key::t const> const &k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   QString new_v { syncValToQString(*v, k) };

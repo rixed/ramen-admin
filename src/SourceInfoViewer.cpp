@@ -39,7 +39,7 @@ static QString const QStringOfRetention(dessser::gen::retention::t const &r)
 }
 
 bool SourceInfoViewer::setValue(
-  dessser::gen::sync_key::t const &,
+  std::optional<dessser::gen::sync_key::t const> const &,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous params/parents layouts: */

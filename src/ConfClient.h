@@ -138,6 +138,8 @@ public:
              std::shared_ptr<UserIdentity const>,
              std::shared_ptr<KVStore>);
 
+  bool isSynced() const;
+
   int sendNew(
         dessser::gen::sync_key::t const *,
         dessser::gen::sync_value::t const * = nullptr,

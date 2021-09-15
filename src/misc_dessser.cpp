@@ -244,7 +244,9 @@ static QString qstringOfIpv6(uint128_t const v)
 }
 
 // Handle the cases where we do have a specialization for that key:
-static QString toQStringSpecKey(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
+static QString toQStringSpecKey(
+  dessser::gen::raql_value::t const &v,
+  dessser::gen::sync_key::t const &k)
 {
   // Try some special formats first:
   switch (v.index()) {
@@ -418,10 +420,14 @@ QString raqlValToQString(dessser::gen::raql_value::t const &v)
   return QString::fromStdString(s.str());
 }
 
-QString raqlValToQString(dessser::gen::raql_value::t const &v, dessser::gen::sync_key::t const &k)
+QString raqlValToQString(
+  dessser::gen::raql_value::t const &v,
+  std::optional<dessser::gen::sync_key::t const> const &k)
 {
-  QString spec { toQStringSpecKey(v, k) };
-  if (! spec.isEmpty()) return spec;
+  if (k) {
+    QString spec { toQStringSpecKey(v, *k) };
+    if (! spec.isEmpty()) return spec;
+  }
 
   return raqlValToQString(v);
 }
@@ -453,10 +459,13 @@ QString syncValToQString(dessser::gen::sync_value::t const &v)
   return QString::fromStdString(s.str());
 }
 
-QString syncValToQString(dessser::gen::sync_value::t const &v, dessser::gen::sync_key::t const &k)
+QString syncValToQString(
+  dessser::gen::sync_value::t const &v,
+  std::optional<dessser::gen::sync_key::t const> const &k)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
-    dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
+    dessser::gen::raql_value::t const *rv {
+      std::get<dessser::gen::sync_value::RamenValue>(v) };
     return raqlValToQString(*rv, k);
   }
 
@@ -514,4 +523,9 @@ QDebug operator<<(QDebug debug, dessser::gen::sync_key::t const &msg)
 QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &msg)
 {
   return printerOfStream<dessser::gen::sync_value::t>(debug, msg);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::raql_value::t const &cmd)
+{
+  return printerOfStream<dessser::gen::raql_value::t>(debug, cmd);
 }

@@ -4,51 +4,48 @@
 
 #include "MakeSyncValue.h"
 
-// Returns a single shared ptr controlling the two required allocations:
-static std::shared_ptr<dessser::gen::sync_value::t>
-  makeRaql(std::shared_ptr<dessser::gen::raql_value::t> rv)
+static std::unique_ptr<dessser::gen::sync_value::t> makeRaql(
+  dessser::gen::raql_value::t *rv)
 {
-  return std::shared_ptr<dessser::gen::sync_value::t>(
-    rv,
-    new dessser::gen::sync_value::t(
-      std::in_place_index<dessser::gen::sync_value::RamenValue>,
-      rv.get()));
+  return std::make_unique<dessser::gen::sync_value::t>(
+    std::in_place_index<dessser::gen::sync_value::RamenValue>,
+    rv);
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> ofBool(bool b)
+std::unique_ptr<dessser::gen::sync_value::t> ofBool(bool b)
 {
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>(
+  return makeRaql(new dessser::gen::raql_value::t(
     std::in_place_index<dessser::gen::raql_value::VBool>, b));
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> ofChar(char c)
+std::unique_ptr<dessser::gen::sync_value::t> ofChar(char c)
 {
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>(
+  return makeRaql(new dessser::gen::raql_value::t(
     std::in_place_index<dessser::gen::raql_value::VChar>, c));
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> ofDouble(double d)
+std::unique_ptr<dessser::gen::sync_value::t> ofDouble(double d)
 {
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>(
+  return makeRaql(new dessser::gen::raql_value::t(
     std::in_place_index<dessser::gen::raql_value::VFloat>, d));
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> ofString(std::string const &s)
+std::unique_ptr<dessser::gen::sync_value::t> ofString(std::string const &s)
 {
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>(
+  return makeRaql(new dessser::gen::raql_value::t(
     std::in_place_index<dessser::gen::raql_value::VString>, s));
 }
 
 #define DO_UINT(W, CW, conv) \
-std::shared_ptr<dessser::gen::sync_value::t> ofU##W(uint##CW##_t n) \
+std::unique_ptr<dessser::gen::sync_value::t> ofU##W(uint##CW##_t n) \
 { \
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>( \
+  return makeRaql(new dessser::gen::raql_value::t( \
     std::in_place_index<dessser::gen::raql_value::VU##W>, n)); \
 } \
  \
-std::shared_ptr<dessser::gen::sync_value::t> u##W##OfQString(QString const &s) \
+std::unique_ptr<dessser::gen::sync_value::t> u##W##OfQString(QString const &s) \
 { \
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>(); \
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>(); \
   return ofU##W(s.conv()); \
 } \
 
@@ -64,15 +61,15 @@ DO_UINT(64, 64, toLongLong)
 DO_UINT(128, 128, toLongLong)
 
 #define DO_INT(W, CW, conv) \
-std::shared_ptr<dessser::gen::sync_value::t> ofI##W(int##CW##_t n) \
+std::unique_ptr<dessser::gen::sync_value::t> ofI##W(int##CW##_t n) \
 { \
-  return makeRaql(std::make_shared<dessser::gen::raql_value::t>( \
+  return makeRaql(new dessser::gen::raql_value::t( \
     std::in_place_index<dessser::gen::raql_value::VI##W>, n)); \
 } \
  \
-std::shared_ptr<dessser::gen::sync_value::t> i##W##OfQString(QString const &s) \
+std::unique_ptr<dessser::gen::sync_value::t> i##W##OfQString(QString const &s) \
 { \
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>(); \
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>(); \
   return ofI##W(s.conv()); \
 } \
 
@@ -87,27 +84,27 @@ DO_INT(64, 64, toLongLong)
 // FIXME:
 DO_INT(128, 128, toLongLong)
 
-std::shared_ptr<dessser::gen::sync_value::t> boolOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> boolOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
   char const c { s[0].toLatin1() };
   return ofBool(c == '1' || c == 'y' || c == 't' || s == QString("on"));
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> charOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> charOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
   return ofChar(s[0].toLatin1());
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> floatOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> floatOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
   return ofDouble(s.toDouble());
 }
 
-std::shared_ptr<dessser::gen::sync_value::t> stringOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> stringOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::shared_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
   return ofString(s.toStdString());
 }

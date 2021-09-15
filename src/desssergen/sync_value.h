@@ -20,7 +20,7 @@
 #include "desssergen/replay.h"
 #include "desssergen/runtime_stats.h"
 #include "desssergen/source_info.h"
-#include "desssergen/target_config.h"
+#include "desssergen/rc_entry.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/time_range.h"
 #include "desssergen/retention.h"
@@ -81,7 +81,7 @@ struct t : public std::variant<
   dessser::gen::time_range::t_ext, // TimeRange
   Arr<::dessser::gen::sync_value::tuple*>, // Tuples
   dessser::gen::raql_value::t_ext, // RamenValue
-  dessser::gen::target_config::t_ext, // TargetConfig
+  Arr<dessser::gen::rc_entry::t_ext>, // TargetConfig
   dessser::gen::source_info::t_ext, // SourceInfo
   dessser::gen::runtime_stats::t_ext, // RuntimeStats
   dessser::gen::replay::t_ext, // Replay
@@ -128,7 +128,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
     case 3: os << "TimeRange " << ::dessser::gen::time_range::Deref(std::get<3>(v)); break;
     case 4: os << "Tuples " << std::get<4>(v); break;
     case 5: os << "RamenValue " << ::dessser::gen::raql_value::Deref(std::get<5>(v)); break;
-    case 6: os << "TargetConfig " << ::dessser::gen::target_config::Deref(std::get<6>(v)); break;
+    case 6: os << "TargetConfig " << std::get<6>(v); break;
     case 7: os << "SourceInfo " << ::dessser::gen::source_info::Deref(std::get<7>(v)); break;
     case 8: os << "RuntimeStats " << ::dessser::gen::runtime_stats::Deref(std::get<8>(v)); break;
     case 9: os << "Replay " << ::dessser::gen::replay::Deref(std::get<9>(v)); break;
@@ -155,7 +155,7 @@ inline bool operator==(t const &a, t const &b) {
     case 3: return ::dessser::gen::time_range::Deref(std::get<3>(a)) == ::dessser::gen::time_range::Deref(std::get<3>(b)); // TimeRange
     case 4: return std::get<4>(a) == std::get<4>(b); // Tuples
     case 5: return ::dessser::gen::raql_value::Deref(std::get<5>(a)) == ::dessser::gen::raql_value::Deref(std::get<5>(b)); // RamenValue
-    case 6: return ::dessser::gen::target_config::Deref(std::get<6>(a)) == ::dessser::gen::target_config::Deref(std::get<6>(b)); // TargetConfig
+    case 6: return std::get<6>(a) == std::get<6>(b); // TargetConfig
     case 7: return ::dessser::gen::source_info::Deref(std::get<7>(a)) == ::dessser::gen::source_info::Deref(std::get<7>(b)); // SourceInfo
     case 8: return ::dessser::gen::runtime_stats::Deref(std::get<8>(a)) == ::dessser::gen::runtime_stats::Deref(std::get<8>(b)); // RuntimeStats
     case 9: return ::dessser::gen::replay::Deref(std::get<9>(a)) == ::dessser::gen::replay::Deref(std::get<9>(b)); // Replay

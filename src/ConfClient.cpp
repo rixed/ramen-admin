@@ -816,6 +816,12 @@ bool ConfClient::isCrypted() const
   return id && !id->srv_pub_key.isEmpty();
 }
 
+bool ConfClient::isSynced() const
+{
+  return syncStatus == SyncStatus::Synchronized ||
+         syncStatus == SyncStatus::Closing;
+}
+
 QString const ConfClient::username() const
 {
   if (isCrypted()) {

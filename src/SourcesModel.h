@@ -4,10 +4,16 @@
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <QtGlobal>
-#include "conf.h"
-#include "confValue.h"
 
+struct ConfChange;
 struct KValue;
+
+namespace dessser {
+  namespace gen {
+    namespace source_info { struct t; }
+    namespace sync_key { struct t; }
+  }
+}
 
 class SourcesModel : public QAbstractItemModel
 {
@@ -83,13 +89,12 @@ public:
   struct FileItem : public TreeItem
   {
     /* Without the extension: */
-    std::string const sourceKeyPrefix;
+    std::string const src_path;
 
     QList<QString> extensions;
 
-    FileItem(QString name_, std::string const &sourceKeyPrefix_,
-             TreeItem *parent_ = nullptr) :
-      TreeItem(name_, parent_), sourceKeyPrefix(sourceKeyPrefix_) {}
+    FileItem(QString name_, std::string const &src_path_, TreeItem *parent_ = nullptr) :
+      TreeItem(name_, parent_), src_path(src_path_) {}
 
     ~FileItem()
     {
@@ -126,10 +131,10 @@ private:
   /* Destruct that file, and the dirs that become empty: */
   void deleteAll(QStringList &names, QString const &extension, DirItem *);
 
-  bool isMyKey(std::string const &) const;
+  bool isMyKey(dessser::gen::sync_key::t const &) const;
 
-  void addSource(std::string const &, KValue const &);
-  void delSource(std::string const &, KValue const &);
+  void addSource(dessser::gen::sync_key::t const &, KValue const &);
+  void delSource(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   SourcesModel(QObject *parent = nullptr);
@@ -140,11 +145,12 @@ public:
   int columnCount(QModelIndex const &parent) const;
   QVariant data(QModelIndex const &index, int role) const;
 
-  std::string const keyPrefixOfItem(SourcesModel::TreeItem const *) const;
-  std::string const keyPrefixOfIndex(QModelIndex const &index) const;
-  TreeItem *itemOfKeyPrefix(std::string const &);
-  QModelIndex const indexOfKeyPrefix(std::string const &);
-  std::shared_ptr<conf::SourceInfo const> sourceInfoOfItem(TreeItem const *) const;
+  std::string const SrcPathOfItem(SourcesModel::TreeItem const *) const;
+  std::string const SrcPathOfIndex(QModelIndex const &index) const;
+  TreeItem *itemOfSrcPath(std::string const &);
+  QModelIndex const indexOfSrcPath(std::string const &);
+  std::shared_ptr<dessser::gen::source_info::t const>
+    sourceInfoOfItem(TreeItem const *) const;
 
 private slots:
   void onChange(QList<ConfChange> const &);
@@ -157,12 +163,13 @@ inline SourcesModel::TreeItem::~TreeItem() {} // stupid language!
  */
 
 // Returns the source file name with extension
-QString const sourceNameOfKey(std::string const &);
+QString const sourceNameOfKey(dessser::gen::sync_key::t const &);
 
 // Returns the source file name without extension
-QString const baseNameOfKey(std::string const &);
+QString const baseNameOfKey(dessser::gen::sync_key::t const &);
 
 // The other way around:
-std::string const keyOfSourceName(QString const &, char const *newExtension = nullptr);
+dessser::gen::sync_key::t const keyOfSourceName(
+  QString const &, char const *newExtension = nullptr);
 
 #endif

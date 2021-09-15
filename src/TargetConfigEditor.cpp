@@ -7,12 +7,15 @@
 #include <QComboBox>
 #include <QLabel>
 #include <QStackedLayout>
-#include "confRCEntry.h"
+
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "misc_dessser.h"
 #include "RCEntryEditor.h"
-#include "confValue.h"
+
 #include "TargetConfigEditor.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 TargetConfigEditor::TargetConfigEditor(QWidget *parent) :
   AtomicWidget(parent),
@@ -43,18 +46,22 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent) :
           this, &TargetConfigEditor::changeEntry);
 }
 
-std::shared_ptr<conf::Value const> TargetConfigEditor::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> TargetConfigEditor::getValue() const
 {
-  std::shared_ptr<conf::TargetConfig> rc(new conf::TargetConfig());
+  dessser::Arr<dessser::gen::rc_entry::t_ext> rc;
 
-  for (int i = 0; i < (int)rcEntries.size(); i ++) {
-    rc->addEntry(
-      i == currentIndex ?
-        std::shared_ptr<conf::RCEntry>(entryEditor->getValue()) :
-        rcEntries[i]);
+  for (size_t i = 0; i < rcEntries.size(); i ++) {
+    rc.push_back(
+      (int)i == currentIndex ?
+        entryEditor->getValue().release() :
+        // Copy the stored value:
+        new dessser::gen::rc_entry::t(rcEntries[i]));
   }
 
-  return rc;
+  return
+    std::make_shared<dessser::gen::sync_value::t>(
+      std::in_place_index<dessser::gen::sync_value::TargetConfig>,
+      rc);
 }
 
 /*
@@ -89,14 +96,17 @@ void TargetConfigEditor::setEnabled(bool enabled)
   }
 */
 
-bool TargetConfigEditor::setValue(std::string const &k, std::shared_ptr<conf::Value const> v)
+bool TargetConfigEditor::setValue(
+  std::optional<dessser::gen::sync_key::t const> const &k,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  std::shared_ptr<conf::TargetConfig const> rc =
-    std::dynamic_pointer_cast<conf::TargetConfig const>(v);
-  if (! rc) {
+  if (v->index() != dessser::gen::sync_value::TargetConfig) {
     qCritical() << "Target config not of TargetConfig type!?";
     return false;
   }
+
+  dessser::Arr<dessser::gen::rc_entry::t_ext> rc {
+    std::get<dessser::gen::sync_value::TargetConfig>(*v) };
 
   /* Since we have a single value and it is locked whenever we want to edit
    * it, the current widget cannot have any modification when a new value is
@@ -107,11 +117,10 @@ bool TargetConfigEditor::setValue(std::string const &k, std::shared_ptr<conf::Va
   rcEntries.clear();
   while (entrySelector->count() > 0) entrySelector->removeItem(0);
 
-  for (auto const &it : rc->entries) {
-    /* The entry must be present in rcEntries array before urrentIndexChanged
-     * is signalled! */
-    rcEntries.push_back(it.second);
-    entrySelector->addItem(QString::fromStdString(it.first));
+  // Copy the RC entries:
+  for (dessser::gen::rc_entry::t const *rce : rc) {
+    rcEntries.push_back(*rce);
+    entrySelector->addItem(QString::fromStdString(rce->program));
   }
 
   assert(entrySelector->count() == (int)rcEntries.size());
@@ -119,7 +128,7 @@ bool TargetConfigEditor::setValue(std::string const &k, std::shared_ptr<conf::Va
   if (entrySelector->count() > 0) {
     stackedLayout->setCurrentIndex(entryEditorIdx);
     currentIndex = 0;
-    entryEditor->setValue(*rcEntries[currentIndex]);
+    entryEditor->setValue(rcEntries[currentIndex]);
     entrySelector->setCurrentIndex(currentIndex);
   } else {
     stackedLayout->setCurrentIndex(noSelectionIdx);
@@ -221,8 +230,7 @@ void TargetConfigEditor::changeEntry(int idx)
   if (currentIndex >= 0) {
     /* Save the value from the editor: */
     if (currentIndex < (int)rcEntries.size()) {
-      rcEntries[currentIndex] =
-        std::shared_ptr<conf::RCEntry>(entryEditor->getValue());
+      rcEntries[currentIndex] = *entryEditor->getValue();
     } else {
       /* Can happen that currentIndex is right past the end if we deleted
        * the last entry: */
@@ -233,6 +241,6 @@ void TargetConfigEditor::changeEntry(int idx)
   currentIndex = idx;
 
   if (idx >= 0) {
-    entryEditor->setValue(*rcEntries[idx]);
+    entryEditor->setValue(rcEntries[idx]);
   }
 }

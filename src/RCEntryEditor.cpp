@@ -9,44 +9,64 @@
 #include <QCheckBox>
 #include <QComboBox>
 #include <QLabel>
-#include "conf.h"
-#include "misc.h"
-#include "SourcesModel.h"  // for baseNameOfKey and friends
-#include "RangeDoubleValidator.h"
-#include "PathSuffixValidator.h"
-#include "confRCEntryParam.h"
+
 #include "AtomicWidget.h"
+#include "ConfClient.h"
+#include "desssergen/program_run_parameter.h"
+#include "desssergen/rc_entry.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/source_info.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "EditorWidget.h"
+#include "KVStore.h"
+#include "Menu.h"
+#include "misc.h"
+#include "misc_dessser.h"
+#include "PathSuffixValidator.h"
+#include "RangeDoubleValidator.h"
+#include "SourcesModel.h"  // for baseNameOfKey and friends
+
 #include "RCEntryEditor.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-QMap<std::string, std::shared_ptr<RamenValue const>> RCEntryEditor::setParamValues;
+QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const>>
+  RCEntryEditor::setParamValues;
 
 static bool isCompiledSource(KValue const &kv)
 {
-  std::shared_ptr<conf::SourceInfo const> info =
-    std::dynamic_pointer_cast<conf::SourceInfo const>(kv.val);
-  if (! info) return false;
+  if (kv.val->index() != dessser::gen::sync_value::SourceInfo) return false;
 
-  return info->isInfo();
+  std::shared_ptr<dessser::gen::source_info::t const> info {
+    std::get<dessser::gen::sync_value::SourceInfo>(*kv.val) };
+
+  return info->detail.index() == dessser::gen::source_info::Compiled;
 }
 
-static bool isSourceFile(std::string const &key)
+static std::string const sourceExt(dessser::gen::sync_key::t const &key)
 {
-  return ! endsWith(key, "/info");
+  if (key.index() != dessser::gen::sync_key::Sources) return "";
+  auto const &sources { std::get<dessser::gen::sync_key::Sources>(key) };
+  return std::get<1>(sources);
 }
 
-static bool isInfoFile(std::string const &key)
+static bool isSourceFile(dessser::gen::sync_key::t const &key)
 {
-  return endsWith(key, "/info");
+  return sourceExt(key) != "info";
 }
 
-RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent) :
-  QWidget(parent),
-  sourceDoesExist(false),
-  sourceIsCompiled(false),
-  enabled(false),
-  sourceEditable(sourceEditable_)
+static bool isInfoFile(dessser::gen::sync_key::t const &key)
+{
+  return sourceExt(key) == "info";
+}
+
+RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
+  : QWidget(parent),
+    sourceDoesExist(false),
+    sourceIsCompiled(false),
+    enabled(false),
+    sourceEditable(sourceEditable_)
 {
   QFormLayout *layout = new QFormLayout;
   setLayout(layout);
@@ -134,7 +154,7 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent) :
 
   /* Each creation/deletion of source files while this editor is alive should
    * refresh the source select box and its associated warnings: */
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &RCEntryEditor::onChange);
 }
 
@@ -158,13 +178,12 @@ void RCEntryEditor::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void RCEntryEditor::addSourceFromStore(std::string const &key, KValue const &)
+void RCEntryEditor::addSourceFromStore(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  if (! startsWith(key, "sources/")) return;
+  if (key.index() != dessser::gen::sync_key::Sources) return;
 
   if (verbose)
-    qDebug() << "RCEntryEditor::addSourceFromStore: New key:"
-             << QString::fromStdString(key);
+    qDebug() << "RCEntryEditor::addSourceFromStore: New key:" << key;
 
   if (isSourceFile(key)) {
     if (verbose)
@@ -178,13 +197,12 @@ void RCEntryEditor::addSourceFromStore(std::string const &key, KValue const &)
   }
 }
 
-void RCEntryEditor::updateSourceFromStore(std::string const &key, KValue const &)
+void RCEntryEditor::updateSourceFromStore(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  if (! startsWith(key, "sources/")) return;
+  if (key.index() != dessser::gen::sync_key::Sources) return;
 
   if (verbose)
-    qDebug() << "RCEntryEditor::updateSourceFromStore: Upd key:"
-             << QString::fromStdString(key);
+    qDebug() << "RCEntryEditor::updateSourceFromStore: Upd key:" << key;
 
   if (isInfoFile(key)) {
     if (verbose)
@@ -193,9 +211,9 @@ void RCEntryEditor::updateSourceFromStore(std::string const &key, KValue const &
   }
 }
 
-void RCEntryEditor::removeSourceFromStore(std::string const &key, KValue const &)
+void RCEntryEditor::removeSourceFromStore(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  if (! startsWith(key, "sources/")) return;
+  if (key.index() != dessser::gen::sync_key::Sources) return;
 
   /* Do not remove anything, so keep the current selection.
    * Just update the warning: */
@@ -239,7 +257,7 @@ void RCEntryEditor::setEnabled(bool enabled_)
   }
 }
 
-int RCEntryEditor::addSource(std::string const &k)
+int RCEntryEditor::addSource(dessser::gen::sync_key::t const &k)
 {
   return findOrAddSourceName(baseNameOfKey(k));
 }
@@ -281,12 +299,12 @@ void RCEntryEditor::updateSourceWarnings()
     sourceIsCompiled = true;
   } else {
     QString const name(sourceBox->currentText());
-    std::string info_k(keyOfSourceName(name, "info"));
+    dessser::gen::sync_key::t info_key { keyOfSourceName(name, "info") };
     kvs->lock.lock_shared();
     sourceDoesExist =
       kvs->map.find(keyOfSourceName(name, "ramen")) != kvs->map.end() ||
       kvs->map.find(keyOfSourceName(name, "alert")) != kvs->map.end();
-    auto it = kvs->map.find(info_k);
+    auto it { kvs->map.find(info_key) };
     sourceIsCompiled =
       it != kvs->map.end() &&
       isCompiledSource(it->second);
@@ -304,16 +322,17 @@ void RCEntryEditor::clearParams()
     paramsForm->removeRow(0); // Note: this also deletes the widgets
 }
 
-std::shared_ptr<RamenValue const> RCEntryEditor::paramValue(
-  std::shared_ptr<CompiledProgramParam const> p) const
+std::shared_ptr<dessser::gen::raql_value::t const> RCEntryEditor::paramValue(
+  std::shared_ptr<dessser::gen::program_parameter::t const> p) const
 {
   /* Try to find a set parameter by that name, falling back on the
    * compiled default: */
   if (verbose)
     qDebug() << "RCEntryEditor: paramValue("
-             << QString::fromStdString(p->name) << ") is"
-             << (setParamValues.contains(p->name) ? "present" : "absent");
-  return setParamValues.value(p->name, p->val);
+             << QString::fromStdString(p->ptyp->name) << ") is"
+             << (setParamValues.contains(p->ptyp->name) ? "present" : "absent");
+  std::shared_ptr<dessser::gen::raql_value::t const> val { p, p->value };
+  return setParamValues.value(p->ptyp->name, val);
 }
 
 /* Not the brightest idea to use labels as value store, but there you go: */
@@ -340,17 +359,25 @@ void RCEntryEditor::saveParams()
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
     AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
     assert(editor);
-    std::shared_ptr<conf::RamenValueValue const> rval =
-      std::dynamic_pointer_cast<conf::RamenValueValue const>(editor->getValue());
-    if (rval && rval->v) {
-      if (verbose)
-        qDebug() << "RCEntryEditor: set paramValues["
-                 << QString::fromStdString(pname) << "] to" << *rval->v;
-      setParamValues[pname] = rval->v;
+    std::shared_ptr<dessser::gen::sync_value::t const> val { editor->getValue() };
+    if (val) {
+      if (val->index() == dessser::gen::sync_value::RamenValue) {
+        if (verbose)
+          qDebug() << "RCEntryEditor: set paramValues["
+                   << QString::fromStdString(pname) << "] to" << *val;
+        setParamValues[pname] =
+          std::shared_ptr<dessser::gen::raql_value::t const>(
+            val,
+            std::get<dessser::gen::sync_value::RamenValue>(*val));
+      } else {
+        qCritical() << "AtomicWidget editor returned value for row" << row
+                    << "(name" << QString::fromStdString(pname)
+                    << "):" << *val << "that's not a RaQL value?!";
+      }
     } else {
-      qCritical() << "AtomicWidget editor returned a confValue for row" << row
+      qCritical() << "AtomicWidget editor returned no value for row" << row
                   << "(name" << QString::fromStdString(pname)
-                  << ") that's not a RamenValueValue!?";
+                  << ")";
     }
   }
 }
@@ -360,61 +387,83 @@ void RCEntryEditor::resetParams()
   /* Clear the paramsForm and rebuilt it, taking values from saved values */
   clearParams();
 
-  QString const baseName = sourceBox->currentText();
+  QString const baseName { sourceBox->currentText() };
   if (baseName.isEmpty()) return;
 
-  std::string infoKey("sources/" + baseName.toStdString() + "/info");
+  dessser::gen::sync_key::t const infoKey {
+    std::in_place_index<dessser::gen::sync_key::Sources>,
+      baseName.toStdString(),
+      "info" };
 
   kvs->lock.lock_shared();
-  std::shared_ptr<conf::SourceInfo const> info;
-  auto it = kvs->map.find(infoKey);
-  if (it != kvs->map.end())
-    info = std::dynamic_pointer_cast<conf::SourceInfo const>(it->second.val);
+  std::shared_ptr<dessser::gen::source_info::t> info;
+  auto it { kvs->map.find(infoKey) };
+  if (it != kvs->map.end()) {
+    if (it->second.val->index() == dessser::gen::sync_value::SourceInfo) {
+      info = std::shared_ptr<dessser::gen::source_info::t>(
+        it->second.val,
+        std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val));
+    }
+  }
   kvs->lock.unlock_shared();
 
   if (! info) {
     /* This can be normal during sync though: */
-    if (! initial_sync_finished) {
-      qDebug() << "RCEntryEditor: Cannot get info"
-               << QString::fromStdString(infoKey)
+    if (! Menu::getClient()->isSynced()) {
+      qDebug() << "RCEntryEditor: Cannot get info" << infoKey
                << ", more luck later when sync is complete.";
     } else {
-      qWarning() << "Cannot get info" << QString::fromStdString(infoKey);
+      qWarning() << "Cannot get info" << infoKey;
       qWarning() << "conf map is:";
       for (auto &it : kvs->map) {
-        qWarning() << "  " << QString::fromStdString(it.first)
-                   << "->" << it.second.val->toQString(it.first);
+        qWarning() << "  " << it.first
+                   << "->" << syncValToQString(*it.second.val, it.first);
       }
     }
     return;
   }
 
-  for (auto &p : info->params) {
-    // TODO: a tooltip with the parameter doc (CompiledProgramParam doc)
-    std::shared_ptr<RamenValue const> val = paramValue(p);
-    AtomicWidget *paramEdit = val->editorWidget(std::string());
+  if (info->detail.index() != dessser::gen::source_info::Compiled) {
+    qDebug() << "RCEntryEditor: Info is not compiled for" << infoKey;
+    return;
+  }
+
+  std::shared_ptr<dessser::gen::source_info::compiled_program> prog {
+    info,
+    std::get<dessser::gen::source_info::Compiled>(info->detail) };
+
+  for (dessser::gen::program_parameter::t const *p : prog->default_params) {
+    // TODO: a tooltip with the parameter doc
+    std::shared_ptr<dessser::gen::program_parameter::t const> ps { prog, p };
+    std::shared_ptr<dessser::gen::raql_value::t const> rval { paramValue(ps) };
+    /* paramEdit->setValue wants the value to be a shared_ptr<sync_value>, but since
+     * sync_value store a pointer to the raql_value `rval`, we want this new value to have
+     * the same lifespan as `rval`. */
+    std::shared_ptr<dessser::gen::sync_value::t const> val {
+      rval,
+      new dessser::gen::sync_value::t(
+        std::in_place_index<dessser::gen::sync_value::RamenValue>,
+        const_cast<dessser::gen::raql_value::t *>(rval.get())) };
+    // Get an editor for that type of value:
+    AtomicWidget *paramEdit { newEditorWidget(*val) };
     /* In theory, AtomicWidget got their value from the key. But here we
      * have no key but we know the value so let's just set it: */
-    std::shared_ptr<conf::RamenValueValue const> confval =
-      std::make_shared<conf::RamenValueValue const>(val);
-
-    paramEdit->setValue(
-      std::string(), std::static_pointer_cast<conf::Value const>(confval));
+    paramEdit->setValue(std::nullopt, val);
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged,
             this, &RCEntryEditor::inputChanged);
-    paramsForm->addRow(labelOfParamName(p->name), paramEdit);
+    paramsForm->addRow(labelOfParamName(p->ptyp->name), paramEdit);
   }
 }
 
-void RCEntryEditor::setValue(conf::RCEntry const &rcEntry)
+void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry)
 {
-  if (rcEntry.programName.length() == 0) {
+  if (rcEntry.program.length() == 0) {
     suffixEdit->setEnabled(false);
     sourceBox->setEnabled(false);
   } else {
-    std::string const srcPath = srcPathFromProgramName(rcEntry.programName);
-    std::string const programSuffix = suffixFromProgramName(rcEntry.programName);
+    std::string const srcPath = srcPathFromProgramName(rcEntry.program);
+    std::string const programSuffix = suffixFromProgramName(rcEntry.program);
     suffixEdit->setText(QString::fromStdString(programSuffix));
 
     suffixEdit->setEnabled(enabled);
@@ -428,22 +477,26 @@ void RCEntryEditor::setValue(conf::RCEntry const &rcEntry)
   enabledBox->setCheckState(rcEntry.enabled ? Qt::Checked : Qt::Unchecked);
   debugBox->setCheckState(rcEntry.debug ? Qt::Checked : Qt::Unchecked);
   automaticBox->setCheckState(rcEntry.automatic ? Qt::Checked : Qt::Unchecked);
-  sitesEdit->setText(QString::fromStdString(rcEntry.onSite));
-  reportEdit->setText(QString::number(rcEntry.reportPeriod));
+  sitesEdit->setText(QString::fromStdString(rcEntry.on_site));
+  reportEdit->setText(QString::number(rcEntry.report_period));
   cwdEdit->setText(QString::fromStdString(rcEntry.cwd));
 
   // Also save the parameter values so that resetParams can find them:
   for (auto const &param : rcEntry.params) {
-    if (! param->val) continue;
+    if (! param->value) continue;
     if (verbose)
-      qDebug() << "RCEntryEditor: Save value" << *param->val
+      qDebug() << "RCEntryEditor: Save value" << *param->value
                << "for param" << QString::fromStdString(param->name);
-    setParamValues[param->name] = param->val;
+    qCritical() << "FIXME: dangling pointer over here!";
+    setParamValues[param->name] =
+      /* FIXME: param->value has no lifespan control and will be deleted
+       * whenever the caller feels like deleting rcEntry! */
+      std::shared_ptr<dessser::gen::raql_value::t const>(param->value);
   }
   resetParams();
 }
 
-conf::RCEntry *RCEntryEditor::getValue() const
+std::unique_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
 {
   bool ok;
   double reportPeriod = reportEdit->text().toDouble(&ok);
@@ -464,14 +517,15 @@ conf::RCEntry *RCEntryEditor::getValue() const
       sourceBox->currentText().toStdString() + '#' +
       suffixEdit->text().toStdString());
 
-  conf::RCEntry *rce = new conf::RCEntry(
-    programName,
-    enabledBox->checkState() == Qt::Checked,
-    debugBox->checkState() == Qt::Checked,
-    reportPeriod,
+  std::unique_ptr<dessser::gen::rc_entry::t> rce { new dessser::gen::rc_entry::t(
+    automaticBox->checkState() == Qt::Checked,
     cwd,
+    debugBox->checkState() == Qt::Checked,
+    enabledBox->checkState() == Qt::Checked,
     sitesEdit->text().toStdString(),
-    automaticBox->checkState() == Qt::Checked);
+    dessser::Arr<dessser::gen::program_run_parameter::t_ext>(),
+    programName,
+    reportPeriod) };
 
   // Add parameters (skipping those without a value):
   for (int row = 0; row < paramsForm->rowCount(); row ++) {
@@ -483,13 +537,15 @@ conf::RCEntry *RCEntryEditor::getValue() const
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
     AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
     assert(editor);
-    std::shared_ptr<conf::Value const> val = editor->getValue();
+    std::shared_ptr<dessser::gen::sync_value::t const> val { editor->getValue() };
     if (! val) continue;
-    std::shared_ptr<conf::RamenValueValue const> rval =
-      std::dynamic_pointer_cast<conf::RamenValueValue const>(val);
-    assert(rval);
-    conf::RCEntryParam *param = new conf::RCEntryParam(pname, rval->v);
-    rce->addParam(param);
+    // We need to steel the raql_value from this shared value:
+    Q_ASSERT(val->index() == dessser::gen::sync_value::RamenValue);
+    dessser::gen::raql_value::t *pval {
+      new dessser::gen::raql_value::t(
+        // Copy it:
+        *std::get<dessser::gen::sync_value::RamenValue>(*val)) };
+    rce->params.push_back(new dessser::gen::program_run_parameter::t(pname, pval));
   }
 
   return rce;

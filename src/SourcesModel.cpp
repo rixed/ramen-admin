@@ -1,22 +1,28 @@
-#include <cassert>
 #include <QtGlobal>
 #include <QApplication>
 #include <QDebug>
 #include <QStyle>
 #include <QAbstractItemModel>
-#include "conf.h"
+
+#include "desssergen/source_info.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KValue.h"
+#include "KVStore.h"
 #include "misc.h"
+#include "misc_dessser.h"
 #include "Resources.h"
+
 #include "SourcesModel.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 SourcesModel::SourcesModel(QObject *parent) :
   QAbstractItemModel(parent)
 {
   root = new DirItem("");
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &SourcesModel::onChange);
 }
 
@@ -89,25 +95,31 @@ QVariant SourcesModel::data(QModelIndex const &index, int role) const
           {
             // Button to show the compilation result:
             if (item->isDir()) return QVariant();
-            std::shared_ptr<conf::SourceInfo const> info(sourceInfoOfItem(item));
-            if (! info)
+            std::shared_ptr<dessser::gen::source_info::t const> info {
+              sourceInfoOfItem(item) };
+            if (! info) {
               return QVariant();
-            else if (info->errMsg.isEmpty())
+            } else if (info->detail.index() == dessser::gen::source_info::Compiled) {
               return Resources::get()->infoPixmap;
-            else
+            } else {
+              Q_ASSERT(info->detail.index() == dessser::gen::source_info::Failed);
               return Resources::get()->errorPixmap;
+            }
           }
         case Action2:
           {
             // Button to run the program
             if (item->isDir()) return QVariant();
-            std::shared_ptr<conf::SourceInfo const> info(sourceInfoOfItem(item));
-            if (! info)
+            std::shared_ptr<dessser::gen::source_info::t const> info {
+              sourceInfoOfItem(item) };
+            if (! info) {
               return Resources::get()->waitPixmap;
-            else if (info->errMsg.isEmpty())
+            } else if (info->detail.index() == dessser::gen::source_info::Compiled) {
               return Resources::get()->playPixmap;
-            else
+            } else {
+              Q_ASSERT(info->detail.index() == dessser::gen::source_info::Failed);
               return QVariant();
+            }
           }
         default:
           return QVariant();
@@ -118,78 +130,81 @@ QVariant SourcesModel::data(QModelIndex const &index, int role) const
   }
 }
 
-QString const baseNameOfKey(std::string const &k)
+// Returns the source name (without extension):
+QString const baseNameOfKey(dessser::gen::sync_key::t const &k)
 {
-  // Take everything after first slash and before last:
-  size_t fst = k.find('/');
-  size_t lst = k.rfind('/');
-  if (fst == std::string::npos || lst <= fst) {
-    qDebug() << "Key" << QString::fromStdString(k) << "is invalid for a source";
+  if (k.index() != dessser::gen::sync_key::Sources) {
+    qDebug() << "Key" << k << "is invalid for a source";
     return QString();
+  } else {
+    auto const &sources { std::get<dessser::gen::sync_key::Sources>(k) };
+    return QString::fromStdString(std::get<0>(sources));
   }
-  return QString::fromStdString(k.substr(fst + 1, lst - fst - 1));
 }
 
-QString const sourceNameOfKey(std::string const &k)
+// Returns the file name (source path + extension):
+QString const sourceNameOfKey(dessser::gen::sync_key::t const &k)
 {
-  // Take everything after first slash and before last:
-  size_t fst = k.find('/');
-  size_t lst = k.rfind('/');
-  if (fst == std::string::npos || lst <= fst) {
-    qDebug() << "Key" << QString::fromStdString(k) << "is invalid for a source";
+  if (k.index() != dessser::gen::sync_key::Sources) {
+    qDebug() << "Key" << k << "is invalid for a source";
     return QString();
+  } else {
+    auto const &sources { std::get<dessser::gen::sync_key::Sources>(k) };
+    return QString::fromStdString(std::get<0>(sources) +"."+ std::get<1>(sources));
   }
-  return QString::fromStdString(k.substr(fst + 1, lst - fst - 1) +
-                                "." + k.substr(lst+1));
 }
 
-std::string const keyOfSourceName(QString const &sourceName, char const *newExtension)
+dessser::gen::sync_key::t const keyOfSourceName(
+  QString const &sourceName,
+  char const *newExtension)
 {
-  std::string f(sourceName.toStdString());
-  size_t i = f.rfind('.');
+  std::string const f { sourceName.toStdString() };
+  size_t i { f.rfind('.') };
 
   /* Any source name is supposed to have an extension from which to tell the
    * language it's written in. */
-  assert(newExtension || i != std::string::npos);
+  Q_ASSERT(newExtension || i != std::string::npos);
 
-  std::string const ext =
+  std::string ext {
     newExtension ?
-      newExtension : f.substr(i+1, f.length() - i - 1);
-
+      newExtension : f.substr(i+1, f.length() - i - 1) };
+  std::string src_path {
+    i != std::string::npos ?  f.substr(0, i) : f };
   return
-    i != std::string::npos ?
-      std::string("sources/" + f.substr(0, i) + "/" + ext) :
-      std::string("sources/" + f + "/" + ext);
+    dessser::gen::sync_key::t(
+      std::in_place_index<dessser::gen::sync_key::Sources>,
+      src_path,
+      ext);
 }
 
-bool SourcesModel::isMyKey(std::string const &k) const
+bool SourcesModel::isMyKey(dessser::gen::sync_key::t const &k) const
 {
-  return startsWith(k, "sources/") && (
-           endsWith(k, "/ramen") || endsWith(k, "/alert"));
+  if (k.index() != dessser::gen::sync_key::Sources) return false;
+  auto const &sources { std::get<dessser::gen::sync_key::Sources>(k) };
+  std::string const &ext { std::get<1>(sources) };
+  return ext == "ramen" || ext == "alert";
 }
 
-void SourcesModel::addSource(std::string const &key, KValue const &)
+void SourcesModel::addSource(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (! isMyKey(key)) return;
 
-  QStringList names =
-    QString::fromStdString(key).split("/", QString::SkipEmptyParts);
-  if (names.length() <= 2) {
-    qCritical() << "addSource: invalid source key" << QString::fromStdString(key);
-    return;
-  }
+  Q_ASSERT(key.index() == dessser::gen::sync_key::Sources); // because isMyKey
+  auto const &sources { std::get<dessser::gen::sync_key::Sources>(key) };
+  std::string const src_path { std::get<0>(sources) };
 
-  names.removeFirst();  // "sources"
-  QString const extension(names.takeLast());
-  std::string sourceKeyPrefix(removeExt(key, '/'));
-  createAll(sourceKeyPrefix, names, extension, root);
+  QStringList names {
+    QString::fromStdString(src_path).split("/", Qt::SkipEmptyParts) };
+  QString const extension {
+    QString::fromStdString(std::get<1>(sources)) };
+  createAll(src_path, names, extension, root);
 }
 
 QModelIndex SourcesModel::indexOfItem(TreeItem const *item) const
 {
   if (! item->parent) return QModelIndex();
   DirItem const *parentDir = dynamic_cast<DirItem const *>(item->parent);
-  assert(parentDir);
+  Q_ASSERT(parentDir);
 
   // FIXME: seriously?
   int row = 0;
@@ -204,7 +219,7 @@ QModelIndex SourcesModel::indexOfItem(TreeItem const *item) const
 }
 
 SourcesModel::FileItem *SourcesModel::createAll(
-  std::string const &sourceKeyPrefix,
+  std::string const &src_path,
   QStringList &names,
   QString const &extension,
   DirItem *root)
@@ -224,14 +239,14 @@ SourcesModel::FileItem *SourcesModel::createAll(
         if (! lastName && (*it)->isDir()) {
           if (verbose) qDebug() << "createAll: Same directory name";
           DirItem *sub = dynamic_cast<DirItem *>(*it);
-          assert(sub);  // because isDir()
+          Q_ASSERT(sub);  // because isDir()
           root = sub;
           needNewItem = false;
           break;
         } else if (lastName && ! (*it)->isDir()) {
           if (verbose) qDebug() << "createAll: Same file";
           ret = dynamic_cast<FileItem *>(*it);
-          assert(ret);  // because !isDir()
+          Q_ASSERT(ret);  // because !isDir()
           ret->addExtension(extension);
           needNewItem = false;
           break;
@@ -251,7 +266,7 @@ SourcesModel::FileItem *SourcesModel::createAll(
       beginInsertRows(indexOfItem(root), row /* first row */, row /* last */);
       if (lastName) {
         // Create the final file
-        ret = new FileItem(nextName, sourceKeyPrefix, root);
+        ret = new FileItem(nextName, src_path, root);
         ret->addExtension(extension);
         root->addItem(ret, row);
       } else {
@@ -267,41 +282,36 @@ SourcesModel::FileItem *SourcesModel::createAll(
   return ret;
 }
 
-std::string const SourcesModel::keyPrefixOfItem(SourcesModel::TreeItem const *item) const
+std::string const SourcesModel::SrcPathOfItem(SourcesModel::TreeItem const *item) const
 {
   // Retrieve the key for the info:
   if (item->isDir()) return std::string();
 
-  SourcesModel::FileItem const *file =
-    dynamic_cast<SourcesModel::FileItem const *>(item);
-  assert(file);
-  return file->sourceKeyPrefix;
+  SourcesModel::FileItem const *file {
+    dynamic_cast<SourcesModel::FileItem const *>(item) };
+  Q_ASSERT(file);
+  return file->src_path;
 }
 
-std::string const SourcesModel::keyPrefixOfIndex(QModelIndex const &index) const
+std::string const SourcesModel::SrcPathOfIndex(QModelIndex const &index) const
 {
   // Retrieve the key for the info:
-  SourcesModel::TreeItem const *item =
-    static_cast<SourcesModel::TreeItem const *>(index.internalPointer());
-  return keyPrefixOfItem(item);
+  SourcesModel::TreeItem const *item {
+    static_cast<SourcesModel::TreeItem const *>(index.internalPointer()) };
+  return SrcPathOfItem(item);
 }
 
-QModelIndex const SourcesModel::indexOfKeyPrefix(std::string const &prefix)
+QModelIndex const SourcesModel::indexOfSrcPath(std::string const &prefix)
 {
-  TreeItem *item = itemOfKeyPrefix(prefix);
+  TreeItem *item { itemOfSrcPath(prefix) };
   if (! item) return QModelIndex();
   return indexOfItem(item);
 }
 
-SourcesModel::TreeItem *SourcesModel::itemOfKeyPrefix(std::string const &prefix)
+SourcesModel::TreeItem *SourcesModel::itemOfSrcPath(std::string const &prefix)
 {
-  QStringList names =
-    QString::fromStdString(prefix).split("/", QString::SkipEmptyParts);
-  if (names.length() <= 1) {
-    qCritical() << "Invalid key prefix" << QString::fromStdString(prefix);
-    return nullptr;
-  }
-  names.removeFirst();  // "sources"
+  QStringList names {
+    QString::fromStdString(prefix).split("/", Qt::SkipEmptyParts) };
 
   TreeItem *item = root;
   do {
@@ -309,7 +319,7 @@ SourcesModel::TreeItem *SourcesModel::itemOfKeyPrefix(std::string const &prefix)
     QString const &nextName = names.takeFirst();
     /* Because we have at least one name left after item.
      * Crash here? Check you've sent a key _prefix_ not a full key. */
-    assert(item->isDir());
+    Q_ASSERT(item->isDir());
     DirItem *dir = static_cast<DirItem *>(item);
 
     for (auto it = dir->children.begin();
@@ -327,39 +337,48 @@ found:;
   } while (true);
 }
 
-std::shared_ptr<conf::SourceInfo const> SourcesModel::sourceInfoOfItem(TreeItem const *item) const
+std::shared_ptr<dessser::gen::source_info::t const>
+  SourcesModel::sourceInfoOfItem(TreeItem const *item) const
 {
   if (item->isDir()) return nullptr;
 
-  SourcesModel::FileItem const *file =
-    dynamic_cast<SourcesModel::FileItem const *>(item);
-  assert(file);
+  SourcesModel::FileItem const *file {
+    dynamic_cast<SourcesModel::FileItem const *>(item) };
+  Q_ASSERT(file);
 
-  std::string const infoKey = file->sourceKeyPrefix + "/info";
+  dessser::gen::sync_key::t const infoKey {
+    std::in_place_index<dessser::gen::sync_key::Sources>,
+    file->src_path,
+    "info" };
 
-  std::shared_ptr<conf::Value const> v;
+  std::shared_ptr<dessser::gen::sync_value::t const> v;
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(infoKey);
+  auto it { kvs->map.find(infoKey) };
   if (it != kvs->map.end()) v = it->second.val;
   kvs->lock.unlock_shared();
 
   if (! v) return nullptr;
-  return std::dynamic_pointer_cast<conf::SourceInfo const>(v);
+  if (v->index() != dessser::gen::sync_value::SourceInfo) {
+    qCritical() << "Key" << infoKey << "is not a SourceInfo!?";
+    return nullptr;
+  }
+  return
+    std::shared_ptr<dessser::gen::source_info::t const>(
+      v,
+      std::get<dessser::gen::sync_value::SourceInfo>(*v));
 }
 
-void SourcesModel::delSource(std::string const &key, KValue const &)
+void SourcesModel::delSource(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (! isMyKey(key)) return;
 
-  QStringList names =
-    QString::fromStdString(key).split("/", QString::SkipEmptyParts);
-  if (names.length() <= 2) {
-    qCritical() << "Invalid source key" << QString::fromStdString(key);
-    return;
-  }
+  Q_ASSERT(key.index() == dessser::gen::sync_key::Sources); // because isMyKey
+  auto const &sources { std::get<dessser::gen::sync_key::Sources>(key) };
+  std::string const &src_path { std::get<0>(sources) };
 
-  names.removeFirst();  // "sources"
-  QString const extension(names.takeLast());
+  QStringList names {
+    QString::fromStdString(src_path).split("/", Qt::SkipEmptyParts) };
+  QString const extension { QString::fromStdString(std::get<1>(sources)) };
 
   deleteAll(names, extension, root);
 }
@@ -369,7 +388,7 @@ void SourcesModel::deleteAll(
   QString const &extension,
   DirItem *root)
 {
-  assert(! names.isEmpty());
+  Q_ASSERT(! names.isEmpty());
 
   /* Locate this name in root children: */
   int row;
@@ -391,7 +410,7 @@ found:
 
     FileItem *file =
       dynamic_cast<FileItem *>(root->children[row]);
-    assert(file); // Because we only delete full path to files
+    Q_ASSERT(file); // Because we only delete full path to files
 
     file->delExtension(extension);
     if (file->extensions.isEmpty()) {
@@ -401,7 +420,7 @@ found:
     }
   } else {
     DirItem *dir = dynamic_cast<DirItem *>(root->children[row]);
-    assert(dir); // Because we only delete full path to files
+    Q_ASSERT(dir); // Because we only delete full path to files
     deleteAll(names, extension, dir);
     if (dir->children.count() > 0) return;
     // delete that empty dir

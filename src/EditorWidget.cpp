@@ -12,6 +12,7 @@
 #include "KTextEdit.h"
 #include "MakeSyncValue.h"
 #include "SourceInfoViewer.h"
+#include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
 
@@ -22,8 +23,8 @@
  */
 
 AtomicWidget *newEditorWidget(
-  dessser::gen::sync_key::t const &k,
-  std::shared_ptr<dessser::gen::sync_value::t const> v,
+  dessser::gen::sync_value::t const &v,
+  dessser::gen::sync_key::t const *k,
   QWidget *parent)
 {
   static dessser::gen::sync_key::t const recall_cost {
@@ -33,21 +34,21 @@ AtomicWidget *newEditorWidget(
 
   AtomicWidget *editor = nullptr;
 
-  switch (v->index()) {
+  switch (v.index()) {
     case dessser::gen::sync_value::RamenValue:
       {
         dessser::gen::raql_value::t const *rv {
-          std::get<dessser::gen::sync_value::RamenValue>(*v) };
+          std::get<dessser::gen::sync_value::RamenValue>(v) };
         switch (rv->index()) {
           case dessser::gen::raql_value::VFloat:
             editor =
-              k == recall_cost ?
+              k && *k == recall_cost ?
                 new KFloatEditor(parent, 0., 1.) :
                 new KFloatEditor(parent);
             break;
           case dessser::gen::raql_value::VString:
             editor =
-              k.index() == dessser::gen::sync_key::Sources ?
+              k && k->index() == dessser::gen::sync_key::Sources ?
                 static_cast<AtomicWidget *>(new KTextEdit(parent)) :
                 static_cast<AtomicWidget *>(new KLineEdit(parent));
             break;
@@ -143,17 +144,17 @@ AtomicWidget *newEditorWidget(
     case dessser::gen::sync_value::SourceInfo:
       editor = new SourceInfoViewer(parent);
       break;
-#   if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::TargetConfig:
       editor = new TargetConfigEditor(parent);
       break;
+#   if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::RuntimeStats:
       editor = new RuntimeStatsViewer(parent);
       break;
     case dessser::gen::sync_value::DashboardWidget:
       {
         dessser::gen::dashboard_widget::t const *dash {
-          std::get<dessser::gen::sync_value::DashboardWidget>(*v) };
+          std::get<dessser::gen::sync_value::DashboardWidget>(v) };
         switch (dash->index()) {
           case dessser::gen::dashboard_widget::Text:
             editor = new DashboardWidgetText(nullptr, parent);
@@ -173,6 +174,6 @@ AtomicWidget *newEditorWidget(
       break;
   }
 
-  if (editor) editor->setKey(k);
+  if (editor && k) editor->setKey(*k);
   return editor;
 }

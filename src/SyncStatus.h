@@ -24,10 +24,10 @@ public:
 
   QString message() const;
 
-  bool operator==(SyncStatus const &other) {
+  bool operator==(SyncStatus const &other) const {
     return status == other.status;
   }
-  bool operator!=(SyncStatus const &other) {
+  bool operator!=(SyncStatus const &other) const {
     return status != other.status;
   }
 };

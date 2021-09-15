@@ -52,7 +52,9 @@ static bool betterSkipKey(dessser::gen::sync_key::t const &key)
 }
 
 // Slot to propagates editor valueChanged into the item emitDatachanged
-void ConfTreeWidget::editedValueChangedFromStore(dessser::gen::sync_key::t const &key, KValue const &kv)
+void ConfTreeWidget::editedValueChangedFromStore(
+  dessser::gen::sync_key::t const &key,
+  KValue const &kv)
 {
   if (betterSkipKey(key)) return;
 
@@ -60,9 +62,11 @@ void ConfTreeWidget::editedValueChangedFromStore(dessser::gen::sync_key::t const
 }
 
 void ConfTreeWidget::editedValueChanged(
-  dessser::gen::sync_key::t const &key, std::shared_ptr<dessser::gen::sync_value::t const>)
+  std::optional<dessser::gen::sync_key::t const> const &key,
+  std::shared_ptr<dessser::gen::sync_value::t const>)
 {
-  ConfTreeItem *item = itemOfKey(key);
+  Q_ASSERT(key);
+  ConfTreeItem *item { itemOfKey(*key) };
   if (item) {
     item->emitDataChanged();
     /* The view will then ask for its data again, and those will be fetched
