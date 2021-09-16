@@ -126,6 +126,8 @@ HEADERS += \
   PathSuffixValidator.h \
   RCEntryEditor.h \
   TargetConfigEditor.h \
+  AtomicForm.h \
+  RCEditorDialog.h \
   EditorWidget.h \
   ConfTreeItem.h \
   ConfTreeEditorDialog.h \
@@ -249,6 +251,8 @@ SOURCES += \
   PathSuffixValidator.cpp \
   RCEntryEditor.cpp \
   TargetConfigEditor.cpp \
+  AtomicForm.cpp \
+  RCEditorDialog.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
   ConfTreeEditorDialog.cpp \

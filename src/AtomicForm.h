@@ -5,8 +5,8 @@
 #include <optional>
 #include <QWidget>
 #include <QString>
-#include "conf.h"
-#include "confValue.h"
+
+#include "ConfChange.h"
 
 /* We want to be able to edit a group of values atomically.
  * For this, we need this group of widget to be associated with 3 buttons:
@@ -39,6 +39,13 @@ class QMessageBox;
 class QPushButton;
 class QVBoxLayout;
 
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
+
 class AtomicForm : public QWidget
 {
   Q_OBJECT
@@ -49,7 +56,7 @@ class AtomicForm : public QWidget
      * time it is enabled with the value stored in the widget when the used
      * submits or cancels it.
      * Null if no value could be saved (because we started in edition mode). */
-    std::shared_ptr<conf::Value const> initValue;
+    std::shared_ptr<dessser::gen::sync_value::t const> initValue;
 
     FormWidget(AtomicWidget *widget_) :
       widget(widget_), initValue(nullptr) {}
@@ -63,18 +70,18 @@ class AtomicForm : public QWidget
   QMessageBox *confirmCancelDialog, *confirmDeleteDialog;
 
   // The set of all keys currently locked by this user:
-  std::set<std::string> locked;
+  std::set<dessser::gen::sync_key::t> locked;
 
   void doCancel();
   void doSubmit();
   bool someEdited();
 
   // Similar to lockValue, once we already know the key is our:
-  void setOwner(std::string const &, std::optional<QString> const &);
+  void setOwner(dessser::gen::sync_key::t const &, std::optional<QString> const &);
 
   bool allLocked() const;
-  void lockValue(std::string const &, KValue const &);
-  void unlockValue(std::string const &, KValue const &);
+  void lockValue(dessser::gen::sync_key::t const &, KValue const &);
+  void unlockValue(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
   QPushButton *editButton, *cancelButton, *deleteButton, *submitButton;
@@ -98,7 +105,7 @@ public:
   bool isEnabled() const;
 
 protected:
-  bool isMyKey(std::string const &) const;
+  bool isMyKey(dessser::gen::sync_key::t const &) const;
 
 protected slots:
   void removeWidget(QObject *);
@@ -111,7 +118,9 @@ public slots:
   void wantDelete();
   void wantSubmit();
   void setEnabled(bool);
-  void changeKey(std::string const &oldKey, std::string const &newKey);
+  void changeKey(
+    std::optional<dessser::gen::sync_key::t const> const &oldKey,
+    std::optional<dessser::gen::sync_key::t const> const &newKey);
 
 signals:
   void changeEnabled(bool);

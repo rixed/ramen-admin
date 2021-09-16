@@ -4,13 +4,19 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
-#include "conf.h"
+
 #include "AtomicWidget.h"
+#include "ConfClient.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
+#include "Menu.h"
+#include "misc_dessser.h"
 #include "Resources.h"
 
 #include "AtomicForm.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent)
   : QWidget(parent)
@@ -88,7 +94,7 @@ AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent)
   //confirmDeleteDialog->setWindowModality(Qt::WindowModal);
 
   // Listen to kvs changes:
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &AtomicForm::onChange);
 }
 
@@ -116,10 +122,10 @@ AtomicForm::~AtomicForm()
     qDebug() << "AtomicForm: destroying" << this;
 
   // Unlock everything that's locked:
-  for (std::string const &k : locked) {
+  for (dessser::gen::sync_key::t const &k : locked) {
     if (verbose)
-      qDebug() << "AtomicForm: Unlocking" << QString::fromStdString(k);
-    askUnlock(k);
+      qDebug() << "AtomicForm: Unlocking" << k;
+    Menu::getClient()->sendUnlock(&k);
   }
 }
 
@@ -137,14 +143,18 @@ void AtomicForm::setCentralWidget(QWidget *w)
    * need not be an AtomicWidget. */
 }
 
+static QString const key2str(std::optional<dessser::gen::sync_key::t const> const &k)
+{
+  if (!k) return QString("unset");
+  return syncKeyToQString(*k);
+}
+
 void AtomicForm::addWidget(AtomicWidget *aw, bool deletable)
 {
   widgets.emplace_back(aw);
 
   if (verbose)
-    qDebug() << "AtomicForm: added widget with key"
-             << (aw->key().length() > 0 ? QString::fromStdString(aw->key()) :
-                                        QString("still unset"))
+    qDebug() << "AtomicForm: added widget with key" << key2str(aw->key())
              << "now has" << widgets.size() << "widgets";
 
   connect(aw, &AtomicWidget::destroyed,
@@ -165,29 +175,29 @@ void AtomicForm::addWidget(AtomicWidget *aw, bool deletable)
           this, &AtomicForm::checkValidity);
 
   // If key is already set, start from it:
-  if (aw->key().length() > 0)
-    changeKey(std::string(), aw->key());
+  if (aw->key())
+    changeKey(std::nullopt, aw->key());
 
   setEnabled(allLocked());
 }
 
-void AtomicForm::changeKey(std::string const &oldKey, std::string const &newKey)
+void AtomicForm::changeKey(
+  std::optional<dessser::gen::sync_key::t const> const &oldKey,
+  std::optional<dessser::gen::sync_key::t const> const &newKey)
 {
   if (verbose)
-    qDebug() << "AtomicForm: change key from"
-             << QString::fromStdString(oldKey) << "to"
-             << QString::fromStdString(newKey);
+    qDebug() << "AtomicForm: change key from" << key2str(oldKey) << "to" << key2str(newKey);
 
   /* Unlock the former key.
    * If oldKey has been deleted then we won't update the locked set by
-   * merely calling askUnlock(oldKey). Anyway, we won't recognize this key
+   * merely calling sendUnlock(oldKey). Anyway, we won't recognize this key
    * with isMyKey() when the unlock is answered. So also forcibly remove that
    * key: */
-  if (locked.erase(oldKey) > 0) {
-    askUnlock(oldKey);
+  if (oldKey && locked.erase(*oldKey) > 0) {
+    Menu::getClient()->sendUnlock(&*oldKey);
   }
 
-  if (newKey.empty()) {
+  if (!newKey) {
     setEnabled(allLocked());
     return;
   }
@@ -195,13 +205,13 @@ void AtomicForm::changeKey(std::string const &oldKey, std::string const &newKey)
   std::optional<QString> owner;
 
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(newKey);
+  auto it { kvs->map.find(*newKey) };
   if (it != kvs->map.end())
     if (it->second.isLocked())
       owner = it->second.owner;
   kvs->lock.unlock_shared();
 
-  setOwner(newKey, owner);
+  setOwner(*newKey, owner);
 }
 
 void AtomicForm::wantEdit()
@@ -211,14 +221,14 @@ void AtomicForm::wantEdit()
 
   // Lock all widgets that are not locked already:
   for (FormWidget const &w : widgets) {
-    std::string const &key(w.widget->key());
+    std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
     if (verbose)
-      qDebug() << "AtomicForm: must I lock" << QString::fromStdString(key) << "?";
-    if (key.empty()) continue;
-    if (locked.find(key) == locked.end()) {
+      qDebug() << "AtomicForm: must I lock" << key2str(key) << "?";
+    if (!key) continue;
+    if (locked.find(*key) == locked.end()) {
       if (verbose)
         qDebug() << "AtomicForm: yes";
-      askLock(key);
+      Menu::getClient()->sendLock(&*key);
     }
   }
 
@@ -228,7 +238,7 @@ void AtomicForm::wantEdit()
 bool AtomicForm::someEdited()
 {
   for (FormWidget const &w : widgets) {
-    std::shared_ptr<conf::Value const> v(w.widget->getValue());
+    std::shared_ptr<dessser::gen::sync_value::t const> v { w.widget->getValue() };
     if (! v) {
       if (verbose)
         qDebug() << "AtomicForm::someEdited: No value from widget";
@@ -236,15 +246,13 @@ bool AtomicForm::someEdited()
     }
     if (! w.initValue) {
       if (verbose)
-        qDebug() << "AtomicForm: Value of"
-                 << QString::fromStdString(w.widget->key())
+        qDebug() << "AtomicForm: Value of" << key2str(w.widget->key())
                  << "has been set to " << *v;
       return true;
     }
     if (*w.initValue != *v) {
       if (verbose)
-        qDebug() << "AtomicForm: Value of"
-                 << QString::fromStdString(w.widget->key())
+        qDebug() << "AtomicForm: Value of" << key2str(w.widget->key())
                  << "has changed from " << *w.initValue << "to" << *v;
       return true;
     }
@@ -255,11 +263,11 @@ bool AtomicForm::someEdited()
 void AtomicForm::doCancel()
 {
   for (FormWidget &w : widgets) {
-    std::string const &key(w.widget->key());
-    if (key.empty()) continue;
+    std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
+    if (! key.has_value()) continue;
     if (! w.initValue) continue;
     w.widget->setValue(key, w.initValue);
-    askUnlock(key);
+    Menu::getClient()->sendUnlock(&*key);
   }
 }
 
@@ -280,18 +288,18 @@ void AtomicForm::wantDelete()
 
   QString info(tr("Those keys will be lost forever:\n"));
   for (AtomicWidget *aw : deletables) {
-    std::string const &key(aw->key());
-    if (key.empty()) continue;
-    info.append(QString::fromStdString(key));
+    std::optional<dessser::gen::sync_key::t const> const &key { aw->key() };
+    if (! key.has_value()) continue;
+    info.append(syncKeyToQString(*key));
     info.append("\n");
   }
   confirmDeleteDialog->setInformativeText(info);
 
   if (QMessageBox::Yes == confirmDeleteDialog->exec()) {
     for (AtomicWidget *aw : deletables) {
-      std::string const &key(aw->key());
-      if (key.empty()) continue;
-      askDel(key);
+      std::optional<dessser::gen::sync_key::t const> const &key { aw->key() };
+      if (! key.has_value()) continue;
+      Menu::getClient()->sendDel(&*key);
     }
   }
 }
@@ -299,12 +307,12 @@ void AtomicForm::wantDelete()
 void AtomicForm::doSubmit()
 {
   for (FormWidget &w : widgets) {
-    std::string const &key(w.widget->key());
-    if (key.empty()) continue;
-    std::shared_ptr<conf::Value const> v(w.widget->getValue());
+    std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
+    if (! key.has_value()) continue;
+    std::shared_ptr<dessser::gen::sync_value::t const> v { w.widget->getValue() };
     if (v && (! w.initValue || *v != *w.initValue))
-      askSet(key, v);
-    askUnlock(key);
+      Menu::getClient()->sendSet(&*key, v.get());
+    Menu::getClient()->sendUnlock(&*key);
   }
 }
 
@@ -352,7 +360,7 @@ void AtomicForm::setEnabled(bool enabled)
   emit changeEnabled(enabled);
 }
 
-bool AtomicForm::isMyKey(std::string const &k) const
+bool AtomicForm::isMyKey(dessser::gen::sync_key::t const &k) const
 {
   for (FormWidget const &w : widgets) {
     if (w.widget->key() == k) return true;
@@ -360,18 +368,18 @@ bool AtomicForm::isMyKey(std::string const &k) const
   return false;
 }
 
-void AtomicForm::lockValue(std::string const &key, KValue const &kv)
+void AtomicForm::lockValue(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (! isMyKey(key)) return;
   setOwner(key, kv.owner);
 }
 
-void AtomicForm::setOwner(std::string const &k, std::optional<QString> const &u)
+void AtomicForm::setOwner(dessser::gen::sync_key::t const &k, std::optional<QString> const &u)
 {
   bool const is_me = my_uid && u.has_value() && *my_uid == *u;
 
   if (verbose)
-    qDebug() << "AtomicForm: Owner of" << QString::fromStdString(k) << "is now"
+    qDebug() << "AtomicForm: Owner of" << k << "is now"
              << (u.has_value() ? *u : "none")
              << "(I am" << *my_uid
              << (is_me ? ", that's me!)" : ", not me)");
@@ -379,7 +387,6 @@ void AtomicForm::setOwner(std::string const &k, std::optional<QString> const &u)
   if (is_me) {
     locked.insert(k);
   } else {
-    assert(!k.empty());
     locked.erase(k);
   }
 
@@ -391,8 +398,8 @@ bool AtomicForm::allLocked() const
   bool const ret(
     std::all_of(widgets.cbegin(), widgets.cend(),
                 [this](FormWidget const &w) {
-    std::string const &key(w.widget->key());
-    return key.empty() || locked.find(key) != locked.end();
+    std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
+    return !key.has_value() || locked.find(*key) != locked.end();
   }));
 
   if (verbose) {
@@ -400,11 +407,10 @@ bool AtomicForm::allLocked() const
       qDebug() << "AtomicForm: all your keys are belong to us!";
     } else {
       for (FormWidget const &w : widgets) {
-        std::string const &key(w.widget->key());
-        if (key.empty()) continue;
-        if (locked.find(key) == locked.end()) {
-          qDebug() << "AtomicForm: missing lock for"
-                   << QString::fromStdString(key);
+        std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
+        if (! key.has_value()) continue;
+        if (locked.find(*key) == locked.end()) {
+          qDebug() << "AtomicForm: missing lock for" << *key;
         }
       }
     }
@@ -413,14 +419,13 @@ bool AtomicForm::allLocked() const
   return ret;
 }
 
-void AtomicForm::unlockValue(std::string const &key, KValue const &)
+void AtomicForm::unlockValue(dessser::gen::sync_key::t const &key, KValue const &)
 {
   if (! isMyKey(key)) return;
 
   if (verbose)
-    qDebug() << "AtomicForm:unlock (or del)" << QString::fromStdString(key);
+    qDebug() << "AtomicForm:unlock (or del)" << key;
 
-  assert(!key.empty());
   locked.erase(key);
   setEnabled(allLocked());
 }
@@ -466,9 +471,9 @@ void AtomicForm::checkValidity()
     qDebug() << "AtomicForm: checkValidity";
 
   for (FormWidget const &w : widgets) {
-    std::string const &key(w.widget->key());
-    if (key.empty()) continue;
-    if (!w.widget->hasValidInput()) {
+    std::optional<dessser::gen::sync_key::t const> const &key { w.widget->key() };
+    if (! key) continue;
+    if (! w.widget->hasValidInput()) {
       if (verbose) qDebug() << "AtomicForm:" << w.widget << "is invalid";
       submitButton->setEnabled(false);
       return;

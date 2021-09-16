@@ -32,9 +32,7 @@
 #ifdef WITH_PROCESSES
 #include "ProcessesDialog.h"
 #endif
-#ifdef WITH_RC_EDITOR
 #include "RCEditorDialog.h"
-#endif
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"
 #ifdef WITH_SOURCES
@@ -68,9 +66,7 @@ NewDashboardDialog *Menu::newDashboardDialog;
 #ifdef WITH_PROCESSES
 ProcessesDialog *Menu::processesDialog;
 #endif
-#ifdef WITH_RC_EDITOR
 RCEditorDialog *Menu::rcEditorDialog;
-#endif
 NamesTreeWin *Menu::namesTreeWin;
 #ifdef WITH_STORAGE
 StorageWin *Menu::storageWin;
@@ -115,10 +111,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create ProcessesDialog...";
   if (! processesDialog) processesDialog = new ProcessesDialog;
 # endif
-# ifdef WITH_RC_EDITOR
   if (verbose) qDebug() << "Create RCEditorDialog...";
   if (! rcEditorDialog) rcEditorDialog = new RCEditorDialog;
-# endif
   if (verbose) qDebug() << "Create NamesTreeWin...";
   if (! namesTreeWin) namesTreeWin = new NamesTreeWin;
 # ifdef WITH_STORAGE
@@ -151,9 +145,7 @@ void Menu::showSomething()
 # ifdef WITH_PROCESSES
   someOpened |= processesDialog->isVisible();
 # endif
-# ifdef WITH_RC_EDITOR
   someOpened |= rcEditorDialog->isVisible();
-# endif
 # ifdef WITH_STORAGE
   someOpened |= storageWin->isVisible();
 # endif
@@ -184,9 +176,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_PROCESSES
   danceOfDelLater<ProcessesDialog>(&processesDialog);
 # endif
-# ifdef WITH_RC_EDITOR
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
-# endif
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
 # ifdef WITH_STORAGE
   danceOfDelLater<StorageWin>(&storageWin);
@@ -273,12 +263,10 @@ void Menu::populateMenu(bool basic, bool extended)
       this, &Menu::openProcesses);
 #   endif
 
-#   ifdef WITH_RC_EDITOR
     /* The TargetConfig editor: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Running Configuration…"),
       this, &Menu::openRCEditor);
-#   endif
 
 #   ifdef WITH_STORAGE
     /* The Storage configuration window: */
@@ -426,12 +414,10 @@ void Menu::openProcesses()
 }
 #endif
 
-#ifdef WITH_RC_EDITOR
 void Menu::openRCEditor()
 {
   showRaised(rcEditorDialog);
 }
-#endif
 
 void Menu::openConfTreeDialog()
 {

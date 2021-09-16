@@ -28,9 +28,7 @@ class ProcessesDialog;
 #endif
 class QMainWindow;
 class QMenuBar;
-#ifdef WITH_RC_EDITOR
 class RCEditorDialog;
-#endif
 class ServerInfoWin;
 #ifdef WITH_SOURCES
 class SourcesWin;
@@ -93,9 +91,7 @@ public:
 # ifdef WITH_PROCESSES
   static ProcessesDialog *processesDialog;
 # endif
-# ifdef WITH_RC_EDITOR
   static RCEditorDialog *rcEditorDialog;
-# endif
   static NamesTreeWin *namesTreeWin;
 # ifdef WITH_STORAGE
   static StorageWin *storageWin;
@@ -133,9 +129,7 @@ public slots:
 # ifdef WITH_PROCESSES
   static void openProcesses();
 # endif
-# ifdef WITH_RC_EDITOR
   static void openRCEditor();
-# endif
   static void openConfTreeDialog();
   static void openAboutDialog();
   static void openNamesTreeWin();

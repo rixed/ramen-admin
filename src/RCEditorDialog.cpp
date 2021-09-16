@@ -2,10 +2,12 @@
 #include <QHBoxLayout>
 #include <QMessageBox>
 #include <QStackedLayout>
-#include "TargetConfigEditor.h"
+
 #include "AtomicForm.h"
+#include "TargetConfigEditor.h"
 #include "Resources.h"
 #include "RCEntryEditor.h"
+
 #include "RCEditorDialog.h"
 
 RCEditorDialog::RCEditorDialog(QWidget *parent) :
