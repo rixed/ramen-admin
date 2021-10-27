@@ -3,8 +3,6 @@ AC_INIT(rmadmin, 7.0.0)
 AC_PROG_CXX
 AC_CONFIG_HEADERS([src/config.h])
 
-AC_CHECK_LIB(zmq, zmq_bind)
-
 AC_PATH_PROG(QMAKE, qmake)
 AS_IF([test -z "$QMAKE"], [AC_MSG_ERROR([Cannot find qmake.])])
 
@@ -25,6 +23,17 @@ AC_ARG_WITH([dessser],
   [],
   [with_dessser=../dessser/src])
 AC_SUBST(DESSSER_INC, [$(realpath $with_dessser)])
+
+default_dessserc=../dessser/src/dessserc
+if ocamlfind query dessser >/dev/null 2>&1 ; then
+  default_dessserc=$(ocamlfind query dessser)/dessserc
+fi
+
+AC_ARG_WITH([dessserc],
+  AC_HELP_STRING([--with-dessserc], [Where to find the dessserc code generator]),
+  [],
+  [with_dessserc=$default_dessserc])
+AC_SUBST(DESSSERC, [$with_dessserc])
 
 AC_CONFIG_FILES([
   Makefile

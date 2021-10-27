@@ -2,7 +2,7 @@
 
 VERSION = @PACKAGE_VERSION@
 
-DESSSERC = ocamlfind dessser/dessserc
+DESSSERC = @DESSSERC@
 LINUXDEPLOY = linuxdeploy-x86_64.AppImage
 
 CXXFLAGS += -std=gnu++17 -Wall -W -Wno-parentheses -fPIC
