@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Input
 HEADERS += \
+  desssergen/team_name.h \
   desssergen/field_name.h \
   desssergen/function_name.h \
   desssergen/program_name.h \
@@ -145,6 +146,7 @@ HEADERS += \
   colorOfString.h
 
 SOURCES += \
+  desssergen/team_name.cc \
   desssergen/field_name.cc \
   desssergen/function_name.cc \
   desssergen/program_name.cc \

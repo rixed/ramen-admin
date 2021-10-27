@@ -48,6 +48,7 @@ all: $(INSTALLED)
 	  -o $@
 
 TYPE_SOURCES = \
+	team_name.type \
 	field_name.type \
 	function_name.type \
 	program_name.type \
@@ -112,6 +113,9 @@ src/desssergen/.created:
 # we use the _wire types directly as the type.
 # (Note: cp rather than ln because 1. timestamps need to be greater and
 # 2. might not be the same FS)
+src/desssergen/team_name.type: $(RAMEN_SRC)/team_name_wire.type src/desssergen/.created
+	cp $< $@
+
 src/desssergen/field_name.type: $(RAMEN_SRC)/field_name_wire.type src/desssergen/.created
 	cp $< $@
 

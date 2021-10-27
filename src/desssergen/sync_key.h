@@ -7,6 +7,7 @@
 #include <variant>
 #include <vector>
 #include "dessser/runtime.h"
+#include "desssergen/team_name.h"
 #include "desssergen/sync_socket.h"
 #include "desssergen/sync_socket.h"
 #include "desssergen/fq_name.h"
@@ -583,21 +584,21 @@ inline bool operator==(t8bc7bba8a815a55f85ed48e95de5ac1f const &a, t8bc7bba8a815
 inline bool operator!=(t8bc7bba8a815a55f85ed48e95de5ac1f const &a, t8bc7bba8a815a55f85ed48e95de5ac1f const &b) {
   return !operator==(a, b);
 }
-struct tdf2a6472960228e59d64c7f9dc00dcfa : public std::tuple<
-  std::string,
+struct t2ca7e384e93254d786048eef2705adff : public std::tuple<
+  dessser::gen::team_name::t_ext,
   ::dessser::gen::sync_key::t8bc7bba8a815a55f85ed48e95de5ac1f
 > {
   using tuple::tuple;
-  tdf2a6472960228e59d64c7f9dc00dcfa(std::tuple<std::string, ::dessser::gen::sync_key::t8bc7bba8a815a55f85ed48e95de5ac1f> p)
-    : std::tuple<std::string, ::dessser::gen::sync_key::t8bc7bba8a815a55f85ed48e95de5ac1f>(std::get<0>(p), std::get<1>(p)) {}
+  t2ca7e384e93254d786048eef2705adff(std::tuple<dessser::gen::team_name::t_ext, ::dessser::gen::sync_key::t8bc7bba8a815a55f85ed48e95de5ac1f> p)
+    : std::tuple<dessser::gen::team_name::t_ext, ::dessser::gen::sync_key::t8bc7bba8a815a55f85ed48e95de5ac1f>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tdf2a6472960228e59d64c7f9dc00dcfa const &a, tdf2a6472960228e59d64c7f9dc00dcfa const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t2ca7e384e93254d786048eef2705adff const &a, t2ca7e384e93254d786048eef2705adff const &b) {
+  return ::dessser::gen::team_name::Deref(std::get<0>(a)) == ::dessser::gen::team_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tdf2a6472960228e59d64c7f9dc00dcfa const &a, tdf2a6472960228e59d64c7f9dc00dcfa const &b) {
+inline bool operator!=(t2ca7e384e93254d786048eef2705adff const &a, t2ca7e384e93254d786048eef2705adff const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tdf2a6472960228e59d64c7f9dc00dcfa const &t) {
+inline std::ostream &operator<<(std::ostream &os, t2ca7e384e93254d786048eef2705adff const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -792,7 +793,7 @@ struct t : public std::variant<
   ::dessser::gen::sync_key::t3f175f4a6fba6fdb7dfcec615c7c9650, // PerClient
   ::dessser::gen::sync_key::ta2544ee31f0dcf915e9425cc06777d2f, // Dashboards
   Void, // Notifications
-  ::dessser::gen::sync_key::tdf2a6472960228e59d64c7f9dc00dcfa, // Teams
+  ::dessser::gen::sync_key::t2ca7e384e93254d786048eef2705adff, // Teams
   ::dessser::gen::sync_key::t9ec4790c9e9e464ee01331cfcf67af68 // Incidents
 > { using variant::variant; };
 

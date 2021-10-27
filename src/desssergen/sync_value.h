@@ -22,6 +22,7 @@
 #include "desssergen/source_info.h"
 #include "desssergen/rc_entry.h"
 #include "desssergen/raql_value.h"
+#include "desssergen/raql_value.h"
 #include "desssergen/time_range.h"
 #include "desssergen/retention.h"
 #include "desssergen/worker.h"
@@ -34,19 +35,19 @@ using dessser::operator<<;
 /* ------------ */
 struct tuple {
   uint32_t skipped;
-  Bytes values;
-  tuple(uint32_t skipped_, Bytes values_) : skipped(skipped_), values(values_) {}
+  dessser::gen::raql_value::t_ext values;
+  tuple(uint32_t skipped_, dessser::gen::raql_value::t_ext values_) : skipped(skipped_), values(values_) {}
   tuple() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, tuple const &r) {
   os << '{';
   os << "skipped:" << r.skipped << ',';
-  os << "values:" << r.values;
+  os << "values:" << ::dessser::gen::raql_value::Deref(r.values);
   os << '}';
   return os;
 }
 inline bool operator==(tuple const &a, tuple const &b) {
-  return a.skipped == b.skipped && a.values == b.values;
+  return a.skipped == b.skipped && ::dessser::gen::raql_value::Deref(a.values) == ::dessser::gen::raql_value::Deref(b.values);
 }
 
 inline bool operator!=(tuple const &a, tuple const &b) {
