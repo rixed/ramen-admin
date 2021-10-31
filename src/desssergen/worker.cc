@@ -3454,7 +3454,7 @@ static std::function<::dessser::gen::worker::t880e090806568021cc11b70fc209293e(P
                                                                       {
                                                                         auto du32_fst_219 { std::get<0>(id_1295) };
                                                                         auto du32_snd_220 { std::get<1>(id_1295) };
-                                                                        ::dessser::gen::worker::tdc75c022089b23d508b703f7fd52f8cc id_1297 { .parent_num = du32_fst_219, .tunneld_host = drec_fst_210, .tunneld_port = drec_fst_216 };
+                                                                        ::dessser::gen::worker::tdc75c022089b23d508b703f7fd52f8cc id_1297 { du32_fst_219, drec_fst_210, drec_fst_216 };
                                                                         Lst<::dessser::gen::worker::tdc75c022089b23d508b703f7fd52f8cc> id_1298 { id_1297, dlist2_fst_195 };
                                                                         ::dessser::gen::worker::t44d06c4644b2adb306bb7736a99f0330 id_1299 { id_1298, du32_snd_220 };
                                                                         letpair_res_1296 = id_1299;
@@ -3835,7 +3835,7 @@ static std::function<::dessser::gen::worker::t880e090806568021cc11b70fc209293e(P
                                                   auto dlist4_fst_289 { std::get<0>(let_res_1442) };
                                                   auto dlist4_snd_290 { std::get<1>(let_res_1442) };
                                                   Arr<dessser::gen::func_ref::t_ext> id_1473 { dlist4_fst_289.toListRev() };
-                                                  ::dessser::gen::worker::t* id_1474 { new ::dessser::gen::worker::t({ .children = id_1473, .cwd = drec_fst_75, .debug = drec_fst_66, .enabled = drec_fst_60, .envvars = drec_fst_169, .info_signature = drec_fst_105, .is_used = drec_fst_111, .params = drec_fst_143, .parents = drec_fst_266, .report_period = drec_fst_72, .role = drec_fst_237, .worker_signature = drec_fst_90 }) };
+                                                  ::dessser::gen::worker::t* id_1474 { new ::dessser::gen::worker::t({ id_1473, drec_fst_75, drec_fst_66, drec_fst_60, drec_fst_169, drec_fst_105, drec_fst_111, drec_fst_143, drec_fst_266, drec_fst_72, drec_fst_237, drec_fst_90 }) };
                                                   ::dessser::gen::worker::t880e090806568021cc11b70fc209293e id_1475 { id_1474, dlist4_snd_290 };
                                                   letpair_res_1472 = id_1475;
                                                 }

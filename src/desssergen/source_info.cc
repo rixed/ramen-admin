@@ -3429,7 +3429,7 @@ static std::function<::dessser::gen::source_info::tcd0d96e788be71f12c9272f5a0d08
                                           auto dstring2_fst_143 { std::get<0>(id_1377) };
                                           auto dstring2_snd_144 { std::get<1>(id_1377) };
                                           std::string id_1379 { dstring2_fst_143.toString() };
-                                          ::dessser::gen::source_info::compiled_func* id_1380 { new ::dessser::gen::source_info::compiled_func({ .doc = drec_fst_84, .factors = drec_fst_116, .in_signature = id_1379, .is_lazy = drec_fst_69, .name = drec_fst_57, .operation = drec_fst_87, .out_record = drec_fst_90, .retention = drec_fst_63, .signature = drec_fst_131 }) };
+                                          ::dessser::gen::source_info::compiled_func* id_1380 { new ::dessser::gen::source_info::compiled_func({ drec_fst_84, drec_fst_116, id_1379, drec_fst_69, drec_fst_57, drec_fst_87, drec_fst_90, drec_fst_63, drec_fst_131 }) };
                                           ::dessser::gen::source_info::tcd0d96e788be71f12c9272f5a0d08d3c id_1381 { id_1380, dstring2_snd_144 };
                                           letpair_res_1378 = id_1381;
                                         }
@@ -4055,7 +4055,7 @@ static std::function<::dessser::gen::source_info::t31f1f135df78e9323cd012cdca269
                 {
                   auto dlist4_fst_227 { std::get<0>(let_res_1575) };
                   auto dlist4_snd_228 { std::get<1>(let_res_1575) };
-                  ::dessser::gen::source_info::compiled_program* id_1605 { new ::dessser::gen::source_info::compiled_program({ .condition = drec_fst_178, .default_params = drec_fst_175, .funcs = dlist4_fst_227, .globals = drec_fst_204 }) };
+                  ::dessser::gen::source_info::compiled_program* id_1605 { new ::dessser::gen::source_info::compiled_program({ drec_fst_178, drec_fst_175, dlist4_fst_227, drec_fst_204 }) };
                   ::dessser::gen::source_info::t31f1f135df78e9323cd012cdca26996e id_1606 { id_1605, dlist4_snd_228 };
                   letpair_res_1604 = id_1606;
                 }
@@ -4696,7 +4696,7 @@ static std::function<::dessser::gen::source_info::tf8f403c93a73c64e0fb65e03e40d1
                       {
                         auto drec_fst_316 { std::get<0>(choose_res_1842) };
                         auto drec_snd_317 { std::get<1>(choose_res_1842) };
-                        ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1855 { .depends_on = drec_fst_316, .err_msg = drec_fst_310 };
+                        ::dessser::gen::source_info::t88a6703da8448662bc6d4e57390c3cfd id_1855 { drec_fst_316, drec_fst_310 };
                         ::dessser::gen::source_info::t8c0427df1968ef96f97bb2464a520b4c id_1856 { std::in_place_index<1>, id_1855 };
                         ::dessser::gen::source_info::t4140d8e218c3adb86fb9699cf64e17dd id_1857 { id_1856, drec_snd_317 };
                         letpair_res_1854 = id_1857;
@@ -4715,7 +4715,7 @@ static std::function<::dessser::gen::source_info::tf8f403c93a73c64e0fb65e03e40d1
             {
               auto drec_fst_325 { std::get<0>(let_res_1777) };
               auto drec_snd_326 { std::get<1>(let_res_1777) };
-              ::dessser::gen::source_info::t* id_1859 { new ::dessser::gen::source_info::t({ .detail = drec_fst_325, .md5s = drec_fst_286, .src_ext = drec_fst_248 }) };
+              ::dessser::gen::source_info::t* id_1859 { new ::dessser::gen::source_info::t({ drec_fst_325, drec_fst_286, drec_fst_248 }) };
               ::dessser::gen::source_info::tf8f403c93a73c64e0fb65e03e40d1cf9 id_1860 { id_1859, drec_snd_326 };
               letpair_res_1858 = id_1860;
             }

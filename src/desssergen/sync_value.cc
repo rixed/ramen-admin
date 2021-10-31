@@ -1757,7 +1757,7 @@ static std::function<::dessser::gen::sync_value::t750a477200d5d3da6135579fb33c15
         {
           auto drec_fst_63 { std::get<0>(id_591) };
           auto drec_snd_64 { std::get<1>(id_591) };
-          ::dessser::gen::sync_value::tuple* id_593 { new ::dessser::gen::sync_value::tuple({ .skipped = drec_fst_60, .values = drec_fst_63 }) };
+          ::dessser::gen::sync_value::tuple* id_593 { new ::dessser::gen::sync_value::tuple({ drec_fst_60, drec_fst_63 }) };
           ::dessser::gen::sync_value::t750a477200d5d3da6135579fb33c1597 id_594 { id_593, drec_snd_64 };
           letpair_res_592 = id_594;
         }

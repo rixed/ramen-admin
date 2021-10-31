@@ -16940,7 +16940,7 @@ static std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553
                                                                           return p_0;
                                                                         }
                                                                          };
-                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1428 { .Cidr4_ip = drec_fst_304, .Cidr4_mask = du8_fst_307 };
+                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1428 { drec_fst_304, du8_fst_307 };
                                                                         ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1429 { fun1427(id_1428) };
                                                                         ::dessser::gen::raql_value::t* id_1430 { new ::dessser::gen::raql_value::t(std::in_place_index<28>, id_1429) };
                                                                         ::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553ac id_1431 { id_1430, du8_snd_308 };
@@ -16985,7 +16985,7 @@ static std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553
                                                                             return p_0;
                                                                           }
                                                                            };
-                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1445 { .ip = drec_fst_283, .mask = du8_fst_286 };
+                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1445 { drec_fst_283, du8_fst_286 };
                                                                           ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1446 { fun1444(id_1445) };
                                                                           ::dessser::gen::raql_value::t* id_1447 { new ::dessser::gen::raql_value::t(std::in_place_index<29>, id_1446) };
                                                                           ::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553ac id_1448 { id_1447, du8_snd_287 };
@@ -17049,7 +17049,7 @@ static std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553
                                                                                     return p_0;
                                                                                   }
                                                                                    };
-                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1470 { .Cidr4_ip = drec_fst_256, .Cidr4_mask = du8_fst_259 };
+                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1470 { drec_fst_256, du8_fst_259 };
                                                                                   ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1471 { fun1469(id_1470) };
                                                                                   ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1472 { std::in_place_index<0>, id_1471 };
                                                                                   ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_1473 { id_1472, du8_snd_260 };
@@ -17094,7 +17094,7 @@ static std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553
                                                                                     return p_0;
                                                                                   }
                                                                                    };
-                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1487 { .ip = drec_fst_235, .mask = du8_fst_238 };
+                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1487 { drec_fst_235, du8_fst_238 };
                                                                                   ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1488 { fun1486(id_1487) };
                                                                                   ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1489 { std::in_place_index<1>, id_1488 };
                                                                                   ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_1490 { id_1489, du8_snd_239 };

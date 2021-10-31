@@ -810,7 +810,7 @@ static std::function<::dessser::gen::raql_select_field::tbc99a2463600e515e0f9491
                 {
                   auto drec_fst_93 { std::get<0>(choose_res_239) };
                   auto drec_snd_94 { std::get<1>(choose_res_239) };
-                  ::dessser::gen::raql_select_field::t* id_295 { new ::dessser::gen::raql_select_field::t({ .aggr = drec_fst_93, .alias = drec_fst_60, .doc = drec_fst_75, .expr = drec_fst_57 }) };
+                  ::dessser::gen::raql_select_field::t* id_295 { new ::dessser::gen::raql_select_field::t({ drec_fst_93, drec_fst_60, drec_fst_75, drec_fst_57 }) };
                   ::dessser::gen::raql_select_field::tbc99a2463600e515e0f9491341a5f511 id_296 { id_295, drec_snd_94 };
                   letpair_res_294 = id_296;
                 }

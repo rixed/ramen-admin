@@ -681,7 +681,7 @@ static std::function<::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e
                   auto dstring2_fst_84 { std::get<0>(id_247) };
                   auto dstring2_snd_85 { std::get<1>(id_247) };
                   std::string id_249 { dstring2_fst_84.toString() };
-                  ::dessser::gen::simple_filter::t* id_250 { new ::dessser::gen::simple_filter::t({ .lhs = drec_fst_57, .op = id_249, .rhs = drec_fst_72 }) };
+                  ::dessser::gen::simple_filter::t* id_250 { new ::dessser::gen::simple_filter::t({ drec_fst_57, id_249, drec_fst_72 }) };
                   ::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba id_251 { id_250, dstring2_snd_85 };
                   letpair_res_248 = id_251;
                 }

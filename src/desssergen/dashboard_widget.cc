@@ -3173,7 +3173,7 @@ static std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f24
                                           {
                                             auto drec_fst_140 { std::get<0>(let_res_1135) };
                                             auto drec_snd_141 { std::get<1>(let_res_1135) };
-                                            ::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6 id_1148 { .force_zero = drec_fst_122, .left = drec_fst_116, .scale = drec_fst_140 };
+                                            ::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6 id_1148 { drec_fst_122, drec_fst_116, drec_fst_140 };
                                             Lst<::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6> id_1149 { id_1148, dlist2_fst_110 };
                                             ::dessser::gen::dashboard_widget::t303e9891fb8ed9a2c6baec4b13805e74 id_1150 { id_1149, drec_snd_141 };
                                             letpair_res_1147 = id_1150;
@@ -3903,7 +3903,7 @@ static std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f24
                                                                                   {
                                                                                     auto du8_fst_284 { std::get<0>(id_1494) };
                                                                                     auto du8_snd_285 { std::get<1>(id_1494) };
-                                                                                    ::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82 id_1496 { .axis = du8_fst_284, .color = drec_fst_204, .column = drec_fst_243, .factors = drec_fst_281, .opacity = drec_fst_198, .representation = drec_fst_228 };
+                                                                                    ::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82 id_1496 { du8_fst_284, drec_fst_204, drec_fst_243, drec_fst_281, drec_fst_198, drec_fst_228 };
                                                                                     Lst<::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> id_1497 { id_1496, dlist2_fst_192 };
                                                                                     ::dessser::gen::dashboard_widget::t3fd42cf02103165757b46133ec4aa4a0 id_1498 { id_1497, du8_snd_285 };
                                                                                     letpair_res_1495 = id_1498;
@@ -3960,7 +3960,7 @@ static std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f24
                                                 auto dlist4_fst_293 { std::get<0>(let_res_1273) };
                                                 auto dlist4_snd_294 { std::get<1>(let_res_1273) };
                                                 Arr<::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> id_1509 { dlist4_fst_293.toListRev() };
-                                                ::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225 id_1510 { .fields = id_1509, .name = drec_fst_169, .visible = drec_fst_175 };
+                                                ::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225 id_1510 { id_1509, drec_fst_169, drec_fst_175 };
                                                 Lst<::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225> id_1511 { id_1510, dlist2_fst_166 };
                                                 ::dessser::gen::dashboard_widget::t1c27ebb6a650b9e9075513ac9d0da262 id_1512 { id_1511, dlist4_snd_294 };
                                                 letpair_res_1508 = id_1512;
@@ -4005,7 +4005,7 @@ static std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f24
                         auto dlist4_fst_302 { std::get<0>(let_res_1205) };
                         auto dlist4_snd_303 { std::get<1>(let_res_1205) };
                         Arr<::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225> id_1523 { dlist4_fst_302.toListRev() };
-                        ::dessser::gen::dashboard_widget::ta3280375be63ffe37d86976d93bf0304 id_1524 { .Chart_axis = drec_fst_149, .sources = id_1523, .title = drec_fst_78, .type = drec_fst_93 };
+                        ::dessser::gen::dashboard_widget::ta3280375be63ffe37d86976d93bf0304 id_1524 { drec_fst_149, id_1523, drec_fst_78, drec_fst_93 };
                         ::dessser::gen::dashboard_widget::t* id_1525 { new ::dessser::gen::dashboard_widget::t(std::in_place_index<1>, id_1524) };
                         ::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f2470c8d7b2 id_1526 { id_1525, dlist4_snd_303 };
                         letpair_res_1522 = id_1526;

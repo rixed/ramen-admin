@@ -933,7 +933,7 @@ static std::function<::dessser::gen::field_type::t4b48994596cb33a8ebda6c66090593
                     {
                       auto drec_fst_99 { std::get<0>(choose_res_282) };
                       auto drec_snd_100 { std::get<1>(choose_res_282) };
-                      ::dessser::gen::field_type::t* id_338 { new ::dessser::gen::field_type::t({ .aggr = drec_fst_99, .doc = drec_fst_81, .name = drec_fst_57, .typ = drec_fst_60, .units = drec_fst_66 }) };
+                      ::dessser::gen::field_type::t* id_338 { new ::dessser::gen::field_type::t({ drec_fst_99, drec_fst_81, drec_fst_57, drec_fst_60, drec_fst_66 }) };
                       ::dessser::gen::field_type::t4b48994596cb33a8ebda6c66090593de id_339 { id_338, drec_snd_100 };
                       letpair_res_337 = id_339;
                     }

@@ -997,7 +997,7 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
                           auto dstring2_fst_108 { std::get<0>(id_378) };
                           auto dstring2_snd_109 { std::get<1>(id_378) };
                           std::string id_380 { dstring2_fst_108.toString() };
-                          ::dessser::gen::alerting_inhibition::t* id_381 { new ::dessser::gen::alerting_inhibition::t({ .start_date = drec_fst_75, .stop_date = drec_fst_81, .what = drec_fst_69, .who = drec_fst_96, .why = id_380 }) };
+                          ::dessser::gen::alerting_inhibition::t* id_381 { new ::dessser::gen::alerting_inhibition::t({ drec_fst_75, drec_fst_81, drec_fst_69, drec_fst_96, id_380 }) };
                           ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c id_382 { id_381, dstring2_snd_109 };
                           letpair_res_379 = id_382;
                         }

@@ -322,7 +322,7 @@ static std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b2
         {
           auto du16_fst_90 { std::get<0>(id_69) };
           auto du16_snd_91 { std::get<1>(id_69) };
-          ::dessser::gen::sync_socket::t* id_71 { new ::dessser::gen::sync_socket::t({ .ip = drec_fst_87, .port = du16_fst_90 }) };
+          ::dessser::gen::sync_socket::t* id_71 { new ::dessser::gen::sync_socket::t({ drec_fst_87, du16_fst_90 }) };
           ::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9 id_72 { id_71, du16_snd_91 };
           letpair_res_70 = id_72;
         }

@@ -252,7 +252,7 @@ static std::function<::dessser::gen::sync_client_msg::t4409d3791506989c07ce018cc
                 {
                   auto drec_fst_75 { std::get<0>(id_44) };
                   auto drec_snd_76 { std::get<1>(id_44) };
-                  ::dessser::gen::sync_client_msg::t* id_46 { new ::dessser::gen::sync_client_msg::t({ .cmd = drec_fst_75, .confirm_success = drec_fst_66, .echo = drec_fst_72, .seq = drec_fst_60 }) };
+                  ::dessser::gen::sync_client_msg::t* id_46 { new ::dessser::gen::sync_client_msg::t({ drec_fst_75, drec_fst_66, drec_fst_72, drec_fst_60 }) };
                   ::dessser::gen::sync_client_msg::t4409d3791506989c07ce018cc8d6db69 id_47 { id_46, drec_snd_76 };
                   letpair_res_45 = id_47;
                 }

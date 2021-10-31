@@ -1809,7 +1809,7 @@ static std::function<::dessser::gen::sync_server_msg::tc420411c3211fa528e6f33214
                             auto dfloat_fst_183 { std::get<0>(id_674) };
                             auto dfloat_snd_184 { std::get<1>(id_674) };
                             double id_676 { float_of_qword(dfloat_fst_183) };
-                            ::dessser::gen::sync_server_msg::tf2e49d651ffdc321ab5675abf4b1c554 id_677 { .SetKey_k = drec_fst_162, .SetKey_mtime = id_676, .SetKey_uid = drec_fst_180, .SetKey_v = drec_fst_165 };
+                            ::dessser::gen::sync_server_msg::tf2e49d651ffdc321ab5675abf4b1c554 id_677 { drec_fst_162, id_676, drec_fst_180, drec_fst_165 };
                             ::dessser::gen::sync_server_msg::t* id_678 { new ::dessser::gen::sync_server_msg::t(std::in_place_index<2>, id_677) };
                             ::dessser::gen::sync_server_msg::tc420411c3211fa528e6f332144c4bd15 id_679 { id_678, dfloat_snd_184 };
                             letpair_res_675 = id_679;
@@ -2106,7 +2106,7 @@ static std::function<::dessser::gen::sync_server_msg::tc420411c3211fa528e6f33214
                                               auto dfloat_fst_153 { std::get<0>(id_811) };
                                               auto dfloat_snd_154 { std::get<1>(id_811) };
                                               double id_813 { float_of_qword(dfloat_fst_153) };
-                                              ::dessser::gen::sync_server_msg::t95feeb4c05fbe296dbc45d08c9a46b94 id_814 { .can_del = drec_fst_135, .can_write = drec_fst_129, .NewKey_expiry = id_813, .NewKey_k = drec_fst_99, .mtime = drec_fst_123, .NewKey_owner = drec_fst_150, .uid = drec_fst_117, .v = drec_fst_102 };
+                                              ::dessser::gen::sync_server_msg::t95feeb4c05fbe296dbc45d08c9a46b94 id_814 { drec_fst_135, drec_fst_129, id_813, drec_fst_99, drec_fst_123, drec_fst_150, drec_fst_117, drec_fst_102 };
                                               ::dessser::gen::sync_server_msg::t* id_815 { new ::dessser::gen::sync_server_msg::t(std::in_place_index<3>, id_814) };
                                               ::dessser::gen::sync_server_msg::tc420411c3211fa528e6f332144c4bd15 id_816 { id_815, dfloat_snd_154 };
                                               letpair_res_812 = id_816;
@@ -2275,7 +2275,7 @@ static std::function<::dessser::gen::sync_server_msg::tc420411c3211fa528e6f33214
                               auto dfloat_fst_87 { std::get<0>(id_881) };
                               auto dfloat_snd_88 { std::get<1>(id_881) };
                               double id_883 { float_of_qword(dfloat_fst_87) };
-                              ::dessser::gen::sync_server_msg::t69cc6731c9f63b8423445eb8919b831d id_884 { .expiry = id_883, .k = drec_fst_69, .owner = drec_fst_84 };
+                              ::dessser::gen::sync_server_msg::t69cc6731c9f63b8423445eb8919b831d id_884 { id_883, drec_fst_69, drec_fst_84 };
                               ::dessser::gen::sync_server_msg::t* id_885 { new ::dessser::gen::sync_server_msg::t(std::in_place_index<5>, id_884) };
                               ::dessser::gen::sync_server_msg::tc420411c3211fa528e6f332144c4bd15 id_886 { id_885, dfloat_snd_88 };
                               letpair_res_882 = id_886;

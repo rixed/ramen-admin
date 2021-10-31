@@ -214,7 +214,7 @@ static std::function<::dessser::gen::func_ref::tc1232252b3372e81155cf238dacf3283
             {
               auto drec_fst_63 { std::get<0>(id_36) };
               auto drec_snd_64 { std::get<1>(id_36) };
-              ::dessser::gen::func_ref::t* id_38 { new ::dessser::gen::func_ref::t({ .func = drec_fst_63, .program = drec_fst_60, .site = drec_fst_57 }) };
+              ::dessser::gen::func_ref::t* id_38 { new ::dessser::gen::func_ref::t({ drec_fst_63, drec_fst_60, drec_fst_57 }) };
               ::dessser::gen::func_ref::tc1232252b3372e81155cf238dacf3283 id_39 { id_38, drec_snd_64 };
               letpair_res_37 = id_39;
             }

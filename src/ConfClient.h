@@ -17,7 +17,7 @@
 #include "SyncStatus.h"
 
 class QTcpSocket;
-class UserIdentity;
+struct UserIdentity;
 class KVStore;
 
 namespace dessser {

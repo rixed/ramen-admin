@@ -282,7 +282,7 @@ int ConfClient::recvdSessionKey(
 static void sodium_increment_rev(unsigned char *b, size_t sz)
 {
   while (sz-- != 0) [[likely]] {
-    uint_fast16_t const c { (uint_fast16_t)b[sz] + 1 };
+    uint_fast16_t const c { (uint_fast16_t)(b[sz] + 1) };
     b[sz] = c;
     if (! (c & 0x100)) [[likely]] break;
   }
@@ -680,10 +680,8 @@ int ConfClient::sendCmd(
       bool echo)
 {
   dessser::gen::sync_client_msg::t msg {
-    .cmd = const_cast<dessser::gen::sync_client_cmd::t *>(&cmd),
-    .confirm_success = onDone.has_value(),
-    .echo = echo,
-    .seq = seq };
+    const_cast<dessser::gen::sync_client_cmd::t *>(&cmd),
+    onDone.has_value(), echo, seq };
 
   if (onDone.has_value()) {
     onDoneCallbacks.emplace_back(seq, *onDone);

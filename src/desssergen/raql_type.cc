@@ -18128,7 +18128,7 @@ static std::function<::dessser::gen::raql_type::t8cf8d4a14dfed6b2cbd585598476a47
           uint8_t id_1356 { 0 };
           bool id_1357 { bool(dbool_fst_297 == id_1356) };
           bool id_1358 { ! id_1357 };
-          ::dessser::gen::raql_type::t* id_1359 { new ::dessser::gen::raql_type::t({ .nullable = id_1358, .type = drec_fst_294 }) };
+          ::dessser::gen::raql_type::t* id_1359 { new ::dessser::gen::raql_type::t({ id_1358, drec_fst_294 }) };
           ::dessser::gen::raql_type::t8cf8d4a14dfed6b2cbd585598476a47b id_1360 { id_1359, dbool_snd_298 };
           letpair_res_1355 = id_1360;
         }

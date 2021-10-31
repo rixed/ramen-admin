@@ -166,7 +166,7 @@ static std::function<::dessser::gen::program_run_parameter::t45ac720640416eb316f
         {
           auto drec_fst_60 { std::get<0>(id_23) };
           auto drec_snd_61 { std::get<1>(id_23) };
-          ::dessser::gen::program_run_parameter::t* id_25 { new ::dessser::gen::program_run_parameter::t({ .name = drec_fst_57, .value = drec_fst_60 }) };
+          ::dessser::gen::program_run_parameter::t* id_25 { new ::dessser::gen::program_run_parameter::t({ drec_fst_57, drec_fst_60 }) };
           ::dessser::gen::program_run_parameter::t45ac720640416eb316fdbda6895dd1dc id_26 { id_25, drec_snd_61 };
           letpair_res_24 = id_26;
         }

@@ -2056,7 +2056,7 @@ static std::function<::dessser::gen::output_specs::tc6e0a3d92ad1a0dc71b26f93d651
                   {
                     auto du32_fst_111 { std::get<0>(id_736) };
                     auto du32_snd_112 { std::get<1>(id_736) };
-                    ::dessser::gen::output_specs::t55234e0caf6cba9a33ddd852496b1d7b id_738 { .batch_size = drec_fst_108, .num_batches = du32_fst_111, .with_index = drec_fst_102 };
+                    ::dessser::gen::output_specs::t55234e0caf6cba9a33ddd852496b1d7b id_738 { drec_fst_108, du32_fst_111, drec_fst_102 };
                     ::dessser::gen::output_specs::file_type* id_739 { new ::dessser::gen::output_specs::file_type(std::in_place_index<1>, id_738) };
                     ::dessser::gen::output_specs::tc6e0a3d92ad1a0dc71b26f93d6511bba id_740 { id_739, du32_snd_112 };
                     letpair_res_737 = id_740;
@@ -3107,7 +3107,7 @@ static std::function<::dessser::gen::output_specs::tf6138ae5919ddcb1cb9a935a9dc7
                                       auto dlist4_fst_260 { std::get<0>(let_res_1075) };
                                       auto dlist4_snd_261 { std::get<1>(let_res_1075) };
                                       Arr<::dessser::gen::output_specs::te4c4fc93d886f75ad3a4c47dcf350bfe> id_1111 { dlist4_fst_260.toListRev() };
-                                      ::dessser::gen::output_specs::t09ed983fbf58eb1b2ba3e79aee535b96 id_1112 { .channels = id_1111, .fieldmask = drec_fst_170, .file_type = drec_fst_167, .filters = drec_fst_228 };
+                                      ::dessser::gen::output_specs::t09ed983fbf58eb1b2ba3e79aee535b96 id_1112 { id_1111, drec_fst_170, drec_fst_167, drec_fst_228 };
                                       ::dessser::gen::output_specs::t1ef03b4a7a480e0e4d46675869c6a594 id_1113 { dtup_fst_164, id_1112 };
                                       Lst<::dessser::gen::output_specs::t1ef03b4a7a480e0e4d46675869c6a594> id_1114 { id_1113, dlist2_fst_161 };
                                       ::dessser::gen::output_specs::t1ad0048e46d88b111d399db3bc044189 id_1115 { id_1114, dlist4_snd_261 };

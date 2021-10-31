@@ -1127,7 +1127,7 @@ static std::function<::dessser::gen::replayer::t6917ef55820d0fab931ee64de5c03063
                           auto dlist4_fst_122 { std::get<0>(let_res_373) };
                           auto dlist4_snd_123 { std::get<1>(let_res_373) };
                           Arr<uint16_t> id_403 { dlist4_fst_122.toListRev() };
-                          ::dessser::gen::replayer::t* id_404 { new ::dessser::gen::replayer::t({ .channels = id_403, .creation = drec_fst_63, .exit_status = drec_fst_96, .last_killed = drec_fst_78, .pid = drec_fst_72, .time_range = drec_fst_57 }) };
+                          ::dessser::gen::replayer::t* id_404 { new ::dessser::gen::replayer::t({ id_403, drec_fst_63, drec_fst_96, drec_fst_78, drec_fst_72, drec_fst_57 }) };
                           ::dessser::gen::replayer::t6917ef55820d0fab931ee64de5c03063 id_405 { id_404, dlist4_snd_123 };
                           letpair_res_402 = id_405;
                         }

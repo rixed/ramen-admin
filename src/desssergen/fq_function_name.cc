@@ -214,7 +214,7 @@ static std::function<::dessser::gen::fq_function_name::tf533ff813b5d329c8f12bc34
             {
               auto drec_fst_63 { std::get<0>(id_36) };
               auto drec_snd_64 { std::get<1>(id_36) };
-              ::dessser::gen::fq_function_name::t* id_38 { new ::dessser::gen::fq_function_name::t({ .function = drec_fst_63, .program = drec_fst_60, .site = drec_fst_57 }) };
+              ::dessser::gen::fq_function_name::t* id_38 { new ::dessser::gen::fq_function_name::t({ drec_fst_63, drec_fst_60, drec_fst_57 }) };
               ::dessser::gen::fq_function_name::tf533ff813b5d329c8f12bc34e9fcc752 id_39 { id_38, drec_snd_64 };
               letpair_res_37 = id_39;
             }

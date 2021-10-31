@@ -2735,7 +2735,7 @@ static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f
                               auto dstring2_fst_200 { std::get<0>(id_1133) };
                               auto dstring2_snd_201 { std::get<1>(id_1133) };
                               std::string id_1135 { dstring2_fst_200.toString() };
-                              ::dessser::gen::alerting_contact::tbe8824b6bd92590dbb49ce7f29575869 id_1136 { .create = id_1135, .file = drec_fst_173, .insert = drec_fst_188 };
+                              ::dessser::gen::alerting_contact::tbe8824b6bd92590dbb49ce7f29575869 id_1136 { id_1135, drec_fst_173, drec_fst_188 };
                               ::dessser::gen::alerting_contact::ta2737d85243c228c957e6a89b1a2eaef id_1137 { std::in_place_index<3>, id_1136 };
                               ::dessser::gen::alerting_contact::t7a1727acfeac88acd54a67e8464ac4df id_1138 { id_1137, dstring2_snd_201 };
                               letpair_res_1134 = id_1138;
@@ -3299,7 +3299,7 @@ static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f
                                   auto dstring2_fst_152 { std::get<0>(id_1406) };
                                   auto dstring2_snd_153 { std::get<1>(id_1406) };
                                   std::string id_1408 { dstring2_fst_152.toString() };
-                                  ::dessser::gen::alerting_contact::t4f5f54104181335488041bad68082286 id_1409 { .options = drec_fst_119, .partition = drec_fst_140, .text = id_1408, .topic = drec_fst_134 };
+                                  ::dessser::gen::alerting_contact::t4f5f54104181335488041bad68082286 id_1409 { drec_fst_119, drec_fst_140, id_1408, drec_fst_134 };
                                   ::dessser::gen::alerting_contact::ta2737d85243c228c957e6a89b1a2eaef id_1410 { std::in_place_index<4>, id_1409 };
                                   ::dessser::gen::alerting_contact::t7a1727acfeac88acd54a67e8464ac4df id_1411 { id_1410, dstring2_snd_153 };
                                   letpair_res_1407 = id_1411;
@@ -3345,7 +3345,7 @@ static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f
           auto dfloat_fst_245 { std::get<0>(id_1414) };
           auto dfloat_snd_246 { std::get<1>(id_1414) };
           double id_1416 { float_of_qword(dfloat_fst_245) };
-          ::dessser::gen::alerting_contact::t* id_1417 { new ::dessser::gen::alerting_contact::t({ .timeout = id_1416, .via = drec_fst_242 }) };
+          ::dessser::gen::alerting_contact::t* id_1417 { new ::dessser::gen::alerting_contact::t({ id_1416, drec_fst_242 }) };
           ::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9 id_1418 { id_1417, dfloat_snd_246 };
           letpair_res_1415 = id_1418;
         }

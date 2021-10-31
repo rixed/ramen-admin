@@ -1143,7 +1143,7 @@ static std::function<::dessser::gen::rc_entry::t2c17f1ade0bb053f8b40955fc8bc8af6
                                   uint8_t id_383 { 0 };
                                   bool id_384 { bool(dbool_fst_122 == id_383) };
                                   bool id_385 { ! id_384 };
-                                  ::dessser::gen::rc_entry::t* id_386 { new ::dessser::gen::rc_entry::t({ .automatic = id_385, .cwd = drec_fst_78, .debug = drec_fst_69, .enabled = drec_fst_63, .on_site = drec_fst_119, .params = drec_fst_104, .program = drec_fst_57, .report_period = drec_fst_75 }) };
+                                  ::dessser::gen::rc_entry::t* id_386 { new ::dessser::gen::rc_entry::t({ id_385, drec_fst_78, drec_fst_69, drec_fst_63, drec_fst_119, drec_fst_104, drec_fst_57, drec_fst_75 }) };
                                   ::dessser::gen::rc_entry::t2c17f1ade0bb053f8b40955fc8bc8af6 id_387 { id_386, dbool_snd_123 };
                                   letpair_res_382 = id_387;
                                 }

@@ -359,7 +359,7 @@ static std::function<::dessser::gen::global_variable::te0fdf9308787ca06b18f7afa4
             {
               auto drec_fst_81 { std::get<0>(id_85) };
               auto drec_snd_82 { std::get<1>(id_85) };
-              ::dessser::gen::global_variable::t* id_87 { new ::dessser::gen::global_variable::t({ .name = drec_fst_78, .scope = drec_fst_75, .typ = drec_fst_81 }) };
+              ::dessser::gen::global_variable::t* id_87 { new ::dessser::gen::global_variable::t({ drec_fst_78, drec_fst_75, drec_fst_81 }) };
               ::dessser::gen::global_variable::te0fdf9308787ca06b18f7afa420eb4db id_88 { id_87, drec_snd_82 };
               letpair_res_86 = id_88;
             }

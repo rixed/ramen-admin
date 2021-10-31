@@ -157,7 +157,7 @@ static std::function<::dessser::gen::retention::t3c1a4fa343f4d41a3f7803e33483ce8
           auto dfloat_fst_60 { std::get<0>(id_19) };
           auto dfloat_snd_61 { std::get<1>(id_19) };
           double id_21 { float_of_qword(dfloat_fst_60) };
-          ::dessser::gen::retention::t* id_22 { new ::dessser::gen::retention::t({ .duration = drec_fst_57, .period = id_21 }) };
+          ::dessser::gen::retention::t* id_22 { new ::dessser::gen::retention::t({ drec_fst_57, id_21 }) };
           ::dessser::gen::retention::t3c1a4fa343f4d41a3f7803e33483ce83 id_23 { id_22, dfloat_snd_61 };
           letpair_res_20 = id_23;
         }

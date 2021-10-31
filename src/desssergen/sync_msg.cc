@@ -1475,7 +1475,7 @@ static std::function<::dessser::gen::sync_msg::td335ba805bbc6c81afca7fd8487e603c
                   {
                     auto drec_fst_138 { std::get<0>(let_res_613) };
                     auto drec_snd_139 { std::get<1>(let_res_613) };
-                    ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_617 { .message = drec_fst_138, .nonce = drec_fst_114, .public_key = drec_fst_126 };
+                    ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_617 { drec_fst_138, drec_fst_114, drec_fst_126 };
                     ::dessser::gen::sync_msg::t* id_618 { new ::dessser::gen::sync_msg::t(std::in_place_index<0>, id_617) };
                     ::dessser::gen::sync_msg::td335ba805bbc6c81afca7fd8487e603c id_619 { id_618, drec_snd_139 };
                     letpair_res_616 = id_619;
