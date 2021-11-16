@@ -149,7 +149,7 @@ void ConfClient::readMsg()
   if (syncStatus != SyncStatus::Authenticating &&
       syncStatus != SyncStatus::Synchronizing &&
       syncStatus != SyncStatus::Synchronized)
-    qWarning() << "Received data while in syncStatus " << syncStatus;
+    qWarning() << "Received data while in syncStatus" << syncStatus;
 
   // Check we can read the message size:
   qint64 avail_sz { tcpSocket->bytesAvailable() };
@@ -175,8 +175,8 @@ void ConfClient::readMsg()
       ((size_t)prefix[0] << 0U) };
     // Sanity check:
     if (msg_sz > 500000U) {  // Nope
-      qWarning() << "Received a message pretending to be " << msg_sz
-                 << " bytes long, quitting.";
+      qWarning() << "Received a message pretending to be" << msg_sz
+                 << "bytes long, quitting.";
 cannot_decode:
       emit connectionFatalError(syncStatus, QString("Cannot decode configuration message"));
       syncStatus = SyncStatus::Failed;
@@ -193,7 +193,7 @@ cannot_decode:
     // Alloc the message...
     std::shared_ptr<uint8_t> msg { (uint8_t *)std::malloc(msg_sz) };
     if (! msg) {
-      qWarning() << "Cannot alloc " << 4 + msg_sz << "bytes!";
+      qWarning() << "Cannot alloc" << 4 + msg_sz << "bytes!";
       emit connectionFatalError(syncStatus, QString("Cannot allocate memory"));
       syncStatus = SyncStatus::Failed;
       break;
@@ -647,7 +647,7 @@ int ConfClient::sendLock(
     std::in_place_index<dessser::gen::sync_client_cmd::LockKey>,
     const_cast<dessser::gen::sync_key::t *>(key),
     timeout,
-    false /* TODO: alsp pass recurs */ };
+    false /* TODO: also pass recurs */ };
 
   return sendCmd(cmd);
 }

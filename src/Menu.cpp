@@ -424,8 +424,8 @@ void Menu::openConfTreeDialog()
 
 void Menu::openAboutDialog()
 {
-   if (! aboutDialog) aboutDialog = new AboutDialog;
-   showRaised(aboutDialog);
+  if (! aboutDialog) aboutDialog = new AboutDialog;
+  showRaised(aboutDialog);
 }
 
 void Menu::openNamesTreeWin()
