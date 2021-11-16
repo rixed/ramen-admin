@@ -521,18 +521,6 @@ struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct ta2544ee31f0dcf915e9425cc06777d2f : public std::tuple<
   std::string,
   per_dash_key*
@@ -770,14 +758,6 @@ inline std::ostream &operator<<(std::ostream &os, t9ec4790c9e9e464ee01331cfcf67a
   return os;
 }
 
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t : public std::variant<
   Void, // DevNull
   Void, // Time
@@ -867,10 +847,6 @@ struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct tcce73bde988985bdd0bca77372a40274 : public std::tuple<
   ::dessser::gen::sync_key::per_dash_key*,
   Pointer
@@ -937,34 +913,6 @@ inline std::ostream &operator<<(std::ostream &os, t5f750ede44b214b8c8c8313f068cc
   return os;
 }
 
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct per_dash_key;
-inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
-inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
-inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
