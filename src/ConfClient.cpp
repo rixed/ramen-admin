@@ -156,19 +156,23 @@ void ConfClient::readMsg()
   Q_ASSERT(avail_sz >= 0);
 
   do {
-    if (avail_sz < 2) {
+    if (avail_sz < 4) {
       if (verbose)
         qDebug() << "Only" << avail_sz << "bytes available to read, will wait.";
       break;
     }
 
     // read the message size:
-    unsigned char prefix[2];
-    qint64 peeked { tcpSocket->peek((char *)prefix, 2) };
-    Q_ASSERT(peeked == 2);
+    unsigned char prefix[4];
+    qint64 const peeked { tcpSocket->peek((char *)prefix, 4) };
+    Q_ASSERT(peeked == 4);
 
     // Prefix is little endian:
-    size_t msg_sz { ((size_t)prefix[1] << 8U) | prefix[0] };
+    size_t msg_sz {
+      ((size_t)prefix[3] << 24U) |
+      ((size_t)prefix[2] << 16U) |
+      ((size_t)prefix[1] << 8U) |
+      ((size_t)prefix[0] << 0U) };
     // Sanity check:
     if (msg_sz > 500000U) {  // Nope
       qWarning() << "Received a message pretending to be " << msg_sz
@@ -180,24 +184,24 @@ cannot_decode:
     }
 
     // Do not read until the whole message is there:
-    if ((size_t)avail_sz < 2 + msg_sz) {
+    if ((size_t)avail_sz < 4 + msg_sz) {
       if (verbose)
-        qDebug() << "Have to wait for" << (2 + msg_sz) - avail_sz << "more bytes.";
+        qDebug() << "Have to wait for" << (4 + msg_sz) - avail_sz << "more bytes.";
       break;
     }
 
     // Alloc the message...
     std::shared_ptr<uint8_t> msg { (uint8_t *)std::malloc(msg_sz) };
     if (! msg) {
-      qWarning() << "Cannot alloc " << 2 + msg_sz << "bytes!";
+      qWarning() << "Cannot alloc " << 4 + msg_sz << "bytes!";
       emit connectionFatalError(syncStatus, QString("Cannot allocate memory"));
       syncStatus = SyncStatus::Failed;
       break;
     }
 
     // ...and read it, skipping the prefix:
-    qint64 const skip_sz { tcpSocket->skip(2) };
-    Q_ASSERT(skip_sz == 2);
+    qint64 const skip_sz { tcpSocket->skip(4) };
+    Q_ASSERT(skip_sz == 4);
     qint64 const read_sz { tcpSocket->read((char *)msg.get(), msg_sz) };
     Q_ASSERT((size_t)read_sz == msg_sz);
     avail_sz -= skip_sz + read_sz;
@@ -291,8 +295,8 @@ static void sodium_increment_rev(unsigned char *b, size_t sz)
 /* Assumes srv_nonce and channel_key are up to date: */
 int ConfClient::readCrypted(dessser::Bytes const &cipher)
 {
-  /* clear must have capacity for the clear text, ie. crypto_box_BOXZEROBYTES longer
-   * than cipher (cipher is MAC + message, NaCl wants 32 zeros) */
+  /* clear_buffer must have capacity for the clear text, ie. crypto_box_BOXZEROBYTES
+   * longer than cipher (cipher is MAC + message, NaCl wants 32 zeros) */
   uint8_t clear_buffer[crypto_box_BOXZEROBYTES + cipher.length()];
   bzero(clear_buffer, crypto_box_ZEROBYTES);
   // Have to copy cipher for 0 headers:
@@ -797,9 +801,9 @@ int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg)
 
   // Prepend the length and send:
   // FIXME: This assumes little endian
-  uint16_t lenPrefix = auth_act_sz;
+  uint32_t const lenPrefix { (uint32_t)auth_act_sz };
   // Note: A TcpSocket buffers internally and never short writes
-  if (0 != sendBytes(reinterpret_cast<char const *>(&lenPrefix), 2) ||
+  if (0 != sendBytes(reinterpret_cast<char const *>(&lenPrefix), 4) ||
       0 != sendBytes(reinterpret_cast<char const *>(auth_ptr.buffer.get()), auth_act_sz))
     return -1;
 
