@@ -129,8 +129,6 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create AlertingWin ...";
   if (! alertingWin) alertingWin = new AlertingWin;
 # endif
-  if (verbose) qDebug() << "Create Logger ...";
-  if (! loggerWin) loggerWin = new LoggerWin;
   // login is supposed to be initialized first
   assert(loginWin);
 }
@@ -287,11 +285,6 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "Server Information…"),
       this, &Menu::openServerInfoWin);
 
-    /* The Logger window */
-    windowMenu->addAction(
-      QCoreApplication::translate("QMenuBar", "Log messages…"),
-      this, &Menu::openLoggerWin);
-
     /* As a last resort, a raw edition window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Raw Configuration…"),
@@ -299,6 +292,11 @@ void Menu::populateMenu(bool basic, bool extended)
   }
 
   if (basic) {
+    /* The Logger window */
+    windowMenu->addAction(
+      QCoreApplication::translate("QMenuBar", "Log messages…"),
+      this, &Menu::openLoggerWin);
+
     /* An "About" entry added in any menu (but not directly in the top menubar)
      * will be moved into the automatic application menu in MacOs: */
     windowMenu->addAction(
@@ -469,6 +467,7 @@ void Menu::openLoginWin()
 
 void Menu::openLoggerWin()
 {
+  if (! loggerWin) loggerWin = new LoggerWin;
   showRaised(loggerWin);
 }
 
