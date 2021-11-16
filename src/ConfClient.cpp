@@ -174,7 +174,7 @@ void ConfClient::readMsg()
       ((size_t)prefix[1] << 8U) |
       ((size_t)prefix[0] << 0U) };
     // Sanity check:
-    if (msg_sz > 500000U) {  // Nope
+    if (msg_sz > 10*1024*(size_t)1024) {  // Nope
       qWarning() << "Received a message pretending to be" << msg_sz
                  << "bytes long, quitting.";
 cannot_decode:
@@ -205,6 +205,9 @@ cannot_decode:
     qint64 const read_sz { tcpSocket->read((char *)msg.get(), msg_sz) };
     Q_ASSERT((size_t)read_sz == msg_sz);
     avail_sz -= skip_sz + read_sz;
+
+    if (msg_sz > (size_t)500000)
+      qWarning() << "Message is" << msg_sz << "bytes!";
 
     // Parse it:
     dessser::Pointer in_ptr { msg, msg_sz };
