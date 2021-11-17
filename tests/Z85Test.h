@@ -1,5 +1,5 @@
-#ifndef Z85TESTS_H_210831
-#define Z85TESTS_H_210831
+#ifndef Z85TEST_H_210831
+#define Z85TEST_H_210831
 
 #include <QObject>
 

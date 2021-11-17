@@ -20,7 +20,7 @@
 struct HashKey {
   std::size_t operator()(dessser::gen::sync_key::t const &k) const noexcept
   {
-    // Lazily convert the key to a string then hash this string:
+    // Lazily convert the key to a string then hash this string: (FIXME)
     std::ostringstream str;
     str << k;
     return std::hash<std::string>{}(str.str());

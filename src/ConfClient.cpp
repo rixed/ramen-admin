@@ -19,7 +19,7 @@
 #include "z85.h"
 #include "ConfClient.h"
 
-static bool verbose { true };
+static bool verbose { false };
 
 void ConfClient::fatalErr(QString const &errString)
 {
