@@ -34,6 +34,8 @@ QString const stringOfDate(double);
 QString const stringOfDuration(double);
 QString const stringOfBytes(size_t);
 QString const stringOfBool(bool);
+QString const stringOfIp4(uint32_t);
+QString const stringOfIp6(uint128_t);
 
 QString const abbrev(int, QString const &);
 

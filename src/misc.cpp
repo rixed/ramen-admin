@@ -139,6 +139,26 @@ QString const stringOfBool(bool b)
   return "false";
 }
 
+QString const stringOfIp4(uint32_t ip)
+{
+  return QString::number((ip >> 24U) & 255) + "." +
+         QString::number((ip >> 16U) & 255) + "." +
+         QString::number((ip >> 8U) & 255) + "." +
+         QString::number(ip & 255);
+}
+
+QString const stringOfIp6(uint128_t ip)
+{
+  QStringList words;
+  for (int i = 7; i >= 0; i --) {
+    unsigned const w = (ip >> (unsigned)(16 * i)) & 0xffffU;
+    words = words << QString::number(w, 16);
+  }
+  // TODO: Replace the longest sequence of "0"s by ""
+
+  return words.join(":");
+}
+
 QString const abbrev(int len, QString const &s)
 {
   if (len <= 1) return "…";
