@@ -10,7 +10,7 @@
 #include "ConfTreeItem.h"
 
 ConfTreeItem::ConfTreeItem(
-  std::optional<dessser::gen::sync_key::t const> key_,
+  std::shared_ptr<dessser::gen::sync_key::t const> key_,
   QString const name_,
   ConfTreeItem *parent,
   ConfTreeItem *preceding)
@@ -26,7 +26,7 @@ QVariant ConfTreeItem::data(int column, int role) const
     Resources *r = Resources::get();
     bool isLocked = false;
     kvs->lock.lock_shared();
-    auto it = kvs->map.find(*key);
+    auto it = kvs->map.find(key);
     if (it != kvs->map.end()) isLocked = it->second.isLocked();
     kvs->lock.unlock_shared();
     return isLocked ? QIcon(r->lockedPixmap) : QVariant();
@@ -46,7 +46,7 @@ QVariant ConfTreeItem::data(int column, int role) const
         std::optional<QString> owner;
         double expiry;
         kvs->lock.lock_shared();
-        auto it = kvs->map.find(*key);
+        auto it = kvs->map.find(key);
         if (it != kvs->map.end()) {
           isLocked = it->second.isLocked();
           owner = it->second.owner;

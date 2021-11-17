@@ -80,7 +80,7 @@ static QString const qstringOfRef(dessser::gen::func_ref::t const &ref)
 }
 
 bool WorkerViewer::setValue(
-  std::optional<dessser::gen::sync_key::t const> const &,
+  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous params/parents layouts: */
@@ -88,7 +88,7 @@ bool WorkerViewer::setValue(
   emptyLayout(parents);
 
   if (v->index() == dessser::gen::sync_value::Worker) {
-    dessser::gen::worker::t const *w {
+    std::shared_ptr<dessser::gen::worker::t const> w {
       std::get<dessser::gen::sync_value::Worker>(*v) };
 
     enabled->setChecked(w->enabled);

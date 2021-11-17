@@ -105,7 +105,9 @@ std::shared_ptr<dessser::gen::source_info::compiled_func const> Function::compil
     "info" };
   KValue const *kv = nullptr;
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(k);
+  auto it =
+    kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
+      &k, /* No del */[](dessser::gen::sync_key::t const *){}));
   if (it != kvs->map.end()) kv = &it->second;
   kvs->lock.unlock_shared();
 
@@ -120,7 +122,7 @@ std::shared_ptr<dessser::gen::source_info::compiled_func const> Function::compil
   }
 
   std::shared_ptr<dessser::gen::source_info::t const> info {
-    kv->val, std::get<dessser::gen::sync_value::SourceInfo>(*kv->val) };
+    std::get<dessser::gen::sync_value::SourceInfo>(*kv->val) };
 
   if (info->detail.index() != dessser::gen::source_info::Compiled) {
     qWarning() << k << "is not compiled";
@@ -128,11 +130,10 @@ std::shared_ptr<dessser::gen::source_info::compiled_func const> Function::compil
   }
 
   std::shared_ptr<dessser::gen::source_info::compiled_program const> compiled {
-    kv->val, std::get<dessser::gen::source_info::Compiled>(info->detail) };
-  for (dessser::gen::source_info::compiled_func const *f :
+    std::get<dessser::gen::source_info::Compiled>(info->detail) };
+  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> f :
        std::const_pointer_cast<dessser::gen::source_info::compiled_program>(compiled)->funcs) {
-    if (QString::fromStdString(f->name) == name)
-      return std::shared_ptr<dessser::gen::source_info::compiled_func const>(kv->val, f);
+    if (QString::fromStdString(f->name) == name) return f;
   }
 
   qCritical() << k << "has no function" << name;
@@ -143,9 +144,7 @@ std::shared_ptr<dessser::gen::raql_type::t const> Function::outType() const
 {
   std::shared_ptr<dessser::gen::source_info::compiled_func const> func { compiledInfo() };
   if (! func) return nullptr;
-
-  return std::shared_ptr<dessser::gen::raql_type::t const>(
-           func, func->out_record);
+  return func->out_record;
 }
 
 std::shared_ptr<EventTime const> Function::getTime() const
@@ -172,19 +171,13 @@ std::shared_ptr<dessser::gen::event_time::t const> Function::get_event_time() co
       {
         auto const op {
           std::get<dessser::gen::raql_operation::Aggregate>(*func->operation) };
-        return op.Aggregate_event_time ?
-                 std::shared_ptr<dessser::gen::event_time::t const>(
-                   func, *op.Aggregate_event_time) :
-                 nullptr;
+        return op.Aggregate_event_time ? *op.Aggregate_event_time : nullptr;
       }
     case dessser::gen::raql_operation::ReadExternal:
       {
         auto const op {
           std::get<dessser::gen::raql_operation::ReadExternal>(*func->operation) };
-        return op.event_time ?
-                 std::shared_ptr<dessser::gen::event_time::t const>(
-                   func, *op.event_time) :
-                 nullptr;
+        return op.event_time ? *op.event_time : nullptr;
       }
     case dessser::gen::raql_operation::ListenFor:
       return nullptr;
@@ -221,7 +214,7 @@ std::shared_ptr<PastData> Function::getPast()
 
 void Function::iterValues(
   double since, double until, bool onePast, std::vector<int> const &columns,
-  std::function<void (double, std::vector<dessser::gen::raql_value::t const *> const)> cb)
+  std::function<void (double, std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> const)> cb)
 {
   /* It's not mandatory to tail that function, but we cannot iterValues
    * without pastData: */
@@ -253,7 +246,7 @@ void Function::iterValues(
     assert(!last || lastTime <= time);
     lastTime = time;
     last = tuple;
-    std::vector<dessser::gen::raql_value::t const *> v;
+    std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> v;
     v.reserve(columns.size());
     for (unsigned column : columns) {
       v.push_back(columnValue(*tuple, column));
@@ -266,7 +259,7 @@ void Function::iterValues(
   std::function<void(double, std::shared_ptr<dessser::gen::raql_value::t const>)>
     sendTuple([&cb, &columns]
       (double time, std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
-    std::vector<dessser::gen::raql_value::t const *> v;
+    std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> v;
     v.reserve(columns.size());
     for (unsigned column : columns)
       v.push_back(columnValue(*tuple, column));

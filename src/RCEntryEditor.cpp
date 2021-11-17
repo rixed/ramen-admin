@@ -164,13 +164,13 @@ void RCEntryEditor::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyCreated:
-        addSourceFromStore(change.key, change.kv);
+        addSourceFromStore(*change.key, change.kv);
         break;
       case KeyChanged:
-        updateSourceFromStore(change.key, change.kv);
+        updateSourceFromStore(*change.key, change.kv);
         break;
       case KeyDeleted:
-        removeSourceFromStore(change.key, change.kv);
+        removeSourceFromStore(*change.key, change.kv);
         break;
       default:
         break;
@@ -299,12 +299,26 @@ void RCEntryEditor::updateSourceWarnings()
     sourceIsCompiled = true;
   } else {
     QString const name(sourceBox->currentText());
-    dessser::gen::sync_key::t info_key { keyOfSourceName(name, "info") };
+    dessser::gen::sync_key::t const info_key { keyOfSourceName(name, "info") };
     kvs->lock.lock_shared();
+    dessser::gen::sync_key::t const ramen_src { keyOfSourceName(name, "ramen") };
     sourceDoesExist =
-      kvs->map.find(keyOfSourceName(name, "ramen")) != kvs->map.end() ||
-      kvs->map.find(keyOfSourceName(name, "alert")) != kvs->map.end();
-    auto it { kvs->map.find(info_key) };
+      kvs->map.find(
+        std::shared_ptr<dessser::gen::sync_key::t const>(
+          &ramen_src, /* No del */[](dessser::gen::sync_key::t const *){})) !=
+        kvs->map.end();
+    if (! sourceDoesExist) {
+      dessser::gen::sync_key::t const ramen_alert { keyOfSourceName(name, "alert") };
+      sourceDoesExist =
+        kvs->map.find(
+          std::shared_ptr<dessser::gen::sync_key::t const>(
+            &ramen_alert, /* No del */[](dessser::gen::sync_key::t const *){})) !=
+          kvs->map.end();
+    }
+    auto it {
+      kvs->map.find(
+        std::shared_ptr<dessser::gen::sync_key::t const>(
+          &info_key, /* No del */[](dessser::gen::sync_key::t const *){})) };
     sourceIsCompiled =
       it != kvs->map.end() &&
       isCompiledSource(it->second);
@@ -331,7 +345,7 @@ std::shared_ptr<dessser::gen::raql_value::t const> RCEntryEditor::paramValue(
     qDebug() << "RCEntryEditor: paramValue("
              << QString::fromStdString(p->ptyp->name) << ") is"
              << (setParamValues.contains(p->ptyp->name) ? "present" : "absent");
-  std::shared_ptr<dessser::gen::raql_value::t const> val { p, p->value };
+  std::shared_ptr<dessser::gen::raql_value::t const> val { p->value };
   return setParamValues.value(p->ptyp->name, val);
 }
 
@@ -365,10 +379,7 @@ void RCEntryEditor::saveParams()
         if (verbose)
           qDebug() << "RCEntryEditor: set paramValues["
                    << QString::fromStdString(pname) << "] to" << *val;
-        setParamValues[pname] =
-          std::shared_ptr<dessser::gen::raql_value::t const>(
-            val,
-            std::get<dessser::gen::sync_value::RamenValue>(*val));
+        setParamValues[pname] = std::get<dessser::gen::sync_value::RamenValue>(*val);
       } else {
         qCritical() << "AtomicWidget editor returned value for row" << row
                     << "(name" << QString::fromStdString(pname)
@@ -397,13 +408,13 @@ void RCEntryEditor::resetParams()
 
   kvs->lock.lock_shared();
   std::shared_ptr<dessser::gen::source_info::t> info;
-  auto it { kvs->map.find(infoKey) };
+  auto it {
+    kvs->map.find(
+      std::shared_ptr<dessser::gen::sync_key::t const>(
+        &infoKey, /* No del */[](dessser::gen::sync_key::t const *){})) };
   if (it != kvs->map.end()) {
-    if (it->second.val->index() == dessser::gen::sync_value::SourceInfo) {
-      info = std::shared_ptr<dessser::gen::source_info::t>(
-        it->second.val,
-        std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val));
-    }
+    if (it->second.val->index() == dessser::gen::sync_value::SourceInfo)
+      info = std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val);
   }
   kvs->lock.unlock_shared();
 
@@ -416,8 +427,8 @@ void RCEntryEditor::resetParams()
       qWarning() << "Cannot get info" << infoKey;
       qWarning() << "conf map is:";
       for (auto &it : kvs->map) {
-        qWarning() << "  " << it.first
-                   << "->" << syncValToQString(*it.second.val, it.first);
+        qWarning() << "  " << *it.first
+                   << "->" << syncValToQString(*it.second.val, it.first.get());
       }
     }
     return;
@@ -429,26 +440,23 @@ void RCEntryEditor::resetParams()
   }
 
   std::shared_ptr<dessser::gen::source_info::compiled_program> prog {
-    info,
     std::get<dessser::gen::source_info::Compiled>(info->detail) };
 
-  for (dessser::gen::program_parameter::t const *p : prog->default_params) {
+  for (std::shared_ptr<dessser::gen::program_parameter::t const> p : prog->default_params) {
     // TODO: a tooltip with the parameter doc
-    std::shared_ptr<dessser::gen::program_parameter::t const> ps { prog, p };
-    std::shared_ptr<dessser::gen::raql_value::t const> rval { paramValue(ps) };
+    std::shared_ptr<dessser::gen::raql_value::t const> rval { paramValue(p) };
     /* paramEdit->setValue wants the value to be a shared_ptr<sync_value>, but since
      * sync_value store a pointer to the raql_value `rval`, we want this new value to have
      * the same lifespan as `rval`. */
     std::shared_ptr<dessser::gen::sync_value::t const> val {
-      rval,
-      new dessser::gen::sync_value::t(
+      std::make_shared<dessser::gen::sync_value::t>(
         std::in_place_index<dessser::gen::sync_value::RamenValue>,
-        const_cast<dessser::gen::raql_value::t *>(rval.get())) };
+        std::const_pointer_cast<dessser::gen::raql_value::t>(rval)) };
     // Get an editor for that type of value:
     AtomicWidget *paramEdit { newEditorWidget(*val) };
     /* In theory, AtomicWidget got their value from the key. But here we
      * have no key but we know the value so let's just set it: */
-    paramEdit->setValue(std::nullopt, val);
+    paramEdit->setValue(nullptr, val);
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged,
             this, &RCEntryEditor::inputChanged);
@@ -496,7 +504,7 @@ void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry)
   resetParams();
 }
 
-std::unique_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
+std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
 {
   bool ok;
   double reportPeriod = reportEdit->text().toDouble(&ok);
@@ -517,15 +525,16 @@ std::unique_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
       sourceBox->currentText().toStdString() + '#' +
       suffixEdit->text().toStdString());
 
-  std::unique_ptr<dessser::gen::rc_entry::t> rce { new dessser::gen::rc_entry::t(
-    automaticBox->checkState() == Qt::Checked,
-    cwd,
-    debugBox->checkState() == Qt::Checked,
-    enabledBox->checkState() == Qt::Checked,
-    sitesEdit->text().toStdString(),
-    dessser::Arr<dessser::gen::program_run_parameter::t_ext>(),
-    programName,
-    reportPeriod) };
+  std::shared_ptr<dessser::gen::rc_entry::t> rce {
+    std::make_shared<dessser::gen::rc_entry::t>(
+      automaticBox->checkState() == Qt::Checked,
+      cwd,
+      debugBox->checkState() == Qt::Checked,
+      enabledBox->checkState() == Qt::Checked,
+      sitesEdit->text().toStdString(),
+      dessser::Arr<dessser::gen::program_run_parameter::t_ext>(),
+      programName,
+      reportPeriod) };
 
   // Add parameters (skipping those without a value):
   for (int row = 0; row < paramsForm->rowCount(); row ++) {
@@ -541,11 +550,10 @@ std::unique_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
     if (! val) continue;
     // We need to steel the raql_value from this shared value:
     Q_ASSERT(val->index() == dessser::gen::sync_value::RamenValue);
-    dessser::gen::raql_value::t *pval {
-      new dessser::gen::raql_value::t(
-        // Copy it:
-        *std::get<dessser::gen::sync_value::RamenValue>(*val)) };
-    rce->params.push_back(new dessser::gen::program_run_parameter::t(pname, pval));
+    std::shared_ptr<dessser::gen::raql_value::t> pval {
+      std::get<dessser::gen::sync_value::RamenValue>(*val) };
+    rce->params.push_back(
+      std::make_shared<dessser::gen::program_run_parameter::t>(pname, pval));
   }
 
   return rce;

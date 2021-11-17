@@ -108,18 +108,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tafbda6d9cc6c85623ff6054f254a9dc9 : public std::tuple<
-  ::dessser::gen::alerting_contact::t*,
+struct t64d64e9c0acacb981f0a90c22987e81e : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_contact::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tafbda6d9cc6c85623ff6054f254a9dc9(std::tuple<::dessser::gen::alerting_contact::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_contact::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t64d64e9c0acacb981f0a90c22987e81e(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tafbda6d9cc6c85623ff6054f254a9dc9 const &a, tafbda6d9cc6c85623ff6054f254a9dc9 const &b) {
+inline bool operator==(t64d64e9c0acacb981f0a90c22987e81e const &a, t64d64e9c0acacb981f0a90c22987e81e const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tafbda6d9cc6c85623ff6054f254a9dc9 const &a, tafbda6d9cc6c85623ff6054f254a9dc9 const &b) {
+inline bool operator!=(t64d64e9c0acacb981f0a90c22987e81e const &a, t64d64e9c0acacb981f0a90c22987e81e const &b) {
   return !operator==(a, b);
 }
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
@@ -428,9 +428,9 @@ inline bool operator!=(tf568409f41c9c0a265f7302110fc9084 const &a, tf568409f41c9
                         (bytes-of-string (get-field "text" (get-alt "Kafka" (get-field "via" (param 0))))))))))))) 
         (write-u64 little-endian (identifier "srec_dst_328") (u64-of-float (get-field "timeout" (param 0))))))
  */
-static std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_contact::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
     ::dessser::gen::alerting_contact::ta2737d85243c228c957e6a89b1a2eaef id_1 { (*p_0).via };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
@@ -1214,7 +1214,7 @@ static std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> to_r
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{via: [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]; timeout: FLOAT}")
@@ -1334,9 +1334,9 @@ std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> to_row_bina
                         (size-of-u32 (string-length (get-field "text" (get-alt "Kafka" (get-field "via" (param 0)))))))))))))) 
         (size 8)))
  */
-static std::function<Size(::dessser::gen::alerting_contact::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::alerting_contact::t*)> fun488 { [&fun488](::dessser::gen::alerting_contact::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> fun488 { [&fun488](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0) {
     uint16_t id_489 { 0 };
     ::dessser::gen::alerting_contact::ta2737d85243c228c957e6a89b1a2eaef id_490 { (*p_0).via };
     uint16_t id_491 { uint16_t(id_490.index()) };
@@ -1949,7 +1949,7 @@ static std::function<Size(::dessser::gen::alerting_contact::t*)> sersize_of_row_
    };
   return fun488;
 }
-std::function<Size(::dessser::gen::alerting_contact::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2223,9 +2223,9 @@ std::function<Size(::dessser::gen::alerting_contact::t*)> sersize_of_row_binary(
           (let-pair "dfloat_fst_245" "dfloat_snd_246" (read-u64 little-endian (identifier "drec_snd_243"))
             (make-tup (make-rec (string "timeout") (float-of-u64 (identifier "dfloat_fst_245")) (string "via") (identifier "drec_fst_242")) (identifier "dfloat_snd_246"))))))
  */
-static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9(Pointer)> fun876 { [&fun876](Pointer p_0) {
+  std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> fun876 { [&fun876](Pointer p_0) {
     ::dessser::gen::alerting_contact::t7609d344c1ba69d0f80fec236d4c216b id_877 { p_0.readU16Le() };
     ::dessser::gen::alerting_contact::t7609d344c1ba69d0f80fec236d4c216b letpair_res_878;
     {
@@ -3332,21 +3332,21 @@ static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f
       }
       let_res_880 = letpair_res_881;
     }
-    ::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9 let_res_1412;
+    ::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e let_res_1412;
     {
       ::dessser::gen::alerting_contact::t7a1727acfeac88acd54a67e8464ac4df drec_241 { let_res_880 };
-      ::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9 letpair_res_1413;
+      ::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e letpair_res_1413;
       {
         auto drec_fst_242 { std::get<0>(drec_241) };
         auto drec_snd_243 { std::get<1>(drec_241) };
         ::dessser::gen::alerting_contact::tf568409f41c9c0a265f7302110fc9084 id_1414 { drec_snd_243.readU64Le() };
-        ::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9 letpair_res_1415;
+        ::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e letpair_res_1415;
         {
           auto dfloat_fst_245 { std::get<0>(id_1414) };
           auto dfloat_snd_246 { std::get<1>(id_1414) };
           double id_1416 { float_of_qword(dfloat_fst_245) };
-          ::dessser::gen::alerting_contact::t* id_1417 { new ::dessser::gen::alerting_contact::t({ id_1416, drec_fst_242 }) };
-          ::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9 id_1418 { id_1417, dfloat_snd_246 };
+          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1417 { std::make_shared<::dessser::gen::alerting_contact::t>(id_1416, drec_fst_242) };
+          ::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e id_1418 { id_1417, dfloat_snd_246 };
           letpair_res_1415 = id_1418;
         }
         letpair_res_1413 = letpair_res_1415;
@@ -3358,9 +3358,9 @@ static std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f
    };
   return fun876;
 }
-std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

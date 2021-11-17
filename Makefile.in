@@ -36,8 +36,8 @@ all: $(INSTALLED)
 	@extra=""; \
 	$(DESSSERC) lib --quiet --fieldmask=without -O3 \
 	  --input-encoding row-binary --output-encoding row-binary \
-	  --language=C++ --include-base=desssergen --schema=@$< \
-	  -o $@
+	  --language=C++ --include-base=desssergen --pointers=shared \
+	  --schema=@$< -o $@
 
 TYPE_SOURCES = \
 	team_name.type \

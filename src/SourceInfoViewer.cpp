@@ -39,7 +39,7 @@ static QString const QStringOfRetention(dessser::gen::retention::t const &r)
 }
 
 bool SourceInfoViewer::setValue(
-  std::optional<dessser::gen::sync_key::t const> const &,
+  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous params/parents layouts: */
@@ -47,7 +47,7 @@ bool SourceInfoViewer::setValue(
   emptyLayout(layout);
 
   if (v->index() == dessser::gen::sync_value::SourceInfo) {
-    dessser::gen::source_info::t *info {
+    std::shared_ptr<dessser::gen::source_info::t> info {
       std::get<dessser::gen::sync_value::SourceInfo>(*v) };
 
     if (info->detail.index() == dessser::gen::source_info::Failed) {
@@ -59,7 +59,7 @@ bool SourceInfoViewer::setValue(
       layout->addWidget(l);
     } else {
       Q_ASSERT(info->detail.index() == dessser::gen::source_info::Compiled);
-      dessser::gen::source_info::compiled_program *compiled {
+      std::shared_ptr<dessser::gen::source_info::compiled_program> compiled {
         std::get<dessser::gen::source_info::Compiled>(info->detail) };
 
       layout->addWidget(new QLabel("<b>" + tr("Parameters") + "</b>"));
@@ -84,7 +84,7 @@ bool SourceInfoViewer::setValue(
       }
 
       QTabWidget *functions { new QTabWidget };
-      for (dessser::gen::source_info::compiled_func *func : compiled->funcs) {
+      for (std::shared_ptr<dessser::gen::source_info::compiled_func> func : compiled->funcs) {
         QVBoxLayout *l { new QVBoxLayout };
         QWidget *w { new QWidget };
         w->setLayout(l);
@@ -125,7 +125,7 @@ bool SourceInfoViewer::setValue(
             }
           }
 
-          dessser::gen::raql_type::t const *subtype {
+          std::shared_ptr<dessser::gen::raql_type::t const> subtype {
             columnType(*func->out_record, c) };
           columns->setItem(c, 0, new QTableWidgetItem(QString::fromStdString(name)));
           columns->setItem(c, 1, new QTableWidgetItem(

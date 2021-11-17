@@ -37,10 +37,10 @@ void GraphModel::onChange(QList<ConfChange> const &changes)
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
-        updateKey(change.key, change.kv);
+        updateKey(*change.key, change.kv);
         break;
       case KeyDeleted:
-        deleteKey(change.key, change.kv);
+        deleteKey(*change.key, change.kv);
         break;
       default:
         break;
@@ -510,9 +510,7 @@ void GraphModel::setFunctionProperty(
 
   if (pk.property == "worker") {
     if (v->index() == dessser::gen::sync_value::Worker) [[likely]] {
-      function->worker =
-        std::shared_ptr<dessser::gen::worker::t const>(
-          v, std::get<dessser::gen::sync_value::Worker>(*v));
+      function->worker = std::get<dessser::gen::sync_value::Worker>(*v);
 
       std::shared_ptr<Site> site =
         std::static_pointer_cast<Site>(siteItem->shared);
@@ -556,9 +554,7 @@ void GraphModel::setFunctionProperty(
     }
   } else if (pk.property == "stats/runtime") {
     if (v->index() == dessser::gen::sync_value::RuntimeStats) {
-      function->runtimeStats =
-        std::shared_ptr<dessser::gen::runtime_stats::t const>(
-          v, std::get<dessser::gen::sync_value::RuntimeStats>(*v));
+      function->runtimeStats = std::get<dessser::gen::sync_value::RuntimeStats>(*v);
       changed |= PROPERTY_CHANGED;
     }
   } else if (pk.property == "archives/times") {
@@ -573,10 +569,9 @@ void GraphModel::setFunctionProperty(
 #   define SET_RAMENVALUE(type, var, conv, whatChanged) do { \
       if (v->index() == dessser::gen::sync_value::RamenValue) { \
         std::shared_ptr<dessser::gen::raql_value::t const> rv { \
-          v, std::get<dessser::gen::sync_value::RamenValue>(*v) }; \
+          std::get<dessser::gen::sync_value::RamenValue>(*v) }; \
         if (rv->index() == dessser::gen::raql_value::type) { \
-          function->var = \
-              conv(std::get<dessser::gen::raql_value::type>(*rv)); \
+          function->var = conv(std::get<dessser::gen::raql_value::type>(*rv)); \
         } \
       } \
     } while (0)
@@ -724,7 +719,7 @@ void GraphModel::setSiteProperty(
   if (pk.property == "is_master") {
     if (v->index() == dessser::gen::sync_value::RamenValue) {
       std::shared_ptr<dessser::gen::raql_value::t const> rv {
-        v, std::get<dessser::gen::sync_value::RamenValue>(*v) };
+        std::get<dessser::gen::sync_value::RamenValue>(*v) };
 
       if (rv->index() == dessser::gen::raql_value::VBool) {
         std::shared_ptr<Site> site =

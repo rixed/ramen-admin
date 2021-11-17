@@ -2,6 +2,7 @@
 #define DESSSER_GEN_alerting_log
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -147,21 +148,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tfb6b082684a87ff594b0de919b33994b : public std::tuple<
-  ::dessser::gen::alerting_log::t*,
+struct t6b074172af0a13530a735ecaa0f9d4fe : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_log::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tfb6b082684a87ff594b0de919b33994b(std::tuple<::dessser::gen::alerting_log::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_log::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t6b074172af0a13530a735ecaa0f9d4fe(std::tuple<std::shared_ptr<::dessser::gen::alerting_log::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_log::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tfb6b082684a87ff594b0de919b33994b const &a, tfb6b082684a87ff594b0de919b33994b const &b) {
+inline bool operator==(t6b074172af0a13530a735ecaa0f9d4fe const &a, t6b074172af0a13530a735ecaa0f9d4fe const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tfb6b082684a87ff594b0de919b33994b const &a, tfb6b082684a87ff594b0de919b33994b const &b) {
+inline bool operator!=(t6b074172af0a13530a735ecaa0f9d4fe const &a, t6b074172af0a13530a735ecaa0f9d4fe const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tfb6b082684a87ff594b0de919b33994b const &t) {
+inline std::ostream &operator<<(std::ostream &os, t6b074172af0a13530a735ecaa0f9d4fe const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -172,10 +173,10 @@ inline std::ostream &operator<<(std::ostream &os, tfb6b082684a87ff594b0de919b339
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::alerting_log::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::alerting_log::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_log::tfb6b082684a87ff594b0de919b33994b(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_log::t6b074172af0a13530a735ecaa0f9d4fe(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

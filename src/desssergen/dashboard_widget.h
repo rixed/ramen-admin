@@ -2,6 +2,7 @@
 #define DESSSER_GEN_dashboard_widget
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -231,21 +232,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t2ebbcd7179991b0888025f2470c8d7b2 : public std::tuple<
-  ::dessser::gen::dashboard_widget::t*,
+struct t206086bb48fe7c1f7a2a1b42bad30939 : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t2ebbcd7179991b0888025f2470c8d7b2(std::tuple<::dessser::gen::dashboard_widget::t*, Pointer> p)
-    : std::tuple<::dessser::gen::dashboard_widget::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t206086bb48fe7c1f7a2a1b42bad30939(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t2ebbcd7179991b0888025f2470c8d7b2 const &a, t2ebbcd7179991b0888025f2470c8d7b2 const &b) {
+inline bool operator==(t206086bb48fe7c1f7a2a1b42bad30939 const &a, t206086bb48fe7c1f7a2a1b42bad30939 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t2ebbcd7179991b0888025f2470c8d7b2 const &a, t2ebbcd7179991b0888025f2470c8d7b2 const &b) {
+inline bool operator!=(t206086bb48fe7c1f7a2a1b42bad30939 const &a, t206086bb48fe7c1f7a2a1b42bad30939 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t2ebbcd7179991b0888025f2470c8d7b2 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t206086bb48fe7c1f7a2a1b42bad30939 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -256,10 +257,10 @@ inline std::ostream &operator<<(std::ostream &os, t2ebbcd7179991b0888025f2470c8d
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::dashboard_widget::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::dashboard_widget::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::dashboard_widget::t2ebbcd7179991b0888025f2470c8d7b2(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::t206086bb48fe7c1f7a2a1b42bad30939(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

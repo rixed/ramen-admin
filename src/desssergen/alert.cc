@@ -130,18 +130,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tdce58e386f2f7074ab8981efbc4d05ee : public std::tuple<
-  ::dessser::gen::alert::t*,
+struct t39104663fb90074c71cd95d895d45654 : public std::tuple<
+  std::shared_ptr<::dessser::gen::alert::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tdce58e386f2f7074ab8981efbc4d05ee(std::tuple<::dessser::gen::alert::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alert::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t39104663fb90074c71cd95d895d45654(std::tuple<std::shared_ptr<::dessser::gen::alert::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alert::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tdce58e386f2f7074ab8981efbc4d05ee const &a, tdce58e386f2f7074ab8981efbc4d05ee const &b) {
+inline bool operator==(t39104663fb90074c71cd95d895d45654 const &a, t39104663fb90074c71cd95d895d45654 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tdce58e386f2f7074ab8981efbc4d05ee const &a, tdce58e386f2f7074ab8981efbc4d05ee const &b) {
+inline bool operator!=(t39104663fb90074c71cd95d895d45654 const &a, t39104663fb90074c71cd95d895d45654 const &b) {
   return !operator==(a, b);
 }
 struct tcd6e38ac5ca8a381102d1fa6500e9b6e : public std::tuple<
@@ -642,9 +642,9 @@ inline bool operator!=(t3fd8221434e489b54b5c4356ebff5005 const &a, t3fd8221434e4
                   (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_541"))))) 
           (bytes-of-string (get-field "desc-recovery" (param 0))))))
  */
-static std::function<Pointer(::dessser::gen::alert::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::alert::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alert::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alert::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::fq_name::to_row_binary };
     dessser::gen::fq_name::t_ext id_2 { (*p_0).table };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -1767,7 +1767,7 @@ static std::function<Pointer(::dessser::gen::alert::t*,Pointer)> to_row_binary_i
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::alert::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{table: $fq_name; column: $field_name; enabled: BOOL; where: $simple_filter[[]]; group-by: $field_name[[]]?; having: $simple_filter[[]]; threshold: [Constant FLOAT | Baseline {avg_window: FLOAT; sample_size: U32; percentile: FLOAT; seasonality: U32; smooth_factor: FLOAT; max_distance: [Absolute FLOAT | Relative FLOAT]}]; hysteresis: FLOAT; duration: FLOAT; ratio: FLOAT; time-step: FLOAT; tops: $field_name[[]]; carry-fields: $field_name[[]]; carry-csts: ($field_name; STRING)[[]]; id: STRING; desc-title: STRING; desc-firing: STRING; desc-recovery: STRING}")
@@ -1958,9 +1958,9 @@ std::function<Pointer(::dessser::gen::alert::t*,Pointer)> to_row_binary(to_row_b
                   (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_473")))))) 
             (size-of-u32 (string-length (get-field "desc-recovery" (param 0))))))))
  */
-static std::function<Size(::dessser::gen::alert::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::alert::t*)> fun671 { [&fun671](::dessser::gen::alert::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> fun671 { [&fun671](std::shared_ptr<::dessser::gen::alert::t>  p_0) {
     auto fun672 { dessser::gen::fq_name::sersize_of_row_binary };
     dessser::gen::fq_name::t_ext id_673 { (*p_0).table };
     Size id_674 { fun672(id_673) };
@@ -2890,7 +2890,7 @@ static std::function<Size(::dessser::gen::alert::t*)> sersize_of_row_binary_init
    };
   return fun671;
 }
-std::function<Size(::dessser::gen::alert::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3448,24 +3448,24 @@ std::function<Size(::dessser::gen::alert::t*)> sersize_of_row_binary(sersize_of_
                                                                     (identifier "drec_fst_57")) 
                                                                     (identifier "dstring2_snd_400"))))))))))))))))))))))))))))))))))))))))
  */
-static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alert::t39104663fb90074c71cd95d895d45654(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Pointer)> fun1252 { [&fun1252](Pointer p_0) {
+  std::function<::dessser::gen::alert::t39104663fb90074c71cd95d895d45654(Pointer)> fun1252 { [&fun1252](Pointer p_0) {
     auto fun1253 { dessser::gen::fq_name::of_row_binary };
     ::dessser::gen::alert::tcd6e38ac5ca8a381102d1fa6500e9b6e id_1254 { fun1253(p_0) };
-    ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1255;
+    ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1255;
     {
       ::dessser::gen::alert::tcd6e38ac5ca8a381102d1fa6500e9b6e drec_56 { id_1254 };
-      ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1256;
+      ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1256;
       {
         auto drec_fst_57 { std::get<0>(drec_56) };
         auto drec_snd_58 { std::get<1>(drec_56) };
         auto fun1257 { dessser::gen::field_name::of_row_binary };
         ::dessser::gen::alert::tacdfdbd490062d58073ca57b70932e6d id_1258 { fun1257(drec_snd_58) };
-        ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1259;
+        ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1259;
         {
           ::dessser::gen::alert::tacdfdbd490062d58073ca57b70932e6d drec_59 { id_1258 };
-          ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1260;
+          ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1260;
           {
             auto drec_fst_60 { std::get<0>(drec_59) };
             auto drec_snd_61 { std::get<1>(drec_59) };
@@ -3480,10 +3480,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
               ::dessser::gen::alert::t8f6cce063b0da10e7eea29b507eded2e id_1266 { id_1265, dbool_snd_64 };
               letpair_res_1262 = id_1266;
             }
-            ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1267;
+            ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1267;
             {
               ::dessser::gen::alert::t8f6cce063b0da10e7eea29b507eded2e drec_65 { letpair_res_1262 };
-              ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1268;
+              ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1268;
               {
                 auto drec_fst_66 { std::get<0>(drec_65) };
                 auto drec_snd_67 { std::get<1>(drec_65) };
@@ -3635,10 +3635,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                   ::dessser::gen::alert::t9255ef9f3d6c5ca33c6c824fca6e1149 id_1340 { dlist4_fst_89, dlist4_snd_90 };
                   letpair_res_1339 = id_1340;
                 }
-                ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1341;
+                ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1341;
                 {
                   ::dessser::gen::alert::t9255ef9f3d6c5ca33c6c824fca6e1149 drec_91 { letpair_res_1339 };
-                  ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1342;
+                  ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1342;
                   {
                     auto drec_fst_92 { std::get<0>(drec_91) };
                     auto drec_snd_93 { std::get<1>(drec_91) };
@@ -3807,10 +3807,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                       }
                       choose_res_1347 = letpair_res_1424;
                     }
-                    ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1427;
+                    ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1427;
                     {
                       ::dessser::gen::alert::t26376016172a29903da48e04c55b7e60 drec_120 { choose_res_1347 };
-                      ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1428;
+                      ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1428;
                       {
                         auto drec_fst_121 { std::get<0>(drec_120) };
                         auto drec_snd_122 { std::get<1>(drec_120) };
@@ -3962,10 +3962,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                           ::dessser::gen::alert::t9255ef9f3d6c5ca33c6c824fca6e1149 id_1500 { dlist4_fst_144, dlist4_snd_145 };
                           letpair_res_1499 = id_1500;
                         }
-                        ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1501;
+                        ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1501;
                         {
                           ::dessser::gen::alert::t9255ef9f3d6c5ca33c6c824fca6e1149 drec_146 { letpair_res_1499 };
-                          ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1502;
+                          ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1502;
                           {
                             auto drec_fst_147 { std::get<0>(drec_146) };
                             auto drec_snd_148 { std::get<1>(drec_146) };
@@ -4168,10 +4168,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                               }
                               let_res_1506 = letpair_res_1507;
                             }
-                            ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1572;
+                            ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1572;
                             {
                               ::dessser::gen::alert::ta1979b7f9ef0da590975ddb15074a2fd drec_221 { let_res_1506 };
-                              ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1573;
+                              ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1573;
                               {
                                 auto drec_fst_222 { std::get<0>(drec_221) };
                                 auto drec_snd_223 { std::get<1>(drec_221) };
@@ -4184,10 +4184,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                   ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 id_1577 { id_1576, dfloat_snd_226 };
                                   letpair_res_1575 = id_1577;
                                 }
-                                ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1578;
+                                ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1578;
                                 {
                                   ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 drec_227 { letpair_res_1575 };
-                                  ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1579;
+                                  ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1579;
                                   {
                                     auto drec_fst_228 { std::get<0>(drec_227) };
                                     auto drec_snd_229 { std::get<1>(drec_227) };
@@ -4200,10 +4200,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                       ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 id_1583 { id_1582, dfloat_snd_232 };
                                       letpair_res_1581 = id_1583;
                                     }
-                                    ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1584;
+                                    ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1584;
                                     {
                                       ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 drec_233 { letpair_res_1581 };
-                                      ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1585;
+                                      ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1585;
                                       {
                                         auto drec_fst_234 { std::get<0>(drec_233) };
                                         auto drec_snd_235 { std::get<1>(drec_233) };
@@ -4216,10 +4216,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                           ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 id_1589 { id_1588, dfloat_snd_238 };
                                           letpair_res_1587 = id_1589;
                                         }
-                                        ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1590;
+                                        ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1590;
                                         {
                                           ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 drec_239 { letpair_res_1587 };
-                                          ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1591;
+                                          ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1591;
                                           {
                                             auto drec_fst_240 { std::get<0>(drec_239) };
                                             auto drec_snd_241 { std::get<1>(drec_239) };
@@ -4232,10 +4232,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                               ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 id_1595 { id_1594, dfloat_snd_244 };
                                               letpair_res_1593 = id_1595;
                                             }
-                                            ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1596;
+                                            ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1596;
                                             {
                                               ::dessser::gen::alert::t5375de390f9cb5ae2ee5880ea1674828 drec_245 { letpair_res_1593 };
-                                              ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1597;
+                                              ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1597;
                                               {
                                                 auto drec_fst_246 { std::get<0>(drec_245) };
                                                 auto drec_snd_247 { std::get<1>(drec_245) };
@@ -4387,10 +4387,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                   ::dessser::gen::alert::tdf9bf4f04872c9874ee332ccc8cdd11a id_1669 { dlist4_fst_269, dlist4_snd_270 };
                                                   letpair_res_1668 = id_1669;
                                                 }
-                                                ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1670;
+                                                ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1670;
                                                 {
                                                   ::dessser::gen::alert::tdf9bf4f04872c9874ee332ccc8cdd11a drec_271 { letpair_res_1668 };
-                                                  ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1671;
+                                                  ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1671;
                                                   {
                                                     auto drec_fst_272 { std::get<0>(drec_271) };
                                                     auto drec_snd_273 { std::get<1>(drec_271) };
@@ -4542,10 +4542,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                       ::dessser::gen::alert::tdf9bf4f04872c9874ee332ccc8cdd11a id_1743 { dlist4_fst_295, dlist4_snd_296 };
                                                       letpair_res_1742 = id_1743;
                                                     }
-                                                    ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1744;
+                                                    ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1744;
                                                     {
                                                       ::dessser::gen::alert::tdf9bf4f04872c9874ee332ccc8cdd11a drec_297 { letpair_res_1742 };
-                                                      ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1745;
+                                                      ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1745;
                                                       {
                                                         auto drec_fst_298 { std::get<0>(drec_297) };
                                                         auto drec_snd_299 { std::get<1>(drec_297) };
@@ -4794,10 +4794,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                           ::dessser::gen::alert::t11655eb45061dd5d24b869c466342a3d id_1865 { dlist4_fst_339, dlist4_snd_340 };
                                                           letpair_res_1864 = id_1865;
                                                         }
-                                                        ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1866;
+                                                        ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1866;
                                                         {
                                                           ::dessser::gen::alert::t11655eb45061dd5d24b869c466342a3d drec_341 { letpair_res_1864 };
-                                                          ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1867;
+                                                          ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1867;
                                                           {
                                                             auto drec_fst_342 { std::get<0>(drec_341) };
                                                             auto drec_snd_343 { std::get<1>(drec_341) };
@@ -4893,10 +4893,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                               }
                                                               let_res_1909 = letpair_res_1910;
                                                             }
-                                                            ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1915;
+                                                            ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1915;
                                                             {
                                                               ::dessser::gen::alert::t3fd8221434e489b54b5c4356ebff5005 drec_356 { let_res_1909 };
-                                                              ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1916;
+                                                              ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1916;
                                                               {
                                                                 auto drec_fst_357 { std::get<0>(drec_356) };
                                                                 auto drec_snd_358 { std::get<1>(drec_356) };
@@ -4992,10 +4992,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                                   }
                                                                   let_res_1958 = letpair_res_1959;
                                                                 }
-                                                                ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_1964;
+                                                                ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_1964;
                                                                 {
                                                                   ::dessser::gen::alert::t3fd8221434e489b54b5c4356ebff5005 drec_371 { let_res_1958 };
-                                                                  ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_1965;
+                                                                  ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_1965;
                                                                   {
                                                                     auto drec_fst_372 { std::get<0>(drec_371) };
                                                                     auto drec_snd_373 { std::get<1>(drec_371) };
@@ -5091,10 +5091,10 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                                       }
                                                                       let_res_2007 = letpair_res_2008;
                                                                     }
-                                                                    ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_2013;
+                                                                    ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_2013;
                                                                     {
                                                                       ::dessser::gen::alert::t3fd8221434e489b54b5c4356ebff5005 drec_386 { let_res_2007 };
-                                                                      ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_2014;
+                                                                      ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_2014;
                                                                       {
                                                                         auto drec_fst_387 { std::get<0>(drec_386) };
                                                                         auto drec_snd_388 { std::get<1>(drec_386) };
@@ -5170,21 +5170,21 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
                                                                           }
                                                                           let_res_2017 = let_res_2020;
                                                                         }
-                                                                        ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee let_res_2056;
+                                                                        ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 let_res_2056;
                                                                         {
                                                                           ::dessser::gen::alert::t044960e524fd6ec1bfc06410ce526709 dstring1_395 { let_res_2017 };
-                                                                          ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_2057;
+                                                                          ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_2057;
                                                                           {
                                                                             auto dstring1_fst_396 { std::get<0>(dstring1_395) };
                                                                             auto dstring1_snd_397 { std::get<1>(dstring1_395) };
                                                                             ::dessser::gen::alert::t5887709cc43c8c8e24d28211e8c970a2 id_2058 { dstring1_snd_397.readBytes(dstring1_fst_396) };
-                                                                            ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee letpair_res_2059;
+                                                                            ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 letpair_res_2059;
                                                                             {
                                                                               auto dstring2_fst_399 { std::get<0>(id_2058) };
                                                                               auto dstring2_snd_400 { std::get<1>(id_2058) };
                                                                               std::string id_2060 { dstring2_fst_399.toString() };
-                                                                              ::dessser::gen::alert::t* id_2061 { new ::dessser::gen::alert::t({ drec_fst_342, drec_fst_298, drec_fst_60, drec_fst_387, id_2060, drec_fst_372, drec_fst_234, drec_fst_66, drec_fst_121, drec_fst_147, drec_fst_228, drec_fst_357, drec_fst_240, drec_fst_57, drec_fst_222, drec_fst_246, drec_fst_272, drec_fst_92 }) };
-                                                                              ::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee id_2062 { id_2061, dstring2_snd_400 };
+                                                                              std::shared_ptr<::dessser::gen::alert::t>  id_2061 { std::make_shared<::dessser::gen::alert::t>(drec_fst_342, drec_fst_298, drec_fst_60, drec_fst_387, id_2060, drec_fst_372, drec_fst_234, drec_fst_66, drec_fst_121, drec_fst_147, drec_fst_228, drec_fst_357, drec_fst_240, drec_fst_57, drec_fst_222, drec_fst_246, drec_fst_272, drec_fst_92) };
+                                                                              ::dessser::gen::alert::t39104663fb90074c71cd95d895d45654 id_2062 { id_2061, dstring2_snd_400 };
                                                                               letpair_res_2059 = id_2062;
                                                                             }
                                                                             letpair_res_2057 = letpair_res_2059;
@@ -5264,9 +5264,9 @@ static std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Po
    };
   return fun1252;
 }
-std::function<::dessser::gen::alert::tdce58e386f2f7074ab8981efbc4d05ee(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alert::t39104663fb90074c71cd95d895d45654(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

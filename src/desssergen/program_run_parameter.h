@@ -2,6 +2,7 @@
 #define DESSSER_GEN_program_run_parameter
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -36,21 +37,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t45ac720640416eb316fdbda6895dd1dc : public std::tuple<
-  ::dessser::gen::program_run_parameter::t*,
+struct t173f3f612a5483c7df1f08e5e0f5709b : public std::tuple<
+  std::shared_ptr<::dessser::gen::program_run_parameter::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t45ac720640416eb316fdbda6895dd1dc(std::tuple<::dessser::gen::program_run_parameter::t*, Pointer> p)
-    : std::tuple<::dessser::gen::program_run_parameter::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t173f3f612a5483c7df1f08e5e0f5709b(std::tuple<std::shared_ptr<::dessser::gen::program_run_parameter::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::program_run_parameter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t45ac720640416eb316fdbda6895dd1dc const &a, t45ac720640416eb316fdbda6895dd1dc const &b) {
+inline bool operator==(t173f3f612a5483c7df1f08e5e0f5709b const &a, t173f3f612a5483c7df1f08e5e0f5709b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t45ac720640416eb316fdbda6895dd1dc const &a, t45ac720640416eb316fdbda6895dd1dc const &b) {
+inline bool operator!=(t173f3f612a5483c7df1f08e5e0f5709b const &a, t173f3f612a5483c7df1f08e5e0f5709b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t45ac720640416eb316fdbda6895dd1dc const &t) {
+inline std::ostream &operator<<(std::ostream &os, t173f3f612a5483c7df1f08e5e0f5709b const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -61,10 +62,10 @@ inline std::ostream &operator<<(std::ostream &os, t45ac720640416eb316fdbda6895dd
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::program_run_parameter::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::program_run_parameter::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::program_run_parameter::t45ac720640416eb316fdbda6895dd1dc(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::program_run_parameter::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::program_run_parameter::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::program_run_parameter::t173f3f612a5483c7df1f08e5e0f5709b(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

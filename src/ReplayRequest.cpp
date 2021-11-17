@@ -31,18 +31,19 @@ std::string const respKeyPrefix(
 static unsigned respKeySeq;
 static std::mutex respKeySeqLock;
 
-static dessser::gen::sync_key::t const nextRespKey()
+static std::shared_ptr<dessser::gen::sync_key::t const> nextRespKey()
 {
   std::lock_guard<std::mutex> guard(respKeySeqLock);
 
-  dessser::gen::sync_key::per_client resp {
-    std::in_place_index<dessser::gen::sync_key::Response>,
-    respKeyPrefix + std::to_string(respKeySeq++) };
+  std::shared_ptr<dessser::gen::sync_key::per_client> resp {
+    std::make_shared<dessser::gen::sync_key::per_client>(
+      std::in_place_index<dessser::gen::sync_key::Response>,
+      respKeyPrefix + std::to_string(respKeySeq++)) };
 
-  return dessser::gen::sync_key::t(
+  return std::make_shared<dessser::gen::sync_key::t const>(
     std::in_place_index<dessser::gen::sync_key::PerClient>,
-    const_cast<dessser::gen::sync_socket::t_ext>(Menu::getClient()->syncSocket.get()),
-    &resp);
+    std::const_pointer_cast<dessser::gen::sync_socket::t>(Menu::getClient()->syncSocket),
+    resp);
 }
 
 ReplayRequest::ReplayRequest(
@@ -82,10 +83,10 @@ void ReplayRequest::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyChanged:
-        receiveValue(change.key, change.kv);
+        receiveValue(*change.key, change.kv);
         break;
       case KeyDeleted:
-        endReplay(change.key, change.kv);
+        endReplay(*change.key, change.kv);
         break;
       default:
         break;
@@ -111,22 +112,25 @@ void ReplayRequest::sendRequest()
   status = Sent;
 
   // Create the response key:
-  Menu::getClient()->sendNew(&respKey);
+  Menu::getClient()->sendNew(respKey);
 
   // Then the replay request:
-  dessser::gen::fq_function_name::t const fq_target {
-    function, program, site };
+  std::shared_ptr<dessser::gen::fq_function_name::t const> fq_target {
+    std::make_shared<dessser::gen::fq_function_name::t const>(
+      function, program, site) };
 
-  dessser::gen::replay_request::t const req {
-    false, // explain
-    const_cast<dessser::gen::sync_key::t *>(&respKey),
-    since,
-    const_cast<dessser::gen::fq_function_name::t *>(&fq_target),
-    until };
+  std::shared_ptr<dessser::gen::replay_request::t const> req {
+    std::make_shared<dessser::gen::replay_request::t const>(
+      false, // explain
+      std::const_pointer_cast<dessser::gen::sync_key::t>(respKey),
+      since,
+      std::const_pointer_cast<dessser::gen::fq_function_name::t>(fq_target),
+      until) };
 
-  dessser::gen::sync_value::t const val {
-    std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
-    const_cast<dessser::gen::replay_request::t *>(&req) };
+  std::shared_ptr<dessser::gen::sync_value::t const> val {
+    std::make_shared<dessser::gen::sync_value::t const>(
+      std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
+      std::const_pointer_cast<dessser::gen::replay_request::t>(req)) };
 
   if (verbose)
     qDebug() << "ReplayRequest::sendRequest:"
@@ -134,17 +138,19 @@ void ReplayRequest::sendRequest()
               << QString::fromStdString(function)
               << qSetRealNumberPrecision(13)
               << "from" << since << "to" << until
-              << "respKey" << respKey;
+              << "respKey" << *respKey;
 
-  dessser::gen::sync_key::t const key {
-    std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
-    VOID };
-  Menu::getClient()->sendSet(&key, &val);
+  std::shared_ptr<dessser::gen::sync_key::t const> key {
+    std::make_shared<dessser::gen::sync_key::t const>(
+      std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
+      VOID) };
+
+  Menu::getClient()->sendSet(key, val);
 }
 
 void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
-  if (key != respKey) return;
+  if (key != *respKey) return;
 
   // Values are received in batches (Tuples)
   if (kv.val->index() != dessser::gen::sync_value::Tuples) {
@@ -164,7 +170,7 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
     std::lock_guard<std::mutex> guard(lock);
 
     if (status != ReplayRequest::Sent) {
-      qCritical() << "Replay" << respKey
+      qCritical() << "Replay" << *respKey
                   << "received a tuple while " << qstringOfStatus(status);
       // Will not be ordered properly, but better than nothing
     }
@@ -172,7 +178,7 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
     if (verbose)
       qDebug() << "Received a batch of" << batch.size() << "tuples";
 
-    for (dessser::gen::sync_value::tuple const *tuple : batch) {
+    for (std::shared_ptr<dessser::gen::sync_value::tuple const> tuple : batch) {
       /* TODO: tuple should carry a raql_value directly instead of bytes! */
 #     if 0
       dessser::gen::raql_value const *val { tuple.unserialize(type) };
@@ -212,7 +218,7 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
 
 void ReplayRequest::endReplay(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  if (key != respKey) return;
+  if (key != *respKey) return;
 
   if (verbose)
     qDebug() << "ReplayRequest::endReplay" << key;

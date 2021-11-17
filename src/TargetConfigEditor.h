@@ -28,7 +28,7 @@ public:
   QLabel *noSelectionText;
   QStackedLayout *stackedLayout;
   int entryEditorIdx, noSelectionIdx;
-  std::vector<dessser::gen::rc_entry::t> rcEntries;
+  std::vector<std::shared_ptr<dessser::gen::rc_entry::t>> rcEntries;
 
   TargetConfigEditor(QWidget *parent = nullptr);
 
@@ -39,7 +39,7 @@ public:
 
 public slots:
   bool setValue(
-    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>);
 
   void preselect(QString const &programName);

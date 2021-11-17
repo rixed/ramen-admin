@@ -1,5 +1,6 @@
 #ifndef MISC_DESSSER_H_210910
 #define MISC_DESSSER_H_210910
+#include <memory>
 #include <optional>
 #include <string>
 #include <QDebug>
@@ -33,10 +34,12 @@ unsigned numColumns(dessser::gen::raql_type::t const &);
 std::string const columnName(dessser::gen::raql_type::t const &, size_t);
 
 // Returns a pointer into the passed type (or nullptr):
-dessser::gen::raql_type::t const *columnType(dessser::gen::raql_type::t const &, size_t);
+std::shared_ptr<dessser::gen::raql_type::t const> columnType(
+  dessser::gen::raql_type::t const &, size_t);
 
 // Returns a pointer into the passed value (or nullptr):
-dessser::gen::raql_value::t const *columnValue(dessser::gen::raql_value::t const &, size_t);
+std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
+  dessser::gen::raql_value::t const &, size_t);
 
 // Returns the float representation of that value
 std::optional<double> toDouble(dessser::gen::raql_value::t const &);
@@ -45,7 +48,7 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &);
  * the type of conversion desired) */
 QString raqlValToQString(
   dessser::gen::raql_value::t const &,
-  std::optional<dessser::gen::sync_key::t const> const &);
+  dessser::gen::sync_key::t const *);
 
 QString raqlValToQString(dessser::gen::raql_value::t const &);
 
@@ -55,7 +58,7 @@ QString raqlExprToQString(dessser::gen::raql_expr::t const &);
 
 QString syncValToQString(
   dessser::gen::sync_value::t const &,
-  std::optional<dessser::gen::sync_key::t const> const &);
+  dessser::gen::sync_key::t const *);
 
 QString syncValToQString(dessser::gen::sync_value::t const &);
 

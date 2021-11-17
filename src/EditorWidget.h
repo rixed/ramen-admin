@@ -19,7 +19,8 @@ namespace dessser {
  * allow them to customize their editor and/or other members. */
 AtomicWidget *newEditorWidget(
   dessser::gen::sync_value::t const &,
-  dessser::gen::sync_key::t const * = nullptr,
+  std::shared_ptr<dessser::gen::sync_key::t const> =
+    std::shared_ptr<dessser::gen::sync_key::t const>(),
   QWidget *parent = nullptr);
 
 #endif

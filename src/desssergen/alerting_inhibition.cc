@@ -46,18 +46,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t7b36490807adef2395f9ec16d5d2062c : public std::tuple<
-  ::dessser::gen::alerting_inhibition::t*,
+struct t4595ec1adc4f7355158d53cad66ecc5b : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t7b36490807adef2395f9ec16d5d2062c(std::tuple<::dessser::gen::alerting_inhibition::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_inhibition::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t4595ec1adc4f7355158d53cad66ecc5b(std::tuple<std::shared_ptr<::dessser::gen::alerting_inhibition::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_inhibition::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7b36490807adef2395f9ec16d5d2062c const &a, t7b36490807adef2395f9ec16d5d2062c const &b) {
+inline bool operator==(t4595ec1adc4f7355158d53cad66ecc5b const &a, t4595ec1adc4f7355158d53cad66ecc5b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t7b36490807adef2395f9ec16d5d2062c const &a, t7b36490807adef2395f9ec16d5d2062c const &b) {
+inline bool operator!=(t4595ec1adc4f7355158d53cad66ecc5b const &a, t4595ec1adc4f7355158d53cad66ecc5b const &b) {
   return !operator==(a, b);
 }
 struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
@@ -196,9 +196,9 @@ inline bool operator!=(t5375de390f9cb5ae2ee5880ea1674828 const &a, t5375de390f9c
                   (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_139"))))) 
           (bytes-of-string (get-field "why" (param 0))))))
  */
-static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> fun0 { [&fun0](::dessser::gen::alerting_inhibition::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0, Pointer p_1) {
     std::string id_1 { (*p_0).what };
     uint32_t id_2 { (uint32_t)id_1.size() };
     Vec<1, uint32_t> id_3 {  id_2  };
@@ -416,7 +416,7 @@ static std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> t
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{what: STRING; start_date: FLOAT; stop_date: FLOAT; who: STRING; why: STRING}")
@@ -452,9 +452,9 @@ std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_b
                   (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_129")))))) 
             (size-of-u32 (string-length (get-field "why" (param 0))))))))
  */
-static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::alerting_inhibition::t*)> fun131 { [&fun131](::dessser::gen::alerting_inhibition::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> fun131 { [&fun131](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0) {
     std::string id_132 { (*p_0).what };
     uint32_t id_133 { (uint32_t)id_132.size() };
     Vec<1, uint32_t> id_134 {  id_133  };
@@ -605,7 +605,7 @@ static std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_r
    };
   return fun131;
 }
-std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -679,9 +679,9 @@ std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_row_bina
                                 (string "what") (identifier "drec_fst_69")) 
                               (identifier "dstring2_snd_109"))))))))))))))
  */
-static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c(Pointer)> fun224 { [&fun224](Pointer p_0) {
+  std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> fun224 { [&fun224](Pointer p_0) {
     uint32_t id_225 { 0U };
     Vec<1, uint32_t> id_226 {  id_225  };
     ::dessser::gen::alerting_inhibition::t044960e524fd6ec1bfc06410ce526709 let_res_227;
@@ -774,10 +774,10 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
       }
       let_res_266 = letpair_res_267;
     }
-    ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c let_res_272;
+    ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b let_res_272;
     {
       ::dessser::gen::alerting_inhibition::t3fd8221434e489b54b5c4356ebff5005 drec_68 { let_res_266 };
-      ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_273;
+      ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_273;
       {
         auto drec_fst_69 { std::get<0>(drec_68) };
         auto drec_snd_70 { std::get<1>(drec_68) };
@@ -790,10 +790,10 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
           ::dessser::gen::alerting_inhibition::t5375de390f9cb5ae2ee5880ea1674828 id_277 { id_276, dfloat_snd_73 };
           letpair_res_275 = id_277;
         }
-        ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c let_res_278;
+        ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b let_res_278;
         {
           ::dessser::gen::alerting_inhibition::t5375de390f9cb5ae2ee5880ea1674828 drec_74 { letpair_res_275 };
-          ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_279;
+          ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_279;
           {
             auto drec_fst_75 { std::get<0>(drec_74) };
             auto drec_snd_76 { std::get<1>(drec_74) };
@@ -806,10 +806,10 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
               ::dessser::gen::alerting_inhibition::t5375de390f9cb5ae2ee5880ea1674828 id_283 { id_282, dfloat_snd_79 };
               letpair_res_281 = id_283;
             }
-            ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c let_res_284;
+            ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b let_res_284;
             {
               ::dessser::gen::alerting_inhibition::t5375de390f9cb5ae2ee5880ea1674828 drec_80 { letpair_res_281 };
-              ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_285;
+              ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_285;
               {
                 auto drec_fst_81 { std::get<0>(drec_80) };
                 auto drec_snd_82 { std::get<1>(drec_80) };
@@ -905,10 +905,10 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
                   }
                   let_res_327 = letpair_res_328;
                 }
-                ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c let_res_333;
+                ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b let_res_333;
                 {
                   ::dessser::gen::alerting_inhibition::t3fd8221434e489b54b5c4356ebff5005 drec_95 { let_res_327 };
-                  ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_334;
+                  ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_334;
                   {
                     auto drec_fst_96 { std::get<0>(drec_95) };
                     auto drec_snd_97 { std::get<1>(drec_95) };
@@ -984,21 +984,21 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
                       }
                       let_res_337 = let_res_340;
                     }
-                    ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c let_res_376;
+                    ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b let_res_376;
                     {
                       ::dessser::gen::alerting_inhibition::t044960e524fd6ec1bfc06410ce526709 dstring1_104 { let_res_337 };
-                      ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_377;
+                      ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_377;
                       {
                         auto dstring1_fst_105 { std::get<0>(dstring1_104) };
                         auto dstring1_snd_106 { std::get<1>(dstring1_104) };
                         ::dessser::gen::alerting_inhibition::t5887709cc43c8c8e24d28211e8c970a2 id_378 { dstring1_snd_106.readBytes(dstring1_fst_105) };
-                        ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c letpair_res_379;
+                        ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b letpair_res_379;
                         {
                           auto dstring2_fst_108 { std::get<0>(id_378) };
                           auto dstring2_snd_109 { std::get<1>(id_378) };
                           std::string id_380 { dstring2_fst_108.toString() };
-                          ::dessser::gen::alerting_inhibition::t* id_381 { new ::dessser::gen::alerting_inhibition::t({ drec_fst_75, drec_fst_81, drec_fst_69, drec_fst_96, id_380 }) };
-                          ::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c id_382 { id_381, dstring2_snd_109 };
+                          std::shared_ptr<::dessser::gen::alerting_inhibition::t>  id_381 { std::make_shared<::dessser::gen::alerting_inhibition::t>(drec_fst_75, drec_fst_81, drec_fst_69, drec_fst_96, id_380) };
+                          ::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b id_382 { id_381, dstring2_snd_109 };
                           letpair_res_379 = id_382;
                         }
                         letpair_res_377 = letpair_res_379;
@@ -1026,9 +1026,9 @@ static std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9e
    };
   return fun224;
 }
-std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

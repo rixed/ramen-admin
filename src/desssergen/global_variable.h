@@ -2,6 +2,7 @@
 #define DESSSER_GEN_global_variable
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -71,21 +72,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct te0fdf9308787ca06b18f7afa420eb4db : public std::tuple<
-  ::dessser::gen::global_variable::t*,
+struct t12a4afd72f36ee14a00cd9875e781364 : public std::tuple<
+  std::shared_ptr<::dessser::gen::global_variable::t> ,
   Pointer
 > {
   using tuple::tuple;
-  te0fdf9308787ca06b18f7afa420eb4db(std::tuple<::dessser::gen::global_variable::t*, Pointer> p)
-    : std::tuple<::dessser::gen::global_variable::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t12a4afd72f36ee14a00cd9875e781364(std::tuple<std::shared_ptr<::dessser::gen::global_variable::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::global_variable::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(te0fdf9308787ca06b18f7afa420eb4db const &a, te0fdf9308787ca06b18f7afa420eb4db const &b) {
+inline bool operator==(t12a4afd72f36ee14a00cd9875e781364 const &a, t12a4afd72f36ee14a00cd9875e781364 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(te0fdf9308787ca06b18f7afa420eb4db const &a, te0fdf9308787ca06b18f7afa420eb4db const &b) {
+inline bool operator!=(t12a4afd72f36ee14a00cd9875e781364 const &a, t12a4afd72f36ee14a00cd9875e781364 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, te0fdf9308787ca06b18f7afa420eb4db const &t) {
+inline std::ostream &operator<<(std::ostream &os, t12a4afd72f36ee14a00cd9875e781364 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -96,10 +97,10 @@ inline std::ostream &operator<<(std::ostream &os, te0fdf9308787ca06b18f7afa420eb
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::global_variable::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::global_variable::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::global_variable::te0fdf9308787ca06b18f7afa420eb4db(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::global_variable::t12a4afd72f36ee14a00cd9875e781364(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

@@ -24,7 +24,7 @@
 
 AtomicWidget *newEditorWidget(
   dessser::gen::sync_value::t const &v,
-  dessser::gen::sync_key::t const *k,
+  std::shared_ptr<dessser::gen::sync_key::t const> k,
   QWidget *parent)
 {
   static dessser::gen::sync_key::t const recall_cost {
@@ -37,7 +37,7 @@ AtomicWidget *newEditorWidget(
   switch (v.index()) {
     case dessser::gen::sync_value::RamenValue:
       {
-        dessser::gen::raql_value::t const *rv {
+        std::shared_ptr<dessser::gen::raql_value::t const> rv {
           std::get<dessser::gen::sync_value::RamenValue>(v) };
         switch (rv->index()) {
           case dessser::gen::raql_value::VFloat:
@@ -174,6 +174,6 @@ AtomicWidget *newEditorWidget(
       break;
   }
 
-  if (editor && k) editor->setKey(*k);
+  if (editor && k) editor->setKey(k);
   return editor;
 }

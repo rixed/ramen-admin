@@ -2,7 +2,6 @@
 #define ATOMICWIDGET_H_190506
 /* What an AtomicForm remembers about its widgets */
 #include <memory>
-#include <optional>
 #include <QWidget>
 
 #include "ConfChange.h"
@@ -31,9 +30,11 @@ class AtomicWidget : public QWidget
   QStackedLayout *layout;
 
   // For the default implementation of setKey()/key()
-  std::optional<dessser::gen::sync_key::t> _key;
+  std::shared_ptr<dessser::gen::sync_key::t const> _key;
 
-  void setValueFromStore(dessser::gen::sync_key::t const &, KValue const &);
+  // Key here is not allowed to be nullptr:
+  void setValueFromStore(
+    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
   void lockValue(dessser::gen::sync_key::t const &, KValue const &);
   void unlockValue(dessser::gen::sync_key::t const &, KValue const &);
@@ -50,7 +51,7 @@ public:
     setKey(k);
   } */
 
-  virtual std::optional<dessser::gen::sync_key::t const> key() const
+  virtual std::shared_ptr<dessser::gen::sync_key::t const> key() const
   {
     return _key;
   }
@@ -59,16 +60,19 @@ public:
 
   bool sameKey(dessser::gen::sync_key::t const &k) const
   {
-    return key() && k == *key();
+    std::shared_ptr<dessser::gen::sync_key::t const> current { key() };
+    return current && k == *current;
   }
 
-  bool sameKey(std::optional<dessser::gen::sync_key::t const> const &k) const
+  bool sameKey(std::shared_ptr<dessser::gen::sync_key::t const> k) const
   {
-    return k == key();
+    std::shared_ptr<dessser::gen::sync_key::t const> current { key() };
+    if (!k) return !current;
+    return current && *k == *current;
   }
 
-  // Called by setKey to actually save that new key:
-  virtual void saveKey(std::optional<dessser::gen::sync_key::t const> const &newKey)
+  // Called by setKey to actually save (a copy of) that new key:
+  virtual void saveKey(std::shared_ptr<dessser::gen::sync_key::t const> newKey)
   {
     _key = newKey;
   }
@@ -87,7 +91,7 @@ public:
    * copy. */
   // TODO: replace the widget with an error message then.
   virtual bool setValue(
-    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>) = 0;
 
   virtual bool hasValidInput() const { return true; }
@@ -99,7 +103,7 @@ public:
    * If nullptr, the value is not supposed to be found in the configuration,
    * and edition is disabled.
    * Returns whether the value was accepted by setValue. */
-  virtual bool setKey(std::optional<dessser::gen::sync_key::t const>);
+  virtual bool setKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
 protected:
   void relayoutWidget(QWidget *w);
@@ -109,11 +113,11 @@ public slots:
 
 signals:
   // Triggered when the key is changed:
-  void keyChanged(std::optional<dessser::gen::sync_key::t const> const &old,
-                  std::optional<dessser::gen::sync_key::t const> const &new_);
+  void keyChanged(std::shared_ptr<dessser::gen::sync_key::t const> old,
+                  std::shared_ptr<dessser::gen::sync_key::t const> new_);
 
   // Triggered when the underlying value is changed
-  void valueChanged(std::optional<dessser::gen::sync_key::t const> const &,
+  void valueChanged(std::shared_ptr<dessser::gen::sync_key::t const>,
                     std::shared_ptr<dessser::gen::sync_value::t const>);
 
   // Triggered when the edited value is changed

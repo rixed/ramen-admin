@@ -2,6 +2,7 @@
 #define DESSSER_GEN_alerting_inhibition
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -40,21 +41,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t7b36490807adef2395f9ec16d5d2062c : public std::tuple<
-  ::dessser::gen::alerting_inhibition::t*,
+struct t4595ec1adc4f7355158d53cad66ecc5b : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t7b36490807adef2395f9ec16d5d2062c(std::tuple<::dessser::gen::alerting_inhibition::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_inhibition::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t4595ec1adc4f7355158d53cad66ecc5b(std::tuple<std::shared_ptr<::dessser::gen::alerting_inhibition::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_inhibition::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7b36490807adef2395f9ec16d5d2062c const &a, t7b36490807adef2395f9ec16d5d2062c const &b) {
+inline bool operator==(t4595ec1adc4f7355158d53cad66ecc5b const &a, t4595ec1adc4f7355158d53cad66ecc5b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t7b36490807adef2395f9ec16d5d2062c const &a, t7b36490807adef2395f9ec16d5d2062c const &b) {
+inline bool operator!=(t4595ec1adc4f7355158d53cad66ecc5b const &a, t4595ec1adc4f7355158d53cad66ecc5b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7b36490807adef2395f9ec16d5d2062c const &t) {
+inline std::ostream &operator<<(std::ostream &os, t4595ec1adc4f7355158d53cad66ecc5b const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -65,10 +66,10 @@ inline std::ostream &operator<<(std::ostream &os, t7b36490807adef2395f9ec16d5d20
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::alerting_inhibition::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::alerting_inhibition::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_inhibition::t7b36490807adef2395f9ec16d5d2062c(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

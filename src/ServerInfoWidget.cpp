@@ -31,10 +31,10 @@ void ServerInfoWidget::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyCreated:
-        setKey(change.key, change.kv);
+        setKey(*change.key, change.kv);
         break;
       case KeyChanged:
-        setKey(change.key, change.kv);
+        setKey(*change.key, change.kv);
         break;
       default:
         break;
@@ -61,7 +61,7 @@ err:
     qCritical() << "ServerInfoWidget::setLabel: value is not a string?!";
     return;
   }
-  dessser::gen::raql_value::t const *val {
+  std::shared_ptr<dessser::gen::raql_value::t const> val {
     std::get<dessser::gen::sync_value::RamenValue>(*value) };
 
   QString str;

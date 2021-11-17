@@ -2,6 +2,7 @@
 #define DESSSER_GEN_sync_client_cmd
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -177,21 +178,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t0264662d00b54dcd6f38027b603c6230 : public std::tuple<
-  ::dessser::gen::sync_client_cmd::t*,
+struct tfd5814032c8587486ba8d32ccdd5b703 : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_client_cmd::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t0264662d00b54dcd6f38027b603c6230(std::tuple<::dessser::gen::sync_client_cmd::t*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_client_cmd::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tfd5814032c8587486ba8d32ccdd5b703(std::tuple<std::shared_ptr<::dessser::gen::sync_client_cmd::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_client_cmd::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t0264662d00b54dcd6f38027b603c6230 const &a, t0264662d00b54dcd6f38027b603c6230 const &b) {
+inline bool operator==(tfd5814032c8587486ba8d32ccdd5b703 const &a, tfd5814032c8587486ba8d32ccdd5b703 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t0264662d00b54dcd6f38027b603c6230 const &a, t0264662d00b54dcd6f38027b603c6230 const &b) {
+inline bool operator!=(tfd5814032c8587486ba8d32ccdd5b703 const &a, tfd5814032c8587486ba8d32ccdd5b703 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t0264662d00b54dcd6f38027b603c6230 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tfd5814032c8587486ba8d32ccdd5b703 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -202,10 +203,10 @@ inline std::ostream &operator<<(std::ostream &os, t0264662d00b54dcd6f38027b603c6
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::sync_client_cmd::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::sync_client_cmd::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_client_cmd::t0264662d00b54dcd6f38027b603c6230(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_client_cmd::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_client_cmd::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_client_cmd::tfd5814032c8587486ba8d32ccdd5b703(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

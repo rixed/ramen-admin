@@ -2,6 +2,7 @@
 #define DESSSER_GEN_event_time
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -72,21 +73,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &t) {
   return os;
 }
 
-struct tfe74fe03fd74a982eabab7a43795b12a : public std::tuple<
-  ::dessser::gen::event_time::t*,
+struct tbfec2f2c14f43ba5c6cd1570da6c1d48 : public std::tuple<
+  std::shared_ptr<::dessser::gen::event_time::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tfe74fe03fd74a982eabab7a43795b12a(std::tuple<::dessser::gen::event_time::t*, Pointer> p)
-    : std::tuple<::dessser::gen::event_time::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tbfec2f2c14f43ba5c6cd1570da6c1d48(std::tuple<std::shared_ptr<::dessser::gen::event_time::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::event_time::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tfe74fe03fd74a982eabab7a43795b12a const &a, tfe74fe03fd74a982eabab7a43795b12a const &b) {
+inline bool operator==(tbfec2f2c14f43ba5c6cd1570da6c1d48 const &a, tbfec2f2c14f43ba5c6cd1570da6c1d48 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tfe74fe03fd74a982eabab7a43795b12a const &a, tfe74fe03fd74a982eabab7a43795b12a const &b) {
+inline bool operator!=(tbfec2f2c14f43ba5c6cd1570da6c1d48 const &a, tbfec2f2c14f43ba5c6cd1570da6c1d48 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tfe74fe03fd74a982eabab7a43795b12a const &t) {
+inline std::ostream &operator<<(std::ostream &os, tbfec2f2c14f43ba5c6cd1570da6c1d48 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -97,10 +98,10 @@ inline std::ostream &operator<<(std::ostream &os, tfe74fe03fd74a982eabab7a43795b
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

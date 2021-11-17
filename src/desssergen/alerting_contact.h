@@ -2,6 +2,7 @@
 #define DESSSER_GEN_alerting_contact
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -143,21 +144,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tafbda6d9cc6c85623ff6054f254a9dc9 : public std::tuple<
-  ::dessser::gen::alerting_contact::t*,
+struct t64d64e9c0acacb981f0a90c22987e81e : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_contact::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tafbda6d9cc6c85623ff6054f254a9dc9(std::tuple<::dessser::gen::alerting_contact::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_contact::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t64d64e9c0acacb981f0a90c22987e81e(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tafbda6d9cc6c85623ff6054f254a9dc9 const &a, tafbda6d9cc6c85623ff6054f254a9dc9 const &b) {
+inline bool operator==(t64d64e9c0acacb981f0a90c22987e81e const &a, t64d64e9c0acacb981f0a90c22987e81e const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tafbda6d9cc6c85623ff6054f254a9dc9 const &a, tafbda6d9cc6c85623ff6054f254a9dc9 const &b) {
+inline bool operator!=(t64d64e9c0acacb981f0a90c22987e81e const &a, t64d64e9c0acacb981f0a90c22987e81e const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tafbda6d9cc6c85623ff6054f254a9dc9 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t64d64e9c0acacb981f0a90c22987e81e const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -168,10 +169,10 @@ inline std::ostream &operator<<(std::ostream &os, tafbda6d9cc6c85623ff6054f254a9
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::alerting_contact::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::alerting_contact::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_contact::tafbda6d9cc6c85623ff6054f254a9dc9(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

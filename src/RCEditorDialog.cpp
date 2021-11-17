@@ -32,7 +32,12 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
           this, &RCEditorDialog::wantDeleteEntry);
 
   targetConfigEditor = new TargetConfigEditor;
-  targetConfigEditor->setKey(std::string("target_config"));
+  static dessser::gen::sync_key::t const targetConfig {
+    std::in_place_index<dessser::gen::sync_key::TargetConfig>,
+    VOID };
+  targetConfigEditor->setKey(
+    std::shared_ptr<dessser::gen::sync_key::t const>(
+      &targetConfig, /* No del */[](dessser::gen::sync_key::t const *){}));
   form->setCentralWidget(targetConfigEditor);
   form->addWidget(targetConfigEditor);
 

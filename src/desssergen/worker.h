@@ -2,6 +2,7 @@
 #define DESSSER_GEN_worker
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -133,21 +134,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t880e090806568021cc11b70fc209293e : public std::tuple<
-  ::dessser::gen::worker::t*,
+struct ta3e796acad3d617428352d1a366552f7 : public std::tuple<
+  std::shared_ptr<::dessser::gen::worker::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t880e090806568021cc11b70fc209293e(std::tuple<::dessser::gen::worker::t*, Pointer> p)
-    : std::tuple<::dessser::gen::worker::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  ta3e796acad3d617428352d1a366552f7(std::tuple<std::shared_ptr<::dessser::gen::worker::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::worker::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t880e090806568021cc11b70fc209293e const &a, t880e090806568021cc11b70fc209293e const &b) {
+inline bool operator==(ta3e796acad3d617428352d1a366552f7 const &a, ta3e796acad3d617428352d1a366552f7 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t880e090806568021cc11b70fc209293e const &a, t880e090806568021cc11b70fc209293e const &b) {
+inline bool operator!=(ta3e796acad3d617428352d1a366552f7 const &a, ta3e796acad3d617428352d1a366552f7 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t880e090806568021cc11b70fc209293e const &t) {
+inline std::ostream &operator<<(std::ostream &os, ta3e796acad3d617428352d1a366552f7 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -158,10 +159,10 @@ inline std::ostream &operator<<(std::ostream &os, t880e090806568021cc11b70fc2092
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::worker::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::worker::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::worker::t880e090806568021cc11b70fc209293e(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::worker::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::worker::ta3e796acad3d617428352d1a366552f7(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

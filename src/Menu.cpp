@@ -562,10 +562,10 @@ void Menu::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyCreated:
-        addValue(change.key, change.kv);
+        addValue(*change.key, change.kv);
         break;
       case KeyDeleted:
-        delValue(change.key, change.kv);
+        delValue(*change.key, change.kv);
         break;
       default:
         break;

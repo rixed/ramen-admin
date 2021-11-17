@@ -35,35 +35,36 @@ TailModel::TailModel(
           this, &TailModel::onChange);
 
   // Subscribe
-  dessser::gen::sync_key::t const k { subscriberKey() };
-  static dessser::gen::raql_value::t const dummy {
-    std::in_place_index<dessser::gen::raql_value::VNull>,
-    VOID };
-  static dessser::gen::sync_value::t v {
-    std::in_place_index<dessser::gen::sync_value::RamenValue>,
-    const_cast<dessser::gen::raql_value::t *>(&dummy) };
-  Menu::getClient()->sendSet(&k, &v);
+  std::shared_ptr<dessser::gen::sync_key::t const> k { subscriberKey() };
+  static std::shared_ptr<dessser::gen::raql_value::t> const dummy {
+    std::make_shared<dessser::gen::raql_value::t>(
+      std::in_place_index<dessser::gen::raql_value::VNull>,
+      VOID) };
+  static std::shared_ptr<dessser::gen::sync_value::t> const v {
+    std::make_shared<dessser::gen::sync_value::t>(
+      std::in_place_index<dessser::gen::sync_value::RamenValue>,
+      std::static_pointer_cast<dessser::gen::raql_value::t>(dummy)) };
+  Menu::getClient()->sendSet(
+    k, std::static_pointer_cast<dessser::gen::sync_value::t>(v));
 }
 
 TailModel::~TailModel()
 {
   // Unsubscribe
-  dessser::gen::sync_key::t const k { subscriberKey() };
-  Menu::getClient()->sendDel(&k);
+  std::shared_ptr<dessser::gen::sync_key::t const> k { subscriberKey() };
+  Menu::getClient()->sendDel(k);
 }
 
-dessser::gen::sync_key::t TailModel::subscriberKey() const
+std::shared_ptr<dessser::gen::sync_key::t> TailModel::subscriberKey() const
 {
-  dessser::gen::sync_key::per_tail sub {
-    std::in_place_index<dessser::gen::sync_key::Subscriber>,
-    my_uid->toStdString() };
+  std::shared_ptr<dessser::gen::sync_key::per_tail> sub {
+    std::make_shared<dessser::gen::sync_key::per_tail>(
+      std::in_place_index<dessser::gen::sync_key::Subscriber>,
+      my_uid->toStdString()) };
 
-  return dessser::gen::sync_key::t(
+  return std::make_shared<dessser::gen::sync_key::t>(
     std::in_place_index<dessser::gen::sync_key::Tails>,
-    siteName,
-    fqName,
-    workerSign,
-    &sub);
+    siteName, fqName, workerSign, sub);
 }
 
 void TailModel::onChange(QList<ConfChange> const &changes)
@@ -72,7 +73,7 @@ void TailModel::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyCreated:
-        addTuple(change.key, change.kv);
+        addTuple(*change.key, change.kv);
         break;
       default:
         break;
@@ -87,7 +88,8 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key, KValue const &kv)
   if (std::get<0>(tails) != siteName ||
       std::get<1>(tails) != fqName ||
       std::get<2>(tails) != workerSign) return;
-  dessser::gen::sync_key::per_tail const *per_tail { std::get<3>(tails) };
+  std::shared_ptr<dessser::gen::sync_key::per_tail const> per_tail {
+    std::get<3>(tails) };
   if (per_tail->index() != dessser::gen::sync_key::LastTuple) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Tuples) {
@@ -154,7 +156,8 @@ QVariant TailModel::data(QModelIndex const &index, int role) const
   switch (role) {
     case Qt::DisplayRole:
       {
-        dessser::gen::raql_value::t const *v { columnValue(*tuples[row].second, column) };
+        std::shared_ptr<dessser::gen::raql_value::t const> v {
+          columnValue(*tuples[row].second, column) };
         return v ? QVariant(raqlValToQString(*v)) : QVariant();
       }
       break;
@@ -184,6 +187,6 @@ QVariant TailModel::headerData(int section, Qt::Orientation orient, int role) co
 
 bool TailModel::isNumeric(int column) const
 {
-  dessser::gen::raql_type::t const *t { columnType(*type, column) };
+  std::shared_ptr<dessser::gen::raql_type::t const> t { columnType(*type, column) };
   return t ? ::isNumeric(*t) : false;
 }

@@ -92,7 +92,7 @@ public:
     double since, double until, bool onePast, std::vector<int> const &columns,
     /* TODO: document the lifespan on those pointers to raql_value. Is
      * it safe to store? If not, shouldn't they be shared_ptr? */
-    std::function<void (double, std::vector<dessser::gen::raql_value::t const *> const)>);
+    std::function<void (double, std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> const)>);
 
   void resetInstanceData();
   void checkTail();

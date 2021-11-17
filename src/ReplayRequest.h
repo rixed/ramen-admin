@@ -42,7 +42,9 @@ public:
   std::mutex lock;
 
   std::time_t started; // When the query was sent (for timeout)
-  dessser::gen::sync_key::t const respKey; // Used to identify a single request
+
+  // Used to identify a single request:
+  std::shared_ptr<dessser::gen::sync_key::t const> respKey;
 
   std::shared_ptr<dessser::gen::raql_type::t const> type;
   std::shared_ptr<EventTime const> eventTime;

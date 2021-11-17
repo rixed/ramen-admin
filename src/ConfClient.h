@@ -77,7 +77,7 @@ class ConfClient : public QObject
 
   int sendAuth();
 
-  int sendMsg(dessser::gen::sync_client_msg::t const &);
+  int sendMsg(std::shared_ptr<dessser::gen::sync_client_msg::t const>);
 
   int sendBytes(char const *, size_t);
 
@@ -141,25 +141,27 @@ public:
   bool isSynced() const;
 
   int sendNew(
-        dessser::gen::sync_key::t const *,
-        dessser::gen::sync_value::t const * = nullptr,
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::shared_ptr<dessser::gen::sync_value::t const> = nullptr,
         double timeout = 0.);
 
   int sendSet(
-        dessser::gen::sync_key::t const *,
-        dessser::gen::sync_value::t const *);
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::shared_ptr<dessser::gen::sync_value::t const>);
 
 # define DEFAULT_LOCK_TIMEOUT 600.
   int sendLock(
-        dessser::gen::sync_key::t const *,
+        std::shared_ptr<dessser::gen::sync_key::t const>,
         double timeout = DEFAULT_LOCK_TIMEOUT);
 
-  int sendUnlock(dessser::gen::sync_key::t const *);
+  int sendUnlock(
+        std::shared_ptr<dessser::gen::sync_key::t const>);
 
-  int sendDel(dessser::gen::sync_key::t const *);
+  int sendDel(
+        std::shared_ptr<dessser::gen::sync_key::t const>);
 
   int sendCmd(
-    dessser::gen::sync_client_cmd::t const &,
+    std::shared_ptr<dessser::gen::sync_client_cmd::t const>,
     /* Register what should happen when the result is received (with err message,
      * empty if no error). */
     std::optional<std::function<int(std::string const &)>> = std::nullopt,

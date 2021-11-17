@@ -30,13 +30,13 @@ void AtomicWidget::onChange(QList<ConfChange> const &changes)
         setValueFromStore(change.key, change.kv);
         break;
       case KeyDeleted:
-        forgetValue(change.key, change.kv);
+        forgetValue(*change.key, change.kv);
         break;
       case KeyLocked:
-        lockValue(change.key, change.kv);
+        lockValue(*change.key, change.kv);
         break;
       case KeyUnlocked:
-        unlockValue(change.key, change.kv);
+        unlockValue(*change.key, change.kv);
         break;
     }
   }
@@ -61,7 +61,7 @@ QString AtomicWidget::dbgId() const
          QString("]");
 }
 
-bool AtomicWidget::setKey(std::optional<dessser::gen::sync_key::t const> newKey)
+bool AtomicWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKey)
 {
   if (sameKey(newKey)) return true;
 
@@ -69,7 +69,7 @@ bool AtomicWidget::setKey(std::optional<dessser::gen::sync_key::t const> newKey)
     qDebug() << dbgId() << ": changing key to"
              << (newKey ? syncKeyToQString(*newKey) : QString("unset"));
 
-  std::optional<dessser::gen::sync_key::t const> oldKey { key() };
+  std::shared_ptr<dessser::gen::sync_key::t const> oldKey { key() };
   saveKey(newKey);
   assert(sameKey(newKey));  // at least for now
 
@@ -77,7 +77,7 @@ bool AtomicWidget::setKey(std::optional<dessser::gen::sync_key::t const> newKey)
 
   if (newKey) {
     kvs->lock.lock_shared();
-    auto it = kvs->map.find(*newKey);
+    auto it = kvs->map.find(newKey);
     if (it == kvs->map.end()) {
       if (verbose)
         qDebug() << dbgId() << ": ...which is not in the kvs yet";
@@ -127,12 +127,14 @@ void AtomicWidget::forgetValue(dessser::gen::sync_key::t const &k, KValue const 
   if (verbose)
     qDebug() << dbgId() << ": forgetValue for key" << k;
 
-  setKey(std::nullopt); // should also disable the widget
+  setKey(nullptr); // should also disable the widget
 }
 
-void AtomicWidget::setValueFromStore(dessser::gen::sync_key::t const &k, KValue const &kv)
+void AtomicWidget::setValueFromStore(
+  std::shared_ptr<dessser::gen::sync_key::t const> k, KValue const &kv)
 {
-  if (! sameKey(k)) return;
+  assert(k);
+  if (! sameKey(*k)) return;
 
   setValue(k, kv.val);
 }

@@ -1,6 +1,6 @@
 #ifndef CONFTREEITEM_H_190715
 #define CONFTREEITEM_H_190715
-#include <optional>
+#include <memory>
 #include <QPixmap>
 #include <QString>
 
@@ -25,10 +25,10 @@ public:
    * Therefore we build yet another representation of the tree of keys as a
    * simple tree of strings. */
   QString const name;
-  std::optional<dessser::gen::sync_key::t const> key;
+  std::shared_ptr<dessser::gen::sync_key::t const> key;
 
   ConfTreeItem(
-    std::optional<dessser::gen::sync_key::t const>,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     QString const,
     ConfTreeItem *parent = nullptr,
     ConfTreeItem *preceding = nullptr);

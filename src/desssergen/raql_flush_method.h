@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_flush_method
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -43,21 +44,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tb3a89096758ec6cf20bf4ee069398ed5 : public std::tuple<
-  ::dessser::gen::raql_flush_method::t*,
+struct tcb9728fff2af5188e5e3e0aee866cdff : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_flush_method::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tb3a89096758ec6cf20bf4ee069398ed5(std::tuple<::dessser::gen::raql_flush_method::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_flush_method::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcb9728fff2af5188e5e3e0aee866cdff(std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+inline bool operator==(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+inline bool operator!=(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tb3a89096758ec6cf20bf4ee069398ed5 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tcb9728fff2af5188e5e3e0aee866cdff const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -68,10 +69,10 @@ inline std::ostream &operator<<(std::ostream &os, tb3a89096758ec6cf20bf4ee069398
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

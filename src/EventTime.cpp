@@ -17,7 +17,8 @@ EventTime::EventTime(dessser::gen::raql_type::t const &type) :
   if (! isScalar(type)) {
     unsigned const num_cols { numColumns(type) };
     for (unsigned column = 0; column < num_cols; column ++) {
-      dessser::gen::raql_type::t const *subType { columnType(type, column) };
+      std::shared_ptr<dessser::gen::raql_type::t const> subType {
+        columnType(type, column) };
       if (subType && isScalar(*subType)) {
         std::string const name { columnName(type, column) };
         if (name == "start") {
@@ -43,14 +44,16 @@ bool EventTime::isValid() const
 
 std::optional<double> EventTime::startOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
-  dessser::gen::raql_value::t const *startVal { columnValue(tuple, startColumn) };
+  std::shared_ptr<dessser::gen::raql_value::t const> startVal {
+    columnValue(tuple, startColumn) };
   if (! startVal) return std::nullopt;
   return toDouble(*startVal);
 }
 
 std::optional<double> EventTime::stopOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
-  dessser::gen::raql_value::t const *stopVal { columnValue(tuple, stopColumn) };
+  std::shared_ptr<dessser::gen::raql_value::t const> stopVal {
+    columnValue(tuple, stopColumn) };
   if (! stopVal) return std::nullopt;
   return toDouble(*stopVal);
 }

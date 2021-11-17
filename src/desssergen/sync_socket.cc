@@ -59,18 +59,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t9c221102bec3ae5a2e3e5c5f795b27d9 : public std::tuple<
-  ::dessser::gen::sync_socket::t*,
+struct t0158b3285e71d7107af39bdaaaca11cc : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_socket::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t9c221102bec3ae5a2e3e5c5f795b27d9(std::tuple<::dessser::gen::sync_socket::t*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_socket::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t0158b3285e71d7107af39bdaaaca11cc(std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t9c221102bec3ae5a2e3e5c5f795b27d9 const &a, t9c221102bec3ae5a2e3e5c5f795b27d9 const &b) {
+inline bool operator==(t0158b3285e71d7107af39bdaaaca11cc const &a, t0158b3285e71d7107af39bdaaaca11cc const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t9c221102bec3ae5a2e3e5c5f795b27d9 const &a, t9c221102bec3ae5a2e3e5c5f795b27d9 const &b) {
+inline bool operator!=(t0158b3285e71d7107af39bdaaaca11cc const &a, t0158b3285e71d7107af39bdaaaca11cc const &b) {
   return !operator==(a, b);
 }
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
@@ -140,9 +140,9 @@ inline bool operator!=(t9e0ebd3dfe4817b98136c6e6b20afc92 const &a, t9e0ebd3dfe48
             (seq (assert (eq (label-of (get-field "ip" (param 0))) (u16 1))) (write-u128 little-endian (identifier "ssum_dst_102") (get-alt "v6" (get-field "ip" (param 0)))))))
         (write-u16 little-endian (identifier "srec_dst_103") (get-field "port" (param 0)))))
  */
-static std::function<Pointer(::dessser::gen::sync_socket::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::sync_socket::t*,Pointer)> fun0 { [&fun0](::dessser::gen::sync_socket::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::sync_socket::t>  p_0, Pointer p_1) {
     ::dessser::gen::sync_socket::tb689860ac91fca7822797a026958e891 id_1 { (*p_0).ip };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
@@ -185,14 +185,14 @@ static std::function<Pointer(::dessser::gen::sync_socket::t*,Pointer)> to_row_bi
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::sync_socket::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{ip: Ip; port: U16}") (add (if (eq (u16 0) (label-of (get-field "ip" (param 0)))) (size 6) (seq (assert (eq (label-of (get-field "ip" (param 0))) (u16 1))) (size 18))) (size 2)))
  */
-static std::function<Size(::dessser::gen::sync_socket::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::sync_socket::t*)> fun24 { [&fun24](::dessser::gen::sync_socket::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> fun24 { [&fun24](std::shared_ptr<::dessser::gen::sync_socket::t>  p_0) {
     uint16_t id_25 { 0 };
     ::dessser::gen::sync_socket::tb689860ac91fca7822797a026958e891 id_26 { (*p_0).ip };
     uint16_t id_27 { uint16_t(id_26.index()) };
@@ -218,7 +218,7 @@ static std::function<Size(::dessser::gen::sync_socket::t*)> sersize_of_row_binar
    };
   return fun24;
 }
-std::function<Size(::dessser::gen::sync_socket::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -236,9 +236,9 @@ std::function<Size(::dessser::gen::sync_socket::t*)> sersize_of_row_binary(sersi
           (let-pair "du16_fst_90" "du16_snd_91" (read-u16 little-endian (identifier "drec_snd_88"))
             (make-tup (make-rec (string "port") (identifier "du16_fst_90") (string "ip") (identifier "drec_fst_87")) (identifier "du16_snd_91"))))))
  */
-static std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9(Pointer)> fun39 { [&fun39](Pointer p_0) {
+  std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc(Pointer)> fun39 { [&fun39](Pointer p_0) {
     ::dessser::gen::sync_socket::t7609d344c1ba69d0f80fec236d4c216b id_40 { p_0.readU16Le() };
     ::dessser::gen::sync_socket::t7609d344c1ba69d0f80fec236d4c216b letpair_res_41;
     {
@@ -310,20 +310,20 @@ static std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b2
       ::dessser::gen::sync_socket::te1eee5b4e548fff25ec00d11c13510c2 id_66 { id_65, des_usr_type_snd_85 };
       letpair_res_63 = id_66;
     }
-    ::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9 let_res_67;
+    ::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc let_res_67;
     {
       ::dessser::gen::sync_socket::te1eee5b4e548fff25ec00d11c13510c2 drec_86 { letpair_res_63 };
-      ::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9 letpair_res_68;
+      ::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc letpair_res_68;
       {
         auto drec_fst_87 { std::get<0>(drec_86) };
         auto drec_snd_88 { std::get<1>(drec_86) };
         ::dessser::gen::sync_socket::t7609d344c1ba69d0f80fec236d4c216b id_69 { drec_snd_88.readU16Le() };
-        ::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9 letpair_res_70;
+        ::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc letpair_res_70;
         {
           auto du16_fst_90 { std::get<0>(id_69) };
           auto du16_snd_91 { std::get<1>(id_69) };
-          ::dessser::gen::sync_socket::t* id_71 { new ::dessser::gen::sync_socket::t({ drec_fst_87, du16_fst_90 }) };
-          ::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9 id_72 { id_71, du16_snd_91 };
+          std::shared_ptr<::dessser::gen::sync_socket::t>  id_71 { std::make_shared<::dessser::gen::sync_socket::t>(drec_fst_87, du16_fst_90) };
+          ::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc id_72 { id_71, du16_snd_91 };
           letpair_res_70 = id_72;
         }
         letpair_res_68 = letpair_res_70;
@@ -335,9 +335,9 @@ static std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b2
    };
   return fun39;
 }
-std::function<::dessser::gen::sync_socket::t9c221102bec3ae5a2e3e5c5f795b27d9(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

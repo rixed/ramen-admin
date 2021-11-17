@@ -32,10 +32,10 @@ void SourcesModel::onChange(QList<ConfChange> const &changes)
     ConfChange const &change { changes.at(i) };
     switch (change.op) {
       case KeyCreated:
-        addSource(change.key, change.kv);
+        addSource(*change.key, change.kv);
         break;
       case KeyDeleted:
-        delSource(change.key, change.kv);
+        delSource(*change.key, change.kv);
         break;
       default:
         break;
@@ -353,7 +353,9 @@ std::shared_ptr<dessser::gen::source_info::t const>
 
   std::shared_ptr<dessser::gen::sync_value::t const> v;
   kvs->lock.lock_shared();
-  auto it { kvs->map.find(infoKey) };
+  auto it {
+    kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
+      &infoKey, /* No del */[](dessser::gen::sync_key::t const *){})) };
   if (it != kvs->map.end()) v = it->second.val;
   kvs->lock.unlock_shared();
 
@@ -364,7 +366,6 @@ std::shared_ptr<dessser::gen::source_info::t const>
   }
   return
     std::shared_ptr<dessser::gen::source_info::t const>(
-      v,
       std::get<dessser::gen::sync_value::SourceInfo>(*v));
 }
 

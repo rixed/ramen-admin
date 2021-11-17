@@ -2,6 +2,7 @@
 #define DESSSER_GEN_alerting_notification
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -76,21 +77,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct te8ad757749fae6294b10eb09007d1f7d : public std::tuple<
-  ::dessser::gen::alerting_notification::t*,
+struct tad5879bd9b09922b2a273d2a9777067d : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_notification::t> ,
   Pointer
 > {
   using tuple::tuple;
-  te8ad757749fae6294b10eb09007d1f7d(std::tuple<::dessser::gen::alerting_notification::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_notification::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tad5879bd9b09922b2a273d2a9777067d(std::tuple<std::shared_ptr<::dessser::gen::alerting_notification::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_notification::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(te8ad757749fae6294b10eb09007d1f7d const &a, te8ad757749fae6294b10eb09007d1f7d const &b) {
+inline bool operator==(tad5879bd9b09922b2a273d2a9777067d const &a, tad5879bd9b09922b2a273d2a9777067d const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(te8ad757749fae6294b10eb09007d1f7d const &a, te8ad757749fae6294b10eb09007d1f7d const &b) {
+inline bool operator!=(tad5879bd9b09922b2a273d2a9777067d const &a, tad5879bd9b09922b2a273d2a9777067d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, te8ad757749fae6294b10eb09007d1f7d const &t) {
+inline std::ostream &operator<<(std::ostream &os, tad5879bd9b09922b2a273d2a9777067d const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -101,10 +102,10 @@ inline std::ostream &operator<<(std::ostream &os, te8ad757749fae6294b10eb09007d1
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::alerting_notification::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::alerting_notification::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_notification::te8ad757749fae6294b10eb09007d1f7d(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_notification::tad5879bd9b09922b2a273d2a9777067d(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

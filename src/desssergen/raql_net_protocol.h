@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_net_protocol
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -47,21 +48,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t836e37d51e6f62fde58e17756aec5ede : public std::tuple<
-  ::dessser::gen::raql_net_protocol::t*,
+struct tf47c5e4ed9a1c0c5574835152b1a472e : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t836e37d51e6f62fde58e17756aec5ede(std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_net_protocol::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tf47c5e4ed9a1c0c5574835152b1a472e(std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+inline bool operator==(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t836e37d51e6f62fde58e17756aec5ede const &a, t836e37d51e6f62fde58e17756aec5ede const &b) {
+inline bool operator!=(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t836e37d51e6f62fde58e17756aec5ede const &t) {
+inline std::ostream &operator<<(std::ostream &os, tf47c5e4ed9a1c0c5574835152b1a472e const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -72,10 +73,10 @@ inline std::ostream &operator<<(std::ostream &os, t836e37d51e6f62fde58e17756aec5
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_net_protocol::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_net_protocol::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_net_protocol::t836e37d51e6f62fde58e17756aec5ede(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_net_protocol::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

@@ -44,7 +44,7 @@ std::shared_ptr<dessser::gen::sync_value::t const> KChoice::getValue() const
 }
 
 bool KChoice::setValue(
-  std::optional<dessser::gen::sync_key::t const> const &k,
+  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   for (unsigned i = 0; i < choices.size(); i ++) {

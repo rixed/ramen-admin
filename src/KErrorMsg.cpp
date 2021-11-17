@@ -23,11 +23,11 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
-        setValueFromStore(change.key, change.kv);
+        setValueFromStore(*change.key, change.kv);
         break;
       case KeyDeleted:
         // Our error key is deleted as part of server timeouting us:
-        warnTimeout(change.key, change.kv);
+        warnTimeout(*change.key, change.kv);
         break;
       default:
         break;

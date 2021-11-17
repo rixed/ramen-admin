@@ -2,6 +2,7 @@
 #define DESSSER_GEN_alerting_delivery_status
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -59,21 +60,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tec8dd05d08a833eba987e623943a6c52 : public std::tuple<
-  ::dessser::gen::alerting_delivery_status::t*,
+struct tef7a86fb4151f002e287c72985f042cf : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tec8dd05d08a833eba987e623943a6c52(std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_delivery_status::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tef7a86fb4151f002e287c72985f042cf(std::tuple<std::shared_ptr<::dessser::gen::alerting_delivery_status::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_delivery_status::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+inline bool operator==(tef7a86fb4151f002e287c72985f042cf const &a, tef7a86fb4151f002e287c72985f042cf const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tec8dd05d08a833eba987e623943a6c52 const &a, tec8dd05d08a833eba987e623943a6c52 const &b) {
+inline bool operator!=(tef7a86fb4151f002e287c72985f042cf const &a, tef7a86fb4151f002e287c72985f042cf const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tec8dd05d08a833eba987e623943a6c52 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tef7a86fb4151f002e287c72985f042cf const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -84,10 +85,10 @@ inline std::ostream &operator<<(std::ostream &os, tec8dd05d08a833eba987e623943a6
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::alerting_delivery_status::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::alerting_delivery_status::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_delivery_status::tec8dd05d08a833eba987e623943a6c52(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

@@ -41,10 +41,10 @@ void NamesTree::onChange(QList<ConfChange> const &changes)
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
-        updateNames(change.key, change.kv);
+        updateNames(*change.key, change.kv);
         break;
       case KeyDeleted:
-        deleteNames(change.key, change.kv);
+        deleteNames(*change.key, change.kv);
         break;
       default:
         break;
@@ -91,7 +91,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
     return;
   }
   std::shared_ptr<dessser::gen::worker::t const> worker {
-    kv.val, std::get<dessser::gen::sync_value::Worker>(*kv.val) };
+    std::get<dessser::gen::sync_value::Worker>(*kv.val) };
 
   if (worker->role.index() != dessser::gen::worker::Whole) return;
 
@@ -135,12 +135,14 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
   std::shared_ptr<dessser::gen::source_info::t const> sourceInfos;
 
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(infoKey);
+  auto it =
+    kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
+      &infoKey, /* No del */[](dessser::gen::sync_key::t const *){}));
   if (it != kvs->map.end()) {
     std::shared_ptr<dessser::gen::sync_value::t const> v { it->second.val };
     if (v->index() == dessser::gen::sync_value::SourceInfo) [[likely]] {
       sourceInfos = std::shared_ptr<dessser::gen::source_info::t const>(
-                      v, std::get<dessser::gen::sync_value::SourceInfo>(*v));
+                      std::get<dessser::gen::sync_value::SourceInfo>(*v));
     } else {
       qCritical() << "Not a SourceInfo!?";
     }
@@ -160,22 +162,21 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
   }
 
   std::shared_ptr<dessser::gen::source_info::compiled_program> compiled {
-    sourceInfos, std::get<dessser::gen::source_info::Compiled>(sourceInfos->detail) };
+    std::get<dessser::gen::source_info::Compiled>(sourceInfos->detail) };
 
   /* In the sourceInfos all functions of that program could be found, but for
    * simplicity let's add only the one we came for: */
-  for (dessser::gen::source_info::compiled_func const *info : compiled->funcs) {
+  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> info : compiled->funcs) {
     if (info->name != function_name) continue;
 
-    dessser::gen::raql_type::t const &out_record { *info->out_record };
-    unsigned const num_cols { numColumns(out_record) };
+    unsigned const num_cols { numColumns(*info->out_record) };
     /* FIXME: Each column could have subcolumns and all should be inserted
      * hierarchically. */
     /* Some type info for the field (stored in the model as UserType+... would
      * come handy, for instance to determine if a field is numeric, or a
      * factor, etc */
     for (unsigned i = 0; i < num_cols; i++) {
-      QString const col { QString::fromStdString(columnName(out_record, i)) };
+      QString const col { QString::fromStdString(columnName(*info->out_record, i)) };
       QStringList names(col);
       (void)findOrCreate(func, names, names.last());
     }

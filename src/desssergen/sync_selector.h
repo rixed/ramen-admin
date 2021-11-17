@@ -2,6 +2,7 @@
 #define DESSSER_GEN_sync_selector
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>

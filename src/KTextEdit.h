@@ -23,7 +23,7 @@ public:
 
 public slots:
   bool setValue(
-    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 

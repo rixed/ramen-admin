@@ -2,6 +2,7 @@
 #define DESSSER_GEN_sync_value
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -80,7 +81,7 @@ struct t : public std::variant<
   dessser::gen::worker::t_ext, // Worker
   dessser::gen::retention::t_ext, // Retention
   dessser::gen::time_range::t_ext, // TimeRange
-  Arr<::dessser::gen::sync_value::tuple*>, // Tuples
+  Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> >, // Tuples
   dessser::gen::raql_value::t_ext, // RamenValue
   Arr<dessser::gen::rc_entry::t_ext>, // TargetConfig
   dessser::gen::source_info::t_ext, // SourceInfo
@@ -176,21 +177,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t750a477200d5d3da6135579fb33c1597 : public std::tuple<
-  ::dessser::gen::sync_value::tuple*,
+struct tc7deda5c4126d63f3447d561e47a978d : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_value::tuple> ,
   Pointer
 > {
   using tuple::tuple;
-  t750a477200d5d3da6135579fb33c1597(std::tuple<::dessser::gen::sync_value::tuple*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_value::tuple*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc7deda5c4126d63f3447d561e47a978d(std::tuple<std::shared_ptr<::dessser::gen::sync_value::tuple> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_value::tuple> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t750a477200d5d3da6135579fb33c1597 const &a, t750a477200d5d3da6135579fb33c1597 const &b) {
+inline bool operator==(tc7deda5c4126d63f3447d561e47a978d const &a, tc7deda5c4126d63f3447d561e47a978d const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t750a477200d5d3da6135579fb33c1597 const &a, t750a477200d5d3da6135579fb33c1597 const &b) {
+inline bool operator!=(tc7deda5c4126d63f3447d561e47a978d const &a, tc7deda5c4126d63f3447d561e47a978d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t750a477200d5d3da6135579fb33c1597 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tc7deda5c4126d63f3447d561e47a978d const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -198,21 +199,21 @@ inline std::ostream &operator<<(std::ostream &os, t750a477200d5d3da6135579fb33c1
   return os;
 }
 
-struct tda69ebe48ca6c803b31d09dc9d524987 : public std::tuple<
-  ::dessser::gen::sync_value::t*,
+struct tf9a721d48bd2d16691e9ebbb086e28c7 : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_value::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tda69ebe48ca6c803b31d09dc9d524987(std::tuple<::dessser::gen::sync_value::t*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_value::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tf9a721d48bd2d16691e9ebbb086e28c7(std::tuple<std::shared_ptr<::dessser::gen::sync_value::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_value::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tda69ebe48ca6c803b31d09dc9d524987 const &a, tda69ebe48ca6c803b31d09dc9d524987 const &b) {
+inline bool operator==(tf9a721d48bd2d16691e9ebbb086e28c7 const &a, tf9a721d48bd2d16691e9ebbb086e28c7 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tda69ebe48ca6c803b31d09dc9d524987 const &a, tda69ebe48ca6c803b31d09dc9d524987 const &b) {
+inline bool operator!=(tf9a721d48bd2d16691e9ebbb086e28c7 const &a, tf9a721d48bd2d16691e9ebbb086e28c7 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tda69ebe48ca6c803b31d09dc9d524987 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tf9a721d48bd2d16691e9ebbb086e28c7 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -223,13 +224,13 @@ inline std::ostream &operator<<(std::ostream &os, tda69ebe48ca6c803b31d09dc9d524
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::sync_value::tuple*,Pointer)> tuple_to_row_binary;
-extern std::function<Pointer(::dessser::gen::sync_value::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::sync_value::tuple*)> tuple_sersize_of_row_binary;
-extern std::function<Size(::dessser::gen::sync_value::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_value::t750a477200d5d3da6135579fb33c1597(Pointer)> tuple_of_row_binary;
-extern std::function<::dessser::gen::sync_value::tda69ebe48ca6c803b31d09dc9d524987(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> tuple_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_value::tc7deda5c4126d63f3447d561e47a978d(Pointer)> tuple_of_row_binary;
+extern std::function<::dessser::gen::sync_value::tf9a721d48bd2d16691e9ebbb086e28c7(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

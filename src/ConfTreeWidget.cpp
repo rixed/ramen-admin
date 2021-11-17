@@ -168,7 +168,7 @@ static QStringList treeNamesOfTailsKey(dessser::gen::sync_key::t const &k)
   std::string const &site_name { std::get<0>(tails) };
   std::string const &fq_name { std::get<1>(tails) };
   std::string const &instance { std::get<2>(tails) };
-  auto const *subscriber_data { std::get<3>(tails) };
+  std::shared_ptr<per_tail const> subscriber_data { std::get<3>(tails) };
   QStringList ret {
     QStringList("Tails")
       << QString::fromStdString(site_name)
@@ -382,7 +382,7 @@ static bool isASubscriber(dessser::gen::sync_key::t const &key)
 {
   if (key.index() != dessser::gen::sync_key::Tails) return false;
   auto const &tail { std::get<dessser::gen::sync_key::Tails>(key) };
-  auto const *per_tail { std::get<3>(tail) };
+  std::shared_ptr<dessser::gen::sync_key::per_tail const> per_tail { std::get<3>(tail) };
   return per_tail->index() == dessser::gen::sync_key::Subscriber;
 }
 
@@ -397,20 +397,20 @@ static bool betterSkipKey(dessser::gen::sync_key::t const &key)
 
 // Slot to propagates editor valueChanged into the item emitDatachanged
 void ConfTreeWidget::editedValueChangedFromStore(
-  dessser::gen::sync_key::t const &key,
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
   KValue const &kv)
 {
-  if (betterSkipKey(key)) return;
+  if (betterSkipKey(*key)) return;
 
   editedValueChanged(key, kv.val);
 }
 
 void ConfTreeWidget::editedValueChanged(
-  std::optional<dessser::gen::sync_key::t const> const &key,
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
   std::shared_ptr<dessser::gen::sync_value::t const>)
 {
   Q_ASSERT(key);
-  ConfTreeItem *item { itemOfKey(*key) };
+  ConfTreeItem *item { itemOfKey(key) };
   if (item) {
     item->emitDataChanged();
     /* The view will then ask for its data again, and those will be fetched
@@ -419,35 +419,41 @@ void ConfTreeWidget::editedValueChanged(
   }
 }
 
-void ConfTreeWidget::deleteItem(dessser::gen::sync_key::t const &key, KValue const &)
+void ConfTreeWidget::deleteItem(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
-  if (betterSkipKey(key)) return;
+  if (betterSkipKey(*key)) return;
 
   /* Note: No need to emitDataChanged on the parent
    * Note2: QTreeWidgetItem objects are not QObject so delete for real: */
   delete itemOfKey(key);
 }
 
-void ConfTreeWidget::deleteClicked(dessser::gen::sync_key::t const &key)
+void ConfTreeWidget::deleteClicked(
+  std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
+  assert(key);
   QMessageBox msg;
   msg.setText(tr("Are you sure?"));
   msg.setInformativeText(
     tr("Key %1 will be lost forever, there is no undo")
-      .arg(syncKeyToQString(key)));
+      .arg(syncKeyToQString(*key)));
   msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
   msg.setDefaultButton(QMessageBox::Cancel);
   msg.setIcon(QMessageBox::Warning);
-  if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(&key);
+  if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(key);
 }
 
-void ConfTreeWidget::openEditorWindow(dessser::gen::sync_key::t const &key)
+void ConfTreeWidget::openEditorWindow(
+  std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
   QDialog *editor = new ConfTreeEditorDialog(key);
   editor->show();
 }
 
-QWidget *ConfTreeWidget::actionWidget(dessser::gen::sync_key::t const &key, bool canWrite, bool canDel)
+QWidget *ConfTreeWidget::actionWidget(
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
+  bool canWrite, bool canDel)
 {
   // The widget for the "Actions" column:
   QWidget *widget = new QWidget;
@@ -493,7 +499,11 @@ QWidget *ConfTreeWidget::fillerWidget()
  * and return the leaf one.
  * Will not create it if kv is null. */
 void ConfTreeWidget::createItemByNames(
-  QStringList &names, dessser::gen::sync_key::t const &key, KValue const &kv, ConfTreeItem *parent, bool topLevel)
+  QStringList &names,
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
+  KValue const &kv,
+  ConfTreeItem *parent,
+  bool topLevel)
 {
   int const len = names.count();
   assert(len >= 1);
@@ -511,7 +521,7 @@ void ConfTreeWidget::createItemByNames(
   item =
     1 == len ?
       new ConfTreeItem(key, name, parent, nullptr) : // TODO: sort
-      new ConfTreeItem(std::nullopt, name, parent, nullptr); // TODO: sort
+      new ConfTreeItem(nullptr, name, parent, nullptr); // TODO: sort
 
   if (! item) return;
 
@@ -539,19 +549,20 @@ void ConfTreeWidget::createItemByNames(
   }
 }
 
-void ConfTreeWidget::createItem(dessser::gen::sync_key::t const &key, KValue const &kv)
+void ConfTreeWidget::createItem(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv)
 {
-  if (betterSkipKey(key)) return;
+  if (betterSkipKey(*key)) return;
 
   if (verbose)
-    qDebug() << "ConfTreeWidget: createItem for key" << key;
+    qDebug() << "ConfTreeWidget: createItem for key" << *key;
 
   /* We have a new key.
    * Add it to the tree and connect any value change for that value to a
    * slot that will retrieve the item and call it's emitDataChanged function
    * (which will itself call the underlying model to signal a change).
    */
-  QStringList names { treeNamesOfSyncKey(key) };
+  QStringList names { treeNamesOfSyncKey(*key) };
   createItemByNames(names, key, kv, nullptr, true);
 }
 
@@ -564,15 +575,16 @@ void ConfTreeWidget::activateItem(QTreeWidgetItem *item_, int)
   }
 
   if (item->key) {
-    openEditorWindow(*item->key);
+    openEditorWindow(item->key);
   } else {
     item->setExpanded(! item->isExpanded());
   }
 }
 
-ConfTreeItem *ConfTreeWidget::itemOfKey(dessser::gen::sync_key::t const &key)
+ConfTreeItem *ConfTreeWidget::itemOfKey(
+  std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
-  QStringList names { treeNamesOfSyncKey(key) };
+  QStringList names { treeNamesOfSyncKey(*key) };
   return findItemByNames(names);
 }
 

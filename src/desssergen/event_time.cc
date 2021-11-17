@@ -65,18 +65,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tfe74fe03fd74a982eabab7a43795b12a : public std::tuple<
-  ::dessser::gen::event_time::t*,
+struct tbfec2f2c14f43ba5c6cd1570da6c1d48 : public std::tuple<
+  std::shared_ptr<::dessser::gen::event_time::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tfe74fe03fd74a982eabab7a43795b12a(std::tuple<::dessser::gen::event_time::t*, Pointer> p)
-    : std::tuple<::dessser::gen::event_time::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tbfec2f2c14f43ba5c6cd1570da6c1d48(std::tuple<std::shared_ptr<::dessser::gen::event_time::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::event_time::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tfe74fe03fd74a982eabab7a43795b12a const &a, tfe74fe03fd74a982eabab7a43795b12a const &b) {
+inline bool operator==(tbfec2f2c14f43ba5c6cd1570da6c1d48 const &a, tbfec2f2c14f43ba5c6cd1570da6c1d48 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tfe74fe03fd74a982eabab7a43795b12a const &a, tfe74fe03fd74a982eabab7a43795b12a const &b) {
+inline bool operator!=(tbfec2f2c14f43ba5c6cd1570da6c1d48 const &a, tbfec2f2c14f43ba5c6cd1570da6c1d48 const &b) {
   return !operator==(a, b);
 }
 struct tb15987033570e012d9c84230b99c5f27 : public std::tuple<
@@ -146,9 +146,9 @@ inline bool operator!=(tf568409f41c9c0a265f7302110fc9084 const &a, tf568409f41c9
             (if (eq (u16 1) (label-of (get-item 1 (param 0)))) (apply (ext-identifier event_time_field to-row-binary) (get-alt "DurationField" (get-item 1 (param 0))) (identifier "ssum_dst_91"))
               (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 2))) (apply (ext-identifier event_time_field to-row-binary) (get-alt "StopField" (get-item 1 (param 0))) (identifier "ssum_dst_91"))))))))
  */
-static std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> fun0 { [&fun0](::dessser::gen::event_time::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::event_time::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::event_time_field::to_row_binary };
     dessser::gen::event_time_field::t_ext id_2 { std::get<0>((*p_0)) };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -208,7 +208,7 @@ static std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_bin
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("($event_time_field; [DurationConst FLOAT | DurationField $event_time_field | StopField $event_time_field])")
@@ -217,9 +217,9 @@ std::function<Pointer(::dessser::gen::event_time::t*,Pointer)> to_row_binary(to_
           (if (eq (u16 1) (label-of (get-item 1 (param 0)))) (add (add (identifier "sz_87") (size 2)) (apply (ext-identifier event_time_field sersize-of-row-binary) (get-alt "DurationField" (get-item 1 (param 0)))))
             (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 2))) (add (add (identifier "sz_87") (size 2)) (apply (ext-identifier event_time_field sersize-of-row-binary) (get-alt "StopField" (get-item 1 (param 0))))))))))
  */
-static std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::event_time::t*)> fun36 { [&fun36](::dessser::gen::event_time::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> fun36 { [&fun36](std::shared_ptr<::dessser::gen::event_time::t>  p_0) {
     auto fun37 { dessser::gen::event_time_field::sersize_of_row_binary };
     dessser::gen::event_time_field::t_ext id_38 { std::get<0>((*p_0)) };
     Size id_39 { fun37(id_38) };
@@ -277,7 +277,7 @@ static std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary
    };
   return fun36;
 }
-std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -297,15 +297,15 @@ std::function<Size(::dessser::gen::event_time::t*)> sersize_of_row_binary(sersiz
                         (make-tup (construct "[DurationConst FLOAT | DurationField $event_time_field | StopField $event_time_field]" 2 (identifier "dsum2_fst_69")) (identifier "dsum2_snd_70"))))))))
             (make-tup (make-tup (identifier "dtup_fst_57") (identifier "dtup_fst_81")) (identifier "dtup_snd_82"))))))
  */
-static std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a(Pointer)> fun74 { [&fun74](Pointer p_0) {
+  std::function<::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48(Pointer)> fun74 { [&fun74](Pointer p_0) {
     auto fun75 { dessser::gen::event_time_field::of_row_binary };
     ::dessser::gen::event_time::tb15987033570e012d9c84230b99c5f27 id_76 { fun75(p_0) };
-    ::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a let_res_77;
+    ::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48 let_res_77;
     {
       ::dessser::gen::event_time::tb15987033570e012d9c84230b99c5f27 dtup_56 { id_76 };
-      ::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a letpair_res_78;
+      ::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48 letpair_res_78;
       {
         auto dtup_fst_57 { std::get<0>(dtup_56) };
         auto dtup_snd_58 { std::get<1>(dtup_56) };
@@ -378,12 +378,12 @@ static std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b1
           }
           let_res_82 = letpair_res_83;
         }
-        ::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a letpair_res_108;
+        ::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48 letpair_res_108;
         {
           auto dtup_fst_81 { std::get<0>(let_res_82) };
           auto dtup_snd_82 { std::get<1>(let_res_82) };
-          ::dessser::gen::event_time::t* id_109 { new ::dessser::gen::event_time::t(dtup_fst_57, dtup_fst_81) };
-          ::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a id_110 { id_109, dtup_snd_82 };
+          std::shared_ptr<::dessser::gen::event_time::t>  id_109 { std::make_shared<::dessser::gen::event_time::t>(dtup_fst_57, dtup_fst_81) };
+          ::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48 id_110 { id_109, dtup_snd_82 };
           letpair_res_108 = id_110;
         }
         letpair_res_78 = letpair_res_108;
@@ -395,9 +395,9 @@ static std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b1
    };
   return fun74;
 }
-std::function<::dessser::gen::event_time::tfe74fe03fd74a982eabab7a43795b12a(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d48(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_top_output
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -47,21 +48,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t7a394582306d7b8adb1704330d06a58e : public std::tuple<
-  ::dessser::gen::raql_top_output::t*,
+struct t56749a956933ce485fc8f8a29d7c3f4b : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_top_output::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t7a394582306d7b8adb1704330d06a58e(std::tuple<::dessser::gen::raql_top_output::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_top_output::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t56749a956933ce485fc8f8a29d7c3f4b(std::tuple<std::shared_ptr<::dessser::gen::raql_top_output::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_top_output::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7a394582306d7b8adb1704330d06a58e const &a, t7a394582306d7b8adb1704330d06a58e const &b) {
+inline bool operator==(t56749a956933ce485fc8f8a29d7c3f4b const &a, t56749a956933ce485fc8f8a29d7c3f4b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t7a394582306d7b8adb1704330d06a58e const &a, t7a394582306d7b8adb1704330d06a58e const &b) {
+inline bool operator!=(t56749a956933ce485fc8f8a29d7c3f4b const &a, t56749a956933ce485fc8f8a29d7c3f4b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7a394582306d7b8adb1704330d06a58e const &t) {
+inline std::ostream &operator<<(std::ostream &os, t56749a956933ce485fc8f8a29d7c3f4b const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -72,10 +73,10 @@ inline std::ostream &operator<<(std::ostream &os, t7a394582306d7b8adb1704330d06a
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_top_output::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_top_output::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_top_output::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_top_output::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

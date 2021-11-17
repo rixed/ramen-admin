@@ -2,6 +2,7 @@
 #define DESSSER_GEN_sync_key
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -49,7 +50,7 @@ inline bool operator!=(per_dash_key const &a, per_dash_key const &b) {
 }
 struct per_client : public std::variant<
   std::string, // Response
-  ::dessser::gen::sync_key::per_dash_key* // Scratchpad
+  std::shared_ptr<::dessser::gen::sync_key::per_dash_key>  // Scratchpad
 > { using variant::variant; };
 
 enum Constr_per_client {
@@ -471,21 +472,21 @@ inline bool operator==(t1fb80ba5a0eef0b970838ab3e8e6bce4 const &a, t1fb80ba5a0ee
 inline bool operator!=(t1fb80ba5a0eef0b970838ab3e8e6bce4 const &a, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &b) {
   return !operator==(a, b);
 }
-struct t1fe1711acd7cd3c8e5ef24184b852848 : public std::tuple<
+struct te552b116666bdac4ad5a96694c71efca : public std::tuple<
   dessser::gen::site_name::t_ext,
   dessser::gen::fq_name::t_ext,
   std::string,
-  ::dessser::gen::sync_key::per_tail*
+  std::shared_ptr<::dessser::gen::sync_key::per_tail> 
 > {
   using tuple::tuple;
 };
-inline bool operator==(t1fe1711acd7cd3c8e5ef24184b852848 const &a, t1fe1711acd7cd3c8e5ef24184b852848 const &b) {
+inline bool operator==(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
   return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && std::get<3>(a) == std::get<3>(b);
 }
-inline bool operator!=(t1fe1711acd7cd3c8e5ef24184b852848 const &a, t1fe1711acd7cd3c8e5ef24184b852848 const &b) {
+inline bool operator!=(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t1fe1711acd7cd3c8e5ef24184b852848 const &t) {
+inline std::ostream &operator<<(std::ostream &os, te552b116666bdac4ad5a96694c71efca const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t) << ", "
@@ -495,21 +496,21 @@ inline std::ostream &operator<<(std::ostream &os, t1fe1711acd7cd3c8e5ef24184b852
   return os;
 }
 
-struct t3f175f4a6fba6fdb7dfcec615c7c9650 : public std::tuple<
+struct t4ce2d4679665698c8b564907b52837ef : public std::tuple<
   dessser::gen::sync_socket::t_ext,
-  ::dessser::gen::sync_key::per_client*
+  std::shared_ptr<::dessser::gen::sync_key::per_client> 
 > {
   using tuple::tuple;
-  t3f175f4a6fba6fdb7dfcec615c7c9650(std::tuple<dessser::gen::sync_socket::t_ext, ::dessser::gen::sync_key::per_client*> p)
-    : std::tuple<dessser::gen::sync_socket::t_ext, ::dessser::gen::sync_key::per_client*>(std::get<0>(p), std::get<1>(p)) {}
+  t4ce2d4679665698c8b564907b52837ef(std::tuple<dessser::gen::sync_socket::t_ext, std::shared_ptr<::dessser::gen::sync_key::per_client> > p)
+    : std::tuple<dessser::gen::sync_socket::t_ext, std::shared_ptr<::dessser::gen::sync_key::per_client> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t3f175f4a6fba6fdb7dfcec615c7c9650 const &a, t3f175f4a6fba6fdb7dfcec615c7c9650 const &b) {
+inline bool operator==(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
   return ::dessser::gen::sync_socket::Deref(std::get<0>(a)) == ::dessser::gen::sync_socket::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t3f175f4a6fba6fdb7dfcec615c7c9650 const &a, t3f175f4a6fba6fdb7dfcec615c7c9650 const &b) {
+inline bool operator!=(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t3f175f4a6fba6fdb7dfcec615c7c9650 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t4ce2d4679665698c8b564907b52837ef const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -521,21 +522,21 @@ struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct ta2544ee31f0dcf915e9425cc06777d2f : public std::tuple<
+struct t86de2f73c647a4a64e778895c97184da : public std::tuple<
   std::string,
-  per_dash_key*
+  std::shared_ptr<per_dash_key> 
 > {
   using tuple::tuple;
-  ta2544ee31f0dcf915e9425cc06777d2f(std::tuple<std::string, per_dash_key*> p)
-    : std::tuple<std::string, per_dash_key*>(std::get<0>(p), std::get<1>(p)) {}
+  t86de2f73c647a4a64e778895c97184da(std::tuple<std::string, std::shared_ptr<per_dash_key> > p)
+    : std::tuple<std::string, std::shared_ptr<per_dash_key> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(ta2544ee31f0dcf915e9425cc06777d2f const &a, ta2544ee31f0dcf915e9425cc06777d2f const &b) {
+inline bool operator==(t86de2f73c647a4a64e778895c97184da const &a, t86de2f73c647a4a64e778895c97184da const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(ta2544ee31f0dcf915e9425cc06777d2f const &a, ta2544ee31f0dcf915e9425cc06777d2f const &b) {
+inline bool operator!=(t86de2f73c647a4a64e778895c97184da const &a, t86de2f73c647a4a64e778895c97184da const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta2544ee31f0dcf915e9425cc06777d2f const &t) {
+inline std::ostream &operator<<(std::ostream &os, t86de2f73c647a4a64e778895c97184da const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t)
@@ -766,12 +767,12 @@ struct t : public std::variant<
   Void, // TargetConfig
   ::dessser::gen::sync_key::t64d8d40f333c531e9d48c05b8ceb4cfa, // PerSite
   ::dessser::gen::sync_key::t1fb80ba5a0eef0b970838ab3e8e6bce4, // Storage
-  ::dessser::gen::sync_key::t1fe1711acd7cd3c8e5ef24184b852848, // Tails
+  ::dessser::gen::sync_key::te552b116666bdac4ad5a96694c71efca, // Tails
   uint16_t, // Replays
   std::optional<dessser::gen::sync_socket::t_ext>, // Error
   Void, // ReplayRequests
-  ::dessser::gen::sync_key::t3f175f4a6fba6fdb7dfcec615c7c9650, // PerClient
-  ::dessser::gen::sync_key::ta2544ee31f0dcf915e9425cc06777d2f, // Dashboards
+  ::dessser::gen::sync_key::t4ce2d4679665698c8b564907b52837ef, // PerClient
+  ::dessser::gen::sync_key::t86de2f73c647a4a64e778895c97184da, // Dashboards
   Void, // Notifications
   ::dessser::gen::sync_key::t2ca7e384e93254d786048eef2705adff, // Teams
   ::dessser::gen::sync_key::t9ec4790c9e9e464ee01331cfcf67af68 // Incidents
@@ -847,21 +848,21 @@ struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct tcce73bde988985bdd0bca77372a40274 : public std::tuple<
-  ::dessser::gen::sync_key::per_dash_key*,
+struct t35aec9ecfaa6df3f20c35d464145bd4c : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_key::per_dash_key> ,
   Pointer
 > {
   using tuple::tuple;
-  tcce73bde988985bdd0bca77372a40274(std::tuple<::dessser::gen::sync_key::per_dash_key*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::per_dash_key*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t35aec9ecfaa6df3f20c35d464145bd4c(std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_dash_key> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_dash_key> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tcce73bde988985bdd0bca77372a40274 const &a, tcce73bde988985bdd0bca77372a40274 const &b) {
+inline bool operator==(t35aec9ecfaa6df3f20c35d464145bd4c const &a, t35aec9ecfaa6df3f20c35d464145bd4c const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tcce73bde988985bdd0bca77372a40274 const &a, tcce73bde988985bdd0bca77372a40274 const &b) {
+inline bool operator!=(t35aec9ecfaa6df3f20c35d464145bd4c const &a, t35aec9ecfaa6df3f20c35d464145bd4c const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tcce73bde988985bdd0bca77372a40274 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t35aec9ecfaa6df3f20c35d464145bd4c const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -869,21 +870,21 @@ inline std::ostream &operator<<(std::ostream &os, tcce73bde988985bdd0bca77372a40
   return os;
 }
 
-struct ta604b376a0844fde5b1ddf9a5c29cb43 : public std::tuple<
-  ::dessser::gen::sync_key::per_client*,
+struct t046563c971c0fcc6bcd022e88904aea9 : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_key::per_client> ,
   Pointer
 > {
   using tuple::tuple;
-  ta604b376a0844fde5b1ddf9a5c29cb43(std::tuple<::dessser::gen::sync_key::per_client*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::per_client*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t046563c971c0fcc6bcd022e88904aea9(std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_client> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_client> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(ta604b376a0844fde5b1ddf9a5c29cb43 const &a, ta604b376a0844fde5b1ddf9a5c29cb43 const &b) {
+inline bool operator==(t046563c971c0fcc6bcd022e88904aea9 const &a, t046563c971c0fcc6bcd022e88904aea9 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(ta604b376a0844fde5b1ddf9a5c29cb43 const &a, ta604b376a0844fde5b1ddf9a5c29cb43 const &b) {
+inline bool operator!=(t046563c971c0fcc6bcd022e88904aea9 const &a, t046563c971c0fcc6bcd022e88904aea9 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta604b376a0844fde5b1ddf9a5c29cb43 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t046563c971c0fcc6bcd022e88904aea9 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -891,21 +892,21 @@ inline std::ostream &operator<<(std::ostream &os, ta604b376a0844fde5b1ddf9a5c29c
   return os;
 }
 
-struct t5f750ede44b214b8c8c8313f068ccc23 : public std::tuple<
-  ::dessser::gen::sync_key::per_tail*,
+struct t4521c7ac16d3ba391c05353ff307ec6d : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_key::per_tail> ,
   Pointer
 > {
   using tuple::tuple;
-  t5f750ede44b214b8c8c8313f068ccc23(std::tuple<::dessser::gen::sync_key::per_tail*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::per_tail*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t4521c7ac16d3ba391c05353ff307ec6d(std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_tail> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_key::per_tail> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t5f750ede44b214b8c8c8313f068ccc23 const &a, t5f750ede44b214b8c8c8313f068ccc23 const &b) {
+inline bool operator==(t4521c7ac16d3ba391c05353ff307ec6d const &a, t4521c7ac16d3ba391c05353ff307ec6d const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t5f750ede44b214b8c8c8313f068ccc23 const &a, t5f750ede44b214b8c8c8313f068ccc23 const &b) {
+inline bool operator!=(t4521c7ac16d3ba391c05353ff307ec6d const &a, t4521c7ac16d3ba391c05353ff307ec6d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t5f750ede44b214b8c8c8313f068ccc23 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t4521c7ac16d3ba391c05353ff307ec6d const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -917,21 +918,21 @@ struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct t2448b9260b09dfe70925659af56825d4 : public std::tuple<
-  ::dessser::gen::sync_key::t*,
+struct t88648ce03c3e83f4daca25557f77454f : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_key::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t2448b9260b09dfe70925659af56825d4(std::tuple<::dessser::gen::sync_key::t*, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t88648ce03c3e83f4daca25557f77454f(std::tuple<std::shared_ptr<::dessser::gen::sync_key::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_key::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t2448b9260b09dfe70925659af56825d4 const &a, t2448b9260b09dfe70925659af56825d4 const &b) {
+inline bool operator==(t88648ce03c3e83f4daca25557f77454f const &a, t88648ce03c3e83f4daca25557f77454f const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t2448b9260b09dfe70925659af56825d4 const &a, t2448b9260b09dfe70925659af56825d4 const &b) {
+inline bool operator!=(t88648ce03c3e83f4daca25557f77454f const &a, t88648ce03c3e83f4daca25557f77454f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t2448b9260b09dfe70925659af56825d4 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t88648ce03c3e83f4daca25557f77454f const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -942,19 +943,19 @@ inline std::ostream &operator<<(std::ostream &os, t2448b9260b09dfe70925659af5682
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::sync_key::per_dash_key*,Pointer)> per_dash_key_to_row_binary;
-extern std::function<Pointer(::dessser::gen::sync_key::per_client*,Pointer)> per_client_to_row_binary;
-extern std::function<Pointer(::dessser::gen::sync_key::per_tail*,Pointer)> per_tail_to_row_binary;
-extern std::function<Pointer(::dessser::gen::sync_key::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::sync_key::per_dash_key*)> per_dash_key_sersize_of_row_binary;
-extern std::function<Size(::dessser::gen::sync_key::per_client*)> per_client_sersize_of_row_binary;
-extern std::function<Size(::dessser::gen::sync_key::per_tail*)> per_tail_sersize_of_row_binary;
-extern std::function<Size(::dessser::gen::sync_key::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_key::tcce73bde988985bdd0bca77372a40274(Pointer)> per_dash_key_of_row_binary;
-extern std::function<::dessser::gen::sync_key::ta604b376a0844fde5b1ddf9a5c29cb43(Pointer)> per_client_of_row_binary;
-extern std::function<::dessser::gen::sync_key::t5f750ede44b214b8c8c8313f068ccc23(Pointer)> per_tail_of_row_binary;
-extern std::function<::dessser::gen::sync_key::t2448b9260b09dfe70925659af56825d4(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_dash_key> ,Pointer)> per_dash_key_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_client> ,Pointer)> per_client_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_tail> ,Pointer)> per_tail_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_dash_key> )> per_dash_key_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_client> )> per_client_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_tail> )> per_tail_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_key::t35aec9ecfaa6df3f20c35d464145bd4c(Pointer)> per_dash_key_of_row_binary;
+extern std::function<::dessser::gen::sync_key::t046563c971c0fcc6bcd022e88904aea9(Pointer)> per_client_of_row_binary;
+extern std::function<::dessser::gen::sync_key::t4521c7ac16d3ba391c05353ff307ec6d(Pointer)> per_tail_of_row_binary;
+extern std::function<::dessser::gen::sync_key::t88648ce03c3e83f4daca25557f77454f(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

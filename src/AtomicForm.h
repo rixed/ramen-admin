@@ -7,6 +7,7 @@
 #include <QString>
 
 #include "ConfChange.h"
+#include "KVStore.h"
 
 /* We want to be able to edit a group of values atomically.
  * For this, we need this group of widget to be associated with 3 buttons:
@@ -70,18 +71,24 @@ class AtomicForm : public QWidget
   QMessageBox *confirmCancelDialog, *confirmDeleteDialog;
 
   // The set of all keys currently locked by this user:
-  std::set<dessser::gen::sync_key::t> locked;
+  std::unordered_set<std::shared_ptr<dessser::gen::sync_key::t const>, HashKey, EqualKey>
+    locked;
 
   void doCancel();
   void doSubmit();
   bool someEdited();
 
   // Similar to lockValue, once we already know the key is our:
-  void setOwner(dessser::gen::sync_key::t const &, std::optional<QString> const &);
+  void setOwner(
+    std::shared_ptr<dessser::gen::sync_key::t const>, std::optional<QString> const &);
 
   bool allLocked() const;
-  void lockValue(dessser::gen::sync_key::t const &, KValue const &);
-  void unlockValue(dessser::gen::sync_key::t const &, KValue const &);
+
+  void lockValue(
+    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+
+  void unlockValue(
+    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   QPushButton *editButton, *cancelButton, *deleteButton, *submitButton;
@@ -105,7 +112,7 @@ public:
   bool isEnabled() const;
 
 protected:
-  bool isMyKey(dessser::gen::sync_key::t const &) const;
+  bool isMyKey(std::shared_ptr<dessser::gen::sync_key::t const>) const;
 
 protected slots:
   void removeWidget(QObject *);
@@ -119,8 +126,8 @@ public slots:
   void wantSubmit();
   void setEnabled(bool);
   void changeKey(
-    std::optional<dessser::gen::sync_key::t const> const &oldKey,
-    std::optional<dessser::gen::sync_key::t const> const &newKey);
+    std::shared_ptr<dessser::gen::sync_key::t const> oldKey,
+    std::shared_ptr<dessser::gen::sync_key::t const> newKey);
 
 signals:
   void changeEnabled(bool);

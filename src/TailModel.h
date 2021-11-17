@@ -70,7 +70,7 @@ public:
 
   ~TailModel();
 
-  dessser::gen::sync_key::t subscriberKey() const;
+  std::shared_ptr<dessser::gen::sync_key::t> subscriberKey() const;
 
   int rowCount(QModelIndex const &parent = QModelIndex()) const override;
   int columnCount(QModelIndex const &parent = QModelIndex()) const override;

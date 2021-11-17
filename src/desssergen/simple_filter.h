@@ -2,6 +2,7 @@
 #define DESSSER_GEN_simple_filter
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -37,21 +38,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tf255fe6e5b49b611c7370ea969e9caba : public std::tuple<
-  ::dessser::gen::simple_filter::t*,
+struct td37ebe6eab835faa3db142ce469a93d5 : public std::tuple<
+  std::shared_ptr<::dessser::gen::simple_filter::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tf255fe6e5b49b611c7370ea969e9caba(std::tuple<::dessser::gen::simple_filter::t*, Pointer> p)
-    : std::tuple<::dessser::gen::simple_filter::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  td37ebe6eab835faa3db142ce469a93d5(std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf255fe6e5b49b611c7370ea969e9caba const &a, tf255fe6e5b49b611c7370ea969e9caba const &b) {
+inline bool operator==(td37ebe6eab835faa3db142ce469a93d5 const &a, td37ebe6eab835faa3db142ce469a93d5 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf255fe6e5b49b611c7370ea969e9caba const &a, tf255fe6e5b49b611c7370ea969e9caba const &b) {
+inline bool operator!=(td37ebe6eab835faa3db142ce469a93d5 const &a, td37ebe6eab835faa3db142ce469a93d5 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf255fe6e5b49b611c7370ea969e9caba const &t) {
+inline std::ostream &operator<<(std::ostream &os, td37ebe6eab835faa3db142ce469a93d5 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -62,10 +63,10 @@ inline std::ostream &operator<<(std::ostream &os, tf255fe6e5b49b611c7370ea969e9c
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::simple_filter::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::simple_filter::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::simple_filter::tf255fe6e5b49b611c7370ea969e9caba(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::simple_filter::td37ebe6eab835faa3db142ce469a93d5(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

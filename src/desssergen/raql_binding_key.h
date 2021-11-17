@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_binding_key
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -76,21 +77,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tc07e51d9b9f88bd1eb75ad3990101d02 : public std::tuple<
-  ::dessser::gen::raql_binding_key::t*,
+struct tb153335fc05f1eec6819ab87a88b916a : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_binding_key::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tc07e51d9b9f88bd1eb75ad3990101d02(std::tuple<::dessser::gen::raql_binding_key::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_binding_key::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tb153335fc05f1eec6819ab87a88b916a(std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc07e51d9b9f88bd1eb75ad3990101d02 const &a, tc07e51d9b9f88bd1eb75ad3990101d02 const &b) {
+inline bool operator==(tb153335fc05f1eec6819ab87a88b916a const &a, tb153335fc05f1eec6819ab87a88b916a const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tc07e51d9b9f88bd1eb75ad3990101d02 const &a, tc07e51d9b9f88bd1eb75ad3990101d02 const &b) {
+inline bool operator!=(tb153335fc05f1eec6819ab87a88b916a const &a, tb153335fc05f1eec6819ab87a88b916a const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tc07e51d9b9f88bd1eb75ad3990101d02 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tb153335fc05f1eec6819ab87a88b916a const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -101,10 +102,10 @@ inline std::ostream &operator<<(std::ostream &os, tc07e51d9b9f88bd1eb75ad3990101
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_binding_key::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_binding_key::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_binding_key::tc07e51d9b9f88bd1eb75ad3990101d02(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_binding_key::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_binding_key::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

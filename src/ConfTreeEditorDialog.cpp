@@ -19,7 +19,7 @@
 #include "ConfTreeEditorDialog.h"
 
 ConfTreeEditorDialog::ConfTreeEditorDialog(
-  dessser::gen::sync_key::t const &key_, QWidget *parent)
+  std::shared_ptr<dessser::gen::sync_key::t const> key_, QWidget *parent)
   : QDialog(parent),
     key(key_)
 {
@@ -36,7 +36,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
   /* The header: */
   QFormLayout *headerLayout = new QFormLayout;
-  QLabel *keyName { new QLabel(syncKeyToQString(key)) };
+  QLabel *keyName { new QLabel(syncKeyToQString(*key)) };
   keyName->setWordWrap(true);
   headerLayout->addRow(tr("Key:"), keyName);
   QLabel *setter { new QLabel(kv->uid) };
@@ -50,7 +50,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
     headerLayout->addRow(tr("Expiry:"), expiry);
   }
 
-  editor = newEditorWidget(*kv->val, &key);
+  editor = newEditorWidget(*kv->val, key);
   QDialogButtonBox *buttonBox {
     new QDialogButtonBox(
       can_write ? QDialogButtonBox::Ok | QDialogButtonBox::Cancel :
@@ -70,7 +70,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   /* The editor will start in read-only mode (unless we already own the
    * value). Reception of the lock ack from the confserver will turn it
    * into read-write mode: */
-  if (can_write) Menu::getClient()->sendLock(&key);
+  if (can_write) Menu::getClient()->sendLock(key);
 
   /* Now the layout: */
   QVBoxLayout *mainLayout { new QVBoxLayout };
@@ -92,12 +92,12 @@ void ConfTreeEditorDialog::save()
 {
   std::shared_ptr<dessser::gen::sync_value::t const> v { editor->getValue() };
   ConfClient *client = Menu::getClient();
-  if (v) client->sendSet(&key, v.get()); // read-only editors return no value
-  if (can_write) client->sendUnlock(&key);
+  if (v) client->sendSet(key, v); // read-only editors return no value
+  if (can_write) client->sendUnlock(key);
   emit QDialog::accept();
 }
 
 void ConfTreeEditorDialog::cancel()
 {
-  if (can_write) Menu::getClient()->sendUnlock(&key);
+  if (can_write) Menu::getClient()->sendUnlock(key);
 }

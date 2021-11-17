@@ -74,7 +74,7 @@ bool PastData::merge(
 
   if (verbose)
     qDebug() << qSetRealNumberPrecision(13) << "PastData: Enlarging ReplayRequest"
-             << r.respKey << "to" << r.since << r.until;
+             << *r.respKey << "to" << r.since << r.until;
 
   check();
   return true;

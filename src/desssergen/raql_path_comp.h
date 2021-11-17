@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_path_comp
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -44,21 +45,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t69fcb450dd02dd92e601786a5f958b40 : public std::tuple<
-  ::dessser::gen::raql_path_comp::t*,
+struct t14edb0e8ed5b099e7b0f6eeb360b87b2 : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_path_comp::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t69fcb450dd02dd92e601786a5f958b40(std::tuple<::dessser::gen::raql_path_comp::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_path_comp::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t14edb0e8ed5b099e7b0f6eeb360b87b2(std::tuple<std::shared_ptr<::dessser::gen::raql_path_comp::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_path_comp::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t69fcb450dd02dd92e601786a5f958b40 const &a, t69fcb450dd02dd92e601786a5f958b40 const &b) {
+inline bool operator==(t14edb0e8ed5b099e7b0f6eeb360b87b2 const &a, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t69fcb450dd02dd92e601786a5f958b40 const &a, t69fcb450dd02dd92e601786a5f958b40 const &b) {
+inline bool operator!=(t14edb0e8ed5b099e7b0f6eeb360b87b2 const &a, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t69fcb450dd02dd92e601786a5f958b40 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -69,10 +70,10 @@ inline std::ostream &operator<<(std::ostream &os, t69fcb450dd02dd92e601786a5f958
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_path_comp::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_path_comp::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_path_comp::t69fcb450dd02dd92e601786a5f958b40(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_path_comp::t14edb0e8ed5b099e7b0f6eeb360b87b2(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

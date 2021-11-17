@@ -104,7 +104,7 @@ public:
 
   /* Build a new RCEntry according to current content.
    * Caller takes ownership */
-  std::unique_ptr<dessser::gen::rc_entry::t> getValue() const;
+  std::shared_ptr<dessser::gen::rc_entry::t> getValue() const;
 
   bool programIsEnabled() const { return enabledBox && enabledBox->isChecked(); }
 

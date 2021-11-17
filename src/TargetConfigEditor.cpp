@@ -53,9 +53,7 @@ std::shared_ptr<dessser::gen::sync_value::t const> TargetConfigEditor::getValue(
   for (size_t i = 0; i < rcEntries.size(); i ++) {
     rc.push_back(
       (int)i == currentIndex ?
-        entryEditor->getValue().release() :
-        // Copy the stored value:
-        new dessser::gen::rc_entry::t(rcEntries[i]));
+        entryEditor->getValue() : rcEntries[i]);
   }
 
   return
@@ -97,7 +95,7 @@ void TargetConfigEditor::setEnabled(bool enabled)
 */
 
 bool TargetConfigEditor::setValue(
-  std::optional<dessser::gen::sync_key::t const> const &k,
+  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (v->index() != dessser::gen::sync_value::TargetConfig) {
@@ -118,8 +116,8 @@ bool TargetConfigEditor::setValue(
   while (entrySelector->count() > 0) entrySelector->removeItem(0);
 
   // Copy the RC entries:
-  for (dessser::gen::rc_entry::t const *rce : rc) {
-    rcEntries.push_back(*rce);
+  for (std::shared_ptr<dessser::gen::rc_entry::t> rce : rc) {
+    rcEntries.push_back(rce);
     entrySelector->addItem(QString::fromStdString(rce->program));
   }
 
@@ -128,7 +126,7 @@ bool TargetConfigEditor::setValue(
   if (entrySelector->count() > 0) {
     stackedLayout->setCurrentIndex(entryEditorIdx);
     currentIndex = 0;
-    entryEditor->setValue(rcEntries[currentIndex]);
+    entryEditor->setValue(*rcEntries[currentIndex]);
     entrySelector->setCurrentIndex(currentIndex);
   } else {
     stackedLayout->setCurrentIndex(noSelectionIdx);
@@ -230,7 +228,7 @@ void TargetConfigEditor::changeEntry(int idx)
   if (currentIndex >= 0) {
     /* Save the value from the editor: */
     if (currentIndex < (int)rcEntries.size()) {
-      rcEntries[currentIndex] = *entryEditor->getValue();
+      rcEntries[currentIndex] = entryEditor->getValue();
     } else {
       /* Can happen that currentIndex is right past the end if we deleted
        * the last entry: */
@@ -241,6 +239,6 @@ void TargetConfigEditor::changeEntry(int idx)
   currentIndex = idx;
 
   if (idx >= 0) {
-    entryEditor->setValue(rcEntries[idx]);
+    entryEditor->setValue(*rcEntries[idx]);
   }
 }

@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_value
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -116,21 +117,21 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t283d6c4a825a1e3b55be4835188780e8 : public std::tuple<
+struct t680a68e6f3607e0c45e8eabda3bee607 : public std::tuple<
   std::string,
-  t*
+  std::shared_ptr<t> 
 > {
   using tuple::tuple;
-  t283d6c4a825a1e3b55be4835188780e8(std::tuple<std::string, t*> p)
-    : std::tuple<std::string, t*>(std::get<0>(p), std::get<1>(p)) {}
+  t680a68e6f3607e0c45e8eabda3bee607(std::tuple<std::string, std::shared_ptr<t> > p)
+    : std::tuple<std::string, std::shared_ptr<t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t283d6c4a825a1e3b55be4835188780e8 const &a, t283d6c4a825a1e3b55be4835188780e8 const &b) {
+inline bool operator==(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f3607e0c45e8eabda3bee607 const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t283d6c4a825a1e3b55be4835188780e8 const &a, t283d6c4a825a1e3b55be4835188780e8 const &b) {
+inline bool operator!=(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f3607e0c45e8eabda3bee607 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t283d6c4a825a1e3b55be4835188780e8 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t680a68e6f3607e0c45e8eabda3bee607 const &t) {
   os << '<'
      << std::get<0>(t) << ", "
      << *std::get<1>(t)
@@ -138,21 +139,21 @@ inline std::ostream &operator<<(std::ostream &os, t283d6c4a825a1e3b55be483518878
   return os;
 }
 
-struct t904326184a165aa7b5c8e6ffafa090a8 : public std::tuple<
-  t*,
-  t*
+struct tad36fa23b9d22f496a8fdcdecfae294b : public std::tuple<
+  std::shared_ptr<t> ,
+  std::shared_ptr<t> 
 > {
   using tuple::tuple;
-  t904326184a165aa7b5c8e6ffafa090a8(std::tuple<t*, t*> p)
-    : std::tuple<t*, t*>(std::get<0>(p), std::get<1>(p)) {}
+  tad36fa23b9d22f496a8fdcdecfae294b(std::tuple<std::shared_ptr<t> , std::shared_ptr<t> > p)
+    : std::tuple<std::shared_ptr<t> , std::shared_ptr<t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
+inline bool operator==(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d22f496a8fdcdecfae294b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t904326184a165aa7b5c8e6ffafa090a8 const &a, t904326184a165aa7b5c8e6ffafa090a8 const &b) {
+inline bool operator!=(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d22f496a8fdcdecfae294b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t904326184a165aa7b5c8e6ffafa090a8 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tad36fa23b9d22f496a8fdcdecfae294b const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << *std::get<1>(t)
@@ -192,11 +193,11 @@ struct t : public std::variant<
   ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982, // VCidrv4
   ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86, // VCidrv6
   ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27, // VCidr
-  Arr<t*>, // VTup
-  Arr<t*>, // VVec
-  Arr<t*>, // VLst
-  Arr<::dessser::gen::raql_value::t283d6c4a825a1e3b55be4835188780e8>, // VRec
-  Arr<::dessser::gen::raql_value::t904326184a165aa7b5c8e6ffafa090a8> // VMap
+  Arr<std::shared_ptr<t> >, // VTup
+  Arr<std::shared_ptr<t> >, // VVec
+  Arr<std::shared_ptr<t> >, // VLst
+  Arr<::dessser::gen::raql_value::t680a68e6f3607e0c45e8eabda3bee607>, // VRec
+  Arr<::dessser::gen::raql_value::tad36fa23b9d22f496a8fdcdecfae294b> // VMap
 > { using variant::variant; };
 
 enum Constr_t {
@@ -333,21 +334,21 @@ struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct ta6d704ca45a3aca7e9aa07ee44b553ac : public std::tuple<
-  ::dessser::gen::raql_value::t*,
+struct t2192dc426e477a22ba201bc3a0e4295b : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_value::t> ,
   Pointer
 > {
   using tuple::tuple;
-  ta6d704ca45a3aca7e9aa07ee44b553ac(std::tuple<::dessser::gen::raql_value::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_value::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t2192dc426e477a22ba201bc3a0e4295b(std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(ta6d704ca45a3aca7e9aa07ee44b553ac const &a, ta6d704ca45a3aca7e9aa07ee44b553ac const &b) {
+inline bool operator==(t2192dc426e477a22ba201bc3a0e4295b const &a, t2192dc426e477a22ba201bc3a0e4295b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(ta6d704ca45a3aca7e9aa07ee44b553ac const &a, ta6d704ca45a3aca7e9aa07ee44b553ac const &b) {
+inline bool operator!=(t2192dc426e477a22ba201bc3a0e4295b const &a, t2192dc426e477a22ba201bc3a0e4295b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta6d704ca45a3aca7e9aa07ee44b553ac const &t) {
+inline std::ostream &operator<<(std::ostream &os, t2192dc426e477a22ba201bc3a0e4295b const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -358,10 +359,10 @@ inline std::ostream &operator<<(std::ostream &os, ta6d704ca45a3aca7e9aa07ee44b55
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_value::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_value::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_value::ta6d704ca45a3aca7e9aa07ee44b553ac(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

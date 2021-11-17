@@ -18,12 +18,22 @@
  * into the namespace std does not work, so the map is constructed explicitly
  * with this Hash "function": */
 struct HashKey {
-  std::size_t operator()(dessser::gen::sync_key::t const &k) const noexcept
+  std::size_t operator()(std::shared_ptr<dessser::gen::sync_key::t const> k) const noexcept
   {
     // Lazily convert the key to a string then hash this string: (FIXME)
     std::ostringstream str;
-    str << k;
+    if (k) str << *k;
+    else str << "null";
     return std::hash<std::string>{}(str.str());
+  }
+};
+
+struct EqualKey {
+  // Compare the content of the shared pointer rather than the addresses
+  bool operator()(std::shared_ptr<dessser::gen::sync_key::t const> const &k1,
+                  std::shared_ptr<dessser::gen::sync_key::t const> const &k2) const noexcept
+  {
+    return (*k1 == *k2);
   }
 };
 
@@ -43,11 +53,13 @@ public:
 
   KVStore(QObject *parent = nullptr);
 
-  std::unordered_map<dessser::gen::sync_key::t const, KValue, HashKey> map;
+  std::unordered_map<std::shared_ptr<dessser::gen::sync_key::t const>, KValue, HashKey, EqualKey> map;
   rec_shared_mutex lock;
 
-  bool contains(dessser::gen::sync_key::t const &);
-  std::shared_ptr<dessser::gen::sync_value::t const> get(dessser::gen::sync_key::t const &);
+  bool contains(std::shared_ptr<dessser::gen::sync_key::t const>);
+
+  std::shared_ptr<dessser::gen::sync_value::t const> get(
+    std::shared_ptr<dessser::gen::sync_key::t const>);
 
 private slots:
   void signalChanges();

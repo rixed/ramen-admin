@@ -2,6 +2,7 @@
 #define DESSSER_GEN_raql_select_field
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -40,21 +41,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tbc99a2463600e515e0f9491341a5f511 : public std::tuple<
-  ::dessser::gen::raql_select_field::t*,
+struct t5c6c889b098fc024b736e0b7420544dc : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_select_field::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tbc99a2463600e515e0f9491341a5f511(std::tuple<::dessser::gen::raql_select_field::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_select_field::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t5c6c889b098fc024b736e0b7420544dc(std::tuple<std::shared_ptr<::dessser::gen::raql_select_field::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_select_field::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tbc99a2463600e515e0f9491341a5f511 const &a, tbc99a2463600e515e0f9491341a5f511 const &b) {
+inline bool operator==(t5c6c889b098fc024b736e0b7420544dc const &a, t5c6c889b098fc024b736e0b7420544dc const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tbc99a2463600e515e0f9491341a5f511 const &a, tbc99a2463600e515e0f9491341a5f511 const &b) {
+inline bool operator!=(t5c6c889b098fc024b736e0b7420544dc const &a, t5c6c889b098fc024b736e0b7420544dc const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tbc99a2463600e515e0f9491341a5f511 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t5c6c889b098fc024b736e0b7420544dc const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -65,10 +66,10 @@ inline std::ostream &operator<<(std::ostream &os, tbc99a2463600e515e0f9491341a5f
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::raql_select_field::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::raql_select_field::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_select_field::tbc99a2463600e515e0f9491341a5f511(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_select_field::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_select_field::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::raql_select_field::t5c6c889b098fc024b736e0b7420544dc(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

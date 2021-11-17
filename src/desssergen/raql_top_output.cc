@@ -48,18 +48,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t7a394582306d7b8adb1704330d06a58e : public std::tuple<
-  ::dessser::gen::raql_top_output::t*,
+struct t56749a956933ce485fc8f8a29d7c3f4b : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_top_output::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t7a394582306d7b8adb1704330d06a58e(std::tuple<::dessser::gen::raql_top_output::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_top_output::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t56749a956933ce485fc8f8a29d7c3f4b(std::tuple<std::shared_ptr<::dessser::gen::raql_top_output::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_top_output::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7a394582306d7b8adb1704330d06a58e const &a, t7a394582306d7b8adb1704330d06a58e const &b) {
+inline bool operator==(t56749a956933ce485fc8f8a29d7c3f4b const &a, t56749a956933ce485fc8f8a29d7c3f4b const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t7a394582306d7b8adb1704330d06a58e const &a, t7a394582306d7b8adb1704330d06a58e const &b) {
+inline bool operator!=(t56749a956933ce485fc8f8a29d7c3f4b const &a, t56749a956933ce485fc8f8a29d7c3f4b const &b) {
   return !operator==(a, b);
 }
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
@@ -84,9 +84,9 @@ inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba
       (let "ssum_dst_79" (write-u16 little-endian (param 1) (label-of (param 0)))
         (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_79") (if (eq (u16 1) (label-of (param 0))) (identifier "ssum_dst_79") (seq (assert (eq (label-of (param 0)) (u16 2))) (identifier "ssum_dst_79"))))))
  */
-static std::function<Pointer(::dessser::gen::raql_top_output::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_top_output::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::raql_top_output::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_top_output::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_top_output::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_top_output::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -122,14 +122,14 @@ static std::function<Pointer(::dessser::gen::raql_top_output::t*,Pointer)> to_ro
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::raql_top_output::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_top_output::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[Membership Void | Rank Void | List Void]") (if (eq (u16 0) (label-of (param 0))) (size 2) (if (eq (u16 1) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 2))) (size 2)))))
  */
-static std::function<Size(::dessser::gen::raql_top_output::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::raql_top_output::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::raql_top_output::t*)> fun16 { [&fun16](::dessser::gen::raql_top_output::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_top_output::t> )> fun16 { [&fun16](std::shared_ptr<::dessser::gen::raql_top_output::t>  p_0) {
     uint16_t id_17 { 0 };
     uint16_t id_18 { uint16_t((*p_0).index()) };
     bool id_19 { bool(id_17 == id_18) };
@@ -161,7 +161,7 @@ static std::function<Size(::dessser::gen::raql_top_output::t*)> sersize_of_row_b
    };
   return fun16;
 }
-std::function<Size(::dessser::gen::raql_top_output::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::raql_top_output::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -173,9 +173,9 @@ std::function<Size(::dessser::gen::raql_top_output::t*)> sersize_of_row_binary(s
                 (seq (assert (eq (identifier "dsum1_fst_63") (u16 2))) (make-tup (construct "[Membership Void | Rank Void | List Void]" 2 (nop)) (identifier "dsum1_snd_64")))))))
         (make-tup (identifier "make_fst_75") (identifier "make_snd_76"))))
  */
-static std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e(Pointer)> fun32 { [&fun32](Pointer p_0) {
+  std::function<::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b(Pointer)> fun32 { [&fun32](Pointer p_0) {
     ::dessser::gen::raql_top_output::t7609d344c1ba69d0f80fec236d4c216b id_33 { p_0.readU16Le() };
     ::dessser::gen::raql_top_output::t7609d344c1ba69d0f80fec236d4c216b letpair_res_34;
     {
@@ -184,29 +184,29 @@ static std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330
       ::dessser::gen::raql_top_output::t7609d344c1ba69d0f80fec236d4c216b id_35 { du16_fst_57, du16_snd_58 };
       letpair_res_34 = id_35;
     }
-    ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e let_res_36;
+    ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b let_res_36;
     {
       ::dessser::gen::raql_top_output::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_34 };
-      ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e letpair_res_37;
+      ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b letpair_res_37;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_38 { 0 };
         bool id_39 { bool(id_38 == dsum1_fst_63) };
-        ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e choose_res_40;
+        ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b choose_res_40;
         if (id_39) {
           (void)VOID;
-          ::dessser::gen::raql_top_output::t* id_41 { new ::dessser::gen::raql_top_output::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e id_42 { id_41, dsum1_snd_64 };
+          std::shared_ptr<::dessser::gen::raql_top_output::t>  id_41 { std::make_shared<::dessser::gen::raql_top_output::t>(std::in_place_index<0>, VOID) };
+          ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b id_42 { id_41, dsum1_snd_64 };
           choose_res_40 = id_42;
         } else {
           uint16_t id_43 { 1 };
           bool id_44 { bool(id_43 == dsum1_fst_63) };
-          ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e choose_res_45;
+          ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b choose_res_45;
           if (id_44) {
             (void)VOID;
-            ::dessser::gen::raql_top_output::t* id_46 { new ::dessser::gen::raql_top_output::t(std::in_place_index<1>, VOID) };
-            ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e id_47 { id_46, dsum1_snd_64 };
+            std::shared_ptr<::dessser::gen::raql_top_output::t>  id_46 { std::make_shared<::dessser::gen::raql_top_output::t>(std::in_place_index<1>, VOID) };
+            ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b id_47 { id_46, dsum1_snd_64 };
             choose_res_45 = id_47;
           } else {
             uint16_t id_48 { 2 };
@@ -214,8 +214,8 @@ static std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330
             Void id_50 { ((void)(assert(id_49)), VOID) };
             (void)id_50;
             (void)VOID;
-            ::dessser::gen::raql_top_output::t* id_51 { new ::dessser::gen::raql_top_output::t(std::in_place_index<2>, VOID) };
-            ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e id_52 { id_51, dsum1_snd_64 };
+            std::shared_ptr<::dessser::gen::raql_top_output::t>  id_51 { std::make_shared<::dessser::gen::raql_top_output::t>(std::in_place_index<2>, VOID) };
+            ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b id_52 { id_51, dsum1_snd_64 };
             choose_res_45 = id_52;
           }
           choose_res_40 = choose_res_45;
@@ -224,11 +224,11 @@ static std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330
       }
       let_res_36 = letpair_res_37;
     }
-    ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e letpair_res_53;
+    ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b letpair_res_53;
     {
       auto make_fst_75 { std::get<0>(let_res_36) };
       auto make_snd_76 { std::get<1>(let_res_36) };
-      ::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e id_54 { make_fst_75, make_snd_76 };
+      ::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b id_54 { make_fst_75, make_snd_76 };
       letpair_res_53 = id_54;
     }
     return letpair_res_53;
@@ -236,9 +236,9 @@ static std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330
    };
   return fun32;
 }
-std::function<::dessser::gen::raql_top_output::t7a394582306d7b8adb1704330d06a58e(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

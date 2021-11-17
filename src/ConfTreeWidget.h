@@ -23,18 +23,21 @@ class ConfTreeWidget : public QTreeWidget
   Q_OBJECT
 
   void createItemByNames(
-    QStringList &, dessser::gen::sync_key::t const &, KValue const &, ConfTreeItem * = nullptr, bool = false);
+    QStringList &,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
+    KValue const &, ConfTreeItem * = nullptr, bool = false);
   ConfTreeItem *findItemByNames(QStringList &names, ConfTreeItem * = nullptr);
 
-  ConfTreeItem *itemOfKey(dessser::gen::sync_key::t const &);
+  ConfTreeItem *itemOfKey(std::shared_ptr<dessser::gen::sync_key::t const>);
   ConfTreeItem *findItem(QString const &name, ConfTreeItem *parent) const;
 
-  QWidget *actionWidget(dessser::gen::sync_key::t const &, bool, bool);
+  QWidget *actionWidget(std::shared_ptr<dessser::gen::sync_key::t const>, bool, bool);
   QWidget *fillerWidget();
 
-  void createItem(dessser::gen::sync_key::t const &, KValue const &);
-  void deleteItem(dessser::gen::sync_key::t const &, KValue const &);
-  void editedValueChangedFromStore(dessser::gen::sync_key::t const &, KValue const &kvp);
+  void createItem(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void deleteItem(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void editedValueChangedFromStore(
+    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &kvp);
 
 public:
   ConfTreeWidget(QWidget *parent = nullptr);
@@ -46,11 +49,11 @@ protected:
 protected slots:
   void onChange(QList<ConfChange> const &);
   void editedValueChanged(
-    std::optional<dessser::gen::sync_key::t const> const &,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>);
-  void deleteClicked(dessser::gen::sync_key::t const &);
+  void deleteClicked(std::shared_ptr<dessser::gen::sync_key::t const>);
   void activateItem(QTreeWidgetItem *item, int column);
-  void openEditorWindow(dessser::gen::sync_key::t const &);
+  void openEditorWindow(std::shared_ptr<dessser::gen::sync_key::t const>);
 };
 
 #endif

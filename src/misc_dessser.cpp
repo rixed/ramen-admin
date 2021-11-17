@@ -7,7 +7,6 @@ extern "C" {
 }
 #include <QCoreApplication>
 
-
 #include "desssergen/raql_type.h"
 #include "desssergen/sync_server_msg.h"
 #include "desssergen/sync_client_msg.h"
@@ -109,7 +108,8 @@ std::string const columnName(dessser::gen::raql_type::t const &t, size_t i)
   }
 }
 
-dessser::gen::raql_type::t const *columnType(dessser::gen::raql_type::t const &t, size_t i)
+std::shared_ptr<dessser::gen::raql_type::t const> columnType(
+  dessser::gen::raql_type::t const &t, size_t i)
 {
   switch (t.type.index()) {
     case dessser::gen::raql_type::Tup:
@@ -136,9 +136,10 @@ dessser::gen::raql_type::t const *columnType(dessser::gen::raql_type::t const &t
   }
 }
 
-dessser::gen::raql_value::t const *columnValue(dessser::gen::raql_value::t const &v, size_t i)
+std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
+  dessser::gen::raql_value::t const &v, size_t i)
 {
-  dessser::Arr<dessser::gen::raql_value::t *> const *arr;
+  dessser::Arr<std::shared_ptr<dessser::gen::raql_value::t>> const *arr;
   switch (v.index()) {
     case dessser::gen::raql_value::VTup:
       arr = &(std::get<dessser::gen::raql_value::VTup>(v));
@@ -213,10 +214,11 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &v)
   }
 }
 
-static QString arrToQString(dessser::Arr<dessser::gen::raql_value::t *> const &arr)
+static QString arrToQString(
+  dessser::Arr<std::shared_ptr<dessser::gen::raql_value::t>> const &arr)
 {
   QString s;
-  for (dessser::gen::raql_value::t *v : arr) {
+  for (std::shared_ptr<dessser::gen::raql_value::t> v : arr) {
     if (s.length() > 0) s += ", ";
     s += raqlValToQString(*v);
   }
@@ -422,7 +424,7 @@ QString raqlValToQString(dessser::gen::raql_value::t const &v)
 
 QString raqlValToQString(
   dessser::gen::raql_value::t const &v,
-  std::optional<dessser::gen::sync_key::t const> const &k)
+  dessser::gen::sync_key::t const *k)
 {
   if (k) {
     QString spec { toQStringSpecKey(v, *k) };
@@ -449,7 +451,8 @@ QString raqlExprToQString(dessser::gen::raql_expr::t const &e)
 QString syncValToQString(dessser::gen::sync_value::t const &v)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
-    dessser::gen::raql_value::t const *rv { std::get<dessser::gen::sync_value::RamenValue>(v) };
+    std::shared_ptr<dessser::gen::raql_value::t const> rv {
+      std::get<dessser::gen::sync_value::RamenValue>(v) };
     return raqlValToQString(*rv);
   }
 
@@ -461,10 +464,10 @@ QString syncValToQString(dessser::gen::sync_value::t const &v)
 
 QString syncValToQString(
   dessser::gen::sync_value::t const &v,
-  std::optional<dessser::gen::sync_key::t const> const &k)
+  dessser::gen::sync_key::t const *k)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
-    dessser::gen::raql_value::t const *rv {
+    std::shared_ptr<dessser::gen::raql_value::t const> rv {
       std::get<dessser::gen::sync_value::RamenValue>(v) };
     return raqlValToQString(*rv, k);
   }

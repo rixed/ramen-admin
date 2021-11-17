@@ -2,6 +2,7 @@
 #define DESSSER_GEN_func_ref
 #include <arpa/inet.h>
 #include <functional>
+#include <memory>
 #include <optional>
 #include <tuple>
 #include <variant>
@@ -39,21 +40,21 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tc1232252b3372e81155cf238dacf3283 : public std::tuple<
-  ::dessser::gen::func_ref::t*,
+struct tff4bf20007a06d9088a88bafe23e44d5 : public std::tuple<
+  std::shared_ptr<::dessser::gen::func_ref::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tc1232252b3372e81155cf238dacf3283(std::tuple<::dessser::gen::func_ref::t*, Pointer> p)
-    : std::tuple<::dessser::gen::func_ref::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tff4bf20007a06d9088a88bafe23e44d5(std::tuple<std::shared_ptr<::dessser::gen::func_ref::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::func_ref::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc1232252b3372e81155cf238dacf3283 const &a, tc1232252b3372e81155cf238dacf3283 const &b) {
+inline bool operator==(tff4bf20007a06d9088a88bafe23e44d5 const &a, tff4bf20007a06d9088a88bafe23e44d5 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tc1232252b3372e81155cf238dacf3283 const &a, tc1232252b3372e81155cf238dacf3283 const &b) {
+inline bool operator!=(tff4bf20007a06d9088a88bafe23e44d5 const &a, tff4bf20007a06d9088a88bafe23e44d5 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tc1232252b3372e81155cf238dacf3283 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tff4bf20007a06d9088a88bafe23e44d5 const &t) {
   os << '<'
      << *std::get<0>(t) << ", "
      << std::get<1>(t)
@@ -64,10 +65,10 @@ inline std::ostream &operator<<(std::ostream &os, tc1232252b3372e81155cf238dacf3
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(::dessser::gen::func_ref::t*,Pointer)> to_row_binary;
-extern std::function<Size(::dessser::gen::func_ref::t*)> sersize_of_row_binary;
-extern std::function<::dessser::gen::func_ref::tc1232252b3372e81155cf238dacf3283(Pointer)> of_row_binary;
-typedef t *t_ext;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::func_ref::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::func_ref::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::func_ref::tff4bf20007a06d9088a88bafe23e44d5(Pointer)> of_row_binary;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }

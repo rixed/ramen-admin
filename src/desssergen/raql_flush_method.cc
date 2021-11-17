@@ -46,18 +46,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tb3a89096758ec6cf20bf4ee069398ed5 : public std::tuple<
-  ::dessser::gen::raql_flush_method::t*,
+struct tcb9728fff2af5188e5e3e0aee866cdff : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_flush_method::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tb3a89096758ec6cf20bf4ee069398ed5(std::tuple<::dessser::gen::raql_flush_method::t*, Pointer> p)
-    : std::tuple<::dessser::gen::raql_flush_method::t*, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcb9728fff2af5188e5e3e0aee866cdff(std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+inline bool operator==(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tb3a89096758ec6cf20bf4ee069398ed5 const &a, tb3a89096758ec6cf20bf4ee069398ed5 const &b) {
+inline bool operator!=(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
   return !operator==(a, b);
 }
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
@@ -81,9 +81,9 @@ inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba
     (fun ("[reset Void | never Void]" "Ptr")
       (let "ssum_dst_76" (write-u16 little-endian (param 1) (label-of (param 0))) (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_76") (seq (assert (eq (label-of (param 0)) (u16 1))) (identifier "ssum_dst_76")))))
  */
-static std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> fun0 { [&fun0](::dessser::gen::raql_flush_method::t* p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -110,14 +110,14 @@ static std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_
    };
   return fun0;
 }
-std::function<Pointer(::dessser::gen::raql_flush_method::t*,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[reset Void | never Void]") (if (eq (u16 0) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 1))) (size 2))))
  */
-static std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(::dessser::gen::raql_flush_method::t*)> fun12 { [&fun12](::dessser::gen::raql_flush_method::t* p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> fun12 { [&fun12](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0) {
     uint16_t id_13 { 0 };
     uint16_t id_14 { uint16_t((*p_0).index()) };
     bool id_15 { bool(id_13 == id_14) };
@@ -139,7 +139,7 @@ static std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row
    };
   return fun12;
 }
-std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -150,9 +150,9 @@ std::function<Size(::dessser::gen::raql_flush_method::t*)> sersize_of_row_binary
               (seq (assert (eq (identifier "dsum1_fst_63") (u16 1))) (make-tup (construct "[reset Void | never Void]" 1 (nop)) (identifier "dsum1_snd_64")))))) 
         (make-tup (identifier "make_fst_72") (identifier "make_snd_73"))))
  */
-static std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> fun23 { [&fun23](Pointer p_0) {
+  std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> fun23 { [&fun23](Pointer p_0) {
     ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b id_24 { p_0.readU16Le() };
     ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b letpair_res_25;
     {
@@ -161,20 +161,20 @@ static std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee
       ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b id_26 { du16_fst_57, du16_snd_58 };
       letpair_res_25 = id_26;
     }
-    ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 let_res_27;
+    ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff let_res_27;
     {
       ::dessser::gen::raql_flush_method::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_25 };
-      ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 letpair_res_28;
+      ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff letpair_res_28;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_29 { 0 };
         bool id_30 { bool(id_29 == dsum1_fst_63) };
-        ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 choose_res_31;
+        ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff choose_res_31;
         if (id_30) {
           (void)VOID;
-          ::dessser::gen::raql_flush_method::t* id_32 { new ::dessser::gen::raql_flush_method::t(std::in_place_index<0>, VOID) };
-          ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_33 { id_32, dsum1_snd_64 };
+          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_32 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<0>, VOID) };
+          ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff id_33 { id_32, dsum1_snd_64 };
           choose_res_31 = id_33;
         } else {
           uint16_t id_34 { 1 };
@@ -182,19 +182,19 @@ static std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee
           Void id_36 { ((void)(assert(id_35)), VOID) };
           (void)id_36;
           (void)VOID;
-          ::dessser::gen::raql_flush_method::t* id_37 { new ::dessser::gen::raql_flush_method::t(std::in_place_index<1>, VOID) };
-          ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_38 { id_37, dsum1_snd_64 };
+          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_37 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<1>, VOID) };
+          ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff id_38 { id_37, dsum1_snd_64 };
           choose_res_31 = id_38;
         }
         letpair_res_28 = choose_res_31;
       }
       let_res_27 = letpair_res_28;
     }
-    ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 letpair_res_39;
+    ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff letpair_res_39;
     {
       auto make_fst_72 { std::get<0>(let_res_27) };
       auto make_snd_73 { std::get<1>(let_res_27) };
-      ::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5 id_40 { make_fst_72, make_snd_73 };
+      ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff id_40 { make_fst_72, make_snd_73 };
       letpair_res_39 = id_40;
     }
     return letpair_res_39;
@@ -202,9 +202,9 @@ static std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee
    };
   return fun23;
 }
-std::function<::dessser::gen::raql_flush_method::tb3a89096758ec6cf20bf4ee069398ed5(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t *t_ext;
+typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
 }
