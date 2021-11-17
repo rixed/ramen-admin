@@ -19,7 +19,7 @@ struct KValue
   std::shared_ptr<dessser::gen::sync_value::t const> val;
   QString uid;  // Of the user who has set this value
   double mtime;
-  std::optional<QString> owner;
+  QString owner;  // Empty for no locker
   double expiry;  // if owner above is set
   bool can_write, can_del;
 
@@ -42,22 +42,23 @@ struct KValue
 
   void setLock(QString const &o, double ex)
   {
+    if (o.isEmpty()) qCritical("Setting a lock to empty username");
     owner = o;
     expiry = ex;
   }
 
   void setUnlock()
   {
-    assert(owner.has_value());
-    owner.reset();
+    if(owner.isEmpty()) qCritical("Unlocking an unlocked value");
+    owner.clear();
   }
 
   bool isLocked() const {
-    return owner.has_value();
+    return !owner.isEmpty();
   }
 
   bool isMine() const {
-    return isLocked() && *owner == my_uid;
+    return owner == my_uid;
   }
 };
 

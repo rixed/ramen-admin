@@ -108,7 +108,7 @@ void AtomicWidget::lockValue(dessser::gen::sync_key::t const &k, KValue const &k
 {
   if (! sameKey(k)) return;
 
-  setEnabled(my_uid && kv.owner.has_value() && kv.owner == *my_uid);
+  setEnabled(my_uid && kv.isMine());
 }
 
 /* TODO: Couldn't we have a single lockChange signal, now that both lock

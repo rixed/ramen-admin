@@ -499,7 +499,8 @@ int ConfClient::recvdNewKey(
     kvs->map.try_emplace(*k, v, set_by_uid, mtime, can_write, can_del)
   };
   if (it.second) [[likely]] {
-    it.first->second.setLock(owner, expiry);
+    if (! owner.isEmpty()) [[unlikely]]
+      it.first->second.setLock(owner, expiry);
     ret = checkDones(k, v);
   } else {
     // Not supposed to happen but harmless

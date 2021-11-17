@@ -44,7 +44,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   QLabel *mtime { new QLabel(stringOfDate(kv->mtime)) };
   headerLayout->addRow(tr("Last Modified At:"), mtime);
   if (kv->isLocked()) {
-    QLabel *locker { new QLabel(*kv->owner) };
+    QLabel *locker { new QLabel(kv->owner) };
     headerLayout->addRow(tr("Locked By:"), locker);
     QLabel *expiry { new QLabel(stringOfDate(kv->expiry)) };
     headerLayout->addRow(tr("Expiry:"), expiry);
