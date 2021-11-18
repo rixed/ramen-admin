@@ -4,10 +4,7 @@
 #include <QDebug>
 #include <QtWidgets>
 
-class SyncStatus {
-  std::string msg;
-
-public:
+struct SyncStatus {
   enum Status {
     Disconnected,
     Resolving,
@@ -17,10 +14,16 @@ public:
     Synchronized,
     Closing,
     Failed
-  } status;
+  };
 
   SyncStatus(Status = Disconnected);
   ~SyncStatus();
+
+  void set(enum Status);
+
+  enum Status get() const {
+    return status;
+  }
 
   QString message() const;
 
@@ -30,6 +33,14 @@ public:
   bool operator!=(SyncStatus const &other) const {
     return status != other.status;
   }
+
+private:
+  enum Status status;
+
+  std::string errMsg;
+
+  qint64 lastChange; // Timestamp (ms) when the status was changed last
+  QString lastDuration;
 };
 
 QDebug operator<<(QDebug, SyncStatus const &);

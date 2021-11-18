@@ -25,7 +25,7 @@ void ConfClient::fatalErr(QString const &errString)
 {
   // Emit the signal with the status we were in before the error occurred:
   emit connectionFatalError(syncStatus, errString);
-  syncStatus = SyncStatus::Failed;
+  syncStatus.set(SyncStatus::Failed);
   qDebug().nospace() << "ConfClient::fatalErr(" << errString << ")!";
 }
 
@@ -107,28 +107,28 @@ void ConfClient::onTcpError(QAbstractSocket::SocketError err)
 
 void ConfClient::onStateChange(QAbstractSocket::SocketState sockState)
 {
-  SyncStatus oldStage = syncStatus;
+  SyncStatus oldStage { syncStatus };
 
   switch (sockState) {
     case QAbstractSocket::UnconnectedState:
-      syncStatus = SyncStatus::Resolving;
+      syncStatus.set(SyncStatus::Resolving);
       break;
     case QAbstractSocket::HostLookupState:
-      syncStatus = SyncStatus::Resolving;
+      syncStatus.set(SyncStatus::Resolving);
       break;
     case QAbstractSocket::ConnectingState:
-      syncStatus = SyncStatus::Connecting;
+      syncStatus.set(SyncStatus::Connecting);
       break;
     case QAbstractSocket::ConnectedState:
       if (0 == sendAuth())
-        syncStatus = SyncStatus::Authenticating;
+        syncStatus.set(SyncStatus::Authenticating);
       break;
     case QAbstractSocket::BoundState:
       // Should not happen on a client
       qWarning() << "ConfClient received stateChanged to BoundState!?";
       break;
     case QAbstractSocket::ClosingState:
-      syncStatus = SyncStatus::Closing;
+      syncStatus.set(SyncStatus::Closing);
       break;
     case QAbstractSocket::ListeningState:
       // Should not happen at all
@@ -179,7 +179,7 @@ void ConfClient::readMsg()
                  << "bytes long, quitting.";
 cannot_decode:
       emit connectionFatalError(syncStatus, QString("Cannot decode configuration message"));
-      syncStatus = SyncStatus::Failed;
+      syncStatus.set(SyncStatus::Failed);
       break;
     }
 
@@ -195,7 +195,7 @@ cannot_decode:
     if (! msg) {
       qWarning() << "Cannot alloc" << 4 + msg_sz << "bytes!";
       emit connectionFatalError(syncStatus, QString("Cannot allocate memory"));
-      syncStatus = SyncStatus::Failed;
+      syncStatus.set(SyncStatus::Failed);
       break;
     }
 
@@ -325,7 +325,7 @@ int ConfClient::readCrypted(dessser::Bytes const &cipher)
 
 int ConfClient::startSynchronization()
 {
-  syncStatus = SyncStatus::Synchronizing;
+  syncStatus.set(SyncStatus::Synchronizing);
   emit connectionProgressed(syncStatus);
 
   /* Subscribe to all keys for now: */
@@ -340,7 +340,7 @@ int ConfClient::startSynchronization()
         qDebug() << "Synchronisation completed";
       lastSent = QDateTime::currentMSecsSinceEpoch();
       Q_ASSERT(syncStatus == SyncStatus::Synchronizing);
-      syncStatus = SyncStatus::Synchronized;
+      syncStatus.set(SyncStatus::Synchronized);
       emit connectionProgressed(syncStatus);
       return 0;
     } else {

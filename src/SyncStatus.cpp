@@ -1,12 +1,27 @@
 #include <cassert>
+#include <QDateTime>
+
+#include "misc.h"
 #include "SyncStatus.h"
 
-SyncStatus::SyncStatus(enum Status status_) : status(status_)
+SyncStatus::SyncStatus(enum Status status_)
+  : status(status_), lastChange(0L)
 {
 }
 
 SyncStatus::~SyncStatus()
 {
+}
+
+void SyncStatus::set(enum Status new_status) {
+  status = new_status;
+
+  qint64 const now { QDateTime::currentMSecsSinceEpoch() };
+
+  if (lastChange > 0L) {
+    lastDuration = stringOfDuration((double)(now - lastChange) / 1000);
+  }
+  lastChange = now;
 }
 
 QString SyncStatus::message() const
@@ -23,12 +38,13 @@ QString SyncStatus::message() const
     case Synchronizing:
       return QCoreApplication::translate("QMainWindow", "Synchronizing...");
     case Synchronized:
-      return QCoreApplication::translate("QMainWindow", "Synchronized.");
+      return QCoreApplication::translate("QMainWindow", "Synchronized in %1.").
+             arg(lastDuration);
     case Closing:
       return QCoreApplication::translate("QMainWindow", "Closing...");
     case Failed:
       return QCoreApplication::translate("QMainWindow", "Failed: ").
-             append(msg.c_str());
+             append(errMsg.c_str());
   }
   assert(!"Invalid sync status");
 }

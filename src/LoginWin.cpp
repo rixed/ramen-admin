@@ -100,7 +100,7 @@ void LoginWin::syncProgress(SyncStatus status)
   syncStatus = status;
   setStatusMsg();
   // Start the actual interface as soon as synchronization starts:
-  if (status.status == SyncStatus::Status::Synchronizing) {
+  if (status.get() == SyncStatus::Status::Synchronizing) {
     emit authenticated();
     //hide();
   }
