@@ -60,7 +60,7 @@ class ConfClient : public QObject
   unsigned char clt_pub_key[crypto_box_PUBLICKEYBYTES];
   unsigned char clt_priv_key[crypto_box_SECRETKEYBYTES];
   bool keySent = false;
-  // Used for applicative keep-alive (0 means not ready yet)
+  // Used for applicative keep-alive (TODO) (0 means not ready yet)
   qint64 lastSent = 0U;
 
   struct OnDoneCallback {

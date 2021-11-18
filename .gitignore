@@ -239,3 +239,4 @@ src/sync_server_msg.mli
 target_wrapper.sh
 tests/test
 tests/test_crypto
+src/desssergen/*.type

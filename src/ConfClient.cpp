@@ -507,7 +507,7 @@ int ConfClient::recvdNewKey(
     ret = checkDones(k, v);
   } else {
     // Not supposed to happen but harmless
-    qCritical() << "NewKey was not new, keeping previous value!";
+    qCritical() << "NewKey" << *k << "was not new, keeping previous value!";
   }
 
   {
