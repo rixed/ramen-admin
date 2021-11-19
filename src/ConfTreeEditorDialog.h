@@ -13,11 +13,14 @@ class ConfTreeEditorDialog : public QDialog
 
   AtomicWidget *editor;
   std::shared_ptr<dessser::gen::sync_key::t const> key;
-  bool can_write;
+  bool canWrite, showEditor;
 
 public:
   ConfTreeEditorDialog(
-    std::shared_ptr<dessser::gen::sync_key::t const> k, QWidget *parent = nullptr);
+    std::shared_ptr<dessser::gen::sync_key::t const> k,
+    // Even if we can write that key we might prefer not to show the editor:
+    bool show_editor = true,
+    QWidget *parent = nullptr);
 
 private slots:
   void save();

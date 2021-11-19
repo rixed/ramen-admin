@@ -10,6 +10,7 @@
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "EditorWidget.h"
+#include "KTextEdit.h"
 #include "KValue.h"
 #include "KVStore.h"
 #include "Menu.h"
@@ -19,9 +20,12 @@
 #include "ConfTreeEditorDialog.h"
 
 ConfTreeEditorDialog::ConfTreeEditorDialog(
-  std::shared_ptr<dessser::gen::sync_key::t const> key_, QWidget *parent)
+  std::shared_ptr<dessser::gen::sync_key::t const> key_,
+  bool show_editor,
+  QWidget *parent)
   : QDialog(parent),
-    key(key_)
+    key(key_),
+    showEditor(show_editor)
 {
   /* Locate the value in the kvs: */
   KValue const *kv = nullptr;
@@ -32,7 +36,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   if (! kv) {
     assert(!"TODO: display a QLabel(error) instead");
   }
-  can_write = kv->can_write;
+  canWrite = kv->can_write;
 
   /* The header: */
   QFormLayout *headerLayout = new QFormLayout;
@@ -50,13 +54,24 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
     headerLayout->addRow(tr("Expiry:"), expiry);
   }
 
-  editor = newEditorWidget(*kv->val, key);
+  /* When we do not want to show the editor we still want to see the value,
+   * in raw form, and non editable. We get the raw form by forcing the "editor"
+   * to be a KTextEdit editor (we need multiple lines), and we get it read-only
+   * by not locking that key. */
+  if (showEditor) {
+    editor = newEditorWidget(*kv->val, key);
+  } else {
+    editor = new KTextEdit;
+    editor->setKey(key);
+  }
+
   QDialogButtonBox *buttonBox {
     new QDialogButtonBox(
-      can_write ? QDialogButtonBox::Ok | QDialogButtonBox::Cancel :
-                  QDialogButtonBox::Close) };  // Note: Close will reject
+      canWrite && showEditor ?
+        QDialogButtonBox::Ok | QDialogButtonBox::Cancel :
+        QDialogButtonBox::Close) };  // Note: Close will reject
 
-  if (can_write)
+  if (canWrite && showEditor)
     connect(buttonBox, &QDialogButtonBox::accepted,
             this, &ConfTreeEditorDialog::save);
   /* Connect first the cancel button to the normal reject signal, and
@@ -70,7 +85,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   /* The editor will start in read-only mode (unless we already own the
    * value). Reception of the lock ack from the confserver will turn it
    * into read-write mode: */
-  if (can_write) Menu::getClient()->sendLock(key);
+  if (canWrite && showEditor) Menu::getClient()->sendLock(key);
 
   /* Now the layout: */
   QVBoxLayout *mainLayout { new QVBoxLayout };
@@ -84,7 +99,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   setLayout(mainLayout);
 
   /* Now that the layout is known, set window decorations, sizes etc: */
-  setWindowTitle(tr("Value Editor"));
+  setWindowTitle(tr(showEditor ? "Value Editor" : "Value Details"));
   setSizeGripEnabled(true); // editors of various types vary largely in size
 }
 
@@ -93,11 +108,11 @@ void ConfTreeEditorDialog::save()
   std::shared_ptr<dessser::gen::sync_value::t const> v { editor->getValue() };
   ConfClient *client = Menu::getClient();
   if (v) client->sendSet(key, v); // read-only editors return no value
-  if (can_write) client->sendUnlock(key);
+  if (canWrite && showEditor) client->sendUnlock(key);
   emit QDialog::accept();
 }
 
 void ConfTreeEditorDialog::cancel()
 {
-  if (can_write) Menu::getClient()->sendUnlock(key);
+  if (canWrite && showEditor) Menu::getClient()->sendUnlock(key);
 }

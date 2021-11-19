@@ -53,6 +53,7 @@ protected slots:
     std::shared_ptr<dessser::gen::sync_value::t const>);
   void deleteClicked(std::shared_ptr<dessser::gen::sync_key::t const>);
   void activateItem(QTreeWidgetItem *item, int column);
+  void openViewWindow(std::shared_ptr<dessser::gen::sync_key::t const>);
   void openEditorWindow(std::shared_ptr<dessser::gen::sync_key::t const>);
 };
 

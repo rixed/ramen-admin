@@ -444,10 +444,17 @@ void ConfTreeWidget::deleteClicked(
   if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(key);
 }
 
+void ConfTreeWidget::openViewWindow(
+  std::shared_ptr<dessser::gen::sync_key::t const> key)
+{
+  QDialog *editor = new ConfTreeEditorDialog(key, false);
+  editor->show();
+}
+
 void ConfTreeWidget::openEditorWindow(
   std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
-  QDialog *editor = new ConfTreeEditorDialog(key);
+  QDialog *editor = new ConfTreeEditorDialog(key, true);
   editor->show();
 }
 
@@ -461,13 +468,21 @@ QWidget *ConfTreeWidget::actionWidget(
   layout->setContentsMargins(0, 0, 0, 0);
   widget->setLayout(layout);
 
-  QPushButton *editButton =
-    new QPushButton(canWrite ? tr("Edit"):tr("View"));
-  layout->addWidget(editButton);
-  connect(editButton, &QPushButton::clicked,
+  QPushButton *viewButton = new QPushButton(tr("View"));
+  layout->addWidget(viewButton);
+  connect(viewButton, &QPushButton::clicked,
           this, [this, key](bool) {
-    openEditorWindow(key);
+    openViewWindow(key);
   });
+
+  if (canWrite) {
+    QPushButton *editButton = new QPushButton(tr("Edit"));
+    layout->addWidget(editButton);
+    connect(editButton, &QPushButton::clicked,
+            this, [this, key](bool) {
+      openEditorWindow(key);
+    });
+  }
 
   if (canDel) {
     QPushButton *delButton = new QPushButton(tr("Delete"));
