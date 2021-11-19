@@ -2783,7 +2783,5 @@ static std::function<::dessser::gen::sync_value::tf9a721d48bd2d16691e9ebbb086e28
 }
 std::function<::dessser::gen::sync_value::tf9a721d48bd2d16691e9ebbb086e28c7(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

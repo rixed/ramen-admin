@@ -703,7 +703,5 @@ static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87
 }
 std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

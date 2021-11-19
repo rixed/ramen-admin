@@ -332,7 +332,5 @@ static std::function<::dessser::gen::event_time_field::t42a2a21ee63bf8cff9c7d0d6
 }
 std::function<::dessser::gen::event_time_field::t42a2a21ee63bf8cff9c7d0d6f7ed8f3b(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

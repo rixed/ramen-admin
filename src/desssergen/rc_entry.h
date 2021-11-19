@@ -80,6 +80,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::rc_entry::t> )> sersiz
 extern std::function<::dessser::gen::rc_entry::t9e1b8c5b2a05df0f8b497985ad687600(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

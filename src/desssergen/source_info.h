@@ -233,6 +233,7 @@ extern std::function<::dessser::gen::source_info::tab14cca2da8a1bf7815d3cb326bde
 extern std::function<::dessser::gen::source_info::t30765aebeaacaa9c15b78975b43a156d(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

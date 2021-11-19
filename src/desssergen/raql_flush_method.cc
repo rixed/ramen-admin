@@ -204,7 +204,5 @@ static std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0a
 }
 std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

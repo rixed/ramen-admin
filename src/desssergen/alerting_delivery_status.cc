@@ -349,7 +349,5 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
 }
 std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

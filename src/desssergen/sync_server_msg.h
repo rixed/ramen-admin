@@ -180,6 +180,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::sync_server_msg::t> )>
 extern std::function<::dessser::gen::sync_server_msg::tc82ccaefb251651114fd50a5fd96cfe2(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

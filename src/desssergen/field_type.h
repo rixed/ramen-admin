@@ -74,6 +74,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
 extern std::function<::dessser::gen::field_type::t224480ea0ba324dab25f497681af9b36(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

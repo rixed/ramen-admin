@@ -115,6 +115,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> s
 extern std::function<::dessser::gen::runtime_stats::ted39c8ea485719117d89516f551abd2b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

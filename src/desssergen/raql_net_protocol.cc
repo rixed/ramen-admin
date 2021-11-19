@@ -238,7 +238,5 @@ static std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c55748351
 }
 std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

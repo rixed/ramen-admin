@@ -618,7 +618,5 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
 }
 std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

@@ -8104,7 +8104,5 @@ static std::function<::dessser::gen::sync_key::t88648ce03c3e83f4daca25557f77454f
 }
 std::function<::dessser::gen::sync_key::t88648ce03c3e83f4daca25557f77454f(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

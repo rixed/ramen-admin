@@ -213,6 +213,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_o
 extern std::function<::dessser::gen::alert::t39104663fb90074c71cd95d895d45654(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

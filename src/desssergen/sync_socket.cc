@@ -337,7 +337,5 @@ static std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca1
 }
 std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca11cc(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

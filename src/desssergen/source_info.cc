@@ -4734,7 +4734,5 @@ static std::function<::dessser::gen::source_info::t30765aebeaacaa9c15b78975b43a1
 }
 std::function<::dessser::gen::source_info::t30765aebeaacaa9c15b78975b43a156d(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

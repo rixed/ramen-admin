@@ -614,6 +614,7 @@ extern std::function<::dessser::gen::raql_operation::t94e08005d9e759ca406a29f5a9
 extern std::function<::dessser::gen::raql_operation::tec658c1a26520d6f3490dc88d519d525(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

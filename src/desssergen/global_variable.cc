@@ -378,7 +378,5 @@ static std::function<::dessser::gen::global_variable::t12a4afd72f36ee14a00cd9875
 }
 std::function<::dessser::gen::global_variable::t12a4afd72f36ee14a00cd9875e781364(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

@@ -275,7 +275,5 @@ static std::function<::dessser::gen::sync_client_msg::tb7a2a03f105ea4d2c1ce1ff32
 }
 std::function<::dessser::gen::sync_client_msg::tb7a2a03f105ea4d2c1ce1ff32010c20f(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

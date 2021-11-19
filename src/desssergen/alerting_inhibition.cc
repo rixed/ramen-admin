@@ -1028,7 +1028,5 @@ static std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d5
 }
 std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

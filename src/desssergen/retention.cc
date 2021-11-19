@@ -172,7 +172,5 @@ static std::function<::dessser::gen::retention::t6dbf61a16e6aaa200048c3b277abb23
 }
 std::function<::dessser::gen::retention::t6dbf61a16e6aaa200048c3b277abb230(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

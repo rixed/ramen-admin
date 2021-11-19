@@ -359,7 +359,5 @@ static std::function<::dessser::gen::fq_name::tf6138ae5919ddcb1cb9a935a9dc7190a(
 }
 std::function<::dessser::gen::fq_name::tf6138ae5919ddcb1cb9a935a9dc7190a(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef t t_ext;
-inline t Deref(t_ext x) { return x; }
 
 }

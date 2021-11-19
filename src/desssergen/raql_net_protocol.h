@@ -78,6 +78,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_net_protocol::t> 
 extern std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -181,7 +181,5 @@ static std::function<::dessser::gen::program_parameter::tf064cb568ecd4c78e46c7b6
 }
 std::function<::dessser::gen::program_parameter::tf064cb568ecd4c78e46c7b6418d30392(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

@@ -351,7 +351,5 @@ static std::function<::dessser::gen::replay_request::ta0bc57460f17716e140fcbe64b
 }
 std::function<::dessser::gen::replay_request::ta0bc57460f17716e140fcbe64bd88b18(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

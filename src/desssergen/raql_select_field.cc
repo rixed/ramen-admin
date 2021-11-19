@@ -833,7 +833,5 @@ static std::function<::dessser::gen::raql_select_field::t5c6c889b098fc024b736e0b
 }
 std::function<::dessser::gen::raql_select_field::t5c6c889b098fc024b736e0b7420544dc(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

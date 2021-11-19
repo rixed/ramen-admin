@@ -1158,7 +1158,5 @@ static std::function<::dessser::gen::replayer::t9c4573cf5a3c790b5fb7b271fc5dfb6a
 }
 std::function<::dessser::gen::replayer::t9c4573cf5a3c790b5fb7b271fc5dfb6a(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

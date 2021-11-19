@@ -1480,7 +1480,5 @@ static std::function<::dessser::gen::runtime_stats::ted39c8ea485719117d89516f551
 }
 std::function<::dessser::gen::runtime_stats::ted39c8ea485719117d89516f551abd2b(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

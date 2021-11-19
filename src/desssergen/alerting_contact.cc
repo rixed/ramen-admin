@@ -3360,7 +3360,5 @@ static std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c2
 }
 std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> of_row_binary(of_row_binary_init());
 
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
 
 }

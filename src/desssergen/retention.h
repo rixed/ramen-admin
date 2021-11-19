@@ -66,6 +66,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> sersi
 extern std::function<::dessser::gen::retention::t6dbf61a16e6aaa200048c3b277abb230(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif
