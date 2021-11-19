@@ -54,7 +54,7 @@ bool KTextEdit::setValue(
   std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v { syncValToQString(*v, k.get()) };
+  QString new_v { syncValToQString(*v, k) };
 
   if (new_v != textEdit->toPlainText()) {
     textEdit->setPlainText(new_v);

@@ -18,9 +18,6 @@ std::string const srcPathFromProgramName(std::string const &);
 // The other way around: extract the suffix from a program name
 std::string const suffixFromProgramName(std::string const &);
 
-std::ostream &operator<<(std::ostream &, int128_t const &);
-std::ostream &operator<<(std::ostream &, uint128_t const &);
-
 #include <QString>
 
 QString const removeExtQ(QString const &, char const);
@@ -36,6 +33,8 @@ QString const stringOfBytes(size_t);
 QString const stringOfBool(bool);
 QString const stringOfIp4(uint32_t);
 QString const stringOfIp6(uint128_t);
+QString const stringOfU128(uint128_t);
+QString const stringOfI128(int128_t);
 
 QString const abbrev(int, QString const &);
 

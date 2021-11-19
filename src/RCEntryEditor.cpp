@@ -428,7 +428,7 @@ void RCEntryEditor::resetParams()
       qWarning() << "conf map is:";
       for (auto &it : kvs->map) {
         qWarning() << "  " << *it.first
-                   << "->" << syncValToQString(*it.second.val, it.first.get());
+                   << "->" << syncValToQString(*it.second.val, it.first);
       }
     }
     return;

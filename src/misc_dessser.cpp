@@ -330,10 +330,21 @@ static QString toQStringSpecKey(
   return QString();
 }
 
-QString raqlValToQString(dessser::gen::raql_value::t const &v)
+QString raqlValToQString(
+  dessser::gen::raql_value::t const &v,
+  std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
+  if (k) {
+    QString spec { toQStringSpecKey(v, *k) };
+    if (! spec.isEmpty()) return spec;
+  }
+
   // Special format according to type:
   switch (v.index()) {
+    case dessser::gen::raql_value::VFloat:
+      return QString::number(std::get<dessser::gen::raql_value::VFloat>(v));
+    case dessser::gen::raql_value::VString:
+      return QString::fromStdString(std::get<dessser::gen::raql_value::VString>(v));
     case dessser::gen::raql_value::VBool:
       if (std::get<dessser::gen::raql_value::VBool>(v))
         return QCoreApplication::translate("QMainWindow", "true");
@@ -345,6 +356,42 @@ QString raqlValToQString(dessser::gen::raql_value::t const &v)
         QTextStream(&res) << "#\\" << std::get<dessser::gen::raql_value::VChar>(v);
         return res;
       }
+    case dessser::gen::raql_value::VU8:
+      return QString::number(std::get<dessser::gen::raql_value::VU8>(v));
+    case dessser::gen::raql_value::VU16:
+      return QString::number(std::get<dessser::gen::raql_value::VU16>(v));
+    case dessser::gen::raql_value::VU24:
+      return QString::number(std::get<dessser::gen::raql_value::VU24>(v));
+    case dessser::gen::raql_value::VU32:
+      return QString::number(std::get<dessser::gen::raql_value::VU32>(v));
+    case dessser::gen::raql_value::VU40:
+      return QString::number(std::get<dessser::gen::raql_value::VU40>(v));
+    case dessser::gen::raql_value::VU48:
+      return QString::number(std::get<dessser::gen::raql_value::VU48>(v));
+    case dessser::gen::raql_value::VU56:
+      return QString::number(std::get<dessser::gen::raql_value::VU56>(v));
+    case dessser::gen::raql_value::VU64:
+      return QString::number(std::get<dessser::gen::raql_value::VU64>(v));
+    case dessser::gen::raql_value::VU128:
+      return stringOfU128(std::get<dessser::gen::raql_value::VU128>(v));
+    case dessser::gen::raql_value::VI8:
+      return QString::number(std::get<dessser::gen::raql_value::VI8>(v));
+    case dessser::gen::raql_value::VI16:
+      return QString::number(std::get<dessser::gen::raql_value::VI16>(v));
+    case dessser::gen::raql_value::VI24:
+      return QString::number(std::get<dessser::gen::raql_value::VI24>(v));
+    case dessser::gen::raql_value::VI32:
+      return QString::number(std::get<dessser::gen::raql_value::VI32>(v));
+    case dessser::gen::raql_value::VI40:
+      return QString::number(std::get<dessser::gen::raql_value::VI40>(v));
+    case dessser::gen::raql_value::VI48:
+      return QString::number(std::get<dessser::gen::raql_value::VI48>(v));
+    case dessser::gen::raql_value::VI56:
+      return QString::number(std::get<dessser::gen::raql_value::VI56>(v));
+    case dessser::gen::raql_value::VI64:
+      return QString::number(std::get<dessser::gen::raql_value::VI64>(v));
+    case dessser::gen::raql_value::VI128:
+      return stringOfI128(std::get<dessser::gen::raql_value::VU128>(v));
     case dessser::gen::raql_value::VIpv4:
       return qstringOfIpv4(std::get<dessser::gen::raql_value::VIpv4>(v));
     case dessser::gen::raql_value::VIpv6:
@@ -422,18 +469,6 @@ QString raqlValToQString(dessser::gen::raql_value::t const &v)
   return QString::fromStdString(s.str());
 }
 
-QString raqlValToQString(
-  dessser::gen::raql_value::t const &v,
-  dessser::gen::sync_key::t const *k)
-{
-  if (k) {
-    QString spec { toQStringSpecKey(v, *k) };
-    if (! spec.isEmpty()) return spec;
-  }
-
-  return raqlValToQString(v);
-}
-
 QString raqlTypeToQString(dessser::gen::raql_type::t const &t)
 {
   std::ostringstream s;
@@ -448,23 +483,9 @@ QString raqlExprToQString(dessser::gen::raql_expr::t const &e)
   return QString::fromStdString(s.str());
 }
 
-QString syncValToQString(dessser::gen::sync_value::t const &v)
-{
-  if (v.index() == dessser::gen::sync_value::RamenValue) {
-    std::shared_ptr<dessser::gen::raql_value::t const> rv {
-      std::get<dessser::gen::sync_value::RamenValue>(v) };
-    return raqlValToQString(*rv);
-  }
-
-  // Fallback to default:
-  std::ostringstream s;
-  s << v;
-  return QString::fromStdString(s.str());
-}
-
 QString syncValToQString(
   dessser::gen::sync_value::t const &v,
-  dessser::gen::sync_key::t const *k)
+  std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   if (v.index() == dessser::gen::sync_value::RamenValue) {
     std::shared_ptr<dessser::gen::raql_value::t const> rv {
@@ -472,7 +493,10 @@ QString syncValToQString(
     return raqlValToQString(*rv, k);
   }
 
-  return syncValToQString(v);
+  // Fallback to default:
+  std::ostringstream s;
+  s << v;
+  return QString::fromStdString(s.str());
 }
 
 QString syncKeyToQString(dessser::gen::sync_key::t const &k)

@@ -1,25 +1,16 @@
 #include <iostream>
 #include <cassert>
+#include <cinttypes>
+#include <cstdio>
 #include <string>
 #include <cmath>
 #include <QDateTime>
 #include <QLayout>
 #include <QModelIndex>
 #include <QTreeView>
+#include "dessser/runtime.h"  // for operator<< on int128
 
 #include "misc.h"
-
-std::ostream &operator<<(std::ostream &os, int128_t const &)
-{
-  os << "TODO: << for int128";
-  return os;
-}
-
-std::ostream &operator<<(std::ostream &os, uint128_t const &)
-{
-  os << "TODO: << for uint128";
-  return os;
-}
 
 bool startsWith(std::string const &a, std::string const &b)
 {
@@ -157,6 +148,22 @@ QString const stringOfIp6(uint128_t ip)
   // TODO: Replace the longest sequence of "0"s by ""
 
   return words.join(":");
+}
+
+QString const stringOfU128(uint128_t v)
+{
+  using dessser::operator<<;
+  std::ostringstream s;
+  s << v;
+  return QString::fromStdString(s.str());
+}
+
+QString const stringOfI128(int128_t v)
+{
+  using dessser::operator<<;
+  std::ostringstream s;
+  s << v;
+  return QString::fromStdString(s.str());
 }
 
 QString const abbrev(int len, QString const &s)

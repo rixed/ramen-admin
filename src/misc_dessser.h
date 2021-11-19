@@ -48,9 +48,7 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &);
  * the type of conversion desired) */
 QString raqlValToQString(
   dessser::gen::raql_value::t const &,
-  dessser::gen::sync_key::t const *);
-
-QString raqlValToQString(dessser::gen::raql_value::t const &);
+  std::shared_ptr<dessser::gen::sync_key::t const> = nullptr);
 
 QString raqlTypeToQString(dessser::gen::raql_type::t const &);
 
@@ -58,9 +56,7 @@ QString raqlExprToQString(dessser::gen::raql_expr::t const &);
 
 QString syncValToQString(
   dessser::gen::sync_value::t const &,
-  dessser::gen::sync_key::t const *);
-
-QString syncValToQString(dessser::gen::sync_value::t const &);
+  std::shared_ptr<dessser::gen::sync_key::t const> = nullptr);
 
 QString syncKeyToQString(dessser::gen::sync_key::t const &);
 
