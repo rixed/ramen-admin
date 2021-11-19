@@ -341,6 +341,8 @@ QString raqlValToQString(
 
   // Special format according to type:
   switch (v.index()) {
+    case dessser::gen::raql_value::VNull:
+      return QCoreApplication::translate("QMainWindow", "null");
     case dessser::gen::raql_value::VFloat:
       return QString::number(std::get<dessser::gen::raql_value::VFloat>(v));
     case dessser::gen::raql_value::VString:
