@@ -155,7 +155,9 @@ void ConfClient::readMsg()
   qint64 avail_sz { tcpSocket->bytesAvailable() };
   Q_ASSERT(avail_sz >= 0);
 
-  do {
+  rcvdBytes += avail_sz;
+
+  while (avail_sz > 0) {
     if (avail_sz < 4) {
       if (verbose)
         qDebug() << "Only" << avail_sz << "bytes available to read, will wait.";
@@ -224,7 +226,7 @@ cannot_decode:
       case dessser::gen::sync_msg::SendSessionKey:
         {
           auto const sess_keys { std::get<dessser::gen::sync_msg::SendSessionKey>(*authn) };
-          if (0 != recvdSessionKey(sess_keys.public_key, sess_keys.nonce, sess_keys.message))
+          if (0 != rcvdSessionKey(sess_keys.public_key, sess_keys.nonce, sess_keys.message))
             goto cannot_decode;
         }
         break;
@@ -253,10 +255,12 @@ cannot_decode:
         goto cannot_decode;
     }
 
-  } while (avail_sz > 0);
+    rcvdMsgs ++;
+
+  }
 }
 
-int ConfClient::recvdSessionKey(
+int ConfClient::rcvdSessionKey(
       dessser::Bytes const &public_key,
       dessser::Bytes const &nonce,
       dessser::Bytes const &message)
@@ -371,19 +375,19 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
       {
         std::shared_ptr<dessser::gen::sync_socket::t const> sync_socket {
           std::get<dessser::gen::sync_server_msg::AuthOk>(*msg) };
-        return recvdAuthOk(sync_socket);
+        return rcvdAuthOk(sync_socket);
       }
     case dessser::gen::sync_server_msg::AuthErr:
       {
         std::string const err { std::get<dessser::gen::sync_server_msg::AuthErr>(*msg) };
-        return recvdAuthErr(QString::fromStdString(err));
+        return rcvdAuthErr(QString::fromStdString(err));
       }
     case dessser::gen::sync_server_msg::SetKey:
       {
         auto const &set_key { std::get<dessser::gen::sync_server_msg::SetKey>(*msg) };
         std::shared_ptr<dessser::gen::sync_key::t const> k { set_key.SetKey_k };
         std::shared_ptr<dessser::gen::sync_value::t const> v { set_key.SetKey_v };
-        return recvdSetKey(k, v, QString::fromStdString(set_key.SetKey_uid),
+        return rcvdSetKey(k, v, QString::fromStdString(set_key.SetKey_uid),
                            set_key.SetKey_mtime);
       }
     case dessser::gen::sync_server_msg::NewKey:
@@ -391,7 +395,7 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
         auto const &new_key { std::get<dessser::gen::sync_server_msg::NewKey>(*msg) };
         std::shared_ptr<dessser::gen::sync_key::t const> k { new_key.NewKey_k };
         std::shared_ptr<dessser::gen::sync_value::t const> v { new_key.v };
-        return recvdNewKey(k, v, QString::fromStdString(new_key.uid), new_key.mtime,
+        return rcvdNewKey(k, v, QString::fromStdString(new_key.uid), new_key.mtime,
                            new_key.can_write, new_key.can_del,
                            QString::fromStdString(new_key.NewKey_owner),
                            new_key.NewKey_expiry);
@@ -400,19 +404,19 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
       {
         std::shared_ptr<dessser::gen::sync_key::t const> k {
           std::get<dessser::gen::sync_server_msg::DelKey>(*msg) };
-        return recvdDelKey(k);
+        return rcvdDelKey(k);
       }
     case dessser::gen::sync_server_msg::LockKey:
       {
         auto const &lock { std::get<dessser::gen::sync_server_msg::LockKey>(*msg) };
         std::shared_ptr<dessser::gen::sync_key::t const> k { lock.k };
-        return recvdLockKey(k, QString::fromStdString(lock.owner), lock.expiry);
+        return rcvdLockKey(k, QString::fromStdString(lock.owner), lock.expiry);
       }
     case dessser::gen::sync_server_msg::UnlockKey:
       {
         std::shared_ptr<dessser::gen::sync_key::t const> k {
           std::get<dessser::gen::sync_server_msg::UnlockKey>(*msg) };
-        return recvdUnlockKey(k);
+        return rcvdUnlockKey(k);
       }
     default:
       qCritical() << "Invalid sync_server_msg type";
@@ -422,13 +426,13 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
   return -1;
 }
 
-int ConfClient::recvdAuthErr(QString const &err)
+int ConfClient::rcvdAuthErr(QString const &err)
 {
   fatalErr(err);
   return 0;
 }
 
-int ConfClient::recvdAuthOk(
+int ConfClient::rcvdAuthOk(
       std::shared_ptr<dessser::gen::sync_socket::t const> sync_socket)
 {
   syncSocket = sync_socket;
@@ -446,7 +450,7 @@ int ConfClient::recvdAuthOk(
   return startSynchronization();
 }
 
-int ConfClient::recvdSetKey(
+int ConfClient::rcvdSetKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k,
       std::shared_ptr<dessser::gen::sync_value::t const> v,
       QString const &set_by_uid,
@@ -481,7 +485,7 @@ int ConfClient::recvdSetKey(
   return checkDones(k, v);
 }
 
-int ConfClient::recvdNewKey(
+int ConfClient::rcvdNewKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k,
       std::shared_ptr<dessser::gen::sync_value::t const> v,
       QString const &set_by_uid,
@@ -521,7 +525,7 @@ int ConfClient::recvdNewKey(
   return ret;
 }
 
-int ConfClient::recvdDelKey(
+int ConfClient::rcvdDelKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   if (verbose) qDebug() << "del" << *k;
@@ -543,7 +547,7 @@ int ConfClient::recvdDelKey(
   return 0;
 }
 
-int ConfClient::recvdLockKey(
+int ConfClient::rcvdLockKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k,
       QString const &owner,
       double const expiry)
@@ -569,7 +573,7 @@ int ConfClient::recvdLockKey(
   return ret;
 }
 
-int ConfClient::recvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
+int ConfClient::rcvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   if (verbose) qDebug() << "unlock" << *k;
 
@@ -833,6 +837,8 @@ int ConfClient::sendMsg(
   // If we have used the nonce, increment it (*AFTER* it's serialized!)
   if (isCrypted()) sodium_increment_rev(clt_nonce, sizeof clt_nonce);
 
+  sentMsgs ++;
+
   return 0;
 }
 
@@ -864,6 +870,8 @@ int ConfClient::sendBytes(char const *bytes, size_t sz)
     return -1;
   }
   Q_ASSERT(written == (qint64)sz);
+
+  sentBytes += written;
 
   return 0;
 }

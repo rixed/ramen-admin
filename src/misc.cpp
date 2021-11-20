@@ -117,7 +117,7 @@ QString const stringOfBytes(size_t z)
   REDUCE(30, "GiB");
   REDUCE(20, "MiB");
   REDUCE(10, "KiB");
-  REDUCE(0, "bytes");
+  REDUCE(0, "");
 
 # undef REDUCE
 

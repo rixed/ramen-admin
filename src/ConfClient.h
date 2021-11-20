@@ -83,7 +83,7 @@ class ConfClient : public QObject
 
   int readSrvMsg(dessser::Bytes const &);
 
-  int recvdSessionKey(
+  int rcvdSessionKey(
         dessser::Bytes const &public_key,
         dessser::Bytes const &nonce,
         dessser::Bytes const &message);
@@ -91,29 +91,29 @@ class ConfClient : public QObject
   // Decrypt the given message and call readSrvMsg:
   int readCrypted(dessser::Bytes const &);
 
-  int recvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const>);
+  int rcvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const>);
 
-  int recvdAuthErr(QString const &err);
+  int rcvdAuthErr(QString const &err);
 
-  int recvdSetKey(
+  int rcvdSetKey(
         std::shared_ptr<dessser::gen::sync_key::t const>,
         std::shared_ptr<dessser::gen::sync_value::t const>,
         QString const &set_by_uid, double const mtime);
 
-  int recvdNewKey(
+  int rcvdNewKey(
         std::shared_ptr<dessser::gen::sync_key::t const>,
         std::shared_ptr<dessser::gen::sync_value::t const>,
         QString const &set_by_uid, double const mtime,
         bool const can_write, bool const can_del,
         QString const &owner, double const expiry);
 
-  int recvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const>);
+  int rcvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
-  int recvdLockKey(
+  int rcvdLockKey(
         std::shared_ptr<dessser::gen::sync_key::t const>,
         QString const &owner, double const expiry);
 
-  int recvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const>);
+  int rcvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
   int startSynchronization();
 
@@ -127,7 +127,11 @@ class ConfClient : public QObject
         std::shared_ptr<dessser::gen::sync_value::t const>);
 
 public:
-  /* Configuration server's representation of my socket, identifying this
+  /* Some stats about the connection */
+  qint64 sentBytes = 0U, rcvdBytes = 0U;
+  qint64 sentMsgs = 0U, rcvdMsgs = 0U;
+
+/* Configuration server's representation of my socket, identifying this
    * connection (although most configuration objects are associated to a user name,
    * some are with a specific socket). */
   std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;

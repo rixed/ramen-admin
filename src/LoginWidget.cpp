@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QFormLayout>
 #include <QHBoxLayout>
+#include <QVBoxLayout>
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
@@ -101,7 +102,6 @@ LoginWidget::LoginWidget(
   { /* The buttons */
     submitButton = new QPushButton(tr("Connect"));
     submitButton->setDefault(true);
-    connectStatus = new QLabel;
     cancelButton = new QPushButton(tr("Cancel"));
   }
 
@@ -133,9 +133,16 @@ LoginWidget::LoginWidget(
       QDialogButtonBox *buttonBox = new QDialogButtonBox;
       buttonBox->addButton(cancelButton, QDialogButtonBox::RejectRole);
       buttonBox->addButton(submitButton, QDialogButtonBox::AcceptRole);
-      buttonsIdx = buttonsOrStatus->addWidget(buttonBox);
+      QVBoxLayout *layout = new QVBoxLayout;
+      layout->addWidget(buttonBox);
+      layout->addStretch();
+      // A bit of a dance to add a layout to a QStackedLayout:
+      QWidget *w = new QWidget;
+      w->setLayout(layout);
+      buttonsIdx = buttonsOrStatus->addWidget(w);
     }
     { // The status text
+      connectStatus = new QLabel;
       statusIdx = buttonsOrStatus->addWidget(connectStatus);
     }
     outerLayout->addLayout(buttonsOrStatus);
@@ -246,5 +253,6 @@ void LoginWidget::setSubmitStatus(QString const text)
     cancelButton->setEnabled(false);
     buttonsOrStatus->setCurrentIndex(statusIdx);
   }
-  connectStatus->setText(text);
+  if (!text.isEmpty())
+    connectStatus->setText(connectStatus->text() + "\n" + text);
 }

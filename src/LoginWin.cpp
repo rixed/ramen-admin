@@ -1,11 +1,16 @@
 #include <memory>
 #include <QDebug>
 #include <QFile>
+#include <QLabel>
 #include <QMetaObject>
+#include <QStatusBar>
+#include <QTimer>
+
 #include "ConfClient.h"
 #include "LoginWidget.h"
 #include "LoginWin.h"
 #include "Menu.h"
+#include "misc.h"
 #include "UserIdentity.h"
 
 LoginWin::LoginWin(
@@ -17,21 +22,25 @@ LoginWin::LoginWin(
   loginWidget = new LoginWidget(configDir);
   setCentralWidget(loginWidget);
   connect(loginWidget, &LoginWidget::submitted,
-          this, &LoginWin::startApp);
+          this, &LoginWin::startConnect);
   connect(loginWidget, &LoginWidget::cancelled,
           this, &LoginWin::exitApp);
 
-  /* As a status bar we will have the connection status and total number
-   * of exchanged messages. */
+  /* As a status bar we will display the error from the confserver in errorMessage
+   * and some statistics about the connection. */
+  QStatusBar *sb { statusBar() };
+  stats = new QLabel;
+  sb->addPermanentWidget(stats);
   errorMessage = new KErrorMsg(this);
-  statusBar()->addPermanentWidget(errorMessage);
-
-  /* Must not wait that the connProgress slot create the statusBar, as
-   * it will be called from another thread: */
-  statusBar()->showMessage(tr("Starting-up..."));
+  sb->addWidget(errorMessage, 1);
 
   connect(this, &LoginWin::authenticated,
           menu, &Menu::upgradeToFull);
+
+  statsTimer = new QTimer(this);
+  connect(statsTimer, &QTimer::timeout,
+          this, &LoginWin::refreshStats);
+  // Will be started when sync starts
 }
 
 LoginWin::~LoginWin()
@@ -44,11 +53,9 @@ void LoginWin::focusSubmit()
   loginWidget->focusSubmit();
 }
 
-void LoginWin::startApp(
+void LoginWin::startConnect(
   QString const server, QString const username, QString const idFile)
 {
-  loginWidget->setSubmitStatus("");
-
   std::shared_ptr<UserIdentity const> id;
   if (! idFile.isEmpty()) {
     QFile file(idFile);
@@ -76,6 +83,8 @@ void LoginWin::startApp(
           this, &LoginWin::syncProgress);
   connect(client, &ConfClient::connectionFatalError,
           this, &LoginWin::syncFailed);
+
+  loginWidget->setSubmitStatus("");
 }
 
 void LoginWin::exitApp()
@@ -83,32 +92,43 @@ void LoginWin::exitApp()
   QCoreApplication::quit();
 }
 
-void LoginWin::setStatusMsg()
+void LoginWin::refreshStats()
 {
-  QStatusBar *sb = statusBar(); // create it if it doesn't exist yet
-
-  if (! errMsg.isEmpty()) {
-    sb->setStyleSheet("background-color: pink;");
-  }
-  sb->showMessage(errMsg);
-
-  loginWidget->setSubmitStatus(syncStatus.message());
+  QString const statusMsg {
+    tr("%1 (%2) ⥮ %3 (%4)").
+      arg(QString::number(client->sentMsgs)).
+      arg(stringOfBytes(client->sentBytes)).
+      arg(QString::number(client->rcvdMsgs)).
+      arg(stringOfBytes(client->rcvdBytes)) };
+  stats->setText(statusMsg);
 }
 
-void LoginWin::syncProgress(SyncStatus status)
+void LoginWin::setStatusMsg(SyncStatus const status)
 {
-  syncStatus = status;
-  setStatusMsg();
+
+  if (! errMsg.isEmpty()) {
+    QStatusBar *sb { statusBar() };
+    sb->setStyleSheet("background-color: pink;");
+    sb->showMessage(errMsg);
+  }
+
+  QString const statusMsg { status.message() };
+  loginWidget->setSubmitStatus(statusMsg);
+}
+
+void LoginWin::syncProgress(SyncStatus const status)
+{
+  setStatusMsg(status);
   // Start the actual interface as soon as synchronization starts:
   if (status.get() == SyncStatus::Status::Synchronizing) {
     emit authenticated();
+    statsTimer->start(500);
     //hide();
   }
 }
 
-void LoginWin::syncFailed(SyncStatus lastStatus, QString const &msg)
+void LoginWin::syncFailed(SyncStatus const lastStatus, QString const &msg)
 {
-  syncStatus = lastStatus;
   errMsg = msg;
-  setStatusMsg();
+  setStatusMsg(lastStatus);
 }
