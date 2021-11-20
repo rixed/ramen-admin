@@ -13,8 +13,11 @@ class KTextEdit : public AtomicWidget
 
   QSize suggestedSize;
 
+  // If true (default), editor is configured to edit RaQL syntax
+  bool raql;
+
 public:
-  KTextEdit(QWidget *parent = nullptr);
+  KTextEdit(bool raql = true, QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);

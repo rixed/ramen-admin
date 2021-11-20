@@ -10,7 +10,7 @@
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "EditorWidget.h"
-#include "KLabel.h"
+#include "KTextEdit.h"
 #include "KValue.h"
 #include "KVStore.h"
 #include "Menu.h"
@@ -56,11 +56,11 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
   /* When we do not want to show the editor we still want to see the value,
    * in raw form, and non editable. We get the raw form by forcing the "editor"
-   * to be a KLabel editor, and we get it read-only by not locking that key. */
+   * to be a KTextEdit editor, and we get it read-only by not locking that key. */
   if (showEditor) {
     editor = newEditorWidget(*kv->val, key);
   } else {
-    editor = new KLabel(nullptr, true);
+    editor = new KTextEdit(false, nullptr);
     editor->setKey(key);
   }
 

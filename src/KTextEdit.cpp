@@ -16,26 +16,31 @@
 
 static bool const verbose { false };
 
-KTextEdit::KTextEdit(QWidget *parent) :
-  AtomicWidget(parent)
+KTextEdit::KTextEdit(bool raql_, QWidget *parent) :
+  AtomicWidget(parent),
+  raql(raql_)
 {
   textEdit = new QPlainTextEdit;
   relayoutWidget(textEdit);
-  new RamenSyntaxHighlighter(textEdit->document()); // the document becomes owner
 
-  /* Set a monospaced font: */
-  QFont font = textEdit->document()->defaultFont();
-  font.setFamily("Courier New");
-  textEdit->document()->setDefaultFont(font);
+  if (raql) {
+    new RamenSyntaxHighlighter(textEdit->document()); // the document becomes owner
 
-  /* Set tab stops to 4 spaces: */
-  QFontMetricsF fontMetrics(font);
-  float tabWidth = fontMetrics.width("    ");
+    /* Set a monospaced font: */
+    QFont font = textEdit->document()->defaultFont();
+    font.setFamily("Courier New");
+    textEdit->document()->setDefaultFont(font);
+
+    /* Set tab stops to 4 spaces: */
+    QFontMetricsF fontMetrics(font);
+    float tabWidth = fontMetrics.width("    ");
 # if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-  textEdit->setTabStopDistance(roundf(tabWidth));
+    textEdit->setTabStopDistance(roundf(tabWidth));
 # else
-  textEdit->setTabStopWidth(roundf(tabWidth));
+    textEdit->setTabStopWidth(roundf(tabWidth));
 #endif
+  }
+
   connect(textEdit, &QPlainTextEdit::textChanged, // ouch!
           this, &KTextEdit::inputChanged);
 }
@@ -59,20 +64,22 @@ bool KTextEdit::setValue(
   if (new_v != textEdit->toPlainText()) {
     textEdit->setPlainText(new_v);
 
-    /* We'd like the size to be that of the widest line of text,
-     * within reason: */
-    QFont font(textEdit->document()->defaultFont());
-    QFontMetrics fontMetrics((QFontMetrics(font)));
-    int const tabWidth = 20;  // FIXME: get this from somewhere
-    QSize const maxSize(QDesktopWidget().availableGeometry(this).size() * 0.7);
-    QSize textSize(fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth));
-    suggestedSize = QSize(
-      std::min(maxSize.width(), textSize.width()),
-      std::min(maxSize.height(), textSize.height()));
+    if (raql) {
+      /* We'd like the size to be that of the widest line of text,
+       * within reason: */
+      QFont font(textEdit->document()->defaultFont());
+      QFontMetrics fontMetrics((QFontMetrics(font)));
+      int const tabWidth = 20;  // FIXME: get this from somewhere
+      QSize const maxSize(QDesktopWidget().availableGeometry(this).size() * 0.7);
+      QSize textSize(fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth));
+      suggestedSize = QSize(
+        std::min(maxSize.width(), textSize.width()),
+        std::min(maxSize.height(), textSize.height()));
 
-    if (verbose)
-      qDebug() << "KTextEdit: suggestedSize=" << suggestedSize
-               << "(max is" << maxSize << ")";
+      if (verbose)
+        qDebug() << "KTextEdit: suggestedSize=" << suggestedSize
+                 << "(max is" << maxSize << ")";
+    }
 
     emit valueChanged(k, v);
   }
