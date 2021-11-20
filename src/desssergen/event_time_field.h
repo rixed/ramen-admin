@@ -28,11 +28,13 @@ enum Constr_t48a2d544f23c6703dc0a88c42484f480 {
 
 inline std::ostream &operator<<(std::ostream &os, t48a2d544f23c6703dc0a88c42484f480 const &v) {
   switch (v.index()) {
-    case 0: os << "OutputField " << std::get<0>(v); break;
-    case 1: os << "Parameter " << std::get<1>(v); break;
+    case 0: os << "OutputField" << std::get<0>(v); break;
+    case 1: os << "Parameter" << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t48a2d544f23c6703dc0a88c42484f480> const v) { os << *v; return os; }
 
 inline bool operator==(t48a2d544f23c6703dc0a88c42484f480 const &a, t48a2d544f23c6703dc0a88c42484f480 const &b) {
   if (a.index() != b.index()) return false;
@@ -59,13 +61,15 @@ inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t) << ", ";
+  os << std::get<2>(t);
+  os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const t) { os << *t; return os; }
 
 struct t42a2a21ee63bf8cff9c7d0d6f7ed8f3b : public std::tuple<
   std::shared_ptr<::dessser::gen::event_time_field::t> ,
@@ -82,10 +86,10 @@ inline bool operator!=(t42a2a21ee63bf8cff9c7d0d6f7ed8f3b const &a, t42a2a21ee63b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t42a2a21ee63bf8cff9c7d0d6f7ed8f3b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -97,7 +101,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
 extern std::function<::dessser::gen::event_time_field::t42a2a21ee63bf8cff9c7d0d6f7ed8f3b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

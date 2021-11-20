@@ -31,12 +31,14 @@ enum Constr_t652f68aa23f2c18d61b70156eeb125ea {
 
 inline std::ostream &operator<<(std::ostream &os, t652f68aa23f2c18d61b70156eeb125ea const &v) {
   switch (v.index()) {
-    case 0: os << "Program " << std::get<0>(v); break;
-    case 1: os << "Site " << std::get<1>(v); break;
-    case 2: os << "Global " << std::get<2>(v); break;
+    case 0: os << "Program" << std::get<0>(v); break;
+    case 1: os << "Site" << std::get<1>(v); break;
+    case 2: os << "Global" << std::get<2>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t652f68aa23f2c18d61b70156eeb125ea> const v) { os << *v; return os; }
 
 inline bool operator==(t652f68aa23f2c18d61b70156eeb125ea const &a, t652f68aa23f2c18d61b70156eeb125ea const &b) {
   if (a.index() != b.index()) return false;
@@ -59,12 +61,14 @@ struct t {
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "name:" << ::dessser::gen::field_name::Deref(r.name) << ',';
+  os << "name:" << r.name << ',';
   os << "scope:" << r.scope << ',';
-  os << "typ:" << ::dessser::gen::raql_type::Deref(r.typ);
+  os << "typ:" << r.typ;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && a.scope == b.scope && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ);
 }
@@ -87,10 +91,10 @@ inline bool operator!=(t12a4afd72f36ee14a00cd9875e781364 const &a, t12a4afd72f36
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t12a4afd72f36ee14a00cd9875e781364 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -102,7 +106,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )>
 extern std::function<::dessser::gen::global_variable::t12a4afd72f36ee14a00cd9875e781364(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

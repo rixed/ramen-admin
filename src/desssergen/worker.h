@@ -36,10 +36,10 @@ inline bool operator!=(tbb6b5f61a720ca930638180f8a3d0d1a const &a, tbb6b5f61a720
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tbb6b5f61a720ca930638180f8a3d0d1a const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -58,6 +58,8 @@ inline std::ostream &operator<<(std::ostream &os, tdc75c022089b23d508b703f7fd52f
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tdc75c022089b23d508b703f7fd52f8cc> const r) { os << *r; return os; }
+
 inline bool operator==(tdc75c022089b23d508b703f7fd52f8cc const &a, tdc75c022089b23d508b703f7fd52f8cc const &b) {
   return a.parent_num == b.parent_num && a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port;
 }
@@ -77,11 +79,13 @@ enum Constr_tcea6add784d8acf1d66fabc567856768 {
 
 inline std::ostream &operator<<(std::ostream &os, tcea6add784d8acf1d66fabc567856768 const &v) {
   switch (v.index()) {
-    case 0: os << "Whole " << std::get<0>(v); break;
+    case 0: os << "Whole" << std::get<0>(v); break;
     case 1: os << "TopHalf " << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tcea6add784d8acf1d66fabc567856768> const v) { os << *v; return os; }
 
 inline bool operator==(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8acf1d66fabc567856768 const &b) {
   if (a.index() != b.index()) return false;
@@ -113,7 +117,7 @@ struct t {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "children:" << r.children << ',';
-  os << "cwd:" << ::dessser::gen::file_path::Deref(r.cwd) << ',';
+  os << "cwd:" << r.cwd << ',';
   os << "debug:" << r.debug << ',';
   os << "enabled:" << r.enabled << ',';
   os << "envvars:" << r.envvars << ',';
@@ -127,6 +131,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.children == b.children && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.envvars == b.envvars && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.report_period == b.report_period && a.role == b.role && a.worker_signature == b.worker_signature;
 }
@@ -149,10 +155,10 @@ inline bool operator!=(ta3e796acad3d617428352d1a366552f7 const &a, ta3e796acad3d
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, ta3e796acad3d617428352d1a366552f7 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -164,7 +170,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
 extern std::function<::dessser::gen::worker::ta3e796acad3d617428352d1a366552f7(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

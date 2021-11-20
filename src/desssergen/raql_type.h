@@ -17,6 +17,7 @@ using dessser::operator<<;
 /* ------------ */
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t7c0067ec9e3be4497df102566ce6840c : public std::tuple<
@@ -34,10 +35,10 @@ inline bool operator!=(t7c0067ec9e3be4497df102566ce6840c const &a, t7c0067ec9e3b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t7c0067ec9e3be4497df102566ce6840c const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -56,10 +57,10 @@ inline bool operator!=(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f360
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t680a68e6f3607e0c45e8eabda3bee607 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -78,10 +79,10 @@ inline bool operator!=(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d2
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tad36fa23b9d22f496a8fdcdecfae294b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -165,45 +166,47 @@ enum Constr_tfc84267c1506821d35acfff7838227b4 {
 
 inline std::ostream &operator<<(std::ostream &os, tfc84267c1506821d35acfff7838227b4 const &v) {
   switch (v.index()) {
-    case 0: os << "Void " << std::get<0>(v); break;
-    case 1: os << "Bool " << std::get<1>(v); break;
-    case 2: os << "Char " << std::get<2>(v); break;
-    case 3: os << "Float " << std::get<3>(v); break;
-    case 4: os << "String " << std::get<4>(v); break;
-    case 5: os << "U8 " << std::get<5>(v); break;
-    case 6: os << "U16 " << std::get<6>(v); break;
-    case 7: os << "U24 " << std::get<7>(v); break;
-    case 8: os << "U32 " << std::get<8>(v); break;
-    case 9: os << "U40 " << std::get<9>(v); break;
-    case 10: os << "U48 " << std::get<10>(v); break;
-    case 11: os << "U56 " << std::get<11>(v); break;
-    case 12: os << "U64 " << std::get<12>(v); break;
-    case 13: os << "U128 " << std::get<13>(v); break;
-    case 14: os << "I8 " << std::get<14>(v); break;
-    case 15: os << "I16 " << std::get<15>(v); break;
-    case 16: os << "I24 " << std::get<16>(v); break;
-    case 17: os << "I32 " << std::get<17>(v); break;
-    case 18: os << "I40 " << std::get<18>(v); break;
-    case 19: os << "I48 " << std::get<19>(v); break;
-    case 20: os << "I56 " << std::get<20>(v); break;
-    case 21: os << "I64 " << std::get<21>(v); break;
-    case 22: os << "I128 " << std::get<22>(v); break;
-    case 23: os << "Eth " << std::get<23>(v); break;
-    case 24: os << "Ipv4 " << std::get<24>(v); break;
-    case 25: os << "Ipv6 " << std::get<25>(v); break;
-    case 26: os << "Ip " << std::get<26>(v); break;
-    case 27: os << "Cidrv4 " << std::get<27>(v); break;
-    case 28: os << "Cidrv6 " << std::get<28>(v); break;
-    case 29: os << "Cidr " << std::get<29>(v); break;
+    case 0: os << "Void" << std::get<0>(v); break;
+    case 1: os << "Bool" << std::get<1>(v); break;
+    case 2: os << "Char" << std::get<2>(v); break;
+    case 3: os << "Float" << std::get<3>(v); break;
+    case 4: os << "String" << std::get<4>(v); break;
+    case 5: os << "U8" << std::get<5>(v); break;
+    case 6: os << "U16" << std::get<6>(v); break;
+    case 7: os << "U24" << std::get<7>(v); break;
+    case 8: os << "U32" << std::get<8>(v); break;
+    case 9: os << "U40" << std::get<9>(v); break;
+    case 10: os << "U48" << std::get<10>(v); break;
+    case 11: os << "U56" << std::get<11>(v); break;
+    case 12: os << "U64" << std::get<12>(v); break;
+    case 13: os << "U128" << std::get<13>(v); break;
+    case 14: os << "I8" << std::get<14>(v); break;
+    case 15: os << "I16" << std::get<15>(v); break;
+    case 16: os << "I24" << std::get<16>(v); break;
+    case 17: os << "I32" << std::get<17>(v); break;
+    case 18: os << "I40" << std::get<18>(v); break;
+    case 19: os << "I48" << std::get<19>(v); break;
+    case 20: os << "I56" << std::get<20>(v); break;
+    case 21: os << "I64" << std::get<21>(v); break;
+    case 22: os << "I128" << std::get<22>(v); break;
+    case 23: os << "Eth" << std::get<23>(v); break;
+    case 24: os << "Ipv4" << std::get<24>(v); break;
+    case 25: os << "Ipv6" << std::get<25>(v); break;
+    case 26: os << "Ip" << std::get<26>(v); break;
+    case 27: os << "Cidrv4" << std::get<27>(v); break;
+    case 28: os << "Cidrv6" << std::get<28>(v); break;
+    case 29: os << "Cidr" << std::get<29>(v); break;
     case 30: os << "Tup " << std::get<30>(v); break;
     case 31: os << "Vec " << std::get<31>(v); break;
-    case 32: os << "Arr " << (*std::get<32>(v)); break;
+    case 32: os << "Arr " << std::get<32>(v); break;
     case 33: os << "Rec " << std::get<33>(v); break;
     case 34: os << "Sum " << std::get<34>(v); break;
     case 35: os << "Map " << std::get<35>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfc84267c1506821d35acfff7838227b4> const v) { os << *v; return os; }
 
 inline bool operator==(tfc84267c1506821d35acfff7838227b4 const &a, tfc84267c1506821d35acfff7838227b4 const &b) {
   if (a.index() != b.index()) return false;
@@ -263,6 +266,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.nullable == b.nullable && a.type == b.type;
 }
@@ -272,10 +277,12 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct tf2625240b3c32734b297669569815110 : public std::tuple<
@@ -293,10 +300,10 @@ inline bool operator!=(tf2625240b3c32734b297669569815110 const &a, tf2625240b3c3
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tf2625240b3c32734b297669569815110 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -308,7 +315,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersi
 extern std::function<::dessser::gen::raql_type::tf2625240b3c32734b297669569815110(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

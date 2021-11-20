@@ -42,6 +42,7 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t75eb84cfd0f6bcc73aa497e64829fd98 : public std::tuple<
@@ -819,10 +820,12 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t941fc5823ff49780db4e6bb9a331e7d9 : public std::tuple<

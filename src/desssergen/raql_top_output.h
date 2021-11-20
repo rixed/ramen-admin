@@ -29,12 +29,14 @@ enum Constr_t {
 
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << "Membership " << std::get<0>(v); break;
-    case 1: os << "Rank " << std::get<1>(v); break;
-    case 2: os << "List " << std::get<2>(v); break;
+    case 0: os << "Membership" << std::get<0>(v); break;
+    case 1: os << "Rank" << std::get<1>(v); break;
+    case 2: os << "List" << std::get<2>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -63,10 +65,10 @@ inline bool operator!=(t56749a956933ce485fc8f8a29d7c3f4b const &a, t56749a956933
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t56749a956933ce485fc8f8a29d7c3f4b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -78,7 +80,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_top_output::t> )>
 extern std::function<::dessser::gen::raql_top_output::t56749a956933ce485fc8f8a29d7c3f4b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -33,6 +33,8 @@ inline std::ostream &operator<<(std::ostream &os, tb689860ac91fca7822797a026958e
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb689860ac91fca7822797a026958e891> const v) { os << *v; return os; }
+
 inline bool operator==(tb689860ac91fca7822797a026958e891 const &a, tb689860ac91fca7822797a026958e891 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -57,6 +59,8 @@ inline std::ostream &operator<<(std::ostream &os, t81f779acbcb9180b1df9b88e2d8ce
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t81f779acbcb9180b1df9b88e2d8ce982> const r) { os << *r; return os; }
+
 inline bool operator==(t81f779acbcb9180b1df9b88e2d8ce982 const &a, t81f779acbcb9180b1df9b88e2d8ce982 const &b) {
   return a.Cidr4_ip == b.Cidr4_ip && a.Cidr4_mask == b.Cidr4_mask;
 }
@@ -77,6 +81,8 @@ inline std::ostream &operator<<(std::ostream &os, t8d4af754051624596ec1687a64e3b
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8d4af754051624596ec1687a64e3bf86> const r) { os << *r; return os; }
+
 inline bool operator==(t8d4af754051624596ec1687a64e3bf86 const &a, t8d4af754051624596ec1687a64e3bf86 const &b) {
   return a.ip == b.ip && a.mask == b.mask;
 }
@@ -102,6 +108,8 @@ inline std::ostream &operator<<(std::ostream &os, t086a8e00718450baf3e88e60b5e42
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t086a8e00718450baf3e88e60b5e42a27> const v) { os << *v; return os; }
+
 inline bool operator==(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e00718450baf3e88e60b5e42a27 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -115,6 +123,7 @@ inline bool operator!=(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e007184
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t680a68e6f3607e0c45e8eabda3bee607 : public std::tuple<
@@ -132,10 +141,10 @@ inline bool operator!=(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f360
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t680a68e6f3607e0c45e8eabda3bee607 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -154,10 +163,10 @@ inline bool operator!=(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d2
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tad36fa23b9d22f496a8fdcdecfae294b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -241,8 +250,8 @@ enum Constr_t {
 
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << "VNull " << std::get<0>(v); break;
-    case 1: os << "VUnit " << std::get<1>(v); break;
+    case 0: os << "VNull" << std::get<0>(v); break;
+    case 1: os << "VUnit" << std::get<1>(v); break;
     case 2: os << "VFloat " << std::get<2>(v); break;
     case 3: os << "VString " << std::get<3>(v); break;
     case 4: os << "VBool " << std::get<4>(v); break;
@@ -280,6 +289,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -328,10 +339,12 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t2192dc426e477a22ba201bc3a0e4295b : public std::tuple<
@@ -349,10 +362,10 @@ inline bool operator!=(t2192dc426e477a22ba201bc3a0e4295b const &a, t2192dc426e47
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t2192dc426e477a22ba201bc3a0e4295b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -364,7 +377,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
 extern std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

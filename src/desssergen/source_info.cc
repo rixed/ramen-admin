@@ -95,7 +95,7 @@ struct t6053a864da647a621fc35e881a801a97 : public std::variant<
 inline bool operator==(t6053a864da647a621fc35e881a801a97 const &a, t6053a864da647a621fc35e881a801a97 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Compiled
+    case 0: return (*std::get<0>(a)) == (*std::get<0>(b)); // Compiled
     case 1: return std::get<1>(a) == std::get<1>(b); // Failed
   };
   return false;

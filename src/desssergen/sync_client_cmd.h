@@ -42,10 +42,10 @@ inline bool operator!=(t76a4eace0515e74e2f7158564887d6e2 const &a, t76a4eace0515
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t76a4eace0515e74e2f7158564887d6e2 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -64,10 +64,10 @@ inline bool operator!=(t3d86b821c5091c6f135e0807d7d824a9 const &a, t3d86b821c509
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t3d86b821c5091c6f135e0807d7d824a9 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -86,12 +86,12 @@ inline bool operator!=(t4e5b196a7c2c025698938503da55021a const &a, t4e5b196a7c2c
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t4e5b196a7c2c025698938503da55021a const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t) << ", ";
+  os << std::get<2>(t) << ", ";
+  os << std::get<3>(t);
+  os << '>';
   return os;
 }
 
@@ -109,11 +109,11 @@ inline bool operator!=(tdc1bba9eed6e3f46c2e7e4e1c60d94bc const &a, tdc1bba9eed6e
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tdc1bba9eed6e3f46c2e7e4e1c60d94bc const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t) << ", ";
+  os << std::get<2>(t);
+  os << '>';
   return os;
 }
 
@@ -146,18 +146,20 @@ enum Constr_t {
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Auth " << std::get<0>(v); break;
-    case 1: os << "StartSync " << ::dessser::gen::sync_selector::Deref(std::get<1>(v)); break;
+    case 1: os << "StartSync " << std::get<1>(v); break;
     case 2: os << "SetKey " << std::get<2>(v); break;
     case 3: os << "NewKey " << std::get<3>(v); break;
     case 4: os << "UpdKey " << std::get<4>(v); break;
-    case 5: os << "DelKey " << ::dessser::gen::sync_key::Deref(std::get<5>(v)); break;
+    case 5: os << "DelKey " << std::get<5>(v); break;
     case 6: os << "LockKey " << std::get<6>(v); break;
     case 7: os << "LockOrCreateKey " << std::get<7>(v); break;
-    case 8: os << "UnlockKey " << ::dessser::gen::sync_key::Deref(std::get<8>(v)); break;
-    case 9: os << "Bye " << std::get<9>(v); break;
+    case 8: os << "UnlockKey " << std::get<8>(v); break;
+    case 9: os << "Bye" << std::get<9>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -193,10 +195,10 @@ inline bool operator!=(tfd5814032c8587486ba8d32ccdd5b703 const &a, tfd5814032c85
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tfd5814032c8587486ba8d32ccdd5b703 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -208,7 +210,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::sync_client_cmd::t> )>
 extern std::function<::dessser::gen::sync_client_cmd::tfd5814032c8587486ba8d32ccdd5b703(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

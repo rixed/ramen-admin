@@ -104,7 +104,7 @@ struct t784c9e092e6dc8e0c9c5fd1cc3093085 : public std::tuple<
     : std::tuple<uint16_t, std::shared_ptr<::dessser::gen::output_specs::channel_specs> >(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t784c9e092e6dc8e0c9c5fd1cc3093085 const &a, t784c9e092e6dc8e0c9c5fd1cc3093085 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+  return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
 inline bool operator!=(t784c9e092e6dc8e0c9c5fd1cc3093085 const &a, t784c9e092e6dc8e0c9c5fd1cc3093085 const &b) {
   return !operator==(a, b);
@@ -132,7 +132,7 @@ struct td4b276c89163d76d7a872961502751f6 {
   td4b276c89163d76d7a872961502751f6() = default;
 };
 inline bool operator==(td4b276c89163d76d7a872961502751f6 const &a, td4b276c89163d76d7a872961502751f6 const &b) {
-  return a.channels == b.channels && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && a.file_type == b.file_type && a.filters == b.filters;
+  return a.channels == b.channels && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && (*a.file_type) == (*b.file_type) && a.filters == b.filters;
 }
 
 inline bool operator!=(td4b276c89163d76d7a872961502751f6 const &a, td4b276c89163d76d7a872961502751f6 const &b) {
@@ -147,7 +147,7 @@ struct tba04231272fbebb3d3653fbc82bc2eee : public std::tuple<
     : std::tuple<std::shared_ptr<::dessser::gen::output_specs::recipient> , ::dessser::gen::output_specs::td4b276c89163d76d7a872961502751f6>(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(tba04231272fbebb3d3653fbc82bc2eee const &a, tba04231272fbebb3d3653fbc82bc2eee const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
 inline bool operator!=(tba04231272fbebb3d3653fbc82bc2eee const &a, tba04231272fbebb3d3653fbc82bc2eee const &b) {
   return !operator==(a, b);

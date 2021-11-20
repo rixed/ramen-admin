@@ -34,6 +34,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.start_date == b.start_date && a.stop_date == b.stop_date && a.what == b.what && a.who == b.who && a.why == b.why;
 }
@@ -56,10 +58,10 @@ inline bool operator!=(t4595ec1adc4f7355158d53cad66ecc5b const &a, t4595ec1adc4f
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t4595ec1adc4f7355158d53cad66ecc5b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -71,7 +73,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t
 extern std::function<::dessser::gen::alerting_inhibition::t4595ec1adc4f7355158d53cad66ecc5b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -38,6 +38,8 @@ inline std::ostream &operator<<(std::ostream &os, per_dash_key const &v) {
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<per_dash_key> const v) { os << *v; return os; }
+
 inline bool operator==(per_dash_key const &a, per_dash_key const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -66,11 +68,13 @@ inline std::ostream &operator<<(std::ostream &os, per_client const &v) {
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<per_client> const v) { os << *v; return os; }
+
 inline bool operator==(per_client const &a, per_client const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Response
-    case 1: return std::get<1>(a) == std::get<1>(b); // Scratchpad
+    case 1: return (*std::get<1>(a)) == (*std::get<1>(b)); // Scratchpad
   };
   return false;
 }
@@ -94,6 +98,8 @@ inline std::ostream &operator<<(std::ostream &os, per_tail const &v) {
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<per_tail> const v) { os << *v; return os; }
 
 inline bool operator==(per_tail const &a, per_tail const &b) {
   if (a.index() != b.index()) return false;
@@ -121,10 +127,10 @@ inline bool operator!=(t3f2a416abcbd7d33d681d9d47445767b const &a, t3f2a416abcbd
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t3f2a416abcbd7d33d681d9d47445767b const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -140,11 +146,13 @@ enum Constr_t32def300158106bfcc2bfd2015d1a3a9 {
 
 inline std::ostream &operator<<(std::ostream &os, t32def300158106bfcc2bfd2015d1a3a9 const &v) {
   switch (v.index()) {
-    case 0: os << "Host " << std::get<0>(v); break;
-    case 1: os << "Port " << std::get<1>(v); break;
+    case 0: os << "Host" << std::get<0>(v); break;
+    case 1: os << "Port" << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t32def300158106bfcc2bfd2015d1a3a9> const v) { os << *v; return os; }
 
 inline bool operator==(t32def300158106bfcc2bfd2015d1a3a9 const &a, t32def300158106bfcc2bfd2015d1a3a9 const &b) {
   if (a.index() != b.index()) return false;
@@ -172,10 +180,10 @@ inline bool operator!=(t917a1ec3837bac9e10c931466c2b1db6 const &a, t917a1ec3837b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t917a1ec3837bac9e10c931466c2b1db6 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -203,17 +211,19 @@ enum Constr_t082c1c733e68c2b9334f218f8c5aeccb {
 
 inline std::ostream &operator<<(std::ostream &os, t082c1c733e68c2b9334f218f8c5aeccb const &v) {
   switch (v.index()) {
-    case 0: os << "StateFile " << std::get<0>(v); break;
-    case 1: os << "InputRingFile " << std::get<1>(v); break;
-    case 2: os << "Pid " << std::get<2>(v); break;
-    case 3: os << "LastKilled " << std::get<3>(v); break;
-    case 4: os << "LastExit " << std::get<4>(v); break;
-    case 5: os << "LastExitStatus " << std::get<5>(v); break;
-    case 6: os << "SuccessiveFailures " << std::get<6>(v); break;
-    case 7: os << "QuarantineUntil " << std::get<7>(v); break;
+    case 0: os << "StateFile" << std::get<0>(v); break;
+    case 1: os << "InputRingFile" << std::get<1>(v); break;
+    case 2: os << "Pid" << std::get<2>(v); break;
+    case 3: os << "LastKilled" << std::get<3>(v); break;
+    case 4: os << "LastExit" << std::get<4>(v); break;
+    case 5: os << "LastExitStatus" << std::get<5>(v); break;
+    case 6: os << "SuccessiveFailures" << std::get<6>(v); break;
+    case 7: os << "QuarantineUntil" << std::get<7>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t082c1c733e68c2b9334f218f8c5aeccb> const v) { os << *v; return os; }
 
 inline bool operator==(t082c1c733e68c2b9334f218f8c5aeccb const &a, t082c1c733e68c2b9334f218f8c5aeccb const &b) {
   if (a.index() != b.index()) return false;
@@ -247,10 +257,10 @@ inline bool operator!=(t87de6a51e16e395e537230ef32d18a96 const &a, t87de6a51e16e
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t87de6a51e16e395e537230ef32d18a96 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -280,18 +290,20 @@ enum Constr_t4f653cc5cecafb6924f3d52da0caa392 {
 
 inline std::ostream &operator<<(std::ostream &os, t4f653cc5cecafb6924f3d52da0caa392 const &v) {
   switch (v.index()) {
-    case 0: os << "RuntimeStats " << std::get<0>(v); break;
-    case 1: os << "ArchivedTimes " << std::get<1>(v); break;
-    case 2: os << "NumArcFiles " << std::get<2>(v); break;
-    case 3: os << "NumArcBytes " << std::get<3>(v); break;
-    case 4: os << "AllocedArcBytes " << std::get<4>(v); break;
-    case 5: os << "Worker " << std::get<5>(v); break;
+    case 0: os << "RuntimeStats" << std::get<0>(v); break;
+    case 1: os << "ArchivedTimes" << std::get<1>(v); break;
+    case 2: os << "NumArcFiles" << std::get<2>(v); break;
+    case 3: os << "NumArcBytes" << std::get<3>(v); break;
+    case 4: os << "AllocedArcBytes" << std::get<4>(v); break;
+    case 5: os << "Worker" << std::get<5>(v); break;
     case 6: os << "PerInstance " << std::get<6>(v); break;
     case 7: os << "PerReplayer " << std::get<7>(v); break;
-    case 8: os << "OutputSpecs " << std::get<8>(v); break;
+    case 8: os << "OutputSpecs" << std::get<8>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4f653cc5cecafb6924f3d52da0caa392> const v) { os << *v; return os; }
 
 inline bool operator==(t4f653cc5cecafb6924f3d52da0caa392 const &a, t4f653cc5cecafb6924f3d52da0caa392 const &b) {
   if (a.index() != b.index()) return false;
@@ -326,10 +338,10 @@ inline bool operator!=(tb2139bc0252a099cc9e179b592108d12 const &a, tb2139bc0252a
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tb2139bc0252a099cc9e179b592108d12 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -343,10 +355,12 @@ enum Constr_t73ec97d1f82a1880f5d2693e3a0558b1 {
 
 inline std::ostream &operator<<(std::ostream &os, t73ec97d1f82a1880f5d2693e3a0558b1 const &v) {
   switch (v.index()) {
-    case 0: os << "Executable " << std::get<0>(v); break;
+    case 0: os << "Executable" << std::get<0>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t73ec97d1f82a1880f5d2693e3a0558b1> const v) { os << *v; return os; }
 
 inline bool operator==(t73ec97d1f82a1880f5d2693e3a0558b1 const &a, t73ec97d1f82a1880f5d2693e3a0558b1 const &b) {
   if (a.index() != b.index()) return false;
@@ -373,10 +387,10 @@ inline bool operator!=(t1a2ea3d90b4ec20b73da76f490de4625 const &a, t1a2ea3d90b4e
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t1a2ea3d90b4ec20b73da76f490de4625 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -396,13 +410,15 @@ enum Constr_t9030dc10bd527c50c2f835375dc4eb9d {
 
 inline std::ostream &operator<<(std::ostream &os, t9030dc10bd527c50c2f835375dc4eb9d const &v) {
   switch (v.index()) {
-    case 0: os << "IsMaster " << std::get<0>(v); break;
+    case 0: os << "IsMaster" << std::get<0>(v); break;
     case 1: os << "PerService " << std::get<1>(v); break;
     case 2: os << "PerWorker " << std::get<2>(v); break;
     case 3: os << "PerProgram " << std::get<3>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9030dc10bd527c50c2f835375dc4eb9d> const v) { os << *v; return os; }
 
 inline bool operator==(t9030dc10bd527c50c2f835375dc4eb9d const &a, t9030dc10bd527c50c2f835375dc4eb9d const &b) {
   if (a.index() != b.index()) return false;
@@ -432,10 +448,10 @@ inline bool operator!=(t64d8d40f333c531e9d48c05b8ceb4cfa const &a, t64d8d40f333c
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t64d8d40f333c531e9d48c05b8ceb4cfa const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -453,12 +469,14 @@ enum Constr_t1fb80ba5a0eef0b970838ab3e8e6bce4 {
 
 inline std::ostream &operator<<(std::ostream &os, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &v) {
   switch (v.index()) {
-    case 0: os << "TotalSize " << std::get<0>(v); break;
-    case 1: os << "RecallCost " << std::get<1>(v); break;
+    case 0: os << "TotalSize" << std::get<0>(v); break;
+    case 1: os << "RecallCost" << std::get<1>(v); break;
     case 2: os << "RetentionsOverride " << std::get<2>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t1fb80ba5a0eef0b970838ab3e8e6bce4> const v) { os << *v; return os; }
 
 inline bool operator==(t1fb80ba5a0eef0b970838ab3e8e6bce4 const &a, t1fb80ba5a0eef0b970838ab3e8e6bce4 const &b) {
   if (a.index() != b.index()) return false;
@@ -481,18 +499,18 @@ struct te552b116666bdac4ad5a96694c71efca : public std::tuple<
   using tuple::tuple;
 };
 inline bool operator==(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
-  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && std::get<3>(a) == std::get<3>(b);
+  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && (*std::get<3>(a)) == (*std::get<3>(b));
 }
 inline bool operator!=(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, te552b116666bdac4ad5a96694c71efca const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t) << ", "
-     << std::get<3>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t) << ", ";
+  os << std::get<2>(t) << ", ";
+  os << std::get<3>(t);
+  os << '>';
   return os;
 }
 
@@ -505,21 +523,22 @@ struct t4ce2d4679665698c8b564907b52837ef : public std::tuple<
     : std::tuple<dessser::gen::sync_socket::t_ext, std::shared_ptr<::dessser::gen::sync_key::per_client> >(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
-  return ::dessser::gen::sync_socket::Deref(std::get<0>(a)) == ::dessser::gen::sync_socket::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+  return ::dessser::gen::sync_socket::Deref(std::get<0>(a)) == ::dessser::gen::sync_socket::Deref(std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
 inline bool operator!=(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t4ce2d4679665698c8b564907b52837ef const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t86de2f73c647a4a64e778895c97184da : public std::tuple<
@@ -537,10 +556,10 @@ inline bool operator!=(t86de2f73c647a4a64e778895c97184da const &a, t86de2f73c647
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t86de2f73c647a4a64e778895c97184da const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << *std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -561,6 +580,8 @@ inline std::ostream &operator<<(std::ostream &os, t8bc7bba8a815a55f85ed48e95de5a
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8bc7bba8a815a55f85ed48e95de5ac1f> const v) { os << *v; return os; }
 
 inline bool operator==(t8bc7bba8a815a55f85ed48e95de5ac1f const &a, t8bc7bba8a815a55f85ed48e95de5ac1f const &b) {
   if (a.index() != b.index()) return false;
@@ -588,10 +609,10 @@ inline bool operator!=(t2ca7e384e93254d786048eef2705adff const &a, t2ca7e384e932
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t2ca7e384e93254d786048eef2705adff const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -617,16 +638,18 @@ enum Constr_t7cca840d7e40b13b976d995ba9f9fd5b {
 
 inline std::ostream &operator<<(std::ostream &os, t7cca840d7e40b13b976d995ba9f9fd5b const &v) {
   switch (v.index()) {
-    case 0: os << "NumDeliveryAttempts " << std::get<0>(v); break;
-    case 1: os << "FirstDeliveryAttempt " << std::get<1>(v); break;
-    case 2: os << "LastDeliveryAttempt " << std::get<2>(v); break;
-    case 3: os << "NextScheduled " << std::get<3>(v); break;
-    case 4: os << "NextSend " << std::get<4>(v); break;
-    case 5: os << "DeliveryStatus " << std::get<5>(v); break;
-    case 6: os << "Ack " << std::get<6>(v); break;
+    case 0: os << "NumDeliveryAttempts" << std::get<0>(v); break;
+    case 1: os << "FirstDeliveryAttempt" << std::get<1>(v); break;
+    case 2: os << "LastDeliveryAttempt" << std::get<2>(v); break;
+    case 3: os << "NextScheduled" << std::get<3>(v); break;
+    case 4: os << "NextSend" << std::get<4>(v); break;
+    case 5: os << "DeliveryStatus" << std::get<5>(v); break;
+    case 6: os << "Ack" << std::get<6>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7cca840d7e40b13b976d995ba9f9fd5b> const v) { os << *v; return os; }
 
 inline bool operator==(t7cca840d7e40b13b976d995ba9f9fd5b const &a, t7cca840d7e40b13b976d995ba9f9fd5b const &b) {
   if (a.index() != b.index()) return false;
@@ -659,10 +682,10 @@ inline bool operator!=(t5f10ae89970b1e8c27fc9f8df94fd836 const &a, t5f10ae89970b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t5f10ae89970b1e8c27fc9f8df94fd836 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -681,10 +704,10 @@ inline bool operator!=(t5f29f78957e3b1e9ec4688f50d1b6080 const &a, t5f29f78957e3
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t5f29f78957e3b1e9ec4688f50d1b6080 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -710,16 +733,18 @@ enum Constr_t0c4a58933d47075f04ed70f827130a86 {
 
 inline std::ostream &operator<<(std::ostream &os, t0c4a58933d47075f04ed70f827130a86 const &v) {
   switch (v.index()) {
-    case 0: os << "FirstStartNotif " << std::get<0>(v); break;
-    case 1: os << "LastStartNotif " << std::get<1>(v); break;
-    case 2: os << "LastStopNotif " << std::get<2>(v); break;
-    case 3: os << "LastStateChangeNotif " << std::get<3>(v); break;
-    case 4: os << "Team " << std::get<4>(v); break;
+    case 0: os << "FirstStartNotif" << std::get<0>(v); break;
+    case 1: os << "LastStartNotif" << std::get<1>(v); break;
+    case 2: os << "LastStopNotif" << std::get<2>(v); break;
+    case 3: os << "LastStateChangeNotif" << std::get<3>(v); break;
+    case 4: os << "Team" << std::get<4>(v); break;
     case 5: os << "Dialogs " << std::get<5>(v); break;
     case 6: os << "Journal " << std::get<6>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0c4a58933d47075f04ed70f827130a86> const v) { os << *v; return os; }
 
 inline bool operator==(t0c4a58933d47075f04ed70f827130a86 const &a, t0c4a58933d47075f04ed70f827130a86 const &b) {
   if (a.index() != b.index()) return false;
@@ -752,10 +777,10 @@ inline bool operator!=(t9ec4790c9e9e464ee01331cfcf67af68 const &a, t9ec4790c9e9e
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t9ec4790c9e9e464ee01331cfcf67af68 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -799,25 +824,27 @@ enum Constr_t {
 
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << "DevNull " << std::get<0>(v); break;
-    case 1: os << "Time " << std::get<1>(v); break;
+    case 0: os << "DevNull" << std::get<0>(v); break;
+    case 1: os << "Time" << std::get<1>(v); break;
     case 2: os << "Versions " << std::get<2>(v); break;
     case 3: os << "Sources " << std::get<3>(v); break;
-    case 4: os << "TargetConfig " << std::get<4>(v); break;
+    case 4: os << "TargetConfig" << std::get<4>(v); break;
     case 5: os << "PerSite " << std::get<5>(v); break;
     case 6: os << "Storage " << std::get<6>(v); break;
     case 7: os << "Tails " << std::get<7>(v); break;
     case 8: os << "Replays " << std::get<8>(v); break;
-    case 9: if (std::get<9>(v)) os << "Error " << ::dessser::gen::sync_socket::Deref(std::get<9>(v).value()); break;
-    case 10: os << "ReplayRequests " << std::get<10>(v); break;
+    case 9: if (std::get<9>(v)) os << "Error " << std::get<9>(v).value(); break;
+    case 10: os << "ReplayRequests" << std::get<10>(v); break;
     case 11: os << "PerClient " << std::get<11>(v); break;
     case 12: os << "Dashboards " << std::get<12>(v); break;
-    case 13: os << "Notifications " << std::get<13>(v); break;
+    case 13: os << "Notifications" << std::get<13>(v); break;
     case 14: os << "Teams " << std::get<14>(v); break;
     case 15: os << "Incidents " << std::get<15>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -846,6 +873,7 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t35aec9ecfaa6df3f20c35d464145bd4c : public std::tuple<
@@ -863,10 +891,10 @@ inline bool operator!=(t35aec9ecfaa6df3f20c35d464145bd4c const &a, t35aec9ecfaa6
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t35aec9ecfaa6df3f20c35d464145bd4c const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -885,10 +913,10 @@ inline bool operator!=(t046563c971c0fcc6bcd022e88904aea9 const &a, t046563c971c0
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t046563c971c0fcc6bcd022e88904aea9 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -907,15 +935,16 @@ inline bool operator!=(t4521c7ac16d3ba391c05353ff307ec6d const &a, t4521c7ac16d3
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t4521c7ac16d3ba391c05353ff307ec6d const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t88648ce03c3e83f4daca25557f77454f : public std::tuple<
@@ -933,10 +962,10 @@ inline bool operator!=(t88648ce03c3e83f4daca25557f77454f const &a, t88648ce03c3e
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t88648ce03c3e83f4daca25557f77454f const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -957,7 +986,6 @@ extern std::function<::dessser::gen::sync_key::t4521c7ac16d3ba391c05353ff307ec6d
 extern std::function<::dessser::gen::sync_key::t88648ce03c3e83f4daca25557f77454f(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

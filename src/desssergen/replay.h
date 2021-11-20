@@ -36,10 +36,10 @@ inline bool operator!=(t8b5761d72d0b8fde816fcaa9bfc21290 const &a, t8b5761d72d0b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t8b5761d72d0b8fde816fcaa9bfc21290 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -55,11 +55,13 @@ enum Constr_t249796f29bea1f0bea9516f4b3a8f909 {
 
 inline std::ostream &operator<<(std::ostream &os, t249796f29bea1f0bea9516f4b3a8f909 const &v) {
   switch (v.index()) {
-    case 0: os << "RingBuf " << ::dessser::gen::file_path::Deref(std::get<0>(v)); break;
-    case 1: os << "SyncKey " << ::dessser::gen::sync_key::Deref(std::get<1>(v)); break;
+    case 0: os << "RingBuf " << std::get<0>(v); break;
+    case 1: os << "SyncKey " << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t249796f29bea1f0bea9516f4b3a8f909> const v) { os << *v; return os; }
 
 inline bool operator==(t249796f29bea1f0bea9516f4b3a8f909 const &a, t249796f29bea1f0bea9516f4b3a8f909 const &b) {
   if (a.index() != b.index()) return false;
@@ -92,13 +94,15 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << "recipient:" << r.recipient << ',';
   os << "since:" << r.since << ',';
   os << "sources:" << r.sources << ',';
-  os << "target:" << ::dessser::gen::fq_function_name::Deref(r.target) << ',';
+  os << "target:" << r.target << ',';
   os << "target_fieldmask:" << r.target_fieldmask << ',';
   os << "timeout_date:" << r.timeout_date << ',';
   os << "until:" << r.until;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.channel == b.channel && a.links == b.links && a.recipient == b.recipient && a.since == b.since && a.sources == b.sources && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.target_fieldmask == b.target_fieldmask && a.timeout_date == b.timeout_date && a.until == b.until;
 }
@@ -121,10 +125,10 @@ inline bool operator!=(t0e599894aecab3395c467833ad77eb85 const &a, t0e599894aeca
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t0e599894aecab3395c467833ad77eb85 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -136,7 +140,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_
 extern std::function<::dessser::gen::replay::t0e599894aecab3395c467833ad77eb85(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -33,10 +33,10 @@ inline bool operator!=(t40f56917851bc62b1c9e1a72700c3bed const &a, t40f56917851b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t40f56917851bc62b1c9e1a72700c3bed const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -58,11 +58,13 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "State " << std::get<0>(v); break;
     case 1: os << "RecordField " << std::get<1>(v); break;
-    case 2: os << "RecordValue " << ::dessser::gen::raql_variable::Deref(std::get<2>(v)); break;
+    case 2: os << "RecordValue " << std::get<2>(v); break;
     case 3: os << "Direct " << std::get<3>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -92,10 +94,10 @@ inline bool operator!=(tb153335fc05f1eec6819ab87a88b916a const &a, tb153335fc05f
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tb153335fc05f1eec6819ab87a88b916a const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -107,7 +109,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_binding_key::t> )
 extern std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

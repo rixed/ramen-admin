@@ -90,6 +90,7 @@ inline bool operator!=(t086a8e00718450baf3e88e60b5e42a27 const &a, t086a8e007184
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t680a68e6f3607e0c45e8eabda3bee607 : public std::tuple<
@@ -206,10 +207,12 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t2192dc426e477a22ba201bc3a0e4295b : public std::tuple<

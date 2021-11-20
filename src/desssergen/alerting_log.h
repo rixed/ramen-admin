@@ -31,13 +31,15 @@ enum Constr_t89816cbdea496c3fdf253c2ff7eb9816 {
 
 inline std::ostream &operator<<(std::ostream &os, t89816cbdea496c3fdf253c2ff7eb9816 const &v) {
   switch (v.index()) {
-    case 0: os << "Duplicate " << std::get<0>(v); break;
-    case 1: os << "Inhibited " << std::get<1>(v); break;
-    case 2: os << "STFU " << std::get<2>(v); break;
-    case 3: os << "StartEscalation " << std::get<3>(v); break;
+    case 0: os << "Duplicate" << std::get<0>(v); break;
+    case 1: os << "Inhibited" << std::get<1>(v); break;
+    case 2: os << "STFU" << std::get<2>(v); break;
+    case 3: os << "StartEscalation" << std::get<3>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t89816cbdea496c3fdf253c2ff7eb9816> const v) { os << *v; return os; }
 
 inline bool operator==(t89816cbdea496c3fdf253c2ff7eb9816 const &a, t89816cbdea496c3fdf253c2ff7eb9816 const &b) {
   if (a.index() != b.index()) return false;
@@ -67,10 +69,10 @@ inline bool operator!=(t634cf874353f100ca9a3d84e2b6c3c4b const &a, t634cf874353f
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t634cf874353f100ca9a3d84e2b6c3c4b const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -88,12 +90,14 @@ enum Constr_tc13ab978611f6f6c6f0eb7ff36eb72f4 {
 
 inline std::ostream &operator<<(std::ostream &os, tc13ab978611f6f6c6f0eb7ff36eb72f4 const &v) {
   switch (v.index()) {
-    case 0: os << "Notification " << std::get<0>(v); break;
+    case 0: os << "Notification" << std::get<0>(v); break;
     case 1: os << "Manual " << std::get<1>(v); break;
     case 2: os << "Timeout " << std::get<2>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc13ab978611f6f6c6f0eb7ff36eb72f4> const v) { os << *v; return os; }
 
 inline bool operator==(tc13ab978611f6f6c6f0eb7ff36eb72f4 const &a, tc13ab978611f6f6c6f0eb7ff36eb72f4 const &b) {
   if (a.index() != b.index()) return false;
@@ -134,6 +138,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -163,10 +169,10 @@ inline bool operator!=(t6b074172af0a13530a735ecaa0f9d4fe const &a, t6b074172af0a
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t6b074172af0a13530a735ecaa0f9d4fe const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -178,7 +184,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> se
 extern std::function<::dessser::gen::alerting_log::t6b074172af0a13530a735ecaa0f9d4fe(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -33,16 +33,18 @@ struct t {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "automatic:" << r.automatic << ',';
-  os << "cwd:" << ::dessser::gen::file_path::Deref(r.cwd) << ',';
+  os << "cwd:" << r.cwd << ',';
   os << "debug:" << r.debug << ',';
   os << "enabled:" << r.enabled << ',';
   os << "on_site:" << r.on_site << ',';
   os << "params:" << r.params << ',';
-  os << "program:" << ::dessser::gen::program_name::Deref(r.program) << ',';
+  os << "program:" << r.program << ',';
   os << "report_period:" << r.report_period;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.automatic == b.automatic && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.on_site == b.on_site && a.params == b.params && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && a.report_period == b.report_period;
 }
@@ -65,10 +67,10 @@ inline bool operator!=(t9e1b8c5b2a05df0f8b497985ad687600 const &a, t9e1b8c5b2a05
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t9e1b8c5b2a05df0f8b497985ad687600 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -80,7 +82,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::rc_entry::t> )> sersiz
 extern std::function<::dessser::gen::rc_entry::t9e1b8c5b2a05df0f8b497985ad687600(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

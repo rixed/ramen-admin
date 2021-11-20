@@ -30,10 +30,10 @@ inline bool operator!=(t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &a, t91f2e36eeb48
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -52,10 +52,10 @@ inline bool operator!=(tf1e686582fa50fe4bb8d464a3c3b3553 const &a, tf1e686582fa5
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tf1e686582fa50fe4bb8d464a3c3b3553 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -75,10 +75,10 @@ inline bool operator!=(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919d
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc7190a const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 

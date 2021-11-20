@@ -30,6 +30,8 @@ inline std::ostream &operator<<(std::ostream &os, tf2b1e55baf84ce749ce34e373ad06
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf2b1e55baf84ce749ce34e373ad06db6> const r) { os << *r; return os; }
+
 inline bool operator==(tf2b1e55baf84ce749ce34e373ad06db6 const &a, tf2b1e55baf84ce749ce34e373ad06db6 const &b) {
   return a.growing == b.growing && a.since == b.since && a.until == b.until;
 }
@@ -53,10 +55,10 @@ inline bool operator!=(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919d
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc7190a const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 

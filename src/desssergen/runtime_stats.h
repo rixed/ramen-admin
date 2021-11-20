@@ -78,6 +78,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.cur_groups == b.cur_groups && a.cur_ram == b.cur_ram && ((a.first_input && b.first_input && a.first_input.value() == b.first_input.value()) || (!a.first_input && !b.first_input)) && ((a.first_output && b.first_output && a.first_output.value() == b.first_output.value()) || (!a.first_output && !b.first_output)) && a.first_startup == b.first_startup && ((a.last_input && b.last_input && a.last_input.value() == b.last_input.value()) || (!a.last_input && !b.last_input)) && ((a.last_output && b.last_output && a.last_output.value() == b.last_output.value()) || (!a.last_output && !b.last_output)) && a.last_startup == b.last_startup && ((a.max_etime && b.max_etime && a.max_etime.value() == b.max_etime.value()) || (!a.max_etime && !b.max_etime)) && a.max_groups == b.max_groups && a.max_ram == b.max_ram && ((a.min_etime && b.min_etime && a.min_etime.value() == b.min_etime.value()) || (!a.min_etime && !b.min_etime)) && a.stats_time == b.stats_time && a.tot_cpu == b.tot_cpu && a.tot_extinguished_notifs == b.tot_extinguished_notifs && a.tot_firing_notifs == b.tot_firing_notifs && a.tot_full_bytes == b.tot_full_bytes && a.tot_full_bytes_samples == b.tot_full_bytes_samples && a.tot_in_bytes == b.tot_in_bytes && a.tot_in_tuples == b.tot_in_tuples && a.tot_out_bytes == b.tot_out_bytes && a.tot_out_errs == b.tot_out_errs && a.tot_out_filtered == b.tot_out_filtered && a.tot_out_tuples == b.tot_out_tuples && a.tot_sel_tuples == b.tot_sel_tuples && a.tot_wait_in == b.tot_wait_in && a.tot_wait_out == b.tot_wait_out;
 }
@@ -100,10 +102,10 @@ inline bool operator!=(ted39c8ea485719117d89516f551abd2b const &a, ted39c8ea4857
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, ted39c8ea485719117d89516f551abd2b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -115,7 +117,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> s
 extern std::function<::dessser::gen::runtime_stats::ted39c8ea485719117d89516f551abd2b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

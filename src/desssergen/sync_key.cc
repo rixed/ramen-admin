@@ -61,7 +61,7 @@ inline bool operator==(per_client const &a, per_client const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Response
-    case 1: return std::get<1>(a) == std::get<1>(b); // Scratchpad
+    case 1: return (*std::get<1>(a)) == (*std::get<1>(b)); // Scratchpad
   };
   return false;
 }
@@ -303,7 +303,7 @@ struct te552b116666bdac4ad5a96694c71efca : public std::tuple<
   using tuple::tuple;
 };
 inline bool operator==(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
-  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && std::get<3>(a) == std::get<3>(b);
+  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_name::Deref(std::get<1>(b)) && std::get<2>(a) == std::get<2>(b) && (*std::get<3>(a)) == (*std::get<3>(b));
 }
 inline bool operator!=(te552b116666bdac4ad5a96694c71efca const &a, te552b116666bdac4ad5a96694c71efca const &b) {
   return !operator==(a, b);
@@ -317,13 +317,14 @@ struct t4ce2d4679665698c8b564907b52837ef : public std::tuple<
     : std::tuple<dessser::gen::sync_socket::t_ext, std::shared_ptr<::dessser::gen::sync_key::per_client> >(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
-  return ::dessser::gen::sync_socket::Deref(std::get<0>(a)) == ::dessser::gen::sync_socket::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+  return ::dessser::gen::sync_socket::Deref(std::get<0>(a)) == ::dessser::gen::sync_socket::Deref(std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
 inline bool operator!=(t4ce2d4679665698c8b564907b52837ef const &a, t4ce2d4679665698c8b564907b52837ef const &b) {
   return !operator==(a, b);
 }
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t86de2f73c647a4a64e778895c97184da : public std::tuple<
@@ -510,6 +511,7 @@ inline bool operator!=(t const &a, t const &b) {
 }
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t35aec9ecfaa6df3f20c35d464145bd4c : public std::tuple<
@@ -626,6 +628,7 @@ inline bool operator!=(t4521c7ac16d3ba391c05353ff307ec6d const &a, t4521c7ac16d3
 }
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
 struct t88648ce03c3e83f4daca25557f77454f : public std::tuple<

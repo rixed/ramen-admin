@@ -38,10 +38,10 @@ inline bool operator!=(t596d48bd9128124b3701d75ab095e574 const &a, t596d48bd9128
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t596d48bd9128124b3701d75ab095e574 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -62,6 +62,8 @@ inline std::ostream &operator<<(std::ostream &os, t131662737cd7ca0ff4503bc447b90
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t131662737cd7ca0ff4503bc447b90c1f> const v) { os << *v; return os; }
 
 inline bool operator==(t131662737cd7ca0ff4503bc447b90c1f const &a, t131662737cd7ca0ff4503bc447b90c1f const &b) {
   if (a.index() != b.index()) return false;
@@ -95,6 +97,8 @@ inline std::ostream &operator<<(std::ostream &os, tbea317b67d84f7d9cf6a71dc11d82
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbea317b67d84f7d9cf6a71dc11d82f92> const r) { os << *r; return os; }
+
 inline bool operator==(tbea317b67d84f7d9cf6a71dc11d82f92 const &a, tbea317b67d84f7d9cf6a71dc11d82f92 const &b) {
   return a.avg_window == b.avg_window && a.max_distance == b.max_distance && a.percentile == b.percentile && a.sample_size == b.sample_size && a.seasonality == b.seasonality && a.smooth_factor == b.smooth_factor;
 }
@@ -119,6 +123,8 @@ inline std::ostream &operator<<(std::ostream &os, t7a02edca1273055c3c437ebec83c4
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7a02edca1273055c3c437ebec83c4409> const v) { os << *v; return os; }
 
 inline bool operator==(t7a02edca1273055c3c437ebec83c4409 const &a, t7a02edca1273055c3c437ebec83c4409 const &b) {
   if (a.index() != b.index()) return false;
@@ -157,7 +163,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "carry_csts:" << r.carry_csts << ',';
   os << "carry_fields:" << r.carry_fields << ',';
-  os << "column:" << ::dessser::gen::field_name::Deref(r.column) << ',';
+  os << "column:" << r.column << ',';
   os << "desc_firing:" << r.desc_firing << ',';
   os << "desc_recovery:" << r.desc_recovery << ',';
   os << "desc_title:" << r.desc_title << ',';
@@ -168,7 +174,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << "hysteresis:" << r.hysteresis << ',';
   os << "id:" << r.id << ',';
   os << "ratio:" << r.ratio << ',';
-  os << "table:" << ::dessser::gen::fq_name::Deref(r.table) << ',';
+  os << "table:" << r.table << ',';
   os << "threshold:" << r.threshold << ',';
   os << "time_step:" << r.time_step << ',';
   os << "tops:" << r.tops << ',';
@@ -176,6 +182,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.carry_csts == b.carry_csts && a.carry_fields == b.carry_fields && ::dessser::gen::field_name::Deref(a.column) == ::dessser::gen::field_name::Deref(b.column) && a.desc_firing == b.desc_firing && a.desc_recovery == b.desc_recovery && a.desc_title == b.desc_title && a.duration == b.duration && a.enabled == b.enabled && ((a.group_by && b.group_by && a.group_by.value() == b.group_by.value()) || (!a.group_by && !b.group_by)) && a.having == b.having && a.hysteresis == b.hysteresis && a.id == b.id && a.ratio == b.ratio && ::dessser::gen::fq_name::Deref(a.table) == ::dessser::gen::fq_name::Deref(b.table) && a.threshold == b.threshold && a.time_step == b.time_step && a.tops == b.tops && a.where == b.where;
 }
@@ -198,10 +206,10 @@ inline bool operator!=(t39104663fb90074c71cd95d895d45654 const &a, t39104663fb90
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t39104663fb90074c71cd95d895d45654 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -213,7 +221,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_o
 extern std::function<::dessser::gen::alert::t39104663fb90074c71cd95d895d45654(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -35,15 +35,17 @@ enum Constr_t {
 
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << "StartToBeSent " << std::get<0>(v); break;
-    case 1: os << "StartToBeSentThenStopped " << std::get<1>(v); break;
-    case 2: os << "StartSent " << std::get<2>(v); break;
-    case 3: os << "StartAcked " << std::get<3>(v); break;
-    case 4: os << "StopToBeSent " << std::get<4>(v); break;
-    case 5: os << "StopSent " << std::get<5>(v); break;
+    case 0: os << "StartToBeSent" << std::get<0>(v); break;
+    case 1: os << "StartToBeSentThenStopped" << std::get<1>(v); break;
+    case 2: os << "StartSent" << std::get<2>(v); break;
+    case 3: os << "StartAcked" << std::get<3>(v); break;
+    case 4: os << "StopToBeSent" << std::get<4>(v); break;
+    case 5: os << "StopSent" << std::get<5>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -75,10 +77,10 @@ inline bool operator!=(tef7a86fb4151f002e287c72985f042cf const &a, tef7a86fb4151
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tef7a86fb4151f002e287c72985f042cf const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -90,7 +92,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_stat
 extern std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

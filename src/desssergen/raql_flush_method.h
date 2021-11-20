@@ -27,11 +27,13 @@ enum Constr_t {
 
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
-    case 0: os << "reset " << std::get<0>(v); break;
-    case 1: os << "never " << std::get<1>(v); break;
+    case 0: os << "reset" << std::get<0>(v); break;
+    case 1: os << "never" << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -59,10 +61,10 @@ inline bool operator!=(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tcb9728fff2af5188e5e3e0aee866cdff const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -74,7 +76,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> 
 extern std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -24,11 +24,13 @@ struct t {
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "duration:" << ::dessser::gen::raql_expr::Deref(r.duration) << ',';
+  os << "duration:" << r.duration << ',';
   os << "period:" << r.period;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::raql_expr::Deref(a.duration) == ::dessser::gen::raql_expr::Deref(b.duration) && a.period == b.period;
 }
@@ -51,10 +53,10 @@ inline bool operator!=(t6dbf61a16e6aaa200048c3b277abb230 const &a, t6dbf61a16e6a
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t6dbf61a16e6aaa200048c3b277abb230 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -66,7 +68,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> sersi
 extern std::function<::dessser::gen::retention::t6dbf61a16e6aaa200048c3b277abb230(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

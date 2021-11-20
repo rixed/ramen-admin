@@ -33,10 +33,12 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   if (r.exit_status) os << "exit_status:" << r.exit_status.value() << ',';
   os << "last_killed:" << r.last_killed << ',';
   if (r.pid) os << "pid:" << r.pid.value() << ',';
-  os << "time_range:" << ::dessser::gen::time_range::Deref(r.time_range);
+  os << "time_range:" << r.time_range;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.channels == b.channels && a.creation == b.creation && ((a.exit_status && b.exit_status && a.exit_status.value() == b.exit_status.value()) || (!a.exit_status && !b.exit_status)) && a.last_killed == b.last_killed && ((a.pid && b.pid && a.pid.value() == b.pid.value()) || (!a.pid && !b.pid)) && ::dessser::gen::time_range::Deref(a.time_range) == ::dessser::gen::time_range::Deref(b.time_range);
 }
@@ -59,10 +61,10 @@ inline bool operator!=(t9c4573cf5a3c790b5fb7b271fc5dfb6a const &a, t9c4573cf5a3c
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t9c4573cf5a3c790b5fb7b271fc5dfb6a const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -74,7 +76,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::replayer::t> )> sersiz
 extern std::function<::dessser::gen::replayer::t9c4573cf5a3c790b5fb7b271fc5dfb6a(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

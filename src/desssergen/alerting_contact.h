@@ -30,6 +30,8 @@ inline std::ostream &operator<<(std::ostream &os, tbe8824b6bd92590dbb49ce7f29575
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbe8824b6bd92590dbb49ce7f29575869> const r) { os << *r; return os; }
+
 inline bool operator==(tbe8824b6bd92590dbb49ce7f29575869 const &a, tbe8824b6bd92590dbb49ce7f29575869 const &b) {
   return a.create == b.create && a.file == b.file && a.insert == b.insert;
 }
@@ -52,10 +54,10 @@ inline bool operator!=(t284e07c4f4868d983fec7971424a1df8 const &a, t284e07c4f486
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t284e07c4f4868d983fec7971424a1df8 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -76,6 +78,8 @@ inline std::ostream &operator<<(std::ostream &os, t4f5f54104181335488041bad68082
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4f5f54104181335488041bad68082286> const r) { os << *r; return os; }
+
 inline bool operator==(t4f5f54104181335488041bad68082286 const &a, t4f5f54104181335488041bad68082286 const &b) {
   return a.options == b.options && a.partition == b.partition && a.text == b.text && a.topic == b.topic;
 }
@@ -101,7 +105,7 @@ enum Constr_ta2737d85243c228c957e6a89b1a2eaef {
 
 inline std::ostream &operator<<(std::ostream &os, ta2737d85243c228c957e6a89b1a2eaef const &v) {
   switch (v.index()) {
-    case 0: os << "Ignore " << std::get<0>(v); break;
+    case 0: os << "Ignore" << std::get<0>(v); break;
     case 1: os << "Exec " << std::get<1>(v); break;
     case 2: os << "SysLog " << std::get<2>(v); break;
     case 3: os << "Sqlite " << std::get<3>(v); break;
@@ -109,6 +113,8 @@ inline std::ostream &operator<<(std::ostream &os, ta2737d85243c228c957e6a89b1a2e
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta2737d85243c228c957e6a89b1a2eaef> const v) { os << *v; return os; }
 
 inline bool operator==(ta2737d85243c228c957e6a89b1a2eaef const &a, ta2737d85243c228c957e6a89b1a2eaef const &b) {
   if (a.index() != b.index()) return false;
@@ -137,6 +143,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.timeout == b.timeout && a.via == b.via;
 }
@@ -159,10 +167,10 @@ inline bool operator!=(t64d64e9c0acacb981f0a90c22987e81e const &a, t64d64e9c0aca
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t64d64e9c0acacb981f0a90c22987e81e const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -174,7 +182,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )
 extern std::function<::dessser::gen::alerting_contact::t64d64e9c0acacb981f0a90c22987e81e(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -29,10 +29,12 @@ enum Constr_t {
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Idx " << std::get<0>(v); break;
-    case 1: os << "Name " << ::dessser::gen::field_name::Deref(std::get<1>(v)); break;
+    case 1: os << "Name " << std::get<1>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -60,10 +62,10 @@ inline bool operator!=(t14edb0e8ed5b099e7b0f6eeb360b87b2 const &a, t14edb0e8ed5b
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -75,7 +77,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> 
 extern std::function<::dessser::gen::raql_path_comp::t14edb0e8ed5b099e7b0f6eeb360b87b2(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

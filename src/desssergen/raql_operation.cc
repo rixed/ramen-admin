@@ -441,6 +441,7 @@ inline bool operator!=(t249f0e7a3ae3494a3614c086c3b8e5a9 const &a, t249f0e7a3ae3
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct data_source : public std::variant<
@@ -462,6 +463,7 @@ inline bool operator!=(data_source const &a, data_source const &b) {
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::data_source> ,Pointer)> data_source_to_row_binary;
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct te74c4d30259154b72d6b2593df765f37 : public std::tuple<
@@ -510,7 +512,7 @@ struct t0092eebf3602fbefea5f779964ea8f24 {
   t0092eebf3602fbefea5f779964ea8f24() = default;
 };
 inline bool operator==(t0092eebf3602fbefea5f779964ea8f24 const &a, t0092eebf3602fbefea5f779964ea8f24 const &b) {
-  return ((a.event_time && b.event_time && ::dessser::gen::event_time::Deref(a.event_time.value()) == ::dessser::gen::event_time::Deref(b.event_time.value())) || (!a.event_time && !b.event_time)) && a.ReadExternal_factors == b.ReadExternal_factors && a.format == b.format && a.source == b.source;
+  return ((a.event_time && b.event_time && ::dessser::gen::event_time::Deref(a.event_time.value()) == ::dessser::gen::event_time::Deref(b.event_time.value())) || (!a.event_time && !b.event_time)) && a.ReadExternal_factors == b.ReadExternal_factors && (*a.format) == (*b.format) && (*a.source) == (*b.source);
 }
 
 inline bool operator!=(t0092eebf3602fbefea5f779964ea8f24 const &a, t0092eebf3602fbefea5f779964ea8f24 const &b) {
@@ -552,16 +554,19 @@ inline bool operator!=(t const &a, t const &b) {
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> to_row_binary;
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::data_source> )> data_source_sersize_of_row_binary;
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::t> )> sersize_of_row_binary;
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct t94e08005d9e759ca406a29f5a9b87ca5 : public std::tuple<
@@ -637,6 +642,7 @@ inline bool operator!=(tec658c1a26520d6f3490dc88d519d525 const &a, tec658c1a2652
 }
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 extern std::function<::dessser::gen::raql_operation::tec658c1a26520d6f3490dc88d519d525(Pointer)> of_row_binary;

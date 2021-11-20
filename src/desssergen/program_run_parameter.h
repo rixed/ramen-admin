@@ -25,11 +25,13 @@ struct t {
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "name:" << ::dessser::gen::field_name::Deref(r.name) << ',';
-  os << "value:" << ::dessser::gen::raql_value::Deref(r.value);
+  os << "name:" << r.name << ',';
+  os << "value:" << r.value;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
 }
@@ -52,10 +54,10 @@ inline bool operator!=(t173f3f612a5483c7df1f08e5e0f5709b const &a, t173f3f612a54
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t173f3f612a5483c7df1f08e5e0f5709b const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -67,7 +69,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::program_run_parameter:
 extern std::function<::dessser::gen::program_run_parameter::t173f3f612a5483c7df1f08e5e0f5709b(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

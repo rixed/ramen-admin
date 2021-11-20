@@ -43,10 +43,12 @@ struct tuple {
 inline std::ostream &operator<<(std::ostream &os, tuple const &r) {
   os << '{';
   os << "skipped:" << r.skipped << ',';
-  os << "values:" << ::dessser::gen::raql_value::Deref(r.values);
+  os << "values:" << r.values;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tuple> const r) { os << *r; return os; }
+
 inline bool operator==(tuple const &a, tuple const &b) {
   return a.skipped == b.skipped && ::dessser::gen::raql_value::Deref(a.values) == ::dessser::gen::raql_value::Deref(b.values);
 }
@@ -68,11 +70,11 @@ inline bool operator!=(t4ec0da5161c08f29f8aed40b17a73ef5 const &a, t4ec0da5161c0
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t4ec0da5161c08f29f8aed40b17a73ef5 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t) << ", "
-     << std::get<2>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t) << ", ";
+  os << std::get<2>(t);
+  os << '>';
   return os;
 }
 
@@ -125,28 +127,30 @@ enum Constr_t {
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v.index()) {
     case 0: os << "Error " << std::get<0>(v); break;
-    case 1: os << "Worker " << ::dessser::gen::worker::Deref(std::get<1>(v)); break;
-    case 2: os << "Retention " << ::dessser::gen::retention::Deref(std::get<2>(v)); break;
-    case 3: os << "TimeRange " << ::dessser::gen::time_range::Deref(std::get<3>(v)); break;
+    case 1: os << "Worker " << std::get<1>(v); break;
+    case 2: os << "Retention " << std::get<2>(v); break;
+    case 3: os << "TimeRange " << std::get<3>(v); break;
     case 4: os << "Tuples " << std::get<4>(v); break;
-    case 5: os << "RamenValue " << ::dessser::gen::raql_value::Deref(std::get<5>(v)); break;
+    case 5: os << "RamenValue " << std::get<5>(v); break;
     case 6: os << "TargetConfig " << std::get<6>(v); break;
-    case 7: os << "SourceInfo " << ::dessser::gen::source_info::Deref(std::get<7>(v)); break;
-    case 8: os << "RuntimeStats " << ::dessser::gen::runtime_stats::Deref(std::get<8>(v)); break;
-    case 9: os << "Replay " << ::dessser::gen::replay::Deref(std::get<9>(v)); break;
-    case 10: os << "Replayer " << ::dessser::gen::replayer::Deref(std::get<10>(v)); break;
-    case 11: os << "ReplayRequest " << ::dessser::gen::replay_request::Deref(std::get<11>(v)); break;
-    case 12: os << "Alert " << ::dessser::gen::alert::Deref(std::get<12>(v)); break;
-    case 13: os << "OutputSpecs " << ::dessser::gen::output_specs::Deref(std::get<13>(v)); break;
-    case 14: os << "DashboardWidget " << ::dessser::gen::dashboard_widget::Deref(std::get<14>(v)); break;
-    case 15: os << "AlertingContact " << ::dessser::gen::alerting_contact::Deref(std::get<15>(v)); break;
-    case 16: os << "Notification " << ::dessser::gen::alerting_notification::Deref(std::get<16>(v)); break;
-    case 17: os << "DeliveryStatus " << ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(v)); break;
-    case 18: os << "IncidentLog " << ::dessser::gen::alerting_log::Deref(std::get<18>(v)); break;
-    case 19: os << "Inhibition " << ::dessser::gen::alerting_inhibition::Deref(std::get<19>(v)); break;
+    case 7: os << "SourceInfo " << std::get<7>(v); break;
+    case 8: os << "RuntimeStats " << std::get<8>(v); break;
+    case 9: os << "Replay " << std::get<9>(v); break;
+    case 10: os << "Replayer " << std::get<10>(v); break;
+    case 11: os << "ReplayRequest " << std::get<11>(v); break;
+    case 12: os << "Alert " << std::get<12>(v); break;
+    case 13: os << "OutputSpecs " << std::get<13>(v); break;
+    case 14: os << "DashboardWidget " << std::get<14>(v); break;
+    case 15: os << "AlertingContact " << std::get<15>(v); break;
+    case 16: os << "Notification " << std::get<16>(v); break;
+    case 17: os << "DeliveryStatus " << std::get<17>(v); break;
+    case 18: os << "IncidentLog " << std::get<18>(v); break;
+    case 19: os << "Inhibition " << std::get<19>(v); break;
   }
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
@@ -192,10 +196,10 @@ inline bool operator!=(tc7deda5c4126d63f3447d561e47a978d const &a, tc7deda5c4126
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tc7deda5c4126d63f3447d561e47a978d const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -214,10 +218,10 @@ inline bool operator!=(tf9a721d48bd2d16691e9ebbb086e28c7 const &a, tf9a721d48bd2
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tf9a721d48bd2d16691e9ebbb086e28c7 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -232,7 +236,6 @@ extern std::function<::dessser::gen::sync_value::tc7deda5c4126d63f3447d561e47a97
 extern std::function<::dessser::gen::sync_value::tf9a721d48bd2d16691e9ebbb086e28c7(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

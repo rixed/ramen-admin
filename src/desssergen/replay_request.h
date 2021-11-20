@@ -29,13 +29,15 @@ struct t {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "explain:" << r.explain << ',';
-  os << "resp_key:" << ::dessser::gen::sync_key::Deref(r.resp_key) << ',';
+  os << "resp_key:" << r.resp_key << ',';
   os << "since:" << r.since << ',';
-  os << "target:" << ::dessser::gen::fq_function_name::Deref(r.target) << ',';
+  os << "target:" << r.target << ',';
   os << "until:" << r.until;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.explain == b.explain && ::dessser::gen::sync_key::Deref(a.resp_key) == ::dessser::gen::sync_key::Deref(b.resp_key) && a.since == b.since && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.until == b.until;
 }
@@ -58,10 +60,10 @@ inline bool operator!=(ta0bc57460f17716e140fcbe64bd88b18 const &a, ta0bc57460f17
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, ta0bc57460f17716e140fcbe64bd88b18 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -73,7 +75,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> 
 extern std::function<::dessser::gen::replay_request::ta0bc57460f17716e140fcbe64bd88b18(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

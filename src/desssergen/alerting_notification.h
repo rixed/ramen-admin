@@ -32,10 +32,10 @@ inline bool operator!=(t284e07c4f4868d983fec7971424a1df8 const &a, t284e07c4f486
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, t284e07c4f4868d983fec7971424a1df8 const &t) {
-  os << '<'
-     << std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -63,13 +63,15 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << "name:" << r.name << ',';
   os << "parameters:" << r.parameters << ',';
   os << "sent_time:" << r.sent_time << ',';
-  os << "site:" << ::dessser::gen::site_name::Deref(r.site) << ',';
+  os << "site:" << r.site << ',';
   os << "test:" << r.test << ',';
   os << "timeout:" << r.timeout << ',';
-  os << "worker:" << ::dessser::gen::fq_name::Deref(r.worker);
+  os << "worker:" << r.worker;
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   return a.certainty == b.certainty && a.debounce == b.debounce && ((a.event_time && b.event_time && a.event_time.value() == b.event_time.value()) || (!a.event_time && !b.event_time)) && a.firing == b.firing && a.name == b.name && a.parameters == b.parameters && a.sent_time == b.sent_time && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site) && a.test == b.test && a.timeout == b.timeout && ::dessser::gen::fq_name::Deref(a.worker) == ::dessser::gen::fq_name::Deref(b.worker);
 }
@@ -92,10 +94,10 @@ inline bool operator!=(tad5879bd9b09922b2a273d2a9777067d const &a, tad5879bd9b09
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tad5879bd9b09922b2a273d2a9777067d const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -107,7 +109,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
 extern std::function<::dessser::gen::alerting_notification::tad5879bd9b09922b2a273d2a9777067d(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif

@@ -30,6 +30,8 @@ inline std::ostream &operator<<(std::ostream &os, t863dd87ee3eb9bd93a78669675db1
   os << '}';
   return os;
 }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t863dd87ee3eb9bd93a78669675db1450> const r) { os << *r; return os; }
+
 inline bool operator==(t863dd87ee3eb9bd93a78669675db1450 const &a, t863dd87ee3eb9bd93a78669675db1450 const &b) {
   return a.message == b.message && a.nonce == b.nonce && a.public_key == b.public_key;
 }
@@ -61,6 +63,8 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
+
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
@@ -89,10 +93,10 @@ inline bool operator!=(tc079aed4395dddd624f3bbbe199eefe6 const &a, tc079aed4395d
   return !operator==(a, b);
 }
 inline std::ostream &operator<<(std::ostream &os, tc079aed4395dddd624f3bbbe199eefe6 const &t) {
-  os << '<'
-     << *std::get<0>(t) << ", "
-     << std::get<1>(t)
-     << '>';
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
   return os;
 }
 
@@ -104,7 +108,6 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
 extern std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t>  r) { os << *r; return os; }
 
 }
 #endif
