@@ -20,7 +20,6 @@
 #include "desssergen/program_name.h"
 #include "desssergen/site_name.h"
 
-
 namespace dessser::gen::fq_function_name {
 using dessser::operator<<;
 
@@ -40,13 +39,6 @@ struct t {
   t(dessser::gen::function_name::t_ext function_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : function(function_), program(program_), site(site_) {}
   t() = default;
 };
-inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::function_name::Deref(a.function) == ::dessser::gen::function_name::Deref(b.function) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site);
-}
-
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tb5cd2749aa7785c10c094474448db9bb : public std::tuple<
   std::shared_ptr<::dessser::gen::fq_function_name::t> ,
   Pointer
@@ -55,12 +47,6 @@ struct tb5cd2749aa7785c10c094474448db9bb : public std::tuple<
   tb5cd2749aa7785c10c094474448db9bb(std::tuple<std::shared_ptr<::dessser::gen::fq_function_name::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::fq_function_name::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb5cd2749aa7785c10c094474448db9bb const &a, tb5cd2749aa7785c10c094474448db9bb const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tb5cd2749aa7785c10c094474448db9bb const &a, tb5cd2749aa7785c10c094474448db9bb const &b) {
-  return !operator==(a, b);
-}
 struct tff906bde0664efb2415be180e5a241ea : public std::tuple<
   dessser::gen::site_name::t_ext,
   Pointer
@@ -69,12 +55,6 @@ struct tff906bde0664efb2415be180e5a241ea : public std::tuple<
   tff906bde0664efb2415be180e5a241ea(std::tuple<dessser::gen::site_name::t_ext, Pointer> p)
     : std::tuple<dessser::gen::site_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tff906bde0664efb2415be180e5a241ea const &a, tff906bde0664efb2415be180e5a241ea const &b) {
-  return ::dessser::gen::site_name::Deref(std::get<0>(a)) == ::dessser::gen::site_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tff906bde0664efb2415be180e5a241ea const &a, tff906bde0664efb2415be180e5a241ea const &b) {
-  return !operator==(a, b);
-}
 struct t0e093472c41732c72d22288335ad8771 : public std::tuple<
   dessser::gen::program_name::t_ext,
   Pointer
@@ -83,12 +63,6 @@ struct t0e093472c41732c72d22288335ad8771 : public std::tuple<
   t0e093472c41732c72d22288335ad8771(std::tuple<dessser::gen::program_name::t_ext, Pointer> p)
     : std::tuple<dessser::gen::program_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t0e093472c41732c72d22288335ad8771 const &a, t0e093472c41732c72d22288335ad8771 const &b) {
-  return ::dessser::gen::program_name::Deref(std::get<0>(a)) == ::dessser::gen::program_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t0e093472c41732c72d22288335ad8771 const &a, t0e093472c41732c72d22288335ad8771 const &b) {
-  return !operator==(a, b);
-}
 struct te3e7208bccb6f553e92629f0b2acc200 : public std::tuple<
   dessser::gen::function_name::t_ext,
   Pointer
@@ -97,12 +71,6 @@ struct te3e7208bccb6f553e92629f0b2acc200 : public std::tuple<
   te3e7208bccb6f553e92629f0b2acc200(std::tuple<dessser::gen::function_name::t_ext, Pointer> p)
     : std::tuple<dessser::gen::function_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(te3e7208bccb6f553e92629f0b2acc200 const &a, te3e7208bccb6f553e92629f0b2acc200 const &b) {
-  return ::dessser::gen::function_name::Deref(std::get<0>(a)) == ::dessser::gen::function_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(te3e7208bccb6f553e92629f0b2acc200 const &a, te3e7208bccb6f553e92629f0b2acc200 const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

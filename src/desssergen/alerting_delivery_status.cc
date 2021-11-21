@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::alerting_delivery_status {
 using dessser::operator<<;
 
@@ -39,21 +38,6 @@ struct t : public std::variant<
   Void // StopSent
 > { using variant::variant; };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // StartToBeSent
-    case 1: return std::get<1>(a) == std::get<1>(b); // StartToBeSentThenStopped
-    case 2: return std::get<2>(a) == std::get<2>(b); // StartSent
-    case 3: return std::get<3>(a) == std::get<3>(b); // StartAcked
-    case 4: return std::get<4>(a) == std::get<4>(b); // StopToBeSent
-    case 5: return std::get<5>(a) == std::get<5>(b); // StopSent
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tef7a86fb4151f002e287c72985f042cf : public std::tuple<
   std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,
   Pointer
@@ -62,12 +46,6 @@ struct tef7a86fb4151f002e287c72985f042cf : public std::tuple<
   tef7a86fb4151f002e287c72985f042cf(std::tuple<std::shared_ptr<::dessser::gen::alerting_delivery_status::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::alerting_delivery_status::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tef7a86fb4151f002e287c72985f042cf const &a, tef7a86fb4151f002e287c72985f042cf const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tef7a86fb4151f002e287c72985f042cf const &a, tef7a86fb4151f002e287c72985f042cf const &b) {
-  return !operator==(a, b);
-}
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -76,12 +54,6 @@ struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

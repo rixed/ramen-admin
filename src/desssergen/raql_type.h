@@ -20,21 +20,21 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t7c0067ec9e3be4497df102566ce6840c : public std::tuple<
+struct tb65a12146ab462f3a71f0a2c9184c7a4 : public std::tuple<
   uint32_t,
-  std::shared_ptr<t> 
+  std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  t7c0067ec9e3be4497df102566ce6840c(std::tuple<uint32_t, std::shared_ptr<t> > p)
-    : std::tuple<uint32_t, std::shared_ptr<t> >(std::get<0>(p), std::get<1>(p)) {}
+  tb65a12146ab462f3a71f0a2c9184c7a4(std::tuple<uint32_t, std::shared_ptr<::dessser::gen::raql_type::t> > p)
+    : std::tuple<uint32_t, std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7c0067ec9e3be4497df102566ce6840c const &a, t7c0067ec9e3be4497df102566ce6840c const &b) {
+inline bool operator==(tb65a12146ab462f3a71f0a2c9184c7a4 const &a, tb65a12146ab462f3a71f0a2c9184c7a4 const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t7c0067ec9e3be4497df102566ce6840c const &a, t7c0067ec9e3be4497df102566ce6840c const &b) {
+inline bool operator!=(tb65a12146ab462f3a71f0a2c9184c7a4 const &a, tb65a12146ab462f3a71f0a2c9184c7a4 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7c0067ec9e3be4497df102566ce6840c const &t) {
+inline std::ostream &operator<<(std::ostream &os, tb65a12146ab462f3a71f0a2c9184c7a4 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -42,21 +42,23 @@ inline std::ostream &operator<<(std::ostream &os, t7c0067ec9e3be4497df102566ce68
   return os;
 }
 
-struct t680a68e6f3607e0c45e8eabda3bee607 : public std::tuple<
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb65a12146ab462f3a71f0a2c9184c7a4> const t) { os << *t; return os; }
+
+struct t322be039d4e703202ccedfc1a13e4f5d : public std::tuple<
   std::string,
-  std::shared_ptr<t> 
+  std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  t680a68e6f3607e0c45e8eabda3bee607(std::tuple<std::string, std::shared_ptr<t> > p)
-    : std::tuple<std::string, std::shared_ptr<t> >(std::get<0>(p), std::get<1>(p)) {}
+  t322be039d4e703202ccedfc1a13e4f5d(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> > p)
+    : std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f3607e0c45e8eabda3bee607 const &b) {
+inline bool operator==(t322be039d4e703202ccedfc1a13e4f5d const &a, t322be039d4e703202ccedfc1a13e4f5d const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t680a68e6f3607e0c45e8eabda3bee607 const &a, t680a68e6f3607e0c45e8eabda3bee607 const &b) {
+inline bool operator!=(t322be039d4e703202ccedfc1a13e4f5d const &a, t322be039d4e703202ccedfc1a13e4f5d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t680a68e6f3607e0c45e8eabda3bee607 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t322be039d4e703202ccedfc1a13e4f5d const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -64,21 +66,23 @@ inline std::ostream &operator<<(std::ostream &os, t680a68e6f3607e0c45e8eabda3bee
   return os;
 }
 
-struct tad36fa23b9d22f496a8fdcdecfae294b : public std::tuple<
-  std::shared_ptr<t> ,
-  std::shared_ptr<t> 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t322be039d4e703202ccedfc1a13e4f5d> const t) { os << *t; return os; }
+
+struct t76c4c35a2b2b182ccf791241e9611c1d : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_type::t> ,
+  std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  tad36fa23b9d22f496a8fdcdecfae294b(std::tuple<std::shared_ptr<t> , std::shared_ptr<t> > p)
-    : std::tuple<std::shared_ptr<t> , std::shared_ptr<t> >(std::get<0>(p), std::get<1>(p)) {}
+  t76c4c35a2b2b182ccf791241e9611c1d(std::tuple<std::shared_ptr<::dessser::gen::raql_type::t> , std::shared_ptr<::dessser::gen::raql_type::t> > p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::t> , std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d22f496a8fdcdecfae294b const &b) {
+inline bool operator==(t76c4c35a2b2b182ccf791241e9611c1d const &a, t76c4c35a2b2b182ccf791241e9611c1d const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(tad36fa23b9d22f496a8fdcdecfae294b const &a, tad36fa23b9d22f496a8fdcdecfae294b const &b) {
+inline bool operator!=(t76c4c35a2b2b182ccf791241e9611c1d const &a, t76c4c35a2b2b182ccf791241e9611c1d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tad36fa23b9d22f496a8fdcdecfae294b const &t) {
+inline std::ostream &operator<<(std::ostream &os, t76c4c35a2b2b182ccf791241e9611c1d const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -86,7 +90,9 @@ inline std::ostream &operator<<(std::ostream &os, tad36fa23b9d22f496a8fdcdecfae2
   return os;
 }
 
-struct tfc84267c1506821d35acfff7838227b4 : public std::variant<
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t76c4c35a2b2b182ccf791241e9611c1d> const t) { os << *t; return os; }
+
+struct maybe_nullable : public std::variant<
   Void, // Void
   Void, // Bool
   Void, // Char
@@ -117,15 +123,15 @@ struct tfc84267c1506821d35acfff7838227b4 : public std::variant<
   Void, // Cidrv4
   Void, // Cidrv6
   Void, // Cidr
-  Arr<std::shared_ptr<t> >, // Tup
-  ::dessser::gen::raql_type::t7c0067ec9e3be4497df102566ce6840c, // Vec
-  std::shared_ptr<t> , // Arr
-  Arr<::dessser::gen::raql_type::t680a68e6f3607e0c45e8eabda3bee607>, // Rec
-  Arr<::dessser::gen::raql_type::t680a68e6f3607e0c45e8eabda3bee607>, // Sum
-  ::dessser::gen::raql_type::tad36fa23b9d22f496a8fdcdecfae294b // Map
+  Arr<std::shared_ptr<::dessser::gen::raql_type::t> >, // Tup
+  ::dessser::gen::raql_type::tb65a12146ab462f3a71f0a2c9184c7a4, // Vec
+  std::shared_ptr<::dessser::gen::raql_type::t> , // Arr
+  Arr<::dessser::gen::raql_type::t322be039d4e703202ccedfc1a13e4f5d>, // Rec
+  Arr<::dessser::gen::raql_type::t322be039d4e703202ccedfc1a13e4f5d>, // Sum
+  ::dessser::gen::raql_type::t76c4c35a2b2b182ccf791241e9611c1d // Map
 > { using variant::variant; };
 
-enum Constr_tfc84267c1506821d35acfff7838227b4 {
+enum Constr_maybe_nullable {
   Void,
   Bool,
   Char,
@@ -164,7 +170,7 @@ enum Constr_tfc84267c1506821d35acfff7838227b4 {
   Map,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tfc84267c1506821d35acfff7838227b4 const &v) {
+inline std::ostream &operator<<(std::ostream &os, maybe_nullable const &v) {
   switch (v.index()) {
     case 0: os << "Void" << std::get<0>(v); break;
     case 1: os << "Bool" << std::get<1>(v); break;
@@ -206,9 +212,9 @@ inline std::ostream &operator<<(std::ostream &os, tfc84267c1506821d35acfff783822
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfc84267c1506821d35acfff7838227b4> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<maybe_nullable> const v) { os << *v; return os; }
 
-inline bool operator==(tfc84267c1506821d35acfff7838227b4 const &a, tfc84267c1506821d35acfff7838227b4 const &b) {
+inline bool operator==(maybe_nullable const &a, maybe_nullable const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Void
@@ -250,13 +256,13 @@ inline bool operator==(tfc84267c1506821d35acfff7838227b4 const &a, tfc84267c1506
   };
   return false;
 }
-inline bool operator!=(tfc84267c1506821d35acfff7838227b4 const &a, tfc84267c1506821d35acfff7838227b4 const &b) {
+inline bool operator!=(maybe_nullable const &a, maybe_nullable const &b) {
   return !operator==(a, b);
 }
 struct t {
   bool nullable;
-  ::dessser::gen::raql_type::tfc84267c1506821d35acfff7838227b4 type;
-  t(bool nullable_, ::dessser::gen::raql_type::tfc84267c1506821d35acfff7838227b4 type_) : nullable(nullable_), type(type_) {}
+  std::shared_ptr<::dessser::gen::raql_type::maybe_nullable>  type;
+  t(bool nullable_, std::shared_ptr<::dessser::gen::raql_type::maybe_nullable>  type_) : nullable(nullable_), type(type_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -269,22 +275,12 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
 inline bool operator==(t const &a, t const &b) {
-  return a.nullable == b.nullable && a.type == b.type;
+  return a.nullable == b.nullable && (*a.type) == (*b.type);
 }
 
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
 struct tf2625240b3c32734b297669569815110 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_type::t> ,
   Pointer
@@ -307,12 +303,66 @@ inline std::ostream &operator<<(std::ostream &os, tf2625240b3c32734b297669569815
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf2625240b3c32734b297669569815110> const t) { os << *t; return os; }
+
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t45ee7f4879efff40ea028e859efcc30a : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> ,
+  Pointer
+> {
+  using tuple::tuple;
+  t45ee7f4879efff40ea028e859efcc30a(std::tuple<std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t45ee7f4879efff40ea028e859efcc30a const &a, t45ee7f4879efff40ea028e859efcc30a const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t45ee7f4879efff40ea028e859efcc30a const &a, t45ee7f4879efff40ea028e859efcc30a const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t45ee7f4879efff40ea028e859efcc30a const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t45ee7f4879efff40ea028e859efcc30a> const t) { os << *t; return os; }
+
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_row_binary;
 extern std::function<::dessser::gen::raql_type::tf2625240b3c32734b297669569815110(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_type::t45ee7f4879efff40ea028e859efcc30a(Pointer)> maybe_nullable_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> )> maybe_nullable_sersize_of_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> ,Pointer)> maybe_nullable_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

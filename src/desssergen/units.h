@@ -37,6 +37,8 @@ inline std::ostream &operator<<(std::ostream &os, t91f2e36eeb48a24e3d0e81b8fc2b2
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t91f2e36eeb48a24e3d0e81b8fc2b2ee3> const t) { os << *t; return os; }
+
 struct tf1e686582fa50fe4bb8d464a3c3b3553 : public std::tuple<
   std::string,
   ::dessser::gen::units::t91f2e36eeb48a24e3d0e81b8fc2b2ee3
@@ -58,6 +60,8 @@ inline std::ostream &operator<<(std::ostream &os, tf1e686582fa50fe4bb8d464a3c3b3
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf1e686582fa50fe4bb8d464a3c3b3553> const t) { os << *t; return os; }
 
 typedef Arr<::dessser::gen::units::tf1e686582fa50fe4bb8d464a3c3b3553> t;
 struct tf6138ae5919ddcb1cb9a935a9dc7190a : public std::tuple<
@@ -81,6 +85,8 @@ inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc71
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf6138ae5919ddcb1cb9a935a9dc7190a> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::program_name {
 using dessser::operator<<;
 
@@ -39,12 +38,6 @@ struct tf6138ae5919ddcb1cb9a935a9dc7190a : public std::tuple<
   tf6138ae5919ddcb1cb9a935a9dc7190a(std::tuple<t, Pointer> p)
     : std::tuple<t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
-  return !operator==(a, b);
-}
 struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
   Size,
   Pointer
@@ -53,12 +46,6 @@ struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
   t044960e524fd6ec1bfc06410ce526709(std::tuple<Size, Pointer> p)
     : std::tuple<Size, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
-  return !operator==(a, b);
-}
 struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
   uint8_t,
   Pointer
@@ -67,12 +54,6 @@ struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
   t1566bd611d8a2b90669c241f5e8d6ff1(std::tuple<uint8_t, Pointer> p)
     : std::tuple<uint8_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
-  return !operator==(a, b);
-}
 struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
   Bytes,
   Pointer
@@ -81,12 +62,6 @@ struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
   t5887709cc43c8c8e24d28211e8c970a2(std::tuple<Bytes, Pointer> p)
     : std::tuple<Bytes, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

@@ -20,7 +20,6 @@
 #include "desssergen/field_name.h"
 #include "desssergen/raql_variable.h"
 
-
 namespace dessser::gen::raql_binding_key {
 using dessser::operator<<;
 
@@ -41,12 +40,6 @@ struct t40f56917851bc62b1c9e1a72700c3bed : public std::tuple<
   t40f56917851bc62b1c9e1a72700c3bed(std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext> p)
     : std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t40f56917851bc62b1c9e1a72700c3bed const &a, t40f56917851bc62b1c9e1a72700c3bed const &b) {
-  return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b));
-}
-inline bool operator!=(t40f56917851bc62b1c9e1a72700c3bed const &a, t40f56917851bc62b1c9e1a72700c3bed const &b) {
-  return !operator==(a, b);
-}
 struct t : public std::variant<
   uint32_t, // State
   ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed, // RecordField
@@ -54,19 +47,6 @@ struct t : public std::variant<
   std::string // Direct
 > { using variant::variant; };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // State
-    case 1: return std::get<1>(a) == std::get<1>(b); // RecordField
-    case 2: return ::dessser::gen::raql_variable::Deref(std::get<2>(a)) == ::dessser::gen::raql_variable::Deref(std::get<2>(b)); // RecordValue
-    case 3: return std::get<3>(a) == std::get<3>(b); // Direct
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tb153335fc05f1eec6819ab87a88b916a : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_binding_key::t> ,
   Pointer
@@ -75,12 +55,6 @@ struct tb153335fc05f1eec6819ab87a88b916a : public std::tuple<
   tb153335fc05f1eec6819ab87a88b916a(std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb153335fc05f1eec6819ab87a88b916a const &a, tb153335fc05f1eec6819ab87a88b916a const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tb153335fc05f1eec6819ab87a88b916a const &a, tb153335fc05f1eec6819ab87a88b916a const &b) {
-  return !operator==(a, b);
-}
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -89,12 +63,6 @@ struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return !operator==(a, b);
-}
 struct t883c6ffea47c0d7b950fe35881e3d737 : public std::tuple<
   uint32_t,
   Pointer
@@ -103,12 +71,6 @@ struct t883c6ffea47c0d7b950fe35881e3d737 : public std::tuple<
   t883c6ffea47c0d7b950fe35881e3d737(std::tuple<uint32_t, Pointer> p)
     : std::tuple<uint32_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t883c6ffea47c0d7b950fe35881e3d737 const &a, t883c6ffea47c0d7b950fe35881e3d737 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t883c6ffea47c0d7b950fe35881e3d737 const &a, t883c6ffea47c0d7b950fe35881e3d737 const &b) {
-  return !operator==(a, b);
-}
 struct t8b22e447956958a21d977c854a5cd7c0 : public std::tuple<
   dessser::gen::raql_variable::t_ext,
   Pointer
@@ -117,12 +79,6 @@ struct t8b22e447956958a21d977c854a5cd7c0 : public std::tuple<
   t8b22e447956958a21d977c854a5cd7c0(std::tuple<dessser::gen::raql_variable::t_ext, Pointer> p)
     : std::tuple<dessser::gen::raql_variable::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t8b22e447956958a21d977c854a5cd7c0 const &a, t8b22e447956958a21d977c854a5cd7c0 const &b) {
-  return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t8b22e447956958a21d977c854a5cd7c0 const &a, t8b22e447956958a21d977c854a5cd7c0 const &b) {
-  return !operator==(a, b);
-}
 struct tacdfdbd490062d58073ca57b70932e6d : public std::tuple<
   dessser::gen::field_name::t_ext,
   Pointer
@@ -131,12 +87,6 @@ struct tacdfdbd490062d58073ca57b70932e6d : public std::tuple<
   tacdfdbd490062d58073ca57b70932e6d(std::tuple<dessser::gen::field_name::t_ext, Pointer> p)
     : std::tuple<dessser::gen::field_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tacdfdbd490062d58073ca57b70932e6d const &a, tacdfdbd490062d58073ca57b70932e6d const &b) {
-  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tacdfdbd490062d58073ca57b70932e6d const &a, tacdfdbd490062d58073ca57b70932e6d const &b) {
-  return !operator==(a, b);
-}
 struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
   Size,
   Pointer
@@ -145,12 +95,6 @@ struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
   t044960e524fd6ec1bfc06410ce526709(std::tuple<Size, Pointer> p)
     : std::tuple<Size, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t044960e524fd6ec1bfc06410ce526709 const &a, t044960e524fd6ec1bfc06410ce526709 const &b) {
-  return !operator==(a, b);
-}
 struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
   uint8_t,
   Pointer
@@ -159,12 +103,6 @@ struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
   t1566bd611d8a2b90669c241f5e8d6ff1(std::tuple<uint8_t, Pointer> p)
     : std::tuple<uint8_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t1566bd611d8a2b90669c241f5e8d6ff1 const &a, t1566bd611d8a2b90669c241f5e8d6ff1 const &b) {
-  return !operator==(a, b);
-}
 struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
   Bytes,
   Pointer
@@ -173,12 +111,6 @@ struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
   t5887709cc43c8c8e24d28211e8c970a2(std::tuple<Bytes, Pointer> p)
     : std::tuple<Bytes, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t5887709cc43c8c8e24d28211e8c970a2 const &a, t5887709cc43c8c8e24d28211e8c970a2 const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

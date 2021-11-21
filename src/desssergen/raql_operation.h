@@ -152,6 +152,8 @@ inline std::ostream &operator<<(std::ostream &os, tdaa2c69f9514291e785172f768172
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tdaa2c69f9514291e785172f768172205> const t) { os << *t; return os; }
+
 struct tb07656d6bb51183c62956887bcdc8cf2 {
   dessser::gen::raql_expr::t_ext after_max_events;
   dessser::gen::raql_expr::t_ext after_max_secs;
@@ -292,6 +294,8 @@ inline std::ostream &operator<<(std::ostream &os, t9c7691cb1a7a8eb9fb2ecb020bd75
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9c7691cb1a7a8eb9fb2ecb020bd75c99> const t) { os << *t; return os; }
+
 struct tad0487b7d585b386d3fb43df884790fa : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_operation::external_source> ,
   Pointer
@@ -313,6 +317,8 @@ inline std::ostream &operator<<(std::ostream &os, tad0487b7d585b386d3fb43df88479
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tad0487b7d585b386d3fb43df884790fa> const t) { os << *t; return os; }
 
 struct t59b20b8b0e4973a8b2e924c6f3f006db : public std::variant<
   Void, // AllSites
@@ -371,6 +377,8 @@ inline std::ostream &operator<<(std::ostream &os, t249f0e7a3ae3494a3614c086c3b8e
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t249f0e7a3ae3494a3614c086c3b8e5a9> const t) { os << *t; return os; }
+
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
@@ -378,7 +386,7 @@ inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct data_source : public std::variant<
   ::dessser::gen::raql_operation::t249f0e7a3ae3494a3614c086c3b8e5a9, // NamedOperation
-  std::shared_ptr<t>  // SubQuery
+  std::shared_ptr<::dessser::gen::raql_operation::t>  // SubQuery
 > { using variant::variant; };
 
 enum Constr_data_source {
@@ -433,6 +441,8 @@ inline std::ostream &operator<<(std::ostream &os, te74c4d30259154b72d6b2593df765
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te74c4d30259154b72d6b2593df765f37> const t) { os << *t; return os; }
 
 struct t2aed35f2cd1482b2f796571d3ffee1d5 {
   std::optional<Lst<dessser::gen::field_name::t_ext>> and_all_others;
@@ -602,6 +612,8 @@ inline std::ostream &operator<<(std::ostream &os, t94e08005d9e759ca406a29f5a9b87
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t94e08005d9e759ca406a29f5a9b87ca5> const t) { os << *t; return os; }
+
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
@@ -628,6 +640,8 @@ inline std::ostream &operator<<(std::ostream &os, tec658c1a26520d6f3490dc88d519d
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tec658c1a26520d6f3490dc88d519d525> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::runtime_stats {
 using dessser::operator<<;
 
@@ -61,13 +60,6 @@ struct t {
   t(uint64_t cur_groups_, uint64_t cur_ram_, std::optional<double> first_input_, std::optional<double> first_output_, double first_startup_, std::optional<double> last_input_, std::optional<double> last_output_, double last_startup_, std::optional<double> max_etime_, uint64_t max_groups_, uint64_t max_ram_, std::optional<double> min_etime_, double stats_time_, double tot_cpu_, uint64_t tot_extinguished_notifs_, uint64_t tot_firing_notifs_, uint64_t tot_full_bytes_, uint64_t tot_full_bytes_samples_, uint64_t tot_in_bytes_, uint64_t tot_in_tuples_, uint64_t tot_out_bytes_, uint64_t tot_out_errs_, uint64_t tot_out_filtered_, uint64_t tot_out_tuples_, uint64_t tot_sel_tuples_, double tot_wait_in_, double tot_wait_out_) : cur_groups(cur_groups_), cur_ram(cur_ram_), first_input(first_input_), first_output(first_output_), first_startup(first_startup_), last_input(last_input_), last_output(last_output_), last_startup(last_startup_), max_etime(max_etime_), max_groups(max_groups_), max_ram(max_ram_), min_etime(min_etime_), stats_time(stats_time_), tot_cpu(tot_cpu_), tot_extinguished_notifs(tot_extinguished_notifs_), tot_firing_notifs(tot_firing_notifs_), tot_full_bytes(tot_full_bytes_), tot_full_bytes_samples(tot_full_bytes_samples_), tot_in_bytes(tot_in_bytes_), tot_in_tuples(tot_in_tuples_), tot_out_bytes(tot_out_bytes_), tot_out_errs(tot_out_errs_), tot_out_filtered(tot_out_filtered_), tot_out_tuples(tot_out_tuples_), tot_sel_tuples(tot_sel_tuples_), tot_wait_in(tot_wait_in_), tot_wait_out(tot_wait_out_) {}
   t() = default;
 };
-inline bool operator==(t const &a, t const &b) {
-  return a.cur_groups == b.cur_groups && a.cur_ram == b.cur_ram && ((a.first_input && b.first_input && a.first_input.value() == b.first_input.value()) || (!a.first_input && !b.first_input)) && ((a.first_output && b.first_output && a.first_output.value() == b.first_output.value()) || (!a.first_output && !b.first_output)) && a.first_startup == b.first_startup && ((a.last_input && b.last_input && a.last_input.value() == b.last_input.value()) || (!a.last_input && !b.last_input)) && ((a.last_output && b.last_output && a.last_output.value() == b.last_output.value()) || (!a.last_output && !b.last_output)) && a.last_startup == b.last_startup && ((a.max_etime && b.max_etime && a.max_etime.value() == b.max_etime.value()) || (!a.max_etime && !b.max_etime)) && a.max_groups == b.max_groups && a.max_ram == b.max_ram && ((a.min_etime && b.min_etime && a.min_etime.value() == b.min_etime.value()) || (!a.min_etime && !b.min_etime)) && a.stats_time == b.stats_time && a.tot_cpu == b.tot_cpu && a.tot_extinguished_notifs == b.tot_extinguished_notifs && a.tot_firing_notifs == b.tot_firing_notifs && a.tot_full_bytes == b.tot_full_bytes && a.tot_full_bytes_samples == b.tot_full_bytes_samples && a.tot_in_bytes == b.tot_in_bytes && a.tot_in_tuples == b.tot_in_tuples && a.tot_out_bytes == b.tot_out_bytes && a.tot_out_errs == b.tot_out_errs && a.tot_out_filtered == b.tot_out_filtered && a.tot_out_tuples == b.tot_out_tuples && a.tot_sel_tuples == b.tot_sel_tuples && a.tot_wait_in == b.tot_wait_in && a.tot_wait_out == b.tot_wait_out;
-}
-
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct ted39c8ea485719117d89516f551abd2b : public std::tuple<
   std::shared_ptr<::dessser::gen::runtime_stats::t> ,
   Pointer
@@ -76,12 +68,6 @@ struct ted39c8ea485719117d89516f551abd2b : public std::tuple<
   ted39c8ea485719117d89516f551abd2b(std::tuple<std::shared_ptr<::dessser::gen::runtime_stats::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::runtime_stats::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(ted39c8ea485719117d89516f551abd2b const &a, ted39c8ea485719117d89516f551abd2b const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(ted39c8ea485719117d89516f551abd2b const &a, ted39c8ea485719117d89516f551abd2b const &b) {
-  return !operator==(a, b);
-}
 struct tf568409f41c9c0a265f7302110fc9084 : public std::tuple<
   uint64_t,
   Pointer
@@ -90,12 +76,6 @@ struct tf568409f41c9c0a265f7302110fc9084 : public std::tuple<
   tf568409f41c9c0a265f7302110fc9084(std::tuple<uint64_t, Pointer> p)
     : std::tuple<uint64_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf568409f41c9c0a265f7302110fc9084 const &a, tf568409f41c9c0a265f7302110fc9084 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf568409f41c9c0a265f7302110fc9084 const &a, tf568409f41c9c0a265f7302110fc9084 const &b) {
-  return !operator==(a, b);
-}
 struct t5375de390f9cb5ae2ee5880ea1674828 : public std::tuple<
   double,
   Pointer
@@ -104,12 +84,6 @@ struct t5375de390f9cb5ae2ee5880ea1674828 : public std::tuple<
   t5375de390f9cb5ae2ee5880ea1674828(std::tuple<double, Pointer> p)
     : std::tuple<double, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t5375de390f9cb5ae2ee5880ea1674828 const &a, t5375de390f9cb5ae2ee5880ea1674828 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t5375de390f9cb5ae2ee5880ea1674828 const &a, t5375de390f9cb5ae2ee5880ea1674828 const &b) {
-  return !operator==(a, b);
-}
 struct t19ee1fc06b5aeb0ff499d8b8349fcd78 : public std::tuple<
   std::optional<double>,
   Pointer
@@ -118,12 +92,6 @@ struct t19ee1fc06b5aeb0ff499d8b8349fcd78 : public std::tuple<
   t19ee1fc06b5aeb0ff499d8b8349fcd78(std::tuple<std::optional<double>, Pointer> p)
     : std::tuple<std::optional<double>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t19ee1fc06b5aeb0ff499d8b8349fcd78 const &a, t19ee1fc06b5aeb0ff499d8b8349fcd78 const &b) {
-  return ((std::get<0>(a) && std::get<0>(b) && std::get<0>(a).value() == std::get<0>(b).value()) || (!std::get<0>(a) && !std::get<0>(b))) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t19ee1fc06b5aeb0ff499d8b8349fcd78 const &a, t19ee1fc06b5aeb0ff499d8b8349fcd78 const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

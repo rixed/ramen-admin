@@ -43,6 +43,8 @@ inline std::ostream &operator<<(std::ostream &os, t8b5761d72d0b8fde816fcaa9bfc21
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8b5761d72d0b8fde816fcaa9bfc21290> const t) { os << *t; return os; }
+
 struct t249796f29bea1f0bea9516f4b3a8f909 : public std::variant<
   dessser::gen::file_path::t_ext, // RingBuf
   dessser::gen::sync_key::t_ext // SyncKey
@@ -131,6 +133,8 @@ inline std::ostream &operator<<(std::ostream &os, t0e599894aecab3395c467833ad77e
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0e599894aecab3395c467833ad77eb85> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

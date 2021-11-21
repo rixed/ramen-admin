@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::raql_variable {
 using dessser::operator<<;
 
@@ -46,28 +45,6 @@ struct t : public std::variant<
   Void // GlobalVar
 > { using variant::variant; };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Unknown
-    case 1: return std::get<1>(a) == std::get<1>(b); // In
-    case 2: return std::get<2>(a) == std::get<2>(b); // GroupState
-    case 3: return std::get<3>(a) == std::get<3>(b); // GlobalState
-    case 4: return std::get<4>(a) == std::get<4>(b); // OutPrevious
-    case 5: return std::get<5>(a) == std::get<5>(b); // Out
-    case 6: return std::get<6>(a) == std::get<6>(b); // SortFirst
-    case 7: return std::get<7>(a) == std::get<7>(b); // SortSmallest
-    case 8: return std::get<8>(a) == std::get<8>(b); // SortGreatest
-    case 9: return std::get<9>(a) == std::get<9>(b); // Param
-    case 10: return std::get<10>(a) == std::get<10>(b); // Env
-    case 11: return std::get<11>(a) == std::get<11>(b); // Record
-    case 12: return std::get<12>(a) == std::get<12>(b); // GlobalVar
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct te9fedb588053185e9707b2b63ba5bb70 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_variable::t> ,
   Pointer
@@ -76,12 +53,6 @@ struct te9fedb588053185e9707b2b63ba5bb70 : public std::tuple<
   te9fedb588053185e9707b2b63ba5bb70(std::tuple<std::shared_ptr<::dessser::gen::raql_variable::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_variable::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(te9fedb588053185e9707b2b63ba5bb70 const &a, te9fedb588053185e9707b2b63ba5bb70 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(te9fedb588053185e9707b2b63ba5bb70 const &a, te9fedb588053185e9707b2b63ba5bb70 const &b) {
-  return !operator==(a, b);
-}
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -90,12 +61,6 @@ struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

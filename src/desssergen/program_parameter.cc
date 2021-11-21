@@ -19,7 +19,6 @@
 #include "desssergen/raql_value.h"
 #include "desssergen/field_type.h"
 
-
 namespace dessser::gen::program_parameter {
 using dessser::operator<<;
 
@@ -38,13 +37,6 @@ struct t {
   t(dessser::gen::field_type::t_ext ptyp_, dessser::gen::raql_value::t_ext value_) : ptyp(ptyp_), value(value_) {}
   t() = default;
 };
-inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::field_type::Deref(a.ptyp) == ::dessser::gen::field_type::Deref(b.ptyp) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
-}
-
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tf064cb568ecd4c78e46c7b6418d30392 : public std::tuple<
   std::shared_ptr<::dessser::gen::program_parameter::t> ,
   Pointer
@@ -53,12 +45,6 @@ struct tf064cb568ecd4c78e46c7b6418d30392 : public std::tuple<
   tf064cb568ecd4c78e46c7b6418d30392(std::tuple<std::shared_ptr<::dessser::gen::program_parameter::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::program_parameter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf064cb568ecd4c78e46c7b6418d30392 const &a, tf064cb568ecd4c78e46c7b6418d30392 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf064cb568ecd4c78e46c7b6418d30392 const &a, tf064cb568ecd4c78e46c7b6418d30392 const &b) {
-  return !operator==(a, b);
-}
 struct t6d425349bbb8a0175d827ed2ef05e5db : public std::tuple<
   dessser::gen::field_type::t_ext,
   Pointer
@@ -67,12 +53,6 @@ struct t6d425349bbb8a0175d827ed2ef05e5db : public std::tuple<
   t6d425349bbb8a0175d827ed2ef05e5db(std::tuple<dessser::gen::field_type::t_ext, Pointer> p)
     : std::tuple<dessser::gen::field_type::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t6d425349bbb8a0175d827ed2ef05e5db const &a, t6d425349bbb8a0175d827ed2ef05e5db const &b) {
-  return ::dessser::gen::field_type::Deref(std::get<0>(a)) == ::dessser::gen::field_type::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t6d425349bbb8a0175d827ed2ef05e5db const &a, t6d425349bbb8a0175d827ed2ef05e5db const &b) {
-  return !operator==(a, b);
-}
 struct td46b7b5194a84c2e11400d9ca5d84700 : public std::tuple<
   dessser::gen::raql_value::t_ext,
   Pointer
@@ -81,12 +61,6 @@ struct td46b7b5194a84c2e11400d9ca5d84700 : public std::tuple<
   td46b7b5194a84c2e11400d9ca5d84700(std::tuple<dessser::gen::raql_value::t_ext, Pointer> p)
     : std::tuple<dessser::gen::raql_value::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(td46b7b5194a84c2e11400d9ca5d84700 const &a, td46b7b5194a84c2e11400d9ca5d84700 const &b) {
-  return ::dessser::gen::raql_value::Deref(std::get<0>(a)) == ::dessser::gen::raql_value::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(td46b7b5194a84c2e11400d9ca5d84700 const &a, td46b7b5194a84c2e11400d9ca5d84700 const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

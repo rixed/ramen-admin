@@ -134,6 +134,8 @@ inline std::ostream &operator<<(std::ostream &os, t3f2a416abcbd7d33d681d9d474457
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3f2a416abcbd7d33d681d9d47445767b> const t) { os << *t; return os; }
+
 struct t32def300158106bfcc2bfd2015d1a3a9 : public std::variant<
   Void, // Host
   Void // Port
@@ -186,6 +188,8 @@ inline std::ostream &operator<<(std::ostream &os, t917a1ec3837bac9e10c931466c2b1
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t917a1ec3837bac9e10c931466c2b1db6> const t) { os << *t; return os; }
 
 struct t082c1c733e68c2b9334f218f8c5aeccb : public std::variant<
   Void, // StateFile
@@ -263,6 +267,8 @@ inline std::ostream &operator<<(std::ostream &os, t87de6a51e16e395e537230ef32d18
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t87de6a51e16e395e537230ef32d18a96> const t) { os << *t; return os; }
 
 struct t4f653cc5cecafb6924f3d52da0caa392 : public std::variant<
   Void, // RuntimeStats
@@ -345,6 +351,8 @@ inline std::ostream &operator<<(std::ostream &os, tb2139bc0252a099cc9e179b592108
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb2139bc0252a099cc9e179b592108d12> const t) { os << *t; return os; }
+
 struct t73ec97d1f82a1880f5d2693e3a0558b1 : public std::variant<
   Void // Executable
 > { using variant::variant; };
@@ -393,6 +401,8 @@ inline std::ostream &operator<<(std::ostream &os, t1a2ea3d90b4ec20b73da76f490de4
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t1a2ea3d90b4ec20b73da76f490de4625> const t) { os << *t; return os; }
 
 struct t9030dc10bd527c50c2f835375dc4eb9d : public std::variant<
   Void, // IsMaster
@@ -455,6 +465,8 @@ inline std::ostream &operator<<(std::ostream &os, t64d8d40f333c531e9d48c05b8ceb4
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t64d8d40f333c531e9d48c05b8ceb4cfa> const t) { os << *t; return os; }
+
 struct t1fb80ba5a0eef0b970838ab3e8e6bce4 : public std::variant<
   Void, // TotalSize
   Void, // RecallCost
@@ -514,6 +526,8 @@ inline std::ostream &operator<<(std::ostream &os, te552b116666bdac4ad5a96694c71e
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te552b116666bdac4ad5a96694c71efca> const t) { os << *t; return os; }
+
 struct t4ce2d4679665698c8b564907b52837ef : public std::tuple<
   dessser::gen::sync_socket::t_ext,
   std::shared_ptr<::dessser::gen::sync_key::per_client> 
@@ -536,32 +550,36 @@ inline std::ostream &operator<<(std::ostream &os, t4ce2d4679665698c8b564907b5283
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4ce2d4679665698c8b564907b52837ef> const t) { os << *t; return os; }
+
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct per_dash_key> const);
 inline bool operator==(struct per_dash_key const &, struct per_dash_key const &);
 inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &);
-struct t86de2f73c647a4a64e778895c97184da : public std::tuple<
+struct tfac19990b99b6207810e41e57c01fbc1 : public std::tuple<
   std::string,
-  std::shared_ptr<per_dash_key> 
+  std::shared_ptr<::dessser::gen::sync_key::per_dash_key> 
 > {
   using tuple::tuple;
-  t86de2f73c647a4a64e778895c97184da(std::tuple<std::string, std::shared_ptr<per_dash_key> > p)
-    : std::tuple<std::string, std::shared_ptr<per_dash_key> >(std::get<0>(p), std::get<1>(p)) {}
+  tfac19990b99b6207810e41e57c01fbc1(std::tuple<std::string, std::shared_ptr<::dessser::gen::sync_key::per_dash_key> > p)
+    : std::tuple<std::string, std::shared_ptr<::dessser::gen::sync_key::per_dash_key> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t86de2f73c647a4a64e778895c97184da const &a, t86de2f73c647a4a64e778895c97184da const &b) {
+inline bool operator==(tfac19990b99b6207810e41e57c01fbc1 const &a, tfac19990b99b6207810e41e57c01fbc1 const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t86de2f73c647a4a64e778895c97184da const &a, t86de2f73c647a4a64e778895c97184da const &b) {
+inline bool operator!=(tfac19990b99b6207810e41e57c01fbc1 const &a, tfac19990b99b6207810e41e57c01fbc1 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t86de2f73c647a4a64e778895c97184da const &t) {
+inline std::ostream &operator<<(std::ostream &os, tfac19990b99b6207810e41e57c01fbc1 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfac19990b99b6207810e41e57c01fbc1> const t) { os << *t; return os; }
 
 struct t8bc7bba8a815a55f85ed48e95de5ac1f : public std::variant<
   std::string, // Contacts
@@ -615,6 +633,8 @@ inline std::ostream &operator<<(std::ostream &os, t2ca7e384e93254d786048eef2705a
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t2ca7e384e93254d786048eef2705adff> const t) { os << *t; return os; }
 
 struct t7cca840d7e40b13b976d995ba9f9fd5b : public std::variant<
   Void, // NumDeliveryAttempts
@@ -689,6 +709,8 @@ inline std::ostream &operator<<(std::ostream &os, t5f10ae89970b1e8c27fc9f8df94fd
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5f10ae89970b1e8c27fc9f8df94fd836> const t) { os << *t; return os; }
+
 struct t5f29f78957e3b1e9ec4688f50d1b6080 : public std::tuple<
   double,
   uint32_t
@@ -710,6 +732,8 @@ inline std::ostream &operator<<(std::ostream &os, t5f29f78957e3b1e9ec4688f50d1b6
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5f29f78957e3b1e9ec4688f50d1b6080> const t) { os << *t; return os; }
 
 struct t0c4a58933d47075f04ed70f827130a86 : public std::variant<
   Void, // FirstStartNotif
@@ -784,6 +808,8 @@ inline std::ostream &operator<<(std::ostream &os, t9ec4790c9e9e464ee01331cfcf67a
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9ec4790c9e9e464ee01331cfcf67af68> const t) { os << *t; return os; }
+
 struct t : public std::variant<
   Void, // DevNull
   Void, // Time
@@ -797,7 +823,7 @@ struct t : public std::variant<
   std::optional<dessser::gen::sync_socket::t_ext>, // Error
   Void, // ReplayRequests
   ::dessser::gen::sync_key::t4ce2d4679665698c8b564907b52837ef, // PerClient
-  ::dessser::gen::sync_key::t86de2f73c647a4a64e778895c97184da, // Dashboards
+  ::dessser::gen::sync_key::tfac19990b99b6207810e41e57c01fbc1, // Dashboards
   Void, // Notifications
   ::dessser::gen::sync_key::t2ca7e384e93254d786048eef2705adff, // Teams
   ::dessser::gen::sync_key::t9ec4790c9e9e464ee01331cfcf67af68 // Incidents
@@ -898,6 +924,8 @@ inline std::ostream &operator<<(std::ostream &os, t35aec9ecfaa6df3f20c35d464145b
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t35aec9ecfaa6df3f20c35d464145bd4c> const t) { os << *t; return os; }
+
 struct t046563c971c0fcc6bcd022e88904aea9 : public std::tuple<
   std::shared_ptr<::dessser::gen::sync_key::per_client> ,
   Pointer
@@ -920,6 +948,8 @@ inline std::ostream &operator<<(std::ostream &os, t046563c971c0fcc6bcd022e88904a
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t046563c971c0fcc6bcd022e88904aea9> const t) { os << *t; return os; }
+
 struct t4521c7ac16d3ba391c05353ff307ec6d : public std::tuple<
   std::shared_ptr<::dessser::gen::sync_key::per_tail> ,
   Pointer
@@ -941,6 +971,8 @@ inline std::ostream &operator<<(std::ostream &os, t4521c7ac16d3ba391c05353ff307e
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4521c7ac16d3ba391c05353ff307ec6d> const t) { os << *t; return os; }
 
 struct per_dash_key;
 inline std::ostream &operator<<(std::ostream &, struct per_dash_key const &);
@@ -968,6 +1000,8 @@ inline std::ostream &operator<<(std::ostream &os, t88648ce03c3e83f4daca25557f774
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t88648ce03c3e83f4daca25557f77454f> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

@@ -43,6 +43,8 @@ inline std::ostream &operator<<(std::ostream &os, tbb6b5f61a720ca930638180f8a3d0
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbb6b5f61a720ca930638180f8a3d0d1a> const t) { os << *t; return os; }
+
 struct tdc75c022089b23d508b703f7fd52f8cc {
   uint32_t parent_num;
   std::string tunneld_host;
@@ -161,6 +163,8 @@ inline std::ostream &operator<<(std::ostream &os, ta3e796acad3d617428352d1a36655
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta3e796acad3d617428352d1a366552f7> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

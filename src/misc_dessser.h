@@ -60,7 +60,7 @@ QString syncValToQString(
 
 QString syncKeyToQString(dessser::gen::sync_key::t const &);
 
-/* Printer for some dessser generated types: */
+/* Debug printer for some dessser generated types: */
 
 QDebug operator<<(QDebug, dessser::gen::sync_client_cmd::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_client_msg::t const &);
@@ -70,5 +70,10 @@ QDebug operator<<(QDebug, dessser::gen::sync_socket::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_key::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_value::t const &);
+QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
+
+/* Better conversion to string for some generated types: */
+
+std::ostream &operator<<(std::ostream &os, dessser::gen::raql_type::t const &);
 
 #endif

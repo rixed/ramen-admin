@@ -39,6 +39,8 @@ inline std::ostream &operator<<(std::ostream &os, t284e07c4f4868d983fec7971424a1
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t284e07c4f4868d983fec7971424a1df8> const t) { os << *t; return os; }
+
 struct t {
   double certainty;
   double debounce;
@@ -100,6 +102,8 @@ inline std::ostream &operator<<(std::ostream &os, tad5879bd9b09922b2a273d2a97770
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tad5879bd9b09922b2a273d2a9777067d> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

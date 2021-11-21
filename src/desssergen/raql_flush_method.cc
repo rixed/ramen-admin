@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::raql_flush_method {
 using dessser::operator<<;
 
@@ -35,17 +34,6 @@ struct t : public std::variant<
   Void // never
 > { using variant::variant; };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // reset
-    case 1: return std::get<1>(a) == std::get<1>(b); // never
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tcb9728fff2af5188e5e3e0aee866cdff : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_flush_method::t> ,
   Pointer
@@ -54,12 +42,6 @@ struct tcb9728fff2af5188e5e3e0aee866cdff : public std::tuple<
   tcb9728fff2af5188e5e3e0aee866cdff(std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_flush_method::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tcb9728fff2af5188e5e3e0aee866cdff const &a, tcb9728fff2af5188e5e3e0aee866cdff const &b) {
-  return !operator==(a, b);
-}
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -68,12 +50,6 @@ struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

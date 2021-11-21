@@ -49,6 +49,8 @@ inline std::ostream &operator<<(std::ostream &os, t76a4eace0515e74e2f7158564887d
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t76a4eace0515e74e2f7158564887d6e2> const t) { os << *t; return os; }
+
 struct t3d86b821c5091c6f135e0807d7d824a9 : public std::tuple<
   dessser::gen::sync_key::t_ext,
   dessser::gen::sync_value::t_ext
@@ -70,6 +72,8 @@ inline std::ostream &operator<<(std::ostream &os, t3d86b821c5091c6f135e0807d7d82
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3d86b821c5091c6f135e0807d7d824a9> const t) { os << *t; return os; }
 
 struct t4e5b196a7c2c025698938503da55021a : public std::tuple<
   dessser::gen::sync_key::t_ext,
@@ -95,6 +99,8 @@ inline std::ostream &operator<<(std::ostream &os, t4e5b196a7c2c025698938503da550
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4e5b196a7c2c025698938503da55021a> const t) { os << *t; return os; }
+
 struct tdc1bba9eed6e3f46c2e7e4e1c60d94bc : public std::tuple<
   dessser::gen::sync_key::t_ext,
   double,
@@ -116,6 +122,8 @@ inline std::ostream &operator<<(std::ostream &os, tdc1bba9eed6e3f46c2e7e4e1c60d9
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tdc1bba9eed6e3f46c2e7e4e1c60d94bc> const t) { os << *t; return os; }
 
 struct t : public std::variant<
   ::dessser::gen::sync_client_cmd::t76a4eace0515e74e2f7158564887d6e2, // Auth
@@ -201,6 +209,8 @@ inline std::ostream &operator<<(std::ostream &os, tfd5814032c8587486ba8d32ccdd5b
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfd5814032c8587486ba8d32ccdd5b703> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

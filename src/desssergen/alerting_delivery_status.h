@@ -84,6 +84,8 @@ inline std::ostream &operator<<(std::ostream &os, tef7a86fb4151f002e287c72985f04
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tef7a86fb4151f002e287c72985f042cf> const t) { os << *t; return os; }
+
 /* ----------- */
 /* Definitions */
 /* ----------- */

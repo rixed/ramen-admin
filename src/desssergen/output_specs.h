@@ -155,6 +155,8 @@ inline std::ostream &operator<<(std::ostream &os, t784c9e092e6dc8e0c9c5fd1cc3093
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t784c9e092e6dc8e0c9c5fd1cc3093085> const t) { os << *t; return os; }
+
 struct t0b14edd3739ead719254746b30f1350c : public std::tuple<
   uint16_t,
   Arr<dessser::gen::raql_value::t_ext>
@@ -176,6 +178,8 @@ inline std::ostream &operator<<(std::ostream &os, t0b14edd3739ead719254746b30f13
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0b14edd3739ead719254746b30f1350c> const t) { os << *t; return os; }
 
 struct td4b276c89163d76d7a872961502751f6 {
   Arr<::dessser::gen::output_specs::t784c9e092e6dc8e0c9c5fd1cc3093085> channels;
@@ -225,6 +229,8 @@ inline std::ostream &operator<<(std::ostream &os, tba04231272fbebb3d3653fbc82bc2
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tba04231272fbebb3d3653fbc82bc2eee> const t) { os << *t; return os; }
+
 typedef Arr<::dessser::gen::output_specs::tba04231272fbebb3d3653fbc82bc2eee> t;
 struct t092f0ef972407382249d7ed7a5dafaca : public std::tuple<
   std::shared_ptr<::dessser::gen::output_specs::channel_specs> ,
@@ -248,6 +254,8 @@ inline std::ostream &operator<<(std::ostream &os, t092f0ef972407382249d7ed7a5daf
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t092f0ef972407382249d7ed7a5dafaca> const t) { os << *t; return os; }
+
 struct tdad017d875a8dc0f7c36bbe3dba6e956 : public std::tuple<
   std::shared_ptr<::dessser::gen::output_specs::file_type> ,
   Pointer
@@ -269,6 +277,8 @@ inline std::ostream &operator<<(std::ostream &os, tdad017d875a8dc0f7c36bbe3dba6e
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tdad017d875a8dc0f7c36bbe3dba6e956> const t) { os << *t; return os; }
 
 struct te1550c6bf972eb31c7ccc68cf1702abf : public std::tuple<
   std::shared_ptr<::dessser::gen::output_specs::recipient> ,
@@ -292,6 +302,8 @@ inline std::ostream &operator<<(std::ostream &os, te1550c6bf972eb31c7ccc68cf1702
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te1550c6bf972eb31c7ccc68cf1702abf> const t) { os << *t; return os; }
+
 struct tf6138ae5919ddcb1cb9a935a9dc7190a : public std::tuple<
   t,
   Pointer
@@ -313,6 +325,8 @@ inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc71
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf6138ae5919ddcb1cb9a935a9dc7190a> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

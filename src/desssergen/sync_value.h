@@ -78,6 +78,8 @@ inline std::ostream &operator<<(std::ostream &os, t4ec0da5161c08f29f8aed40b17a73
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4ec0da5161c08f29f8aed40b17a73ef5> const t) { os << *t; return os; }
+
 struct t : public std::variant<
   ::dessser::gen::sync_value::t4ec0da5161c08f29f8aed40b17a73ef5, // Error
   dessser::gen::worker::t_ext, // Worker
@@ -203,6 +205,8 @@ inline std::ostream &operator<<(std::ostream &os, tc7deda5c4126d63f3447d561e47a9
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc7deda5c4126d63f3447d561e47a978d> const t) { os << *t; return os; }
+
 struct tf9a721d48bd2d16691e9ebbb086e28c7 : public std::tuple<
   std::shared_ptr<::dessser::gen::sync_value::t> ,
   Pointer
@@ -224,6 +228,8 @@ inline std::ostream &operator<<(std::ostream &os, tf9a721d48bd2d16691e9ebbb086e2
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf9a721d48bd2d16691e9ebbb086e28c7> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

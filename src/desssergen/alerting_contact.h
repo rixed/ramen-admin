@@ -61,6 +61,8 @@ inline std::ostream &operator<<(std::ostream &os, t284e07c4f4868d983fec7971424a1
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t284e07c4f4868d983fec7971424a1df8> const t) { os << *t; return os; }
+
 struct t4f5f54104181335488041bad68082286 {
   Lst<::dessser::gen::alerting_contact::t284e07c4f4868d983fec7971424a1df8> options;
   uint16_t partition;
@@ -173,6 +175,8 @@ inline std::ostream &operator<<(std::ostream &os, t64d64e9c0acacb981f0a90c22987e
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t64d64e9c0acacb981f0a90c22987e81e> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

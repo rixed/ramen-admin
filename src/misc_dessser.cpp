@@ -17,7 +17,7 @@ extern "C" {
 
 bool isScalar(dessser::gen::raql_type::t const &t)
 {
-  switch (t.type.index()) {
+  switch (t.type->index()) {
     case dessser::gen::raql_type::Vec:
     case dessser::gen::raql_type::Arr:
     case dessser::gen::raql_type::Tup:
@@ -31,7 +31,7 @@ bool isScalar(dessser::gen::raql_type::t const &t)
 
 bool isNumeric(dessser::gen::raql_type::t const &t)
 {
-  switch (t.type.index()) {
+  switch (t.type->index()) {
     case dessser::gen::raql_type::Bool:
     case dessser::gen::raql_type::Float:
     case dessser::gen::raql_type::U8:
@@ -71,20 +71,20 @@ bool isAWorker(dessser::gen::sync_key::t const &key)
 
 unsigned numColumns(dessser::gen::raql_type::t const &t)
 {
-  switch (t.type.index()) {
+  switch (t.type->index()) {
     case dessser::gen::raql_type::Tup:
       {
-        auto const &tup { std::get<dessser::gen::raql_type::Tup>(t.type) };
+        auto const &tup { std::get<dessser::gen::raql_type::Tup>(*t.type) };
         return tup.size();
       }
     case dessser::gen::raql_type::Vec:
       {
-        auto const &vec { std::get<dessser::gen::raql_type::Vec>(t.type) };
+        auto const &vec { std::get<dessser::gen::raql_type::Vec>(*t.type) };
         return std::get<0>(vec);
       }
     case dessser::gen::raql_type::Rec:
       {
-        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
+        auto const &rec { std::get<dessser::gen::raql_type::Rec>(*t.type) };
         return rec.size();
       }
     default:
@@ -94,13 +94,13 @@ unsigned numColumns(dessser::gen::raql_type::t const &t)
 
 std::string const columnName(dessser::gen::raql_type::t const &t, size_t i)
 {
-  switch (t.type.index()) {
+  switch (t.type->index()) {
     case dessser::gen::raql_type::Tup:
     case dessser::gen::raql_type::Vec:
       return std::string("#") + std::to_string(i);
     case dessser::gen::raql_type::Rec:
       {
-        auto const &rec { std::get<dessser::gen::raql_type::Rec>(t.type) };
+        auto const &rec { std::get<dessser::gen::raql_type::Rec>(*t.type) };
         return std::get<0>(rec[i]);
       }
     default:
@@ -111,23 +111,23 @@ std::string const columnName(dessser::gen::raql_type::t const &t, size_t i)
 std::shared_ptr<dessser::gen::raql_type::t const> columnType(
   dessser::gen::raql_type::t const &t, size_t i)
 {
-  switch (t.type.index()) {
+  switch (t.type->index()) {
     case dessser::gen::raql_type::Tup:
       {
-        auto const &arr { std::get<dessser::gen::raql_type::Tup>(t.type) };
+        auto const &arr { std::get<dessser::gen::raql_type::Tup>(*t.type) };
         if (i >= arr.size()) return nullptr;
         return arr[i];
       }
     case dessser::gen::raql_type::Vec:
       {
-        auto const &vec { std::get<dessser::gen::raql_type::Vec>(t.type) };
+        auto const &vec { std::get<dessser::gen::raql_type::Vec>(*t.type) };
         uint32_t const len { std::get<0>(vec) };
         if (i >= len) return nullptr;
         return std::get<1>(vec);
       }
     case dessser::gen::raql_type::Rec:
       {
-        auto const &arr { std::get<dessser::gen::raql_type::Rec>(t.type) };
+        auto const &arr { std::get<dessser::gen::raql_type::Rec>(*t.type) };
         if (i >= arr.size()) return nullptr;
         return std::get<1>(arr[i]);
       }
@@ -474,7 +474,7 @@ QString raqlValToQString(
 QString raqlTypeToQString(dessser::gen::raql_type::t const &t)
 {
   std::ostringstream s;
-  s << t;
+  s << *t.type; // use preferably the one declared here
   return QString::fromStdString(s.str());
 }
 
@@ -557,4 +557,11 @@ QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &msg)
 QDebug operator<<(QDebug debug, dessser::gen::raql_value::t const &cmd)
 {
   return printerOfStream<dessser::gen::raql_value::t>(debug, cmd);
+}
+
+std::ostream &operator<<(std::ostream &os, dessser::gen::raql_type::t const &v)
+{
+  os << v.type;
+  if (v.nullable) os << '?';
+  return os;
 }

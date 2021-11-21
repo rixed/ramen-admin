@@ -17,7 +17,6 @@
 #include <vector>
 #include "dessser/runtime.h"
 
-
 namespace dessser::gen::raql_net_protocol {
 using dessser::operator<<;
 
@@ -36,18 +35,6 @@ struct t : public std::variant<
   Void // Graphite
 > { using variant::variant; };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
-    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
-    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
 struct tf47c5e4ed9a1c0c5574835152b1a472e : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,
   Pointer
@@ -56,12 +43,6 @@ struct tf47c5e4ed9a1c0c5574835152b1a472e : public std::tuple<
   tf47c5e4ed9a1c0c5574835152b1a472e(std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
-  return !operator==(a, b);
-}
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -70,12 +51,6 @@ struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t7609d344c1ba69d0f80fec236d4c216b const &a, t7609d344c1ba69d0f80fec236d4c216b const &b) {
-  return !operator==(a, b);
-}
 /* ----------- */
 /* Definitions */
 /* ----------- */

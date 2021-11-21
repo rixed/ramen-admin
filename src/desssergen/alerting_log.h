@@ -76,6 +76,8 @@ inline std::ostream &operator<<(std::ostream &os, t634cf874353f100ca9a3d84e2b6c3
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t634cf874353f100ca9a3d84e2b6c3c4b> const t) { os << *t; return os; }
+
 struct tc13ab978611f6f6c6f0eb7ff36eb72f4 : public std::variant<
   Void, // Notification
   std::string, // Manual
@@ -175,6 +177,8 @@ inline std::ostream &operator<<(std::ostream &os, t6b074172af0a13530a735ecaa0f9d
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6b074172af0a13530a735ecaa0f9d4fe> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

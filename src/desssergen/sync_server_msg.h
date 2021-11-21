@@ -180,6 +180,8 @@ inline std::ostream &operator<<(std::ostream &os, tc82ccaefb251651114fd50a5fd96c
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc82ccaefb251651114fd50a5fd96cfe2> const t) { os << *t; return os; }
+
 /* ----------- */
 /* Definitions */
 /* ----------- */

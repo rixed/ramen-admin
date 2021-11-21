@@ -185,6 +185,8 @@ inline std::ostream &operator<<(std::ostream &os, tf10028d8c172b81c81f09681b7ea7
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf10028d8c172b81c81f09681b7ea7fa0> const t) { os << *t; return os; }
+
 struct tab14cca2da8a1bf7815d3cb326bdebb2 : public std::tuple<
   std::shared_ptr<::dessser::gen::source_info::compiled_program> ,
   Pointer
@@ -207,6 +209,8 @@ inline std::ostream &operator<<(std::ostream &os, tab14cca2da8a1bf7815d3cb326bde
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tab14cca2da8a1bf7815d3cb326bdebb2> const t) { os << *t; return os; }
+
 struct t30765aebeaacaa9c15b78975b43a156d : public std::tuple<
   std::shared_ptr<::dessser::gen::source_info::t> ,
   Pointer
@@ -228,6 +232,8 @@ inline std::ostream &operator<<(std::ostream &os, t30765aebeaacaa9c15b78975b43a1
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t30765aebeaacaa9c15b78975b43a156d> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

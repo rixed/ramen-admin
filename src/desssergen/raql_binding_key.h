@@ -40,6 +40,8 @@ inline std::ostream &operator<<(std::ostream &os, t40f56917851bc62b1c9e1a72700c3
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t40f56917851bc62b1c9e1a72700c3bed> const t) { os << *t; return os; }
+
 struct t : public std::variant<
   uint32_t, // State
   ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed, // RecordField
@@ -100,6 +102,8 @@ inline std::ostream &operator<<(std::ostream &os, tb153335fc05f1eec6819ab87a88b9
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb153335fc05f1eec6819ab87a88b916a> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */

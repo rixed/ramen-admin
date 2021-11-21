@@ -45,6 +45,8 @@ inline std::ostream &operator<<(std::ostream &os, t596d48bd9128124b3701d75ab095e
   return os;
 }
 
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t596d48bd9128124b3701d75ab095e574> const t) { os << *t; return os; }
+
 struct t131662737cd7ca0ff4503bc447b90c1f : public std::variant<
   double, // Absolute
   double // Relative
@@ -212,6 +214,8 @@ inline std::ostream &operator<<(std::ostream &os, t39104663fb90074c71cd95d895d45
   os << '>';
   return os;
 }
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t39104663fb90074c71cd95d895d45654> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
