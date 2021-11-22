@@ -4,7 +4,7 @@
 // module.
 {
   type:
-    (maybe_nullable as [ Void
+    (base as [ Void
     | Bool
     | Char
     | Float

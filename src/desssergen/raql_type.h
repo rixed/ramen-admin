@@ -92,7 +92,7 @@ inline std::ostream &operator<<(std::ostream &os, t76c4c35a2b2b182ccf791241e9611
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t76c4c35a2b2b182ccf791241e9611c1d> const t) { os << *t; return os; }
 
-struct maybe_nullable : public std::variant<
+struct base : public std::variant<
   Void, // Void
   Void, // Bool
   Void, // Char
@@ -131,7 +131,7 @@ struct maybe_nullable : public std::variant<
   ::dessser::gen::raql_type::t76c4c35a2b2b182ccf791241e9611c1d // Map
 > { using variant::variant; };
 
-enum Constr_maybe_nullable {
+enum Constr_base {
   Void,
   Bool,
   Char,
@@ -170,7 +170,7 @@ enum Constr_maybe_nullable {
   Map,
 };
 
-inline std::ostream &operator<<(std::ostream &os, maybe_nullable const &v) {
+inline std::ostream &operator<<(std::ostream &os, base const &v) {
   switch (v.index()) {
     case 0: os << "Void" << std::get<0>(v); break;
     case 1: os << "Bool" << std::get<1>(v); break;
@@ -212,9 +212,9 @@ inline std::ostream &operator<<(std::ostream &os, maybe_nullable const &v) {
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<maybe_nullable> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<base> const v) { os << *v; return os; }
 
-inline bool operator==(maybe_nullable const &a, maybe_nullable const &b) {
+inline bool operator==(base const &a, base const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Void
@@ -256,13 +256,13 @@ inline bool operator==(maybe_nullable const &a, maybe_nullable const &b) {
   };
   return false;
 }
-inline bool operator!=(maybe_nullable const &a, maybe_nullable const &b) {
+inline bool operator!=(base const &a, base const &b) {
   return !operator==(a, b);
 }
 struct t {
   bool nullable;
-  std::shared_ptr<::dessser::gen::raql_type::maybe_nullable>  type;
-  t(bool nullable_, std::shared_ptr<::dessser::gen::raql_type::maybe_nullable>  type_) : nullable(nullable_), type(type_) {}
+  std::shared_ptr<::dessser::gen::raql_type::base>  type;
+  t(bool nullable_, std::shared_ptr<::dessser::gen::raql_type::base>  type_) : nullable(nullable_), type(type_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
@@ -310,21 +310,21 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t45ee7f4879efff40ea028e859efcc30a : public std::tuple<
-  std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> ,
+struct t45adf9446573668c9b9a6264c9e7d2b0 : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_type::base> ,
   Pointer
 > {
   using tuple::tuple;
-  t45ee7f4879efff40ea028e859efcc30a(std::tuple<std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t45adf9446573668c9b9a6264c9e7d2b0(std::tuple<std::shared_ptr<::dessser::gen::raql_type::base> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::base> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t45ee7f4879efff40ea028e859efcc30a const &a, t45ee7f4879efff40ea028e859efcc30a const &b) {
+inline bool operator==(t45adf9446573668c9b9a6264c9e7d2b0 const &a, t45adf9446573668c9b9a6264c9e7d2b0 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t45ee7f4879efff40ea028e859efcc30a const &a, t45ee7f4879efff40ea028e859efcc30a const &b) {
+inline bool operator!=(t45adf9446573668c9b9a6264c9e7d2b0 const &a, t45adf9446573668c9b9a6264c9e7d2b0 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t45ee7f4879efff40ea028e859efcc30a const &t) {
+inline std::ostream &operator<<(std::ostream &os, t45adf9446573668c9b9a6264c9e7d2b0 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -332,7 +332,7 @@ inline std::ostream &operator<<(std::ostream &os, t45ee7f4879efff40ea028e859efcc
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t45ee7f4879efff40ea028e859efcc30a> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t45adf9446573668c9b9a6264c9e7d2b0> const t) { os << *t; return os; }
 
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
@@ -358,11 +358,11 @@ inline bool operator!=(struct t const &, struct t const &);
 /* Definitions */
 /* ----------- */
 extern std::function<::dessser::gen::raql_type::tf2625240b3c32734b297669569815110(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::raql_type::t45ee7f4879efff40ea028e859efcc30a(Pointer)> maybe_nullable_of_row_binary;
+extern std::function<::dessser::gen::raql_type::t45adf9446573668c9b9a6264c9e7d2b0(Pointer)> base_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> )> maybe_nullable_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> base_sersize_of_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> to_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::maybe_nullable> ,Pointer)> maybe_nullable_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)> base_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

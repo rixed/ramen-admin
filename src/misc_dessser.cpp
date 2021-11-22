@@ -471,11 +471,76 @@ QString raqlValToQString(
   return QString::fromStdString(s.str());
 }
 
+static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
+{
+  using namespace dessser::gen::raql_type;
+  switch (b.index()) {
+    case Tup:
+      {
+        dessser::Arr<std::shared_ptr<t>> ts { std::get<Tup>(b) };
+        QString s;
+        bool first = true;
+        for (std::shared_ptr<const t> t : ts) {
+          QString sep { QString(first ? "(" : "; ") };
+          s += sep + raqlTypeToQString(*t);
+        }
+        return s + ")";
+      }
+    case Vec:
+      {
+        auto const d_t { std::get<Vec>(b) };
+        return raqlTypeToQString(*std::get<1>(d_t)) +
+                 "[" + QString::number(std::get<0>(d_t)) + "]";
+      }
+    case Arr:
+      {
+        std::shared_ptr<t> t { std::get<Arr>(b) };
+        return raqlTypeToQString(*t) + "[]";
+      }
+    case Rec:
+      {
+        auto const ts { std::get<Rec>(b) };
+        QString s;
+        bool first = true;
+        for (auto const n_t : ts) {
+          QString sep { QString(first ? "{" : "; ") };
+          s += sep + QString::fromStdString(std::get<0>(n_t)) + ": " +
+               raqlTypeToQString(*std::get<1>(n_t));
+        }
+        return s + "}";
+      }
+    case Sum:
+      {
+        auto const ts { std::get<Sum>(b) };
+        QString s;
+        bool first = true;
+        for (auto const n_t : ts) {
+          QString sep { QString(first ? "[" : " | ") };
+          s += sep + QString::fromStdString(std::get<0>(n_t)) + " " +
+               raqlTypeToQString(*std::get<1>(n_t));
+        }
+        return s + "]";
+      }
+    case Map:
+      {
+        auto const k_v { std::get<Map>(b) };
+        return raqlTypeToQString(*std::get<0>(k_v)) + "[" +
+               raqlTypeToQString(*std::get<1>(k_v)) + "]";
+      }
+    default:
+      {
+        std::ostringstream s;
+        s << b;
+        return QString::fromStdString(s.str());
+      }
+  }
+}
+
 QString raqlTypeToQString(dessser::gen::raql_type::t const &t)
 {
-  std::ostringstream s;
-  s << *t.type; // use preferably the one declared here
-  return QString::fromStdString(s.str());
+  QString b { raqlBaseType2QString(*t.type) };
+  if (t.nullable) b += '?';
+  return b;
 }
 
 QString raqlExprToQString(dessser::gen::raql_expr::t const &e)
@@ -557,11 +622,4 @@ QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &msg)
 QDebug operator<<(QDebug debug, dessser::gen::raql_value::t const &cmd)
 {
   return printerOfStream<dessser::gen::raql_value::t>(debug, cmd);
-}
-
-std::ostream &operator<<(std::ostream &os, dessser::gen::raql_type::t const &v)
-{
-  os << v.type;
-  if (v.nullable) os << '?';
-  return os;
 }

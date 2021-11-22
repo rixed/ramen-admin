@@ -72,8 +72,4 @@ QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
 
-/* Better conversion to string for some generated types: */
-
-std::ostream &operator<<(std::ostream &os, dessser::gen::raql_type::t const &);
-
 #endif
