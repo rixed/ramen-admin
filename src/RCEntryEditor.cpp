@@ -69,7 +69,6 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
     sourceEditable(sourceEditable_)
 {
   QFormLayout *layout = new QFormLayout;
-  setLayout(layout);
 
   { // source
 
@@ -149,6 +148,13 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
 
   paramsForm = new QFormLayout;
   layout->addRow(new QLabel(tr("Parameters:")), paramsForm);
+
+  /* Make sure the above form is compressed vertically when parameters are
+   * added/removed: */
+  QVBoxLayout *vbox_layout = new QVBoxLayout;
+  vbox_layout->addLayout(layout);
+  vbox_layout->addStretch(1);
+  setLayout(vbox_layout);
 
   setEnabled(enabled);
 
