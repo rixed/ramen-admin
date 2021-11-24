@@ -30,7 +30,7 @@ AtomicWidget *newEditorWidget(
   static dessser::gen::sync_key::t const recall_cost {
     std::in_place_index<dessser::gen::sync_key::Storage>,
     std::in_place_index<dessser::gen::sync_key::RecallCost>,
-    VOID };
+    dessser::VOID };
 
   AtomicWidget *editor = nullptr;
 

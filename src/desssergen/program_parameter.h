@@ -9,7 +9,9 @@
 #include <vector>
 #include "dessser/runtime.h"
 #include "desssergen/raql_value.h"
-#include "desssergen/field_type.h"
+#include "desssergen/units.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/field_name.h"
 
 namespace dessser::gen::program_parameter {
 using dessser::operator<<;
@@ -18,14 +20,20 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::field_type::t_ext ptyp;
+  std::string doc;
+  dessser::gen::field_name::t_ext name;
+  dessser::gen::raql_type::t_ext typ;
+  std::optional<dessser::gen::units::t_ext> units;
   dessser::gen::raql_value::t_ext value;
-  t(dessser::gen::field_type::t_ext ptyp_, dessser::gen::raql_value::t_ext value_) : ptyp(ptyp_), value(value_) {}
+  t(std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, dessser::gen::raql_value::t_ext value_) : doc(doc_), name(name_), typ(typ_), units(units_), value(value_) {}
   t() = default;
 };
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "ptyp:" << r.ptyp << ',';
+  os << "doc:" << r.doc << ',';
+  os << "name:" << r.name << ',';
+  os << "typ:" << r.typ << ',';
+  if (r.units) os << "units:" << r.units.value() << ',';
   os << "value:" << r.value;
   os << '}';
   return os;
@@ -33,7 +41,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::field_type::Deref(a.ptyp) == ::dessser::gen::field_type::Deref(b.ptyp) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
+  return a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
 }
 
 inline bool operator!=(t const &a, t const &b) {

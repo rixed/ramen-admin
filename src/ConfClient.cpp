@@ -619,7 +619,7 @@ int ConfClient::sendNew(
   // Set a placeholder null value by default:
   static std::shared_ptr<dessser::gen::raql_value::t> vnull {
     std::make_shared<dessser::gen::raql_value::t>(
-      std::in_place_index<dessser::gen::raql_value::VNull>, VOID) };
+      std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID) };
   static std::shared_ptr<dessser::gen::sync_value::t const> nullVal {
     std::make_shared<dessser::gen::sync_value::t const>(
       std::in_place_index<dessser::gen::sync_value::RamenValue>,

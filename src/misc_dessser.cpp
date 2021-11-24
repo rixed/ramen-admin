@@ -604,22 +604,32 @@ QDebug operator<<(QDebug debug, dessser::gen::sync_msg::t const &msg)
   return printerOfStream<dessser::gen::sync_msg::t>(debug, msg);
 }
 
-QDebug operator<<(QDebug debug, dessser::gen::sync_socket::t const &msg)
+QDebug operator<<(QDebug debug, dessser::gen::sync_socket::t const &s)
 {
-  return printerOfStream<dessser::gen::sync_socket::t>(debug, msg);
+  return printerOfStream<dessser::gen::sync_socket::t>(debug, s);
 }
 
-QDebug operator<<(QDebug debug, dessser::gen::sync_key::t const &msg)
+QDebug operator<<(QDebug debug, dessser::gen::sync_key::t const &k)
 {
-  return printerOfStream<dessser::gen::sync_key::t>(debug, msg);
+  return printerOfStream<dessser::gen::sync_key::t>(debug, k);
 }
 
-QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &msg)
+QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &v)
 {
-  return printerOfStream<dessser::gen::sync_value::t>(debug, msg);
+  return printerOfStream<dessser::gen::sync_value::t>(debug, v);
 }
 
-QDebug operator<<(QDebug debug, dessser::gen::raql_value::t const &cmd)
+QDebug operator<<(QDebug debug, dessser::gen::raql_value::t const &v)
 {
-  return printerOfStream<dessser::gen::raql_value::t>(debug, cmd);
+  return printerOfStream<dessser::gen::raql_value::t>(debug, v);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::raql_type::t const &t)
+{
+  return printerOfStream<dessser::gen::raql_type::t>(debug, t);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::raql_type::base const &b)
+{
+  return printerOfStream<dessser::gen::raql_type::base>(debug, b);
 }

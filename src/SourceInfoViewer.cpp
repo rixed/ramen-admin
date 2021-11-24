@@ -73,9 +73,9 @@ bool SourceInfoViewer::setValue(
         for (auto p : compiled->default_params) {
           QLabel *l { new QLabel(raqlValToQString(*p->value)) };
           l->setWordWrap(true);
-          paramsLayout->addRow(QString::fromStdString(p->ptyp->name) + ":", l);
-          if (p->ptyp->doc.size() > 0) {
-            QLabel *doc { new QLabel(QString::fromStdString(p->ptyp->doc)) };
+          paramsLayout->addRow(QString::fromStdString(p->name) + ":", l);
+          if (p->doc.size() > 0) {
+            QLabel *doc { new QLabel(QString::fromStdString(p->doc)) };
             doc->setWordWrap(true);
             paramsLayout->addRow(doc);
           }

@@ -1,6 +1,6 @@
 #ifndef EDITORWIDGET_H_210913
 #define EDITORWIDGET_H_210913
-/* Build a widget to edit a given conf value */
+/* Build a widget to edit a given configuration value */
 #include <memory>
 
 class QWidget;

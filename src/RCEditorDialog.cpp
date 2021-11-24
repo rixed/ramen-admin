@@ -34,7 +34,7 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
   targetConfigEditor = new TargetConfigEditor;
   static dessser::gen::sync_key::t const targetConfig {
     std::in_place_index<dessser::gen::sync_key::TargetConfig>,
-    VOID };
+    dessser::VOID };
   targetConfigEditor->setKey(
     std::shared_ptr<dessser::gen::sync_key::t const>(
       &targetConfig, /* No del */[](dessser::gen::sync_key::t const *){}));

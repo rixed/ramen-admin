@@ -349,10 +349,9 @@ std::shared_ptr<dessser::gen::raql_value::t const> RCEntryEditor::paramValue(
    * compiled default: */
   if (verbose)
     qDebug() << "RCEntryEditor: paramValue("
-             << QString::fromStdString(p->ptyp->name) << ") is"
-             << (setParamValues.contains(p->ptyp->name) ? "present" : "absent");
-  std::shared_ptr<dessser::gen::raql_value::t const> val { p->value };
-  return setParamValues.value(p->ptyp->name, val);
+             << QString::fromStdString(p->name) << ") is"
+             << (setParamValues.contains(p->name) ? "present" : "absent");
+  return setParamValues.value(p->name, p->value);
 }
 
 /* Not the brightest idea to use labels as value store, but there you go: */
@@ -466,7 +465,7 @@ void RCEntryEditor::resetParams()
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged,
             this, &RCEntryEditor::inputChanged);
-    paramsForm->addRow(labelOfParamName(p->ptyp->name), paramEdit);
+    paramsForm->addRow(labelOfParamName(p->name), paramEdit);
   }
 }
 
@@ -496,16 +495,12 @@ void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry)
   cwdEdit->setText(QString::fromStdString(rcEntry.cwd));
 
   // Also save the parameter values so that resetParams can find them:
-  for (auto const &param : rcEntry.params) {
-    if (! param->value) continue;
+  for (std::shared_ptr<dessser::gen::program_run_parameter::t const> const &p : rcEntry.params) {
+    if (! p->value) continue;
     if (verbose)
-      qDebug() << "RCEntryEditor: Save value" << *param->value
-               << "for param" << QString::fromStdString(param->name);
-    qCritical() << "FIXME: dangling pointer over here!";
-    setParamValues[param->name] =
-      /* FIXME: param->value has no lifespan control and will be deleted
-       * whenever the caller feels like deleting rcEntry! */
-      std::shared_ptr<dessser::gen::raql_value::t const>(param->value);
+      qDebug() << "RCEntryEditor: Save value" << *p->value
+               << "for param" << QString::fromStdString(p->name);
+    setParamValues[p->name] = p->value;
   }
   resetParams();
 }

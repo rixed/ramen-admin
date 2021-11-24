@@ -39,7 +39,7 @@ TailModel::TailModel(
   static std::shared_ptr<dessser::gen::raql_value::t> const dummy {
     std::make_shared<dessser::gen::raql_value::t>(
       std::in_place_index<dessser::gen::raql_value::VNull>,
-      VOID) };
+      dessser::VOID) };
   static std::shared_ptr<dessser::gen::sync_value::t> const v {
     std::make_shared<dessser::gen::sync_value::t>(
       std::in_place_index<dessser::gen::sync_value::RamenValue>,

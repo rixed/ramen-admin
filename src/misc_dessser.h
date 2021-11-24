@@ -9,7 +9,10 @@
 namespace dessser {
   namespace gen {
     namespace raql_expr { struct t; }
-    namespace raql_type { struct t; }
+    namespace raql_type {
+      struct t;
+      struct base;
+    }
     namespace raql_value { struct t; }
     namespace sync_client_cmd { struct t; }
     namespace sync_client_msg { struct t; }
@@ -71,5 +74,6 @@ QDebug operator<<(QDebug, dessser::gen::sync_key::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
+QDebug operator<<(QDebug, dessser::gen::raql_type::base const &);
 
 #endif
