@@ -25,6 +25,7 @@
 #include "misc_dessser.h"
 #include "PathSuffixValidator.h"
 #include "RangeDoubleValidator.h"
+#include "raql_editor.h"
 #include "SourcesModel.h"  // for baseNameOfKey and friends
 
 #include "RCEntryEditor.h"
@@ -458,7 +459,7 @@ void RCEntryEditor::resetParams()
         std::in_place_index<dessser::gen::sync_value::RamenValue>,
         std::const_pointer_cast<dessser::gen::raql_value::t>(rval)) };
     // Get an editor for that type of value:
-    AtomicWidget *paramEdit { newEditorWidget(*val) };
+    AtomicWidget *paramEdit { newRaqlValueEditorWidget(*p->typ) };
     /* In theory, AtomicWidget got their value from the key. But here we
      * have no key but we know the value so let's just set it: */
     paramEdit->setValue(nullptr, val);
