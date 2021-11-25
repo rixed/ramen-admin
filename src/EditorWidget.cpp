@@ -5,10 +5,12 @@
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
-#include "KBool.h"
+#include "KBoolEditor.h"
 #include "KCharEditor.h"
+#include "KCidrEditor.h"
 #include "KFloatEditor.h"
 #include "KIntEditor.h"
+#include "KIpEditor.h"
 #include "KLabel.h"
 #include "KLineEdit.h"
 #include "KTextEdit.h"
@@ -34,6 +36,95 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
   switch (t.type->index()) {
     case Void:
       editor = new KVoidEditor(parent);
+      break;
+    case Bool:
+      editor = new KBoolEditor(parent);
+      break;
+    case Char:
+      editor = new KCharEditor(charOfQString, parent);
+      break;
+    case Float:
+      editor = new KFloatEditor(parent);
+      break;
+    case String:
+      editor = new KLineEdit(parent);
+      break;
+    case U8:
+      editor = new KIntEditor(u8OfQString, parent, 0,
+                              std::numeric_limits<uint8_t>::max());
+      break;
+    case U16:
+      editor = new KIntEditor(u16OfQString, parent, 0,
+                              std::numeric_limits<uint16_t>::max());
+      break;
+    case U24:
+      editor = new KIntEditor(u24OfQString, parent, 0, 16777216ULL);
+      break;
+    case U32:
+      editor = new KIntEditor(u32OfQString, parent, 0,
+                              std::numeric_limits<uint32_t>::max());
+      break;
+    case U40:
+      editor = new KIntEditor(u40OfQString, parent, 0, 1099511627776ULL);
+      break;
+    case U48:
+      editor = new KIntEditor(u48OfQString, parent, 0, 281474976710656ULL);
+      break;
+    case U56:
+      editor = new KIntEditor(u56OfQString, parent, 0, 72057594037927936ULL);
+      break;
+    case U64:
+      editor = new KIntEditor(u64OfQString, parent, 0,
+                              std::numeric_limits<uint64_t>::max());
+      break;
+    case U128:
+      editor = new KIntEditor(u128OfQString, parent, 0,
+                              std::numeric_limits<uint128_t>::max());
+      break;
+    case I8:
+      editor = new KIntEditor(i8OfQString, parent,
+                              std::numeric_limits<int8_t>::min(),
+                              std::numeric_limits<int8_t>::max());
+      break;
+    case I16:
+      editor = new KIntEditor(i16OfQString, parent,
+                              std::numeric_limits<int16_t>::min(),
+                              std::numeric_limits<int16_t>::max());
+      break;
+    case I24:
+      editor = new KIntEditor(i24OfQString, parent, -8388608LL, 8388607);
+      break;
+    case I32:
+      editor = new KIntEditor(i32OfQString, parent,
+                              std::numeric_limits<int32_t>::min(),
+                              std::numeric_limits<int32_t>::max());
+      break;
+    case I40:
+      editor = new KIntEditor(i40OfQString, parent, -549755813888LL, 549755813887LL);
+      break;
+    case I48:
+      editor = new KIntEditor(i48OfQString, parent,
+                              -140737488355328LL, 140737488355327LL);
+      break;
+    case I56:
+      editor = new KIntEditor(i56OfQString, parent,
+                              -36028797018963968LL, 36028797018963967LL);
+      break;
+    case I64:
+      editor = new KIntEditor(i64OfQString, parent,
+                              std::numeric_limits<int64_t>::min(),
+                              std::numeric_limits<int64_t>::max());
+      break;
+    case I128:
+      editor = new KIntEditor(i128OfQString, parent,
+                              std::numeric_limits<int128_t>::min(),
+                              std::numeric_limits<int128_t>::max());
+      break;
+    case Ip:
+      editor = new KIpEditor(parent);
+      break;
+    case Cidr:
+      editor = new KCidrEditor(parent);
       break;
 
     default:
@@ -80,7 +171,7 @@ AtomicWidget *newEditorWidget(
                 static_cast<AtomicWidget *>(new KLineEdit(parent));
             break;
           case dessser::gen::raql_value::VBool:
-            editor = new KBool(parent);
+            editor = new KBoolEditor(parent);
             break;
           case dessser::gen::raql_value::VChar:
             editor = new KCharEditor(charOfQString, parent);

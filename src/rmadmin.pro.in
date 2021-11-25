@@ -120,10 +120,12 @@ HEADERS += \
   KCharEditor.h \
   KLabel.h \
   KLineEdit.h \
+  KIpEditor.h \
+  KCidrEditor.h \
   RamenSyntaxHighlighter.h \
   KTextEdit.h \
   KChoice.h \
-  KBool.h \
+  KBoolEditor.h \
   WorkerViewer.h \
   TimeRangeViewer.h \
   SourceInfoViewer.h \
@@ -247,10 +249,12 @@ SOURCES += \
   KCharEditor.cpp \
   KLabel.cpp \
   KLineEdit.cpp \
+  KIpEditor.cpp \
+  KCidrEditor.cpp \
   RamenSyntaxHighlighter.cpp \
   KTextEdit.cpp \
   KChoice.cpp \
-  KBool.cpp \
+  KBoolEditor.cpp \
   WorkerViewer.cpp \
   TimeRangeViewer.cpp \
   SourceInfoViewer.cpp \

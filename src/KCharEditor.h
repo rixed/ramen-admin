@@ -1,5 +1,6 @@
 #ifndef KCHAREDITOR_H_191029
 #define KCHAREDITOR_H_191029
+/* TODO: a char selector would be nicer */
 #include "KIntEditor.h"
 
 class KCharEditor : public KIntEditor {

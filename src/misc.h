@@ -96,4 +96,7 @@ QColor blendColor(QColor const &c1, QColor const &c2, double ratio);
 
 #define WITH_BETA_FEATURES (!qgetenv("RMADMIN_BETA").isEmpty())
 
+bool parseIpv4(uint32_t *, QString const &);
+bool parseIpv6(uint128_t *, QString const &);
+
 #endif

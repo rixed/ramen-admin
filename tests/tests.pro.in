@@ -5,14 +5,17 @@ QT += core widgets testlib
 
 INCLUDEPATH += .
 INCLUDEPATH += ../src
+INCLUDEPATH += @DESSSER_INC@  # Because misc.cpp includes runtime.h for int128
 
 HEADERS += \
   ConfClientTest.h \
   Z85Test.h \
-  StringOfIpTest.h
+  StringOfIpTest.h \
+  ParseIpTest.h
 
 SOURCES += \
   ConfClientTest.cpp \
   Z85Test.cpp \
   StringOfIpTest.cpp \
-  main.cpp
+  main.cpp \
+  ParseIpTest.cpp

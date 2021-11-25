@@ -236,3 +236,34 @@ QColor blendColor(QColor const &c1, QColor const &c2, double r2)
     c1.blue() * r1 + c2.blue() * r2,
     c1.alpha() * r1 + c2.alpha() * r2);
 }
+
+extern "C" {
+#include <arpa/inet.h>
+}
+
+bool parseIpv4(uint32_t *ip, QString const &s)
+{
+  struct in_addr addr;
+  if (0 == inet_pton(AF_INET, s.toStdString().c_str(), &addr))
+    return false;
+  *ip = ntohl(addr.s_addr);
+  return true;
+}
+
+bool parseIpv6(uint128_t *ip, QString const &s)
+{
+  static_assert(sizeof(struct in6_addr) == sizeof(uint128_t));
+  uint128_t addr;
+  if (0 == inet_pton(AF_INET6, s.toStdString().c_str(), &addr))
+    return false;
+  // Endianness?
+  if (ntohs(0x0102) == 0x0102) {
+    *ip = addr;
+  } else {
+    *((uint32_t *)ip + 0) = ntohl(*((uint32_t *)&addr + 3));
+    *((uint32_t *)ip + 1) = ntohl(*((uint32_t *)&addr + 2));
+    *((uint32_t *)ip + 2) = ntohl(*((uint32_t *)&addr + 1));
+    *((uint32_t *)ip + 3) = ntohl(*((uint32_t *)&addr + 0));
+  }
+  return true;
+}

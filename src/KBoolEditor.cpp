@@ -4,9 +4,9 @@
 #include "desssergen/sync_value.h"
 #include "MakeSyncValue.h"
 
-#include "KBool.h"
+#include "KBoolEditor.h"
 
-KBool::KBool(QString const &yesLabel, QString const &noLabel, QWidget *parent) :
+KBoolEditor::KBoolEditor(QWidget *parent, QString const &yesLabel, QString const &noLabel) :
   KChoice(
     {
       { yesLabel, ofBool(true) },
@@ -14,6 +14,3 @@ KBool::KBool(QString const &yesLabel, QString const &noLabel, QWidget *parent) :
     },
     parent
   ) {}
-
-KBool::KBool(QWidget *parent) :
-  KBool(tr("yes"), tr("no"), parent) {}

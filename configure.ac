@@ -38,5 +38,6 @@ AC_SUBST(DESSSERC, [$with_dessserc])
 AC_CONFIG_FILES([
   Makefile
   src/rmadmin.pro
+  tests/tests.pro
 ])
 AC_OUTPUT

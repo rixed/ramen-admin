@@ -4,8 +4,8 @@
 
 #include "MakeSyncValue.h"
 
-static std::unique_ptr<dessser::gen::sync_value::t> makeRaql(
-  dessser::gen::raql_value::t *rv)
+std::unique_ptr<dessser::gen::sync_value::t> makeRamenValue(
+  std::shared_ptr<dessser::gen::raql_value::t> rv)
 {
   return std::make_unique<dessser::gen::sync_value::t>(
     std::in_place_index<dessser::gen::sync_value::RamenValue>,
@@ -14,32 +14,57 @@ static std::unique_ptr<dessser::gen::sync_value::t> makeRaql(
 
 std::unique_ptr<dessser::gen::sync_value::t> ofBool(bool b)
 {
-  return makeRaql(new dessser::gen::raql_value::t(
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
     std::in_place_index<dessser::gen::raql_value::VBool>, b));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> boolOfQString(QString const &s)
+{
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  char const c { s[0].toLatin1() };
+  return ofBool(c == '1' || c == 'y' || c == 't' || s == QString("on"));
 }
 
 std::unique_ptr<dessser::gen::sync_value::t> ofChar(char c)
 {
-  return makeRaql(new dessser::gen::raql_value::t(
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
     std::in_place_index<dessser::gen::raql_value::VChar>, c));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> charOfQString(QString const &s)
+{
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofChar(s[0].toLatin1());
 }
 
 std::unique_ptr<dessser::gen::sync_value::t> ofDouble(double d)
 {
-  return makeRaql(new dessser::gen::raql_value::t(
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
     std::in_place_index<dessser::gen::raql_value::VFloat>, d));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> floatOfQString(QString const &s)
+{
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofDouble(s.toDouble());
 }
 
 std::unique_ptr<dessser::gen::sync_value::t> ofString(std::string const &s)
 {
-  return makeRaql(new dessser::gen::raql_value::t(
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
     std::in_place_index<dessser::gen::raql_value::VString>, s));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> stringOfQString(QString const &s)
+{
+  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofString(s.toStdString());
 }
 
 #define DO_UINT(W, CW, conv) \
 std::unique_ptr<dessser::gen::sync_value::t> ofU##W(uint##CW##_t n) \
 { \
-  return makeRaql(new dessser::gen::raql_value::t( \
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>( \
     std::in_place_index<dessser::gen::raql_value::VU##W>, n)); \
 } \
  \
@@ -63,7 +88,7 @@ DO_UINT(128, 128, toLongLong)
 #define DO_INT(W, CW, conv) \
 std::unique_ptr<dessser::gen::sync_value::t> ofI##W(int##CW##_t n) \
 { \
-  return makeRaql(new dessser::gen::raql_value::t( \
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>( \
     std::in_place_index<dessser::gen::raql_value::VI##W>, n)); \
 } \
  \
@@ -84,27 +109,77 @@ DO_INT(64, 64, toLongLong)
 // FIXME:
 DO_INT(128, 128, toLongLong)
 
-std::unique_ptr<dessser::gen::sync_value::t> boolOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> ofIpv4(uint32_t ip)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
-  char const c { s[0].toLatin1() };
-  return ofBool(c == '1' || c == 'y' || c == 't' || s == QString("on"));
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VIpv4>, ip));
 }
 
-std::unique_ptr<dessser::gen::sync_value::t> charOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> ipv4OfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
-  return ofChar(s[0].toLatin1());
+  uint32_t ip;
+  if (! parseIpv4(&ip, s)) return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofIpv4(ip);
 }
 
-std::unique_ptr<dessser::gen::sync_value::t> floatOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> ofIpv6(uint128_t ip)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
-  return ofDouble(s.toDouble());
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VIpv6>, ip));
 }
 
-std::unique_ptr<dessser::gen::sync_value::t> stringOfQString(QString const &s)
+std::unique_ptr<dessser::gen::sync_value::t> ipv6OfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
-  return ofString(s.toStdString());
+  uint128_t ip;
+  if (! parseIpv6(&ip, s)) return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofIpv6(ip);
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> ipOfQString(QString const &s)
+{
+  uint32_t ip4;
+  uint128_t ip6;
+  if (parseIpv4(&ip4, s)) {
+    return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+      std::in_place_index<dessser::gen::raql_value::VIp>,
+      std::in_place_index<dessser::gen::raql_value::v4>,
+      ip4));
+  } else if (parseIpv6(&ip6, s)) {
+    return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+      std::in_place_index<dessser::gen::raql_value::VIp>,
+      std::in_place_index<dessser::gen::raql_value::v6>,
+      ip6));
+  } else {
+    return std::unique_ptr<dessser::gen::sync_value::t>();
+  }
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> ofCidrv4(uint32_t ip, uint8_t mask)
+{
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VCidrv4>, ip, mask));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> cidrv4OfQString(QString const &s)
+{
+  QStringList l { s.split("/", Qt::KeepEmptyParts) };
+  uint32_t ip;
+  if (l.count() != 2 || !parseIpv4(&ip, s))
+    return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofCidrv4(ip, l[1].toInt());
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> ofCidrv6(uint128_t ip, uint8_t mask)
+{
+  return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VCidrv6>, ip, mask));
+}
+
+std::unique_ptr<dessser::gen::sync_value::t> cidrv6OfQString(QString const &s)
+{
+  QStringList l { s.split("/", Qt::KeepEmptyParts) };
+  uint128_t ip;
+  if (l.count() != 2 || !parseIpv6(&ip, s))
+    return std::unique_ptr<dessser::gen::sync_value::t>();
+  return ofCidrv6(ip, l[1].toInt());
 }
