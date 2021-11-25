@@ -386,7 +386,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_client_cmd::t>
                         } else {
                           uint16_t id_115 { 9 };
                           bool id_116 { bool(label1_184 == id_115) };
-                          Void id_117 { ((void)(assert(id_116)), VOID) };
+                          Void id_117 { ((void)(assert(id_116)), ::dessser::VOID) };
                           (void)id_117;
                           choose_res_111 = ssum_dst_185;
                         }
@@ -598,7 +598,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_client_cmd::t> )>
                       } else {
                         uint16_t id_231 { 9 };
                         bool id_232 { bool(label2_167 == id_231) };
-                        Void id_233 { ((void)(assert(id_232)), VOID) };
+                        Void id_233 { ((void)(assert(id_232)), ::dessser::VOID) };
                         (void)id_233;
                         Size id_234 { 2UL };
                         choose_res_225 = id_234;
@@ -1044,10 +1044,10 @@ static std::function<::dessser::gen::sync_client_cmd::tfd5814032c8587486ba8d32cc
                         } else {
                           uint16_t id_371 { 9 };
                           bool id_372 { bool(dsum1_fst_63 == id_371) };
-                          Void id_373 { ((void)(assert(id_372)), VOID) };
+                          Void id_373 { ((void)(assert(id_372)), ::dessser::VOID) };
                           (void)id_373;
-                          (void)VOID;
-                          std::shared_ptr<::dessser::gen::sync_client_cmd::t>  id_374 { std::make_shared<::dessser::gen::sync_client_cmd::t>(std::in_place_index<9>, VOID) };
+                          (void)::dessser::VOID;
+                          std::shared_ptr<::dessser::gen::sync_client_cmd::t>  id_374 { std::make_shared<::dessser::gen::sync_client_cmd::t>(std::in_place_index<9>, ::dessser::VOID) };
                           ::dessser::gen::sync_client_cmd::tfd5814032c8587486ba8d32ccdd5b703 id_375 { id_374, dsum1_snd_64 };
                           choose_res_365 = id_375;
                         }

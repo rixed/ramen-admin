@@ -168,7 +168,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_variable::t> ,
                               } else {
                                 uint16_t id_41 { 12 };
                                 bool id_42 { bool(label1_108 == id_41) };
-                                Void id_43 { ((void)(assert(id_42)), VOID) };
+                                Void id_43 { ((void)(assert(id_42)), ::dessser::VOID) };
                                 (void)id_43;
                                 choose_res_40 = ssum_dst_109;
                               }
@@ -313,7 +313,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_variable::t> )> s
                             } else {
                               uint16_t id_95 { 12 };
                               bool id_96 { bool(label2_107 == id_95) };
-                              Void id_97 { ((void)(assert(id_96)), VOID) };
+                              Void id_97 { ((void)(assert(id_96)), ::dessser::VOID) };
                               (void)id_97;
                               Size id_98 { 2UL };
                               choose_res_93 = id_98;
@@ -430,8 +430,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
         bool id_106 { bool(id_105 == dsum1_fst_63) };
         ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_107;
         if (id_106) {
-          (void)VOID;
-          std::shared_ptr<::dessser::gen::raql_variable::t>  id_108 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<0>, VOID) };
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::raql_variable::t>  id_108 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<0>, ::dessser::VOID) };
           ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_109 { id_108, dsum1_snd_64 };
           choose_res_107 = id_109;
         } else {
@@ -439,8 +439,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
           bool id_111 { bool(id_110 == dsum1_fst_63) };
           ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_112;
           if (id_111) {
-            (void)VOID;
-            std::shared_ptr<::dessser::gen::raql_variable::t>  id_113 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<1>, VOID) };
+            (void)::dessser::VOID;
+            std::shared_ptr<::dessser::gen::raql_variable::t>  id_113 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<1>, ::dessser::VOID) };
             ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_114 { id_113, dsum1_snd_64 };
             choose_res_112 = id_114;
           } else {
@@ -448,8 +448,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
             bool id_116 { bool(id_115 == dsum1_fst_63) };
             ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_117;
             if (id_116) {
-              (void)VOID;
-              std::shared_ptr<::dessser::gen::raql_variable::t>  id_118 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<2>, VOID) };
+              (void)::dessser::VOID;
+              std::shared_ptr<::dessser::gen::raql_variable::t>  id_118 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<2>, ::dessser::VOID) };
               ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_119 { id_118, dsum1_snd_64 };
               choose_res_117 = id_119;
             } else {
@@ -457,8 +457,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
               bool id_121 { bool(id_120 == dsum1_fst_63) };
               ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_122;
               if (id_121) {
-                (void)VOID;
-                std::shared_ptr<::dessser::gen::raql_variable::t>  id_123 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<3>, VOID) };
+                (void)::dessser::VOID;
+                std::shared_ptr<::dessser::gen::raql_variable::t>  id_123 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<3>, ::dessser::VOID) };
                 ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_124 { id_123, dsum1_snd_64 };
                 choose_res_122 = id_124;
               } else {
@@ -466,8 +466,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                 bool id_126 { bool(id_125 == dsum1_fst_63) };
                 ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_127;
                 if (id_126) {
-                  (void)VOID;
-                  std::shared_ptr<::dessser::gen::raql_variable::t>  id_128 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<4>, VOID) };
+                  (void)::dessser::VOID;
+                  std::shared_ptr<::dessser::gen::raql_variable::t>  id_128 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<4>, ::dessser::VOID) };
                   ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_129 { id_128, dsum1_snd_64 };
                   choose_res_127 = id_129;
                 } else {
@@ -475,8 +475,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                   bool id_131 { bool(id_130 == dsum1_fst_63) };
                   ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_132;
                   if (id_131) {
-                    (void)VOID;
-                    std::shared_ptr<::dessser::gen::raql_variable::t>  id_133 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<5>, VOID) };
+                    (void)::dessser::VOID;
+                    std::shared_ptr<::dessser::gen::raql_variable::t>  id_133 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<5>, ::dessser::VOID) };
                     ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_134 { id_133, dsum1_snd_64 };
                     choose_res_132 = id_134;
                   } else {
@@ -484,8 +484,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                     bool id_136 { bool(id_135 == dsum1_fst_63) };
                     ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_137;
                     if (id_136) {
-                      (void)VOID;
-                      std::shared_ptr<::dessser::gen::raql_variable::t>  id_138 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<6>, VOID) };
+                      (void)::dessser::VOID;
+                      std::shared_ptr<::dessser::gen::raql_variable::t>  id_138 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<6>, ::dessser::VOID) };
                       ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_139 { id_138, dsum1_snd_64 };
                       choose_res_137 = id_139;
                     } else {
@@ -493,8 +493,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                       bool id_141 { bool(id_140 == dsum1_fst_63) };
                       ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_142;
                       if (id_141) {
-                        (void)VOID;
-                        std::shared_ptr<::dessser::gen::raql_variable::t>  id_143 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<7>, VOID) };
+                        (void)::dessser::VOID;
+                        std::shared_ptr<::dessser::gen::raql_variable::t>  id_143 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<7>, ::dessser::VOID) };
                         ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_144 { id_143, dsum1_snd_64 };
                         choose_res_142 = id_144;
                       } else {
@@ -502,8 +502,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                         bool id_146 { bool(id_145 == dsum1_fst_63) };
                         ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_147;
                         if (id_146) {
-                          (void)VOID;
-                          std::shared_ptr<::dessser::gen::raql_variable::t>  id_148 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<8>, VOID) };
+                          (void)::dessser::VOID;
+                          std::shared_ptr<::dessser::gen::raql_variable::t>  id_148 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<8>, ::dessser::VOID) };
                           ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_149 { id_148, dsum1_snd_64 };
                           choose_res_147 = id_149;
                         } else {
@@ -511,8 +511,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                           bool id_151 { bool(id_150 == dsum1_fst_63) };
                           ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_152;
                           if (id_151) {
-                            (void)VOID;
-                            std::shared_ptr<::dessser::gen::raql_variable::t>  id_153 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<9>, VOID) };
+                            (void)::dessser::VOID;
+                            std::shared_ptr<::dessser::gen::raql_variable::t>  id_153 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<9>, ::dessser::VOID) };
                             ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_154 { id_153, dsum1_snd_64 };
                             choose_res_152 = id_154;
                           } else {
@@ -520,8 +520,8 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                             bool id_156 { bool(id_155 == dsum1_fst_63) };
                             ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_157;
                             if (id_156) {
-                              (void)VOID;
-                              std::shared_ptr<::dessser::gen::raql_variable::t>  id_158 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<10>, VOID) };
+                              (void)::dessser::VOID;
+                              std::shared_ptr<::dessser::gen::raql_variable::t>  id_158 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<10>, ::dessser::VOID) };
                               ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_159 { id_158, dsum1_snd_64 };
                               choose_res_157 = id_159;
                             } else {
@@ -529,17 +529,17 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                               bool id_161 { bool(id_160 == dsum1_fst_63) };
                               ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_162;
                               if (id_161) {
-                                (void)VOID;
-                                std::shared_ptr<::dessser::gen::raql_variable::t>  id_163 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<11>, VOID) };
+                                (void)::dessser::VOID;
+                                std::shared_ptr<::dessser::gen::raql_variable::t>  id_163 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<11>, ::dessser::VOID) };
                                 ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_164 { id_163, dsum1_snd_64 };
                                 choose_res_162 = id_164;
                               } else {
                                 uint16_t id_165 { 12 };
                                 bool id_166 { bool(dsum1_fst_63 == id_165) };
-                                Void id_167 { ((void)(assert(id_166)), VOID) };
+                                Void id_167 { ((void)(assert(id_166)), ::dessser::VOID) };
                                 (void)id_167;
-                                (void)VOID;
-                                std::shared_ptr<::dessser::gen::raql_variable::t>  id_168 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<12>, VOID) };
+                                (void)::dessser::VOID;
+                                std::shared_ptr<::dessser::gen::raql_variable::t>  id_168 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<12>, ::dessser::VOID) };
                                 ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_169 { id_168, dsum1_snd_64 };
                                 choose_res_162 = id_169;
                               }

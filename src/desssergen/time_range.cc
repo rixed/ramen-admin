@@ -151,14 +151,14 @@ static std::function<Pointer(t&,Pointer)> to_row_binary_init()
             choose_res_14 = id_22;
           }
           Pointer id_23 { id_9.writeU8(choose_res_14) };
-          Void id_24 { ((void)(leb128_ptr_108[id_7] = id_23), VOID) };
+          Void id_24 { ((void)(leb128_ptr_108[id_7] = id_23), ::dessser::VOID) };
           (void)id_24;
           uint8_t id_25 { 0 };
           uint8_t id_26 { 0 };
           uint32_t id_27 { leb128_sz_107[id_26] };
           uint8_t id_28 { 7 };
           uint32_t id_29 { uint32_t(id_27 >> id_28) };
-          Void id_30 { ((void)(leb128_sz_107[id_25] = id_29), VOID) };
+          Void id_30 { ((void)(leb128_sz_107[id_25] = id_29), ::dessser::VOID) };
           (void)id_30;
           uint8_t id_31 { 0 };
           uint32_t id_32 { leb128_sz_107[id_31] };
@@ -166,10 +166,10 @@ static std::function<Pointer(t&,Pointer)> to_row_binary_init()
           bool id_34 { bool(id_32 > id_33) };
           while_flag_6 = id_34;
           if (while_flag_6) {
-            (void)VOID;
+            (void)::dessser::VOID;
           }
         } while (while_flag_6);
-        (void)VOID;
+        (void)::dessser::VOID;
         uint8_t id_35 { 0 };
         Pointer id_36 { leb128_ptr_108[id_35] };
         let_res_5 = id_36;
@@ -213,18 +213,18 @@ static std::function<Pointer(t&,Pointer)> to_row_binary_init()
             Pointer id_56 { srec_dst_114.writeU8(id_55) };
             let_res_53 = id_56;
           }
-          Void id_57 { ((void)(dst_ref_109[id_42] = let_res_53), VOID) };
+          Void id_57 { ((void)(dst_ref_109[id_42] = let_res_53), ::dessser::VOID) };
           (void)id_57;
           uint8_t id_58 { 0 };
           int32_t id_59 { 1L };
           uint8_t id_60 { 0 };
           int32_t id_61 { n_ref_110[id_60] };
           int32_t id_62 { int32_t(id_59 + id_61) };
-          Void id_63 { ((void)(n_ref_110[id_58] = id_62), VOID) };
+          Void id_63 { ((void)(n_ref_110[id_58] = id_62), ::dessser::VOID) };
           (void)id_63;
           (void)id_63;
         }
-        (void)VOID;
+        (void)::dessser::VOID;
         uint8_t id_64 { 0 };
         Pointer id_65 { dst_ref_109[id_64] };
         let_res_41 = id_65;
@@ -284,11 +284,11 @@ static std::function<Size(t&)> sersize_of_row_binary_init()
             uint32_t id_83 { lebsz_ref_101[id_82] };
             uint32_t id_84 { 1U };
             uint32_t id_85 { uint32_t(id_83 + id_84) };
-            Void id_86 { ((void)(lebsz_ref_101[id_81] = id_85), VOID) };
+            Void id_86 { ((void)(lebsz_ref_101[id_81] = id_85), ::dessser::VOID) };
             (void)id_86;
           }
         } while (while_flag_73);
-        (void)VOID;
+        (void)::dessser::VOID;
         uint8_t id_87 { 0 };
         uint32_t id_88 { lebsz_ref_101[id_87] };
         Size id_89 { Size(id_88) };
@@ -322,21 +322,21 @@ static std::function<Size(t&)> sersize_of_row_binary_init()
             Size id_106 { Size(id_104 + id_105) };
             Size id_107 { 1UL };
             Size id_108 { Size(id_106 + id_107) };
-            Void id_109 { ((void)(sz_ref_102[id_100] = id_108), VOID) };
+            Void id_109 { ((void)(sz_ref_102[id_100] = id_108), ::dessser::VOID) };
             (void)id_109;
             uint8_t id_110 { 0 };
             uint8_t id_111 { 0 };
             int32_t id_112 { repeat_n_103[id_111] };
             int32_t id_113 { 1L };
             int32_t id_114 { int32_t(id_112 + id_113) };
-            Void id_115 { ((void)(repeat_n_103[id_110] = id_114), VOID) };
+            Void id_115 { ((void)(repeat_n_103[id_110] = id_114), ::dessser::VOID) };
             (void)id_115;
             (void)id_115;
           }
         } while (while_flag_94);
-        (void)VOID;
+        (void)::dessser::VOID;
       }
-      (void)VOID;
+      (void)::dessser::VOID;
       uint8_t id_116 { 0 };
       Size id_117 { sz_ref_102[id_116] };
       let_res_91 = id_117;
@@ -419,7 +419,7 @@ static std::function<::dessser::gen::time_range::tf6138ae5919ddcb1cb9a935a9dc719
                 auto leb128_fst_60 { std::get<0>(leb128_59) };
                 auto leb128_snd_61 { std::get<1>(leb128_59) };
                 uint8_t id_133 { 0 };
-                Void id_134 { ((void)(p_ref_58[id_133] = leb128_snd_61), VOID) };
+                Void id_134 { ((void)(p_ref_58[id_133] = leb128_snd_61), ::dessser::VOID) };
                 (void)id_134;
                 uint8_t id_135 { 0 };
                 uint8_t id_136 { 127 };
@@ -431,14 +431,14 @@ static std::function<::dessser::gen::time_range::tf6138ae5919ddcb1cb9a935a9dc719
                 uint8_t id_142 { 0 };
                 uint32_t id_143 { leb_ref_56[id_142] };
                 uint32_t id_144 { uint32_t(id_141 | id_143) };
-                Void id_145 { ((void)(leb_ref_56[id_135] = id_144), VOID) };
+                Void id_145 { ((void)(leb_ref_56[id_135] = id_144), ::dessser::VOID) };
                 (void)id_145;
                 uint8_t id_146 { 0 };
                 uint8_t id_147 { 0 };
                 uint8_t id_148 { shft_ref_57[id_147] };
                 uint8_t id_149 { 7 };
                 uint8_t id_150 { uint8_t(id_148 + id_149) };
-                Void id_151 { ((void)(shft_ref_57[id_146] = id_150), VOID) };
+                Void id_151 { ((void)(shft_ref_57[id_146] = id_150), ::dessser::VOID) };
                 (void)id_151;
                 uint8_t id_152 { 128 };
                 bool id_153 { bool(leb128_fst_60 >= id_152) };
@@ -448,10 +448,10 @@ static std::function<::dessser::gen::time_range::tf6138ae5919ddcb1cb9a935a9dc719
             }
             while_flag_127 = let_res_131;
             if (while_flag_127) {
-              (void)VOID;
+              (void)::dessser::VOID;
             }
           } while (while_flag_127);
-          (void)VOID;
+          (void)::dessser::VOID;
           uint8_t id_154 { 0 };
           uint32_t id_155 { leb_ref_56[id_154] };
           uint8_t id_156 { 0 };
@@ -549,25 +549,25 @@ static std::function<::dessser::gen::time_range::tf6138ae5919ddcb1cb9a935a9dc719
                       }
                       let_res_179 = letpair_res_180;
                     }
-                    Void id_195 { ((void)(inits_src_ref_68[id_174] = let_res_179), VOID) };
+                    Void id_195 { ((void)(inits_src_ref_68[id_174] = let_res_179), ::dessser::VOID) };
                     (void)id_195;
                   }
-                  (void)VOID;
+                  (void)::dessser::VOID;
                 }
-                (void)VOID;
+                (void)::dessser::VOID;
                 uint8_t id_196 { 0 };
                 uint8_t id_197 { 0 };
                 int32_t id_198 { repeat_n_69[id_197] };
                 int32_t id_199 { 1L };
                 int32_t id_200 { int32_t(id_198 + id_199) };
-                Void id_201 { ((void)(repeat_n_69[id_196] = id_200), VOID) };
+                Void id_201 { ((void)(repeat_n_69[id_196] = id_200), ::dessser::VOID) };
                 (void)id_201;
                 (void)id_201;
               }
             } while (while_flag_167);
-            (void)VOID;
+            (void)::dessser::VOID;
           }
-          (void)VOID;
+          (void)::dessser::VOID;
           uint8_t id_202 { 0 };
           ::dessser::gen::time_range::t2275c2676546e0406b575fe4ab4e70d0 id_203 { inits_src_ref_68[id_202] };
           let_res_164 = id_203;

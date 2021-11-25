@@ -111,7 +111,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_s
                 uint16_t id_24 { uint16_t((*p_0).index()) };
                 uint16_t id_25 { 5 };
                 bool id_26 { bool(id_24 == id_25) };
-                Void id_27 { ((void)(assert(id_26)), VOID) };
+                Void id_27 { ((void)(assert(id_26)), ::dessser::VOID) };
                 (void)id_27;
                 choose_res_23 = ssum_dst_88;
               }
@@ -184,7 +184,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_stat
               uint16_t id_54 { uint16_t((*p_0).index()) };
               uint16_t id_55 { 5 };
               bool id_56 { bool(id_54 == id_55) };
-              Void id_57 { ((void)(assert(id_56)), VOID) };
+              Void id_57 { ((void)(assert(id_56)), ::dessser::VOID) };
               (void)id_57;
               Size id_58 { 2UL };
               choose_res_52 = id_58;
@@ -245,8 +245,8 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
         bool id_66 { bool(id_65 == dsum1_fst_63) };
         ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf choose_res_67;
         if (id_66) {
-          (void)VOID;
-          std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_68 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<0>, VOID) };
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_68 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<0>, ::dessser::VOID) };
           ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_69 { id_68, dsum1_snd_64 };
           choose_res_67 = id_69;
         } else {
@@ -254,8 +254,8 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
           bool id_71 { bool(id_70 == dsum1_fst_63) };
           ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf choose_res_72;
           if (id_71) {
-            (void)VOID;
-            std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_73 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<1>, VOID) };
+            (void)::dessser::VOID;
+            std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_73 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<1>, ::dessser::VOID) };
             ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_74 { id_73, dsum1_snd_64 };
             choose_res_72 = id_74;
           } else {
@@ -263,8 +263,8 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
             bool id_76 { bool(id_75 == dsum1_fst_63) };
             ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf choose_res_77;
             if (id_76) {
-              (void)VOID;
-              std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_78 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<2>, VOID) };
+              (void)::dessser::VOID;
+              std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_78 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<2>, ::dessser::VOID) };
               ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_79 { id_78, dsum1_snd_64 };
               choose_res_77 = id_79;
             } else {
@@ -272,8 +272,8 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
               bool id_81 { bool(id_80 == dsum1_fst_63) };
               ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf choose_res_82;
               if (id_81) {
-                (void)VOID;
-                std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_83 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<3>, VOID) };
+                (void)::dessser::VOID;
+                std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_83 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<3>, ::dessser::VOID) };
                 ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_84 { id_83, dsum1_snd_64 };
                 choose_res_82 = id_84;
               } else {
@@ -281,17 +281,17 @@ static std::function<::dessser::gen::alerting_delivery_status::tef7a86fb4151f002
                 bool id_86 { bool(id_85 == dsum1_fst_63) };
                 ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf choose_res_87;
                 if (id_86) {
-                  (void)VOID;
-                  std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_88 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<4>, VOID) };
+                  (void)::dessser::VOID;
+                  std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_88 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<4>, ::dessser::VOID) };
                   ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_89 { id_88, dsum1_snd_64 };
                   choose_res_87 = id_89;
                 } else {
                   uint16_t id_90 { 5 };
                   bool id_91 { bool(dsum1_fst_63 == id_90) };
-                  Void id_92 { ((void)(assert(id_91)), VOID) };
+                  Void id_92 { ((void)(assert(id_91)), ::dessser::VOID) };
                   (void)id_92;
-                  (void)VOID;
-                  std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_93 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<5>, VOID) };
+                  (void)::dessser::VOID;
+                  std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  id_93 { std::make_shared<::dessser::gen::alerting_delivery_status::t>(std::in_place_index<5>, ::dessser::VOID) };
                   ::dessser::gen::alerting_delivery_status::tef7a86fb4151f002e287c72985f042cf id_94 { id_93, dsum1_snd_64 };
                   choose_res_87 = id_94;
                 }

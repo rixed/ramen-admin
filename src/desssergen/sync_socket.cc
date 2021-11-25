@@ -115,7 +115,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Po
         uint16_t id_14 { uint16_t(id_13.index()) };
         uint16_t id_15 { 1 };
         bool id_16 { bool(id_14 == id_15) };
-        Void id_17 { ((void)(assert(id_16)), VOID) };
+        Void id_17 { ((void)(assert(id_16)), ::dessser::VOID) };
         (void)id_17;
         ::dessser::gen::sync_socket::tb689860ac91fca7822797a026958e891 id_18 { (*p_0).ip };
         uint128_t id_19 { std::get<1 /* v6 */>(id_18) };
@@ -157,7 +157,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> ser
       uint16_t id_32 { uint16_t(id_31.index()) };
       uint16_t id_33 { 1 };
       bool id_34 { bool(id_32 == id_33) };
-      Void id_35 { ((void)(assert(id_34)), VOID) };
+      Void id_35 { ((void)(assert(id_34)), ::dessser::VOID) };
       (void)id_35;
       Size id_36 { 18UL };
       choose_res_29 = id_36;
@@ -227,7 +227,7 @@ static std::function<::dessser::gen::sync_socket::t0158b3285e71d7107af39bdaaaca1
         } else {
           uint16_t id_54 { 1 };
           bool id_55 { bool(dsum1_fst_63 == id_54) };
-          Void id_56 { ((void)(assert(id_55)), VOID) };
+          Void id_56 { ((void)(assert(id_55)), ::dessser::VOID) };
           (void)id_56;
           ::dessser::gen::sync_socket::t9e0ebd3dfe4817b98136c6e6b20afc92 id_57 { dsum1_snd_64.readU128Le() };
           ::dessser::gen::sync_socket::te1eee5b4e548fff25ec00d11c13510c2 letpair_res_58;

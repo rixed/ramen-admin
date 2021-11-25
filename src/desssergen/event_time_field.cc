@@ -120,7 +120,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t
           uint16_t id_15 { uint16_t(id_14.index()) };
           uint16_t id_16 { 1 };
           bool id_17 { bool(id_15 == id_16) };
-          Void id_18 { ((void)(assert(id_17)), VOID) };
+          Void id_18 { ((void)(assert(id_17)), ::dessser::VOID) };
           (void)id_18;
           choose_res_13 = ssum_dst_92;
         }
@@ -173,7 +173,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
         uint16_t id_36 { uint16_t(id_35.index()) };
         uint16_t id_37 { 1 };
         bool id_38 { bool(id_36 == id_37) };
-        Void id_39 { ((void)(assert(id_38)), VOID) };
+        Void id_39 { ((void)(assert(id_38)), ::dessser::VOID) };
         (void)id_39;
         Size id_40 { 2UL };
         Size id_41 { Size(sz_87 + id_40) };
@@ -234,17 +234,17 @@ static std::function<::dessser::gen::event_time_field::t42a2a21ee63bf8cff9c7d0d6
             bool id_55 { bool(id_54 == dsum1_fst_66) };
             ::dessser::gen::event_time_field::tb4035ae59572b883d902d5f2badfd8e0 choose_res_56;
             if (id_55) {
-              (void)VOID;
-              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_57 { std::in_place_index<0>, VOID };
+              (void)::dessser::VOID;
+              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_57 { std::in_place_index<0>, ::dessser::VOID };
               ::dessser::gen::event_time_field::tb4035ae59572b883d902d5f2badfd8e0 id_58 { id_57, dsum1_snd_67 };
               choose_res_56 = id_58;
             } else {
               uint16_t id_59 { 1 };
               bool id_60 { bool(dsum1_fst_66 == id_59) };
-              Void id_61 { ((void)(assert(id_60)), VOID) };
+              Void id_61 { ((void)(assert(id_60)), ::dessser::VOID) };
               (void)id_61;
-              (void)VOID;
-              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_62 { std::in_place_index<1>, VOID };
+              (void)::dessser::VOID;
+              ::dessser::gen::event_time_field::t48a2d544f23c6703dc0a88c42484f480 id_62 { std::in_place_index<1>, ::dessser::VOID };
               ::dessser::gen::event_time_field::tb4035ae59572b883d902d5f2badfd8e0 id_63 { id_62, dsum1_snd_67 };
               choose_res_56 = id_63;
             }

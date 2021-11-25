@@ -84,7 +84,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_net_protocol::
           uint16_t id_12 { uint16_t((*p_0).index()) };
           uint16_t id_13 { 2 };
           bool id_14 { bool(id_12 == id_13) };
-          Void id_15 { ((void)(assert(id_14)), VOID) };
+          Void id_15 { ((void)(assert(id_14)), ::dessser::VOID) };
           (void)id_15;
           choose_res_11 = ssum_dst_79;
         }
@@ -124,7 +124,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_net_protocol::t> 
         uint16_t id_27 { uint16_t((*p_0).index()) };
         uint16_t id_28 { 2 };
         bool id_29 { bool(id_27 == id_28) };
-        Void id_30 { ((void)(assert(id_29)), VOID) };
+        Void id_30 { ((void)(assert(id_29)), ::dessser::VOID) };
         (void)id_30;
         Size id_31 { 2UL };
         choose_res_25 = id_31;
@@ -170,8 +170,8 @@ static std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c55748351
         bool id_39 { bool(id_38 == dsum1_fst_63) };
         ::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e choose_res_40;
         if (id_39) {
-          (void)VOID;
-          std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_41 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<0>, VOID) };
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_41 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<0>, ::dessser::VOID) };
           ::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e id_42 { id_41, dsum1_snd_64 };
           choose_res_40 = id_42;
         } else {
@@ -179,17 +179,17 @@ static std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c55748351
           bool id_44 { bool(id_43 == dsum1_fst_63) };
           ::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e choose_res_45;
           if (id_44) {
-            (void)VOID;
-            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_46 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<1>, VOID) };
+            (void)::dessser::VOID;
+            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_46 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<1>, ::dessser::VOID) };
             ::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e id_47 { id_46, dsum1_snd_64 };
             choose_res_45 = id_47;
           } else {
             uint16_t id_48 { 2 };
             bool id_49 { bool(dsum1_fst_63 == id_48) };
-            Void id_50 { ((void)(assert(id_49)), VOID) };
+            Void id_50 { ((void)(assert(id_49)), ::dessser::VOID) };
             (void)id_50;
-            (void)VOID;
-            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_51 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<2>, VOID) };
+            (void)::dessser::VOID;
+            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_51 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<2>, ::dessser::VOID) };
             ::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e id_52 { id_51, dsum1_snd_64 };
             choose_res_45 = id_52;
           }

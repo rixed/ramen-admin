@@ -75,7 +75,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::
         uint16_t id_8 { uint16_t((*p_0).index()) };
         uint16_t id_9 { 1 };
         bool id_10 { bool(id_8 == id_9) };
-        Void id_11 { ((void)(assert(id_10)), VOID) };
+        Void id_11 { ((void)(assert(id_10)), ::dessser::VOID) };
         (void)id_11;
         choose_res_7 = ssum_dst_76;
       }
@@ -105,7 +105,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> 
       uint16_t id_18 { uint16_t((*p_0).index()) };
       uint16_t id_19 { 1 };
       bool id_20 { bool(id_18 == id_19) };
-      Void id_21 { ((void)(assert(id_20)), VOID) };
+      Void id_21 { ((void)(assert(id_20)), ::dessser::VOID) };
       (void)id_21;
       Size id_22 { 2UL };
       choose_res_16 = id_22;
@@ -148,17 +148,17 @@ static std::function<::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0a
         bool id_30 { bool(id_29 == dsum1_fst_63) };
         ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff choose_res_31;
         if (id_30) {
-          (void)VOID;
-          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_32 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<0>, VOID) };
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_32 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<0>, ::dessser::VOID) };
           ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff id_33 { id_32, dsum1_snd_64 };
           choose_res_31 = id_33;
         } else {
           uint16_t id_34 { 1 };
           bool id_35 { bool(dsum1_fst_63 == id_34) };
-          Void id_36 { ((void)(assert(id_35)), VOID) };
+          Void id_36 { ((void)(assert(id_35)), ::dessser::VOID) };
           (void)id_36;
-          (void)VOID;
-          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_37 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<1>, VOID) };
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::raql_flush_method::t>  id_37 { std::make_shared<::dessser::gen::raql_flush_method::t>(std::in_place_index<1>, ::dessser::VOID) };
           ::dessser::gen::raql_flush_method::tcb9728fff2af5188e5e3e0aee866cdff id_38 { id_37, dsum1_snd_64 };
           choose_res_31 = id_38;
         }

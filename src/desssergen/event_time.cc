@@ -140,7 +140,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Poi
             uint16_t id_28 { uint16_t(id_27.index()) };
             uint16_t id_29 { 2 };
             bool id_30 { bool(id_28 == id_29) };
-            Void id_31 { ((void)(assert(id_30)), VOID) };
+            Void id_31 { ((void)(assert(id_30)), ::dessser::VOID) };
             (void)id_31;
             auto fun32 { dessser::gen::event_time_field::to_row_binary };
             ::dessser::gen::event_time::tb22291137390f6968b7c7852ed4b8408 id_33 { std::get<1>((*p_0)) };
@@ -208,7 +208,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sers
           uint16_t id_63 { uint16_t(id_62.index()) };
           uint16_t id_64 { 2 };
           bool id_65 { bool(id_63 == id_64) };
-          Void id_66 { ((void)(assert(id_65)), VOID) };
+          Void id_66 { ((void)(assert(id_65)), ::dessser::VOID) };
           (void)id_66;
           Size id_67 { 2UL };
           Size id_68 { Size(sz_87 + id_67) };
@@ -309,7 +309,7 @@ static std::function<::dessser::gen::event_time::tbfec2f2c14f43ba5c6cd1570da6c1d
               } else {
                 uint16_t id_100 { 2 };
                 bool id_101 { bool(dsum1_fst_66 == id_100) };
-                Void id_102 { ((void)(assert(id_101)), VOID) };
+                Void id_102 { ((void)(assert(id_101)), ::dessser::VOID) };
                 (void)id_102;
                 auto fun103 { dessser::gen::event_time_field::of_row_binary };
                 ::dessser::gen::event_time::tb15987033570e012d9c84230b99c5f27 id_104 { fun103(dsum1_snd_67) };
