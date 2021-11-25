@@ -115,6 +115,7 @@ HEADERS += \
   KFloatEditor.h \
   KShortLabel.h \
   RangeIntValidator.h \
+  KVoidEditor.h \
   KIntEditor.h \
   KCharEditor.h \
   KLabel.h \
@@ -128,7 +129,6 @@ HEADERS += \
   SourceInfoViewer.h \
   SourcesModel.h \
   PathSuffixValidator.h \
-  raql_editor/RaqlEditorVoid.h \
   RCEntryEditor.h \
   TargetConfigEditor.h \
   AtomicForm.h \
@@ -242,6 +242,7 @@ SOURCES += \
   KFloatEditor.cpp \
   KShortLabel.cpp \
   RangeIntValidator.cpp \
+  KVoidEditor.cpp \
   KIntEditor.cpp \
   KCharEditor.cpp \
   KLabel.cpp \
@@ -255,8 +256,6 @@ SOURCES += \
   SourceInfoViewer.cpp \
   SourcesModel.cpp \
   PathSuffixValidator.cpp \
-  raql_editor/RaqlEditorVoid.cpp \
-  raql_editor.cpp \
   RCEntryEditor.cpp \
   TargetConfigEditor.cpp \
   AtomicForm.cpp \

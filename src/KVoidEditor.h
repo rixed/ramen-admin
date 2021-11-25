@@ -1,14 +1,14 @@
-#ifndef RAQL_EDITOR_VOID_H_211124
-#define RAQL_EDITOR_VOID_H_211124
+#ifndef KVOIDEDITOR_H_211124
+#define KVOIDEDITOR_H_211124
 /* Editor for a raql_value of type Void */
 #include "AtomicWidget.h"
 
-class RaqlEditorVoid : public AtomicWidget
+class KVoidEditor : public AtomicWidget
 {
   Q_OBJECT
 
 public:
-  RaqlEditorVoid(QWidget *parent = nullptr);
+  KVoidEditor(QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);

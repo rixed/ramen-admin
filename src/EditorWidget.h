@@ -9,6 +9,7 @@ namespace dessser {
   namespace gen {
     namespace sync_key { struct t; }
     namespace sync_value { struct t; }
+    namespace raql_type { struct t; }
   }
 }
 
@@ -21,6 +22,10 @@ AtomicWidget *newEditorWidget(
   dessser::gen::sync_value::t const &,
   std::shared_ptr<dessser::gen::sync_key::t const> =
     std::shared_ptr<dessser::gen::sync_key::t const>(),
+  QWidget *parent = nullptr);
+
+AtomicWidget *newRaqlValueEditorWidget(
+  dessser::gen::raql_type::t const &,
   QWidget *parent = nullptr);
 
 #endif

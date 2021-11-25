@@ -25,7 +25,6 @@
 #include "misc_dessser.h"
 #include "PathSuffixValidator.h"
 #include "RangeDoubleValidator.h"
-#include "raql_editor.h"
 #include "SourcesModel.h"  // for baseNameOfKey and friends
 
 #include "RCEntryEditor.h"

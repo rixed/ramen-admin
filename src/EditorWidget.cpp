@@ -1,8 +1,10 @@
+#include <QDebug>
+
 #include "AtomicWidget.h"
+#include "desssergen/raql_type.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
-
 #include "KBool.h"
 #include "KCharEditor.h"
 #include "KFloatEditor.h"
@@ -11,12 +13,37 @@
 #include "KLineEdit.h"
 #include "KTextEdit.h"
 #include "MakeSyncValue.h"
+#include "misc_dessser.h"
 #include "SourceInfoViewer.h"
 #include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
+#include "KVoidEditor.h"
 
 #include "EditorWidget.h"
+
+/*
+ * Returns an editor widget for the desired raql type:
+ * Compared to newEditorWidget, those AtomicWidget has no associated key.
+ */
+
+AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWidget *parent)
+{
+  using namespace dessser::gen::raql_type;
+  AtomicWidget *editor = nullptr;
+  switch (t.type->index()) {
+    case Void:
+      editor = new KVoidEditor(parent);
+      break;
+
+    default:
+      qCritical() <<
+        "Not implemented: newRaqlValueEditorWidget for raql_type::base" << *t.type;
+  }
+
+  // TODO: wrap into a nullable editor that offers to set null (radio?)
+  return editor;
+}
 
 /*
  * Return an editor widget for the given key/value:

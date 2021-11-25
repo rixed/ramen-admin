@@ -4,14 +4,14 @@
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_value.h"
 
-#include "raql_editor/RaqlEditorVoid.h"
+#include "KVoidEditor.h"
 
-RaqlEditorVoid::RaqlEditorVoid(QWidget *parent)
+KVoidEditor::KVoidEditor(QWidget *parent)
   : AtomicWidget(parent)
 {
 }
 
-std::shared_ptr<dessser::gen::sync_value::t const> RaqlEditorVoid::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> KVoidEditor::getValue() const
 {
   static std::shared_ptr<dessser::gen::raql_value::t> raql_v {
     std::make_shared<dessser::gen::raql_value::t>(
@@ -25,11 +25,11 @@ std::shared_ptr<dessser::gen::sync_value::t const> RaqlEditorVoid::getValue() co
   return v;
 }
 
-void RaqlEditorVoid::setEnabled(bool)
+void KVoidEditor::setEnabled(bool)
 {
 }
 
-bool RaqlEditorVoid::setValue(
+bool KVoidEditor::setValue(
   std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const>v)
 {
