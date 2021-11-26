@@ -123,6 +123,7 @@ HEADERS += \
   KIpEditor.h \
   KCidrEditor.h \
   KTupEditor.h \
+  KVecEditor.h \
   RamenSyntaxHighlighter.h \
   KTextEdit.h \
   KChoice.h \
@@ -253,6 +254,7 @@ SOURCES += \
   KIpEditor.cpp \
   KCidrEditor.cpp \
   KTupEditor.cpp \
+  KVecEditor.cpp \
   RamenSyntaxHighlighter.cpp \
   KTextEdit.cpp \
   KChoice.cpp \

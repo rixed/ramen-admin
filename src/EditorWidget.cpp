@@ -15,6 +15,7 @@
 #include "KLineEdit.h"
 #include "KTextEdit.h"
 #include "KTupEditor.h"
+#include "KVecEditor.h"
 #include "MakeSyncValue.h"
 #include "misc_dessser.h"
 #include "SourceInfoViewer.h"
@@ -130,6 +131,12 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
     /* Compound types: */
     case Tup:
       editor = new KTupEditor(std::get<Tup>(*t.type), parent);
+      break;
+    case Vec:
+      {
+        auto const &vec { std::get<Vec>(*t.type) };
+        editor = new KVecEditor(std::get<0>(vec), *std::get<1>(vec), parent);
+      }
       break;
     default:
       qCritical() <<
