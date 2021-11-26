@@ -5,6 +5,7 @@
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
+#include "KArrEditor.h"
 #include "KBoolEditor.h"
 #include "KCharEditor.h"
 #include "KCidrEditor.h"
@@ -138,6 +139,10 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
         editor = new KVecEditor(std::get<0>(vec), *std::get<1>(vec), parent);
       }
       break;
+    case Arr:
+      editor = new KArrEditor(std::get<Arr>(*t.type), parent);
+      break;
+
     default:
       qCritical() <<
         "Not implemented: newRaqlValueEditorWidget for raql_type::base" << *t.type;

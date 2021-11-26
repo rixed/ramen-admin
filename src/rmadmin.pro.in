@@ -115,7 +115,7 @@ HEADERS += \
   KFloatEditor.h \
   KShortLabel.h \
   RangeIntValidator.h \
-  KVoidEditor.h \
+  KArrEditor.h \
   KIntEditor.h \
   KCharEditor.h \
   KLabel.h \
@@ -124,6 +124,7 @@ HEADERS += \
   KCidrEditor.h \
   KTupEditor.h \
   KVecEditor.h \
+  KVoidEditor.h \
   RamenSyntaxHighlighter.h \
   KTextEdit.h \
   KChoice.h \
@@ -246,7 +247,7 @@ SOURCES += \
   KFloatEditor.cpp \
   KShortLabel.cpp \
   RangeIntValidator.cpp \
-  KVoidEditor.cpp \
+  KArrEditor.cpp \
   KIntEditor.cpp \
   KCharEditor.cpp \
   KLabel.cpp \
@@ -255,6 +256,7 @@ SOURCES += \
   KCidrEditor.cpp \
   KTupEditor.cpp \
   KVecEditor.cpp \
+  KVoidEditor.cpp \
   RamenSyntaxHighlighter.cpp \
   KTextEdit.cpp \
   KChoice.cpp \

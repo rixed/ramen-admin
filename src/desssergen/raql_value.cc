@@ -106,7 +106,7 @@ struct t : public std::variant<
   ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27, // VCidr
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VTup
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VVec
-  Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VLst
+  Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VArr
   Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>, // VRec
   Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> // VMap
 > { using variant::variant; };
@@ -229,7 +229,7 @@ struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
 /* Definitions */
 /* ----------- */
 /* 
-    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" "Ptr")
+    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" "Ptr")
       (let "label1_569" (label-of (param 0))
         (let "ssum_dst_570" (write-u16 little-endian (param 1) (identifier "label1_569"))
           (if (eq (u16 0) (identifier "label1_569")) (identifier "ssum_dst_570")
@@ -395,7 +395,7 @@ struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
                                                                     (let "dst_ref_589"
                                                                     (make-vec
                                                                     (let "leb128_sz_587" 
-                                                                    (make-vec (cardinality (get-alt "VLst" (param 0))))
+                                                                    (make-vec (cardinality (get-alt "VArr" (param 0))))
                                                                     (let "leb128_ptr_588" 
                                                                     (make-vec (identifier "ssum_dst_570"))
                                                                     (seq
@@ -418,7 +418,7 @@ struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
                                                                     (make-vec (i32 0))
                                                                     (seq
                                                                     (for-each "x_591" 
-                                                                    (get-alt "VLst" (param 0))
+                                                                    (get-alt "VArr" (param 0))
                                                                     (seq 
                                                                     (set-vec (u8 0) (identifier "dst_ref_589") (apply (myself "Ptr") (identifier "x_591") (unsafe-nth (u8 0) (identifier "dst_ref_589"))))
                                                                     (set-vec (u8 0) (identifier "n_ref_590") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_590")))))) 
@@ -1152,7 +1152,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                           bool id_392 { bool(id_391 == label1_569) };
                                                                           Pointer choose_res_393;
                                                                           if (id_392) {
-                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_394 { std::get<33 /* VLst */>((*p_0)) };
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_394 { std::get<33 /* VArr */>((*p_0)) };
                                                                             uint32_t id_395 { id_394.size() };
                                                                             Vec<1, uint32_t> id_396 {  id_395  };
                                                                             Pointer let_res_397;
@@ -1220,7 +1220,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                               Pointer let_res_435;
                                                                               {
                                                                                 Vec<1, int32_t> n_ref_590 { id_434 };
-                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_436 { std::get<33 /* VLst */>((*p_0)) };
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_436 { std::get<33 /* VArr */>((*p_0)) };
                                                                                 for (std::shared_ptr<::dessser::gen::raql_value::t>  x_591 : id_436) {
                                                                                   uint8_t id_437 { 0 };
                                                                                   uint8_t id_438 { 0 };
@@ -1593,7 +1593,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
 std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
-    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]")
+    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]")
       (let "label2_528" (label-of (param 0))
         (if (eq (u16 0) (identifier "label2_528")) (size 2)
           (if (eq (u16 1) (identifier "label2_528")) (size 2)
@@ -1724,7 +1724,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> 
                                                                     (add 
                                                                     (size 2)
                                                                     (let "n_ref_544" 
-                                                                    (make-vec (cardinality (get-alt "VLst" (param 0))))
+                                                                    (make-vec (cardinality (get-alt "VArr" (param 0))))
                                                                     (let "lebsz_ref_545" 
                                                                     (make-vec (u32 1))
                                                                     (seq
@@ -1736,14 +1736,14 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> 
                                                                     (let "repeat_n_547" 
                                                                     (make-vec (i32 0))
                                                                     (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VLst" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_547")))
+                                                                    (gt (to-i32 (cardinality (get-alt "VArr" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_547")))
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
                                                                     (identifier "sz_ref_546")
                                                                     (add 
                                                                     (unsafe-nth (u8 0) (identifier "sz_ref_546")) 
-                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_547")) (get-alt "VLst" (param 0))))))
+                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_547")) (get-alt "VArr" (param 0))))))
                                                                     (set-vec (u8 0) (identifier "repeat_n_547") (add (unsafe-nth (u8 0) (identifier "repeat_n_547")) (i32 1)))))) 
                                                                     (unsafe-nth (u8 0) (identifier "sz_ref_546"))))
                                                                     (if 
@@ -2316,7 +2316,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                         Size choose_res_909;
                                                                         if (id_908) {
                                                                           Size id_910 { 2UL };
-                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_911 { std::get<33 /* VLst */>((*p_0)) };
+                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_911 { std::get<33 /* VArr */>((*p_0)) };
                                                                           uint32_t id_912 { id_911.size() };
                                                                           Vec<1, uint32_t> id_913 {  id_912  };
                                                                           Size let_res_914;
@@ -2366,7 +2366,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                               Vec<1, int32_t> repeat_n_547 { id_939 };
                                                                               bool while_flag_940 { true };
                                                                               do {
-                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_941 { std::get<33 /* VLst */>((*p_0)) };
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_941 { std::get<33 /* VArr */>((*p_0)) };
                                                                                 uint32_t id_942 { id_941.size() };
                                                                                 int32_t id_943 { int32_t(id_942) };
                                                                                 uint8_t id_944 { 0 };
@@ -2379,7 +2379,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                   Size id_949 { sz_ref_546[id_948] };
                                                                                   uint8_t id_950 { 0 };
                                                                                   int32_t id_951 { repeat_n_547[id_950] };
-                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_952 { std::get<33 /* VLst */>((*p_0)) };
+                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_952 { std::get<33 /* VArr */>((*p_0)) };
                                                                                   std::shared_ptr<::dessser::gen::raql_value::t>  id_953 { id_952[id_951] };
                                                                                   Size id_954 { fun613(id_953) };
                                                                                   Size id_955 { Size(id_949 + id_954) };
@@ -2744,16 +2744,16 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
           (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
             (if (eq (u16 0) (identifier "dsum1_fst_63"))
               (make-tup
-                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 0
+                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 0
                   (nop)) (identifier "dsum1_snd_64"))
               (if (eq (u16 1) (identifier "dsum1_fst_63"))
                 (make-tup
-                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 1
+                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 1
                     (nop)) (identifier "dsum1_snd_64"))
                 (if (eq (u16 2) (identifier "dsum1_fst_63"))
                   (let-pair "dfloat_fst_514" "dfloat_snd_515" (read-u64 little-endian (identifier "dsum1_snd_64"))
                     (make-tup
-                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 2
+                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 2
                         (float-of-u64 (identifier "dfloat_fst_514"))) 
                       (identifier "dfloat_snd_515")))
                   (if (eq (u16 3) (identifier "dsum1_fst_63"))
@@ -2777,161 +2777,161 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                         (let-pair "dstring2_fst_508" "dstring2_snd_509" 
                           (read-bytes (identifier "dstring1_snd_506") (identifier "dstring1_fst_505"))
                           (make-tup
-                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 3
+                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 3
                               (string-of-bytes (identifier "dstring2_fst_508"))) 
                             (identifier "dstring2_snd_509")))))
                     (if (eq (u16 4) (identifier "dsum1_fst_63"))
                       (let-pair "dbool_fst_493" "dbool_snd_494" (read-u8 (identifier "dsum1_snd_64"))
                         (make-tup
-                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 4
+                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 4
                             (not (eq (identifier "dbool_fst_493") (u8 0)))) 
                           (identifier "dbool_snd_494")))
                       (if (eq (u16 5) (identifier "dsum1_fst_63"))
                         (let-pair "dchar_fst_487" "dchar_snd_488" (read-u8 (identifier "dsum1_snd_64"))
                           (make-tup
-                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 5
+                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 5
                               (char-of-u8 (identifier "dchar_fst_487"))) 
                             (identifier "dchar_snd_488")))
                         (if (eq (u16 6) (identifier "dsum1_fst_63"))
                           (let-pair "du8_fst_481" "du8_snd_482" (read-u8 (identifier "dsum1_snd_64"))
                             (make-tup
-                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 6
+                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 6
                                 (identifier "du8_fst_481")) (identifier "du8_snd_482")))
                           (if (eq (u16 7) (identifier "dsum1_fst_63"))
                             (let-pair "du16_fst_475" "du16_snd_476" (read-u16 little-endian (identifier "dsum1_snd_64"))
                               (make-tup
-                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 7
+                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 7
                                   (identifier "du16_fst_475")) (identifier "du16_snd_476")))
                             (if (eq (u16 8) (identifier "dsum1_fst_63"))
                               (let-pair "du24_fst_469" "du24_snd_470" 
                                 (read-u32 little-endian (identifier "dsum1_snd_64"))
                                 (make-tup
-                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 8
+                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 8
                                     (to-u24 (identifier "du24_fst_469"))) 
                                   (identifier "du24_snd_470")))
                               (if (eq (u16 9) (identifier "dsum1_fst_63"))
                                 (let-pair "du32_fst_463" "du32_snd_464" 
                                   (read-u32 little-endian (identifier "dsum1_snd_64"))
                                   (make-tup
-                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 9
+                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 9
                                       (identifier "du32_fst_463")) (identifier "du32_snd_464")))
                                 (if (eq (u16 10) (identifier "dsum1_fst_63"))
                                   (let-pair "du40_fst_457" "du40_snd_458" 
                                     (read-u64 little-endian (identifier "dsum1_snd_64"))
                                     (make-tup
-                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 10
+                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 10
                                         (to-u40 (identifier "du40_fst_457"))) 
                                       (identifier "du40_snd_458")))
                                   (if (eq (u16 11) (identifier "dsum1_fst_63"))
                                     (let-pair "du48_fst_451" "du48_snd_452" 
                                       (read-u64 little-endian (identifier "dsum1_snd_64"))
                                       (make-tup
-                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 11
+                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 11
                                           (to-u48 (identifier "du48_fst_451"))) 
                                         (identifier "du48_snd_452")))
                                     (if (eq (u16 12) (identifier "dsum1_fst_63"))
                                       (let-pair "du56_fst_445" "du56_snd_446" 
                                         (read-u64 little-endian (identifier "dsum1_snd_64"))
                                         (make-tup
-                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 12
+                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 12
                                             (to-u56 (identifier "du56_fst_445"))) 
                                           (identifier "du56_snd_446")))
                                       (if (eq (u16 13) (identifier "dsum1_fst_63"))
                                         (let-pair "du64_fst_439" "du64_snd_440" 
                                           (read-u64 little-endian (identifier "dsum1_snd_64"))
                                           (make-tup
-                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 13
+                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 13
                                               (identifier "du64_fst_439")) 
                                             (identifier "du64_snd_440")))
                                         (if (eq (u16 14) (identifier "dsum1_fst_63"))
                                           (let-pair "di128_fst_433" "di128_snd_434" 
                                             (read-u128 little-endian (identifier "dsum1_snd_64"))
                                             (make-tup
-                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 14
+                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 14
                                                 (identifier "di128_fst_433")) 
                                               (identifier "di128_snd_434")))
                                           (if (eq (u16 15) (identifier "dsum1_fst_63"))
                                             (let-pair "di8_fst_427" "di8_snd_428" 
                                               (read-u8 (identifier "dsum1_snd_64"))
                                               (make-tup
-                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 15
+                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 15
                                                   (to-i8 (identifier "di8_fst_427"))) 
                                                 (identifier "di8_snd_428")))
                                             (if (eq (u16 16) (identifier "dsum1_fst_63"))
                                               (let-pair "di16_fst_421" "di16_snd_422" 
                                                 (read-u16 little-endian (identifier "dsum1_snd_64"))
                                                 (make-tup
-                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 16
+                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 16
                                                     (to-i16 (identifier "di16_fst_421"))) 
                                                   (identifier "di16_snd_422")))
                                               (if (eq (u16 17) (identifier "dsum1_fst_63"))
                                                 (let-pair "di24_fst_415" "di24_snd_416" 
                                                   (read-u32 little-endian (identifier "dsum1_snd_64"))
                                                   (make-tup
-                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 17
+                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 17
                                                       (to-i24 (identifier "di24_fst_415"))) 
                                                     (identifier "di24_snd_416")))
                                                 (if (eq (u16 18) (identifier "dsum1_fst_63"))
                                                   (let-pair "di32_fst_409" "di32_snd_410" 
                                                     (read-u32 little-endian (identifier "dsum1_snd_64"))
                                                     (make-tup
-                                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 18
+                                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 18
                                                         (to-i32 (identifier "di32_fst_409"))) 
                                                       (identifier "di32_snd_410")))
                                                   (if (eq (u16 19) (identifier "dsum1_fst_63"))
                                                     (let-pair "di40_fst_403" "di40_snd_404" 
                                                       (read-u64 little-endian (identifier "dsum1_snd_64"))
                                                       (make-tup
-                                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 19
+                                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 19
                                                           (to-i40 (identifier "di40_fst_403"))) 
                                                         (identifier "di40_snd_404")))
                                                     (if (eq (u16 20) (identifier "dsum1_fst_63"))
                                                       (let-pair "di48_fst_397" "di48_snd_398" 
                                                         (read-u64 little-endian (identifier "dsum1_snd_64"))
                                                         (make-tup
-                                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 20
+                                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 20
                                                             (to-i48 (identifier "di48_fst_397"))) 
                                                           (identifier "di48_snd_398")))
                                                       (if (eq (u16 21) (identifier "dsum1_fst_63"))
                                                         (let-pair "di56_fst_391" "di56_snd_392" 
                                                           (read-u64 little-endian (identifier "dsum1_snd_64"))
                                                           (make-tup
-                                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 21
+                                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 21
                                                               (to-i56 (identifier "di56_fst_391"))) 
                                                             (identifier "di56_snd_392")))
                                                         (if (eq (u16 22) (identifier "dsum1_fst_63"))
                                                           (let-pair "di64_fst_385" "di64_snd_386" 
                                                             (read-u64 little-endian (identifier "dsum1_snd_64"))
                                                             (make-tup
-                                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 22
+                                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 22
                                                                 (to-i64 (identifier "di64_fst_385"))) 
                                                               (identifier "di64_snd_386")))
                                                           (if (eq (u16 23) (identifier "dsum1_fst_63"))
                                                             (let-pair "di128_fst_379" "di128_snd_380" 
                                                               (read-u128 little-endian (identifier "dsum1_snd_64"))
                                                               (make-tup
-                                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 23
+                                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 23
                                                                   (to-i128 (identifier "di128_fst_379"))) 
                                                                 (identifier "di128_snd_380")))
                                                             (if (eq (u16 24) (identifier "dsum1_fst_63"))
                                                               (let-pair "du48_fst_370" "du48_snd_371" 
                                                                 (read-u64 little-endian (identifier "dsum1_snd_64"))
                                                                 (make-tup
-                                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 24
+                                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 24
                                                                     (make-usr "Eth" (to-u48 (identifier "du48_fst_370")))) 
                                                                   (identifier "du48_snd_371")))
                                                               (if (eq (u16 25) (identifier "dsum1_fst_63"))
                                                                 (let-pair "du32_fst_361" "du32_snd_362" 
                                                                   (read-u32 little-endian (identifier "dsum1_snd_64"))
                                                                   (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 25
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 25
                                                                     (make-usr "Ip4" (identifier "du32_fst_361"))) 
                                                                     (identifier "du32_snd_362")))
                                                                 (if (eq (u16 26) (identifier "dsum1_fst_63"))
                                                                   (let-pair "di128_fst_352" "di128_snd_353" 
                                                                     (read-u128 little-endian (identifier "dsum1_snd_64"))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 26
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 26
                                                                     (make-usr "Ip6" (identifier "di128_fst_352"))) 
                                                                     (identifier "di128_snd_353")))
                                                                   (if 
@@ -2952,7 +2952,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (read-u128 little-endian (identifier "dsum1_snd_326"))
                                                                     (make-tup (construct "[v4 Ip4 | v6 Ip6]" 1 (make-usr "Ip6" (identifier "di128_fst_328"))) (identifier "di128_snd_329")))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 27
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 27
                                                                     (make-usr "Ip" (identifier "des_usr_type_fst_346"))) 
                                                                     (identifier "des_usr_type_snd_347")))
                                                                     (if 
@@ -2966,7 +2966,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (let-pair "du8_fst_307" "du8_snd_308" 
                                                                     (read-u8 (identifier "drec_snd_305"))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 28
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 28
                                                                     (make-usr "Cidr4" (make-rec (string "mask") (identifier "du8_fst_307") (string "ip") (identifier "drec_fst_304")))) 
                                                                     (identifier "du8_snd_308")))))
                                                                     (if 
@@ -2980,7 +2980,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (let-pair "du8_fst_286" "du8_snd_287" 
                                                                     (read-u8 (identifier "drec_snd_284"))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 29
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 29
                                                                     (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_286") (string "ip") (identifier "drec_fst_283")))) 
                                                                     (identifier "du8_snd_287")))))
                                                                     (if 
@@ -3017,7 +3017,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (construct "[v4 Cidr4 | v6 Cidr6]" 1 (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_238") (string "ip") (identifier "drec_fst_235"))))
                                                                     (identifier "du8_snd_239")))))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 30
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 30
                                                                     (make-usr "Cidr" (identifier "des_usr_type_fst_271"))) 
                                                                     (identifier "des_usr_type_snd_272")))
                                                                     (if 
@@ -3071,7 +3071,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (set-vec (u8 0) (identifier "repeat_n_206") (add (unsafe-nth (u8 0) (identifier "repeat_n_206")) (i32 1))))))
                                                                     (unsafe-nth (u8 0) (identifier "inits_src_ref_205"))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 31
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 31
                                                                     (arr-of-lst-rev (identifier "dlist4_fst_214"))) 
                                                                     (identifier "dlist4_snd_215")))
                                                                     (if 
@@ -3125,7 +3125,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (set-vec (u8 0) (identifier "repeat_n_180") (add (unsafe-nth (u8 0) (identifier "repeat_n_180")) (i32 1))))))
                                                                     (unsafe-nth (u8 0) (identifier "inits_src_ref_179"))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 32
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 32
                                                                     (arr-of-lst-rev (identifier "dlist4_fst_188"))) 
                                                                     (identifier "dlist4_snd_189")))
                                                                     (if 
@@ -3179,7 +3179,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (set-vec (u8 0) (identifier "repeat_n_154") (add (unsafe-nth (u8 0) (identifier "repeat_n_154")) (i32 1))))))
                                                                     (unsafe-nth (u8 0) (identifier "inits_src_ref_153"))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 33
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 33
                                                                     (arr-of-lst-rev (identifier "dlist4_fst_162"))) 
                                                                     (identifier "dlist4_snd_163")))
                                                                     (if 
@@ -3264,7 +3264,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (set-vec (u8 0) (identifier "repeat_n_110") (add (unsafe-nth (u8 0) (identifier "repeat_n_110")) (i32 1))))))
                                                                     (unsafe-nth (u8 0) (identifier "inits_src_ref_109"))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 34
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 34
                                                                     (arr-of-lst-rev (identifier "dlist4_fst_136"))) 
                                                                     (identifier "dlist4_snd_137")))
                                                                     (seq 
@@ -3320,7 +3320,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_
                                                                     (set-vec (u8 0) (identifier "repeat_n_78") (add (unsafe-nth (u8 0) (identifier "repeat_n_78")) (i32 1)))))) 
                                                                     (unsafe-nth (u8 0) (identifier "inits_src_ref_77"))))))
                                                                     (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VLst THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 35
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 35
                                                                     (arr-of-lst-rev (identifier "dlist4_fst_92"))) 
                                                                     (identifier "dlist4_snd_93"))))))))))))))))))))))))))))))))))))))))) 
         (make-tup (identifier "make_fst_526") (identifier "make_snd_527"))))

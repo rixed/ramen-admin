@@ -208,7 +208,7 @@ struct t : public std::variant<
   ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27, // VCidr
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VTup
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VVec
-  Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VLst
+  Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VArr
   Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>, // VRec
   Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> // VMap
 > { using variant::variant; };
@@ -247,7 +247,7 @@ enum Constr_t {
   VCidr,
   VTup,
   VVec,
-  VLst,
+  VArr,
   VRec,
   VMap,
 };
@@ -287,7 +287,7 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
     case 30: os << "VCidr " << std::get<30>(v); break;
     case 31: os << "VTup " << std::get<31>(v); break;
     case 32: os << "VVec " << std::get<32>(v); break;
-    case 33: os << "VLst " << std::get<33>(v); break;
+    case 33: os << "VArr " << std::get<33>(v); break;
     case 34: os << "VRec " << std::get<34>(v); break;
     case 35: os << "VMap " << std::get<35>(v); break;
   }
@@ -332,7 +332,7 @@ inline bool operator==(t const &a, t const &b) {
     case 30: return std::get<30>(a) == std::get<30>(b); // VCidr
     case 31: return std::get<31>(a) == std::get<31>(b); // VTup
     case 32: return std::get<32>(a) == std::get<32>(b); // VVec
-    case 33: return std::get<33>(a) == std::get<33>(b); // VLst
+    case 33: return std::get<33>(a) == std::get<33>(b); // VArr
     case 34: return std::get<34>(a) == std::get<34>(b); // VRec
     case 35: return std::get<35>(a) == std::get<35>(b); // VMap
   };

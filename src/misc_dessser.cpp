@@ -149,8 +149,8 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
       arr = &(std::get<dessser::gen::raql_value::VVec>(v));
       Q_ASSERT(i < arr->size());
       return (*arr)[i];
-    case dessser::gen::raql_value::VLst:
-      arr = &(std::get<dessser::gen::raql_value::VLst>(v));
+    case dessser::gen::raql_value::VArr:
+      arr = &(std::get<dessser::gen::raql_value::VArr>(v));
       Q_ASSERT(i < arr->size());
       return (*arr)[i];
     case dessser::gen::raql_value::VRec:
@@ -445,9 +445,9 @@ QString raqlValToQString(
       return QString("[") +
              arrToQString(std::get<dessser::gen::raql_value::VVec>(v)) +
              QString("]");
-    case dessser::gen::raql_value::VLst:
+    case dessser::gen::raql_value::VArr:
       return QString("[") +
-             arrToQString(std::get<dessser::gen::raql_value::VLst>(v)) +
+             arrToQString(std::get<dessser::gen::raql_value::VArr>(v)) +
              QString("]");
     case dessser::gen::raql_value::VRec:
       {
