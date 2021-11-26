@@ -14,6 +14,7 @@
 #include "KLabel.h"
 #include "KLineEdit.h"
 #include "KTextEdit.h"
+#include "KTupEditor.h"
 #include "MakeSyncValue.h"
 #include "misc_dessser.h"
 #include "SourceInfoViewer.h"
@@ -126,7 +127,10 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
     case Cidr:
       editor = new KCidrEditor(parent);
       break;
-
+    /* Compound types: */
+    case Tup:
+      editor = new KTupEditor(std::get<Tup>(*t.type), parent);
+      break;
     default:
       qCritical() <<
         "Not implemented: newRaqlValueEditorWidget for raql_type::base" << *t.type;
