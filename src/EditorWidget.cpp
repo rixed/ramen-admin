@@ -14,6 +14,7 @@
 #include "KIpEditor.h"
 #include "KLabel.h"
 #include "KLineEdit.h"
+#include "KRecEditor.h"
 #include "KTextEdit.h"
 #include "KTupEditor.h"
 #include "KVecEditor.h"
@@ -141,6 +142,9 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
       break;
     case Arr:
       editor = new KArrEditor(std::get<Arr>(*t.type), parent);
+      break;
+    case Rec:
+      editor = new KRecEditor(std::get<Rec>(*t.type), parent);
       break;
 
     default:

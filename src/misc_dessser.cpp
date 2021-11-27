@@ -101,7 +101,7 @@ std::string const columnName(dessser::gen::raql_type::t const &t, size_t i)
     case dessser::gen::raql_type::Rec:
       {
         auto const &rec { std::get<dessser::gen::raql_type::Rec>(*t.type) };
-        return std::get<0>(rec[i]);
+        return std::get<0>(*rec[i]);
       }
     default:
       return std::string();
@@ -129,7 +129,7 @@ std::shared_ptr<dessser::gen::raql_type::t const> columnType(
       {
         auto const &arr { std::get<dessser::gen::raql_type::Rec>(*t.type) };
         if (i >= arr.size()) return nullptr;
-        return std::get<1>(arr[i]);
+        return std::get<1>(*arr[i]);
       }
     default:
       return nullptr;
@@ -155,9 +155,10 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
       return (*arr)[i];
     case dessser::gen::raql_value::VRec:
       {
-        auto const *rec { &std::get<dessser::gen::raql_value::VRec>(v) };
-        Q_ASSERT(i < rec->size());
-        return std::get<1>((*rec)[i]);
+        dessser::Arr<std::shared_ptr<dessser::gen::raql_value::named_value>> const &rec {
+          std::get<dessser::gen::raql_value::VRec>(v) };
+        Q_ASSERT(i < rec.size());
+        return std::get<1>(*rec[i]);
       }
     default:
       return nullptr;
@@ -451,13 +452,14 @@ QString raqlValToQString(
              QString("]");
     case dessser::gen::raql_value::VRec:
       {
-        auto const &arr { std::get<dessser::gen::raql_value::VRec>(v) };
+        dessser::Arr<std::shared_ptr<dessser::gen::raql_value::named_value>> const &arr {
+          std::get<dessser::gen::raql_value::VRec>(v) };
         QString s;
-        for (auto const &v : arr) {
+        for (std::shared_ptr<dessser::gen::raql_value::named_value> const &v : arr) {
           if (s.length() > 0) s += ", ";
-          s += QString::fromStdString(std::get<0>(v)) +
+          s += QString::fromStdString(std::get<0>(*v)) +
                QString(":") +
-               raqlValToQString(*std::get<1>(v));
+               raqlValToQString(*std::get<1>(*v));
         }
         return QString("{") + s + QString("}");
       }
@@ -504,8 +506,8 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         bool first = true;
         for (auto const n_t : ts) {
           QString sep { QString(first ? "{" : "; ") };
-          s += sep + QString::fromStdString(std::get<0>(n_t)) + ": " +
-               raqlTypeToQString(*std::get<1>(n_t));
+          s += sep + QString::fromStdString(std::get<0>(*n_t)) + ": " +
+               raqlTypeToQString(*std::get<1>(*n_t));
         }
         return s + "}";
       }
@@ -516,8 +518,8 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         bool first = true;
         for (auto const n_t : ts) {
           QString sep { QString(first ? "[" : " | ") };
-          s += sep + QString::fromStdString(std::get<0>(n_t)) + " " +
-               raqlTypeToQString(*std::get<1>(n_t));
+          s += sep + QString::fromStdString(std::get<0>(*n_t)) + " " +
+               raqlTypeToQString(*std::get<1>(*n_t));
         }
         return s + "]";
       }

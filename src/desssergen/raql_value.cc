@@ -56,12 +56,12 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct t67d3bf5598562d32022de37a569b680f : public std::tuple<
+struct named_value : public std::tuple<
   std::string,
   std::shared_ptr<::dessser::gen::raql_value::t> 
 > {
   using tuple::tuple;
-  t67d3bf5598562d32022de37a569b680f(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_value::t> > p)
+  named_value(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_value::t> > p)
     : std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_value::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
 struct t03cfda2a49b4fd636c1028863952922d : public std::tuple<
@@ -107,20 +107,10 @@ struct t : public std::variant<
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VTup
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VVec
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VArr
-  Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>, // VRec
+  Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> >, // VRec
   Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> // VMap
 > { using variant::variant; };
 
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
-struct t;
-inline std::ostream &operator<<(std::ostream &, struct t const &);
-inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
-inline bool operator==(struct t const &, struct t const &);
-inline bool operator!=(struct t const &, struct t const &);
 struct t2192dc426e477a22ba201bc3a0e4295b : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_value::t> ,
   Pointer
@@ -129,6 +119,7 @@ struct t2192dc426e477a22ba201bc3a0e4295b : public std::tuple<
   t2192dc426e477a22ba201bc3a0e4295b(std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
+extern std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary;
 struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
   uint16_t,
   Pointer
@@ -209,13 +200,21 @@ struct t9658b993bb9f5814bdb59e00050f3b24 : public std::tuple<
   t9658b993bb9f5814bdb59e00050f3b24(std::tuple<Lst<std::shared_ptr<::dessser::gen::raql_value::t> >, Pointer> p)
     : std::tuple<Lst<std::shared_ptr<::dessser::gen::raql_value::t> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct ta41aed06f24ad632eef7f2040ddc7efc : public std::tuple<
-  Lst<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>,
+struct t5acf4e40a97d10bb414b149b4987167e : public std::tuple<
+  Lst<std::shared_ptr<::dessser::gen::raql_value::named_value> >,
   Pointer
 > {
   using tuple::tuple;
-  ta41aed06f24ad632eef7f2040ddc7efc(std::tuple<Lst<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>, Pointer> p)
-    : std::tuple<Lst<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t5acf4e40a97d10bb414b149b4987167e(std::tuple<Lst<std::shared_ptr<::dessser::gen::raql_value::named_value> >, Pointer> p)
+    : std::tuple<Lst<std::shared_ptr<::dessser::gen::raql_value::named_value> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+struct t0c870624fb83311f54db2c065f542418 : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_value::named_value> ,
+  Pointer
+> {
+  using tuple::tuple;
+  t0c870624fb83311f54db2c065f542418(std::tuple<std::shared_ptr<::dessser::gen::raql_value::named_value> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_value::named_value> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
 struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
   Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d>,
@@ -225,247 +224,3785 @@ struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
   t6ca87232c4396e34133f69634dc3e421(std::tuple<Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d>, Pointer> p)
     : std::tuple<Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+extern std::function<::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418(Pointer)> named_value_of_row_binary;
+struct t3fd8221434e489b54b5c4356ebff5005 : public std::tuple<
+  std::string,
+  Pointer
+> {
+  using tuple::tuple;
+  t3fd8221434e489b54b5c4356ebff5005(std::tuple<std::string, Pointer> p)
+    : std::tuple<std::string, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary;
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_value::named_value> )> named_value_sersize_of_row_binary;
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> to_row_binary;
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_value> ,Pointer)> named_value_to_row_binary;
 /* ----------- */
 /* Definitions */
 /* ----------- */
 /* 
-    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" "Ptr")
-      (let "label1_569" (label-of (param 0))
-        (let "ssum_dst_570" (write-u16 little-endian (param 1) (identifier "label1_569"))
-          (if (eq (u16 0) (identifier "label1_569")) (identifier "ssum_dst_570")
-            (if (eq (u16 1) (identifier "label1_569")) (identifier "ssum_dst_570")
-              (if (eq (u16 2) (identifier "label1_569")) (write-u64 little-endian (identifier "ssum_dst_570") (u64-of-float (get-alt "VFloat" (param 0))))
-                (if (eq (u16 3) (identifier "label1_569"))
+    (fun ("Ptr")
+      (let-pair "make_fst_529" "make_snd_530"
+        (let "dsum1_83" (let-pair "du16_fst_78" "du16_snd_79" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_78") (identifier "du16_snd_79")))
+          (let-pair "dsum1_fst_84" "dsum1_snd_85" (identifier "dsum1_83")
+            (if (eq (u16 0) (identifier "dsum1_fst_84"))
+              (make-tup
+                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 0
+                  (nop)) (identifier "dsum1_snd_85"))
+              (if (eq (u16 1) (identifier "dsum1_fst_84"))
+                (make-tup
+                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 1
+                    (nop)) (identifier "dsum1_snd_85"))
+                (if (eq (u16 2) (identifier "dsum1_fst_84"))
+                  (let-pair "dfloat_fst_517" "dfloat_snd_518" (read-u64 little-endian (identifier "dsum1_snd_85"))
+                    (make-tup
+                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 2
+                        (float-of-u64 (identifier "dfloat_fst_517"))) 
+                      (identifier "dfloat_snd_518")))
+                  (if (eq (u16 3) (identifier "dsum1_fst_84"))
+                    (let "dstring1_507"
+                      (let "leb_ref_501" (make-vec (u32 0))
+                        (let "shft_ref_502" (make-vec (u8 0))
+                          (let "p_ref_503" (make-vec (identifier "dsum1_snd_85"))
+                            (seq
+                              (while
+                                (let "leb128_504" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_503")))
+                                  (let-pair "leb128_fst_505" "leb128_snd_506" 
+                                    (identifier "leb128_504")
+                                    (seq (set-vec (u8 0) (identifier "p_ref_503") (identifier "leb128_snd_506"))
+                                      (set-vec (u8 0) (identifier "leb_ref_501")
+                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_505") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_502"))) (unsafe-nth (u8 0) (identifier "leb_ref_501"))))
+                                      (set-vec (u8 0) (identifier "shft_ref_502") (add (unsafe-nth (u8 0) (identifier "shft_ref_502")) (u8 7))) 
+                                      (ge (identifier "leb128_fst_505") (u8 128))))) 
+                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_501"))) (unsafe-nth (u8 0) (identifier "p_ref_503")))))))
+                      (let-pair "dstring1_fst_508" "dstring1_snd_509" 
+                        (identifier "dstring1_507")
+                        (let-pair "dstring2_fst_511" "dstring2_snd_512" 
+                          (read-bytes (identifier "dstring1_snd_509") (identifier "dstring1_fst_508"))
+                          (make-tup
+                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 3
+                              (string-of-bytes (identifier "dstring2_fst_511"))) 
+                            (identifier "dstring2_snd_512")))))
+                    (if (eq (u16 4) (identifier "dsum1_fst_84"))
+                      (let-pair "dbool_fst_496" "dbool_snd_497" (read-u8 (identifier "dsum1_snd_85"))
+                        (make-tup
+                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 4
+                            (not (eq (identifier "dbool_fst_496") (u8 0)))) 
+                          (identifier "dbool_snd_497")))
+                      (if (eq (u16 5) (identifier "dsum1_fst_84"))
+                        (let-pair "dchar_fst_490" "dchar_snd_491" (read-u8 (identifier "dsum1_snd_85"))
+                          (make-tup
+                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 5
+                              (char-of-u8 (identifier "dchar_fst_490"))) 
+                            (identifier "dchar_snd_491")))
+                        (if (eq (u16 6) (identifier "dsum1_fst_84"))
+                          (let-pair "du8_fst_484" "du8_snd_485" (read-u8 (identifier "dsum1_snd_85"))
+                            (make-tup
+                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 6
+                                (identifier "du8_fst_484")) (identifier "du8_snd_485")))
+                          (if (eq (u16 7) (identifier "dsum1_fst_84"))
+                            (let-pair "du16_fst_478" "du16_snd_479" (read-u16 little-endian (identifier "dsum1_snd_85"))
+                              (make-tup
+                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 7
+                                  (identifier "du16_fst_478")) (identifier "du16_snd_479")))
+                            (if (eq (u16 8) (identifier "dsum1_fst_84"))
+                              (let-pair "du24_fst_472" "du24_snd_473" 
+                                (read-u32 little-endian (identifier "dsum1_snd_85"))
+                                (make-tup
+                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 8
+                                    (to-u24 (identifier "du24_fst_472"))) 
+                                  (identifier "du24_snd_473")))
+                              (if (eq (u16 9) (identifier "dsum1_fst_84"))
+                                (let-pair "du32_fst_466" "du32_snd_467" 
+                                  (read-u32 little-endian (identifier "dsum1_snd_85"))
+                                  (make-tup
+                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 9
+                                      (identifier "du32_fst_466")) (identifier "du32_snd_467")))
+                                (if (eq (u16 10) (identifier "dsum1_fst_84"))
+                                  (let-pair "du40_fst_460" "du40_snd_461" 
+                                    (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                    (make-tup
+                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 10
+                                        (to-u40 (identifier "du40_fst_460"))) 
+                                      (identifier "du40_snd_461")))
+                                  (if (eq (u16 11) (identifier "dsum1_fst_84"))
+                                    (let-pair "du48_fst_454" "du48_snd_455" 
+                                      (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                      (make-tup
+                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 11
+                                          (to-u48 (identifier "du48_fst_454"))) 
+                                        (identifier "du48_snd_455")))
+                                    (if (eq (u16 12) (identifier "dsum1_fst_84"))
+                                      (let-pair "du56_fst_448" "du56_snd_449" 
+                                        (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                        (make-tup
+                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 12
+                                            (to-u56 (identifier "du56_fst_448"))) 
+                                          (identifier "du56_snd_449")))
+                                      (if (eq (u16 13) (identifier "dsum1_fst_84"))
+                                        (let-pair "du64_fst_442" "du64_snd_443" 
+                                          (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                          (make-tup
+                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 13
+                                              (identifier "du64_fst_442")) 
+                                            (identifier "du64_snd_443")))
+                                        (if (eq (u16 14) (identifier "dsum1_fst_84"))
+                                          (let-pair "di128_fst_436" "di128_snd_437" 
+                                            (read-u128 little-endian (identifier "dsum1_snd_85"))
+                                            (make-tup
+                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 14
+                                                (identifier "di128_fst_436")) 
+                                              (identifier "di128_snd_437")))
+                                          (if (eq (u16 15) (identifier "dsum1_fst_84"))
+                                            (let-pair "di8_fst_430" "di8_snd_431" 
+                                              (read-u8 (identifier "dsum1_snd_85"))
+                                              (make-tup
+                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 15
+                                                  (to-i8 (identifier "di8_fst_430"))) 
+                                                (identifier "di8_snd_431")))
+                                            (if (eq (u16 16) (identifier "dsum1_fst_84"))
+                                              (let-pair "di16_fst_424" "di16_snd_425" 
+                                                (read-u16 little-endian (identifier "dsum1_snd_85"))
+                                                (make-tup
+                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 16
+                                                    (to-i16 (identifier "di16_fst_424"))) 
+                                                  (identifier "di16_snd_425")))
+                                              (if (eq (u16 17) (identifier "dsum1_fst_84"))
+                                                (let-pair "di24_fst_418" "di24_snd_419" 
+                                                  (read-u32 little-endian (identifier "dsum1_snd_85"))
+                                                  (make-tup
+                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 17
+                                                      (to-i24 (identifier "di24_fst_418"))) 
+                                                    (identifier "di24_snd_419")))
+                                                (if (eq (u16 18) (identifier "dsum1_fst_84"))
+                                                  (let-pair "di32_fst_412" "di32_snd_413" 
+                                                    (read-u32 little-endian (identifier "dsum1_snd_85"))
+                                                    (make-tup
+                                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 18
+                                                        (to-i32 (identifier "di32_fst_412"))) 
+                                                      (identifier "di32_snd_413")))
+                                                  (if (eq (u16 19) (identifier "dsum1_fst_84"))
+                                                    (let-pair "di40_fst_406" "di40_snd_407" 
+                                                      (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                                      (make-tup
+                                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 19
+                                                          (to-i40 (identifier "di40_fst_406"))) 
+                                                        (identifier "di40_snd_407")))
+                                                    (if (eq (u16 20) (identifier "dsum1_fst_84"))
+                                                      (let-pair "di48_fst_400" "di48_snd_401" 
+                                                        (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                                        (make-tup
+                                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 20
+                                                            (to-i48 (identifier "di48_fst_400"))) 
+                                                          (identifier "di48_snd_401")))
+                                                      (if (eq (u16 21) (identifier "dsum1_fst_84"))
+                                                        (let-pair "di56_fst_394" "di56_snd_395" 
+                                                          (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                                          (make-tup
+                                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 21
+                                                              (to-i56 (identifier "di56_fst_394"))) 
+                                                            (identifier "di56_snd_395")))
+                                                        (if (eq (u16 22) (identifier "dsum1_fst_84"))
+                                                          (let-pair "di64_fst_388" "di64_snd_389" 
+                                                            (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                                            (make-tup
+                                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 22
+                                                                (to-i64 (identifier "di64_fst_388"))) 
+                                                              (identifier "di64_snd_389")))
+                                                          (if (eq (u16 23) (identifier "dsum1_fst_84"))
+                                                            (let-pair "di128_fst_382" "di128_snd_383" 
+                                                              (read-u128 little-endian (identifier "dsum1_snd_85"))
+                                                              (make-tup
+                                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 23
+                                                                  (to-i128 (identifier "di128_fst_382"))) 
+                                                                (identifier "di128_snd_383")))
+                                                            (if (eq (u16 24) (identifier "dsum1_fst_84"))
+                                                              (let-pair "du48_fst_373" "du48_snd_374" 
+                                                                (read-u64 little-endian (identifier "dsum1_snd_85"))
+                                                                (make-tup
+                                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 24
+                                                                    (make-usr "Eth" (to-u48 (identifier "du48_fst_373")))) 
+                                                                  (identifier "du48_snd_374")))
+                                                              (if (eq (u16 25) (identifier "dsum1_fst_84"))
+                                                                (let-pair "du32_fst_364" "du32_snd_365" 
+                                                                  (read-u32 little-endian (identifier "dsum1_snd_85"))
+                                                                  (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 25
+                                                                    (make-usr "Ip4" (identifier "du32_fst_364"))) 
+                                                                    (identifier "du32_snd_365")))
+                                                                (if (eq (u16 26) (identifier "dsum1_fst_84"))
+                                                                  (let-pair "di128_fst_355" "di128_snd_356" 
+                                                                    (read-u128 little-endian (identifier "dsum1_snd_85"))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 26
+                                                                    (make-usr "Ip6" (identifier "di128_fst_355"))) 
+                                                                    (identifier "di128_snd_356")))
+                                                                  (if 
+                                                                    (eq (u16 27) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "des_usr_type_fst_349" "des_usr_type_snd_350"
+                                                                    (let "dsum1_327"
+                                                                    (let-pair "du16_fst_322" "du16_snd_323" (read-u16 little-endian (identifier "dsum1_snd_85")) (make-tup (identifier "du16_fst_322") (identifier "du16_snd_323")))
+                                                                    (let-pair "dsum1_fst_328" "dsum1_snd_329" 
+                                                                    (identifier "dsum1_327")
+                                                                    (if 
+                                                                    (eq (u16 0) (identifier "dsum1_fst_328"))
+                                                                    (let-pair "du32_fst_340" "du32_snd_341" 
+                                                                    (read-u32 little-endian (identifier "dsum1_snd_329"))
+                                                                    (make-tup (construct "[v4 Ip4 | v6 Ip6]" 0 (make-usr "Ip4" (identifier "du32_fst_340"))) (identifier "du32_snd_341")))
+                                                                    (seq 
+                                                                    (assert (eq (identifier "dsum1_fst_328") (u16 1)))
+                                                                    (let-pair "di128_fst_331" "di128_snd_332" 
+                                                                    (read-u128 little-endian (identifier "dsum1_snd_329"))
+                                                                    (make-tup (construct "[v4 Ip4 | v6 Ip6]" 1 (make-usr "Ip6" (identifier "di128_fst_331"))) (identifier "di128_snd_332")))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 27
+                                                                    (make-usr "Ip" (identifier "des_usr_type_fst_349"))) 
+                                                                    (identifier "des_usr_type_snd_350")))
+                                                                    (if 
+                                                                    (eq (u16 28) (identifier "dsum1_fst_84"))
+                                                                    (let "drec_306"
+                                                                    (let-pair "du32_fst_301" "du32_snd_302" 
+                                                                    (read-u32 little-endian (identifier "dsum1_snd_85")) 
+                                                                    (make-tup (make-usr "Ip4" (identifier "du32_fst_301")) (identifier "du32_snd_302")))
+                                                                    (let-pair "drec_fst_307" "drec_snd_308" 
+                                                                    (identifier "drec_306")
+                                                                    (let-pair "du8_fst_310" "du8_snd_311" 
+                                                                    (read-u8 (identifier "drec_snd_308"))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 28
+                                                                    (make-usr "Cidr4" (make-rec (string "mask") (identifier "du8_fst_310") (string "ip") (identifier "drec_fst_307")))) 
+                                                                    (identifier "du8_snd_311")))))
+                                                                    (if 
+                                                                    (eq (u16 29) (identifier "dsum1_fst_84"))
+                                                                    (let "drec_285"
+                                                                    (let-pair "di128_fst_280" "di128_snd_281" 
+                                                                    (read-u128 little-endian (identifier "dsum1_snd_85")) 
+                                                                    (make-tup (make-usr "Ip6" (identifier "di128_fst_280")) (identifier "di128_snd_281")))
+                                                                    (let-pair "drec_fst_286" "drec_snd_287" 
+                                                                    (identifier "drec_285")
+                                                                    (let-pair "du8_fst_289" "du8_snd_290" 
+                                                                    (read-u8 (identifier "drec_snd_287"))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 29
+                                                                    (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_289") (string "ip") (identifier "drec_fst_286")))) 
+                                                                    (identifier "du8_snd_290")))))
+                                                                    (if 
+                                                                    (eq (u16 30) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "des_usr_type_fst_274" "des_usr_type_snd_275"
+                                                                    (let "dsum1_228"
+                                                                    (let-pair "du16_fst_223" "du16_snd_224" (read-u16 little-endian (identifier "dsum1_snd_85")) (make-tup (identifier "du16_fst_223") (identifier "du16_snd_224")))
+                                                                    (let-pair "dsum1_fst_229" "dsum1_snd_230" 
+                                                                    (identifier "dsum1_228")
+                                                                    (if 
+                                                                    (eq (u16 0) (identifier "dsum1_fst_229"))
+                                                                    (let "drec_258"
+                                                                    (let-pair "du32_fst_253" "du32_snd_254" 
+                                                                    (read-u32 little-endian (identifier "dsum1_snd_230")) 
+                                                                    (make-tup (make-usr "Ip4" (identifier "du32_fst_253")) (identifier "du32_snd_254")))
+                                                                    (let-pair "drec_fst_259" "drec_snd_260" 
+                                                                    (identifier "drec_258")
+                                                                    (let-pair "du8_fst_262" "du8_snd_263" 
+                                                                    (read-u8 (identifier "drec_snd_260"))
+                                                                    (make-tup
+                                                                    (construct "[v4 Cidr4 | v6 Cidr6]" 0 (make-usr "Cidr4" (make-rec (string "mask") (identifier "du8_fst_262") (string "ip") (identifier "drec_fst_259"))))
+                                                                    (identifier "du8_snd_263")))))
+                                                                    (seq 
+                                                                    (assert (eq (identifier "dsum1_fst_229") (u16 1)))
+                                                                    (let "drec_237"
+                                                                    (let-pair "di128_fst_232" "di128_snd_233" 
+                                                                    (read-u128 little-endian (identifier "dsum1_snd_230")) 
+                                                                    (make-tup (make-usr "Ip6" (identifier "di128_fst_232")) (identifier "di128_snd_233")))
+                                                                    (let-pair "drec_fst_238" "drec_snd_239" 
+                                                                    (identifier "drec_237")
+                                                                    (let-pair "du8_fst_241" "du8_snd_242" 
+                                                                    (read-u8 (identifier "drec_snd_239"))
+                                                                    (make-tup
+                                                                    (construct "[v4 Cidr4 | v6 Cidr6]" 1 (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_241") (string "ip") (identifier "drec_fst_238"))))
+                                                                    (identifier "du8_snd_242")))))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 30
+                                                                    (make-usr "Cidr" (identifier "des_usr_type_fst_274"))) 
+                                                                    (identifier "des_usr_type_snd_275")))
+                                                                    (if 
+                                                                    (eq (u16 31) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "dlist4_fst_217" "dlist4_snd_218"
+                                                                    (let "dlist1_205"
+                                                                    (let "leb_ref_196" 
+                                                                    (make-vec (u32 0))
+                                                                    (let "shft_ref_197" 
+                                                                    (make-vec (u8 0))
+                                                                    (let "p_ref_198" 
+                                                                    (make-vec (identifier "dsum1_snd_85"))
+                                                                    (seq
+                                                                    (while
+                                                                    (let "leb128_199" 
+                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_198")))
+                                                                    (let-pair "leb128_fst_200" "leb128_snd_201" 
+                                                                    (identifier "leb128_199")
+                                                                    (seq 
+                                                                    (set-vec (u8 0) (identifier "p_ref_198") (identifier "leb128_snd_201"))
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "leb_ref_196")
+                                                                    (bit-or 
+                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_200") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_197")))
+                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_196")))) 
+                                                                    (set-vec (u8 0) (identifier "shft_ref_197") (add (unsafe-nth (u8 0) (identifier "shft_ref_197")) (u8 7))) 
+                                                                    (ge (identifier "leb128_fst_200") (u8 128))))) 
+                                                                    (nop)) 
+                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_196")) (unsafe-nth (u8 0) (identifier "p_ref_198")))))))
+                                                                    (let-pair "dlist1_fst_206" "dlist1_snd_207" 
+                                                                    (identifier "dlist1_205")
+                                                                    (let "inits_src_ref_208" 
+                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_207")))
+                                                                    (seq
+                                                                    (let "repeat_n_209" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (identifier "dlist1_fst_206")) (unsafe-nth (u8 0) (identifier "repeat_n_209")))
+                                                                    (seq
+                                                                    (let "dlist2_210" 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_208"))
+                                                                    (let-pair "dlist2_fst_211" "dlist2_snd_212" 
+                                                                    (identifier "dlist2_210")
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "inits_src_ref_208")
+                                                                    (let-pair "dlist3_fst_214" "dlist3_snd_215" 
+                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_212"))
+                                                                    (make-tup (cons (identifier "dlist3_fst_214") (identifier "dlist2_fst_211")) (identifier "dlist3_snd_215"))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_209") (add (unsafe-nth (u8 0) (identifier "repeat_n_209")) (i32 1))))))
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_208"))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 31
+                                                                    (arr-of-lst-rev (identifier "dlist4_fst_217"))) 
+                                                                    (identifier "dlist4_snd_218")))
+                                                                    (if 
+                                                                    (eq (u16 32) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "dlist4_fst_191" "dlist4_snd_192"
+                                                                    (let "dlist1_179"
+                                                                    (let "leb_ref_170" 
+                                                                    (make-vec (u32 0))
+                                                                    (let "shft_ref_171" 
+                                                                    (make-vec (u8 0))
+                                                                    (let "p_ref_172" 
+                                                                    (make-vec (identifier "dsum1_snd_85"))
+                                                                    (seq
+                                                                    (while
+                                                                    (let "leb128_173" 
+                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_172")))
+                                                                    (let-pair "leb128_fst_174" "leb128_snd_175" 
+                                                                    (identifier "leb128_173")
+                                                                    (seq 
+                                                                    (set-vec (u8 0) (identifier "p_ref_172") (identifier "leb128_snd_175"))
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "leb_ref_170")
+                                                                    (bit-or 
+                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_174") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_171")))
+                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_170")))) 
+                                                                    (set-vec (u8 0) (identifier "shft_ref_171") (add (unsafe-nth (u8 0) (identifier "shft_ref_171")) (u8 7))) 
+                                                                    (ge (identifier "leb128_fst_174") (u8 128))))) 
+                                                                    (nop)) 
+                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_170")) (unsafe-nth (u8 0) (identifier "p_ref_172")))))))
+                                                                    (let-pair "dlist1_fst_180" "dlist1_snd_181" 
+                                                                    (identifier "dlist1_179")
+                                                                    (let "inits_src_ref_182" 
+                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_181")))
+                                                                    (seq
+                                                                    (let "repeat_n_183" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (identifier "dlist1_fst_180")) (unsafe-nth (u8 0) (identifier "repeat_n_183")))
+                                                                    (seq
+                                                                    (let "dlist2_184" 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_182"))
+                                                                    (let-pair "dlist2_fst_185" "dlist2_snd_186" 
+                                                                    (identifier "dlist2_184")
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "inits_src_ref_182")
+                                                                    (let-pair "dlist3_fst_188" "dlist3_snd_189" 
+                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_186"))
+                                                                    (make-tup (cons (identifier "dlist3_fst_188") (identifier "dlist2_fst_185")) (identifier "dlist3_snd_189"))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_183") (add (unsafe-nth (u8 0) (identifier "repeat_n_183")) (i32 1))))))
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_182"))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 32
+                                                                    (arr-of-lst-rev (identifier "dlist4_fst_191"))) 
+                                                                    (identifier "dlist4_snd_192")))
+                                                                    (if 
+                                                                    (eq (u16 33) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "dlist4_fst_165" "dlist4_snd_166"
+                                                                    (let "dlist1_153"
+                                                                    (let "leb_ref_144" 
+                                                                    (make-vec (u32 0))
+                                                                    (let "shft_ref_145" 
+                                                                    (make-vec (u8 0))
+                                                                    (let "p_ref_146" 
+                                                                    (make-vec (identifier "dsum1_snd_85"))
+                                                                    (seq
+                                                                    (while
+                                                                    (let "leb128_147" 
+                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_146")))
+                                                                    (let-pair "leb128_fst_148" "leb128_snd_149" 
+                                                                    (identifier "leb128_147")
+                                                                    (seq 
+                                                                    (set-vec (u8 0) (identifier "p_ref_146") (identifier "leb128_snd_149"))
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "leb_ref_144")
+                                                                    (bit-or 
+                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_148") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_145")))
+                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_144")))) 
+                                                                    (set-vec (u8 0) (identifier "shft_ref_145") (add (unsafe-nth (u8 0) (identifier "shft_ref_145")) (u8 7))) 
+                                                                    (ge (identifier "leb128_fst_148") (u8 128))))) 
+                                                                    (nop)) 
+                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_144")) (unsafe-nth (u8 0) (identifier "p_ref_146")))))))
+                                                                    (let-pair "dlist1_fst_154" "dlist1_snd_155" 
+                                                                    (identifier "dlist1_153")
+                                                                    (let "inits_src_ref_156" 
+                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_155")))
+                                                                    (seq
+                                                                    (let "repeat_n_157" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (identifier "dlist1_fst_154")) (unsafe-nth (u8 0) (identifier "repeat_n_157")))
+                                                                    (seq
+                                                                    (let "dlist2_158" 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_156"))
+                                                                    (let-pair "dlist2_fst_159" "dlist2_snd_160" 
+                                                                    (identifier "dlist2_158")
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "inits_src_ref_156")
+                                                                    (let-pair "dlist3_fst_162" "dlist3_snd_163" 
+                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_160"))
+                                                                    (make-tup (cons (identifier "dlist3_fst_162") (identifier "dlist2_fst_159")) (identifier "dlist3_snd_163"))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_157") (add (unsafe-nth (u8 0) (identifier "repeat_n_157")) (i32 1))))))
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_156"))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 33
+                                                                    (arr-of-lst-rev (identifier "dlist4_fst_165"))) 
+                                                                    (identifier "dlist4_snd_166")))
+                                                                    (if 
+                                                                    (eq (u16 34) (identifier "dsum1_fst_84"))
+                                                                    (let-pair "dlist4_fst_139" "dlist4_snd_140"
+                                                                    (let "dlist1_127"
+                                                                    (let "leb_ref_118" 
+                                                                    (make-vec (u32 0))
+                                                                    (let "shft_ref_119" 
+                                                                    (make-vec (u8 0))
+                                                                    (let "p_ref_120" 
+                                                                    (make-vec (identifier "dsum1_snd_85"))
+                                                                    (seq
+                                                                    (while
+                                                                    (let "leb128_121" 
+                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_120")))
+                                                                    (let-pair "leb128_fst_122" "leb128_snd_123" 
+                                                                    (identifier "leb128_121")
+                                                                    (seq 
+                                                                    (set-vec (u8 0) (identifier "p_ref_120") (identifier "leb128_snd_123"))
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "leb_ref_118")
+                                                                    (bit-or 
+                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_122") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_119")))
+                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_118")))) 
+                                                                    (set-vec (u8 0) (identifier "shft_ref_119") (add (unsafe-nth (u8 0) (identifier "shft_ref_119")) (u8 7))) 
+                                                                    (ge (identifier "leb128_fst_122") (u8 128))))) 
+                                                                    (nop)) 
+                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_118")) (unsafe-nth (u8 0) (identifier "p_ref_120")))))))
+                                                                    (let-pair "dlist1_fst_128" "dlist1_snd_129" 
+                                                                    (identifier "dlist1_127")
+                                                                    (let "inits_src_ref_130" 
+                                                                    (make-vec (make-tup (end-of-list "(named_value AS (STRING; THIS))") (identifier "dlist1_snd_129")))
+                                                                    (seq
+                                                                    (let "repeat_n_131" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (identifier "dlist1_fst_128")) (unsafe-nth (u8 0) (identifier "repeat_n_131")))
+                                                                    (seq
+                                                                    (let "dlist2_132" 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_130"))
+                                                                    (let-pair "dlist2_fst_133" "dlist2_snd_134" 
+                                                                    (identifier "dlist2_132")
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "inits_src_ref_130")
+                                                                    (let-pair "dlist3_fst_136" "dlist3_snd_137" 
+                                                                    (apply (identifier "named_value-of-row-binary") (identifier "dlist2_snd_134"))
+                                                                    (make-tup (cons (identifier "dlist3_fst_136") (identifier "dlist2_fst_133")) (identifier "dlist3_snd_137"))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_131") (add (unsafe-nth (u8 0) (identifier "repeat_n_131")) (i32 1))))))
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_130"))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 34
+                                                                    (arr-of-lst-rev (identifier "dlist4_fst_139"))) 
+                                                                    (identifier "dlist4_snd_140")))
+                                                                    (seq 
+                                                                    (assert (eq (identifier "dsum1_fst_84") (u16 35)))
+                                                                    (let-pair "dlist4_fst_113" "dlist4_snd_114"
+                                                                    (let "dlist1_95"
+                                                                    (let "leb_ref_86" 
+                                                                    (make-vec (u32 0))
+                                                                    (let "shft_ref_87" 
+                                                                    (make-vec (u8 0))
+                                                                    (let "p_ref_88" 
+                                                                    (make-vec (identifier "dsum1_snd_85"))
+                                                                    (seq
+                                                                    (while
+                                                                    (let "leb128_89" 
+                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_88")))
+                                                                    (let-pair "leb128_fst_90" "leb128_snd_91" 
+                                                                    (identifier "leb128_89")
+                                                                    (seq 
+                                                                    (set-vec (u8 0) (identifier "p_ref_88") (identifier "leb128_snd_91"))
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "leb_ref_86")
+                                                                    (bit-or 
+                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_90") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_87")))
+                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_86")))) 
+                                                                    (set-vec (u8 0) (identifier "shft_ref_87") (add (unsafe-nth (u8 0) (identifier "shft_ref_87")) (u8 7))) 
+                                                                    (ge (identifier "leb128_fst_90") (u8 128))))) 
+                                                                    (nop)) 
+                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_86")) (unsafe-nth (u8 0) (identifier "p_ref_88")))))))
+                                                                    (let-pair "dlist1_fst_96" "dlist1_snd_97" 
+                                                                    (identifier "dlist1_95")
+                                                                    (let "inits_src_ref_98" 
+                                                                    (make-vec (make-tup (end-of-list "(THIS; THIS)") (identifier "dlist1_snd_97")))
+                                                                    (seq
+                                                                    (let "repeat_n_99" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (identifier "dlist1_fst_96")) (unsafe-nth (u8 0) (identifier "repeat_n_99")))
+                                                                    (seq
+                                                                    (let "dlist2_100" 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_98"))
+                                                                    (let-pair "dlist2_fst_101" "dlist2_snd_102" 
+                                                                    (identifier "dlist2_100")
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "inits_src_ref_98")
+                                                                    (let-pair "dtup_fst_104" "dtup_snd_105" 
+                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_102"))
+                                                                    (let-pair "dtup_fst_107" "dtup_snd_108" 
+                                                                    (apply (myself "(THIS; Ptr)") (identifier "dtup_snd_105"))
+                                                                    (make-tup (cons (make-tup (identifier "dtup_fst_104") (identifier "dtup_fst_107")) (identifier "dlist2_fst_101")) (identifier "dtup_snd_108")))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_99") (add (unsafe-nth (u8 0) (identifier "repeat_n_99")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_98"))))))
+                                                                    (make-tup
+                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" 35
+                                                                    (arr-of-lst-rev (identifier "dlist4_fst_113"))) 
+                                                                    (identifier "dlist4_snd_114"))))))))))))))))))))))))))))))))))))))))) 
+        (make-tup (identifier "make_fst_529") (identifier "make_snd_530"))))
+ */
+static std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary_init()
+{
+  std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> fun0 { [&fun0](Pointer p_0) {
+    ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1 { p_0.readU16Le() };
+    ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_2;
+    {
+      auto du16_fst_78 { std::get<0>(id_1) };
+      auto du16_snd_79 { std::get<1>(id_1) };
+      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_3 { du16_fst_78, du16_snd_79 };
+      letpair_res_2 = id_3;
+    }
+    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_4;
+    {
+      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_83 { letpair_res_2 };
+      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_5;
+      {
+        auto dsum1_fst_84 { std::get<0>(dsum1_83) };
+        auto dsum1_snd_85 { std::get<1>(dsum1_83) };
+        uint16_t id_6 { 0 };
+        bool id_7 { bool(id_6 == dsum1_fst_84) };
+        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_8;
+        if (id_7) {
+          (void)::dessser::VOID;
+          std::shared_ptr<::dessser::gen::raql_value::t>  id_9 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<0>, ::dessser::VOID) };
+          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_10 { id_9, dsum1_snd_85 };
+          choose_res_8 = id_10;
+        } else {
+          uint16_t id_11 { 1 };
+          bool id_12 { bool(id_11 == dsum1_fst_84) };
+          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_13;
+          if (id_12) {
+            (void)::dessser::VOID;
+            std::shared_ptr<::dessser::gen::raql_value::t>  id_14 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<1>, ::dessser::VOID) };
+            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_15 { id_14, dsum1_snd_85 };
+            choose_res_13 = id_15;
+          } else {
+            uint16_t id_16 { 2 };
+            bool id_17 { bool(id_16 == dsum1_fst_84) };
+            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_18;
+            if (id_17) {
+              ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_19 { dsum1_snd_85.readU64Le() };
+              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_20;
+              {
+                auto dfloat_fst_517 { std::get<0>(id_19) };
+                auto dfloat_snd_518 { std::get<1>(id_19) };
+                double id_21 { float_of_qword(dfloat_fst_517) };
+                std::shared_ptr<::dessser::gen::raql_value::t>  id_22 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<2>, id_21) };
+                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_23 { id_22, dfloat_snd_518 };
+                letpair_res_20 = id_23;
+              }
+              choose_res_18 = letpair_res_20;
+            } else {
+              uint16_t id_24 { 3 };
+              bool id_25 { bool(id_24 == dsum1_fst_84) };
+              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_26;
+              if (id_25) {
+                uint32_t id_27 { 0U };
+                Vec<1, uint32_t> id_28 {  id_27  };
+                ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_29;
+                {
+                  Vec<1, uint32_t> leb_ref_501 { id_28 };
+                  uint8_t id_30 { 0 };
+                  Vec<1, uint8_t> id_31 {  id_30  };
+                  ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_32;
+                  {
+                    Vec<1, uint8_t> shft_ref_502 { id_31 };
+                    Vec<1, Pointer> id_33 {  dsum1_snd_85  };
+                    ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_34;
+                    {
+                      Vec<1, Pointer> p_ref_503 { id_33 };
+                      bool while_flag_35 { true };
+                      do {
+                        uint8_t id_36 { 0 };
+                        Pointer id_37 { p_ref_503[id_36] };
+                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_38 { id_37.readU8() };
+                        bool let_res_39;
+                        {
+                          ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_504 { id_38 };
+                          bool letpair_res_40;
+                          {
+                            auto leb128_fst_505 { std::get<0>(leb128_504) };
+                            auto leb128_snd_506 { std::get<1>(leb128_504) };
+                            uint8_t id_41 { 0 };
+                            Void id_42 { ((void)(p_ref_503[id_41] = leb128_snd_506), ::dessser::VOID) };
+                            (void)id_42;
+                            uint8_t id_43 { 0 };
+                            uint8_t id_44 { 127 };
+                            uint8_t id_45 { uint8_t(leb128_fst_505 & id_44) };
+                            uint32_t id_46 { uint32_t(id_45) };
+                            uint8_t id_47 { 0 };
+                            uint8_t id_48 { shft_ref_502[id_47] };
+                            uint32_t id_49 { uint32_t(id_46 << id_48) };
+                            uint8_t id_50 { 0 };
+                            uint32_t id_51 { leb_ref_501[id_50] };
+                            uint32_t id_52 { uint32_t(id_49 | id_51) };
+                            Void id_53 { ((void)(leb_ref_501[id_43] = id_52), ::dessser::VOID) };
+                            (void)id_53;
+                            uint8_t id_54 { 0 };
+                            uint8_t id_55 { 0 };
+                            uint8_t id_56 { shft_ref_502[id_55] };
+                            uint8_t id_57 { 7 };
+                            uint8_t id_58 { uint8_t(id_56 + id_57) };
+                            Void id_59 { ((void)(shft_ref_502[id_54] = id_58), ::dessser::VOID) };
+                            (void)id_59;
+                            uint8_t id_60 { 128 };
+                            bool id_61 { bool(leb128_fst_505 >= id_60) };
+                            letpair_res_40 = id_61;
+                          }
+                          let_res_39 = letpair_res_40;
+                        }
+                        while_flag_35 = let_res_39;
+                        if (while_flag_35) {
+                          (void)::dessser::VOID;
+                        }
+                      } while (while_flag_35);
+                      (void)::dessser::VOID;
+                      uint8_t id_62 { 0 };
+                      uint32_t id_63 { leb_ref_501[id_62] };
+                      Size id_64 { Size(id_63) };
+                      uint8_t id_65 { 0 };
+                      Pointer id_66 { p_ref_503[id_65] };
+                      ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 id_67 { id_64, id_66 };
+                      let_res_34 = id_67;
+                    }
+                    let_res_32 = let_res_34;
+                  }
+                  let_res_29 = let_res_32;
+                }
+                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_68;
+                {
+                  ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 dstring1_507 { let_res_29 };
+                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_69;
+                  {
+                    auto dstring1_fst_508 { std::get<0>(dstring1_507) };
+                    auto dstring1_snd_509 { std::get<1>(dstring1_507) };
+                    ::dessser::gen::raql_value::t5887709cc43c8c8e24d28211e8c970a2 id_70 { dstring1_snd_509.readBytes(dstring1_fst_508) };
+                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_71;
+                    {
+                      auto dstring2_fst_511 { std::get<0>(id_70) };
+                      auto dstring2_snd_512 { std::get<1>(id_70) };
+                      std::string id_72 { dstring2_fst_511.toString() };
+                      std::shared_ptr<::dessser::gen::raql_value::t>  id_73 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<3>, id_72) };
+                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_74 { id_73, dstring2_snd_512 };
+                      letpair_res_71 = id_74;
+                    }
+                    letpair_res_69 = letpair_res_71;
+                  }
+                  let_res_68 = letpair_res_69;
+                }
+                choose_res_26 = let_res_68;
+              } else {
+                uint16_t id_75 { 4 };
+                bool id_76 { bool(id_75 == dsum1_fst_84) };
+                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_77;
+                if (id_76) {
+                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_78 { dsum1_snd_85.readU8() };
+                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_79;
+                  {
+                    auto dbool_fst_496 { std::get<0>(id_78) };
+                    auto dbool_snd_497 { std::get<1>(id_78) };
+                    uint8_t id_80 { 0 };
+                    bool id_81 { bool(dbool_fst_496 == id_80) };
+                    bool id_82 { ! id_81 };
+                    std::shared_ptr<::dessser::gen::raql_value::t>  id_83 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<4>, id_82) };
+                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_84 { id_83, dbool_snd_497 };
+                    letpair_res_79 = id_84;
+                  }
+                  choose_res_77 = letpair_res_79;
+                } else {
+                  uint16_t id_85 { 5 };
+                  bool id_86 { bool(id_85 == dsum1_fst_84) };
+                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_87;
+                  if (id_86) {
+                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_88 { dsum1_snd_85.readU8() };
+                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_89;
+                    {
+                      auto dchar_fst_490 { std::get<0>(id_88) };
+                      auto dchar_snd_491 { std::get<1>(id_88) };
+                      char id_90 { char(dchar_fst_490) };
+                      std::shared_ptr<::dessser::gen::raql_value::t>  id_91 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<5>, id_90) };
+                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_92 { id_91, dchar_snd_491 };
+                      letpair_res_89 = id_92;
+                    }
+                    choose_res_87 = letpair_res_89;
+                  } else {
+                    uint16_t id_93 { 6 };
+                    bool id_94 { bool(id_93 == dsum1_fst_84) };
+                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_95;
+                    if (id_94) {
+                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_96 { dsum1_snd_85.readU8() };
+                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_97;
+                      {
+                        auto du8_fst_484 { std::get<0>(id_96) };
+                        auto du8_snd_485 { std::get<1>(id_96) };
+                        std::shared_ptr<::dessser::gen::raql_value::t>  id_98 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<6>, du8_fst_484) };
+                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_99 { id_98, du8_snd_485 };
+                        letpair_res_97 = id_99;
+                      }
+                      choose_res_95 = letpair_res_97;
+                    } else {
+                      uint16_t id_100 { 7 };
+                      bool id_101 { bool(id_100 == dsum1_fst_84) };
+                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_102;
+                      if (id_101) {
+                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_103 { dsum1_snd_85.readU16Le() };
+                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_104;
+                        {
+                          auto du16_fst_478 { std::get<0>(id_103) };
+                          auto du16_snd_479 { std::get<1>(id_103) };
+                          std::shared_ptr<::dessser::gen::raql_value::t>  id_105 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<7>, du16_fst_478) };
+                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_106 { id_105, du16_snd_479 };
+                          letpair_res_104 = id_106;
+                        }
+                        choose_res_102 = letpair_res_104;
+                      } else {
+                        uint16_t id_107 { 8 };
+                        bool id_108 { bool(id_107 == dsum1_fst_84) };
+                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_109;
+                        if (id_108) {
+                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_110 { dsum1_snd_85.readU32Le() };
+                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_111;
+                          {
+                            auto du24_fst_472 { std::get<0>(id_110) };
+                            auto du24_snd_473 { std::get<1>(id_110) };
+                            uint32_t id_112 { uint32_t(du24_fst_472) };
+                            std::shared_ptr<::dessser::gen::raql_value::t>  id_113 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<8>, id_112) };
+                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_114 { id_113, du24_snd_473 };
+                            letpair_res_111 = id_114;
+                          }
+                          choose_res_109 = letpair_res_111;
+                        } else {
+                          uint16_t id_115 { 9 };
+                          bool id_116 { bool(id_115 == dsum1_fst_84) };
+                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_117;
+                          if (id_116) {
+                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_118 { dsum1_snd_85.readU32Le() };
+                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_119;
+                            {
+                              auto du32_fst_466 { std::get<0>(id_118) };
+                              auto du32_snd_467 { std::get<1>(id_118) };
+                              std::shared_ptr<::dessser::gen::raql_value::t>  id_120 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<9>, du32_fst_466) };
+                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_121 { id_120, du32_snd_467 };
+                              letpair_res_119 = id_121;
+                            }
+                            choose_res_117 = letpair_res_119;
+                          } else {
+                            uint16_t id_122 { 10 };
+                            bool id_123 { bool(id_122 == dsum1_fst_84) };
+                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_124;
+                            if (id_123) {
+                              ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_125 { dsum1_snd_85.readU64Le() };
+                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_126;
+                              {
+                                auto du40_fst_460 { std::get<0>(id_125) };
+                                auto du40_snd_461 { std::get<1>(id_125) };
+                                uint64_t id_127 { uint64_t(du40_fst_460) };
+                                std::shared_ptr<::dessser::gen::raql_value::t>  id_128 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<10>, id_127) };
+                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_129 { id_128, du40_snd_461 };
+                                letpair_res_126 = id_129;
+                              }
+                              choose_res_124 = letpair_res_126;
+                            } else {
+                              uint16_t id_130 { 11 };
+                              bool id_131 { bool(id_130 == dsum1_fst_84) };
+                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_132;
+                              if (id_131) {
+                                ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_133 { dsum1_snd_85.readU64Le() };
+                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_134;
+                                {
+                                  auto du48_fst_454 { std::get<0>(id_133) };
+                                  auto du48_snd_455 { std::get<1>(id_133) };
+                                  uint64_t id_135 { uint64_t(du48_fst_454) };
+                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_136 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<11>, id_135) };
+                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_137 { id_136, du48_snd_455 };
+                                  letpair_res_134 = id_137;
+                                }
+                                choose_res_132 = letpair_res_134;
+                              } else {
+                                uint16_t id_138 { 12 };
+                                bool id_139 { bool(id_138 == dsum1_fst_84) };
+                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_140;
+                                if (id_139) {
+                                  ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_141 { dsum1_snd_85.readU64Le() };
+                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_142;
+                                  {
+                                    auto du56_fst_448 { std::get<0>(id_141) };
+                                    auto du56_snd_449 { std::get<1>(id_141) };
+                                    uint64_t id_143 { uint64_t(du56_fst_448) };
+                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_144 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<12>, id_143) };
+                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_145 { id_144, du56_snd_449 };
+                                    letpair_res_142 = id_145;
+                                  }
+                                  choose_res_140 = letpair_res_142;
+                                } else {
+                                  uint16_t id_146 { 13 };
+                                  bool id_147 { bool(id_146 == dsum1_fst_84) };
+                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_148;
+                                  if (id_147) {
+                                    ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_149 { dsum1_snd_85.readU64Le() };
+                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_150;
+                                    {
+                                      auto du64_fst_442 { std::get<0>(id_149) };
+                                      auto du64_snd_443 { std::get<1>(id_149) };
+                                      std::shared_ptr<::dessser::gen::raql_value::t>  id_151 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<13>, du64_fst_442) };
+                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_152 { id_151, du64_snd_443 };
+                                      letpair_res_150 = id_152;
+                                    }
+                                    choose_res_148 = letpair_res_150;
+                                  } else {
+                                    uint16_t id_153 { 14 };
+                                    bool id_154 { bool(id_153 == dsum1_fst_84) };
+                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_155;
+                                    if (id_154) {
+                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_156 { dsum1_snd_85.readU128Le() };
+                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_157;
+                                      {
+                                        auto di128_fst_436 { std::get<0>(id_156) };
+                                        auto di128_snd_437 { std::get<1>(id_156) };
+                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_158 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<14>, di128_fst_436) };
+                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_159 { id_158, di128_snd_437 };
+                                        letpair_res_157 = id_159;
+                                      }
+                                      choose_res_155 = letpair_res_157;
+                                    } else {
+                                      uint16_t id_160 { 15 };
+                                      bool id_161 { bool(id_160 == dsum1_fst_84) };
+                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_162;
+                                      if (id_161) {
+                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_163 { dsum1_snd_85.readU8() };
+                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_164;
+                                        {
+                                          auto di8_fst_430 { std::get<0>(id_163) };
+                                          auto di8_snd_431 { std::get<1>(id_163) };
+                                          int8_t id_165 { int8_t(di8_fst_430) };
+                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_166 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<15>, id_165) };
+                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_167 { id_166, di8_snd_431 };
+                                          letpair_res_164 = id_167;
+                                        }
+                                        choose_res_162 = letpair_res_164;
+                                      } else {
+                                        uint16_t id_168 { 16 };
+                                        bool id_169 { bool(id_168 == dsum1_fst_84) };
+                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_170;
+                                        if (id_169) {
+                                          ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_171 { dsum1_snd_85.readU16Le() };
+                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_172;
+                                          {
+                                            auto di16_fst_424 { std::get<0>(id_171) };
+                                            auto di16_snd_425 { std::get<1>(id_171) };
+                                            int16_t id_173 { int16_t(di16_fst_424) };
+                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_174 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<16>, id_173) };
+                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_175 { id_174, di16_snd_425 };
+                                            letpair_res_172 = id_175;
+                                          }
+                                          choose_res_170 = letpair_res_172;
+                                        } else {
+                                          uint16_t id_176 { 17 };
+                                          bool id_177 { bool(id_176 == dsum1_fst_84) };
+                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_178;
+                                          if (id_177) {
+                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_179 { dsum1_snd_85.readU32Le() };
+                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_180;
+                                            {
+                                              auto di24_fst_418 { std::get<0>(id_179) };
+                                              auto di24_snd_419 { std::get<1>(id_179) };
+                                              int32_t id_181 { int32_t(di24_fst_418) };
+                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_182 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<17>, id_181) };
+                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_183 { id_182, di24_snd_419 };
+                                              letpair_res_180 = id_183;
+                                            }
+                                            choose_res_178 = letpair_res_180;
+                                          } else {
+                                            uint16_t id_184 { 18 };
+                                            bool id_185 { bool(id_184 == dsum1_fst_84) };
+                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_186;
+                                            if (id_185) {
+                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_187 { dsum1_snd_85.readU32Le() };
+                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_188;
+                                              {
+                                                auto di32_fst_412 { std::get<0>(id_187) };
+                                                auto di32_snd_413 { std::get<1>(id_187) };
+                                                int32_t id_189 { int32_t(di32_fst_412) };
+                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_190 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<18>, id_189) };
+                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_191 { id_190, di32_snd_413 };
+                                                letpair_res_188 = id_191;
+                                              }
+                                              choose_res_186 = letpair_res_188;
+                                            } else {
+                                              uint16_t id_192 { 19 };
+                                              bool id_193 { bool(id_192 == dsum1_fst_84) };
+                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_194;
+                                              if (id_193) {
+                                                ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_195 { dsum1_snd_85.readU64Le() };
+                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_196;
+                                                {
+                                                  auto di40_fst_406 { std::get<0>(id_195) };
+                                                  auto di40_snd_407 { std::get<1>(id_195) };
+                                                  int64_t id_197 { int64_t(di40_fst_406) };
+                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_198 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<19>, id_197) };
+                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_199 { id_198, di40_snd_407 };
+                                                  letpair_res_196 = id_199;
+                                                }
+                                                choose_res_194 = letpair_res_196;
+                                              } else {
+                                                uint16_t id_200 { 20 };
+                                                bool id_201 { bool(id_200 == dsum1_fst_84) };
+                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_202;
+                                                if (id_201) {
+                                                  ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_203 { dsum1_snd_85.readU64Le() };
+                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_204;
+                                                  {
+                                                    auto di48_fst_400 { std::get<0>(id_203) };
+                                                    auto di48_snd_401 { std::get<1>(id_203) };
+                                                    int64_t id_205 { int64_t(di48_fst_400) };
+                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_206 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<20>, id_205) };
+                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_207 { id_206, di48_snd_401 };
+                                                    letpair_res_204 = id_207;
+                                                  }
+                                                  choose_res_202 = letpair_res_204;
+                                                } else {
+                                                  uint16_t id_208 { 21 };
+                                                  bool id_209 { bool(id_208 == dsum1_fst_84) };
+                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_210;
+                                                  if (id_209) {
+                                                    ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_211 { dsum1_snd_85.readU64Le() };
+                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_212;
+                                                    {
+                                                      auto di56_fst_394 { std::get<0>(id_211) };
+                                                      auto di56_snd_395 { std::get<1>(id_211) };
+                                                      int64_t id_213 { int64_t(di56_fst_394) };
+                                                      std::shared_ptr<::dessser::gen::raql_value::t>  id_214 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<21>, id_213) };
+                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_215 { id_214, di56_snd_395 };
+                                                      letpair_res_212 = id_215;
+                                                    }
+                                                    choose_res_210 = letpair_res_212;
+                                                  } else {
+                                                    uint16_t id_216 { 22 };
+                                                    bool id_217 { bool(id_216 == dsum1_fst_84) };
+                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_218;
+                                                    if (id_217) {
+                                                      ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_219 { dsum1_snd_85.readU64Le() };
+                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_220;
+                                                      {
+                                                        auto di64_fst_388 { std::get<0>(id_219) };
+                                                        auto di64_snd_389 { std::get<1>(id_219) };
+                                                        int64_t id_221 { int64_t(di64_fst_388) };
+                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_222 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<22>, id_221) };
+                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_223 { id_222, di64_snd_389 };
+                                                        letpair_res_220 = id_223;
+                                                      }
+                                                      choose_res_218 = letpair_res_220;
+                                                    } else {
+                                                      uint16_t id_224 { 23 };
+                                                      bool id_225 { bool(id_224 == dsum1_fst_84) };
+                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_226;
+                                                      if (id_225) {
+                                                        ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_227 { dsum1_snd_85.readU128Le() };
+                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_228;
+                                                        {
+                                                          auto di128_fst_382 { std::get<0>(id_227) };
+                                                          auto di128_snd_383 { std::get<1>(id_227) };
+                                                          int128_t id_229 { int128_t(di128_fst_382) };
+                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_230 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<23>, id_229) };
+                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_231 { id_230, di128_snd_383 };
+                                                          letpair_res_228 = id_231;
+                                                        }
+                                                        choose_res_226 = letpair_res_228;
+                                                      } else {
+                                                        uint16_t id_232 { 24 };
+                                                        bool id_233 { bool(id_232 == dsum1_fst_84) };
+                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_234;
+                                                        if (id_233) {
+                                                          ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_235 { dsum1_snd_85.readU64Le() };
+                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_236;
+                                                          {
+                                                            auto du48_fst_373 { std::get<0>(id_235) };
+                                                            auto du48_snd_374 { std::get<1>(id_235) };
+                                                            std::function<uint64_t(uint64_t)> fun237 { [&fun237](uint64_t p_0) {
+                                                              return p_0;
+                                                            }
+                                                             };
+                                                            uint64_t id_238 { uint64_t(du48_fst_373) };
+                                                            uint64_t id_239 { fun237(id_238) };
+                                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_240 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<24>, id_239) };
+                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_241 { id_240, du48_snd_374 };
+                                                            letpair_res_236 = id_241;
+                                                          }
+                                                          choose_res_234 = letpair_res_236;
+                                                        } else {
+                                                          uint16_t id_242 { 25 };
+                                                          bool id_243 { bool(id_242 == dsum1_fst_84) };
+                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_244;
+                                                          if (id_243) {
+                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_245 { dsum1_snd_85.readU32Le() };
+                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_246;
+                                                            {
+                                                              auto du32_fst_364 { std::get<0>(id_245) };
+                                                              auto du32_snd_365 { std::get<1>(id_245) };
+                                                              std::function<uint32_t(uint32_t)> fun247 { [&fun247](uint32_t p_0) {
+                                                                return p_0;
+                                                              }
+                                                               };
+                                                              uint32_t id_248 { fun247(du32_fst_364) };
+                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_249 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<25>, id_248) };
+                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_250 { id_249, du32_snd_365 };
+                                                              letpair_res_246 = id_250;
+                                                            }
+                                                            choose_res_244 = letpair_res_246;
+                                                          } else {
+                                                            uint16_t id_251 { 26 };
+                                                            bool id_252 { bool(id_251 == dsum1_fst_84) };
+                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_253;
+                                                            if (id_252) {
+                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_254 { dsum1_snd_85.readU128Le() };
+                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_255;
+                                                              {
+                                                                auto di128_fst_355 { std::get<0>(id_254) };
+                                                                auto di128_snd_356 { std::get<1>(id_254) };
+                                                                std::function<uint128_t(uint128_t)> fun256 { [&fun256](uint128_t p_0) {
+                                                                  return p_0;
+                                                                }
+                                                                 };
+                                                                uint128_t id_257 { fun256(di128_fst_355) };
+                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_258 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<26>, id_257) };
+                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_259 { id_258, di128_snd_356 };
+                                                                letpair_res_255 = id_259;
+                                                              }
+                                                              choose_res_253 = letpair_res_255;
+                                                            } else {
+                                                              uint16_t id_260 { 27 };
+                                                              bool id_261 { bool(id_260 == dsum1_fst_84) };
+                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_262;
+                                                              if (id_261) {
+                                                                ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_263 { dsum1_snd_85.readU16Le() };
+                                                                ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_264;
+                                                                {
+                                                                  auto du16_fst_322 { std::get<0>(id_263) };
+                                                                  auto du16_snd_323 { std::get<1>(id_263) };
+                                                                  ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_265 { du16_fst_322, du16_snd_323 };
+                                                                  letpair_res_264 = id_265;
+                                                                }
+                                                                ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a let_res_266;
+                                                                {
+                                                                  ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_327 { letpair_res_264 };
+                                                                  ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_267;
+                                                                  {
+                                                                    auto dsum1_fst_328 { std::get<0>(dsum1_327) };
+                                                                    auto dsum1_snd_329 { std::get<1>(dsum1_327) };
+                                                                    uint16_t id_268 { 0 };
+                                                                    bool id_269 { bool(id_268 == dsum1_fst_328) };
+                                                                    ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a choose_res_270;
+                                                                    if (id_269) {
+                                                                      ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_271 { dsum1_snd_329.readU32Le() };
+                                                                      ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_272;
+                                                                      {
+                                                                        auto du32_fst_340 { std::get<0>(id_271) };
+                                                                        auto du32_snd_341 { std::get<1>(id_271) };
+                                                                        std::function<uint32_t(uint32_t)> fun273 { [&fun273](uint32_t p_0) {
+                                                                          return p_0;
+                                                                        }
+                                                                         };
+                                                                        uint32_t id_274 { fun273(du32_fst_340) };
+                                                                        ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_275 { std::in_place_index<0>, id_274 };
+                                                                        ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a id_276 { id_275, du32_snd_341 };
+                                                                        letpair_res_272 = id_276;
+                                                                      }
+                                                                      choose_res_270 = letpair_res_272;
+                                                                    } else {
+                                                                      uint16_t id_277 { 1 };
+                                                                      bool id_278 { bool(dsum1_fst_328 == id_277) };
+                                                                      Void id_279 { ((void)(assert(id_278)), ::dessser::VOID) };
+                                                                      (void)id_279;
+                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_280 { dsum1_snd_329.readU128Le() };
+                                                                      ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_281;
+                                                                      {
+                                                                        auto di128_fst_331 { std::get<0>(id_280) };
+                                                                        auto di128_snd_332 { std::get<1>(id_280) };
+                                                                        std::function<uint128_t(uint128_t)> fun282 { [&fun282](uint128_t p_0) {
+                                                                          return p_0;
+                                                                        }
+                                                                         };
+                                                                        uint128_t id_283 { fun282(di128_fst_331) };
+                                                                        ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_284 { std::in_place_index<1>, id_283 };
+                                                                        ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a id_285 { id_284, di128_snd_332 };
+                                                                        letpair_res_281 = id_285;
+                                                                      }
+                                                                      choose_res_270 = letpair_res_281;
+                                                                    }
+                                                                    letpair_res_267 = choose_res_270;
+                                                                  }
+                                                                  let_res_266 = letpair_res_267;
+                                                                }
+                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_286;
+                                                                {
+                                                                  auto des_usr_type_fst_349 { std::get<0>(let_res_266) };
+                                                                  auto des_usr_type_snd_350 { std::get<1>(let_res_266) };
+                                                                  std::function<::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891(::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891)> fun287 { [&fun287](::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 p_0) {
+                                                                    return p_0;
+                                                                  }
+                                                                   };
+                                                                  ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_288 { fun287(des_usr_type_fst_349) };
+                                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_289 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<27>, id_288) };
+                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_290 { id_289, des_usr_type_snd_350 };
+                                                                  letpair_res_286 = id_290;
+                                                                }
+                                                                choose_res_262 = letpair_res_286;
+                                                              } else {
+                                                                uint16_t id_291 { 28 };
+                                                                bool id_292 { bool(id_291 == dsum1_fst_84) };
+                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_293;
+                                                                if (id_292) {
+                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_294 { dsum1_snd_85.readU32Le() };
+                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 letpair_res_295;
+                                                                  {
+                                                                    auto du32_fst_301 { std::get<0>(id_294) };
+                                                                    auto du32_snd_302 { std::get<1>(id_294) };
+                                                                    std::function<uint32_t(uint32_t)> fun296 { [&fun296](uint32_t p_0) {
+                                                                      return p_0;
+                                                                    }
+                                                                     };
+                                                                    uint32_t id_297 { fun296(du32_fst_301) };
+                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_298 { id_297, du32_snd_302 };
+                                                                    letpair_res_295 = id_298;
+                                                                  }
+                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_299;
+                                                                  {
+                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 drec_306 { letpair_res_295 };
+                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_300;
+                                                                    {
+                                                                      auto drec_fst_307 { std::get<0>(drec_306) };
+                                                                      auto drec_snd_308 { std::get<1>(drec_306) };
+                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_301 { drec_snd_308.readU8() };
+                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_302;
+                                                                      {
+                                                                        auto du8_fst_310 { std::get<0>(id_301) };
+                                                                        auto du8_snd_311 { std::get<1>(id_301) };
+                                                                        std::function<::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982(::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982)> fun303 { [&fun303](::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 p_0) {
+                                                                          return p_0;
+                                                                        }
+                                                                         };
+                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_304 { drec_fst_307, du8_fst_310 };
+                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_305 { fun303(id_304) };
+                                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_306 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<28>, id_305) };
+                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_307 { id_306, du8_snd_311 };
+                                                                        letpair_res_302 = id_307;
+                                                                      }
+                                                                      letpair_res_300 = letpair_res_302;
+                                                                    }
+                                                                    let_res_299 = letpair_res_300;
+                                                                  }
+                                                                  choose_res_293 = let_res_299;
+                                                                } else {
+                                                                  uint16_t id_308 { 29 };
+                                                                  bool id_309 { bool(id_308 == dsum1_fst_84) };
+                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_310;
+                                                                  if (id_309) {
+                                                                    ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_311 { dsum1_snd_85.readU128Le() };
+                                                                    ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 letpair_res_312;
+                                                                    {
+                                                                      auto di128_fst_280 { std::get<0>(id_311) };
+                                                                      auto di128_snd_281 { std::get<1>(id_311) };
+                                                                      std::function<uint128_t(uint128_t)> fun313 { [&fun313](uint128_t p_0) {
+                                                                        return p_0;
+                                                                      }
+                                                                       };
+                                                                      uint128_t id_314 { fun313(di128_fst_280) };
+                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_315 { id_314, di128_snd_281 };
+                                                                      letpair_res_312 = id_315;
+                                                                    }
+                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_316;
+                                                                    {
+                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 drec_285 { letpair_res_312 };
+                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_317;
+                                                                      {
+                                                                        auto drec_fst_286 { std::get<0>(drec_285) };
+                                                                        auto drec_snd_287 { std::get<1>(drec_285) };
+                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_318 { drec_snd_287.readU8() };
+                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_319;
+                                                                        {
+                                                                          auto du8_fst_289 { std::get<0>(id_318) };
+                                                                          auto du8_snd_290 { std::get<1>(id_318) };
+                                                                          std::function<::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86(::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86)> fun320 { [&fun320](::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 p_0) {
+                                                                            return p_0;
+                                                                          }
+                                                                           };
+                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_321 { drec_fst_286, du8_fst_289 };
+                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_322 { fun320(id_321) };
+                                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_323 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<29>, id_322) };
+                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_324 { id_323, du8_snd_290 };
+                                                                          letpair_res_319 = id_324;
+                                                                        }
+                                                                        letpair_res_317 = letpair_res_319;
+                                                                      }
+                                                                      let_res_316 = letpair_res_317;
+                                                                    }
+                                                                    choose_res_310 = let_res_316;
+                                                                  } else {
+                                                                    uint16_t id_325 { 30 };
+                                                                    bool id_326 { bool(id_325 == dsum1_fst_84) };
+                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_327;
+                                                                    if (id_326) {
+                                                                      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_328 { dsum1_snd_85.readU16Le() };
+                                                                      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_329;
+                                                                      {
+                                                                        auto du16_fst_223 { std::get<0>(id_328) };
+                                                                        auto du16_snd_224 { std::get<1>(id_328) };
+                                                                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_330 { du16_fst_223, du16_snd_224 };
+                                                                        letpair_res_329 = id_330;
+                                                                      }
+                                                                      ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_331;
+                                                                      {
+                                                                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_228 { letpair_res_329 };
+                                                                        ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_332;
+                                                                        {
+                                                                          auto dsum1_fst_229 { std::get<0>(dsum1_228) };
+                                                                          auto dsum1_snd_230 { std::get<1>(dsum1_228) };
+                                                                          uint16_t id_333 { 0 };
+                                                                          bool id_334 { bool(id_333 == dsum1_fst_229) };
+                                                                          ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc choose_res_335;
+                                                                          if (id_334) {
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_336 { dsum1_snd_230.readU32Le() };
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 letpair_res_337;
+                                                                            {
+                                                                              auto du32_fst_253 { std::get<0>(id_336) };
+                                                                              auto du32_snd_254 { std::get<1>(id_336) };
+                                                                              std::function<uint32_t(uint32_t)> fun338 { [&fun338](uint32_t p_0) {
+                                                                                return p_0;
+                                                                              }
+                                                                               };
+                                                                              uint32_t id_339 { fun338(du32_fst_253) };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_340 { id_339, du32_snd_254 };
+                                                                              letpair_res_337 = id_340;
+                                                                            }
+                                                                            ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_341;
+                                                                            {
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 drec_258 { letpair_res_337 };
+                                                                              ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_342;
+                                                                              {
+                                                                                auto drec_fst_259 { std::get<0>(drec_258) };
+                                                                                auto drec_snd_260 { std::get<1>(drec_258) };
+                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_343 { drec_snd_260.readU8() };
+                                                                                ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_344;
+                                                                                {
+                                                                                  auto du8_fst_262 { std::get<0>(id_343) };
+                                                                                  auto du8_snd_263 { std::get<1>(id_343) };
+                                                                                  std::function<::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982(::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982)> fun345 { [&fun345](::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 p_0) {
+                                                                                    return p_0;
+                                                                                  }
+                                                                                   };
+                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_346 { drec_fst_259, du8_fst_262 };
+                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_347 { fun345(id_346) };
+                                                                                  ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_348 { std::in_place_index<0>, id_347 };
+                                                                                  ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_349 { id_348, du8_snd_263 };
+                                                                                  letpair_res_344 = id_349;
+                                                                                }
+                                                                                letpair_res_342 = letpair_res_344;
+                                                                              }
+                                                                              let_res_341 = letpair_res_342;
+                                                                            }
+                                                                            choose_res_335 = let_res_341;
+                                                                          } else {
+                                                                            uint16_t id_350 { 1 };
+                                                                            bool id_351 { bool(dsum1_fst_229 == id_350) };
+                                                                            Void id_352 { ((void)(assert(id_351)), ::dessser::VOID) };
+                                                                            (void)id_352;
+                                                                            ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_353 { dsum1_snd_230.readU128Le() };
+                                                                            ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 letpair_res_354;
+                                                                            {
+                                                                              auto di128_fst_232 { std::get<0>(id_353) };
+                                                                              auto di128_snd_233 { std::get<1>(id_353) };
+                                                                              std::function<uint128_t(uint128_t)> fun355 { [&fun355](uint128_t p_0) {
+                                                                                return p_0;
+                                                                              }
+                                                                               };
+                                                                              uint128_t id_356 { fun355(di128_fst_232) };
+                                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_357 { id_356, di128_snd_233 };
+                                                                              letpair_res_354 = id_357;
+                                                                            }
+                                                                            ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_358;
+                                                                            {
+                                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 drec_237 { letpair_res_354 };
+                                                                              ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_359;
+                                                                              {
+                                                                                auto drec_fst_238 { std::get<0>(drec_237) };
+                                                                                auto drec_snd_239 { std::get<1>(drec_237) };
+                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_360 { drec_snd_239.readU8() };
+                                                                                ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_361;
+                                                                                {
+                                                                                  auto du8_fst_241 { std::get<0>(id_360) };
+                                                                                  auto du8_snd_242 { std::get<1>(id_360) };
+                                                                                  std::function<::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86(::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86)> fun362 { [&fun362](::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 p_0) {
+                                                                                    return p_0;
+                                                                                  }
+                                                                                   };
+                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_363 { drec_fst_238, du8_fst_241 };
+                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_364 { fun362(id_363) };
+                                                                                  ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_365 { std::in_place_index<1>, id_364 };
+                                                                                  ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_366 { id_365, du8_snd_242 };
+                                                                                  letpair_res_361 = id_366;
+                                                                                }
+                                                                                letpair_res_359 = letpair_res_361;
+                                                                              }
+                                                                              let_res_358 = letpair_res_359;
+                                                                            }
+                                                                            choose_res_335 = let_res_358;
+                                                                          }
+                                                                          letpair_res_332 = choose_res_335;
+                                                                        }
+                                                                        let_res_331 = letpair_res_332;
+                                                                      }
+                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_367;
+                                                                      {
+                                                                        auto des_usr_type_fst_274 { std::get<0>(let_res_331) };
+                                                                        auto des_usr_type_snd_275 { std::get<1>(let_res_331) };
+                                                                        std::function<::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27(::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27)> fun368 { [&fun368](::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 p_0) {
+                                                                          return p_0;
+                                                                        }
+                                                                         };
+                                                                        ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_369 { fun368(des_usr_type_fst_274) };
+                                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_370 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<30>, id_369) };
+                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_371 { id_370, des_usr_type_snd_275 };
+                                                                        letpair_res_367 = id_371;
+                                                                      }
+                                                                      choose_res_327 = letpair_res_367;
+                                                                    } else {
+                                                                      uint16_t id_372 { 31 };
+                                                                      bool id_373 { bool(id_372 == dsum1_fst_84) };
+                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_374;
+                                                                      if (id_373) {
+                                                                        uint32_t id_375 { 0U };
+                                                                        Vec<1, uint32_t> id_376 {  id_375  };
+                                                                        ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_377;
+                                                                        {
+                                                                          Vec<1, uint32_t> leb_ref_196 { id_376 };
+                                                                          uint8_t id_378 { 0 };
+                                                                          Vec<1, uint8_t> id_379 {  id_378  };
+                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_380;
+                                                                          {
+                                                                            Vec<1, uint8_t> shft_ref_197 { id_379 };
+                                                                            Vec<1, Pointer> id_381 {  dsum1_snd_85  };
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_382;
+                                                                            {
+                                                                              Vec<1, Pointer> p_ref_198 { id_381 };
+                                                                              bool while_flag_383 { true };
+                                                                              do {
+                                                                                uint8_t id_384 { 0 };
+                                                                                Pointer id_385 { p_ref_198[id_384] };
+                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_386 { id_385.readU8() };
+                                                                                bool let_res_387;
+                                                                                {
+                                                                                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_199 { id_386 };
+                                                                                  bool letpair_res_388;
+                                                                                  {
+                                                                                    auto leb128_fst_200 { std::get<0>(leb128_199) };
+                                                                                    auto leb128_snd_201 { std::get<1>(leb128_199) };
+                                                                                    uint8_t id_389 { 0 };
+                                                                                    Void id_390 { ((void)(p_ref_198[id_389] = leb128_snd_201), ::dessser::VOID) };
+                                                                                    (void)id_390;
+                                                                                    uint8_t id_391 { 0 };
+                                                                                    uint8_t id_392 { 127 };
+                                                                                    uint8_t id_393 { uint8_t(leb128_fst_200 & id_392) };
+                                                                                    uint32_t id_394 { uint32_t(id_393) };
+                                                                                    uint8_t id_395 { 0 };
+                                                                                    uint8_t id_396 { shft_ref_197[id_395] };
+                                                                                    uint32_t id_397 { uint32_t(id_394 << id_396) };
+                                                                                    uint8_t id_398 { 0 };
+                                                                                    uint32_t id_399 { leb_ref_196[id_398] };
+                                                                                    uint32_t id_400 { uint32_t(id_397 | id_399) };
+                                                                                    Void id_401 { ((void)(leb_ref_196[id_391] = id_400), ::dessser::VOID) };
+                                                                                    (void)id_401;
+                                                                                    uint8_t id_402 { 0 };
+                                                                                    uint8_t id_403 { 0 };
+                                                                                    uint8_t id_404 { shft_ref_197[id_403] };
+                                                                                    uint8_t id_405 { 7 };
+                                                                                    uint8_t id_406 { uint8_t(id_404 + id_405) };
+                                                                                    Void id_407 { ((void)(shft_ref_197[id_402] = id_406), ::dessser::VOID) };
+                                                                                    (void)id_407;
+                                                                                    uint8_t id_408 { 128 };
+                                                                                    bool id_409 { bool(leb128_fst_200 >= id_408) };
+                                                                                    letpair_res_388 = id_409;
+                                                                                  }
+                                                                                  let_res_387 = letpair_res_388;
+                                                                                }
+                                                                                while_flag_383 = let_res_387;
+                                                                                if (while_flag_383) {
+                                                                                  (void)::dessser::VOID;
+                                                                                }
+                                                                              } while (while_flag_383);
+                                                                              (void)::dessser::VOID;
+                                                                              uint8_t id_410 { 0 };
+                                                                              uint32_t id_411 { leb_ref_196[id_410] };
+                                                                              uint8_t id_412 { 0 };
+                                                                              Pointer id_413 { p_ref_198[id_412] };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_414 { id_411, id_413 };
+                                                                              let_res_382 = id_414;
+                                                                            }
+                                                                            let_res_380 = let_res_382;
+                                                                          }
+                                                                          let_res_377 = let_res_380;
+                                                                        }
+                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_415;
+                                                                        {
+                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_205 { let_res_377 };
+                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_416;
+                                                                          {
+                                                                            auto dlist1_fst_206 { std::get<0>(dlist1_205) };
+                                                                            auto dlist1_snd_207 { std::get<1>(dlist1_205) };
+                                                                            Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_417;
+                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_418 { endoflist_417, dlist1_snd_207 };
+                                                                            Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_419 {  id_418  };
+                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_420;
+                                                                            {
+                                                                              Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_208 { id_419 };
+                                                                              int32_t id_421 { 0L };
+                                                                              Vec<1, int32_t> id_422 {  id_421  };
+                                                                              {
+                                                                                Vec<1, int32_t> repeat_n_209 { id_422 };
+                                                                                bool while_flag_423 { true };
+                                                                                do {
+                                                                                  int32_t id_424 { int32_t(dlist1_fst_206) };
+                                                                                  uint8_t id_425 { 0 };
+                                                                                  int32_t id_426 { repeat_n_209[id_425] };
+                                                                                  bool id_427 { bool(id_424 > id_426) };
+                                                                                  while_flag_423 = id_427;
+                                                                                  if (while_flag_423) {
+                                                                                    uint8_t id_428 { 0 };
+                                                                                    ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_429 { inits_src_ref_208[id_428] };
+                                                                                    {
+                                                                                      ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_210 { id_429 };
+                                                                                      {
+                                                                                        auto dlist2_fst_211 { std::get<0>(dlist2_210) };
+                                                                                        auto dlist2_snd_212 { std::get<1>(dlist2_210) };
+                                                                                        uint8_t id_430 { 0 };
+                                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_431 { fun0(dlist2_snd_212) };
+                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_432;
+                                                                                        {
+                                                                                          auto dlist3_fst_214 { std::get<0>(id_431) };
+                                                                                          auto dlist3_snd_215 { std::get<1>(id_431) };
+                                                                                          Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_433 { dlist3_fst_214, dlist2_fst_211 };
+                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_434 { id_433, dlist3_snd_215 };
+                                                                                          letpair_res_432 = id_434;
+                                                                                        }
+                                                                                        Void id_435 { ((void)(inits_src_ref_208[id_430] = letpair_res_432), ::dessser::VOID) };
+                                                                                        (void)id_435;
+                                                                                      }
+                                                                                      (void)::dessser::VOID;
+                                                                                    }
+                                                                                    (void)::dessser::VOID;
+                                                                                    uint8_t id_436 { 0 };
+                                                                                    uint8_t id_437 { 0 };
+                                                                                    int32_t id_438 { repeat_n_209[id_437] };
+                                                                                    int32_t id_439 { 1L };
+                                                                                    int32_t id_440 { int32_t(id_438 + id_439) };
+                                                                                    Void id_441 { ((void)(repeat_n_209[id_436] = id_440), ::dessser::VOID) };
+                                                                                    (void)id_441;
+                                                                                    (void)id_441;
+                                                                                  }
+                                                                                } while (while_flag_423);
+                                                                                (void)::dessser::VOID;
+                                                                              }
+                                                                              (void)::dessser::VOID;
+                                                                              uint8_t id_442 { 0 };
+                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_443 { inits_src_ref_208[id_442] };
+                                                                              let_res_420 = id_443;
+                                                                            }
+                                                                            letpair_res_416 = let_res_420;
+                                                                          }
+                                                                          let_res_415 = letpair_res_416;
+                                                                        }
+                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_444;
+                                                                        {
+                                                                          auto dlist4_fst_217 { std::get<0>(let_res_415) };
+                                                                          auto dlist4_snd_218 { std::get<1>(let_res_415) };
+                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_445 { dlist4_fst_217.toListRev() };
+                                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_446 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<31>, id_445) };
+                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_447 { id_446, dlist4_snd_218 };
+                                                                          letpair_res_444 = id_447;
+                                                                        }
+                                                                        choose_res_374 = letpair_res_444;
+                                                                      } else {
+                                                                        uint16_t id_448 { 32 };
+                                                                        bool id_449 { bool(id_448 == dsum1_fst_84) };
+                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_450;
+                                                                        if (id_449) {
+                                                                          uint32_t id_451 { 0U };
+                                                                          Vec<1, uint32_t> id_452 {  id_451  };
+                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_453;
+                                                                          {
+                                                                            Vec<1, uint32_t> leb_ref_170 { id_452 };
+                                                                            uint8_t id_454 { 0 };
+                                                                            Vec<1, uint8_t> id_455 {  id_454  };
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_456;
+                                                                            {
+                                                                              Vec<1, uint8_t> shft_ref_171 { id_455 };
+                                                                              Vec<1, Pointer> id_457 {  dsum1_snd_85  };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_458;
+                                                                              {
+                                                                                Vec<1, Pointer> p_ref_172 { id_457 };
+                                                                                bool while_flag_459 { true };
+                                                                                do {
+                                                                                  uint8_t id_460 { 0 };
+                                                                                  Pointer id_461 { p_ref_172[id_460] };
+                                                                                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_462 { id_461.readU8() };
+                                                                                  bool let_res_463;
+                                                                                  {
+                                                                                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_173 { id_462 };
+                                                                                    bool letpair_res_464;
+                                                                                    {
+                                                                                      auto leb128_fst_174 { std::get<0>(leb128_173) };
+                                                                                      auto leb128_snd_175 { std::get<1>(leb128_173) };
+                                                                                      uint8_t id_465 { 0 };
+                                                                                      Void id_466 { ((void)(p_ref_172[id_465] = leb128_snd_175), ::dessser::VOID) };
+                                                                                      (void)id_466;
+                                                                                      uint8_t id_467 { 0 };
+                                                                                      uint8_t id_468 { 127 };
+                                                                                      uint8_t id_469 { uint8_t(leb128_fst_174 & id_468) };
+                                                                                      uint32_t id_470 { uint32_t(id_469) };
+                                                                                      uint8_t id_471 { 0 };
+                                                                                      uint8_t id_472 { shft_ref_171[id_471] };
+                                                                                      uint32_t id_473 { uint32_t(id_470 << id_472) };
+                                                                                      uint8_t id_474 { 0 };
+                                                                                      uint32_t id_475 { leb_ref_170[id_474] };
+                                                                                      uint32_t id_476 { uint32_t(id_473 | id_475) };
+                                                                                      Void id_477 { ((void)(leb_ref_170[id_467] = id_476), ::dessser::VOID) };
+                                                                                      (void)id_477;
+                                                                                      uint8_t id_478 { 0 };
+                                                                                      uint8_t id_479 { 0 };
+                                                                                      uint8_t id_480 { shft_ref_171[id_479] };
+                                                                                      uint8_t id_481 { 7 };
+                                                                                      uint8_t id_482 { uint8_t(id_480 + id_481) };
+                                                                                      Void id_483 { ((void)(shft_ref_171[id_478] = id_482), ::dessser::VOID) };
+                                                                                      (void)id_483;
+                                                                                      uint8_t id_484 { 128 };
+                                                                                      bool id_485 { bool(leb128_fst_174 >= id_484) };
+                                                                                      letpair_res_464 = id_485;
+                                                                                    }
+                                                                                    let_res_463 = letpair_res_464;
+                                                                                  }
+                                                                                  while_flag_459 = let_res_463;
+                                                                                  if (while_flag_459) {
+                                                                                    (void)::dessser::VOID;
+                                                                                  }
+                                                                                } while (while_flag_459);
+                                                                                (void)::dessser::VOID;
+                                                                                uint8_t id_486 { 0 };
+                                                                                uint32_t id_487 { leb_ref_170[id_486] };
+                                                                                uint8_t id_488 { 0 };
+                                                                                Pointer id_489 { p_ref_172[id_488] };
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_490 { id_487, id_489 };
+                                                                                let_res_458 = id_490;
+                                                                              }
+                                                                              let_res_456 = let_res_458;
+                                                                            }
+                                                                            let_res_453 = let_res_456;
+                                                                          }
+                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_491;
+                                                                          {
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_179 { let_res_453 };
+                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_492;
+                                                                            {
+                                                                              auto dlist1_fst_180 { std::get<0>(dlist1_179) };
+                                                                              auto dlist1_snd_181 { std::get<1>(dlist1_179) };
+                                                                              Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_493;
+                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_494 { endoflist_493, dlist1_snd_181 };
+                                                                              Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_495 {  id_494  };
+                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_496;
+                                                                              {
+                                                                                Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_182 { id_495 };
+                                                                                int32_t id_497 { 0L };
+                                                                                Vec<1, int32_t> id_498 {  id_497  };
+                                                                                {
+                                                                                  Vec<1, int32_t> repeat_n_183 { id_498 };
+                                                                                  bool while_flag_499 { true };
+                                                                                  do {
+                                                                                    int32_t id_500 { int32_t(dlist1_fst_180) };
+                                                                                    uint8_t id_501 { 0 };
+                                                                                    int32_t id_502 { repeat_n_183[id_501] };
+                                                                                    bool id_503 { bool(id_500 > id_502) };
+                                                                                    while_flag_499 = id_503;
+                                                                                    if (while_flag_499) {
+                                                                                      uint8_t id_504 { 0 };
+                                                                                      ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_505 { inits_src_ref_182[id_504] };
+                                                                                      {
+                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_184 { id_505 };
+                                                                                        {
+                                                                                          auto dlist2_fst_185 { std::get<0>(dlist2_184) };
+                                                                                          auto dlist2_snd_186 { std::get<1>(dlist2_184) };
+                                                                                          uint8_t id_506 { 0 };
+                                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_507 { fun0(dlist2_snd_186) };
+                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_508;
+                                                                                          {
+                                                                                            auto dlist3_fst_188 { std::get<0>(id_507) };
+                                                                                            auto dlist3_snd_189 { std::get<1>(id_507) };
+                                                                                            Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_509 { dlist3_fst_188, dlist2_fst_185 };
+                                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_510 { id_509, dlist3_snd_189 };
+                                                                                            letpair_res_508 = id_510;
+                                                                                          }
+                                                                                          Void id_511 { ((void)(inits_src_ref_182[id_506] = letpair_res_508), ::dessser::VOID) };
+                                                                                          (void)id_511;
+                                                                                        }
+                                                                                        (void)::dessser::VOID;
+                                                                                      }
+                                                                                      (void)::dessser::VOID;
+                                                                                      uint8_t id_512 { 0 };
+                                                                                      uint8_t id_513 { 0 };
+                                                                                      int32_t id_514 { repeat_n_183[id_513] };
+                                                                                      int32_t id_515 { 1L };
+                                                                                      int32_t id_516 { int32_t(id_514 + id_515) };
+                                                                                      Void id_517 { ((void)(repeat_n_183[id_512] = id_516), ::dessser::VOID) };
+                                                                                      (void)id_517;
+                                                                                      (void)id_517;
+                                                                                    }
+                                                                                  } while (while_flag_499);
+                                                                                  (void)::dessser::VOID;
+                                                                                }
+                                                                                (void)::dessser::VOID;
+                                                                                uint8_t id_518 { 0 };
+                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_519 { inits_src_ref_182[id_518] };
+                                                                                let_res_496 = id_519;
+                                                                              }
+                                                                              letpair_res_492 = let_res_496;
+                                                                            }
+                                                                            let_res_491 = letpair_res_492;
+                                                                          }
+                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_520;
+                                                                          {
+                                                                            auto dlist4_fst_191 { std::get<0>(let_res_491) };
+                                                                            auto dlist4_snd_192 { std::get<1>(let_res_491) };
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_521 { dlist4_fst_191.toListRev() };
+                                                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_522 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<32>, id_521) };
+                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_523 { id_522, dlist4_snd_192 };
+                                                                            letpair_res_520 = id_523;
+                                                                          }
+                                                                          choose_res_450 = letpair_res_520;
+                                                                        } else {
+                                                                          uint16_t id_524 { 33 };
+                                                                          bool id_525 { bool(id_524 == dsum1_fst_84) };
+                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_526;
+                                                                          if (id_525) {
+                                                                            uint32_t id_527 { 0U };
+                                                                            Vec<1, uint32_t> id_528 {  id_527  };
+                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_529;
+                                                                            {
+                                                                              Vec<1, uint32_t> leb_ref_144 { id_528 };
+                                                                              uint8_t id_530 { 0 };
+                                                                              Vec<1, uint8_t> id_531 {  id_530  };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_532;
+                                                                              {
+                                                                                Vec<1, uint8_t> shft_ref_145 { id_531 };
+                                                                                Vec<1, Pointer> id_533 {  dsum1_snd_85  };
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_534;
+                                                                                {
+                                                                                  Vec<1, Pointer> p_ref_146 { id_533 };
+                                                                                  bool while_flag_535 { true };
+                                                                                  do {
+                                                                                    uint8_t id_536 { 0 };
+                                                                                    Pointer id_537 { p_ref_146[id_536] };
+                                                                                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_538 { id_537.readU8() };
+                                                                                    bool let_res_539;
+                                                                                    {
+                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_147 { id_538 };
+                                                                                      bool letpair_res_540;
+                                                                                      {
+                                                                                        auto leb128_fst_148 { std::get<0>(leb128_147) };
+                                                                                        auto leb128_snd_149 { std::get<1>(leb128_147) };
+                                                                                        uint8_t id_541 { 0 };
+                                                                                        Void id_542 { ((void)(p_ref_146[id_541] = leb128_snd_149), ::dessser::VOID) };
+                                                                                        (void)id_542;
+                                                                                        uint8_t id_543 { 0 };
+                                                                                        uint8_t id_544 { 127 };
+                                                                                        uint8_t id_545 { uint8_t(leb128_fst_148 & id_544) };
+                                                                                        uint32_t id_546 { uint32_t(id_545) };
+                                                                                        uint8_t id_547 { 0 };
+                                                                                        uint8_t id_548 { shft_ref_145[id_547] };
+                                                                                        uint32_t id_549 { uint32_t(id_546 << id_548) };
+                                                                                        uint8_t id_550 { 0 };
+                                                                                        uint32_t id_551 { leb_ref_144[id_550] };
+                                                                                        uint32_t id_552 { uint32_t(id_549 | id_551) };
+                                                                                        Void id_553 { ((void)(leb_ref_144[id_543] = id_552), ::dessser::VOID) };
+                                                                                        (void)id_553;
+                                                                                        uint8_t id_554 { 0 };
+                                                                                        uint8_t id_555 { 0 };
+                                                                                        uint8_t id_556 { shft_ref_145[id_555] };
+                                                                                        uint8_t id_557 { 7 };
+                                                                                        uint8_t id_558 { uint8_t(id_556 + id_557) };
+                                                                                        Void id_559 { ((void)(shft_ref_145[id_554] = id_558), ::dessser::VOID) };
+                                                                                        (void)id_559;
+                                                                                        uint8_t id_560 { 128 };
+                                                                                        bool id_561 { bool(leb128_fst_148 >= id_560) };
+                                                                                        letpair_res_540 = id_561;
+                                                                                      }
+                                                                                      let_res_539 = letpair_res_540;
+                                                                                    }
+                                                                                    while_flag_535 = let_res_539;
+                                                                                    if (while_flag_535) {
+                                                                                      (void)::dessser::VOID;
+                                                                                    }
+                                                                                  } while (while_flag_535);
+                                                                                  (void)::dessser::VOID;
+                                                                                  uint8_t id_562 { 0 };
+                                                                                  uint32_t id_563 { leb_ref_144[id_562] };
+                                                                                  uint8_t id_564 { 0 };
+                                                                                  Pointer id_565 { p_ref_146[id_564] };
+                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_566 { id_563, id_565 };
+                                                                                  let_res_534 = id_566;
+                                                                                }
+                                                                                let_res_532 = let_res_534;
+                                                                              }
+                                                                              let_res_529 = let_res_532;
+                                                                            }
+                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_567;
+                                                                            {
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_153 { let_res_529 };
+                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_568;
+                                                                              {
+                                                                                auto dlist1_fst_154 { std::get<0>(dlist1_153) };
+                                                                                auto dlist1_snd_155 { std::get<1>(dlist1_153) };
+                                                                                Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_569;
+                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_570 { endoflist_569, dlist1_snd_155 };
+                                                                                Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_571 {  id_570  };
+                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_572;
+                                                                                {
+                                                                                  Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_156 { id_571 };
+                                                                                  int32_t id_573 { 0L };
+                                                                                  Vec<1, int32_t> id_574 {  id_573  };
+                                                                                  {
+                                                                                    Vec<1, int32_t> repeat_n_157 { id_574 };
+                                                                                    bool while_flag_575 { true };
+                                                                                    do {
+                                                                                      int32_t id_576 { int32_t(dlist1_fst_154) };
+                                                                                      uint8_t id_577 { 0 };
+                                                                                      int32_t id_578 { repeat_n_157[id_577] };
+                                                                                      bool id_579 { bool(id_576 > id_578) };
+                                                                                      while_flag_575 = id_579;
+                                                                                      if (while_flag_575) {
+                                                                                        uint8_t id_580 { 0 };
+                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_581 { inits_src_ref_156[id_580] };
+                                                                                        {
+                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_158 { id_581 };
+                                                                                          {
+                                                                                            auto dlist2_fst_159 { std::get<0>(dlist2_158) };
+                                                                                            auto dlist2_snd_160 { std::get<1>(dlist2_158) };
+                                                                                            uint8_t id_582 { 0 };
+                                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_583 { fun0(dlist2_snd_160) };
+                                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_584;
+                                                                                            {
+                                                                                              auto dlist3_fst_162 { std::get<0>(id_583) };
+                                                                                              auto dlist3_snd_163 { std::get<1>(id_583) };
+                                                                                              Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_585 { dlist3_fst_162, dlist2_fst_159 };
+                                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_586 { id_585, dlist3_snd_163 };
+                                                                                              letpair_res_584 = id_586;
+                                                                                            }
+                                                                                            Void id_587 { ((void)(inits_src_ref_156[id_582] = letpair_res_584), ::dessser::VOID) };
+                                                                                            (void)id_587;
+                                                                                          }
+                                                                                          (void)::dessser::VOID;
+                                                                                        }
+                                                                                        (void)::dessser::VOID;
+                                                                                        uint8_t id_588 { 0 };
+                                                                                        uint8_t id_589 { 0 };
+                                                                                        int32_t id_590 { repeat_n_157[id_589] };
+                                                                                        int32_t id_591 { 1L };
+                                                                                        int32_t id_592 { int32_t(id_590 + id_591) };
+                                                                                        Void id_593 { ((void)(repeat_n_157[id_588] = id_592), ::dessser::VOID) };
+                                                                                        (void)id_593;
+                                                                                        (void)id_593;
+                                                                                      }
+                                                                                    } while (while_flag_575);
+                                                                                    (void)::dessser::VOID;
+                                                                                  }
+                                                                                  (void)::dessser::VOID;
+                                                                                  uint8_t id_594 { 0 };
+                                                                                  ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_595 { inits_src_ref_156[id_594] };
+                                                                                  let_res_572 = id_595;
+                                                                                }
+                                                                                letpair_res_568 = let_res_572;
+                                                                              }
+                                                                              let_res_567 = letpair_res_568;
+                                                                            }
+                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_596;
+                                                                            {
+                                                                              auto dlist4_fst_165 { std::get<0>(let_res_567) };
+                                                                              auto dlist4_snd_166 { std::get<1>(let_res_567) };
+                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_597 { dlist4_fst_165.toListRev() };
+                                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_598 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<33>, id_597) };
+                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_599 { id_598, dlist4_snd_166 };
+                                                                              letpair_res_596 = id_599;
+                                                                            }
+                                                                            choose_res_526 = letpair_res_596;
+                                                                          } else {
+                                                                            uint16_t id_600 { 34 };
+                                                                            bool id_601 { bool(id_600 == dsum1_fst_84) };
+                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_602;
+                                                                            if (id_601) {
+                                                                              uint32_t id_603 { 0U };
+                                                                              Vec<1, uint32_t> id_604 {  id_603  };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_605;
+                                                                              {
+                                                                                Vec<1, uint32_t> leb_ref_118 { id_604 };
+                                                                                uint8_t id_606 { 0 };
+                                                                                Vec<1, uint8_t> id_607 {  id_606  };
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_608;
+                                                                                {
+                                                                                  Vec<1, uint8_t> shft_ref_119 { id_607 };
+                                                                                  Vec<1, Pointer> id_609 {  dsum1_snd_85  };
+                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_610;
+                                                                                  {
+                                                                                    Vec<1, Pointer> p_ref_120 { id_609 };
+                                                                                    bool while_flag_611 { true };
+                                                                                    do {
+                                                                                      uint8_t id_612 { 0 };
+                                                                                      Pointer id_613 { p_ref_120[id_612] };
+                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_614 { id_613.readU8() };
+                                                                                      bool let_res_615;
+                                                                                      {
+                                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_121 { id_614 };
+                                                                                        bool letpair_res_616;
+                                                                                        {
+                                                                                          auto leb128_fst_122 { std::get<0>(leb128_121) };
+                                                                                          auto leb128_snd_123 { std::get<1>(leb128_121) };
+                                                                                          uint8_t id_617 { 0 };
+                                                                                          Void id_618 { ((void)(p_ref_120[id_617] = leb128_snd_123), ::dessser::VOID) };
+                                                                                          (void)id_618;
+                                                                                          uint8_t id_619 { 0 };
+                                                                                          uint8_t id_620 { 127 };
+                                                                                          uint8_t id_621 { uint8_t(leb128_fst_122 & id_620) };
+                                                                                          uint32_t id_622 { uint32_t(id_621) };
+                                                                                          uint8_t id_623 { 0 };
+                                                                                          uint8_t id_624 { shft_ref_119[id_623] };
+                                                                                          uint32_t id_625 { uint32_t(id_622 << id_624) };
+                                                                                          uint8_t id_626 { 0 };
+                                                                                          uint32_t id_627 { leb_ref_118[id_626] };
+                                                                                          uint32_t id_628 { uint32_t(id_625 | id_627) };
+                                                                                          Void id_629 { ((void)(leb_ref_118[id_619] = id_628), ::dessser::VOID) };
+                                                                                          (void)id_629;
+                                                                                          uint8_t id_630 { 0 };
+                                                                                          uint8_t id_631 { 0 };
+                                                                                          uint8_t id_632 { shft_ref_119[id_631] };
+                                                                                          uint8_t id_633 { 7 };
+                                                                                          uint8_t id_634 { uint8_t(id_632 + id_633) };
+                                                                                          Void id_635 { ((void)(shft_ref_119[id_630] = id_634), ::dessser::VOID) };
+                                                                                          (void)id_635;
+                                                                                          uint8_t id_636 { 128 };
+                                                                                          bool id_637 { bool(leb128_fst_122 >= id_636) };
+                                                                                          letpair_res_616 = id_637;
+                                                                                        }
+                                                                                        let_res_615 = letpair_res_616;
+                                                                                      }
+                                                                                      while_flag_611 = let_res_615;
+                                                                                      if (while_flag_611) {
+                                                                                        (void)::dessser::VOID;
+                                                                                      }
+                                                                                    } while (while_flag_611);
+                                                                                    (void)::dessser::VOID;
+                                                                                    uint8_t id_638 { 0 };
+                                                                                    uint32_t id_639 { leb_ref_118[id_638] };
+                                                                                    uint8_t id_640 { 0 };
+                                                                                    Pointer id_641 { p_ref_120[id_640] };
+                                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_642 { id_639, id_641 };
+                                                                                    let_res_610 = id_642;
+                                                                                  }
+                                                                                  let_res_608 = let_res_610;
+                                                                                }
+                                                                                let_res_605 = let_res_608;
+                                                                              }
+                                                                              ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e let_res_643;
+                                                                              {
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_127 { let_res_605 };
+                                                                                ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e letpair_res_644;
+                                                                                {
+                                                                                  auto dlist1_fst_128 { std::get<0>(dlist1_127) };
+                                                                                  auto dlist1_snd_129 { std::get<1>(dlist1_127) };
+                                                                                  Lst<std::shared_ptr<::dessser::gen::raql_value::named_value> > endoflist_645;
+                                                                                  ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e id_646 { endoflist_645, dlist1_snd_129 };
+                                                                                  Vec<1, ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e> id_647 {  id_646  };
+                                                                                  ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e let_res_648;
+                                                                                  {
+                                                                                    Vec<1, ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e> inits_src_ref_130 { id_647 };
+                                                                                    int32_t id_649 { 0L };
+                                                                                    Vec<1, int32_t> id_650 {  id_649  };
+                                                                                    {
+                                                                                      Vec<1, int32_t> repeat_n_131 { id_650 };
+                                                                                      bool while_flag_651 { true };
+                                                                                      do {
+                                                                                        int32_t id_652 { int32_t(dlist1_fst_128) };
+                                                                                        uint8_t id_653 { 0 };
+                                                                                        int32_t id_654 { repeat_n_131[id_653] };
+                                                                                        bool id_655 { bool(id_652 > id_654) };
+                                                                                        while_flag_651 = id_655;
+                                                                                        if (while_flag_651) {
+                                                                                          uint8_t id_656 { 0 };
+                                                                                          ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e id_657 { inits_src_ref_130[id_656] };
+                                                                                          {
+                                                                                            ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e dlist2_132 { id_657 };
+                                                                                            {
+                                                                                              auto dlist2_fst_133 { std::get<0>(dlist2_132) };
+                                                                                              auto dlist2_snd_134 { std::get<1>(dlist2_132) };
+                                                                                              uint8_t id_658 { 0 };
+                                                                                              ::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418 id_659 { named_value_of_row_binary(dlist2_snd_134) };
+                                                                                              ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e letpair_res_660;
+                                                                                              {
+                                                                                                auto dlist3_fst_136 { std::get<0>(id_659) };
+                                                                                                auto dlist3_snd_137 { std::get<1>(id_659) };
+                                                                                                Lst<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_661 { dlist3_fst_136, dlist2_fst_133 };
+                                                                                                ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e id_662 { id_661, dlist3_snd_137 };
+                                                                                                letpair_res_660 = id_662;
+                                                                                              }
+                                                                                              Void id_663 { ((void)(inits_src_ref_130[id_658] = letpair_res_660), ::dessser::VOID) };
+                                                                                              (void)id_663;
+                                                                                            }
+                                                                                            (void)::dessser::VOID;
+                                                                                          }
+                                                                                          (void)::dessser::VOID;
+                                                                                          uint8_t id_664 { 0 };
+                                                                                          uint8_t id_665 { 0 };
+                                                                                          int32_t id_666 { repeat_n_131[id_665] };
+                                                                                          int32_t id_667 { 1L };
+                                                                                          int32_t id_668 { int32_t(id_666 + id_667) };
+                                                                                          Void id_669 { ((void)(repeat_n_131[id_664] = id_668), ::dessser::VOID) };
+                                                                                          (void)id_669;
+                                                                                          (void)id_669;
+                                                                                        }
+                                                                                      } while (while_flag_651);
+                                                                                      (void)::dessser::VOID;
+                                                                                    }
+                                                                                    (void)::dessser::VOID;
+                                                                                    uint8_t id_670 { 0 };
+                                                                                    ::dessser::gen::raql_value::t5acf4e40a97d10bb414b149b4987167e id_671 { inits_src_ref_130[id_670] };
+                                                                                    let_res_648 = id_671;
+                                                                                  }
+                                                                                  letpair_res_644 = let_res_648;
+                                                                                }
+                                                                                let_res_643 = letpair_res_644;
+                                                                              }
+                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_672;
+                                                                              {
+                                                                                auto dlist4_fst_139 { std::get<0>(let_res_643) };
+                                                                                auto dlist4_snd_140 { std::get<1>(let_res_643) };
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_673 { dlist4_fst_139.toListRev() };
+                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_674 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<34>, id_673) };
+                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_675 { id_674, dlist4_snd_140 };
+                                                                                letpair_res_672 = id_675;
+                                                                              }
+                                                                              choose_res_602 = letpair_res_672;
+                                                                            } else {
+                                                                              uint16_t id_676 { 35 };
+                                                                              bool id_677 { bool(dsum1_fst_84 == id_676) };
+                                                                              Void id_678 { ((void)(assert(id_677)), ::dessser::VOID) };
+                                                                              (void)id_678;
+                                                                              uint32_t id_679 { 0U };
+                                                                              Vec<1, uint32_t> id_680 {  id_679  };
+                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_681;
+                                                                              {
+                                                                                Vec<1, uint32_t> leb_ref_86 { id_680 };
+                                                                                uint8_t id_682 { 0 };
+                                                                                Vec<1, uint8_t> id_683 {  id_682  };
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_684;
+                                                                                {
+                                                                                  Vec<1, uint8_t> shft_ref_87 { id_683 };
+                                                                                  Vec<1, Pointer> id_685 {  dsum1_snd_85  };
+                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_686;
+                                                                                  {
+                                                                                    Vec<1, Pointer> p_ref_88 { id_685 };
+                                                                                    bool while_flag_687 { true };
+                                                                                    do {
+                                                                                      uint8_t id_688 { 0 };
+                                                                                      Pointer id_689 { p_ref_88[id_688] };
+                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_690 { id_689.readU8() };
+                                                                                      bool let_res_691;
+                                                                                      {
+                                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_89 { id_690 };
+                                                                                        bool letpair_res_692;
+                                                                                        {
+                                                                                          auto leb128_fst_90 { std::get<0>(leb128_89) };
+                                                                                          auto leb128_snd_91 { std::get<1>(leb128_89) };
+                                                                                          uint8_t id_693 { 0 };
+                                                                                          Void id_694 { ((void)(p_ref_88[id_693] = leb128_snd_91), ::dessser::VOID) };
+                                                                                          (void)id_694;
+                                                                                          uint8_t id_695 { 0 };
+                                                                                          uint8_t id_696 { 127 };
+                                                                                          uint8_t id_697 { uint8_t(leb128_fst_90 & id_696) };
+                                                                                          uint32_t id_698 { uint32_t(id_697) };
+                                                                                          uint8_t id_699 { 0 };
+                                                                                          uint8_t id_700 { shft_ref_87[id_699] };
+                                                                                          uint32_t id_701 { uint32_t(id_698 << id_700) };
+                                                                                          uint8_t id_702 { 0 };
+                                                                                          uint32_t id_703 { leb_ref_86[id_702] };
+                                                                                          uint32_t id_704 { uint32_t(id_701 | id_703) };
+                                                                                          Void id_705 { ((void)(leb_ref_86[id_695] = id_704), ::dessser::VOID) };
+                                                                                          (void)id_705;
+                                                                                          uint8_t id_706 { 0 };
+                                                                                          uint8_t id_707 { 0 };
+                                                                                          uint8_t id_708 { shft_ref_87[id_707] };
+                                                                                          uint8_t id_709 { 7 };
+                                                                                          uint8_t id_710 { uint8_t(id_708 + id_709) };
+                                                                                          Void id_711 { ((void)(shft_ref_87[id_706] = id_710), ::dessser::VOID) };
+                                                                                          (void)id_711;
+                                                                                          uint8_t id_712 { 128 };
+                                                                                          bool id_713 { bool(leb128_fst_90 >= id_712) };
+                                                                                          letpair_res_692 = id_713;
+                                                                                        }
+                                                                                        let_res_691 = letpair_res_692;
+                                                                                      }
+                                                                                      while_flag_687 = let_res_691;
+                                                                                      if (while_flag_687) {
+                                                                                        (void)::dessser::VOID;
+                                                                                      }
+                                                                                    } while (while_flag_687);
+                                                                                    (void)::dessser::VOID;
+                                                                                    uint8_t id_714 { 0 };
+                                                                                    uint32_t id_715 { leb_ref_86[id_714] };
+                                                                                    uint8_t id_716 { 0 };
+                                                                                    Pointer id_717 { p_ref_88[id_716] };
+                                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_718 { id_715, id_717 };
+                                                                                    let_res_686 = id_718;
+                                                                                  }
+                                                                                  let_res_684 = let_res_686;
+                                                                                }
+                                                                                let_res_681 = let_res_684;
+                                                                              }
+                                                                              ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 let_res_719;
+                                                                              {
+                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_95 { let_res_681 };
+                                                                                ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_720;
+                                                                                {
+                                                                                  auto dlist1_fst_96 { std::get<0>(dlist1_95) };
+                                                                                  auto dlist1_snd_97 { std::get<1>(dlist1_95) };
+                                                                                  Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> endoflist_721;
+                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_722 { endoflist_721, dlist1_snd_97 };
+                                                                                  Vec<1, ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421> id_723 {  id_722  };
+                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 let_res_724;
+                                                                                  {
+                                                                                    Vec<1, ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421> inits_src_ref_98 { id_723 };
+                                                                                    int32_t id_725 { 0L };
+                                                                                    Vec<1, int32_t> id_726 {  id_725  };
+                                                                                    {
+                                                                                      Vec<1, int32_t> repeat_n_99 { id_726 };
+                                                                                      bool while_flag_727 { true };
+                                                                                      do {
+                                                                                        int32_t id_728 { int32_t(dlist1_fst_96) };
+                                                                                        uint8_t id_729 { 0 };
+                                                                                        int32_t id_730 { repeat_n_99[id_729] };
+                                                                                        bool id_731 { bool(id_728 > id_730) };
+                                                                                        while_flag_727 = id_731;
+                                                                                        if (while_flag_727) {
+                                                                                          uint8_t id_732 { 0 };
+                                                                                          ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_733 { inits_src_ref_98[id_732] };
+                                                                                          {
+                                                                                            ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 dlist2_100 { id_733 };
+                                                                                            {
+                                                                                              auto dlist2_fst_101 { std::get<0>(dlist2_100) };
+                                                                                              auto dlist2_snd_102 { std::get<1>(dlist2_100) };
+                                                                                              uint8_t id_734 { 0 };
+                                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_735 { fun0(dlist2_snd_102) };
+                                                                                              ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_736;
+                                                                                              {
+                                                                                                auto dtup_fst_104 { std::get<0>(id_735) };
+                                                                                                auto dtup_snd_105 { std::get<1>(id_735) };
+                                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_737 { fun0(dtup_snd_105) };
+                                                                                                ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_738;
+                                                                                                {
+                                                                                                  auto dtup_fst_107 { std::get<0>(id_737) };
+                                                                                                  auto dtup_snd_108 { std::get<1>(id_737) };
+                                                                                                  ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_739 { dtup_fst_104, dtup_fst_107 };
+                                                                                                  Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_740 { id_739, dlist2_fst_101 };
+                                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_741 { id_740, dtup_snd_108 };
+                                                                                                  letpair_res_738 = id_741;
+                                                                                                }
+                                                                                                letpair_res_736 = letpair_res_738;
+                                                                                              }
+                                                                                              Void id_742 { ((void)(inits_src_ref_98[id_734] = letpair_res_736), ::dessser::VOID) };
+                                                                                              (void)id_742;
+                                                                                            }
+                                                                                            (void)::dessser::VOID;
+                                                                                          }
+                                                                                          (void)::dessser::VOID;
+                                                                                          uint8_t id_743 { 0 };
+                                                                                          uint8_t id_744 { 0 };
+                                                                                          int32_t id_745 { repeat_n_99[id_744] };
+                                                                                          int32_t id_746 { 1L };
+                                                                                          int32_t id_747 { int32_t(id_745 + id_746) };
+                                                                                          Void id_748 { ((void)(repeat_n_99[id_743] = id_747), ::dessser::VOID) };
+                                                                                          (void)id_748;
+                                                                                          (void)id_748;
+                                                                                        }
+                                                                                      } while (while_flag_727);
+                                                                                      (void)::dessser::VOID;
+                                                                                    }
+                                                                                    (void)::dessser::VOID;
+                                                                                    uint8_t id_749 { 0 };
+                                                                                    ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_750 { inits_src_ref_98[id_749] };
+                                                                                    let_res_724 = id_750;
+                                                                                  }
+                                                                                  letpair_res_720 = let_res_724;
+                                                                                }
+                                                                                let_res_719 = letpair_res_720;
+                                                                              }
+                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_751;
+                                                                              {
+                                                                                auto dlist4_fst_113 { std::get<0>(let_res_719) };
+                                                                                auto dlist4_snd_114 { std::get<1>(let_res_719) };
+                                                                                Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_752 { dlist4_fst_113.toListRev() };
+                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_753 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<35>, id_752) };
+                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_754 { id_753, dlist4_snd_114 };
+                                                                                letpair_res_751 = id_754;
+                                                                              }
+                                                                              choose_res_602 = letpair_res_751;
+                                                                            }
+                                                                            choose_res_526 = choose_res_602;
+                                                                          }
+                                                                          choose_res_450 = choose_res_526;
+                                                                        }
+                                                                        choose_res_374 = choose_res_450;
+                                                                      }
+                                                                      choose_res_327 = choose_res_374;
+                                                                    }
+                                                                    choose_res_310 = choose_res_327;
+                                                                  }
+                                                                  choose_res_293 = choose_res_310;
+                                                                }
+                                                                choose_res_262 = choose_res_293;
+                                                              }
+                                                              choose_res_253 = choose_res_262;
+                                                            }
+                                                            choose_res_244 = choose_res_253;
+                                                          }
+                                                          choose_res_234 = choose_res_244;
+                                                        }
+                                                        choose_res_226 = choose_res_234;
+                                                      }
+                                                      choose_res_218 = choose_res_226;
+                                                    }
+                                                    choose_res_210 = choose_res_218;
+                                                  }
+                                                  choose_res_202 = choose_res_210;
+                                                }
+                                                choose_res_194 = choose_res_202;
+                                              }
+                                              choose_res_186 = choose_res_194;
+                                            }
+                                            choose_res_178 = choose_res_186;
+                                          }
+                                          choose_res_170 = choose_res_178;
+                                        }
+                                        choose_res_162 = choose_res_170;
+                                      }
+                                      choose_res_155 = choose_res_162;
+                                    }
+                                    choose_res_148 = choose_res_155;
+                                  }
+                                  choose_res_140 = choose_res_148;
+                                }
+                                choose_res_132 = choose_res_140;
+                              }
+                              choose_res_124 = choose_res_132;
+                            }
+                            choose_res_117 = choose_res_124;
+                          }
+                          choose_res_109 = choose_res_117;
+                        }
+                        choose_res_102 = choose_res_109;
+                      }
+                      choose_res_95 = choose_res_102;
+                    }
+                    choose_res_87 = choose_res_95;
+                  }
+                  choose_res_77 = choose_res_87;
+                }
+                choose_res_26 = choose_res_77;
+              }
+              choose_res_18 = choose_res_26;
+            }
+            choose_res_13 = choose_res_18;
+          }
+          choose_res_8 = choose_res_13;
+        }
+        letpair_res_5 = choose_res_8;
+      }
+      let_res_4 = letpair_res_5;
+    }
+    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_755;
+    {
+      auto make_fst_529 { std::get<0>(let_res_4) };
+      auto make_snd_530 { std::get<1>(let_res_4) };
+      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_756 { make_fst_529, make_snd_530 };
+      letpair_res_755 = id_756;
+    }
+    return letpair_res_755;
+  }
+   };
+  return fun0;
+}
+std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary(of_row_binary_init());
+
+/* 
+    (fun ("Ptr")
+      (let "dtup_68"
+        (let "dstring1_62"
+          (let "leb_ref_56" (make-vec (u32 0))
+            (let "shft_ref_57" (make-vec (u8 0))
+              (let "p_ref_58" (make-vec (param 0))
+                (seq
+                  (while
+                    (let "leb128_59" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_58")))
+                      (let-pair "leb128_fst_60" "leb128_snd_61" (identifier "leb128_59")
+                        (seq (set-vec (u8 0) (identifier "p_ref_58") (identifier "leb128_snd_61"))
+                          (set-vec (u8 0) (identifier "leb_ref_56")
+                            (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_60") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_57"))) (unsafe-nth (u8 0) (identifier "leb_ref_56"))))
+                          (set-vec (u8 0) (identifier "shft_ref_57") (add (unsafe-nth (u8 0) (identifier "shft_ref_57")) (u8 7))) 
+                          (ge (identifier "leb128_fst_60") (u8 128))))) 
+                    (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_56"))) (unsafe-nth (u8 0) (identifier "p_ref_58")))))))
+          (let-pair "dstring1_fst_63" "dstring1_snd_64" (identifier "dstring1_62")
+            (let-pair "dstring2_fst_66" "dstring2_snd_67" (read-bytes (identifier "dstring1_snd_64") (identifier "dstring1_fst_63")) (make-tup (string-of-bytes (identifier "dstring2_fst_66")) (identifier "dstring2_snd_67")))))
+        (let-pair "dtup_fst_69" "dtup_snd_70" (identifier "dtup_68")
+          (let-pair "dtup_fst_72" "dtup_snd_73" (apply (identifier "of-row-binary") (identifier "dtup_snd_70")) (make-tup (make-tup (identifier "dtup_fst_69") (identifier "dtup_fst_72")) (identifier "dtup_snd_73"))))))
+ */
+static std::function<::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418(Pointer)> named_value_of_row_binary_init()
+{
+  std::function<::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418(Pointer)> fun757 { [&fun757](Pointer p_0) {
+    uint32_t id_758 { 0U };
+    Vec<1, uint32_t> id_759 {  id_758  };
+    ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_760;
+    {
+      Vec<1, uint32_t> leb_ref_56 { id_759 };
+      uint8_t id_761 { 0 };
+      Vec<1, uint8_t> id_762 {  id_761  };
+      ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_763;
+      {
+        Vec<1, uint8_t> shft_ref_57 { id_762 };
+        Vec<1, Pointer> id_764 {  p_0  };
+        ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_765;
+        {
+          Vec<1, Pointer> p_ref_58 { id_764 };
+          bool while_flag_766 { true };
+          do {
+            uint8_t id_767 { 0 };
+            Pointer id_768 { p_ref_58[id_767] };
+            ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_769 { id_768.readU8() };
+            bool let_res_770;
+            {
+              ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_59 { id_769 };
+              bool letpair_res_771;
+              {
+                auto leb128_fst_60 { std::get<0>(leb128_59) };
+                auto leb128_snd_61 { std::get<1>(leb128_59) };
+                uint8_t id_772 { 0 };
+                Void id_773 { ((void)(p_ref_58[id_772] = leb128_snd_61), ::dessser::VOID) };
+                (void)id_773;
+                uint8_t id_774 { 0 };
+                uint8_t id_775 { 127 };
+                uint8_t id_776 { uint8_t(leb128_fst_60 & id_775) };
+                uint32_t id_777 { uint32_t(id_776) };
+                uint8_t id_778 { 0 };
+                uint8_t id_779 { shft_ref_57[id_778] };
+                uint32_t id_780 { uint32_t(id_777 << id_779) };
+                uint8_t id_781 { 0 };
+                uint32_t id_782 { leb_ref_56[id_781] };
+                uint32_t id_783 { uint32_t(id_780 | id_782) };
+                Void id_784 { ((void)(leb_ref_56[id_774] = id_783), ::dessser::VOID) };
+                (void)id_784;
+                uint8_t id_785 { 0 };
+                uint8_t id_786 { 0 };
+                uint8_t id_787 { shft_ref_57[id_786] };
+                uint8_t id_788 { 7 };
+                uint8_t id_789 { uint8_t(id_787 + id_788) };
+                Void id_790 { ((void)(shft_ref_57[id_785] = id_789), ::dessser::VOID) };
+                (void)id_790;
+                uint8_t id_791 { 128 };
+                bool id_792 { bool(leb128_fst_60 >= id_791) };
+                letpair_res_771 = id_792;
+              }
+              let_res_770 = letpair_res_771;
+            }
+            while_flag_766 = let_res_770;
+            if (while_flag_766) {
+              (void)::dessser::VOID;
+            }
+          } while (while_flag_766);
+          (void)::dessser::VOID;
+          uint8_t id_793 { 0 };
+          uint32_t id_794 { leb_ref_56[id_793] };
+          Size id_795 { Size(id_794) };
+          uint8_t id_796 { 0 };
+          Pointer id_797 { p_ref_58[id_796] };
+          ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 id_798 { id_795, id_797 };
+          let_res_765 = id_798;
+        }
+        let_res_763 = let_res_765;
+      }
+      let_res_760 = let_res_763;
+    }
+    ::dessser::gen::raql_value::t3fd8221434e489b54b5c4356ebff5005 let_res_799;
+    {
+      ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 dstring1_62 { let_res_760 };
+      ::dessser::gen::raql_value::t3fd8221434e489b54b5c4356ebff5005 letpair_res_800;
+      {
+        auto dstring1_fst_63 { std::get<0>(dstring1_62) };
+        auto dstring1_snd_64 { std::get<1>(dstring1_62) };
+        ::dessser::gen::raql_value::t5887709cc43c8c8e24d28211e8c970a2 id_801 { dstring1_snd_64.readBytes(dstring1_fst_63) };
+        ::dessser::gen::raql_value::t3fd8221434e489b54b5c4356ebff5005 letpair_res_802;
+        {
+          auto dstring2_fst_66 { std::get<0>(id_801) };
+          auto dstring2_snd_67 { std::get<1>(id_801) };
+          std::string id_803 { dstring2_fst_66.toString() };
+          ::dessser::gen::raql_value::t3fd8221434e489b54b5c4356ebff5005 id_804 { id_803, dstring2_snd_67 };
+          letpair_res_802 = id_804;
+        }
+        letpair_res_800 = letpair_res_802;
+      }
+      let_res_799 = letpair_res_800;
+    }
+    ::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418 let_res_805;
+    {
+      ::dessser::gen::raql_value::t3fd8221434e489b54b5c4356ebff5005 dtup_68 { let_res_799 };
+      ::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418 letpair_res_806;
+      {
+        auto dtup_fst_69 { std::get<0>(dtup_68) };
+        auto dtup_snd_70 { std::get<1>(dtup_68) };
+        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_807 { of_row_binary(dtup_snd_70) };
+        ::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418 letpair_res_808;
+        {
+          auto dtup_fst_72 { std::get<0>(id_807) };
+          auto dtup_snd_73 { std::get<1>(id_807) };
+          std::shared_ptr<::dessser::gen::raql_value::named_value>  id_809 { std::make_shared<::dessser::gen::raql_value::named_value>(dtup_fst_69, dtup_fst_72) };
+          ::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418 id_810 { id_809, dtup_snd_73 };
+          letpair_res_808 = id_810;
+        }
+        letpair_res_806 = letpair_res_808;
+      }
+      let_res_805 = letpair_res_806;
+    }
+    return let_res_805;
+  }
+   };
+  return fun757;
+}
+std::function<::dessser::gen::raql_value::t0c870624fb83311f54db2c065f542418(Pointer)> named_value_of_row_binary(named_value_of_row_binary_init());
+
+/* 
+    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]")
+      (let "label2_536" (label-of (param 0))
+        (if (eq (u16 0) (identifier "label2_536")) (size 2)
+          (if (eq (u16 1) (identifier "label2_536")) (size 2)
+            (if (eq (u16 2) (identifier "label2_536")) (size 10)
+              (if (eq (u16 3) (identifier "label2_536"))
+                (add (size 2)
+                  (add
+                    (let "n_ref_570" (make-vec (string-length (get-alt "VString" (param 0))))
+                      (let "lebsz_ref_571" (make-vec (u32 1))
+                        (seq
+                          (while (ge (unsafe-nth (u8 0) (identifier "n_ref_570")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_571")) (u8 7)))
+                            (set-vec (u8 0) (identifier "lebsz_ref_571") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_571")) (u32 1)))) 
+                          (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_571")))))) 
+                    (size-of-u32 (string-length (get-alt "VString" (param 0))))))
+                (if (eq (u16 4) (identifier "label2_536")) (size 3)
+                  (if (eq (u16 5) (identifier "label2_536")) (size 3)
+                    (if (eq (u16 6) (identifier "label2_536")) (size 3)
+                      (if (eq (u16 7) (identifier "label2_536")) (size 4)
+                        (if (eq (u16 8) (identifier "label2_536")) (size 6)
+                          (if (eq (u16 9) (identifier "label2_536")) 
+                            (size 6)
+                            (if (eq (u16 10) (identifier "label2_536")) 
+                              (size 10)
+                              (if (eq (u16 11) (identifier "label2_536")) 
+                                (size 10)
+                                (if (eq (u16 12) (identifier "label2_536")) 
+                                  (size 10)
+                                  (if (eq (u16 13) (identifier "label2_536")) 
+                                    (size 10)
+                                    (if (eq (u16 14) (identifier "label2_536")) 
+                                      (size 18)
+                                      (if (eq (u16 15) (identifier "label2_536")) 
+                                        (size 3)
+                                        (if (eq (u16 16) (identifier "label2_536")) 
+                                          (size 4)
+                                          (if (eq (u16 17) (identifier "label2_536")) 
+                                            (size 6)
+                                            (if (eq (u16 18) (identifier "label2_536")) 
+                                              (size 6)
+                                              (if (eq (u16 19) (identifier "label2_536")) 
+                                                (size 10)
+                                                (if (eq (u16 20) (identifier "label2_536")) 
+                                                  (size 10)
+                                                  (if (eq (u16 21) (identifier "label2_536")) 
+                                                    (size 10)
+                                                    (if (eq (u16 22) (identifier "label2_536")) 
+                                                      (size 10)
+                                                      (if (eq (u16 23) (identifier "label2_536")) 
+                                                        (size 18)
+                                                        (if (eq (u16 24) (identifier "label2_536")) 
+                                                          (size 10)
+                                                          (if (eq (u16 25) (identifier "label2_536")) 
+                                                            (size 6)
+                                                            (if (eq (u16 26) (identifier "label2_536")) 
+                                                              (size 18)
+                                                              (if (eq (u16 27) (identifier "label2_536"))
+                                                                (if (eq (u16 0) (label-of (get-alt "VIp" (param 0)))) (size 8) (seq (assert (eq (label-of (get-alt "VIp" (param 0))) (u16 1))) (size 20)))
+                                                                (if (eq (u16 28) (identifier "label2_536")) 
+                                                                  (size 7)
+                                                                  (if 
+                                                                    (eq (u16 29) (identifier "label2_536")) 
+                                                                    (size 19)
+                                                                    (if 
+                                                                    (eq (u16 30) (identifier "label2_536"))
+                                                                    (if (eq (u16 0) (label-of (get-alt "VCidr" (param 0)))) (size 9) (seq (assert (eq (label-of (get-alt "VCidr" (param 0))) (u16 1))) (size 21)))
+                                                                    (if 
+                                                                    (eq (u16 31) (identifier "label2_536"))
+                                                                    (let "sz_ref_557"
+                                                                    (make-vec
+                                                                    (add 
+                                                                    (size 2)
+                                                                    (let "n_ref_555" 
+                                                                    (make-vec (cardinality (get-alt "VTup" (param 0))))
+                                                                    (let "lebsz_ref_556" 
+                                                                    (make-vec (u32 1))
+                                                                    (seq
+                                                                    (while 
+                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_555")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_556")) (u8 7)))
+                                                                    (set-vec (u8 0) (identifier "lebsz_ref_556") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_556")) (u32 1))))
+                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_556"))))))))
+                                                                    (seq
+                                                                    (let "repeat_n_558" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (cardinality (get-alt "VTup" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_558")))
+                                                                    (seq
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "sz_ref_557")
+                                                                    (add 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_557")) 
+                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_558")) (get-alt "VTup" (param 0))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_558") (add (unsafe-nth (u8 0) (identifier "repeat_n_558")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_557"))))
+                                                                    (if 
+                                                                    (eq (u16 32) (identifier "label2_536"))
+                                                                    (let "sz_ref_553"
+                                                                    (make-vec
+                                                                    (add 
+                                                                    (size 2)
+                                                                    (let "n_ref_551" 
+                                                                    (make-vec (cardinality (get-alt "VVec" (param 0))))
+                                                                    (let "lebsz_ref_552" 
+                                                                    (make-vec (u32 1))
+                                                                    (seq
+                                                                    (while 
+                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_551")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_552")) (u8 7)))
+                                                                    (set-vec (u8 0) (identifier "lebsz_ref_552") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_552")) (u32 1))))
+                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_552"))))))))
+                                                                    (seq
+                                                                    (let "repeat_n_554" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (cardinality (get-alt "VVec" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_554")))
+                                                                    (seq
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "sz_ref_553")
+                                                                    (add 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_553")) 
+                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_554")) (get-alt "VVec" (param 0))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_554") (add (unsafe-nth (u8 0) (identifier "repeat_n_554")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_553"))))
+                                                                    (if 
+                                                                    (eq (u16 33) (identifier "label2_536"))
+                                                                    (let "sz_ref_549"
+                                                                    (make-vec
+                                                                    (add 
+                                                                    (size 2)
+                                                                    (let "n_ref_547" 
+                                                                    (make-vec (cardinality (get-alt "VArr" (param 0))))
+                                                                    (let "lebsz_ref_548" 
+                                                                    (make-vec (u32 1))
+                                                                    (seq
+                                                                    (while 
+                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_547")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_548")) (u8 7)))
+                                                                    (set-vec (u8 0) (identifier "lebsz_ref_548") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_548")) (u32 1))))
+                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_548"))))))))
+                                                                    (seq
+                                                                    (let "repeat_n_550" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (cardinality (get-alt "VArr" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_550")))
+                                                                    (seq
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "sz_ref_549")
+                                                                    (add 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_549")) 
+                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_550")) (get-alt "VArr" (param 0))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_550") (add (unsafe-nth (u8 0) (identifier "repeat_n_550")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_549"))))
+                                                                    (if 
+                                                                    (eq (u16 34) (identifier "label2_536"))
+                                                                    (let "sz_ref_545"
+                                                                    (make-vec
+                                                                    (add 
+                                                                    (size 2)
+                                                                    (let "n_ref_543" 
+                                                                    (make-vec (cardinality (get-alt "VRec" (param 0))))
+                                                                    (let "lebsz_ref_544" 
+                                                                    (make-vec (u32 1))
+                                                                    (seq
+                                                                    (while 
+                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_543")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_544")) (u8 7)))
+                                                                    (set-vec (u8 0) (identifier "lebsz_ref_544") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_544")) (u32 1))))
+                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_544"))))))))
+                                                                    (seq
+                                                                    (let "repeat_n_546" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (cardinality (get-alt "VRec" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_546")))
+                                                                    (seq
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "sz_ref_545")
+                                                                    (add 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_545"))
+                                                                    (apply (identifier "named_value-sersize-of-row-binary") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_546")) (get-alt "VRec" (param 0))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_546") (add (unsafe-nth (u8 0) (identifier "repeat_n_546")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_545"))))
+                                                                    (seq 
+                                                                    (assert (eq (identifier "label2_536") (u16 35)))
+                                                                    (let "sz_ref_539"
+                                                                    (make-vec
+                                                                    (add 
+                                                                    (size 2)
+                                                                    (let "n_ref_537" 
+                                                                    (make-vec (cardinality (get-alt "VMap" (param 0))))
+                                                                    (let "lebsz_ref_538" 
+                                                                    (make-vec (u32 1))
+                                                                    (seq
+                                                                    (while 
+                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_537")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_538")) (u8 7)))
+                                                                    (set-vec (u8 0) (identifier "lebsz_ref_538") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_538")) (u32 1))))
+                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_538"))))))))
+                                                                    (seq
+                                                                    (let "repeat_n_540" 
+                                                                    (make-vec (i32 0))
+                                                                    (while 
+                                                                    (gt (to-i32 (cardinality (get-alt "VMap" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_540")))
+                                                                    (seq
+                                                                    (set-vec 
+                                                                    (u8 0) 
+                                                                    (identifier "sz_ref_539")
+                                                                    (add
+                                                                    (add 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_539"))
+                                                                    (apply (myself "Size") (get-item 0 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_540")) (get-alt "VMap" (param 0))))))
+                                                                    (apply (myself "Size") (get-item 1 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_540")) (get-alt "VMap" (param 0)))))))
+                                                                    (set-vec (u8 0) (identifier "repeat_n_540") (add (unsafe-nth (u8 0) (identifier "repeat_n_540")) (i32 1)))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_539"))))))))))))))))))))))))))))))))))))))))))
+ */
+static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary_init()
+{
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> fun811 { [&fun811](std::shared_ptr<::dessser::gen::raql_value::t>  p_0) {
+    uint16_t id_812 { uint16_t((*p_0).index()) };
+    Size let_res_813;
+    {
+      uint16_t label2_536 { id_812 };
+      uint16_t id_814 { 0 };
+      bool id_815 { bool(id_814 == label2_536) };
+      Size choose_res_816;
+      if (id_815) {
+        Size id_817 { 2UL };
+        choose_res_816 = id_817;
+      } else {
+        uint16_t id_818 { 1 };
+        bool id_819 { bool(id_818 == label2_536) };
+        Size choose_res_820;
+        if (id_819) {
+          Size id_821 { 2UL };
+          choose_res_820 = id_821;
+        } else {
+          uint16_t id_822 { 2 };
+          bool id_823 { bool(id_822 == label2_536) };
+          Size choose_res_824;
+          if (id_823) {
+            Size id_825 { 10UL };
+            choose_res_824 = id_825;
+          } else {
+            uint16_t id_826 { 3 };
+            bool id_827 { bool(id_826 == label2_536) };
+            Size choose_res_828;
+            if (id_827) {
+              Size id_829 { 2UL };
+              std::string id_830 { std::get<3 /* VString */>((*p_0)) };
+              uint32_t id_831 { (uint32_t)id_830.size() };
+              Vec<1, uint32_t> id_832 {  id_831  };
+              Size let_res_833;
+              {
+                Vec<1, uint32_t> n_ref_570 { id_832 };
+                uint32_t id_834 { 1U };
+                Vec<1, uint32_t> id_835 {  id_834  };
+                Size let_res_836;
+                {
+                  Vec<1, uint32_t> lebsz_ref_571 { id_835 };
+                  bool while_flag_837 { true };
+                  do {
+                    uint8_t id_838 { 0 };
+                    uint32_t id_839 { n_ref_570[id_838] };
+                    uint8_t id_840 { 0 };
+                    uint32_t id_841 { lebsz_ref_571[id_840] };
+                    uint8_t id_842 { 7 };
+                    uint32_t id_843 { uint32_t(id_841 << id_842) };
+                    bool id_844 { bool(id_839 >= id_843) };
+                    while_flag_837 = id_844;
+                    if (while_flag_837) {
+                      uint8_t id_845 { 0 };
+                      uint8_t id_846 { 0 };
+                      uint32_t id_847 { lebsz_ref_571[id_846] };
+                      uint32_t id_848 { 1U };
+                      uint32_t id_849 { uint32_t(id_847 + id_848) };
+                      Void id_850 { ((void)(lebsz_ref_571[id_845] = id_849), ::dessser::VOID) };
+                      (void)id_850;
+                    }
+                  } while (while_flag_837);
+                  (void)::dessser::VOID;
+                  uint8_t id_851 { 0 };
+                  uint32_t id_852 { lebsz_ref_571[id_851] };
+                  Size id_853 { Size(id_852) };
+                  let_res_836 = id_853;
+                }
+                let_res_833 = let_res_836;
+              }
+              std::string id_854 { std::get<3 /* VString */>((*p_0)) };
+              uint32_t id_855 { (uint32_t)id_854.size() };
+              Size id_856 { Size(id_855) };
+              Size id_857 { Size(let_res_833 + id_856) };
+              Size id_858 { Size(id_829 + id_857) };
+              choose_res_828 = id_858;
+            } else {
+              uint16_t id_859 { 4 };
+              bool id_860 { bool(id_859 == label2_536) };
+              Size choose_res_861;
+              if (id_860) {
+                Size id_862 { 3UL };
+                choose_res_861 = id_862;
+              } else {
+                uint16_t id_863 { 5 };
+                bool id_864 { bool(id_863 == label2_536) };
+                Size choose_res_865;
+                if (id_864) {
+                  Size id_866 { 3UL };
+                  choose_res_865 = id_866;
+                } else {
+                  uint16_t id_867 { 6 };
+                  bool id_868 { bool(id_867 == label2_536) };
+                  Size choose_res_869;
+                  if (id_868) {
+                    Size id_870 { 3UL };
+                    choose_res_869 = id_870;
+                  } else {
+                    uint16_t id_871 { 7 };
+                    bool id_872 { bool(id_871 == label2_536) };
+                    Size choose_res_873;
+                    if (id_872) {
+                      Size id_874 { 4UL };
+                      choose_res_873 = id_874;
+                    } else {
+                      uint16_t id_875 { 8 };
+                      bool id_876 { bool(id_875 == label2_536) };
+                      Size choose_res_877;
+                      if (id_876) {
+                        Size id_878 { 6UL };
+                        choose_res_877 = id_878;
+                      } else {
+                        uint16_t id_879 { 9 };
+                        bool id_880 { bool(id_879 == label2_536) };
+                        Size choose_res_881;
+                        if (id_880) {
+                          Size id_882 { 6UL };
+                          choose_res_881 = id_882;
+                        } else {
+                          uint16_t id_883 { 10 };
+                          bool id_884 { bool(id_883 == label2_536) };
+                          Size choose_res_885;
+                          if (id_884) {
+                            Size id_886 { 10UL };
+                            choose_res_885 = id_886;
+                          } else {
+                            uint16_t id_887 { 11 };
+                            bool id_888 { bool(id_887 == label2_536) };
+                            Size choose_res_889;
+                            if (id_888) {
+                              Size id_890 { 10UL };
+                              choose_res_889 = id_890;
+                            } else {
+                              uint16_t id_891 { 12 };
+                              bool id_892 { bool(id_891 == label2_536) };
+                              Size choose_res_893;
+                              if (id_892) {
+                                Size id_894 { 10UL };
+                                choose_res_893 = id_894;
+                              } else {
+                                uint16_t id_895 { 13 };
+                                bool id_896 { bool(id_895 == label2_536) };
+                                Size choose_res_897;
+                                if (id_896) {
+                                  Size id_898 { 10UL };
+                                  choose_res_897 = id_898;
+                                } else {
+                                  uint16_t id_899 { 14 };
+                                  bool id_900 { bool(id_899 == label2_536) };
+                                  Size choose_res_901;
+                                  if (id_900) {
+                                    Size id_902 { 18UL };
+                                    choose_res_901 = id_902;
+                                  } else {
+                                    uint16_t id_903 { 15 };
+                                    bool id_904 { bool(id_903 == label2_536) };
+                                    Size choose_res_905;
+                                    if (id_904) {
+                                      Size id_906 { 3UL };
+                                      choose_res_905 = id_906;
+                                    } else {
+                                      uint16_t id_907 { 16 };
+                                      bool id_908 { bool(id_907 == label2_536) };
+                                      Size choose_res_909;
+                                      if (id_908) {
+                                        Size id_910 { 4UL };
+                                        choose_res_909 = id_910;
+                                      } else {
+                                        uint16_t id_911 { 17 };
+                                        bool id_912 { bool(id_911 == label2_536) };
+                                        Size choose_res_913;
+                                        if (id_912) {
+                                          Size id_914 { 6UL };
+                                          choose_res_913 = id_914;
+                                        } else {
+                                          uint16_t id_915 { 18 };
+                                          bool id_916 { bool(id_915 == label2_536) };
+                                          Size choose_res_917;
+                                          if (id_916) {
+                                            Size id_918 { 6UL };
+                                            choose_res_917 = id_918;
+                                          } else {
+                                            uint16_t id_919 { 19 };
+                                            bool id_920 { bool(id_919 == label2_536) };
+                                            Size choose_res_921;
+                                            if (id_920) {
+                                              Size id_922 { 10UL };
+                                              choose_res_921 = id_922;
+                                            } else {
+                                              uint16_t id_923 { 20 };
+                                              bool id_924 { bool(id_923 == label2_536) };
+                                              Size choose_res_925;
+                                              if (id_924) {
+                                                Size id_926 { 10UL };
+                                                choose_res_925 = id_926;
+                                              } else {
+                                                uint16_t id_927 { 21 };
+                                                bool id_928 { bool(id_927 == label2_536) };
+                                                Size choose_res_929;
+                                                if (id_928) {
+                                                  Size id_930 { 10UL };
+                                                  choose_res_929 = id_930;
+                                                } else {
+                                                  uint16_t id_931 { 22 };
+                                                  bool id_932 { bool(id_931 == label2_536) };
+                                                  Size choose_res_933;
+                                                  if (id_932) {
+                                                    Size id_934 { 10UL };
+                                                    choose_res_933 = id_934;
+                                                  } else {
+                                                    uint16_t id_935 { 23 };
+                                                    bool id_936 { bool(id_935 == label2_536) };
+                                                    Size choose_res_937;
+                                                    if (id_936) {
+                                                      Size id_938 { 18UL };
+                                                      choose_res_937 = id_938;
+                                                    } else {
+                                                      uint16_t id_939 { 24 };
+                                                      bool id_940 { bool(id_939 == label2_536) };
+                                                      Size choose_res_941;
+                                                      if (id_940) {
+                                                        Size id_942 { 10UL };
+                                                        choose_res_941 = id_942;
+                                                      } else {
+                                                        uint16_t id_943 { 25 };
+                                                        bool id_944 { bool(id_943 == label2_536) };
+                                                        Size choose_res_945;
+                                                        if (id_944) {
+                                                          Size id_946 { 6UL };
+                                                          choose_res_945 = id_946;
+                                                        } else {
+                                                          uint16_t id_947 { 26 };
+                                                          bool id_948 { bool(id_947 == label2_536) };
+                                                          Size choose_res_949;
+                                                          if (id_948) {
+                                                            Size id_950 { 18UL };
+                                                            choose_res_949 = id_950;
+                                                          } else {
+                                                            uint16_t id_951 { 27 };
+                                                            bool id_952 { bool(id_951 == label2_536) };
+                                                            Size choose_res_953;
+                                                            if (id_952) {
+                                                              uint16_t id_954 { 0 };
+                                                              ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_955 { std::get<27 /* VIp */>((*p_0)) };
+                                                              uint16_t id_956 { uint16_t(id_955.index()) };
+                                                              bool id_957 { bool(id_954 == id_956) };
+                                                              Size choose_res_958;
+                                                              if (id_957) {
+                                                                Size id_959 { 8UL };
+                                                                choose_res_958 = id_959;
+                                                              } else {
+                                                                ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_960 { std::get<27 /* VIp */>((*p_0)) };
+                                                                uint16_t id_961 { uint16_t(id_960.index()) };
+                                                                uint16_t id_962 { 1 };
+                                                                bool id_963 { bool(id_961 == id_962) };
+                                                                Void id_964 { ((void)(assert(id_963)), ::dessser::VOID) };
+                                                                (void)id_964;
+                                                                Size id_965 { 20UL };
+                                                                choose_res_958 = id_965;
+                                                              }
+                                                              choose_res_953 = choose_res_958;
+                                                            } else {
+                                                              uint16_t id_966 { 28 };
+                                                              bool id_967 { bool(id_966 == label2_536) };
+                                                              Size choose_res_968;
+                                                              if (id_967) {
+                                                                Size id_969 { 7UL };
+                                                                choose_res_968 = id_969;
+                                                              } else {
+                                                                uint16_t id_970 { 29 };
+                                                                bool id_971 { bool(id_970 == label2_536) };
+                                                                Size choose_res_972;
+                                                                if (id_971) {
+                                                                  Size id_973 { 19UL };
+                                                                  choose_res_972 = id_973;
+                                                                } else {
+                                                                  uint16_t id_974 { 30 };
+                                                                  bool id_975 { bool(id_974 == label2_536) };
+                                                                  Size choose_res_976;
+                                                                  if (id_975) {
+                                                                    uint16_t id_977 { 0 };
+                                                                    ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_978 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                    uint16_t id_979 { uint16_t(id_978.index()) };
+                                                                    bool id_980 { bool(id_977 == id_979) };
+                                                                    Size choose_res_981;
+                                                                    if (id_980) {
+                                                                      Size id_982 { 9UL };
+                                                                      choose_res_981 = id_982;
+                                                                    } else {
+                                                                      ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_983 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                      uint16_t id_984 { uint16_t(id_983.index()) };
+                                                                      uint16_t id_985 { 1 };
+                                                                      bool id_986 { bool(id_984 == id_985) };
+                                                                      Void id_987 { ((void)(assert(id_986)), ::dessser::VOID) };
+                                                                      (void)id_987;
+                                                                      Size id_988 { 21UL };
+                                                                      choose_res_981 = id_988;
+                                                                    }
+                                                                    choose_res_976 = choose_res_981;
+                                                                  } else {
+                                                                    uint16_t id_989 { 31 };
+                                                                    bool id_990 { bool(id_989 == label2_536) };
+                                                                    Size choose_res_991;
+                                                                    if (id_990) {
+                                                                      Size id_992 { 2UL };
+                                                                      Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_993 { std::get<31 /* VTup */>((*p_0)) };
+                                                                      uint32_t id_994 { id_993.size() };
+                                                                      Vec<1, uint32_t> id_995 {  id_994  };
+                                                                      Size let_res_996;
+                                                                      {
+                                                                        Vec<1, uint32_t> n_ref_555 { id_995 };
+                                                                        uint32_t id_997 { 1U };
+                                                                        Vec<1, uint32_t> id_998 {  id_997  };
+                                                                        Size let_res_999;
+                                                                        {
+                                                                          Vec<1, uint32_t> lebsz_ref_556 { id_998 };
+                                                                          bool while_flag_1000 { true };
+                                                                          do {
+                                                                            uint8_t id_1001 { 0 };
+                                                                            uint32_t id_1002 { n_ref_555[id_1001] };
+                                                                            uint8_t id_1003 { 0 };
+                                                                            uint32_t id_1004 { lebsz_ref_556[id_1003] };
+                                                                            uint8_t id_1005 { 7 };
+                                                                            uint32_t id_1006 { uint32_t(id_1004 << id_1005) };
+                                                                            bool id_1007 { bool(id_1002 >= id_1006) };
+                                                                            while_flag_1000 = id_1007;
+                                                                            if (while_flag_1000) {
+                                                                              uint8_t id_1008 { 0 };
+                                                                              uint8_t id_1009 { 0 };
+                                                                              uint32_t id_1010 { lebsz_ref_556[id_1009] };
+                                                                              uint32_t id_1011 { 1U };
+                                                                              uint32_t id_1012 { uint32_t(id_1010 + id_1011) };
+                                                                              Void id_1013 { ((void)(lebsz_ref_556[id_1008] = id_1012), ::dessser::VOID) };
+                                                                              (void)id_1013;
+                                                                            }
+                                                                          } while (while_flag_1000);
+                                                                          (void)::dessser::VOID;
+                                                                          uint8_t id_1014 { 0 };
+                                                                          uint32_t id_1015 { lebsz_ref_556[id_1014] };
+                                                                          Size id_1016 { Size(id_1015) };
+                                                                          let_res_999 = id_1016;
+                                                                        }
+                                                                        let_res_996 = let_res_999;
+                                                                      }
+                                                                      Size id_1017 { Size(id_992 + let_res_996) };
+                                                                      Vec<1, Size> id_1018 {  id_1017  };
+                                                                      Size let_res_1019;
+                                                                      {
+                                                                        Vec<1, Size> sz_ref_557 { id_1018 };
+                                                                        int32_t id_1020 { 0L };
+                                                                        Vec<1, int32_t> id_1021 {  id_1020  };
+                                                                        {
+                                                                          Vec<1, int32_t> repeat_n_558 { id_1021 };
+                                                                          bool while_flag_1022 { true };
+                                                                          do {
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1023 { std::get<31 /* VTup */>((*p_0)) };
+                                                                            uint32_t id_1024 { id_1023.size() };
+                                                                            int32_t id_1025 { int32_t(id_1024) };
+                                                                            uint8_t id_1026 { 0 };
+                                                                            int32_t id_1027 { repeat_n_558[id_1026] };
+                                                                            bool id_1028 { bool(id_1025 > id_1027) };
+                                                                            while_flag_1022 = id_1028;
+                                                                            if (while_flag_1022) {
+                                                                              uint8_t id_1029 { 0 };
+                                                                              uint8_t id_1030 { 0 };
+                                                                              Size id_1031 { sz_ref_557[id_1030] };
+                                                                              uint8_t id_1032 { 0 };
+                                                                              int32_t id_1033 { repeat_n_558[id_1032] };
+                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1034 { std::get<31 /* VTup */>((*p_0)) };
+                                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_1035 { id_1034[id_1033] };
+                                                                              Size id_1036 { fun811(id_1035) };
+                                                                              Size id_1037 { Size(id_1031 + id_1036) };
+                                                                              Void id_1038 { ((void)(sz_ref_557[id_1029] = id_1037), ::dessser::VOID) };
+                                                                              (void)id_1038;
+                                                                              uint8_t id_1039 { 0 };
+                                                                              uint8_t id_1040 { 0 };
+                                                                              int32_t id_1041 { repeat_n_558[id_1040] };
+                                                                              int32_t id_1042 { 1L };
+                                                                              int32_t id_1043 { int32_t(id_1041 + id_1042) };
+                                                                              Void id_1044 { ((void)(repeat_n_558[id_1039] = id_1043), ::dessser::VOID) };
+                                                                              (void)id_1044;
+                                                                              (void)id_1044;
+                                                                            }
+                                                                          } while (while_flag_1022);
+                                                                          (void)::dessser::VOID;
+                                                                        }
+                                                                        (void)::dessser::VOID;
+                                                                        uint8_t id_1045 { 0 };
+                                                                        Size id_1046 { sz_ref_557[id_1045] };
+                                                                        let_res_1019 = id_1046;
+                                                                      }
+                                                                      choose_res_991 = let_res_1019;
+                                                                    } else {
+                                                                      uint16_t id_1047 { 32 };
+                                                                      bool id_1048 { bool(id_1047 == label2_536) };
+                                                                      Size choose_res_1049;
+                                                                      if (id_1048) {
+                                                                        Size id_1050 { 2UL };
+                                                                        Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1051 { std::get<32 /* VVec */>((*p_0)) };
+                                                                        uint32_t id_1052 { id_1051.size() };
+                                                                        Vec<1, uint32_t> id_1053 {  id_1052  };
+                                                                        Size let_res_1054;
+                                                                        {
+                                                                          Vec<1, uint32_t> n_ref_551 { id_1053 };
+                                                                          uint32_t id_1055 { 1U };
+                                                                          Vec<1, uint32_t> id_1056 {  id_1055  };
+                                                                          Size let_res_1057;
+                                                                          {
+                                                                            Vec<1, uint32_t> lebsz_ref_552 { id_1056 };
+                                                                            bool while_flag_1058 { true };
+                                                                            do {
+                                                                              uint8_t id_1059 { 0 };
+                                                                              uint32_t id_1060 { n_ref_551[id_1059] };
+                                                                              uint8_t id_1061 { 0 };
+                                                                              uint32_t id_1062 { lebsz_ref_552[id_1061] };
+                                                                              uint8_t id_1063 { 7 };
+                                                                              uint32_t id_1064 { uint32_t(id_1062 << id_1063) };
+                                                                              bool id_1065 { bool(id_1060 >= id_1064) };
+                                                                              while_flag_1058 = id_1065;
+                                                                              if (while_flag_1058) {
+                                                                                uint8_t id_1066 { 0 };
+                                                                                uint8_t id_1067 { 0 };
+                                                                                uint32_t id_1068 { lebsz_ref_552[id_1067] };
+                                                                                uint32_t id_1069 { 1U };
+                                                                                uint32_t id_1070 { uint32_t(id_1068 + id_1069) };
+                                                                                Void id_1071 { ((void)(lebsz_ref_552[id_1066] = id_1070), ::dessser::VOID) };
+                                                                                (void)id_1071;
+                                                                              }
+                                                                            } while (while_flag_1058);
+                                                                            (void)::dessser::VOID;
+                                                                            uint8_t id_1072 { 0 };
+                                                                            uint32_t id_1073 { lebsz_ref_552[id_1072] };
+                                                                            Size id_1074 { Size(id_1073) };
+                                                                            let_res_1057 = id_1074;
+                                                                          }
+                                                                          let_res_1054 = let_res_1057;
+                                                                        }
+                                                                        Size id_1075 { Size(id_1050 + let_res_1054) };
+                                                                        Vec<1, Size> id_1076 {  id_1075  };
+                                                                        Size let_res_1077;
+                                                                        {
+                                                                          Vec<1, Size> sz_ref_553 { id_1076 };
+                                                                          int32_t id_1078 { 0L };
+                                                                          Vec<1, int32_t> id_1079 {  id_1078  };
+                                                                          {
+                                                                            Vec<1, int32_t> repeat_n_554 { id_1079 };
+                                                                            bool while_flag_1080 { true };
+                                                                            do {
+                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1081 { std::get<32 /* VVec */>((*p_0)) };
+                                                                              uint32_t id_1082 { id_1081.size() };
+                                                                              int32_t id_1083 { int32_t(id_1082) };
+                                                                              uint8_t id_1084 { 0 };
+                                                                              int32_t id_1085 { repeat_n_554[id_1084] };
+                                                                              bool id_1086 { bool(id_1083 > id_1085) };
+                                                                              while_flag_1080 = id_1086;
+                                                                              if (while_flag_1080) {
+                                                                                uint8_t id_1087 { 0 };
+                                                                                uint8_t id_1088 { 0 };
+                                                                                Size id_1089 { sz_ref_553[id_1088] };
+                                                                                uint8_t id_1090 { 0 };
+                                                                                int32_t id_1091 { repeat_n_554[id_1090] };
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1092 { std::get<32 /* VVec */>((*p_0)) };
+                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1093 { id_1092[id_1091] };
+                                                                                Size id_1094 { fun811(id_1093) };
+                                                                                Size id_1095 { Size(id_1089 + id_1094) };
+                                                                                Void id_1096 { ((void)(sz_ref_553[id_1087] = id_1095), ::dessser::VOID) };
+                                                                                (void)id_1096;
+                                                                                uint8_t id_1097 { 0 };
+                                                                                uint8_t id_1098 { 0 };
+                                                                                int32_t id_1099 { repeat_n_554[id_1098] };
+                                                                                int32_t id_1100 { 1L };
+                                                                                int32_t id_1101 { int32_t(id_1099 + id_1100) };
+                                                                                Void id_1102 { ((void)(repeat_n_554[id_1097] = id_1101), ::dessser::VOID) };
+                                                                                (void)id_1102;
+                                                                                (void)id_1102;
+                                                                              }
+                                                                            } while (while_flag_1080);
+                                                                            (void)::dessser::VOID;
+                                                                          }
+                                                                          (void)::dessser::VOID;
+                                                                          uint8_t id_1103 { 0 };
+                                                                          Size id_1104 { sz_ref_553[id_1103] };
+                                                                          let_res_1077 = id_1104;
+                                                                        }
+                                                                        choose_res_1049 = let_res_1077;
+                                                                      } else {
+                                                                        uint16_t id_1105 { 33 };
+                                                                        bool id_1106 { bool(id_1105 == label2_536) };
+                                                                        Size choose_res_1107;
+                                                                        if (id_1106) {
+                                                                          Size id_1108 { 2UL };
+                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1109 { std::get<33 /* VArr */>((*p_0)) };
+                                                                          uint32_t id_1110 { id_1109.size() };
+                                                                          Vec<1, uint32_t> id_1111 {  id_1110  };
+                                                                          Size let_res_1112;
+                                                                          {
+                                                                            Vec<1, uint32_t> n_ref_547 { id_1111 };
+                                                                            uint32_t id_1113 { 1U };
+                                                                            Vec<1, uint32_t> id_1114 {  id_1113  };
+                                                                            Size let_res_1115;
+                                                                            {
+                                                                              Vec<1, uint32_t> lebsz_ref_548 { id_1114 };
+                                                                              bool while_flag_1116 { true };
+                                                                              do {
+                                                                                uint8_t id_1117 { 0 };
+                                                                                uint32_t id_1118 { n_ref_547[id_1117] };
+                                                                                uint8_t id_1119 { 0 };
+                                                                                uint32_t id_1120 { lebsz_ref_548[id_1119] };
+                                                                                uint8_t id_1121 { 7 };
+                                                                                uint32_t id_1122 { uint32_t(id_1120 << id_1121) };
+                                                                                bool id_1123 { bool(id_1118 >= id_1122) };
+                                                                                while_flag_1116 = id_1123;
+                                                                                if (while_flag_1116) {
+                                                                                  uint8_t id_1124 { 0 };
+                                                                                  uint8_t id_1125 { 0 };
+                                                                                  uint32_t id_1126 { lebsz_ref_548[id_1125] };
+                                                                                  uint32_t id_1127 { 1U };
+                                                                                  uint32_t id_1128 { uint32_t(id_1126 + id_1127) };
+                                                                                  Void id_1129 { ((void)(lebsz_ref_548[id_1124] = id_1128), ::dessser::VOID) };
+                                                                                  (void)id_1129;
+                                                                                }
+                                                                              } while (while_flag_1116);
+                                                                              (void)::dessser::VOID;
+                                                                              uint8_t id_1130 { 0 };
+                                                                              uint32_t id_1131 { lebsz_ref_548[id_1130] };
+                                                                              Size id_1132 { Size(id_1131) };
+                                                                              let_res_1115 = id_1132;
+                                                                            }
+                                                                            let_res_1112 = let_res_1115;
+                                                                          }
+                                                                          Size id_1133 { Size(id_1108 + let_res_1112) };
+                                                                          Vec<1, Size> id_1134 {  id_1133  };
+                                                                          Size let_res_1135;
+                                                                          {
+                                                                            Vec<1, Size> sz_ref_549 { id_1134 };
+                                                                            int32_t id_1136 { 0L };
+                                                                            Vec<1, int32_t> id_1137 {  id_1136  };
+                                                                            {
+                                                                              Vec<1, int32_t> repeat_n_550 { id_1137 };
+                                                                              bool while_flag_1138 { true };
+                                                                              do {
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1139 { std::get<33 /* VArr */>((*p_0)) };
+                                                                                uint32_t id_1140 { id_1139.size() };
+                                                                                int32_t id_1141 { int32_t(id_1140) };
+                                                                                uint8_t id_1142 { 0 };
+                                                                                int32_t id_1143 { repeat_n_550[id_1142] };
+                                                                                bool id_1144 { bool(id_1141 > id_1143) };
+                                                                                while_flag_1138 = id_1144;
+                                                                                if (while_flag_1138) {
+                                                                                  uint8_t id_1145 { 0 };
+                                                                                  uint8_t id_1146 { 0 };
+                                                                                  Size id_1147 { sz_ref_549[id_1146] };
+                                                                                  uint8_t id_1148 { 0 };
+                                                                                  int32_t id_1149 { repeat_n_550[id_1148] };
+                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1150 { std::get<33 /* VArr */>((*p_0)) };
+                                                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_1151 { id_1150[id_1149] };
+                                                                                  Size id_1152 { fun811(id_1151) };
+                                                                                  Size id_1153 { Size(id_1147 + id_1152) };
+                                                                                  Void id_1154 { ((void)(sz_ref_549[id_1145] = id_1153), ::dessser::VOID) };
+                                                                                  (void)id_1154;
+                                                                                  uint8_t id_1155 { 0 };
+                                                                                  uint8_t id_1156 { 0 };
+                                                                                  int32_t id_1157 { repeat_n_550[id_1156] };
+                                                                                  int32_t id_1158 { 1L };
+                                                                                  int32_t id_1159 { int32_t(id_1157 + id_1158) };
+                                                                                  Void id_1160 { ((void)(repeat_n_550[id_1155] = id_1159), ::dessser::VOID) };
+                                                                                  (void)id_1160;
+                                                                                  (void)id_1160;
+                                                                                }
+                                                                              } while (while_flag_1138);
+                                                                              (void)::dessser::VOID;
+                                                                            }
+                                                                            (void)::dessser::VOID;
+                                                                            uint8_t id_1161 { 0 };
+                                                                            Size id_1162 { sz_ref_549[id_1161] };
+                                                                            let_res_1135 = id_1162;
+                                                                          }
+                                                                          choose_res_1107 = let_res_1135;
+                                                                        } else {
+                                                                          uint16_t id_1163 { 34 };
+                                                                          bool id_1164 { bool(id_1163 == label2_536) };
+                                                                          Size choose_res_1165;
+                                                                          if (id_1164) {
+                                                                            Size id_1166 { 2UL };
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_1167 { std::get<34 /* VRec */>((*p_0)) };
+                                                                            uint32_t id_1168 { id_1167.size() };
+                                                                            Vec<1, uint32_t> id_1169 {  id_1168  };
+                                                                            Size let_res_1170;
+                                                                            {
+                                                                              Vec<1, uint32_t> n_ref_543 { id_1169 };
+                                                                              uint32_t id_1171 { 1U };
+                                                                              Vec<1, uint32_t> id_1172 {  id_1171  };
+                                                                              Size let_res_1173;
+                                                                              {
+                                                                                Vec<1, uint32_t> lebsz_ref_544 { id_1172 };
+                                                                                bool while_flag_1174 { true };
+                                                                                do {
+                                                                                  uint8_t id_1175 { 0 };
+                                                                                  uint32_t id_1176 { n_ref_543[id_1175] };
+                                                                                  uint8_t id_1177 { 0 };
+                                                                                  uint32_t id_1178 { lebsz_ref_544[id_1177] };
+                                                                                  uint8_t id_1179 { 7 };
+                                                                                  uint32_t id_1180 { uint32_t(id_1178 << id_1179) };
+                                                                                  bool id_1181 { bool(id_1176 >= id_1180) };
+                                                                                  while_flag_1174 = id_1181;
+                                                                                  if (while_flag_1174) {
+                                                                                    uint8_t id_1182 { 0 };
+                                                                                    uint8_t id_1183 { 0 };
+                                                                                    uint32_t id_1184 { lebsz_ref_544[id_1183] };
+                                                                                    uint32_t id_1185 { 1U };
+                                                                                    uint32_t id_1186 { uint32_t(id_1184 + id_1185) };
+                                                                                    Void id_1187 { ((void)(lebsz_ref_544[id_1182] = id_1186), ::dessser::VOID) };
+                                                                                    (void)id_1187;
+                                                                                  }
+                                                                                } while (while_flag_1174);
+                                                                                (void)::dessser::VOID;
+                                                                                uint8_t id_1188 { 0 };
+                                                                                uint32_t id_1189 { lebsz_ref_544[id_1188] };
+                                                                                Size id_1190 { Size(id_1189) };
+                                                                                let_res_1173 = id_1190;
+                                                                              }
+                                                                              let_res_1170 = let_res_1173;
+                                                                            }
+                                                                            Size id_1191 { Size(id_1166 + let_res_1170) };
+                                                                            Vec<1, Size> id_1192 {  id_1191  };
+                                                                            Size let_res_1193;
+                                                                            {
+                                                                              Vec<1, Size> sz_ref_545 { id_1192 };
+                                                                              int32_t id_1194 { 0L };
+                                                                              Vec<1, int32_t> id_1195 {  id_1194  };
+                                                                              {
+                                                                                Vec<1, int32_t> repeat_n_546 { id_1195 };
+                                                                                bool while_flag_1196 { true };
+                                                                                do {
+                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_1197 { std::get<34 /* VRec */>((*p_0)) };
+                                                                                  uint32_t id_1198 { id_1197.size() };
+                                                                                  int32_t id_1199 { int32_t(id_1198) };
+                                                                                  uint8_t id_1200 { 0 };
+                                                                                  int32_t id_1201 { repeat_n_546[id_1200] };
+                                                                                  bool id_1202 { bool(id_1199 > id_1201) };
+                                                                                  while_flag_1196 = id_1202;
+                                                                                  if (while_flag_1196) {
+                                                                                    uint8_t id_1203 { 0 };
+                                                                                    uint8_t id_1204 { 0 };
+                                                                                    Size id_1205 { sz_ref_545[id_1204] };
+                                                                                    uint8_t id_1206 { 0 };
+                                                                                    int32_t id_1207 { repeat_n_546[id_1206] };
+                                                                                    Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_1208 { std::get<34 /* VRec */>((*p_0)) };
+                                                                                    std::shared_ptr<::dessser::gen::raql_value::named_value>  id_1209 { id_1208[id_1207] };
+                                                                                    Size id_1210 { named_value_sersize_of_row_binary(id_1209) };
+                                                                                    Size id_1211 { Size(id_1205 + id_1210) };
+                                                                                    Void id_1212 { ((void)(sz_ref_545[id_1203] = id_1211), ::dessser::VOID) };
+                                                                                    (void)id_1212;
+                                                                                    uint8_t id_1213 { 0 };
+                                                                                    uint8_t id_1214 { 0 };
+                                                                                    int32_t id_1215 { repeat_n_546[id_1214] };
+                                                                                    int32_t id_1216 { 1L };
+                                                                                    int32_t id_1217 { int32_t(id_1215 + id_1216) };
+                                                                                    Void id_1218 { ((void)(repeat_n_546[id_1213] = id_1217), ::dessser::VOID) };
+                                                                                    (void)id_1218;
+                                                                                    (void)id_1218;
+                                                                                  }
+                                                                                } while (while_flag_1196);
+                                                                                (void)::dessser::VOID;
+                                                                              }
+                                                                              (void)::dessser::VOID;
+                                                                              uint8_t id_1219 { 0 };
+                                                                              Size id_1220 { sz_ref_545[id_1219] };
+                                                                              let_res_1193 = id_1220;
+                                                                            }
+                                                                            choose_res_1165 = let_res_1193;
+                                                                          } else {
+                                                                            uint16_t id_1221 { 35 };
+                                                                            bool id_1222 { bool(label2_536 == id_1221) };
+                                                                            Void id_1223 { ((void)(assert(id_1222)), ::dessser::VOID) };
+                                                                            (void)id_1223;
+                                                                            Size id_1224 { 2UL };
+                                                                            Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1225 { std::get<35 /* VMap */>((*p_0)) };
+                                                                            uint32_t id_1226 { id_1225.size() };
+                                                                            Vec<1, uint32_t> id_1227 {  id_1226  };
+                                                                            Size let_res_1228;
+                                                                            {
+                                                                              Vec<1, uint32_t> n_ref_537 { id_1227 };
+                                                                              uint32_t id_1229 { 1U };
+                                                                              Vec<1, uint32_t> id_1230 {  id_1229  };
+                                                                              Size let_res_1231;
+                                                                              {
+                                                                                Vec<1, uint32_t> lebsz_ref_538 { id_1230 };
+                                                                                bool while_flag_1232 { true };
+                                                                                do {
+                                                                                  uint8_t id_1233 { 0 };
+                                                                                  uint32_t id_1234 { n_ref_537[id_1233] };
+                                                                                  uint8_t id_1235 { 0 };
+                                                                                  uint32_t id_1236 { lebsz_ref_538[id_1235] };
+                                                                                  uint8_t id_1237 { 7 };
+                                                                                  uint32_t id_1238 { uint32_t(id_1236 << id_1237) };
+                                                                                  bool id_1239 { bool(id_1234 >= id_1238) };
+                                                                                  while_flag_1232 = id_1239;
+                                                                                  if (while_flag_1232) {
+                                                                                    uint8_t id_1240 { 0 };
+                                                                                    uint8_t id_1241 { 0 };
+                                                                                    uint32_t id_1242 { lebsz_ref_538[id_1241] };
+                                                                                    uint32_t id_1243 { 1U };
+                                                                                    uint32_t id_1244 { uint32_t(id_1242 + id_1243) };
+                                                                                    Void id_1245 { ((void)(lebsz_ref_538[id_1240] = id_1244), ::dessser::VOID) };
+                                                                                    (void)id_1245;
+                                                                                  }
+                                                                                } while (while_flag_1232);
+                                                                                (void)::dessser::VOID;
+                                                                                uint8_t id_1246 { 0 };
+                                                                                uint32_t id_1247 { lebsz_ref_538[id_1246] };
+                                                                                Size id_1248 { Size(id_1247) };
+                                                                                let_res_1231 = id_1248;
+                                                                              }
+                                                                              let_res_1228 = let_res_1231;
+                                                                            }
+                                                                            Size id_1249 { Size(id_1224 + let_res_1228) };
+                                                                            Vec<1, Size> id_1250 {  id_1249  };
+                                                                            Size let_res_1251;
+                                                                            {
+                                                                              Vec<1, Size> sz_ref_539 { id_1250 };
+                                                                              int32_t id_1252 { 0L };
+                                                                              Vec<1, int32_t> id_1253 {  id_1252  };
+                                                                              {
+                                                                                Vec<1, int32_t> repeat_n_540 { id_1253 };
+                                                                                bool while_flag_1254 { true };
+                                                                                do {
+                                                                                  Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1255 { std::get<35 /* VMap */>((*p_0)) };
+                                                                                  uint32_t id_1256 { id_1255.size() };
+                                                                                  int32_t id_1257 { int32_t(id_1256) };
+                                                                                  uint8_t id_1258 { 0 };
+                                                                                  int32_t id_1259 { repeat_n_540[id_1258] };
+                                                                                  bool id_1260 { bool(id_1257 > id_1259) };
+                                                                                  while_flag_1254 = id_1260;
+                                                                                  if (while_flag_1254) {
+                                                                                    uint8_t id_1261 { 0 };
+                                                                                    uint8_t id_1262 { 0 };
+                                                                                    Size id_1263 { sz_ref_539[id_1262] };
+                                                                                    uint8_t id_1264 { 0 };
+                                                                                    int32_t id_1265 { repeat_n_540[id_1264] };
+                                                                                    Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1266 { std::get<35 /* VMap */>((*p_0)) };
+                                                                                    ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_1267 { id_1266[id_1265] };
+                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1268 { std::get<0>(id_1267) };
+                                                                                    Size id_1269 { fun811(id_1268) };
+                                                                                    Size id_1270 { Size(id_1263 + id_1269) };
+                                                                                    uint8_t id_1271 { 0 };
+                                                                                    int32_t id_1272 { repeat_n_540[id_1271] };
+                                                                                    Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1273 { std::get<35 /* VMap */>((*p_0)) };
+                                                                                    ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_1274 { id_1273[id_1272] };
+                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1275 { std::get<1>(id_1274) };
+                                                                                    Size id_1276 { fun811(id_1275) };
+                                                                                    Size id_1277 { Size(id_1270 + id_1276) };
+                                                                                    Void id_1278 { ((void)(sz_ref_539[id_1261] = id_1277), ::dessser::VOID) };
+                                                                                    (void)id_1278;
+                                                                                    uint8_t id_1279 { 0 };
+                                                                                    uint8_t id_1280 { 0 };
+                                                                                    int32_t id_1281 { repeat_n_540[id_1280] };
+                                                                                    int32_t id_1282 { 1L };
+                                                                                    int32_t id_1283 { int32_t(id_1281 + id_1282) };
+                                                                                    Void id_1284 { ((void)(repeat_n_540[id_1279] = id_1283), ::dessser::VOID) };
+                                                                                    (void)id_1284;
+                                                                                    (void)id_1284;
+                                                                                  }
+                                                                                } while (while_flag_1254);
+                                                                                (void)::dessser::VOID;
+                                                                              }
+                                                                              (void)::dessser::VOID;
+                                                                              uint8_t id_1285 { 0 };
+                                                                              Size id_1286 { sz_ref_539[id_1285] };
+                                                                              let_res_1251 = id_1286;
+                                                                            }
+                                                                            choose_res_1165 = let_res_1251;
+                                                                          }
+                                                                          choose_res_1107 = choose_res_1165;
+                                                                        }
+                                                                        choose_res_1049 = choose_res_1107;
+                                                                      }
+                                                                      choose_res_991 = choose_res_1049;
+                                                                    }
+                                                                    choose_res_976 = choose_res_991;
+                                                                  }
+                                                                  choose_res_972 = choose_res_976;
+                                                                }
+                                                                choose_res_968 = choose_res_972;
+                                                              }
+                                                              choose_res_953 = choose_res_968;
+                                                            }
+                                                            choose_res_949 = choose_res_953;
+                                                          }
+                                                          choose_res_945 = choose_res_949;
+                                                        }
+                                                        choose_res_941 = choose_res_945;
+                                                      }
+                                                      choose_res_937 = choose_res_941;
+                                                    }
+                                                    choose_res_933 = choose_res_937;
+                                                  }
+                                                  choose_res_929 = choose_res_933;
+                                                }
+                                                choose_res_925 = choose_res_929;
+                                              }
+                                              choose_res_921 = choose_res_925;
+                                            }
+                                            choose_res_917 = choose_res_921;
+                                          }
+                                          choose_res_913 = choose_res_917;
+                                        }
+                                        choose_res_909 = choose_res_913;
+                                      }
+                                      choose_res_905 = choose_res_909;
+                                    }
+                                    choose_res_901 = choose_res_905;
+                                  }
+                                  choose_res_897 = choose_res_901;
+                                }
+                                choose_res_893 = choose_res_897;
+                              }
+                              choose_res_889 = choose_res_893;
+                            }
+                            choose_res_885 = choose_res_889;
+                          }
+                          choose_res_881 = choose_res_885;
+                        }
+                        choose_res_877 = choose_res_881;
+                      }
+                      choose_res_873 = choose_res_877;
+                    }
+                    choose_res_869 = choose_res_873;
+                  }
+                  choose_res_865 = choose_res_869;
+                }
+                choose_res_861 = choose_res_865;
+              }
+              choose_res_828 = choose_res_861;
+            }
+            choose_res_824 = choose_res_828;
+          }
+          choose_res_820 = choose_res_824;
+        }
+        choose_res_816 = choose_res_820;
+      }
+      let_res_813 = choose_res_816;
+    }
+    return let_res_813;
+  }
+   };
+  return fun811;
+}
+std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+
+/* 
+    (fun ("(STRING; THIS)")
+      (let "sz_535"
+        (add
+          (let "n_ref_533" (make-vec (string-length (get-item 0 (param 0))))
+            (let "lebsz_ref_534" (make-vec (u32 1))
+              (seq
+                (while (ge (unsafe-nth (u8 0) (identifier "n_ref_533")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_534")) (u8 7)))
+                  (set-vec (u8 0) (identifier "lebsz_ref_534") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_534")) (u32 1)))) 
+                (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_534")))))) 
+          (size-of-u32 (string-length (get-item 0 (param 0))))) (add (identifier "sz_535") (apply (identifier "sersize-of-row-binary") (get-item 1 (param 0))))))
+ */
+static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::named_value> )> named_value_sersize_of_row_binary_init()
+{
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_value::named_value> )> fun1287 { [&fun1287](std::shared_ptr<::dessser::gen::raql_value::named_value>  p_0) {
+    std::string id_1288 { std::get<0>((*p_0)) };
+    uint32_t id_1289 { (uint32_t)id_1288.size() };
+    Vec<1, uint32_t> id_1290 {  id_1289  };
+    Size let_res_1291;
+    {
+      Vec<1, uint32_t> n_ref_533 { id_1290 };
+      uint32_t id_1292 { 1U };
+      Vec<1, uint32_t> id_1293 {  id_1292  };
+      Size let_res_1294;
+      {
+        Vec<1, uint32_t> lebsz_ref_534 { id_1293 };
+        bool while_flag_1295 { true };
+        do {
+          uint8_t id_1296 { 0 };
+          uint32_t id_1297 { n_ref_533[id_1296] };
+          uint8_t id_1298 { 0 };
+          uint32_t id_1299 { lebsz_ref_534[id_1298] };
+          uint8_t id_1300 { 7 };
+          uint32_t id_1301 { uint32_t(id_1299 << id_1300) };
+          bool id_1302 { bool(id_1297 >= id_1301) };
+          while_flag_1295 = id_1302;
+          if (while_flag_1295) {
+            uint8_t id_1303 { 0 };
+            uint8_t id_1304 { 0 };
+            uint32_t id_1305 { lebsz_ref_534[id_1304] };
+            uint32_t id_1306 { 1U };
+            uint32_t id_1307 { uint32_t(id_1305 + id_1306) };
+            Void id_1308 { ((void)(lebsz_ref_534[id_1303] = id_1307), ::dessser::VOID) };
+            (void)id_1308;
+          }
+        } while (while_flag_1295);
+        (void)::dessser::VOID;
+        uint8_t id_1309 { 0 };
+        uint32_t id_1310 { lebsz_ref_534[id_1309] };
+        Size id_1311 { Size(id_1310) };
+        let_res_1294 = id_1311;
+      }
+      let_res_1291 = let_res_1294;
+    }
+    std::string id_1312 { std::get<0>((*p_0)) };
+    uint32_t id_1313 { (uint32_t)id_1312.size() };
+    Size id_1314 { Size(id_1313) };
+    Size id_1315 { Size(let_res_1291 + id_1314) };
+    Size let_res_1316;
+    {
+      Size sz_535 { id_1315 };
+      std::shared_ptr<::dessser::gen::raql_value::t>  id_1317 { std::get<1>((*p_0)) };
+      Size id_1318 { sersize_of_row_binary(id_1317) };
+      Size id_1319 { Size(sz_535 + id_1318) };
+      let_res_1316 = id_1319;
+    }
+    return let_res_1316;
+  }
+   };
+  return fun1287;
+}
+std::function<Size(std::shared_ptr<::dessser::gen::raql_value::named_value> )> named_value_sersize_of_row_binary(named_value_sersize_of_row_binary_init());
+
+/* 
+    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (named_value AS (STRING; THIS))[] | VMap (THIS; THIS)[]]" "Ptr")
+      (let "label1_575" (label-of (param 0))
+        (let "ssum_dst_576" (write-u16 little-endian (param 1) (identifier "label1_575"))
+          (if (eq (u16 0) (identifier "label1_575")) (identifier "ssum_dst_576")
+            (if (eq (u16 1) (identifier "label1_575")) (identifier "ssum_dst_576")
+              (if (eq (u16 2) (identifier "label1_575")) (write-u64 little-endian (identifier "ssum_dst_576") (u64-of-float (get-alt "VFloat" (param 0))))
+                (if (eq (u16 3) (identifier "label1_575"))
                   (write-bytes
-                    (let "leb128_sz_610" (make-vec (string-length (get-alt "VString" (param 0))))
-                      (let "leb128_ptr_611" (make-vec (identifier "ssum_dst_570"))
+                    (let "leb128_sz_612" (make-vec (string-length (get-alt "VString" (param 0))))
+                      (let "leb128_ptr_613" (make-vec (identifier "ssum_dst_576"))
                         (seq
                           (while
                             (seq
-                              (set-vec (u8 0) (identifier "leb128_ptr_611")
-                                (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_611"))
-                                  (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_610"))) 
-                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_610"))) 
-                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_610"))) (u8 128))))) 
-                              (set-vec (u8 0) (identifier "leb128_sz_610") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_610")) (u8 7))) 
-                              (gt (unsafe-nth (u8 0) (identifier "leb128_sz_610")) (u32 0))) 
-                            (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_611"))))) 
+                              (set-vec (u8 0) (identifier "leb128_ptr_613")
+                                (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_613"))
+                                  (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_612"))) 
+                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_612"))) 
+                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_612"))) (u8 128))))) 
+                              (set-vec (u8 0) (identifier "leb128_sz_612") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_612")) (u8 7))) 
+                              (gt (unsafe-nth (u8 0) (identifier "leb128_sz_612")) (u32 0))) 
+                            (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_613"))))) 
                     (bytes-of-string (get-alt "VString" (param 0))))
-                  (if (eq (u16 4) (identifier "label1_569")) (write-u8 (identifier "ssum_dst_570") (u8-of-bool (get-alt "VBool" (param 0))))
-                    (if (eq (u16 5) (identifier "label1_569")) (write-u8 (identifier "ssum_dst_570") (u8-of-char (get-alt "VChar" (param 0))))
-                      (if (eq (u16 6) (identifier "label1_569")) (write-u8 (identifier "ssum_dst_570") (get-alt "VU8" (param 0)))
-                        (if (eq (u16 7) (identifier "label1_569")) (write-u16 little-endian (identifier "ssum_dst_570") (get-alt "VU16" (param 0)))
-                          (if (eq (u16 8) (identifier "label1_569")) 
-                            (write-u32 little-endian (identifier "ssum_dst_570") (to-u32 (get-alt "VU24" (param 0))))
-                            (if (eq (u16 9) (identifier "label1_569")) 
-                              (write-u32 little-endian (identifier "ssum_dst_570") (get-alt "VU32" (param 0)))
-                              (if (eq (u16 10) (identifier "label1_569")) 
-                                (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (get-alt "VU40" (param 0))))
-                                (if (eq (u16 11) (identifier "label1_569")) 
-                                  (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (get-alt "VU48" (param 0))))
-                                  (if (eq (u16 12) (identifier "label1_569")) 
-                                    (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (get-alt "VU56" (param 0))))
-                                    (if (eq (u16 13) (identifier "label1_569")) 
-                                      (write-u64 little-endian (identifier "ssum_dst_570") (get-alt "VU64" (param 0)))
-                                      (if (eq (u16 14) (identifier "label1_569")) 
-                                        (write-u128 little-endian (identifier "ssum_dst_570") (get-alt "VU128" (param 0)))
-                                        (if (eq (u16 15) (identifier "label1_569")) 
-                                          (write-u8 (identifier "ssum_dst_570") (to-u8 (get-alt "VI8" (param 0))))
-                                          (if (eq (u16 16) (identifier "label1_569")) 
-                                            (write-u16 little-endian (identifier "ssum_dst_570") (to-u16 (get-alt "VI16" (param 0))))
-                                            (if (eq (u16 17) (identifier "label1_569")) 
-                                              (write-u32 little-endian (identifier "ssum_dst_570") (to-u32 (to-i32 (get-alt "VI24" (param 0)))))
-                                              (if (eq (u16 18) (identifier "label1_569")) 
-                                                (write-u32 little-endian (identifier "ssum_dst_570") (to-u32 (get-alt "VI32" (param 0))))
-                                                (if (eq (u16 19) (identifier "label1_569")) 
-                                                  (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (to-i64 (get-alt "VI40" (param 0)))))
-                                                  (if (eq (u16 20) (identifier "label1_569")) 
-                                                    (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (to-i64 (get-alt "VI48" (param 0)))))
-                                                    (if (eq (u16 21) (identifier "label1_569")) 
-                                                      (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (to-i64 (get-alt "VI56" (param 0)))))
-                                                      (if (eq (u16 22) (identifier "label1_569")) 
-                                                        (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (get-alt "VI64" (param 0))))
-                                                        (if (eq (u16 23) (identifier "label1_569")) 
-                                                          (write-u128 little-endian (identifier "ssum_dst_570") (to-u128 (get-alt "VI128" (param 0))))
-                                                          (if (eq (u16 24) (identifier "label1_569")) 
-                                                            (write-u64 little-endian (identifier "ssum_dst_570") (to-u64 (get-alt "VEth" (param 0))))
-                                                            (if (eq (u16 25) (identifier "label1_569")) 
-                                                              (write-u32 little-endian (identifier "ssum_dst_570") (get-alt "VIpv4" (param 0)))
-                                                              (if (eq (u16 26) (identifier "label1_569")) 
-                                                                (write-u128 little-endian (identifier "ssum_dst_570") (get-alt "VIpv6" (param 0)))
-                                                                (if (eq (u16 27) (identifier "label1_569"))
-                                                                  (let "ssum_dst_609" 
-                                                                    (write-u16 little-endian (identifier "ssum_dst_570") (label-of (get-alt "VIp" (param 0))))
+                  (if (eq (u16 4) (identifier "label1_575")) (write-u8 (identifier "ssum_dst_576") (u8-of-bool (get-alt "VBool" (param 0))))
+                    (if (eq (u16 5) (identifier "label1_575")) (write-u8 (identifier "ssum_dst_576") (u8-of-char (get-alt "VChar" (param 0))))
+                      (if (eq (u16 6) (identifier "label1_575")) (write-u8 (identifier "ssum_dst_576") (get-alt "VU8" (param 0)))
+                        (if (eq (u16 7) (identifier "label1_575")) (write-u16 little-endian (identifier "ssum_dst_576") (get-alt "VU16" (param 0)))
+                          (if (eq (u16 8) (identifier "label1_575")) 
+                            (write-u32 little-endian (identifier "ssum_dst_576") (to-u32 (get-alt "VU24" (param 0))))
+                            (if (eq (u16 9) (identifier "label1_575")) 
+                              (write-u32 little-endian (identifier "ssum_dst_576") (get-alt "VU32" (param 0)))
+                              (if (eq (u16 10) (identifier "label1_575")) 
+                                (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (get-alt "VU40" (param 0))))
+                                (if (eq (u16 11) (identifier "label1_575")) 
+                                  (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (get-alt "VU48" (param 0))))
+                                  (if (eq (u16 12) (identifier "label1_575")) 
+                                    (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (get-alt "VU56" (param 0))))
+                                    (if (eq (u16 13) (identifier "label1_575")) 
+                                      (write-u64 little-endian (identifier "ssum_dst_576") (get-alt "VU64" (param 0)))
+                                      (if (eq (u16 14) (identifier "label1_575")) 
+                                        (write-u128 little-endian (identifier "ssum_dst_576") (get-alt "VU128" (param 0)))
+                                        (if (eq (u16 15) (identifier "label1_575")) 
+                                          (write-u8 (identifier "ssum_dst_576") (to-u8 (get-alt "VI8" (param 0))))
+                                          (if (eq (u16 16) (identifier "label1_575")) 
+                                            (write-u16 little-endian (identifier "ssum_dst_576") (to-u16 (get-alt "VI16" (param 0))))
+                                            (if (eq (u16 17) (identifier "label1_575")) 
+                                              (write-u32 little-endian (identifier "ssum_dst_576") (to-u32 (to-i32 (get-alt "VI24" (param 0)))))
+                                              (if (eq (u16 18) (identifier "label1_575")) 
+                                                (write-u32 little-endian (identifier "ssum_dst_576") (to-u32 (get-alt "VI32" (param 0))))
+                                                (if (eq (u16 19) (identifier "label1_575")) 
+                                                  (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (to-i64 (get-alt "VI40" (param 0)))))
+                                                  (if (eq (u16 20) (identifier "label1_575")) 
+                                                    (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (to-i64 (get-alt "VI48" (param 0)))))
+                                                    (if (eq (u16 21) (identifier "label1_575")) 
+                                                      (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (to-i64 (get-alt "VI56" (param 0)))))
+                                                      (if (eq (u16 22) (identifier "label1_575")) 
+                                                        (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (get-alt "VI64" (param 0))))
+                                                        (if (eq (u16 23) (identifier "label1_575")) 
+                                                          (write-u128 little-endian (identifier "ssum_dst_576") (to-u128 (get-alt "VI128" (param 0))))
+                                                          (if (eq (u16 24) (identifier "label1_575")) 
+                                                            (write-u64 little-endian (identifier "ssum_dst_576") (to-u64 (get-alt "VEth" (param 0))))
+                                                            (if (eq (u16 25) (identifier "label1_575")) 
+                                                              (write-u32 little-endian (identifier "ssum_dst_576") (get-alt "VIpv4" (param 0)))
+                                                              (if (eq (u16 26) (identifier "label1_575")) 
+                                                                (write-u128 little-endian (identifier "ssum_dst_576") (get-alt "VIpv6" (param 0)))
+                                                                (if (eq (u16 27) (identifier "label1_575"))
+                                                                  (let "ssum_dst_611" 
+                                                                    (write-u16 little-endian (identifier "ssum_dst_576") (label-of (get-alt "VIp" (param 0))))
                                                                     (if 
                                                                     (eq (u16 0) (label-of (get-alt "VIp" (param 0)))) 
-                                                                    (write-u32 little-endian (identifier "ssum_dst_609") (get-alt "v4" (get-alt "VIp" (param 0))))
-                                                                    (seq (assert (eq (label-of (get-alt "VIp" (param 0))) (u16 1))) (write-u128 little-endian (identifier "ssum_dst_609") (get-alt "v6" (get-alt "VIp" (param 0)))))))
+                                                                    (write-u32 little-endian (identifier "ssum_dst_611") (get-alt "v4" (get-alt "VIp" (param 0))))
+                                                                    (seq (assert (eq (label-of (get-alt "VIp" (param 0))) (u16 1))) (write-u128 little-endian (identifier "ssum_dst_611") (get-alt "v6" (get-alt "VIp" (param 0)))))))
                                                                   (if 
-                                                                    (eq (u16 28) (identifier "label1_569"))
-                                                                    (let "srec_dst_607" 
-                                                                    (write-u32 little-endian (identifier "ssum_dst_570") (get-field "ip" (get-alt "VCidrv4" (param 0))))
-                                                                    (write-u8 (identifier "srec_dst_607") (get-field "mask" (get-alt "VCidrv4" (param 0)))))
+                                                                    (eq (u16 28) (identifier "label1_575"))
+                                                                    (let "srec_dst_609" 
+                                                                    (write-u32 little-endian (identifier "ssum_dst_576") (get-field "ip" (get-alt "VCidrv4" (param 0))))
+                                                                    (write-u8 (identifier "srec_dst_609") (get-field "mask" (get-alt "VCidrv4" (param 0)))))
                                                                     (if 
-                                                                    (eq (u16 29) (identifier "label1_569"))
-                                                                    (let "srec_dst_606" 
-                                                                    (write-u128 little-endian (identifier "ssum_dst_570") (get-field "ip" (get-alt "VCidrv6" (param 0))))
-                                                                    (write-u8 (identifier "srec_dst_606") (get-field "mask" (get-alt "VCidrv6" (param 0)))))
+                                                                    (eq (u16 29) (identifier "label1_575"))
+                                                                    (let "srec_dst_608" 
+                                                                    (write-u128 little-endian (identifier "ssum_dst_576") (get-field "ip" (get-alt "VCidrv6" (param 0))))
+                                                                    (write-u8 (identifier "srec_dst_608") (get-field "mask" (get-alt "VCidrv6" (param 0)))))
                                                                     (if 
-                                                                    (eq (u16 30) (identifier "label1_569"))
-                                                                    (let "ssum_dst_603" 
-                                                                    (write-u16 little-endian (identifier "ssum_dst_570") (label-of (get-alt "VCidr" (param 0))))
+                                                                    (eq (u16 30) (identifier "label1_575"))
+                                                                    (let "ssum_dst_605" 
+                                                                    (write-u16 little-endian (identifier "ssum_dst_576") (label-of (get-alt "VCidr" (param 0))))
                                                                     (if 
                                                                     (eq (u16 0) (label-of (get-alt "VCidr" (param 0))))
-                                                                    (let "srec_dst_605" 
-                                                                    (write-u32 little-endian (identifier "ssum_dst_603") (get-field "ip" (get-alt "v4" (get-alt "VCidr" (param 0)))))
-                                                                    (write-u8 (identifier "srec_dst_605") (get-field "mask" (get-alt "v4" (get-alt "VCidr" (param 0))))))
+                                                                    (let "srec_dst_607" 
+                                                                    (write-u32 little-endian (identifier "ssum_dst_605") (get-field "ip" (get-alt "v4" (get-alt "VCidr" (param 0)))))
+                                                                    (write-u8 (identifier "srec_dst_607") (get-field "mask" (get-alt "v4" (get-alt "VCidr" (param 0))))))
                                                                     (seq 
                                                                     (assert (eq (label-of (get-alt "VCidr" (param 0))) (u16 1)))
-                                                                    (let "srec_dst_604" 
-                                                                    (write-u128 little-endian (identifier "ssum_dst_603") (get-field "ip" (get-alt "v6" (get-alt "VCidr" (param 0)))))
-                                                                    (write-u8 (identifier "srec_dst_604") (get-field "mask" (get-alt "v6" (get-alt "VCidr" (param 0)))))))))
+                                                                    (let "srec_dst_606" 
+                                                                    (write-u128 little-endian (identifier "ssum_dst_605") (get-field "ip" (get-alt "v6" (get-alt "VCidr" (param 0)))))
+                                                                    (write-u8 (identifier "srec_dst_606") (get-field "mask" (get-alt "v6" (get-alt "VCidr" (param 0)))))))))
                                                                     (if 
-                                                                    (eq (u16 31) (identifier "label1_569"))
-                                                                    (let "dst_ref_599"
+                                                                    (eq (u16 31) (identifier "label1_575"))
+                                                                    (let "dst_ref_601"
                                                                     (make-vec
-                                                                    (let "leb128_sz_597" 
+                                                                    (let "leb128_sz_599" 
                                                                     (make-vec (cardinality (get-alt "VTup" (param 0))))
-                                                                    (let "leb128_ptr_598" 
-                                                                    (make-vec (identifier "ssum_dst_570"))
+                                                                    (let "leb128_ptr_600" 
+                                                                    (make-vec (identifier "ssum_dst_576"))
                                                                     (seq
                                                                     (while
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
-                                                                    (identifier "leb128_ptr_598")
+                                                                    (identifier "leb128_ptr_600")
                                                                     (write-u8 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_598"))
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_600"))
                                                                     (if 
-                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_597"))) 
-                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_597"))) 
-                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_597"))) (u8 128)))))
-                                                                    (set-vec (u8 0) (identifier "leb128_sz_597") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_597")) (u8 7)))
-                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_597")) (u32 0))) 
+                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_599"))) 
+                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_599"))) 
+                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_599"))) (u8 128)))))
+                                                                    (set-vec (u8 0) (identifier "leb128_sz_599") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_599")) (u8 7)))
+                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_599")) (u32 0))) 
                                                                     (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_598"))))))
-                                                                    (let "n_ref_600" 
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_600"))))))
+                                                                    (let "n_ref_602" 
                                                                     (make-vec (i32 0))
                                                                     (seq
-                                                                    (for-each "x_601" 
+                                                                    (for-each "x_603" 
                                                                     (get-alt "VTup" (param 0))
                                                                     (seq 
-                                                                    (set-vec (u8 0) (identifier "dst_ref_599") (apply (myself "Ptr") (identifier "x_601") (unsafe-nth (u8 0) (identifier "dst_ref_599"))))
-                                                                    (set-vec (u8 0) (identifier "n_ref_600") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_600")))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_599")))))
+                                                                    (set-vec (u8 0) (identifier "dst_ref_601") (apply (myself "Ptr") (identifier "x_603") (unsafe-nth (u8 0) (identifier "dst_ref_601"))))
+                                                                    (set-vec (u8 0) (identifier "n_ref_602") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_602")))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_601")))))
                                                                     (if 
-                                                                    (eq (u16 32) (identifier "label1_569"))
-                                                                    (let "dst_ref_594"
+                                                                    (eq (u16 32) (identifier "label1_575"))
+                                                                    (let "dst_ref_596"
                                                                     (make-vec
-                                                                    (let "leb128_sz_592" 
+                                                                    (let "leb128_sz_594" 
                                                                     (make-vec (cardinality (get-alt "VVec" (param 0))))
-                                                                    (let "leb128_ptr_593" 
-                                                                    (make-vec (identifier "ssum_dst_570"))
+                                                                    (let "leb128_ptr_595" 
+                                                                    (make-vec (identifier "ssum_dst_576"))
                                                                     (seq
                                                                     (while
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
-                                                                    (identifier "leb128_ptr_593")
+                                                                    (identifier "leb128_ptr_595")
                                                                     (write-u8 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_593"))
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_595"))
                                                                     (if 
-                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_592"))) 
-                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_592"))) 
-                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_592"))) (u8 128)))))
-                                                                    (set-vec (u8 0) (identifier "leb128_sz_592") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_592")) (u8 7)))
-                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_592")) (u32 0))) 
+                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_594"))) 
+                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_594"))) 
+                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_594"))) (u8 128)))))
+                                                                    (set-vec (u8 0) (identifier "leb128_sz_594") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_594")) (u8 7)))
+                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_594")) (u32 0))) 
                                                                     (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_593"))))))
-                                                                    (let "n_ref_595" 
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_595"))))))
+                                                                    (let "n_ref_597" 
                                                                     (make-vec (i32 0))
                                                                     (seq
-                                                                    (for-each "x_596" 
+                                                                    (for-each "x_598" 
                                                                     (get-alt "VVec" (param 0))
                                                                     (seq 
-                                                                    (set-vec (u8 0) (identifier "dst_ref_594") (apply (myself "Ptr") (identifier "x_596") (unsafe-nth (u8 0) (identifier "dst_ref_594"))))
-                                                                    (set-vec (u8 0) (identifier "n_ref_595") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_595")))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_594")))))
+                                                                    (set-vec (u8 0) (identifier "dst_ref_596") (apply (myself "Ptr") (identifier "x_598") (unsafe-nth (u8 0) (identifier "dst_ref_596"))))
+                                                                    (set-vec (u8 0) (identifier "n_ref_597") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_597")))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_596")))))
                                                                     (if 
-                                                                    (eq (u16 33) (identifier "label1_569"))
-                                                                    (let "dst_ref_589"
+                                                                    (eq (u16 33) (identifier "label1_575"))
+                                                                    (let "dst_ref_591"
                                                                     (make-vec
-                                                                    (let "leb128_sz_587" 
+                                                                    (let "leb128_sz_589" 
                                                                     (make-vec (cardinality (get-alt "VArr" (param 0))))
-                                                                    (let "leb128_ptr_588" 
-                                                                    (make-vec (identifier "ssum_dst_570"))
+                                                                    (let "leb128_ptr_590" 
+                                                                    (make-vec (identifier "ssum_dst_576"))
                                                                     (seq
                                                                     (while
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
-                                                                    (identifier "leb128_ptr_588")
+                                                                    (identifier "leb128_ptr_590")
                                                                     (write-u8 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_588"))
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_590"))
                                                                     (if 
-                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_587"))) 
-                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_587"))) 
-                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_587"))) (u8 128)))))
-                                                                    (set-vec (u8 0) (identifier "leb128_sz_587") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_587")) (u8 7)))
-                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_587")) (u32 0))) 
+                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_589"))) 
+                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_589"))) 
+                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_589"))) (u8 128)))))
+                                                                    (set-vec (u8 0) (identifier "leb128_sz_589") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_589")) (u8 7)))
+                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_589")) (u32 0))) 
                                                                     (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_588"))))))
-                                                                    (let "n_ref_590" 
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_590"))))))
+                                                                    (let "n_ref_592" 
                                                                     (make-vec (i32 0))
                                                                     (seq
-                                                                    (for-each "x_591" 
+                                                                    (for-each "x_593" 
                                                                     (get-alt "VArr" (param 0))
                                                                     (seq 
-                                                                    (set-vec (u8 0) (identifier "dst_ref_589") (apply (myself "Ptr") (identifier "x_591") (unsafe-nth (u8 0) (identifier "dst_ref_589"))))
-                                                                    (set-vec (u8 0) (identifier "n_ref_590") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_590")))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_589")))))
+                                                                    (set-vec (u8 0) (identifier "dst_ref_591") (apply (myself "Ptr") (identifier "x_593") (unsafe-nth (u8 0) (identifier "dst_ref_591"))))
+                                                                    (set-vec (u8 0) (identifier "n_ref_592") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_592")))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_591")))))
                                                                     (if 
-                                                                    (eq (u16 34) (identifier "label1_569"))
-                                                                    (let "dst_ref_580"
+                                                                    (eq (u16 34) (identifier "label1_575"))
+                                                                    (let "dst_ref_586"
                                                                     (make-vec
-                                                                    (let "leb128_sz_578" 
-                                                                    (make-vec (cardinality (get-alt "VRec" (param 0))))
-                                                                    (let "leb128_ptr_579" 
-                                                                    (make-vec (identifier "ssum_dst_570"))
-                                                                    (seq
-                                                                    (while
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb128_ptr_579")
-                                                                    (write-u8 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_579"))
-                                                                    (if 
-                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_578"))) 
-                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_578"))) 
-                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_578"))) (u8 128)))))
-                                                                    (set-vec (u8 0) (identifier "leb128_sz_578") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_578")) (u8 7)))
-                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_578")) (u32 0))) 
-                                                                    (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_579"))))))
-                                                                    (let "n_ref_581" 
-                                                                    (make-vec (i32 0))
-                                                                    (seq
-                                                                    (for-each "x_582" 
-                                                                    (get-alt "VRec" (param 0))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "dst_ref_580")
-                                                                    (apply 
-                                                                    (myself "Ptr") 
-                                                                    (get-item 1 (identifier "x_582"))
-                                                                    (let "stup_dst_583" 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_580"))
-                                                                    (write-bytes
                                                                     (let "leb128_sz_584" 
-                                                                    (make-vec (string-length (get-item 0 (identifier "x_582"))))
+                                                                    (make-vec (cardinality (get-alt "VRec" (param 0))))
                                                                     (let "leb128_ptr_585" 
-                                                                    (make-vec (identifier "stup_dst_583"))
+                                                                    (make-vec (identifier "ssum_dst_576"))
                                                                     (seq
                                                                     (while
                                                                     (seq
@@ -481,4635 +4018,1150 @@ struct t6ca87232c4396e34133f69634dc3e421 : public std::tuple<
                                                                     (set-vec (u8 0) (identifier "leb128_sz_584") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_584")) (u8 7)))
                                                                     (gt (unsafe-nth (u8 0) (identifier "leb128_sz_584")) (u32 0))) 
                                                                     (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_585"))))) 
-                                                                    (bytes-of-string (get-item 0 (identifier "x_582"))))))) 
-                                                                    (set-vec (u8 0) (identifier "n_ref_581") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_581")))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_580")))))
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_585"))))))
+                                                                    (let "n_ref_587" 
+                                                                    (make-vec (i32 0))
+                                                                    (seq
+                                                                    (for-each "x_588" 
+                                                                    (get-alt "VRec" (param 0))
+                                                                    (seq
+                                                                    (set-vec (u8 0) (identifier "dst_ref_586") (apply (identifier "named_value-to-row-binary") (identifier "x_588") (unsafe-nth (u8 0) (identifier "dst_ref_586"))))
+                                                                    (set-vec (u8 0) (identifier "n_ref_587") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_587")))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_586")))))
                                                                     (seq 
-                                                                    (assert (eq (identifier "label1_569") (u16 35)))
-                                                                    (let "dst_ref_573"
+                                                                    (assert (eq (identifier "label1_575") (u16 35)))
+                                                                    (let "dst_ref_579"
                                                                     (make-vec
-                                                                    (let "leb128_sz_571" 
+                                                                    (let "leb128_sz_577" 
                                                                     (make-vec (cardinality (get-alt "VMap" (param 0))))
-                                                                    (let "leb128_ptr_572" 
-                                                                    (make-vec (identifier "ssum_dst_570"))
+                                                                    (let "leb128_ptr_578" 
+                                                                    (make-vec (identifier "ssum_dst_576"))
                                                                     (seq
                                                                     (while
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
-                                                                    (identifier "leb128_ptr_572")
+                                                                    (identifier "leb128_ptr_578")
                                                                     (write-u8 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_572"))
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_578"))
                                                                     (if 
-                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_571"))) 
-                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_571"))) 
-                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_571"))) (u8 128)))))
-                                                                    (set-vec (u8 0) (identifier "leb128_sz_571") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_571")) (u8 7)))
-                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_571")) (u32 0))) 
+                                                                    (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_577"))) 
+                                                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_577"))) 
+                                                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_577"))) (u8 128)))))
+                                                                    (set-vec (u8 0) (identifier "leb128_sz_577") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_577")) (u8 7)))
+                                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_577")) (u32 0))) 
                                                                     (nop)) 
-                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_572"))))))
-                                                                    (let "n_ref_574" 
+                                                                    (unsafe-nth (u8 0) (identifier "leb128_ptr_578"))))))
+                                                                    (let "n_ref_580" 
                                                                     (make-vec (i32 0))
                                                                     (seq
-                                                                    (for-each "x_575" 
+                                                                    (for-each "x_581" 
                                                                     (get-alt "VMap" (param 0))
                                                                     (seq
                                                                     (set-vec 
                                                                     (u8 0) 
-                                                                    (identifier "dst_ref_573")
-                                                                    (apply (myself "Ptr") (get-item 1 (identifier "x_575")) (apply (myself "Ptr") (get-item 0 (identifier "x_575")) (unsafe-nth (u8 0) (identifier "dst_ref_573")))))
-                                                                    (set-vec (u8 0) (identifier "n_ref_574") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_574")))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_573"))))))))))))))))))))))))))))))))))))))))))))
+                                                                    (identifier "dst_ref_579")
+                                                                    (apply (myself "Ptr") (get-item 1 (identifier "x_581")) (apply (myself "Ptr") (get-item 0 (identifier "x_581")) (unsafe-nth (u8 0) (identifier "dst_ref_579")))))
+                                                                    (set-vec (u8 0) (identifier "n_ref_580") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_580")))))) 
+                                                                    (unsafe-nth (u8 0) (identifier "dst_ref_579"))))))))))))))))))))))))))))))))))))))))))))
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_value::t>  p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t((*p_0).index()) };
-    Pointer let_res_2;
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> fun1320 { [&fun1320](std::shared_ptr<::dessser::gen::raql_value::t>  p_0, Pointer p_1) {
+    uint16_t id_1321 { uint16_t((*p_0).index()) };
+    Pointer let_res_1322;
     {
-      uint16_t label1_569 { id_1 };
-      Pointer id_3 { p_1.writeU16Le(label1_569) };
-      Pointer let_res_4;
+      uint16_t label1_575 { id_1321 };
+      Pointer id_1323 { p_1.writeU16Le(label1_575) };
+      Pointer let_res_1324;
       {
-        Pointer ssum_dst_570 { id_3 };
-        uint16_t id_5 { 0 };
-        bool id_6 { bool(id_5 == label1_569) };
-        Pointer choose_res_7;
-        if (id_6) {
-          choose_res_7 = ssum_dst_570;
+        Pointer ssum_dst_576 { id_1323 };
+        uint16_t id_1325 { 0 };
+        bool id_1326 { bool(id_1325 == label1_575) };
+        Pointer choose_res_1327;
+        if (id_1326) {
+          choose_res_1327 = ssum_dst_576;
         } else {
-          uint16_t id_8 { 1 };
-          bool id_9 { bool(id_8 == label1_569) };
-          Pointer choose_res_10;
-          if (id_9) {
-            choose_res_10 = ssum_dst_570;
+          uint16_t id_1328 { 1 };
+          bool id_1329 { bool(id_1328 == label1_575) };
+          Pointer choose_res_1330;
+          if (id_1329) {
+            choose_res_1330 = ssum_dst_576;
           } else {
-            uint16_t id_11 { 2 };
-            bool id_12 { bool(id_11 == label1_569) };
-            Pointer choose_res_13;
-            if (id_12) {
-              double id_14 { std::get<2 /* VFloat */>((*p_0)) };
-              uint64_t id_15 { qword_of_float(id_14) };
-              Pointer id_16 { ssum_dst_570.writeU64Le(id_15) };
-              choose_res_13 = id_16;
+            uint16_t id_1331 { 2 };
+            bool id_1332 { bool(id_1331 == label1_575) };
+            Pointer choose_res_1333;
+            if (id_1332) {
+              double id_1334 { std::get<2 /* VFloat */>((*p_0)) };
+              uint64_t id_1335 { qword_of_float(id_1334) };
+              Pointer id_1336 { ssum_dst_576.writeU64Le(id_1335) };
+              choose_res_1333 = id_1336;
             } else {
-              uint16_t id_17 { 3 };
-              bool id_18 { bool(id_17 == label1_569) };
-              Pointer choose_res_19;
-              if (id_18) {
-                std::string id_20 { std::get<3 /* VString */>((*p_0)) };
-                uint32_t id_21 { (uint32_t)id_20.size() };
-                Vec<1, uint32_t> id_22 {  id_21  };
-                Pointer let_res_23;
+              uint16_t id_1337 { 3 };
+              bool id_1338 { bool(id_1337 == label1_575) };
+              Pointer choose_res_1339;
+              if (id_1338) {
+                std::string id_1340 { std::get<3 /* VString */>((*p_0)) };
+                uint32_t id_1341 { (uint32_t)id_1340.size() };
+                Vec<1, uint32_t> id_1342 {  id_1341  };
+                Pointer let_res_1343;
                 {
-                  Vec<1, uint32_t> leb128_sz_610 { id_22 };
-                  Vec<1, Pointer> id_24 {  ssum_dst_570  };
-                  Pointer let_res_25;
+                  Vec<1, uint32_t> leb128_sz_612 { id_1342 };
+                  Vec<1, Pointer> id_1344 {  ssum_dst_576  };
+                  Pointer let_res_1345;
                   {
-                    Vec<1, Pointer> leb128_ptr_611 { id_24 };
-                    bool while_flag_26 { true };
+                    Vec<1, Pointer> leb128_ptr_613 { id_1344 };
+                    bool while_flag_1346 { true };
                     do {
-                      uint8_t id_27 { 0 };
-                      uint8_t id_28 { 0 };
-                      Pointer id_29 { leb128_ptr_611[id_28] };
-                      uint32_t id_30 { 128U };
-                      uint8_t id_31 { 0 };
-                      uint32_t id_32 { leb128_sz_610[id_31] };
-                      bool id_33 { bool(id_30 > id_32) };
-                      uint8_t choose_res_34;
-                      if (id_33) {
-                        uint8_t id_35 { 0 };
-                        uint32_t id_36 { leb128_sz_610[id_35] };
-                        uint8_t id_37 { uint8_t(id_36) };
-                        choose_res_34 = id_37;
+                      uint8_t id_1347 { 0 };
+                      uint8_t id_1348 { 0 };
+                      Pointer id_1349 { leb128_ptr_613[id_1348] };
+                      uint32_t id_1350 { 128U };
+                      uint8_t id_1351 { 0 };
+                      uint32_t id_1352 { leb128_sz_612[id_1351] };
+                      bool id_1353 { bool(id_1350 > id_1352) };
+                      uint8_t choose_res_1354;
+                      if (id_1353) {
+                        uint8_t id_1355 { 0 };
+                        uint32_t id_1356 { leb128_sz_612[id_1355] };
+                        uint8_t id_1357 { uint8_t(id_1356) };
+                        choose_res_1354 = id_1357;
                       } else {
-                        uint8_t id_38 { 0 };
-                        uint32_t id_39 { leb128_sz_610[id_38] };
-                        uint8_t id_40 { uint8_t(id_39) };
-                        uint8_t id_41 { 128 };
-                        uint8_t id_42 { uint8_t(id_40 | id_41) };
-                        choose_res_34 = id_42;
+                        uint8_t id_1358 { 0 };
+                        uint32_t id_1359 { leb128_sz_612[id_1358] };
+                        uint8_t id_1360 { uint8_t(id_1359) };
+                        uint8_t id_1361 { 128 };
+                        uint8_t id_1362 { uint8_t(id_1360 | id_1361) };
+                        choose_res_1354 = id_1362;
                       }
-                      Pointer id_43 { id_29.writeU8(choose_res_34) };
-                      Void id_44 { ((void)(leb128_ptr_611[id_27] = id_43), ::dessser::VOID) };
-                      (void)id_44;
-                      uint8_t id_45 { 0 };
-                      uint8_t id_46 { 0 };
-                      uint32_t id_47 { leb128_sz_610[id_46] };
-                      uint8_t id_48 { 7 };
-                      uint32_t id_49 { uint32_t(id_47 >> id_48) };
-                      Void id_50 { ((void)(leb128_sz_610[id_45] = id_49), ::dessser::VOID) };
-                      (void)id_50;
-                      uint8_t id_51 { 0 };
-                      uint32_t id_52 { leb128_sz_610[id_51] };
-                      uint32_t id_53 { 0U };
-                      bool id_54 { bool(id_52 > id_53) };
-                      while_flag_26 = id_54;
-                      if (while_flag_26) {
+                      Pointer id_1363 { id_1349.writeU8(choose_res_1354) };
+                      Void id_1364 { ((void)(leb128_ptr_613[id_1347] = id_1363), ::dessser::VOID) };
+                      (void)id_1364;
+                      uint8_t id_1365 { 0 };
+                      uint8_t id_1366 { 0 };
+                      uint32_t id_1367 { leb128_sz_612[id_1366] };
+                      uint8_t id_1368 { 7 };
+                      uint32_t id_1369 { uint32_t(id_1367 >> id_1368) };
+                      Void id_1370 { ((void)(leb128_sz_612[id_1365] = id_1369), ::dessser::VOID) };
+                      (void)id_1370;
+                      uint8_t id_1371 { 0 };
+                      uint32_t id_1372 { leb128_sz_612[id_1371] };
+                      uint32_t id_1373 { 0U };
+                      bool id_1374 { bool(id_1372 > id_1373) };
+                      while_flag_1346 = id_1374;
+                      if (while_flag_1346) {
                         (void)::dessser::VOID;
                       }
-                    } while (while_flag_26);
+                    } while (while_flag_1346);
                     (void)::dessser::VOID;
-                    uint8_t id_55 { 0 };
-                    Pointer id_56 { leb128_ptr_611[id_55] };
-                    let_res_25 = id_56;
+                    uint8_t id_1375 { 0 };
+                    Pointer id_1376 { leb128_ptr_613[id_1375] };
+                    let_res_1345 = id_1376;
                   }
-                  let_res_23 = let_res_25;
+                  let_res_1343 = let_res_1345;
                 }
-                std::string id_57 { std::get<3 /* VString */>((*p_0)) };
-                Bytes id_58 { id_57 };
-                Pointer id_59 { let_res_23.writeBytes(id_58) };
-                choose_res_19 = id_59;
+                std::string id_1377 { std::get<3 /* VString */>((*p_0)) };
+                Bytes id_1378 { id_1377 };
+                Pointer id_1379 { let_res_1343.writeBytes(id_1378) };
+                choose_res_1339 = id_1379;
               } else {
-                uint16_t id_60 { 4 };
-                bool id_61 { bool(id_60 == label1_569) };
-                Pointer choose_res_62;
-                if (id_61) {
-                  bool id_63 { std::get<4 /* VBool */>((*p_0)) };
-                  uint8_t id_64 { uint8_t(id_63) };
-                  Pointer id_65 { ssum_dst_570.writeU8(id_64) };
-                  choose_res_62 = id_65;
+                uint16_t id_1380 { 4 };
+                bool id_1381 { bool(id_1380 == label1_575) };
+                Pointer choose_res_1382;
+                if (id_1381) {
+                  bool id_1383 { std::get<4 /* VBool */>((*p_0)) };
+                  uint8_t id_1384 { uint8_t(id_1383) };
+                  Pointer id_1385 { ssum_dst_576.writeU8(id_1384) };
+                  choose_res_1382 = id_1385;
                 } else {
-                  uint16_t id_66 { 5 };
-                  bool id_67 { bool(id_66 == label1_569) };
-                  Pointer choose_res_68;
-                  if (id_67) {
-                    char id_69 { std::get<5 /* VChar */>((*p_0)) };
-                    uint8_t id_70 { uint8_t(id_69) };
-                    Pointer id_71 { ssum_dst_570.writeU8(id_70) };
-                    choose_res_68 = id_71;
+                  uint16_t id_1386 { 5 };
+                  bool id_1387 { bool(id_1386 == label1_575) };
+                  Pointer choose_res_1388;
+                  if (id_1387) {
+                    char id_1389 { std::get<5 /* VChar */>((*p_0)) };
+                    uint8_t id_1390 { uint8_t(id_1389) };
+                    Pointer id_1391 { ssum_dst_576.writeU8(id_1390) };
+                    choose_res_1388 = id_1391;
                   } else {
-                    uint16_t id_72 { 6 };
-                    bool id_73 { bool(id_72 == label1_569) };
-                    Pointer choose_res_74;
-                    if (id_73) {
-                      uint8_t id_75 { std::get<6 /* VU8 */>((*p_0)) };
-                      Pointer id_76 { ssum_dst_570.writeU8(id_75) };
-                      choose_res_74 = id_76;
+                    uint16_t id_1392 { 6 };
+                    bool id_1393 { bool(id_1392 == label1_575) };
+                    Pointer choose_res_1394;
+                    if (id_1393) {
+                      uint8_t id_1395 { std::get<6 /* VU8 */>((*p_0)) };
+                      Pointer id_1396 { ssum_dst_576.writeU8(id_1395) };
+                      choose_res_1394 = id_1396;
                     } else {
-                      uint16_t id_77 { 7 };
-                      bool id_78 { bool(id_77 == label1_569) };
-                      Pointer choose_res_79;
-                      if (id_78) {
-                        uint16_t id_80 { std::get<7 /* VU16 */>((*p_0)) };
-                        Pointer id_81 { ssum_dst_570.writeU16Le(id_80) };
-                        choose_res_79 = id_81;
+                      uint16_t id_1397 { 7 };
+                      bool id_1398 { bool(id_1397 == label1_575) };
+                      Pointer choose_res_1399;
+                      if (id_1398) {
+                        uint16_t id_1400 { std::get<7 /* VU16 */>((*p_0)) };
+                        Pointer id_1401 { ssum_dst_576.writeU16Le(id_1400) };
+                        choose_res_1399 = id_1401;
                       } else {
-                        uint16_t id_82 { 8 };
-                        bool id_83 { bool(id_82 == label1_569) };
-                        Pointer choose_res_84;
-                        if (id_83) {
-                          uint32_t id_85 { std::get<8 /* VU24 */>((*p_0)) };
-                          uint32_t id_86 { uint32_t(id_85) };
-                          Pointer id_87 { ssum_dst_570.writeU32Le(id_86) };
-                          choose_res_84 = id_87;
+                        uint16_t id_1402 { 8 };
+                        bool id_1403 { bool(id_1402 == label1_575) };
+                        Pointer choose_res_1404;
+                        if (id_1403) {
+                          uint32_t id_1405 { std::get<8 /* VU24 */>((*p_0)) };
+                          uint32_t id_1406 { uint32_t(id_1405) };
+                          Pointer id_1407 { ssum_dst_576.writeU32Le(id_1406) };
+                          choose_res_1404 = id_1407;
                         } else {
-                          uint16_t id_88 { 9 };
-                          bool id_89 { bool(id_88 == label1_569) };
-                          Pointer choose_res_90;
-                          if (id_89) {
-                            uint32_t id_91 { std::get<9 /* VU32 */>((*p_0)) };
-                            Pointer id_92 { ssum_dst_570.writeU32Le(id_91) };
-                            choose_res_90 = id_92;
+                          uint16_t id_1408 { 9 };
+                          bool id_1409 { bool(id_1408 == label1_575) };
+                          Pointer choose_res_1410;
+                          if (id_1409) {
+                            uint32_t id_1411 { std::get<9 /* VU32 */>((*p_0)) };
+                            Pointer id_1412 { ssum_dst_576.writeU32Le(id_1411) };
+                            choose_res_1410 = id_1412;
                           } else {
-                            uint16_t id_93 { 10 };
-                            bool id_94 { bool(id_93 == label1_569) };
-                            Pointer choose_res_95;
-                            if (id_94) {
-                              uint64_t id_96 { std::get<10 /* VU40 */>((*p_0)) };
-                              uint64_t id_97 { uint64_t(id_96) };
-                              Pointer id_98 { ssum_dst_570.writeU64Le(id_97) };
-                              choose_res_95 = id_98;
+                            uint16_t id_1413 { 10 };
+                            bool id_1414 { bool(id_1413 == label1_575) };
+                            Pointer choose_res_1415;
+                            if (id_1414) {
+                              uint64_t id_1416 { std::get<10 /* VU40 */>((*p_0)) };
+                              uint64_t id_1417 { uint64_t(id_1416) };
+                              Pointer id_1418 { ssum_dst_576.writeU64Le(id_1417) };
+                              choose_res_1415 = id_1418;
                             } else {
-                              uint16_t id_99 { 11 };
-                              bool id_100 { bool(id_99 == label1_569) };
-                              Pointer choose_res_101;
-                              if (id_100) {
-                                uint64_t id_102 { std::get<11 /* VU48 */>((*p_0)) };
-                                uint64_t id_103 { uint64_t(id_102) };
-                                Pointer id_104 { ssum_dst_570.writeU64Le(id_103) };
-                                choose_res_101 = id_104;
+                              uint16_t id_1419 { 11 };
+                              bool id_1420 { bool(id_1419 == label1_575) };
+                              Pointer choose_res_1421;
+                              if (id_1420) {
+                                uint64_t id_1422 { std::get<11 /* VU48 */>((*p_0)) };
+                                uint64_t id_1423 { uint64_t(id_1422) };
+                                Pointer id_1424 { ssum_dst_576.writeU64Le(id_1423) };
+                                choose_res_1421 = id_1424;
                               } else {
-                                uint16_t id_105 { 12 };
-                                bool id_106 { bool(id_105 == label1_569) };
-                                Pointer choose_res_107;
-                                if (id_106) {
-                                  uint64_t id_108 { std::get<12 /* VU56 */>((*p_0)) };
-                                  uint64_t id_109 { uint64_t(id_108) };
-                                  Pointer id_110 { ssum_dst_570.writeU64Le(id_109) };
-                                  choose_res_107 = id_110;
+                                uint16_t id_1425 { 12 };
+                                bool id_1426 { bool(id_1425 == label1_575) };
+                                Pointer choose_res_1427;
+                                if (id_1426) {
+                                  uint64_t id_1428 { std::get<12 /* VU56 */>((*p_0)) };
+                                  uint64_t id_1429 { uint64_t(id_1428) };
+                                  Pointer id_1430 { ssum_dst_576.writeU64Le(id_1429) };
+                                  choose_res_1427 = id_1430;
                                 } else {
-                                  uint16_t id_111 { 13 };
-                                  bool id_112 { bool(id_111 == label1_569) };
-                                  Pointer choose_res_113;
-                                  if (id_112) {
-                                    uint64_t id_114 { std::get<13 /* VU64 */>((*p_0)) };
-                                    Pointer id_115 { ssum_dst_570.writeU64Le(id_114) };
-                                    choose_res_113 = id_115;
+                                  uint16_t id_1431 { 13 };
+                                  bool id_1432 { bool(id_1431 == label1_575) };
+                                  Pointer choose_res_1433;
+                                  if (id_1432) {
+                                    uint64_t id_1434 { std::get<13 /* VU64 */>((*p_0)) };
+                                    Pointer id_1435 { ssum_dst_576.writeU64Le(id_1434) };
+                                    choose_res_1433 = id_1435;
                                   } else {
-                                    uint16_t id_116 { 14 };
-                                    bool id_117 { bool(id_116 == label1_569) };
-                                    Pointer choose_res_118;
-                                    if (id_117) {
-                                      uint128_t id_119 { std::get<14 /* VU128 */>((*p_0)) };
-                                      Pointer id_120 { ssum_dst_570.writeU128Le(id_119) };
-                                      choose_res_118 = id_120;
+                                    uint16_t id_1436 { 14 };
+                                    bool id_1437 { bool(id_1436 == label1_575) };
+                                    Pointer choose_res_1438;
+                                    if (id_1437) {
+                                      uint128_t id_1439 { std::get<14 /* VU128 */>((*p_0)) };
+                                      Pointer id_1440 { ssum_dst_576.writeU128Le(id_1439) };
+                                      choose_res_1438 = id_1440;
                                     } else {
-                                      uint16_t id_121 { 15 };
-                                      bool id_122 { bool(id_121 == label1_569) };
-                                      Pointer choose_res_123;
-                                      if (id_122) {
-                                        int8_t id_124 { std::get<15 /* VI8 */>((*p_0)) };
-                                        uint8_t id_125 { uint8_t(id_124) };
-                                        Pointer id_126 { ssum_dst_570.writeU8(id_125) };
-                                        choose_res_123 = id_126;
+                                      uint16_t id_1441 { 15 };
+                                      bool id_1442 { bool(id_1441 == label1_575) };
+                                      Pointer choose_res_1443;
+                                      if (id_1442) {
+                                        int8_t id_1444 { std::get<15 /* VI8 */>((*p_0)) };
+                                        uint8_t id_1445 { uint8_t(id_1444) };
+                                        Pointer id_1446 { ssum_dst_576.writeU8(id_1445) };
+                                        choose_res_1443 = id_1446;
                                       } else {
-                                        uint16_t id_127 { 16 };
-                                        bool id_128 { bool(id_127 == label1_569) };
-                                        Pointer choose_res_129;
-                                        if (id_128) {
-                                          int16_t id_130 { std::get<16 /* VI16 */>((*p_0)) };
-                                          uint16_t id_131 { uint16_t(id_130) };
-                                          Pointer id_132 { ssum_dst_570.writeU16Le(id_131) };
-                                          choose_res_129 = id_132;
+                                        uint16_t id_1447 { 16 };
+                                        bool id_1448 { bool(id_1447 == label1_575) };
+                                        Pointer choose_res_1449;
+                                        if (id_1448) {
+                                          int16_t id_1450 { std::get<16 /* VI16 */>((*p_0)) };
+                                          uint16_t id_1451 { uint16_t(id_1450) };
+                                          Pointer id_1452 { ssum_dst_576.writeU16Le(id_1451) };
+                                          choose_res_1449 = id_1452;
                                         } else {
-                                          uint16_t id_133 { 17 };
-                                          bool id_134 { bool(id_133 == label1_569) };
-                                          Pointer choose_res_135;
-                                          if (id_134) {
-                                            int32_t id_136 { std::get<17 /* VI24 */>((*p_0)) };
-                                            int32_t id_137 { int32_t(id_136) };
-                                            uint32_t id_138 { uint32_t(id_137) };
-                                            Pointer id_139 { ssum_dst_570.writeU32Le(id_138) };
-                                            choose_res_135 = id_139;
+                                          uint16_t id_1453 { 17 };
+                                          bool id_1454 { bool(id_1453 == label1_575) };
+                                          Pointer choose_res_1455;
+                                          if (id_1454) {
+                                            int32_t id_1456 { std::get<17 /* VI24 */>((*p_0)) };
+                                            int32_t id_1457 { int32_t(id_1456) };
+                                            uint32_t id_1458 { uint32_t(id_1457) };
+                                            Pointer id_1459 { ssum_dst_576.writeU32Le(id_1458) };
+                                            choose_res_1455 = id_1459;
                                           } else {
-                                            uint16_t id_140 { 18 };
-                                            bool id_141 { bool(id_140 == label1_569) };
-                                            Pointer choose_res_142;
-                                            if (id_141) {
-                                              int32_t id_143 { std::get<18 /* VI32 */>((*p_0)) };
-                                              uint32_t id_144 { uint32_t(id_143) };
-                                              Pointer id_145 { ssum_dst_570.writeU32Le(id_144) };
-                                              choose_res_142 = id_145;
+                                            uint16_t id_1460 { 18 };
+                                            bool id_1461 { bool(id_1460 == label1_575) };
+                                            Pointer choose_res_1462;
+                                            if (id_1461) {
+                                              int32_t id_1463 { std::get<18 /* VI32 */>((*p_0)) };
+                                              uint32_t id_1464 { uint32_t(id_1463) };
+                                              Pointer id_1465 { ssum_dst_576.writeU32Le(id_1464) };
+                                              choose_res_1462 = id_1465;
                                             } else {
-                                              uint16_t id_146 { 19 };
-                                              bool id_147 { bool(id_146 == label1_569) };
-                                              Pointer choose_res_148;
-                                              if (id_147) {
-                                                int64_t id_149 { std::get<19 /* VI40 */>((*p_0)) };
-                                                int64_t id_150 { int64_t(id_149) };
-                                                uint64_t id_151 { uint64_t(id_150) };
-                                                Pointer id_152 { ssum_dst_570.writeU64Le(id_151) };
-                                                choose_res_148 = id_152;
+                                              uint16_t id_1466 { 19 };
+                                              bool id_1467 { bool(id_1466 == label1_575) };
+                                              Pointer choose_res_1468;
+                                              if (id_1467) {
+                                                int64_t id_1469 { std::get<19 /* VI40 */>((*p_0)) };
+                                                int64_t id_1470 { int64_t(id_1469) };
+                                                uint64_t id_1471 { uint64_t(id_1470) };
+                                                Pointer id_1472 { ssum_dst_576.writeU64Le(id_1471) };
+                                                choose_res_1468 = id_1472;
                                               } else {
-                                                uint16_t id_153 { 20 };
-                                                bool id_154 { bool(id_153 == label1_569) };
-                                                Pointer choose_res_155;
-                                                if (id_154) {
-                                                  int64_t id_156 { std::get<20 /* VI48 */>((*p_0)) };
-                                                  int64_t id_157 { int64_t(id_156) };
-                                                  uint64_t id_158 { uint64_t(id_157) };
-                                                  Pointer id_159 { ssum_dst_570.writeU64Le(id_158) };
-                                                  choose_res_155 = id_159;
+                                                uint16_t id_1473 { 20 };
+                                                bool id_1474 { bool(id_1473 == label1_575) };
+                                                Pointer choose_res_1475;
+                                                if (id_1474) {
+                                                  int64_t id_1476 { std::get<20 /* VI48 */>((*p_0)) };
+                                                  int64_t id_1477 { int64_t(id_1476) };
+                                                  uint64_t id_1478 { uint64_t(id_1477) };
+                                                  Pointer id_1479 { ssum_dst_576.writeU64Le(id_1478) };
+                                                  choose_res_1475 = id_1479;
                                                 } else {
-                                                  uint16_t id_160 { 21 };
-                                                  bool id_161 { bool(id_160 == label1_569) };
-                                                  Pointer choose_res_162;
-                                                  if (id_161) {
-                                                    int64_t id_163 { std::get<21 /* VI56 */>((*p_0)) };
-                                                    int64_t id_164 { int64_t(id_163) };
-                                                    uint64_t id_165 { uint64_t(id_164) };
-                                                    Pointer id_166 { ssum_dst_570.writeU64Le(id_165) };
-                                                    choose_res_162 = id_166;
+                                                  uint16_t id_1480 { 21 };
+                                                  bool id_1481 { bool(id_1480 == label1_575) };
+                                                  Pointer choose_res_1482;
+                                                  if (id_1481) {
+                                                    int64_t id_1483 { std::get<21 /* VI56 */>((*p_0)) };
+                                                    int64_t id_1484 { int64_t(id_1483) };
+                                                    uint64_t id_1485 { uint64_t(id_1484) };
+                                                    Pointer id_1486 { ssum_dst_576.writeU64Le(id_1485) };
+                                                    choose_res_1482 = id_1486;
                                                   } else {
-                                                    uint16_t id_167 { 22 };
-                                                    bool id_168 { bool(id_167 == label1_569) };
-                                                    Pointer choose_res_169;
-                                                    if (id_168) {
-                                                      int64_t id_170 { std::get<22 /* VI64 */>((*p_0)) };
-                                                      uint64_t id_171 { uint64_t(id_170) };
-                                                      Pointer id_172 { ssum_dst_570.writeU64Le(id_171) };
-                                                      choose_res_169 = id_172;
+                                                    uint16_t id_1487 { 22 };
+                                                    bool id_1488 { bool(id_1487 == label1_575) };
+                                                    Pointer choose_res_1489;
+                                                    if (id_1488) {
+                                                      int64_t id_1490 { std::get<22 /* VI64 */>((*p_0)) };
+                                                      uint64_t id_1491 { uint64_t(id_1490) };
+                                                      Pointer id_1492 { ssum_dst_576.writeU64Le(id_1491) };
+                                                      choose_res_1489 = id_1492;
                                                     } else {
-                                                      uint16_t id_173 { 23 };
-                                                      bool id_174 { bool(id_173 == label1_569) };
-                                                      Pointer choose_res_175;
-                                                      if (id_174) {
-                                                        int128_t id_176 { std::get<23 /* VI128 */>((*p_0)) };
-                                                        uint128_t id_177 { uint128_t(id_176) };
-                                                        Pointer id_178 { ssum_dst_570.writeU128Le(id_177) };
-                                                        choose_res_175 = id_178;
+                                                      uint16_t id_1493 { 23 };
+                                                      bool id_1494 { bool(id_1493 == label1_575) };
+                                                      Pointer choose_res_1495;
+                                                      if (id_1494) {
+                                                        int128_t id_1496 { std::get<23 /* VI128 */>((*p_0)) };
+                                                        uint128_t id_1497 { uint128_t(id_1496) };
+                                                        Pointer id_1498 { ssum_dst_576.writeU128Le(id_1497) };
+                                                        choose_res_1495 = id_1498;
                                                       } else {
-                                                        uint16_t id_179 { 24 };
-                                                        bool id_180 { bool(id_179 == label1_569) };
-                                                        Pointer choose_res_181;
-                                                        if (id_180) {
-                                                          uint64_t id_182 { std::get<24 /* VEth */>((*p_0)) };
-                                                          uint64_t id_183 { uint64_t(id_182) };
-                                                          Pointer id_184 { ssum_dst_570.writeU64Le(id_183) };
-                                                          choose_res_181 = id_184;
+                                                        uint16_t id_1499 { 24 };
+                                                        bool id_1500 { bool(id_1499 == label1_575) };
+                                                        Pointer choose_res_1501;
+                                                        if (id_1500) {
+                                                          uint64_t id_1502 { std::get<24 /* VEth */>((*p_0)) };
+                                                          uint64_t id_1503 { uint64_t(id_1502) };
+                                                          Pointer id_1504 { ssum_dst_576.writeU64Le(id_1503) };
+                                                          choose_res_1501 = id_1504;
                                                         } else {
-                                                          uint16_t id_185 { 25 };
-                                                          bool id_186 { bool(id_185 == label1_569) };
-                                                          Pointer choose_res_187;
-                                                          if (id_186) {
-                                                            uint32_t id_188 { std::get<25 /* VIpv4 */>((*p_0)) };
-                                                            Pointer id_189 { ssum_dst_570.writeU32Le(id_188) };
-                                                            choose_res_187 = id_189;
+                                                          uint16_t id_1505 { 25 };
+                                                          bool id_1506 { bool(id_1505 == label1_575) };
+                                                          Pointer choose_res_1507;
+                                                          if (id_1506) {
+                                                            uint32_t id_1508 { std::get<25 /* VIpv4 */>((*p_0)) };
+                                                            Pointer id_1509 { ssum_dst_576.writeU32Le(id_1508) };
+                                                            choose_res_1507 = id_1509;
                                                           } else {
-                                                            uint16_t id_190 { 26 };
-                                                            bool id_191 { bool(id_190 == label1_569) };
-                                                            Pointer choose_res_192;
-                                                            if (id_191) {
-                                                              uint128_t id_193 { std::get<26 /* VIpv6 */>((*p_0)) };
-                                                              Pointer id_194 { ssum_dst_570.writeU128Le(id_193) };
-                                                              choose_res_192 = id_194;
+                                                            uint16_t id_1510 { 26 };
+                                                            bool id_1511 { bool(id_1510 == label1_575) };
+                                                            Pointer choose_res_1512;
+                                                            if (id_1511) {
+                                                              uint128_t id_1513 { std::get<26 /* VIpv6 */>((*p_0)) };
+                                                              Pointer id_1514 { ssum_dst_576.writeU128Le(id_1513) };
+                                                              choose_res_1512 = id_1514;
                                                             } else {
-                                                              uint16_t id_195 { 27 };
-                                                              bool id_196 { bool(id_195 == label1_569) };
-                                                              Pointer choose_res_197;
-                                                              if (id_196) {
-                                                                ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_198 { std::get<27 /* VIp */>((*p_0)) };
-                                                                uint16_t id_199 { uint16_t(id_198.index()) };
-                                                                Pointer id_200 { ssum_dst_570.writeU16Le(id_199) };
-                                                                Pointer let_res_201;
+                                                              uint16_t id_1515 { 27 };
+                                                              bool id_1516 { bool(id_1515 == label1_575) };
+                                                              Pointer choose_res_1517;
+                                                              if (id_1516) {
+                                                                ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1518 { std::get<27 /* VIp */>((*p_0)) };
+                                                                uint16_t id_1519 { uint16_t(id_1518.index()) };
+                                                                Pointer id_1520 { ssum_dst_576.writeU16Le(id_1519) };
+                                                                Pointer let_res_1521;
                                                                 {
-                                                                  Pointer ssum_dst_609 { id_200 };
-                                                                  uint16_t id_202 { 0 };
-                                                                  ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_203 { std::get<27 /* VIp */>((*p_0)) };
-                                                                  uint16_t id_204 { uint16_t(id_203.index()) };
-                                                                  bool id_205 { bool(id_202 == id_204) };
-                                                                  Pointer choose_res_206;
-                                                                  if (id_205) {
-                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_207 { std::get<27 /* VIp */>((*p_0)) };
-                                                                    uint32_t id_208 { std::get<0 /* v4 */>(id_207) };
-                                                                    Pointer id_209 { ssum_dst_609.writeU32Le(id_208) };
-                                                                    choose_res_206 = id_209;
+                                                                  Pointer ssum_dst_611 { id_1520 };
+                                                                  uint16_t id_1522 { 0 };
+                                                                  ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1523 { std::get<27 /* VIp */>((*p_0)) };
+                                                                  uint16_t id_1524 { uint16_t(id_1523.index()) };
+                                                                  bool id_1525 { bool(id_1522 == id_1524) };
+                                                                  Pointer choose_res_1526;
+                                                                  if (id_1525) {
+                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1527 { std::get<27 /* VIp */>((*p_0)) };
+                                                                    uint32_t id_1528 { std::get<0 /* v4 */>(id_1527) };
+                                                                    Pointer id_1529 { ssum_dst_611.writeU32Le(id_1528) };
+                                                                    choose_res_1526 = id_1529;
                                                                   } else {
-                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_210 { std::get<27 /* VIp */>((*p_0)) };
-                                                                    uint16_t id_211 { uint16_t(id_210.index()) };
-                                                                    uint16_t id_212 { 1 };
-                                                                    bool id_213 { bool(id_211 == id_212) };
-                                                                    Void id_214 { ((void)(assert(id_213)), ::dessser::VOID) };
-                                                                    (void)id_214;
-                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_215 { std::get<27 /* VIp */>((*p_0)) };
-                                                                    uint128_t id_216 { std::get<1 /* v6 */>(id_215) };
-                                                                    Pointer id_217 { ssum_dst_609.writeU128Le(id_216) };
-                                                                    choose_res_206 = id_217;
+                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1530 { std::get<27 /* VIp */>((*p_0)) };
+                                                                    uint16_t id_1531 { uint16_t(id_1530.index()) };
+                                                                    uint16_t id_1532 { 1 };
+                                                                    bool id_1533 { bool(id_1531 == id_1532) };
+                                                                    Void id_1534 { ((void)(assert(id_1533)), ::dessser::VOID) };
+                                                                    (void)id_1534;
+                                                                    ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1535 { std::get<27 /* VIp */>((*p_0)) };
+                                                                    uint128_t id_1536 { std::get<1 /* v6 */>(id_1535) };
+                                                                    Pointer id_1537 { ssum_dst_611.writeU128Le(id_1536) };
+                                                                    choose_res_1526 = id_1537;
                                                                   }
-                                                                  let_res_201 = choose_res_206;
+                                                                  let_res_1521 = choose_res_1526;
                                                                 }
-                                                                choose_res_197 = let_res_201;
+                                                                choose_res_1517 = let_res_1521;
                                                               } else {
-                                                                uint16_t id_218 { 28 };
-                                                                bool id_219 { bool(id_218 == label1_569) };
-                                                                Pointer choose_res_220;
-                                                                if (id_219) {
-                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_221 { std::get<28 /* VCidrv4 */>((*p_0)) };
-                                                                  uint32_t id_222 { id_221.Cidr4_ip };
-                                                                  Pointer id_223 { ssum_dst_570.writeU32Le(id_222) };
-                                                                  Pointer let_res_224;
+                                                                uint16_t id_1538 { 28 };
+                                                                bool id_1539 { bool(id_1538 == label1_575) };
+                                                                Pointer choose_res_1540;
+                                                                if (id_1539) {
+                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1541 { std::get<28 /* VCidrv4 */>((*p_0)) };
+                                                                  uint32_t id_1542 { id_1541.Cidr4_ip };
+                                                                  Pointer id_1543 { ssum_dst_576.writeU32Le(id_1542) };
+                                                                  Pointer let_res_1544;
                                                                   {
-                                                                    Pointer srec_dst_607 { id_223 };
-                                                                    ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_225 { std::get<28 /* VCidrv4 */>((*p_0)) };
-                                                                    uint8_t id_226 { id_225.Cidr4_mask };
-                                                                    Pointer id_227 { srec_dst_607.writeU8(id_226) };
-                                                                    let_res_224 = id_227;
+                                                                    Pointer srec_dst_609 { id_1543 };
+                                                                    ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1545 { std::get<28 /* VCidrv4 */>((*p_0)) };
+                                                                    uint8_t id_1546 { id_1545.Cidr4_mask };
+                                                                    Pointer id_1547 { srec_dst_609.writeU8(id_1546) };
+                                                                    let_res_1544 = id_1547;
                                                                   }
-                                                                  choose_res_220 = let_res_224;
+                                                                  choose_res_1540 = let_res_1544;
                                                                 } else {
-                                                                  uint16_t id_228 { 29 };
-                                                                  bool id_229 { bool(id_228 == label1_569) };
-                                                                  Pointer choose_res_230;
-                                                                  if (id_229) {
-                                                                    ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_231 { std::get<29 /* VCidrv6 */>((*p_0)) };
-                                                                    uint128_t id_232 { id_231.ip };
-                                                                    Pointer id_233 { ssum_dst_570.writeU128Le(id_232) };
-                                                                    Pointer let_res_234;
+                                                                  uint16_t id_1548 { 29 };
+                                                                  bool id_1549 { bool(id_1548 == label1_575) };
+                                                                  Pointer choose_res_1550;
+                                                                  if (id_1549) {
+                                                                    ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1551 { std::get<29 /* VCidrv6 */>((*p_0)) };
+                                                                    uint128_t id_1552 { id_1551.ip };
+                                                                    Pointer id_1553 { ssum_dst_576.writeU128Le(id_1552) };
+                                                                    Pointer let_res_1554;
                                                                     {
-                                                                      Pointer srec_dst_606 { id_233 };
-                                                                      ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_235 { std::get<29 /* VCidrv6 */>((*p_0)) };
-                                                                      uint8_t id_236 { id_235.mask };
-                                                                      Pointer id_237 { srec_dst_606.writeU8(id_236) };
-                                                                      let_res_234 = id_237;
+                                                                      Pointer srec_dst_608 { id_1553 };
+                                                                      ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1555 { std::get<29 /* VCidrv6 */>((*p_0)) };
+                                                                      uint8_t id_1556 { id_1555.mask };
+                                                                      Pointer id_1557 { srec_dst_608.writeU8(id_1556) };
+                                                                      let_res_1554 = id_1557;
                                                                     }
-                                                                    choose_res_230 = let_res_234;
+                                                                    choose_res_1550 = let_res_1554;
                                                                   } else {
-                                                                    uint16_t id_238 { 30 };
-                                                                    bool id_239 { bool(id_238 == label1_569) };
-                                                                    Pointer choose_res_240;
-                                                                    if (id_239) {
-                                                                      ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_241 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                      uint16_t id_242 { uint16_t(id_241.index()) };
-                                                                      Pointer id_243 { ssum_dst_570.writeU16Le(id_242) };
-                                                                      Pointer let_res_244;
+                                                                    uint16_t id_1558 { 30 };
+                                                                    bool id_1559 { bool(id_1558 == label1_575) };
+                                                                    Pointer choose_res_1560;
+                                                                    if (id_1559) {
+                                                                      ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1561 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                      uint16_t id_1562 { uint16_t(id_1561.index()) };
+                                                                      Pointer id_1563 { ssum_dst_576.writeU16Le(id_1562) };
+                                                                      Pointer let_res_1564;
                                                                       {
-                                                                        Pointer ssum_dst_603 { id_243 };
-                                                                        uint16_t id_245 { 0 };
-                                                                        ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_246 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                        uint16_t id_247 { uint16_t(id_246.index()) };
-                                                                        bool id_248 { bool(id_245 == id_247) };
-                                                                        Pointer choose_res_249;
-                                                                        if (id_248) {
-                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_250 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                          ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_251 { std::get<0 /* v4 */>(id_250) };
-                                                                          uint32_t id_252 { id_251.Cidr4_ip };
-                                                                          Pointer id_253 { ssum_dst_603.writeU32Le(id_252) };
-                                                                          Pointer let_res_254;
+                                                                        Pointer ssum_dst_605 { id_1563 };
+                                                                        uint16_t id_1565 { 0 };
+                                                                        ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1566 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                        uint16_t id_1567 { uint16_t(id_1566.index()) };
+                                                                        bool id_1568 { bool(id_1565 == id_1567) };
+                                                                        Pointer choose_res_1569;
+                                                                        if (id_1568) {
+                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1570 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                          ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1571 { std::get<0 /* v4 */>(id_1570) };
+                                                                          uint32_t id_1572 { id_1571.Cidr4_ip };
+                                                                          Pointer id_1573 { ssum_dst_605.writeU32Le(id_1572) };
+                                                                          Pointer let_res_1574;
                                                                           {
-                                                                            Pointer srec_dst_605 { id_253 };
-                                                                            ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_255 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                            ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_256 { std::get<0 /* v4 */>(id_255) };
-                                                                            uint8_t id_257 { id_256.Cidr4_mask };
-                                                                            Pointer id_258 { srec_dst_605.writeU8(id_257) };
-                                                                            let_res_254 = id_258;
+                                                                            Pointer srec_dst_607 { id_1573 };
+                                                                            ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1575 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                            ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1576 { std::get<0 /* v4 */>(id_1575) };
+                                                                            uint8_t id_1577 { id_1576.Cidr4_mask };
+                                                                            Pointer id_1578 { srec_dst_607.writeU8(id_1577) };
+                                                                            let_res_1574 = id_1578;
                                                                           }
-                                                                          choose_res_249 = let_res_254;
+                                                                          choose_res_1569 = let_res_1574;
                                                                         } else {
-                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_259 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                          uint16_t id_260 { uint16_t(id_259.index()) };
-                                                                          uint16_t id_261 { 1 };
-                                                                          bool id_262 { bool(id_260 == id_261) };
-                                                                          Void id_263 { ((void)(assert(id_262)), ::dessser::VOID) };
-                                                                          (void)id_263;
-                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_264 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_265 { std::get<1 /* v6 */>(id_264) };
-                                                                          uint128_t id_266 { id_265.ip };
-                                                                          Pointer id_267 { ssum_dst_603.writeU128Le(id_266) };
-                                                                          Pointer let_res_268;
+                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1579 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                          uint16_t id_1580 { uint16_t(id_1579.index()) };
+                                                                          uint16_t id_1581 { 1 };
+                                                                          bool id_1582 { bool(id_1580 == id_1581) };
+                                                                          Void id_1583 { ((void)(assert(id_1582)), ::dessser::VOID) };
+                                                                          (void)id_1583;
+                                                                          ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1584 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1585 { std::get<1 /* v6 */>(id_1584) };
+                                                                          uint128_t id_1586 { id_1585.ip };
+                                                                          Pointer id_1587 { ssum_dst_605.writeU128Le(id_1586) };
+                                                                          Pointer let_res_1588;
                                                                           {
-                                                                            Pointer srec_dst_604 { id_267 };
-                                                                            ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_269 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                            ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_270 { std::get<1 /* v6 */>(id_269) };
-                                                                            uint8_t id_271 { id_270.mask };
-                                                                            Pointer id_272 { srec_dst_604.writeU8(id_271) };
-                                                                            let_res_268 = id_272;
+                                                                            Pointer srec_dst_606 { id_1587 };
+                                                                            ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1589 { std::get<30 /* VCidr */>((*p_0)) };
+                                                                            ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1590 { std::get<1 /* v6 */>(id_1589) };
+                                                                            uint8_t id_1591 { id_1590.mask };
+                                                                            Pointer id_1592 { srec_dst_606.writeU8(id_1591) };
+                                                                            let_res_1588 = id_1592;
                                                                           }
-                                                                          choose_res_249 = let_res_268;
+                                                                          choose_res_1569 = let_res_1588;
                                                                         }
-                                                                        let_res_244 = choose_res_249;
+                                                                        let_res_1564 = choose_res_1569;
                                                                       }
-                                                                      choose_res_240 = let_res_244;
+                                                                      choose_res_1560 = let_res_1564;
                                                                     } else {
-                                                                      uint16_t id_273 { 31 };
-                                                                      bool id_274 { bool(id_273 == label1_569) };
-                                                                      Pointer choose_res_275;
-                                                                      if (id_274) {
-                                                                        Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_276 { std::get<31 /* VTup */>((*p_0)) };
-                                                                        uint32_t id_277 { id_276.size() };
-                                                                        Vec<1, uint32_t> id_278 {  id_277  };
-                                                                        Pointer let_res_279;
+                                                                      uint16_t id_1593 { 31 };
+                                                                      bool id_1594 { bool(id_1593 == label1_575) };
+                                                                      Pointer choose_res_1595;
+                                                                      if (id_1594) {
+                                                                        Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1596 { std::get<31 /* VTup */>((*p_0)) };
+                                                                        uint32_t id_1597 { id_1596.size() };
+                                                                        Vec<1, uint32_t> id_1598 {  id_1597  };
+                                                                        Pointer let_res_1599;
                                                                         {
-                                                                          Vec<1, uint32_t> leb128_sz_597 { id_278 };
-                                                                          Vec<1, Pointer> id_280 {  ssum_dst_570  };
-                                                                          Pointer let_res_281;
+                                                                          Vec<1, uint32_t> leb128_sz_599 { id_1598 };
+                                                                          Vec<1, Pointer> id_1600 {  ssum_dst_576  };
+                                                                          Pointer let_res_1601;
                                                                           {
-                                                                            Vec<1, Pointer> leb128_ptr_598 { id_280 };
-                                                                            bool while_flag_282 { true };
+                                                                            Vec<1, Pointer> leb128_ptr_600 { id_1600 };
+                                                                            bool while_flag_1602 { true };
                                                                             do {
-                                                                              uint8_t id_283 { 0 };
-                                                                              uint8_t id_284 { 0 };
-                                                                              Pointer id_285 { leb128_ptr_598[id_284] };
-                                                                              uint32_t id_286 { 128U };
-                                                                              uint8_t id_287 { 0 };
-                                                                              uint32_t id_288 { leb128_sz_597[id_287] };
-                                                                              bool id_289 { bool(id_286 > id_288) };
-                                                                              uint8_t choose_res_290;
-                                                                              if (id_289) {
-                                                                                uint8_t id_291 { 0 };
-                                                                                uint32_t id_292 { leb128_sz_597[id_291] };
-                                                                                uint8_t id_293 { uint8_t(id_292) };
-                                                                                choose_res_290 = id_293;
+                                                                              uint8_t id_1603 { 0 };
+                                                                              uint8_t id_1604 { 0 };
+                                                                              Pointer id_1605 { leb128_ptr_600[id_1604] };
+                                                                              uint32_t id_1606 { 128U };
+                                                                              uint8_t id_1607 { 0 };
+                                                                              uint32_t id_1608 { leb128_sz_599[id_1607] };
+                                                                              bool id_1609 { bool(id_1606 > id_1608) };
+                                                                              uint8_t choose_res_1610;
+                                                                              if (id_1609) {
+                                                                                uint8_t id_1611 { 0 };
+                                                                                uint32_t id_1612 { leb128_sz_599[id_1611] };
+                                                                                uint8_t id_1613 { uint8_t(id_1612) };
+                                                                                choose_res_1610 = id_1613;
                                                                               } else {
-                                                                                uint8_t id_294 { 0 };
-                                                                                uint32_t id_295 { leb128_sz_597[id_294] };
-                                                                                uint8_t id_296 { uint8_t(id_295) };
-                                                                                uint8_t id_297 { 128 };
-                                                                                uint8_t id_298 { uint8_t(id_296 | id_297) };
-                                                                                choose_res_290 = id_298;
+                                                                                uint8_t id_1614 { 0 };
+                                                                                uint32_t id_1615 { leb128_sz_599[id_1614] };
+                                                                                uint8_t id_1616 { uint8_t(id_1615) };
+                                                                                uint8_t id_1617 { 128 };
+                                                                                uint8_t id_1618 { uint8_t(id_1616 | id_1617) };
+                                                                                choose_res_1610 = id_1618;
                                                                               }
-                                                                              Pointer id_299 { id_285.writeU8(choose_res_290) };
-                                                                              Void id_300 { ((void)(leb128_ptr_598[id_283] = id_299), ::dessser::VOID) };
-                                                                              (void)id_300;
-                                                                              uint8_t id_301 { 0 };
-                                                                              uint8_t id_302 { 0 };
-                                                                              uint32_t id_303 { leb128_sz_597[id_302] };
-                                                                              uint8_t id_304 { 7 };
-                                                                              uint32_t id_305 { uint32_t(id_303 >> id_304) };
-                                                                              Void id_306 { ((void)(leb128_sz_597[id_301] = id_305), ::dessser::VOID) };
-                                                                              (void)id_306;
-                                                                              uint8_t id_307 { 0 };
-                                                                              uint32_t id_308 { leb128_sz_597[id_307] };
-                                                                              uint32_t id_309 { 0U };
-                                                                              bool id_310 { bool(id_308 > id_309) };
-                                                                              while_flag_282 = id_310;
-                                                                              if (while_flag_282) {
+                                                                              Pointer id_1619 { id_1605.writeU8(choose_res_1610) };
+                                                                              Void id_1620 { ((void)(leb128_ptr_600[id_1603] = id_1619), ::dessser::VOID) };
+                                                                              (void)id_1620;
+                                                                              uint8_t id_1621 { 0 };
+                                                                              uint8_t id_1622 { 0 };
+                                                                              uint32_t id_1623 { leb128_sz_599[id_1622] };
+                                                                              uint8_t id_1624 { 7 };
+                                                                              uint32_t id_1625 { uint32_t(id_1623 >> id_1624) };
+                                                                              Void id_1626 { ((void)(leb128_sz_599[id_1621] = id_1625), ::dessser::VOID) };
+                                                                              (void)id_1626;
+                                                                              uint8_t id_1627 { 0 };
+                                                                              uint32_t id_1628 { leb128_sz_599[id_1627] };
+                                                                              uint32_t id_1629 { 0U };
+                                                                              bool id_1630 { bool(id_1628 > id_1629) };
+                                                                              while_flag_1602 = id_1630;
+                                                                              if (while_flag_1602) {
                                                                                 (void)::dessser::VOID;
                                                                               }
-                                                                            } while (while_flag_282);
+                                                                            } while (while_flag_1602);
                                                                             (void)::dessser::VOID;
-                                                                            uint8_t id_311 { 0 };
-                                                                            Pointer id_312 { leb128_ptr_598[id_311] };
-                                                                            let_res_281 = id_312;
+                                                                            uint8_t id_1631 { 0 };
+                                                                            Pointer id_1632 { leb128_ptr_600[id_1631] };
+                                                                            let_res_1601 = id_1632;
                                                                           }
-                                                                          let_res_279 = let_res_281;
+                                                                          let_res_1599 = let_res_1601;
                                                                         }
-                                                                        Vec<1, Pointer> id_313 {  let_res_279  };
-                                                                        Pointer let_res_314;
+                                                                        Vec<1, Pointer> id_1633 {  let_res_1599  };
+                                                                        Pointer let_res_1634;
                                                                         {
-                                                                          Vec<1, Pointer> dst_ref_599 { id_313 };
-                                                                          int32_t id_315 { 0L };
-                                                                          Vec<1, int32_t> id_316 {  id_315  };
-                                                                          Pointer let_res_317;
+                                                                          Vec<1, Pointer> dst_ref_601 { id_1633 };
+                                                                          int32_t id_1635 { 0L };
+                                                                          Vec<1, int32_t> id_1636 {  id_1635  };
+                                                                          Pointer let_res_1637;
                                                                           {
-                                                                            Vec<1, int32_t> n_ref_600 { id_316 };
-                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_318 { std::get<31 /* VTup */>((*p_0)) };
-                                                                            for (std::shared_ptr<::dessser::gen::raql_value::t>  x_601 : id_318) {
-                                                                              uint8_t id_319 { 0 };
-                                                                              uint8_t id_320 { 0 };
-                                                                              Pointer id_321 { dst_ref_599[id_320] };
-                                                                              Pointer id_322 { fun0(x_601, id_321) };
-                                                                              Void id_323 { ((void)(dst_ref_599[id_319] = id_322), ::dessser::VOID) };
-                                                                              (void)id_323;
-                                                                              uint8_t id_324 { 0 };
-                                                                              int32_t id_325 { 1L };
-                                                                              uint8_t id_326 { 0 };
-                                                                              int32_t id_327 { n_ref_600[id_326] };
-                                                                              int32_t id_328 { int32_t(id_325 + id_327) };
-                                                                              Void id_329 { ((void)(n_ref_600[id_324] = id_328), ::dessser::VOID) };
-                                                                              (void)id_329;
-                                                                              (void)id_329;
+                                                                            Vec<1, int32_t> n_ref_602 { id_1636 };
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1638 { std::get<31 /* VTup */>((*p_0)) };
+                                                                            for (std::shared_ptr<::dessser::gen::raql_value::t>  x_603 : id_1638) {
+                                                                              uint8_t id_1639 { 0 };
+                                                                              uint8_t id_1640 { 0 };
+                                                                              Pointer id_1641 { dst_ref_601[id_1640] };
+                                                                              Pointer id_1642 { fun1320(x_603, id_1641) };
+                                                                              Void id_1643 { ((void)(dst_ref_601[id_1639] = id_1642), ::dessser::VOID) };
+                                                                              (void)id_1643;
+                                                                              uint8_t id_1644 { 0 };
+                                                                              int32_t id_1645 { 1L };
+                                                                              uint8_t id_1646 { 0 };
+                                                                              int32_t id_1647 { n_ref_602[id_1646] };
+                                                                              int32_t id_1648 { int32_t(id_1645 + id_1647) };
+                                                                              Void id_1649 { ((void)(n_ref_602[id_1644] = id_1648), ::dessser::VOID) };
+                                                                              (void)id_1649;
+                                                                              (void)id_1649;
                                                                             }
                                                                             (void)::dessser::VOID;
-                                                                            uint8_t id_330 { 0 };
-                                                                            Pointer id_331 { dst_ref_599[id_330] };
-                                                                            let_res_317 = id_331;
+                                                                            uint8_t id_1650 { 0 };
+                                                                            Pointer id_1651 { dst_ref_601[id_1650] };
+                                                                            let_res_1637 = id_1651;
                                                                           }
-                                                                          let_res_314 = let_res_317;
+                                                                          let_res_1634 = let_res_1637;
                                                                         }
-                                                                        choose_res_275 = let_res_314;
+                                                                        choose_res_1595 = let_res_1634;
                                                                       } else {
-                                                                        uint16_t id_332 { 32 };
-                                                                        bool id_333 { bool(id_332 == label1_569) };
-                                                                        Pointer choose_res_334;
-                                                                        if (id_333) {
-                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_335 { std::get<32 /* VVec */>((*p_0)) };
-                                                                          uint32_t id_336 { id_335.size() };
-                                                                          Vec<1, uint32_t> id_337 {  id_336  };
-                                                                          Pointer let_res_338;
+                                                                        uint16_t id_1652 { 32 };
+                                                                        bool id_1653 { bool(id_1652 == label1_575) };
+                                                                        Pointer choose_res_1654;
+                                                                        if (id_1653) {
+                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1655 { std::get<32 /* VVec */>((*p_0)) };
+                                                                          uint32_t id_1656 { id_1655.size() };
+                                                                          Vec<1, uint32_t> id_1657 {  id_1656  };
+                                                                          Pointer let_res_1658;
                                                                           {
-                                                                            Vec<1, uint32_t> leb128_sz_592 { id_337 };
-                                                                            Vec<1, Pointer> id_339 {  ssum_dst_570  };
-                                                                            Pointer let_res_340;
+                                                                            Vec<1, uint32_t> leb128_sz_594 { id_1657 };
+                                                                            Vec<1, Pointer> id_1659 {  ssum_dst_576  };
+                                                                            Pointer let_res_1660;
                                                                             {
-                                                                              Vec<1, Pointer> leb128_ptr_593 { id_339 };
-                                                                              bool while_flag_341 { true };
+                                                                              Vec<1, Pointer> leb128_ptr_595 { id_1659 };
+                                                                              bool while_flag_1661 { true };
                                                                               do {
-                                                                                uint8_t id_342 { 0 };
-                                                                                uint8_t id_343 { 0 };
-                                                                                Pointer id_344 { leb128_ptr_593[id_343] };
-                                                                                uint32_t id_345 { 128U };
-                                                                                uint8_t id_346 { 0 };
-                                                                                uint32_t id_347 { leb128_sz_592[id_346] };
-                                                                                bool id_348 { bool(id_345 > id_347) };
-                                                                                uint8_t choose_res_349;
-                                                                                if (id_348) {
-                                                                                  uint8_t id_350 { 0 };
-                                                                                  uint32_t id_351 { leb128_sz_592[id_350] };
-                                                                                  uint8_t id_352 { uint8_t(id_351) };
-                                                                                  choose_res_349 = id_352;
+                                                                                uint8_t id_1662 { 0 };
+                                                                                uint8_t id_1663 { 0 };
+                                                                                Pointer id_1664 { leb128_ptr_595[id_1663] };
+                                                                                uint32_t id_1665 { 128U };
+                                                                                uint8_t id_1666 { 0 };
+                                                                                uint32_t id_1667 { leb128_sz_594[id_1666] };
+                                                                                bool id_1668 { bool(id_1665 > id_1667) };
+                                                                                uint8_t choose_res_1669;
+                                                                                if (id_1668) {
+                                                                                  uint8_t id_1670 { 0 };
+                                                                                  uint32_t id_1671 { leb128_sz_594[id_1670] };
+                                                                                  uint8_t id_1672 { uint8_t(id_1671) };
+                                                                                  choose_res_1669 = id_1672;
                                                                                 } else {
-                                                                                  uint8_t id_353 { 0 };
-                                                                                  uint32_t id_354 { leb128_sz_592[id_353] };
-                                                                                  uint8_t id_355 { uint8_t(id_354) };
-                                                                                  uint8_t id_356 { 128 };
-                                                                                  uint8_t id_357 { uint8_t(id_355 | id_356) };
-                                                                                  choose_res_349 = id_357;
+                                                                                  uint8_t id_1673 { 0 };
+                                                                                  uint32_t id_1674 { leb128_sz_594[id_1673] };
+                                                                                  uint8_t id_1675 { uint8_t(id_1674) };
+                                                                                  uint8_t id_1676 { 128 };
+                                                                                  uint8_t id_1677 { uint8_t(id_1675 | id_1676) };
+                                                                                  choose_res_1669 = id_1677;
                                                                                 }
-                                                                                Pointer id_358 { id_344.writeU8(choose_res_349) };
-                                                                                Void id_359 { ((void)(leb128_ptr_593[id_342] = id_358), ::dessser::VOID) };
-                                                                                (void)id_359;
-                                                                                uint8_t id_360 { 0 };
-                                                                                uint8_t id_361 { 0 };
-                                                                                uint32_t id_362 { leb128_sz_592[id_361] };
-                                                                                uint8_t id_363 { 7 };
-                                                                                uint32_t id_364 { uint32_t(id_362 >> id_363) };
-                                                                                Void id_365 { ((void)(leb128_sz_592[id_360] = id_364), ::dessser::VOID) };
-                                                                                (void)id_365;
-                                                                                uint8_t id_366 { 0 };
-                                                                                uint32_t id_367 { leb128_sz_592[id_366] };
-                                                                                uint32_t id_368 { 0U };
-                                                                                bool id_369 { bool(id_367 > id_368) };
-                                                                                while_flag_341 = id_369;
-                                                                                if (while_flag_341) {
+                                                                                Pointer id_1678 { id_1664.writeU8(choose_res_1669) };
+                                                                                Void id_1679 { ((void)(leb128_ptr_595[id_1662] = id_1678), ::dessser::VOID) };
+                                                                                (void)id_1679;
+                                                                                uint8_t id_1680 { 0 };
+                                                                                uint8_t id_1681 { 0 };
+                                                                                uint32_t id_1682 { leb128_sz_594[id_1681] };
+                                                                                uint8_t id_1683 { 7 };
+                                                                                uint32_t id_1684 { uint32_t(id_1682 >> id_1683) };
+                                                                                Void id_1685 { ((void)(leb128_sz_594[id_1680] = id_1684), ::dessser::VOID) };
+                                                                                (void)id_1685;
+                                                                                uint8_t id_1686 { 0 };
+                                                                                uint32_t id_1687 { leb128_sz_594[id_1686] };
+                                                                                uint32_t id_1688 { 0U };
+                                                                                bool id_1689 { bool(id_1687 > id_1688) };
+                                                                                while_flag_1661 = id_1689;
+                                                                                if (while_flag_1661) {
                                                                                   (void)::dessser::VOID;
                                                                                 }
-                                                                              } while (while_flag_341);
+                                                                              } while (while_flag_1661);
                                                                               (void)::dessser::VOID;
-                                                                              uint8_t id_370 { 0 };
-                                                                              Pointer id_371 { leb128_ptr_593[id_370] };
-                                                                              let_res_340 = id_371;
+                                                                              uint8_t id_1690 { 0 };
+                                                                              Pointer id_1691 { leb128_ptr_595[id_1690] };
+                                                                              let_res_1660 = id_1691;
                                                                             }
-                                                                            let_res_338 = let_res_340;
+                                                                            let_res_1658 = let_res_1660;
                                                                           }
-                                                                          Vec<1, Pointer> id_372 {  let_res_338  };
-                                                                          Pointer let_res_373;
+                                                                          Vec<1, Pointer> id_1692 {  let_res_1658  };
+                                                                          Pointer let_res_1693;
                                                                           {
-                                                                            Vec<1, Pointer> dst_ref_594 { id_372 };
-                                                                            int32_t id_374 { 0L };
-                                                                            Vec<1, int32_t> id_375 {  id_374  };
-                                                                            Pointer let_res_376;
+                                                                            Vec<1, Pointer> dst_ref_596 { id_1692 };
+                                                                            int32_t id_1694 { 0L };
+                                                                            Vec<1, int32_t> id_1695 {  id_1694  };
+                                                                            Pointer let_res_1696;
                                                                             {
-                                                                              Vec<1, int32_t> n_ref_595 { id_375 };
-                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_377 { std::get<32 /* VVec */>((*p_0)) };
-                                                                              for (std::shared_ptr<::dessser::gen::raql_value::t>  x_596 : id_377) {
-                                                                                uint8_t id_378 { 0 };
-                                                                                uint8_t id_379 { 0 };
-                                                                                Pointer id_380 { dst_ref_594[id_379] };
-                                                                                Pointer id_381 { fun0(x_596, id_380) };
-                                                                                Void id_382 { ((void)(dst_ref_594[id_378] = id_381), ::dessser::VOID) };
-                                                                                (void)id_382;
-                                                                                uint8_t id_383 { 0 };
-                                                                                int32_t id_384 { 1L };
-                                                                                uint8_t id_385 { 0 };
-                                                                                int32_t id_386 { n_ref_595[id_385] };
-                                                                                int32_t id_387 { int32_t(id_384 + id_386) };
-                                                                                Void id_388 { ((void)(n_ref_595[id_383] = id_387), ::dessser::VOID) };
-                                                                                (void)id_388;
-                                                                                (void)id_388;
+                                                                              Vec<1, int32_t> n_ref_597 { id_1695 };
+                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1697 { std::get<32 /* VVec */>((*p_0)) };
+                                                                              for (std::shared_ptr<::dessser::gen::raql_value::t>  x_598 : id_1697) {
+                                                                                uint8_t id_1698 { 0 };
+                                                                                uint8_t id_1699 { 0 };
+                                                                                Pointer id_1700 { dst_ref_596[id_1699] };
+                                                                                Pointer id_1701 { fun1320(x_598, id_1700) };
+                                                                                Void id_1702 { ((void)(dst_ref_596[id_1698] = id_1701), ::dessser::VOID) };
+                                                                                (void)id_1702;
+                                                                                uint8_t id_1703 { 0 };
+                                                                                int32_t id_1704 { 1L };
+                                                                                uint8_t id_1705 { 0 };
+                                                                                int32_t id_1706 { n_ref_597[id_1705] };
+                                                                                int32_t id_1707 { int32_t(id_1704 + id_1706) };
+                                                                                Void id_1708 { ((void)(n_ref_597[id_1703] = id_1707), ::dessser::VOID) };
+                                                                                (void)id_1708;
+                                                                                (void)id_1708;
                                                                               }
                                                                               (void)::dessser::VOID;
-                                                                              uint8_t id_389 { 0 };
-                                                                              Pointer id_390 { dst_ref_594[id_389] };
-                                                                              let_res_376 = id_390;
+                                                                              uint8_t id_1709 { 0 };
+                                                                              Pointer id_1710 { dst_ref_596[id_1709] };
+                                                                              let_res_1696 = id_1710;
                                                                             }
-                                                                            let_res_373 = let_res_376;
+                                                                            let_res_1693 = let_res_1696;
                                                                           }
-                                                                          choose_res_334 = let_res_373;
+                                                                          choose_res_1654 = let_res_1693;
                                                                         } else {
-                                                                          uint16_t id_391 { 33 };
-                                                                          bool id_392 { bool(id_391 == label1_569) };
-                                                                          Pointer choose_res_393;
-                                                                          if (id_392) {
-                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_394 { std::get<33 /* VArr */>((*p_0)) };
-                                                                            uint32_t id_395 { id_394.size() };
-                                                                            Vec<1, uint32_t> id_396 {  id_395  };
-                                                                            Pointer let_res_397;
+                                                                          uint16_t id_1711 { 33 };
+                                                                          bool id_1712 { bool(id_1711 == label1_575) };
+                                                                          Pointer choose_res_1713;
+                                                                          if (id_1712) {
+                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1714 { std::get<33 /* VArr */>((*p_0)) };
+                                                                            uint32_t id_1715 { id_1714.size() };
+                                                                            Vec<1, uint32_t> id_1716 {  id_1715  };
+                                                                            Pointer let_res_1717;
                                                                             {
-                                                                              Vec<1, uint32_t> leb128_sz_587 { id_396 };
-                                                                              Vec<1, Pointer> id_398 {  ssum_dst_570  };
-                                                                              Pointer let_res_399;
+                                                                              Vec<1, uint32_t> leb128_sz_589 { id_1716 };
+                                                                              Vec<1, Pointer> id_1718 {  ssum_dst_576  };
+                                                                              Pointer let_res_1719;
                                                                               {
-                                                                                Vec<1, Pointer> leb128_ptr_588 { id_398 };
-                                                                                bool while_flag_400 { true };
+                                                                                Vec<1, Pointer> leb128_ptr_590 { id_1718 };
+                                                                                bool while_flag_1720 { true };
                                                                                 do {
-                                                                                  uint8_t id_401 { 0 };
-                                                                                  uint8_t id_402 { 0 };
-                                                                                  Pointer id_403 { leb128_ptr_588[id_402] };
-                                                                                  uint32_t id_404 { 128U };
-                                                                                  uint8_t id_405 { 0 };
-                                                                                  uint32_t id_406 { leb128_sz_587[id_405] };
-                                                                                  bool id_407 { bool(id_404 > id_406) };
-                                                                                  uint8_t choose_res_408;
-                                                                                  if (id_407) {
-                                                                                    uint8_t id_409 { 0 };
-                                                                                    uint32_t id_410 { leb128_sz_587[id_409] };
-                                                                                    uint8_t id_411 { uint8_t(id_410) };
-                                                                                    choose_res_408 = id_411;
+                                                                                  uint8_t id_1721 { 0 };
+                                                                                  uint8_t id_1722 { 0 };
+                                                                                  Pointer id_1723 { leb128_ptr_590[id_1722] };
+                                                                                  uint32_t id_1724 { 128U };
+                                                                                  uint8_t id_1725 { 0 };
+                                                                                  uint32_t id_1726 { leb128_sz_589[id_1725] };
+                                                                                  bool id_1727 { bool(id_1724 > id_1726) };
+                                                                                  uint8_t choose_res_1728;
+                                                                                  if (id_1727) {
+                                                                                    uint8_t id_1729 { 0 };
+                                                                                    uint32_t id_1730 { leb128_sz_589[id_1729] };
+                                                                                    uint8_t id_1731 { uint8_t(id_1730) };
+                                                                                    choose_res_1728 = id_1731;
                                                                                   } else {
-                                                                                    uint8_t id_412 { 0 };
-                                                                                    uint32_t id_413 { leb128_sz_587[id_412] };
-                                                                                    uint8_t id_414 { uint8_t(id_413) };
-                                                                                    uint8_t id_415 { 128 };
-                                                                                    uint8_t id_416 { uint8_t(id_414 | id_415) };
-                                                                                    choose_res_408 = id_416;
+                                                                                    uint8_t id_1732 { 0 };
+                                                                                    uint32_t id_1733 { leb128_sz_589[id_1732] };
+                                                                                    uint8_t id_1734 { uint8_t(id_1733) };
+                                                                                    uint8_t id_1735 { 128 };
+                                                                                    uint8_t id_1736 { uint8_t(id_1734 | id_1735) };
+                                                                                    choose_res_1728 = id_1736;
                                                                                   }
-                                                                                  Pointer id_417 { id_403.writeU8(choose_res_408) };
-                                                                                  Void id_418 { ((void)(leb128_ptr_588[id_401] = id_417), ::dessser::VOID) };
-                                                                                  (void)id_418;
-                                                                                  uint8_t id_419 { 0 };
-                                                                                  uint8_t id_420 { 0 };
-                                                                                  uint32_t id_421 { leb128_sz_587[id_420] };
-                                                                                  uint8_t id_422 { 7 };
-                                                                                  uint32_t id_423 { uint32_t(id_421 >> id_422) };
-                                                                                  Void id_424 { ((void)(leb128_sz_587[id_419] = id_423), ::dessser::VOID) };
-                                                                                  (void)id_424;
-                                                                                  uint8_t id_425 { 0 };
-                                                                                  uint32_t id_426 { leb128_sz_587[id_425] };
-                                                                                  uint32_t id_427 { 0U };
-                                                                                  bool id_428 { bool(id_426 > id_427) };
-                                                                                  while_flag_400 = id_428;
-                                                                                  if (while_flag_400) {
+                                                                                  Pointer id_1737 { id_1723.writeU8(choose_res_1728) };
+                                                                                  Void id_1738 { ((void)(leb128_ptr_590[id_1721] = id_1737), ::dessser::VOID) };
+                                                                                  (void)id_1738;
+                                                                                  uint8_t id_1739 { 0 };
+                                                                                  uint8_t id_1740 { 0 };
+                                                                                  uint32_t id_1741 { leb128_sz_589[id_1740] };
+                                                                                  uint8_t id_1742 { 7 };
+                                                                                  uint32_t id_1743 { uint32_t(id_1741 >> id_1742) };
+                                                                                  Void id_1744 { ((void)(leb128_sz_589[id_1739] = id_1743), ::dessser::VOID) };
+                                                                                  (void)id_1744;
+                                                                                  uint8_t id_1745 { 0 };
+                                                                                  uint32_t id_1746 { leb128_sz_589[id_1745] };
+                                                                                  uint32_t id_1747 { 0U };
+                                                                                  bool id_1748 { bool(id_1746 > id_1747) };
+                                                                                  while_flag_1720 = id_1748;
+                                                                                  if (while_flag_1720) {
                                                                                     (void)::dessser::VOID;
                                                                                   }
-                                                                                } while (while_flag_400);
+                                                                                } while (while_flag_1720);
                                                                                 (void)::dessser::VOID;
-                                                                                uint8_t id_429 { 0 };
-                                                                                Pointer id_430 { leb128_ptr_588[id_429] };
-                                                                                let_res_399 = id_430;
+                                                                                uint8_t id_1749 { 0 };
+                                                                                Pointer id_1750 { leb128_ptr_590[id_1749] };
+                                                                                let_res_1719 = id_1750;
                                                                               }
-                                                                              let_res_397 = let_res_399;
+                                                                              let_res_1717 = let_res_1719;
                                                                             }
-                                                                            Vec<1, Pointer> id_431 {  let_res_397  };
-                                                                            Pointer let_res_432;
+                                                                            Vec<1, Pointer> id_1751 {  let_res_1717  };
+                                                                            Pointer let_res_1752;
                                                                             {
-                                                                              Vec<1, Pointer> dst_ref_589 { id_431 };
-                                                                              int32_t id_433 { 0L };
-                                                                              Vec<1, int32_t> id_434 {  id_433  };
-                                                                              Pointer let_res_435;
+                                                                              Vec<1, Pointer> dst_ref_591 { id_1751 };
+                                                                              int32_t id_1753 { 0L };
+                                                                              Vec<1, int32_t> id_1754 {  id_1753  };
+                                                                              Pointer let_res_1755;
                                                                               {
-                                                                                Vec<1, int32_t> n_ref_590 { id_434 };
-                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_436 { std::get<33 /* VArr */>((*p_0)) };
-                                                                                for (std::shared_ptr<::dessser::gen::raql_value::t>  x_591 : id_436) {
-                                                                                  uint8_t id_437 { 0 };
-                                                                                  uint8_t id_438 { 0 };
-                                                                                  Pointer id_439 { dst_ref_589[id_438] };
-                                                                                  Pointer id_440 { fun0(x_591, id_439) };
-                                                                                  Void id_441 { ((void)(dst_ref_589[id_437] = id_440), ::dessser::VOID) };
-                                                                                  (void)id_441;
-                                                                                  uint8_t id_442 { 0 };
-                                                                                  int32_t id_443 { 1L };
-                                                                                  uint8_t id_444 { 0 };
-                                                                                  int32_t id_445 { n_ref_590[id_444] };
-                                                                                  int32_t id_446 { int32_t(id_443 + id_445) };
-                                                                                  Void id_447 { ((void)(n_ref_590[id_442] = id_446), ::dessser::VOID) };
-                                                                                  (void)id_447;
-                                                                                  (void)id_447;
+                                                                                Vec<1, int32_t> n_ref_592 { id_1754 };
+                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1756 { std::get<33 /* VArr */>((*p_0)) };
+                                                                                for (std::shared_ptr<::dessser::gen::raql_value::t>  x_593 : id_1756) {
+                                                                                  uint8_t id_1757 { 0 };
+                                                                                  uint8_t id_1758 { 0 };
+                                                                                  Pointer id_1759 { dst_ref_591[id_1758] };
+                                                                                  Pointer id_1760 { fun1320(x_593, id_1759) };
+                                                                                  Void id_1761 { ((void)(dst_ref_591[id_1757] = id_1760), ::dessser::VOID) };
+                                                                                  (void)id_1761;
+                                                                                  uint8_t id_1762 { 0 };
+                                                                                  int32_t id_1763 { 1L };
+                                                                                  uint8_t id_1764 { 0 };
+                                                                                  int32_t id_1765 { n_ref_592[id_1764] };
+                                                                                  int32_t id_1766 { int32_t(id_1763 + id_1765) };
+                                                                                  Void id_1767 { ((void)(n_ref_592[id_1762] = id_1766), ::dessser::VOID) };
+                                                                                  (void)id_1767;
+                                                                                  (void)id_1767;
                                                                                 }
                                                                                 (void)::dessser::VOID;
-                                                                                uint8_t id_448 { 0 };
-                                                                                Pointer id_449 { dst_ref_589[id_448] };
-                                                                                let_res_435 = id_449;
+                                                                                uint8_t id_1768 { 0 };
+                                                                                Pointer id_1769 { dst_ref_591[id_1768] };
+                                                                                let_res_1755 = id_1769;
                                                                               }
-                                                                              let_res_432 = let_res_435;
+                                                                              let_res_1752 = let_res_1755;
                                                                             }
-                                                                            choose_res_393 = let_res_432;
+                                                                            choose_res_1713 = let_res_1752;
                                                                           } else {
-                                                                            uint16_t id_450 { 34 };
-                                                                            bool id_451 { bool(id_450 == label1_569) };
-                                                                            Pointer choose_res_452;
-                                                                            if (id_451) {
-                                                                              Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_453 { std::get<34 /* VRec */>((*p_0)) };
-                                                                              uint32_t id_454 { id_453.size() };
-                                                                              Vec<1, uint32_t> id_455 {  id_454  };
-                                                                              Pointer let_res_456;
+                                                                            uint16_t id_1770 { 34 };
+                                                                            bool id_1771 { bool(id_1770 == label1_575) };
+                                                                            Pointer choose_res_1772;
+                                                                            if (id_1771) {
+                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_1773 { std::get<34 /* VRec */>((*p_0)) };
+                                                                              uint32_t id_1774 { id_1773.size() };
+                                                                              Vec<1, uint32_t> id_1775 {  id_1774  };
+                                                                              Pointer let_res_1776;
                                                                               {
-                                                                                Vec<1, uint32_t> leb128_sz_578 { id_455 };
-                                                                                Vec<1, Pointer> id_457 {  ssum_dst_570  };
-                                                                                Pointer let_res_458;
+                                                                                Vec<1, uint32_t> leb128_sz_584 { id_1775 };
+                                                                                Vec<1, Pointer> id_1777 {  ssum_dst_576  };
+                                                                                Pointer let_res_1778;
                                                                                 {
-                                                                                  Vec<1, Pointer> leb128_ptr_579 { id_457 };
-                                                                                  bool while_flag_459 { true };
+                                                                                  Vec<1, Pointer> leb128_ptr_585 { id_1777 };
+                                                                                  bool while_flag_1779 { true };
                                                                                   do {
-                                                                                    uint8_t id_460 { 0 };
-                                                                                    uint8_t id_461 { 0 };
-                                                                                    Pointer id_462 { leb128_ptr_579[id_461] };
-                                                                                    uint32_t id_463 { 128U };
-                                                                                    uint8_t id_464 { 0 };
-                                                                                    uint32_t id_465 { leb128_sz_578[id_464] };
-                                                                                    bool id_466 { bool(id_463 > id_465) };
-                                                                                    uint8_t choose_res_467;
-                                                                                    if (id_466) {
-                                                                                      uint8_t id_468 { 0 };
-                                                                                      uint32_t id_469 { leb128_sz_578[id_468] };
-                                                                                      uint8_t id_470 { uint8_t(id_469) };
-                                                                                      choose_res_467 = id_470;
+                                                                                    uint8_t id_1780 { 0 };
+                                                                                    uint8_t id_1781 { 0 };
+                                                                                    Pointer id_1782 { leb128_ptr_585[id_1781] };
+                                                                                    uint32_t id_1783 { 128U };
+                                                                                    uint8_t id_1784 { 0 };
+                                                                                    uint32_t id_1785 { leb128_sz_584[id_1784] };
+                                                                                    bool id_1786 { bool(id_1783 > id_1785) };
+                                                                                    uint8_t choose_res_1787;
+                                                                                    if (id_1786) {
+                                                                                      uint8_t id_1788 { 0 };
+                                                                                      uint32_t id_1789 { leb128_sz_584[id_1788] };
+                                                                                      uint8_t id_1790 { uint8_t(id_1789) };
+                                                                                      choose_res_1787 = id_1790;
                                                                                     } else {
-                                                                                      uint8_t id_471 { 0 };
-                                                                                      uint32_t id_472 { leb128_sz_578[id_471] };
-                                                                                      uint8_t id_473 { uint8_t(id_472) };
-                                                                                      uint8_t id_474 { 128 };
-                                                                                      uint8_t id_475 { uint8_t(id_473 | id_474) };
-                                                                                      choose_res_467 = id_475;
+                                                                                      uint8_t id_1791 { 0 };
+                                                                                      uint32_t id_1792 { leb128_sz_584[id_1791] };
+                                                                                      uint8_t id_1793 { uint8_t(id_1792) };
+                                                                                      uint8_t id_1794 { 128 };
+                                                                                      uint8_t id_1795 { uint8_t(id_1793 | id_1794) };
+                                                                                      choose_res_1787 = id_1795;
                                                                                     }
-                                                                                    Pointer id_476 { id_462.writeU8(choose_res_467) };
-                                                                                    Void id_477 { ((void)(leb128_ptr_579[id_460] = id_476), ::dessser::VOID) };
-                                                                                    (void)id_477;
-                                                                                    uint8_t id_478 { 0 };
-                                                                                    uint8_t id_479 { 0 };
-                                                                                    uint32_t id_480 { leb128_sz_578[id_479] };
-                                                                                    uint8_t id_481 { 7 };
-                                                                                    uint32_t id_482 { uint32_t(id_480 >> id_481) };
-                                                                                    Void id_483 { ((void)(leb128_sz_578[id_478] = id_482), ::dessser::VOID) };
-                                                                                    (void)id_483;
-                                                                                    uint8_t id_484 { 0 };
-                                                                                    uint32_t id_485 { leb128_sz_578[id_484] };
-                                                                                    uint32_t id_486 { 0U };
-                                                                                    bool id_487 { bool(id_485 > id_486) };
-                                                                                    while_flag_459 = id_487;
-                                                                                    if (while_flag_459) {
+                                                                                    Pointer id_1796 { id_1782.writeU8(choose_res_1787) };
+                                                                                    Void id_1797 { ((void)(leb128_ptr_585[id_1780] = id_1796), ::dessser::VOID) };
+                                                                                    (void)id_1797;
+                                                                                    uint8_t id_1798 { 0 };
+                                                                                    uint8_t id_1799 { 0 };
+                                                                                    uint32_t id_1800 { leb128_sz_584[id_1799] };
+                                                                                    uint8_t id_1801 { 7 };
+                                                                                    uint32_t id_1802 { uint32_t(id_1800 >> id_1801) };
+                                                                                    Void id_1803 { ((void)(leb128_sz_584[id_1798] = id_1802), ::dessser::VOID) };
+                                                                                    (void)id_1803;
+                                                                                    uint8_t id_1804 { 0 };
+                                                                                    uint32_t id_1805 { leb128_sz_584[id_1804] };
+                                                                                    uint32_t id_1806 { 0U };
+                                                                                    bool id_1807 { bool(id_1805 > id_1806) };
+                                                                                    while_flag_1779 = id_1807;
+                                                                                    if (while_flag_1779) {
                                                                                       (void)::dessser::VOID;
                                                                                     }
-                                                                                  } while (while_flag_459);
+                                                                                  } while (while_flag_1779);
                                                                                   (void)::dessser::VOID;
-                                                                                  uint8_t id_488 { 0 };
-                                                                                  Pointer id_489 { leb128_ptr_579[id_488] };
-                                                                                  let_res_458 = id_489;
+                                                                                  uint8_t id_1808 { 0 };
+                                                                                  Pointer id_1809 { leb128_ptr_585[id_1808] };
+                                                                                  let_res_1778 = id_1809;
                                                                                 }
-                                                                                let_res_456 = let_res_458;
+                                                                                let_res_1776 = let_res_1778;
                                                                               }
-                                                                              Vec<1, Pointer> id_490 {  let_res_456  };
-                                                                              Pointer let_res_491;
+                                                                              Vec<1, Pointer> id_1810 {  let_res_1776  };
+                                                                              Pointer let_res_1811;
                                                                               {
-                                                                                Vec<1, Pointer> dst_ref_580 { id_490 };
-                                                                                int32_t id_492 { 0L };
-                                                                                Vec<1, int32_t> id_493 {  id_492  };
-                                                                                Pointer let_res_494;
+                                                                                Vec<1, Pointer> dst_ref_586 { id_1810 };
+                                                                                int32_t id_1812 { 0L };
+                                                                                Vec<1, int32_t> id_1813 {  id_1812  };
+                                                                                Pointer let_res_1814;
                                                                                 {
-                                                                                  Vec<1, int32_t> n_ref_581 { id_493 };
-                                                                                  Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_495 { std::get<34 /* VRec */>((*p_0)) };
-                                                                                  for (::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f x_582 : id_495) {
-                                                                                    uint8_t id_496 { 0 };
-                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_497 { std::get<1>(x_582) };
-                                                                                    uint8_t id_498 { 0 };
-                                                                                    Pointer id_499 { dst_ref_580[id_498] };
-                                                                                    Pointer let_res_500;
-                                                                                    {
-                                                                                      Pointer stup_dst_583 { id_499 };
-                                                                                      std::string id_501 { std::get<0>(x_582) };
-                                                                                      uint32_t id_502 { (uint32_t)id_501.size() };
-                                                                                      Vec<1, uint32_t> id_503 {  id_502  };
-                                                                                      Pointer let_res_504;
-                                                                                      {
-                                                                                        Vec<1, uint32_t> leb128_sz_584 { id_503 };
-                                                                                        Vec<1, Pointer> id_505 {  stup_dst_583  };
-                                                                                        Pointer let_res_506;
-                                                                                        {
-                                                                                          Vec<1, Pointer> leb128_ptr_585 { id_505 };
-                                                                                          bool while_flag_507 { true };
-                                                                                          do {
-                                                                                            uint8_t id_508 { 0 };
-                                                                                            uint8_t id_509 { 0 };
-                                                                                            Pointer id_510 { leb128_ptr_585[id_509] };
-                                                                                            uint32_t id_511 { 128U };
-                                                                                            uint8_t id_512 { 0 };
-                                                                                            uint32_t id_513 { leb128_sz_584[id_512] };
-                                                                                            bool id_514 { bool(id_511 > id_513) };
-                                                                                            uint8_t choose_res_515;
-                                                                                            if (id_514) {
-                                                                                              uint8_t id_516 { 0 };
-                                                                                              uint32_t id_517 { leb128_sz_584[id_516] };
-                                                                                              uint8_t id_518 { uint8_t(id_517) };
-                                                                                              choose_res_515 = id_518;
-                                                                                            } else {
-                                                                                              uint8_t id_519 { 0 };
-                                                                                              uint32_t id_520 { leb128_sz_584[id_519] };
-                                                                                              uint8_t id_521 { uint8_t(id_520) };
-                                                                                              uint8_t id_522 { 128 };
-                                                                                              uint8_t id_523 { uint8_t(id_521 | id_522) };
-                                                                                              choose_res_515 = id_523;
-                                                                                            }
-                                                                                            Pointer id_524 { id_510.writeU8(choose_res_515) };
-                                                                                            Void id_525 { ((void)(leb128_ptr_585[id_508] = id_524), ::dessser::VOID) };
-                                                                                            (void)id_525;
-                                                                                            uint8_t id_526 { 0 };
-                                                                                            uint8_t id_527 { 0 };
-                                                                                            uint32_t id_528 { leb128_sz_584[id_527] };
-                                                                                            uint8_t id_529 { 7 };
-                                                                                            uint32_t id_530 { uint32_t(id_528 >> id_529) };
-                                                                                            Void id_531 { ((void)(leb128_sz_584[id_526] = id_530), ::dessser::VOID) };
-                                                                                            (void)id_531;
-                                                                                            uint8_t id_532 { 0 };
-                                                                                            uint32_t id_533 { leb128_sz_584[id_532] };
-                                                                                            uint32_t id_534 { 0U };
-                                                                                            bool id_535 { bool(id_533 > id_534) };
-                                                                                            while_flag_507 = id_535;
-                                                                                            if (while_flag_507) {
-                                                                                              (void)::dessser::VOID;
-                                                                                            }
-                                                                                          } while (while_flag_507);
-                                                                                          (void)::dessser::VOID;
-                                                                                          uint8_t id_536 { 0 };
-                                                                                          Pointer id_537 { leb128_ptr_585[id_536] };
-                                                                                          let_res_506 = id_537;
-                                                                                        }
-                                                                                        let_res_504 = let_res_506;
-                                                                                      }
-                                                                                      std::string id_538 { std::get<0>(x_582) };
-                                                                                      Bytes id_539 { id_538 };
-                                                                                      Pointer id_540 { let_res_504.writeBytes(id_539) };
-                                                                                      let_res_500 = id_540;
-                                                                                    }
-                                                                                    Pointer id_541 { fun0(id_497, let_res_500) };
-                                                                                    Void id_542 { ((void)(dst_ref_580[id_496] = id_541), ::dessser::VOID) };
-                                                                                    (void)id_542;
-                                                                                    uint8_t id_543 { 0 };
-                                                                                    int32_t id_544 { 1L };
-                                                                                    uint8_t id_545 { 0 };
-                                                                                    int32_t id_546 { n_ref_581[id_545] };
-                                                                                    int32_t id_547 { int32_t(id_544 + id_546) };
-                                                                                    Void id_548 { ((void)(n_ref_581[id_543] = id_547), ::dessser::VOID) };
-                                                                                    (void)id_548;
-                                                                                    (void)id_548;
+                                                                                  Vec<1, int32_t> n_ref_587 { id_1813 };
+                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> > id_1815 { std::get<34 /* VRec */>((*p_0)) };
+                                                                                  for (std::shared_ptr<::dessser::gen::raql_value::named_value>  x_588 : id_1815) {
+                                                                                    uint8_t id_1816 { 0 };
+                                                                                    uint8_t id_1817 { 0 };
+                                                                                    Pointer id_1818 { dst_ref_586[id_1817] };
+                                                                                    Pointer id_1819 { named_value_to_row_binary(x_588, id_1818) };
+                                                                                    Void id_1820 { ((void)(dst_ref_586[id_1816] = id_1819), ::dessser::VOID) };
+                                                                                    (void)id_1820;
+                                                                                    uint8_t id_1821 { 0 };
+                                                                                    int32_t id_1822 { 1L };
+                                                                                    uint8_t id_1823 { 0 };
+                                                                                    int32_t id_1824 { n_ref_587[id_1823] };
+                                                                                    int32_t id_1825 { int32_t(id_1822 + id_1824) };
+                                                                                    Void id_1826 { ((void)(n_ref_587[id_1821] = id_1825), ::dessser::VOID) };
+                                                                                    (void)id_1826;
+                                                                                    (void)id_1826;
                                                                                   }
                                                                                   (void)::dessser::VOID;
-                                                                                  uint8_t id_549 { 0 };
-                                                                                  Pointer id_550 { dst_ref_580[id_549] };
-                                                                                  let_res_494 = id_550;
+                                                                                  uint8_t id_1827 { 0 };
+                                                                                  Pointer id_1828 { dst_ref_586[id_1827] };
+                                                                                  let_res_1814 = id_1828;
                                                                                 }
-                                                                                let_res_491 = let_res_494;
+                                                                                let_res_1811 = let_res_1814;
                                                                               }
-                                                                              choose_res_452 = let_res_491;
+                                                                              choose_res_1772 = let_res_1811;
                                                                             } else {
-                                                                              uint16_t id_551 { 35 };
-                                                                              bool id_552 { bool(label1_569 == id_551) };
-                                                                              Void id_553 { ((void)(assert(id_552)), ::dessser::VOID) };
-                                                                              (void)id_553;
-                                                                              Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_554 { std::get<35 /* VMap */>((*p_0)) };
-                                                                              uint32_t id_555 { id_554.size() };
-                                                                              Vec<1, uint32_t> id_556 {  id_555  };
-                                                                              Pointer let_res_557;
+                                                                              uint16_t id_1829 { 35 };
+                                                                              bool id_1830 { bool(label1_575 == id_1829) };
+                                                                              Void id_1831 { ((void)(assert(id_1830)), ::dessser::VOID) };
+                                                                              (void)id_1831;
+                                                                              Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1832 { std::get<35 /* VMap */>((*p_0)) };
+                                                                              uint32_t id_1833 { id_1832.size() };
+                                                                              Vec<1, uint32_t> id_1834 {  id_1833  };
+                                                                              Pointer let_res_1835;
                                                                               {
-                                                                                Vec<1, uint32_t> leb128_sz_571 { id_556 };
-                                                                                Vec<1, Pointer> id_558 {  ssum_dst_570  };
-                                                                                Pointer let_res_559;
+                                                                                Vec<1, uint32_t> leb128_sz_577 { id_1834 };
+                                                                                Vec<1, Pointer> id_1836 {  ssum_dst_576  };
+                                                                                Pointer let_res_1837;
                                                                                 {
-                                                                                  Vec<1, Pointer> leb128_ptr_572 { id_558 };
-                                                                                  bool while_flag_560 { true };
+                                                                                  Vec<1, Pointer> leb128_ptr_578 { id_1836 };
+                                                                                  bool while_flag_1838 { true };
                                                                                   do {
-                                                                                    uint8_t id_561 { 0 };
-                                                                                    uint8_t id_562 { 0 };
-                                                                                    Pointer id_563 { leb128_ptr_572[id_562] };
-                                                                                    uint32_t id_564 { 128U };
-                                                                                    uint8_t id_565 { 0 };
-                                                                                    uint32_t id_566 { leb128_sz_571[id_565] };
-                                                                                    bool id_567 { bool(id_564 > id_566) };
-                                                                                    uint8_t choose_res_568;
-                                                                                    if (id_567) {
-                                                                                      uint8_t id_569 { 0 };
-                                                                                      uint32_t id_570 { leb128_sz_571[id_569] };
-                                                                                      uint8_t id_571 { uint8_t(id_570) };
-                                                                                      choose_res_568 = id_571;
+                                                                                    uint8_t id_1839 { 0 };
+                                                                                    uint8_t id_1840 { 0 };
+                                                                                    Pointer id_1841 { leb128_ptr_578[id_1840] };
+                                                                                    uint32_t id_1842 { 128U };
+                                                                                    uint8_t id_1843 { 0 };
+                                                                                    uint32_t id_1844 { leb128_sz_577[id_1843] };
+                                                                                    bool id_1845 { bool(id_1842 > id_1844) };
+                                                                                    uint8_t choose_res_1846;
+                                                                                    if (id_1845) {
+                                                                                      uint8_t id_1847 { 0 };
+                                                                                      uint32_t id_1848 { leb128_sz_577[id_1847] };
+                                                                                      uint8_t id_1849 { uint8_t(id_1848) };
+                                                                                      choose_res_1846 = id_1849;
                                                                                     } else {
-                                                                                      uint8_t id_572 { 0 };
-                                                                                      uint32_t id_573 { leb128_sz_571[id_572] };
-                                                                                      uint8_t id_574 { uint8_t(id_573) };
-                                                                                      uint8_t id_575 { 128 };
-                                                                                      uint8_t id_576 { uint8_t(id_574 | id_575) };
-                                                                                      choose_res_568 = id_576;
+                                                                                      uint8_t id_1850 { 0 };
+                                                                                      uint32_t id_1851 { leb128_sz_577[id_1850] };
+                                                                                      uint8_t id_1852 { uint8_t(id_1851) };
+                                                                                      uint8_t id_1853 { 128 };
+                                                                                      uint8_t id_1854 { uint8_t(id_1852 | id_1853) };
+                                                                                      choose_res_1846 = id_1854;
                                                                                     }
-                                                                                    Pointer id_577 { id_563.writeU8(choose_res_568) };
-                                                                                    Void id_578 { ((void)(leb128_ptr_572[id_561] = id_577), ::dessser::VOID) };
-                                                                                    (void)id_578;
-                                                                                    uint8_t id_579 { 0 };
-                                                                                    uint8_t id_580 { 0 };
-                                                                                    uint32_t id_581 { leb128_sz_571[id_580] };
-                                                                                    uint8_t id_582 { 7 };
-                                                                                    uint32_t id_583 { uint32_t(id_581 >> id_582) };
-                                                                                    Void id_584 { ((void)(leb128_sz_571[id_579] = id_583), ::dessser::VOID) };
-                                                                                    (void)id_584;
-                                                                                    uint8_t id_585 { 0 };
-                                                                                    uint32_t id_586 { leb128_sz_571[id_585] };
-                                                                                    uint32_t id_587 { 0U };
-                                                                                    bool id_588 { bool(id_586 > id_587) };
-                                                                                    while_flag_560 = id_588;
-                                                                                    if (while_flag_560) {
+                                                                                    Pointer id_1855 { id_1841.writeU8(choose_res_1846) };
+                                                                                    Void id_1856 { ((void)(leb128_ptr_578[id_1839] = id_1855), ::dessser::VOID) };
+                                                                                    (void)id_1856;
+                                                                                    uint8_t id_1857 { 0 };
+                                                                                    uint8_t id_1858 { 0 };
+                                                                                    uint32_t id_1859 { leb128_sz_577[id_1858] };
+                                                                                    uint8_t id_1860 { 7 };
+                                                                                    uint32_t id_1861 { uint32_t(id_1859 >> id_1860) };
+                                                                                    Void id_1862 { ((void)(leb128_sz_577[id_1857] = id_1861), ::dessser::VOID) };
+                                                                                    (void)id_1862;
+                                                                                    uint8_t id_1863 { 0 };
+                                                                                    uint32_t id_1864 { leb128_sz_577[id_1863] };
+                                                                                    uint32_t id_1865 { 0U };
+                                                                                    bool id_1866 { bool(id_1864 > id_1865) };
+                                                                                    while_flag_1838 = id_1866;
+                                                                                    if (while_flag_1838) {
                                                                                       (void)::dessser::VOID;
                                                                                     }
-                                                                                  } while (while_flag_560);
+                                                                                  } while (while_flag_1838);
                                                                                   (void)::dessser::VOID;
-                                                                                  uint8_t id_589 { 0 };
-                                                                                  Pointer id_590 { leb128_ptr_572[id_589] };
-                                                                                  let_res_559 = id_590;
+                                                                                  uint8_t id_1867 { 0 };
+                                                                                  Pointer id_1868 { leb128_ptr_578[id_1867] };
+                                                                                  let_res_1837 = id_1868;
                                                                                 }
-                                                                                let_res_557 = let_res_559;
+                                                                                let_res_1835 = let_res_1837;
                                                                               }
-                                                                              Vec<1, Pointer> id_591 {  let_res_557  };
-                                                                              Pointer let_res_592;
+                                                                              Vec<1, Pointer> id_1869 {  let_res_1835  };
+                                                                              Pointer let_res_1870;
                                                                               {
-                                                                                Vec<1, Pointer> dst_ref_573 { id_591 };
-                                                                                int32_t id_593 { 0L };
-                                                                                Vec<1, int32_t> id_594 {  id_593  };
-                                                                                Pointer let_res_595;
+                                                                                Vec<1, Pointer> dst_ref_579 { id_1869 };
+                                                                                int32_t id_1871 { 0L };
+                                                                                Vec<1, int32_t> id_1872 {  id_1871  };
+                                                                                Pointer let_res_1873;
                                                                                 {
-                                                                                  Vec<1, int32_t> n_ref_574 { id_594 };
-                                                                                  Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_596 { std::get<35 /* VMap */>((*p_0)) };
-                                                                                  for (::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d x_575 : id_596) {
-                                                                                    uint8_t id_597 { 0 };
-                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_598 { std::get<1>(x_575) };
-                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_599 { std::get<0>(x_575) };
-                                                                                    uint8_t id_600 { 0 };
-                                                                                    Pointer id_601 { dst_ref_573[id_600] };
-                                                                                    Pointer id_602 { fun0(id_599, id_601) };
-                                                                                    Pointer id_603 { fun0(id_598, id_602) };
-                                                                                    Void id_604 { ((void)(dst_ref_573[id_597] = id_603), ::dessser::VOID) };
-                                                                                    (void)id_604;
-                                                                                    uint8_t id_605 { 0 };
-                                                                                    int32_t id_606 { 1L };
-                                                                                    uint8_t id_607 { 0 };
-                                                                                    int32_t id_608 { n_ref_574[id_607] };
-                                                                                    int32_t id_609 { int32_t(id_606 + id_608) };
-                                                                                    Void id_610 { ((void)(n_ref_574[id_605] = id_609), ::dessser::VOID) };
-                                                                                    (void)id_610;
-                                                                                    (void)id_610;
+                                                                                  Vec<1, int32_t> n_ref_580 { id_1872 };
+                                                                                  Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1874 { std::get<35 /* VMap */>((*p_0)) };
+                                                                                  for (::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d x_581 : id_1874) {
+                                                                                    uint8_t id_1875 { 0 };
+                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1876 { std::get<1>(x_581) };
+                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1877 { std::get<0>(x_581) };
+                                                                                    uint8_t id_1878 { 0 };
+                                                                                    Pointer id_1879 { dst_ref_579[id_1878] };
+                                                                                    Pointer id_1880 { fun1320(id_1877, id_1879) };
+                                                                                    Pointer id_1881 { fun1320(id_1876, id_1880) };
+                                                                                    Void id_1882 { ((void)(dst_ref_579[id_1875] = id_1881), ::dessser::VOID) };
+                                                                                    (void)id_1882;
+                                                                                    uint8_t id_1883 { 0 };
+                                                                                    int32_t id_1884 { 1L };
+                                                                                    uint8_t id_1885 { 0 };
+                                                                                    int32_t id_1886 { n_ref_580[id_1885] };
+                                                                                    int32_t id_1887 { int32_t(id_1884 + id_1886) };
+                                                                                    Void id_1888 { ((void)(n_ref_580[id_1883] = id_1887), ::dessser::VOID) };
+                                                                                    (void)id_1888;
+                                                                                    (void)id_1888;
                                                                                   }
                                                                                   (void)::dessser::VOID;
-                                                                                  uint8_t id_611 { 0 };
-                                                                                  Pointer id_612 { dst_ref_573[id_611] };
-                                                                                  let_res_595 = id_612;
+                                                                                  uint8_t id_1889 { 0 };
+                                                                                  Pointer id_1890 { dst_ref_579[id_1889] };
+                                                                                  let_res_1873 = id_1890;
                                                                                 }
-                                                                                let_res_592 = let_res_595;
+                                                                                let_res_1870 = let_res_1873;
                                                                               }
-                                                                              choose_res_452 = let_res_592;
+                                                                              choose_res_1772 = let_res_1870;
                                                                             }
-                                                                            choose_res_393 = choose_res_452;
+                                                                            choose_res_1713 = choose_res_1772;
                                                                           }
-                                                                          choose_res_334 = choose_res_393;
+                                                                          choose_res_1654 = choose_res_1713;
                                                                         }
-                                                                        choose_res_275 = choose_res_334;
+                                                                        choose_res_1595 = choose_res_1654;
                                                                       }
-                                                                      choose_res_240 = choose_res_275;
+                                                                      choose_res_1560 = choose_res_1595;
                                                                     }
-                                                                    choose_res_230 = choose_res_240;
+                                                                    choose_res_1550 = choose_res_1560;
                                                                   }
-                                                                  choose_res_220 = choose_res_230;
+                                                                  choose_res_1540 = choose_res_1550;
                                                                 }
-                                                                choose_res_197 = choose_res_220;
+                                                                choose_res_1517 = choose_res_1540;
                                                               }
-                                                              choose_res_192 = choose_res_197;
+                                                              choose_res_1512 = choose_res_1517;
                                                             }
-                                                            choose_res_187 = choose_res_192;
+                                                            choose_res_1507 = choose_res_1512;
                                                           }
-                                                          choose_res_181 = choose_res_187;
+                                                          choose_res_1501 = choose_res_1507;
                                                         }
-                                                        choose_res_175 = choose_res_181;
+                                                        choose_res_1495 = choose_res_1501;
                                                       }
-                                                      choose_res_169 = choose_res_175;
+                                                      choose_res_1489 = choose_res_1495;
                                                     }
-                                                    choose_res_162 = choose_res_169;
+                                                    choose_res_1482 = choose_res_1489;
                                                   }
-                                                  choose_res_155 = choose_res_162;
+                                                  choose_res_1475 = choose_res_1482;
                                                 }
-                                                choose_res_148 = choose_res_155;
+                                                choose_res_1468 = choose_res_1475;
                                               }
-                                              choose_res_142 = choose_res_148;
+                                              choose_res_1462 = choose_res_1468;
                                             }
-                                            choose_res_135 = choose_res_142;
+                                            choose_res_1455 = choose_res_1462;
                                           }
-                                          choose_res_129 = choose_res_135;
+                                          choose_res_1449 = choose_res_1455;
                                         }
-                                        choose_res_123 = choose_res_129;
+                                        choose_res_1443 = choose_res_1449;
                                       }
-                                      choose_res_118 = choose_res_123;
+                                      choose_res_1438 = choose_res_1443;
                                     }
-                                    choose_res_113 = choose_res_118;
+                                    choose_res_1433 = choose_res_1438;
                                   }
-                                  choose_res_107 = choose_res_113;
+                                  choose_res_1427 = choose_res_1433;
                                 }
-                                choose_res_101 = choose_res_107;
+                                choose_res_1421 = choose_res_1427;
                               }
-                              choose_res_95 = choose_res_101;
+                              choose_res_1415 = choose_res_1421;
                             }
-                            choose_res_90 = choose_res_95;
+                            choose_res_1410 = choose_res_1415;
                           }
-                          choose_res_84 = choose_res_90;
+                          choose_res_1404 = choose_res_1410;
                         }
-                        choose_res_79 = choose_res_84;
+                        choose_res_1399 = choose_res_1404;
                       }
-                      choose_res_74 = choose_res_79;
+                      choose_res_1394 = choose_res_1399;
                     }
-                    choose_res_68 = choose_res_74;
+                    choose_res_1388 = choose_res_1394;
                   }
-                  choose_res_62 = choose_res_68;
+                  choose_res_1382 = choose_res_1388;
                 }
-                choose_res_19 = choose_res_62;
+                choose_res_1339 = choose_res_1382;
               }
-              choose_res_13 = choose_res_19;
+              choose_res_1333 = choose_res_1339;
             }
-            choose_res_10 = choose_res_13;
+            choose_res_1330 = choose_res_1333;
           }
-          choose_res_7 = choose_res_10;
+          choose_res_1327 = choose_res_1330;
         }
-        let_res_4 = choose_res_7;
+        let_res_1324 = choose_res_1327;
       }
-      let_res_2 = let_res_4;
+      let_res_1322 = let_res_1324;
     }
-    return let_res_2;
+    return let_res_1322;
   }
    };
-  return fun0;
+  return fun1320;
 }
 std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
-    (fun ("[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]")
-      (let "label2_528" (label-of (param 0))
-        (if (eq (u16 0) (identifier "label2_528")) (size 2)
-          (if (eq (u16 1) (identifier "label2_528")) (size 2)
-            (if (eq (u16 2) (identifier "label2_528")) (size 10)
-              (if (eq (u16 3) (identifier "label2_528"))
-                (add (size 2)
-                  (add
-                    (let "n_ref_567" (make-vec (string-length (get-alt "VString" (param 0))))
-                      (let "lebsz_ref_568" (make-vec (u32 1))
-                        (seq
-                          (while (ge (unsafe-nth (u8 0) (identifier "n_ref_567")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_568")) (u8 7)))
-                            (set-vec (u8 0) (identifier "lebsz_ref_568") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_568")) (u32 1)))) 
-                          (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_568")))))) 
-                    (size-of-u32 (string-length (get-alt "VString" (param 0))))))
-                (if (eq (u16 4) (identifier "label2_528")) (size 3)
-                  (if (eq (u16 5) (identifier "label2_528")) (size 3)
-                    (if (eq (u16 6) (identifier "label2_528")) (size 3)
-                      (if (eq (u16 7) (identifier "label2_528")) (size 4)
-                        (if (eq (u16 8) (identifier "label2_528")) (size 6)
-                          (if (eq (u16 9) (identifier "label2_528")) 
-                            (size 6)
-                            (if (eq (u16 10) (identifier "label2_528")) 
-                              (size 10)
-                              (if (eq (u16 11) (identifier "label2_528")) 
-                                (size 10)
-                                (if (eq (u16 12) (identifier "label2_528")) 
-                                  (size 10)
-                                  (if (eq (u16 13) (identifier "label2_528")) 
-                                    (size 10)
-                                    (if (eq (u16 14) (identifier "label2_528")) 
-                                      (size 18)
-                                      (if (eq (u16 15) (identifier "label2_528")) 
-                                        (size 3)
-                                        (if (eq (u16 16) (identifier "label2_528")) 
-                                          (size 4)
-                                          (if (eq (u16 17) (identifier "label2_528")) 
-                                            (size 6)
-                                            (if (eq (u16 18) (identifier "label2_528")) 
-                                              (size 6)
-                                              (if (eq (u16 19) (identifier "label2_528")) 
-                                                (size 10)
-                                                (if (eq (u16 20) (identifier "label2_528")) 
-                                                  (size 10)
-                                                  (if (eq (u16 21) (identifier "label2_528")) 
-                                                    (size 10)
-                                                    (if (eq (u16 22) (identifier "label2_528")) 
-                                                      (size 10)
-                                                      (if (eq (u16 23) (identifier "label2_528")) 
-                                                        (size 18)
-                                                        (if (eq (u16 24) (identifier "label2_528")) 
-                                                          (size 10)
-                                                          (if (eq (u16 25) (identifier "label2_528")) 
-                                                            (size 6)
-                                                            (if (eq (u16 26) (identifier "label2_528")) 
-                                                              (size 18)
-                                                              (if (eq (u16 27) (identifier "label2_528"))
-                                                                (if (eq (u16 0) (label-of (get-alt "VIp" (param 0)))) (size 8) (seq (assert (eq (label-of (get-alt "VIp" (param 0))) (u16 1))) (size 20)))
-                                                                (if (eq (u16 28) (identifier "label2_528")) 
-                                                                  (size 7)
-                                                                  (if 
-                                                                    (eq (u16 29) (identifier "label2_528")) 
-                                                                    (size 19)
-                                                                    (if 
-                                                                    (eq (u16 30) (identifier "label2_528"))
-                                                                    (if (eq (u16 0) (label-of (get-alt "VCidr" (param 0)))) (size 9) (seq (assert (eq (label-of (get-alt "VCidr" (param 0))) (u16 1))) (size 21)))
-                                                                    (if 
-                                                                    (eq (u16 31) (identifier "label2_528"))
-                                                                    (let "sz_ref_554"
-                                                                    (make-vec
-                                                                    (add 
-                                                                    (size 2)
-                                                                    (let "n_ref_552" 
-                                                                    (make-vec (cardinality (get-alt "VTup" (param 0))))
-                                                                    (let "lebsz_ref_553" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_552")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_553")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_553") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_553")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_553"))))))))
-                                                                    (seq
-                                                                    (let "repeat_n_555" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VTup" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_555")))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "sz_ref_554")
-                                                                    (add 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_554")) 
-                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_555")) (get-alt "VTup" (param 0))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_555") (add (unsafe-nth (u8 0) (identifier "repeat_n_555")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_554"))))
-                                                                    (if 
-                                                                    (eq (u16 32) (identifier "label2_528"))
-                                                                    (let "sz_ref_550"
-                                                                    (make-vec
-                                                                    (add 
-                                                                    (size 2)
-                                                                    (let "n_ref_548" 
-                                                                    (make-vec (cardinality (get-alt "VVec" (param 0))))
-                                                                    (let "lebsz_ref_549" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_548")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_549")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_549") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_549")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_549"))))))))
-                                                                    (seq
-                                                                    (let "repeat_n_551" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VVec" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_551")))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "sz_ref_550")
-                                                                    (add 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_550")) 
-                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_551")) (get-alt "VVec" (param 0))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_551") (add (unsafe-nth (u8 0) (identifier "repeat_n_551")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_550"))))
-                                                                    (if 
-                                                                    (eq (u16 33) (identifier "label2_528"))
-                                                                    (let "sz_ref_546"
-                                                                    (make-vec
-                                                                    (add 
-                                                                    (size 2)
-                                                                    (let "n_ref_544" 
-                                                                    (make-vec (cardinality (get-alt "VArr" (param 0))))
-                                                                    (let "lebsz_ref_545" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_544")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_545")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_545") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_545")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_545"))))))))
-                                                                    (seq
-                                                                    (let "repeat_n_547" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VArr" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_547")))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "sz_ref_546")
-                                                                    (add 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_546")) 
-                                                                    (apply (myself "Size") (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_547")) (get-alt "VArr" (param 0))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_547") (add (unsafe-nth (u8 0) (identifier "repeat_n_547")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_546"))))
-                                                                    (if 
-                                                                    (eq (u16 34) (identifier "label2_528"))
-                                                                    (let "sz_ref_537"
-                                                                    (make-vec
-                                                                    (add 
-                                                                    (size 2)
-                                                                    (let "n_ref_535" 
-                                                                    (make-vec (cardinality (get-alt "VRec" (param 0))))
-                                                                    (let "lebsz_ref_536" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_535")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_536")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_536") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_536")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_536"))))))))
-                                                                    (seq
-                                                                    (let "repeat_n_538" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VRec" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_538")))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "sz_ref_537")
-                                                                    (let "sz_543"
-                                                                    (let "sz_539" 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_537"))
-                                                                    (add 
-                                                                    (identifier "sz_539")
-                                                                    (let "wlen_540" 
-                                                                    (string-length (get-item 0 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_538")) (get-alt "VRec" (param 0)))))
-                                                                    (add
-                                                                    (let "n_ref_541" 
-                                                                    (make-vec (identifier "wlen_540"))
-                                                                    (let "lebsz_ref_542" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_541")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_542")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_542") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_542")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_542")))))) 
-                                                                    (size-of-u32 (identifier "wlen_540"))))))
-                                                                    (add (identifier "sz_543") (apply (myself "Size") (get-item 1 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_538")) (get-alt "VRec" (param 0))))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_538") (add (unsafe-nth (u8 0) (identifier "repeat_n_538")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_537"))))
-                                                                    (seq 
-                                                                    (assert (eq (identifier "label2_528") (u16 35)))
-                                                                    (let "sz_ref_531"
-                                                                    (make-vec
-                                                                    (add 
-                                                                    (size 2)
-                                                                    (let "n_ref_529" 
-                                                                    (make-vec (cardinality (get-alt "VMap" (param 0))))
-                                                                    (let "lebsz_ref_530" 
-                                                                    (make-vec (u32 1))
-                                                                    (seq
-                                                                    (while 
-                                                                    (ge (unsafe-nth (u8 0) (identifier "n_ref_529")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_530")) (u8 7)))
-                                                                    (set-vec (u8 0) (identifier "lebsz_ref_530") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_530")) (u32 1))))
-                                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_530"))))))))
-                                                                    (seq
-                                                                    (let "repeat_n_532" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (cardinality (get-alt "VMap" (param 0)))) (unsafe-nth (u8 0) (identifier "repeat_n_532")))
-                                                                    (seq
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "sz_ref_531")
-                                                                    (add
-                                                                    (add 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_531"))
-                                                                    (apply (myself "Size") (get-item 0 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_532")) (get-alt "VMap" (param 0))))))
-                                                                    (apply (myself "Size") (get-item 1 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_532")) (get-alt "VMap" (param 0)))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_532") (add (unsafe-nth (u8 0) (identifier "repeat_n_532")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "sz_ref_531"))))))))))))))))))))))))))))))))))))))))))
+    (fun ("(STRING; THIS)" "Ptr")
+      (let "stup_dst_574"
+        (write-bytes
+          (let "leb128_sz_572" (make-vec (string-length (get-item 0 (param 0))))
+            (let "leb128_ptr_573" (make-vec (param 1))
+              (seq
+                (while
+                  (seq
+                    (set-vec (u8 0) (identifier "leb128_ptr_573")
+                      (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_573"))
+                        (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_572"))) (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_572"))) (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_572"))) (u8 128)))))
+                    (set-vec (u8 0) (identifier "leb128_sz_572") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_572")) (u8 7))) 
+                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_572")) (u32 0))) 
+                  (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_573"))))) 
+          (bytes-of-string (get-item 0 (param 0)))) (apply (identifier "to-row-binary") (get-item 1 (param 0)) (identifier "stup_dst_574"))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_value> ,Pointer)> named_value_to_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> fun613 { [&fun613](std::shared_ptr<::dessser::gen::raql_value::t>  p_0) {
-    uint16_t id_614 { uint16_t((*p_0).index()) };
-    Size let_res_615;
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_value> ,Pointer)> fun1891 { [&fun1891](std::shared_ptr<::dessser::gen::raql_value::named_value>  p_0, Pointer p_1) {
+    std::string id_1892 { std::get<0>((*p_0)) };
+    uint32_t id_1893 { (uint32_t)id_1892.size() };
+    Vec<1, uint32_t> id_1894 {  id_1893  };
+    Pointer let_res_1895;
     {
-      uint16_t label2_528 { id_614 };
-      uint16_t id_616 { 0 };
-      bool id_617 { bool(id_616 == label2_528) };
-      Size choose_res_618;
-      if (id_617) {
-        Size id_619 { 2UL };
-        choose_res_618 = id_619;
-      } else {
-        uint16_t id_620 { 1 };
-        bool id_621 { bool(id_620 == label2_528) };
-        Size choose_res_622;
-        if (id_621) {
-          Size id_623 { 2UL };
-          choose_res_622 = id_623;
-        } else {
-          uint16_t id_624 { 2 };
-          bool id_625 { bool(id_624 == label2_528) };
-          Size choose_res_626;
-          if (id_625) {
-            Size id_627 { 10UL };
-            choose_res_626 = id_627;
-          } else {
-            uint16_t id_628 { 3 };
-            bool id_629 { bool(id_628 == label2_528) };
-            Size choose_res_630;
-            if (id_629) {
-              Size id_631 { 2UL };
-              std::string id_632 { std::get<3 /* VString */>((*p_0)) };
-              uint32_t id_633 { (uint32_t)id_632.size() };
-              Vec<1, uint32_t> id_634 {  id_633  };
-              Size let_res_635;
-              {
-                Vec<1, uint32_t> n_ref_567 { id_634 };
-                uint32_t id_636 { 1U };
-                Vec<1, uint32_t> id_637 {  id_636  };
-                Size let_res_638;
-                {
-                  Vec<1, uint32_t> lebsz_ref_568 { id_637 };
-                  bool while_flag_639 { true };
-                  do {
-                    uint8_t id_640 { 0 };
-                    uint32_t id_641 { n_ref_567[id_640] };
-                    uint8_t id_642 { 0 };
-                    uint32_t id_643 { lebsz_ref_568[id_642] };
-                    uint8_t id_644 { 7 };
-                    uint32_t id_645 { uint32_t(id_643 << id_644) };
-                    bool id_646 { bool(id_641 >= id_645) };
-                    while_flag_639 = id_646;
-                    if (while_flag_639) {
-                      uint8_t id_647 { 0 };
-                      uint8_t id_648 { 0 };
-                      uint32_t id_649 { lebsz_ref_568[id_648] };
-                      uint32_t id_650 { 1U };
-                      uint32_t id_651 { uint32_t(id_649 + id_650) };
-                      Void id_652 { ((void)(lebsz_ref_568[id_647] = id_651), ::dessser::VOID) };
-                      (void)id_652;
-                    }
-                  } while (while_flag_639);
-                  (void)::dessser::VOID;
-                  uint8_t id_653 { 0 };
-                  uint32_t id_654 { lebsz_ref_568[id_653] };
-                  Size id_655 { Size(id_654) };
-                  let_res_638 = id_655;
-                }
-                let_res_635 = let_res_638;
-              }
-              std::string id_656 { std::get<3 /* VString */>((*p_0)) };
-              uint32_t id_657 { (uint32_t)id_656.size() };
-              Size id_658 { Size(id_657) };
-              Size id_659 { Size(let_res_635 + id_658) };
-              Size id_660 { Size(id_631 + id_659) };
-              choose_res_630 = id_660;
-            } else {
-              uint16_t id_661 { 4 };
-              bool id_662 { bool(id_661 == label2_528) };
-              Size choose_res_663;
-              if (id_662) {
-                Size id_664 { 3UL };
-                choose_res_663 = id_664;
-              } else {
-                uint16_t id_665 { 5 };
-                bool id_666 { bool(id_665 == label2_528) };
-                Size choose_res_667;
-                if (id_666) {
-                  Size id_668 { 3UL };
-                  choose_res_667 = id_668;
-                } else {
-                  uint16_t id_669 { 6 };
-                  bool id_670 { bool(id_669 == label2_528) };
-                  Size choose_res_671;
-                  if (id_670) {
-                    Size id_672 { 3UL };
-                    choose_res_671 = id_672;
-                  } else {
-                    uint16_t id_673 { 7 };
-                    bool id_674 { bool(id_673 == label2_528) };
-                    Size choose_res_675;
-                    if (id_674) {
-                      Size id_676 { 4UL };
-                      choose_res_675 = id_676;
-                    } else {
-                      uint16_t id_677 { 8 };
-                      bool id_678 { bool(id_677 == label2_528) };
-                      Size choose_res_679;
-                      if (id_678) {
-                        Size id_680 { 6UL };
-                        choose_res_679 = id_680;
-                      } else {
-                        uint16_t id_681 { 9 };
-                        bool id_682 { bool(id_681 == label2_528) };
-                        Size choose_res_683;
-                        if (id_682) {
-                          Size id_684 { 6UL };
-                          choose_res_683 = id_684;
-                        } else {
-                          uint16_t id_685 { 10 };
-                          bool id_686 { bool(id_685 == label2_528) };
-                          Size choose_res_687;
-                          if (id_686) {
-                            Size id_688 { 10UL };
-                            choose_res_687 = id_688;
-                          } else {
-                            uint16_t id_689 { 11 };
-                            bool id_690 { bool(id_689 == label2_528) };
-                            Size choose_res_691;
-                            if (id_690) {
-                              Size id_692 { 10UL };
-                              choose_res_691 = id_692;
-                            } else {
-                              uint16_t id_693 { 12 };
-                              bool id_694 { bool(id_693 == label2_528) };
-                              Size choose_res_695;
-                              if (id_694) {
-                                Size id_696 { 10UL };
-                                choose_res_695 = id_696;
-                              } else {
-                                uint16_t id_697 { 13 };
-                                bool id_698 { bool(id_697 == label2_528) };
-                                Size choose_res_699;
-                                if (id_698) {
-                                  Size id_700 { 10UL };
-                                  choose_res_699 = id_700;
-                                } else {
-                                  uint16_t id_701 { 14 };
-                                  bool id_702 { bool(id_701 == label2_528) };
-                                  Size choose_res_703;
-                                  if (id_702) {
-                                    Size id_704 { 18UL };
-                                    choose_res_703 = id_704;
-                                  } else {
-                                    uint16_t id_705 { 15 };
-                                    bool id_706 { bool(id_705 == label2_528) };
-                                    Size choose_res_707;
-                                    if (id_706) {
-                                      Size id_708 { 3UL };
-                                      choose_res_707 = id_708;
-                                    } else {
-                                      uint16_t id_709 { 16 };
-                                      bool id_710 { bool(id_709 == label2_528) };
-                                      Size choose_res_711;
-                                      if (id_710) {
-                                        Size id_712 { 4UL };
-                                        choose_res_711 = id_712;
-                                      } else {
-                                        uint16_t id_713 { 17 };
-                                        bool id_714 { bool(id_713 == label2_528) };
-                                        Size choose_res_715;
-                                        if (id_714) {
-                                          Size id_716 { 6UL };
-                                          choose_res_715 = id_716;
-                                        } else {
-                                          uint16_t id_717 { 18 };
-                                          bool id_718 { bool(id_717 == label2_528) };
-                                          Size choose_res_719;
-                                          if (id_718) {
-                                            Size id_720 { 6UL };
-                                            choose_res_719 = id_720;
-                                          } else {
-                                            uint16_t id_721 { 19 };
-                                            bool id_722 { bool(id_721 == label2_528) };
-                                            Size choose_res_723;
-                                            if (id_722) {
-                                              Size id_724 { 10UL };
-                                              choose_res_723 = id_724;
-                                            } else {
-                                              uint16_t id_725 { 20 };
-                                              bool id_726 { bool(id_725 == label2_528) };
-                                              Size choose_res_727;
-                                              if (id_726) {
-                                                Size id_728 { 10UL };
-                                                choose_res_727 = id_728;
-                                              } else {
-                                                uint16_t id_729 { 21 };
-                                                bool id_730 { bool(id_729 == label2_528) };
-                                                Size choose_res_731;
-                                                if (id_730) {
-                                                  Size id_732 { 10UL };
-                                                  choose_res_731 = id_732;
-                                                } else {
-                                                  uint16_t id_733 { 22 };
-                                                  bool id_734 { bool(id_733 == label2_528) };
-                                                  Size choose_res_735;
-                                                  if (id_734) {
-                                                    Size id_736 { 10UL };
-                                                    choose_res_735 = id_736;
-                                                  } else {
-                                                    uint16_t id_737 { 23 };
-                                                    bool id_738 { bool(id_737 == label2_528) };
-                                                    Size choose_res_739;
-                                                    if (id_738) {
-                                                      Size id_740 { 18UL };
-                                                      choose_res_739 = id_740;
-                                                    } else {
-                                                      uint16_t id_741 { 24 };
-                                                      bool id_742 { bool(id_741 == label2_528) };
-                                                      Size choose_res_743;
-                                                      if (id_742) {
-                                                        Size id_744 { 10UL };
-                                                        choose_res_743 = id_744;
-                                                      } else {
-                                                        uint16_t id_745 { 25 };
-                                                        bool id_746 { bool(id_745 == label2_528) };
-                                                        Size choose_res_747;
-                                                        if (id_746) {
-                                                          Size id_748 { 6UL };
-                                                          choose_res_747 = id_748;
-                                                        } else {
-                                                          uint16_t id_749 { 26 };
-                                                          bool id_750 { bool(id_749 == label2_528) };
-                                                          Size choose_res_751;
-                                                          if (id_750) {
-                                                            Size id_752 { 18UL };
-                                                            choose_res_751 = id_752;
-                                                          } else {
-                                                            uint16_t id_753 { 27 };
-                                                            bool id_754 { bool(id_753 == label2_528) };
-                                                            Size choose_res_755;
-                                                            if (id_754) {
-                                                              uint16_t id_756 { 0 };
-                                                              ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_757 { std::get<27 /* VIp */>((*p_0)) };
-                                                              uint16_t id_758 { uint16_t(id_757.index()) };
-                                                              bool id_759 { bool(id_756 == id_758) };
-                                                              Size choose_res_760;
-                                                              if (id_759) {
-                                                                Size id_761 { 8UL };
-                                                                choose_res_760 = id_761;
-                                                              } else {
-                                                                ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_762 { std::get<27 /* VIp */>((*p_0)) };
-                                                                uint16_t id_763 { uint16_t(id_762.index()) };
-                                                                uint16_t id_764 { 1 };
-                                                                bool id_765 { bool(id_763 == id_764) };
-                                                                Void id_766 { ((void)(assert(id_765)), ::dessser::VOID) };
-                                                                (void)id_766;
-                                                                Size id_767 { 20UL };
-                                                                choose_res_760 = id_767;
-                                                              }
-                                                              choose_res_755 = choose_res_760;
-                                                            } else {
-                                                              uint16_t id_768 { 28 };
-                                                              bool id_769 { bool(id_768 == label2_528) };
-                                                              Size choose_res_770;
-                                                              if (id_769) {
-                                                                Size id_771 { 7UL };
-                                                                choose_res_770 = id_771;
-                                                              } else {
-                                                                uint16_t id_772 { 29 };
-                                                                bool id_773 { bool(id_772 == label2_528) };
-                                                                Size choose_res_774;
-                                                                if (id_773) {
-                                                                  Size id_775 { 19UL };
-                                                                  choose_res_774 = id_775;
-                                                                } else {
-                                                                  uint16_t id_776 { 30 };
-                                                                  bool id_777 { bool(id_776 == label2_528) };
-                                                                  Size choose_res_778;
-                                                                  if (id_777) {
-                                                                    uint16_t id_779 { 0 };
-                                                                    ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_780 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                    uint16_t id_781 { uint16_t(id_780.index()) };
-                                                                    bool id_782 { bool(id_779 == id_781) };
-                                                                    Size choose_res_783;
-                                                                    if (id_782) {
-                                                                      Size id_784 { 9UL };
-                                                                      choose_res_783 = id_784;
-                                                                    } else {
-                                                                      ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_785 { std::get<30 /* VCidr */>((*p_0)) };
-                                                                      uint16_t id_786 { uint16_t(id_785.index()) };
-                                                                      uint16_t id_787 { 1 };
-                                                                      bool id_788 { bool(id_786 == id_787) };
-                                                                      Void id_789 { ((void)(assert(id_788)), ::dessser::VOID) };
-                                                                      (void)id_789;
-                                                                      Size id_790 { 21UL };
-                                                                      choose_res_783 = id_790;
-                                                                    }
-                                                                    choose_res_778 = choose_res_783;
-                                                                  } else {
-                                                                    uint16_t id_791 { 31 };
-                                                                    bool id_792 { bool(id_791 == label2_528) };
-                                                                    Size choose_res_793;
-                                                                    if (id_792) {
-                                                                      Size id_794 { 2UL };
-                                                                      Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_795 { std::get<31 /* VTup */>((*p_0)) };
-                                                                      uint32_t id_796 { id_795.size() };
-                                                                      Vec<1, uint32_t> id_797 {  id_796  };
-                                                                      Size let_res_798;
-                                                                      {
-                                                                        Vec<1, uint32_t> n_ref_552 { id_797 };
-                                                                        uint32_t id_799 { 1U };
-                                                                        Vec<1, uint32_t> id_800 {  id_799  };
-                                                                        Size let_res_801;
-                                                                        {
-                                                                          Vec<1, uint32_t> lebsz_ref_553 { id_800 };
-                                                                          bool while_flag_802 { true };
-                                                                          do {
-                                                                            uint8_t id_803 { 0 };
-                                                                            uint32_t id_804 { n_ref_552[id_803] };
-                                                                            uint8_t id_805 { 0 };
-                                                                            uint32_t id_806 { lebsz_ref_553[id_805] };
-                                                                            uint8_t id_807 { 7 };
-                                                                            uint32_t id_808 { uint32_t(id_806 << id_807) };
-                                                                            bool id_809 { bool(id_804 >= id_808) };
-                                                                            while_flag_802 = id_809;
-                                                                            if (while_flag_802) {
-                                                                              uint8_t id_810 { 0 };
-                                                                              uint8_t id_811 { 0 };
-                                                                              uint32_t id_812 { lebsz_ref_553[id_811] };
-                                                                              uint32_t id_813 { 1U };
-                                                                              uint32_t id_814 { uint32_t(id_812 + id_813) };
-                                                                              Void id_815 { ((void)(lebsz_ref_553[id_810] = id_814), ::dessser::VOID) };
-                                                                              (void)id_815;
-                                                                            }
-                                                                          } while (while_flag_802);
-                                                                          (void)::dessser::VOID;
-                                                                          uint8_t id_816 { 0 };
-                                                                          uint32_t id_817 { lebsz_ref_553[id_816] };
-                                                                          Size id_818 { Size(id_817) };
-                                                                          let_res_801 = id_818;
-                                                                        }
-                                                                        let_res_798 = let_res_801;
-                                                                      }
-                                                                      Size id_819 { Size(id_794 + let_res_798) };
-                                                                      Vec<1, Size> id_820 {  id_819  };
-                                                                      Size let_res_821;
-                                                                      {
-                                                                        Vec<1, Size> sz_ref_554 { id_820 };
-                                                                        int32_t id_822 { 0L };
-                                                                        Vec<1, int32_t> id_823 {  id_822  };
-                                                                        {
-                                                                          Vec<1, int32_t> repeat_n_555 { id_823 };
-                                                                          bool while_flag_824 { true };
-                                                                          do {
-                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_825 { std::get<31 /* VTup */>((*p_0)) };
-                                                                            uint32_t id_826 { id_825.size() };
-                                                                            int32_t id_827 { int32_t(id_826) };
-                                                                            uint8_t id_828 { 0 };
-                                                                            int32_t id_829 { repeat_n_555[id_828] };
-                                                                            bool id_830 { bool(id_827 > id_829) };
-                                                                            while_flag_824 = id_830;
-                                                                            if (while_flag_824) {
-                                                                              uint8_t id_831 { 0 };
-                                                                              uint8_t id_832 { 0 };
-                                                                              Size id_833 { sz_ref_554[id_832] };
-                                                                              uint8_t id_834 { 0 };
-                                                                              int32_t id_835 { repeat_n_555[id_834] };
-                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_836 { std::get<31 /* VTup */>((*p_0)) };
-                                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_837 { id_836[id_835] };
-                                                                              Size id_838 { fun613(id_837) };
-                                                                              Size id_839 { Size(id_833 + id_838) };
-                                                                              Void id_840 { ((void)(sz_ref_554[id_831] = id_839), ::dessser::VOID) };
-                                                                              (void)id_840;
-                                                                              uint8_t id_841 { 0 };
-                                                                              uint8_t id_842 { 0 };
-                                                                              int32_t id_843 { repeat_n_555[id_842] };
-                                                                              int32_t id_844 { 1L };
-                                                                              int32_t id_845 { int32_t(id_843 + id_844) };
-                                                                              Void id_846 { ((void)(repeat_n_555[id_841] = id_845), ::dessser::VOID) };
-                                                                              (void)id_846;
-                                                                              (void)id_846;
-                                                                            }
-                                                                          } while (while_flag_824);
-                                                                          (void)::dessser::VOID;
-                                                                        }
-                                                                        (void)::dessser::VOID;
-                                                                        uint8_t id_847 { 0 };
-                                                                        Size id_848 { sz_ref_554[id_847] };
-                                                                        let_res_821 = id_848;
-                                                                      }
-                                                                      choose_res_793 = let_res_821;
-                                                                    } else {
-                                                                      uint16_t id_849 { 32 };
-                                                                      bool id_850 { bool(id_849 == label2_528) };
-                                                                      Size choose_res_851;
-                                                                      if (id_850) {
-                                                                        Size id_852 { 2UL };
-                                                                        Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_853 { std::get<32 /* VVec */>((*p_0)) };
-                                                                        uint32_t id_854 { id_853.size() };
-                                                                        Vec<1, uint32_t> id_855 {  id_854  };
-                                                                        Size let_res_856;
-                                                                        {
-                                                                          Vec<1, uint32_t> n_ref_548 { id_855 };
-                                                                          uint32_t id_857 { 1U };
-                                                                          Vec<1, uint32_t> id_858 {  id_857  };
-                                                                          Size let_res_859;
-                                                                          {
-                                                                            Vec<1, uint32_t> lebsz_ref_549 { id_858 };
-                                                                            bool while_flag_860 { true };
-                                                                            do {
-                                                                              uint8_t id_861 { 0 };
-                                                                              uint32_t id_862 { n_ref_548[id_861] };
-                                                                              uint8_t id_863 { 0 };
-                                                                              uint32_t id_864 { lebsz_ref_549[id_863] };
-                                                                              uint8_t id_865 { 7 };
-                                                                              uint32_t id_866 { uint32_t(id_864 << id_865) };
-                                                                              bool id_867 { bool(id_862 >= id_866) };
-                                                                              while_flag_860 = id_867;
-                                                                              if (while_flag_860) {
-                                                                                uint8_t id_868 { 0 };
-                                                                                uint8_t id_869 { 0 };
-                                                                                uint32_t id_870 { lebsz_ref_549[id_869] };
-                                                                                uint32_t id_871 { 1U };
-                                                                                uint32_t id_872 { uint32_t(id_870 + id_871) };
-                                                                                Void id_873 { ((void)(lebsz_ref_549[id_868] = id_872), ::dessser::VOID) };
-                                                                                (void)id_873;
-                                                                              }
-                                                                            } while (while_flag_860);
-                                                                            (void)::dessser::VOID;
-                                                                            uint8_t id_874 { 0 };
-                                                                            uint32_t id_875 { lebsz_ref_549[id_874] };
-                                                                            Size id_876 { Size(id_875) };
-                                                                            let_res_859 = id_876;
-                                                                          }
-                                                                          let_res_856 = let_res_859;
-                                                                        }
-                                                                        Size id_877 { Size(id_852 + let_res_856) };
-                                                                        Vec<1, Size> id_878 {  id_877  };
-                                                                        Size let_res_879;
-                                                                        {
-                                                                          Vec<1, Size> sz_ref_550 { id_878 };
-                                                                          int32_t id_880 { 0L };
-                                                                          Vec<1, int32_t> id_881 {  id_880  };
-                                                                          {
-                                                                            Vec<1, int32_t> repeat_n_551 { id_881 };
-                                                                            bool while_flag_882 { true };
-                                                                            do {
-                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_883 { std::get<32 /* VVec */>((*p_0)) };
-                                                                              uint32_t id_884 { id_883.size() };
-                                                                              int32_t id_885 { int32_t(id_884) };
-                                                                              uint8_t id_886 { 0 };
-                                                                              int32_t id_887 { repeat_n_551[id_886] };
-                                                                              bool id_888 { bool(id_885 > id_887) };
-                                                                              while_flag_882 = id_888;
-                                                                              if (while_flag_882) {
-                                                                                uint8_t id_889 { 0 };
-                                                                                uint8_t id_890 { 0 };
-                                                                                Size id_891 { sz_ref_550[id_890] };
-                                                                                uint8_t id_892 { 0 };
-                                                                                int32_t id_893 { repeat_n_551[id_892] };
-                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_894 { std::get<32 /* VVec */>((*p_0)) };
-                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_895 { id_894[id_893] };
-                                                                                Size id_896 { fun613(id_895) };
-                                                                                Size id_897 { Size(id_891 + id_896) };
-                                                                                Void id_898 { ((void)(sz_ref_550[id_889] = id_897), ::dessser::VOID) };
-                                                                                (void)id_898;
-                                                                                uint8_t id_899 { 0 };
-                                                                                uint8_t id_900 { 0 };
-                                                                                int32_t id_901 { repeat_n_551[id_900] };
-                                                                                int32_t id_902 { 1L };
-                                                                                int32_t id_903 { int32_t(id_901 + id_902) };
-                                                                                Void id_904 { ((void)(repeat_n_551[id_899] = id_903), ::dessser::VOID) };
-                                                                                (void)id_904;
-                                                                                (void)id_904;
-                                                                              }
-                                                                            } while (while_flag_882);
-                                                                            (void)::dessser::VOID;
-                                                                          }
-                                                                          (void)::dessser::VOID;
-                                                                          uint8_t id_905 { 0 };
-                                                                          Size id_906 { sz_ref_550[id_905] };
-                                                                          let_res_879 = id_906;
-                                                                        }
-                                                                        choose_res_851 = let_res_879;
-                                                                      } else {
-                                                                        uint16_t id_907 { 33 };
-                                                                        bool id_908 { bool(id_907 == label2_528) };
-                                                                        Size choose_res_909;
-                                                                        if (id_908) {
-                                                                          Size id_910 { 2UL };
-                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_911 { std::get<33 /* VArr */>((*p_0)) };
-                                                                          uint32_t id_912 { id_911.size() };
-                                                                          Vec<1, uint32_t> id_913 {  id_912  };
-                                                                          Size let_res_914;
-                                                                          {
-                                                                            Vec<1, uint32_t> n_ref_544 { id_913 };
-                                                                            uint32_t id_915 { 1U };
-                                                                            Vec<1, uint32_t> id_916 {  id_915  };
-                                                                            Size let_res_917;
-                                                                            {
-                                                                              Vec<1, uint32_t> lebsz_ref_545 { id_916 };
-                                                                              bool while_flag_918 { true };
-                                                                              do {
-                                                                                uint8_t id_919 { 0 };
-                                                                                uint32_t id_920 { n_ref_544[id_919] };
-                                                                                uint8_t id_921 { 0 };
-                                                                                uint32_t id_922 { lebsz_ref_545[id_921] };
-                                                                                uint8_t id_923 { 7 };
-                                                                                uint32_t id_924 { uint32_t(id_922 << id_923) };
-                                                                                bool id_925 { bool(id_920 >= id_924) };
-                                                                                while_flag_918 = id_925;
-                                                                                if (while_flag_918) {
-                                                                                  uint8_t id_926 { 0 };
-                                                                                  uint8_t id_927 { 0 };
-                                                                                  uint32_t id_928 { lebsz_ref_545[id_927] };
-                                                                                  uint32_t id_929 { 1U };
-                                                                                  uint32_t id_930 { uint32_t(id_928 + id_929) };
-                                                                                  Void id_931 { ((void)(lebsz_ref_545[id_926] = id_930), ::dessser::VOID) };
-                                                                                  (void)id_931;
-                                                                                }
-                                                                              } while (while_flag_918);
-                                                                              (void)::dessser::VOID;
-                                                                              uint8_t id_932 { 0 };
-                                                                              uint32_t id_933 { lebsz_ref_545[id_932] };
-                                                                              Size id_934 { Size(id_933) };
-                                                                              let_res_917 = id_934;
-                                                                            }
-                                                                            let_res_914 = let_res_917;
-                                                                          }
-                                                                          Size id_935 { Size(id_910 + let_res_914) };
-                                                                          Vec<1, Size> id_936 {  id_935  };
-                                                                          Size let_res_937;
-                                                                          {
-                                                                            Vec<1, Size> sz_ref_546 { id_936 };
-                                                                            int32_t id_938 { 0L };
-                                                                            Vec<1, int32_t> id_939 {  id_938  };
-                                                                            {
-                                                                              Vec<1, int32_t> repeat_n_547 { id_939 };
-                                                                              bool while_flag_940 { true };
-                                                                              do {
-                                                                                Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_941 { std::get<33 /* VArr */>((*p_0)) };
-                                                                                uint32_t id_942 { id_941.size() };
-                                                                                int32_t id_943 { int32_t(id_942) };
-                                                                                uint8_t id_944 { 0 };
-                                                                                int32_t id_945 { repeat_n_547[id_944] };
-                                                                                bool id_946 { bool(id_943 > id_945) };
-                                                                                while_flag_940 = id_946;
-                                                                                if (while_flag_940) {
-                                                                                  uint8_t id_947 { 0 };
-                                                                                  uint8_t id_948 { 0 };
-                                                                                  Size id_949 { sz_ref_546[id_948] };
-                                                                                  uint8_t id_950 { 0 };
-                                                                                  int32_t id_951 { repeat_n_547[id_950] };
-                                                                                  Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_952 { std::get<33 /* VArr */>((*p_0)) };
-                                                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_953 { id_952[id_951] };
-                                                                                  Size id_954 { fun613(id_953) };
-                                                                                  Size id_955 { Size(id_949 + id_954) };
-                                                                                  Void id_956 { ((void)(sz_ref_546[id_947] = id_955), ::dessser::VOID) };
-                                                                                  (void)id_956;
-                                                                                  uint8_t id_957 { 0 };
-                                                                                  uint8_t id_958 { 0 };
-                                                                                  int32_t id_959 { repeat_n_547[id_958] };
-                                                                                  int32_t id_960 { 1L };
-                                                                                  int32_t id_961 { int32_t(id_959 + id_960) };
-                                                                                  Void id_962 { ((void)(repeat_n_547[id_957] = id_961), ::dessser::VOID) };
-                                                                                  (void)id_962;
-                                                                                  (void)id_962;
-                                                                                }
-                                                                              } while (while_flag_940);
-                                                                              (void)::dessser::VOID;
-                                                                            }
-                                                                            (void)::dessser::VOID;
-                                                                            uint8_t id_963 { 0 };
-                                                                            Size id_964 { sz_ref_546[id_963] };
-                                                                            let_res_937 = id_964;
-                                                                          }
-                                                                          choose_res_909 = let_res_937;
-                                                                        } else {
-                                                                          uint16_t id_965 { 34 };
-                                                                          bool id_966 { bool(id_965 == label2_528) };
-                                                                          Size choose_res_967;
-                                                                          if (id_966) {
-                                                                            Size id_968 { 2UL };
-                                                                            Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_969 { std::get<34 /* VRec */>((*p_0)) };
-                                                                            uint32_t id_970 { id_969.size() };
-                                                                            Vec<1, uint32_t> id_971 {  id_970  };
-                                                                            Size let_res_972;
-                                                                            {
-                                                                              Vec<1, uint32_t> n_ref_535 { id_971 };
-                                                                              uint32_t id_973 { 1U };
-                                                                              Vec<1, uint32_t> id_974 {  id_973  };
-                                                                              Size let_res_975;
-                                                                              {
-                                                                                Vec<1, uint32_t> lebsz_ref_536 { id_974 };
-                                                                                bool while_flag_976 { true };
-                                                                                do {
-                                                                                  uint8_t id_977 { 0 };
-                                                                                  uint32_t id_978 { n_ref_535[id_977] };
-                                                                                  uint8_t id_979 { 0 };
-                                                                                  uint32_t id_980 { lebsz_ref_536[id_979] };
-                                                                                  uint8_t id_981 { 7 };
-                                                                                  uint32_t id_982 { uint32_t(id_980 << id_981) };
-                                                                                  bool id_983 { bool(id_978 >= id_982) };
-                                                                                  while_flag_976 = id_983;
-                                                                                  if (while_flag_976) {
-                                                                                    uint8_t id_984 { 0 };
-                                                                                    uint8_t id_985 { 0 };
-                                                                                    uint32_t id_986 { lebsz_ref_536[id_985] };
-                                                                                    uint32_t id_987 { 1U };
-                                                                                    uint32_t id_988 { uint32_t(id_986 + id_987) };
-                                                                                    Void id_989 { ((void)(lebsz_ref_536[id_984] = id_988), ::dessser::VOID) };
-                                                                                    (void)id_989;
-                                                                                  }
-                                                                                } while (while_flag_976);
-                                                                                (void)::dessser::VOID;
-                                                                                uint8_t id_990 { 0 };
-                                                                                uint32_t id_991 { lebsz_ref_536[id_990] };
-                                                                                Size id_992 { Size(id_991) };
-                                                                                let_res_975 = id_992;
-                                                                              }
-                                                                              let_res_972 = let_res_975;
-                                                                            }
-                                                                            Size id_993 { Size(id_968 + let_res_972) };
-                                                                            Vec<1, Size> id_994 {  id_993  };
-                                                                            Size let_res_995;
-                                                                            {
-                                                                              Vec<1, Size> sz_ref_537 { id_994 };
-                                                                              int32_t id_996 { 0L };
-                                                                              Vec<1, int32_t> id_997 {  id_996  };
-                                                                              {
-                                                                                Vec<1, int32_t> repeat_n_538 { id_997 };
-                                                                                bool while_flag_998 { true };
-                                                                                do {
-                                                                                  Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_999 { std::get<34 /* VRec */>((*p_0)) };
-                                                                                  uint32_t id_1000 { id_999.size() };
-                                                                                  int32_t id_1001 { int32_t(id_1000) };
-                                                                                  uint8_t id_1002 { 0 };
-                                                                                  int32_t id_1003 { repeat_n_538[id_1002] };
-                                                                                  bool id_1004 { bool(id_1001 > id_1003) };
-                                                                                  while_flag_998 = id_1004;
-                                                                                  if (while_flag_998) {
-                                                                                    uint8_t id_1005 { 0 };
-                                                                                    uint8_t id_1006 { 0 };
-                                                                                    Size id_1007 { sz_ref_537[id_1006] };
-                                                                                    Size let_res_1008;
-                                                                                    {
-                                                                                      Size sz_539 { id_1007 };
-                                                                                      uint8_t id_1009 { 0 };
-                                                                                      int32_t id_1010 { repeat_n_538[id_1009] };
-                                                                                      Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_1011 { std::get<34 /* VRec */>((*p_0)) };
-                                                                                      ::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f id_1012 { id_1011[id_1010] };
-                                                                                      std::string id_1013 { std::get<0>(id_1012) };
-                                                                                      uint32_t id_1014 { (uint32_t)id_1013.size() };
-                                                                                      Size let_res_1015;
-                                                                                      {
-                                                                                        uint32_t wlen_540 { id_1014 };
-                                                                                        Vec<1, uint32_t> id_1016 {  wlen_540  };
-                                                                                        Size let_res_1017;
-                                                                                        {
-                                                                                          Vec<1, uint32_t> n_ref_541 { id_1016 };
-                                                                                          uint32_t id_1018 { 1U };
-                                                                                          Vec<1, uint32_t> id_1019 {  id_1018  };
-                                                                                          Size let_res_1020;
-                                                                                          {
-                                                                                            Vec<1, uint32_t> lebsz_ref_542 { id_1019 };
-                                                                                            bool while_flag_1021 { true };
-                                                                                            do {
-                                                                                              uint8_t id_1022 { 0 };
-                                                                                              uint32_t id_1023 { n_ref_541[id_1022] };
-                                                                                              uint8_t id_1024 { 0 };
-                                                                                              uint32_t id_1025 { lebsz_ref_542[id_1024] };
-                                                                                              uint8_t id_1026 { 7 };
-                                                                                              uint32_t id_1027 { uint32_t(id_1025 << id_1026) };
-                                                                                              bool id_1028 { bool(id_1023 >= id_1027) };
-                                                                                              while_flag_1021 = id_1028;
-                                                                                              if (while_flag_1021) {
-                                                                                                uint8_t id_1029 { 0 };
-                                                                                                uint8_t id_1030 { 0 };
-                                                                                                uint32_t id_1031 { lebsz_ref_542[id_1030] };
-                                                                                                uint32_t id_1032 { 1U };
-                                                                                                uint32_t id_1033 { uint32_t(id_1031 + id_1032) };
-                                                                                                Void id_1034 { ((void)(lebsz_ref_542[id_1029] = id_1033), ::dessser::VOID) };
-                                                                                                (void)id_1034;
-                                                                                              }
-                                                                                            } while (while_flag_1021);
-                                                                                            (void)::dessser::VOID;
-                                                                                            uint8_t id_1035 { 0 };
-                                                                                            uint32_t id_1036 { lebsz_ref_542[id_1035] };
-                                                                                            Size id_1037 { Size(id_1036) };
-                                                                                            let_res_1020 = id_1037;
-                                                                                          }
-                                                                                          let_res_1017 = let_res_1020;
-                                                                                        }
-                                                                                        Size id_1038 { Size(wlen_540) };
-                                                                                        Size id_1039 { Size(let_res_1017 + id_1038) };
-                                                                                        let_res_1015 = id_1039;
-                                                                                      }
-                                                                                      Size id_1040 { Size(sz_539 + let_res_1015) };
-                                                                                      let_res_1008 = id_1040;
-                                                                                    }
-                                                                                    Size let_res_1041;
-                                                                                    {
-                                                                                      Size sz_543 { let_res_1008 };
-                                                                                      uint8_t id_1042 { 0 };
-                                                                                      int32_t id_1043 { repeat_n_538[id_1042] };
-                                                                                      Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_1044 { std::get<34 /* VRec */>((*p_0)) };
-                                                                                      ::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f id_1045 { id_1044[id_1043] };
-                                                                                      std::shared_ptr<::dessser::gen::raql_value::t>  id_1046 { std::get<1>(id_1045) };
-                                                                                      Size id_1047 { fun613(id_1046) };
-                                                                                      Size id_1048 { Size(sz_543 + id_1047) };
-                                                                                      let_res_1041 = id_1048;
-                                                                                    }
-                                                                                    Void id_1049 { ((void)(sz_ref_537[id_1005] = let_res_1041), ::dessser::VOID) };
-                                                                                    (void)id_1049;
-                                                                                    uint8_t id_1050 { 0 };
-                                                                                    uint8_t id_1051 { 0 };
-                                                                                    int32_t id_1052 { repeat_n_538[id_1051] };
-                                                                                    int32_t id_1053 { 1L };
-                                                                                    int32_t id_1054 { int32_t(id_1052 + id_1053) };
-                                                                                    Void id_1055 { ((void)(repeat_n_538[id_1050] = id_1054), ::dessser::VOID) };
-                                                                                    (void)id_1055;
-                                                                                    (void)id_1055;
-                                                                                  }
-                                                                                } while (while_flag_998);
-                                                                                (void)::dessser::VOID;
-                                                                              }
-                                                                              (void)::dessser::VOID;
-                                                                              uint8_t id_1056 { 0 };
-                                                                              Size id_1057 { sz_ref_537[id_1056] };
-                                                                              let_res_995 = id_1057;
-                                                                            }
-                                                                            choose_res_967 = let_res_995;
-                                                                          } else {
-                                                                            uint16_t id_1058 { 35 };
-                                                                            bool id_1059 { bool(label2_528 == id_1058) };
-                                                                            Void id_1060 { ((void)(assert(id_1059)), ::dessser::VOID) };
-                                                                            (void)id_1060;
-                                                                            Size id_1061 { 2UL };
-                                                                            Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1062 { std::get<35 /* VMap */>((*p_0)) };
-                                                                            uint32_t id_1063 { id_1062.size() };
-                                                                            Vec<1, uint32_t> id_1064 {  id_1063  };
-                                                                            Size let_res_1065;
-                                                                            {
-                                                                              Vec<1, uint32_t> n_ref_529 { id_1064 };
-                                                                              uint32_t id_1066 { 1U };
-                                                                              Vec<1, uint32_t> id_1067 {  id_1066  };
-                                                                              Size let_res_1068;
-                                                                              {
-                                                                                Vec<1, uint32_t> lebsz_ref_530 { id_1067 };
-                                                                                bool while_flag_1069 { true };
-                                                                                do {
-                                                                                  uint8_t id_1070 { 0 };
-                                                                                  uint32_t id_1071 { n_ref_529[id_1070] };
-                                                                                  uint8_t id_1072 { 0 };
-                                                                                  uint32_t id_1073 { lebsz_ref_530[id_1072] };
-                                                                                  uint8_t id_1074 { 7 };
-                                                                                  uint32_t id_1075 { uint32_t(id_1073 << id_1074) };
-                                                                                  bool id_1076 { bool(id_1071 >= id_1075) };
-                                                                                  while_flag_1069 = id_1076;
-                                                                                  if (while_flag_1069) {
-                                                                                    uint8_t id_1077 { 0 };
-                                                                                    uint8_t id_1078 { 0 };
-                                                                                    uint32_t id_1079 { lebsz_ref_530[id_1078] };
-                                                                                    uint32_t id_1080 { 1U };
-                                                                                    uint32_t id_1081 { uint32_t(id_1079 + id_1080) };
-                                                                                    Void id_1082 { ((void)(lebsz_ref_530[id_1077] = id_1081), ::dessser::VOID) };
-                                                                                    (void)id_1082;
-                                                                                  }
-                                                                                } while (while_flag_1069);
-                                                                                (void)::dessser::VOID;
-                                                                                uint8_t id_1083 { 0 };
-                                                                                uint32_t id_1084 { lebsz_ref_530[id_1083] };
-                                                                                Size id_1085 { Size(id_1084) };
-                                                                                let_res_1068 = id_1085;
-                                                                              }
-                                                                              let_res_1065 = let_res_1068;
-                                                                            }
-                                                                            Size id_1086 { Size(id_1061 + let_res_1065) };
-                                                                            Vec<1, Size> id_1087 {  id_1086  };
-                                                                            Size let_res_1088;
-                                                                            {
-                                                                              Vec<1, Size> sz_ref_531 { id_1087 };
-                                                                              int32_t id_1089 { 0L };
-                                                                              Vec<1, int32_t> id_1090 {  id_1089  };
-                                                                              {
-                                                                                Vec<1, int32_t> repeat_n_532 { id_1090 };
-                                                                                bool while_flag_1091 { true };
-                                                                                do {
-                                                                                  Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1092 { std::get<35 /* VMap */>((*p_0)) };
-                                                                                  uint32_t id_1093 { id_1092.size() };
-                                                                                  int32_t id_1094 { int32_t(id_1093) };
-                                                                                  uint8_t id_1095 { 0 };
-                                                                                  int32_t id_1096 { repeat_n_532[id_1095] };
-                                                                                  bool id_1097 { bool(id_1094 > id_1096) };
-                                                                                  while_flag_1091 = id_1097;
-                                                                                  if (while_flag_1091) {
-                                                                                    uint8_t id_1098 { 0 };
-                                                                                    uint8_t id_1099 { 0 };
-                                                                                    Size id_1100 { sz_ref_531[id_1099] };
-                                                                                    uint8_t id_1101 { 0 };
-                                                                                    int32_t id_1102 { repeat_n_532[id_1101] };
-                                                                                    Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1103 { std::get<35 /* VMap */>((*p_0)) };
-                                                                                    ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_1104 { id_1103[id_1102] };
-                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1105 { std::get<0>(id_1104) };
-                                                                                    Size id_1106 { fun613(id_1105) };
-                                                                                    Size id_1107 { Size(id_1100 + id_1106) };
-                                                                                    uint8_t id_1108 { 0 };
-                                                                                    int32_t id_1109 { repeat_n_532[id_1108] };
-                                                                                    Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1110 { std::get<35 /* VMap */>((*p_0)) };
-                                                                                    ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_1111 { id_1110[id_1109] };
-                                                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1112 { std::get<1>(id_1111) };
-                                                                                    Size id_1113 { fun613(id_1112) };
-                                                                                    Size id_1114 { Size(id_1107 + id_1113) };
-                                                                                    Void id_1115 { ((void)(sz_ref_531[id_1098] = id_1114), ::dessser::VOID) };
-                                                                                    (void)id_1115;
-                                                                                    uint8_t id_1116 { 0 };
-                                                                                    uint8_t id_1117 { 0 };
-                                                                                    int32_t id_1118 { repeat_n_532[id_1117] };
-                                                                                    int32_t id_1119 { 1L };
-                                                                                    int32_t id_1120 { int32_t(id_1118 + id_1119) };
-                                                                                    Void id_1121 { ((void)(repeat_n_532[id_1116] = id_1120), ::dessser::VOID) };
-                                                                                    (void)id_1121;
-                                                                                    (void)id_1121;
-                                                                                  }
-                                                                                } while (while_flag_1091);
-                                                                                (void)::dessser::VOID;
-                                                                              }
-                                                                              (void)::dessser::VOID;
-                                                                              uint8_t id_1122 { 0 };
-                                                                              Size id_1123 { sz_ref_531[id_1122] };
-                                                                              let_res_1088 = id_1123;
-                                                                            }
-                                                                            choose_res_967 = let_res_1088;
-                                                                          }
-                                                                          choose_res_909 = choose_res_967;
-                                                                        }
-                                                                        choose_res_851 = choose_res_909;
-                                                                      }
-                                                                      choose_res_793 = choose_res_851;
-                                                                    }
-                                                                    choose_res_778 = choose_res_793;
-                                                                  }
-                                                                  choose_res_774 = choose_res_778;
-                                                                }
-                                                                choose_res_770 = choose_res_774;
-                                                              }
-                                                              choose_res_755 = choose_res_770;
-                                                            }
-                                                            choose_res_751 = choose_res_755;
-                                                          }
-                                                          choose_res_747 = choose_res_751;
-                                                        }
-                                                        choose_res_743 = choose_res_747;
-                                                      }
-                                                      choose_res_739 = choose_res_743;
-                                                    }
-                                                    choose_res_735 = choose_res_739;
-                                                  }
-                                                  choose_res_731 = choose_res_735;
-                                                }
-                                                choose_res_727 = choose_res_731;
-                                              }
-                                              choose_res_723 = choose_res_727;
-                                            }
-                                            choose_res_719 = choose_res_723;
-                                          }
-                                          choose_res_715 = choose_res_719;
-                                        }
-                                        choose_res_711 = choose_res_715;
-                                      }
-                                      choose_res_707 = choose_res_711;
-                                    }
-                                    choose_res_703 = choose_res_707;
-                                  }
-                                  choose_res_699 = choose_res_703;
-                                }
-                                choose_res_695 = choose_res_699;
-                              }
-                              choose_res_691 = choose_res_695;
-                            }
-                            choose_res_687 = choose_res_691;
-                          }
-                          choose_res_683 = choose_res_687;
-                        }
-                        choose_res_679 = choose_res_683;
-                      }
-                      choose_res_675 = choose_res_679;
-                    }
-                    choose_res_671 = choose_res_675;
-                  }
-                  choose_res_667 = choose_res_671;
-                }
-                choose_res_663 = choose_res_667;
-              }
-              choose_res_630 = choose_res_663;
-            }
-            choose_res_626 = choose_res_630;
-          }
-          choose_res_622 = choose_res_626;
-        }
-        choose_res_618 = choose_res_622;
-      }
-      let_res_615 = choose_res_618;
-    }
-    return let_res_615;
-  }
-   };
-  return fun613;
-}
-std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
-
-/* 
-    (fun ("Ptr")
-      (let-pair "make_fst_526" "make_snd_527"
-        (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
-          (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
-            (if (eq (u16 0) (identifier "dsum1_fst_63"))
-              (make-tup
-                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 0
-                  (nop)) (identifier "dsum1_snd_64"))
-              (if (eq (u16 1) (identifier "dsum1_fst_63"))
-                (make-tup
-                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 1
-                    (nop)) (identifier "dsum1_snd_64"))
-                (if (eq (u16 2) (identifier "dsum1_fst_63"))
-                  (let-pair "dfloat_fst_514" "dfloat_snd_515" (read-u64 little-endian (identifier "dsum1_snd_64"))
-                    (make-tup
-                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 2
-                        (float-of-u64 (identifier "dfloat_fst_514"))) 
-                      (identifier "dfloat_snd_515")))
-                  (if (eq (u16 3) (identifier "dsum1_fst_63"))
-                    (let "dstring1_504"
-                      (let "leb_ref_498" (make-vec (u32 0))
-                        (let "shft_ref_499" (make-vec (u8 0))
-                          (let "p_ref_500" (make-vec (identifier "dsum1_snd_64"))
-                            (seq
-                              (while
-                                (let "leb128_501" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_500")))
-                                  (let-pair "leb128_fst_502" "leb128_snd_503" 
-                                    (identifier "leb128_501")
-                                    (seq (set-vec (u8 0) (identifier "p_ref_500") (identifier "leb128_snd_503"))
-                                      (set-vec (u8 0) (identifier "leb_ref_498")
-                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_502") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_499"))) (unsafe-nth (u8 0) (identifier "leb_ref_498"))))
-                                      (set-vec (u8 0) (identifier "shft_ref_499") (add (unsafe-nth (u8 0) (identifier "shft_ref_499")) (u8 7))) 
-                                      (ge (identifier "leb128_fst_502") (u8 128))))) 
-                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_498"))) (unsafe-nth (u8 0) (identifier "p_ref_500")))))))
-                      (let-pair "dstring1_fst_505" "dstring1_snd_506" 
-                        (identifier "dstring1_504")
-                        (let-pair "dstring2_fst_508" "dstring2_snd_509" 
-                          (read-bytes (identifier "dstring1_snd_506") (identifier "dstring1_fst_505"))
-                          (make-tup
-                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 3
-                              (string-of-bytes (identifier "dstring2_fst_508"))) 
-                            (identifier "dstring2_snd_509")))))
-                    (if (eq (u16 4) (identifier "dsum1_fst_63"))
-                      (let-pair "dbool_fst_493" "dbool_snd_494" (read-u8 (identifier "dsum1_snd_64"))
-                        (make-tup
-                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 4
-                            (not (eq (identifier "dbool_fst_493") (u8 0)))) 
-                          (identifier "dbool_snd_494")))
-                      (if (eq (u16 5) (identifier "dsum1_fst_63"))
-                        (let-pair "dchar_fst_487" "dchar_snd_488" (read-u8 (identifier "dsum1_snd_64"))
-                          (make-tup
-                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 5
-                              (char-of-u8 (identifier "dchar_fst_487"))) 
-                            (identifier "dchar_snd_488")))
-                        (if (eq (u16 6) (identifier "dsum1_fst_63"))
-                          (let-pair "du8_fst_481" "du8_snd_482" (read-u8 (identifier "dsum1_snd_64"))
-                            (make-tup
-                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 6
-                                (identifier "du8_fst_481")) (identifier "du8_snd_482")))
-                          (if (eq (u16 7) (identifier "dsum1_fst_63"))
-                            (let-pair "du16_fst_475" "du16_snd_476" (read-u16 little-endian (identifier "dsum1_snd_64"))
-                              (make-tup
-                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 7
-                                  (identifier "du16_fst_475")) (identifier "du16_snd_476")))
-                            (if (eq (u16 8) (identifier "dsum1_fst_63"))
-                              (let-pair "du24_fst_469" "du24_snd_470" 
-                                (read-u32 little-endian (identifier "dsum1_snd_64"))
-                                (make-tup
-                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 8
-                                    (to-u24 (identifier "du24_fst_469"))) 
-                                  (identifier "du24_snd_470")))
-                              (if (eq (u16 9) (identifier "dsum1_fst_63"))
-                                (let-pair "du32_fst_463" "du32_snd_464" 
-                                  (read-u32 little-endian (identifier "dsum1_snd_64"))
-                                  (make-tup
-                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 9
-                                      (identifier "du32_fst_463")) (identifier "du32_snd_464")))
-                                (if (eq (u16 10) (identifier "dsum1_fst_63"))
-                                  (let-pair "du40_fst_457" "du40_snd_458" 
-                                    (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                    (make-tup
-                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 10
-                                        (to-u40 (identifier "du40_fst_457"))) 
-                                      (identifier "du40_snd_458")))
-                                  (if (eq (u16 11) (identifier "dsum1_fst_63"))
-                                    (let-pair "du48_fst_451" "du48_snd_452" 
-                                      (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                      (make-tup
-                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 11
-                                          (to-u48 (identifier "du48_fst_451"))) 
-                                        (identifier "du48_snd_452")))
-                                    (if (eq (u16 12) (identifier "dsum1_fst_63"))
-                                      (let-pair "du56_fst_445" "du56_snd_446" 
-                                        (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                        (make-tup
-                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 12
-                                            (to-u56 (identifier "du56_fst_445"))) 
-                                          (identifier "du56_snd_446")))
-                                      (if (eq (u16 13) (identifier "dsum1_fst_63"))
-                                        (let-pair "du64_fst_439" "du64_snd_440" 
-                                          (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                          (make-tup
-                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 13
-                                              (identifier "du64_fst_439")) 
-                                            (identifier "du64_snd_440")))
-                                        (if (eq (u16 14) (identifier "dsum1_fst_63"))
-                                          (let-pair "di128_fst_433" "di128_snd_434" 
-                                            (read-u128 little-endian (identifier "dsum1_snd_64"))
-                                            (make-tup
-                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 14
-                                                (identifier "di128_fst_433")) 
-                                              (identifier "di128_snd_434")))
-                                          (if (eq (u16 15) (identifier "dsum1_fst_63"))
-                                            (let-pair "di8_fst_427" "di8_snd_428" 
-                                              (read-u8 (identifier "dsum1_snd_64"))
-                                              (make-tup
-                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 15
-                                                  (to-i8 (identifier "di8_fst_427"))) 
-                                                (identifier "di8_snd_428")))
-                                            (if (eq (u16 16) (identifier "dsum1_fst_63"))
-                                              (let-pair "di16_fst_421" "di16_snd_422" 
-                                                (read-u16 little-endian (identifier "dsum1_snd_64"))
-                                                (make-tup
-                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 16
-                                                    (to-i16 (identifier "di16_fst_421"))) 
-                                                  (identifier "di16_snd_422")))
-                                              (if (eq (u16 17) (identifier "dsum1_fst_63"))
-                                                (let-pair "di24_fst_415" "di24_snd_416" 
-                                                  (read-u32 little-endian (identifier "dsum1_snd_64"))
-                                                  (make-tup
-                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 17
-                                                      (to-i24 (identifier "di24_fst_415"))) 
-                                                    (identifier "di24_snd_416")))
-                                                (if (eq (u16 18) (identifier "dsum1_fst_63"))
-                                                  (let-pair "di32_fst_409" "di32_snd_410" 
-                                                    (read-u32 little-endian (identifier "dsum1_snd_64"))
-                                                    (make-tup
-                                                      (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 18
-                                                        (to-i32 (identifier "di32_fst_409"))) 
-                                                      (identifier "di32_snd_410")))
-                                                  (if (eq (u16 19) (identifier "dsum1_fst_63"))
-                                                    (let-pair "di40_fst_403" "di40_snd_404" 
-                                                      (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                                      (make-tup
-                                                        (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 19
-                                                          (to-i40 (identifier "di40_fst_403"))) 
-                                                        (identifier "di40_snd_404")))
-                                                    (if (eq (u16 20) (identifier "dsum1_fst_63"))
-                                                      (let-pair "di48_fst_397" "di48_snd_398" 
-                                                        (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                                        (make-tup
-                                                          (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 20
-                                                            (to-i48 (identifier "di48_fst_397"))) 
-                                                          (identifier "di48_snd_398")))
-                                                      (if (eq (u16 21) (identifier "dsum1_fst_63"))
-                                                        (let-pair "di56_fst_391" "di56_snd_392" 
-                                                          (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                                          (make-tup
-                                                            (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 21
-                                                              (to-i56 (identifier "di56_fst_391"))) 
-                                                            (identifier "di56_snd_392")))
-                                                        (if (eq (u16 22) (identifier "dsum1_fst_63"))
-                                                          (let-pair "di64_fst_385" "di64_snd_386" 
-                                                            (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                                            (make-tup
-                                                              (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 22
-                                                                (to-i64 (identifier "di64_fst_385"))) 
-                                                              (identifier "di64_snd_386")))
-                                                          (if (eq (u16 23) (identifier "dsum1_fst_63"))
-                                                            (let-pair "di128_fst_379" "di128_snd_380" 
-                                                              (read-u128 little-endian (identifier "dsum1_snd_64"))
-                                                              (make-tup
-                                                                (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 23
-                                                                  (to-i128 (identifier "di128_fst_379"))) 
-                                                                (identifier "di128_snd_380")))
-                                                            (if (eq (u16 24) (identifier "dsum1_fst_63"))
-                                                              (let-pair "du48_fst_370" "du48_snd_371" 
-                                                                (read-u64 little-endian (identifier "dsum1_snd_64"))
-                                                                (make-tup
-                                                                  (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 24
-                                                                    (make-usr "Eth" (to-u48 (identifier "du48_fst_370")))) 
-                                                                  (identifier "du48_snd_371")))
-                                                              (if (eq (u16 25) (identifier "dsum1_fst_63"))
-                                                                (let-pair "du32_fst_361" "du32_snd_362" 
-                                                                  (read-u32 little-endian (identifier "dsum1_snd_64"))
-                                                                  (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 25
-                                                                    (make-usr "Ip4" (identifier "du32_fst_361"))) 
-                                                                    (identifier "du32_snd_362")))
-                                                                (if (eq (u16 26) (identifier "dsum1_fst_63"))
-                                                                  (let-pair "di128_fst_352" "di128_snd_353" 
-                                                                    (read-u128 little-endian (identifier "dsum1_snd_64"))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 26
-                                                                    (make-usr "Ip6" (identifier "di128_fst_352"))) 
-                                                                    (identifier "di128_snd_353")))
-                                                                  (if 
-                                                                    (eq (u16 27) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "des_usr_type_fst_346" "des_usr_type_snd_347"
-                                                                    (let "dsum1_324"
-                                                                    (let-pair "du16_fst_319" "du16_snd_320" (read-u16 little-endian (identifier "dsum1_snd_64")) (make-tup (identifier "du16_fst_319") (identifier "du16_snd_320")))
-                                                                    (let-pair "dsum1_fst_325" "dsum1_snd_326" 
-                                                                    (identifier "dsum1_324")
-                                                                    (if 
-                                                                    (eq (u16 0) (identifier "dsum1_fst_325"))
-                                                                    (let-pair "du32_fst_337" "du32_snd_338" 
-                                                                    (read-u32 little-endian (identifier "dsum1_snd_326"))
-                                                                    (make-tup (construct "[v4 Ip4 | v6 Ip6]" 0 (make-usr "Ip4" (identifier "du32_fst_337"))) (identifier "du32_snd_338")))
-                                                                    (seq 
-                                                                    (assert (eq (identifier "dsum1_fst_325") (u16 1)))
-                                                                    (let-pair "di128_fst_328" "di128_snd_329" 
-                                                                    (read-u128 little-endian (identifier "dsum1_snd_326"))
-                                                                    (make-tup (construct "[v4 Ip4 | v6 Ip6]" 1 (make-usr "Ip6" (identifier "di128_fst_328"))) (identifier "di128_snd_329")))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 27
-                                                                    (make-usr "Ip" (identifier "des_usr_type_fst_346"))) 
-                                                                    (identifier "des_usr_type_snd_347")))
-                                                                    (if 
-                                                                    (eq (u16 28) (identifier "dsum1_fst_63"))
-                                                                    (let "drec_303"
-                                                                    (let-pair "du32_fst_298" "du32_snd_299" 
-                                                                    (read-u32 little-endian (identifier "dsum1_snd_64")) 
-                                                                    (make-tup (make-usr "Ip4" (identifier "du32_fst_298")) (identifier "du32_snd_299")))
-                                                                    (let-pair "drec_fst_304" "drec_snd_305" 
-                                                                    (identifier "drec_303")
-                                                                    (let-pair "du8_fst_307" "du8_snd_308" 
-                                                                    (read-u8 (identifier "drec_snd_305"))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 28
-                                                                    (make-usr "Cidr4" (make-rec (string "mask") (identifier "du8_fst_307") (string "ip") (identifier "drec_fst_304")))) 
-                                                                    (identifier "du8_snd_308")))))
-                                                                    (if 
-                                                                    (eq (u16 29) (identifier "dsum1_fst_63"))
-                                                                    (let "drec_282"
-                                                                    (let-pair "di128_fst_277" "di128_snd_278" 
-                                                                    (read-u128 little-endian (identifier "dsum1_snd_64")) 
-                                                                    (make-tup (make-usr "Ip6" (identifier "di128_fst_277")) (identifier "di128_snd_278")))
-                                                                    (let-pair "drec_fst_283" "drec_snd_284" 
-                                                                    (identifier "drec_282")
-                                                                    (let-pair "du8_fst_286" "du8_snd_287" 
-                                                                    (read-u8 (identifier "drec_snd_284"))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 29
-                                                                    (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_286") (string "ip") (identifier "drec_fst_283")))) 
-                                                                    (identifier "du8_snd_287")))))
-                                                                    (if 
-                                                                    (eq (u16 30) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "des_usr_type_fst_271" "des_usr_type_snd_272"
-                                                                    (let "dsum1_225"
-                                                                    (let-pair "du16_fst_220" "du16_snd_221" (read-u16 little-endian (identifier "dsum1_snd_64")) (make-tup (identifier "du16_fst_220") (identifier "du16_snd_221")))
-                                                                    (let-pair "dsum1_fst_226" "dsum1_snd_227" 
-                                                                    (identifier "dsum1_225")
-                                                                    (if 
-                                                                    (eq (u16 0) (identifier "dsum1_fst_226"))
-                                                                    (let "drec_255"
-                                                                    (let-pair "du32_fst_250" "du32_snd_251" 
-                                                                    (read-u32 little-endian (identifier "dsum1_snd_227")) 
-                                                                    (make-tup (make-usr "Ip4" (identifier "du32_fst_250")) (identifier "du32_snd_251")))
-                                                                    (let-pair "drec_fst_256" "drec_snd_257" 
-                                                                    (identifier "drec_255")
-                                                                    (let-pair "du8_fst_259" "du8_snd_260" 
-                                                                    (read-u8 (identifier "drec_snd_257"))
-                                                                    (make-tup
-                                                                    (construct "[v4 Cidr4 | v6 Cidr6]" 0 (make-usr "Cidr4" (make-rec (string "mask") (identifier "du8_fst_259") (string "ip") (identifier "drec_fst_256"))))
-                                                                    (identifier "du8_snd_260")))))
-                                                                    (seq 
-                                                                    (assert (eq (identifier "dsum1_fst_226") (u16 1)))
-                                                                    (let "drec_234"
-                                                                    (let-pair "di128_fst_229" "di128_snd_230" 
-                                                                    (read-u128 little-endian (identifier "dsum1_snd_227")) 
-                                                                    (make-tup (make-usr "Ip6" (identifier "di128_fst_229")) (identifier "di128_snd_230")))
-                                                                    (let-pair "drec_fst_235" "drec_snd_236" 
-                                                                    (identifier "drec_234")
-                                                                    (let-pair "du8_fst_238" "du8_snd_239" 
-                                                                    (read-u8 (identifier "drec_snd_236"))
-                                                                    (make-tup
-                                                                    (construct "[v4 Cidr4 | v6 Cidr6]" 1 (make-usr "Cidr6" (make-rec (string "mask") (identifier "du8_fst_238") (string "ip") (identifier "drec_fst_235"))))
-                                                                    (identifier "du8_snd_239")))))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 30
-                                                                    (make-usr "Cidr" (identifier "des_usr_type_fst_271"))) 
-                                                                    (identifier "des_usr_type_snd_272")))
-                                                                    (if 
-                                                                    (eq (u16 31) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "dlist4_fst_214" "dlist4_snd_215"
-                                                                    (let "dlist1_202"
-                                                                    (let "leb_ref_193" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_194" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_195" 
-                                                                    (make-vec (identifier "dsum1_snd_64"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_196" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_195")))
-                                                                    (let-pair "leb128_fst_197" "leb128_snd_198" 
-                                                                    (identifier "leb128_196")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_195") (identifier "leb128_snd_198"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_193")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_197") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_194")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_193")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_194") (add (unsafe-nth (u8 0) (identifier "shft_ref_194")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_197") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_193")) (unsafe-nth (u8 0) (identifier "p_ref_195")))))))
-                                                                    (let-pair "dlist1_fst_203" "dlist1_snd_204" 
-                                                                    (identifier "dlist1_202")
-                                                                    (let "inits_src_ref_205" 
-                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_204")))
-                                                                    (seq
-                                                                    (let "repeat_n_206" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (identifier "dlist1_fst_203")) (unsafe-nth (u8 0) (identifier "repeat_n_206")))
-                                                                    (seq
-                                                                    (let "dlist2_207" 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_205"))
-                                                                    (let-pair "dlist2_fst_208" "dlist2_snd_209" 
-                                                                    (identifier "dlist2_207")
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "inits_src_ref_205")
-                                                                    (let-pair "dlist3_fst_211" "dlist3_snd_212" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_209"))
-                                                                    (make-tup (cons (identifier "dlist3_fst_211") (identifier "dlist2_fst_208")) (identifier "dlist3_snd_212"))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_206") (add (unsafe-nth (u8 0) (identifier "repeat_n_206")) (i32 1))))))
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_205"))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 31
-                                                                    (arr-of-lst-rev (identifier "dlist4_fst_214"))) 
-                                                                    (identifier "dlist4_snd_215")))
-                                                                    (if 
-                                                                    (eq (u16 32) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "dlist4_fst_188" "dlist4_snd_189"
-                                                                    (let "dlist1_176"
-                                                                    (let "leb_ref_167" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_168" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_169" 
-                                                                    (make-vec (identifier "dsum1_snd_64"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_170" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_169")))
-                                                                    (let-pair "leb128_fst_171" "leb128_snd_172" 
-                                                                    (identifier "leb128_170")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_169") (identifier "leb128_snd_172"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_167")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_171") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_168")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_167")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_168") (add (unsafe-nth (u8 0) (identifier "shft_ref_168")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_171") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_167")) (unsafe-nth (u8 0) (identifier "p_ref_169")))))))
-                                                                    (let-pair "dlist1_fst_177" "dlist1_snd_178" 
-                                                                    (identifier "dlist1_176")
-                                                                    (let "inits_src_ref_179" 
-                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_178")))
-                                                                    (seq
-                                                                    (let "repeat_n_180" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (identifier "dlist1_fst_177")) (unsafe-nth (u8 0) (identifier "repeat_n_180")))
-                                                                    (seq
-                                                                    (let "dlist2_181" 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_179"))
-                                                                    (let-pair "dlist2_fst_182" "dlist2_snd_183" 
-                                                                    (identifier "dlist2_181")
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "inits_src_ref_179")
-                                                                    (let-pair "dlist3_fst_185" "dlist3_snd_186" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_183"))
-                                                                    (make-tup (cons (identifier "dlist3_fst_185") (identifier "dlist2_fst_182")) (identifier "dlist3_snd_186"))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_180") (add (unsafe-nth (u8 0) (identifier "repeat_n_180")) (i32 1))))))
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_179"))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 32
-                                                                    (arr-of-lst-rev (identifier "dlist4_fst_188"))) 
-                                                                    (identifier "dlist4_snd_189")))
-                                                                    (if 
-                                                                    (eq (u16 33) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "dlist4_fst_162" "dlist4_snd_163"
-                                                                    (let "dlist1_150"
-                                                                    (let "leb_ref_141" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_142" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_143" 
-                                                                    (make-vec (identifier "dsum1_snd_64"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_144" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_143")))
-                                                                    (let-pair "leb128_fst_145" "leb128_snd_146" 
-                                                                    (identifier "leb128_144")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_143") (identifier "leb128_snd_146"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_141")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_145") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_142")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_141")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_142") (add (unsafe-nth (u8 0) (identifier "shft_ref_142")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_145") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_141")) (unsafe-nth (u8 0) (identifier "p_ref_143")))))))
-                                                                    (let-pair "dlist1_fst_151" "dlist1_snd_152" 
-                                                                    (identifier "dlist1_150")
-                                                                    (let "inits_src_ref_153" 
-                                                                    (make-vec (make-tup (end-of-list "THIS") (identifier "dlist1_snd_152")))
-                                                                    (seq
-                                                                    (let "repeat_n_154" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (identifier "dlist1_fst_151")) (unsafe-nth (u8 0) (identifier "repeat_n_154")))
-                                                                    (seq
-                                                                    (let "dlist2_155" 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_153"))
-                                                                    (let-pair "dlist2_fst_156" "dlist2_snd_157" 
-                                                                    (identifier "dlist2_155")
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "inits_src_ref_153")
-                                                                    (let-pair "dlist3_fst_159" "dlist3_snd_160" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_157"))
-                                                                    (make-tup (cons (identifier "dlist3_fst_159") (identifier "dlist2_fst_156")) (identifier "dlist3_snd_160"))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_154") (add (unsafe-nth (u8 0) (identifier "repeat_n_154")) (i32 1))))))
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_153"))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 33
-                                                                    (arr-of-lst-rev (identifier "dlist4_fst_162"))) 
-                                                                    (identifier "dlist4_snd_163")))
-                                                                    (if 
-                                                                    (eq (u16 34) (identifier "dsum1_fst_63"))
-                                                                    (let-pair "dlist4_fst_136" "dlist4_snd_137"
-                                                                    (let "dlist1_106"
-                                                                    (let "leb_ref_97" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_98" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_99" 
-                                                                    (make-vec (identifier "dsum1_snd_64"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_100" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_99")))
-                                                                    (let-pair "leb128_fst_101" "leb128_snd_102" 
-                                                                    (identifier "leb128_100")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_99") (identifier "leb128_snd_102"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_97")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_101") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_98")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_97")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_98") (add (unsafe-nth (u8 0) (identifier "shft_ref_98")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_101") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_97")) (unsafe-nth (u8 0) (identifier "p_ref_99")))))))
-                                                                    (let-pair "dlist1_fst_107" "dlist1_snd_108" 
-                                                                    (identifier "dlist1_106")
-                                                                    (let "inits_src_ref_109" 
-                                                                    (make-vec (make-tup (end-of-list "(STRING; THIS)") (identifier "dlist1_snd_108")))
-                                                                    (seq
-                                                                    (let "repeat_n_110" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (identifier "dlist1_fst_107")) (unsafe-nth (u8 0) (identifier "repeat_n_110")))
-                                                                    (seq
-                                                                    (let "dlist2_111" 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_109"))
-                                                                    (let-pair "dlist2_fst_112" "dlist2_snd_113" 
-                                                                    (identifier "dlist2_111")
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "inits_src_ref_109")
-                                                                    (let "dstring1_120"
-                                                                    (let "leb_ref_114" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_115" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_116" 
-                                                                    (make-vec (identifier "dlist2_snd_113"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_117" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_116")))
-                                                                    (let-pair "leb128_fst_118" "leb128_snd_119" 
-                                                                    (identifier "leb128_117")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_116") (identifier "leb128_snd_119"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_114")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_118") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_115")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_114")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_115") (add (unsafe-nth (u8 0) (identifier "shft_ref_115")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_118") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_114"))) (unsafe-nth (u8 0) (identifier "p_ref_116")))))))
-                                                                    (let-pair "dstring1_fst_121" "dstring1_snd_122" 
-                                                                    (identifier "dstring1_120")
-                                                                    (let-pair "dstring2_fst_124" "dstring2_snd_125" 
-                                                                    (read-bytes (identifier "dstring1_snd_122") (identifier "dstring1_fst_121"))
-                                                                    (let-pair "dtup_fst_130" "dtup_snd_131" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dstring2_snd_125"))
-                                                                    (make-tup 
-                                                                    (cons (make-tup (string-of-bytes (identifier "dstring2_fst_124")) (identifier "dtup_fst_130")) (identifier "dlist2_fst_112")) 
-                                                                    (identifier "dtup_snd_131"))))))))) 
-                                                                    (set-vec (u8 0) (identifier "repeat_n_110") (add (unsafe-nth (u8 0) (identifier "repeat_n_110")) (i32 1))))))
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_109"))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 34
-                                                                    (arr-of-lst-rev (identifier "dlist4_fst_136"))) 
-                                                                    (identifier "dlist4_snd_137")))
-                                                                    (seq 
-                                                                    (assert (eq (identifier "dsum1_fst_63") (u16 35)))
-                                                                    (let-pair "dlist4_fst_92" "dlist4_snd_93"
-                                                                    (let "dlist1_74"
-                                                                    (let "leb_ref_65" 
-                                                                    (make-vec (u32 0))
-                                                                    (let "shft_ref_66" 
-                                                                    (make-vec (u8 0))
-                                                                    (let "p_ref_67" 
-                                                                    (make-vec (identifier "dsum1_snd_64"))
-                                                                    (seq
-                                                                    (while
-                                                                    (let "leb128_68" 
-                                                                    (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_67")))
-                                                                    (let-pair "leb128_fst_69" "leb128_snd_70" 
-                                                                    (identifier "leb128_68")
-                                                                    (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_67") (identifier "leb128_snd_70"))
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_65")
-                                                                    (bit-or 
-                                                                    (left-shift (to-u32 (bit-and (identifier "leb128_fst_69") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_66")))
-                                                                    (unsafe-nth (u8 0) (identifier "leb_ref_65")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_66") (add (unsafe-nth (u8 0) (identifier "shft_ref_66")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_69") (u8 128))))) 
-                                                                    (nop)) 
-                                                                    (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_65")) (unsafe-nth (u8 0) (identifier "p_ref_67")))))))
-                                                                    (let-pair "dlist1_fst_75" "dlist1_snd_76" 
-                                                                    (identifier "dlist1_74")
-                                                                    (let "inits_src_ref_77" 
-                                                                    (make-vec (make-tup (end-of-list "(THIS; THIS)") (identifier "dlist1_snd_76")))
-                                                                    (seq
-                                                                    (let "repeat_n_78" 
-                                                                    (make-vec (i32 0))
-                                                                    (while 
-                                                                    (gt (to-i32 (identifier "dlist1_fst_75")) (unsafe-nth (u8 0) (identifier "repeat_n_78")))
-                                                                    (seq
-                                                                    (let "dlist2_79" 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_77"))
-                                                                    (let-pair "dlist2_fst_80" "dlist2_snd_81" 
-                                                                    (identifier "dlist2_79")
-                                                                    (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "inits_src_ref_77")
-                                                                    (let-pair "dtup_fst_83" "dtup_snd_84" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dlist2_snd_81"))
-                                                                    (let-pair "dtup_fst_86" "dtup_snd_87" 
-                                                                    (apply (myself "(THIS; Ptr)") (identifier "dtup_snd_84"))
-                                                                    (make-tup (cons (make-tup (identifier "dtup_fst_83") (identifier "dtup_fst_86")) (identifier "dlist2_fst_80")) (identifier "dtup_snd_87")))))))
-                                                                    (set-vec (u8 0) (identifier "repeat_n_78") (add (unsafe-nth (u8 0) (identifier "repeat_n_78")) (i32 1)))))) 
-                                                                    (unsafe-nth (u8 0) (identifier "inits_src_ref_77"))))))
-                                                                    (make-tup
-                                                                    (construct "[VNull Void | VUnit Void | VFloat FLOAT | VString STRING | VBool BOOL | VChar CHAR | VU8 U8 | VU16 U16 | VU24 U24 | VU32 U32 | VU40 U40 | VU48 U48 | VU56 U56 | VU64 U64 | VU128 U128 | VI8 I8 | VI16 I16 | VI24 I24 | VI32 I32 | VI40 I40 | VI48 I48 | VI56 I56 | VI64 I64 | VI128 I128 | VEth Eth | VIpv4 Ip4 | VIpv6 Ip6 | VIp Ip | VCidrv4 Cidr4 | VCidrv6 Cidr6 | VCidr Cidr | VTup THIS[] | VVec THIS[] | VArr THIS[] | VRec (STRING; THIS)[] | VMap (THIS; THIS)[]]" 35
-                                                                    (arr-of-lst-rev (identifier "dlist4_fst_92"))) 
-                                                                    (identifier "dlist4_snd_93"))))))))))))))))))))))))))))))))))))))))) 
-        (make-tup (identifier "make_fst_526") (identifier "make_snd_527"))))
- */
-static std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary_init()
-{
-  std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> fun1124 { [&fun1124](Pointer p_0) {
-    ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1125 { p_0.readU16Le() };
-    ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_1126;
-    {
-      auto du16_fst_57 { std::get<0>(id_1125) };
-      auto du16_snd_58 { std::get<1>(id_1125) };
-      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1127 { du16_fst_57, du16_snd_58 };
-      letpair_res_1126 = id_1127;
-    }
-    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_1128;
-    {
-      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_1126 };
-      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1129;
+      Vec<1, uint32_t> leb128_sz_572 { id_1894 };
+      Vec<1, Pointer> id_1896 {  p_1  };
+      Pointer let_res_1897;
       {
-        auto dsum1_fst_63 { std::get<0>(dsum1_62) };
-        auto dsum1_snd_64 { std::get<1>(dsum1_62) };
-        uint16_t id_1130 { 0 };
-        bool id_1131 { bool(id_1130 == dsum1_fst_63) };
-        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1132;
-        if (id_1131) {
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::raql_value::t>  id_1133 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<0>, ::dessser::VOID) };
-          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1134 { id_1133, dsum1_snd_64 };
-          choose_res_1132 = id_1134;
-        } else {
-          uint16_t id_1135 { 1 };
-          bool id_1136 { bool(id_1135 == dsum1_fst_63) };
-          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1137;
-          if (id_1136) {
-            (void)::dessser::VOID;
-            std::shared_ptr<::dessser::gen::raql_value::t>  id_1138 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<1>, ::dessser::VOID) };
-            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1139 { id_1138, dsum1_snd_64 };
-            choose_res_1137 = id_1139;
+        Vec<1, Pointer> leb128_ptr_573 { id_1896 };
+        bool while_flag_1898 { true };
+        do {
+          uint8_t id_1899 { 0 };
+          uint8_t id_1900 { 0 };
+          Pointer id_1901 { leb128_ptr_573[id_1900] };
+          uint32_t id_1902 { 128U };
+          uint8_t id_1903 { 0 };
+          uint32_t id_1904 { leb128_sz_572[id_1903] };
+          bool id_1905 { bool(id_1902 > id_1904) };
+          uint8_t choose_res_1906;
+          if (id_1905) {
+            uint8_t id_1907 { 0 };
+            uint32_t id_1908 { leb128_sz_572[id_1907] };
+            uint8_t id_1909 { uint8_t(id_1908) };
+            choose_res_1906 = id_1909;
           } else {
-            uint16_t id_1140 { 2 };
-            bool id_1141 { bool(id_1140 == dsum1_fst_63) };
-            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1142;
-            if (id_1141) {
-              ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1143 { dsum1_snd_64.readU64Le() };
-              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1144;
-              {
-                auto dfloat_fst_514 { std::get<0>(id_1143) };
-                auto dfloat_snd_515 { std::get<1>(id_1143) };
-                double id_1145 { float_of_qword(dfloat_fst_514) };
-                std::shared_ptr<::dessser::gen::raql_value::t>  id_1146 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<2>, id_1145) };
-                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1147 { id_1146, dfloat_snd_515 };
-                letpair_res_1144 = id_1147;
-              }
-              choose_res_1142 = letpair_res_1144;
-            } else {
-              uint16_t id_1148 { 3 };
-              bool id_1149 { bool(id_1148 == dsum1_fst_63) };
-              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1150;
-              if (id_1149) {
-                uint32_t id_1151 { 0U };
-                Vec<1, uint32_t> id_1152 {  id_1151  };
-                ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1153;
-                {
-                  Vec<1, uint32_t> leb_ref_498 { id_1152 };
-                  uint8_t id_1154 { 0 };
-                  Vec<1, uint8_t> id_1155 {  id_1154  };
-                  ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1156;
-                  {
-                    Vec<1, uint8_t> shft_ref_499 { id_1155 };
-                    Vec<1, Pointer> id_1157 {  dsum1_snd_64  };
-                    ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1158;
-                    {
-                      Vec<1, Pointer> p_ref_500 { id_1157 };
-                      bool while_flag_1159 { true };
-                      do {
-                        uint8_t id_1160 { 0 };
-                        Pointer id_1161 { p_ref_500[id_1160] };
-                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1162 { id_1161.readU8() };
-                        bool let_res_1163;
-                        {
-                          ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_501 { id_1162 };
-                          bool letpair_res_1164;
-                          {
-                            auto leb128_fst_502 { std::get<0>(leb128_501) };
-                            auto leb128_snd_503 { std::get<1>(leb128_501) };
-                            uint8_t id_1165 { 0 };
-                            Void id_1166 { ((void)(p_ref_500[id_1165] = leb128_snd_503), ::dessser::VOID) };
-                            (void)id_1166;
-                            uint8_t id_1167 { 0 };
-                            uint8_t id_1168 { 127 };
-                            uint8_t id_1169 { uint8_t(leb128_fst_502 & id_1168) };
-                            uint32_t id_1170 { uint32_t(id_1169) };
-                            uint8_t id_1171 { 0 };
-                            uint8_t id_1172 { shft_ref_499[id_1171] };
-                            uint32_t id_1173 { uint32_t(id_1170 << id_1172) };
-                            uint8_t id_1174 { 0 };
-                            uint32_t id_1175 { leb_ref_498[id_1174] };
-                            uint32_t id_1176 { uint32_t(id_1173 | id_1175) };
-                            Void id_1177 { ((void)(leb_ref_498[id_1167] = id_1176), ::dessser::VOID) };
-                            (void)id_1177;
-                            uint8_t id_1178 { 0 };
-                            uint8_t id_1179 { 0 };
-                            uint8_t id_1180 { shft_ref_499[id_1179] };
-                            uint8_t id_1181 { 7 };
-                            uint8_t id_1182 { uint8_t(id_1180 + id_1181) };
-                            Void id_1183 { ((void)(shft_ref_499[id_1178] = id_1182), ::dessser::VOID) };
-                            (void)id_1183;
-                            uint8_t id_1184 { 128 };
-                            bool id_1185 { bool(leb128_fst_502 >= id_1184) };
-                            letpair_res_1164 = id_1185;
-                          }
-                          let_res_1163 = letpair_res_1164;
-                        }
-                        while_flag_1159 = let_res_1163;
-                        if (while_flag_1159) {
-                          (void)::dessser::VOID;
-                        }
-                      } while (while_flag_1159);
-                      (void)::dessser::VOID;
-                      uint8_t id_1186 { 0 };
-                      uint32_t id_1187 { leb_ref_498[id_1186] };
-                      Size id_1188 { Size(id_1187) };
-                      uint8_t id_1189 { 0 };
-                      Pointer id_1190 { p_ref_500[id_1189] };
-                      ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 id_1191 { id_1188, id_1190 };
-                      let_res_1158 = id_1191;
-                    }
-                    let_res_1156 = let_res_1158;
-                  }
-                  let_res_1153 = let_res_1156;
-                }
-                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_1192;
-                {
-                  ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 dstring1_504 { let_res_1153 };
-                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1193;
-                  {
-                    auto dstring1_fst_505 { std::get<0>(dstring1_504) };
-                    auto dstring1_snd_506 { std::get<1>(dstring1_504) };
-                    ::dessser::gen::raql_value::t5887709cc43c8c8e24d28211e8c970a2 id_1194 { dstring1_snd_506.readBytes(dstring1_fst_505) };
-                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1195;
-                    {
-                      auto dstring2_fst_508 { std::get<0>(id_1194) };
-                      auto dstring2_snd_509 { std::get<1>(id_1194) };
-                      std::string id_1196 { dstring2_fst_508.toString() };
-                      std::shared_ptr<::dessser::gen::raql_value::t>  id_1197 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<3>, id_1196) };
-                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1198 { id_1197, dstring2_snd_509 };
-                      letpair_res_1195 = id_1198;
-                    }
-                    letpair_res_1193 = letpair_res_1195;
-                  }
-                  let_res_1192 = letpair_res_1193;
-                }
-                choose_res_1150 = let_res_1192;
-              } else {
-                uint16_t id_1199 { 4 };
-                bool id_1200 { bool(id_1199 == dsum1_fst_63) };
-                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1201;
-                if (id_1200) {
-                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1202 { dsum1_snd_64.readU8() };
-                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1203;
-                  {
-                    auto dbool_fst_493 { std::get<0>(id_1202) };
-                    auto dbool_snd_494 { std::get<1>(id_1202) };
-                    uint8_t id_1204 { 0 };
-                    bool id_1205 { bool(dbool_fst_493 == id_1204) };
-                    bool id_1206 { ! id_1205 };
-                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1207 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<4>, id_1206) };
-                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1208 { id_1207, dbool_snd_494 };
-                    letpair_res_1203 = id_1208;
-                  }
-                  choose_res_1201 = letpair_res_1203;
-                } else {
-                  uint16_t id_1209 { 5 };
-                  bool id_1210 { bool(id_1209 == dsum1_fst_63) };
-                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1211;
-                  if (id_1210) {
-                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1212 { dsum1_snd_64.readU8() };
-                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1213;
-                    {
-                      auto dchar_fst_487 { std::get<0>(id_1212) };
-                      auto dchar_snd_488 { std::get<1>(id_1212) };
-                      char id_1214 { char(dchar_fst_487) };
-                      std::shared_ptr<::dessser::gen::raql_value::t>  id_1215 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<5>, id_1214) };
-                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1216 { id_1215, dchar_snd_488 };
-                      letpair_res_1213 = id_1216;
-                    }
-                    choose_res_1211 = letpair_res_1213;
-                  } else {
-                    uint16_t id_1217 { 6 };
-                    bool id_1218 { bool(id_1217 == dsum1_fst_63) };
-                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1219;
-                    if (id_1218) {
-                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1220 { dsum1_snd_64.readU8() };
-                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1221;
-                      {
-                        auto du8_fst_481 { std::get<0>(id_1220) };
-                        auto du8_snd_482 { std::get<1>(id_1220) };
-                        std::shared_ptr<::dessser::gen::raql_value::t>  id_1222 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<6>, du8_fst_481) };
-                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1223 { id_1222, du8_snd_482 };
-                        letpair_res_1221 = id_1223;
-                      }
-                      choose_res_1219 = letpair_res_1221;
-                    } else {
-                      uint16_t id_1224 { 7 };
-                      bool id_1225 { bool(id_1224 == dsum1_fst_63) };
-                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1226;
-                      if (id_1225) {
-                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1227 { dsum1_snd_64.readU16Le() };
-                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1228;
-                        {
-                          auto du16_fst_475 { std::get<0>(id_1227) };
-                          auto du16_snd_476 { std::get<1>(id_1227) };
-                          std::shared_ptr<::dessser::gen::raql_value::t>  id_1229 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<7>, du16_fst_475) };
-                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1230 { id_1229, du16_snd_476 };
-                          letpair_res_1228 = id_1230;
-                        }
-                        choose_res_1226 = letpair_res_1228;
-                      } else {
-                        uint16_t id_1231 { 8 };
-                        bool id_1232 { bool(id_1231 == dsum1_fst_63) };
-                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1233;
-                        if (id_1232) {
-                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1234 { dsum1_snd_64.readU32Le() };
-                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1235;
-                          {
-                            auto du24_fst_469 { std::get<0>(id_1234) };
-                            auto du24_snd_470 { std::get<1>(id_1234) };
-                            uint32_t id_1236 { uint32_t(du24_fst_469) };
-                            std::shared_ptr<::dessser::gen::raql_value::t>  id_1237 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<8>, id_1236) };
-                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1238 { id_1237, du24_snd_470 };
-                            letpair_res_1235 = id_1238;
-                          }
-                          choose_res_1233 = letpair_res_1235;
-                        } else {
-                          uint16_t id_1239 { 9 };
-                          bool id_1240 { bool(id_1239 == dsum1_fst_63) };
-                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1241;
-                          if (id_1240) {
-                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1242 { dsum1_snd_64.readU32Le() };
-                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1243;
-                            {
-                              auto du32_fst_463 { std::get<0>(id_1242) };
-                              auto du32_snd_464 { std::get<1>(id_1242) };
-                              std::shared_ptr<::dessser::gen::raql_value::t>  id_1244 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<9>, du32_fst_463) };
-                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1245 { id_1244, du32_snd_464 };
-                              letpair_res_1243 = id_1245;
-                            }
-                            choose_res_1241 = letpair_res_1243;
-                          } else {
-                            uint16_t id_1246 { 10 };
-                            bool id_1247 { bool(id_1246 == dsum1_fst_63) };
-                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1248;
-                            if (id_1247) {
-                              ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1249 { dsum1_snd_64.readU64Le() };
-                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1250;
-                              {
-                                auto du40_fst_457 { std::get<0>(id_1249) };
-                                auto du40_snd_458 { std::get<1>(id_1249) };
-                                uint64_t id_1251 { uint64_t(du40_fst_457) };
-                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1252 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<10>, id_1251) };
-                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1253 { id_1252, du40_snd_458 };
-                                letpair_res_1250 = id_1253;
-                              }
-                              choose_res_1248 = letpair_res_1250;
-                            } else {
-                              uint16_t id_1254 { 11 };
-                              bool id_1255 { bool(id_1254 == dsum1_fst_63) };
-                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1256;
-                              if (id_1255) {
-                                ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1257 { dsum1_snd_64.readU64Le() };
-                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1258;
-                                {
-                                  auto du48_fst_451 { std::get<0>(id_1257) };
-                                  auto du48_snd_452 { std::get<1>(id_1257) };
-                                  uint64_t id_1259 { uint64_t(du48_fst_451) };
-                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_1260 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<11>, id_1259) };
-                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1261 { id_1260, du48_snd_452 };
-                                  letpair_res_1258 = id_1261;
-                                }
-                                choose_res_1256 = letpair_res_1258;
-                              } else {
-                                uint16_t id_1262 { 12 };
-                                bool id_1263 { bool(id_1262 == dsum1_fst_63) };
-                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1264;
-                                if (id_1263) {
-                                  ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1265 { dsum1_snd_64.readU64Le() };
-                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1266;
-                                  {
-                                    auto du56_fst_445 { std::get<0>(id_1265) };
-                                    auto du56_snd_446 { std::get<1>(id_1265) };
-                                    uint64_t id_1267 { uint64_t(du56_fst_445) };
-                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1268 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<12>, id_1267) };
-                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1269 { id_1268, du56_snd_446 };
-                                    letpair_res_1266 = id_1269;
-                                  }
-                                  choose_res_1264 = letpair_res_1266;
-                                } else {
-                                  uint16_t id_1270 { 13 };
-                                  bool id_1271 { bool(id_1270 == dsum1_fst_63) };
-                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1272;
-                                  if (id_1271) {
-                                    ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1273 { dsum1_snd_64.readU64Le() };
-                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1274;
-                                    {
-                                      auto du64_fst_439 { std::get<0>(id_1273) };
-                                      auto du64_snd_440 { std::get<1>(id_1273) };
-                                      std::shared_ptr<::dessser::gen::raql_value::t>  id_1275 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<13>, du64_fst_439) };
-                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1276 { id_1275, du64_snd_440 };
-                                      letpair_res_1274 = id_1276;
-                                    }
-                                    choose_res_1272 = letpair_res_1274;
-                                  } else {
-                                    uint16_t id_1277 { 14 };
-                                    bool id_1278 { bool(id_1277 == dsum1_fst_63) };
-                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1279;
-                                    if (id_1278) {
-                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1280 { dsum1_snd_64.readU128Le() };
-                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1281;
-                                      {
-                                        auto di128_fst_433 { std::get<0>(id_1280) };
-                                        auto di128_snd_434 { std::get<1>(id_1280) };
-                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_1282 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<14>, di128_fst_433) };
-                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1283 { id_1282, di128_snd_434 };
-                                        letpair_res_1281 = id_1283;
-                                      }
-                                      choose_res_1279 = letpair_res_1281;
-                                    } else {
-                                      uint16_t id_1284 { 15 };
-                                      bool id_1285 { bool(id_1284 == dsum1_fst_63) };
-                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1286;
-                                      if (id_1285) {
-                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1287 { dsum1_snd_64.readU8() };
-                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1288;
-                                        {
-                                          auto di8_fst_427 { std::get<0>(id_1287) };
-                                          auto di8_snd_428 { std::get<1>(id_1287) };
-                                          int8_t id_1289 { int8_t(di8_fst_427) };
-                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_1290 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<15>, id_1289) };
-                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1291 { id_1290, di8_snd_428 };
-                                          letpair_res_1288 = id_1291;
-                                        }
-                                        choose_res_1286 = letpair_res_1288;
-                                      } else {
-                                        uint16_t id_1292 { 16 };
-                                        bool id_1293 { bool(id_1292 == dsum1_fst_63) };
-                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1294;
-                                        if (id_1293) {
-                                          ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1295 { dsum1_snd_64.readU16Le() };
-                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1296;
-                                          {
-                                            auto di16_fst_421 { std::get<0>(id_1295) };
-                                            auto di16_snd_422 { std::get<1>(id_1295) };
-                                            int16_t id_1297 { int16_t(di16_fst_421) };
-                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_1298 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<16>, id_1297) };
-                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1299 { id_1298, di16_snd_422 };
-                                            letpair_res_1296 = id_1299;
-                                          }
-                                          choose_res_1294 = letpair_res_1296;
-                                        } else {
-                                          uint16_t id_1300 { 17 };
-                                          bool id_1301 { bool(id_1300 == dsum1_fst_63) };
-                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1302;
-                                          if (id_1301) {
-                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1303 { dsum1_snd_64.readU32Le() };
-                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1304;
-                                            {
-                                              auto di24_fst_415 { std::get<0>(id_1303) };
-                                              auto di24_snd_416 { std::get<1>(id_1303) };
-                                              int32_t id_1305 { int32_t(di24_fst_415) };
-                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_1306 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<17>, id_1305) };
-                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1307 { id_1306, di24_snd_416 };
-                                              letpair_res_1304 = id_1307;
-                                            }
-                                            choose_res_1302 = letpair_res_1304;
-                                          } else {
-                                            uint16_t id_1308 { 18 };
-                                            bool id_1309 { bool(id_1308 == dsum1_fst_63) };
-                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1310;
-                                            if (id_1309) {
-                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1311 { dsum1_snd_64.readU32Le() };
-                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1312;
-                                              {
-                                                auto di32_fst_409 { std::get<0>(id_1311) };
-                                                auto di32_snd_410 { std::get<1>(id_1311) };
-                                                int32_t id_1313 { int32_t(di32_fst_409) };
-                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1314 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<18>, id_1313) };
-                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1315 { id_1314, di32_snd_410 };
-                                                letpair_res_1312 = id_1315;
-                                              }
-                                              choose_res_1310 = letpair_res_1312;
-                                            } else {
-                                              uint16_t id_1316 { 19 };
-                                              bool id_1317 { bool(id_1316 == dsum1_fst_63) };
-                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1318;
-                                              if (id_1317) {
-                                                ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1319 { dsum1_snd_64.readU64Le() };
-                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1320;
-                                                {
-                                                  auto di40_fst_403 { std::get<0>(id_1319) };
-                                                  auto di40_snd_404 { std::get<1>(id_1319) };
-                                                  int64_t id_1321 { int64_t(di40_fst_403) };
-                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_1322 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<19>, id_1321) };
-                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1323 { id_1322, di40_snd_404 };
-                                                  letpair_res_1320 = id_1323;
-                                                }
-                                                choose_res_1318 = letpair_res_1320;
-                                              } else {
-                                                uint16_t id_1324 { 20 };
-                                                bool id_1325 { bool(id_1324 == dsum1_fst_63) };
-                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1326;
-                                                if (id_1325) {
-                                                  ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1327 { dsum1_snd_64.readU64Le() };
-                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1328;
-                                                  {
-                                                    auto di48_fst_397 { std::get<0>(id_1327) };
-                                                    auto di48_snd_398 { std::get<1>(id_1327) };
-                                                    int64_t id_1329 { int64_t(di48_fst_397) };
-                                                    std::shared_ptr<::dessser::gen::raql_value::t>  id_1330 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<20>, id_1329) };
-                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1331 { id_1330, di48_snd_398 };
-                                                    letpair_res_1328 = id_1331;
-                                                  }
-                                                  choose_res_1326 = letpair_res_1328;
-                                                } else {
-                                                  uint16_t id_1332 { 21 };
-                                                  bool id_1333 { bool(id_1332 == dsum1_fst_63) };
-                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1334;
-                                                  if (id_1333) {
-                                                    ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1335 { dsum1_snd_64.readU64Le() };
-                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1336;
-                                                    {
-                                                      auto di56_fst_391 { std::get<0>(id_1335) };
-                                                      auto di56_snd_392 { std::get<1>(id_1335) };
-                                                      int64_t id_1337 { int64_t(di56_fst_391) };
-                                                      std::shared_ptr<::dessser::gen::raql_value::t>  id_1338 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<21>, id_1337) };
-                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1339 { id_1338, di56_snd_392 };
-                                                      letpair_res_1336 = id_1339;
-                                                    }
-                                                    choose_res_1334 = letpair_res_1336;
-                                                  } else {
-                                                    uint16_t id_1340 { 22 };
-                                                    bool id_1341 { bool(id_1340 == dsum1_fst_63) };
-                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1342;
-                                                    if (id_1341) {
-                                                      ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1343 { dsum1_snd_64.readU64Le() };
-                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1344;
-                                                      {
-                                                        auto di64_fst_385 { std::get<0>(id_1343) };
-                                                        auto di64_snd_386 { std::get<1>(id_1343) };
-                                                        int64_t id_1345 { int64_t(di64_fst_385) };
-                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_1346 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<22>, id_1345) };
-                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1347 { id_1346, di64_snd_386 };
-                                                        letpair_res_1344 = id_1347;
-                                                      }
-                                                      choose_res_1342 = letpair_res_1344;
-                                                    } else {
-                                                      uint16_t id_1348 { 23 };
-                                                      bool id_1349 { bool(id_1348 == dsum1_fst_63) };
-                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1350;
-                                                      if (id_1349) {
-                                                        ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1351 { dsum1_snd_64.readU128Le() };
-                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1352;
-                                                        {
-                                                          auto di128_fst_379 { std::get<0>(id_1351) };
-                                                          auto di128_snd_380 { std::get<1>(id_1351) };
-                                                          int128_t id_1353 { int128_t(di128_fst_379) };
-                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_1354 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<23>, id_1353) };
-                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1355 { id_1354, di128_snd_380 };
-                                                          letpair_res_1352 = id_1355;
-                                                        }
-                                                        choose_res_1350 = letpair_res_1352;
-                                                      } else {
-                                                        uint16_t id_1356 { 24 };
-                                                        bool id_1357 { bool(id_1356 == dsum1_fst_63) };
-                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1358;
-                                                        if (id_1357) {
-                                                          ::dessser::gen::raql_value::tf568409f41c9c0a265f7302110fc9084 id_1359 { dsum1_snd_64.readU64Le() };
-                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1360;
-                                                          {
-                                                            auto du48_fst_370 { std::get<0>(id_1359) };
-                                                            auto du48_snd_371 { std::get<1>(id_1359) };
-                                                            std::function<uint64_t(uint64_t)> fun1361 { [&fun1361](uint64_t p_0) {
-                                                              return p_0;
-                                                            }
-                                                             };
-                                                            uint64_t id_1362 { uint64_t(du48_fst_370) };
-                                                            uint64_t id_1363 { fun1361(id_1362) };
-                                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_1364 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<24>, id_1363) };
-                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1365 { id_1364, du48_snd_371 };
-                                                            letpair_res_1360 = id_1365;
-                                                          }
-                                                          choose_res_1358 = letpair_res_1360;
-                                                        } else {
-                                                          uint16_t id_1366 { 25 };
-                                                          bool id_1367 { bool(id_1366 == dsum1_fst_63) };
-                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1368;
-                                                          if (id_1367) {
-                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1369 { dsum1_snd_64.readU32Le() };
-                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1370;
-                                                            {
-                                                              auto du32_fst_361 { std::get<0>(id_1369) };
-                                                              auto du32_snd_362 { std::get<1>(id_1369) };
-                                                              std::function<uint32_t(uint32_t)> fun1371 { [&fun1371](uint32_t p_0) {
-                                                                return p_0;
-                                                              }
-                                                               };
-                                                              uint32_t id_1372 { fun1371(du32_fst_361) };
-                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_1373 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<25>, id_1372) };
-                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1374 { id_1373, du32_snd_362 };
-                                                              letpair_res_1370 = id_1374;
-                                                            }
-                                                            choose_res_1368 = letpair_res_1370;
-                                                          } else {
-                                                            uint16_t id_1375 { 26 };
-                                                            bool id_1376 { bool(id_1375 == dsum1_fst_63) };
-                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1377;
-                                                            if (id_1376) {
-                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1378 { dsum1_snd_64.readU128Le() };
-                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1379;
-                                                              {
-                                                                auto di128_fst_352 { std::get<0>(id_1378) };
-                                                                auto di128_snd_353 { std::get<1>(id_1378) };
-                                                                std::function<uint128_t(uint128_t)> fun1380 { [&fun1380](uint128_t p_0) {
-                                                                  return p_0;
-                                                                }
-                                                                 };
-                                                                uint128_t id_1381 { fun1380(di128_fst_352) };
-                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1382 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<26>, id_1381) };
-                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1383 { id_1382, di128_snd_353 };
-                                                                letpair_res_1379 = id_1383;
-                                                              }
-                                                              choose_res_1377 = letpair_res_1379;
-                                                            } else {
-                                                              uint16_t id_1384 { 27 };
-                                                              bool id_1385 { bool(id_1384 == dsum1_fst_63) };
-                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1386;
-                                                              if (id_1385) {
-                                                                ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1387 { dsum1_snd_64.readU16Le() };
-                                                                ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_1388;
-                                                                {
-                                                                  auto du16_fst_319 { std::get<0>(id_1387) };
-                                                                  auto du16_snd_320 { std::get<1>(id_1387) };
-                                                                  ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1389 { du16_fst_319, du16_snd_320 };
-                                                                  letpair_res_1388 = id_1389;
-                                                                }
-                                                                ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a let_res_1390;
-                                                                {
-                                                                  ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_324 { letpair_res_1388 };
-                                                                  ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_1391;
-                                                                  {
-                                                                    auto dsum1_fst_325 { std::get<0>(dsum1_324) };
-                                                                    auto dsum1_snd_326 { std::get<1>(dsum1_324) };
-                                                                    uint16_t id_1392 { 0 };
-                                                                    bool id_1393 { bool(id_1392 == dsum1_fst_325) };
-                                                                    ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a choose_res_1394;
-                                                                    if (id_1393) {
-                                                                      ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1395 { dsum1_snd_326.readU32Le() };
-                                                                      ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_1396;
-                                                                      {
-                                                                        auto du32_fst_337 { std::get<0>(id_1395) };
-                                                                        auto du32_snd_338 { std::get<1>(id_1395) };
-                                                                        std::function<uint32_t(uint32_t)> fun1397 { [&fun1397](uint32_t p_0) {
-                                                                          return p_0;
-                                                                        }
-                                                                         };
-                                                                        uint32_t id_1398 { fun1397(du32_fst_337) };
-                                                                        ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1399 { std::in_place_index<0>, id_1398 };
-                                                                        ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a id_1400 { id_1399, du32_snd_338 };
-                                                                        letpair_res_1396 = id_1400;
-                                                                      }
-                                                                      choose_res_1394 = letpair_res_1396;
-                                                                    } else {
-                                                                      uint16_t id_1401 { 1 };
-                                                                      bool id_1402 { bool(dsum1_fst_325 == id_1401) };
-                                                                      Void id_1403 { ((void)(assert(id_1402)), ::dessser::VOID) };
-                                                                      (void)id_1403;
-                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1404 { dsum1_snd_326.readU128Le() };
-                                                                      ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a letpair_res_1405;
-                                                                      {
-                                                                        auto di128_fst_328 { std::get<0>(id_1404) };
-                                                                        auto di128_snd_329 { std::get<1>(id_1404) };
-                                                                        std::function<uint128_t(uint128_t)> fun1406 { [&fun1406](uint128_t p_0) {
-                                                                          return p_0;
-                                                                        }
-                                                                         };
-                                                                        uint128_t id_1407 { fun1406(di128_fst_328) };
-                                                                        ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1408 { std::in_place_index<1>, id_1407 };
-                                                                        ::dessser::gen::raql_value::tbacb7b7dfcd8eb9fae24f64ef122344a id_1409 { id_1408, di128_snd_329 };
-                                                                        letpair_res_1405 = id_1409;
-                                                                      }
-                                                                      choose_res_1394 = letpair_res_1405;
-                                                                    }
-                                                                    letpair_res_1391 = choose_res_1394;
-                                                                  }
-                                                                  let_res_1390 = letpair_res_1391;
-                                                                }
-                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1410;
-                                                                {
-                                                                  auto des_usr_type_fst_346 { std::get<0>(let_res_1390) };
-                                                                  auto des_usr_type_snd_347 { std::get<1>(let_res_1390) };
-                                                                  std::function<::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891(::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891)> fun1411 { [&fun1411](::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 p_0) {
-                                                                    return p_0;
-                                                                  }
-                                                                   };
-                                                                  ::dessser::gen::raql_value::tb689860ac91fca7822797a026958e891 id_1412 { fun1411(des_usr_type_fst_346) };
-                                                                  std::shared_ptr<::dessser::gen::raql_value::t>  id_1413 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<27>, id_1412) };
-                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1414 { id_1413, des_usr_type_snd_347 };
-                                                                  letpair_res_1410 = id_1414;
-                                                                }
-                                                                choose_res_1386 = letpair_res_1410;
-                                                              } else {
-                                                                uint16_t id_1415 { 28 };
-                                                                bool id_1416 { bool(id_1415 == dsum1_fst_63) };
-                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1417;
-                                                                if (id_1416) {
-                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1418 { dsum1_snd_64.readU32Le() };
-                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 letpair_res_1419;
-                                                                  {
-                                                                    auto du32_fst_298 { std::get<0>(id_1418) };
-                                                                    auto du32_snd_299 { std::get<1>(id_1418) };
-                                                                    std::function<uint32_t(uint32_t)> fun1420 { [&fun1420](uint32_t p_0) {
-                                                                      return p_0;
-                                                                    }
-                                                                     };
-                                                                    uint32_t id_1421 { fun1420(du32_fst_298) };
-                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1422 { id_1421, du32_snd_299 };
-                                                                    letpair_res_1419 = id_1422;
-                                                                  }
-                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_1423;
-                                                                  {
-                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 drec_303 { letpair_res_1419 };
-                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1424;
-                                                                    {
-                                                                      auto drec_fst_304 { std::get<0>(drec_303) };
-                                                                      auto drec_snd_305 { std::get<1>(drec_303) };
-                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1425 { drec_snd_305.readU8() };
-                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1426;
-                                                                      {
-                                                                        auto du8_fst_307 { std::get<0>(id_1425) };
-                                                                        auto du8_snd_308 { std::get<1>(id_1425) };
-                                                                        std::function<::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982(::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982)> fun1427 { [&fun1427](::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 p_0) {
-                                                                          return p_0;
-                                                                        }
-                                                                         };
-                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1428 { drec_fst_304, du8_fst_307 };
-                                                                        ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1429 { fun1427(id_1428) };
-                                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_1430 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<28>, id_1429) };
-                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1431 { id_1430, du8_snd_308 };
-                                                                        letpair_res_1426 = id_1431;
-                                                                      }
-                                                                      letpair_res_1424 = letpair_res_1426;
-                                                                    }
-                                                                    let_res_1423 = letpair_res_1424;
-                                                                  }
-                                                                  choose_res_1417 = let_res_1423;
-                                                                } else {
-                                                                  uint16_t id_1432 { 29 };
-                                                                  bool id_1433 { bool(id_1432 == dsum1_fst_63) };
-                                                                  ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1434;
-                                                                  if (id_1433) {
-                                                                    ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1435 { dsum1_snd_64.readU128Le() };
-                                                                    ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 letpair_res_1436;
-                                                                    {
-                                                                      auto di128_fst_277 { std::get<0>(id_1435) };
-                                                                      auto di128_snd_278 { std::get<1>(id_1435) };
-                                                                      std::function<uint128_t(uint128_t)> fun1437 { [&fun1437](uint128_t p_0) {
-                                                                        return p_0;
-                                                                      }
-                                                                       };
-                                                                      uint128_t id_1438 { fun1437(di128_fst_277) };
-                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1439 { id_1438, di128_snd_278 };
-                                                                      letpair_res_1436 = id_1439;
-                                                                    }
-                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b let_res_1440;
-                                                                    {
-                                                                      ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 drec_282 { letpair_res_1436 };
-                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1441;
-                                                                      {
-                                                                        auto drec_fst_283 { std::get<0>(drec_282) };
-                                                                        auto drec_snd_284 { std::get<1>(drec_282) };
-                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1442 { drec_snd_284.readU8() };
-                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1443;
-                                                                        {
-                                                                          auto du8_fst_286 { std::get<0>(id_1442) };
-                                                                          auto du8_snd_287 { std::get<1>(id_1442) };
-                                                                          std::function<::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86(::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86)> fun1444 { [&fun1444](::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 p_0) {
-                                                                            return p_0;
-                                                                          }
-                                                                           };
-                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1445 { drec_fst_283, du8_fst_286 };
-                                                                          ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1446 { fun1444(id_1445) };
-                                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_1447 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<29>, id_1446) };
-                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1448 { id_1447, du8_snd_287 };
-                                                                          letpair_res_1443 = id_1448;
-                                                                        }
-                                                                        letpair_res_1441 = letpair_res_1443;
-                                                                      }
-                                                                      let_res_1440 = letpair_res_1441;
-                                                                    }
-                                                                    choose_res_1434 = let_res_1440;
-                                                                  } else {
-                                                                    uint16_t id_1449 { 30 };
-                                                                    bool id_1450 { bool(id_1449 == dsum1_fst_63) };
-                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1451;
-                                                                    if (id_1450) {
-                                                                      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1452 { dsum1_snd_64.readU16Le() };
-                                                                      ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b letpair_res_1453;
-                                                                      {
-                                                                        auto du16_fst_220 { std::get<0>(id_1452) };
-                                                                        auto du16_snd_221 { std::get<1>(id_1452) };
-                                                                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b id_1454 { du16_fst_220, du16_snd_221 };
-                                                                        letpair_res_1453 = id_1454;
-                                                                      }
-                                                                      ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_1455;
-                                                                      {
-                                                                        ::dessser::gen::raql_value::t7609d344c1ba69d0f80fec236d4c216b dsum1_225 { letpair_res_1453 };
-                                                                        ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_1456;
-                                                                        {
-                                                                          auto dsum1_fst_226 { std::get<0>(dsum1_225) };
-                                                                          auto dsum1_snd_227 { std::get<1>(dsum1_225) };
-                                                                          uint16_t id_1457 { 0 };
-                                                                          bool id_1458 { bool(id_1457 == dsum1_fst_226) };
-                                                                          ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc choose_res_1459;
-                                                                          if (id_1458) {
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1460 { dsum1_snd_227.readU32Le() };
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 letpair_res_1461;
-                                                                            {
-                                                                              auto du32_fst_250 { std::get<0>(id_1460) };
-                                                                              auto du32_snd_251 { std::get<1>(id_1460) };
-                                                                              std::function<uint32_t(uint32_t)> fun1462 { [&fun1462](uint32_t p_0) {
-                                                                                return p_0;
-                                                                              }
-                                                                               };
-                                                                              uint32_t id_1463 { fun1462(du32_fst_250) };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1464 { id_1463, du32_snd_251 };
-                                                                              letpair_res_1461 = id_1464;
-                                                                            }
-                                                                            ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_1465;
-                                                                            {
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 drec_255 { letpair_res_1461 };
-                                                                              ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_1466;
-                                                                              {
-                                                                                auto drec_fst_256 { std::get<0>(drec_255) };
-                                                                                auto drec_snd_257 { std::get<1>(drec_255) };
-                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1467 { drec_snd_257.readU8() };
-                                                                                ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_1468;
-                                                                                {
-                                                                                  auto du8_fst_259 { std::get<0>(id_1467) };
-                                                                                  auto du8_snd_260 { std::get<1>(id_1467) };
-                                                                                  std::function<::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982(::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982)> fun1469 { [&fun1469](::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 p_0) {
-                                                                                    return p_0;
-                                                                                  }
-                                                                                   };
-                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1470 { drec_fst_256, du8_fst_259 };
-                                                                                  ::dessser::gen::raql_value::t81f779acbcb9180b1df9b88e2d8ce982 id_1471 { fun1469(id_1470) };
-                                                                                  ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1472 { std::in_place_index<0>, id_1471 };
-                                                                                  ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_1473 { id_1472, du8_snd_260 };
-                                                                                  letpair_res_1468 = id_1473;
-                                                                                }
-                                                                                letpair_res_1466 = letpair_res_1468;
-                                                                              }
-                                                                              let_res_1465 = letpair_res_1466;
-                                                                            }
-                                                                            choose_res_1459 = let_res_1465;
-                                                                          } else {
-                                                                            uint16_t id_1474 { 1 };
-                                                                            bool id_1475 { bool(dsum1_fst_226 == id_1474) };
-                                                                            Void id_1476 { ((void)(assert(id_1475)), ::dessser::VOID) };
-                                                                            (void)id_1476;
-                                                                            ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1477 { dsum1_snd_227.readU128Le() };
-                                                                            ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 letpair_res_1478;
-                                                                            {
-                                                                              auto di128_fst_229 { std::get<0>(id_1477) };
-                                                                              auto di128_snd_230 { std::get<1>(id_1477) };
-                                                                              std::function<uint128_t(uint128_t)> fun1479 { [&fun1479](uint128_t p_0) {
-                                                                                return p_0;
-                                                                              }
-                                                                               };
-                                                                              uint128_t id_1480 { fun1479(di128_fst_229) };
-                                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 id_1481 { id_1480, di128_snd_230 };
-                                                                              letpair_res_1478 = id_1481;
-                                                                            }
-                                                                            ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc let_res_1482;
-                                                                            {
-                                                                              ::dessser::gen::raql_value::t9e0ebd3dfe4817b98136c6e6b20afc92 drec_234 { letpair_res_1478 };
-                                                                              ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_1483;
-                                                                              {
-                                                                                auto drec_fst_235 { std::get<0>(drec_234) };
-                                                                                auto drec_snd_236 { std::get<1>(drec_234) };
-                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1484 { drec_snd_236.readU8() };
-                                                                                ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc letpair_res_1485;
-                                                                                {
-                                                                                  auto du8_fst_238 { std::get<0>(id_1484) };
-                                                                                  auto du8_snd_239 { std::get<1>(id_1484) };
-                                                                                  std::function<::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86(::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86)> fun1486 { [&fun1486](::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 p_0) {
-                                                                                    return p_0;
-                                                                                  }
-                                                                                   };
-                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1487 { drec_fst_235, du8_fst_238 };
-                                                                                  ::dessser::gen::raql_value::t8d4af754051624596ec1687a64e3bf86 id_1488 { fun1486(id_1487) };
-                                                                                  ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1489 { std::in_place_index<1>, id_1488 };
-                                                                                  ::dessser::gen::raql_value::t67fcf630ffd97c208644a466f20c16dc id_1490 { id_1489, du8_snd_239 };
-                                                                                  letpair_res_1485 = id_1490;
-                                                                                }
-                                                                                letpair_res_1483 = letpair_res_1485;
-                                                                              }
-                                                                              let_res_1482 = letpair_res_1483;
-                                                                            }
-                                                                            choose_res_1459 = let_res_1482;
-                                                                          }
-                                                                          letpair_res_1456 = choose_res_1459;
-                                                                        }
-                                                                        let_res_1455 = letpair_res_1456;
-                                                                      }
-                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1491;
-                                                                      {
-                                                                        auto des_usr_type_fst_271 { std::get<0>(let_res_1455) };
-                                                                        auto des_usr_type_snd_272 { std::get<1>(let_res_1455) };
-                                                                        std::function<::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27(::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27)> fun1492 { [&fun1492](::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 p_0) {
-                                                                          return p_0;
-                                                                        }
-                                                                         };
-                                                                        ::dessser::gen::raql_value::t086a8e00718450baf3e88e60b5e42a27 id_1493 { fun1492(des_usr_type_fst_271) };
-                                                                        std::shared_ptr<::dessser::gen::raql_value::t>  id_1494 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<30>, id_1493) };
-                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1495 { id_1494, des_usr_type_snd_272 };
-                                                                        letpair_res_1491 = id_1495;
-                                                                      }
-                                                                      choose_res_1451 = letpair_res_1491;
-                                                                    } else {
-                                                                      uint16_t id_1496 { 31 };
-                                                                      bool id_1497 { bool(id_1496 == dsum1_fst_63) };
-                                                                      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1498;
-                                                                      if (id_1497) {
-                                                                        uint32_t id_1499 { 0U };
-                                                                        Vec<1, uint32_t> id_1500 {  id_1499  };
-                                                                        ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1501;
-                                                                        {
-                                                                          Vec<1, uint32_t> leb_ref_193 { id_1500 };
-                                                                          uint8_t id_1502 { 0 };
-                                                                          Vec<1, uint8_t> id_1503 {  id_1502  };
-                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1504;
-                                                                          {
-                                                                            Vec<1, uint8_t> shft_ref_194 { id_1503 };
-                                                                            Vec<1, Pointer> id_1505 {  dsum1_snd_64  };
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1506;
-                                                                            {
-                                                                              Vec<1, Pointer> p_ref_195 { id_1505 };
-                                                                              bool while_flag_1507 { true };
-                                                                              do {
-                                                                                uint8_t id_1508 { 0 };
-                                                                                Pointer id_1509 { p_ref_195[id_1508] };
-                                                                                ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1510 { id_1509.readU8() };
-                                                                                bool let_res_1511;
-                                                                                {
-                                                                                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_196 { id_1510 };
-                                                                                  bool letpair_res_1512;
-                                                                                  {
-                                                                                    auto leb128_fst_197 { std::get<0>(leb128_196) };
-                                                                                    auto leb128_snd_198 { std::get<1>(leb128_196) };
-                                                                                    uint8_t id_1513 { 0 };
-                                                                                    Void id_1514 { ((void)(p_ref_195[id_1513] = leb128_snd_198), ::dessser::VOID) };
-                                                                                    (void)id_1514;
-                                                                                    uint8_t id_1515 { 0 };
-                                                                                    uint8_t id_1516 { 127 };
-                                                                                    uint8_t id_1517 { uint8_t(leb128_fst_197 & id_1516) };
-                                                                                    uint32_t id_1518 { uint32_t(id_1517) };
-                                                                                    uint8_t id_1519 { 0 };
-                                                                                    uint8_t id_1520 { shft_ref_194[id_1519] };
-                                                                                    uint32_t id_1521 { uint32_t(id_1518 << id_1520) };
-                                                                                    uint8_t id_1522 { 0 };
-                                                                                    uint32_t id_1523 { leb_ref_193[id_1522] };
-                                                                                    uint32_t id_1524 { uint32_t(id_1521 | id_1523) };
-                                                                                    Void id_1525 { ((void)(leb_ref_193[id_1515] = id_1524), ::dessser::VOID) };
-                                                                                    (void)id_1525;
-                                                                                    uint8_t id_1526 { 0 };
-                                                                                    uint8_t id_1527 { 0 };
-                                                                                    uint8_t id_1528 { shft_ref_194[id_1527] };
-                                                                                    uint8_t id_1529 { 7 };
-                                                                                    uint8_t id_1530 { uint8_t(id_1528 + id_1529) };
-                                                                                    Void id_1531 { ((void)(shft_ref_194[id_1526] = id_1530), ::dessser::VOID) };
-                                                                                    (void)id_1531;
-                                                                                    uint8_t id_1532 { 128 };
-                                                                                    bool id_1533 { bool(leb128_fst_197 >= id_1532) };
-                                                                                    letpair_res_1512 = id_1533;
-                                                                                  }
-                                                                                  let_res_1511 = letpair_res_1512;
-                                                                                }
-                                                                                while_flag_1507 = let_res_1511;
-                                                                                if (while_flag_1507) {
-                                                                                  (void)::dessser::VOID;
-                                                                                }
-                                                                              } while (while_flag_1507);
-                                                                              (void)::dessser::VOID;
-                                                                              uint8_t id_1534 { 0 };
-                                                                              uint32_t id_1535 { leb_ref_193[id_1534] };
-                                                                              uint8_t id_1536 { 0 };
-                                                                              Pointer id_1537 { p_ref_195[id_1536] };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1538 { id_1535, id_1537 };
-                                                                              let_res_1506 = id_1538;
-                                                                            }
-                                                                            let_res_1504 = let_res_1506;
-                                                                          }
-                                                                          let_res_1501 = let_res_1504;
-                                                                        }
-                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1539;
-                                                                        {
-                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_202 { let_res_1501 };
-                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1540;
-                                                                          {
-                                                                            auto dlist1_fst_203 { std::get<0>(dlist1_202) };
-                                                                            auto dlist1_snd_204 { std::get<1>(dlist1_202) };
-                                                                            Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_1541;
-                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1542 { endoflist_1541, dlist1_snd_204 };
-                                                                            Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_1543 {  id_1542  };
-                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1544;
-                                                                            {
-                                                                              Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_205 { id_1543 };
-                                                                              int32_t id_1545 { 0L };
-                                                                              Vec<1, int32_t> id_1546 {  id_1545  };
-                                                                              {
-                                                                                Vec<1, int32_t> repeat_n_206 { id_1546 };
-                                                                                bool while_flag_1547 { true };
-                                                                                do {
-                                                                                  int32_t id_1548 { int32_t(dlist1_fst_203) };
-                                                                                  uint8_t id_1549 { 0 };
-                                                                                  int32_t id_1550 { repeat_n_206[id_1549] };
-                                                                                  bool id_1551 { bool(id_1548 > id_1550) };
-                                                                                  while_flag_1547 = id_1551;
-                                                                                  if (while_flag_1547) {
-                                                                                    uint8_t id_1552 { 0 };
-                                                                                    ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1553 { inits_src_ref_205[id_1552] };
-                                                                                    {
-                                                                                      ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_207 { id_1553 };
-                                                                                      {
-                                                                                        auto dlist2_fst_208 { std::get<0>(dlist2_207) };
-                                                                                        auto dlist2_snd_209 { std::get<1>(dlist2_207) };
-                                                                                        uint8_t id_1554 { 0 };
-                                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1555 { fun1124(dlist2_snd_209) };
-                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1556;
-                                                                                        {
-                                                                                          auto dlist3_fst_211 { std::get<0>(id_1555) };
-                                                                                          auto dlist3_snd_212 { std::get<1>(id_1555) };
-                                                                                          Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_1557 { dlist3_fst_211, dlist2_fst_208 };
-                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1558 { id_1557, dlist3_snd_212 };
-                                                                                          letpair_res_1556 = id_1558;
-                                                                                        }
-                                                                                        Void id_1559 { ((void)(inits_src_ref_205[id_1554] = letpair_res_1556), ::dessser::VOID) };
-                                                                                        (void)id_1559;
-                                                                                      }
-                                                                                      (void)::dessser::VOID;
-                                                                                    }
-                                                                                    (void)::dessser::VOID;
-                                                                                    uint8_t id_1560 { 0 };
-                                                                                    uint8_t id_1561 { 0 };
-                                                                                    int32_t id_1562 { repeat_n_206[id_1561] };
-                                                                                    int32_t id_1563 { 1L };
-                                                                                    int32_t id_1564 { int32_t(id_1562 + id_1563) };
-                                                                                    Void id_1565 { ((void)(repeat_n_206[id_1560] = id_1564), ::dessser::VOID) };
-                                                                                    (void)id_1565;
-                                                                                    (void)id_1565;
-                                                                                  }
-                                                                                } while (while_flag_1547);
-                                                                                (void)::dessser::VOID;
-                                                                              }
-                                                                              (void)::dessser::VOID;
-                                                                              uint8_t id_1566 { 0 };
-                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1567 { inits_src_ref_205[id_1566] };
-                                                                              let_res_1544 = id_1567;
-                                                                            }
-                                                                            letpair_res_1540 = let_res_1544;
-                                                                          }
-                                                                          let_res_1539 = letpair_res_1540;
-                                                                        }
-                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1568;
-                                                                        {
-                                                                          auto dlist4_fst_214 { std::get<0>(let_res_1539) };
-                                                                          auto dlist4_snd_215 { std::get<1>(let_res_1539) };
-                                                                          Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1569 { dlist4_fst_214.toListRev() };
-                                                                          std::shared_ptr<::dessser::gen::raql_value::t>  id_1570 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<31>, id_1569) };
-                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1571 { id_1570, dlist4_snd_215 };
-                                                                          letpair_res_1568 = id_1571;
-                                                                        }
-                                                                        choose_res_1498 = letpair_res_1568;
-                                                                      } else {
-                                                                        uint16_t id_1572 { 32 };
-                                                                        bool id_1573 { bool(id_1572 == dsum1_fst_63) };
-                                                                        ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1574;
-                                                                        if (id_1573) {
-                                                                          uint32_t id_1575 { 0U };
-                                                                          Vec<1, uint32_t> id_1576 {  id_1575  };
-                                                                          ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1577;
-                                                                          {
-                                                                            Vec<1, uint32_t> leb_ref_167 { id_1576 };
-                                                                            uint8_t id_1578 { 0 };
-                                                                            Vec<1, uint8_t> id_1579 {  id_1578  };
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1580;
-                                                                            {
-                                                                              Vec<1, uint8_t> shft_ref_168 { id_1579 };
-                                                                              Vec<1, Pointer> id_1581 {  dsum1_snd_64  };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1582;
-                                                                              {
-                                                                                Vec<1, Pointer> p_ref_169 { id_1581 };
-                                                                                bool while_flag_1583 { true };
-                                                                                do {
-                                                                                  uint8_t id_1584 { 0 };
-                                                                                  Pointer id_1585 { p_ref_169[id_1584] };
-                                                                                  ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1586 { id_1585.readU8() };
-                                                                                  bool let_res_1587;
-                                                                                  {
-                                                                                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_170 { id_1586 };
-                                                                                    bool letpair_res_1588;
-                                                                                    {
-                                                                                      auto leb128_fst_171 { std::get<0>(leb128_170) };
-                                                                                      auto leb128_snd_172 { std::get<1>(leb128_170) };
-                                                                                      uint8_t id_1589 { 0 };
-                                                                                      Void id_1590 { ((void)(p_ref_169[id_1589] = leb128_snd_172), ::dessser::VOID) };
-                                                                                      (void)id_1590;
-                                                                                      uint8_t id_1591 { 0 };
-                                                                                      uint8_t id_1592 { 127 };
-                                                                                      uint8_t id_1593 { uint8_t(leb128_fst_171 & id_1592) };
-                                                                                      uint32_t id_1594 { uint32_t(id_1593) };
-                                                                                      uint8_t id_1595 { 0 };
-                                                                                      uint8_t id_1596 { shft_ref_168[id_1595] };
-                                                                                      uint32_t id_1597 { uint32_t(id_1594 << id_1596) };
-                                                                                      uint8_t id_1598 { 0 };
-                                                                                      uint32_t id_1599 { leb_ref_167[id_1598] };
-                                                                                      uint32_t id_1600 { uint32_t(id_1597 | id_1599) };
-                                                                                      Void id_1601 { ((void)(leb_ref_167[id_1591] = id_1600), ::dessser::VOID) };
-                                                                                      (void)id_1601;
-                                                                                      uint8_t id_1602 { 0 };
-                                                                                      uint8_t id_1603 { 0 };
-                                                                                      uint8_t id_1604 { shft_ref_168[id_1603] };
-                                                                                      uint8_t id_1605 { 7 };
-                                                                                      uint8_t id_1606 { uint8_t(id_1604 + id_1605) };
-                                                                                      Void id_1607 { ((void)(shft_ref_168[id_1602] = id_1606), ::dessser::VOID) };
-                                                                                      (void)id_1607;
-                                                                                      uint8_t id_1608 { 128 };
-                                                                                      bool id_1609 { bool(leb128_fst_171 >= id_1608) };
-                                                                                      letpair_res_1588 = id_1609;
-                                                                                    }
-                                                                                    let_res_1587 = letpair_res_1588;
-                                                                                  }
-                                                                                  while_flag_1583 = let_res_1587;
-                                                                                  if (while_flag_1583) {
-                                                                                    (void)::dessser::VOID;
-                                                                                  }
-                                                                                } while (while_flag_1583);
-                                                                                (void)::dessser::VOID;
-                                                                                uint8_t id_1610 { 0 };
-                                                                                uint32_t id_1611 { leb_ref_167[id_1610] };
-                                                                                uint8_t id_1612 { 0 };
-                                                                                Pointer id_1613 { p_ref_169[id_1612] };
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1614 { id_1611, id_1613 };
-                                                                                let_res_1582 = id_1614;
-                                                                              }
-                                                                              let_res_1580 = let_res_1582;
-                                                                            }
-                                                                            let_res_1577 = let_res_1580;
-                                                                          }
-                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1615;
-                                                                          {
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_176 { let_res_1577 };
-                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1616;
-                                                                            {
-                                                                              auto dlist1_fst_177 { std::get<0>(dlist1_176) };
-                                                                              auto dlist1_snd_178 { std::get<1>(dlist1_176) };
-                                                                              Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_1617;
-                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1618 { endoflist_1617, dlist1_snd_178 };
-                                                                              Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_1619 {  id_1618  };
-                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1620;
-                                                                              {
-                                                                                Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_179 { id_1619 };
-                                                                                int32_t id_1621 { 0L };
-                                                                                Vec<1, int32_t> id_1622 {  id_1621  };
-                                                                                {
-                                                                                  Vec<1, int32_t> repeat_n_180 { id_1622 };
-                                                                                  bool while_flag_1623 { true };
-                                                                                  do {
-                                                                                    int32_t id_1624 { int32_t(dlist1_fst_177) };
-                                                                                    uint8_t id_1625 { 0 };
-                                                                                    int32_t id_1626 { repeat_n_180[id_1625] };
-                                                                                    bool id_1627 { bool(id_1624 > id_1626) };
-                                                                                    while_flag_1623 = id_1627;
-                                                                                    if (while_flag_1623) {
-                                                                                      uint8_t id_1628 { 0 };
-                                                                                      ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1629 { inits_src_ref_179[id_1628] };
-                                                                                      {
-                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_181 { id_1629 };
-                                                                                        {
-                                                                                          auto dlist2_fst_182 { std::get<0>(dlist2_181) };
-                                                                                          auto dlist2_snd_183 { std::get<1>(dlist2_181) };
-                                                                                          uint8_t id_1630 { 0 };
-                                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1631 { fun1124(dlist2_snd_183) };
-                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1632;
-                                                                                          {
-                                                                                            auto dlist3_fst_185 { std::get<0>(id_1631) };
-                                                                                            auto dlist3_snd_186 { std::get<1>(id_1631) };
-                                                                                            Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_1633 { dlist3_fst_185, dlist2_fst_182 };
-                                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1634 { id_1633, dlist3_snd_186 };
-                                                                                            letpair_res_1632 = id_1634;
-                                                                                          }
-                                                                                          Void id_1635 { ((void)(inits_src_ref_179[id_1630] = letpair_res_1632), ::dessser::VOID) };
-                                                                                          (void)id_1635;
-                                                                                        }
-                                                                                        (void)::dessser::VOID;
-                                                                                      }
-                                                                                      (void)::dessser::VOID;
-                                                                                      uint8_t id_1636 { 0 };
-                                                                                      uint8_t id_1637 { 0 };
-                                                                                      int32_t id_1638 { repeat_n_180[id_1637] };
-                                                                                      int32_t id_1639 { 1L };
-                                                                                      int32_t id_1640 { int32_t(id_1638 + id_1639) };
-                                                                                      Void id_1641 { ((void)(repeat_n_180[id_1636] = id_1640), ::dessser::VOID) };
-                                                                                      (void)id_1641;
-                                                                                      (void)id_1641;
-                                                                                    }
-                                                                                  } while (while_flag_1623);
-                                                                                  (void)::dessser::VOID;
-                                                                                }
-                                                                                (void)::dessser::VOID;
-                                                                                uint8_t id_1642 { 0 };
-                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1643 { inits_src_ref_179[id_1642] };
-                                                                                let_res_1620 = id_1643;
-                                                                              }
-                                                                              letpair_res_1616 = let_res_1620;
-                                                                            }
-                                                                            let_res_1615 = letpair_res_1616;
-                                                                          }
-                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1644;
-                                                                          {
-                                                                            auto dlist4_fst_188 { std::get<0>(let_res_1615) };
-                                                                            auto dlist4_snd_189 { std::get<1>(let_res_1615) };
-                                                                            Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1645 { dlist4_fst_188.toListRev() };
-                                                                            std::shared_ptr<::dessser::gen::raql_value::t>  id_1646 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<32>, id_1645) };
-                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1647 { id_1646, dlist4_snd_189 };
-                                                                            letpair_res_1644 = id_1647;
-                                                                          }
-                                                                          choose_res_1574 = letpair_res_1644;
-                                                                        } else {
-                                                                          uint16_t id_1648 { 33 };
-                                                                          bool id_1649 { bool(id_1648 == dsum1_fst_63) };
-                                                                          ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1650;
-                                                                          if (id_1649) {
-                                                                            uint32_t id_1651 { 0U };
-                                                                            Vec<1, uint32_t> id_1652 {  id_1651  };
-                                                                            ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1653;
-                                                                            {
-                                                                              Vec<1, uint32_t> leb_ref_141 { id_1652 };
-                                                                              uint8_t id_1654 { 0 };
-                                                                              Vec<1, uint8_t> id_1655 {  id_1654  };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1656;
-                                                                              {
-                                                                                Vec<1, uint8_t> shft_ref_142 { id_1655 };
-                                                                                Vec<1, Pointer> id_1657 {  dsum1_snd_64  };
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1658;
-                                                                                {
-                                                                                  Vec<1, Pointer> p_ref_143 { id_1657 };
-                                                                                  bool while_flag_1659 { true };
-                                                                                  do {
-                                                                                    uint8_t id_1660 { 0 };
-                                                                                    Pointer id_1661 { p_ref_143[id_1660] };
-                                                                                    ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1662 { id_1661.readU8() };
-                                                                                    bool let_res_1663;
-                                                                                    {
-                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_144 { id_1662 };
-                                                                                      bool letpair_res_1664;
-                                                                                      {
-                                                                                        auto leb128_fst_145 { std::get<0>(leb128_144) };
-                                                                                        auto leb128_snd_146 { std::get<1>(leb128_144) };
-                                                                                        uint8_t id_1665 { 0 };
-                                                                                        Void id_1666 { ((void)(p_ref_143[id_1665] = leb128_snd_146), ::dessser::VOID) };
-                                                                                        (void)id_1666;
-                                                                                        uint8_t id_1667 { 0 };
-                                                                                        uint8_t id_1668 { 127 };
-                                                                                        uint8_t id_1669 { uint8_t(leb128_fst_145 & id_1668) };
-                                                                                        uint32_t id_1670 { uint32_t(id_1669) };
-                                                                                        uint8_t id_1671 { 0 };
-                                                                                        uint8_t id_1672 { shft_ref_142[id_1671] };
-                                                                                        uint32_t id_1673 { uint32_t(id_1670 << id_1672) };
-                                                                                        uint8_t id_1674 { 0 };
-                                                                                        uint32_t id_1675 { leb_ref_141[id_1674] };
-                                                                                        uint32_t id_1676 { uint32_t(id_1673 | id_1675) };
-                                                                                        Void id_1677 { ((void)(leb_ref_141[id_1667] = id_1676), ::dessser::VOID) };
-                                                                                        (void)id_1677;
-                                                                                        uint8_t id_1678 { 0 };
-                                                                                        uint8_t id_1679 { 0 };
-                                                                                        uint8_t id_1680 { shft_ref_142[id_1679] };
-                                                                                        uint8_t id_1681 { 7 };
-                                                                                        uint8_t id_1682 { uint8_t(id_1680 + id_1681) };
-                                                                                        Void id_1683 { ((void)(shft_ref_142[id_1678] = id_1682), ::dessser::VOID) };
-                                                                                        (void)id_1683;
-                                                                                        uint8_t id_1684 { 128 };
-                                                                                        bool id_1685 { bool(leb128_fst_145 >= id_1684) };
-                                                                                        letpair_res_1664 = id_1685;
-                                                                                      }
-                                                                                      let_res_1663 = letpair_res_1664;
-                                                                                    }
-                                                                                    while_flag_1659 = let_res_1663;
-                                                                                    if (while_flag_1659) {
-                                                                                      (void)::dessser::VOID;
-                                                                                    }
-                                                                                  } while (while_flag_1659);
-                                                                                  (void)::dessser::VOID;
-                                                                                  uint8_t id_1686 { 0 };
-                                                                                  uint32_t id_1687 { leb_ref_141[id_1686] };
-                                                                                  uint8_t id_1688 { 0 };
-                                                                                  Pointer id_1689 { p_ref_143[id_1688] };
-                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1690 { id_1687, id_1689 };
-                                                                                  let_res_1658 = id_1690;
-                                                                                }
-                                                                                let_res_1656 = let_res_1658;
-                                                                              }
-                                                                              let_res_1653 = let_res_1656;
-                                                                            }
-                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1691;
-                                                                            {
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_150 { let_res_1653 };
-                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1692;
-                                                                              {
-                                                                                auto dlist1_fst_151 { std::get<0>(dlist1_150) };
-                                                                                auto dlist1_snd_152 { std::get<1>(dlist1_150) };
-                                                                                Lst<std::shared_ptr<::dessser::gen::raql_value::t> > endoflist_1693;
-                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1694 { endoflist_1693, dlist1_snd_152 };
-                                                                                Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> id_1695 {  id_1694  };
-                                                                                ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 let_res_1696;
-                                                                                {
-                                                                                  Vec<1, ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24> inits_src_ref_153 { id_1695 };
-                                                                                  int32_t id_1697 { 0L };
-                                                                                  Vec<1, int32_t> id_1698 {  id_1697  };
-                                                                                  {
-                                                                                    Vec<1, int32_t> repeat_n_154 { id_1698 };
-                                                                                    bool while_flag_1699 { true };
-                                                                                    do {
-                                                                                      int32_t id_1700 { int32_t(dlist1_fst_151) };
-                                                                                      uint8_t id_1701 { 0 };
-                                                                                      int32_t id_1702 { repeat_n_154[id_1701] };
-                                                                                      bool id_1703 { bool(id_1700 > id_1702) };
-                                                                                      while_flag_1699 = id_1703;
-                                                                                      if (while_flag_1699) {
-                                                                                        uint8_t id_1704 { 0 };
-                                                                                        ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1705 { inits_src_ref_153[id_1704] };
-                                                                                        {
-                                                                                          ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 dlist2_155 { id_1705 };
-                                                                                          {
-                                                                                            auto dlist2_fst_156 { std::get<0>(dlist2_155) };
-                                                                                            auto dlist2_snd_157 { std::get<1>(dlist2_155) };
-                                                                                            uint8_t id_1706 { 0 };
-                                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1707 { fun1124(dlist2_snd_157) };
-                                                                                            ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 letpair_res_1708;
-                                                                                            {
-                                                                                              auto dlist3_fst_159 { std::get<0>(id_1707) };
-                                                                                              auto dlist3_snd_160 { std::get<1>(id_1707) };
-                                                                                              Lst<std::shared_ptr<::dessser::gen::raql_value::t> > id_1709 { dlist3_fst_159, dlist2_fst_156 };
-                                                                                              ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1710 { id_1709, dlist3_snd_160 };
-                                                                                              letpair_res_1708 = id_1710;
-                                                                                            }
-                                                                                            Void id_1711 { ((void)(inits_src_ref_153[id_1706] = letpair_res_1708), ::dessser::VOID) };
-                                                                                            (void)id_1711;
-                                                                                          }
-                                                                                          (void)::dessser::VOID;
-                                                                                        }
-                                                                                        (void)::dessser::VOID;
-                                                                                        uint8_t id_1712 { 0 };
-                                                                                        uint8_t id_1713 { 0 };
-                                                                                        int32_t id_1714 { repeat_n_154[id_1713] };
-                                                                                        int32_t id_1715 { 1L };
-                                                                                        int32_t id_1716 { int32_t(id_1714 + id_1715) };
-                                                                                        Void id_1717 { ((void)(repeat_n_154[id_1712] = id_1716), ::dessser::VOID) };
-                                                                                        (void)id_1717;
-                                                                                        (void)id_1717;
-                                                                                      }
-                                                                                    } while (while_flag_1699);
-                                                                                    (void)::dessser::VOID;
-                                                                                  }
-                                                                                  (void)::dessser::VOID;
-                                                                                  uint8_t id_1718 { 0 };
-                                                                                  ::dessser::gen::raql_value::t9658b993bb9f5814bdb59e00050f3b24 id_1719 { inits_src_ref_153[id_1718] };
-                                                                                  let_res_1696 = id_1719;
-                                                                                }
-                                                                                letpair_res_1692 = let_res_1696;
-                                                                              }
-                                                                              let_res_1691 = letpair_res_1692;
-                                                                            }
-                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1720;
-                                                                            {
-                                                                              auto dlist4_fst_162 { std::get<0>(let_res_1691) };
-                                                                              auto dlist4_snd_163 { std::get<1>(let_res_1691) };
-                                                                              Arr<std::shared_ptr<::dessser::gen::raql_value::t> > id_1721 { dlist4_fst_162.toListRev() };
-                                                                              std::shared_ptr<::dessser::gen::raql_value::t>  id_1722 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<33>, id_1721) };
-                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1723 { id_1722, dlist4_snd_163 };
-                                                                              letpair_res_1720 = id_1723;
-                                                                            }
-                                                                            choose_res_1650 = letpair_res_1720;
-                                                                          } else {
-                                                                            uint16_t id_1724 { 34 };
-                                                                            bool id_1725 { bool(id_1724 == dsum1_fst_63) };
-                                                                            ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b choose_res_1726;
-                                                                            if (id_1725) {
-                                                                              uint32_t id_1727 { 0U };
-                                                                              Vec<1, uint32_t> id_1728 {  id_1727  };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1729;
-                                                                              {
-                                                                                Vec<1, uint32_t> leb_ref_97 { id_1728 };
-                                                                                uint8_t id_1730 { 0 };
-                                                                                Vec<1, uint8_t> id_1731 {  id_1730  };
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1732;
-                                                                                {
-                                                                                  Vec<1, uint8_t> shft_ref_98 { id_1731 };
-                                                                                  Vec<1, Pointer> id_1733 {  dsum1_snd_64  };
-                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1734;
-                                                                                  {
-                                                                                    Vec<1, Pointer> p_ref_99 { id_1733 };
-                                                                                    bool while_flag_1735 { true };
-                                                                                    do {
-                                                                                      uint8_t id_1736 { 0 };
-                                                                                      Pointer id_1737 { p_ref_99[id_1736] };
-                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1738 { id_1737.readU8() };
-                                                                                      bool let_res_1739;
-                                                                                      {
-                                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_100 { id_1738 };
-                                                                                        bool letpair_res_1740;
-                                                                                        {
-                                                                                          auto leb128_fst_101 { std::get<0>(leb128_100) };
-                                                                                          auto leb128_snd_102 { std::get<1>(leb128_100) };
-                                                                                          uint8_t id_1741 { 0 };
-                                                                                          Void id_1742 { ((void)(p_ref_99[id_1741] = leb128_snd_102), ::dessser::VOID) };
-                                                                                          (void)id_1742;
-                                                                                          uint8_t id_1743 { 0 };
-                                                                                          uint8_t id_1744 { 127 };
-                                                                                          uint8_t id_1745 { uint8_t(leb128_fst_101 & id_1744) };
-                                                                                          uint32_t id_1746 { uint32_t(id_1745) };
-                                                                                          uint8_t id_1747 { 0 };
-                                                                                          uint8_t id_1748 { shft_ref_98[id_1747] };
-                                                                                          uint32_t id_1749 { uint32_t(id_1746 << id_1748) };
-                                                                                          uint8_t id_1750 { 0 };
-                                                                                          uint32_t id_1751 { leb_ref_97[id_1750] };
-                                                                                          uint32_t id_1752 { uint32_t(id_1749 | id_1751) };
-                                                                                          Void id_1753 { ((void)(leb_ref_97[id_1743] = id_1752), ::dessser::VOID) };
-                                                                                          (void)id_1753;
-                                                                                          uint8_t id_1754 { 0 };
-                                                                                          uint8_t id_1755 { 0 };
-                                                                                          uint8_t id_1756 { shft_ref_98[id_1755] };
-                                                                                          uint8_t id_1757 { 7 };
-                                                                                          uint8_t id_1758 { uint8_t(id_1756 + id_1757) };
-                                                                                          Void id_1759 { ((void)(shft_ref_98[id_1754] = id_1758), ::dessser::VOID) };
-                                                                                          (void)id_1759;
-                                                                                          uint8_t id_1760 { 128 };
-                                                                                          bool id_1761 { bool(leb128_fst_101 >= id_1760) };
-                                                                                          letpair_res_1740 = id_1761;
-                                                                                        }
-                                                                                        let_res_1739 = letpair_res_1740;
-                                                                                      }
-                                                                                      while_flag_1735 = let_res_1739;
-                                                                                      if (while_flag_1735) {
-                                                                                        (void)::dessser::VOID;
-                                                                                      }
-                                                                                    } while (while_flag_1735);
-                                                                                    (void)::dessser::VOID;
-                                                                                    uint8_t id_1762 { 0 };
-                                                                                    uint32_t id_1763 { leb_ref_97[id_1762] };
-                                                                                    uint8_t id_1764 { 0 };
-                                                                                    Pointer id_1765 { p_ref_99[id_1764] };
-                                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1766 { id_1763, id_1765 };
-                                                                                    let_res_1734 = id_1766;
-                                                                                  }
-                                                                                  let_res_1732 = let_res_1734;
-                                                                                }
-                                                                                let_res_1729 = let_res_1732;
-                                                                              }
-                                                                              ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc let_res_1767;
-                                                                              {
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_106 { let_res_1729 };
-                                                                                ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc letpair_res_1768;
-                                                                                {
-                                                                                  auto dlist1_fst_107 { std::get<0>(dlist1_106) };
-                                                                                  auto dlist1_snd_108 { std::get<1>(dlist1_106) };
-                                                                                  Lst<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> endoflist_1769;
-                                                                                  ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc id_1770 { endoflist_1769, dlist1_snd_108 };
-                                                                                  Vec<1, ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc> id_1771 {  id_1770  };
-                                                                                  ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc let_res_1772;
-                                                                                  {
-                                                                                    Vec<1, ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc> inits_src_ref_109 { id_1771 };
-                                                                                    int32_t id_1773 { 0L };
-                                                                                    Vec<1, int32_t> id_1774 {  id_1773  };
-                                                                                    {
-                                                                                      Vec<1, int32_t> repeat_n_110 { id_1774 };
-                                                                                      bool while_flag_1775 { true };
-                                                                                      do {
-                                                                                        int32_t id_1776 { int32_t(dlist1_fst_107) };
-                                                                                        uint8_t id_1777 { 0 };
-                                                                                        int32_t id_1778 { repeat_n_110[id_1777] };
-                                                                                        bool id_1779 { bool(id_1776 > id_1778) };
-                                                                                        while_flag_1775 = id_1779;
-                                                                                        if (while_flag_1775) {
-                                                                                          uint8_t id_1780 { 0 };
-                                                                                          ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc id_1781 { inits_src_ref_109[id_1780] };
-                                                                                          {
-                                                                                            ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc dlist2_111 { id_1781 };
-                                                                                            {
-                                                                                              auto dlist2_fst_112 { std::get<0>(dlist2_111) };
-                                                                                              auto dlist2_snd_113 { std::get<1>(dlist2_111) };
-                                                                                              uint8_t id_1782 { 0 };
-                                                                                              uint32_t id_1783 { 0U };
-                                                                                              Vec<1, uint32_t> id_1784 {  id_1783  };
-                                                                                              ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1785;
-                                                                                              {
-                                                                                                Vec<1, uint32_t> leb_ref_114 { id_1784 };
-                                                                                                uint8_t id_1786 { 0 };
-                                                                                                Vec<1, uint8_t> id_1787 {  id_1786  };
-                                                                                                ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1788;
-                                                                                                {
-                                                                                                  Vec<1, uint8_t> shft_ref_115 { id_1787 };
-                                                                                                  Vec<1, Pointer> id_1789 {  dlist2_snd_113  };
-                                                                                                  ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 let_res_1790;
-                                                                                                  {
-                                                                                                    Vec<1, Pointer> p_ref_116 { id_1789 };
-                                                                                                    bool while_flag_1791 { true };
-                                                                                                    do {
-                                                                                                      uint8_t id_1792 { 0 };
-                                                                                                      Pointer id_1793 { p_ref_116[id_1792] };
-                                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1794 { id_1793.readU8() };
-                                                                                                      bool let_res_1795;
-                                                                                                      {
-                                                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_117 { id_1794 };
-                                                                                                        bool letpair_res_1796;
-                                                                                                        {
-                                                                                                          auto leb128_fst_118 { std::get<0>(leb128_117) };
-                                                                                                          auto leb128_snd_119 { std::get<1>(leb128_117) };
-                                                                                                          uint8_t id_1797 { 0 };
-                                                                                                          Void id_1798 { ((void)(p_ref_116[id_1797] = leb128_snd_119), ::dessser::VOID) };
-                                                                                                          (void)id_1798;
-                                                                                                          uint8_t id_1799 { 0 };
-                                                                                                          uint8_t id_1800 { 127 };
-                                                                                                          uint8_t id_1801 { uint8_t(leb128_fst_118 & id_1800) };
-                                                                                                          uint32_t id_1802 { uint32_t(id_1801) };
-                                                                                                          uint8_t id_1803 { 0 };
-                                                                                                          uint8_t id_1804 { shft_ref_115[id_1803] };
-                                                                                                          uint32_t id_1805 { uint32_t(id_1802 << id_1804) };
-                                                                                                          uint8_t id_1806 { 0 };
-                                                                                                          uint32_t id_1807 { leb_ref_114[id_1806] };
-                                                                                                          uint32_t id_1808 { uint32_t(id_1805 | id_1807) };
-                                                                                                          Void id_1809 { ((void)(leb_ref_114[id_1799] = id_1808), ::dessser::VOID) };
-                                                                                                          (void)id_1809;
-                                                                                                          uint8_t id_1810 { 0 };
-                                                                                                          uint8_t id_1811 { 0 };
-                                                                                                          uint8_t id_1812 { shft_ref_115[id_1811] };
-                                                                                                          uint8_t id_1813 { 7 };
-                                                                                                          uint8_t id_1814 { uint8_t(id_1812 + id_1813) };
-                                                                                                          Void id_1815 { ((void)(shft_ref_115[id_1810] = id_1814), ::dessser::VOID) };
-                                                                                                          (void)id_1815;
-                                                                                                          uint8_t id_1816 { 128 };
-                                                                                                          bool id_1817 { bool(leb128_fst_118 >= id_1816) };
-                                                                                                          letpair_res_1796 = id_1817;
-                                                                                                        }
-                                                                                                        let_res_1795 = letpair_res_1796;
-                                                                                                      }
-                                                                                                      while_flag_1791 = let_res_1795;
-                                                                                                      if (while_flag_1791) {
-                                                                                                        (void)::dessser::VOID;
-                                                                                                      }
-                                                                                                    } while (while_flag_1791);
-                                                                                                    (void)::dessser::VOID;
-                                                                                                    uint8_t id_1818 { 0 };
-                                                                                                    uint32_t id_1819 { leb_ref_114[id_1818] };
-                                                                                                    Size id_1820 { Size(id_1819) };
-                                                                                                    uint8_t id_1821 { 0 };
-                                                                                                    Pointer id_1822 { p_ref_116[id_1821] };
-                                                                                                    ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 id_1823 { id_1820, id_1822 };
-                                                                                                    let_res_1790 = id_1823;
-                                                                                                  }
-                                                                                                  let_res_1788 = let_res_1790;
-                                                                                                }
-                                                                                                let_res_1785 = let_res_1788;
-                                                                                              }
-                                                                                              ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc let_res_1824;
-                                                                                              {
-                                                                                                ::dessser::gen::raql_value::t044960e524fd6ec1bfc06410ce526709 dstring1_120 { let_res_1785 };
-                                                                                                ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc letpair_res_1825;
-                                                                                                {
-                                                                                                  auto dstring1_fst_121 { std::get<0>(dstring1_120) };
-                                                                                                  auto dstring1_snd_122 { std::get<1>(dstring1_120) };
-                                                                                                  ::dessser::gen::raql_value::t5887709cc43c8c8e24d28211e8c970a2 id_1826 { dstring1_snd_122.readBytes(dstring1_fst_121) };
-                                                                                                  ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc letpair_res_1827;
-                                                                                                  {
-                                                                                                    auto dstring2_fst_124 { std::get<0>(id_1826) };
-                                                                                                    auto dstring2_snd_125 { std::get<1>(id_1826) };
-                                                                                                    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1828 { fun1124(dstring2_snd_125) };
-                                                                                                    ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc letpair_res_1829;
-                                                                                                    {
-                                                                                                      auto dtup_fst_130 { std::get<0>(id_1828) };
-                                                                                                      auto dtup_snd_131 { std::get<1>(id_1828) };
-                                                                                                      std::string id_1830 { dstring2_fst_124.toString() };
-                                                                                                      ::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f id_1831 { id_1830, dtup_fst_130 };
-                                                                                                      Lst<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_1832 { id_1831, dlist2_fst_112 };
-                                                                                                      ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc id_1833 { id_1832, dtup_snd_131 };
-                                                                                                      letpair_res_1829 = id_1833;
-                                                                                                    }
-                                                                                                    letpair_res_1827 = letpair_res_1829;
-                                                                                                  }
-                                                                                                  letpair_res_1825 = letpair_res_1827;
-                                                                                                }
-                                                                                                let_res_1824 = letpair_res_1825;
-                                                                                              }
-                                                                                              Void id_1834 { ((void)(inits_src_ref_109[id_1782] = let_res_1824), ::dessser::VOID) };
-                                                                                              (void)id_1834;
-                                                                                            }
-                                                                                            (void)::dessser::VOID;
-                                                                                          }
-                                                                                          (void)::dessser::VOID;
-                                                                                          uint8_t id_1835 { 0 };
-                                                                                          uint8_t id_1836 { 0 };
-                                                                                          int32_t id_1837 { repeat_n_110[id_1836] };
-                                                                                          int32_t id_1838 { 1L };
-                                                                                          int32_t id_1839 { int32_t(id_1837 + id_1838) };
-                                                                                          Void id_1840 { ((void)(repeat_n_110[id_1835] = id_1839), ::dessser::VOID) };
-                                                                                          (void)id_1840;
-                                                                                          (void)id_1840;
-                                                                                        }
-                                                                                      } while (while_flag_1775);
-                                                                                      (void)::dessser::VOID;
-                                                                                    }
-                                                                                    (void)::dessser::VOID;
-                                                                                    uint8_t id_1841 { 0 };
-                                                                                    ::dessser::gen::raql_value::ta41aed06f24ad632eef7f2040ddc7efc id_1842 { inits_src_ref_109[id_1841] };
-                                                                                    let_res_1772 = id_1842;
-                                                                                  }
-                                                                                  letpair_res_1768 = let_res_1772;
-                                                                                }
-                                                                                let_res_1767 = letpair_res_1768;
-                                                                              }
-                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1843;
-                                                                              {
-                                                                                auto dlist4_fst_136 { std::get<0>(let_res_1767) };
-                                                                                auto dlist4_snd_137 { std::get<1>(let_res_1767) };
-                                                                                Arr<::dessser::gen::raql_value::t67d3bf5598562d32022de37a569b680f> id_1844 { dlist4_fst_136.toListRev() };
-                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1845 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<34>, id_1844) };
-                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1846 { id_1845, dlist4_snd_137 };
-                                                                                letpair_res_1843 = id_1846;
-                                                                              }
-                                                                              choose_res_1726 = letpair_res_1843;
-                                                                            } else {
-                                                                              uint16_t id_1847 { 35 };
-                                                                              bool id_1848 { bool(dsum1_fst_63 == id_1847) };
-                                                                              Void id_1849 { ((void)(assert(id_1848)), ::dessser::VOID) };
-                                                                              (void)id_1849;
-                                                                              uint32_t id_1850 { 0U };
-                                                                              Vec<1, uint32_t> id_1851 {  id_1850  };
-                                                                              ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1852;
-                                                                              {
-                                                                                Vec<1, uint32_t> leb_ref_65 { id_1851 };
-                                                                                uint8_t id_1853 { 0 };
-                                                                                Vec<1, uint8_t> id_1854 {  id_1853  };
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1855;
-                                                                                {
-                                                                                  Vec<1, uint8_t> shft_ref_66 { id_1854 };
-                                                                                  Vec<1, Pointer> id_1856 {  dsum1_snd_64  };
-                                                                                  ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 let_res_1857;
-                                                                                  {
-                                                                                    Vec<1, Pointer> p_ref_67 { id_1856 };
-                                                                                    bool while_flag_1858 { true };
-                                                                                    do {
-                                                                                      uint8_t id_1859 { 0 };
-                                                                                      Pointer id_1860 { p_ref_67[id_1859] };
-                                                                                      ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 id_1861 { id_1860.readU8() };
-                                                                                      bool let_res_1862;
-                                                                                      {
-                                                                                        ::dessser::gen::raql_value::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_68 { id_1861 };
-                                                                                        bool letpair_res_1863;
-                                                                                        {
-                                                                                          auto leb128_fst_69 { std::get<0>(leb128_68) };
-                                                                                          auto leb128_snd_70 { std::get<1>(leb128_68) };
-                                                                                          uint8_t id_1864 { 0 };
-                                                                                          Void id_1865 { ((void)(p_ref_67[id_1864] = leb128_snd_70), ::dessser::VOID) };
-                                                                                          (void)id_1865;
-                                                                                          uint8_t id_1866 { 0 };
-                                                                                          uint8_t id_1867 { 127 };
-                                                                                          uint8_t id_1868 { uint8_t(leb128_fst_69 & id_1867) };
-                                                                                          uint32_t id_1869 { uint32_t(id_1868) };
-                                                                                          uint8_t id_1870 { 0 };
-                                                                                          uint8_t id_1871 { shft_ref_66[id_1870] };
-                                                                                          uint32_t id_1872 { uint32_t(id_1869 << id_1871) };
-                                                                                          uint8_t id_1873 { 0 };
-                                                                                          uint32_t id_1874 { leb_ref_65[id_1873] };
-                                                                                          uint32_t id_1875 { uint32_t(id_1872 | id_1874) };
-                                                                                          Void id_1876 { ((void)(leb_ref_65[id_1866] = id_1875), ::dessser::VOID) };
-                                                                                          (void)id_1876;
-                                                                                          uint8_t id_1877 { 0 };
-                                                                                          uint8_t id_1878 { 0 };
-                                                                                          uint8_t id_1879 { shft_ref_66[id_1878] };
-                                                                                          uint8_t id_1880 { 7 };
-                                                                                          uint8_t id_1881 { uint8_t(id_1879 + id_1880) };
-                                                                                          Void id_1882 { ((void)(shft_ref_66[id_1877] = id_1881), ::dessser::VOID) };
-                                                                                          (void)id_1882;
-                                                                                          uint8_t id_1883 { 128 };
-                                                                                          bool id_1884 { bool(leb128_fst_69 >= id_1883) };
-                                                                                          letpair_res_1863 = id_1884;
-                                                                                        }
-                                                                                        let_res_1862 = letpair_res_1863;
-                                                                                      }
-                                                                                      while_flag_1858 = let_res_1862;
-                                                                                      if (while_flag_1858) {
-                                                                                        (void)::dessser::VOID;
-                                                                                      }
-                                                                                    } while (while_flag_1858);
-                                                                                    (void)::dessser::VOID;
-                                                                                    uint8_t id_1885 { 0 };
-                                                                                    uint32_t id_1886 { leb_ref_65[id_1885] };
-                                                                                    uint8_t id_1887 { 0 };
-                                                                                    Pointer id_1888 { p_ref_67[id_1887] };
-                                                                                    ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 id_1889 { id_1886, id_1888 };
-                                                                                    let_res_1857 = id_1889;
-                                                                                  }
-                                                                                  let_res_1855 = let_res_1857;
-                                                                                }
-                                                                                let_res_1852 = let_res_1855;
-                                                                              }
-                                                                              ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 let_res_1890;
-                                                                              {
-                                                                                ::dessser::gen::raql_value::t883c6ffea47c0d7b950fe35881e3d737 dlist1_74 { let_res_1852 };
-                                                                                ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_1891;
-                                                                                {
-                                                                                  auto dlist1_fst_75 { std::get<0>(dlist1_74) };
-                                                                                  auto dlist1_snd_76 { std::get<1>(dlist1_74) };
-                                                                                  Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> endoflist_1892;
-                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_1893 { endoflist_1892, dlist1_snd_76 };
-                                                                                  Vec<1, ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421> id_1894 {  id_1893  };
-                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 let_res_1895;
-                                                                                  {
-                                                                                    Vec<1, ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421> inits_src_ref_77 { id_1894 };
-                                                                                    int32_t id_1896 { 0L };
-                                                                                    Vec<1, int32_t> id_1897 {  id_1896  };
-                                                                                    {
-                                                                                      Vec<1, int32_t> repeat_n_78 { id_1897 };
-                                                                                      bool while_flag_1898 { true };
-                                                                                      do {
-                                                                                        int32_t id_1899 { int32_t(dlist1_fst_75) };
-                                                                                        uint8_t id_1900 { 0 };
-                                                                                        int32_t id_1901 { repeat_n_78[id_1900] };
-                                                                                        bool id_1902 { bool(id_1899 > id_1901) };
-                                                                                        while_flag_1898 = id_1902;
-                                                                                        if (while_flag_1898) {
-                                                                                          uint8_t id_1903 { 0 };
-                                                                                          ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_1904 { inits_src_ref_77[id_1903] };
-                                                                                          {
-                                                                                            ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 dlist2_79 { id_1904 };
-                                                                                            {
-                                                                                              auto dlist2_fst_80 { std::get<0>(dlist2_79) };
-                                                                                              auto dlist2_snd_81 { std::get<1>(dlist2_79) };
-                                                                                              uint8_t id_1905 { 0 };
-                                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1906 { fun1124(dlist2_snd_81) };
-                                                                                              ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_1907;
-                                                                                              {
-                                                                                                auto dtup_fst_83 { std::get<0>(id_1906) };
-                                                                                                auto dtup_snd_84 { std::get<1>(id_1906) };
-                                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1908 { fun1124(dtup_snd_84) };
-                                                                                                ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 letpair_res_1909;
-                                                                                                {
-                                                                                                  auto dtup_fst_86 { std::get<0>(id_1908) };
-                                                                                                  auto dtup_snd_87 { std::get<1>(id_1908) };
-                                                                                                  ::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d id_1910 { dtup_fst_83, dtup_fst_86 };
-                                                                                                  Lst<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1911 { id_1910, dlist2_fst_80 };
-                                                                                                  ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_1912 { id_1911, dtup_snd_87 };
-                                                                                                  letpair_res_1909 = id_1912;
-                                                                                                }
-                                                                                                letpair_res_1907 = letpair_res_1909;
-                                                                                              }
-                                                                                              Void id_1913 { ((void)(inits_src_ref_77[id_1905] = letpair_res_1907), ::dessser::VOID) };
-                                                                                              (void)id_1913;
-                                                                                            }
-                                                                                            (void)::dessser::VOID;
-                                                                                          }
-                                                                                          (void)::dessser::VOID;
-                                                                                          uint8_t id_1914 { 0 };
-                                                                                          uint8_t id_1915 { 0 };
-                                                                                          int32_t id_1916 { repeat_n_78[id_1915] };
-                                                                                          int32_t id_1917 { 1L };
-                                                                                          int32_t id_1918 { int32_t(id_1916 + id_1917) };
-                                                                                          Void id_1919 { ((void)(repeat_n_78[id_1914] = id_1918), ::dessser::VOID) };
-                                                                                          (void)id_1919;
-                                                                                          (void)id_1919;
-                                                                                        }
-                                                                                      } while (while_flag_1898);
-                                                                                      (void)::dessser::VOID;
-                                                                                    }
-                                                                                    (void)::dessser::VOID;
-                                                                                    uint8_t id_1920 { 0 };
-                                                                                    ::dessser::gen::raql_value::t6ca87232c4396e34133f69634dc3e421 id_1921 { inits_src_ref_77[id_1920] };
-                                                                                    let_res_1895 = id_1921;
-                                                                                  }
-                                                                                  letpair_res_1891 = let_res_1895;
-                                                                                }
-                                                                                let_res_1890 = letpair_res_1891;
-                                                                              }
-                                                                              ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1922;
-                                                                              {
-                                                                                auto dlist4_fst_92 { std::get<0>(let_res_1890) };
-                                                                                auto dlist4_snd_93 { std::get<1>(let_res_1890) };
-                                                                                Arr<::dessser::gen::raql_value::t03cfda2a49b4fd636c1028863952922d> id_1923 { dlist4_fst_92.toListRev() };
-                                                                                std::shared_ptr<::dessser::gen::raql_value::t>  id_1924 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<35>, id_1923) };
-                                                                                ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1925 { id_1924, dlist4_snd_93 };
-                                                                                letpair_res_1922 = id_1925;
-                                                                              }
-                                                                              choose_res_1726 = letpair_res_1922;
-                                                                            }
-                                                                            choose_res_1650 = choose_res_1726;
-                                                                          }
-                                                                          choose_res_1574 = choose_res_1650;
-                                                                        }
-                                                                        choose_res_1498 = choose_res_1574;
-                                                                      }
-                                                                      choose_res_1451 = choose_res_1498;
-                                                                    }
-                                                                    choose_res_1434 = choose_res_1451;
-                                                                  }
-                                                                  choose_res_1417 = choose_res_1434;
-                                                                }
-                                                                choose_res_1386 = choose_res_1417;
-                                                              }
-                                                              choose_res_1377 = choose_res_1386;
-                                                            }
-                                                            choose_res_1368 = choose_res_1377;
-                                                          }
-                                                          choose_res_1358 = choose_res_1368;
-                                                        }
-                                                        choose_res_1350 = choose_res_1358;
-                                                      }
-                                                      choose_res_1342 = choose_res_1350;
-                                                    }
-                                                    choose_res_1334 = choose_res_1342;
-                                                  }
-                                                  choose_res_1326 = choose_res_1334;
-                                                }
-                                                choose_res_1318 = choose_res_1326;
-                                              }
-                                              choose_res_1310 = choose_res_1318;
-                                            }
-                                            choose_res_1302 = choose_res_1310;
-                                          }
-                                          choose_res_1294 = choose_res_1302;
-                                        }
-                                        choose_res_1286 = choose_res_1294;
-                                      }
-                                      choose_res_1279 = choose_res_1286;
-                                    }
-                                    choose_res_1272 = choose_res_1279;
-                                  }
-                                  choose_res_1264 = choose_res_1272;
-                                }
-                                choose_res_1256 = choose_res_1264;
-                              }
-                              choose_res_1248 = choose_res_1256;
-                            }
-                            choose_res_1241 = choose_res_1248;
-                          }
-                          choose_res_1233 = choose_res_1241;
-                        }
-                        choose_res_1226 = choose_res_1233;
-                      }
-                      choose_res_1219 = choose_res_1226;
-                    }
-                    choose_res_1211 = choose_res_1219;
-                  }
-                  choose_res_1201 = choose_res_1211;
-                }
-                choose_res_1150 = choose_res_1201;
-              }
-              choose_res_1142 = choose_res_1150;
-            }
-            choose_res_1137 = choose_res_1142;
+            uint8_t id_1910 { 0 };
+            uint32_t id_1911 { leb128_sz_572[id_1910] };
+            uint8_t id_1912 { uint8_t(id_1911) };
+            uint8_t id_1913 { 128 };
+            uint8_t id_1914 { uint8_t(id_1912 | id_1913) };
+            choose_res_1906 = id_1914;
           }
-          choose_res_1132 = choose_res_1137;
-        }
-        letpair_res_1129 = choose_res_1132;
+          Pointer id_1915 { id_1901.writeU8(choose_res_1906) };
+          Void id_1916 { ((void)(leb128_ptr_573[id_1899] = id_1915), ::dessser::VOID) };
+          (void)id_1916;
+          uint8_t id_1917 { 0 };
+          uint8_t id_1918 { 0 };
+          uint32_t id_1919 { leb128_sz_572[id_1918] };
+          uint8_t id_1920 { 7 };
+          uint32_t id_1921 { uint32_t(id_1919 >> id_1920) };
+          Void id_1922 { ((void)(leb128_sz_572[id_1917] = id_1921), ::dessser::VOID) };
+          (void)id_1922;
+          uint8_t id_1923 { 0 };
+          uint32_t id_1924 { leb128_sz_572[id_1923] };
+          uint32_t id_1925 { 0U };
+          bool id_1926 { bool(id_1924 > id_1925) };
+          while_flag_1898 = id_1926;
+          if (while_flag_1898) {
+            (void)::dessser::VOID;
+          }
+        } while (while_flag_1898);
+        (void)::dessser::VOID;
+        uint8_t id_1927 { 0 };
+        Pointer id_1928 { leb128_ptr_573[id_1927] };
+        let_res_1897 = id_1928;
       }
-      let_res_1128 = letpair_res_1129;
+      let_res_1895 = let_res_1897;
     }
-    ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b letpair_res_1926;
+    std::string id_1929 { std::get<0>((*p_0)) };
+    Bytes id_1930 { id_1929 };
+    Pointer id_1931 { let_res_1895.writeBytes(id_1930) };
+    Pointer let_res_1932;
     {
-      auto make_fst_526 { std::get<0>(let_res_1128) };
-      auto make_snd_527 { std::get<1>(let_res_1128) };
-      ::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b id_1927 { make_fst_526, make_snd_527 };
-      letpair_res_1926 = id_1927;
+      Pointer stup_dst_574 { id_1931 };
+      std::shared_ptr<::dessser::gen::raql_value::t>  id_1933 { std::get<1>((*p_0)) };
+      Pointer id_1934 { to_row_binary(id_1933, stup_dst_574) };
+      let_res_1932 = id_1934;
     }
-    return letpair_res_1926;
+    return let_res_1932;
   }
    };
-  return fun1124;
+  return fun1891;
 }
-std::function<::dessser::gen::raql_value::t2192dc426e477a22ba201bc3a0e4295b(Pointer)> of_row_binary(of_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_value> ,Pointer)> named_value_to_row_binary(named_value_to_row_binary_init());
 
 
 }

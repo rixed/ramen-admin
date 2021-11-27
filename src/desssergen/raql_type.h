@@ -44,21 +44,21 @@ inline std::ostream &operator<<(std::ostream &os, tb65a12146ab462f3a71f0a2c9184c
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb65a12146ab462f3a71f0a2c9184c7a4> const t) { os << *t; return os; }
 
-struct t322be039d4e703202ccedfc1a13e4f5d : public std::tuple<
+struct named_type : public std::tuple<
   std::string,
   std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  t322be039d4e703202ccedfc1a13e4f5d(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> > p)
+  named_type(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> > p)
     : std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t322be039d4e703202ccedfc1a13e4f5d const &a, t322be039d4e703202ccedfc1a13e4f5d const &b) {
+inline bool operator==(named_type const &a, named_type const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t322be039d4e703202ccedfc1a13e4f5d const &a, t322be039d4e703202ccedfc1a13e4f5d const &b) {
+inline bool operator!=(named_type const &a, named_type const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t322be039d4e703202ccedfc1a13e4f5d const &t) {
+inline std::ostream &operator<<(std::ostream &os, named_type const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -66,8 +66,13 @@ inline std::ostream &operator<<(std::ostream &os, t322be039d4e703202ccedfc1a13e4
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t322be039d4e703202ccedfc1a13e4f5d> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<named_type> const t) { os << *t; return os; }
 
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
 struct t76c4c35a2b2b182ccf791241e9611c1d : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_type::t> ,
   std::shared_ptr<::dessser::gen::raql_type::t> 
@@ -126,8 +131,8 @@ struct base : public std::variant<
   Arr<std::shared_ptr<::dessser::gen::raql_type::t> >, // Tup
   ::dessser::gen::raql_type::tb65a12146ab462f3a71f0a2c9184c7a4, // Vec
   std::shared_ptr<::dessser::gen::raql_type::t> , // Arr
-  Arr<::dessser::gen::raql_type::t322be039d4e703202ccedfc1a13e4f5d>, // Rec
-  Arr<::dessser::gen::raql_type::t322be039d4e703202ccedfc1a13e4f5d>, // Sum
+  Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Rec
+  Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Sum
   ::dessser::gen::raql_type::t76c4c35a2b2b182ccf791241e9611c1d // Map
 > { using variant::variant; };
 
@@ -310,6 +315,11 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
 struct t45adf9446573668c9b9a6264c9e7d2b0 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_type::base> ,
   Pointer
@@ -339,6 +349,55 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
+struct te9623fc9e468b565c42815c7eaf17382 : public std::tuple<
+  std::shared_ptr<::dessser::gen::raql_type::named_type> ,
+  Pointer
+> {
+  using tuple::tuple;
+  te9623fc9e468b565c42815c7eaf17382(std::tuple<std::shared_ptr<::dessser::gen::raql_type::named_type> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::named_type> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(te9623fc9e468b565c42815c7eaf17382 const &a, te9623fc9e468b565c42815c7eaf17382 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(te9623fc9e468b565c42815c7eaf17382 const &a, te9623fc9e468b565c42815c7eaf17382 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, te9623fc9e468b565c42815c7eaf17382 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te9623fc9e468b565c42815c7eaf17382> const t) { os << *t; return os; }
+
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
@@ -349,6 +408,21 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
+struct t;
+inline std::ostream &operator<<(std::ostream &, struct t const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
+inline bool operator==(struct t const &, struct t const &);
+inline bool operator!=(struct t const &, struct t const &);
+struct named_type;
+inline std::ostream &operator<<(std::ostream &, struct named_type const &);
+inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
+inline bool operator==(struct named_type const &, struct named_type const &);
+inline bool operator!=(struct named_type const &, struct named_type const &);
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
@@ -359,10 +433,13 @@ inline bool operator!=(struct t const &, struct t const &);
 /* ----------- */
 extern std::function<::dessser::gen::raql_type::tf2625240b3c32734b297669569815110(Pointer)> of_row_binary;
 extern std::function<::dessser::gen::raql_type::t45adf9446573668c9b9a6264c9e7d2b0(Pointer)> base_of_row_binary;
+extern std::function<::dessser::gen::raql_type::te9623fc9e468b565c42815c7eaf17382(Pointer)> named_type_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> base_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::raql_type::named_type> )> named_type_sersize_of_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)> base_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::named_type> ,Pointer)> named_type_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 
