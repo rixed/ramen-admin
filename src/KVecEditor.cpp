@@ -68,7 +68,7 @@ bool KVecEditor::setValue(
 
   bool res { false };
   for (size_t i = 0; i < vec.size(); i++) {
-    res = res || editors[i]->setValue(nullptr, makeRamenValue(vec[i]));
+    res = editors[i]->setValue(nullptr, makeRamenValue(vec[i])) || res;
   }
 
   if (res) emit valueChanged(k, v);

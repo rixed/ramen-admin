@@ -67,7 +67,7 @@ bool KArrEditor::setValue(
   for (size_t i = 0; i < lst.size(); i++) {
     AtomicWidget *editor { editorAt(i) };
     if (! editor) editor = insertNewEditor(i);
-    res = res || editor->setValue(nullptr, makeRamenValue(lst[i]));
+    res = editor->setValue(nullptr, makeRamenValue(lst[i])) || res;
   }
 
   if (res) emit valueChanged(k, v);

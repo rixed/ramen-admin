@@ -67,7 +67,7 @@ bool KTupEditor::setValue(
 
   bool res { false };
   for (size_t i = 0; i < tup.size(); i++) {
-    res = res || editors[i]->setValue(nullptr, makeRamenValue(tup[i]));
+    res = editors[i]->setValue(nullptr, makeRamenValue(tup[i])) || res;
   }
 
   if (res) emit valueChanged(k, v);
