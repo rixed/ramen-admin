@@ -17,6 +17,7 @@
 #include "SyncStatus.h"
 
 class QTcpSocket;
+class QTimer;
 struct UserIdentity;
 class KVStore;
 
@@ -60,8 +61,10 @@ class ConfClient : public QObject
   unsigned char clt_pub_key[crypto_box_PUBLICKEYBYTES];
   unsigned char clt_priv_key[crypto_box_SECRETKEYBYTES];
   bool keySent = false;
-  // Used for applicative keep-alive (TODO) (0 means not ready yet)
+
+  // Used for applicative keep-alive (0 means not ready yet)
   qint64 lastSent = 0U;
+  QTimer *timer;
 
   struct OnDoneCallback {
     uint32_t seq;
@@ -181,6 +184,7 @@ private slots:
   void onTcpError(QAbstractSocket::SocketError);
   void onStateChange(QAbstractSocket::SocketState);
   void readMsg();
+  void keepAlive();
 };
 
 #endif

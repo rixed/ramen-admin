@@ -4,6 +4,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QTcpSocket>
+#include <QTimer>
 #include <QtGlobal>
 #include <sodium.h>
 
@@ -20,6 +21,23 @@
 #include "ConfClient.h"
 
 static bool verbose { false };
+
+static double const sessionTimeout { 300. };
+
+static std::shared_ptr<dessser::gen::raql_value::t const> const vnull {
+  std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID) };
+
+static std::shared_ptr<dessser::gen::sync_value::t const> const nullVal {
+  std::make_shared<dessser::gen::sync_value::t const>(
+    std::in_place_index<dessser::gen::sync_value::RamenValue>,
+    std::const_pointer_cast<dessser::gen::raql_value::t>(
+      std::static_pointer_cast<dessser::gen::raql_value::t const>(vnull))) };
+
+static std::shared_ptr<dessser::gen::sync_key::t const> const devNull {
+  std::make_shared<dessser::gen::sync_key::t const>(
+    std::in_place_index<dessser::gen::sync_key::DevNull>,
+    dessser::VOID) };
 
 void ConfClient::fatalErr(QString const &errString)
 {
@@ -77,6 +95,11 @@ ConfClient::ConfClient(
       qCritical() << "Invalid client private key";
     }
   }
+
+  timer = new QTimer(this);
+  connect(timer, &QTimer::timeout,
+          this, &ConfClient::keepAlive);
+  timer->start(1000);
 }
 
 void ConfClient::onTcpError(QAbstractSocket::SocketError err)
@@ -342,7 +365,6 @@ int ConfClient::startSynchronization()
     if (err.empty()) {
       if (verbose)
         qDebug() << "Synchronisation completed";
-      lastSent = QDateTime::currentMSecsSinceEpoch();
       Q_ASSERT(syncStatus == SyncStatus::Synchronizing);
       syncStatus.set(SyncStatus::Synchronized);
       emit connectionProgressed(syncStatus);
@@ -598,7 +620,6 @@ int ConfClient::sendAuth()
 {
   if (verbose) qDebug() << "ConfClient::sendAuth";
 
-  double const sessionTimeout { 300. };
   std::shared_ptr<dessser::gen::sync_client_cmd::t const> auth {
     std::make_shared<dessser::gen::sync_client_cmd::t const>(
       std::in_place_index<dessser::gen::sync_client_cmd::Auth>,
@@ -617,13 +638,6 @@ int ConfClient::sendNew(
     qDebug() << "ConfClient::sendNew:" << *key << "=" << *val;
 
   // Set a placeholder null value by default:
-  static std::shared_ptr<dessser::gen::raql_value::t> vnull {
-    std::make_shared<dessser::gen::raql_value::t>(
-      std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID) };
-  static std::shared_ptr<dessser::gen::sync_value::t const> nullVal {
-    std::make_shared<dessser::gen::sync_value::t const>(
-      std::in_place_index<dessser::gen::sync_value::RamenValue>,
-      std::static_pointer_cast<dessser::gen::raql_value::t>(vnull)) };
   if (! val)
     val = std::static_pointer_cast<dessser::gen::sync_value::t const>(nullVal);
 
@@ -718,7 +732,10 @@ int ConfClient::sendCmd(
 
   seq++;
 
-  return sendMsg(msg);
+  int const err { sendMsg(msg) };
+  if (! err)
+    lastSent = QDateTime::currentMSecsSinceEpoch();
+  return err;
 }
 
 int ConfClient::sendMsg(
@@ -840,6 +857,14 @@ int ConfClient::sendMsg(
   sentMsgs ++;
 
   return 0;
+}
+
+void ConfClient::keepAlive()
+{
+  qint64 const now { QDateTime::currentMSecsSinceEpoch() };
+
+  if (now - lastSent > 1000. * 0.7 * sessionTimeout)
+    sendSet(devNull, nullVal);
 }
 
 bool ConfClient::isCrypted() const
