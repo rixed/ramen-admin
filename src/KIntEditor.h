@@ -1,5 +1,6 @@
 #ifndef KINTEDITOR_H_190727
 #define KINTEDITOR_H_190727
+/* An AtomicWidget that returns an integer value of the type set by a callback */
 #include <functional>
 #include <optional>
 #include <QLineEdit>

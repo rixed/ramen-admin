@@ -34,7 +34,7 @@ KIntEditor::KIntEditor(
 
 std::shared_ptr<dessser::gen::sync_value::t const> KIntEditor::getValue() const
 {
-  return stringOfQString(lineEdit->text());
+  return ofQString(lineEdit->text());
 }
 
 void KIntEditor::setEnabled(bool enabled)
