@@ -57,5 +57,3 @@ bool KIntEditor::setValue(
 
   return true;
 }
-
-#undef MakeKIntEditor
