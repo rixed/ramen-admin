@@ -18,7 +18,18 @@ KArrEditor::KArrEditor(
     type(type_)
 {
   layout = new QVBoxLayout;
-  QWidget *w = new QWidget;
+
+  QHBoxLayout *l { new QHBoxLayout };
+  l->addStretch(1);
+  Resources *r = Resources::get();
+  QPushButton *addButton { new QPushButton(r->addPixmap, tr("&add")) };
+  l->addWidget(addButton);
+  layout->addLayout(l);
+
+  connect(addButton, &QPushButton::clicked,
+          this, &KArrEditor::addItem);
+
+  QWidget *w { new QWidget };
   w->setLayout(layout);
   relayoutWidget(w);
 }
@@ -94,7 +105,7 @@ AtomicWidget *KArrEditor::insertNewEditor(int i)
   l->addWidget(editor);
 
   Resources *r = Resources::get();
-  QPushButton *deleteButton { new QPushButton(r->deletePixmap, tr("&delete")) };
+  QPushButton *deleteButton { new QPushButton(r->deletePixmap, tr("delete")) };
   l->addWidget(deleteButton);
   // TODO: connect this button
   // TODO: buttons to move up/down
@@ -102,4 +113,13 @@ AtomicWidget *KArrEditor::insertNewEditor(int i)
   layout->insertLayout(i, l);
 
   return editor;
+}
+
+void KArrEditor::addItem()
+{
+  // The layout has N items for the editors, then one more for the add button:
+  int const c { layout->count() };
+  Q_ASSERT(c >= 1);
+  AtomicWidget *editor { insertNewEditor(c - 1) };
+  editor->setEnabled(isEnabled());
 }
