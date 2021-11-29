@@ -17,7 +17,7 @@ KArrEditor::KArrEditor(
   : AtomicWidget(parent),
     type(type_)
 {
-  QVBoxLayout *layout = new QVBoxLayout;
+  layout = new QVBoxLayout;
   QWidget *w = new QWidget;
   w->setLayout(layout);
   relayoutWidget(w);
@@ -76,6 +76,7 @@ bool KArrEditor::setValue(
 
 AtomicWidget *KArrEditor::editorAt(int i) const
 {
+  if (i < 0 || i >= layout->count()) return nullptr;
   QLayoutItem *item { layout->itemAt(i) };
   if (! item) return nullptr;
   /* The item is made of a HBoxLayoutm with the editor as first item
