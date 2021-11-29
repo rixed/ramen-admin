@@ -130,6 +130,7 @@ HEADERS += \
   KTextEdit.h \
   KChoice.h \
   KBoolEditor.h \
+  KNullableEditor.h \
   WorkerViewer.h \
   TimeRangeViewer.h \
   SourceInfoViewer.h \
@@ -263,6 +264,7 @@ SOURCES += \
   KTextEdit.cpp \
   KChoice.cpp \
   KBoolEditor.cpp \
+  KNullableEditor.cpp \
   WorkerViewer.cpp \
   TimeRangeViewer.cpp \
   SourceInfoViewer.cpp \

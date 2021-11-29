@@ -24,16 +24,6 @@ static bool verbose { false };
 
 static double const sessionTimeout { 300. };
 
-static std::shared_ptr<dessser::gen::raql_value::t const> const vnull {
-  std::make_shared<dessser::gen::raql_value::t>(
-    std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID) };
-
-static std::shared_ptr<dessser::gen::sync_value::t const> const nullVal {
-  std::make_shared<dessser::gen::sync_value::t const>(
-    std::in_place_index<dessser::gen::sync_value::RamenValue>,
-    std::const_pointer_cast<dessser::gen::raql_value::t>(
-      std::static_pointer_cast<dessser::gen::raql_value::t const>(vnull))) };
-
 static std::shared_ptr<dessser::gen::sync_key::t const> const devNull {
   std::make_shared<dessser::gen::sync_key::t const>(
     std::in_place_index<dessser::gen::sync_key::DevNull>,

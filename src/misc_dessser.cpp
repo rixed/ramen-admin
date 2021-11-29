@@ -15,6 +15,16 @@ extern "C" {
 
 #include "misc_dessser.h"
 
+std::shared_ptr<dessser::gen::raql_value::t const> const vnull {
+  std::make_shared<dessser::gen::raql_value::t>(
+    std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID) };
+
+std::shared_ptr<dessser::gen::sync_value::t const> const nullVal {
+  std::make_shared<dessser::gen::sync_value::t const>(
+    std::in_place_index<dessser::gen::sync_value::RamenValue>,
+    std::const_pointer_cast<dessser::gen::raql_value::t>(
+      std::static_pointer_cast<dessser::gen::raql_value::t const>(vnull))) };
+
 bool isScalar(dessser::gen::raql_type::t const &t)
 {
   switch (t.type->index()) {

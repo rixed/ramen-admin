@@ -24,6 +24,10 @@ namespace dessser {
   }
 }
 
+// Some commonly used values:
+extern std::shared_ptr<dessser::gen::raql_value::t const> const vnull;
+extern std::shared_ptr<dessser::gen::sync_value::t const> const nullVal;
+
 // All but vectors, lists, tuples, records, sum types
 bool isScalar(dessser::gen::raql_type::t const &);
 

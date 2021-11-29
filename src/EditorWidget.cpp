@@ -14,6 +14,7 @@
 #include "KIpEditor.h"
 #include "KLabel.h"
 #include "KLineEdit.h"
+#include "KNullableEditor.h"
 #include "KRecEditor.h"
 #include "KTextEdit.h"
 #include "KTupEditor.h"
@@ -152,7 +153,9 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t, QWid
         "Not implemented: newRaqlValueEditorWidget for raql_type::base" << *t.type;
   }
 
-  // TODO: wrap into a nullable editor that offers to set null (radio?)
+  if (t.nullable)
+    editor = new KNullableEditor(editor);
+
   return editor;
 }
 
