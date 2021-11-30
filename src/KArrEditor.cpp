@@ -22,7 +22,7 @@ KArrEditor::KArrEditor(
   QHBoxLayout *l { new QHBoxLayout };
   l->addStretch(1);
   Resources *r = Resources::get();
-  QPushButton *addButton { new QPushButton(r->addPixmap, tr("&add")) };
+  addButton = new QPushButton(r->addPixmap, tr("&add"));
   l->addWidget(addButton);
   layout->addLayout(l);
 
@@ -55,6 +55,8 @@ std::shared_ptr<dessser::gen::sync_value::t const> KArrEditor::getValue() const
 
 void KArrEditor::setEnabled(bool enabled)
 {
+  addButton->setEnabled(enabled);
+
   for (int i = 0; true; i++) {
     AtomicWidget *editor { editorAt(i) };
     if (! editor) break;

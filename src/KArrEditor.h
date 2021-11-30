@@ -7,6 +7,7 @@
 #include "AtomicWidget.h"
 
 class QVBoxLayout;
+class QPushButton;
 
 namespace dessser {
   namespace gen {
@@ -21,6 +22,7 @@ class KArrEditor : public AtomicWidget
   std::shared_ptr<dessser::gen::raql_type::t const> type;
   // Layout where to find all the editors:
   QVBoxLayout *layout;
+  QPushButton *addButton;
 
   AtomicWidget *editorAt(int) const;
   AtomicWidget *insertNewEditor(int);
