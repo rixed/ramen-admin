@@ -27,6 +27,9 @@ class KArrEditor : public AtomicWidget
   AtomicWidget *editorAt(int) const;
   AtomicWidget *insertNewEditor(int);
 
+  // Tells if there is an editor at that index:
+  bool hasEditor(int) const;
+
 public:
   KArrEditor(
     std::shared_ptr<dessser::gen::raql_type::t const>,
@@ -42,6 +45,7 @@ public slots:
 
 private slots:
   void addItem();
+  void delItem(int);
 };
 
 #endif

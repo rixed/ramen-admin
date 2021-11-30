@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
@@ -62,6 +63,17 @@ void KArrEditor::setEnabled(bool enabled)
     AtomicWidget *editor { editorAt(i) };
     if (! editor) break;
     editor->setEnabled(enabled);
+    // Also enable/disable the del/move buttons
+    QLayoutItem *item { layout->itemAt(i) };
+    /* The item is made of a HBoxLayout with the editor as first item and
+     * buttons next (see insertNewEditor): */
+    for (int j = 1; true; j++) {
+      QLayoutItem *item_ { item->layout()->itemAt(j) };
+      if (! item_) break;
+      QWidget *w { item_->widget() };
+      if (! w) break;
+      w->setEnabled(enabled);
+    }
   }
 }
 
@@ -88,9 +100,15 @@ bool KArrEditor::setValue(
   return res;
 }
 
+bool KArrEditor::hasEditor(int i) const
+{
+  /* There are N+1 items in [layout], the last one being the Add button: */
+  return i < layout->count() - 1;
+}
+
 AtomicWidget *KArrEditor::editorAt(int i) const
 {
-  if (i < 0 || i >= layout->count()) return nullptr;
+  if (! hasEditor(i)) return nullptr;
   QLayoutItem *item { layout->itemAt(i) };
   if (! item) return nullptr;
   /* The item is made of a HBoxLayout with the editor as first item
@@ -110,7 +128,8 @@ AtomicWidget *KArrEditor::insertNewEditor(int i)
   Resources *r = Resources::get();
   QPushButton *deleteButton { new QPushButton(r->deletePixmap, tr("delete")) };
   l->addWidget(deleteButton);
-  // TODO: connect this button
+  connect(deleteButton, &QPushButton::clicked,
+          [this, i] () { this->delItem(i); });
   // TODO: buttons to move up/down
 
   layout->insertLayout(i, l);
@@ -125,4 +144,16 @@ void KArrEditor::addItem()
   Q_ASSERT(c >= 1);
   AtomicWidget *editor { insertNewEditor(c - 1) };
   editor->setEnabled(isEnabled());
+}
+
+void KArrEditor::delItem(int i)
+{
+  if (! hasEditor(i)) {
+    qWarning() << "No editor at index" << i << ", ignoring";
+    return; // race condition?
+  }
+
+  QLayoutItem *item { layout->itemAt(i) };
+  if (! item) return;
+  emptyAndDelLayoutItem(layout, i);
 }

@@ -67,6 +67,10 @@ void danceOfDelLater(T **t)
   tmp->deleteLater();
 }
 
+/* Remove an item from a layout, deleting all the widgets therein (from inner
+ * to outer layout): */
+void emptyAndDelLayoutItem(QLayout *, int);
+
 /* Don't be too strict when comparing edited values for equality: */
 
 bool isClose(double v1, double v2, double prec = 1e-6);

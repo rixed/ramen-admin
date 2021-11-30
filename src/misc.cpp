@@ -6,6 +6,7 @@
 #include <cmath>
 #include <QDateTime>
 #include <QLayout>
+#include <QLayoutItem>
 #include <QModelIndex>
 #include <QTreeView>
 #include "dessser/runtime.h"  // for operator<< on int128
@@ -266,4 +267,28 @@ bool parseIpv6(uint128_t *ip, QString const &s)
     *((uint32_t *)ip + 3) = ntohl(*((uint32_t *)&addr + 0));
   }
   return true;
+}
+
+void emptyAndDelLayoutItem(QLayout *l, int i)
+{
+  Q_ASSERT(i >= 0);
+  if (i >= l->count()) return;
+
+  QLayoutItem *item { l->itemAt(i) };
+  if (! item) return;
+
+  // The item is either a widget or another layout:
+  QWidget *w { item->widget() };
+  if (w) {
+    l->removeWidget(w);
+    w->deleteLater();
+  } else {
+    QLayout *l_ { item->layout() };
+    if (l_) {
+      while (l_->count())
+        emptyAndDelLayoutItem(l_, 0);
+    }
+  }
+
+  l->removeItem(item);
 }
