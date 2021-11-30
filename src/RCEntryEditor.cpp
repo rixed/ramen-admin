@@ -333,7 +333,7 @@ void RCEntryEditor::updateSourceWarnings()
   }
 
   deletedSourceWarning->setVisible(!sourceDoesExist);
-  notCompiledSourceWarning->setVisible(!sourceIsCompiled);
+  notCompiledSourceWarning->setVisible(sourceDoesExist && !sourceIsCompiled);
 }
 
 void RCEntryEditor::clearParams()
