@@ -92,7 +92,7 @@ AtomicWidget *KArrEditor::editorAt(int i) const
   if (i < 0 || i >= layout->count()) return nullptr;
   QLayoutItem *item { layout->itemAt(i) };
   if (! item) return nullptr;
-  /* The item is made of a HBoxLayoutm with the editor as first item
+  /* The item is made of a HBoxLayout with the editor as first item
    * (see insertNewEditor): */
   return dynamic_cast<AtomicWidget *>(item->layout()->itemAt(0)->widget());
 }
@@ -119,7 +119,7 @@ AtomicWidget *KArrEditor::insertNewEditor(int i)
 
 void KArrEditor::addItem()
 {
-  // The layout has N items for the editors, then one more for the add button:
+  /* The layout has N items for the editors, then one more for the add button: */
   int const c { layout->count() };
   Q_ASSERT(c >= 1);
   AtomicWidget *editor { insertNewEditor(c - 1) };

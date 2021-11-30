@@ -33,7 +33,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofChar(char c)
 
 std::unique_ptr<dessser::gen::sync_value::t> charOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return nullptr;
   return ofChar(s[0].toLatin1());
 }
 
@@ -45,7 +45,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofDouble(double d)
 
 std::unique_ptr<dessser::gen::sync_value::t> floatOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return nullptr;
   return ofDouble(s.toDouble());
 }
 
@@ -57,7 +57,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofString(std::string const &s)
 
 std::unique_ptr<dessser::gen::sync_value::t> stringOfQString(QString const &s)
 {
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (s.isEmpty()) return nullptr;
   return ofString(s.toStdString());
 }
 
@@ -70,7 +70,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofU##W(uint##CW##_t n) \
  \
 std::unique_ptr<dessser::gen::sync_value::t> u##W##OfQString(QString const &s) \
 { \
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>(); \
+  if (s.isEmpty()) return nullptr; \
   return ofU##W(s.conv()); \
 } \
 
@@ -94,7 +94,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofI##W(int##CW##_t n) \
  \
 std::unique_ptr<dessser::gen::sync_value::t> i##W##OfQString(QString const &s) \
 { \
-  if (s.isEmpty()) return std::unique_ptr<dessser::gen::sync_value::t>(); \
+  if (s.isEmpty()) return nullptr; \
   return ofI##W(s.conv()); \
 } \
 
@@ -118,7 +118,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofIpv4(uint32_t ip)
 std::unique_ptr<dessser::gen::sync_value::t> ipv4OfQString(QString const &s)
 {
   uint32_t ip;
-  if (! parseIpv4(&ip, s)) return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (! parseIpv4(&ip, s)) return nullptr;
   return ofIpv4(ip);
 }
 
@@ -131,7 +131,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofIpv6(uint128_t ip)
 std::unique_ptr<dessser::gen::sync_value::t> ipv6OfQString(QString const &s)
 {
   uint128_t ip;
-  if (! parseIpv6(&ip, s)) return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (! parseIpv6(&ip, s)) return nullptr;
   return ofIpv6(ip);
 }
 
@@ -150,7 +150,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ipOfQString(QString const &s)
       std::in_place_index<dessser::gen::raql_value::v6>,
       ip6));
   } else {
-    return std::unique_ptr<dessser::gen::sync_value::t>();
+    return nullptr;
   }
 }
 
@@ -164,8 +164,7 @@ std::unique_ptr<dessser::gen::sync_value::t> cidrv4OfQString(QString const &s)
 {
   QStringList l { s.split("/", Qt::KeepEmptyParts) };
   uint32_t ip;
-  if (l.count() != 2 || !parseIpv4(&ip, s))
-    return std::unique_ptr<dessser::gen::sync_value::t>();
+  if (l.count() != 2 || !parseIpv4(&ip, s)) return nullptr;
   return ofCidrv4(ip, l[1].toInt());
 }
 
@@ -180,6 +179,6 @@ std::unique_ptr<dessser::gen::sync_value::t> cidrv6OfQString(QString const &s)
   QStringList l { s.split("/", Qt::KeepEmptyParts) };
   uint128_t ip;
   if (l.count() != 2 || !parseIpv6(&ip, s))
-    return std::unique_ptr<dessser::gen::sync_value::t>();
+    return nullptr;
   return ofCidrv6(ip, l[1].toInt());
 }

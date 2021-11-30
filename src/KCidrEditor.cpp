@@ -15,7 +15,7 @@ KCidrEditor::KCidrEditor(bool allow_v4, bool allow_v6, QWidget *parent)
     allowV4(allow_v4),
     allowV6(allow_v6)
 {
-  ipEditor = new KIpEditor(allow_v4, allow_v6);
+  ipEditor = new KIpEditor(allowV4, allowV6);
   int const max_mask { allowV6 ? 128 : 32 };
   maskEditor = new KIntEditor(u8OfQString, nullptr, 0, max_mask);
 

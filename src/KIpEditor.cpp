@@ -13,6 +13,7 @@ KIpEditor::KIpEditor(bool allow_v4, bool allow_v6, QWidget *parent)
     allowV6(allow_v6)
 {
   lineEdit = new QLineEdit;
+  lineEdit->setPlaceholderText(tr("Enter an IP address (v4 or v6)"));
   relayoutWidget(lineEdit);
   connect(lineEdit, &QLineEdit::editingFinished,
           this, &KIpEditor::inputChanged);
