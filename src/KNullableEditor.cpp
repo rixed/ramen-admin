@@ -81,9 +81,11 @@ bool KNullableEditor::setValue(
 void KNullableEditor::setNull()
 {
   emit valueChanged(key, nullVal);
+  editor->setEnabled(false);
 }
 
 void KNullableEditor::setNotNull()
 {
+  editor->setEnabled(isEnabled());
   emit valueChanged(key, editor->getValue());
 }
