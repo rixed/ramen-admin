@@ -47,13 +47,13 @@ protected:
   QLineEdit *cwdEdit;
 
   /* The SourceInfo defines the possible parameters, with a name, a doc and a
-   * default value. On top of that, the rc-entry comes with a set of parameters
-   * overwriting the defaults.  The form must offer to edit every defined param
-   * for that source.  When the sourceBox is changed, the set of defined
-   * parameters change, yet we keep the former values for the RCEntryParams, so
-   * no value is ever lost by changing this combobox.  When computing the value
-   * of the RCEntryEditor, though, we take only the parameters that are defined
-   * in the selected source. */
+   * default value. On top of that, the rc-entry comes with a (possibly smaller)
+   * set of parameters overwriting the defaults.  The form must offer to edit
+   * every defined params for that source.  When the sourceBox is changed, the
+   * set of defined parameters change and an unset parameters but appear again
+   * with the default value.
+   * In case the edition is cancelled then AtomicWidget will reset the value it
+   * witnessed initially. */
   // Returned value still owned by the callee
   std::shared_ptr<dessser::gen::raql_value::t const> paramValue(
     std::shared_ptr<dessser::gen::program_parameter::t const>) const;

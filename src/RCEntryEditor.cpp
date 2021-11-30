@@ -80,6 +80,7 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
 
     connect(sourceBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
             this, [this](int) {
+      setParamValues.clear();
       updateSourceWarnings();
       saveParams();
       resetParams();
@@ -366,7 +367,7 @@ static std::string const paramNameOfLabel(QString const &label)
 }
 
 /* Save the values that are currently set (and that can be parsed) into
- * setParamValues, for later reuse. */
+ * setParamValues, for later reuse (until source is changed). */
 void RCEntryEditor::saveParams()
 {
   for (int row = 0; row < paramsForm->rowCount(); row ++) {
@@ -398,6 +399,9 @@ void RCEntryEditor::saveParams()
   }
 }
 
+/* Rebuilt the parameters form, with one line per parameter, which current value
+ * is taken from setParamValues or the default parameter value.
+ * Called by setValue and when changing the source. */
 void RCEntryEditor::resetParams()
 {
   /* Clear the paramsForm and rebuilt it, taking values from saved values */
