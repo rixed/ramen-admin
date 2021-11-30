@@ -45,6 +45,7 @@ std::shared_ptr<dessser::gen::sync_value::t const> KArrEditor::getValue() const
     AtomicWidget *editor { editorAt(i) };
     if (! editor) break;
     std::shared_ptr<dessser::gen::sync_value::t const> v { editor->getValue() };
+    if (! v) return nullptr;
     Q_ASSERT(v->index() == dessser::gen::sync_value::RamenValue);
     std::get<dessser::gen::raql_value::VArr>(*res).push_back(
       std::get<dessser::gen::sync_value::RamenValue>(*v));

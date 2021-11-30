@@ -16,6 +16,8 @@ void ParseIpTest::testParseIp4()
   QCOMPARE(ip, 0x01020304U);
   QVERIFY(parseIpv4(&ip, "192.168.0.14"));
   QCOMPARE(ip, 0xC0A8000EU);
+  QVERIFY(parseIpv4(&ip, "10.0.0.0"));
+  QCOMPARE(ip, 0x0A000000U);
 }
 
 void ParseIpTest::testParseIp6()

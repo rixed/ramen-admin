@@ -15,7 +15,7 @@ class KCidrEditor : public AtomicWidget
   bool allowV4, allowV6;
 
 public:
-  KCidrEditor(bool allow_v4 = true, bool allow_v6 = true, QWidget *parent = nullptr);
+  KCidrEditor(QWidget *parent = nullptr, bool allow_v4 = true, bool allow_v6 = true);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);

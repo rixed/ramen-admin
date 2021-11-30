@@ -10,7 +10,7 @@
 
 #include "KCidrEditor.h"
 
-KCidrEditor::KCidrEditor(bool allow_v4, bool allow_v6, QWidget *parent)
+KCidrEditor::KCidrEditor(QWidget *parent, bool allow_v4, bool allow_v6)
   : AtomicWidget(parent),
     allowV4(allow_v4),
     allowV6(allow_v6)
@@ -37,11 +37,13 @@ std::shared_ptr<dessser::gen::sync_value::t const> KCidrEditor::getValue() const
 {
   // Both ip and mask will be sync_values, extract the actual ip and mask:
   std::shared_ptr<dessser::gen::sync_value::t const> ip_ { ipEditor->getValue() };
+  if (! ip_) return nullptr;
   Q_ASSERT(ip_->index() == dessser::gen::sync_value::RamenValue);
   std::shared_ptr<dessser::gen::raql_value::t const> ip {
     std::get<dessser::gen::sync_value::RamenValue>(*ip_) };
   // More specifically, mask will be an u8:
   std::shared_ptr<dessser::gen::sync_value::t const> mask_ { maskEditor->getValue() };
+  if (! mask_) return nullptr;
   Q_ASSERT(mask_->index() == dessser::gen::sync_value::RamenValue);
   std::shared_ptr<dessser::gen::raql_value::t const> mask__ {
     std::get<dessser::gen::sync_value::RamenValue>(*mask_) };
@@ -52,8 +54,26 @@ std::shared_ptr<dessser::gen::sync_value::t const> KCidrEditor::getValue() const
   uint128_t ipv6;
 
   if (allowV4 && allowV6) {
-    // returns a Cidr
+    // returns a Cidr from the Ip
     switch (ip->index()) {
+      case dessser::gen::raql_value::VIp:
+        {
+          auto const &ip_ { std::get<dessser::gen::raql_value::VIp>(*ip) };
+          if (ip_.index() == dessser::gen::raql_value::v4) {
+            ipv4 = std::get<dessser::gen::raql_value::v4>(ip_);
+            return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+              std::in_place_index<dessser::gen::raql_value::VCidr>,
+              std::in_place_index<dessser::gen::raql_value::v4>,
+              ipv4, mask));
+          } else {
+            Q_ASSERT(ip_.index() == dessser::gen::raql_value::v6);
+            ipv6 = std::get<dessser::gen::raql_value::v6>(ip_);
+            return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
+              std::in_place_index<dessser::gen::raql_value::VCidr>,
+              std::in_place_index<dessser::gen::raql_value::v6>,
+              ipv6, mask));
+          }
+        }
       case dessser::gen::raql_value::VIpv4:
         ipv4 = std::get<dessser::gen::raql_value::VIpv4>(*ip);
         return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
@@ -70,13 +90,13 @@ std::shared_ptr<dessser::gen::sync_value::t const> KCidrEditor::getValue() const
         Q_ASSERT(false);
     }
   } else if (allowV4) {
-    // returns a Cidrv4
+    // returns a Cidrv4 from the Ipv4
     ipv4 = std::get<dessser::gen::raql_value::VIpv4>(*ip);
     return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
       std::in_place_index<dessser::gen::raql_value::VCidrv4>,
       ipv4, mask));
   } else if (allowV6) {
-    // returns a Cidrv6
+    // returns a Cidrv6 from the Ipv6
     ipv6 = std::get<dessser::gen::raql_value::VIpv6>(*ip);
     return makeRamenValue(std::make_shared<dessser::gen::raql_value::t>(
       std::in_place_index<dessser::gen::raql_value::VCidrv6>,
