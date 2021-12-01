@@ -206,7 +206,7 @@ cannot_decode:
     }
 
     // Alloc the message...
-    std::shared_ptr<uint8_t> msg { (uint8_t *)std::malloc(msg_sz) };
+    std::shared_ptr<uint8_t[]> msg { (uint8_t *)std::malloc(msg_sz) };
     if (! msg) {
       qWarning() << "Cannot alloc" << 4 + msg_sz << "bytes!";
       emit connectionFatalError(syncStatus, QString("Cannot allocate memory"));
@@ -251,8 +251,8 @@ cannot_decode:
         break;
       case dessser::gen::sync_msg::ClearText:
         {
-          dessser::Bytes const msg { std::get<dessser::gen::sync_msg::ClearText>(*authn) };
-          if (0 != readSrvMsg(msg)) goto cannot_decode;
+          dessser::Bytes const msg_ { std::get<dessser::gen::sync_msg::ClearText>(*authn) };
+          if (0 != readSrvMsg(msg_)) goto cannot_decode;
         }
         break;
       case dessser::gen::sync_msg::Error:
@@ -334,7 +334,7 @@ int ConfClient::readCrypted(dessser::Bytes const &cipher)
 
   dessser::Bytes msg {
     // Points after padding and mac:
-    std::shared_ptr<uint8_t>(clear_buffer, [](uint8_t *){}),
+    std::shared_ptr<uint8_t[]>(clear_buffer, [](uint8_t *){}),
     sizeof clear_buffer - crypto_box_ZEROBYTES, size_t(crypto_box_ZEROBYTES) };
 
   return readSrvMsg(msg);
@@ -788,7 +788,7 @@ int ConfClient::sendMsg(
       return -1;
     }
     dessser::Bytes const send_msg {
-      std::shared_ptr<uint8_t>(
+      std::shared_ptr<uint8_t[]>(
         reinterpret_cast<uint8_t *>(cipher_text + crypto_box_BOXZEROBYTES),
         /* Do not delete for real: */[](uint8_t *){}),
       sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0) };
@@ -799,12 +799,12 @@ int ConfClient::sendMsg(
           send_msg);
     } else {
       dessser::Bytes const send_nonce {
-        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_nonce),
-                                 [](uint8_t *){}),
+        std::shared_ptr<uint8_t[]>(reinterpret_cast<uint8_t *>(clt_nonce),
+                                   [](uint8_t *){}),
         sizeof(clt_nonce), size_t(0) };
       dessser::Bytes const send_clt_pub_key {
-        std::shared_ptr<uint8_t>(reinterpret_cast<uint8_t *>(clt_pub_key),
-                                 [](uint8_t *){}),
+        std::shared_ptr<uint8_t[]>(reinterpret_cast<uint8_t *>(clt_pub_key),
+                                   [](uint8_t *){}),
         sizeof(clt_pub_key), size_t(0) };
       auth =
         std::make_shared<dessser::gen::sync_msg::t>(
