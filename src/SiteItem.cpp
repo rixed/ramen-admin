@@ -1,12 +1,15 @@
 #include <QMarginsF>
+
 #include "GraphView.h"
+#include "GraphViewSettings.h"
 #include "GraphModel.h"
 #include "ProgramItem.h"
+
 #include "SiteItem.h"
 
 SiteItem::SiteItem(
   GraphItem *treeParent, std::unique_ptr<Site> site,
-  GraphViewSettings const *settings) :
+  GraphViewSettings const &settings) :
   GraphItem(treeParent, std::move(site), settings)
 {
   setZValue(1);
@@ -45,10 +48,10 @@ QRectF SiteItem::operationRect() const
     b.translate(program->pos());
     bbox |= b;
   }
-  bbox += QMarginsF(settings->programMarginHoriz,
-                    settings->programMarginTop,
-                    settings->programMarginHoriz,
-                    settings->programMarginBottom);
+  bbox += QMarginsF(settings.programMarginHoriz,
+                    settings.programMarginTop,
+                    settings.programMarginHoriz,
+                    settings.programMarginBottom);
   return bbox;
 }
 

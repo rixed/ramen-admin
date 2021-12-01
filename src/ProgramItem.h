@@ -22,7 +22,7 @@ public:
   std::vector<FunctionItem *> functions;
 
   ProgramItem(
-    GraphItem *treeParent, std::unique_ptr<Program>, GraphViewSettings const *);
+    GraphItem *treeParent, std::unique_ptr<Program>, GraphViewSettings const &);
 
   QVariant data(int column, int role) const;
   void reorder(GraphModel const *);

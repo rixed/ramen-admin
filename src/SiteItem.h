@@ -23,7 +23,7 @@ protected:
 public:
   std::vector<ProgramItem *> programs;
 
-  SiteItem(GraphItem *treeParent, std::unique_ptr<Site>, GraphViewSettings const *);
+  SiteItem(GraphItem *treeParent, std::unique_ptr<Site>, GraphViewSettings const &);
 
   void reorder(GraphModel const *);
   QRectF operationRect() const;

@@ -2,9 +2,12 @@
 #include <QPainter>
 #include <QFontMetrics>
 #include <QPropertyAnimation>
-#include "GraphItem.h"
+
 #include "GraphModel.h"
+#include "GraphViewSettings.h"
 #include "colorOfString.h"
+
+#include "GraphItem.h"
 
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,
  * but can be used to hide/move/transform its children in one go.
@@ -26,7 +29,7 @@ public:
 // reorder detect that it's indeed a new value when we insert the first one!
 GraphItem::GraphItem(
   GraphItem *treeParent_, std::unique_ptr<GraphData> data,
-  GraphViewSettings const *settings_) :
+  GraphViewSettings const &settings_) :
   QGraphicsItem(treeParent_ ? treeParent_->subItems : treeParent_),
   border_(2),
   collapsed(true),
@@ -108,7 +111,7 @@ void GraphItem::setBorder(qreal b)
 
 void GraphItem::paintLabels(QPainter *painter, std::vector<std::pair<QString const, QString const>> const &labels, int y)
 {
-  QFont boldFont = settings->labelsFont;
+  QFont boldFont = settings.labelsFont;
   boldFont.setBold(true);
   QFontMetrics fm(boldFont);
 
@@ -116,8 +119,8 @@ void GraphItem::paintLabels(QPainter *painter, std::vector<std::pair<QString con
   pen.setWidthF(0);
   painter->setPen(pen);
 
-  y += settings->labelsLineHeight;
-  int const x = settings->labelsHorizMargin;
+  y += settings.labelsLineHeight;
+  int const x = settings.labelsHorizMargin;
   for (auto const &label : labels) {
     int x2 = x;
     painter->setFont(boldFont);
@@ -125,16 +128,16 @@ void GraphItem::paintLabels(QPainter *painter, std::vector<std::pair<QString con
       QString const title(label.first + QString(": "));
       painter->drawText(x, y, title);
       x2 += fm.boundingRect(title).width();
-      painter->setFont(settings->labelsFont);
+      painter->setFont(settings.labelsFont);
     }
     painter->drawText(x2, y, label.second);
-    y += settings->labelsLineHeight;
+    y += settings.labelsLineHeight;
   }
 }
 
 QRect GraphItem::labelsBoundingRect(std::vector<std::pair<QString const, QString const>> const &labels) const
 {
-  QFont font = settings->labelsFont;
+  QFont font = settings.labelsFont;
   font.setBold(true);
 
   QFontMetrics fm(font);
@@ -143,10 +146,10 @@ QRect GraphItem::labelsBoundingRect(std::vector<std::pair<QString const, QString
   for (auto const &label : labels) {
     QString const totLine(label.first + QString(": ") + label.second);
     totWidth =
-      std::max(totWidth, settings->labelsHorizMargin + fm.boundingRect(totLine).width());
+      std::max(totWidth, settings.labelsHorizMargin + fm.boundingRect(totLine).width());
   }
 
-  int const totHeight = labels.size() * settings->labelsLineHeight;
+  int const totHeight = labels.size() * settings.labelsLineHeight;
 
   return QRect(QPoint(0, 0), QSize(totWidth, totHeight));
 }
@@ -187,19 +190,19 @@ void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidg
   painter->drawRoundedRect(bbox, 5, 5);
 
   // Title (ie name)
-  painter->setFont(settings->titleFont);
+  painter->setFont(settings.titleFont);
 
   QPen titlePen = QPen(Qt::black);
   titlePen.setWidth(0);
   painter->setPen(titlePen);
 
   painter->drawText(
-    settings->labelsHorizMargin, settings->titleLineHeight, shared->name);
+    settings.labelsHorizMargin, settings.titleLineHeight, shared->name);
 
   // Labels:
   if (collapsed) {
     std::vector<std::pair<QString const, QString const>> labs = labels();
-    paintLabels(painter, labs, settings->titleLineHeight);
+    paintLabels(painter, labs, settings.titleLineHeight);
   }
 }
 

@@ -3,12 +3,14 @@
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "GraphView.h"
+#include "GraphViewSettings.h"
 #include "Resources.h"
+
 #include "ProgramItem.h"
 
 ProgramItem::ProgramItem(
   GraphItem *treeParent, std::unique_ptr<Program> program,
-  GraphViewSettings const *settings) :
+  GraphViewSettings const &settings) :
   GraphItem(treeParent, std::move(program), settings)
 {
   setZValue(2);
@@ -40,10 +42,10 @@ QRectF ProgramItem::operationRect() const
     b.translate(function->pos());
     bbox |= b;
   }
-  bbox += QMarginsF(settings->functionMarginHoriz,
-                    settings->functionMarginTop,
-                    settings->functionMarginHoriz,
-                    settings->functionMarginBottom);
+  bbox += QMarginsF(settings.functionMarginHoriz,
+                    settings.functionMarginTop,
+                    settings.functionMarginHoriz,
+                    settings.functionMarginBottom);
   return bbox;
 }
 

@@ -6,16 +6,19 @@
 #include <QParallelAnimationGroup>
 #include <QTouchEvent>
 #include <QGestureEvent>
+
 #include "GraphArrow.h"
+#include "GraphViewSettings.h"
 #include "FunctionItem.h"
 #include "ProgramItem.h"
 #include "SiteItem.h"
 #include "layout.h"
+
 #include "GraphView.h"
 
 static bool const verbose(false);
 
-GraphView::GraphView(GraphViewSettings const *settings_, QWidget *parent) :
+GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent) :
   QGraphicsView(parent),
   model(nullptr),
   layoutTimer(this),
@@ -174,9 +177,9 @@ void GraphView::updateArrows()
 
 # define NB_HMARGINS 3
   int const hmargins[NB_HMARGINS] = {
-    settings->siteMarginHoriz + settings->programMarginHoriz + settings->functionMarginHoriz,
-    settings->siteMarginHoriz + settings->programMarginHoriz,
-    settings->siteMarginHoriz
+    settings.siteMarginHoriz + settings.programMarginHoriz + settings.functionMarginHoriz,
+    settings.siteMarginHoriz + settings.programMarginHoriz,
+    settings.siteMarginHoriz
   };
 
   for (auto const &it : relations) {
@@ -294,8 +297,8 @@ void GraphView::startLayout()
 
     for (auto const &siteItem : model->sites) {
       QPointF sitePos =
-        settings->pointOfTile(siteItem->x0, siteItem->y0) +
-        QPointF(settings->siteMarginHoriz, settings->siteMarginTop);
+        settings.pointOfTile(siteItem->x0, siteItem->y0) +
+        QPointF(settings.siteMarginHoriz, settings.siteMarginTop);
       QPropertyAnimation *siteAnim =
         new QPropertyAnimation(siteItem, "pos");
       siteAnim->setDuration(animDuration);
@@ -305,10 +308,10 @@ void GraphView::startLayout()
       // Now position the programs:
       for (auto const &programItem : siteItem->programs) {
         QPointF progPos =
-          settings->pointOfTile(
+          settings.pointOfTile(
             programItem->x0 - siteItem->x0,
             programItem->y0 - siteItem->y0) +
-          QPointF(settings->programMarginHoriz, settings->programMarginTop);
+          QPointF(settings.programMarginHoriz, settings.programMarginTop);
         QPropertyAnimation *progAnim =
           new QPropertyAnimation(programItem, "pos");
         progAnim->setDuration(animDuration);
@@ -318,11 +321,11 @@ void GraphView::startLayout()
         // Finally, we can now position the functions:
         for (auto const &functionItem : programItem->functions) {
           QPointF funcPos =
-            settings->pointOfTile(
+            settings.pointOfTile(
               functionItem->x0 - programItem->x0,
               functionItem->y0 - programItem->y0) +
-            QPointF(settings->functionMarginHoriz,
-                    settings->functionMarginTop);
+            QPointF(settings.functionMarginHoriz,
+                    settings.functionMarginTop);
           QPropertyAnimation *funcAnim =
             new QPropertyAnimation(functionItem, "pos");
           funcAnim->setDuration(animDuration);

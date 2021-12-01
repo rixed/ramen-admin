@@ -15,14 +15,14 @@ class GraphArrow : public QGraphicsItem
     Direction dir;
     int x, y;
 
-    QPointF start(GraphViewSettings const *) const;
-    QPointF stop(GraphViewSettings const *) const;
+    QPointF start(GraphViewSettings const &) const;
+    QPointF stop(GraphViewSettings const &) const;
   };
   unsigned channel;
   QColor color;
 
   // FIXME: shared_ptr:
-  GraphViewSettings const *settings;
+  GraphViewSettings const &settings;
   QPainterPath arrowPath;
   QPainterPath arrowHead;
   QRectF boundingBox;
@@ -32,7 +32,7 @@ public:
   // above layers. So they should be given the horiz-margin to apply by the
   // constructor.
   GraphArrow(
-    GraphViewSettings const *, int x0, int y0, int hmargin0,
+    GraphViewSettings const &, int x0, int y0, int hmargin0,
     int x1, int y1, int hmargin1, unsigned channel, QColor,
     QGraphicsItem *parent = nullptr);
 

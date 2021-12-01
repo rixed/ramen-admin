@@ -1,7 +1,9 @@
 #include <cassert>
 #include <QPainter>
 #include <QPainterPath>
+
 #include "GraphViewSettings.h"
+
 #include "GraphArrow.h"
 
 /* Arrows only go in the margins, and the GraphArrow object is actually
@@ -24,7 +26,7 @@
  * number of tiles where the same channel is occupied by more than one
  * arrow. */
 
-GraphArrow::GraphArrow(GraphViewSettings const *settings_, int x0, int y0, int hmargin0, int x1, int y1, int hmargin1, unsigned channel_, QColor color_, QGraphicsItem *parent) :
+GraphArrow::GraphArrow(GraphViewSettings const &settings_, int x0, int y0, int hmargin0, int x1, int y1, int hmargin1, unsigned channel_, QColor color_, QGraphicsItem *parent) :
   QGraphicsItem(parent),
   channel(channel_),
   color(color_),
@@ -57,16 +59,16 @@ GraphArrow::GraphArrow(GraphViewSettings const *settings_, int x0, int y0, int h
       lines.push_back({ Down, x, y });
 
   int channelOffset =
-    channel * settings->arrowChannelWidth -
-    (settings->numArrowChannels * settings->arrowChannelWidth) / 2;
+    channel * settings.arrowChannelWidth -
+    (settings.numArrowChannels * settings.arrowChannelWidth) / 2;
 
   QPointF startPos(
-    (x0 + 1) * settings->gridWidth - hmargin0,
-    y0 * settings->gridHeight + settings->arrowConnectOutY + channelOffset);
+    (x0 + 1) * settings.gridWidth - hmargin0,
+    y0 * settings.gridHeight + settings.arrowConnectOutY + channelOffset);
 
   QPointF stopPos(
-    x1 * settings->gridWidth + hmargin1,
-    y1 * settings->gridHeight + settings->arrowConnectInY + channelOffset);
+    x1 * settings.gridWidth + hmargin1,
+    y1 * settings.gridHeight + settings.arrowConnectInY + channelOffset);
 
   int arrowHeadLength = 14;
   int arrowHeadWidth = 8;
@@ -85,7 +87,7 @@ GraphArrow::GraphArrow(GraphViewSettings const *settings_, int x0, int y0, int h
   arrowPath.lineTo(stopPos - QPointF(arrowHeadLength, 0));
 
   boundingBox = arrowPath.boundingRect();
-  int const w = settings->arrowWidth;
+  int const w = settings.arrowWidth;
   boundingBox += QMarginsF(w, w, w, w);
 
   arrowHead = QPainterPath(stopPos);
@@ -104,7 +106,7 @@ QRectF GraphArrow::boundingRect() const
 
 void GraphArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-  QPen pen(Qt::SolidPattern, settings->arrowWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen(Qt::SolidPattern, settings.arrowWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
   pen.setColor(color);
   painter->setPen(pen);
   painter->drawPath(arrowPath);
@@ -114,31 +116,31 @@ void GraphArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWid
   painter->drawPath(arrowHead);
 }
 
-QPointF GraphArrow::Line::start(GraphViewSettings const *settings) const
+QPointF GraphArrow::Line::start(GraphViewSettings const &settings) const
 {
   switch (dir) {
     case Right:
     case Down:
-      return settings->pointOfTile(x, y);
+      return settings.pointOfTile(x, y);
     case Left:
-      return settings->pointOfTile(x + 1, y);
+      return settings.pointOfTile(x + 1, y);
     case Up:
-      return settings->pointOfTile(x, y + 1);
+      return settings.pointOfTile(x, y + 1);
   }
   assert(!"Invalid dir");
   return QPointF();
 }
 
-QPointF GraphArrow::Line::stop(GraphViewSettings const *settings) const
+QPointF GraphArrow::Line::stop(GraphViewSettings const &settings) const
 {
   switch (dir) {
     case Left:
     case Up:
-      return settings->pointOfTile(x, y);
+      return settings.pointOfTile(x, y);
     case Right:
-      return settings->pointOfTile(x + 1, y);
+      return settings.pointOfTile(x + 1, y);
     case Down:
-      return settings->pointOfTile(x, y + 1);
+      return settings.pointOfTile(x, y + 1);
   }
   assert(!"Invalid dir");
   return QPointF();

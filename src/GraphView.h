@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
+
 #include "GraphModel.h"
 
 class GraphArrow;
@@ -63,13 +64,13 @@ class GraphView : public QGraphicsView
   QTimer layoutTimer;
 
   // Parameters we must share with the GraphItems:
-  GraphViewSettings const *settings;
+  GraphViewSettings const &settings;
 
   qreal currentScale;
   qreal lastScale;
 
 public:
-  GraphView(GraphViewSettings const *, QWidget *parent = nullptr);
+  GraphView(GraphViewSettings const &, QWidget *parent = nullptr);
   void setModel(GraphModel const *);
   QSize sizeHint() const override;
 protected:

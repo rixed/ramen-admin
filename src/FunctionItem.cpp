@@ -13,6 +13,7 @@
 #include "desssergen/worker.h"
 #include "EventTime.h"
 #include "GraphView.h"
+#include "GraphViewSettings.h"
 #include "KVStore.h"
 #include "misc.h"
 #include "misc_dessser.h"
@@ -326,11 +327,11 @@ std::shared_ptr<Function> Function::find(
 
 FunctionItem::FunctionItem(
   GraphItem *treeParent, std::unique_ptr<Function> function,
-  GraphViewSettings const *settings) :
+  GraphViewSettings const &settings) :
   GraphItem(treeParent, std::move(function), settings)
 {
   // TODO: updateArrows should reallocate the channels:
-  channel = std::rand() % settings->numArrowChannels;
+  channel = std::rand() % settings.numArrowChannels;
   setZValue(3);
 }
 
@@ -759,14 +760,14 @@ QRectF FunctionItem::operationRect() const
 {
   return
     QRect(0, 0,
-          settings->gridWidth - 2 * (
-            settings->functionMarginHoriz +
-            settings->programMarginHoriz +
-            settings->siteMarginHoriz),
-          settings->gridHeight - (
-            settings->functionMarginBottom + settings->programMarginBottom +
-            settings->siteMarginBottom + settings->functionMarginTop +
-            settings->programMarginTop + settings->siteMarginTop));
+          settings.gridWidth - 2 * (
+            settings.functionMarginHoriz +
+            settings.programMarginHoriz +
+            settings.siteMarginHoriz),
+          settings.gridHeight - (
+            settings.functionMarginBottom + settings.programMarginBottom +
+            settings.siteMarginBottom + settings.functionMarginTop +
+            settings.programMarginTop + settings.siteMarginTop));
 }
 
 bool FunctionItem::isTopHalf() const

@@ -118,7 +118,7 @@ public:
   unsigned channel; // could also be used to select a color?
 
   FunctionItem(
-    GraphItem *treeParent, std::unique_ptr<Function>, GraphViewSettings const *);
+    GraphItem *treeParent, std::unique_ptr<Function>, GraphViewSettings const &);
 
   int columnCount() const;
   QVariant data(int, int) const;

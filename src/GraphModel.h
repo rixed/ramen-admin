@@ -89,7 +89,7 @@ class GraphModel : public QAbstractItemModel
   void deleteKey(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
-  GraphViewSettings const *settings;
+  GraphViewSettings const &settings;
   std::vector<SiteItem *> sites;
 
   enum Columns {
@@ -163,7 +163,7 @@ public:
 
   static int const SortRole = Qt::UserRole + 0;
 
-  GraphModel(GraphViewSettings const *, QObject *parent = nullptr);
+  GraphModel(GraphViewSettings const &, QObject *parent = nullptr);
 
   static QString const columnName(Columns);
   // Those columns that are displayed by default on the processes list:

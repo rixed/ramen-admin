@@ -10,9 +10,9 @@
 #include <QPoint>
 #include <QString>
 #include <QVariant>
-#include "GraphViewSettings.h"
 
 class GraphModel;
+class GraphViewSettings;
 
 namespace dessser {
   namespace gen {
@@ -64,7 +64,7 @@ class GraphItem : public QObject, public QGraphicsItem
   QRect labelsBoundingRect(std::vector<std::pair<QString const, QString const>> const &) const;
 
 protected:
-  GraphViewSettings const *settings;
+  GraphViewSettings const &settings;
 
   // Displayed in the graph:
   // TODO: use QStaticText
@@ -85,7 +85,7 @@ public:
 
   GraphItem(
     GraphItem *treeParent, std::unique_ptr<GraphData> data,
-    GraphViewSettings const *);
+    GraphViewSettings const &);
 
   int columnCount() const;
   virtual QVariant data(int col, int role) const;

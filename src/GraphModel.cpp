@@ -22,7 +22,7 @@ static bool const verbose { false };
 
 GraphModel *GraphModel::globalGraphModel;
 
-GraphModel::GraphModel(GraphViewSettings const *settings_, QObject *parent) :
+GraphModel::GraphModel(GraphViewSettings const &settings_, QObject *parent) :
   QAbstractItemModel(parent),
   settings(settings_)
 {
@@ -52,7 +52,7 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
 {
   if (! parent.isValid()) { // Asking for a site
     if ((size_t)row >= sites.size()) return QModelIndex();
-    SiteItem *site = sites[row];
+    SiteItem *site { sites[row] };
     assert(site->treeParent == nullptr);
     return createIndex(row, column, static_cast<GraphItem *>(site));
   }
@@ -758,7 +758,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
 
   assert(pk.site.length() > 0);
 
-  SiteItem *siteItem = nullptr;
+  SiteItem *siteItem { nullptr };
   for (SiteItem *si : sites) {
     if (si->shared->name == pk.site) {
       siteItem = si;
@@ -855,7 +855,7 @@ void GraphModel::deleteKey(dessser::gen::sync_key::t const &key, KValue const &)
 
   assert(pk.site.length() > 0);
 
-  SiteItem *siteItem = nullptr;
+  SiteItem *siteItem { nullptr };
   for (SiteItem *si : sites) {
     if (si->shared->name == pk.site) {
       siteItem = si;
@@ -865,7 +865,7 @@ void GraphModel::deleteKey(dessser::gen::sync_key::t const &key, KValue const &)
   if (! siteItem) return;
 
   if (pk.program.length() > 0) {
-    ProgramItem *programItem = nullptr;
+    ProgramItem *programItem { nullptr };
     for (ProgramItem *pi : siteItem->programs) {
       if (pi->shared->name == pk.program) {
         programItem = pi;
