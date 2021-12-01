@@ -31,7 +31,7 @@ Function::Function(std::string const &siteName_, std::string const &programName_
   GraphData(QString::fromStdString(functionName_)),
   siteName(siteName_),
   programName(programName_),
-  fqName(siteName_ + "/" + programName_ + "/" + functionName_),
+  fqName(programName_ + "/" + functionName_),
   srcPath(srcPath_) {}
 
 std::shared_ptr<TailModel> Function::getOrCreateTail()

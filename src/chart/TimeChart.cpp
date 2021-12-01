@@ -477,7 +477,9 @@ static int getFieldNum(
   // Prepare the field number in the function output type:
   std::shared_ptr<RamenType const> outType(func->outType());
   if (! outType) {
-    qWarning() << "TimeChart: Cannot find outType for" << func->fqName;
+    qWarning().nospace()
+      << "TimeChart: Cannot find outType for "
+      << func->siteName << ':' << func->fqName;
     return -1;
   }
   QString const fieldName(QString::fromStdString(fieldName_));
@@ -568,7 +570,9 @@ void TimeChart::paintEvent(QPaintEvent *event)
             update();
           });
         } else {
-          qCritical() << "TimeChart: Cannot get tail for function" << func->fqName;
+          qCritical().nospace()
+            << "TimeChart: Cannot get tail for function "
+            << func->siteName << ':' << func->fqName;
         }
       }
     }
@@ -615,10 +619,11 @@ void TimeChart::paintEvent(QPaintEvent *event)
     }
 
     if (verbose)
-      qDebug() << qSetRealNumberPrecision(13)
-               << "TimeChart: collecting tuples for" << res.columns.size()
-               << "columns of" << res.func->fqName
-               << "between" << m_viewPort.first << "and" << m_viewPort.second;
+      qDebug().nospace()
+        << qSetRealNumberPrecision(13)
+        << "TimeChart: collecting tuples for " << res.columns.size()
+        << " columns of " << res.func->siteName << ':' << res.func->fqName
+        << " between " << m_viewPort.first << " and " << m_viewPort.second;
 
     res.func->iterValues(m_viewPort.first, m_viewPort.second, true, res.columns,
       [&res](double time, std::vector<RamenValue const *> const values) {

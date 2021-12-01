@@ -136,10 +136,10 @@ void TimeChartFunctionsEditor::addOrFocus(
   std::string const &function,
   bool customizable)
 {
-  QString const fqName(
+  QString const fqName {
     QString::fromStdString(site) + ":" +
     QString::fromStdString(program) + "/" +
-    QString::fromStdString(function));
+    QString::fromStdString(function) };
 
   int t_i;
   for (t_i = 0; t_i < functions->count(); t_i++) {
@@ -182,8 +182,9 @@ TimeChartFunctionEditor *TimeChartFunctionsEditor::addFunctionByName(
   }
 
   if (verbose)
-    qDebug() << "TimeChartFunctionsEditor: adding function"
-             << f->fqName;
+    qDebug().nospace()
+      << "TimeChartFunctionsEditor: adding function "
+      << f->siteName << ':' << f->fqName;
 
   TimeChartFunctionEditor *e = new TimeChartFunctionEditor(
     site, program, function, customizable);

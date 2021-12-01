@@ -323,7 +323,7 @@ void ProcessesWidget::wantChart(std::shared_ptr<Function> function)
           // Single source: visible: true
           sources,
           // Title
-          function->fqName,
+          function->siteName + ':' + function->fqName,
           // Type: plot
           type))) };
 
