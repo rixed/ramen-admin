@@ -19,5 +19,5 @@ TailTableDialog::TailTableDialog(
 
   setCentralWidget(table);
 
-  setWindowTitle(tr("Tail of %1").arg(tailModel->fqName));
+  setWindowTitle(tr("Tail of %1").arg(QString::fromStdString(tailModel->fqName)));
 }

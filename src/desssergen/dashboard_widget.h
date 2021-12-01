@@ -16,61 +16,6 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tf285c6d4be19a8e3e994b3792fed4f11 : public std::variant<
-  Void, // Linear
-  Void // Logarithmic
-> { using variant::variant; };
-
-enum Constr_tf285c6d4be19a8e3e994b3792fed4f11 {
-  Linear,
-  Logarithmic,
-};
-
-inline std::ostream &operator<<(std::ostream &os, tf285c6d4be19a8e3e994b3792fed4f11 const &v) {
-  switch (v.index()) {
-    case 0: os << "Linear" << std::get<0>(v); break;
-    case 1: os << "Logarithmic" << std::get<1>(v); break;
-  }
-  return os;
-}
-
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf285c6d4be19a8e3e994b3792fed4f11> const v) { os << *v; return os; }
-
-inline bool operator==(tf285c6d4be19a8e3e994b3792fed4f11 const &a, tf285c6d4be19a8e3e994b3792fed4f11 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Linear
-    case 1: return std::get<1>(a) == std::get<1>(b); // Logarithmic
-  };
-  return false;
-}
-inline bool operator!=(tf285c6d4be19a8e3e994b3792fed4f11 const &a, tf285c6d4be19a8e3e994b3792fed4f11 const &b) {
-  return !operator==(a, b);
-}
-struct t7a73277e81021fc63d7d1b63bc3beba6 {
-  bool force_zero;
-  bool left;
-  ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale;
-  t7a73277e81021fc63d7d1b63bc3beba6(bool force_zero_, bool left_, ::dessser::gen::dashboard_widget::tf285c6d4be19a8e3e994b3792fed4f11 scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
-  t7a73277e81021fc63d7d1b63bc3beba6() = default;
-};
-inline std::ostream &operator<<(std::ostream &os, t7a73277e81021fc63d7d1b63bc3beba6 const &r) {
-  os << '{';
-  os << "force_zero:" << r.force_zero << ',';
-  os << "left:" << r.left << ',';
-  os << "scale:" << r.scale;
-  os << '}';
-  return os;
-}
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7a73277e81021fc63d7d1b63bc3beba6> const r) { os << *r; return os; }
-
-inline bool operator==(t7a73277e81021fc63d7d1b63bc3beba6 const &a, t7a73277e81021fc63d7d1b63bc3beba6 const &b) {
-  return a.force_zero == b.force_zero && a.left == b.left && a.scale == b.scale;
-}
-
-inline bool operator!=(t7a73277e81021fc63d7d1b63bc3beba6 const &a, t7a73277e81021fc63d7d1b63bc3beba6 const &b) {
-  return !operator==(a, b);
-}
 struct tc758d36a6b58d564436d5e1104817704 : public std::variant<
   Void, // Unused
   Void, // Independent
@@ -140,14 +85,14 @@ inline bool operator==(t4014451f4abcdfd5489869fefe1eca82 const &a, t4014451f4abc
 inline bool operator!=(t4014451f4abcdfd5489869fefe1eca82 const &a, t4014451f4abcdfd5489869fefe1eca82 const &b) {
   return !operator==(a, b);
 }
-struct t79826a59cc1e8c45c3ad94e8417c3225 {
+struct source {
   Arr<::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> fields;
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  t79826a59cc1e8c45c3ad94e8417c3225(Arr<::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
-  t79826a59cc1e8c45c3ad94e8417c3225() = default;
+  source(Arr<::dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
+  source() = default;
 };
-inline std::ostream &operator<<(std::ostream &os, t79826a59cc1e8c45c3ad94e8417c3225 const &r) {
+inline std::ostream &operator<<(std::ostream &os, source const &r) {
   os << '{';
   os << "fields:" << r.fields << ',';
   os << "name:" << r.name << ',';
@@ -155,71 +100,126 @@ inline std::ostream &operator<<(std::ostream &os, t79826a59cc1e8c45c3ad94e8417c3
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t79826a59cc1e8c45c3ad94e8417c3225> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<source> const r) { os << *r; return os; }
 
-inline bool operator==(t79826a59cc1e8c45c3ad94e8417c3225 const &a, t79826a59cc1e8c45c3ad94e8417c3225 const &b) {
+inline bool operator==(source const &a, source const &b) {
   return a.fields == b.fields && ::dessser::gen::fq_function_name::Deref(a.name) == ::dessser::gen::fq_function_name::Deref(b.name) && a.visible == b.visible;
 }
 
-inline bool operator!=(t79826a59cc1e8c45c3ad94e8417c3225 const &a, t79826a59cc1e8c45c3ad94e8417c3225 const &b) {
+inline bool operator!=(source const &a, source const &b) {
   return !operator==(a, b);
 }
-struct t3ef59f16a0cdd3a9e330e7c5bf93b091 : public std::variant<
+struct scale : public std::variant<
+  Void, // Linear
+  Void // Logarithmic
+> { using variant::variant; };
+
+enum Constr_scale {
+  Linear,
+  Logarithmic,
+};
+
+inline std::ostream &operator<<(std::ostream &os, scale const &v) {
+  switch (v.index()) {
+    case 0: os << "Linear" << std::get<0>(v); break;
+    case 1: os << "Logarithmic" << std::get<1>(v); break;
+  }
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<scale> const v) { os << *v; return os; }
+
+inline bool operator==(scale const &a, scale const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Linear
+    case 1: return std::get<1>(a) == std::get<1>(b); // Logarithmic
+  };
+  return false;
+}
+inline bool operator!=(scale const &a, scale const &b) {
+  return !operator==(a, b);
+}
+struct axis {
+  bool force_zero;
+  bool left;
+  std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale;
+  axis(bool force_zero_, bool left_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
+  axis() = default;
+};
+inline std::ostream &operator<<(std::ostream &os, axis const &r) {
+  os << '{';
+  os << "force_zero:" << r.force_zero << ',';
+  os << "left:" << r.left << ',';
+  os << "scale:" << r.scale;
+  os << '}';
+  return os;
+}
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<axis> const r) { os << *r; return os; }
+
+inline bool operator==(axis const &a, axis const &b) {
+  return a.force_zero == b.force_zero && a.left == b.left && (*a.scale) == (*b.scale);
+}
+
+inline bool operator!=(axis const &a, axis const &b) {
+  return !operator==(a, b);
+}
+struct type : public std::variant<
   Void // Plot
 > { using variant::variant; };
 
-enum Constr_t3ef59f16a0cdd3a9e330e7c5bf93b091 {
+enum Constr_type {
   Plot,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &v) {
+inline std::ostream &operator<<(std::ostream &os, type const &v) {
   switch (v.index()) {
     case 0: os << "Plot" << std::get<0>(v); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3ef59f16a0cdd3a9e330e7c5bf93b091> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<type> const v) { os << *v; return os; }
 
-inline bool operator==(t3ef59f16a0cdd3a9e330e7c5bf93b091 const &a, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &b) {
+inline bool operator==(type const &a, type const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Plot
   };
   return false;
 }
-inline bool operator!=(t3ef59f16a0cdd3a9e330e7c5bf93b091 const &a, t3ef59f16a0cdd3a9e330e7c5bf93b091 const &b) {
+inline bool operator!=(type const &a, type const &b) {
   return !operator==(a, b);
 }
-struct ta3280375be63ffe37d86976d93bf0304 {
-  Arr<::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6> Chart_axis;
-  Arr<::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225> sources;
+struct chart {
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
   std::string title;
-  ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type;
-  ta3280375be63ffe37d86976d93bf0304(Arr<::dessser::gen::dashboard_widget::t7a73277e81021fc63d7d1b63bc3beba6> Chart_axis_, Arr<::dessser::gen::dashboard_widget::t79826a59cc1e8c45c3ad94e8417c3225> sources_, std::string title_, ::dessser::gen::dashboard_widget::t3ef59f16a0cdd3a9e330e7c5bf93b091 type_) : Chart_axis(Chart_axis_), sources(sources_), title(title_), type(type_) {}
-  ta3280375be63ffe37d86976d93bf0304() = default;
+  std::shared_ptr<::dessser::gen::dashboard_widget::type>  type;
+  chart(Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_, std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_) : axes(axes_), sources(sources_), title(title_), type(type_) {}
+  chart() = default;
 };
-inline std::ostream &operator<<(std::ostream &os, ta3280375be63ffe37d86976d93bf0304 const &r) {
+inline std::ostream &operator<<(std::ostream &os, chart const &r) {
   os << '{';
-  os << "Chart_axis:" << r.Chart_axis << ',';
+  os << "axes:" << r.axes << ',';
   os << "sources:" << r.sources << ',';
   os << "title:" << r.title << ',';
   os << "type:" << r.type;
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta3280375be63ffe37d86976d93bf0304> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<chart> const r) { os << *r; return os; }
 
-inline bool operator==(ta3280375be63ffe37d86976d93bf0304 const &a, ta3280375be63ffe37d86976d93bf0304 const &b) {
-  return a.Chart_axis == b.Chart_axis && a.sources == b.sources && a.title == b.title && a.type == b.type;
+inline bool operator==(chart const &a, chart const &b) {
+  return a.axes == b.axes && a.sources == b.sources && a.title == b.title && (*a.type) == (*b.type);
 }
 
-inline bool operator!=(ta3280375be63ffe37d86976d93bf0304 const &a, ta3280375be63ffe37d86976d93bf0304 const &b) {
+inline bool operator!=(chart const &a, chart const &b) {
   return !operator==(a, b);
 }
 struct t : public std::variant<
   std::string, // Text
-  ::dessser::gen::dashboard_widget::ta3280375be63ffe37d86976d93bf0304 // Chart
+  std::shared_ptr<::dessser::gen::dashboard_widget::chart>  // Chart
 > { using variant::variant; };
 
 enum Constr_t {
@@ -241,13 +241,133 @@ inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Text
-    case 1: return std::get<1>(a) == std::get<1>(b); // Chart
+    case 1: return (*std::get<1>(a)) == (*std::get<1>(b)); // Chart
   };
   return false;
 }
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
+struct t97cba01e43a21515748b36fb32be3b3e : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::source> ,
+  Pointer
+> {
+  using tuple::tuple;
+  t97cba01e43a21515748b36fb32be3b3e(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::source> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::source> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t97cba01e43a21515748b36fb32be3b3e const &a, t97cba01e43a21515748b36fb32be3b3e const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t97cba01e43a21515748b36fb32be3b3e const &a, t97cba01e43a21515748b36fb32be3b3e const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t97cba01e43a21515748b36fb32be3b3e const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t97cba01e43a21515748b36fb32be3b3e> const t) { os << *t; return os; }
+
+struct tf9ef46e559cc4aa51a61b6310df405c7 : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,
+  Pointer
+> {
+  using tuple::tuple;
+  tf9ef46e559cc4aa51a61b6310df405c7(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::scale> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::scale> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tf9ef46e559cc4aa51a61b6310df405c7 const &a, tf9ef46e559cc4aa51a61b6310df405c7 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tf9ef46e559cc4aa51a61b6310df405c7 const &a, tf9ef46e559cc4aa51a61b6310df405c7 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tf9ef46e559cc4aa51a61b6310df405c7 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf9ef46e559cc4aa51a61b6310df405c7> const t) { os << *t; return os; }
+
+struct t6ac8518a7138f46f9eb6363b25e26552 : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,
+  Pointer
+> {
+  using tuple::tuple;
+  t6ac8518a7138f46f9eb6363b25e26552(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::axis> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::axis> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t6ac8518a7138f46f9eb6363b25e26552 const &a, t6ac8518a7138f46f9eb6363b25e26552 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t6ac8518a7138f46f9eb6363b25e26552 const &a, t6ac8518a7138f46f9eb6363b25e26552 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t6ac8518a7138f46f9eb6363b25e26552 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6ac8518a7138f46f9eb6363b25e26552> const t) { os << *t; return os; }
+
+struct tb8736edae5c2876425e55b9d652a8681 : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::type> ,
+  Pointer
+> {
+  using tuple::tuple;
+  tb8736edae5c2876425e55b9d652a8681(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::type> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::type> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb8736edae5c2876425e55b9d652a8681 const &a, tb8736edae5c2876425e55b9d652a8681 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tb8736edae5c2876425e55b9d652a8681 const &a, tb8736edae5c2876425e55b9d652a8681 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb8736edae5c2876425e55b9d652a8681 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb8736edae5c2876425e55b9d652a8681> const t) { os << *t; return os; }
+
+struct tef7a76372bf1c1fa490f519ad932fc70 : public std::tuple<
+  std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,
+  Pointer
+> {
+  using tuple::tuple;
+  tef7a76372bf1c1fa490f519ad932fc70(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::chart> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::chart> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tef7a76372bf1c1fa490f519ad932fc70 const &a, tef7a76372bf1c1fa490f519ad932fc70 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tef7a76372bf1c1fa490f519ad932fc70 const &a, tef7a76372bf1c1fa490f519ad932fc70 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tef7a76372bf1c1fa490f519ad932fc70 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tef7a76372bf1c1fa490f519ad932fc70> const t) { os << *t; return os; }
+
 struct t206086bb48fe7c1f7a2a1b42bad30939 : public std::tuple<
   std::shared_ptr<::dessser::gen::dashboard_widget::t> ,
   Pointer
@@ -275,8 +395,23 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t206086bb48fe7
 /* ----------- */
 /* Definitions */
 /* ----------- */
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> source_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> scale_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> axis_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> type_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> chart_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> source_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> scale_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> axis_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> type_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> chart_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::t97cba01e43a21515748b36fb32be3b3e(Pointer)> source_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::tf9ef46e559cc4aa51a61b6310df405c7(Pointer)> scale_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::t6ac8518a7138f46f9eb6363b25e26552(Pointer)> axis_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::tb8736edae5c2876425e55b9d652a8681(Pointer)> type_of_row_binary;
+extern std::function<::dessser::gen::dashboard_widget::tef7a76372bf1c1fa490f519ad932fc70(Pointer)> chart_of_row_binary;
 extern std::function<::dessser::gen::dashboard_widget::t206086bb48fe7c1f7a2a1b42bad30939(Pointer)> of_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }

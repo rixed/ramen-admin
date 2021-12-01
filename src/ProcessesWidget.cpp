@@ -16,8 +16,9 @@
 #include <QVBoxLayout>
 #include <QVector>
 #include "ButtonDelegate.h"
-#include "conf.h"
+#include "ConfClient.h"
 #include "dashboard/tools.h"
+#include "desssergen/sync_value.h"
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "Menu.h"
@@ -280,26 +281,76 @@ void ProcessesWidget::wantTable(std::shared_ptr<Function> function)
 
 void ProcessesWidget::wantChart(std::shared_ptr<Function> function)
 {
-  assert(my_socket);
+  /* Start with the simplest chart possible, user will edit it to its taste.
+   * Note: C++ need to be baby-fed because parser is getting very confused by
+   * inline braces it seems.
+   * Note to self: never use a UI library that depends on C++ ever again */
 
-  std::shared_ptr<conf::DashWidgetChart> chart =
-    std::make_shared<conf::DashWidgetChart>(
-      function->siteName.toStdString(),
-      function->programName.toStdString(),
-      function->name.toStdString());
+  std::shared_ptr<dessser::gen::dashboard_widget::axis> axis {
+    std::make_shared<dessser::gen::dashboard_widget::axis>(
+      false, true,
+      std::make_shared<dessser::gen::dashboard_widget::scale>(
+        std::in_place_index<dessser::gen::dashboard_widget::Linear>,
+        dessser::VOID)) };
+
+  dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis>> axes {
+    axis };
+
+  dessser::Arr<dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> fields {};
+
+  std::shared_ptr<dessser::gen::dashboard_widget::source> source {
+    std::make_shared<dessser::gen::dashboard_widget::source>(
+      fields,
+      std::make_shared<dessser::gen::fq_function_name::t>(
+        function->name.toStdString(), function->programName, function->siteName),
+      true) };
+
+  dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source>> sources {
+    source };
+
+  std::shared_ptr<dessser::gen::dashboard_widget::type> type {
+    std::make_shared<dessser::gen::dashboard_widget::type>(
+      std::in_place_index<dessser::gen::dashboard_widget::Plot>, dessser::VOID) };
+
+  std::shared_ptr<dessser::gen::sync_value::t> chart {
+    std::make_shared<dessser::gen::sync_value::t>(
+      std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
+      std::make_shared<dessser::gen::dashboard_widget::t>(
+        std::in_place_index<dessser::gen::dashboard_widget::Chart>,
+        std::make_shared<dessser::gen::dashboard_widget::chart>(
+          // Single axis: left=true, forceZero=false, scale=Linear
+          axes,
+          // Single source: visible: true
+          sources,
+          // Title
+          function->fqName,
+          // Type: plot
+          type))) };
 
   /* The only way to display a chart is from a dashboard (where its definition
    * is stored). So this button merely adds a new chart to the scratchpad
    * dashboard and opens it: */
-  std::string const dash_key("clients/" + *my_socket + "/scratchpad");
-  int const num = dashboardNextWidget(dash_key);
-  std::string widget_key(dash_key + "/widgets/" + std::to_string(num));
+  uint32_t const idx { dashboardNextWidget(SCRATCHPAD) };
+
+  std::shared_ptr<dessser::gen::sync_key::t> widget_key {
+    std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::PerClient>,
+      std::make_tuple(
+        std::const_pointer_cast<dessser::gen::sync_socket::t>(Menu::getClient()->syncSocket),
+        std::make_shared<dessser::gen::sync_key::per_client>(
+          std::in_place_index<dessser::gen::sync_key::Scratchpad>,
+          std::make_shared<dessser::gen::sync_key::per_dash_key>(
+            std::in_place_index<dessser::gen::sync_key::Widgets>,
+            idx)))) };
+
   /* No need to lock in theory, as the scratchpad is per socket, but
    * lock ownership is how we know to activate the editor: */
-  askNew(widget_key, std::dynamic_pointer_cast<conf::Value const>(chart),
-         DEFAULT_LOCK_TIMEOUT);
+  Menu::getClient()->sendNew(widget_key, chart, DEFAULT_LOCK_TIMEOUT);
+
+#ifdef WITH_DASHBOARDS
   /* And opens it */
   Menu::openDashboard(QString("scratchpad"), dash_key);
+#endif
 }
 
 void ProcessesWidget::activate(QModelIndex const &proxyIndex, int button)

@@ -1,3 +1,4 @@
+#include <QCoreApplication>
 #include <QMenuBar>
 #include <QMenu>
 #include <QKeyEvent>

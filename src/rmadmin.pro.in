@@ -145,8 +145,15 @@ HEADERS += \
   ConfTreeEditorDialog.h \
   ConfTreeWidget.h \
   ConfTreeDialog.h \
-  Menu.h \
+  ButtonDelegate.h \
+  dashboard/tools.h \
   TailModel.h \
+  TailTable.h \
+  TailTableDialog.h \
+  ProcessesWidget.h \
+  ProcessesWidgetProxy.h \
+  ProcessesDialog.h \
+  Menu.h \
   ReplayRequest.h \
   PastData.h \
   FunctionItem.h \
@@ -279,8 +286,15 @@ SOURCES += \
   ConfTreeEditorDialog.cpp \
   ConfTreeWidget.cpp \
   ConfTreeDialog.cpp \
-  Menu.cpp \
+  ButtonDelegate.cpp \
+  dashboard/tools.cpp \
   TailModel.cpp \
+  TailTable.cpp \
+  TailTableDialog.cpp \
+  ProcessesWidget.cpp \
+  ProcessesWidgetProxy.cpp \
+  ProcessesDialog.cpp \
+  Menu.cpp \
   ReplayRequest.cpp \
   PastData.cpp \
   FunctionItem.cpp \

@@ -29,9 +29,7 @@
 #ifdef WITH_OPERATIONS
 #include "OperationsWin.h"
 #endif
-#ifdef WITH_PROCESSES
 #include "ProcessesDialog.h"
-#endif
 #include "RCEditorDialog.h"
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"
@@ -63,9 +61,7 @@ NewProgramDialog *Menu::newProgramDialog;
 #ifdef WITH_DASHBOARDS
 NewDashboardDialog *Menu::newDashboardDialog;
 #endif
-#ifdef WITH_PROCESSES
 ProcessesDialog *Menu::processesDialog;
-#endif
 RCEditorDialog *Menu::rcEditorDialog;
 NamesTreeWin *Menu::namesTreeWin;
 #ifdef WITH_STORAGE
@@ -107,10 +103,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create NewDashboardDialog...";
   if (! newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
 # endif
-# ifdef WITH_PROCESSES
   if (verbose) qDebug() << "Create ProcessesDialog...";
   if (! processesDialog) processesDialog = new ProcessesDialog;
-# endif
   if (verbose) qDebug() << "Create RCEditorDialog...";
   if (! rcEditorDialog) rcEditorDialog = new RCEditorDialog;
   if (verbose) qDebug() << "Create NamesTreeWin...";
@@ -140,9 +134,7 @@ void Menu::showSomething()
   someOpened |= sourcesWin->isVisible();
 # endif
   someOpened |= confTreeDialog->isVisible();
-# ifdef WITH_PROCESSES
   someOpened |= processesDialog->isVisible();
-# endif
   someOpened |= rcEditorDialog->isVisible();
 # ifdef WITH_STORAGE
   someOpened |= storageWin->isVisible();
@@ -171,9 +163,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_DASHBOARDS
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
 # endif
-# ifdef WITH_PROCESSES
   danceOfDelLater<ProcessesDialog>(&processesDialog);
-# endif
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
 # ifdef WITH_STORAGE
@@ -253,13 +243,11 @@ void Menu::populateMenu(bool basic, bool extended)
       this, &Menu::openOperationsWin);
 #   endif
 
-#   ifdef WITH_PROCESSES
     /* The list of all running processes, as a qtree, equivalent to the
      * `ramen ps` command, but nicer and with stats push all the way: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Processes…"),
       this, &Menu::openProcesses);
-#   endif
 
     /* The TargetConfig editor: */
     windowMenu->addAction(
@@ -405,14 +393,12 @@ void Menu::openSourceEditor()
 }
 #endif
 
-#ifdef WITH_PROCESSES
 void Menu::openProcesses()
 {
   // If opened too early that window will actually be deleted on close:
   if (! processesDialog) processesDialog = new ProcessesDialog;
   showRaised(processesDialog);
 }
-#endif
 
 void Menu::openRCEditor()
 {
