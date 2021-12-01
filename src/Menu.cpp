@@ -408,6 +408,8 @@ void Menu::openSourceEditor()
 #ifdef WITH_PROCESSES
 void Menu::openProcesses()
 {
+  // If opened too early that window will actually be deleted on close:
+  if (! processesDialog) processesDialog = new ProcessesDialog;
   showRaised(processesDialog);
 }
 #endif
@@ -430,12 +432,16 @@ void Menu::openAboutDialog()
 
 void Menu::openNamesTreeWin()
 {
+  // If opened too early that window will actually be deleted on close:
+  if (! namesTreeWin) namesTreeWin = new NamesTreeWin;
   showRaised(namesTreeWin);
 }
 
 #ifdef WITH_STORAGE
 void Menu::openStorageWin()
 {
+  // If opened too early that window will actually be deleted on close:
+  if (! storageWin) storageWin = new StorageWin;
   showRaised(storageWin);
 }
 #endif
