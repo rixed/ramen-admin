@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QtGlobal>
 #include <QComboBox>
 #include <QDebug>
@@ -232,7 +231,7 @@ void TargetConfigEditor::changeEntry(int idx)
     } else {
       /* Can happen that currentIndex is right past the end if we deleted
        * the last entry: */
-      assert(currentIndex == (int)rcEntries.size());
+      Q_ASSERT(currentIndex == (int)rcEntries.size());
     }
   }
 

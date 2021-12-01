@@ -21,6 +21,8 @@ KArrEditor::KArrEditor(
   layout = new QVBoxLayout;
 
   QHBoxLayout *l { new QHBoxLayout };
+  /* TODO: add a label "empty list" that's made hidden/visible on setValue depending
+   * on the emptyness of the list */
   l->addStretch(1);
   Resources *r = Resources::get();
   addButton = new QPushButton(r->addPixmap, tr("&add"));

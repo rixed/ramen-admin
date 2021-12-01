@@ -2,6 +2,7 @@
 #include <QScrollBar>
 #include <QTableView>
 #include <QVBoxLayout>
+
 #include "FunctionItem.h"
 #include "TailModel.h"
 

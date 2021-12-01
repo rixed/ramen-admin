@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFrame>
@@ -15,6 +14,7 @@
 #include <QTreeView>
 #include <QVBoxLayout>
 #include <QVector>
+
 #include "ButtonDelegate.h"
 #include "ConfClient.h"
 #include "dashboard/tools.h"
@@ -187,8 +187,8 @@ void ProcessesWidget::askAdjustColumnSize(
 {
   if (! roles.contains(Qt::DisplayRole)) return;
 
-  assert(topLeft.column() >= 0 && bottomRight.column() >= 0);
-  assert((size_t)bottomRight.column() < needResizing.size());
+  Q_ASSERT(topLeft.column() >= 0 && bottomRight.column() >= 0);
+  Q_ASSERT((size_t)bottomRight.column() < needResizing.size());
   for (size_t c = (size_t)topLeft.column(); c <= (size_t)bottomRight.column(); c ++) {
     needResizing.set(c);
   }

@@ -1,6 +1,7 @@
 #include "FunctionItem.h"
 #include "TailModel.h"
 #include "TailTable.h"
+
 #include "TailTableDialog.h"
 
 TailTableDialog::TailTableDialog(
