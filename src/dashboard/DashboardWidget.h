@@ -1,6 +1,7 @@
 #ifndef DASHBOARDWIDGET_H_200304
 #define DASHBOARDWIDGET_H_200304
 #include <memory>
+
 #include "AtomicWidget.h"
 
 class Dashboard;
@@ -11,9 +12,6 @@ class DashboardWidgetText;
 class QAction;
 class QStackedLayout;
 class QWidget;
-namespace conf {
-  class Value;
-};
 
 /* This is an AtomicWidget that can switch representation between a chart
  * or a text box, thus surviving setKey that change the widget type.
@@ -23,7 +21,6 @@ class DashboardWidget : public AtomicWidget
 {
   Q_OBJECT
 
-  std::string widgetKey;
   Dashboard *dashboard;
   DashboardWidgetForm *widgetForm;
 
@@ -40,10 +37,13 @@ public:
   DashboardWidget(
     Dashboard *, DashboardWidgetForm *, QWidget *parent = nullptr);
 
-  void setEnabled(bool);
-  std::shared_ptr<conf::Value const> getValue() const;
+  void setEnabled(bool) override;
+
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const override;
+
   bool setValue(
-    std::string const &, std::shared_ptr<conf::Value const>);
+    std::shared_ptr<dessser::gen::sync_key::t const>,
+    std::shared_ptr<dessser::gen::sync_value::t const>) override;
 
 signals:
   void titleChanged(QString const &);

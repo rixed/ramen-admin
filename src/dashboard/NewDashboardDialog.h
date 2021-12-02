@@ -15,6 +15,7 @@ public:
 
 public slots:
   void clear();
+
 protected slots:
   void createDashboard();
 };

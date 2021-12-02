@@ -84,16 +84,18 @@ void TailModel::onChange(QList<ConfChange> const &changes)
 void TailModel::addTuple(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (key.index() != dessser::gen::sync_key::Tails) return;
+
   auto const &tails { std::get<dessser::gen::sync_key::Tails>(key) };
   if (std::get<0>(tails) != siteName ||
       std::get<1>(tails) != fqName ||
       std::get<2>(tails) != workerSign) return;
+
   std::shared_ptr<dessser::gen::sync_key::per_tail const> per_tail {
     std::get<3>(tails) };
   if (per_tail->index() != dessser::gen::sync_key::LastTuple) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Tuples) {
-    qCritical() << "Received tuples that are not tuples:" << *kv.val;
+    qCritical() << "TailModel::addTuple: Received a Tail that is not tuples:" << *kv.val;
     return;
   }
 
@@ -138,8 +140,8 @@ QVariant TailModel::data(QModelIndex const &index, int role) const
 {
   if (! index.isValid()) return QVariant();
 
-  int const row = index.row();
-  int const column = index.column();
+  int const row { index.row() };
+  int const column { index.column() };
 
   if (row < 0 || row >= rowCount() ||
       column < 0 || column >= columnCount())

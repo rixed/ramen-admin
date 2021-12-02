@@ -1,6 +1,7 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QSizePolicy>
+
 #include "chart/TimeChartEditor.h"
 #include "chart/TimeChartEditWidget.h"
 #include "dashboard/Dashboard.h"
@@ -55,13 +56,14 @@ void DashboardWidgetChart::setEnabled(bool enabled)
   chart->editWidget->setEnabled(enabled);
 }
 
-std::shared_ptr<conf::Value const> DashboardWidgetChart::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> DashboardWidgetChart::getValue() const
 {
   return chart->editWidget->getValue();
 }
 
 bool DashboardWidgetChart::setValue(
-  std::string const &key, std::shared_ptr<conf::Value const> val)
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
+  std::shared_ptr<dessser::gen::sync_value::t const> val)
 {
   return chart->editWidget->setValue(key, val);
 }

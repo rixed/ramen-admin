@@ -4,7 +4,8 @@
 #include <QFormLayout>
 #include <QRadioButton>
 #include <QHBoxLayout>
-#include "confValue.h"
+
+#include "desssergen/dashboard_widget.h"
 
 #include "TimeChartAxisEditor.h"
 
@@ -22,18 +23,18 @@ TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
 
   linear = new QRadioButton(tr("Linear"));
   logarithmic = new QRadioButton(tr("Logarithmic"));
-  QButtonGroup *linLog = new QButtonGroup;
+  QButtonGroup *linLog { new QButtonGroup };
   linLog->addButton(linear);
   linLog->addButton(logarithmic);
   linear->setChecked(true);
 
-  connect(side, QOverload<int>::of(&QButtonGroup::buttonClicked),
+  connect(side, QOverload<int>::of(&QButtonGroup::idClicked),
           this, [this](int){
     emit valueChanged();
   });
   connect(forceZero, &QCheckBox::stateChanged,
           this, &TimeChartAxisEditor::valueChanged);
-  connect(linLog, QOverload<int>::of(&QButtonGroup::buttonClicked),
+  connect(linLog, QOverload<int>::of(&QButtonGroup::idClicked),
           this, [this](int){
     emit valueChanged();
   });
@@ -55,24 +56,24 @@ TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
 }
 
 bool TimeChartAxisEditor::setValue(
-  conf::DashWidgetChart::Axis const &a)
+  dessser::gen::dashboard_widget::axis const &a)
 {
   if (a.left != left->isChecked()) {
     (a.left ? left : right)->click();
   }
 
-  if (a.forceZero != forceZero->isChecked()) {
-    forceZero->setChecked(a.forceZero);
+  if (a.force_zero != forceZero->isChecked()) {
+    forceZero->setChecked(a.force_zero);
   }
 
-  switch (a.scale) {
-    case conf::DashWidgetChart::Axis::Linear:
+  switch (a.scale->index()) {
+    case dessser::gen::dashboard_widget::Linear:
       if (! linear->isChecked()) {
         linear->click();
       }
       break;
 
-    case conf::DashWidgetChart::Axis::Logarithmic:
+    case dessser::gen::dashboard_widget::Logarithmic:
       if (! logarithmic->isChecked()) {
         logarithmic->click();
       }
@@ -82,12 +83,17 @@ bool TimeChartAxisEditor::setValue(
   return true;
 }
 
-conf::DashWidgetChart::Axis TimeChartAxisEditor::getValue() const
+std::shared_ptr<dessser::gen::dashboard_widget::axis> TimeChartAxisEditor::getValue() const
 {
-  return conf::DashWidgetChart::Axis(
-    left->isChecked(),
-    forceZero->isChecked(),
+  std::shared_ptr<dessser::gen::dashboard_widget::scale> scale {
     linear->isChecked() ?
-      conf::DashWidgetChart::Axis::Linear :
-      conf::DashWidgetChart::Axis::Logarithmic);
+      std::make_shared<dessser::gen::dashboard_widget::scale>(
+        std::in_place_index<dessser::gen::dashboard_widget::Linear>, dessser::VOID) :
+      std::make_shared<dessser::gen::dashboard_widget::scale>(
+        std::in_place_index<dessser::gen::dashboard_widget::Logarithmic>, dessser::VOID) };
+
+  return std::make_shared<dessser::gen::dashboard_widget::axis>(
+    forceZero->isChecked(),
+    left->isChecked(),
+    scale);
 }

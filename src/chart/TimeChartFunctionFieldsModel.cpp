@@ -1,15 +1,22 @@
-#include <cassert>
 #include <QDebug>
 #include <QModelIndex>
 #include <QVariant>
-#include "conf.h"
+
+#include "colorOfString.h"
+#include "desssergen/dashboard_widget.h"
+#include "desssergen/raql_type.h"
+#include "desssergen/source_info.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
 #include "GraphModel.h"
-#include "RamenType.h"
+#include "KVStore.h"
+#include "misc.h"
+#include "misc_dessser.h"
 #include "Resources.h"
 
 #include "chart/TimeChartFunctionFieldsModel.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 TimeChartFunctionFieldsModel::TimeChartFunctionFieldsModel(
   std::string const &site,
@@ -17,7 +24,10 @@ TimeChartFunctionFieldsModel::TimeChartFunctionFieldsModel(
   std::string const &function,
   QObject *parent)
   : QAbstractTableModel(parent),
-    source(site, program, function)
+    source(
+      {},
+      std::make_shared<dessser::gen::fq_function_name::t>(function, program, site),
+      true)
 {
   connect(GraphModel::globalGraphModel, &GraphModel::workerChanged,
           this, &TimeChartFunctionFieldsModel::checkSource);
@@ -33,53 +43,74 @@ int TimeChartFunctionFieldsModel::columnCount(QModelIndex const &) const
   return NumColumns;
 }
 
-conf::DashWidgetChart::Column const *
-  TimeChartFunctionFieldsModel::findFieldConfiguration(
-    std::string const &fieldName
-  ) const
+std::shared_ptr<dessser::gen::dashboard_widget::field const>
+  TimeChartFunctionFieldsModel::findFieldConfiguration(std::string const &name) const
 {
-  for (conf::DashWidgetChart::Column const &field : source.fields) {
-    if (field.name == fieldName) return &field;
+  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+    if (field->column == name) return field;
   }
 
   return nullptr;
 }
 
-/* Return the configuration for the given row, ie. the Column from the
- * saved source if we have one, or the default config (for any undrawn
- * fields) */
-conf::DashWidgetChart::Column
-  TimeChartFunctionFieldsModel::findFieldConfiguration(int row) const
+static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
+  std::string const &program, std::string const &function, std::string const &field)
 {
-  std::string const fieldName(
-    headerData(row, Qt::Vertical).toString().toStdString());
+  static std::shared_ptr<dessser::gen::dashboard_widget::representation> representation {
+    std::make_shared<dessser::gen::dashboard_widget::representation>(
+      std::in_place_index<dessser::gen::dashboard_widget::Unused>, dessser::VOID) };
 
-  conf::DashWidgetChart::Column const *conf =
-    findFieldConfiguration(fieldName);
+  QString const full_name {
+    QString::fromStdString(program) + "/" +
+    QString::fromStdString(function) + "/" +
+    QString::fromStdString(field) };
 
-  if (conf) return *conf;
+  QColor c { colorOfString(full_name) };
 
-  return conf::DashWidgetChart::Column(
-    source.program, source.function, fieldName);
+  dessser::Arr<std::string> factors;
+
+  return
+    std::make_shared<dessser::gen::dashboard_widget::field>(
+      (uint8_t)0,  // axis number
+      (uint32_t)(c.rgb() & 0xffffffU),
+      field,
+      factors,
+      (double)c.alphaF(), // opacity
+      representation);
 }
 
-conf::DashWidgetChart::Column &
+dessser::gen::dashboard_widget::field
+  TimeChartFunctionFieldsModel::findFieldConfiguration(int row) const
+{
+  std::string const name {
+    headerData(row, Qt::Vertical).toString().toStdString() };
+
+  std::shared_ptr<dessser::gen::dashboard_widget::field> field {
+    std::const_pointer_cast<dessser::gen::dashboard_widget::field>(
+      findFieldConfiguration(name)) };
+
+  if (! field) {
+    field = makeField(source.name->program, source.name->function, name);
+  }
+  return *field;
+}
+
+std::shared_ptr<dessser::gen::dashboard_widget::field>
   TimeChartFunctionFieldsModel::findFieldConfiguration(int row)
 {
-  std::string const fieldName(
-    headerData(row, Qt::Vertical).toString().toStdString());
+  std::string const name {
+    headerData(row, Qt::Vertical).toString().toStdString() };
 
-  conf::DashWidgetChart::Column const *conf =
-    findFieldConfiguration(fieldName);
+  std::shared_ptr<dessser::gen::dashboard_widget::field> field {
+    std::const_pointer_cast<dessser::gen::dashboard_widget::field>(
+      findFieldConfiguration(name)) };
 
-  if (conf) {
-    return const_cast<conf::DashWidgetChart::Column&>(*conf);
-  } else {
-    if (verbose)
-      qDebug() << "model: adding a field";
-    source.fields.emplace_back(source.program, source.function, fieldName);
-    return source.fields.back();
+  if (! field) {
+    field = makeField(source.name->program, source.name->function, name);
+    if (verbose) qDebug() << "model: adding a field";
+    source.fields.push_back(field);
   }
+  return field;
 }
 
 QVariant TimeChartFunctionFieldsModel::data(
@@ -87,28 +118,28 @@ QVariant TimeChartFunctionFieldsModel::data(
 {
   if (role != Qt::EditRole && role != Qt::DisplayRole) return QVariant();
 
-  int const row(index.row());
+  int const row { index.row() };
   if (row < 0 || row >= numericFields.count()) return QVariant();
 
-  int const col(index.column());
+  int const col { index.column() };
   if (col < 0 || col >= NumColumns) return QVariant();
 
-  conf::DashWidgetChart::Column conf(
-    findFieldConfiguration(row));
+  dessser::gen::dashboard_widget::field const field {
+    findFieldConfiguration(row) };
 
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:
-      return conf.representation;
+      return (uint)field.representation->index();
 
     case ColFactors:
       if (role == Qt::DisplayRole) {
-        if (conf.factors.empty())
+        if (field.factors.empty())
           return Resources::get()->emptyIcon;
         else
           return Resources::get()->factorsIcon;
     } else if (role == Qt::EditRole) {
       QStringList lst;
-      for (std::string const &f : conf.factors) {
+      for (std::string const &f : field.factors) {
         lst += QString::fromStdString(f);
       }
       return lst;
@@ -116,13 +147,17 @@ QVariant TimeChartFunctionFieldsModel::data(
     break;
 
     case ColAxis:
-      return conf.axisNum;
+      return field.axis;
 
     case ColColor:
-      return conf.color;
+      {
+        QColor c { (QRgb)(field.color) }; // This constructor sets alpha to solid
+        c.setAlphaF(field.opacity);
+        return c;
+      }
 
     case NumColumns:  // not a real column number
-      assert(false);
+      Q_ASSERT(false);
   }
 
   return QVariant();
@@ -148,7 +183,7 @@ QVariant TimeChartFunctionFieldsModel::headerData(
       case ColColor:
         return QString(tr("color"));
       case NumColumns:
-        assert(false);
+        Q_ASSERT(false);
     }
   }
 
@@ -160,104 +195,135 @@ bool TimeChartFunctionFieldsModel::setData(
 {
   if (role != Qt::EditRole) return false;
 
-  int const row(index.row());
+  int const row { index.row() };
   if (row < 0 || row >= numericFields.count()) return false;
 
-  int const col(index.column());
+  int const col { index.column() };
   if (col < 0 || col >= NumColumns) return false;
 
-  conf::DashWidgetChart::Column &conf(
-    findFieldConfiguration(row));
+  std::shared_ptr<dessser::gen::dashboard_widget::field> field {
+    findFieldConfiguration(row) };
+
+  // Required to assign variants:
+  static dessser::gen::dashboard_widget::representation const reprUnused {
+    std::in_place_index<dessser::gen::dashboard_widget::Unused>, dessser::VOID };
+  static dessser::gen::dashboard_widget::representation const reprIndependent {
+    std::in_place_index<dessser::gen::dashboard_widget::Independent>, dessser::VOID };
+  static dessser::gen::dashboard_widget::representation const reprStacked {
+    std::in_place_index<dessser::gen::dashboard_widget::Stacked>, dessser::VOID };
+  static dessser::gen::dashboard_widget::representation const reprStackCentered  {
+    std::in_place_index<dessser::gen::dashboard_widget::StackCentered>, dessser::VOID };
 
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:
-      conf.representation =
-        static_cast<conf::DashWidgetChart::Column::Representation>(
-          value.toInt());
+      switch (value.toInt()) {
+        case 0:
+          *field->representation = reprUnused;
+          break;
+        case 1:
+          *field->representation = reprIndependent;
+          break;
+        case 2:
+          *field->representation = reprStacked;
+          break;
+        case 3:
+          *field->representation = reprStackCentered;
+          break;
+        default:
+          Q_ASSERT(false);
+      }
       break;
 
     case ColFactors:
-      {
-        conf.factors.clear();
-        QStringList const l = value.toStringList();
-        for (int i = 0; i < l.count(); i++) {
-          conf.factors.push_back(l[i].toStdString());
-        }
+      field->factors.clear();
+      for (QString const &s : value.toStringList()) {
+        field->factors.push_back(s.toStdString());
       }
       break;
 
     case ColAxis:
-      conf.axisNum = value.toInt();
+      {
+        int const v { value.toInt() };
+        Q_ASSERT(v >= 0 && v < 256);
+        field->axis = v;
+      }
       break;
 
     case ColColor:
-      conf.color = value.value<QColor>();
+      field->color = value.value<QColor>().rgb() & 0xffffffU;
       break;
 
     case NumColumns:
-      assert(false);
+      Q_ASSERT(false);
   }
 
-  static const QVector<int> editedRoles({ Qt::EditRole, Qt::DisplayRole });
+  static const QVector<int> editedRoles { Qt::EditRole, Qt::DisplayRole };
   emit dataChanged(index, index, editedRoles);
   return true;
 }
 
-Qt::ItemFlags TimeChartFunctionFieldsModel::flags(
-  QModelIndex const &) const
+Qt::ItemFlags TimeChartFunctionFieldsModel::flags(QModelIndex const &) const
 {
   return Qt::ItemIsEnabled | Qt::ItemIsEditable;
 }
 
 bool TimeChartFunctionFieldsModel::setValue(
-  conf::DashWidgetChart::Source const &source_)
+  dessser::gen::dashboard_widget::source const &source_)
 {
   if (verbose)
     qDebug() << "model: setValue with " << source_.fields.size() << "fields";
 
   /* The structure of the model can change entirely from the previous one.
    * Start by getting a list of all numeric fields (similar to NamesTree): */
-  std::string const infoKey {
-    "sources/" + srcPathFromProgramName(source_.program) + "/info" };
+  std::shared_ptr<dessser::gen::sync_key::t const> infoKey {
+    std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::Sources>,
+      srcPathFromProgramName(source_.name->program),
+      "info") };
 
-  std::shared_ptr<conf::SourceInfo const> sourceInfos;
+  std::shared_ptr<dessser::gen::source_info::t const> sourceInfo;
   {
     kvs->lock.lock_shared();
     auto it = kvs->map.find(infoKey);
     if (it != kvs->map.end()) {
-      sourceInfos =
-        std::dynamic_pointer_cast<conf::SourceInfo const>(it->second.val);
-      if (! sourceInfos)
-        qCritical() << "TimeChartFunctionFieldsModel: Not a SourceInfo!?";
+      std::shared_ptr<dessser::gen::sync_value::t const> v { it->second.val };
+      if (v->index() == dessser::gen::sync_value::SourceInfo) {
+        sourceInfo = std::get<dessser::gen::sync_value::SourceInfo>(*v);
+      } else {
+        if (! sourceInfo)
+          qCritical() << "TimeChartFunctionFieldsModel: Not a SourceInfo!?";
+      }
     }
     kvs->lock.unlock_shared();
   }
 
-  if (! sourceInfos) {
-    qWarning() << "TimeChartFunctionFieldsModel: Cannot get field of"
-               << QString::fromStdString(infoKey);
+  if (! sourceInfo) {
+    qWarning() << "TimeChartFunctionFieldsModel: Cannot get field of" << *infoKey;
     return false;
   }
 
-  if (sourceInfos->isError()) {
+  if (sourceInfo->detail.index() != dessser::gen::source_info::Compiled) {
     qWarning() << "TimeChartFunctionFieldsModel:"
-               << QString::fromStdString(infoKey) << "is not compiled yet";
+               << *infoKey << "is not compiled yet";
     return false;
   }
+
+  std::shared_ptr<dessser::gen::source_info::compiled_program> prog {
+    std::get<dessser::gen::source_info::Compiled>(sourceInfo->detail) };
 
   beginResetModel();
   numericFields.clear();
   factors.clear();
 
-  QString function_(QString::fromStdString(source_.function));
-  for (auto &info : sourceInfos->infos) {
-    if (info->name != function_) continue;
-    std::shared_ptr<DessserValueType const> s(info->outType->vtyp);
-    for (int c = 0; c < s->numColumns(); c++) {
-      QString const columnName = s->columnName(c);
-      std::shared_ptr<RamenType const> t(s->columnType(c));
-      if (t->vtyp->isNumeric()) numericFields += columnName;
-      if (info->factors.contains(columnName)) factors += columnName;
+  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> func : prog->funcs) {
+    if (func->name != source_.name->function) continue;
+    std::shared_ptr<dessser::gen::raql_type::t const> typ { func->out_record };
+    for (unsigned c = 0; c < numColumns(*typ); c++) {
+      std::string const name { columnName(*typ, c) };
+      std::shared_ptr<dessser::gen::raql_type::t const> t { columnType(*typ, c) };
+      QString name_ { QString::fromStdString(name) };
+      if (isNumeric(*t)) numericFields += name_;
+      if (func->factors.contains(name)) factors += name_;
     }
     break;
   }
@@ -270,10 +336,10 @@ bool TimeChartFunctionFieldsModel::setValue(
 
   /* Filter out fields that are not numeric (or does not exist any longer) */
   {
-    auto it = source.fields.begin();
-    auto end = source.fields.end();
+    auto it { source.fields.begin() };
+    auto end { source.fields.end() };
     while (it != end) {
-      QString const name { QString::fromStdString(it->name) };
+      QString const name { QString::fromStdString((*it)->column) };
       if (!numericFields.contains(name)) {
         qWarning() << "configured field" << name
                    << "does not exist or is not numeric";
@@ -299,8 +365,8 @@ void TimeChartFunctionFieldsModel::checkSource(
 
 bool TimeChartFunctionFieldsModel::hasSelection() const
 {
-  for (conf::DashWidgetChart::Column const &c : source.fields) {
-    if (c.representation != conf::DashWidgetChart::Column::Unused)
+  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+    if (field->representation->index() != dessser::gen::dashboard_widget::Unused)
       return true;
   }
 

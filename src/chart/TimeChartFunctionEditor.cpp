@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cstdlib>
 #include <QCheckBox>
 #include <QCompleter>
@@ -11,25 +10,37 @@
 #include <QPushButton>
 #include <QTableView>
 #include <QVBoxLayout>
+
+#include "Automaton.h"
 #include "chart/FactorsDelegate.h"
 #include "chart/TimeChartAutomatonCustomize.h"
 #include "chart/TimeChartFunctionFieldsModel.h"
 #include "ColorDelegate.h"
-#include "conf.h"
-#include "confAutomaton.h"
-#include "confRCEntry.h"
-#include "confValue.h"
+#include "ConfClient.h"
+#include "desssergen/dashboard_widget.h"
+#include "desssergen/raql_value.h"
+#include "desssergen/rc_entry.h"
+#include "desssergen/sync_value.h"
 #include "FixedTableView.h"
+#include "MakeSyncValue.h"
 #include "Menu.h"
 #include "misc.h"
-#include "RamenValue.h"
+#include "misc_dessser.h"
 #include "Resources.h"
 #include "RollButtonDelegate.h"
+#if WITH_SOURCES
 #include "SourcesWin.h"
+#endif
 
 #include "chart/TimeChartFunctionEditor.h"
 
 static bool const verbose { false };
+
+namespace dessser {
+  namespace gen {
+    namespace program_run_parameter { struct t; }
+  }
+}
 
 TimeChartFunctionEditor::TimeChartFunctionEditor(
   std::string const &site,
@@ -54,7 +65,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   connect(openSource, &QPushButton::clicked,
           this, &TimeChartFunctionEditor::wantSource);
 
-  Resources *r = Resources::get();
+  Resources *r { Resources::get() };
 
   deleteButton = new QPushButton(r->deletePixmap, QString());
   connect(deleteButton, &QPushButton::clicked,
@@ -97,7 +108,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
     factorsDelegate->setColumns(model->factors);
     // Then emit fieldChanged for every changed fields:
     int const lastRow = bottomRight.row();
-    conf::DashWidgetChart::Source const &source = model->source;
+    dessser::gen::dashboard_widget::source const &source = model->source;
     for (int row = topLeft.row(); row <= lastRow; row++) {
       /* Model row correspond to numericFields not source.fields! */
       if (row > model->numericFields.count()) {
@@ -108,7 +119,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
       if (verbose)
         qDebug() << "TimeChartFunctionEditor: fieldChanged"
                  << model->numericFields[row];
-      emit fieldChanged(source.site, source.program, source.function,
+      emit fieldChanged(source.name->site, source.name->program, source.name->function,
                         model->numericFields[row].toStdString());
     }
   });
@@ -129,15 +140,17 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
 
 void TimeChartFunctionEditor::wantSource()
 {
+# ifdef WITH_SOURCES
   if (! Menu::sourcesWin) return;
 
   std::string const sourceKeyPrefix(
-    "sources/" + srcPathFromProgramName(model->source.program));
+    "sources/" + srcPathFromProgramName(model->source.name->program));
   if (verbose)
     qDebug() << "Show source of program" << QString::fromStdString(sourceKeyPrefix);
 
   Menu::sourcesWin->showFile(sourceKeyPrefix);
   Menu::openSourceEditor();
+# endif
 }
 
 /* Customization is a multi step process:
@@ -151,33 +164,34 @@ void TimeChartFunctionEditor::wantCustomize()
 {
   TimeChartAutomatonCustomize *automaton =
     new TimeChartAutomatonCustomize(
-      model->source.site, model->source.program, model->source.function, this);
+      model->source.name->site,
+      model->source.name->program,
+      model->source.name->function,
+      this);
 
   connect(automaton, &TimeChartAutomatonCustomize::transitionTo,
           this, &TimeChartFunctionEditor::automatonTransition);
 
-  std::shared_ptr<conf::RamenValueValue const> newSource(
-    std::make_shared<conf::RamenValueValue>(
-      new VString(
-        QString::fromStdString(
-          "DEFINE LAZY '" + automaton->customFunction + "' AS\n"
-          "  SELECT\n"
-          "    *\n" // TODO: rather list the fields explicitly, with their doc
-          "  FROM '"
-            + model->source.program + "/"
-            + model->source.function + "' ON THIS SITE;\n"))));
+  std::shared_ptr<dessser::gen::sync_value::t const> newSource {
+    ofString(
+      "DEFINE LAZY '" + automaton->customFunction + "' AS\n"
+      "  SELECT\n"
+      "    *\n" // TODO: rather list the fields explicitly, with their doc
+      "  FROM '"
+        + model->source.name->program + "/"
+        + model->source.name->function + "' ON THIS SITE;\n") };
 
-  askNew(automaton->sourceKey, newSource);
+  Menu::getClient()->sendNew(automaton->sourceKey, newSource);
 }
 
 void TimeChartFunctionEditor::automatonTransition(
-  conf::Automaton *automaton_, size_t state,
-  std::shared_ptr<conf::Value const> val)
+  Automaton *automaton_, size_t state,
+  std::shared_ptr<dessser::gen::sync_value::t const> val)
 {
   qInfo() << "TimeChartFunctionEditor: automaton entering state" << state;
 
-  TimeChartAutomatonCustomize *automaton(
-    dynamic_cast<TimeChartAutomatonCustomize *>(automaton_));
+  TimeChartAutomatonCustomize *automaton {
+    dynamic_cast<TimeChartAutomatonCustomize *>(automaton_) };
   if (!automaton) {
     qCritical() << "TimeChartFunctionEditor::automatonTransition:"
                    " not a TimeChartAutomatonCustomize?!";
@@ -186,12 +200,14 @@ void TimeChartFunctionEditor::automatonTransition(
 
   switch (state) {
     case TimeChartAutomatonCustomize::WaitSource:
-      assert(false);  // not transited _to_
+      Q_ASSERT(false);  // not transited _to_
 
     case TimeChartAutomatonCustomize::WaitInfo:
       qInfo() << "TimeChartFunctionEditor: displaying the customized source";
+#     ifdef WITH_SOURCES
       Menu::sourcesWin->showFile(removeExt(automaton->sourceKey, '/'));
       Menu::openSourceEditor();
+#     endif
       break;
 
     case TimeChartAutomatonCustomize::WaitLockRC:
@@ -199,62 +215,65 @@ void TimeChartFunctionEditor::automatonTransition(
                  "running configuration";
       {
         // Check that compilation worked
-        std::shared_ptr<conf::SourceInfo const> info(
-          std::dynamic_pointer_cast<conf::SourceInfo const>(val));
-        if (!info) {
-          qCritical() << "key" << QString::fromStdString(automaton->infoKey)
-                      << "not a SourceInfo?!";
-          automaton->deleteLater();
-          return;
-        }
-        if (!info->errMsg.isEmpty()) {
-          // We generated this source ourselves!
-          qCritical() << "Cannot compile customization template:"
-                      << info->errMsg;
+        std::shared_ptr<dessser::gen::source_info::compiled_program const> comp {
+          getCompiledProgram(*val) };
+        if (!comp) {
+          qCritical() << "key" << *automaton->infoKey
+                      << "not a SourceInfo, or compilation failed?!";
           automaton->deleteLater();
           return;
         }
         // Lock target_config
-        askLock("target_config");
+        Menu::getClient()->sendLock(targetConfig);
       }
       break;
 
     case TimeChartAutomatonCustomize::WaitWorkerOrGraph:
       qInfo() << "TimeChartFunctionEditor: running that program";
       {
-        std::shared_ptr<conf::TargetConfig const> rc(
-          std::dynamic_pointer_cast<conf::TargetConfig const>(val));
+        dessser::Arr<dessser::gen::rc_entry::t_ext> const *rc {
+          getTargetConfig(*val) };
         if (!rc) {
           qCritical() << "target_config not a TargetConfig?!";
           automaton->deleteLater();
           return;
         }
-        std::shared_ptr<conf::TargetConfig> rc2(
-          std::make_shared<conf::TargetConfig>(*rc));
         // Look at the RC for this function for inspiration:
-        std::shared_ptr<conf::RCEntry> sourceEntry;
-        for (std::pair<std::string const, std::shared_ptr<conf::RCEntry>> const &rce :
-               rc->entries) {
+        std::shared_ptr<dessser::gen::rc_entry::t const> sourceEntry;
+        for (std::shared_ptr<dessser::gen::rc_entry::t const> rce : *rc) {
           /* Ideally check also the site: */
-          if (rce.first == model->source.program) {
-            sourceEntry = rce.second;
+          if (rce->program == model->source.name->program) {
+            sourceEntry = rce;
             break;
           }
         }
         if (! sourceEntry) {
           qWarning() << "Cannot find program"
-                     << QString::fromStdString(model->source.program)
+                     << QString::fromStdString(model->source.name->program)
                      << "in the RC file";
           automaton->deleteLater();
           return;
         }
-        std::shared_ptr<conf::RCEntry> rce(
-          std::make_shared<conf::RCEntry>(
-            automaton->customProgram, true, sourceEntry->debug,
-            sourceEntry->reportPeriod, sourceEntry->cwd,
-            model->source.site, false));
-        rc2->addEntry(rce);
-        askSet("target_config", rc2);
+        // Copy sourceEntry:
+        dessser::Arr<std::shared_ptr<dessser::gen::program_run_parameter::t>> params;
+        std::shared_ptr<dessser::gen::rc_entry::t> rce {
+          std::make_shared<dessser::gen::rc_entry::t>(
+            false,  // automatic
+            sourceEntry->cwd,
+            sourceEntry->debug,
+            true, // enabled
+            model->source.name->site,
+            params,
+            automaton->customProgram,
+            sourceEntry->report_period) };
+        // Create a new array with all same entries (shared) + rce:
+        dessser::Arr<dessser::gen::rc_entry::t_ext> rc2 { *rc };
+        rc2.push_back(rce);
+        std::shared_ptr<dessser::gen::sync_value::t> target_config {
+          std::make_shared<dessser::gen::sync_value::t>(
+            std::in_place_index<dessser::gen::sync_value::TargetConfig>,
+            rc2) };
+        Menu::getClient()->sendSet(targetConfig, target_config);
       }
       break;
 
@@ -275,11 +294,8 @@ void TimeChartFunctionEditor::setEnabled(bool enabled)
 }
 
 bool TimeChartFunctionEditor::setValue(
-  conf::DashWidgetChart::Source const &source)
+  dessser::gen::dashboard_widget::source const &source)
 {
-  if (verbose)
-    qDebug() << "TimeChartFunctionEditor::setValue" << source;
-
   if (source.visible != visible->isChecked()) {
     visible->setChecked(source.visible);
   }
@@ -292,9 +308,11 @@ bool TimeChartFunctionEditor::setValue(
   return true;
 }
 
-conf::DashWidgetChart::Source TimeChartFunctionEditor::getValue() const
+std::shared_ptr<dessser::gen::dashboard_widget::source>
+  TimeChartFunctionEditor::getValue() const
 {
-  conf::DashWidgetChart::Source source(model->source);
-  source.visible = visible->isChecked();
+  std::shared_ptr<dessser::gen::dashboard_widget::source> source {
+    std::make_shared<dessser::gen::dashboard_widget::source>(model->source) };
+  source->visible = visible->isChecked();
   return source;
 }

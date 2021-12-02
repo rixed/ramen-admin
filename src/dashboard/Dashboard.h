@@ -4,8 +4,8 @@
 #include <string>
 #include <QString>
 #include <QWidget>
-#include "conf.h"
 
+struct ConfChange;
 class DashboardWidgetForm;
 class FunctionSelector;
 struct KValue;
@@ -13,23 +13,26 @@ class QLabel;
 class QSplitter;
 class TimeLineGroup;
 class TimeRangeEdit;
-namespace conf {
-  struct DashboardWidget;
-  class Value;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
+
 
 class Dashboard : public QWidget
 {
   Q_OBJECT
 
-  std::string const keyPrefix;
-  QString name;
+  std::string const name;
 
   struct WidgetRef {
-    int idx;
+    uint32_t idx;
     DashboardWidgetForm *widget;
 
-    WidgetRef(int idx_, DashboardWidgetForm *widget_)
+    WidgetRef(uint32_t idx_, DashboardWidgetForm *widget_)
       : idx(idx_), widget(widget_) {}
   };
   std::list<WidgetRef> widgets; // ordered according to idx
@@ -39,32 +42,31 @@ class Dashboard : public QWidget
   // The placeholder message when a dashboard is empty:
   QLabel *placeHolder;
 
-  bool isMyKey(std::string const &);
+  bool isMyKey(dessser::gen::sync_key::t const &);
   void resetArrows();
 
-  void addValue(std::string const &, KValue const &);
-  void delValue(std::string const &, KValue const &);
+  void addValue(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void delValue(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   TimeLineGroup *timeLineGroup;
   FunctionSelector *functionSelector;
   TimeRangeEdit *timeRangeEdit;
 
-  // keyPrefix: up to but not including "/widgets"
-  Dashboard(std::string const keyPrefix, QWidget *parent = nullptr);
+  Dashboard(std::string const &dash_name, QWidget *parent = nullptr);
 
 protected:
-  /* Add a widget, in the right order according to the key. The KValue must
-   * be a conf::DashWidget. */
-  void addWidget(std::string const &, int);
+  /* Add a widget, in the right order according to the key. */
+  void addWidget(std::shared_ptr<dessser::gen::sync_key::t const>);
 
-  void delWidget(int);
+  void delWidget(uint32_t);
 
 public slots:
   void setTailTime(double);
 
 protected slots:
   void onChange(QList<ConfChange> const &);
+
   void addCurrentFunction();
 };
 #endif

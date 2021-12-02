@@ -1,14 +1,18 @@
 #ifndef TIMECHARTFUNCTIONSEDITOR_H_200306
 #define TIMECHARTFUNCTIONSEDITOR_H_200306
-#include <memory>
 #include <list>
 #include <QWidget>
-#include "confValue.h"
 
 class Function;
 class FunctionSelector;
 class QToolBox;
 class TimeChartFunctionEditor;
+
+namespace dessser {
+  namespace gen {
+    namespace dashboard_widget { struct chart; }
+  }
+}
 
 class TimeChartFunctionsEditor : public QWidget
 {
@@ -27,7 +31,7 @@ public:
   FunctionSelector *functionSelector;
 
   TimeChartFunctionsEditor(QWidget *parent = nullptr);
-  bool setValue(std::shared_ptr<conf::DashWidgetChart const> v);
+  bool setValue(dessser::gen::dashboard_widget::chart const &);
   void setEnabled(bool);
 
 protected slots:

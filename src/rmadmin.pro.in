@@ -115,6 +115,7 @@ HEADERS += \
   KFloatEditor.h \
   KShortLabel.h \
   RangeIntValidator.h \
+  PathNameValidator.h \
   KArrEditor.h \
   KIntEditor.h \
   KCharEditor.h \
@@ -132,7 +133,9 @@ HEADERS += \
   KBoolEditor.h \
   KNullableEditor.h \
   WorkerViewer.h \
+  TimeRange.h \
   TimeRangeViewer.h \
+  TimeRangeEdit.h \
   SourceInfoViewer.h \
   SourcesModel.h \
   PathSuffixValidator.h \
@@ -146,7 +149,42 @@ HEADERS += \
   ConfTreeWidget.h \
   ConfTreeDialog.h \
   ButtonDelegate.h \
+  TreeComboBox.h \
+  Automaton.h \
+  FixedTableView.h \
+  colorOfString.h \
+  ColorDelegate.h \
+  IconSelector.h \
+  RollButtonDelegate.h \
+  FunctionSelector.h \
+  GrowingTextEdit.h \
+  chart/Ticks.h \
+  chart/AbstractTimeLine.h \
+  chart/TimeLine.h \
+  chart/TimeLineGroup.h \
+  chart/FactorsEditor.h \
+  chart/FactorsDelegate.h \
+  chart/TimeChartAutomatonCustomize.h \
+  chart/TimeChartAxisEditor.h \
+  chart/TimeChartOptionsEditor.h \
+  chart/TimeChartFunctionFieldsModel.h \
+  chart/TimeChartFunctionEditor.h \
+  chart/TimeChartFunctionsEditor.h \
+  chart/TimeChartEditWidget.h \
+  chart/TimeChartEditor.h \
+  chart/TimeChart.h \
   dashboard/tools.h \
+  dashboard/DashboardCopyDialog.h \
+  dashboard/DashboardTreeModel.h \
+  dashboard/DashboardSelector.h \
+  dashboard/DashboardWidgetChart.h \
+  dashboard/DashboardWidgetEditor.h \
+  dashboard/DashboardWidgetText.h \
+  dashboard/DashboardWidgetForm.h \
+  dashboard/DashboardWidget.h \
+  dashboard/Dashboard.h \
+  dashboard/NewDashboardDialog.h \
+  dashboard/DashboardWindow.h \
   TailModel.h \
   TailTable.h \
   TailTableDialog.h \
@@ -160,8 +198,7 @@ HEADERS += \
   ProgramItem.h \
   SiteItem.h \
   layout.h \
-  GraphView.h \
-  colorOfString.h
+  GraphView.h
 
 SOURCES += \
   desssergen/team_name.cc \
@@ -256,6 +293,7 @@ SOURCES += \
   KFloatEditor.cpp \
   KShortLabel.cpp \
   RangeIntValidator.cpp \
+  PathNameValidator.cpp \
   KArrEditor.cpp \
   KIntEditor.cpp \
   KCharEditor.cpp \
@@ -273,7 +311,9 @@ SOURCES += \
   KBoolEditor.cpp \
   KNullableEditor.cpp \
   WorkerViewer.cpp \
+  TimeRange.cpp \
   TimeRangeViewer.cpp \
+  TimeRangeEdit.cpp \
   SourceInfoViewer.cpp \
   SourcesModel.cpp \
   PathSuffixValidator.cpp \
@@ -287,7 +327,42 @@ SOURCES += \
   ConfTreeWidget.cpp \
   ConfTreeDialog.cpp \
   ButtonDelegate.cpp \
+  TreeComboBox.cpp \
+  Automaton.cpp \
+  FixedTableView.cpp \
+  colorOfString.cpp \
+  ColorDelegate.cpp \
+  IconSelector.cpp \
+  RollButtonDelegate.cpp \
+  FunctionSelector.cpp \
+  GrowingTextEdit.cpp \
+  chart/Ticks.cpp \
+  chart/AbstractTimeLine.cpp \
+  chart/TimeLine.cpp \
+  chart/TimeLineGroup.cpp \
+  chart/FactorsEditor.cpp \
+  chart/FactorsDelegate.cpp \
+  chart/TimeChartAutomatonCustomize.cpp \
+  chart/TimeChartAxisEditor.cpp \
+  chart/TimeChartOptionsEditor.cpp \
+  chart/TimeChartFunctionFieldsModel.cpp \
+  chart/TimeChartFunctionEditor.cpp \
+  chart/TimeChartFunctionsEditor.cpp \
+  chart/TimeChartEditWidget.cpp \
+  chart/TimeChartEditor.cpp \
+  chart/TimeChart.cpp \
   dashboard/tools.cpp \
+  dashboard/DashboardCopyDialog.cpp \
+  dashboard/DashboardTreeModel.cpp \
+  dashboard/DashboardSelector.cpp \
+  dashboard/DashboardWidgetChart.cpp \
+  dashboard/DashboardWidgetEditor.cpp \
+  dashboard/DashboardWidgetText.cpp \
+  dashboard/DashboardWidgetForm.cpp \
+  dashboard/DashboardWidget.cpp \
+  dashboard/Dashboard.cpp \
+  dashboard/NewDashboardDialog.cpp \
+  dashboard/DashboardWindow.cpp \
   TailModel.cpp \
   TailTable.cpp \
   TailTableDialog.cpp \
@@ -302,7 +377,6 @@ SOURCES += \
   SiteItem.cpp \
   layout.cpp \
   GraphView.cpp \
-  colorOfString.cpp \
   main.cpp
 
 RESOURCES = resources.qrc

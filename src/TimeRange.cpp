@@ -1,5 +1,6 @@
 #include <cassert>
 #include <QDateTime>
+
 #include "misc.h"
 
 #include "TimeRange.h"

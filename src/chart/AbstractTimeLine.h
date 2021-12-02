@@ -59,8 +59,8 @@ protected:
   void leaveEvent(QEvent *) override { hovered = false; }
   void paintEvent(QPaintEvent *) override;
 
-  int toPixel(qreal) const;
-  qreal toTime(int) const;
+  qreal toPixel(qreal) const;
+  qreal toTime(qreal) const;
 
   qreal m_beginOfTime;
   qreal m_endOfTime;

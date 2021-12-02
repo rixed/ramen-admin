@@ -52,7 +52,7 @@ public:
   std::string const fqName;
   std::string const workerSign;
 
-  /* Unlike for Replayrequests, for tails we actually want to know in which orders
+  /* Unlike for ReplayRequests, for tails we actually want to know in which orders
    * are the tuples emitted (plus, they could have no event-time at all).
    * Therefore we keep both a vector and a multimap: */
   std::vector<std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>>> tuples;

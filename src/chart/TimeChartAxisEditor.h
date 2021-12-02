@@ -1,10 +1,15 @@
 #ifndef TIMECHARTAXISEDITOR_H_200309
 #define TIMECHARTAXISEDITOR_H_200309
 #include <QWidget>
-#include "confValue.h"
 
 class QCheckBox;
 class QRadioButton;
+
+namespace dessser {
+  namespace gen {
+    namespace dashboard_widget { struct axis; }
+  }
+}
 
 class TimeChartAxisEditor : public QWidget
 {
@@ -17,8 +22,8 @@ public:
 
   TimeChartAxisEditor(QWidget *parent = nullptr);
 
-  bool setValue(conf::DashWidgetChart::Axis const &);
-  conf::DashWidgetChart::Axis getValue() const;
+  bool setValue(dessser::gen::dashboard_widget::axis const &);
+  std::shared_ptr<dessser::gen::dashboard_widget::axis> getValue() const;
 
 signals:
   void valueChanged();

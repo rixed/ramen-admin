@@ -3,9 +3,10 @@
 #include <QLineEdit>
 #include <QTabWidget>
 #include <QVBoxLayout>
-#include "confValue.h"
+
 #include "chart/TimeChartAxisEditor.h"
 #include "chart/TimeChartEditWidget.h"
+#include "desssergen/dashboard_widget.h"
 
 #include "chart/TimeChartOptionsEditor.h"
 
@@ -20,7 +21,7 @@ TimeChartOptionsEditor::TimeChartOptionsEditor(
 
   axes = new QTabWidget;
 
-  QVBoxLayout *layout = new QVBoxLayout;
+  QVBoxLayout *layout { new QVBoxLayout };
   layout->addWidget(title);
   layout->addWidget(axes);
   setLayout(layout);
@@ -39,34 +40,33 @@ void TimeChartOptionsEditor::setEnabled(bool enabled)
 }
 
 bool TimeChartOptionsEditor::setValue(
-  std::string const &,
-  std::shared_ptr<conf::DashWidgetChart const> conf)
+  std::shared_ptr<dessser::gen::dashboard_widget::chart const> conf)
 {
-  title->setText(conf->title);
+  title->setText(QString::fromStdString(conf->title));
 
-  int t_idx(0); // iterates over tabs
-  size_t c_idx(0); // iterates over conf->axes
+  int t_idx { 0 }; // iterates over tabs
+  size_t c_idx { 0 }; // iterates over conf->axes
 
   while (t_idx < axes->count() || c_idx < conf->axes.size()) {
     if (t_idx >= axes->count()) {
-      TimeChartAxisEditor *e = new TimeChartAxisEditor;
+      TimeChartAxisEditor *e { new TimeChartAxisEditor };
       connect(e, &TimeChartAxisEditor::valueChanged,
               this, [this, t_idx]() {
           emit axisChanged(t_idx);
       });
       // TODO: a name depending on the properties, updated when they change:
-      QString name(QString::number(t_idx));
+      QString name { QString::number(t_idx) };
       axes->addTab(e, name);
-      e->setValue(conf->axes[c_idx]);
+      e->setValue(*conf->axes[c_idx]);
       t_idx++;
       c_idx++;
     } else if (c_idx >= conf->axes.size()) {
       qDebug() << "Removing a tab";
       axes->removeTab(t_idx);
     } else {
-      TimeChartAxisEditor *e =
-        static_cast<TimeChartAxisEditor *>(axes->widget(t_idx));
-      e->setValue(conf->axes[c_idx]);
+      TimeChartAxisEditor *e {
+        static_cast<TimeChartAxisEditor *>(axes->widget(t_idx)) };
+      e->setValue(*conf->axes[c_idx]);
       t_idx++;
       c_idx++;
     }
@@ -84,17 +84,17 @@ void TimeChartOptionsEditor::updateAfterFieldChange(
 {
   editWidget->iterFields([this,&site,&program,&function,&name](
     std::string const &site_, std::string const &program_,
-    std::string const &function_, conf::DashWidgetChart::Column const &field) {
+    std::string const &function_, dessser::gen::dashboard_widget::field const &field) {
     if (site != site_ || program != program_ || function != function_ ||
-        name != field.name) return;
+        name != field.column) return;
 
-    for (int t_idx = axes->count(); t_idx <= field.axisNum; t_idx++) {
-      TimeChartAxisEditor *e = new TimeChartAxisEditor;
+    for (int t_idx = axes->count(); t_idx <= field.axis; t_idx++) {
+      TimeChartAxisEditor *e { new TimeChartAxisEditor };
       connect(e, &TimeChartAxisEditor::valueChanged,
               this, [this, t_idx]() {
           emit axisChanged(t_idx);
       });
-      QString name(QString::number(t_idx));
+      QString name { QString::number(t_idx) };
       axes->addTab(e, name);
     }
   });

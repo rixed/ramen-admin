@@ -4,12 +4,23 @@
 #include <memory>
 #include <optional>
 #include <string>
+
 #include "AtomicWidget.h"
-#include "confValue.h"
 
 class QPushButton;
 class TimeChartFunctionsEditor;
 class TimeChartOptionsEditor;
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+    namespace dashboard_widget {
+      struct axis;
+      struct field;
+    }
+  }
+}
 
 class TimeChartEditWidget : public AtomicWidget
 {
@@ -27,9 +38,11 @@ public:
 
   void setEnabled(bool) override;
 
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>) override;
+  bool setValue(
+    std::shared_ptr<dessser::gen::sync_key::t const>,
+    std::shared_ptr<dessser::gen::sync_value::t const>) override;
 
-  std::shared_ptr<conf::Value const> getValue() const override;
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const override;
 
   int axisCountOnSide(bool left) const;
 
@@ -38,11 +51,12 @@ public:
 
   int axisCount() const;
 
-  std::optional <conf::DashWidgetChart::Axis const> axis(int) const;
+  // or nullptr if this axis does not exist
+  std::shared_ptr<dessser::gen::dashboard_widget::axis const> axis(int) const;
 
   void iterFields(std::function<void(
     std::string const &site, std::string const &program,
-    std::string const &function, conf::DashWidgetChart::Column const &)>) const;
+    std::string const &function, dessser::gen::dashboard_widget::field const &)>) const;
 
   void closeEvent(QCloseEvent *) override;
 

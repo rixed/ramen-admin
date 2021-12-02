@@ -2,14 +2,16 @@
 #define TIMECHARTOPTIONSEDITOR_H_200306
 #include <memory>
 #include <QWidget>
-#include "confValue.h"
 
 class QLineEdit;
 class QTabWidget;
 class TimeChartEditWidget;
-namespace conf {
-  struct DashboardWidgetChart;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace dashboard_widget { struct chart; }
+  }
+}
 
 class TimeChartOptionsEditor : public QWidget
 {
@@ -28,8 +30,7 @@ public:
     QWidget *parent = nullptr);
 
   void setEnabled(bool);
-  bool setValue(
-    std::string const &, std::shared_ptr<conf::DashWidgetChart const>);
+  bool setValue(std::shared_ptr<dessser::gen::dashboard_widget::chart const>);
 
 public slots:
   void updateAfterFieldChange(

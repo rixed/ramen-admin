@@ -3,8 +3,10 @@
 #include <QTextDocument>
 #include <QHBoxLayout>
 #include <QVBoxLayout>
-#include "confValue.h"
+
 #include "dashboard/DashboardWidgetForm.h"
+#include "desssergen/dashboard_widget.h"
+#include "desssergen/sync_value.h"
 #include "GrowingTextEdit.h"
 
 #include "dashboard/DashboardWidgetText.h"
@@ -56,24 +58,34 @@ void DashboardWidgetText::setEnabled(bool enabled)
 }
 
 bool DashboardWidgetText::setValue(
-  std::string const &, std::shared_ptr<conf::Value const> v_)
+  std::shared_ptr<dessser::gen::sync_key::t const>,
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  std::shared_ptr<conf::DashWidgetText const> v =
-    std::dynamic_pointer_cast<conf::DashWidgetText const>(v_);
-
-  if (!v) {
+  if (v->index() != dessser::gen::sync_value::DashboardWidget) {
+not_a_dash:
     qWarning("DashboardWidgetText::setValue: not a conf::DashWidgetText?");
     return false;
   }
 
-  text->setHtml(v->text);
+  std::shared_ptr<dessser::gen::dashboard_widget::t> w {
+    std::get<dessser::gen::sync_value::DashboardWidget>(*v) };
+
+  if (w->index() != dessser::gen::dashboard_widget::Text) goto not_a_dash;
+
+  text->setHtml(
+    QString::fromStdString(std::get<dessser::gen::dashboard_widget::Text>(*w)));
 
   return true;
 }
 
-std::shared_ptr<conf::Value const> DashboardWidgetText::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> DashboardWidgetText::getValue() const
 {
-  std::shared_ptr<conf::DashWidgetText> ret =
-    std::make_shared<conf::DashWidgetText>(text->document()->toHtml());
-  return std::static_pointer_cast<conf::Value>(ret);
+  std::shared_ptr<dessser::gen::dashboard_widget::t> w {
+    std::make_shared<dessser::gen::dashboard_widget::t>(
+      std::in_place_index<dessser::gen::dashboard_widget::Text>,
+      text->document()->toHtml().toStdString()) };
+
+  return std::make_shared<dessser::gen::sync_value::t>(
+    std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
+    w);
 }

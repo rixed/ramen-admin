@@ -1,8 +1,11 @@
 #include <cassert>
 #include <string>
 #include <QDebug>
-#include "conf.h"
+
+#include "ConfClient.h"
 #include "dashboard/tools.h"
+#include "KVStore.h"
+#include "Menu.h"
 #include "misc.h"
 
 #include "dashboard/DashboardTreeModel.h"
@@ -17,7 +20,7 @@ DashboardTreeModel::DashboardTreeModel(QObject *parent)
 {
   addScratchpad();
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &DashboardTreeModel::onChange);
 }
 
@@ -39,40 +42,43 @@ void DashboardTreeModel::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void DashboardTreeModel::updateNames(std::string const &key, KValue const &)
+void DashboardTreeModel::updateNames(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
   addScratchpad();
 
-  std::pair<QString const, std::string const> name_prefix(
-    dashboardNameAndPrefOfKey(key));
-  if (name_prefix.first.isEmpty()) return;
+  std::string const dash_name { dashboardNameOfKey(*key) };
+
+  if (isScratchpad(dash_name)) return;
 
   if (verbose)
-    qDebug() << "DashboardTreeModel: found" << name_prefix.first;
+    qDebug() << "DashboardTreeModel: found" << QString::fromStdString(dash_name);
 
-  QStringList names(name_prefix.first.split('/'));
+  QStringList names { QString::fromStdString(dash_name).split('/') };
 
-  (void)findOrCreate(root, names, QString::fromStdString(name_prefix.second));
+  (void)findOrCreate(root, names, QString::fromStdString(dash_name));
 }
 
-void DashboardTreeModel::deleteNames(std::string const &key, KValue const &)
+void DashboardTreeModel::deleteNames(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
   addScratchpad();
 
-  QString const name(dashboardNameOfKey(key));
-  if (name.isEmpty()) return;
+  std::string const dash_name { dashboardNameOfKey(*key) };
+  if (isScratchpad(dash_name)) return;
 
   // TODO: actually delete? Or keep the names around for a bit?
 }
 
 void DashboardTreeModel::addScratchpad()
 {
+  std::shared_ptr<dessser::gen::sync_socket::t const> my_socket {
+    Menu::getClient()->syncSocket };
   if (addedScratchpad || !my_socket) return;
 
   /* We start with no scratchpad widgets, but we'd like a scratchpad entry
    * nonetheless so add it manually: */
   QStringList names({ "scratchpad" });
-  std::string const prefix("clients/" + *my_socket + "/scratchpad");
-  (void)findOrCreate(root, names, QString::fromStdString(prefix));
+  (void)findOrCreate(root, names, QString());
   addedScratchpad = true;
 }

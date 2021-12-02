@@ -7,12 +7,13 @@
 #include <QPoint>
 #include <QSizePolicy>
 #include <QWheelEvent>
+
 #include "misc.h"
 #include "TimeRange.h"
 
-#include "AbstractTimeLine.h"
+#include "chart/AbstractTimeLine.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 AbstractTimeLine::AbstractTimeLine(
     qreal beginOftime, qreal endOfTime,
@@ -37,16 +38,14 @@ AbstractTimeLine::AbstractTimeLine(
  * Utilities
  */
 
-int AbstractTimeLine::toPixel(qreal t) const
+qreal AbstractTimeLine::toPixel(qreal t) const
 {
-  return static_cast<int>(
-    ((t - m_viewPort.first) / viewPortWidth()) * width());
+  return ((t - m_viewPort.first) / viewPortWidth()) * width();
 }
 
-qreal AbstractTimeLine::toTime(int x) const
+qreal AbstractTimeLine::toTime(qreal x) const
 {
-  return
-    (static_cast<qreal>(x) / width()) * viewPortWidth() + m_viewPort.first;
+  return (x / width()) * viewPortWidth() + m_viewPort.first;
 }
 
 /*

@@ -46,17 +46,17 @@ static QStringList treeNamesOfSourcesKey(dessser::gen::sync_key::t const &k)
 static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
 {
   using namespace dessser::gen::sync_key;
-  auto const &per_site { std::get<PerSite>(k) };
-  std::string const &site_name { std::get<0>(per_site) };
-  auto const &data { std::get<1>(per_site) };
+  std::shared_ptr<per_site const> per_site { std::get<PerSite>(k) };
+  std::string const &site_name { std::get<0>(*per_site) };
+  std::shared_ptr<per_site_data const> data { std::get<1>(*per_site) };
   QStringList ret { "PerSite", QString::fromStdString(site_name) };
 
-  switch (data.index()) {
+  switch (data->index()) {
     case IsMaster:
       return ret << "IsMaster";
     case PerService:
       {
-        auto const &service { std::get<PerService>(data) };
+        auto const &service { std::get<PerService>(*data) };
         std::string const &service_name { std::get<0>(service) };
         auto const &service_data { std::get<1>(service) };
         ret = ret << "PerService" << QString::fromStdString(service_name);
@@ -71,12 +71,12 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
       }
     case PerWorker:
       {
-        auto const &worker { std::get<PerWorker>(data) };
-        std::string const &worker_name { std::get<0>(worker) };
-        auto const &worker_data { std::get<1>(worker) };
+        std::shared_ptr<per_worker const> per_worker { std::get<PerWorker>(*data) };
+        std::string const &worker_name { std::get<0>(*per_worker) };
+        std::shared_ptr<per_worker_data const> worker_data { std::get<1>(*per_worker) };
         ret = ret << "PerWorker"
                   << QString::fromStdString(worker_name).split("/", Qt::SkipEmptyParts);
-        switch (worker_data.index()) {
+        switch (worker_data->index()) {
           case RuntimeStats:
             return ret << "RuntimeStats";
           case ArchivedTimes:
@@ -91,7 +91,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
             return ret << "Worker";
           case PerInstance:
             {
-              auto const &instance { std::get<PerInstance>(worker_data) };
+              auto const &instance { std::get<PerInstance>(*worker_data) };
               std::string const &instance_name { std::get<0>(instance) };
               auto const &instance_data { std::get<1>(instance) };
               ret = ret << "PerInstance" << QString::fromStdString(instance_name);
@@ -117,7 +117,8 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
               }
             }
           case PerReplayer:
-            return ret << "PerReplayer" << QString::number(std::get<PerReplayer>(worker_data));
+            return ret << "PerReplayer"
+                       << QString::number(std::get<PerReplayer>(*worker_data));
           case OutputSpecs:
             return ret << "OutputSpecs";
           default:
@@ -126,7 +127,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
       }
     case PerProgram:
       {
-        auto const &program { std::get<PerProgram>(data) };
+        auto const &program { std::get<PerProgram>(*data) };
         std::string const &program_name { std::get<0>(program) };
         auto const &program_data { std::get<1>(program) };
         ret = ret << "PerProgram"
@@ -139,7 +140,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k)
         }
       }
     default:
-      qFatal("Invalid data.index");
+      qFatal("Invalid data->index");
   }
 }
 

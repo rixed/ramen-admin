@@ -1,14 +1,17 @@
+#include <algorithm>
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QToolBox>
 #include <QVBoxLayout>
-#include "confValue.h"
+
+#include "desssergen/dashboard_widget.h"
 #include "chart/TimeChartFunctionEditor.h"
 #include "chart/TimeChartFunctionFieldsModel.h"
 #include "FunctionItem.h"
 #include "FunctionSelector.h"
 #include "GraphModel.h"
+#include "misc_dessser.h"
 
 #include "chart/TimeChartFunctionsEditor.h"
 
@@ -21,7 +24,7 @@ TimeChartFunctionsEditor::TimeChartFunctionsEditor(QWidget *parent)
   functions->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
 
   // TODO: a globalGraphModelWithoutTopHalves
-  GraphModel *graph(GraphModel::globalGraphModel);
+  GraphModel *graph { GraphModel::globalGraphModel };
   functionSelector = new FunctionSelector(graph);
   QPushButton *addButton = new QPushButton(tr("Add"));
   connect(addButton, &QPushButton::clicked,
@@ -37,50 +40,72 @@ TimeChartFunctionsEditor::TimeChartFunctionsEditor(QWidget *parent)
 }
 
 bool TimeChartFunctionsEditor::setValue(
-  std::shared_ptr<conf::DashWidgetChart const> v)
+  dessser::gen::dashboard_widget::chart const &v)
 {
   if (verbose)
-    qDebug() << "TimeChartFunctionsEditor::setValue with" << v->sources.size()
-             << "sources and" << v->axes.size() << "axes";
+    qDebug() << "TimeChartFunctionsEditor::setValue with" << v.sources.size()
+             << "sources and" << v.axes.size() << "axes";
 
-  /* Sources are ordered by name */
+  /* We want the function list to be ordered by FQ name, but the sources in [v]
+   * come in no particular order, so let's start by ordering them: */
+  std::vector<std::shared_ptr<dessser::gen::dashboard_widget::source>> ordered_sources {
+    v.sources };
+  std::sort(
+    ordered_sources.begin(), ordered_sources.end(),
+    [](std::shared_ptr<dessser::gen::dashboard_widget::source> const &a,
+       std::shared_ptr<dessser::gen::dashboard_widget::source> const &b)
+    {
+      int const c1 { a->name->site.compare(b->name->site) };
+      if (c1 < 0) return true;
+      if (c1 > 0) return false;
+      int const c2 { a->name->program.compare(b->name->program) };
+      if (c2 < 0) return true;
+      if (c2 > 0) return false;
+      int const c3 { a->name->function.compare(b->name->function) };
+      if (c3 <= 0) return true;
+      return false;
+    });
 
-  size_t v_i(0); // index in v->sources
-  int t_i(0); // index in items
+  size_t v_i { 0 }; // index in v.sources
+  int t_i { 0 }; // index in items
   for (;
-    v_i < v->sources.size() || t_i < functions->count();
+    v_i < ordered_sources.size() || t_i < functions->count();
     v_i++, t_i++
   ) {
-    if (v_i >= v->sources.size()) {
+    if (v_i >= ordered_sources.size()) {
       if (verbose) qDebug() << "extra function" << t_i << "is gone";
       allFieldsChanged(t_i);
       functions->removeItem(t_i--);
     } else if (t_i >= functions->count()) {
-      conf::DashWidgetChart::Source const &src = v->sources[v_i];
+      std::shared_ptr<dessser::gen::dashboard_widget::source const> src {
+        ordered_sources[v_i] };
       if (verbose)
         qDebug() << "appending new function at" << t_i << "for"
-                 << QString::fromStdString(src.function);
-      TimeChartFunctionEditor *e = addFunctionByName(
-        src.site, src.program, src.function, true);
-      e->setValue(src);
-      functions->addItem(e, src.name);
+                 << QString::fromStdString(src->name->function);
+      TimeChartFunctionEditor *e {
+        addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
+      e->setValue(*src);
+      functions->addItem(e, QString::fromStdString(siteFqName(*src->name)));
     } else {
-      int const c(v->sources[v_i].name.compare(functions->itemText(t_i)));
+      QString const name_i {
+        QString::fromStdString(siteFqName(*ordered_sources[v_i]->name)) };
+      int const c { name_i.compare(functions->itemText(t_i)) };
       if (c == 0) {
         if (verbose) qDebug() << "updating function" << t_i;
-        TimeChartFunctionEditor *e =
-          static_cast<TimeChartFunctionEditor *>(functions->widget(t_i));
-        e->setValue(v->sources[v_i]);
+        TimeChartFunctionEditor *e {
+          static_cast<TimeChartFunctionEditor *>(functions->widget(t_i)) };
+        e->setValue(*ordered_sources[v_i]);
       } else if (c < 0) {
         // v->source comes first
-        conf::DashWidgetChart::Source const &src = v->sources[v_i];
+        std::shared_ptr<dessser::gen::dashboard_widget::source const> src {
+          ordered_sources[v_i] };
         if (verbose)
           qDebug() << "inserting function at" << t_i << "for"
-                   << QString::fromStdString(src.function);
-        TimeChartFunctionEditor *e = addFunctionByName(
-          src.site, src.program, src.function, true);
-        e->setValue(src);
-        (void)functions->insertItem(t_i, e, src.name);
+                   << QString::fromStdString(src->name->function);
+        TimeChartFunctionEditor *e {
+          addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
+        e->setValue(*src);
+        (void)functions->insertItem(t_i, e, name_i);
       } else if (c > 0) {
         /* QToolBox item comes first. It must be a new function being edited,
          * and will be subsequently either saved or deleted when the form gets
@@ -100,32 +125,33 @@ void TimeChartFunctionsEditor::setEnabled(bool enabled)
 
 void TimeChartFunctionsEditor::allFieldsChanged(int tab_idx)
 {
-  TimeChartFunctionEditor *e =
-    static_cast<TimeChartFunctionEditor *>(functions->widget(tab_idx));
-  conf::DashWidgetChart::Source const &source(e->model->source);
-  for (conf::DashWidgetChart::Column const &field : source.fields) {
-    emit fieldChanged(source.site, source.program, source.function, field.name);
+  TimeChartFunctionEditor *e {
+    static_cast<TimeChartFunctionEditor *>(functions->widget(tab_idx)) };
+  dessser::gen::dashboard_widget::source const &source { e->model->source };
+  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+    emit fieldChanged(source.name->site, source.name->program,
+                      source.name->function, field->column);
   }
 }
 
 void TimeChartFunctionsEditor::addCurrentFunction()
 {
-  FunctionItem *f(functionSelector->getCurrent());
+  FunctionItem *f { functionSelector->getCurrent() };
   if (! f) {
     qDebug() << "Must select a function";
     return;
   }
 
-  std::shared_ptr<Function> function(
-    std::dynamic_pointer_cast<Function>(f->shared));
+  std::shared_ptr<Function> function {
+    std::dynamic_pointer_cast<Function>(f->shared) };
   if (! function) {
     qWarning() << "No such function";
     return;
   }
 
   addOrFocus(
-    function->siteName.toStdString(),
-    function->programName.toStdString(),
+    function->siteName,
+    function->programName,
     function->name.toStdString(),
     true);
 }
@@ -156,9 +182,14 @@ void TimeChartFunctionsEditor::addOrFocus(
   /* Create a new function editor */
   if (verbose)
     qDebug() << "Insert new function at index" << t_i;
-  TimeChartFunctionEditor *e = addFunctionByName(
-    site, program, function, customizable);
-  conf::DashWidgetChart::Source defaultSrc { site, program, function };
+
+  TimeChartFunctionEditor *e {
+    addFunctionByName(site, program, function, customizable) };
+  dessser::gen::dashboard_widget::source defaultSrc {
+    {}, // fields
+    std::make_shared<dessser::gen::fq_function_name::t>(function, program, site),
+    true  // visible
+  };
   e->setValue(defaultSrc);
   (void)functions->insertItem(t_i, e, fqName);
   functions->setCurrentIndex(t_i);
@@ -170,11 +201,11 @@ TimeChartFunctionEditor *TimeChartFunctionsEditor::addFunctionByName(
   std::string const &function,
   bool customizable)
 {
-  std::shared_ptr<Function const> const f(
+  std::shared_ptr<Function const> const f {
     Function::find(
       QString::fromStdString(site),
       QString::fromStdString(program),
-      QString::fromStdString(function)));
+      QString::fromStdString(function)) };
 
   if (! f) {
     qCritical() << "Customized function does not exist yet!";
@@ -186,8 +217,8 @@ TimeChartFunctionEditor *TimeChartFunctionsEditor::addFunctionByName(
       << "TimeChartFunctionsEditor: adding function "
       << f->siteName << ':' << f->fqName;
 
-  TimeChartFunctionEditor *e = new TimeChartFunctionEditor(
-    site, program, function, customizable);
+  TimeChartFunctionEditor *e {
+    new TimeChartFunctionEditor(site, program, function, customizable) };
 
   connect(e, &TimeChartFunctionEditor::fieldChanged,
           this, &TimeChartFunctionsEditor::fieldChanged);

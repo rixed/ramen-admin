@@ -1,17 +1,17 @@
-#include <cassert>
 #include <limits>
 #include <QDebug>
-#include "conf.h"
-#include "confValue.h"
+
+#include "desssergen/raql_value.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
 #include "misc.h"
-#include "RamenValue.h"
+#include "misc_dessser.h"
 #include "UserIdentity.h"
 
-#include "confAutomaton.h"
+#include "Automaton.h"
 
-static bool const verbose(false);
-
-namespace conf {
+static bool const verbose { false };
 
 Automaton::Automaton(
   QString const name_,
@@ -21,25 +21,24 @@ Automaton::Automaton(
     name(name_),
     states(numStates)
 {
-  assert(numStates > 0);  // At least an empty state
+  Q_ASSERT(numStates > 0);  // At least an empty state
 }
 
 void Automaton::addTransition(
   size_t fromState, size_t toState,
   unsigned keyOperations,
-  std::string const &key,
-  bool isPrefix,
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
   double timeout)
 {
-  assert(fromState < states.size());
-  assert(toState < states.size());
+  Q_ASSERT(fromState < states.size());
+  Q_ASSERT(toState < states.size());
 
   double const timeoutDate(
     timeout > 0 ?
       getTime() + timeout : std::numeric_limits<double>::max());
 
   states[fromState].transitions.push_back({
-    toState, keyOperations, key, isPrefix, timeoutDate});
+    toState, keyOperations, key, timeoutDate});
 }
 
 void Automaton::start()
@@ -47,7 +46,7 @@ void Automaton::start()
   if (verbose)
     qInfo() << "Automaton" << name << ": starting";
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &Automaton::onChange);
 
   tryDirectTransition();
@@ -70,34 +69,32 @@ void Automaton::moveTo(size_t toState)
 }
 
 void Automaton::tryTransition(
-  std::string const &k, KValue const &kv, KeyOperation op)
+  std::shared_ptr<dessser::gen::sync_key::t const> key,
+  KValue const &kv, KeyOperation op)
 {
   /* Ignore null values to simplify automatons */
-  std::shared_ptr<RamenValueValue const> rv(
-    std::dynamic_pointer_cast<RamenValueValue const>(kv.val));
-  if (rv && rv->v->isNull()) {
-    if (verbose)
-      qDebug() << "Automaton: ignoring VNull";
-    return;
+  if (kv.val->index() == dessser::gen::sync_value::RamenValue) {
+    std::shared_ptr<dessser::gen::raql_value::t const> rv {
+      std::get<dessser::gen::sync_value::RamenValue>(*kv.val) };
+    if (rv->index() == dessser::gen::raql_value::VNull) {
+      if (verbose) qDebug() << "Automaton: ignoring VNull";
+      return;
+    }
   }
 
   if (verbose)
-    qDebug() << "Automaton: Trying key" << QString::fromStdString(k)
+    qDebug() << "Automaton: Trying key" << *key
              << "from state" << currentState;
 
-  bool allTimedOut(true);
-  double const now(getTime());
+  bool allTimedOut { true };
+  double const now { getTime() };
 
   for (Transition const &t : states[currentState].transitions) {
     if (t.timeoutDate < now) continue;
     allTimedOut = false;
 
     if (!(t.keyOperations & op)) continue;
-    if (t.isPrefix) {
-      if (!startsWith(k, t.key)) continue;
-    } else {
-      if (k != t.key) continue;
-    }
+    if (*key != *t.key) continue;
 
     qInfo() << "Automaton" << name << ": transitioning to state" << t.toState;
     currentState = t.toState;
@@ -135,27 +132,18 @@ void Automaton::tryDirectTransition()
 
   for (Transition const &t : states[currentState].transitions) {
     if (! (t.keyOperations & OnLock)) continue;
-    if (t.isPrefix) {
-      /* Not necessarily an error but let's remind this limitation to
-       * future self: */
-      qWarning() << "Automaton: Beware thaht OnLock on a key prefix "
-                    "cannot deal with already owned keys!";
-      continue;
-    }
 
-    std::shared_ptr<conf::Value const> val;
+    std::shared_ptr<dessser::gen::sync_value::t const> val;
     kvs->lock.lock_shared();
     auto it = kvs->map.find(t.key);
     if (it != kvs->map.end()) {
-      KValue const &kv(it->second);
-      if (kv.owner && *kv.owner == my_uid)
-        val = kv.val;
+      KValue const &kv { it->second };
+      if (kv.owner == my_uid) val = kv.val;
     }
     kvs->lock.unlock_shared();
 
     if (val) {
-      qInfo() << "Automaton" << name << ": Already own key"
-              << QString::fromStdString(t.key)
+      qInfo() << "Automaton" << name << ": Already own key" << *t.key
               << ", transitioning to state" << t.toState;
       currentState = t.toState;
       emit transitionTo(this, t.toState, val);
@@ -187,5 +175,3 @@ void Automaton::onChange(QList<ConfChange> const &changes)
     }
   }
 }
-
-};

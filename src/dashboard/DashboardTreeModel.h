@@ -1,7 +1,16 @@
 #ifndef DASHBOARDTREEMODEL_H_200320
 #define DASHBOARDTREEMODEL_H_200320
-#include "conf.h"
+#include <memory>
+
 #include "ConfTreeModel.h"
+#include "ConfChange.h"
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class DashboardTreeModel : public ConfTreeModel
 {
@@ -10,8 +19,8 @@ class DashboardTreeModel : public ConfTreeModel
   bool addedScratchpad;
   void addScratchpad();
 
-  void updateNames(std::string const &, KValue const &);
-  void deleteNames(std::string const &, KValue const &);
+  void updateNames(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void deleteNames(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   static DashboardTreeModel *globalDashboardTree;

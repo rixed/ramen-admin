@@ -1,10 +1,12 @@
 #ifndef TIMECHARTFUNCTIONFIELDSMODEL_H_200309
 #define TIMECHARTFUNCTIONFIELDSMODEL_H_200309
+#include <memory>
 #include <string>
+
 #include <QAbstractTableModel>
 #include <QStringList>
-#include "conf.h"
-#include "confValue.h"
+
+#include "desssergen/dashboard_widget.h"
 
 struct KValue;
 
@@ -17,29 +19,31 @@ class TimeChartFunctionFieldsModel : public QAbstractTableModel
 {
   Q_OBJECT
 
+  /* Returns a R-O pointer to the known configuration for that field, or
+   * null: */
+  std::shared_ptr<dessser::gen::dashboard_widget::field const> findFieldConfiguration(
+    std::string const &field_name) const;
+
+  /* Returns a copy of the stored Column in source or a fresh default value
+   * if there is no stored configuration for that field yet. */
+  dessser::gen::dashboard_widget::field findFieldConfiguration(int) const;
+
+  /* Same as above, but returns the value from the configuration (and add it if
+   * needed) */
+  std::shared_ptr<dessser::gen::dashboard_widget::field> findFieldConfiguration(int);
+
 public:
   /* Used to answer data(), can be changed at any time.
    * Will be extended with new field config as new fields are edited.
-   * WARNING: Therefore, is not a copy of the conf::DashWidgetChart,
+   * WARNING: Therefore, is not a copy of the dashboard_widget::t,
    *          as fields can be in different order/number. */
-  conf::DashWidgetChart::Source source;
+  dessser::gen::dashboard_widget::source source;
 
   // Names of the numeric fields:
   QStringList numericFields;
 
   // Names of possible factors:
   QStringList factors;
-
-  /* Returns a R-O pointer to the known configuration for that field, or
-   * null: */
-  conf::DashWidgetChart::Column const *findFieldConfiguration(
-    std::string const &fieldName) const;
-  /* Returns a copy of the stored Column in source or a fresh default value
-   * if there is no stored configuration for that field yet) */
-  conf::DashWidgetChart::Column findFieldConfiguration(int) const;
-  /* Returns a R-W reference to the stored Column in source (which will be
-   * extended if the field has no configuration yet) */
-  conf::DashWidgetChart::Column &findFieldConfiguration(int);
 
   enum Columns {
     ColRepresentation, ColFactors, ColAxis, ColColor, NumColumns
@@ -75,7 +79,7 @@ protected slots:
 
 public slots:
   // Faster and simpler than individual setData:
-  bool setValue(conf::DashWidgetChart::Source const &);
+  bool setValue(dessser::gen::dashboard_widget::source const &);
 };
 
 #endif

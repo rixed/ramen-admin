@@ -2,6 +2,7 @@
 #define DASHBOARDWINDOW_H_200304
 #include <string>
 #include <QString>
+
 #include "SavedWindow.h"
 
 class Dashboard;
@@ -13,11 +14,7 @@ class DashboardWindow : public SavedWindow
   Dashboard *dashboard;
 
 public:
-  DashboardWindow(
-    QString const &name,
-    std::string const &key_prefix,
-    QWidget *parent = nullptr);
-
+  DashboardWindow(std::string const &dash_name, QWidget *parent = nullptr);
 };
 
 #endif

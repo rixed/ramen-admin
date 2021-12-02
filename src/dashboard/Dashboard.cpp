@@ -6,43 +6,29 @@
 #include <QScrollArea>
 #include <QSplitter>
 #include <QVBoxLayout>
+
 #include "chart/TimeLineGroup.h"
-#include "conf.h"
-#include "confValue.h"
+#include "ConfClient.h"
 #include "dashboard/tools.h"
 #include "dashboard/DashboardWidgetForm.h"
+#include "desssergen/dashboard_widget.h"
+#include "desssergen/sync_value.h"
 #include "FunctionItem.h"
 #include "FunctionSelector.h"
 #include "GraphModel.h"
+#include "Menu.h"
 #include "misc.h"
+#include "misc_dessser.h"
 #include "TimeRange.h"
 #include "TimeRangeEdit.h"
 
 #include "dashboard/Dashboard.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-/* The prefix must end with the dashboard name (before the "/widgets"
- * part). */
-QString const dashboardNameOfKeyPrefix(std::string const prefix)
-{
-  std::string::size_type const len(prefix.length());
-  assert(len > 1);
-  assert(prefix[len - 1] != '/');
-  if (startsWith(prefix, "dashboards/")) {
-    return QString::fromStdString(prefix.substr(11));
-  } else if (startsWith(prefix, "clients/") &&
-             endsWith(prefix, "/scratchpad")) {
-    return QString("scratchpad");
-  } else {
-    qFatal("Cannot make sense of key prefix %s", prefix.c_str());
-  }
-}
-
-Dashboard::Dashboard(std::string const keyPrefix_, QWidget *parent)
+Dashboard::Dashboard(std::string const &dash_name, QWidget *parent)
   : QWidget(parent),
-    keyPrefix(keyPrefix_),
-    name(dashboardNameOfKeyPrefix(keyPrefix_))
+    name(dash_name)
 {
   timeLineGroup = new TimeLineGroup(this);
 
@@ -81,12 +67,12 @@ Dashboard::Dashboard(std::string const keyPrefix_, QWidget *parent)
 
   setLayout(vboxLayout);
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &Dashboard::onChange);
 
-  iterDashboardWidgets(keyPrefix,
-    [this](std::string const &key, KValue const &, int idx) {
-    addWidget(key, idx);
+  iterDashboardWidgets(name,
+    [this](std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &) {
+      addWidget(key);
   });
 }
 
@@ -107,11 +93,16 @@ void Dashboard::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void Dashboard::addWidget(std::string const &key, int idx)
+void Dashboard::addWidget(std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
+  std::optional<uint32_t> idx { widgetIndexOfKey(*key) };
+  if (! idx) {
+    qCritical() << "Invalid key, not a widget:" << *key;
+    return;
+  }
+
   if (verbose)
-    qDebug() << "Dashboard: addWidget" << QString::fromStdString(key)
-             << "at index" << idx;
+    qDebug() << "Dashboard: addWidget" << *key << "at index" << *idx;
 
   DashboardWidgetForm *widgetForm(
     new DashboardWidgetForm(key, this, this));
@@ -120,19 +111,19 @@ void Dashboard::addWidget(std::string const &key, int idx)
   int splitterIdx { 0 };
   for (std::list<WidgetRef>::iterator it = widgets.begin();
        it != widgets.end(); it++, splitterIdx++) {
-    if (it->idx == idx) {
+    if (it->idx == *idx) {
       if (verbose)
-        qDebug() << "Dashboard: replacing widget" << idx;
+        qDebug() << "Dashboard: replacing widget" << *idx;
       it->widget->deleteLater(); // also removes from the splitter
       it->widget = widgetForm;
       goto added;
-    } else if (it->idx > idx) {
-      widgets.emplace(it, idx, widgetForm);
+    } else if (it->idx > *idx) {
+      widgets.emplace(it, *idx, widgetForm);
       goto added;
     }
   }
   // fallback: add it at the end
-  widgets.emplace_back(idx, widgetForm);
+  widgets.emplace_back(*idx, widgetForm);
 added:
   splitter->insertWidget(splitterIdx, widgetForm);
 
@@ -149,25 +140,26 @@ void Dashboard::resetArrows()
     it->widget->enableArrowsForPosition(i, numWidgets);
 }
 
-bool Dashboard::isMyKey(std::string const &key)
+bool Dashboard::isMyKey(dessser::gen::sync_key::t const &key)
 {
-  return startsWith(key, keyPrefix);
+  return isDashboardKey(key) && name == dashboardNameOfKey(key);
 }
 
-void Dashboard::addValue(std::string const &key, KValue const &)
+void Dashboard::addValue(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
-  if (! isMyKey(key)) return;
+  if (! isMyKey(*key)) return;
 
   if (verbose)
-    qDebug() << "Dashboard::addValue for key" << QString::fromStdString(key);
+    qDebug() << "Dashboard::addValue for key" << *key;
 
-  std::optional<int> idx(widgetIndexOfKey(key));
+  std::optional<uint32_t> idx { widgetIndexOfKey(*key) };
   if (! idx) return;
-  addWidget(key, *idx);
+  addWidget(key);
   resetArrows();
 }
 
-void Dashboard::delWidget(int idx)
+void Dashboard::delWidget(uint32_t idx)
 {
   for (std::list<WidgetRef>::iterator it = widgets.begin();
        it != widgets.end();
@@ -188,17 +180,17 @@ void Dashboard::delWidget(int idx)
   placeHolder->setVisible(widgets.empty());
 }
 
-void Dashboard::delValue(std::string const &key, KValue const &)
+void Dashboard::delValue(
+  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
-  if (! isMyKey(key)) return;
+  if (! isMyKey(*key)) return;
 
   if (verbose)
-    qDebug() << "Dashboard: removing widget" << QString::fromStdString(key);
+    qDebug() << "Dashboard: removing widget" << *key;
 
-  std::optional<int> idx(widgetIndexOfKey(key));
-  if (! idx.has_value()) {
-    qCritical() << "Dashboard::delValue: Cannot find index of widget"
-                << QString::fromStdString(key);
+  std::optional<uint32_t> idx { widgetIndexOfKey(*key) };
+  if (! idx) {
+    qCritical() << "Dashboard::delValue: Cannot find index of widget" << *key;
     return;
   }
 
@@ -231,16 +223,13 @@ void Dashboard::addCurrentFunction()
     return;
   }
 
-  std::shared_ptr<conf::DashWidgetChart> chart {
-    std::make_shared<conf::DashWidgetChart>(
-      function->siteName.toStdString(),
-      function->programName.toStdString(),
+  std::shared_ptr<dessser::gen::sync_value::t> chart {
+    newDashboardChart(
+      function->siteName,
+      function->programName,
       function->name.toStdString()) };
 
-  int const num { dashboardNextWidget(keyPrefix) };
-  std::string const key {
-    keyPrefix + "/widgets/" + std::to_string(num) };
+  std::shared_ptr<dessser::gen::sync_key::t> const key { dashboardNextWidget(name) };
 
-  askNew(key, std::dynamic_pointer_cast<conf::Value const>(chart),
-         DEFAULT_LOCK_TIMEOUT);
+  Menu::getClient()->sendNew(key, chart, DEFAULT_LOCK_TIMEOUT);
 }

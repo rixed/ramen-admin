@@ -1,17 +1,24 @@
 #include <QDebug>
-#include "confValue.h"
+
+#include "desssergen/raql_value.h"
+#include "desssergen/sync_key.h"
 #include "FunctionItem.h"
 #include "GraphModel.h"
-#include "RamenValue.h"
+#include "misc.h"
 
 #include "chart/TimeChartAutomatonCustomize.h"
+
+static std::shared_ptr<dessser::gen::sync_key::t const> targetConfigKey {
+  std::make_shared<dessser::gen::sync_key::t>(
+    std::in_place_index<dessser::gen::sync_key::TargetConfig>,
+    dessser::VOID) };
 
 TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
   std::string const &site_,
   std::string const &program_,
   std::string const &function_,
   QObject *parent)
-  : conf::Automaton("Customize function", NumStates, parent),
+  : Automaton("Customize function", NumStates, parent),
     site(site_),
     program(program_),
     function(function_)
@@ -22,19 +29,34 @@ TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
 
   customFunction = "custom_" + function;
 
-  std::string const destKeyPrefix("sources/" + customProgram);
+  sourceKey =
+    std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::Sources>,
+      customProgram, "ramen");
 
-  sourceKey = destKeyPrefix + "/ramen";
-  infoKey = destKeyPrefix + "/info";
+  infoKey =
+    std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::Sources>,
+      customProgram, "info");
+
   /* FIXME: do not wait for the worker but for the addition in the global
    * graphModel, so that the function editors can find it as well! */
-  workerKey = "sites/" + site + "/workers/"
-            + customProgram + "/"
-            + customFunction + "/worker";
+  workerKey =
+    std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::PerSite>,
+      std::make_shared<dessser::gen::sync_key::per_site>(
+        site,
+        std::make_shared<dessser::gen::sync_key::per_site_data>(
+          std::in_place_index<dessser::gen::sync_key::PerWorker>,
+          std::make_shared<dessser::gen::sync_key::per_worker>(
+            (customProgram + '/' + customFunction),
+            std::make_shared<dessser::gen::sync_key::per_worker_data>(
+              std::in_place_index<dessser::gen::sync_key::Worker>,
+              dessser::VOID)))));
 
   addTransition(WaitSource, WaitInfo, OnSet, sourceKey);
   addTransition(WaitInfo, WaitLockRC, OnSet, infoKey);
-  addTransition(WaitLockRC, WaitWorkerOrGraph, OnLock, "target_config");
+  addTransition(WaitLockRC, WaitWorkerOrGraph, OnLock, targetConfigKey);
   addTransition(WaitWorkerOrGraph, WaitGraph, OnSet, workerKey);
   addTransition(WaitWorkerOrGraph, WaitWorker);
   addTransition(WaitWorker, Done, OnSet, workerKey);
@@ -50,11 +72,11 @@ TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
 void TimeChartAutomatonCustomize::graphChanged(
   FunctionItem const *functionItem)
 {
-  std::shared_ptr<Function const> function(
-    std::static_pointer_cast<Function const>(functionItem->shared));
+  std::shared_ptr<Function const> function {
+    std::static_pointer_cast<Function const>(functionItem->shared) };
   if (function->name.toStdString() != customFunction ||
-      function->programName.toStdString() != customProgram ||
-      function->siteName.toStdString() != site)
+      function->programName != customProgram ||
+      function->siteName != site)
     return;
 
   if (currentState == WaitWorkerOrGraph)

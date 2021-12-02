@@ -8,12 +8,16 @@
 
 namespace dessser {
   namespace gen {
+    namespace dashboard_widget { struct type; }
+    namespace fq_function_name { struct t; }
     namespace raql_expr { struct t; }
     namespace raql_type {
       struct t;
       struct base;
     }
     namespace raql_value { struct t; }
+    namespace rc_entry { struct t; }
+    namespace source_info { struct compiled_program; }
     namespace sync_client_cmd { struct t; }
     namespace sync_client_msg { struct t; }
     namespace sync_server_msg { struct t; }
@@ -27,6 +31,8 @@ namespace dessser {
 // Some commonly used values:
 extern std::shared_ptr<dessser::gen::raql_value::t const> const vnull;
 extern std::shared_ptr<dessser::gen::sync_value::t const> const nullVal;
+extern std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig;
+extern std::shared_ptr<dessser::gen::dashboard_widget::type const> const chartPlotType;
 
 // All but vectors, lists, tuples, records, sum types
 bool isScalar(dessser::gen::raql_type::t const &);
@@ -36,20 +42,33 @@ bool isNumeric(dessser::gen::raql_type::t const &);
 
 bool isAWorker(dessser::gen::sync_key::t const &);
 
+std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
+  std::string const &site_name, std::string const &prog_name, std::string const &func_name);
+
 unsigned numColumns(dessser::gen::raql_type::t const &);
 
-std::string const columnName(dessser::gen::raql_type::t const &, size_t);
+std::string const columnName(dessser::gen::raql_type::t const &, unsigned);
 
 // Returns a pointer into the passed type (or nullptr):
 std::shared_ptr<dessser::gen::raql_type::t const> columnType(
-  dessser::gen::raql_type::t const &, size_t);
+  dessser::gen::raql_type::t const &, unsigned);
 
 // Returns a pointer into the passed value (or nullptr):
 std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
-  dessser::gen::raql_value::t const &, size_t);
+  dessser::gen::raql_value::t const &, unsigned);
 
 // Returns the float representation of that value
 std::optional<double> toDouble(dessser::gen::raql_value::t const &);
+
+// Returns the compiled function, or nullptr:
+std::shared_ptr<dessser::gen::source_info::compiled_program const> getCompiledProgram(
+  dessser::gen::sync_value::t const &);
+
+std::string const siteFqName(dessser::gen::fq_function_name::t const &);
+
+// Returns the TargetConfig value, or nullptr:
+dessser::Arr<std::shared_ptr<dessser::gen::rc_entry::t>> const *getTargetConfig(
+  dessser::gen::sync_value::t const &);
 
 /* Returns the string representation of that value (the optional key gives a hint about
  * the type of conversion desired) */

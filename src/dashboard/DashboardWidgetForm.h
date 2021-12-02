@@ -1,6 +1,7 @@
 #ifndef DASHBOARDWIDGETFORM_H_200323
 #define DASHBOARDWIDGETFORM_H_200323
 #include <string>
+
 #include "AtomicForm.h"
 
 class Dashboard;
@@ -10,9 +11,6 @@ class QAction;
 class QLabel;
 class QVBoxLayout;
 class QWidget;
-namespace conf {
-  class Value;
-};
 
 /* This is an AtomicForm that's composed of a single AtomicWidget,
  * since all widget values are madde of a single KValue. */
@@ -20,7 +18,7 @@ class DashboardWidgetForm : public AtomicForm
 {
   Q_OBJECT
 
-  std::string widgetKey;
+  std::shared_ptr<dessser::gen::sync_key::t const> widgetKey;
   DashboardWidget *widget;
 
   QVBoxLayout *layout;
@@ -31,13 +29,14 @@ class DashboardWidgetForm : public AtomicForm
   QAction *upAction, *downAction;
 
   void doCopy(bool);
-  void switchPosition(std::string const &, KValue const &);
+
+  void switchPosition(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   Dashboard *dashboard;
 
   DashboardWidgetForm(
-    std::string const &widgetKey,
+    std::shared_ptr<dessser::gen::sync_key::t const> widgetKey,
     Dashboard *,
     QWidget *parent = nullptr);
 

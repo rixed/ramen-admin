@@ -8,8 +8,10 @@
 #include <vector>
 #include <QDebug>
 #include <QString>
-#include "AbstractTimeLine.h"
-#include "confValue.h"
+
+#include "chart/AbstractTimeLine.h"
+#include "desssergen/dashboard_widget.h"
+#include "misc_dessser.h"
 
 /* A TimeChart diplay the actual plot.
  * It is configured from a TimeChartWidget that it provided in the constructor,
@@ -18,6 +20,12 @@
 class Function;
 class QPaintEvent;
 class TimeChartEditWidget;
+
+namespace dessser {
+  namespace gen {
+    namespace raql_value { struct t; }
+  }
+}
 
 class TimeChart : public AbstractTimeLine
 {
@@ -46,15 +54,17 @@ class TimeChart : public AbstractTimeLine
     double time;
     std::vector<std::optional<double>> values;
 
-    CategorizedTuple(double time_, std::vector<RamenValue const *> const tuple)
+    CategorizedTuple(
+      double time_,
+      std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> const tuple)
       : time(time_)
     {
       /* Convert the whole tuple into a vector of doubles.
        * Not very useful for the factors but that's probably faster than
        * trying to distinguish them. */
       values.reserve(tuple.size());
-      for (size_t i = 0; i < tuple.size(); i++) {
-        values.push_back(tuple[i]->toDouble());
+      for (std::shared_ptr<dessser::gen::raql_value::t const> tup : tuple) {
+        values.push_back(toDouble(*tup));
       }
     }
 
@@ -134,9 +144,9 @@ class TimeChart : public AbstractTimeLine
      * axis tick marks. */
     qreal min, max;
 
-    std::optional<conf::DashWidgetChart::Axis const> conf;
+    std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf;
 
-    Axis(std::optional<conf::DashWidgetChart::Axis const> conf_)
+    Axis(std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf_)
       : min(std::numeric_limits<qreal>::max()),
         max(std::numeric_limits<qreal>::min()),
         conf(conf_) {

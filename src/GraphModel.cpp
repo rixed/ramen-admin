@@ -273,21 +273,24 @@ public:
     switch (k.index()) {
       case dessser::gen::sync_key::PerSite:
         {
-          auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(k) };
-          site = QString::fromStdString(std::get<0>(per_site));
-          auto const &per_site_prop { std::get<1>(per_site) };
-          switch (per_site_prop.index()) {
+          std::shared_ptr<dessser::gen::sync_key::per_site const> per_site {
+            std::get<dessser::gen::sync_key::PerSite>(k) };
+          site = QString::fromStdString(std::get<0>(*per_site));
+          std::shared_ptr<dessser::gen::sync_key::per_site_data> per_site_data {
+            std::get<1>(*per_site) };
+          switch (per_site_data->index()) {
             case dessser::gen::sync_key::PerWorker:
               {
-                auto const &per_worker {
-                  std::get<dessser::gen::sync_key::PerWorker>(per_site_prop) };
-                std::string const &fq_name { std::get<0>(per_worker) };
+                std::shared_ptr<dessser::gen::sync_key::per_worker const> per_worker {
+                  std::get<dessser::gen::sync_key::PerWorker>(*per_site_data) };
+                std::string const &fq_name { std::get<0>(*per_worker) };
                 size_t const l { fq_name.rfind('/') };
                 if (l == std::string::npos || l == 0 || l >= fq_name.size() - 1) return;
                 program = QString::fromStdString(fq_name.substr(0, l));
                 function = QString::fromStdString(fq_name.substr(l + 1));
-                auto const &per_worker_prop { std::get<1>(per_worker) };
-                switch (per_worker_prop.index()) {
+                std::shared_ptr<dessser::gen::sync_key::per_worker_data const> per_worker_data {
+                  std::get<1>(*per_worker) };
+                switch (per_worker_data->index()) {
                   case dessser::gen::sync_key::Worker:
                     property = QString("worker");
                     valid = true;
@@ -315,7 +318,7 @@ public:
                   case dessser::gen::sync_key::PerInstance:
                     {
                       auto const &per_inst {
-                        std::get<dessser::gen::sync_key::PerInstance>(per_worker_prop) };
+                        std::get<dessser::gen::sync_key::PerInstance>(*per_worker_data) };
                       instanceSignature = QString::fromStdString(std::get<0>(per_inst));
                       auto const &per_inst_prop { std::get<1>(per_inst) };
                       valid = true;

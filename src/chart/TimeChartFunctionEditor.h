@@ -4,8 +4,8 @@
 #include <string>
 #include <QSize>
 #include <QWidget>
-#include "confValue.h"  // for the inner DashboardWidgetChart::Source
 
+class Automaton;
 class FactorsDelegate;
 class FixedTableView;
 struct KValue;
@@ -13,9 +13,13 @@ class QCheckBox;
 class QLineEdit;
 class QPushButton;
 class TimeChartFunctionFieldsModel;
-namespace conf {
-  class Automaton;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace dashboard_widget { struct source; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class TimeChartFunctionEditor : public QWidget
 {
@@ -44,12 +48,12 @@ protected slots:
   void wantSource();
   void wantCustomize();
   void automatonTransition(
-    conf::Automaton *, size_t, std::shared_ptr<conf::Value const>);
+    Automaton *, size_t, std::shared_ptr<dessser::gen::sync_value::t const>);
 
 public slots:
   void setEnabled(bool);
-  bool setValue(conf::DashWidgetChart::Source const &);
-  conf::DashWidgetChart::Source getValue() const;
+  bool setValue(dessser::gen::dashboard_widget::source const &);
+  std::shared_ptr<dessser::gen::dashboard_widget::source> getValue() const;
 
 signals:
   void fieldChanged(std::string const &site, std::string const &program,

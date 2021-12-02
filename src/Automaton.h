@@ -15,14 +15,17 @@
 #include <string>
 #include <vector>
 #include <QObject>
-#include "conf.h"
 
+struct ConfChange;
 struct KValue;
 class KVStore;
 
-namespace conf {
-
-class Value;
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class Automaton : public QObject {
   Q_OBJECT
@@ -43,8 +46,9 @@ public:
 
   void addTransition(
     size_t fromState, size_t toState,
-    unsigned ops = 0, std::string const &key = std::string(),
-    bool isPrefix_ = false, double timeout = 0);
+    unsigned ops = 0,
+    std::shared_ptr<dessser::gen::sync_key::t const> = nullptr,
+    double timeout = 0.);
 
   /* To be called once all transitions have been added to start the process. */
   void start();
@@ -55,14 +59,14 @@ public:
 
 signals:
   // val is null for forced transitions:
-  void transitionTo(Automaton *, size_t, std::shared_ptr<conf::Value const> val);
+  void transitionTo(
+    Automaton *, size_t state, std::shared_ptr<dessser::gen::sync_value::t const>);
 
 private:
   struct Transition {
     size_t toState;
     unsigned keyOperations;
-    std::string const key;
-    bool isPrefix;
+    std::shared_ptr<dessser::gen::sync_key::t const> key;
     double timeoutDate;
   };
 
@@ -70,7 +74,9 @@ private:
     std::vector<Transition> transitions;
   };
 
-  void tryTransition(std::string const &, KValue const &, KeyOperation);
+  void tryTransition(
+    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &, KeyOperation);
+
   void tryDirectTransition();
 
 protected:
@@ -80,8 +86,6 @@ protected:
 
 private slots:
   void onChange(QList<ConfChange> const &);
-};
-
 };
 
 #endif

@@ -5,14 +5,18 @@
  * variable (such as key names) from the slots. */
 #include <memory>
 #include <string>
-#include "confAutomaton.h"
+
+#include "Automaton.h"
 
 class FunctionItem;
-namespace conf {
-  struct RamenValueValue;
-};
+namespace dessser {
+  namespace gen {
+    namespace raql_value { struct t; }
+    namespace sync_key { struct t; }
+  }
+}
 
-class TimeChartAutomatonCustomize : public conf::Automaton {
+class TimeChartAutomatonCustomize : public Automaton {
   Q_OBJECT
 
 public:
@@ -43,9 +47,9 @@ public:
 
   std::string customProgram;
   std::string customFunction;
-  std::string sourceKey;
-  std::string infoKey;
-  std::string workerKey;
+  std::shared_ptr<dessser::gen::sync_key::t> sourceKey;
+  std::shared_ptr<dessser::gen::sync_key::t> infoKey;
+  std::shared_ptr<dessser::gen::sync_key::t> workerKey;
 
   TimeChartAutomatonCustomize(
     std::string const &site,

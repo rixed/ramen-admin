@@ -11,9 +11,7 @@ struct KValue;
 class LoggerWin;
 class LoginWin;
 class NamesTreeWin;
-#ifdef WITH_DASHBOARDS
 class NewDashboardDialog;
-#endif
 #ifdef WITH_PROGRAMS
 class NewProgramDialog;
 #endif
@@ -62,9 +60,7 @@ class Menu : public QObject
   void showSomething();
 
   // Add a dashboard in the dashboard menu:
-# ifdef WITH_DASHBOARDS
-  void addDashboard(QString const &, std::string const &key_prefix);
-# endif
+  void addDashboard(std::string const &);
   void addValue(dessser::gen::sync_key::t const &, KValue const &);
   void delValue(dessser::gen::sync_key::t const &, KValue const &);
 
@@ -83,9 +79,7 @@ public:
 # ifdef WITH_PROGRAMS
   static NewProgramDialog *newProgramDialog;
 # endif
-# ifdef WITH_DASHBOARDS
   static NewDashboardDialog *newDashboardDialog;
-# endif
   static ProcessesDialog *processesDialog;
   static RCEditorDialog *rcEditorDialog;
   static NamesTreeWin *namesTreeWin;
@@ -105,6 +99,7 @@ public:
   static void initDialogs(QString const &srvUrl);
   static void initLoginWin(QString const &configDir);
   static void deleteDialogs();
+  static QString const nameOfDashboard(std::string const &dash_name);
 
   Menu(bool fullMenu, QMainWindow *);
 
@@ -116,9 +111,7 @@ public slots:
 # ifdef WITH_PROGRAMS
   static void openNewProgramDialog();
 # endif
-# ifdef WITH_DASHBOARDS
   static void openNewDashboardDialog();
-# endif
 # ifdef WITH_SOURCES
   static void openSourceEditor();
 # endif
@@ -140,9 +133,7 @@ public slots:
   static void openLoginWin();
   static void openLoggerWin();
   static void prepareQuit();
-# ifdef WITH_DASHBOARDS
-  static void openDashboard(QString const &, std::string const &);
-# endif
+  static void openDashboard(std::string const &);
   static ConfClient *getClient();
 
 protected slots:

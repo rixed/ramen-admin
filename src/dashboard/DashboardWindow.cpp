@@ -1,22 +1,21 @@
 #include <QDebug>
+
 #include "dashboard/Dashboard.h"
+#include "Menu.h"
 
 #include "dashboard/DashboardWindow.h"
 
 static bool const verbose { false };
 
-DashboardWindow::DashboardWindow(
-  QString const &name,
-  std::string const &key_prefix,
-  QWidget *parent)
+DashboardWindow::DashboardWindow(std::string const &dash_name, QWidget *parent)
   : SavedWindow(
-      QString("dashboardWindow/") + name,
-      QString("Dashboard: ") + name,
+      QString("dashboardWindow/") + Menu::nameOfDashboard(dash_name),
+      QString("Dashboard: ") + Menu::nameOfDashboard(dash_name),
       true,
       parent,
       true)
 {
-  dashboard = new Dashboard(key_prefix, this);
+  dashboard = new Dashboard(dash_name, this);
   setCentralWidget(dashboard);
 
   resize(700, 700);

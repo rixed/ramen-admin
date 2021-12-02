@@ -1,5 +1,6 @@
 #ifndef CONFSUBTREE_H_200320
 #define CONFSUBTREE_H_200320
+/* See ConfTreeModel.h */
 #include <vector>
 #include <QString>
 

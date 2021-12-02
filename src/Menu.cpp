@@ -10,11 +10,9 @@
 #include "AboutDialog.h"
 #include "ConfClient.h"
 #include "ConfTreeDialog.h"
-#ifdef WITH_DASHBOARDS
-# include "dashboard/DashboardWindow.h"
-# include "dashboard/NewDashboardDialog.h"
-# include "dashboard/tools.h"
-#endif
+#include "dashboard/DashboardWindow.h"
+#include "dashboard/NewDashboardDialog.h"
+#include "dashboard/tools.h"
 #include "LoggerView.h"
 #include "LoggerWin.h"
 #include "LoginWin.h"
@@ -58,9 +56,7 @@ NewSourceDialog *Menu::newSourceDialog;
 #ifdef WITH_PROGRAMS
 NewProgramDialog *Menu::newProgramDialog;
 # endif
-#ifdef WITH_DASHBOARDS
 NewDashboardDialog *Menu::newDashboardDialog;
-#endif
 ProcessesDialog *Menu::processesDialog;
 RCEditorDialog *Menu::rcEditorDialog;
 NamesTreeWin *Menu::namesTreeWin;
@@ -99,10 +95,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create NewProgramDialog...";
   if (! newProgramDialog) newProgramDialog = new NewProgramDialog;
 # endif
-# ifdef WITH_DASHBOARDS
   if (verbose) qDebug() << "Create NewDashboardDialog...";
   if (! newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
-# endif
   if (verbose) qDebug() << "Create ProcessesDialog...";
   if (! processesDialog) processesDialog = new ProcessesDialog;
   if (verbose) qDebug() << "Create RCEditorDialog...";
@@ -160,9 +154,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_PROGRAMS
   danceOfDelLater<NewProgramDialog>(&newProgramDialog);
 # endif
-# ifdef WITH_DASHBOARDS
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
-# endif
   danceOfDelLater<ProcessesDialog>(&processesDialog);
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
@@ -293,7 +285,6 @@ void Menu::populateMenu(bool basic, bool extended)
   }
 
   if (extended) {
-# ifdef WITH_DASHBOARDS
     dashboardMenu = menuBar->addMenu(
       QCoreApplication::translate("QMenuBar", "&Dashboard"));
 
@@ -307,7 +298,6 @@ void Menu::populateMenu(bool basic, bool extended)
       Qt::CTRL|Qt::Key_D);
 
     dashboardMenu->addSeparator();
-# endif
 
     /* Dynamically add new dashboards.
      * FIXME: do not connect those for every Menu we have! Instead, use the
@@ -316,13 +306,8 @@ void Menu::populateMenu(bool basic, bool extended)
     connect(kvs.get(), &KVStore::keyChanged,
             this, &Menu::onChange);
 
-# ifdef WITH_DASHBOARDS
     /* Also populate from what we already have: */
-    iterDashboards([this](std::string const &, KValue const &,
-                          QString const &name, std::string const &key_prefix) {
-      addDashboard(name, key_prefix);
-    });
-# endif
+    iterDashboards([this](std::string const &dash_name) { addDashboard(dash_name); });
   }
 
   if (extended && WITH_BETA_FEATURES) {
@@ -378,13 +363,11 @@ void Menu::openNewProgramDialog()
 }
 #endif
 
-#ifdef WITH_DASHBOARDS
 void Menu::openNewDashboardDialog()
 {
   newDashboardDialog->clear();
   showRaised(newDashboardDialog);
 }
-#endif
 
 #ifdef WITH_SOURCES
 void Menu::openSourceEditor()
@@ -469,15 +452,22 @@ void Menu::prepareQuit()
   qApp->closeAllWindows();
 }
 
-# ifdef WITH_DASHBOARDS
-void Menu::addDashboard(QString const &name, std::string const &key_prefix)
+QString const Menu::nameOfDashboard(std::string const &dash_name)
+{
+  return
+    dash_name.empty() ? QString("--scratchpad--")
+                      : QString::fromStdString(dash_name);
+}
+
+void Menu::addDashboard(std::string const &dash_name)
 {
   // Locate where to insert this new menu entry:
+  QString const menu_name { nameOfDashboard(dash_name) };
   QList<QAction *> const actions = dashboardMenu->actions();
   QAction *before = nullptr;
   for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); i++) {
     QString const entryName(removeAmp(actions[i]->text()));
-    int const c = entryName.compare(name);
+    int const c = entryName.compare(menu_name);
     if (c < 0) continue;
     if (c == 0) return;
     before = actions[i];
@@ -485,50 +475,39 @@ void Menu::addDashboard(QString const &name, std::string const &key_prefix)
   }
 
   if (verbose)
-    qDebug() << "Menu: Adding dashboard" << name;
+    qDebug() << "Menu: Adding dashboard" << menu_name;
 
-  QAction *openDashboardAction(new QAction(name, this));
+  QAction *openDashboardAction(new QAction(menu_name, this));
   connect(openDashboardAction, &QAction::triggered,
     /* Note to self: those captured copies are actual copies of the underlying
      * data not of the reference */
     /* Note: we do not specify a receiver here on purpose, as openDashboard is
      * a static member. */
-    [name, key_prefix] (bool) {
-      openDashboard(name, key_prefix);
-  });
+    [dash_name] (bool) { openDashboard(dash_name); });
   dashboardMenu->insertAction(before, openDashboardAction);
 }
-# endif
 
 void Menu::addValue(dessser::gen::sync_key::t const &key, KValue const &)
 {
-# ifdef WITH_DASHBOARDS
-  std::pair<QString const, std::string> name_prefix =
-    dashboardNameAndPrefOfKey(key);
-  if (!name_prefix.first.isEmpty())
-      addDashboard(name_prefix.first, name_prefix.second);
+  std::string const dash_name { dashboardNameOfKey(key) };
+  addDashboard(dash_name);
   // Other dynamic menus can be completed here
-# else
-  (void)key;
-# endif
 }
 
 void Menu::delValue(dessser::gen::sync_key::t const &key, KValue const &)
 {
-# ifdef WITH_DASHBOARDS
-  std::pair<QString const, std::string> name_prefix =
-    dashboardNameAndPrefOfKey(key);
-  QString const &name(name_prefix.first);
-  std::string const &prefix(name_prefix.second);
+  std::string const &dash_name { dashboardNameOfKey(key) };
 
-  if (name.isEmpty()) return;
+  if (isScratchpad(dash_name)) return;
 
-  if (dashboardNumWidgets(prefix) > 0) {
+  if (dashboardNumWidgets(dash_name) > 0) {
     if (verbose)
-      qDebug() << "Menu: Dashboard" << name << "still has widgets";
+      qDebug()
+        << "Menu: Dashboard" << QString::fromStdString(dash_name) << "still has widgets";
     return;
   }
 
+  QString const name { nameOfDashboard(dash_name) };
   QList<QAction *> const actions = dashboardMenu->actions();
   for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); ) {
     int const c = actions[i]->text().compare(name);
@@ -538,14 +517,10 @@ void Menu::delValue(dessser::gen::sync_key::t const &key, KValue const &)
     } else if (c == 0) {
       if (verbose)
         qDebug() << "Menu: Removing dashboard" << name;
-
       dashboardMenu->removeAction(actions[i]);
       break;
     } else i++;
   }
-# else
-  (void)key;
-# endif
 }
 
 void Menu::onChange(QList<ConfChange> const &changes)
@@ -565,31 +540,32 @@ void Menu::onChange(QList<ConfChange> const &changes)
   }
 }
 
-#ifdef WITH_DASHBOARDS
-void Menu::openDashboard(QString const &name, std::string const &key_prefix)
+void Menu::openDashboard(std::string const &dash_name)
 {
   /* Open dashboards only once: */
   static std::mutex lock;
-  static std::map<QString, DashboardWindow *> windows;
+  static std::map<std::string, DashboardWindow *> windows;
 
   lock.lock();
 
-  auto const it = windows.find(name);
+  auto const it { windows.find(dash_name) };
   if (it != windows.end()) {
     if (verbose)
-      qDebug() << "Reopen dashboard window" << name << it->second;
+      qDebug()
+        << "Reopen dashboard window" << QString::fromStdString(dash_name) << it->second;
     showRaised(it->second);
   } else {
-    DashboardWindow *w = new DashboardWindow(name, key_prefix);
+    DashboardWindow *w { new DashboardWindow(dash_name) };
     if (verbose)
-      qDebug() << "No dashboard window for" << name << ", creating it as" << w;
-    windows.insert({ name, w });
+      qDebug()
+        << "No dashboard window for" << QString::fromStdString(dash_name)
+        << ", creating it as" << w;
+    windows.insert({ dash_name, w });
     showRaised(w);
   }
 
   lock.unlock();
 }
-# endif
 
 ConfClient *Menu::getClient()
 {

@@ -22,6 +22,7 @@
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "Menu.h"
+#include "misc_dessser.h"
 #include "ProcessesWidgetProxy.h"
 #include "ProgramItem.h"
 #include "Resources.h"
@@ -32,7 +33,7 @@
 
 #include "ProcessesWidget.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 /*
  * Now for the actual Processes list widget:
@@ -193,7 +194,7 @@ void ProcessesWidget::askAdjustColumnSize(
     needResizing.set(c);
   }
 
-  static int const adjustColumnTimeout = 1000; // ms
+  static int const adjustColumnTimeout { 1000 }; // ms
   adjustColumnTimer->start(adjustColumnTimeout);
 }
 
@@ -242,17 +243,17 @@ static SavedWindow const *mySavedWindow(QWidget const *widget)
 {
   if (! widget) return nullptr;
 
-  SavedWindow const *win = dynamic_cast<SavedWindow const *>(widget);
+  SavedWindow const *win { dynamic_cast<SavedWindow const *>(widget) };
   if (win) return win;
 
-  QWidget const *parent = widget->parentWidget();
+  QWidget const *parent { widget->parentWidget() };
   if (! parent) return nullptr;
   return mySavedWindow(parent);
 }
 
 void ProcessesWidget::wantEdit(std::shared_ptr<Program const> program)
 {
-  SavedWindow const *win = mySavedWindow(this);
+  SavedWindow const *win { mySavedWindow(this) };
   if (! win) {
     if (verbose)
       qCritical() << "Cannot find the main window!?";
@@ -285,91 +286,42 @@ void ProcessesWidget::wantChart(std::shared_ptr<Function> function)
    * Note: C++ need to be baby-fed because parser is getting very confused by
    * inline braces it seems.
    * Note to self: never use a UI library that depends on C++ ever again */
-
-  std::shared_ptr<dessser::gen::dashboard_widget::axis> axis {
-    std::make_shared<dessser::gen::dashboard_widget::axis>(
-      false, true,
-      std::make_shared<dessser::gen::dashboard_widget::scale>(
-        std::in_place_index<dessser::gen::dashboard_widget::Linear>,
-        dessser::VOID)) };
-
-  dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis>> axes {
-    axis };
-
-  dessser::Arr<dessser::gen::dashboard_widget::t4014451f4abcdfd5489869fefe1eca82> fields {};
-
-  std::shared_ptr<dessser::gen::dashboard_widget::source> source {
-    std::make_shared<dessser::gen::dashboard_widget::source>(
-      fields,
-      std::make_shared<dessser::gen::fq_function_name::t>(
-        function->name.toStdString(), function->programName, function->siteName),
-      true) };
-
-  dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source>> sources {
-    source };
-
-  std::shared_ptr<dessser::gen::dashboard_widget::type> type {
-    std::make_shared<dessser::gen::dashboard_widget::type>(
-      std::in_place_index<dessser::gen::dashboard_widget::Plot>, dessser::VOID) };
-
   std::shared_ptr<dessser::gen::sync_value::t> chart {
-    std::make_shared<dessser::gen::sync_value::t>(
-      std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
-      std::make_shared<dessser::gen::dashboard_widget::t>(
-        std::in_place_index<dessser::gen::dashboard_widget::Chart>,
-        std::make_shared<dessser::gen::dashboard_widget::chart>(
-          // Single axis: left=true, forceZero=false, scale=Linear
-          axes,
-          // Single source: visible: true
-          sources,
-          // Title
-          function->siteName + ':' + function->fqName,
-          // Type: plot
-          type))) };
+    newDashboardChart(function->siteName,
+                      function->programName,
+                      function->name.toStdString()) };
 
   /* The only way to display a chart is from a dashboard (where its definition
    * is stored). So this button merely adds a new chart to the scratchpad
    * dashboard and opens it: */
-  uint32_t const idx { dashboardNextWidget(SCRATCHPAD) };
-
   std::shared_ptr<dessser::gen::sync_key::t> widget_key {
-    std::make_shared<dessser::gen::sync_key::t>(
-      std::in_place_index<dessser::gen::sync_key::PerClient>,
-      std::make_tuple(
-        std::const_pointer_cast<dessser::gen::sync_socket::t>(Menu::getClient()->syncSocket),
-        std::make_shared<dessser::gen::sync_key::per_client>(
-          std::in_place_index<dessser::gen::sync_key::Scratchpad>,
-          std::make_shared<dessser::gen::sync_key::per_dash_key>(
-            std::in_place_index<dessser::gen::sync_key::Widgets>,
-            idx)))) };
+    dashboardNextWidget(SCRATCHPAD) };
 
   /* No need to lock in theory, as the scratchpad is per socket, but
    * lock ownership is how we know to activate the editor: */
   Menu::getClient()->sendNew(widget_key, chart, DEFAULT_LOCK_TIMEOUT);
 
-#ifdef WITH_DASHBOARDS
   /* And opens it */
-  Menu::openDashboard(QString("scratchpad"), dash_key);
-#endif
+  Menu::openDashboard(SCRATCHPAD);
 }
 
 void ProcessesWidget::activate(QModelIndex const &proxyIndex, int button)
 {
   // Retrieve the function or program:
-  QModelIndex const index = proxyModel->mapToSource(proxyIndex);
-  GraphItem *parentPtr =
-    static_cast<GraphItem *>(index.internalPointer());
+  QModelIndex const index { proxyModel->mapToSource(proxyIndex) };
+  GraphItem *parentPtr {
+    static_cast<GraphItem *>(index.internalPointer()) };
 
-  ProgramItem const *programItem =
-    dynamic_cast<ProgramItem const *>(parentPtr);
+  ProgramItem const *programItem {
+    dynamic_cast<ProgramItem const *>(parentPtr) };
 
   if (programItem && button == 2) {
     wantEdit(std::static_pointer_cast<Program>(programItem->shared));
     return;
   }
 
-  FunctionItem *functionItem =
-    dynamic_cast<FunctionItem *>(parentPtr);
+  FunctionItem *functionItem {
+    dynamic_cast<FunctionItem *>(parentPtr) };
 
   if (functionItem) {
     if (button == 1)
@@ -404,9 +356,9 @@ void ProcessesWidget::expandRows(QModelIndex const &parent, int first, int last)
   treeView->setExpanded(parent, true);
 
   for (int r = first; r <= last; r ++) {
-    QModelIndex const index = parent.model()->index(r, 0, parent);
+    QModelIndex const index { parent.model()->index(r, 0, parent) };
     // recursively:
-    int const numChildren = index.model()->rowCount(index);
+    int const numChildren { index.model()->rowCount(index) };
     expandRows(index, 0, numChildren - 1);
   }
 }

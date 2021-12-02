@@ -77,14 +77,18 @@ std::pair<std::string, std::string> NamesTree::pathOfIndex(
 void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   if (key.index() != dessser::gen::sync_key::PerSite) return;
-  auto const &per_site { std::get<dessser::gen::sync_key::PerSite>(key) };
-  std::string const &site_name { std::get<0>(per_site) };
-  auto const &key_ { std::get<1>(per_site) };
-  if (key_.index() != dessser::gen::sync_key::PerWorker) return;
-  auto const &per_worker { std::get<dessser::gen::sync_key::PerWorker>(key_) };
-  std::string const &fq_name { std::get<0>(per_worker) };
-  auto const &key__ { std::get<1>(per_worker) };
-  if (key__.index() != dessser::gen::sync_key::Worker) return;
+  std::shared_ptr<dessser::gen::sync_key::per_site const> per_site {
+    std::get<dessser::gen::sync_key::PerSite>(key) };
+  std::string const &site_name { std::get<0>(*per_site) };
+  std::shared_ptr<dessser::gen::sync_key::per_site_data const> per_site_data {
+    std::get<1>(*per_site) };
+  if (per_site_data->index() != dessser::gen::sync_key::PerWorker) return;
+  std::shared_ptr<dessser::gen::sync_key::per_worker const> per_worker {
+    std::get<dessser::gen::sync_key::PerWorker>(*per_site_data) };
+  std::string const &fq_name { std::get<0>(*per_worker) };
+  std::shared_ptr<dessser::gen::sync_key::per_worker_data const> per_worker_data {
+    std::get<1>(*per_worker) };
+  if (per_worker_data->index() != dessser::gen::sync_key::Worker) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Worker) [[unlikely]] {
     qCritical() << "Not a worker!?";

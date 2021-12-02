@@ -10,77 +10,89 @@
 
 #include "dashboard/tools.h"
 
-#ifdef WITH_DASHBOARDS
-// FIXME: returns the name of the dashboard and a function to return the widget key
-std::pair<QString const, uint32_t const> dashboardNameAndPrefOfKey(
-  dessser::gen::sync_key::t const &key)
+bool isDashboardKey(dessser::gen::sync_key::t const &key)
 {
-  assert(client && client->syncSocket);
-
   if (key.index() == dessser::gen::sync_key::Dashboards) {
-    auto const &dashboards {
-      std::get<dessser::gen::sync_key::Dashboards>(key) };
-    Q_ASSERT(dashboards.index() == dessser::gen::sync_key::Widgets);
-    auto const &widgets {
-      std::get<dessser::gen::sync_key::Widgets>(dashboards) };
-    return std::make_pair(QString::fromStdString(std::get<0>(dashboards)),
-                          std::get<0>(widgets));
+    return true;
   } else if (key.index() == dessser::gen::sync_key::PerClient) {
     auto const &per_client {
       std::get<dessser::gen::sync_key::PerClient>(key) };
-    if (*client->syncSocket == *std::get<0>(per_client) &&
-        std::get<1>(per_client).index() == dessser::gen::sync_key::Scratchpad) {
-      return std::make_pair(QString("scratchpad"),
-                            client_scratchpad);
+    if (*Menu::getClient()->syncSocket == *std::get<0>(per_client) &&
+        std::get<1>(per_client)->index() == dessser::gen::sync_key::Scratchpad)
+      return true;
   }
-err:
-  return std::make_pair(QString(), std::string());
+
+  return false;
 }
 
-QString const dashboardNameOfKey(dessser::gen::sync_key::t const &key)
+std::string const dashboardNameOfKey(dessser::gen::sync_key::t const &key)
 {
-  return dashboardNameAndPrefOfKey(key).first;
+  if (key.index() == dessser::gen::sync_key::Dashboards) {
+    auto const &dashboards {
+      std::get<dessser::gen::sync_key::Dashboards>(key) };
+    return std::get<0>(dashboards);
+  } else if (key.index() == dessser::gen::sync_key::PerClient) {
+    auto const &per_client {
+      std::get<dessser::gen::sync_key::PerClient>(key) };
+    if (*Menu::getClient()->syncSocket == *std::get<0>(per_client) &&
+        std::get<1>(per_client)->index() == dessser::gen::sync_key::Scratchpad)
+      return "";
+  }
+
+  Q_ASSERT(false);
 }
 
-std::string const dashboardPrefixOfKey(dessser::gen::sync_key::t const &key)
+void iterDashboards(std::function<void(std::string const &)> f)
 {
-  return dashboardNameAndPrefOfKey(key).second;
-}
+  // Remember dashboard already visited to call [f] only once per dashboard:
+  std::unordered_set<std::string> visited;
 
-void iterDashboards(
-  std::function<void(std::string const &, KValue const &,
-                     QString const &, std::string const &)> f)
-{
   kvs->lock.lock_shared();
-  std::map<std::string const, KValue>::const_iterator const end =
-    kvs->map.upper_bound("e");
-  for (std::map<std::string const, KValue>::const_iterator it =
-         kvs->map.lower_bound("dashboards/");
-       it != end ; it++)
-  {
-    dessser::gen::sync_key::t const &key = it->first;
-    KValue const &value = it->second;
-    std::pair<QString const, std::string const> name_pref =
-      dashboardNameAndPrefOfKey(key);
-    if (! name_pref.first.isEmpty())
-      f(key, value, name_pref.first, name_pref.second);
+  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
+    std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
+    std::shared_ptr<dessser::gen::sync_key::t const> to_visit;
+
+    switch (key->index()) {
+      case dessser::gen::sync_key::PerClient:
+        {
+          auto const &per_client { std::get<dessser::gen::sync_key::PerClient>(*key) };
+          std::shared_ptr<dessser::gen::sync_socket::t const> sock {
+            std::get<0>(per_client) };
+          if (*sock != *Menu::getClient()->syncSocket) break;
+          std::shared_ptr<dessser::gen::sync_key::per_client const> per_client_data {
+            std::get<1>(per_client) };
+          if (per_client_data->index() != dessser::gen::sync_key::Scratchpad) break;
+          to_visit = key;
+        }
+        break;
+      case dessser::gen::sync_key::Dashboards:
+        to_visit = key;
+        break;
+      default:
+        break;
+    }
+
+    if (to_visit) {
+      std::string const dash_name { dashboardNameOfKey(*to_visit) };
+      if (visited.find(dash_name) == visited.end()) {
+        visited.insert(dash_name);
+        f(dash_name);
+      }
+    }
   }
-  // TODO: Also the users/.../scratchpad keys!
+
   kvs->lock.unlock_shared();
 }
 
-int dashboardNumWidgets(std::string const &key_prefix)
+int dashboardNumWidgets(std::string const &dash_name)
 {
-  int num(0);
+  int num { 0 };
 
-  iterDashboardWidgets(key_prefix,
-    [&num](std::string const &, KValue const &, int) {
-      num++;
-  });
+  iterDashboardWidgets(dash_name,
+    [&num](std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &) { num++; });
 
   return num;
 }
-#endif
 
 std::optional<uint32_t> widgetIndexOfKey(dessser::gen::sync_key::t const &key)
 {
@@ -144,7 +156,7 @@ void iterDashboardWidgets(
   kvs->lock.unlock_shared();
 }
 
-uint32_t dashboardNextWidget(std::string const &dash_name)
+std::shared_ptr<dessser::gen::sync_key::t> dashboardNextWidget(std::string const &dash_name)
 {
   std::optional<uint32_t> num;
 
@@ -155,5 +167,25 @@ uint32_t dashboardNextWidget(std::string const &dash_name)
       num = num ? std::max(*num, *n) : *n;
   });
 
-  return num ? *num + 1 : 0;
+  uint32_t const idx { num ? *num + 1 : 0 };
+
+  std::shared_ptr<dessser::gen::sync_key::per_dash_key> per_dash_key {
+    std::make_shared<dessser::gen::sync_key::per_dash_key>(
+      std::in_place_index<dessser::gen::sync_key::Widgets>, idx) };
+
+  if (isScratchpad(dash_name)) {
+    return
+      std::make_shared<dessser::gen::sync_key::t>(
+        std::in_place_index<dessser::gen::sync_key::PerClient>,
+        std::const_pointer_cast<dessser::gen::sync_socket::t>(Menu::getClient()->syncSocket),
+        std::make_shared<dessser::gen::sync_key::per_client>(
+          std::in_place_index<dessser::gen::sync_key::Scratchpad>,
+          per_dash_key));
+  } else {
+    return
+      std::make_shared<dessser::gen::sync_key::t>(
+        std::in_place_index<dessser::gen::sync_key::Dashboards>,
+        dash_name,
+        per_dash_key);
+  }
 }

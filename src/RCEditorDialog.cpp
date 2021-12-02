@@ -4,6 +4,7 @@
 #include <QStackedLayout>
 
 #include "AtomicForm.h"
+#include "misc_dessser.h"
 #include "TargetConfigEditor.h"
 #include "Resources.h"
 #include "RCEntryEditor.h"
@@ -32,12 +33,7 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
           this, &RCEditorDialog::wantDeleteEntry);
 
   targetConfigEditor = new TargetConfigEditor;
-  static dessser::gen::sync_key::t const targetConfig {
-    std::in_place_index<dessser::gen::sync_key::TargetConfig>,
-    dessser::VOID };
-  targetConfigEditor->setKey(
-    std::shared_ptr<dessser::gen::sync_key::t const>(
-      &targetConfig, /* No del */[](dessser::gen::sync_key::t const *){}));
+  targetConfigEditor->setKey(targetConfig);
   form->setCentralWidget(targetConfigEditor);
   form->addWidget(targetConfigEditor);
 
