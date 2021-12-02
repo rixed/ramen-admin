@@ -97,37 +97,29 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key, KValue const &kv)
     return;
   }
 
-  // TODO: deserialize those tuples that are still encoded as RawBinary!
-# if 0
-  std::shared_ptr<dessser::gen::sync_value::conf::Tuples const> batch =
-    std::dynamic_pointer_cast<conf::Tuples const>(kv.val);
+  dessser::Arr<std::shared_ptr<dessser::gen::sync_value::tuple>> const &batch {
+    std::get<dessser::gen::sync_value::Tuples>(*kv.val) };
 
-  size_t const numTuples(batch->tuples.size());
+  size_t const numTuples { batch.size() };
   if (0 == numTuples) return;
 
   beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + numTuples - 1);
 
-  for (conf::Tuples::Tuple const &tuple : batch->tuples) {
-    std::shared_ptr<dessser::gen::raql_value::t const> val(tuple.unserialize(type));
-    if (! val) {
-      qCritical() << "Cannot unserialize tuple from batch";
-      continue;
-    }
-
+  for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple : batch) {
     /* If a function has no event time info, all tuples will have time 0.
      * Past data is disabled in that case anyway. */
     double start(eventTime ?
-      eventTime->startOfTuple(*val).value_or(0.) : 0.);
+      eventTime->startOfTuple(*tuple->values).value_or(0.) : 0.);
 
     minEventTime_ =
       std::isnan(minEventTime_) ? start : std::min(minEventTime_, start);
     maxEventTime_ =
       std::isnan(maxEventTime_) ? start : std::max(maxEventTime_, start);
+
     order.insert(std::make_pair(start, tuples.size()));
-    tuples.emplace_back(start, val);
+    tuples.emplace_back(start, tuple->values);
   }
   endInsertRows();
-# endif
 }
 
 int TailModel::rowCount(QModelIndex const &parent) const

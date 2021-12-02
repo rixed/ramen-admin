@@ -44,6 +44,7 @@ bool EventTime::isValid() const
 
 std::optional<double> EventTime::startOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
+  if (startColumn < 0) return std::nullopt;
   std::shared_ptr<dessser::gen::raql_value::t const> startVal {
     columnValue(tuple, startColumn) };
   if (! startVal) return std::nullopt;
@@ -52,6 +53,7 @@ std::optional<double> EventTime::startOfTuple(dessser::gen::raql_value::t const 
 
 std::optional<double> EventTime::stopOfTuple(dessser::gen::raql_value::t const &tuple) const
 {
+  if (stopColumn < 0) return std::nullopt;
   std::shared_ptr<dessser::gen::raql_value::t const> stopVal {
     columnValue(tuple, stopColumn) };
   if (! stopVal) return std::nullopt;
