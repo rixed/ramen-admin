@@ -489,38 +489,43 @@ void Menu::addDashboard(std::string const &dash_name)
 
 void Menu::addValue(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  std::string const dash_name { dashboardNameOfKey(key) };
-  addDashboard(dash_name);
+  if (isDashboardKey(key)) {
+    std::string const dash_name { dashboardNameOfKey(key) };
+    addDashboard(dash_name);
+  }
   // Other dynamic menus can be completed here
 }
 
 void Menu::delValue(dessser::gen::sync_key::t const &key, KValue const &)
 {
-  std::string const &dash_name { dashboardNameOfKey(key) };
+  if (isDashboardKey(key)) {
+    std::string const &dash_name { dashboardNameOfKey(key) };
 
-  if (isScratchpad(dash_name)) return;
+    if (isScratchpad(dash_name)) return;
 
-  if (dashboardNumWidgets(dash_name) > 0) {
-    if (verbose)
-      qDebug()
-        << "Menu: Dashboard" << QString::fromStdString(dash_name) << "still has widgets";
-    return;
-  }
-
-  QString const name { nameOfDashboard(dash_name) };
-  QList<QAction *> const actions = dashboardMenu->actions();
-  for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); ) {
-    int const c = actions[i]->text().compare(name);
-    if (c > 0) {
-      qWarning() << "Menu: Deleted dashboard" << name << "not found!?";
-      break;
-    } else if (c == 0) {
+    if (dashboardNumWidgets(dash_name) > 0) {
       if (verbose)
-        qDebug() << "Menu: Removing dashboard" << name;
-      dashboardMenu->removeAction(actions[i]);
-      break;
-    } else i++;
+        qDebug()
+          << "Menu: Dashboard" << QString::fromStdString(dash_name) << "still has widgets";
+      return;
+    }
+
+    QString const name { nameOfDashboard(dash_name) };
+    QList<QAction *> const actions = dashboardMenu->actions();
+    for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); ) {
+      int const c = actions[i]->text().compare(name);
+      if (c > 0) {
+        qWarning() << "Menu: Deleted dashboard" << name << "not found!?";
+        break;
+      } else if (c == 0) {
+        if (verbose)
+          qDebug() << "Menu: Removing dashboard" << name;
+        dashboardMenu->removeAction(actions[i]);
+        break;
+      } else i++;
+    }
   }
+  // Other dynamic menus can be updated here
 }
 
 void Menu::onChange(QList<ConfChange> const &changes)
