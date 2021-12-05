@@ -16,6 +16,7 @@ NamesTreeWin::NamesTreeWin(QWidget *parent) :
     lineEdit->setCompleter(completer);
 
     QTreeView *treeWidget = new QTreeView;
+    Q_ASSERT(NamesTree::globalNamesTree);
     treeWidget->setModel(NamesTree::globalNamesTree);
     treeWidget->setHeaderHidden(true);
     treeWidget->setUniformRowHeights(true);

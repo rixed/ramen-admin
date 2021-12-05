@@ -81,7 +81,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   // Best thing after having all the editors open at once:
   fields->setEditTriggers(QAbstractItemView::AllEditTriggers);
 
-  RollButtonDelegate *reprDelegate = new RollButtonDelegate;
+  RollButtonDelegate *reprDelegate { new RollButtonDelegate };
   reprDelegate->addIcon(r->emptyIcon);
   reprDelegate->addIcon(r->lineChartIcon);
   reprDelegate->addIcon(r->stackedChartIcon);
@@ -94,37 +94,38 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   fields->setItemDelegateForColumn(
     TimeChartFunctionFieldsModel::ColFactors, factorsDelegate);
 
-  ColorDelegate *colorDelegate = new ColorDelegate;
+  ColorDelegate *colorDelegate { new ColorDelegate };
   fields->setItemDelegateForColumn(
     TimeChartFunctionFieldsModel::ColColor, colorDelegate);
 
   connect(model, &QAbstractTableModel::dataChanged,
           this, [this](QModelIndex const &topLeft,
-                       QModelIndex const &bottomRight) {
-    if (verbose)
-      qDebug() << "model data changed from row" << topLeft.row()
-               << "to" << bottomRight.row();
-    // First reset the factors used by the delegate:
-    factorsDelegate->setColumns(model->factors);
-    // Then emit fieldChanged for every changed fields:
-    int const lastRow = bottomRight.row();
-    dessser::gen::dashboard_widget::source const &source = model->source;
-    for (int row = topLeft.row(); row <= lastRow; row++) {
-      /* Model row correspond to numericFields not source.fields! */
-      if (row > model->numericFields.count()) {
-        qCritical("TimeChartFunctionEditor: dataChanged on row %d but model "
-                  "has only %d rows!", row, model->numericFields.count());
-        break;
-      }
+                       QModelIndex const &bottomRight)
+    {
       if (verbose)
-        qDebug() << "TimeChartFunctionEditor: fieldChanged"
-                 << model->numericFields[row];
-      emit fieldChanged(source.name->site, source.name->program, source.name->function,
-                        model->numericFields[row].toStdString());
-    }
-  });
+        qDebug() << "model data changed from row" << topLeft.row()
+                 << "to" << bottomRight.row();
+      // First reset the factors used by the delegate:
+      factorsDelegate->setColumns(model->factors);
+      // Then emit fieldChanged for every changed fields:
+      int const lastRow { bottomRight.row() };
+      dessser::gen::dashboard_widget::source const &source { model->source };
+      for (int row = topLeft.row(); row <= lastRow; row++) {
+        /* Model row correspond to numericFields not source.fields! */
+        if (row > model->numericFields.count()) {
+          qCritical("TimeChartFunctionEditor: dataChanged on row %d but model "
+                    "has only %d rows!", row, model->numericFields.count());
+          break;
+        }
+        if (verbose)
+          qDebug() << "TimeChartFunctionEditor: fieldChanged"
+                   << model->numericFields[row];
+        emit fieldChanged(source.name->site, source.name->program, source.name->function,
+                          model->numericFields[row].toStdString());
+      }
+    });
 
-  QHBoxLayout *topHBox = new QHBoxLayout;
+  QHBoxLayout *topHBox { new QHBoxLayout };
   topHBox->setObjectName("topHBox");
   topHBox->addWidget(visible);
   topHBox->addStretch();
@@ -132,7 +133,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   topHBox->addWidget(openSource);
   topHBox->addWidget(deleteButton);
 
-  QVBoxLayout *layout = new QVBoxLayout;
+  QVBoxLayout *layout { new QVBoxLayout };
   layout->addLayout(topHBox);
   layout->addWidget(fields);
   setLayout(layout);
@@ -143,8 +144,8 @@ void TimeChartFunctionEditor::wantSource()
 # ifdef WITH_SOURCES
   if (! Menu::sourcesWin) return;
 
-  std::string const sourceKeyPrefix(
-    "sources/" + srcPathFromProgramName(model->source.name->program));
+  std::string const sourceKeyPrefix {
+    "sources/" + srcPathFromProgramName(model->source.name->program) };
   if (verbose)
     qDebug() << "Show source of program" << QString::fromStdString(sourceKeyPrefix);
 
@@ -162,12 +163,12 @@ void TimeChartFunctionEditor::wantSource()
 
 void TimeChartFunctionEditor::wantCustomize()
 {
-  TimeChartAutomatonCustomize *automaton =
+  TimeChartAutomatonCustomize *automaton {
     new TimeChartAutomatonCustomize(
       model->source.name->site,
       model->source.name->program,
       model->source.name->function,
-      this);
+      this) };
 
   connect(automaton, &TimeChartAutomatonCustomize::transitionTo,
           this, &TimeChartFunctionEditor::automatonTransition);

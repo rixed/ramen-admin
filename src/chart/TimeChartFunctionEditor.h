@@ -27,14 +27,14 @@ class TimeChartFunctionEditor : public QWidget
 
   FactorsDelegate *factorsDelegate;
 
-public:
-  QCheckBox *visible;   // To disable the whole source temporarily
   QPushButton *customize;
   QPushButton *openSource;
   QPushButton *deleteButton;
 
   FixedTableView *fields;
 
+public:
+  QCheckBox *visible;   // To disable the whole source temporarily
   TimeChartFunctionFieldsModel *model;
 
   TimeChartFunctionEditor(

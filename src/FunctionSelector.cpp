@@ -10,6 +10,7 @@ FunctionSelector::FunctionSelector(GraphModel *model, QWidget *parent)
   : TreeComboBox(parent),
     previous(nullptr)
 {
+  Q_ASSERT(model);
   setModel(model);
   setAllowNonLeafSelection(false);
 

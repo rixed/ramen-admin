@@ -16,9 +16,6 @@ class DashboardTreeModel : public ConfTreeModel
 {
   Q_OBJECT
 
-  bool addedScratchpad;
-  void addScratchpad();
-
   void updateNames(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
   void deleteNames(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 

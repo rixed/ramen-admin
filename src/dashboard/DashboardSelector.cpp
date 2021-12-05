@@ -9,6 +9,7 @@ DashboardSelector::DashboardSelector(
   DashboardTreeModel *model, QWidget *parent)
   : TreeComboBox(parent)
 {
+  Q_ASSERT(model);
   setModel(model);
   setAllowNonLeafSelection(false);
 

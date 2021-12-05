@@ -15,10 +15,12 @@ static bool const verbose(false);
 DashboardTreeModel *DashboardTreeModel::globalDashboardTree;
 
 DashboardTreeModel::DashboardTreeModel(QObject *parent)
-  : ConfTreeModel(parent),
-    addedScratchpad(false)
+  : ConfTreeModel(parent)
 {
-  addScratchpad();
+  /* We start with no scratchpad widgets, but we'd like a scratchpad entry
+   * nonetheless so add it manually: */
+  QStringList names({ "scratchpad" });
+  (void)findOrCreate(root, names, QString());
 
   connect(kvs.get(), &KVStore::keyChanged,
           this, &DashboardTreeModel::onChange);
@@ -28,6 +30,7 @@ void DashboardTreeModel::onChange(QList<ConfChange> const &changes)
 {
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change { changes.at(i) };
+    if (! isDashboardKey(*change.key)) continue;
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
@@ -45,8 +48,6 @@ void DashboardTreeModel::onChange(QList<ConfChange> const &changes)
 void DashboardTreeModel::updateNames(
   std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
-  addScratchpad();
-
   std::string const dash_name { dashboardNameOfKey(*key) };
 
   if (isScratchpad(dash_name)) return;
@@ -62,23 +63,8 @@ void DashboardTreeModel::updateNames(
 void DashboardTreeModel::deleteNames(
   std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &)
 {
-  addScratchpad();
-
   std::string const dash_name { dashboardNameOfKey(*key) };
   if (isScratchpad(dash_name)) return;
 
   // TODO: actually delete? Or keep the names around for a bit?
-}
-
-void DashboardTreeModel::addScratchpad()
-{
-  std::shared_ptr<dessser::gen::sync_socket::t const> my_socket {
-    Menu::getClient()->syncSocket };
-  if (addedScratchpad || !my_socket) return;
-
-  /* We start with no scratchpad widgets, but we'd like a scratchpad entry
-   * nonetheless so add it manually: */
-  QStringList names({ "scratchpad" });
-  (void)findOrCreate(root, names, QString());
-  addedScratchpad = true;
 }

@@ -5,7 +5,7 @@
 
 #include "IconSelector.h"
 
-int const IconSelector::iconMargin(2);
+int const IconSelector::iconMargin { 2 };
 
 IconSelector::IconSelector(QList<QPixmap>pixmaps_, QWidget *parent)
   : QWidget(parent), pixmaps(pixmaps_),
@@ -29,11 +29,11 @@ void IconSelector::paint(
 {
   painter.save();
   painter.fillRect(rect, painter.background());
-  QPalette const palette(QApplication::palette());
+  QPalette const palette { QApplication::palette() };
   painter.setPen(palette.color(QPalette::Highlight));
 
-  int x(rect.x());
-  int const y(rect.y());
+  int x { rect.x() };
+  int const y { rect.y() };
   for (int i = 0; i < pixmaps.count(); i++) {
     if (selected == i) {
       painter.drawRect(
@@ -42,9 +42,9 @@ void IconSelector::paint(
         iconMargin + pixmaps[i].height());
     }
     if (hovered && *hovered == i) {
-      QBrush brush(painter.background());
+      QBrush brush { painter.background() };
       brush.setColor(brush.color().lighter());
-      QRect bg(pixmaps[i].rect());
+      QRect bg { pixmaps[i].rect() };
       bg.translate(x + iconMargin, iconMargin);
       painter.fillRect(bg, brush);
     }
@@ -56,7 +56,7 @@ void IconSelector::paint(
 
 void IconSelector::paintEvent(QPaintEvent *)
 {
-  QPainter painter(this);
+  QPainter painter { this };
   paint(painter, rect(), pixmaps, m_selected, hovered);
 }
 
@@ -67,7 +67,7 @@ std::optional<int> IconSelector::iconAtPos(QPoint const &pos)
     pos.x() < iconMargin || pos.x() > minSize.width() - iconMargin
   ) return std::nullopt;
 
-  int x(iconMargin);
+  int x { iconMargin };
   for (int i = 0; i < pixmaps.count(); i++) {
     if (pos.x() < x + pixmaps[i].width()) {
       return i;
@@ -80,7 +80,7 @@ std::optional<int> IconSelector::iconAtPos(QPoint const &pos)
 
 void IconSelector::mouseMoveEvent(QMouseEvent *event)
 {
-  std::optional<int> const prev(hovered);
+  std::optional<int> const prev { hovered };
   hovered = iconAtPos(event->pos());
 
   if (hovered != prev)

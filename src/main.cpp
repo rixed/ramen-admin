@@ -9,6 +9,7 @@
 #include <QVector>
 #include <sodium.h>
 
+#include "dashboard/DashboardTreeModel.h"
 #include "GraphModel.h"
 #include "GraphViewSettings.h"
 #include "KVStore.h"
@@ -59,15 +60,15 @@ int main(int argc, char *argv[])
   kvs = std::make_shared<KVStore>();
 
   NamesTree::globalNamesTree = new NamesTree(true);
+  NamesTree::globalNamesTreeAnySites = new NamesTree(false);
 
   /* A GraphModel satisfies both the TreeView and the GraphView
    * requirements: */
   GraphViewSettings settings;
   GraphModel::globalGraphModel = new GraphModel(settings);
-#if 0
-  NamesTree::globalNamesTree = new NamesTree(true);
-  NamesTree::globalNamesTreeAnySites = new NamesTree(false);
+
   DashboardTreeModel::globalDashboardTree = new DashboardTreeModel;
+#if 0
   AlertingLogsModel::globalLogsModel = new AlertingLogsModel;
 #endif
 

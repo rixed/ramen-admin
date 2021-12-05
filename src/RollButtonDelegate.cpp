@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QAbstractItemModel>
 #include <QCursor>
 #include <QDebug>
@@ -9,6 +8,8 @@
 #include "IconSelector.h"
 
 #include "RollButtonDelegate.h"
+
+static bool const verbose { false };
 
 RollButtonDelegate::RollButtonDelegate(QObject *parent)
   : QStyledItemDelegate(parent), minSize(QSize(0, 0))
@@ -26,15 +27,15 @@ void RollButtonDelegate::paint(
   QPainter *painter, QStyleOptionViewItem const &option,
   QModelIndex const &index) const
 {
-  int const n(index.data().toInt());
-  assert(n < pixmaps.count());
+  int const n { index.data().toInt() };
+  Q_ASSERT(n < pixmaps.count());
 
   painter->fillRect(option.rect, painter->background());
 
-  int const x(
-    option.rect.x() + (option.rect.width() - pixmaps[n].width()) /  2);
-  int const y(
-    option.rect.y() + (option.rect.height() - pixmaps[n].height()) /  2);
+  int const x {
+    option.rect.x() + (option.rect.width() - pixmaps[n].width()) /  2 };
+  int const y {
+    option.rect.y() + (option.rect.height() - pixmaps[n].height()) /  2 };
   painter->drawPixmap(x, y, pixmaps[n]);
 }
 
@@ -48,7 +49,7 @@ QWidget *RollButtonDelegate::createEditor(
   QWidget *parent, QStyleOptionViewItem const &,
   QModelIndex const &) const
 {
-  IconSelector *editor = new IconSelector(pixmaps, parent);
+  IconSelector *editor { new IconSelector(pixmaps, parent) };
   editor->setWindowFlags(Qt::Popup);
   connect(editor, &IconSelector::selectionChanged,
           this, &RollButtonDelegate::commitAndCloseEditor);
@@ -59,7 +60,7 @@ void RollButtonDelegate::updateEditorGeometry(
   QWidget *editor, QStyleOptionViewItem const &,
   QModelIndex const &) const
 {
-  QSize const hint(editor->sizeHint());
+  QSize const hint { editor->sizeHint() };
   QPoint p(QCursor::pos());
   editor->setGeometry(p.x(), p.y(), hint.width(), hint.height());
 }
@@ -67,23 +68,25 @@ void RollButtonDelegate::updateEditorGeometry(
 void RollButtonDelegate::setEditorData(
   QWidget *editor_, QModelIndex const &index) const
 {
-  int const n(index.data().toInt());
-  assert(n < pixmaps.count());
+  int const n { index.data().toInt() };
+  Q_ASSERT(n < pixmaps.count());
 
-  IconSelector *editor(static_cast<IconSelector *>(editor_));
+  IconSelector *editor { static_cast<IconSelector *>(editor_) };
+  if (verbose)
+    qDebug() << "RollButtonDelegate: setSelected to" << n;
   editor->setSelected(n);
 }
 
 void RollButtonDelegate::setModelData(
   QWidget *editor_, QAbstractItemModel *model, QModelIndex const &index) const
 {
-  IconSelector *editor(static_cast<IconSelector *>(editor_));
+  IconSelector *editor { static_cast<IconSelector *>(editor_) };
   model->setData(index, editor->selected());
 }
 
 void RollButtonDelegate::commitAndCloseEditor()
 {
-  IconSelector *editor(static_cast<IconSelector *>(sender()));
+  IconSelector *editor { static_cast<IconSelector *>(sender()) };
   emit commitData(editor);
   emit closeEditor(editor);
 }
