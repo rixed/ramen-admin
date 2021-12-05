@@ -56,7 +56,7 @@ std::shared_ptr<dessser::gen::dashboard_widget::field const>
 static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
   std::string const &program, std::string const &function, std::string const &field)
 {
-  static std::shared_ptr<dessser::gen::dashboard_widget::representation> representation {
+  std::shared_ptr<dessser::gen::dashboard_widget::representation> representation {
     std::make_shared<dessser::gen::dashboard_widget::representation>(
       std::in_place_index<dessser::gen::dashboard_widget::Unused>, dessser::VOID) };
 
