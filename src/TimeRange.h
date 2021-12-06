@@ -28,4 +28,6 @@ struct TimeRange {
   QString toQString() const;
 };
 
+QDebug operator<<(QDebug debug, TimeRange const &);
+
 #endif

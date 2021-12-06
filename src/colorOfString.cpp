@@ -1,10 +1,9 @@
-#include <cassert>
 #include <cmath>
 #include "colorOfString.h"
 
 static unsigned rescale(unsigned x, unsigned from, unsigned to)
 {
-  assert(x < from);
+  Q_ASSERT(x < from);
   return ((double)x / from) * to;
 }
 

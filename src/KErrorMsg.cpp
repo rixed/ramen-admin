@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QtGlobal>
 #include <QDebug>
 
@@ -42,7 +41,7 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
  * Auth message)! */
 void KErrorMsg::setKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  assert(! key);
+  Q_ASSERT(! key);
   qDebug() << "KErrorMsg: setting key to" << *k;
   key = k;
 }

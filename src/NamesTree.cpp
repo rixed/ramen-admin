@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <QtGlobal>
@@ -283,7 +282,7 @@ QString NamesCompleter::pathFromIndex(QModelIndex const &index) const
 {
   if (!index.isValid()) {
     // possible when newRoot is the root
-    assert(!newRoot.isValid());
+    Q_ASSERT(!newRoot.isValid());
     return QString(); // Path from model root
   }
 

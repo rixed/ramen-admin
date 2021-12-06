@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDebug>
 #include <QtGlobal>
 #include <QVariant>
@@ -43,7 +42,7 @@ QModelIndex ConfTreeModel::index(
 
 QModelIndex ConfTreeModel::parent(QModelIndex const &index) const
 {
-  assert(index.isValid());
+  Q_ASSERT(index.isValid());
 
   ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
   if (tree->parent == root) return QModelIndex();
@@ -64,7 +63,7 @@ int ConfTreeModel::columnCount(QModelIndex const &) const
 
 QVariant ConfTreeModel::data(QModelIndex const &index, int role) const
 {
-  assert(index.isValid());
+  Q_ASSERT(index.isValid());
   ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
 
   switch (role) {
@@ -116,7 +115,7 @@ QModelIndex ConfTreeModel::find(std::string const &path) const
 ConfSubTree *ConfTreeModel::findOrCreate(
   ConfSubTree *parent, QStringList &names, QString const termValue)
 {
-  assert(parent == root || parent->parent != nullptr);
+  Q_ASSERT(parent == root || parent->parent != nullptr);
 
   if (names.count() == 0) return parent;
 

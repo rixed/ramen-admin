@@ -1,4 +1,3 @@
-#include <cassert>
 #include <optional>
 #include <QtGlobal>
 #include <QDebug>
@@ -111,7 +110,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
      * the case.
      * Sites cause no such trouble because we always display even empty
      * sites. */
-    assert((size_t)sourceRow < parentSite->programs.size());
+    Q_ASSERT((size_t)sourceRow < parentSite->programs.size());
     if (verbose)
       qDebug() << "Filtering program #" << sourceRow << "?";
     ProgramItem const *program = parentSite->programs[sourceRow];
@@ -148,7 +147,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
 
   /* When the parent is a program, build the FQ name of the function
    * and match that: */
-  assert((size_t)sourceRow < parentProgram->functions.size());
+  Q_ASSERT((size_t)sourceRow < parentProgram->functions.size());
   FunctionItem const *function = parentProgram->functions[sourceRow];
 
   if (! filterAcceptsFunction(*function)) return false;

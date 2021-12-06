@@ -65,6 +65,7 @@ private slots:
   void signalChanges();
 
 signals:
+  // Emitted for any changes (FIXME: rename)
   void keyChanged(QList<ConfChange> const &changes) const;
 };
 

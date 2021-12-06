@@ -1,4 +1,4 @@
-#include <cassert>
+#include <QDebug>
 #include <QDateTime>
 
 #include "misc.h"
@@ -27,14 +27,14 @@ bool TimeRange::contains(double t) const
 
 void TimeRange::merge(TimeRange const &that)
 {
-  assert(relative == that.relative);  // or TODO
+  Q_ASSERT(relative == that.relative);  // or TODO
   since = std::min(since, that.since);
   until = std::max(until, that.until);
 }
 
 void TimeRange::chop(TimeRange const &have)
 {
-  assert(relative == have.relative);  // or TODO
+  Q_ASSERT(relative == have.relative);  // or TODO
   if (isEmpty()) return;
   if (have.since <= since && have.until > since)
     since = have.until;
@@ -53,4 +53,11 @@ QString TimeRange::toQString() const
                    " → " +
                    QDateTime::fromSecsSinceEpoch(until).toString());
   }
+}
+
+QDebug operator<<(QDebug debug, TimeRange const &v)
+{
+  QDebugStateSaver saver(debug);
+  debug.nospace() << v.toQString();
+  return debug;
 }

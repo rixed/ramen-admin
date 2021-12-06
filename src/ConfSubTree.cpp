@@ -1,4 +1,3 @@
-#include <cassert>
 #include <iostream>
 #include <QDebug>
 
@@ -46,7 +45,7 @@ int ConfSubTree::count() const
 
 ConfSubTree const *ConfSubTree::child(int pos) const
 {
-  assert(pos >= 0 && pos < (ssize_t)children.size());
+  Q_ASSERT(pos >= 0 && pos < (ssize_t)children.size());
   return children[pos];
 }
 
@@ -67,7 +66,7 @@ int ConfSubTree::childNum(ConfSubTree const *child) const
                   << children[c] << "vs" << child;
     if (children[c] == child) return c;
   }
-  assert(!"Not a child");
+  Q_ASSERT(!"Not a child");
   return -1;
 }
 
@@ -99,7 +98,7 @@ void __attribute__((noinline)) __attribute__((used))
 ConfSubTree *ConfSubTree::insertAt(
   int pos, QString const &name, QString const &termValue)
 {
-  assert(pos >= 0 && pos <= (ssize_t)children.size());
+  Q_ASSERT(pos >= 0 && pos <= (ssize_t)children.size());
   ConfSubTree *s = new ConfSubTree(name, this, termValue);
   children.insert(children.begin() + pos, s);
   return s;

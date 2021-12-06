@@ -1,9 +1,14 @@
 #include <QDebug>
 #include <limits>
+
 #include "AbstractTimeLine.h"
 #include "misc.h"
 #include "TimeLine.h"
+#include "TimeRange.h"
+
 #include "TimeLineGroup.h"
+
+static bool verbose { false };
 
 TimeLineGroup::TimeLineGroup(QObject *parent)
   : QObject(parent),
@@ -86,8 +91,7 @@ void TimeLineGroup::remove(QObject *w)
     }
   }
 
-  qWarning() << "TimeLineGroup: Asked to remove an unknown AbstractTimeLine"
-             << w;
+  qWarning() << "TimeLineGroup: Asked to remove an unknown AbstractTimeLine" << w;
 }
 
 void TimeLineGroup::setCurrentTimes(qreal t) const
@@ -116,6 +120,9 @@ void TimeLineGroup::setEndOfTimes(qreal t) const
 
 void TimeLineGroup::setTimeRange(TimeRange const &range) const
 {
+  if (verbose)
+    qDebug() << "TimeLineGroup::setTimeRange to" << range;
+
   for (AbstractTimeLine *w : items) {
     if (w == sender()) continue;
     w->setTimeRange(range);

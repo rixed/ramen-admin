@@ -20,7 +20,7 @@ ConfTreeItem::ConfTreeItem(
 
 QVariant ConfTreeItem::data(int column, int role) const
 {
-  assert(column < CONFTREE_WIDGET_NUM_COLUMNS);
+  Q_ASSERT(column < CONFTREE_WIDGET_NUM_COLUMNS);
 
   if (role == Qt::DecorationRole && column == 2 && key) {
     Resources *r = Resources::get();

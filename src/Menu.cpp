@@ -1,4 +1,3 @@
-#include <cassert>
 #include <map>
 #include <QAction>
 #include <QApplication>
@@ -118,7 +117,7 @@ void Menu::initDialogs(QString const &srvUrl)
   if (! alertingWin) alertingWin = new AlertingWin;
 # endif
   // login is supposed to be initialized first
-  assert(loginWin);
+  Q_ASSERT(loginWin);
 }
 
 void Menu::showSomething()
@@ -186,7 +185,7 @@ void Menu::populateMenu(bool basic, bool extended)
   }
 
   if (extended) {
-    assert(fileMenu);  // user is supposed to populate basic first
+    Q_ASSERT(fileMenu);  // user is supposed to populate basic first
 #   ifdef WITH_SOURCES
     fileMenu->addAction(
       QCoreApplication::translate("QMenuBar", "New Source…"),

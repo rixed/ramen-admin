@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cmath>
 #include <sstream>
 #include <QtGlobal>
@@ -244,7 +243,7 @@ void Function::iterValues(
   pastData->iterTuples(since, until, onePast,
     [&cb, &columns, &last, &lastTime](
       double time, std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
-    assert(!last || lastTime <= time);
+    Q_ASSERT(!last || lastTime <= time);
     lastTime = time;
     last = tuple;
     std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> v;
@@ -271,7 +270,7 @@ void Function::iterValues(
   for (std::pair<double, size_t> const &ordered : tailModel->order) {
     std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>> const &tuple(
       tailModel->tuples[ordered.second]);
-    assert(ordered.first == tuple.first);
+    Q_ASSERT(ordered.first == tuple.first);
 
     /* Despite we never request past data after the oldest tail, it can happen
      * that past data overlap with the tail, because tail is just cached or
@@ -339,7 +338,7 @@ FunctionItem::FunctionItem(
  * Functions have no sub-elements and Qt should know this. */
 int FunctionItem::columnCount() const
 {
-  assert(!"FunctionItem::columnCount called!");
+  Q_ASSERT(!"FunctionItem::columnCount called!");
 }
 
 QVariant FunctionItem::data(int column, int role) const
@@ -732,7 +731,7 @@ QVariant FunctionItem::data(int column, int role) const
       break;
   }
 
-  assert(!"Bad columnCount for FunctionItem");
+  Q_ASSERT(!"Bad columnCount for FunctionItem");
 }
 
 std::vector<std::pair<QString const, QString const>> FunctionItem::labels() const

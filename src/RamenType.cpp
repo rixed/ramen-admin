@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QString>
 extern "C" {
 # include <caml/memory.h>
@@ -13,7 +12,7 @@ extern "C" {
 
 value RamenType::toOCamlValue() const
 {
-  assert(!"Don't know how to convert from a RamenType");
+  Q_ASSERT(!"Don't know how to convert from a RamenType");
 }
 
 RamenValue *RamenType::valueOfQString(QString const s) const
@@ -25,11 +24,11 @@ RamenValue *RamenType::valueOfQString(QString const s) const
 // Does not alloc on OCaml heap
 RamenType::RamenType(value v_)
 {
-  assert(Is_block(v_));
-  assert(Wosize_val(v_) == 2);
+  Q_ASSERT(Is_block(v_));
+  Q_ASSERT(Wosize_val(v_) == 2);
   value vtyp_ = Field(v_, 0);  // value type
   value nul_ = Field(v_, 1);  // nullable
-  assert(! Is_block(nul_));
+  Q_ASSERT(! Is_block(nul_));
   vtyp =
     std::shared_ptr<DessserValueType>(DessserValueType::ofOCaml(vtyp_));
   nullable = Bool_val(nul_);

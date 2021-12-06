@@ -1,4 +1,3 @@
-#include <cassert>
 #include <list>
 #include <QDebug>
 #include <QRegularExpression>
@@ -53,7 +52,7 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
   if (! parent.isValid()) { // Asking for a site
     if ((size_t)row >= sites.size()) return QModelIndex();
     SiteItem *site { sites[row] };
-    assert(site->treeParent == nullptr);
+    Q_ASSERT(site->treeParent == nullptr);
     return createIndex(row, column, static_cast<GraphItem *>(site));
   }
 
@@ -63,7 +62,7 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
   if (parentSite) { // bingo!
     if ((size_t)row >= parentSite->programs.size()) return QModelIndex();
     ProgramItem *program = parentSite->programs[row];
-    assert(program->treeParent == parentPtr);
+    Q_ASSERT(program->treeParent == parentPtr);
     return createIndex(row, column, static_cast<GraphItem *>(program));
   }
 
@@ -72,12 +71,12 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
   if (parentProgram) {
     if ((size_t)row >= parentProgram->functions.size()) return QModelIndex();
     FunctionItem *function = parentProgram->functions[row];
-    assert(function->treeParent == parentPtr);
+    Q_ASSERT(function->treeParent == parentPtr);
     return createIndex(row, column, static_cast<GraphItem *>(function));
   }
 
   // There is no alternative
-  assert(!"Someone should RTFM on indexing");
+  Q_ASSERT(!"Someone should RTFM on indexing");
 }
 
 QModelIndex GraphModel::parent(QModelIndex const &index) const
@@ -88,7 +87,7 @@ QModelIndex GraphModel::parent(QModelIndex const &index) const
 
   if (! treeParent) {
     // We must be a site then:
-    assert(nullptr != dynamic_cast<SiteItem *>(item));
+    Q_ASSERT(nullptr != dynamic_cast<SiteItem *>(item));
     return QModelIndex(); // parent is "root"
   }
 
@@ -119,7 +118,7 @@ int GraphModel::rowCount(QModelIndex const &parent) const
     return 0;
   }
 
-  assert(!"how is indexing working, again?");
+  Q_ASSERT(!"how is indexing working, again?");
 }
 
 int GraphModel::columnCount(QModelIndex const &parent) const
@@ -205,7 +204,7 @@ QString const GraphModel::columnName(GraphModel::Columns c)
     case NumColumns: break;
   }
 
-  assert(!"Invalid column");
+  Q_ASSERT(!"Invalid column");
 }
 
 bool GraphModel::columnIsImportant(Columns c)
@@ -756,10 +755,9 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
   if (! pk.valid) return;
 
   if (verbose)
-    qDebug() << "GraphModel key" << key << "set to value "
-             << *kv.val << "is valid:" << pk.valid;
+    qDebug() << "GraphModel key" << key << "set to value " << *kv.val;
 
-  assert(pk.site.length() > 0);
+  Q_ASSERT(pk.site.length() > 0);
 
   SiteItem *siteItem { nullptr };
   for (SiteItem *si : sites) {
@@ -856,7 +854,7 @@ void GraphModel::deleteKey(dessser::gen::sync_key::t const &key, KValue const &)
     qDebug() << "GraphModel key" << key << "deleted, is valid:"
              << pk.valid;
 
-  assert(pk.site.length() > 0);
+  Q_ASSERT(pk.site.length() > 0);
 
   SiteItem *siteItem { nullptr };
   for (SiteItem *si : sites) {

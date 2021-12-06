@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cstdio>
 #include <cstring>
 #include <cinttypes>
@@ -214,7 +213,7 @@ VChar *VChar::ofQString(QString const&)
 {
   // QStringRef c = s.midRef(2); // ignore first two characters "\#".
   // return new VChar(c.toInt());
-  assert(!"TODO: VChar::ofQString");
+  Q_ASSERT(!"TODO: VChar::ofQString");
 }
 
 value VChar::toOCamlValue() const
@@ -909,7 +908,7 @@ RamenValue *RamenValue::ofOCaml(value v_)
         ret = new VIpv6(*(uint128_t *)Data_custom_val(Field(v_, 0)));
         break;
       case TAG_VIp:
-        assert(Is_block(Field(v_, 0)));
+        Q_ASSERT(Is_block(Field(v_, 0)));
         if (Tag_val(Field(v_, 0)) == 0) { // Ipv4
           ret = new VIp(*(uint32_t *)Data_custom_val(Field(Field(v_, 0), 0)));
         } else {
@@ -936,10 +935,10 @@ RamenValue *RamenValue::ofOCaml(value v_)
         ret = new VRecord(Field(v_, 0));
         break;
       default:
-        assert(!"Invalid tag, not a RamenValueType");
+        Q_ASSERT(!"Invalid tag, not a RamenValueType");
     }
   } else {
-    assert(Long_val(v_) == 0);
+    Q_ASSERT(Long_val(v_) == 0);
     return new VNull();
   }
 
@@ -974,7 +973,7 @@ void VTuple::append(RamenValue const *i)
 {
   /* FIXME: Make sure we do not add a Null immediate and pretend the field is
    * not nullable: */
-  assert(v.size() < v.capacity());
+  Q_ASSERT(v.size() < v.capacity());
   v.push_back(i);
 }
 
@@ -1060,7 +1059,7 @@ QString const VRecord::toQString(std::string const &k) const
 
 void VRecord::set(size_t idx, QString const field, RamenValue const *i)
 {
-  assert(idx < v.size());
+  Q_ASSERT(idx < v.size());
   v[idx].first = field;
   v[idx].second = i;
 }
@@ -1072,7 +1071,7 @@ void VRecord::set(size_t idx, QString const field, RamenValue const *i)
 VSum::VSum(value)
 {
   // TODO
-  assert(false);
+  Q_ASSERT(false);
 }
 
 VSum::VSum(size_t label_, QString const &cstrName_, RamenValue const *v_) :

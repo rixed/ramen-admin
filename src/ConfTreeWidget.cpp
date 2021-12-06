@@ -433,7 +433,7 @@ void ConfTreeWidget::deleteItem(
 void ConfTreeWidget::deleteClicked(
   std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
-  assert(key);
+  Q_ASSERT(key);
   QMessageBox msg;
   msg.setText(tr("Are you sure?"));
   msg.setInformativeText(
@@ -522,7 +522,7 @@ void ConfTreeWidget::createItemByNames(
   bool topLevel)
 {
   int const len = names.count();
-  assert(len >= 1);
+  Q_ASSERT(len >= 1);
   QString const name = names.takeFirst();
 
   ConfTreeItem *item = findItem(name, parent);
@@ -608,7 +608,7 @@ ConfTreeItem *ConfTreeWidget::findItemByNames(
   QStringList &names, ConfTreeItem *parent)
 {
   int const len = names.count();
-  assert(len >= 1);
+  Q_ASSERT(len >= 1);
   QString const name = names.takeFirst();
 
   ConfTreeItem *item = findItem(name, parent);

@@ -1,4 +1,3 @@
-#include <cassert>
 #include <string>
 #include <memory>
 #include <QtGlobal>
@@ -259,7 +258,7 @@ void RCEntryEditor::setEnabled(bool enabled_)
     QLayoutItem *item = paramsForm->itemAt(row, QFormLayout::LabelRole);
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
     AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
-    assert(editor);
+    Q_ASSERT(editor);
     editor->setEnabled(enabled);
   }
 }
@@ -292,7 +291,7 @@ int RCEntryEditor::findOrAddSourceName(QString const &name)
     }
   }
 
-  assert(!"Hit by a gamma rays!");
+  Q_ASSERT(!"Hit by a gamma rays!");
   return -1;
 }
 
@@ -362,7 +361,7 @@ static QString const labelOfParamName(std::string const &pname)
 }
 static std::string const paramNameOfLabel(QString const &label)
 {
-  assert(label.length() > 0);
+  Q_ASSERT(label.length() > 0);
   return removeAmp(label.left(label.length()-1)).toStdString();
 }
 
@@ -373,12 +372,12 @@ void RCEntryEditor::saveParams()
   for (int row = 0; row < paramsForm->rowCount(); row ++) {
     QLayoutItem *item = paramsForm->itemAt(row, QFormLayout::LabelRole);
     QLabel *label = dynamic_cast<QLabel *>(item->widget());
-    assert(label);
+    Q_ASSERT(label);
     std::string const pname(paramNameOfLabel(label->text()));
 
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
     AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
-    assert(editor);
+    Q_ASSERT(editor);
     std::shared_ptr<dessser::gen::sync_value::t const> val { editor->getValue() };
     if (val) {
       if (val->index() == dessser::gen::sync_value::RamenValue) {
@@ -545,12 +544,12 @@ std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
   for (int row = 0; row < paramsForm->rowCount(); row ++) {
     QLayoutItem *item = paramsForm->itemAt(row, QFormLayout::LabelRole);
     QLabel *label = dynamic_cast<QLabel *>(item->widget());
-    assert(label);
+    Q_ASSERT(label);
     std::string const pname(paramNameOfLabel(label->text()));
 
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
     AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
-    assert(editor);
+    Q_ASSERT(editor);
     std::shared_ptr<dessser::gen::sync_value::t const> val { editor->getValue() };
     if (! val) continue;
     // We need to steel the raql_value from this shared value:

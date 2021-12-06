@@ -14,8 +14,8 @@ extern "C" {
 CompiledFunctionInfo::CompiledFunctionInfo(value v_) :
   retention(nullptr)
 {
-  assert(Is_block(v_));
-  assert(Wosize_val(v_) == 9);
+  Q_ASSERT(Is_block(v_));
+  Q_ASSERT(Wosize_val(v_) == 9);
   value tmp_ = Field(v_, 1);  // the (optional) retention
   if (Is_block(tmp_)) {
     retention = new conf::Retention(Field(tmp_, 0));

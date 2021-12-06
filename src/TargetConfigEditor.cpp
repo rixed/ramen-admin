@@ -120,7 +120,7 @@ bool TargetConfigEditor::setValue(
     entrySelector->addItem(QString::fromStdString(rce->program));
   }
 
-  assert(entrySelector->count() == (int)rcEntries.size());
+  Q_ASSERT(entrySelector->count() == (int)rcEntries.size());
 
   if (entrySelector->count() > 0) {
     stackedLayout->setCurrentIndex(entryEditorIdx);
@@ -163,7 +163,7 @@ RCEntryEditor const *TargetConfigEditor::currentEntry() const
 void TargetConfigEditor::removeCurrentEntry()
 {
   int const idx = entrySelector->currentIndex();
-  assert(idx == currentIndex);
+  Q_ASSERT(idx == currentIndex);
 
   if (stackedLayout->currentIndex() != entryEditorIdx ||
       idx < 0 || idx >= (int)rcEntries.size()) return;

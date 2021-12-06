@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cmath>
 #include <QApplication>
 #include <QColor>
@@ -92,7 +91,7 @@ static QVector<qreal> getTicks(int numSteps, QPair<qreal, qreal> const &range)
   while (start < range.second) {
     if (start >= range.first) {
       res.append(start);
-      assert(res.length() < numSteps + 100);
+      Q_ASSERT(res.length() < numSteps + 100);
     }
     start += step;
   }

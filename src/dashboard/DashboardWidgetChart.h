@@ -41,6 +41,7 @@ public slots:
   void setTimeRange(TimeRange const &);
 
 signals:
+  // Re-emitted from the controlling TimeRangeEditor:
   void timeRangeChanged(TimeRange const &);
   void newTailTime(double);
 };

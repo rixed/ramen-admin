@@ -1,6 +1,6 @@
 #ifndef REPLAYREQUEST_H_191007
 #define REPLAYREQUEST_H_191007
-/* A ReplayRequest is a set of tuples obtained form the server and stored to
+/* A ReplayRequest is a set of tuples obtained from the server and stored to
  * feed the charts and tail tables. */
 #include <ctime>
 #include <map>
@@ -69,14 +69,17 @@ public:
     QObject *parent = nullptr);
 
   bool isCompleted(std::lock_guard<std::mutex> const &) const;
+
   bool isWaiting(std::lock_guard<std::mutex> const &) const;
 
 protected slots:
   void sendRequest();
+
   void onChange(QList<ConfChange> const &);
 
 signals:
   void tupleBatchReceived();
+
   void endReceived();
 };
 

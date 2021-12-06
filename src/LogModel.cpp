@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDateTime>
 #include "misc.h"
 #include "Logger.h"
@@ -72,7 +71,7 @@ QVariant LogModel::headerData(int section, Qt::Orientation orientation, int role
 int LogModel::rowCount(const QModelIndex &index) const
 {
   if (index.isValid()) return 0;
-  assert(logs.count() > 0 || !removingFirst);
+  Q_ASSERT(logs.count() > 0 || !removingFirst);
   return logs.count() - (removingFirst ? 1 : 0);
 }
 

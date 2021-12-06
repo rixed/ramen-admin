@@ -28,7 +28,7 @@ void KVStore::signalChanges()
     qDebug() << "KVStore: signalChanges:" << confChanges.length() << "changes";
 
   QList<ConfChange> confChangesCopy { std::move(confChanges) };
-  assert(confChanges.isEmpty());
+  Q_ASSERT(confChanges.isEmpty());
   confChangesLock.unlock();
 
   emit keyChanged(confChangesCopy);

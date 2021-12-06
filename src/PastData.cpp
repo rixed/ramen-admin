@@ -10,9 +10,9 @@
 
 #include "PastData.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-static int const maxPending(3);
+static int const maxPending { 3 };
 
 /* A bit arbitrary, should depend on the tuple density: */
 static double const minGapBetweenReplays(10.);
@@ -33,19 +33,19 @@ PastData::PastData(std::string const &site_, std::string const &program_,
 
 void PastData::check() const
 {
-  ReplayRequest const *last = nullptr;
-  int numPending_(0);
+  ReplayRequest const *last { nullptr };
+  int numPending_ { 0 };
 
   for (ReplayRequest const &r : replayRequests) {
-    assert(r.since < r.until);
+    Q_ASSERT(r.since < r.until);
     if (last)
-      assert(last->until <= r.since);
+      Q_ASSERT(last->until <= r.since);
     last = &r;
 
     if (r.status != ReplayRequest::Completed) numPending_++;
   }
 
-  assert(numPending == numPending_);
+  Q_ASSERT(numPending == numPending_);
 }
 
 /* Try to merge this new request with that previous one.
@@ -106,9 +106,9 @@ bool PastData::insert(
                << qSetRealNumberPrecision(13) << since
                << ", until=" << until << ")";
 
-    std::list<ReplayRequest>::iterator const &emplaced =
+    std::list<ReplayRequest>::iterator const &emplaced {
       replayRequests.emplace(it,
-        site, program, function, since, until, type, eventTime);
+        site, program, function, since, until, type, eventTime) };
     numPending++;
     connect(&*emplaced, &ReplayRequest::tupleBatchReceived,
             this, &PastData::tupleReceived);
@@ -134,10 +134,10 @@ bool PastData::request(double since, double until, bool canPostpone)
   {
     if (since >= until) return true;
 
-    ReplayRequest &c(*it);
-    ReplayRequest *next(
+    ReplayRequest &c { *it };
+    ReplayRequest *next {
       std::next(it) != replayRequests.end() ?
-        &*(std::next(it)) : nullptr);
+        &*(std::next(it)) : nullptr };
 
     std::lock_guard<std::mutex> guard(c.lock);
 
@@ -198,7 +198,7 @@ void PastData::iterTuples(
   check();
 
   for (ReplayRequest &c : replayRequests) {
-    std::lock_guard<std::mutex> guard(c.lock);
+    std::lock_guard<std::mutex> guard { c.lock };
 
     if (c.since >= until) break;
     if (c.until <= since) continue;
@@ -212,7 +212,7 @@ void PastData::iterTuples(
         }
       } else if (tuple.first < until) {
         if (last) {
-          assert(lastTime <= tuple.first);
+          Q_ASSERT(lastTime <= tuple.first);
           cb(lastTime, last);
           last = nullptr;
         }
@@ -228,7 +228,7 @@ void PastData::iterTuples(
 
 void PastData::replayEnded()
 {
-  assert(numPending > 0);
+  Q_ASSERT(numPending > 0);
   numPending--;
 
   if (verbose)

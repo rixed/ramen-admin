@@ -1,10 +1,12 @@
 #include <QDebug>
 #include <QEnterEvent>
+#include <QLineF>
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPaintEvent>
 #include <QPinchGesture>
 #include <QPoint>
+#include <QRectF>
 #include <QSizePolicy>
 #include <QWheelEvent>
 
@@ -104,9 +106,9 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event)
 {
   if (scrollStart) {
     /* Scrolling mode: offset the viewport */
-    int const dx = event->x() - *scrollStart;
-    qreal const ratio = (qreal)dx / width();
-    qreal dt = viewPortWidth() * ratio;
+    int const dx { event->x() - *scrollStart };
+    qreal const ratio { (qreal)dx / width() };
+    qreal dt { viewPortWidth() * ratio };
     if (viewPortStartScroll.first - dt < m_beginOfTime) {
       dt = viewPortStartScroll.first - m_beginOfTime;
     } else if (viewPortStartScroll.second - dt > m_endOfTime) {
@@ -120,9 +122,9 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event)
 
   /* Normal mouse move: update current time.
    * Note: selection might happen at the same time. */
-  qreal const ratio = (qreal)event->x() / width();
-  qreal const offs = viewPortWidth() * ratio;
-  qreal t = m_viewPort.first + offs;
+  qreal const ratio { (qreal)event->x() / width() };
+  qreal const offs { viewPortWidth() * ratio };
+  qreal t { m_viewPort.first + offs };
   if (t < m_beginOfTime) t = m_beginOfTime;
   else if (t > m_endOfTime) t = m_endOfTime;
   if (t != m_currentTime) {
@@ -137,17 +139,17 @@ bool AbstractTimeLine::event(QEvent *event)
   if (event->type() != QEvent::Gesture)
     return QWidget::event(event);
 
-  QGestureEvent *e = static_cast<QGestureEvent *>(event);
-  QGesture *pinch_ = e->gesture(Qt::PinchGesture);
+  QGestureEvent *e { static_cast<QGestureEvent *>(event) };
+  QGesture *pinch_ { e->gesture(Qt::PinchGesture) };
   if (! pinch_)
     return QWidget::event(event);
 
-  QPinchGesture *pinch = static_cast<QPinchGesture *>(pinch_);
+  QPinchGesture *pinch { static_cast<QPinchGesture *>(pinch_) };
 
   switch (pinch->state()) {
     case Qt::GestureUpdated:
       {
-        qreal const centerTime = toTime(pinch->centerPoint().x());
+        qreal const centerTime { toTime(pinch->centerPoint().x()) };
         setZoom(pinch->scaleFactor(), centerTime);
       }
       break;
@@ -185,23 +187,23 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event)
 {
   QWidget::paintEvent(event);
 
-  QPainter painter(this);
+  QPainter painter { this };
 
-  static QColor const highlightColor(255, 255, 255, 125);
+  static QColor const highlightColor { 255, 255, 255, 125 };
   painter.setPen(Qt::NoPen);
   painter.setBrush(highlightColor);
   for (QPair<qreal, qreal> const range : highlights) {
-    int const xStart = toPixel(range.first);
-    int const xStop = toPixel(range.second);
-    painter.drawRect(xStart, 0, xStop - xStart, height());
+    qreal const xStart { toPixel(range.first) };
+    qreal const xStop { toPixel(range.second) };
+    painter.drawRect(QRectF { xStart, 0., xStop - xStart, (qreal)height() });
   }
 
   if (m_withCursor && m_currentTime > m_beginOfTime) {
-    static QColor const cursorColor("orange");
+    static QColor const cursorColor { "orange" };
     painter.setPen(cursorColor);
     painter.setBrush(Qt::NoBrush);
-    int const x = toPixel(m_currentTime);
-    painter.drawLine(x, 0, x, height());
+    qreal const x { toPixel(m_currentTime) };
+    painter.drawLine(QLineF { x, 0, x, (qreal)height() });
   }
 }
 
@@ -213,10 +215,10 @@ void AbstractTimeLine::setBeginOfTime(qreal t)
 {
   if (m_beginOfTime != t) {
     if (verbose)
-      qDebug() << "AbstractTimeLine: setBeginOfTime"<< t;
+      qDebug() << "AbstractTimeLine: setBeginOfTime" << stringOfDate(t);
 
     // If we were looking at the end, keep tracking
-    bool const trackEnd(m_viewPort.second >= m_endOfTime);
+    bool const trackEnd { m_viewPort.second >= m_endOfTime };
 
     if (m_endOfTime <= t)
       m_endOfTime += t - m_beginOfTime;
@@ -229,7 +231,7 @@ void AbstractTimeLine::setBeginOfTime(qreal t)
     }
 
     if (trackEnd) {
-      double const dt(m_endOfTime - m_viewPort.second);
+      double const dt { m_endOfTime - m_viewPort.second };
       m_viewPort.first += dt;
       m_viewPort.second += dt;
     }
@@ -242,10 +244,10 @@ void AbstractTimeLine::setEndOfTime(qreal t)
 {
   if (m_endOfTime != t) {
     if (verbose)
-      qDebug() << "AbstractTimeLine: setEndOfTime"<< t;
+      qDebug() << "AbstractTimeLine: setEndOfTime" << stringOfDate(t);
 
     // If we were looking at the end, keep tracking
-    bool const trackEnd(m_viewPort.second >= m_endOfTime);
+    bool const trackEnd { m_viewPort.second >= m_endOfTime };
 
     if (m_beginOfTime >= t)
       m_beginOfTime -= m_endOfTime - t;
@@ -258,7 +260,7 @@ void AbstractTimeLine::setEndOfTime(qreal t)
     }
 
     if (trackEnd) {
-      double const dt(m_endOfTime - m_viewPort.second);
+      double const dt { m_endOfTime - m_viewPort.second };
       m_viewPort.first += dt;
       m_viewPort.second += dt;
     }
@@ -291,9 +293,9 @@ void AbstractTimeLine::setViewPort(QPair<qreal, qreal> const &vp)
     std::min<qreal>(vp.first, vp.second),
     std::max<qreal>(vp.first, vp.second));
 
-  static qreal const min_viewport_width = 1.;
+  static qreal const min_viewport_width { 1. };
   if (viewPortWidth() < min_viewport_width) {
-    qreal const mid = 0.5 * (m_viewPort.second + m_viewPort.first);
+    qreal const mid { 0.5 * (m_viewPort.second + m_viewPort.first) };
     m_viewPort.first = mid - min_viewport_width/2;
     m_viewPort.second = mid + min_viewport_width/2;
   }
@@ -323,7 +325,7 @@ void AbstractTimeLine::setZoom(qreal z, qreal centerTime)
 
 void AbstractTimeLine::moveViewPort(qreal ratio)
 {
-  qreal const dt = viewPortWidth() * ratio;
+  qreal const dt { viewPortWidth() * ratio };
   setViewPort(QPair<qreal, qreal>(
     std::max(m_viewPort.first + dt, m_beginOfTime),
     std::min(m_viewPort.second + dt, m_endOfTime)));
@@ -352,7 +354,9 @@ void AbstractTimeLine::setTimeRange(TimeRange const &range)
   double since, until;
   range.absRange(&since, &until);
   if (verbose)
-    qDebug() << "AbstractTimeLine: setTimeRange(" << since << "," << until << ")";
+    qDebug()
+      << "AbstractTimeLine: setTimeRange(" << stringOfDate(since) << ","
+                                           << stringOfDate(until) << ")";
   setBeginOfTime(since);
   setEndOfTime(until);
 }

@@ -135,7 +135,7 @@ void AtomicForm::setCentralWidget(QWidget *w)
 
   QLayoutItem *previous =
     groupLayout->replaceWidget(centralWidget, w, Qt::FindDirectChildrenOnly);
-  assert(previous);
+  Q_ASSERT(previous);
   centralWidget->deleteLater();
   centralWidget = w;
   delete previous;
@@ -363,7 +363,7 @@ void AtomicForm::setEnabled(bool enabled)
 
 bool AtomicForm::isMyKey(std::shared_ptr<dessser::gen::sync_key::t const> k) const
 {
-  assert(k);
+  Q_ASSERT(k);
   for (FormWidget const &w : widgets) {
     std::shared_ptr<dessser::gen::sync_key::t const> wk { w.widget->key() };
     if (wk && *wk == *k) return true;

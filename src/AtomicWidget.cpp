@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDebug>
 #include <QStackedLayout>
 
@@ -71,7 +70,7 @@ bool AtomicWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKe
 
   std::shared_ptr<dessser::gen::sync_key::t const> oldKey { key() };
   saveKey(newKey);
-  assert(sameKey(newKey));  // at least for now
+  Q_ASSERT(sameKey(newKey));  // at least for now
 
   bool ok { true };
 
@@ -133,7 +132,7 @@ void AtomicWidget::forgetValue(dessser::gen::sync_key::t const &k, KValue const 
 void AtomicWidget::setValueFromStore(
   std::shared_ptr<dessser::gen::sync_key::t const> k, KValue const &kv)
 {
-  assert(k);
+  Q_ASSERT(k);
   if (! sameKey(*k)) return;
 
   setValue(k, kv.val);

@@ -25,6 +25,7 @@ namespace dessser {
   }
 }
 
+// FIXME: move me in Function.h
 class Function : public QObject, public GraphData
 {
   Q_OBJECT

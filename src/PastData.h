@@ -57,6 +57,7 @@ class PastData : public QObject
   bool merge(
     ReplayRequest &, ReplayRequest *, double, double,
     std::lock_guard<std::mutex> const &);
+
   bool insert(
     std::list<ReplayRequest>::iterator, double, double, bool);
 
@@ -66,6 +67,7 @@ public:
   std::list<ReplayRequest> replayRequests;
 
   std::shared_ptr<dessser::gen::raql_type::t const> type;
+
   std::shared_ptr<EventTime const> eventTime;
 
   double maxTime = NAN;

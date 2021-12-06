@@ -34,6 +34,7 @@ protected slots:
   void setEndOfTimes(qreal) const;
 
 public slots:
+  // Typically connected to a TimeRangeEditor:
   void setTimeRange(TimeRange const &) const;
 };
 

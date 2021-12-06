@@ -488,8 +488,8 @@ int ConfClient::rcvdSetKey(
 
   {
     // Prepare the ConfChange to be signaled:
-    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
-    kvs->confChanges.append({ KeyCreated, it->first, it->second });
+    std::lock_guard<std::mutex> guard { kvs->confChangesLock };
+    kvs->confChanges.append({ KeyChanged, it->first, it->second });
   }
 
   kvs->lock.unlock();
@@ -528,7 +528,7 @@ int ConfClient::rcvdNewKey(
 
   {
     // Prepare the ConfChange to be signaled:
-    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyCreated, it.first->first, it.first->second });
   }
 
@@ -540,7 +540,7 @@ int ConfClient::rcvdNewKey(
 int ConfClient::rcvdDelKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  if (verbose) qDebug() << "del" << *k;
+  if (verbose) qDebug() << "Del" << *k;
 
   kvs->lock.lock();
 
@@ -549,7 +549,7 @@ int ConfClient::rcvdDelKey(
     // Not supposed to happen but harmless:
     qCritical() << "Cannot delete unbound key" << *k;
   } else {
-    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyDeleted, it->first, it->second });
     kvs->map.erase(it);
   }
@@ -575,7 +575,7 @@ int ConfClient::rcvdLockKey(
     qCritical() << "Cannot lock unbound key" << *k;
   } else {
     it->second.setLock(owner, expiry);
-    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyLocked, it->first, it->second });
     ret = 0;
   }
@@ -597,7 +597,7 @@ int ConfClient::rcvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k
     qCritical() << "Cannot unlock unbound key" << *k;
   } else {
     it->second.setUnlock();
-    std::lock_guard<std::mutex> guard(kvs->confChangesLock);
+    std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyUnlocked, it->first, it->second });
     ret = 0;
   }
@@ -777,7 +777,7 @@ int ConfClient::sendMsg(
 
   if (isCrypted()) {
     /* Encrypt using server public key and that nonce: */
-    qDebug() << "Encrypting" << text_len << "bytes";
+    if (verbose) qDebug() << "Encrypting" << text_len << "bytes";
     bzero(clear_text, crypto_box_ZEROBYTES);
     memcpy(clear_text + crypto_box_ZEROBYTES,
            reinterpret_cast<unsigned char const *>(text.toString().c_str()),

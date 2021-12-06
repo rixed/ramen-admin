@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDebug>
 #include <QString>
 

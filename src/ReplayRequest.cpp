@@ -33,7 +33,7 @@ static std::mutex respKeySeqLock;
 
 static std::shared_ptr<dessser::gen::sync_key::t const> nextRespKey()
 {
-  std::lock_guard<std::mutex> guard(respKeySeqLock);
+  std::lock_guard<std::mutex> guard { respKeySeqLock };
 
   std::shared_ptr<dessser::gen::sync_key::per_client> resp {
     std::make_shared<dessser::gen::sync_key::per_client>(
@@ -106,9 +106,9 @@ bool ReplayRequest::isWaiting(std::lock_guard<std::mutex> const &) const
 
 void ReplayRequest::sendRequest()
 {
-  std::lock_guard<std::mutex> guard(lock);
+  std::lock_guard<std::mutex> guard { lock };
 
-  assert(status == ReplayRequest::Waiting);
+  Q_ASSERT(status == ReplayRequest::Waiting);
   status = Sent;
 
   // Create the response key:
@@ -137,7 +137,7 @@ void ReplayRequest::sendRequest()
               << QString::fromStdString(program) << "/"
               << QString::fromStdString(function)
               << qSetRealNumberPrecision(13)
-              << "from" << since << "to" << until
+              << "from" << stringOfDate(since) << "to" << stringOfDate(until)
               << "respKey" << *respKey;
 
   std::shared_ptr<dessser::gen::sync_key::t const> key {
@@ -162,12 +162,13 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
     return;
   }
 
-  auto const &batch { std::get<dessser::gen::sync_value::Tuples>(*kv.val) };
+  dessser::Arr<std::shared_ptr<dessser::gen::sync_value::tuple>> const &batch {
+    std::get<dessser::gen::sync_value::Tuples>(*kv.val) };
 
   bool hadTuple { false };
 
   {
-    std::lock_guard<std::mutex> guard(lock);
+    std::lock_guard<std::mutex> guard { lock };
 
     if (status != ReplayRequest::Sent) {
       qCritical() << "Replay" << *respKey
@@ -185,10 +186,12 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
         continue;
       }
 
-      if (*start >= since && *start <= until) {
-        if (verbose)
-          qDebug() << "ReplayRequest: received" << *tuple->values;
+      if (verbose) {
+        qDebug() << "ReplayRequest: received" << *tuple->values;
+        qDebug() << "EventTime:" << *eventTime;
+      }
 
+      if (*start >= since && *start <= until) {
         tuples.insert(std::make_pair(*start, tuple->values));
         hadTuple = true;
       } else {
@@ -213,7 +216,7 @@ void ReplayRequest::endReplay(dessser::gen::sync_key::t const &key, KValue const
     qDebug() << "ReplayRequest::endReplay" << key;
 
   {
-    std::lock_guard<std::mutex> guard(lock);
+    std::lock_guard<std::mutex> guard { lock };
     status = ReplayRequest::Completed;
   }
   emit endReceived();
@@ -229,6 +232,6 @@ QString const ReplayRequest::qstringOfStatus(ReplayRequest::Status const status)
     case ReplayRequest::Completed:
       return QString(tr("Completed"));
     default:
-      assert(!"Invalid status!");
+      Q_ASSERT(!"Invalid status!");
   }
 }

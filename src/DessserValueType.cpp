@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cstring>
 #include <iostream>
 #include <QtGlobal>
@@ -43,7 +42,7 @@ value DessserValueType::toOCamlValue() const
 {
   qCritical() << "Unimplemented conversion to OCaml value from"
               << toQString();
-  assert(!"Don't know how to convert from a DessserValueType");
+  Q_ASSERT(!"Don't know how to convert from a DessserValueType");
 }
 
 /*
@@ -52,7 +51,7 @@ value DessserValueType::toOCamlValue() const
 
 RamenValue *Unknown::unserialize(uint32_t const *&, uint32_t const *, bool) const
 {
-  assert(false);
+  Q_ASSERT(false);
 }
 
 /*
@@ -615,7 +614,7 @@ QString const TList::toQString() const
 
 size_t TList::nullmaskWidth(bool) const
 {
-  assert(!"List nullmaskWidth is special!");
+  Q_ASSERT(!"List nullmaskWidth is special!");
 }
 
 RamenValue *TList::unserialize(uint32_t const *&start, uint32_t const *max, bool) const
@@ -778,7 +777,7 @@ RamenValue *TRecord::unserialize(uint32_t const *&start, uint32_t const *max, bo
   size_t const numFields = fields.size();
   VRecord *rec = new VRecord(fields.size());
   unsigned null_i = 0;
-  assert(serOrder.size() == numFields);
+  Q_ASSERT(serOrder.size() == numFields);
   for (unsigned i = 0; i < numFields; i++) {
     size_t const fieldIdx = serOrder[i];
     QString const &fieldName = fields[ fieldIdx ].first;
@@ -866,7 +865,7 @@ RamenValue *TSum::unserialize(uint32_t const *&start, uint32_t const *max, bool)
 // Does not alloc on OCaml heap
 static DessserValueType *intyValueTypeOfOCaml(value v_)
 {
-  assert(Long_val(v_) == 0); // Unknown
+  Q_ASSERT(Long_val(v_) == 0); // Unknown
   return new Unknown;
 }
 
@@ -897,15 +896,15 @@ static DessserValueType *MacTypeOfOCaml(value v_)
     case 20: ret = new TI64; break;
     case 21: ret = new TI128; break;
     default:
-      assert(!"Unknown tag for mac_type!");
+      Q_ASSERT(!"Unknown tag for mac_type!");
   }
   return ret;
 }
 
 static DessserValueType *WellknownUserTypeOfOCaml(value v_)
 {
-  assert(Is_block(v_));
-  assert(Wosize_val(v_) == 2);
+  Q_ASSERT(Is_block(v_));
+  Q_ASSERT(Wosize_val(v_) == 2);
   QString const name(String_val(Field(v_, 0)));
 
   if (name == "Eth") {
@@ -924,7 +923,7 @@ static DessserValueType *WellknownUserTypeOfOCaml(value v_)
     return new TCidr;
   } else {
     qCritical() << "Unknown user_type " << name;
-    assert(!"Unknown user_type");
+    Q_ASSERT(!"Unknown user_type");
   }
 }
 
@@ -956,7 +955,7 @@ static DessserValueType *blockyValueTypeOfOCaml(value v_)
     case 4:  // TTup of maybe_nullable array
       {
         value tmp_ = Field(v_, 0);
-        assert(Is_block(tmp_));  // an array of types
+        Q_ASSERT(Is_block(tmp_));  // an array of types
         unsigned const numFields = Wosize_val(tmp_);
         TTuple *tuple = new TTuple(numFields);
         for (unsigned f = 0; f < numFields; f++) {
@@ -970,13 +969,13 @@ static DessserValueType *blockyValueTypeOfOCaml(value v_)
     case 5:  // TRec of (string * maybe_nullable) array
       {
         value tmp_ = Field(v_, 0);
-        assert(Is_block(tmp_));  // an array of name * type pairs
+        Q_ASSERT(Is_block(tmp_));  // an array of name * type pairs
 
         unsigned const numFields = Wosize_val(tmp_);
         TRecord *rec = new TRecord(numFields);
         for (unsigned f = 0; f < numFields; f++) {
           v_ = Field(tmp_, f);
-          assert(Is_block(v_));   // a pair of string * type
+          Q_ASSERT(Is_block(v_));   // a pair of string * type
           std::shared_ptr<RamenType const> subType =
             std::make_shared<RamenType const>(Field(v_, 1));
           rec->append(QString(String_val(Field(v_, 0))), subType);
@@ -987,13 +986,13 @@ static DessserValueType *blockyValueTypeOfOCaml(value v_)
     case 6:  // TSum of (string * maybe_nullable) array
       {
         value tmp_ = Field(v_, 0);
-        assert(Is_block(tmp_));  // an array of name * type pairs
+        Q_ASSERT(Is_block(tmp_));  // an array of name * type pairs
 
         unsigned const numCstrs = Wosize_val(tmp_);
         TSum *sum = new TSum(numCstrs);
         for (unsigned f = 0; f < numCstrs; f++) {
           v_ = Field(tmp_, f);
-          assert(Is_block(v_));   // a pair of string * type
+          Q_ASSERT(Is_block(v_));   // a pair of string * type
           std::shared_ptr<RamenType const> subType =
             std::make_shared<RamenType const>(Field(v_, 1));
           sum->append(QString(String_val(Field(v_, 0))), subType);
@@ -1002,7 +1001,7 @@ static DessserValueType *blockyValueTypeOfOCaml(value v_)
       }
       break;
     default:
-      assert(!"Unknown tag for compound DessserValueType!");
+      Q_ASSERT(!"Unknown tag for compound DessserValueType!");
   }
   return ret;
 }

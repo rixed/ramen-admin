@@ -514,97 +514,97 @@ void TimeChart::paintEvent(QPaintEvent *event)
    * the above funcs map) */
   editWidget->iterFields([this, numAxes, &funcs, &axes](
     std::string const &site, std::string const &program,
-    std::string const &function, dessser::gen::dashboard_widget::field const &field) {
-
-    if (field.axis >= numAxes) {
-      /* Can happen in between a new axis is used in the fields and that axis
-       * being added to the axis editor. */
-      qDebug() << "Field uses axis" << field.axis
-               << "that's not been created yet";
-      return;
-    }
-
-    // Lookup the function:
-    std::shared_ptr<Function> func;
-    QString const funcFq {
-      QString::fromStdString(site) + ":" +
-      QString::fromStdString(program) + "/" +
-      QString::fromStdString(function) };
-    auto it { funcs.find(funcFq) };
-    if (it != funcs.end()) {
-      func = it->second.func;
-    } else {
-      func = Function::find(QString::fromStdString(site),
-                            QString::fromStdString(program),
-                            QString::fromStdString(function));
-      if (! func) {
-        qCritical("TimeChart: Cannot find Function for %s:%s/%s",
-          site.c_str(), program.c_str(), function.c_str());
-        return; // better safe than sorry
+    std::string const &function, dessser::gen::dashboard_widget::field const &field)
+    {
+      if (field.axis >= numAxes) {
+        /* Can happen in between a new axis is used in the fields and that axis
+         * being added to the axis editor. */
+        qDebug() << "Field uses axis" << field.axis
+                 << "that's not been created yet";
+        return;
       }
 
-      // Redisplay on new arrivals:
-      std::shared_ptr<PastData> past { func->getPast() };
-      if (past) {
-        connect(past.get(), &PastData::tupleReceived,
-                this, [this]() {
-          update();
-        });
-      }
+      // Lookup the function:
+      std::shared_ptr<Function> func;
+      QString const funcFq {
+        QString::fromStdString(site) + ":" +
+        QString::fromStdString(program) + "/" +
+        QString::fromStdString(function) };
+      auto it { funcs.find(funcFq) };
+      if (it != funcs.end()) {
+        func = it->second.func;
+      } else {
+        func = Function::find(QString::fromStdString(site),
+                              QString::fromStdString(program),
+                              QString::fromStdString(function));
+        if (! func) {
+          qCritical("TimeChart: Cannot find Function for %s:%s/%s",
+            site.c_str(), program.c_str(), function.c_str());
+          return; // better safe than sorry
+        }
 
-      auto emplaced { funcs.emplace(funcFq, func) };
-      it = emplaced.first;
-
-      /* Also ask for this function's tail: */
-      std::shared_ptr<TailModel const> tailModel { func->getTail() };
-      if (! tailModel) {
-        if (verbose)
-          qDebug() << "TimeChart: Requesting tail";
-        tailModel = func->getOrCreateTail();
-        if (tailModel) {
-          connect(tailModel.get(), &TailModel::rowsInserted,
-                  this, [this,tailModel]() {
-            // Signal the new front time
-            double const t { tailModel->maxEventTime() };
-            if (! std::isnan(t)) emit newTailTime(t);
-            // Redraw the chart
+        // Redisplay on new arrivals:
+        std::shared_ptr<PastData> past { func->getPast() };
+        if (past) {
+          connect(past.get(), &PastData::tupleReceived,
+                  this, [this]() {
             update();
           });
-        } else {
-          qCritical().nospace()
-            << "TimeChart: Cannot get tail for function "
-            << QString::fromStdString(func->siteName) << ':'
-            << QString::fromStdString(func->fqName);
+        }
+
+        auto emplaced { funcs.emplace(funcFq, func) };
+        it = emplaced.first;
+
+        /* Also ask for this function's tail: */
+        std::shared_ptr<TailModel const> tailModel { func->getTail() };
+        if (! tailModel) {
+          if (verbose)
+            qDebug() << "TimeChart: Requesting tail";
+          tailModel = func->getOrCreateTail();
+          if (tailModel) {
+            connect(tailModel.get(), &TailModel::rowsInserted,
+                    this, [this,tailModel]() {
+              // Signal the new front time
+              double const t { tailModel->maxEventTime() };
+              if (! std::isnan(t)) emit newTailTime(t);
+              // Redraw the chart
+              update();
+            });
+          } else {
+            qCritical().nospace()
+              << "TimeChart: Cannot get tail for function "
+              << QString::fromStdString(func->siteName) << ':'
+              << QString::fromStdString(func->fqName);
+          }
         }
       }
-    }
-    Q_ASSERT(func);
-    int const fieldNum { getFieldNum(func, field.column) };
-    if (fieldNum < 0) return;
+      Q_ASSERT(func);
+      int const fieldNum { getFieldNum(func, field.column) };
+      if (fieldNum < 0) return;
 
-    // Add this field in the request and remember its location:
-    PerFunctionResults &res { it->second };
+      // Add this field in the request and remember its location:
+      PerFunctionResults &res { it->second };
 
-    size_t const factorValues { res.addFactors(field.factors) };
-    switch (field.representation->index()) {
-      case dessser::gen::dashboard_widget::Unused:
-        break;  // Well tried!
-      case dessser::gen::dashboard_widget::Independent:
-        axes[field.axis].independent.emplace_back(
-          &res, field.column, res.columns.size(), factorValues, field.color);
-        break;
-      case dessser::gen::dashboard_widget::Stacked:
-        axes[field.axis].stacked.emplace_back(
-          &res, field.column, res.columns.size(), factorValues, field.color);
-        break;
-      case dessser::gen::dashboard_widget::StackCentered:
-        axes[field.axis].stackCentered.emplace_back(
-          &res, field.column, res.columns.size(), factorValues, field.color);
-        break;
-    }
+      size_t const factorValues { res.addFactors(field.factors) };
+      switch (field.representation->index()) {
+        case dessser::gen::dashboard_widget::Unused:
+          break;  // Well tried!
+        case dessser::gen::dashboard_widget::Independent:
+          axes[field.axis].independent.emplace_back(
+            &res, field.column, res.columns.size(), factorValues, field.color);
+          break;
+        case dessser::gen::dashboard_widget::Stacked:
+          axes[field.axis].stacked.emplace_back(
+            &res, field.column, res.columns.size(), factorValues, field.color);
+          break;
+        case dessser::gen::dashboard_widget::StackCentered:
+          axes[field.axis].stackCentered.emplace_back(
+            &res, field.column, res.columns.size(), factorValues, field.color);
+          break;
+      }
 
-    res.columns.push_back(fieldNum);
-  });
+      res.columns.push_back(fieldNum);
+    });
 
   // Then iterate over all functions and fill in the results with actual tuples:
   for (auto &it : funcs) {
@@ -623,10 +623,11 @@ void TimeChart::paintEvent(QPaintEvent *event)
     if (verbose)
       qDebug().nospace()
         << qSetRealNumberPrecision(13)
-        << "TimeChart: collecting tuples for " << res.columns.size()
+        << "TimeChart: Collecting tuples for " << res.columns.size()
         << " columns of " << QString::fromStdString(res.func->siteName)
         << ':' << QString::fromStdString(res.func->fqName)
-        << " between " << m_viewPort.first << " and " << m_viewPort.second;
+        << " between " << stringOfDate(m_viewPort.first)
+        << " and " << stringOfDate(m_viewPort.second);
 
     res.func->iterValues(m_viewPort.first, m_viewPort.second, true, res.columns,
       [&res](double time,

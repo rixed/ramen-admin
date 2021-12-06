@@ -33,6 +33,7 @@ protected:
   void resizeEvent(QResizeEvent *);
 
 signals:
+  // Re-emitted (after a few bounces) from the controlling TimeRangeEditor
   void timeRangeChanged(TimeRange const &);
   void newTailTime(double);
 };
