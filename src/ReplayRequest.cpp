@@ -178,38 +178,27 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
     if (verbose)
       qDebug() << "Received a batch of" << batch.size() << "tuples";
 
-    for (std::shared_ptr<dessser::gen::sync_value::tuple const> tuple : batch) {
-      /* TODO: tuple should carry a raql_value directly instead of bytes! */
-#     if 0
-      dessser::gen::raql_value const *val { tuple.unserialize(type) };
-      if (! val) {
-        qCritical() << "Cannot unserialize tuple:" << *kv.val;
-        continue;
-      }
-
-      std::optional<double> start(eventTime->startOfTuple(*val));
+    for (std::shared_ptr<dessser::gen::sync_value::tuple> const tuple : batch) {
+      std::optional<double> start { eventTime->startOfTuple(*tuple->values) };
       if (! start) {
         qCritical() << "Dropping tuple missing event time";
         continue;
       }
 
-      if (!start || (*start >= since && *start <= until)) {
+      if (*start >= since && *start <= until) {
         if (verbose)
-          qDebug() << "ReplayRequest: received" << val->toQString(std::string());;
+          qDebug() << "ReplayRequest: received" << *tuple->values;
 
-        tuples.insert(std::make_pair(*start, val));
+        tuples.insert(std::make_pair(*start, tuple->values));
         hadTuple = true;
       } else {
-        std::optional<double> stop(eventTime->stopOfTuple(*val));
+        std::optional<double> stop { eventTime->stopOfTuple(*tuple->values) };
         if (! stop || !overlap(*start, *stop, since, until)) {
           qCritical() << qSetRealNumberPrecision(13)
                       << "Ignoring a tuple which time" << int64_t(*start)
                       << "is not within" << since << "..." << until;
         }
       }
-#     else
-      qDebug() << "Tuple: skipped" << tuple->skipped;
-#     endif
     }
   } // destroy guard
 
