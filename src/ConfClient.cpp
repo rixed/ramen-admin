@@ -624,12 +624,12 @@ int ConfClient::sendNew(
       std::shared_ptr<dessser::gen::sync_value::t const> val,
       double timeout)
 {
-  if (verbose)
-    qDebug() << "ConfClient::sendNew:" << *key << "=" << *val;
-
   // Set a placeholder null value by default:
   if (! val)
     val = std::static_pointer_cast<dessser::gen::sync_value::t const>(nullVal);
+
+  if (verbose)
+    if (val) qDebug() << "ConfClient::sendNew:" << *key << "=" << *val;
 
   std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd {
     std::make_shared<dessser::gen::sync_client_cmd::t const>(
