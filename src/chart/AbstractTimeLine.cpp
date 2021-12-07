@@ -136,13 +136,14 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event)
 
 bool AbstractTimeLine::event(QEvent *event)
 {
-  if (event->type() != QEvent::Gesture)
+  if (event->type() != QEvent::Gesture) {
+ignore:
     return QWidget::event(event);
+}
 
   QGestureEvent *e { static_cast<QGestureEvent *>(event) };
   QGesture *pinch_ { e->gesture(Qt::PinchGesture) };
-  if (! pinch_)
-    return QWidget::event(event);
+  if (! pinch_) goto ignore;
 
   QPinchGesture *pinch { static_cast<QPinchGesture *>(pinch_) };
 
@@ -157,6 +158,46 @@ bool AbstractTimeLine::event(QEvent *event)
       break;
   }
   return true;
+}
+
+void AbstractTimeLine::wheelEvent(QWheelEvent *event)
+{
+  if (! m_doScroll) {
+ignore:
+    QWidget::wheelEvent(event); // will ignore() the event
+    return;
+  }
+
+  /* Zooming with the mouse wheel is more convenient than with the keyboard, but
+   * it will prevent any enclosing scroll area to get the event, so for instance
+   * in a long dashboard the user scrolling through the dashboard would be
+   * interrupted with zooms. To limit this annoyance only the top left corner is
+   * sensitive to zoom (FIXME: at least, display something there) */
+  QPointF const mouse_pos { event->position() };
+  if (mouse_pos.x() > 20 || mouse_pos.y() > 20) goto ignore;
+
+  QPoint p { event->pixelDelta() };
+  if (p.isNull()) {
+    p = event->angleDelta() / 8;
+  }
+
+  if (! p.isNull()) {
+    qreal zoom { p.y() >= 0 ? 0.97 : 1.03 };
+
+    qreal const leftWidth { zoom * (m_currentTime - m_viewPort.first) };
+    qreal const rightWidth { zoom * (m_viewPort.second - m_currentTime) };
+
+    auto newViewPort { QPair<qreal, qreal>(
+      std::max(m_currentTime - leftWidth, m_beginOfTime),
+      std::min(m_currentTime + rightWidth, m_endOfTime)) };
+    if (newViewPort == m_viewPort) goto ignore;
+
+    setViewPort(newViewPort);
+    emit viewPortChanged(m_viewPort);
+  }
+
+  /* Prevent propagation to any QScrollArea: */
+  event->accept();
 }
 
 void AbstractTimeLine::keyPressEvent(QKeyEvent *event)
@@ -359,6 +400,8 @@ void AbstractTimeLine::setTimeRange(TimeRange const &range)
                                            << stringOfDate(until) << ")";
   setBeginOfTime(since);
   setEndOfTime(until);
+  // Also reset the zoom
+  setViewPort(QPair { since, until });
 }
 
 void AbstractTimeLine::highlightRange(QPair<qreal, qreal> const range)

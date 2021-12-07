@@ -11,8 +11,10 @@
  * Not to be confused with QTimeLine, which is not a widget but an object to
  * control animations. */
 #include <optional>
-#include <QWidget>
+#include <QMouseEvent>
 #include <QPair>
+#include <QWidget>
+#include <QWheelEvent>
 
 struct TimeRange;
 
@@ -53,6 +55,7 @@ protected:
   void mouseMoveEvent(QMouseEvent *) override;
   void mousePressEvent(QMouseEvent *) override;
   void mouseReleaseEvent(QMouseEvent *) override;
+  void wheelEvent(QWheelEvent *) override;
   bool event(QEvent *) override;
   void keyPressEvent(QKeyEvent *) override;
   void enterEvent(QEvent *) override { hovered = true; }
@@ -117,7 +120,9 @@ public slots:
 
   /* This matches TimeRangeEditor signals and allow to control both the
    * beginOfTime and endOfTime, so that the TimeRangeEditor controls the
-   * large picture while user is still able to zoom the viewport at will. */
+   * large picture while user is still able to zoom the viewport at will.
+   * On reception of that signal the zoom is reset so that the full new
+   * time range is visible, though. */
   void setTimeRange(TimeRange const &);
 
 signals:
