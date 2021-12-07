@@ -38,7 +38,6 @@ DashboardWidgetForm::DashboardWidgetForm(
 
   widget = new DashboardWidget(dashboard, this, this);
   widget->setObjectName("GenericDashboardWidget");
-  addWidget(widget, true);
 
   QMenuBar *menuBar { new QMenuBar };
   menuBar->addAction(tr("export"));
@@ -74,6 +73,8 @@ DashboardWidgetForm::DashboardWidgetForm(
   /* Now that everything is connected, set the key (which will set the
    * value) */
   widget->setKey(widgetKey);
+  /* And add it to the form that will then get the initial value: */
+  addWidget(widget, true);
 
   /* Or the top-left corner button will float away if the menubar expands
    * vertically, for some unfathomable reason: */
