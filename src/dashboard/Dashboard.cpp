@@ -33,9 +33,9 @@ Dashboard::Dashboard(std::string const &dash_name, QWidget *parent)
   timeLineGroup = new TimeLineGroup(this);
 
   // TODO: globalGraphModelWithoutTopHalves, cf chart/TimeChartFunctionsEditor
-  GraphModel *graph(GraphModel::globalGraphModel);
+  GraphModel *graph { GraphModel::globalGraphModel };
   functionSelector = new FunctionSelector(graph);
-  QPushButton *addButton = new QPushButton(tr("Add"));
+  QPushButton *addButton { new QPushButton(tr("Add")) };
   connect(addButton, &QPushButton::clicked,
           this, &Dashboard::addCurrentFunction);
 
@@ -45,20 +45,20 @@ Dashboard::Dashboard(std::string const &dash_name, QWidget *parent)
   placeHolder->setObjectName("placeHolder");
   splitter = new QSplitter(Qt::Vertical);
 
-  QScrollArea *scrollArea = new QScrollArea(this);
+  QScrollArea *scrollArea { new QScrollArea(this) };
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
   scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scrollArea->setWidgetResizable(true);
   scrollArea->setWidget(splitter);
 
-  QHBoxLayout *bottomBar = new QHBoxLayout;
+  QHBoxLayout *bottomBar { new QHBoxLayout };
   bottomBar->setObjectName("bottomBar");
   bottomBar->addWidget(functionSelector);
   bottomBar->addWidget(addButton);
   bottomBar->addStretch();
   bottomBar->addWidget(timeRangeEdit);
 
-  QVBoxLayout *vboxLayout = new QVBoxLayout;
+  QVBoxLayout *vboxLayout { new QVBoxLayout };
   vboxLayout->setMargin(0);
   vboxLayout->setContentsMargins(QMargins());
   vboxLayout->addWidget(placeHolder);
@@ -104,8 +104,7 @@ void Dashboard::addWidget(std::shared_ptr<dessser::gen::sync_key::t const> key)
   if (verbose)
     qDebug() << "Dashboard: addWidget" << *key << "at index" << *idx;
 
-  DashboardWidgetForm *widgetForm(
-    new DashboardWidgetForm(key, this, this));
+  DashboardWidgetForm *widgetForm { new DashboardWidgetForm(key, this, this) };
 
   /* Add the new widget at the proper position in the layout: */
   int splitterIdx { 0 };

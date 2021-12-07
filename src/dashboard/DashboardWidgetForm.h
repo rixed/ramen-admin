@@ -13,7 +13,7 @@ class QVBoxLayout;
 class QWidget;
 
 /* This is an AtomicForm that's composed of a single AtomicWidget,
- * since all widget values are madde of a single KValue. */
+ * since all widget values are made of a single KValue. */
 class DashboardWidgetForm : public AtomicForm
 {
   Q_OBJECT

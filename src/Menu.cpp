@@ -462,11 +462,11 @@ void Menu::addDashboard(std::string const &dash_name)
 {
   // Locate where to insert this new menu entry:
   QString const menu_name { nameOfDashboard(dash_name) };
-  QList<QAction *> const actions = dashboardMenu->actions();
-  QAction *before = nullptr;
+  QList<QAction *> const actions { dashboardMenu->actions() };
+  QAction *before { nullptr };
   for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); i++) {
-    QString const entryName(removeAmp(actions[i]->text()));
-    int const c = entryName.compare(menu_name);
+    QString const entryName { removeAmp(actions[i]->text()) };
+    int const c { entryName.compare(menu_name) };
     if (c < 0) continue;
     if (c == 0) return;
     before = actions[i];
@@ -476,7 +476,7 @@ void Menu::addDashboard(std::string const &dash_name)
   if (verbose)
     qDebug() << "Menu: Adding dashboard" << menu_name;
 
-  QAction *openDashboardAction(new QAction(menu_name, this));
+  QAction *openDashboardAction { new QAction(menu_name, this) };
   connect(openDashboardAction, &QAction::triggered,
     /* Note to self: those captured copies are actual copies of the underlying
      * data not of the reference */
@@ -510,9 +510,9 @@ void Menu::delValue(dessser::gen::sync_key::t const &key, KValue const &)
     }
 
     QString const name { nameOfDashboard(dash_name) };
-    QList<QAction *> const actions = dashboardMenu->actions();
+    QList<QAction *> const actions { dashboardMenu->actions() };
     for (int i = NUM_STATIC_DASHBOARD_ACTIONS; i < actions.length(); ) {
-      int const c = actions[i]->text().compare(name);
+      int const c { actions[i]->text().compare(name) };
       if (c > 0) {
         qWarning() << "Menu: Deleted dashboard" << name << "not found!?";
         break;

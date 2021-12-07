@@ -347,9 +347,13 @@ void AtomicForm::setEnabled(bool enabled)
   /* Capture the widget initial value if we are enabling edition: */
   if (enabled)
     for (FormWidget &w : widgets) {
-      if (verbose)
-        qDebug() << "AtomicForm::setEnabled: Capture initValue";
       w.initValue = w.widget->getValue();
+      if (verbose) {
+        if (w.initValue)
+          qDebug() << "AtomicForm::setEnabled: Captured initValue" << *w.initValue;
+        else
+          qDebug() << "AtomicForm::setEnabled: no initial value";
+      }
     }
 
   // An enabled form is a form that's editable:

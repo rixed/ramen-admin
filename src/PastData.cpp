@@ -12,7 +12,7 @@
 
 static bool const verbose { false };
 
-static int const maxPending { 3 };
+static int const maxInFlight { 3 };
 
 /* A bit arbitrary, should depend on the tuple density: */
 static double const minGapBetweenReplays(10.);
@@ -25,7 +25,7 @@ PastData::PastData(std::string const &site_, std::string const &program_,
                    QObject *parent) :
   QObject(parent),
   site(site_), program(program_), function(function_),
-  numPending(0),
+  numInFlight(0),
   type(type_),
   eventTime(eventTime_),
   maxTime(maxTime_)
@@ -34,7 +34,7 @@ PastData::PastData(std::string const &site_, std::string const &program_,
 void PastData::check() const
 {
   ReplayRequest const *last { nullptr };
-  int numPending_ { 0 };
+  int numInFlight_ { 0 };
 
   for (ReplayRequest const &r : replayRequests) {
     Q_ASSERT(r.since < r.until);
@@ -42,10 +42,10 @@ void PastData::check() const
       Q_ASSERT(last->until <= r.since);
     last = &r;
 
-    if (r.status != ReplayRequest::Completed) numPending_++;
+    if (r.status != ReplayRequest::Completed) numInFlight_++;
   }
 
-  Q_ASSERT(numPending == numPending_);
+  Q_ASSERT(numInFlight == numInFlight_);
 }
 
 /* Try to merge this new request with that previous one.
@@ -87,7 +87,7 @@ bool PastData::insert(
   std::list<ReplayRequest>::iterator it, double since, double until,
   bool canPostpone)
 {
-  if (numPending >= maxPending) {
+  if (numInFlight >= maxInFlight) {
     if (canPostpone) {
       if (verbose)
         qDebug() << "PastData: too many replay requests in flight, postponing.";
@@ -109,7 +109,7 @@ bool PastData::insert(
     std::list<ReplayRequest>::iterator const &emplaced {
       replayRequests.emplace(it,
         site, program, function, since, until, type, eventTime) };
-    numPending++;
+    numInFlight++;
     connect(&*emplaced, &ReplayRequest::tupleBatchReceived,
             this, &PastData::tupleReceived);
     connect(&*emplaced, &ReplayRequest::endReceived,
@@ -228,11 +228,11 @@ void PastData::iterTuples(
 
 void PastData::replayEnded()
 {
-  Q_ASSERT(numPending > 0);
-  numPending--;
+  Q_ASSERT(numInFlight > 0);
+  numInFlight--;
 
   if (verbose)
-    qDebug() << "PastData: a replay ended (still" << numPending << "pending)";
+    qDebug() << "PastData: a replay ended (still" << numInFlight << "in flight)";
 
   if (!postponedRequests.empty()) {
     if (verbose)

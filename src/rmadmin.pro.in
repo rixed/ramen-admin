@@ -178,7 +178,6 @@ HEADERS += \
   dashboard/DashboardTreeModel.h \
   dashboard/DashboardSelector.h \
   dashboard/DashboardWidgetChart.h \
-  dashboard/DashboardWidgetEditor.h \
   dashboard/DashboardWidgetText.h \
   dashboard/DashboardWidgetForm.h \
   dashboard/DashboardWidget.h \
@@ -356,7 +355,6 @@ SOURCES += \
   dashboard/DashboardTreeModel.cpp \
   dashboard/DashboardSelector.cpp \
   dashboard/DashboardWidgetChart.cpp \
-  dashboard/DashboardWidgetEditor.cpp \
   dashboard/DashboardWidgetText.cpp \
   dashboard/DashboardWidgetForm.cpp \
   dashboard/DashboardWidget.cpp \
