@@ -18,11 +18,12 @@ static int const minTimeLineHeight { 25 }; // below that, hide it
 TimeChartEditor::TimeChartEditor(
   QPushButton *submitButton,
   QPushButton *cancelButton,
+  QPushButton *deleteButton,
   TimeLineGroup *timeLineGroup,
   QWidget *parent)
   : QWidget(parent)
 {
-  editWidget = new TimeChartEditWidget(submitButton, cancelButton);
+  editWidget = new TimeChartEditWidget(submitButton, cancelButton, deleteButton);
   /* Make closing the window the same as cancel */
 
   chart = new TimeChart(editWidget, this);

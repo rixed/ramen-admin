@@ -28,12 +28,13 @@ class TimeChartEditWidget : public AtomicWidget
 
   TimeChartOptionsEditor *optionsEditor;
   TimeChartFunctionsEditor *functionsEditor;
-  QPushButton *cancelButton;
+  QPushButton *cancelButton, *deleteButton;
 
 public:
   TimeChartEditWidget(
     QPushButton *submitButton,
     QPushButton *cancelButton,
+    QPushButton *deleteButton,
     QWidget *parent = nullptr);
 
   void setEnabled(bool) override;

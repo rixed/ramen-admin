@@ -66,7 +66,6 @@ DashboardWidgetForm::DashboardWidgetForm(
   titleBar->addWidget(title);
   titleBar->addStretch();
   titleBar->addWidget(editButton);
-  titleBar->addWidget(deleteButton);
 
   connect(widget, &DashboardWidget::titleChanged,
           this, &DashboardWidgetForm::setTitle);

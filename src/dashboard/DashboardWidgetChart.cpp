@@ -20,6 +20,7 @@ DashboardWidgetChart::DashboardWidgetChart(
     new TimeChartEditor(
       widgetForm ? widgetForm->submitButton : nullptr,
       widgetForm ? widgetForm->cancelButton : nullptr,
+      widgetForm ? widgetForm->deleteButton : nullptr,
       widgetForm ? widgetForm->dashboard->timeLineGroup : nullptr);
 
   connect(this, &DashboardWidgetChart::timeRangeChanged,

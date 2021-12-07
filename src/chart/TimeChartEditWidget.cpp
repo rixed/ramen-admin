@@ -23,9 +23,11 @@ static bool const verbose { false };
 TimeChartEditWidget::TimeChartEditWidget(
   QPushButton *submitButton,
   QPushButton *cancelButton_,
+  QPushButton *deleteButton_,
   QWidget *parent)
   : AtomicWidget(parent),
-    cancelButton(cancelButton_)
+    cancelButton(cancelButton_),
+    deleteButton(deleteButton_)
 {
   optionsEditor = new TimeChartOptionsEditor(this);
   functionsEditor = new TimeChartFunctionsEditor;
@@ -45,6 +47,7 @@ TimeChartEditWidget::TimeChartEditWidget(
   buttonsLayout->addStretch();
   if (cancelButton) buttonsLayout->addWidget(cancelButton);
   if (submitButton) buttonsLayout->addWidget(submitButton);
+  if (deleteButton) buttonsLayout->addWidget(deleteButton);
 
   QVBoxLayout *layout { new QVBoxLayout };
   layout->addWidget(optionsEditor, 0);
@@ -206,6 +209,13 @@ void TimeChartEditWidget::iterFields(std::function<void(
 
 void TimeChartEditWidget::closeEvent(QCloseEvent *event)
 {
-  cancelButton->click();
+  if (cancelButton && cancelButton->isEnabled()) {
+    cancelButton->click();
+  } else {
+    // In some case the only option is to delete:
+    if (deleteButton && deleteButton->isEnabled()) {
+      deleteButton->click();
+    }
+  }
   AtomicWidget::closeEvent(event);
 }

@@ -24,6 +24,7 @@ public:
   TimeChartEditor(
     QPushButton *submitButton,
     QPushButton *cancelButton,
+    QPushButton *deleteButton,
     TimeLineGroup *timeLineGroup,
     QWidget *parent = nullptr);
 
