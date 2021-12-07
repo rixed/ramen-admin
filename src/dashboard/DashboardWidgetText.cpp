@@ -19,29 +19,34 @@ DashboardWidgetText::DashboardWidgetText(
   text = new GrowingTextEdit;
   text->setPlaceholderText(tr("Enter a text here"));
 
-  QHBoxLayout *buttonsLayout = new QHBoxLayout;
+  QHBoxLayout *buttonsLayout { new QHBoxLayout };
   if (widgetForm) {
     buttonsLayout->addStretch();
     buttonsLayout->addWidget(widgetForm->cancelButton);
     buttonsLayout->addWidget(widgetForm->submitButton);
+    buttonsLayout->addWidget(widgetForm->deleteButton);
   }
+  /* We want to hide/show those three buttons simultaneously, and independently
+   * of the AtomicForm that may also call hide/show on the buttons individually.
+   * Therefore we pack them in a widget and will hide/show that widget instead: */
+  QWidget *buttonBox { new QWidget };
+  buttonBox->setLayout(buttonsLayout);
 
   QVBoxLayout *layout = new QVBoxLayout;
   layout->addWidget(text);
-  layout->addLayout(buttonsLayout);
+  layout->addWidget(buttonBox);
   QWidget *widget = new QWidget(this);
   widget->setLayout(layout);
 
   if (widgetForm) {
     widgetForm->setExpand(false);
-    widgetForm->cancelButton->setVisible(false);
-    widgetForm->submitButton->setVisible(false);
+    buttonBox->setVisible(false);
     /* Open/close the editor when the AtomicForm is enabled/disabled: */
     connect(widgetForm, &DashboardWidgetForm::changeEnabled,
-            this, [widgetForm](bool enabled) {
-      widgetForm->cancelButton->setVisible(enabled);
-      widgetForm->submitButton->setVisible(enabled);
-    });
+            this, [buttonBox](bool enabled)
+      {
+        buttonBox->setVisible(enabled);
+      });
   };
 
   QSizePolicy p { sizePolicy() };
