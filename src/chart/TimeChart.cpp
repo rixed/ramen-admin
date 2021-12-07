@@ -804,8 +804,8 @@ void TimeChart::Axis::iterTime(
 
   if (0 == numValues) return;
 
-  std::vector<std::pair<std::optional<qreal>, QColor>> values {
-    numValues, std::make_pair(std::nullopt, QColor()) };
+  std::vector<std::pair<std::optional<qreal>, QColor>> values(  // Not list-init
+    numValues, std::make_pair(std::nullopt, QColor()));
 
   size_t numTuples[numValues];
 
@@ -826,8 +826,8 @@ void TimeChart::Axis::iterTime(
   }
 
   /* Iterate over time steps: */
-  std::vector<size_t> nextTupleIdx { numValues, 0 };
-  std::vector<bool> done { !!numValues, false };
+  std::vector<size_t> nextTupleIdx (numValues, 0);  // Not list-init here!
+  std::vector<bool> done (numValues, false);  // Not list-init here!
   unsigned numDone { 0 };
 
   while (numDone < numValues) {
