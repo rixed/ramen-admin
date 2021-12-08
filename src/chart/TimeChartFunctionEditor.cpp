@@ -98,6 +98,10 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   fields->setItemDelegateForColumn(
     TimeChartFunctionFieldsModel::ColColor, colorDelegate);
 
+  /*
+   * Emit fieldChanged whenever the underlying model data is changed:
+   */
+
   connect(model, &QAbstractTableModel::dataChanged,
           this, [this](QModelIndex const &topLeft,
                        QModelIndex const &bottomRight)
@@ -122,6 +126,20 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
                    << model->numericFields[row];
         emit fieldChanged(source.name->site, source.name->program, source.name->function,
                           model->numericFields[row].toStdString());
+      }
+    });
+
+  connect(model, &QAbstractTableModel::modelReset,
+          this, [this]()
+    {
+      if (verbose)
+        qDebug() << "TimeChartFunctionEditor: model data reset";
+      for (QString const &numericField : model->numericFields) {
+        if (verbose)
+          qDebug() << "TimeChartFunctionEditor: fieldChanged" << numericField;
+        dessser::gen::dashboard_widget::source const &source { model->source };
+        emit fieldChanged(source.name->site, source.name->program, source.name->function,
+                          numericField.toStdString());
       }
     });
 
@@ -300,13 +318,14 @@ bool TimeChartFunctionEditor::setValue(
   if (source.visible != visible->isChecked()) {
     visible->setChecked(source.visible);
   }
-  model->setValue(source);
+  /* Will trigger QAbstractTableModel::resetModel and thus fieldChanged: */
+  bool const ret { model->setValue(source) };
 
   /* Offer to delete (without confirmation dialog) a function as long as
    * it has no field drawn: */
   deleteButton->setEnabled(!model->hasSelection());
 
-  return true;
+  return ret;
 }
 
 std::shared_ptr<dessser::gen::dashboard_widget::source>

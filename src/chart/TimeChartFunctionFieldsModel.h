@@ -78,7 +78,9 @@ protected slots:
   void checkSource(QString const &, QString const &);
 
 public slots:
-  // Faster and simpler than individual setData:
+  /* Faster and simpler than individual setData:
+   * Returns false if value could not be set.
+   * Emits modelReset. */
   bool setValue(dessser::gen::dashboard_widget::source const &);
 };
 

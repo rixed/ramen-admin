@@ -48,6 +48,11 @@ TimeChart::TimeChart(TimeChartEditWidget *editWidget_, QWidget *parent)
           this, &TimeChart::redrawAxis);
   connect(editWidget, &TimeChartEditWidget::fieldChanged,
           this, &TimeChart::redrawField);
+  /* TODO: when many fields change simultaneously (such as when the dashboard
+   * widget value is swapped for another one) we are going to be signaled once
+   * per displayed field, which will trigger as many redraw. Maybe another signal
+   * would be better in this case, that redraw everything without changing the
+   * focusedField? */
 
   setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 }
