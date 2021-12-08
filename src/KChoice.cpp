@@ -44,14 +44,13 @@ std::shared_ptr<dessser::gen::sync_value::t const> KChoice::getValue() const
 }
 
 bool KChoice::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   for (unsigned i = 0; i < choices.size(); i ++) {
     if (*choices[i].second == *v) {
       if (! choices[i].first->isChecked()) {
         choices[i].first->setChecked(true);
-        emit valueChanged(k, v);
+        emit valueChanged(v);
       }
       return true;
     }

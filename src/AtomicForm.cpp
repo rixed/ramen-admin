@@ -267,7 +267,7 @@ void AtomicForm::doCancel()
     std::shared_ptr<dessser::gen::sync_key::t const> key { w.widget->key() };
     if (! key) continue;
     if (! w.initValue) continue;
-    w.widget->setValue(key, w.initValue);
+    w.widget->setValue(w.initValue);
     Menu::getClient()->sendUnlock(key);
   }
 }

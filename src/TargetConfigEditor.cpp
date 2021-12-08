@@ -94,7 +94,6 @@ void TargetConfigEditor::setEnabled(bool enabled)
 */
 
 bool TargetConfigEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (v->index() != dessser::gen::sync_value::TargetConfig) {
@@ -142,7 +141,7 @@ bool TargetConfigEditor::setValue(
             this, &TargetConfigEditor::inputChanged);
 */
 
-  emit valueChanged(k, v);
+  emit valueChanged(v);
 
   return true;
 }

@@ -32,12 +32,10 @@ class AtomicWidget : public QWidget
   // For the default implementation of setKey()/key()
   std::shared_ptr<dessser::gen::sync_key::t const> _key;
 
-  // Key here is not allowed to be nullptr:
-  void setValueFromStore(
-    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
-
   void lockValue(dessser::gen::sync_key::t const &, KValue const &);
+
   void unlockValue(dessser::gen::sync_key::t const &, KValue const &);
+
   void forgetValue(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
@@ -91,7 +89,6 @@ public:
    * copy. */
   // TODO: replace the widget with an error message then.
   virtual bool setValue(
-    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>) = 0;
 
   virtual bool hasValidInput() const { return true; }
@@ -101,9 +98,13 @@ public:
    * each time we need the actual value (which is almost never - the widget
    * produces the value).
    * If nullptr, the value is not supposed to be found in the configuration,
-   * and edition is disabled.
-   * Returns whether the value was accepted by setValue. */
-  virtual bool setKey(std::shared_ptr<dessser::gen::sync_key::t const>);
+   * and edition is disabled. */
+  virtual void setKey(std::shared_ptr<dessser::gen::sync_key::t const>);
+
+  /* Get the value from the store and call setValue. Does nothing if the
+   * key is unset.
+   * Returns the result of setValue, or true if the key is unset. */
+  bool setValueFromStore();
 
 protected:
   void relayoutWidget(QWidget *w);
@@ -117,8 +118,7 @@ signals:
                   std::shared_ptr<dessser::gen::sync_key::t const> new_);
 
   // Triggered when the underlying value is changed
-  void valueChanged(std::shared_ptr<dessser::gen::sync_key::t const>,
-                    std::shared_ptr<dessser::gen::sync_value::t const>);
+  void valueChanged(std::shared_ptr<dessser::gen::sync_value::t const>);
 
   // Triggered when the edited value is changed
   void inputChanged();

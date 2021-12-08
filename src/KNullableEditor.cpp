@@ -54,11 +54,8 @@ void KNullableEditor::setEnabled(bool enabled)
 }
 
 bool KNullableEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  key = k;  // save it for valueChanged signal
-
   Q_ASSERT(v->index() == dessser::gen::sync_value::RamenValue);
   std::shared_ptr<dessser::gen::raql_value::t const> rv {
     std::get<dessser::gen::sync_value::RamenValue>(*v) };
@@ -69,7 +66,7 @@ bool KNullableEditor::setValue(
     nullButton->setChecked(true);
     return true;
   } else {
-    bool ret { editor->setValue(k, v) };
+    bool ret { editor->setValue(v) };
     if (!notNullButton->isChecked()) {
       notNullButton->setChecked(true);
       ret = true;
@@ -80,12 +77,12 @@ bool KNullableEditor::setValue(
 
 void KNullableEditor::setNull()
 {
-  emit valueChanged(key, nullVal);
+  emit valueChanged(nullVal);
   editor->setEnabled(false);
 }
 
 void KNullableEditor::setNotNull()
 {
   editor->setEnabled(isEnabled());
-  emit valueChanged(key, editor->getValue());
+  emit valueChanged(editor->getValue());
 }

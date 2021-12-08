@@ -554,12 +554,15 @@ void ConfTreeWidget::createItemByNames(
     createItemByNames(names, key, kv, item);
   } else {
     // "The tree takes ownership of the widget"
-    KShortLabel *shortLabel = new KShortLabel;
+    KShortLabel *shortLabel { new KShortLabel };
     shortLabel->setKey(key);
+    shortLabel->setValueFromStore();
     shortLabel->setContentsMargins(8, 8, 8, 8);
     // Redraw/resize whenever the value is changed:
     connect(shortLabel, &AtomicWidget::valueChanged,
-            this, &ConfTreeWidget::editedValueChanged);
+            [this, key](std::shared_ptr<dessser::gen::sync_value::t const> val) {
+              editedValueChanged(key, val);
+            });
     setItemWidget(item, 1, shortLabel);
     setItemWidget(item, 3, actionWidget(key, kv.can_write, kv.can_del));
   }

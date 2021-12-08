@@ -80,7 +80,6 @@ void KArrEditor::setEnabled(bool enabled)
 }
 
 bool KArrEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   // Value is supposed to be a RamenValue.VArr:
@@ -95,10 +94,10 @@ bool KArrEditor::setValue(
   for (size_t i = 0; i < lst.size(); i++) {
     AtomicWidget *editor { editorAt(i) };
     if (! editor) editor = insertNewEditor(i);
-    res = editor->setValue(nullptr, makeRamenValue(lst[i])) || res;
+    res = editor->setValue(makeRamenValue(lst[i])) || res;
   }
 
-  if (res) emit valueChanged(k, v);
+  if (res) emit valueChanged(v);
   return res;
 }
 

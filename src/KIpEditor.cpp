@@ -41,14 +41,13 @@ void KIpEditor::setEnabled(bool enabled)
 }
 
 bool KIpEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v { syncValToQString(*v, k) };
+  QString new_v { syncValToQString(*v, key()) };
 
   if (new_v != lineEdit->text()) {
     lineEdit->setText(new_v);
-    emit valueChanged(k, v);
+    emit valueChanged(v);
   }
 
   return true;

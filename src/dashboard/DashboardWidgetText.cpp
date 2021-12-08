@@ -63,7 +63,6 @@ void DashboardWidgetText::setEnabled(bool enabled)
 }
 
 bool DashboardWidgetText::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (v->index() != dessser::gen::sync_value::DashboardWidget) {
@@ -77,6 +76,7 @@ not_a_dash:
 
   if (w->index() != dessser::gen::dashboard_widget::Text) goto not_a_dash;
 
+  // TODO: emit valueChanged?
   text->setHtml(
     QString::fromStdString(std::get<dessser::gen::dashboard_widget::Text>(*w)));
 

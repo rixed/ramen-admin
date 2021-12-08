@@ -61,7 +61,6 @@ void KRecEditor::setEnabled(bool enabled)
 }
 
 bool KRecEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   // Value is supposed to be a RamenValue.VRec:
@@ -77,11 +76,11 @@ bool KRecEditor::setValue(
   for (size_t i = 0; i < rec.size(); i++) {
     for (size_t j = 0; j < editors.size(); j++) {
       if (editors[j].first != std::get<0>(*rec[i])) continue;
-      res = editors[i].second->setValue(nullptr, makeRamenValue(std::get<1>(*rec[i]))) || res;
+      res = editors[i].second->setValue(makeRamenValue(std::get<1>(*rec[i]))) || res;
       break;
     }
   }
 
-  if (res) emit valueChanged(k, v);
+  if (res) emit valueChanged(v);
   return res;
 }

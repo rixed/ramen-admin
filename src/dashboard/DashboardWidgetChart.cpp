@@ -63,8 +63,7 @@ std::shared_ptr<dessser::gen::sync_value::t const> DashboardWidgetChart::getValu
 }
 
 bool DashboardWidgetChart::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> key,
   std::shared_ptr<dessser::gen::sync_value::t const> val)
 {
-  return chart->editWidget->setValue(key, val);
+  return chart->editWidget->setValue(val);
 }

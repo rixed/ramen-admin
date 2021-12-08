@@ -56,10 +56,9 @@ void KTextEdit::setEnabled(bool enabled)
 }
 
 bool KTextEdit::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v { syncValToQString(*v, k) };
+  QString new_v { syncValToQString(*v, key()) };
 
   if (new_v != textEdit->toPlainText()) {
     textEdit->setPlainText(new_v);
@@ -69,9 +68,9 @@ bool KTextEdit::setValue(
        * within reason: */
       QFont font(textEdit->document()->defaultFont());
       QFontMetrics fontMetrics((QFontMetrics(font)));
-      int const tabWidth = 20;  // FIXME: get this from somewhere
-      QSize const maxSize(QDesktopWidget().availableGeometry(this).size() * 0.7);
-      QSize textSize(fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth));
+      int const tabWidth { 20 };  // FIXME: get this from somewhere
+      QSize const maxSize { QDesktopWidget().availableGeometry(this).size() * 0.7 };
+      QSize textSize { fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth) };
       suggestedSize = QSize(
         std::min(maxSize.width(), textSize.width()),
         std::min(maxSize.height(), textSize.height()));
@@ -81,7 +80,7 @@ bool KTextEdit::setValue(
                  << "(max is" << maxSize << ")";
     }
 
-    emit valueChanged(k, v);
+    emit valueChanged(v);
   }
 
   return true;

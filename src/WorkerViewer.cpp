@@ -80,7 +80,6 @@ static QString const qstringOfRef(dessser::gen::func_ref::t const &ref)
 }
 
 bool WorkerViewer::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous params/parents layouts: */
@@ -121,6 +120,7 @@ bool WorkerViewer::setValue(
         parents->addWidget(l);
       }
     }
+    // TODO: emit valueChanged?
     return true;
   } else {
     qCritical() << "Not a Worker value?!";

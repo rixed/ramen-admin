@@ -315,6 +315,9 @@ AtomicWidget *newEditorWidget(
       break;
   }
 
-  if (editor && k) editor->setKey(k);
+  if (editor && k) {
+    editor->setKey(k);
+    editor->setValueFromStore();
+  }
   return editor;
 }

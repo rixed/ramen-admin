@@ -23,10 +23,11 @@ void AtomicWidget::onChange(QList<ConfChange> const &changes)
 {
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change { changes.at(i) };
+    if (! sameKey(*change.key)) continue;
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
-        setValueFromStore(change.key, change.kv);
+        setValue(change.kv.val);
         break;
       case KeyDeleted:
         forgetValue(*change.key, change.kv);
@@ -60,29 +61,55 @@ QString AtomicWidget::dbgId() const
          QString("]");
 }
 
-bool AtomicWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKey)
+void AtomicWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKey)
 {
-  if (sameKey(newKey)) return true;
+  if (sameKey(newKey)) return;
 
   if (verbose)
     qDebug() << dbgId() << ": changing key to"
              << (newKey ? syncKeyToQString(*newKey) : QString("unset"));
 
   std::shared_ptr<dessser::gen::sync_key::t const> oldKey { key() };
-  saveKey(newKey);
-  Q_ASSERT(sameKey(newKey));  // at least for now
+  if (oldKey != newKey) {
+    saveKey(newKey);
+    Q_ASSERT(sameKey(newKey));  // at least for now
+    emit keyChanged(oldKey, newKey);
+  }
+}
 
-  bool ok { true };
+void AtomicWidget::lockValue(dessser::gen::sync_key::t const &, KValue const &kv)
+{
+  setEnabled(my_uid && kv.isMine());
+}
 
-  if (newKey) {
+/* TODO: Couldn't we have a single lockChange signal, now that both lock
+ * and unlock pass a PVPair? */
+void AtomicWidget::unlockValue(dessser::gen::sync_key::t const &, KValue const &)
+{
+  setEnabled(false);
+}
+
+void AtomicWidget::forgetValue(dessser::gen::sync_key::t const &k, KValue const &)
+{
+  if (verbose)
+    qDebug() << dbgId() << ": forgetValue for key" << k;
+
+  setKey(nullptr); // should also disable the widget
+}
+
+bool AtomicWidget::setValueFromStore()
+{
+  std::shared_ptr<dessser::gen::sync_key::t const> k { key() };
+  if (k) {
+    bool ok { true };
     kvs->lock.lock_shared();
-    auto it = kvs->map.find(newKey);
+    auto it = kvs->map.find(k);
     if (it == kvs->map.end()) {
       if (verbose)
-        qDebug() << dbgId() << ": ...which is not in the kvs yet";
+        qDebug() << dbgId() << ": ...is not in the kvs yet";
       setEnabled(false);
     } else {
-      ok = setValue(it->first, it->second.val);
+      ok = setValue(it->second.val);
       if (verbose)
         qDebug() << dbgId() << ": set value to" << *it->second.val << (ok ? " (ok)":" XXXXXX");
       if (ok) {
@@ -92,48 +119,10 @@ bool AtomicWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKe
       }
     }
     kvs->lock.unlock_shared();
+    return ok;
   } else {
     // or set the value to nullptr?
     setEnabled(false);
     return true;
   }
-
-  if (ok) emit keyChanged(oldKey, newKey);
-
-  return ok;
-}
-
-void AtomicWidget::lockValue(dessser::gen::sync_key::t const &k, KValue const &kv)
-{
-  if (! sameKey(k)) return;
-
-  setEnabled(my_uid && kv.isMine());
-}
-
-/* TODO: Couldn't we have a single lockChange signal, now that both lock
- * and unlock pass a PVPair? */
-void AtomicWidget::unlockValue(dessser::gen::sync_key::t const &k, KValue const &)
-{
-  if (! sameKey(k)) return;
-
-  setEnabled(false);
-}
-
-void AtomicWidget::forgetValue(dessser::gen::sync_key::t const &k, KValue const &)
-{
-  if (! sameKey(k)) return;
-
-  if (verbose)
-    qDebug() << dbgId() << ": forgetValue for key" << k;
-
-  setKey(nullptr); // should also disable the widget
-}
-
-void AtomicWidget::setValueFromStore(
-  std::shared_ptr<dessser::gen::sync_key::t const> k, KValue const &kv)
-{
-  Q_ASSERT(k);
-  if (! sameKey(*k)) return;
-
-  setValue(k, kv.val);
 }

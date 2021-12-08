@@ -30,7 +30,6 @@ void KVoidEditor::setEnabled(bool)
 }
 
 bool KVoidEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const>v)
 {
   return

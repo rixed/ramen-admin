@@ -26,7 +26,9 @@ class KErrorMsg : public QLabel
 
   void displayError(QString const &);
 
-  void setValueFromStore(dessser::gen::sync_key::t const &, KValue const &);
+  void setError(
+    dessser::gen::sync_key::t const &, KValue const &);
+
   void warnTimeout(dessser::gen::sync_key::t const &, KValue const &);
 
 public:

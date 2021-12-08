@@ -22,7 +22,7 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
-        setValueFromStore(*change.key, change.kv);
+        setError(*change.key, change.kv);
         break;
       case KeyDeleted:
         // Our error key is deleted as part of server timeouting us:
@@ -55,7 +55,8 @@ void KErrorMsg::displayError(QString const &str)
   QLabel::setText(str);
 }
 
-void KErrorMsg::setValueFromStore(dessser::gen::sync_key::t const &k, KValue const &kv)
+void KErrorMsg::setError(
+  dessser::gen::sync_key::t const &k, KValue const &kv)
 {
   if (! key || *key != k) return;
 

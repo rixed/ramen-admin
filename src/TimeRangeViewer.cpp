@@ -23,7 +23,6 @@ TimeRangeViewer::TimeRangeViewer(QWidget *parent) :
 }
 
 bool TimeRangeViewer::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   /* Empty the previous table */
@@ -45,6 +44,7 @@ bool TimeRangeViewer::setValue(
       table->setItem(i, 1, until);
     }
     table->resizeColumnsToContents();
+    // TODO: emit valueChanged?
     return true;
   } else {
     qCritical() << "Not a TimeRange value?!";

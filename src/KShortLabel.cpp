@@ -14,15 +14,14 @@ KShortLabel::KShortLabel(QWidget *parent)
 }
 
 bool KShortLabel::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  QString new_v { syncValToQString(*v, k) };
+  QString new_v { syncValToQString(*v, key()) };
 
   if (new_v != text) {
     text = new_v;
     update();
-    emit valueChanged(k, v);
+    emit valueChanged(v);
   }
 
   return true;

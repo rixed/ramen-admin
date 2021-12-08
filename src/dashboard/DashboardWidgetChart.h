@@ -34,7 +34,6 @@ public:
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const override;
 
   bool setValue(
-    std::shared_ptr<dessser::gen::sync_key::t const>,
     std::shared_ptr<dessser::gen::sync_value::t const>) override;
 
 public slots:

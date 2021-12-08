@@ -113,7 +113,6 @@ void KCidrEditor::setEnabled(bool enabled)
 }
 
 bool KCidrEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   // Extract the IP and mask as sync_values
@@ -168,10 +167,10 @@ bool KCidrEditor::setValue(
 
   /* Take care not to shortcut setting the second value when the first returns
    * true :) */
-  bool s1 { ipEditor->setValue(nullptr, ip) };
-  bool s2 { maskEditor->setValue(nullptr, mask) };
+  bool s1 { ipEditor->setValue(ip) };
+  bool s2 { maskEditor->setValue(mask) };
   bool res { s1 || s2 };
 
-  if (res) emit valueChanged(k, v);
+  if (res) emit valueChanged(v);
   return res;
 }

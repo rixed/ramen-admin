@@ -53,7 +53,6 @@ void KTupEditor::setEnabled(bool enabled)
 }
 
 bool KTupEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   // Value is supposed to be a RamenValue.VTup:
@@ -67,9 +66,9 @@ bool KTupEditor::setValue(
 
   bool res { false };
   for (size_t i = 0; i < tup.size(); i++) {
-    res = editors[i]->setValue(nullptr, makeRamenValue(tup[i])) || res;
+    res = editors[i]->setValue(makeRamenValue(tup[i])) || res;
   }
 
-  if (res) emit valueChanged(k, v);
+  if (res) emit valueChanged(v);
   return res;
 }

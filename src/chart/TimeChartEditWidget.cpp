@@ -42,6 +42,7 @@ TimeChartEditWidget::TimeChartEditWidget(
           this, &TimeChartEditWidget::axisChanged);
   connect(functionsEditor, &TimeChartFunctionsEditor::fieldChanged,
           this, &TimeChartEditWidget::fieldChanged);
+  // TODO: connect those editors to our AtomicWidget::valueChanged signal?
 
   QHBoxLayout *buttonsLayout { new QHBoxLayout };
   buttonsLayout->addStretch();
@@ -65,7 +66,6 @@ void TimeChartEditWidget::setEnabled(bool enabled)
 }
 
 bool TimeChartEditWidget::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const>,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   if (v->index() != dessser::gen::sync_value::DashboardWidget) {
@@ -84,10 +84,10 @@ not_a_chart:
   std::shared_ptr<dessser::gen::dashboard_widget::chart const> conf {
     std::get<dessser::gen::dashboard_widget::Chart>(*widget) };
 
-  if (verbose)
-    qDebug() << "TimeChartEditWidget::setValue: setting a value with"
-             << conf->axes.size() << "axes and"
-             << conf->sources.size() << "sources.";
+  if (verbose) {
+    qDebug() << "TimeChartEditWidget::setValue: setting value" << *conf;
+    if (key()) qDebug() << "(my key is " << *key() << ")";
+  }
 
   optionsEditor->setValue(conf);
   functionsEditor->setValue(*conf);

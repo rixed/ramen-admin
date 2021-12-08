@@ -72,6 +72,7 @@ DashboardWidgetForm::DashboardWidgetForm(
   /* Now that everything is connected, set the key (which will set the
    * value) */
   widget->setKey(widgetKey);
+  widget->setValueFromStore();
   /* And add it to the form that will then get the initial value: */
   addWidget(widget, true);
 

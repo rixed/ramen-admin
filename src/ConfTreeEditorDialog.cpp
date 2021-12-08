@@ -62,6 +62,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   } else {
     editor = new KTextEdit(false, nullptr);
     editor->setKey(key);
+    editor->setValueFromStore();
   }
 
   QDialogButtonBox *buttonBox {

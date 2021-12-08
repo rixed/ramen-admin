@@ -54,7 +54,6 @@ void KVecEditor::setEnabled(bool enabled)
 }
 
 bool KVecEditor::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> k,
   std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
   // Value is supposed to be a RamenValue.VVec:
@@ -68,9 +67,9 @@ bool KVecEditor::setValue(
 
   bool res { false };
   for (size_t i = 0; i < vec.size(); i++) {
-    res = editors[i]->setValue(nullptr, makeRamenValue(vec[i])) || res;
+    res = editors[i]->setValue(makeRamenValue(vec[i])) || res;
   }
 
-  if (res) emit valueChanged(k, v);
+  if (res) emit valueChanged(v);
   return res;
 }

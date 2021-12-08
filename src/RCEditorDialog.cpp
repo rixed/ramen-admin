@@ -34,6 +34,7 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
 
   targetConfigEditor = new TargetConfigEditor;
   targetConfigEditor->setKey(targetConfig);
+  targetConfigEditor->setValueFromStore();
   form->setCentralWidget(targetConfigEditor);
   form->addWidget(targetConfigEditor);
 

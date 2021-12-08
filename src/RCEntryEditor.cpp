@@ -464,7 +464,7 @@ void RCEntryEditor::resetParams()
     AtomicWidget *paramEdit { newRaqlValueEditorWidget(*p->typ) };
     /* In theory, AtomicWidget got their value from the key. But here we
      * have no key but we know the value so let's just set it: */
-    paramEdit->setValue(nullptr, val);
+    paramEdit->setValue(val);
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged,
             this, &RCEntryEditor::inputChanged);

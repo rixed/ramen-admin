@@ -45,11 +45,10 @@ std::shared_ptr<dessser::gen::sync_value::t const> DashboardWidget::getValue() c
 }
 
 bool DashboardWidget::setValue(
-  std::shared_ptr<dessser::gen::sync_key::t const> key,
   std::shared_ptr<dessser::gen::sync_value::t const> val)
 {
   if (val->index() != dessser::gen::sync_value::DashboardWidget) {
-    qCritical() << *key << "is not a DashboardWidget";
+    qCritical() << *val << "is not a DashboardWidget";
     return false;
   }
 
@@ -65,13 +64,13 @@ bool DashboardWidget::setValue(
         if (verbose)
           qDebug() << "DashboardWidget: create a new text widget";
 
+        widgetText = new DashboardWidgetText(widgetForm, this);
+
         if (widgetChart) {
+          widgetText->setKey(widgetChart->key());
           widgetChart->deleteLater();
           widgetChart = nullptr;
         }
-
-        widgetText = new DashboardWidgetText(widgetForm, this);
-        widgetText->setKey(key);
       }
       newCurrent = widgetText;
       break;
@@ -82,15 +81,15 @@ bool DashboardWidget::setValue(
 
         if (! widgetChart) {
           if (verbose)
-            qDebug() << "DashboardWidget: create a new chart widget for key" << *key;
+            qDebug() << "DashboardWidget: create a new chart widget";
+
+          widgetChart = new DashboardWidgetChart(widgetForm, this);
 
           if (widgetText) {
+            widgetChart->setKey(widgetText->key());
             widgetText->deleteLater();
             widgetText = nullptr;
           }
-
-          widgetChart = new DashboardWidgetChart(widgetForm, this);
-          widgetChart->setKey(key);
 
           if (dashboard) {
             connect(dashboard->timeRangeEdit, &TimeRangeEdit::valueChanged,
@@ -119,5 +118,18 @@ bool DashboardWidget::setValue(
     emit titleChanged(title);
   }
 
-  return current->setValue(key, val);
+  return current->setValue(val);
+}
+
+void DashboardWidget::setKey(std::shared_ptr<dessser::gen::sync_key::t const> newKey)
+{
+  /* What if the new key has a value of the wrong type?
+   * There is no support for this. Actually, we do not allo to set the key more
+   * than once! */
+  std::shared_ptr<dessser::gen::sync_key::t const>  curKey { key() };
+  Q_ASSERT(!curKey || !newKey || *curKey != *newKey);
+  saveKey(newKey);
+  // Propagates:
+  if (widgetText) widgetText->setKey(newKey);
+  if (widgetChart) widgetChart->setKey(newKey);
 }
