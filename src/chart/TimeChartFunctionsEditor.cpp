@@ -72,6 +72,7 @@ bool TimeChartFunctionsEditor::setValue(
     v_i++, t_i++
   ) {
     if (v_i >= ordered_sources.size()) {
+remove_function:
       if (verbose)
         qDebug()
           << "TimeChartFunctionsEditor::setValue: extra function" << t_i << "is gone";
@@ -111,9 +112,9 @@ bool TimeChartFunctionsEditor::setValue(
         e->setValue(*src);
         (void)functions->insertItem(t_i, e, name_i);
       } else if (c > 0) {
-        /* QToolBox item comes first. It must be a new function being edited,
-         * and will be subsequently either saved or deleted when the form gets
-         * submitted. For now, ignore it. */
+        /* The current function is no more: */
+        v_i--;
+        goto remove_function; // will decrement t_i
       }
     }
   }
