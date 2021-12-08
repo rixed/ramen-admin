@@ -105,8 +105,9 @@ std::shared_ptr<dessser::gen::sync_value::t const> TimeChartEditWidget::getValue
       optionsEditor->title->text().toStdString(),  // title
       std::const_pointer_cast<dessser::gen::dashboard_widget::type>(chartPlotType)) };
 
-  qDebug()
-    << "TimeChartEditWidget::getValue: title =" << QString::fromStdString(conf->title);
+  if (verbose)
+    qDebug()
+      << "TimeChartEditWidget::getValue: title =" << QString::fromStdString(conf->title);
 
   /* TODO: a signal from functionsEditor when a new axis is requested, that
    * would be connected to the AxisEditor.addAxis(where). */

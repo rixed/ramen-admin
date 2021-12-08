@@ -22,6 +22,9 @@ namespace dessser {
   }
 }
 
+/* FIXME: the actual AtomicWidget tracking the key is already the DashboardWidgetChart,
+ * which is one of the personalities of the polymorphic DashboardWidget. Maybe this
+ * TimechartWidget should then not be an AtomicWidget? */
 class TimeChartEditWidget : public AtomicWidget
 {
   Q_OBJECT

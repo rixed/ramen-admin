@@ -8,7 +8,10 @@
 
 namespace dessser {
   namespace gen {
-    namespace dashboard_widget { struct type; }
+    namespace dashboard_widget {
+      struct chart;
+      struct type;
+    }
     namespace fq_function_name { struct t; }
     namespace raql_expr { struct t; }
     namespace raql_type {
@@ -98,5 +101,6 @@ QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::base const &);
+QDebug operator<<(QDebug, dessser::gen::dashboard_widget::chart const &);
 
 #endif

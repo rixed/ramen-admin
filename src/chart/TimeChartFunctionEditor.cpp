@@ -103,8 +103,8 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
                        QModelIndex const &bottomRight)
     {
       if (verbose)
-        qDebug() << "model data changed from row" << topLeft.row()
-                 << "to" << bottomRight.row();
+        qDebug() << "TimeChartFunctionEditor: model data changed from row"
+                 << topLeft.row() << "to" << bottomRight.row();
       // First reset the factors used by the delegate:
       factorsDelegate->setColumns(model->factors);
       // Then emit fieldChanged for every changed fields:

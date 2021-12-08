@@ -677,7 +677,7 @@ QString syncKeyToQString(dessser::gen::sync_key::t const &k)
 template<typename T>
 QDebug printerOfStream(QDebug debug, T const &t)
 {
-  QDebugStateSaver saver(debug);
+  QDebugStateSaver saver { debug };
   std::ostringstream s;
   s << t;
   debug << QString::fromStdString(s.str());
@@ -732,4 +732,9 @@ QDebug operator<<(QDebug debug, dessser::gen::raql_type::t const &t)
 QDebug operator<<(QDebug debug, dessser::gen::raql_type::base const &b)
 {
   return printerOfStream<dessser::gen::raql_type::base>(debug, b);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::dashboard_widget::chart const &c)
+{
+  return printerOfStream<dessser::gen::dashboard_widget::chart>(debug, c);
 }

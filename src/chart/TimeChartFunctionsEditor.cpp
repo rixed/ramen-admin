@@ -73,15 +73,18 @@ bool TimeChartFunctionsEditor::setValue(
     v_i++, t_i++
   ) {
     if (v_i >= ordered_sources.size()) {
-      if (verbose) qDebug() << "extra function" << t_i << "is gone";
+      if (verbose)
+        qDebug()
+          << "TimeChartFunctionsEditor::setValue: extra function" << t_i << "is gone";
       allFieldsChanged(t_i);
       functions->removeItem(t_i--);
     } else if (t_i >= functions->count()) {
       std::shared_ptr<dessser::gen::dashboard_widget::source const> src {
         ordered_sources[v_i] };
       if (verbose)
-        qDebug() << "appending new function at" << t_i << "for"
-                 << QString::fromStdString(src->name->function);
+        qDebug()
+          << "TimeChartFunctionsEditor::setValue: appending new function at" << t_i
+          << "for" << QString::fromStdString(src->name->function);
       TimeChartFunctionEditor *e {
         addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
       e->setValue(*src);
@@ -91,7 +94,8 @@ bool TimeChartFunctionsEditor::setValue(
         QString::fromStdString(siteFqName(*ordered_sources[v_i]->name)) };
       int const c { name_i.compare(functions->itemText(t_i)) };
       if (c == 0) {
-        if (verbose) qDebug() << "updating function" << t_i;
+        if (verbose)
+          qDebug() << "TimeChartFunctionsEditor::setValue: updating function" << t_i;
         TimeChartFunctionEditor *e {
           static_cast<TimeChartFunctionEditor *>(functions->widget(t_i)) };
         e->setValue(*ordered_sources[v_i]);
@@ -100,8 +104,9 @@ bool TimeChartFunctionsEditor::setValue(
         std::shared_ptr<dessser::gen::dashboard_widget::source const> src {
           ordered_sources[v_i] };
         if (verbose)
-          qDebug() << "inserting function at" << t_i << "for"
-                   << QString::fromStdString(src->name->function);
+          qDebug()
+            << "TimeChartFunctionsEditor::setValue: inserting function at" << t_i
+            << "for" << QString::fromStdString(src->name->function);
         TimeChartFunctionEditor *e {
           addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
         e->setValue(*src);
@@ -129,6 +134,8 @@ void TimeChartFunctionsEditor::allFieldsChanged(int tab_idx)
     static_cast<TimeChartFunctionEditor *>(functions->widget(tab_idx)) };
   dessser::gen::dashboard_widget::source const &source { e->model->source };
   for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+    if (verbose)
+      qDebug() << "TimeChartFunctionsEditor::allFieldsChanged for column" << field->column;
     emit fieldChanged(source.name->site, source.name->program,
                       source.name->function, field->column);
   }

@@ -13,8 +13,8 @@
 #include "desssergen/dashboard_widget.h"
 #include "misc_dessser.h"
 
-/* A TimeChart diplay the actual plot.
- * It is configured from a TimeChartWidget that it provided in the constructor,
+/* A TimeChart displays the actual plot.
+ * It is configured from a TimeChartWidget that is provided in the constructor,
  * to which it attaches to receive the various changes. */
 
 class Function;

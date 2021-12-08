@@ -15,7 +15,7 @@ class QWidget;
 
 /* This is an AtomicWidget that can switch representation between a chart
  * or a text box, thus surviving setKey that change the widget type.
- * It is the AtomicWidget that is added in the DashboardWidgetForm; the
+ * It is the AtomicWidget that is added in the DashboardWidgetForm; The
  * underlying DashboardWidgetText/Chart is not. */
 class DashboardWidget : public AtomicWidget
 {
