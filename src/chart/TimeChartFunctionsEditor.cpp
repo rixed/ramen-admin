@@ -62,8 +62,7 @@ bool TimeChartFunctionsEditor::setValue(
       if (c2 < 0) return true;
       if (c2 > 0) return false;
       int const c3 { a->name->function.compare(b->name->function) };
-      if (c3 <= 0) return true;
-      return false;
+      return c3 <= 0;
     });
 
   size_t v_i { 0 }; // index in v.sources
