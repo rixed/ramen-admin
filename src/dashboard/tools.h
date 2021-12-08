@@ -28,6 +28,7 @@ int dashboardNumWidgets(std::string const &dash_name);
 
 std::optional<uint32_t> widgetIndexOfKey(dessser::gen::sync_key::t const &);
 
+// Iter over widget indexes in ascending order
 void iterDashboardWidgets(
   std::string const &dash_name,  // or empty for scratchpad
   // Called back with the widget key and its value:

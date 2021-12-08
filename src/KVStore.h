@@ -53,7 +53,9 @@ public:
 
   KVStore(QObject *parent = nullptr);
 
-  std::unordered_map<std::shared_ptr<dessser::gen::sync_key::t const>, KValue, HashKey, EqualKey> map;
+  /* Cannot be an ordered map because dessserc does not generate comparators: */
+  std::unordered_map<std::shared_ptr<dessser::gen::sync_key::t const>, KValue,
+                     HashKey, EqualKey> map;
   rec_shared_mutex lock;
 
   bool contains(std::shared_ptr<dessser::gen::sync_key::t const>);

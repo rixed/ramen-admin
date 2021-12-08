@@ -128,7 +128,11 @@ void iterDashboardWidgets(
   std::string const &dash_name,
   std::function<void(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &)> f)
 {
-  /* We need to scan the whole map: */
+  /* Reminder: kvs->map is not sorted. Therefore to map must be scanned first, and
+   * the list of keys ordered by indices before calling [f]. */
+  std::map<uint32_t,
+           std::pair<std::shared_ptr<dessser::gen::sync_key::t const>,
+                     KValue const &>> widgets;
   kvs->lock.lock_shared();
   for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
@@ -151,6 +155,16 @@ void iterDashboardWidgets(
     }
     KValue const &value { p.second };
     if (per_dash_key->index() != dessser::gen::sync_key::Widgets) continue;
+    std::optional<uint32_t> const idx { widgetIndexOfKey(*key) };
+    Q_ASSERT(idx);
+    widgets.emplace(*idx, std::make_pair(key, value));
+  }
+
+  /* Still holding the KVS->map lock so that the callback can assume those dashboard
+   * widgets do exist, call [f]: */
+  for (auto const &k_v : widgets) {
+    std::shared_ptr<dessser::gen::sync_key::t const> const &key { k_v.second.first };
+    KValue const &value { k_v.second.second };
     f(key, value);
   }
   kvs->lock.unlock_shared();
