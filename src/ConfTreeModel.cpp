@@ -26,10 +26,10 @@ void ConfTreeModel::dump() const
 QModelIndex ConfTreeModel::index(
   int row, int column, QModelIndex const &parent) const
 {
-  ConfSubTree *parentTree =
+  ConfSubTree *parentTree {
     parent.isValid() ?
       static_cast<ConfSubTree *>(parent.internalPointer()) :
-      root;
+      root };
 
   if (verbose && parent.isValid())
     qDebug() << "ConfTreeModel: index(" << row << ") of "
@@ -44,7 +44,7 @@ QModelIndex ConfTreeModel::parent(QModelIndex const &index) const
 {
   Q_ASSERT(index.isValid());
 
-  ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *tree { static_cast<ConfSubTree *>(index.internalPointer()) };
   if (tree->parent == root) return QModelIndex();
   return createIndex(tree->parent->childNum(tree), 0, tree->parent);
 }
@@ -52,7 +52,7 @@ QModelIndex ConfTreeModel::parent(QModelIndex const &index) const
 int ConfTreeModel::rowCount(QModelIndex const &index) const
 {
   if (! index.isValid()) return root->count();
-  ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *tree { static_cast<ConfSubTree *>(index.internalPointer()) };
   return tree->count();
 }
 
@@ -64,7 +64,7 @@ int ConfTreeModel::columnCount(QModelIndex const &) const
 QVariant ConfTreeModel::data(QModelIndex const &index, int role) const
 {
   Q_ASSERT(index.isValid());
-  ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *tree { static_cast<ConfSubTree *>(index.internalPointer()) };
 
   switch (role) {
     case Qt::DisplayRole:
@@ -84,20 +84,20 @@ QVariant ConfTreeModel::data(QModelIndex const &index, int role) const
 
 QModelIndex ConfTreeModel::find(std::string const &path) const
 {
-  QStringList names(QString::fromStdString(path).
-                    split('/', Qt::SkipEmptyParts));
+  QStringList names { QString::fromStdString(path).
+                      split('/', Qt::SkipEmptyParts) };
 
   QModelIndex idx;
-  ConfSubTree const *parent = root;
+  ConfSubTree const *parent { root };
 
   do {
     if (names.count() == 0) return idx;
 
-    QString const &name = names.takeFirst();
+    QString const &name { names.takeFirst() };
 
     for (int i = 0; i < parent->count(); i ++) {
-      ConfSubTree const *c = parent->child(i);
-      int const cmp(name.compare(c->name));
+      ConfSubTree const *c { parent->child(i) };
+      int const cmp { name.compare(c->name) };
       if (cmp > 0) continue;
       if (cmp < 0) {
         if (verbose)
@@ -119,13 +119,13 @@ ConfSubTree *ConfTreeModel::findOrCreate(
 
   if (names.count() == 0) return parent;
 
-  QString const &name = names.takeFirst();
+  QString const &name { names.takeFirst() };
 
   /* Look for it in the (ordered) list of subtrees: */
   int i;
   for (i = 0; i < parent->count(); i ++) {
-    ConfSubTree *c = parent->child(i);
-    int const cmp(name.compare(c->name));
+    ConfSubTree *c { parent->child(i) };
+    int const cmp { name.compare(c->name) };
     if (cmp > 0) continue;
     if (cmp == 0) {
       if (verbose)
@@ -154,7 +154,7 @@ bool ConfTreeModel::isTerm(QModelIndex const &index) const
 {
   if (! index.isValid()) return false;
 
-  ConfSubTree *s = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *s { static_cast<ConfSubTree *>(index.internalPointer()) };
 
   return s->isTerm();
 }

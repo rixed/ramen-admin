@@ -56,21 +56,21 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
     return createIndex(row, column, static_cast<GraphItem *>(site));
   }
 
-  GraphItem *parentPtr = static_cast<GraphItem *>(parent.internalPointer());
+  GraphItem *parentPtr { static_cast<GraphItem *>(parent.internalPointer()) };
   // Maybe a site?
-  SiteItem *parentSite = dynamic_cast<SiteItem *>(parentPtr);
+  SiteItem *parentSite { dynamic_cast<SiteItem *>(parentPtr) };
   if (parentSite) { // bingo!
     if ((size_t)row >= parentSite->programs.size()) return QModelIndex();
-    ProgramItem *program = parentSite->programs[row];
+    ProgramItem *program { parentSite->programs[row] };
     Q_ASSERT(program->treeParent == parentPtr);
     return createIndex(row, column, static_cast<GraphItem *>(program));
   }
 
   // Maybe a program?
-  ProgramItem *parentProgram = dynamic_cast<ProgramItem *>(parentPtr);
+  ProgramItem *parentProgram { dynamic_cast<ProgramItem *>(parentPtr) };
   if (parentProgram) {
     if ((size_t)row >= parentProgram->functions.size()) return QModelIndex();
-    FunctionItem *function = parentProgram->functions[row];
+    FunctionItem *function { parentProgram->functions[row] };
     Q_ASSERT(function->treeParent == parentPtr);
     return createIndex(row, column, static_cast<GraphItem *>(function));
   }
@@ -81,17 +81,15 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
 
 QModelIndex GraphModel::parent(QModelIndex const &index) const
 {
-  GraphItem *item =
-    static_cast<GraphItem *>(index.internalPointer());
-  GraphItem *treeParent = item->treeParent;
+  GraphItem const *item { itemOfIndex(index) };
 
-  if (! treeParent) {
+  if (! item->treeParent) {
     // We must be a site then:
-    Q_ASSERT(nullptr != dynamic_cast<SiteItem *>(item));
+    Q_ASSERT(nullptr != dynamic_cast<SiteItem const *>(item));
     return QModelIndex(); // parent is "root"
   }
 
-  return createIndex(treeParent->row, 0, treeParent);
+  return createIndex(item->treeParent->row, 0, item->treeParent);
 }
 
 int GraphModel::rowCount(QModelIndex const &parent) const
@@ -101,19 +99,18 @@ int GraphModel::rowCount(QModelIndex const &parent) const
     return sites.size();
   }
 
-  GraphItem *parentPtr =
-    static_cast<GraphItem *>(parent.internalPointer());
-  SiteItem *parentSite = dynamic_cast<SiteItem *>(parentPtr);
+  GraphItem const *parentPtr { itemOfIndex(parent) };
+  SiteItem const *parentSite { dynamic_cast<SiteItem const *>(parentPtr) };
   if (parentSite) {
     return parentSite->programs.size();
   }
 
-  ProgramItem *parentProgram = dynamic_cast<ProgramItem *>(parentPtr);
+  ProgramItem const *parentProgram { dynamic_cast<ProgramItem const *>(parentPtr) };
   if (parentProgram) {
     return parentProgram->functions.size();
   }
 
-  FunctionItem *parentFunction = dynamic_cast<FunctionItem *>(parentPtr);
+  FunctionItem const *parentFunction { dynamic_cast<FunctionItem const *>(parentPtr) };
   if (parentFunction) {
     return 0;
   }
@@ -126,22 +123,20 @@ int GraphModel::columnCount(QModelIndex const &parent) const
   /* Number of columns for the global header. */
   if (! parent.isValid()) return NumColumns;
 
-  GraphItem *item =
-    static_cast<GraphItem *>(parent.internalPointer());
-  return item->columnCount();
+  return itemOfIndex(parent)->columnCount();
 }
 
 QVariant GraphModel::data(QModelIndex const &index, int role) const
 {
   if (! index.isValid()) return QVariant();
 
-  GraphItem const *item = itemOfIndex(index);
-  return item->data(index.column(), role);
+  return itemOfIndex(index)->data(index.column(), role);
 }
 
 GraphItem const *GraphModel::itemOfIndex(QModelIndex const &index) const
 {
   if (! index.isValid()) return nullptr;
+
   return static_cast<GraphItem *>(index.internalPointer());
 }
 
@@ -446,7 +441,7 @@ void GraphModel::delayAddFunctionParent(FunctionItem *child, QString const &site
 void GraphModel::retryAddParents()
 {
   for (auto it = pendingAddParents.begin(); it != pendingAddParents.end(); ) {
-    FunctionItem *parent = find(it->site, it->program, it->function);
+    FunctionItem *parent { find(it->site, it->program, it->function) };
     if (parent) {
       if (verbose)
         qDebug() << "Resolved pending parent";
@@ -471,8 +466,8 @@ void GraphModel::setFunctionProperty(
 # define STORAGE_CHANGED  0x2
 # define WORKER_CHANGED   0x4
 
-  std::shared_ptr<Function> function =
-    std::static_pointer_cast<Function>(functionItem->shared);
+  std::shared_ptr<Function> function {
+    std::static_pointer_cast<Function>(functionItem->shared) };
 
   if (! pk.instanceSignature.isEmpty()) {
     /* Remember that old instances are not removed from the config tree.
@@ -514,10 +509,10 @@ void GraphModel::setFunctionProperty(
     if (v->index() == dessser::gen::sync_value::Worker) [[likely]] {
       function->worker = std::get<dessser::gen::sync_value::Worker>(*v);
 
-      std::shared_ptr<Site> site =
-        std::static_pointer_cast<Site>(siteItem->shared);
-      std::shared_ptr<Program> program =
-        std::static_pointer_cast<Program>(programItem->shared);
+      std::shared_ptr<Site> site {
+        std::static_pointer_cast<Site>(siteItem->shared) };
+      std::shared_ptr<Program> program {
+        std::static_pointer_cast<Program>(programItem->shared) };
 
       changed |= WORKER_CHANGED;
 
@@ -542,7 +537,7 @@ void GraphModel::setFunctionProperty(
           /* Try to locate the GraphItem of this parent. If it's not
            * there yet, enqueue this worker somewhere and revisit this
            * once a new function appears. */
-          FunctionItem *parent = find(psite, pprog, pfunc);
+          FunctionItem *parent { find(psite, pprog, pfunc) };
           if (parent) {
             if (verbose) qDebug() << "Set immediate parent";
             addFunctionParent(parent, functionItem);
@@ -608,8 +603,8 @@ void GraphModel::setFunctionProperty(
   }
   if (changed & PROPERTY_CHANGED) {
     if (verbose) qDebug() << "Emitting dataChanged";
-    QModelIndex topLeft(functionItem->index(this, 0));
-    QModelIndex bottomRight(functionItem->index(this, GraphModel::NumColumns - 1));
+    QModelIndex topLeft { functionItem->index(this, 0) };
+    QModelIndex bottomRight { functionItem->index(this, GraphModel::NumColumns - 1) };
     emit dataChanged(topLeft, bottomRight, { Qt::DisplayRole });
   }
   if (changed & WORKER_CHANGED) {
@@ -627,11 +622,11 @@ void GraphModel::delFunctionProperty(
   if (verbose)
     qDebug() << "delFunctionProperty for" << pk.property;
 
-  int changed(0);
+  int changed { 0 };
   QString prevWorkerSign;
 
-  std::shared_ptr<Function> function =
-    std::static_pointer_cast<Function>(functionItem->shared);
+  std::shared_ptr<Function> function {
+    std::static_pointer_cast<Function>(functionItem->shared) };
 
   if (pk.property == "worker") {
     if (function->worker) {
@@ -696,8 +691,8 @@ void GraphModel::delFunctionProperty(
   }
   if (changed) {
     if (verbose) qDebug() << "Emitting dataChanged";
-    QModelIndex topLeft(functionItem->index(this, 0));
-    QModelIndex bottomRight(functionItem->index(this, GraphModel::NumColumns - 1));
+    QModelIndex topLeft { functionItem->index(this, 0) };
+    QModelIndex bottomRight { functionItem->index(this, GraphModel::NumColumns - 1) };
     emit dataChanged(topLeft, bottomRight);
   }
   if (changed & WORKER_CHANGED) {
@@ -739,13 +734,13 @@ void GraphModel::setSiteProperty(
 void GraphModel::delSiteProperty(SiteItem *siteItem, ParsedKey const &pk)
 {
   if (pk.property == "is_master") {
-    std::shared_ptr<Site> site =
-      std::static_pointer_cast<Site>(siteItem->shared);
+    std::shared_ptr<Site> site {
+      std::static_pointer_cast<Site>(siteItem->shared) };
 
     site->isMaster = false;
   }
 
-  QModelIndex index(siteItem->index(this, 0));
+  QModelIndex index { siteItem->index(this, 0) };
   emit dataChanged(index, index, { Qt::DisplayRole });
 }
 
@@ -772,7 +767,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
       qDebug() << "Creating a new Site" << pk.site;
 
     siteItem = new SiteItem(nullptr, std::make_unique<Site>(pk.site), settings);
-    int idx = sites.size(); // as we insert at the end for now
+    size_t idx { sites.size() }; // as we insert at the end for now
     beginInsertRows(QModelIndex(), idx, idx);
     sites.insert(sites.begin()+idx, siteItem);
     reorder();
@@ -780,7 +775,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
   }
 
   if (pk.program.length() > 0) {
-    ProgramItem *programItem = nullptr;
+    ProgramItem *programItem { nullptr };
     for (ProgramItem *pi : siteItem->programs) {
       if (pi->shared->name == pk.program) {
         programItem = pi;
@@ -793,9 +788,9 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
 
       programItem =
         new ProgramItem(siteItem, std::make_unique<Program>(pk.program), settings);
-      int idx = siteItem->programs.size();
-      QModelIndex parent =
-        createIndex(siteItem->row, 0, static_cast<GraphItem *>(siteItem));
+      size_t idx { siteItem->programs.size() };
+      QModelIndex parent {
+        createIndex(siteItem->row, 0, static_cast<GraphItem *>(siteItem)) };
       beginInsertRows(parent, idx, idx);
       siteItem->programs.insert(siteItem->programs.begin()+idx, programItem);
       siteItem->reorder(this);
@@ -803,7 +798,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
     }
 
     if (pk.function.length() > 0) {
-      FunctionItem *functionItem = nullptr;
+      FunctionItem *functionItem { nullptr };
       for (FunctionItem *fi : programItem->functions) {
         if (fi->shared->name == pk.function) {
           functionItem = fi;
@@ -824,9 +819,9 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key, KValue const &k
               programItem->shared->name.toStdString(),
               pk.function.toStdString(), srcPath),
             settings);
-        int idx = programItem->functions.size();
-        QModelIndex parent =
-          createIndex(programItem->row, 0, static_cast<GraphItem *>(programItem));
+        size_t idx { programItem->functions.size() };
+        QModelIndex parent {
+          createIndex(programItem->row, 0, static_cast<GraphItem *>(programItem)) };
         beginInsertRows(parent, idx, idx);
         programItem->functions.insert(programItem->functions.begin()+idx, functionItem);
         programItem->reorder(this);
@@ -876,7 +871,7 @@ void GraphModel::deleteKey(dessser::gen::sync_key::t const &key, KValue const &)
     if (! programItem) return;
 
     if (pk.function.length() > 0) {
-      FunctionItem *functionItem = nullptr;
+      FunctionItem *functionItem { nullptr };
       for (FunctionItem *fi : programItem->functions) {
         if (fi->shared->name == pk.function) {
           functionItem = fi;

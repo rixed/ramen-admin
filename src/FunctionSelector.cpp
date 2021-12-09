@@ -34,12 +34,12 @@ FunctionSelector::FunctionSelector(GraphModel *model, QWidget *parent)
 
 FunctionItem *FunctionSelector::getCurrent() const
 {
-  QModelIndex const index(TreeComboBox::getCurrent());
+  QModelIndex const index { TreeComboBox::getCurrent() };
 
   if (! index.isValid()) return nullptr;
 
-  GraphItem *item(static_cast<GraphItem *>(index.internalPointer()));
-  FunctionItem *function(dynamic_cast<FunctionItem *>(item));
+  GraphItem *item { static_cast<GraphItem *>(index.internalPointer()) };
+  FunctionItem *function { dynamic_cast<FunctionItem *>(item) };
   return function;
 }
 

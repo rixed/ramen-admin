@@ -175,12 +175,12 @@ public:
    * index(), parent(), rowCount(), columnCount(), and data(). These functions
    * are used in all read-only models, and form the basis of editable models."
    */
-  QModelIndex index(int, int, QModelIndex const &) const;
-  QModelIndex parent(QModelIndex const &) const;
-  int rowCount(QModelIndex const &) const;
-  int columnCount(QModelIndex const &) const;
-  QVariant data(QModelIndex const &, int) const;
-  QVariant headerData(int, Qt::Orientation, int) const;
+  QModelIndex index(int, int, QModelIndex const &) const override;
+  QModelIndex parent(QModelIndex const &) const override;
+  int rowCount(QModelIndex const &) const override;
+  int columnCount(QModelIndex const &) const override;
+  QVariant data(QModelIndex const &, int) const override;
+  QVariant headerData(int, Qt::Orientation, int) const override;
   GraphItem const *itemOfIndex(QModelIndex const &) const;
 
   static GraphModel *globalGraphModel;
