@@ -20,7 +20,7 @@
 #include "z85.h"
 #include "ConfClient.h"
 
-static bool verbose { false };
+static bool const verbose { false };
 
 static double const sessionTimeout { 300. };
 

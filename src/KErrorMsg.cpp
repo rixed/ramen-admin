@@ -8,6 +8,8 @@
 
 #include "KErrorMsg.h"
 
+static bool const verbose { false };
+
 KErrorMsg::KErrorMsg(QWidget *parent) :
   QLabel(parent)
 {
@@ -42,7 +44,7 @@ void KErrorMsg::onChange(QList<ConfChange> const &changes)
 void KErrorMsg::setKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
   Q_ASSERT(! key);
-  qDebug() << "KErrorMsg: setting key to" << *k;
+  if (verbose) qDebug() << "KErrorMsg: setting key to" << *k;
   key = k;
 }
 

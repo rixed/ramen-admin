@@ -25,7 +25,7 @@ void TreeComboBox::showPopup()
 
 QModelIndex TreeComboBox::getCurrent() const
 {
-  QModelIndex index = treeView->currentIndex();
+  QModelIndex index { treeView->currentIndex() };
 
   if (! m_allowNonLeafSelection &&
       treeView->model()->rowCount(index) != 0)

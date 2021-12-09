@@ -137,7 +137,7 @@ void iterDashboardWidgets(
   for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const &p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
     std::shared_ptr<dessser::gen::sync_key::per_dash_key> per_dash_key;
-    if (dash_name.size() == 0) {  // Skip all keys but widgets from the scratchpad:
+    if (isScratchpad(dash_name)) {  // Skip all keys but widgets from the scratchpad:
       if (key->index() != dessser::gen::sync_key::PerClient) continue;
       auto const &per_client { std::get<dessser::gen::sync_key::PerClient>(*key) };
       std::shared_ptr<dessser::gen::sync_socket::t const> sock {

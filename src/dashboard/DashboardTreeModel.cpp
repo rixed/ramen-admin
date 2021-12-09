@@ -10,7 +10,7 @@
 
 #include "dashboard/DashboardTreeModel.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 DashboardTreeModel *DashboardTreeModel::globalDashboardTree;
 
@@ -52,10 +52,12 @@ void DashboardTreeModel::updateNames(
 
   if (isScratchpad(dash_name)) return;
 
-  if (verbose)
-    qDebug() << "DashboardTreeModel: found" << QString::fromStdString(dash_name);
-
   QStringList names { QString::fromStdString(dash_name).split('/') };
+
+  if (verbose)
+    qDebug()
+      << "DashboardTreeModel::updateNames: from name" << QString::fromStdString(dash_name)
+      << "to path:" << names;
 
   (void)findOrCreate(root, names, QString::fromStdString(dash_name));
 }

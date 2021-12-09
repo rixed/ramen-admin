@@ -23,15 +23,20 @@ public:
     QString const termValue);
 
   ConfTreeModel(QObject *parent = nullptr);
+
   virtual ~ConfTreeModel();
 
   void dump() const;
 
   // The QAbstractModel:
   QModelIndex index(int, int, QModelIndex const &) const;
+
   QModelIndex parent(QModelIndex const &) const;
+
   int rowCount(QModelIndex const &) const;
+
   int columnCount(QModelIndex const &) const;
+
   QVariant data(QModelIndex const &, int = Qt::DisplayRole) const;
 
   QModelIndex find(std::string const &) const;

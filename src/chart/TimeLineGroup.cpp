@@ -8,7 +8,7 @@
 
 #include "TimeLineGroup.h"
 
-static bool verbose { false };
+static bool const verbose { false };
 
 TimeLineGroup::TimeLineGroup(QObject *parent)
   : QObject(parent),

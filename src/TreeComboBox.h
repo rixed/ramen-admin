@@ -29,10 +29,14 @@ protected:
 
 public:
   TreeComboBox(QWidget *parent = nullptr);
+
   void showPopup() override;
+
+  // Will return QModelIndex() for non-leaf if NonLeafSelection is off:
   QModelIndex getCurrent() const;
 
   bool allowNonLeafSelection() const { return m_allowNonLeafSelection; }
+
   void setAllowNonLeafSelection(bool v) { m_allowNonLeafSelection = v; }
 };
 

@@ -3,7 +3,7 @@
 
 #include "ConfSubTree.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 ConfSubTree::ConfSubTree(
   QString const &name_,
@@ -28,7 +28,7 @@ ConfSubTree::ConfSubTree(ConfSubTree const &other, ConfSubTree *parent_)
              << other.count() << "children";
 
   for (ConfSubTree const *c : other.children) {
-    ConfSubTree *myChild = new ConfSubTree(*c, this);
+    ConfSubTree *myChild { new ConfSubTree(*c, this) };
     children.push_back(myChild);
   }
 }
@@ -83,7 +83,7 @@ void __attribute__((noinline)) __attribute__((used))
   ConfSubTree::dump_c(int const indent) const
 {
   char indent_[indent+1];
-  int i(0);
+  int i { 0 };
   for (; i < indent; i++) indent_[i] = ' ';
   indent_[i] = '\0';
 
@@ -99,7 +99,7 @@ ConfSubTree *ConfSubTree::insertAt(
   int pos, QString const &name, QString const &termValue)
 {
   Q_ASSERT(pos >= 0 && pos <= (ssize_t)children.size());
-  ConfSubTree *s = new ConfSubTree(name, this, termValue);
+  ConfSubTree *s { new ConfSubTree(name, this, termValue) };
   children.insert(children.begin() + pos, s);
   return s;
 }
