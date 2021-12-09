@@ -119,6 +119,7 @@ ConfSubTree *ConfTreeModel::findOrCreate(
 
   if (names.count() == 0) return parent;
 
+  bool const is_term { names.count() == 1 };
   QString const &name { names.takeFirst() };
 
   /* Look for it in the (ordered) list of subtrees: */
@@ -138,14 +139,14 @@ ConfSubTree *ConfTreeModel::findOrCreate(
   // Insert the new name at position i:
   if (verbose)
     qDebug() << "ConfTreeModel: inserting" << name
-             << "with termValue" << termValue;
+             << "with termValue" << (is_term ? termValue : "none (non-term)");
 
   QModelIndex parentIndex =
     parent == root ?
       QModelIndex() :
       createIndex(parent->parent->childNum(parent), 0, parent);
   beginInsertRows(parentIndex, i, i);
-  ConfSubTree *n = parent->insertAt(i, name, termValue);
+  ConfSubTree *n { parent->insertAt(i, name, is_term ? termValue : QString()) };
   endInsertRows();
   return findOrCreate(n, names, termValue);
 }

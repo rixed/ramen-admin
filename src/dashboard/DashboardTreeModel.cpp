@@ -2,6 +2,7 @@
 #include <QDebug>
 
 #include "ConfClient.h"
+#include "ConfSubTree.h"
 #include "dashboard/tools.h"
 #include "KVStore.h"
 #include "Menu.h"
@@ -19,7 +20,7 @@ DashboardTreeModel::DashboardTreeModel(QObject *parent)
   /* We start with no scratchpad widgets, but we'd like a scratchpad entry
    * nonetheless so add it manually: */
   QStringList names { SCRATCHPAD };
-  (void)findOrCreate(root, names, QString());
+  (void)findOrCreate(root, names, QString(SCRATCHPAD));
 
   connect(kvs.get(), &KVStore::keyChanged,
           this, &DashboardTreeModel::onChange);
@@ -68,4 +69,14 @@ void DashboardTreeModel::deleteNames(
   if (isScratchpad(dash_name)) return;
 
   // TODO: actually delete? Or keep the names around for a bit?
+}
+
+Qt::ItemFlags DashboardTreeModel::flags(QModelIndex const &index) const
+{
+  Q_ASSERT(index.isValid());
+  Qt::ItemFlags f { ConfTreeModel::flags(index) };
+
+  ConfSubTree *tree { static_cast<ConfSubTree *>(index.internalPointer()) };
+  if (tree->isTerm()) return f;
+  else return f & (~Qt::ItemIsSelectable);
 }

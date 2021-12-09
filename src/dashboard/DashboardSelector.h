@@ -1,6 +1,7 @@
 #ifndef DASHBOARDSELECTOR_H_200320
 #define DASHBOARDSELECTOR_H_200320
 /* A widget to pick a dashboard */
+#include <optional>
 #include <string>
 
 #include "TreeComboBox.h"
@@ -15,7 +16,7 @@ public:
   DashboardSelector(DashboardTreeModel *model, QWidget *parent = nullptr);
 
   // Returns the dashboard name:
-  std::string getCurrent() const;
+  std::optional<std::string> getCurrent() const;
 };
 
 #endif

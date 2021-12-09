@@ -125,9 +125,11 @@ void DashboardWidgetForm::setExpand(bool expand)
 void DashboardWidgetForm::doCopy(bool andDelete)
 {
   if (QDialog::Accepted == copyDialog->copy(!andDelete)) {
-    std::string const dash_name { copyDialog->dashSelector->getCurrent() };
+    std::optional<std::string> const dash_name {
+      copyDialog->dashSelector->getCurrent() };
+    if (! dash_name) return;  // User managed to select a non-leaf, ignore.
     std::shared_ptr<dessser::gen::sync_key::t> dest_key {
-      dashboardNextWidget(dash_name) };
+      dashboardNextWidget(*dash_name) };
 
     if (verbose)
       qDebug() << "DashboardWidgetForm: Will copy to" << *dest_key;
