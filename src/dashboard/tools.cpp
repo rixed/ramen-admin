@@ -36,7 +36,7 @@ std::string const dashboardNameOfKey(dessser::gen::sync_key::t const &key)
       std::get<dessser::gen::sync_key::PerClient>(key) };
     if (*Menu::getClient()->syncSocket == *std::get<0>(per_client) &&
         std::get<1>(per_client)->index() == dessser::gen::sync_key::Scratchpad)
-      return "";
+      return SCRATCHPAD;
   }
 
   Q_ASSERT(false);

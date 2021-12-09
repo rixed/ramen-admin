@@ -17,7 +17,7 @@ namespace dessser {
 // Returns true if this key is that of a dashboard
 bool isDashboardKey(dessser::gen::sync_key::t const &);
 
-// Returns the dashboard name ("" for the scratchpad)
+// Returns the dashboard name (SCRATCHPAD for the scratchpad)
 std::string const dashboardNameOfKey(dessser::gen::sync_key::t const &);
 
 /* For each defined dashboard, call that function with its name */
@@ -30,17 +30,17 @@ std::optional<uint32_t> widgetIndexOfKey(dessser::gen::sync_key::t const &);
 
 // Iter over widget indexes in ascending order
 void iterDashboardWidgets(
-  std::string const &dash_name,  // or empty for scratchpad
+  std::string const &dash_name,  // SCRATCHPAD for scratchpad
   // Called back with the widget key and its value:
   std::function<void(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &)>);
 
 /* Returns the next available widget key in the dashboard identified by
- * that name (or the scratchpad if name is empty): */
+ * that name: */
 std::shared_ptr<dessser::gen::sync_key::t> dashboardNextWidget(std::string const &dash_name);
 
-#define SCRATCHPAD ""
+#define SCRATCHPAD "scratchpad"
 inline bool isScratchpad(std::string const &dash_name) {
-  return dash_name.empty();
+  return dash_name == SCRATCHPAD;
 }
 
 #endif

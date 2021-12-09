@@ -454,8 +454,9 @@ void Menu::prepareQuit()
 QString const Menu::nameOfDashboard(std::string const &dash_name)
 {
   return
-    dash_name.empty() ? QString("--scratchpad--")
-                      : QString::fromStdString(dash_name);
+    isScratchpad(dash_name) ?
+      QString("--scratchpad--") :
+      QString::fromStdString(dash_name);
 }
 
 void Menu::addDashboard(std::string const &dash_name)

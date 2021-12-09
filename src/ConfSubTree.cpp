@@ -108,6 +108,8 @@ QString ConfSubTree::nameFromRoot(QString const &sep) const
 {
   if (! parent)
     return name;
-  else
-    return parent->nameFromRoot(sep) + sep + name;
+  else {
+    QString const pname { parent->nameFromRoot(sep) };
+    return pname.isEmpty() ? name : pname + sep + name;
+  }
 }

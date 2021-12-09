@@ -19,7 +19,7 @@ DashboardTreeModel::DashboardTreeModel(QObject *parent)
 {
   /* We start with no scratchpad widgets, but we'd like a scratchpad entry
    * nonetheless so add it manually: */
-  QStringList names({ "scratchpad" });
+  QStringList names { SCRATCHPAD };
   (void)findOrCreate(root, names, QString());
 
   connect(kvs.get(), &KVStore::keyChanged,
