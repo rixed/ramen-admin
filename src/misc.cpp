@@ -34,7 +34,7 @@ std::string const removeExt(std::string const &s, char const c)
 
 std::string const srcPathFromProgramName(std::string const &programName)
 {
-  size_t const i(programName.rfind('#'));
+  size_t const i { programName.rfind('#') };
   if (i == std::string::npos) return programName;
   return programName.substr(0, i);
 }

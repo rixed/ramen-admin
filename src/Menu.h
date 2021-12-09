@@ -15,9 +15,7 @@ class NewDashboardDialog;
 #ifdef WITH_PROGRAMS
 class NewProgramDialog;
 #endif
-#ifdef WITH_SOURCES
 class NewSourceDialog;
-#endif
 #ifdef WITH_OPERATIONS
 class OperationsWin;
 #endif
@@ -26,9 +24,7 @@ class QMainWindow;
 class QMenuBar;
 class RCEditorDialog;
 class ServerInfoWin;
-#ifdef WITH_SOURCES
 class SourcesWin;
-#endif
 #ifdef WITH_STORAGE
 class StorageWin;
 #endif
@@ -69,13 +65,9 @@ public:
   bool fullMenu;
 
   static AboutDialog *aboutDialog;
-# ifdef WITH_SOURCES
   static SourcesWin *sourcesWin;
-# endif
   static ConfTreeDialog *confTreeDialog;
-# ifdef WITH_SOURCES
   static NewSourceDialog *newSourceDialog;
-# endif
 # ifdef WITH_PROGRAMS
   static NewProgramDialog *newProgramDialog;
 # endif
@@ -105,16 +97,12 @@ public:
 
 public slots:
   void upgradeToFull();  // and show something
-# ifdef WITH_SOURCES
   static void openNewSourceDialog();
-# endif
 # ifdef WITH_PROGRAMS
   static void openNewProgramDialog();
 # endif
   static void openNewDashboardDialog();
-# ifdef WITH_SOURCES
   static void openSourceEditor();
-# endif
   static void openProcesses();
   static void openRCEditor();
   static void openConfTreeDialog();

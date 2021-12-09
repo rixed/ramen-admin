@@ -136,8 +136,7 @@ HEADERS += \
   TimeRange.h \
   TimeRangeViewer.h \
   TimeRangeEdit.h \
-  SourceInfoViewer.h \
-  SourcesModel.h \
+  source/SourceInfoViewer.h \
   PathSuffixValidator.h \
   RCEntryEditor.h \
   TargetConfigEditor.h \
@@ -190,6 +189,13 @@ HEADERS += \
   ProcessesWidget.h \
   ProcessesWidgetProxy.h \
   ProcessesDialog.h \
+  source/SourceCloneDialog.h \
+  source/CodeEditForm.h \
+  source/CodeEdit.h \
+  source/NewSourceDialog.h \
+  source/SourcesModel.h \
+  source/SourcesView.h \
+  source/SourcesWin.h \
   Menu.h \
   ReplayRequest.h \
   PastData.h \
@@ -313,8 +319,7 @@ SOURCES += \
   TimeRange.cpp \
   TimeRangeViewer.cpp \
   TimeRangeEdit.cpp \
-  SourceInfoViewer.cpp \
-  SourcesModel.cpp \
+  source/SourceInfoViewer.cpp \
   PathSuffixValidator.cpp \
   RCEntryEditor.cpp \
   TargetConfigEditor.cpp \
@@ -367,6 +372,13 @@ SOURCES += \
   ProcessesWidget.cpp \
   ProcessesWidgetProxy.cpp \
   ProcessesDialog.cpp \
+  source/SourceCloneDialog.cpp \
+  source/CodeEditForm.cpp \
+  source/CodeEdit.cpp \
+  source/NewSourceDialog.cpp \
+  source/SourcesModel.cpp \
+  source/SourcesView.cpp \
+  source/SourcesWin.cpp \
   Menu.cpp \
   ReplayRequest.cpp \
   PastData.cpp \

@@ -17,9 +17,7 @@
 #include "LoginWin.h"
 #include "misc.h"
 #include "NamesTreeWin.h"
-#ifdef WITH_SOURCES
-#include "NewSourceDialog.h"
-#endif
+#include "source/NewSourceDialog.h"
 #ifdef WITH_PROGRAMS
 #include "NewProgramDialog.h"
 #endif
@@ -30,9 +28,7 @@
 #include "RCEditorDialog.h"
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"
-#ifdef WITH_SOURCES
-#include "SourcesWin.h"
-#endif
+#include "source/SourcesWin.h"
 #ifdef WITH_STORAGE
 #include "StorageWin.h"
 #endif
@@ -45,13 +41,9 @@
 static bool const verbose { false };
 
 AboutDialog *Menu::aboutDialog;
-#ifdef WITH_SOURCES
 SourcesWin *Menu::sourcesWin;
-#endif
 ConfTreeDialog *Menu::confTreeDialog;
-#ifdef WITH_SOURCES
 NewSourceDialog *Menu::newSourceDialog;
-#endif
 #ifdef WITH_PROGRAMS
 NewProgramDialog *Menu::newProgramDialog;
 # endif
@@ -80,16 +72,12 @@ void Menu::initLoginWin(QString const &configDir)
 
 void Menu::initDialogs(QString const &srvUrl)
 {
-# ifdef WITH_SOURCES
   if (verbose) qDebug() << "Create SourceEditor...";
   if (! sourcesWin) sourcesWin = new SourcesWin;
-# endif
   if (verbose) qDebug() << "Create ConfTreeDialog...";
   if (!confTreeDialog) confTreeDialog = new ConfTreeDialog;
-# ifdef WITH_SOURCES
   if (verbose) qDebug() << "Create NewSourceDialog...";
   if (! newSourceDialog) newSourceDialog = new NewSourceDialog;
-# endif
 # ifdef WITH_PROGRAMS
   if (verbose) qDebug() << "Create NewProgramDialog...";
   if (! newProgramDialog) newProgramDialog = new NewProgramDialog;
@@ -123,9 +111,7 @@ void Menu::initDialogs(QString const &srvUrl)
 void Menu::showSomething()
 {
   bool someOpened = false;
-# ifdef WITH_SOURCES
   someOpened |= sourcesWin->isVisible();
-# endif
   someOpened |= confTreeDialog->isVisible();
   someOpened |= processesDialog->isVisible();
   someOpened |= rcEditorDialog->isVisible();
@@ -133,9 +119,7 @@ void Menu::showSomething()
   someOpened |= storageWin->isVisible();
 # endif
 
-# ifdef WITH_SOURCES
   if (! someOpened) sourcesWin->show();
-# endif
 }
 
 void Menu::deleteDialogs()
@@ -143,13 +127,9 @@ void Menu::deleteDialogs()
   danceOfDelLater<LoginWin>(&loginWin);
 
   danceOfDelLater<AboutDialog>(&aboutDialog);
-# ifdef WITH_SOURCES
   danceOfDelLater<SourcesWin>(&sourcesWin);
-# endif
   danceOfDelLater<ConfTreeDialog>(&confTreeDialog);
-# ifdef WITH_SOURCES
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
-# endif
 # ifdef WITH_PROGRAMS
   danceOfDelLater<NewProgramDialog>(&newProgramDialog);
 # endif
@@ -186,12 +166,10 @@ void Menu::populateMenu(bool basic, bool extended)
 
   if (extended) {
     Q_ASSERT(fileMenu);  // user is supposed to populate basic first
-#   ifdef WITH_SOURCES
     fileMenu->addAction(
       QCoreApplication::translate("QMenuBar", "New Source…"),
       this, &Menu::openNewSourceDialog,
       QKeySequence::New);
-#   endif
 #   ifdef WITH_PROGRAMS
     fileMenu->addAction(
       QCoreApplication::translate("QMenuBar", "New Program…"),
@@ -220,12 +198,10 @@ void Menu::populateMenu(bool basic, bool extended)
   }
 
   if (extended) {
-#   ifdef WITH_SOURCES
     /* The code editor (also the initial window) */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Source Editor…"),
       this, &Menu::openSourceEditor);
-#   endif
 
 #   ifdef WITH_OPERATIONS
     /* The graph of operations window: */
@@ -347,13 +323,11 @@ static void showRaised(QWidget *w)
   w->raise();
 }
 
-#ifdef WITH_SOURCES
 void Menu::openNewSourceDialog()
 {
   newSourceDialog->clear();
   showRaised(newSourceDialog);
 }
-#endif
 
 #ifdef WITH_PROGRAMS
 void Menu::openNewProgramDialog()
@@ -368,12 +342,10 @@ void Menu::openNewDashboardDialog()
   showRaised(newDashboardDialog);
 }
 
-#ifdef WITH_SOURCES
 void Menu::openSourceEditor()
 {
   showRaised(sourcesWin);
 }
-#endif
 
 void Menu::openProcesses()
 {

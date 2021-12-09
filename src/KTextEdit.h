@@ -20,6 +20,7 @@ public:
   KTextEdit(bool raql = true, QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
+
   void setEnabled(bool);
 
   QSize sizeHint() const;

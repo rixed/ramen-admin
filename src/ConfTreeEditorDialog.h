@@ -17,7 +17,7 @@ class ConfTreeEditorDialog : public QDialog
 
 public:
   ConfTreeEditorDialog(
-    std::shared_ptr<dessser::gen::sync_key::t const> k,
+    std::shared_ptr<dessser::gen::sync_key::t const>,
     // Even if we can write that key we might prefer not to show the editor:
     bool show_editor = true,
     QWidget *parent = nullptr);

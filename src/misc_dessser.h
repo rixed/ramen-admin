@@ -3,8 +3,10 @@
 #include <memory>
 #include <optional>
 #include <string>
+#include <utility>
 #include <QDebug>
 #include <QString>
+#include <dessser/Arr.h>
 
 namespace dessser {
   namespace gen {
@@ -45,6 +47,8 @@ bool isNumeric(dessser::gen::raql_type::t const &);
 
 bool isAWorker(dessser::gen::sync_key::t const &);
 
+bool isNull(dessser::gen::sync_value::t const &);
+
 std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
   std::string const &site_name, std::string const &prog_name, std::string const &func_name);
 
@@ -66,6 +70,14 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &);
 // Returns the compiled function, or nullptr:
 std::shared_ptr<dessser::gen::source_info::compiled_program const> getCompiledProgram(
   dessser::gen::sync_value::t const &);
+
+// Returns the source path and extension of the source which key is given
+std::optional<std::pair<std::string const, std::string const>> srcPathOfKey(
+  dessser::gen::sync_key::t const &);
+
+// Returns the key identifying that source path and extension:
+std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
+  std::string const &path, std::string const &ext);
 
 std::string const siteFqName(dessser::gen::fq_function_name::t const &);
 

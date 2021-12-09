@@ -16,7 +16,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-#include "SourceInfoViewer.h"
+#include "source/SourceInfoViewer.h"
 
 SourceInfoViewer::SourceInfoViewer(QWidget *parent) :
   AtomicWidget(parent)

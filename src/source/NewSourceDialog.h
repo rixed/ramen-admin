@@ -20,6 +20,7 @@ public:
 
 public slots:
   void clear();
+
 protected slots:
   void checkValidity();
   void createSource();

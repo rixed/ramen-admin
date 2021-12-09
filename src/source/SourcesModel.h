@@ -15,8 +15,7 @@ namespace dessser {
   }
 }
 
-class SourcesModel : public QAbstractItemModel
-{
+class SourcesModel : public QAbstractItemModel {
   Q_OBJECT
 
 public:
@@ -28,12 +27,13 @@ public:
   };
 
   // The tree of source files is stored as a list of those:
-  struct TreeItem
-  {
+  struct TreeItem {
     QString name;
+
     TreeItem *parent; // or nullptr for root
 
     TreeItem() : parent(nullptr) {}
+
     TreeItem(QString name_, TreeItem *parent_ = nullptr) :
       name(name_), parent(parent_) {}
 
@@ -55,8 +55,7 @@ public:
     }
   };
 
-  struct DirItem : public TreeItem
-  {
+  struct DirItem : public TreeItem {
     QList<TreeItem *> children;
 
     DirItem(QString name_, TreeItem *parent_ = nullptr) :
@@ -68,14 +67,16 @@ public:
       while (children.count() > 0) delete children.first();
 
       if (! parent) return;
-      DirItem *dir = static_cast<DirItem *>(parent);
+      DirItem *dir { static_cast<DirItem *>(parent) };
       if (! dir->children.removeOne(this))
         qWarning() << "Dir" << name
                    << "has been abandoned!"; // Life goes on
     }
 
     int numRows() const { return children.length(); }
+
     bool isDir() const { return true; }
+
     void addItem(TreeItem *i, int row)
     {
       children.insert(row, i);
@@ -86,25 +87,25 @@ public:
    * the source-tree just for extensions would not be convenient as most of the
    * time the only extension present will be "ramen". It's best to add an
    * additional extension switcher in the source editor when it makes sense. */
-  struct FileItem : public TreeItem
-  {
+  struct FileItem : public TreeItem {
     /* Without the extension: */
-    std::string const src_path;
+    std::string const srcPath;
 
     QList<QString> extensions;
 
-    FileItem(QString name_, std::string const &src_path_, TreeItem *parent_ = nullptr) :
-      TreeItem(name_, parent_), src_path(src_path_) {}
+    FileItem(QString name_, std::string const &src_path, TreeItem *parent_ = nullptr) :
+      TreeItem(name_, parent_), srcPath(src_path) {}
 
     ~FileItem()
     {
       if (! parent) return;
-      DirItem *dir = static_cast<DirItem *>(parent);
+      DirItem *dir { static_cast<DirItem *>(parent) };
       if (! dir->children.removeOne(this))
         qCritical() << "File" << name << "has been abandoned!";
     }
 
     int numRows() const { return 0; }
+
     bool isDir() const { return false; }
 
     void addExtension(QString const &extension)
@@ -140,17 +141,25 @@ public:
   SourcesModel(QObject *parent = nullptr);
 
   QModelIndex index(int row, int column, QModelIndex const &parent) const;
+
   QModelIndex parent(QModelIndex const &index) const;
+
   int rowCount(QModelIndex const &parent) const;
+
   int columnCount(QModelIndex const &parent) const;
+
   QVariant data(QModelIndex const &index, int role) const;
 
   std::string const SrcPathOfItem(SourcesModel::TreeItem const *) const;
+
   std::string const SrcPathOfIndex(QModelIndex const &index) const;
+
   TreeItem *itemOfSrcPath(std::string const &);
+
   QModelIndex const indexOfSrcPath(std::string const &);
-  std::shared_ptr<dessser::gen::source_info::t const>
-    sourceInfoOfItem(TreeItem const *) const;
+
+  std::shared_ptr<dessser::gen::source_info::t const> sourceInfoOfItem(
+    TreeItem const *) const;
 
 private slots:
   void onChange(QList<ConfChange> const &);
@@ -169,7 +178,7 @@ QString const sourceNameOfKey(dessser::gen::sync_key::t const &);
 QString const baseNameOfKey(dessser::gen::sync_key::t const &);
 
 // The other way around:
-dessser::gen::sync_key::t const keyOfSourceName(
+std::shared_ptr<dessser::gen::sync_key::t> keyOfSourceName(
   QString const &, char const *newExtension = nullptr);
 
 #endif

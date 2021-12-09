@@ -1,6 +1,8 @@
 #ifndef SOURCESWINWIN_H_20190429
 #define SOURCESWINWIN_H_20190429
+#include <memory>
 #include <string>
+
 #include "SavedWindow.h"
 /* The SourcesWindow is the initial window that's opened.
  * It features the SourcesView, aka the code editor.
@@ -13,6 +15,12 @@ class QWidget;
 class SourcesModel;
 class SourcesView;
 
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+  }
+}
+
 class SourcesWin : public SavedWindow
 {
   Q_OBJECT
@@ -24,8 +32,11 @@ public:
   explicit SourcesWin(QWidget *parent = nullptr);
 
 public slots:
-  /* The string is the key prefix of the desired source */
-  void showFile(std::string const &);
+  // Show a specific path (TODO: optional extension?)
+  void showFile(std::string const &path);
+
+  // Show a specific key (FIXME: currently ignores the extension):
+  void showFile(std::shared_ptr<dessser::gen::sync_key::t const>);
 };
 
 #endif

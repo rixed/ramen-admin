@@ -2,6 +2,7 @@
 #define CODEEDITFORM_H_190516
 #include <memory>
 #include <string>
+
 #include "AtomicForm.h"
 
 class CodeEdit;
@@ -12,6 +13,7 @@ class CodeEditForm : public AtomicForm
 
 public:
   CodeEdit *codeEdit;
+
   CodeEditForm(QWidget *parent = nullptr);
 
 protected slots:

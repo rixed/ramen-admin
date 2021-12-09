@@ -154,24 +154,23 @@ QString const sourceNameOfKey(dessser::gen::sync_key::t const &k)
   }
 }
 
-dessser::gen::sync_key::t const keyOfSourceName(
+std::shared_ptr<dessser::gen::sync_key::t> keyOfSourceName(
   QString const &sourceName,
-  char const *newExtension)
+  char const *extension)
 {
   std::string const f { sourceName.toStdString() };
   size_t i { f.rfind('.') };
 
   /* Any source name is supposed to have an extension from which to tell the
    * language it's written in. */
-  Q_ASSERT(newExtension || i != std::string::npos);
+  Q_ASSERT(extension || i != std::string::npos);
 
   std::string ext {
-    newExtension ?
-      newExtension : f.substr(i+1, f.length() - i - 1) };
+    extension ?  extension : f.substr(i+1, f.length() - i - 1) };
   std::string src_path {
     i != std::string::npos ?  f.substr(0, i) : f };
   return
-    dessser::gen::sync_key::t(
+    std::make_shared<dessser::gen::sync_key::t>(
       std::in_place_index<dessser::gen::sync_key::Sources>,
       src_path,
       ext);
@@ -290,7 +289,7 @@ std::string const SourcesModel::SrcPathOfItem(SourcesModel::TreeItem const *item
   SourcesModel::FileItem const *file {
     dynamic_cast<SourcesModel::FileItem const *>(item) };
   Q_ASSERT(file);
-  return file->src_path;
+  return file->srcPath;
 }
 
 std::string const SourcesModel::SrcPathOfIndex(QModelIndex const &index) const
@@ -346,22 +345,18 @@ std::shared_ptr<dessser::gen::source_info::t const>
     dynamic_cast<SourcesModel::FileItem const *>(item) };
   Q_ASSERT(file);
 
-  dessser::gen::sync_key::t const infoKey {
-    std::in_place_index<dessser::gen::sync_key::Sources>,
-    file->src_path,
-    "info" };
+  std::shared_ptr<dessser::gen::sync_key::t> const infoKey {
+    keyOfSrcPath(file->srcPath, "info") };
 
   std::shared_ptr<dessser::gen::sync_value::t const> v;
   kvs->lock.lock_shared();
-  auto it {
-    kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
-      &infoKey, /* No del */[](dessser::gen::sync_key::t const *){})) };
+  auto it { kvs->map.find(infoKey) };
   if (it != kvs->map.end()) v = it->second.val;
   kvs->lock.unlock_shared();
 
   if (! v) return nullptr;
   if (v->index() != dessser::gen::sync_value::SourceInfo) {
-    qCritical() << "Key" << infoKey << "is not a SourceInfo!?";
+    qCritical() << "Key" << *infoKey << "is not a SourceInfo!?";
     return nullptr;
   }
   return

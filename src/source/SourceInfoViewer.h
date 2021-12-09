@@ -1,6 +1,7 @@
 #ifndef SOURCEINFOVIEWER_H_190801
 #define SOURCEINFOVIEWER_H_190801
 #include <vector>
+
 #include "AtomicWidget.h"
 
 class QVBoxLayout;

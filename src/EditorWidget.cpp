@@ -21,7 +21,7 @@
 #include "KVecEditor.h"
 #include "MakeSyncValue.h"
 #include "misc_dessser.h"
-#include "SourceInfoViewer.h"
+#include "source/SourceInfoViewer.h"
 #include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"

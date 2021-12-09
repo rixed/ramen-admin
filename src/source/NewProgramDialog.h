@@ -2,6 +2,7 @@
 #define NEWPROGRAMDIALOG_H_190731
 #include <memory>
 #include <QDialog>
+
 #include "ConfChange.h"
 
 class QPushButton;

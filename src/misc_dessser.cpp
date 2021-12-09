@@ -95,6 +95,14 @@ bool isAWorker(dessser::gen::sync_key::t const &key)
   return per_worker_data->index() == dessser::gen::sync_key::Worker;
 }
 
+bool isNull(dessser::gen::sync_value::t const &v)
+{
+  if (v.index() != dessser::gen::sync_value::RamenValue) return false;
+  return
+    std::get<dessser::gen::sync_value::RamenValue>(v)->index() ==
+      dessser::gen::raql_value::VNull;
+}
+
 std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
   std::string const &site_name,
   std::string const &program_name,
@@ -292,6 +300,22 @@ std::shared_ptr<dessser::gen::source_info::compiled_program const> getCompiledPr
     std::get<dessser::gen::sync_value::SourceInfo>(v) };
   if (source_info->detail.index() != dessser::gen::source_info::Compiled) return nullptr;
   return std::get<dessser::gen::source_info::Compiled>(source_info->detail);
+}
+
+std::optional<std::pair<std::string const, std::string const>> srcPathOfKey(
+  dessser::gen::sync_key::t const &k)
+{
+  if (k.index() != dessser::gen::sync_key::Sources) return std::nullopt;
+  auto const &src { std::get<dessser::gen::sync_key::Sources>(k) };
+  return std::make_pair(std::get<0>(src), std::get<1>(src));
+}
+
+std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
+  std::string const &path, std::string const &ext)
+{
+  return std::make_shared<dessser::gen::sync_key::t>(
+    std::in_place_index<dessser::gen::sync_key::Sources>,
+    std::make_tuple(path, ext));
 }
 
 /* The name used by a chart source in the list of functions (also to order them) */

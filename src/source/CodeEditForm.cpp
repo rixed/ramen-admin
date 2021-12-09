@@ -1,4 +1,3 @@
-#include <cassert>
 #include <QDebug>
 #include <QVBoxLayout>
 #include <QVBoxLayout>
@@ -6,34 +5,39 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QStackedLayout>
+
+#ifdef WITH_ALERTING
 #include "AlertInfo.h"
 #include "AlertInfoEditor.h"
-#include "CloneDialog.h"
-#include "CodeEdit.h"
-#include "conf.h"
-#include "SourceInfoViewer.h"
+#endif
 #include "KTextEdit.h"
+#include "misc_dessser.h"
 #include "ProgramItem.h"
+#include "source/CodeEdit.h"
+#include "source/SourceCloneDialog.h"
+#include "source/SourceInfoViewer.h"
 
-#include "CodeEditForm.h"
+#include "source/CodeEditForm.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 CodeEditForm::CodeEditForm(QWidget *parent)
   : AtomicForm(true, parent)
 {
   layout()->setContentsMargins(QMargins());
 
-  QPushButton *cloneButton = new QPushButton("&Clone…");
+  QPushButton *cloneButton { new QPushButton("&Clone…") };
   // Because that AtomicForm was created with buttons just above
-  assert(buttonsLayout);
+  Q_ASSERT(buttonsLayout);
   buttonsLayout->insertWidget(0, cloneButton);
 
   codeEdit = new CodeEdit;
   codeEdit->setObjectName("codeEdit");
   // FIXME: codeEdit should inherit AtomicWidgetAlternative
   setCentralWidget(codeEdit);
+# ifdef WITH_ALERTING
   addWidget(codeEdit->alertEditor, true);
+# endif
   addWidget(codeEdit->textEditor, true);
   addWidget(codeEdit->infoEditor, true);
 
@@ -48,20 +52,21 @@ CodeEditForm::CodeEditForm(QWidget *parent)
 void CodeEditForm::wantClone()
 {
   if (verbose)
-    qDebug() << "CodeEditForm::wantClone: keyPrefix="
-             << QString::fromStdString(codeEdit->keyPrefix)
+    qDebug() << "CodeEditForm::wantClone: srcPath="
+             << QString::fromStdString(codeEdit->srcPath)
              << ", extension=" << codeEdit->extensionsCombo->currentData().toString();
 
-  if (codeEdit->keyPrefix.empty()) return;
+  if (codeEdit->srcPath.size() == 0) return;
 
-  /* We might want to have as many of those dialogs open as we want
+  /* We might want to have as many of those dialogues open as we want
    * to create clones (possibly of the same source); So just create
    * a new dialog each time the clone button is clicked.
    * Note that we clone only the selected extension. */
-  std::string const orig(
-    codeEdit->keyPrefix + "/" +
-    codeEdit->extensionsCombo->currentData().toString().toStdString());
+  std::shared_ptr<dessser::gen::sync_key::t const> orig {
+    keyOfSrcPath(
+      codeEdit->srcPath,
+      codeEdit->extensionsCombo->currentData().toString().toStdString()) };
 
-  CloneDialog *dialog(new CloneDialog(orig, this));
+  SourceCloneDialog *dialog { new SourceCloneDialog(orig, this) };
   dialog->show();
 }

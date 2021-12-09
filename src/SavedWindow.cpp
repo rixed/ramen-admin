@@ -3,7 +3,7 @@
 #include <QCoreApplication>
 #include <QSettings>
 #include "Menu.h"
-#include "SourcesWin.h" // for SOURCE_EDITOR_WINDOW_NAME
+#include "source/SourcesWin.h" // for SOURCE_EDITOR_WINDOW_NAME
 
 #include "SavedWindow.h"
 

@@ -6,16 +6,19 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
-#include "CodeEdit.h"
-#include "conf.h"
-#include "confValue.h"
+
+#include "ConfClient.h"
+#include "desssergen/sync_value.h"
 #include "KTextEdit.h"
+#include "MakeSyncValue.h"
+#include "Menu.h"
+#include "misc_dessser.h"
 #include "PathNameValidator.h"
-#include "RamenValue.h"
+#include "source/CodeEdit.h"
 
-#include "NewSourceDialog.h"
+#include "source/NewSourceDialog.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 NewSourceDialog::NewSourceDialog(QWidget *parent) :
   QDialog(parent)
@@ -41,10 +44,10 @@ NewSourceDialog::NewSourceDialog(QWidget *parent) :
   connect(buttonBox, &QDialogButtonBox::rejected,
           this, &QDialog::reject);
 
-  QFormLayout *formLayout = new QFormLayout;
+  QFormLayout *formLayout { new QFormLayout };
   formLayout->addRow(tr("Source name"), nameEdit);
   formLayout->addRow(codeEdit);
-  QVBoxLayout *layout = new QVBoxLayout;
+  QVBoxLayout *layout { new QVBoxLayout };
   layout->addLayout(formLayout);
   layout->addWidget(buttonBox);
   setLayout(layout);
@@ -65,13 +68,14 @@ void NewSourceDialog::checkValidity()
 
 void NewSourceDialog::createSource()
 {
-  QString const extension =
-    codeEdit->extensionsCombo->currentData().toString();
-  std::shared_ptr<conf::Value const> val = codeEdit->getValue();
+  std::string const extension {
+    codeEdit->extensionsCombo->currentData().toString().toStdString() };
+  std::shared_ptr<dessser::gen::sync_value::t const> val {
+    codeEdit->getValue() };
 
-  std::string key("sources/" + nameEdit->text().toStdString() +
-                "/" + extension.toStdString());
-  askNew(key, val);
+  std::shared_ptr<dessser::gen::sync_key::t const> key {
+    keyOfSrcPath(nameEdit->text().toStdString(), extension) };
+  Menu::getClient()->sendNew(key, val);
 
   clear();
   emit QDialog::accept();
@@ -79,12 +83,14 @@ void NewSourceDialog::createSource()
 
 void NewSourceDialog::clear()
 {
+# ifdef WITH_ALERTING
   codeEdit->enableLanguage(codeEdit->alertEditorIndex, true);
+# endif
   codeEdit->enableLanguage(codeEdit->textEditorIndex, true);
   codeEdit->enableLanguage(codeEdit->infoEditorIndex, false);
   codeEdit->setLanguage(codeEdit->textEditorIndex);
-  codeEdit->textEditor->setValue("",
-    std::make_shared<conf::RamenValueValue>(new VString(
-      QString("-- Created by ") + *my_uid +
-      QString(" the ") + stringOfDate(std::time(nullptr)))));
+  codeEdit->textEditor->setValue(
+    ofString(
+      "-- Created by " + my_uid->toStdString() +
+      " the " + stringOfDate(std::time(nullptr)).toStdString()));
 }

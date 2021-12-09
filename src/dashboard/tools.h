@@ -38,7 +38,8 @@ void iterDashboardWidgets(
  * that name: */
 std::shared_ptr<dessser::gen::sync_key::t> dashboardNextWidget(std::string const &dash_name);
 
-#define SCRATCHPAD "scratchpad"
+constexpr char const *SCRATCHPAD = "scratchpad";
+
 inline bool isScratchpad(std::string const &dash_name) {
   return dash_name == SCRATCHPAD;
 }

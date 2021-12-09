@@ -24,7 +24,7 @@
 #include "misc_dessser.h"
 #include "PathSuffixValidator.h"
 #include "RangeDoubleValidator.h"
-#include "SourcesModel.h"  // for baseNameOfKey and friends
+#include "source/SourcesModel.h"  // for baseNameOfKey and friends
 
 #include "RCEntryEditor.h"
 
@@ -305,26 +305,18 @@ void RCEntryEditor::updateSourceWarnings()
     sourceIsCompiled = true;
   } else {
     QString const name(sourceBox->currentText());
-    dessser::gen::sync_key::t const info_key { keyOfSourceName(name, "info") };
+    std::shared_ptr<dessser::gen::sync_key::t const> info_key {
+      keyOfSourceName(name, "info") };
     kvs->lock.lock_shared();
-    dessser::gen::sync_key::t const ramen_src { keyOfSourceName(name, "ramen") };
-    sourceDoesExist =
-      kvs->map.find(
-        std::shared_ptr<dessser::gen::sync_key::t const>(
-          &ramen_src, /* No del */[](dessser::gen::sync_key::t const *){})) !=
-        kvs->map.end();
+    std::shared_ptr<dessser::gen::sync_key::t const> ramen_src {
+      keyOfSourceName(name, "ramen") };
+    sourceDoesExist = kvs->map.find(ramen_src) != kvs->map.end();
     if (! sourceDoesExist) {
-      dessser::gen::sync_key::t const ramen_alert { keyOfSourceName(name, "alert") };
-      sourceDoesExist =
-        kvs->map.find(
-          std::shared_ptr<dessser::gen::sync_key::t const>(
-            &ramen_alert, /* No del */[](dessser::gen::sync_key::t const *){})) !=
-          kvs->map.end();
+      std::shared_ptr<dessser::gen::sync_key::t const> ramen_alert {
+        keyOfSourceName(name, "alert") };
+      sourceDoesExist = kvs->map.find(ramen_alert) != kvs->map.end();
     }
-    auto it {
-      kvs->map.find(
-        std::shared_ptr<dessser::gen::sync_key::t const>(
-          &info_key, /* No del */[](dessser::gen::sync_key::t const *){})) };
+    auto it { kvs->map.find(info_key) };
     sourceIsCompiled =
       it != kvs->map.end() &&
       isCompiledSource(it->second);

@@ -28,9 +28,7 @@
 #include "misc_dessser.h"
 #include "Resources.h"
 #include "RollButtonDelegate.h"
-#if WITH_SOURCES
-#include "SourcesWin.h"
-#endif
+#include "source/SourcesWin.h"
 
 #include "chart/TimeChartFunctionEditor.h"
 
@@ -159,17 +157,10 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
 
 void TimeChartFunctionEditor::wantSource()
 {
-# ifdef WITH_SOURCES
   if (! Menu::sourcesWin) return;
 
-  std::string const sourceKeyPrefix {
-    "sources/" + srcPathFromProgramName(model->source.name->program) };
-  if (verbose)
-    qDebug() << "Show source of program" << QString::fromStdString(sourceKeyPrefix);
-
-  Menu::sourcesWin->showFile(sourceKeyPrefix);
+  Menu::sourcesWin->showFile(srcPathFromProgramName(model->source.name->program));
   Menu::openSourceEditor();
-# endif
 }
 
 /* Customization is a multi step process:
@@ -223,10 +214,8 @@ void TimeChartFunctionEditor::automatonTransition(
 
     case TimeChartAutomatonCustomize::WaitInfo:
       qInfo() << "TimeChartFunctionEditor: displaying the customized source";
-#     ifdef WITH_SOURCES
-      Menu::sourcesWin->showFile(removeExt(automaton->sourceKey, '/'));
+      Menu::sourcesWin->showFile(automaton->sourceKey);
       Menu::openSourceEditor();
-#     endif
       break;
 
     case TimeChartAutomatonCustomize::WaitLockRC:

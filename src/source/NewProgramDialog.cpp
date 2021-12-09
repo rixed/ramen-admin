@@ -7,15 +7,12 @@
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QFormLayout>
+
 #include "RCEntryEditor.h"
-#include "conf.h"
-#include "confValue.h"
-#include "RamenValue.h"
-#include "NewProgramDialog.h"
 
-static bool const verbose(false);
+#include "source/NewProgramDialog.h"
 
-static std::string rc_key("target_config");
+static bool const verbose { false };
 
 NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent) :
   QDialog(parent),
@@ -97,7 +94,7 @@ void NewProgramDialog::createProgram()
    * Here instead we write only if/when we obtain the lock. */
   std::shared_ptr<conf::Value> rc_value;
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(rc_key);
+  auto it = kvs->map.find(targetConfig);
   if (it != kvs->map.end() && it->second.isMine())
     rc_value = it->second.val;
   kvs->lock.unlock_shared();
@@ -107,13 +104,13 @@ void NewProgramDialog::createProgram()
   } else {
     if (verbose)
       qDebug() << "NewProgramDialog: createProgram: must wait";
-    askLock(rc_key);
+    askLock(targetConfig);
   }
 }
 
 void NewProgramDialog::mayWriteRC(std::string const &key, KValue const &kv)
 {
-  if (key != rc_key) return;
+  if (key != targetConfig) return;
   if (! mustSave) return;
 
   if (verbose)
@@ -144,13 +141,13 @@ void NewProgramDialog::appendEntry(std::shared_ptr<conf::Value> rc_value)
     rc->addEntry(rce);
     if (verbose)
       qDebug() << "NewProgramDialog::appendEntry:Added entry with" << rce->params.size() << "params";
-    askSet(rc_key, std::static_pointer_cast<conf::Value const>(rc));
+    askSet(targetConfig, std::static_pointer_cast<conf::Value const>(rc));
   } else {
     qCritical() << "NewProgramDialog::appendEntry:Invalid type for the TargetConfig!?";
   }
 
   mustSave = false;
-  askUnlock(rc_key);
+  askUnlock(targetConfig);
   /* Maybe reset the editor? */
   emit QDialog::accept();
 }
