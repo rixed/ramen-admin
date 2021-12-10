@@ -300,6 +300,8 @@ void AtomicForm::wantDelete()
     for (AtomicWidget *aw : deletables) {
       std::shared_ptr<dessser::gen::sync_key::t const> key { aw->key() };
       if (! key) continue;
+      // Start by detaching this key from the widget so this lock is no longer needed
+      aw->setKey(nullptr);
       Menu::getClient()->sendDel(key);
     }
   }
