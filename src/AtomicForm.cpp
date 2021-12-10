@@ -339,7 +339,7 @@ bool AtomicForm::isEnabled() const
 
 void AtomicForm::setEnabled(bool enabled)
 {
-  bool const wasEnabled = isEnabled();
+  bool const wasEnabled { isEnabled() };
 
   if (enabled == wasEnabled) return;
 

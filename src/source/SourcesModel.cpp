@@ -404,8 +404,8 @@ found:
       qDebug() << "SourcesModel: Deleting extension"
                << root->children[row]->name << "/" << extension;
 
-    FileItem *file =
-      dynamic_cast<FileItem *>(root->children[row]);
+    FileItem *file {
+      dynamic_cast<FileItem *>(root->children[row]) };
     Q_ASSERT(file); // Because we only delete full path to files
 
     file->delExtension(extension);
@@ -415,7 +415,7 @@ found:
       endRemoveRows();
     }
   } else {
-    DirItem *dir = dynamic_cast<DirItem *>(root->children[row]);
+    DirItem *dir { dynamic_cast<DirItem *>(root->children[row]) };
     Q_ASSERT(dir); // Because we only delete full path to files
     deleteAll(names, extension, dir);
     if (dir->children.count() > 0) return;

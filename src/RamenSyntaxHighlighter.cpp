@@ -35,13 +35,13 @@ struct Rules {
     keyword.setFontWeight(QFont::Bold);
     keyword.setForeground(Qt::darkGreen);
     rules.emplace_back(keyword,
-      "\\b(parameter|parameters|default|defaults|to|run|if|define|lazy|"
+      "\\b(parameter|parameters|declare|default|defaults|to|run|if|define|lazy|"
           "persist|for|querying|query|every|while|as|doc|event|starts|starting|"
-          "at|with|duration|stops|stopping|ending|select|"
+          "at|with|duration|stops|stopping|ending|select|program|global|"
           "yield|merge|on|timeout|after|sort|until|by|where|"
           "group|notify|commit|flush|keep|all|before|collectd|netflow|"
           "graphite|listen|read|delete|file|separator|no|escape|"
-          "preprocess|factor|factors|from|this|site|sites|globally|"
+          "preprocess|factor|factors|from|this|scope|site|sites|globally|"
           "locally|skip|nulls)\\b");
 
     QTextCharFormat ops;

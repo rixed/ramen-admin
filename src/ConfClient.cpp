@@ -477,12 +477,7 @@ int ConfClient::rcvdSetKey(
       std::piecewise_construct,
       std::forward_as_tuple(k),
       std::forward_as_tuple(v, set_by_uid, mtime, false, false));
-  if (inserted) {
-    if (verbose)
-      qDebug() << *k << "<=" << *v << "set by" << set_by_uid << "at" << mtime;
-  } else {
-    if (verbose)
-      qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime;
+  if (! inserted) {
     it->second.set(v, set_by_uid, mtime);
   }
 
@@ -506,11 +501,6 @@ int ConfClient::rcvdNewKey(
       QString const &owner,
       double const expiry)
 {
-  if (verbose)
-    qDebug() << *k << "<-" << *v << "set by" << set_by_uid << "at" << mtime
-             << "owned by" << owner << "expiring at" << expiry
-             << "can_write" << can_write << "can_del" << can_del;
-
   kvs->lock.lock();
   int ret { -1 };
 
@@ -540,8 +530,6 @@ int ConfClient::rcvdNewKey(
 int ConfClient::rcvdDelKey(
       std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  if (verbose) qDebug() << "Del" << *k;
-
   kvs->lock.lock();
 
   auto it { kvs->map.find(k) };
@@ -564,9 +552,6 @@ int ConfClient::rcvdLockKey(
       QString const &owner,
       double const expiry)
 {
-  if (verbose)
-    qDebug() << "lock" << *k << "owned by" << owner << "expiring at" << expiry;
-
   int ret { -1 };
   kvs->lock.lock();
 
@@ -587,8 +572,6 @@ int ConfClient::rcvdLockKey(
 
 int ConfClient::rcvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  if (verbose) qDebug() << "unlock" << *k;
-
   int ret { -1 };
   kvs->lock.lock();
 

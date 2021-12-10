@@ -215,7 +215,7 @@ void SourcesView::expandRows(QModelIndex const &parent, int first, int last)
 void SourcesView::hideEditor(QModelIndex const &parent, int first, int last)
 {
   if (verbose)
-    qDebug() << "SourcesView::hideEditor: Removing rows" << first << ".."
+    qDebug() << "SourcesView::hideEditor: Removing rows" << first << "to"
              << last;
 
   for (int r = first ; r <= last ; r ++) {
@@ -238,8 +238,7 @@ void SourcesView::hideEditor(QModelIndex const &parent, int first, int last)
       Q_ASSERT(file);
 
       if (verbose)
-        qDebug() << "SourcesView: File"
-                 << QString::fromStdString(file->srcPath) << "deleted";
+        qDebug() << "SourcesView: File" << file->srcPath << "deleted";
 
       if (editorForm && file->srcPath == editorForm->codeEdit->srcPath) {
         hideFile();
