@@ -29,60 +29,110 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t863dd87ee3eb9bd93a78669675db1450 {
+struct t206fd5d881820fd19331922d3e213def {
   Bytes message;
   Bytes nonce;
   Bytes public_key;
-  t863dd87ee3eb9bd93a78669675db1450(Bytes message_, Bytes nonce_, Bytes public_key_) : message(message_), nonce(nonce_), public_key(public_key_) {}
-  t863dd87ee3eb9bd93a78669675db1450() = default;
+  t206fd5d881820fd19331922d3e213def(Bytes message_, Bytes nonce_, Bytes public_key_) : message(message_), nonce(nonce_), public_key(public_key_) {}
+  t206fd5d881820fd19331922d3e213def() = default;
 };
+inline bool operator==(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
+  return a.message == b.message && a.nonce == b.nonce && a.public_key == b.public_key;
+}
+
+inline bool operator!=(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
+  return !operator==(a, b);
+}
 struct t : public std::variant<
-  ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450, // SendSessionKey
+  ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def, // SendSessionKey
   Bytes, // Crypted
   Bytes, // ClearText
   std::string // Error
 > { using variant::variant; };
 
-struct tc079aed4395dddd624f3bbbe199eefe6 : public std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // SendSessionKey
+    case 1: return std::get<1>(a) == std::get<1>(b); // Crypted
+    case 2: return std::get<2>(a) == std::get<2>(b); // ClearText
+    case 3: return std::get<3>(a) == std::get<3>(b); // Error
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct t12f53a0c7c008f43bd9f6aa8e2c9a88a : public std::tuple<
   std::shared_ptr<::dessser::gen::sync_msg::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tc079aed4395dddd624f3bbbe199eefe6(std::tuple<std::shared_ptr<::dessser::gen::sync_msg::t> , Pointer> p)
+  t12f53a0c7c008f43bd9f6aa8e2c9a88a(std::tuple<std::shared_ptr<::dessser::gen::sync_msg::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::sync_msg::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
+inline bool operator==(t12f53a0c7c008f43bd9f6aa8e2c9a88a const &a, t12f53a0c7c008f43bd9f6aa8e2c9a88a const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t12f53a0c7c008f43bd9f6aa8e2c9a88a const &a, t12f53a0c7c008f43bd9f6aa8e2c9a88a const &b) {
+  return !operator==(a, b);
+}
+struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
   uint16_t,
   Pointer
 > {
   using tuple::tuple;
-  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+  ta97bb48ed75bbda6173555873826c8c6(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
+inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return !operator==(a, b);
+}
+struct t12fb9c475959b52bf7b17b155a955ffa : public std::tuple<
   Size,
   Pointer
 > {
   using tuple::tuple;
-  t044960e524fd6ec1bfc06410ce526709(std::tuple<Size, Pointer> p)
+  t12fb9c475959b52bf7b17b155a955ffa(std::tuple<Size, Pointer> p)
     : std::tuple<Size, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
+inline bool operator==(t12fb9c475959b52bf7b17b155a955ffa const &a, t12fb9c475959b52bf7b17b155a955ffa const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t12fb9c475959b52bf7b17b155a955ffa const &a, t12fb9c475959b52bf7b17b155a955ffa const &b) {
+  return !operator==(a, b);
+}
+struct t1a5d74abf838df33f185a72a8912f5c9 : public std::tuple<
   uint8_t,
   Pointer
 > {
   using tuple::tuple;
-  t1566bd611d8a2b90669c241f5e8d6ff1(std::tuple<uint8_t, Pointer> p)
+  t1a5d74abf838df33f185a72a8912f5c9(std::tuple<uint8_t, Pointer> p)
     : std::tuple<uint8_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
+inline bool operator==(t1a5d74abf838df33f185a72a8912f5c9 const &a, t1a5d74abf838df33f185a72a8912f5c9 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t1a5d74abf838df33f185a72a8912f5c9 const &a, t1a5d74abf838df33f185a72a8912f5c9 const &b) {
+  return !operator==(a, b);
+}
+struct t9ef6882174ae71a34a3c5ef6b29242fb : public std::tuple<
   Bytes,
   Pointer
 > {
   using tuple::tuple;
-  t5887709cc43c8c8e24d28211e8c970a2(std::tuple<Bytes, Pointer> p)
+  t9ef6882174ae71a34a3c5ef6b29242fb(std::tuple<Bytes, Pointer> p)
     : std::tuple<Bytes, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
+inline bool operator==(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae71a34a3c5ef6b29242fb const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae71a34a3c5ef6b29242fb const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -195,7 +245,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Point
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_8 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_8 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_9 { id_8.nonce };
         Size id_10 { id_9.length() };
         uint32_t id_11 { uint32_t(id_10) };
@@ -256,13 +306,13 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Point
           }
           let_res_13 = let_res_15;
         }
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_47 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_47 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_48 { id_47.nonce };
         Pointer id_49 { let_res_13.writeBytes(id_48) };
         Pointer let_res_50;
         {
           Pointer srec_dst_178 { id_49 };
-          ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_51 { std::get<0 /* SendSessionKey */>((*p_0)) };
+          ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_51 { std::get<0 /* SendSessionKey */>((*p_0)) };
           Bytes id_52 { id_51.public_key };
           Size id_53 { id_52.length() };
           uint32_t id_54 { uint32_t(id_53) };
@@ -323,7 +373,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Point
             }
             let_res_56 = let_res_58;
           }
-          ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_90 { std::get<0 /* SendSessionKey */>((*p_0)) };
+          ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_90 { std::get<0 /* SendSessionKey */>((*p_0)) };
           Bytes id_91 { id_90.public_key };
           Pointer id_92 { let_res_56.writeBytes(id_91) };
           let_res_50 = id_92;
@@ -331,7 +381,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Point
         Pointer let_res_93;
         {
           Pointer srec_dst_181 { let_res_50 };
-          ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_94 { std::get<0 /* SendSessionKey */>((*p_0)) };
+          ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_94 { std::get<0 /* SendSessionKey */>((*p_0)) };
           Bytes id_95 { id_94.message };
           Size id_96 { id_95.length() };
           uint32_t id_97 { uint32_t(id_96) };
@@ -392,7 +442,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Point
             }
             let_res_99 = let_res_101;
           }
-          ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_133 { std::get<0 /* SendSessionKey */>((*p_0)) };
+          ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_133 { std::get<0 /* SendSessionKey */>((*p_0)) };
           Bytes id_134 { id_133.message };
           Pointer id_135 { let_res_99.writeBytes(id_134) };
           let_res_93 = id_135;
@@ -691,7 +741,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
     Size choose_res_272;
     if (id_271) {
       Size id_273 { 2UL };
-      ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_274 { std::get<0 /* SendSessionKey */>((*p_0)) };
+      ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_274 { std::get<0 /* SendSessionKey */>((*p_0)) };
       Bytes id_275 { id_274.nonce };
       Size id_276 { id_275.length() };
       uint32_t id_277 { uint32_t(id_276) };
@@ -732,7 +782,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
         }
         let_res_279 = let_res_282;
       }
-      ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_300 { std::get<0 /* SendSessionKey */>((*p_0)) };
+      ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_300 { std::get<0 /* SendSessionKey */>((*p_0)) };
       Bytes id_301 { id_300.nonce };
       Size id_302 { id_301.length() };
       Size id_303 { Size(let_res_279 + id_302) };
@@ -740,7 +790,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
       Size let_res_305;
       {
         Size sz_160 { id_304 };
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_306 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_306 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_307 { id_306.public_key };
         Size id_308 { id_307.length() };
         uint32_t id_309 { uint32_t(id_308) };
@@ -781,7 +831,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
           }
           let_res_311 = let_res_314;
         }
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_332 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_332 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_333 { id_332.public_key };
         Size id_334 { id_333.length() };
         Size id_335 { Size(let_res_311 + id_334) };
@@ -791,7 +841,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
       Size let_res_337;
       {
         Size sz_164 { let_res_305 };
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_338 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_338 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_339 { id_338.message };
         Size id_340 { id_339.length() };
         uint32_t id_341 { uint32_t(id_340) };
@@ -832,7 +882,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersiz
           }
           let_res_343 = let_res_346;
         }
-        ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_364 { std::get<0 /* SendSessionKey */>((*p_0)) };
+        ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_364 { std::get<0 /* SendSessionKey */>((*p_0)) };
         Bytes id_365 { id_364.message };
         Size id_366 { id_365.length() };
         Size id_367 { Size(let_res_343 + id_366) };
@@ -1010,172 +1060,169 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersize_of_ro
 
 /* 
     (fun ("Ptr")
-      (let-pair "make_fst_144" "make_snd_145"
-        (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
-          (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
-            (if (eq (u16 0) (identifier "dsum1_fst_63"))
-              (let "drec_113"
-                (let "dbytes1_110"
-                  (let "leb_ref_104" (make-vec (u32 0))
-                    (let "shft_ref_105" (make-vec (u8 0))
-                      (let "p_ref_106" (make-vec (identifier "dsum1_snd_64"))
-                        (seq
-                          (while
-                            (let "leb128_107" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_106")))
-                              (let-pair "leb128_fst_108" "leb128_snd_109" 
-                                (identifier "leb128_107")
-                                (seq (set-vec (u8 0) (identifier "p_ref_106") (identifier "leb128_snd_109"))
-                                  (set-vec (u8 0) (identifier "leb_ref_104")
-                                    (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_108") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_105"))) (unsafe-nth (u8 0) (identifier "leb_ref_104"))))
-                                  (set-vec (u8 0) (identifier "shft_ref_105") (add (unsafe-nth (u8 0) (identifier "shft_ref_105")) (u8 7))) 
-                                  (ge (identifier "leb128_fst_108") (u8 128))))) 
-                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_104"))) (unsafe-nth (u8 0) (identifier "p_ref_106")))))))
-                  (let-pair "dbytes1_fst_111" "dbytes1_snd_112" (identifier "dbytes1_110") (read-bytes (identifier "dbytes1_snd_112") (identifier "dbytes1_fst_111"))))
-                (let-pair "drec_fst_114" "drec_snd_115" (identifier "drec_113")
-                  (let "drec_125"
-                    (let "dbytes1_122"
-                      (let "leb_ref_116" (make-vec (u32 0))
-                        (let "shft_ref_117" (make-vec (u8 0))
-                          (let "p_ref_118" (make-vec (identifier "drec_snd_115"))
-                            (seq
-                              (while
-                                (let "leb128_119" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_118")))
-                                  (let-pair "leb128_fst_120" "leb128_snd_121" 
-                                    (identifier "leb128_119")
-                                    (seq (set-vec (u8 0) (identifier "p_ref_118") (identifier "leb128_snd_121"))
-                                      (set-vec (u8 0) (identifier "leb_ref_116")
-                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_120") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_117"))) (unsafe-nth (u8 0) (identifier "leb_ref_116"))))
-                                      (set-vec (u8 0) (identifier "shft_ref_117") (add (unsafe-nth (u8 0) (identifier "shft_ref_117")) (u8 7))) 
-                                      (ge (identifier "leb128_fst_120") (u8 128))))) 
-                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_116"))) (unsafe-nth (u8 0) (identifier "p_ref_118")))))))
-                      (let-pair "dbytes1_fst_123" "dbytes1_snd_124" (identifier "dbytes1_122") (read-bytes (identifier "dbytes1_snd_124") (identifier "dbytes1_fst_123"))))
-                    (let-pair "drec_fst_126" "drec_snd_127" (identifier "drec_125")
-                      (let-pair "drec_fst_138" "drec_snd_139"
-                        (let "dbytes1_134"
-                          (let "leb_ref_128" (make-vec (u32 0))
-                            (let "shft_ref_129" (make-vec (u8 0))
-                              (let "p_ref_130" (make-vec (identifier "drec_snd_127"))
-                                (seq
-                                  (while
-                                    (let "leb128_131" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_130")))
-                                      (let-pair "leb128_fst_132" "leb128_snd_133" 
-                                        (identifier "leb128_131")
-                                        (seq (set-vec (u8 0) (identifier "p_ref_130") (identifier "leb128_snd_133"))
-                                          (set-vec (u8 0) (identifier "leb_ref_128")
-                                            (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_132") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_129"))) (unsafe-nth (u8 0) (identifier "leb_ref_128"))))
-                                          (set-vec (u8 0) (identifier "shft_ref_129") (add (unsafe-nth (u8 0) (identifier "shft_ref_129")) (u8 7))) 
-                                          (ge (identifier "leb128_fst_132") (u8 128))))) 
-                                    (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_128"))) (unsafe-nth (u8 0) (identifier "p_ref_130")))))))
-                          (let-pair "dbytes1_fst_135" "dbytes1_snd_136" (identifier "dbytes1_134") (read-bytes (identifier "dbytes1_snd_136") (identifier "dbytes1_fst_135"))))
-                        (make-tup
-                          (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 0
-                            (make-rec (string "message") (identifier "drec_fst_138") (string "public_key") (identifier "drec_fst_126") (string "nonce") (identifier "drec_fst_114"))) 
-                          (identifier "drec_snd_139")))))))
-              (if (eq (u16 1) (identifier "dsum1_fst_63"))
-                (let-pair "dsum2_fst_102" "dsum2_snd_103"
-                  (let "dbytes1_98"
-                    (let "leb_ref_92" (make-vec (u32 0))
-                      (let "shft_ref_93" (make-vec (u8 0))
-                        (let "p_ref_94" (make-vec (identifier "dsum1_snd_64"))
+      (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
+        (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
+          (if (eq (u16 0) (identifier "dsum1_fst_63"))
+            (let "drec_113"
+              (let "dbytes1_110"
+                (let "leb_ref_104" (make-vec (u32 0))
+                  (let "shft_ref_105" (make-vec (u8 0))
+                    (let "p_ref_106" (make-vec (identifier "dsum1_snd_64"))
+                      (seq
+                        (while
+                          (let "leb128_107" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_106")))
+                            (let-pair "leb128_fst_108" "leb128_snd_109" 
+                              (identifier "leb128_107")
+                              (seq (set-vec (u8 0) (identifier "p_ref_106") (identifier "leb128_snd_109"))
+                                (set-vec (u8 0) (identifier "leb_ref_104")
+                                  (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_108") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_105"))) (unsafe-nth (u8 0) (identifier "leb_ref_104"))))
+                                (set-vec (u8 0) (identifier "shft_ref_105") (add (unsafe-nth (u8 0) (identifier "shft_ref_105")) (u8 7))) 
+                                (ge (identifier "leb128_fst_108") (u8 128))))) 
+                          (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_104"))) (unsafe-nth (u8 0) (identifier "p_ref_106")))))))
+                (let-pair "dbytes1_fst_111" "dbytes1_snd_112" (identifier "dbytes1_110") (read-bytes (identifier "dbytes1_snd_112") (identifier "dbytes1_fst_111"))))
+              (let-pair "drec_fst_114" "drec_snd_115" (identifier "drec_113")
+                (let "drec_125"
+                  (let "dbytes1_122"
+                    (let "leb_ref_116" (make-vec (u32 0))
+                      (let "shft_ref_117" (make-vec (u8 0))
+                        (let "p_ref_118" (make-vec (identifier "drec_snd_115"))
                           (seq
                             (while
-                              (let "leb128_95" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_94")))
-                                (let-pair "leb128_fst_96" "leb128_snd_97" 
-                                  (identifier "leb128_95")
-                                  (seq (set-vec (u8 0) (identifier "p_ref_94") (identifier "leb128_snd_97"))
-                                    (set-vec (u8 0) (identifier "leb_ref_92")
-                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_96") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_93"))) (unsafe-nth (u8 0) (identifier "leb_ref_92"))))
-                                    (set-vec (u8 0) (identifier "shft_ref_93") (add (unsafe-nth (u8 0) (identifier "shft_ref_93")) (u8 7))) 
-                                    (ge (identifier "leb128_fst_96") (u8 128))))) 
-                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_92"))) (unsafe-nth (u8 0) (identifier "p_ref_94")))))))
-                    (let-pair "dbytes1_fst_99" "dbytes1_snd_100" (identifier "dbytes1_98") (read-bytes (identifier "dbytes1_snd_100") (identifier "dbytes1_fst_99"))))
-                  (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 1 (identifier "dsum2_fst_102")) (identifier "dsum2_snd_103")))
-                (if (eq (u16 2) (identifier "dsum1_fst_63"))
-                  (let-pair "dsum2_fst_90" "dsum2_snd_91"
-                    (let "dbytes1_86"
-                      (let "leb_ref_80" (make-vec (u32 0))
-                        (let "shft_ref_81" (make-vec (u8 0))
-                          (let "p_ref_82" (make-vec (identifier "dsum1_snd_64"))
-                            (seq
-                              (while
-                                (let "leb128_83" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_82")))
-                                  (let-pair "leb128_fst_84" "leb128_snd_85" 
-                                    (identifier "leb128_83")
-                                    (seq (set-vec (u8 0) (identifier "p_ref_82") (identifier "leb128_snd_85"))
-                                      (set-vec (u8 0) (identifier "leb_ref_80")
-                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_84") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_81"))) (unsafe-nth (u8 0) (identifier "leb_ref_80"))))
-                                      (set-vec (u8 0) (identifier "shft_ref_81") (add (unsafe-nth (u8 0) (identifier "shft_ref_81")) (u8 7))) 
-                                      (ge (identifier "leb128_fst_84") (u8 128))))) 
-                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_80"))) (unsafe-nth (u8 0) (identifier "p_ref_82")))))))
-                      (let-pair "dbytes1_fst_87" "dbytes1_snd_88" (identifier "dbytes1_86") (read-bytes (identifier "dbytes1_snd_88") (identifier "dbytes1_fst_87"))))
-                    (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 2 (identifier "dsum2_fst_90")) (identifier "dsum2_snd_91")))
-                  (seq (assert (eq (identifier "dsum1_fst_63") (u16 3)))
-                    (let "dstring1_71"
-                      (let "leb_ref_65" (make-vec (u32 0))
-                        (let "shft_ref_66" (make-vec (u8 0))
-                          (let "p_ref_67" (make-vec (identifier "dsum1_snd_64"))
-                            (seq
-                              (while
-                                (let "leb128_68" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_67")))
-                                  (let-pair "leb128_fst_69" "leb128_snd_70" 
-                                    (identifier "leb128_68")
-                                    (seq (set-vec (u8 0) (identifier "p_ref_67") (identifier "leb128_snd_70"))
-                                      (set-vec (u8 0) (identifier "leb_ref_65")
-                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_69") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_66"))) (unsafe-nth (u8 0) (identifier "leb_ref_65"))))
-                                      (set-vec (u8 0) (identifier "shft_ref_66") (add (unsafe-nth (u8 0) (identifier "shft_ref_66")) (u8 7))) 
-                                      (ge (identifier "leb128_fst_69") (u8 128))))) 
-                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_65"))) (unsafe-nth (u8 0) (identifier "p_ref_67")))))))
-                      (let-pair "dstring1_fst_72" "dstring1_snd_73" (identifier "dstring1_71")
-                        (let-pair "dstring2_fst_75" "dstring2_snd_76" 
-                          (read-bytes (identifier "dstring1_snd_73") (identifier "dstring1_fst_72"))
-                          (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 3 (string-of-bytes (identifier "dstring2_fst_75")))
-                            (identifier "dstring2_snd_76"))))))))))) 
-        (make-tup (identifier "make_fst_144") (identifier "make_snd_145"))))
+                              (let "leb128_119" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_118")))
+                                (let-pair "leb128_fst_120" "leb128_snd_121" 
+                                  (identifier "leb128_119")
+                                  (seq (set-vec (u8 0) (identifier "p_ref_118") (identifier "leb128_snd_121"))
+                                    (set-vec (u8 0) (identifier "leb_ref_116")
+                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_120") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_117"))) (unsafe-nth (u8 0) (identifier "leb_ref_116"))))
+                                    (set-vec (u8 0) (identifier "shft_ref_117") (add (unsafe-nth (u8 0) (identifier "shft_ref_117")) (u8 7))) 
+                                    (ge (identifier "leb128_fst_120") (u8 128))))) 
+                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_116"))) (unsafe-nth (u8 0) (identifier "p_ref_118")))))))
+                    (let-pair "dbytes1_fst_123" "dbytes1_snd_124" (identifier "dbytes1_122") (read-bytes (identifier "dbytes1_snd_124") (identifier "dbytes1_fst_123"))))
+                  (let-pair "drec_fst_126" "drec_snd_127" (identifier "drec_125")
+                    (let-pair "drec_fst_138" "drec_snd_139"
+                      (let "dbytes1_134"
+                        (let "leb_ref_128" (make-vec (u32 0))
+                          (let "shft_ref_129" (make-vec (u8 0))
+                            (let "p_ref_130" (make-vec (identifier "drec_snd_127"))
+                              (seq
+                                (while
+                                  (let "leb128_131" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_130")))
+                                    (let-pair "leb128_fst_132" "leb128_snd_133" 
+                                      (identifier "leb128_131")
+                                      (seq (set-vec (u8 0) (identifier "p_ref_130") (identifier "leb128_snd_133"))
+                                        (set-vec (u8 0) (identifier "leb_ref_128")
+                                          (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_132") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_129"))) (unsafe-nth (u8 0) (identifier "leb_ref_128"))))
+                                        (set-vec (u8 0) (identifier "shft_ref_129") (add (unsafe-nth (u8 0) (identifier "shft_ref_129")) (u8 7))) 
+                                        (ge (identifier "leb128_fst_132") (u8 128))))) 
+                                  (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_128"))) (unsafe-nth (u8 0) (identifier "p_ref_130")))))))
+                        (let-pair "dbytes1_fst_135" "dbytes1_snd_136" (identifier "dbytes1_134") (read-bytes (identifier "dbytes1_snd_136") (identifier "dbytes1_fst_135"))))
+                      (make-tup
+                        (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 0
+                          (make-rec (string "message") (identifier "drec_fst_138") (string "public_key") (identifier "drec_fst_126") (string "nonce") (identifier "drec_fst_114"))) 
+                        (identifier "drec_snd_139")))))))
+            (if (eq (u16 1) (identifier "dsum1_fst_63"))
+              (let-pair "dsum2_fst_102" "dsum2_snd_103"
+                (let "dbytes1_98"
+                  (let "leb_ref_92" (make-vec (u32 0))
+                    (let "shft_ref_93" (make-vec (u8 0))
+                      (let "p_ref_94" (make-vec (identifier "dsum1_snd_64"))
+                        (seq
+                          (while
+                            (let "leb128_95" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_94")))
+                              (let-pair "leb128_fst_96" "leb128_snd_97" 
+                                (identifier "leb128_95")
+                                (seq (set-vec (u8 0) (identifier "p_ref_94") (identifier "leb128_snd_97"))
+                                  (set-vec (u8 0) (identifier "leb_ref_92")
+                                    (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_96") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_93"))) (unsafe-nth (u8 0) (identifier "leb_ref_92"))))
+                                  (set-vec (u8 0) (identifier "shft_ref_93") (add (unsafe-nth (u8 0) (identifier "shft_ref_93")) (u8 7))) 
+                                  (ge (identifier "leb128_fst_96") (u8 128))))) 
+                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_92"))) (unsafe-nth (u8 0) (identifier "p_ref_94")))))))
+                  (let-pair "dbytes1_fst_99" "dbytes1_snd_100" (identifier "dbytes1_98") (read-bytes (identifier "dbytes1_snd_100") (identifier "dbytes1_fst_99"))))
+                (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 1 (identifier "dsum2_fst_102")) (identifier "dsum2_snd_103")))
+              (if (eq (u16 2) (identifier "dsum1_fst_63"))
+                (let-pair "dsum2_fst_90" "dsum2_snd_91"
+                  (let "dbytes1_86"
+                    (let "leb_ref_80" (make-vec (u32 0))
+                      (let "shft_ref_81" (make-vec (u8 0))
+                        (let "p_ref_82" (make-vec (identifier "dsum1_snd_64"))
+                          (seq
+                            (while
+                              (let "leb128_83" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_82")))
+                                (let-pair "leb128_fst_84" "leb128_snd_85" 
+                                  (identifier "leb128_83")
+                                  (seq (set-vec (u8 0) (identifier "p_ref_82") (identifier "leb128_snd_85"))
+                                    (set-vec (u8 0) (identifier "leb_ref_80")
+                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_84") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_81"))) (unsafe-nth (u8 0) (identifier "leb_ref_80"))))
+                                    (set-vec (u8 0) (identifier "shft_ref_81") (add (unsafe-nth (u8 0) (identifier "shft_ref_81")) (u8 7))) 
+                                    (ge (identifier "leb128_fst_84") (u8 128))))) 
+                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_80"))) (unsafe-nth (u8 0) (identifier "p_ref_82")))))))
+                    (let-pair "dbytes1_fst_87" "dbytes1_snd_88" (identifier "dbytes1_86") (read-bytes (identifier "dbytes1_snd_88") (identifier "dbytes1_fst_87"))))
+                  (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 2 (identifier "dsum2_fst_90")) (identifier "dsum2_snd_91")))
+                (seq (assert (eq (identifier "dsum1_fst_63") (u16 3)))
+                  (let "dstring1_71"
+                    (let "leb_ref_65" (make-vec (u32 0))
+                      (let "shft_ref_66" (make-vec (u8 0))
+                        (let "p_ref_67" (make-vec (identifier "dsum1_snd_64"))
+                          (seq
+                            (while
+                              (let "leb128_68" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_67")))
+                                (let-pair "leb128_fst_69" "leb128_snd_70" 
+                                  (identifier "leb128_68")
+                                  (seq (set-vec (u8 0) (identifier "p_ref_67") (identifier "leb128_snd_70"))
+                                    (set-vec (u8 0) (identifier "leb_ref_65")
+                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_69") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_66"))) (unsafe-nth (u8 0) (identifier "leb_ref_65"))))
+                                    (set-vec (u8 0) (identifier "shft_ref_66") (add (unsafe-nth (u8 0) (identifier "shft_ref_66")) (u8 7))) 
+                                    (ge (identifier "leb128_fst_69") (u8 128))))) 
+                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_65"))) (unsafe-nth (u8 0) (identifier "p_ref_67")))))))
+                    (let-pair "dstring1_fst_72" "dstring1_snd_73" (identifier "dstring1_71")
+                      (let-pair "dstring2_fst_75" "dstring2_snd_76" (read-bytes (identifier "dstring1_snd_73") (identifier "dstring1_fst_72"))
+                        (make-tup (construct "[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" 3 (string-of-bytes (identifier "dstring2_fst_75")))
+                          (identifier "dstring2_snd_76"))))))))))))
  */
-static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6(Pointer)> fun471 { [&fun471](Pointer p_0) {
-    ::dessser::gen::sync_msg::t7609d344c1ba69d0f80fec236d4c216b id_472 { p_0.readU16Le() };
-    ::dessser::gen::sync_msg::t7609d344c1ba69d0f80fec236d4c216b letpair_res_473;
+  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun471 { [&fun471](Pointer p_0) {
+    ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 id_472 { p_0.readU16Le() };
+    ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 letpair_res_473;
     {
       auto du16_fst_57 { std::get<0>(id_472) };
       auto du16_snd_58 { std::get<1>(id_472) };
-      ::dessser::gen::sync_msg::t7609d344c1ba69d0f80fec236d4c216b id_474 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 id_474 { du16_fst_57, du16_snd_58 };
       letpair_res_473 = id_474;
     }
-    ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 let_res_475;
+    ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a let_res_475;
     {
-      ::dessser::gen::sync_msg::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_473 };
-      ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_476;
+      ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 dsum1_62 { letpair_res_473 };
+      ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_476;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_477 { 0 };
         bool id_478 { bool(id_477 == dsum1_fst_63) };
-        ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 choose_res_479;
+        ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a choose_res_479;
         if (id_478) {
           uint32_t id_480 { 0U };
           Vec<1, uint32_t> id_481 {  id_480  };
-          ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_482;
+          ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_482;
           {
             Vec<1, uint32_t> leb_ref_104 { id_481 };
             uint8_t id_483 { 0 };
             Vec<1, uint8_t> id_484 {  id_483  };
-            ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_485;
+            ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_485;
             {
               Vec<1, uint8_t> shft_ref_105 { id_484 };
               Vec<1, Pointer> id_486 {  dsum1_snd_64  };
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_487;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_487;
               {
                 Vec<1, Pointer> p_ref_106 { id_486 };
                 bool while_flag_488 { true };
                 do {
                   uint8_t id_489 { 0 };
                   Pointer id_490 { p_ref_106[id_489] };
-                  ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_491 { id_490.readU8() };
+                  ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_491 { id_490.readU8() };
                   bool let_res_492;
                   {
-                    ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_107 { id_491 };
+                    ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_107 { id_491 };
                     bool letpair_res_493;
                     {
                       auto leb128_fst_108 { std::get<0>(leb128_107) };
@@ -1219,54 +1266,54 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                 Size id_517 { Size(id_516) };
                 uint8_t id_518 { 0 };
                 Pointer id_519 { p_ref_106[id_518] };
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_520 { id_517, id_519 };
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_520 { id_517, id_519 };
                 let_res_487 = id_520;
               }
               let_res_485 = let_res_487;
             }
             let_res_482 = let_res_485;
           }
-          ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 let_res_521;
+          ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb let_res_521;
           {
-            ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dbytes1_110 { let_res_482 };
-            ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 letpair_res_522;
+            ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dbytes1_110 { let_res_482 };
+            ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb letpair_res_522;
             {
               auto dbytes1_fst_111 { std::get<0>(dbytes1_110) };
               auto dbytes1_snd_112 { std::get<1>(dbytes1_110) };
-              ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_523 { dbytes1_snd_112.readBytes(dbytes1_fst_111) };
+              ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_523 { dbytes1_snd_112.readBytes(dbytes1_fst_111) };
               letpair_res_522 = id_523;
             }
             let_res_521 = letpair_res_522;
           }
-          ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 let_res_524;
+          ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a let_res_524;
           {
-            ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 drec_113 { let_res_521 };
-            ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_525;
+            ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb drec_113 { let_res_521 };
+            ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_525;
             {
               auto drec_fst_114 { std::get<0>(drec_113) };
               auto drec_snd_115 { std::get<1>(drec_113) };
               uint32_t id_526 { 0U };
               Vec<1, uint32_t> id_527 {  id_526  };
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_528;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_528;
               {
                 Vec<1, uint32_t> leb_ref_116 { id_527 };
                 uint8_t id_529 { 0 };
                 Vec<1, uint8_t> id_530 {  id_529  };
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_531;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_531;
                 {
                   Vec<1, uint8_t> shft_ref_117 { id_530 };
                   Vec<1, Pointer> id_532 {  drec_snd_115  };
-                  ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_533;
+                  ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_533;
                   {
                     Vec<1, Pointer> p_ref_118 { id_532 };
                     bool while_flag_534 { true };
                     do {
                       uint8_t id_535 { 0 };
                       Pointer id_536 { p_ref_118[id_535] };
-                      ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_537 { id_536.readU8() };
+                      ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_537 { id_536.readU8() };
                       bool let_res_538;
                       {
-                        ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_119 { id_537 };
+                        ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_119 { id_537 };
                         bool letpair_res_539;
                         {
                           auto leb128_fst_120 { std::get<0>(leb128_119) };
@@ -1310,54 +1357,54 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                     Size id_563 { Size(id_562) };
                     uint8_t id_564 { 0 };
                     Pointer id_565 { p_ref_118[id_564] };
-                    ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_566 { id_563, id_565 };
+                    ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_566 { id_563, id_565 };
                     let_res_533 = id_566;
                   }
                   let_res_531 = let_res_533;
                 }
                 let_res_528 = let_res_531;
               }
-              ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 let_res_567;
+              ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb let_res_567;
               {
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dbytes1_122 { let_res_528 };
-                ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 letpair_res_568;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dbytes1_122 { let_res_528 };
+                ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb letpair_res_568;
                 {
                   auto dbytes1_fst_123 { std::get<0>(dbytes1_122) };
                   auto dbytes1_snd_124 { std::get<1>(dbytes1_122) };
-                  ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_569 { dbytes1_snd_124.readBytes(dbytes1_fst_123) };
+                  ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_569 { dbytes1_snd_124.readBytes(dbytes1_fst_123) };
                   letpair_res_568 = id_569;
                 }
                 let_res_567 = letpair_res_568;
               }
-              ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 let_res_570;
+              ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a let_res_570;
               {
-                ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 drec_125 { let_res_567 };
-                ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_571;
+                ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb drec_125 { let_res_567 };
+                ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_571;
                 {
                   auto drec_fst_126 { std::get<0>(drec_125) };
                   auto drec_snd_127 { std::get<1>(drec_125) };
                   uint32_t id_572 { 0U };
                   Vec<1, uint32_t> id_573 {  id_572  };
-                  ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_574;
+                  ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_574;
                   {
                     Vec<1, uint32_t> leb_ref_128 { id_573 };
                     uint8_t id_575 { 0 };
                     Vec<1, uint8_t> id_576 {  id_575  };
-                    ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_577;
+                    ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_577;
                     {
                       Vec<1, uint8_t> shft_ref_129 { id_576 };
                       Vec<1, Pointer> id_578 {  drec_snd_127  };
-                      ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_579;
+                      ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_579;
                       {
                         Vec<1, Pointer> p_ref_130 { id_578 };
                         bool while_flag_580 { true };
                         do {
                           uint8_t id_581 { 0 };
                           Pointer id_582 { p_ref_130[id_581] };
-                          ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_583 { id_582.readU8() };
+                          ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_583 { id_582.readU8() };
                           bool let_res_584;
                           {
-                            ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_131 { id_583 };
+                            ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_131 { id_583 };
                             bool letpair_res_585;
                             {
                               auto leb128_fst_132 { std::get<0>(leb128_131) };
@@ -1401,32 +1448,32 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                         Size id_609 { Size(id_608) };
                         uint8_t id_610 { 0 };
                         Pointer id_611 { p_ref_130[id_610] };
-                        ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_612 { id_609, id_611 };
+                        ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_612 { id_609, id_611 };
                         let_res_579 = id_612;
                       }
                       let_res_577 = let_res_579;
                     }
                     let_res_574 = let_res_577;
                   }
-                  ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 let_res_613;
+                  ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb let_res_613;
                   {
-                    ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dbytes1_134 { let_res_574 };
-                    ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 letpair_res_614;
+                    ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dbytes1_134 { let_res_574 };
+                    ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb letpair_res_614;
                     {
                       auto dbytes1_fst_135 { std::get<0>(dbytes1_134) };
                       auto dbytes1_snd_136 { std::get<1>(dbytes1_134) };
-                      ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_615 { dbytes1_snd_136.readBytes(dbytes1_fst_135) };
+                      ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_615 { dbytes1_snd_136.readBytes(dbytes1_fst_135) };
                       letpair_res_614 = id_615;
                     }
                     let_res_613 = letpair_res_614;
                   }
-                  ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_616;
+                  ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_616;
                   {
                     auto drec_fst_138 { std::get<0>(let_res_613) };
                     auto drec_snd_139 { std::get<1>(let_res_613) };
-                    ::dessser::gen::sync_msg::t863dd87ee3eb9bd93a78669675db1450 id_617 { drec_fst_138, drec_fst_114, drec_fst_126 };
+                    ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_617 { drec_fst_138, drec_fst_114, drec_fst_126 };
                     std::shared_ptr<::dessser::gen::sync_msg::t>  id_618 { std::make_shared<::dessser::gen::sync_msg::t>(std::in_place_index<0>, id_617) };
-                    ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 id_619 { id_618, drec_snd_139 };
+                    ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_619 { id_618, drec_snd_139 };
                     letpair_res_616 = id_619;
                   }
                   letpair_res_571 = letpair_res_616;
@@ -1441,30 +1488,30 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
         } else {
           uint16_t id_620 { 1 };
           bool id_621 { bool(id_620 == dsum1_fst_63) };
-          ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 choose_res_622;
+          ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a choose_res_622;
           if (id_621) {
             uint32_t id_623 { 0U };
             Vec<1, uint32_t> id_624 {  id_623  };
-            ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_625;
+            ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_625;
             {
               Vec<1, uint32_t> leb_ref_92 { id_624 };
               uint8_t id_626 { 0 };
               Vec<1, uint8_t> id_627 {  id_626  };
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_628;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_628;
               {
                 Vec<1, uint8_t> shft_ref_93 { id_627 };
                 Vec<1, Pointer> id_629 {  dsum1_snd_64  };
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_630;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_630;
                 {
                   Vec<1, Pointer> p_ref_94 { id_629 };
                   bool while_flag_631 { true };
                   do {
                     uint8_t id_632 { 0 };
                     Pointer id_633 { p_ref_94[id_632] };
-                    ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_634 { id_633.readU8() };
+                    ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_634 { id_633.readU8() };
                     bool let_res_635;
                     {
-                      ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_95 { id_634 };
+                      ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_95 { id_634 };
                       bool letpair_res_636;
                       {
                         auto leb128_fst_96 { std::get<0>(leb128_95) };
@@ -1508,61 +1555,61 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                   Size id_660 { Size(id_659) };
                   uint8_t id_661 { 0 };
                   Pointer id_662 { p_ref_94[id_661] };
-                  ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_663 { id_660, id_662 };
+                  ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_663 { id_660, id_662 };
                   let_res_630 = id_663;
                 }
                 let_res_628 = let_res_630;
               }
               let_res_625 = let_res_628;
             }
-            ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 let_res_664;
+            ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb let_res_664;
             {
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dbytes1_98 { let_res_625 };
-              ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 letpair_res_665;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dbytes1_98 { let_res_625 };
+              ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb letpair_res_665;
               {
                 auto dbytes1_fst_99 { std::get<0>(dbytes1_98) };
                 auto dbytes1_snd_100 { std::get<1>(dbytes1_98) };
-                ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_666 { dbytes1_snd_100.readBytes(dbytes1_fst_99) };
+                ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_666 { dbytes1_snd_100.readBytes(dbytes1_fst_99) };
                 letpair_res_665 = id_666;
               }
               let_res_664 = letpair_res_665;
             }
-            ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_667;
+            ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_667;
             {
               auto dsum2_fst_102 { std::get<0>(let_res_664) };
               auto dsum2_snd_103 { std::get<1>(let_res_664) };
               std::shared_ptr<::dessser::gen::sync_msg::t>  id_668 { std::make_shared<::dessser::gen::sync_msg::t>(std::in_place_index<1>, dsum2_fst_102) };
-              ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 id_669 { id_668, dsum2_snd_103 };
+              ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_669 { id_668, dsum2_snd_103 };
               letpair_res_667 = id_669;
             }
             choose_res_622 = letpair_res_667;
           } else {
             uint16_t id_670 { 2 };
             bool id_671 { bool(id_670 == dsum1_fst_63) };
-            ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 choose_res_672;
+            ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a choose_res_672;
             if (id_671) {
               uint32_t id_673 { 0U };
               Vec<1, uint32_t> id_674 {  id_673  };
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_675;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_675;
               {
                 Vec<1, uint32_t> leb_ref_80 { id_674 };
                 uint8_t id_676 { 0 };
                 Vec<1, uint8_t> id_677 {  id_676  };
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_678;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_678;
                 {
                   Vec<1, uint8_t> shft_ref_81 { id_677 };
                   Vec<1, Pointer> id_679 {  dsum1_snd_64  };
-                  ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_680;
+                  ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_680;
                   {
                     Vec<1, Pointer> p_ref_82 { id_679 };
                     bool while_flag_681 { true };
                     do {
                       uint8_t id_682 { 0 };
                       Pointer id_683 { p_ref_82[id_682] };
-                      ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_684 { id_683.readU8() };
+                      ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_684 { id_683.readU8() };
                       bool let_res_685;
                       {
-                        ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_83 { id_684 };
+                        ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_83 { id_684 };
                         bool letpair_res_686;
                         {
                           auto leb128_fst_84 { std::get<0>(leb128_83) };
@@ -1606,31 +1653,31 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                     Size id_710 { Size(id_709) };
                     uint8_t id_711 { 0 };
                     Pointer id_712 { p_ref_82[id_711] };
-                    ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_713 { id_710, id_712 };
+                    ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_713 { id_710, id_712 };
                     let_res_680 = id_713;
                   }
                   let_res_678 = let_res_680;
                 }
                 let_res_675 = let_res_678;
               }
-              ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 let_res_714;
+              ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb let_res_714;
               {
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dbytes1_86 { let_res_675 };
-                ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 letpair_res_715;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dbytes1_86 { let_res_675 };
+                ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb letpair_res_715;
                 {
                   auto dbytes1_fst_87 { std::get<0>(dbytes1_86) };
                   auto dbytes1_snd_88 { std::get<1>(dbytes1_86) };
-                  ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_716 { dbytes1_snd_88.readBytes(dbytes1_fst_87) };
+                  ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_716 { dbytes1_snd_88.readBytes(dbytes1_fst_87) };
                   letpair_res_715 = id_716;
                 }
                 let_res_714 = letpair_res_715;
               }
-              ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_717;
+              ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_717;
               {
                 auto dsum2_fst_90 { std::get<0>(let_res_714) };
                 auto dsum2_snd_91 { std::get<1>(let_res_714) };
                 std::shared_ptr<::dessser::gen::sync_msg::t>  id_718 { std::make_shared<::dessser::gen::sync_msg::t>(std::in_place_index<2>, dsum2_fst_90) };
-                ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 id_719 { id_718, dsum2_snd_91 };
+                ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_719 { id_718, dsum2_snd_91 };
                 letpair_res_717 = id_719;
               }
               choose_res_672 = letpair_res_717;
@@ -1641,26 +1688,26 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
               (void)id_722;
               uint32_t id_723 { 0U };
               Vec<1, uint32_t> id_724 {  id_723  };
-              ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_725;
+              ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_725;
               {
                 Vec<1, uint32_t> leb_ref_65 { id_724 };
                 uint8_t id_726 { 0 };
                 Vec<1, uint8_t> id_727 {  id_726  };
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_728;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_728;
                 {
                   Vec<1, uint8_t> shft_ref_66 { id_727 };
                   Vec<1, Pointer> id_729 {  dsum1_snd_64  };
-                  ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 let_res_730;
+                  ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa let_res_730;
                   {
                     Vec<1, Pointer> p_ref_67 { id_729 };
                     bool while_flag_731 { true };
                     do {
                       uint8_t id_732 { 0 };
                       Pointer id_733 { p_ref_67[id_732] };
-                      ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 id_734 { id_733.readU8() };
+                      ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 id_734 { id_733.readU8() };
                       bool let_res_735;
                       {
-                        ::dessser::gen::sync_msg::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_68 { id_734 };
+                        ::dessser::gen::sync_msg::t1a5d74abf838df33f185a72a8912f5c9 leb128_68 { id_734 };
                         bool letpair_res_736;
                         {
                           auto leb128_fst_69 { std::get<0>(leb128_68) };
@@ -1704,28 +1751,28 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
                     Size id_760 { Size(id_759) };
                     uint8_t id_761 { 0 };
                     Pointer id_762 { p_ref_67[id_761] };
-                    ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 id_763 { id_760, id_762 };
+                    ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa id_763 { id_760, id_762 };
                     let_res_730 = id_763;
                   }
                   let_res_728 = let_res_730;
                 }
                 let_res_725 = let_res_728;
               }
-              ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 let_res_764;
+              ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a let_res_764;
               {
-                ::dessser::gen::sync_msg::t044960e524fd6ec1bfc06410ce526709 dstring1_71 { let_res_725 };
-                ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_765;
+                ::dessser::gen::sync_msg::t12fb9c475959b52bf7b17b155a955ffa dstring1_71 { let_res_725 };
+                ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_765;
                 {
                   auto dstring1_fst_72 { std::get<0>(dstring1_71) };
                   auto dstring1_snd_73 { std::get<1>(dstring1_71) };
-                  ::dessser::gen::sync_msg::t5887709cc43c8c8e24d28211e8c970a2 id_766 { dstring1_snd_73.readBytes(dstring1_fst_72) };
-                  ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_767;
+                  ::dessser::gen::sync_msg::t9ef6882174ae71a34a3c5ef6b29242fb id_766 { dstring1_snd_73.readBytes(dstring1_fst_72) };
+                  ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_767;
                   {
                     auto dstring2_fst_75 { std::get<0>(id_766) };
                     auto dstring2_snd_76 { std::get<1>(id_766) };
                     std::string id_768 { dstring2_fst_75.toString() };
                     std::shared_ptr<::dessser::gen::sync_msg::t>  id_769 { std::make_shared<::dessser::gen::sync_msg::t>(std::in_place_index<3>, id_768) };
-                    ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 id_770 { id_769, dstring2_snd_76 };
+                    ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_770 { id_769, dstring2_snd_76 };
                     letpair_res_767 = id_770;
                   }
                   letpair_res_765 = letpair_res_767;
@@ -1742,19 +1789,47 @@ static std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6
       }
       let_res_475 = letpair_res_476;
     }
-    ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 letpair_res_771;
-    {
-      auto make_fst_144 { std::get<0>(let_res_475) };
-      auto make_snd_145 { std::get<1>(let_res_475) };
-      ::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6 id_772 { make_fst_144, make_snd_145 };
-      letpair_res_771 = id_772;
-    }
-    return letpair_res_771;
+    return let_res_475;
   }
    };
   return fun471;
 }
-std::function<::dessser::gen::sync_msg::tc079aed4395dddd624f3bbbe199eefe6(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> of_row_binary(of_row_binary_init());
+
+/* 
+    (fun ("Ptr") (let-pair "make_fst_144" "make_snd_145" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_144") (identifier "make_snd_145"))))
+ */
+static std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> wrap_of_row_binary_init()
+{
+  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun771 { [&fun771](Pointer p_0) {
+    ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_772 { of_row_binary(p_0) };
+    ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_773;
+    {
+      auto make_fst_144 { std::get<0>(id_772) };
+      auto make_snd_145 { std::get<1>(id_772) };
+      ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_774 { make_fst_144, make_snd_145 };
+      letpair_res_773 = id_774;
+    }
+    return letpair_res_773;
+  }
+   };
+  return fun771;
+}
+std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+
+/* 
+    (fun ("[SendSessionKey {nonce: Bytes; public_key: Bytes; message: Bytes} | Crypted Bytes | ClearText Bytes | Error STRING]" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
+ */
+static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> wrap_to_row_binary_init()
+{
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> fun775 { [&fun775](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0, Pointer p_1) {
+    Pointer id_776 { to_row_binary(p_0, p_1) };
+    return id_776;
+  }
+   };
+  return fun775;
+}
+std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

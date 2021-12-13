@@ -32,85 +32,152 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t40f56917851bc62b1c9e1a72700c3bed : public std::tuple<
+struct t3b2e72656dd8de97c9c84aaa9445df69 : public std::tuple<
   dessser::gen::raql_variable::t_ext,
   dessser::gen::field_name::t_ext
 > {
   using tuple::tuple;
-  t40f56917851bc62b1c9e1a72700c3bed(std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext> p)
+  t3b2e72656dd8de97c9c84aaa9445df69(std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext> p)
     : std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
+inline bool operator==(t3b2e72656dd8de97c9c84aaa9445df69 const &a, t3b2e72656dd8de97c9c84aaa9445df69 const &b) {
+  return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b));
+}
+inline bool operator!=(t3b2e72656dd8de97c9c84aaa9445df69 const &a, t3b2e72656dd8de97c9c84aaa9445df69 const &b) {
+  return !operator==(a, b);
+}
 struct t : public std::variant<
   uint32_t, // State
-  ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed, // RecordField
+  ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69, // RecordField
   dessser::gen::raql_variable::t_ext, // RecordValue
   std::string // Direct
 > { using variant::variant; };
 
-struct tb153335fc05f1eec6819ab87a88b916a : public std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // State
+    case 1: return std::get<1>(a) == std::get<1>(b); // RecordField
+    case 2: return ::dessser::gen::raql_variable::Deref(std::get<2>(a)) == ::dessser::gen::raql_variable::Deref(std::get<2>(b)); // RecordValue
+    case 3: return std::get<3>(a) == std::get<3>(b); // Direct
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct tcfe4e88d4d9c898d84274f847fed6750 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_binding_key::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tb153335fc05f1eec6819ab87a88b916a(std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer> p)
+  tcfe4e88d4d9c898d84274f847fed6750(std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_binding_key::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
+inline bool operator==(tcfe4e88d4d9c898d84274f847fed6750 const &a, tcfe4e88d4d9c898d84274f847fed6750 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tcfe4e88d4d9c898d84274f847fed6750 const &a, tcfe4e88d4d9c898d84274f847fed6750 const &b) {
+  return !operator==(a, b);
+}
+struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
   uint16_t,
   Pointer
 > {
   using tuple::tuple;
-  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+  ta97bb48ed75bbda6173555873826c8c6(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t883c6ffea47c0d7b950fe35881e3d737 : public std::tuple<
+inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return !operator==(a, b);
+}
+struct t491c44439106a32f896827242e8e76a1 : public std::tuple<
   uint32_t,
   Pointer
 > {
   using tuple::tuple;
-  t883c6ffea47c0d7b950fe35881e3d737(std::tuple<uint32_t, Pointer> p)
+  t491c44439106a32f896827242e8e76a1(std::tuple<uint32_t, Pointer> p)
     : std::tuple<uint32_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t8b22e447956958a21d977c854a5cd7c0 : public std::tuple<
+inline bool operator==(t491c44439106a32f896827242e8e76a1 const &a, t491c44439106a32f896827242e8e76a1 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t491c44439106a32f896827242e8e76a1 const &a, t491c44439106a32f896827242e8e76a1 const &b) {
+  return !operator==(a, b);
+}
+struct tc4e06565de85990f3a8300f3d579c5ec : public std::tuple<
   dessser::gen::raql_variable::t_ext,
   Pointer
 > {
   using tuple::tuple;
-  t8b22e447956958a21d977c854a5cd7c0(std::tuple<dessser::gen::raql_variable::t_ext, Pointer> p)
+  tc4e06565de85990f3a8300f3d579c5ec(std::tuple<dessser::gen::raql_variable::t_ext, Pointer> p)
     : std::tuple<dessser::gen::raql_variable::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct tacdfdbd490062d58073ca57b70932e6d : public std::tuple<
+inline bool operator==(tc4e06565de85990f3a8300f3d579c5ec const &a, tc4e06565de85990f3a8300f3d579c5ec const &b) {
+  return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tc4e06565de85990f3a8300f3d579c5ec const &a, tc4e06565de85990f3a8300f3d579c5ec const &b) {
+  return !operator==(a, b);
+}
+struct t18cecf882d7ac80cef37dfe6b22279d4 : public std::tuple<
   dessser::gen::field_name::t_ext,
   Pointer
 > {
   using tuple::tuple;
-  tacdfdbd490062d58073ca57b70932e6d(std::tuple<dessser::gen::field_name::t_ext, Pointer> p)
+  t18cecf882d7ac80cef37dfe6b22279d4(std::tuple<dessser::gen::field_name::t_ext, Pointer> p)
     : std::tuple<dessser::gen::field_name::t_ext, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t044960e524fd6ec1bfc06410ce526709 : public std::tuple<
+inline bool operator==(t18cecf882d7ac80cef37dfe6b22279d4 const &a, t18cecf882d7ac80cef37dfe6b22279d4 const &b) {
+  return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t18cecf882d7ac80cef37dfe6b22279d4 const &a, t18cecf882d7ac80cef37dfe6b22279d4 const &b) {
+  return !operator==(a, b);
+}
+struct t12fb9c475959b52bf7b17b155a955ffa : public std::tuple<
   Size,
   Pointer
 > {
   using tuple::tuple;
-  t044960e524fd6ec1bfc06410ce526709(std::tuple<Size, Pointer> p)
+  t12fb9c475959b52bf7b17b155a955ffa(std::tuple<Size, Pointer> p)
     : std::tuple<Size, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t1566bd611d8a2b90669c241f5e8d6ff1 : public std::tuple<
+inline bool operator==(t12fb9c475959b52bf7b17b155a955ffa const &a, t12fb9c475959b52bf7b17b155a955ffa const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t12fb9c475959b52bf7b17b155a955ffa const &a, t12fb9c475959b52bf7b17b155a955ffa const &b) {
+  return !operator==(a, b);
+}
+struct t1a5d74abf838df33f185a72a8912f5c9 : public std::tuple<
   uint8_t,
   Pointer
 > {
   using tuple::tuple;
-  t1566bd611d8a2b90669c241f5e8d6ff1(std::tuple<uint8_t, Pointer> p)
+  t1a5d74abf838df33f185a72a8912f5c9(std::tuple<uint8_t, Pointer> p)
     : std::tuple<uint8_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t5887709cc43c8c8e24d28211e8c970a2 : public std::tuple<
+inline bool operator==(t1a5d74abf838df33f185a72a8912f5c9 const &a, t1a5d74abf838df33f185a72a8912f5c9 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t1a5d74abf838df33f185a72a8912f5c9 const &a, t1a5d74abf838df33f185a72a8912f5c9 const &b) {
+  return !operator==(a, b);
+}
+struct t9ef6882174ae71a34a3c5ef6b29242fb : public std::tuple<
   Bytes,
   Pointer
 > {
   using tuple::tuple;
-  t5887709cc43c8c8e24d28211e8c970a2(std::tuple<Bytes, Pointer> p)
+  t9ef6882174ae71a34a3c5ef6b29242fb(std::tuple<Bytes, Pointer> p)
     : std::tuple<Bytes, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
+inline bool operator==(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae71a34a3c5ef6b29242fb const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae71a34a3c5ef6b29242fb const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -162,14 +229,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_binding_key::t
         Pointer choose_res_13;
         if (id_12) {
           auto fun14 { dessser::gen::raql_variable::to_row_binary };
-          ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed id_15 { std::get<1 /* RecordField */>((*p_0)) };
+          ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69 id_15 { std::get<1 /* RecordField */>((*p_0)) };
           dessser::gen::raql_variable::t_ext id_16 { std::get<0>(id_15) };
           Pointer id_17 { fun14(id_16, ssum_dst_108) };
           Pointer let_res_18;
           {
             Pointer stup_dst_111 { id_17 };
             auto fun19 { dessser::gen::field_name::to_row_binary };
-            ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed id_20 { std::get<1 /* RecordField */>((*p_0)) };
+            ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69 id_20 { std::get<1 /* RecordField */>((*p_0)) };
             dessser::gen::field_name::t_ext id_21 { std::get<1>(id_20) };
             Pointer id_22 { fun19(id_21, stup_dst_111) };
             let_res_18 = id_22;
@@ -304,7 +371,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_binding_key::t> )
       if (id_82) {
         Size id_84 { 2UL };
         auto fun85 { dessser::gen::raql_variable::sersize_of_row_binary };
-        ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed id_86 { std::get<1 /* RecordField */>((*p_0)) };
+        ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69 id_86 { std::get<1 /* RecordField */>((*p_0)) };
         dessser::gen::raql_variable::t_ext id_87 { std::get<0>(id_86) };
         Size id_88 { fun85(id_87) };
         Size id_89 { Size(id_84 + id_88) };
@@ -312,7 +379,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_binding_key::t> )
         {
           Size sz_106 { id_89 };
           auto fun91 { dessser::gen::field_name::sersize_of_row_binary };
-          ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed id_92 { std::get<1 /* RecordField */>((*p_0)) };
+          ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69 id_92 { std::get<1 /* RecordField */>((*p_0)) };
           dessser::gen::field_name::t_ext id_93 { std::get<1>(id_92) };
           Size id_94 { fun91(id_93) };
           Size id_95 { Size(sz_106 + id_94) };
@@ -397,99 +464,96 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_binding_key::t> )> sersi
 
 /* 
     (fun ("Ptr")
-      (let-pair "make_fst_99" "make_snd_100"
-        (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
-          (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
-            (if (eq (u16 0) (identifier "dsum1_fst_63"))
-              (let-pair "du32_fst_93" "du32_snd_94" (read-u32 little-endian (identifier "dsum1_snd_64"))
-                (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 0 (identifier "du32_fst_93")) (identifier "du32_snd_94")))
-              (if (eq (u16 1) (identifier "dsum1_fst_63"))
-                (let "dtup_83" (apply (ext-identifier raql_variable of-row-binary) (identifier "dsum1_snd_64"))
-                  (let-pair "dtup_fst_84" "dtup_snd_85" (identifier "dtup_83")
-                    (let-pair "dtup_fst_87" "dtup_snd_88" (apply (ext-identifier field_name of-row-binary) (identifier "dtup_snd_85"))
-                      (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 1 (make-tup (identifier "dtup_fst_84") (identifier "dtup_fst_87")))
-                        (identifier "dtup_snd_88")))))
-                (if (eq (u16 2) (identifier "dsum1_fst_63"))
-                  (let-pair "dsum2_fst_81" "dsum2_snd_82" (apply (ext-identifier raql_variable of-row-binary) (identifier "dsum1_snd_64"))
-                    (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 2 (identifier "dsum2_fst_81")) (identifier "dsum2_snd_82")))
-                  (seq (assert (eq (identifier "dsum1_fst_63") (u16 3)))
-                    (let "dstring1_71"
-                      (let "leb_ref_65" (make-vec (u32 0))
-                        (let "shft_ref_66" (make-vec (u8 0))
-                          (let "p_ref_67" (make-vec (identifier "dsum1_snd_64"))
-                            (seq
-                              (while
-                                (let "leb128_68" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_67")))
-                                  (let-pair "leb128_fst_69" "leb128_snd_70" 
-                                    (identifier "leb128_68")
-                                    (seq (set-vec (u8 0) (identifier "p_ref_67") (identifier "leb128_snd_70"))
-                                      (set-vec (u8 0) (identifier "leb_ref_65")
-                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_69") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_66"))) (unsafe-nth (u8 0) (identifier "leb_ref_65"))))
-                                      (set-vec (u8 0) (identifier "shft_ref_66") (add (unsafe-nth (u8 0) (identifier "shft_ref_66")) (u8 7))) 
-                                      (ge (identifier "leb128_fst_69") (u8 128))))) 
-                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_65"))) (unsafe-nth (u8 0) (identifier "p_ref_67")))))))
-                      (let-pair "dstring1_fst_72" "dstring1_snd_73" (identifier "dstring1_71")
-                        (let-pair "dstring2_fst_75" "dstring2_snd_76" 
-                          (read-bytes (identifier "dstring1_snd_73") (identifier "dstring1_fst_72"))
-                          (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 3 (string-of-bytes (identifier "dstring2_fst_75")))
-                            (identifier "dstring2_snd_76"))))))))))) 
-        (make-tup (identifier "make_fst_99") (identifier "make_snd_100"))))
+      (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
+        (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
+          (if (eq (u16 0) (identifier "dsum1_fst_63"))
+            (let-pair "du32_fst_93" "du32_snd_94" (read-u32 little-endian (identifier "dsum1_snd_64"))
+              (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 0 (identifier "du32_fst_93")) (identifier "du32_snd_94")))
+            (if (eq (u16 1) (identifier "dsum1_fst_63"))
+              (let "dtup_83" (apply (ext-identifier raql_variable of-row-binary) (identifier "dsum1_snd_64"))
+                (let-pair "dtup_fst_84" "dtup_snd_85" (identifier "dtup_83")
+                  (let-pair "dtup_fst_87" "dtup_snd_88" (apply (ext-identifier field_name of-row-binary) (identifier "dtup_snd_85"))
+                    (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 1 (make-tup (identifier "dtup_fst_84") (identifier "dtup_fst_87")))
+                      (identifier "dtup_snd_88")))))
+              (if (eq (u16 2) (identifier "dsum1_fst_63"))
+                (let-pair "dsum2_fst_81" "dsum2_snd_82" (apply (ext-identifier raql_variable of-row-binary) (identifier "dsum1_snd_64"))
+                  (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 2 (identifier "dsum2_fst_81")) (identifier "dsum2_snd_82")))
+                (seq (assert (eq (identifier "dsum1_fst_63") (u16 3)))
+                  (let "dstring1_71"
+                    (let "leb_ref_65" (make-vec (u32 0))
+                      (let "shft_ref_66" (make-vec (u8 0))
+                        (let "p_ref_67" (make-vec (identifier "dsum1_snd_64"))
+                          (seq
+                            (while
+                              (let "leb128_68" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_67")))
+                                (let-pair "leb128_fst_69" "leb128_snd_70" 
+                                  (identifier "leb128_68")
+                                  (seq (set-vec (u8 0) (identifier "p_ref_67") (identifier "leb128_snd_70"))
+                                    (set-vec (u8 0) (identifier "leb_ref_65")
+                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_69") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_66"))) (unsafe-nth (u8 0) (identifier "leb_ref_65"))))
+                                    (set-vec (u8 0) (identifier "shft_ref_66") (add (unsafe-nth (u8 0) (identifier "shft_ref_66")) (u8 7))) 
+                                    (ge (identifier "leb128_fst_69") (u8 128))))) 
+                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_65"))) (unsafe-nth (u8 0) (identifier "p_ref_67")))))))
+                    (let-pair "dstring1_fst_72" "dstring1_snd_73" (identifier "dstring1_71")
+                      (let-pair "dstring2_fst_75" "dstring2_snd_76" (read-bytes (identifier "dstring1_snd_73") (identifier "dstring1_fst_72"))
+                        (make-tup (construct "[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" 3 (string-of-bytes (identifier "dstring2_fst_75")))
+                          (identifier "dstring2_snd_76"))))))))))))
  */
-static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> fun139 { [&fun139](Pointer p_0) {
-    ::dessser::gen::raql_binding_key::t7609d344c1ba69d0f80fec236d4c216b id_140 { p_0.readU16Le() };
-    ::dessser::gen::raql_binding_key::t7609d344c1ba69d0f80fec236d4c216b letpair_res_141;
+  std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> fun139 { [&fun139](Pointer p_0) {
+    ::dessser::gen::raql_binding_key::ta97bb48ed75bbda6173555873826c8c6 id_140 { p_0.readU16Le() };
+    ::dessser::gen::raql_binding_key::ta97bb48ed75bbda6173555873826c8c6 letpair_res_141;
     {
       auto du16_fst_57 { std::get<0>(id_140) };
       auto du16_snd_58 { std::get<1>(id_140) };
-      ::dessser::gen::raql_binding_key::t7609d344c1ba69d0f80fec236d4c216b id_142 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_binding_key::ta97bb48ed75bbda6173555873826c8c6 id_142 { du16_fst_57, du16_snd_58 };
       letpair_res_141 = id_142;
     }
-    ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a let_res_143;
+    ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 let_res_143;
     {
-      ::dessser::gen::raql_binding_key::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_141 };
-      ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_144;
+      ::dessser::gen::raql_binding_key::ta97bb48ed75bbda6173555873826c8c6 dsum1_62 { letpair_res_141 };
+      ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_144;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_145 { 0 };
         bool id_146 { bool(id_145 == dsum1_fst_63) };
-        ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a choose_res_147;
+        ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 choose_res_147;
         if (id_146) {
-          ::dessser::gen::raql_binding_key::t883c6ffea47c0d7b950fe35881e3d737 id_148 { dsum1_snd_64.readU32Le() };
-          ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_149;
+          ::dessser::gen::raql_binding_key::t491c44439106a32f896827242e8e76a1 id_148 { dsum1_snd_64.readU32Le() };
+          ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_149;
           {
             auto du32_fst_93 { std::get<0>(id_148) };
             auto du32_snd_94 { std::get<1>(id_148) };
             std::shared_ptr<::dessser::gen::raql_binding_key::t>  id_150 { std::make_shared<::dessser::gen::raql_binding_key::t>(std::in_place_index<0>, du32_fst_93) };
-            ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a id_151 { id_150, du32_snd_94 };
+            ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_151 { id_150, du32_snd_94 };
             letpair_res_149 = id_151;
           }
           choose_res_147 = letpair_res_149;
         } else {
           uint16_t id_152 { 1 };
           bool id_153 { bool(id_152 == dsum1_fst_63) };
-          ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a choose_res_154;
+          ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 choose_res_154;
           if (id_153) {
             auto fun155 { dessser::gen::raql_variable::of_row_binary };
-            ::dessser::gen::raql_binding_key::t8b22e447956958a21d977c854a5cd7c0 id_156 { fun155(dsum1_snd_64) };
-            ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a let_res_157;
+            ::dessser::gen::raql_binding_key::tc4e06565de85990f3a8300f3d579c5ec id_156 { fun155(dsum1_snd_64) };
+            ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 let_res_157;
             {
-              ::dessser::gen::raql_binding_key::t8b22e447956958a21d977c854a5cd7c0 dtup_83 { id_156 };
-              ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_158;
+              ::dessser::gen::raql_binding_key::tc4e06565de85990f3a8300f3d579c5ec dtup_83 { id_156 };
+              ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_158;
               {
                 auto dtup_fst_84 { std::get<0>(dtup_83) };
                 auto dtup_snd_85 { std::get<1>(dtup_83) };
                 auto fun159 { dessser::gen::field_name::of_row_binary };
-                ::dessser::gen::raql_binding_key::tacdfdbd490062d58073ca57b70932e6d id_160 { fun159(dtup_snd_85) };
-                ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_161;
+                ::dessser::gen::raql_binding_key::t18cecf882d7ac80cef37dfe6b22279d4 id_160 { fun159(dtup_snd_85) };
+                ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_161;
                 {
                   auto dtup_fst_87 { std::get<0>(id_160) };
                   auto dtup_snd_88 { std::get<1>(id_160) };
-                  ::dessser::gen::raql_binding_key::t40f56917851bc62b1c9e1a72700c3bed id_162 { dtup_fst_84, dtup_fst_87 };
+                  ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69 id_162 { dtup_fst_84, dtup_fst_87 };
                   std::shared_ptr<::dessser::gen::raql_binding_key::t>  id_163 { std::make_shared<::dessser::gen::raql_binding_key::t>(std::in_place_index<1>, id_162) };
-                  ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a id_164 { id_163, dtup_snd_88 };
+                  ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_164 { id_163, dtup_snd_88 };
                   letpair_res_161 = id_164;
                 }
                 letpair_res_158 = letpair_res_161;
@@ -500,16 +564,16 @@ static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87
           } else {
             uint16_t id_165 { 2 };
             bool id_166 { bool(id_165 == dsum1_fst_63) };
-            ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a choose_res_167;
+            ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 choose_res_167;
             if (id_166) {
               auto fun168 { dessser::gen::raql_variable::of_row_binary };
-              ::dessser::gen::raql_binding_key::t8b22e447956958a21d977c854a5cd7c0 id_169 { fun168(dsum1_snd_64) };
-              ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_170;
+              ::dessser::gen::raql_binding_key::tc4e06565de85990f3a8300f3d579c5ec id_169 { fun168(dsum1_snd_64) };
+              ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_170;
               {
                 auto dsum2_fst_81 { std::get<0>(id_169) };
                 auto dsum2_snd_82 { std::get<1>(id_169) };
                 std::shared_ptr<::dessser::gen::raql_binding_key::t>  id_171 { std::make_shared<::dessser::gen::raql_binding_key::t>(std::in_place_index<2>, dsum2_fst_81) };
-                ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a id_172 { id_171, dsum2_snd_82 };
+                ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_172 { id_171, dsum2_snd_82 };
                 letpair_res_170 = id_172;
               }
               choose_res_167 = letpair_res_170;
@@ -520,26 +584,26 @@ static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87
               (void)id_175;
               uint32_t id_176 { 0U };
               Vec<1, uint32_t> id_177 {  id_176  };
-              ::dessser::gen::raql_binding_key::t044960e524fd6ec1bfc06410ce526709 let_res_178;
+              ::dessser::gen::raql_binding_key::t12fb9c475959b52bf7b17b155a955ffa let_res_178;
               {
                 Vec<1, uint32_t> leb_ref_65 { id_177 };
                 uint8_t id_179 { 0 };
                 Vec<1, uint8_t> id_180 {  id_179  };
-                ::dessser::gen::raql_binding_key::t044960e524fd6ec1bfc06410ce526709 let_res_181;
+                ::dessser::gen::raql_binding_key::t12fb9c475959b52bf7b17b155a955ffa let_res_181;
                 {
                   Vec<1, uint8_t> shft_ref_66 { id_180 };
                   Vec<1, Pointer> id_182 {  dsum1_snd_64  };
-                  ::dessser::gen::raql_binding_key::t044960e524fd6ec1bfc06410ce526709 let_res_183;
+                  ::dessser::gen::raql_binding_key::t12fb9c475959b52bf7b17b155a955ffa let_res_183;
                   {
                     Vec<1, Pointer> p_ref_67 { id_182 };
                     bool while_flag_184 { true };
                     do {
                       uint8_t id_185 { 0 };
                       Pointer id_186 { p_ref_67[id_185] };
-                      ::dessser::gen::raql_binding_key::t1566bd611d8a2b90669c241f5e8d6ff1 id_187 { id_186.readU8() };
+                      ::dessser::gen::raql_binding_key::t1a5d74abf838df33f185a72a8912f5c9 id_187 { id_186.readU8() };
                       bool let_res_188;
                       {
-                        ::dessser::gen::raql_binding_key::t1566bd611d8a2b90669c241f5e8d6ff1 leb128_68 { id_187 };
+                        ::dessser::gen::raql_binding_key::t1a5d74abf838df33f185a72a8912f5c9 leb128_68 { id_187 };
                         bool letpair_res_189;
                         {
                           auto leb128_fst_69 { std::get<0>(leb128_68) };
@@ -583,28 +647,28 @@ static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87
                     Size id_213 { Size(id_212) };
                     uint8_t id_214 { 0 };
                     Pointer id_215 { p_ref_67[id_214] };
-                    ::dessser::gen::raql_binding_key::t044960e524fd6ec1bfc06410ce526709 id_216 { id_213, id_215 };
+                    ::dessser::gen::raql_binding_key::t12fb9c475959b52bf7b17b155a955ffa id_216 { id_213, id_215 };
                     let_res_183 = id_216;
                   }
                   let_res_181 = let_res_183;
                 }
                 let_res_178 = let_res_181;
               }
-              ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a let_res_217;
+              ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 let_res_217;
               {
-                ::dessser::gen::raql_binding_key::t044960e524fd6ec1bfc06410ce526709 dstring1_71 { let_res_178 };
-                ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_218;
+                ::dessser::gen::raql_binding_key::t12fb9c475959b52bf7b17b155a955ffa dstring1_71 { let_res_178 };
+                ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_218;
                 {
                   auto dstring1_fst_72 { std::get<0>(dstring1_71) };
                   auto dstring1_snd_73 { std::get<1>(dstring1_71) };
-                  ::dessser::gen::raql_binding_key::t5887709cc43c8c8e24d28211e8c970a2 id_219 { dstring1_snd_73.readBytes(dstring1_fst_72) };
-                  ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_220;
+                  ::dessser::gen::raql_binding_key::t9ef6882174ae71a34a3c5ef6b29242fb id_219 { dstring1_snd_73.readBytes(dstring1_fst_72) };
+                  ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_220;
                   {
                     auto dstring2_fst_75 { std::get<0>(id_219) };
                     auto dstring2_snd_76 { std::get<1>(id_219) };
                     std::string id_221 { dstring2_fst_75.toString() };
                     std::shared_ptr<::dessser::gen::raql_binding_key::t>  id_222 { std::make_shared<::dessser::gen::raql_binding_key::t>(std::in_place_index<3>, id_221) };
-                    ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a id_223 { id_222, dstring2_snd_76 };
+                    ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_223 { id_222, dstring2_snd_76 };
                     letpair_res_220 = id_223;
                   }
                   letpair_res_218 = letpair_res_220;
@@ -621,19 +685,47 @@ static std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87
       }
       let_res_143 = letpair_res_144;
     }
-    ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a letpair_res_224;
-    {
-      auto make_fst_99 { std::get<0>(let_res_143) };
-      auto make_snd_100 { std::get<1>(let_res_143) };
-      ::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a id_225 { make_fst_99, make_snd_100 };
-      letpair_res_224 = id_225;
-    }
-    return letpair_res_224;
+    return let_res_143;
   }
    };
   return fun139;
 }
-std::function<::dessser::gen::raql_binding_key::tb153335fc05f1eec6819ab87a88b916a(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> of_row_binary(of_row_binary_init());
+
+/* 
+    (fun ("Ptr") (let-pair "make_fst_99" "make_snd_100" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_99") (identifier "make_snd_100"))))
+ */
+static std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> wrap_of_row_binary_init()
+{
+  std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> fun224 { [&fun224](Pointer p_0) {
+    ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_225 { of_row_binary(p_0) };
+    ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 letpair_res_226;
+    {
+      auto make_fst_99 { std::get<0>(id_225) };
+      auto make_snd_100 { std::get<1>(id_225) };
+      ::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750 id_227 { make_fst_99, make_snd_100 };
+      letpair_res_226 = id_227;
+    }
+    return letpair_res_226;
+  }
+   };
+  return fun224;
+}
+std::function<::dessser::gen::raql_binding_key::tcfe4e88d4d9c898d84274f847fed6750(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+
+/* 
+    (fun ("[State U32 | RecordField ($raql_variable; $field_name) | RecordValue $raql_variable | Direct STRING]" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
+ */
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_binding_key::t> ,Pointer)> wrap_to_row_binary_init()
+{
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_binding_key::t> ,Pointer)> fun228 { [&fun228](std::shared_ptr<::dessser::gen::raql_binding_key::t>  p_0, Pointer p_1) {
+    Pointer id_229 { to_row_binary(p_0, p_1) };
+    return id_229;
+  }
+   };
+  return fun228;
+}
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_binding_key::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

@@ -21,6 +21,17 @@ struct t : public std::variant<
   dessser::gen::field_name::t_ext // Name
 > { using variant::variant; };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Idx
+    case 1: return ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b)); // Name
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 enum Constr_t {
   Idx,
   Name,
@@ -36,32 +47,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Idx
-    case 1: return ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b)); // Name
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-struct t14edb0e8ed5b099e7b0f6eeb360b87b2 : public std::tuple<
+struct t16c6226b84acb3730f799350894ac2a3 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_path_comp::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t14edb0e8ed5b099e7b0f6eeb360b87b2(std::tuple<std::shared_ptr<::dessser::gen::raql_path_comp::t> , Pointer> p)
+  t16c6226b84acb3730f799350894ac2a3(std::tuple<std::shared_ptr<::dessser::gen::raql_path_comp::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_path_comp::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t14edb0e8ed5b099e7b0f6eeb360b87b2 const &a, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &b) {
+inline bool operator==(t16c6226b84acb3730f799350894ac2a3 const &a, t16c6226b84acb3730f799350894ac2a3 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t14edb0e8ed5b099e7b0f6eeb360b87b2 const &a, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &b) {
+inline bool operator!=(t16c6226b84acb3730f799350894ac2a3 const &a, t16c6226b84acb3730f799350894ac2a3 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t14edb0e8ed5b099e7b0f6eeb360b87b2 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t16c6226b84acb3730f799350894ac2a3 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -69,14 +69,16 @@ inline std::ostream &operator<<(std::ostream &os, t14edb0e8ed5b099e7b0f6eeb360b8
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t14edb0e8ed5b099e7b0f6eeb360b87b2> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t16c6226b84acb3730f799350894ac2a3> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> to_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_path_comp::t14edb0e8ed5b099e7b0f6eeb360b87b2(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> wrap_of_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> wrap_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

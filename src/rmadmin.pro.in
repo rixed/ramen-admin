@@ -189,6 +189,8 @@ HEADERS += \
   ProcessesWidget.h \
   ProcessesWidgetProxy.h \
   ProcessesDialog.h \
+  source/FilterEditor.h \
+  source/AlertInfoEditor.h \
   source/SourceCloneDialog.h \
   source/CodeEditForm.h \
   source/CodeEdit.h \
@@ -372,6 +374,8 @@ SOURCES += \
   ProcessesWidget.cpp \
   ProcessesWidgetProxy.cpp \
   ProcessesDialog.cpp \
+  source/FilterEditor.cpp \
+  source/AlertInfoEditor.cpp \
   source/SourceCloneDialog.cpp \
   source/CodeEditForm.cpp \
   source/CodeEdit.cpp \

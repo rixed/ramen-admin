@@ -83,9 +83,7 @@ void NewSourceDialog::createSource()
 
 void NewSourceDialog::clear()
 {
-# ifdef WITH_ALERTING
   codeEdit->enableLanguage(codeEdit->alertEditorIndex, true);
-# endif
   codeEdit->enableLanguage(codeEdit->textEditorIndex, true);
   codeEdit->enableLanguage(codeEdit->infoEditorIndex, false);
   codeEdit->setLanguage(codeEdit->textEditorIndex);

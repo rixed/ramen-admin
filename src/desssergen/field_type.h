@@ -27,6 +27,13 @@ struct t {
   t(std::optional<std::string> aggr_, std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : aggr(aggr_), doc(doc_), name(name_), typ(typ_), units(units_) {}
   t() = default;
 };
+inline bool operator==(t const &a, t const &b) {
+  return ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr)) && a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
+}
+
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   if (r.aggr) os << "aggr:" << r.aggr.value() << ',';
@@ -39,28 +46,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-inline bool operator==(t const &a, t const &b) {
-  return ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr)) && a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
-}
-
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-struct t224480ea0ba324dab25f497681af9b36 : public std::tuple<
+struct t17783e9e04d504e04563e9d950fd4c39 : public std::tuple<
   std::shared_ptr<::dessser::gen::field_type::t> ,
   Pointer
 > {
   using tuple::tuple;
-  t224480ea0ba324dab25f497681af9b36(std::tuple<std::shared_ptr<::dessser::gen::field_type::t> , Pointer> p)
+  t17783e9e04d504e04563e9d950fd4c39(std::tuple<std::shared_ptr<::dessser::gen::field_type::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::field_type::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t224480ea0ba324dab25f497681af9b36 const &a, t224480ea0ba324dab25f497681af9b36 const &b) {
+inline bool operator==(t17783e9e04d504e04563e9d950fd4c39 const &a, t17783e9e04d504e04563e9d950fd4c39 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t224480ea0ba324dab25f497681af9b36 const &a, t224480ea0ba324dab25f497681af9b36 const &b) {
+inline bool operator!=(t17783e9e04d504e04563e9d950fd4c39 const &a, t17783e9e04d504e04563e9d950fd4c39 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t224480ea0ba324dab25f497681af9b36 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t17783e9e04d504e04563e9d950fd4c39 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -68,14 +68,16 @@ inline std::ostream &operator<<(std::ostream &os, t224480ea0ba324dab25f497681af9
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t224480ea0ba324dab25f497681af9b36> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t17783e9e04d504e04563e9d950fd4c39> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> to_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::field_type::t224480ea0ba324dab25f497681af9b36(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> wrap_of_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> wrap_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

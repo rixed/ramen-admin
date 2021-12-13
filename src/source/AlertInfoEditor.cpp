@@ -1,4 +1,5 @@
 #include <cmath>
+#include <dessser/Lst.h>
 #include <QCheckBox>
 #include <QCompleter>
 #include <QDebug>
@@ -14,15 +15,17 @@
 #include <QRegularExpressionValidator>
 #include <QStringListModel>
 #include <QVBoxLayout>
-#include "confValue.h"
+
+#include "desssergen/alert.h"
+#include "desssergen/sync_value.h"
 #include "FilterEditor.h"
+#include "misc.h"
 #include "NamesTree.h"
 #include "PopupListView.h"
-#include "misc.h"
 
 #include "AlertInfoEditor.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 NameTreeView::NameTreeView(QWidget *parent) :
   QTreeView(parent)
@@ -98,17 +101,19 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
           this, &AlertInfoEditor::inputChanged);
   hysteresis = new QLineEdit("10");
   hysteresis->setValidator(new QDoubleValidator(0., 100., 5));
-  hysteresis->setPlaceholderText(tr("% of the value magnitude"));
+  hysteresis->setPlaceholderText(tr("%% of the value magnitude"));
   connect(hysteresis, &QLineEdit::textChanged,
           this, &AlertInfoEditor::inputChanged);
   duration = new QLineEdit;
-  duration->setValidator(new QDoubleValidator(0., std::numeric_limits<double>::max(), 5)); // TODO: DurationValidator
+  duration->setValidator(
+    // TODO: DurationValidator
+    new QDoubleValidator(0., std::numeric_limits<double>::max(), 5));
   duration->setPlaceholderText(tr("duration"));
   connect(duration, &QLineEdit::textChanged,
           this, &AlertInfoEditor::inputChanged);
   percentage = new QLineEdit("100");
   percentage->setValidator(new QDoubleValidator(0., 100., 5));
-  percentage->setPlaceholderText(tr("% of past measures"));
+  percentage->setPlaceholderText(tr("%% of past measures"));
   connect(percentage, &QLineEdit::textChanged,
           this, &AlertInfoEditor::inputChanged);
   timeStep = new QLineEdit;
@@ -144,15 +149,15 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
   /* Layout: Starts with a dynamic sentence describing the notification, and
    * then the form: */
 
-  QVBoxLayout *outerLayout = new QVBoxLayout;
+  QVBoxLayout *outerLayout { new QVBoxLayout };
   {
     // The names and descriptions
-    QGroupBox *namesBox = new QGroupBox(tr("Names"));
+    QGroupBox *namesBox { new QGroupBox(tr("Names")) };
     /* Use two QFormLayouts side by side to benefit from better
      * styling of those forms that one would get from a QGridLayout: */
-    QHBoxLayout *namesLayout = new QHBoxLayout;
-    QFormLayout *namesLayout1 = new QFormLayout;  // 1st column
-    QFormLayout *namesLayout2 = new QFormLayout;  // 2nd column
+    QHBoxLayout *namesLayout { new QHBoxLayout };
+    QFormLayout *namesLayout1 { new QFormLayout };  // 1st column
+    QFormLayout *namesLayout2 { new QFormLayout };  // 2nd column
     {
       namesLayout1->addRow(tr("Alert unique name:"), descTitle);
       namesLayout1->addRow(tr("Optional Identifier:"), id);
@@ -165,10 +170,10 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
     outerLayout->addWidget(namesBox);
 
     // The notification condition
-    QGroupBox *condition = new QGroupBox(tr("Main Condition"));
-    QHBoxLayout *conditionLayout = new QHBoxLayout;
+    QGroupBox *condition { new QGroupBox(tr("Main Condition")) };
+    QHBoxLayout *conditionLayout { new QHBoxLayout };
     {
-      QFormLayout *metricForm = new QFormLayout;
+      QFormLayout *metricForm { new QFormLayout };
       {
         QSizePolicy policy = source->sizePolicy();
         policy.setVerticalStretch(1);
@@ -182,22 +187,22 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
       }
       conditionLayout->addLayout(metricForm);
 
-      QFormLayout *limitLayout = new QFormLayout;
+      QFormLayout *limitLayout { new QFormLayout };
       {
         thresholdIsMax = new QRadioButton(tr("max"));
         thresholdIsMin = new QRadioButton(tr("min"));
         thresholdIsMax->setChecked(true);
-        QHBoxLayout *minMaxLayout = new QHBoxLayout;
+        QHBoxLayout *minMaxLayout { new QHBoxLayout };
         minMaxLayout->addWidget(thresholdIsMax);
         minMaxLayout->addWidget(thresholdIsMin);
         minMaxLayout->addWidget(threshold);
-        QWidget *minMaxBox = new QWidget;
+        QWidget *minMaxBox { new QWidget };
         minMaxBox->setLayout(minMaxLayout);
         limitLayout->addRow(tr("Threshold:"), minMaxBox);
         limitLayout->addRow(tr("Hysteresis:"), hysteresis);
-        limitLayout->addRow(tr("Measurements (%):"), percentage);
+        limitLayout->addRow(tr("Measurements (%%):"), percentage);
         limitLayout->addRow(tr("During the last (secs):"), duration);
-        QHBoxLayout *groupByGroup = new QHBoxLayout;
+        QHBoxLayout *groupByGroup { new QHBoxLayout };
         groupByGroup->addWidget(autoGroupBy);
         groupByGroup->addWidget(openGroupBy);
         limitLayout->addRow(tr("Group By:"), groupByGroup);
@@ -212,8 +217,8 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
     outerLayout->addWidget(condition);
 
     // Additional information to add to alerts:
-    QGroupBox *addFieldsBox = new QGroupBox(tr("Attach additional fields"));
-    QHBoxLayout *addFieldsBoxLayout = new QHBoxLayout;
+    QGroupBox *addFieldsBox { new QGroupBox(tr("Attach additional fields")) };
+    QHBoxLayout *addFieldsBoxLayout { new QHBoxLayout };
     {
       addFieldsBoxLayout->addWidget(new QLabel(tr("Value of:")));
       addFieldsBoxLayout->addWidget(carryFields);
@@ -225,8 +230,8 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
     outerLayout->addWidget(addFieldsBox);
 
     // The description
-    QGroupBox *descriptionBox = new QGroupBox(tr("Description"));
-    QVBoxLayout *descriptionBoxLayout = new QVBoxLayout;
+    QGroupBox *descriptionBox { new QGroupBox(tr("Description")) };
+    QVBoxLayout *descriptionBoxLayout { new QVBoxLayout };
     {
       descriptionBoxLayout->addWidget(description);
       description->setAlignment(Qt::AlignCenter);
@@ -238,7 +243,7 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
     outerLayout->addWidget(isEnabled);
   }
 
-  QWidget *widget = new QWidget;
+  QWidget *widget { new QWidget };
   widget->setLayout(outerLayout);
   relayoutWidget(widget);
 
@@ -347,27 +352,25 @@ void AlertInfoEditor::setEnabled(bool enabled)
 }
 
 bool AlertInfoEditor::setValue(
-  std::string const &, std::shared_ptr<conf::Value const> v)
+  std::shared_ptr<dessser::gen::sync_value::t const> v)
 {
-  std::shared_ptr<conf::Alert const> alert =
-    std::dynamic_pointer_cast<conf::Alert const>(v);
-
-  if (! alert) {
-    qCritical() << "Not a conf::Alert?!";
+  if (v->index() != dessser::gen::sync_value::Alert) {
+    qCritical() << "Not a dessser::gen::alert::t?!";
     return false;
   }
 
-  AlertInfo *info = static_cast<AlertInfo *>(alert->info);
+  std::shared_ptr<dessser::gen::alert::t> alert {
+    std::get<dessser::gen::sync_value::Alert>(*v) };
 
   /* Source:
    * Look for the name "$table/$column" and select it, but
    * also save the table and column names in case they are not
    * known (for instance if the program is not running (yet)). */
-  _table = info->table;
-  _column = info->column;
-  NamesTree *model = static_cast<NamesTree *>(source->model());
-  std::string const path(info->table + "/" + info->column);
-  QModelIndex index(model->find(path));
+  table = alert->table;
+  column = alert->column;
+  NamesTree *model { static_cast<NamesTree *>(source->model()) };
+  std::string const path { alert->table + "/" + alert->column };
+  QModelIndex index { model->find(path) };
   if (index.isValid()) {
     source->setCurrentIndex(index);
     /* FIXME: scrollTo is supposed to expand collapsed parents but does
@@ -378,32 +381,32 @@ bool AlertInfoEditor::setValue(
     checkSource(index);
     checkGroupBy(index);
   } else {
-    if (verbose)
-      qDebug() << "Cannot find field" << QString::fromStdString(path);
+    if (verbose) qDebug() << "Cannot find field" << QString::fromStdString(path);
     inexistantSourceError->setText(
       tr("Field %1/%2 does not exist")
-      .arg(QString::fromStdString(info->table))
-      .arg(QString::fromStdString(info->column)));
+      .arg(QString::fromStdString(alert->table))
+      .arg(QString::fromStdString(alert->column)));
     inexistantSourceError->show();
   }
 
-  isEnabled->setChecked(info->isEnabled);
+  isEnabled->setChecked(alert->enabled);
 
-  // TODO: support multiple where/having
-  if (info->where.empty()) {
+  if (alert->where.empty()) {
     where->clear();
   } else {
-    where->setValue(info->where.front());
+    // TODO: support multiple where/having
+    where->setValue(*alert->where.head());
   }
 
-  _groupBy = info->groupBy;
+  _groupBy = alert->group_by;
   QItemSelectionModel *selModel { groupBy->selectionModel() };
   selModel->clearSelection();
-  if (info->groupBy) {
+  if (alert->group_by) {
     autoGroupBy->setChecked(false);
     toggleAutoGroupBy(Qt::Unchecked);
     QStringList const fields { tableFields->stringList() };
-    for (std::string const &s_ : *info->groupBy) {
+    // TODO: const iterator on Lst:
+    for (std::string const &s_ : *(alert->group_by)) {
       QString const s { QString::fromStdString(s_) };
       int const row { fields.indexOf(s) };
       if (row >= 0) {
@@ -418,48 +421,47 @@ bool AlertInfoEditor::setValue(
   }
   updateGroupByLabel();
 
-  if (info->having.empty()) {
+  if (alert->having.empty()) {
     having->clear();
   } else {
-    having->setValue(info->having.front());
+    having->setValue(*alert->having.head());
   }
 
   // FIXME: threshold can optionally be a baseline now:
-  ConstantThreshold const *constThreshold {
-    dynamic_cast<ConstantThreshold const *>(info->threshold.get()) };
-  if (constThreshold) {
-    threshold->setText(QString::number(constThreshold->v));
+  if (alert->threshold->index() == dessser::gen::alert::Constant) {
+    double const t { std::get<dessser::gen::alert::Constant>(*alert->threshold) };
+    threshold->setText(QString::number(t));
   } else {
-    threshold->setText("TODO"); //QString::number(info->threshold));
+    threshold->setText("TODO"); //QString::number(alert->threshold));
   }
 
   // Display the hysteresis in absolute value as defined
-  hysteresis->setText(QString::number(info->hysteresis));
+  hysteresis->setText(QString::number(alert->hysteresis));
 
-  duration->setText(QString::number(info->duration));
+  duration->setText(QString::number(alert->duration));
 
-  percentage->setText(QString::number(100. * info->ratio));
+  percentage->setText(QString::number(100. * alert->ratio));
 
   timeStep->setText(
-    info->timeStep > 0 ? QString::number(info->timeStep) : QString());
+    alert->time_step > 0 ? QString::number(alert->time_step) : QString());
 
-  id->setText(QString::fromStdString(info->id));
+  id->setText(QString::fromStdString(alert->id));
 
-  descTitle->setText(QString::fromStdString(info->descTitle));
+  descTitle->setText(QString::fromStdString(alert->desc_title));
 
-  descFiring->setText(QString::fromStdString(info->descFiring));
+  descFiring->setText(QString::fromStdString(alert->desc_firing));
 
-  descRecovery->setText(QString::fromStdString(info->descRecovery));
+  descRecovery->setText(QString::fromStdString(alert->desc_recovery));
 
-  if (info->tops.empty()) {
+  if (alert->tops.empty()) {
     top->clear();
   } else {
-    top->setText(QString::fromStdString(info->tops.front()));
+    top->setText(QString::fromStdString(alert->tops.head()));
   }
-  if (info->carryFields.empty()) {
+  if (alert->carry_fields.empty()) {
     carryFields->clear();
   } else {
-    carryFields->setText(QString::fromStdString(info->carryFields.front()));
+    carryFields->setText(QString::fromStdString(alert->carry_fields.head()));
   }
 
   return true;
@@ -467,18 +469,18 @@ bool AlertInfoEditor::setValue(
 
 std::string const AlertInfoEditor::getTable() const
 {
-  NamesTree const *model = static_cast<NamesTree const *>(source->model());
-  std::pair<std::string, std::string> const path =
-    model->pathOfIndex(source->currentIndex());
-  return path.first.empty() ? _table : path.first;
+  NamesTree const *model { static_cast<NamesTree const *>(source->model()) };
+  std::pair<std::string, std::string> const path {
+    model->pathOfIndex(source->currentIndex()) };
+  return path.first.empty() ? table : path.first;
 }
 
 std::string const AlertInfoEditor::getColumn() const
 {
-  NamesTree const *model = static_cast<NamesTree const *>(source->model());
-  std::pair<std::string, std::string> const path =
-    model->pathOfIndex(source->currentIndex());
-  return path.second.empty() ? _column : path.second;
+  NamesTree const *model { static_cast<NamesTree const *>(source->model()) };
+  std::pair<std::string, std::string> const path {
+    model->pathOfIndex(source->currentIndex()) };
+  return path.second.empty() ? column : path.second;
 }
 
 QStringList const AlertInfoEditor::getGroupByQStrings() const
@@ -494,41 +496,81 @@ QStringList const AlertInfoEditor::getGroupByQStrings() const
   return lst;
 }
 
-std::optional<std::set<std::string>> const AlertInfoEditor::getGroupBy() const
+std::optional<dessser::Lst<std::string>> const AlertInfoEditor::getGroupBy() const
 {
   if (autoGroupBy->isChecked())
     return std::nullopt;
 
   QStringList const lst { getGroupByQStrings() };
-  std::set<std::string> ret;
+  dessser::Lst<std::string> ret;
 
-  for (int i = 0; i < lst.length(); i++)
-    ret.emplace(lst[i].toStdString());
+  for (int i = lst.length() - 1; i >= 0; i--)
+    ret.push_front(lst[i].toStdString());
 
   return ret;
 }
 
-std::shared_ptr<conf::Value const> AlertInfoEditor::getValue() const
+std::shared_ptr<dessser::gen::sync_value::t const> AlertInfoEditor::getValue() const
 {
-  // FIXME: simplify
-  std::unique_ptr<AlertInfo> info(
-    std::make_unique<AlertInfo>(this));
+  dessser::Lst<std::string> carry_fields;
+  if (! carryFields->text().isEmpty())
+    carry_fields = dessser::Lst<std::string> { carryFields->text().toStdString () };
 
-  return std::shared_ptr<conf::Value const>(
-    new conf::Alert(std::move(info)));
+  dessser::Lst<std::string> tops;
+  if (! carryFields->text().isEmpty())
+    tops = dessser::Lst<std::string> { top->text().toStdString () };
+
+  dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t>> where_;
+  if (! where->isEmpty() && where->hasValidInput())
+    where_ = dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t>> {
+      where->getValue() };
+
+  dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t>> having_;
+  if (!having->isEmpty() && having->hasValidInput())
+    having_ = dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t>> {
+      having->getValue() };
+
+  dessser::Lst<std::shared_ptr<dessser::gen::alert::constant>> carry_csts_ {};
+
+  std::shared_ptr<dessser::gen::alert::t> alert {
+    std::make_shared<dessser::gen::alert::t>(
+      carry_csts_,
+      carry_fields,
+      column,
+      descFiring->text().toStdString(),
+      descRecovery->text().toStdString(),
+      descTitle->text().toStdString(),
+      duration->text().toDouble(),
+      isEnabled->isChecked(),
+      getGroupBy(),
+      having_,
+      hysteresis->text().toDouble(),
+      id->text().toStdString(),
+      0.01 * percentage->text().toDouble(),
+      getTable(),
+      std::make_shared<dessser::gen::alert::threshold>(
+        std::in_place_index<dessser::gen::alert::Constant>,
+        threshold->text().toDouble()),
+      timeStep->text().toDouble(),
+      tops,
+      where_) };
+
+  return std::make_shared<dessser::gen::sync_value::t const>(
+    std::in_place_index<dessser::gen::sync_value::Alert>,
+    alert);
 }
 
 /* This is called each time we change or set the source to some value: */
 void AlertInfoEditor::checkSource(QModelIndex const &current) const
 {
   inexistantSourceError->hide();
-  NamesTree *model = static_cast<NamesTree *>(source->model());
+  NamesTree *model { static_cast<NamesTree *>(source->model()) };
   mustSelectAField->setVisible(! model->isField(current));
 }
 
 void AlertInfoEditor::checkGroupBy(QModelIndex const &current)
 {
-  NamesTree *model = static_cast<NamesTree *>(source->model());
+  NamesTree *model { static_cast<NamesTree *>(source->model()) };
   if (! model->isField(current)) return;
 
   /* Get the list of fields in this table, expunge from groupBy all unknown
@@ -580,24 +622,24 @@ add_missing:
 
 void AlertInfoEditor::updateDescription()
 {
-  std::string const table = getTable();
-  std::string const column = getColumn();
-  bool const has_table = table.length() > 0;
-  bool const has_column = has_table && column.length() > 0;
-  bool const has_threshold = threshold->hasAcceptableInput();
-  bool const has_hysteresis = hysteresis->hasAcceptableInput();
-  bool const has_duration = duration->hasAcceptableInput();
-  bool const has_timeStep = timeStep->hasAcceptableInput();
-  bool const has_percentage = percentage->hasAcceptableInput();
-  QString const where_desc =
-    where->description("\n(considering only values which ", "), ");
-  QString const having_desc =
-    having->description("\nwhenever the aggregated ", ", ");
-  double const threshold_val = threshold->text().toDouble();
-  double const hysteresis_val = hysteresis->text().toDouble();
-  double const recovery = threshold_val + hysteresis_val;
-  double const percentage_val = percentage->text().toDouble();
-  double const duration_val = duration->text().toDouble();
+  std::string const table { getTable() };
+  std::string const column { getColumn() };
+  bool const has_table { table.length() > 0 };
+  bool const has_column { has_table && column.length() > 0 };
+  bool const has_threshold { threshold->hasAcceptableInput() };
+  bool const has_hysteresis { hysteresis->hasAcceptableInput() };
+  bool const has_duration { duration->hasAcceptableInput() };
+  bool const has_timeStep { timeStep->hasAcceptableInput() };
+  bool const has_percentage { percentage->hasAcceptableInput() };
+  QString const where_desc {
+    where->description("\n(considering only values which ", "), ") };
+  QString const having_desc {
+    having->description("\nwhenever the aggregated ", ", ") };
+  double const threshold_val { threshold->text().toDouble() };
+  double const hysteresis_val { hysteresis->text().toDouble() };
+  double const recovery { threshold_val + hysteresis_val };
+  double const percentage_val { percentage->text().toDouble() };
+  double const duration_val { duration->text().toDouble() };
   QString const timeStep_text {
     has_timeStep ?
       tr(" (aggregated by %1)").arg(
@@ -686,14 +728,14 @@ void AlertInfoEditor::updateFilters(QModelIndex const &current)
 {
   if (! current.isValid()) return;
 
-  NamesTree const *model = static_cast<NamesTree const *>(source->model());
+  NamesTree const *model { static_cast<NamesTree const *>(source->model()) };
   if (! model->isField(current)) {
     if (verbose)
       qDebug() << "AlertInfoEditor: selected source is not in a field";
     return;
   }
 
-  QModelIndex const parent(current.parent());
+  QModelIndex const parent { current.parent() };
   if (verbose)
     qDebug() << "AlertInfoEditor: selecting parent" << model->data(parent, 0);
   if (! parent.isValid()) {
@@ -719,7 +761,7 @@ void AlertInfoEditor::updateFilters(QModelIndex const &current)
 
 bool AlertInfoEditor::hasValidInput() const
 {
-  NamesTree const *model(static_cast<NamesTree *>(source->model()));
+  NamesTree const *model { static_cast<NamesTree *>(source->model()) };
   if (!model->isField(source->currentIndex())) {
     if (verbose)
       qDebug() << "AlertInfoEditor: selected source is not a field";

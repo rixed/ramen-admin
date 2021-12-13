@@ -1,12 +1,13 @@
 #ifndef ALERTINFOEDITOR_H_191129
 #define ALERTINFOEDITOR_H_191129
+#include <dessser/Lst.h>
 #include <memory>
 #include <optional>
 #include <set>
 #include <string>
 #include <QTreeView>
 #include <QWidget>
-#include "AlertInfo.h"
+
 #include "AtomicWidget.h"
 
 class FilterEditor;
@@ -19,9 +20,11 @@ class QPushButton;
 class QRadioButton;
 class QStringListModel;
 
-namespace conf {
-  class Value;
-};
+namespace dessser {
+  namespace gen {
+    namespace sync_value { struct t; }
+  }
+}
 
 /* Same as QTreeView but emits a selectedChanged whenever the current
  * entry changes.
@@ -52,10 +55,10 @@ class AlertInfoEditor : public AtomicWidget
   /* In case the table/column is not in the source, also save the values
    * here. Use the accessors getTable/getColumn to get the actual version
    * either from the edition widget or from those saved values: */
-  std::string _table, _column;
+  std::string table, column;
 
   /* Similarly for groupBy fields: */
-  std::optional<std::set<std::string>> _groupBy;
+  std::optional<dessser::Lst<std::string>> _groupBy;
 
   /* Returns the current selection of group-by fields as a QStringList
    * (empty list for automatic group-by as well as explicit empty group-by,
@@ -68,14 +71,17 @@ class AlertInfoEditor : public AtomicWidget
 
   /* By default, group-by is implicit (automatic): */
   QCheckBox *autoGroupBy;
+
   /* Multi-Select fields of the selected table:
    * TODO: whenever the selected source is changed, and that result in a
-   * table change, then reset this combo. Then, if the new table is _table
+   * table change, then reset this combo. Then, if the new table is table
    * re-select the fields in _groupBy. */
   QListView *groupBy;
+
   /* So that groupBy's QSelectionModel does not change it is assigned a
    * single model that is repopulated every time the selected table changes: */
   QStringListModel *tableFields;
+
   /* The above QListView opens/closes when this button, which label list
    * the selected fields, is pushed: */
   QPushButton *openGroupBy;
@@ -86,8 +92,10 @@ public:
   /* These functions will return the selected table and column (either from
    * the NameTreeView or the saved table and column values: */
   std::string const getTable() const;
+
   std::string const getColumn() const;
-  std::optional<std::set<std::string>> const getGroupBy() const;
+
+  std::optional<dessser::Lst<std::string>> const getGroupBy() const;
 
   QCheckBox *isEnabled; // the editor, not the alert
   QRadioButton *thresholdIsMax;
@@ -110,12 +118,15 @@ public:
   FilterEditor *where, *having;
 
   AlertInfoEditor(QWidget *parent = nullptr);
+
   void setEnabled(bool) override;
-  std::shared_ptr<conf::Value const> getValue() const override;
+
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const override;
+
   bool hasValidInput() const override;
 
 public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>) override;
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>) override;
 
 protected slots:
   void checkSource(QModelIndex const &) const;

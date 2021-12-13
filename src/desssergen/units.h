@@ -15,21 +15,21 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t91f2e36eeb48a24e3d0e81b8fc2b2ee3 : public std::tuple<
+struct t269a713e7cffb6a948c359cf821188bc : public std::tuple<
   double,
   bool
 > {
   using tuple::tuple;
-  t91f2e36eeb48a24e3d0e81b8fc2b2ee3(std::tuple<double, bool> p)
+  t269a713e7cffb6a948c359cf821188bc(std::tuple<double, bool> p)
     : std::tuple<double, bool>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &a, t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &b) {
+inline bool operator==(t269a713e7cffb6a948c359cf821188bc const &a, t269a713e7cffb6a948c359cf821188bc const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &a, t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &b) {
+inline bool operator!=(t269a713e7cffb6a948c359cf821188bc const &a, t269a713e7cffb6a948c359cf821188bc const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t91f2e36eeb48a24e3d0e81b8fc2b2ee3 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t269a713e7cffb6a948c359cf821188bc const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -37,23 +37,23 @@ inline std::ostream &operator<<(std::ostream &os, t91f2e36eeb48a24e3d0e81b8fc2b2
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t91f2e36eeb48a24e3d0e81b8fc2b2ee3> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t269a713e7cffb6a948c359cf821188bc> const t) { os << *t; return os; }
 
-struct tf1e686582fa50fe4bb8d464a3c3b3553 : public std::tuple<
+struct t6065e0c71fac083ca075217e1ad8299c : public std::tuple<
   std::string,
-  ::dessser::gen::units::t91f2e36eeb48a24e3d0e81b8fc2b2ee3
+  ::dessser::gen::units::t269a713e7cffb6a948c359cf821188bc
 > {
   using tuple::tuple;
-  tf1e686582fa50fe4bb8d464a3c3b3553(std::tuple<std::string, ::dessser::gen::units::t91f2e36eeb48a24e3d0e81b8fc2b2ee3> p)
-    : std::tuple<std::string, ::dessser::gen::units::t91f2e36eeb48a24e3d0e81b8fc2b2ee3>(std::get<0>(p), std::get<1>(p)) {}
+  t6065e0c71fac083ca075217e1ad8299c(std::tuple<std::string, ::dessser::gen::units::t269a713e7cffb6a948c359cf821188bc> p)
+    : std::tuple<std::string, ::dessser::gen::units::t269a713e7cffb6a948c359cf821188bc>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf1e686582fa50fe4bb8d464a3c3b3553 const &a, tf1e686582fa50fe4bb8d464a3c3b3553 const &b) {
+inline bool operator==(t6065e0c71fac083ca075217e1ad8299c const &a, t6065e0c71fac083ca075217e1ad8299c const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf1e686582fa50fe4bb8d464a3c3b3553 const &a, tf1e686582fa50fe4bb8d464a3c3b3553 const &b) {
+inline bool operator!=(t6065e0c71fac083ca075217e1ad8299c const &a, t6065e0c71fac083ca075217e1ad8299c const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf1e686582fa50fe4bb8d464a3c3b3553 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t6065e0c71fac083ca075217e1ad8299c const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -61,24 +61,24 @@ inline std::ostream &operator<<(std::ostream &os, tf1e686582fa50fe4bb8d464a3c3b3
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf1e686582fa50fe4bb8d464a3c3b3553> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6065e0c71fac083ca075217e1ad8299c> const t) { os << *t; return os; }
 
-typedef Arr<::dessser::gen::units::tf1e686582fa50fe4bb8d464a3c3b3553> t;
-struct tf6138ae5919ddcb1cb9a935a9dc7190a : public std::tuple<
+typedef Arr<::dessser::gen::units::t6065e0c71fac083ca075217e1ad8299c> t;
+struct ta30293a82943182cab78182f33b18016 : public std::tuple<
   t,
   Pointer
 > {
   using tuple::tuple;
-  tf6138ae5919ddcb1cb9a935a9dc7190a(std::tuple<t, Pointer> p)
+  ta30293a82943182cab78182f33b18016(std::tuple<t, Pointer> p)
     : std::tuple<t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
+inline bool operator==(ta30293a82943182cab78182f33b18016 const &a, ta30293a82943182cab78182f33b18016 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf6138ae5919ddcb1cb9a935a9dc7190a const &a, tf6138ae5919ddcb1cb9a935a9dc7190a const &b) {
+inline bool operator!=(ta30293a82943182cab78182f33b18016 const &a, ta30293a82943182cab78182f33b18016 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc7190a const &t) {
+inline std::ostream &operator<<(std::ostream &os, ta30293a82943182cab78182f33b18016 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -86,14 +86,16 @@ inline std::ostream &operator<<(std::ostream &os, tf6138ae5919ddcb1cb9a935a9dc71
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf6138ae5919ddcb1cb9a935a9dc7190a> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta30293a82943182cab78182f33b18016> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(t&,Pointer)> to_row_binary;
 extern std::function<Size(t&)> sersize_of_row_binary;
-extern std::function<::dessser::gen::units::tf6138ae5919ddcb1cb9a935a9dc7190a(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary;
+extern std::function<Pointer(t&,Pointer)> wrap_to_row_binary;
 typedef t t_ext;
 inline t Deref(t_ext x) { return x; }
 

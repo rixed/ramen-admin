@@ -45,22 +45,56 @@ struct t : public std::variant<
   Void // GlobalVar
 > { using variant::variant; };
 
-struct te9fedb588053185e9707b2b63ba5bb70 : public std::tuple<
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Unknown
+    case 1: return std::get<1>(a) == std::get<1>(b); // In
+    case 2: return std::get<2>(a) == std::get<2>(b); // GroupState
+    case 3: return std::get<3>(a) == std::get<3>(b); // GlobalState
+    case 4: return std::get<4>(a) == std::get<4>(b); // OutPrevious
+    case 5: return std::get<5>(a) == std::get<5>(b); // Out
+    case 6: return std::get<6>(a) == std::get<6>(b); // SortFirst
+    case 7: return std::get<7>(a) == std::get<7>(b); // SortSmallest
+    case 8: return std::get<8>(a) == std::get<8>(b); // SortGreatest
+    case 9: return std::get<9>(a) == std::get<9>(b); // Param
+    case 10: return std::get<10>(a) == std::get<10>(b); // Env
+    case 11: return std::get<11>(a) == std::get<11>(b); // Record
+    case 12: return std::get<12>(a) == std::get<12>(b); // GlobalVar
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
+struct t001249353e9f03ec2fa2967bd9975306 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_variable::t> ,
   Pointer
 > {
   using tuple::tuple;
-  te9fedb588053185e9707b2b63ba5bb70(std::tuple<std::shared_ptr<::dessser::gen::raql_variable::t> , Pointer> p)
+  t001249353e9f03ec2fa2967bd9975306(std::tuple<std::shared_ptr<::dessser::gen::raql_variable::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_variable::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-struct t7609d344c1ba69d0f80fec236d4c216b : public std::tuple<
+inline bool operator==(t001249353e9f03ec2fa2967bd9975306 const &a, t001249353e9f03ec2fa2967bd9975306 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t001249353e9f03ec2fa2967bd9975306 const &a, t001249353e9f03ec2fa2967bd9975306 const &b) {
+  return !operator==(a, b);
+}
+struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
   uint16_t,
   Pointer
 > {
   using tuple::tuple;
-  t7609d344c1ba69d0f80fec236d4c216b(std::tuple<uint16_t, Pointer> p)
+  ta97bb48ed75bbda6173555873826c8c6(std::tuple<uint16_t, Pointer> p)
     : std::tuple<uint16_t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
+inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
+  return !operator==(a, b);
+}
 /* ----------- */
 /* Definitions */
 /* ----------- */
@@ -351,187 +385,185 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_variable::t> )> sersize_
 
 /* 
     (fun ("Ptr")
-      (let-pair "make_fst_105" "make_snd_106"
-        (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
-          (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
-            (if (eq (u16 0) (identifier "dsum1_fst_63"))
+      (let "dsum1_62" (let-pair "du16_fst_57" "du16_snd_58" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_57") (identifier "du16_snd_58")))
+        (let-pair "dsum1_fst_63" "dsum1_snd_64" (identifier "dsum1_62")
+          (if (eq (u16 0) (identifier "dsum1_fst_63"))
+            (make-tup
+              (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 0
+                (nop)) (identifier "dsum1_snd_64"))
+            (if (eq (u16 1) (identifier "dsum1_fst_63"))
               (make-tup
-                (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 0
+                (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 1
                   (nop)) (identifier "dsum1_snd_64"))
-              (if (eq (u16 1) (identifier "dsum1_fst_63"))
+              (if (eq (u16 2) (identifier "dsum1_fst_63"))
                 (make-tup
-                  (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 1
+                  (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 2
                     (nop)) (identifier "dsum1_snd_64"))
-                (if (eq (u16 2) (identifier "dsum1_fst_63"))
+                (if (eq (u16 3) (identifier "dsum1_fst_63"))
                   (make-tup
-                    (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 2
+                    (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 3
                       (nop)) (identifier "dsum1_snd_64"))
-                  (if (eq (u16 3) (identifier "dsum1_fst_63"))
+                  (if (eq (u16 4) (identifier "dsum1_fst_63"))
                     (make-tup
-                      (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 3
+                      (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 4
                         (nop)) (identifier "dsum1_snd_64"))
-                    (if (eq (u16 4) (identifier "dsum1_fst_63"))
+                    (if (eq (u16 5) (identifier "dsum1_fst_63"))
                       (make-tup
-                        (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 4
+                        (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 5
                           (nop)) (identifier "dsum1_snd_64"))
-                      (if (eq (u16 5) (identifier "dsum1_fst_63"))
+                      (if (eq (u16 6) (identifier "dsum1_fst_63"))
                         (make-tup
-                          (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 5
+                          (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 6
                             (nop)) (identifier "dsum1_snd_64"))
-                        (if (eq (u16 6) (identifier "dsum1_fst_63"))
+                        (if (eq (u16 7) (identifier "dsum1_fst_63"))
                           (make-tup
-                            (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 6
+                            (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 7
                               (nop)) (identifier "dsum1_snd_64"))
-                          (if (eq (u16 7) (identifier "dsum1_fst_63"))
+                          (if (eq (u16 8) (identifier "dsum1_fst_63"))
                             (make-tup
-                              (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 7
+                              (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 8
                                 (nop)) (identifier "dsum1_snd_64"))
-                            (if (eq (u16 8) (identifier "dsum1_fst_63"))
+                            (if (eq (u16 9) (identifier "dsum1_fst_63"))
                               (make-tup
-                                (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 8
+                                (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 9
                                   (nop)) (identifier "dsum1_snd_64"))
-                              (if (eq (u16 9) (identifier "dsum1_fst_63"))
+                              (if (eq (u16 10) (identifier "dsum1_fst_63"))
                                 (make-tup
-                                  (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 9
+                                  (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 10
                                     (nop)) (identifier "dsum1_snd_64"))
-                                (if (eq (u16 10) (identifier "dsum1_fst_63"))
+                                (if (eq (u16 11) (identifier "dsum1_fst_63"))
                                   (make-tup
-                                    (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 10
+                                    (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 11
                                       (nop)) (identifier "dsum1_snd_64"))
-                                  (if (eq (u16 11) (identifier "dsum1_fst_63"))
+                                  (seq (assert (eq (identifier "dsum1_fst_63") (u16 12)))
                                     (make-tup
-                                      (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 11
-                                        (nop)) (identifier "dsum1_snd_64"))
-                                    (seq (assert (eq (identifier "dsum1_fst_63") (u16 12)))
-                                      (make-tup
-                                        (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 12
-                                          (nop)) (identifier "dsum1_snd_64"))))))))))))))))) 
-        (make-tup (identifier "make_fst_105") (identifier "make_snd_106"))))
+                                      (construct "[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" 12
+                                        (nop)) (identifier "dsum1_snd_64"))))))))))))))))))
  */
-static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70(Pointer)> fun99 { [&fun99](Pointer p_0) {
-    ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b id_100 { p_0.readU16Le() };
-    ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b letpair_res_101;
+  std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> fun99 { [&fun99](Pointer p_0) {
+    ::dessser::gen::raql_variable::ta97bb48ed75bbda6173555873826c8c6 id_100 { p_0.readU16Le() };
+    ::dessser::gen::raql_variable::ta97bb48ed75bbda6173555873826c8c6 letpair_res_101;
     {
       auto du16_fst_57 { std::get<0>(id_100) };
       auto du16_snd_58 { std::get<1>(id_100) };
-      ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b id_102 { du16_fst_57, du16_snd_58 };
+      ::dessser::gen::raql_variable::ta97bb48ed75bbda6173555873826c8c6 id_102 { du16_fst_57, du16_snd_58 };
       letpair_res_101 = id_102;
     }
-    ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 let_res_103;
+    ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 let_res_103;
     {
-      ::dessser::gen::raql_variable::t7609d344c1ba69d0f80fec236d4c216b dsum1_62 { letpair_res_101 };
-      ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 letpair_res_104;
+      ::dessser::gen::raql_variable::ta97bb48ed75bbda6173555873826c8c6 dsum1_62 { letpair_res_101 };
+      ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 letpair_res_104;
       {
         auto dsum1_fst_63 { std::get<0>(dsum1_62) };
         auto dsum1_snd_64 { std::get<1>(dsum1_62) };
         uint16_t id_105 { 0 };
         bool id_106 { bool(id_105 == dsum1_fst_63) };
-        ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_107;
+        ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_107;
         if (id_106) {
           (void)::dessser::VOID;
           std::shared_ptr<::dessser::gen::raql_variable::t>  id_108 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<0>, ::dessser::VOID) };
-          ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_109 { id_108, dsum1_snd_64 };
+          ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_109 { id_108, dsum1_snd_64 };
           choose_res_107 = id_109;
         } else {
           uint16_t id_110 { 1 };
           bool id_111 { bool(id_110 == dsum1_fst_63) };
-          ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_112;
+          ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_112;
           if (id_111) {
             (void)::dessser::VOID;
             std::shared_ptr<::dessser::gen::raql_variable::t>  id_113 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<1>, ::dessser::VOID) };
-            ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_114 { id_113, dsum1_snd_64 };
+            ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_114 { id_113, dsum1_snd_64 };
             choose_res_112 = id_114;
           } else {
             uint16_t id_115 { 2 };
             bool id_116 { bool(id_115 == dsum1_fst_63) };
-            ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_117;
+            ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_117;
             if (id_116) {
               (void)::dessser::VOID;
               std::shared_ptr<::dessser::gen::raql_variable::t>  id_118 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<2>, ::dessser::VOID) };
-              ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_119 { id_118, dsum1_snd_64 };
+              ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_119 { id_118, dsum1_snd_64 };
               choose_res_117 = id_119;
             } else {
               uint16_t id_120 { 3 };
               bool id_121 { bool(id_120 == dsum1_fst_63) };
-              ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_122;
+              ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_122;
               if (id_121) {
                 (void)::dessser::VOID;
                 std::shared_ptr<::dessser::gen::raql_variable::t>  id_123 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<3>, ::dessser::VOID) };
-                ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_124 { id_123, dsum1_snd_64 };
+                ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_124 { id_123, dsum1_snd_64 };
                 choose_res_122 = id_124;
               } else {
                 uint16_t id_125 { 4 };
                 bool id_126 { bool(id_125 == dsum1_fst_63) };
-                ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_127;
+                ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_127;
                 if (id_126) {
                   (void)::dessser::VOID;
                   std::shared_ptr<::dessser::gen::raql_variable::t>  id_128 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<4>, ::dessser::VOID) };
-                  ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_129 { id_128, dsum1_snd_64 };
+                  ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_129 { id_128, dsum1_snd_64 };
                   choose_res_127 = id_129;
                 } else {
                   uint16_t id_130 { 5 };
                   bool id_131 { bool(id_130 == dsum1_fst_63) };
-                  ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_132;
+                  ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_132;
                   if (id_131) {
                     (void)::dessser::VOID;
                     std::shared_ptr<::dessser::gen::raql_variable::t>  id_133 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<5>, ::dessser::VOID) };
-                    ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_134 { id_133, dsum1_snd_64 };
+                    ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_134 { id_133, dsum1_snd_64 };
                     choose_res_132 = id_134;
                   } else {
                     uint16_t id_135 { 6 };
                     bool id_136 { bool(id_135 == dsum1_fst_63) };
-                    ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_137;
+                    ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_137;
                     if (id_136) {
                       (void)::dessser::VOID;
                       std::shared_ptr<::dessser::gen::raql_variable::t>  id_138 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<6>, ::dessser::VOID) };
-                      ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_139 { id_138, dsum1_snd_64 };
+                      ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_139 { id_138, dsum1_snd_64 };
                       choose_res_137 = id_139;
                     } else {
                       uint16_t id_140 { 7 };
                       bool id_141 { bool(id_140 == dsum1_fst_63) };
-                      ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_142;
+                      ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_142;
                       if (id_141) {
                         (void)::dessser::VOID;
                         std::shared_ptr<::dessser::gen::raql_variable::t>  id_143 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<7>, ::dessser::VOID) };
-                        ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_144 { id_143, dsum1_snd_64 };
+                        ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_144 { id_143, dsum1_snd_64 };
                         choose_res_142 = id_144;
                       } else {
                         uint16_t id_145 { 8 };
                         bool id_146 { bool(id_145 == dsum1_fst_63) };
-                        ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_147;
+                        ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_147;
                         if (id_146) {
                           (void)::dessser::VOID;
                           std::shared_ptr<::dessser::gen::raql_variable::t>  id_148 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<8>, ::dessser::VOID) };
-                          ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_149 { id_148, dsum1_snd_64 };
+                          ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_149 { id_148, dsum1_snd_64 };
                           choose_res_147 = id_149;
                         } else {
                           uint16_t id_150 { 9 };
                           bool id_151 { bool(id_150 == dsum1_fst_63) };
-                          ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_152;
+                          ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_152;
                           if (id_151) {
                             (void)::dessser::VOID;
                             std::shared_ptr<::dessser::gen::raql_variable::t>  id_153 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<9>, ::dessser::VOID) };
-                            ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_154 { id_153, dsum1_snd_64 };
+                            ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_154 { id_153, dsum1_snd_64 };
                             choose_res_152 = id_154;
                           } else {
                             uint16_t id_155 { 10 };
                             bool id_156 { bool(id_155 == dsum1_fst_63) };
-                            ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_157;
+                            ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_157;
                             if (id_156) {
                               (void)::dessser::VOID;
                               std::shared_ptr<::dessser::gen::raql_variable::t>  id_158 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<10>, ::dessser::VOID) };
-                              ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_159 { id_158, dsum1_snd_64 };
+                              ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_159 { id_158, dsum1_snd_64 };
                               choose_res_157 = id_159;
                             } else {
                               uint16_t id_160 { 11 };
                               bool id_161 { bool(id_160 == dsum1_fst_63) };
-                              ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 choose_res_162;
+                              ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 choose_res_162;
                               if (id_161) {
                                 (void)::dessser::VOID;
                                 std::shared_ptr<::dessser::gen::raql_variable::t>  id_163 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<11>, ::dessser::VOID) };
-                                ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_164 { id_163, dsum1_snd_64 };
+                                ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_164 { id_163, dsum1_snd_64 };
                                 choose_res_162 = id_164;
                               } else {
                                 uint16_t id_165 { 12 };
@@ -540,7 +572,7 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
                                 (void)id_167;
                                 (void)::dessser::VOID;
                                 std::shared_ptr<::dessser::gen::raql_variable::t>  id_168 { std::make_shared<::dessser::gen::raql_variable::t>(std::in_place_index<12>, ::dessser::VOID) };
-                                ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_169 { id_168, dsum1_snd_64 };
+                                ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_169 { id_168, dsum1_snd_64 };
                                 choose_res_162 = id_169;
                               }
                               choose_res_157 = choose_res_162;
@@ -569,19 +601,48 @@ static std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba
       }
       let_res_103 = letpair_res_104;
     }
-    ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 letpair_res_170;
-    {
-      auto make_fst_105 { std::get<0>(let_res_103) };
-      auto make_snd_106 { std::get<1>(let_res_103) };
-      ::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70 id_171 { make_fst_105, make_snd_106 };
-      letpair_res_170 = id_171;
-    }
-    return letpair_res_170;
+    return let_res_103;
   }
    };
   return fun99;
 }
-std::function<::dessser::gen::raql_variable::te9fedb588053185e9707b2b63ba5bb70(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> of_row_binary(of_row_binary_init());
+
+/* 
+    (fun ("Ptr") (let-pair "make_fst_105" "make_snd_106" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_105") (identifier "make_snd_106"))))
+ */
+static std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> wrap_of_row_binary_init()
+{
+  std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> fun170 { [&fun170](Pointer p_0) {
+    ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_171 { of_row_binary(p_0) };
+    ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 letpair_res_172;
+    {
+      auto make_fst_105 { std::get<0>(id_171) };
+      auto make_snd_106 { std::get<1>(id_171) };
+      ::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306 id_173 { make_fst_105, make_snd_106 };
+      letpair_res_172 = id_173;
+    }
+    return letpair_res_172;
+  }
+   };
+  return fun170;
+}
+std::function<::dessser::gen::raql_variable::t001249353e9f03ec2fa2967bd9975306(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+
+/* 
+    (fun ("[Unknown Void | In Void | GroupState Void | GlobalState Void | OutPrevious Void | Out Void | SortFirst Void | SortSmallest Void | SortGreatest Void | Param Void | Env Void | Record Void | GlobalVar Void]" "Ptr")
+      (apply (identifier "to-row-binary") (param 0) (param 1)))
+ */
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_variable::t> ,Pointer)> wrap_to_row_binary_init()
+{
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_variable::t> ,Pointer)> fun174 { [&fun174](std::shared_ptr<::dessser::gen::raql_variable::t>  p_0, Pointer p_1) {
+    Pointer id_175 { to_row_binary(p_0, p_1) };
+    return id_175;
+  }
+   };
+  return fun174;
+}
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_variable::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

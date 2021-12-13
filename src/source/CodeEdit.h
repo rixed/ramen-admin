@@ -43,10 +43,8 @@ public:
   QComboBox *extensionsCombo;
   QWidget *extensionSwitcher;
 
-# ifdef WITH_ALERTING
   /* The editor for alert sources: */
   AlertInfoEditor *alertEditor;
-# endif
 
   /* The editor for ramen language sources: */
   KTextEdit *textEditor;

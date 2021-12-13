@@ -4,14 +4,15 @@
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QLineEdit>
+
+#include "desssergen/simple_filter.h"
 #include "NamesTree.h"
-#include "AlertInfo.h"
-#include "FilterEditor.h"
 
-static bool const verbose(false);
+#include "source/FilterEditor.h"
 
-FilterEditor::FilterEditor(
-    QWidget *parent)
+static bool const verbose { false };
+
+FilterEditor::FilterEditor(QWidget *parent)
   : QWidget(parent)
 {
   lhsEdit = new QLineEdit;
@@ -26,7 +27,7 @@ FilterEditor::FilterEditor(
   rhsEdit = new QLineEdit;
   rhsEdit->setPlaceholderText(tr("value"));
 
-  QHBoxLayout *layout = new QHBoxLayout;
+  QHBoxLayout *layout { new QHBoxLayout };
   layout->addWidget(lhsEdit);
   layout->addWidget(opEdit);
   layout->addWidget(rhsEdit);
@@ -71,20 +72,28 @@ void FilterEditor::setFunction(QModelIndex const &root)
   lhsEdit->setCompleter(completer);
 }
 
-bool FilterEditor::setValue(SimpleFilter const &f)
+bool FilterEditor::setValue(dessser::gen::simple_filter::t const &v)
 {
-  lhsEdit->setText(QString::fromStdString(f.lhs));
-  rhsEdit->setText(QString::fromStdString(f.rhs));
+  lhsEdit->setText(QString::fromStdString(v.lhs));
+  rhsEdit->setText(QString::fromStdString(v.rhs));
 
-  int opIndex = opEdit->findData(QString::fromStdString(f.op));
+  int opIndex { opEdit->findData(QString::fromStdString(v.op)) };
   if (opIndex < 0) {
     qCritical() << "FilterEditor: cannot find operator for"
-                << QString::fromStdString(f.op);
+                << QString::fromStdString(v.op);
     return false;
   }
   opEdit->setCurrentIndex(opIndex);
 
   return true;
+}
+
+std::shared_ptr<dessser::gen::simple_filter::t> FilterEditor::getValue() const
+{
+  return std::make_shared<dessser::gen::simple_filter::t>(
+    lhsEdit->text().toStdString(),
+    opEdit->currentData().toString().toStdString(),
+    rhsEdit->text().toStdString());
 }
 
 void FilterEditor::clear()
@@ -109,9 +118,9 @@ static QString const opDescription(QString const &s)
 QString const FilterEditor::description(
   QString const &prefix, QString const &suffix)
 {
-  QString const lhs(lhsEdit->text());
-  QString const op(opEdit->currentData().toString());
-  QString const rhs(rhsEdit->text());
+  QString const lhs { lhsEdit->text() };
+  QString const op { opEdit->currentData().toString() };
+  QString const rhs { rhsEdit->text() };
 
   if (lhs.isEmpty() && rhs.isEmpty()) return QString();
 

@@ -21,6 +21,18 @@ struct t : public std::variant<
   Void // Graphite
 > { using variant::variant; };
 
+inline bool operator==(t const &a, t const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
+    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
+    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
+  };
+  return false;
+}
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 enum Constr_t {
   Collectd,
   NetflowV5,
@@ -38,33 +50,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
-    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
-    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-struct tf47c5e4ed9a1c0c5574835152b1a472e : public std::tuple<
+struct t53cccde421b2d033d9d6d4dd53f42f73 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,
   Pointer
 > {
   using tuple::tuple;
-  tf47c5e4ed9a1c0c5574835152b1a472e(std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer> p)
+  t53cccde421b2d033d9d6d4dd53f42f73(std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::raql_net_protocol::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
+inline bool operator==(t53cccde421b2d033d9d6d4dd53f42f73 const &a, t53cccde421b2d033d9d6d4dd53f42f73 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf47c5e4ed9a1c0c5574835152b1a472e const &a, tf47c5e4ed9a1c0c5574835152b1a472e const &b) {
+inline bool operator!=(t53cccde421b2d033d9d6d4dd53f42f73 const &a, t53cccde421b2d033d9d6d4dd53f42f73 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf47c5e4ed9a1c0c5574835152b1a472e const &t) {
+inline std::ostream &operator<<(std::ostream &os, t53cccde421b2d033d9d6d4dd53f42f73 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -72,14 +72,16 @@ inline std::ostream &operator<<(std::ostream &os, tf47c5e4ed9a1c0c5574835152b1a4
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf47c5e4ed9a1c0c5574835152b1a472e> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t53cccde421b2d033d9d6d4dd53f42f73> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,Pointer)> to_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::raql_net_protocol::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::raql_net_protocol::tf47c5e4ed9a1c0c5574835152b1a472e(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73(Pointer)> wrap_of_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_net_protocol::t> ,Pointer)> wrap_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

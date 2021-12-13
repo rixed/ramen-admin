@@ -1,8 +1,8 @@
 #ifndef FILTEREDITOR_H_191210
 #define FILTEREDITOR_H_191210
+#include <memory>
 #include <QString>
 #include <QWidget>
-#include "AlertInfo.h"
 
 class QComboBox;
 class QCompleter;
@@ -11,8 +11,14 @@ class QModelIndex;
 class NamesSubtree;
 struct SimpleFilter;
 
-class FilterEditor : public QWidget
-{
+namespace dessser {
+  namespace gen {
+    namespace alert { struct t; }
+    namespace simple_filter { struct t; }
+  }
+}
+
+class FilterEditor : public QWidget {
   Q_OBJECT
 
 public:
@@ -23,16 +29,21 @@ public:
   QCompleter *completer = nullptr;  // used for lhsEdit;
 
   FilterEditor(QWidget *parent = nullptr);
+
   void setEnabled(bool);
 
   bool isEmpty() const;
+
   bool hasValidInput() const;
 
   QString const description(
     QString const &prefix = QString(), QString const &suffix = QString());
 
-  bool setValue(SimpleFilter const &);
+  bool setValue(dessser::gen::simple_filter::t const &);
+
   void clear();
+
+  std::shared_ptr<dessser::gen::simple_filter::t> getValue() const;
 
 public slots:
   void setFunction(QModelIndex const &);

@@ -21,21 +21,21 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tbb6b5f61a720ca930638180f8a3d0d1a : public std::tuple<
+struct t4827d21c37f0b56d86b99cff40066ee3 : public std::tuple<
   dessser::gen::field_name::t_ext,
   dessser::gen::raql_value::t_ext
 > {
   using tuple::tuple;
-  tbb6b5f61a720ca930638180f8a3d0d1a(std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext> p)
+  t4827d21c37f0b56d86b99cff40066ee3(std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext> p)
     : std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tbb6b5f61a720ca930638180f8a3d0d1a const &a, tbb6b5f61a720ca930638180f8a3d0d1a const &b) {
+inline bool operator==(t4827d21c37f0b56d86b99cff40066ee3 const &a, t4827d21c37f0b56d86b99cff40066ee3 const &b) {
   return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && ::dessser::gen::raql_value::Deref(std::get<1>(a)) == ::dessser::gen::raql_value::Deref(std::get<1>(b));
 }
-inline bool operator!=(tbb6b5f61a720ca930638180f8a3d0d1a const &a, tbb6b5f61a720ca930638180f8a3d0d1a const &b) {
+inline bool operator!=(t4827d21c37f0b56d86b99cff40066ee3 const &a, t4827d21c37f0b56d86b99cff40066ee3 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tbb6b5f61a720ca930638180f8a3d0d1a const &t) {
+inline std::ostream &operator<<(std::ostream &os, t4827d21c37f0b56d86b99cff40066ee3 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -43,16 +43,23 @@ inline std::ostream &operator<<(std::ostream &os, tbb6b5f61a720ca930638180f8a3d0
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbb6b5f61a720ca930638180f8a3d0d1a> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4827d21c37f0b56d86b99cff40066ee3> const t) { os << *t; return os; }
 
-struct tdc75c022089b23d508b703f7fd52f8cc {
+struct tb1d409993b02f1b7f7cedc87680eed70 {
   uint32_t parent_num;
   std::string tunneld_host;
   uint16_t tunneld_port;
-  tdc75c022089b23d508b703f7fd52f8cc(uint32_t parent_num_, std::string tunneld_host_, uint16_t tunneld_port_) : parent_num(parent_num_), tunneld_host(tunneld_host_), tunneld_port(tunneld_port_) {}
-  tdc75c022089b23d508b703f7fd52f8cc() = default;
+  tb1d409993b02f1b7f7cedc87680eed70(uint32_t parent_num_, std::string tunneld_host_, uint16_t tunneld_port_) : parent_num(parent_num_), tunneld_host(tunneld_host_), tunneld_port(tunneld_port_) {}
+  tb1d409993b02f1b7f7cedc87680eed70() = default;
 };
-inline std::ostream &operator<<(std::ostream &os, tdc75c022089b23d508b703f7fd52f8cc const &r) {
+inline bool operator==(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
+  return a.parent_num == b.parent_num && a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port;
+}
+
+inline bool operator!=(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb1d409993b02f1b7f7cedc87680eed70 const &r) {
   os << '{';
   os << "parent_num:" << r.parent_num << ',';
   os << "tunneld_host:" << r.tunneld_host << ',';
@@ -60,36 +67,14 @@ inline std::ostream &operator<<(std::ostream &os, tdc75c022089b23d508b703f7fd52f
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tdc75c022089b23d508b703f7fd52f8cc> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb1d409993b02f1b7f7cedc87680eed70> const r) { os << *r; return os; }
 
-inline bool operator==(tdc75c022089b23d508b703f7fd52f8cc const &a, tdc75c022089b23d508b703f7fd52f8cc const &b) {
-  return a.parent_num == b.parent_num && a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port;
-}
-
-inline bool operator!=(tdc75c022089b23d508b703f7fd52f8cc const &a, tdc75c022089b23d508b703f7fd52f8cc const &b) {
-  return !operator==(a, b);
-}
-struct tcea6add784d8acf1d66fabc567856768 : public std::variant<
+struct tc2ce6e932e30e0ce1da66750e694e766 : public std::variant<
   Void, // Whole
-  Arr<::dessser::gen::worker::tdc75c022089b23d508b703f7fd52f8cc> // TopHalf
+  Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> // TopHalf
 > { using variant::variant; };
 
-enum Constr_tcea6add784d8acf1d66fabc567856768 {
-  Whole,
-  TopHalf,
-};
-
-inline std::ostream &operator<<(std::ostream &os, tcea6add784d8acf1d66fabc567856768 const &v) {
-  switch (v.index()) {
-    case 0: os << "Whole" << std::get<0>(v); break;
-    case 1: os << "TopHalf " << std::get<1>(v); break;
-  }
-  return os;
-}
-
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tcea6add784d8acf1d66fabc567856768> const v) { os << *v; return os; }
-
-inline bool operator==(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8acf1d66fabc567856768 const &b) {
+inline bool operator==(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Whole
@@ -97,9 +82,24 @@ inline bool operator==(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8
   };
   return false;
 }
-inline bool operator!=(tcea6add784d8acf1d66fabc567856768 const &a, tcea6add784d8acf1d66fabc567856768 const &b) {
+inline bool operator!=(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
   return !operator==(a, b);
 }
+enum Constr_tc2ce6e932e30e0ce1da66750e694e766 {
+  Whole,
+  TopHalf,
+};
+
+inline std::ostream &operator<<(std::ostream &os, tc2ce6e932e30e0ce1da66750e694e766 const &v) {
+  switch (v.index()) {
+    case 0: os << "Whole" << std::get<0>(v); break;
+    case 1: os << "TopHalf " << std::get<1>(v); break;
+  }
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc2ce6e932e30e0ce1da66750e694e766> const v) { os << *v; return os; }
+
 struct t {
   Arr<dessser::gen::func_ref::t_ext> children;
   dessser::gen::file_path::t_ext cwd;
@@ -108,14 +108,21 @@ struct t {
   Arr<dessser::gen::field_name::t_ext> envvars;
   std::string info_signature;
   bool is_used;
-  Arr<::dessser::gen::worker::tbb6b5f61a720ca930638180f8a3d0d1a> params;
+  Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   double report_period;
-  ::dessser::gen::worker::tcea6add784d8acf1d66fabc567856768 role;
+  ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role;
   std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::tbb6b5f61a720ca930638180f8a3d0d1a> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tcea6add784d8acf1d66fabc567856768 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
   t() = default;
 };
+inline bool operator==(t const &a, t const &b) {
+  return a.children == b.children && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.envvars == b.envvars && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.report_period == b.report_period && a.role == b.role && a.worker_signature == b.worker_signature;
+}
+
+inline bool operator!=(t const &a, t const &b) {
+  return !operator==(a, b);
+}
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "children:" << r.children << ',';
@@ -135,28 +142,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-inline bool operator==(t const &a, t const &b) {
-  return a.children == b.children && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.envvars == b.envvars && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.report_period == b.report_period && a.role == b.role && a.worker_signature == b.worker_signature;
-}
-
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-struct ta3e796acad3d617428352d1a366552f7 : public std::tuple<
+struct tfd8469c1f315c828082a129ae15367ca : public std::tuple<
   std::shared_ptr<::dessser::gen::worker::t> ,
   Pointer
 > {
   using tuple::tuple;
-  ta3e796acad3d617428352d1a366552f7(std::tuple<std::shared_ptr<::dessser::gen::worker::t> , Pointer> p)
+  tfd8469c1f315c828082a129ae15367ca(std::tuple<std::shared_ptr<::dessser::gen::worker::t> , Pointer> p)
     : std::tuple<std::shared_ptr<::dessser::gen::worker::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(ta3e796acad3d617428352d1a366552f7 const &a, ta3e796acad3d617428352d1a366552f7 const &b) {
+inline bool operator==(tfd8469c1f315c828082a129ae15367ca const &a, tfd8469c1f315c828082a129ae15367ca const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(ta3e796acad3d617428352d1a366552f7 const &a, ta3e796acad3d617428352d1a366552f7 const &b) {
+inline bool operator!=(tfd8469c1f315c828082a129ae15367ca const &a, tfd8469c1f315c828082a129ae15367ca const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta3e796acad3d617428352d1a366552f7 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tfd8469c1f315c828082a129ae15367ca const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -164,14 +164,16 @@ inline std::ostream &operator<<(std::ostream &os, ta3e796acad3d617428352d1a36655
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta3e796acad3d617428352d1a366552f7> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfd8469c1f315c828082a129ae15367ca> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::worker::t> ,Pointer)> to_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::worker::ta3e796acad3d617428352d1a366552f7(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(Pointer)> of_row_binary;
+extern std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(Pointer)> wrap_of_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::worker::t> ,Pointer)> wrap_to_row_binary;
 typedef std::shared_ptr<t> t_ext;
 inline t Deref(t_ext x) { return *x; }
 

@@ -15,9 +15,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 #include "ProgramItem.h"
-#ifdef WITH_ALERTING
-#include "AlertInfoEditor.h"
-#endif
+#include "source/AlertInfoEditor.h"
 #include "source/SourceInfoViewer.h"
 
 #include "source/CodeEdit.h"
@@ -35,7 +33,6 @@ CodeEdit::CodeEdit(QWidget *parent) :
   stackedLayout = new QStackedLayout;
   stackedLayout->setObjectName("stackedLayout");
 
-# ifdef WITH_ALERTING
   alertEditor = new AlertInfoEditor;
   alertEditor->setObjectName("alertEditor");
   connect(alertEditor, &AlertInfoEditor::inputChanged,
@@ -45,7 +42,6 @@ CodeEdit::CodeEdit(QWidget *parent) :
    * extensionsCombo: */
   alertEditorIndex = stackedLayout->addWidget(alertEditor);
   extensionsCombo->addItem(tr("Simple Alert"), "alert");
-# endif
 
   textEditor = new KTextEdit;
   textEditor->setObjectName("textEditor");
@@ -111,10 +107,8 @@ AtomicWidget const *CodeEdit::currentWidget() const
 
   if (editorIndex == textEditorIndex) {
     return textEditor;
-# ifdef WITH_ALERTING
   } else if (editorIndex == alertEditorIndex) {
     return alertEditor;
-# endif
   } else if (editorIndex == infoEditorIndex) {
     return infoEditor;
   }
@@ -240,10 +234,8 @@ void CodeEdit::setSrcPath(std::string const &path)
   if (path == srcPath) return;
   srcPath = path;
 
-# ifdef WITH_ALERTING
   std::shared_ptr<dessser::gen::sync_key::t const> alertKey {
     keyOfSrcPath(path, "alert") };
-# endif
   std::shared_ptr<dessser::gen::sync_key::t const> ramenKey {
     keyOfSrcPath(path, "ramen") };
   std::shared_ptr<dessser::gen::sync_key::t const> infoKey {
@@ -269,7 +261,6 @@ void CodeEdit::setSrcPath(std::string const &path)
       }
     };
 
-# ifdef WITH_ALERTING
   // Look for the alert first:
   auto it { kvs->map.find(alertKey) };
   if (it != kvs->map.end() &&
@@ -286,11 +277,6 @@ void CodeEdit::setSrcPath(std::string const &path)
 
   // Then look for the ramen source that is the second best option:
   it = kvs->map.find(ramenKey);
-# else
-
-  // Look for the raql source first:
-  auto it { kvs->map.find(ramenKey) };
-# endif
   if (it != kvs->map.end() &&
       /* Skip Null values that are created as placeholder during compilation: */
       !isNull(*it->second.val)) {

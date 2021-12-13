@@ -6,13 +6,10 @@
 #include <QComboBox>
 #include <QStackedLayout>
 
-#ifdef WITH_ALERTING
-#include "AlertInfo.h"
-#include "AlertInfoEditor.h"
-#endif
 #include "KTextEdit.h"
 #include "misc_dessser.h"
 #include "ProgramItem.h"
+#include "source/AlertInfoEditor.h"
 #include "source/CodeEdit.h"
 #include "source/SourceCloneDialog.h"
 #include "source/SourceInfoViewer.h"
@@ -35,9 +32,7 @@ CodeEditForm::CodeEditForm(QWidget *parent)
   codeEdit->setObjectName("codeEdit");
   // FIXME: codeEdit should inherit AtomicWidgetAlternative
   setCentralWidget(codeEdit);
-# ifdef WITH_ALERTING
   addWidget(codeEdit->alertEditor, true);
-# endif
   addWidget(codeEdit->textEditor, true);
   addWidget(codeEdit->infoEditor, true);
 
