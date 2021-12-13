@@ -768,6 +768,11 @@ QDebug operator<<(QDebug debug, dessser::gen::fq_function_name::t const &n)
   return printerOfStream<dessser::gen::fq_function_name::t>(debug, n);
 }
 
+QDebug operator<<(QDebug debug, dessser::gen::rc_entry::t const &e)
+{
+  return printerOfStream<dessser::gen::rc_entry::t>(debug, e);
+}
+
 QDebug operator<<(QDebug debug, std::string const &s)
 {
   QDebugStateSaver saver { debug };

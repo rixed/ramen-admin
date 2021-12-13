@@ -9,9 +9,13 @@ class QPushButton;
 class RCEntryEditor;
 
 struct KValue;
-namespace conf {
-  class Value;
-};
+
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+    namespace sync_value { struct t; }
+  }
+}
 
 class NewProgramDialog : public QDialog
 {
@@ -22,13 +26,13 @@ class NewProgramDialog : public QDialog
 
   QPushButton *okButton;
 
-  void mayWriteRC(std::string const &, KValue const &);
+  void mayWriteRC(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   NewProgramDialog(QString const &sourceName = "", QWidget *parent = nullptr);
 
 private:
-  void appendEntry(std::shared_ptr<conf::Value>);
+  void appendEntry(dessser::gen::sync_value::t const &);
 
 protected slots:
   void createProgram();

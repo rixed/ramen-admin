@@ -17,10 +17,8 @@
 #include "LoginWin.h"
 #include "misc.h"
 #include "NamesTreeWin.h"
+#include "source/NewProgramDialog.h"
 #include "source/NewSourceDialog.h"
-#ifdef WITH_PROGRAMS
-#include "NewProgramDialog.h"
-#endif
 #ifdef WITH_OPERATIONS
 #include "OperationsWin.h"
 #endif
@@ -44,9 +42,7 @@ AboutDialog *Menu::aboutDialog;
 SourcesWin *Menu::sourcesWin;
 ConfTreeDialog *Menu::confTreeDialog;
 NewSourceDialog *Menu::newSourceDialog;
-#ifdef WITH_PROGRAMS
 NewProgramDialog *Menu::newProgramDialog;
-# endif
 NewDashboardDialog *Menu::newDashboardDialog;
 ProcessesDialog *Menu::processesDialog;
 RCEditorDialog *Menu::rcEditorDialog;
@@ -78,10 +74,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (!confTreeDialog) confTreeDialog = new ConfTreeDialog;
   if (verbose) qDebug() << "Create NewSourceDialog...";
   if (! newSourceDialog) newSourceDialog = new NewSourceDialog;
-# ifdef WITH_PROGRAMS
   if (verbose) qDebug() << "Create NewProgramDialog...";
   if (! newProgramDialog) newProgramDialog = new NewProgramDialog;
-# endif
   if (verbose) qDebug() << "Create NewDashboardDialog...";
   if (! newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
   if (verbose) qDebug() << "Create ProcessesDialog...";
@@ -130,9 +124,7 @@ void Menu::deleteDialogs()
   danceOfDelLater<SourcesWin>(&sourcesWin);
   danceOfDelLater<ConfTreeDialog>(&confTreeDialog);
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
-# ifdef WITH_PROGRAMS
   danceOfDelLater<NewProgramDialog>(&newProgramDialog);
-# endif
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
   danceOfDelLater<ProcessesDialog>(&processesDialog);
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
@@ -170,12 +162,10 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "New Source…"),
       this, &Menu::openNewSourceDialog,
       QKeySequence::New);
-#   ifdef WITH_PROGRAMS
     fileMenu->addAction(
-      QCoreApplication::translate("QMenuBar", "New Program…"),
+      QCoreApplication::translate("QMenuBar", "Run…"),
       this, &Menu::openNewProgramDialog,
       Qt::CTRL|Qt::Key_R); // _R_un
-#   endif
 
     fileMenu->addSeparator();
   }
@@ -329,12 +319,10 @@ void Menu::openNewSourceDialog()
   showRaised(newSourceDialog);
 }
 
-#ifdef WITH_PROGRAMS
 void Menu::openNewProgramDialog()
 {
   showRaised(newProgramDialog);
 }
-#endif
 
 void Menu::openNewDashboardDialog()
 {

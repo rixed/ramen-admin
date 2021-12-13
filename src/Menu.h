@@ -12,9 +12,7 @@ class LoggerWin;
 class LoginWin;
 class NamesTreeWin;
 class NewDashboardDialog;
-#ifdef WITH_PROGRAMS
 class NewProgramDialog;
-#endif
 class NewSourceDialog;
 #ifdef WITH_OPERATIONS
 class OperationsWin;
@@ -68,9 +66,7 @@ public:
   static SourcesWin *sourcesWin;
   static ConfTreeDialog *confTreeDialog;
   static NewSourceDialog *newSourceDialog;
-# ifdef WITH_PROGRAMS
   static NewProgramDialog *newProgramDialog;
-# endif
   static NewDashboardDialog *newDashboardDialog;
   static ProcessesDialog *processesDialog;
   static RCEditorDialog *rcEditorDialog;
@@ -98,9 +94,7 @@ public:
 public slots:
   void upgradeToFull();  // and show something
   static void openNewSourceDialog();
-# ifdef WITH_PROGRAMS
   static void openNewProgramDialog();
-# endif
   static void openNewDashboardDialog();
   static void openSourceEditor();
   static void openProcesses();

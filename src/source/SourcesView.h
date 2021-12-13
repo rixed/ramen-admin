@@ -63,10 +63,8 @@ public slots:
   // Popup that displays the full content of the info of that source:
   void openInfo(QModelIndex const &);
 
-# ifdef WITH_PROGRAMS
   // Create a new program with that source
   void runSource(QModelIndex const &);
-# endif
 
   // Expand that item recursively
   void expandRows(QModelIndex const &parent, int first, int last);

@@ -17,9 +17,7 @@
 #include "ConfTreeEditorDialog.h"
 #include "misc.h"
 #include "misc_dessser.h"
-#ifdef WITH_PROGRAMS
 #include "source/NewProgramDialog.h"
-#endif
 #include "source/SourcesModel.h"
 #include "widgetTools.h"
 
@@ -73,12 +71,10 @@ SourcesView::SourcesView(SourcesModel *sourceModel_, QWidget *parent) :
   sourcesList->setItemDelegateForColumn(SourcesModel::Action1, detailButton);
   connect(detailButton, &ButtonDelegate::clicked,
           this, &SourcesView::openInfo);
-# ifdef WITH_PROGRAMS
   ButtonDelegate *runButton { new ButtonDelegate(3, this) };
   sourcesList->setItemDelegateForColumn(SourcesModel::Action2, runButton);
   connect(runButton, &ButtonDelegate::clicked,
           this, &SourcesView::runSource);
-# endif
 
   sourcesList->resizeColumnToContents(SourcesModel::Action1);
   sourcesList->resizeColumnToContents(SourcesModel::Action2);
@@ -184,7 +180,6 @@ void SourcesView::openInfo(QModelIndex const &index)
   dialog->show();
 }
 
-#ifdef WITH_PROGRAMS
 void SourcesView::runSource(QModelIndex const &index)
 {
   SourcesModel::TreeItem const *item {
@@ -195,7 +190,6 @@ void SourcesView::runSource(QModelIndex const &index)
   dialog->show();
   dialog->raise();
 }
-#endif
 
 void SourcesView::expandRows(QModelIndex const &parent, int first, int last)
 {

@@ -115,6 +115,7 @@ QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::base const &);
 QDebug operator<<(QDebug, dessser::gen::dashboard_widget::chart const &);
 QDebug operator<<(QDebug, dessser::gen::fq_function_name::t const &);
+QDebug operator<<(QDebug, dessser::gen::rc_entry::t const &);
 
 /* Also to avoid strings to be converted into some variant accepting strings
  * defined in sync_key (Versions for instance), actually define operator<< for

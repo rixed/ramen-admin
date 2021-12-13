@@ -157,6 +157,7 @@ HEADERS += \
   RollButtonDelegate.h \
   FunctionSelector.h \
   GrowingTextEdit.h \
+  PopupListView.h \
   chart/Ticks.h \
   chart/AbstractTimeLine.h \
   chart/TimeLine.h \
@@ -194,6 +195,7 @@ HEADERS += \
   source/SourceCloneDialog.h \
   source/CodeEditForm.h \
   source/CodeEdit.h \
+  source/NewProgramDialog.h \
   source/NewSourceDialog.h \
   source/SourcesModel.h \
   source/SourcesView.h \
@@ -342,6 +344,7 @@ SOURCES += \
   RollButtonDelegate.cpp \
   FunctionSelector.cpp \
   GrowingTextEdit.cpp \
+  PopupListView.cpp \
   chart/Ticks.cpp \
   chart/AbstractTimeLine.cpp \
   chart/TimeLine.cpp \
@@ -379,6 +382,7 @@ SOURCES += \
   source/SourceCloneDialog.cpp \
   source/CodeEditForm.cpp \
   source/CodeEdit.cpp \
+  source/NewProgramDialog.cpp \
   source/NewSourceDialog.cpp \
   source/SourcesModel.cpp \
   source/SourcesView.cpp \
