@@ -1,8 +1,9 @@
 #ifndef STORAGEPIES_H_190522
 #define STORAGEPIES_H_190522
-#include "StorageSlice.h"
 #include <QTimer>
 #include <QWidget>
+
+#include "storage/StorageSlice.h"
 
 class FunctionItem;
 class GraphModel;

@@ -4,12 +4,17 @@ extern "C" {
 # include <sys/socket.h>
 # include <netinet/in.h>
 # include <arpa/inet.h>
+// For getpid():
+# include <sys/types.h>
+# include <unistd.h>
 }
 #include <QCoreApplication>
 
 #include "desssergen/dashboard_widget.h"
 #include "desssergen/fq_function_name.h"
 #include "desssergen/raql_type.h"
+#include "desssergen/replay.h"
+#include "desssergen/replay_request.h"
 #include "desssergen/source_info.h"
 #include "desssergen/sync_server_msg.h"
 #include "desssergen/sync_client_msg.h"
@@ -17,6 +22,9 @@ extern "C" {
 #include "misc.h"
 
 #include "misc_dessser.h"
+
+std::string const respKeyPrefix {
+  std::to_string(getpid()) + "_" + std::to_string(std::rand()) + "_" };
 
 std::shared_ptr<dessser::gen::raql_value::t const> const vnull {
   std::make_shared<dessser::gen::raql_value::t>(
@@ -322,6 +330,30 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
 std::string const siteFqName(dessser::gen::fq_function_name::t const &s)
 {
   return s.site + ':' + s.program + '/' + s.function;
+}
+
+std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
+  std::string const &site, std::string const &program, std::string const &function,
+  double since, double until,
+  std::shared_ptr<dessser::gen::sync_key::t const> respKey,
+  bool explain)
+{
+  std::shared_ptr<dessser::gen::fq_function_name::t> fq_target {
+    std::make_shared<dessser::gen::fq_function_name::t>(
+      function, program, site) };
+
+  std::shared_ptr<dessser::gen::replay_request::t> req {
+    std::make_shared<dessser::gen::replay_request::t>(
+      explain,
+      std::const_pointer_cast<dessser::gen::sync_key::t>(respKey),
+      since,
+      std::const_pointer_cast<dessser::gen::fq_function_name::t>(fq_target),
+      until) };
+
+  return
+    std::make_shared<dessser::gen::sync_value::t>(
+      std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
+      std::const_pointer_cast<dessser::gen::replay_request::t>(req));
 }
 
 // Returns the TargetConfig value, or nullptr:
@@ -771,6 +803,11 @@ QDebug operator<<(QDebug debug, dessser::gen::fq_function_name::t const &n)
 QDebug operator<<(QDebug debug, dessser::gen::rc_entry::t const &e)
 {
   return printerOfStream<dessser::gen::rc_entry::t>(debug, e);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::replay::t const &r)
+{
+  return printerOfStream<dessser::gen::replay::t>(debug, r);
 }
 
 QDebug operator<<(QDebug debug, std::string const &s)

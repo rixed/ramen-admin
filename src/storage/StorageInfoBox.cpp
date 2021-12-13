@@ -1,21 +1,23 @@
 #include <QGridLayout>
 #include <QLabel>
-#include "conf.h"
-#include "GraphModel.h"
-#include "SiteItem.h"
-#include "ProgramItem.h"
-#include "FunctionItem.h"
-#include "StorageInfoBox.h"
 
-StorageInfoBox::StorageInfoBox(GraphModel *graphModel_, QWidget *parent) :
-  QWidget(parent),
-  graphModel(graphModel_),
-  recomputeTimer(this),
-  knowAllArcWorkers(false),
-  knowAllArcFiles(false),
-  knowAllArcBytes(false)
+#include "FunctionItem.h"
+#include "GraphModel.h"
+#include "misc.h"
+#include "ProgramItem.h"
+#include "SiteItem.h"
+
+#include "storage/StorageInfoBox.h"
+
+StorageInfoBox::StorageInfoBox(GraphModel *graphModel_, QWidget *parent)
+  : QWidget(parent),
+    graphModel(graphModel_),
+    recomputeTimer(this),
+    knowAllArcWorkers(false),
+    knowAllArcFiles(false),
+    knowAllArcBytes(false)
 {
-  QGridLayout *layout = new QGridLayout();
+  QGridLayout *layout { new QGridLayout() };
 
   numArcWorkersWdg = new QLabel(this);
   numArcFilesWdg = new QLabel(this);
@@ -43,7 +45,7 @@ StorageInfoBox::StorageInfoBox(GraphModel *graphModel_, QWidget *parent) :
           this, &StorageInfoBox::recomputeStats);
 }
 
-static int recomputeTimeout = 1000;
+static int recomputeTimeout { 1000 };
 
 static QString orMore(QString const s, bool knowAll)
 {
@@ -53,19 +55,19 @@ static QString orMore(QString const s, bool knowAll)
 
 void StorageInfoBox::recomputeStats()
 {
-  unsigned countWorkers = 0;
-  unsigned countFiles = 0;
-  size_t countBytes = 0;
-  bool all_workers = true;
-  bool all_files = true;
-  bool all_bytes = true;
+  unsigned countWorkers { 0 };
+  unsigned countFiles { 0 };
+  size_t countBytes { 0 };
+  bool all_workers { true };
+  bool all_files { true };
+  bool all_bytes { true };
   // TODO: lastAllocatorRun (must export it first)
 
   for (auto &siteItem : graphModel->sites) {
     for (auto &programItem : siteItem->programs) {
       for (auto &functionItem : programItem->functions) {
-        std::shared_ptr<Function const> function =
-          std::static_pointer_cast<Function const>(functionItem->shared);
+        std::shared_ptr<Function const> function {
+          std::static_pointer_cast<Function const>(functionItem->shared) };
         if (function->allocArcBytes) {
           if (*function->allocArcBytes > 0) countWorkers ++;
         } else all_workers = false;

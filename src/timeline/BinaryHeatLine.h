@@ -6,14 +6,11 @@
 #include <QColor>
 #include <QPair>
 #include <QVector>
-#include "HeatLine.h"
 
-namespace conf {
-  struct TimeRange;
-};
+#include "desssergen/time_range.h"
+#include "timeline/HeatLine.h"
 
-class BinaryHeatLine : public HeatLine
-{
+class BinaryHeatLine : public HeatLine {
   Q_OBJECT
 
 public:
@@ -24,7 +21,7 @@ public:
     QWidget *parent = nullptr);
 
   void add(qreal start, qreal stop);
-  void setArchivedTimes(conf::TimeRange const &);
+  void setArchivedTimes(dessser::gen::time_range::t const &);
 };
 
 #endif

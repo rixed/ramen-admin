@@ -1,12 +1,12 @@
 #include <QDebug>
 #include <limits>
 
-#include "AbstractTimeLine.h"
 #include "misc.h"
-#include "TimeLine.h"
+#include "timeline/AbstractTimeLine.h"
+#include "timeline/TimeLine.h"
 #include "TimeRange.h"
 
-#include "TimeLineGroup.h"
+#include "timeline/TimeLineGroup.h"
 
 static bool const verbose { false };
 

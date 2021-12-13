@@ -3,7 +3,7 @@
 /* A Timeline is an AbstractTimeLine that displays an axis with tick
  * marks and labels.
  */
-#include "AbstractTimeLine.h"
+#include "timeline/AbstractTimeLine.h"
 
 class TimeLine : public AbstractTimeLine
 {

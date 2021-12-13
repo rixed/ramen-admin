@@ -23,9 +23,7 @@ class QMenuBar;
 class RCEditorDialog;
 class ServerInfoWin;
 class SourcesWin;
-#ifdef WITH_STORAGE
 class StorageWin;
-#endif
 #ifdef WITH_ALERTING
 class AlertingWin;
 #endif
@@ -71,9 +69,7 @@ public:
   static ProcessesDialog *processesDialog;
   static RCEditorDialog *rcEditorDialog;
   static NamesTreeWin *namesTreeWin;
-# ifdef WITH_STORAGE
   static StorageWin *storageWin;
-# endif
   static ServerInfoWin *serverInfoWin;
 # ifdef WITH_OPERATIONS
   static OperationsWin *operationsWin;
@@ -102,9 +98,7 @@ public slots:
   static void openConfTreeDialog();
   static void openAboutDialog();
   static void openNamesTreeWin();
-# ifdef WITH_STORAGE
   static void openStorageWin();
-# endif
 # ifdef WITH_ALERTING
   static void openAlertingWin();
 # endif

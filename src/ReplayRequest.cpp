@@ -1,7 +1,6 @@
 #include <algorithm>
 #include <cstdlib>
 #include <mutex>
-#include <unistd.h>
 #include <QtGlobal>
 #include <QTimer>
 #include <QDebug>
@@ -24,9 +23,6 @@
 static bool const verbose { false };
 
 static std::chrono::milliseconds const batchReplaysForMs { 2000 };
-
-std::string const respKeyPrefix(
-  std::to_string(getpid()) + "_" + std::to_string(std::rand()) + "_");
 
 static unsigned respKeySeq;
 static std::mutex respKeySeqLock;
@@ -115,23 +111,8 @@ void ReplayRequest::sendRequest()
   // Create the response key:
   Menu::getClient()->sendNew(respKey);
 
-  // Then the replay request:
-  std::shared_ptr<dessser::gen::fq_function_name::t const> fq_target {
-    std::make_shared<dessser::gen::fq_function_name::t const>(
-      function, program, site) };
-
-  std::shared_ptr<dessser::gen::replay_request::t const> req {
-    std::make_shared<dessser::gen::replay_request::t const>(
-      false, // explain
-      std::const_pointer_cast<dessser::gen::sync_key::t>(respKey),
-      since,
-      std::const_pointer_cast<dessser::gen::fq_function_name::t>(fq_target),
-      until) };
-
   std::shared_ptr<dessser::gen::sync_value::t const> val {
-    std::make_shared<dessser::gen::sync_value::t const>(
-      std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
-      std::const_pointer_cast<dessser::gen::replay_request::t>(req)) };
+    makeReplayRequest(site, program, function, since, until, respKey) };
 
   if (verbose)
     qDebug() << "ReplayRequest::sendRequest:"

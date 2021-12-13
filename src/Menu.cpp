@@ -27,9 +27,7 @@
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"
 #include "source/SourcesWin.h"
-#ifdef WITH_STORAGE
-#include "StorageWin.h"
-#endif
+#include "storage/StorageWin.h"
 #ifdef WITH_ALERTING
 #include "alerting/AlertingWin.h"
 #endif
@@ -47,9 +45,7 @@ NewDashboardDialog *Menu::newDashboardDialog;
 ProcessesDialog *Menu::processesDialog;
 RCEditorDialog *Menu::rcEditorDialog;
 NamesTreeWin *Menu::namesTreeWin;
-#ifdef WITH_STORAGE
 StorageWin *Menu::storageWin;
-#endif
 ServerInfoWin *Menu::serverInfoWin;
 #ifdef WITH_OPERATIONS
 OperationsWin *Menu::operationsWin;
@@ -84,10 +80,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (! rcEditorDialog) rcEditorDialog = new RCEditorDialog;
   if (verbose) qDebug() << "Create NamesTreeWin...";
   if (! namesTreeWin) namesTreeWin = new NamesTreeWin;
-# ifdef WITH_STORAGE
   if (verbose) qDebug() << "Create StorageWin...";
   if (! storageWin) storageWin = new StorageWin;
-# endif
   if (verbose) qDebug() << "Create ServerInfoWin...";
   if (! serverInfoWin) serverInfoWin = new ServerInfoWin(srvUrl);
 # ifdef WITH_OPERATIONS
@@ -109,9 +103,7 @@ void Menu::showSomething()
   someOpened |= confTreeDialog->isVisible();
   someOpened |= processesDialog->isVisible();
   someOpened |= rcEditorDialog->isVisible();
-# ifdef WITH_STORAGE
   someOpened |= storageWin->isVisible();
-# endif
 
   if (! someOpened) sourcesWin->show();
 }
@@ -129,9 +121,7 @@ void Menu::deleteDialogs()
   danceOfDelLater<ProcessesDialog>(&processesDialog);
   danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
-# ifdef WITH_STORAGE
   danceOfDelLater<StorageWin>(&storageWin);
-# endif
   danceOfDelLater<ServerInfoWin>(&serverInfoWin);
 # ifdef WITH_OPERATIONS
   danceOfDelLater<OperationsWin>(&operationsWin);
@@ -211,12 +201,10 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "Running Configuration…"),
       this, &Menu::openRCEditor);
 
-#   ifdef WITH_STORAGE
     /* The Storage configuration window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Storage Configuration…"),
       this, &Menu::openStorageWin);
-#   endif
 
 #   ifdef WITH_ALERTING
     /* The alerting window: */
@@ -365,14 +353,12 @@ void Menu::openNamesTreeWin()
   showRaised(namesTreeWin);
 }
 
-#ifdef WITH_STORAGE
 void Menu::openStorageWin()
 {
   // If opened too early that window will actually be deleted on close:
   if (! storageWin) storageWin = new StorageWin;
   showRaised(storageWin);
 }
-#endif
 
 void Menu::openServerInfoWin()
 {

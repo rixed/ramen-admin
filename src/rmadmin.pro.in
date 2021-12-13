@@ -136,6 +136,12 @@ HEADERS += \
   TimeRange.h \
   TimeRangeViewer.h \
   TimeRangeEdit.h \
+  timeline/AbstractTimeLine.h \
+  timeline/TimeLine.h \
+  timeline/TimeLineGroup.h \
+  timeline/TimeLineView.h \
+  timeline/HeatLine.h \
+  timeline/BinaryHeatLine.h \
   source/SourceInfoViewer.h \
   PathSuffixValidator.h \
   RCEntryEditor.h \
@@ -159,9 +165,6 @@ HEADERS += \
   GrowingTextEdit.h \
   PopupListView.h \
   chart/Ticks.h \
-  chart/AbstractTimeLine.h \
-  chart/TimeLine.h \
-  chart/TimeLineGroup.h \
   chart/FactorsEditor.h \
   chart/FactorsDelegate.h \
   chart/TimeChartAutomatonCustomize.h \
@@ -200,6 +203,16 @@ HEADERS += \
   source/SourcesModel.h \
   source/SourcesView.h \
   source/SourcesWin.h \
+  storage/StorageTimeline.h \
+  storage/StorageSlice.h \
+  storage/StoragePies.h \
+  storage/StorageTreeModel.h \
+  storage/StorageTreeView.h \
+  storage/StorageForm.h \
+  storage/StorageInfoBox.h \
+  storage/StorageInfo.h \
+  storage/StorageView.h \
+  storage/StorageWin.h \
   Menu.h \
   ReplayRequest.h \
   PastData.h \
@@ -323,6 +336,12 @@ SOURCES += \
   TimeRange.cpp \
   TimeRangeViewer.cpp \
   TimeRangeEdit.cpp \
+  timeline/AbstractTimeLine.cpp \
+  timeline/TimeLine.cpp \
+  timeline/TimeLineGroup.cpp \
+  timeline/TimeLineView.cpp \
+  timeline/HeatLine.cpp \
+  timeline/BinaryHeatLine.cpp \
   source/SourceInfoViewer.cpp \
   PathSuffixValidator.cpp \
   RCEntryEditor.cpp \
@@ -346,9 +365,6 @@ SOURCES += \
   GrowingTextEdit.cpp \
   PopupListView.cpp \
   chart/Ticks.cpp \
-  chart/AbstractTimeLine.cpp \
-  chart/TimeLine.cpp \
-  chart/TimeLineGroup.cpp \
   chart/FactorsEditor.cpp \
   chart/FactorsDelegate.cpp \
   chart/TimeChartAutomatonCustomize.cpp \
@@ -387,6 +403,16 @@ SOURCES += \
   source/SourcesModel.cpp \
   source/SourcesView.cpp \
   source/SourcesWin.cpp \
+  storage/StorageTimeline.cpp \
+  storage/StorageSlice.cpp \
+  storage/StoragePies.cpp \
+  storage/StorageTreeModel.cpp \
+  storage/StorageTreeView.cpp \
+  storage/StorageForm.cpp \
+  storage/StorageInfoBox.cpp \
+  storage/StorageInfo.cpp \
+  storage/StorageView.cpp \
+  storage/StorageWin.cpp \
   Menu.cpp \
   ReplayRequest.cpp \
   PastData.cpp \

@@ -1,9 +1,5 @@
 #ifndef STORAGETIMELINE_H_190522
 #define STORAGETIMELINE_H_190522
-#include <string>
-#include <QWidget>
-#include "conf.h"
-
 /* Here we want to display two things:
  *
  * - A timeline of all archives, per worker.
@@ -28,6 +24,11 @@
  * explain a query, ie tells what archives are needed to fulfill a given
  * replay query.
  */
+#include <memory>
+#include <string>
+#include <QWidget>
+
+#include "ConfChange.h"
 
 class FunctionItem;
 class FunctionSelector;
@@ -37,8 +38,13 @@ class QPushButton;
 class TimeLineView;
 class TimeRangeEdit;
 
-class StorageTimeline : public QWidget
-{
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+  }
+}
+
+class StorageTimeline : public QWidget {
   Q_OBJECT
 
   TimeLineView *timeLineView;
@@ -46,9 +52,9 @@ class StorageTimeline : public QWidget
   TimeRangeEdit *explainTimeRange;
   QPushButton *explainButton;
   QPushButton *explainReset;
-  std::string respKey;
+  std::shared_ptr<dessser::gen::sync_key::t const> respKey;
 
-  void receiveExplain(std::string const &, KValue const &);
+  void receiveExplain(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
 
 public:
   StorageTimeline(GraphModel *, QWidget *parent = nullptr);

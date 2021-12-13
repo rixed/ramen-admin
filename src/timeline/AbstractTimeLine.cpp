@@ -13,7 +13,7 @@
 #include "misc.h"
 #include "TimeRange.h"
 
-#include "chart/AbstractTimeLine.h"
+#include "timeline/AbstractTimeLine.h"
 
 static bool const verbose { false };
 

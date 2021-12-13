@@ -10,6 +10,8 @@ using namespace QtCharts;
 struct Key {
   QString name[3];
 
+//  Key(const Key&) = default;
+
   void reset() {
     for (unsigned r = 0; r < 3; r++) name[r].clear();
   }
@@ -19,11 +21,11 @@ struct Key {
     return name[0].length() || name[1].length() || name[2].length();
   }
 
-  Key &operator=(Key const &rhs)
+/*  Key &operator=(Key const &rhs)
   {
     for (unsigned r = 0; r < 3; r ++) name[r] = rhs.name[r];
     return *this;
-  }
+  } */
 
   bool operator==(Key const &other) const
   {

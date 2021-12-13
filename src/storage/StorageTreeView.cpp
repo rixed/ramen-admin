@@ -1,11 +1,13 @@
 #include <QDebug>
 #include <QHeaderView>
 #include <QTimer>
+
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "misc.h"
-#include "StorageTreeModel.h"
-#include "StorageTreeView.h"
+#include "storage/StorageTreeModel.h"
+
+#include "storage/StorageTreeView.h"
 
 StorageTreeView::StorageTreeView(
     GraphModel *graphModel,
@@ -53,14 +55,14 @@ void StorageTreeView::expandRows(QModelIndex const &parent, int first, int last)
 
 void StorageTreeView::mayInvalidateModel()
 {
-  static int const invalidateModelTimeout = 1000; // ms
+  static int const invalidateModelTimeout { 1000 }; // ms
   invalidateModelTimer->start(invalidateModelTimeout);
 }
 
 void StorageTreeView::doInvalidateModel()
 {
-  StorageTreeModel *storageTreeModel =
-    dynamic_cast<StorageTreeModel *>(model());
+  StorageTreeModel *storageTreeModel {
+    dynamic_cast<StorageTreeModel *>(model()) };
   if (! storageTreeModel) {
     qCritical() << "Cannot invalidate model: not a StorageTreeModel!?";
     return;

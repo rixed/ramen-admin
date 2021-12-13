@@ -1,15 +1,15 @@
-#include <cassert>
 #include <QDebug>
 #include <QPainter>
 #include <QPaintEvent>
 #include <QRect>
-#include "HeatLine.h"
+
+#include "timeline/HeatLine.h"
 
 HeatLine::HeatLine(
-    qreal beginOftime, qreal endOfTime,
-    bool withCursor,
-    bool doScroll,
-    QWidget *parent)
+  qreal beginOftime, qreal endOfTime,
+  bool withCursor,
+  bool doScroll,
+  QWidget *parent)
   : AbstractTimeLine(beginOftime, endOfTime, withCursor, doScroll, parent)
 {
   blocks.reserve(20);
@@ -17,23 +17,24 @@ HeatLine::HeatLine(
 
 void HeatLine::paintEvent(QPaintEvent *event)
 {
-  QPainter painter(this);
+  QPainter painter { this };
   painter.setPen(Qt::NoPen);
 
-  static QColor const hoveredColor("dimgrey");
+  static QColor const hoveredColor { "dimgrey" };
   if (hovered)
     painter.fillRect(event->rect(), hoveredColor);
 
   for (int i = 0; i < blocks.size(); i ++) {
-    Block const &block = blocks[i];
+    Block const &block { blocks[i] };
 
-    qreal const start(block.start);
-    qreal const stop(block.stop);
+    qreal const start { block.start };
+    qreal const stop { block.stop };
 
-    int const xStart(toPixel(start));
+    qreal const xStart { toPixel(start) };
 
     painter.setBrush(hovered ? block.color.lighter() : block.color);
-    painter.drawRect(xStart, 0, toPixel(stop) - xStart, height());
+    painter.drawRect(
+      QRectF { xStart, 0., toPixel(stop) - xStart, qreal(height()) });
   }
 
   // Paint the cursor over the heatmap:

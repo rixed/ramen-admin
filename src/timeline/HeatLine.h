@@ -4,10 +4,10 @@
 #include <QColor>
 #include <QPair>
 #include <QList>
-#include "chart/AbstractTimeLine.h"
 
-class HeatLine : public AbstractTimeLine
-{
+#include "timeline/AbstractTimeLine.h"
+
+class HeatLine : public AbstractTimeLine {
   Q_OBJECT
 
 public:

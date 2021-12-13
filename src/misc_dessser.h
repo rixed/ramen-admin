@@ -21,6 +21,7 @@ namespace dessser {
       struct base;
     }
     namespace raql_value { struct t; }
+    namespace replay { struct t; }
     namespace rc_entry { struct t; }
     namespace source_info { struct compiled_program; }
     namespace sync_client_cmd { struct t; }
@@ -34,6 +35,7 @@ namespace dessser {
 }
 
 // Some commonly used values:
+extern std::string const respKeyPrefix;
 extern std::shared_ptr<dessser::gen::raql_value::t const> const vnull;
 extern std::shared_ptr<dessser::gen::sync_value::t const> const nullVal;
 extern std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig;
@@ -81,6 +83,11 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
 
 std::string const siteFqName(dessser::gen::fq_function_name::t const &);
 
+std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
+  std::string const &site, std::string const &program, std::string const &function,
+  double since, double until, std::shared_ptr<dessser::gen::sync_key::t const> respKey,
+  bool explain = false);
+
 // Returns the TargetConfig value, or nullptr:
 dessser::Arr<std::shared_ptr<dessser::gen::rc_entry::t>> const *getTargetConfig(
   dessser::gen::sync_value::t const &);
@@ -116,6 +123,7 @@ QDebug operator<<(QDebug, dessser::gen::raql_type::base const &);
 QDebug operator<<(QDebug, dessser::gen::dashboard_widget::chart const &);
 QDebug operator<<(QDebug, dessser::gen::fq_function_name::t const &);
 QDebug operator<<(QDebug, dessser::gen::rc_entry::t const &);
+QDebug operator<<(QDebug, dessser::gen::replay::t const &);
 
 /* Also to avoid strings to be converted into some variant accepting strings
  * defined in sync_key (Versions for instance), actually define operator<< for
