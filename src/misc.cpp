@@ -76,26 +76,27 @@ QString const stringOfDate(double d)
   return QDateTime::fromSecsSinceEpoch(d).toString();
 }
 
+static void reduce(QString &s, double &d, double secs, QString const unit)
+{
+  if (d < secs) return;
+
+  int unit_ { int(floor(d / secs)) };
+  if (s.length() > 0) s += QString(", ");
+  s += QString::number(unit_) + unit;
+  if (unit.back() != 's' && unit_ > 1) s += 's';
+  d -= secs * unit_;
+}
+
 QString const stringOfDuration(double d)
 {
   QString s;
 
-# define REDUCE(secs, unit) \
-  if (d > secs) { \
-    unsigned unit_ = floor(d / secs); \
-    if (s.length() > 0) s += QString(", "); \
-    s += QString::number(unit_) + unit; \
-    d -= secs * unit_; \
-  }
-
-  REDUCE(86400, " days");
-  REDUCE(3600, " hours");
-  REDUCE(60, " mins");
-  REDUCE(1, " secs");
-  REDUCE(1e-3, "ms");
-  REDUCE(1e-6, "µs");
-
-# undef REDUCE
+  reduce(s, d, 86400, " day");
+  reduce(s, d, 3600, " hour");
+  reduce(s, d, 60, " min");
+  reduce(s, d, 1, " sec");
+  reduce(s, d, 1e-3, "ms");
+  reduce(s, d, 1e-6, "µs");
 
   return s.isEmpty() ? QString("0 secs") : s;
 }
