@@ -182,7 +182,7 @@ void StorageTimeline::resetQueryPlan()
 void StorageTimeline::receiveExplain(
   std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv)
 {
-  if (*key != *respKey) return;
+  if (!respKey || *key != *respKey) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Replay) {
     qCritical() << "StorageTimeline: explain answer is not a Replay?!";
