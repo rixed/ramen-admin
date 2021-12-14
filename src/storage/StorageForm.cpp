@@ -26,6 +26,7 @@ StorageForm::StorageForm(QWidget *parent)
       dessser::VOID) };
   KIntEditor *totalSizeEdit { new KIntEditor(u64OfQString, cw) };
   totalSizeEdit->setKey(totalSizeKey);
+  totalSizeEdit->setValueFromStore();
   totalSizeEdit->setPlaceholderText(tr("Size in bytes"));
 
   static std::shared_ptr<dessser::gen::sync_key::t const> recallCostKey {
@@ -35,6 +36,7 @@ StorageForm::StorageForm(QWidget *parent)
       dessser::VOID) };
   KFloatEditor *recallCostEdit { new KFloatEditor(cw, 0., 1.) };
   recallCostEdit->setKey(recallCostKey);
+  recallCostEdit->setValueFromStore();
   recallCostEdit->setPlaceholderText(tr("Cost of reading vs. computing"));
 
   QFormLayout *formLayout { new QFormLayout };
