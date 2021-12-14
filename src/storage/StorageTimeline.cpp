@@ -8,7 +8,7 @@
 #include <QScrollArea>
 #include <QVBoxLayout>
 
-#include "chart/TimeLineView.h"
+#include "timeline/TimeLineView.h"
 #include "ConfClient.h"
 #include "desssergen/fq_function_name.h"
 #include "desssergen/replay.h"
