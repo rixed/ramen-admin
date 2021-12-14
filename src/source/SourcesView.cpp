@@ -23,7 +23,7 @@
 
 #include "source/SourcesView.h"
 
-static bool const verbose { true };
+static bool const verbose { false };
 
 SourcesTreeView::SourcesTreeView(QWidget *parent) :
   QTreeView(parent) {}

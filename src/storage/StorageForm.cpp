@@ -12,8 +12,8 @@
 
 #include "storage/StorageForm.h"
 
-StorageForm::StorageForm(QWidget *parent) :
-  AtomicForm(parent)
+StorageForm::StorageForm(QWidget *parent)
+  : AtomicForm(true, parent)
 {
   QWidget *cw { new QWidget(this) };
 

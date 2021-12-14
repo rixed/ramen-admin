@@ -48,7 +48,7 @@ AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent)
    * "delete" before it, in fear that users might go for the right-most
    * button out of habit. */
   buttonsLayout = new QHBoxLayout;
-  Resources *r = Resources::get();
+  Resources *r { Resources::get() };
   editButton = new QPushButton(r->settingsPixmap, tr("&edit"));
   buttonsLayout->addWidget(editButton);
   connect(editButton, &QPushButton::clicked,
@@ -154,8 +154,8 @@ void AtomicForm::addWidget(AtomicWidget *aw, bool deletable)
   widgets.emplace_back(aw);
 
   if (verbose)
-    qDebug() << "AtomicForm: added widget with key" << key2str(aw->key())
-             << "now has" << widgets.size() << "widgets";
+    qDebug() << "AtomicForm::addWidget: added widget with key" << key2str(aw->key())
+             << ", now has" << widgets.size() << "widgets";
 
   connect(aw, &AtomicWidget::destroyed,
           this, &AtomicForm::removeWidget);
@@ -341,6 +341,9 @@ void AtomicForm::setEnabled(bool enabled)
 {
   bool const wasEnabled { isEnabled() };
 
+  if (verbose)
+    qDebug() << "AtomicForm::setEnabled(" << enabled << ", was" << wasEnabled << ")";
+
   if (enabled == wasEnabled) return;
 
   if (verbose)
@@ -392,8 +395,8 @@ void AtomicForm::setOwner(
   if (verbose)
     qDebug() << "AtomicForm: Owner of" << *k << "is now"
              << (u.has_value() ? *u : "none")
-             << "(I am" << *my_uid
-             << (is_me ? ", that's me!)" : ", not me)");
+             << "(I am" << *my_uid << ", so that is"
+             << (is_me ? "" : "not") << "me)";
 
   if (is_me) {
     locked.insert(k);
@@ -406,12 +409,13 @@ void AtomicForm::setOwner(
 
 bool AtomicForm::allLocked() const
 {
-  bool const ret(
+  bool const ret {
     std::all_of(widgets.cbegin(), widgets.cend(),
-                [this](FormWidget const &w) {
-    std::shared_ptr<dessser::gen::sync_key::t const> key { w.widget->key() };
-    return !key || locked.find(key) != locked.end();
-  }));
+                [this](FormWidget const &w)
+      {
+        std::shared_ptr<dessser::gen::sync_key::t const> key { w.widget->key() };
+        return !key || locked.find(key) != locked.end();
+      }) };
 
   if (verbose) {
     if (ret) {

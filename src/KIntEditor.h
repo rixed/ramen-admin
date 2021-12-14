@@ -24,6 +24,7 @@ class KIntEditor : public AtomicWidget
   Q_OBJECT
 
   std::function<std::shared_ptr<dessser::gen::sync_value::t>(QString const &)> ofQString;
+
   QLineEdit *lineEdit;
 
 public:
@@ -39,12 +40,13 @@ public:
     lineEdit->setPlaceholderText(s);
   }
 
-  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
-  void setEnabled(bool);
+  std::shared_ptr<dessser::gen::sync_value::t const> getValue() const override;
+
+  void setEnabled(bool) override;
 
 public slots:
   bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+    std::shared_ptr<dessser::gen::sync_value::t const>) override;
 };
 
 #endif
