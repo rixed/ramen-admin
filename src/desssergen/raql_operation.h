@@ -78,7 +78,11 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t78cec4f982724
 struct external_format : public std::variant<
   ::dessser::gen::raql_operation::t78cec4f9827249604fe947034c575f2a, // CSV
   Lst<dessser::gen::field_type::t_ext> // RowBinary
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(external_format const &a, external_format const &b) {
   if (a.index() != b.index()) return false;
@@ -176,14 +180,18 @@ inline std::ostream &operator<<(std::ostream &os, t66e84af8ac3d220e6953b80939519
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t66e84af8ac3d220e6953b809395192f8> const r) { os << *r; return os; }
 
-struct td6b783eb78996074f9384054f64b14ae : public std::variant<
+struct tbbc319188017fc622f05dfada38341dc : public std::variant<
   Void, // Beginning
   dessser::gen::raql_expr::t_ext, // OffsetFromEnd
   Void, // SaveInState
   ::dessser::gen::raql_operation::t66e84af8ac3d220e6953b809395192f8 // UseKafkaGroupCoordinator
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 4 };
+};
 
-inline bool operator==(td6b783eb78996074f9384054f64b14ae const &a, td6b783eb78996074f9384054f64b14ae const &b) {
+inline bool operator==(tbbc319188017fc622f05dfada38341dc const &a, tbbc319188017fc622f05dfada38341dc const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Beginning
@@ -193,17 +201,17 @@ inline bool operator==(td6b783eb78996074f9384054f64b14ae const &a, td6b783eb7899
   };
   return false;
 }
-inline bool operator!=(td6b783eb78996074f9384054f64b14ae const &a, td6b783eb78996074f9384054f64b14ae const &b) {
+inline bool operator!=(tbbc319188017fc622f05dfada38341dc const &a, tbbc319188017fc622f05dfada38341dc const &b) {
   return !operator==(a, b);
 }
-enum Constr_td6b783eb78996074f9384054f64b14ae {
+enum Constr_tbbc319188017fc622f05dfada38341dc {
   Beginning,
   OffsetFromEnd,
   SaveInState,
   UseKafkaGroupCoordinator,
 };
 
-inline std::ostream &operator<<(std::ostream &os, td6b783eb78996074f9384054f64b14ae const &v) {
+inline std::ostream &operator<<(std::ostream &os, tbbc319188017fc622f05dfada38341dc const &v) {
   switch (v.index()) {
     case 0: os << "Beginning" << std::get<0>(v); break;
     case 1: os << "OffsetFromEnd " << std::get<1>(v); break;
@@ -213,24 +221,24 @@ inline std::ostream &operator<<(std::ostream &os, td6b783eb78996074f9384054f64b1
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td6b783eb78996074f9384054f64b14ae> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbbc319188017fc622f05dfada38341dc> const v) { os << *v; return os; }
 
-struct t39c49449a1a829aeb161993f390f9dbf {
+struct t30bd731cf6638e267c87018bc3ca5b81 {
   Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> options;
   std::optional<dessser::gen::raql_expr::t_ext> partitions;
-  ::dessser::gen::raql_operation::td6b783eb78996074f9384054f64b14ae restart_from;
+  ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc restart_from;
   dessser::gen::raql_expr::t_ext topic;
-  t39c49449a1a829aeb161993f390f9dbf(Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> options_, std::optional<dessser::gen::raql_expr::t_ext> partitions_, ::dessser::gen::raql_operation::td6b783eb78996074f9384054f64b14ae restart_from_, dessser::gen::raql_expr::t_ext topic_) : options(options_), partitions(partitions_), restart_from(restart_from_), topic(topic_) {}
-  t39c49449a1a829aeb161993f390f9dbf() = default;
+  t30bd731cf6638e267c87018bc3ca5b81(Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> options_, std::optional<dessser::gen::raql_expr::t_ext> partitions_, ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc restart_from_, dessser::gen::raql_expr::t_ext topic_) : options(options_), partitions(partitions_), restart_from(restart_from_), topic(topic_) {}
+  t30bd731cf6638e267c87018bc3ca5b81() = default;
 };
-inline bool operator==(t39c49449a1a829aeb161993f390f9dbf const &a, t39c49449a1a829aeb161993f390f9dbf const &b) {
+inline bool operator==(t30bd731cf6638e267c87018bc3ca5b81 const &a, t30bd731cf6638e267c87018bc3ca5b81 const &b) {
   return a.options == b.options && ((a.partitions && b.partitions && ::dessser::gen::raql_expr::Deref(a.partitions.value()) == ::dessser::gen::raql_expr::Deref(b.partitions.value())) || (!a.partitions && !b.partitions)) && a.restart_from == b.restart_from && ::dessser::gen::raql_expr::Deref(a.topic) == ::dessser::gen::raql_expr::Deref(b.topic);
 }
 
-inline bool operator!=(t39c49449a1a829aeb161993f390f9dbf const &a, t39c49449a1a829aeb161993f390f9dbf const &b) {
+inline bool operator!=(t30bd731cf6638e267c87018bc3ca5b81 const &a, t30bd731cf6638e267c87018bc3ca5b81 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t39c49449a1a829aeb161993f390f9dbf const &r) {
+inline std::ostream &operator<<(std::ostream &os, t30bd731cf6638e267c87018bc3ca5b81 const &r) {
   os << '{';
   os << "options:" << r.options << ',';
   if (r.partitions) os << "partitions:" << r.partitions.value() << ',';
@@ -239,12 +247,16 @@ inline std::ostream &operator<<(std::ostream &os, t39c49449a1a829aeb161993f390f9
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t39c49449a1a829aeb161993f390f9dbf> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t30bd731cf6638e267c87018bc3ca5b81> const r) { os << *r; return os; }
 
 struct external_source : public std::variant<
   ::dessser::gen::raql_operation::t614b5d4c127c7065272d8dcc1f9877d3, // File
-  ::dessser::gen::raql_operation::t39c49449a1a829aeb161993f390f9dbf // Kafka
-> { using variant::variant; };
+  ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 // Kafka
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(external_source const &a, external_source const &b) {
   if (a.index() != b.index()) return false;
@@ -320,13 +332,17 @@ inline std::ostream &operator<<(std::ostream &os, t8b60740739dfc5a7cf5f2b99a1358
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8b60740739dfc5a7cf5f2b99a1358fa6> const t) { os << *t; return os; }
 
-struct t054d75b46129860c650f4e7e4e60a6f9 : public std::variant<
+struct t8c6ca1751131c806bba8633db9760cf7 : public std::variant<
   Void, // AllSites
   std::string, // TheseSites
   Void // ThisSite
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
-inline bool operator==(t054d75b46129860c650f4e7e4e60a6f9 const &a, t054d75b46129860c650f4e7e4e60a6f9 const &b) {
+inline bool operator==(t8c6ca1751131c806bba8633db9760cf7 const &a, t8c6ca1751131c806bba8633db9760cf7 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // AllSites
@@ -335,16 +351,16 @@ inline bool operator==(t054d75b46129860c650f4e7e4e60a6f9 const &a, t054d75b46129
   };
   return false;
 }
-inline bool operator!=(t054d75b46129860c650f4e7e4e60a6f9 const &a, t054d75b46129860c650f4e7e4e60a6f9 const &b) {
+inline bool operator!=(t8c6ca1751131c806bba8633db9760cf7 const &a, t8c6ca1751131c806bba8633db9760cf7 const &b) {
   return !operator==(a, b);
 }
-enum Constr_t054d75b46129860c650f4e7e4e60a6f9 {
+enum Constr_t8c6ca1751131c806bba8633db9760cf7 {
   AllSites,
   TheseSites,
   ThisSite,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t054d75b46129860c650f4e7e4e60a6f9 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t8c6ca1751131c806bba8633db9760cf7 const &v) {
   switch (v.index()) {
     case 0: os << "AllSites" << std::get<0>(v); break;
     case 1: os << "TheseSites " << std::get<1>(v); break;
@@ -353,22 +369,22 @@ inline std::ostream &operator<<(std::ostream &os, t054d75b46129860c650f4e7e4e60a
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t054d75b46129860c650f4e7e4e60a6f9> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8c6ca1751131c806bba8633db9760cf7> const v) { os << *v; return os; }
 
-struct ted682f302d97794f7d8af77b7693b421 : public std::tuple<
-  ::dessser::gen::raql_operation::t054d75b46129860c650f4e7e4e60a6f9,
+struct t0ca94dea84b5aab39c17a3e69f7dc2d6 : public std::tuple<
+  ::dessser::gen::raql_operation::t8c6ca1751131c806bba8633db9760cf7,
   std::optional<std::string>,
   dessser::gen::function_name::t_ext
 > {
   using tuple::tuple;
 };
-inline bool operator==(ted682f302d97794f7d8af77b7693b421 const &a, ted682f302d97794f7d8af77b7693b421 const &b) {
+inline bool operator==(t0ca94dea84b5aab39c17a3e69f7dc2d6 const &a, t0ca94dea84b5aab39c17a3e69f7dc2d6 const &b) {
   return std::get<0>(a) == std::get<0>(b) && ((std::get<1>(a) && std::get<1>(b) && std::get<1>(a).value() == std::get<1>(b).value()) || (!std::get<1>(a) && !std::get<1>(b))) && ::dessser::gen::function_name::Deref(std::get<2>(a)) == ::dessser::gen::function_name::Deref(std::get<2>(b));
 }
-inline bool operator!=(ted682f302d97794f7d8af77b7693b421 const &a, ted682f302d97794f7d8af77b7693b421 const &b) {
+inline bool operator!=(t0ca94dea84b5aab39c17a3e69f7dc2d6 const &a, t0ca94dea84b5aab39c17a3e69f7dc2d6 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ted682f302d97794f7d8af77b7693b421 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t0ca94dea84b5aab39c17a3e69f7dc2d6 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   if (std::get<1>(t)) os << std::get<1>(t).value() << ", ";
@@ -377,7 +393,7 @@ inline std::ostream &operator<<(std::ostream &os, ted682f302d97794f7d8af77b7693b
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ted682f302d97794f7d8af77b7693b421> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0ca94dea84b5aab39c17a3e69f7dc2d6> const t) { os << *t; return os; }
 
 struct t;
 inline std::ostream &operator<<(std::ostream &, struct t const &);
@@ -385,9 +401,13 @@ inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const)
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
 struct data_source : public std::variant<
-  ::dessser::gen::raql_operation::ted682f302d97794f7d8af77b7693b421, // NamedOperation
+  ::dessser::gen::raql_operation::t0ca94dea84b5aab39c17a3e69f7dc2d6, // NamedOperation
   std::shared_ptr<::dessser::gen::raql_operation::t>  // SubQuery
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(data_source const &a, data_source const &b) {
   if (a.index() != b.index()) return false;
@@ -539,7 +559,11 @@ struct t : public std::variant<
   ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5, // Aggregate
   ::dessser::gen::raql_operation::teabb4aa6beb374b8a3faf63ed92e59d1, // ReadExternal
   ::dessser::gen::raql_operation::tfb55a595623604efa44696c62f9afcc5 // ListenFor
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

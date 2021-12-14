@@ -32,7 +32,11 @@ std::default_random_engine _random_engine_;
 struct t : public std::variant<
   Void, // reset
   Void // never
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

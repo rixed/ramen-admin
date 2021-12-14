@@ -1,8 +1,13 @@
+#include <QCoreApplication>
 #include <QDebug>
 #include <QModelIndex>
 #include <QVariant>
+
 #include "alerting/tools.h"
-#include "confValue.h"
+#include "desssergen/alerting_log.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
+#include "misc_dessser.h"
 
 #include "alerting/AlertingLogsModel.h"
 
@@ -15,21 +20,23 @@ AlertingLogsModel::AlertingLogsModel(QObject *parent)
 {
   journal.reserve(20);
 
-  iterIncidents([this](std::string const &incidentId) {
-    iterLogs(incidentId, [this, &incidentId]
-             (double time, std::shared_ptr<conf::IncidentLog const> log) {
-      addLog(incidentId, time, log);
+  iterIncidents([this](std::string const &incidentId)
+    {
+      iterLogs(incidentId, [this, &incidentId]
+               (double time, std::shared_ptr<dessser::gen::alerting_log::t const> log)
+        {
+          addLog(incidentId, time, log);
+        });
     });
-  });
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &AlertingLogsModel::onChange);
 }
 
 void AlertingLogsModel::addLog(
   std::string const &incidentId,
   double time,
-  std::shared_ptr<conf::IncidentLog const> log)
+  std::shared_ptr<dessser::gen::alerting_log::t const> log)
 {
   /* Insert it into the journal (most of the time, will be merely appended): */
   size_t i;
@@ -54,15 +61,15 @@ void AlertingLogsModel::onChange(QList<ConfChange> const &changes)
 
     std::string incidentId;
     double time;
-    if (! parseLogKey(change.key, &incidentId, &time)) continue;
+    if (! parseLogKey(*change.key, &incidentId, &time)) continue;
 
-    std::shared_ptr<conf::IncidentLog const> log {
-      std::dynamic_pointer_cast<conf::IncidentLog const>(change.kv.val) };
-    if (! log) {
-      qCritical() << "Log entry not a conf::IncidentLog for key"
-                  << QString::fromStdString(change.key);
+    if (change.kv.val->index() != dessser::gen::sync_value::IncidentLog) {
+      qCritical() << "Log entry not IncidentLog:" << *change.key;
       continue;
     }
+
+    std::shared_ptr<dessser::gen::alerting_log::t const> log {
+      std::get<dessser::gen::sync_value::IncidentLog>(*change.kv.val) };
 
     addLog(incidentId, time, log);
   }
@@ -80,6 +87,60 @@ int AlertingLogsModel::columnCount(QModelIndex const &parent) const
   return AlertingLogsModel::NUM_COLUMNS;
 }
 
+static QString alertingLogToQString(dessser::gen::alerting_log::t const &log)
+{
+# define TR(x) QCoreApplication::translate("QMainWindow", x)
+  switch (log.index()) {
+    case dessser::gen::alerting_log::NewNotification:
+      {
+        QString ret { TR("New notification received, %1") };
+        switch (std::get<dessser::gen::alerting_log::NewNotification>(log).index()) {
+          case dessser::gen::alerting_log::Duplicate:
+            return ret.arg(TR("duplicate"));
+          case dessser::gen::alerting_log::Inhibited:
+            return ret.arg(TR("inhibited"));
+          case dessser::gen::alerting_log::STFU:
+            return ret.arg(TR("silenced"));
+          case dessser::gen::alerting_log::StartEscalation:
+            return ret.arg(TR("started escalation"));
+          default:
+            Q_ASSERT(false);
+        }
+      }
+      break;
+    case dessser::gen::alerting_log::Outcry:
+      return QString(TR("Sent message via %1")).arg(QString::fromStdString(
+               std::get<0>(std::get<dessser::gen::alerting_log::Outcry>(log))));
+    case dessser::gen::alerting_log::Ack:
+      return QString(TR("Received ack for %1")).arg(QString::fromStdString(
+               std::get<dessser::gen::alerting_log::Ack>(log)));
+    case dessser::gen::alerting_log::Stop:
+      {
+        QString ret { TR("Stopped incident (%1)") };
+        switch (std::get<dessser::gen::alerting_log::Stop>(log).index()) {
+          case dessser::gen::alerting_log::Notification:
+            return ret.arg(TR("notification"));
+          case dessser::gen::alerting_log::Manual:
+            return ret.arg(TR("manually stopped by %1").arg(QString::fromStdString(
+                     std::get<dessser::gen::alerting_log::Manual>(
+                       std::get<dessser::gen::alerting_log::Stop>(log)))));
+          case dessser::gen::alerting_log::Timeout:
+            return ret.arg(TR("timeout for %1").arg(QString::fromStdString(
+                     std::get<dessser::gen::alerting_log::Timeout>(
+                       std::get<dessser::gen::alerting_log::Stop>(log)))));
+          default:
+            Q_ASSERT(false);
+        }
+      }
+    case dessser::gen::alerting_log::Cancel:
+      return QString(TR("Cancelled message for %1")).arg(QString::fromStdString(
+               std::get<dessser::gen::alerting_log::Cancel>(log)));
+    default:
+      Q_ASSERT(false);
+  }
+# undef TR
+}
+
 QVariant AlertingLogsModel::data(QModelIndex const &index, int role) const
 {
   if (role != Qt::DisplayRole) return QVariant();
@@ -91,7 +152,7 @@ QVariant AlertingLogsModel::data(QModelIndex const &index, int role) const
     case AlertingLogsModel::Time:
       return journal[row].timeStr;
     case AlertingLogsModel::Text:
-      return journal[row].log->text;
+      return alertingLogToQString(*journal[row].log);
     default:
       return QVariant();
   }

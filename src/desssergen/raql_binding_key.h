@@ -47,7 +47,11 @@ struct t : public std::variant<
   ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69, // RecordField
   dessser::gen::raql_variable::t_ext, // RecordValue
   std::string // Direct
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 4 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

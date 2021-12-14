@@ -33,7 +33,11 @@ struct t : public std::variant<
   Void, // Membership
   Void, // Rank
   Void // List
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

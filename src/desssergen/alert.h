@@ -45,12 +45,16 @@ inline std::ostream &operator<<(std::ostream &os, constant const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<constant> const r) { os << *r; return os; }
 
-struct td771ddde7c5e379015a4c13cee45ad3e : public std::variant<
+struct t1287f5ccd09b12d10e0e8359b374ce64 : public std::variant<
   double, // Absolute
   double // Relative
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e379015a4c13cee45ad3e const &b) {
+inline bool operator==(t1287f5ccd09b12d10e0e8359b374ce64 const &a, t1287f5ccd09b12d10e0e8359b374ce64 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Absolute
@@ -58,15 +62,15 @@ inline bool operator==(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e
   };
   return false;
 }
-inline bool operator!=(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e379015a4c13cee45ad3e const &b) {
+inline bool operator!=(t1287f5ccd09b12d10e0e8359b374ce64 const &a, t1287f5ccd09b12d10e0e8359b374ce64 const &b) {
   return !operator==(a, b);
 }
-enum Constr_td771ddde7c5e379015a4c13cee45ad3e {
+enum Constr_t1287f5ccd09b12d10e0e8359b374ce64 {
   Absolute,
   Relative,
 };
 
-inline std::ostream &operator<<(std::ostream &os, td771ddde7c5e379015a4c13cee45ad3e const &v) {
+inline std::ostream &operator<<(std::ostream &os, t1287f5ccd09b12d10e0e8359b374ce64 const &v) {
   switch (v.index()) {
     case 0: os << "Absolute " << std::get<0>(v); break;
     case 1: os << "Relative " << std::get<1>(v); break;
@@ -74,26 +78,26 @@ inline std::ostream &operator<<(std::ostream &os, td771ddde7c5e379015a4c13cee45a
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td771ddde7c5e379015a4c13cee45ad3e> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t1287f5ccd09b12d10e0e8359b374ce64> const v) { os << *v; return os; }
 
-struct tbe2e56baf82b7af4d9ea2714b1b36b50 {
+struct t4d94676e99bfec48ddb223ef58e339ac {
   double avg_window;
-  ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e max_distance;
+  ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance;
   double percentile;
   uint32_t sample_size;
   uint32_t seasonality;
   double smooth_factor;
-  tbe2e56baf82b7af4d9ea2714b1b36b50(double avg_window_, ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e max_distance_, double percentile_, uint32_t sample_size_, uint32_t seasonality_, double smooth_factor_) : avg_window(avg_window_), max_distance(max_distance_), percentile(percentile_), sample_size(sample_size_), seasonality(seasonality_), smooth_factor(smooth_factor_) {}
-  tbe2e56baf82b7af4d9ea2714b1b36b50() = default;
+  t4d94676e99bfec48ddb223ef58e339ac(double avg_window_, ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance_, double percentile_, uint32_t sample_size_, uint32_t seasonality_, double smooth_factor_) : avg_window(avg_window_), max_distance(max_distance_), percentile(percentile_), sample_size(sample_size_), seasonality(seasonality_), smooth_factor(smooth_factor_) {}
+  t4d94676e99bfec48ddb223ef58e339ac() = default;
 };
-inline bool operator==(tbe2e56baf82b7af4d9ea2714b1b36b50 const &a, tbe2e56baf82b7af4d9ea2714b1b36b50 const &b) {
+inline bool operator==(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
   return a.avg_window == b.avg_window && a.max_distance == b.max_distance && a.percentile == b.percentile && a.sample_size == b.sample_size && a.seasonality == b.seasonality && a.smooth_factor == b.smooth_factor;
 }
 
-inline bool operator!=(tbe2e56baf82b7af4d9ea2714b1b36b50 const &a, tbe2e56baf82b7af4d9ea2714b1b36b50 const &b) {
+inline bool operator!=(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tbe2e56baf82b7af4d9ea2714b1b36b50 const &r) {
+inline std::ostream &operator<<(std::ostream &os, t4d94676e99bfec48ddb223ef58e339ac const &r) {
   os << '{';
   os << "avg_window:" << r.avg_window << ',';
   os << "max_distance:" << r.max_distance << ',';
@@ -104,12 +108,16 @@ inline std::ostream &operator<<(std::ostream &os, tbe2e56baf82b7af4d9ea2714b1b36
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbe2e56baf82b7af4d9ea2714b1b36b50> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4d94676e99bfec48ddb223ef58e339ac> const r) { os << *r; return os; }
 
 struct threshold : public std::variant<
   double, // Constant
-  ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 // Baseline
-> { using variant::variant; };
+  ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac // Baseline
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(threshold const &a, threshold const &b) {
   if (a.index() != b.index()) return false;

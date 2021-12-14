@@ -63,7 +63,11 @@ inline bool operator!=(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c
 struct file_type : public std::variant<
   Void, // RingBuf
   ::dessser::gen::output_specs::ta86dfe69264c9600d57a3b5ead0f7951 // Orc
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(file_type const &a, file_type const &b) {
   if (a.index() != b.index()) return false;
@@ -80,7 +84,11 @@ struct recipient : public std::variant<
   dessser::gen::file_path::t_ext, // DirectFile
   std::string, // IndirectFile
   dessser::gen::sync_key::t_ext // SyncKey
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
 inline bool operator==(recipient const &a, recipient const &b) {
   if (a.index() != b.index()) return false;

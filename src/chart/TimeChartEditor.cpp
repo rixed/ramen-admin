@@ -7,9 +7,9 @@
 
 #include "chart/TimeChart.h"
 #include "chart/TimeChartEditWidget.h"
-#include "chart/TimeLine.h"
-#include "chart/TimeLineGroup.h"
 #include "Resources.h"
+#include "timeline/TimeLine.h"
+#include "timeline/TimeLineGroup.h"
 
 #include "chart/TimeChartEditor.h"
 

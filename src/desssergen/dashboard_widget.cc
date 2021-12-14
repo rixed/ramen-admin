@@ -35,7 +35,11 @@ struct representation : public std::variant<
   Void, // Independent
   Void, // Stacked
   Void // StackCentered
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 4 };
+};
 
 inline bool operator==(representation const &a, representation const &b) {
   if (a.index() != b.index()) return false;
@@ -84,7 +88,11 @@ inline bool operator!=(source const &a, source const &b) {
 struct scale : public std::variant<
   Void, // Linear
   Void // Logarithmic
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(scale const &a, scale const &b) {
   if (a.index() != b.index()) return false;
@@ -113,7 +121,11 @@ inline bool operator!=(axis const &a, axis const &b) {
 }
 struct type : public std::variant<
   Void // Plot
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 1 };
+};
 
 inline bool operator==(type const &a, type const &b) {
   if (a.index() != b.index()) return false;
@@ -143,7 +155,11 @@ inline bool operator!=(chart const &a, chart const &b) {
 struct t : public std::variant<
   std::string, // Text
   std::shared_ptr<::dessser::gen::dashboard_widget::chart>  // Chart
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

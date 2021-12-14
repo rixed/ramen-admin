@@ -89,15 +89,19 @@ inline std::ostream &operator<<(std::ostream &os, ta01abe30cb0b3ed10ed8f9629a473
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta01abe30cb0b3ed10ed8f9629a473d35> const r) { os << *r; return os; }
 
-struct tc803ccb03fe2ac2e76cb991267dc2406 : public std::variant<
+struct t370a948715668202b695a186b099b0c9 : public std::variant<
   Void, // Ignore
   std::string, // Exec
   std::string, // SysLog
   ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b, // Sqlite
   ::dessser::gen::alerting_contact::ta01abe30cb0b3ed10ed8f9629a473d35 // Kafka
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 5 };
+};
 
-inline bool operator==(tc803ccb03fe2ac2e76cb991267dc2406 const &a, tc803ccb03fe2ac2e76cb991267dc2406 const &b) {
+inline bool operator==(t370a948715668202b695a186b099b0c9 const &a, t370a948715668202b695a186b099b0c9 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Ignore
@@ -108,10 +112,10 @@ inline bool operator==(tc803ccb03fe2ac2e76cb991267dc2406 const &a, tc803ccb03fe2
   };
   return false;
 }
-inline bool operator!=(tc803ccb03fe2ac2e76cb991267dc2406 const &a, tc803ccb03fe2ac2e76cb991267dc2406 const &b) {
+inline bool operator!=(t370a948715668202b695a186b099b0c9 const &a, t370a948715668202b695a186b099b0c9 const &b) {
   return !operator==(a, b);
 }
-enum Constr_tc803ccb03fe2ac2e76cb991267dc2406 {
+enum Constr_t370a948715668202b695a186b099b0c9 {
   Ignore,
   Exec,
   SysLog,
@@ -119,7 +123,7 @@ enum Constr_tc803ccb03fe2ac2e76cb991267dc2406 {
   Kafka,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tc803ccb03fe2ac2e76cb991267dc2406 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t370a948715668202b695a186b099b0c9 const &v) {
   switch (v.index()) {
     case 0: os << "Ignore" << std::get<0>(v); break;
     case 1: os << "Exec " << std::get<1>(v); break;
@@ -130,12 +134,12 @@ inline std::ostream &operator<<(std::ostream &os, tc803ccb03fe2ac2e76cb991267dc2
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc803ccb03fe2ac2e76cb991267dc2406> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t370a948715668202b695a186b099b0c9> const v) { os << *v; return os; }
 
 struct t {
   double timeout;
-  ::dessser::gen::alerting_contact::tc803ccb03fe2ac2e76cb991267dc2406 via;
-  t(double timeout_, ::dessser::gen::alerting_contact::tc803ccb03fe2ac2e76cb991267dc2406 via_) : timeout(timeout_), via(via_) {}
+  ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via;
+  t(double timeout_, ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via_) : timeout(timeout_), via(via_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

@@ -1,9 +1,10 @@
 #include <QHeaderView>
 #include <QTableView>
 #include <QVBoxLayout>
-#include "AlertingLogsModel.h"
 
-#include "AlertingJournal.h"
+#include "alerting/AlertingLogsModel.h"
+
+#include "alerting/AlertingJournal.h"
 
 AlertingJournal::AlertingJournal(AlertingLogsModel *model, QWidget *parent)
   : QWidget(parent)
@@ -17,7 +18,7 @@ AlertingJournal::AlertingJournal(AlertingLogsModel *model, QWidget *parent)
   tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
   tableView->setModel(model);
 
-  QVBoxLayout *layout = new QVBoxLayout;
+  QVBoxLayout *layout { new QVBoxLayout };
   layout->setContentsMargins(QMargins());
   layout->addWidget(tableView);
 

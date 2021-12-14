@@ -50,12 +50,16 @@ inline bool operator==(constant const &a, constant const &b) {
 inline bool operator!=(constant const &a, constant const &b) {
   return !operator==(a, b);
 }
-struct td771ddde7c5e379015a4c13cee45ad3e : public std::variant<
+struct t1287f5ccd09b12d10e0e8359b374ce64 : public std::variant<
   double, // Absolute
   double // Relative
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e379015a4c13cee45ad3e const &b) {
+inline bool operator==(t1287f5ccd09b12d10e0e8359b374ce64 const &a, t1287f5ccd09b12d10e0e8359b374ce64 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Absolute
@@ -63,30 +67,34 @@ inline bool operator==(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e
   };
   return false;
 }
-inline bool operator!=(td771ddde7c5e379015a4c13cee45ad3e const &a, td771ddde7c5e379015a4c13cee45ad3e const &b) {
+inline bool operator!=(t1287f5ccd09b12d10e0e8359b374ce64 const &a, t1287f5ccd09b12d10e0e8359b374ce64 const &b) {
   return !operator==(a, b);
 }
-struct tbe2e56baf82b7af4d9ea2714b1b36b50 {
+struct t4d94676e99bfec48ddb223ef58e339ac {
   double avg_window;
-  ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e max_distance;
+  ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance;
   double percentile;
   uint32_t sample_size;
   uint32_t seasonality;
   double smooth_factor;
-  tbe2e56baf82b7af4d9ea2714b1b36b50(double avg_window_, ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e max_distance_, double percentile_, uint32_t sample_size_, uint32_t seasonality_, double smooth_factor_) : avg_window(avg_window_), max_distance(max_distance_), percentile(percentile_), sample_size(sample_size_), seasonality(seasonality_), smooth_factor(smooth_factor_) {}
-  tbe2e56baf82b7af4d9ea2714b1b36b50() = default;
+  t4d94676e99bfec48ddb223ef58e339ac(double avg_window_, ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance_, double percentile_, uint32_t sample_size_, uint32_t seasonality_, double smooth_factor_) : avg_window(avg_window_), max_distance(max_distance_), percentile(percentile_), sample_size(sample_size_), seasonality(seasonality_), smooth_factor(smooth_factor_) {}
+  t4d94676e99bfec48ddb223ef58e339ac() = default;
 };
-inline bool operator==(tbe2e56baf82b7af4d9ea2714b1b36b50 const &a, tbe2e56baf82b7af4d9ea2714b1b36b50 const &b) {
+inline bool operator==(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
   return a.avg_window == b.avg_window && a.max_distance == b.max_distance && a.percentile == b.percentile && a.sample_size == b.sample_size && a.seasonality == b.seasonality && a.smooth_factor == b.smooth_factor;
 }
 
-inline bool operator!=(tbe2e56baf82b7af4d9ea2714b1b36b50 const &a, tbe2e56baf82b7af4d9ea2714b1b36b50 const &b) {
+inline bool operator!=(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
   return !operator==(a, b);
 }
 struct threshold : public std::variant<
   double, // Constant
-  ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 // Baseline
-> { using variant::variant; };
+  ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac // Baseline
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(threshold const &a, threshold const &b) {
   if (a.index() != b.index()) return false;
@@ -268,18 +276,18 @@ inline bool operator==(t491c44439106a32f896827242e8e76a1 const &a, t491c44439106
 inline bool operator!=(t491c44439106a32f896827242e8e76a1 const &a, t491c44439106a32f896827242e8e76a1 const &b) {
   return !operator==(a, b);
 }
-struct tff11f21e1cebc7ba9e4fb32ed21320b3 : public std::tuple<
-  ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e,
+struct tc35264428ed4b717e8fbc891998f97e3 : public std::tuple<
+  ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64,
   Pointer
 > {
   using tuple::tuple;
-  tff11f21e1cebc7ba9e4fb32ed21320b3(std::tuple<::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e, Pointer> p)
-    : std::tuple<::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc35264428ed4b717e8fbc891998f97e3(std::tuple<::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64, Pointer> p)
+    : std::tuple<::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tff11f21e1cebc7ba9e4fb32ed21320b3 const &a, tff11f21e1cebc7ba9e4fb32ed21320b3 const &b) {
+inline bool operator==(tc35264428ed4b717e8fbc891998f97e3 const &a, tc35264428ed4b717e8fbc891998f97e3 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tff11f21e1cebc7ba9e4fb32ed21320b3 const &a, tff11f21e1cebc7ba9e4fb32ed21320b3 const &b) {
+inline bool operator!=(tc35264428ed4b717e8fbc891998f97e3 const &a, tc35264428ed4b717e8fbc891998f97e3 const &b) {
   return !operator==(a, b);
 }
 struct tc6d52773763d322654577a54bd0001f6 : public std::tuple<
@@ -551,14 +559,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,
         bool id_58 { bool(id_56 == id_57) };
         Void id_59 { ((void)(assert(id_58)), ::dessser::VOID) };
         (void)id_59;
-        ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_60 { std::get<1 /* Baseline */>((*p_0)) };
+        ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_60 { std::get<1 /* Baseline */>((*p_0)) };
         double id_61 { id_60.avg_window };
         uint64_t id_62 { qword_of_float(id_61) };
         Pointer id_63 { ssum_dst_475.writeU64Le(id_62) };
         Pointer let_res_64;
         {
           Pointer srec_dst_476 { id_63 };
-          ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_65 { std::get<1 /* Baseline */>((*p_0)) };
+          ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_65 { std::get<1 /* Baseline */>((*p_0)) };
           uint32_t id_66 { id_65.sample_size };
           Pointer id_67 { srec_dst_476.writeU32Le(id_66) };
           let_res_64 = id_67;
@@ -566,7 +574,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,
         Pointer let_res_68;
         {
           Pointer srec_dst_477 { let_res_64 };
-          ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_69 { std::get<1 /* Baseline */>((*p_0)) };
+          ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_69 { std::get<1 /* Baseline */>((*p_0)) };
           double id_70 { id_69.percentile };
           uint64_t id_71 { qword_of_float(id_70) };
           Pointer id_72 { srec_dst_477.writeU64Le(id_71) };
@@ -575,7 +583,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,
         Pointer let_res_73;
         {
           Pointer srec_dst_478 { let_res_68 };
-          ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_74 { std::get<1 /* Baseline */>((*p_0)) };
+          ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_74 { std::get<1 /* Baseline */>((*p_0)) };
           uint32_t id_75 { id_74.seasonality };
           Pointer id_76 { srec_dst_478.writeU32Le(id_75) };
           let_res_73 = id_76;
@@ -583,7 +591,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,
         Pointer let_res_77;
         {
           Pointer srec_dst_479 { let_res_73 };
-          ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_78 { std::get<1 /* Baseline */>((*p_0)) };
+          ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_78 { std::get<1 /* Baseline */>((*p_0)) };
           double id_79 { id_78.smooth_factor };
           uint64_t id_80 { qword_of_float(id_79) };
           Pointer id_81 { srec_dst_479.writeU64Le(id_80) };
@@ -592,36 +600,36 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,
         Pointer let_res_82;
         {
           Pointer srec_dst_480 { let_res_77 };
-          ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_83 { std::get<1 /* Baseline */>((*p_0)) };
-          ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_84 { id_83.max_distance };
+          ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_83 { std::get<1 /* Baseline */>((*p_0)) };
+          ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_84 { id_83.max_distance };
           uint16_t id_85 { uint16_t(id_84.index()) };
           Pointer id_86 { srec_dst_480.writeU16Le(id_85) };
           Pointer let_res_87;
           {
             Pointer ssum_dst_482 { id_86 };
             uint16_t id_88 { 0 };
-            ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_89 { std::get<1 /* Baseline */>((*p_0)) };
-            ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_90 { id_89.max_distance };
+            ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_89 { std::get<1 /* Baseline */>((*p_0)) };
+            ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_90 { id_89.max_distance };
             uint16_t id_91 { uint16_t(id_90.index()) };
             bool id_92 { bool(id_88 == id_91) };
             Pointer choose_res_93;
             if (id_92) {
-              ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_94 { std::get<1 /* Baseline */>((*p_0)) };
-              ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_95 { id_94.max_distance };
+              ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_94 { std::get<1 /* Baseline */>((*p_0)) };
+              ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_95 { id_94.max_distance };
               double id_96 { std::get<0 /* Absolute */>(id_95) };
               uint64_t id_97 { qword_of_float(id_96) };
               Pointer id_98 { ssum_dst_482.writeU64Le(id_97) };
               choose_res_93 = id_98;
             } else {
-              ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_99 { std::get<1 /* Baseline */>((*p_0)) };
-              ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_100 { id_99.max_distance };
+              ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_99 { std::get<1 /* Baseline */>((*p_0)) };
+              ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_100 { id_99.max_distance };
               uint16_t id_101 { uint16_t(id_100.index()) };
               uint16_t id_102 { 1 };
               bool id_103 { bool(id_101 == id_102) };
               Void id_104 { ((void)(assert(id_103)), ::dessser::VOID) };
               (void)id_104;
-              ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_105 { std::get<1 /* Baseline */>((*p_0)) };
-              ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_106 { id_105.max_distance };
+              ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_105 { std::get<1 /* Baseline */>((*p_0)) };
+              ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_106 { id_105.max_distance };
               double id_107 { std::get<1 /* Relative */>(id_106) };
               uint64_t id_108 { qword_of_float(id_107) };
               Pointer id_109 { ssum_dst_482.writeU64Le(id_108) };
@@ -1886,8 +1894,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> t
       Void id_704 { ((void)(assert(id_703)), ::dessser::VOID) };
       (void)id_704;
       uint16_t id_705 { 0 };
-      ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_706 { std::get<1 /* Baseline */>((*p_0)) };
-      ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_707 { id_706.max_distance };
+      ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_706 { std::get<1 /* Baseline */>((*p_0)) };
+      ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_707 { id_706.max_distance };
       uint16_t id_708 { uint16_t(id_707.index()) };
       bool id_709 { bool(id_705 == id_708) };
       Size choose_res_710;
@@ -1895,8 +1903,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> t
         Size id_711 { 44UL };
         choose_res_710 = id_711;
       } else {
-        ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_712 { std::get<1 /* Baseline */>((*p_0)) };
-        ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_713 { id_712.max_distance };
+        ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_712 { std::get<1 /* Baseline */>((*p_0)) };
+        ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_713 { id_712.max_distance };
         uint16_t id_714 { uint16_t(id_713.index()) };
         uint16_t id_715 { 1 };
         bool id_716 { bool(id_714 == id_715) };
@@ -3193,25 +3201,25 @@ static std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Po
                                 ::dessser::gen::alert::ta97bb48ed75bbda6173555873826c8c6 id_1307 { du16_fst_96, du16_snd_97 };
                                 letpair_res_1306 = id_1307;
                               }
-                              ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 let_res_1308;
+                              ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 let_res_1308;
                               {
                                 ::dessser::gen::alert::ta97bb48ed75bbda6173555873826c8c6 dsum1_101 { letpair_res_1306 };
-                                ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 letpair_res_1309;
+                                ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 letpair_res_1309;
                                 {
                                   auto dsum1_fst_102 { std::get<0>(dsum1_101) };
                                   auto dsum1_snd_103 { std::get<1>(dsum1_101) };
                                   uint16_t id_1310 { 0 };
                                   bool id_1311 { bool(id_1310 == dsum1_fst_102) };
-                                  ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 choose_res_1312;
+                                  ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 choose_res_1312;
                                   if (id_1311) {
                                     ::dessser::gen::alert::td2cd337bb3c8bc04d5603393d084985b id_1313 { dsum1_snd_103.readU64Le() };
-                                    ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 letpair_res_1314;
+                                    ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 letpair_res_1314;
                                     {
                                       auto dfloat_fst_111 { std::get<0>(id_1313) };
                                       auto dfloat_snd_112 { std::get<1>(id_1313) };
                                       double id_1315 { float_of_qword(dfloat_fst_111) };
-                                      ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_1316 { std::in_place_index<0>, id_1315 };
-                                      ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 id_1317 { id_1316, dfloat_snd_112 };
+                                      ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_1316 { std::in_place_index<0>, id_1315 };
+                                      ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 id_1317 { id_1316, dfloat_snd_112 };
                                       letpair_res_1314 = id_1317;
                                     }
                                     choose_res_1312 = letpair_res_1314;
@@ -3221,13 +3229,13 @@ static std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Po
                                     Void id_1320 { ((void)(assert(id_1319)), ::dessser::VOID) };
                                     (void)id_1320;
                                     ::dessser::gen::alert::td2cd337bb3c8bc04d5603393d084985b id_1321 { dsum1_snd_103.readU64Le() };
-                                    ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 letpair_res_1322;
+                                    ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 letpair_res_1322;
                                     {
                                       auto dfloat_fst_105 { std::get<0>(id_1321) };
                                       auto dfloat_snd_106 { std::get<1>(id_1321) };
                                       double id_1323 { float_of_qword(dfloat_fst_105) };
-                                      ::dessser::gen::alert::td771ddde7c5e379015a4c13cee45ad3e id_1324 { std::in_place_index<1>, id_1323 };
-                                      ::dessser::gen::alert::tff11f21e1cebc7ba9e4fb32ed21320b3 id_1325 { id_1324, dfloat_snd_106 };
+                                      ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 id_1324 { std::in_place_index<1>, id_1323 };
+                                      ::dessser::gen::alert::tc35264428ed4b717e8fbc891998f97e3 id_1325 { id_1324, dfloat_snd_106 };
                                       letpair_res_1322 = id_1325;
                                     }
                                     choose_res_1312 = letpair_res_1322;
@@ -3240,7 +3248,7 @@ static std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Po
                               {
                                 auto drec_fst_117 { std::get<0>(let_res_1308) };
                                 auto drec_snd_118 { std::get<1>(let_res_1308) };
-                                ::dessser::gen::alert::tbe2e56baf82b7af4d9ea2714b1b36b50 id_1327 { drec_fst_69, drec_fst_117, drec_fst_81, drec_fst_75, drec_fst_87, drec_fst_93 };
+                                ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_1327 { drec_fst_69, drec_fst_117, drec_fst_81, drec_fst_75, drec_fst_87, drec_fst_93 };
                                 std::shared_ptr<::dessser::gen::alert::threshold>  id_1328 { std::make_shared<::dessser::gen::alert::threshold>(std::in_place_index<1>, id_1327) };
                                 ::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91 id_1329 { id_1328, drec_snd_118 };
                                 letpair_res_1326 = id_1329;

@@ -7,7 +7,6 @@
 #include <QSplitter>
 #include <QVBoxLayout>
 
-#include "chart/TimeLineGroup.h"
 #include "ConfClient.h"
 #include "dashboard/tools.h"
 #include "dashboard/DashboardWidgetForm.h"
@@ -19,6 +18,7 @@
 #include "Menu.h"
 #include "misc.h"
 #include "misc_dessser.h"
+#include "timeline/TimeLineGroup.h"
 #include "TimeRange.h"
 #include "TimeRangeEdit.h"
 

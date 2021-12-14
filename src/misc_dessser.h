@@ -10,6 +10,7 @@
 
 namespace dessser {
   namespace gen {
+    namespace alerting_log { struct t; }
     namespace dashboard_widget {
       struct chart;
       struct type;
@@ -29,7 +30,11 @@ namespace dessser {
     namespace sync_server_msg { struct t; }
     namespace sync_msg { struct t; }
     namespace sync_socket { struct t; }
-    namespace sync_key { struct t; }
+    namespace sync_key {
+      struct dialog_key;
+      struct incident_key;
+      struct t;
+    }
     namespace sync_value { struct t; }
   }
 }
@@ -116,6 +121,8 @@ QDebug operator<<(QDebug, dessser::gen::sync_server_msg::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_msg::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_socket::t const &);
 QDebug operator<<(QDebug, dessser::gen::sync_key::t const &);
+QDebug operator<<(QDebug, dessser::gen::sync_key::dialog_key const &);
+QDebug operator<<(QDebug, dessser::gen::sync_key::incident_key const &);
 QDebug operator<<(QDebug, dessser::gen::sync_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_value::t const &);
 QDebug operator<<(QDebug, dessser::gen::raql_type::t const &);
@@ -124,6 +131,7 @@ QDebug operator<<(QDebug, dessser::gen::dashboard_widget::chart const &);
 QDebug operator<<(QDebug, dessser::gen::fq_function_name::t const &);
 QDebug operator<<(QDebug, dessser::gen::rc_entry::t const &);
 QDebug operator<<(QDebug, dessser::gen::replay::t const &);
+QDebug operator<<(QDebug, dessser::gen::alerting_log::t const &);
 
 /* Also to avoid strings to be converted into some variant accepting strings
  * defined in sync_key (Versions for instance), actually define operator<< for

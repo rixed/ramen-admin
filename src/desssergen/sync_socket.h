@@ -15,12 +15,16 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t6f1b381b487374088d1a008e5b5be1f3 : public std::variant<
+struct t690438e8d106ddec68c668ab00e5188a : public std::variant<
   uint32_t, // v4
   uint128_t // v6
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(t6f1b381b487374088d1a008e5b5be1f3 const &a, t6f1b381b487374088d1a008e5b5be1f3 const &b) {
+inline bool operator==(t690438e8d106ddec68c668ab00e5188a const &a, t690438e8d106ddec68c668ab00e5188a const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // v4
@@ -28,15 +32,15 @@ inline bool operator==(t6f1b381b487374088d1a008e5b5be1f3 const &a, t6f1b381b4873
   };
   return false;
 }
-inline bool operator!=(t6f1b381b487374088d1a008e5b5be1f3 const &a, t6f1b381b487374088d1a008e5b5be1f3 const &b) {
+inline bool operator!=(t690438e8d106ddec68c668ab00e5188a const &a, t690438e8d106ddec68c668ab00e5188a const &b) {
   return !operator==(a, b);
 }
-enum Constr_t6f1b381b487374088d1a008e5b5be1f3 {
+enum Constr_t690438e8d106ddec68c668ab00e5188a {
   v4,
   v6,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t6f1b381b487374088d1a008e5b5be1f3 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t690438e8d106ddec68c668ab00e5188a const &v) {
   switch (v.index()) {
     case 0: os << "v4 " << std::get<0>(v); break;
     case 1: os << "v6 " << std::get<1>(v); break;
@@ -44,12 +48,12 @@ inline std::ostream &operator<<(std::ostream &os, t6f1b381b487374088d1a008e5b5be
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6f1b381b487374088d1a008e5b5be1f3> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t690438e8d106ddec68c668ab00e5188a> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::sync_socket::t6f1b381b487374088d1a008e5b5be1f3 ip;
+  ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a ip;
   uint16_t port;
-  t(::dessser::gen::sync_socket::t6f1b381b487374088d1a008e5b5be1f3 ip_, uint16_t port_) : ip(ip_), port(port_) {}
+  t(::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a ip_, uint16_t port_) : ip(ip_), port(port_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

@@ -1,6 +1,5 @@
 #include <limits>
 #include <memory>
-
 #include <QDebug>
 #include <QFormLayout>
 #include <QHBoxLayout>
@@ -8,6 +7,13 @@
 #include <QTimer>
 
 #include "alerting/tools.h"
+#include "desssergen/alerting_delivery_status.h"
+#include "desssergen/alerting_notification.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
+#include "misc.h"
+
 #include "alerting/AlertingStats.h"
 
 static bool const verbose { false };
@@ -25,9 +31,9 @@ AlertingStats::AlertingStats(QWidget *parent)
   numFiringIncidentsWidget = new QLabel;
   numDialogsWidget = new QLabel;
 
-  QHBoxLayout *layout = new QHBoxLayout;
-  QFormLayout *leftCol = new QFormLayout;
-  QFormLayout *rightCol = new QFormLayout;
+  QHBoxLayout *layout { new QHBoxLayout };
+  QFormLayout *leftCol { new QFormLayout };
+  QFormLayout *rightCol { new QFormLayout };
   leftCol->addRow(tr("Number of Firing Incidents:"), numFiringIncidentsWidget);
   leftCol->addRow(tr("Number of Incidents:"), numIncidentsWidget);
   leftCol->addRow(tr("Number of Teams:"), numTeamsWidget);
@@ -45,7 +51,7 @@ AlertingStats::AlertingStats(QWidget *parent)
   connect(timer, &QTimer::timeout,
           this, QOverload<>::of(&AlertingStats::updateStats));
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &AlertingStats::onChange);
 
   timer->start(2000);
@@ -58,109 +64,126 @@ void AlertingStats::updateStats()
 
   if (! dirty) return;
 
-  int numFiringIncidents = 0;
-  int numIncidents = 0;
-  int numDialogs[conf::DeliveryStatus::NUM_STATUS] = { 0 };
-  double lastNotification = 0.;
-  double oldestNotification = std::numeric_limits<double>::max();
-  double lastDeliveryAttempt = 0.;
-  double nextSchedule = std::numeric_limits<double>::max();
-  double nextSend = std::numeric_limits<double>::max();
+  int numFiringIncidents { 0 };
+  int numIncidents { 0 };
+  int numDialogs[dessser::gen::alerting_delivery_status::t::size] { 0 };
+  double lastNotification { 0. };
+  double oldestNotification { std::numeric_limits<double>::max() };
+  double lastDeliveryAttempt { 0. };
+  double nextSchedule { std::numeric_limits<double>::max() };
+  double nextSend { std::numeric_limits<double>::max() };
 
-  std::function<void(std::shared_ptr<conf::Notification const>)> updateNotifDates {
+  std::function<void(std::shared_ptr<dessser::gen::alerting_notification::t const> const)> updateNotifDates {
     [&lastNotification, &oldestNotification]
-    (std::shared_ptr<conf::Notification const> notif)
+    (std::shared_ptr<dessser::gen::alerting_notification::t const> const notif)
     {
-      lastNotification = std::max<double>(lastNotification, notif->sentTime);
-      oldestNotification = std::min<double>(oldestNotification, notif->sentTime);
+      lastNotification = std::max<double>(lastNotification, notif->sent_time);
+      oldestNotification = std::min<double>(oldestNotification, notif->sent_time);
     }
   };
 
   /* Update all stats in one go: */
-  int numTeams = 0;
-  iterTeams([&numTeams](std::string const &) {
-    numTeams ++;
-  });
+  int numTeams { 0 };
+  iterTeams([&numTeams](std::string const &) { numTeams ++; });
 
   iterIncidents([&numFiringIncidents, &numIncidents, &numDialogs,
                  &lastDeliveryAttempt, &nextSchedule, &nextSend,
-                 &updateNotifDates](std::string const &incidentId) {
-    numIncidents ++;
+                 &updateNotifDates](std::string const &incidentId)
+    {
+      numIncidents ++;
 
-    std::shared_ptr<conf::Notification const> firstStartNotif {
-      std::dynamic_pointer_cast<conf::Notification const>(
-          getIncident(incidentId, "first_start")) };
-    if (firstStartNotif) {
-      updateNotifDates(firstStartNotif);
-    }
-
-    std::shared_ptr<conf::Notification const> lastChangeNotif {
-      std::dynamic_pointer_cast<conf::Notification const>(
-          getIncident(incidentId, "last_change")) };
-    if (lastChangeNotif) {
-      if (lastChangeNotif->firing) numFiringIncidents ++;
-      updateNotifDates(lastChangeNotif);
-    }
-
-    iterDialogs(incidentId,
-                [&numDialogs, &lastDeliveryAttempt, &nextSchedule, &nextSend,
-                 &incidentId](std::string const &dialogId) {
-      std::shared_ptr<conf::DeliveryStatus const> deliveryStatus {
-        std::dynamic_pointer_cast<conf::DeliveryStatus const>(
-            getDialog(incidentId, dialogId, "delivery_status")) };
-      if (deliveryStatus) {
-        assert(deliveryStatus->status < conf::DeliveryStatus::NUM_STATUS);
-        numDialogs[deliveryStatus->status] ++;
+      std::shared_ptr<dessser::gen::alerting_notification::t const> const firstStartNotif {
+        getIncidentNotif(incidentId,
+                         std::make_shared<dessser::gen::sync_key::incident_key>(
+                           std::in_place_index<dessser::gen::sync_key::FirstStartNotif>,
+                           dessser::VOID)) };
+      if (firstStartNotif) {
+        updateNotifDates(firstStartNotif);
       }
 
-      std::optional<double> const lastDelivAttempt {
-        getDialogDate(incidentId, dialogId, "last_attempt") };
-      if (lastDelivAttempt)
-        lastDeliveryAttempt =
-          std::max<double>(lastDeliveryAttempt, *lastDelivAttempt);
+      std::shared_ptr<dessser::gen::alerting_notification::t const> const lastChangeNotif {
+        getIncidentNotif(incidentId,
+                         std::make_shared<dessser::gen::sync_key::incident_key>(
+                           std::in_place_index<dessser::gen::sync_key::LastStateChangeNotif>,
+                           dessser::VOID)) };
+      if (lastChangeNotif) {
+        if (lastChangeNotif->firing) numFiringIncidents ++;
+        updateNotifDates(lastChangeNotif);
+      }
 
-      std::optional<double> const nextSched {
-        getDialogDate(incidentId, dialogId, "next_scheduled") };
-      if (nextSched)
-        nextSchedule =
-          std::min<double>(nextSchedule, *lastDelivAttempt);
+      iterDialogs(incidentId,
+                  [&numDialogs, &lastDeliveryAttempt, &nextSchedule, &nextSend,
+                   &incidentId](std::string const &dialogId) {
+        std::shared_ptr<dessser::gen::sync_value::t const> deliveryStatus_v {
+          getDialog(incidentId, dialogId,
+                    std::make_shared<dessser::gen::sync_key::dialog_key>(
+                      std::in_place_index<dessser::gen::sync_key::DeliveryStatus>,
+                      dessser::VOID)) };
+        if (deliveryStatus_v &&
+            deliveryStatus_v->index() == dessser::gen::sync_value::DeliveryStatus) {
+          std::shared_ptr<dessser::gen::alerting_delivery_status::t const> const deliveryStatus {
+            std::get<dessser::gen::sync_value::DeliveryStatus>(*deliveryStatus_v) };
+          Q_ASSERT(deliveryStatus->index() < SIZEOF_ARRAY(numDialogs));
+          numDialogs[deliveryStatus->index()] ++;
+        }
 
-      std::optional<double> const nextSnd {
-        getDialogDate(incidentId, dialogId, "next_send") };
-      if (nextSnd)
-        nextSend =
-          std::min<double>(nextSend, *nextSnd);
+        std::optional<double> const lastDelivAttempt {
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                          std::in_place_index<dessser::gen::sync_key::LastDeliveryAttempt>,
+                          dessser::VOID)) };
+        if (lastDelivAttempt)
+          lastDeliveryAttempt =
+            std::max<double>(lastDeliveryAttempt, *lastDelivAttempt);
+
+        std::optional<double> const nextSched {
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                          std::in_place_index<dessser::gen::sync_key::NextScheduled>,
+                          dessser::VOID)) };
+        if (nextSched)
+          nextSchedule =
+            std::min<double>(nextSchedule, *lastDelivAttempt);
+
+        std::optional<double> const nextSnd {
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                          std::in_place_index<dessser::gen::sync_key::NextSend>,
+                          dessser::VOID)) };
+        if (nextSnd)
+          nextSend =
+            std::min<double>(nextSend, *nextSnd);
+      });
     });
-  });
 
   numTeamsWidget->setText(QString::number(numTeams));
 
   numFiringIncidentsWidget->setText(QString::number(numFiringIncidents));
   numIncidentsWidget->setText(QString::number(numIncidents));
   QStringList numDialogsStr;
-  if (numDialogs[conf::DeliveryStatus::StartToBeSent] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StartToBeSent] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StartToBeSent]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StartToBeSent]) +
       " alerts to be sent");
-  if (numDialogs[conf::DeliveryStatus::StartToBeSentThenStopped] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StartToBeSentThenStopped] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StartToBeSentThenStopped]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StartToBeSentThenStopped]) +
       " stopped before alert delivery attempted");
-  if (numDialogs[conf::DeliveryStatus::StartSent] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StartSent] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StartSent]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StartSent]) +
       " alerts sent");
-  if (numDialogs[conf::DeliveryStatus::StartAcked] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StartAcked] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StartAcked]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StartAcked]) +
       " alerts acked");
-  if (numDialogs[conf::DeliveryStatus::StopToBeSent] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StopToBeSent] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StopToBeSent]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StopToBeSent]) +
       " recovery to be sent");
-  if (numDialogs[conf::DeliveryStatus::StopSent] > 0)
+  if (numDialogs[dessser::gen::alerting_delivery_status::StopSent] > 0)
     numDialogsStr.append(
-      QString::number(numDialogs[conf::DeliveryStatus::StopSent]) +
+      QString::number(numDialogs[dessser::gen::alerting_delivery_status::StopSent]) +
       " recovery sent");
   numDialogsWidget->setText(numDialogsStr.join(",\n"));
   lastNotificationWidget->setText(stringOfDate(lastNotification));
@@ -170,11 +193,11 @@ void AlertingStats::updateStats()
   nextSendWidget->setText(stringOfDate(nextSend));
 }
 
-bool AlertingStats::isMyKey(std::string const &k) const
+bool AlertingStats::isMyKey(dessser::gen::sync_key::t const &k) const
 {
   return
-    startsWith(k, "alerting/teams/") ||
-    startsWith(k, "alerting/incidents/");
+    k.index() == dessser::gen::sync_key::Teams ||
+    k.index() == dessser::gen::sync_key::Incidents;
 }
 
 void AlertingStats::onChange(QList<ConfChange> const &changes)
@@ -188,7 +211,7 @@ void AlertingStats::onChange(QList<ConfChange> const &changes)
       case KeyCreated:
       case KeyChanged:
       case KeyDeleted:
-        if (! isMyKey(change.key)) return;
+        if (! isMyKey(*change.key)) return;
         dirty = true;
         break;
     }

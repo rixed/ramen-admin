@@ -108,12 +108,16 @@ inline std::ostream &operator<<(std::ostream &os, t7904aca1b7c7094ac41533a380831
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7904aca1b7c7094ac41533a38083131a> const r) { os << *r; return os; }
 
-struct t0b3b13a12d06c11bdb06603757bde4bd : public std::variant<
+struct t01907297530734eeb2fea6f30cc7354a : public std::variant<
   std::shared_ptr<::dessser::gen::source_info::compiled_program> , // Compiled
   ::dessser::gen::source_info::t7904aca1b7c7094ac41533a38083131a // Failed
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(t0b3b13a12d06c11bdb06603757bde4bd const &a, t0b3b13a12d06c11bdb06603757bde4bd const &b) {
+inline bool operator==(t01907297530734eeb2fea6f30cc7354a const &a, t01907297530734eeb2fea6f30cc7354a const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return (*std::get<0>(a)) == (*std::get<0>(b)); // Compiled
@@ -121,15 +125,15 @@ inline bool operator==(t0b3b13a12d06c11bdb06603757bde4bd const &a, t0b3b13a12d06
   };
   return false;
 }
-inline bool operator!=(t0b3b13a12d06c11bdb06603757bde4bd const &a, t0b3b13a12d06c11bdb06603757bde4bd const &b) {
+inline bool operator!=(t01907297530734eeb2fea6f30cc7354a const &a, t01907297530734eeb2fea6f30cc7354a const &b) {
   return !operator==(a, b);
 }
-enum Constr_t0b3b13a12d06c11bdb06603757bde4bd {
+enum Constr_t01907297530734eeb2fea6f30cc7354a {
   Compiled,
   Failed,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t0b3b13a12d06c11bdb06603757bde4bd const &v) {
+inline std::ostream &operator<<(std::ostream &os, t01907297530734eeb2fea6f30cc7354a const &v) {
   switch (v.index()) {
     case 0: os << "Compiled " << std::get<0>(v); break;
     case 1: os << "Failed " << std::get<1>(v); break;
@@ -137,13 +141,13 @@ inline std::ostream &operator<<(std::ostream &os, t0b3b13a12d06c11bdb06603757bde
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0b3b13a12d06c11bdb06603757bde4bd> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t01907297530734eeb2fea6f30cc7354a> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::source_info::t0b3b13a12d06c11bdb06603757bde4bd detail;
+  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
   Lst<std::string> md5s;
   std::string src_ext;
-  t(::dessser::gen::source_info::t0b3b13a12d06c11bdb06603757bde4bd detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
+  t(::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

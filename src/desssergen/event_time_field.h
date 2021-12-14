@@ -16,12 +16,16 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tc66891f26215ed3a95ca778dcaba5d3c : public std::variant<
+struct t5ea188408f7fe865526a4b1d67aef6a3 : public std::variant<
   Void, // OutputField
   Void // Parameter
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(tc66891f26215ed3a95ca778dcaba5d3c const &a, tc66891f26215ed3a95ca778dcaba5d3c const &b) {
+inline bool operator==(t5ea188408f7fe865526a4b1d67aef6a3 const &a, t5ea188408f7fe865526a4b1d67aef6a3 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // OutputField
@@ -29,15 +33,15 @@ inline bool operator==(tc66891f26215ed3a95ca778dcaba5d3c const &a, tc66891f26215
   };
   return false;
 }
-inline bool operator!=(tc66891f26215ed3a95ca778dcaba5d3c const &a, tc66891f26215ed3a95ca778dcaba5d3c const &b) {
+inline bool operator!=(t5ea188408f7fe865526a4b1d67aef6a3 const &a, t5ea188408f7fe865526a4b1d67aef6a3 const &b) {
   return !operator==(a, b);
 }
-enum Constr_tc66891f26215ed3a95ca778dcaba5d3c {
+enum Constr_t5ea188408f7fe865526a4b1d67aef6a3 {
   OutputField,
   Parameter,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tc66891f26215ed3a95ca778dcaba5d3c const &v) {
+inline std::ostream &operator<<(std::ostream &os, t5ea188408f7fe865526a4b1d67aef6a3 const &v) {
   switch (v.index()) {
     case 0: os << "OutputField" << std::get<0>(v); break;
     case 1: os << "Parameter" << std::get<1>(v); break;
@@ -45,11 +49,11 @@ inline std::ostream &operator<<(std::ostream &os, tc66891f26215ed3a95ca778dcaba5
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc66891f26215ed3a95ca778dcaba5d3c> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5ea188408f7fe865526a4b1d67aef6a3> const v) { os << *v; return os; }
 
 struct t : public std::tuple<
   dessser::gen::field_name::t_ext,
-  ::dessser::gen::event_time_field::tc66891f26215ed3a95ca778dcaba5d3c,
+  ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3,
   double
 > {
   using tuple::tuple;

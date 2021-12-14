@@ -256,11 +256,12 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k)
   using namespace dessser::gen::sync_key;
   auto const &incidents { std::get<Incidents>(k) };
   std::string const &incident_id { std::get<0>(incidents) };
-  auto const &incident_data { std::get<1>(incidents) };
+  std::shared_ptr<dessser::gen::sync_key::incident_key const> incident_data {
+    std::get<1>(incidents) };
   QStringList ret {
     QStringList("Incidents") <<
     QString::fromStdString(incident_id) };
-  switch (incident_data.index()) {
+  switch (incident_data->index()) {
     case FirstStartNotif:
       return ret << "FirstStartNotif";
     case LastStartNotif:
@@ -273,11 +274,12 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k)
       return ret << "Team";
     case Dialogs:
       {
-        auto const &dialogs { std::get<Dialogs>(incident_data) };
+        auto const &dialogs { std::get<Dialogs>(*incident_data) };
         ret = ret << "Dialogs" <<
               QString::fromStdString(std::get<0>(dialogs)).split("/", Qt::SkipEmptyParts);
-        auto const &dialog_data { std::get<1>(dialogs) };
-        switch (dialog_data.index()) {
+        std::shared_ptr<dessser::gen::sync_key::dialog_key const> dialog_data {
+          std::get<1>(dialogs) };
+        switch (dialog_data->index()) {
           case NumDeliveryAttempts:
             return ret << "NumDeliveryAttempts";
           case FirstDeliveryAttempt:
@@ -298,7 +300,7 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k)
       }
     case Journal:
       {
-        auto const &journal { std::get<Journal>(incident_data) };
+        auto const &journal { std::get<Journal>(*incident_data) };
         return ret << "Journal" << stringOfDate(std::get<0>(journal))
                    << QString::number(std::get<1>(journal));
       }

@@ -33,7 +33,11 @@ std::default_random_engine _random_engine_;
 struct t : public std::variant<
   uint32_t, // Idx
   dessser::gen::field_name::t_ext // Name
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

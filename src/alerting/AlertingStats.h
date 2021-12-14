@@ -2,14 +2,17 @@
 #define ALERTINGSTATS_H_200525
 #include <QWidget>
 
-#include "conf.h"
-#include "confValue.h"
-
+struct ConfChange;
 class QLabel;
 class QTimer;
 
-class AlertingStats : public QWidget
-{
+namespace dessser {
+  namespace gen {
+    namespace sync_key { struct t; }
+  }
+}
+
+class AlertingStats : public QWidget {
   Q_OBJECT
 
   QLabel *numFiringIncidentsWidget;
@@ -26,7 +29,8 @@ class AlertingStats : public QWidget
   bool dirty = true;
   QTimer *timer;
 
-  bool isMyKey(std::string const &) const;
+  bool isMyKey(dessser::gen::sync_key::t const &) const;
+
   void updateStats();
 
 public:
@@ -34,7 +38,6 @@ public:
 
 protected slots:
   void onChange(QList<ConfChange> const &);
-
 };
 
 #endif

@@ -45,12 +45,16 @@ inline std::ostream &operator<<(std::ostream &os, tc75d15e003a7ff08bcc9d3be43928
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc75d15e003a7ff08bcc9d3be43928a37> const t) { os << *t; return os; }
 
-struct tea7c279264063df7624d046b53678d33 : public std::variant<
+struct td2e775685fdb218732b8145a467405fe : public std::variant<
   dessser::gen::file_path::t_ext, // RingBuf
   dessser::gen::sync_key::t_ext // SyncKey
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(tea7c279264063df7624d046b53678d33 const &a, tea7c279264063df7624d046b53678d33 const &b) {
+inline bool operator==(td2e775685fdb218732b8145a467405fe const &a, td2e775685fdb218732b8145a467405fe const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return ::dessser::gen::file_path::Deref(std::get<0>(a)) == ::dessser::gen::file_path::Deref(std::get<0>(b)); // RingBuf
@@ -58,15 +62,15 @@ inline bool operator==(tea7c279264063df7624d046b53678d33 const &a, tea7c27926406
   };
   return false;
 }
-inline bool operator!=(tea7c279264063df7624d046b53678d33 const &a, tea7c279264063df7624d046b53678d33 const &b) {
+inline bool operator!=(td2e775685fdb218732b8145a467405fe const &a, td2e775685fdb218732b8145a467405fe const &b) {
   return !operator==(a, b);
 }
-enum Constr_tea7c279264063df7624d046b53678d33 {
+enum Constr_td2e775685fdb218732b8145a467405fe {
   RingBuf,
   SyncKey,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tea7c279264063df7624d046b53678d33 const &v) {
+inline std::ostream &operator<<(std::ostream &os, td2e775685fdb218732b8145a467405fe const &v) {
   switch (v.index()) {
     case 0: os << "RingBuf " << std::get<0>(v); break;
     case 1: os << "SyncKey " << std::get<1>(v); break;
@@ -74,19 +78,19 @@ inline std::ostream &operator<<(std::ostream &os, tea7c279264063df7624d046b53678
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tea7c279264063df7624d046b53678d33> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td2e775685fdb218732b8145a467405fe> const v) { os << *v; return os; }
 
 struct t {
   uint16_t channel;
   Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links;
-  ::dessser::gen::replay::tea7c279264063df7624d046b53678d33 recipient;
+  ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient;
   double since;
   Arr<dessser::gen::fq_function_name::t_ext> sources;
   dessser::gen::fq_function_name::t_ext target;
   std::string target_fieldmask;
   double timeout_date;
   double until;
-  t(uint16_t channel_, Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links_, ::dessser::gen::replay::tea7c279264063df7624d046b53678d33 recipient_, double since_, Arr<dessser::gen::fq_function_name::t_ext> sources_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double timeout_date_, double until_) : channel(channel_), links(links_), recipient(recipient_), since(since_), sources(sources_), target(target_), target_fieldmask(target_fieldmask_), timeout_date(timeout_date_), until(until_) {}
+  t(uint16_t channel_, Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links_, ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient_, double since_, Arr<dessser::gen::fq_function_name::t_ext> sources_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double timeout_date_, double until_) : channel(channel_), links(links_), recipient(recipient_), since(since_), sources(sources_), target(target_), target_fieldmask(target_fieldmask_), timeout_date(timeout_date_), until(until_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

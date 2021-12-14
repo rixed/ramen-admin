@@ -213,6 +213,13 @@ HEADERS += \
   storage/StorageInfo.h \
   storage/StorageView.h \
   storage/StorageWin.h \
+  alerting/tools.h \
+  alerting/AlertingJournal.h \
+  alerting/AlertingLogsModel.h \
+  alerting/AlertingStats.h \
+  alerting/NotifTimeLine.h \
+  alerting/AlertingTimeLine.h \
+  alerting/AlertingWin.h \
   Menu.h \
   ReplayRequest.h \
   PastData.h \
@@ -413,6 +420,13 @@ SOURCES += \
   storage/StorageInfo.cpp \
   storage/StorageView.cpp \
   storage/StorageWin.cpp \
+  alerting/tools.cpp \
+  alerting/AlertingJournal.cpp \
+  alerting/AlertingLogsModel.cpp \
+  alerting/AlertingStats.cpp \
+  alerting/NotifTimeLine.cpp \
+  alerting/AlertingTimeLine.cpp \
+  alerting/AlertingWin.cpp \
   Menu.cpp \
   ReplayRequest.cpp \
   PastData.cpp \

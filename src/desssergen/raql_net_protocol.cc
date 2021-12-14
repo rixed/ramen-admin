@@ -33,7 +33,11 @@ struct t : public std::variant<
   Void, // Collectd
   Void, // NetflowV5
   Void // Graphite
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

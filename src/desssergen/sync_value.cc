@@ -95,7 +95,11 @@ struct t : public std::variant<
   dessser::gen::alerting_delivery_status::t_ext, // DeliveryStatus
   dessser::gen::alerting_log::t_ext, // IncidentLog
   dessser::gen::alerting_inhibition::t_ext // Inhibition
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 20 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

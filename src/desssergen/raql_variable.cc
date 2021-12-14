@@ -43,7 +43,11 @@ struct t : public std::variant<
   Void, // Env
   Void, // Record
   Void // GlobalVar
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 13 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

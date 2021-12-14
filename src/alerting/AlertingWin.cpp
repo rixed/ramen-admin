@@ -1,7 +1,8 @@
 #include <QWidget>
 #include <QVBoxLayout>
-#include "alerting/AlertingLogsModel.h"
+
 #include "alerting/AlertingJournal.h"
+#include "alerting/AlertingLogsModel.h"
 #include "alerting/AlertingStats.h"
 #include "alerting/AlertingTimeLine.h"
 

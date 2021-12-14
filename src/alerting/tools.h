@@ -6,12 +6,18 @@
 #include <optional>
 #include <string>
 
-struct VString;
-namespace conf {
-  class Value;
-  struct IncidentLog;
-  struct Notification;
-};
+namespace dessser {
+  namespace gen {
+    namespace alerting_log { struct t; }
+    namespace alerting_notification { struct t; }
+    namespace sync_key {
+      struct t;
+      struct incident_key;
+      struct dialog_key;
+    }
+    namespace sync_value { struct t; }
+  }
+}
 
 void iterTeams(
   std::function<void(std::string const &)>);
@@ -20,48 +26,47 @@ void iterIncidents(
   std::function<void(std::string const &)>);
 
 void iterDialogs(
-  std::string const &incidentId,
+  std::string const &incident_id,
   std::function<void(std::string const &)>);
 
 // In no particular order:
 void iterLogs(
-  std::string const &incidentId,
-  std::function<void(double,
-                     std::shared_ptr<conf::IncidentLog const>)>);
+  std::string const &incident_id,
+  std::function<void(double, std::shared_ptr<dessser::gen::alerting_log::t const>)>);
 
 bool parseLogKey(
-  std::string const &k,
-  std::string *incidentId,
+  dessser::gen::sync_key::t const &,
+  std::string *incident_id,
   double *time);
 
-std::string const incidentKey(
-  std::string const &incidentId,
-  std::string const &k);
+std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
+  std::string const &incident_id,
+  std::shared_ptr<dessser::gen::sync_key::incident_key const>);
 
-std::shared_ptr<conf::Value const> getIncident(
-  std::string const &incidentId,
-  std::string const &k);
+std::shared_ptr<dessser::gen::sync_value::t const> getIncident(
+  std::string const &incident_id,
+  std::shared_ptr<dessser::gen::sync_key::incident_key const>);
 
-std::shared_ptr<conf::Notification const> getIncidentNotif(
-  std::string const &incidentId,
-  std::string const &k);
+std::shared_ptr<dessser::gen::alerting_notification::t const> getIncidentNotif(
+  std::string const &incident_id,
+  std::shared_ptr<dessser::gen::sync_key::incident_key const>);
 
-std::shared_ptr<VString const> getAssignedTeam(std::string const &incidentId);
+std::shared_ptr<std::string const> getAssignedTeam(std::string const &incident_id);
 
-std::string const dialogKey(
-  std::string const &incidentId,
-  std::string const &dialogId,
-  std::string const &k);
+std::shared_ptr<dessser::gen::sync_key::t const> dialogKey(
+  std::string const &incident_id,
+  std::string const &dialog_id,
+  std::shared_ptr<dessser::gen::sync_key::dialog_key const>);
 
-std::shared_ptr<conf::Value const> getDialog(
-  std::string const &incidentId,
-  std::string const &dialogId,
-  std::string const &k);
+std::shared_ptr<dessser::gen::sync_value::t const> getDialog(
+  std::string const &incident_id,
+  std::string const &dialog_id,
+  std::shared_ptr<dessser::gen::sync_key::dialog_key const>);
 
 /* Same as above but returns a float directly: */
 std::optional<double> getDialogDate(
-  std::string const &incidentId,
-  std::string const &dialogId,
-  std::string const &k);
+  std::string const &incident_id,
+  std::string const &dialog_id,
+  std::shared_ptr<dessser::gen::sync_key::dialog_key const>);
 
 #endif

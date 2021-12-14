@@ -6,8 +6,7 @@ class AlertingJournal;
 class AlertingStats;
 class AlertingTimeLine;
 
-class AlertingWin : public SavedWindow
-{
+class AlertingWin : public SavedWindow {
   Q_OBJECT
 
   AlertingStats *stats;

@@ -28,9 +28,7 @@
 #include "ServerInfoWin.h"
 #include "source/SourcesWin.h"
 #include "storage/StorageWin.h"
-#ifdef WITH_ALERTING
 #include "alerting/AlertingWin.h"
-#endif
 
 #include "Menu.h"
 
@@ -52,9 +50,7 @@ OperationsWin *Menu::operationsWin;
 # endif
 LoginWin *Menu::loginWin;
 LoggerWin *Menu::loggerWin;
-#ifdef WITH_ALERTING
 AlertingWin *Menu::alertingWin;
-#endif
 
 void Menu::initLoginWin(QString const &configDir)
 {
@@ -88,10 +84,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (verbose) qDebug() << "Create OperationsWin...";
   if (! operationsWin) operationsWin = new OperationsWin;
 # endif
-# ifdef WITH_ALERTING
   if (verbose) qDebug() << "Create AlertingWin ...";
   if (! alertingWin) alertingWin = new AlertingWin;
-# endif
   // login is supposed to be initialized first
   Q_ASSERT(loginWin);
 }
@@ -126,9 +120,7 @@ void Menu::deleteDialogs()
 # ifdef WITH_OPERATIONS
   danceOfDelLater<OperationsWin>(&operationsWin);
 # endif
-# ifdef WITH_ALERTING
   danceOfDelLater<AlertingWin>(&alertingWin);
-# endif
   // delLater is never when we quit the app:
   if (loggerWin) loggerWin->loggerView->flush();
   danceOfDelLater<LoggerWin>(&loggerWin);
@@ -206,12 +198,10 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "Storage Configuration…"),
       this, &Menu::openStorageWin);
 
-#   ifdef WITH_ALERTING
     /* The alerting window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Alerting…"),
       this, &Menu::openAlertingWin);
-#   endif
 
     /* The Server Information window: */
     windowMenu->addAction(
@@ -264,11 +254,9 @@ void Menu::populateMenu(bool basic, bool extended)
   }
 
   if (extended && WITH_BETA_FEATURES) {
-#   ifdef WITH_ALERTING
     alertMenu = menuBar->addMenu(
       QCoreApplication::translate("QMenuBar", "&Alert"));
     (void)alertMenu;
-#   endif
 
     /* DEBUG: the list of all names, to test autocompletion: */
     windowMenu->addAction(
@@ -372,12 +360,10 @@ void Menu::openOperationsWin()
 }
 #endif
 
-#ifdef WITH_ALERTING
 void Menu::openAlertingWin()
 {
   showRaised(alertingWin);
 }
-#endif
 
 void Menu::openLoginWin()
 {

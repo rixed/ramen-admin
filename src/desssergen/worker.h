@@ -69,12 +69,16 @@ inline std::ostream &operator<<(std::ostream &os, tb1d409993b02f1b7f7cedc87680ee
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb1d409993b02f1b7f7cedc87680eed70> const r) { os << *r; return os; }
 
-struct tc2ce6e932e30e0ce1da66750e694e766 : public std::variant<
+struct t99c4dcc041241b8d5db72250f8968306 : public std::variant<
   Void, // Whole
   Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> // TopHalf
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
+inline bool operator==(t99c4dcc041241b8d5db72250f8968306 const &a, t99c4dcc041241b8d5db72250f8968306 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Whole
@@ -82,15 +86,15 @@ inline bool operator==(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30
   };
   return false;
 }
-inline bool operator!=(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
+inline bool operator!=(t99c4dcc041241b8d5db72250f8968306 const &a, t99c4dcc041241b8d5db72250f8968306 const &b) {
   return !operator==(a, b);
 }
-enum Constr_tc2ce6e932e30e0ce1da66750e694e766 {
+enum Constr_t99c4dcc041241b8d5db72250f8968306 {
   Whole,
   TopHalf,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tc2ce6e932e30e0ce1da66750e694e766 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t99c4dcc041241b8d5db72250f8968306 const &v) {
   switch (v.index()) {
     case 0: os << "Whole" << std::get<0>(v); break;
     case 1: os << "TopHalf " << std::get<1>(v); break;
@@ -98,7 +102,7 @@ inline std::ostream &operator<<(std::ostream &os, tc2ce6e932e30e0ce1da66750e694e
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc2ce6e932e30e0ce1da66750e694e766> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t99c4dcc041241b8d5db72250f8968306> const v) { os << *v; return os; }
 
 struct t {
   Arr<dessser::gen::func_ref::t_ext> children;
@@ -111,9 +115,9 @@ struct t {
   Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   double report_period;
-  ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role;
+  ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role;
   std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

@@ -17,13 +17,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t385d96eaffd8e1290e38421e1560ee60 : public std::variant<
+struct t92d550ed37bacecb946618f8c58e8de4 : public std::variant<
   Void, // Program
   Void, // Site
   Void // Global
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
-inline bool operator==(t385d96eaffd8e1290e38421e1560ee60 const &a, t385d96eaffd8e1290e38421e1560ee60 const &b) {
+inline bool operator==(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Program
@@ -32,16 +36,16 @@ inline bool operator==(t385d96eaffd8e1290e38421e1560ee60 const &a, t385d96eaffd8
   };
   return false;
 }
-inline bool operator!=(t385d96eaffd8e1290e38421e1560ee60 const &a, t385d96eaffd8e1290e38421e1560ee60 const &b) {
+inline bool operator!=(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
   return !operator==(a, b);
 }
-enum Constr_t385d96eaffd8e1290e38421e1560ee60 {
+enum Constr_t92d550ed37bacecb946618f8c58e8de4 {
   Program,
   Site,
   Global,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t385d96eaffd8e1290e38421e1560ee60 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t92d550ed37bacecb946618f8c58e8de4 const &v) {
   switch (v.index()) {
     case 0: os << "Program" << std::get<0>(v); break;
     case 1: os << "Site" << std::get<1>(v); break;
@@ -50,13 +54,13 @@ inline std::ostream &operator<<(std::ostream &os, t385d96eaffd8e1290e38421e1560e
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t385d96eaffd8e1290e38421e1560ee60> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t92d550ed37bacecb946618f8c58e8de4> const v) { os << *v; return os; }
 
 struct t {
   dessser::gen::field_name::t_ext name;
-  ::dessser::gen::global_variable::t385d96eaffd8e1290e38421e1560ee60 scope;
+  ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope;
   dessser::gen::raql_type::t_ext typ;
-  t(dessser::gen::field_name::t_ext name_, ::dessser::gen::global_variable::t385d96eaffd8e1290e38421e1560ee60 scope_, dessser::gen::raql_type::t_ext typ_) : name(name_), scope(scope_), typ(typ_) {}
+  t(dessser::gen::field_name::t_ext name_, ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope_, dessser::gen::raql_type::t_ext typ_) : name(name_), scope(scope_), typ(typ_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

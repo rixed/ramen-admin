@@ -1,12 +1,17 @@
 #include <cstdlib>
 #include <QDebug>
 #include <QFormLayout>
+
 #include "alerting/NotifTimeLine.h"
 #include "alerting/tools.h"
-#include "chart/TimeLine.h"
-#include "chart/TimeLineGroup.h"
-#include "conf.h"
-#include "confValue.h"
+#include "desssergen/alerting_log.h"
+#include "desssergen/alerting_notification.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "KVStore.h"
+#include "misc.h"
+#include "timeline/TimeLine.h"
+#include "timeline/TimeLineGroup.h"
 #include "TimeRange.h"
 
 #include "alerting/AlertingTimeLine.h"
@@ -21,12 +26,12 @@ AlertingTimeLine::AlertingTimeLine(QWidget *parent)
   formLayout->setFieldGrowthPolicy(QFormLayout::AllNonFixedFieldsGrow);
   timeLineGroup = new TimeLineGroup(this);
 
-  qreal const endOfTime = getTime();
-  qreal const beginOfTime = endOfTime - 24*3600;
-  TimeLine *timeLineTop =
-    new TimeLine(beginOfTime, endOfTime, TimeLine::TicksBottom);
-  TimeLine *timeLineBottom =
-    new TimeLine(beginOfTime, endOfTime, TimeLine::TicksTop);
+  qreal const endOfTime { getTime() };
+  qreal const beginOfTime { endOfTime - 24*3600 };
+  TimeLine *timeLineTop {
+    new TimeLine(beginOfTime, endOfTime, TimeLine::TicksBottom) };
+  TimeLine *timeLineBottom {
+    new TimeLine(beginOfTime, endOfTime, TimeLine::TicksTop) };
   /* Note: Order of insertion in the group has no influence over order of
    * representation in the QFormLayout: */
   timeLineGroup->add(timeLineTop);
@@ -42,14 +47,16 @@ AlertingTimeLine::AlertingTimeLine(QWidget *parent)
 
   setLayout(formLayout);
 
-  iterIncidents([this](std::string const &incidentId) {
-    iterLogs(incidentId, [this, &incidentId]
-             (double time, std::shared_ptr<conf::IncidentLog const> log) {
-      addLog(incidentId, time, log);
+  iterIncidents([this](std::string const &incidentId)
+    {
+      iterLogs(incidentId, [this, &incidentId]
+               (double time, std::shared_ptr<dessser::gen::alerting_log::t const> log)
+        {
+          addLog(incidentId, time, log);
+        });
     });
-  });
 
-  connect(kvs, &KVStore::keyChanged,
+  connect(kvs.get(), &KVStore::keyChanged,
           this, &AlertingTimeLine::onKeyChange);
 }
 
@@ -67,20 +74,23 @@ void AlertingTimeLine::setTimeRange(TimeRange const &range)
 void AlertingTimeLine::addLog(
   std::string const &incidentId,
   double const &time,
-  std::shared_ptr<conf::IncidentLog const> log)
+  std::shared_ptr<dessser::gen::alerting_log::t const>)
 {
-  (void)time; (void)log;
+  (void)time;
   NotifTimeLine *timeLine { timeLines.value(incidentId) };
   if (! timeLine) {
-    std::shared_ptr<conf::Notification const> const firstStart {
-      getIncidentNotif(incidentId, "first_start") };
+    std::shared_ptr<dessser::gen::alerting_notification::t const> const firstStart {
+      getIncidentNotif(incidentId,
+                       std::make_shared<dessser::gen::sync_key::incident_key>(
+                         std::in_place_index<dessser::gen::sync_key::FirstStartNotif>,
+                         dessser::VOID)) };
     if (! firstStart) {
       qWarning() << "Cannot find first_start notif for incident"
                  << QString::fromStdString(incidentId);
       return;
     }
 
-    std::shared_ptr<VString const> const assignedTeam {
+    std::shared_ptr<std::string const> const assignedTeam {
       getAssignedTeam(incidentId) };
     if (! assignedTeam) {
       qWarning() << "Cannot find IncidentId" << QString::fromStdString(incidentId)
@@ -89,25 +99,31 @@ void AlertingTimeLine::addLog(
     }
 
     QString const incidentName {
-      assignedTeam->v + QString(": ") + firstStart->name };
+      QString::fromStdString(*assignedTeam) + QString(": ") +
+      QString::fromStdString(firstStart->name) };
 
     timeLine = new NotifTimeLine(incidentId, 0., 0., true, true, this);
     timeLineGroup->add(timeLine);
-    int const row = 1; // TODO: order notif names alphabetically?
+    int const row { 1 }; // TODO: order notif names alphabetically?
     formLayout->insertRow(row, incidentName, timeLine);
     timeLines.insert(incidentId, timeLine);
   }
 }
 
-void AlertingTimeLine::addLogKey(std::string const &key, KValue const &kv)
+void AlertingTimeLine::addLogKey(
+  dessser::gen::sync_key::t const &key, KValue const &kv)
 {
   std::string incidentId;
   double time;
-  if (! parseLogKey(key, &incidentId, &time)) return;
+  if (! parseLogKey(key, &incidentId, &time)) {
+not_log:
+    return;
+  }
+  // Not all keys are log events:
+  if (kv.val->index() != dessser::gen::sync_value::IncidentLog) goto not_log;
 
-  std::shared_ptr<conf::IncidentLog const> log {
-    std::dynamic_pointer_cast<conf::IncidentLog const>(kv.val) };
-  if (! log) return;  // Not all keys are log events
+  std::shared_ptr<dessser::gen::alerting_log::t const> log {
+    std::get<dessser::gen::sync_value::IncidentLog>(*kv.val) };
 
   addLog(incidentId, time, log);
 }
@@ -117,6 +133,6 @@ void AlertingTimeLine::onKeyChange(QList<ConfChange> const &changes)
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change { changes.at(i) };
     if (change.op != KeyCreated) continue;
-    addLogKey(change.key, change.kv);
+    addLogKey(*change.key, change.kv);
   }
 }

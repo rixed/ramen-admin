@@ -9,9 +9,9 @@
 #include <QDebug>
 #include <QString>
 
-#include "chart/AbstractTimeLine.h"
 #include "desssergen/dashboard_widget.h"
 #include "misc_dessser.h"
+#include "timeline/AbstractTimeLine.h"
 
 /* A TimeChart displays the actual plot.
  * It is configured from a TimeChartWidget that is provided in the constructor,

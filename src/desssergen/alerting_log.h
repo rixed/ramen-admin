@@ -15,14 +15,18 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t68e400d2c31c46ef1f50eb49f6d25f2c : public std::variant<
+struct tc97f0c1bbabddd4db874c961cd5609d9 : public std::variant<
   Void, // Duplicate
   Void, // Inhibited
   Void, // STFU
   Void // StartEscalation
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 4 };
+};
 
-inline bool operator==(t68e400d2c31c46ef1f50eb49f6d25f2c const &a, t68e400d2c31c46ef1f50eb49f6d25f2c const &b) {
+inline bool operator==(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabddd4db874c961cd5609d9 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Duplicate
@@ -32,17 +36,17 @@ inline bool operator==(t68e400d2c31c46ef1f50eb49f6d25f2c const &a, t68e400d2c31c
   };
   return false;
 }
-inline bool operator!=(t68e400d2c31c46ef1f50eb49f6d25f2c const &a, t68e400d2c31c46ef1f50eb49f6d25f2c const &b) {
+inline bool operator!=(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabddd4db874c961cd5609d9 const &b) {
   return !operator==(a, b);
 }
-enum Constr_t68e400d2c31c46ef1f50eb49f6d25f2c {
+enum Constr_tc97f0c1bbabddd4db874c961cd5609d9 {
   Duplicate,
   Inhibited,
   STFU,
   StartEscalation,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t68e400d2c31c46ef1f50eb49f6d25f2c const &v) {
+inline std::ostream &operator<<(std::ostream &os, tc97f0c1bbabddd4db874c961cd5609d9 const &v) {
   switch (v.index()) {
     case 0: os << "Duplicate" << std::get<0>(v); break;
     case 1: os << "Inhibited" << std::get<1>(v); break;
@@ -52,7 +56,7 @@ inline std::ostream &operator<<(std::ostream &os, t68e400d2c31c46ef1f50eb49f6d25
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t68e400d2c31c46ef1f50eb49f6d25f2c> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc97f0c1bbabddd4db874c961cd5609d9> const v) { os << *v; return os; }
 
 struct t6bded395cd2ca5ea5b1538d97c26812f : public std::tuple<
   std::string,
@@ -78,13 +82,17 @@ inline std::ostream &operator<<(std::ostream &os, t6bded395cd2ca5ea5b1538d97c268
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6bded395cd2ca5ea5b1538d97c26812f> const t) { os << *t; return os; }
 
-struct tda1a7f0ee5c512824f4f5c13bdd6fcc3 : public std::variant<
+struct t2f07d8351fa62306ecaa96746ccc3d68 : public std::variant<
   Void, // Notification
   std::string, // Manual
   std::string // Timeout
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
-inline bool operator==(tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &a, tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &b) {
+inline bool operator==(t2f07d8351fa62306ecaa96746ccc3d68 const &a, t2f07d8351fa62306ecaa96746ccc3d68 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Notification
@@ -93,16 +101,16 @@ inline bool operator==(tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &a, tda1a7f0ee5c5
   };
   return false;
 }
-inline bool operator!=(tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &a, tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &b) {
+inline bool operator!=(t2f07d8351fa62306ecaa96746ccc3d68 const &a, t2f07d8351fa62306ecaa96746ccc3d68 const &b) {
   return !operator==(a, b);
 }
-enum Constr_tda1a7f0ee5c512824f4f5c13bdd6fcc3 {
+enum Constr_t2f07d8351fa62306ecaa96746ccc3d68 {
   Notification,
   Manual,
   Timeout,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tda1a7f0ee5c512824f4f5c13bdd6fcc3 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t2f07d8351fa62306ecaa96746ccc3d68 const &v) {
   switch (v.index()) {
     case 0: os << "Notification" << std::get<0>(v); break;
     case 1: os << "Manual " << std::get<1>(v); break;
@@ -111,15 +119,19 @@ inline std::ostream &operator<<(std::ostream &os, tda1a7f0ee5c512824f4f5c13bdd6f
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tda1a7f0ee5c512824f4f5c13bdd6fcc3> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t2f07d8351fa62306ecaa96746ccc3d68> const v) { os << *v; return os; }
 
 struct t : public std::variant<
-  ::dessser::gen::alerting_log::t68e400d2c31c46ef1f50eb49f6d25f2c, // NewNotification
+  ::dessser::gen::alerting_log::tc97f0c1bbabddd4db874c961cd5609d9, // NewNotification
   ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f, // Outcry
   std::string, // Ack
-  ::dessser::gen::alerting_log::tda1a7f0ee5c512824f4f5c13bdd6fcc3, // Stop
+  ::dessser::gen::alerting_log::t2f07d8351fa62306ecaa96746ccc3d68, // Stop
   std::string // Cancel
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 5 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;

@@ -63,12 +63,16 @@ inline bool operator==(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02
 inline bool operator!=(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
   return !operator==(a, b);
 }
-struct tc2ce6e932e30e0ce1da66750e694e766 : public std::variant<
+struct t99c4dcc041241b8d5db72250f8968306 : public std::variant<
   Void, // Whole
   Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> // TopHalf
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
 
-inline bool operator==(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
+inline bool operator==(t99c4dcc041241b8d5db72250f8968306 const &a, t99c4dcc041241b8d5db72250f8968306 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Whole
@@ -76,7 +80,7 @@ inline bool operator==(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30
   };
   return false;
 }
-inline bool operator!=(tc2ce6e932e30e0ce1da66750e694e766 const &a, tc2ce6e932e30e0ce1da66750e694e766 const &b) {
+inline bool operator!=(t99c4dcc041241b8d5db72250f8968306 const &a, t99c4dcc041241b8d5db72250f8968306 const &b) {
   return !operator==(a, b);
 }
 struct t {
@@ -90,9 +94,9 @@ struct t {
   Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   double report_period;
-  ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role;
+  ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role;
   std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
@@ -340,18 +344,18 @@ inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
   return !operator==(a, b);
 }
-struct tf84ad2f19b04907e60bf220250e36c40 : public std::tuple<
-  ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766,
+struct t22f1c18d7ff5e17fbfd136926bb86456 : public std::tuple<
+  ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306,
   Pointer
 > {
   using tuple::tuple;
-  tf84ad2f19b04907e60bf220250e36c40(std::tuple<::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766, Pointer> p)
-    : std::tuple<::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t22f1c18d7ff5e17fbfd136926bb86456(std::tuple<::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306, Pointer> p)
+    : std::tuple<::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf84ad2f19b04907e60bf220250e36c40 const &a, tf84ad2f19b04907e60bf220250e36c40 const &b) {
+inline bool operator==(t22f1c18d7ff5e17fbfd136926bb86456 const &a, t22f1c18d7ff5e17fbfd136926bb86456 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf84ad2f19b04907e60bf220250e36c40 const &a, tf84ad2f19b04907e60bf220250e36c40 const &b) {
+inline bool operator!=(t22f1c18d7ff5e17fbfd136926bb86456 const &a, t22f1c18d7ff5e17fbfd136926bb86456 const &b) {
   return !operator==(a, b);
 }
 struct te199516c71e68f0bc8f7fc5bbe6b4afc : public std::tuple<
@@ -976,27 +980,27 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::worker::t> ,Pointer
     Pointer let_res_224;
     {
       Pointer srec_dst_368 { let_res_166 };
-      ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_225 { (*p_0).role };
+      ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_225 { (*p_0).role };
       uint16_t id_226 { uint16_t(id_225.index()) };
       Pointer id_227 { srec_dst_368.writeU16Le(id_226) };
       Pointer let_res_228;
       {
         Pointer ssum_dst_370 { id_227 };
         uint16_t id_229 { 0 };
-        ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_230 { (*p_0).role };
+        ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_230 { (*p_0).role };
         uint16_t id_231 { uint16_t(id_230.index()) };
         bool id_232 { bool(id_229 == id_231) };
         Pointer choose_res_233;
         if (id_232) {
           choose_res_233 = ssum_dst_370;
         } else {
-          ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_234 { (*p_0).role };
+          ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_234 { (*p_0).role };
           uint16_t id_235 { uint16_t(id_234.index()) };
           uint16_t id_236 { 1 };
           bool id_237 { bool(id_235 == id_236) };
           Void id_238 { ((void)(assert(id_237)), ::dessser::VOID) };
           (void)id_238;
-          ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_239 { (*p_0).role };
+          ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_239 { (*p_0).role };
           Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_240 { std::get<1 /* TopHalf */>(id_239) };
           uint32_t id_241 { id_240.size() };
           Vec<1, uint32_t> id_242 {  id_241  };
@@ -1065,7 +1069,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::worker::t> ,Pointer
             Pointer let_res_281;
             {
               Vec<1, int32_t> n_ref_374 { id_280 };
-              ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_282 { (*p_0).role };
+              ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_282 { (*p_0).role };
               Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_283 { std::get<1 /* TopHalf */>(id_282) };
               for (::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70 x_375 : id_283) {
                 uint8_t id_284 { 0 };
@@ -1844,7 +1848,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
     {
       Size sz_322 { let_res_603 };
       uint16_t id_660 { 0 };
-      ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_661 { (*p_0).role };
+      ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_661 { (*p_0).role };
       uint16_t id_662 { uint16_t(id_661.index()) };
       bool id_663 { bool(id_660 == id_662) };
       Size choose_res_664;
@@ -1853,7 +1857,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
         Size id_666 { Size(sz_322 + id_665) };
         choose_res_664 = id_666;
       } else {
-        ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_667 { (*p_0).role };
+        ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_667 { (*p_0).role };
         uint16_t id_668 { uint16_t(id_667.index()) };
         uint16_t id_669 { 1 };
         bool id_670 { bool(id_668 == id_669) };
@@ -1861,7 +1865,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
         (void)id_671;
         Size id_672 { 2UL };
         Size id_673 { Size(sz_322 + id_672) };
-        ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_674 { (*p_0).role };
+        ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_674 { (*p_0).role };
         Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_675 { std::get<1 /* TopHalf */>(id_674) };
         uint32_t id_676 { id_675.size() };
         Vec<1, uint32_t> id_677 {  id_676  };
@@ -1912,7 +1916,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
             Vec<1, int32_t> repeat_n_327 { id_703 };
             bool while_flag_704 { true };
             do {
-              ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_705 { (*p_0).role };
+              ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_705 { (*p_0).role };
               Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_706 { std::get<1 /* TopHalf */>(id_705) };
               uint32_t id_707 { id_706.size() };
               int32_t id_708 { int32_t(id_707) };
@@ -1929,7 +1933,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::worker::t> )> sersize_
                   Size sz_328 { id_714 };
                   uint8_t id_716 { 0 };
                   int32_t id_717 { repeat_n_327[id_716] };
-                  ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_718 { (*p_0).role };
+                  ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_718 { (*p_0).role };
                   Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_719 { std::get<1 /* TopHalf */>(id_718) };
                   ::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70 id_720 { id_719[id_717] };
                   std::string id_721 { id_720.tunneld_host };
@@ -3210,20 +3214,20 @@ static std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(P
                                           ::dessser::gen::worker::ta97bb48ed75bbda6173555873826c8c6 id_1174 { du16_fst_172, du16_snd_173 };
                                           letpair_res_1173 = id_1174;
                                         }
-                                        ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 let_res_1175;
+                                        ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 let_res_1175;
                                         {
                                           ::dessser::gen::worker::ta97bb48ed75bbda6173555873826c8c6 dsum1_177 { letpair_res_1173 };
-                                          ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 letpair_res_1176;
+                                          ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 letpair_res_1176;
                                           {
                                             auto dsum1_fst_178 { std::get<0>(dsum1_177) };
                                             auto dsum1_snd_179 { std::get<1>(dsum1_177) };
                                             uint16_t id_1177 { 0 };
                                             bool id_1178 { bool(id_1177 == dsum1_fst_178) };
-                                            ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 choose_res_1179;
+                                            ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 choose_res_1179;
                                             if (id_1178) {
                                               (void)::dessser::VOID;
-                                              ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_1180 { std::in_place_index<0>, ::dessser::VOID };
-                                              ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 id_1181 { id_1180, dsum1_snd_179 };
+                                              ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_1180 { std::in_place_index<0>, ::dessser::VOID };
+                                              ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 id_1181 { id_1180, dsum1_snd_179 };
                                               choose_res_1179 = id_1181;
                                             } else {
                                               uint16_t id_1182 { 1 };
@@ -3493,13 +3497,13 @@ static std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(P
                                                 }
                                                 let_res_1225 = letpair_res_1226;
                                               }
-                                              ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 letpair_res_1309;
+                                              ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 letpair_res_1309;
                                               {
                                                 auto dlist4_fst_228 { std::get<0>(let_res_1225) };
                                                 auto dlist4_snd_229 { std::get<1>(let_res_1225) };
                                                 Arr<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_1310 { dlist4_fst_228.toListRev() };
-                                                ::dessser::gen::worker::tc2ce6e932e30e0ce1da66750e694e766 id_1311 { std::in_place_index<1>, id_1310 };
-                                                ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 id_1312 { id_1311, dlist4_snd_229 };
+                                                ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 id_1311 { std::in_place_index<1>, id_1310 };
+                                                ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 id_1312 { id_1311, dlist4_snd_229 };
                                                 letpair_res_1309 = id_1312;
                                               }
                                               choose_res_1179 = letpair_res_1309;
@@ -3510,7 +3514,7 @@ static std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(P
                                         }
                                         ::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca let_res_1313;
                                         {
-                                          ::dessser::gen::worker::tf84ad2f19b04907e60bf220250e36c40 drec_236 { let_res_1175 };
+                                          ::dessser::gen::worker::t22f1c18d7ff5e17fbfd136926bb86456 drec_236 { let_res_1175 };
                                           ::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca letpair_res_1314;
                                           {
                                             auto drec_fst_237 { std::get<0>(drec_236) };

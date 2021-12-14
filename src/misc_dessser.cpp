@@ -450,13 +450,16 @@ static QString toQStringSpecKey(
           case dessser::gen::sync_key::Incidents:
             {
               auto const &per_inc { std::get<dessser::gen::sync_key::Incidents>(k) };
-              auto const &per_inc_key { std::get<1>(per_inc) };
-              switch (per_inc_key.index()) {
+              std::shared_ptr<dessser::gen::sync_key::incident_key const> per_inc_key {
+                std::get<1>(per_inc) };
+              switch (per_inc_key->index()) {
                 case dessser::gen::sync_key::Dialogs:
                   {
-                    auto const &per_diag { std::get<dessser::gen::sync_key::Dialogs>(per_inc_key) };
-                    auto const &per_diag_key { std::get<1>(per_diag) };
-                    switch (per_diag_key.index()) {
+                    auto const &per_diag {
+                      std::get<dessser::gen::sync_key::Dialogs>(*per_inc_key) };
+                    std::shared_ptr<dessser::gen::sync_key::dialog_key const> per_diag_key {
+                      std::get<1>(per_diag) };
+                    switch (per_diag_key->index()) {
                       case dessser::gen::sync_key::FirstDeliveryAttempt:
                       case dessser::gen::sync_key::LastDeliveryAttempt:
                       case dessser::gen::sync_key::NextScheduled:
@@ -770,6 +773,16 @@ QDebug operator<<(QDebug debug, dessser::gen::sync_key::t const &k)
   return printerOfStream<dessser::gen::sync_key::t>(debug, k);
 }
 
+QDebug operator<<(QDebug debug, dessser::gen::sync_key::dialog_key const &k)
+{
+  return printerOfStream<dessser::gen::sync_key::dialog_key>(debug, k);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::sync_key::incident_key const &k)
+{
+  return printerOfStream<dessser::gen::sync_key::incident_key>(debug, k);
+}
+
 QDebug operator<<(QDebug debug, dessser::gen::sync_value::t const &v)
 {
   return printerOfStream<dessser::gen::sync_value::t>(debug, v);
@@ -808,6 +821,11 @@ QDebug operator<<(QDebug debug, dessser::gen::rc_entry::t const &e)
 QDebug operator<<(QDebug debug, dessser::gen::replay::t const &r)
 {
   return printerOfStream<dessser::gen::replay::t>(debug, r);
+}
+
+QDebug operator<<(QDebug debug, dessser::gen::alerting_log::t const &l)
+{
+  return printerOfStream<dessser::gen::alerting_log::t>(debug, l);
 }
 
 QDebug operator<<(QDebug debug, std::string const &s)

@@ -18,13 +18,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct te56444ea7a5883cbac09e8c474932330 : public std::variant<
+struct t52e26a57572ca91d707cdc0b7b472229 : public std::variant<
   double, // DurationConst
   dessser::gen::event_time_field::t_ext, // DurationField
   dessser::gen::event_time_field::t_ext // StopField
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 3 };
+};
 
-inline bool operator==(te56444ea7a5883cbac09e8c474932330 const &a, te56444ea7a5883cbac09e8c474932330 const &b) {
+inline bool operator==(t52e26a57572ca91d707cdc0b7b472229 const &a, t52e26a57572ca91d707cdc0b7b472229 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // DurationConst
@@ -33,16 +37,16 @@ inline bool operator==(te56444ea7a5883cbac09e8c474932330 const &a, te56444ea7a58
   };
   return false;
 }
-inline bool operator!=(te56444ea7a5883cbac09e8c474932330 const &a, te56444ea7a5883cbac09e8c474932330 const &b) {
+inline bool operator!=(t52e26a57572ca91d707cdc0b7b472229 const &a, t52e26a57572ca91d707cdc0b7b472229 const &b) {
   return !operator==(a, b);
 }
-enum Constr_te56444ea7a5883cbac09e8c474932330 {
+enum Constr_t52e26a57572ca91d707cdc0b7b472229 {
   DurationConst,
   DurationField,
   StopField,
 };
 
-inline std::ostream &operator<<(std::ostream &os, te56444ea7a5883cbac09e8c474932330 const &v) {
+inline std::ostream &operator<<(std::ostream &os, t52e26a57572ca91d707cdc0b7b472229 const &v) {
   switch (v.index()) {
     case 0: os << "DurationConst " << std::get<0>(v); break;
     case 1: os << "DurationField " << std::get<1>(v); break;
@@ -51,15 +55,15 @@ inline std::ostream &operator<<(std::ostream &os, te56444ea7a5883cbac09e8c474932
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te56444ea7a5883cbac09e8c474932330> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t52e26a57572ca91d707cdc0b7b472229> const v) { os << *v; return os; }
 
 struct t : public std::tuple<
   dessser::gen::event_time_field::t_ext,
-  ::dessser::gen::event_time::te56444ea7a5883cbac09e8c474932330
+  ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229
 > {
   using tuple::tuple;
-  t(std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::te56444ea7a5883cbac09e8c474932330> p)
-    : std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::te56444ea7a5883cbac09e8c474932330>(std::get<0>(p), std::get<1>(p)) {}
+  t(std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229> p)
+    : std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229>(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::event_time_field::Deref(std::get<0>(a)) == ::dessser::gen::event_time_field::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);

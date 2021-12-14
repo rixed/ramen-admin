@@ -134,7 +134,11 @@ struct base : public std::variant<
   Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Rec
   Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Sum
   ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 // Map
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 36 };
+};
 
 inline bool operator==(base const &a, base const &b) {
   if (a.index() != b.index()) return false;

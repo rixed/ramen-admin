@@ -115,7 +115,11 @@ struct t : public std::variant<
   dessser::gen::sync_key::t_ext, // DelKey
   ::dessser::gen::sync_server_msg::t675a4fdd830ddedd7d9ba746180c033f, // LockKey
   dessser::gen::sync_key::t_ext // UnlockKey
-> { using variant::variant; };
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 7 };
+};
 
 inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
