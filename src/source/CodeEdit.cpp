@@ -20,7 +20,7 @@
 
 #include "source/CodeEdit.h"
 
-static bool const verbose { true };
+static bool const verbose { false };
 
 CodeEdit::CodeEdit(QWidget *parent) :
   QWidget(parent)
