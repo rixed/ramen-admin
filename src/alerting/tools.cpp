@@ -82,19 +82,14 @@ void iterTeams(
 void iterIncidents(
   std::function<void(std::string const &)> f)
 {
+  /* [kvs->incident_ids] being a multiset, it is ordered, so it is enough to remember
+   * the last item to deduplicate entries for [f]: */
+  std::string last_incident_id;
   kvs->lock.lock_shared();
-  std::set<std::string> ids;
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
-    std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
-    if (key->index() != dessser::gen::sync_key::Incidents) continue;
-    std::string const &incident_id {
-      std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*key)) };
-    auto it_new { ids.insert(incident_id) };
-    if (it_new.second) {
-      if (verbose)
-        qDebug() << "New incident_id:" << QString::fromStdString(incident_id);
-      f(incident_id);
-    }
+  for (std::string const &this_incident_id : kvs->incident_ids) {
+    if (this_incident_id == last_incident_id) continue;
+    last_incident_id = this_incident_id;
+    f(this_incident_id);
   }
   kvs->lock.unlock_shared();
 }
@@ -103,25 +98,17 @@ void iterDialogs(
   std::string const &incident_id,
   std::function<void(std::string const &)> f)
 {
+  /* Same remark as above regarding deduplication: */
+  std::string last_dialog_id;  // will be emptied when the incident id changes
   kvs->lock.lock_shared();
-  std::set<std::string> ids;
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
-    std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
-    if (key->index() != dessser::gen::sync_key::Incidents) continue;
-    std::string const &this_incident_id {
-      std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*key)) };
-    if (this_incident_id != incident_id) continue;
-    std::shared_ptr<::dessser::gen::sync_key::incident_key> ikey {
-      std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*key)) };
-    if (ikey->index() != dessser::gen::sync_key::Dialogs) continue;
-    std::string const &dialog_id {
-      std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*ikey)) };
-    auto it_new { ids.insert(dialog_id) };
-    if (it_new.second) {
-      if (verbose)
-        qDebug() << "New dialog_id:" << QString::fromStdString(dialog_id);
-      f(dialog_id);
-    }
+  auto range { kvs->dialog_ids.equal_range(incident_id) };
+  for (auto it = range.first; it != range.second; ++it) {
+    std::string const &this_incident_id { it->first };
+    Q_ASSERT(this_incident_id == incident_id);
+    std::string const &this_dialog_id { it->second };
+    if (this_dialog_id == last_dialog_id) continue;
+    last_dialog_id = this_dialog_id;
+    f(this_dialog_id);
   }
   kvs->lock.unlock_shared();
 }

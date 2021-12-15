@@ -52,3 +52,54 @@ std::shared_ptr<dessser::gen::sync_value::t const> KVStore::get(
   lock.unlock_shared();
   return ret;
 }
+
+void KVStore::addIncident(dessser::gen::sync_key::t const &k)
+{
+  if (k.index() != dessser::gen::sync_key::Incidents) return;
+
+  std::string const &incident_id {
+    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+  incident_ids.insert(incident_id);
+  /* Maybe also update the set of dialog ids: */
+  std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
+    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+  if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
+    std::string const &dialog_id {
+      std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key)) };
+    dialog_ids.insert(std::make_pair(incident_id, dialog_id));
+  }
+}
+
+void KVStore::delIncident(dessser::gen::sync_key::t const &k)
+{
+  if (k.index() != dessser::gen::sync_key::Incidents) return;
+
+  std::string const &incident_id {
+    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+  // Find the first occurrence and deletes it:
+  auto it { incident_ids.find(incident_id) };
+  Q_ASSERT(it != incident_ids.end());
+  incident_ids.erase(it);
+
+  /* Maybe also deletes a dialog: */
+  std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
+    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+  if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
+    std::string const &dialog_id {
+      std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key)) };
+    // Remove again the first occurrence:
+    bool deleted { false };
+    auto range { dialog_ids.equal_range(incident_id) };
+    for (auto it = range.first; it != range.second; ++it) {
+      std::string const &this_incident_id { it->first };
+      Q_ASSERT(this_incident_id == incident_id);
+      std::string const &this_dialog_id { it->second };
+      if (this_dialog_id == dialog_id) {
+        dialog_ids.erase(it);
+        deleted = true;
+        break;
+      }
+    }
+    Q_ASSERT(deleted);
+  }
+}

@@ -11,13 +11,15 @@
 #include <dessser/Pointer.h>
 #include <dessser/Bytes.h>
 
-#include "desssergen/sync_server_msg.h"
 #include "desssergen/sync_client_msg.h"
+#include "desssergen/sync_key.h"
 #include "desssergen/sync_msg.h"
+#include "desssergen/sync_server_msg.h"
 #include "KVStore.h"
 #include "misc_dessser.h"
 #include "UserIdentity.h"
 #include "z85.h"
+
 #include "ConfClient.h"
 
 static bool const verbose { false };
@@ -477,7 +479,9 @@ int ConfClient::rcvdSetKey(
       std::piecewise_construct,
       std::forward_as_tuple(k),
       std::forward_as_tuple(v, set_by_uid, mtime, false, false));
-  if (! inserted) {
+  if (inserted) {
+    kvs->addIncident(*k);
+  } else {
     it->second.set(v, set_by_uid, mtime);
   }
 
@@ -505,11 +509,11 @@ int ConfClient::rcvdNewKey(
   int ret { -1 };
 
   auto const it {
-    kvs->map.try_emplace(k, v, set_by_uid, mtime, can_write, can_del)
-  };
+    kvs->map.try_emplace(k, v, set_by_uid, mtime, can_write, can_del) };
   if (it.second) [[likely]] {
     if (! owner.isEmpty()) [[unlikely]]
       it.first->second.setLock(owner, expiry);
+    kvs->addIncident(*k);
     ret = checkDones(k, v);
   } else {
     // Not supposed to happen but harmless
@@ -540,6 +544,7 @@ int ConfClient::rcvdDelKey(
     std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyDeleted, it->first, it->second });
     kvs->map.erase(it);
+    kvs->delIncident(*k);
   }
 
   kvs->lock.unlock();

@@ -2,7 +2,9 @@
 #define KVSTORE_H_210812
 #include <functional>
 #include <memory>
+#include <map>
 #include <mutex>
+#include <set>
 #include <sstream>
 #include <unordered_map>
 #include <QList>
@@ -53,15 +55,33 @@ public:
 
   KVStore(QObject *parent = nullptr);
 
-  /* Cannot be an ordered map because dessserc does not generate comparators: */
+  /* Key to value bindings are stored in a single hashtable, with some additional
+   * views maintained for performance reasons.
+   * These are actually maintained in sync by ConfClient.
+   * All of those data containers are protected by this lock: */
+  rec_shared_mutex lock;
+
+  /* Cannot be an ordered map because dessserc does not generate comparators.
+   * Protected by [lock]. */
   std::unordered_map<std::shared_ptr<dessser::gen::sync_key::t const>, KValue,
                      HashKey, EqualKey> map;
-  rec_shared_mutex lock;
+  /* Also the set of all existing incident identifiers, once for every occurrence
+   * for easy deletion. Also protected by [lock]: */
+  std::multiset<std::string> incident_ids;
+  /* Finally, the map of dialog identifiers per incident identifiers, also multimap
+   * for easy deletion, and also protected by [lock]: */
+  std::multimap<std::string, std::string> dialog_ids;
 
   bool contains(std::shared_ptr<dessser::gen::sync_key::t const>);
 
   std::shared_ptr<dessser::gen::sync_value::t const> get(
     std::shared_ptr<dessser::gen::sync_key::t const>);
+
+  /* Maybe update the set of incident and dialog ids.
+   * Must be called with [lock]. */
+  void addIncident(dessser::gen::sync_key::t const &);
+
+  void delIncident(dessser::gen::sync_key::t const &);
 
 private slots:
   void signalChanges();
