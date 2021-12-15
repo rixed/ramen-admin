@@ -101,7 +101,7 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
           this, &AlertInfoEditor::inputChanged);
   hysteresis = new QLineEdit("10");
   hysteresis->setValidator(new QDoubleValidator(0., 100., 5));
-  hysteresis->setPlaceholderText(tr("%% of the value magnitude"));
+  hysteresis->setPlaceholderText(tr("% of the value magnitude"));
   connect(hysteresis, &QLineEdit::textChanged,
           this, &AlertInfoEditor::inputChanged);
   duration = new QLineEdit;
@@ -113,7 +113,7 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
           this, &AlertInfoEditor::inputChanged);
   percentage = new QLineEdit("100");
   percentage->setValidator(new QDoubleValidator(0., 100., 5));
-  percentage->setPlaceholderText(tr("%% of past measures"));
+  percentage->setPlaceholderText(tr("% of past measures"));
   connect(percentage, &QLineEdit::textChanged,
           this, &AlertInfoEditor::inputChanged);
   timeStep = new QLineEdit;
@@ -200,7 +200,7 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) :
         minMaxBox->setLayout(minMaxLayout);
         limitLayout->addRow(tr("Threshold:"), minMaxBox);
         limitLayout->addRow(tr("Hysteresis:"), hysteresis);
-        limitLayout->addRow(tr("Measurements (%%):"), percentage);
+        limitLayout->addRow(tr("Measurements (%):"), percentage);
         limitLayout->addRow(tr("During the last (secs):"), duration);
         QHBoxLayout *groupByGroup { new QHBoxLayout };
         groupByGroup->addWidget(autoGroupBy);
