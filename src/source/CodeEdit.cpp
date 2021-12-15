@@ -249,13 +249,18 @@ void CodeEdit::setSrcPath(std::string const &path)
   /* When the path is set (ie. the view switch to this source) select
    * by default the language that has been edited most recently by a human: */
   double latest_mtime { 0 };
-  int latest_index { textEditorIndex };  // default is ramen
+  int latest_index { -1 };
   std::function<void(double mtime, QString const &uid, int index)> const
     compete_latest = [&latest_mtime, &latest_index]
       (double mtime, QString const &uid, int index)
     {
-      if (uid.size() == 0 || uid.at(0) == '_') return;
-      if (mtime >= latest_mtime) {
+      // Default on the higher level language that's defined:
+      if (latest_index < 0) {
+        latest_mtime = mtime;
+        latest_index = index;
+      } else if (uid.size() == 0 || uid.at(0) == '_') {
+        // not a human
+      } else if (mtime >= latest_mtime) {
         latest_mtime = mtime;
         latest_index = index;
       }
