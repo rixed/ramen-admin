@@ -167,6 +167,8 @@ src/RmAdmin: \
 		$(wildcard src/timeline/*.h) \
 		$(wildcard src/storage/*.cpp) \
 		$(wildcard src/storage/*.h) \
+		$(wildcard src/alerting/*.cpp) \
+		$(wildcard src/alerting/*.h) \
 		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
 		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
 	@echo 'Generating RmAdmin $@'
