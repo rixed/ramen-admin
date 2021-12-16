@@ -9,6 +9,7 @@
 #include <QVector>
 #include <sodium.h>
 
+#include "alerting/AlertingLogsModel.h"
 #include "dashboard/DashboardTreeModel.h"
 #include "GraphModel.h"
 #include "GraphViewSettings.h"
@@ -68,9 +69,7 @@ int main(int argc, char *argv[])
   GraphModel::globalGraphModel = new GraphModel(settings);
 
   DashboardTreeModel::globalDashboardTree = new DashboardTreeModel;
-#if 0
   AlertingLogsModel::globalLogsModel = new AlertingLogsModel;
-#endif
 
   Menu::initLoginWin(configDir);
   Menu::openLoginWin();
