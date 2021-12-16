@@ -54,7 +54,7 @@ AlertingStats::AlertingStats(QWidget *parent)
   connect(kvs.get(), &KVStore::keyChanged,
           this, &AlertingStats::onChange);
 
-  timer->start(2000);
+  timer->start(20000);
 }
 
 void AlertingStats::updateStats()
