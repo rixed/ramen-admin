@@ -116,6 +116,7 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
 {
   /* In chronological order: */
   std::vector<std::pair<double, std::shared_ptr<dessser::gen::alerting_log::t const>>> logs;
+  logs.reserve(100);
   iterLogs(incidentId,
            [&logs](double time, std::shared_ptr<dessser::gen::alerting_log::t const> log)
     {

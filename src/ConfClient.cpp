@@ -480,7 +480,7 @@ int ConfClient::rcvdSetKey(
       std::forward_as_tuple(k),
       std::forward_as_tuple(v, set_by_uid, mtime, false, false));
   if (inserted) {
-    kvs->addIncident(*k);
+    kvs->addIncident(k);
   } else {
     it->second.set(v, set_by_uid, mtime);
   }
@@ -513,7 +513,7 @@ int ConfClient::rcvdNewKey(
   if (it.second) [[likely]] {
     if (! owner.isEmpty()) [[unlikely]]
       it.first->second.setLock(owner, expiry);
-    kvs->addIncident(*k);
+    kvs->addIncident(k);
     ret = checkDones(k, v);
   } else {
     // Not supposed to happen but harmless
@@ -544,7 +544,7 @@ int ConfClient::rcvdDelKey(
     std::lock_guard<std::mutex> guard { kvs->confChangesLock };
     kvs->confChanges.append({ KeyDeleted, it->first, it->second });
     kvs->map.erase(it);
-    kvs->delIncident(*k);
+    kvs->delIncident(k);
   }
 
   kvs->lock.unlock();

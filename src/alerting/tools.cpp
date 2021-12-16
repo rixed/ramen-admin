@@ -118,29 +118,30 @@ void iterLogs(
   std::function<void(double, std::shared_ptr<dessser::gen::alerting_log::t const>)> f)
 {
   kvs->lock.lock_shared();
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
-    std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
-    if (key->index() != dessser::gen::sync_key::Incidents) continue;
-    std::string const &this_incident_id {
-      std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*key)) };
-    if (this_incident_id != incident_id) continue;
-    std::shared_ptr<::dessser::gen::sync_key::incident_key> ikey {
+  auto range { kvs->incident_logs.equal_range(incident_id) };
+  for (auto it = range.first; it != range.second; ++it) {
+    std::string const &this_incident_id { it->first };
+    Q_ASSERT(this_incident_id == incident_id);
+    std::shared_ptr<dessser::gen::sync_key::t const> key { it->second };
+    Q_ASSERT(key->index() == dessser::gen::sync_key::Incidents);
+    Q_ASSERT(std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*key)) == incident_id);
+    std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
       std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*key)) };
-    if (ikey->index() != dessser::gen::sync_key::Journal) continue;
-    double const &time {
-      std::get<0>(std::get<dessser::gen::sync_key::Journal>(*ikey)) };
-    std::shared_ptr<dessser::gen::sync_value::t const> val { p.second.val };
-    if (val->index() != dessser::gen::sync_value::IncidentLog) {
+    Q_ASSERT(incident_key->index() == dessser::gen::sync_key::Journal);
+    double const time {
+      std::get<0>(std::get<dessser::gen::sync_key::Journal>(*incident_key)) };
+    auto const &found_it { kvs->map.find(key) };
+    Q_ASSERT(found_it != kvs->map.end());
+    std::shared_ptr<dessser::gen::sync_value::t const> v { found_it->second.val };
+    if (v->index() != dessser::gen::sync_value::IncidentLog) {
       qCritical() << "iterLogs: Value for key" << *key
-                  << "not an IncidentLog (but" << *val << ")";
+                  << "not an IncidentLog (but" << *v << ")";
       continue;
     }
     std::shared_ptr<dessser::gen::alerting_log::t const> log {
-      std::get<dessser::gen::sync_value::IncidentLog>(*val) };
-
+      std::get<dessser::gen::sync_value::IncidentLog>(*v) };
     if (verbose)
       qDebug() << "New log for time:" << time << ":" << *log;
-
     f(time, log);
   }
   kvs->lock.unlock_shared();

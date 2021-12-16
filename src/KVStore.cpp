@@ -53,29 +53,31 @@ std::shared_ptr<dessser::gen::sync_value::t const> KVStore::get(
   return ret;
 }
 
-void KVStore::addIncident(dessser::gen::sync_key::t const &k)
+void KVStore::addIncident(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  if (k.index() != dessser::gen::sync_key::Incidents) return;
+  if (k->index() != dessser::gen::sync_key::Incidents) return;
 
   std::string const &incident_id {
-    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*k)) };
   incident_ids.insert(incident_id);
   /* Maybe also update the set of dialog ids: */
   std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
-    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*k)) };
   if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
     std::string const &dialog_id {
       std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key)) };
     dialog_ids.insert(std::make_pair(incident_id, dialog_id));
+  } else if (incident_key->index() == dessser::gen::sync_key::Journal) {
+    incident_logs.insert(std::make_pair(incident_id, k));
   }
 }
 
-void KVStore::delIncident(dessser::gen::sync_key::t const &k)
+void KVStore::delIncident(std::shared_ptr<dessser::gen::sync_key::t const> k)
 {
-  if (k.index() != dessser::gen::sync_key::Incidents) return;
+  if (k->index() != dessser::gen::sync_key::Incidents) return;
 
   std::string const &incident_id {
-    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+    std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*k)) };
   // Find the first occurrence and deletes it:
   auto it { incident_ids.find(incident_id) };
   Q_ASSERT(it != incident_ids.end());
@@ -83,7 +85,7 @@ void KVStore::delIncident(dessser::gen::sync_key::t const &k)
 
   /* Maybe also deletes a dialog: */
   std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
-    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(k)) };
+    std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*k)) };
   if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
     std::string const &dialog_id {
       std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key)) };
@@ -98,6 +100,22 @@ void KVStore::delIncident(dessser::gen::sync_key::t const &k)
         dialog_ids.erase(it);
         deleted = true;
         break;
+      }
+    }
+    Q_ASSERT(deleted);
+  } else if (incident_key->index() == dessser::gen::sync_key::Journal) {
+    bool deleted { false };
+    auto range { incident_logs.equal_range(incident_id) };
+    for (auto it = range.first; it != range.second; ++it) {
+      std::string const &this_incident_id { it->first };
+      Q_ASSERT(this_incident_id == incident_id);
+      if (k.get() == it->second.get()) {
+        Q_ASSERT(! deleted);
+        incident_logs.erase(it);
+        deleted = true;
+#       ifndef QT_DEBUG
+        break;
+#       endif
       }
     }
     Q_ASSERT(deleted);

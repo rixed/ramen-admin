@@ -68,9 +68,11 @@ public:
   /* Also the set of all existing incident identifiers, once for every occurrence
    * for easy deletion. Also protected by [lock]: */
   std::multiset<std::string> incident_ids;
-  /* Finally, the map of dialog identifiers per incident identifiers, also multimap
+  /* Similarly, a map of dialog identifiers per incident identifiers, also multimap
    * for easy deletion, and also protected by [lock]: */
   std::multimap<std::string, std::string> dialog_ids;
+  /* Finally, a multimap of logs identifiers per incident identifiers. */
+  std::multimap<std::string, std::shared_ptr<dessser::gen::sync_key::t const>> incident_logs;
 
   bool contains(std::shared_ptr<dessser::gen::sync_key::t const>);
 
@@ -79,9 +81,9 @@ public:
 
   /* Maybe update the set of incident and dialog ids.
    * Must be called with [lock]. */
-  void addIncident(dessser::gen::sync_key::t const &);
+  void addIncident(std::shared_ptr<dessser::gen::sync_key::t const>);
 
-  void delIncident(dessser::gen::sync_key::t const &);
+  void delIncident(std::shared_ptr<dessser::gen::sync_key::t const>);
 
 private slots:
   void signalChanges();
