@@ -110,7 +110,9 @@ class ConfClient : public QObject
         bool const can_write, bool const can_del,
         QString const &owner, double const expiry);
 
-  int rcvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const>);
+  int rcvdDelKey(
+        std::shared_ptr<dessser::gen::sync_key::t const>,
+        std::string const &uid);
 
   int rcvdLockKey(
         std::shared_ptr<dessser::gen::sync_key::t const>,

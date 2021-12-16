@@ -416,9 +416,10 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
       }
     case dessser::gen::sync_server_msg::DelKey:
       {
-        std::shared_ptr<dessser::gen::sync_key::t const> k {
-          std::get<dessser::gen::sync_server_msg::DelKey>(*msg) };
-        return rcvdDelKey(k);
+        auto const &del_key { std::get<dessser::gen::sync_server_msg::DelKey>(*msg) };
+        std::shared_ptr<dessser::gen::sync_key::t const> k { del_key.DelKey_k };
+        std::string const &uid { del_key.uid };
+        return rcvdDelKey(k, uid);
       }
     case dessser::gen::sync_server_msg::LockKey:
       {
@@ -532,8 +533,10 @@ int ConfClient::rcvdNewKey(
 }
 
 int ConfClient::rcvdDelKey(
-      std::shared_ptr<dessser::gen::sync_key::t const> k)
+      std::shared_ptr<dessser::gen::sync_key::t const> k,
+      std::string const &uid)
 {
+  (void)uid;
   kvs->lock.lock();
 
   auto it { kvs->map.find(k) };
