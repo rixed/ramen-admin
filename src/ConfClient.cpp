@@ -493,7 +493,7 @@ int ConfClient::rcvdSetKey(
 
   kvs->lock.unlock();
 
-  return checkDones(k, v);
+  return checkDones(*k, *v);
 }
 
 int ConfClient::rcvdNewKey(
@@ -514,7 +514,7 @@ int ConfClient::rcvdNewKey(
     if (! owner.isEmpty()) [[unlikely]]
       it.first->second.setLock(owner, expiry);
     kvs->addIncident(k);
-    ret = checkDones(k, v);
+    ret = checkDones(*k, *v);
   } else {
     // Not supposed to happen but harmless
     qCritical() << "NewKey" << *k << "was not new, keeping previous value!";
@@ -880,16 +880,16 @@ int ConfClient::sendBytes(char const *bytes, size_t sz)
 }
 
 int ConfClient::checkDones(
-      std::shared_ptr<dessser::gen::sync_key::t const> k,
-      std::shared_ptr<dessser::gen::sync_value::t const> v)
+      dessser::gen::sync_key::t const &k,
+      dessser::gen::sync_value::t const &v)
 {
-  if (!myErrKey || *k != *myErrKey) return 0;
+  if (!myErrKey || k != *myErrKey) return 0;
 
-  if (v->index() != dessser::gen::sync_value::Error) {
-    qCritical() << "Not an error value in" << *k;
+  if (v.index() != dessser::gen::sync_value::Error) {
+    qCritical() << "Not an error value in" << k;
     return -1;
   }
-  auto const err { std::get<dessser::gen::sync_value::Error>(*v) };
+  auto const err { std::get<dessser::gen::sync_value::Error>(v) };
   uint32_t const err_seq { std::get<1>(err) };
   std::string const &err_msg { std::get<2>(err) };
 

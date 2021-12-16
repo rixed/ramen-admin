@@ -11,6 +11,8 @@
 
 #include "alerting/NotifTimeLine.h"
 
+static bool const verbose { false };
+
 NotifTimeLine::NotifTimeLine(
   std::string const incidentId_,
   qreal beginOftime, qreal endOfTime,
@@ -122,6 +124,9 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
     {
       logs.emplace_back(time, log);
     });
+  if (verbose)
+    qDebug() << "NotifTimeLine::paintEvent:" << logs.size() << "log entries";
+
   struct {
     bool operator()(
       std::pair<double, std::shared_ptr<dessser::gen::alerting_log::t const>> const &a,

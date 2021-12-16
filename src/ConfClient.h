@@ -126,8 +126,8 @@ class ConfClient : public QObject
 
   // Checks whether we had a call-back for that key and execute it
   int checkDones(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>);
+        dessser::gen::sync_key::t const &,
+        dessser::gen::sync_value::t const &);
 
 public:
   /* Some stats about the connection */
