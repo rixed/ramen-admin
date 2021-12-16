@@ -402,17 +402,17 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes)
         std::shared_ptr<dessser::gen::sync_key::t const> k { set_key.SetKey_k };
         std::shared_ptr<dessser::gen::sync_value::t const> v { set_key.SetKey_v };
         return rcvdSetKey(k, v, QString::fromStdString(set_key.SetKey_uid),
-                           set_key.SetKey_mtime);
+                          set_key.SetKey_mtime);
       }
     case dessser::gen::sync_server_msg::NewKey:
       {
         auto const &new_key { std::get<dessser::gen::sync_server_msg::NewKey>(*msg) };
         std::shared_ptr<dessser::gen::sync_key::t const> k { new_key.NewKey_k };
         std::shared_ptr<dessser::gen::sync_value::t const> v { new_key.v };
-        return rcvdNewKey(k, v, QString::fromStdString(new_key.uid), new_key.mtime,
-                           new_key.can_write, new_key.can_del,
-                           QString::fromStdString(new_key.NewKey_owner),
-                           new_key.NewKey_expiry);
+        return rcvdNewKey(k, v, QString::fromStdString(new_key.NewKey_uid), new_key.mtime,
+                          new_key.can_write, new_key.can_del,
+                          QString::fromStdString(new_key.NewKey_owner),
+                          new_key.NewKey_expiry);
       }
     case dessser::gen::sync_server_msg::DelKey:
       {

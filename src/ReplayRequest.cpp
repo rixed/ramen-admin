@@ -195,7 +195,8 @@ void ReplayRequest::endReplay(dessser::gen::sync_key::t const &key, KValue const
   if (key != *respKey) return;
 
   if (verbose)
-    qDebug() << "ReplayRequest::endReplay" << key;
+    qDebug() << "ReplayRequest::endReplay" << key
+             << ", previously in status" << qstringOfStatus(status);
 
   {
     std::lock_guard<std::mutex> guard { lock };

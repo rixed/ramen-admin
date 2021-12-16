@@ -12,11 +12,12 @@ Members of "alerting/"
 
 - AlertingTimeLine: A widget displaying a timeline of every incident, past and
   present in the selected time range (actually displays the journal, one
-  incident per line).
+  incident per line). Displayed below the AlertingStats.
 
 - NotifTimeLine: An AbstractTimeline displaying log events of a given notification
 
-- AlertingJournal: A widget displaying all logs of every incidents.
+- AlertingJournal: A widget displaying all logs of every incidents. Displayed below
+  the AlertingTimeLine.
 
 - AlertingLogsModel: A QAbstractTableModel for the AlertingJournal
 
