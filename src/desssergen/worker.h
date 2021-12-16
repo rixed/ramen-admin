@@ -46,14 +46,14 @@ inline std::ostream &operator<<(std::ostream &os, t4827d21c37f0b56d86b99cff40066
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4827d21c37f0b56d86b99cff40066ee3> const t) { os << *t; return os; }
 
 struct tb1d409993b02f1b7f7cedc87680eed70 {
-  uint32_t parent_num;
   std::string tunneld_host;
   uint16_t tunneld_port;
-  tb1d409993b02f1b7f7cedc87680eed70(uint32_t parent_num_, std::string tunneld_host_, uint16_t tunneld_port_) : parent_num(parent_num_), tunneld_host(tunneld_host_), tunneld_port(tunneld_port_) {}
+  uint32_t parent_num;
+  tb1d409993b02f1b7f7cedc87680eed70(std::string tunneld_host_, uint16_t tunneld_port_, uint32_t parent_num_) : tunneld_host(tunneld_host_), tunneld_port(tunneld_port_), parent_num(parent_num_) {}
   tb1d409993b02f1b7f7cedc87680eed70() = default;
 };
 inline bool operator==(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
-  return a.parent_num == b.parent_num && a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port;
+  return a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port && a.parent_num == b.parent_num;
 }
 
 inline bool operator!=(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
@@ -61,9 +61,9 @@ inline bool operator!=(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02
 }
 inline std::ostream &operator<<(std::ostream &os, tb1d409993b02f1b7f7cedc87680eed70 const &r) {
   os << '{';
-  os << "parent_num:" << r.parent_num << ',';
   os << "tunneld_host:" << r.tunneld_host << ',';
-  os << "tunneld_port:" << r.tunneld_port;
+  os << "tunneld_port:" << r.tunneld_port << ',';
+  os << "parent_num:" << r.parent_num;
   os << '}';
   return os;
 }
@@ -105,23 +105,23 @@ inline std::ostream &operator<<(std::ostream &os, t99c4dcc041241b8d5db72250f8968
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t99c4dcc041241b8d5db72250f8968306> const v) { os << *v; return os; }
 
 struct t {
-  Arr<dessser::gen::func_ref::t_ext> children;
-  dessser::gen::file_path::t_ext cwd;
-  bool debug;
   bool enabled;
-  Arr<dessser::gen::field_name::t_ext> envvars;
+  bool debug;
+  double report_period;
+  dessser::gen::file_path::t_ext cwd;
+  std::string worker_signature;
   std::string info_signature;
   bool is_used;
   Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
-  std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
-  double report_period;
+  Arr<dessser::gen::field_name::t_ext> envvars;
   ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role;
-  std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
+  Arr<dessser::gen::func_ref::t_ext> children;
+  t(bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, std::string worker_signature_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, Arr<dessser::gen::field_name::t_ext> envvars_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, Arr<dessser::gen::func_ref::t_ext> children_) : enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), worker_signature(worker_signature_), info_signature(info_signature_), is_used(is_used_), params(params_), envvars(envvars_), role(role_), parents(parents_), children(children_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.children == b.children && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.envvars == b.envvars && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.report_period == b.report_period && a.role == b.role && a.worker_signature == b.worker_signature;
+  return a.enabled == b.enabled && a.debug == b.debug && a.report_period == b.report_period && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.worker_signature == b.worker_signature && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && a.envvars == b.envvars && a.role == b.role && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.children == b.children;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -129,18 +129,18 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "children:" << r.children << ',';
-  os << "cwd:" << r.cwd << ',';
-  os << "debug:" << r.debug << ',';
   os << "enabled:" << r.enabled << ',';
-  os << "envvars:" << r.envvars << ',';
+  os << "debug:" << r.debug << ',';
+  os << "report_period:" << r.report_period << ',';
+  os << "cwd:" << r.cwd << ',';
+  os << "worker_signature:" << r.worker_signature << ',';
   os << "info_signature:" << r.info_signature << ',';
   os << "is_used:" << r.is_used << ',';
   os << "params:" << r.params << ',';
-  if (r.parents) os << "parents:" << r.parents.value() << ',';
-  os << "report_period:" << r.report_period << ',';
+  os << "envvars:" << r.envvars << ',';
   os << "role:" << r.role << ',';
-  os << "worker_signature:" << r.worker_signature;
+  if (r.parents) os << "parents:" << r.parents.value() << ',';
+  os << "children:" << r.children;
   os << '}';
   return os;
 }

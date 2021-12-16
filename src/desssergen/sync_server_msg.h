@@ -25,14 +25,14 @@ using dessser::operator<<;
 /* ------------ */
 struct t3f973b24e2e9a1d94d78f692da2d8ddd {
   dessser::gen::sync_key::t_ext SetKey_k;
-  double SetKey_mtime;
-  std::string SetKey_uid;
   dessser::gen::sync_value::t_ext SetKey_v;
-  t3f973b24e2e9a1d94d78f692da2d8ddd(dessser::gen::sync_key::t_ext SetKey_k_, double SetKey_mtime_, std::string SetKey_uid_, dessser::gen::sync_value::t_ext SetKey_v_) : SetKey_k(SetKey_k_), SetKey_mtime(SetKey_mtime_), SetKey_uid(SetKey_uid_), SetKey_v(SetKey_v_) {}
+  std::string SetKey_uid;
+  double SetKey_mtime;
+  t3f973b24e2e9a1d94d78f692da2d8ddd(dessser::gen::sync_key::t_ext SetKey_k_, dessser::gen::sync_value::t_ext SetKey_v_, std::string SetKey_uid_, double SetKey_mtime_) : SetKey_k(SetKey_k_), SetKey_v(SetKey_v_), SetKey_uid(SetKey_uid_), SetKey_mtime(SetKey_mtime_) {}
   t3f973b24e2e9a1d94d78f692da2d8ddd() = default;
 };
 inline bool operator==(t3f973b24e2e9a1d94d78f692da2d8ddd const &a, t3f973b24e2e9a1d94d78f692da2d8ddd const &b) {
-  return ::dessser::gen::sync_key::Deref(a.SetKey_k) == ::dessser::gen::sync_key::Deref(b.SetKey_k) && a.SetKey_mtime == b.SetKey_mtime && a.SetKey_uid == b.SetKey_uid && ::dessser::gen::sync_value::Deref(a.SetKey_v) == ::dessser::gen::sync_value::Deref(b.SetKey_v);
+  return ::dessser::gen::sync_key::Deref(a.SetKey_k) == ::dessser::gen::sync_key::Deref(b.SetKey_k) && ::dessser::gen::sync_value::Deref(a.SetKey_v) == ::dessser::gen::sync_value::Deref(b.SetKey_v) && a.SetKey_uid == b.SetKey_uid && a.SetKey_mtime == b.SetKey_mtime;
 }
 
 inline bool operator!=(t3f973b24e2e9a1d94d78f692da2d8ddd const &a, t3f973b24e2e9a1d94d78f692da2d8ddd const &b) {
@@ -41,28 +41,28 @@ inline bool operator!=(t3f973b24e2e9a1d94d78f692da2d8ddd const &a, t3f973b24e2e9
 inline std::ostream &operator<<(std::ostream &os, t3f973b24e2e9a1d94d78f692da2d8ddd const &r) {
   os << '{';
   os << "SetKey_k:" << r.SetKey_k << ',';
-  os << "SetKey_mtime:" << r.SetKey_mtime << ',';
+  os << "SetKey_v:" << r.SetKey_v << ',';
   os << "SetKey_uid:" << r.SetKey_uid << ',';
-  os << "SetKey_v:" << r.SetKey_v;
+  os << "SetKey_mtime:" << r.SetKey_mtime;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3f973b24e2e9a1d94d78f692da2d8ddd> const r) { os << *r; return os; }
 
 struct td4227ac047ed98f74e1d279b847d611e {
-  bool can_del;
-  bool can_write;
-  double NewKey_expiry;
   dessser::gen::sync_key::t_ext NewKey_k;
-  double mtime;
-  std::string NewKey_owner;
-  std::string NewKey_uid;
   dessser::gen::sync_value::t_ext v;
-  td4227ac047ed98f74e1d279b847d611e(bool can_del_, bool can_write_, double NewKey_expiry_, dessser::gen::sync_key::t_ext NewKey_k_, double mtime_, std::string NewKey_owner_, std::string NewKey_uid_, dessser::gen::sync_value::t_ext v_) : can_del(can_del_), can_write(can_write_), NewKey_expiry(NewKey_expiry_), NewKey_k(NewKey_k_), mtime(mtime_), NewKey_owner(NewKey_owner_), NewKey_uid(NewKey_uid_), v(v_) {}
+  std::string NewKey_uid;
+  double mtime;
+  bool can_write;
+  bool can_del;
+  std::string NewKey_owner;
+  double NewKey_expiry;
+  td4227ac047ed98f74e1d279b847d611e(dessser::gen::sync_key::t_ext NewKey_k_, dessser::gen::sync_value::t_ext v_, std::string NewKey_uid_, double mtime_, bool can_write_, bool can_del_, std::string NewKey_owner_, double NewKey_expiry_) : NewKey_k(NewKey_k_), v(v_), NewKey_uid(NewKey_uid_), mtime(mtime_), can_write(can_write_), can_del(can_del_), NewKey_owner(NewKey_owner_), NewKey_expiry(NewKey_expiry_) {}
   td4227ac047ed98f74e1d279b847d611e() = default;
 };
 inline bool operator==(td4227ac047ed98f74e1d279b847d611e const &a, td4227ac047ed98f74e1d279b847d611e const &b) {
-  return a.can_del == b.can_del && a.can_write == b.can_write && a.NewKey_expiry == b.NewKey_expiry && ::dessser::gen::sync_key::Deref(a.NewKey_k) == ::dessser::gen::sync_key::Deref(b.NewKey_k) && a.mtime == b.mtime && a.NewKey_owner == b.NewKey_owner && a.NewKey_uid == b.NewKey_uid && ::dessser::gen::sync_value::Deref(a.v) == ::dessser::gen::sync_value::Deref(b.v);
+  return ::dessser::gen::sync_key::Deref(a.NewKey_k) == ::dessser::gen::sync_key::Deref(b.NewKey_k) && ::dessser::gen::sync_value::Deref(a.v) == ::dessser::gen::sync_value::Deref(b.v) && a.NewKey_uid == b.NewKey_uid && a.mtime == b.mtime && a.can_write == b.can_write && a.can_del == b.can_del && a.NewKey_owner == b.NewKey_owner && a.NewKey_expiry == b.NewKey_expiry;
 }
 
 inline bool operator!=(td4227ac047ed98f74e1d279b847d611e const &a, td4227ac047ed98f74e1d279b847d611e const &b) {
@@ -70,14 +70,14 @@ inline bool operator!=(td4227ac047ed98f74e1d279b847d611e const &a, td4227ac047ed
 }
 inline std::ostream &operator<<(std::ostream &os, td4227ac047ed98f74e1d279b847d611e const &r) {
   os << '{';
-  os << "can_del:" << r.can_del << ',';
-  os << "can_write:" << r.can_write << ',';
-  os << "NewKey_expiry:" << r.NewKey_expiry << ',';
   os << "NewKey_k:" << r.NewKey_k << ',';
-  os << "mtime:" << r.mtime << ',';
-  os << "NewKey_owner:" << r.NewKey_owner << ',';
+  os << "v:" << r.v << ',';
   os << "NewKey_uid:" << r.NewKey_uid << ',';
-  os << "v:" << r.v;
+  os << "mtime:" << r.mtime << ',';
+  os << "can_write:" << r.can_write << ',';
+  os << "can_del:" << r.can_del << ',';
+  os << "NewKey_owner:" << r.NewKey_owner << ',';
+  os << "NewKey_expiry:" << r.NewKey_expiry;
   os << '}';
   return os;
 }
@@ -106,14 +106,14 @@ inline std::ostream &operator<<(std::ostream &os, t08b27b0be3a89631db1d9e270c1e8
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t08b27b0be3a89631db1d9e270c1e83bc> const r) { os << *r; return os; }
 
 struct t675a4fdd830ddedd7d9ba746180c033f {
-  double expiry;
   dessser::gen::sync_key::t_ext k;
   std::string owner;
-  t675a4fdd830ddedd7d9ba746180c033f(double expiry_, dessser::gen::sync_key::t_ext k_, std::string owner_) : expiry(expiry_), k(k_), owner(owner_) {}
+  double expiry;
+  t675a4fdd830ddedd7d9ba746180c033f(dessser::gen::sync_key::t_ext k_, std::string owner_, double expiry_) : k(k_), owner(owner_), expiry(expiry_) {}
   t675a4fdd830ddedd7d9ba746180c033f() = default;
 };
 inline bool operator==(t675a4fdd830ddedd7d9ba746180c033f const &a, t675a4fdd830ddedd7d9ba746180c033f const &b) {
-  return a.expiry == b.expiry && ::dessser::gen::sync_key::Deref(a.k) == ::dessser::gen::sync_key::Deref(b.k) && a.owner == b.owner;
+  return ::dessser::gen::sync_key::Deref(a.k) == ::dessser::gen::sync_key::Deref(b.k) && a.owner == b.owner && a.expiry == b.expiry;
 }
 
 inline bool operator!=(t675a4fdd830ddedd7d9ba746180c033f const &a, t675a4fdd830ddedd7d9ba746180c033f const &b) {
@@ -121,9 +121,9 @@ inline bool operator!=(t675a4fdd830ddedd7d9ba746180c033f const &a, t675a4fdd830d
 }
 inline std::ostream &operator<<(std::ostream &os, t675a4fdd830ddedd7d9ba746180c033f const &r) {
   os << '{';
-  os << "expiry:" << r.expiry << ',';
   os << "k:" << r.k << ',';
-  os << "owner:" << r.owner;
+  os << "owner:" << r.owner << ',';
+  os << "expiry:" << r.expiry;
   os << '}';
   return os;
 }

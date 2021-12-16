@@ -1281,19 +1281,19 @@ inline std::ostream &operator<<(std::ostream &os, t6d6c48cf4b08d7c4eeda1a11c6973
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6d6c48cf4b08d7c4eeda1a11c69738be> const t) { os << *t; return os; }
 
 struct t9ff32f6938631a338c8ace99a86c40f3 {
-  std::shared_ptr<::dessser::gen::raql_expr::t>  by;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  duration;
-  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size;
   dessser::gen::raql_top_output::t_ext output;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas;
   std::shared_ptr<::dessser::gen::raql_expr::t>  size;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time;
+  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size;
   std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what;
-  t9ff32f6938631a338c8ace99a86c40f3(std::shared_ptr<::dessser::gen::raql_expr::t>  by_, std::shared_ptr<::dessser::gen::raql_expr::t>  duration_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size_, dessser::gen::raql_top_output::t_ext output_, std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas_, std::shared_ptr<::dessser::gen::raql_expr::t>  size_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what_) : by(by_), duration(duration_), max_size(max_size_), output(output_), sigmas(sigmas_), size(size_), Top_time(Top_time_), Top_what(Top_what_) {}
+  std::shared_ptr<::dessser::gen::raql_expr::t>  by;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  duration;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas;
+  t9ff32f6938631a338c8ace99a86c40f3(dessser::gen::raql_top_output::t_ext output_, std::shared_ptr<::dessser::gen::raql_expr::t>  size_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what_, std::shared_ptr<::dessser::gen::raql_expr::t>  by_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time_, std::shared_ptr<::dessser::gen::raql_expr::t>  duration_, std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas_) : output(output_), size(size_), max_size(max_size_), Top_what(Top_what_), by(by_), Top_time(Top_time_), duration(duration_), sigmas(sigmas_) {}
   t9ff32f6938631a338c8ace99a86c40f3() = default;
 };
 inline bool operator==(t9ff32f6938631a338c8ace99a86c40f3 const &a, t9ff32f6938631a338c8ace99a86c40f3 const &b) {
-  return (*a.by) == (*b.by) && (*a.duration) == (*b.duration) && ((a.max_size && b.max_size && (*a.max_size.value()) == (*b.max_size.value())) || (!a.max_size && !b.max_size)) && ::dessser::gen::raql_top_output::Deref(a.output) == ::dessser::gen::raql_top_output::Deref(b.output) && (*a.sigmas) == (*b.sigmas) && (*a.size) == (*b.size) && (*a.Top_time) == (*b.Top_time) && (*a.Top_what) == (*b.Top_what);
+  return ::dessser::gen::raql_top_output::Deref(a.output) == ::dessser::gen::raql_top_output::Deref(b.output) && (*a.size) == (*b.size) && ((a.max_size && b.max_size && (*a.max_size.value()) == (*b.max_size.value())) || (!a.max_size && !b.max_size)) && (*a.Top_what) == (*b.Top_what) && (*a.by) == (*b.by) && (*a.Top_time) == (*b.Top_time) && (*a.duration) == (*b.duration) && (*a.sigmas) == (*b.sigmas);
 }
 
 inline bool operator!=(t9ff32f6938631a338c8ace99a86c40f3 const &a, t9ff32f6938631a338c8ace99a86c40f3 const &b) {
@@ -1301,30 +1301,30 @@ inline bool operator!=(t9ff32f6938631a338c8ace99a86c40f3 const &a, t9ff32f693863
 }
 inline std::ostream &operator<<(std::ostream &os, t9ff32f6938631a338c8ace99a86c40f3 const &r) {
   os << '{';
-  os << "by:" << r.by << ',';
-  os << "duration:" << r.duration << ',';
-  if (r.max_size) os << "max_size:" << r.max_size.value() << ',';
   os << "output:" << r.output << ',';
-  os << "sigmas:" << r.sigmas << ',';
   os << "size:" << r.size << ',';
+  if (r.max_size) os << "max_size:" << r.max_size.value() << ',';
+  os << "Top_what:" << r.Top_what << ',';
+  os << "by:" << r.by << ',';
   os << "Top_time:" << r.Top_time << ',';
-  os << "Top_what:" << r.Top_what;
+  os << "duration:" << r.duration << ',';
+  os << "sigmas:" << r.sigmas;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9ff32f6938631a338c8ace99a86c40f3> const r) { os << *r; return os; }
 
 struct t1444e78faaacd44c5e033d97448c4e87 {
-  std::shared_ptr<::dessser::gen::raql_expr::t>  max_age;
-  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  time;
-  bool tumbling;
   std::shared_ptr<::dessser::gen::raql_expr::t>  what;
-  t1444e78faaacd44c5e033d97448c4e87(std::shared_ptr<::dessser::gen::raql_expr::t>  max_age_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size_, std::shared_ptr<::dessser::gen::raql_expr::t>  time_, bool tumbling_, std::shared_ptr<::dessser::gen::raql_expr::t>  what_) : max_age(max_age_), sample_size(sample_size_), time(time_), tumbling(tumbling_), what(what_) {}
+  std::shared_ptr<::dessser::gen::raql_expr::t>  time;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  max_age;
+  bool tumbling;
+  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size;
+  t1444e78faaacd44c5e033d97448c4e87(std::shared_ptr<::dessser::gen::raql_expr::t>  what_, std::shared_ptr<::dessser::gen::raql_expr::t>  time_, std::shared_ptr<::dessser::gen::raql_expr::t>  max_age_, bool tumbling_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size_) : what(what_), time(time_), max_age(max_age_), tumbling(tumbling_), sample_size(sample_size_) {}
   t1444e78faaacd44c5e033d97448c4e87() = default;
 };
 inline bool operator==(t1444e78faaacd44c5e033d97448c4e87 const &a, t1444e78faaacd44c5e033d97448c4e87 const &b) {
-  return (*a.max_age) == (*b.max_age) && ((a.sample_size && b.sample_size && (*a.sample_size.value()) == (*b.sample_size.value())) || (!a.sample_size && !b.sample_size)) && (*a.time) == (*b.time) && a.tumbling == b.tumbling && (*a.what) == (*b.what);
+  return (*a.what) == (*b.what) && (*a.time) == (*b.time) && (*a.max_age) == (*b.max_age) && a.tumbling == b.tumbling && ((a.sample_size && b.sample_size && (*a.sample_size.value()) == (*b.sample_size.value())) || (!a.sample_size && !b.sample_size));
 }
 
 inline bool operator!=(t1444e78faaacd44c5e033d97448c4e87 const &a, t1444e78faaacd44c5e033d97448c4e87 const &b) {
@@ -1332,11 +1332,11 @@ inline bool operator!=(t1444e78faaacd44c5e033d97448c4e87 const &a, t1444e78faaac
 }
 inline std::ostream &operator<<(std::ostream &os, t1444e78faaacd44c5e033d97448c4e87 const &r) {
   os << '{';
-  os << "max_age:" << r.max_age << ',';
-  if (r.sample_size) os << "sample_size:" << r.sample_size.value() << ',';
+  os << "what:" << r.what << ',';
   os << "time:" << r.time << ',';
+  os << "max_age:" << r.max_age << ',';
   os << "tumbling:" << r.tumbling << ',';
-  os << "what:" << r.what;
+  if (r.sample_size) os << "sample_size:" << r.sample_size.value();
   os << '}';
   return os;
 }
@@ -1537,14 +1537,14 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf524e2b10456a
 
 struct t {
   ::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text;
-  dessser::gen::raql_type::t_ext typ;
   uint32_t uniq_num;
+  dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
-  t(::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text_, dessser::gen::raql_type::t_ext typ_, uint32_t uniq_num_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), typ(typ_), uniq_num(uniq_num_), units(units_) {}
+  t(::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text_, uint32_t uniq_num_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), uniq_num(uniq_num_), typ(typ_), units(units_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.text == b.text && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && a.uniq_num == b.uniq_num && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
+  return a.text == b.text && a.uniq_num == b.uniq_num && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -1553,8 +1553,8 @@ inline bool operator!=(t const &a, t const &b) {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "text:" << r.text << ',';
-  os << "typ:" << r.typ << ',';
   os << "uniq_num:" << r.uniq_num << ',';
+  os << "typ:" << r.typ << ',';
   if (r.units) os << "units:" << r.units.value();
   os << '}';
   return os;

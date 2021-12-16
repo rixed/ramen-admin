@@ -30,14 +30,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t2295780c8d3630e8bc9d277e6fa82e3b {
-  std::string create;
   std::string file;
   std::string insert;
-  t2295780c8d3630e8bc9d277e6fa82e3b(std::string create_, std::string file_, std::string insert_) : create(create_), file(file_), insert(insert_) {}
+  std::string create;
+  t2295780c8d3630e8bc9d277e6fa82e3b(std::string file_, std::string insert_, std::string create_) : file(file_), insert(insert_), create(create_) {}
   t2295780c8d3630e8bc9d277e6fa82e3b() = default;
 };
 inline bool operator==(t2295780c8d3630e8bc9d277e6fa82e3b const &a, t2295780c8d3630e8bc9d277e6fa82e3b const &b) {
-  return a.create == b.create && a.file == b.file && a.insert == b.insert;
+  return a.file == b.file && a.insert == b.insert && a.create == b.create;
 }
 
 inline bool operator!=(t2295780c8d3630e8bc9d277e6fa82e3b const &a, t2295780c8d3630e8bc9d277e6fa82e3b const &b) {
@@ -59,14 +59,14 @@ inline bool operator!=(t491302cf85c6148f165ecf960720a734 const &a, t491302cf85c6
 }
 struct ta01abe30cb0b3ed10ed8f9629a473d35 {
   Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options;
+  std::string topic;
   uint16_t partition;
   std::string text;
-  std::string topic;
-  ta01abe30cb0b3ed10ed8f9629a473d35(Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options_, uint16_t partition_, std::string text_, std::string topic_) : options(options_), partition(partition_), text(text_), topic(topic_) {}
+  ta01abe30cb0b3ed10ed8f9629a473d35(Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options_, std::string topic_, uint16_t partition_, std::string text_) : options(options_), topic(topic_), partition(partition_), text(text_) {}
   ta01abe30cb0b3ed10ed8f9629a473d35() = default;
 };
 inline bool operator==(ta01abe30cb0b3ed10ed8f9629a473d35 const &a, ta01abe30cb0b3ed10ed8f9629a473d35 const &b) {
-  return a.options == b.options && a.partition == b.partition && a.text == b.text && a.topic == b.topic;
+  return a.options == b.options && a.topic == b.topic && a.partition == b.partition && a.text == b.text;
 }
 
 inline bool operator!=(ta01abe30cb0b3ed10ed8f9629a473d35 const &a, ta01abe30cb0b3ed10ed8f9629a473d35 const &b) {
@@ -99,13 +99,13 @@ inline bool operator!=(t370a948715668202b695a186b099b0c9 const &a, t370a94871566
   return !operator==(a, b);
 }
 struct t {
-  double timeout;
   ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via;
-  t(double timeout_, ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via_) : timeout(timeout_), via(via_) {}
+  double timeout;
+  t(::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via_, double timeout_) : via(via_), timeout(timeout_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.timeout == b.timeout && a.via == b.via;
+  return a.via == b.via && a.timeout == b.timeout;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -2738,7 +2738,7 @@ static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291
                               auto dstring2_fst_200 { std::get<0>(id_1133) };
                               auto dstring2_snd_201 { std::get<1>(id_1133) };
                               std::string id_1135 { dstring2_fst_200.toString() };
-                              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_1136 { id_1135, drec_fst_173, drec_fst_188 };
+                              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_1136 { drec_fst_173, drec_fst_188, id_1135 };
                               ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 id_1137 { std::in_place_index<3>, id_1136 };
                               ::dessser::gen::alerting_contact::tee7cf594c2e5b47524c8efe132506092 id_1138 { id_1137, dstring2_snd_201 };
                               letpair_res_1134 = id_1138;
@@ -3302,7 +3302,7 @@ static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291
                                   auto dstring2_fst_152 { std::get<0>(id_1406) };
                                   auto dstring2_snd_153 { std::get<1>(id_1406) };
                                   std::string id_1408 { dstring2_fst_152.toString() };
-                                  ::dessser::gen::alerting_contact::ta01abe30cb0b3ed10ed8f9629a473d35 id_1409 { drec_fst_119, drec_fst_140, id_1408, drec_fst_134 };
+                                  ::dessser::gen::alerting_contact::ta01abe30cb0b3ed10ed8f9629a473d35 id_1409 { drec_fst_119, drec_fst_134, drec_fst_140, id_1408 };
                                   ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 id_1410 { std::in_place_index<4>, id_1409 };
                                   ::dessser::gen::alerting_contact::tee7cf594c2e5b47524c8efe132506092 id_1411 { id_1410, dstring2_snd_153 };
                                   letpair_res_1407 = id_1411;
@@ -3348,7 +3348,7 @@ static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291
           auto dfloat_fst_245 { std::get<0>(id_1414) };
           auto dfloat_snd_246 { std::get<1>(id_1414) };
           double id_1416 { float_of_qword(dfloat_fst_245) };
-          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1417 { std::make_shared<::dessser::gen::alerting_contact::t>(id_1416, drec_fst_242) };
+          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1417 { std::make_shared<::dessser::gen::alerting_contact::t>(drec_fst_242, id_1416) };
           ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1418 { id_1417, dfloat_snd_246 };
           letpair_res_1415 = id_1418;
         }

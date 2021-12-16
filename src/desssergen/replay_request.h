@@ -18,16 +18,16 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
+  dessser::gen::fq_function_name::t_ext target;
+  double since;
+  double until;
   bool explain;
   dessser::gen::sync_key::t_ext resp_key;
-  double since;
-  dessser::gen::fq_function_name::t_ext target;
-  double until;
-  t(bool explain_, dessser::gen::sync_key::t_ext resp_key_, double since_, dessser::gen::fq_function_name::t_ext target_, double until_) : explain(explain_), resp_key(resp_key_), since(since_), target(target_), until(until_) {}
+  t(dessser::gen::fq_function_name::t_ext target_, double since_, double until_, bool explain_, dessser::gen::sync_key::t_ext resp_key_) : target(target_), since(since_), until(until_), explain(explain_), resp_key(resp_key_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.explain == b.explain && ::dessser::gen::sync_key::Deref(a.resp_key) == ::dessser::gen::sync_key::Deref(b.resp_key) && a.since == b.since && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.until == b.until;
+  return ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.since == b.since && a.until == b.until && a.explain == b.explain && ::dessser::gen::sync_key::Deref(a.resp_key) == ::dessser::gen::sync_key::Deref(b.resp_key);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -35,11 +35,11 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "explain:" << r.explain << ',';
-  os << "resp_key:" << r.resp_key << ',';
-  os << "since:" << r.since << ',';
   os << "target:" << r.target << ',';
-  os << "until:" << r.until;
+  os << "since:" << r.since << ',';
+  os << "until:" << r.until << ',';
+  os << "explain:" << r.explain << ',';
+  os << "resp_key:" << r.resp_key;
   os << '}';
   return os;
 }

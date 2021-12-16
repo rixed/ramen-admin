@@ -701,8 +701,8 @@ int ConfClient::sendCmd(
 {
   dessser::gen::sync_client_msg::t_ext msg {
     std::make_shared<dessser::gen::sync_client_msg::t>(
-      std::const_pointer_cast<dessser::gen::sync_client_cmd::t>(cmd),
-      onDone.has_value(), echo, seq) };
+      seq, onDone.has_value(), echo,
+      std::const_pointer_cast<dessser::gen::sync_client_cmd::t>(cmd)) };
 
   if (onDone.has_value()) {
     onDoneCallbacks.emplace_back(seq, *onDone);
@@ -800,7 +800,7 @@ int ConfClient::sendMsg(
       auth =
         std::make_shared<dessser::gen::sync_msg::t>(
           std::in_place_index<dessser::gen::sync_msg::SendSessionKey>,
-          send_msg, send_nonce, send_clt_pub_key);
+          send_nonce, send_clt_pub_key, send_msg);
       keySent = true;
     }
   } else {

@@ -17,17 +17,17 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  Arr<uint16_t> channels;
-  double creation;
-  std::optional<std::string> exit_status;
-  double last_killed;
-  std::optional<uint32_t> pid;
   dessser::gen::time_range::t_ext time_range;
-  t(Arr<uint16_t> channels_, double creation_, std::optional<std::string> exit_status_, double last_killed_, std::optional<uint32_t> pid_, dessser::gen::time_range::t_ext time_range_) : channels(channels_), creation(creation_), exit_status(exit_status_), last_killed(last_killed_), pid(pid_), time_range(time_range_) {}
+  double creation;
+  std::optional<uint32_t> pid;
+  double last_killed;
+  std::optional<std::string> exit_status;
+  Arr<uint16_t> channels;
+  t(dessser::gen::time_range::t_ext time_range_, double creation_, std::optional<uint32_t> pid_, double last_killed_, std::optional<std::string> exit_status_, Arr<uint16_t> channels_) : time_range(time_range_), creation(creation_), pid(pid_), last_killed(last_killed_), exit_status(exit_status_), channels(channels_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.channels == b.channels && a.creation == b.creation && ((a.exit_status && b.exit_status && a.exit_status.value() == b.exit_status.value()) || (!a.exit_status && !b.exit_status)) && a.last_killed == b.last_killed && ((a.pid && b.pid && a.pid.value() == b.pid.value()) || (!a.pid && !b.pid)) && ::dessser::gen::time_range::Deref(a.time_range) == ::dessser::gen::time_range::Deref(b.time_range);
+  return ::dessser::gen::time_range::Deref(a.time_range) == ::dessser::gen::time_range::Deref(b.time_range) && a.creation == b.creation && ((a.pid && b.pid && a.pid.value() == b.pid.value()) || (!a.pid && !b.pid)) && a.last_killed == b.last_killed && ((a.exit_status && b.exit_status && a.exit_status.value() == b.exit_status.value()) || (!a.exit_status && !b.exit_status)) && a.channels == b.channels;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -35,12 +35,12 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "channels:" << r.channels << ',';
+  os << "time_range:" << r.time_range << ',';
   os << "creation:" << r.creation << ',';
-  if (r.exit_status) os << "exit_status:" << r.exit_status.value() << ',';
-  os << "last_killed:" << r.last_killed << ',';
   if (r.pid) os << "pid:" << r.pid.value() << ',';
-  os << "time_range:" << r.time_range;
+  os << "last_killed:" << r.last_killed << ',';
+  if (r.exit_status) os << "exit_status:" << r.exit_status.value() << ',';
+  os << "channels:" << r.channels;
   os << '}';
   return os;
 }

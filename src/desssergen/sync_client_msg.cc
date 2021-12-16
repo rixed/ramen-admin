@@ -31,15 +31,15 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::sync_client_cmd::t_ext cmd;
+  uint32_t seq;
   bool confirm_success;
   bool echo;
-  uint32_t seq;
-  t(dessser::gen::sync_client_cmd::t_ext cmd_, bool confirm_success_, bool echo_, uint32_t seq_) : cmd(cmd_), confirm_success(confirm_success_), echo(echo_), seq(seq_) {}
+  dessser::gen::sync_client_cmd::t_ext cmd;
+  t(uint32_t seq_, bool confirm_success_, bool echo_, dessser::gen::sync_client_cmd::t_ext cmd_) : seq(seq_), confirm_success(confirm_success_), echo(echo_), cmd(cmd_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::sync_client_cmd::Deref(a.cmd) == ::dessser::gen::sync_client_cmd::Deref(b.cmd) && a.confirm_success == b.confirm_success && a.echo == b.echo && a.seq == b.seq;
+  return a.seq == b.seq && a.confirm_success == b.confirm_success && a.echo == b.echo && ::dessser::gen::sync_client_cmd::Deref(a.cmd) == ::dessser::gen::sync_client_cmd::Deref(b.cmd);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -251,7 +251,7 @@ static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd
                 {
                   auto drec_fst_75 { std::get<0>(id_44) };
                   auto drec_snd_76 { std::get<1>(id_44) };
-                  std::shared_ptr<::dessser::gen::sync_client_msg::t>  id_46 { std::make_shared<::dessser::gen::sync_client_msg::t>(drec_fst_75, drec_fst_66, drec_fst_72, drec_fst_60) };
+                  std::shared_ptr<::dessser::gen::sync_client_msg::t>  id_46 { std::make_shared<::dessser::gen::sync_client_msg::t>(drec_fst_60, drec_fst_66, drec_fst_72, drec_fst_75) };
                   ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_47 { id_46, drec_snd_76 };
                   letpair_res_45 = id_47;
                 }

@@ -31,17 +31,17 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  Arr<uint16_t> channels;
-  double creation;
-  std::optional<std::string> exit_status;
-  double last_killed;
-  std::optional<uint32_t> pid;
   dessser::gen::time_range::t_ext time_range;
-  t(Arr<uint16_t> channels_, double creation_, std::optional<std::string> exit_status_, double last_killed_, std::optional<uint32_t> pid_, dessser::gen::time_range::t_ext time_range_) : channels(channels_), creation(creation_), exit_status(exit_status_), last_killed(last_killed_), pid(pid_), time_range(time_range_) {}
+  double creation;
+  std::optional<uint32_t> pid;
+  double last_killed;
+  std::optional<std::string> exit_status;
+  Arr<uint16_t> channels;
+  t(dessser::gen::time_range::t_ext time_range_, double creation_, std::optional<uint32_t> pid_, double last_killed_, std::optional<std::string> exit_status_, Arr<uint16_t> channels_) : time_range(time_range_), creation(creation_), pid(pid_), last_killed(last_killed_), exit_status(exit_status_), channels(channels_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.channels == b.channels && a.creation == b.creation && ((a.exit_status && b.exit_status && a.exit_status.value() == b.exit_status.value()) || (!a.exit_status && !b.exit_status)) && a.last_killed == b.last_killed && ((a.pid && b.pid && a.pid.value() == b.pid.value()) || (!a.pid && !b.pid)) && ::dessser::gen::time_range::Deref(a.time_range) == ::dessser::gen::time_range::Deref(b.time_range);
+  return ::dessser::gen::time_range::Deref(a.time_range) == ::dessser::gen::time_range::Deref(b.time_range) && a.creation == b.creation && ((a.pid && b.pid && a.pid.value() == b.pid.value()) || (!a.pid && !b.pid)) && a.last_killed == b.last_killed && ((a.exit_status && b.exit_status && a.exit_status.value() == b.exit_status.value()) || (!a.exit_status && !b.exit_status)) && a.channels == b.channels;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -1126,7 +1126,7 @@ static std::function<::dessser::gen::replayer::t0bd45f437ea17ff5374b334c82df701e
                           auto dlist4_fst_122 { std::get<0>(let_res_373) };
                           auto dlist4_snd_123 { std::get<1>(let_res_373) };
                           Arr<uint16_t> id_403 { dlist4_fst_122.toListRev() };
-                          std::shared_ptr<::dessser::gen::replayer::t>  id_404 { std::make_shared<::dessser::gen::replayer::t>(id_403, drec_fst_63, drec_fst_96, drec_fst_78, drec_fst_72, drec_fst_57) };
+                          std::shared_ptr<::dessser::gen::replayer::t>  id_404 { std::make_shared<::dessser::gen::replayer::t>(drec_fst_57, drec_fst_63, drec_fst_72, drec_fst_78, drec_fst_96, id_403) };
                           ::dessser::gen::replayer::t0bd45f437ea17ff5374b334c82df701e id_405 { id_404, dlist4_snd_123 };
                           letpair_res_402 = id_405;
                         }

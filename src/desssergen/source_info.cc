@@ -39,48 +39,48 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct compiled_func {
-  std::string doc;
-  Lst<dessser::gen::field_name::t_ext> factors;
-  std::string in_signature;
-  bool is_lazy;
   dessser::gen::function_name::t_ext name;
+  std::optional<dessser::gen::retention::t_ext> retention;
+  bool is_lazy;
+  std::string doc;
   dessser::gen::raql_operation::t_ext operation;
   dessser::gen::raql_type::t_ext out_record;
-  std::optional<dessser::gen::retention::t_ext> retention;
+  Lst<dessser::gen::field_name::t_ext> factors;
   std::string signature;
-  compiled_func(std::string doc_, Lst<dessser::gen::field_name::t_ext> factors_, std::string in_signature_, bool is_lazy_, dessser::gen::function_name::t_ext name_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, std::optional<dessser::gen::retention::t_ext> retention_, std::string signature_) : doc(doc_), factors(factors_), in_signature(in_signature_), is_lazy(is_lazy_), name(name_), operation(operation_), out_record(out_record_), retention(retention_), signature(signature_) {}
+  std::string in_signature;
+  compiled_func(dessser::gen::function_name::t_ext name_, std::optional<dessser::gen::retention::t_ext> retention_, bool is_lazy_, std::string doc_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, Lst<dessser::gen::field_name::t_ext> factors_, std::string signature_, std::string in_signature_) : name(name_), retention(retention_), is_lazy(is_lazy_), doc(doc_), operation(operation_), out_record(out_record_), factors(factors_), signature(signature_), in_signature(in_signature_) {}
   compiled_func() = default;
 };
 inline bool operator==(compiled_func const &a, compiled_func const &b) {
-  return a.doc == b.doc && a.factors == b.factors && a.in_signature == b.in_signature && a.is_lazy == b.is_lazy && ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.signature == b.signature;
+  return ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.is_lazy == b.is_lazy && a.doc == b.doc && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && a.factors == b.factors && a.signature == b.signature && a.in_signature == b.in_signature;
 }
 
 inline bool operator!=(compiled_func const &a, compiled_func const &b) {
   return !operator==(a, b);
 }
 struct compiled_program {
-  dessser::gen::raql_expr::t_ext condition;
   Lst<dessser::gen::program_parameter::t_ext> default_params;
-  Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs;
+  dessser::gen::raql_expr::t_ext condition;
   Lst<dessser::gen::global_variable::t_ext> globals;
-  compiled_program(dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::program_parameter::t_ext> default_params_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_, Lst<dessser::gen::global_variable::t_ext> globals_) : condition(condition_), default_params(default_params_), funcs(funcs_), globals(globals_) {}
+  Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs;
+  compiled_program(Lst<dessser::gen::program_parameter::t_ext> default_params_, dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::global_variable::t_ext> globals_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_) : default_params(default_params_), condition(condition_), globals(globals_), funcs(funcs_) {}
   compiled_program() = default;
 };
 inline bool operator==(compiled_program const &a, compiled_program const &b) {
-  return ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.default_params == b.default_params && a.funcs == b.funcs && a.globals == b.globals;
+  return a.default_params == b.default_params && ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.globals == b.globals && a.funcs == b.funcs;
 }
 
 inline bool operator!=(compiled_program const &a, compiled_program const &b) {
   return !operator==(a, b);
 }
 struct t7904aca1b7c7094ac41533a38083131a {
-  std::optional<dessser::gen::src_path::t_ext> depends_on;
   std::string err_msg;
-  t7904aca1b7c7094ac41533a38083131a(std::optional<dessser::gen::src_path::t_ext> depends_on_, std::string err_msg_) : depends_on(depends_on_), err_msg(err_msg_) {}
+  std::optional<dessser::gen::src_path::t_ext> depends_on;
+  t7904aca1b7c7094ac41533a38083131a(std::string err_msg_, std::optional<dessser::gen::src_path::t_ext> depends_on_) : err_msg(err_msg_), depends_on(depends_on_) {}
   t7904aca1b7c7094ac41533a38083131a() = default;
 };
 inline bool operator==(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
-  return ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on)) && a.err_msg == b.err_msg;
+  return a.err_msg == b.err_msg && ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on));
 }
 
 inline bool operator!=(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
@@ -107,14 +107,14 @@ inline bool operator!=(t01907297530734eeb2fea6f30cc7354a const &a, t019072975307
   return !operator==(a, b);
 }
 struct t {
-  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
-  Lst<std::string> md5s;
   std::string src_ext;
-  t(::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
+  Lst<std::string> md5s;
+  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
+  t(std::string src_ext_, Lst<std::string> md5s_, ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_) : src_ext(src_ext_), md5s(md5s_), detail(detail_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.detail == b.detail && a.md5s == b.md5s && a.src_ext == b.src_ext;
+  return a.src_ext == b.src_ext && a.md5s == b.md5s && a.detail == b.detail;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -3432,7 +3432,7 @@ static std::function<::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f09
                                           auto dstring2_fst_143 { std::get<0>(id_1377) };
                                           auto dstring2_snd_144 { std::get<1>(id_1377) };
                                           std::string id_1379 { dstring2_fst_143.toString() };
-                                          std::shared_ptr<::dessser::gen::source_info::compiled_func>  id_1380 { std::make_shared<::dessser::gen::source_info::compiled_func>(drec_fst_84, drec_fst_116, id_1379, drec_fst_69, drec_fst_57, drec_fst_87, drec_fst_90, drec_fst_63, drec_fst_131) };
+                                          std::shared_ptr<::dessser::gen::source_info::compiled_func>  id_1380 { std::make_shared<::dessser::gen::source_info::compiled_func>(drec_fst_57, drec_fst_63, drec_fst_69, drec_fst_84, drec_fst_87, drec_fst_90, drec_fst_116, drec_fst_131, id_1379) };
                                           ::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be id_1381 { id_1380, dstring2_snd_144 };
                                           letpair_res_1378 = id_1381;
                                         }
@@ -4058,7 +4058,7 @@ static std::function<::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c
                 {
                   auto dlist4_fst_224 { std::get<0>(let_res_1575) };
                   auto dlist4_snd_225 { std::get<1>(let_res_1575) };
-                  std::shared_ptr<::dessser::gen::source_info::compiled_program>  id_1605 { std::make_shared<::dessser::gen::source_info::compiled_program>(drec_fst_175, drec_fst_172, dlist4_fst_224, drec_fst_201) };
+                  std::shared_ptr<::dessser::gen::source_info::compiled_program>  id_1605 { std::make_shared<::dessser::gen::source_info::compiled_program>(drec_fst_172, drec_fst_175, drec_fst_201, dlist4_fst_224) };
                   ::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c0a0 id_1606 { id_1605, dlist4_snd_225 };
                   letpair_res_1604 = id_1606;
                 }
@@ -4699,7 +4699,7 @@ static std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f3
                       {
                         auto drec_fst_310 { std::get<0>(choose_res_1842) };
                         auto drec_snd_311 { std::get<1>(choose_res_1842) };
-                        ::dessser::gen::source_info::t7904aca1b7c7094ac41533a38083131a id_1855 { drec_fst_310, drec_fst_304 };
+                        ::dessser::gen::source_info::t7904aca1b7c7094ac41533a38083131a id_1855 { drec_fst_304, drec_fst_310 };
                         ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a id_1856 { std::in_place_index<1>, id_1855 };
                         ::dessser::gen::source_info::t1dbe46d793a5e2554e3a17c25d03e7d4 id_1857 { id_1856, drec_snd_311 };
                         letpair_res_1854 = id_1857;
@@ -4718,7 +4718,7 @@ static std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f3
             {
               auto drec_fst_319 { std::get<0>(let_res_1777) };
               auto drec_snd_320 { std::get<1>(let_res_1777) };
-              std::shared_ptr<::dessser::gen::source_info::t>  id_1859 { std::make_shared<::dessser::gen::source_info::t>(drec_fst_319, drec_fst_280, drec_fst_242) };
+              std::shared_ptr<::dessser::gen::source_info::t>  id_1859 { std::make_shared<::dessser::gen::source_info::t>(drec_fst_242, drec_fst_280, drec_fst_319) };
               ::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8 id_1860 { id_1859, drec_snd_320 };
               letpair_res_1858 = id_1860;
             }

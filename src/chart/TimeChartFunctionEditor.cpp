@@ -266,14 +266,14 @@ void TimeChartFunctionEditor::automatonTransition(
         dessser::Arr<std::shared_ptr<dessser::gen::program_run_parameter::t>> params;
         std::shared_ptr<dessser::gen::rc_entry::t> rce {
           std::make_shared<dessser::gen::rc_entry::t>(
-            false,  // automatic
-            sourceEntry->cwd,
-            sourceEntry->debug,
-            true, // enabled
-            model->source.name->site,
-            params,
             automaton->customProgram,
-            sourceEntry->report_period) };
+            true, // enabled
+            sourceEntry->debug,
+            sourceEntry->report_period,
+            sourceEntry->cwd,
+            params,
+            model->source.name->site,
+            false) };  // automatic
         // Create a new array with all same entries (shared) + rce:
         dessser::Arr<dessser::gen::rc_entry::t_ext> rc2 { *rc };
         rc2.push_back(rce);

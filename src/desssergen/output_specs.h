@@ -44,14 +44,14 @@ inline std::ostream &operator<<(std::ostream &os, channel_specs const &t) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<channel_specs> const t) { os << *t; return os; }
 
 struct ta86dfe69264c9600d57a3b5ead0f7951 {
+  bool with_index;
   uint32_t batch_size;
   uint32_t num_batches;
-  bool with_index;
-  ta86dfe69264c9600d57a3b5ead0f7951(uint32_t batch_size_, uint32_t num_batches_, bool with_index_) : batch_size(batch_size_), num_batches(num_batches_), with_index(with_index_) {}
+  ta86dfe69264c9600d57a3b5ead0f7951(bool with_index_, uint32_t batch_size_, uint32_t num_batches_) : with_index(with_index_), batch_size(batch_size_), num_batches(num_batches_) {}
   ta86dfe69264c9600d57a3b5ead0f7951() = default;
 };
 inline bool operator==(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c9600d57a3b5ead0f7951 const &b) {
-  return a.batch_size == b.batch_size && a.num_batches == b.num_batches && a.with_index == b.with_index;
+  return a.with_index == b.with_index && a.batch_size == b.batch_size && a.num_batches == b.num_batches;
 }
 
 inline bool operator!=(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c9600d57a3b5ead0f7951 const &b) {
@@ -59,9 +59,9 @@ inline bool operator!=(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c
 }
 inline std::ostream &operator<<(std::ostream &os, ta86dfe69264c9600d57a3b5ead0f7951 const &r) {
   os << '{';
+  os << "with_index:" << r.with_index << ',';
   os << "batch_size:" << r.batch_size << ',';
-  os << "num_batches:" << r.num_batches << ',';
-  os << "with_index:" << r.with_index;
+  os << "num_batches:" << r.num_batches;
   os << '}';
   return os;
 }
@@ -190,15 +190,15 @@ inline std::ostream &operator<<(std::ostream &os, t513ffd998e76089b452224202d19c
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t513ffd998e76089b452224202d19cdbb> const t) { os << *t; return os; }
 
 struct tb95b6de0d0270e9aab9c85d675629e8b {
-  Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels;
-  dessser::gen::fieldmask::t_ext fieldmask;
   std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type;
+  dessser::gen::fieldmask::t_ext fieldmask;
   Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters;
-  tb95b6de0d0270e9aab9c85d675629e8b(Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels_, dessser::gen::fieldmask::t_ext fieldmask_, std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type_, Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters_) : channels(channels_), fieldmask(fieldmask_), file_type(file_type_), filters(filters_) {}
+  Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels;
+  tb95b6de0d0270e9aab9c85d675629e8b(std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type_, dessser::gen::fieldmask::t_ext fieldmask_, Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters_, Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels_) : file_type(file_type_), fieldmask(fieldmask_), filters(filters_), channels(channels_) {}
   tb95b6de0d0270e9aab9c85d675629e8b() = default;
 };
 inline bool operator==(tb95b6de0d0270e9aab9c85d675629e8b const &a, tb95b6de0d0270e9aab9c85d675629e8b const &b) {
-  return a.channels == b.channels && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && (*a.file_type) == (*b.file_type) && a.filters == b.filters;
+  return (*a.file_type) == (*b.file_type) && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && a.filters == b.filters && a.channels == b.channels;
 }
 
 inline bool operator!=(tb95b6de0d0270e9aab9c85d675629e8b const &a, tb95b6de0d0270e9aab9c85d675629e8b const &b) {
@@ -206,10 +206,10 @@ inline bool operator!=(tb95b6de0d0270e9aab9c85d675629e8b const &a, tb95b6de0d027
 }
 inline std::ostream &operator<<(std::ostream &os, tb95b6de0d0270e9aab9c85d675629e8b const &r) {
   os << '{';
-  os << "channels:" << r.channels << ',';
-  os << "fieldmask:" << r.fieldmask << ',';
   os << "file_type:" << r.file_type << ',';
-  os << "filters:" << r.filters;
+  os << "fieldmask:" << r.fieldmask << ',';
+  os << "filters:" << r.filters << ',';
+  os << "channels:" << r.channels;
   os << '}';
   return os;
 }

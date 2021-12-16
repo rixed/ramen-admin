@@ -16,14 +16,14 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t206fd5d881820fd19331922d3e213def {
-  Bytes message;
   Bytes nonce;
   Bytes public_key;
-  t206fd5d881820fd19331922d3e213def(Bytes message_, Bytes nonce_, Bytes public_key_) : message(message_), nonce(nonce_), public_key(public_key_) {}
+  Bytes message;
+  t206fd5d881820fd19331922d3e213def(Bytes nonce_, Bytes public_key_, Bytes message_) : nonce(nonce_), public_key(public_key_), message(message_) {}
   t206fd5d881820fd19331922d3e213def() = default;
 };
 inline bool operator==(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
-  return a.message == b.message && a.nonce == b.nonce && a.public_key == b.public_key;
+  return a.nonce == b.nonce && a.public_key == b.public_key && a.message == b.message;
 }
 
 inline bool operator!=(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
@@ -31,9 +31,9 @@ inline bool operator!=(t206fd5d881820fd19331922d3e213def const &a, t206fd5d88182
 }
 inline std::ostream &operator<<(std::ostream &os, t206fd5d881820fd19331922d3e213def const &r) {
   os << '{';
-  os << "message:" << r.message << ',';
   os << "nonce:" << r.nonce << ',';
-  os << "public_key:" << r.public_key;
+  os << "public_key:" << r.public_key << ',';
+  os << "message:" << r.message;
   os << '}';
   return os;
 }

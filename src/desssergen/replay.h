@@ -82,19 +82,19 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td2e775685fdb2
 
 struct t {
   uint16_t channel;
-  Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links;
-  ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient;
-  double since;
-  Arr<dessser::gen::fq_function_name::t_ext> sources;
   dessser::gen::fq_function_name::t_ext target;
   std::string target_fieldmask;
-  double timeout_date;
+  double since;
   double until;
-  t(uint16_t channel_, Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links_, ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient_, double since_, Arr<dessser::gen::fq_function_name::t_ext> sources_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double timeout_date_, double until_) : channel(channel_), links(links_), recipient(recipient_), since(since_), sources(sources_), target(target_), target_fieldmask(target_fieldmask_), timeout_date(timeout_date_), until(until_) {}
+  ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient;
+  Arr<dessser::gen::fq_function_name::t_ext> sources;
+  Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links;
+  double timeout_date;
+  t(uint16_t channel_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double since_, double until_, ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient_, Arr<dessser::gen::fq_function_name::t_ext> sources_, Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links_, double timeout_date_) : channel(channel_), target(target_), target_fieldmask(target_fieldmask_), since(since_), until(until_), recipient(recipient_), sources(sources_), links(links_), timeout_date(timeout_date_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.channel == b.channel && a.links == b.links && a.recipient == b.recipient && a.since == b.since && a.sources == b.sources && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.target_fieldmask == b.target_fieldmask && a.timeout_date == b.timeout_date && a.until == b.until;
+  return a.channel == b.channel && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.target_fieldmask == b.target_fieldmask && a.since == b.since && a.until == b.until && a.recipient == b.recipient && a.sources == b.sources && a.links == b.links && a.timeout_date == b.timeout_date;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -103,14 +103,14 @@ inline bool operator!=(t const &a, t const &b) {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "channel:" << r.channel << ',';
-  os << "links:" << r.links << ',';
-  os << "recipient:" << r.recipient << ',';
-  os << "since:" << r.since << ',';
-  os << "sources:" << r.sources << ',';
   os << "target:" << r.target << ',';
   os << "target_fieldmask:" << r.target_fieldmask << ',';
-  os << "timeout_date:" << r.timeout_date << ',';
-  os << "until:" << r.until;
+  os << "since:" << r.since << ',';
+  os << "until:" << r.until << ',';
+  os << "recipient:" << r.recipient << ',';
+  os << "sources:" << r.sources << ',';
+  os << "links:" << r.links << ',';
+  os << "timeout_date:" << r.timeout_date;
   os << '}';
   return os;
 }

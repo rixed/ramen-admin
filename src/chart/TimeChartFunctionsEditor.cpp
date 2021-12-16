@@ -193,9 +193,9 @@ void TimeChartFunctionsEditor::addOrFocus(
   TimeChartFunctionEditor *e {
     addFunctionByName(site, program, function, customizable) };
   dessser::gen::dashboard_widget::source defaultSrc {
-    {}, // fields
-    std::make_shared<dessser::gen::fq_function_name::t>(function, program, site),
-    true  // visible
+    std::make_shared<dessser::gen::fq_function_name::t>(site, program, function),
+    true,  // visible
+    {} // fields
   };
   e->setValue(defaultSrc);
   (void)functions->insertItem(t_i, e, fqName);

@@ -534,26 +534,26 @@ std::shared_ptr<dessser::gen::sync_value::t const> AlertInfoEditor::getValue() c
 
   std::shared_ptr<dessser::gen::alert::t> alert {
     std::make_shared<dessser::gen::alert::t>(
-      carry_csts_,
-      carry_fields,
+      getTable(),
       column,
-      descFiring->text().toStdString(),
-      descRecovery->text().toStdString(),
-      descTitle->text().toStdString(),
-      duration->text().toDouble(),
       isEnabled->isChecked(),
+      where_,
       getGroupBy(),
       having_,
-      hysteresis->text().toDouble(),
-      id->text().toStdString(),
-      0.01 * percentage->text().toDouble(),
-      getTable(),
       std::make_shared<dessser::gen::alert::threshold>(
         std::in_place_index<dessser::gen::alert::Constant>,
         threshold->text().toDouble()),
+      hysteresis->text().toDouble(),
+      duration->text().toDouble(),
+      0.01 * percentage->text().toDouble(),
       timeStep->text().toDouble(),
       tops,
-      where_) };
+      carry_fields,
+      carry_csts_,
+      id->text().toStdString(),
+      descTitle->text().toStdString(),
+      descFiring->text().toStdString(),
+      descRecovery->text().toStdString()) };
 
   return std::make_shared<dessser::gen::sync_value::t const>(
     std::in_place_index<dessser::gen::sync_value::Alert>,

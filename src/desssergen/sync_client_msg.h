@@ -17,15 +17,15 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::sync_client_cmd::t_ext cmd;
+  uint32_t seq;
   bool confirm_success;
   bool echo;
-  uint32_t seq;
-  t(dessser::gen::sync_client_cmd::t_ext cmd_, bool confirm_success_, bool echo_, uint32_t seq_) : cmd(cmd_), confirm_success(confirm_success_), echo(echo_), seq(seq_) {}
+  dessser::gen::sync_client_cmd::t_ext cmd;
+  t(uint32_t seq_, bool confirm_success_, bool echo_, dessser::gen::sync_client_cmd::t_ext cmd_) : seq(seq_), confirm_success(confirm_success_), echo(echo_), cmd(cmd_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::sync_client_cmd::Deref(a.cmd) == ::dessser::gen::sync_client_cmd::Deref(b.cmd) && a.confirm_success == b.confirm_success && a.echo == b.echo && a.seq == b.seq;
+  return a.seq == b.seq && a.confirm_success == b.confirm_success && a.echo == b.echo && ::dessser::gen::sync_client_cmd::Deref(a.cmd) == ::dessser::gen::sync_client_cmd::Deref(b.cmd);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -33,10 +33,10 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "cmd:" << r.cmd << ',';
+  os << "seq:" << r.seq << ',';
   os << "confirm_success:" << r.confirm_success << ',';
   os << "echo:" << r.echo << ',';
-  os << "seq:" << r.seq;
+  os << "cmd:" << r.cmd;
   os << '}';
   return os;
 }

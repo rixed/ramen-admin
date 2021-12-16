@@ -33,14 +33,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::function_name::t_ext func;
-  dessser::gen::program_name::t_ext program;
   dessser::gen::site_name::t_ext site;
-  t(dessser::gen::function_name::t_ext func_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : func(func_), program(program_), site(site_) {}
+  dessser::gen::program_name::t_ext program;
+  dessser::gen::function_name::t_ext func;
+  t(dessser::gen::site_name::t_ext site_, dessser::gen::program_name::t_ext program_, dessser::gen::function_name::t_ext func_) : site(site_), program(program_), func(func_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::function_name::Deref(a.func) == ::dessser::gen::function_name::Deref(b.func) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site);
+  return ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::function_name::Deref(a.func) == ::dessser::gen::function_name::Deref(b.func);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -213,7 +213,7 @@ static std::function<::dessser::gen::func_ref::taa1ea876bd3405a61d941fe18b62be03
             {
               auto drec_fst_63 { std::get<0>(id_36) };
               auto drec_snd_64 { std::get<1>(id_36) };
-              std::shared_ptr<::dessser::gen::func_ref::t>  id_38 { std::make_shared<::dessser::gen::func_ref::t>(drec_fst_63, drec_fst_60, drec_fst_57) };
+              std::shared_ptr<::dessser::gen::func_ref::t>  id_38 { std::make_shared<::dessser::gen::func_ref::t>(drec_fst_57, drec_fst_60, drec_fst_63) };
               ::dessser::gen::func_ref::taa1ea876bd3405a61d941fe18b62be03 id_39 { id_38, drec_snd_64 };
               letpair_res_37 = id_39;
             }

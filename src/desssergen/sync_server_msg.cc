@@ -39,33 +39,33 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 struct t3f973b24e2e9a1d94d78f692da2d8ddd {
   dessser::gen::sync_key::t_ext SetKey_k;
-  double SetKey_mtime;
-  std::string SetKey_uid;
   dessser::gen::sync_value::t_ext SetKey_v;
-  t3f973b24e2e9a1d94d78f692da2d8ddd(dessser::gen::sync_key::t_ext SetKey_k_, double SetKey_mtime_, std::string SetKey_uid_, dessser::gen::sync_value::t_ext SetKey_v_) : SetKey_k(SetKey_k_), SetKey_mtime(SetKey_mtime_), SetKey_uid(SetKey_uid_), SetKey_v(SetKey_v_) {}
+  std::string SetKey_uid;
+  double SetKey_mtime;
+  t3f973b24e2e9a1d94d78f692da2d8ddd(dessser::gen::sync_key::t_ext SetKey_k_, dessser::gen::sync_value::t_ext SetKey_v_, std::string SetKey_uid_, double SetKey_mtime_) : SetKey_k(SetKey_k_), SetKey_v(SetKey_v_), SetKey_uid(SetKey_uid_), SetKey_mtime(SetKey_mtime_) {}
   t3f973b24e2e9a1d94d78f692da2d8ddd() = default;
 };
 inline bool operator==(t3f973b24e2e9a1d94d78f692da2d8ddd const &a, t3f973b24e2e9a1d94d78f692da2d8ddd const &b) {
-  return ::dessser::gen::sync_key::Deref(a.SetKey_k) == ::dessser::gen::sync_key::Deref(b.SetKey_k) && a.SetKey_mtime == b.SetKey_mtime && a.SetKey_uid == b.SetKey_uid && ::dessser::gen::sync_value::Deref(a.SetKey_v) == ::dessser::gen::sync_value::Deref(b.SetKey_v);
+  return ::dessser::gen::sync_key::Deref(a.SetKey_k) == ::dessser::gen::sync_key::Deref(b.SetKey_k) && ::dessser::gen::sync_value::Deref(a.SetKey_v) == ::dessser::gen::sync_value::Deref(b.SetKey_v) && a.SetKey_uid == b.SetKey_uid && a.SetKey_mtime == b.SetKey_mtime;
 }
 
 inline bool operator!=(t3f973b24e2e9a1d94d78f692da2d8ddd const &a, t3f973b24e2e9a1d94d78f692da2d8ddd const &b) {
   return !operator==(a, b);
 }
 struct td4227ac047ed98f74e1d279b847d611e {
-  bool can_del;
-  bool can_write;
-  double NewKey_expiry;
   dessser::gen::sync_key::t_ext NewKey_k;
-  double mtime;
-  std::string NewKey_owner;
-  std::string NewKey_uid;
   dessser::gen::sync_value::t_ext v;
-  td4227ac047ed98f74e1d279b847d611e(bool can_del_, bool can_write_, double NewKey_expiry_, dessser::gen::sync_key::t_ext NewKey_k_, double mtime_, std::string NewKey_owner_, std::string NewKey_uid_, dessser::gen::sync_value::t_ext v_) : can_del(can_del_), can_write(can_write_), NewKey_expiry(NewKey_expiry_), NewKey_k(NewKey_k_), mtime(mtime_), NewKey_owner(NewKey_owner_), NewKey_uid(NewKey_uid_), v(v_) {}
+  std::string NewKey_uid;
+  double mtime;
+  bool can_write;
+  bool can_del;
+  std::string NewKey_owner;
+  double NewKey_expiry;
+  td4227ac047ed98f74e1d279b847d611e(dessser::gen::sync_key::t_ext NewKey_k_, dessser::gen::sync_value::t_ext v_, std::string NewKey_uid_, double mtime_, bool can_write_, bool can_del_, std::string NewKey_owner_, double NewKey_expiry_) : NewKey_k(NewKey_k_), v(v_), NewKey_uid(NewKey_uid_), mtime(mtime_), can_write(can_write_), can_del(can_del_), NewKey_owner(NewKey_owner_), NewKey_expiry(NewKey_expiry_) {}
   td4227ac047ed98f74e1d279b847d611e() = default;
 };
 inline bool operator==(td4227ac047ed98f74e1d279b847d611e const &a, td4227ac047ed98f74e1d279b847d611e const &b) {
-  return a.can_del == b.can_del && a.can_write == b.can_write && a.NewKey_expiry == b.NewKey_expiry && ::dessser::gen::sync_key::Deref(a.NewKey_k) == ::dessser::gen::sync_key::Deref(b.NewKey_k) && a.mtime == b.mtime && a.NewKey_owner == b.NewKey_owner && a.NewKey_uid == b.NewKey_uid && ::dessser::gen::sync_value::Deref(a.v) == ::dessser::gen::sync_value::Deref(b.v);
+  return ::dessser::gen::sync_key::Deref(a.NewKey_k) == ::dessser::gen::sync_key::Deref(b.NewKey_k) && ::dessser::gen::sync_value::Deref(a.v) == ::dessser::gen::sync_value::Deref(b.v) && a.NewKey_uid == b.NewKey_uid && a.mtime == b.mtime && a.can_write == b.can_write && a.can_del == b.can_del && a.NewKey_owner == b.NewKey_owner && a.NewKey_expiry == b.NewKey_expiry;
 }
 
 inline bool operator!=(td4227ac047ed98f74e1d279b847d611e const &a, td4227ac047ed98f74e1d279b847d611e const &b) {
@@ -85,14 +85,14 @@ inline bool operator!=(t08b27b0be3a89631db1d9e270c1e83bc const &a, t08b27b0be3a8
   return !operator==(a, b);
 }
 struct t675a4fdd830ddedd7d9ba746180c033f {
-  double expiry;
   dessser::gen::sync_key::t_ext k;
   std::string owner;
-  t675a4fdd830ddedd7d9ba746180c033f(double expiry_, dessser::gen::sync_key::t_ext k_, std::string owner_) : expiry(expiry_), k(k_), owner(owner_) {}
+  double expiry;
+  t675a4fdd830ddedd7d9ba746180c033f(dessser::gen::sync_key::t_ext k_, std::string owner_, double expiry_) : k(k_), owner(owner_), expiry(expiry_) {}
   t675a4fdd830ddedd7d9ba746180c033f() = default;
 };
 inline bool operator==(t675a4fdd830ddedd7d9ba746180c033f const &a, t675a4fdd830ddedd7d9ba746180c033f const &b) {
-  return a.expiry == b.expiry && ::dessser::gen::sync_key::Deref(a.k) == ::dessser::gen::sync_key::Deref(b.k) && a.owner == b.owner;
+  return ::dessser::gen::sync_key::Deref(a.k) == ::dessser::gen::sync_key::Deref(b.k) && a.owner == b.owner && a.expiry == b.expiry;
 }
 
 inline bool operator!=(t675a4fdd830ddedd7d9ba746180c033f const &a, t675a4fdd830ddedd7d9ba746180c033f const &b) {
@@ -1986,7 +1986,7 @@ static std::function<::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa3
                             auto dfloat_fst_201 { std::get<0>(id_751) };
                             auto dfloat_snd_202 { std::get<1>(id_751) };
                             double id_753 { float_of_qword(dfloat_fst_201) };
-                            ::dessser::gen::sync_server_msg::t3f973b24e2e9a1d94d78f692da2d8ddd id_754 { drec_fst_180, id_753, drec_fst_198, drec_fst_183 };
+                            ::dessser::gen::sync_server_msg::t3f973b24e2e9a1d94d78f692da2d8ddd id_754 { drec_fst_180, drec_fst_183, drec_fst_198, id_753 };
                             std::shared_ptr<::dessser::gen::sync_server_msg::t>  id_755 { std::make_shared<::dessser::gen::sync_server_msg::t>(std::in_place_index<2>, id_754) };
                             ::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa38842dd1 id_756 { id_755, dfloat_snd_202 };
                             letpair_res_752 = id_756;
@@ -2283,7 +2283,7 @@ static std::function<::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa3
                                               auto dfloat_fst_171 { std::get<0>(id_888) };
                                               auto dfloat_snd_172 { std::get<1>(id_888) };
                                               double id_890 { float_of_qword(dfloat_fst_171) };
-                                              ::dessser::gen::sync_server_msg::td4227ac047ed98f74e1d279b847d611e id_891 { drec_fst_153, drec_fst_147, id_890, drec_fst_117, drec_fst_141, drec_fst_168, drec_fst_135, drec_fst_120 };
+                                              ::dessser::gen::sync_server_msg::td4227ac047ed98f74e1d279b847d611e id_891 { drec_fst_117, drec_fst_120, drec_fst_135, drec_fst_141, drec_fst_147, drec_fst_153, drec_fst_168, id_890 };
                                               std::shared_ptr<::dessser::gen::sync_server_msg::t>  id_892 { std::make_shared<::dessser::gen::sync_server_msg::t>(std::in_place_index<3>, id_891) };
                                               ::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa38842dd1 id_893 { id_892, dfloat_snd_172 };
                                               letpair_res_889 = id_893;
@@ -2549,7 +2549,7 @@ static std::function<::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa3
                               auto dfloat_fst_87 { std::get<0>(id_1006) };
                               auto dfloat_snd_88 { std::get<1>(id_1006) };
                               double id_1008 { float_of_qword(dfloat_fst_87) };
-                              ::dessser::gen::sync_server_msg::t675a4fdd830ddedd7d9ba746180c033f id_1009 { id_1008, drec_fst_69, drec_fst_84 };
+                              ::dessser::gen::sync_server_msg::t675a4fdd830ddedd7d9ba746180c033f id_1009 { drec_fst_69, drec_fst_84, id_1008 };
                               std::shared_ptr<::dessser::gen::sync_server_msg::t>  id_1010 { std::make_shared<::dessser::gen::sync_server_msg::t>(std::in_place_index<5>, id_1009) };
                               ::dessser::gen::sync_server_msg::t74e78fed6c064ccc52152cfa38842dd1 id_1011 { id_1010, dfloat_snd_88 };
                               letpair_res_1007 = id_1011;

@@ -32,13 +32,13 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 struct t {
   dessser::gen::field_name::t_ext lhs;
-  std::string op;
   std::string rhs;
-  t(dessser::gen::field_name::t_ext lhs_, std::string op_, std::string rhs_) : lhs(lhs_), op(op_), rhs(rhs_) {}
+  std::string op;
+  t(dessser::gen::field_name::t_ext lhs_, std::string rhs_, std::string op_) : lhs(lhs_), rhs(rhs_), op(op_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::field_name::Deref(a.lhs) == ::dessser::gen::field_name::Deref(b.lhs) && a.op == b.op && a.rhs == b.rhs;
+  return ::dessser::gen::field_name::Deref(a.lhs) == ::dessser::gen::field_name::Deref(b.lhs) && a.rhs == b.rhs && a.op == b.op;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -680,7 +680,7 @@ static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa0
                   auto dstring2_fst_84 { std::get<0>(id_247) };
                   auto dstring2_snd_85 { std::get<1>(id_247) };
                   std::string id_249 { dstring2_fst_84.toString() };
-                  std::shared_ptr<::dessser::gen::simple_filter::t>  id_250 { std::make_shared<::dessser::gen::simple_filter::t>(drec_fst_57, id_249, drec_fst_72) };
+                  std::shared_ptr<::dessser::gen::simple_filter::t>  id_250 { std::make_shared<::dessser::gen::simple_filter::t>(drec_fst_57, drec_fst_72, id_249) };
                   ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 id_251 { id_250, dstring2_snd_85 };
                   letpair_res_248 = id_251;
                 }

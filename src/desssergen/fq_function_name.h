@@ -19,14 +19,14 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::function_name::t_ext function;
-  dessser::gen::program_name::t_ext program;
   dessser::gen::site_name::t_ext site;
-  t(dessser::gen::function_name::t_ext function_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : function(function_), program(program_), site(site_) {}
+  dessser::gen::program_name::t_ext program;
+  dessser::gen::function_name::t_ext function;
+  t(dessser::gen::site_name::t_ext site_, dessser::gen::program_name::t_ext program_, dessser::gen::function_name::t_ext function_) : site(site_), program(program_), function(function_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::function_name::Deref(a.function) == ::dessser::gen::function_name::Deref(b.function) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site);
+  return ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::function_name::Deref(a.function) == ::dessser::gen::function_name::Deref(b.function);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -34,9 +34,9 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "function:" << r.function << ',';
+  os << "site:" << r.site << ',';
   os << "program:" << r.program << ',';
-  os << "site:" << r.site;
+  os << "function:" << r.function;
   os << '}';
   return os;
 }

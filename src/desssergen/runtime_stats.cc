@@ -30,38 +30,38 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  uint64_t cur_groups;
-  uint64_t cur_ram;
-  std::optional<double> first_input;
-  std::optional<double> first_output;
-  double first_startup;
-  std::optional<double> last_input;
-  std::optional<double> last_output;
-  double last_startup;
-  std::optional<double> max_etime;
-  uint64_t max_groups;
-  uint64_t max_ram;
-  std::optional<double> min_etime;
   double stats_time;
-  double tot_cpu;
-  uint64_t tot_extinguished_notifs;
-  uint64_t tot_firing_notifs;
-  uint64_t tot_full_bytes;
-  uint64_t tot_full_bytes_samples;
-  uint64_t tot_in_bytes;
+  double first_startup;
+  double last_startup;
+  std::optional<double> min_etime;
+  std::optional<double> max_etime;
+  std::optional<double> first_input;
+  std::optional<double> last_input;
+  std::optional<double> first_output;
+  std::optional<double> last_output;
   uint64_t tot_in_tuples;
-  uint64_t tot_out_bytes;
-  uint64_t tot_out_errs;
+  uint64_t tot_sel_tuples;
   uint64_t tot_out_filtered;
   uint64_t tot_out_tuples;
-  uint64_t tot_sel_tuples;
+  uint64_t tot_out_errs;
+  uint64_t tot_full_bytes;
+  uint64_t tot_full_bytes_samples;
+  uint64_t cur_groups;
+  uint64_t max_groups;
+  uint64_t tot_in_bytes;
+  uint64_t tot_out_bytes;
   double tot_wait_in;
   double tot_wait_out;
-  t(uint64_t cur_groups_, uint64_t cur_ram_, std::optional<double> first_input_, std::optional<double> first_output_, double first_startup_, std::optional<double> last_input_, std::optional<double> last_output_, double last_startup_, std::optional<double> max_etime_, uint64_t max_groups_, uint64_t max_ram_, std::optional<double> min_etime_, double stats_time_, double tot_cpu_, uint64_t tot_extinguished_notifs_, uint64_t tot_firing_notifs_, uint64_t tot_full_bytes_, uint64_t tot_full_bytes_samples_, uint64_t tot_in_bytes_, uint64_t tot_in_tuples_, uint64_t tot_out_bytes_, uint64_t tot_out_errs_, uint64_t tot_out_filtered_, uint64_t tot_out_tuples_, uint64_t tot_sel_tuples_, double tot_wait_in_, double tot_wait_out_) : cur_groups(cur_groups_), cur_ram(cur_ram_), first_input(first_input_), first_output(first_output_), first_startup(first_startup_), last_input(last_input_), last_output(last_output_), last_startup(last_startup_), max_etime(max_etime_), max_groups(max_groups_), max_ram(max_ram_), min_etime(min_etime_), stats_time(stats_time_), tot_cpu(tot_cpu_), tot_extinguished_notifs(tot_extinguished_notifs_), tot_firing_notifs(tot_firing_notifs_), tot_full_bytes(tot_full_bytes_), tot_full_bytes_samples(tot_full_bytes_samples_), tot_in_bytes(tot_in_bytes_), tot_in_tuples(tot_in_tuples_), tot_out_bytes(tot_out_bytes_), tot_out_errs(tot_out_errs_), tot_out_filtered(tot_out_filtered_), tot_out_tuples(tot_out_tuples_), tot_sel_tuples(tot_sel_tuples_), tot_wait_in(tot_wait_in_), tot_wait_out(tot_wait_out_) {}
+  uint64_t tot_firing_notifs;
+  uint64_t tot_extinguished_notifs;
+  double tot_cpu;
+  uint64_t cur_ram;
+  uint64_t max_ram;
+  t(double stats_time_, double first_startup_, double last_startup_, std::optional<double> min_etime_, std::optional<double> max_etime_, std::optional<double> first_input_, std::optional<double> last_input_, std::optional<double> first_output_, std::optional<double> last_output_, uint64_t tot_in_tuples_, uint64_t tot_sel_tuples_, uint64_t tot_out_filtered_, uint64_t tot_out_tuples_, uint64_t tot_out_errs_, uint64_t tot_full_bytes_, uint64_t tot_full_bytes_samples_, uint64_t cur_groups_, uint64_t max_groups_, uint64_t tot_in_bytes_, uint64_t tot_out_bytes_, double tot_wait_in_, double tot_wait_out_, uint64_t tot_firing_notifs_, uint64_t tot_extinguished_notifs_, double tot_cpu_, uint64_t cur_ram_, uint64_t max_ram_) : stats_time(stats_time_), first_startup(first_startup_), last_startup(last_startup_), min_etime(min_etime_), max_etime(max_etime_), first_input(first_input_), last_input(last_input_), first_output(first_output_), last_output(last_output_), tot_in_tuples(tot_in_tuples_), tot_sel_tuples(tot_sel_tuples_), tot_out_filtered(tot_out_filtered_), tot_out_tuples(tot_out_tuples_), tot_out_errs(tot_out_errs_), tot_full_bytes(tot_full_bytes_), tot_full_bytes_samples(tot_full_bytes_samples_), cur_groups(cur_groups_), max_groups(max_groups_), tot_in_bytes(tot_in_bytes_), tot_out_bytes(tot_out_bytes_), tot_wait_in(tot_wait_in_), tot_wait_out(tot_wait_out_), tot_firing_notifs(tot_firing_notifs_), tot_extinguished_notifs(tot_extinguished_notifs_), tot_cpu(tot_cpu_), cur_ram(cur_ram_), max_ram(max_ram_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.cur_groups == b.cur_groups && a.cur_ram == b.cur_ram && ((a.first_input && b.first_input && a.first_input.value() == b.first_input.value()) || (!a.first_input && !b.first_input)) && ((a.first_output && b.first_output && a.first_output.value() == b.first_output.value()) || (!a.first_output && !b.first_output)) && a.first_startup == b.first_startup && ((a.last_input && b.last_input && a.last_input.value() == b.last_input.value()) || (!a.last_input && !b.last_input)) && ((a.last_output && b.last_output && a.last_output.value() == b.last_output.value()) || (!a.last_output && !b.last_output)) && a.last_startup == b.last_startup && ((a.max_etime && b.max_etime && a.max_etime.value() == b.max_etime.value()) || (!a.max_etime && !b.max_etime)) && a.max_groups == b.max_groups && a.max_ram == b.max_ram && ((a.min_etime && b.min_etime && a.min_etime.value() == b.min_etime.value()) || (!a.min_etime && !b.min_etime)) && a.stats_time == b.stats_time && a.tot_cpu == b.tot_cpu && a.tot_extinguished_notifs == b.tot_extinguished_notifs && a.tot_firing_notifs == b.tot_firing_notifs && a.tot_full_bytes == b.tot_full_bytes && a.tot_full_bytes_samples == b.tot_full_bytes_samples && a.tot_in_bytes == b.tot_in_bytes && a.tot_in_tuples == b.tot_in_tuples && a.tot_out_bytes == b.tot_out_bytes && a.tot_out_errs == b.tot_out_errs && a.tot_out_filtered == b.tot_out_filtered && a.tot_out_tuples == b.tot_out_tuples && a.tot_sel_tuples == b.tot_sel_tuples && a.tot_wait_in == b.tot_wait_in && a.tot_wait_out == b.tot_wait_out;
+  return a.stats_time == b.stats_time && a.first_startup == b.first_startup && a.last_startup == b.last_startup && ((a.min_etime && b.min_etime && a.min_etime.value() == b.min_etime.value()) || (!a.min_etime && !b.min_etime)) && ((a.max_etime && b.max_etime && a.max_etime.value() == b.max_etime.value()) || (!a.max_etime && !b.max_etime)) && ((a.first_input && b.first_input && a.first_input.value() == b.first_input.value()) || (!a.first_input && !b.first_input)) && ((a.last_input && b.last_input && a.last_input.value() == b.last_input.value()) || (!a.last_input && !b.last_input)) && ((a.first_output && b.first_output && a.first_output.value() == b.first_output.value()) || (!a.first_output && !b.first_output)) && ((a.last_output && b.last_output && a.last_output.value() == b.last_output.value()) || (!a.last_output && !b.last_output)) && a.tot_in_tuples == b.tot_in_tuples && a.tot_sel_tuples == b.tot_sel_tuples && a.tot_out_filtered == b.tot_out_filtered && a.tot_out_tuples == b.tot_out_tuples && a.tot_out_errs == b.tot_out_errs && a.tot_full_bytes == b.tot_full_bytes && a.tot_full_bytes_samples == b.tot_full_bytes_samples && a.cur_groups == b.cur_groups && a.max_groups == b.max_groups && a.tot_in_bytes == b.tot_in_bytes && a.tot_out_bytes == b.tot_out_bytes && a.tot_wait_in == b.tot_wait_in && a.tot_wait_out == b.tot_wait_out && a.tot_firing_notifs == b.tot_firing_notifs && a.tot_extinguished_notifs == b.tot_extinguished_notifs && a.tot_cpu == b.tot_cpu && a.cur_ram == b.cur_ram && a.max_ram == b.max_ram;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -1364,7 +1364,7 @@ static std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712
                                                                                                             {
                                                                                                               auto du64_fst_231 { std::get<0>(id_452) };
                                                                                                               auto du64_snd_232 { std::get<1>(id_452) };
-                                                                                                              std::shared_ptr<::dessser::gen::runtime_stats::t>  id_454 { std::make_shared<::dessser::gen::runtime_stats::t>(drec_fst_174, drec_fst_228, drec_fst_99, drec_fst_117, drec_fst_66, drec_fst_108, drec_fst_126, drec_fst_72, drec_fst_90, drec_fst_180, du64_fst_231, drec_fst_81, drec_fst_60, drec_fst_222, drec_fst_216, drec_fst_210, drec_fst_162, drec_fst_168, drec_fst_186, drec_fst_132, drec_fst_192, drec_fst_156, drec_fst_144, drec_fst_150, drec_fst_138, drec_fst_198, drec_fst_204) };
+                                                                                                              std::shared_ptr<::dessser::gen::runtime_stats::t>  id_454 { std::make_shared<::dessser::gen::runtime_stats::t>(drec_fst_60, drec_fst_66, drec_fst_72, drec_fst_81, drec_fst_90, drec_fst_99, drec_fst_108, drec_fst_117, drec_fst_126, drec_fst_132, drec_fst_138, drec_fst_144, drec_fst_150, drec_fst_156, drec_fst_162, drec_fst_168, drec_fst_174, drec_fst_180, drec_fst_186, drec_fst_192, drec_fst_198, drec_fst_204, drec_fst_210, drec_fst_216, drec_fst_222, drec_fst_228, du64_fst_231) };
                                                                                                               ::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820 id_455 { id_454, du64_snd_232 };
                                                                                                               letpair_res_453 = id_455;
                                                                                                             }

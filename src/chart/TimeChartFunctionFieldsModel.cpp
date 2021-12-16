@@ -25,9 +25,9 @@ TimeChartFunctionFieldsModel::TimeChartFunctionFieldsModel(
   QObject *parent)
   : QAbstractTableModel(parent),
     source(
-      {},
-      std::make_shared<dessser::gen::fq_function_name::t>(function, program, site),
-      true)
+      std::make_shared<dessser::gen::fq_function_name::t>(site, program, function),
+      true,
+      {})
 {
   connect(GraphModel::globalGraphModel, &GraphModel::workerChanged,
           this, &TimeChartFunctionFieldsModel::checkSource);
@@ -71,12 +71,12 @@ static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
 
   return
     std::make_shared<dessser::gen::dashboard_widget::field>(
-      (uint8_t)0,  // axis number
+      (double)c.alphaF(), // opacity
       (uint32_t)(c.rgb() & 0xffffffU),
+      representation,
       field,
       factors,
-      (double)c.alphaF(), // opacity
-      representation);
+      (uint8_t)0);  // axis number
 }
 
 dessser::gen::dashboard_widget::field

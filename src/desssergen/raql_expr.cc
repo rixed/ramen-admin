@@ -729,35 +729,35 @@ inline bool operator!=(t6d6c48cf4b08d7c4eeda1a11c69738be const &a, t6d6c48cf4b08
   return !operator==(a, b);
 }
 struct t9ff32f6938631a338c8ace99a86c40f3 {
-  std::shared_ptr<::dessser::gen::raql_expr::t>  by;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  duration;
-  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size;
   dessser::gen::raql_top_output::t_ext output;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas;
   std::shared_ptr<::dessser::gen::raql_expr::t>  size;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time;
+  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size;
   std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what;
-  t9ff32f6938631a338c8ace99a86c40f3(std::shared_ptr<::dessser::gen::raql_expr::t>  by_, std::shared_ptr<::dessser::gen::raql_expr::t>  duration_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size_, dessser::gen::raql_top_output::t_ext output_, std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas_, std::shared_ptr<::dessser::gen::raql_expr::t>  size_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what_) : by(by_), duration(duration_), max_size(max_size_), output(output_), sigmas(sigmas_), size(size_), Top_time(Top_time_), Top_what(Top_what_) {}
+  std::shared_ptr<::dessser::gen::raql_expr::t>  by;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  duration;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas;
+  t9ff32f6938631a338c8ace99a86c40f3(dessser::gen::raql_top_output::t_ext output_, std::shared_ptr<::dessser::gen::raql_expr::t>  size_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > max_size_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_what_, std::shared_ptr<::dessser::gen::raql_expr::t>  by_, std::shared_ptr<::dessser::gen::raql_expr::t>  Top_time_, std::shared_ptr<::dessser::gen::raql_expr::t>  duration_, std::shared_ptr<::dessser::gen::raql_expr::t>  sigmas_) : output(output_), size(size_), max_size(max_size_), Top_what(Top_what_), by(by_), Top_time(Top_time_), duration(duration_), sigmas(sigmas_) {}
   t9ff32f6938631a338c8ace99a86c40f3() = default;
 };
 inline bool operator==(t9ff32f6938631a338c8ace99a86c40f3 const &a, t9ff32f6938631a338c8ace99a86c40f3 const &b) {
-  return (*a.by) == (*b.by) && (*a.duration) == (*b.duration) && ((a.max_size && b.max_size && (*a.max_size.value()) == (*b.max_size.value())) || (!a.max_size && !b.max_size)) && ::dessser::gen::raql_top_output::Deref(a.output) == ::dessser::gen::raql_top_output::Deref(b.output) && (*a.sigmas) == (*b.sigmas) && (*a.size) == (*b.size) && (*a.Top_time) == (*b.Top_time) && (*a.Top_what) == (*b.Top_what);
+  return ::dessser::gen::raql_top_output::Deref(a.output) == ::dessser::gen::raql_top_output::Deref(b.output) && (*a.size) == (*b.size) && ((a.max_size && b.max_size && (*a.max_size.value()) == (*b.max_size.value())) || (!a.max_size && !b.max_size)) && (*a.Top_what) == (*b.Top_what) && (*a.by) == (*b.by) && (*a.Top_time) == (*b.Top_time) && (*a.duration) == (*b.duration) && (*a.sigmas) == (*b.sigmas);
 }
 
 inline bool operator!=(t9ff32f6938631a338c8ace99a86c40f3 const &a, t9ff32f6938631a338c8ace99a86c40f3 const &b) {
   return !operator==(a, b);
 }
 struct t1444e78faaacd44c5e033d97448c4e87 {
-  std::shared_ptr<::dessser::gen::raql_expr::t>  max_age;
-  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size;
-  std::shared_ptr<::dessser::gen::raql_expr::t>  time;
-  bool tumbling;
   std::shared_ptr<::dessser::gen::raql_expr::t>  what;
-  t1444e78faaacd44c5e033d97448c4e87(std::shared_ptr<::dessser::gen::raql_expr::t>  max_age_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size_, std::shared_ptr<::dessser::gen::raql_expr::t>  time_, bool tumbling_, std::shared_ptr<::dessser::gen::raql_expr::t>  what_) : max_age(max_age_), sample_size(sample_size_), time(time_), tumbling(tumbling_), what(what_) {}
+  std::shared_ptr<::dessser::gen::raql_expr::t>  time;
+  std::shared_ptr<::dessser::gen::raql_expr::t>  max_age;
+  bool tumbling;
+  std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size;
+  t1444e78faaacd44c5e033d97448c4e87(std::shared_ptr<::dessser::gen::raql_expr::t>  what_, std::shared_ptr<::dessser::gen::raql_expr::t>  time_, std::shared_ptr<::dessser::gen::raql_expr::t>  max_age_, bool tumbling_, std::optional<std::shared_ptr<::dessser::gen::raql_expr::t> > sample_size_) : what(what_), time(time_), max_age(max_age_), tumbling(tumbling_), sample_size(sample_size_) {}
   t1444e78faaacd44c5e033d97448c4e87() = default;
 };
 inline bool operator==(t1444e78faaacd44c5e033d97448c4e87 const &a, t1444e78faaacd44c5e033d97448c4e87 const &b) {
-  return (*a.max_age) == (*b.max_age) && ((a.sample_size && b.sample_size && (*a.sample_size.value()) == (*b.sample_size.value())) || (!a.sample_size && !b.sample_size)) && (*a.time) == (*b.time) && a.tumbling == b.tumbling && (*a.what) == (*b.what);
+  return (*a.what) == (*b.what) && (*a.time) == (*b.time) && (*a.max_age) == (*b.max_age) && a.tumbling == b.tumbling && ((a.sample_size && b.sample_size && (*a.sample_size.value()) == (*b.sample_size.value())) || (!a.sample_size && !b.sample_size));
 }
 
 inline bool operator!=(t1444e78faaacd44c5e033d97448c4e87 const &a, t1444e78faaacd44c5e033d97448c4e87 const &b) {
@@ -872,14 +872,14 @@ inline bool operator!=(tf524e2b10456a493083b8a844619a4ce const &a, tf524e2b10456
 }
 struct t {
   ::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text;
-  dessser::gen::raql_type::t_ext typ;
   uint32_t uniq_num;
+  dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
-  t(::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text_, dessser::gen::raql_type::t_ext typ_, uint32_t uniq_num_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), typ(typ_), uniq_num(uniq_num_), units(units_) {}
+  t(::dessser::gen::raql_expr::tf524e2b10456a493083b8a844619a4ce text_, uint32_t uniq_num_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), uniq_num(uniq_num_), typ(typ_), units(units_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.text == b.text && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && a.uniq_num == b.uniq_num && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
+  return a.text == b.text && a.uniq_num == b.uniq_num && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -12320,7 +12320,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                               {
                                                                 auto drec_fst_168 { std::get<0>(id_4701) };
                                                                 auto drec_snd_169 { std::get<1>(id_4701) };
-                                                                ::dessser::gen::raql_expr::t9ff32f6938631a338c8ace99a86c40f3 id_4703 { drec_fst_159, drec_fst_165, drec_fst_153, drec_fst_144, drec_fst_168, drec_fst_147, drec_fst_162, drec_fst_156 };
+                                                                ::dessser::gen::raql_expr::t9ff32f6938631a338c8ace99a86c40f3 id_4703 { drec_fst_144, drec_fst_147, drec_fst_153, drec_fst_156, drec_fst_159, drec_fst_162, drec_fst_165, drec_fst_168 };
                                                                 ::dessser::gen::raql_expr::t758406067b4b6471cf32ee7e36ef35bb id_4704 { std::in_place_index<6>, id_4703 };
                                                                 ::dessser::gen::raql_expr::t5755e25351e938544fb6cf37bc07c777 id_4705 { id_4704, drec_snd_169 };
                                                                 letpair_res_4702 = id_4705;
@@ -12409,7 +12409,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         {
                                                           auto drec_fst_138 { std::get<0>(choose_res_4727) };
                                                           auto drec_snd_139 { std::get<1>(choose_res_4727) };
-                                                          ::dessser::gen::raql_expr::t1444e78faaacd44c5e033d97448c4e87 id_4739 { drec_fst_126, drec_fst_138, drec_fst_123, drec_fst_132, drec_fst_120 };
+                                                          ::dessser::gen::raql_expr::t1444e78faaacd44c5e033d97448c4e87 id_4739 { drec_fst_120, drec_fst_123, drec_fst_126, drec_fst_132, drec_fst_138 };
                                                           ::dessser::gen::raql_expr::t758406067b4b6471cf32ee7e36ef35bb id_4740 { std::in_place_index<7>, id_4739 };
                                                           ::dessser::gen::raql_expr::t5755e25351e938544fb6cf37bc07c777 id_4741 { id_4740, drec_snd_139 };
                                                           letpair_res_4738 = id_4741;
@@ -12583,7 +12583,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                 {
                   auto drec_fst_1040 { std::get<0>(choose_res_4780) };
                   auto drec_snd_1041 { std::get<1>(choose_res_4780) };
-                  std::shared_ptr<::dessser::gen::raql_expr::t>  id_4793 { std::make_shared<::dessser::gen::raql_expr::t>(drec_fst_1025, drec_fst_1034, drec_fst_1031, drec_fst_1040) };
+                  std::shared_ptr<::dessser::gen::raql_expr::t>  id_4793 { std::make_shared<::dessser::gen::raql_expr::t>(drec_fst_1025, drec_fst_1031, drec_fst_1034, drec_fst_1040) };
                   ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 id_4794 { id_4793, drec_snd_1041 };
                   letpair_res_4792 = id_4794;
                 }

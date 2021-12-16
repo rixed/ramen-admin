@@ -57,14 +57,14 @@ inline std::ostream &operator<<(std::ostream &os, t92d550ed37bacecb946618f8c58e8
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t92d550ed37bacecb946618f8c58e8de4> const v) { os << *v; return os; }
 
 struct t {
-  dessser::gen::field_name::t_ext name;
   ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope;
+  dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
-  t(dessser::gen::field_name::t_ext name_, ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope_, dessser::gen::raql_type::t_ext typ_) : name(name_), scope(scope_), typ(typ_) {}
+  t(::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_) : scope(scope_), name(name_), typ(typ_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && a.scope == b.scope && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ);
+  return a.scope == b.scope && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -72,8 +72,8 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "name:" << r.name << ',';
   os << "scope:" << r.scope << ',';
+  os << "name:" << r.name << ',';
   os << "typ:" << r.typ;
   os << '}';
   return os;

@@ -50,14 +50,14 @@ inline bool operator!=(t4827d21c37f0b56d86b99cff40066ee3 const &a, t4827d21c37f0
   return !operator==(a, b);
 }
 struct tb1d409993b02f1b7f7cedc87680eed70 {
-  uint32_t parent_num;
   std::string tunneld_host;
   uint16_t tunneld_port;
-  tb1d409993b02f1b7f7cedc87680eed70(uint32_t parent_num_, std::string tunneld_host_, uint16_t tunneld_port_) : parent_num(parent_num_), tunneld_host(tunneld_host_), tunneld_port(tunneld_port_) {}
+  uint32_t parent_num;
+  tb1d409993b02f1b7f7cedc87680eed70(std::string tunneld_host_, uint16_t tunneld_port_, uint32_t parent_num_) : tunneld_host(tunneld_host_), tunneld_port(tunneld_port_), parent_num(parent_num_) {}
   tb1d409993b02f1b7f7cedc87680eed70() = default;
 };
 inline bool operator==(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
-  return a.parent_num == b.parent_num && a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port;
+  return a.tunneld_host == b.tunneld_host && a.tunneld_port == b.tunneld_port && a.parent_num == b.parent_num;
 }
 
 inline bool operator!=(tb1d409993b02f1b7f7cedc87680eed70 const &a, tb1d409993b02f1b7f7cedc87680eed70 const &b) {
@@ -84,23 +84,23 @@ inline bool operator!=(t99c4dcc041241b8d5db72250f8968306 const &a, t99c4dcc04124
   return !operator==(a, b);
 }
 struct t {
-  Arr<dessser::gen::func_ref::t_ext> children;
-  dessser::gen::file_path::t_ext cwd;
-  bool debug;
   bool enabled;
-  Arr<dessser::gen::field_name::t_ext> envvars;
+  bool debug;
+  double report_period;
+  dessser::gen::file_path::t_ext cwd;
+  std::string worker_signature;
   std::string info_signature;
   bool is_used;
   Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
-  std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
-  double report_period;
+  Arr<dessser::gen::field_name::t_ext> envvars;
   ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role;
-  std::string worker_signature;
-  t(Arr<dessser::gen::func_ref::t_ext> children_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, Arr<dessser::gen::field_name::t_ext> envvars_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, double report_period_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::string worker_signature_) : children(children_), cwd(cwd_), debug(debug_), enabled(enabled_), envvars(envvars_), info_signature(info_signature_), is_used(is_used_), params(params_), parents(parents_), report_period(report_period_), role(role_), worker_signature(worker_signature_) {}
+  std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
+  Arr<dessser::gen::func_ref::t_ext> children;
+  t(bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, std::string worker_signature_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, Arr<dessser::gen::field_name::t_ext> envvars_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, Arr<dessser::gen::func_ref::t_ext> children_) : enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), worker_signature(worker_signature_), info_signature(info_signature_), is_used(is_used_), params(params_), envvars(envvars_), role(role_), parents(parents_), children(children_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.children == b.children && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.envvars == b.envvars && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.report_period == b.report_period && a.role == b.role && a.worker_signature == b.worker_signature;
+  return a.enabled == b.enabled && a.debug == b.debug && a.report_period == b.report_period && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.worker_signature == b.worker_signature && a.info_signature == b.info_signature && a.is_used == b.is_used && a.params == b.params && a.envvars == b.envvars && a.role == b.role && ((a.parents && b.parents && a.parents.value() == b.parents.value()) || (!a.parents && !b.parents)) && a.children == b.children;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -3457,7 +3457,7 @@ static std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(P
                                                                       {
                                                                         auto du32_fst_219 { std::get<0>(id_1295) };
                                                                         auto du32_snd_220 { std::get<1>(id_1295) };
-                                                                        ::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70 id_1297 { du32_fst_219, drec_fst_210, drec_fst_216 };
+                                                                        ::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70 id_1297 { drec_fst_210, drec_fst_216, du32_fst_219 };
                                                                         Lst<::dessser::gen::worker::tb1d409993b02f1b7f7cedc87680eed70> id_1298 { id_1297, dlist2_fst_195 };
                                                                         ::dessser::gen::worker::te199516c71e68f0bc8f7fc5bbe6b4afc id_1299 { id_1298, du32_snd_220 };
                                                                         letpair_res_1296 = id_1299;
@@ -3838,7 +3838,7 @@ static std::function<::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca(P
                                                   auto dlist4_fst_289 { std::get<0>(let_res_1442) };
                                                   auto dlist4_snd_290 { std::get<1>(let_res_1442) };
                                                   Arr<dessser::gen::func_ref::t_ext> id_1473 { dlist4_fst_289.toListRev() };
-                                                  std::shared_ptr<::dessser::gen::worker::t>  id_1474 { std::make_shared<::dessser::gen::worker::t>(id_1473, drec_fst_75, drec_fst_66, drec_fst_60, drec_fst_169, drec_fst_105, drec_fst_111, drec_fst_143, drec_fst_266, drec_fst_72, drec_fst_237, drec_fst_90) };
+                                                  std::shared_ptr<::dessser::gen::worker::t>  id_1474 { std::make_shared<::dessser::gen::worker::t>(drec_fst_60, drec_fst_66, drec_fst_72, drec_fst_75, drec_fst_90, drec_fst_105, drec_fst_111, drec_fst_143, drec_fst_169, drec_fst_237, drec_fst_266, id_1473) };
                                                   ::dessser::gen::worker::tfd8469c1f315c828082a129ae15367ca id_1475 { id_1474, dlist4_snd_290 };
                                                   letpair_res_1472 = id_1475;
                                                 }

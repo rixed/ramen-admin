@@ -25,20 +25,20 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct compiled_func {
-  std::string doc;
-  Lst<dessser::gen::field_name::t_ext> factors;
-  std::string in_signature;
-  bool is_lazy;
   dessser::gen::function_name::t_ext name;
+  std::optional<dessser::gen::retention::t_ext> retention;
+  bool is_lazy;
+  std::string doc;
   dessser::gen::raql_operation::t_ext operation;
   dessser::gen::raql_type::t_ext out_record;
-  std::optional<dessser::gen::retention::t_ext> retention;
+  Lst<dessser::gen::field_name::t_ext> factors;
   std::string signature;
-  compiled_func(std::string doc_, Lst<dessser::gen::field_name::t_ext> factors_, std::string in_signature_, bool is_lazy_, dessser::gen::function_name::t_ext name_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, std::optional<dessser::gen::retention::t_ext> retention_, std::string signature_) : doc(doc_), factors(factors_), in_signature(in_signature_), is_lazy(is_lazy_), name(name_), operation(operation_), out_record(out_record_), retention(retention_), signature(signature_) {}
+  std::string in_signature;
+  compiled_func(dessser::gen::function_name::t_ext name_, std::optional<dessser::gen::retention::t_ext> retention_, bool is_lazy_, std::string doc_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, Lst<dessser::gen::field_name::t_ext> factors_, std::string signature_, std::string in_signature_) : name(name_), retention(retention_), is_lazy(is_lazy_), doc(doc_), operation(operation_), out_record(out_record_), factors(factors_), signature(signature_), in_signature(in_signature_) {}
   compiled_func() = default;
 };
 inline bool operator==(compiled_func const &a, compiled_func const &b) {
-  return a.doc == b.doc && a.factors == b.factors && a.in_signature == b.in_signature && a.is_lazy == b.is_lazy && ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.signature == b.signature;
+  return ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.is_lazy == b.is_lazy && a.doc == b.doc && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && a.factors == b.factors && a.signature == b.signature && a.in_signature == b.in_signature;
 }
 
 inline bool operator!=(compiled_func const &a, compiled_func const &b) {
@@ -46,30 +46,30 @@ inline bool operator!=(compiled_func const &a, compiled_func const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, compiled_func const &r) {
   os << '{';
-  os << "doc:" << r.doc << ',';
-  os << "factors:" << r.factors << ',';
-  os << "in_signature:" << r.in_signature << ',';
-  os << "is_lazy:" << r.is_lazy << ',';
   os << "name:" << r.name << ',';
+  if (r.retention) os << "retention:" << r.retention.value() << ',';
+  os << "is_lazy:" << r.is_lazy << ',';
+  os << "doc:" << r.doc << ',';
   os << "operation:" << r.operation << ',';
   os << "out_record:" << r.out_record << ',';
-  if (r.retention) os << "retention:" << r.retention.value() << ',';
-  os << "signature:" << r.signature;
+  os << "factors:" << r.factors << ',';
+  os << "signature:" << r.signature << ',';
+  os << "in_signature:" << r.in_signature;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<compiled_func> const r) { os << *r; return os; }
 
 struct compiled_program {
-  dessser::gen::raql_expr::t_ext condition;
   Lst<dessser::gen::program_parameter::t_ext> default_params;
-  Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs;
+  dessser::gen::raql_expr::t_ext condition;
   Lst<dessser::gen::global_variable::t_ext> globals;
-  compiled_program(dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::program_parameter::t_ext> default_params_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_, Lst<dessser::gen::global_variable::t_ext> globals_) : condition(condition_), default_params(default_params_), funcs(funcs_), globals(globals_) {}
+  Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs;
+  compiled_program(Lst<dessser::gen::program_parameter::t_ext> default_params_, dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::global_variable::t_ext> globals_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_) : default_params(default_params_), condition(condition_), globals(globals_), funcs(funcs_) {}
   compiled_program() = default;
 };
 inline bool operator==(compiled_program const &a, compiled_program const &b) {
-  return ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.default_params == b.default_params && a.funcs == b.funcs && a.globals == b.globals;
+  return a.default_params == b.default_params && ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.globals == b.globals && a.funcs == b.funcs;
 }
 
 inline bool operator!=(compiled_program const &a, compiled_program const &b) {
@@ -77,23 +77,23 @@ inline bool operator!=(compiled_program const &a, compiled_program const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, compiled_program const &r) {
   os << '{';
-  os << "condition:" << r.condition << ',';
   os << "default_params:" << r.default_params << ',';
-  os << "funcs:" << r.funcs << ',';
-  os << "globals:" << r.globals;
+  os << "condition:" << r.condition << ',';
+  os << "globals:" << r.globals << ',';
+  os << "funcs:" << r.funcs;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<compiled_program> const r) { os << *r; return os; }
 
 struct t7904aca1b7c7094ac41533a38083131a {
-  std::optional<dessser::gen::src_path::t_ext> depends_on;
   std::string err_msg;
-  t7904aca1b7c7094ac41533a38083131a(std::optional<dessser::gen::src_path::t_ext> depends_on_, std::string err_msg_) : depends_on(depends_on_), err_msg(err_msg_) {}
+  std::optional<dessser::gen::src_path::t_ext> depends_on;
+  t7904aca1b7c7094ac41533a38083131a(std::string err_msg_, std::optional<dessser::gen::src_path::t_ext> depends_on_) : err_msg(err_msg_), depends_on(depends_on_) {}
   t7904aca1b7c7094ac41533a38083131a() = default;
 };
 inline bool operator==(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
-  return ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on)) && a.err_msg == b.err_msg;
+  return a.err_msg == b.err_msg && ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on));
 }
 
 inline bool operator!=(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
@@ -101,8 +101,8 @@ inline bool operator!=(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7
 }
 inline std::ostream &operator<<(std::ostream &os, t7904aca1b7c7094ac41533a38083131a const &r) {
   os << '{';
-  if (r.depends_on) os << "depends_on:" << r.depends_on.value() << ',';
-  os << "err_msg:" << r.err_msg;
+  os << "err_msg:" << r.err_msg << ',';
+  if (r.depends_on) os << "depends_on:" << r.depends_on.value();
   os << '}';
   return os;
 }
@@ -144,14 +144,14 @@ inline std::ostream &operator<<(std::ostream &os, t01907297530734eeb2fea6f30cc73
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t01907297530734eeb2fea6f30cc7354a> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
-  Lst<std::string> md5s;
   std::string src_ext;
-  t(::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_, Lst<std::string> md5s_, std::string src_ext_) : detail(detail_), md5s(md5s_), src_ext(src_ext_) {}
+  Lst<std::string> md5s;
+  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
+  t(std::string src_ext_, Lst<std::string> md5s_, ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_) : src_ext(src_ext_), md5s(md5s_), detail(detail_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.detail == b.detail && a.md5s == b.md5s && a.src_ext == b.src_ext;
+  return a.src_ext == b.src_ext && a.md5s == b.md5s && a.detail == b.detail;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -159,9 +159,9 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "detail:" << r.detail << ',';
+  os << "src_ext:" << r.src_ext << ',';
   os << "md5s:" << r.md5s << ',';
-  os << "src_ext:" << r.src_ext;
+  os << "detail:" << r.detail;
   os << '}';
   return os;
 }

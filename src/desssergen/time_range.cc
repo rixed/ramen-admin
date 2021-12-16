@@ -30,14 +30,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t0a5f0f32f40c91bcfe721c5930f07dd9 {
-  bool growing;
   double since;
   double until;
-  t0a5f0f32f40c91bcfe721c5930f07dd9(bool growing_, double since_, double until_) : growing(growing_), since(since_), until(until_) {}
+  bool growing;
+  t0a5f0f32f40c91bcfe721c5930f07dd9(double since_, double until_, bool growing_) : since(since_), until(until_), growing(growing_) {}
   t0a5f0f32f40c91bcfe721c5930f07dd9() = default;
 };
 inline bool operator==(t0a5f0f32f40c91bcfe721c5930f07dd9 const &a, t0a5f0f32f40c91bcfe721c5930f07dd9 const &b) {
-  return a.growing == b.growing && a.since == b.since && a.until == b.until;
+  return a.since == b.since && a.until == b.until && a.growing == b.growing;
 }
 
 inline bool operator!=(t0a5f0f32f40c91bcfe721c5930f07dd9 const &a, t0a5f0f32f40c91bcfe721c5930f07dd9 const &b) {
@@ -579,7 +579,7 @@ static std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b180
                               uint8_t id_189 { 0 };
                               bool id_190 { bool(dbool_fst_86 == id_189) };
                               bool id_191 { ! id_190 };
-                              ::dessser::gen::time_range::t0a5f0f32f40c91bcfe721c5930f07dd9 id_192 { id_191, drec_fst_77, drec_fst_83 };
+                              ::dessser::gen::time_range::t0a5f0f32f40c91bcfe721c5930f07dd9 id_192 { drec_fst_77, drec_fst_83, id_191 };
                               Lst<::dessser::gen::time_range::t0a5f0f32f40c91bcfe721c5930f07dd9> id_193 { id_192, dlist2_fst_71 };
                               ::dessser::gen::time_range::tb3a68ea7637de277db2ae2e5d18c5b6f id_194 { id_193, dbool_snd_87 };
                               letpair_res_188 = id_194;

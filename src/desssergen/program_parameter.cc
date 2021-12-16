@@ -34,16 +34,16 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  std::string doc;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
+  std::string doc;
   dessser::gen::raql_value::t_ext value;
-  t(std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, dessser::gen::raql_value::t_ext value_) : doc(doc_), name(name_), typ(typ_), units(units_), value(value_) {}
+  t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, std::string doc_, dessser::gen::raql_value::t_ext value_) : name(name_), typ(typ_), units(units_), doc(doc_), value(value_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
+  return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && a.doc == b.doc && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -651,7 +651,7 @@ static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1
                     {
                       auto drec_fst_84 { std::get<0>(id_199) };
                       auto drec_snd_85 { std::get<1>(id_199) };
-                      std::shared_ptr<::dessser::gen::program_parameter::t>  id_201 { std::make_shared<::dessser::gen::program_parameter::t>(drec_fst_81, drec_fst_57, drec_fst_60, drec_fst_66, drec_fst_84) };
+                      std::shared_ptr<::dessser::gen::program_parameter::t>  id_201 { std::make_shared<::dessser::gen::program_parameter::t>(drec_fst_57, drec_fst_60, drec_fst_66, drec_fst_81, drec_fst_84) };
                       ::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4 id_202 { id_201, drec_snd_85 };
                       letpair_res_200 = id_202;
                     }

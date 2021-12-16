@@ -16,14 +16,14 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t0a5f0f32f40c91bcfe721c5930f07dd9 {
-  bool growing;
   double since;
   double until;
-  t0a5f0f32f40c91bcfe721c5930f07dd9(bool growing_, double since_, double until_) : growing(growing_), since(since_), until(until_) {}
+  bool growing;
+  t0a5f0f32f40c91bcfe721c5930f07dd9(double since_, double until_, bool growing_) : since(since_), until(until_), growing(growing_) {}
   t0a5f0f32f40c91bcfe721c5930f07dd9() = default;
 };
 inline bool operator==(t0a5f0f32f40c91bcfe721c5930f07dd9 const &a, t0a5f0f32f40c91bcfe721c5930f07dd9 const &b) {
-  return a.growing == b.growing && a.since == b.since && a.until == b.until;
+  return a.since == b.since && a.until == b.until && a.growing == b.growing;
 }
 
 inline bool operator!=(t0a5f0f32f40c91bcfe721c5930f07dd9 const &a, t0a5f0f32f40c91bcfe721c5930f07dd9 const &b) {
@@ -31,9 +31,9 @@ inline bool operator!=(t0a5f0f32f40c91bcfe721c5930f07dd9 const &a, t0a5f0f32f40c
 }
 inline std::ostream &operator<<(std::ostream &os, t0a5f0f32f40c91bcfe721c5930f07dd9 const &r) {
   os << '{';
-  os << "growing:" << r.growing << ',';
   os << "since:" << r.since << ',';
-  os << "until:" << r.until;
+  os << "until:" << r.until << ',';
+  os << "growing:" << r.growing;
   os << '}';
   return os;
 }

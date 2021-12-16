@@ -47,14 +47,14 @@ inline bool operator!=(channel_specs const &a, channel_specs const &b) {
   return !operator==(a, b);
 }
 struct ta86dfe69264c9600d57a3b5ead0f7951 {
+  bool with_index;
   uint32_t batch_size;
   uint32_t num_batches;
-  bool with_index;
-  ta86dfe69264c9600d57a3b5ead0f7951(uint32_t batch_size_, uint32_t num_batches_, bool with_index_) : batch_size(batch_size_), num_batches(num_batches_), with_index(with_index_) {}
+  ta86dfe69264c9600d57a3b5ead0f7951(bool with_index_, uint32_t batch_size_, uint32_t num_batches_) : with_index(with_index_), batch_size(batch_size_), num_batches(num_batches_) {}
   ta86dfe69264c9600d57a3b5ead0f7951() = default;
 };
 inline bool operator==(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c9600d57a3b5ead0f7951 const &b) {
-  return a.batch_size == b.batch_size && a.num_batches == b.num_batches && a.with_index == b.with_index;
+  return a.with_index == b.with_index && a.batch_size == b.batch_size && a.num_batches == b.num_batches;
 }
 
 inline bool operator!=(ta86dfe69264c9600d57a3b5ead0f7951 const &a, ta86dfe69264c9600d57a3b5ead0f7951 const &b) {
@@ -131,15 +131,15 @@ inline bool operator!=(t513ffd998e76089b452224202d19cdbb const &a, t513ffd998e76
   return !operator==(a, b);
 }
 struct tb95b6de0d0270e9aab9c85d675629e8b {
-  Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels;
-  dessser::gen::fieldmask::t_ext fieldmask;
   std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type;
+  dessser::gen::fieldmask::t_ext fieldmask;
   Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters;
-  tb95b6de0d0270e9aab9c85d675629e8b(Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels_, dessser::gen::fieldmask::t_ext fieldmask_, std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type_, Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters_) : channels(channels_), fieldmask(fieldmask_), file_type(file_type_), filters(filters_) {}
+  Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels;
+  tb95b6de0d0270e9aab9c85d675629e8b(std::shared_ptr<::dessser::gen::output_specs::file_type>  file_type_, dessser::gen::fieldmask::t_ext fieldmask_, Arr<::dessser::gen::output_specs::t513ffd998e76089b452224202d19cdbb> filters_, Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> channels_) : file_type(file_type_), fieldmask(fieldmask_), filters(filters_), channels(channels_) {}
   tb95b6de0d0270e9aab9c85d675629e8b() = default;
 };
 inline bool operator==(tb95b6de0d0270e9aab9c85d675629e8b const &a, tb95b6de0d0270e9aab9c85d675629e8b const &b) {
-  return a.channels == b.channels && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && (*a.file_type) == (*b.file_type) && a.filters == b.filters;
+  return (*a.file_type) == (*b.file_type) && ::dessser::gen::fieldmask::Deref(a.fieldmask) == ::dessser::gen::fieldmask::Deref(b.fieldmask) && a.filters == b.filters && a.channels == b.channels;
 }
 
 inline bool operator!=(tb95b6de0d0270e9aab9c85d675629e8b const &a, tb95b6de0d0270e9aab9c85d675629e8b const &b) {
@@ -2062,7 +2062,7 @@ static std::function<::dessser::gen::output_specs::tec49c8ef4173bb15914c79fbc4e1
                   {
                     auto du32_fst_108 { std::get<0>(id_736) };
                     auto du32_snd_109 { std::get<1>(id_736) };
-                    ::dessser::gen::output_specs::ta86dfe69264c9600d57a3b5ead0f7951 id_738 { drec_fst_105, du32_fst_108, drec_fst_99 };
+                    ::dessser::gen::output_specs::ta86dfe69264c9600d57a3b5ead0f7951 id_738 { drec_fst_99, drec_fst_105, du32_fst_108 };
                     std::shared_ptr<::dessser::gen::output_specs::file_type>  id_739 { std::make_shared<::dessser::gen::output_specs::file_type>(std::in_place_index<1>, id_738) };
                     ::dessser::gen::output_specs::tec49c8ef4173bb15914c79fbc4e1c164 id_740 { id_739, du32_snd_109 };
                     letpair_res_737 = id_740;
@@ -3097,7 +3097,7 @@ static std::function<::dessser::gen::output_specs::ta30293a82943182cab78182f33b1
                                       auto dlist4_fst_251 { std::get<0>(let_res_1071) };
                                       auto dlist4_snd_252 { std::get<1>(let_res_1071) };
                                       Arr<::dessser::gen::output_specs::ta618d67f3398e8f157c6ee421884d34f> id_1107 { dlist4_fst_251.toListRev() };
-                                      ::dessser::gen::output_specs::tb95b6de0d0270e9aab9c85d675629e8b id_1108 { id_1107, drec_fst_161, drec_fst_158, drec_fst_219 };
+                                      ::dessser::gen::output_specs::tb95b6de0d0270e9aab9c85d675629e8b id_1108 { drec_fst_158, drec_fst_161, drec_fst_219, id_1107 };
                                       ::dessser::gen::output_specs::t404661133564bf8d9dd50dad047644cd id_1109 { dtup_fst_155, id_1108 };
                                       Lst<::dessser::gen::output_specs::t404661133564bf8d9dd50dad047644cd> id_1110 { id_1109, dlist2_fst_152 };
                                       ::dessser::gen::output_specs::t84d9f7278c4238833aca96eb6a20d69d id_1111 { id_1110, dlist4_snd_252 };

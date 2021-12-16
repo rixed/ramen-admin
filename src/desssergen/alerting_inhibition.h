@@ -16,16 +16,16 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
+  std::string what;
   double start_date;
   double stop_date;
-  std::string what;
   std::string who;
   std::string why;
-  t(double start_date_, double stop_date_, std::string what_, std::string who_, std::string why_) : start_date(start_date_), stop_date(stop_date_), what(what_), who(who_), why(why_) {}
+  t(std::string what_, double start_date_, double stop_date_, std::string who_, std::string why_) : what(what_), start_date(start_date_), stop_date(stop_date_), who(who_), why(why_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.start_date == b.start_date && a.stop_date == b.stop_date && a.what == b.what && a.who == b.who && a.why == b.why;
+  return a.what == b.what && a.start_date == b.start_date && a.stop_date == b.stop_date && a.who == b.who && a.why == b.why;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -33,9 +33,9 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
+  os << "what:" << r.what << ',';
   os << "start_date:" << r.start_date << ',';
   os << "stop_date:" << r.stop_date << ',';
-  os << "what:" << r.what << ',';
   os << "who:" << r.who << ',';
   os << "why:" << r.why;
   os << '}';

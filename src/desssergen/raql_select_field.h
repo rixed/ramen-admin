@@ -18,15 +18,15 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  std::optional<std::string> aggr;
+  dessser::gen::raql_expr::t_ext expr;
   dessser::gen::field_name::t_ext alias;
   std::string doc;
-  dessser::gen::raql_expr::t_ext expr;
-  t(std::optional<std::string> aggr_, dessser::gen::field_name::t_ext alias_, std::string doc_, dessser::gen::raql_expr::t_ext expr_) : aggr(aggr_), alias(alias_), doc(doc_), expr(expr_) {}
+  std::optional<std::string> aggr;
+  t(dessser::gen::raql_expr::t_ext expr_, dessser::gen::field_name::t_ext alias_, std::string doc_, std::optional<std::string> aggr_) : expr(expr_), alias(alias_), doc(doc_), aggr(aggr_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr)) && ::dessser::gen::field_name::Deref(a.alias) == ::dessser::gen::field_name::Deref(b.alias) && a.doc == b.doc && ::dessser::gen::raql_expr::Deref(a.expr) == ::dessser::gen::raql_expr::Deref(b.expr);
+  return ::dessser::gen::raql_expr::Deref(a.expr) == ::dessser::gen::raql_expr::Deref(b.expr) && ::dessser::gen::field_name::Deref(a.alias) == ::dessser::gen::field_name::Deref(b.alias) && a.doc == b.doc && ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr));
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -34,10 +34,10 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  if (r.aggr) os << "aggr:" << r.aggr.value() << ',';
+  os << "expr:" << r.expr << ',';
   os << "alias:" << r.alias << ',';
   os << "doc:" << r.doc << ',';
-  os << "expr:" << r.expr;
+  if (r.aggr) os << "aggr:" << r.aggr.value();
   os << '}';
   return os;
 }

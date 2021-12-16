@@ -118,7 +118,7 @@ std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
 {
   std::shared_ptr<dessser::gen::dashboard_widget::axis> axis {
     std::make_shared<dessser::gen::dashboard_widget::axis>(
-      false, true,
+      true, false,
       std::make_shared<dessser::gen::dashboard_widget::scale>(
         std::in_place_index<dessser::gen::dashboard_widget::Linear>,
         dessser::VOID)) };
@@ -128,10 +128,10 @@ std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
 
   std::shared_ptr<dessser::gen::dashboard_widget::source> source {
     std::make_shared<dessser::gen::dashboard_widget::source>(
-      dessser::Arr<std::shared_ptr<dessser::gen::dashboard_widget::field>>(),
       std::make_shared<dessser::gen::fq_function_name::t>(
-        function_name, program_name, site_name),
-      true) };
+        site_name, program_name, function_name),
+      true,
+      dessser::Arr<std::shared_ptr<dessser::gen::dashboard_widget::field>>()) };
 
   dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source>> sources {
     source };
@@ -142,14 +142,14 @@ std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
       std::make_shared<dessser::gen::dashboard_widget::t>(
         std::in_place_index<dessser::gen::dashboard_widget::Chart>,
         std::make_shared<dessser::gen::dashboard_widget::chart>(
-          // Single axis: left=true, forceZero=false, scale=Linear
-          axes,
-          // Single source: visible: true
-          sources,
           // Title
           site_name + ':' + program_name + '/' + function_name,
           // Type: plot
-          std::const_pointer_cast<dessser::gen::dashboard_widget::type>(chartPlotType)))) };
+          std::const_pointer_cast<dessser::gen::dashboard_widget::type>(chartPlotType),
+          // Single axis: left=true, forceZero=false, scale=Linear
+          axes,
+          // Single source: visible: true
+          sources))) };
 
   return chart;
 }
@@ -340,15 +340,13 @@ std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
 {
   std::shared_ptr<dessser::gen::fq_function_name::t> fq_target {
     std::make_shared<dessser::gen::fq_function_name::t>(
-      function, program, site) };
+      site, program, function) };
 
   std::shared_ptr<dessser::gen::replay_request::t> req {
     std::make_shared<dessser::gen::replay_request::t>(
-      explain,
-      std::const_pointer_cast<dessser::gen::sync_key::t>(respKey),
-      since,
       std::const_pointer_cast<dessser::gen::fq_function_name::t>(fq_target),
-      until) };
+      since, until, explain,
+      std::const_pointer_cast<dessser::gen::sync_key::t>(respKey)) };
 
   return
     std::make_shared<dessser::gen::sync_value::t>(

@@ -55,31 +55,31 @@ inline bool operator!=(representation const &a, representation const &b) {
   return !operator==(a, b);
 }
 struct field {
-  uint8_t axis;
+  double opacity;
   uint32_t color;
+  std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation;
   std::string column;
   Arr<std::string> factors;
-  double opacity;
-  std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation;
-  field(uint8_t axis_, uint32_t color_, std::string column_, Arr<std::string> factors_, double opacity_, std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation_) : axis(axis_), color(color_), column(column_), factors(factors_), opacity(opacity_), representation(representation_) {}
+  uint8_t axis;
+  field(double opacity_, uint32_t color_, std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation_, std::string column_, Arr<std::string> factors_, uint8_t axis_) : opacity(opacity_), color(color_), representation(representation_), column(column_), factors(factors_), axis(axis_) {}
   field() = default;
 };
 inline bool operator==(field const &a, field const &b) {
-  return a.axis == b.axis && a.color == b.color && a.column == b.column && a.factors == b.factors && a.opacity == b.opacity && (*a.representation) == (*b.representation);
+  return a.opacity == b.opacity && a.color == b.color && (*a.representation) == (*b.representation) && a.column == b.column && a.factors == b.factors && a.axis == b.axis;
 }
 
 inline bool operator!=(field const &a, field const &b) {
   return !operator==(a, b);
 }
 struct source {
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields;
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  source(Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields;
+  source(dessser::gen::fq_function_name::t_ext name_, bool visible_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields_) : name(name_), visible(visible_), fields(fields_) {}
   source() = default;
 };
 inline bool operator==(source const &a, source const &b) {
-  return a.fields == b.fields && ::dessser::gen::fq_function_name::Deref(a.name) == ::dessser::gen::fq_function_name::Deref(b.name) && a.visible == b.visible;
+  return ::dessser::gen::fq_function_name::Deref(a.name) == ::dessser::gen::fq_function_name::Deref(b.name) && a.visible == b.visible && a.fields == b.fields;
 }
 
 inline bool operator!=(source const &a, source const &b) {
@@ -106,14 +106,14 @@ inline bool operator!=(scale const &a, scale const &b) {
   return !operator==(a, b);
 }
 struct axis {
-  bool force_zero;
   bool left;
+  bool force_zero;
   std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale;
-  axis(bool force_zero_, bool left_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
+  axis(bool left_, bool force_zero_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : left(left_), force_zero(force_zero_), scale(scale_) {}
   axis() = default;
 };
 inline bool operator==(axis const &a, axis const &b) {
-  return a.force_zero == b.force_zero && a.left == b.left && (*a.scale) == (*b.scale);
+  return a.left == b.left && a.force_zero == b.force_zero && (*a.scale) == (*b.scale);
 }
 
 inline bool operator!=(axis const &a, axis const &b) {
@@ -138,15 +138,15 @@ inline bool operator!=(type const &a, type const &b) {
   return !operator==(a, b);
 }
 struct chart {
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
   std::string title;
   std::shared_ptr<::dessser::gen::dashboard_widget::type>  type;
-  chart(Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_, std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_) : axes(axes_), sources(sources_), title(title_), type(type_) {}
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
+  chart(std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_) : title(title_), type(type_), axes(axes_), sources(sources_) {}
   chart() = default;
 };
 inline bool operator==(chart const &a, chart const &b) {
-  return a.axes == b.axes && a.sources == b.sources && a.title == b.title && (*a.type) == (*b.type);
+  return a.title == b.title && (*a.type) == (*b.type) && a.axes == b.axes && a.sources == b.sources;
 }
 
 inline bool operator!=(chart const &a, chart const &b) {
@@ -2979,7 +2979,7 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                         {
                           auto du8_fst_188 { std::get<0>(id_1091) };
                           auto du8_snd_189 { std::get<1>(id_1091) };
-                          std::shared_ptr<::dessser::gen::dashboard_widget::field>  id_1093 { std::make_shared<::dessser::gen::dashboard_widget::field>(du8_fst_188, drec_fst_129, drec_fst_147, drec_fst_185, drec_fst_123, drec_fst_132) };
+                          std::shared_ptr<::dessser::gen::dashboard_widget::field>  id_1093 { std::make_shared<::dessser::gen::dashboard_widget::field>(drec_fst_123, drec_fst_129, drec_fst_132, drec_fst_147, drec_fst_185, du8_fst_188) };
                           ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 id_1094 { id_1093, du8_snd_189 };
                           letpair_res_1092 = id_1094;
                         }
@@ -3228,7 +3228,7 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
               auto dlist4_fst_223 { std::get<0>(let_res_1148) };
               auto dlist4_snd_224 { std::get<1>(let_res_1148) };
               Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_1178 { dlist4_fst_223.toListRev() };
-              std::shared_ptr<::dessser::gen::dashboard_widget::source>  id_1179 { std::make_shared<::dessser::gen::dashboard_widget::source>(id_1178, drec_fst_194, drec_fst_200) };
+              std::shared_ptr<::dessser::gen::dashboard_widget::source>  id_1179 { std::make_shared<::dessser::gen::dashboard_widget::source>(drec_fst_194, drec_fst_200, id_1178) };
               ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae id_1180 { id_1179, dlist4_snd_224 };
               letpair_res_1177 = id_1180;
             }
@@ -3354,7 +3354,7 @@ static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915
             {
               auto drec_fst_96 { std::get<0>(id_1214) };
               auto drec_snd_97 { std::get<1>(id_1214) };
-              std::shared_ptr<::dessser::gen::dashboard_widget::axis>  id_1216 { std::make_shared<::dessser::gen::dashboard_widget::axis>(drec_fst_93, drec_fst_87, drec_fst_96) };
+              std::shared_ptr<::dessser::gen::dashboard_widget::axis>  id_1216 { std::make_shared<::dessser::gen::dashboard_widget::axis>(drec_fst_87, drec_fst_93, drec_fst_96) };
               ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 id_1217 { id_1216, drec_snd_97 };
               letpair_res_1215 = id_1217;
             }
@@ -3922,7 +3922,7 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                   auto dlist4_fst_293 { std::get<0>(let_res_1396) };
                   auto dlist4_snd_294 { std::get<1>(let_res_1396) };
                   Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_1426 { dlist4_fst_293.toListRev() };
-                  std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_1427 { std::make_shared<::dessser::gen::dashboard_widget::chart>(drec_fst_270, id_1426, drec_fst_241, drec_fst_244) };
+                  std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_1427 { std::make_shared<::dessser::gen::dashboard_widget::chart>(drec_fst_241, drec_fst_244, drec_fst_270, id_1426) };
                   ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc id_1428 { id_1427, dlist4_snd_294 };
                   letpair_res_1425 = id_1428;
                 }

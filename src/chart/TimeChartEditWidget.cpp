@@ -100,10 +100,10 @@ std::shared_ptr<dessser::gen::sync_value::t const> TimeChartEditWidget::getValue
   // Start from an empty configuration:
   std::shared_ptr<dessser::gen::dashboard_widget::chart> conf {
     std::make_shared<dessser::gen::dashboard_widget::chart>(
-      dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis>>{}, // axes
-      dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source>>{}, // sources
-      optionsEditor->title->text().toStdString(),  // title
-      std::const_pointer_cast<dessser::gen::dashboard_widget::type>(chartPlotType)) };
+      optionsEditor->title->text().toStdString(),
+      std::const_pointer_cast<dessser::gen::dashboard_widget::type>(chartPlotType),
+      dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis>>{},
+      dessser::Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source>>{}) };
 
   if (verbose)
     qDebug()

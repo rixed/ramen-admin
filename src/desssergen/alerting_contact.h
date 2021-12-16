@@ -16,14 +16,14 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t2295780c8d3630e8bc9d277e6fa82e3b {
-  std::string create;
   std::string file;
   std::string insert;
-  t2295780c8d3630e8bc9d277e6fa82e3b(std::string create_, std::string file_, std::string insert_) : create(create_), file(file_), insert(insert_) {}
+  std::string create;
+  t2295780c8d3630e8bc9d277e6fa82e3b(std::string file_, std::string insert_, std::string create_) : file(file_), insert(insert_), create(create_) {}
   t2295780c8d3630e8bc9d277e6fa82e3b() = default;
 };
 inline bool operator==(t2295780c8d3630e8bc9d277e6fa82e3b const &a, t2295780c8d3630e8bc9d277e6fa82e3b const &b) {
-  return a.create == b.create && a.file == b.file && a.insert == b.insert;
+  return a.file == b.file && a.insert == b.insert && a.create == b.create;
 }
 
 inline bool operator!=(t2295780c8d3630e8bc9d277e6fa82e3b const &a, t2295780c8d3630e8bc9d277e6fa82e3b const &b) {
@@ -31,9 +31,9 @@ inline bool operator!=(t2295780c8d3630e8bc9d277e6fa82e3b const &a, t2295780c8d36
 }
 inline std::ostream &operator<<(std::ostream &os, t2295780c8d3630e8bc9d277e6fa82e3b const &r) {
   os << '{';
-  os << "create:" << r.create << ',';
   os << "file:" << r.file << ',';
-  os << "insert:" << r.insert;
+  os << "insert:" << r.insert << ',';
+  os << "create:" << r.create;
   os << '}';
   return os;
 }
@@ -65,14 +65,14 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t491302cf85c61
 
 struct ta01abe30cb0b3ed10ed8f9629a473d35 {
   Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options;
+  std::string topic;
   uint16_t partition;
   std::string text;
-  std::string topic;
-  ta01abe30cb0b3ed10ed8f9629a473d35(Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options_, uint16_t partition_, std::string text_, std::string topic_) : options(options_), partition(partition_), text(text_), topic(topic_) {}
+  ta01abe30cb0b3ed10ed8f9629a473d35(Lst<::dessser::gen::alerting_contact::t491302cf85c6148f165ecf960720a734> options_, std::string topic_, uint16_t partition_, std::string text_) : options(options_), topic(topic_), partition(partition_), text(text_) {}
   ta01abe30cb0b3ed10ed8f9629a473d35() = default;
 };
 inline bool operator==(ta01abe30cb0b3ed10ed8f9629a473d35 const &a, ta01abe30cb0b3ed10ed8f9629a473d35 const &b) {
-  return a.options == b.options && a.partition == b.partition && a.text == b.text && a.topic == b.topic;
+  return a.options == b.options && a.topic == b.topic && a.partition == b.partition && a.text == b.text;
 }
 
 inline bool operator!=(ta01abe30cb0b3ed10ed8f9629a473d35 const &a, ta01abe30cb0b3ed10ed8f9629a473d35 const &b) {
@@ -81,9 +81,9 @@ inline bool operator!=(ta01abe30cb0b3ed10ed8f9629a473d35 const &a, ta01abe30cb0b
 inline std::ostream &operator<<(std::ostream &os, ta01abe30cb0b3ed10ed8f9629a473d35 const &r) {
   os << '{';
   os << "options:" << r.options << ',';
+  os << "topic:" << r.topic << ',';
   os << "partition:" << r.partition << ',';
-  os << "text:" << r.text << ',';
-  os << "topic:" << r.topic;
+  os << "text:" << r.text;
   os << '}';
   return os;
 }
@@ -137,13 +137,13 @@ inline std::ostream &operator<<(std::ostream &os, t370a948715668202b695a186b099b
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t370a948715668202b695a186b099b0c9> const v) { os << *v; return os; }
 
 struct t {
-  double timeout;
   ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via;
-  t(double timeout_, ::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via_) : timeout(timeout_), via(via_) {}
+  double timeout;
+  t(::dessser::gen::alerting_contact::t370a948715668202b695a186b099b0c9 via_, double timeout_) : via(via_), timeout(timeout_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.timeout == b.timeout && a.via == b.via;
+  return a.via == b.via && a.timeout == b.timeout;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -151,8 +151,8 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "timeout:" << r.timeout << ',';
-  os << "via:" << r.via;
+  os << "via:" << r.via << ',';
+  os << "timeout:" << r.timeout;
   os << '}';
   return os;
 }

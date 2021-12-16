@@ -33,16 +33,16 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  std::optional<std::string> aggr;
-  std::string doc;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
-  t(std::optional<std::string> aggr_, std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : aggr(aggr_), doc(doc_), name(name_), typ(typ_), units(units_) {}
+  std::string doc;
+  std::optional<std::string> aggr;
+  t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, std::string doc_, std::optional<std::string> aggr_) : name(name_), typ(typ_), units(units_), doc(doc_), aggr(aggr_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr)) && a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units));
+  return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && a.doc == b.doc && ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr));
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -932,7 +932,7 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
                     {
                       auto drec_fst_99 { std::get<0>(choose_res_282) };
                       auto drec_snd_100 { std::get<1>(choose_res_282) };
-                      std::shared_ptr<::dessser::gen::field_type::t>  id_338 { std::make_shared<::dessser::gen::field_type::t>(drec_fst_99, drec_fst_81, drec_fst_57, drec_fst_60, drec_fst_66) };
+                      std::shared_ptr<::dessser::gen::field_type::t>  id_338 { std::make_shared<::dessser::gen::field_type::t>(drec_fst_57, drec_fst_60, drec_fst_66, drec_fst_81, drec_fst_99) };
                       ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 id_339 { id_338, drec_snd_100 };
                       letpair_res_337 = id_339;
                     }

@@ -19,19 +19,19 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  bool automatic;
-  dessser::gen::file_path::t_ext cwd;
-  bool debug;
-  bool enabled;
-  std::string on_site;
-  Arr<dessser::gen::program_run_parameter::t_ext> params;
   dessser::gen::program_name::t_ext program;
+  bool enabled;
+  bool debug;
   double report_period;
-  t(bool automatic_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, std::string on_site_, Arr<dessser::gen::program_run_parameter::t_ext> params_, dessser::gen::program_name::t_ext program_, double report_period_) : automatic(automatic_), cwd(cwd_), debug(debug_), enabled(enabled_), on_site(on_site_), params(params_), program(program_), report_period(report_period_) {}
+  dessser::gen::file_path::t_ext cwd;
+  Arr<dessser::gen::program_run_parameter::t_ext> params;
+  std::string on_site;
+  bool automatic;
+  t(dessser::gen::program_name::t_ext program_, bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, Arr<dessser::gen::program_run_parameter::t_ext> params_, std::string on_site_, bool automatic_) : program(program_), enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), params(params_), on_site(on_site_), automatic(automatic_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.automatic == b.automatic && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.on_site == b.on_site && a.params == b.params && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && a.report_period == b.report_period;
+  return ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && a.enabled == b.enabled && a.debug == b.debug && a.report_period == b.report_period && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.params == b.params && a.on_site == b.on_site && a.automatic == b.automatic;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -39,14 +39,14 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "automatic:" << r.automatic << ',';
-  os << "cwd:" << r.cwd << ',';
-  os << "debug:" << r.debug << ',';
-  os << "enabled:" << r.enabled << ',';
-  os << "on_site:" << r.on_site << ',';
-  os << "params:" << r.params << ',';
   os << "program:" << r.program << ',';
-  os << "report_period:" << r.report_period;
+  os << "enabled:" << r.enabled << ',';
+  os << "debug:" << r.debug << ',';
+  os << "report_period:" << r.report_period << ',';
+  os << "cwd:" << r.cwd << ',';
+  os << "params:" << r.params << ',';
+  os << "on_site:" << r.on_site << ',';
+  os << "automatic:" << r.automatic;
   os << '}';
   return os;
 }

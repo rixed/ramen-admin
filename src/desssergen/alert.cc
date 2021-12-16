@@ -72,16 +72,16 @@ inline bool operator!=(t1287f5ccd09b12d10e0e8359b374ce64 const &a, t1287f5ccd09b
 }
 struct t4d94676e99bfec48ddb223ef58e339ac {
   double avg_window;
-  ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance;
-  double percentile;
   uint32_t sample_size;
+  double percentile;
   uint32_t seasonality;
   double smooth_factor;
-  t4d94676e99bfec48ddb223ef58e339ac(double avg_window_, ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance_, double percentile_, uint32_t sample_size_, uint32_t seasonality_, double smooth_factor_) : avg_window(avg_window_), max_distance(max_distance_), percentile(percentile_), sample_size(sample_size_), seasonality(seasonality_), smooth_factor(smooth_factor_) {}
+  ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance;
+  t4d94676e99bfec48ddb223ef58e339ac(double avg_window_, uint32_t sample_size_, double percentile_, uint32_t seasonality_, double smooth_factor_, ::dessser::gen::alert::t1287f5ccd09b12d10e0e8359b374ce64 max_distance_) : avg_window(avg_window_), sample_size(sample_size_), percentile(percentile_), seasonality(seasonality_), smooth_factor(smooth_factor_), max_distance(max_distance_) {}
   t4d94676e99bfec48ddb223ef58e339ac() = default;
 };
 inline bool operator==(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
-  return a.avg_window == b.avg_window && a.max_distance == b.max_distance && a.percentile == b.percentile && a.sample_size == b.sample_size && a.seasonality == b.seasonality && a.smooth_factor == b.smooth_factor;
+  return a.avg_window == b.avg_window && a.sample_size == b.sample_size && a.percentile == b.percentile && a.seasonality == b.seasonality && a.smooth_factor == b.smooth_factor && a.max_distance == b.max_distance;
 }
 
 inline bool operator!=(t4d94676e99bfec48ddb223ef58e339ac const &a, t4d94676e99bfec48ddb223ef58e339ac const &b) {
@@ -108,29 +108,29 @@ inline bool operator!=(threshold const &a, threshold const &b) {
   return !operator==(a, b);
 }
 struct t {
-  Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts;
-  Lst<dessser::gen::field_name::t_ext> carry_fields;
+  dessser::gen::fq_name::t_ext table;
   dessser::gen::field_name::t_ext column;
-  std::string desc_firing;
-  std::string desc_recovery;
-  std::string desc_title;
-  double duration;
   bool enabled;
+  Lst<dessser::gen::simple_filter::t_ext> where;
   std::optional<Lst<dessser::gen::field_name::t_ext>> group_by;
   Lst<dessser::gen::simple_filter::t_ext> having;
-  double hysteresis;
-  std::string id;
-  double ratio;
-  dessser::gen::fq_name::t_ext table;
   std::shared_ptr<::dessser::gen::alert::threshold>  threshold;
+  double hysteresis;
+  double duration;
+  double ratio;
   double time_step;
   Lst<dessser::gen::field_name::t_ext> tops;
-  Lst<dessser::gen::simple_filter::t_ext> where;
-  t(Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts_, Lst<dessser::gen::field_name::t_ext> carry_fields_, dessser::gen::field_name::t_ext column_, std::string desc_firing_, std::string desc_recovery_, std::string desc_title_, double duration_, bool enabled_, std::optional<Lst<dessser::gen::field_name::t_ext>> group_by_, Lst<dessser::gen::simple_filter::t_ext> having_, double hysteresis_, std::string id_, double ratio_, dessser::gen::fq_name::t_ext table_, std::shared_ptr<::dessser::gen::alert::threshold>  threshold_, double time_step_, Lst<dessser::gen::field_name::t_ext> tops_, Lst<dessser::gen::simple_filter::t_ext> where_) : carry_csts(carry_csts_), carry_fields(carry_fields_), column(column_), desc_firing(desc_firing_), desc_recovery(desc_recovery_), desc_title(desc_title_), duration(duration_), enabled(enabled_), group_by(group_by_), having(having_), hysteresis(hysteresis_), id(id_), ratio(ratio_), table(table_), threshold(threshold_), time_step(time_step_), tops(tops_), where(where_) {}
+  Lst<dessser::gen::field_name::t_ext> carry_fields;
+  Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts;
+  std::string id;
+  std::string desc_title;
+  std::string desc_firing;
+  std::string desc_recovery;
+  t(dessser::gen::fq_name::t_ext table_, dessser::gen::field_name::t_ext column_, bool enabled_, Lst<dessser::gen::simple_filter::t_ext> where_, std::optional<Lst<dessser::gen::field_name::t_ext>> group_by_, Lst<dessser::gen::simple_filter::t_ext> having_, std::shared_ptr<::dessser::gen::alert::threshold>  threshold_, double hysteresis_, double duration_, double ratio_, double time_step_, Lst<dessser::gen::field_name::t_ext> tops_, Lst<dessser::gen::field_name::t_ext> carry_fields_, Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts_, std::string id_, std::string desc_title_, std::string desc_firing_, std::string desc_recovery_) : table(table_), column(column_), enabled(enabled_), where(where_), group_by(group_by_), having(having_), threshold(threshold_), hysteresis(hysteresis_), duration(duration_), ratio(ratio_), time_step(time_step_), tops(tops_), carry_fields(carry_fields_), carry_csts(carry_csts_), id(id_), desc_title(desc_title_), desc_firing(desc_firing_), desc_recovery(desc_recovery_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.carry_csts == b.carry_csts && a.carry_fields == b.carry_fields && ::dessser::gen::field_name::Deref(a.column) == ::dessser::gen::field_name::Deref(b.column) && a.desc_firing == b.desc_firing && a.desc_recovery == b.desc_recovery && a.desc_title == b.desc_title && a.duration == b.duration && a.enabled == b.enabled && ((a.group_by && b.group_by && a.group_by.value() == b.group_by.value()) || (!a.group_by && !b.group_by)) && a.having == b.having && a.hysteresis == b.hysteresis && a.id == b.id && a.ratio == b.ratio && ::dessser::gen::fq_name::Deref(a.table) == ::dessser::gen::fq_name::Deref(b.table) && (*a.threshold) == (*b.threshold) && a.time_step == b.time_step && a.tops == b.tops && a.where == b.where;
+  return ::dessser::gen::fq_name::Deref(a.table) == ::dessser::gen::fq_name::Deref(b.table) && ::dessser::gen::field_name::Deref(a.column) == ::dessser::gen::field_name::Deref(b.column) && a.enabled == b.enabled && a.where == b.where && ((a.group_by && b.group_by && a.group_by.value() == b.group_by.value()) || (!a.group_by && !b.group_by)) && a.having == b.having && (*a.threshold) == (*b.threshold) && a.hysteresis == b.hysteresis && a.duration == b.duration && a.ratio == b.ratio && a.time_step == b.time_step && a.tops == b.tops && a.carry_fields == b.carry_fields && a.carry_csts == b.carry_csts && a.id == b.id && a.desc_title == b.desc_title && a.desc_firing == b.desc_firing && a.desc_recovery == b.desc_recovery;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -3248,7 +3248,7 @@ static std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Po
                               {
                                 auto drec_fst_117 { std::get<0>(let_res_1308) };
                                 auto drec_snd_118 { std::get<1>(let_res_1308) };
-                                ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_1327 { drec_fst_69, drec_fst_117, drec_fst_81, drec_fst_75, drec_fst_87, drec_fst_93 };
+                                ::dessser::gen::alert::t4d94676e99bfec48ddb223ef58e339ac id_1327 { drec_fst_69, drec_fst_75, drec_fst_81, drec_fst_87, drec_fst_93, drec_fst_117 };
                                 std::shared_ptr<::dessser::gen::alert::threshold>  id_1328 { std::make_shared<::dessser::gen::alert::threshold>(std::in_place_index<1>, id_1327) };
                                 ::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91 id_1329 { id_1328, drec_snd_118 };
                                 letpair_res_1326 = id_1329;
@@ -5184,7 +5184,7 @@ static std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Po
                                                                               auto dstring2_fst_399 { std::get<0>(id_2019) };
                                                                               auto dstring2_snd_400 { std::get<1>(id_2019) };
                                                                               std::string id_2021 { dstring2_fst_399.toString() };
-                                                                              std::shared_ptr<::dessser::gen::alert::t>  id_2022 { std::make_shared<::dessser::gen::alert::t>(drec_fst_342, drec_fst_316, drec_fst_150, drec_fst_387, id_2021, drec_fst_372, drec_fst_252, drec_fst_156, drec_fst_211, drec_fst_237, drec_fst_246, drec_fst_357, drec_fst_258, drec_fst_147, drec_fst_240, drec_fst_264, drec_fst_290, drec_fst_182) };
+                                                                              std::shared_ptr<::dessser::gen::alert::t>  id_2022 { std::make_shared<::dessser::gen::alert::t>(drec_fst_147, drec_fst_150, drec_fst_156, drec_fst_182, drec_fst_211, drec_fst_237, drec_fst_240, drec_fst_246, drec_fst_252, drec_fst_258, drec_fst_264, drec_fst_290, drec_fst_316, drec_fst_342, drec_fst_357, drec_fst_372, drec_fst_387, id_2021) };
                                                                               ::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6 id_2023 { id_2022, dstring2_snd_400 };
                                                                               letpair_res_2020 = id_2023;
                                                                             }

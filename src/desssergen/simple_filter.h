@@ -18,13 +18,13 @@ using dessser::operator<<;
 /* ------------ */
 struct t {
   dessser::gen::field_name::t_ext lhs;
-  std::string op;
   std::string rhs;
-  t(dessser::gen::field_name::t_ext lhs_, std::string op_, std::string rhs_) : lhs(lhs_), op(op_), rhs(rhs_) {}
+  std::string op;
+  t(dessser::gen::field_name::t_ext lhs_, std::string rhs_, std::string op_) : lhs(lhs_), rhs(rhs_), op(op_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::field_name::Deref(a.lhs) == ::dessser::gen::field_name::Deref(b.lhs) && a.op == b.op && a.rhs == b.rhs;
+  return ::dessser::gen::field_name::Deref(a.lhs) == ::dessser::gen::field_name::Deref(b.lhs) && a.rhs == b.rhs && a.op == b.op;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -33,8 +33,8 @@ inline bool operator!=(t const &a, t const &b) {
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
   os << "lhs:" << r.lhs << ',';
-  os << "op:" << r.op << ',';
-  os << "rhs:" << r.rhs;
+  os << "rhs:" << r.rhs << ',';
+  os << "op:" << r.op;
   os << '}';
   return os;
 }

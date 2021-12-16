@@ -523,14 +523,14 @@ std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const
 
   std::shared_ptr<dessser::gen::rc_entry::t> rce {
     std::make_shared<dessser::gen::rc_entry::t>(
-      automaticBox->checkState() == Qt::Checked,
-      cwd,
-      debugBox->checkState() == Qt::Checked,
-      enabledBox->checkState() == Qt::Checked,
-      sitesEdit->text().toStdString(),
-      dessser::Arr<dessser::gen::program_run_parameter::t_ext>(),
       programName,
-      reportPeriod) };
+      enabledBox->checkState() == Qt::Checked,
+      debugBox->checkState() == Qt::Checked,
+      reportPeriod,
+      cwd,
+      dessser::Arr<dessser::gen::program_run_parameter::t_ext>(),
+      sitesEdit->text().toStdString(),
+      automaticBox->checkState() == Qt::Checked) };
 
   // Add parameters (skipping those without a value):
   for (int row = 0; row < paramsForm->rowCount(); row ++) {

@@ -30,16 +30,16 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
+  std::string what;
   double start_date;
   double stop_date;
-  std::string what;
   std::string who;
   std::string why;
-  t(double start_date_, double stop_date_, std::string what_, std::string who_, std::string why_) : start_date(start_date_), stop_date(stop_date_), what(what_), who(who_), why(why_) {}
+  t(std::string what_, double start_date_, double stop_date_, std::string who_, std::string why_) : what(what_), start_date(start_date_), stop_date(stop_date_), who(who_), why(why_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.start_date == b.start_date && a.stop_date == b.stop_date && a.what == b.what && a.who == b.who && a.why == b.why;
+  return a.what == b.what && a.start_date == b.start_date && a.stop_date == b.stop_date && a.who == b.who && a.why == b.why;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -996,7 +996,7 @@ static std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab86
                           auto dstring2_fst_108 { std::get<0>(id_378) };
                           auto dstring2_snd_109 { std::get<1>(id_378) };
                           std::string id_380 { dstring2_fst_108.toString() };
-                          std::shared_ptr<::dessser::gen::alerting_inhibition::t>  id_381 { std::make_shared<::dessser::gen::alerting_inhibition::t>(drec_fst_75, drec_fst_81, drec_fst_69, drec_fst_96, id_380) };
+                          std::shared_ptr<::dessser::gen::alerting_inhibition::t>  id_381 { std::make_shared<::dessser::gen::alerting_inhibition::t>(drec_fst_69, drec_fst_75, drec_fst_81, drec_fst_96, id_380) };
                           ::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c id_382 { id_381, dstring2_snd_109 };
                           letpair_res_379 = id_382;
                         }

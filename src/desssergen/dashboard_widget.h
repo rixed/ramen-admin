@@ -60,17 +60,17 @@ inline std::ostream &operator<<(std::ostream &os, representation const &v) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<representation> const v) { os << *v; return os; }
 
 struct field {
-  uint8_t axis;
+  double opacity;
   uint32_t color;
+  std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation;
   std::string column;
   Arr<std::string> factors;
-  double opacity;
-  std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation;
-  field(uint8_t axis_, uint32_t color_, std::string column_, Arr<std::string> factors_, double opacity_, std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation_) : axis(axis_), color(color_), column(column_), factors(factors_), opacity(opacity_), representation(representation_) {}
+  uint8_t axis;
+  field(double opacity_, uint32_t color_, std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation_, std::string column_, Arr<std::string> factors_, uint8_t axis_) : opacity(opacity_), color(color_), representation(representation_), column(column_), factors(factors_), axis(axis_) {}
   field() = default;
 };
 inline bool operator==(field const &a, field const &b) {
-  return a.axis == b.axis && a.color == b.color && a.column == b.column && a.factors == b.factors && a.opacity == b.opacity && (*a.representation) == (*b.representation);
+  return a.opacity == b.opacity && a.color == b.color && (*a.representation) == (*b.representation) && a.column == b.column && a.factors == b.factors && a.axis == b.axis;
 }
 
 inline bool operator!=(field const &a, field const &b) {
@@ -78,26 +78,26 @@ inline bool operator!=(field const &a, field const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, field const &r) {
   os << '{';
-  os << "axis:" << r.axis << ',';
+  os << "opacity:" << r.opacity << ',';
   os << "color:" << r.color << ',';
+  os << "representation:" << r.representation << ',';
   os << "column:" << r.column << ',';
   os << "factors:" << r.factors << ',';
-  os << "opacity:" << r.opacity << ',';
-  os << "representation:" << r.representation;
+  os << "axis:" << r.axis;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<field> const r) { os << *r; return os; }
 
 struct source {
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields;
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  source(Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields_, dessser::gen::fq_function_name::t_ext name_, bool visible_) : fields(fields_), name(name_), visible(visible_) {}
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields;
+  source(dessser::gen::fq_function_name::t_ext name_, bool visible_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields_) : name(name_), visible(visible_), fields(fields_) {}
   source() = default;
 };
 inline bool operator==(source const &a, source const &b) {
-  return a.fields == b.fields && ::dessser::gen::fq_function_name::Deref(a.name) == ::dessser::gen::fq_function_name::Deref(b.name) && a.visible == b.visible;
+  return ::dessser::gen::fq_function_name::Deref(a.name) == ::dessser::gen::fq_function_name::Deref(b.name) && a.visible == b.visible && a.fields == b.fields;
 }
 
 inline bool operator!=(source const &a, source const &b) {
@@ -105,9 +105,9 @@ inline bool operator!=(source const &a, source const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, source const &r) {
   os << '{';
-  os << "fields:" << r.fields << ',';
   os << "name:" << r.name << ',';
-  os << "visible:" << r.visible;
+  os << "visible:" << r.visible << ',';
+  os << "fields:" << r.fields;
   os << '}';
   return os;
 }
@@ -149,14 +149,14 @@ inline std::ostream &operator<<(std::ostream &os, scale const &v) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<scale> const v) { os << *v; return os; }
 
 struct axis {
-  bool force_zero;
   bool left;
+  bool force_zero;
   std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale;
-  axis(bool force_zero_, bool left_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : force_zero(force_zero_), left(left_), scale(scale_) {}
+  axis(bool left_, bool force_zero_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : left(left_), force_zero(force_zero_), scale(scale_) {}
   axis() = default;
 };
 inline bool operator==(axis const &a, axis const &b) {
-  return a.force_zero == b.force_zero && a.left == b.left && (*a.scale) == (*b.scale);
+  return a.left == b.left && a.force_zero == b.force_zero && (*a.scale) == (*b.scale);
 }
 
 inline bool operator!=(axis const &a, axis const &b) {
@@ -164,8 +164,8 @@ inline bool operator!=(axis const &a, axis const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, axis const &r) {
   os << '{';
-  os << "force_zero:" << r.force_zero << ',';
   os << "left:" << r.left << ',';
+  os << "force_zero:" << r.force_zero << ',';
   os << "scale:" << r.scale;
   os << '}';
   return os;
@@ -204,15 +204,15 @@ inline std::ostream &operator<<(std::ostream &os, type const &v) {
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<type> const v) { os << *v; return os; }
 
 struct chart {
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
   std::string title;
   std::shared_ptr<::dessser::gen::dashboard_widget::type>  type;
-  chart(Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_, std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_) : axes(axes_), sources(sources_), title(title_), type(type_) {}
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
+  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
+  chart(std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_) : title(title_), type(type_), axes(axes_), sources(sources_) {}
   chart() = default;
 };
 inline bool operator==(chart const &a, chart const &b) {
-  return a.axes == b.axes && a.sources == b.sources && a.title == b.title && (*a.type) == (*b.type);
+  return a.title == b.title && (*a.type) == (*b.type) && a.axes == b.axes && a.sources == b.sources;
 }
 
 inline bool operator!=(chart const &a, chart const &b) {
@@ -220,10 +220,10 @@ inline bool operator!=(chart const &a, chart const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, chart const &r) {
   os << '{';
-  os << "axes:" << r.axes << ',';
-  os << "sources:" << r.sources << ',';
   os << "title:" << r.title << ',';
-  os << "type:" << r.type;
+  os << "type:" << r.type << ',';
+  os << "axes:" << r.axes << ',';
+  os << "sources:" << r.sources;
   os << '}';
   return os;
 }

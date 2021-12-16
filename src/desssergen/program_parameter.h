@@ -20,16 +20,16 @@ using dessser::operator<<;
 /* Declarations */
 /* ------------ */
 struct t {
-  std::string doc;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
+  std::string doc;
   dessser::gen::raql_value::t_ext value;
-  t(std::string doc_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, dessser::gen::raql_value::t_ext value_) : doc(doc_), name(name_), typ(typ_), units(units_), value(value_) {}
+  t(dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_, std::string doc_, dessser::gen::raql_value::t_ext value_) : name(name_), typ(typ_), units(units_), doc(doc_), value(value_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.doc == b.doc && ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
+  return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && ::dessser::gen::raql_type::Deref(a.typ) == ::dessser::gen::raql_type::Deref(b.typ) && ((a.units && b.units && ::dessser::gen::units::Deref(a.units.value()) == ::dessser::gen::units::Deref(b.units.value())) || (!a.units && !b.units)) && a.doc == b.doc && ::dessser::gen::raql_value::Deref(a.value) == ::dessser::gen::raql_value::Deref(b.value);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -37,10 +37,10 @@ inline bool operator!=(t const &a, t const &b) {
 }
 inline std::ostream &operator<<(std::ostream &os, t const &r) {
   os << '{';
-  os << "doc:" << r.doc << ',';
   os << "name:" << r.name << ',';
   os << "typ:" << r.typ << ',';
   if (r.units) os << "units:" << r.units.value() << ',';
+  os << "doc:" << r.doc << ',';
   os << "value:" << r.value;
   os << '}';
   return os;

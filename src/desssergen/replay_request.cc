@@ -32,16 +32,16 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
+  dessser::gen::fq_function_name::t_ext target;
+  double since;
+  double until;
   bool explain;
   dessser::gen::sync_key::t_ext resp_key;
-  double since;
-  dessser::gen::fq_function_name::t_ext target;
-  double until;
-  t(bool explain_, dessser::gen::sync_key::t_ext resp_key_, double since_, dessser::gen::fq_function_name::t_ext target_, double until_) : explain(explain_), resp_key(resp_key_), since(since_), target(target_), until(until_) {}
+  t(dessser::gen::fq_function_name::t_ext target_, double since_, double until_, bool explain_, dessser::gen::sync_key::t_ext resp_key_) : target(target_), since(since_), until(until_), explain(explain_), resp_key(resp_key_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.explain == b.explain && ::dessser::gen::sync_key::Deref(a.resp_key) == ::dessser::gen::sync_key::Deref(b.resp_key) && a.since == b.since && ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.until == b.until;
+  return ::dessser::gen::fq_function_name::Deref(a.target) == ::dessser::gen::fq_function_name::Deref(b.target) && a.since == b.since && a.until == b.until && a.explain == b.explain && ::dessser::gen::sync_key::Deref(a.resp_key) == ::dessser::gen::sync_key::Deref(b.resp_key);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -323,7 +323,7 @@ static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce
                     {
                       auto drec_fst_78 { std::get<0>(id_61) };
                       auto drec_snd_79 { std::get<1>(id_61) };
-                      std::shared_ptr<::dessser::gen::replay_request::t>  id_63 { std::make_shared<::dessser::gen::replay_request::t>(drec_fst_75, drec_fst_78, drec_fst_63, drec_fst_57, drec_fst_69) };
+                      std::shared_ptr<::dessser::gen::replay_request::t>  id_63 { std::make_shared<::dessser::gen::replay_request::t>(drec_fst_57, drec_fst_63, drec_fst_69, drec_fst_75, drec_fst_78) };
                       ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_64 { id_63, drec_snd_79 };
                       letpair_res_62 = id_64;
                     }

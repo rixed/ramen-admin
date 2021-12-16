@@ -32,15 +32,15 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  std::optional<std::string> aggr;
+  dessser::gen::raql_expr::t_ext expr;
   dessser::gen::field_name::t_ext alias;
   std::string doc;
-  dessser::gen::raql_expr::t_ext expr;
-  t(std::optional<std::string> aggr_, dessser::gen::field_name::t_ext alias_, std::string doc_, dessser::gen::raql_expr::t_ext expr_) : aggr(aggr_), alias(alias_), doc(doc_), expr(expr_) {}
+  std::optional<std::string> aggr;
+  t(dessser::gen::raql_expr::t_ext expr_, dessser::gen::field_name::t_ext alias_, std::string doc_, std::optional<std::string> aggr_) : expr(expr_), alias(alias_), doc(doc_), aggr(aggr_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr)) && ::dessser::gen::field_name::Deref(a.alias) == ::dessser::gen::field_name::Deref(b.alias) && a.doc == b.doc && ::dessser::gen::raql_expr::Deref(a.expr) == ::dessser::gen::raql_expr::Deref(b.expr);
+  return ::dessser::gen::raql_expr::Deref(a.expr) == ::dessser::gen::raql_expr::Deref(b.expr) && ::dessser::gen::field_name::Deref(a.alias) == ::dessser::gen::field_name::Deref(b.alias) && a.doc == b.doc && ((a.aggr && b.aggr && a.aggr.value() == b.aggr.value()) || (!a.aggr && !b.aggr));
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -809,7 +809,7 @@ static std::function<::dessser::gen::raql_select_field::tdf010ca5e9c34c62a5f22df
                 {
                   auto drec_fst_93 { std::get<0>(choose_res_239) };
                   auto drec_snd_94 { std::get<1>(choose_res_239) };
-                  std::shared_ptr<::dessser::gen::raql_select_field::t>  id_295 { std::make_shared<::dessser::gen::raql_select_field::t>(drec_fst_93, drec_fst_60, drec_fst_75, drec_fst_57) };
+                  std::shared_ptr<::dessser::gen::raql_select_field::t>  id_295 { std::make_shared<::dessser::gen::raql_select_field::t>(drec_fst_57, drec_fst_60, drec_fst_75, drec_fst_93) };
                   ::dessser::gen::raql_select_field::tdf010ca5e9c34c62a5f22df13388fb5d id_296 { id_295, drec_snd_94 };
                   letpair_res_294 = id_296;
                 }

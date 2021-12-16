@@ -30,14 +30,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t206fd5d881820fd19331922d3e213def {
-  Bytes message;
   Bytes nonce;
   Bytes public_key;
-  t206fd5d881820fd19331922d3e213def(Bytes message_, Bytes nonce_, Bytes public_key_) : message(message_), nonce(nonce_), public_key(public_key_) {}
+  Bytes message;
+  t206fd5d881820fd19331922d3e213def(Bytes nonce_, Bytes public_key_, Bytes message_) : nonce(nonce_), public_key(public_key_), message(message_) {}
   t206fd5d881820fd19331922d3e213def() = default;
 };
 inline bool operator==(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
-  return a.message == b.message && a.nonce == b.nonce && a.public_key == b.public_key;
+  return a.nonce == b.nonce && a.public_key == b.public_key && a.message == b.message;
 }
 
 inline bool operator!=(t206fd5d881820fd19331922d3e213def const &a, t206fd5d881820fd19331922d3e213def const &b) {
@@ -1475,7 +1475,7 @@ static std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a
                   {
                     auto drec_fst_138 { std::get<0>(let_res_613) };
                     auto drec_snd_139 { std::get<1>(let_res_613) };
-                    ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_617 { drec_fst_138, drec_fst_114, drec_fst_126 };
+                    ::dessser::gen::sync_msg::t206fd5d881820fd19331922d3e213def id_617 { drec_fst_114, drec_fst_126, drec_fst_138 };
                     std::shared_ptr<::dessser::gen::sync_msg::t>  id_618 { std::make_shared<::dessser::gen::sync_msg::t>(std::in_place_index<0>, id_617) };
                     ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_619 { id_618, drec_snd_139 };
                     letpair_res_616 = id_619;

@@ -33,14 +33,14 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  dessser::gen::function_name::t_ext function;
-  dessser::gen::program_name::t_ext program;
   dessser::gen::site_name::t_ext site;
-  t(dessser::gen::function_name::t_ext function_, dessser::gen::program_name::t_ext program_, dessser::gen::site_name::t_ext site_) : function(function_), program(program_), site(site_) {}
+  dessser::gen::program_name::t_ext program;
+  dessser::gen::function_name::t_ext function;
+  t(dessser::gen::site_name::t_ext site_, dessser::gen::program_name::t_ext program_, dessser::gen::function_name::t_ext function_) : site(site_), program(program_), function(function_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::function_name::Deref(a.function) == ::dessser::gen::function_name::Deref(b.function) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site);
+  return ::dessser::gen::site_name::Deref(a.site) == ::dessser::gen::site_name::Deref(b.site) && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && ::dessser::gen::function_name::Deref(a.function) == ::dessser::gen::function_name::Deref(b.function);
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -213,7 +213,7 @@ static std::function<::dessser::gen::fq_function_name::tf1fae54ea048ad49ea9dc7e6
             {
               auto drec_fst_63 { std::get<0>(id_36) };
               auto drec_snd_64 { std::get<1>(id_36) };
-              std::shared_ptr<::dessser::gen::fq_function_name::t>  id_38 { std::make_shared<::dessser::gen::fq_function_name::t>(drec_fst_63, drec_fst_60, drec_fst_57) };
+              std::shared_ptr<::dessser::gen::fq_function_name::t>  id_38 { std::make_shared<::dessser::gen::fq_function_name::t>(drec_fst_57, drec_fst_60, drec_fst_63) };
               ::dessser::gen::fq_function_name::tf1fae54ea048ad49ea9dc7e6824f4917 id_39 { id_38, drec_snd_64 };
               letpair_res_37 = id_39;
             }

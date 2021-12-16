@@ -33,19 +33,19 @@ std::default_random_engine _random_engine_;
 /* Declarations */
 /* ------------ */
 struct t {
-  bool automatic;
-  dessser::gen::file_path::t_ext cwd;
-  bool debug;
-  bool enabled;
-  std::string on_site;
-  Arr<dessser::gen::program_run_parameter::t_ext> params;
   dessser::gen::program_name::t_ext program;
+  bool enabled;
+  bool debug;
   double report_period;
-  t(bool automatic_, dessser::gen::file_path::t_ext cwd_, bool debug_, bool enabled_, std::string on_site_, Arr<dessser::gen::program_run_parameter::t_ext> params_, dessser::gen::program_name::t_ext program_, double report_period_) : automatic(automatic_), cwd(cwd_), debug(debug_), enabled(enabled_), on_site(on_site_), params(params_), program(program_), report_period(report_period_) {}
+  dessser::gen::file_path::t_ext cwd;
+  Arr<dessser::gen::program_run_parameter::t_ext> params;
+  std::string on_site;
+  bool automatic;
+  t(dessser::gen::program_name::t_ext program_, bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, Arr<dessser::gen::program_run_parameter::t_ext> params_, std::string on_site_, bool automatic_) : program(program_), enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), params(params_), on_site(on_site_), automatic(automatic_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.automatic == b.automatic && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.debug == b.debug && a.enabled == b.enabled && a.on_site == b.on_site && a.params == b.params && ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && a.report_period == b.report_period;
+  return ::dessser::gen::program_name::Deref(a.program) == ::dessser::gen::program_name::Deref(b.program) && a.enabled == b.enabled && a.debug == b.debug && a.report_period == b.report_period && ::dessser::gen::file_path::Deref(a.cwd) == ::dessser::gen::file_path::Deref(b.cwd) && a.params == b.params && a.on_site == b.on_site && a.automatic == b.automatic;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -1142,7 +1142,7 @@ static std::function<::dessser::gen::rc_entry::t3ac1055254e339c986a46055f673c8c3
                                   uint8_t id_383 { 0 };
                                   bool id_384 { bool(dbool_fst_122 == id_383) };
                                   bool id_385 { ! id_384 };
-                                  std::shared_ptr<::dessser::gen::rc_entry::t>  id_386 { std::make_shared<::dessser::gen::rc_entry::t>(id_385, drec_fst_78, drec_fst_69, drec_fst_63, drec_fst_119, drec_fst_104, drec_fst_57, drec_fst_75) };
+                                  std::shared_ptr<::dessser::gen::rc_entry::t>  id_386 { std::make_shared<::dessser::gen::rc_entry::t>(drec_fst_57, drec_fst_63, drec_fst_69, drec_fst_75, drec_fst_78, drec_fst_104, drec_fst_119, id_385) };
                                   ::dessser::gen::rc_entry::t3ac1055254e339c986a46055f673c8c3 id_387 { id_386, dbool_snd_123 };
                                   letpair_res_382 = id_387;
                                 }
