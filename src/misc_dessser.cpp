@@ -639,6 +639,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         bool first = true;
         for (std::shared_ptr<const t> t : ts) {
           QString sep { QString(first ? "(" : "; ") };
+          first = false;
           s += sep + raqlTypeToQString(*t);
         }
         return s + ")";
@@ -661,6 +662,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         bool first = true;
         for (auto const n_t : ts) {
           QString sep { QString(first ? "{" : "; ") };
+          first = false;
           s += sep + QString::fromStdString(std::get<0>(*n_t)) + ": " +
                raqlTypeToQString(*std::get<1>(*n_t));
         }
@@ -673,6 +675,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         bool first = true;
         for (auto const n_t : ts) {
           QString sep { QString(first ? "[" : " | ") };
+          first = false;
           s += sep + QString::fromStdString(std::get<0>(*n_t)) + " " +
                raqlTypeToQString(*std::get<1>(*n_t));
         }
