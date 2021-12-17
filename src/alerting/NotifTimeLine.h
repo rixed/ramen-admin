@@ -1,5 +1,6 @@
 #ifndef NOTIFTIMELINE_H_191204
 #define NOTIFTIMELINE_H_191204
+#include <memory>
 #include <optional>
 #include <string>
 
@@ -16,9 +17,12 @@ class NotifTimeLine : public AbstractTimeLine {
 
   std::string const incidentId;
 
+  std::shared_ptr<dessser::gen::alerting_log::t const> selected;
+
   void paintTick(
     dessser::gen::alerting_log::t const &,
-    QPainter *painter, qreal width, qreal x, qreal y0, qreal y1) const;
+    QPainter *, qreal width, qreal x, qreal y0, qreal y1,
+    bool is_selected = false) const;
 
 public:
   // Created empty:
@@ -30,7 +34,9 @@ public:
     QWidget *parent = nullptr);
 
 protected:
-  void paintEvent(QPaintEvent *event) override;
+  void paintEvent(QPaintEvent *) override;
+
+  bool event(QEvent *) override;
 };
 
 #endif

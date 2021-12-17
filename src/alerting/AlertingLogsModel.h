@@ -2,8 +2,9 @@
 #define ALERTINGLOGSMODEL_H_200615
 #include <memory>
 #include <vector>
-#include <QList>
 #include <QAbstractTableModel>
+#include <QList>
+#include <QString>
 
 #include "misc.h"
 
@@ -16,6 +17,8 @@ namespace dessser {
     namespace alerting_log { struct t; }
   }
 }
+
+QString alertingLogToQString(dessser::gen::alerting_log::t const &);
 
 class AlertingLogsModel : public QAbstractTableModel {
   Q_OBJECT

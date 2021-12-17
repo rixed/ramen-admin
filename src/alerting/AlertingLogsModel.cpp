@@ -87,7 +87,7 @@ int AlertingLogsModel::columnCount(QModelIndex const &parent) const
   return AlertingLogsModel::NUM_COLUMNS;
 }
 
-static QString alertingLogToQString(dessser::gen::alerting_log::t const &log)
+QString alertingLogToQString(dessser::gen::alerting_log::t const &log)
 {
 # define TR(x) QCoreApplication::translate("QMainWindow", x)
   switch (log.index()) {

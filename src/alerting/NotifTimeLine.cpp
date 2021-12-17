@@ -1,10 +1,13 @@
+#include <cmath>
 #include <utility>
 #include <vector>
 #include <QDebug>
 #include <QPainter>
 #include <QPaintEvent>
+#include <QToolTip>
 #include <QRect>
 
+#include "alerting/AlertingLogsModel.h"
 #include "alerting/tools.h"
 #include "desssergen/alerting_log.h"
 #include "misc.h"
@@ -12,6 +15,8 @@
 #include "alerting/NotifTimeLine.h"
 
 static bool const verbose { false };
+
+static constexpr qreal unselected_opacity { 0.3 };
 
 NotifTimeLine::NotifTimeLine(
   std::string const incidentId_,
@@ -26,7 +31,8 @@ NotifTimeLine::NotifTimeLine(
 
 void NotifTimeLine::paintTick(
   dessser::gen::alerting_log::t const &log,
-  QPainter *painter, qreal width, qreal x, qreal y0, qreal y1) const
+  QPainter *painter, qreal width, qreal x, qreal y0, qreal y1,
+  bool is_selected) const
 {
   qreal const tickWidth { 14 };
   qreal const x0 { x - 0.5 * tickWidth };
@@ -46,6 +52,7 @@ void NotifTimeLine::paintTick(
   QPen thick { tickColor };
   thick.setWidth(2);
   painter->setRenderHint(QPainter::Antialiasing, true);
+  painter->setOpacity(is_selected ? 1. : unselected_opacity);
 
   switch (log.index()) {
     case dessser::gen::alerting_log::NewNotification:
@@ -119,13 +126,34 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
   /* In chronological order: */
   std::vector<std::pair<double, std::shared_ptr<dessser::gen::alerting_log::t const>>> logs;
   logs.reserve(100);
+  /* While at it, look for the closest log (and select it): */
+  qreal closest_time;
+  std::shared_ptr<dessser::gen::alerting_log::t const> closest_log;
+  double closest_dist;
+  QPoint const pos { mapFromGlobal(QCursor::pos()) };
+  bool const hover { rect().contains(pos) };
+  qreal const curs_time { toTime(pos.x()) };
+
   iterLogs(incidentId,
-           [&logs](double time, std::shared_ptr<dessser::gen::alerting_log::t const> log)
+           [&logs, &closest_time, &closest_log, &closest_dist, &hover, &curs_time]
+           (double time, std::shared_ptr<dessser::gen::alerting_log::t const> log)
     {
       logs.emplace_back(time, log);
+
+      double const this_dist { std::abs(time - curs_time) };
+      if (hover && (! closest_log || this_dist < closest_dist)) {
+        closest_time = time;
+        closest_log = log;
+        closest_dist = this_dist;
+      }
     });
   if (verbose)
     qDebug() << "NotifTimeLine::paintEvent:" << logs.size() << "log entries";
+  if (closest_log) {
+    selected = closest_log;
+  } else {
+    selected = nullptr;
+  }
 
   struct {
     bool operator()(
@@ -141,6 +169,7 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
 
   /* Paint the background: */
   std::optional<qreal> prevX { std::nullopt };
+  bool was_selected;
   for (std::pair<double, std::shared_ptr<dessser::gen::alerting_log::t const>> const &l : logs) {
     double const time { l.first };
     std::shared_ptr<dessser::gen::alerting_log::t const> const log { l.second };
@@ -178,7 +207,9 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
           break;
       }
 
+      painter.setOpacity(was_selected ? 1. : unselected_opacity);
       painter.drawRect(QRectF(*prevX, 0., x - *prevX, qreal(height())));
+      was_selected = log.get() == selected.get();
     }
 
     prevX = x;
@@ -190,9 +221,26 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
     std::shared_ptr<dessser::gen::alerting_log::t const> const log { l.second };
 
     qreal const x { toPixel(time) };
-    paintTick(*log, &painter, width(), x, 0, height());
+    paintTick(*log, &painter, width(), x, 0, height(), log.get() == selected.get());
   }
 
   /* Paint the cursor over: */
   AbstractTimeLine::paintEvent(event);
+}
+
+bool NotifTimeLine::event(QEvent *event)
+{
+  if (event->type() != QEvent::ToolTip) return AbstractTimeLine::event(event);
+
+  QHelpEvent *help_event { static_cast<QHelpEvent *>(event) };
+
+  if (selected) {
+    // TODO: also highlight that entry in the journal, scrolling to it first
+    QToolTip::showText(help_event->globalPos(), alertingLogToQString(*selected));
+  } else {
+    QToolTip::hideText();
+    event->ignore();
+  }
+
+  return true;
 }
