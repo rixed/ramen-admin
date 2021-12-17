@@ -12,7 +12,7 @@
 #include <QVariant>
 
 class GraphModel;
-class GraphViewSettings;
+struct GraphViewSettings;
 
 namespace dessser {
   namespace gen {

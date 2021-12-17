@@ -2,16 +2,16 @@
 
 #include "FunctionItem.h"
 #include "GraphModel.h"
-#include "GraphView.h"
-#include "GraphViewSettings.h"
 #include "Resources.h"
+#include "stream/GraphView.h"
+#include "stream/GraphViewSettings.h"
 
 #include "ProgramItem.h"
 
 ProgramItem::ProgramItem(
   GraphItem *treeParent, std::unique_ptr<Program> program,
-  GraphViewSettings const &settings) :
-  GraphItem(treeParent, std::move(program), settings)
+  GraphViewSettings const &settings)
+  : GraphItem(treeParent, std::move(program), settings)
 {
   setZValue(2);
 }
@@ -38,7 +38,7 @@ QRectF ProgramItem::operationRect() const
 {
   QRectF bbox;
   for (auto const &function : functions) {
-    QRectF b = function->operationRect();
+    QRectF b { function->operationRect() };
     b.translate(function->pos());
     bbox |= b;
   }
@@ -102,7 +102,7 @@ QVariant ProgramItem::data(int column, int role) const
 
 ProgramItem::operator QString() const
 {
-  QString s(" Program[");
+  QString s { " Program[" };
   s += row;
   s += "]:";
   s += shared->name;

@@ -1,5 +1,6 @@
 #include <QFontMetrics>
-#include "GraphViewSettings.h"
+
+#include "stream/GraphViewSettings.h"
 
 GraphViewSettings::GraphViewSettings()
 {
@@ -33,12 +34,13 @@ GraphViewSettings::GraphViewSettings()
 
   labelsHorizMargin = 10;
 
-  int const functionY0 =
-    siteMarginTop + programMarginTop + functionMarginTop;
-  int const functionY1 =
+  int const functionY0 {
+    siteMarginTop + programMarginTop + functionMarginTop };
+  int const functionY1 {
     gridHeight -
-    (siteMarginBottom + programMarginBottom + functionMarginBottom);
-  int const functionYMid = functionY0 + (functionY1 - functionY0) / 2;
+    (siteMarginBottom + programMarginBottom + functionMarginBottom) };
+  int const functionYMid {
+    functionY0 + (functionY1 - functionY0) / 2 };
 
   arrowConnectInY = functionYMid - 10;
   arrowConnectOutY = functionYMid + 10;
@@ -50,5 +52,3 @@ QPointF GraphViewSettings::pointOfTile(int x, int y) const
 {
   return QPointF(x * gridWidth, y * gridHeight);
 }
-
-

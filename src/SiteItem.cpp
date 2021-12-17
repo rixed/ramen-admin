@@ -1,9 +1,9 @@
 #include <QMarginsF>
 
-#include "GraphView.h"
-#include "GraphViewSettings.h"
 #include "GraphModel.h"
 #include "ProgramItem.h"
+#include "stream/GraphView.h"
+#include "stream/GraphViewSettings.h"
 
 #include "SiteItem.h"
 
@@ -30,8 +30,8 @@ void SiteItem::reorder(GraphModel const *model)
 
 std::vector<std::pair<QString const, QString const>> SiteItem::labels() const
 {
-  std::shared_ptr<Site> shr =
-    std::static_pointer_cast<Site>(shared);
+  std::shared_ptr<Site> shr {
+    std::static_pointer_cast<Site>(shared) };
 
   return {
     { "#programs", QString::number(programs.size()) },
@@ -44,7 +44,7 @@ QRectF SiteItem::operationRect() const
 {
   QRectF bbox;
   for (auto const &program : programs) {
-    QRectF b = program->operationRect();
+    QRectF b { program->operationRect() };
     b.translate(program->pos());
     bbox |= b;
   }
@@ -57,7 +57,7 @@ QRectF SiteItem::operationRect() const
 
 SiteItem::operator QString() const
 {
-  QString s("Site[");
+  QString s { "Site[" };
   s += row;
   s += "]:";
   s += shared->name;

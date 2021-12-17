@@ -24,7 +24,7 @@ class GraphArrow;
  * place there.
  */
 
-class GraphViewSettings;
+struct GraphViewSettings;
 
 struct HashStupidPairOfPointers {
   size_t operator()(const std::pair<GraphItem const *, GraphItem const *>& key) const {

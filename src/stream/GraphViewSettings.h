@@ -3,9 +3,7 @@
 #include <QFont>
 #include <QPointF>
 
-class GraphViewSettings
-{
-public:
+struct GraphViewSettings {
   QFont labelsFont;
   int labelsLineHeight;
   QFont titleFont;
@@ -16,6 +14,7 @@ public:
     functionMarginHoriz, programMarginHoriz, siteMarginHoriz,
     functionMarginTop, programMarginTop, siteMarginTop,
     functionMarginBottom, programMarginBottom, siteMarginBottom;
+
   int labelsHorizMargin;
 
   unsigned numArrowChannels;
@@ -25,7 +24,9 @@ public:
   int arrowConnectOutY;
 
   GraphViewSettings();
+
   ~GraphViewSettings();
+
   QPointF pointOfTile(int x, int y) const;
 };
 

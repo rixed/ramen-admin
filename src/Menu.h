@@ -14,9 +14,7 @@ class NamesTreeWin;
 class NewDashboardDialog;
 class NewProgramDialog;
 class NewSourceDialog;
-#ifdef WITH_OPERATIONS
 class OperationsWin;
-#endif
 class ProcessesDialog;
 class QMainWindow;
 class QMenuBar;
@@ -69,9 +67,7 @@ public:
   static NamesTreeWin *namesTreeWin;
   static StorageWin *storageWin;
   static ServerInfoWin *serverInfoWin;
-# ifdef WITH_OPERATIONS
   static OperationsWin *operationsWin;
-# endif
   static LoginWin *loginWin;
   static LoggerWin *loggerWin;
   static AlertingWin *alertingWin;
@@ -97,9 +93,7 @@ public slots:
   static void openStorageWin();
   static void openAlertingWin();
   static void openServerInfoWin();
-# ifdef WITH_OPERATIONS
   static void openOperationsWin();
-# endif
   static void openLoginWin();
   static void openLoggerWin();
   static void prepareQuit();

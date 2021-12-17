@@ -1,4 +1,3 @@
-#include <cassert>
 #include <cstdlib>
 #include <limits>
 #include <QDebug>
@@ -7,8 +6,8 @@
 #include <QTouchEvent>
 #include <QGestureEvent>
 
-#include "GraphArrow.h"
-#include "GraphViewSettings.h"
+#include "stream/GraphArrow.h"
+#include "stream/GraphViewSettings.h"
 #include "FunctionItem.h"
 #include "ProgramItem.h"
 #include "SiteItem.h"
@@ -16,15 +15,15 @@
 
 #include "GraphView.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
-GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent) :
-  QGraphicsView(parent),
-  model(nullptr),
-  layoutTimer(this),
-  settings(settings_),
-  currentScale(1.),
-  lastScale(1.)
+GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent)
+  : QGraphicsView(parent),
+    model(nullptr),
+    layoutTimer(this),
+    settings(settings_),
+    currentScale(1.),
+    lastScale(1.)
 {
   setTransformationAnchor(QGraphicsView::AnchorUnderMouse);
   setDragMode(ScrollHandDrag);
@@ -74,12 +73,12 @@ void GraphView::keyPressEvent(QKeyEvent *event)
 bool GraphView::event(QEvent *event)
 {
   if (event->type() == QEvent::Gesture) {
-    QGestureEvent *gest = static_cast<QGestureEvent *>(event);
+    QGestureEvent *gest { static_cast<QGestureEvent *>(event) };
     if (QGesture *pinch_ = gest->gesture(Qt::PinchGesture)) {
-      QPinchGesture *pinch = static_cast<QPinchGesture *>(pinch_);
+      QPinchGesture *pinch { static_cast<QPinchGesture *>(pinch_) };
       if (pinch->changeFlags() & QPinchGesture::ScaleFactorChanged) {
         lastScale = pinch->totalScaleFactor();
-        qreal const scale = currentScale * lastScale;
+        qreal const scale { currentScale * lastScale };
         setTransform(QTransform().scale(scale, scale));
       }
       if (pinch->state() == Qt::GestureFinished) {
@@ -94,7 +93,7 @@ bool GraphView::event(QEvent *event)
 
 void GraphView::setModel(GraphModel const *model_)
 {
-  assert(! model);
+  Q_ASSERT(! model);
   model = model_;
 
   // Connect to the model signals to learn about updates (notice the race
@@ -109,8 +108,8 @@ void GraphView::setModel(GraphModel const *model_)
 
 void GraphView::collapse(QModelIndex const &index)
 {
-  GraphItem *item =
-    static_cast<GraphItem *>(index.internalPointer());
+  GraphItem *item {
+    static_cast<GraphItem *>(index.internalPointer()) };
 
   item->setCollapsed(true);
   updateArrows();
@@ -118,8 +117,8 @@ void GraphView::collapse(QModelIndex const &index)
 
 void GraphView::expand(QModelIndex const &index)
 {
-  GraphItem *item =
-    static_cast<GraphItem *>(index.internalPointer());
+  GraphItem *item {
+    static_cast<GraphItem *>(index.internalPointer()) };
 
   item->setCollapsed(false);
   updateArrows();
@@ -128,8 +127,8 @@ void GraphView::expand(QModelIndex const &index)
 // Used to select a graph item from the treeview:
 void GraphView::select(QModelIndex const &index)
 {
-  GraphItem *item =
-    static_cast<GraphItem *>(index.internalPointer());
+  GraphItem *item {
+    static_cast<GraphItem *>(index.internalPointer()) };
 
   // Only allow to select tree leaves:
   if (item->isCollapsed()) {
@@ -138,7 +137,7 @@ void GraphView::select(QModelIndex const &index)
   }
 }
 
-static int layoutTimeout = 500; // ms
+static int layoutTimeout { 500 }; // ms
 
 void GraphView::insertRows(const QModelIndex &parent, int first, int last)
 {
@@ -152,9 +151,9 @@ void GraphView::insertRows(const QModelIndex &parent, int first, int last)
 
   // Add those new items in the scene:
   for (int row = first ; row <= last; row++) {
-    QModelIndex index = model->index(row, 0, parent);
-    GraphItem *item =
-      static_cast<GraphItem *>(index.internalPointer());
+    QModelIndex index { model->index(row, 0, parent) };
+    GraphItem *item {
+      static_cast<GraphItem *>(index.internalPointer()) };
     scene.addItem(item);
   }
 }
@@ -164,7 +163,7 @@ void GraphView::updateArrows()
   // Redo all arrows every time:
   // TODO: if this stick then simplify the following!
   for (auto it = arrows.begin(); it != arrows.end(); ) {
-    GraphArrow *arrow = it->second.first;
+    GraphArrow *arrow { it->second.first };
     scene.removeItem(arrow); // reclaim ownership
     delete arrow;  // should remove it from the scene etc...
     it = arrows.erase(it);
@@ -183,45 +182,46 @@ void GraphView::updateArrows()
   };
 
   for (auto const &it : relations) {
-    FunctionItem const *srcFunction =
-      static_cast<FunctionItem const *>(it.first);
-    GraphItem const *src =
-      static_cast<GraphItem const *>(srcFunction);
-    GraphItem const *dst =
-      static_cast<GraphItem const *>(it.second);
-    unsigned marginSrc = 0, marginDst = 0;
-    unsigned const channel = srcFunction->channel;
+    FunctionItem const *srcFunction {
+      static_cast<FunctionItem const *>(it.first) };
+    GraphItem const *src {
+      static_cast<GraphItem const *>(srcFunction) };
+    GraphItem const *dst {
+      static_cast<GraphItem const *>(it.second) };
+    unsigned marginSrc { 0 }, marginDst { 0 };
+    unsigned const channel { srcFunction->channel };
 
     while (src && !src->isVisibleTo(nullptr)) {
       src = src->treeParent;
       marginSrc ++;
     }
     if (! src) continue;  // for some reason even the site is not visible?!
-    assert (marginSrc < NB_HMARGINS);
+    Q_ASSERT(marginSrc < NB_HMARGINS);
 
     while (dst && !dst->isVisibleTo(nullptr)) {
       dst = dst->treeParent;
       marginDst ++;
     }
     if (! dst) continue;
-    assert (marginDst < NB_HMARGINS);
+    Q_ASSERT(marginDst < NB_HMARGINS);
 
     // This may happen because of collapsing
     if (src == dst) continue;
 
     // Do we have this arrow already?
-    auto ait = arrows.find(std::pair<GraphItem const *, GraphItem const *>(src, dst));
+    auto ait {
+      arrows.find(std::pair<GraphItem const *, GraphItem const *>(src, dst)) };
     if (ait == arrows.end()) {
       if (verbose)
         qDebug() << "Creating Arrow from" <<src->shared->name << ":"
                  << src->x1 << "," << src->y1
                  << "to" << dst->shared->name << ":"
                  << dst->x0 << "," << dst->y0;
-      GraphArrow *arrow =
+      GraphArrow *arrow {
         new GraphArrow(settings,
           src->x1, src->y1, hmargins[marginSrc],
           dst->x0, dst->y0, hmargins[marginDst],
-          channel, src->color());
+          channel, src->color()) };
       arrows.insert({{ src, dst }, { arrow, true }});
       arrow->setZValue(-1);
       scene.addItem(arrow);
@@ -238,7 +238,7 @@ void GraphView::updateArrows()
       if (verbose)
         qDebug() << "Deleting Arrow from" << it->first.first->fqName()
                  << "to" << it->first.second->fqName();
-      GraphArrow *arrow = it->second.first;
+      GraphArrow *arrow { it->second.first };
       scene.removeItem(arrow); // reclaim ownership
       delete arrow;  // should remove it from the scene etc...
       it = arrows.erase(it);
@@ -263,7 +263,7 @@ void GraphView::relationRemoved(FunctionItem const *parent, FunctionItem const *
 {
   if (verbose)
     qDebug() << "Del" << parent->fqName() << "->" << child->fqName();
-  auto it = relations.find(parent);
+  auto it { relations.find(parent) };
   if (it != relations.end()) {
     relations.erase(it);
     updateArrows();
@@ -292,42 +292,42 @@ void GraphView::startLayout()
 
   if (layout::solve(model->sites)) {
 
-    QParallelAnimationGroup *animGroup = new QParallelAnimationGroup;
-    int const animDuration = 300; // ms
+    QParallelAnimationGroup *animGroup { new QParallelAnimationGroup };
+    int const animDuration { 300 }; // ms
 
     for (auto const &siteItem : model->sites) {
-      QPointF sitePos =
+      QPointF sitePos {
         settings.pointOfTile(siteItem->x0, siteItem->y0) +
-        QPointF(settings.siteMarginHoriz, settings.siteMarginTop);
-      QPropertyAnimation *siteAnim =
-        new QPropertyAnimation(siteItem, "pos");
+        QPointF(settings.siteMarginHoriz, settings.siteMarginTop) };
+      QPropertyAnimation *siteAnim {
+        new QPropertyAnimation(siteItem, "pos") };
       siteAnim->setDuration(animDuration);
       siteAnim->setEndValue(sitePos);
       animGroup->addAnimation(siteAnim);
 
       // Now position the programs:
       for (auto const &programItem : siteItem->programs) {
-        QPointF progPos =
+        QPointF progPos {
           settings.pointOfTile(
             programItem->x0 - siteItem->x0,
             programItem->y0 - siteItem->y0) +
-          QPointF(settings.programMarginHoriz, settings.programMarginTop);
-        QPropertyAnimation *progAnim =
-          new QPropertyAnimation(programItem, "pos");
+          QPointF(settings.programMarginHoriz, settings.programMarginTop) };
+        QPropertyAnimation *progAnim {
+          new QPropertyAnimation(programItem, "pos") };
         progAnim->setDuration(animDuration);
         progAnim->setEndValue(progPos);
         animGroup->addAnimation(progAnim);
 
         // Finally, we can now position the functions:
         for (auto const &functionItem : programItem->functions) {
-          QPointF funcPos =
+          QPointF funcPos {
             settings.pointOfTile(
               functionItem->x0 - programItem->x0,
               functionItem->y0 - programItem->y0) +
             QPointF(settings.functionMarginHoriz,
-                    settings.functionMarginTop);
-          QPropertyAnimation *funcAnim =
-            new QPropertyAnimation(functionItem, "pos");
+                    settings.functionMarginTop) };
+          QPropertyAnimation *funcAnim {
+            new QPropertyAnimation(functionItem, "pos") };
           funcAnim->setDuration(animDuration);
           funcAnim->setEndValue(funcPos);
           animGroup->addAnimation(funcAnim);
@@ -349,10 +349,10 @@ void GraphView::selectionChanged()
 {
   if (! model) return;
 
-  QList<QGraphicsItem *> items = scene.selectedItems();
+  QList<QGraphicsItem *> items { scene.selectedItems() };
   if (items.empty()) return;
 
-  GraphItem *item = dynamic_cast<GraphItem *>(items.first());
+  GraphItem *item { dynamic_cast<GraphItem *>(items.first()) };
   if (! item) return;
 
   emit selected(item->index(model, 0));

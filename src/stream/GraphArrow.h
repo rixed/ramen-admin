@@ -4,20 +4,21 @@
 #include <QGraphicsItem>
 #include <QRectF>
 
-class GraphViewSettings;
+struct GraphViewSettings;
 class QPainterPath;
 
 enum Direction { Right, Left, Up, Down };
 
-class GraphArrow : public QGraphicsItem
-{
+class GraphArrow : public QGraphicsItem {
   struct Line {
     Direction dir;
     int x, y;
 
     QPointF start(GraphViewSettings const &) const;
+
     QPointF stop(GraphViewSettings const &) const;
   };
+
   unsigned channel;
   QColor color;
 
@@ -37,6 +38,7 @@ public:
     QGraphicsItem *parent = nullptr);
 
   QRectF boundingRect() const override;
+
   void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget *) override;
 };
 

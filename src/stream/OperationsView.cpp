@@ -5,19 +5,22 @@
 #include <QRadioButton>
 #include <QTreeView>
 #include <QGridLayout>
+
 #include "FunctionInfoBox.h"
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "GraphView.h"
 #include "Menu.h"
+#include "misc.h"
 #include "ProgramItem.h"
-#include "SourcesWin.h"
+#include "source/SourcesWin.h"
 #include "TailModel.h"
 #include "TailTable.h"
 #include "widgetTools.h"
-#include "OperationsView.h"
 
-static bool const verbose(false);
+#include "stream/OperationsView.h"
+
+static bool const verbose { false };
 
 /* For some unfathomable reason the QTreeView sizeHint always return a width
  * of 256, and this is read only. So to change the actual default size of a
@@ -29,19 +32,19 @@ public:
   QSize sizeHint() const { return QSize(100, 42); }
 };
 
-OperationsView::OperationsView(GraphModel *graphModel, QWidget *parent) :
-  QSplitter(parent),
-  allowReset(true)
+OperationsView::OperationsView(GraphModel *graphModel, QWidget *parent)
+  : QSplitter(parent),
+    allowReset(true)
 {
   // On the top side, we have another splitter to separate the treeview
   // from the graphview:
-  QWidget *leftPannel = new QWidget;
-  QVBoxLayout *leftPannelLayout = new QVBoxLayout;
+  QWidget *leftPannel { new QWidget };
+  QVBoxLayout *leftPannelLayout { new QVBoxLayout };
   leftPannelLayout->setContentsMargins(1, 1, 1, 1);
   leftPannelLayout->setSpacing(3);
 
-  QWidget *LODBar = new QWidget;
-  QHBoxLayout *LODBarLayout = new QHBoxLayout;
+  QWidget *LODBar { new QWidget };
+  QHBoxLayout *LODBarLayout { new QHBoxLayout };
   LODBarLayout->setContentsMargins(1, 1, 1, 1);
   LODBarLayout->setSpacing(3);
   toSites = new QRadioButton("&sites", LODBar);
@@ -70,7 +73,7 @@ OperationsView::OperationsView(GraphModel *graphModel, QWidget *parent) :
   addWidget(leftPannel);
   setStretchFactor(0, 0);
 
-  GraphView *graphView = new GraphView(graphModel->settings);
+  GraphView *graphView { new GraphView(graphModel->settings) };
   graphView->setModel(graphModel);
   addWidget(graphView);
   setStretchFactor(1, 1);
@@ -144,15 +147,15 @@ void OperationsView::selectItem(QModelIndex const &index)
 {
   if (! index.isValid()) return;
 
-  GraphItem *gi =
-    static_cast<GraphItem *>(index.internalPointer());
-  ProgramItem *p = dynamic_cast<ProgramItem *>(gi);
+  GraphItem *gi {
+    static_cast<GraphItem *>(index.internalPointer()) };
+  ProgramItem *p { dynamic_cast<ProgramItem *>(gi) };
   if (p) {
     emit programSelected(p);
     return;
   }
 
-  FunctionItem *f = dynamic_cast<FunctionItem *>(gi);
+  FunctionItem *f { dynamic_cast<FunctionItem *>(gi) };
   if (f) {
     emit functionSelected(f);
     return;
@@ -162,20 +165,20 @@ void OperationsView::selectItem(QModelIndex const &index)
 void OperationsView::showSource(ProgramItem const *p)
 {
   if (! Menu::sourcesWin) return;
-  std::string const sourceKeyPrefix =
-    "sources/" + srcPathFromProgramName(p->shared->name.toStdString());
+  std::string const src_path {
+    srcPathFromProgramName(p->shared->name.toStdString()) };
   if (verbose)
-    qDebug() << "Show source of program" << QString::fromStdString(sourceKeyPrefix);
-  Menu::sourcesWin->showFile(sourceKeyPrefix);
+    qDebug() << "Show source of program" << QString::fromStdString(src_path);
+  Menu::sourcesWin->showFile(src_path);
 }
 
 // Same as above but also scroll down to that function:
 void OperationsView::showFuncInfo(FunctionItem const *f)
 {
   if (! Menu::sourcesWin) return;
-  std::string const sourceKeyPrefix =
-    "sources/" + srcPathFromProgramName(f->treeParent->shared->name.toStdString());
+  std::string const src_path {
+    srcPathFromProgramName(f->treeParent->shared->name.toStdString()) };
   if (verbose)
-    qDebug() << "Show source of function" << QString::fromStdString(sourceKeyPrefix);
-  Menu::sourcesWin->showFile(sourceKeyPrefix);
+    qDebug() << "Show source of function" << QString::fromStdString(src_path);
+  Menu::sourcesWin->showFile(src_path);
 }

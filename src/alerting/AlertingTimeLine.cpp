@@ -98,14 +98,14 @@ void AlertingTimeLine::addLog(
       return;
     }
 
-    QString const incidentName {
+    QString const incident_name {
       QString::fromStdString(*assignedTeam) + QString(": ") +
       QString::fromStdString(firstStart->name) };
 
     timeLine = new NotifTimeLine(incidentId, 0., 0., true, true, this);
     timeLineGroup->add(timeLine);
     int const row { 1 }; // TODO: order notif names alphabetically?
-    formLayout->insertRow(row, incidentName, timeLine);
+    formLayout->insertRow(row, incident_name, timeLine);
     timeLines.insert(incidentId, timeLine);
   }
 }

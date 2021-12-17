@@ -2,9 +2,9 @@
 #include <QPainter>
 #include <QPainterPath>
 
-#include "GraphViewSettings.h"
+#include "stream/GraphViewSettings.h"
 
-#include "GraphArrow.h"
+#include "stream/GraphArrow.h"
 
 /* Arrows only go in the margins, and the GraphArrow object is actually
  * given only the coordinates of the hlines and vlines to occupy, and a
@@ -26,16 +26,22 @@
  * number of tiles where the same channel is occupied by more than one
  * arrow. */
 
-GraphArrow::GraphArrow(GraphViewSettings const &settings_, int x0, int y0, int hmargin0, int x1, int y1, int hmargin1, unsigned channel_, QColor color_, QGraphicsItem *parent) :
-  QGraphicsItem(parent),
-  channel(channel_),
-  color(color_),
-  settings(settings_)
+GraphArrow::GraphArrow(
+  GraphViewSettings const &settings_,
+  int x0, int y0, int hmargin0,
+  int x1, int y1, int hmargin1,
+  unsigned channel_,
+  QColor color_,
+  QGraphicsItem *parent)
+  : QGraphicsItem(parent),
+    channel(channel_),
+    color(color_),
+    settings(settings_)
 {
   std::vector<Line> lines; // from src to dest
 
-  int x = x0;
-  int y = y0;
+  int x { x0 };
+  int y { y0 };
 
   if (x1 > x0) {
     x ++;
@@ -58,26 +64,26 @@ GraphArrow::GraphArrow(GraphViewSettings const &settings_, int x0, int y0, int h
     for (; y < y1; y++)
       lines.push_back({ Down, x, y });
 
-  int channelOffset =
-    channel * settings.arrowChannelWidth -
-    (settings.numArrowChannels * settings.arrowChannelWidth) / 2;
+  int channelOffset {
+    int(channel) * settings.arrowChannelWidth -
+    (int(settings.numArrowChannels) * settings.arrowChannelWidth) / 2 };
 
-  QPointF startPos(
-    (x0 + 1) * settings.gridWidth - hmargin0,
-    y0 * settings.gridHeight + settings.arrowConnectOutY + channelOffset);
+  QPointF startPos {
+    qreal((x0 + 1) * settings.gridWidth - hmargin0),
+    qreal(y0 * settings.gridHeight + settings.arrowConnectOutY + channelOffset) };
 
-  QPointF stopPos(
-    x1 * settings.gridWidth + hmargin1,
-    y1 * settings.gridHeight + settings.arrowConnectInY + channelOffset);
+  QPointF stopPos {
+    qreal(x1 * settings.gridWidth + hmargin1),
+    qreal(y1 * settings.gridHeight + settings.arrowConnectInY + channelOffset) };
 
-  int arrowHeadLength = 14;
-  int arrowHeadWidth = 8;
+  int arrowHeadLength { 14 };
+  int arrowHeadWidth { 8 };
 
   arrowPath = QPainterPath(startPos);
   arrowPath.lineTo(startPos + QPointF(hmargin0 + channelOffset, 0));
 
   // Go through these intermediary points:
-  QPoint off(channelOffset, channelOffset);
+  QPoint off { channelOffset, channelOffset };
   for (auto const &line : lines) {
     arrowPath.lineTo(line.start(settings) + off);
     arrowPath.lineTo(line.stop(settings) + off);
@@ -87,7 +93,7 @@ GraphArrow::GraphArrow(GraphViewSettings const &settings_, int x0, int y0, int h
   arrowPath.lineTo(stopPos - QPointF(arrowHeadLength, 0));
 
   boundingBox = arrowPath.boundingRect();
-  int const w = settings.arrowWidth;
+  int const w { settings.arrowWidth };
   boundingBox += QMarginsF(w, w, w, w);
 
   arrowHead = QPainterPath(stopPos);
@@ -106,7 +112,8 @@ QRectF GraphArrow::boundingRect() const
 
 void GraphArrow::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-  QPen pen(Qt::SolidPattern, settings.arrowWidth, Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin);
+  QPen pen {
+    Qt::SolidPattern, qreal(settings.arrowWidth), Qt::SolidLine, Qt::RoundCap, Qt::RoundJoin };
   pen.setColor(color);
   painter->setPen(pen);
   painter->drawPath(arrowPath);

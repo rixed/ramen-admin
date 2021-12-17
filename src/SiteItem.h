@@ -5,7 +5,7 @@
 #include <QString>
 #include "GraphItem.h"
 
-class GraphViewSettings;
+struct GraphViewSettings;
 class ProgramItem;
 
 struct Site : public GraphData

@@ -19,9 +19,7 @@
 #include "NamesTreeWin.h"
 #include "source/NewProgramDialog.h"
 #include "source/NewSourceDialog.h"
-#ifdef WITH_OPERATIONS
-#include "OperationsWin.h"
-#endif
+#include "stream/OperationsWin.h"
 #include "ProcessesDialog.h"
 #include "RCEditorDialog.h"
 #include "SavedWindow.h"
@@ -45,9 +43,7 @@ RCEditorDialog *Menu::rcEditorDialog;
 NamesTreeWin *Menu::namesTreeWin;
 StorageWin *Menu::storageWin;
 ServerInfoWin *Menu::serverInfoWin;
-#ifdef WITH_OPERATIONS
 OperationsWin *Menu::operationsWin;
-# endif
 LoginWin *Menu::loginWin;
 LoggerWin *Menu::loggerWin;
 AlertingWin *Menu::alertingWin;
@@ -80,10 +76,8 @@ void Menu::initDialogs(QString const &srvUrl)
   if (! storageWin) storageWin = new StorageWin;
   if (verbose) qDebug() << "Create ServerInfoWin...";
   if (! serverInfoWin) serverInfoWin = new ServerInfoWin(srvUrl);
-# ifdef WITH_OPERATIONS
   if (verbose) qDebug() << "Create OperationsWin...";
   if (! operationsWin) operationsWin = new OperationsWin;
-# endif
   if (verbose) qDebug() << "Create AlertingWin ...";
   if (! alertingWin) alertingWin = new AlertingWin;
   // login is supposed to be initialized first
@@ -117,9 +111,7 @@ void Menu::deleteDialogs()
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
   danceOfDelLater<StorageWin>(&storageWin);
   danceOfDelLater<ServerInfoWin>(&serverInfoWin);
-# ifdef WITH_OPERATIONS
   danceOfDelLater<OperationsWin>(&operationsWin);
-# endif
   danceOfDelLater<AlertingWin>(&alertingWin);
   // delLater is never when we quit the app:
   if (loggerWin) loggerWin->loggerView->flush();
@@ -175,12 +167,10 @@ void Menu::populateMenu(bool basic, bool extended)
       QCoreApplication::translate("QMenuBar", "Source Editor…"),
       this, &Menu::openSourceEditor);
 
-#   ifdef WITH_OPERATIONS
     /* The graph of operations window: */
     windowMenu->addAction(
       QCoreApplication::translate("QMenuBar", "Graph of Operations…"),
       this, &Menu::openOperationsWin);
-#   endif
 
     /* The list of all running processes, as a qtree, equivalent to the
      * `ramen ps` command, but nicer and with stats push all the way: */
@@ -353,12 +343,10 @@ void Menu::openServerInfoWin()
   showRaised(serverInfoWin);
 }
 
-#ifdef WITH_OPERATIONS
 void Menu::openOperationsWin()
 {
   showRaised(operationsWin);
 }
-#endif
 
 void Menu::openAlertingWin()
 {

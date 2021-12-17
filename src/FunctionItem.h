@@ -11,7 +11,7 @@
 #include "GraphItem.h"
 #include "PastData.h"
 
-class GraphViewSettings;
+struct GraphViewSettings;
 class TailModel;
 
 namespace dessser {

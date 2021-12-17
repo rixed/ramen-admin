@@ -4,7 +4,7 @@
 #include <QPropertyAnimation>
 
 #include "GraphModel.h"
-#include "GraphViewSettings.h"
+#include "stream/GraphViewSettings.h"
 #include "colorOfString.h"
 
 #include "GraphItem.h"

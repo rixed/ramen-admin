@@ -5,7 +5,7 @@
 #include "GraphItem.h"
 
 class FunctionItem;
-class GraphViewSettings;
+struct GraphViewSettings;
 
 struct Program : public GraphData
 {

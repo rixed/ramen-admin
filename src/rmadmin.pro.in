@@ -105,9 +105,9 @@ HEADERS += \
   NamesTree.h \
   NamesTreeWin.h \
   GraphModel.h \
-  GraphViewSettings.h \
+  stream/GraphViewSettings.h \
   GraphItem.h \
-  GraphArrow.h \
+  stream/GraphArrow.h \
   EventTime.h \
   AtomicWidget.h \
   MakeSyncValue.h \
@@ -220,6 +220,8 @@ HEADERS += \
   alerting/NotifTimeLine.h \
   alerting/AlertingTimeLine.h \
   alerting/AlertingWin.h \
+  stream/OperationsView.h \
+  stream/OperationsWin.h \
   Menu.h \
   ReplayRequest.h \
   PastData.h \
@@ -227,7 +229,7 @@ HEADERS += \
   ProgramItem.h \
   SiteItem.h \
   layout.h \
-  GraphView.h
+  stream/GraphView.h
 
 SOURCES += \
   desssergen/team_name.cc \
@@ -312,9 +314,9 @@ SOURCES += \
   NamesTree.cpp \
   NamesTreeWin.cpp \
   GraphModel.cpp \
-  GraphViewSettings.cpp \
+  stream/GraphViewSettings.cpp \
   GraphItem.cpp \
-  GraphArrow.cpp \
+  stream/GraphArrow.cpp \
   EventTime.cpp \
   AtomicWidget.cpp \
   MakeSyncValue.cpp \
@@ -427,6 +429,8 @@ SOURCES += \
   alerting/NotifTimeLine.cpp \
   alerting/AlertingTimeLine.cpp \
   alerting/AlertingWin.cpp \
+  stream/OperationsView.cpp \
+  stream/OperationsWin.cpp \
   Menu.cpp \
   ReplayRequest.cpp \
   PastData.cpp \
@@ -434,7 +438,7 @@ SOURCES += \
   ProgramItem.cpp \
   SiteItem.cpp \
   layout.cpp \
-  GraphView.cpp \
+  stream/GraphView.cpp \
   main.cpp
 
 RESOURCES = resources.qrc

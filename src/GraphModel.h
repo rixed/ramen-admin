@@ -36,7 +36,7 @@
 
 struct ConfChange;
 class FunctionItem;
-class GraphViewSettings;
+struct GraphViewSettings;
 struct KValue;
 class ParsedKey;
 class ProgramItem;
