@@ -71,10 +71,11 @@ void GraphItem::setCollapsed(bool c)
   subItems->setVisible(!c);
 }
 
-QString GraphItem::fqName() const
+QString GraphItem::sfqName() const
 {
   if (! treeParent) return shared->name;
-  return treeParent->fqName() + "/" + shared->name;
+  QString const sep { treeParent->treeParent ? "/" : ":" };
+  return treeParent->sfqName() + sep + shared->name;
 }
 
 QColor GraphItem::color() const

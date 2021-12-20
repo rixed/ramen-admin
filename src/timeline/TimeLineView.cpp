@@ -58,6 +58,8 @@ TimeLineView::TimeLineView(
 
 void TimeLineView::updateOrCreateTimeLine(FunctionItem const *functionItem)
 {
+  QString name { functionItem->sfqName() };
+
   /* Some functions may be added before their shr is created or populated.
    * deal with them in the dataChanged slot. */
   std::shared_ptr<Function const> shr {
@@ -71,12 +73,11 @@ void TimeLineView::updateOrCreateTimeLine(FunctionItem const *functionItem)
     shr->archivedTimes };
   if (! archivedTimes || archivedTimes->empty()) {
     if (verbose)
-      qDebug() << "TimeLineView: Added function" << shr->name
+      qDebug() << "TimeLineView: Added function" << name
                << "has no archives";
     return;
   }
 
-  QString name { functionItem->fqName() };
   /* Insert a line in the form: */
   int i;
   for (i = 0; i < labels.count(); i ++) {
@@ -113,7 +114,7 @@ void TimeLineView::updateOrCreateTimeLine(FunctionItem const *functionItem)
 
 void TimeLineView::removeTimeLine(FunctionItem const *functionItem)
 {
-  QString name { functionItem->fqName() };
+  QString name { functionItem->sfqName() };
 
   for (int i = 0; i < labels.count(); i ++) {
     if (labels[i] != name) continue;

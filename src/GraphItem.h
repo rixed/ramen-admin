@@ -104,7 +104,10 @@ public:
   virtual QRectF operationRect() const = 0;
 
   void setCollapsed(bool);
-  QString fqName() const;
+
+  /* Returns "$site:$program/$function" */
+  QString sfqName() const;
+
   QColor color() const;
   qreal border() const;
   void setBorder(qreal);

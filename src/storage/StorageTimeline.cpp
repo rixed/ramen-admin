@@ -168,7 +168,7 @@ void StorageTimeline::requestQueryPlan()
 
   if (verbose)
     qDebug() << "StorageTimeline: request QueryPlan for target"
-             << functionItem->fqName() << "and response key" << *respKey;
+             << functionItem->sfqName() << "and response key" << *respKey;
 
   client->sendSet(key, req);
 }

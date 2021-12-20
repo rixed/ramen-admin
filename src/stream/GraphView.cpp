@@ -236,8 +236,8 @@ void GraphView::updateArrows()
       it++;
     } else {
       if (verbose)
-        qDebug() << "Deleting Arrow from" << it->first.first->fqName()
-                 << "to" << it->first.second->fqName();
+        qDebug() << "Deleting Arrow from" << it->first.first->sfqName()
+                 << "to" << it->first.second->sfqName();
       GraphArrow *arrow { it->second.first };
       scene.removeItem(arrow); // reclaim ownership
       delete arrow;  // should remove it from the scene etc...
@@ -253,7 +253,7 @@ void GraphView::updateArrows()
 void GraphView::relationAdded(FunctionItem const *parent, FunctionItem const *child)
 {
   if (verbose)
-    qDebug() << "Add" << parent->fqName() << "->" << child->fqName();
+    qDebug() << "Add" << parent->sfqName() << "->" << child->sfqName();
   relations.insert(std::pair<FunctionItem const *, FunctionItem const *>(parent, child));
   updateArrows();
   layoutTimer.start(layoutTimeout);
@@ -262,7 +262,7 @@ void GraphView::relationAdded(FunctionItem const *parent, FunctionItem const *ch
 void GraphView::relationRemoved(FunctionItem const *parent, FunctionItem const *child)
 {
   if (verbose)
-    qDebug() << "Del" << parent->fqName() << "->" << child->fqName();
+    qDebug() << "Del" << parent->sfqName() << "->" << child->sfqName();
   auto it { relations.find(parent) };
   if (it != relations.end()) {
     relations.erase(it);

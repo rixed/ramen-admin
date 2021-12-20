@@ -254,7 +254,6 @@ void GraphModel::reorder()
   }
 }
 
-/* FIXME: ParsedKey is now obsolete, we could use the key directly! */
 class ParsedKey {
 public:
   bool valid;
@@ -370,7 +369,7 @@ public:
 FunctionItem *GraphModel::find(QString const &site, QString const &program, QString const &function)
 {
   if (verbose)
-    qDebug() << "Look for function" << site << "/" << program << "/" << function;
+    qDebug() << "Look for function" << site << ":" << program << "/" << function;
   for (SiteItem *siteItem : sites) {
     if (siteItem->shared->name == site) {
       for (ProgramItem *programItem : siteItem->programs) {
