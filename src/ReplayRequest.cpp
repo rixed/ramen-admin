@@ -108,9 +108,6 @@ void ReplayRequest::sendRequest()
   Q_ASSERT(status == ReplayRequest::Waiting);
   status = Sent;
 
-  // Create the response key:
-  Menu::getClient()->sendNew(respKey);
-
   std::shared_ptr<dessser::gen::sync_value::t const> val {
     makeReplayRequest(site, program, function, since, until, respKey) };
 
