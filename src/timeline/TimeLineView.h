@@ -29,6 +29,7 @@ public:
   TimeLineView(GraphModel *, QWidget *parent = nullptr);
 
   void highlightRange(QString const &label, QPair<qreal, qreal> const range);
+
   void resetHighlights();
 
 protected slots:

@@ -6,7 +6,6 @@
 #include <QTreeView>
 #include <QGridLayout>
 
-#include "FunctionInfoBox.h"
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "GraphView.h"

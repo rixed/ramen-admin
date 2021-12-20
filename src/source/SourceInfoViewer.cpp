@@ -22,7 +22,7 @@ SourceInfoViewer::SourceInfoViewer(QWidget *parent) :
   AtomicWidget(parent)
 {
   layout = new QVBoxLayout;
-  QWidget *contents = new QWidget;
+  QWidget *contents { new QWidget };
   contents->setObjectName("infoViewerContents");
   contents->setLayout(layout);
   contents->setMinimumHeight(400);
@@ -68,7 +68,7 @@ bool SourceInfoViewer::setValue(
         none->setAlignment(Qt::AlignCenter);
         layout->addWidget(none);
       } else {
-        QFormLayout *paramsLayout = new QFormLayout;
+        QFormLayout *paramsLayout { new QFormLayout };
         for (auto p : compiled->default_params) {
           QLabel *l { new QLabel(raqlValToQString(*p->value)) };
           l->setWordWrap(true);
@@ -92,15 +92,17 @@ bool SourceInfoViewer::setValue(
                   (func->is_lazy ? " (lazy)" : "")) };
         functions->addTab(w, title);
         if (func->doc.length() > 0) {
-          QLabel *doc = new QLabel(QString::fromStdString(func->doc));
+          QLabel *doc { new QLabel(QString::fromStdString(func->doc)) };
           doc->setWordWrap(true);
           l->addWidget(doc);
         }
-        QLabel *retention { new QLabel(
-          tr("Retention: ") +
-          (func->retention ?
-            QStringOfRetention(**func->retention) :
-            "<i>" + tr("none") + "</i>")) };
+        QLabel *retention {
+          new QLabel(
+            tr("Retention: %1").
+            arg(
+              func->retention ?
+                QStringOfRetention(**func->retention) :
+                "<i>" + tr("none") + "</i>")) };
         retention->setWordWrap(true);
         l->addWidget(retention);
 

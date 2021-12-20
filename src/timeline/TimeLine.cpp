@@ -8,6 +8,7 @@
 #include <QTime>
 
 #include "misc.h"
+
 #include "timeline/TimeLine.h"
 
 static bool const verbose { false };

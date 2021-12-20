@@ -18,8 +18,7 @@
 
 struct TimeRange;
 
-class AbstractTimeLine : public QWidget
-{
+class AbstractTimeLine : public QWidget {
   /* FIXME: Make this work with relative times.
    * 1. Use a TimeRange instead of begin/end of time as qreal
    * 2. In paintEvent, update the endOfTime/viewPort if timeRange.relative.
