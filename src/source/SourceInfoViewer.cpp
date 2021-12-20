@@ -101,6 +101,7 @@ bool SourceInfoViewer::setValue(
           (func->retention ?
             QStringOfRetention(**func->retention) :
             "<i>" + tr("none") + "</i>")) };
+        retention->setWordWrap(true);
         l->addWidget(retention);
 
         l->addWidget(new QLabel(tr("Output Type:")));
@@ -138,6 +139,7 @@ bool SourceInfoViewer::setValue(
         QLabel *sign {
           new QLabel(
             tr("Signature: %1").arg(QString::fromStdString(func->signature))) };
+        sign->setWordWrap(true);
         l->addWidget(sign);
       }
       layout->addWidget(new QLabel("<b>" + tr("Functions") + "</b>"));
