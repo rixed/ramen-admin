@@ -1,3 +1,4 @@
+#include <cmath>
 #include <QDebug>
 #include <QEnterEvent>
 #include <QLineF>
@@ -236,7 +237,11 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event)
   for (QPair<qreal, qreal> const range : highlights) {
     qreal const xStart { toPixel(range.first) };
     qreal const xStop { toPixel(range.second) };
-    painter.drawRect(QRectF { xStart, 0., xStop - xStart, (qreal)height() });
+    if (verbose)
+      qDebug() << "AbstractTimeLine::paintEvent: highlighting from"
+               << xStart << "to" << xStop;
+    painter.drawRect(
+      QRectF { std::floor(xStart), 0., std::ceil(xStop - xStart), (qreal)height() });
   }
 
   if (m_withCursor && m_currentTime > m_beginOfTime) {
