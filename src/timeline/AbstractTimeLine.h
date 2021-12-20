@@ -48,6 +48,8 @@ class AbstractTimeLine : public QWidget
              NOTIFY selectionChanged)
   Q_PROPERTY(bool withCursor
              MEMBER m_withCursor)
+  Q_PROPERTY(bool drawCurrentTime
+             MEMBER m_drawCurrentTime)
   Q_PROPERTY(bool doScroll
              READ doScroll)
 
@@ -71,6 +73,7 @@ protected:
   qreal m_currentTime;
   QPair<qreal, qreal> m_selection;
   bool m_withCursor;
+  bool m_drawCurrentTime;
   bool m_doScroll;
   bool hovered;
 
@@ -80,6 +83,7 @@ public:
   AbstractTimeLine(
     qreal beginOftime, qreal endOfTime,
     bool withCursor = true,
+    bool drawCurrentTime = true,
     bool doScroll = false,
     QWidget *parent = nullptr);
 

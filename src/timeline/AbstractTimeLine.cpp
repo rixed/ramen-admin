@@ -28,6 +28,7 @@ AbstractTimeLine::AbstractTimeLine(
     m_currentTime(m_beginOfTime), // first mouse move will set this more accurately
     m_selection(noSelection),
     m_withCursor(withCursor),
+    m_drawCurrentTime(drawCurrentTime),
     m_doScroll(doScroll),
     hovered(false)
 {
@@ -250,6 +251,12 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event)
     painter.setBrush(Qt::NoBrush);
     qreal const x { toPixel(m_currentTime) };
     painter.drawLine(QLineF { x, 0, x, (qreal)height() });
+    if (m_drawCurrentTime) {
+      QString const curTime { stringOfDate(m_currentTime) };
+      painter.rotate(-90); // clockwise
+      painter.drawText(-height(), x, curTime);
+      painter.rotate(90);
+    }
   }
 }
 
