@@ -19,8 +19,8 @@
 static bool const verbose { false };
 
 AbstractTimeLine::AbstractTimeLine(
-    qreal beginOftime, qreal endOfTime,
-    bool withCursor, bool doScroll, QWidget *parent)
+  qreal beginOftime, qreal endOfTime,
+  bool withCursor, bool drawCurrentTime, bool doScroll, QWidget *parent)
   : QWidget(parent),
     m_beginOfTime(std::min(beginOftime, endOfTime)),
     m_endOfTime(std::max(beginOftime, endOfTime)),

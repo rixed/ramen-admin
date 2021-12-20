@@ -368,12 +368,12 @@ ConfTreeItem *ConfTreeWidget::findItem(QString const &name, ConfTreeItem *parent
   if (parent) {
     // TODO: once sorted, early exit (which also tells where to insert the new one)
     for (int c = 0; c < parent->childCount(); c ++) {
-      ConfTreeItem *item = dynamic_cast<ConfTreeItem *>(parent->child(c));
+      ConfTreeItem *item { dynamic_cast<ConfTreeItem *>(parent->child(c)) };
       if (item->name == name) return item;
     }
   } else {
     for (int c = 0; c < topLevelItemCount(); c ++) {
-      ConfTreeItem *item = dynamic_cast<ConfTreeItem *>(topLevelItem(c));
+      ConfTreeItem *item { dynamic_cast<ConfTreeItem *>(topLevelItem(c)) };
       if (item->name == name) return item;
     }
   }
@@ -450,14 +450,14 @@ void ConfTreeWidget::deleteClicked(
 void ConfTreeWidget::openViewWindow(
   std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
-  QDialog *editor = new ConfTreeEditorDialog(key, false);
+  QDialog *editor { new ConfTreeEditorDialog(key, false) };
   editor->show();
 }
 
 void ConfTreeWidget::openEditorWindow(
   std::shared_ptr<dessser::gen::sync_key::t const> key)
 {
-  QDialog *editor = new ConfTreeEditorDialog(key, true);
+  QDialog *editor { new ConfTreeEditorDialog(key, true) };
   editor->show();
 }
 
@@ -466,12 +466,12 @@ QWidget *ConfTreeWidget::actionWidget(
   bool canWrite, bool canDel)
 {
   // The widget for the "Actions" column:
-  QWidget *widget = new QWidget;
-  QHBoxLayout *layout = new QHBoxLayout;
+  QWidget *widget { new QWidget };
+  QHBoxLayout *layout { new QHBoxLayout };
   layout->setContentsMargins(0, 0, 0, 0);
   widget->setLayout(layout);
 
-  QPushButton *viewButton = new QPushButton(tr("View"));
+  QPushButton *viewButton { new QPushButton(tr("View")) };
   layout->addWidget(viewButton);
   connect(viewButton, &QPushButton::clicked,
           this, [this, key](bool) {
@@ -479,7 +479,7 @@ QWidget *ConfTreeWidget::actionWidget(
   });
 
   if (canWrite) {
-    QPushButton *editButton = new QPushButton(tr("Edit"));
+    QPushButton *editButton { new QPushButton(tr("Edit")) };
     layout->addWidget(editButton);
     connect(editButton, &QPushButton::clicked,
             this, [this, key](bool) {
@@ -488,7 +488,7 @@ QWidget *ConfTreeWidget::actionWidget(
   }
 
   if (canDel) {
-    QPushButton *delButton = new QPushButton(tr("Delete"));
+    QPushButton *delButton { new QPushButton(tr("Delete")) };
     layout->addWidget(delButton);
     connect(delButton, &QPushButton::clicked,
             this, [this, key](bool) {
@@ -502,10 +502,10 @@ QWidget *ConfTreeWidget::actionWidget(
 /* Same height as the actionWidget, but invisible: */
 QWidget *ConfTreeWidget::fillerWidget()
 {
-  QWidget *widget = new QWidget;
-  QHBoxLayout *layout = new QHBoxLayout;
+  QWidget *widget { new QWidget };
+  QHBoxLayout *layout { new QHBoxLayout };
   layout->setContentsMargins(0, 0, 0, 0);
-  QPushButton *nopButton = new QPushButton;
+  QPushButton *nopButton { new QPushButton };
   nopButton->setFlat(true);
   nopButton->setEnabled(false);
   layout->addWidget(nopButton);
@@ -523,11 +523,11 @@ void ConfTreeWidget::createItemByNames(
   ConfTreeItem *parent,
   bool topLevel)
 {
-  int const len = names.count();
+  int const len { names.count() };
   Q_ASSERT(len >= 1);
-  QString const name = names.takeFirst();
+  QString const name { names.takeFirst() };
 
-  ConfTreeItem *item = findItem(name, parent);
+  ConfTreeItem *item { findItem(name, parent) };
   if (item) {
     if (len > 1)
       createItemByNames(names, key, kv, item);
@@ -589,7 +589,7 @@ void ConfTreeWidget::createItem(
 
 void ConfTreeWidget::activateItem(QTreeWidgetItem *item_, int)
 {
-  ConfTreeItem *item = dynamic_cast<ConfTreeItem *>(item_);
+  ConfTreeItem *item { dynamic_cast<ConfTreeItem *>(item_) };
   if (! item) {
     qDebug() << "Activated an item that's not a ConfTreeItem!?";
     return;
@@ -612,11 +612,11 @@ ConfTreeItem *ConfTreeWidget::itemOfKey(
 ConfTreeItem *ConfTreeWidget::findItemByNames(
   QStringList &names, ConfTreeItem *parent)
 {
-  int const len = names.count();
+  int const len { names.count() };
   Q_ASSERT(len >= 1);
-  QString const name = names.takeFirst();
+  QString const name { names.takeFirst() };
 
-  ConfTreeItem *item = findItem(name, parent);
+  ConfTreeItem *item { findItem(name, parent) };
   if (item) {
     if (1 == len) return item;
     return findItemByNames(names, item);

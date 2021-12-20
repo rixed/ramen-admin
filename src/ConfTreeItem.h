@@ -25,6 +25,7 @@ public:
    * Therefore we build yet another representation of the tree of keys as a
    * simple tree of strings. */
   QString const name;
+
   std::shared_ptr<dessser::gen::sync_key::t const> key;
 
   ConfTreeItem(
