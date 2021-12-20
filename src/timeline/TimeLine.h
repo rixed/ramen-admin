@@ -5,6 +5,8 @@
  */
 #include "timeline/AbstractTimeLine.h"
 
+class QPainter;
+
 class TimeLine : public AbstractTimeLine
 {
   Q_OBJECT
@@ -24,7 +26,14 @@ public:
   QSize sizeHint() const override { return QSize(250, 40); }
 
 protected:
-  void paintEvent(QPaintEvent *event) override;
+  void paintTick(QPainter &, qreal const, int const ticksHeight) const;
+
+  void paintEvent(QPaintEvent *) override;
+
+  void paintLabel(
+    QPainter &, QFont const &, QFont const &,
+    qreal const, QDateTime *lastTime,
+    int const ticksHeight, int const labelsHeight) const;
 
 private:
   TicksPosition ticksPosition;

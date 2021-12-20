@@ -101,6 +101,66 @@ static QVector<qreal> getTicks(int numSteps, QPair<qreal, qreal> const &range)
   return res;
 }
 
+void TimeLine::paintTick(QPainter &painter, qreal const t, int const ticksHeight) const
+{
+  qreal const x { toPixel(t) };
+  if (ticksPosition & TicksBottom) {
+    qreal const y1 { qreal(height()) };
+    qreal const y0 { qreal(y1 - ticksHeight) };
+    painter.drawLine(QLineF { x, y0, x, y1 });
+  }
+  if (ticksPosition & TicksTop) {
+    qreal const y0 { 0. };
+    qreal const y1 { qreal(y0 + ticksHeight) };
+    painter.drawLine(QLineF { x, y0, x, y1 });
+  }
+}
+
+void TimeLine::paintLabel(
+  QPainter &painter, QFont const &smallTimeFont, QFont const &largeTimeFont,
+  qreal const t, QDateTime *lastTime, int const ticksHeight, int const labelsHeight) const
+{
+  qreal const x0 { toPixel(t) };
+  QDateTime time { QDateTime::fromSecsSinceEpoch(t) };
+  bool const printDate {
+    !lastTime || !lastTime->isValid() || lastTime->date() != time.date() };
+  bool const printTime { time.time() != QTime(0, 0) };
+  if (lastTime) *lastTime = time;
+
+  qreal const h {
+    printDate && printTime ? qreal(labelsHeight)/2. : qreal(labelsHeight) };
+  qreal y0 { qreal(ticksHeight + 1) };
+
+  auto print {
+    [&](bool small, int x, int y, int h, QString const &str)
+    {
+      painter.setFont(small ? smallTimeFont : largeTimeFont);
+      painter.drawText(
+        QRect(x, y, 1, h),
+        Qt::AlignCenter | Qt::TextSingleLine | Qt::TextDontClip,
+        str);
+    } };
+
+  if (ticksPosition & TicksTop) {
+    // First the time:
+    if (printTime) {
+      print(printDate, x0, y0, h, time.time().toString());
+      y0 += h;
+    }
+    if (printDate) {
+      print(printTime, x0, y0, h, time.date().toString());
+    }
+  } else {
+    // First the date:
+    if (printDate) {
+      print(printTime, x0, y0, h, time.date().toString());
+      y0 += h;
+    }
+    if (printTime) {
+      print(printDate, x0, y0, h, time.time().toString());
+    }
+  }
+}
 
 void TimeLine::paintEvent(QPaintEvent *event)
 {
@@ -119,17 +179,7 @@ void TimeLine::paintEvent(QPaintEvent *event)
 
   painter.setPen(ticksColor);
   for (qreal t : ticks) {
-    qreal const x { toPixel(t) };
-    if (ticksPosition & TicksBottom) {
-      qreal const y1 { qreal(height()) };
-      qreal const y0 { qreal(y1 - ticksHeight) };
-      painter.drawLine(QLineF { x, y0, x, y1 });
-    }
-    if (ticksPosition & TicksTop) {
-      qreal const y0 { 0. };
-      qreal const y1 { qreal(y0 + ticksHeight) };
-      painter.drawLine(QLineF { x, y0, x, y1 });
-    }
+    paintTick(painter, t, ticksHeight);
   }
 
   // Once again for the tick labels
@@ -139,47 +189,16 @@ void TimeLine::paintEvent(QPaintEvent *event)
   QFont const smallDateFont { "Arial", 9 * labelsHeight / 32 };
   QFont const largeDateFont { "Arial", 9 * labelsHeight / 32 };
 
-  auto print {
-    [&](bool small, int x, int y, int h, QString const &str)
-    {
-      painter.setFont(small ? smallTimeFont : largeTimeFont);
-      painter.drawText(
-        QRect(x, y, 1, h),
-        Qt::AlignCenter | Qt::TextSingleLine | Qt::TextDontClip,
-        str);
-    } };
-
   QDateTime lastTime;
   for (qreal t : ticks) {
-    qreal const x0 { toPixel(t) };
-    QDateTime time { QDateTime::fromSecsSinceEpoch(t) };
-    bool const printDate {
-      !lastTime.isValid() || lastTime.date() != time.date() };
-    bool const printTime { time.time() != QTime(0, 0) };
-    lastTime = time;
-
-    qreal const h {
-      printDate && printTime ? qreal(labelsHeight)/2. : qreal(labelsHeight) };
-    qreal y0 { qreal(ticksHeight + 1) };
-
-    if (ticksPosition & TicksTop) {
-      // First the time:
-      if (printTime) {
-        print(printDate, x0, y0, h, time.time().toString());
-        y0 += h;
-      }
-      if (printDate) {
-        print(printTime, x0, y0, h, time.date().toString());
-      }
-    } else {
-      // First the date:
-      if (printDate) {
-        print(printTime, x0, y0, h, time.date().toString());
-        y0 += h;
-      }
-      if (printTime) {
-        print(printDate, x0, y0, h, time.time().toString());
-      }
-    }
+    paintLabel(painter, smallTimeFont, largeTimeFont, t, &lastTime,
+               ticksHeight, labelsHeight);
   }
+
+  // And the current time:
+  qreal t { currentTime() };
+  painter.setPen(AbstractTimeLine::cursorColor);
+  paintTick(painter, t, ticksHeight);
+  paintLabel(painter, smallTimeFont, largeTimeFont, t, nullptr,
+             ticksHeight, labelsHeight);
 }

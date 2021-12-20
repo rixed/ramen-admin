@@ -18,9 +18,11 @@
 
 static bool const verbose { false };
 
+QColor const AbstractTimeLine::cursorColor { "orange" };
+
 AbstractTimeLine::AbstractTimeLine(
   qreal beginOftime, qreal endOfTime,
-  bool withCursor, bool drawCurrentTime, bool doScroll, QWidget *parent)
+  bool withCursor, bool doScroll, QWidget *parent)
   : QWidget(parent),
     m_beginOfTime(std::min(beginOftime, endOfTime)),
     m_endOfTime(std::max(beginOftime, endOfTime)),
@@ -28,7 +30,6 @@ AbstractTimeLine::AbstractTimeLine(
     m_currentTime(m_beginOfTime), // first mouse move will set this more accurately
     m_selection(noSelection),
     m_withCursor(withCursor),
-    m_drawCurrentTime(drawCurrentTime),
     m_doScroll(doScroll),
     hovered(false)
 {
@@ -246,17 +247,10 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event)
   }
 
   if (m_withCursor && m_currentTime > m_beginOfTime) {
-    static QColor const cursorColor { "orange" };
     painter.setPen(cursorColor);
     painter.setBrush(Qt::NoBrush);
     qreal const x { toPixel(m_currentTime) };
     painter.drawLine(QLineF { x, 0, x, (qreal)height() });
-    if (m_drawCurrentTime) {
-      QString const curTime { stringOfDate(m_currentTime) };
-      painter.rotate(-90); // clockwise
-      painter.drawText(-height(), x, curTime);
-      painter.rotate(90);
-    }
   }
 }
 
