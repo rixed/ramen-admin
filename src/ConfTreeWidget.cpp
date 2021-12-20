@@ -427,9 +427,25 @@ void ConfTreeWidget::deleteItem(
 {
   if (betterSkipKey(*key)) return;
 
-  /* Note: No need to emitDataChanged on the parent
-   * Note2: QTreeWidgetItem objects are not QObject so delete for real: */
-  delete itemOfKey(key);
+  QStringList names { treeNamesOfSyncKey(*key) };
+  if (verbose)
+    qDebug() << "ConfTreeWidget::deleteItem: deleting names" << names;
+
+  Q_ASSERT(names.length() >= 1);
+
+  /* Delete leaf item as well as all intermediary items that are now empty: */
+  do {
+    ConfTreeItem *item { findItemByNames(names) };
+    Q_ASSERT(item);
+    if (verbose)
+      qDebug() << "ConfTreeWidget::deleteItem:" << item->name
+               << "has" << item->childCount() << "children";
+    if (item->childCount() > 0) break;
+    /* Note: No need to emitDataChanged on the parent
+     * Note2: QTreeWidgetItem objects are not QObject so delete for real: */
+    delete item;
+    names.removeLast();
+  } while (names.length() > 0);
 }
 
 void ConfTreeWidget::deleteClicked(
@@ -517,7 +533,8 @@ QWidget *ConfTreeWidget::fillerWidget()
  * and return the leaf one.
  * Will not create it if kv is null. */
 void ConfTreeWidget::createItemByNames(
-  QStringList &names,
+  // Takes a copy of [names] because it's going to be mnodified
+  QStringList names,
   std::shared_ptr<dessser::gen::sync_key::t const> key,
   KValue const &kv,
   ConfTreeItem *parent,
@@ -610,7 +627,8 @@ ConfTreeItem *ConfTreeWidget::itemOfKey(
 }
 
 ConfTreeItem *ConfTreeWidget::findItemByNames(
-  QStringList &names, ConfTreeItem *parent)
+  // Takes a copy of [names] because it's going to be modified
+  QStringList names, ConfTreeItem *parent)
 {
   int const len { names.count() };
   Q_ASSERT(len >= 1);

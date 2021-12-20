@@ -23,10 +23,10 @@ class ConfTreeWidget : public QTreeWidget
   Q_OBJECT
 
   void createItemByNames(
-    QStringList &,
+    QStringList names,
     std::shared_ptr<dessser::gen::sync_key::t const>,
     KValue const &, ConfTreeItem * = nullptr, bool = false);
-  ConfTreeItem *findItemByNames(QStringList &names, ConfTreeItem * = nullptr);
+  ConfTreeItem *findItemByNames(QStringList names, ConfTreeItem * = nullptr);
 
   ConfTreeItem *itemOfKey(std::shared_ptr<dessser::gen::sync_key::t const>);
   ConfTreeItem *findItem(QString const &name, ConfTreeItem *parent) const;
