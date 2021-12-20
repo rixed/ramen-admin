@@ -35,6 +35,7 @@ class ReplayRequest : public QObject
   std::string const site, program, function;
 
   void receiveValue(dessser::gen::sync_key::t const &, KValue const &);
+
   void endReplay(dessser::gen::sync_key::t const &, KValue const &);
 
 public:
@@ -47,6 +48,7 @@ public:
   std::shared_ptr<dessser::gen::sync_key::t const> respKey;
 
   std::shared_ptr<dessser::gen::raql_type::t const> type;
+
   std::shared_ptr<EventTime const> eventTime;
 
   enum Status { Waiting, Sent, Completed } status;

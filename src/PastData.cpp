@@ -5,6 +5,7 @@
 #include "desssergen/event_time.h"
 #include "desssergen/raql_type.h"
 #include "desssergen/raql_value.h"
+#include "misc.h"
 #include "misc_dessser.h"
 #include "ReplayRequest.h"
 
@@ -14,8 +15,9 @@ static bool const verbose { false };
 
 static int const maxInFlight { 3 };
 
-/* A bit arbitrary, should depend on the tuple density: */
-static double const minGapBetweenReplays(10.);
+/* Max number of seconds between two time ranges for them being merged in a single
+ * ReplayRequest. A bit arbitrary, should depend on the tuple density: */
+static double const minGapBetweenReplays { 10. };
 
 PastData::PastData(std::string const &site_, std::string const &program_,
                    std::string const &function_,
@@ -73,8 +75,8 @@ bool PastData::merge(
   }
 
   if (verbose)
-    qDebug() << qSetRealNumberPrecision(13) << "PastData: Enlarging ReplayRequest"
-             << *r.respKey << "to" << r.since << r.until;
+    qDebug() << "PastData: Enlarging ReplayRequest" << *r.respKey << "to"
+             << stringOfDate(r.since) << stringOfDate(r.until);
 
   check();
   return true;
@@ -87,6 +89,8 @@ bool PastData::insert(
   std::list<ReplayRequest>::iterator it, double since, double until,
   bool canPostpone)
 {
+  /* TODO: if the duration is tiny (TBD), ignores the request and returns true */
+
   if (numInFlight >= maxInFlight) {
     if (canPostpone) {
       if (verbose)
@@ -103,8 +107,7 @@ bool PastData::insert(
 
     if (verbose)
       qDebug() << "PastData: Enqueuing a new ReplayRequest (since="
-               << qSetRealNumberPrecision(13) << since
-               << ", until=" << until << ")";
+               << stringOfDate(since) << ", until=" << stringOfDate(until) << ")";
 
     std::list<ReplayRequest>::iterator const &emplaced {
       replayRequests.emplace(it,

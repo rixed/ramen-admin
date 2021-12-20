@@ -1,6 +1,6 @@
 #ifndef GROWINGTEXTEDIT_H_200405
 #define GROWINGTEXTEDIT_H_200405
-/* A QTextEdit which (prefered) size grows with its content, inspired from
+/* A QTextEdit which (preferred) size grows with its content, inspired from
  * https://stackoverflow.com/a/47711588 */
 #include <QTextEdit>
 

@@ -85,8 +85,9 @@ void TimeLineView::updateOrCreateTimeLine(FunctionItem const *functionItem)
     if (c == 0) {
       if (verbose)
         qDebug() << "TimeLineView: Added function already present:" << name;
-      BinaryHeatLine *heatLine = static_cast<BinaryHeatLine *>(
-        formLayout->itemAt(i + 1, QFormLayout::FieldRole)->widget());
+      BinaryHeatLine *heatLine {
+        static_cast<BinaryHeatLine *>(
+          formLayout->itemAt(i + 1, QFormLayout::FieldRole)->widget()) };
       heatLine->setArchivedTimes(*archivedTimes);
       return;
     } else if (c < 0) {
@@ -138,8 +139,9 @@ void TimeLineView::highlightRange(QString const &label, QPair<qreal, qreal> cons
 
     if (verbose)
       qDebug() << "TimeLineView: Highlighting function" << label;
-    BinaryHeatLine *heatLine = static_cast<BinaryHeatLine *>(
-      formLayout->itemAt(i + 1, QFormLayout::FieldRole)->widget());
+    BinaryHeatLine *heatLine {
+      static_cast<BinaryHeatLine *>(
+        formLayout->itemAt(i + 1, QFormLayout::FieldRole)->widget()) };
     heatLine->highlightRange(range);
 
     return;

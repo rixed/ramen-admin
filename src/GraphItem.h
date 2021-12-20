@@ -109,7 +109,9 @@ public:
   QString sfqName() const;
 
   QColor color() const;
+
   qreal border() const;
+
   void setBorder(qreal);
 };
 

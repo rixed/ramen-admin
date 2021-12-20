@@ -81,7 +81,7 @@ public:
            double maxTime_ = NAN,
            QObject *parent = nullptr);
 
-  /* Return true if the query can either be sent or postponed: */
+  /* Returns true if the query can either be sent or postponed: */
   bool request(double since, double until, bool canPostpone = true);
 
   /* If onePast, also include the points before/after the requested time
