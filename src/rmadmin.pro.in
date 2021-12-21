@@ -190,9 +190,9 @@ HEADERS += \
   TailModel.h \
   TailTable.h \
   TailTableDialog.h \
-  ProcessesWidget.h \
-  ProcessesWidgetProxy.h \
-  ProcessesDialog.h \
+  processes/ProcessesWidget.h \
+  processes/ProcessesWidgetProxy.h \
+  processes/ProcessesDialog.h \
   source/FilterEditor.h \
   source/AlertInfoEditor.h \
   source/SourceCloneDialog.h \
@@ -399,9 +399,9 @@ SOURCES += \
   TailModel.cpp \
   TailTable.cpp \
   TailTableDialog.cpp \
-  ProcessesWidget.cpp \
-  ProcessesWidgetProxy.cpp \
-  ProcessesDialog.cpp \
+  processes/ProcessesWidget.cpp \
+  processes/ProcessesWidgetProxy.cpp \
+  processes/ProcessesDialog.cpp \
   source/FilterEditor.cpp \
   source/AlertInfoEditor.cpp \
   source/SourceCloneDialog.cpp \

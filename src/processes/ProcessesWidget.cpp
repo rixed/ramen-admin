@@ -23,7 +23,7 @@
 #include "GraphModel.h"
 #include "Menu.h"
 #include "misc_dessser.h"
-#include "ProcessesWidgetProxy.h"
+#include "processes/ProcessesWidgetProxy.h"
 #include "ProgramItem.h"
 #include "Resources.h"
 #include "RCEditorDialog.h"
@@ -31,7 +31,7 @@
 #include "TailTableDialog.h"
 #include "UserIdentity.h"
 
-#include "ProcessesWidget.h"
+#include "processes/ProcessesWidget.h"
 
 static bool const verbose { false };
 

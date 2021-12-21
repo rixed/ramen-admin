@@ -7,10 +7,10 @@
 #include <QTreeView>
 
 #include "GraphModel.h"
-#include "ProcessesWidget.h"
-#include "ProcessesWidgetProxy.h"
+#include "processes/ProcessesWidget.h"
+#include "processes/ProcessesWidgetProxy.h"
 
-#include "ProcessesDialog.h"
+#include "processes/ProcessesDialog.h"
 
 ProcessesDialog::ProcessesDialog(QWidget *parent) :
   SavedWindow("ProcessesWindow", tr("Processes List"), true, parent)

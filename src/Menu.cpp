@@ -20,7 +20,7 @@
 #include "source/NewProgramDialog.h"
 #include "source/NewSourceDialog.h"
 #include "stream/OperationsWin.h"
-#include "ProcessesDialog.h"
+#include "processes/ProcessesDialog.h"
 #include "RCEditorDialog.h"
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"

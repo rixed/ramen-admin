@@ -6,9 +6,10 @@
 #include "SiteItem.h"
 #include "ProgramItem.h"
 #include "FunctionItem.h"
-#include "ProcessesWidgetProxy.h"
 
-static bool const verbose(false);
+#include "processes/ProcessesWidgetProxy.h"
+
+static bool const verbose { false };
 
 ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent) :
   QSortFilterProxyModel(parent),
@@ -86,11 +87,11 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
 
   /* For now keep it simple: Accept all sites and programs, filter only
    * function names. */
-  GraphItem const *parentPtr =
-    static_cast<GraphItem const *>(sourceParent.internalPointer());
+  GraphItem const *parentPtr {
+    static_cast<GraphItem const *>(sourceParent.internalPointer()) };
 
-  SiteItem const *parentSite =
-    dynamic_cast<SiteItem const *>(parentPtr);
+  SiteItem const *parentSite {
+    dynamic_cast<SiteItem const *>(parentPtr) };
   if (parentSite) {
     /* If that program is running only top-halves or non-working functions,
      * then also filter it. There is a vicious consequence though: if it's
@@ -113,7 +114,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
     Q_ASSERT((size_t)sourceRow < parentSite->programs.size());
     if (verbose)
       qDebug() << "Filtering program #" << sourceRow << "?";
-    ProgramItem const *program = parentSite->programs[sourceRow];
+    ProgramItem const *program { parentSite->programs[sourceRow] };
 
     // Filter entire programs if all their functions are filtered:
     if (0 == program->functions.size()) {
@@ -122,7 +123,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
                  << program->shared->name;
       return false;
     }
-    bool accepted = false;
+    bool accepted { false };
     for (FunctionItem const *function : program->functions) {
       if (filterAcceptsFunction(*function)) {
         accepted = true;
@@ -138,8 +139,8 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
     return true;
   }
 
-  ProgramItem const *parentProgram =
-    dynamic_cast<ProgramItem const *>(parentPtr);
+  ProgramItem const *parentProgram {
+    dynamic_cast<ProgramItem const *>(parentPtr) };
   if (! parentProgram) {
     qCritical() << "Filtering the rows of a function?!";
     return false;
@@ -148,16 +149,16 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
   /* When the parent is a program, build the FQ name of the function
    * and match that: */
   Q_ASSERT((size_t)sourceRow < parentProgram->functions.size());
-  FunctionItem const *function = parentProgram->functions[sourceRow];
+  FunctionItem const *function { parentProgram->functions[sourceRow] };
 
   if (! filterAcceptsFunction(*function)) return false;
 
-  SiteItem const *site =
-    static_cast<SiteItem const *>(parentProgram->treeParent);
+  SiteItem const *site {
+    static_cast<SiteItem const *>(parentProgram->treeParent) };
 
-  QString const fq(site->shared->name + ":" +
-                   parentProgram->shared->name + "/" +
-                   function->shared->name);
+  QString const fq { site->shared->name + ":" +
+                     parentProgram->shared->name + "/" +
+                     function->shared->name };
   return fq.contains(filterRegExp());
 }
 
