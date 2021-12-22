@@ -151,28 +151,31 @@ else
 EXTRA_ICON_FILES =
 endif
 
+MANUAL_CPP_SOURCES = \
+  $(wildcard src/*.cpp) \
+  $(wildcard src/*.h) \
+  $(wildcard src/chart/*.cpp) \
+  $(wildcard src/chart/*.h) \
+  $(wildcard src/dashboard/*.cpp) \
+  $(wildcard src/dashboard/*.h) \
+  $(wildcard src/source/*.cpp) \
+  $(wildcard src/source/*.h) \
+  $(wildcard src/timeline/*.cpp) \
+  $(wildcard src/timeline/*.h) \
+  $(wildcard src/storage/*.cpp) \
+  $(wildcard src/storage/*.h) \
+  $(wildcard src/alerting/*.cpp) \
+  $(wildcard src/alerting/*.h) \
+  $(wildcard src/stream/*.cpp) \
+  $(wildcard src/stream/*.h) \
+  $(wildcard src/ps/*.cpp) \
+  $(wildcard src/ps/*.h)
+
 src/RmAdmin: \
 		src/rmadmin.ico \
 		$(EXTRA_ICON_FILES) \
 		src/rmadmin.pro \
-		$(wildcard src/*.cpp) \
-		$(wildcard src/*.h) \
-		$(wildcard src/chart/*.cpp) \
-		$(wildcard src/chart/*.h) \
-		$(wildcard src/dashboard/*.cpp) \
-		$(wildcard src/dashboard/*.h) \
-		$(wildcard src/source/*.cpp) \
-		$(wildcard src/source/*.h) \
-		$(wildcard src/timeline/*.cpp) \
-		$(wildcard src/timeline/*.h) \
-		$(wildcard src/storage/*.cpp) \
-		$(wildcard src/storage/*.h) \
-		$(wildcard src/alerting/*.cpp) \
-		$(wildcard src/alerting/*.h) \
-		$(wildcard src/stream/*.cpp) \
-		$(wildcard src/stream/*.h) \
-		$(wildcard src/ps/*.cpp) \
-		$(wildcard src/ps/*.h) \
+		$(MANUAL_CPP_SOURCES) \
 		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
 		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
 	@echo 'Generating RmAdmin $@'
@@ -247,6 +250,10 @@ src/RmAdmin.$(VERSION).AppImage: \
 	@echo 'Generating Linux AppImage into $@'
 	OUTPUT=$@ $(LINUXDEPLOY) --appdir=src/AppDir --plugin qt --output appimage
 
+#
+# Extra
+#
+
 coverity:
 	@echo 'Building and uploading coverity analysis'
 	@test `whoami` = rixed
@@ -274,7 +281,7 @@ check-crypto: tests/test_crypto
 	tests/test_crypto
 
 check-qt:
-	cd tests && /usr/bin/qmake
+	cd tests && @QMAKE@
 	$(MAKE) -C tests
 	tests/test
 
