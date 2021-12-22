@@ -21,9 +21,9 @@ static bool const verbose { false };
 
 GraphModel *GraphModel::globalGraphModel;
 
-GraphModel::GraphModel(GraphViewSettings const &settings_, QObject *parent) :
-  QAbstractItemModel(parent),
-  settings(settings_)
+GraphModel::GraphModel(GraphViewSettings const &settings_, QObject *parent)
+  : QAbstractItemModel(parent),
+    settings(settings_)
 {
   connect(kvs.get(), &KVStore::keyChanged,
           this, &GraphModel::onChange);
@@ -408,8 +408,8 @@ struct PendingAddParent {
   FunctionItem *child;
   QString const site, program, function;
 
-  PendingAddParent(FunctionItem *child_, QString const &site_, QString const &program_, QString const function_) :
-    child(child_), site(site_), program(program_), function(function_) {}
+  PendingAddParent(FunctionItem *child_, QString const &site_, QString const &program_, QString const function_)
+    : child(child_), site(site_), program(program_), function(function_) {}
 };
 static std::list<PendingAddParent> pendingAddParents;
 

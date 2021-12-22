@@ -39,8 +39,8 @@ static bool const verbose { false };
  * Now for the actual Processes list widget:
  */
 
-ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent) :
-  QWidget(parent)
+ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent)
+  : QWidget(parent)
 {
   /* Process list is large so the we overloaded the sizeHint and must
    * now explain how it's meant to be used: */
@@ -125,6 +125,7 @@ ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent) :
 
   /* Special signal when a worker changed, since that affects top-halfness
    * and working-ness: */
+  // TODO: use dataChanged and filter on workers after #72 is fixed
   connect(graphModel, &GraphModel::workerChanged,
           proxyModel, &ProcessesWidgetProxy::invalidate);
 

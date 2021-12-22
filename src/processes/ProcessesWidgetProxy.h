@@ -9,8 +9,7 @@
 class FunctionItem;
 class QModelIndex;
 
-class ProcessesWidgetProxy : public QSortFilterProxyModel
-{
+class ProcessesWidgetProxy : public QSortFilterProxyModel {
   Q_OBJECT
 
   bool includeFinished, includeUnused, includeDisabled, includeNonRunning,

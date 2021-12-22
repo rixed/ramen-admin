@@ -14,7 +14,7 @@
 
 #include "NamesTree.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 NamesTree *NamesTree::globalNamesTree;
 NamesTree *NamesTree::globalNamesTreeAnySites;
@@ -52,17 +52,17 @@ void NamesTree::onChange(QList<ConfChange> const &changes)
 std::pair<std::string, std::string> NamesTree::pathOfIndex(
   QModelIndex const &index) const
 {
-  std::pair<std::string, std::string> ret; // { std::string(), std::string() };
+  std::pair<std::string, std::string> ret;
 
   if (! index.isValid()) return ret;
 
-  ConfSubTree *s = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *s { static_cast<ConfSubTree *>(index.internalPointer()) };
 
   if (!s->isTerm() && verbose)
     qWarning() << s->name << "is not a terminal yet is on term position";
 
   while (s != root) {
-    std::string *n = s->isTerm() ? &ret.second : &ret.first;
+    std::string *n { s->isTerm() ? &ret.second : &ret.first };
     if (! n->empty()) n->insert(0, "/");
     n->insert(0, s->name.toStdString());
     s = s->parent;
@@ -136,9 +136,9 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
   std::shared_ptr<dessser::gen::source_info::t const> sourceInfos;
 
   kvs->lock.lock_shared();
-  auto it =
+  auto it {
     kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
-      &infoKey, /* No del */[](dessser::gen::sync_key::t const *){}));
+      &infoKey, /* No del */[](dessser::gen::sync_key::t const *){})) };
   if (it != kvs->map.end()) {
     std::shared_ptr<dessser::gen::sync_value::t const> v { it->second.val };
     if (v->index() == dessser::gen::sync_value::SourceInfo) [[likely]] {
@@ -264,7 +264,7 @@ NamesCompleter::NamesCompleter(
 QStringList NamesCompleter::splitPath(QString const &path_) const
 {
   QString path(path_);
-  QAbstractItemModel const *mod = model();
+  QAbstractItemModel const *mod { model() };
 
   for (QModelIndex i = newRoot; i.isValid(); i = mod->parent(i)) {
     if (! path.isEmpty()) path.prepend('/');
@@ -284,13 +284,13 @@ QString NamesCompleter::pathFromIndex(QModelIndex const &index) const
     return QString(); // Path from model root
   }
 
-  ConfSubTree *tree = static_cast<ConfSubTree *>(index.internalPointer());
+  ConfSubTree *tree { static_cast<ConfSubTree *>(index.internalPointer()) };
 
   QString ret(tree->name);
 
-  ConfSubTree *root =
+  ConfSubTree *root {
     newRoot.isValid() ?
-      static_cast<ConfSubTree *>(QModelIndex(newRoot).internalPointer()) : nullptr;
+      static_cast<ConfSubTree *>(QModelIndex(newRoot).internalPointer()) : nullptr };
   if (verbose)
     qDebug() << "NamesCompleter: root@" << root << ":" << root->name;
 

@@ -11,15 +11,15 @@
 
 static bool const verbose { false };
 
-ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent) :
-  QSortFilterProxyModel(parent),
-  /* Will be set by ProcessesDialog ctor, but avoids manipulation of
-   * uninitialized data: */
-  includeFinished(false),
-  includeUnused(false),
-  includeDisabled(false),
-  includeNonRunning(false),
-  includeTopHalves(false)
+ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent)
+  : QSortFilterProxyModel(parent),
+    /* Will be set by ProcessesDialog ctor, but avoids manipulation of
+     * uninitialized data: */
+    includeFinished(false),
+    includeUnused(false),
+    includeDisabled(false),
+    includeNonRunning(false),
+    includeTopHalves(false)
 {
   setDynamicSortFilter(false);  // Or segfaults may happen when removing workers
 }

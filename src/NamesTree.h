@@ -13,7 +13,7 @@
  * So the right QCompleter can be obtained directly from the NamesTree
  */
 #include <utility>
-#include <QAbstractItemModel>
+
 #include "ConfChange.h"
 #include "ConfTreeModel.h"
 
@@ -34,8 +34,7 @@ namespace dessser {
  * optionally, to some types of name).
  */
 
-class NamesTree : public ConfTreeModel
-{
+class NamesTree : public ConfTreeModel {
   Q_OBJECT
 
   void updateNames(dessser::gen::sync_key::t const &, KValue const &);

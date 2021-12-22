@@ -20,8 +20,7 @@ INCLUDEPATH += @DESSSER_INC@
 
 DEFINES += QT_DEPRECATED_WARNINGS
 
-# Input
-HEADERS += \
+HEADERS_DESSSERC_GEN = \
   desssergen/team_name.h \
   desssergen/field_name.h \
   desssergen/function_name.h \
@@ -78,6 +77,68 @@ HEADERS += \
   desssergen/sync_client_msg.h \
   desssergen/sync_server_msg.h \
   desssergen/sync_msg.h \
+
+SOURCES_DESSSERC_GEN = \
+  desssergen/team_name.cc \
+  desssergen/field_name.cc \
+  desssergen/function_name.cc \
+  desssergen/program_name.cc \
+  desssergen/fq_name.cc \
+  desssergen/site_name.cc \
+  desssergen/file_path.cc \
+  desssergen/src_path.cc \
+  desssergen/fieldmask.cc \
+  desssergen/fq_function_name.cc \
+  desssergen/event_time_field.cc \
+  desssergen/event_time.cc \
+  desssergen/raql_type.cc \
+  desssergen/raql_value.cc \
+  desssergen/func_ref.cc \
+  desssergen/worker.cc \
+  desssergen/units.cc \
+  desssergen/global_variable.cc \
+  desssergen/field_type.cc \
+  desssergen/program_run_parameter.cc \
+  desssergen/program_parameter.cc \
+  desssergen/rc_entry.cc \
+  desssergen/raql_variable.cc \
+  desssergen/raql_path_comp.cc \
+  desssergen/raql_top_output.cc \
+  desssergen/raql_binding_key.cc \
+  desssergen/raql_expr.cc \
+  desssergen/raql_net_protocol.cc \
+  desssergen/raql_select_field.cc \
+  desssergen/raql_flush_method.cc \
+  desssergen/raql_operation.cc \
+  desssergen/retention.cc \
+  desssergen/source_info.cc \
+  desssergen/simple_filter.cc \
+  desssergen/alert.cc \
+  desssergen/runtime_stats.cc \
+  desssergen/time_range.cc \
+  desssergen/replay.cc \
+  desssergen/replay_request.cc \
+  desssergen/replayer.cc \
+  desssergen/output_specs.cc \
+  desssergen/dashboard_widget.cc \
+  desssergen/alerting_contact.cc \
+  desssergen/alerting_notification.cc \
+  desssergen/alerting_delivery_status.cc \
+  desssergen/alerting_log.cc \
+  desssergen/alerting_inhibition.cc \
+  desssergen/sync_user_id.cc \
+  desssergen/sync_selector.cc \
+  desssergen/sync_socket.cc \
+  desssergen/sync_value.cc \
+  desssergen/sync_key.cc \
+  desssergen/sync_client_cmd.cc \
+  desssergen/sync_client_msg.cc \
+  desssergen/sync_server_msg.cc \
+  desssergen/sync_msg.cc \
+
+# Input
+HEADERS += \
+  $$HEADERS_DESSSERC_GEN \
   misc.h \
   misc_dessser.h \
   z85.h \
@@ -232,62 +293,7 @@ HEADERS += \
   stream/GraphView.h
 
 SOURCES += \
-  desssergen/team_name.cc \
-  desssergen/field_name.cc \
-  desssergen/function_name.cc \
-  desssergen/program_name.cc \
-  desssergen/fq_name.cc \
-  desssergen/site_name.cc \
-  desssergen/file_path.cc \
-  desssergen/src_path.cc \
-  desssergen/fieldmask.cc \
-  desssergen/fq_function_name.cc \
-  desssergen/event_time_field.cc \
-  desssergen/event_time.cc \
-  desssergen/raql_type.cc \
-  desssergen/raql_value.cc \
-  desssergen/func_ref.cc \
-  desssergen/worker.cc \
-  desssergen/units.cc \
-  desssergen/global_variable.cc \
-  desssergen/field_type.cc \
-  desssergen/program_run_parameter.cc \
-  desssergen/program_parameter.cc \
-  desssergen/rc_entry.cc \
-  desssergen/raql_variable.cc \
-  desssergen/raql_path_comp.cc \
-  desssergen/raql_top_output.cc \
-  desssergen/raql_binding_key.cc \
-  desssergen/raql_expr.cc \
-  desssergen/raql_net_protocol.cc \
-  desssergen/raql_select_field.cc \
-  desssergen/raql_flush_method.cc \
-  desssergen/raql_operation.cc \
-  desssergen/retention.cc \
-  desssergen/source_info.cc \
-  desssergen/simple_filter.cc \
-  desssergen/alert.cc \
-  desssergen/runtime_stats.cc \
-  desssergen/time_range.cc \
-  desssergen/replay.cc \
-  desssergen/replay_request.cc \
-  desssergen/replayer.cc \
-  desssergen/output_specs.cc \
-  desssergen/dashboard_widget.cc \
-  desssergen/alerting_contact.cc \
-  desssergen/alerting_notification.cc \
-  desssergen/alerting_delivery_status.cc \
-  desssergen/alerting_log.cc \
-  desssergen/alerting_inhibition.cc \
-  desssergen/sync_user_id.cc \
-  desssergen/sync_selector.cc \
-  desssergen/sync_socket.cc \
-  desssergen/sync_value.cc \
-  desssergen/sync_key.cc \
-  desssergen/sync_client_cmd.cc \
-  desssergen/sync_client_msg.cc \
-  desssergen/sync_server_msg.cc \
-  desssergen/sync_msg.cc \
+  $$SOURCES_DESSSERC_GEN \
   misc.cpp \
   misc_dessser.cpp \
   z85.cpp \

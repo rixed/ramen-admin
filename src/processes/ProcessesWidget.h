@@ -3,6 +3,7 @@
 #include <bitset>
 #include <memory>
 #include <QWidget>
+
 #include "GraphModel.h"
 
 /* A tree to display the sites/programs/workers. */
@@ -15,8 +16,7 @@ class QLineEdit;
 class QTimer;
 class QTreeView;
 
-class ProcessesWidget : public QWidget
-{
+class ProcessesWidget : public QWidget {
   Q_OBJECT
 
   QTimer *adjustColumnTimer;
@@ -36,18 +36,30 @@ public slots:
   /* Flag those columns as needing adjustment and start a timer: */
   void askAdjustColumnSize(
     QModelIndex const &, QModelIndex const &, QVector<int> const &);
+
   /* Do adjust column size now: */
   void adjustColumnSize();
+
   void adjustAllColumnSize();
+
   void openSearch();
+
   void changeSearch(QString const &);
+
   void closeSearch();
+
   void wantEdit(std::shared_ptr<Program const>);
+
   void wantTable(std::shared_ptr<Function>);
+
   void wantChart(std::shared_ptr<Function>);
+
   void activate(QModelIndex const &, int);
+
   void activate1(QModelIndex const &);
+
   void activate2(QModelIndex const &);
+
   void expandRows(QModelIndex const &parent, int first, int last);
 };
 

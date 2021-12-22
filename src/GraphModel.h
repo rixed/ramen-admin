@@ -3,6 +3,7 @@
 #include <vector>
 #include <QAbstractItemModel>
 #include <QPointF>
+
 #include "GraphItem.h"
 
 /* The "Graph" described here is the graph of
@@ -16,7 +17,7 @@
  * - programs, with again a name etc;
  * - function, with name, stats, worker etc.
  *
- * The "PerInstance" layer is not feature, but all information about (past)
+ * The "PerInstance" layer is not featured, but all information about (past)
  * running processes are instead stored in the function (it would not be
  * very stimulating to display a graph of instances distinct from the graph of
  * functions, at least as long as we are supposed to have one process per
@@ -49,8 +50,7 @@ namespace dessser {
   }
 }
 
-class GraphModel : public QAbstractItemModel
-{
+class GraphModel : public QAbstractItemModel {
   Q_OBJECT
 
   // So they can createIndex():
