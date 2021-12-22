@@ -21,9 +21,6 @@ DashboardTreeModel::DashboardTreeModel(QObject *parent)
    * nonetheless so add it manually: */
   QStringList names { SCRATCHPAD };
   (void)findOrCreate(root, names, QString(SCRATCHPAD));
-
-  connect(kvs.get(), &KVStore::keyChanged,
-          this, &DashboardTreeModel::onChange);
 }
 
 void DashboardTreeModel::onChange(QList<ConfChange> const &changes)

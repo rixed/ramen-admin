@@ -1,7 +1,10 @@
 #include <QDebug>
 #include <QtGlobal>
 #include <QVariant>
+
+#include "ConfChange.h"
 #include "ConfSubTree.h"
+#include "KVStore.h"
 
 #include "ConfTreeModel.h"
 
@@ -11,6 +14,9 @@ ConfTreeModel::ConfTreeModel(QObject *parent)
   : QAbstractItemModel(parent)
 {
   root = new ConfSubTree(QString(), nullptr, QString());
+
+  connect(kvs.get(), &KVStore::keyChanged,
+          this, &ConfTreeModel::onChange);
 }
 
 ConfTreeModel::~ConfTreeModel()

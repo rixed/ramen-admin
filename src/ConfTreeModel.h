@@ -3,6 +3,7 @@
 /* Abstract class to help build global treemodels from the configuration */
 #include <QAbstractItemModel>
 
+struct ConfChange;
 class ConfSubTree;
 struct KValue;
 class QStringList;
@@ -25,6 +26,9 @@ public:
   ConfTreeModel(QObject *parent = nullptr);
 
   virtual ~ConfTreeModel();
+
+  // on configuration changes:
+  virtual void onChange(QList<ConfChange> const &) = 0;
 
   void dump() const;
 

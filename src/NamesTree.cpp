@@ -29,8 +29,6 @@ NamesTree *NamesTree::globalNamesTreeAnySites;
 NamesTree::NamesTree(bool withSites_, QObject *parent)
   : ConfTreeModel(parent), withSites(withSites_)
 {
-  connect(kvs.get(), &KVStore::keyChanged,
-          this, &NamesTree::onChange);
 }
 
 void NamesTree::onChange(QList<ConfChange> const &changes)
