@@ -19,7 +19,7 @@
 
 #include "ConfTreeWidget.h"
 
-static bool const verbose { false };
+static bool const verbose { true };
 
 /* In order to display the conftree as an actual tree we need the keys to be
  * split in a meaningful way. Unfortunately, using dessser automatic conversion
@@ -579,7 +579,7 @@ void ConfTreeWidget::createItemByNames(
     shortLabel->setContentsMargins(8, 8, 8, 8);
     // Redraw/resize whenever the value is changed:
     connect(shortLabel, &AtomicWidget::valueChanged,
-            [this, key](std::shared_ptr<dessser::gen::sync_value::t const> val) {
+            this, [this, key](std::shared_ptr<dessser::gen::sync_value::t const> val) {
               editedValueChanged(key, val);
             });
     setItemWidget(item, 1, shortLabel);

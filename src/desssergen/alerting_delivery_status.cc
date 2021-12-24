@@ -98,7 +98,7 @@ inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -171,7 +171,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> )> fun28 { [&fun28](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> )> fun28 { [&](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0) {
     uint16_t id_29 { 0 };
     uint16_t id_30 { uint16_t((*p_0).index()) };
     bool id_31 { bool(id_29 == id_30) };
@@ -254,7 +254,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> 
  */
 static std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> fun59 { [&fun59](Pointer p_0) {
+  std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> fun59 { [&](Pointer p_0) {
     ::dessser::gen::alerting_delivery_status::ta97bb48ed75bbda6173555873826c8c6 id_60 { p_0.readU16Le() };
     ::dessser::gen::alerting_delivery_status::ta97bb48ed75bbda6173555873826c8c6 letpair_res_61;
     {
@@ -348,7 +348,7 @@ std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917
  */
 static std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> fun95 { [&fun95](Pointer p_0) {
+  std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f(Pointer)> fun95 { [&](Pointer p_0) {
     ::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f id_96 { of_row_binary(p_0) };
     ::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917917ea243f letpair_res_97;
     {
@@ -369,7 +369,7 @@ std::function<::dessser::gen::alerting_delivery_status::tec94fb10bb9e3d4256b8917
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> fun99 { [&fun99](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_delivery_status::t> ,Pointer)> fun99 { [&](std::shared_ptr<::dessser::gen::alerting_delivery_status::t>  p_0, Pointer p_1) {
     Pointer id_100 { to_row_binary(p_0, p_1) };
     return id_100;
   }

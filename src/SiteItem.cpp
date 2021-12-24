@@ -15,7 +15,7 @@ SiteItem::SiteItem(
   setZValue(1);
 }
 
-void SiteItem::reorder(GraphModel const *model)
+void SiteItem::reorder(GraphModel *model)
 {
   for (int i = 0; (size_t)i < programs.size(); i++) {
     if (programs[i]->row != i) {

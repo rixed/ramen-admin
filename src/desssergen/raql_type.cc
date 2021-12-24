@@ -34,18 +34,16 @@ inline std::ostream &operator<<(std::ostream &, struct t const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct t> const);
 inline bool operator==(struct t const &, struct t const &);
 inline bool operator!=(struct t const &, struct t const &);
-struct td2bedc2754278eeddd817ca15345a333 : public std::tuple<
+struct t9acdca30308e28313c3977aa48ab367d : public std::tuple<
   uint32_t,
   std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  td2bedc2754278eeddd817ca15345a333(std::tuple<uint32_t, std::shared_ptr<::dessser::gen::raql_type::t> > p)
-    : std::tuple<uint32_t, std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(td2bedc2754278eeddd817ca15345a333 const &a, td2bedc2754278eeddd817ca15345a333 const &b) {
+inline bool operator==(t9acdca30308e28313c3977aa48ab367d const &a, t9acdca30308e28313c3977aa48ab367d const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(td2bedc2754278eeddd817ca15345a333 const &a, td2bedc2754278eeddd817ca15345a333 const &b) {
+inline bool operator!=(t9acdca30308e28313c3977aa48ab367d const &a, t9acdca30308e28313c3977aa48ab367d const &b) {
   return !operator==(a, b);
 }
 struct named_type : public std::tuple<
@@ -53,8 +51,6 @@ struct named_type : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  named_type(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> > p)
-    : std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(named_type const &a, named_type const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
@@ -67,18 +63,16 @@ inline std::ostream &operator<<(std::ostream &, struct named_type const &);
 inline std::ostream &operator<<(std::ostream &, std::shared_ptr<struct named_type> const);
 inline bool operator==(struct named_type const &, struct named_type const &);
 inline bool operator!=(struct named_type const &, struct named_type const &);
-struct tc5c18469277557eee1002278fdead581 : public std::tuple<
+struct t550173c9cc042d56a37c01d7d8bbfa95 : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_type::t> ,
   std::shared_ptr<::dessser::gen::raql_type::t> 
 > {
   using tuple::tuple;
-  tc5c18469277557eee1002278fdead581(std::tuple<std::shared_ptr<::dessser::gen::raql_type::t> , std::shared_ptr<::dessser::gen::raql_type::t> > p)
-    : std::tuple<std::shared_ptr<::dessser::gen::raql_type::t> , std::shared_ptr<::dessser::gen::raql_type::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc5c18469277557eee1002278fdead581 const &a, tc5c18469277557eee1002278fdead581 const &b) {
+inline bool operator==(t550173c9cc042d56a37c01d7d8bbfa95 const &a, t550173c9cc042d56a37c01d7d8bbfa95 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(tc5c18469277557eee1002278fdead581 const &a, tc5c18469277557eee1002278fdead581 const &b) {
+inline bool operator!=(t550173c9cc042d56a37c01d7d8bbfa95 const &a, t550173c9cc042d56a37c01d7d8bbfa95 const &b) {
   return !operator==(a, b);
 }
 struct base : public std::variant<
@@ -113,11 +107,11 @@ struct base : public std::variant<
   Void, // Cidrv6
   Void, // Cidr
   Arr<std::shared_ptr<::dessser::gen::raql_type::t> >, // Tup
-  ::dessser::gen::raql_type::td2bedc2754278eeddd817ca15345a333, // Vec
+  ::dessser::gen::raql_type::t9acdca30308e28313c3977aa48ab367d, // Vec
   std::shared_ptr<::dessser::gen::raql_type::t> , // Arr
   Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Rec
   Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> >, // Sum
-  ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 // Map
+  ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 // Map
 > {
   using variant::variant;
   using variant::operator=;
@@ -449,7 +443,7 @@ extern std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Poin
  */
 static std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> fun0 { [&fun0](Pointer p_0) {
+  std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> fun0 { [&](Pointer p_0) {
     ::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf id_1 { base_of_row_binary(p_0) };
     ::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033 let_res_2;
     {
@@ -811,7 +805,7 @@ std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Point
  */
 static std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf(Pointer)> base_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf(Pointer)> fun11 { [&fun11](Pointer p_0) {
+  std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf(Pointer)> fun11 { [&](Pointer p_0) {
     ::dessser::gen::raql_type::ta97bb48ed75bbda6173555873826c8c6 id_12 { p_0.readU16Le() };
     ::dessser::gen::raql_type::ta97bb48ed75bbda6173555873826c8c6 letpair_res_13;
     {
@@ -1276,7 +1270,7 @@ static std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfa
                                                                             {
                                                                               auto dtup_fst_154 { std::get<0>(id_251) };
                                                                               auto dtup_snd_155 { std::get<1>(id_251) };
-                                                                              ::dessser::gen::raql_type::td2bedc2754278eeddd817ca15345a333 id_253 { dtup_fst_151, dtup_fst_154 };
+                                                                              ::dessser::gen::raql_type::t9acdca30308e28313c3977aa48ab367d id_253 { dtup_fst_151, dtup_fst_154 };
                                                                               std::shared_ptr<::dessser::gen::raql_type::base>  id_254 { std::make_shared<::dessser::gen::raql_type::base>(std::in_place_index<31>, id_253) };
                                                                               ::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf id_255 { id_254, dtup_snd_155 };
                                                                               letpair_res_252 = id_255;
@@ -1629,7 +1623,7 @@ static std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfa
                                                                                   {
                                                                                     auto dtup_fst_87 { std::get<0>(id_421) };
                                                                                     auto dtup_snd_88 { std::get<1>(id_421) };
-                                                                                    ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 id_423 { dtup_fst_84, dtup_fst_87 };
+                                                                                    ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 id_423 { dtup_fst_84, dtup_fst_87 };
                                                                                     std::shared_ptr<::dessser::gen::raql_type::base>  id_424 { std::make_shared<::dessser::gen::raql_type::base>(std::in_place_index<35>, id_423) };
                                                                                     ::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf id_425 { id_424, dtup_snd_88 };
                                                                                     letpair_res_422 = id_425;
@@ -1743,7 +1737,7 @@ std::function<::dessser::gen::raql_type::tf8a88b53b4c47066834e94151000bfaf(Point
  */
 static std::function<::dessser::gen::raql_type::t7fbe1cfb5917a94fd4534c65eba54a27(Pointer)> named_type_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_type::t7fbe1cfb5917a94fd4534c65eba54a27(Pointer)> fun426 { [&fun426](Pointer p_0) {
+  std::function<::dessser::gen::raql_type::t7fbe1cfb5917a94fd4534c65eba54a27(Pointer)> fun426 { [&](Pointer p_0) {
     uint32_t id_427 { 0U };
     Vec<1, uint32_t> id_428 {  id_427  };
     ::dessser::gen::raql_type::t12fb9c475959b52bf7b17b155a955ffa let_res_429;
@@ -1868,7 +1862,7 @@ std::function<::dessser::gen::raql_type::t7fbe1cfb5917a94fd4534c65eba54a27(Point
  */
 static std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> fun480 { [&fun480](Pointer p_0) {
+  std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Pointer)> fun480 { [&](Pointer p_0) {
     ::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033 id_481 { of_row_binary(p_0) };
     ::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033 letpair_res_482;
     {
@@ -1890,7 +1884,7 @@ std::function<::dessser::gen::raql_type::t8b07d6797983610fb5146e4336d56033(Point
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> fun484 { [&fun484](std::shared_ptr<::dessser::gen::raql_type::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> fun484 { [&](std::shared_ptr<::dessser::gen::raql_type::t>  p_0) {
     std::shared_ptr<::dessser::gen::raql_type::base>  id_485 { (*p_0).type };
     Size id_486 { base_sersize_of_row_binary(id_485) };
     Size id_487 { 1UL };
@@ -2058,7 +2052,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_type::t> )> sersize_of_r
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> base_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> fun489 { [&fun489](std::shared_ptr<::dessser::gen::raql_type::base>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> fun489 { [&](std::shared_ptr<::dessser::gen::raql_type::base>  p_0) {
     uint16_t id_490 { uint16_t((*p_0).index()) };
     Size let_res_491;
     {
@@ -2371,7 +2365,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> ba
                                                                     Size choose_res_672;
                                                                     if (id_671) {
                                                                       Size id_673 { 6UL };
-                                                                      ::dessser::gen::raql_type::td2bedc2754278eeddd817ca15345a333 id_674 { std::get<31 /* Vec */>((*p_0)) };
+                                                                      ::dessser::gen::raql_type::t9acdca30308e28313c3977aa48ab367d id_674 { std::get<31 /* Vec */>((*p_0)) };
                                                                       std::shared_ptr<::dessser::gen::raql_type::t>  id_675 { std::get<1>(id_674) };
                                                                       Size id_676 { sersize_of_row_binary(id_675) };
                                                                       Size id_677 { Size(id_673 + id_676) };
@@ -2578,14 +2572,14 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> ba
                                                                             Void id_803 { ((void)(assert(id_802)), ::dessser::VOID) };
                                                                             (void)id_803;
                                                                             Size id_804 { 2UL };
-                                                                            ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 id_805 { std::get<35 /* Map */>((*p_0)) };
+                                                                            ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 id_805 { std::get<35 /* Map */>((*p_0)) };
                                                                             std::shared_ptr<::dessser::gen::raql_type::t>  id_806 { std::get<0>(id_805) };
                                                                             Size id_807 { sersize_of_row_binary(id_806) };
                                                                             Size id_808 { Size(id_804 + id_807) };
                                                                             Size let_res_809;
                                                                             {
                                                                               Size sz_294 { id_808 };
-                                                                              ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 id_810 { std::get<35 /* Map */>((*p_0)) };
+                                                                              ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 id_810 { std::get<35 /* Map */>((*p_0)) };
                                                                               std::shared_ptr<::dessser::gen::raql_type::t>  id_811 { std::get<1>(id_810) };
                                                                               Size id_812 { sersize_of_row_binary(id_811) };
                                                                               Size id_813 { Size(sz_294 + id_812) };
@@ -2684,7 +2678,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_type::base> )> base_sers
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_type::named_type> )> named_type_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::named_type> )> fun814 { [&fun814](std::shared_ptr<::dessser::gen::raql_type::named_type>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_type::named_type> )> fun814 { [&](std::shared_ptr<::dessser::gen::raql_type::named_type>  p_0) {
     std::string id_815 { std::get<0>((*p_0)) };
     uint32_t id_816 { (uint32_t)id_815.size() };
     Vec<1, uint32_t> id_817 {  id_816  };
@@ -2749,7 +2743,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_type::named_type> )> nam
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> fun847 { [&fun847](std::shared_ptr<::dessser::gen::raql_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> fun847 { [&](std::shared_ptr<::dessser::gen::raql_type::t>  p_0, Pointer p_1) {
     std::shared_ptr<::dessser::gen::raql_type::base>  id_848 { (*p_0).type };
     Pointer id_849 { base_to_row_binary(id_848, p_1) };
     Pointer let_res_850;
@@ -2940,7 +2934,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> t
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)> base_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)> fun854 { [&fun854](std::shared_ptr<::dessser::gen::raql_type::base>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)> fun854 { [&](std::shared_ptr<::dessser::gen::raql_type::base>  p_0, Pointer p_1) {
     uint16_t id_855 { uint16_t((*p_0).index()) };
     Pointer let_res_856;
     {
@@ -3202,7 +3196,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,P
                                                                         {
                                                                           Vec<1, int32_t> n_ref_331 { id_992 };
                                                                           Arr<std::shared_ptr<::dessser::gen::raql_type::t> > id_994 { std::get<30 /* Tup */>((*p_0)) };
-                                                                          for (std::shared_ptr<::dessser::gen::raql_type::t>  x_332 : id_994) {
+                                                                          for (std::shared_ptr<::dessser::gen::raql_type::t>  &x_332 : id_994) {
                                                                             uint8_t id_995 { 0 };
                                                                             uint8_t id_996 { 0 };
                                                                             Pointer id_997 { dst_ref_330[id_996] };
@@ -3231,13 +3225,13 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,P
                                                                       bool id_1009 { bool(id_1008 == label1_314) };
                                                                       Pointer choose_res_1010;
                                                                       if (id_1009) {
-                                                                        ::dessser::gen::raql_type::td2bedc2754278eeddd817ca15345a333 id_1011 { std::get<31 /* Vec */>((*p_0)) };
+                                                                        ::dessser::gen::raql_type::t9acdca30308e28313c3977aa48ab367d id_1011 { std::get<31 /* Vec */>((*p_0)) };
                                                                         uint32_t id_1012 { std::get<0>(id_1011) };
                                                                         Pointer id_1013 { ssum_dst_315.writeU32Le(id_1012) };
                                                                         Pointer let_res_1014;
                                                                         {
                                                                           Pointer stup_dst_327 { id_1013 };
-                                                                          ::dessser::gen::raql_type::td2bedc2754278eeddd817ca15345a333 id_1015 { std::get<31 /* Vec */>((*p_0)) };
+                                                                          ::dessser::gen::raql_type::t9acdca30308e28313c3977aa48ab367d id_1015 { std::get<31 /* Vec */>((*p_0)) };
                                                                           std::shared_ptr<::dessser::gen::raql_type::t>  id_1016 { std::get<1>(id_1015) };
                                                                           Pointer id_1017 { to_row_binary(id_1016, stup_dst_327) };
                                                                           let_res_1014 = id_1017;
@@ -3325,7 +3319,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,P
                                                                               {
                                                                                 Vec<1, int32_t> n_ref_325 { id_1066 };
                                                                                 Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> > id_1068 { std::get<33 /* Rec */>((*p_0)) };
-                                                                                for (std::shared_ptr<::dessser::gen::raql_type::named_type>  x_326 : id_1068) {
+                                                                                for (std::shared_ptr<::dessser::gen::raql_type::named_type>  &x_326 : id_1068) {
                                                                                   uint8_t id_1069 { 0 };
                                                                                   uint8_t id_1070 { 0 };
                                                                                   Pointer id_1071 { dst_ref_324[id_1070] };
@@ -3423,7 +3417,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,P
                                                                                 {
                                                                                   Vec<1, int32_t> n_ref_320 { id_1125 };
                                                                                   Arr<std::shared_ptr<::dessser::gen::raql_type::named_type> > id_1127 { std::get<34 /* Sum */>((*p_0)) };
-                                                                                  for (std::shared_ptr<::dessser::gen::raql_type::named_type>  x_321 : id_1127) {
+                                                                                  for (std::shared_ptr<::dessser::gen::raql_type::named_type>  &x_321 : id_1127) {
                                                                                     uint8_t id_1128 { 0 };
                                                                                     uint8_t id_1129 { 0 };
                                                                                     Pointer id_1130 { dst_ref_319[id_1129] };
@@ -3452,13 +3446,13 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,P
                                                                               bool id_1142 { bool(label1_314 == id_1141) };
                                                                               Void id_1143 { ((void)(assert(id_1142)), ::dessser::VOID) };
                                                                               (void)id_1143;
-                                                                              ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 id_1144 { std::get<35 /* Map */>((*p_0)) };
+                                                                              ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 id_1144 { std::get<35 /* Map */>((*p_0)) };
                                                                               std::shared_ptr<::dessser::gen::raql_type::t>  id_1145 { std::get<0>(id_1144) };
                                                                               Pointer id_1146 { to_row_binary(id_1145, ssum_dst_315) };
                                                                               Pointer let_res_1147;
                                                                               {
                                                                                 Pointer stup_dst_316 { id_1146 };
-                                                                                ::dessser::gen::raql_type::tc5c18469277557eee1002278fdead581 id_1148 { std::get<35 /* Map */>((*p_0)) };
+                                                                                ::dessser::gen::raql_type::t550173c9cc042d56a37c01d7d8bbfa95 id_1148 { std::get<35 /* Map */>((*p_0)) };
                                                                                 std::shared_ptr<::dessser::gen::raql_type::t>  id_1149 { std::get<1>(id_1148) };
                                                                                 Pointer id_1150 { to_row_binary(id_1149, stup_dst_316) };
                                                                                 let_res_1147 = id_1150;
@@ -3563,7 +3557,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::base> ,Pointer)
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::named_type> ,Pointer)> named_type_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::named_type> ,Pointer)> fun1151 { [&fun1151](std::shared_ptr<::dessser::gen::raql_type::named_type>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::named_type> ,Pointer)> fun1151 { [&](std::shared_ptr<::dessser::gen::raql_type::named_type>  p_0, Pointer p_1) {
     std::string id_1152 { std::get<0>((*p_0)) };
     uint32_t id_1153 { (uint32_t)id_1152.size() };
     Vec<1, uint32_t> id_1154 {  id_1153  };
@@ -3646,7 +3640,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::named_type> ,Po
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> fun1195 { [&fun1195](std::shared_ptr<::dessser::gen::raql_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_type::t> ,Pointer)> fun1195 { [&](std::shared_ptr<::dessser::gen::raql_type::t>  p_0, Pointer p_1) {
     Pointer id_1196 { to_row_binary(p_0, p_1) };
     return id_1196;
   }

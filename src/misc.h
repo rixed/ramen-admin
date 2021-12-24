@@ -98,7 +98,7 @@ inline double getTime()
  * 100% c2 if ratio is 1) */
 QColor blendColor(QColor const &c1, QColor const &c2, double ratio);
 
-#define WITH_BETA_FEATURES (!qgetenv("RMADMIN_BETA").isEmpty())
+#define WITH_BETA_FEATURES (!qEnvironmentVariableIsEmpty("RMADMIN_BETA"))
 
 bool parseIpv4(uint32_t *, QString const &);
 bool parseIpv6(uint128_t *, QString const &);

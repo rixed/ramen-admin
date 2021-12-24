@@ -94,7 +94,7 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::retention::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::retention::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::raql_expr::to_row_binary };
     dessser::gen::raql_expr::t_ext id_2 { (*p_0).duration };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -118,7 +118,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> t
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> fun8 { [&fun8](std::shared_ptr<::dessser::gen::retention::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> fun8 { [&](std::shared_ptr<::dessser::gen::retention::t>  p_0) {
     auto fun9 { dessser::gen::raql_expr::sersize_of_row_binary };
     dessser::gen::raql_expr::t_ext id_10 { (*p_0).duration };
     Size id_11 { fun9(id_10) };
@@ -140,7 +140,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::retention::t> )> sersize_of_r
  */
 static std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> fun14 { [&fun14](Pointer p_0) {
+  std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> fun14 { [&](Pointer p_0) {
     auto fun15 { dessser::gen::raql_expr::of_row_binary };
     ::dessser::gen::retention::tc473a3a3b5068e57b15e934d0afcc038 id_16 { fun15(p_0) };
     ::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116 let_res_17;
@@ -176,7 +176,7 @@ std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Point
  */
 static std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> fun24 { [&fun24](Pointer p_0) {
+  std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Pointer)> fun24 { [&](Pointer p_0) {
     ::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116 id_25 { of_row_binary(p_0) };
     ::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116 letpair_res_26;
     {
@@ -197,7 +197,7 @@ std::function<::dessser::gen::retention::tc95d60afdce8d3b7a30d0873966b0116(Point
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> fun28 { [&fun28](std::shared_ptr<::dessser::gen::retention::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::retention::t> ,Pointer)> fun28 { [&](std::shared_ptr<::dessser::gen::retention::t>  p_0, Pointer p_1) {
     Pointer id_29 { to_row_binary(p_0, p_1) };
     return id_29;
   }

@@ -346,7 +346,7 @@ void TimeChart::paintAxis(Axis const &axis)
     /* Now draw the line, actually one per factor combination. */
     FactorValues const &factorValues {
       line.res->factorValues[line.factorValues] };
-    for (std::pair<QString, std::vector<size_t>> const &p : factorValues.labels) {
+    for (std::pair<QString const, std::vector<size_t>> const &p : factorValues.labels) {
       QString const &label { p.first };
       std::vector<size_t> const &tupleIndices { p.second };
 
@@ -818,8 +818,7 @@ void TimeChart::Axis::iterTime(
   for (Line const &line : lines) {
     FactorValues const &factorValues { line.res->factorValues[line.factorValues] };
     bool const noFactor { factorValues.labels.size() <= 1 };
-    for (std::pair<QString, std::vector<size_t>> const &p :
-           factorValues.labels) {
+    for (std::pair<QString const, std::vector<size_t>> const &p : factorValues.labels) {
       QString const &label { p.first };
       std::vector<size_t> const &tupleIndices { p.second };
 
@@ -842,8 +841,7 @@ void TimeChart::Axis::iterTime(
     for (Line const &line : lines) {
       FactorValues const &factorValues { line.res->factorValues[line.factorValues] };
 
-      for (std::pair<QString, std::vector<size_t>> const &p :
-             factorValues.labels) {
+      for (std::pair<QString const, std::vector<size_t>> const &p : factorValues.labels) {
         std::vector<size_t> const &tupleIndices { p.second };
 
         if (!done[valIdx]) {
@@ -864,8 +862,7 @@ void TimeChart::Axis::iterTime(
     for (Line const &line : lines) {
       FactorValues const &factorValues { line.res->factorValues[line.factorValues] };
 
-      for (std::pair<QString, std::vector<size_t>> const &p :
-             factorValues.labels) {
+      for (std::pair<QString const, std::vector<size_t>> const &p : factorValues.labels) {
         std::vector<size_t> const &tupleIndices { p.second };
 
         values[valIdx].first = 0.;

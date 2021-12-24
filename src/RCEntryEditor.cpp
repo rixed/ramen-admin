@@ -442,7 +442,7 @@ void RCEntryEditor::resetParams()
   std::shared_ptr<dessser::gen::source_info::compiled_program> prog {
     std::get<dessser::gen::source_info::Compiled>(info->detail) };
 
-  for (std::shared_ptr<dessser::gen::program_parameter::t const> p : prog->default_params) {
+  for (std::shared_ptr<dessser::gen::program_parameter::t> const &p : prog->default_params) {
     // TODO: a tooltip with the parameter doc
     std::shared_ptr<dessser::gen::raql_value::t const> rval { paramValue(p) };
     /* paramEdit->setValue wants the value to be a shared_ptr<sync_value>, but since
@@ -490,7 +490,7 @@ void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry)
   cwdEdit->setText(QString::fromStdString(rcEntry.cwd));
 
   // Also save the parameter values so that resetParams can find them:
-  for (std::shared_ptr<dessser::gen::program_run_parameter::t const> const &p : rcEntry.params) {
+  for (std::shared_ptr<dessser::gen::program_run_parameter::t> const &p : rcEntry.params) {
     if (! p->value) continue;
     if (verbose)
       qDebug() << "RCEntryEditor: Save value" << *p->value

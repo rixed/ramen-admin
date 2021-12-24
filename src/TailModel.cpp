@@ -107,7 +107,7 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key, KValue const &kv)
 
   beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + numTuples - 1);
 
-  for (std::shared_ptr<dessser::gen::sync_value::tuple> const tuple : batch) {
+  for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple : batch) {
     /* If a function has no event time info, all tuples will have time 0.
      * Past data is disabled in that case anyway. */
     double start { eventTime ?

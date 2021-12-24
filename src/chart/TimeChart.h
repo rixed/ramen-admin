@@ -63,7 +63,7 @@ class TimeChart : public AbstractTimeLine
        * Not very useful for the factors but that's probably faster than
        * trying to distinguish them. */
       values.reserve(tuple.size());
-      for (std::shared_ptr<dessser::gen::raql_value::t const> tup : tuple) {
+      for (std::shared_ptr<dessser::gen::raql_value::t const> const &tup : tuple) {
         values.push_back(toDouble(*tup));
       }
     }

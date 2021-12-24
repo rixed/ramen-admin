@@ -117,7 +117,7 @@ inline bool operator!=(t18cecf882d7ac80cef37dfe6b22279d4 const &a, t18cecf882d7a
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -157,7 +157,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointe
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> fun17 { [&fun17](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> fun17 { [&](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0) {
     uint16_t id_18 { 0 };
     uint16_t id_19 { uint16_t((*p_0).index()) };
     bool id_20 { bool(id_18 == id_19) };
@@ -197,7 +197,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> sersize
  */
 static std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> fun32 { [&fun32](Pointer p_0) {
+  std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> fun32 { [&](Pointer p_0) {
     ::dessser::gen::raql_path_comp::ta97bb48ed75bbda6173555873826c8c6 id_33 { p_0.readU16Le() };
     ::dessser::gen::raql_path_comp::ta97bb48ed75bbda6173555873826c8c6 letpair_res_34;
     {
@@ -260,7 +260,7 @@ std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(
  */
 static std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> fun53 { [&fun53](Pointer p_0) {
+  std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(Pointer)> fun53 { [&](Pointer p_0) {
     ::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3 id_54 { of_row_binary(p_0) };
     ::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3 letpair_res_55;
     {
@@ -281,7 +281,7 @@ std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f799350894ac2a3(
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> fun57 { [&fun57](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> ,Pointer)> fun57 { [&](std::shared_ptr<::dessser::gen::raql_path_comp::t>  p_0, Pointer p_1) {
     Pointer id_58 { to_row_binary(p_0, p_1) };
     return id_58;
   }

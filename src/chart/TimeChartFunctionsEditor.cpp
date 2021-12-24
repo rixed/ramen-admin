@@ -133,7 +133,7 @@ void TimeChartFunctionsEditor::allFieldsChanged(int tab_idx)
   TimeChartFunctionEditor *e {
     static_cast<TimeChartFunctionEditor *>(functions->widget(tab_idx)) };
   dessser::gen::dashboard_widget::source const &source { e->model->source };
-  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+  for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field : source.fields) {
     if (verbose)
       qDebug() << "TimeChartFunctionsEditor::allFieldsChanged for column" << field->column;
     emit fieldChanged(source.name->site, source.name->program,

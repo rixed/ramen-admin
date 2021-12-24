@@ -109,7 +109,7 @@ void ConfTreeEditorDialog::save()
   ConfClient *client = Menu::getClient();
   if (v) client->sendSet(key, v); // read-only editors return no value
   if (canWrite && showEditor) client->sendUnlock(key);
-  emit QDialog::accept();
+  QDialog::accept();
 }
 
 void ConfTreeEditorDialog::cancel()

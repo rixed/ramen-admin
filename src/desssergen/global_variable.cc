@@ -152,7 +152,7 @@ inline bool operator!=(t101502ffd7fb38beafe4b49259f92ba1 const &a, t101502ffd7fb
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::global_variable::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::global_variable::t>  p_0, Pointer p_1) {
     ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_1 { (*p_0).scope };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
@@ -220,7 +220,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Point
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> fun28 { [&fun28](std::shared_ptr<::dessser::gen::global_variable::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> fun28 { [&](std::shared_ptr<::dessser::gen::global_variable::t>  p_0) {
     uint16_t id_29 { 0 };
     ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_30 { (*p_0).scope };
     uint16_t id_31 { uint16_t(id_30.index()) };
@@ -291,7 +291,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> sersiz
  */
 static std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> fun57 { [&fun57](Pointer p_0) {
+  std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> fun57 { [&](Pointer p_0) {
     ::dessser::gen::global_variable::ta97bb48ed75bbda6173555873826c8c6 id_58 { p_0.readU16Le() };
     ::dessser::gen::global_variable::ta97bb48ed75bbda6173555873826c8c6 letpair_res_59;
     {
@@ -386,7 +386,7 @@ std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3
  */
 static std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> fun89 { [&fun89](Pointer p_0) {
+  std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> fun89 { [&](Pointer p_0) {
     ::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3 id_90 { of_row_binary(p_0) };
     ::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3 letpair_res_91;
     {
@@ -407,7 +407,7 @@ std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> fun93 { [&fun93](std::shared_ptr<::dessser::gen::global_variable::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> fun93 { [&](std::shared_ptr<::dessser::gen::global_variable::t>  p_0, Pointer p_1) {
     Pointer id_94 { to_row_binary(p_0, p_1) };
     return id_94;
   }

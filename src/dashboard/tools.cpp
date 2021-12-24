@@ -48,7 +48,7 @@ void iterDashboards(std::function<void(std::string const &)> f)
   std::unordered_set<std::string> visited;
 
   kvs->lock.lock_shared();
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
+  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const> const, KValue> const &p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
     std::shared_ptr<dessser::gen::sync_key::t const> to_visit;
 
@@ -134,7 +134,7 @@ void iterDashboardWidgets(
            std::pair<std::shared_ptr<dessser::gen::sync_key::t const>,
                      KValue const &>> widgets;
   kvs->lock.lock_shared();
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const &p : kvs->map) {
+  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const> const, KValue> const &p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
     std::shared_ptr<dessser::gen::sync_key::per_dash_key> per_dash_key;
     if (isScratchpad(dash_name)) {  // Skip all keys but widgets from the scratchpad:

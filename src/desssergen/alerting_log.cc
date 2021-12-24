@@ -53,18 +53,16 @@ inline bool operator==(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabd
 inline bool operator!=(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabddd4db874c961cd5609d9 const &b) {
   return !operator==(a, b);
 }
-struct t6bded395cd2ca5ea5b1538d97c26812f : public std::tuple<
+struct t62aae75ed55c9c452157e890cb77faf5 : public std::tuple<
   std::string,
   uint32_t
 > {
   using tuple::tuple;
-  t6bded395cd2ca5ea5b1538d97c26812f(std::tuple<std::string, uint32_t> p)
-    : std::tuple<std::string, uint32_t>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t6bded395cd2ca5ea5b1538d97c26812f const &a, t6bded395cd2ca5ea5b1538d97c26812f const &b) {
+inline bool operator==(t62aae75ed55c9c452157e890cb77faf5 const &a, t62aae75ed55c9c452157e890cb77faf5 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t6bded395cd2ca5ea5b1538d97c26812f const &a, t6bded395cd2ca5ea5b1538d97c26812f const &b) {
+inline bool operator!=(t62aae75ed55c9c452157e890cb77faf5 const &a, t62aae75ed55c9c452157e890cb77faf5 const &b) {
   return !operator==(a, b);
 }
 struct t2f07d8351fa62306ecaa96746ccc3d68 : public std::variant<
@@ -91,7 +89,7 @@ inline bool operator!=(t2f07d8351fa62306ecaa96746ccc3d68 const &a, t2f07d8351fa6
 }
 struct t : public std::variant<
   ::dessser::gen::alerting_log::tc97f0c1bbabddd4db874c961cd5609d9, // NewNotification
-  ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f, // Outcry
+  ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5, // Outcry
   std::string, // Ack
   ::dessser::gen::alerting_log::t2f07d8351fa62306ecaa96746ccc3d68, // Stop
   std::string // Cancel
@@ -343,7 +341,7 @@ inline bool operator!=(t717a9fa5b27ba2a501259bb0c3fb6224 const &a, t717a9fa5b27b
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -405,7 +403,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,P
         bool id_34 { bool(id_32 == id_33) };
         Pointer choose_res_35;
         if (id_34) {
-          ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_36 { std::get<1 /* Outcry */>((*p_0)) };
+          ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_36 { std::get<1 /* Outcry */>((*p_0)) };
           std::string id_37 { std::get<0>(id_36) };
           uint32_t id_38 { (uint32_t)id_37.size() };
           Vec<1, uint32_t> id_39 {  id_38  };
@@ -465,14 +463,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,P
             }
             let_res_40 = let_res_42;
           }
-          ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_74 { std::get<1 /* Outcry */>((*p_0)) };
+          ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_74 { std::get<1 /* Outcry */>((*p_0)) };
           std::string id_75 { std::get<0>(id_74) };
           Bytes id_76 { id_75 };
           Pointer id_77 { let_res_40.writeBytes(id_76) };
           Pointer let_res_78;
           {
             Pointer stup_dst_225 { id_77 };
-            ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_79 { std::get<1 /* Outcry */>((*p_0)) };
+            ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_79 { std::get<1 /* Outcry */>((*p_0)) };
             uint32_t id_80 { std::get<1>(id_79) };
             Pointer id_81 { stup_dst_225.writeU32Le(id_80) };
             let_res_78 = id_81;
@@ -866,7 +864,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> fun277 { [&fun277](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> fun277 { [&](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0) {
     uint16_t id_278 { 0 };
     uint16_t id_279 { uint16_t((*p_0).index()) };
     bool id_280 { bool(id_278 == id_279) };
@@ -920,7 +918,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> se
       Size choose_res_309;
       if (id_308) {
         Size id_310 { 2UL };
-        ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_311 { std::get<1 /* Outcry */>((*p_0)) };
+        ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_311 { std::get<1 /* Outcry */>((*p_0)) };
         std::string id_312 { std::get<0>(id_311) };
         uint32_t id_313 { (uint32_t)id_312.size() };
         Vec<1, uint32_t> id_314 {  id_313  };
@@ -960,7 +958,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> se
           }
           let_res_315 = let_res_318;
         }
-        ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_336 { std::get<1 /* Outcry */>((*p_0)) };
+        ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_336 { std::get<1 /* Outcry */>((*p_0)) };
         std::string id_337 { std::get<0>(id_336) };
         uint32_t id_338 { (uint32_t)id_337.size() };
         Size id_339 { Size(id_338) };
@@ -1355,7 +1353,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> sersize_o
  */
 static std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> fun496 { [&fun496](Pointer p_0) {
+  std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> fun496 { [&](Pointer p_0) {
     ::dessser::gen::alerting_log::ta97bb48ed75bbda6173555873826c8c6 id_497 { p_0.readU16Le() };
     ::dessser::gen::alerting_log::ta97bb48ed75bbda6173555873826c8c6 letpair_res_498;
     {
@@ -1552,7 +1550,7 @@ static std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf
                 {
                   auto du32_fst_156 { std::get<0>(id_585) };
                   auto du32_snd_157 { std::get<1>(id_585) };
-                  ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f id_587 { dtup_fst_153, du32_fst_156 };
+                  ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5 id_587 { dtup_fst_153, du32_fst_156 };
                   std::shared_ptr<::dessser::gen::alerting_log::t>  id_588 { std::make_shared<::dessser::gen::alerting_log::t>(std::in_place_index<1>, id_587) };
                   ::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190 id_589 { id_588, du32_snd_157 };
                   letpair_res_586 = id_589;
@@ -2025,7 +2023,7 @@ std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Po
  */
 static std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> fun810 { [&fun810](Pointer p_0) {
+  std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> fun810 { [&](Pointer p_0) {
     ::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190 id_811 { of_row_binary(p_0) };
     ::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190 letpair_res_812;
     {
@@ -2047,7 +2045,7 @@ std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Po
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> fun814 { [&fun814](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> fun814 { [&](std::shared_ptr<::dessser::gen::alerting_log::t>  p_0, Pointer p_1) {
     Pointer id_815 { to_row_binary(p_0, p_1) };
     return id_815;
   }

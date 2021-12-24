@@ -17,21 +17,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t491302cf85c6148f165ecf960720a734 : public std::tuple<
+struct t720047405469e43c41ae902df9d2c463 : public std::tuple<
   std::string,
   std::string
 > {
   using tuple::tuple;
-  t491302cf85c6148f165ecf960720a734(std::tuple<std::string, std::string> p)
-    : std::tuple<std::string, std::string>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t491302cf85c6148f165ecf960720a734 const &a, t491302cf85c6148f165ecf960720a734 const &b) {
+inline bool operator==(t720047405469e43c41ae902df9d2c463 const &a, t720047405469e43c41ae902df9d2c463 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t491302cf85c6148f165ecf960720a734 const &a, t491302cf85c6148f165ecf960720a734 const &b) {
+inline bool operator!=(t720047405469e43c41ae902df9d2c463 const &a, t720047405469e43c41ae902df9d2c463 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t491302cf85c6148f165ecf960720a734 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t720047405469e43c41ae902df9d2c463 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -39,7 +37,7 @@ inline std::ostream &operator<<(std::ostream &os, t491302cf85c6148f165ecf960720a
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t491302cf85c6148f165ecf960720a734> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t720047405469e43c41ae902df9d2c463> const t) { os << *t; return os; }
 
 struct t {
   dessser::gen::site_name::t_ext site;
@@ -52,8 +50,8 @@ struct t {
   double certainty;
   double debounce;
   double timeout;
-  Lst<::dessser::gen::alerting_notification::t491302cf85c6148f165ecf960720a734> parameters;
-  t(dessser::gen::site_name::t_ext site_, dessser::gen::fq_name::t_ext worker_, bool test_, double sent_time_, std::optional<double> event_time_, std::string name_, bool firing_, double certainty_, double debounce_, double timeout_, Lst<::dessser::gen::alerting_notification::t491302cf85c6148f165ecf960720a734> parameters_) : site(site_), worker(worker_), test(test_), sent_time(sent_time_), event_time(event_time_), name(name_), firing(firing_), certainty(certainty_), debounce(debounce_), timeout(timeout_), parameters(parameters_) {}
+  Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> parameters;
+  t(dessser::gen::site_name::t_ext site_, dessser::gen::fq_name::t_ext worker_, bool test_, double sent_time_, std::optional<double> event_time_, std::string name_, bool firing_, double certainty_, double debounce_, double timeout_, Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> parameters_) : site(site_), worker(worker_), test(test_), sent_time(sent_time_), event_time(event_time_), name(name_), firing(firing_), certainty(certainty_), debounce(debounce_), timeout(timeout_), parameters(parameters_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

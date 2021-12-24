@@ -267,7 +267,7 @@ void Function::iterValues(
   });
 
   // FIXME: lock the tailModel to prevent points being added while we iterate
-  for (std::pair<double, size_t> const &ordered : tailModel->order) {
+  for (std::pair<double const, size_t> const &ordered : tailModel->order) {
     std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>> const &tuple(
       tailModel->tuples[ordered.second]);
     Q_ASSERT(ordered.first == tuple.first);

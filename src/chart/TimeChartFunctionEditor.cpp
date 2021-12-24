@@ -132,7 +132,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
     {
       if (verbose)
         qDebug() << "TimeChartFunctionEditor: model data reset";
-      for (QString const &numericField : model->numericFields) {
+      for (QString const &numericField : qAsConst(model->numericFields)) {
         if (verbose)
           qDebug() << "TimeChartFunctionEditor: fieldChanged" << numericField;
         dessser::gen::dashboard_widget::source const &source { model->source };
@@ -248,7 +248,7 @@ void TimeChartFunctionEditor::automatonTransition(
         }
         // Look at the RC for this function for inspiration:
         std::shared_ptr<dessser::gen::rc_entry::t const> sourceEntry;
-        for (std::shared_ptr<dessser::gen::rc_entry::t const> rce : *rc) {
+        for (std::shared_ptr<dessser::gen::rc_entry::t> const &rce : *rc) {
           /* Ideally check also the site: */
           if (rce->program == model->source.name->program) {
             sourceEntry = rce;

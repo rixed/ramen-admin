@@ -71,7 +71,7 @@ void NewDashboardDialog::createDashboard()
   Menu::getClient()->sendNew(key, val);
 
   clear();
-  emit QDialog::accept();
+  QDialog::accept();
 
   if (verbose)
     qDebug() << "NewDashboardDialog: opening new dashboard...";

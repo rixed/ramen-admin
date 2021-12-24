@@ -581,7 +581,7 @@ inline bool operator!=(t6915129216bc7fcac0c82f38ea6cfec8 const &a, t6915129216bc
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_func> ,Pointer)> compiled_func_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_func> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::source_info::compiled_func>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_func> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::source_info::compiled_func>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::function_name::to_row_binary };
     dessser::gen::function_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -769,7 +769,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compil
         {
           Vec<1, int32_t> n_ref_392 { id_110 };
           Lst<dessser::gen::field_name::t_ext> id_112 { (*p_0).factors };
-          for (dessser::gen::field_name::t_ext x_393 : id_112) {
+          for (dessser::gen::field_name::t_ext &x_393 : id_112) {
             uint8_t id_113 { 0 };
             auto fun114 { dessser::gen::field_name::to_row_binary };
             uint8_t id_115 { 0 };
@@ -1003,7 +1003,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_func
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_program> ,Pointer)> compiled_program_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_program> ,Pointer)> fun209 { [&fun209](std::shared_ptr<::dessser::gen::source_info::compiled_program>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_program> ,Pointer)> fun209 { [&](std::shared_ptr<::dessser::gen::source_info::compiled_program>  p_0, Pointer p_1) {
     Lst<dessser::gen::program_parameter::t_ext> id_210 { (*p_0).default_params };
     uint32_t id_211 { id_210.size() };
     Vec<1, uint32_t> id_212 {  id_211  };
@@ -1073,7 +1073,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compil
       {
         Vec<1, int32_t> n_ref_403 { id_250 };
         Lst<dessser::gen::program_parameter::t_ext> id_252 { (*p_0).default_params };
-        for (dessser::gen::program_parameter::t_ext x_404 : id_252) {
+        for (dessser::gen::program_parameter::t_ext &x_404 : id_252) {
           uint8_t id_253 { 0 };
           auto fun254 { dessser::gen::program_parameter::to_row_binary };
           uint8_t id_255 { 0 };
@@ -1177,7 +1177,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compil
         {
           Vec<1, int32_t> n_ref_410 { id_312 };
           Lst<dessser::gen::global_variable::t_ext> id_314 { (*p_0).globals };
-          for (dessser::gen::global_variable::t_ext x_411 : id_314) {
+          for (dessser::gen::global_variable::t_ext &x_411 : id_314) {
             uint8_t id_315 { 0 };
             auto fun316 { dessser::gen::global_variable::to_row_binary };
             uint8_t id_317 { 0 };
@@ -1275,7 +1275,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compil
         {
           Vec<1, int32_t> n_ref_416 { id_370 };
           Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > id_372 { (*p_0).funcs };
-          for (std::shared_ptr<::dessser::gen::source_info::compiled_func>  x_417 : id_372) {
+          for (std::shared_ptr<::dessser::gen::source_info::compiled_func>  &x_417 : id_372) {
             uint8_t id_373 { 0 };
             uint8_t id_374 { 0 };
             Pointer id_375 { dst_ref_415[id_374] };
@@ -1384,7 +1384,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::compiled_prog
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> fun386 { [&fun386](std::shared_ptr<::dessser::gen::source_info::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> fun386 { [&](std::shared_ptr<::dessser::gen::source_info::t>  p_0, Pointer p_1) {
     std::string id_387 { (*p_0).src_ext };
     uint32_t id_388 { (uint32_t)id_387.size() };
     Vec<1, uint32_t> id_389 {  id_388  };
@@ -1519,7 +1519,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Po
         {
           Vec<1, int32_t> n_ref_424 { id_468 };
           Lst<std::string> id_470 { (*p_0).md5s };
-          for (std::string x_425 : id_470) {
+          for (std::string const &x_425 : id_470) {
             uint8_t id_471 { 0 };
             uint32_t id_472 { (uint32_t)x_425.size() };
             Vec<1, uint32_t> id_473 {  id_472  };
@@ -1795,7 +1795,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)>
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_func> )> compiled_func_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_func> )> fun599 { [&fun599](std::shared_ptr<::dessser::gen::source_info::compiled_func>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_func> )> fun599 { [&](std::shared_ptr<::dessser::gen::source_info::compiled_func>  p_0) {
     auto fun600 { dessser::gen::function_name::sersize_of_row_binary };
     dessser::gen::function_name::t_ext id_601 { (*p_0).name };
     Size id_602 { fun600(id_601) };
@@ -2146,7 +2146,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_func> )
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_program> )> compiled_program_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_program> )> fun774 { [&fun774](std::shared_ptr<::dessser::gen::source_info::compiled_program>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_program> )> fun774 { [&](std::shared_ptr<::dessser::gen::source_info::compiled_program>  p_0) {
     Lst<dessser::gen::program_parameter::t_ext> id_775 { (*p_0).default_params };
     uint32_t id_776 { id_775.size() };
     Vec<1, uint32_t> id_777 {  id_776  };
@@ -2488,7 +2488,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::source_info::compiled_program
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::source_info::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::source_info::t> )> fun945 { [&fun945](std::shared_ptr<::dessser::gen::source_info::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::source_info::t> )> fun945 { [&](std::shared_ptr<::dessser::gen::source_info::t>  p_0) {
     std::string id_946 { (*p_0).src_ext };
     uint32_t id_947 { (uint32_t)id_946.size() };
     Vec<1, uint32_t> id_948 {  id_947  };
@@ -2915,7 +2915,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::source_info::t> )> sersize_of
  */
 static std::function<::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be(Pointer)> compiled_func_of_row_binary_init()
 {
-  std::function<::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be(Pointer)> fun1123 { [&fun1123](Pointer p_0) {
+  std::function<::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be(Pointer)> fun1123 { [&](Pointer p_0) {
     auto fun1124 { dessser::gen::function_name::of_row_binary };
     ::dessser::gen::source_info::t7ced0f6935c1265b26e1abfcc364f52e id_1125 { fun1124(p_0) };
     ::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be let_res_1126;
@@ -3594,7 +3594,7 @@ std::function<::dessser::gen::source_info::t24b44b6db30fb2060e8aaa3137f095be(Poi
  */
 static std::function<::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c0a0(Pointer)> compiled_program_of_row_binary_init()
 {
-  std::function<::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c0a0(Pointer)> fun1382 { [&fun1382](Pointer p_0) {
+  std::function<::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c0a0(Pointer)> fun1382 { [&](Pointer p_0) {
     uint32_t id_1383 { 0U };
     Vec<1, uint32_t> id_1384 {  id_1383  };
     ::dessser::gen::source_info::t491c44439106a32f896827242e8e76a1 let_res_1385;
@@ -4198,7 +4198,7 @@ std::function<::dessser::gen::source_info::t70259d935c5af76ccd7093d0aa01c0a0(Poi
  */
 static std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> fun1607 { [&fun1607](Pointer p_0) {
+  std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> fun1607 { [&](Pointer p_0) {
     uint32_t id_1608 { 0U };
     Vec<1, uint32_t> id_1609 {  id_1608  };
     ::dessser::gen::source_info::t12fb9c475959b52bf7b17b155a955ffa let_res_1610;
@@ -4742,7 +4742,7 @@ std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Poi
  */
 static std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> fun1861 { [&fun1861](Pointer p_0) {
+  std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Pointer)> fun1861 { [&](Pointer p_0) {
     ::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8 id_1862 { of_row_binary(p_0) };
     ::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8 letpair_res_1863;
     {
@@ -4764,7 +4764,7 @@ std::function<::dessser::gen::source_info::t52b663ff57b1b0023c18934f992f38e8(Poi
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> fun1865 { [&fun1865](std::shared_ptr<::dessser::gen::source_info::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::source_info::t> ,Pointer)> fun1865 { [&](std::shared_ptr<::dessser::gen::source_info::t>  p_0, Pointer p_1) {
     Pointer id_1866 { to_row_binary(p_0, p_1) };
     return id_1866;
   }

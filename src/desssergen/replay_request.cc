@@ -160,7 +160,7 @@ inline bool operator!=(t0e7f6ba9e1ceef343afe44456f9067ec const &a, t0e7f6ba9e1ce
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::replay_request::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::replay_request::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::fq_function_name::to_row_binary };
     dessser::gen::fq_function_name::t_ext id_2 { (*p_0).target };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -210,7 +210,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointe
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> fun20 { [&fun20](std::shared_ptr<::dessser::gen::replay_request::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> fun20 { [&](std::shared_ptr<::dessser::gen::replay_request::t>  p_0) {
     auto fun21 { dessser::gen::fq_function_name::sersize_of_row_binary };
     dessser::gen::fq_function_name::t_ext id_22 { (*p_0).target };
     Size id_23 { fun21(id_22) };
@@ -257,7 +257,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> sersize
  */
 static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> fun35 { [&fun35](Pointer p_0) {
+  std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> fun35 { [&](Pointer p_0) {
     auto fun36 { dessser::gen::fq_function_name::of_row_binary };
     ::dessser::gen::replay_request::tafdf48d85e3efdf5b24e3fa2741562be id_37 { fun36(p_0) };
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 let_res_38;
@@ -355,7 +355,7 @@ std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(
  */
 static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> fun65 { [&fun65](Pointer p_0) {
+  std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> fun65 { [&](Pointer p_0) {
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_66 { of_row_binary(p_0) };
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_67;
     {
@@ -376,7 +376,7 @@ std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> fun69 { [&fun69](std::shared_ptr<::dessser::gen::replay_request::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> fun69 { [&](std::shared_ptr<::dessser::gen::replay_request::t>  p_0, Pointer p_1) {
     Pointer id_70 { to_row_binary(p_0, p_1) };
     return id_70;
   }

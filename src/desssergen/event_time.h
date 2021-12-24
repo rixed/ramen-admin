@@ -62,8 +62,6 @@ struct t : public std::tuple<
   ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229
 > {
   using tuple::tuple;
-  t(std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229> p)
-    : std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229>(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::event_time_field::Deref(std::get<0>(a)) == ::dessser::gen::event_time_field::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);

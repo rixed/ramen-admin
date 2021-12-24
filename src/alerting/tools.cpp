@@ -19,8 +19,8 @@ std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
 {
   return std::make_shared<dessser::gen::sync_key::t>(
     std::in_place_index<dessser::gen::sync_key::Incidents>,
-    std::make_tuple(incident_id,
-                    std::const_pointer_cast<dessser::gen::sync_key::incident_key>(k)));
+    incident_id,
+    std::const_pointer_cast<dessser::gen::sync_key::incident_key>(k));
 }
 
 std::shared_ptr<dessser::gen::sync_value::t const> getIncident(
@@ -64,7 +64,7 @@ void iterTeams(
 {
   kvs->lock.lock_shared();
   std::set<std::string> names;
-  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const>, KValue> const p : kvs->map) {
+  for (std::pair<std::shared_ptr<dessser::gen::sync_key::t const> const, KValue> const &p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key { p.first };
     if (key->index() != dessser::gen::sync_key::Teams) continue;
     std::string const &name {
@@ -182,8 +182,8 @@ std::shared_ptr<dessser::gen::sync_key::t const> dialogKey(
   std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key {
     std::make_shared<dessser::gen::sync_key::incident_key>(
       std::in_place_index<dessser::gen::sync_key::Dialogs>,
-      std::make_tuple(dialog_id,
-                      std::const_pointer_cast<dessser::gen::sync_key::dialog_key>(k))) };
+      dialog_id,
+      std::const_pointer_cast<dessser::gen::sync_key::dialog_key>(k)) };
   return incidentKey(incident_id, incident_key);
 }
 

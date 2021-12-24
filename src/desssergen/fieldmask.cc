@@ -107,7 +107,7 @@ inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae
  */
 static std::function<Pointer(t,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun0 { [&fun0](t p_0, Pointer p_1) {
+  std::function<Pointer(t,Pointer)> fun0 { [&](t p_0, Pointer p_1) {
     uint32_t id_1 { (uint32_t)p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -188,7 +188,7 @@ std::function<Pointer(t,Pointer)> to_row_binary(to_row_binary_init());
  */
 static std::function<Size(t)> sersize_of_row_binary_init()
 {
-  std::function<Size(t)> fun39 { [&fun39](t p_0) {
+  std::function<Size(t)> fun39 { [&](t p_0) {
     uint32_t id_40 { (uint32_t)p_0.size() };
     Vec<1, uint32_t> id_41 {  id_40  };
     Size let_res_42;
@@ -258,7 +258,7 @@ std::function<Size(t)> sersize_of_row_binary(sersize_of_row_binary_init());
  */
 static std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> fun66 { [&fun66](Pointer p_0) {
+  std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> fun66 { [&](Pointer p_0) {
     uint32_t id_67 { 0U };
     Vec<1, uint32_t> id_68 {  id_67  };
     ::dessser::gen::fieldmask::t12fb9c475959b52bf7b17b155a955ffa let_res_69;
@@ -363,7 +363,7 @@ std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Point
  */
 static std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> fun114 { [&fun114](Pointer p_0) {
+  std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Pointer)> fun114 { [&](Pointer p_0) {
     ::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016 id_115 { of_row_binary(p_0) };
     ::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016 letpair_res_116;
     {
@@ -384,7 +384,7 @@ std::function<::dessser::gen::fieldmask::ta30293a82943182cab78182f33b18016(Point
  */
 static std::function<Pointer(t,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(t,Pointer)> fun118 { [&fun118](t p_0, Pointer p_1) {
+  std::function<Pointer(t,Pointer)> fun118 { [&](t p_0, Pointer p_1) {
     Pointer id_119 { to_row_binary(p_0, p_1) };
     return id_119;
   }

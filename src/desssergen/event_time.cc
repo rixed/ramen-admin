@@ -59,8 +59,6 @@ struct t : public std::tuple<
   ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229
 > {
   using tuple::tuple;
-  t(std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229> p)
-    : std::tuple<dessser::gen::event_time_field::t_ext, ::dessser::gen::event_time::t52e26a57572ca91d707cdc0b7b472229>(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(t const &a, t const &b) {
   return ::dessser::gen::event_time_field::Deref(std::get<0>(a)) == ::dessser::gen::event_time_field::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
@@ -151,7 +149,7 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::event_time::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::event_time::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::event_time_field::to_row_binary };
     dessser::gen::event_time_field::t_ext id_2 { std::get<0>((*p_0)) };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -222,7 +220,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> 
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> fun36 { [&fun36](std::shared_ptr<::dessser::gen::event_time::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> fun36 { [&](std::shared_ptr<::dessser::gen::event_time::t>  p_0) {
     auto fun37 { dessser::gen::event_time_field::sersize_of_row_binary };
     dessser::gen::event_time_field::t_ext id_38 { std::get<0>((*p_0)) };
     Size id_39 { fun37(id_38) };
@@ -302,7 +300,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::event_time::t> )> sersize_of_
  */
 static std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> fun74 { [&fun74](Pointer p_0) {
+  std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> fun74 { [&](Pointer p_0) {
     auto fun75 { dessser::gen::event_time_field::of_row_binary };
     ::dessser::gen::event_time::tbbd2b8c4f75407d8eeb609a7e2e8ba68 id_76 { fun75(p_0) };
     ::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd let_res_77;
@@ -405,7 +403,7 @@ std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Poin
  */
 static std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> fun111 { [&fun111](Pointer p_0) {
+  std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Pointer)> fun111 { [&](Pointer p_0) {
     ::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd id_112 { of_row_binary(p_0) };
     ::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd letpair_res_113;
     {
@@ -426,7 +424,7 @@ std::function<::dessser::gen::event_time::tc5af49eea21f544f0c497da6c5af45dd(Poin
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> fun115 { [&fun115](std::shared_ptr<::dessser::gen::event_time::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time::t> ,Pointer)> fun115 { [&](std::shared_ptr<::dessser::gen::event_time::t>  p_0, Pointer p_1) {
     Pointer id_116 { to_row_binary(p_0, p_1) };
     return id_116;
   }

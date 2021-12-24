@@ -17,7 +17,7 @@ KRecEditor::KRecEditor(
 {
   QVBoxLayout *layout = new QVBoxLayout;
 
-  for (std::shared_ptr<dessser::gen::raql_type::named_type const> nt : rec) {
+  for (std::shared_ptr<dessser::gen::raql_type::named_type> const &nt : rec) {
     QHBoxLayout *l = new QHBoxLayout;
     std::string const &name { std::get<0>(*nt) };
     l->addWidget(new QLabel(QString::fromStdString(name) + ":"));

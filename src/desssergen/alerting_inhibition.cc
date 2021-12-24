@@ -197,7 +197,7 @@ inline bool operator!=(t9a758baeff17224a77e1a522010b4168 const &a, t9a758baeff17
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0, Pointer p_1) {
     std::string id_1 { (*p_0).what };
     uint32_t id_2 { (uint32_t)id_1.size() };
     Vec<1, uint32_t> id_3 {  id_2  };
@@ -453,7 +453,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,P
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> fun131 { [&fun131](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> fun131 { [&](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0) {
     std::string id_132 { (*p_0).what };
     uint32_t id_133 { (uint32_t)id_132.size() };
     Vec<1, uint32_t> id_134 {  id_133  };
@@ -680,7 +680,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alerting_inhibition::t> )> se
  */
 static std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> fun224 { [&fun224](Pointer p_0) {
+  std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> fun224 { [&](Pointer p_0) {
     uint32_t id_225 { 0U };
     Vec<1, uint32_t> id_226 {  id_225  };
     ::dessser::gen::alerting_inhibition::t12fb9c475959b52bf7b17b155a955ffa let_res_227;
@@ -1032,7 +1032,7 @@ std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643e
  */
 static std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> fun383 { [&fun383](Pointer p_0) {
+  std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c(Pointer)> fun383 { [&](Pointer p_0) {
     ::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c id_384 { of_row_binary(p_0) };
     ::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643ef14c letpair_res_385;
     {
@@ -1053,7 +1053,7 @@ std::function<::dessser::gen::alerting_inhibition::taaa95a29f95367e0fab864a9643e
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> fun387 { [&fun387](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_inhibition::t> ,Pointer)> fun387 { [&](std::shared_ptr<::dessser::gen::alerting_inhibition::t>  p_0, Pointer p_1) {
     Pointer id_388 { to_row_binary(p_0, p_1) };
     return id_388;
   }

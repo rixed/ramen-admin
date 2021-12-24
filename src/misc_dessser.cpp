@@ -1,4 +1,5 @@
 #include <cstring>
+#include <memory>
 #include <sstream>
 extern "C" {
 # include <sys/socket.h>
@@ -323,7 +324,7 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
 {
   return std::make_shared<dessser::gen::sync_key::t>(
     std::in_place_index<dessser::gen::sync_key::Sources>,
-    std::make_tuple(path, ext));
+    path, ext);
 }
 
 /* The name used by a chart source in the list of functions (also to order them) */
@@ -366,7 +367,7 @@ static QString arrToQString(
   dessser::Arr<std::shared_ptr<dessser::gen::raql_value::t>> const &arr)
 {
   QString s;
-  for (std::shared_ptr<dessser::gen::raql_value::t> v : arr) {
+  for (std::shared_ptr<dessser::gen::raql_value::t> const &v : arr) {
     if (s.length() > 0) s += ", ";
     s += raqlValToQString(*v);
   }
@@ -637,7 +638,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         dessser::Arr<std::shared_ptr<t>> ts { std::get<Tup>(b) };
         QString s;
         bool first = true;
-        for (std::shared_ptr<const t> t : ts) {
+        for (std::shared_ptr<t> const &t : ts) {
           QString sep { QString(first ? "(" : "; ") };
           first = false;
           s += sep + raqlTypeToQString(*t);
@@ -660,7 +661,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         auto const ts { std::get<Rec>(b) };
         QString s;
         bool first = true;
-        for (auto const n_t : ts) {
+        for (std::shared_ptr<dessser::gen::raql_type::named_type> const &n_t : ts) {
           QString sep { QString(first ? "{" : "; ") };
           first = false;
           s += sep + QString::fromStdString(std::get<0>(*n_t)) + ": " +
@@ -673,7 +674,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b)
         auto const ts { std::get<Sum>(b) };
         QString s;
         bool first = true;
-        for (auto const n_t : ts) {
+        for (std::shared_ptr<dessser::gen::raql_type::named_type> const &n_t : ts) {
           QString sep { QString(first ? "[" : " | ") };
           first = false;
           s += sep + QString::fromStdString(std::get<0>(*n_t)) + " " +

@@ -16,7 +16,7 @@ ProgramItem::ProgramItem(
   setZValue(2);
 }
 
-void ProgramItem::reorder(GraphModel const *model)
+void ProgramItem::reorder(GraphModel *model)
 {
   for (int i = 0; (size_t)i < functions.size(); i++) {
     if (functions[i]->row != i) {

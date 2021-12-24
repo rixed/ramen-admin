@@ -15,7 +15,7 @@ KTupEditor::KTupEditor(
 {
   QVBoxLayout *layout = new QVBoxLayout;
 
-  for (std::shared_ptr<dessser::gen::raql_type::t const> t : tup) {
+  for (std::shared_ptr<dessser::gen::raql_type::t> const &t : tup) {
     AtomicWidget *editor = newRaqlValueEditorWidget(*t);
     layout->addWidget(editor);
     connect(editor, &AtomicWidget::inputChanged,

@@ -200,7 +200,7 @@ void TimeChartEditWidget::iterFields(std::function<void(
 
     dessser::gen::dashboard_widget::source const &source {
       funcEditor->model->source };
-    for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+    for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field : source.fields) {
       if (field->representation->index() == dessser::gen::dashboard_widget::Unused)
         continue;
       cb(source.name->site, source.name->program, source.name->function, *field);

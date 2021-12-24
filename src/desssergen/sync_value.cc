@@ -545,7 +545,7 @@ inline bool operator!=(t511ff94fe7190561084aee555c49cbe8 const &a, t511ff94fe719
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> tuple_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0, Pointer p_1) {
     uint32_t id_1 { (*p_0).skipped };
     Pointer id_2 { p_1.writeU32Le(id_1) };
     Pointer let_res_3;
@@ -661,7 +661,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointe
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun7 { [&fun7](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun7 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
     uint16_t id_8 { uint16_t((*p_0).index()) };
     Pointer let_res_9;
     {
@@ -857,7 +857,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                     {
                       Vec<1, int32_t> n_ref_238 { id_127 };
                       Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_129 { std::get<4 /* Tuples */>((*p_0)) };
-                      for (std::shared_ptr<::dessser::gen::sync_value::tuple>  x_239 : id_129) {
+                      for (std::shared_ptr<::dessser::gen::sync_value::tuple>  &x_239 : id_129) {
                         uint8_t id_130 { 0 };
                         uint8_t id_131 { 0 };
                         Pointer id_132 { dst_ref_237[id_131] };
@@ -964,7 +964,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                         {
                           Vec<1, int32_t> n_ref_233 { id_192 };
                           Arr<dessser::gen::rc_entry::t_ext> id_194 { std::get<6 /* TargetConfig */>((*p_0)) };
-                          for (dessser::gen::rc_entry::t_ext x_234 : id_194) {
+                          for (dessser::gen::rc_entry::t_ext &x_234 : id_194) {
                             uint8_t id_195 { 0 };
                             auto fun196 { dessser::gen::rc_entry::to_row_binary };
                             uint8_t id_197 { 0 };
@@ -1159,7 +1159,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> 
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> fun287 { [&fun287](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> fun287 { [&](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0) {
     Size id_288 { 4UL };
     auto fun289 { dessser::gen::raql_value::sersize_of_row_binary };
     dessser::gen::raql_value::t_ext id_290 { (*p_0).values };
@@ -1252,7 +1252,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_s
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> fun293 { [&fun293](std::shared_ptr<::dessser::gen::sync_value::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> fun293 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0) {
     uint16_t id_294 { uint16_t((*p_0).index()) };
     Size let_res_295;
     {
@@ -1738,7 +1738,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_
  */
 static std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> tuple_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> fun584 { [&fun584](Pointer p_0) {
+  std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> fun584 { [&](Pointer p_0) {
     ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 id_585 { p_0.readU32Le() };
     ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 letpair_res_586;
     {
@@ -1989,7 +1989,7 @@ std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Poin
  */
 static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun595 { [&fun595](Pointer p_0) {
+  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun595 { [&](Pointer p_0) {
     ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 id_596 { p_0.readU16Le() };
     ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 letpair_res_597;
     {
@@ -2779,7 +2779,7 @@ std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Poin
  */
 static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun953 { [&fun953](Pointer p_0) {
+  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun953 { [&](Pointer p_0) {
     ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_954 { of_row_binary(p_0) };
     ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_955;
     {
@@ -2801,7 +2801,7 @@ std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Poin
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun957 { [&fun957](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun957 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
     Pointer id_958 { to_row_binary(p_0, p_1) };
     return id_958;
   }

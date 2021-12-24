@@ -78,7 +78,7 @@ void NewSourceDialog::createSource()
   Menu::getClient()->sendNew(key, val);
 
   clear();
-  emit QDialog::accept();
+  QDialog::accept();
 }
 
 void NewSourceDialog::clear()

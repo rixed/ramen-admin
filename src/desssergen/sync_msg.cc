@@ -238,7 +238,7 @@ inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -738,7 +738,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> to
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> fun268 { [&fun268](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> fun268 { [&](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0) {
     uint16_t id_269 { 0 };
     uint16_t id_270 { uint16_t((*p_0).index()) };
     bool id_271 { bool(id_269 == id_270) };
@@ -1185,7 +1185,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_msg::t> )> sersize_of_ro
  */
 static std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun471 { [&fun471](Pointer p_0) {
+  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun471 { [&](Pointer p_0) {
     ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 id_472 { p_0.readU16Le() };
     ::dessser::gen::sync_msg::ta97bb48ed75bbda6173555873826c8c6 letpair_res_473;
     {
@@ -1805,7 +1805,7 @@ std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointe
  */
 static std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun771 { [&fun771](Pointer p_0) {
+  std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointer)> fun771 { [&](Pointer p_0) {
     ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a id_772 { of_row_binary(p_0) };
     ::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a letpair_res_773;
     {
@@ -1826,7 +1826,7 @@ std::function<::dessser::gen::sync_msg::t12f53a0c7c008f43bd9f6aa8e2c9a88a(Pointe
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> fun775 { [&fun775](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_msg::t> ,Pointer)> fun775 { [&](std::shared_ptr<::dessser::gen::sync_msg::t>  p_0, Pointer p_1) {
     Pointer id_776 { to_row_binary(p_0, p_1) };
     return id_776;
   }

@@ -139,8 +139,6 @@ struct named_value : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_value::t> 
 > {
   using tuple::tuple;
-  named_value(std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_value::t> > p)
-    : std::tuple<std::string, std::shared_ptr<::dessser::gen::raql_value::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
 inline bool operator==(named_value const &a, named_value const &b) {
   return std::get<0>(a) == std::get<0>(b) && (*std::get<1>(a)) == (*std::get<1>(b));
@@ -158,21 +156,19 @@ inline std::ostream &operator<<(std::ostream &os, named_value const &t) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<named_value> const t) { os << *t; return os; }
 
-struct t539d9337a52df37cb66da93b14fe446d : public std::tuple<
+struct ta4246d307efc26a581b0c83fdec1c21f : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_value::t> ,
   std::shared_ptr<::dessser::gen::raql_value::t> 
 > {
   using tuple::tuple;
-  t539d9337a52df37cb66da93b14fe446d(std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , std::shared_ptr<::dessser::gen::raql_value::t> > p)
-    : std::tuple<std::shared_ptr<::dessser::gen::raql_value::t> , std::shared_ptr<::dessser::gen::raql_value::t> >(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t539d9337a52df37cb66da93b14fe446d const &a, t539d9337a52df37cb66da93b14fe446d const &b) {
+inline bool operator==(ta4246d307efc26a581b0c83fdec1c21f const &a, ta4246d307efc26a581b0c83fdec1c21f const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && (*std::get<1>(a)) == (*std::get<1>(b));
 }
-inline bool operator!=(t539d9337a52df37cb66da93b14fe446d const &a, t539d9337a52df37cb66da93b14fe446d const &b) {
+inline bool operator!=(ta4246d307efc26a581b0c83fdec1c21f const &a, ta4246d307efc26a581b0c83fdec1c21f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t539d9337a52df37cb66da93b14fe446d const &t) {
+inline std::ostream &operator<<(std::ostream &os, ta4246d307efc26a581b0c83fdec1c21f const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -180,7 +176,7 @@ inline std::ostream &operator<<(std::ostream &os, t539d9337a52df37cb66da93b14fe4
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t539d9337a52df37cb66da93b14fe446d> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta4246d307efc26a581b0c83fdec1c21f> const t) { os << *t; return os; }
 
 struct t : public std::variant<
   Void, // VNull
@@ -218,7 +214,7 @@ struct t : public std::variant<
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VVec
   Arr<std::shared_ptr<::dessser::gen::raql_value::t> >, // VArr
   Arr<std::shared_ptr<::dessser::gen::raql_value::named_value> >, // VRec
-  Arr<::dessser::gen::raql_value::t539d9337a52df37cb66da93b14fe446d> // VMap
+  Arr<::dessser::gen::raql_value::ta4246d307efc26a581b0c83fdec1c21f> // VMap
 > {
   using variant::variant;
   using variant::operator=;

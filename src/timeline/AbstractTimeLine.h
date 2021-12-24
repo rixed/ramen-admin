@@ -49,7 +49,8 @@ class AbstractTimeLine : public QWidget {
   Q_PROPERTY(bool withCursor
              MEMBER m_withCursor)
   Q_PROPERTY(bool doScroll
-             READ doScroll)
+             READ doScroll
+             CONSTANT)
 
 protected:
   void mouseMoveEvent(QMouseEvent *) override;
@@ -102,12 +103,13 @@ public:
   void highlightRange(QPair<qreal, qreal> const);
   void resetHighlights();
 
+  QPair<qreal, qreal> viewPort() const { return m_viewPort; }
+
 public slots:
   void setCurrentTime(qreal);
 
   /* The new viewport will be clipped to the begin and end of times: */
   void setViewPort(QPair<qreal, qreal> const &);
-  QPair<qreal, qreal> viewPort() const { return m_viewPort; }
 
   /* Zoom in or out of the current time. Note that zoom=1 means to have
    * the viewport = begin to end of time, and is therefore the minimum

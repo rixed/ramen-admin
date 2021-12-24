@@ -384,8 +384,8 @@ bool AlertInfoEditor::setValue(
     if (verbose) qDebug() << "Cannot find field" << QString::fromStdString(path);
     inexistantSourceError->setText(
       tr("Field %1/%2 does not exist")
-      .arg(QString::fromStdString(alert->table))
-      .arg(QString::fromStdString(alert->column)));
+      .arg(QString::fromStdString(alert->table),
+           QString::fromStdString(alert->column)));
     inexistantSourceError->show();
   }
 
@@ -654,7 +654,7 @@ void AlertInfoEditor::updateDescription()
   /* TODO: CarryCsts */
   QString const attachedFields {
     !topFields.isEmpty() && !carryFieldsStr.isEmpty() ?
-      tr("%1 and %2").arg(carryFieldsStr).arg(topFields) :
+      tr("%1 and %2").arg(carryFieldsStr, topFields) :
       !topFields.isEmpty() ? topFields : carryFieldsStr };
   QString const attachedFields_text {
     !attachedFields.isEmpty() ?
@@ -664,61 +664,61 @@ void AlertInfoEditor::updateDescription()
     description->setText(tr(
       "Fire notification \"%1%2\" when %3%4%5 is %6 %7%8%9\n"
       "and recover when back %10 %11.\n%12").
-      arg(descTitle->text()).
-      arg(descTitle->hasAcceptableInput() ? QString() : QString("…")).
-      arg(has_table ? QString::fromStdString(table) : QString("…")).
-      arg(has_column ? QString("/") + QString::fromStdString(column) :
-                         (has_table ? QString("…") : QString())).
-      arg(timeStep_text).
-      arg(thresholdIsMax->isChecked() ?  tr("above") : tr("below")).
-      arg(has_threshold ? threshold->text() : QString("…")).
-      arg(where_desc).
-      arg(having_desc).
-      arg(thresholdIsMax->isChecked() ?  tr("below") : tr("above")).
-      arg(has_threshold && has_hysteresis ?
-        QString::number(recovery) : QString("…")).
-      arg(attachedFields_text));
+      arg(descTitle->text(),
+          descTitle->hasAcceptableInput() ? QString() : QString("…"),
+          has_table ? QString::fromStdString(table) : QString("…"),
+          has_column ? QString("/") + QString::fromStdString(column) :
+                         (has_table ? QString("…") : QString()),
+          timeStep_text,
+          thresholdIsMax->isChecked() ?  tr("above") : tr("below"),
+          has_threshold ? threshold->text() : QString("…"),
+          where_desc,
+          having_desc,
+          thresholdIsMax->isChecked() ?  tr("below") : tr("above"),
+          has_threshold && has_hysteresis ?
+        QString::number(recovery) : QString("…"),
+          attachedFields_text));
   } else if (percentage_val >= 100.) {
     description->setText(tr(
       "Fire notification \"%1%2\" when %3%4%5 is consistently %6 %7\n"
       "for the last %8%9%10\n"
       "and recover when back %11 %12.\n%13").
-      arg(descTitle->text()).
-      arg(descTitle->hasAcceptableInput() ? QString() : QString("…")).
-      arg(has_table ? QString::fromStdString(table) : QString("…")).
-      arg(has_column ? QString("/") + QString::fromStdString(column) :
-                         (has_table ? QString("…") : QString())).
-      arg(timeStep_text).
-      arg(thresholdIsMax->isChecked() ? tr("above") : tr("below")).
-      arg(has_threshold ? threshold->text() : QString("…")).
-      arg(has_duration ? stringOfDuration(duration_val) : QString("…")).
-      arg(where_desc).
-      arg(having_desc).
-      arg(thresholdIsMax->isChecked() ? tr("below") : tr("above")).
-      arg(has_threshold && has_hysteresis ?
-        QString::number(recovery) : QString("…")).
-      arg(attachedFields_text));
+      arg(descTitle->text(),
+          descTitle->hasAcceptableInput() ? QString() : QString("…"),
+          has_table ? QString::fromStdString(table) : QString("…"),
+          has_column ? QString("/") + QString::fromStdString(column) :
+                         (has_table ? QString("…") : QString()),
+          timeStep_text,
+          thresholdIsMax->isChecked() ? tr("above") : tr("below"),
+          has_threshold ? threshold->text() : QString("…"),
+          has_duration ? stringOfDuration(duration_val) : QString("…"),
+          where_desc,
+          having_desc,
+          thresholdIsMax->isChecked() ? tr("below") : tr("above"),
+          has_threshold && has_hysteresis ?
+        QString::number(recovery) : QString("…"),
+          attachedFields_text));
   } else {
     description->setText(tr(
       "Fire notification \"%1%2\" when %3%4%5 is %6 %7%8\nfor at least %9% "
       "of the time during the last %10%11\nand recover when back %12 %13.\n"
       "%14").
-      arg(descTitle->text()).
-      arg(descTitle->hasAcceptableInput() ? QString() : QString("…")).
-      arg(has_table ? QString::fromStdString(table) : QString("…")).
-      arg(has_column ? QString("/") + QString::fromStdString(column) :
-                         (has_table ? QString("…") : QString())).
-      arg(timeStep_text).
-      arg(thresholdIsMax->isChecked() ? tr("above") : tr("below")).
-      arg(has_threshold ? threshold->text() : QString("…")).
-      arg(where_desc).
-      arg(has_percentage ? QString::number(percentage_val) : QString("…")).
-      arg(has_duration ? stringOfDuration(duration_val) : QString("…")).
-      arg(having_desc).
-      arg(thresholdIsMax->isChecked() ? tr("below") : tr("above")).
-      arg(has_threshold && has_hysteresis ?
-        QString::number(recovery) : QString("…")).
-      arg(attachedFields_text));
+      arg(descTitle->text(),
+          descTitle->hasAcceptableInput() ? QString() : QString("…"),
+          has_table ? QString::fromStdString(table) : QString("…"),
+          has_column ? QString("/") + QString::fromStdString(column) :
+                         (has_table ? QString("…") : QString()),
+          timeStep_text,
+          thresholdIsMax->isChecked() ? tr("above") : tr("below"),
+          has_threshold ? threshold->text() : QString("…"),
+          where_desc,
+          has_percentage ? QString::number(percentage_val) : QString("…"),
+          has_duration ? stringOfDuration(duration_val) : QString("…"),
+          having_desc,
+          thresholdIsMax->isChecked() ? tr("below") : tr("above"),
+          has_threshold && has_hysteresis ?
+        QString::number(recovery) : QString("…"),
+          attachedFields_text));
   }
 }
 

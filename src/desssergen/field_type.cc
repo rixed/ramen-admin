@@ -229,7 +229,7 @@ inline bool operator!=(ta18b971ad5bf537b68fb1bbf5fd2b926 const &a, ta18b971ad5bf
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
     dessser::gen::field_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -448,7 +448,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> 
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> fun111 { [&fun111](std::shared_ptr<::dessser::gen::field_type::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> fun111 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0) {
     auto fun112 { dessser::gen::field_name::sersize_of_row_binary };
     dessser::gen::field_name::t_ext id_113 { (*p_0).name };
     Size id_114 { fun112(id_113) };
@@ -668,7 +668,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_
  */
 static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun202 { [&fun202](Pointer p_0) {
+  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun202 { [&](Pointer p_0) {
     auto fun203 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::field_type::t18cecf882d7ac80cef37dfe6b22279d4 id_204 { fun203(p_0) };
     ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 let_res_205;
@@ -964,7 +964,7 @@ std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Poin
  */
 static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun340 { [&fun340](Pointer p_0) {
+  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun340 { [&](Pointer p_0) {
     ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 id_341 { of_row_binary(p_0) };
     ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_342;
     {
@@ -985,7 +985,7 @@ std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Poin
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun344 { [&fun344](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun344 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
     Pointer id_345 { to_row_binary(p_0, p_1) };
     return id_345;
   }

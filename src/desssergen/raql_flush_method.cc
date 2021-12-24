@@ -86,7 +86,7 @@ inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -120,7 +120,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Poi
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> fun12 { [&fun12](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> fun12 { [&](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0) {
     uint16_t id_13 { 0 };
     uint16_t id_14 { uint16_t((*p_0).index()) };
     bool id_15 { bool(id_13 == id_14) };
@@ -153,7 +153,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_flush_method::t> )> sers
  */
 static std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> fun23 { [&fun23](Pointer p_0) {
+  std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> fun23 { [&](Pointer p_0) {
     ::dessser::gen::raql_flush_method::ta97bb48ed75bbda6173555873826c8c6 id_24 { p_0.readU16Le() };
     ::dessser::gen::raql_flush_method::ta97bb48ed75bbda6173555873826c8c6 letpair_res_25;
     {
@@ -203,7 +203,7 @@ std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357
  */
 static std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> fun39 { [&fun39](Pointer p_0) {
+  std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1(Pointer)> fun39 { [&](Pointer p_0) {
     ::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1 id_40 { of_row_binary(p_0) };
     ::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357f1 letpair_res_41;
     {
@@ -224,7 +224,7 @@ std::function<::dessser::gen::raql_flush_method::t8a28a190b669d936f20fb6e41e8357
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> fun43 { [&fun43](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_flush_method::t> ,Pointer)> fun43 { [&](std::shared_ptr<::dessser::gen::raql_flush_method::t>  p_0, Pointer p_1) {
     Pointer id_44 { to_row_binary(p_0, p_1) };
     return id_44;
   }

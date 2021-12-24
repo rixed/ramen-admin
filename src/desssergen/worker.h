@@ -21,21 +21,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t4827d21c37f0b56d86b99cff40066ee3 : public std::tuple<
+struct t6f90506018683e67ac263aa9878686ac : public std::tuple<
   dessser::gen::field_name::t_ext,
   dessser::gen::raql_value::t_ext
 > {
   using tuple::tuple;
-  t4827d21c37f0b56d86b99cff40066ee3(std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext> p)
-    : std::tuple<dessser::gen::field_name::t_ext, dessser::gen::raql_value::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t4827d21c37f0b56d86b99cff40066ee3 const &a, t4827d21c37f0b56d86b99cff40066ee3 const &b) {
+inline bool operator==(t6f90506018683e67ac263aa9878686ac const &a, t6f90506018683e67ac263aa9878686ac const &b) {
   return ::dessser::gen::field_name::Deref(std::get<0>(a)) == ::dessser::gen::field_name::Deref(std::get<0>(b)) && ::dessser::gen::raql_value::Deref(std::get<1>(a)) == ::dessser::gen::raql_value::Deref(std::get<1>(b));
 }
-inline bool operator!=(t4827d21c37f0b56d86b99cff40066ee3 const &a, t4827d21c37f0b56d86b99cff40066ee3 const &b) {
+inline bool operator!=(t6f90506018683e67ac263aa9878686ac const &a, t6f90506018683e67ac263aa9878686ac const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t4827d21c37f0b56d86b99cff40066ee3 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t6f90506018683e67ac263aa9878686ac const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -43,7 +41,7 @@ inline std::ostream &operator<<(std::ostream &os, t4827d21c37f0b56d86b99cff40066
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4827d21c37f0b56d86b99cff40066ee3> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6f90506018683e67ac263aa9878686ac> const t) { os << *t; return os; }
 
 struct tb1d409993b02f1b7f7cedc87680eed70 {
   std::string tunneld_host;
@@ -112,12 +110,12 @@ struct t {
   std::string worker_signature;
   std::string info_signature;
   bool is_used;
-  Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params;
+  Arr<::dessser::gen::worker::t6f90506018683e67ac263aa9878686ac> params;
   Arr<dessser::gen::field_name::t_ext> envvars;
   ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role;
   std::optional<Arr<dessser::gen::func_ref::t_ext>> parents;
   Arr<dessser::gen::func_ref::t_ext> children;
-  t(bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, std::string worker_signature_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t4827d21c37f0b56d86b99cff40066ee3> params_, Arr<dessser::gen::field_name::t_ext> envvars_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, Arr<dessser::gen::func_ref::t_ext> children_) : enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), worker_signature(worker_signature_), info_signature(info_signature_), is_used(is_used_), params(params_), envvars(envvars_), role(role_), parents(parents_), children(children_) {}
+  t(bool enabled_, bool debug_, double report_period_, dessser::gen::file_path::t_ext cwd_, std::string worker_signature_, std::string info_signature_, bool is_used_, Arr<::dessser::gen::worker::t6f90506018683e67ac263aa9878686ac> params_, Arr<dessser::gen::field_name::t_ext> envvars_, ::dessser::gen::worker::t99c4dcc041241b8d5db72250f8968306 role_, std::optional<Arr<dessser::gen::func_ref::t_ext>> parents_, Arr<dessser::gen::func_ref::t_ext> children_) : enabled(enabled_), debug(debug_), report_period(report_period_), cwd(cwd_), worker_signature(worker_signature_), info_signature(info_signature_), is_used(is_used_), params(params_), envvars(envvars_), role(role_), parents(parents_), children(children_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

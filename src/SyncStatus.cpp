@@ -59,28 +59,28 @@ QString SyncStatus::message() const
 
     if (*prevStatus == status) {
       return QCoreApplication::translate("QMainWindow", "Retrying after %1: %2").
-             arg(duration).arg(curr);
+             arg(duration, curr);
     } else {
       switch (*prevStatus) {
         case Disconnected:
           return curr;
         case Resolving:
           return QCoreApplication::translate("QMainWindow", "Resolved in %1, %2").
-                 arg(duration).arg(curr);
+                 arg(duration, curr);
         case Connecting:
           return QCoreApplication::translate("QMainWindow", "Connected in %1, %2").
-                 arg(duration).arg(curr);
+                 arg(duration, curr);
         case Authenticating:
           return QCoreApplication::translate("QMainWindow", "Authenticated in %1, %2").
-                 arg(duration).arg(curr);
+                 arg(duration, curr);
         case Synchronizing:
           return QCoreApplication::translate("QMainWindow", "Synchronized in %1, %2").
-                 arg(duration).arg(curr);
+                 arg(duration, curr);
         case Synchronized:
           return curr;
         case Closing:
           return QCoreApplication::translate("QMainWindow", "Closed in %1, %2").
-                 arg(duration).arg(curr);
+                 arg(duration, curr);
         case Failed:
           return curr;
       }

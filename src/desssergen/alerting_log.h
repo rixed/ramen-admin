@@ -58,21 +58,19 @@ inline std::ostream &operator<<(std::ostream &os, tc97f0c1bbabddd4db874c961cd560
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc97f0c1bbabddd4db874c961cd5609d9> const v) { os << *v; return os; }
 
-struct t6bded395cd2ca5ea5b1538d97c26812f : public std::tuple<
+struct t62aae75ed55c9c452157e890cb77faf5 : public std::tuple<
   std::string,
   uint32_t
 > {
   using tuple::tuple;
-  t6bded395cd2ca5ea5b1538d97c26812f(std::tuple<std::string, uint32_t> p)
-    : std::tuple<std::string, uint32_t>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t6bded395cd2ca5ea5b1538d97c26812f const &a, t6bded395cd2ca5ea5b1538d97c26812f const &b) {
+inline bool operator==(t62aae75ed55c9c452157e890cb77faf5 const &a, t62aae75ed55c9c452157e890cb77faf5 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t6bded395cd2ca5ea5b1538d97c26812f const &a, t6bded395cd2ca5ea5b1538d97c26812f const &b) {
+inline bool operator!=(t62aae75ed55c9c452157e890cb77faf5 const &a, t62aae75ed55c9c452157e890cb77faf5 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t6bded395cd2ca5ea5b1538d97c26812f const &t) {
+inline std::ostream &operator<<(std::ostream &os, t62aae75ed55c9c452157e890cb77faf5 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -80,7 +78,7 @@ inline std::ostream &operator<<(std::ostream &os, t6bded395cd2ca5ea5b1538d97c268
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t6bded395cd2ca5ea5b1538d97c26812f> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t62aae75ed55c9c452157e890cb77faf5> const t) { os << *t; return os; }
 
 struct t2f07d8351fa62306ecaa96746ccc3d68 : public std::variant<
   Void, // Notification
@@ -123,7 +121,7 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t2f07d8351fa62
 
 struct t : public std::variant<
   ::dessser::gen::alerting_log::tc97f0c1bbabddd4db874c961cd5609d9, // NewNotification
-  ::dessser::gen::alerting_log::t6bded395cd2ca5ea5b1538d97c26812f, // Outcry
+  ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5, // Outcry
   std::string, // Ack
   ::dessser::gen::alerting_log::t2f07d8351fa62306ecaa96746ccc3d68, // Stop
   std::string // Cancel

@@ -411,6 +411,7 @@ struct PendingAddParent {
   PendingAddParent(FunctionItem *child_, QString const &site_, QString const &program_, QString const function_)
     : child(child_), site(site_), program(program_), function(function_) {}
 };
+
 static std::list<PendingAddParent> pendingAddParents;
 
 void GraphModel::removeParents(FunctionItem *child)

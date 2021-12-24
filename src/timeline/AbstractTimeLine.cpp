@@ -236,7 +236,7 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event)
   static QColor const highlightColor { 255, 255, 255, 125 };
   painter.setPen(Qt::NoPen);
   painter.setBrush(highlightColor);
-  for (QPair<qreal, qreal> const range : highlights) {
+  for (QPair<qreal, qreal> const &range : qAsConst(highlights)) {
     qreal const xStart { toPixel(range.first) };
     qreal const xStop { toPixel(range.second) };
     if (verbose)

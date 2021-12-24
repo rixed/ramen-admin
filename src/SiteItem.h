@@ -25,7 +25,7 @@ public:
 
   SiteItem(GraphItem *treeParent, std::unique_ptr<Site>, GraphViewSettings const &);
 
-  void reorder(GraphModel const *);
+  void reorder(GraphModel *);
   QRectF operationRect() const;
   bool isTopHalf() const { return false; }
 

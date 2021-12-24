@@ -35,18 +35,16 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tc75d15e003a7ff08bcc9d3be43928a37 : public std::tuple<
+struct te5110d98acb3927362000c58e13a1d40 : public std::tuple<
   dessser::gen::fq_function_name::t_ext,
   dessser::gen::fq_function_name::t_ext
 > {
   using tuple::tuple;
-  tc75d15e003a7ff08bcc9d3be43928a37(std::tuple<dessser::gen::fq_function_name::t_ext, dessser::gen::fq_function_name::t_ext> p)
-    : std::tuple<dessser::gen::fq_function_name::t_ext, dessser::gen::fq_function_name::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc75d15e003a7ff08bcc9d3be43928a37 const &a, tc75d15e003a7ff08bcc9d3be43928a37 const &b) {
+inline bool operator==(te5110d98acb3927362000c58e13a1d40 const &a, te5110d98acb3927362000c58e13a1d40 const &b) {
   return ::dessser::gen::fq_function_name::Deref(std::get<0>(a)) == ::dessser::gen::fq_function_name::Deref(std::get<0>(b)) && ::dessser::gen::fq_function_name::Deref(std::get<1>(a)) == ::dessser::gen::fq_function_name::Deref(std::get<1>(b));
 }
-inline bool operator!=(tc75d15e003a7ff08bcc9d3be43928a37 const &a, tc75d15e003a7ff08bcc9d3be43928a37 const &b) {
+inline bool operator!=(te5110d98acb3927362000c58e13a1d40 const &a, te5110d98acb3927362000c58e13a1d40 const &b) {
   return !operator==(a, b);
 }
 struct td2e775685fdb218732b8145a467405fe : public std::variant<
@@ -77,9 +75,9 @@ struct t {
   double until;
   ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient;
   Arr<dessser::gen::fq_function_name::t_ext> sources;
-  Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links;
+  Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> links;
   double timeout_date;
-  t(uint16_t channel_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double since_, double until_, ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient_, Arr<dessser::gen::fq_function_name::t_ext> sources_, Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> links_, double timeout_date_) : channel(channel_), target(target_), target_fieldmask(target_fieldmask_), since(since_), until(until_), recipient(recipient_), sources(sources_), links(links_), timeout_date(timeout_date_) {}
+  t(uint16_t channel_, dessser::gen::fq_function_name::t_ext target_, std::string target_fieldmask_, double since_, double until_, ::dessser::gen::replay::td2e775685fdb218732b8145a467405fe recipient_, Arr<dessser::gen::fq_function_name::t_ext> sources_, Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> links_, double timeout_date_) : channel(channel_), target(target_), target_fieldmask(target_fieldmask_), since(since_), until(until_), recipient(recipient_), sources(sources_), links(links_), timeout_date(timeout_date_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
@@ -299,32 +297,32 @@ inline bool operator==(t7e337a83829e34e4f1a2127dcf8e964a const &a, t7e337a83829e
 inline bool operator!=(t7e337a83829e34e4f1a2127dcf8e964a const &a, t7e337a83829e34e4f1a2127dcf8e964a const &b) {
   return !operator==(a, b);
 }
-struct t756f4fc25adfaffaa2b2ced6c957feda : public std::tuple<
-  Lst<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>,
+struct t423627277da8559e8b54a2ca90fab66d : public std::tuple<
+  Lst<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>,
   Pointer
 > {
   using tuple::tuple;
-  t756f4fc25adfaffaa2b2ced6c957feda(std::tuple<Lst<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>, Pointer> p)
-    : std::tuple<Lst<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t423627277da8559e8b54a2ca90fab66d(std::tuple<Lst<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t756f4fc25adfaffaa2b2ced6c957feda const &a, t756f4fc25adfaffaa2b2ced6c957feda const &b) {
+inline bool operator==(t423627277da8559e8b54a2ca90fab66d const &a, t423627277da8559e8b54a2ca90fab66d const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t756f4fc25adfaffaa2b2ced6c957feda const &a, t756f4fc25adfaffaa2b2ced6c957feda const &b) {
+inline bool operator!=(t423627277da8559e8b54a2ca90fab66d const &a, t423627277da8559e8b54a2ca90fab66d const &b) {
   return !operator==(a, b);
 }
-struct t4ea03b1ad544ad94c5c9d248a168036d : public std::tuple<
-  Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>,
+struct t28a2aa1152147e15b39aa4954f238c94 : public std::tuple<
+  Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>,
   Pointer
 > {
   using tuple::tuple;
-  t4ea03b1ad544ad94c5c9d248a168036d(std::tuple<Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>, Pointer> p)
-    : std::tuple<Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t28a2aa1152147e15b39aa4954f238c94(std::tuple<Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>, Pointer> p)
+    : std::tuple<Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t4ea03b1ad544ad94c5c9d248a168036d const &a, t4ea03b1ad544ad94c5c9d248a168036d const &b) {
+inline bool operator==(t28a2aa1152147e15b39aa4954f238c94 const &a, t28a2aa1152147e15b39aa4954f238c94 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t4ea03b1ad544ad94c5c9d248a168036d const &a, t4ea03b1ad544ad94c5c9d248a168036d const &b) {
+inline bool operator!=(t28a2aa1152147e15b39aa4954f238c94 const &a, t28a2aa1152147e15b39aa4954f238c94 const &b) {
   return !operator==(a, b);
 }
 /* ----------- */
@@ -407,7 +405,7 @@ inline bool operator!=(t4ea03b1ad544ad94c5c9d248a168036d const &a, t4ea03b1ad544
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::replay::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::replay::t>  p_0, Pointer p_1) {
     uint16_t id_1 { (*p_0).channel };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -610,7 +608,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer
         {
           Vec<1, int32_t> n_ref_213 { id_120 };
           Arr<dessser::gen::fq_function_name::t_ext> id_122 { (*p_0).sources };
-          for (dessser::gen::fq_function_name::t_ext x_214 : id_122) {
+          for (dessser::gen::fq_function_name::t_ext &x_214 : id_122) {
             uint8_t id_123 { 0 };
             auto fun124 { dessser::gen::fq_function_name::to_row_binary };
             uint8_t id_125 { 0 };
@@ -639,7 +637,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer
     Pointer let_res_137;
     {
       Pointer srec_dst_215 { let_res_79 };
-      Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_138 { (*p_0).links };
+      Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_138 { (*p_0).links };
       uint32_t id_139 { id_138.size() };
       Vec<1, uint32_t> id_140 {  id_139  };
       Pointer let_res_141;
@@ -707,8 +705,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer
         Pointer let_res_179;
         {
           Vec<1, int32_t> n_ref_219 { id_178 };
-          Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_180 { (*p_0).links };
-          for (::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37 x_220 : id_180) {
+          Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_180 { (*p_0).links };
+          for (::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40 &x_220 : id_180) {
             uint8_t id_181 { 0 };
             uint8_t id_182 { 0 };
             Pointer id_183 { dst_ref_218[id_182] };
@@ -827,7 +825,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> to_r
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> fun205 { [&fun205](std::shared_ptr<::dessser::gen::replay::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> fun205 { [&](std::shared_ptr<::dessser::gen::replay::t>  p_0) {
     Size id_206 { 2UL };
     auto fun207 { dessser::gen::fq_function_name::sersize_of_row_binary };
     dessser::gen::fq_function_name::t_ext id_208 { (*p_0).target };
@@ -1016,7 +1014,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_
     Size let_res_326;
     {
       Size sz_192 { let_res_270 };
-      Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_327 { (*p_0).links };
+      Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_327 { (*p_0).links };
       uint32_t id_328 { id_327.size() };
       Vec<1, uint32_t> id_329 {  id_328  };
       Size let_res_330;
@@ -1066,7 +1064,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_
           Vec<1, int32_t> repeat_n_196 { id_355 };
           bool while_flag_356 { true };
           do {
-            Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_357 { (*p_0).links };
+            Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_357 { (*p_0).links };
             uint32_t id_358 { id_357.size() };
             int32_t id_359 { int32_t(id_358) };
             uint8_t id_360 { 0 };
@@ -1083,8 +1081,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_
                 auto fun367 { dessser::gen::fq_function_name::sersize_of_row_binary };
                 uint8_t id_368 { 0 };
                 int32_t id_369 { repeat_n_196[id_368] };
-                Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_370 { (*p_0).links };
-                ::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37 id_371 { id_370[id_369] };
+                Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_370 { (*p_0).links };
+                ::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40 id_371 { id_370[id_369] };
                 dessser::gen::fq_function_name::t_ext id_372 { std::get<0>(id_371) };
                 Size id_373 { fun367(id_372) };
                 Size id_374 { Size(sz_197 + id_373) };
@@ -1096,8 +1094,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_
                 auto fun376 { dessser::gen::fq_function_name::sersize_of_row_binary };
                 uint8_t id_377 { 0 };
                 int32_t id_378 { repeat_n_196[id_377] };
-                Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_379 { (*p_0).links };
-                ::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37 id_380 { id_379[id_378] };
+                Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_379 { (*p_0).links };
+                ::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40 id_380 { id_379[id_378] };
                 dessser::gen::fq_function_name::t_ext id_381 { std::get<1>(id_380) };
                 Size id_382 { fun376(id_381) };
                 Size id_383 { Size(sz_198 + id_382) };
@@ -1274,7 +1272,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::replay::t> )> sersize_of_row_
  */
 static std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> fun395 { [&fun395](Pointer p_0) {
+  std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> fun395 { [&](Pointer p_0) {
     ::dessser::gen::replay::ta97bb48ed75bbda6173555873826c8c6 id_396 { p_0.readU16Le() };
     ::dessser::gen::replay::ta97bb48ed75bbda6173555873826c8c6 letpair_res_397;
     {
@@ -1715,19 +1713,19 @@ static std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(P
                                   }
                                   let_res_566 = let_res_569;
                                 }
-                                ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda let_res_604;
+                                ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d let_res_604;
                                 {
                                   ::dessser::gen::replay::t491c44439106a32f896827242e8e76a1 dlist1_145 { let_res_566 };
-                                  ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda letpair_res_605;
+                                  ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d letpair_res_605;
                                   {
                                     auto dlist1_fst_146 { std::get<0>(dlist1_145) };
                                     auto dlist1_snd_147 { std::get<1>(dlist1_145) };
-                                    Lst<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> endoflist_606;
-                                    ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda id_607 { endoflist_606, dlist1_snd_147 };
-                                    Vec<1, ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda> id_608 {  id_607  };
-                                    ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda let_res_609;
+                                    Lst<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> endoflist_606;
+                                    ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d id_607 { endoflist_606, dlist1_snd_147 };
+                                    Vec<1, ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d> id_608 {  id_607  };
+                                    ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d let_res_609;
                                     {
-                                      Vec<1, ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda> inits_src_ref_148 { id_608 };
+                                      Vec<1, ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d> inits_src_ref_148 { id_608 };
                                       int32_t id_610 { 0L };
                                       Vec<1, int32_t> id_611 {  id_610  };
                                       {
@@ -1741,31 +1739,31 @@ static std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(P
                                           while_flag_612 = id_616;
                                           if (while_flag_612) {
                                             uint8_t id_617 { 0 };
-                                            ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda id_618 { inits_src_ref_148[id_617] };
+                                            ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d id_618 { inits_src_ref_148[id_617] };
                                             {
-                                              ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda dlist2_150 { id_618 };
+                                              ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d dlist2_150 { id_618 };
                                               {
                                                 auto dlist2_fst_151 { std::get<0>(dlist2_150) };
                                                 auto dlist2_snd_152 { std::get<1>(dlist2_150) };
                                                 uint8_t id_619 { 0 };
                                                 auto fun620 { dessser::gen::fq_function_name::of_row_binary };
                                                 ::dessser::gen::replay::tafdf48d85e3efdf5b24e3fa2741562be id_621 { fun620(dlist2_snd_152) };
-                                                ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda let_res_622;
+                                                ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d let_res_622;
                                                 {
                                                   ::dessser::gen::replay::tafdf48d85e3efdf5b24e3fa2741562be dtup_153 { id_621 };
-                                                  ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda letpair_res_623;
+                                                  ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d letpair_res_623;
                                                   {
                                                     auto dtup_fst_154 { std::get<0>(dtup_153) };
                                                     auto dtup_snd_155 { std::get<1>(dtup_153) };
                                                     auto fun624 { dessser::gen::fq_function_name::of_row_binary };
                                                     ::dessser::gen::replay::tafdf48d85e3efdf5b24e3fa2741562be id_625 { fun624(dtup_snd_155) };
-                                                    ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda letpair_res_626;
+                                                    ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d letpair_res_626;
                                                     {
                                                       auto dtup_fst_157 { std::get<0>(id_625) };
                                                       auto dtup_snd_158 { std::get<1>(id_625) };
-                                                      ::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37 id_627 { dtup_fst_154, dtup_fst_157 };
-                                                      Lst<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_628 { id_627, dlist2_fst_151 };
-                                                      ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda id_629 { id_628, dtup_snd_158 };
+                                                      ::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40 id_627 { dtup_fst_154, dtup_fst_157 };
+                                                      Lst<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_628 { id_627, dlist2_fst_151 };
+                                                      ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d id_629 { id_628, dtup_snd_158 };
                                                       letpair_res_626 = id_629;
                                                     }
                                                     letpair_res_623 = letpair_res_626;
@@ -1792,24 +1790,24 @@ static std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(P
                                       }
                                       (void)::dessser::VOID;
                                       uint8_t id_637 { 0 };
-                                      ::dessser::gen::replay::t756f4fc25adfaffaa2b2ced6c957feda id_638 { inits_src_ref_148[id_637] };
+                                      ::dessser::gen::replay::t423627277da8559e8b54a2ca90fab66d id_638 { inits_src_ref_148[id_637] };
                                       let_res_609 = id_638;
                                     }
                                     letpair_res_605 = let_res_609;
                                   }
                                   let_res_604 = letpair_res_605;
                                 }
-                                ::dessser::gen::replay::t4ea03b1ad544ad94c5c9d248a168036d letpair_res_639;
+                                ::dessser::gen::replay::t28a2aa1152147e15b39aa4954f238c94 letpair_res_639;
                                 {
                                   auto dlist4_fst_163 { std::get<0>(let_res_604) };
                                   auto dlist4_snd_164 { std::get<1>(let_res_604) };
-                                  Arr<::dessser::gen::replay::tc75d15e003a7ff08bcc9d3be43928a37> id_640 { dlist4_fst_163.toListRev() };
-                                  ::dessser::gen::replay::t4ea03b1ad544ad94c5c9d248a168036d id_641 { id_640, dlist4_snd_164 };
+                                  Arr<::dessser::gen::replay::te5110d98acb3927362000c58e13a1d40> id_640 { dlist4_fst_163.toListRev() };
+                                  ::dessser::gen::replay::t28a2aa1152147e15b39aa4954f238c94 id_641 { id_640, dlist4_snd_164 };
                                   letpair_res_639 = id_641;
                                 }
                                 ::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970 let_res_642;
                                 {
-                                  ::dessser::gen::replay::t4ea03b1ad544ad94c5c9d248a168036d drec_165 { letpair_res_639 };
+                                  ::dessser::gen::replay::t28a2aa1152147e15b39aa4954f238c94 drec_165 { letpair_res_639 };
                                   ::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970 letpair_res_643;
                                   {
                                     auto drec_fst_166 { std::get<0>(drec_165) };
@@ -1868,7 +1866,7 @@ std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)
  */
 static std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> fun649 { [&fun649](Pointer p_0) {
+  std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)> fun649 { [&](Pointer p_0) {
     ::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970 id_650 { of_row_binary(p_0) };
     ::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970 letpair_res_651;
     {
@@ -1890,7 +1888,7 @@ std::function<::dessser::gen::replay::tec7b3f539b48c1f927aab2bb35ca7970(Pointer)
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> fun653 { [&fun653](std::shared_ptr<::dessser::gen::replay::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::replay::t> ,Pointer)> fun653 { [&](std::shared_ptr<::dessser::gen::replay::t>  p_0, Pointer p_1) {
     Pointer id_654 { to_row_binary(p_0, p_1) };
     return id_654;
   }

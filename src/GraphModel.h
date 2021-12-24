@@ -189,15 +189,15 @@ private slots:
   void onChange(QList<ConfChange> const &);
 
 signals:
-  void positionChanged(QModelIndex const &index) const;
-  void functionAdded(FunctionItem const *) const;
-  void functionRemoved(FunctionItem const *) const;
-  void relationAdded(FunctionItem const *parent, FunctionItem const *child) const;
-  void relationRemoved(FunctionItem const *parent, FunctionItem const *child) const;
-  void storagePropertyChanged(FunctionItem const *) const;
+  void positionChanged(QModelIndex const &index);
+  void functionAdded(FunctionItem const *);
+  void functionRemoved(FunctionItem const *);
+  void relationAdded(FunctionItem const *parent, FunctionItem const *child);
+  void relationRemoved(FunctionItem const *parent, FunctionItem const *child);
+  void storagePropertyChanged(FunctionItem const *);
   /* Special signal each time a worker changes (to help with filtering
    * processes, see ProcessesWidget.cpp */
-  void workerChanged(QString const &oldSign, QString const &newSign) const;
+  void workerChanged(QString const &oldSign, QString const &newSign);
 };
 
 #endif

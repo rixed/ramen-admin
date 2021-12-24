@@ -438,7 +438,7 @@ inline bool operator!=(t13a07ee37ab40962540da8534858dc07 const &a, t13a07ee37ab4
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::constant> ,Pointer)> constant_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::constant> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::alert::constant>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::constant> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alert::constant>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
     dessser::gen::field_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -538,7 +538,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alert::constant> ,Pointer)
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,Pointer)> threshold_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,Pointer)> fun45 { [&fun45](std::shared_ptr<::dessser::gen::alert::threshold>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,Pointer)> fun45 { [&](std::shared_ptr<::dessser::gen::alert::threshold>  p_0, Pointer p_1) {
     uint16_t id_46 { uint16_t((*p_0).index()) };
     Pointer id_47 { p_1.writeU16Le(id_46) };
     Pointer let_res_48;
@@ -861,7 +861,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,Pointer
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> fun110 { [&fun110](std::shared_ptr<::dessser::gen::alert::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> fun110 { [&](std::shared_ptr<::dessser::gen::alert::t>  p_0, Pointer p_1) {
     auto fun111 { dessser::gen::fq_name::to_row_binary };
     dessser::gen::fq_name::t_ext id_112 { (*p_0).table };
     Pointer id_113 { fun111(id_112, p_1) };
@@ -953,7 +953,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
         {
           Vec<1, int32_t> n_ref_492 { id_163 };
           Lst<dessser::gen::simple_filter::t_ext> id_165 { (*p_0).where };
-          for (dessser::gen::simple_filter::t_ext x_493 : id_165) {
+          for (dessser::gen::simple_filter::t_ext &x_493 : id_165) {
             uint8_t id_166 { 0 };
             auto fun167 { dessser::gen::simple_filter::to_row_binary };
             uint8_t id_168 { 0 };
@@ -1063,7 +1063,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
             Vec<1, int32_t> n_ref_498 { id_229 };
             std::optional<Lst<dessser::gen::field_name::t_ext>> id_231 { (*p_0).group_by };
             Lst<dessser::gen::field_name::t_ext> id_232 { id_231.value() };
-            for (dessser::gen::field_name::t_ext x_499 : id_232) {
+            for (dessser::gen::field_name::t_ext &x_499 : id_232) {
               uint8_t id_233 { 0 };
               auto fun234 { dessser::gen::field_name::to_row_binary };
               uint8_t id_235 { 0 };
@@ -1163,7 +1163,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
         {
           Vec<1, int32_t> n_ref_504 { id_288 };
           Lst<dessser::gen::simple_filter::t_ext> id_290 { (*p_0).having };
-          for (dessser::gen::simple_filter::t_ext x_505 : id_290) {
+          for (dessser::gen::simple_filter::t_ext &x_505 : id_290) {
             uint8_t id_291 { 0 };
             auto fun292 { dessser::gen::simple_filter::to_row_binary };
             uint8_t id_293 { 0 };
@@ -1300,7 +1300,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
         {
           Vec<1, int32_t> n_ref_515 { id_365 };
           Lst<dessser::gen::field_name::t_ext> id_367 { (*p_0).tops };
-          for (dessser::gen::field_name::t_ext x_516 : id_367) {
+          for (dessser::gen::field_name::t_ext &x_516 : id_367) {
             uint8_t id_368 { 0 };
             auto fun369 { dessser::gen::field_name::to_row_binary };
             uint8_t id_370 { 0 };
@@ -1398,7 +1398,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
         {
           Vec<1, int32_t> n_ref_521 { id_423 };
           Lst<dessser::gen::field_name::t_ext> id_425 { (*p_0).carry_fields };
-          for (dessser::gen::field_name::t_ext x_522 : id_425) {
+          for (dessser::gen::field_name::t_ext &x_522 : id_425) {
             uint8_t id_426 { 0 };
             auto fun427 { dessser::gen::field_name::to_row_binary };
             uint8_t id_428 { 0 };
@@ -1496,7 +1496,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)
         {
           Vec<1, int32_t> n_ref_527 { id_481 };
           Lst<std::shared_ptr<::dessser::gen::alert::constant> > id_483 { (*p_0).carry_csts };
-          for (std::shared_ptr<::dessser::gen::alert::constant>  x_528 : id_483) {
+          for (std::shared_ptr<::dessser::gen::alert::constant>  &x_528 : id_483) {
             uint8_t id_484 { 0 };
             uint8_t id_485 { 0 };
             Pointer id_486 { dst_ref_526[id_485] };
@@ -1811,7 +1811,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> to_ro
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alert::constant> )> constant_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alert::constant> )> fun661 { [&fun661](std::shared_ptr<::dessser::gen::alert::constant>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alert::constant> )> fun661 { [&](std::shared_ptr<::dessser::gen::alert::constant>  p_0) {
     auto fun662 { dessser::gen::field_name::sersize_of_row_binary };
     dessser::gen::field_name::t_ext id_663 { (*p_0).name };
     Size id_664 { fun662(id_663) };
@@ -1879,7 +1879,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alert::constant> )> constant_
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> threshold_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> fun695 { [&fun695](std::shared_ptr<::dessser::gen::alert::threshold>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> fun695 { [&](std::shared_ptr<::dessser::gen::alert::threshold>  p_0) {
     uint16_t id_696 { 0 };
     uint16_t id_697 { uint16_t((*p_0).index()) };
     bool id_698 { bool(id_696 == id_697) };
@@ -2095,7 +2095,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> threshol
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> fun719 { [&fun719](std::shared_ptr<::dessser::gen::alert::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> fun719 { [&](std::shared_ptr<::dessser::gen::alert::t>  p_0) {
     auto fun720 { dessser::gen::fq_name::sersize_of_row_binary };
     dessser::gen::fq_name::t_ext id_721 { (*p_0).table };
     Size id_722 { fun720(id_721) };
@@ -2919,7 +2919,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_of_row_b
  */
 static std::function<::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904(Pointer)> constant_of_row_binary_init()
 {
-  std::function<::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904(Pointer)> fun1207 { [&fun1207](Pointer p_0) {
+  std::function<::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904(Pointer)> fun1207 { [&](Pointer p_0) {
     auto fun1208 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::alert::t18cecf882d7ac80cef37dfe6b22279d4 id_1209 { fun1208(p_0) };
     ::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904 let_res_1210;
@@ -3079,7 +3079,7 @@ std::function<::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904(Pointer)>
  */
 static std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Pointer)> threshold_of_row_binary_init()
 {
-  std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Pointer)> fun1260 { [&fun1260](Pointer p_0) {
+  std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Pointer)> fun1260 { [&](Pointer p_0) {
     ::dessser::gen::alert::ta97bb48ed75bbda6173555873826c8c6 id_1261 { p_0.readU16Le() };
     ::dessser::gen::alert::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1262;
     {
@@ -3747,7 +3747,7 @@ std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Pointer)>
  */
 static std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> fun1330 { [&fun1330](Pointer p_0) {
+  std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> fun1330 { [&](Pointer p_0) {
     auto fun1331 { dessser::gen::fq_name::of_row_binary };
     ::dessser::gen::alert::t1067cf8ed87e4e016349f71797fb0661 id_1332 { fun1331(p_0) };
     ::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6 let_res_1333;
@@ -5272,7 +5272,7 @@ std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)>
  */
 static std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> fun2024 { [&fun2024](Pointer p_0) {
+  std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> fun2024 { [&](Pointer p_0) {
     ::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6 id_2025 { of_row_binary(p_0) };
     ::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6 letpair_res_2026;
     {
@@ -5294,7 +5294,7 @@ std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)>
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> fun2028 { [&fun2028](std::shared_ptr<::dessser::gen::alert::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> fun2028 { [&](std::shared_ptr<::dessser::gen::alert::t>  p_0, Pointer p_1) {
     Pointer id_2029 { to_row_binary(p_0, p_1) };
     return id_2029;
   }

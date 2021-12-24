@@ -109,18 +109,16 @@ inline bool operator==(t614b5d4c127c7065272d8dcc1f9877d3 const &a, t614b5d4c127c
 inline bool operator!=(t614b5d4c127c7065272d8dcc1f9877d3 const &a, t614b5d4c127c7065272d8dcc1f9877d3 const &b) {
   return !operator==(a, b);
 }
-struct td1e70aeaf070b9b0d0119e932e590179 : public std::tuple<
+struct t42c3ffb6cb514e3c128f0c7344ce492a : public std::tuple<
   std::string,
   dessser::gen::raql_expr::t_ext
 > {
   using tuple::tuple;
-  td1e70aeaf070b9b0d0119e932e590179(std::tuple<std::string, dessser::gen::raql_expr::t_ext> p)
-    : std::tuple<std::string, dessser::gen::raql_expr::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(td1e70aeaf070b9b0d0119e932e590179 const &a, td1e70aeaf070b9b0d0119e932e590179 const &b) {
+inline bool operator==(t42c3ffb6cb514e3c128f0c7344ce492a const &a, t42c3ffb6cb514e3c128f0c7344ce492a const &b) {
   return std::get<0>(a) == std::get<0>(b) && ::dessser::gen::raql_expr::Deref(std::get<1>(a)) == ::dessser::gen::raql_expr::Deref(std::get<1>(b));
 }
-inline bool operator!=(td1e70aeaf070b9b0d0119e932e590179 const &a, td1e70aeaf070b9b0d0119e932e590179 const &b) {
+inline bool operator!=(t42c3ffb6cb514e3c128f0c7344ce492a const &a, t42c3ffb6cb514e3c128f0c7344ce492a const &b) {
   return !operator==(a, b);
 }
 struct t66e84af8ac3d220e6953b809395192f8 {
@@ -160,24 +158,24 @@ inline bool operator==(tbbc319188017fc622f05dfada38341dc const &a, tbbc319188017
 inline bool operator!=(tbbc319188017fc622f05dfada38341dc const &a, tbbc319188017fc622f05dfada38341dc const &b) {
   return !operator==(a, b);
 }
-struct t30bd731cf6638e267c87018bc3ca5b81 {
-  Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> options;
+struct ta64ee09b20632228f3a50181be1b6548 {
+  Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> options;
   dessser::gen::raql_expr::t_ext topic;
   std::optional<dessser::gen::raql_expr::t_ext> partitions;
   ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc restart_from;
-  t30bd731cf6638e267c87018bc3ca5b81(Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> options_, dessser::gen::raql_expr::t_ext topic_, std::optional<dessser::gen::raql_expr::t_ext> partitions_, ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc restart_from_) : options(options_), topic(topic_), partitions(partitions_), restart_from(restart_from_) {}
-  t30bd731cf6638e267c87018bc3ca5b81() = default;
+  ta64ee09b20632228f3a50181be1b6548(Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> options_, dessser::gen::raql_expr::t_ext topic_, std::optional<dessser::gen::raql_expr::t_ext> partitions_, ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc restart_from_) : options(options_), topic(topic_), partitions(partitions_), restart_from(restart_from_) {}
+  ta64ee09b20632228f3a50181be1b6548() = default;
 };
-inline bool operator==(t30bd731cf6638e267c87018bc3ca5b81 const &a, t30bd731cf6638e267c87018bc3ca5b81 const &b) {
+inline bool operator==(ta64ee09b20632228f3a50181be1b6548 const &a, ta64ee09b20632228f3a50181be1b6548 const &b) {
   return a.options == b.options && ::dessser::gen::raql_expr::Deref(a.topic) == ::dessser::gen::raql_expr::Deref(b.topic) && ((a.partitions && b.partitions && ::dessser::gen::raql_expr::Deref(a.partitions.value()) == ::dessser::gen::raql_expr::Deref(b.partitions.value())) || (!a.partitions && !b.partitions)) && a.restart_from == b.restart_from;
 }
 
-inline bool operator!=(t30bd731cf6638e267c87018bc3ca5b81 const &a, t30bd731cf6638e267c87018bc3ca5b81 const &b) {
+inline bool operator!=(ta64ee09b20632228f3a50181be1b6548 const &a, ta64ee09b20632228f3a50181be1b6548 const &b) {
   return !operator==(a, b);
 }
 struct external_source : public std::variant<
   ::dessser::gen::raql_operation::t614b5d4c127c7065272d8dcc1f9877d3, // File
-  ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 // Kafka
+  ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 // Kafka
 > {
   using variant::variant;
   using variant::operator=;
@@ -391,18 +389,18 @@ inline bool operator==(tffcb9977d856d30366202f1b8eb57823 const &a, tffcb9977d856
 inline bool operator!=(tffcb9977d856d30366202f1b8eb57823 const &a, tffcb9977d856d30366202f1b8eb57823 const &b) {
   return !operator==(a, b);
 }
-struct t90d9936f362c598c2320b06a45a435fd : public std::tuple<
-  Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179>,
+struct tf13fbb09f51834e815a6b7b178fd9c4c : public std::tuple<
+  Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a>,
   Pointer
 > {
   using tuple::tuple;
-  t90d9936f362c598c2320b06a45a435fd(std::tuple<Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179>, Pointer> p)
-    : std::tuple<Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tf13fbb09f51834e815a6b7b178fd9c4c(std::tuple<Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t90d9936f362c598c2320b06a45a435fd const &a, t90d9936f362c598c2320b06a45a435fd const &b) {
+inline bool operator==(tf13fbb09f51834e815a6b7b178fd9c4c const &a, tf13fbb09f51834e815a6b7b178fd9c4c const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t90d9936f362c598c2320b06a45a435fd const &a, t90d9936f362c598c2320b06a45a435fd const &b) {
+inline bool operator!=(tf13fbb09f51834e815a6b7b178fd9c4c const &a, tf13fbb09f51834e815a6b7b178fd9c4c const &b) {
   return !operator==(a, b);
 }
 struct t63851e9ebc3cda254eb20d83ee5492de : public std::tuple<
@@ -941,7 +939,7 @@ inline bool operator!=(ta85addb3b405dfc5781945a2f01e354a const &a, ta85addb3b405
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_format> ,Pointer)> external_format_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_format> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::raql_operation::external_format>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_format> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_operation::external_format>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -1177,7 +1175,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
               Vec<1, int32_t> n_ref_856 { id_145 };
               ::dessser::gen::raql_operation::t78cec4f9827249604fe947034c575f2a id_147 { std::get<0 /* CSV */>((*p_0)) };
               Lst<dessser::gen::field_type::t_ext> id_148 { id_147.fields };
-              for (dessser::gen::field_type::t_ext x_857 : id_148) {
+              for (dessser::gen::field_type::t_ext &x_857 : id_148) {
                 uint8_t id_149 { 0 };
                 auto fun150 { dessser::gen::field_type::to_row_binary };
                 uint8_t id_151 { 0 };
@@ -1297,7 +1295,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
           {
             Vec<1, int32_t> n_ref_843 { id_217 };
             Lst<dessser::gen::field_type::t_ext> id_219 { std::get<1 /* RowBinary */>((*p_0)) };
-            for (dessser::gen::field_type::t_ext x_844 : id_219) {
+            for (dessser::gen::field_type::t_ext &x_844 : id_219) {
               uint8_t id_220 { 0 };
               auto fun221 { dessser::gen::field_type::to_row_binary };
               uint8_t id_222 { 0 };
@@ -1402,7 +1400,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_f
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_source> ,Pointer)> external_source_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_source> ,Pointer)> fun234 { [&fun234](std::shared_ptr<::dessser::gen::raql_operation::external_source>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_source> ,Pointer)> fun234 { [&](std::shared_ptr<::dessser::gen::raql_operation::external_source>  p_0, Pointer p_1) {
     uint16_t id_235 { uint16_t((*p_0).index()) };
     Pointer id_236 { p_1.writeU16Le(id_235) };
     Pointer let_res_237;
@@ -1456,8 +1454,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
         bool id_267 { bool(id_265 == id_266) };
         Void id_268 { ((void)(assert(id_267)), ::dessser::VOID) };
         (void)id_268;
-        ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_269 { std::get<1 /* Kafka */>((*p_0)) };
-        Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_270 { id_269.options };
+        ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_269 { std::get<1 /* Kafka */>((*p_0)) };
+        Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_270 { id_269.options };
         uint32_t id_271 { id_270.size() };
         Vec<1, uint32_t> id_272 {  id_271  };
         Pointer let_res_273;
@@ -1525,9 +1523,9 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
           Pointer let_res_311;
           {
             Vec<1, int32_t> n_ref_824 { id_310 };
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_312 { std::get<1 /* Kafka */>((*p_0)) };
-            Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_313 { id_312.options };
-            for (::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179 x_825 : id_313) {
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_312 { std::get<1 /* Kafka */>((*p_0)) };
+            Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_313 { id_312.options };
+            for (::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a &x_825 : id_313) {
               uint8_t id_314 { 0 };
               uint8_t id_315 { 0 };
               Pointer id_316 { dst_ref_823[id_315] };
@@ -1628,7 +1626,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
         {
           Pointer srec_dst_830 { let_res_308 };
           auto fun372 { dessser::gen::raql_expr::to_row_binary };
-          ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_373 { std::get<1 /* Kafka */>((*p_0)) };
+          ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_373 { std::get<1 /* Kafka */>((*p_0)) };
           dessser::gen::raql_expr::t_ext id_374 { id_373.topic };
           Pointer id_375 { fun372(id_374, srec_dst_830) };
           let_res_371 = id_375;
@@ -1636,7 +1634,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
         Pointer let_res_376;
         {
           Pointer srec_dst_831 { let_res_371 };
-          ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_377 { std::get<1 /* Kafka */>((*p_0)) };
+          ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_377 { std::get<1 /* Kafka */>((*p_0)) };
           std::optional<dessser::gen::raql_expr::t_ext> id_378 { id_377.partitions };
           bool id_379 { !(id_378.has_value ()) };
           Pointer choose_res_380;
@@ -1646,7 +1644,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
             choose_res_380 = id_382;
           } else {
             auto fun383 { dessser::gen::raql_expr::to_row_binary };
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_384 { std::get<1 /* Kafka */>((*p_0)) };
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_384 { std::get<1 /* Kafka */>((*p_0)) };
             std::optional<dessser::gen::raql_expr::t_ext> id_385 { id_384.partitions };
             dessser::gen::raql_expr::t_ext id_386 { id_385.value() };
             uint8_t id_387 { 0 };
@@ -1659,7 +1657,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
         Pointer let_res_390;
         {
           Pointer srec_dst_832 { let_res_376 };
-          ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_391 { std::get<1 /* Kafka */>((*p_0)) };
+          ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_391 { std::get<1 /* Kafka */>((*p_0)) };
           ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_392 { id_391.restart_from };
           uint16_t id_393 { uint16_t(id_392.index()) };
           Pointer id_394 { srec_dst_832.writeU16Le(id_393) };
@@ -1667,7 +1665,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
           {
             Pointer ssum_dst_834 { id_394 };
             uint16_t id_396 { 0 };
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_397 { std::get<1 /* Kafka */>((*p_0)) };
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_397 { std::get<1 /* Kafka */>((*p_0)) };
             ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_398 { id_397.restart_from };
             uint16_t id_399 { uint16_t(id_398.index()) };
             bool id_400 { bool(id_396 == id_399) };
@@ -1676,21 +1674,21 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
               choose_res_401 = ssum_dst_834;
             } else {
               uint16_t id_402 { 1 };
-              ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_403 { std::get<1 /* Kafka */>((*p_0)) };
+              ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_403 { std::get<1 /* Kafka */>((*p_0)) };
               ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_404 { id_403.restart_from };
               uint16_t id_405 { uint16_t(id_404.index()) };
               bool id_406 { bool(id_402 == id_405) };
               Pointer choose_res_407;
               if (id_406) {
                 auto fun408 { dessser::gen::raql_expr::to_row_binary };
-                ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_409 { std::get<1 /* Kafka */>((*p_0)) };
+                ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_409 { std::get<1 /* Kafka */>((*p_0)) };
                 ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_410 { id_409.restart_from };
                 dessser::gen::raql_expr::t_ext id_411 { std::get<1 /* OffsetFromEnd */>(id_410) };
                 Pointer id_412 { fun408(id_411, ssum_dst_834) };
                 choose_res_407 = id_412;
               } else {
                 uint16_t id_413 { 2 };
-                ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_414 { std::get<1 /* Kafka */>((*p_0)) };
+                ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_414 { std::get<1 /* Kafka */>((*p_0)) };
                 ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_415 { id_414.restart_from };
                 uint16_t id_416 { uint16_t(id_415.index()) };
                 bool id_417 { bool(id_413 == id_416) };
@@ -1698,7 +1696,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
                 if (id_417) {
                   choose_res_418 = ssum_dst_834;
                 } else {
-                  ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_419 { std::get<1 /* Kafka */>((*p_0)) };
+                  ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_419 { std::get<1 /* Kafka */>((*p_0)) };
                   ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_420 { id_419.restart_from };
                   uint16_t id_421 { uint16_t(id_420.index()) };
                   uint16_t id_422 { 3 };
@@ -1706,7 +1704,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
                   Void id_424 { ((void)(assert(id_423)), ::dessser::VOID) };
                   (void)id_424;
                   auto fun425 { dessser::gen::raql_expr::to_row_binary };
-                  ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_426 { std::get<1 /* Kafka */>((*p_0)) };
+                  ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_426 { std::get<1 /* Kafka */>((*p_0)) };
                   ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_427 { id_426.restart_from };
                   ::dessser::gen::raql_operation::t66e84af8ac3d220e6953b809395192f8 id_428 { std::get<3 /* UseKafkaGroupCoordinator */>(id_427) };
                   dessser::gen::raql_expr::t_ext id_429 { id_428.after_max_secs };
@@ -1715,7 +1713,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::ext
                   {
                     Pointer srec_dst_835 { id_430 };
                     auto fun432 { dessser::gen::raql_expr::to_row_binary };
-                    ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_433 { std::get<1 /* Kafka */>((*p_0)) };
+                    ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_433 { std::get<1 /* Kafka */>((*p_0)) };
                     ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_434 { id_433.restart_from };
                     ::dessser::gen::raql_operation::t66e84af8ac3d220e6953b809395192f8 id_435 { std::get<3 /* UseKafkaGroupCoordinator */>(id_434) };
                     dessser::gen::raql_expr::t_ext id_436 { id_435.after_max_events };
@@ -1810,7 +1808,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::external_s
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_format> )> external_format_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_format> )> fun438 { [&fun438](std::shared_ptr<::dessser::gen::raql_operation::external_format>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_format> )> fun438 { [&](std::shared_ptr<::dessser::gen::raql_operation::external_format>  p_0) {
     uint16_t id_439 { 0 };
     uint16_t id_440 { uint16_t((*p_0).index()) };
     bool id_441 { bool(id_439 == id_440) };
@@ -2177,7 +2175,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_form
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_source> )> external_source_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_source> )> fun632 { [&fun632](std::shared_ptr<::dessser::gen::raql_operation::external_source>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_source> )> fun632 { [&](std::shared_ptr<::dessser::gen::raql_operation::external_source>  p_0) {
     uint16_t id_633 { 0 };
     uint16_t id_634 { uint16_t((*p_0).index()) };
     bool id_635 { bool(id_633 == id_634) };
@@ -2231,8 +2229,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
       Void id_667 { ((void)(assert(id_666)), ::dessser::VOID) };
       (void)id_667;
       Size id_668 { 2UL };
-      ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_669 { std::get<1 /* Kafka */>((*p_0)) };
-      Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_670 { id_669.options };
+      ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_669 { std::get<1 /* Kafka */>((*p_0)) };
+      Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_670 { id_669.options };
       uint32_t id_671 { id_670.size() };
       Vec<1, uint32_t> id_672 {  id_671  };
       Size let_res_673;
@@ -2282,8 +2280,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
           Vec<1, int32_t> repeat_n_708 { id_698 };
           bool while_flag_699 { true };
           do {
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_700 { std::get<1 /* Kafka */>((*p_0)) };
-            Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_701 { id_700.options };
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_700 { std::get<1 /* Kafka */>((*p_0)) };
+            Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_701 { id_700.options };
             uint32_t id_702 { id_701.size() };
             int32_t id_703 { int32_t(id_702) };
             uint8_t id_704 { 0 };
@@ -2299,9 +2297,9 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
                 Size sz_709 { id_709 };
                 uint8_t id_711 { 0 };
                 int32_t id_712 { repeat_n_708[id_711] };
-                ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_713 { std::get<1 /* Kafka */>((*p_0)) };
-                Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_714 { id_713.options };
-                ::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179 id_715 { id_714[id_712] };
+                ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_713 { std::get<1 /* Kafka */>((*p_0)) };
+                Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_714 { id_713.options };
+                ::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a id_715 { id_714[id_712] };
                 std::string id_716 { std::get<0>(id_715) };
                 uint32_t id_717 { (uint32_t)id_716.size() };
                 Size let_res_718;
@@ -2357,9 +2355,9 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
                 auto fun745 { dessser::gen::raql_expr::sersize_of_row_binary };
                 uint8_t id_746 { 0 };
                 int32_t id_747 { repeat_n_708[id_746] };
-                ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_748 { std::get<1 /* Kafka */>((*p_0)) };
-                Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_749 { id_748.options };
-                ::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179 id_750 { id_749[id_747] };
+                ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_748 { std::get<1 /* Kafka */>((*p_0)) };
+                Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_749 { id_748.options };
+                ::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a id_750 { id_749[id_747] };
                 dessser::gen::raql_expr::t_ext id_751 { std::get<1>(id_750) };
                 Size id_752 { fun745(id_751) };
                 Size id_753 { Size(sz_713 + id_752) };
@@ -2388,7 +2386,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
       {
         Size sz_714 { let_res_696 };
         auto fun764 { dessser::gen::raql_expr::sersize_of_row_binary };
-        ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_765 { std::get<1 /* Kafka */>((*p_0)) };
+        ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_765 { std::get<1 /* Kafka */>((*p_0)) };
         dessser::gen::raql_expr::t_ext id_766 { id_765.topic };
         Size id_767 { fun764(id_766) };
         Size id_768 { Size(sz_714 + id_767) };
@@ -2397,7 +2395,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
       Size let_res_769;
       {
         Size sz_715 { let_res_763 };
-        ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_770 { std::get<1 /* Kafka */>((*p_0)) };
+        ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_770 { std::get<1 /* Kafka */>((*p_0)) };
         std::optional<dessser::gen::raql_expr::t_ext> id_771 { id_770.partitions };
         bool id_772 { !(id_771.has_value ()) };
         Size choose_res_773;
@@ -2407,7 +2405,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
           choose_res_773 = id_775;
         } else {
           auto fun776 { dessser::gen::raql_expr::sersize_of_row_binary };
-          ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_777 { std::get<1 /* Kafka */>((*p_0)) };
+          ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_777 { std::get<1 /* Kafka */>((*p_0)) };
           std::optional<dessser::gen::raql_expr::t_ext> id_778 { id_777.partitions };
           dessser::gen::raql_expr::t_ext id_779 { id_778.value() };
           Size id_780 { fun776(id_779) };
@@ -2422,7 +2420,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
       {
         Size sz_716 { let_res_769 };
         uint16_t id_785 { 0 };
-        ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_786 { std::get<1 /* Kafka */>((*p_0)) };
+        ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_786 { std::get<1 /* Kafka */>((*p_0)) };
         ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_787 { id_786.restart_from };
         uint16_t id_788 { uint16_t(id_787.index()) };
         bool id_789 { bool(id_785 == id_788) };
@@ -2433,7 +2431,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
           choose_res_790 = id_792;
         } else {
           uint16_t id_793 { 1 };
-          ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_794 { std::get<1 /* Kafka */>((*p_0)) };
+          ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_794 { std::get<1 /* Kafka */>((*p_0)) };
           ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_795 { id_794.restart_from };
           uint16_t id_796 { uint16_t(id_795.index()) };
           bool id_797 { bool(id_793 == id_796) };
@@ -2442,7 +2440,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
             Size id_799 { 2UL };
             Size id_800 { Size(sz_716 + id_799) };
             auto fun801 { dessser::gen::raql_expr::sersize_of_row_binary };
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_802 { std::get<1 /* Kafka */>((*p_0)) };
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_802 { std::get<1 /* Kafka */>((*p_0)) };
             ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_803 { id_802.restart_from };
             dessser::gen::raql_expr::t_ext id_804 { std::get<1 /* OffsetFromEnd */>(id_803) };
             Size id_805 { fun801(id_804) };
@@ -2450,7 +2448,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
             choose_res_798 = id_806;
           } else {
             uint16_t id_807 { 2 };
-            ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_808 { std::get<1 /* Kafka */>((*p_0)) };
+            ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_808 { std::get<1 /* Kafka */>((*p_0)) };
             ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_809 { id_808.restart_from };
             uint16_t id_810 { uint16_t(id_809.index()) };
             bool id_811 { bool(id_807 == id_810) };
@@ -2460,7 +2458,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
               Size id_814 { Size(sz_716 + id_813) };
               choose_res_812 = id_814;
             } else {
-              ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_815 { std::get<1 /* Kafka */>((*p_0)) };
+              ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_815 { std::get<1 /* Kafka */>((*p_0)) };
               ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_816 { id_815.restart_from };
               uint16_t id_817 { uint16_t(id_816.index()) };
               uint16_t id_818 { 3 };
@@ -2470,7 +2468,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
               Size id_821 { 2UL };
               Size id_822 { Size(sz_716 + id_821) };
               auto fun823 { dessser::gen::raql_expr::sersize_of_row_binary };
-              ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_824 { std::get<1 /* Kafka */>((*p_0)) };
+              ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_824 { std::get<1 /* Kafka */>((*p_0)) };
               ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_825 { id_824.restart_from };
               ::dessser::gen::raql_operation::t66e84af8ac3d220e6953b809395192f8 id_826 { std::get<3 /* UseKafkaGroupCoordinator */>(id_825) };
               dessser::gen::raql_expr::t_ext id_827 { id_826.after_max_secs };
@@ -2480,7 +2478,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::extern
               {
                 Size sz_719 { id_829 };
                 auto fun831 { dessser::gen::raql_expr::sersize_of_row_binary };
-                ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_832 { std::get<1 /* Kafka */>((*p_0)) };
+                ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_832 { std::get<1 /* Kafka */>((*p_0)) };
                 ::dessser::gen::raql_operation::tbbc319188017fc622f05dfada38341dc id_833 { id_832.restart_from };
                 ::dessser::gen::raql_operation::t66e84af8ac3d220e6953b809395192f8 id_834 { std::get<3 /* UseKafkaGroupCoordinator */>(id_833) };
                 dessser::gen::raql_expr::t_ext id_835 { id_834.after_max_events };
@@ -2648,7 +2646,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::external_sour
  */
 static std::function<::dessser::gen::raql_operation::t818559b68b475733e8c99b87db21c5d3(Pointer)> external_format_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_operation::t818559b68b475733e8c99b87db21c5d3(Pointer)> fun838 { [&fun838](Pointer p_0) {
+  std::function<::dessser::gen::raql_operation::t818559b68b475733e8c99b87db21c5d3(Pointer)> fun838 { [&](Pointer p_0) {
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 id_839 { p_0.readU16Le() };
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 letpair_res_840;
     {
@@ -3403,7 +3401,7 @@ std::function<::dessser::gen::raql_operation::t818559b68b475733e8c99b87db21c5d3(
  */
 static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6(Pointer)> external_source_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6(Pointer)> fun1125 { [&fun1125](Pointer p_0) {
+  std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6(Pointer)> fun1125 { [&](Pointer p_0) {
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 id_1126 { p_0.readU16Le() };
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1127;
     {
@@ -3561,19 +3559,19 @@ static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1
             }
             let_res_1167 = let_res_1170;
           }
-          ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd let_res_1205;
+          ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c let_res_1205;
           {
             ::dessser::gen::raql_operation::t491c44439106a32f896827242e8e76a1 dlist1_143 { let_res_1167 };
-            ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd letpair_res_1206;
+            ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c letpair_res_1206;
             {
               auto dlist1_fst_144 { std::get<0>(dlist1_143) };
               auto dlist1_snd_145 { std::get<1>(dlist1_143) };
-              Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> endoflist_1207;
-              ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd id_1208 { endoflist_1207, dlist1_snd_145 };
-              Vec<1, ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd> id_1209 {  id_1208  };
-              ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd let_res_1210;
+              Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> endoflist_1207;
+              ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c id_1208 { endoflist_1207, dlist1_snd_145 };
+              Vec<1, ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c> id_1209 {  id_1208  };
+              ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c let_res_1210;
               {
-                Vec<1, ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd> inits_src_ref_146 { id_1209 };
+                Vec<1, ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c> inits_src_ref_146 { id_1209 };
                 int32_t id_1211 { 0L };
                 Vec<1, int32_t> id_1212 {  id_1211  };
                 {
@@ -3587,9 +3585,9 @@ static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1
                     while_flag_1213 = id_1217;
                     if (while_flag_1213) {
                       uint8_t id_1218 { 0 };
-                      ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd id_1219 { inits_src_ref_146[id_1218] };
+                      ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c id_1219 { inits_src_ref_146[id_1218] };
                       {
-                        ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd dlist2_148 { id_1219 };
+                        ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c dlist2_148 { id_1219 };
                         {
                           auto dlist2_fst_149 { std::get<0>(dlist2_148) };
                           auto dlist2_snd_150 { std::get<1>(dlist2_148) };
@@ -3686,22 +3684,22 @@ static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1
                             }
                             let_res_1262 = letpair_res_1263;
                           }
-                          ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd let_res_1268;
+                          ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c let_res_1268;
                           {
                             ::dessser::gen::raql_operation::t13a07ee37ab40962540da8534858dc07 dtup_163 { let_res_1262 };
-                            ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd letpair_res_1269;
+                            ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c letpair_res_1269;
                             {
                               auto dtup_fst_164 { std::get<0>(dtup_163) };
                               auto dtup_snd_165 { std::get<1>(dtup_163) };
                               auto fun1270 { dessser::gen::raql_expr::of_row_binary };
                               ::dessser::gen::raql_operation::tc473a3a3b5068e57b15e934d0afcc038 id_1271 { fun1270(dtup_snd_165) };
-                              ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd letpair_res_1272;
+                              ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c letpair_res_1272;
                               {
                                 auto dtup_fst_167 { std::get<0>(id_1271) };
                                 auto dtup_snd_168 { std::get<1>(id_1271) };
-                                ::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179 id_1273 { dtup_fst_164, dtup_fst_167 };
-                                Lst<::dessser::gen::raql_operation::td1e70aeaf070b9b0d0119e932e590179> id_1274 { id_1273, dlist2_fst_149 };
-                                ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd id_1275 { id_1274, dtup_snd_168 };
+                                ::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a id_1273 { dtup_fst_164, dtup_fst_167 };
+                                Lst<::dessser::gen::raql_operation::t42c3ffb6cb514e3c128f0c7344ce492a> id_1274 { id_1273, dlist2_fst_149 };
+                                ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c id_1275 { id_1274, dtup_snd_168 };
                                 letpair_res_1272 = id_1275;
                               }
                               letpair_res_1269 = letpair_res_1272;
@@ -3728,23 +3726,23 @@ static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1
                 }
                 (void)::dessser::VOID;
                 uint8_t id_1283 { 0 };
-                ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd id_1284 { inits_src_ref_146[id_1283] };
+                ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c id_1284 { inits_src_ref_146[id_1283] };
                 let_res_1210 = id_1284;
               }
               letpair_res_1206 = let_res_1210;
             }
             let_res_1205 = letpair_res_1206;
           }
-          ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd letpair_res_1285;
+          ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c letpair_res_1285;
           {
             auto dlist4_fst_173 { std::get<0>(let_res_1205) };
             auto dlist4_snd_174 { std::get<1>(let_res_1205) };
-            ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd id_1286 { dlist4_fst_173, dlist4_snd_174 };
+            ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c id_1286 { dlist4_fst_173, dlist4_snd_174 };
             letpair_res_1285 = id_1286;
           }
           ::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6 let_res_1287;
           {
-            ::dessser::gen::raql_operation::t90d9936f362c598c2320b06a45a435fd drec_175 { letpair_res_1285 };
+            ::dessser::gen::raql_operation::tf13fbb09f51834e815a6b7b178fd9c4c drec_175 { letpair_res_1285 };
             ::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6 letpair_res_1288;
             {
               auto drec_fst_176 { std::get<0>(drec_175) };
@@ -3882,7 +3880,7 @@ static std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1
                       {
                         auto drec_fst_215 { std::get<0>(let_res_1314) };
                         auto drec_snd_216 { std::get<1>(let_res_1314) };
-                        ::dessser::gen::raql_operation::t30bd731cf6638e267c87018bc3ca5b81 id_1348 { drec_fst_176, drec_fst_179, drec_fst_185, drec_fst_215 };
+                        ::dessser::gen::raql_operation::ta64ee09b20632228f3a50181be1b6548 id_1348 { drec_fst_176, drec_fst_179, drec_fst_185, drec_fst_215 };
                         std::shared_ptr<::dessser::gen::raql_operation::external_source>  id_1349 { std::make_shared<::dessser::gen::raql_operation::external_source>(std::in_place_index<1>, id_1348) };
                         ::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6 id_1350 { id_1349, drec_snd_216 };
                         letpair_res_1347 = id_1350;
@@ -3918,7 +3916,7 @@ std::function<::dessser::gen::raql_operation::t8b60740739dfc5a7cf5f2b99a1358fa6(
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> fun1351 { [&fun1351](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> fun1351 { [&](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0, Pointer p_1) {
     Pointer id_1352 { to_row_binary(p_0, p_1) };
     return id_1352;
   }
@@ -3975,7 +3973,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointe
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::data_source> ,Pointer)> data_source_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::data_source> ,Pointer)> fun1353 { [&fun1353](std::shared_ptr<::dessser::gen::raql_operation::data_source>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::data_source> ,Pointer)> fun1353 { [&](std::shared_ptr<::dessser::gen::raql_operation::data_source>  p_0, Pointer p_1) {
     uint16_t id_1354 { uint16_t((*p_0).index()) };
     Pointer id_1355 { p_1.writeU16Le(id_1354) };
     Pointer let_res_1356;
@@ -4459,7 +4457,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::data_sourc
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> fun1492 { [&fun1492](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointer)> fun1492 { [&](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0, Pointer p_1) {
     uint16_t id_1493 { uint16_t((*p_0).index()) };
     Pointer id_1494 { p_1.writeU16Le(id_1493) };
     Pointer let_res_1495;
@@ -4541,7 +4539,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
             Vec<1, int32_t> n_ref_883 { id_1541 };
             ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1543 { std::get<0 /* Aggregate */>((*p_0)) };
             Lst<dessser::gen::raql_select_field::t_ext> id_1544 { id_1543.Aggregate_fields };
-            for (dessser::gen::raql_select_field::t_ext x_884 : id_1544) {
+            for (dessser::gen::raql_select_field::t_ext &x_884 : id_1544) {
               uint8_t id_1545 { 0 };
               auto fun1546 { dessser::gen::raql_select_field::to_row_binary };
               uint8_t id_1547 { 0 };
@@ -4652,7 +4650,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
                 ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1612 { std::get<0 /* Aggregate */>((*p_0)) };
                 std::optional<Lst<dessser::gen::field_name::t_ext>> id_1613 { id_1612.and_all_others };
                 Lst<dessser::gen::field_name::t_ext> id_1614 { id_1613.value() };
-                for (dessser::gen::field_name::t_ext x_890 : id_1614) {
+                for (dessser::gen::field_name::t_ext &x_890 : id_1614) {
                   uint8_t id_1615 { 0 };
                   auto fun1616 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_1617 { 0 };
@@ -4809,7 +4807,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
                   std::optional<::dessser::gen::raql_operation::t75cceda8358977a4781ef44dda7fab07> id_1709 { id_1708.sort };
                   ::dessser::gen::raql_operation::t75cceda8358977a4781ef44dda7fab07 id_1710 { id_1709.value() };
                   Lst<dessser::gen::raql_expr::t_ext> id_1711 { std::get<2>(id_1710) };
-                  for (dessser::gen::raql_expr::t_ext x_899 : id_1711) {
+                  for (dessser::gen::raql_expr::t_ext &x_899 : id_1711) {
                     uint8_t id_1712 { 0 };
                     auto fun1713 { dessser::gen::raql_expr::to_row_binary };
                     uint8_t id_1714 { 0 };
@@ -4945,7 +4943,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
               Vec<1, int32_t> n_ref_906 { id_1787 };
               ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1789 { std::get<0 /* Aggregate */>((*p_0)) };
               Lst<dessser::gen::raql_expr::t_ext> id_1790 { id_1789.notifications };
-              for (dessser::gen::raql_expr::t_ext x_907 : id_1790) {
+              for (dessser::gen::raql_expr::t_ext &x_907 : id_1790) {
                 uint8_t id_1791 { 0 };
                 auto fun1792 { dessser::gen::raql_expr::to_row_binary };
                 uint8_t id_1793 { 0 };
@@ -5045,7 +5043,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
               Vec<1, int32_t> n_ref_912 { id_1847 };
               ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1849 { std::get<0 /* Aggregate */>((*p_0)) };
               Lst<dessser::gen::raql_expr::t_ext> id_1850 { id_1849.key };
-              for (dessser::gen::raql_expr::t_ext x_913 : id_1850) {
+              for (dessser::gen::raql_expr::t_ext &x_913 : id_1850) {
                 uint8_t id_1851 { 0 };
                 auto fun1852 { dessser::gen::raql_expr::to_row_binary };
                 uint8_t id_1853 { 0 };
@@ -5172,7 +5170,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
               Vec<1, int32_t> n_ref_921 { id_1922 };
               ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1924 { std::get<0 /* Aggregate */>((*p_0)) };
               Lst<std::shared_ptr<::dessser::gen::raql_operation::data_source> > id_1925 { id_1924.from };
-              for (std::shared_ptr<::dessser::gen::raql_operation::data_source>  x_922 : id_1925) {
+              for (std::shared_ptr<::dessser::gen::raql_operation::data_source>  &x_922 : id_1925) {
                 uint8_t id_1926 { 0 };
                 uint8_t id_1927 { 0 };
                 Pointer id_1928 { dst_ref_920[id_1927] };
@@ -5294,7 +5292,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
               Vec<1, int32_t> n_ref_928 { id_1995 };
               ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5 id_1997 { std::get<0 /* Aggregate */>((*p_0)) };
               Lst<dessser::gen::field_name::t_ext> id_1998 { id_1997.Aggregate_factors };
-              for (dessser::gen::field_name::t_ext x_929 : id_1998) {
+              for (dessser::gen::field_name::t_ext &x_929 : id_1998) {
                 uint8_t id_1999 { 0 };
                 auto fun2000 { dessser::gen::field_name::to_row_binary };
                 uint8_t id_2001 { 0 };
@@ -5435,7 +5433,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
                 Vec<1, int32_t> n_ref_878 { id_2080 };
                 ::dessser::gen::raql_operation::teabb4aa6beb374b8a3faf63ed92e59d1 id_2082 { std::get<1 /* ReadExternal */>((*p_0)) };
                 Lst<dessser::gen::field_name::t_ext> id_2083 { id_2082.ReadExternal_factors };
-                for (dessser::gen::field_name::t_ext x_879 : id_2083) {
+                for (dessser::gen::field_name::t_ext &x_879 : id_2083) {
                   uint8_t id_2084 { 0 };
                   auto fun2085 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_2086 { 0 };
@@ -5623,7 +5621,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> 
                 Vec<1, int32_t> n_ref_870 { id_2195 };
                 ::dessser::gen::raql_operation::tfb55a595623604efa44696c62f9afcc5 id_2197 { std::get<2 /* ListenFor */>((*p_0)) };
                 Lst<dessser::gen::field_name::t_ext> id_2198 { id_2197.factors };
-                for (dessser::gen::field_name::t_ext x_871 : id_2198) {
+                for (dessser::gen::field_name::t_ext &x_871 : id_2198) {
                   uint8_t id_2199 { 0 };
                   auto fun2200 { dessser::gen::field_name::to_row_binary };
                   uint8_t id_2201 { 0 };
@@ -5697,7 +5695,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_operation::t> ,Pointe
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::data_source> )> data_source_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::data_source> )> fun2213 { [&fun2213](std::shared_ptr<::dessser::gen::raql_operation::data_source>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::data_source> )> fun2213 { [&](std::shared_ptr<::dessser::gen::raql_operation::data_source>  p_0) {
     uint16_t id_2214 { 0 };
     uint16_t id_2215 { uint16_t((*p_0).index()) };
     bool id_2216 { bool(id_2214 == id_2215) };
@@ -6102,7 +6100,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::data_source> 
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::t> )> fun2328 { [&fun2328](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::t> )> fun2328 { [&](std::shared_ptr<::dessser::gen::raql_operation::t>  p_0) {
     uint16_t id_2329 { 0 };
     uint16_t id_2330 { uint16_t((*p_0).index()) };
     bool id_2331 { bool(id_2329 == id_2330) };
@@ -7232,7 +7230,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_operation::t> )> sersize
  */
 static std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> fun3034 { [&fun3034](Pointer p_0) {
+  std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> fun3034 { [&](Pointer p_0) {
     ::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd id_3035 { of_row_binary(p_0) };
     ::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd letpair_res_3036;
     {
@@ -7315,7 +7313,7 @@ std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(
  */
 static std::function<::dessser::gen::raql_operation::t686eed8ab9a7b5a11ecf622b72433681(Pointer)> data_source_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_operation::t686eed8ab9a7b5a11ecf622b72433681(Pointer)> fun3038 { [&fun3038](Pointer p_0) {
+  std::function<::dessser::gen::raql_operation::t686eed8ab9a7b5a11ecf622b72433681(Pointer)> fun3038 { [&](Pointer p_0) {
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 id_3039 { p_0.readU16Le() };
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 letpair_res_3040;
     {
@@ -8125,7 +8123,7 @@ std::function<::dessser::gen::raql_operation::t686eed8ab9a7b5a11ecf622b72433681(
  */
 static std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> fun3189 { [&fun3189](Pointer p_0) {
+  std::function<::dessser::gen::raql_operation::t063f95ee917f7168b9cc40076caa81fd(Pointer)> fun3189 { [&](Pointer p_0) {
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 id_3190 { p_0.readU16Le() };
     ::dessser::gen::raql_operation::ta97bb48ed75bbda6173555873826c8c6 letpair_res_3191;
     {

@@ -28,7 +28,7 @@ public:
   Qt::ItemFlags flags(QModelIndex const &) const override;
 
 protected slots:
-  void onChange(QList<ConfChange> const &);
+  void onChange(QList<ConfChange> const &) override;
 };
 
 #endif

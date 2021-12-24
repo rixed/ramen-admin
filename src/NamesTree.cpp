@@ -130,8 +130,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
    * received the source info before any worker using it during a sync: */
   dessser::gen::sync_key::t const infoKey {
     std::in_place_index<dessser::gen::sync_key::Sources>,
-    src_path,
-    "info" };
+    src_path, "info" };
 
   std::shared_ptr<dessser::gen::source_info::t const> sourceInfos;
 
@@ -167,7 +166,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key, KValue const &
 
   /* In the sourceInfos all functions of that program could be found, but for
    * simplicity let's add only the one we came for: */
-  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> info : compiled->funcs) {
+  for (std::shared_ptr<dessser::gen::source_info::compiled_func> const &info : compiled->funcs) {
     if (info->name != function_name) continue;
 
     unsigned const num_cols { numColumns(*info->out_record) };

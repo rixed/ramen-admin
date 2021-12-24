@@ -20,7 +20,7 @@
 
 #include "ReplayRequest.h"
 
-static bool const verbose { false };
+static bool const verbose { true };
 
 static std::chrono::milliseconds const batchReplaysForMs { 2000 };
 
@@ -158,7 +158,7 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key, KValue co
     if (verbose)
       qDebug() << "Received a batch of" << batch.size() << "tuples";
 
-    for (std::shared_ptr<dessser::gen::sync_value::tuple> const tuple : batch) {
+    for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple : batch) {
       std::optional<double> start { eventTime->startOfTuple(*tuple->values) };
       if (! start) {
         qCritical() << "Dropping tuple missing event time";

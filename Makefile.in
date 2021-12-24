@@ -270,6 +270,15 @@ coverity:
 	   --form description="$(shell git rev-parse --short HEAD)" \
 	   https://scan.coverity.com/builds?project=rixed%2Framen
 
+clazy: \
+		$(MANUAL_CPP_SOURCES) \
+		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
+		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
+	@echo 'Analysing sources with clazy...'
+	$(MAKE) -C src clean
+	cd src && @QMAKE@ $(QMAKE_EXTRA) -spec linux-clang QMAKE_CXX='clazy -Wno-unknown-attributes'
+	$(MAKE) -C src CLAZY_IGNORE_DIRS=.*qt5.* CLAZY_CHECKS=level0,level1,no-rule-of-two-soft,no-non-pod-global-static,no-qproperty-without-notify
+
 #
 # Tests
 #

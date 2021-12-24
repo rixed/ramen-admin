@@ -83,7 +83,7 @@ ProcessesDialog::ProcessesDialog(QWidget *parent) :
       QString const name { GraphModel::columnName((GraphModel::Columns)c) };
       // Column names have already been translated
       QAction *toggle {
-        viewMenu->addAction(name, [this, c](bool checked) {
+        viewMenu->addAction(name, this, [this, c](bool checked) {
           processesWidget->treeView->setColumnHidden(c, !checked);
         }) };
       toggle->setCheckable(true);

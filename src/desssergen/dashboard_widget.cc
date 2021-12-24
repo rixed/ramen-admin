@@ -519,7 +519,7 @@ inline bool operator!=(tcedbe6db9a2ca1abdf03f15044f3916c const &a, tcedbe6db9a2c
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> representation_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0, Pointer p_1) {
     uint16_t id_1 { uint16_t((*p_0).index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
@@ -623,7 +623,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::represen
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> field_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> fun20 { [&fun20](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> fun20 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0, Pointer p_1) {
     double id_21 { (*p_0).opacity };
     uint64_t id_22 { qword_of_float(id_21) };
     Pointer id_23 { p_1.writeU64Le(id_22) };
@@ -780,7 +780,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
         {
           Vec<1, int32_t> n_ref_393 { id_112 };
           Arr<std::string> id_114 { (*p_0).factors };
-          for (std::string x_394 : id_114) {
+          for (std::string const &x_394 : id_114) {
             uint8_t id_115 { 0 };
             uint32_t id_116 { (uint32_t)x_394.size() };
             Vec<1, uint32_t> id_117 {  id_116  };
@@ -903,7 +903,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> source_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> fun168 { [&fun168](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> fun168 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0, Pointer p_1) {
     auto fun169 { dessser::gen::fq_function_name::to_row_binary };
     dessser::gen::fq_function_name::t_ext id_170 { (*p_0).name };
     Pointer id_171 { fun169(id_170, p_1) };
@@ -987,7 +987,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
         {
           Vec<1, int32_t> n_ref_403 { id_217 };
           Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_219 { (*p_0).fields };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::field>  x_404 : id_219) {
+          for (std::shared_ptr<::dessser::gen::dashboard_widget::field>  &x_404 : id_219) {
             uint8_t id_220 { 0 };
             uint8_t id_221 { 0 };
             Pointer id_222 { dst_ref_402[id_221] };
@@ -1025,7 +1025,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> 
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> scale_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> fun233 { [&fun233](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> fun233 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0, Pointer p_1) {
     uint16_t id_234 { uint16_t((*p_0).index()) };
     Pointer id_235 { p_1.writeU16Le(id_234) };
     Pointer let_res_236;
@@ -1061,7 +1061,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> axis_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> fun245 { [&fun245](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> fun245 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0, Pointer p_1) {
     bool id_246 { (*p_0).left };
     uint8_t id_247 { uint8_t(id_246) };
     Pointer id_248 { p_1.writeU8(id_247) };
@@ -1092,7 +1092,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,P
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> type_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> fun256 { [&fun256](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> fun256 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0, Pointer p_1) {
     uint16_t id_257 { uint16_t((*p_0).index()) };
     Pointer id_258 { p_1.writeU16Le(id_257) };
     Pointer let_res_259;
@@ -1171,7 +1171,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,P
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> chart_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> fun264 { [&fun264](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> fun264 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0, Pointer p_1) {
     std::string id_265 { (*p_0).title };
     uint32_t id_266 { (uint32_t)id_265.size() };
     Vec<1, uint32_t> id_267 {  id_266  };
@@ -1313,7 +1313,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
         {
           Vec<1, int32_t> n_ref_412 { id_349 };
           Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_351 { (*p_0).axes };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::axis>  x_413 : id_351) {
+          for (std::shared_ptr<::dessser::gen::dashboard_widget::axis>  const &x_413 : id_351) {
             uint8_t id_352 { 0 };
             uint8_t id_353 { 0 };
             Pointer id_354 { dst_ref_411[id_353] };
@@ -1410,7 +1410,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
         {
           Vec<1, int32_t> n_ref_418 { id_406 };
           Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_408 { (*p_0).sources };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::source>  x_419 : id_408) {
+          for (std::shared_ptr<::dessser::gen::dashboard_widget::source>  &x_419 : id_408) {
             uint8_t id_409 { 0 };
             uint8_t id_410 { 0 };
             Pointer id_411 { dst_ref_417[id_410] };
@@ -1462,7 +1462,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun422 { [&fun422](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun422 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
     uint16_t id_423 { uint16_t((*p_0).index()) };
     Pointer id_424 { p_1.writeU16Le(id_423) };
     Pointer let_res_425;
@@ -1561,7 +1561,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Poin
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> representation_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> fun476 { [&fun476](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> fun476 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0) {
     uint16_t id_477 { 0 };
     uint16_t id_478 { uint16_t((*p_0).index()) };
     bool id_479 { bool(id_477 == id_478) };
@@ -1648,7 +1648,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representat
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> field_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> fun497 { [&fun497](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> fun497 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0) {
     Size id_498 { 12UL };
     std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_499 { (*p_0).representation };
     Size id_500 { representation_sersize_of_row_binary(id_499) };
@@ -1869,7 +1869,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> f
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> source_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> fun614 { [&fun614](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> fun614 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0) {
     auto fun615 { dessser::gen::fq_function_name::sersize_of_row_binary };
     dessser::gen::fq_function_name::t_ext id_616 { (*p_0).name };
     Size id_617 { fun615(id_616) };
@@ -1978,7 +1978,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> 
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> scale_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> fun675 { [&fun675](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> fun675 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0) {
     uint16_t id_676 { 0 };
     uint16_t id_677 { uint16_t((*p_0).index()) };
     bool id_678 { bool(id_676 == id_677) };
@@ -2007,7 +2007,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> s
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> axis_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> fun686 { [&fun686](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> fun686 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0) {
     Size id_687 { 2UL };
     std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_688 { (*p_0).scale };
     Size id_689 { scale_sersize_of_row_binary(id_688) };
@@ -2024,7 +2024,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> ax
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> type_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> fun691 { [&fun691](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> fun691 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0) {
     uint16_t id_692 { uint16_t((*p_0).index()) };
     uint16_t id_693 { 0 };
     bool id_694 { bool(id_692 == id_693) };
@@ -2089,7 +2089,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> ty
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> chart_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> fun697 { [&fun697](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> fun697 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0) {
     std::string id_698 { (*p_0).title };
     uint32_t id_699 { (uint32_t)id_698.size() };
     Vec<1, uint32_t> id_700 {  id_699  };
@@ -2346,7 +2346,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> c
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> fun840 { [&fun840](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> fun840 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0) {
     uint16_t id_841 { 0 };
     uint16_t id_842 { uint16_t((*p_0).index()) };
     bool id_843 { bool(id_841 == id_842) };
@@ -2428,7 +2428,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersi
  */
 static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> representation_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> fun883 { [&fun883](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> fun883 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_884 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_885;
     {
@@ -2596,7 +2596,7 @@ std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00
  */
 static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> field_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> fun909 { [&fun909](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> fun909 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::td2cd337bb3c8bc04d5603393d084985b id_910 { p_0.readU64Le() };
     ::dessser::gen::dashboard_widget::t9a758baeff17224a77e1a522010b4168 letpair_res_911;
     {
@@ -3055,7 +3055,7 @@ std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf
  */
 static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> source_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> fun1095 { [&fun1095](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> fun1095 { [&](Pointer p_0) {
     auto fun1096 { dessser::gen::fq_function_name::of_row_binary };
     ::dessser::gen::dashboard_widget::tafdf48d85e3efdf5b24e3fa2741562be id_1097 { fun1096(p_0) };
     ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae let_res_1098;
@@ -3256,7 +3256,7 @@ std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27a
  */
 static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> scale_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> fun1181 { [&fun1181](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> fun1181 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1182 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1183;
     {
@@ -3312,7 +3312,7 @@ std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70
  */
 static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> axis_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> fun1197 { [&fun1197](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> fun1197 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::t1a5d74abf838df33f185a72a8912f5c9 id_1198 { p_0.readU8() };
     ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_1199;
     {
@@ -3380,7 +3380,7 @@ std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f
  */
 static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> type_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> fun1218 { [&fun1218](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> fun1218 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1219 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1220;
     {
@@ -3514,7 +3514,7 @@ std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e6
  */
 static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> chart_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> fun1229 { [&fun1229](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> fun1229 { [&](Pointer p_0) {
     uint32_t id_1230 { 0U };
     Vec<1, uint32_t> id_1231 {  id_1230  };
     ::dessser::gen::dashboard_widget::t12fb9c475959b52bf7b17b155a955ffa let_res_1232;
@@ -3979,7 +3979,7 @@ std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695c
  */
 static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1429 { [&fun1429](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1429 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1430 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1431;
     {
@@ -4125,7 +4125,7 @@ std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916
  */
 static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1493 { [&fun1493](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1493 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c id_1494 { of_row_binary(p_0) };
     ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1495;
     {
@@ -4147,7 +4147,7 @@ std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun1497 { [&fun1497](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun1497 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
     Pointer id_1498 { to_row_binary(p_0, p_1) };
     return id_1498;
   }

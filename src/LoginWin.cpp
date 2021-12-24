@@ -96,10 +96,10 @@ void LoginWin::refreshStats()
 {
   QString const statusMsg {
     tr("%1 (%2) ⥮ %3 (%4)").
-      arg(QString::number(client->sentMsgs)).
-      arg(stringOfBytes(client->sentBytes)).
-      arg(QString::number(client->rcvdMsgs)).
-      arg(stringOfBytes(client->rcvdBytes)) };
+      arg(QString::number(client->sentMsgs),
+          stringOfBytes(client->sentBytes),
+          QString::number(client->rcvdMsgs),
+          stringOfBytes(client->rcvdBytes)) };
   stats->setText(statusMsg);
 }
 

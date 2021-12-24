@@ -151,7 +151,7 @@ void NewProgramDialog::appendEntry(dessser::gen::sync_value::t const &rc_value)
   mustSave = false;
   Menu::getClient()->sendUnlock(targetConfig);
   /* Maybe reset the editor? */
-  emit QDialog::accept();
+  QDialog::accept();
 }
 
 void NewProgramDialog::validate()

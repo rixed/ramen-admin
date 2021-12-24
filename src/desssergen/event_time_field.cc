@@ -146,7 +146,7 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
     dessser::gen::field_name::t_ext id_2 { std::get<0>((*p_0)) };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -203,7 +203,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Poin
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> fun23 { [&fun23](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> fun23 { [&](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0) {
     auto fun24 { dessser::gen::field_name::sersize_of_row_binary };
     dessser::gen::field_name::t_ext id_25 { std::get<0>((*p_0)) };
     Size id_26 { fun24(id_25) };
@@ -256,7 +256,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> sersi
  */
 static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> fun44 { [&fun44](Pointer p_0) {
+  std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> fun44 { [&](Pointer p_0) {
     auto fun45 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::event_time_field::t18cecf882d7ac80cef37dfe6b22279d4 id_46 { fun45(p_0) };
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 let_res_47;
@@ -340,7 +340,7 @@ std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f66
  */
 static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> fun71 { [&fun71](Pointer p_0) {
+  std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> fun71 { [&](Pointer p_0) {
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_72 { of_row_binary(p_0) };
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 letpair_res_73;
     {
@@ -361,7 +361,7 @@ std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f66
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> fun75 { [&fun75](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> fun75 { [&](std::shared_ptr<::dessser::gen::event_time_field::t>  p_0, Pointer p_1) {
     Pointer id_76 { to_row_binary(p_0, p_1) };
     return id_76;
   }

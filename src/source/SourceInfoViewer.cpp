@@ -69,7 +69,7 @@ bool SourceInfoViewer::setValue(
         layout->addWidget(none);
       } else {
         QFormLayout *paramsLayout { new QFormLayout };
-        for (auto p : compiled->default_params) {
+        for (std::shared_ptr<dessser::gen::program_parameter::t> const &p : compiled->default_params) {
           QLabel *l { new QLabel(raqlValToQString(*p->value)) };
           l->setWordWrap(true);
           paramsLayout->addRow(QString::fromStdString(p->name) + ":", l);
@@ -83,7 +83,7 @@ bool SourceInfoViewer::setValue(
       }
 
       QTabWidget *functions { new QTabWidget };
-      for (std::shared_ptr<dessser::gen::source_info::compiled_func> func : compiled->funcs) {
+      for (std::shared_ptr<dessser::gen::source_info::compiled_func> const &func : compiled->funcs) {
         QVBoxLayout *l { new QVBoxLayout };
         QWidget *w { new QWidget };
         w->setLayout(l);
@@ -149,7 +149,7 @@ bool SourceInfoViewer::setValue(
     }
     layout->addSpacing(10);
     QString md5s { QString("For sources which MD5 are ") };
-    for (auto s : info->md5s) md5s += ", " + QString::fromStdString(s);
+    for (auto const &s : info->md5s) md5s += ", " + QString::fromStdString(s);
     QLabel *md5 { new QLabel(md5s) };
     md5->setWordWrap(true);
     layout->addWidget(md5);

@@ -16,21 +16,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tbaa20319e8bbfef3653a60c2d82bbbb9 : public std::tuple<
+struct t40120715e1a398c85256df6891079958 : public std::tuple<
   uint16_t,
   bool
 > {
   using tuple::tuple;
-  tbaa20319e8bbfef3653a60c2d82bbbb9(std::tuple<uint16_t, bool> p)
-    : std::tuple<uint16_t, bool>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tbaa20319e8bbfef3653a60c2d82bbbb9 const &a, tbaa20319e8bbfef3653a60c2d82bbbb9 const &b) {
+inline bool operator==(t40120715e1a398c85256df6891079958 const &a, t40120715e1a398c85256df6891079958 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tbaa20319e8bbfef3653a60c2d82bbbb9 const &a, tbaa20319e8bbfef3653a60c2d82bbbb9 const &b) {
+inline bool operator!=(t40120715e1a398c85256df6891079958 const &a, t40120715e1a398c85256df6891079958 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tbaa20319e8bbfef3653a60c2d82bbbb9 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t40120715e1a398c85256df6891079958 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -38,7 +36,7 @@ inline std::ostream &operator<<(std::ostream &os, tbaa20319e8bbfef3653a60c2d82bb
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbaa20319e8bbfef3653a60c2d82bbbb9> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t40120715e1a398c85256df6891079958> const t) { os << *t; return os; }
 
 struct t {
   dessser::gen::time_range::t_ext time_range;
@@ -46,8 +44,8 @@ struct t {
   std::optional<uint32_t> pid;
   double last_killed;
   std::optional<std::string> exit_status;
-  Arr<::dessser::gen::replayer::tbaa20319e8bbfef3653a60c2d82bbbb9> channels;
-  t(dessser::gen::time_range::t_ext time_range_, double creation_, std::optional<uint32_t> pid_, double last_killed_, std::optional<std::string> exit_status_, Arr<::dessser::gen::replayer::tbaa20319e8bbfef3653a60c2d82bbbb9> channels_) : time_range(time_range_), creation(creation_), pid(pid_), last_killed(last_killed_), exit_status(exit_status_), channels(channels_) {}
+  Arr<::dessser::gen::replayer::t40120715e1a398c85256df6891079958> channels;
+  t(dessser::gen::time_range::t_ext time_range_, double creation_, std::optional<uint32_t> pid_, double last_killed_, std::optional<std::string> exit_status_, Arr<::dessser::gen::replayer::t40120715e1a398c85256df6891079958> channels_) : time_range(time_range_), creation(creation_), pid(pid_), last_killed(last_killed_), exit_status(exit_status_), channels(channels_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

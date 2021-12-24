@@ -235,9 +235,12 @@ bool TimeChartFunctionFieldsModel::setData(
       break;
 
     case ColFactors:
-      field->factors.clear();
-      for (QString const &s : value.toStringList()) {
-        field->factors.push_back(s.toStdString());
+      {
+        field->factors.clear();
+        QStringList const fields { value.toStringList() };
+        for (QString const &s : fields) {
+          field->factors.push_back(s.toStdString());
+        }
       }
       break;
 
@@ -315,7 +318,7 @@ bool TimeChartFunctionFieldsModel::setValue(
   numericFields.clear();
   factors.clear();
 
-  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> func : prog->funcs) {
+  for (std::shared_ptr<dessser::gen::source_info::compiled_func> const &func : prog->funcs) {
     if (func->name != source_.name->function) continue;
     std::shared_ptr<dessser::gen::raql_type::t const> typ { func->out_record };
     for (unsigned c = 0; c < numColumns(*typ); c++) {
@@ -365,7 +368,7 @@ void TimeChartFunctionFieldsModel::checkSource(
 
 bool TimeChartFunctionFieldsModel::hasSelection() const
 {
-  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field : source.fields) {
+  for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field : source.fields) {
     if (field->representation->index() != dessser::gen::dashboard_widget::Unused)
       return true;
   }

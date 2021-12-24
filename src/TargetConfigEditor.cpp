@@ -114,7 +114,7 @@ bool TargetConfigEditor::setValue(
   while (entrySelector->count() > 0) entrySelector->removeItem(0);
 
   // Copy the RC entries:
-  for (std::shared_ptr<dessser::gen::rc_entry::t> rce : rc) {
+  for (std::shared_ptr<dessser::gen::rc_entry::t> const &rce : rc) {
     rcEntries.push_back(rce);
     entrySelector->addItem(QString::fromStdString(rce->program));
   }

@@ -122,7 +122,7 @@ AtomicForm::~AtomicForm()
     qDebug() << "AtomicForm: destroying" << this;
 
   // Unlock everything that's locked:
-  for (std::shared_ptr<dessser::gen::sync_key::t const> k : locked) {
+  for (std::shared_ptr<dessser::gen::sync_key::t const> const &k : locked) {
     if (verbose)
       qDebug() << "AtomicForm: Unlocking" << *k;
     Menu::getClient()->sendUnlock(k);

@@ -160,7 +160,7 @@ inline bool operator!=(t9a758baeff17224a77e1a522010b4168 const &a, t9a758baeff17
  */
 static std::function<Pointer(t&,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(t&,Pointer)> fun0 { [&fun0](t& p_0, Pointer p_1) {
+  std::function<Pointer(t&,Pointer)> fun0 { [&](t& p_0, Pointer p_1) {
     uint32_t id_1 { p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -228,7 +228,7 @@ static std::function<Pointer(t&,Pointer)> to_row_binary_init()
       Pointer let_res_41;
       {
         Vec<1, int32_t> n_ref_110 { id_40 };
-        for (::dessser::gen::time_range::t0a5f0f32f40c91bcfe721c5930f07dd9 x_111 : p_0) {
+        for (::dessser::gen::time_range::t0a5f0f32f40c91bcfe721c5930f07dd9 const &x_111 : p_0) {
           uint8_t id_42 { 0 };
           uint8_t id_43 { 0 };
           Pointer id_44 { dst_ref_109[id_43] };
@@ -300,7 +300,7 @@ std::function<Pointer(t&,Pointer)> to_row_binary(to_row_binary_init());
  */
 static std::function<Size(t&)> sersize_of_row_binary_init()
 {
-  std::function<Size(t&)> fun66 { [&fun66](t& p_0) {
+  std::function<Size(t&)> fun66 { [&](t& p_0) {
     uint32_t id_67 { p_0.size() };
     Vec<1, uint32_t> id_68 {  id_67  };
     Size let_res_69;
@@ -434,7 +434,7 @@ std::function<Size(t&)> sersize_of_row_binary(sersize_of_row_binary_init());
  */
 static std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> fun118 { [&fun118](Pointer p_0) {
+  std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> fun118 { [&](Pointer p_0) {
     uint32_t id_119 { 0U };
     Vec<1, uint32_t> id_120 {  id_119  };
     ::dessser::gen::time_range::t491c44439106a32f896827242e8e76a1 let_res_121;
@@ -639,7 +639,7 @@ std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Poin
  */
 static std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> fun207 { [&fun207](Pointer p_0) {
+  std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Pointer)> fun207 { [&](Pointer p_0) {
     ::dessser::gen::time_range::ta30293a82943182cab78182f33b18016 id_208 { of_row_binary(p_0) };
     ::dessser::gen::time_range::ta30293a82943182cab78182f33b18016 letpair_res_209;
     {
@@ -660,7 +660,7 @@ std::function<::dessser::gen::time_range::ta30293a82943182cab78182f33b18016(Poin
  */
 static std::function<Pointer(t&,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(t&,Pointer)> fun211 { [&fun211](t& p_0, Pointer p_1) {
+  std::function<Pointer(t&,Pointer)> fun211 { [&](t& p_0, Pointer p_1) {
     Pointer id_212 { to_row_binary(p_0, p_1) };
     return id_212;
   }

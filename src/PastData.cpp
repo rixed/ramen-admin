@@ -11,7 +11,7 @@
 
 #include "PastData.h"
 
-static bool const verbose { false };
+static bool const verbose { true };
 
 static int const maxInFlight { 3 };
 
@@ -206,8 +206,7 @@ void PastData::iterTuples(
     if (c.since >= until) break;
     if (c.until <= since) continue;
 
-    for (std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>> const &tuple :
-           c.tuples) {
+    for (std::pair<double const, std::shared_ptr<dessser::gen::raql_value::t const>> const &tuple : c.tuples) {
       if (tuple.first < since) {
         if (onePast) {
           lastTime = tuple.first;

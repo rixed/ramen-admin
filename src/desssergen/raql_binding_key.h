@@ -18,21 +18,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t3b2e72656dd8de97c9c84aaa9445df69 : public std::tuple<
+struct t5dd86ec6b88e1a48a954458ba0bc58f0 : public std::tuple<
   dessser::gen::raql_variable::t_ext,
   dessser::gen::field_name::t_ext
 > {
   using tuple::tuple;
-  t3b2e72656dd8de97c9c84aaa9445df69(std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext> p)
-    : std::tuple<dessser::gen::raql_variable::t_ext, dessser::gen::field_name::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t3b2e72656dd8de97c9c84aaa9445df69 const &a, t3b2e72656dd8de97c9c84aaa9445df69 const &b) {
+inline bool operator==(t5dd86ec6b88e1a48a954458ba0bc58f0 const &a, t5dd86ec6b88e1a48a954458ba0bc58f0 const &b) {
   return ::dessser::gen::raql_variable::Deref(std::get<0>(a)) == ::dessser::gen::raql_variable::Deref(std::get<0>(b)) && ::dessser::gen::field_name::Deref(std::get<1>(a)) == ::dessser::gen::field_name::Deref(std::get<1>(b));
 }
-inline bool operator!=(t3b2e72656dd8de97c9c84aaa9445df69 const &a, t3b2e72656dd8de97c9c84aaa9445df69 const &b) {
+inline bool operator!=(t5dd86ec6b88e1a48a954458ba0bc58f0 const &a, t5dd86ec6b88e1a48a954458ba0bc58f0 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t3b2e72656dd8de97c9c84aaa9445df69 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t5dd86ec6b88e1a48a954458ba0bc58f0 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -40,11 +38,11 @@ inline std::ostream &operator<<(std::ostream &os, t3b2e72656dd8de97c9c84aaa9445d
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3b2e72656dd8de97c9c84aaa9445df69> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5dd86ec6b88e1a48a954458ba0bc58f0> const t) { os << *t; return os; }
 
 struct t : public std::variant<
   uint32_t, // State
-  ::dessser::gen::raql_binding_key::t3b2e72656dd8de97c9c84aaa9445df69, // RecordField
+  ::dessser::gen::raql_binding_key::t5dd86ec6b88e1a48a954458ba0bc58f0, // RecordField
   dessser::gen::raql_variable::t_ext, // RecordValue
   std::string // Direct
 > {

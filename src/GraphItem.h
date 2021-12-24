@@ -90,7 +90,7 @@ public:
   int columnCount() const;
   virtual QVariant data(int col, int role) const;
   // Reorder the children after some has been added/removed
-  virtual void reorder(GraphModel const *) {};
+  virtual void reorder(GraphModel *) {};
   virtual void setProperty(QString const &,
                            std::shared_ptr<dessser::gen::raql_value::t const>) {};
   QModelIndex index(GraphModel const *, int) const;

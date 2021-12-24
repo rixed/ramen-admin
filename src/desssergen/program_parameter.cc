@@ -215,7 +215,7 @@ inline bool operator!=(tf3063cfb73e0f06d3ea99ebd15a86d50 const &a, tf3063cfb73e0
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
     dessser::gen::field_name::t_ext id_2 { (*p_0).name };
     Pointer id_3 { fun1(id_2, p_1) };
@@ -350,7 +350,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Poi
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> )> fun65 { [&fun65](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> )> fun65 { [&](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0) {
     auto fun66 { dessser::gen::field_name::sersize_of_row_binary };
     dessser::gen::field_name::t_ext id_67 { (*p_0).name };
     Size id_68 { fun66(id_67) };
@@ -494,7 +494,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> )> sers
  */
 static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> fun122 { [&fun122](Pointer p_0) {
+  std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> fun122 { [&](Pointer p_0) {
     auto fun123 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::program_parameter::t18cecf882d7ac80cef37dfe6b22279d4 id_124 { fun123(p_0) };
     ::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4 let_res_125;
@@ -683,7 +683,7 @@ std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8
  */
 static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> fun203 { [&fun203](Pointer p_0) {
+  std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> fun203 { [&](Pointer p_0) {
     ::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4 id_204 { of_row_binary(p_0) };
     ::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4 letpair_res_205;
     {
@@ -704,7 +704,7 @@ std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> fun207 { [&fun207](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> fun207 { [&](std::shared_ptr<::dessser::gen::program_parameter::t>  p_0, Pointer p_1) {
     Pointer id_208 { to_row_binary(p_0, p_1) };
     return id_208;
   }

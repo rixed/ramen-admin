@@ -196,7 +196,7 @@ inline bool operator!=(t55727524d16738c6d5fa67218480136d const &a, t55727524d167
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> fun0 { [&fun0](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0, Pointer p_1) {
     double id_1 { (*p_0).stats_time };
     uint64_t id_2 { qword_of_float(id_1) };
     Pointer id_3 { p_1.writeU64Le(id_2) };
@@ -516,7 +516,7 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> fun141 { [&fun141](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> fun141 { [&](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0) {
     std::optional<double> id_142 { (*p_0).max_etime };
     bool id_143 { !(id_142.has_value ()) };
     Size choose_res_144;
@@ -854,7 +854,7 @@ std::function<Size(std::shared_ptr<::dessser::gen::runtime_stats::t> )> sersize_
  */
 static std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> fun237 { [&fun237](Pointer p_0) {
+  std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> fun237 { [&](Pointer p_0) {
     ::dessser::gen::runtime_stats::td2cd337bb3c8bc04d5603393d084985b id_238 { p_0.readU64Le() };
     ::dessser::gen::runtime_stats::t9a758baeff17224a77e1a522010b4168 letpair_res_239;
     {
@@ -1484,7 +1484,7 @@ std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(P
  */
 static std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> fun456 { [&fun456](Pointer p_0) {
+  std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(Pointer)> fun456 { [&](Pointer p_0) {
     ::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820 id_457 { of_row_binary(p_0) };
     ::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820 letpair_res_458;
     {
@@ -1506,7 +1506,7 @@ std::function<::dessser::gen::runtime_stats::t499f7b290c8689eedd4afcf2712aa820(P
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> fun460 { [&fun460](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::runtime_stats::t> ,Pointer)> fun460 { [&](std::shared_ptr<::dessser::gen::runtime_stats::t>  p_0, Pointer p_1) {
     Pointer id_461 { to_row_binary(p_0, p_1) };
     return id_461;
   }

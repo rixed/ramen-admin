@@ -45,7 +45,7 @@ void KShortLabel::paintEvent(QPaintEvent *event)
   int y = topMargin;
   QStringList lines(text.split('\n'));
 
-  for (QString const l : lines) {
+  for (QString const &l : lines) {
 
     if (y >= bbox.bottom() || y >= height() - bottomMargin) break;
 

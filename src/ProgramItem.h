@@ -25,7 +25,7 @@ public:
     GraphItem *treeParent, std::unique_ptr<Program>, GraphViewSettings const &);
 
   QVariant data(int column, int role) const;
-  void reorder(GraphModel const *);
+  void reorder(GraphModel *);
   QRectF operationRect() const;
 
   bool isTopHalf() const;

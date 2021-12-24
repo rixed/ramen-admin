@@ -27,21 +27,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tff7b54471b87043162b66b899ee5752c : public std::tuple<
+struct t805abd272f99387513a75eaf2be5b195 : public std::tuple<
   dessser::gen::sync_user_id::t_ext,
   double
 > {
   using tuple::tuple;
-  tff7b54471b87043162b66b899ee5752c(std::tuple<dessser::gen::sync_user_id::t_ext, double> p)
-    : std::tuple<dessser::gen::sync_user_id::t_ext, double>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tff7b54471b87043162b66b899ee5752c const &a, tff7b54471b87043162b66b899ee5752c const &b) {
+inline bool operator==(t805abd272f99387513a75eaf2be5b195 const &a, t805abd272f99387513a75eaf2be5b195 const &b) {
   return ::dessser::gen::sync_user_id::Deref(std::get<0>(a)) == ::dessser::gen::sync_user_id::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tff7b54471b87043162b66b899ee5752c const &a, tff7b54471b87043162b66b899ee5752c const &b) {
+inline bool operator!=(t805abd272f99387513a75eaf2be5b195 const &a, t805abd272f99387513a75eaf2be5b195 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tff7b54471b87043162b66b899ee5752c const &t) {
+inline std::ostream &operator<<(std::ostream &os, t805abd272f99387513a75eaf2be5b195 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -49,23 +47,21 @@ inline std::ostream &operator<<(std::ostream &os, tff7b54471b87043162b66b899ee57
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tff7b54471b87043162b66b899ee5752c> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t805abd272f99387513a75eaf2be5b195> const t) { os << *t; return os; }
 
-struct tbc2962b8a16f722e2fa776d8567e35f5 : public std::tuple<
+struct ta760ad950ac6e9d5bb8cad673985521b : public std::tuple<
   dessser::gen::sync_key::t_ext,
   dessser::gen::sync_value::t_ext
 > {
   using tuple::tuple;
-  tbc2962b8a16f722e2fa776d8567e35f5(std::tuple<dessser::gen::sync_key::t_ext, dessser::gen::sync_value::t_ext> p)
-    : std::tuple<dessser::gen::sync_key::t_ext, dessser::gen::sync_value::t_ext>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tbc2962b8a16f722e2fa776d8567e35f5 const &a, tbc2962b8a16f722e2fa776d8567e35f5 const &b) {
+inline bool operator==(ta760ad950ac6e9d5bb8cad673985521b const &a, ta760ad950ac6e9d5bb8cad673985521b const &b) {
   return ::dessser::gen::sync_key::Deref(std::get<0>(a)) == ::dessser::gen::sync_key::Deref(std::get<0>(b)) && ::dessser::gen::sync_value::Deref(std::get<1>(a)) == ::dessser::gen::sync_value::Deref(std::get<1>(b));
 }
-inline bool operator!=(tbc2962b8a16f722e2fa776d8567e35f5 const &a, tbc2962b8a16f722e2fa776d8567e35f5 const &b) {
+inline bool operator!=(ta760ad950ac6e9d5bb8cad673985521b const &a, ta760ad950ac6e9d5bb8cad673985521b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tbc2962b8a16f722e2fa776d8567e35f5 const &t) {
+inline std::ostream &operator<<(std::ostream &os, ta760ad950ac6e9d5bb8cad673985521b const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -73,7 +69,7 @@ inline std::ostream &operator<<(std::ostream &os, tbc2962b8a16f722e2fa776d8567e3
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbc2962b8a16f722e2fa776d8567e35f5> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta760ad950ac6e9d5bb8cad673985521b> const t) { os << *t; return os; }
 
 struct tb16878f6e292208107ef8273775c68d0 : public std::tuple<
   dessser::gen::sync_key::t_ext,
@@ -126,11 +122,11 @@ inline std::ostream &operator<<(std::ostream &os, t828d44a85b9c48d5ccb39d9b1a51e
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t828d44a85b9c48d5ccb39d9b1a51ef22> const t) { os << *t; return os; }
 
 struct t : public std::variant<
-  ::dessser::gen::sync_client_cmd::tff7b54471b87043162b66b899ee5752c, // Auth
+  ::dessser::gen::sync_client_cmd::t805abd272f99387513a75eaf2be5b195, // Auth
   dessser::gen::sync_selector::t_ext, // StartSync
-  ::dessser::gen::sync_client_cmd::tbc2962b8a16f722e2fa776d8567e35f5, // SetKey
+  ::dessser::gen::sync_client_cmd::ta760ad950ac6e9d5bb8cad673985521b, // SetKey
   ::dessser::gen::sync_client_cmd::tb16878f6e292208107ef8273775c68d0, // NewKey
-  ::dessser::gen::sync_client_cmd::tbc2962b8a16f722e2fa776d8567e35f5, // UpdKey
+  ::dessser::gen::sync_client_cmd::ta760ad950ac6e9d5bb8cad673985521b, // UpdKey
   dessser::gen::sync_key::t_ext, // DelKey
   ::dessser::gen::sync_client_cmd::t828d44a85b9c48d5ccb39d9b1a51ef22, // LockKey
   ::dessser::gen::sync_client_cmd::t828d44a85b9c48d5ccb39d9b1a51ef22, // LockOrCreateKey

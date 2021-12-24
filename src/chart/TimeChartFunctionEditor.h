@@ -44,6 +44,8 @@ public:
     bool customizable = true,  // TODO: disable this for the raw config editor
     QWidget *parent = nullptr);
 
+  std::shared_ptr<dessser::gen::dashboard_widget::source> getValue() const;
+
 protected slots:
   void wantSource();
   void wantCustomize();
@@ -53,7 +55,6 @@ protected slots:
 public slots:
   void setEnabled(bool);
   bool setValue(dessser::gen::dashboard_widget::source const &);
-  std::shared_ptr<dessser::gen::dashboard_widget::source> getValue() const;
 
 signals:
   void fieldChanged(std::string const &site, std::string const &program,

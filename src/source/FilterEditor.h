@@ -50,7 +50,7 @@ public slots:
 
 signals:
   /* Signaled when the filter has been changed in any way: */
-  void inputChanged() const;
+  void inputChanged();
 };
 
 #endif
