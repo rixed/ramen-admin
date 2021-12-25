@@ -1,9 +1,9 @@
 #ifndef GRAPHVIEW_H_190508
 #define GRAPHVIEW_H_190508
-#include <unordered_map>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
+#include <unordered_map>
 
 #include "GraphModel.h"
 
@@ -27,13 +27,13 @@ class GraphArrow;
 struct GraphViewSettings;
 
 struct HashStupidPairOfPointers {
-  size_t operator()(const std::pair<GraphItem const *, GraphItem const *>& key) const {
+  size_t operator()(
+      const std::pair<GraphItem const *, GraphItem const *> &key) const {
     return (size_t)key.first + (size_t)key.second;
   }
 };
 
-class GraphView : public QGraphicsView
-{
+class GraphView : public QGraphicsView {
   Q_OBJECT
 
   QGraphicsScene scene;
@@ -53,11 +53,9 @@ class GraphView : public QGraphicsView
 
   /* The current set of arrows, indexed by src+dst.
    * The bool is for tagging while updating. */
-  std::unordered_map<
-    std::pair<GraphItem const *, GraphItem const *>,
-    std::pair<GraphArrow *, bool>,
-    HashStupidPairOfPointers
-  > arrows;
+  std::unordered_map<std::pair<GraphItem const *, GraphItem const *>,
+                     std::pair<GraphArrow *, bool>, HashStupidPairOfPointers>
+      arrows;
 
   /* Used to trigger a layout computation after no functions were updated
    * for a short while: */
@@ -69,18 +67,19 @@ class GraphView : public QGraphicsView
   qreal currentScale;
   qreal lastScale;
 
-public:
+ public:
   GraphView(GraphViewSettings const &, QWidget *parent = nullptr);
   void setModel(GraphModel const *);
   QSize sizeHint() const override;
-protected:
+
+ protected:
   void keyPressEvent(QKeyEvent *) override;
   bool event(QEvent *) override;
 
-protected slots:
+ protected slots:
   void updateArrows();
 
-public slots:
+ public slots:
   void zoom(qreal);
   void collapse(QModelIndex const &index);
   void expand(QModelIndex const &index);
@@ -93,7 +92,7 @@ public slots:
   void startLayout();
   void selectionChanged();
 
-signals:
+ signals:
   void selected(QModelIndex const &);
 };
 

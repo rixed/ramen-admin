@@ -7,8 +7,7 @@
 
 class QPixmap;
 
-class RollButtonDelegate : public QStyledItemDelegate
-{
+class RollButtonDelegate : public QStyledItemDelegate {
   Q_OBJECT
   Q_DISABLE_COPY(RollButtonDelegate);
 
@@ -16,7 +15,7 @@ class RollButtonDelegate : public QStyledItemDelegate
 
   QSize minSize;
 
-public:
+ public:
   RollButtonDelegate(QObject *parent = nullptr);
 
   void addIcon(QPixmap);
@@ -27,20 +26,18 @@ public:
   QSize sizeHint(QStyleOptionViewItem const &option,
                  QModelIndex const &index) const override;
 
-  QWidget *createEditor(
-    QWidget *parent, QStyleOptionViewItem const &option,
-    QModelIndex const &index) const override;
+  QWidget *createEditor(QWidget *parent, QStyleOptionViewItem const &option,
+                        QModelIndex const &index) const override;
 
   void setEditorData(QWidget *editor, QModelIndex const &index) const override;
 
   void setModelData(QWidget *editor, QAbstractItemModel *model,
                     QModelIndex const &index) const override;
 
-  void updateEditorGeometry(
-    QWidget *editor, QStyleOptionViewItem const &option,
-    QModelIndex const &index) const override;
+  void updateEditorGeometry(QWidget *editor, QStyleOptionViewItem const &option,
+                            QModelIndex const &index) const override;
 
-private slots:
+ private slots:
   void commitAndCloseEditor();
 };
 

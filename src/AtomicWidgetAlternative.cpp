@@ -1,17 +1,18 @@
-#include <QDebug>
-#include "confValue.h"
 #include "AtomicWidgetAlternative.h"
+
+#include <QDebug>
+
+#include "confValue.h"
 
 static bool const verbose(false);
 
-AtomicWidgetAlternative::AtomicWidgetAlternative(QWidget *parent) :
-  AtomicWidget(parent), currentWidget(-1) {}
+AtomicWidgetAlternative::AtomicWidgetAlternative(QWidget *parent)
+    : AtomicWidget(parent), currentWidget(-1) {}
 
-int AtomicWidgetAlternative::addWidget(AtomicWidget *w)
-{
+int AtomicWidgetAlternative::addWidget(AtomicWidget *w) {
   if (verbose)
-    qDebug() << "AtomicWidgetAlternative: adding widget" << w
-             << "as" << widgets.size();
+    qDebug() << "AtomicWidgetAlternative: adding widget" << w << "as"
+             << widgets.size();
 
   widgets.push_back(w);
   int i = widgets.size() - 1;
@@ -19,58 +20,49 @@ int AtomicWidgetAlternative::addWidget(AtomicWidget *w)
   return i;
 }
 
-void AtomicWidgetAlternative::setEnabled(bool enabled)
-{
-  for (AtomicWidget *w : widgets)
-    w->setEnabled(enabled);
+void AtomicWidgetAlternative::setEnabled(bool enabled) {
+  for (AtomicWidget *w : widgets) w->setEnabled(enabled);
 }
 
-std::shared_ptr<conf::Value const> AtomicWidgetAlternative::getValue() const
-{
+std::shared_ptr<conf::Value const> AtomicWidgetAlternative::getValue() const {
   Q_ASSERT(currentWidget >= 0);
   return widgets[currentWidget]->getValue();
 }
 
-bool AtomicWidgetAlternative::setValue(
-  std::string const &k, std::shared_ptr<conf::Value const>v)
-{
+bool AtomicWidgetAlternative::setValue(std::string const &k,
+                                       std::shared_ptr<conf::Value const> v) {
   Q_ASSERT(currentWidget >= 0);
   return widgets[currentWidget]->setValue(k, v);
 }
 
-void AtomicWidgetAlternative::setCurrentWidget(int i)
-{
+void AtomicWidgetAlternative::setCurrentWidget(int i) {
   Q_ASSERT(i >= 0 && i < (int)widgets.size());
 
   if (verbose)
-    qDebug() << "AtomicWidgetAlternative: current widget is now"
-             << i << "(" << this << ")";
+    qDebug() << "AtomicWidgetAlternative: current widget is now" << i << "("
+             << this << ")";
 
   currentWidget = i;
 }
 
-std::string const &AtomicWidgetAlternative::key() const
-{
+std::string const &AtomicWidgetAlternative::key() const {
   Q_ASSERT(currentWidget >= 0);
   return widgets[currentWidget]->key();
 }
 
-void AtomicWidgetAlternative::saveKey(std::string const &newKey)
-{
+void AtomicWidgetAlternative::saveKey(std::string const &newKey) {
   Q_ASSERT(currentWidget >= 0);
   widgets[currentWidget]->saveKey(newKey);
 }
 
-bool AtomicWidgetAlternative::setKey(std::string const &newKey)
-{
+bool AtomicWidgetAlternative::setKey(std::string const &newKey) {
   if (verbose)
     qDebug() << "AtomicWidgetAlternative::setKey("
              << QString::fromStdString(newKey) << ")";
 
   bool const ok(AtomicWidget::setKey(newKey));
   Q_ASSERT(currentWidget >= 0);
-  if (ok)
-    widgets[currentWidget]->setKey(newKey);
+  if (ok) widgets[currentWidget]->setKey(newKey);
 
   return ok;
 }

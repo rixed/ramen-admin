@@ -1,23 +1,21 @@
-#include <QtGlobal>
+#include "WorkerViewer.h"
+
+#include <QCheckBox>
 #include <QDebug>
 #include <QFormLayout>
 #include <QLabel>
-#include <QCheckBox>
+#include <QtGlobal>
 
+#include "MakeSyncValue.h"
+#include "RangeDoubleValidator.h"
 #include "desssergen/func_ref.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "desssergen/worker.h"
-#include "MakeSyncValue.h"
 #include "misc.h"
 #include "misc_dessser.h"
-#include "RangeDoubleValidator.h"
 
-#include "WorkerViewer.h"
-
-WorkerViewer::WorkerViewer(QWidget *parent) :
-  AtomicWidget(parent)
-{
+WorkerViewer::WorkerViewer(QWidget *parent) : AtomicWidget(parent) {
   enabled = new QCheckBox("Enabled");
   enabled->setEnabled(false);
   debug = new QCheckBox("Debug");
@@ -55,40 +53,35 @@ WorkerViewer::WorkerViewer(QWidget *parent) :
   relayoutWidget(w);
 }
 
-void WorkerViewer::setEnabled(bool enabled_)
-{
+void WorkerViewer::setEnabled(bool enabled_) {
   enabled->setEnabled(enabled_);
   debug->setEnabled(enabled_);
   used->setEnabled(enabled_);
 }
 
-static QString const qstringOfRole(dessser::gen::worker::t const &worker)
-{
+static QString const qstringOfRole(dessser::gen::worker::t const &worker) {
   if (worker.role.index() == dessser::gen::worker::Whole)
     return QString("normal");
   else
     return QString("top-half");
 }
 
-static QString const qstringOfRef(dessser::gen::func_ref::t const &ref)
-{
-  QString const fq {
-    QString::fromStdString(ref.program) + "/" +
-    QString::fromStdString(ref.func) };
+static QString const qstringOfRef(dessser::gen::func_ref::t const &ref) {
+  QString const fq{QString::fromStdString(ref.program) + "/" +
+                   QString::fromStdString(ref.func)};
   if (ref.site.size() == 0) return fq;
   return QString::fromStdString(ref.site) + ":" + fq;
 }
 
 bool WorkerViewer::setValue(
-  std::shared_ptr<dessser::gen::sync_value::t const> v)
-{
+    std::shared_ptr<dessser::gen::sync_value::t const> v) {
   /* Empty the previous params/parents layouts: */
   while (params->count() > 0) params->removeRow(0);
   emptyLayout(parents);
 
   if (v->index() == dessser::gen::sync_value::Worker) {
-    std::shared_ptr<dessser::gen::worker::t const> w {
-      std::get<dessser::gen::sync_value::Worker>(*v) };
+    std::shared_ptr<dessser::gen::worker::t const> w{
+        std::get<dessser::gen::sync_value::Worker>(*v)};
 
     enabled->setChecked(w->enabled);
     debug->setChecked(w->debug);
@@ -104,9 +97,8 @@ bool WorkerViewer::setValue(
       params->addRow(none);
     } else {
       for (auto &p : w->params) {
-        params->addRow(
-          QString::fromStdString(std::get<0>(p)) + QString(":"),
-          new QLabel(raqlValToQString(*std::get<1>(p))));
+        params->addRow(QString::fromStdString(std::get<0>(p)) + QString(":"),
+                       new QLabel(raqlValToQString(*std::get<1>(p))));
       }
     }
     if (!w->parents || w->parents->size() == 0) {
@@ -115,7 +107,7 @@ bool WorkerViewer::setValue(
       parents->addWidget(none);
     } else {
       for (auto const &p : *w->parents) {
-        QLabel *l { new QLabel(qstringOfRef(*p)) };
+        QLabel *l{new QLabel(qstringOfRef(*p))};
         l->setAlignment(Qt::AlignCenter);
         parents->addWidget(l);
       }

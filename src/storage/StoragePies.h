@@ -10,7 +10,7 @@ class GraphModel;
 class QCheckBox;
 class QLabel;
 namespace QtCharts {
-  class QChart;
+class QChart;
 }
 
 /*
@@ -18,8 +18,7 @@ namespace QtCharts {
  * programs, functions, sites+programs or sites+programs+function.
  */
 
-class StoragePies : public QWidget
-{
+class StoragePies : public QWidget {
   Q_OBJECT
 
   GraphModel *graphModel;
@@ -28,8 +27,8 @@ class StoragePies : public QWidget
    * program+function.
    * So up to three concentric donuts: */
   QtCharts::QChart *chart;
-  Key selected; // unless invalid
-  bool staysSelected; // when hover ceases
+  Key selected;        // unless invalid
+  bool staysSelected;  // when hover ceases
 
   QLabel *selectionSiteLabel;
   QLabel *selectionProgLabel;
@@ -40,13 +39,12 @@ class StoragePies : public QWidget
 
   DataMode dataMode;
 
-
   void displaySelection(Key const &, Values const &);
 
-public:
+ public:
   StoragePies(GraphModel *, QWidget *parent = nullptr);
 
-private slots:
+ private slots:
   void rearmReallocTimer(FunctionItem const *);
   void refreshChart();
   void toggleSelection();

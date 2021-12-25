@@ -1,28 +1,28 @@
+#include <sodium.h>
+
+#include <QAbstractSocket>
+#include <QApplication>
+#include <QCommandLineParser>
+#include <QDebug>
+#include <QVector>
 #include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include <QAbstractSocket>
-#include <QApplication>
-#include <QDebug>
-#include <QCommandLineParser>
-#include <QVector>
-#include <sodium.h>
 
-#include "alerting/AlertingLogsModel.h"
-#include "dashboard/DashboardTreeModel.h"
 #include "GraphModel.h"
 #include "KVStore.h"
 #include "Menu.h"
-#include "misc.h"
 #include "NamesTree.h"
-#include "stream/GraphViewSettings.h"
 #include "SyncStatus.h"
 #include "UserIdentity.h"
+#include "alerting/AlertingLogsModel.h"
 #include "config.h"
+#include "dashboard/DashboardTreeModel.h"
+#include "misc.h"
+#include "stream/GraphViewSettings.h"
 
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]) {
   if (sodium_init() < 0) {
     std::cerr << "Cannot initialize libsodium!?" << std::endl;
     return 1;
@@ -47,14 +47,13 @@ int main(int argc, char *argv[])
 
   parser.process(app);
 
-  QString configDir =
-    getenv("HOME") ?
-      qgetenv("HOME") + QString("/.config/rmadmin") :
-      QString("/etc/rmadmin");
+  QString configDir = getenv("HOME")
+                          ? qgetenv("HOME") + QString("/.config/rmadmin")
+                          : QString("/etc/rmadmin");
 
   qRegisterMetaType<KValue>();
   qRegisterMetaType<QAbstractSocket::SocketError>();
-  qRegisterMetaType<QList<ConfChange>>();
+  qRegisterMetaType<QList<ConfChange> >();
   qRegisterMetaType<SyncStatus>();
 
   // Creates the global kvs (store of keys) before widgets start to use it:

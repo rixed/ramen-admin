@@ -1,16 +1,15 @@
-#include <vector>
 #include "RangeDoubleValidator.h"
+
+#include <vector>
 
 namespace RangeDoubleValidator {
 
 static std::vector<QDoubleValidator *> validators;
 
-QDoubleValidator const *forRange(double min, double max)
-{
+QDoubleValidator const *forRange(double min, double max) {
   // Look for a previously created validator for that range:
   for (auto const validator : validators) {
-    if (validator->bottom() == min && validator->top() == max)
-      return validator;
+    if (validator->bottom() == min && validator->top() == max) return validator;
   }
 
   // 1000 decimal digits is the default:
@@ -19,4 +18,4 @@ QDoubleValidator const *forRange(double min, double max)
   return validator;
 }
 
-};
+};  // namespace RangeDoubleValidator

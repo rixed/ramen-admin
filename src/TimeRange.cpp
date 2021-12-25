@@ -1,62 +1,52 @@
-#include <QDebug>
+#include "TimeRange.h"
+
 #include <QDateTime>
+#include <QDebug>
 
 #include "misc.h"
 
-#include "TimeRange.h"
-
-TimeRange::TimeRange(double lastSeconds)
-{
+TimeRange::TimeRange(double lastSeconds) {
   relative = true;
   since = -lastSeconds;
   until = 0;
 }
 
-void TimeRange::absRange(double *since_, double *until_) const
-{
+void TimeRange::absRange(double *since_, double *until_) const {
   double origin = relative ? getTime() : 0;
   *since_ = origin + since;
   *until_ = origin + until;
 }
 
-bool TimeRange::contains(double t) const
-{
+bool TimeRange::contains(double t) const {
   double origin = relative ? getTime() : 0;
   return t >= origin + since && t < origin + until;
 }
 
-void TimeRange::merge(TimeRange const &that)
-{
+void TimeRange::merge(TimeRange const &that) {
   Q_ASSERT(relative == that.relative);  // or TODO
   since = std::min(since, that.since);
   until = std::max(until, that.until);
 }
 
-void TimeRange::chop(TimeRange const &have)
-{
+void TimeRange::chop(TimeRange const &have) {
   Q_ASSERT(relative == have.relative);  // or TODO
   if (isEmpty()) return;
-  if (have.since <= since && have.until > since)
-    since = have.until;
-  if (have.until >= until && have.since < until)
-    until = have.since;
+  if (have.since <= since && have.until > since) since = have.until;
+  if (have.until >= until && have.since < until) until = have.since;
   /* TODO: make TimeRange a list of ranges and make a hole in it when
    * have is contained in this range? */
 }
 
-QString TimeRange::toQString() const
-{
+QString TimeRange::toQString() const {
   if (relative) {
     return QString("Last " + QString::number(-since) + " seconds");
   } else {
-    return QString(QDateTime::fromSecsSinceEpoch(since).toString() +
-                   " → " +
+    return QString(QDateTime::fromSecsSinceEpoch(since).toString() + " → " +
                    QDateTime::fromSecsSinceEpoch(until).toString());
   }
 }
 
-QDebug operator<<(QDebug debug, TimeRange const &v)
-{
+QDebug operator<<(QDebug debug, TimeRange const &v) {
   QDebugStateSaver saver(debug);
   debug.nospace() << v.toQString();
   return debug;

@@ -1,25 +1,25 @@
-#include <algorithm>
-#include <QPainter>
+#include "GraphItem.h"
+
 #include <QFontMetrics>
+#include <QPainter>
 #include <QPropertyAnimation>
+#include <algorithm>
 
 #include "GraphModel.h"
-#include "stream/GraphViewSettings.h"
 #include "colorOfString.h"
-
-#include "GraphItem.h"
+#include "stream/GraphViewSettings.h"
 
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,
  * but can be used to hide/move/transform its children in one go.
  * And unlike QGrpahicsItemGroup, will not hide events.
  * Very useful, should be in Qt IMHO. */
-class GraphicsEmpty : public QAbstractGraphicsShapeItem
-{
-public:
-  GraphicsEmpty(QGraphicsItem *parent = nullptr) :
-    QAbstractGraphicsShapeItem (parent) {}
+class GraphicsEmpty : public QAbstractGraphicsShapeItem {
+ public:
+  GraphicsEmpty(QGraphicsItem *parent = nullptr)
+      : QAbstractGraphicsShapeItem(parent) {}
   QRectF boundingRect() const { return QRectF(); }
-  void paint(QPainter *, const QStyleOptionGraphicsItem *, QWidget * = nullptr) {}
+  void paint(QPainter *, const QStyleOptionGraphicsItem *,
+             QWidget * = nullptr) {}
 };
 
 // Notice that we use our parent's subItems as the parent of the GraphItem,
@@ -27,23 +27,25 @@ public:
 // moves.
 // Note also that we must initialize row with an invalid value so that
 // reorder detect that it's indeed a new value when we insert the first one!
-GraphItem::GraphItem(
-  GraphItem *treeParent_, std::unique_ptr<GraphData> data,
-  GraphViewSettings const &settings_) :
-  QGraphicsItem(treeParent_ ? treeParent_->subItems : treeParent_),
-  border_(2),
-  collapsed(true),
-  settings(settings_),
-  x0(0), y0(0), x1(0), y1(0),
-  xRank(0), yRank(0),
-  treeParent(treeParent_),
-  row(-1),
-  shared(std::move(data))
-{
+GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
+                     GraphViewSettings const &settings_)
+    : QGraphicsItem(treeParent_ ? treeParent_->subItems : treeParent_),
+      border_(2),
+      collapsed(true),
+      settings(settings_),
+      x0(0),
+      y0(0),
+      x1(0),
+      y1(0),
+      xRank(0),
+      yRank(0),
+      treeParent(treeParent_),
+      row(-1),
+      shared(std::move(data)) {
   brush = QBrush(colorOfString(shared->name)),
 
   // Notifies itemChange whenever the position is changed:
-  setFlag(ItemSendsGeometryChanges, true);
+      setFlag(ItemSendsGeometryChanges, true);
   // or the item (un)selected:
   setFlag(ItemIsSelectable, true);
   setAcceptTouchEvents(true);
@@ -53,45 +55,34 @@ GraphItem::GraphItem(
   subItems->hide();
 }
 
-QVariant GraphItem::data(int column, int role) const
-{
+QVariant GraphItem::data(int column, int role) const {
   if (role != Qt::DisplayRole) return QVariant();
   if (column != 0) return QVariant();
   return shared->name;
 }
 
-bool GraphItem::isCollapsed() const
-{
-  return collapsed;
-}
+bool GraphItem::isCollapsed() const { return collapsed; }
 
-void GraphItem::setCollapsed(bool c)
-{
+void GraphItem::setCollapsed(bool c) {
   collapsed = c;
   subItems->setVisible(!c);
 }
 
-QString GraphItem::sfqName() const
-{
-  if (! treeParent) return shared->name;
-  QString const sep { treeParent->treeParent ? "/" : ":" };
+QString GraphItem::sfqName() const {
+  if (!treeParent) return shared->name;
+  QString const sep{treeParent->treeParent ? "/" : ":"};
   return treeParent->sfqName() + sep + shared->name;
 }
 
-QColor GraphItem::color() const
-{
+QColor GraphItem::color() const {
   QColor c = brush.color();
   c.setAlpha(collapsed ? 200 : 25);
   return c;
 }
 
-qreal GraphItem::border() const
-{
-  return border_;
-}
+qreal GraphItem::border() const { return border_; }
 
-void GraphItem::setBorder(qreal b)
-{
+void GraphItem::setBorder(qreal b) {
   if (b != border_) {
     border_ = b;
     update();
@@ -110,8 +101,10 @@ void GraphItem::setBorder(qreal b)
  * item itself) inside.
  * The upper-left corner of that frame lays at (0, 0). */
 
-void GraphItem::paintLabels(QPainter *painter, std::vector<std::pair<QString const, QString const>> const &labels, int y)
-{
+void GraphItem::paintLabels(
+    QPainter *painter,
+    std::vector<std::pair<QString const, QString const> > const &labels,
+    int y) {
   QFont boldFont = settings.labelsFont;
   boldFont.setBold(true);
   QFontMetrics fm(boldFont);
@@ -136,8 +129,8 @@ void GraphItem::paintLabels(QPainter *painter, std::vector<std::pair<QString con
   }
 }
 
-QRect GraphItem::labelsBoundingRect(std::vector<std::pair<QString const, QString const>> const &labels) const
-{
+QRect GraphItem::labelsBoundingRect(
+    std::vector<std::pair<QString const, QString const> > const &labels) const {
   QFont font = settings.labelsFont;
   font.setBold(true);
 
@@ -146,8 +139,8 @@ QRect GraphItem::labelsBoundingRect(std::vector<std::pair<QString const, QString
   int totWidth = 0;
   for (auto const &label : labels) {
     QString const totLine(label.first + QString(": ") + label.second);
-    totWidth =
-      std::max(totWidth, settings.labelsHorizMargin + fm.boundingRect(totLine).width());
+    totWidth = std::max(totWidth, settings.labelsHorizMargin +
+                                      fm.boundingRect(totLine).width());
   }
 
   int const totHeight = labels.size() * settings.labelsLineHeight;
@@ -155,19 +148,14 @@ QRect GraphItem::labelsBoundingRect(std::vector<std::pair<QString const, QString
   return QRect(QPoint(0, 0), QSize(totWidth, totHeight));
 }
 
-QModelIndex GraphItem::index(GraphModel const *model, int column) const
-{
+QModelIndex GraphItem::index(GraphModel const *model, int column) const {
   return model->index(row, column,
-    treeParent ? treeParent->index(model, 0) : QModelIndex());
+                      treeParent ? treeParent->index(model, 0) : QModelIndex());
 }
 
-int GraphItem::columnCount() const
-{
-  return GraphModel::NumColumns;
-}
+int GraphItem::columnCount() const { return GraphModel::NumColumns; }
 
-QRectF GraphItem::boundingRect() const
-{
+QRectF GraphItem::boundingRect() const {
   QRectF bbox = operationRect();
   qreal b = border();
   bbox += QMargins(b, b, b, b);
@@ -175,8 +163,8 @@ QRectF GraphItem::boundingRect() const
 }
 
 // Every node in the graph start by displaying a set of properties:
-void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
-{
+void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
+                      QWidget *) {
   qreal b = border();
   QBrush bru = brush;
   bru.setColor(color().lighter());
@@ -197,18 +185,18 @@ void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidg
   titlePen.setWidth(0);
   painter->setPen(titlePen);
 
-  painter->drawText(
-    settings.labelsHorizMargin, settings.titleLineHeight, shared->name);
+  painter->drawText(settings.labelsHorizMargin, settings.titleLineHeight,
+                    shared->name);
 
   // Labels:
   if (collapsed) {
-    std::vector<std::pair<QString const, QString const>> labs = labels();
+    std::vector<std::pair<QString const, QString const> > labs = labels();
     paintLabels(painter, labs, settings.titleLineHeight);
   }
 }
 
-QVariant GraphItem::itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant &v)
-{
+QVariant GraphItem::itemChange(QGraphicsItem::GraphicsItemChange change,
+                               const QVariant &v) {
   if (treeParent && change == QGraphicsItem::ItemPositionHasChanged) {
     update();
   } else if (change == ItemSelectedChange) {

@@ -15,19 +15,17 @@
 class QTreeView;
 class QWidget;
 
-class TreeComboBox : public QComboBox
-{
+class TreeComboBox : public QComboBox {
   Q_OBJECT
-  Q_PROPERTY(bool allowNonLeafSelection
-             READ allowNonLeafSelection
-             WRITE setAllowNonLeafSelection)
+  Q_PROPERTY(bool allowNonLeafSelection READ allowNonLeafSelection WRITE
+                 setAllowNonLeafSelection)
 
   bool m_allowNonLeafSelection;
 
-protected:
+ protected:
   QTreeView *treeView;
 
-public:
+ public:
   TreeComboBox(QWidget *parent = nullptr);
 
   void showPopup() override;

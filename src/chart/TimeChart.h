@@ -1,13 +1,13 @@
 #ifndef TIMECHART_H_200203
 #define TIMECHART_H_200203
-#include <optional>
+#include <QDebug>
+#include <QString>
 #include <map>
 #include <memory>
+#include <optional>
 #include <string>
 #include <utility>
 #include <vector>
-#include <QDebug>
-#include <QString>
 
 #include "desssergen/dashboard_widget.h"
 #include "misc_dessser.h"
@@ -22,13 +22,14 @@ class QPaintEvent;
 class TimeChartEditWidget;
 
 namespace dessser {
-  namespace gen {
-    namespace raql_value { struct t; }
-  }
+namespace gen {
+namespace raql_value {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class TimeChart : public AbstractTimeLine
-{
+class TimeChart : public AbstractTimeLine {
   Q_OBJECT
 
   TimeChartEditWidget *editWidget;
@@ -41,29 +42,30 @@ class TimeChart : public AbstractTimeLine
   /* Possible values for a combination of factor: */
   struct FactorValues {
     // factor name * factor index in columns:
-    std::vector<std::pair<std::string, int>> indices;
+    std::vector<std::pair<std::string, int> > indices;
     /* Possible values, as a map from the label to all tuple indices (ordered)
      * with this label: */
-    std::map<QString, std::vector<size_t>> labels;
+    std::map<QString, std::vector<size_t> > labels;
 
-    FactorValues(std::vector<std::pair<std::string, int>> indices_)
-      : indices(indices_) {}
+    FactorValues(std::vector<std::pair<std::string, int> > indices_)
+        : indices(indices_) {}
   };
 
   struct CategorizedTuple {
     double time;
-    std::vector<std::optional<double>> values;
+    std::vector<std::optional<double> > values;
 
     CategorizedTuple(
-      double time_,
-      std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> const tuple)
-      : time(time_)
-    {
+        double time_,
+        std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > const
+            tuple)
+        : time(time_) {
       /* Convert the whole tuple into a vector of doubles.
        * Not very useful for the factors but that's probably faster than
        * trying to distinguish them. */
       values.reserve(tuple.size());
-      for (std::shared_ptr<dessser::gen::raql_value::t const> const &tup : tuple) {
+      for (std::shared_ptr<dessser::gen::raql_value::t const> const &tup :
+           tuple) {
         values.push_back(toDouble(*tup));
       }
     }
@@ -78,8 +80,8 @@ class TimeChart : public AbstractTimeLine
 
   /* Result of a function iteration: */
   struct PerFunctionResults {
-    std::shared_ptr<Function> func; // the function to get data from
-    std::vector<int> columns; // what columns are we interested in
+    std::shared_ptr<Function> func;  // the function to get data from
+    std::vector<int> columns;        // what columns are we interested in
     std::vector<CategorizedTuple> tuples;
     // What combinations of factors are we interested in:
     std::vector<FactorValues> factorValues;
@@ -87,7 +89,7 @@ class TimeChart : public AbstractTimeLine
     bool noEventTime;
 
     PerFunctionResults(std::shared_ptr<Function> func_)
-      : func(func_), noEventTime(false) {
+        : func(func_), noEventTime(false) {
       columns.reserve(5);
       tuples.reserve(500);
       factorValues.reserve(3);
@@ -118,8 +120,11 @@ class TimeChart : public AbstractTimeLine
 
     Line(PerFunctionResults const *res_, std::string const fieldName_,
          size_t ci, size_t fi, QColor const &co)
-      : res(res_), fieldName(fieldName_),
-        columnIndex(ci), factorValues(fi), color(co) {}
+        : res(res_),
+          fieldName(fieldName_),
+          columnIndex(ci),
+          factorValues(fi),
+          color(co) {}
   };
 
   struct Axis {
@@ -134,10 +139,9 @@ class TimeChart : public AbstractTimeLine
     /* Given a set of lines, call the given function for every time
      * step with the value (and color) for each lines (inc. per factor): */
     static void iterTime(
-      std::vector<Line> const &lines,
-      std::function<void(
-        double,
-        std::vector<std::pair<std::optional<qreal>, QColor>>)>);
+        std::vector<Line> const &lines,
+        std::function<void(
+            double, std::vector<std::pair<std::optional<qreal>, QColor> >)>);
 
     /* extremums of all the plots/stacks.
      * This is the min/max of the global resulting picture, used to draw the
@@ -147,9 +151,9 @@ class TimeChart : public AbstractTimeLine
     std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf;
 
     Axis(std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf_)
-      : min(std::numeric_limits<qreal>::max()),
-        max(std::numeric_limits<qreal>::min()),
-        conf(conf_) {
+        : min(std::numeric_limits<qreal>::max()),
+          max(std::numeric_limits<qreal>::min()),
+          conf(conf_) {
       stacked.reserve(10);
       stackCentered.reserve(10);
       independent.reserve(10);
@@ -162,17 +166,15 @@ class TimeChart : public AbstractTimeLine
 
   void paintGrid(Axis const &);
 
-  void paintTicks(
-    Side const,
-    Axis const &,
-    std::map<QString, PerFunctionResults> &);
+  void paintTicks(Side const, Axis const &,
+                  std::map<QString, PerFunctionResults> &);
 
   void paintAxis(Axis const &);
 
-public:
+ public:
   TimeChart(TimeChartEditWidget *editWidget, QWidget *parent = nullptr);
 
-protected:
+ protected:
   std::optional<int> anyAxis(bool) const;
 
   void paintEvent(QPaintEvent *) override;
@@ -181,16 +183,15 @@ protected:
 
   qreal VofY(int y, qreal min, qreal max, bool log, int base) const;
 
-protected slots:
+ protected slots:
   /* Focus this axis and redraw it: */
   void redrawAxis(int);
 
   /* Focus this field and redraw it: */
-  void redrawField(
-    std::string const &site, std::string const &program,
-    std::string const &function, std::string const &field);
+  void redrawField(std::string const &site, std::string const &program,
+                   std::string const &function, std::string const &field);
 
-signals:
+ signals:
   void newTailTime(double);
 };
 

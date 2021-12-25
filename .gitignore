@@ -243,3 +243,4 @@ tests/test_crypto
 src/desssergen/*.type
 clazy-build
 tidy-build
+format

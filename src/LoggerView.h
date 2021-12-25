@@ -14,19 +14,17 @@ class QPainter;
  * Draws log items:
  */
 
-class LogLine : public QStyledItemDelegate
-{
+class LogLine : public QStyledItemDelegate {
   Q_OBJECT
 
-public:
+ public:
   LogLine(QObject *parent = nullptr) : QStyledItemDelegate(parent) {}
 
-  void paint(
-    QPainter *, QStyleOptionViewItem const &, QModelIndex const &) const override;
+  void paint(QPainter *, QStyleOptionViewItem const &,
+             QModelIndex const &) const override;
 
-  QSize sizeHint(
-    QStyleOptionViewItem const &, QModelIndex const &) const override;
-
+  QSize sizeHint(QStyleOptionViewItem const &,
+                 QModelIndex const &) const override;
 };
 
 /*
@@ -37,8 +35,7 @@ class QCheckBox;
 class QPushButton;
 class QTableView;
 
-class LoggerView : public QWidget
-{
+class LoggerView : public QWidget {
   Q_OBJECT
 
   QTableView *tableView;
@@ -49,15 +46,16 @@ class LoggerView : public QWidget
   QCheckBox *saveLogs;
   QPushButton *saveButton;
 
-public:
+ public:
   LoggerView(QWidget *parent = nullptr);
   ~LoggerView();
   void flush();
   void setModel(QAbstractItemModel *);
-protected:
+
+ protected:
   void saveLines(QModelIndex const &, int, int);
 
-protected slots:
+ protected slots:
   void resizeColumns();
   void setDoScroll(bool);
   void pickSaveFile();

@@ -1,17 +1,16 @@
+#include "dashboard/DashboardCopyDialog.h"
+
 #include <QButtonGroup>
 #include <QFormLayout>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QVBoxLayout>
+
 #include "dashboard/DashboardSelector.h"
 #include "dashboard/DashboardTreeModel.h"
 
-#include "dashboard/DashboardCopyDialog.h"
-
-DashboardCopyDialog::DashboardCopyDialog(QWidget *parent)
-  : QDialog(parent)
-{
+DashboardCopyDialog::DashboardCopyDialog(QWidget *parent) : QDialog(parent) {
   setModal(true);
 
   copyButton = new QRadioButton(tr("copy"));
@@ -25,16 +24,15 @@ DashboardCopyDialog::DashboardCopyDialog(QWidget *parent)
   copyMoveLayout->addWidget(copyButton);
   copyMoveLayout->addWidget(moveButton);
 
-  dashSelector =
-    new DashboardSelector(DashboardTreeModel::globalDashboardTree);
+  dashSelector = new DashboardSelector(DashboardTreeModel::globalDashboardTree);
 
   QPushButton *acceptButton = new QPushButton(tr("Ok"));
-  connect(acceptButton, &QPushButton::clicked,
-          this, &DashboardCopyDialog::accept);
+  connect(acceptButton, &QPushButton::clicked, this,
+          &DashboardCopyDialog::accept);
 
   QPushButton *cancelButton = new QPushButton(tr("Cancel"));
-  connect(cancelButton, &QPushButton::clicked,
-          this, &DashboardCopyDialog::reject);
+  connect(cancelButton, &QPushButton::clicked, this,
+          &DashboardCopyDialog::reject);
 
   QFormLayout *form = new QFormLayout;
   form->addRow(tr("Action:"), copyMoveLayout);
@@ -51,8 +49,7 @@ DashboardCopyDialog::DashboardCopyDialog(QWidget *parent)
   setLayout(layout);
 }
 
-int DashboardCopyDialog::copy(bool defaultToCopy)
-{
+int DashboardCopyDialog::copy(bool defaultToCopy) {
   // Surprisingly, copyButton->setChecked(defaultToCopy) does not do the job
   if (defaultToCopy)
     copyButton->setChecked(true);

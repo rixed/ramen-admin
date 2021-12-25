@@ -1,8 +1,8 @@
 #ifndef GRAPHMODEL_H_190507
 #define GRAPHMODEL_H_190507
-#include <vector>
 #include <QAbstractItemModel>
 #include <QPointF>
+#include <vector>
 
 #include "GraphItem.h"
 
@@ -44,11 +44,15 @@ class ProgramItem;
 class SiteItem;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class GraphModel : public QAbstractItemModel {
   Q_OBJECT
@@ -59,28 +63,25 @@ class GraphModel : public QAbstractItemModel {
   friend class FunctionItem;
 
   void reorder();
-  FunctionItem *find(
-    QString const &site, QString const &program, QString const &function);
+  FunctionItem *find(QString const &site, QString const &program,
+                     QString const &function);
 
   /* Parents are (re)set when we receive the "worker" object. But some parents
    * may still be unknown, so we also have a pending list of parents, that
    * must also be cleared for that child when its "worker" is received. */
   void addFunctionParent(FunctionItem *parent, FunctionItem *child);
-  void delayAddFunctionParent(
-    FunctionItem *child, QString const &site, QString const &program,
-    QString const &function);
+  void delayAddFunctionParent(FunctionItem *child, QString const &site,
+                              QString const &program, QString const &function);
   void removeParents(FunctionItem *child);  // also from pendings!
   void retryAddParents();
 
-  void setFunctionProperty(
-    SiteItem const *, ProgramItem const *, FunctionItem *, ParsedKey const &p,
-    std::shared_ptr<dessser::gen::sync_value::t const>);
-  void setProgramProperty(
-    ProgramItem *, ParsedKey const &p,
-    std::shared_ptr<dessser::gen::sync_value::t const>);
-  void setSiteProperty(
-    SiteItem *, ParsedKey const &p,
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+  void setFunctionProperty(SiteItem const *, ProgramItem const *,
+                           FunctionItem *, ParsedKey const &p,
+                           std::shared_ptr<dessser::gen::sync_value::t const>);
+  void setProgramProperty(ProgramItem *, ParsedKey const &p,
+                          std::shared_ptr<dessser::gen::sync_value::t const>);
+  void setSiteProperty(SiteItem *, ParsedKey const &p,
+                       std::shared_ptr<dessser::gen::sync_value::t const>);
   void delFunctionProperty(FunctionItem *, ParsedKey const &p);
   void delProgramProperty(ProgramItem *, ParsedKey const &p);
   void delSiteProperty(SiteItem *, ParsedKey const &p);
@@ -88,7 +89,7 @@ class GraphModel : public QAbstractItemModel {
   void updateKey(dessser::gen::sync_key::t const &, KValue const &);
   void deleteKey(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   GraphViewSettings const &settings;
   std::vector<SiteItem *> sites;
 
@@ -152,7 +153,7 @@ public:
     InstanceLastExitStatus,
     InstanceSuccessiveFailures,
     InstanceQuarantineUntil,
-    InstanceSignature, // = WorkerSignature in theory
+    InstanceSignature,  // = WorkerSignature in theory
     // Internal info:
     WorkerSignature,
     WorkerBinSignature,
@@ -185,10 +186,10 @@ public:
 
   static GraphModel *globalGraphModel;
 
-private slots:
+ private slots:
   void onChange(QList<ConfChange> const &);
 
-signals:
+ signals:
   void positionChanged(QModelIndex const &index);
   void functionAdded(FunctionItem const *);
   void functionRemoved(FunctionItem const *);

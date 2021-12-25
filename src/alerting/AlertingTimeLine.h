@@ -1,8 +1,8 @@
 #ifndef ALERTINGTIMELINE_H_200527
 #define ALERTINGTIMELINE_H_200527
-#include <memory>
 #include <QMap>
 #include <QWidget>
+#include <memory>
 
 #include "TimeRange.h"
 
@@ -14,11 +14,15 @@ class QLineEdit;
 class TimeLineGroup;
 
 namespace dessser {
-  namespace gen {
-    namespace alerting_log { struct t; }
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace alerting_log {
+struct t;
 }
+namespace sync_key {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class AlertingTimeLine : public QWidget {
   Q_OBJECT
@@ -39,20 +43,18 @@ class AlertingTimeLine : public QWidget {
 
   void updateVisibility();
 
-  void addLog(
-    std::string const &incidentId,
-    double const &time,
-    std::shared_ptr<dessser::gen::alerting_log::t const> log);
+  void addLog(std::string const &incidentId, double const &time,
+              std::shared_ptr<dessser::gen::alerting_log::t const> log);
 
   void addLogKey(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   AlertingTimeLine(QWidget *parent = nullptr);
 
-protected slots:
+ protected slots:
   void onKeyChange(QList<ConfChange> const &changes);
 
-public slots:
+ public slots:
   void setTimeRange(TimeRange const &);
 };
 

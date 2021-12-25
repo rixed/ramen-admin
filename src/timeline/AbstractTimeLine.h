@@ -10,12 +10,12 @@
  *
  * Not to be confused with QTimeLine, which is not a widget but an object to
  * control animations. */
-#include <optional>
 #include <QColor>
 #include <QMouseEvent>
 #include <QPair>
-#include <QWidget>
 #include <QWheelEvent>
+#include <QWidget>
+#include <optional>
 
 struct TimeRange;
 
@@ -26,33 +26,20 @@ class AbstractTimeLine : public QWidget {
    */
 
   Q_OBJECT
-  Q_PROPERTY(qreal beginOfTime
-             READ beginOfTime
-             WRITE setBeginOfTime
-             NOTIFY beginOfTimeChanged)
-  Q_PROPERTY(qreal endOfTime
-             READ endOfTime
-             WRITE setEndOfTime
-             NOTIFY endOfTimeChanged)
-  Q_PROPERTY(QPair<qreal, qreal> viewPort
-             READ viewPort
-             WRITE setViewPort
-             NOTIFY viewPortChanged)
-  Q_PROPERTY(qreal currentTime
-             READ currentTime
-             WRITE setCurrentTime
-             NOTIFY currentTimeChanged
-             USER true)
-  Q_PROPERTY(QPair<qreal, qreal> selection
-             MEMBER m_selection
-             NOTIFY selectionChanged)
-  Q_PROPERTY(bool withCursor
-             MEMBER m_withCursor)
-  Q_PROPERTY(bool doScroll
-             READ doScroll
-             CONSTANT)
+  Q_PROPERTY(qreal beginOfTime READ beginOfTime WRITE setBeginOfTime NOTIFY
+                 beginOfTimeChanged)
+  Q_PROPERTY(
+      qreal endOfTime READ endOfTime WRITE setEndOfTime NOTIFY endOfTimeChanged)
+  Q_PROPERTY(QPair<qreal, qreal> viewPort READ viewPort WRITE setViewPort NOTIFY
+                 viewPortChanged)
+  Q_PROPERTY(qreal currentTime READ currentTime WRITE setCurrentTime NOTIFY
+                 currentTimeChanged USER true)
+  Q_PROPERTY(
+      QPair<qreal, qreal> selection MEMBER m_selection NOTIFY selectionChanged)
+  Q_PROPERTY(bool withCursor MEMBER m_withCursor)
+  Q_PROPERTY(bool doScroll READ doScroll CONSTANT)
 
-protected:
+ protected:
   void mouseMoveEvent(QMouseEvent *) override;
   void mousePressEvent(QMouseEvent *) override;
   void mouseReleaseEvent(QMouseEvent *) override;
@@ -75,14 +62,11 @@ protected:
   bool m_doScroll;
   bool hovered;
 
-  QVector<QPair<qreal, qreal>> highlights;
+  QVector<QPair<qreal, qreal> > highlights;
 
-public:
-  AbstractTimeLine(
-    qreal beginOftime, qreal endOfTime,
-    bool withCursor = true,
-    bool doScroll = false,
-    QWidget *parent = nullptr);
+ public:
+  AbstractTimeLine(qreal beginOftime, qreal endOfTime, bool withCursor = true,
+                   bool doScroll = false, QWidget *parent = nullptr);
 
   static QColor const cursorColor;
 
@@ -105,7 +89,7 @@ public:
 
   QPair<qreal, qreal> viewPort() const { return m_viewPort; }
 
-public slots:
+ public slots:
   void setCurrentTime(qreal);
 
   /* The new viewport will be clipped to the begin and end of times: */
@@ -129,14 +113,14 @@ public slots:
    * time range is visible, though. */
   void setTimeRange(TimeRange const &);
 
-signals:
+ signals:
   void beginOfTimeChanged(qreal);
   void endOfTimeChanged(qreal);
   void viewPortChanged(QPair<qreal, qreal>);
   void currentTimeChanged(qreal);
   void selectionChanged(QPair<qreal, qreal>);
 
-private:
+ private:
   std::optional<int> scrollStart;
   QPair<qreal, qreal> viewPortStartScroll;
   std::optional<qreal> candidateSelectionStart;

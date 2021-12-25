@@ -9,14 +9,18 @@
 
 class QString;
 namespace dessser {
-  namespace gen {
-    namespace sync_value { struct t; }
-    namespace raql_value { struct t; }
-  }
+namespace gen {
+namespace sync_value {
+struct t;
 }
+namespace raql_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 std::unique_ptr<dessser::gen::sync_value::t> makeRamenValue(
-  std::shared_ptr<dessser::gen::raql_value::t>);
+    std::shared_ptr<dessser::gen::raql_value::t>);
 
 std::unique_ptr<dessser::gen::sync_value::t> ofBool(bool);
 std::unique_ptr<dessser::gen::sync_value::t> ofChar(char);

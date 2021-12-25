@@ -5,13 +5,12 @@
 
 class QVBoxLayout;
 
-class FactorsEditor : public QWidget
-{
+class FactorsEditor : public QWidget {
   Q_OBJECT
 
   QVBoxLayout *layout;
 
-public:
+ public:
   FactorsEditor(QStringList const &columns, QWidget *parent = nullptr);
 
   void setCurrentFactors(QStringList const &factors);

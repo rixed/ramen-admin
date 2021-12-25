@@ -16,25 +16,23 @@
 
 class QPixmap;
 
-class ButtonDelegate : public QStyledItemDelegate
-{
+class ButtonDelegate : public QStyledItemDelegate {
   Q_OBJECT
   Q_DISABLE_COPY(ButtonDelegate);
 
   int margin;
 
-public:
-  ButtonDelegate(
-    unsigned margin = 0,
-    QObject *parent = nullptr);
+ public:
+  ButtonDelegate(unsigned margin = 0, QObject *parent = nullptr);
 
   QRect rect(QPixmap const &, QStyleOptionViewItem const &) const;
-  void paint(QPainter *, QStyleOptionViewItem const &, QModelIndex const &) const;
+  void paint(QPainter *, QStyleOptionViewItem const &,
+             QModelIndex const &) const;
   QSize sizeHint(QStyleOptionViewItem const &, QModelIndex const &) const;
   bool editorEvent(QEvent *, QAbstractItemModel *, QStyleOptionViewItem const &,
                    QModelIndex const &);
 
-signals:
+ signals:
   void clicked(QModelIndex const &);
   void hovered(QModelIndex const &);
 };

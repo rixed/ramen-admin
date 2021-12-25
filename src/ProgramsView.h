@@ -4,13 +4,12 @@
 
 class TargetConfigEditor;
 
-class ProgramsView : public AtomicForm
-{
+class ProgramsView : public AtomicForm {
   Q_OBJECT
 
   TargetConfigEditor *rcEditor;
 
-public:
+ public:
   ProgramsView(QWidget *parent = nullptr);
 };
 

@@ -1,11 +1,10 @@
-#include <QHeaderView>
-#include <QTreeView>
 #include "TreeComboBox.h"
 
+#include <QHeaderView>
+#include <QTreeView>
+
 TreeComboBox::TreeComboBox(QWidget *parent)
-  : QComboBox(parent),
-    m_allowNonLeafSelection(true)
-{
+    : QComboBox(parent), m_allowNonLeafSelection(true) {
   treeView = new QTreeView;
   treeView->setFrameShape(QFrame::NoFrame);
   treeView->setSelectionBehavior(QTreeView::SelectRows);
@@ -17,18 +16,15 @@ TreeComboBox::TreeComboBox(QWidget *parent)
   setView(treeView);
 }
 
-void TreeComboBox::showPopup()
-{
+void TreeComboBox::showPopup() {
   treeView->expandAll();
   QComboBox::showPopup();
 }
 
-QModelIndex TreeComboBox::getCurrent() const
-{
-  QModelIndex index { treeView->currentIndex() };
+QModelIndex TreeComboBox::getCurrent() const {
+  QModelIndex index{treeView->currentIndex()};
 
-  if (! m_allowNonLeafSelection &&
-      treeView->model()->rowCount(index) != 0)
+  if (!m_allowNonLeafSelection && treeView->model()->rowCount(index) != 0)
     return QModelIndex();
 
   return index;

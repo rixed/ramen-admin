@@ -5,11 +5,10 @@
 class Logger;
 class LoggerView;
 
-class LoggerWin : public SavedWindow
-{
+class LoggerWin : public SavedWindow {
   Q_OBJECT
 
-public:
+ public:
   LoggerView *loggerView;
   Logger *logger;
 
@@ -17,4 +16,3 @@ public:
 };
 
 #endif
-

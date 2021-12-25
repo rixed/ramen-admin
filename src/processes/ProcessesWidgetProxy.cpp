@@ -1,31 +1,31 @@
-#include <optional>
-#include <QtGlobal>
-#include <QDebug>
-#include <QModelIndex>
-#include "GraphItem.h"
-#include "SiteItem.h"
-#include "ProgramItem.h"
-#include "FunctionItem.h"
-
 #include "processes/ProcessesWidgetProxy.h"
 
-static bool const verbose { false };
+#include <QDebug>
+#include <QModelIndex>
+#include <QtGlobal>
+#include <optional>
+
+#include "FunctionItem.h"
+#include "GraphItem.h"
+#include "ProgramItem.h"
+#include "SiteItem.h"
+
+static bool const verbose{false};
 
 ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent)
-  : QSortFilterProxyModel(parent),
-    /* Will be set by ProcessesDialog ctor, but avoids manipulation of
-     * uninitialized data: */
-    includeFinished(false),
-    includeUnused(false),
-    includeDisabled(false),
-    includeNonRunning(false),
-    includeTopHalves(false)
-{
+    : QSortFilterProxyModel(parent),
+      /* Will be set by ProcessesDialog ctor, but avoids manipulation of
+       * uninitialized data: */
+      includeFinished(false),
+      includeUnused(false),
+      includeDisabled(false),
+      includeNonRunning(false),
+      includeTopHalves(false) {
   setDynamicSortFilter(false);  // Or segfaults may happen when removing workers
 }
 
-bool ProcessesWidgetProxy::filterAcceptsFunction(FunctionItem const &function) const
-{
+bool ProcessesWidgetProxy::filterAcceptsFunction(
+    FunctionItem const &function) const {
   /* We can also list non-running processes:
    * - Unused:
    *     processes that do not run because they are lazy and unused;
@@ -44,36 +44,31 @@ bool ProcessesWidgetProxy::filterAcceptsFunction(FunctionItem const &function) c
    * disabled. */
 
   // Filter out unused functions, optionally:
-  if (! includeUnused && ! function.isUsed()) {
+  if (!includeUnused && !function.isUsed()) {
     if (verbose)
-      qDebug() << "Filter out lazy function"
-                << function.shared->name;
+      qDebug() << "Filter out lazy function" << function.shared->name;
     return false;
   }
 
   // Filter out the top-halves, optionally:
-  if (! includeTopHalves && function.isTopHalf()) {
+  if (!includeTopHalves && function.isTopHalf()) {
     if (verbose)
-      qDebug() << "Filter out top-half function"
-               << function.shared->name;
+      qDebug() << "Filter out top-half function" << function.shared->name;
     return false;
   }
 
   // ...and non-working functions
-  if (! includeFinished && ! function.isWorking()) {
+  if (!includeFinished && !function.isWorking()) {
     if (verbose)
-      qDebug() << "Filter out non-working function"
-               << function.shared->name;
+      qDebug() << "Filter out non-working function" << function.shared->name;
     return false;
   }
 
   /* Optionally exclude functions with no pid, unless the function is unused
    * or not working, in which case obviously the function cannot have a pid: */
-  if (function.isWorking() && ! function.isRunning() && ! includeNonRunning)
-  {
+  if (function.isWorking() && !function.isRunning() && !includeNonRunning) {
     if (verbose)
-      qDebug() << "Filter out non-running function"
-               << function.shared->name;
+      qDebug() << "Filter out non-running function" << function.shared->name;
     return false;
   }
 
@@ -81,17 +76,15 @@ bool ProcessesWidgetProxy::filterAcceptsFunction(FunctionItem const &function) c
 }
 
 bool ProcessesWidgetProxy::filterAcceptsRow(
-  int sourceRow, QModelIndex const &sourceParent) const
-{
-  if (! sourceParent.isValid()) return true;
+    int sourceRow, QModelIndex const &sourceParent) const {
+  if (!sourceParent.isValid()) return true;
 
   /* For now keep it simple: Accept all sites and programs, filter only
    * function names. */
-  GraphItem const *parentPtr {
-    static_cast<GraphItem const *>(sourceParent.internalPointer()) };
+  GraphItem const *parentPtr{
+      static_cast<GraphItem const *>(sourceParent.internalPointer())};
 
-  SiteItem const *parentSite {
-    dynamic_cast<SiteItem const *>(parentPtr) };
+  SiteItem const *parentSite{dynamic_cast<SiteItem const *>(parentPtr)};
   if (parentSite) {
     /* If that program is running only top-halves or non-working functions,
      * then also filter it. There is a vicious consequence though: if it's
@@ -112,36 +105,32 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
      * Sites cause no such trouble because we always display even empty
      * sites. */
     Q_ASSERT((size_t)sourceRow < parentSite->programs.size());
-    if (verbose)
-      qDebug() << "Filtering program #" << sourceRow << "?";
-    ProgramItem const *program { parentSite->programs[sourceRow] };
+    if (verbose) qDebug() << "Filtering program #" << sourceRow << "?";
+    ProgramItem const *program{parentSite->programs[sourceRow]};
 
     // Filter entire programs if all their functions are filtered:
     if (0 == program->functions.size()) {
-      if (verbose)
-        qDebug() << "Filter empty program"
-                 << program->shared->name;
+      if (verbose) qDebug() << "Filter empty program" << program->shared->name;
       return false;
     }
-    bool accepted { false };
+    bool accepted{false};
     for (FunctionItem const *function : program->functions) {
       if (filterAcceptsFunction(*function)) {
         accepted = true;
         break;
       }
     }
-    if (! accepted) {
+    if (!accepted) {
       if (verbose)
-        qDebug() << "Filter out entirely program"
-                 << program->shared->name;
+        qDebug() << "Filter out entirely program" << program->shared->name;
       return false;
     }
     return true;
   }
 
-  ProgramItem const *parentProgram {
-    dynamic_cast<ProgramItem const *>(parentPtr) };
-  if (! parentProgram) {
+  ProgramItem const *parentProgram{
+      dynamic_cast<ProgramItem const *>(parentPtr)};
+  if (!parentProgram) {
     qCritical() << "Filtering the rows of a function?!";
     return false;
   }
@@ -149,49 +138,43 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
   /* When the parent is a program, build the FQ name of the function
    * and match that: */
   Q_ASSERT((size_t)sourceRow < parentProgram->functions.size());
-  FunctionItem const *function { parentProgram->functions[sourceRow] };
+  FunctionItem const *function{parentProgram->functions[sourceRow]};
 
-  if (! filterAcceptsFunction(*function)) return false;
+  if (!filterAcceptsFunction(*function)) return false;
 
-  SiteItem const *site {
-    static_cast<SiteItem const *>(parentProgram->treeParent) };
+  SiteItem const *site{
+      static_cast<SiteItem const *>(parentProgram->treeParent)};
 
-  QString const fq { site->shared->name + ":" +
-                     parentProgram->shared->name + "/" +
-                     function->shared->name };
+  QString const fq{site->shared->name + ":" + parentProgram->shared->name +
+                   "/" + function->shared->name};
   return fq.contains(filterRegExp());
 }
 
-void ProcessesWidgetProxy::viewFinished(bool checked)
-{
+void ProcessesWidgetProxy::viewFinished(bool checked) {
   if (includeFinished == checked) return;
   includeFinished = checked;
   invalidateFilter();
 }
 
-void ProcessesWidgetProxy::viewUnused(bool checked)
-{
+void ProcessesWidgetProxy::viewUnused(bool checked) {
   if (includeUnused == checked) return;
   includeUnused = checked;
   invalidateFilter();
 }
 
-void ProcessesWidgetProxy::viewDisabled(bool checked)
-{
+void ProcessesWidgetProxy::viewDisabled(bool checked) {
   if (includeDisabled == checked) return;
   includeDisabled = checked;
   invalidateFilter();
 }
 
-void ProcessesWidgetProxy::viewNonRunning(bool checked)
-{
+void ProcessesWidgetProxy::viewNonRunning(bool checked) {
   if (includeNonRunning == checked) return;
   includeNonRunning = checked;
   invalidateFilter();
 }
 
-void ProcessesWidgetProxy::viewTopHalves(bool checked)
-{
+void ProcessesWidgetProxy::viewTopHalves(bool checked) {
   if (includeTopHalves == checked) return;
   includeTopHalves = checked;
   invalidateFilter();

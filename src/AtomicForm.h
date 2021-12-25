@@ -1,10 +1,10 @@
 #ifndef ATOMICFORM_H_190504
 #define ATOMICFORM_H_190504
-#include <list>
-#include <set>
-#include <optional>
-#include <QWidget>
 #include <QString>
+#include <QWidget>
+#include <list>
+#include <optional>
+#include <set>
 
 #include "ConfChange.h"
 #include "KVStore.h"
@@ -41,14 +41,17 @@ class QPushButton;
 class QVBoxLayout;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
-class AtomicForm : public QWidget
-{
+class AtomicForm : public QWidget {
   Q_OBJECT
 
   struct FormWidget {
@@ -59,8 +62,7 @@ class AtomicForm : public QWidget
      * Null if no value could be saved (because we started in edition mode). */
     std::shared_ptr<dessser::gen::sync_value::t const> initValue;
 
-    FormWidget(AtomicWidget *widget_) :
-      widget(widget_), initValue(nullptr) {}
+    FormWidget(AtomicWidget *widget_) : widget(widget_), initValue(nullptr) {}
   };
 
   std::list<FormWidget> widgets;
@@ -71,26 +73,27 @@ class AtomicForm : public QWidget
   QMessageBox *confirmCancelDialog, *confirmDeleteDialog;
 
   // The set of all keys currently locked by this user:
-  std::unordered_set<std::shared_ptr<dessser::gen::sync_key::t const>, HashKey, EqualKey>
-    locked;
+  std::unordered_set<std::shared_ptr<dessser::gen::sync_key::t const>, HashKey,
+                     EqualKey>
+      locked;
 
   void doCancel();
   void doSubmit();
   bool someEdited();
 
   // Similar to lockValue, once we already know the key is our:
-  void setOwner(
-    std::shared_ptr<dessser::gen::sync_key::t const>, std::optional<QString> const &);
+  void setOwner(std::shared_ptr<dessser::gen::sync_key::t const>,
+                std::optional<QString> const &);
 
   bool allLocked() const;
 
-  void lockValue(
-    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void lockValue(std::shared_ptr<dessser::gen::sync_key::t const>,
+                 KValue const &);
 
-  void unlockValue(
-    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void unlockValue(std::shared_ptr<dessser::gen::sync_key::t const>,
+                   KValue const &);
 
-public:
+ public:
   QPushButton *editButton, *cancelButton, *deleteButton, *submitButton;
 
   QWidget *centralWidget;
@@ -111,25 +114,24 @@ public:
 
   bool isEnabled() const;
 
-protected:
+ protected:
   bool isMyKey(std::shared_ptr<dessser::gen::sync_key::t const>) const;
 
-protected slots:
+ protected slots:
   void removeWidget(QObject *);
   void checkValidity();
 
-public slots:
+ public slots:
   void onChange(QList<ConfChange> const &);
   void wantEdit();
   void wantCancel();
   void wantDelete();
   void wantSubmit();
   void setEnabled(bool);
-  void changeKey(
-    std::shared_ptr<dessser::gen::sync_key::t const> oldKey,
-    std::shared_ptr<dessser::gen::sync_key::t const> newKey);
+  void changeKey(std::shared_ptr<dessser::gen::sync_key::t const> oldKey,
+                 std::shared_ptr<dessser::gen::sync_key::t const> newKey);
 
-signals:
+ signals:
   void changeEnabled(bool);
 };
 

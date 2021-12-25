@@ -5,11 +5,10 @@
 
 class QWidget;
 
-class OperationsWin : public SavedWindow
-{
+class OperationsWin : public SavedWindow {
   Q_OBJECT
 
-public:
+ public:
   explicit OperationsWin(QWidget *parent = nullptr);
 };
 

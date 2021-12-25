@@ -9,11 +9,9 @@ struct GraphViewSettings {
   QFont titleFont;
   int titleLineHeight;
 
-  int
-    gridWidth, gridHeight,
-    functionMarginHoriz, programMarginHoriz, siteMarginHoriz,
-    functionMarginTop, programMarginTop, siteMarginTop,
-    functionMarginBottom, programMarginBottom, siteMarginBottom;
+  int gridWidth, gridHeight, functionMarginHoriz, programMarginHoriz,
+      siteMarginHoriz, functionMarginTop, programMarginTop, siteMarginTop,
+      functionMarginBottom, programMarginBottom, siteMarginBottom;
 
   int labelsHorizMargin;
 

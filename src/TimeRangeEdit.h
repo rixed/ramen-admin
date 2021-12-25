@@ -1,6 +1,7 @@
 #ifndef TIMERANGEEDIT_H_191007
 #define TIMERANGEEDIT_H_191007
 #include <QPushButton>
+
 #include "TimeRange.h"
 
 class QDateTimeEdit;
@@ -9,8 +10,7 @@ class QLineEdit;
 class QRadioButton;
 class QStackedLayout;
 
-class TimeRangeEdit : public QPushButton
-{
+class TimeRangeEdit : public QPushButton {
   Q_OBJECT
 
   /* Time control: we can select to see the last X seconds, and the actual
@@ -26,22 +26,22 @@ class TimeRangeEdit : public QPushButton
 
   void updateLabel();
 
-public:
+ public:
   TimeRange range;
 
   TimeRangeEdit(QWidget *parent = nullptr);
 
-public slots:
+ public slots:
   /* Move the time range by the specified amount, and emit valueChanged. */
   void offset(double dt);
 
-protected slots:
+ protected slots:
   void wantOpen();
   void wantSubmit(QAbstractButton *);
   void wantCancel();
   void updateEnabled();
 
-signals:
+ signals:
   void valueChanged(TimeRange const &);
 };
 

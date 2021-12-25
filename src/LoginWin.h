@@ -13,6 +13,7 @@
  * The only widget in there is the LoginWidget.
  * Statistics are displayed in the window status bar. */
 #include <QString>
+
 #include "KErrorMsg.h"
 #include "SavedWindow.h"
 #include "SyncStatus.h"
@@ -23,8 +24,7 @@ class ConfClient;
 struct UserIdentity;
 class LoginWidget;
 
-class LoginWin : public SavedWindow
-{
+class LoginWin : public SavedWindow {
   Q_OBJECT
 
   LoginWidget *loginWidget;
@@ -41,31 +41,31 @@ class LoginWin : public SavedWindow
   // Timer used to refresh connection stats
   QTimer *statsTimer;
 
-protected:
+ protected:
   friend class Menu;
   /* That's the only ConfClient that's ever instantiated.
    * It's the one returned by Menu::getClient() */
   ConfClient *client;
 
-public:
+ public:
   LoginWin(QString const configDir, QWidget *parent = nullptr);
   ~LoginWin();
   void focusSubmit();
 
-protected slots:
+ protected slots:
   // If idFile is null then it is assumed insecure, and the other way around.
-  void startConnect(
-    QString const server, QString const username, QString const idFile);
+  void startConnect(QString const server, QString const username,
+                    QString const idFile);
 
   void exitApp();
 
   void refreshStats();
 
-public slots:
+ public slots:
   void syncProgress(SyncStatus const);
   void syncFailed(SyncStatus const, QString const &);
 
-signals:
+ signals:
   void authenticated();
 };
 

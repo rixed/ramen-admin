@@ -1,28 +1,23 @@
+#include "SyncStatus.h"
+
 #include <QDateTime>
 
 #include "misc.h"
-#include "SyncStatus.h"
 
-SyncStatus::SyncStatus(Status status_)
-  : status(status_)
-{
-}
+SyncStatus::SyncStatus(Status status_) : status(status_) {}
 
-SyncStatus::~SyncStatus()
-{
-}
+SyncStatus::~SyncStatus() {}
 
 void SyncStatus::set(Status new_status) {
   prevStatus = status;
   status = new_status;
 
-  qint64 const now { QDateTime::currentMSecsSinceEpoch() };
+  qint64 const now{QDateTime::currentMSecsSinceEpoch()};
   if (lastChange) lastDuration = now - *lastChange;
   lastChange = now;
 }
 
-QString SyncStatus::message() const
-{
+QString SyncStatus::message() const {
   QString curr;
   switch (status) {
     case Disconnected:
@@ -47,40 +42,44 @@ QString SyncStatus::message() const
       curr = QCoreApplication::translate("QMainWindow", "Closing...");
       break;
     case Failed:
-      curr = QCoreApplication::translate("QMainWindow", "Failed: ").
-             append(errMsg.c_str());
+      curr = QCoreApplication::translate("QMainWindow", "Failed: ")
+                 .append(errMsg.c_str());
       break;
     default:
       qFatal("SyncStatus::message: invalid status");
   }
 
   if (lastDuration && prevStatus) {
-    QString const duration { stringOfDuration((double)*lastDuration / 1000) };
+    QString const duration{stringOfDuration((double)*lastDuration / 1000)};
 
     if (*prevStatus == status) {
-      return QCoreApplication::translate("QMainWindow", "Retrying after %1: %2").
-             arg(duration, curr);
+      return QCoreApplication::translate("QMainWindow", "Retrying after %1: %2")
+          .arg(duration, curr);
     } else {
       switch (*prevStatus) {
         case Disconnected:
           return curr;
         case Resolving:
-          return QCoreApplication::translate("QMainWindow", "Resolved in %1, %2").
-                 arg(duration, curr);
+          return QCoreApplication::translate("QMainWindow",
+                                             "Resolved in %1, %2")
+              .arg(duration, curr);
         case Connecting:
-          return QCoreApplication::translate("QMainWindow", "Connected in %1, %2").
-                 arg(duration, curr);
+          return QCoreApplication::translate("QMainWindow",
+                                             "Connected in %1, %2")
+              .arg(duration, curr);
         case Authenticating:
-          return QCoreApplication::translate("QMainWindow", "Authenticated in %1, %2").
-                 arg(duration, curr);
+          return QCoreApplication::translate("QMainWindow",
+                                             "Authenticated in %1, %2")
+              .arg(duration, curr);
         case Synchronizing:
-          return QCoreApplication::translate("QMainWindow", "Synchronized in %1, %2").
-                 arg(duration, curr);
+          return QCoreApplication::translate("QMainWindow",
+                                             "Synchronized in %1, %2")
+              .arg(duration, curr);
         case Synchronized:
           return curr;
         case Closing:
-          return QCoreApplication::translate("QMainWindow", "Closed in %1, %2").
-                 arg(duration, curr);
+          return QCoreApplication::translate("QMainWindow", "Closed in %1, %2")
+              .arg(duration, curr);
         case Failed:
           return curr;
       }
@@ -90,8 +89,7 @@ QString SyncStatus::message() const
   return curr;
 }
 
-QDebug operator<<(QDebug debug, SyncStatus const &s)
-{
+QDebug operator<<(QDebug debug, SyncStatus const &s) {
   QDebugStateSaver saver(debug);
   debug.nospace() << s.message();
   return debug;

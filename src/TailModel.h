@@ -1,12 +1,12 @@
 #ifndef TAILMODEL_H_190515
 #define TAILMODEL_H_190515
+#include <QAbstractItemModel>
+#include <QString>
+#include <QStringList>
 #include <cmath>
 #include <map>
 #include <memory>
 #include <vector>
-#include <QAbstractItemModel>
-#include <QString>
-#include <QStringList>
 
 #include "desssergen/sync_key.h"
 
@@ -30,14 +30,17 @@ struct ConfChange;
 struct EventTime;
 struct KValue;
 namespace dessser {
-  namespace gen {
-    namespace raql_type { struct t; }
-    namespace raql_value { struct t; }
-  }
+namespace gen {
+namespace raql_type {
+struct t;
 }
+namespace raql_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
-class TailModel : public QAbstractTableModel
-{
+class TailModel : public QAbstractTableModel {
   Q_OBJECT
 
   std::shared_ptr<EventTime const> eventTime;
@@ -47,26 +50,25 @@ class TailModel : public QAbstractTableModel
 
   void addTuple(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   std::string const siteName;
   std::string const fqName;
   std::string const workerSign;
 
-  /* Unlike for ReplayRequests, for tails we actually want to know in which orders
-   * are the tuples emitted (plus, they could have no event-time at all).
-   * Therefore we keep both a vector and a multimap: */
-  std::vector<std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const>>> tuples;
+  /* Unlike for ReplayRequests, for tails we actually want to know in which
+   * orders are the tuples emitted (plus, they could have no event-time at
+   * all). Therefore we keep both a vector and a multimap: */
+  std::vector<
+      std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const> > >
+      tuples;
   std::multimap<double, size_t> order;
 
   std::shared_ptr<dessser::gen::raql_type::t const> type;
 
-  TailModel(
-    std::string const &siteName,
-    std::string const &fqName,
-    std::string const &workerSign,
-    std::shared_ptr<dessser::gen::raql_type::t const> type,
-    std::shared_ptr<EventTime const>,
-    QObject *parent = nullptr);
+  TailModel(std::string const &siteName, std::string const &fqName,
+            std::string const &workerSign,
+            std::shared_ptr<dessser::gen::raql_type::t const> type,
+            std::shared_ptr<EventTime const>, QObject *parent = nullptr);
 
   ~TailModel();
 
@@ -75,8 +77,8 @@ public:
   int rowCount(QModelIndex const &parent = QModelIndex()) const override;
   int columnCount(QModelIndex const &parent = QModelIndex()) const override;
   QVariant data(QModelIndex const &index, int role) const override;
-  QVariant headerData(
-    int, Qt::Orientation, int role = Qt::DisplayRole) const override;
+  QVariant headerData(int, Qt::Orientation,
+                      int role = Qt::DisplayRole) const override;
   bool isNumeric(int) const;
   bool isFactor(int) const;
 
@@ -84,10 +86,10 @@ public:
   double minEventTime() const { return minEventTime_; };
   double maxEventTime() const { return maxEventTime_; };
 
-protected slots:
+ protected slots:
   void onChange(QList<ConfChange> const &);
 
-signals:
+ signals:
   void receivedTuple(double time);
 };
 

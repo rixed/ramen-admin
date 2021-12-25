@@ -1,4 +1,5 @@
-#include <string>
+#include "storage/StorageTimeline.h"
+
 #include <QCompleter>
 #include <QDebug>
 #include <QHBoxLayout>
@@ -7,49 +8,44 @@
 #include <QPushButton>
 #include <QScrollArea>
 #include <QVBoxLayout>
+#include <string>
 
-#include "timeline/TimeLineView.h"
 #include "ConfClient.h"
-#include "desssergen/fq_function_name.h"
-#include "desssergen/replay.h"
-#include "desssergen/replay_request.h"
-#include "desssergen/sync_key.h"
-#include "desssergen/sync_value.h"
 #include "FunctionItem.h"
 #include "FunctionSelector.h"
 #include "GraphModel.h"
 #include "KVStore.h"
 #include "Menu.h"
-#include "misc_dessser.h"
 #include "ReplayRequest.h"
 #include "Resources.h"
 #include "TimeRange.h"
 #include "TimeRangeEdit.h"
+#include "desssergen/fq_function_name.h"
+#include "desssergen/replay.h"
+#include "desssergen/replay_request.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "misc_dessser.h"
+#include "timeline/TimeLineView.h"
 
-#include "storage/StorageTimeline.h"
+static bool const verbose{false};
 
-static bool const verbose { false };
-
-StorageTimeline::StorageTimeline(
-  GraphModel *graphModel,
-  QWidget *parent)
-  : QWidget(parent),
-    respKey(nullptr)
-{
-  QVBoxLayout *layout { new QVBoxLayout };
+StorageTimeline::StorageTimeline(GraphModel *graphModel, QWidget *parent)
+    : QWidget(parent), respKey(nullptr) {
+  QVBoxLayout *layout{new QVBoxLayout};
 
   /*
    * The TimeLineView in a QScrollArea:
    */
 
-  QScrollArea *scrollArea { new QScrollArea };
+  QScrollArea *scrollArea{new QScrollArea};
   scrollArea->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
   scrollArea->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOn);
   scrollArea->setWidgetResizable(true);
 
   // Required for the scrollarea to behave properly, for some reason:
-  QWidget *widget { new QWidget };
-  QVBoxLayout *l1 { new QVBoxLayout };
+  QWidget *widget{new QWidget};
+  QVBoxLayout *l1{new QVBoxLayout};
   widget->setLayout(l1);
 
   timeLineView = new TimeLineView(graphModel);
@@ -71,11 +67,11 @@ StorageTimeline::StorageTimeline(
   // Disable that button until a function is selected:
   explainButton->setEnabled(false);
   explainReset = new QPushButton;
-  QIcon closeIcon { resources->get()->closePixmap };
+  QIcon closeIcon{resources->get()->closePixmap};
   explainReset->setIcon(closeIcon);
   explainReset->setEnabled(false);
 
-  QHBoxLayout *l2 { new QHBoxLayout };
+  QHBoxLayout *l2{new QHBoxLayout};
   l2->addWidget(explainTarget);
   l2->addWidget(explainTimeRange);
   l2->addWidget(explainButton);
@@ -90,26 +86,24 @@ StorageTimeline::StorageTimeline(
    */
 
   /* Changing the selected function enable/disable the explainButton: */
-  connect(explainTarget, &FunctionSelector::selectionChanged,
-          this, &StorageTimeline::enableExplainButton);
+  connect(explainTarget, &FunctionSelector::selectionChanged, this,
+          &StorageTimeline::enableExplainButton);
 
   /* explainButton triggers the query: */
-  connect(explainButton, &QPushButton::clicked,
-          this, &StorageTimeline::requestQueryPlan);
+  connect(explainButton, &QPushButton::clicked, this,
+          &StorageTimeline::requestQueryPlan);
 
   /* explainReset removes the highlights: */
-  connect(explainReset, &QPushButton::clicked,
-          this, &StorageTimeline::resetQueryPlan);
+  connect(explainReset, &QPushButton::clicked, this,
+          &StorageTimeline::resetQueryPlan);
 
   /* Get the query answer: */
-  connect(kvs.get(), &KVStore::keyChanged,
-          this, &StorageTimeline::onChange);
+  connect(kvs.get(), &KVStore::keyChanged, this, &StorageTimeline::onChange);
 }
 
-void StorageTimeline::onChange(QList<ConfChange> const &changes)
-{
+void StorageTimeline::onChange(QList<ConfChange> const &changes) {
   for (int i = 0; i < changes.length(); i++) {
-    ConfChange const &change { changes.at(i) };
+    ConfChange const &change{changes.at(i)};
     switch (change.op) {
       case KeyCreated:
       case KeyChanged:
@@ -121,35 +115,33 @@ void StorageTimeline::onChange(QList<ConfChange> const &changes)
   }
 }
 
-void StorageTimeline::enableExplainButton(FunctionItem *functionItem)
-{
+void StorageTimeline::enableExplainButton(FunctionItem *functionItem) {
   explainButton->setEnabled(functionItem != nullptr);
 }
 
-void StorageTimeline::requestQueryPlan()
-{
-  ConfClient *client { Menu::getClient() };
+void StorageTimeline::requestQueryPlan() {
+  ConfClient *client{Menu::getClient()};
 
-  if (! respKey) {
-    if (! client->syncSocket) {
+  if (!respKey) {
+    if (!client->syncSocket) {
       qCritical() << "Cannot request a query plan before socket is known!";
       return;
     }
 
-    respKey =
-      std::make_shared<dessser::gen::sync_key::t const>(
+    respKey = std::make_shared<dessser::gen::sync_key::t const>(
         std::in_place_index<dessser::gen::sync_key::PerClient>,
-        std::const_pointer_cast<dessser::gen::sync_socket::t>(client->syncSocket),
+        std::const_pointer_cast<dessser::gen::sync_socket::t>(
+            client->syncSocket),
         std::make_shared<dessser::gen::sync_key::per_client>(
-          std::in_place_index<dessser::gen::sync_key::Response>,
-          respKeyPrefix + "explain"));
+            std::in_place_index<dessser::gen::sync_key::Response>,
+            respKeyPrefix + "explain"));
   }
 
-  FunctionItem *functionItem { explainTarget->getCurrent() };
-  if (! functionItem) return;
+  FunctionItem *functionItem{explainTarget->getCurrent()};
+  if (!functionItem) return;
 
-  std::shared_ptr<Function> function {
-    std::static_pointer_cast<Function>(functionItem->shared) };
+  std::shared_ptr<Function> function{
+      std::static_pointer_cast<Function>(functionItem->shared)};
 
   std::string functionName(function->name.toStdString());
   std::string programName(function->programName);
@@ -158,13 +150,13 @@ void StorageTimeline::requestQueryPlan()
   double since, until;
   explainTimeRange->range.absRange(&since, &until);
 
-  std::shared_ptr<dessser::gen::sync_key::t const> key {
-    std::make_shared<dessser::gen::sync_key::t const>(
-      std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
-      dessser::VOID) };
+  std::shared_ptr<dessser::gen::sync_key::t const> key{
+      std::make_shared<dessser::gen::sync_key::t const>(
+          std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
+          dessser::VOID)};
 
-  std::shared_ptr<dessser::gen::sync_value::t const> req {
-    makeReplayRequest(siteName, programName, functionName, since, until, respKey, true) };
+  std::shared_ptr<dessser::gen::sync_value::t const> req{makeReplayRequest(
+      siteName, programName, functionName, since, until, respKey, true)};
 
   if (verbose)
     qDebug() << "StorageTimeline: request QueryPlan for target"
@@ -173,15 +165,13 @@ void StorageTimeline::requestQueryPlan()
   client->sendSet(key, req);
 }
 
-void StorageTimeline::resetQueryPlan()
-{
+void StorageTimeline::resetQueryPlan() {
   timeLineView->resetHighlights();
   explainReset->setEnabled(false);
 }
 
 void StorageTimeline::receiveExplain(
-  std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv)
-{
+    std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv) {
   if (!respKey || *key != *respKey) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Replay) {
@@ -189,19 +179,19 @@ void StorageTimeline::receiveExplain(
     return;
   }
 
-  std::shared_ptr<dessser::gen::replay::t const> replay {
-    std::get<dessser::gen::sync_value::Replay>(*kv.val) };
+  std::shared_ptr<dessser::gen::replay::t const> replay{
+      std::get<dessser::gen::sync_value::Replay>(*kv.val)};
 
-  if (verbose)
-    qDebug() << "StorageTimeline: received a query plan:" << *replay;
+  if (verbose) qDebug() << "StorageTimeline: received a query plan:" << *replay;
 
   timeLineView->resetHighlights();
 
-  QPair<qreal, qreal> range { replay->since, replay->until };
+  QPair<qreal, qreal> range{replay->since, replay->until};
 
-  for (std::shared_ptr<dessser::gen::fq_function_name::t> const &source : replay->sources) {
-    QString const label {
-      QString::fromStdString(source->site + ":" + source->program + "/" + source->function) };
+  for (std::shared_ptr<dessser::gen::fq_function_name::t> const &source :
+       replay->sources) {
+    QString const label{QString::fromStdString(
+        source->site + ":" + source->program + "/" + source->function)};
     timeLineView->highlightRange(label, range);
   }
 

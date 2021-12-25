@@ -5,14 +5,13 @@
 class DashboardSelector;
 class QRadioButton;
 
-class DashboardCopyDialog : public QDialog
-{
+class DashboardCopyDialog : public QDialog {
   Q_OBJECT
 
   QRadioButton *copyButton;
   QRadioButton *moveButton;
 
-public:
+ public:
   DashboardSelector *dashSelector;
 
   DashboardCopyDialog(QWidget *parent = nullptr);

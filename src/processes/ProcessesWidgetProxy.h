@@ -13,16 +13,16 @@ class ProcessesWidgetProxy : public QSortFilterProxyModel {
   Q_OBJECT
 
   bool includeFinished, includeUnused, includeDisabled, includeNonRunning,
-       includeTopHalves;
+      includeTopHalves;
 
-public:
+ public:
   ProcessesWidgetProxy(QObject * = nullptr);
 
-protected:
+ protected:
   bool filterAcceptsRow(int, QModelIndex const &) const override;
   bool filterAcceptsFunction(FunctionItem const &) const;
 
-public slots:
+ public slots:
   void viewFinished(bool);
   void viewUnused(bool);
   void viewDisabled(bool);

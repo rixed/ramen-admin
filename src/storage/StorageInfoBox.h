@@ -1,14 +1,13 @@
 #ifndef STORAGEINFOBOX_H_190522
 #define STORAGEINFOBOX_H_190522
-#include <optional>
 #include <QLabel>
 #include <QTimer>
+#include <optional>
 
 class FunctionItem;
 class GraphModel;
 
-class StorageInfoBox : public QWidget
-{
+class StorageInfoBox : public QWidget {
   Q_OBJECT
 
   GraphModel *graphModel;
@@ -33,10 +32,10 @@ class StorageInfoBox : public QWidget
   std::optional<float> lastAllocatorRun;
   QLabel *lastAllocatorRunWdg;
 
-public:
+ public:
   StorageInfoBox(GraphModel *, QWidget *parent = nullptr);
 
-private slots:
+ private slots:
   void rearmRecomputeTimer(FunctionItem const *);
   void recomputeStats();
 };

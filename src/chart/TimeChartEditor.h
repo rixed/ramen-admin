@@ -10,30 +10,26 @@ class TimeLine;
 class TimeLineGroup;
 struct TimeRange;
 
-class TimeChartEditor : public QWidget
-{
+class TimeChartEditor : public QWidget {
   Q_OBJECT
 
   TimeLine *timeLine;
 
-public:
+ public:
   TimeChartEditWidget *editWidget;
   TimeChart *chart;
   QWidget *timeLines;
 
-  TimeChartEditor(
-    QPushButton *submitButton,
-    QPushButton *cancelButton,
-    QPushButton *deleteButton,
-    TimeLineGroup *timeLineGroup,
-    QWidget *parent = nullptr);
+  TimeChartEditor(QPushButton *submitButton, QPushButton *cancelButton,
+                  QPushButton *deleteButton, TimeLineGroup *timeLineGroup,
+                  QWidget *parent = nullptr);
 
   ~TimeChartEditor();
 
-protected:
+ protected:
   void resizeEvent(QResizeEvent *);
 
-signals:
+ signals:
   // Re-emitted (after a few bounces) from the controlling TimeRangeEditor
   void timeRangeChanged(TimeRange const &);
   void newTailTime(double);

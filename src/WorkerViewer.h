@@ -1,6 +1,7 @@
 #ifndef WORKERVIEWER_H_190801
 #define WORKERVIEWER_H_190801
 #include <vector>
+
 #include "AtomicWidget.h"
 
 class QCheckBox;
@@ -8,8 +9,7 @@ class QFormLayout;
 class QLabel;
 class QVBoxLayout;
 
-class WorkerViewer : public AtomicWidget
-{
+class WorkerViewer : public AtomicWidget {
   Q_OBJECT
 
   QCheckBox *enabled, *debug, *used;
@@ -19,13 +19,12 @@ class WorkerViewer : public AtomicWidget
   QVBoxLayout *parents;
   std::vector<QLabel *> parentLabels;
 
-public:
+ public:
   WorkerViewer(QWidget *parent = nullptr);
   void setEnabled(bool);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

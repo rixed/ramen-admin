@@ -1,25 +1,20 @@
-#include <optional>
-#include <QDateTime>
-
-#include "ConfTreeWidget.h" // for CONFTREE_WIDGET_NUM_COLUMNS
-#include "desssergen/sync_key.h"
-#include "KVStore.h"
-#include "misc.h"
-#include "Resources.h"
-
 #include "ConfTreeItem.h"
 
-ConfTreeItem::ConfTreeItem(
-  std::shared_ptr<dessser::gen::sync_key::t const> key_,
-  QString const name_,
-  ConfTreeItem *parent,
-  ConfTreeItem *preceding)
-  : QTreeWidgetItem(parent, preceding, UserType),
-    name(name_),
-    key(key_) {}
+#include <QDateTime>
+#include <optional>
 
-QVariant ConfTreeItem::data(int column, int role) const
-{
+#include "ConfTreeWidget.h"  // for CONFTREE_WIDGET_NUM_COLUMNS
+#include "KVStore.h"
+#include "Resources.h"
+#include "desssergen/sync_key.h"
+#include "misc.h"
+
+ConfTreeItem::ConfTreeItem(
+    std::shared_ptr<dessser::gen::sync_key::t const> key_, QString const name_,
+    ConfTreeItem *parent, ConfTreeItem *preceding)
+    : QTreeWidgetItem(parent, preceding, UserType), name(name_), key(key_) {}
+
+QVariant ConfTreeItem::data(int column, int role) const {
   Q_ASSERT(column < CONFTREE_WIDGET_NUM_COLUMNS);
 
   if (role == Qt::DecorationRole && column == 2 && key) {
@@ -36,10 +31,10 @@ QVariant ConfTreeItem::data(int column, int role) const
 
   if (0 == column) return QVariant(name);
 
-  if (! key) return QVariant();
+  if (!key) return QVariant();
 
   switch (column) {
-    case 2: // lock status
+    case 2:  // lock status
       // k for the lock, and then maybe "locked by ... until ..."
       {
         bool isLocked = false;
@@ -54,15 +49,14 @@ QVariant ConfTreeItem::data(int column, int role) const
         }
         kvs->lock.unlock_shared();
         if (isLocked) {
-          return
-            QString(
-              QString("locked by ") + *owner +
-              QString(" until ") + stringOfDate(expiry));
+          return QString(QString("locked by ") + *owner + QString(" until ") +
+                         stringOfDate(expiry));
         } else {
           return QString("");
         }
       }
-    // Column 1 is the view/edit widget that's set once and for all at creation time
+    // Column 1 is the view/edit widget that's set once and for all at creation
+    // time
     default:
       return QVariant();
   }

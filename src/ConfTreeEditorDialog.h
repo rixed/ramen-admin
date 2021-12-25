@@ -1,28 +1,26 @@
 #ifndef CONFTREEEDITORDIALOG_H_190729
 #define CONFTREEEDITORDIALOG_H_190729
-#include <memory>
 #include <QDialog>
+#include <memory>
 
 #include "desssergen/sync_key.h"
 
 class AtomicWidget;
 
-class ConfTreeEditorDialog : public QDialog
-{
+class ConfTreeEditorDialog : public QDialog {
   Q_OBJECT
 
   AtomicWidget *editor;
   std::shared_ptr<dessser::gen::sync_key::t const> key;
   bool canWrite, showEditor;
 
-public:
+ public:
   ConfTreeEditorDialog(
-    std::shared_ptr<dessser::gen::sync_key::t const>,
-    // Even if we can write that key we might prefer not to show the editor:
-    bool show_editor = true,
-    QWidget *parent = nullptr);
+      std::shared_ptr<dessser::gen::sync_key::t const>,
+      // Even if we can write that key we might prefer not to show the editor:
+      bool show_editor = true, QWidget *parent = nullptr);
 
-private slots:
+ private slots:
   void save();
   void cancel();
 };

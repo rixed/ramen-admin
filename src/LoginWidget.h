@@ -7,8 +7,8 @@
  *   or open a file picker in the default config location),
  * - a submit button which label can then be changed into a status.
  * There is also a Cancel button (that will quits the app). */
-#include <QWidget>
 #include <QString>
+#include <QWidget>
 
 class QComboBox;
 class QLabel;
@@ -17,8 +17,7 @@ class QRadioButton;
 class QStackedLayout;
 struct UserIdentity;
 
-class LoginWidget : public QWidget
-{
+class LoginWidget : public QWidget {
   Q_OBJECT
 
   QString const configDir;
@@ -34,23 +33,23 @@ class LoginWidget : public QWidget
 
   void resizeFileCombo();
 
-public:
+ public:
   LoginWidget(QString const configDir, QWidget *parent = nullptr);
 
   void focusSubmit();
 
   QSize sizeHint() const { return QSize(500, 300); }
 
-protected slots:
+ protected slots:
   void setSecure(bool);
   void pickNewFile();
   void submitLogin();
 
-public slots:
+ public slots:
   // Disable and hide the submit button and show instead the given text:
   void setSubmitStatus(QString const);
 
-signals:
+ signals:
   void submitted(QString const server, QString const username,
                  QString const idFile);
   void cancelled();

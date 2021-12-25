@@ -22,12 +22,12 @@ class QStringList;
 class ConfSubTree;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key {
-      struct t;
-    }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 /*
  * The NamesTree is a model. A proxy could restrict it to some subtree (and,
@@ -40,7 +40,7 @@ class NamesTree : public ConfTreeModel {
   void updateNames(dessser::gen::sync_key::t const &, KValue const &);
   void deleteNames(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   bool withSites;
 
   static NamesTree *globalNamesTree;
@@ -56,7 +56,7 @@ public:
    * fq. */
   std::pair<std::string, std::string> pathOfIndex(QModelIndex const &) const;
 
-protected slots:
+ protected slots:
   void onChange(QList<ConfChange> const &);
 };
 
@@ -71,13 +71,12 @@ protected slots:
 
 /* Like a NamesTree, but starts at a given root.
  * Uses data from a passed NamesTree. */
-class NamesSubtree : public NamesTree
-{
+class NamesSubtree : public NamesTree {
   Q_OBJECT
 
   QPersistentModelIndex newRoot;
 
-public:
+ public:
   /* NamesTree passed must have longer lifespan, so just use one of
    * globalNamesTree or globalNamesTreeAnySites: */
   NamesSubtree(NamesTree const &, QModelIndex const &);
@@ -95,17 +94,14 @@ public:
 
 #include <QCompleter>
 
-class NamesCompleter : public QCompleter
-{
+class NamesCompleter : public QCompleter {
   Q_OBJECT
 
   QPersistentModelIndex newRoot;
 
-public:
-  NamesCompleter(
-    NamesTree *,
-    QObject *parent = nullptr,
-    QModelIndex const & = QModelIndex());
+ public:
+  NamesCompleter(NamesTree *, QObject *parent = nullptr,
+                 QModelIndex const & = QModelIndex());
 
   QStringList splitPath(QString const &) const override;
 

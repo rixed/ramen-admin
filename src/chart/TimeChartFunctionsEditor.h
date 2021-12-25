@@ -1,7 +1,7 @@
 #ifndef TIMECHARTFUNCTIONSEDITOR_H_200306
 #define TIMECHARTFUNCTIONSEDITOR_H_200306
-#include <list>
 #include <QWidget>
+#include <list>
 
 class Function;
 class FunctionSelector;
@@ -9,24 +9,25 @@ class QToolBox;
 class TimeChartFunctionEditor;
 
 namespace dessser {
-  namespace gen {
-    namespace dashboard_widget { struct chart; }
-  }
+namespace gen {
+namespace dashboard_widget {
+struct chart;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class TimeChartFunctionsEditor : public QWidget
-{
+class TimeChartFunctionsEditor : public QWidget {
   Q_OBJECT
 
   void allFieldsChanged(int);
-  TimeChartFunctionEditor *addFunctionByName(
-    std::string const &site, std::string const &program,
-    std::string const &function, bool customizable);
-  void addOrFocus(
-    std::string const &site, std::string const &program,
-    std::string const &function, bool customizable);
+  TimeChartFunctionEditor *addFunctionByName(std::string const &site,
+                                             std::string const &program,
+                                             std::string const &function,
+                                             bool customizable);
+  void addOrFocus(std::string const &site, std::string const &program,
+                  std::string const &function, bool customizable);
 
-public:
+ public:
   QToolBox *functions;
   FunctionSelector *functionSelector;
 
@@ -34,12 +35,13 @@ public:
   bool setValue(dessser::gen::dashboard_widget::chart const &);
   void setEnabled(bool);
 
-protected slots:
+ protected slots:
   void addCurrentFunction();
-  void addCustomizedFunction(std::string const &site, std::string const &program,
+  void addCustomizedFunction(std::string const &site,
+                             std::string const &program,
                              std::string const &function);
 
-signals:
+ signals:
   void fieldChanged(std::string const &site, std::string const &program,
                     std::string const &function, std::string const &name);
 };

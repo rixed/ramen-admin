@@ -8,11 +8,11 @@ QString const logLevel(QtMsgType);
 class Logger : public QObject {
   Q_OBJECT
 
-public:
+ public:
   Logger(QObject *parent = nullptr);
   ~Logger();
 
-signals:
+ signals:
   void newMessage(QtMsgType, QString const &);
 };
 

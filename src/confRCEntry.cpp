@@ -1,29 +1,28 @@
 #include <cassert>
 extern "C" {
-# include <caml/memory.h>
-# include <caml/alloc.h>
-# undef alloc
-# undef flush
+#include <caml/alloc.h>
+#include <caml/memory.h>
+#undef alloc
+#undef flush
 }
-#include "confRCEntryParam.h"
 #include "confRCEntry.h"
+#include "confRCEntryParam.h"
 
 namespace conf {
 
 RCEntry::RCEntry(std::string const &programName_, bool enabled_, bool debug_,
                  double reportPeriod_, std::string const &cwd_,
-                 std::string const &onSite_, bool automatic_) :
-  programName(programName_),
-  onSite(onSite_),
-  reportPeriod(reportPeriod_),
-  cwd(cwd_),
-  enabled(enabled_),
-  debug(debug_),
-  automatic(automatic_) {}
+                 std::string const &onSite_, bool automatic_)
+    : programName(programName_),
+      onSite(onSite_),
+      reportPeriod(reportPeriod_),
+      cwd(cwd_),
+      enabled(enabled_),
+      debug(debug_),
+      automatic(automatic_) {}
 
 // This _does_ alloc on the OCaml heap
-value RCEntry::toOCamlValue() const
-{
+value RCEntry::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal3(ret, paramLst, cons);
   checkInOCamlThread();
@@ -32,7 +31,7 @@ value RCEntry::toOCamlValue() const
   Store_field(ret, 1, Val_bool(debug));
   Store_field(ret, 2, caml_copy_double(reportPeriod));
   Store_field(ret, 3, caml_copy_string(cwd.c_str()));
-  paramLst = Val_emptylist; // Aka Val_int(0)
+  paramLst = Val_emptylist;  // Aka Val_int(0)
   for (auto const param : params) {
     // prepend param:
     cons = caml_alloc(2, Tag_cons);
@@ -46,17 +45,11 @@ value RCEntry::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-bool RCEntry::operator==(RCEntry const &other) const
-{
-  if (
-    programName != other.programName ||
-    onSite != other.onSite ||
-    reportPeriod != other.reportPeriod ||
-    cwd != other.cwd ||
-    enabled != other.enabled ||
-    debug != other.debug ||
-    automatic != other.automatic
-  ) {
+bool RCEntry::operator==(RCEntry const &other) const {
+  if (programName != other.programName || onSite != other.onSite ||
+      reportPeriod != other.reportPeriod || cwd != other.cwd ||
+      enabled != other.enabled || debug != other.debug ||
+      automatic != other.automatic) {
     return false;
   }
 
@@ -68,10 +61,10 @@ bool RCEntry::operator==(RCEntry const &other) const
         break;
       }
     }
-    if (! found) return false;
+    if (!found) return false;
   }
 
   return true;
 }
 
-};
+};  // namespace conf

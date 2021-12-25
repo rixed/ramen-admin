@@ -169,7 +169,9 @@ MANUAL_CPP_SOURCES = \
   $(wildcard src/stream/*.cpp) \
   $(wildcard src/stream/*.h) \
   $(wildcard src/ps/*.cpp) \
-  $(wildcard src/ps/*.h)
+  $(wildcard src/ps/*.h) \
+  $(wildcard src/processes/*.cpp) \
+  $(wildcard src/processes/*.h) \
 
 src/RmAdmin: \
 		src/rmadmin.ico \
@@ -287,6 +289,11 @@ clazy-build/Makefile: \
 clazy: clazy-build/Makefile
 	@echo 'Analysing sources with clazy...'
 	@$(MAKE) -C clazy-build CLAZY_IGNORE_DIRS=.*qt5.* CLAZY_CHECKS=level0,level1,no-rule-of-two-soft,no-non-pod-global-static,no-qproperty-without-notify
+
+# Try to make format as quick as possible by not reformating the same files unless changed:
+format: $(MANUAL_CPP_SOURCES)
+	clang-format -i --style=Google $?
+	@touch $@
 
 #
 # Tests

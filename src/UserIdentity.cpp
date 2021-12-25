@@ -1,23 +1,22 @@
-#include <string>
-#include <QtGlobal>
+#include "UserIdentity.h"
+
 #include <QDebug>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include "UserIdentity.h"
+#include <QtGlobal>
+#include <string>
 
 std::optional<QString> my_uid;
 
-static void complain(QFile &file, std::string msg)
-{
+static void complain(QFile &file, std::string msg) {
   qCritical() << "File" << file.fileName() << ":"
               << QString::fromStdString(msg);
 }
 
-UserIdentity::UserIdentity(QFile &file)
-{
+UserIdentity::UserIdentity(QFile &file) {
   isValid = false;
   do {
-    if (! file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)) {
       complain(file, "Cannot open");
       break;
     }
@@ -38,12 +37,12 @@ UserIdentity::UserIdentity(QFile &file)
 
     QJsonObject obj = doc.object();
 
-#   define GET(field, name) \
-    if (! obj.contains(name) || ! obj[name].isString()) { \
-      complain(file, "Cannot find/parse " name); \
-      break; \
-    } \
-    field = obj[name].toString()
+#define GET(field, name)                              \
+  if (!obj.contains(name) || !obj[name].isString()) { \
+    complain(file, "Cannot find/parse " name);        \
+    break;                                            \
+  }                                                   \
+  field = obj[name].toString()
 
     GET(username, "username");
     GET(srv_pub_key, "server_public_key");

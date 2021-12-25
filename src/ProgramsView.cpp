@@ -1,9 +1,8 @@
-#include "TargetConfigEditor.h"
 #include "ProgramsView.h"
 
-ProgramsView::ProgramsView(QWidget *parent) :
-  AtomicForm(parent)
-{
+#include "TargetConfigEditor.h"
+
+ProgramsView::ProgramsView(QWidget *parent) : AtomicForm(parent) {
   // TODO: Add a search box
 
   rcEditor = new TargetConfigEditor;

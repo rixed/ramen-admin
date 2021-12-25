@@ -6,19 +6,17 @@
 
 class QVBoxLayout;
 
-class SourceInfoViewer : public AtomicWidget
-{
+class SourceInfoViewer : public AtomicWidget {
   Q_OBJECT
 
   QVBoxLayout *layout;
 
-public:
+ public:
   SourceInfoViewer(QWidget *parent = nullptr);
   void setEnabled(bool) {}
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <QString>
 
 struct TimeRange {
-  bool relative; // if true, then now must be added to since and until
+  bool relative;  // if true, then now must be added to since and until
   double since, until;
 
   // Means empty:
@@ -12,8 +12,8 @@ struct TimeRange {
 
   TimeRange(double lastSeconds);
 
-  TimeRange(bool relative_, double since_, double until_) :
-    relative(relative_), since(since_), until(until_) {}
+  TimeRange(bool relative_, double since_, double until_)
+      : relative(relative_), since(since_), until(until_) {}
 
   // Return the absolute time range:
   void absRange(double *since_, double *until_) const;

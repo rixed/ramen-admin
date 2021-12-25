@@ -2,11 +2,10 @@
 #define STORAGEFORM_H_190505
 #include "AtomicForm.h"
 
-class StorageForm : public AtomicForm
-{
+class StorageForm : public AtomicForm {
   Q_OBJECT
 
-public:
+ public:
   StorageForm(QWidget *parent = nullptr);
 };
 

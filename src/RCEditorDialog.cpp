@@ -1,19 +1,18 @@
-#include <QPushButton>
+#include "RCEditorDialog.h"
+
 #include <QHBoxLayout>
 #include <QMessageBox>
+#include <QPushButton>
 #include <QStackedLayout>
 
 #include "AtomicForm.h"
-#include "misc_dessser.h"
-#include "TargetConfigEditor.h"
-#include "Resources.h"
 #include "RCEntryEditor.h"
+#include "Resources.h"
+#include "TargetConfigEditor.h"
+#include "misc_dessser.h"
 
-#include "RCEditorDialog.h"
-
-RCEditorDialog::RCEditorDialog(QWidget *parent) :
-  SavedWindow("RCWindow", tr("Running Configuration"), true, parent)
-{
+RCEditorDialog::RCEditorDialog(QWidget *parent)
+    : SavedWindow("RCWindow", tr("Running Configuration"), true, parent) {
   AtomicForm *form = new AtomicForm(true, this);
 
   Resources *r = Resources::get();
@@ -22,15 +21,15 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
    * they have no independent keys that could be deleted independently.
    * Instead, we need an ad-hoc delete function. */
   QPushButton *deleteButton =
-    new QPushButton(r->deletePixmap, tr("Delete this entry"));
+      new QPushButton(r->deletePixmap, tr("Delete this entry"));
   form->buttonsLayout->insertWidget(2, deleteButton);
-  connect(form, &AtomicForm::changeEnabled,
-          deleteButton, &QPushButton::setEnabled);
+  connect(form, &AtomicForm::changeEnabled, deleteButton,
+          &QPushButton::setEnabled);
   // Every form start disabled (thus won't signal changeEnabled at init):
   deleteButton->setEnabled(form->isEnabled());
 
-  connect(deleteButton, &QPushButton::clicked,
-          this, &RCEditorDialog::wantDeleteEntry);
+  connect(deleteButton, &QPushButton::clicked, this,
+          &RCEditorDialog::wantDeleteEntry);
 
   targetConfigEditor = new TargetConfigEditor;
   targetConfigEditor->setKey(targetConfig);
@@ -43,21 +42,23 @@ RCEditorDialog::RCEditorDialog(QWidget *parent) :
   // Prepare the confirmation dialog for deletion:
   confirmDeleteDialog = new QMessageBox(this);
   confirmDeleteDialog->setText("Are you sure you want to delete this entry?");
-  confirmDeleteDialog->setStandardButtons(QMessageBox::Yes | QMessageBox::Cancel);
+  confirmDeleteDialog->setStandardButtons(QMessageBox::Yes |
+                                          QMessageBox::Cancel);
   confirmDeleteDialog->setDefaultButton(QMessageBox::Cancel);
   confirmDeleteDialog->setIcon(QMessageBox::Warning);
 }
 
-void RCEditorDialog::wantDeleteEntry()
-{
+void RCEditorDialog::wantDeleteEntry() {
   // Retrieve the entry.
   if (targetConfigEditor->stackedLayout->currentIndex() !=
-      targetConfigEditor->entryEditorIdx) return;
+      targetConfigEditor->entryEditorIdx)
+    return;
 
   QString info(tr("This program will no longer be running."));
   if (targetConfigEditor->entryEditor->programIsEnabled())
-    info.append("\n\nAlternatively, this program could be "
-                "temporarily disabled.");
+    info.append(
+        "\n\nAlternatively, this program could be "
+        "temporarily disabled.");
   confirmDeleteDialog->setInformativeText(info);
 
   if (QMessageBox::Yes == confirmDeleteDialog->exec()) {
@@ -65,7 +66,6 @@ void RCEditorDialog::wantDeleteEntry()
   }
 }
 
-void RCEditorDialog::preselect(QString const &programName)
-{
+void RCEditorDialog::preselect(QString const &programName) {
   targetConfigEditor->preselect(programName);
 }

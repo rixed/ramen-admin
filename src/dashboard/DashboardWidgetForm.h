@@ -14,8 +14,7 @@ class QWidget;
 
 /* This is an AtomicForm that's composed of a single AtomicWidget,
  * since all widget values are made of a single KValue. */
-class DashboardWidgetForm : public AtomicForm
-{
+class DashboardWidgetForm : public AtomicForm {
   Q_OBJECT
 
   std::shared_ptr<dessser::gen::sync_key::t const> widgetKey;
@@ -30,15 +29,15 @@ class DashboardWidgetForm : public AtomicForm
 
   void doCopy(bool);
 
-  void switchPosition(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void switchPosition(std::shared_ptr<dessser::gen::sync_key::t const>,
+                      KValue const &);
 
-public:
+ public:
   Dashboard *dashboard;
 
   DashboardWidgetForm(
-    std::shared_ptr<dessser::gen::sync_key::t const> widgetKey,
-    Dashboard *,
-    QWidget *parent = nullptr);
+      std::shared_ptr<dessser::gen::sync_key::t const> widgetKey, Dashboard *,
+      QWidget *parent = nullptr);
 
   ~DashboardWidgetForm();
 
@@ -46,7 +45,7 @@ public:
 
   void setExpand(bool);
 
-protected slots:
+ protected slots:
   void performCopy();
   void performMove();
   void moveUp();

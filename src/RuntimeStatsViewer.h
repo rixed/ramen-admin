@@ -4,15 +4,15 @@
 
 class QLabel;
 
-class RuntimeStatsViewer : public AtomicWidget
-{
+class RuntimeStatsViewer : public AtomicWidget {
   Q_OBJECT
 
   QLabel *statsTime, *firstStartup, *lastStartup;
   QLabel *minEventTime, *maxEventTime;
   QLabel *firstInput, *lastInput;
   QLabel *firstOutput, *lastOutput;
-  QLabel *totInputTuples, *totSelectedTuples, *totFilteredTuples, *totOutputTuples;
+  QLabel *totInputTuples, *totSelectedTuples, *totFilteredTuples,
+      *totOutputTuples;
   QLabel *avgFullBytes;
   QLabel *curGroups, *maxGroups;
   QLabel *totInputBytes, *totOutputBytes;
@@ -21,11 +21,11 @@ class RuntimeStatsViewer : public AtomicWidget
   QLabel *totCpu;
   QLabel *curRam, *maxRam;
 
-public:
+ public:
   RuntimeStatsViewer(QWidget *parent = nullptr);
   void setEnabled(bool) {}
 
-public slots:
+ public slots:
   bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
 };
 

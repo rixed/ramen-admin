@@ -4,13 +4,12 @@
 
 class ConfTreeWidget;
 
-class ConfTreeDialog : public SavedWindow
-{
+class ConfTreeDialog : public SavedWindow {
   Q_OBJECT
 
   ConfTreeWidget *confTreeWidget;
 
-public:
+ public:
   ConfTreeDialog(QWidget *parent = nullptr);
 };
 

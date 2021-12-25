@@ -7,16 +7,15 @@
 
 class CodeEdit;
 
-class CodeEditForm : public AtomicForm
-{
+class CodeEditForm : public AtomicForm {
   Q_OBJECT
 
-public:
+ public:
   CodeEdit *codeEdit;
 
   CodeEditForm(QWidget *parent = nullptr);
 
-protected slots:
+ protected slots:
   void wantClone();
 };
 

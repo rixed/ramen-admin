@@ -6,19 +6,19 @@ class QMessageBox;
 class QString;
 class TargetConfigEditor;
 
-class RCEditorDialog : public SavedWindow
-{
+class RCEditorDialog : public SavedWindow {
   Q_OBJECT
 
   TargetConfigEditor *targetConfigEditor;
 
   QMessageBox *confirmDeleteDialog;
-public:
+
+ public:
   RCEditorDialog(QWidget *parent = nullptr);
 
   void preselect(QString const &programName);
 
-protected slots:
+ protected slots:
   void wantDeleteEntry();
 };
 

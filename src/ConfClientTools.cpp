@@ -1,6 +1,5 @@
-static int parseUrl(QString &host, quint16 &port, QString const &url)
-{
-  int sep { url.indexOf(':') };
+static int parseUrl(QString &host, quint16 &port, QString const &url) {
+  int sep{url.indexOf(':')};
 
   if (sep < 0) {
     host = url;

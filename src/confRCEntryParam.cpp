@@ -1,17 +1,16 @@
 #include <cassert>
 extern "C" {
-# include <caml/memory.h>
-# include <caml/alloc.h>
-# undef alloc
-# undef flush
+#include <caml/alloc.h>
+#include <caml/memory.h>
+#undef alloc
+#undef flush
 }
 #include "confRCEntryParam.h"
 
 namespace conf {
 
 // This _does_ alloc on the OCaml heap
-value RCEntryParam::toOCamlValue() const
-{
+value RCEntryParam::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal1(ret);
   checkInOCamlThread();
@@ -21,18 +20,16 @@ value RCEntryParam::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-QString const RCEntryParam::toQString() const
-{
+QString const RCEntryParam::toQString() const {
   return QString::fromStdString(name) + QString('=') +
          val->toQString(std::string());
 }
 
-bool RCEntryParam::operator==(RCEntryParam const &other) const
-{
+bool RCEntryParam::operator==(RCEntryParam const &other) const {
   if (name != other.name) return false;
 
   if (val) {
-    if (! other.val || *val != *other.val) return false;
+    if (!other.val || *val != *other.val) return false;
   } else {
     if (other.val) return false;
   }
@@ -40,4 +37,4 @@ bool RCEntryParam::operator==(RCEntryParam const &other) const
   return true;
 }
 
-};
+};  // namespace conf

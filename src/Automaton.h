@@ -11,44 +11,41 @@
  * lifetime, matching them against the current set of outgoing transitions,
  * until it reaches a final state and then destroys itself.
  */
+#include <QObject>
 #include <memory>
 #include <string>
 #include <vector>
-#include <QObject>
 
 struct ConfChange;
 struct KValue;
 class KVStore;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class Automaton : public QObject {
   Q_OBJECT
 
-public:
+ public:
   /* Note: we cannot distinguish between new and updated keys since we ignore
    * VNull values: */
-  enum KeyOperation {
-    OnSet = 1,
-    OnLock = 2,
-    OnUnlock = 4,
-    OnDelete = 8
-  };
+  enum KeyOperation { OnSet = 1, OnLock = 2, OnUnlock = 4, OnDelete = 8 };
 
   /* Works only with the global kvs so no KVStore parameter.
    * Initial state will be the first one. */
   Automaton(QString const, size_t numStates, QObject *parent = nullptr);
 
-  void addTransition(
-    size_t fromState, size_t toState,
-    unsigned ops = 0,
-    std::shared_ptr<dessser::gen::sync_key::t const> = nullptr,
-    double timeout = 0.);
+  void addTransition(size_t fromState, size_t toState, unsigned ops = 0,
+                     std::shared_ptr<dessser::gen::sync_key::t const> = nullptr,
+                     double timeout = 0.);
 
   /* To be called once all transitions have been added to start the process. */
   void start();
@@ -57,12 +54,12 @@ public:
    * signal than a key change. */
   void moveTo(size_t toState);
 
-signals:
+ signals:
   // val is null for forced transitions:
-  void transitionTo(
-    Automaton *, size_t state, std::shared_ptr<dessser::gen::sync_value::t const>);
+  void transitionTo(Automaton *, size_t state,
+                    std::shared_ptr<dessser::gen::sync_value::t const>);
 
-private:
+ private:
   struct Transition {
     size_t toState;
     unsigned keyOperations;
@@ -74,17 +71,17 @@ private:
     std::vector<Transition> transitions;
   };
 
-  void tryTransition(
-    std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &, KeyOperation);
+  void tryTransition(std::shared_ptr<dessser::gen::sync_key::t const>,
+                     KValue const &, KeyOperation);
 
   void tryDirectTransition();
 
-protected:
+ protected:
   QString const name;
   std::vector<State> states;
-  size_t currentState { 0 };
+  size_t currentState{0};
 
-private slots:
+ private slots:
   void onChange(QList<ConfChange> const &);
 };
 

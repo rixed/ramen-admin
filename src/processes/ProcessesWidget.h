@@ -1,8 +1,8 @@
 #ifndef PROCESSESWIDGET_H_190806
 #define PROCESSESWIDGET_H_190806
+#include <QWidget>
 #include <bitset>
 #include <memory>
-#include <QWidget>
 
 #include "GraphModel.h"
 
@@ -22,7 +22,7 @@ class ProcessesWidget : public QWidget {
   QTimer *adjustColumnTimer;
   std::bitset<GraphModel::NumColumns> needResizing;
 
-public:
+ public:
   QTreeView *treeView;
   QLineEdit *searchBox;
   QWidget *searchFrame;
@@ -32,10 +32,10 @@ public:
 
   QSize sizeHint() const { return QSize(700, 300); }
 
-public slots:
+ public slots:
   /* Flag those columns as needing adjustment and start a timer: */
-  void askAdjustColumnSize(
-    QModelIndex const &, QModelIndex const &, QVector<int> const &);
+  void askAdjustColumnSize(QModelIndex const &, QModelIndex const &,
+                           QVector<int> const &);
 
   /* Do adjust column size now: */
   void adjustColumnSize();

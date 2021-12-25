@@ -4,19 +4,18 @@
  * https://stackoverflow.com/a/47711588 */
 #include <QTextEdit>
 
-class GrowingTextEdit : public QTextEdit
-{
+class GrowingTextEdit : public QTextEdit {
   Q_OBJECT
 
-public:
+ public:
   GrowingTextEdit(QWidget *parent = nullptr);
 
   QSize sizeHint() const override;
 
-protected:
+ protected:
   void resizeEvent(QResizeEvent *) override;
 
-public slots:
+ public slots:
   void onTextChange();
 };
 

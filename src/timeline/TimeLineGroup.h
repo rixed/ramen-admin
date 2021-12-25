@@ -6,21 +6,20 @@
  * But it displays nothing (and is not a QWidget).
  * Consequently, it does not take ownership of the objects. */
 #include <QObject>
-#include <QVector>
 #include <QPair>
+#include <QVector>
 
 class AbstractTimeLine;
 struct TimeRange;
 
-class TimeLineGroup : public QObject
-{
+class TimeLineGroup : public QObject {
   Q_OBJECT
 
   QVector<AbstractTimeLine *> items;
   qreal minBeginOfTime, maxEndOfTime;
   QPair<qreal, qreal> largestViewPort;
 
-public:
+ public:
   TimeLineGroup(QObject *parent = nullptr);
 
   /* Does not take ownership of the passed timeline. */
@@ -28,12 +27,12 @@ public:
   /* Won't complain if that timeline is not in the group: */
   void remove(QObject *);
 
-protected slots:
+ protected slots:
   void setCurrentTimes(qreal) const;
   void setBeginOfTimes(qreal) const;
   void setEndOfTimes(qreal) const;
 
-public slots:
+ public slots:
   // Typically connected to a TimeRangeEditor:
   void setTimeRange(TimeRange const &) const;
 };

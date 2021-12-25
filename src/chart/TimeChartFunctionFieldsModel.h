@@ -1,10 +1,9 @@
 #ifndef TIMECHARTFUNCTIONFIELDSMODEL_H_200309
 #define TIMECHARTFUNCTIONFIELDSMODEL_H_200309
-#include <memory>
-#include <string>
-
 #include <QAbstractTableModel>
 #include <QStringList>
+#include <memory>
+#include <string>
 
 #include "desssergen/dashboard_widget.h"
 
@@ -15,14 +14,13 @@ struct KValue;
  * receives it from the FunctionsEditor, which receives it from the
  * TimeChartEditWidget, which is an AtomicWidget connected to that key. */
 
-class TimeChartFunctionFieldsModel : public QAbstractTableModel
-{
+class TimeChartFunctionFieldsModel : public QAbstractTableModel {
   Q_OBJECT
 
   /* Returns a R-O pointer to the known configuration for that field, or
    * null: */
-  std::shared_ptr<dessser::gen::dashboard_widget::field const> findFieldConfiguration(
-    std::string const &field_name) const;
+  std::shared_ptr<dessser::gen::dashboard_widget::field const>
+  findFieldConfiguration(std::string const &field_name) const;
 
   /* Returns a copy of the stored Column in source or a fresh default value
    * if there is no stored configuration for that field yet. */
@@ -30,9 +28,10 @@ class TimeChartFunctionFieldsModel : public QAbstractTableModel
 
   /* Same as above, but returns the value from the configuration (and add it if
    * needed) */
-  std::shared_ptr<dessser::gen::dashboard_widget::field> findFieldConfiguration(int);
+  std::shared_ptr<dessser::gen::dashboard_widget::field> findFieldConfiguration(
+      int);
 
-public:
+ public:
   /* Used to answer data(), can be changed at any time.
    * Will be extended with new field config as new fields are edited.
    * WARNING: Therefore, is not a copy of the dashboard_widget::t,
@@ -45,26 +44,22 @@ public:
   // Names of possible factors:
   QStringList factors;
 
-  enum Columns {
-    ColRepresentation, ColFactors, ColAxis, ColColor, NumColumns
-  };
+  enum Columns { ColRepresentation, ColFactors, ColAxis, ColColor, NumColumns };
 
-  TimeChartFunctionFieldsModel(
-    std::string const &site,
-    std::string const &program,
-    std::string const &function,
-    QObject *parent = nullptr);
+  TimeChartFunctionFieldsModel(std::string const &site,
+                               std::string const &program,
+                               std::string const &function,
+                               QObject *parent = nullptr);
 
   int rowCount(QModelIndex const &parent = QModelIndex()) const override;
 
   int columnCount(QModelIndex const &parent = QModelIndex()) const override;
 
-  QVariant data(
-    QModelIndex const &index, int role = Qt::DisplayRole) const override;
+  QVariant data(QModelIndex const &index,
+                int role = Qt::DisplayRole) const override;
 
-  QVariant headerData(
-    int section, Qt::Orientation orientation, int role = Qt::DisplayRole
-  ) const override;
+  QVariant headerData(int section, Qt::Orientation orientation,
+                      int role = Qt::DisplayRole) const override;
 
   // Maybe useless:
   bool setData(const QModelIndex &index, const QVariant &value,
@@ -74,10 +69,10 @@ public:
 
   bool hasSelection() const;
 
-protected slots:
+ protected slots:
   void checkSource(QString const &, QString const &);
 
-public slots:
+ public slots:
   /* Faster and simpler than individual setData:
    * Returns false if value could not be set.
    * Emits modelReset. */

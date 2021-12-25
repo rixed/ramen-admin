@@ -1,26 +1,26 @@
 #ifndef GRAPHITEM_H_190508
 #define GRAPHITEM_H_190508
-#include <memory>
-#include <set>
-#include <string>
-#include <vector>
 #include <QBrush>
 #include <QGraphicsItem>
 #include <QGraphicsItemGroup>
 #include <QPoint>
 #include <QString>
 #include <QVariant>
+#include <memory>
+#include <set>
+#include <string>
+#include <vector>
 
 class GraphModel;
 struct GraphViewSettings;
 
 namespace dessser {
-  namespace gen {
-    namespace raql_value {
-      struct t;
-    }
-  }
+namespace gen {
+namespace raql_value {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 /* GraphItem is an Item in the GraphModel *and* in the scene of the GraphView.
  * This is the address of the GraphItem that is stored in QModelIndex
@@ -35,19 +35,17 @@ namespace dessser {
  * structures (humbly named Site, Program and Function) on the side in
  * shared. */
 
-struct GraphData
-{
+struct GraphData {
   QString const name;
 
   GraphData(QString const &name_) : name(name_) {}
 
   /* GraphData is going to be inherited: */
-  virtual ~GraphData() {};
+  virtual ~GraphData(){};
 };
 
 // Note: QGraphicsItem does not inherit QObject
-class GraphItem : public QObject, public QGraphicsItem
-{
+class GraphItem : public QObject, public QGraphicsItem {
   Q_OBJECT
   Q_PROPERTY(QPointF pos READ pos WRITE setPos)
   Q_PROPERTY(qreal border READ border WRITE setBorder)
@@ -60,47 +58,53 @@ class GraphItem : public QObject, public QGraphicsItem
   QGraphicsItem *subItems;
   bool collapsed;
 
-  void paintLabels(QPainter *, std::vector<std::pair<QString const, QString const>> const &, int y);
-  QRect labelsBoundingRect(std::vector<std::pair<QString const, QString const>> const &) const;
+  void paintLabels(
+      QPainter *, std::vector<std::pair<QString const, QString const> > const &,
+      int y);
+  QRect labelsBoundingRect(
+      std::vector<std::pair<QString const, QString const> > const &) const;
 
-protected:
+ protected:
   GraphViewSettings const &settings;
 
   // Displayed in the graph:
   // TODO: use QStaticText
-  virtual std::vector<std::pair<QString const, QString const>> labels() const  = 0;
+  virtual std::vector<std::pair<QString const, QString const> > labels()
+      const = 0;
 
   // to update parent's frame bbox:
   QVariant itemChange(QGraphicsItem::GraphicsItemChange, const QVariant &);
 
-public:
+ public:
   int x0, y0, x1, y1;  // in the function grid (absolute!)
-  int xRank, yRank;  // the column / row within that column (used for laying out)
-  std::set<GraphItem *> parentOps; // also used during layout
+  int xRank,
+      yRank;  // the column / row within that column (used for laying out)
+  std::set<GraphItem *> parentOps;  // also used during layout
   /* We store a pointer to the parents, because no item is ever reparented. */
   GraphItem *treeParent;
   int row;
 
   std::shared_ptr<GraphData> shared;
 
-  GraphItem(
-    GraphItem *treeParent, std::unique_ptr<GraphData> data,
-    GraphViewSettings const &);
+  GraphItem(GraphItem *treeParent, std::unique_ptr<GraphData> data,
+            GraphViewSettings const &);
 
   int columnCount() const;
   virtual QVariant data(int col, int role) const;
   // Reorder the children after some has been added/removed
-  virtual void reorder(GraphModel *) {};
-  virtual void setProperty(QString const &,
-                           std::shared_ptr<dessser::gen::raql_value::t const>) {};
+  virtual void reorder(GraphModel *){};
+  virtual void setProperty(
+      QString const &, std::shared_ptr<dessser::gen::raql_value::t const>){};
   QModelIndex index(GraphModel const *, int) const;
   bool isCollapsed() const;
   virtual bool isTopHalf() const = 0;
 
   // For the GraphView:
   QRectF boundingRect() const;
-  virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-  // The box representing the operation, regardless of its border (unlike boundingRect):
+  virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
+                     QWidget *widget);
+  // The box representing the operation, regardless of its border (unlike
+  // boundingRect):
   virtual QRectF operationRect() const = 0;
 
   void setCollapsed(bool);

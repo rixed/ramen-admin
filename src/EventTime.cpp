@@ -1,3 +1,5 @@
+#include "EventTime.h"
+
 #include <QDebug>
 #include <QString>
 
@@ -5,21 +7,17 @@
 #include "desssergen/raql_value.h"
 #include "misc_dessser.h"
 
-#include "EventTime.h"
+static bool const verbose{false};
 
-static bool const verbose { false };
-
-EventTime::EventTime(dessser::gen::raql_type::t const &type) :
-  startColumn(-1),
-  stopColumn(-1)
-{
-  if (! isScalar(type)) {
-    unsigned const num_cols { numColumns(type) };
-    for (unsigned column = 0; column < num_cols; column ++) {
-      std::shared_ptr<dessser::gen::raql_type::t const> subType {
-        columnType(type, column) };
+EventTime::EventTime(dessser::gen::raql_type::t const &type)
+    : startColumn(-1), stopColumn(-1) {
+  if (!isScalar(type)) {
+    unsigned const num_cols{numColumns(type)};
+    for (unsigned column = 0; column < num_cols; column++) {
+      std::shared_ptr<dessser::gen::raql_type::t const> subType{
+          columnType(type, column)};
       if (subType && isScalar(*subType)) {
-        std::string const name { columnName(type, column) };
+        std::string const name{columnName(type, column)};
         if (name == "start") {
           startColumn = column;
           if (verbose)
@@ -36,31 +34,27 @@ EventTime::EventTime(dessser::gen::raql_type::t const &type) :
   }
 }
 
-bool EventTime::isValid() const
-{
-  return startColumn >= 0;
-}
+bool EventTime::isValid() const { return startColumn >= 0; }
 
-std::optional<double> EventTime::startOfTuple(dessser::gen::raql_value::t const &tuple) const
-{
+std::optional<double> EventTime::startOfTuple(
+    dessser::gen::raql_value::t const &tuple) const {
   if (startColumn < 0) return std::nullopt;
-  std::shared_ptr<dessser::gen::raql_value::t const> startVal {
-    columnValue(tuple, startColumn) };
-  if (! startVal) return std::nullopt;
+  std::shared_ptr<dessser::gen::raql_value::t const> startVal{
+      columnValue(tuple, startColumn)};
+  if (!startVal) return std::nullopt;
   return toDouble(*startVal);
 }
 
-std::optional<double> EventTime::stopOfTuple(dessser::gen::raql_value::t const &tuple) const
-{
+std::optional<double> EventTime::stopOfTuple(
+    dessser::gen::raql_value::t const &tuple) const {
   if (stopColumn < 0) return std::nullopt;
-  std::shared_ptr<dessser::gen::raql_value::t const> stopVal {
-    columnValue(tuple, stopColumn) };
-  if (! stopVal) return std::nullopt;
+  std::shared_ptr<dessser::gen::raql_value::t const> stopVal{
+      columnValue(tuple, stopColumn)};
+  if (!stopVal) return std::nullopt;
   return toDouble(*stopVal);
 }
 
-QDebug operator<<(QDebug debug, EventTime const &v)
-{
+QDebug operator<<(QDebug debug, EventTime const &v) {
   QDebugStateSaver saver(debug);
   debug.nospace() << "Start column:" << v.startColumn
                   << ", Stop column:" << v.stopColumn;

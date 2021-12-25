@@ -6,20 +6,19 @@
 class FunctionItem;
 class GraphModel;
 
-class FunctionSelector : public TreeComboBox
-{
+class FunctionSelector : public TreeComboBox {
   Q_OBJECT
 
   FunctionItem *previous;
 
-public:
+ public:
   FunctionSelector(GraphModel *model, QWidget *parent = nullptr);
   FunctionItem *getCurrent() const;
 
-signals:
+ signals:
   void selectionChanged(FunctionItem *);
 
-protected slots:
+ protected slots:
   /* Receives all selection changes from the QComboBox and emits
    * selectionChanged signals with either the function or nullptr: */
   void filterSelection();

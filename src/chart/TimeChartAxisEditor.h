@@ -6,16 +6,17 @@ class QCheckBox;
 class QRadioButton;
 
 namespace dessser {
-  namespace gen {
-    namespace dashboard_widget { struct axis; }
-  }
+namespace gen {
+namespace dashboard_widget {
+struct axis;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class TimeChartAxisEditor : public QWidget
-{
+class TimeChartAxisEditor : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   QRadioButton *left, *right;
   QCheckBox *forceZero;
   QRadioButton *linear, *logarithmic;
@@ -25,7 +26,7 @@ public:
   bool setValue(dessser::gen::dashboard_widget::axis const &);
   std::shared_ptr<dessser::gen::dashboard_widget::axis> getValue() const;
 
-signals:
+ signals:
   void valueChanged();
 };
 

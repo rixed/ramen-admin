@@ -15,22 +15,23 @@ class SourcesModel;
 class SourcesView;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class SourcesWin : public SavedWindow
-{
+class SourcesWin : public SavedWindow {
   Q_OBJECT
 
   SourcesModel *sourcesModel;
   SourcesView *sourcesView;
 
-public:
+ public:
   explicit SourcesWin(QWidget *parent = nullptr);
 
-public slots:
+ public slots:
   // Show a specific path (TODO: optional extension?)
   void showFile(std::string const &path);
 

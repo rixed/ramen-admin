@@ -4,11 +4,10 @@
 
 class GraphModel;
 
-class StorageView : public QWidget
-{
+class StorageView : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   StorageView(GraphModel *, QWidget *parent = nullptr);
 };
 

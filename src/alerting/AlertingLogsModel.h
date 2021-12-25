@@ -1,10 +1,10 @@
 #ifndef ALERTINGLOGSMODEL_H_200615
 #define ALERTINGLOGSMODEL_H_200615
-#include <memory>
-#include <vector>
 #include <QAbstractTableModel>
 #include <QList>
 #include <QString>
+#include <memory>
+#include <vector>
 
 #include "misc.h"
 
@@ -13,10 +13,12 @@ class QModelIndex;
 class QVariant;
 
 namespace dessser {
-  namespace gen {
-    namespace alerting_log { struct t; }
-  }
+namespace gen {
+namespace alerting_log {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 QString alertingLogToQString(dessser::gen::alerting_log::t const &);
 
@@ -32,16 +34,18 @@ class AlertingLogsModel : public QAbstractTableModel {
 
     Log(std::string incidentId_, double time_,
         std::shared_ptr<dessser::gen::alerting_log::t const> log_)
-      : incidentId(incidentId_), time(time_), log(log_),
-        timeStr(stringOfDate(time_)) {}
+        : incidentId(incidentId_),
+          time(time_),
+          log(log_),
+          timeStr(stringOfDate(time_)) {}
   };
 
   std::vector<Log> journal;
 
-  void addLog(
-    std::string const &, double, std::shared_ptr<dessser::gen::alerting_log::t const>);
+  void addLog(std::string const &, double,
+              std::shared_ptr<dessser::gen::alerting_log::t const>);
 
-public:
+ public:
   enum Columns { Time, Text, NUM_COLUMNS };
 
   AlertingLogsModel(QObject *parent = nullptr);
@@ -56,7 +60,7 @@ public:
 
   static AlertingLogsModel *globalLogsModel;
 
-private slots:
+ private slots:
   void onChange(QList<ConfChange> const &);
 };
 

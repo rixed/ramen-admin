@@ -4,19 +4,18 @@
 
 class QLineEdit;
 
-class NewDashboardDialog : public QDialog
-{
+class NewDashboardDialog : public QDialog {
   Q_OBJECT
 
   QLineEdit *nameEdit;
 
-public:
+ public:
   NewDashboardDialog(QWidget *parent = nullptr);
 
-public slots:
+ public slots:
   void clear();
 
-protected slots:
+ protected slots:
   void createDashboard();
 };
 

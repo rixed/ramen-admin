@@ -21,25 +21,25 @@ class OperationsView : public QSplitter {
   // Radio buttons for quickly set the desired Level Of Detail:
   QRadioButton *toSites, *toPrograms, *toFunctions;
 
-public:
+ public:
   OperationsView(GraphModel *, QWidget *parent = nullptr);
 
-signals:
+ signals:
   void functionSelected(FunctionItem *);
 
   void programSelected(ProgramItem *);
 
-public slots:
-  void resetLOD(); // release all LOD radio buttons
+ public slots:
+  void resetLOD();  // release all LOD radio buttons
 
-  void setLOD(bool); // set a given LOD
+  void setLOD(bool);  // set a given LOD
 
   void showSource(ProgramItem const *);
 
   void showFuncInfo(FunctionItem const *);
 
   // Will retrieve the function and emit functionSelected()
-  void selectItem(QModelIndex const &); // the QModelIndex from the graphModel
+  void selectItem(QModelIndex const &);  // the QModelIndex from the graphModel
 };
 
 #endif

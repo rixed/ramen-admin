@@ -1,3 +1,5 @@
+#include "storage/StorageTreeView.h"
+
 #include <QDebug>
 #include <QHeaderView>
 #include <QTimer>
@@ -7,14 +9,10 @@
 #include "misc.h"
 #include "storage/StorageTreeModel.h"
 
-#include "storage/StorageTreeView.h"
-
-StorageTreeView::StorageTreeView(
-    GraphModel *graphModel,
-    StorageTreeModel *storageTreeModel,
-    QWidget *parent)
-  : QTreeView(parent)
-{
+StorageTreeView::StorageTreeView(GraphModel *graphModel,
+                                 StorageTreeModel *storageTreeModel,
+                                 QWidget *parent)
+    : QTreeView(parent) {
   setModel(storageTreeModel);
 
   setUniformRowHeights(true);
@@ -23,7 +21,7 @@ StorageTreeView::StorageTreeView(
   invalidateModelTimer->setSingleShot(true);
 
   // Display only the columns that are relevant to archival:
-  for (unsigned c = 0; c < GraphModel::NumColumns; c ++) {
+  for (unsigned c = 0; c < GraphModel::NumColumns; c++) {
     if (!GraphModel::columnIsAboutArchives((GraphModel::Columns)c)) {
       setColumnHidden(c, true);
     }
@@ -31,10 +29,10 @@ StorageTreeView::StorageTreeView(
 
   header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 
-  connect(graphModel, &GraphModel::storagePropertyChanged,
-          this, &StorageTreeView::mayInvalidateModel);
-  connect(invalidateModelTimer, &QTimer::timeout,
-          this, &StorageTreeView::doInvalidateModel);
+  connect(graphModel, &GraphModel::storagePropertyChanged, this,
+          &StorageTreeView::mayInvalidateModel);
+  connect(invalidateModelTimer, &QTimer::timeout, this,
+          &StorageTreeView::doInvalidateModel);
 
   // Cosmetics:
   setAlternatingRowColors(true);
@@ -43,27 +41,24 @@ StorageTreeView::StorageTreeView(
 
   // Make sure all new rows are always initially expanded:
   expandAll();
-  connect(storageTreeModel, &QAbstractItemModel::rowsInserted,
-          this, &StorageTreeView::expandRows);
+  connect(storageTreeModel, &QAbstractItemModel::rowsInserted, this,
+          &StorageTreeView::expandRows);
 }
 
 // FIXME: Does not work for some reason:
-void StorageTreeView::expandRows(QModelIndex const &parent, int first, int last)
-{
+void StorageTreeView::expandRows(QModelIndex const &parent, int first,
+                                 int last) {
   expandAllFromParent(this, parent, first, last);
 }
 
-void StorageTreeView::mayInvalidateModel()
-{
-  static int const invalidateModelTimeout { 1000 }; // ms
+void StorageTreeView::mayInvalidateModel() {
+  static int const invalidateModelTimeout{1000};  // ms
   invalidateModelTimer->start(invalidateModelTimeout);
 }
 
-void StorageTreeView::doInvalidateModel()
-{
-  StorageTreeModel *storageTreeModel {
-    dynamic_cast<StorageTreeModel *>(model()) };
-  if (! storageTreeModel) {
+void StorageTreeView::doInvalidateModel() {
+  StorageTreeModel *storageTreeModel{dynamic_cast<StorageTreeModel *>(model())};
+  if (!storageTreeModel) {
     qCritical() << "Cannot invalidate model: not a StorageTreeModel!?";
     return;
   }

@@ -7,14 +7,13 @@
  * And if you wonder why this class is not inline despite how small it is,
  * it's because of Qt MOC preprocessor want things that way. */
 
-class StorageTreeModel : public QSortFilterProxyModel
-{
+class StorageTreeModel : public QSortFilterProxyModel {
   Q_OBJECT
 
-public:
+ public:
   StorageTreeModel(QObject *parent = nullptr);
 
-protected:
+ protected:
   bool filterAcceptsRow(int, const QModelIndex &) const override;
 };
 

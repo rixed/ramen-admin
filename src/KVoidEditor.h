@@ -3,19 +3,17 @@
 /* Editor for a raql_value of type Void */
 #include "AtomicWidget.h"
 
-class KVoidEditor : public AtomicWidget
-{
+class KVoidEditor : public AtomicWidget {
   Q_OBJECT
 
-public:
+ public:
   KVoidEditor(QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

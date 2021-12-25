@@ -1,21 +1,17 @@
-#include <cstdlib>
+#include "SavedWindow.h"
+
 #include <QCloseEvent>
 #include <QCoreApplication>
 #include <QSettings>
+#include <cstdlib>
+
 #include "Menu.h"
-#include "source/SourcesWin.h" // for SOURCE_EDITOR_WINDOW_NAME
+#include "source/SourcesWin.h"  // for SOURCE_EDITOR_WINDOW_NAME
 
-#include "SavedWindow.h"
-
-SavedWindow::SavedWindow(
-  QString const &windowName_,
-  QString const &windowTitle,
-  bool fullMenu,
-  QWidget *parent,
-  std::optional<bool> visibility) :
-    QMainWindow(parent),
-    windowName(windowName_)
-{
+SavedWindow::SavedWindow(QString const &windowName_, QString const &windowTitle,
+                         bool fullMenu, QWidget *parent,
+                         std::optional<bool> visibility)
+    : QMainWindow(parent), windowName(windowName_) {
   setUnifiedTitleAndToolBarOnMac(true);
   setWindowTitle(windowTitle);
 
@@ -30,12 +26,12 @@ SavedWindow::SavedWindow(
   resize(settings.value("size", size()).toSize());
   if (settings.value("maximized", isMaximized()).toBool()) showMaximized();
 
-  /* For now, make it so that the code editor is visible by default at start. */
+  /* For now, make it so that the code editor is visible by default at start.
+   */
 
-  bool const isVisible {
-    visibility.value_or(
-      settings.value("visible",
-                     windowName == SOURCE_EDITOR_WINDOW_NAME).toBool()) };
+  bool const isVisible{visibility.value_or(
+      settings.value("visible", windowName == SOURCE_EDITOR_WINDOW_NAME)
+          .toBool())};
   setVisible(isVisible);
 
   settings.endGroup();
@@ -45,8 +41,7 @@ SavedWindow::SavedWindow(
 
 bool saveWindowVisibility = false;
 
-void SavedWindow::closeEvent(QCloseEvent *event)
-{
+void SavedWindow::closeEvent(QCloseEvent *event) {
   QSettings settings;
 
   settings.beginGroup(windowName);
@@ -54,7 +49,7 @@ void SavedWindow::closeEvent(QCloseEvent *event)
   settings.setValue("geometry", saveGeometry());
   settings.setValue("state", saveState());
   settings.setValue("maximized", isMaximized());
-  if (! isMaximized()) {
+  if (!isMaximized()) {
     settings.setValue("position", pos());
     settings.setValue("size", size());
   }

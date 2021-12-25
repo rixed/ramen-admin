@@ -1,3 +1,5 @@
+#include "dashboard/DashboardWidgetForm.h"
+
 #include <QDebug>
 #include <QHBoxLayout>
 #include <QLabel>
@@ -8,29 +10,23 @@
 #include <QVBoxLayout>
 
 #include "AtomicWidget.h"
+#include "ConfClient.h"
+#include "Menu.h"
+#include "Resources.h"
 #include "dashboard/DashboardCopyDialog.h"
 #include "dashboard/DashboardSelector.h"
 #include "dashboard/DashboardWidget.h"
 #include "dashboard/tools.h"
-#include "desssergen/sync_value.h"
 #include "desssergen/sync_key.h"
-#include "ConfClient.h"
-#include "Menu.h"
+#include "desssergen/sync_value.h"
 #include "misc_dessser.h"
-#include "Resources.h"
 
-#include "dashboard/DashboardWidgetForm.h"
-
-static bool const verbose { false };
+static bool const verbose{false};
 
 DashboardWidgetForm::DashboardWidgetForm(
-  std::shared_ptr<dessser::gen::sync_key::t const> widgetKey_,
-  Dashboard *dashboard_,
-  QWidget *parent)
-  : AtomicForm(false, parent),
-    widgetKey(widgetKey_),
-    dashboard(dashboard_)
-{
+    std::shared_ptr<dessser::gen::sync_key::t const> widgetKey_,
+    Dashboard *dashboard_, QWidget *parent)
+    : AtomicForm(false, parent), widgetKey(widgetKey_), dashboard(dashboard_) {
   /* Beware that `new DashboardWidget()` will call back setExpand, so
    * create the menuFrame sooner: */
   menuFrame = new QWidget(this);
@@ -39,27 +35,26 @@ DashboardWidgetForm::DashboardWidgetForm(
   widget = new DashboardWidget(dashboard, this, this);
   widget->setObjectName("GenericDashboardWidget");
 
-  QMenuBar *menuBar { new QMenuBar };
+  QMenuBar *menuBar{new QMenuBar};
   menuBar->addAction(tr("export"));
-  QMenu *moveMenu { menuBar->addMenu(tr("move")) };
+  QMenu *moveMenu{menuBar->addMenu(tr("move"))};
   moveMenu->addSection(tr("Within this dashboard"));
 
-  Resources const *r { Resources::get() };
+  Resources const *r{Resources::get()};
 
-  upAction = moveMenu->addAction(r->upPixmap, tr("Up"),
-                                 this, &DashboardWidgetForm::moveUp);
-  downAction = moveMenu->addAction(r->downPixmap, tr("Down"),
-                                   this, &DashboardWidgetForm::moveDown);
+  upAction = moveMenu->addAction(r->upPixmap, tr("Up"), this,
+                                 &DashboardWidgetForm::moveUp);
+  downAction = moveMenu->addAction(r->downPixmap, tr("Down"), this,
+                                   &DashboardWidgetForm::moveDown);
   moveMenu->addSection(tr("To another dashboard"));
-  moveMenu->addAction(r->copyPixmap, tr("Copy to…"),
-                      this, &DashboardWidgetForm::performCopy);
-  moveMenu->addAction(tr("Move to…"),
-                      this, &DashboardWidgetForm::performMove);
+  moveMenu->addAction(r->copyPixmap, tr("Copy to…"), this,
+                      &DashboardWidgetForm::performCopy);
+  moveMenu->addAction(tr("Move to…"), this, &DashboardWidgetForm::performMove);
 
   title = new QLabel;
   title->setObjectName("title");
 
-  QHBoxLayout *titleBar { new QHBoxLayout };
+  QHBoxLayout *titleBar{new QHBoxLayout};
   titleBar->setObjectName("titleBar");
   titleBar->addWidget(menuBar);
   titleBar->addStretch();
@@ -67,8 +62,8 @@ DashboardWidgetForm::DashboardWidgetForm(
   titleBar->addStretch();
   titleBar->addWidget(editButton);
 
-  connect(widget, &DashboardWidget::titleChanged,
-          this, &DashboardWidgetForm::setTitle);
+  connect(widget, &DashboardWidget::titleChanged, this,
+          &DashboardWidgetForm::setTitle);
   /* Now that everything is connected, set the key (which will set the
    * value) */
   widget->setKey(widgetKey);
@@ -94,8 +89,7 @@ DashboardWidgetForm::DashboardWidgetForm(
   copyDialog = new DashboardCopyDialog(this);
 }
 
-DashboardWidgetForm::~DashboardWidgetForm()
-{
+DashboardWidgetForm::~DashboardWidgetForm() {
   if (verbose)
     qDebug() << "DashboardWidgetForm: destructing" << this
              << "while parent of widget" << widget;
@@ -106,35 +100,30 @@ DashboardWidgetForm::~DashboardWidgetForm()
   widget->disconnect(this);
 }
 
-void DashboardWidgetForm::enableArrowsForPosition(size_t idx, size_t count)
-{
+void DashboardWidgetForm::enableArrowsForPosition(size_t idx, size_t count) {
   upAction->setEnabled(idx > 0);
   downAction->setEnabled(idx < count - 1);
 }
 
-void DashboardWidgetForm::setExpand(bool expand)
-{
-  QSizePolicy p {
-    QSizePolicy::Preferred,
-    (expand ? QSizePolicy::Expanding : QSizePolicy::Maximum) };
+void DashboardWidgetForm::setExpand(bool expand) {
+  QSizePolicy p{QSizePolicy::Preferred,
+                (expand ? QSizePolicy::Expanding : QSizePolicy::Maximum)};
   p.setVerticalStretch(expand ? 1 : 0);
   setSizePolicy(p);
   menuFrame->setSizePolicy(p);
 }
 
-void DashboardWidgetForm::doCopy(bool andDelete)
-{
+void DashboardWidgetForm::doCopy(bool andDelete) {
   if (QDialog::Accepted == copyDialog->copy(!andDelete)) {
-    std::optional<std::string> const dash_name {
-      copyDialog->dashSelector->getCurrent() };
-    if (! dash_name) return;  // User managed to select a non-leaf, ignore.
-    std::shared_ptr<dessser::gen::sync_key::t> dest_key {
-      dashboardNextWidget(*dash_name) };
+    std::optional<std::string> const dash_name{
+        copyDialog->dashSelector->getCurrent()};
+    if (!dash_name) return;  // User managed to select a non-leaf, ignore.
+    std::shared_ptr<dessser::gen::sync_key::t> dest_key{
+        dashboardNextWidget(*dash_name)};
 
-    if (verbose)
-      qDebug() << "DashboardWidgetForm: Will copy to" << *dest_key;
+    if (verbose) qDebug() << "DashboardWidgetForm: Will copy to" << *dest_key;
 
-    std::shared_ptr<dessser::gen::sync_value::t const> v { widget->getValue() };
+    std::shared_ptr<dessser::gen::sync_value::t const> v{widget->getValue()};
 
     /* FIXME: wait for the new widget to be created. And to be sure that's
      * ours, lock and unlock the destination dashboard around these
@@ -144,21 +133,14 @@ void DashboardWidgetForm::doCopy(bool andDelete)
   }
 }
 
-void DashboardWidgetForm::performCopy()
-{
-  doCopy(false);
-}
+void DashboardWidgetForm::performCopy() { doCopy(false); }
 
-void DashboardWidgetForm::performMove()
-{
-  doCopy(true);
-}
+void DashboardWidgetForm::performMove() { doCopy(true); }
 
-void DashboardWidgetForm::moveUp()
-{
+void DashboardWidgetForm::moveUp() {
   /* Locate which other widget to switch position with: */
-  std::optional<uint32_t> const my_idx { widgetIndexOfKey(*widgetKey) };
-  if (! my_idx) {
+  std::optional<uint32_t> const my_idx{widgetIndexOfKey(*widgetKey)};
+  if (!my_idx) {
     qCritical() << "Cannot find out widget index from" << *widgetKey;
     return;
   }
@@ -166,26 +148,25 @@ void DashboardWidgetForm::moveUp()
   // TODO: lock the whole dashboard first:
   std::shared_ptr<dessser::gen::sync_key::t const> destKey;
   KValue destVal;
-  std::string const dash_name { dashboardNameOfKey(*widgetKey) };
-  iterDashboardWidgets(dash_name,
-    [my_idx, &destKey, &destVal](std::shared_ptr<dessser::gen::sync_key::t const> key,
-                                KValue const &val)
-    {
-      std::optional<uint32_t> const that_idx { widgetIndexOfKey(*key) };
-      if (that_idx && *that_idx < *my_idx) {
-        destKey = key;
-        destVal = val;
-      }
-    });
+  std::string const dash_name{dashboardNameOfKey(*widgetKey)};
+  iterDashboardWidgets(
+      dash_name, [my_idx, &destKey, &destVal](
+                     std::shared_ptr<dessser::gen::sync_key::t const> key,
+                     KValue const &val) {
+        std::optional<uint32_t> const that_idx{widgetIndexOfKey(*key)};
+        if (that_idx && *that_idx < *my_idx) {
+          destKey = key;
+          destVal = val;
+        }
+      });
 
   switchPosition(destKey, destVal);
 }
 
-void DashboardWidgetForm::moveDown()
-{
+void DashboardWidgetForm::moveDown() {
   /* Locate which other widget to switch position with: */
-  std::optional<uint32_t> const my_idx { widgetIndexOfKey(*widgetKey) };
-  if (! my_idx) {
+  std::optional<uint32_t> const my_idx{widgetIndexOfKey(*widgetKey)};
+  if (!my_idx) {
     qCritical() << "Cannot find out widget index from" << *widgetKey;
     return;
   }
@@ -193,25 +174,25 @@ void DashboardWidgetForm::moveDown()
   // TODO: lock the whole dashboard first:
   std::shared_ptr<dessser::gen::sync_key::t const> destKey;
   KValue destVal;
-  std::string const dash_name { dashboardNameOfKey(*widgetKey) };
-  iterDashboardWidgets(dash_name,
-    [my_idx, &destKey, &destVal](std::shared_ptr<dessser::gen::sync_key::t const> key,
-                                 KValue const &val)
-    {
-      std::optional<uint32_t> const that_idx { widgetIndexOfKey(*key) };
-      if (!destKey && that_idx && *that_idx > *my_idx) {
-        destKey = key;
-        destVal = val;
-      }
-    });
+  std::string const dash_name{dashboardNameOfKey(*widgetKey)};
+  iterDashboardWidgets(
+      dash_name, [my_idx, &destKey, &destVal](
+                     std::shared_ptr<dessser::gen::sync_key::t const> key,
+                     KValue const &val) {
+        std::optional<uint32_t> const that_idx{widgetIndexOfKey(*key)};
+        if (!destKey && that_idx && *that_idx > *my_idx) {
+          destKey = key;
+          destVal = val;
+        }
+      });
 
   switchPosition(destKey, destVal);
 }
 
 void DashboardWidgetForm::switchPosition(
-  std::shared_ptr<dessser::gen::sync_key::t const> destKey, KValue const &destVal)
-{
-  if (! destKey) {
+    std::shared_ptr<dessser::gen::sync_key::t const> destKey,
+    KValue const &destVal) {
+  if (!destKey) {
     qCritical() << "No widget to switch position with" << *widgetKey;
     return;
   }
@@ -220,9 +201,7 @@ void DashboardWidgetForm::switchPosition(
   Menu::getClient()->sendSet(widgetKey, destVal.val);
 }
 
-void DashboardWidgetForm::setTitle(QString const &s)
-{
-  if (verbose)
-    qDebug() << "Setting new title:" << s;
+void DashboardWidgetForm::setTitle(QString const &s) {
+  if (verbose) qDebug() << "Setting new title:" << s;
   title->setText(s);
 }

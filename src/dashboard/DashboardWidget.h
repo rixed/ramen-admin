@@ -17,8 +17,7 @@ class QWidget;
  * or a text box, thus surviving setKey that change the widget type.
  * It is the AtomicWidget that is added in the DashboardWidgetForm; The
  * underlying DashboardWidgetText/Chart is not. */
-class DashboardWidget : public AtomicWidget
-{
+class DashboardWidget : public AtomicWidget {
   Q_OBJECT
 
   Dashboard *dashboard;
@@ -31,11 +30,11 @@ class DashboardWidget : public AtomicWidget
 
   QString title;
 
-public:
+ public:
   /* If this is part of a dashboard (tu reuse its time setting) then
    * pass it, else nullptr: */
-  DashboardWidget(
-    Dashboard *, DashboardWidgetForm *, QWidget *parent = nullptr);
+  DashboardWidget(Dashboard *, DashboardWidgetForm *,
+                  QWidget *parent = nullptr);
 
   void setEnabled(bool) override;
 
@@ -45,7 +44,7 @@ public:
 
   void setKey(std::shared_ptr<dessser::gen::sync_key::t const>) override;
 
-signals:
+ signals:
   void titleChanged(QString const &);
 };
 

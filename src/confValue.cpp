@@ -1,68 +1,86 @@
-#include <algorithm>
-#include <cassert>
-#include <cstdlib>
-#include <cstring>
-#include <string>
 #include <QDebug>
 #include <QPainter>
 #include <QString>
 #include <QtGlobal>
 #include <QtWidgets>
+#include <algorithm>
+#include <cassert>
+#include <cstdlib>
+#include <cstring>
+#include <string>
 extern "C" {
-# include <caml/memory.h>
-# include <caml/alloc.h>
-# include <caml/custom.h>
-# undef alloc
-# undef flush
+#include <caml/alloc.h>
+#include <caml/custom.h>
+#include <caml/memory.h>
+#undef alloc
+#undef flush
 }
 
-#include "alerting/tools.h"
-#include "colorOfString.h"
-#include "misc.h"
-#include "RamenValue.h"
-#include "RamenType.h"
-#include "chart/TimeChartEditWidget.h"
-#include "confWorkerRole.h"
-#include "confWorkerRef.h"
-#include "confRCEntryParam.h"
-#include "dashboard/DashboardWidgetText.h"
-#include "TargetConfigEditor.h"
-#include "TimeRangeViewer.h"
-#include "RuntimeStatsViewer.h"
-#include "WorkerViewer.h"
-#include "SourceInfoViewer.h"
 #include "AlertInfo.h"
 #include "KLabel.h"
-
+#include "RamenType.h"
+#include "RamenValue.h"
+#include "RuntimeStatsViewer.h"
+#include "SourceInfoViewer.h"
+#include "TargetConfigEditor.h"
+#include "TimeRangeViewer.h"
+#include "WorkerViewer.h"
+#include "alerting/tools.h"
+#include "chart/TimeChartEditWidget.h"
+#include "colorOfString.h"
+#include "confRCEntryParam.h"
 #include "confValue.h"
+#include "confWorkerRef.h"
+#include "confWorkerRole.h"
+#include "dashboard/DashboardWidgetText.h"
+#include "misc.h"
 
 static bool const verbose(false);
 
 namespace conf {
 
-QString const stringOfValueType(ValueType valueType)
-{
+QString const stringOfValueType(ValueType valueType) {
   switch (valueType) {
-    case ErrorType: return QString("ErrorType");
-    case WorkerType: return QString("WorkerType");
-    case RetentionType: return QString("RetentionType");
-    case TimeRangeType: return QString("TimeRangeType");
-    case TuplesType: return QString("TuplesType");
-    case RamenValueType: return QString("RamenValueType");
-    case TargetConfigType: return QString("TargetConfigType");
-    case SourceInfoType: return QString("SourceInfoType");
-    case RuntimeStatsType: return QString("RuntimeStatsType");
-    case ReplayType: return QString("ReplayType");
-    case ReplayerType: return QString("ReplayerType");
-    case AlertType: return QString("AlertType");
-    case ReplayRequestType: return QString("ReplayRequestType");
-    case OutputSpecsType: return QString("OutputSpecsType");
-    case DashWidgetType: return QString("DashWidgetType");
-    case AlertingContactType: return QString("AlertingContactType");
-    case NotificationType: return QString("NotificationType");
-    case DeliveryStatusType: return QString("DeliveryStatusType");
-    case IncidentLogType: return QString("IncidentLogType");
-    case InhibitionType: return QString("InhibitionType");
+    case ErrorType:
+      return QString("ErrorType");
+    case WorkerType:
+      return QString("WorkerType");
+    case RetentionType:
+      return QString("RetentionType");
+    case TimeRangeType:
+      return QString("TimeRangeType");
+    case TuplesType:
+      return QString("TuplesType");
+    case RamenValueType:
+      return QString("RamenValueType");
+    case TargetConfigType:
+      return QString("TargetConfigType");
+    case SourceInfoType:
+      return QString("SourceInfoType");
+    case RuntimeStatsType:
+      return QString("RuntimeStatsType");
+    case ReplayType:
+      return QString("ReplayType");
+    case ReplayerType:
+      return QString("ReplayerType");
+    case AlertType:
+      return QString("AlertType");
+    case ReplayRequestType:
+      return QString("ReplayRequestType");
+    case OutputSpecsType:
+      return QString("OutputSpecsType");
+    case DashWidgetType:
+      return QString("DashWidgetType");
+    case AlertingContactType:
+      return QString("AlertingContactType");
+    case NotificationType:
+      return QString("NotificationType");
+    case DeliveryStatusType:
+      return QString("DeliveryStatusType");
+    case IncidentLogType:
+      return QString("IncidentLogType");
+    case InhibitionType:
+      return QString("InhibitionType");
   };
   assert(!"invalid valueType");
   return QString();
@@ -70,35 +88,28 @@ QString const stringOfValueType(ValueType valueType)
 
 Value::Value(ValueType valueType_) : valueType(valueType_) {}
 
-QString const Value::toQString(std::string const &) const
-{
+QString const Value::toQString(std::string const &) const {
   return QString("TODO: toQString for ") + stringOfValueType(valueType);
 }
 
-value Value::toOCamlValue() const
-{
+value Value::toOCamlValue() const {
   assert(!"Don't know how to convert from a base Value");
 }
 
-AtomicWidget *Value::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *Value::editorWidget(std::string const &key,
+                                  QWidget *parent) const {
   KLabel *editor = new KLabel(parent);
   editor->setKey(key);
   return editor;
 }
 
-bool Value::operator==(Value const &other) const
-{
+bool Value::operator==(Value const &other) const {
   return valueType == other.valueType;
 }
 
-bool Value::operator!=(Value const &other) const
-{
-  return !operator==(other);
-}
+bool Value::operator!=(Value const &other) const { return !operator==(other); }
 
-Value *valueOfOCaml(value v_)
-{
+Value *valueOfOCaml(value v_) {
   CAMLparam1(v_);
   CAMLlocal4(tmp1_, tmp2_, tmp3_, tmp4_);
   assert(Is_block(v_));
@@ -106,10 +117,8 @@ Value *valueOfOCaml(value v_)
   Value *ret = nullptr;
   switch (valueType) {
     case ErrorType:
-      ret = new Error(
-        Double_val(Field(v_, 0)),
-        (unsigned)Int_val(Field(v_, 1)),
-        String_val(Field(v_, 2)));
+      ret = new Error(Double_val(Field(v_, 0)), (unsigned)Int_val(Field(v_, 1)),
+                      String_val(Field(v_, 2)));
       break;
     case WorkerType:
       ret = new Worker(Field(v_, 0));
@@ -124,8 +133,7 @@ Value *valueOfOCaml(value v_)
       ret = new Tuples(Field(v_, 0));
       break;
     case RamenValueType:
-      ret = new RamenValueValue(
-        RamenValue::ofOCaml(Field(v_, 0)));
+      ret = new RamenValueValue(RamenValue::ofOCaml(Field(v_, 0)));
       break;
     case TargetConfigType:
       ret = new TargetConfig(Field(v_, 0));
@@ -156,42 +164,40 @@ Value *valueOfOCaml(value v_)
       assert(Is_block(v_));
       if (Tag_val(v_) == 0) { /* Text */
         ret = new DashWidgetText(v_);
-      } else {  /* Chart */
+      } else { /* Chart */
         assert(Tag_val(v_) == 1);
         ret = new DashWidgetChart(v_);
       }
       break;
-    case AlertingContactType:
-      {
-        v_ = Field(v_, 0);
-        assert(Is_block(v_));
-        assert(Wosize_val(v_) == 2);
-        double timeout { Double_val(Field(v_, 1)) };
-        v_ = Field(v_, 0);  // via
-        if (Is_block(v_)) {
-          switch (Tag_val(v_)) {
-            case 0:  // ViaExec
-              ret = new AlertingContactExec(timeout, v_);
-              break;
-            case 1:  // ViaSysLog
-              ret = new AlertingContactSysLog(timeout, v_);
-              break;
-            case 2:  // ViaSqlite
-              ret = new AlertingContactSqlite(timeout, v_);
-              break;
-            case 3:  // ViaKafka
-              ret = new AlertingContactKafka(timeout, v_);
-              break;
-            default:
-              qFatal("Invalid AlertingContactType tag");
-              break;
-          }
-        } else {
-          assert(Int_val(v_) == 0); // Ignore
-          ret = new AlertingContactIgnore(timeout);
+    case AlertingContactType: {
+      v_ = Field(v_, 0);
+      assert(Is_block(v_));
+      assert(Wosize_val(v_) == 2);
+      double timeout{Double_val(Field(v_, 1))};
+      v_ = Field(v_, 0);  // via
+      if (Is_block(v_)) {
+        switch (Tag_val(v_)) {
+          case 0:  // ViaExec
+            ret = new AlertingContactExec(timeout, v_);
+            break;
+          case 1:  // ViaSysLog
+            ret = new AlertingContactSysLog(timeout, v_);
+            break;
+          case 2:  // ViaSqlite
+            ret = new AlertingContactSqlite(timeout, v_);
+            break;
+          case 3:  // ViaKafka
+            ret = new AlertingContactKafka(timeout, v_);
+            break;
+          default:
+            qFatal("Invalid AlertingContactType tag");
+            break;
         }
+      } else {
+        assert(Int_val(v_) == 0);  // Ignore
+        ret = new AlertingContactIgnore(timeout);
       }
-      break;
+    } break;
     case NotificationType:
       ret = new Notification(Field(v_, 0));
       break;
@@ -205,14 +211,13 @@ Value *valueOfOCaml(value v_)
       ret = new Inhibition(Field(v_, 0));
       break;
   }
-  if (! ret) {
+  if (!ret) {
     assert(!"Tag_val(v_) <= ReplayRequestType");
   }
   CAMLreturnT(Value *, ret);
 }
 
-Value *valueOfQString(ValueType vt, QString const &)
-{
+Value *valueOfQString(ValueType vt, QString const &) {
   Value *ret = nullptr;
   switch (vt) {
     case ErrorType:
@@ -243,27 +248,23 @@ Value *valueOfQString(ValueType vt, QString const &)
   return ret;
 }
 
-QString const Error::toQString(std::string const &) const
-{
-  return
-    stringOfDate(time) + QString(": #") + QString::number(cmdId) + QString(": ") +
-    (msg.length() > 0 ? QString::fromStdString(msg) : QString("Ok"));
+QString const Error::toQString(std::string const &) const {
+  return stringOfDate(time) + QString(": #") + QString::number(cmdId) +
+         QString(": ") +
+         (msg.length() > 0 ? QString::fromStdString(msg) : QString("Ok"));
 }
 
-value Error::toOCamlValue() const
-{
+value Error::toOCamlValue() const {
   assert(!"Don't know how to convert from an Error");
 }
 
-bool Error::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Error::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Error const &o = static_cast<Error const &>(other);
   return cmdId == o.cmdId;
 }
 
-Worker::Worker(value v_) : Value(WorkerType)
-{
+Worker::Worker(value v_) : Value(WorkerType) {
   CAMLparam1(v_);
   CAMLlocal2(cons_, p_);
 
@@ -279,15 +280,16 @@ Worker::Worker(value v_) : Value(WorkerType)
   for (cons_ = Field(v_, 7); Is_block(cons_); cons_ = Field(cons_, 1)) {
     p_ = Field(cons_, 0);
     RCEntryParam *p = new RCEntryParam(
-      String_val(Field(p_, 0)), // name
-      std::shared_ptr<RamenValue const>(RamenValue::ofOCaml(Field(p_, 1))));
+        String_val(Field(p_, 0)),  // name
+        std::shared_ptr<RamenValue const>(RamenValue::ofOCaml(Field(p_, 1))));
     params.push_back(p);
   }
   // Field 8 is envvars: TODO
   role = WorkerRole::ofOCamlValue(Field(v_, 9));
   // Field 10: parents:
   if (Is_block(Field(v_, 10))) {  // Some
-    for (cons_ = Field(Field(v_, 10), 0); Is_block(cons_); cons_ = Field(cons_, 1)) {
+    for (cons_ = Field(Field(v_, 10), 0); Is_block(cons_);
+         cons_ = Field(cons_, 1)) {
       WorkerRef *p = WorkerRef::ofOCamlValue(Field(cons_, 0));
       parent_refs.push_back(p);
     }
@@ -297,8 +299,7 @@ Worker::Worker(value v_) : Value(WorkerType)
   CAMLreturn0;
 }
 
-Worker::~Worker()
-{
+Worker::~Worker() {
   if (role) delete role;
   for (auto p : parent_refs) {
     delete p;
@@ -308,68 +309,63 @@ Worker::~Worker()
   }
 }
 
-bool Worker::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Worker::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Worker const &o = static_cast<Worker const &>(other);
   return enabled == o.enabled && debug == o.debug &&
          reportPeriod == o.reportPeriod && cwd == o.cwd &&
-         workerSign == o.workerSign && binSign == o.binSign &&
-         used == o.used && role == o.role;
+         workerSign == o.workerSign && binSign == o.binSign && used == o.used &&
+         role == o.role;
 }
 
-QString const Worker::toQString(std::string const &) const
-{
+QString const Worker::toQString(std::string const &) const {
   QString s;
-  s += QString("Status: ") + (enabled ? QString("enabled") : QString("disabled"));
+  s += QString("Status: ") +
+       (enabled ? QString("enabled") : QString("disabled"));
   s += QString(", Role: ") + role->toQString();
   return s;
 }
 
-AtomicWidget *Worker::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *Worker::editorWidget(std::string const &key,
+                                   QWidget *parent) const {
   WorkerViewer *editor = new WorkerViewer(parent);
   editor->setKey(key);
   return editor;
 }
 
-Retention::Retention(value const v_) : Value(RetentionType)
-{
+Retention::Retention(value const v_) : Value(RetentionType) {
   assert(Is_block(v_));
-  assert(Tag_val(v_) == 0); // record
+  assert(Tag_val(v_) == 0);  // record
   // Field 0 is the expression for the duration
   period = Double_val(Field(v_, 1));
 }
 
-bool Retention::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Retention::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Retention const &o = static_cast<Retention const &>(other);
   return period == o.period;
 }
 
-QString const Retention::toQString(std::string const &) const
-{
-  return QString("for SOME DURATION (TODO)").
-         append(", every ").append(stringOfDuration(period));
+QString const Retention::toQString(std::string const &) const {
+  return QString("for SOME DURATION (TODO)")
+      .append(", every ")
+      .append(stringOfDuration(period));
 }
 
-value Retention::toOCamlValue() const
-{
+value Retention::toOCamlValue() const {
   assert(!"Don't know how to convert form a Retention");
 }
 
-TimeRange::TimeRange(value v_) : Value(TimeRangeType)
-{
+TimeRange::TimeRange(value v_) : Value(TimeRangeType) {
   CAMLparam1(v_);
   while (Is_block(v_)) {
     range.emplace_back(Double_val(Field(Field(v_, 0), 0)),
                        Double_val(Field(Field(v_, 0), 1)),
                        Bool_val(Field(Field(v_, 0), 2)));
     Range const &r = range[range.size() - 1];
-    if (! r.isValid()) {
-      qWarning() << "TimeRange: skipping invalid range"
-                 << stringOfDate(r.t1) << "..." << stringOfDate(r.t2);
+    if (!r.isValid()) {
+      qWarning() << "TimeRange: skipping invalid range" << stringOfDate(r.t1)
+                 << "..." << stringOfDate(r.t2);
       range.pop_back();
     }
     v_ = Field(v_, 1);
@@ -377,69 +373,60 @@ TimeRange::TimeRange(value v_) : Value(TimeRangeType)
   CAMLreturn0;
 }
 
-QString const TimeRange::toQString(std::string const &) const
-{
+QString const TimeRange::toQString(std::string const &) const {
   if (0 == range.size()) return QString("empty");
 
   double duration = 0;
   for (auto const &p : range) duration += p.t2 - p.t1;
 
   double const since = range[0].t1;
-  double const until = range[range.size()-1].t2;
-  bool const openEnded = range[range.size()-1].openEnded;
+  double const until = range[range.size() - 1].t2;
+  bool const openEnded = range[range.size() - 1].openEnded;
 
   QString s = stringOfDuration(duration);
-  s += QString(" since ")
-     + stringOfDate(since)
-     + QString(" until ")
-     + (openEnded ? QString("at least ") : QString(""))
-     + stringOfDate(until);
+  s += QString(" since ") + stringOfDate(since) + QString(" until ") +
+       (openEnded ? QString("at least ") : QString("")) + stringOfDate(until);
   return s;
 }
 
-value TimeRange::toOCamlValue() const
-{
+value TimeRange::toOCamlValue() const {
   assert(!"Don't know how to convert from a TimeRange");
 }
 
-AtomicWidget *TimeRange::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *TimeRange::editorWidget(std::string const &key,
+                                      QWidget *parent) const {
   TimeRangeViewer *editor = new TimeRangeViewer(parent);
   editor->setKey(key);
   return editor;
 }
 
-double TimeRange::length() const
-{
+double TimeRange::length() const {
   /* FIXME: Deal with overlaps: to begin with, keep it sorted. */
   double res = 0;
-  for (Range const &r : range)
-    res += r.t2 - r.t1;
+  for (Range const &r : range) res += r.t2 - r.t1;
   return res;
 }
 
-bool TimeRange::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool TimeRange::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   TimeRange const &o = static_cast<TimeRange const &>(other);
   return range == o.range;
 }
 
-Tuples::Tuple::Tuple(unsigned skipped_, unsigned char const *bytes_, size_t size) :
-  skipped(skipped_), num_words(size / 4)
-{
+Tuples::Tuple::Tuple(unsigned skipped_, unsigned char const *bytes_,
+                     size_t size)
+    : skipped(skipped_), num_words(size / 4) {
   assert(0 == (size & 3));
   assert(bytes_);
 
-  if (verbose)
-    qDebug() << "New tuple of" << num_words << "words";
+  if (verbose) qDebug() << "New tuple of" << num_words << "words";
 
   bytes = new uint32_t[num_words];
   memcpy((void *)bytes, (void *)bytes_, size);
 }
 
-RamenValue *Tuples::Tuple::unserialize(std::shared_ptr<RamenType const> type) const
-{
+RamenValue *Tuples::Tuple::unserialize(
+    std::shared_ptr<RamenType const> type) const {
   uint32_t const *start = bytes;
   uint32_t const *max = bytes + num_words;
   RamenValue *v = type->vtyp->unserialize(start, max, true);
@@ -447,56 +434,50 @@ RamenValue *Tuples::Tuple::unserialize(std::shared_ptr<RamenType const> type) co
   return v;
 }
 
-bool Tuples::Tuple::operator==(Tuples::Tuple const &o) const
-{
+bool Tuples::Tuple::operator==(Tuples::Tuple const &o) const {
   return num_words == o.num_words &&
          0 == memcmp(bytes, o.bytes, num_words * sizeof(uint32_t));
 }
 
-Tuples::Tuples(value v_) : Value(TuplesType)
-{
+Tuples::Tuples(value v_) : Value(TuplesType) {
   CAMLparam1(v_);
   CAMLlocal1(t_);
-  assert(Is_block(v_)); // supposed to be an array
+  assert(Is_block(v_));  // supposed to be an array
 
   size_t const numTuples(Wosize_val(v_));
   tuples.reserve(numTuples);
   for (size_t i = 0; i < numTuples; i++) {
     t_ = Field(v_, i);
     tuples.emplace_back(
-      // If the value is <0 it must have wrapped around in the OCaml side.
-      Int_val(Field(t_, 0)), // skipped
-      Bytes_val(Field(t_, 1)), // serialized values
-      caml_string_length(Field(t_, 1)));
+        // If the value is <0 it must have wrapped around in the OCaml side.
+        Int_val(Field(t_, 0)),    // skipped
+        Bytes_val(Field(t_, 1)),  // serialized values
+        caml_string_length(Field(t_, 1)));
   }
 
   CAMLreturn0;
 }
 
-QString const Tuples::toQString(std::string const &) const
-{
+QString const Tuples::toQString(std::string const &) const {
   return QString::number(tuples.size()) + QString(" tuples");
 }
 
-value Tuples::toOCamlValue() const
-{
+value Tuples::toOCamlValue() const {
   assert(!"Don't know how to convert from an Tuple");
 }
 
-bool Tuples::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Tuples::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Tuples const &o = static_cast<Tuples const &>(other);
   if (tuples.size() != o.tuples.size()) return false;
   for (size_t i = 0; i < tuples.size(); i++) {
-    if (! tuples[i].operator==(o.tuples[i])) return false;
+    if (!tuples[i].operator==(o.tuples[i])) return false;
   }
   return true;
 }
 
 // This _does_ alloc on the OCaml heap
-value RamenValueValue::toOCamlValue() const
-{
+value RamenValueValue::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal1(ret);
   checkInOCamlThread();
@@ -505,20 +486,18 @@ value RamenValueValue::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-AtomicWidget *RamenValueValue::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *RamenValueValue::editorWidget(std::string const &key,
+                                            QWidget *parent) const {
   return v->editorWidget(key, parent);
 }
 
-bool RamenValueValue::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool RamenValueValue::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   RamenValueValue const &o = static_cast<RamenValueValue const &>(other);
   return *v == *o.v;
 }
 
-SourceInfo::SourceInfo(value v_) : Value(SourceInfoType)
-{
+SourceInfo::SourceInfo(value v_) : Value(SourceInfoType) {
   CAMLparam1(v_);
   CAMLlocal4(md5_, cons_, param_, func_);
   assert(3 == Wosize_val(v_));
@@ -528,62 +507,57 @@ SourceInfo::SourceInfo(value v_) : Value(SourceInfoType)
   }
   v_ = Field(v_, 2);
   switch (Tag_val(v_)) {
-    case 0: // CompiledSourceInfo
-      {
-        v_ = Field(v_, 0);
-        assert(4 == Wosize_val(v_));
+    case 0:  // CompiledSourceInfo
+    {
+      v_ = Field(v_, 0);
+      assert(4 == Wosize_val(v_));
 
-        // Iter over the cons cells of the RamenTuple.params:
-        params.reserve(10);
-        for (cons_ = Field(v_, 0); Is_block(cons_); cons_ = Field(cons_, 1)) {
-          param_ = Field(cons_, 0);  // the RamenTuple.param
-          params.emplace_back(std::make_shared<CompiledProgramParam>(param_));
-        }
-        // TODO: condition (or nuke it)
-        // TODO: globals
-        // Iter over the cons cells of the function_info:
-        infos.reserve(10);
-        for (cons_ = Field(v_, 3); Is_block(cons_); cons_ = Field(cons_, 1)) {
-          func_ = Field(cons_, 0);  // the function_info
-          infos.emplace_back(std::make_shared<CompiledFunctionInfo>(func_));
-        }
-        if (verbose)
-          qDebug() << "info is a program with" << params.size() << "params"
-                   << "and" << infos.size() << "functions";
+      // Iter over the cons cells of the RamenTuple.params:
+      params.reserve(10);
+      for (cons_ = Field(v_, 0); Is_block(cons_); cons_ = Field(cons_, 1)) {
+        param_ = Field(cons_, 0);  // the RamenTuple.param
+        params.emplace_back(std::make_shared<CompiledProgramParam>(param_));
       }
-      break;
-    case 1: // FailedSourceInfo
-      {
-        v_ = Field(v_, 0);
-        assert(2 == Wosize_val(v_)); // err_msg and depends_on
-        assert(Tag_val(Field(v_, 0)) == String_tag);
-        errMsg = QString(String_val(Field(v_, 0)));
-        if (verbose)
-          qDebug() << "info is compil failure:" << errMsg;
+      // TODO: condition (or nuke it)
+      // TODO: globals
+      // Iter over the cons cells of the function_info:
+      infos.reserve(10);
+      for (cons_ = Field(v_, 3); Is_block(cons_); cons_ = Field(cons_, 1)) {
+        func_ = Field(cons_, 0);  // the function_info
+        infos.emplace_back(std::make_shared<CompiledFunctionInfo>(func_));
       }
-      break;
+      if (verbose)
+        qDebug() << "info is a program with" << params.size() << "params"
+                 << "and" << infos.size() << "functions";
+    } break;
+    case 1:  // FailedSourceInfo
+    {
+      v_ = Field(v_, 0);
+      assert(2 == Wosize_val(v_));  // err_msg and depends_on
+      assert(Tag_val(Field(v_, 0)) == String_tag);
+      errMsg = QString(String_val(Field(v_, 0)));
+      if (verbose) qDebug() << "info is compil failure:" << errMsg;
+    } break;
     default:
       assert(!"Not a detail_source_info?!");
   }
   CAMLreturn0;
 }
 
-bool SourceInfo::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool SourceInfo::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   SourceInfo const &o = static_cast<SourceInfo const &>(other);
   /* Notice: QList::operator!= does the right thing :
    * (as long as the lists are ordered, though (FIXME: use a QSet)) */
   if (md5s != o.md5s) return false;
   if (isInfo()) {
-    return o.isInfo(); // in theory, compare params
+    return o.isInfo();  // in theory, compare params
   } else {
     return !o.isInfo() && errMsg == o.errMsg;
   }
 }
 
-QString const SourceInfo::toQString(std::string const &) const
-{
+QString const SourceInfo::toQString(std::string const &) const {
   if (errMsg.length() > 0) return errMsg;
 
   QString s("");
@@ -595,16 +569,14 @@ QString const SourceInfo::toQString(std::string const &) const
   return QString("Compiled functions from " + src_ext + ": ") + s;
 }
 
-AtomicWidget *SourceInfo::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *SourceInfo::editorWidget(std::string const &key,
+                                       QWidget *parent) const {
   SourceInfoViewer *editor = new SourceInfoViewer(parent);
   editor->setKey(key);
   return editor;
 }
 
-TargetConfig::TargetConfig(value v_)
-  : Value(TargetConfigType)
-{
+TargetConfig::TargetConfig(value v_) : Value(TargetConfigType) {
   CAMLparam1(v_);
   // Iter over the cons cells:
   while (Is_block(v_)) {
@@ -615,18 +587,20 @@ TargetConfig::TargetConfig(value v_)
     assert(Is_block(rce_));
     assert(Is_block(Field(pair, 0)));
     std::shared_ptr<RCEntry> rcEntry = std::make_shared<RCEntry>(
-      String_val(Field(pair, 0)),  // pname
-      Bool_val(Field(rce_, 0)),  // enabled
-      Bool_val(Field(rce_, 1)),  // debug
-      Double_val(Field(rce_, 2)),  // report_period
-      String_val(Field(rce_, 3)),  // cwd
-      String_val(Field(rce_, 5)),  // on_site (as a string)
-      Bool_val(Field(rce_, 6)));  // automatic
-    for (value params_ = Field(rce_, 4); Is_block(params_); params_ = Field(params_, 1)) {
+        String_val(Field(pair, 0)),  // pname
+        Bool_val(Field(rce_, 0)),    // enabled
+        Bool_val(Field(rce_, 1)),    // debug
+        Double_val(Field(rce_, 2)),  // report_period
+        String_val(Field(rce_, 3)),  // cwd
+        String_val(Field(rce_, 5)),  // on_site (as a string)
+        Bool_val(Field(rce_, 6)));   // automatic
+    for (value params_ = Field(rce_, 4); Is_block(params_);
+         params_ = Field(params_, 1)) {
       value param_ = Field(params_, 0);  // the name * value
       RCEntryParam *param = new RCEntryParam(
-        String_val(Field(param_, 0)),  // name
-        std::shared_ptr<RamenValue const>(RamenValue::ofOCaml(Field(param_, 1)))); // value
+          String_val(Field(param_, 0)),  // name
+          std::shared_ptr<RamenValue const>(
+              RamenValue::ofOCaml(Field(param_, 1))));  // value
       rcEntry->addParam(param);
     }
     addEntry(rcEntry);
@@ -636,17 +610,15 @@ TargetConfig::TargetConfig(value v_)
   CAMLreturn0;
 }
 
-TargetConfig::TargetConfig(TargetConfig const &o)
-  : Value(TargetConfigType)
-{
+TargetConfig::TargetConfig(TargetConfig const &o) : Value(TargetConfigType) {
   // The entries themselves are shareable:
-  for (std::pair<std::string const, std::shared_ptr<RCEntry>> const &p : o.entries)
+  for (std::pair<std::string const, std::shared_ptr<RCEntry> > const &p :
+       o.entries)
     addEntry(p.second);
 }
 
 // This _does_ alloc on the OCaml heap
-value TargetConfig::toOCamlValue() const
-{
+value TargetConfig::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal4(ret, lst, cons, pair);
   checkInOCamlThread();
@@ -666,16 +638,15 @@ value TargetConfig::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-AtomicWidget *TargetConfig::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *TargetConfig::editorWidget(std::string const &key,
+                                         QWidget *parent) const {
   TargetConfigEditor *editor = new TargetConfigEditor(parent);
   editor->setKey(key);
   return editor;
 }
 
-bool TargetConfig::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool TargetConfig::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   TargetConfig const &o = static_cast<TargetConfig const &>(other);
 
   /* To compare the map by RCEntry values (rather than pointer equality)
@@ -694,8 +665,7 @@ bool TargetConfig::operator==(Value const &other) const
   return true;
 }
 
-QString const TargetConfig::toQString(std::string const &) const
-{
+QString const TargetConfig::toQString(std::string const &) const {
   if (0 == entries.size()) return QString("empty");
   QString s;
   for (auto const &rce : entries) {
@@ -706,32 +676,31 @@ QString const TargetConfig::toQString(std::string const &) const
   return s;
 }
 
-RuntimeStats::RuntimeStats(value v_) : Value(RuntimeStatsType)
-{
+RuntimeStats::RuntimeStats(value v_) : Value(RuntimeStatsType) {
   CAMLparam1(v_);
-# define Uint64_val(x) *(uint64_t *)Data_custom_val(x)
+#define Uint64_val(x) *(uint64_t *)Data_custom_val(x)
   assert(26 == Wosize_val(v_));
   statsTime = Double_val(Field(v_, 0));
   firstStartup = Double_val(Field(v_, 1));
   lastStartup = Double_val(Field(v_, 2));
-  minEventTime = Is_block(Field(v_, 3)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 3), 0))) :
-    std::optional<double>(),
-  maxEventTime = Is_block(Field(v_, 4)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 4), 0))) :
-    std::optional<double>(),
-  firstInput = Is_block(Field(v_, 5)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 5), 0))) :
-    std::optional<double>(),
-  lastInput = Is_block(Field(v_, 6)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 6), 0))) :
-    std::optional<double>(),
-  firstOutput = Is_block(Field(v_, 7)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 7), 0))) :
-    std::optional<double>(),
-  lastOutput = Is_block(Field(v_, 8)) ?
-    std::optional<double>(Double_val(Field(Field(v_, 8), 0))) :
-    std::optional<double>(),
+  minEventTime = Is_block(Field(v_, 3))
+                     ? std::optional<double>(Double_val(Field(Field(v_, 3), 0)))
+                     : std::optional<double>(),
+  maxEventTime = Is_block(Field(v_, 4))
+                     ? std::optional<double>(Double_val(Field(Field(v_, 4), 0)))
+                     : std::optional<double>(),
+  firstInput = Is_block(Field(v_, 5))
+                   ? std::optional<double>(Double_val(Field(Field(v_, 5), 0)))
+                   : std::optional<double>(),
+  lastInput = Is_block(Field(v_, 6))
+                  ? std::optional<double>(Double_val(Field(Field(v_, 6), 0)))
+                  : std::optional<double>(),
+  firstOutput = Is_block(Field(v_, 7))
+                    ? std::optional<double>(Double_val(Field(Field(v_, 7), 0)))
+                    : std::optional<double>(),
+  lastOutput = Is_block(Field(v_, 8))
+                   ? std::optional<double>(Double_val(Field(Field(v_, 8), 0)))
+                   : std::optional<double>(),
   totInputTuples = Uint64_val(Field(v_, 9));
   totSelectedTuples = Uint64_val(Field(v_, 10));
   totFilteredTuples = Uint64_val(Field(v_, 11));
@@ -752,8 +721,7 @@ RuntimeStats::RuntimeStats(value v_) : Value(RuntimeStatsType)
   CAMLreturn0;
 }
 
-QString const RuntimeStats::toQString(std::string const &) const
-{
+QString const RuntimeStats::toQString(std::string const &) const {
   QString s("Stats-time: ");
   s += stringOfDate(statsTime);
   if (maxEventTime)
@@ -761,15 +729,14 @@ QString const RuntimeStats::toQString(std::string const &) const
   return s;
 }
 
-AtomicWidget *RuntimeStats::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *RuntimeStats::editorWidget(std::string const &key,
+                                         QWidget *parent) const {
   RuntimeStatsViewer *editor = new RuntimeStatsViewer(parent);
   editor->setKey(key);
   return editor;
 }
 
-SiteFq::SiteFq(value v_)
-{
+SiteFq::SiteFq(value v_) {
   CAMLparam1(v_);
   assert(2 == Wosize_val(v_));
   site = String_val(Field(v_, 0));
@@ -778,9 +745,7 @@ SiteFq::SiteFq(value v_)
   CAMLreturn0;
 }
 
-Replay::Replay(value v_) :
-  Value(ReplayType)
-{
+Replay::Replay(value v_) : Value(ReplayType) {
   CAMLparam1(v_);
   assert(9 == Wosize_val(v_));
   channel = Long_val(Field(v_, 0));
@@ -792,47 +757,40 @@ Replay::Replay(value v_) :
     sources.emplace_back(SiteFq(Field(src_, 0)));
   }
   for (value src_ = Field(v_, 7); Is_block(src_); src_ = Field(src_, 1)) {
-    links.emplace_back(
-      SiteFq(Field(Field(src_, 0), 0)),
-      SiteFq(Field(Field(src_, 0), 1)));
+    links.emplace_back(SiteFq(Field(Field(src_, 0), 0)),
+                       SiteFq(Field(Field(src_, 0), 1)));
   }
   timeout_date = Double_val(Field(v_, 8));
   CAMLreturn0;
 }
 
-QString const Replay::toQString(std::string const &) const
-{
+QString const Replay::toQString(std::string const &) const {
   QString s("Channel: ");
   s += QString::number(channel);
   s += QString(", to ") + target.toQString();
   s += QString(", since ") + stringOfDate(since);
   s += QString(", until +") + stringOfDuration(until - since);
-  s += QString(", involving ") + QString::number(links.size()) + QString(" links.");
+  s += QString(", involving ") + QString::number(links.size()) +
+       QString(" links.");
   return s;
 }
 
-Replayer::Replayer(value v_) : Value(ReplayerType)
-{
+Replayer::Replayer(value v_) : Value(ReplayerType) {
   CAMLparam1(v_);
   assert(6 == Wosize_val(v_));
   // wtv, not used anywhere in the GUI for now
   CAMLreturn0;
 }
 
-Alert::Alert(value v_) : Value(AlertType)
-{
+Alert::Alert(value v_) : Value(AlertType) {
   CAMLparam1(v_);
   info = new AlertInfo(v_);
   CAMLreturn0;
 }
 
-Alert::~Alert()
-{
-  delete info;
-}
+Alert::~Alert() { delete info; }
 
-value Alert::toOCamlValue() const
-{
+value Alert::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal1(ret);
   checkInOCamlThread();
@@ -841,8 +799,7 @@ value Alert::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-QString const Alert::toQString(std::string const &) const
-{
+QString const Alert::toQString(std::string const &) const {
   if (info) {
     return info->toQString();
   } else {
@@ -850,9 +807,8 @@ QString const Alert::toQString(std::string const &) const
   }
 }
 
-bool Alert::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Alert::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Alert const &o = static_cast<Alert const &>(other);
 
   if (info == o.info) return true;
@@ -860,29 +816,31 @@ bool Alert::operator==(Value const &other) const
   return *info == *o.info;
 }
 
-static void site_fq(
-  std::string *site, std::string *program, std::string *function, value v_)
-{
+static void site_fq(std::string *site, std::string *program,
+                    std::string *function, value v_) {
   assert(2 == Wosize_val(v_));
 
   *site = String_val(Field(v_, 0));
   if (verbose)
-    qDebug() << "ReplayRequest::ReplayRequest: site=" << QString::fromStdString(*site);
+    qDebug() << "ReplayRequest::ReplayRequest: site="
+             << QString::fromStdString(*site);
   std::string const fq = String_val(Field(v_, 1));
   if (verbose)
-    qDebug() << "ReplayRequest::ReplayRequest: fq=" << QString::fromStdString(fq);
+    qDebug() << "ReplayRequest::ReplayRequest: fq="
+             << QString::fromStdString(fq);
   size_t lst = fq.rfind('/');
   *program = fq.substr(0, lst);
   if (verbose)
-    qDebug() << "ReplayRequest::ReplayRequest: program=" << QString::fromStdString(*program);
+    qDebug() << "ReplayRequest::ReplayRequest: program="
+             << QString::fromStdString(*program);
   *function = fq.substr(lst + 1);
   if (verbose)
-    qDebug() << "ReplayRequest::ReplayRequest: function=" << QString::fromStdString(*function);
+    qDebug() << "ReplayRequest::ReplayRequest: function="
+             << QString::fromStdString(*function);
 }
 
-static value alloc_site_fq(
-  std::string const &site, std::string const &program, std::string const &function)
-{
+static value alloc_site_fq(std::string const &site, std::string const &program,
+                           std::string const &function) {
   CAMLparam0();
   CAMLlocal1(ret);
   checkInOCamlThread();
@@ -893,19 +851,21 @@ static value alloc_site_fq(
   CAMLreturn(ret);
 }
 
-ReplayRequest::ReplayRequest(
-  std::string const &site_,
-  std::string const &program_,
-  std::string const &function_,
-  double since_, double until_,
-  bool explain_,
-  std::string const &respKey_)
-  : Value(ReplayRequestType),
-    site(site_), program(program_), function(function_),
-    since(since_), until(until_), explain(explain_), respKey(respKey_) {}
+ReplayRequest::ReplayRequest(std::string const &site_,
+                             std::string const &program_,
+                             std::string const &function_, double since_,
+                             double until_, bool explain_,
+                             std::string const &respKey_)
+    : Value(ReplayRequestType),
+      site(site_),
+      program(program_),
+      function(function_),
+      since(since_),
+      until(until_),
+      explain(explain_),
+      respKey(respKey_) {}
 
-ReplayRequest::ReplayRequest(value v_) : Value(ReplayRequestType)
-{
+ReplayRequest::ReplayRequest(value v_) : Value(ReplayRequestType) {
   CAMLparam1(v_);
   assert(5 == Wosize_val(v_));
   site_fq(&site, &program, &function, Field(v_, 0));
@@ -916,8 +876,7 @@ ReplayRequest::ReplayRequest(value v_) : Value(ReplayRequestType)
   CAMLreturn0;
 }
 
-value ReplayRequest::toOCamlValue() const
-{
+value ReplayRequest::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal2(ret, request);
   checkInOCamlThread();
@@ -932,26 +891,22 @@ value ReplayRequest::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-QString const ReplayRequest::toQString(std::string const &) const
-{
+QString const ReplayRequest::toQString(std::string const &) const {
   return QString::fromStdString(
-    (explain ? "{ EXPLAIN for site_fq=" : "{ site_fq=") +
-    site + ":" + program + "/" + function +
-    " resp_key=" + respKey + " }");
+      (explain ? "{ EXPLAIN for site_fq=" : "{ site_fq=") + site + ":" +
+      program + "/" + function + " resp_key=" + respKey + " }");
 }
 
-bool ReplayRequest::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool ReplayRequest::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   ReplayRequest const &o = static_cast<ReplayRequest const &>(other);
 
-  return respKey == o.respKey &&
-         since == o.since && until == o.until && explain == o.explain &&
-         site == o.site && program == o.program && function == o.function;
+  return respKey == o.respKey && since == o.since && until == o.until &&
+         explain == o.explain && site == o.site && program == o.program &&
+         function == o.function;
 }
 
-OutputSpecs::OutputSpecs(value v_) : Value(OutputSpecsType)
-{
+OutputSpecs::OutputSpecs(value v_) : Value(OutputSpecsType) {
   CAMLparam1(v_);
   /* Make it something else than a hashtbl! For instance, individual entries.
    * Would also save on locks. */
@@ -960,8 +915,7 @@ OutputSpecs::OutputSpecs(value v_) : Value(OutputSpecsType)
   CAMLreturn0;
 }
 
-DashWidgetText::DashWidgetText(value v_) : DashWidget()
-{
+DashWidgetText::DashWidgetText(value v_) : DashWidget() {
   CAMLparam1(v_);
   assert(Wosize_val(v_) == 1);
   text = QString(String_val(Field(v_, 0)));
@@ -969,13 +923,10 @@ DashWidgetText::DashWidgetText(value v_) : DashWidget()
 }
 
 DashWidgetText::DashWidgetText(QString const &text_)
-  : DashWidget(),
-    text(text_)
-{}
+    : DashWidget(), text(text_) {}
 
 // This _does_ alloc on the OCaml heap
-value DashWidgetText::toOCamlValue() const
-{
+value DashWidgetText::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal2(ret, widget);
   checkInOCamlThread();
@@ -986,38 +937,34 @@ value DashWidgetText::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-AtomicWidget *DashWidgetText::editorWidget(std::string const &key, QWidget *parent) const
-{
+AtomicWidget *DashWidgetText::editorWidget(std::string const &key,
+                                           QWidget *parent) const {
   DashboardWidgetText *editor = new DashboardWidgetText(nullptr, parent);
   editor->setKey(key);
   return editor;
 }
 
-bool DashWidgetText::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool DashWidgetText::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   /* The above just guarantee that we have a DashWidget, but not
    * that it is a DashWidgetText, thus the dynamic_cast: */
   try {
-    DashWidgetText const &o =
-      dynamic_cast<DashWidgetText const &>(other);
+    DashWidgetText const &o = dynamic_cast<DashWidgetText const &>(other);
     return text == o.text;
   } catch (std::bad_cast const &) {
     return false;
   }
 }
 
-DashWidgetChart::Source::Source(value v_)
-{
+DashWidgetChart::Source::Source(value v_) {
   CAMLparam1(v_);
   CAMLlocal1(a_);
 
   assert(3 == Wosize_val(v_));
 
   site_fq(&site, &program, &function, Field(v_, 0));
-  name = QString::fromStdString(site) + ":" +
-         QString::fromStdString(program) + "/" +
-         QString::fromStdString(function);
+  name = QString::fromStdString(site) + ":" + QString::fromStdString(program) +
+         "/" + QString::fromStdString(function);
 
   visible = Bool_val(Field(v_, 1));
 
@@ -1030,23 +977,19 @@ DashWidgetChart::Source::Source(value v_)
 }
 
 // For sorting sources
-bool operator<(
-  DashWidgetChart::Source const &a,
-  DashWidgetChart::Source const &b)
-{
+bool operator<(DashWidgetChart::Source const &a,
+               DashWidgetChart::Source const &b) {
   return a.name < b.name;
 }
 
-QDebug operator<<(QDebug debug, DashWidgetChart::Source const &v)
-{
+QDebug operator<<(QDebug debug, DashWidgetChart::Source const &v) {
   QDebugStateSaver saver(debug);
   debug.nospace() << v.name;
 
   return debug;
 }
 
-DashWidgetChart::DashWidgetChart(value v_) : DashWidget()
-{
+DashWidgetChart::DashWidgetChart(value v_) : DashWidget() {
   CAMLparam1(v_);
   CAMLlocal2(a_, b_);
   assert(Wosize_val(v_) == 4);
@@ -1064,9 +1007,9 @@ DashWidgetChart::DashWidgetChart(value v_) : DashWidget()
     b_ = Field(a_, i);  // i-th axis
     assert(Is_block(b_));
     axes.emplace_back(
-      Bool_val(Field(b_, 0)),  // left
-      Bool_val(Field(b_, 1)),  // forceZero
-      static_cast<enum Axis::Scale>(Int_val(Field(b_, 2)))  // scale
+        Bool_val(Field(b_, 0)),                               // left
+        Bool_val(Field(b_, 1)),                               // forceZero
+        static_cast<enum Axis::Scale>(Int_val(Field(b_, 2)))  // scale
     );
   }
 
@@ -1088,18 +1031,16 @@ DashWidgetChart::DashWidgetChart(value v_) : DashWidget()
   CAMLreturn0;
 }
 
-DashWidgetChart::DashWidgetChart(
-    std::string const sn, std::string const pn, std::string const fn)
-  : DashWidget(),
-    title(QString::fromStdString(pn) + "/" + QString::fromStdString(fn)),
-    type(Plot)
-{
+DashWidgetChart::DashWidgetChart(std::string const sn, std::string const pn,
+                                 std::string const fn)
+    : DashWidget(),
+      title(QString::fromStdString(pn) + "/" + QString::fromStdString(fn)),
+      type(Plot) {
   axes.emplace_back(true, false, DashWidgetChart::Axis::Linear);
   sources.emplace_back(sn, pn, fn);
 }
 
-value DashWidgetChart::Axis::toOCamlValue() const
-{
+value DashWidgetChart::Axis::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal1(ret);
   checkInOCamlThread();
@@ -1110,18 +1051,15 @@ value DashWidgetChart::Axis::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-bool DashWidgetChart::Axis::operator==(Axis const &o) const
-{
+bool DashWidgetChart::Axis::operator==(Axis const &o) const {
   return left == o.left && forceZero == o.forceZero && scale == o.scale;
 }
 
-bool DashWidgetChart::Axis::operator!=(Axis const &o) const
-{
+bool DashWidgetChart::Axis::operator!=(Axis const &o) const {
   return !(this->operator==(o));
 }
 
-DashWidgetChart::Column::Column(value v_)
-{
+DashWidgetChart::Column::Column(value v_) {
   CAMLparam1(v_);
 
   assert(6 == Wosize_val(v_));
@@ -1142,23 +1080,18 @@ DashWidgetChart::Column::Column(value v_)
   CAMLreturn0;
 }
 
-DashWidgetChart::Column::Column(
-  std::string const &program, std::string const &function,
-  std::string const &field)
-  : name(field),
-    representation(DashWidgetChart::Column::Unused),
-    axisNum(0)
-{
-  QString const fqName(
-    QString::fromStdString(program) + "/" +
-    QString::fromStdString(function) + "/" +
-    QString::fromStdString(field));
+DashWidgetChart::Column::Column(std::string const &program,
+                                std::string const &function,
+                                std::string const &field)
+    : name(field), representation(DashWidgetChart::Column::Unused), axisNum(0) {
+  QString const fqName(QString::fromStdString(program) + "/" +
+                       QString::fromStdString(function) + "/" +
+                       QString::fromStdString(field));
 
   color = colorOfString(fqName);
 }
 
-value DashWidgetChart::Column::toOCamlValue() const
-{
+value DashWidgetChart::Column::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal2(ret, a_);
   checkInOCamlThread();
@@ -1181,8 +1114,7 @@ value DashWidgetChart::Column::toOCamlValue() const
 }
 
 QString const DashWidgetChart::Column::nameOfRepresentation(
-  DashWidgetChart::Column::Representation rep)
-{
+    DashWidgetChart::Column::Representation rep) {
   switch (rep) {
     case Unused:
       return QString(QCoreApplication::translate("QMainWindow", "unused"));
@@ -1191,26 +1123,22 @@ QString const DashWidgetChart::Column::nameOfRepresentation(
     case Stacked:
       return QString(QCoreApplication::translate("QMainWindow", "stack"));
     case StackCentered:
-      return QString(QCoreApplication::translate("QMainWindow", "stack+center"));
+      return QString(
+          QCoreApplication::translate("QMainWindow", "stack+center"));
   }
   assert(false);
 }
 
-bool DashWidgetChart::Column::operator==(Column const &o) const
-{
-  return
-    name == o.name && representation == o.representation &&
-    axisNum == o.axisNum && factors == o.factors &&
-    color == o.color;
+bool DashWidgetChart::Column::operator==(Column const &o) const {
+  return name == o.name && representation == o.representation &&
+         axisNum == o.axisNum && factors == o.factors && color == o.color;
 }
 
-bool DashWidgetChart::Column::operator!=(Column const &o) const
-{
+bool DashWidgetChart::Column::operator!=(Column const &o) const {
   return !(this->operator==(o));
 }
 
-value DashWidgetChart::Source::toOCamlValue() const
-{
+value DashWidgetChart::Source::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal2(ret, a_);
   checkInOCamlThread();
@@ -1222,7 +1150,7 @@ value DashWidgetChart::Source::toOCamlValue() const
   Store_field(ret, 1, Val_bool(visible));
   // fields
   a_ = caml_alloc(fields.size(), 0);
-  size_t i { 0 };
+  size_t i{0};
   for (Column const &c : fields) {
     Store_field(a_, i++, c.toOCamlValue());
   }
@@ -1232,20 +1160,16 @@ value DashWidgetChart::Source::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-bool DashWidgetChart::Source::operator==(Source const &o) const
-{
-  return
-    site == o.site && program == o.program && function == o.function &&
-    visible == o.visible && fields == o.fields;
+bool DashWidgetChart::Source::operator==(Source const &o) const {
+  return site == o.site && program == o.program && function == o.function &&
+         visible == o.visible && fields == o.fields;
 }
 
-bool DashWidgetChart::Source::operator!=(Source const &o) const
-{
+bool DashWidgetChart::Source::operator!=(Source const &o) const {
   return !(this->operator==(o));
 }
 
-value DashWidgetChart::toOCamlValue() const
-{
+value DashWidgetChart::toOCamlValue() const {
   CAMLparam0();
   CAMLlocal3(ret, widget, a_);
   checkInOCamlThread();
@@ -1272,50 +1196,43 @@ value DashWidgetChart::toOCamlValue() const
   CAMLreturn(ret);
 }
 
-AtomicWidget *DashWidgetChart::editorWidget(
-  std::string const &key, QWidget *parent) const
-{
-  TimeChartEditWidget *editor = new TimeChartEditWidget(nullptr, nullptr, parent);
+AtomicWidget *DashWidgetChart::editorWidget(std::string const &key,
+                                            QWidget *parent) const {
+  TimeChartEditWidget *editor =
+      new TimeChartEditWidget(nullptr, nullptr, parent);
   editor->setKey(key);
   return editor;
 }
 
-bool DashWidgetChart::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool DashWidgetChart::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   /* The above just guarantee that we have a DashWidget, but not
    * that it is a DashWidgetChart, thus the dynamic_cast: */
   try {
-    DashWidgetChart const &o =
-      dynamic_cast<DashWidgetChart const &>(other);
+    DashWidgetChart const &o = dynamic_cast<DashWidgetChart const &>(other);
     return title == o.title && axes == o.axes && sources == o.sources;
   } catch (std::bad_cast const &) {
     return false;
   }
 }
 
-QString const AlertingContact::toQString(std::string const &) const
-{
+QString const AlertingContact::toQString(std::string const &) const {
   if (timeout <= 0) return QString();
   return QString(", timeout after ") + stringOfDuration(timeout);
 }
 
 AlertingContactIgnore::AlertingContactIgnore(double timeout)
-  : AlertingContact(timeout)
-{
-}
+    : AlertingContact(timeout) {}
 
-QString const AlertingContactIgnore::toQString(std::string const &key) const
-{
+QString const AlertingContactIgnore::toQString(std::string const &key) const {
   return QString("Ignore") + AlertingContact::toQString(key);
 }
 
-bool AlertingContactIgnore::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool AlertingContactIgnore::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   try {
     AlertingContactIgnore const &o =
-      dynamic_cast<AlertingContactIgnore const &>(other);
+        dynamic_cast<AlertingContactIgnore const &>(other);
     return cmd == o.cmd;
   } catch (std::bad_cast const &) {
     return false;
@@ -1323,8 +1240,7 @@ bool AlertingContactIgnore::operator==(Value const &other) const
 }
 
 AlertingContactExec::AlertingContactExec(double timeout, value v_)
-  : AlertingContact(timeout)
-{
+    : AlertingContact(timeout) {
   CAMLparam1(v_);
 
   assert(0 == Tag_val(v_));
@@ -1336,21 +1252,17 @@ AlertingContactExec::AlertingContactExec(double timeout, value v_)
 }
 
 AlertingContactExec::AlertingContactExec(double timeout, QString const &cmd_)
-  : AlertingContact(timeout), cmd(cmd_)
-{
-}
+    : AlertingContact(timeout), cmd(cmd_) {}
 
-QString const AlertingContactExec::toQString(std::string const &key) const
-{
+QString const AlertingContactExec::toQString(std::string const &key) const {
   return QString("Exec ") + cmd + AlertingContact::toQString(key);
 }
 
-bool AlertingContactExec::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool AlertingContactExec::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   try {
     AlertingContactExec const &o =
-      dynamic_cast<AlertingContactExec const &>(other);
+        dynamic_cast<AlertingContactExec const &>(other);
     return cmd == o.cmd;
   } catch (std::bad_cast const &) {
     return false;
@@ -1358,8 +1270,7 @@ bool AlertingContactExec::operator==(Value const &other) const
 }
 
 AlertingContactSysLog::AlertingContactSysLog(double timeout, value v_)
-  : AlertingContact(timeout)
-{
+    : AlertingContact(timeout) {
   CAMLparam1(v_);
 
   assert(1 == Tag_val(v_));
@@ -1370,22 +1281,19 @@ AlertingContactSysLog::AlertingContactSysLog(double timeout, value v_)
   CAMLreturn0;
 }
 
-AlertingContactSysLog::AlertingContactSysLog(double timeout, QString const &msg_)
-  : AlertingContact(timeout), msg(msg_)
-{
-}
+AlertingContactSysLog::AlertingContactSysLog(double timeout,
+                                             QString const &msg_)
+    : AlertingContact(timeout), msg(msg_) {}
 
-QString const AlertingContactSysLog::toQString(std::string const &key) const
-{
+QString const AlertingContactSysLog::toQString(std::string const &key) const {
   return QString("SysLog ") + msg + AlertingContact::toQString(key);
 }
 
-bool AlertingContactSysLog::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool AlertingContactSysLog::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   try {
     AlertingContactSysLog const &o =
-      dynamic_cast<AlertingContactSysLog const &>(other);
+        dynamic_cast<AlertingContactSysLog const &>(other);
     return msg == o.msg;
   } catch (std::bad_cast const &) {
     return false;
@@ -1393,8 +1301,7 @@ bool AlertingContactSysLog::operator==(Value const &other) const
 }
 
 AlertingContactSqlite::AlertingContactSqlite(double timeout, value v_)
-  : AlertingContact(timeout)
-{
+    : AlertingContact(timeout) {
   CAMLparam1(v_);
 
   assert(2 == Tag_val(v_));
@@ -1407,25 +1314,21 @@ AlertingContactSqlite::AlertingContactSqlite(double timeout, value v_)
   CAMLreturn0;
 }
 
-AlertingContactSqlite::AlertingContactSqlite(
-  double timeout,
-  QString const &file_, QString const &insert_, QString const &create_)
-  : AlertingContact(timeout),
-    file(file_), insert(insert_), create(create_)
-{
-}
+AlertingContactSqlite::AlertingContactSqlite(double timeout,
+                                             QString const &file_,
+                                             QString const &insert_,
+                                             QString const &create_)
+    : AlertingContact(timeout), file(file_), insert(insert_), create(create_) {}
 
-QString const AlertingContactSqlite::toQString(std::string const &key) const
-{
+QString const AlertingContactSqlite::toQString(std::string const &key) const {
   return QString("SQlite file:") + file + AlertingContact::toQString(key);
 }
 
-bool AlertingContactSqlite::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool AlertingContactSqlite::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   try {
     AlertingContactSqlite const &o =
-      dynamic_cast<AlertingContactSqlite const &>(other);
+        dynamic_cast<AlertingContactSqlite const &>(other);
     return file == o.file && insert == o.insert && create == o.create;
   } catch (std::bad_cast const &) {
     return false;
@@ -1433,8 +1336,7 @@ bool AlertingContactSqlite::operator==(Value const &other) const
 }
 
 AlertingContactKafka::AlertingContactKafka(double timeout, value v_)
-  : AlertingContact(timeout)
-{
+    : AlertingContact(timeout) {
   CAMLparam1(v_);
   CAMLlocal2(cons_, p_);
 
@@ -1443,9 +1345,7 @@ AlertingContactKafka::AlertingContactKafka(double timeout, value v_)
 
   for (cons_ = Field(v_, 0); Is_block(cons_); cons_ = Field(cons_, 1)) {
     p_ = Field(cons_, 0);
-    options.insert(QPair(
-        String_val(Field(p_, 0)),
-        String_val(Field(p_, 1))));
+    options.insert(QPair(String_val(Field(p_, 0)), String_val(Field(p_, 1))));
   }
 
   topic = String_val(Field(v_, 1));
@@ -1456,25 +1356,23 @@ AlertingContactKafka::AlertingContactKafka(double timeout, value v_)
 }
 
 AlertingContactKafka::AlertingContactKafka(
-  double timeout,
-  QSet<QPair<QString, QString>> const &options_,
-  QString const &topic_, unsigned partition_, QString const &text_)
-  : AlertingContact(timeout),
-    options(options_), topic(topic_), partition(partition_), text(text_)
-{
-}
+    double timeout, QSet<QPair<QString, QString> > const &options_,
+    QString const &topic_, unsigned partition_, QString const &text_)
+    : AlertingContact(timeout),
+      options(options_),
+      topic(topic_),
+      partition(partition_),
+      text(text_) {}
 
-QString const AlertingContactKafka::toQString(std::string const &key) const
-{
+QString const AlertingContactKafka::toQString(std::string const &key) const {
   return QString("Kafka topic:") + topic + AlertingContact::toQString(key);
 }
 
-bool AlertingContactKafka::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool AlertingContactKafka::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   try {
     AlertingContactKafka const &o =
-      dynamic_cast<AlertingContactKafka const &>(other);
+        dynamic_cast<AlertingContactKafka const &>(other);
     return topic == o.topic && partition == o.partition && text == o.text &&
            options == o.options;
   } catch (std::bad_cast const &) {
@@ -1482,9 +1380,7 @@ bool AlertingContactKafka::operator==(Value const &other) const
   }
 }
 
-Notification::Notification(value v_)
-  : Value(NotificationType)
-{
+Notification::Notification(value v_) : Value(NotificationType) {
   CAMLparam1(v_);
   CAMLlocal2(cons_, p_);
 
@@ -1494,10 +1390,9 @@ Notification::Notification(value v_)
   worker = String_val(Field(v_, 1));
   test = Bool_val(Field(v_, 2));
   sentTime = Double_val(Field(v_, 3));
-  eventTime =
-    Is_block(Field(v_, 4)) ?  // Some...
-      std::optional<double>(Double_val(Field(Field(v_, 4), 0))) :
-      std::nullopt;
+  eventTime = Is_block(Field(v_, 4)) ?  // Some...
+                  std::optional<double>(Double_val(Field(Field(v_, 4), 0)))
+                                     : std::nullopt;
   name = String_val(Field(v_, 5));
   firing = Bool_val(Field(v_, 6));
   certainty = Double_val(Field(v_, 7));
@@ -1506,52 +1401,41 @@ Notification::Notification(value v_)
 
   for (cons_ = Field(v_, 10); Is_block(cons_); cons_ = Field(cons_, 1)) {
     p_ = Field(cons_, 0);
-    parameters.insert(QPair(
-        String_val(Field(p_, 0)),
-        String_val(Field(p_, 1))));
+    parameters.insert(
+        QPair(String_val(Field(p_, 0)), String_val(Field(p_, 1))));
   }
 
   CAMLreturn0;
 }
 
-QString const Notification::toQString(std::string const &) const
-{
-  return QString("site:") + site +
-         QString(", worker:") + worker +
-         QString(", test:") + stringOfBool(test) +
-         QString(", name:") + name +
+QString const Notification::toQString(std::string const &) const {
+  return QString("site:") + site + QString(", worker:") + worker +
+         QString(", test:") + stringOfBool(test) + QString(", name:") + name +
          QString(", firing:") + stringOfBool(firing);
 }
 
-bool Notification::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Notification::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Notification const &o = static_cast<Notification const &>(other);
   return site == o.site && worker == o.worker && test == o.test &&
-         sentTime == o.sentTime && eventTime == o.eventTime &&
-         name == o.name && firing == o.firing && certainty == o.certainty &&
+         sentTime == o.sentTime && eventTime == o.eventTime && name == o.name &&
+         firing == o.firing && certainty == o.certainty &&
          debounce == o.debounce && timeout == o.timeout &&
          parameters == o.parameters;
 }
 
-DeliveryStatus::DeliveryStatus(value v_)
-  : Value(DeliveryStatusType)
-{
-  assert(! Is_block(v_));
+DeliveryStatus::DeliveryStatus(value v_) : Value(DeliveryStatusType) {
+  assert(!Is_block(v_));
 
-  int s {Int_val(v_)};
+  int s{Int_val(v_)};
   assert(s >= (int)StartToBeSent && s <= (int)StopSent);
   status = static_cast<DeliveryStatus::Status>(s);
 }
 
 DeliveryStatus::DeliveryStatus(enum Status status_)
-  : Value(DeliveryStatusType),
-    status(status_)
-{
-}
+    : Value(DeliveryStatusType), status(status_) {}
 
-QString const DeliveryStatus::toQString(std::string const &) const
-{
+QString const DeliveryStatus::toQString(std::string const &) const {
   switch (status) {
     case StartToBeSent:
       return QString("StartToBeSent");
@@ -1571,15 +1455,13 @@ QString const DeliveryStatus::toQString(std::string const &) const
   assert(!"DeliveryStatus: invalid status");
 }
 
-bool DeliveryStatus::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool DeliveryStatus::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   DeliveryStatus const &o = static_cast<DeliveryStatus const &>(other);
   return status == o.status;
 }
 
-static QString stringOfNotificationOutcome(value v_)
-{
+static QString stringOfNotificationOutcome(value v_) {
   CAMLparam1(v_);
 
   assert(!Is_block(v_));
@@ -1606,8 +1488,7 @@ static QString stringOfNotificationOutcome(value v_)
   CAMLreturnT(QString, ret);
 }
 
-static QString stringOfStopSource(value v_)
-{
+static QString stringOfStopSource(value v_) {
   CAMLparam1(v_);
 
   QString ret;
@@ -1639,9 +1520,7 @@ static QString stringOfStopSource(value v_)
   CAMLreturnT(QString, ret);
 }
 
-IncidentLog::IncidentLog(value v_)
-  : Value(IncidentLogType)
-{
+IncidentLog::IncidentLog(value v_) : Value(IncidentLogType) {
   CAMLparam1(v_);
   /* All variants are blocks: */
   assert(Is_block(v_));
@@ -1674,8 +1553,7 @@ IncidentLog::IncidentLog(value v_)
       tickKind = IncidentLog::TickAck;
       break;
     case IncidentLog::TagStop:
-      text = QString("Stopped incident (") +
-             stringOfStopSource(Field(v_, 0)) +
+      text = QString("Stopped incident (") + stringOfStopSource(Field(v_, 0)) +
              QString(')');
       tickKind = IncidentLog::TickStop;
       break;
@@ -1689,10 +1567,9 @@ IncidentLog::IncidentLog(value v_)
   CAMLreturn0;
 }
 
-QString const IncidentLog::toQString(std::string const &key) const
-{
+QString const IncidentLog::toQString(std::string const &key) const {
   double time;
-  if (! parseLogKey(key, nullptr, &time)) {
+  if (!parseLogKey(key, nullptr, &time)) {
     qCritical() << "Cannot parse IncidentLog key "
                 << QString::fromStdString(key);
     return text;
@@ -1701,33 +1578,28 @@ QString const IncidentLog::toQString(std::string const &key) const
   return stringOfDate(time) + ": " + text;
 }
 
-bool IncidentLog::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool IncidentLog::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   IncidentLog const &o = static_cast<IncidentLog const &>(other);
   (void)o;
   return true;
 }
 
-void IncidentLog::paintTick(
-  QPainter *painter, qreal width, qreal x, qreal y0, qreal y1) const
-{
-  qreal const tickWidth { 14 };
-  qreal const x0 { x - 0.5 * tickWidth };
-  qreal const x1 { x + 0.5 * tickWidth };
-  qreal const y { 0.5 * (y0 + y1) };
-  qreal const h { y1 - y0 };
+void IncidentLog::paintTick(QPainter *painter, qreal width, qreal x, qreal y0,
+                            qreal y1) const {
+  qreal const tickWidth{14};
+  qreal const x0{x - 0.5 * tickWidth};
+  qreal const x1{x + 0.5 * tickWidth};
+  qreal const y{0.5 * (y0 + y1)};
+  qreal const h{y1 - y0};
   if (x0 > width || x1 < 0) return;
-  QPointF const rightTriangle[3] {
-    QPointF(x, y0),
-    QPointF(x1, y),
-    QPointF(x, y1)
-  };
+  QPointF const rightTriangle[3]{QPointF(x, y0), QPointF(x1, y),
+                                 QPointF(x, y1)};
   // Same color than BinaryHeatLine blocks
-  QColor tickColor { 25, 25, 25 };
+  QColor tickColor{25, 25, 25};
   painter->setPen(Qt::NoPen);
   painter->setPen(Qt::NoBrush);
-  QPen thick { tickColor };
+  QPen thick{tickColor};
   thick.setWidth(2);
   painter->setRenderHint(QPainter::Antialiasing, true);
 
@@ -1753,10 +1625,10 @@ void IncidentLog::paintTick(
       painter->drawLine(x, y0, x, y1);
       painter->setPen(tickColor);
       {
-        qreal dr { 0 };
-        for (int count = 0; count < 3 && dr > h; count ++, dr += 4) {
-          QRectF const sq { x0 + dr, y0 + dr, h - 2*dr, h - 2*dr };
-          painter->drawArc(sq, -45*16, 45*16);
+        qreal dr{0};
+        for (int count = 0; count < 3 && dr > h; count++, dr += 4) {
+          QRectF const sq{x0 + dr, y0 + dr, h - 2 * dr, h - 2 * dr};
+          painter->drawArc(sq, -45 * 16, 45 * 16);
         }
       }
       break;
@@ -1765,25 +1637,20 @@ void IncidentLog::paintTick(
       painter->drawLine(x, y0, x, y1);
       painter->setPen(tickColor);
       {
-        qreal dr { 0 };
+        qreal dr{0};
         painter->setPen(tickColor);
-        for (int count = 0; count < 3 && dr > h; count ++, dr += 4) {
-          QRectF const sq { x0 + dr, y0 + dr, h - 2*dr, h - 2*dr };
-          painter->drawArc(sq, 135*16, 225*16);
+        for (int count = 0; count < 3 && dr > h; count++, dr += 4) {
+          QRectF const sq{x0 + dr, y0 + dr, h - 2 * dr, h - 2 * dr};
+          painter->drawArc(sq, 135 * 16, 225 * 16);
         }
       }
       break;
-    case TickStop:
-      {
-        QPointF const leftTriangle[3] {
-          QPointF(x, y0),
-          QPointF(x, y1),
-          QPointF(x0, y)
-        };
-        painter->setBrush(tickColor);
-        painter->drawConvexPolygon(leftTriangle, SIZEOF_ARRAY(leftTriangle));
-      }
-      break;
+    case TickStop: {
+      QPointF const leftTriangle[3]{QPointF(x, y0), QPointF(x, y1),
+                                    QPointF(x0, y)};
+      painter->setBrush(tickColor);
+      painter->drawConvexPolygon(leftTriangle, SIZEOF_ARRAY(leftTriangle));
+    } break;
     case TickCancel:
       painter->setPen(thick);
       painter->drawLine(x0, y0, x1, y1);
@@ -1792,19 +1659,16 @@ void IncidentLog::paintTick(
   }
 }
 
-Inhibition::Inhibition(value v_)
-  : Value(InhibitionType)
-{
+Inhibition::Inhibition(value v_) : Value(InhibitionType) {
   // TODO
   (void)v_;
 }
 
-bool Inhibition::operator==(Value const &other) const
-{
-  if (! Value::operator==(other)) return false;
+bool Inhibition::operator==(Value const &other) const {
+  if (!Value::operator==(other)) return false;
   Inhibition const &o = static_cast<Inhibition const &>(other);
   (void)o;
   return true;
 }
 
-};
+};  // namespace conf

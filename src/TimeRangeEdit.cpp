@@ -1,3 +1,5 @@
+#include "TimeRangeEdit.h"
+
 #include <QButtonGroup>
 #include <QDateTimeEdit>
 #include <QDebug>
@@ -10,37 +12,35 @@
 #include <QRadioButton>
 #include <QStackedLayout>
 #include <QVBoxLayout>
-#include "TimeRangeEdit.h"
 
-static bool const verbose { false };
+static bool const verbose{false};
 
-TimeRangeEdit::TimeRangeEdit(QWidget *parent) :
-  QPushButton(tr("Last XXX seconds (TODO)"), parent),
-  range(true, -600., 0.)
-{
+TimeRangeEdit::TimeRangeEdit(QWidget *parent)
+    : QPushButton(tr("Last XXX seconds (TODO)"), parent),
+      range(true, -600., 0.) {
   selectLastSeconds = new QRadioButton(tr("last…"));
   selectLastSeconds->setChecked(true);
   selectFixedRange = new QRadioButton(tr("range…"));
-  QButtonGroup *radioGroup { new QButtonGroup() };
+  QButtonGroup *radioGroup{new QButtonGroup()};
   radioGroup->addButton(selectLastSeconds);
   radioGroup->addButton(selectFixedRange);
 
   // TODO: parse time units
   lastSeconds = new QLineEdit;
-  QDateTime const now { QDateTime::currentDateTime() };
+  QDateTime const now{QDateTime::currentDateTime()};
   beginRange = new QDateTimeEdit(now.addSecs(-600));
   beginRange->setCalendarPopup(true);
   endRange = new QDateTimeEdit(now);
   endRange->setCalendarPopup(true);
   buttonBox =
-    new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Apply);
+      new QDialogButtonBox(QDialogButtonBox::Cancel | QDialogButtonBox::Apply);
 
   // Layout of the pop-up:
-  QVBoxLayout *outerVBox { new QVBoxLayout };
+  QVBoxLayout *outerVBox{new QVBoxLayout};
   {
-    QHBoxLayout *outerHBox { new QHBoxLayout };
+    QHBoxLayout *outerHBox{new QHBoxLayout};
     {
-      QVBoxLayout *radioBox { new QVBoxLayout };
+      QVBoxLayout *radioBox{new QVBoxLayout};
       radioBox->addWidget(selectLastSeconds);
       radioBox->addWidget(selectFixedRange);
       outerHBox->addLayout(radioBox);
@@ -49,24 +49,24 @@ TimeRangeEdit::TimeRangeEdit(QWidget *parent) :
     {
       stackedLayout = new QStackedLayout;
       {
-        QVBoxLayout *relativeVLayout { new QVBoxLayout };
+        QVBoxLayout *relativeVLayout{new QVBoxLayout};
         {
-          QHBoxLayout *relativeHLayout { new QHBoxLayout };
+          QHBoxLayout *relativeHLayout{new QHBoxLayout};
           relativeHLayout->addWidget(lastSeconds);
           relativeHLayout->addWidget(new QLabel(tr("seconds")));
           relativeVLayout->addLayout(relativeHLayout);
         }
         relativeVLayout->addStretch();
-        QWidget *relativeWidget { new QWidget };
+        QWidget *relativeWidget{new QWidget};
         relativeWidget->setLayout(relativeVLayout);
         stackedLayout->addWidget(relativeWidget);
       }
 
       {
-        QFormLayout *absoluteLayout { new QFormLayout };
+        QFormLayout *absoluteLayout{new QFormLayout};
         absoluteLayout->addRow(tr("Since:"), beginRange);
         absoluteLayout->addRow(tr("Until:"), endRange);
-        QWidget *absoluteWidget { new QWidget };
+        QWidget *absoluteWidget{new QWidget};
         absoluteWidget->setLayout(absoluteLayout);
         stackedLayout->addWidget(absoluteWidget);
       }
@@ -75,7 +75,7 @@ TimeRangeEdit::TimeRangeEdit(QWidget *parent) :
     outerVBox->addLayout(outerHBox);
   }
   {
-    QHBoxLayout *buttonBoxLayout { new QHBoxLayout };
+    QHBoxLayout *buttonBoxLayout{new QHBoxLayout};
     buttonBoxLayout->addStretch();
     buttonBoxLayout->addWidget(buttonBox);
     outerVBox->addLayout(buttonBoxLayout);
@@ -88,33 +88,30 @@ TimeRangeEdit::TimeRangeEdit(QWidget *parent) :
   updateLabel();
 
   /* Let the popup open when the user clicks on this button: */
-  connect(this, &QPushButton::clicked,
-          this, &TimeRangeEdit::wantOpen);
+  connect(this, &QPushButton::clicked, this, &TimeRangeEdit::wantOpen);
 
   /* When user submits the form, then Recompute this button text, emit
    * valueChanged and close the popup.
    * Note: "Apply" button does not trigger the `accepted` signal so we
    * use the generic `clicked` and will check what button this is about. */
-  connect(buttonBox, &QDialogButtonBox::clicked,
-          this, &TimeRangeEdit::wantSubmit);
-  connect(buttonBox, &QDialogButtonBox::rejected,
-          this, &TimeRangeEdit::wantCancel);
+  connect(buttonBox, &QDialogButtonBox::clicked, this,
+          &TimeRangeEdit::wantSubmit);
+  connect(buttonBox, &QDialogButtonBox::rejected, this,
+          &TimeRangeEdit::wantCancel);
 
   /* When the user toggle the radio button to select which time selector
    * is meant to be used, then disable the other one: */
-  connect(selectLastSeconds, &QRadioButton::toggled,
-          this, &TimeRangeEdit::updateEnabled);
+  connect(selectLastSeconds, &QRadioButton::toggled, this,
+          &TimeRangeEdit::updateEnabled);
 }
 
-void TimeRangeEdit::updateEnabled()
-{
-  bool const relativeTimes { selectLastSeconds->isChecked() };
+void TimeRangeEdit::updateEnabled() {
+  bool const relativeTimes{selectLastSeconds->isChecked()};
   stackedLayout->setCurrentIndex(relativeTimes ? 0 : 1);
 }
 
-void TimeRangeEdit::offset(double dt)
-{
-  if (! range.relative) {
+void TimeRangeEdit::offset(double dt) {
+  if (!range.relative) {
     range.since += dt;
     range.until += dt;
   }
@@ -122,10 +119,8 @@ void TimeRangeEdit::offset(double dt)
   emit valueChanged(range);
 }
 
-void TimeRangeEdit::wantOpen()
-{
-  if (verbose)
-    qDebug() << "TimeRangeEdit::wantOpen()";
+void TimeRangeEdit::wantOpen() {
+  if (verbose) qDebug() << "TimeRangeEdit::wantOpen()";
 
   if (range.relative) {
     /* Relative times: */
@@ -146,27 +141,22 @@ void TimeRangeEdit::wantOpen()
   popup->show();
 }
 
-void TimeRangeEdit::updateLabel()
-{
-  setText(range.toQString());
-}
+void TimeRangeEdit::updateLabel() { setText(range.toQString()); }
 
-void TimeRangeEdit::wantSubmit(QAbstractButton *button)
-{
+void TimeRangeEdit::wantSubmit(QAbstractButton *button) {
   if (button != buttonBox->button(QDialogButtonBox::Apply)) return;
 
-  if (verbose)
-    qDebug() << "TimeRangeEdit::wantSubmit()";
+  if (verbose) qDebug() << "TimeRangeEdit::wantSubmit()";
 
   range.relative = selectLastSeconds->isChecked();
 
   // Save current values and reset button text:
   if (range.relative) {
-    range.since = - lastSeconds->text().toDouble();
+    range.since = -lastSeconds->text().toDouble();
     range.until = 0.;
   } else {
-    qint64 const t1 { beginRange->dateTime().toSecsSinceEpoch() };
-    qint64 const t2 { endRange->dateTime().toSecsSinceEpoch() };
+    qint64 const t1{beginRange->dateTime().toSecsSinceEpoch()};
+    qint64 const t2{endRange->dateTime().toSecsSinceEpoch()};
     range.since = std::min(t1, t2);
     range.until = std::max(t1, t2);
   }
@@ -181,10 +171,8 @@ void TimeRangeEdit::wantSubmit(QAbstractButton *button)
   popup->hide();
 }
 
-void TimeRangeEdit::wantCancel()
-{
-  if (verbose)
-    qDebug() << "TimeRangeEdit::wantCancel()";
+void TimeRangeEdit::wantCancel() {
+  if (verbose) qDebug() << "TimeRangeEdit::wantCancel()";
 
   popup->hide();
 }

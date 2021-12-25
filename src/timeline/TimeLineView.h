@@ -17,7 +17,7 @@ class TimeLineGroup;
 class TimeLineView : public QWidget {
   Q_OBJECT
 
-  GraphModel *graphModel; // Needed for direct access to the GraphItems
+  GraphModel *graphModel;  // Needed for direct access to the GraphItems
   QFormLayout *formLayout;
   /* Copy of the labels in plain text form
    * (because of: https://github.com/rixed/ramen/issues/1094) */
@@ -25,14 +25,14 @@ class TimeLineView : public QWidget {
 
   TimeLineGroup *timeLineGroup;
 
-public:
+ public:
   TimeLineView(GraphModel *, QWidget *parent = nullptr);
 
   void highlightRange(QString const &label, QPair<qreal, qreal> const range);
 
   void resetHighlights();
 
-protected slots:
+ protected slots:
   void updateOrCreateTimeLine(FunctionItem const *);
   void removeTimeLine(FunctionItem const *);
 };

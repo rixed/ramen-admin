@@ -7,19 +7,17 @@
 
 class QTableWidget;
 
-class TimeRangeViewer : public AtomicWidget
-{
+class TimeRangeViewer : public AtomicWidget {
   Q_OBJECT
 
   QTableWidget *table;
 
-public:
+ public:
   TimeRangeViewer(QWidget *parent = nullptr);
   void setEnabled(bool) {}
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

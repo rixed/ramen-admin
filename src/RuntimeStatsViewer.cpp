@@ -1,21 +1,20 @@
-#include <QtGlobal>
+#include "RuntimeStatsViewer.h"
+
 #include <QDebug>
 #include <QFormLayout>
 #include <QLabel>
-#include "confValue.h"
-#include "RuntimeStatsViewer.h"
+#include <QtGlobal>
 
-RuntimeStatsViewer::RuntimeStatsViewer(QWidget *parent) :
-  AtomicWidget(parent)
-{
+#include "confValue.h"
+
+RuntimeStatsViewer::RuntimeStatsViewer(QWidget *parent) : AtomicWidget(parent) {
   QFormLayout *layout = new QFormLayout;
-# define ADD_LABEL(title, var) \
-    do { \
-      var = new QLabel; \
-      layout->addRow(tr(title ":"), var); \
-    } while (0);
-# define ADD_LABEL_UNIT(title, unit, var) \
-    ADD_LABEL(title " (" unit ")", var)
+#define ADD_LABEL(title, var)           \
+  do {                                  \
+    var = new QLabel;                   \
+    layout->addRow(tr(title ":"), var); \
+  } while (0);
+#define ADD_LABEL_UNIT(title, unit, var) ADD_LABEL(title " (" unit ")", var)
   ADD_LABEL("Stats Time", statsTime);
   ADD_LABEL("First Startup", firstStartup);
   ADD_LABEL("Last Startup", lastStartup);
@@ -48,34 +47,33 @@ RuntimeStatsViewer::RuntimeStatsViewer(QWidget *parent) :
   relayoutWidget(w);
 }
 
-bool RuntimeStatsViewer::setValue(
-  std::string const &, std::shared_ptr<conf::Value const> v)
-{
+bool RuntimeStatsViewer::setValue(std::string const &,
+                                  std::shared_ptr<conf::Value const> v) {
   std::shared_ptr<conf::RuntimeStats const> s =
-    std::dynamic_pointer_cast<conf::RuntimeStats const>(v);
+      std::dynamic_pointer_cast<conf::RuntimeStats const>(v);
   if (s) {
-#   define SET_DATE(var) var->setText(stringOfDate(s->var))
+#define SET_DATE(var) var->setText(stringOfDate(s->var))
     SET_DATE(statsTime);
     SET_DATE(firstStartup);
     SET_DATE(lastStartup);
-#   define SET_OPT_DATE(var) \
-      var->setText(s->var.has_value() ? stringOfDate(*s->var) : "n.a.")
+#define SET_OPT_DATE(var) \
+  var->setText(s->var.has_value() ? stringOfDate(*s->var) : "n.a.")
     SET_OPT_DATE(minEventTime);
     SET_OPT_DATE(maxEventTime);
     SET_OPT_DATE(firstInput);
     SET_OPT_DATE(lastInput);
     SET_OPT_DATE(firstOutput);
     SET_OPT_DATE(lastOutput);
-#   define SET_NUM(var) var->setText(QString::number(s->var))
+#define SET_NUM(var) var->setText(QString::number(s->var))
     SET_NUM(totInputTuples);
     SET_NUM(totSelectedTuples);
     SET_NUM(totFilteredTuples);
     SET_NUM(totOutputTuples);
     if (s->totFullBytesSamples > 0) {
       double avg = (double)s->totFullBytes / s->totFullBytesSamples;
-      avgFullBytes->setText(
-        QString::number(avg) + QString(" (from ") +
-        QString::number(s->totFullBytesSamples) + QString(" samples)"));
+      avgFullBytes->setText(QString::number(avg) + QString(" (from ") +
+                            QString::number(s->totFullBytesSamples) +
+                            QString(" samples)"));
     } else {
       avgFullBytes->setText("no samples");
     }

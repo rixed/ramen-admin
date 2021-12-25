@@ -7,21 +7,20 @@ class QComboBox;
 class QDialogButtonBox;
 class QLineEdit;
 
-class NewSourceDialog : public QDialog
-{
+class NewSourceDialog : public QDialog {
   Q_OBJECT
 
   QDialogButtonBox *buttonBox;
   QLineEdit *nameEdit;
   CodeEdit *codeEdit;
 
-public:
+ public:
   NewSourceDialog(QWidget *parent = nullptr);
 
-public slots:
+ public slots:
   void clear();
 
-protected slots:
+ protected slots:
   void checkValidity();
   void createSource();
 };

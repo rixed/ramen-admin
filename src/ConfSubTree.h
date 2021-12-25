@@ -1,19 +1,18 @@
 #ifndef CONFSUBTREE_H_200320
 #define CONFSUBTREE_H_200320
 /* See ConfTreeModel.h */
-#include <vector>
 #include <QString>
+#include <vector>
 
-class ConfSubTree
-{
+class ConfSubTree {
   std::vector<ConfSubTree *> children;
 
-public:
+ public:
   /* Cannot be const because SubTrees are constructed inplace, but
    * that's the idea: */
   QString name;
 
-  ConfSubTree *parent; // nullptr only for root
+  ConfSubTree *parent;  // nullptr only for root
 
   /* Terminals have non empty strings attached to them, that's the value of
    * the data UserRole value (whereas the DisplayRole is the above name) */
@@ -41,7 +40,7 @@ public:
 
   // Useful in gdb:
   void __attribute__((noinline)) __attribute__((used))
-    dump_c(int const indent = 0) const;
+  dump_c(int const indent = 0) const;
 
   ConfSubTree *insertAt(int pos, QString const &name, QString const &termValue);
 

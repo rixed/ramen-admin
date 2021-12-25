@@ -8,11 +8,10 @@
 
 class DashboardTreeModel;
 
-class DashboardSelector : public TreeComboBox
-{
+class DashboardSelector : public TreeComboBox {
   Q_OBJECT
 
-public:
+ public:
   DashboardSelector(DashboardTreeModel *model, QWidget *parent = nullptr);
 
   // Returns the dashboard name:

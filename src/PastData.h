@@ -18,27 +18,30 @@
  * response is needed; ideally controlled solely from the client side. This is
  * still TODO.
  */
+#include <QObject>
 #include <cmath>
 #include <functional>
 #include <list>
 #include <memory>
 #include <mutex>
 #include <utility>
-#include <QObject>
 
 #include "ReplayRequest.h"
 
 namespace dessser {
-  namespace gen {
-    namespace raql_type { struct t; }
-    namespace raql_value { struct t; }
-  }
+namespace gen {
+namespace raql_type {
+struct t;
 }
+namespace raql_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 struct EventTime;
 
-class PastData : public QObject
-{
+class PastData : public QObject {
   Q_OBJECT
 
   std::string const site, program, function;
@@ -51,19 +54,17 @@ class PastData : public QObject
   /* Request for past data that have to wait, in no particular order.
    * Maybe ordering these according to start would provide more merging
    * opportunities? */
-  std::list<std::pair<double, double>> postponedRequests;
+  std::list<std::pair<double, double> > postponedRequests;
 
   // For debugging:
   void check() const;
 
-  bool merge(
-    ReplayRequest &, ReplayRequest *, double, double,
-    std::lock_guard<std::mutex> const &);
+  bool merge(ReplayRequest &, ReplayRequest *, double, double,
+             std::lock_guard<std::mutex> const &);
 
-  bool insert(
-    std::list<ReplayRequest>::iterator, double, double, bool);
+  bool insert(std::list<ReplayRequest>::iterator, double, double, bool);
 
-public:
+ public:
   /* List of queries (pending or past!) for this worker, ordered by time.
    * This is where the data is eventually stored. */
   std::list<ReplayRequest> replayRequests;
@@ -77,8 +78,7 @@ public:
   PastData(std::string const &site, std::string const &program,
            std::string const &function,
            std::shared_ptr<dessser::gen::raql_type::t const>,
-           std::shared_ptr<EventTime const>,
-           double maxTime_ = NAN,
+           std::shared_ptr<EventTime const>, double maxTime_ = NAN,
            QObject *parent = nullptr);
 
   /* Returns true if the query can either be sent or postponed: */
@@ -87,13 +87,14 @@ public:
   /* If onePast, also include the points before/after the requested time
    * range: */
   void iterTuples(
-    double since, double until, bool onePast,
-    std::function<void(double, std::shared_ptr<dessser::gen::raql_value::t const>)>);
+      double since, double until, bool onePast,
+      std::function<void(double,
+                         std::shared_ptr<dessser::gen::raql_value::t const>)>);
 
-protected slots:
+ protected slots:
   void replayEnded();
 
-signals:
+ signals:
   void tupleReceived();
 };
 

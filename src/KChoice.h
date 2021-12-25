@@ -3,32 +3,31 @@
 #include <memory>
 #include <utility>
 #include <vector>
+
 #include "AtomicWidget.h"
 
 class QRadioButton;
 class QWidget;
 
-class KChoice : public AtomicWidget
-{
+class KChoice : public AtomicWidget {
   Q_OBJECT
 
-  std::vector<
-    std::pair<QRadioButton *, std::shared_ptr<dessser::gen::sync_value::t const>>
-  > choices;
+  std::vector<std::pair<QRadioButton *,
+                        std::shared_ptr<dessser::gen::sync_value::t const> > >
+      choices;
 
-public:
+ public:
   KChoice(
-    std::vector<
-      std::pair<QString const, std::shared_ptr<dessser::gen::sync_value::t const>>
-    > labels,
-    QWidget *parent = nullptr);
+      std::vector<std::pair<
+          QString const, std::shared_ptr<dessser::gen::sync_value::t const> > >
+          labels,
+      QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

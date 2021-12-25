@@ -11,8 +11,7 @@
 #include <QString>
 #include <QVector>
 
-class LogModel : public QAbstractListModel
-{
+class LogModel : public QAbstractListModel {
   Q_OBJECT
 
   struct LogEntry {
@@ -23,25 +22,25 @@ class LogModel : public QAbstractListModel
 
   QVector<LogEntry> logs;
   int first;
-  bool removingFirst; // Set when in the middle of teh removal of the first line
+  bool
+      removingFirst;  // Set when in the middle of teh removal of the first line
 
-public:
+ public:
   LogModel(QObject *parent = nullptr);
 
   QVariant data(const QModelIndex &, int = Qt::DisplayRole) const override;
 
-  QVariant headerData(
-    int section, Qt::Orientation, int = Qt::DisplayRole) const override;
+  QVariant headerData(int section, Qt::Orientation,
+                      int = Qt::DisplayRole) const override;
 
   int rowCount(const QModelIndex & = QModelIndex()) const override;
 
-  int columnCount(const QModelIndex &index = QModelIndex()) const override
-  {
+  int columnCount(const QModelIndex &index = QModelIndex()) const override {
     if (index.isValid()) return 0;
     return 3;
   }
 
-public slots:
+ public slots:
   void append(QtMsgType, QString const &);
 };
 

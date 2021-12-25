@@ -17,13 +17,12 @@ class SourcesModel;
 class SourcesTreeView : public QTreeView {
   Q_OBJECT
 
-public:
+ public:
   SourcesTreeView(QWidget *parent = nullptr);
 
-protected:
+ protected:
   void keyPressEvent(QKeyEvent *);
 };
-
 
 class SourcesView : public QSplitter {
   Q_OBJECT
@@ -45,10 +44,10 @@ class SourcesView : public QSplitter {
 
   SourcesModel *sourcesModel;
 
-public:
+ public:
   SourcesView(SourcesModel *, QWidget *parent = nullptr);
 
-public slots:
+ public slots:
   /* Request that that index is shown in the file editor, if it is a file
    * (uses showFile): */
   void showIndex(QModelIndex const &);

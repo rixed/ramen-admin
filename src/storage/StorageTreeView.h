@@ -7,16 +7,15 @@ class GraphModel;
 class QTimer;
 class StorageTreeModel;
 
-class StorageTreeView : public QTreeView
-{
+class StorageTreeView : public QTreeView {
   Q_OBJECT
 
   QTimer *invalidateModelTimer;
 
-public:
+ public:
   StorageTreeView(GraphModel *, StorageTreeModel *, QWidget *parent = nullptr);
 
-protected slots:
+ protected slots:
   void expandRows(const QModelIndex &, int, int);
   void mayInvalidateModel();
   void doInvalidateModel();

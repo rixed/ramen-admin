@@ -2,29 +2,27 @@
 #ifndef RAMENTYPE_H_190716
 #define RAMENTYPE_H_190716
 // A RamenType represents a RamenTypes.t aka a Dessser.maybe_nullable
-#include <memory>
 #include <QCoreApplication>
+#include <memory>
 extern "C" {
-# include <caml/mlvalues.h>
+#include <caml/mlvalues.h>
 // Defined by OCaml mlvalues but conflicting with further Qt includes:
-# undef alloc
-# undef flush
+#undef alloc
+#undef flush
 }
 #include "DessserValueType.h"
 
-struct RamenType
-{
+struct RamenType {
   // Shared with the RamenValue:
   std::shared_ptr<DessserValueType> vtyp;
   bool nullable;
 
-  RamenType(std::shared_ptr<DessserValueType> structure_, bool nullable_) :
-    vtyp(structure_), nullable(nullable_) {}
+  RamenType(std::shared_ptr<DessserValueType> structure_, bool nullable_)
+      : vtyp(structure_), nullable(nullable_) {}
 
   RamenType(value);
 
-  QString toQString() const
-  {
+  QString toQString() const {
     QString s(vtyp->toQString());
     if (nullable) s.append("?");
     return s;

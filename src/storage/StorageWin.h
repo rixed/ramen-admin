@@ -2,11 +2,10 @@
 #define STORAGEWIN_H_190902
 #include "SavedWindow.h"
 
-class StorageWin : public SavedWindow
-{
+class StorageWin : public SavedWindow {
   Q_OBJECT
 
-public:
+ public:
   StorageWin(QWidget *parent = nullptr);
 };
 

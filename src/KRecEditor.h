@@ -5,32 +5,33 @@
 #include <utility>
 #include <vector>
 
-#include "dessser/Arr.h"
 #include "AtomicWidget.h"
+#include "dessser/Arr.h"
 
 namespace dessser {
-  namespace gen {
-    namespace raql_type { struct named_type; }
-  }
+namespace gen {
+namespace raql_type {
+struct named_type;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class KRecEditor : public AtomicWidget
-{
+class KRecEditor : public AtomicWidget {
   Q_OBJECT
 
-  std::vector<std::pair<std::string, AtomicWidget *>> editors;
+  std::vector<std::pair<std::string, AtomicWidget *> > editors;
 
-public:
+ public:
   KRecEditor(
-    dessser::Arr<std::shared_ptr<dessser::gen::raql_type::named_type>> const &,
-    QWidget *parent = nullptr);
+      dessser::Arr<std::shared_ptr<dessser::gen::raql_type::named_type> > const
+          &,
+      QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

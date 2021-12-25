@@ -10,16 +10,20 @@
 
 class FunctionItem;
 namespace dessser {
-  namespace gen {
-    namespace raql_value { struct t; }
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace raql_value {
+struct t;
 }
+namespace sync_key {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class TimeChartAutomatonCustomize : public Automaton {
   Q_OBJECT
 
-public:
+ public:
   enum CustomizeSteps {
     // Wait for the new source to be created:
     WaitSource,
@@ -51,13 +55,12 @@ public:
   std::shared_ptr<dessser::gen::sync_key::t> infoKey;
   std::shared_ptr<dessser::gen::sync_key::t> workerKey;
 
-  TimeChartAutomatonCustomize(
-    std::string const &site,
-    std::string const &program,
-    std::string const &function,
-    QObject *parent = nullptr);
+  TimeChartAutomatonCustomize(std::string const &site,
+                              std::string const &program,
+                              std::string const &function,
+                              QObject *parent = nullptr);
 
-private slots:
+ private slots:
   void graphChanged(FunctionItem const *functionItem);
 };
 

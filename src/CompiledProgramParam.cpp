@@ -1,17 +1,16 @@
 extern "C" {
-# include <caml/memory.h>
-# include <caml/alloc.h>
-# include <caml/custom.h>
+#include <caml/alloc.h>
+#include <caml/custom.h>
+#include <caml/memory.h>
 // Defined by OCaml mlvalues but conflicting with further Qt includes:
-# undef alloc
-# undef flush
+#undef alloc
+#undef flush
 }
-#include "RamenValue.h"
-#include "RamenType.h"
 #include "CompiledProgramParam.h"
+#include "RamenType.h"
+#include "RamenValue.h"
 
-CompiledProgramParam::CompiledProgramParam(value v_)
-{
+CompiledProgramParam::CompiledProgramParam(value v_) {
   value ptyp_ = Field(v_, 0);  // the ptyp field
   name = String_val(Field(ptyp_, 0));
   type = std::make_shared<RamenType const>(Field(ptyp_, 1));

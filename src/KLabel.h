@@ -4,20 +4,18 @@
 
 class QLabel;
 
-class KLabel : public AtomicWidget
-{
+class KLabel : public AtomicWidget {
   Q_OBJECT
 
   QLabel *label;
 
-public:
+ public:
   KLabel(QWidget *parent = nullptr, bool wordWrap = false);
 
   void setEnabled(bool) {}
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

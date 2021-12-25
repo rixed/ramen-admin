@@ -1,7 +1,8 @@
 #ifndef MENU_H_190731
 #define MENU_H_190731
-#include <string>
 #include <QObject>
+#include <string>
+
 #include "KVStore.h"
 
 class AboutDialog;
@@ -31,15 +32,14 @@ class AlertingWin;
 class QMenu;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key {
-      struct t;
-    }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class Menu : public QObject
-{
+class Menu : public QObject {
   Q_OBJECT
 
   QMenu *fileMenu, *windowMenu, *dashboardMenu, *alertMenu;
@@ -52,7 +52,7 @@ class Menu : public QObject
   void addValue(dessser::gen::sync_key::t const &, KValue const &);
   void delValue(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   QMenuBar *menuBar;
   bool fullMenu;
 
@@ -79,7 +79,7 @@ public:
 
   Menu(bool fullMenu, QMainWindow *);
 
-public slots:
+ public slots:
   void upgradeToFull();  // and show something
   static void openNewSourceDialog();
   static void openNewProgramDialog();
@@ -100,7 +100,7 @@ public slots:
   static void openDashboard(std::string const &);
   static ConfClient *getClient();
 
-protected slots:
+ protected slots:
   void onChange(QList<ConfChange> const &);
 };
 

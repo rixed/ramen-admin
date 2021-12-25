@@ -3,13 +3,12 @@
 /* Widget that displays the tail of some function in a table, with selectable
  * columns, then a control bar offering to show and tailor the corresponding
  * chart, and also do add it to some dashboard. */
-#include <memory>
 #include <QTableView>
+#include <memory>
 
 class TailModel;
 
-class TailTable : public QWidget
-{
+class TailTable : public QWidget {
   Q_OBJECT
 
   QTableView *tableView;
@@ -17,11 +16,10 @@ class TailTable : public QWidget
 
   QAbstractItemModel *model() const { return tableView->model(); }
 
-public:
-  TailTable(std::shared_ptr<TailModel>,
-            QWidget *parent = nullptr);
+ public:
+  TailTable(std::shared_ptr<TailModel>, QWidget *parent = nullptr);
 
-private slots:
+ private slots:
   void extendSelection(QModelIndex const &parent, int first, int last);
 };
 

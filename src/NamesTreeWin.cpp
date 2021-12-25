@@ -1,14 +1,15 @@
-#include <QTreeView>
-#include <QLabel>
-#include <QLineEdit>
-#include <QVBoxLayout>
-#include "SavedWindow.h"
-#include "NamesTree.h"
 #include "NamesTreeWin.h"
 
-NamesTreeWin::NamesTreeWin(QWidget *parent) :
-  SavedWindow("Completable Names", tr("Completable Names"), true, parent)
-{
+#include <QLabel>
+#include <QLineEdit>
+#include <QTreeView>
+#include <QVBoxLayout>
+
+#include "NamesTree.h"
+#include "SavedWindow.h"
+
+NamesTreeWin::NamesTreeWin(QWidget *parent)
+    : SavedWindow("Completable Names", tr("Completable Names"), true, parent) {
   if (NamesTree::globalNamesTree) {
     QLineEdit *lineEdit = new QLineEdit;
     // Or use the completer on a NamesSubtree:

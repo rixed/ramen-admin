@@ -2,14 +2,13 @@
 #define RAMENSYNTAXHIGHLIGHTER_190729
 #include <QSyntaxHighlighter>
 
-class RamenSyntaxHighlighter : public QSyntaxHighlighter
-{
+class RamenSyntaxHighlighter : public QSyntaxHighlighter {
   Q_OBJECT
 
-public:
+ public:
   RamenSyntaxHighlighter(QTextDocument *parent = nullptr);
 
-protected:
+ protected:
   void highlightBlock(const QString &text);
 };
 

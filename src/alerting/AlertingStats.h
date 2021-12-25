@@ -7,10 +7,12 @@ class QLabel;
 class QTimer;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 class AlertingStats : public QWidget {
   Q_OBJECT
@@ -33,10 +35,10 @@ class AlertingStats : public QWidget {
 
   void updateStats();
 
-public:
+ public:
   AlertingStats(QWidget *parent = nullptr);
 
-protected slots:
+ protected slots:
   void onChange(QList<ConfChange> const &);
 };
 

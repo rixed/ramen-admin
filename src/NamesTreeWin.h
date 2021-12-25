@@ -2,11 +2,10 @@
 #define NAMESTREEWIN_H_190817
 #include "SavedWindow.h"
 
-class NamesTreeWin : public SavedWindow
-{
+class NamesTreeWin : public SavedWindow {
   Q_OBJECT
 
-public:
+ public:
   NamesTreeWin(QWidget *parent = nullptr);
 };
 

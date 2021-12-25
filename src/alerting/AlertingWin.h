@@ -13,7 +13,7 @@ class AlertingWin : public SavedWindow {
   AlertingTimeLine *timeLine;
   AlertingJournal *journal;
 
-public:
+ public:
   AlertingWin(QWidget *parent = nullptr);
 };
 

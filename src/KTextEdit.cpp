@@ -1,30 +1,30 @@
+#include "KTextEdit.h"
+
 #include <math.h>
-#include <cassert>
+
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFontMetrics>
 #include <QPlainTextEdit>
+#include <cassert>
 
-#include "desssergen/sync_key.h"
-#include "desssergen/sync_value.h"
 #include "MakeSyncValue.h"
-#include "misc_dessser.h"
 #include "RamenSyntaxHighlighter.h"
 #include "RangeDoubleValidator.h"
+#include "desssergen/sync_key.h"
+#include "desssergen/sync_value.h"
+#include "misc_dessser.h"
 
-#include "KTextEdit.h"
+static bool const verbose{false};
 
-static bool const verbose { false };
-
-KTextEdit::KTextEdit(bool raql_, QWidget *parent) :
-  AtomicWidget(parent),
-  raql(raql_)
-{
+KTextEdit::KTextEdit(bool raql_, QWidget *parent)
+    : AtomicWidget(parent), raql(raql_) {
   textEdit = new QPlainTextEdit;
   relayoutWidget(textEdit);
 
   if (raql) {
-    new RamenSyntaxHighlighter(textEdit->document()); // the document becomes owner
+    new RamenSyntaxHighlighter(
+        textEdit->document());  // the document becomes owner
 
     /* Set a monospaced font: */
     QFont font = textEdit->document()->defaultFont();
@@ -34,31 +34,26 @@ KTextEdit::KTextEdit(bool raql_, QWidget *parent) :
     /* Set tab stops to 4 spaces: */
     QFontMetricsF fontMetrics(font);
     float tabWidth = fontMetrics.width("    ");
-# if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     textEdit->setTabStopDistance(roundf(tabWidth));
-# else
+#else
     textEdit->setTabStopWidth(roundf(tabWidth));
 #endif
   }
 
-  connect(textEdit, &QPlainTextEdit::textChanged, // ouch!
+  connect(textEdit,
+          &QPlainTextEdit::textChanged,  // ouch!
           this, &KTextEdit::inputChanged);
 }
 
-std::shared_ptr<dessser::gen::sync_value::t const> KTextEdit::getValue() const
-{
+std::shared_ptr<dessser::gen::sync_value::t const> KTextEdit::getValue() const {
   return stringOfQString(textEdit->toPlainText());
 }
 
-void KTextEdit::setEnabled(bool enabled)
-{
-  textEdit->setReadOnly(! enabled);
-}
+void KTextEdit::setEnabled(bool enabled) { textEdit->setReadOnly(!enabled); }
 
-bool KTextEdit::setValue(
-  std::shared_ptr<dessser::gen::sync_value::t const> v)
-{
-  QString new_v { syncValToQString(*v, key()) };
+bool KTextEdit::setValue(std::shared_ptr<dessser::gen::sync_value::t const> v) {
+  QString new_v{syncValToQString(*v, key())};
 
   if (new_v != textEdit->toPlainText()) {
     textEdit->setPlainText(new_v);
@@ -68,16 +63,16 @@ bool KTextEdit::setValue(
        * within reason: */
       QFont font(textEdit->document()->defaultFont());
       QFontMetrics fontMetrics((QFontMetrics(font)));
-      int const tabWidth { 20 };  // FIXME: get this from somewhere
-      QSize const maxSize { QDesktopWidget().availableGeometry(this).size() * 0.7 };
-      QSize textSize { fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth) };
-      suggestedSize = QSize(
-        std::min(maxSize.width(), textSize.width()),
-        std::min(maxSize.height(), textSize.height()));
+      int const tabWidth{20};  // FIXME: get this from somewhere
+      QSize const maxSize{QDesktopWidget().availableGeometry(this).size() *
+                          0.7};
+      QSize textSize{fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth)};
+      suggestedSize = QSize(std::min(maxSize.width(), textSize.width()),
+                            std::min(maxSize.height(), textSize.height()));
 
       if (verbose)
-        qDebug() << "KTextEdit: suggestedSize=" << suggestedSize
-                 << "(max is" << maxSize << ")";
+        qDebug() << "KTextEdit: suggestedSize=" << suggestedSize << "(max is"
+                 << maxSize << ")";
     }
 
     emit valueChanged(v);
@@ -86,7 +81,4 @@ bool KTextEdit::setValue(
   return true;
 }
 
-QSize KTextEdit::sizeHint() const
-{
-  return suggestedSize;
-}
+QSize KTextEdit::sizeHint() const { return suggestedSize; }

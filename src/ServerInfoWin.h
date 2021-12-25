@@ -5,11 +5,10 @@
 class QString;
 class QWidget;
 
-class ServerInfoWin : public SavedWindow
-{
+class ServerInfoWin : public SavedWindow {
   Q_OBJECT
 
-public:
+ public:
   ServerInfoWin(QString const &srvUrl, QWidget *parent = nullptr);
 };
 

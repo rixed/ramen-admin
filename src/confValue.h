@@ -1,30 +1,30 @@
 #error "DEPRECATED"
 #ifndef CONFVALUE_H_190504
 #define CONFVALUE_H_190504
+#include <QColor>
+#include <QCoreApplication>
+#include <QMetaType>
+#include <QObject>
+#include <QPair>
+#include <QSet>
+#include <QString>
 #include <cassert>
 #include <list>
 #include <memory>
 #include <optional>
 #include <string>
 #include <vector>
-#include <QColor>
-#include <QCoreApplication>
-#include <QPair>
-#include <QSet>
-#include <QString>
-#include <QMetaType>
-#include <QObject>
 extern "C" {
-# include <caml/mlvalues.h>
+#include <caml/mlvalues.h>
 // Defined by OCaml mlvalues but conflicting with further Qt includes:
-# undef alloc
-# undef flush
+#undef alloc
+#undef flush
 }
 #include "CompiledFunctionInfo.h"
 #include "CompiledProgramParam.h"
+#include "RamenValue.h"
 #include "confRCEntry.h"
 #include "confWorkerRef.h"
-#include "RamenValue.h"
 
 struct AlertInfo;
 class AtomicWidget;
@@ -39,7 +39,7 @@ enum ValueType {
   WorkerType,
   RetentionType,
   TimeRangeType,
-  TuplesType, // A serialized batch of tuples, not a VTuple
+  TuplesType,      // A serialized batch of tuples, not a VTuple
   RamenValueType,  // For RamenTypes.value
   TargetConfigType,
   SourceInfoType,
@@ -59,15 +59,14 @@ enum ValueType {
 
 QString const stringOfValueType(ValueType);
 
-class Value
-{
-public:
+class Value {
+ public:
   // FIXME: necessary to have that type?
   ValueType valueType;
   // Construct uninitialized
   Value(ValueType);
-  Value() : Value(ErrorType) {} // wtv
-  virtual ~Value() {};
+  Value() : Value(ErrorType) {}  // wtv
+  virtual ~Value(){};
 
   operator QString() const { return toQString(std::string()); }
   // Can depend on the key to adapt string representation:
@@ -76,7 +75,8 @@ public:
   virtual value toOCamlValue() const;
   /* Generic editor that can be overwritten/specialized/tuned
    * according to the key. By default a read-only label. */
-  virtual AtomicWidget *editorWidget(std::string const &key, QWidget *parent = nullptr) const;
+  virtual AtomicWidget *editorWidget(std::string const &key,
+                                     QWidget *parent = nullptr) const;
   /* Tells if the value is the ramen value Null (used to quickly skip nulls */
   virtual bool isNull() const { return false; }
   virtual bool operator==(Value const &) const;
@@ -88,15 +88,13 @@ Value *valueOfOCaml(value);
 // Construct from a QString
 Value *valueOfQString(ValueType, QString const &);
 
-
-struct Error : public Value
-{
+struct Error : public Value {
   double time;
   unsigned cmdId;
   std::string msg;
 
-  Error(double time_, unsigned cmdId_, std::string const &msg_) :
-    Value(ErrorType), time(time_), cmdId(cmdId_), msg(msg_) {}
+  Error(double time_, unsigned cmdId_, std::string const &msg_)
+      : Value(ErrorType), time(time_), cmdId(cmdId_), msg(msg_) {}
   Error() : Error(0., 0, "") {}
   QString const toQString(std::string const &) const override;
   value toOCamlValue() const override;
@@ -105,8 +103,7 @@ struct Error : public Value
 
 struct WorkerRole;
 
-struct Worker : public Value
-{
+struct Worker : public Value {
   bool enabled;
   bool debug;
   bool used;
@@ -115,31 +112,33 @@ struct Worker : public Value
   QString workerSign;
   QString binSign;
   WorkerRole *role;
-  std::list<RCEntryParam *> params; // Params are owned
-  std::list<WorkerRef *> parent_refs; // WorkerRef are owned
+  std::list<RCEntryParam *> params;    // Params are owned
+  std::list<WorkerRef *> parent_refs;  // WorkerRef are owned
 
   Worker(value);
 
-  Worker() :
-    Value(WorkerType), enabled(false), debug(false), used(false),
-    reportPeriod(0.), role(nullptr)
-  {}
+  Worker()
+      : Value(WorkerType),
+        enabled(false),
+        debug(false),
+        used(false),
+        reportPeriod(0.),
+        role(nullptr) {}
 
   ~Worker();
 
   QString const toQString(std::string const &) const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
   bool operator==(Value const &) const override;
 };
 
-struct Retention : public Value
-{
+struct Retention : public Value {
   /* TODO: duration is now an expression, we need general support for
    * expressions that we might get from dessser serializer at some point */
   double period;
 
-  Retention() : period(0.) {};
+  Retention() : period(0.){};
   Retention(value const);
   Retention(Retention const &other) : Value(other.valueType) {
     period = other.period;
@@ -150,14 +149,13 @@ struct Retention : public Value
   bool operator==(Value const &) const override;
 };
 
-struct TimeRange : public Value
-{
+struct TimeRange : public Value {
   struct Range {
     double t1, t2;
     bool openEnded;
 
-    Range(double t1_, double t2_, bool openEnded_) :
-      t1(t1_), t2(t2_), openEnded(openEnded_) {}
+    Range(double t1_, double t2_, bool openEnded_)
+        : t1(t1_), t2(t2_), openEnded(openEnded_) {}
     bool operator==(Range const &other) const {
       return t1 == other.t1 && t2 == other.t2 && openEnded == other.openEnded;
     }
@@ -168,29 +166,28 @@ struct TimeRange : public Value
   std::vector<Range> range;
 
   TimeRange() : Value(TimeRangeType) {}
-  TimeRange(std::vector<Range> const &range_) :
-    Value(TimeRangeType), range(range_) {}
+  TimeRange(std::vector<Range> const &range_)
+      : Value(TimeRangeType), range(range_) {}
   TimeRange(value);
 
   bool isEmpty() const { return range.empty(); }
   double length() const;
   QString const toQString(std::string const &) const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
   value toOCamlValue() const override;
   bool operator==(Value const &) const override;
 };
 
-/* Tuples of ramen _values_, not to be confused with RamenTypeTuple which is a tuple
- * of ramen _types_.
- * Actually, nothing mandates [val] to be a tuple; in the future, when I/O are not
- * restricted to tuples, rename this Tuple into just RamenValue? */
-struct Tuples : public Value
-{
+/* Tuples of ramen _values_, not to be confused with RamenTypeTuple which is a
+ * tuple of ramen _types_. Actually, nothing mandates [val] to be a tuple; in
+ * the future, when I/O are not restricted to tuples, rename this Tuple into
+ * just RamenValue? */
+struct Tuples : public Value {
   struct Tuple {
     unsigned skipped;
     uint32_t const *bytes;
-    size_t num_words; // words of 4 bytes
+    size_t num_words;  // words of 4 bytes
 
     Tuple(unsigned, unsigned char const *, size_t);
 
@@ -209,16 +206,14 @@ struct Tuples : public Value
   bool operator==(Value const &) const override;
 };
 
-struct RamenValueValue : public Value
-{
+struct RamenValueValue : public Value {
   std::shared_ptr<RamenValue const> v;
 
   // Takes ownership of v_
-  RamenValueValue(RamenValue *v_) :
-    Value(RamenValueType), v(v_) {}
+  RamenValueValue(RamenValue *v_) : Value(RamenValueType), v(v_) {}
 
-  RamenValueValue(std::shared_ptr<RamenValue const> v_) :
-    Value(RamenValueType), v(v_) {}
+  RamenValueValue(std::shared_ptr<RamenValue const> v_)
+      : Value(RamenValueType), v(v_) {}
 
   QString const toQString(std::string const &k) const override {
     return v->toQString(k);
@@ -226,8 +221,8 @@ struct RamenValueValue : public Value
 
   value toOCamlValue() const override;
 
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
 
   bool isNull() const override { return v->isNull(); }
 
@@ -235,30 +230,28 @@ struct RamenValueValue : public Value
 };
 
 // Read-only (pre)compilation output for a program:
-struct SourceInfo : public Value
-{
+struct SourceInfo : public Value {
   QString src_ext;
   QStringList md5s;
   // If this is not empty then everything else is irrelevant.
   QString errMsg;
-  std::vector<std::shared_ptr<CompiledProgramParam>> params;
-  std::vector<std::shared_ptr<CompiledFunctionInfo>> infos;
+  std::vector<std::shared_ptr<CompiledProgramParam> > params;
+  std::vector<std::shared_ptr<CompiledFunctionInfo> > infos;
 
   SourceInfo() {}
   SourceInfo(value);
 
   bool operator==(Value const &) const override;
   QString const toQString(std::string const &) const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
 
   bool isInfo() const { return errMsg.isEmpty(); }
   bool isError() const { return !isInfo(); }
 };
 
-struct TargetConfig : public Value
-{
-  std::map<std::string const, std::shared_ptr<RCEntry>> entries;
+struct TargetConfig : public Value {
+  std::map<std::string const, std::shared_ptr<RCEntry> > entries;
 
   TargetConfig() : Value(TargetConfigType) {}
   TargetConfig(value);
@@ -270,22 +263,23 @@ struct TargetConfig : public Value
   bool operator==(Value const &) const override;
   QString const toQString(std::string const &) const override;
 
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
 
   void addEntry(std::shared_ptr<RCEntry> entry) {
     entries[entry->programName] = entry;
   }
 };
 
-struct RuntimeStats : public Value
-{
+struct RuntimeStats : public Value {
   double statsTime, firstStartup, lastStartup;
   std::optional<double> minEventTime, maxEventTime;
   std::optional<double> firstInput, lastInput;
   std::optional<double> firstOutput, lastOutput;
-  uint64_t totInputTuples, totSelectedTuples, totFilteredTuples, totOutputTuples;
-  uint64_t totFullBytes, totFullBytesSamples; // Measure the full size of output tuples
+  uint64_t totInputTuples, totSelectedTuples, totFilteredTuples,
+      totOutputTuples;
+  uint64_t totFullBytes,
+      totFullBytesSamples;  // Measure the full size of output tuples
   uint64_t curGroups, maxGroups;
   uint64_t totInputBytes, totOutputBytes;
   double totWaitIn, totWaitOut;
@@ -293,16 +287,15 @@ struct RuntimeStats : public Value
   double totCpu;
   uint64_t curRam, maxRam;
 
-  RuntimeStats() : Value(RuntimeStatsType) {};
+  RuntimeStats() : Value(RuntimeStatsType){};
   RuntimeStats(value);
 
   QString const toQString(std::string const &) const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
 };
 
-struct SiteFq
-{
+struct SiteFq {
   QString site;
   QString fq;
   SiteFq() {}
@@ -310,15 +303,14 @@ struct SiteFq
   QString const toQString() const { return site + QString(":") + fq; }
 };
 
-struct Replay : public Value
-{
+struct Replay : public Value {
   int channel;
   SiteFq target;
   double since;
   double until;
   QString final_ringbuf_file;
   std::vector<SiteFq> sources;
-  std::vector<std::pair<SiteFq, SiteFq>> links;
+  std::vector<std::pair<SiteFq, SiteFq> > links;
   double timeout_date;
 
   Replay() : Value(ReplayType) {}
@@ -327,21 +319,19 @@ struct Replay : public Value
   QString const toQString(std::string const &) const override;
 };
 
-struct Replayer : public Value
-{
+struct Replayer : public Value {
   // wtv
   Replayer() : Value(ReplayerType) {}
   Replayer(value);
 };
 
-struct Alert : public Value
-{
+struct Alert : public Value {
   AlertInfo *info;
 
   Alert() : Value(AlertType) {}
   Alert(value);
-  Alert(std::unique_ptr<AlertInfo> info_) :
-    Value(AlertType), info(info_.release()) {}
+  Alert(std::unique_ptr<AlertInfo> info_)
+      : Value(AlertType), info(info_.release()) {}
 
   ~Alert();
 
@@ -350,21 +340,16 @@ struct Alert : public Value
   bool operator==(Value const &) const override;
 };
 
-struct ReplayRequest : public Value
-{
+struct ReplayRequest : public Value {
   std::string site, program, function;
   // TODO: fieldMask
   double since, until;
   bool explain;
   std::string respKey;
 
-  ReplayRequest(
-    std::string const &site,
-    std::string const &program,
-    std::string const &function,
-    double since, double until,
-    bool explain,
-    std::string const &respKey);
+  ReplayRequest(std::string const &site, std::string const &program,
+                std::string const &function, double since, double until,
+                bool explain, std::string const &respKey);
   ReplayRequest(value);
 
   value toOCamlValue() const override;
@@ -372,46 +357,39 @@ struct ReplayRequest : public Value
   bool operator==(Value const &) const override;
 };
 
-struct OutputSpecs : public Value
-{
+struct OutputSpecs : public Value {
   // TODO
   OutputSpecs() : Value(OutputSpecsType) {}
   OutputSpecs(value);
 };
 
-struct DashWidget : public Value
-{
+struct DashWidget : public Value {
   DashWidget() : Value(DashWidgetType) {}
   virtual value toOCamlValue() const override = 0;
 };
 
-struct DashWidgetText : public DashWidget
-{
+struct DashWidgetText : public DashWidget {
   QString text;
 
   DashWidgetText() : DashWidget() {}
   DashWidgetText(value);
   DashWidgetText(QString const &);
   value toOCamlValue() const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
   bool operator==(Value const &) const override;
 };
 
-struct DashWidgetChart : public DashWidget
-{
+struct DashWidgetChart : public DashWidget {
   QString title;
 
-  enum ChartType {
-    Plot
-  } type;
+  enum ChartType { Plot } type;
 
   struct Axis {
     bool left;
     bool forceZero;
     enum Scale { Linear, Logarithmic } scale;
-    Axis(bool l, bool f, Scale s)
-      : left(l), forceZero(f), scale(s) {}
+    Axis(bool l, bool f, Scale s) : left(l), forceZero(f), scale(s) {}
     value toOCamlValue() const;
     bool operator==(Axis const &) const;
     bool operator!=(Axis const &) const;
@@ -420,14 +398,17 @@ struct DashWidgetChart : public DashWidget
   struct Column {
     std::string name;
     enum Representation {
-      Unused, Independent, Stacked, StackCentered
+      Unused,
+      Independent,
+      Stacked,
+      StackCentered
     } representation;
     int axisNum;
     std::vector<std::string> factors;
     QColor color;
 
     Column(std::string const cn, Representation r, int an, QColor c)
-      : name(cn), representation(r), axisNum(an), color(c) {}
+        : name(cn), representation(r), axisNum(an), color(c) {}
     /* Create with a random color associated with this fully-qualified
      * field name */
     Column(std::string const &program, std::string const &function,
@@ -441,13 +422,13 @@ struct DashWidgetChart : public DashWidget
 
   struct Source {
     std::string site, program, function;
-    QString name; // used to order the sources
+    QString name;  // used to order the sources
     bool visible;
     std::list<Column> fields;
 
     Source(std::string const sn, std::string const pn, std::string const fn,
            bool visible_ = true)
-      : site(sn), program(pn), function(fn), visible(visible_) {}
+        : site(sn), program(pn), function(fn), visible(visible_) {}
     Source(value);
     value toOCamlValue() const;
     bool operator==(Source const &) const;
@@ -460,27 +441,24 @@ struct DashWidgetChart : public DashWidget
   DashWidgetChart() : DashWidget() {}
   DashWidgetChart(value);
   // Create an empty chart for this function:
-  DashWidgetChart(
-    std::string const sn, std::string const pn, std::string const fn);
+  DashWidgetChart(std::string const sn, std::string const pn,
+                  std::string const fn);
   value toOCamlValue() const override;
-  AtomicWidget *editorWidget(
-    std::string const &key, QWidget *parent = nullptr) const override;
+  AtomicWidget *editorWidget(std::string const &key,
+                             QWidget *parent = nullptr) const override;
   bool operator==(Value const &) const override;
 };
 
-
-struct AlertingContact : public Value
-{
+struct AlertingContact : public Value {
   double timeout;
 
   AlertingContact() : Value(AlertingContactType) {}
   AlertingContact(double timeout_)
-    : Value(AlertingContactType), timeout(timeout_) {}
+      : Value(AlertingContactType), timeout(timeout_) {}
   QString const toQString(std::string const &) const override;
 };
 
-struct AlertingContactIgnore : public AlertingContact
-{
+struct AlertingContactIgnore : public AlertingContact {
   QString cmd;
 
   AlertingContactIgnore() : AlertingContact() {}
@@ -489,8 +467,7 @@ struct AlertingContactIgnore : public AlertingContact
   bool operator==(Value const &) const override;
 };
 
-struct AlertingContactExec : public AlertingContact
-{
+struct AlertingContactExec : public AlertingContact {
   QString cmd;
 
   AlertingContactExec() : AlertingContact() {}
@@ -500,8 +477,7 @@ struct AlertingContactExec : public AlertingContact
   bool operator==(Value const &) const override;
 };
 
-struct AlertingContactSysLog : public AlertingContact
-{
+struct AlertingContactSysLog : public AlertingContact {
   QString msg;
 
   AlertingContactSysLog() : AlertingContact() {}
@@ -511,38 +487,34 @@ struct AlertingContactSysLog : public AlertingContact
   bool operator==(Value const &) const override;
 };
 
-struct AlertingContactSqlite : public AlertingContact
-{
+struct AlertingContactSqlite : public AlertingContact {
   QString file;
   QString insert;
   QString create;
 
   AlertingContactSqlite() : AlertingContact() {}
   AlertingContactSqlite(double, value);
-  AlertingContactSqlite(double, QString const &, QString const &, QString const &);
+  AlertingContactSqlite(double, QString const &, QString const &,
+                        QString const &);
   QString const toQString(std::string const &) const override;
   bool operator==(Value const &) const override;
 };
 
-struct AlertingContactKafka : public AlertingContact
-{
-  QSet<QPair<QString, QString>> options;
+struct AlertingContactKafka : public AlertingContact {
+  QSet<QPair<QString, QString> > options;
   QString topic;
   unsigned partition;
   QString text;
 
   AlertingContactKafka() : AlertingContact() {}
   AlertingContactKafka(double, value);
-  AlertingContactKafka(
-    double,
-    QSet<QPair<QString, QString>> const &, QString const &, unsigned,
-    QString const &);
+  AlertingContactKafka(double, QSet<QPair<QString, QString> > const &,
+                       QString const &, unsigned, QString const &);
   QString const toQString(std::string const &) const override;
   bool operator==(Value const &) const override;
 };
 
-struct Notification : public Value
-{
+struct Notification : public Value {
   QString site;
   QString worker;
   bool test;
@@ -553,7 +525,7 @@ struct Notification : public Value
   double certainty;
   double debounce;
   double timeout;
-  QSet<QPair<QString, QString>> parameters;
+  QSet<QPair<QString, QString> > parameters;
 
   Notification() : Value(NotificationType) {}
   Notification(value);
@@ -561,8 +533,7 @@ struct Notification : public Value
   bool operator==(Value const &) const override;
 };
 
-struct DeliveryStatus : public Value
-{
+struct DeliveryStatus : public Value {
   enum Status {
     StartToBeSent,
     StartToBeSentThenStopped,
@@ -580,19 +551,20 @@ struct DeliveryStatus : public Value
   bool operator==(Value const &) const override;
 };
 
-struct IncidentLog : public Value
-{
-  enum LogTag {
-    TagNewNotification, TagOutcry, TagAck, TagStop, TagCancel
-  };
+struct IncidentLog : public Value {
+  enum LogTag { TagNewNotification, TagOutcry, TagAck, TagStop, TagCancel };
 
-  enum Outcome {
-    Duplicate, Inhibited, STFU, Escalate
-  };
+  enum Outcome { Duplicate, Inhibited, STFU, Escalate };
 
   QString text;
   enum TickKind {
-    TickStart, TickDup, TickInhibited, TickOutcry, TickAck, TickStop, TickCancel
+    TickStart,
+    TickDup,
+    TickInhibited,
+    TickOutcry,
+    TickAck,
+    TickStop,
+    TickCancel
   } tickKind;
 
   IncidentLog() : Value(IncidentLogType) {}
@@ -603,8 +575,7 @@ struct IncidentLog : public Value
   void paintTick(QPainter *, qreal width, qreal x, qreal y0, qreal y1) const;
 };
 
-struct Inhibition : public Value
-{
+struct Inhibition : public Value {
   /* TODO */
   Inhibition() : Value(InhibitionType) {}
   Inhibition(value);
@@ -613,7 +584,7 @@ struct Inhibition : public Value
 
 QDebug operator<<(QDebug debug, DashWidgetChart::Source const &);
 
-};
+};  // namespace conf
 
 Q_DECLARE_METATYPE(std::shared_ptr<conf::Value const>);
 Q_DECLARE_METATYPE(conf::Error);

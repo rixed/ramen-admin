@@ -1,3 +1,5 @@
+#include "processes/ProcessesWidget.h"
+
 #include <QDebug>
 #include <QDesktopWidget>
 #include <QFrame>
@@ -9,39 +11,36 @@
 #include <QModelIndex>
 #include <QPalette>
 #include <QPushButton>
-#include <QtGlobal>
 #include <QTimer>
 #include <QTreeView>
 #include <QVBoxLayout>
 #include <QVector>
+#include <QtGlobal>
 
 #include "ButtonDelegate.h"
 #include "ConfClient.h"
-#include "dashboard/tools.h"
-#include "desssergen/sync_value.h"
 #include "FunctionItem.h"
 #include "GraphModel.h"
 #include "Menu.h"
-#include "misc_dessser.h"
-#include "processes/ProcessesWidgetProxy.h"
 #include "ProgramItem.h"
-#include "Resources.h"
 #include "RCEditorDialog.h"
+#include "Resources.h"
 #include "SiteItem.h"
 #include "TailTableDialog.h"
 #include "UserIdentity.h"
+#include "dashboard/tools.h"
+#include "desssergen/sync_value.h"
+#include "misc_dessser.h"
+#include "processes/ProcessesWidgetProxy.h"
 
-#include "processes/ProcessesWidget.h"
-
-static bool const verbose { false };
+static bool const verbose{false};
 
 /*
  * Now for the actual Processes list widget:
  */
 
 ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent)
-  : QWidget(parent)
-{
+    : QWidget(parent) {
   /* Process list is large so the we overloaded the sizeHint and must
    * now explain how it's meant to be used: */
   setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -67,74 +66,76 @@ ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent)
   treeView->setMouseTracking(true);  // for the buttons to follow the mouse
   ButtonDelegate *actionButton1 = new ButtonDelegate(3, this);
   treeView->setItemDelegateForColumn(GraphModel::ActionButton1, actionButton1);
-  connect(actionButton1, &ButtonDelegate::clicked,
-          this, &ProcessesWidget::activate1);
+  connect(actionButton1, &ButtonDelegate::clicked, this,
+          &ProcessesWidget::activate1);
 
   ButtonDelegate *actionButton2 = new ButtonDelegate(3, this);
   treeView->setItemDelegateForColumn(GraphModel::ActionButton2, actionButton2);
-  connect(actionButton2, &ButtonDelegate::clicked,
-          this, &ProcessesWidget::activate2);
+  connect(actionButton2, &ButtonDelegate::clicked, this,
+          &ProcessesWidget::activate2);
 
   /* Resize the columns to the _header_ content: */
-  treeView->header()->setDefaultSectionSize(20); // For the 2 icons
+  treeView->header()->setDefaultSectionSize(20);  // For the 2 icons
   treeView->header()->setMinimumSectionSize(20);
-  for (int c = 0; c < GraphModel::NumColumns; c ++) {
+  for (int c = 0; c < GraphModel::NumColumns; c++) {
     if (c == GraphModel::Name) {
-      treeView->header()->setSectionResizeMode(c, QHeaderView::ResizeToContents);
+      treeView->header()->setSectionResizeMode(c,
+                                               QHeaderView::ResizeToContents);
     } else if (c == GraphModel::ActionButton1 ||
                c == GraphModel::ActionButton2) {
       treeView->header()->setSectionResizeMode(c, QHeaderView::Fixed);
       // Redirect sorting attempt to first column:
-      connect(treeView->header(), &QHeaderView::sortIndicatorChanged,
-              this, [this](int c, Qt::SortOrder order) {
-        if (c == GraphModel::ActionButton1 ||
-            c == GraphModel::ActionButton2)
-          treeView->header()->setSortIndicator(0, order);
-      });
+      connect(treeView->header(), &QHeaderView::sortIndicatorChanged, this,
+              [this](int c, Qt::SortOrder order) {
+                if (c == GraphModel::ActionButton1 ||
+                    c == GraphModel::ActionButton2)
+                  treeView->header()->setSortIndicator(0, order);
+              });
     } else {
-      treeView->header()->setSectionResizeMode(c, QHeaderView::ResizeToContents);
+      treeView->header()->setSectionResizeMode(c,
+                                               QHeaderView::ResizeToContents);
     }
   }
 
   /* Now also resize the column to the data content: */
-  connect(proxyModel, &ProcessesWidgetProxy::dataChanged,
-          this, &ProcessesWidget::askAdjustColumnSize);
-  connect(proxyModel, &ProcessesWidgetProxy::rowsInserted,
-          this, &ProcessesWidget::adjustAllColumnSize);
-  connect(proxyModel, &ProcessesWidgetProxy::rowsRemoved,
-          this, &ProcessesWidget::adjustAllColumnSize);
+  connect(proxyModel, &ProcessesWidgetProxy::dataChanged, this,
+          &ProcessesWidget::askAdjustColumnSize);
+  connect(proxyModel, &ProcessesWidgetProxy::rowsInserted, this,
+          &ProcessesWidget::adjustAllColumnSize);
+  connect(proxyModel, &ProcessesWidgetProxy::rowsRemoved, this,
+          &ProcessesWidget::adjustAllColumnSize);
   /* And when a row is expanded/collapsed: */
-  connect(treeView, &QTreeView::expanded,
-          this, &ProcessesWidget::adjustAllColumnSize);
-  connect(treeView, &QTreeView::collapsed,
-          this, &ProcessesWidget::adjustAllColumnSize);
+  connect(treeView, &QTreeView::expanded, this,
+          &ProcessesWidget::adjustAllColumnSize);
+  connect(treeView, &QTreeView::collapsed, this,
+          &ProcessesWidget::adjustAllColumnSize);
 
   /* Don't wait for new keys to resize the columns: */
-  for (int c = 0; c < GraphModel::NumColumns; c ++) {
-    if (c == GraphModel::ActionButton1 ||
-        c == GraphModel::ActionButton2) continue;
+  for (int c = 0; c < GraphModel::NumColumns; c++) {
+    if (c == GraphModel::ActionButton1 || c == GraphModel::ActionButton2)
+      continue;
     treeView->resizeColumnToContents(c);
   }
 
   /* Reset the filters when a function is added (or removed) (see comment
    * in ProcessesWidgetProxy.cpp as to why): */
-  connect(graphModel, &GraphModel::rowsInserted,
-          proxyModel, &ProcessesWidgetProxy::invalidate);
-  connect(graphModel, &GraphModel::rowsRemoved,
-          proxyModel, &ProcessesWidgetProxy::invalidate);
+  connect(graphModel, &GraphModel::rowsInserted, proxyModel,
+          &ProcessesWidgetProxy::invalidate);
+  connect(graphModel, &GraphModel::rowsRemoved, proxyModel,
+          &ProcessesWidgetProxy::invalidate);
 
   /* Special signal when a worker changed, since that affects top-halfness
    * and working-ness: */
   // TODO: use dataChanged and filter on workers after #72 is fixed
-  connect(graphModel, &GraphModel::workerChanged,
-          proxyModel, &ProcessesWidgetProxy::invalidate);
+  connect(graphModel, &GraphModel::workerChanged, proxyModel,
+          &ProcessesWidgetProxy::invalidate);
 
   /* Expand new entries. Unfortunately, does nothing to entries
    * that are no longer filtered. The proxy model stays completely
    * silent about those so there is little we can do. */
-//  TODO: and now it crash. reactivate later
-//  connect(graphModel, &GraphModel::rowsInserted,
-//          this, &ProcessesWidget::expandRows);
+  //  TODO: and now it crash. reactivate later
+  //  connect(graphModel, &GraphModel::rowsInserted,
+  //          this, &ProcessesWidget::expandRows);
 
   /*
    * Searchbox, hidden when unused
@@ -161,10 +162,10 @@ ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent)
   searchFrame->setLayout(searchLayout);
   searchFrame->adjustSize();
   searchFrame->hide();
-  connect(searchBox, &QLineEdit::textChanged,
-          this, &ProcessesWidget::changeSearch);
-  connect(closeButton, &QPushButton::clicked,
-          this, &ProcessesWidget::closeSearch);
+  connect(searchBox, &QLineEdit::textChanged, this,
+          &ProcessesWidget::changeSearch);
+  connect(closeButton, &QPushButton::clicked, this,
+          &ProcessesWidget::closeSearch);
 
   QVBoxLayout *mainLayout = new QVBoxLayout;
   mainLayout->setContentsMargins(0, 0, 0, 0);
@@ -174,96 +175,85 @@ ProcessesWidget::ProcessesWidget(GraphModel *graphModel, QWidget *parent)
 
   adjustColumnTimer = new QTimer(this);
   adjustColumnTimer->setSingleShot(true);
-  connect(adjustColumnTimer, &QTimer::timeout,
-          this, &ProcessesWidget::adjustColumnSize);
+  connect(adjustColumnTimer, &QTimer::timeout, this,
+          &ProcessesWidget::adjustColumnSize);
 }
 
 /* Those ModelIndexes come from the GraphModel not the proxy, so no conversion
  * is necessary.
  * Actually does not adjust right now but use a timer to cluster changes as this
  * is a very expensive operation. */
-void ProcessesWidget::askAdjustColumnSize(
-  QModelIndex const &topLeft,
-  QModelIndex const &bottomRight,
-  QVector<int> const &roles)
-{
-  if (! roles.contains(Qt::DisplayRole)) return;
+void ProcessesWidget::askAdjustColumnSize(QModelIndex const &topLeft,
+                                          QModelIndex const &bottomRight,
+                                          QVector<int> const &roles) {
+  if (!roles.contains(Qt::DisplayRole)) return;
 
   Q_ASSERT(topLeft.column() >= 0 && bottomRight.column() >= 0);
   Q_ASSERT((size_t)bottomRight.column() < needResizing.size());
-  for (size_t c = (size_t)topLeft.column(); c <= (size_t)bottomRight.column(); c ++) {
+  for (size_t c = (size_t)topLeft.column(); c <= (size_t)bottomRight.column();
+       c++) {
     needResizing.set(c);
   }
 
-  static int const adjustColumnTimeout { 1000 }; // ms
+  static int const adjustColumnTimeout{1000};  // ms
   adjustColumnTimer->start(adjustColumnTimeout);
 }
 
-void ProcessesWidget::adjustColumnSize()
-{
-  for (size_t c = 0; c < needResizing.size(); c ++) {
+void ProcessesWidget::adjustColumnSize() {
+  for (size_t c = 0; c < needResizing.size(); c++) {
     if (needResizing.test(c)) {
-      if (c != GraphModel::ActionButton1 &&
-          c != GraphModel::ActionButton2)
+      if (c != GraphModel::ActionButton1 && c != GraphModel::ActionButton2)
         treeView->resizeColumnToContents(c);
       needResizing.reset(c);
     }
   }
 }
 
-void ProcessesWidget::adjustAllColumnSize()
-{
-  for (int c = 0; c < GraphModel::NumColumns; c ++) {
-    if (c == GraphModel::ActionButton1 ||
-        c == GraphModel::ActionButton2) continue;
+void ProcessesWidget::adjustAllColumnSize() {
+  for (int c = 0; c < GraphModel::NumColumns; c++) {
+    if (c == GraphModel::ActionButton1 || c == GraphModel::ActionButton2)
+      continue;
     treeView->resizeColumnToContents(c);
   }
 }
 
-void ProcessesWidget::openSearch()
-{
+void ProcessesWidget::openSearch() {
   searchFrame->show();
   searchBox->setFocus();
 }
 
-void ProcessesWidget::changeSearch(QString const &text)
-{
+void ProcessesWidget::changeSearch(QString const &text) {
   proxyModel->setFilterFixedString(text);
   if (text.length() > 0) treeView->expandAll();
 }
 
-void ProcessesWidget::closeSearch()
-{
+void ProcessesWidget::closeSearch() {
   searchFrame->hide();
   searchBox->clear();
 }
 
 /* Return the QMainWindow or nullptr if, for some reason, the widget is in no
  * QMainWindow yet. */
-static SavedWindow const *mySavedWindow(QWidget const *widget)
-{
-  if (! widget) return nullptr;
+static SavedWindow const *mySavedWindow(QWidget const *widget) {
+  if (!widget) return nullptr;
 
-  SavedWindow const *win { dynamic_cast<SavedWindow const *>(widget) };
+  SavedWindow const *win{dynamic_cast<SavedWindow const *>(widget)};
   if (win) return win;
 
-  QWidget const *parent { widget->parentWidget() };
-  if (! parent) return nullptr;
+  QWidget const *parent{widget->parentWidget()};
+  if (!parent) return nullptr;
   return mySavedWindow(parent);
 }
 
-void ProcessesWidget::wantEdit(std::shared_ptr<Program const> program)
-{
-  SavedWindow const *win { mySavedWindow(this) };
-  if (! win) {
-    if (verbose)
-      qCritical() << "Cannot find the main window!?";
+void ProcessesWidget::wantEdit(std::shared_ptr<Program const> program) {
+  SavedWindow const *win{mySavedWindow(this)};
+  if (!win) {
+    if (verbose) qCritical() << "Cannot find the main window!?";
     return;
   }
 
-  if (! win->menu) {
-    if (verbose)
-      qCritical() << "Main Window has no menu!?";
+  if (!win->menu) {
+    if (verbose) qCritical() << "Main Window has no menu!?";
     return;
   }
 
@@ -271,58 +261,52 @@ void ProcessesWidget::wantEdit(std::shared_ptr<Program const> program)
   win->menu->rcEditorDialog->preselect(program->name);
 }
 
-void ProcessesWidget::wantTable(std::shared_ptr<Function> function)
-{
+void ProcessesWidget::wantTable(std::shared_ptr<Function> function) {
   std::shared_ptr<TailModel> tailModel = function->getOrCreateTail();
   if (tailModel) {
     TailTableDialog *dialog = new TailTableDialog(tailModel);
     dialog->show();
     dialog->raise();
-  } else qWarning() << "Cannot create a TailModel";
+  } else
+    qWarning() << "Cannot create a TailModel";
 }
 
-void ProcessesWidget::wantChart(std::shared_ptr<Function> function)
-{
+void ProcessesWidget::wantChart(std::shared_ptr<Function> function) {
   /* Start with the simplest chart possible, user will edit it to its taste.
    * Note: C++ need to be baby-fed because parser is getting very confused by
    * inline braces it seems.
    * Note to self: never use a UI library that depends on C++ ever again */
-  std::shared_ptr<dessser::gen::sync_value::t> chart {
-    newDashboardChart(function->siteName,
-                      function->programName,
-                      function->name.toStdString()) };
+  std::shared_ptr<dessser::gen::sync_value::t> chart{newDashboardChart(
+      function->siteName, function->programName, function->name.toStdString())};
 
   /* The only way to display a chart is from a dashboard (where its definition
    * is stored). So this button merely adds a new chart to the scratchpad
    * dashboard and opens it: */
-  std::shared_ptr<dessser::gen::sync_key::t> widget_key {
-    dashboardNextWidget(SCRATCHPAD) };
+  std::shared_ptr<dessser::gen::sync_key::t> widget_key{
+      dashboardNextWidget(SCRATCHPAD)};
 
   /* No need to lock in theory, as the scratchpad is per socket, but
    * lock ownership is how we know to activate the editor: */
   Menu::getClient()->sendNew(widget_key, chart, DEFAULT_LOCK_TIMEOUT);
 
-  /* And let's open it (the chart editor will pop-up open because of the lock): */
+  /* And let's open it (the chart editor will pop-up open because of the lock):
+   */
   Menu::openDashboard(SCRATCHPAD);
 }
 
-void ProcessesWidget::activate(QModelIndex const &proxyIndex, int button)
-{
+void ProcessesWidget::activate(QModelIndex const &proxyIndex, int button) {
   // Retrieve the function or program:
-  QModelIndex const index { proxyModel->mapToSource(proxyIndex) };
-  GraphItem *parentPtr {
-    static_cast<GraphItem *>(index.internalPointer()) };
+  QModelIndex const index{proxyModel->mapToSource(proxyIndex)};
+  GraphItem *parentPtr{static_cast<GraphItem *>(index.internalPointer())};
 
-  ProgramItem const *programItem {
-    dynamic_cast<ProgramItem const *>(parentPtr) };
+  ProgramItem const *programItem{dynamic_cast<ProgramItem const *>(parentPtr)};
 
   if (programItem && button == 2) {
     wantEdit(std::static_pointer_cast<Program>(programItem->shared));
     return;
   }
 
-  FunctionItem *functionItem {
-    dynamic_cast<FunctionItem *>(parentPtr) };
+  FunctionItem *functionItem{dynamic_cast<FunctionItem *>(parentPtr)};
 
   if (functionItem) {
     if (button == 1)
@@ -335,31 +319,30 @@ void ProcessesWidget::activate(QModelIndex const &proxyIndex, int button)
   qCritical() << "Activate an unknown object!?";
 }
 
-void ProcessesWidget::activate1(QModelIndex const &proxyIndex)
-{
+void ProcessesWidget::activate1(QModelIndex const &proxyIndex) {
   activate(proxyIndex, 1);
 }
 
-void ProcessesWidget::activate2(QModelIndex const &proxyIndex)
-{
+void ProcessesWidget::activate2(QModelIndex const &proxyIndex) {
   activate(proxyIndex, 2);
 }
 
-void ProcessesWidget::expandRows(QModelIndex const &parent, int first, int last)
-{
+void ProcessesWidget::expandRows(QModelIndex const &parent, int first,
+                                 int last) {
   if (verbose)
     qDebug() << "ProcessesWidget: Expanding children of"
-              << (parent.isValid() ?
-                    (static_cast<GraphItem *>(
-                      parent.internalPointer())->shared->name) : "root")
-              << "from rows" << first << "to" << last;
+             << (parent.isValid()
+                     ? (static_cast<GraphItem *>(parent.internalPointer())
+                            ->shared->name)
+                     : "root")
+             << "from rows" << first << "to" << last;
 
   treeView->setExpanded(parent, true);
 
-  for (int r = first; r <= last; r ++) {
-    QModelIndex const index { parent.model()->index(r, 0, parent) };
+  for (int r = first; r <= last; r++) {
+    QModelIndex const index{parent.model()->index(r, 0, parent)};
     // recursively:
-    int const numChildren { index.model()->rowCount(index) };
+    int const numChildren{index.model()->rowCount(index)};
     expandRows(index, 0, numChildren - 1);
   }
 }

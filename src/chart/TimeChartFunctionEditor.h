@@ -1,9 +1,9 @@
 #ifndef TIMECHARTFUNCTIONEDITOR_H_200306
 #define TIMECHARTFUNCTIONEDITOR_H_200306
-#include <memory>
-#include <string>
 #include <QSize>
 #include <QWidget>
+#include <memory>
+#include <string>
 
 class Automaton;
 class FactorsDelegate;
@@ -15,14 +15,17 @@ class QPushButton;
 class TimeChartFunctionFieldsModel;
 
 namespace dessser {
-  namespace gen {
-    namespace dashboard_widget { struct source; }
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace dashboard_widget {
+struct source;
 }
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
-class TimeChartFunctionEditor : public QWidget
-{
+class TimeChartFunctionEditor : public QWidget {
   Q_OBJECT
 
   FactorsDelegate *factorsDelegate;
@@ -33,30 +36,29 @@ class TimeChartFunctionEditor : public QWidget
 
   FixedTableView *fields;
 
-public:
-  QCheckBox *visible;   // To disable the whole source temporarily
+ public:
+  QCheckBox *visible;  // To disable the whole source temporarily
   TimeChartFunctionFieldsModel *model;
 
   TimeChartFunctionEditor(
-    std::string const &site,
-    std::string const &program,
-    std::string const &function,
-    bool customizable = true,  // TODO: disable this for the raw config editor
-    QWidget *parent = nullptr);
+      std::string const &site, std::string const &program,
+      std::string const &function,
+      bool customizable = true,  // TODO: disable this for the raw config editor
+      QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::dashboard_widget::source> getValue() const;
 
-protected slots:
+ protected slots:
   void wantSource();
   void wantCustomize();
-  void automatonTransition(
-    Automaton *, size_t, std::shared_ptr<dessser::gen::sync_value::t const>);
+  void automatonTransition(Automaton *, size_t,
+                           std::shared_ptr<dessser::gen::sync_value::t const>);
 
-public slots:
+ public slots:
   void setEnabled(bool);
   bool setValue(dessser::gen::dashboard_widget::source const &);
 
-signals:
+ signals:
   void fieldChanged(std::string const &site, std::string const &program,
                     std::string const &function, std::string const &name);
   void customizedFunction(std::string const &site, std::string const &program,

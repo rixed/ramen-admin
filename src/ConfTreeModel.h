@@ -8,20 +8,19 @@ class ConfSubTree;
 struct KValue;
 class QStringList;
 
-class ConfTreeModel : public QAbstractItemModel
-{
+class ConfTreeModel : public QAbstractItemModel {
   Q_OBJECT
 
-public:
+ public:
   ConfSubTree *root;
 
   ConfSubTree *findOrCreate(
-    ConfSubTree *,
-    // This QStringList will be emptied:
-    QStringList &,
-    /* Therefore this "const" QString must not belong to the above list.
-     * To ensure this, it is purposefully passed as copy: */
-    QString const termValue);
+      ConfSubTree *,
+      // This QStringList will be emptied:
+      QStringList &,
+      /* Therefore this "const" QString must not belong to the above
+       * list. To ensure this, it is purposefully passed as copy: */
+      QString const termValue);
 
   ConfTreeModel(QObject *parent = nullptr);
 

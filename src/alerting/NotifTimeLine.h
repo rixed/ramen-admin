@@ -7,10 +7,12 @@
 #include "timeline/AbstractTimeLine.h"
 
 namespace dessser {
-  namespace gen {
-    namespace alerting_log { struct t; }
-  }
+namespace gen {
+namespace alerting_log {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 class NotifTimeLine : public AbstractTimeLine {
   Q_OBJECT
@@ -19,21 +21,16 @@ class NotifTimeLine : public AbstractTimeLine {
 
   std::shared_ptr<dessser::gen::alerting_log::t const> selected;
 
-  void paintTick(
-    dessser::gen::alerting_log::t const &,
-    QPainter *, qreal width, qreal x, qreal y0, qreal y1,
-    bool is_selected = false) const;
+  void paintTick(dessser::gen::alerting_log::t const &, QPainter *, qreal width,
+                 qreal x, qreal y0, qreal y1, bool is_selected = false) const;
 
-public:
+ public:
   // Created empty:
-  NotifTimeLine(
-    std::string const incidentId,
-    qreal beginOfTime, qreal endOfTime,
-    bool withCursor = true,
-    bool doScroll = true,
-    QWidget *parent = nullptr);
+  NotifTimeLine(std::string const incidentId, qreal beginOfTime,
+                qreal endOfTime, bool withCursor = true, bool doScroll = true,
+                QWidget *parent = nullptr);
 
-protected:
+ protected:
   void paintEvent(QPaintEvent *) override;
 
   bool event(QEvent *) override;

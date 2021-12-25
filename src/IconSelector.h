@@ -1,18 +1,18 @@
 #ifndef ICONSELECTOR_H_200316
 #define ICONSELECTOR_H_200316
 /* A simple widget offering to select one amongst several icons */
-#include <optional>
 #include <QList>
 #include <QPixmap>
 #include <QSize>
 #include <QWidget>
+#include <optional>
 
-class IconSelector : public QWidget
-{
+class IconSelector : public QWidget {
   Q_OBJECT
 
   int m_selected;
-  Q_PROPERTY(int selected READ selected WRITE setSelected NOTIFY selectionChanged);
+  Q_PROPERTY(
+      int selected READ selected WRITE setSelected NOTIFY selectionChanged);
 
   QList<QPixmap> pixmaps;
 
@@ -24,7 +24,7 @@ class IconSelector : public QWidget
 
   std::optional<int> hovered, clicked;
 
-public:
+ public:
   /* TODO: select orientation */
   IconSelector(QList<QPixmap>, QWidget *parent = nullptr);
 
@@ -34,12 +34,9 @@ public:
 
   void setSelected(int s) { m_selected = s; }
 
-  static void paint(
-    QPainter &,
-    QRect const &rect,
-    QList<QPixmap> const &,
-    std::optional<int> selected = std::nullopt,
-    std::optional<int> hovered = std::nullopt);
+  static void paint(QPainter &, QRect const &rect, QList<QPixmap> const &,
+                    std::optional<int> selected = std::nullopt,
+                    std::optional<int> hovered = std::nullopt);
 
   void paintEvent(QPaintEvent *) override;
 
@@ -47,7 +44,7 @@ public:
   void mousePressEvent(QMouseEvent *) override;
   void mouseReleaseEvent(QMouseEvent *) override;
 
-signals:
+ signals:
   void selectionChanged(int selected);
 };
 

@@ -2,13 +2,11 @@
 #define POSINTVALIDATOR_H_190504
 #include <QIntValidator>
 
-class PosIntValidator : public QIntValidator
-{
+class PosIntValidator : public QIntValidator {
   Q_OBJECT
 
-public:
-  PosIntValidator(QObject *parent = nullptr) : QIntValidator(parent)
-  {
+ public:
+  PosIntValidator(QObject *parent = nullptr) : QIntValidator(parent) {
     setBottom(0);
   }
   ~PosIntValidator() {}

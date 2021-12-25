@@ -7,35 +7,30 @@
 
 class QPainter;
 
-class TimeLine : public AbstractTimeLine
-{
+class TimeLine : public AbstractTimeLine {
   Q_OBJECT
 
-public:
+ public:
   enum TicksPosition {
-    TicksTop    = 0x1,
+    TicksTop = 0x1,
     TicksBottom = 0x2,
   };
 
-  TimeLine(
-    qreal beginOftime, qreal endOfTime,
-    TicksPosition = TicksTop,
-    bool withCursor = true,
-    QWidget *parent = nullptr);
+  TimeLine(qreal beginOftime, qreal endOfTime, TicksPosition = TicksTop,
+           bool withCursor = true, QWidget *parent = nullptr);
 
   QSize sizeHint() const override { return QSize(250, 40); }
 
-protected:
+ protected:
   void paintTick(QPainter &, qreal const, int const ticksHeight) const;
 
   void paintEvent(QPaintEvent *) override;
 
-  void paintLabel(
-    QPainter &, QFont const &, QFont const &,
-    qreal const, QDateTime *lastTime,
-    int const ticksHeight, int const labelsHeight) const;
+  void paintLabel(QPainter &, QFont const &, QFont const &, qreal const,
+                  QDateTime *lastTime, int const ticksHeight,
+                  int const labelsHeight) const;
 
-private:
+ private:
   TicksPosition ticksPosition;
 };
 

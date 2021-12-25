@@ -6,22 +6,21 @@
 
 class QLineEdit;
 
-class KIpEditor : public AtomicWidget
-{
+class KIpEditor : public AtomicWidget {
   Q_OBJECT
 
   QLineEdit *lineEdit;
   bool allowV4, allowV6;
 
-public:
-  KIpEditor(bool allow_v4 = true, bool allow_v6 = true, QWidget *parent = nullptr);
+ public:
+  KIpEditor(bool allow_v4 = true, bool allow_v6 = true,
+            QWidget *parent = nullptr);
 
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;
   void setEnabled(bool);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

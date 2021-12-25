@@ -4,11 +4,10 @@
 
 class GraphModel;
 
-class StorageInfo : public QSplitter
-{
+class StorageInfo : public QSplitter {
   Q_OBJECT
 
-public:
+ public:
   StorageInfo(GraphModel *, QWidget *parent = nullptr);
 };
 

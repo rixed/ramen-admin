@@ -1,17 +1,15 @@
+#include "TimeChartAxisEditor.h"
+
 #include <QButtonGroup>
 #include <QCheckBox>
 #include <QDebug>
 #include <QFormLayout>
-#include <QRadioButton>
 #include <QHBoxLayout>
+#include <QRadioButton>
 
 #include "desssergen/dashboard_widget.h"
 
-#include "TimeChartAxisEditor.h"
-
-TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
-  : QWidget(parent)
-{
+TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent) : QWidget(parent) {
   left = new QRadioButton(tr("Left"));
   right = new QRadioButton(tr("Right"));
   QButtonGroup *side = new QButtonGroup;
@@ -23,21 +21,17 @@ TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
 
   linear = new QRadioButton(tr("Linear"));
   logarithmic = new QRadioButton(tr("Logarithmic"));
-  QButtonGroup *linLog { new QButtonGroup };
+  QButtonGroup *linLog{new QButtonGroup};
   linLog->addButton(linear);
   linLog->addButton(logarithmic);
   linear->setChecked(true);
 
-  connect(side, QOverload<int>::of(&QButtonGroup::idClicked),
-          this, [this](int){
-    emit valueChanged();
-  });
-  connect(forceZero, &QCheckBox::stateChanged,
-          this, &TimeChartAxisEditor::valueChanged);
-  connect(linLog, QOverload<int>::of(&QButtonGroup::idClicked),
-          this, [this](int){
-    emit valueChanged();
-  });
+  connect(side, QOverload<int>::of(&QButtonGroup::idClicked), this,
+          [this](int) { emit valueChanged(); });
+  connect(forceZero, &QCheckBox::stateChanged, this,
+          &TimeChartAxisEditor::valueChanged);
+  connect(linLog, QOverload<int>::of(&QButtonGroup::idClicked), this,
+          [this](int) { emit valueChanged(); });
 
   QHBoxLayout *sideLayout = new QHBoxLayout;
   sideLayout->addWidget(left);
@@ -47,7 +41,7 @@ TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
   scaleLayout->addWidget(linear);
   scaleLayout->addWidget(logarithmic);
 
-  QFormLayout *form= new QFormLayout;
+  QFormLayout *form = new QFormLayout;
   form->addRow(tr("Side"), sideLayout);
   form->addRow(tr("Force Zero"), forceZero);
   form->addRow(tr("Scale"), scaleLayout);
@@ -56,8 +50,7 @@ TimeChartAxisEditor::TimeChartAxisEditor(QWidget *parent)
 }
 
 bool TimeChartAxisEditor::setValue(
-  dessser::gen::dashboard_widget::axis const &a)
-{
+    dessser::gen::dashboard_widget::axis const &a) {
   if (a.left != left->isChecked()) {
     (a.left ? left : right)->click();
   }
@@ -68,13 +61,13 @@ bool TimeChartAxisEditor::setValue(
 
   switch (a.scale->index()) {
     case dessser::gen::dashboard_widget::Linear:
-      if (! linear->isChecked()) {
+      if (!linear->isChecked()) {
         linear->click();
       }
       break;
 
     case dessser::gen::dashboard_widget::Logarithmic:
-      if (! logarithmic->isChecked()) {
+      if (!logarithmic->isChecked()) {
         logarithmic->click();
       }
       break;
@@ -83,17 +76,18 @@ bool TimeChartAxisEditor::setValue(
   return true;
 }
 
-std::shared_ptr<dessser::gen::dashboard_widget::axis> TimeChartAxisEditor::getValue() const
-{
-  std::shared_ptr<dessser::gen::dashboard_widget::scale> scale {
-    linear->isChecked() ?
-      std::make_shared<dessser::gen::dashboard_widget::scale>(
-        std::in_place_index<dessser::gen::dashboard_widget::Linear>, dessser::VOID) :
-      std::make_shared<dessser::gen::dashboard_widget::scale>(
-        std::in_place_index<dessser::gen::dashboard_widget::Logarithmic>, dessser::VOID) };
+std::shared_ptr<dessser::gen::dashboard_widget::axis>
+TimeChartAxisEditor::getValue() const {
+  std::shared_ptr<dessser::gen::dashboard_widget::scale> scale{
+      linear->isChecked()
+          ? std::make_shared<dessser::gen::dashboard_widget::scale>(
+                std::in_place_index<dessser::gen::dashboard_widget::Linear>,
+                dessser::VOID)
+          : std::make_shared<dessser::gen::dashboard_widget::scale>(
+                std::in_place_index<
+                    dessser::gen::dashboard_widget::Logarithmic>,
+                dessser::VOID)};
 
   return std::make_shared<dessser::gen::dashboard_widget::axis>(
-    forceZero->isChecked(),
-    left->isChecked(),
-    scale);
+      forceZero->isChecked(), left->isChecked(), scale);
 }

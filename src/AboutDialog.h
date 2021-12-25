@@ -2,11 +2,10 @@
 #define ABOUTDIALOG_H_190731
 #include <QDialog>
 
-class AboutDialog : public QDialog
-{
+class AboutDialog : public QDialog {
   Q_OBJECT
 
-public:
+ public:
   AboutDialog(QWidget *parent = nullptr);
 };
 

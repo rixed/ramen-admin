@@ -10,10 +10,10 @@ class AlertingJournal : public QWidget {
 
   QTableView *tableView;
 
-public:
+ public:
   AlertingJournal(AlertingLogsModel *model, QWidget *parent = nullptr);
 
-private slots:
+ private slots:
   void resizeColumns();
 };
 #endif

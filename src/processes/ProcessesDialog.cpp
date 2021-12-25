@@ -1,9 +1,11 @@
+#include "processes/ProcessesDialog.h"
+
 #include <QCoreApplication>
-#include <QMenuBar>
-#include <QMenu>
 #include <QKeyEvent>
-#include <QLineEdit>
 #include <QLabel>
+#include <QLineEdit>
+#include <QMenu>
+#include <QMenuBar>
 #include <QTreeView>
 
 #include "GraphModel.h"
@@ -12,80 +14,73 @@
 
 #include "processes/ProcessesDialog.h"
 
-ProcessesDialog::ProcessesDialog(QWidget *parent) :
-  SavedWindow("ProcessesWindow", tr("Processes List"), true, parent)
-{
+ProcessesDialog::ProcessesDialog(QWidget *parent)
+    : SavedWindow("ProcessesWindow", tr("Processes List"), true, parent) {
   if (GraphModel::globalGraphModel) {
-
     processesWidget =
-      new ProcessesWidget(GraphModel::globalGraphModel, this);
+        new ProcessesWidget(GraphModel::globalGraphModel, this);
     setCentralWidget(processesWidget);
 
     /* The menu bar */
-    QMenu *viewMenu { this->menuBar()->addMenu(
-      QCoreApplication::translate("QMenuBar", "&View")) };
+    QMenu *viewMenu{this->menuBar()->addMenu(
+        QCoreApplication::translate("QMenuBar", "&View"))};
 
-    viewMenu->addAction(
-      QCoreApplication::translate("QMenuBar", "Search…"),
-      processesWidget, &ProcessesWidget::openSearch,
-      QKeySequence::Find);
+    viewMenu->addAction(QCoreApplication::translate("QMenuBar", "Search…"),
+                        processesWidget, &ProcessesWidget::openSearch,
+                        QKeySequence::Find);
 
     // Also list unused workers (from lazy functions):
-    QAction *viewUnused {
-      viewMenu->addAction(
+    QAction *viewUnused{viewMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Unused"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewUnused) };
+        processesWidget->proxyModel, &ProcessesWidgetProxy::viewUnused)};
     viewUnused->setCheckable(true);
     viewUnused->setChecked(false);
     processesWidget->proxyModel->viewUnused(false);
 
     // Also list temporarily disabled functions:
-    QAction *viewDisabled {
-      viewMenu->addAction(
+    QAction *viewDisabled{viewMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Disabled"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewDisabled) };
+        processesWidget->proxyModel, &ProcessesWidgetProxy::viewDisabled)};
     viewDisabled->setCheckable(true);
     viewDisabled->setChecked(true);
     processesWidget->proxyModel->viewDisabled(true);
 
     /* Also list workers with no pid (such as conditionally disabled workers).
      * Notice that unused or disabled workers won't have a pid. */
-    QAction *viewNonRunning {
-      viewMenu->addAction(
+    QAction *viewNonRunning{viewMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Non-Running"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewNonRunning) };
+        processesWidget->proxyModel, &ProcessesWidgetProxy::viewNonRunning)};
     viewNonRunning->setCheckable(true);
     viewNonRunning->setChecked(false);
     processesWidget->proxyModel->viewNonRunning(false);
 
     // Also list instances without any worker at all:
-    QAction *viewFinished {
-      viewMenu->addAction(
+    QAction *viewFinished{viewMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Finished"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewFinished) };
+        processesWidget->proxyModel, &ProcessesWidgetProxy::viewFinished)};
     viewFinished->setCheckable(true);
     viewFinished->setChecked(false);
     processesWidget->proxyModel->viewFinished(false);
 
-    QAction *viewTopHalves {
-      viewMenu->addAction(
+    QAction *viewTopHalves{viewMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Top-Halves"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewTopHalves) };
+        processesWidget->proxyModel, &ProcessesWidgetProxy::viewTopHalves)};
     viewTopHalves->setCheckable(true);
     viewTopHalves->setChecked(false);
     processesWidget->proxyModel->viewTopHalves(false);
 
     viewMenu->addSeparator();
-    for (unsigned c = 0; c < GraphModel::NumColumns; c ++) {
+    for (unsigned c = 0; c < GraphModel::NumColumns; c++) {
       if (c == GraphModel::ActionButton1 ||
-          c == GraphModel::ActionButton2) continue; // Name and buttons are mandatory
+          c == GraphModel::ActionButton2)
+        continue;  // Name and buttons are mandatory
 
-      QString const name { GraphModel::columnName((GraphModel::Columns)c) };
+      QString const name{
+          GraphModel::columnName((GraphModel::Columns)c)};
       // Column names have already been translated
-      QAction *toggle {
-        viewMenu->addAction(name, this, [this, c](bool checked) {
-          processesWidget->treeView->setColumnHidden(c, !checked);
-        }) };
+      QAction *toggle{viewMenu->addAction(name, this, [this, c](bool checked) {
+        processesWidget->treeView->setColumnHidden(c, !checked);
+      })};
       toggle->setCheckable(true);
       if (GraphModel::columnIsImportant((GraphModel::Columns)c)) {
         toggle->setChecked(true);
@@ -98,8 +93,7 @@ ProcessesDialog::ProcessesDialog(QWidget *parent) :
     viewMenu->addSeparator();
 
   } else {
-
-    QString errMsg { tr("No global GraphModel yet!?") };
+    QString errMsg{tr("No global GrapModel yet!?")};
     setCentralWidget(new QLabel(errMsg));
     // Better luck next time?
     setAttribute(Qt::WA_DeleteOnClose);
@@ -109,13 +103,11 @@ ProcessesDialog::ProcessesDialog(QWidget *parent) :
   }
 }
 
-void ProcessesDialog::keyPressEvent(QKeyEvent *event)
-{
-  if (! processesWidget) return;
+void ProcessesDialog::keyPressEvent(QKeyEvent *event) {
+  if (!processesWidget) return;
 
   if (event->key() == Qt::Key_Escape &&
-      processesWidget->searchFrame->isVisible())
-  {
+      processesWidget->searchFrame->isVisible()) {
     processesWidget->searchFrame->hide();
     processesWidget->searchBox->clear();
     event->accept();

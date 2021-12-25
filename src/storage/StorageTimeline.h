@@ -24,9 +24,9 @@
  * explain a query, ie tells what archives are needed to fulfill a given
  * replay query.
  */
+#include <QWidget>
 #include <memory>
 #include <string>
-#include <QWidget>
 
 #include "ConfChange.h"
 
@@ -39,10 +39,12 @@ class TimeLineView;
 class TimeRangeEdit;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace sync_key {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
 class StorageTimeline : public QWidget {
   Q_OBJECT
@@ -54,12 +56,13 @@ class StorageTimeline : public QWidget {
   QPushButton *explainReset;
   std::shared_ptr<dessser::gen::sync_key::t const> respKey;
 
-  void receiveExplain(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void receiveExplain(std::shared_ptr<dessser::gen::sync_key::t const>,
+                      KValue const &);
 
-public:
+ public:
   StorageTimeline(GraphModel *, QWidget *parent = nullptr);
 
-protected slots:
+ protected slots:
   void enableExplainButton(FunctionItem *);
   void requestQueryPlan();
   void resetQueryPlan();

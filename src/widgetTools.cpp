@@ -1,7 +1,6 @@
 #include <QTabWidget>
 
-bool tryFocusTab(QTabWidget *w, QString const &label)
-{
+bool tryFocusTab(QTabWidget *w, QString const &label) {
   for (int i = 0; i < w->count(); i++) {
     if (w->tabText(i) == label) {
       w->setCurrentIndex(i);
@@ -11,7 +10,4 @@ bool tryFocusTab(QTabWidget *w, QString const &label)
   return false;
 }
 
-void focusLastTab(QTabWidget *w)
-{
-  w->setCurrentIndex(w->count() - 1);
-}
+void focusLastTab(QTabWidget *w) { w->setCurrentIndex(w->count() - 1); }

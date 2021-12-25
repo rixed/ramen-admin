@@ -4,35 +4,36 @@
  * Based on Qt example at
  * https://doc.qt.io/qt-5/qtwidgets-widgets-elidedlabel-example.html */
 #include <QString>
+
 #include "AtomicWidget.h"
 
 namespace dessser {
-  namespace gen {
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_value {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class KShortLabel : public AtomicWidget
-{
+class KShortLabel : public AtomicWidget {
   Q_OBJECT
 
   QString text;
 
   int leftMargin, topMargin, rightMargin, bottomMargin;
 
-public:
+ public:
   KShortLabel(QWidget *parent = nullptr);
 
   void setContentsMargins(int, int, int, int);
 
-  void setEnabled(bool) {} // not editable
+  void setEnabled(bool) {}  // not editable
 
-protected:
+ protected:
   void paintEvent(QPaintEvent *event);
 
-public slots:
-  bool setValue(
-    std::shared_ptr<dessser::gen::sync_value::t const>);
+ public slots:
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

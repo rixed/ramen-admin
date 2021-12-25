@@ -1,8 +1,8 @@
 #ifndef CODEEDIT_H_190516
 #define CODEEDIT_H_190516
+#include <QWidget>
 #include <memory>
 #include <string>
-#include <QWidget>
 
 #include "ConfChange.h"
 
@@ -17,25 +17,27 @@ class QStackedLayout;
 class SourceInfoViewer;
 
 namespace dessser {
-  namespace gen {
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_value {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-class CodeEdit : public QWidget
-{
+class CodeEdit : public QWidget {
   Q_OBJECT
 
   AtomicWidget const *currentWidget() const;
 
-  void setError(std::shared_ptr<dessser::gen::sync_key::t const>, KValue const &);
+  void setError(std::shared_ptr<dessser::gen::sync_key::t const>,
+                KValue const &);
 
   /* Associate the given key to that editor for that language index
    * if the key is null then no key will be associated. */
-  void setLanguageKey(
-    int, AtomicWidget *, std::shared_ptr<dessser::gen::sync_key::t const>);
+  void setLanguageKey(int, AtomicWidget *,
+                      std::shared_ptr<dessser::gen::sync_key::t const>);
 
-public:
+ public:
   std::string srcPath;
 
   /* When several source extensions are defined, an additional combo box is
@@ -73,11 +75,11 @@ public:
 
   bool hasValidInput() const;
 
-protected:
+ protected:
   void resetError(KValue const *);
   void doResetError(KValue const &);
 
-public slots:
+ public slots:
   void setSrcPath(std::string const &);
 
   /* Display the editor corresponding to the given language index (either
@@ -86,10 +88,10 @@ public slots:
 
   void disableLanguageSwitch(bool);
 
-protected slots:
+ protected slots:
   void onChange(QList<ConfChange> const &);
 
-signals:
+ signals:
   void inputChanged();
 };
 

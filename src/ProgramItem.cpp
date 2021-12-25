@@ -1,3 +1,5 @@
+#include "ProgramItem.h"
+
 #include <QMarginsF>
 
 #include "FunctionItem.h"
@@ -6,62 +8,54 @@
 #include "stream/GraphView.h"
 #include "stream/GraphViewSettings.h"
 
-#include "ProgramItem.h"
-
-ProgramItem::ProgramItem(
-  GraphItem *treeParent, std::unique_ptr<Program> program,
-  GraphViewSettings const &settings)
-  : GraphItem(treeParent, std::move(program), settings)
-{
+ProgramItem::ProgramItem(GraphItem *treeParent,
+                         std::unique_ptr<Program> program,
+                         GraphViewSettings const &settings)
+    : GraphItem(treeParent, std::move(program), settings) {
   setZValue(2);
 }
 
-void ProgramItem::reorder(GraphModel *model)
-{
+void ProgramItem::reorder(GraphModel *model) {
   for (int i = 0; (size_t)i < functions.size(); i++) {
     if (functions[i]->row != i) {
       functions[i]->row = i;
       functions[i]->setPos(30, i * 30);
-      emit model->positionChanged(model->createIndex(
-        i, 0, static_cast<GraphItem *>(functions[i])));
+      emit model->positionChanged(
+          model->createIndex(i, 0, static_cast<GraphItem *>(functions[i])));
     }
   }
   prepareGeometryChange();
 }
 
-std::vector<std::pair<QString const, QString const>> ProgramItem::labels() const
-{
-  return {{ "#functions", QString::number(functions.size()) }};
+std::vector<std::pair<QString const, QString const> > ProgramItem::labels()
+    const {
+  return {{"#functions", QString::number(functions.size())}};
 }
 
-QRectF ProgramItem::operationRect() const
-{
+QRectF ProgramItem::operationRect() const {
   QRectF bbox;
   for (auto const &function : functions) {
-    QRectF b { function->operationRect() };
+    QRectF b{function->operationRect()};
     b.translate(function->pos());
     bbox |= b;
   }
-  bbox += QMarginsF(settings.functionMarginHoriz,
-                    settings.functionMarginTop,
-                    settings.functionMarginHoriz,
-                    settings.functionMarginBottom);
+  bbox +=
+      QMarginsF(settings.functionMarginHoriz, settings.functionMarginTop,
+                settings.functionMarginHoriz, settings.functionMarginBottom);
   return bbox;
 }
 
 // All their running functions are top-halves
-bool ProgramItem::isTopHalf() const
-{
+bool ProgramItem::isTopHalf() const {
   if (0 == functions.size()) return false;
 
   for (auto &function : functions) {
-    if (! function->isTopHalf()) return false;
+    if (!function->isTopHalf()) return false;
   }
   return true;
 }
 
-bool ProgramItem::isUsed() const
-{
+bool ProgramItem::isUsed() const {
   if (0 == functions.size()) return false;
 
   for (auto &function : functions) {
@@ -70,8 +64,7 @@ bool ProgramItem::isUsed() const
   return false;
 }
 
-bool ProgramItem::isRunning() const
-{
+bool ProgramItem::isRunning() const {
   if (0 == functions.size()) return false;
 
   for (auto &function : functions) {
@@ -80,8 +73,7 @@ bool ProgramItem::isRunning() const
   return false;
 }
 
-bool ProgramItem::isWorking() const
-{
+bool ProgramItem::isWorking() const {
   if (0 == functions.size()) return false;
 
   for (auto &function : functions) {
@@ -90,8 +82,7 @@ bool ProgramItem::isWorking() const
   return false;
 }
 
-QVariant ProgramItem::data(int column, int role) const
-{
+QVariant ProgramItem::data(int column, int role) const {
   if (role == Qt::DisplayRole && !isTopHalf()) {
     if (column == GraphModel::ActionButton2)
       return Resources::get()->infoPixmap;
@@ -100,9 +91,8 @@ QVariant ProgramItem::data(int column, int role) const
   return GraphItem::data(column, role);
 }
 
-ProgramItem::operator QString() const
-{
-  QString s { " Program[" };
+ProgramItem::operator QString() const {
+  QString s{" Program["};
   s += row;
   s += "]:";
   s += shared->name;

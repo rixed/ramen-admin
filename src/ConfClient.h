@@ -3,16 +3,17 @@
 /* A configuration client handle the connection to the configuration server,
  * starts the synchronization and feed the designated KVStore with changes. */
 
-#include <cstddef>
-#include <functional>
-#include <memory>
-#include <optional>
-#include <string>
-#include <list>
+#include <sodium.h>
+
 #include <QAbstractSocket>
 #include <QObject>
 #include <QString>
-#include <sodium.h>
+#include <cstddef>
+#include <functional>
+#include <list>
+#include <memory>
+#include <optional>
+#include <string>
 
 #include "SyncStatus.h"
 
@@ -22,21 +23,34 @@ struct UserIdentity;
 class KVStore;
 
 namespace dessser {
-  struct Bytes;
+struct Bytes;
 
-  namespace gen {
-    namespace sync_client_cmd { struct t; }
-    namespace sync_client_msg { struct t; }
-    namespace sync_server_msg { struct t; }
-    namespace sync_msg { struct t; }
-    namespace sync_socket { struct t; }
-    namespace sync_key { struct t; }
-    namespace sync_value { struct t; }
-  }
+namespace gen {
+namespace sync_client_cmd {
+struct t;
 }
+namespace sync_client_msg {
+struct t;
+}
+namespace sync_server_msg {
+struct t;
+}
+namespace sync_msg {
+struct t;
+}
+namespace sync_socket {
+struct t;
+}
+namespace sync_key {
+struct t;
+}
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
-class ConfClient : public QObject
-{
+class ConfClient : public QObject {
   Q_OBJECT
 
   std::shared_ptr<KVStore> kvs;
@@ -70,8 +84,9 @@ class ConfClient : public QObject
     uint32_t seq;
     std::function<int(std::string const &)> callback;
 
-    OnDoneCallback(uint32_t seq_, std::function<int(std::string const &)> callback_)
-      : seq(seq_), callback(callback_) {}
+    OnDoneCallback(uint32_t seq_,
+                   std::function<int(std::string const &)> callback_)
+        : seq(seq_), callback(callback_) {}
   };
 
   std::list<OnDoneCallback> onDoneCallbacks;
@@ -86,10 +101,9 @@ class ConfClient : public QObject
 
   int readSrvMsg(dessser::Bytes const &);
 
-  int rcvdSessionKey(
-        dessser::Bytes const &public_key,
-        dessser::Bytes const &nonce,
-        dessser::Bytes const &message);
+  int rcvdSessionKey(dessser::Bytes const &public_key,
+                     dessser::Bytes const &nonce,
+                     dessser::Bytes const &message);
 
   // Decrypt the given message and call readSrvMsg:
   int readCrypted(dessser::Bytes const &);
@@ -98,25 +112,21 @@ class ConfClient : public QObject
 
   int rcvdAuthErr(QString const &err);
 
-  int rcvdSetKey(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>,
-        QString const &set_by_uid, double const mtime);
+  int rcvdSetKey(std::shared_ptr<dessser::gen::sync_key::t const>,
+                 std::shared_ptr<dessser::gen::sync_value::t const>,
+                 QString const &set_by_uid, double const mtime);
 
-  int rcvdNewKey(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>,
-        QString const &set_by_uid, double const mtime,
-        bool const can_write, bool const can_del,
-        QString const &owner, double const expiry);
+  int rcvdNewKey(std::shared_ptr<dessser::gen::sync_key::t const>,
+                 std::shared_ptr<dessser::gen::sync_value::t const>,
+                 QString const &set_by_uid, double const mtime,
+                 bool const can_write, bool const can_del, QString const &owner,
+                 double const expiry);
 
-  int rcvdDelKey(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::string const &uid);
+  int rcvdDelKey(std::shared_ptr<dessser::gen::sync_key::t const>,
+                 std::string const &uid);
 
-  int rcvdLockKey(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        QString const &owner, double const expiry);
+  int rcvdLockKey(std::shared_ptr<dessser::gen::sync_key::t const>,
+                  QString const &owner, double const expiry);
 
   int rcvdUnlockKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
@@ -127,62 +137,55 @@ class ConfClient : public QObject
   QString const username() const;
 
   // Checks whether we had a call-back for that key and execute it
-  int checkDones(
-        dessser::gen::sync_key::t const &,
-        dessser::gen::sync_value::t const &);
+  int checkDones(dessser::gen::sync_key::t const &,
+                 dessser::gen::sync_value::t const &);
 
-public:
+ public:
   /* Some stats about the connection */
   qint64 sentBytes = 0U, rcvdBytes = 0U;
   qint64 sentMsgs = 0U, rcvdMsgs = 0U;
 
-/* Configuration server's representation of my socket, identifying this
-   * connection (although most configuration objects are associated to a user name,
-   * some are with a specific socket). */
+  /* Configuration server's representation of my socket, identifying this
+   * connection (although most configuration objects are associated to a user
+   * name, some are with a specific socket). */
   std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
   std::shared_ptr<dessser::gen::sync_key::t const> myErrKey;
 
   // confserver as in "host:port"
   ConfClient(QString const &server, QString const &username,
-             std::shared_ptr<UserIdentity const>,
-             std::shared_ptr<KVStore>);
+             std::shared_ptr<UserIdentity const>, std::shared_ptr<KVStore>);
 
   bool isSynced() const;
 
-  int sendNew(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const> = nullptr,
-        double timeout = 0.);
+  int sendNew(std::shared_ptr<dessser::gen::sync_key::t const>,
+              std::shared_ptr<dessser::gen::sync_value::t const> = nullptr,
+              double timeout = 0.);
 
-  int sendSet(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        std::shared_ptr<dessser::gen::sync_value::t const>);
+  int sendSet(std::shared_ptr<dessser::gen::sync_key::t const>,
+              std::shared_ptr<dessser::gen::sync_value::t const>);
 
-# define DEFAULT_LOCK_TIMEOUT 600.
-  int sendLock(
-        std::shared_ptr<dessser::gen::sync_key::t const>,
-        double timeout = DEFAULT_LOCK_TIMEOUT);
+#define DEFAULT_LOCK_TIMEOUT 600.
+  int sendLock(std::shared_ptr<dessser::gen::sync_key::t const>,
+               double timeout = DEFAULT_LOCK_TIMEOUT);
 
-  int sendUnlock(
-        std::shared_ptr<dessser::gen::sync_key::t const>);
+  int sendUnlock(std::shared_ptr<dessser::gen::sync_key::t const>);
 
-  int sendDel(
-        std::shared_ptr<dessser::gen::sync_key::t const>);
+  int sendDel(std::shared_ptr<dessser::gen::sync_key::t const>);
 
   int sendCmd(
-    std::shared_ptr<dessser::gen::sync_client_cmd::t const>,
-    /* Register what should happen when the result is received (with err message,
-     * empty if no error). */
-    std::optional<std::function<int(std::string const &)>> = std::nullopt,
-    bool echo = true);
+      std::shared_ptr<dessser::gen::sync_client_cmd::t const>,
+      /* Register what should happen when the result is received (with err
+       * message, empty if no error). */
+      std::optional<std::function<int(std::string const &)> > = std::nullopt,
+      bool echo = true);
 
-signals:
+ signals:
   void connectionProgressed(SyncStatus newStage);
   void connectionNonFatalError(SyncStatus currentStatus, QString const &error);
   void connectionFatalError(SyncStatus currentStatus, QString const &error);
   void knownErrKey(std::shared_ptr<dessser::gen::sync_key::t const>);
 
-private slots:
+ private slots:
   void onTcpError(QAbstractSocket::SocketError);
   void onStateChange(QAbstractSocket::SocketState);
   void readMsg();

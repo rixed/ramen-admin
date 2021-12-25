@@ -1,24 +1,28 @@
 #ifndef SOURCESMODEL_H_190530
 #define SOURCESMODEL_H_190530
-#include <memory>
 #include <QAbstractItemModel>
 #include <QDebug>
 #include <QtGlobal>
+#include <memory>
 
 struct ConfChange;
 struct KValue;
 
 namespace dessser {
-  namespace gen {
-    namespace source_info { struct t; }
-    namespace sync_key { struct t; }
-  }
+namespace gen {
+namespace source_info {
+struct t;
 }
+namespace sync_key {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class SourcesModel : public QAbstractItemModel {
   Q_OBJECT
 
-public:
+ public:
   enum Columns {
     SrcPath = 0,
     Action1,
@@ -30,12 +34,12 @@ public:
   struct TreeItem {
     QString name;
 
-    TreeItem *parent; // or nullptr for root
+    TreeItem *parent;  // or nullptr for root
 
     TreeItem() : parent(nullptr) {}
 
-    TreeItem(QString name_, TreeItem *parent_ = nullptr) :
-      name(name_), parent(parent_) {}
+    TreeItem(QString name_, TreeItem *parent_ = nullptr)
+        : name(name_), parent(parent_) {}
 
     virtual ~TreeItem() = 0;
 
@@ -46,41 +50,32 @@ public:
 
     bool isRoot() const { return parent == nullptr; }
 
-    QString fqName() const
-    {
-      return
-        !parent || parent->isRoot() ?
-            name :
-            parent->fqName() + "/" + name;
+    QString fqName() const {
+      return !parent || parent->isRoot() ? name : parent->fqName() + "/" + name;
     }
   };
 
   struct DirItem : public TreeItem {
     QList<TreeItem *> children;
 
-    DirItem(QString name_, TreeItem *parent_ = nullptr) :
-      TreeItem(name_, parent_) {}
+    DirItem(QString name_, TreeItem *parent_ = nullptr)
+        : TreeItem(name_, parent_) {}
 
-    ~DirItem()
-    {
+    ~DirItem() {
       // Children remove themselves from this list:
       while (children.count() > 0) delete children.first();
 
-      if (! parent) return;
-      DirItem *dir { static_cast<DirItem *>(parent) };
-      if (! dir->children.removeOne(this))
-        qWarning() << "Dir" << name
-                   << "has been abandoned!"; // Life goes on
+      if (!parent) return;
+      DirItem *dir{static_cast<DirItem *>(parent)};
+      if (!dir->children.removeOne(this))
+        qWarning() << "Dir" << name << "has been abandoned!";  // Life goes on
     }
 
     int numRows() const { return children.length(); }
 
     bool isDir() const { return true; }
 
-    void addItem(TreeItem *i, int row)
-    {
-      children.insert(row, i);
-    }
+    void addItem(TreeItem *i, int row) { children.insert(row, i); }
   };
 
   /* Files encompass all existing source extensions. Having another layer in
@@ -93,14 +88,14 @@ public:
 
     QList<QString> extensions;
 
-    FileItem(QString name_, std::string const &src_path, TreeItem *parent_ = nullptr) :
-      TreeItem(name_, parent_), srcPath(src_path) {}
+    FileItem(QString name_, std::string const &src_path,
+             TreeItem *parent_ = nullptr)
+        : TreeItem(name_, parent_), srcPath(src_path) {}
 
-    ~FileItem()
-    {
-      if (! parent) return;
-      DirItem *dir { static_cast<DirItem *>(parent) };
-      if (! dir->children.removeOne(this))
+    ~FileItem() {
+      if (!parent) return;
+      DirItem *dir{static_cast<DirItem *>(parent)};
+      if (!dir->children.removeOne(this))
         qCritical() << "File" << name << "has been abandoned!";
     }
 
@@ -108,14 +103,12 @@ public:
 
     bool isDir() const { return false; }
 
-    void addExtension(QString const &extension)
-    {
+    void addExtension(QString const &extension) {
       if (extensions.contains(extension)) return;
       extensions += extension;
     }
 
-    void delExtension(QString const &extension)
-    {
+    void delExtension(QString const &extension) {
       extensions.removeOne(extension);
     }
   };
@@ -124,11 +117,11 @@ public:
 
   QModelIndex indexOfItem(TreeItem const *) const;
 
-private:
+ private:
   /* Construct from the root and the "absolute" name; returns the created
    * file (or nullptr if the sourceName was empty): */
-  FileItem *createAll(
-    std::string const &, QStringList &names, QString const &extension, DirItem *);
+  FileItem *createAll(std::string const &, QStringList &names,
+                      QString const &extension, DirItem *);
   /* Destruct that file, and the dirs that become empty: */
   void deleteAll(QStringList &names, QString const &extension, DirItem *);
 
@@ -137,7 +130,7 @@ private:
   void addSource(dessser::gen::sync_key::t const &, KValue const &);
   void delSource(dessser::gen::sync_key::t const &, KValue const &);
 
-public:
+ public:
   SourcesModel(QObject *parent = nullptr);
 
   QModelIndex index(int row, int column, QModelIndex const &parent) const;
@@ -159,13 +152,13 @@ public:
   QModelIndex const indexOfSrcPath(std::string const &);
 
   std::shared_ptr<dessser::gen::source_info::t const> sourceInfoOfItem(
-    TreeItem const *) const;
+      TreeItem const *) const;
 
-private slots:
+ private slots:
   void onChange(QList<ConfChange> const &);
 };
 
-inline SourcesModel::TreeItem::~TreeItem() {} // stupid language!
+inline SourcesModel::TreeItem::~TreeItem() {}  // stupid language!
 
 /*
  * Helpers:
@@ -179,6 +172,6 @@ QString const baseNameOfKey(dessser::gen::sync_key::t const &);
 
 // The other way around:
 std::shared_ptr<dessser::gen::sync_key::t> keyOfSourceName(
-  QString const &, char const *newExtension = nullptr);
+    QString const &, char const *newExtension = nullptr);
 
 #endif

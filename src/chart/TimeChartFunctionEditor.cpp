@@ -1,4 +1,5 @@
-#include <cstdlib>
+#include "chart/TimeChartFunctionEditor.h"
+
 #include <QCheckBox>
 #include <QCompleter>
 #include <QDebug>
@@ -10,64 +11,62 @@
 #include <QPushButton>
 #include <QTableView>
 #include <QVBoxLayout>
+#include <cstdlib>
 
 #include "Automaton.h"
+#include "ColorDelegate.h"
+#include "ConfClient.h"
+#include "FixedTableView.h"
+#include "MakeSyncValue.h"
+#include "Menu.h"
+#include "Resources.h"
+#include "RollButtonDelegate.h"
 #include "chart/FactorsDelegate.h"
 #include "chart/TimeChartAutomatonCustomize.h"
 #include "chart/TimeChartFunctionFieldsModel.h"
-#include "ColorDelegate.h"
-#include "ConfClient.h"
 #include "desssergen/dashboard_widget.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/rc_entry.h"
 #include "desssergen/sync_value.h"
-#include "FixedTableView.h"
-#include "MakeSyncValue.h"
-#include "Menu.h"
 #include "misc.h"
 #include "misc_dessser.h"
-#include "Resources.h"
-#include "RollButtonDelegate.h"
 #include "source/SourcesWin.h"
 
-#include "chart/TimeChartFunctionEditor.h"
-
-static bool const verbose { false };
+static bool const verbose{false};
 
 namespace dessser {
-  namespace gen {
-    namespace program_run_parameter { struct t; }
-  }
+namespace gen {
+namespace program_run_parameter {
+struct t;
 }
+}  // namespace gen
+}  // namespace dessser
 
-TimeChartFunctionEditor::TimeChartFunctionEditor(
-  std::string const &site,
-  std::string const &program,
-  std::string const &function,
-  bool customizable,
-  QWidget *parent)
-  : QWidget(parent)
-{
+TimeChartFunctionEditor::TimeChartFunctionEditor(std::string const &site,
+                                                 std::string const &program,
+                                                 std::string const &function,
+                                                 bool customizable,
+                                                 QWidget *parent)
+    : QWidget(parent) {
   visible = new QCheckBox(tr("Visible"));
   visible->setChecked(true);
 
   if (customizable) {
     customize = new QPushButton(tr("Customize"));
-    connect(customize, &QPushButton::clicked,
-            this, &TimeChartFunctionEditor::wantCustomize);
+    connect(customize, &QPushButton::clicked, this,
+            &TimeChartFunctionEditor::wantCustomize);
   } else {
     customize = nullptr;
   }
 
   openSource = new QPushButton(tr("Source…"));
-  connect(openSource, &QPushButton::clicked,
-          this, &TimeChartFunctionEditor::wantSource);
+  connect(openSource, &QPushButton::clicked, this,
+          &TimeChartFunctionEditor::wantSource);
 
-  Resources *r { Resources::get() };
+  Resources *r{Resources::get()};
 
   deleteButton = new QPushButton(r->deletePixmap, QString());
-  connect(deleteButton, &QPushButton::clicked,
-          this, &QWidget::deleteLater);
+  connect(deleteButton, &QPushButton::clicked, this, &QWidget::deleteLater);
 
   model = new TimeChartFunctionFieldsModel(site, program, function);
 
@@ -79,69 +78,67 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   // Best thing after having all the editors open at once:
   fields->setEditTriggers(QAbstractItemView::AllEditTriggers);
 
-  RollButtonDelegate *reprDelegate { new RollButtonDelegate };
+  RollButtonDelegate *reprDelegate{new RollButtonDelegate};
   reprDelegate->addIcon(r->emptyIcon);
   reprDelegate->addIcon(r->lineChartIcon);
   reprDelegate->addIcon(r->stackedChartIcon);
   reprDelegate->addIcon(r->stackCenteredChartIcon);
   fields->setItemDelegateForColumn(
-    TimeChartFunctionFieldsModel::ColRepresentation, reprDelegate);
+      TimeChartFunctionFieldsModel::ColRepresentation, reprDelegate);
 
   factorsDelegate = new FactorsDelegate(this);
   factorsDelegate->setColumns(model->factors);
-  fields->setItemDelegateForColumn(
-    TimeChartFunctionFieldsModel::ColFactors, factorsDelegate);
+  fields->setItemDelegateForColumn(TimeChartFunctionFieldsModel::ColFactors,
+                                   factorsDelegate);
 
-  ColorDelegate *colorDelegate { new ColorDelegate };
-  fields->setItemDelegateForColumn(
-    TimeChartFunctionFieldsModel::ColColor, colorDelegate);
+  ColorDelegate *colorDelegate{new ColorDelegate};
+  fields->setItemDelegateForColumn(TimeChartFunctionFieldsModel::ColColor,
+                                   colorDelegate);
 
   /*
    * Emit fieldChanged whenever the underlying model data is changed:
    */
 
-  connect(model, &QAbstractTableModel::dataChanged,
-          this, [this](QModelIndex const &topLeft,
-                       QModelIndex const &bottomRight)
-    {
-      if (verbose)
-        qDebug() << "TimeChartFunctionEditor: model data changed from row"
-                 << topLeft.row() << "to" << bottomRight.row();
-      // First reset the factors used by the delegate:
-      factorsDelegate->setColumns(model->factors);
-      // Then emit fieldChanged for every changed fields:
-      int const lastRow { bottomRight.row() };
-      dessser::gen::dashboard_widget::source const &source { model->source };
-      for (int row = topLeft.row(); row <= lastRow; row++) {
-        /* Model row correspond to numericFields not source.fields! */
-        if (row > model->numericFields.count()) {
-          qCritical("TimeChartFunctionEditor: dataChanged on row %d but model "
-                    "has only %d rows!", row, model->numericFields.count());
-          break;
-        }
-        if (verbose)
-          qDebug() << "TimeChartFunctionEditor: fieldChanged"
-                   << model->numericFields[row];
-        emit fieldChanged(source.name->site, source.name->program, source.name->function,
-                          model->numericFields[row].toStdString());
-      }
-    });
+  connect(model, &QAbstractTableModel::dataChanged, this,
+          [this](QModelIndex const &topLeft, QModelIndex const &bottomRight) {
+            if (verbose)
+              qDebug() << "TimeChartFunctionEditor: model data changed from row"
+                       << topLeft.row() << "to" << bottomRight.row();
+            // First reset the factors used by the delegate:
+            factorsDelegate->setColumns(model->factors);
+            // Then emit fieldChanged for every changed fields:
+            int const lastRow{bottomRight.row()};
+            dessser::gen::dashboard_widget::source const &source{model->source};
+            for (int row = topLeft.row(); row <= lastRow; row++) {
+              /* Model row correspond to numericFields not source.fields! */
+              if (row > model->numericFields.count()) {
+                qCritical(
+                    "TimeChartFunctionEditor: dataChanged on row %d but model "
+                    "has only %d rows!",
+                    row, model->numericFields.count());
+                break;
+              }
+              if (verbose)
+                qDebug() << "TimeChartFunctionEditor: fieldChanged"
+                         << model->numericFields[row];
+              emit fieldChanged(source.name->site, source.name->program,
+                                source.name->function,
+                                model->numericFields[row].toStdString());
+            }
+          });
 
-  connect(model, &QAbstractTableModel::modelReset,
-          this, [this]()
-    {
+  connect(model, &QAbstractTableModel::modelReset, this, [this]() {
+    if (verbose) qDebug() << "TimeChartFunctionEditor: model data reset";
+    for (QString const &numericField : qAsConst(model->numericFields)) {
       if (verbose)
-        qDebug() << "TimeChartFunctionEditor: model data reset";
-      for (QString const &numericField : qAsConst(model->numericFields)) {
-        if (verbose)
-          qDebug() << "TimeChartFunctionEditor: fieldChanged" << numericField;
-        dessser::gen::dashboard_widget::source const &source { model->source };
-        emit fieldChanged(source.name->site, source.name->program, source.name->function,
-                          numericField.toStdString());
-      }
-    });
+        qDebug() << "TimeChartFunctionEditor: fieldChanged" << numericField;
+      dessser::gen::dashboard_widget::source const &source{model->source};
+      emit fieldChanged(source.name->site, source.name->program,
+                        source.name->function, numericField.toStdString());
+    }
+  });
 
-  QHBoxLayout *topHBox { new QHBoxLayout };
+  QHBoxLayout *topHBox{new QHBoxLayout};
   topHBox->setObjectName("topHBox");
   topHBox->addWidget(visible);
   topHBox->addStretch();
@@ -149,17 +146,17 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(
   topHBox->addWidget(openSource);
   topHBox->addWidget(deleteButton);
 
-  QVBoxLayout *layout { new QVBoxLayout };
+  QVBoxLayout *layout{new QVBoxLayout};
   layout->addLayout(topHBox);
   layout->addWidget(fields);
   setLayout(layout);
 }
 
-void TimeChartFunctionEditor::wantSource()
-{
-  if (! Menu::sourcesWin) return;
+void TimeChartFunctionEditor::wantSource() {
+  if (!Menu::sourcesWin) return;
 
-  Menu::sourcesWin->showFile(srcPathFromProgramName(model->source.name->program));
+  Menu::sourcesWin->showFile(
+      srcPathFromProgramName(model->source.name->program));
   Menu::openSourceEditor();
 }
 
@@ -170,38 +167,33 @@ void TimeChartFunctionEditor::wantSource()
  * 4. Once the worker is received, substitute the plotted function with
  *    this custom one. */
 
-void TimeChartFunctionEditor::wantCustomize()
-{
-  TimeChartAutomatonCustomize *automaton {
-    new TimeChartAutomatonCustomize(
-      model->source.name->site,
-      model->source.name->program,
-      model->source.name->function,
-      this) };
+void TimeChartFunctionEditor::wantCustomize() {
+  TimeChartAutomatonCustomize *automaton{new TimeChartAutomatonCustomize(
+      model->source.name->site, model->source.name->program,
+      model->source.name->function, this)};
 
-  connect(automaton, &TimeChartAutomatonCustomize::transitionTo,
-          this, &TimeChartFunctionEditor::automatonTransition);
+  connect(automaton, &TimeChartAutomatonCustomize::transitionTo, this,
+          &TimeChartFunctionEditor::automatonTransition);
 
-  std::shared_ptr<dessser::gen::sync_value::t const> newSource {
-    ofString(
-      "DEFINE LAZY '" + automaton->customFunction + "' AS\n"
+  std::shared_ptr<dessser::gen::sync_value::t const> newSource{ofString(
+      "DEFINE LAZY '" + automaton->customFunction +
+      "' AS\n"
       "  SELECT\n"
-      "    *\n" // TODO: rather list the fields explicitly, with their doc
-      "  FROM '"
-        + model->source.name->program + "/"
-        + model->source.name->function + "' ON THIS SITE;\n") };
+      "    *\n"  // TODO: rather list the fields explicitly, with their doc
+      "  FROM '" +
+      model->source.name->program + "/" + model->source.name->function +
+      "' ON THIS SITE;\n")};
 
   Menu::getClient()->sendNew(automaton->sourceKey, newSource);
 }
 
 void TimeChartFunctionEditor::automatonTransition(
-  Automaton *automaton_, size_t state,
-  std::shared_ptr<dessser::gen::sync_value::t const> val)
-{
+    Automaton *automaton_, size_t state,
+    std::shared_ptr<dessser::gen::sync_value::t const> val) {
   qInfo() << "TimeChartFunctionEditor: automaton entering state" << state;
 
-  TimeChartAutomatonCustomize *automaton {
-    dynamic_cast<TimeChartAutomatonCustomize *>(automaton_) };
+  TimeChartAutomatonCustomize *automaton{
+      dynamic_cast<TimeChartAutomatonCustomize *>(automaton_)};
   if (!automaton) {
     qCritical() << "TimeChartFunctionEditor::automatonTransition:"
                    " not a TimeChartAutomatonCustomize?!";
@@ -210,7 +202,9 @@ void TimeChartFunctionEditor::automatonTransition(
 
   switch (state) {
     case TimeChartAutomatonCustomize::WaitSource:
-      qFatal("TimeChartFunctionEditor::automatonTransition: reached unreachable state");
+      qFatal(
+          "TimeChartFunctionEditor::automatonTransition: reached unreachable "
+          "state");
 
     case TimeChartAutomatonCustomize::WaitInfo:
       qInfo() << "TimeChartFunctionEditor: displaying the customized source";
@@ -223,8 +217,8 @@ void TimeChartFunctionEditor::automatonTransition(
                  "running configuration";
       {
         // Check that compilation worked
-        std::shared_ptr<dessser::gen::source_info::compiled_program const> comp {
-          getCompiledProgram(*val) };
+        std::shared_ptr<dessser::gen::source_info::compiled_program const> comp{
+            getCompiledProgram(*val)};
         if (!comp) {
           qCritical() << "key" << *automaton->infoKey
                       << "not a SourceInfo, or compilation failed?!";
@@ -239,8 +233,8 @@ void TimeChartFunctionEditor::automatonTransition(
     case TimeChartAutomatonCustomize::WaitWorkerOrGraph:
       qInfo() << "TimeChartFunctionEditor: running that program";
       {
-        dessser::Arr<dessser::gen::rc_entry::t_ext> const *rc {
-          getTargetConfig(*val) };
+        dessser::Arr<dessser::gen::rc_entry::t_ext> const *rc{
+            getTargetConfig(*val)};
         if (!rc) {
           qCritical() << "target_config not a TargetConfig?!";
           automaton->deleteLater();
@@ -255,7 +249,7 @@ void TimeChartFunctionEditor::automatonTransition(
             break;
           }
         }
-        if (! sourceEntry) {
+        if (!sourceEntry) {
           qWarning() << "Cannot find program"
                      << QString::fromStdString(model->source.name->program)
                      << "in the RC file";
@@ -263,24 +257,22 @@ void TimeChartFunctionEditor::automatonTransition(
           return;
         }
         // Copy sourceEntry:
-        dessser::Arr<std::shared_ptr<dessser::gen::program_run_parameter::t>> params;
-        std::shared_ptr<dessser::gen::rc_entry::t> rce {
-          std::make_shared<dessser::gen::rc_entry::t>(
-            automaton->customProgram,
-            true, // enabled
-            sourceEntry->debug,
-            sourceEntry->report_period,
-            sourceEntry->cwd,
-            params,
-            model->source.name->site,
-            false) };  // automatic
+        dessser::Arr<std::shared_ptr<dessser::gen::program_run_parameter::t> >
+            params;
+        std::shared_ptr<dessser::gen::rc_entry::t> rce{
+            std::make_shared<dessser::gen::rc_entry::t>(
+                automaton->customProgram,
+                true,  // enabled
+                sourceEntry->debug, sourceEntry->report_period,
+                sourceEntry->cwd, params, model->source.name->site,
+                false)};  // automatic
         // Create a new array with all same entries (shared) + rce:
-        dessser::Arr<dessser::gen::rc_entry::t_ext> rc2 { *rc };
+        dessser::Arr<dessser::gen::rc_entry::t_ext> rc2{*rc};
         rc2.push_back(rce);
-        std::shared_ptr<dessser::gen::sync_value::t> target_config {
-          std::make_shared<dessser::gen::sync_value::t>(
-            std::in_place_index<dessser::gen::sync_value::TargetConfig>,
-            rc2) };
+        std::shared_ptr<dessser::gen::sync_value::t> target_config{
+            std::make_shared<dessser::gen::sync_value::t>(
+                std::in_place_index<dessser::gen::sync_value::TargetConfig>,
+                rc2)};
         Menu::getClient()->sendSet(targetConfig, target_config);
       }
       break;
@@ -288,27 +280,25 @@ void TimeChartFunctionEditor::automatonTransition(
     case TimeChartAutomatonCustomize::Done:
       qInfo() << "TimeChartFunctionEditor: Substituting customized function "
                  "in the current chart.";
-      emit customizedFunction(
-        automaton->site, automaton->customProgram, automaton->customFunction);
+      emit customizedFunction(automaton->site, automaton->customProgram,
+                              automaton->customFunction);
       break;
   }
 }
 
-void TimeChartFunctionEditor::setEnabled(bool enabled)
-{
+void TimeChartFunctionEditor::setEnabled(bool enabled) {
   visible->setEnabled(enabled);
   if (customize) customize->setEnabled(enabled);
   openSource->setEnabled(enabled);
 }
 
 bool TimeChartFunctionEditor::setValue(
-  dessser::gen::dashboard_widget::source const &source)
-{
+    dessser::gen::dashboard_widget::source const &source) {
   if (source.visible != visible->isChecked()) {
     visible->setChecked(source.visible);
   }
   /* Will trigger QAbstractTableModel::resetModel and thus fieldChanged: */
-  bool const ret { model->setValue(source) };
+  bool const ret{model->setValue(source)};
 
   /* Offer to delete (without confirmation dialog) a function as long as
    * it has no field drawn: */
@@ -318,10 +308,9 @@ bool TimeChartFunctionEditor::setValue(
 }
 
 std::shared_ptr<dessser::gen::dashboard_widget::source>
-  TimeChartFunctionEditor::getValue() const
-{
-  std::shared_ptr<dessser::gen::dashboard_widget::source> source {
-    std::make_shared<dessser::gen::dashboard_widget::source>(model->source) };
+TimeChartFunctionEditor::getValue() const {
+  std::shared_ptr<dessser::gen::dashboard_widget::source> source{
+      std::make_shared<dessser::gen::dashboard_widget::source>(model->source)};
   source->visible = visible->isChecked();
   return source;
 }

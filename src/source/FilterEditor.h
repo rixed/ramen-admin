@@ -1,8 +1,8 @@
 #ifndef FILTEREDITOR_H_191210
 #define FILTEREDITOR_H_191210
-#include <memory>
 #include <QString>
 #include <QWidget>
+#include <memory>
 
 class QComboBox;
 class QCompleter;
@@ -12,16 +12,20 @@ class NamesSubtree;
 struct SimpleFilter;
 
 namespace dessser {
-  namespace gen {
-    namespace alert { struct t; }
-    namespace simple_filter { struct t; }
-  }
+namespace gen {
+namespace alert {
+struct t;
 }
+namespace simple_filter {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
 
 class FilterEditor : public QWidget {
   Q_OBJECT
 
-public:
+ public:
   QLineEdit *lhsEdit;
   QComboBox *opEdit;
   QLineEdit *rhsEdit;
@@ -36,8 +40,8 @@ public:
 
   bool hasValidInput() const;
 
-  QString const description(
-    QString const &prefix = QString(), QString const &suffix = QString());
+  QString const description(QString const &prefix = QString(),
+                            QString const &suffix = QString());
 
   bool setValue(dessser::gen::simple_filter::t const &);
 
@@ -45,10 +49,10 @@ public:
 
   std::shared_ptr<dessser::gen::simple_filter::t> getValue() const;
 
-public slots:
+ public slots:
   void setFunction(QModelIndex const &);
 
-signals:
+ signals:
   /* Signaled when the filter has been changed in any way: */
   void inputChanged();
 };

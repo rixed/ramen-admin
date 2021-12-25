@@ -5,16 +5,15 @@
 class ProcessesWidget;
 class GraphModel;
 
-class ProcessesDialog : public SavedWindow
-{
+class ProcessesDialog : public SavedWindow {
   Q_OBJECT
 
   ProcessesWidget *processesWidget;
 
-public:
+ public:
   ProcessesDialog(QWidget *parent = nullptr);
 
-protected:
+ protected:
   void keyPressEvent(QKeyEvent *);
 };
 

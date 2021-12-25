@@ -32,30 +32,29 @@ struct Resources {
   QPixmap stackedChartIcon;
   QPixmap stackCenteredChartIcon;
 
-  Resources() :
-    applicationIcon(":/rmadmin.ico"),
-    lockedPixmap(":/pix/locked.svg"),
-    unlockedPixmap(":/pix/unlocked.svg"),
-    playPixmap(":/pix/play.svg"),
-    waitPixmap(":/pix/wait.svg"),
-    errorPixmap(":/pix/error.svg"),
-    infoPixmap(":/pix/info.svg"),
-    searchPixmap(":/pix/search.svg"),
-    closePixmap(":/pix/close.svg"),
-    deletePixmap(":/pix/delete.svg"),
-    addPixmap(":/pix/add.svg"),
-    copyPixmap(":/pix/copy.svg"),
-    tablePixmap(":/pix/table.svg"),
-    settingsPixmap(":/pix/settings.svg"),
-    chartPixmap(":/pix/chart.svg"),
-    upPixmap(":/pix/up.svg"),
-    downPixmap(":/pix/down.svg"),
-    emptyIcon(":/pix/empty.svg"),
-    factorsIcon(":/pix/factors.svg"),
-    lineChartIcon(":/pix/lineChart.svg"),
-    stackedChartIcon(":/pix/stackedChart.svg"),
-    stackCenteredChartIcon(":/pix/stackCenteredChart.svg")
-  {}
+  Resources()
+      : applicationIcon(":/rmadmin.ico"),
+        lockedPixmap(":/pix/locked.svg"),
+        unlockedPixmap(":/pix/unlocked.svg"),
+        playPixmap(":/pix/play.svg"),
+        waitPixmap(":/pix/wait.svg"),
+        errorPixmap(":/pix/error.svg"),
+        infoPixmap(":/pix/info.svg"),
+        searchPixmap(":/pix/search.svg"),
+        closePixmap(":/pix/close.svg"),
+        deletePixmap(":/pix/delete.svg"),
+        addPixmap(":/pix/add.svg"),
+        copyPixmap(":/pix/copy.svg"),
+        tablePixmap(":/pix/table.svg"),
+        settingsPixmap(":/pix/settings.svg"),
+        chartPixmap(":/pix/chart.svg"),
+        upPixmap(":/pix/up.svg"),
+        downPixmap(":/pix/down.svg"),
+        emptyIcon(":/pix/empty.svg"),
+        factorsIcon(":/pix/factors.svg"),
+        lineChartIcon(":/pix/lineChart.svg"),
+        stackedChartIcon(":/pix/stackedChart.svg"),
+        stackCenteredChartIcon(":/pix/stackCenteredChart.svg") {}
 
   static Resources *get() {
     if (resources) return resources;

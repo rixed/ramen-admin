@@ -47,20 +47,18 @@ std::string demangle(const char *);
 /* There are a few global variables that are used if not NULL. When they are
  * deleted, the global variable has to be invalidated before destruction
  * begins. */
-template<class T>
-void danceOfDel(T **t)
-{
-  if (! *t) return;
+template <class T>
+void danceOfDel(T **t) {
+  if (!*t) return;
 
   T *tmp = *t;
   *t = nullptr;
   delete tmp;
 }
 
-template<class T>
-void danceOfDelLater(T **t)
-{
-  if (! *t) return;
+template <class T>
+void danceOfDelLater(T **t) {
+  if (!*t) return;
 
   T *tmp = *t;
   *t = nullptr;
@@ -80,15 +78,13 @@ class QModelIndex;
 class QTreeView;
 void expandAllFromParent(QTreeView *, QModelIndex const &, int first, int last);
 
-inline bool overlap(double t1, double t2, double u1, double u2)
-{
+inline bool overlap(double t1, double t2, double u1, double u2) {
   return u1 < t2 && u2 > t1;
 }
 
 #include <QDateTime>
 
-inline double getTime()
-{
+inline double getTime() {
   return 0.001 * QDateTime::currentDateTime().toMSecsSinceEpoch();
 }
 
