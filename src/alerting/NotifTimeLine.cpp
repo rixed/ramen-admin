@@ -209,10 +209,10 @@ void NotifTimeLine::paintEvent(QPaintEvent *event)
 
       painter.setOpacity(was_selected ? 1. : unselected_opacity);
       painter.drawRect(QRectF(*prevX, 0., x - *prevX, qreal(height())));
-      was_selected = log.get() == selected.get();
     }
 
     prevX = x;
+    was_selected = log.get() == selected.get();
   }
 
   /* Paint the log ticks: */
