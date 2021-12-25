@@ -29,7 +29,7 @@ all: $(INSTALLED)
 .SUFFIXES: .type
 .PHONY: clean clean-dist clean-dessserc-gen \
         all check check-crypto check-qt install uninstall reinstall \
-        appimage coverity
+        appimage coverity tidy clazy
 
 %.cc: %.type
 	@echo 'Generating code for type $<'
@@ -270,14 +270,23 @@ coverity:
 	   --form description="$(shell git rev-parse --short HEAD)" \
 	   https://scan.coverity.com/builds?project=rixed%2Framen
 
-clazy: \
+tidy-build/compile_commands.json: $(MANUAL_CPP_SOURCES)
+	@mkdir -p tidy-build
+	@cd tidy-build && @QMAKE@ $(QMAKE_EXTRA) -spec linux-clang ../src && bear -- make
+
+tidy: tidy-build/compile_commands.json
+	@echo TODO
+
+clazy-build/Makefile: \
 		$(MANUAL_CPP_SOURCES) \
 		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
 		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
+	@mkdir -p clazy-build
+	@cd clazy-build && @QMAKE@ $(QMAKE_EXTRA) -spec linux-clang QMAKE_CXX='clazy -Wno-unknown-attributes' ../src
+
+clazy: clazy-build/Makefile
 	@echo 'Analysing sources with clazy...'
-	$(MAKE) -C src clean
-	cd src && @QMAKE@ $(QMAKE_EXTRA) -spec linux-clang QMAKE_CXX='clazy -Wno-unknown-attributes'
-	$(MAKE) -C src CLAZY_IGNORE_DIRS=.*qt5.* CLAZY_CHECKS=level0,level1,no-rule-of-two-soft,no-non-pod-global-static,no-qproperty-without-notify
+	@$(MAKE) -C clazy-build CLAZY_IGNORE_DIRS=.*qt5.* CLAZY_CHECKS=level0,level1,no-rule-of-two-soft,no-non-pod-global-static,no-qproperty-without-notify
 
 #
 # Tests

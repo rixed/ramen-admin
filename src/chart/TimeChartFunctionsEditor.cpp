@@ -87,6 +87,7 @@ remove_function:
           << "for" << QString::fromStdString(src->name->function);
       TimeChartFunctionEditor *e {
         addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
+      Q_ASSERT(e);
       e->setValue(*src);
       functions->addItem(e, QString::fromStdString(siteFqName(*src->name)));
     } else {
@@ -109,6 +110,7 @@ remove_function:
             << "for" << QString::fromStdString(src->name->function);
         TimeChartFunctionEditor *e {
           addFunctionByName(src->name->site, src->name->program, src->name->function, true) };
+        Q_ASSERT(e);
         e->setValue(*src);
         (void)functions->insertItem(t_i, e, name_i);
       } else if (c > 0) {
@@ -192,6 +194,7 @@ void TimeChartFunctionsEditor::addOrFocus(
 
   TimeChartFunctionEditor *e {
     addFunctionByName(site, program, function, customizable) };
+  Q_ASSERT(e);
   dessser::gen::dashboard_widget::source defaultSrc {
     std::make_shared<dessser::gen::fq_function_name::t>(site, program, function),
     true,  // visible

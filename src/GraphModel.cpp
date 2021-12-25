@@ -82,6 +82,7 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
 QModelIndex GraphModel::parent(QModelIndex const &index) const
 {
   GraphItem const *item { itemOfIndex(index) };
+  Q_ASSERT(item);
 
   if (! item->treeParent) {
     // We must be a site then:
@@ -100,6 +101,7 @@ int GraphModel::rowCount(QModelIndex const &parent) const
   }
 
   GraphItem const *parentPtr { itemOfIndex(parent) };
+  Q_ASSERT(parentPtr);
   SiteItem const *parentSite { dynamic_cast<SiteItem const *>(parentPtr) };
   if (parentSite) {
     return parentSite->programs.size();

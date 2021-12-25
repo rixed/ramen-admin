@@ -812,7 +812,7 @@ void TimeChart::Axis::iterTime(
   std::vector<std::pair<std::optional<qreal>, QColor>> values(  // Not list-init
     numValues, std::make_pair(std::nullopt, QColor()));
 
-  size_t numTuples[numValues];
+  size_t numTuples[1 + numValues]; // 1+ to satisfies clang-tidy
 
   size_t valIdx { 0 };
   for (Line const &line : lines) {
