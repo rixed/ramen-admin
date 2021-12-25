@@ -212,6 +212,6 @@ QString const ReplayRequest::qstringOfStatus(ReplayRequest::Status const status)
     case ReplayRequest::Completed:
       return QString(tr("Completed"));
     default:
-      Q_ASSERT(!"Invalid status!");
+      qFatal("Invalid status!");
   }
 }

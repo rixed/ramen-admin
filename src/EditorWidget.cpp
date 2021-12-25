@@ -304,7 +304,7 @@ AtomicWidget *newEditorWidget(
             editor = new TimeChartEditWidget(nullptr, nullptr, parent);
             break;
           default:
-            Q_ASSERT(false);
+            qFatal("newEditorWidget: invalid dash->index()");
             break;
         } ;
         break;

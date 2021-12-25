@@ -291,7 +291,7 @@ int RCEntryEditor::findOrAddSourceName(QString const &name)
     }
   }
 
-  Q_ASSERT(!"Hit by a gamma rays!");
+  qFatal("Hit by a gamma rays!");
   return -1;
 }
 

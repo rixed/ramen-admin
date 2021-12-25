@@ -157,7 +157,7 @@ QVariant TimeChartFunctionFieldsModel::data(
       }
 
     case NumColumns:  // not a real column number
-      Q_ASSERT(false);
+      qFatal("TimeChartFunctionFieldsModel::data: invalid column");
   }
 
   return QVariant();
@@ -183,7 +183,7 @@ QVariant TimeChartFunctionFieldsModel::headerData(
       case ColColor:
         return QString(tr("color"));
       case NumColumns:
-        Q_ASSERT(false);
+        qFatal("TimeChartFunctionFieldsModel::headerData: invalid column section");
     }
   }
 
@@ -230,7 +230,7 @@ bool TimeChartFunctionFieldsModel::setData(
           *field->representation = reprStackCentered;
           break;
         default:
-          Q_ASSERT(false);
+          qFatal("TimeChartFunctionFieldsModel::setData: invalid column");
       }
       break;
 
@@ -257,7 +257,7 @@ bool TimeChartFunctionFieldsModel::setData(
       break;
 
     case NumColumns:
-      Q_ASSERT(false);
+      qFatal("TimeChartFunctionFieldsModel::setData: cannot set NumColumns");
   }
 
   static const QVector<int> editedRoles { Qt::EditRole, Qt::DisplayRole };

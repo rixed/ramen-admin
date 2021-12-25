@@ -87,7 +87,7 @@ std::shared_ptr<dessser::gen::sync_value::t const> KCidrEditor::getValue() const
           std::in_place_index<dessser::gen::raql_value::v6>,
           ipv6, mask));
       default:
-        Q_ASSERT(false);
+        qFatal("Invalid ip->index()");
     }
   } else if (allowV4) {
     // returns a Cidrv4 from the Ipv4

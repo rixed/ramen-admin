@@ -104,7 +104,7 @@ QString alertingLogToQString(dessser::gen::alerting_log::t const &log)
           case dessser::gen::alerting_log::StartEscalation:
             return ret.arg(TR("started escalation"));
           default:
-            Q_ASSERT(false);
+            qFatal("alertingLogToQString: invalid NewNotification index");
         }
       }
       break;
@@ -129,14 +129,14 @@ QString alertingLogToQString(dessser::gen::alerting_log::t const &log)
                      std::get<dessser::gen::alerting_log::Timeout>(
                        std::get<dessser::gen::alerting_log::Stop>(log)))));
           default:
-            Q_ASSERT(false);
+            qFatal("alertingLogToQString: invalid alerting_log::Stop index");
         }
       }
     case dessser::gen::alerting_log::Cancel:
       return QString(TR("Cancelled message for %1")).arg(QString::fromStdString(
                std::get<dessser::gen::alerting_log::Cancel>(log)));
     default:
-      Q_ASSERT(false);
+      qFatal("alertingLogToQString: invalid log index");
   }
 # undef TR
 }

@@ -51,7 +51,7 @@ QString SyncStatus::message() const
              append(errMsg.c_str());
       break;
     default:
-      Q_ASSERT(false);
+      qFatal("SyncStatus::message: invalid status");
   }
 
   if (lastDuration && prevStatus) {

@@ -42,7 +42,7 @@ value DessserValueType::toOCamlValue() const
 {
   qCritical() << "Unimplemented conversion to OCaml value from"
               << toQString();
-  Q_ASSERT(!"Don't know how to convert from a DessserValueType");
+  qFatal("Don't know how to convert from a DessserValueType");
 }
 
 /*
@@ -51,7 +51,7 @@ value DessserValueType::toOCamlValue() const
 
 RamenValue *Unknown::unserialize(uint32_t const *&, uint32_t const *, bool) const
 {
-  Q_ASSERT(false);
+  qFatal("Unknown::unserialize?!");
 }
 
 /*
@@ -614,7 +614,7 @@ QString const TList::toQString() const
 
 size_t TList::nullmaskWidth(bool) const
 {
-  Q_ASSERT(!"List nullmaskWidth is special!");
+  qFatal("List nullmaskWidth is special!");
 }
 
 RamenValue *TList::unserialize(uint32_t const *&start, uint32_t const *max, bool) const
@@ -896,7 +896,7 @@ static DessserValueType *MacTypeOfOCaml(value v_)
     case 20: ret = new TI64; break;
     case 21: ret = new TI128; break;
     default:
-      Q_ASSERT(!"Unknown tag for mac_type!");
+      qFatal("Unknown tag for mac_type!");
   }
   return ret;
 }
@@ -922,8 +922,7 @@ static DessserValueType *WellknownUserTypeOfOCaml(value v_)
   } else if (name == "Cidr") {
     return new TCidr;
   } else {
-    qCritical() << "Unknown user_type " << name;
-    Q_ASSERT(!"Unknown user_type");
+    qFatal() << "Unknown user_type " << name;
   }
 }
 
@@ -1001,7 +1000,7 @@ static DessserValueType *blockyValueTypeOfOCaml(value v_)
       }
       break;
     default:
-      Q_ASSERT(!"Unknown tag for compound DessserValueType!");
+      qFatal("Unknown tag for compound DessserValueType!");
   }
   return ret;
 }

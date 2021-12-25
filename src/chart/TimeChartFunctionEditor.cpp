@@ -210,7 +210,7 @@ void TimeChartFunctionEditor::automatonTransition(
 
   switch (state) {
     case TimeChartAutomatonCustomize::WaitSource:
-      Q_ASSERT(false);  // not transited _to_
+      qFatal("TimeChartFunctionEditor::automatonTransition: reached unreachable state");
 
     case TimeChartAutomatonCustomize::WaitInfo:
       qInfo() << "TimeChartFunctionEditor: displaying the customized source";

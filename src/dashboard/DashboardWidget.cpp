@@ -105,7 +105,7 @@ bool DashboardWidget::setValue(
       break;
 
     default:
-      Q_ASSERT(false);
+      qFatal("DashboardWidget::setValue: invalid index");
   }
 
   if (newCurrent != current) {

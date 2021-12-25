@@ -39,7 +39,7 @@ std::string const dashboardNameOfKey(dessser::gen::sync_key::t const &key)
       return SCRATCHPAD;
   }
 
-  Q_ASSERT(false);
+  qFatal("dashboardNameOfKey: invalid key");
 }
 
 void iterDashboards(std::function<void(std::string const &)> f)

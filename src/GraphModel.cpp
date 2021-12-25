@@ -76,7 +76,7 @@ QModelIndex GraphModel::index(int row, int column, QModelIndex const &parent) co
   }
 
   // There is no alternative
-  Q_ASSERT(!"Someone should RTFM on indexing");
+  qFatal("Someone should RTFM on indexing");
 }
 
 QModelIndex GraphModel::parent(QModelIndex const &index) const
@@ -115,7 +115,7 @@ int GraphModel::rowCount(QModelIndex const &parent) const
     return 0;
   }
 
-  Q_ASSERT(!"how is indexing working, again?");
+  qFatal("how is indexing working, again?");
 }
 
 int GraphModel::columnCount(QModelIndex const &parent) const
@@ -199,7 +199,7 @@ QString const GraphModel::columnName(GraphModel::Columns c)
     case NumColumns: break;
   }
 
-  Q_ASSERT(!"Invalid column");
+  qFatal("Invalid column");
 }
 
 bool GraphModel::columnIsImportant(Columns c)

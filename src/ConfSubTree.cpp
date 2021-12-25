@@ -66,7 +66,7 @@ int ConfSubTree::childNum(ConfSubTree const *child) const
                   << children[c] << "vs" << child;
     if (children[c] == child) return c;
   }
-  Q_ASSERT(!"Not a child");
+  qFatal("Not a child");
   return -1;
 }
 

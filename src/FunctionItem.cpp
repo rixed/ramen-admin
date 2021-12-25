@@ -338,7 +338,7 @@ FunctionItem::FunctionItem(
  * Functions have no sub-elements and Qt should know this. */
 int FunctionItem::columnCount() const
 {
-  Q_ASSERT(!"FunctionItem::columnCount called!");
+  qFatal("FunctionItem::columnCount called!");
 }
 
 QVariant FunctionItem::data(int column, int role) const
@@ -731,7 +731,7 @@ QVariant FunctionItem::data(int column, int role) const
       break;
   }
 
-  Q_ASSERT(!"Bad columnCount for FunctionItem");
+  qFatal("Bad columnCount for FunctionItem");
 }
 
 std::vector<std::pair<QString const, QString const>> FunctionItem::labels() const

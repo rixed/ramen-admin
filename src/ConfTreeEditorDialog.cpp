@@ -34,7 +34,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   if (it != kvs->map.end()) kv = &it->second;
   kvs->lock.unlock_shared();
   if (! kv) {
-    Q_ASSERT(!"TODO: display a QLabel(error) instead");
+    qFatal("TODO: display a QLabel(error) instead");
   }
   canWrite = kv->can_write;
 
