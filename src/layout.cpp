@@ -1,23 +1,24 @@
-#include <cassert>
 #include <chrono>
 #include <cmath>
 #include <limits>
 #include <map>
 #include <vector>
 #include <QDebug>
-#include <GraphItem.h>
-#include <SiteItem.h>
-#include <ProgramItem.h>
-#include <FunctionItem.h>
+
+#include "GraphItem.h"
+#include "SiteItem.h"
+#include "ProgramItem.h"
+#include "FunctionItem.h"
+
 #include "layout.h"
 
-static bool const verbose(false);
+static bool const verbose { false };
 
 namespace layout {
 
 static unsigned numUnrankedParents(GraphItem const &n)
 {
-  unsigned c = 0;
+  unsigned c { 0 };
   for (GraphItem *par : n.parentOps) {
     if (par->xRank < 0) c++;
   }
@@ -29,34 +30,34 @@ static unsigned numUnrankedParents(GraphItem const &n)
  * "unknown". */
 template<class I>
 static void rank(
-  std::vector<I *> const &nodes, size_t toRank[], size_t numToRank, int xRank)
+  std::vector<I *> const &nodes, size_t *toRank, size_t numToRank, int xRank)
 {
   if (0 == numToRank) return;
 
   /* Extract those with the minimum number of unranked parents: */
-  unsigned minUnrankedParents = std::numeric_limits<unsigned>::max();
+  unsigned minUnrankedParents { std::numeric_limits<unsigned>::max() };
   size_t firstRank[nodes.size()];
-  size_t numFirstRank = 0;
+  size_t numFirstRank { 0 };
   size_t leftToRank[numToRank];
-  size_t numLeftToRank = 0;
+  size_t numLeftToRank { 0 };
   for (size_t i = 0; i < numToRank; i++) {
-    size_t n = toRank[i];
+    size_t n { toRank[i] };
 
-    unsigned p = numUnrankedParents(*nodes[n]);
+    unsigned p { numUnrankedParents(*nodes[n]) };
     if (p < minUnrankedParents) {
       minUnrankedParents = p;
       // Reject the current first rank:
       for (size_t f = 0; f < numFirstRank; f++) {
-        assert(numLeftToRank < numToRank);
+        Q_ASSERT(numLeftToRank < numToRank);
         leftToRank[numLeftToRank++] = firstRank[f];
       }
       firstRank[0] = n;
       numFirstRank = 1;
     } else if (p == minUnrankedParents) {
-      assert(numFirstRank < nodes.size());
+      Q_ASSERT(numFirstRank < nodes.size());
       firstRank[numFirstRank++] = n;
     } else {
-      assert(numLeftToRank < numToRank);
+      Q_ASSERT(numLeftToRank < numToRank);
       leftToRank[numLeftToRank++] = n;
     }
   }
@@ -65,7 +66,7 @@ static void rank(
    * Note: in case there are plenty with same rank, we might want to try
    * some heuristic to pick only a few of them */
   for (size_t f = 0; f < numFirstRank; f++) {
-    assert(nodes[firstRank[f]]->xRank < 0);
+    Q_ASSERT(nodes[firstRank[f]]->xRank < 0);
     nodes[firstRank[f]]->xRank = xRank;
     nodes[firstRank[f]]->yRank = f;
   }
@@ -89,7 +90,7 @@ static void setRelPosition(P *par, std::vector<C *> const &children)
 template<class I>
 static int maxRankOfVector(std::vector<I *> const nodes)
 {
-  int maxRank = 0;
+  int maxRank { 0 };
   for (GraphItem const *node : nodes) {
     if (node->xRank > maxRank) maxRank = node->xRank;
   }
@@ -101,12 +102,12 @@ static int maxRankOfVector(std::vector<I *> const nodes)
 template<class I>
 static void spreadByRank(std::vector<I *> const nodes)
 {
-  unsigned maxRank = maxRankOfVector<I>(nodes);
+  unsigned maxRank { (unsigned)maxRankOfVector<I>(nodes) };
 
   int maxWidths[maxRank+1];
   for (unsigned i = 0; i < maxRank+1; i++) maxWidths[i] = 0;
   for (GraphItem const *node : nodes) {
-    int const width = 1 + node->x1 - node->x0;
+    int const width { 1 + node->x1 - node->x0 };
     if (width > maxWidths[node->xRank]) maxWidths[node->xRank] = width;
   }
 
@@ -116,8 +117,8 @@ static void spreadByRank(std::vector<I *> const nodes)
     x0[i] = x0[i-1] + maxWidths[i-1];
 
   for (GraphItem *node : nodes) {
-    int const width = 1 + node->x1 - node->x0;
-    int const dx = (maxWidths[node->xRank] - width) / 2;
+    int const width { 1 + node->x1 - node->x0 };
+    int const dx { (maxWidths[node->xRank] - width) / 2 };
     node->x0 = x0[node->xRank] + dx;
     node->x1 = node->x0 + width - 1;
   }
@@ -127,22 +128,22 @@ static void spreadByRank(std::vector<I *> const nodes)
 template<class I>
 static void centerVertically(std::vector<I *> const nodes)
 {
-  unsigned maxRank = maxRankOfVector<I>(nodes);
+  unsigned maxRank { (unsigned)maxRankOfVector<I>(nodes) };
 
   int heights[maxRank+1];
   for (unsigned i = 0; i < maxRank+1; i++) heights[i] = 0;
   for (GraphItem *node : nodes) {
-    int const height = 1 + node->y1 - node->y0;
+    int const height { 1 + node->y1 - node->y0 };
     node->y0 = heights[node->xRank];
     node->y1 = node->y0 + height - 1;
     heights[node->xRank] += height;
   }
-  int maxHeight = 0;
+  int maxHeight { 0 };
   for (unsigned i = 0; i < maxRank+1; i++)
     if (heights[i] > maxHeight) maxHeight = heights[i];
 
   for (GraphItem *node : nodes) {
-    int const dy = (maxHeight - heights[node->xRank]) / 2;
+    int const dy { (maxHeight - heights[node->xRank]) / 2 };
     if (dy > 0) {
       node->y0 += dy;
       node->y1 += dy;
@@ -160,7 +161,7 @@ static void translateItem(GraphItem *child, GraphItem const *parent)
 
 bool solve(std::vector<SiteItem *> const &sites)
 {
-  auto start = std::chrono::high_resolution_clock::now();
+  auto start { std::chrono::high_resolution_clock::now() };
 
   /* Initialize the parents (TODO: should be done once and for all when
    * functions are added) */
@@ -174,14 +175,14 @@ bool solve(std::vector<SiteItem *> const &sites)
         for (FunctionItem *parFunc : func->parents) {
           func->parentOps.insert(parFunc);
 
-          ProgramItem *parProg =
-            dynamic_cast<ProgramItem *>(parFunc->treeParent);
-          assert(parProg);
+          ProgramItem *parProg {
+            dynamic_cast<ProgramItem *>(parFunc->treeParent) };
+          Q_ASSERT(parProg);
           if (parProg != prog) prog->parentOps.insert(parProg);
 
-          SiteItem *parSite =
-            dynamic_cast<SiteItem *>(parProg->treeParent);
-          assert(parSite);
+          SiteItem *parSite {
+            dynamic_cast<SiteItem *>(parProg->treeParent) };
+          Q_ASSERT(parSite);
           if (parSite != site) site->parentOps.insert(parSite);
         }
       }
@@ -237,12 +238,12 @@ bool solve(std::vector<SiteItem *> const &sites)
     }
   }
 
-  auto stop = std::chrono::high_resolution_clock::now();
-  auto duration =
-    std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
-
-  if (verbose)
+  if (verbose) {
+    auto stop { std::chrono::high_resolution_clock::now() };
+    auto duration {
+      std::chrono::duration_cast<std::chrono::milliseconds>(stop - start) };
     qDebug() << "Layout solved in:" << duration.count() << "ms";
+  }
 
   return true;
 }
