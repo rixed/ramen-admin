@@ -1,6 +1,8 @@
 #ifndef TIMERANGE_H_191008
 #define TIMERANGE_H_191008
 
+#include <QString>
+
 struct TimeRange {
   bool relative; // if true, then now must be added to since and until
   double since, until;

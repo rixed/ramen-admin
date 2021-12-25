@@ -3,7 +3,7 @@
 /*
  * Converter from QString (editor widget content) to actual sync_value:
  */
-#include <memory.h>
+#include <memory>
 
 #include "misc.h"
 
