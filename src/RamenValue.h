@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #error "DEPRECATED"
 #ifndef RAMENVALUE_H_190603
 #define RAMENVALUE_H_190603

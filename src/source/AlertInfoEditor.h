@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ALERTINFOEDITOR_H_191129
 #define ALERTINFOEDITOR_H_191129
 #include <dessser/Lst.h>

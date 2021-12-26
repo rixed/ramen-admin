@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KTEXTEDIT_H_190603
 #define KTEXTEDIT_H_190603
 #include <QSize>

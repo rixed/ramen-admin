@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ALERTINGJOURNAL_H_200615
 #define ALERTINGJOURNAL_H_200615
 #include <QWidget>

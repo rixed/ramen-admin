@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef EVENTTIME_H_191008
 #define EVENTTIME_H_191008
 /* An object to represent a RamenEventTime and also perform quick extraction

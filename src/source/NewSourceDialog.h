@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef NEWSOURCEDIALOG_H_190731
 #define NEWSOURCEDIALOG_H_190731
 #include <QDialog>

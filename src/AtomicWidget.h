@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ATOMICWIDGET_H_190506
 #define ATOMICWIDGET_H_190506
 /* What an AtomicForm remembers about its widgets */

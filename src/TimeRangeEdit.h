@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMERANGEEDIT_H_191007
 #define TIMERANGEEDIT_H_191007
 #include <QPushButton>

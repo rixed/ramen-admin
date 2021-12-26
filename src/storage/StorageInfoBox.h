@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef STORAGEINFOBOX_H_190522
 #define STORAGEINFOBOX_H_190522
 #include <QLabel>

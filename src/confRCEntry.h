@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef CONFRCENTRY_H_190611
 #define CONFRCENTRY_H_190611
 #include <string>

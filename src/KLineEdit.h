@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KLINEEDIT_H_190505
 #define KLINEEDIT_H_190505
 #include <QLineEdit>

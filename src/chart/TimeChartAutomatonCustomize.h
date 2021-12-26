@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMECHARTAUTOMATONCUSTOMIZE_H_200325
 #define TIMECHARTAUTOMATONCUSTOMIZE_H_200325
 /* Specialization of an Automaton for the customize process.

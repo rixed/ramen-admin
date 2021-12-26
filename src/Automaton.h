@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef CONFAUTOMATON_H_200325
 #define CONFAUTOMATON_H_200325
 /* Some commands are made of multiple configuration changes and must wait for

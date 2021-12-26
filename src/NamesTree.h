@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef NAMESTREE_H_190816
 #define NAMESTREE_H_190816
 /* This object listen to all sites/.../worker and also to all sources/.../info

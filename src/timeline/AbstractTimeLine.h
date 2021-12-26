@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ABSTRACTTIMELINE_H_191204
 #define ABSTRACTTIMELINE_H_191204
 /* An AbstractTimeLine is a QWidget that can be scrolled to the left and right

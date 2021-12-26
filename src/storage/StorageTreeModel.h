@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef STORAGETREEMODEL_H_190930
 #define STORAGETREEMODEL_H_190930
 #include <QSortFilterProxyModel>

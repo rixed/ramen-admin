@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ICONSELECTOR_H_200316
 #define ICONSELECTOR_H_200316
 /* A simple widget offering to select one amongst several icons */

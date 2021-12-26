@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef BINARYHEATLINE_H_191204
 #define BINARYHEATLINE_H_191204
 /* A BinaryHeatLine is a HeatLine with only on or off values and a simplified

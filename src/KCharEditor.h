@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KCHAREDITOR_H_191029
 #define KCHAREDITOR_H_191029
 /* TODO: a char selector would be nicer */

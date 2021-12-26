@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef LOGINWIN_H_191107
 #define LOGINWIN_H_191107
 /* This is the root window that handle user identity and connection to a

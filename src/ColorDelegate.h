@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef COLORDELEGATE_H_200317
 #define COLORDELEGATE_H_200317
 #include <QStyledItemDelegate>

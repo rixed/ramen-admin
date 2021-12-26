@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ALERTINGTIMELINE_H_200527
 #define ALERTINGTIMELINE_H_200527
 #include <QMap>

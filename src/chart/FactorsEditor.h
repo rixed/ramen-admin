@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef FACTORSEDITOR_H_200324
 #define FACTORSEDITOR_H_200324
 /* Small floating widget with a selectable list of factors */

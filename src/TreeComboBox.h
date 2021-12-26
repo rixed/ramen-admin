@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TREECOMBOBOX_H_191215
 #define TREECOMBOBOX_H_191215
 /* Like a QComboBox, but that actually work with trees.

@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef FUNCTIONSELECTOR_H_191215
 #define FUNCTIONSELECTOR_H_191215
 /* A simple widget to pick a worker */

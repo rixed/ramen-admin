@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TAILTABLE_H_190515
 #define TAILTABLE_H_190515
 /* Widget that displays the tail of some function in a table, with selectable

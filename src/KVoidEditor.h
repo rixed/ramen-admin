@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KVOIDEDITOR_H_211124
 #define KVOIDEDITOR_H_211124
 /* Editor for a raql_value of type Void */

@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef STORAGETREEVIEW_H_190522
 #define STORAGETREEVIEW_H_190522
 #include <QTreeView>

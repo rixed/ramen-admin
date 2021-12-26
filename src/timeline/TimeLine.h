@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMELINE_H_191204
 #define TIMELINE_H_191204
 /* A Timeline is an AbstractTimeLine that displays an axis with tick

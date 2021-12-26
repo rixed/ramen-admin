@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef LOGINWIDGET_H_191107
 #define LOGINWIDGET_H_191107
 /* Widget asking for all connection parameters:

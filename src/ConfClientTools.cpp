@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 static int parseUrl(QString &host, quint16 &port, QString const &url) {
   int sep{url.indexOf(':')};
 

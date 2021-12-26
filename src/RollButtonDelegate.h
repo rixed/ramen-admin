@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ROLLBUTTONDELEGATE_H_200315
 #define ROLLBUTTONDELEGATE_H_200315
 /* An item delegate that displays one amongst several possible icons. */

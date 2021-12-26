@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef MISC_DESSSER_H_210910
 #define MISC_DESSSER_H_210910
 #include <dessser/Arr.h>

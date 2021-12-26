@@ -251,6 +251,7 @@ HEADERS += \
   TailModel.h \
   TailTable.h \
   TailTableDialog.h \
+  processes/ProcessesTreeModel.h \
   processes/ProcessesWidget.h \
   processes/ProcessesWidgetProxy.h \
   processes/ProcessesDialog.h \
@@ -405,6 +406,7 @@ SOURCES += \
   TailModel.cpp \
   TailTable.cpp \
   TailTableDialog.cpp \
+  processes/ProcessesTreeModel.cpp \
   processes/ProcessesWidget.cpp \
   processes/ProcessesWidgetProxy.cpp \
   processes/ProcessesDialog.cpp \

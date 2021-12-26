@@ -290,9 +290,18 @@ clazy: clazy-build/Makefile
 	@echo 'Analysing sources with clazy...'
 	@$(MAKE) -C clazy-build CLAZY_IGNORE_DIRS=.*qt5.* CLAZY_CHECKS=level0,level1,no-rule-of-two-soft,no-non-pod-global-static,no-qproperty-without-notify
 
-# Try to make format as quick as possible by not reformating the same files unless changed:
+# Try to make format as quick as possible by not reformating the same files unless changed.
+# Also prepend the vim configuration if not present already, invoquing sed in such a way
+# that should work on both gnu and non-gnu seds.
 format: $(MANUAL_CPP_SOURCES)
 	clang-format -i --style=Google $?
+	@vim_head="// vim: sw=2 ts=2 sts=2 expandtab tw=80"; \
+	 for f in $?; do \
+	   has_vim_head=$$(sed -ne '1{s,^'"$$vim_head"'$$,yes,p;q}' $$f); \
+	   if ! test "$$has_vim_head" = yes; then \
+	     sed -i.bak -e "1i$$vim_head" $$f && $(RM) $$f.bak ;\
+	   fi ;\
+	 done
 	@touch $@
 
 #

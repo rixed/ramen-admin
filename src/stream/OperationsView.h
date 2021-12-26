@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef OPERATIONSVIEW_H_190507
 #define OPERATIONSVIEW_H_190507
 /* The OperationsView displays the GraphView and some controls. */

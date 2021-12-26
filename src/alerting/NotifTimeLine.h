@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef NOTIFTIMELINE_H_191204
 #define NOTIFTIMELINE_H_191204
 #include <memory>

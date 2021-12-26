@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KARREDITOR_H_211125
 #define KARREDITOR_H_211125
 /* An editor for a raql_value that's a tuple of other raql values. */

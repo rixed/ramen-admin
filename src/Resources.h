@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef RESOURCES_H_190715
 #define RESOURCES_H_190715
 /* As it is not possible to create static QObjects (because the QGuiApplication

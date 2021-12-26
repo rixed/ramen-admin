@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef DASHBOARDTREEMODEL_H_200320
 #define DASHBOARDTREEMODEL_H_200320
 #include <memory>

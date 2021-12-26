@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef PROCESSESWIDGET_H_190806
 #define PROCESSESWIDGET_H_190806
 #include <QWidget>

@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KCHOICE_H_190516
 #define KCHOICE_H_190516
 #include <memory>

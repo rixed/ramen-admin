@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef LOGGERVIEW_H_191202
 #define LOGGERVIEW_H_191202
 /* Widget to display/search the last LOG_HISTORY log messages */

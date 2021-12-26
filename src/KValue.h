@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KVALUE_H_190506
 #define KVALUE_H_190506
 #include <QString>

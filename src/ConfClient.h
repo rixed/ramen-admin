@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef CONFCLIENT_H_210810
 #define CONFCLIENT_H_210810
 /* A configuration client handle the connection to the configuration server,

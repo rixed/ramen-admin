@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include "processes/ProcessesDialog.h"
 
 #include <QCoreApplication>
@@ -8,7 +9,7 @@
 #include <QMenuBar>
 #include <QTreeView>
 
-#include "GraphModel.h"
+#include "processes/ProcessesTreeModel.h"
 #include "processes/ProcessesWidget.h"
 #include "processes/ProcessesWidgetProxy.h"
 
@@ -82,7 +83,7 @@ ProcessesDialog::ProcessesDialog(QWidget *parent)
         processesWidget->treeView->setColumnHidden(c, !checked);
       })};
       toggle->setCheckable(true);
-      if (GraphModel::columnIsImportant((GraphModel::Columns)c)) {
+      if (ProcessesTreeModel::columnIsImportant(ProcessesTreeModel::Columns(c)) {
         toggle->setChecked(true);
       } else {
         processesWidget->treeView->setColumnHidden(c, true);

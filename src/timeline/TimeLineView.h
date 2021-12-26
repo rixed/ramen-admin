@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMELINEVIEW_H_191206
 #define TIMELINEVIEW_H_191206
 /* A widget displaying a group of named timelines, with a TimeLine ruler on top

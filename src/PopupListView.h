@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef POPUPLISTVIEW_H_201005
 #define POPUPLISTVIEW_H_201005
 /* like a QListView, but as a separate popup that can be closed with esc/enter

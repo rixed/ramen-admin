@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMECHARTEDITWIDGET_H_200306
 #define TIMECHARTEDITWIDGET_H_200306
 #include <functional>

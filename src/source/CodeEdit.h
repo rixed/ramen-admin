@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef CODEEDIT_H_190516
 #define CODEEDIT_H_190516
 #include <QWidget>

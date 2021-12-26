@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KSHORTLABEL_H_190729
 #define KSHORTLABEL_H_190729
 /* Like a KLabel, but the content will never grow beyond the container size.

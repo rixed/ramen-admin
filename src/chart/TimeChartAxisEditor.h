@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMECHARTAXISEDITOR_H_200309
 #define TIMECHARTAXISEDITOR_H_200309
 #include <QWidget>

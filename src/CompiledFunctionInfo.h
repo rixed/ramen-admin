@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #error "DEPRECATED"
 #ifndef COMPILEDFUNCTIONINFO_H_190531
 #define COMPILEDFUNCTIONINFO_H_190531

@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef SERVERINFOWIN_H_190923
 #define SERVERINFOWIN_H_190923
 #include "SavedWindow.h"

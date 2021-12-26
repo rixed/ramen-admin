@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef MAKESYNCVALUE_H_210914
 #define MAKESYNCVALUE_H_210914
 /*

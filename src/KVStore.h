@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef KVSTORE_H_210812
 #define KVSTORE_H_210812
 #include <QList>

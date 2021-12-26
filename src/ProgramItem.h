@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef PROGRAMITEM_H_190509
 #define PROGRAMITEM_H_190509
 #include <QString>

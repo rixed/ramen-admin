@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TIMELINEGROUP_H_191205
 #define TIMELINEGROUP_H_191205
 /* This object is used to group together a set of AbstractTimeLine objects.

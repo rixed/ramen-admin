@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef SYNCSTATUS_H_20190503
 #define SYNCSTATUS_H_20190503
 #include <QDebug>

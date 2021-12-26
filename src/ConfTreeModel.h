@@ -1,6 +1,7 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef CONFTREEMODEL_H_200320
 #define CONFTREEMODEL_H_200320
-/* Abstract class to help build global treemodels from the configuration */
+/* Abstract class to help build global tree-models from the configuration */
 #include <QAbstractItemModel>
 
 struct ConfChange;

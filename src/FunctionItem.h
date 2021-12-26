@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef FUNCTIONITEM_H_190509
 #define FUNCTIONITEM_H_190509
 #include <QObject>

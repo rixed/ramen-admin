@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ATOMICWIDGETALTERNATIVE_190830
 #define ATOMICWIDGETALTERNATIVE_190830
 /* Sometime one had several possible editors, each of them an AtomicWidget, but

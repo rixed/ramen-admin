@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef EDITORWIDGET_H_210913
 #define EDITORWIDGET_H_210913
 /* Build a widget to edit a given configuration value */

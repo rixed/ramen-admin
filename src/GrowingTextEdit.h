@@ -1,3 +1,4 @@
+// vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef GROWINGTEXTEDIT_H_200405
 #define GROWINGTEXTEDIT_H_200405
 /* A QTextEdit which (preferred) size grows with its content, inspired from
