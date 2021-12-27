@@ -4,6 +4,7 @@
 /* An object to represent a RamenEventTime and also perform quick extraction
  * of a tuple's event time: */
 #include <optional>
+#include <QDebug>
 
 namespace dessser {
 namespace gen {

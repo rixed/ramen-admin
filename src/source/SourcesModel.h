@@ -129,6 +129,7 @@ class SourcesModel : public QAbstractItemModel {
   bool isMyKey(dessser::gen::sync_key::t const &) const;
 
   void addSource(dessser::gen::sync_key::t const &, KValue const &);
+
   void delSource(dessser::gen::sync_key::t const &, KValue const &);
 
  public:

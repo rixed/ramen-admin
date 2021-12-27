@@ -1,6 +1,7 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef TICKS_H_200311
 #define TICKS_H_200311
+#include <cmath>
 #include <QString>
 #include <QtGlobal>
 #include <vector>
