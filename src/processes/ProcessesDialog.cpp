@@ -9,17 +9,15 @@
 #include <QMenuBar>
 #include <QTreeView>
 
+#include "processes/ProcessesDialog.h"
 #include "processes/ProcessesTreeModel.h"
 #include "processes/ProcessesWidget.h"
 #include "processes/ProcessesWidgetProxy.h"
 
-#include "processes/ProcessesDialog.h"
-
 ProcessesDialog::ProcessesDialog(QWidget *parent)
     : SavedWindow("ProcessesWindow", tr("Processes List"), true, parent) {
   if (GraphModel::globalGraphModel) {
-    processesWidget =
-        new ProcessesWidget(GraphModel::globalGraphModel, this);
+    processesWidget = new ProcessesWidget(GraphModel::globalGraphModel, this);
     setCentralWidget(processesWidget);
 
     /* The menu bar */
@@ -72,12 +70,10 @@ ProcessesDialog::ProcessesDialog(QWidget *parent)
 
     viewMenu->addSeparator();
     for (unsigned c = 0; c < GraphModel::NumColumns; c++) {
-      if (c == GraphModel::ActionButton1 ||
-          c == GraphModel::ActionButton2)
+      if (c == GraphModel::ActionButton1 || c == GraphModel::ActionButton2)
         continue;  // Name and buttons are mandatory
 
-      QString const name{
-          GraphModel::columnName((GraphModel::Columns)c)};
+      QString const name{GraphModel::columnName((GraphModel::Columns)c)};
       // Column names have already been translated
       QAction *toggle{viewMenu->addAction(name, this, [this, c](bool checked) {
         processesWidget->treeView->setColumnHidden(c, !checked);

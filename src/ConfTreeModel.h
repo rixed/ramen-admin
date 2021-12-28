@@ -16,6 +16,7 @@ class ConfTreeModel : public QAbstractItemModel {
   ConfSubTree *root;
 
   ConfSubTree *findOrCreate(
+      // The root where to search for the item:
       ConfSubTree *,
       // This QStringList will be emptied:
       QStringList &,

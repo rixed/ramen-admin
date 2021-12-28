@@ -26,11 +26,15 @@ class ProgramItem : public GraphItem {
               GraphViewSettings const &);
 
   QVariant data(int column, int role) const;
+
   void reorder(GraphModel *);
+
   QRectF operationRect() const;
 
   bool isTopHalf() const;
+
   bool isWorking() const;
+
   bool isUsed() const;
 
   /* Some of the functions are running, which will be none of them if the

@@ -64,6 +64,7 @@ class GraphModel : public QAbstractItemModel {
   friend class FunctionItem;
 
   void reorder();
+
   FunctionItem *find(QString const &site, QString const &program,
                      QString const &function);
 
@@ -71,23 +72,32 @@ class GraphModel : public QAbstractItemModel {
    * may still be unknown, so we also have a pending list of parents, that
    * must also be cleared for that child when its "worker" is received. */
   void addFunctionParent(FunctionItem *parent, FunctionItem *child);
+
   void delayAddFunctionParent(FunctionItem *child, QString const &site,
                               QString const &program, QString const &function);
+
   void removeParents(FunctionItem *child);  // also from pendings!
+
   void retryAddParents();
 
   void setFunctionProperty(SiteItem const *, ProgramItem const *,
                            FunctionItem *, ParsedKey const &p,
                            std::shared_ptr<dessser::gen::sync_value::t const>);
+
   void setProgramProperty(ProgramItem *, ParsedKey const &p,
                           std::shared_ptr<dessser::gen::sync_value::t const>);
+
   void setSiteProperty(SiteItem *, ParsedKey const &p,
                        std::shared_ptr<dessser::gen::sync_value::t const>);
+
   void delFunctionProperty(FunctionItem *, ParsedKey const &p);
+
   void delProgramProperty(ProgramItem *, ParsedKey const &p);
+
   void delSiteProperty(SiteItem *, ParsedKey const &p);
 
   void updateKey(dessser::gen::sync_key::t const &, KValue const &);
+
   void deleteKey(dessser::gen::sync_key::t const &, KValue const &);
 
  public:
@@ -168,8 +178,10 @@ class GraphModel : public QAbstractItemModel {
   GraphModel(GraphViewSettings const &, QObject *parent = nullptr);
 
   static QString const columnName(Columns);
+
   // Those columns that are displayed by default on the processes list:
   static bool columnIsImportant(Columns);
+
   // Those columns that are displayed in the storage window:
   static bool columnIsAboutArchives(Columns);
 
@@ -178,11 +190,17 @@ class GraphModel : public QAbstractItemModel {
    * are used in all read-only models, and form the basis of editable models."
    */
   QModelIndex index(int, int, QModelIndex const &) const override;
+
   QModelIndex parent(QModelIndex const &) const override;
+
   int rowCount(QModelIndex const &) const override;
+
   int columnCount(QModelIndex const &) const override;
+
   QVariant data(QModelIndex const &, int) const override;
+
   QVariant headerData(int, Qt::Orientation, int) const override;
+
   GraphItem const *itemOfIndex(QModelIndex const &) const;
 
   static GraphModel *globalGraphModel;
@@ -192,11 +210,17 @@ class GraphModel : public QAbstractItemModel {
 
  signals:
   void positionChanged(QModelIndex const &index);
+
   void functionAdded(FunctionItem const *);
+
   void functionRemoved(FunctionItem const *);
+
   void relationAdded(FunctionItem const *parent, FunctionItem const *child);
+
   void relationRemoved(FunctionItem const *parent, FunctionItem const *child);
+
   void storagePropertyChanged(FunctionItem const *);
+
   /* Special signal each time a worker changes (to help with filtering
    * processes, see ProcessesWidget.cpp */
   void workerChanged(QString const &oldSign, QString const &newSign);

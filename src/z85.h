@@ -2,7 +2,7 @@
 #ifndef Z85_H_210831
 #define Z85_H_210831
 extern "C" {
-# include <sys/types.h>
+#include <sys/types.h>
 }
 
 ssize_t z85_decode(size_t const in_len, unsigned char const *in,

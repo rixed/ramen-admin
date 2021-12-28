@@ -3,8 +3,8 @@
 #define EVENTTIME_H_191008
 /* An object to represent a RamenEventTime and also perform quick extraction
  * of a tuple's event time: */
-#include <optional>
 #include <QDebug>
+#include <optional>
 
 namespace dessser {
 namespace gen {
