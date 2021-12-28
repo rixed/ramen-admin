@@ -20,6 +20,7 @@
 #include "KVecEditor.h"
 #include "KVoidEditor.h"
 #include "MakeSyncValue.h"
+#include "RuntimeStatsViewer.h"
 #include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
@@ -283,10 +284,10 @@ AtomicWidget *newEditorWidget(
     case dessser::gen::sync_value::TargetConfig:
       editor = new TargetConfigEditor(parent);
       break;
-#if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::RuntimeStats:
       editor = new RuntimeStatsViewer(parent);
       break;
+#if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::DashboardWidget: {
       dessser::gen::dashboard_widget::t const *dash{
           std::get<dessser::gen::sync_value::DashboardWidget>(v)};

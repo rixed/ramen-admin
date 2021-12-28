@@ -18,8 +18,8 @@ class ProgramItem : public GraphItem {
   std::vector<std::pair<QString const, QString const> > labels() const;
 
  public:
-  // As we are going to point to item from their children we do not want them
-  // to move in memory, so let's use a vector of pointers:
+  /* As we are going to point to item from their children we do not want them
+   * to move in memory, so we can use a vector of pointers: */
   std::vector<FunctionItem *> functions;
 
   ProgramItem(GraphItem *treeParent, std::unique_ptr<Program>,

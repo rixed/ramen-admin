@@ -8,8 +8,6 @@
 #include "KFloatEditor.h"
 #include "KIntEditor.h"
 #include "MakeSyncValue.h"
-#include "PosDoubleValidator.h"
-#include "PosIntValidator.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 

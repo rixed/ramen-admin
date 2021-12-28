@@ -5,29 +5,37 @@
 
 class QLabel;
 
+namespace dessser {
+namespace gen {
+namespace sync_value {
+struct t;
+}
+}  // namespace gen
+}  // namespace dessser
+
 class RuntimeStatsViewer : public AtomicWidget {
   Q_OBJECT
 
-  QLabel *statsTime, *firstStartup, *lastStartup;
-  QLabel *minEventTime, *maxEventTime;
-  QLabel *firstInput, *lastInput;
-  QLabel *firstOutput, *lastOutput;
-  QLabel *totInputTuples, *totSelectedTuples, *totFilteredTuples,
-      *totOutputTuples;
-  QLabel *avgFullBytes;
-  QLabel *curGroups, *maxGroups;
-  QLabel *totInputBytes, *totOutputBytes;
-  QLabel *totWaitIn, *totWaitOut;
-  QLabel *totFiringNotifs, *totExtinguishedNotifs;
-  QLabel *totCpu;
-  QLabel *curRam, *maxRam;
+  QLabel *stats_time, *first_startup, *last_startup;
+  QLabel *min_etime, *max_etime;
+  QLabel *first_input, *last_input;
+  QLabel *first_output, *last_output;
+  QLabel *tot_in_tuples, *tot_sel_tuples, *tot_out_filtered, *tot_out_tuples,
+      *tot_out_errs;
+  QLabel *avg_full_bytes;
+  QLabel *cur_groups, *max_groups;
+  QLabel *tot_in_bytes, *tot_out_bytes;
+  QLabel *tot_wait_in, *tot_wait_out;
+  QLabel *tot_firing_notifs, *tot_extinguished_notifs;
+  QLabel *tot_cpu;
+  QLabel *cur_ram, *max_ram;
 
  public:
   RuntimeStatsViewer(QWidget *parent = nullptr);
   void setEnabled(bool) {}
 
  public slots:
-  bool setValue(std::string const &, std::shared_ptr<conf::Value const>);
+  bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
 };
 
 #endif

@@ -10,7 +10,6 @@
 #include <QTreeView>
 
 #include "processes/ProcessesDialog.h"
-#include "processes/ProcessesTreeModel.h"
 #include "processes/ProcessesWidget.h"
 #include "processes/ProcessesWidgetProxy.h"
 
@@ -79,7 +78,7 @@ ProcessesDialog::ProcessesDialog(QWidget *parent)
         processesWidget->treeView->setColumnHidden(c, !checked);
       })};
       toggle->setCheckable(true);
-      if (ProcessesTreeModel::columnIsImportant(ProcessesTreeModel::Columns(c)) {
+      if (GraphModel::columnIsImportant(GraphModel::Columns(c))) {
         toggle->setChecked(true);
       } else {
         processesWidget->treeView->setColumnHidden(c, true);

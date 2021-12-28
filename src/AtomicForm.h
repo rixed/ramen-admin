@@ -16,7 +16,7 @@
  *
  * We are passed a list of KWidgets (Keyed-Widget), which must have a
  * setEnabled(bool) slot (all QWidgets have this one),
- * and they must have a method to get the confValue out of it, that we call
+ * and they must have a method to get the sync_value out of it, that we call
  * when we commit the form and when we click "edit" to save the initial
  * values.
  *

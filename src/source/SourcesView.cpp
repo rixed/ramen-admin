@@ -22,7 +22,6 @@
 #include "misc_dessser.h"
 #include "source/NewProgramDialog.h"
 #include "source/SourcesModel.h"
-#include "widgetTools.h"
 
 static bool const verbose{false};
 
