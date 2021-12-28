@@ -24,6 +24,8 @@
 #include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
+#include "chart/TimeChartEditWidget.h"
+#include "dashboard/DashboardWidgetText.h"
 #include "desssergen/raql_type.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_key.h"
@@ -287,16 +289,15 @@ AtomicWidget *newEditorWidget(
     case dessser::gen::sync_value::RuntimeStats:
       editor = new RuntimeStatsViewer(parent);
       break;
-#if WITH_NON_PORTED_STUFF
     case dessser::gen::sync_value::DashboardWidget: {
-      dessser::gen::dashboard_widget::t const *dash{
+          std::shared_ptr<dessser::gen::dashboard_widget::t const> dash{
           std::get<dessser::gen::sync_value::DashboardWidget>(v)};
       switch (dash->index()) {
         case dessser::gen::dashboard_widget::Text:
           editor = new DashboardWidgetText(nullptr, parent);
           break;
         case dessser::gen::dashboard_widget::Chart:
-          editor = new TimeChartEditWidget(nullptr, nullptr, parent);
+          editor = new TimeChartEditWidget(nullptr, nullptr, nullptr, parent);
           break;
         default:
           qFatal("newEditorWidget: invalid dash->index()");
@@ -304,7 +305,6 @@ AtomicWidget *newEditorWidget(
       };
       break;
     }
-#endif
     default:
       editor = new KLabel(parent);
       break;
