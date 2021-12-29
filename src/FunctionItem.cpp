@@ -98,10 +98,10 @@ std::shared_ptr<dessser::gen::source_info::compiled_func const>
 Function::compiledInfo() const {
   dessser::gen::sync_key::t const k{
       std::in_place_index<dessser::gen::sync_key::Sources>, srcPath, "info"};
-  KValue const *kv = nullptr;
+  KValue const *kv{nullptr};
   kvs->lock.lock_shared();
-  auto it = kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
-      &k, /* No del */ [](dessser::gen::sync_key::t const *) {}));
+  auto it{kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
+      &k, /* No del */ [](dessser::gen::sync_key::t const *) {}))};
   if (it != kvs->map.end()) kv = &it->second;
   kvs->lock.unlock_shared();
 
@@ -184,13 +184,13 @@ std::shared_ptr<dessser::gen::event_time::t const> Function::get_event_time()
 std::shared_ptr<PastData> Function::getPast() {
   if (pastData) return pastData;
 
-  std::shared_ptr<EventTime const> eventTime = getTime();
+  std::shared_ptr<EventTime const> eventTime{getTime()};
   if (!eventTime) {
     qWarning() << "Function" << name << "has no eventTime";
     return nullptr;
   }
 
-  std::shared_ptr<dessser::gen::raql_type::t const> type = outType();
+  std::shared_ptr<dessser::gen::raql_type::t const> type{outType()};
   if (!type) {
     qWarning() << "Function" << name << "has no output type";
     return nullptr;
@@ -218,7 +218,7 @@ void Function::iterValues(
     return;
   }
 
-  double reqSince = since, reqUntil = until;
+  double reqSince{since}, reqUntil{until};
   /* FIXME: lock tailModel->tuples here and release after having read the
    * first tuples */
   if (tailModel && !std::isnan(tailModel->minEventTime())) {
@@ -338,7 +338,7 @@ int FunctionItem::columnCount() const {
 }
 
 QVariant FunctionItem::data(int column, int role) const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   if (role == Qt::DisplayRole && !isTopHalf()) {
     if (column == GraphModel::ActionButton1)
@@ -631,8 +631,8 @@ QVariant FunctionItem::data(int column, int role) const {
 
     case GraphModel::StatsAverageTupleSize:
       if (shr->runtimeStats && shr->runtimeStats->tot_full_bytes_samples > 0) {
-        double const avg = (double)shr->runtimeStats->tot_full_bytes /
-                           shr->runtimeStats->tot_full_bytes_samples;
+        double const avg{(double)shr->runtimeStats->tot_full_bytes /
+                         shr->runtimeStats->tot_full_bytes_samples};
         if (role == GraphModel::SortRole)
           return avg;
         else
@@ -764,7 +764,7 @@ QVariant FunctionItem::data(int column, int role) const {
                          : na;
 
     case GraphModel::NumTailTuples: {
-      std::shared_ptr<TailModel> tailModel = shr->getTail();
+      std::shared_ptr<TailModel> tailModel{shr->getTail()};
       if (role == GraphModel::SortRole)
         return tailModel ? tailModel->rowCount() : (qulonglong)0;
       else
@@ -780,7 +780,7 @@ QVariant FunctionItem::data(int column, int role) const {
 
 std::vector<std::pair<QString const, QString const> > FunctionItem::labels()
     const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   std::vector<std::pair<QString const, QString const> > labels;
   labels.reserve(8);
@@ -810,26 +810,26 @@ QRectF FunctionItem::operationRect() const {
 }
 
 bool FunctionItem::isTopHalf() const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   return shr->worker &&
          shr->worker->role.index() == dessser::gen::worker::TopHalf;
 }
 
 bool FunctionItem::isWorking() const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   return (bool)shr->worker;
 }
 
 bool FunctionItem::isRunning() const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   return shr->pid.has_value();
 }
 
 bool FunctionItem::isUsed() const {
-  std::shared_ptr<Function> shr = std::static_pointer_cast<Function>(shared);
+  std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 
   if (!shr->worker) return false;
   return shr->worker->is_used;

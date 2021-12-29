@@ -176,7 +176,7 @@ void SourcesModel::addSource(dessser::gen::sync_key::t const &key,
   std::string const src_path{std::get<0>(sources)};
 
   QStringList names{
-      QString::fromStdString(src_path).split("/", Qt::SkipEmptyParts)};
+      QString::fromStdString(src_path).split('/', Qt::SkipEmptyParts)};
   QString const extension{QString::fromStdString(std::get<1>(sources))};
   createAll(src_path, names, extension, root);
 }
@@ -284,7 +284,7 @@ QModelIndex const SourcesModel::indexOfSrcPath(std::string const &prefix) {
 
 SourcesModel::TreeItem *SourcesModel::itemOfSrcPath(std::string const &prefix) {
   QStringList names{
-      QString::fromStdString(prefix).split("/", Qt::SkipEmptyParts)};
+      QString::fromStdString(prefix).split('/', Qt::SkipEmptyParts)};
 
   TreeItem *item = root;
   do {
@@ -342,7 +342,7 @@ void SourcesModel::delSource(dessser::gen::sync_key::t const &key,
   std::string const &src_path{std::get<0>(sources)};
 
   QStringList names{
-      QString::fromStdString(src_path).split("/", Qt::SkipEmptyParts)};
+      QString::fromStdString(src_path).split('/', Qt::SkipEmptyParts)};
   QString const extension{QString::fromStdString(std::get<1>(sources))};
 
   deleteAll(names, extension, root);

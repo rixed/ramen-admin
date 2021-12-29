@@ -31,7 +31,7 @@ static bool const verbose{true};
  * the type definitions become incompatible. */
 
 static QStringList treeNamesOfSourcePath(std::string const &src_path) {
-  return QString::fromStdString(src_path).split("/", Qt::SkipEmptyParts);
+  return QString::fromStdString(src_path).split('/', Qt::SkipEmptyParts);
 }
 
 static QStringList treeNamesOfSourcesKey(dessser::gen::sync_key::t const &k) {
@@ -72,7 +72,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       ret =
           ret
           << "PerWorker"
-          << QString::fromStdString(worker_name).split("/", Qt::SkipEmptyParts);
+          << QString::fromStdString(worker_name).split('/', Qt::SkipEmptyParts);
       switch (worker_data->index()) {
         case RuntimeStats:
           return ret << "RuntimeStats";
@@ -127,7 +127,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       auto const &program_data{std::get<1>(program)};
       ret = ret << "PerProgram"
                 << QString::fromStdString(program_name)
-                       .split("/", Qt::SkipEmptyParts);
+                       .split('/', Qt::SkipEmptyParts);
       switch (program_data.index()) {
         case Executable:
           return ret << "Executable";
@@ -167,7 +167,7 @@ static QStringList treeNamesOfTailsKey(dessser::gen::sync_key::t const &k) {
   std::shared_ptr<per_tail const> subscriber_data{std::get<3>(tails)};
   QStringList ret{QStringList("Tails") << QString::fromStdString(site_name)
                                        << QString::fromStdString(fq_name).split(
-                                              "/", Qt::SkipEmptyParts)
+                                              '/', Qt::SkipEmptyParts)
                                        << QString::fromStdString(instance)};
   switch (subscriber_data->index()) {
     case Subscriber:
@@ -234,7 +234,7 @@ static QStringList treeNamesOfTeamsKey(dessser::gen::sync_key::t const &k) {
   auto const &team_data{std::get<1>(teams)};
   QStringList ret{QStringList("Teams")
                   << QString::fromStdString(team_name).split(
-                         "/", Qt::SkipEmptyParts)};
+                         '/', Qt::SkipEmptyParts)};
   switch (team_data.index()) {
     case Contacts:
       return ret << "Contacts"
@@ -270,7 +270,7 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
       auto const &dialogs{std::get<Dialogs>(*incident_data)};
       ret = ret << "Dialogs"
                 << QString::fromStdString(std::get<0>(dialogs))
-                       .split("/", Qt::SkipEmptyParts);
+                       .split('/', Qt::SkipEmptyParts);
       std::shared_ptr<dessser::gen::sync_key::dialog_key const> dialog_data{
           std::get<1>(dialogs)};
       switch (dialog_data->index()) {

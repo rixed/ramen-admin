@@ -54,6 +54,7 @@ class GraphItem : public QObject, public QGraphicsItem {
 
   qreal border_;
   QBrush brush;
+
   /* All subItems will be children of this one, which in turn is our child
    * node. So to collapse subitems it's enough to subItems.hide() */
   QGraphicsItem *subItems;
@@ -90,20 +91,35 @@ class GraphItem : public QObject, public QGraphicsItem {
   GraphItem(GraphItem *treeParent, std::unique_ptr<GraphData> data,
             GraphViewSettings const &);
 
-  int columnCount() const;
+  virtual int columnCount() const;
+
   virtual QVariant data(int col, int role) const;
+
   // Reorder the children after some has been added/removed
   virtual void reorder(GraphModel *){};
   virtual void setProperty(
       QString const &, std::shared_ptr<dessser::gen::raql_value::t const>){};
+
   QModelIndex index(GraphModel const *, int) const;
+
   bool isCollapsed() const;
+
   virtual bool isTopHalf() const = 0;
+
+  virtual bool isUsed() const = 0;
+
+  virtual bool isRunning() const = 0;
+
+  virtual bool isWorking() const = 0;
+
+  virtual operator QString() const = 0;
 
   // For the GraphView:
   QRectF boundingRect() const;
+
   virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                      QWidget *widget);
+
   // The box representing the operation, regardless of its border (unlike
   // boundingRect):
   virtual QRectF operationRect() const = 0;

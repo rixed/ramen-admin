@@ -123,7 +123,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
     }
     if (!accepted) {
       if (verbose)
-        qDebug() << "Filter out entirely program" << program->shared->name;
+        qDebug() << "Filter out entire program" << program->shared->name;
       return false;
     }
     return true;
@@ -143,6 +143,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
 
   if (!filterAcceptsFunction(*function)) return false;
 
+  /* So far so good. Now build the FQ name of the function and match that: */
   SiteItem const *site{
       static_cast<SiteItem const *>(parentProgram->treeParent)};
 

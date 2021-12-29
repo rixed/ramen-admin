@@ -127,14 +127,19 @@ class FunctionItem : public GraphItem {
   FunctionItem(GraphItem *treeParent, std::unique_ptr<Function>,
                GraphViewSettings const &);
 
-  int columnCount() const;
-  QVariant data(int, int) const;
-  QRectF operationRect() const;
+  int columnCount() const override;
 
-  bool isTopHalf() const;
-  bool isWorking() const;  // has a worker
-  bool isRunning() const;  // has a pid
-  bool isUsed() const;     // either not lazy, or have no deps (is_used flag)
+  QVariant data(int, int) const override;
+
+  QRectF operationRect() const override;
+
+  bool isTopHalf() const override;
+
+  bool isWorking() const override;  // has a worker
+
+  bool isRunning() const override;  // has a pid
+
+  bool isUsed() const override;  // either not lazy, or have no deps (is_used flag)
 
   operator QString() const;
 };

@@ -27,19 +27,22 @@ class ProgramItem : public GraphItem {
 
   QVariant data(int column, int role) const;
 
-  void reorder(GraphModel *);
+  void reorder(GraphModel *) override;
 
-  QRectF operationRect() const;
 
-  bool isTopHalf() const;
 
-  bool isWorking() const;
 
-  bool isUsed() const;
+  QRectF operationRect() const override;
+
+  bool isTopHalf() const override;
+
+  bool isWorking() const override;
+
+  bool isUsed() const override;
 
   /* Some of the functions are running, which will be none of them if the
    * program is conditionally disabled: */
-  bool isRunning() const;
+  bool isRunning() const override;
 
   operator QString() const;
 };

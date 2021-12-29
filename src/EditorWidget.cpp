@@ -290,7 +290,7 @@ AtomicWidget *newEditorWidget(
       editor = new RuntimeStatsViewer(parent);
       break;
     case dessser::gen::sync_value::DashboardWidget: {
-          std::shared_ptr<dessser::gen::dashboard_widget::t const> dash{
+      std::shared_ptr<dessser::gen::dashboard_widget::t const> dash{
           std::get<dessser::gen::sync_value::DashboardWidget>(v)};
       switch (dash->index()) {
         case dessser::gen::dashboard_widget::Text:

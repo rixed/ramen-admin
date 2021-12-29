@@ -18,7 +18,6 @@
 #include "TailTable.h"
 #include "misc.h"
 #include "source/SourcesWin.h"
-#include "widgetTools.h"
 
 static bool const verbose{false};
 

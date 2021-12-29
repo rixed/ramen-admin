@@ -143,7 +143,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofCidrv4(uint32_t ip,
 }
 
 std::unique_ptr<dessser::gen::sync_value::t> cidrv4OfQString(QString const &s) {
-  QStringList l{s.split("/", Qt::KeepEmptyParts)};
+  QStringList l{s.split('/', Qt::KeepEmptyParts)};
   uint32_t ip;
   if (l.count() != 2 || !parseIpv4(&ip, s)) return nullptr;
   return ofCidrv4(ip, l[1].toInt());
@@ -156,7 +156,7 @@ std::unique_ptr<dessser::gen::sync_value::t> ofCidrv6(uint128_t ip,
 }
 
 std::unique_ptr<dessser::gen::sync_value::t> cidrv6OfQString(QString const &s) {
-  QStringList l{s.split("/", Qt::KeepEmptyParts)};
+  QStringList l{s.split('/', Qt::KeepEmptyParts)};
   uint128_t ip;
   if (l.count() != 2 || !parseIpv6(&ip, s)) return nullptr;
   return ofCidrv6(ip, l[1].toInt());

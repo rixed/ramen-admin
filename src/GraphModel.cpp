@@ -53,6 +53,7 @@ QModelIndex GraphModel::index(int row, int column,
     return createIndex(row, column, static_cast<GraphItem *>(site));
   }
 
+  // Otherwise, look for that parent
   GraphItem *parentPtr{static_cast<GraphItem *>(parent.internalPointer())};
   // Maybe a site?
   SiteItem *parentSite{dynamic_cast<SiteItem *>(parentPtr)};

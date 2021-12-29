@@ -26,9 +26,18 @@ class SiteItem : public GraphItem {
   SiteItem(GraphItem *treeParent, std::unique_ptr<Site>,
            GraphViewSettings const &);
 
-  void reorder(GraphModel *);
-  QRectF operationRect() const;
-  bool isTopHalf() const { return false; }
+  void reorder(GraphModel *) override;
+
+  QRectF operationRect() const override;
+
+  bool isTopHalf() const override { return false; }
+
+  bool isUsed() const override { Q_ASSERT(false); }
+
+  bool isRunning() const override { Q_ASSERT(false); }
+
+  bool isWorking() const override { Q_ASSERT(false); }
+
 
   operator QString() const;
 };
