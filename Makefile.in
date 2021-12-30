@@ -152,8 +152,8 @@ EXTRA_ICON_FILES =
 endif
 
 MANUAL_CPP_SOURCES = \
-  $(wildcard src/*.cpp) \
-  $(wildcard src/*.h) \
+  $(filter-out src/moc_%, $(wildcard src/*.cpp)) \
+  $(filter-out src/moc_%, $(wildcard src/*.h)) \
   $(wildcard src/chart/*.cpp) \
   $(wildcard src/chart/*.h) \
   $(wildcard src/dashboard/*.cpp) \
