@@ -11,6 +11,7 @@
 #include "FunctionItem.h"
 #include "GraphItem.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "SiteItem.h"
 
 static bool const verbose{false};
@@ -168,8 +169,10 @@ bool solve(std::vector<SiteItem *> const &sites) {
         for (FunctionItem *parFunc : func->parents) {
           func->parentOps.insert(parFunc);
 
-          ProgramItem *parProg{
-              dynamic_cast<ProgramItem *>(parFunc->treeParent)};
+          ProgramPartItem *parProgPart{
+              dynamic_cast<ProgramPartItem *>(parFunc->treeParent)};
+          Q_ASSERT(parProgPart);
+          ProgramItem *parProg{parProgPart->actualProgram};
           Q_ASSERT(parProg);
           if (parProg != prog) prog->parentOps.insert(parProg);
 

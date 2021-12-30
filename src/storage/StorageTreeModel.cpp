@@ -17,7 +17,7 @@ StorageTreeModel::StorageTreeModel(QObject *parent)
 
 bool StorageTreeModel::filterAcceptsRow(int sourceRow,
                                         const QModelIndex &sourceParent) const {
-  if (!sourceParent.isValid()) return false;
+  //if (!sourceParent.isValid()) return false;
 
   GraphModel *graphModel{static_cast<GraphModel *>(sourceModel())};
   QModelIndex const index{graphModel->index(sourceRow, 0, sourceParent)};

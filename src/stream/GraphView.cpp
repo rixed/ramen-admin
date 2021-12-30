@@ -177,15 +177,15 @@ void GraphView::updateArrows() {
     unsigned const channel{srcFunction->channel};
 
     while (src && !src->isVisibleTo(nullptr)) {
+      if (src->isViewable()) marginSrc++;
       src = src->treeParent;
-      marginSrc++;
     }
     if (!src) continue;  // for some reason even the site is not visible?!
     Q_ASSERT(marginSrc < NB_HMARGINS);
 
     while (dst && !dst->isVisibleTo(nullptr)) {
+      if (dst->isViewable()) marginDst++;
       dst = dst->treeParent;
-      marginDst++;
     }
     if (!dst) continue;
     Q_ASSERT(marginDst < NB_HMARGINS);

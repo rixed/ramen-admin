@@ -28,8 +28,11 @@ struct t;
  * internalPointers. It's inherited by actual SiteItem, ProgramItem and
  * FunctionItem, each implementing its own rendering functions.
  *
+ * FIXME: We should have a GraphViewable (Site, Program and Function) and
+ * GraphItem (Site, ProgramPart and Function).
+ *
  * But as we'd like the actual data regarding ramen sites, programs and
- * functions to be shared around and outlive the GraphItem then we'd rathe have
+ * functions to be shared around and outlive the GraphItem then we'd rather have
  * that data allocated separately and accessed via a shared_ptr.
  *
  * Therefore, SiteItems, ProgramItems and FunctionItems allocate their data
@@ -95,12 +98,10 @@ class GraphItem : public QObject, public QGraphicsItem {
 
   virtual QVariant data(int col, int role) const;
 
-  // Reorder the children after some has been added/removed
-  virtual void reorder(GraphModel *){};
   virtual void setProperty(
       QString const &, std::shared_ptr<dessser::gen::raql_value::t const>){};
 
-  QModelIndex index(GraphModel const *, int) const;
+  virtual QModelIndex index(GraphModel const *, int) const;
 
   bool isCollapsed() const;
 
@@ -112,6 +113,10 @@ class GraphItem : public QObject, public QGraphicsItem {
 
   virtual bool isWorking() const = 0;
 
+  /* TODO: have a GraphViewable class for SiteItem, ProgramItem and FunctionItem
+   * objects (but not ProgramPart objects). */
+  virtual bool isViewable() const = 0;
+
   virtual operator QString() const = 0;
 
   // For the GraphView:
@@ -120,8 +125,8 @@ class GraphItem : public QObject, public QGraphicsItem {
   virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                      QWidget *widget);
 
-  // The box representing the operation, regardless of its border (unlike
-  // boundingRect):
+  /* The box representing the operation, regardless of its border (unlike
+   * boundingRect): */
   virtual QRectF operationRect() const = 0;
 
   void setCollapsed(bool);

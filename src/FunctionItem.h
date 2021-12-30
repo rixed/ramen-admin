@@ -115,7 +115,7 @@ class FunctionItem : public GraphItem {
   Q_OBJECT
 
  protected:
-  std::vector<std::pair<QString const, QString const> > labels() const;
+  std::vector<std::pair<QString const, QString const> > labels() const override;
 
  public:
   // FIXME: Function destructor must clean those:
@@ -139,7 +139,10 @@ class FunctionItem : public GraphItem {
 
   bool isRunning() const override;  // has a pid
 
-  bool isUsed() const override;  // either not lazy, or have no deps (is_used flag)
+  bool isUsed()
+      const override;  // either not lazy, or have no deps (is_used flag)
+
+  bool isViewable() const override { return true; }
 
   operator QString() const;
 };

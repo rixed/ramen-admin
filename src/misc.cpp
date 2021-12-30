@@ -1,12 +1,12 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include "misc.h"
 
+#include <QAbstractItemModel>
 #include <QDateTime>
 #include <QLayout>
 #include <QLayoutItem>
 #include <QModelIndex>
 #include <QTreeView>
-#include <cassert>
 #include <cinttypes>
 #include <cmath>
 #include <cstdio>
@@ -26,7 +26,7 @@ bool endsWith(std::string const &a, std::string const &b) {
 }
 
 std::string const removeExt(std::string const &s, char const c) {
-  size_t i = s.rfind(c);
+  size_t i{s.rfind(c)};
   if (i == std::string::npos) return s;
   return s.substr(0, i);
 }
@@ -38,19 +38,19 @@ std::string const srcPathFromProgramName(std::string const &programName) {
 }
 
 std::string const suffixFromProgramName(std::string const &programName) {
-  size_t const i(programName.rfind('#'));
+  size_t const i{programName.rfind('#')};
   if (i == std::string::npos) return "";
   return programName.substr(i + 1);
 }
 
 QString const removeExtQ(QString const &s, char const c) {
-  int i = s.lastIndexOf(c);
+  int i{s.lastIndexOf(c)};
   if (i == -1) return s;
   return s.left(i);
 }
 
 QString const removeAmp(QString const &s) {
-  int const i(s.indexOf('&'));
+  int const i{s.indexOf('&')};
 
   if (i < 0) return s;
 
@@ -58,7 +58,7 @@ QString const removeAmp(QString const &s) {
 }
 
 bool looks_like_true(QString s_) {
-  QString s = s_.simplified();
+  QString s{s_.simplified()};
   if (s.isEmpty() || s[0] == '0' || s[0] == 'f' || s[0] == 'F') return false;
   return true;
 }
@@ -129,7 +129,7 @@ QString const stringOfIp4(uint32_t ip) {
 QString const stringOfIp6(uint128_t ip) {
   QStringList words;
   for (int i = 7; i >= 0; i--) {
-    unsigned const w = (ip >> (unsigned)(16 * i)) & 0xffffU;
+    unsigned const w{unsigned(ip >> (unsigned)(16 * i)) & 0xffffU};
     words = words << QString::number(w, 16);
   }
   // TODO: Replace the longest sequence of "0"s by ""
@@ -172,7 +172,7 @@ void emptyLayout(QLayout *layout) {
 #include <memory>
 
 inline std::string demangle(const char *name) {
-  int status = 0;
+  int status{0};
   std::unique_ptr<char, void (*)(void *)> res{
       abi::__cxa_demangle(name, NULL, NULL, &status), std::free};
   return (status == 0) ? res.get() : name;
@@ -185,27 +185,28 @@ std::string demangle(const char *name) { return name; }
 #endif
 
 bool isClose(double v1, double v2, double prec) {
-  assert(prec > 0);
+  Q_ASSERT(prec > 0);
 
-  double const magnitude = std::fmax(abs(v1), abs(v2));
+  double const magnitude{std::fmax(abs(v1), abs(v2))};
   if (magnitude < prec) return true;
-  double const diff = abs(v1 - v2);
+  double const diff{abs(v1 - v2)};
   return (diff / magnitude) < prec;
 }
 
 void expandAllFromParent(QTreeView *view, QModelIndex const &parent, int first,
                          int last) {
+  Q_ASSERT(first <= last);
   view->expand(parent);
   for (int r = first; r <= last; r++) {
-    QModelIndex const index = view->model()->index(r, 0, parent);
+    QModelIndex const index{view->model()->index(r, 0, parent)};
     // recursively:
-    int const numChildren = view->model()->rowCount(index);
-    expandAllFromParent(view, index, 0, numChildren - 1);
+    int const numChildren{view->model()->rowCount(index)};
+    if (numChildren > 0) expandAllFromParent(view, index, 0, numChildren - 1);
   }
 }
 
 QColor blendColor(QColor const &c1, QColor const &c2, double r2) {
-  double const r1(1 - r2);
+  double const r1{1 - r2};
 
   return QColor(
       c1.red() * r1 + c2.red() * r2, c1.green() * r1 + c2.green() * r2,

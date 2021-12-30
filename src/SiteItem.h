@@ -9,6 +9,7 @@
 
 struct GraphViewSettings;
 class ProgramItem;
+class ProgramPartItem;
 
 struct Site : public GraphData {
   std::optional<bool> isMaster;
@@ -18,16 +19,25 @@ struct Site : public GraphData {
 
 class SiteItem : public GraphItem {
  protected:
-  std::vector<std::pair<QString const, QString const> > labels() const;
+  std::vector<std::pair<QString const, QString const> > labels() const override;
 
  public:
+  /* Whenever we need a 3 layers tree (site/progra/function), use this
+   * set of programs: */
   std::vector<ProgramItem *> programs;
 
-  SiteItem(GraphItem *treeParent, std::unique_ptr<Site>,
-           GraphViewSettings const &);
+  /* But when the full tree of path components is needed, for instance for
+   * the GraphModel to fold the program components, use this.
+   * Eventually the same FunctionItems are reached by programs and programParts.
+   */
+  std::vector<ProgramPartItem *> programParts;
 
-  void reorder(GraphModel *) override;
+  SiteItem(std::unique_ptr<Site>, GraphViewSettings const &);
 
+  void reorder(GraphModel *);
+
+  // The box representing the operation, regardless of its border (unlike
+  // boundingRect):
   QRectF operationRect() const override;
 
   bool isTopHalf() const override { return false; }
@@ -38,6 +48,7 @@ class SiteItem : public GraphItem {
 
   bool isWorking() const override { Q_ASSERT(false); }
 
+  bool isViewable() const override { return true; }
 
   operator QString() const;
 };

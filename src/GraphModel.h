@@ -32,8 +32,6 @@
  * are propagated. But as the GraphView does just the displaying (not the
  * graph layout) then the data model most hold the positions itself (the
  * positions are part of the data model, can be edited/saved by users...)
- * Meaning we need yet another member: [position] and another signal:
- * [positionChanged].
  */
 
 struct ConfChange;
@@ -42,6 +40,7 @@ struct GraphViewSettings;
 struct KValue;
 class ParsedKey;
 class ProgramItem;
+class ProgramPartItem;
 class SiteItem;
 
 namespace dessser {
@@ -63,6 +62,7 @@ class GraphModel : public QAbstractItemModel {
   friend class ProgramItem;
   friend class FunctionItem;
 
+  // Reorder the children after some has been added/removed
   void reorder();
 
   FunctionItem *find(QString const &site, QString const &program,
@@ -95,6 +95,9 @@ class GraphModel : public QAbstractItemModel {
   void delProgramProperty(ProgramItem *, ParsedKey const &p);
 
   void delSiteProperty(SiteItem *, ParsedKey const &p);
+
+  ProgramPartItem *createProgramParts(ProgramPartItem *parent,
+                                      QStringList &programNames, ProgramItem *);
 
   void updateKey(dessser::gen::sync_key::t const &, KValue const &);
 
@@ -209,8 +212,6 @@ class GraphModel : public QAbstractItemModel {
   void onChange(QList<ConfChange> const &);
 
  signals:
-  void positionChanged(QModelIndex const &index);
-
   void functionAdded(FunctionItem const *);
 
   void functionRemoved(FunctionItem const *);

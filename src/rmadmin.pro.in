@@ -7,7 +7,7 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
 TEMPLATE = app
 TARGET = RmAdmin
 VERSION = @PACKAGE_VERSION@
-QT += core network widgets charts printsupport
+QT += core network widgets charts printsupport testlib
 
 # For Windows:
 RC_ICONS = rmadmin.ico
@@ -289,6 +289,7 @@ HEADERS += \
   PastData.h \
   FunctionItem.h \
   ProgramItem.h \
+  ProgramPartItem.h \
   SiteItem.h \
   layout.h \
   stream/GraphView.h
@@ -445,6 +446,7 @@ SOURCES += \
   PastData.cpp \
   FunctionItem.cpp \
   ProgramItem.cpp \
+  ProgramPartItem.cpp \
   SiteItem.cpp \
   layout.cpp \
   stream/GraphView.cpp \

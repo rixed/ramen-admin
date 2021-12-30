@@ -14,6 +14,7 @@
 #include "GraphView.h"
 #include "Menu.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "TailModel.h"
 #include "TailTable.h"
 #include "misc.h"
@@ -158,8 +159,11 @@ void OperationsView::showSource(ProgramItem const *p) {
 // Same as above but also scroll down to that function:
 void OperationsView::showFuncInfo(FunctionItem const *f) {
   if (!Menu::sourcesWin) return;
-  std::string const src_path{
-      srcPathFromProgramName(f->treeParent->shared->name.toStdString())};
+  ProgramPartItem *programPartItem{
+      dynamic_cast<ProgramPartItem *>(f->treeParent)};
+  Q_ASSERT(programPartItem);
+  std::string const src_path{srcPathFromProgramName(
+      programPartItem->actualProgram->shared->name.toStdString())};
   if (verbose)
     qDebug() << "Show source of function" << QString::fromStdString(src_path);
   Menu::sourcesWin->showFile(src_path);

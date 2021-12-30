@@ -5,23 +5,30 @@
 
 #include "GraphModel.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "stream/GraphView.h"
 #include "stream/GraphViewSettings.h"
 
-SiteItem::SiteItem(GraphItem *treeParent, std::unique_ptr<Site> site,
+SiteItem::SiteItem(std::unique_ptr<Site> site,
                    GraphViewSettings const &settings)
-    : GraphItem(treeParent, std::move(site), settings) {
+    : GraphItem(nullptr, std::move(site), settings) {
   setZValue(1);
 }
 
-void SiteItem::reorder(GraphModel *model) {
+/* Reorder both programs and programParts, even if only one of those trees is
+ * going to be used for the graph model: */
+void SiteItem::reorder(GraphModel *) {
   for (int i = 0; (size_t)i < programs.size(); i++) {
     if (programs[i]->row != i) {
       programs[i]->row = i;
       programs[i]->setPos(30, i * 90);
-      emit model->positionChanged(model->createIndex(i, 0, (programs[i])));
     }
   }
+
+  for (int i = 0; (size_t)i < programParts.size(); i++) {
+    programParts[i]->row = i;
+  }
+
   prepareGeometryChange();
 }
 

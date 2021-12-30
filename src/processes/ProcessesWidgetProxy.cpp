@@ -9,6 +9,7 @@
 #include "FunctionItem.h"
 #include "GraphItem.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "SiteItem.h"
 
 static bool const verbose{false};
@@ -129,14 +130,21 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
     return true;
   }
 
-  ProgramItem const *parentProgram{
-      dynamic_cast<ProgramItem const *>(parentPtr)};
-  if (!parentProgram) {
+  ProgramPartItem const *parentProgramPart{
+      dynamic_cast<ProgramPartItem const *>(parentPtr)};
+  if (!parentProgramPart) {
     qCritical() << "Filtering the rows of a function?!";
     return false;
   }
 
-  /* When the parent is a program, build the FQ name of the function
+  ProgramItem const *parentProgram{parentProgramPart->actualProgram};
+  if (!parentProgram) {
+    /* If not an actual program, displays it (for now. TODO: only when some of
+     * its functions are not filtered? */
+    return true;
+  }
+
+  /* When the parent is an actual program, build the FQ name of the function
    * and match that: */
   Q_ASSERT((size_t)sourceRow < parentProgram->functions.size());
   FunctionItem const *function{parentProgram->functions[sourceRow]};

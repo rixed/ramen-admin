@@ -326,6 +326,7 @@ FunctionItem::FunctionItem(GraphItem *treeParent,
                            std::unique_ptr<Function> function,
                            GraphViewSettings const &settings)
     : GraphItem(treeParent, std::move(function), settings) {
+  Q_ASSERT(treeParent);
   // TODO: updateArrows should reallocate the channels:
   channel = std::rand() % settings.numArrowChannels;
   setZValue(3);
@@ -334,7 +335,8 @@ FunctionItem::FunctionItem(GraphItem *treeParent,
 /* columnCount is called to know the number of columns of the sub elements.
  * Functions have no sub-elements and Qt should know this. */
 int FunctionItem::columnCount() const {
-  qFatal("FunctionItem::columnCount called!");
+  //qFatal("FunctionItem::columnCount called!");
+  return 0;
 }
 
 QVariant FunctionItem::data(int column, int role) const {

@@ -12,17 +12,17 @@
 ProgramItem::ProgramItem(GraphItem *treeParent,
                          std::unique_ptr<Program> program,
                          GraphViewSettings const &settings)
-    : GraphItem(treeParent, std::move(program), settings) {
+    : GraphItem(treeParent, std::move(program), settings),
+      lastProgramPartItem(nullptr) {
+  Q_ASSERT(treeParent);
   setZValue(2);
 }
 
-void ProgramItem::reorder(GraphModel *model) {
+void ProgramItem::reorder(GraphModel *) {
   for (int i = 0; (size_t)i < functions.size(); i++) {
     if (functions[i]->row != i) {
       functions[i]->row = i;
       functions[i]->setPos(30, i * 30);
-      emit model->positionChanged(
-          model->createIndex(i, 0, static_cast<GraphItem *>(functions[i])));
     }
   }
   prepareGeometryChange();

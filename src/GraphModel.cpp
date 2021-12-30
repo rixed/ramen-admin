@@ -9,6 +9,7 @@
 #include "FunctionItem.h"
 #include "KVStore.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "SiteItem.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/runtime_stats.h"
@@ -18,7 +19,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static bool const verbose{true};
 
 GraphModel *GraphModel::globalGraphModel;
 
@@ -46,6 +47,7 @@ void GraphModel::onChange(QList<ConfChange> const &changes) {
 
 QModelIndex GraphModel::index(int row, int column,
                               QModelIndex const &parent) const {
+  // Q_ASSERT(checkIndex(parent));
   if (!parent.isValid()) {  // Asking for a site
     if ((size_t)row >= sites.size()) return QModelIndex();
     SiteItem *site{sites[row]};
@@ -57,20 +59,36 @@ QModelIndex GraphModel::index(int row, int column,
   GraphItem *parentPtr{static_cast<GraphItem *>(parent.internalPointer())};
   // Maybe a site?
   SiteItem *parentSite{dynamic_cast<SiteItem *>(parentPtr)};
-  if (parentSite) {  // bingo!
-    if ((size_t)row >= parentSite->programs.size()) return QModelIndex();
-    ProgramItem *program{parentSite->programs[row]};
-    Q_ASSERT(program->treeParent == parentPtr);
-    return createIndex(row, column, static_cast<GraphItem *>(program));
+  if (parentSite) {  // bingo! Look for that program:
+    if ((size_t)row >= parentSite->programParts.size()) return QModelIndex();
+    ProgramPartItem *programPart{parentSite->programParts[row]};
+    Q_ASSERT(programPart->treeParent == parentPtr);
+    return createIndex(row, column, static_cast<GraphItem *>(programPart));
   }
 
   // Maybe a program?
-  ProgramItem *parentProgram{dynamic_cast<ProgramItem *>(parentPtr)};
-  if (parentProgram) {
-    if ((size_t)row >= parentProgram->functions.size()) return QModelIndex();
-    FunctionItem *function{parentProgram->functions[row]};
-    Q_ASSERT(function->treeParent == parentPtr);
-    return createIndex(row, column, static_cast<GraphItem *>(function));
+  ProgramPartItem *parentPart{dynamic_cast<ProgramPartItem *>(parentPtr)};
+  if (parentPart) {  // bingo! Look for that subPart:
+    ProgramItem *parentProgram{parentPart->actualProgram};
+    if (parentProgram) {  // Look for that function:
+      if ((size_t)row >= parentProgram->functions.size()) {
+        // Have subparts after the functions:
+        size_t const row_{row - parentProgram->functions.size()};
+        if (row_ >= parentPart->subParts.size()) return QModelIndex();
+        ProgramPartItem *subPart{parentPart->subParts[row_]};
+        Q_ASSERT(subPart->treeParent == parentPtr);
+        return createIndex(row, column, static_cast<GraphItem *>(subPart));
+      } else {
+        FunctionItem *function{parentProgram->functions[row]};
+        Q_ASSERT(function->treeParent == parentPtr);
+        return createIndex(row, column, static_cast<GraphItem *>(function));
+      }
+    } else {  // Look for that subPart:
+      if ((size_t)row >= parentPart->subParts.size()) return QModelIndex();
+      ProgramPartItem *subPart{parentPart->subParts[row]};
+      Q_ASSERT(subPart->treeParent == parentPtr);
+      return createIndex(row, column, static_cast<GraphItem *>(subPart));
+    }
   }
 
   // There is no alternative
@@ -78,35 +96,47 @@ QModelIndex GraphModel::index(int row, int column,
 }
 
 QModelIndex GraphModel::parent(QModelIndex const &index) const {
+  // QAbstractItemModelTester does call this with an invalid index:
+  if (!index.isValid()) return QModelIndex();
+
+  // Q_ASSERT(checkIndex(index, CheckIndexOption::DoNotUseParent));
   GraphItem const *item{itemOfIndex(index)};
   Q_ASSERT(item);
 
-  if (!item->treeParent) {
+  if (item->treeParent) {
+    return createIndex(item->treeParent->row, 0, item->treeParent);
+  } else {
     // We must be a site then:
     Q_ASSERT(nullptr != dynamic_cast<SiteItem const *>(item));
     return QModelIndex();  // parent is "root"
   }
-
-  return createIndex(item->treeParent->row, 0, item->treeParent);
 }
 
 int GraphModel::rowCount(QModelIndex const &parent) const {
+  // Q_ASSERT(checkIndex(parent));
   if (!parent.isValid()) {
     // That must be "root" then:
     return sites.size();
   }
 
+  // Only the first column has children:
+  if (parent.column() > 0) return 0;
+
   GraphItem const *parentPtr{itemOfIndex(parent)};
   Q_ASSERT(parentPtr);
   SiteItem const *parentSite{dynamic_cast<SiteItem const *>(parentPtr)};
   if (parentSite) {
-    return parentSite->programs.size();
+    return parentSite->programParts.size();
   }
 
-  ProgramItem const *parentProgram{
-      dynamic_cast<ProgramItem const *>(parentPtr)};
-  if (parentProgram) {
-    return parentProgram->functions.size();
+  ProgramPartItem const *parentPart{
+      dynamic_cast<ProgramPartItem const *>(parentPtr)};
+  if (parentPart) {
+    if (parentPart->actualProgram)
+      return parentPart->actualProgram->functions.size() +
+             parentPart->subParts.size();
+    else
+      return parentPart->subParts.size();
   }
 
   FunctionItem const *parentFunction{
@@ -119,6 +149,7 @@ int GraphModel::rowCount(QModelIndex const &parent) const {
 }
 
 int GraphModel::columnCount(QModelIndex const &parent) const {
+  // Q_ASSERT(checkIndex(parent));
   /* Number of columns for the global header. */
   if (!parent.isValid()) return NumColumns;
 
@@ -126,6 +157,7 @@ int GraphModel::columnCount(QModelIndex const &parent) const {
 }
 
 QVariant GraphModel::data(QModelIndex const &index, int role) const {
+  // Q_ASSERT(checkIndex(index, CheckIndexOption::IndexIsValid));
   if (!index.isValid()) return QVariant();
 
   return itemOfIndex(index)->data(index.column(), role);
@@ -295,8 +327,6 @@ void GraphModel::reorder() {
     if (sites[i]->row != i) {
       sites[i]->row = i;
       sites[i]->setPos(0, i * 130);
-      emit positionChanged(
-          createIndex(i, 0, static_cast<GraphItem *>(sites[i])));
     }
   }
 }
@@ -500,7 +530,7 @@ void GraphModel::setFunctionProperty(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   if (verbose) qDebug() << "setFunctionProperty for" << pk.property;
 
-  int changed(0);
+  int changed{0};
 #define PROPERTY_CHANGED 0x1
 #define STORAGE_CHANGED 0x2
 #define WORKER_CHANGED 0x4
@@ -509,6 +539,7 @@ void GraphModel::setFunctionProperty(
       std::static_pointer_cast<Function>(functionItem->shared)};
 
   if (!pk.instanceSignature.isEmpty()) {
+    if (verbose) qDebug() << "instanceSignature set!";
     /* Remember that old instances are not removed from the config tree.
      * Also, worker is supposed to arrive before the instances.
      * So we can safely reject any instance that has not the same signature
@@ -738,6 +769,7 @@ void GraphModel::delFunctionProperty(FunctionItem *functionItem,
     QModelIndex topLeft{functionItem->index(this, 0)};
     QModelIndex bottomRight{
         functionItem->index(this, GraphModel::NumColumns - 1)};
+    if (verbose) qDebug() << "Emitting dataChanged(2)";
     emit dataChanged(topLeft, bottomRight);
   }
   if (changed & WORKER_CHANGED) {
@@ -784,13 +816,53 @@ void GraphModel::delSiteProperty(SiteItem *siteItem, ParsedKey const &pk) {
   emit dataChanged(index, index, {Qt::DisplayRole});
 }
 
+/* Create the populated ProgramPartItem and return its last element.
+ * programNames is consumed: */
+ProgramPartItem *GraphModel::createProgramParts(ProgramPartItem *parent,
+                                                QStringList &programNames,
+                                                ProgramItem *actualProgram) {
+  if (programNames.isEmpty()) return parent;
+
+  // Look for firstName in the parent:
+  QString const &firstName{programNames.takeFirst()};
+  ProgramPartItem *child{nullptr};
+  for (ProgramPartItem *ppi : parent->subParts) {
+    if (ppi->shared->name == firstName) {
+      child = ppi;
+      break;
+    }
+  }
+  // Or create it:
+  if (!child) {
+    if (verbose)
+      qDebug() << "Creating a new ProgramPart (subpart)" << firstName;
+
+    // This needs to be signaled:
+    size_t idx{parent->subParts.size()};
+    QModelIndex parentIndex{
+        createIndex(parent->row, 0, static_cast<GraphItem *>(parent))};
+    beginInsertRows(parentIndex, idx, idx);
+
+    child = new ProgramPartItem(
+        parent, std::make_unique<ProgramPart>(firstName),
+        programNames.isEmpty() ? actualProgram : nullptr, settings);
+    /* No need to beginInsertRows given it is done globally from the root of
+     * that program. */
+    parent->subParts.push_back(child);
+    parent->reorder(this);
+
+    endInsertRows();
+  }
+
+  return createProgramParts(child, programNames, actualProgram);
+}
+
 void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
                            KValue const &kv) {
   ParsedKey pk{key};
   if (!pk.valid) return;
 
-  if (verbose)
-    qDebug() << "GraphModel key" << key << "set to value " << *kv.val;
+  if (verbose) qDebug() << "GraphModel key" << key << "set to value" << *kv.val;
 
   Q_ASSERT(pk.site.length() > 0);
 
@@ -805,7 +877,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
   if (!siteItem) {
     if (verbose) qDebug() << "Creating a new Site" << pk.site;
 
-    siteItem = new SiteItem(nullptr, std::make_unique<Site>(pk.site), settings);
+    siteItem = new SiteItem(std::make_unique<Site>(pk.site), settings);
     size_t idx{sites.size()};  // as we insert at the end for now
     beginInsertRows(QModelIndex(), idx, idx);
     sites.insert(sites.begin() + idx, siteItem);
@@ -826,13 +898,43 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
 
       programItem = new ProgramItem(
           siteItem, std::make_unique<Program>(pk.program), settings);
-      size_t idx{siteItem->programs.size()};
-      QModelIndex parent{
-          createIndex(siteItem->row, 0, static_cast<GraphItem *>(siteItem))};
-      beginInsertRows(parent, idx, idx);
-      siteItem->programs.insert(siteItem->programs.begin() + idx, programItem);
-      siteItem->reorder(this);
-      endInsertRows();
+
+      // Not need to signal this insertion:
+      siteItem->programs.push_back(programItem);
+
+      /* Also create the chain of ProgramPartItem objects, the beginning of
+       * which might exists already: */
+      QStringList programNames{pk.program.split('/', Qt::SkipEmptyParts)};
+      Q_ASSERT(programNames.length() > 0);
+      QString firstName{programNames.takeFirst()};
+      ProgramPartItem *first{nullptr};
+      for (ProgramPartItem *ppi : siteItem->programParts) {
+        if (firstName == ppi->shared->name) {
+          first = ppi;
+          break;
+        }
+      }
+      if (!first) {
+        if (verbose)
+          qDebug() << "Creating a new ProgramPart (first)" << firstName;
+
+        // This needs to be signaled:
+        size_t idx{siteItem->programParts.size()};
+        QModelIndex parent{
+            createIndex(siteItem->row, 0, static_cast<GraphItem *>(siteItem))};
+        beginInsertRows(parent, idx, idx);
+
+        first = new ProgramPartItem(
+            siteItem, std::make_unique<ProgramPart>(firstName),
+            programNames.isEmpty() ? programItem : nullptr, settings);
+        siteItem->programParts.push_back(first);
+
+        siteItem->reorder(this);
+        endInsertRows();
+      }
+      // Complete until the last part:
+      programItem->lastProgramPartItem =
+          createProgramParts(first, programNames, programItem);
     }
 
     if (pk.function.length() > 0) {
@@ -844,19 +946,25 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
         }
       }
       if (!functionItem) {
-        if (verbose) qDebug() << "Creating a new Function" << pk.function;
-
         std::string srcPath{
             srcPathFromProgramName(programItem->shared->name.toStdString())};
+        ProgramPartItem *lastPart{programItem->lastProgramPartItem};
+
+        if (verbose) qDebug() << "Creating a new Function" << pk.function;
+
         functionItem = new FunctionItem(
-            programItem,
+            lastPart,
             std::make_unique<Function>(siteItem->shared->name.toStdString(),
                                        programItem->shared->name.toStdString(),
                                        pk.function.toStdString(), srcPath),
             settings);
+        /* In theory the last ProgramPartItem could have both functions (ie.
+         * an actualProgram) and some more subParts. In that case consider the
+         * functions come first, so that the index of a function in lastPart
+         * is the same as the index in the actualProgram: */
         size_t idx{programItem->functions.size()};
-        QModelIndex parent{createIndex(programItem->row, 0,
-                                       static_cast<GraphItem *>(programItem))};
+        QModelIndex parent{
+            createIndex(lastPart->row, 0, static_cast<GraphItem *>(lastPart))};
         beginInsertRows(parent, idx, idx);
         programItem->functions.insert(programItem->functions.begin() + idx,
                                       functionItem);
@@ -876,6 +984,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
   }
 }
 
+// FIXME: This still does not remove the values from the data model
 void GraphModel::deleteKey(dessser::gen::sync_key::t const &key,
                            KValue const &) {
   ParsedKey pk{key};
@@ -904,6 +1013,19 @@ void GraphModel::deleteKey(dessser::gen::sync_key::t const &key,
       }
     }
     if (!programItem) return;
+
+    // Also look for the first ProgramPartItem:
+    QStringList programNames{pk.program.split('/', Qt::SkipEmptyParts)};
+    Q_ASSERT(programNames.length() > 0);
+    QString firstName{programNames.takeFirst()};
+    ProgramPartItem *partItem{nullptr};
+    for (ProgramPartItem *ppi : siteItem->programParts) {
+      if (ppi->shared->name == firstName) {
+        partItem = ppi;
+        break;
+      }
+    }
+    Q_ASSERT(partItem);
 
     if (pk.function.length() > 0) {
       FunctionItem *functionItem{nullptr};
