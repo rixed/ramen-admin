@@ -150,13 +150,13 @@ inline bool operator!=(t0e7f6ba9e1ceef343afe44456f9067ec const &a, t0e7f6ba9e1ce
 /* ----------- */
 /* 
     (fun ("{target: $fq_function_name; since: FLOAT; until: FLOAT; explain: BOOL; resp_key: $sync_key}" "Ptr")
-      (let "srec_dst_91"
-        (let "srec_dst_90"
-          (let "srec_dst_89"
-            (let "srec_dst_88" (apply (ext-identifier fq_function_name to-row-binary) (get-field "target" (param 0)) (param 1)) (write-u64 little-endian (identifier "srec_dst_88") (u64-of-float (get-field "since" (param 0)))))
-            (write-u64 little-endian (identifier "srec_dst_89") (u64-of-float (get-field "until" (param 0))))) 
-          (write-u8 (identifier "srec_dst_90") (u8-of-bool (get-field "explain" (param 0))))) 
-        (apply (ext-identifier sync_key to-row-binary) (get-field "resp_key" (param 0)) (identifier "srec_dst_91"))))
+      (let "srec_dst_92"
+        (let "srec_dst_91"
+          (let "srec_dst_90"
+            (let "srec_dst_89" (apply (ext-identifier fq_function_name to-row-binary) (get-field "target" (param 0)) (param 1)) (write-u64 little-endian (identifier "srec_dst_89") (u64-of-float (get-field "since" (param 0)))))
+            (write-u64 little-endian (identifier "srec_dst_90") (u64-of-float (get-field "until" (param 0))))) 
+          (write-u8 (identifier "srec_dst_91") (u8-of-bool (get-field "explain" (param 0))))) 
+        (apply (ext-identifier sync_key to-row-binary) (get-field "resp_key" (param 0)) (identifier "srec_dst_92"))))
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> to_row_binary_init()
 {
@@ -166,34 +166,34 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> 
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
-      Pointer srec_dst_88 { id_3 };
+      Pointer srec_dst_89 { id_3 };
       double id_5 { (*p_0).since };
       uint64_t id_6 { qword_of_float(id_5) };
-      Pointer id_7 { srec_dst_88.writeU64Le(id_6) };
+      Pointer id_7 { srec_dst_89.writeU64Le(id_6) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
-      Pointer srec_dst_89 { let_res_4 };
+      Pointer srec_dst_90 { let_res_4 };
       double id_9 { (*p_0).until };
       uint64_t id_10 { qword_of_float(id_9) };
-      Pointer id_11 { srec_dst_89.writeU64Le(id_10) };
+      Pointer id_11 { srec_dst_90.writeU64Le(id_10) };
       let_res_8 = id_11;
     }
     Pointer let_res_12;
     {
-      Pointer srec_dst_90 { let_res_8 };
+      Pointer srec_dst_91 { let_res_8 };
       bool id_13 { (*p_0).explain };
       uint8_t id_14 { uint8_t(id_13) };
-      Pointer id_15 { srec_dst_90.writeU8(id_14) };
+      Pointer id_15 { srec_dst_91.writeU8(id_14) };
       let_res_12 = id_15;
     }
     Pointer let_res_16;
     {
-      Pointer srec_dst_91 { let_res_12 };
+      Pointer srec_dst_92 { let_res_12 };
       auto fun17 { dessser::gen::sync_key::to_row_binary };
       dessser::gen::sync_key::t_ext id_18 { (*p_0).resp_key };
-      Pointer id_19 { fun17(id_18, srec_dst_91) };
+      Pointer id_19 { fun17(id_18, srec_dst_92) };
       let_res_16 = id_19;
     }
     return let_res_16;
@@ -205,8 +205,8 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointe
 
 /* 
     (fun ("{target: $fq_function_name; since: FLOAT; until: FLOAT; explain: BOOL; resp_key: $sync_key}")
-      (let "sz_87" (add (add (add (apply (ext-identifier fq_function_name sersize-of-row-binary) (get-field "target" (param 0))) (size 8)) (size 8)) (size 1))
-        (add (identifier "sz_87") (apply (ext-identifier sync_key sersize-of-row-binary) (get-field "resp_key" (param 0))))))
+      (let "sz_88" (add (add (add (apply (ext-identifier fq_function_name sersize-of-row-binary) (get-field "target" (param 0))) (size 8)) (size 8)) (size 1))
+        (add (identifier "sz_88") (apply (ext-identifier sync_key sersize-of-row-binary) (get-field "resp_key" (param 0))))))
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> sersize_of_row_binary_init()
 {
@@ -222,11 +222,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> 
     Size id_29 { Size(id_27 + id_28) };
     Size let_res_30;
     {
-      Size sz_87 { id_29 };
+      Size sz_88 { id_29 };
       auto fun31 { dessser::gen::sync_key::sersize_of_row_binary };
       dessser::gen::sync_key::t_ext id_32 { (*p_0).resp_key };
       Size id_33 { fun31(id_32) };
-      Size id_34 { Size(sz_87 + id_33) };
+      Size id_34 { Size(sz_88 + id_33) };
       let_res_30 = id_34;
     }
     return let_res_30;
@@ -238,22 +238,22 @@ std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> sersize
 
 /* 
     (fun ("Ptr")
-      (let "drec_56" (apply (ext-identifier fq_function_name of-row-binary) (param 0))
-        (let-pair "drec_fst_57" "drec_snd_58" (identifier "drec_56")
-          (let "drec_62" (let-pair "dfloat_fst_60" "dfloat_snd_61" (read-u64 little-endian (identifier "drec_snd_58")) (make-tup (float-of-u64 (identifier "dfloat_fst_60")) (identifier "dfloat_snd_61")))
-            (let-pair "drec_fst_63" "drec_snd_64" (identifier "drec_62")
-              (let "drec_68" (let-pair "dfloat_fst_66" "dfloat_snd_67" (read-u64 little-endian (identifier "drec_snd_64")) (make-tup (float-of-u64 (identifier "dfloat_fst_66")) (identifier "dfloat_snd_67")))
-                (let-pair "drec_fst_69" "drec_snd_70" (identifier "drec_68")
-                  (let "drec_74" (let-pair "dbool_fst_72" "dbool_snd_73" (read-u8 (identifier "drec_snd_70")) (make-tup (not (eq (identifier "dbool_fst_72") (u8 0))) (identifier "dbool_snd_73")))
-                    (let-pair "drec_fst_75" "drec_snd_76" (identifier "drec_74")
-                      (let-pair "drec_fst_78" "drec_snd_79" (apply (ext-identifier sync_key of-row-binary) (identifier "drec_snd_76"))
+      (let "drec_57" (apply (ext-identifier fq_function_name of-row-binary) (param 0))
+        (let-pair "drec_fst_58" "drec_snd_59" (identifier "drec_57")
+          (let "drec_63" (let-pair "dfloat_fst_61" "dfloat_snd_62" (read-u64 little-endian (identifier "drec_snd_59")) (make-tup (float-of-u64 (identifier "dfloat_fst_61")) (identifier "dfloat_snd_62")))
+            (let-pair "drec_fst_64" "drec_snd_65" (identifier "drec_63")
+              (let "drec_69" (let-pair "dfloat_fst_67" "dfloat_snd_68" (read-u64 little-endian (identifier "drec_snd_65")) (make-tup (float-of-u64 (identifier "dfloat_fst_67")) (identifier "dfloat_snd_68")))
+                (let-pair "drec_fst_70" "drec_snd_71" (identifier "drec_69")
+                  (let "drec_75" (let-pair "dbool_fst_73" "dbool_snd_74" (read-u8 (identifier "drec_snd_71")) (make-tup (not (eq (identifier "dbool_fst_73") (u8 0))) (identifier "dbool_snd_74")))
+                    (let-pair "drec_fst_76" "drec_snd_77" (identifier "drec_75")
+                      (let-pair "drec_fst_79" "drec_snd_80" (apply (ext-identifier sync_key of-row-binary) (identifier "drec_snd_77"))
                         (make-tup
-                          (make-rec (string "resp_key") (identifier "drec_fst_78") 
-                            (string "explain") (identifier "drec_fst_75") 
-                            (string "until") (identifier "drec_fst_69") 
-                            (string "since") (identifier "drec_fst_63") 
-                            (string "target") (identifier "drec_fst_57")) 
-                          (identifier "drec_snd_79"))))))))))))
+                          (make-rec (string "resp_key") (identifier "drec_fst_79") 
+                            (string "explain") (identifier "drec_fst_76") 
+                            (string "until") (identifier "drec_fst_70") 
+                            (string "since") (identifier "drec_fst_64") 
+                            (string "target") (identifier "drec_fst_58")) 
+                          (identifier "drec_snd_80"))))))))))))
  */
 static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> of_row_binary_init()
 {
@@ -262,69 +262,69 @@ static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce
     ::dessser::gen::replay_request::tafdf48d85e3efdf5b24e3fa2741562be id_37 { fun36(p_0) };
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 let_res_38;
     {
-      ::dessser::gen::replay_request::tafdf48d85e3efdf5b24e3fa2741562be drec_56 { id_37 };
+      ::dessser::gen::replay_request::tafdf48d85e3efdf5b24e3fa2741562be drec_57 { id_37 };
       ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_39;
       {
-        auto drec_fst_57 { std::get<0>(drec_56) };
-        auto drec_snd_58 { std::get<1>(drec_56) };
-        ::dessser::gen::replay_request::td2cd337bb3c8bc04d5603393d084985b id_40 { drec_snd_58.readU64Le() };
+        auto drec_fst_58 { std::get<0>(drec_57) };
+        auto drec_snd_59 { std::get<1>(drec_57) };
+        ::dessser::gen::replay_request::td2cd337bb3c8bc04d5603393d084985b id_40 { drec_snd_59.readU64Le() };
         ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 letpair_res_41;
         {
-          auto dfloat_fst_60 { std::get<0>(id_40) };
-          auto dfloat_snd_61 { std::get<1>(id_40) };
-          double id_42 { float_of_qword(dfloat_fst_60) };
-          ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 id_43 { id_42, dfloat_snd_61 };
+          auto dfloat_fst_61 { std::get<0>(id_40) };
+          auto dfloat_snd_62 { std::get<1>(id_40) };
+          double id_42 { float_of_qword(dfloat_fst_61) };
+          ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 id_43 { id_42, dfloat_snd_62 };
           letpair_res_41 = id_43;
         }
         ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 let_res_44;
         {
-          ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 drec_62 { letpair_res_41 };
+          ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 drec_63 { letpair_res_41 };
           ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_45;
           {
-            auto drec_fst_63 { std::get<0>(drec_62) };
-            auto drec_snd_64 { std::get<1>(drec_62) };
-            ::dessser::gen::replay_request::td2cd337bb3c8bc04d5603393d084985b id_46 { drec_snd_64.readU64Le() };
+            auto drec_fst_64 { std::get<0>(drec_63) };
+            auto drec_snd_65 { std::get<1>(drec_63) };
+            ::dessser::gen::replay_request::td2cd337bb3c8bc04d5603393d084985b id_46 { drec_snd_65.readU64Le() };
             ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 letpair_res_47;
             {
-              auto dfloat_fst_66 { std::get<0>(id_46) };
-              auto dfloat_snd_67 { std::get<1>(id_46) };
-              double id_48 { float_of_qword(dfloat_fst_66) };
-              ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 id_49 { id_48, dfloat_snd_67 };
+              auto dfloat_fst_67 { std::get<0>(id_46) };
+              auto dfloat_snd_68 { std::get<1>(id_46) };
+              double id_48 { float_of_qword(dfloat_fst_67) };
+              ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 id_49 { id_48, dfloat_snd_68 };
               letpair_res_47 = id_49;
             }
             ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 let_res_50;
             {
-              ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 drec_68 { letpair_res_47 };
+              ::dessser::gen::replay_request::t9a758baeff17224a77e1a522010b4168 drec_69 { letpair_res_47 };
               ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_51;
               {
-                auto drec_fst_69 { std::get<0>(drec_68) };
-                auto drec_snd_70 { std::get<1>(drec_68) };
-                ::dessser::gen::replay_request::t1a5d74abf838df33f185a72a8912f5c9 id_52 { drec_snd_70.readU8() };
+                auto drec_fst_70 { std::get<0>(drec_69) };
+                auto drec_snd_71 { std::get<1>(drec_69) };
+                ::dessser::gen::replay_request::t1a5d74abf838df33f185a72a8912f5c9 id_52 { drec_snd_71.readU8() };
                 ::dessser::gen::replay_request::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_53;
                 {
-                  auto dbool_fst_72 { std::get<0>(id_52) };
-                  auto dbool_snd_73 { std::get<1>(id_52) };
+                  auto dbool_fst_73 { std::get<0>(id_52) };
+                  auto dbool_snd_74 { std::get<1>(id_52) };
                   uint8_t id_54 { 0 };
-                  bool id_55 { bool(dbool_fst_72 == id_54) };
+                  bool id_55 { bool(dbool_fst_73 == id_54) };
                   bool id_56 { ! id_55 };
-                  ::dessser::gen::replay_request::tf9a0a3fefc87c9e10a93d3a172850c26 id_57 { id_56, dbool_snd_73 };
+                  ::dessser::gen::replay_request::tf9a0a3fefc87c9e10a93d3a172850c26 id_57 { id_56, dbool_snd_74 };
                   letpair_res_53 = id_57;
                 }
                 ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 let_res_58;
                 {
-                  ::dessser::gen::replay_request::tf9a0a3fefc87c9e10a93d3a172850c26 drec_74 { letpair_res_53 };
+                  ::dessser::gen::replay_request::tf9a0a3fefc87c9e10a93d3a172850c26 drec_75 { letpair_res_53 };
                   ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_59;
                   {
-                    auto drec_fst_75 { std::get<0>(drec_74) };
-                    auto drec_snd_76 { std::get<1>(drec_74) };
+                    auto drec_fst_76 { std::get<0>(drec_75) };
+                    auto drec_snd_77 { std::get<1>(drec_75) };
                     auto fun60 { dessser::gen::sync_key::of_row_binary };
-                    ::dessser::gen::replay_request::t0e7f6ba9e1ceef343afe44456f9067ec id_61 { fun60(drec_snd_76) };
+                    ::dessser::gen::replay_request::t0e7f6ba9e1ceef343afe44456f9067ec id_61 { fun60(drec_snd_77) };
                     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_62;
                     {
-                      auto drec_fst_78 { std::get<0>(id_61) };
-                      auto drec_snd_79 { std::get<1>(id_61) };
-                      std::shared_ptr<::dessser::gen::replay_request::t>  id_63 { std::make_shared<::dessser::gen::replay_request::t>(drec_fst_57, drec_fst_63, drec_fst_69, drec_fst_75, drec_fst_78) };
-                      ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_64 { id_63, drec_snd_79 };
+                      auto drec_fst_79 { std::get<0>(id_61) };
+                      auto drec_snd_80 { std::get<1>(id_61) };
+                      std::shared_ptr<::dessser::gen::replay_request::t>  id_63 { std::make_shared<::dessser::gen::replay_request::t>(drec_fst_58, drec_fst_64, drec_fst_70, drec_fst_76, drec_fst_79) };
+                      ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_64 { id_63, drec_snd_80 };
                       letpair_res_62 = id_64;
                     }
                     letpair_res_59 = letpair_res_62;
@@ -351,7 +351,7 @@ static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce
 std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> of_row_binary(of_row_binary_init());
 
 /* 
-    (fun ("Ptr") (let-pair "make_fst_81" "make_snd_82" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_81") (identifier "make_snd_82"))))
+    (fun ("Ptr") (let-pair "make_fst_82" "make_snd_83" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_82") (identifier "make_snd_83"))))
  */
 static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> wrap_of_row_binary_init()
 {
@@ -359,9 +359,9 @@ static std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_66 { of_row_binary(p_0) };
     ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 letpair_res_67;
     {
-      auto make_fst_81 { std::get<0>(id_66) };
-      auto make_snd_82 { std::get<1>(id_66) };
-      ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_68 { make_fst_81, make_snd_82 };
+      auto make_fst_82 { std::get<0>(id_66) };
+      auto make_snd_83 { std::get<1>(id_66) };
+      ::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858 id_68 { make_fst_82, make_snd_83 };
       letpair_res_67 = id_68;
     }
     return letpair_res_67;

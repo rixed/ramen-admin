@@ -120,10 +120,10 @@ inline bool operator!=(t938826a671b76f2c000eeb9bff80e50d const &a, t938826a671b7
 /* ----------- */
 /* 
     (fun ("{seq: U32; confirm_success: BOOL; echo: BOOL; cmd: $sync_client_cmd}" "Ptr")
-      (let "srec_dst_86"
-        (let "srec_dst_85" (let "srec_dst_84" (write-u32 little-endian (param 1) (get-field "seq" (param 0))) (write-u8 (identifier "srec_dst_84") (u8-of-bool (get-field "confirm_success" (param 0)))))
-          (write-u8 (identifier "srec_dst_85") (u8-of-bool (get-field "echo" (param 0))))) 
-        (apply (ext-identifier sync_client_cmd to-row-binary) (get-field "cmd" (param 0)) (identifier "srec_dst_86"))))
+      (let "srec_dst_87"
+        (let "srec_dst_86" (let "srec_dst_85" (write-u32 little-endian (param 1) (get-field "seq" (param 0))) (write-u8 (identifier "srec_dst_85") (u8-of-bool (get-field "confirm_success" (param 0)))))
+          (write-u8 (identifier "srec_dst_86") (u8-of-bool (get-field "echo" (param 0))))) 
+        (apply (ext-identifier sync_client_cmd to-row-binary) (get-field "cmd" (param 0)) (identifier "srec_dst_87"))))
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_client_msg::t> ,Pointer)> to_row_binary_init()
 {
@@ -132,26 +132,26 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_client_msg::t>
     Pointer id_2 { p_1.writeU32Le(id_1) };
     Pointer let_res_3;
     {
-      Pointer srec_dst_84 { id_2 };
+      Pointer srec_dst_85 { id_2 };
       bool id_4 { (*p_0).confirm_success };
       uint8_t id_5 { uint8_t(id_4) };
-      Pointer id_6 { srec_dst_84.writeU8(id_5) };
+      Pointer id_6 { srec_dst_85.writeU8(id_5) };
       let_res_3 = id_6;
     }
     Pointer let_res_7;
     {
-      Pointer srec_dst_85 { let_res_3 };
+      Pointer srec_dst_86 { let_res_3 };
       bool id_8 { (*p_0).echo };
       uint8_t id_9 { uint8_t(id_8) };
-      Pointer id_10 { srec_dst_85.writeU8(id_9) };
+      Pointer id_10 { srec_dst_86.writeU8(id_9) };
       let_res_7 = id_10;
     }
     Pointer let_res_11;
     {
-      Pointer srec_dst_86 { let_res_7 };
+      Pointer srec_dst_87 { let_res_7 };
       auto fun12 { dessser::gen::sync_client_cmd::to_row_binary };
       dessser::gen::sync_client_cmd::t_ext id_13 { (*p_0).cmd };
-      Pointer id_14 { fun12(id_13, srec_dst_86) };
+      Pointer id_14 { fun12(id_13, srec_dst_87) };
       let_res_11 = id_14;
     }
     return let_res_11;
@@ -181,15 +181,15 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_client_msg::t> )> sersiz
 
 /* 
     (fun ("Ptr")
-      (let "drec_59" (let-pair "du32_fst_57" "du32_snd_58" (read-u32 little-endian (param 0)) (make-tup (identifier "du32_fst_57") (identifier "du32_snd_58")))
-        (let-pair "drec_fst_60" "drec_snd_61" (identifier "drec_59")
-          (let "drec_65" (let-pair "dbool_fst_63" "dbool_snd_64" (read-u8 (identifier "drec_snd_61")) (make-tup (not (eq (identifier "dbool_fst_63") (u8 0))) (identifier "dbool_snd_64")))
-            (let-pair "drec_fst_66" "drec_snd_67" (identifier "drec_65")
-              (let "drec_71" (let-pair "dbool_fst_69" "dbool_snd_70" (read-u8 (identifier "drec_snd_67")) (make-tup (not (eq (identifier "dbool_fst_69") (u8 0))) (identifier "dbool_snd_70")))
-                (let-pair "drec_fst_72" "drec_snd_73" (identifier "drec_71")
-                  (let-pair "drec_fst_75" "drec_snd_76" (apply (ext-identifier sync_client_cmd of-row-binary) (identifier "drec_snd_73"))
-                    (make-tup (make-rec (string "cmd") (identifier "drec_fst_75") (string "echo") (identifier "drec_fst_72") (string "confirm_success") (identifier "drec_fst_66") (string "seq") (identifier "drec_fst_60"))
-                      (identifier "drec_snd_76"))))))))))
+      (let "drec_60" (let-pair "du32_fst_58" "du32_snd_59" (read-u32 little-endian (param 0)) (make-tup (identifier "du32_fst_58") (identifier "du32_snd_59")))
+        (let-pair "drec_fst_61" "drec_snd_62" (identifier "drec_60")
+          (let "drec_66" (let-pair "dbool_fst_64" "dbool_snd_65" (read-u8 (identifier "drec_snd_62")) (make-tup (not (eq (identifier "dbool_fst_64") (u8 0))) (identifier "dbool_snd_65")))
+            (let-pair "drec_fst_67" "drec_snd_68" (identifier "drec_66")
+              (let "drec_72" (let-pair "dbool_fst_70" "dbool_snd_71" (read-u8 (identifier "drec_snd_68")) (make-tup (not (eq (identifier "dbool_fst_70") (u8 0))) (identifier "dbool_snd_71")))
+                (let-pair "drec_fst_73" "drec_snd_74" (identifier "drec_72")
+                  (let-pair "drec_fst_76" "drec_snd_77" (apply (ext-identifier sync_client_cmd of-row-binary) (identifier "drec_snd_74"))
+                    (make-tup (make-rec (string "cmd") (identifier "drec_fst_76") (string "echo") (identifier "drec_fst_73") (string "confirm_success") (identifier "drec_fst_67") (string "seq") (identifier "drec_fst_61"))
+                      (identifier "drec_snd_77"))))))))))
  */
 static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a(Pointer)> of_row_binary_init()
 {
@@ -197,62 +197,62 @@ static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd
     ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 id_22 { p_0.readU32Le() };
     ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 letpair_res_23;
     {
-      auto du32_fst_57 { std::get<0>(id_22) };
-      auto du32_snd_58 { std::get<1>(id_22) };
-      ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 id_24 { du32_fst_57, du32_snd_58 };
+      auto du32_fst_58 { std::get<0>(id_22) };
+      auto du32_snd_59 { std::get<1>(id_22) };
+      ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 id_24 { du32_fst_58, du32_snd_59 };
       letpair_res_23 = id_24;
     }
     ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a let_res_25;
     {
-      ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 drec_59 { letpair_res_23 };
+      ::dessser::gen::sync_client_msg::t491c44439106a32f896827242e8e76a1 drec_60 { letpair_res_23 };
       ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a letpair_res_26;
       {
-        auto drec_fst_60 { std::get<0>(drec_59) };
-        auto drec_snd_61 { std::get<1>(drec_59) };
-        ::dessser::gen::sync_client_msg::t1a5d74abf838df33f185a72a8912f5c9 id_27 { drec_snd_61.readU8() };
+        auto drec_fst_61 { std::get<0>(drec_60) };
+        auto drec_snd_62 { std::get<1>(drec_60) };
+        ::dessser::gen::sync_client_msg::t1a5d74abf838df33f185a72a8912f5c9 id_27 { drec_snd_62.readU8() };
         ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_28;
         {
-          auto dbool_fst_63 { std::get<0>(id_27) };
-          auto dbool_snd_64 { std::get<1>(id_27) };
+          auto dbool_fst_64 { std::get<0>(id_27) };
+          auto dbool_snd_65 { std::get<1>(id_27) };
           uint8_t id_29 { 0 };
-          bool id_30 { bool(dbool_fst_63 == id_29) };
+          bool id_30 { bool(dbool_fst_64 == id_29) };
           bool id_31 { ! id_30 };
-          ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 id_32 { id_31, dbool_snd_64 };
+          ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 id_32 { id_31, dbool_snd_65 };
           letpair_res_28 = id_32;
         }
         ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a let_res_33;
         {
-          ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 drec_65 { letpair_res_28 };
+          ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 drec_66 { letpair_res_28 };
           ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a letpair_res_34;
           {
-            auto drec_fst_66 { std::get<0>(drec_65) };
-            auto drec_snd_67 { std::get<1>(drec_65) };
-            ::dessser::gen::sync_client_msg::t1a5d74abf838df33f185a72a8912f5c9 id_35 { drec_snd_67.readU8() };
+            auto drec_fst_67 { std::get<0>(drec_66) };
+            auto drec_snd_68 { std::get<1>(drec_66) };
+            ::dessser::gen::sync_client_msg::t1a5d74abf838df33f185a72a8912f5c9 id_35 { drec_snd_68.readU8() };
             ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_36;
             {
-              auto dbool_fst_69 { std::get<0>(id_35) };
-              auto dbool_snd_70 { std::get<1>(id_35) };
+              auto dbool_fst_70 { std::get<0>(id_35) };
+              auto dbool_snd_71 { std::get<1>(id_35) };
               uint8_t id_37 { 0 };
-              bool id_38 { bool(dbool_fst_69 == id_37) };
+              bool id_38 { bool(dbool_fst_70 == id_37) };
               bool id_39 { ! id_38 };
-              ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 id_40 { id_39, dbool_snd_70 };
+              ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 id_40 { id_39, dbool_snd_71 };
               letpair_res_36 = id_40;
             }
             ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a let_res_41;
             {
-              ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 drec_71 { letpair_res_36 };
+              ::dessser::gen::sync_client_msg::tf9a0a3fefc87c9e10a93d3a172850c26 drec_72 { letpair_res_36 };
               ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a letpair_res_42;
               {
-                auto drec_fst_72 { std::get<0>(drec_71) };
-                auto drec_snd_73 { std::get<1>(drec_71) };
+                auto drec_fst_73 { std::get<0>(drec_72) };
+                auto drec_snd_74 { std::get<1>(drec_72) };
                 auto fun43 { dessser::gen::sync_client_cmd::of_row_binary };
-                ::dessser::gen::sync_client_msg::t938826a671b76f2c000eeb9bff80e50d id_44 { fun43(drec_snd_73) };
+                ::dessser::gen::sync_client_msg::t938826a671b76f2c000eeb9bff80e50d id_44 { fun43(drec_snd_74) };
                 ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a letpair_res_45;
                 {
-                  auto drec_fst_75 { std::get<0>(id_44) };
-                  auto drec_snd_76 { std::get<1>(id_44) };
-                  std::shared_ptr<::dessser::gen::sync_client_msg::t>  id_46 { std::make_shared<::dessser::gen::sync_client_msg::t>(drec_fst_60, drec_fst_66, drec_fst_72, drec_fst_75) };
-                  ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_47 { id_46, drec_snd_76 };
+                  auto drec_fst_76 { std::get<0>(id_44) };
+                  auto drec_snd_77 { std::get<1>(id_44) };
+                  std::shared_ptr<::dessser::gen::sync_client_msg::t>  id_46 { std::make_shared<::dessser::gen::sync_client_msg::t>(drec_fst_61, drec_fst_67, drec_fst_73, drec_fst_76) };
+                  ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_47 { id_46, drec_snd_77 };
                   letpair_res_45 = id_47;
                 }
                 letpair_res_42 = letpair_res_45;
@@ -275,7 +275,7 @@ static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd
 std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a(Pointer)> of_row_binary(of_row_binary_init());
 
 /* 
-    (fun ("Ptr") (let-pair "make_fst_78" "make_snd_79" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_78") (identifier "make_snd_79"))))
+    (fun ("Ptr") (let-pair "make_fst_79" "make_snd_80" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_79") (identifier "make_snd_80"))))
  */
 static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a(Pointer)> wrap_of_row_binary_init()
 {
@@ -283,9 +283,9 @@ static std::function<::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd
     ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_49 { of_row_binary(p_0) };
     ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a letpair_res_50;
     {
-      auto make_fst_78 { std::get<0>(id_49) };
-      auto make_snd_79 { std::get<1>(id_49) };
-      ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_51 { make_fst_78, make_snd_79 };
+      auto make_fst_79 { std::get<0>(id_49) };
+      auto make_snd_80 { std::get<1>(id_49) };
+      ::dessser::gen::sync_client_msg::tfe3f0576fe9e9064fe3aa37bd76eb46a id_51 { make_fst_79, make_snd_80 };
       letpair_res_50 = id_51;
     }
     return letpair_res_50;

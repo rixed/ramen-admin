@@ -138,11 +138,11 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
 /* ----------- */
 /* 
     (fun ("($field_name; [OutputField Void | Parameter Void]; FLOAT)" "Ptr")
-      (let "stup_dst_93"
-        (let "stup_dst_90" (apply (ext-identifier field_name to-row-binary) (get-item 0 (param 0)) (param 1))
-          (let "ssum_dst_92" (write-u16 little-endian (identifier "stup_dst_90") (label-of (get-item 1 (param 0))))
-            (if (eq (u16 0) (label-of (get-item 1 (param 0)))) (identifier "ssum_dst_92") (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 1))) (identifier "ssum_dst_92")))))
-        (write-u64 little-endian (identifier "stup_dst_93") (u64-of-float (get-item 2 (param 0))))))
+      (let "stup_dst_94"
+        (let "stup_dst_91" (apply (ext-identifier field_name to-row-binary) (get-item 0 (param 0)) (param 1))
+          (let "ssum_dst_93" (write-u16 little-endian (identifier "stup_dst_91") (label-of (get-item 1 (param 0))))
+            (if (eq (u16 0) (label-of (get-item 1 (param 0)))) (identifier "ssum_dst_93") (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 1))) (identifier "ssum_dst_93")))))
+        (write-u64 little-endian (identifier "stup_dst_94") (u64-of-float (get-item 2 (param 0))))))
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Pointer)> to_row_binary_init()
 {
@@ -152,20 +152,20 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
-      Pointer stup_dst_90 { id_3 };
+      Pointer stup_dst_91 { id_3 };
       ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_5 { std::get<1>((*p_0)) };
       uint16_t id_6 { uint16_t(id_5.index()) };
-      Pointer id_7 { stup_dst_90.writeU16Le(id_6) };
+      Pointer id_7 { stup_dst_91.writeU16Le(id_6) };
       Pointer let_res_8;
       {
-        Pointer ssum_dst_92 { id_7 };
+        Pointer ssum_dst_93 { id_7 };
         uint16_t id_9 { 0 };
         ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_10 { std::get<1>((*p_0)) };
         uint16_t id_11 { uint16_t(id_10.index()) };
         bool id_12 { bool(id_9 == id_11) };
         Pointer choose_res_13;
         if (id_12) {
-          choose_res_13 = ssum_dst_92;
+          choose_res_13 = ssum_dst_93;
         } else {
           ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_14 { std::get<1>((*p_0)) };
           uint16_t id_15 { uint16_t(id_14.index()) };
@@ -173,7 +173,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t
           bool id_17 { bool(id_15 == id_16) };
           Void id_18 { ((void)(assert(id_17)), ::dessser::VOID) };
           (void)id_18;
-          choose_res_13 = ssum_dst_92;
+          choose_res_13 = ssum_dst_93;
         }
         let_res_8 = choose_res_13;
       }
@@ -181,10 +181,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t
     }
     Pointer let_res_19;
     {
-      Pointer stup_dst_93 { let_res_4 };
+      Pointer stup_dst_94 { let_res_4 };
       double id_20 { std::get<2>((*p_0)) };
       uint64_t id_21 { qword_of_float(id_20) };
-      Pointer id_22 { stup_dst_93.writeU64Le(id_21) };
+      Pointer id_22 { stup_dst_94.writeU64Le(id_21) };
       let_res_19 = id_22;
     }
     return let_res_19;
@@ -197,8 +197,8 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t> ,Poin
 /* 
     (fun ("($field_name; [OutputField Void | Parameter Void]; FLOAT)")
       (add
-        (let "sz_87" (apply (ext-identifier field_name sersize-of-row-binary) (get-item 0 (param 0)))
-          (if (eq (u16 0) (label-of (get-item 1 (param 0)))) (add (identifier "sz_87") (size 2)) (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 1))) (add (identifier "sz_87") (size 2))))) 
+        (let "sz_88" (apply (ext-identifier field_name sersize-of-row-binary) (get-item 0 (param 0)))
+          (if (eq (u16 0) (label-of (get-item 1 (param 0)))) (add (identifier "sz_88") (size 2)) (seq (assert (eq (label-of (get-item 1 (param 0))) (u16 1))) (add (identifier "sz_88") (size 2))))) 
         (size 8)))
  */
 static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> sersize_of_row_binary_init()
@@ -209,7 +209,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
     Size id_26 { fun24(id_25) };
     Size let_res_27;
     {
-      Size sz_87 { id_26 };
+      Size sz_88 { id_26 };
       uint16_t id_28 { 0 };
       ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_29 { std::get<1>((*p_0)) };
       uint16_t id_30 { uint16_t(id_29.index()) };
@@ -217,7 +217,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
       Size choose_res_32;
       if (id_31) {
         Size id_33 { 2UL };
-        Size id_34 { Size(sz_87 + id_33) };
+        Size id_34 { Size(sz_88 + id_33) };
         choose_res_32 = id_34;
       } else {
         ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_35 { std::get<1>((*p_0)) };
@@ -227,7 +227,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
         Void id_39 { ((void)(assert(id_38)), ::dessser::VOID) };
         (void)id_39;
         Size id_40 { 2UL };
-        Size id_41 { Size(sz_87 + id_40) };
+        Size id_41 { Size(sz_88 + id_40) };
         choose_res_32 = id_41;
       }
       let_res_27 = choose_res_32;
@@ -243,16 +243,16 @@ std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )> sersi
 
 /* 
     (fun ("Ptr")
-      (let "dtup_56" (apply (ext-identifier field_name of-row-binary) (param 0))
-        (let-pair "dtup_fst_57" "dtup_snd_58" (identifier "dtup_56")
-          (let "dtup_74"
-            (let "dsum1_65" (let-pair "du16_fst_60" "du16_snd_61" (read-u16 little-endian (identifier "dtup_snd_58")) (make-tup (identifier "du16_fst_60") (identifier "du16_snd_61")))
-              (let-pair "dsum1_fst_66" "dsum1_snd_67" (identifier "dsum1_65")
-                (if (eq (u16 0) (identifier "dsum1_fst_66")) (make-tup (construct "[OutputField Void | Parameter Void]" 0 (nop)) (identifier "dsum1_snd_67"))
-                  (seq (assert (eq (identifier "dsum1_fst_66") (u16 1))) (make-tup (construct "[OutputField Void | Parameter Void]" 1 (nop)) (identifier "dsum1_snd_67"))))))
-            (let-pair "dtup_fst_75" "dtup_snd_76" (identifier "dtup_74")
-              (let-pair "dfloat_fst_78" "dfloat_snd_79" (read-u64 little-endian (identifier "dtup_snd_76"))
-                (make-tup (make-tup (identifier "dtup_fst_57") (identifier "dtup_fst_75") (float-of-u64 (identifier "dfloat_fst_78"))) (identifier "dfloat_snd_79"))))))))
+      (let "dtup_57" (apply (ext-identifier field_name of-row-binary) (param 0))
+        (let-pair "dtup_fst_58" "dtup_snd_59" (identifier "dtup_57")
+          (let "dtup_75"
+            (let "dsum1_66" (let-pair "du16_fst_61" "du16_snd_62" (read-u16 little-endian (identifier "dtup_snd_59")) (make-tup (identifier "du16_fst_61") (identifier "du16_snd_62")))
+              (let-pair "dsum1_fst_67" "dsum1_snd_68" (identifier "dsum1_66")
+                (if (eq (u16 0) (identifier "dsum1_fst_67")) (make-tup (construct "[OutputField Void | Parameter Void]" 0 (nop)) (identifier "dsum1_snd_68"))
+                  (seq (assert (eq (identifier "dsum1_fst_67") (u16 1))) (make-tup (construct "[OutputField Void | Parameter Void]" 1 (nop)) (identifier "dsum1_snd_68"))))))
+            (let-pair "dtup_fst_76" "dtup_snd_77" (identifier "dtup_75")
+              (let-pair "dfloat_fst_79" "dfloat_snd_80" (read-u64 little-endian (identifier "dtup_snd_77"))
+                (make-tup (make-tup (identifier "dtup_fst_58") (identifier "dtup_fst_76") (float-of-u64 (identifier "dfloat_fst_79"))) (identifier "dfloat_snd_80"))))))))
  */
 static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> of_row_binary_init()
 {
@@ -261,42 +261,42 @@ static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890
     ::dessser::gen::event_time_field::t18cecf882d7ac80cef37dfe6b22279d4 id_46 { fun45(p_0) };
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 let_res_47;
     {
-      ::dessser::gen::event_time_field::t18cecf882d7ac80cef37dfe6b22279d4 dtup_56 { id_46 };
+      ::dessser::gen::event_time_field::t18cecf882d7ac80cef37dfe6b22279d4 dtup_57 { id_46 };
       ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 letpair_res_48;
       {
-        auto dtup_fst_57 { std::get<0>(dtup_56) };
-        auto dtup_snd_58 { std::get<1>(dtup_56) };
-        ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 id_49 { dtup_snd_58.readU16Le() };
+        auto dtup_fst_58 { std::get<0>(dtup_57) };
+        auto dtup_snd_59 { std::get<1>(dtup_57) };
+        ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 id_49 { dtup_snd_59.readU16Le() };
         ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 letpair_res_50;
         {
-          auto du16_fst_60 { std::get<0>(id_49) };
-          auto du16_snd_61 { std::get<1>(id_49) };
-          ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 id_51 { du16_fst_60, du16_snd_61 };
+          auto du16_fst_61 { std::get<0>(id_49) };
+          auto du16_snd_62 { std::get<1>(id_49) };
+          ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 id_51 { du16_fst_61, du16_snd_62 };
           letpair_res_50 = id_51;
         }
         ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d let_res_52;
         {
-          ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 dsum1_65 { letpair_res_50 };
+          ::dessser::gen::event_time_field::ta97bb48ed75bbda6173555873826c8c6 dsum1_66 { letpair_res_50 };
           ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d letpair_res_53;
           {
-            auto dsum1_fst_66 { std::get<0>(dsum1_65) };
-            auto dsum1_snd_67 { std::get<1>(dsum1_65) };
+            auto dsum1_fst_67 { std::get<0>(dsum1_66) };
+            auto dsum1_snd_68 { std::get<1>(dsum1_66) };
             uint16_t id_54 { 0 };
-            bool id_55 { bool(id_54 == dsum1_fst_66) };
+            bool id_55 { bool(id_54 == dsum1_fst_67) };
             ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d choose_res_56;
             if (id_55) {
               (void)::dessser::VOID;
               ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_57 { std::in_place_index<0>, ::dessser::VOID };
-              ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_58 { id_57, dsum1_snd_67 };
+              ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_58 { id_57, dsum1_snd_68 };
               choose_res_56 = id_58;
             } else {
               uint16_t id_59 { 1 };
-              bool id_60 { bool(dsum1_fst_66 == id_59) };
+              bool id_60 { bool(dsum1_fst_67 == id_59) };
               Void id_61 { ((void)(assert(id_60)), ::dessser::VOID) };
               (void)id_61;
               (void)::dessser::VOID;
               ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_62 { std::in_place_index<1>, ::dessser::VOID };
-              ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_63 { id_62, dsum1_snd_67 };
+              ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_63 { id_62, dsum1_snd_68 };
               choose_res_56 = id_63;
             }
             letpair_res_53 = choose_res_56;
@@ -305,19 +305,19 @@ static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890
         }
         ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 let_res_64;
         {
-          ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d dtup_74 { let_res_52 };
+          ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d dtup_75 { let_res_52 };
           ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 letpair_res_65;
           {
-            auto dtup_fst_75 { std::get<0>(dtup_74) };
-            auto dtup_snd_76 { std::get<1>(dtup_74) };
-            ::dessser::gen::event_time_field::td2cd337bb3c8bc04d5603393d084985b id_66 { dtup_snd_76.readU64Le() };
+            auto dtup_fst_76 { std::get<0>(dtup_75) };
+            auto dtup_snd_77 { std::get<1>(dtup_75) };
+            ::dessser::gen::event_time_field::td2cd337bb3c8bc04d5603393d084985b id_66 { dtup_snd_77.readU64Le() };
             ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 letpair_res_67;
             {
-              auto dfloat_fst_78 { std::get<0>(id_66) };
-              auto dfloat_snd_79 { std::get<1>(id_66) };
-              double id_68 { float_of_qword(dfloat_fst_78) };
-              std::shared_ptr<::dessser::gen::event_time_field::t>  id_69 { std::make_shared<::dessser::gen::event_time_field::t>(dtup_fst_57, dtup_fst_75, id_68) };
-              ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_70 { id_69, dfloat_snd_79 };
+              auto dfloat_fst_79 { std::get<0>(id_66) };
+              auto dfloat_snd_80 { std::get<1>(id_66) };
+              double id_68 { float_of_qword(dfloat_fst_79) };
+              std::shared_ptr<::dessser::gen::event_time_field::t>  id_69 { std::make_shared<::dessser::gen::event_time_field::t>(dtup_fst_58, dtup_fst_76, id_68) };
+              ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_70 { id_69, dfloat_snd_80 };
               letpair_res_67 = id_70;
             }
             letpair_res_65 = letpair_res_67;
@@ -336,7 +336,7 @@ static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890
 std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> of_row_binary(of_row_binary_init());
 
 /* 
-    (fun ("Ptr") (let-pair "make_fst_84" "make_snd_85" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_84") (identifier "make_snd_85"))))
+    (fun ("Ptr") (let-pair "make_fst_85" "make_snd_86" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_85") (identifier "make_snd_86"))))
  */
 static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667(Pointer)> wrap_of_row_binary_init()
 {
@@ -344,9 +344,9 @@ static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_72 { of_row_binary(p_0) };
     ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 letpair_res_73;
     {
-      auto make_fst_84 { std::get<0>(id_72) };
-      auto make_snd_85 { std::get<1>(id_72) };
-      ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_74 { make_fst_84, make_snd_85 };
+      auto make_fst_85 { std::get<0>(id_72) };
+      auto make_snd_86 { std::get<1>(id_72) };
+      ::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890d7e0f667 id_74 { make_fst_85, make_snd_86 };
       letpair_res_73 = id_74;
     }
     return letpair_res_73;
