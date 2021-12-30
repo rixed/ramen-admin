@@ -148,7 +148,6 @@ HEADERS += \
   KValue.h \
   ConfChange.h \
   KVStore.h \
-  ConfClientTools.h \
   ConfClient.h \
   KErrorMsg.h \
   SavedWindow.h \
