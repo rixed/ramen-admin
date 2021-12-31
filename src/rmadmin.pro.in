@@ -291,7 +291,7 @@ HEADERS += \
   ProgramItem.h \
   ProgramPartItem.h \
   SiteItem.h \
-  layout.h \
+  stream/layout.h \
   stream/GraphView.h
 
 SOURCES += \
@@ -448,7 +448,7 @@ SOURCES += \
   ProgramItem.cpp \
   ProgramPartItem.cpp \
   SiteItem.cpp \
-  layout.cpp \
+  stream/layout.cpp \
   stream/GraphView.cpp \
   main.cpp
 

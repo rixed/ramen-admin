@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "layout.h"
+#include "stream/layout.h"
 
 #include <QDebug>
 #include <chrono>

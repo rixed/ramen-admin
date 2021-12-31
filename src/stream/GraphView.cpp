@@ -12,9 +12,9 @@
 #include "FunctionItem.h"
 #include "ProgramItem.h"
 #include "SiteItem.h"
-#include "layout.h"
 #include "stream/GraphArrow.h"
 #include "stream/GraphViewSettings.h"
+#include "stream/layout.h"
 
 static bool const verbose{false};
 
