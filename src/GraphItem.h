@@ -94,8 +94,6 @@ class GraphItem : public QObject, public QGraphicsItem {
   GraphItem(GraphItem *treeParent, std::unique_ptr<GraphData> data,
             GraphViewSettings const &);
 
-  virtual int columnCount() const;
-
   virtual QVariant data(int col, int role) const;
 
   virtual void setProperty(

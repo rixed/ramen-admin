@@ -127,8 +127,6 @@ class FunctionItem : public GraphItem {
   FunctionItem(GraphItem *treeParent, std::unique_ptr<Function>,
                GraphViewSettings const &);
 
-  int columnCount() const override;
-
   QVariant data(int, int) const override;
 
   QRectF operationRect() const override;

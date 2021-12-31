@@ -332,13 +332,6 @@ FunctionItem::FunctionItem(GraphItem *treeParent,
   setZValue(3);
 }
 
-/* columnCount is called to know the number of columns of the sub elements.
- * Functions have no sub-elements and Qt should know this. */
-int FunctionItem::columnCount() const {
-  //qFatal("FunctionItem::columnCount called!");
-  return 0;
-}
-
 QVariant FunctionItem::data(int column, int role) const {
   std::shared_ptr<Function> shr{std::static_pointer_cast<Function>(shared)};
 

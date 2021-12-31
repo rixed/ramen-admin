@@ -148,13 +148,7 @@ int GraphModel::rowCount(QModelIndex const &parent) const {
   qFatal("how is indexing working, again?");
 }
 
-int GraphModel::columnCount(QModelIndex const &parent) const {
-  // Q_ASSERT(checkIndex(parent));
-  /* Number of columns for the global header. */
-  if (!parent.isValid()) return NumColumns;
-
-  return itemOfIndex(parent)->columnCount();
-}
+int GraphModel::columnCount(QModelIndex const &) const { return NumColumns; }
 
 QVariant GraphModel::data(QModelIndex const &index, int role) const {
   // Q_ASSERT(checkIndex(index, CheckIndexOption::IndexIsValid));

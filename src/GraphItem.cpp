@@ -154,8 +154,6 @@ QModelIndex GraphItem::index(GraphModel const *model, int column) const {
                       treeParent ? treeParent->index(model, 0) : QModelIndex());
 }
 
-int GraphItem::columnCount() const { return GraphModel::NumColumns; }
-
 QRectF GraphItem::boundingRect() const {
   QRectF bbox = operationRect();
   qreal b = border();

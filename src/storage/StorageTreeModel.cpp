@@ -10,6 +10,7 @@ static bool const verbose{false};
 
 StorageTreeModel::StorageTreeModel(QObject *parent)
     : QSortFilterProxyModel(parent) {
+  setDynamicSortFilter(true);
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
   setRecursiveFilteringEnabled(true);
 #endif
@@ -17,8 +18,6 @@ StorageTreeModel::StorageTreeModel(QObject *parent)
 
 bool StorageTreeModel::filterAcceptsRow(int sourceRow,
                                         const QModelIndex &sourceParent) const {
-  //if (!sourceParent.isValid()) return false;
-
   GraphModel *graphModel{static_cast<GraphModel *>(sourceModel())};
   QModelIndex const index{graphModel->index(sourceRow, 0, sourceParent)};
   GraphItem const *graphItem{graphModel->itemOfIndex(index)};
