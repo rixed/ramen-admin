@@ -10,8 +10,9 @@
 #include "stream/GraphViewSettings.h"
 
 SiteItem::SiteItem(std::unique_ptr<Site> site,
-                   GraphViewSettings const &settings)
+                   GraphViewSettings const *settings)
     : GraphItem(nullptr, std::move(site), settings) {
+  Q_ASSERT(settings);
   setZValue(1);
 }
 
@@ -47,8 +48,9 @@ QRectF SiteItem::operationRect() const {
     b.translate(program->pos());
     bbox |= b;
   }
-  bbox += QMarginsF(settings.programMarginHoriz, settings.programMarginTop,
-                    settings.programMarginHoriz, settings.programMarginBottom);
+  bbox +=
+      QMarginsF(settings->programMarginHoriz, settings->programMarginTop,
+                settings->programMarginHoriz, settings->programMarginBottom);
   return bbox;
 }
 

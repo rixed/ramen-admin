@@ -1,12 +1,15 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include "GraphItem.h"
 
+#include <QDebug>
 #include <QFontMetrics>
 #include <QPainter>
 #include <QPropertyAnimation>
 #include <algorithm>
 
 #include "GraphModel.h"
+#include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "colorOfString.h"
 #include "stream/GraphViewSettings.h"
 
@@ -29,8 +32,8 @@ class GraphicsEmpty : public QAbstractGraphicsShapeItem {
 // Note also that we must initialize row with an invalid value so that
 // reorder detect that it's indeed a new value when we insert the first one!
 GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
-                     GraphViewSettings const &settings_)
-    : QGraphicsItem(treeParent_ ? treeParent_->subItems : treeParent_),
+                     GraphViewSettings const *settings_)
+    : QGraphicsItem(treeParent_ ? treeParent_->subItems : nullptr),
       border_(2),
       collapsed(true),
       settings(settings_),
@@ -43,15 +46,17 @@ GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
       treeParent(treeParent_),
       row(-1),
       shared(std::move(data)) {
-  brush = QBrush(colorOfString(shared->name)),
+  brush = QBrush(colorOfString(shared->name));
 
-  // Notifies itemChange whenever the position is changed:
-      setFlag(ItemSendsGeometryChanges, true);
-  // or the item (un)selected:
-  setFlag(ItemIsSelectable, true);
-  setAcceptTouchEvents(true);
+  if (settings) {  // ProgramPartItem is not graphical:
+    // Notifies itemChange whenever the position is changed:
+    setFlag(ItemSendsGeometryChanges, true);
+    // or the item (un)selected:
+    setFlag(ItemIsSelectable, true);
+    setAcceptTouchEvents(true);
+    // TreeView is initially collapsed, and so are we:
+  }
 
-  // TreeView is initially collapsed, and so are we:
   subItems = new GraphicsEmpty(this);
   subItems->hide();
 }
@@ -66,7 +71,7 @@ bool GraphItem::isCollapsed() const { return collapsed; }
 
 void GraphItem::setCollapsed(bool c) {
   collapsed = c;
-  subItems->setVisible(!c);
+  if (subItems) subItems->setVisible(!c);
 }
 
 QString GraphItem::sfqName() const {
@@ -106,45 +111,49 @@ void GraphItem::paintLabels(
     QPainter *painter,
     std::vector<std::pair<QString const, QString const> > const &labels,
     int y) {
-  QFont boldFont = settings.labelsFont;
+  Q_ASSERT(settings);  // Or this should not be called
+
+  QFont boldFont{settings->labelsFont};
   boldFont.setBold(true);
   QFontMetrics fm(boldFont);
 
-  QPen pen = QPen(Qt::black);
+  QPen pen{QPen(Qt::black)};
   pen.setWidthF(0);
   painter->setPen(pen);
 
-  y += settings.labelsLineHeight;
-  int const x = settings.labelsHorizMargin;
+  y += settings->labelsLineHeight;
+  int const x{settings->labelsHorizMargin};
   for (auto const &label : labels) {
-    int x2 = x;
+    int x2{x};
     painter->setFont(boldFont);
     if (label.first.length() > 0) {
-      QString const title(label.first + QString(": "));
+      QString const title{label.first + QString(": ")};
       painter->drawText(x, y, title);
       x2 += fm.boundingRect(title).width();
-      painter->setFont(settings.labelsFont);
+      painter->setFont(settings->labelsFont);
     }
     painter->drawText(x2, y, label.second);
-    y += settings.labelsLineHeight;
+    y += settings->labelsLineHeight;
   }
 }
 
 QRect GraphItem::labelsBoundingRect(
     std::vector<std::pair<QString const, QString const> > const &labels) const {
-  QFont font = settings.labelsFont;
+  Q_ASSERT(settings);  // Or this should not be called
+
+  QFont font{settings->labelsFont};
   font.setBold(true);
 
-  QFontMetrics fm(font);
+  QFontMetrics fm{font};
 
-  int totWidth = 0;
+  int totWidth{0};
   for (auto const &label : labels) {
-    QString const totLine(label.first + QString(": ") + label.second);
-    totWidth = std::max(totWidth, settings.labelsHorizMargin +
+    QString const totLine{label.first + QString(": ") + label.second};
+    totWidth = std::max(totWidth, settings->labelsHorizMargin +
                                       fm.boundingRect(totLine).width());
   }
 
-  int const totHeight = labels.size() * settings.labelsLineHeight;
+  size_t const totHeight{labels.size() * settings->labelsLineHeight};
 
   return QRect(QPoint(0, 0), QSize(totWidth, totHeight));
 }
@@ -155,8 +164,8 @@ QModelIndex GraphItem::index(GraphModel const *model, int column) const {
 }
 
 QRectF GraphItem::boundingRect() const {
-  QRectF bbox = operationRect();
-  qreal b = border();
+  QRectF bbox{operationRect()};
+  qreal b{border()};
   bbox += QMargins(b, b, b, b);
   return bbox;
 }
@@ -164,33 +173,37 @@ QRectF GraphItem::boundingRect() const {
 // Every node in the graph start by displaying a set of properties:
 void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
                       QWidget *) {
-  qreal b = border();
-  QBrush bru = brush;
+  if (!settings) return;
+
+  Q_ASSERT(settings);  // Or this should not be called
+
+  qreal b{border()};
+  QBrush bru{brush};
   bru.setColor(color().lighter());
   painter->setBrush(bru);
-  QPen blockPen(Qt::NoBrush, b, isSelected() ? Qt::SolidLine : Qt::DashLine);
+  QPen blockPen{Qt::NoBrush, b, isSelected() ? Qt::SolidLine : Qt::DashLine};
   blockPen.setColor(isSelected() ? Qt::darkGreen : Qt::darkGray);
   painter->setPen(blockPen);
 
   // Get the total bbox and draw inside:
-  QRectF bbox = boundingRect();
+  QRectF bbox{boundingRect()};
   bbox -= QMargins(b, b, b, b);
   painter->drawRoundedRect(bbox, 5, 5);
 
   // Title (ie name)
-  painter->setFont(settings.titleFont);
+  painter->setFont(settings->titleFont);
 
-  QPen titlePen = QPen(Qt::black);
+  QPen titlePen{QPen(Qt::black)};
   titlePen.setWidth(0);
   painter->setPen(titlePen);
 
-  painter->drawText(settings.labelsHorizMargin, settings.titleLineHeight,
+  painter->drawText(settings->labelsHorizMargin, settings->titleLineHeight,
                     shared->name);
 
   // Labels:
   if (collapsed) {
-    std::vector<std::pair<QString const, QString const> > labs = labels();
-    paintLabels(painter, labs, settings.titleLineHeight);
+    std::vector<std::pair<QString const, QString const> > labs{labels()};
+    paintLabels(painter, labs, settings->titleLineHeight);
   }
 }
 

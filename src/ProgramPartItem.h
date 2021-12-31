@@ -8,7 +8,6 @@
 
 class FunctionItem;
 class GraphModel;
-struct GraphViewSettings;
 class ProgramItem;
 
 struct ProgramPart : public GraphData {
@@ -31,7 +30,7 @@ class ProgramPartItem : public GraphItem {
   ProgramItem *actualProgram;
 
   ProgramPartItem(GraphItem *treeParent, std::unique_ptr<ProgramPart>,
-                  ProgramItem *actualProgram, GraphViewSettings const &);
+                  ProgramItem *actualProgram);
 
   bool isTopHalf() const override;
 
@@ -47,9 +46,11 @@ class ProgramPartItem : public GraphItem {
 
   void reorder(GraphModel *);
 
-  QRectF operationRect() const override { return QRectF{}; }
+  QRectF operationRect() const override;
 
   operator QString() const;
+
+  QString const typeName() const { return QString("ProgramPartItem"); }
 };
 
 #endif

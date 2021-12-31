@@ -69,8 +69,10 @@ class GraphItem : public QObject, public QGraphicsItem {
   QRect labelsBoundingRect(
       std::vector<std::pair<QString const, QString const> > const &) const;
 
+  QGraphicsItem *GraphicsParent(GraphItem *treeParent) const;
+
  protected:
-  GraphViewSettings const &settings;
+  GraphViewSettings const *settings;
 
   // Displayed in the graph:
   // TODO: use QStaticText
@@ -92,7 +94,7 @@ class GraphItem : public QObject, public QGraphicsItem {
   std::shared_ptr<GraphData> shared;
 
   GraphItem(GraphItem *treeParent, std::unique_ptr<GraphData> data,
-            GraphViewSettings const &);
+            GraphViewSettings const *);
 
   virtual QVariant data(int col, int role) const;
 
@@ -111,11 +113,12 @@ class GraphItem : public QObject, public QGraphicsItem {
 
   virtual bool isWorking() const = 0;
 
-  /* TODO: have a GraphViewable class for SiteItem, ProgramItem and FunctionItem
-   * objects (but not ProgramPart objects). */
-  virtual bool isViewable() const = 0;
+  // ProgramPartItem is not viewable
+  virtual bool isViewable() const { return true; }
 
   virtual operator QString() const = 0;
+
+  virtual QString const typeName() const = 0;
 
   // For the GraphView:
   QRectF boundingRect() const;

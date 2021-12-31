@@ -837,9 +837,9 @@ ProgramPartItem *GraphModel::createProgramParts(ProgramPartItem *parent,
         createIndex(parent->row, 0, static_cast<GraphItem *>(parent))};
     beginInsertRows(parentIndex, idx, idx);
 
-    child = new ProgramPartItem(
-        parent, std::make_unique<ProgramPart>(firstName),
-        programNames.isEmpty() ? actualProgram : nullptr, settings);
+    child =
+        new ProgramPartItem(parent, std::make_unique<ProgramPart>(firstName),
+                            programNames.isEmpty() ? actualProgram : nullptr);
     parent->subParts.push_back(child);
     parent->reorder(this);
 
@@ -869,7 +869,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
   if (!siteItem) {
     if (verbose) qDebug() << "Creating a new Site" << pk.site;
 
-    siteItem = new SiteItem(std::make_unique<Site>(pk.site), settings);
+    siteItem = new SiteItem(std::make_unique<Site>(pk.site), &settings);
     size_t idx{sites.size()};  // as we insert at the end for now
     beginInsertRows(QModelIndex(), idx, idx);
     sites.insert(sites.begin() + idx, siteItem);
@@ -889,7 +889,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
       if (verbose) qDebug() << "Creating a new Program" << pk.program;
 
       programItem = new ProgramItem(
-          siteItem, std::make_unique<Program>(pk.program), settings);
+          siteItem, std::make_unique<Program>(pk.program), &settings);
 
       // Not need to signal this insertion:
       siteItem->programs.push_back(programItem);
@@ -918,7 +918,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
 
         first = new ProgramPartItem(
             siteItem, std::make_unique<ProgramPart>(firstName),
-            programNames.isEmpty() ? programItem : nullptr, settings);
+            programNames.isEmpty() ? programItem : nullptr);
         siteItem->programParts.push_back(first);
 
         siteItem->reorder(this);
@@ -949,7 +949,7 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
             std::make_unique<Function>(siteItem->shared->name.toStdString(),
                                        programItem->shared->name.toStdString(),
                                        pk.function.toStdString(), srcPath),
-            settings);
+            &settings);
         /* In theory the last ProgramPartItem could have both functions (ie.
          * an actualProgram) and some more subParts. In that case consider the
          * functions come first, so that the index of a function in lastPart

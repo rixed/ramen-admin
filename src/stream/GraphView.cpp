@@ -11,6 +11,7 @@
 
 #include "FunctionItem.h"
 #include "ProgramItem.h"
+#include "ProgramPartItem.h"
 #include "SiteItem.h"
 #include "stream/GraphArrow.h"
 #include "stream/GraphViewSettings.h"
@@ -104,14 +105,12 @@ void GraphView::setModel(GraphModel const *model_) {
 
 void GraphView::collapse(QModelIndex const &index) {
   GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
-
   item->setCollapsed(true);
   updateArrows();
 }
 
 void GraphView::expand(QModelIndex const &index) {
   GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
-
   item->setCollapsed(false);
   updateArrows();
 }
@@ -120,8 +119,12 @@ void GraphView::expand(QModelIndex const &index) {
 void GraphView::select(QModelIndex const &index) {
   GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
 
+  if (verbose)
+    qDebug() << "GraphView::select a" << item->typeName()
+             << (item->isCollapsed() ? "(collapsed)" : "");
+
   // Only allow to select tree leaves:
-  if (item->isCollapsed()) {
+  if (item->isCollapsed() && item->isViewable()) {
     scene.clearSelection();
     item->setSelected(true);
   }
@@ -135,14 +138,18 @@ void GraphView::insertRows(const QModelIndex &parent, int first, int last) {
     qDebug() << "insertRow in graphModel from" << first << "to" << last;
   layoutTimer.start(layoutTimeout);
 
-  // We only need to add to the scene the toplevel sites:
+  /* We only need to add to the scene the toplevel sites.
+   * Other GraphItem objects will be painted because they have this site as
+   * their (grand)parent. */
   if (parent.isValid()) return;
 
-  // Add those new items in the scene:
+  /* Add those new sites in the scene: */
   for (int row = first; row <= last; row++) {
     QModelIndex index{model->index(row, 0, parent)};
     GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
-    scene.addItem(item);
+    SiteItem *siteItem{dynamic_cast<SiteItem *>(item)};
+    Q_ASSERT(siteItem);
+    scene.addItem(siteItem);
   }
 }
 
@@ -330,6 +337,17 @@ void GraphView::selectionChanged() {
 
   GraphItem *item{dynamic_cast<GraphItem *>(items.first())};
   if (!item) return;
+
+  if (verbose)
+    qDebug() << "GraphView::selectionChanged: selected a" << item->typeName();
+
+  /* If a ProgramItem have been selected, select the last part of the program
+   * name instead (usable by the OperationsView): */
+  ProgramItem *pi{dynamic_cast<ProgramItem *>(item)};
+  if (pi) {
+    Q_ASSERT(pi->lastProgramPartItem);
+    item = pi->lastProgramPartItem;
+  }
 
   emit selected(item->index(model, 0));
 }

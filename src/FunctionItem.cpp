@@ -324,11 +324,12 @@ std::shared_ptr<Function> Function::find(QString const &site,
 
 FunctionItem::FunctionItem(GraphItem *treeParent,
                            std::unique_ptr<Function> function,
-                           GraphViewSettings const &settings)
+                           GraphViewSettings const *settings)
     : GraphItem(treeParent, std::move(function), settings) {
   Q_ASSERT(treeParent);
+  Q_ASSERT(settings);
   // TODO: updateArrows should reallocate the channels:
-  channel = std::rand() % settings.numArrowChannels;
+  channel = std::rand() % settings->numArrowChannels;
   setZValue(3);
 }
 
@@ -795,13 +796,13 @@ std::vector<std::pair<QString const, QString const> > FunctionItem::labels()
 QRectF FunctionItem::operationRect() const {
   return QRect(
       0, 0,
-      settings.gridWidth -
-          2 * (settings.functionMarginHoriz + settings.programMarginHoriz +
-               settings.siteMarginHoriz),
-      settings.gridHeight -
-          (settings.functionMarginBottom + settings.programMarginBottom +
-           settings.siteMarginBottom + settings.functionMarginTop +
-           settings.programMarginTop + settings.siteMarginTop));
+      settings->gridWidth -
+          2 * (settings->functionMarginHoriz + settings->programMarginHoriz +
+               settings->siteMarginHoriz),
+      settings->gridHeight -
+          (settings->functionMarginBottom + settings->programMarginBottom +
+           settings->siteMarginBottom + settings->functionMarginTop +
+           settings->programMarginTop + settings->siteMarginTop));
 }
 
 bool FunctionItem::isTopHalf() const {

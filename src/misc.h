@@ -74,10 +74,14 @@ void emptyAndDelLayoutItem(QLayout *, int);
 
 bool isClose(double v1, double v2, double prec = 1e-6);
 
-// Expand a tree view recursively from a parent:
+/* Expand a tree view recursively from a parent.
+ * If [but_last] is set, then do not expand the last level (useful to expand
+ * ProgramPartItem objects but not the last one so FunctionItem objects stay
+ * collapsed). */
 class QModelIndex;
 class QTreeView;
-void expandAllFromParent(QTreeView *, QModelIndex const &, int first, int last);
+void expandAllFromParent(QTreeView *, QModelIndex const &, int first, int last,
+                         bool but_last = false);
 
 inline bool overlap(double t1, double t2, double u1, double u2) {
   return u1 < t2 && u2 > t1;

@@ -9,21 +9,33 @@
 #include "ProgramItem.h"
 #include "Resources.h"
 #include "stream/GraphView.h"
-#include "stream/GraphViewSettings.h"
 
 static bool const verbose{false};
 
 ProgramPartItem::ProgramPartItem(GraphItem *treeParent,
                                  std::unique_ptr<ProgramPart> program,
-                                 ProgramItem *actualProgram_,
-                                 GraphViewSettings const &settings)
-    : GraphItem(treeParent, std::move(program), settings),
+                                 ProgramItem *actualProgram_)
+    : GraphItem(treeParent, std::move(program), nullptr),
       actualProgram(actualProgram_) {
   Q_ASSERT(treeParent);
   if (verbose)
     qDebug() << "Create a new ProgramPartItem at" << intptr_t(this)
              << "treeParent=" << (intptr_t)treeParent << "actualProgram"
              << (intptr_t)actualProgram;
+}
+
+QRectF ProgramPartItem::operationRect() const {
+  if (actualProgram) {
+    return actualProgram->operationRect();
+  } else {
+    QRectF bbox;
+    for (auto const &sub_part : subParts) {
+      QRectF b{sub_part->operationRect()};
+      b.translate(sub_part->pos());
+      bbox |= b;
+    }
+    return bbox;
+  }
 }
 
 // All their running functions are top-halves

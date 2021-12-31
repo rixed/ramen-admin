@@ -32,7 +32,7 @@ class SiteItem : public GraphItem {
    */
   std::vector<ProgramPartItem *> programParts;
 
-  SiteItem(std::unique_ptr<Site>, GraphViewSettings const &);
+  SiteItem(std::unique_ptr<Site>, GraphViewSettings const *);
 
   void reorder(GraphModel *);
 
@@ -48,9 +48,9 @@ class SiteItem : public GraphItem {
 
   bool isWorking() const override { Q_ASSERT(false); }
 
-  bool isViewable() const override { return true; }
-
   operator QString() const;
+
+  QString const typeName() const { return QString("SiteItem"); }
 };
 
 #endif

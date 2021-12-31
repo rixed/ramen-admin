@@ -28,9 +28,11 @@ class ProgramItem : public GraphItem {
   ProgramPartItem *lastProgramPartItem;
 
   ProgramItem(GraphItem *treeParent, std::unique_ptr<Program>,
-              GraphViewSettings const &);
+              GraphViewSettings const *);
 
-  QModelIndex index(GraphModel const *, int) const {
+  /* As the ProgramItem is not really part of the QAbstractItemModel any more,
+   * it should never be indexed: */
+  QModelIndex index(GraphModel const *, int) const override {
     Q_ASSERT(false);
     return QModelIndex();
   }
@@ -51,9 +53,9 @@ class ProgramItem : public GraphItem {
    * program is conditionally disabled: */
   bool isRunning() const override;
 
-  bool isViewable() const override { return true; }
-
   operator QString() const;
+
+  QString const typeName() const { return QString("ProgramItem"); }
 };
 
 #endif

@@ -3,6 +3,7 @@
 
 #include <QAbstractItemModel>
 #include <QDateTime>
+#include <QDebug>
 #include <QLayout>
 #include <QLayoutItem>
 #include <QModelIndex>
@@ -194,14 +195,29 @@ bool isClose(double v1, double v2, double prec) {
 }
 
 void expandAllFromParent(QTreeView *view, QModelIndex const &parent, int first,
-                         int last) {
+                         int last, bool but_last) {
   Q_ASSERT(first <= last);
+  if (but_last) {  // Find out if all rows are leaves:
+    bool is_last{true};
+    for (int r = first; r <= last; r++) {
+      QModelIndex const index{view->model()->index(r, 0, parent)};
+      if (view->model()->rowCount(index) > 0) {
+        is_last = false;
+        break;
+      }
+    }
+    if (is_last) {
+      view->collapse(parent);
+      return;
+    }
+  }
   view->expand(parent);
   for (int r = first; r <= last; r++) {
     QModelIndex const index{view->model()->index(r, 0, parent)};
     // recursively:
-    int const numChildren{view->model()->rowCount(index)};
-    if (numChildren > 0) expandAllFromParent(view, index, 0, numChildren - 1);
+    int const num_children{view->model()->rowCount(index)};
+    if (num_children > 0)
+      expandAllFromParent(view, index, 0, num_children - 1, but_last);
   }
 }
 

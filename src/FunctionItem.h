@@ -125,7 +125,7 @@ class FunctionItem : public GraphItem {
   unsigned channel;  // could also be used to select a color?
 
   FunctionItem(GraphItem *treeParent, std::unique_ptr<Function>,
-               GraphViewSettings const &);
+               GraphViewSettings const *);
 
   QVariant data(int, int) const override;
 
@@ -140,9 +140,9 @@ class FunctionItem : public GraphItem {
   bool isUsed()
       const override;  // either not lazy, or have no deps (is_used flag)
 
-  bool isViewable() const override { return true; }
-
   operator QString() const;
+
+  QString const typeName() const { return QString("FunctionItem"); }
 };
 
 #endif

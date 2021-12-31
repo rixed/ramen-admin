@@ -117,15 +117,18 @@ void OperationsView::resetLOD() {
 }
 
 void OperationsView::setLOD(bool) {
-  // collapseAll and friends will unfortunately emit the collapsed signal,
-  // which in turn will reset the Radio. So disable this temporarily:
+  /* collapseAll and friends will unfortunately emit the collapsed signal,
+   * which in turn will reset the Radio. So disable this temporarily: */
   allowReset = false;
   if (toSites->isChecked()) {
     treeView->collapseAll();
   } else if (toPrograms->isChecked()) {
-    treeView->expandToDepth(0);
+    // Must expand everything down to, but excluding, function:
+    int const num_rows{treeView->model()->rowCount()};
+    if (num_rows > 0)
+      expandAllFromParent(treeView, QModelIndex(), 0, num_rows - 1, true);
   } else if (toFunctions->isChecked()) {
-    treeView->expandToDepth(1);
+    treeView->expandAll();
   }
   allowReset = true;
 }
@@ -134,9 +137,11 @@ void OperationsView::selectItem(QModelIndex const &index) {
   if (!index.isValid()) return;
 
   GraphItem *gi{static_cast<GraphItem *>(index.internalPointer())};
-  ProgramItem *p{dynamic_cast<ProgramItem *>(gi)};
+  ProgramPartItem *p{dynamic_cast<ProgramPartItem *>(gi)};
   if (p) {
-    emit programSelected(p);
+    // Ignore the user selecting a non-leaf program part:
+    if (!p->actualProgram) return;
+    emit programSelected(p->actualProgram);
     return;
   }
 
@@ -149,6 +154,7 @@ void OperationsView::selectItem(QModelIndex const &index) {
 
 void OperationsView::showSource(ProgramItem const *p) {
   if (!Menu::sourcesWin) return;
+
   std::string const src_path{
       srcPathFromProgramName(p->shared->name.toStdString())};
   if (verbose)
@@ -159,9 +165,12 @@ void OperationsView::showSource(ProgramItem const *p) {
 // Same as above but also scroll down to that function:
 void OperationsView::showFuncInfo(FunctionItem const *f) {
   if (!Menu::sourcesWin) return;
+
   ProgramPartItem *programPartItem{
       dynamic_cast<ProgramPartItem *>(f->treeParent)};
   Q_ASSERT(programPartItem);
+  Q_ASSERT(programPartItem->actualProgram);
+
   std::string const src_path{srcPathFromProgramName(
       programPartItem->actualProgram->shared->name.toStdString())};
   if (verbose)

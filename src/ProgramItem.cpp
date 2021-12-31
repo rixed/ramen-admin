@@ -11,10 +11,11 @@
 
 ProgramItem::ProgramItem(GraphItem *treeParent,
                          std::unique_ptr<Program> program,
-                         GraphViewSettings const &settings)
+                         GraphViewSettings const *settings)
     : GraphItem(treeParent, std::move(program), settings),
       lastProgramPartItem(nullptr) {
   Q_ASSERT(treeParent);
+  Q_ASSERT(settings);
   setZValue(2);
 }
 
@@ -41,8 +42,8 @@ QRectF ProgramItem::operationRect() const {
     bbox |= b;
   }
   bbox +=
-      QMarginsF(settings.functionMarginHoriz, settings.functionMarginTop,
-                settings.functionMarginHoriz, settings.functionMarginBottom);
+      QMarginsF(settings->functionMarginHoriz, settings->functionMarginTop,
+                settings->functionMarginHoriz, settings->functionMarginBottom);
   return bbox;
 }
 
