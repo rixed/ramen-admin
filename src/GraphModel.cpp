@@ -19,7 +19,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{true};
+static bool const verbose{false};
 
 GraphModel *GraphModel::globalGraphModel;
 
@@ -846,8 +846,6 @@ ProgramPartItem *GraphModel::createProgramParts(ProgramPartItem *parent,
     child = new ProgramPartItem(
         parent, std::make_unique<ProgramPart>(firstName),
         programNames.isEmpty() ? actualProgram : nullptr, settings);
-    /* No need to beginInsertRows given it is done globally from the root of
-     * that program. */
     parent->subParts.push_back(child);
     parent->reorder(this);
 

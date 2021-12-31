@@ -20,7 +20,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{true};
+static bool const verbose{false};
 
 /* In order to display the conftree as an actual tree we need the keys to be
  * split in a meaningful way. Unfortunately, using dessser automatic conversion
