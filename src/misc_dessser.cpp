@@ -3,14 +3,12 @@
 #include <memory>
 #include <sstream>
 extern "C" {
-#include <arpa/inet.h>
-#include <netinet/in.h>
-#include <sys/socket.h>
 // For getpid():
 #include <sys/types.h>
 #include <unistd.h>
 }
 #include <QCoreApplication>
+#include <QHostAddress>
 
 #include "desssergen/dashboard_widget.h"
 #include "desssergen/fq_function_name.h"
@@ -353,21 +351,22 @@ static QString arrToQString(
 }
 
 static QString qstringOfIpv4(uint32_t const v) {
-  return QString(inet_ntoa((struct in_addr){.s_addr = htonl(v)}));
+  QHostAddress const addr{quint32(v)};
+  return addr.toString();
 }
 
 static QString qstringOfIpv6(uint128_t const v) {
-  char buf[8 * (4 + 1)];
-  struct in6_addr ip;
+  Q_IPV6ADDR v_;
 
 #if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-  memcpy(ip.s6_addr, &v, sizeof(ip.s6_addr));
+  memcpy(&v_, &v, 16);
 #else
   uint8_t const *p{reinterpret_cast<uint8_t const *>(&v)};
-  for (size_t i = 0; i < 16; ++i) ip.s6_addr[i] = p[15 - i];
+  for (size_t i = 0; i < 16; ++i) v_[i] = p[15 - i];
 #endif
 
-  return QString(inet_ntop(AF_INET6, &ip, buf, sizeof buf));
+  QHostAddress const addr{v_};
+  return addr.toString();
 }
 
 // Handle the cases where we do have a specialization for that key:
