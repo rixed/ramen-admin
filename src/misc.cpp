@@ -12,10 +12,21 @@
 #include <cinttypes>
 #include <cmath>
 #include <cstdio>
+#include <cstring>
 #include <iostream>
 #include <string>
 
 #include "dessser/runtime.h"  // for operator<< on int128
+
+QDebug operator<<(QDebug debug, int128_t const &i) {
+  debug << stringOfI128(i);
+  return debug;
+}
+
+QDebug operator<<(QDebug debug, uint128_t const &i) {
+  debug << stringOfU128(i);
+  return debug;
+}
 
 bool startsWith(std::string const &a, std::string const &b) {
   if (a.length() < b.length()) return false;

@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QtGlobal>
 #include <cstdlib>
+#include <cstring>
 #include <memory>
 
 #include "KVStore.h"

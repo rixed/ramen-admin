@@ -1,12 +1,16 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef MISC_H_190603
 #define MISC_H_190603
+#include <QDebug>
 #include <string>
 
 #define SIZEOF_ARRAY(x) (sizeof(x) / sizeof(*(x)))
 
 typedef unsigned __int128 uint128_t;
 typedef __int128 int128_t;
+
+QDebug operator<<(QDebug debug, int128_t const &);
+QDebug operator<<(QDebug debug, uint128_t const &);
 
 bool startsWith(std::string const &, std::string const &);
 bool endsWith(std::string const &, std::string const &);
