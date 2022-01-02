@@ -137,7 +137,7 @@ bool KCidrEditor::setValue(
           } break;
           case dessser::gen::raql_value::v6: {
             auto const &cidrv6{std::get<dessser::gen::raql_value::v6>(cidr)};
-            ip = ofIpv4(cidrv6.ip);
+            ip = ofIpv6(cidrv6.ip);
             mask = ofU8(cidrv6.mask);
           } break;
           default:
