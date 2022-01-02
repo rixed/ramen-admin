@@ -277,14 +277,14 @@ int ConfClient::rcvdSessionKey(dessser::Bytes const &public_key,
                 << "Instead of" << sizeof srv_pub_key;
     return -1;
   }
-  memcpy(srv_pub_key, public_key.get(), sizeof srv_pub_key);
+  std::memcpy(srv_pub_key, public_key.get(), sizeof srv_pub_key);
   // precompute the channel key:
   if (0 != crypto_box_beforenm(channel_key, srv_pub_key, clt_priv_key)) {
     qCritical() << "Cannot crypto_box_beforenm";
     return -1;
   }
   // decrypt the message:
-  memcpy(srv_nonce, nonce.get(), nonce.length());
+  std::memcpy(srv_nonce, nonce.get(), nonce.length());
   return readCrypted(message);
 }
 
@@ -307,11 +307,11 @@ int ConfClient::readCrypted(dessser::Bytes const &cipher) {
    * crypto_box_BOXZEROBYTES longer than cipher (cipher is MAC + message, NaCl
    * wants 32 zeros) */
   uint8_t clear_buffer[crypto_box_BOXZEROBYTES + cipher.length()];
-  bzero(clear_buffer, crypto_box_ZEROBYTES);
+  std::memset(clear_buffer, 0, crypto_box_ZEROBYTES);
   // Have to copy cipher for 0 headers:
   unsigned char cipher_[crypto_box_BOXZEROBYTES + cipher.length()];
-  bzero(cipher_, crypto_box_BOXZEROBYTES);
-  memcpy(cipher_ + crypto_box_BOXZEROBYTES, cipher.get(), cipher.length());
+  std::memset(cipher_, 0, crypto_box_BOXZEROBYTES);
+  std::memcpy(cipher_ + crypto_box_BOXZEROBYTES, cipher.get(), cipher.length());
   if (0 != crypto_box_open_afternm(clear_buffer, cipher_, sizeof cipher_,
                                    srv_nonce, channel_key)) {
     qCritical() << "Cannot crypto_box_open_afternm";
@@ -714,10 +714,11 @@ int ConfClient::sendMsg(
   if (isCrypted()) {
     /* Encrypt using server public key and that nonce: */
     if (verbose) qDebug() << "Encrypting" << text_len << "bytes";
-    bzero(clear_text, crypto_box_ZEROBYTES);
-    memcpy(clear_text + crypto_box_ZEROBYTES,
-           reinterpret_cast<unsigned char const *>(text.toString().c_str()),
-           text_len);
+    std::memset(clear_text, 0, crypto_box_ZEROBYTES);
+    std::memcpy(
+        clear_text + crypto_box_ZEROBYTES,
+        reinterpret_cast<unsigned char const *>(text.toString().c_str()),
+        text_len);
     if (crypto_box(cipher_text, clear_text, crypto_box_ZEROBYTES + text_len,
                    clt_nonce, srv_pub_key, clt_priv_key) < 0) {
       qCritical() << "Cannot encrypt message";

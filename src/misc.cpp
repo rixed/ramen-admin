@@ -12,6 +12,7 @@
 #include <cinttypes>
 #include <cmath>
 #include <cstdio>
+#include <cstring>  // for memcpy
 #include <cstring>
 #include <iostream>
 #include <string>
@@ -256,7 +257,7 @@ bool parseIpv6(uint128_t *ip, QString const &s) {
 
   // Q_IPV6ADDR stays in network byte order (aka big endian)
 #if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-  memcpy(ip, &ip_, 16);
+  std::memcpy(ip, &ip_, 16);
 #else
   uint8_t *d{reinterpret_cast<uint8_t *>(ip)};
   for (size_t i = 0; i < 16; ++i) d[i] = ip_[15 - i];

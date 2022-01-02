@@ -359,7 +359,7 @@ static QString qstringOfIpv6(uint128_t const v) {
   Q_IPV6ADDR v_;
 
 #if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
-  memcpy(&v_, &v, 16);
+  std::memcpy(&v_, &v, 16);
 #else
   uint8_t const *p{reinterpret_cast<uint8_t const *>(&v)};
   for (size_t i = 0; i < 16; ++i) v_[i] = p[15 - i];
