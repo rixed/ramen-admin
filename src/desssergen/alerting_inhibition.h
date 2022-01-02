@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_alerting_inhibition
 #define DESSSER_GEN_alerting_inhibition
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

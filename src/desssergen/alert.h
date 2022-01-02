@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_alert
 #define DESSSER_GEN_alert
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

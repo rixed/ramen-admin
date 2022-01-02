@@ -43,7 +43,7 @@ std::shared_ptr<std::string const> getAssignedTeam(
   std::shared_ptr<dessser::gen::sync_value::t const> v{getIncident(
       incident_id,
       std::make_shared<dessser::gen::sync_key::incident_key>(
-          std::in_place_index<dessser::gen::sync_key::Team>, dessser::VOID))};
+          std::in_place_index<dessser::gen::sync_key::Team>, dessser::Void()))};
   if (!v || v->index() != dessser::gen::sync_value::RamenValue) return nullptr;
   std::shared_ptr<dessser::gen::raql_value::t const> rv{
       std::get<dessser::gen::sync_value::RamenValue>(*v)};

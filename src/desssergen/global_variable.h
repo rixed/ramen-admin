@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_global_variable
 #define DESSSER_GEN_global_variable
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

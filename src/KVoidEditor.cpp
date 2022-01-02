@@ -13,7 +13,8 @@ std::shared_ptr<dessser::gen::sync_value::t const> KVoidEditor::getValue()
     const {
   static std::shared_ptr<dessser::gen::raql_value::t> raql_v{
       std::make_shared<dessser::gen::raql_value::t>(
-          std::in_place_index<dessser::gen::raql_value::VUnit>, dessser::VOID)};
+          std::in_place_index<dessser::gen::raql_value::VUnit>,
+          dessser::Void())};
   static std::shared_ptr<dessser::gen::sync_value::t const> const v{
       std::make_shared<dessser::gen::sync_value::t>(
           std::in_place_index<dessser::gen::sync_value::RamenValue>, raql_v)};

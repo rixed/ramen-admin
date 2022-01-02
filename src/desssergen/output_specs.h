@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_output_specs
 #define DESSSER_GEN_output_specs
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

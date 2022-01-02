@@ -83,11 +83,11 @@ TimeChartAxisEditor::getValue() const {
       linear->isChecked()
           ? std::make_shared<dessser::gen::dashboard_widget::scale>(
                 std::in_place_index<dessser::gen::dashboard_widget::Linear>,
-                dessser::VOID)
+                dessser::Void())
           : std::make_shared<dessser::gen::dashboard_widget::scale>(
                 std::in_place_index<
                     dessser::gen::dashboard_widget::Logarithmic>,
-                dessser::VOID)};
+                dessser::Void())};
 
   return std::make_shared<dessser::gen::dashboard_widget::axis>(
       forceZero->isChecked(), left->isChecked(), scale);

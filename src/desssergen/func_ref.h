@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_func_ref
 #define DESSSER_GEN_func_ref
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

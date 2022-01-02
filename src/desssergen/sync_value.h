@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_sync_value
 #define DESSSER_GEN_sync_value
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -154,7 +154,7 @@ void StorageTimeline::requestQueryPlan() {
   std::shared_ptr<dessser::gen::sync_key::t const> key{
       std::make_shared<dessser::gen::sync_key::t const>(
           std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
-          dessser::VOID)};
+          dessser::Void())};
 
   std::shared_ptr<dessser::gen::sync_value::t const> req{makeReplayRequest(
       siteName, programName, functionName, since, until, respKey, true)};

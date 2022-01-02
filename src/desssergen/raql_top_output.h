@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_top_output
 #define DESSSER_GEN_raql_top_output
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

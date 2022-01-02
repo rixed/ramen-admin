@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_rc_entry
 #define DESSSER_GEN_rc_entry
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

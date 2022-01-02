@@ -56,7 +56,7 @@ static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
       representation{
           std::make_shared<dessser::gen::dashboard_widget::representation>(
               std::in_place_index<dessser::gen::dashboard_widget::Unused>,
-              dessser::VOID)};
+              dessser::Void())};
 
   QString const full_name{QString::fromStdString(program) + "/" +
                           QString::fromStdString(function) + "/" +
@@ -197,16 +197,16 @@ bool TimeChartFunctionFieldsModel::setData(QModelIndex const &index,
   // Required to assign variants:
   static dessser::gen::dashboard_widget::representation const reprUnused{
       std::in_place_index<dessser::gen::dashboard_widget::Unused>,
-      dessser::VOID};
+      dessser::Void()};
   static dessser::gen::dashboard_widget::representation const reprIndependent{
       std::in_place_index<dessser::gen::dashboard_widget::Independent>,
-      dessser::VOID};
+      dessser::Void()};
   static dessser::gen::dashboard_widget::representation const reprStacked{
       std::in_place_index<dessser::gen::dashboard_widget::Stacked>,
-      dessser::VOID};
+      dessser::Void()};
   static dessser::gen::dashboard_widget::representation const reprStackCentered{
       std::in_place_index<dessser::gen::dashboard_widget::StackCentered>,
-      dessser::VOID};
+      dessser::Void()};
 
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:

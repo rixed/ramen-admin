@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -112,7 +111,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_net_protocol::
           uint16_t id_12 { uint16_t((*p_0).index()) };
           uint16_t id_13 { 2 };
           bool id_14 { bool(id_12 == id_13) };
-          Void id_15 { ((void)(assert(id_14)), ::dessser::VOID) };
+          Void id_15 { ((void)(assert(id_14)), ::dessser::Void()) };
           (void)id_15;
           choose_res_11 = ssum_dst_80;
         }
@@ -152,7 +151,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_net_protocol::t> 
         uint16_t id_27 { uint16_t((*p_0).index()) };
         uint16_t id_28 { 2 };
         bool id_29 { bool(id_27 == id_28) };
-        Void id_30 { ((void)(assert(id_29)), ::dessser::VOID) };
+        Void id_30 { ((void)(assert(id_29)), ::dessser::Void()) };
         (void)id_30;
         Size id_31 { 2UL };
         choose_res_25 = id_31;
@@ -196,8 +195,8 @@ static std::function<::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4d
         bool id_39 { bool(id_38 == dsum1_fst_64) };
         ::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73 choose_res_40;
         if (id_39) {
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_41 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<0>, ::dessser::VOID) };
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_41 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<0>, ::dessser::Void()) };
           ::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73 id_42 { id_41, dsum1_snd_65 };
           choose_res_40 = id_42;
         } else {
@@ -205,17 +204,17 @@ static std::function<::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4d
           bool id_44 { bool(id_43 == dsum1_fst_64) };
           ::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73 choose_res_45;
           if (id_44) {
-            (void)::dessser::VOID;
-            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_46 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<1>, ::dessser::VOID) };
+            (void)::dessser::Void();
+            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_46 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<1>, ::dessser::Void()) };
             ::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73 id_47 { id_46, dsum1_snd_65 };
             choose_res_45 = id_47;
           } else {
             uint16_t id_48 { 2 };
             bool id_49 { bool(dsum1_fst_64 == id_48) };
-            Void id_50 { ((void)(assert(id_49)), ::dessser::VOID) };
+            Void id_50 { ((void)(assert(id_49)), ::dessser::Void()) };
             (void)id_50;
-            (void)::dessser::VOID;
-            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_51 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<2>, ::dessser::VOID) };
+            (void)::dessser::Void();
+            std::shared_ptr<::dessser::gen::raql_net_protocol::t>  id_51 { std::make_shared<::dessser::gen::raql_net_protocol::t>(std::in_place_index<2>, ::dessser::Void()) };
             ::dessser::gen::raql_net_protocol::t53cccde421b2d033d9d6d4dd53f42f73 id_52 { id_51, dsum1_snd_65 };
             choose_res_45 = id_52;
           }

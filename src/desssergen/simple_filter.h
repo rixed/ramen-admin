@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_simple_filter
 #define DESSSER_GEN_simple_filter
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

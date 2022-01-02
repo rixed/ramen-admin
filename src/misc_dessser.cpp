@@ -29,7 +29,7 @@ std::string const respKeyPrefix{std::to_string(getpid()) + "_" +
 
 std::shared_ptr<dessser::gen::raql_value::t const> const vnull{
     std::make_shared<dessser::gen::raql_value::t>(
-        std::in_place_index<dessser::gen::raql_value::VNull>, dessser::VOID)};
+        std::in_place_index<dessser::gen::raql_value::VNull>, dessser::Void())};
 
 std::shared_ptr<dessser::gen::sync_value::t const> const nullVal{
     std::make_shared<dessser::gen::sync_value::t const>(
@@ -41,12 +41,12 @@ std::shared_ptr<dessser::gen::sync_value::t const> const nullVal{
 std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig{
     std::make_shared<dessser::gen::sync_key::t>(
         std::in_place_index<dessser::gen::sync_key::TargetConfig>,
-        dessser::VOID)};
+        dessser::Void())};
 
 std::shared_ptr<dessser::gen::dashboard_widget::type const> const chartPlotType{
     std::make_shared<dessser::gen::dashboard_widget::type>(
         std::in_place_index<dessser::gen::dashboard_widget::Plot>,
-        dessser::VOID)};
+        dessser::Void())};
 
 bool isScalar(dessser::gen::raql_type::t const &t) {
   switch (t.type->index()) {
@@ -117,7 +117,7 @@ std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
           true, false,
           std::make_shared<dessser::gen::dashboard_widget::scale>(
               std::in_place_index<dessser::gen::dashboard_widget::Linear>,
-              dessser::VOID))};
+              dessser::Void()))};
 
   dessser::Arr<std::shared_ptr< ::dessser::gen::dashboard_widget::axis> > axes{
       axis};

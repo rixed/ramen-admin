@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_alerting_delivery_status
 #define DESSSER_GEN_alerting_delivery_status
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

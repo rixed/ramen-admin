@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_fieldmask
 #define DESSSER_GEN_fieldmask
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

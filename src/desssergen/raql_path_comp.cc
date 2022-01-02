@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -135,7 +134,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_path_comp::t> 
         uint16_t id_10 { uint16_t((*p_0).index()) };
         uint16_t id_11 { 1 };
         bool id_12 { bool(id_10 == id_11) };
-        Void id_13 { ((void)(assert(id_12)), ::dessser::VOID) };
+        Void id_13 { ((void)(assert(id_12)), ::dessser::Void()) };
         (void)id_13;
         auto fun14 { dessser::gen::field_name::to_row_binary };
         dessser::gen::field_name::t_ext id_15 { std::get<1 /* Name */>((*p_0)) };
@@ -169,7 +168,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_path_comp::t> )> 
       uint16_t id_23 { uint16_t((*p_0).index()) };
       uint16_t id_24 { 1 };
       bool id_25 { bool(id_23 == id_24) };
-      Void id_26 { ((void)(assert(id_25)), ::dessser::VOID) };
+      Void id_26 { ((void)(assert(id_25)), ::dessser::Void()) };
       (void)id_26;
       Size id_27 { 2UL };
       auto fun28 { dessser::gen::field_name::sersize_of_row_binary };
@@ -230,7 +229,7 @@ static std::function<::dessser::gen::raql_path_comp::t16c6226b84acb3730f79935089
         } else {
           uint16_t id_45 { 1 };
           bool id_46 { bool(dsum1_fst_64 == id_45) };
-          Void id_47 { ((void)(assert(id_46)), ::dessser::VOID) };
+          Void id_47 { ((void)(assert(id_46)), ::dessser::Void()) };
           (void)id_47;
           auto fun48 { dessser::gen::field_name::of_row_binary };
           ::dessser::gen::raql_path_comp::t18cecf882d7ac80cef37dfe6b22279d4 id_49 { fun48(dsum1_snd_65) };

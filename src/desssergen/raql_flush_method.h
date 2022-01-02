@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_flush_method
 #define DESSSER_GEN_raql_flush_method
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

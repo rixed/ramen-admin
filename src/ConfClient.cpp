@@ -29,7 +29,7 @@ static double const sessionTimeout{300.};
 
 static std::shared_ptr<dessser::gen::sync_key::t const> const devNull{
     std::make_shared<dessser::gen::sync_key::t const>(
-        std::in_place_index<dessser::gen::sync_key::DevNull>, dessser::VOID)};
+        std::in_place_index<dessser::gen::sync_key::DevNull>, dessser::Void())};
 
 void ConfClient::fatalErr(QString const &errString) {
   // Emit the signal with the status we were in before the error occurred:

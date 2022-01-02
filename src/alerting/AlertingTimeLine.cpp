@@ -78,7 +78,7 @@ void AlertingTimeLine::addLog(
             incidentId,
             std::make_shared<dessser::gen::sync_key::incident_key>(
                 std::in_place_index<dessser::gen::sync_key::FirstStartNotif>,
-                dessser::VOID))};
+                dessser::Void()))};
     if (!firstStart) {
       qWarning() << "Cannot find first_start notif for incident"
                  << QString::fromStdString(incidentId);

@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_path_comp
 #define DESSSER_GEN_raql_path_comp
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

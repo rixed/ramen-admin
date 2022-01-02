@@ -171,7 +171,7 @@ AtomicWidget *newEditorWidget(
     std::shared_ptr<dessser::gen::sync_key::t const> k, QWidget *parent) {
   static dessser::gen::sync_key::t const recall_cost{
       std::in_place_index<dessser::gen::sync_key::Storage>,
-      std::in_place_index<dessser::gen::sync_key::RecallCost>, dessser::VOID};
+      std::in_place_index<dessser::gen::sync_key::RecallCost>, dessser::Void()};
 
   AtomicWidget *editor = nullptr;
 

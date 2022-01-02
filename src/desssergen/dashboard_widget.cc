@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -549,7 +548,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::r
             uint16_t id_16 { uint16_t((*p_0).index()) };
             uint16_t id_17 { 3 };
             bool id_18 { bool(id_16 == id_17) };
-            Void id_19 { ((void)(assert(id_18)), ::dessser::VOID) };
+            Void id_19 { ((void)(assert(id_18)), ::dessser::Void()) };
             (void)id_19;
             choose_res_15 = ssum_dst_384;
           }
@@ -678,14 +677,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
               choose_res_45 = id_53;
             }
             Pointer id_54 { id_40.writeU8(choose_res_45) };
-            Void id_55 { ((void)(leb128_ptr_389[id_38] = id_54), ::dessser::VOID) };
+            Void id_55 { ((void)(leb128_ptr_389[id_38] = id_54), ::dessser::Void()) };
             (void)id_55;
             uint8_t id_56 { 0 };
             uint8_t id_57 { 0 };
             uint32_t id_58 { leb128_sz_388[id_57] };
             uint8_t id_59 { 7 };
             uint32_t id_60 { uint32_t(id_58 >> id_59) };
-            Void id_61 { ((void)(leb128_sz_388[id_56] = id_60), ::dessser::VOID) };
+            Void id_61 { ((void)(leb128_sz_388[id_56] = id_60), ::dessser::Void()) };
             (void)id_61;
             uint8_t id_62 { 0 };
             uint32_t id_63 { leb128_sz_388[id_62] };
@@ -693,10 +692,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
             bool id_65 { bool(id_63 > id_64) };
             while_flag_37 = id_65;
             if (while_flag_37) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_37);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_66 { 0 };
           Pointer id_67 { leb128_ptr_389[id_66] };
           let_res_36 = id_67;
@@ -745,14 +744,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
               choose_res_86 = id_94;
             }
             Pointer id_95 { id_81.writeU8(choose_res_86) };
-            Void id_96 { ((void)(leb128_ptr_392[id_79] = id_95), ::dessser::VOID) };
+            Void id_96 { ((void)(leb128_ptr_392[id_79] = id_95), ::dessser::Void()) };
             (void)id_96;
             uint8_t id_97 { 0 };
             uint8_t id_98 { 0 };
             uint32_t id_99 { leb128_sz_391[id_98] };
             uint8_t id_100 { 7 };
             uint32_t id_101 { uint32_t(id_99 >> id_100) };
-            Void id_102 { ((void)(leb128_sz_391[id_97] = id_101), ::dessser::VOID) };
+            Void id_102 { ((void)(leb128_sz_391[id_97] = id_101), ::dessser::Void()) };
             (void)id_102;
             uint8_t id_103 { 0 };
             uint32_t id_104 { leb128_sz_391[id_103] };
@@ -760,10 +759,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
             bool id_106 { bool(id_104 > id_105) };
             while_flag_78 = id_106;
             if (while_flag_78) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_78);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_107 { 0 };
           Pointer id_108 { leb128_ptr_392[id_107] };
           let_res_77 = id_108;
@@ -817,14 +816,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
                     choose_res_131 = id_139;
                   }
                   Pointer id_140 { id_126.writeU8(choose_res_131) };
-                  Void id_141 { ((void)(leb128_ptr_397[id_124] = id_140), ::dessser::VOID) };
+                  Void id_141 { ((void)(leb128_ptr_397[id_124] = id_140), ::dessser::Void()) };
                   (void)id_141;
                   uint8_t id_142 { 0 };
                   uint8_t id_143 { 0 };
                   uint32_t id_144 { leb128_sz_396[id_143] };
                   uint8_t id_145 { 7 };
                   uint32_t id_146 { uint32_t(id_144 >> id_145) };
-                  Void id_147 { ((void)(leb128_sz_396[id_142] = id_146), ::dessser::VOID) };
+                  Void id_147 { ((void)(leb128_sz_396[id_142] = id_146), ::dessser::Void()) };
                   (void)id_147;
                   uint8_t id_148 { 0 };
                   uint32_t id_149 { leb128_sz_396[id_148] };
@@ -832,10 +831,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
                   bool id_151 { bool(id_149 > id_150) };
                   while_flag_123 = id_151;
                   if (while_flag_123) {
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
                 } while (while_flag_123);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_152 { 0 };
                 Pointer id_153 { leb128_ptr_397[id_152] };
                 let_res_122 = id_153;
@@ -844,18 +843,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
             }
             Bytes id_154 { x_395 };
             Pointer id_155 { let_res_118.writeBytes(id_154) };
-            Void id_156 { ((void)(dst_ref_393[id_115] = id_155), ::dessser::VOID) };
+            Void id_156 { ((void)(dst_ref_393[id_115] = id_155), ::dessser::Void()) };
             (void)id_156;
             uint8_t id_157 { 0 };
             int32_t id_158 { 1L };
             uint8_t id_159 { 0 };
             int32_t id_160 { n_ref_394[id_159] };
             int32_t id_161 { int32_t(id_158 + id_160) };
-            Void id_162 { ((void)(n_ref_394[id_157] = id_161), ::dessser::VOID) };
+            Void id_162 { ((void)(n_ref_394[id_157] = id_161), ::dessser::Void()) };
             (void)id_162;
             (void)id_162;
           }
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_163 { 0 };
           Pointer id_164 { dst_ref_393[id_163] };
           let_res_113 = id_164;
@@ -952,14 +951,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
               choose_res_191 = id_199;
             }
             Pointer id_200 { id_186.writeU8(choose_res_191) };
-            Void id_201 { ((void)(leb128_ptr_402[id_184] = id_200), ::dessser::VOID) };
+            Void id_201 { ((void)(leb128_ptr_402[id_184] = id_200), ::dessser::Void()) };
             (void)id_201;
             uint8_t id_202 { 0 };
             uint8_t id_203 { 0 };
             uint32_t id_204 { leb128_sz_401[id_203] };
             uint8_t id_205 { 7 };
             uint32_t id_206 { uint32_t(id_204 >> id_205) };
-            Void id_207 { ((void)(leb128_sz_401[id_202] = id_206), ::dessser::VOID) };
+            Void id_207 { ((void)(leb128_sz_401[id_202] = id_206), ::dessser::Void()) };
             (void)id_207;
             uint8_t id_208 { 0 };
             uint32_t id_209 { leb128_sz_401[id_208] };
@@ -967,10 +966,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
             bool id_211 { bool(id_209 > id_210) };
             while_flag_183 = id_211;
             if (while_flag_183) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_183);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_212 { 0 };
           Pointer id_213 { leb128_ptr_402[id_212] };
           let_res_182 = id_213;
@@ -992,18 +991,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
             uint8_t id_221 { 0 };
             Pointer id_222 { dst_ref_403[id_221] };
             Pointer id_223 { field_to_row_binary(x_405, id_222) };
-            Void id_224 { ((void)(dst_ref_403[id_220] = id_223), ::dessser::VOID) };
+            Void id_224 { ((void)(dst_ref_403[id_220] = id_223), ::dessser::Void()) };
             (void)id_224;
             uint8_t id_225 { 0 };
             int32_t id_226 { 1L };
             uint8_t id_227 { 0 };
             int32_t id_228 { n_ref_404[id_227] };
             int32_t id_229 { int32_t(id_226 + id_228) };
-            Void id_230 { ((void)(n_ref_404[id_225] = id_229), ::dessser::VOID) };
+            Void id_230 { ((void)(n_ref_404[id_225] = id_229), ::dessser::Void()) };
             (void)id_230;
             (void)id_230;
           }
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_231 { 0 };
           Pointer id_232 { dst_ref_403[id_231] };
           let_res_218 = id_232;
@@ -1041,7 +1040,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
         uint16_t id_241 { uint16_t((*p_0).index()) };
         uint16_t id_242 { 1 };
         bool id_243 { bool(id_241 == id_242) };
-        Void id_244 { ((void)(assert(id_243)), ::dessser::VOID) };
+        Void id_244 { ((void)(assert(id_243)), ::dessser::Void()) };
         (void)id_244;
         choose_res_240 = ssum_dst_380;
       }
@@ -1101,7 +1100,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
       uint16_t id_260 { uint16_t((*p_0).index()) };
       uint16_t id_261 { 0 };
       bool id_262 { bool(id_260 == id_261) };
-      Void id_263 { ((void)(assert(id_262)), ::dessser::VOID) };
+      Void id_263 { ((void)(assert(id_262)), ::dessser::Void()) };
       (void)id_263;
       let_res_259 = ssum_dst_378;
     }
@@ -1206,14 +1205,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
             choose_res_279 = id_287;
           }
           Pointer id_288 { id_274.writeU8(choose_res_279) };
-          Void id_289 { ((void)(leb128_ptr_407[id_272] = id_288), ::dessser::VOID) };
+          Void id_289 { ((void)(leb128_ptr_407[id_272] = id_288), ::dessser::Void()) };
           (void)id_289;
           uint8_t id_290 { 0 };
           uint8_t id_291 { 0 };
           uint32_t id_292 { leb128_sz_406[id_291] };
           uint8_t id_293 { 7 };
           uint32_t id_294 { uint32_t(id_292 >> id_293) };
-          Void id_295 { ((void)(leb128_sz_406[id_290] = id_294), ::dessser::VOID) };
+          Void id_295 { ((void)(leb128_sz_406[id_290] = id_294), ::dessser::Void()) };
           (void)id_295;
           uint8_t id_296 { 0 };
           uint32_t id_297 { leb128_sz_406[id_296] };
@@ -1221,10 +1220,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
           bool id_299 { bool(id_297 > id_298) };
           while_flag_271 = id_299;
           if (while_flag_271) {
-            (void)::dessser::VOID;
+            (void)::dessser::Void();
           }
         } while (while_flag_271);
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_300 { 0 };
         Pointer id_301 { leb128_ptr_407[id_300] };
         let_res_270 = id_301;
@@ -1278,14 +1277,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
               choose_res_323 = id_331;
             }
             Pointer id_332 { id_318.writeU8(choose_res_323) };
-            Void id_333 { ((void)(leb128_ptr_411[id_316] = id_332), ::dessser::VOID) };
+            Void id_333 { ((void)(leb128_ptr_411[id_316] = id_332), ::dessser::Void()) };
             (void)id_333;
             uint8_t id_334 { 0 };
             uint8_t id_335 { 0 };
             uint32_t id_336 { leb128_sz_410[id_335] };
             uint8_t id_337 { 7 };
             uint32_t id_338 { uint32_t(id_336 >> id_337) };
-            Void id_339 { ((void)(leb128_sz_410[id_334] = id_338), ::dessser::VOID) };
+            Void id_339 { ((void)(leb128_sz_410[id_334] = id_338), ::dessser::Void()) };
             (void)id_339;
             uint8_t id_340 { 0 };
             uint32_t id_341 { leb128_sz_410[id_340] };
@@ -1293,10 +1292,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
             bool id_343 { bool(id_341 > id_342) };
             while_flag_315 = id_343;
             if (while_flag_315) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_315);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_344 { 0 };
           Pointer id_345 { leb128_ptr_411[id_344] };
           let_res_314 = id_345;
@@ -1318,18 +1317,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
             uint8_t id_353 { 0 };
             Pointer id_354 { dst_ref_412[id_353] };
             Pointer id_355 { axis_to_row_binary(x_414, id_354) };
-            Void id_356 { ((void)(dst_ref_412[id_352] = id_355), ::dessser::VOID) };
+            Void id_356 { ((void)(dst_ref_412[id_352] = id_355), ::dessser::Void()) };
             (void)id_356;
             uint8_t id_357 { 0 };
             int32_t id_358 { 1L };
             uint8_t id_359 { 0 };
             int32_t id_360 { n_ref_413[id_359] };
             int32_t id_361 { int32_t(id_358 + id_360) };
-            Void id_362 { ((void)(n_ref_413[id_357] = id_361), ::dessser::VOID) };
+            Void id_362 { ((void)(n_ref_413[id_357] = id_361), ::dessser::Void()) };
             (void)id_362;
             (void)id_362;
           }
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_363 { 0 };
           Pointer id_364 { dst_ref_412[id_363] };
           let_res_350 = id_364;
@@ -1375,14 +1374,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
               choose_res_380 = id_388;
             }
             Pointer id_389 { id_375.writeU8(choose_res_380) };
-            Void id_390 { ((void)(leb128_ptr_417[id_373] = id_389), ::dessser::VOID) };
+            Void id_390 { ((void)(leb128_ptr_417[id_373] = id_389), ::dessser::Void()) };
             (void)id_390;
             uint8_t id_391 { 0 };
             uint8_t id_392 { 0 };
             uint32_t id_393 { leb128_sz_416[id_392] };
             uint8_t id_394 { 7 };
             uint32_t id_395 { uint32_t(id_393 >> id_394) };
-            Void id_396 { ((void)(leb128_sz_416[id_391] = id_395), ::dessser::VOID) };
+            Void id_396 { ((void)(leb128_sz_416[id_391] = id_395), ::dessser::Void()) };
             (void)id_396;
             uint8_t id_397 { 0 };
             uint32_t id_398 { leb128_sz_416[id_397] };
@@ -1390,10 +1389,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
             bool id_400 { bool(id_398 > id_399) };
             while_flag_372 = id_400;
             if (while_flag_372) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_372);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_401 { 0 };
           Pointer id_402 { leb128_ptr_417[id_401] };
           let_res_371 = id_402;
@@ -1415,18 +1414,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
             uint8_t id_410 { 0 };
             Pointer id_411 { dst_ref_418[id_410] };
             Pointer id_412 { source_to_row_binary(x_420, id_411) };
-            Void id_413 { ((void)(dst_ref_418[id_409] = id_412), ::dessser::VOID) };
+            Void id_413 { ((void)(dst_ref_418[id_409] = id_412), ::dessser::Void()) };
             (void)id_413;
             uint8_t id_414 { 0 };
             int32_t id_415 { 1L };
             uint8_t id_416 { 0 };
             int32_t id_417 { n_ref_419[id_416] };
             int32_t id_418 { int32_t(id_415 + id_417) };
-            Void id_419 { ((void)(n_ref_419[id_414] = id_418), ::dessser::VOID) };
+            Void id_419 { ((void)(n_ref_419[id_414] = id_418), ::dessser::Void()) };
             (void)id_419;
             (void)id_419;
           }
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_420 { 0 };
           Pointer id_421 { dst_ref_418[id_420] };
           let_res_407 = id_421;
@@ -1507,14 +1506,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
                 choose_res_444 = id_452;
               }
               Pointer id_453 { id_439.writeU8(choose_res_444) };
-              Void id_454 { ((void)(leb128_ptr_424[id_437] = id_453), ::dessser::VOID) };
+              Void id_454 { ((void)(leb128_ptr_424[id_437] = id_453), ::dessser::Void()) };
               (void)id_454;
               uint8_t id_455 { 0 };
               uint8_t id_456 { 0 };
               uint32_t id_457 { leb128_sz_423[id_456] };
               uint8_t id_458 { 7 };
               uint32_t id_459 { uint32_t(id_457 >> id_458) };
-              Void id_460 { ((void)(leb128_sz_423[id_455] = id_459), ::dessser::VOID) };
+              Void id_460 { ((void)(leb128_sz_423[id_455] = id_459), ::dessser::Void()) };
               (void)id_460;
               uint8_t id_461 { 0 };
               uint32_t id_462 { leb128_sz_423[id_461] };
@@ -1522,10 +1521,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
               bool id_464 { bool(id_462 > id_463) };
               while_flag_436 = id_464;
               if (while_flag_436) {
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
               }
             } while (while_flag_436);
-            (void)::dessser::VOID;
+            (void)::dessser::Void();
             uint8_t id_465 { 0 };
             Pointer id_466 { leb128_ptr_424[id_465] };
             let_res_435 = id_466;
@@ -1540,7 +1539,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
         uint16_t id_470 { uint16_t((*p_0).index()) };
         uint16_t id_471 { 1 };
         bool id_472 { bool(id_470 == id_471) };
-        Void id_473 { ((void)(assert(id_472)), ::dessser::VOID) };
+        Void id_473 { ((void)(assert(id_472)), ::dessser::Void()) };
         (void)id_473;
         std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_474 { std::get<1 /* Chart */>((*p_0)) };
         Pointer id_475 { chart_to_row_binary(id_474, ssum_dst_422) };
@@ -1589,7 +1588,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::repr
           uint16_t id_492 { uint16_t((*p_0).index()) };
           uint16_t id_493 { 3 };
           bool id_494 { bool(id_492 == id_493) };
-          Void id_495 { ((void)(assert(id_494)), ::dessser::VOID) };
+          Void id_495 { ((void)(assert(id_494)), ::dessser::Void()) };
           (void)id_495;
           Size id_496 { 2UL };
           choose_res_490 = id_496;
@@ -1683,11 +1682,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
               uint32_t id_520 { lebsz_ref_341[id_519] };
               uint32_t id_521 { 1U };
               uint32_t id_522 { uint32_t(id_520 + id_521) };
-              Void id_523 { ((void)(lebsz_ref_341[id_518] = id_522), ::dessser::VOID) };
+              Void id_523 { ((void)(lebsz_ref_341[id_518] = id_522), ::dessser::Void()) };
               (void)id_523;
             }
           } while (while_flag_510);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_524 { 0 };
           uint32_t id_525 { lebsz_ref_341[id_524] };
           Size id_526 { Size(id_525) };
@@ -1732,11 +1731,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
               uint32_t id_550 { lebsz_ref_344[id_549] };
               uint32_t id_551 { 1U };
               uint32_t id_552 { uint32_t(id_550 + id_551) };
-              Void id_553 { ((void)(lebsz_ref_344[id_548] = id_552), ::dessser::VOID) };
+              Void id_553 { ((void)(lebsz_ref_344[id_548] = id_552), ::dessser::Void()) };
               (void)id_553;
             }
           } while (while_flag_540);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_554 { 0 };
           uint32_t id_555 { lebsz_ref_344[id_554] };
           Size id_556 { Size(id_555) };
@@ -1799,11 +1798,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
                         uint32_t id_593 { lebsz_ref_349[id_592] };
                         uint32_t id_594 { 1U };
                         uint32_t id_595 { uint32_t(id_593 + id_594) };
-                        Void id_596 { ((void)(lebsz_ref_349[id_591] = id_595), ::dessser::VOID) };
+                        Void id_596 { ((void)(lebsz_ref_349[id_591] = id_595), ::dessser::Void()) };
                         (void)id_596;
                       }
                     } while (while_flag_583);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_597 { 0 };
                     uint32_t id_598 { lebsz_ref_349[id_597] };
                     Size id_599 { Size(id_598) };
@@ -1816,21 +1815,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
                 let_res_577 = id_601;
               }
               Size id_602 { Size(id_571 + let_res_577) };
-              Void id_603 { ((void)(sz_ref_345[id_569] = id_602), ::dessser::VOID) };
+              Void id_603 { ((void)(sz_ref_345[id_569] = id_602), ::dessser::Void()) };
               (void)id_603;
               uint8_t id_604 { 0 };
               uint8_t id_605 { 0 };
               int32_t id_606 { repeat_n_346[id_605] };
               int32_t id_607 { 1L };
               int32_t id_608 { int32_t(id_606 + id_607) };
-              Void id_609 { ((void)(repeat_n_346[id_604] = id_608), ::dessser::VOID) };
+              Void id_609 { ((void)(repeat_n_346[id_604] = id_608), ::dessser::Void()) };
               (void)id_609;
               (void)id_609;
             }
           } while (while_flag_562);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
         }
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_610 { 0 };
         Size id_611 { sz_ref_345[id_610] };
         let_res_559 = id_611;
@@ -1905,11 +1904,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::sour
               uint32_t id_638 { lebsz_ref_355[id_637] };
               uint32_t id_639 { 1U };
               uint32_t id_640 { uint32_t(id_638 + id_639) };
-              Void id_641 { ((void)(lebsz_ref_355[id_636] = id_640), ::dessser::VOID) };
+              Void id_641 { ((void)(lebsz_ref_355[id_636] = id_640), ::dessser::Void()) };
               (void)id_641;
             }
           } while (while_flag_628);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_642 { 0 };
           uint32_t id_643 { lebsz_ref_355[id_642] };
           Size id_644 { Size(id_643) };
@@ -1945,21 +1944,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::sour
               std::shared_ptr<::dessser::gen::dashboard_widget::field>  id_663 { id_662[id_661] };
               Size id_664 { field_sersize_of_row_binary(id_663) };
               Size id_665 { Size(id_659 + id_664) };
-              Void id_666 { ((void)(sz_ref_356[id_657] = id_665), ::dessser::VOID) };
+              Void id_666 { ((void)(sz_ref_356[id_657] = id_665), ::dessser::Void()) };
               (void)id_666;
               uint8_t id_667 { 0 };
               uint8_t id_668 { 0 };
               int32_t id_669 { repeat_n_357[id_668] };
               int32_t id_670 { 1L };
               int32_t id_671 { int32_t(id_669 + id_670) };
-              Void id_672 { ((void)(repeat_n_357[id_667] = id_671), ::dessser::VOID) };
+              Void id_672 { ((void)(repeat_n_357[id_667] = id_671), ::dessser::Void()) };
               (void)id_672;
               (void)id_672;
             }
           } while (while_flag_650);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
         }
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_673 { 0 };
         Size id_674 { sz_ref_356[id_673] };
         let_res_647 = id_674;
@@ -1990,7 +1989,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scal
       uint16_t id_681 { uint16_t((*p_0).index()) };
       uint16_t id_682 { 1 };
       bool id_683 { bool(id_681 == id_682) };
-      Void id_684 { ((void)(assert(id_683)), ::dessser::VOID) };
+      Void id_684 { ((void)(assert(id_683)), ::dessser::Void()) };
       (void)id_684;
       Size id_685 { 2UL };
       choose_res_679 = id_685;
@@ -2028,7 +2027,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type
     uint16_t id_692 { uint16_t((*p_0).index()) };
     uint16_t id_693 { 0 };
     bool id_694 { bool(id_692 == id_693) };
-    Void id_695 { ((void)(assert(id_694)), ::dessser::VOID) };
+    Void id_695 { ((void)(assert(id_694)), ::dessser::Void()) };
     (void)id_695;
     Size id_696 { 2UL };
     return id_696;
@@ -2117,11 +2116,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
             uint32_t id_715 { lebsz_ref_361[id_714] };
             uint32_t id_716 { 1U };
             uint32_t id_717 { uint32_t(id_715 + id_716) };
-            Void id_718 { ((void)(lebsz_ref_361[id_713] = id_717), ::dessser::VOID) };
+            Void id_718 { ((void)(lebsz_ref_361[id_713] = id_717), ::dessser::Void()) };
             (void)id_718;
           }
         } while (while_flag_705);
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_719 { 0 };
         uint32_t id_720 { lebsz_ref_361[id_719] };
         Size id_721 { Size(id_720) };
@@ -2171,11 +2170,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               uint32_t id_748 { lebsz_ref_365[id_747] };
               uint32_t id_749 { 1U };
               uint32_t id_750 { uint32_t(id_748 + id_749) };
-              Void id_751 { ((void)(lebsz_ref_365[id_746] = id_750), ::dessser::VOID) };
+              Void id_751 { ((void)(lebsz_ref_365[id_746] = id_750), ::dessser::Void()) };
               (void)id_751;
             }
           } while (while_flag_738);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_752 { 0 };
           uint32_t id_753 { lebsz_ref_365[id_752] };
           Size id_754 { Size(id_753) };
@@ -2211,21 +2210,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               std::shared_ptr<::dessser::gen::dashboard_widget::axis>  id_773 { id_772[id_771] };
               Size id_774 { axis_sersize_of_row_binary(id_773) };
               Size id_775 { Size(id_769 + id_774) };
-              Void id_776 { ((void)(sz_ref_366[id_767] = id_775), ::dessser::VOID) };
+              Void id_776 { ((void)(sz_ref_366[id_767] = id_775), ::dessser::Void()) };
               (void)id_776;
               uint8_t id_777 { 0 };
               uint8_t id_778 { 0 };
               int32_t id_779 { repeat_n_367[id_778] };
               int32_t id_780 { 1L };
               int32_t id_781 { int32_t(id_779 + id_780) };
-              Void id_782 { ((void)(repeat_n_367[id_777] = id_781), ::dessser::VOID) };
+              Void id_782 { ((void)(repeat_n_367[id_777] = id_781), ::dessser::Void()) };
               (void)id_782;
               (void)id_782;
             }
           } while (while_flag_760);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
         }
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_783 { 0 };
         Size id_784 { sz_ref_366[id_783] };
         let_res_757 = id_784;
@@ -2262,11 +2261,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               uint32_t id_803 { lebsz_ref_370[id_802] };
               uint32_t id_804 { 1U };
               uint32_t id_805 { uint32_t(id_803 + id_804) };
-              Void id_806 { ((void)(lebsz_ref_370[id_801] = id_805), ::dessser::VOID) };
+              Void id_806 { ((void)(lebsz_ref_370[id_801] = id_805), ::dessser::Void()) };
               (void)id_806;
             }
           } while (while_flag_793);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_807 { 0 };
           uint32_t id_808 { lebsz_ref_370[id_807] };
           Size id_809 { Size(id_808) };
@@ -2302,21 +2301,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               std::shared_ptr<::dessser::gen::dashboard_widget::source>  id_828 { id_827[id_826] };
               Size id_829 { source_sersize_of_row_binary(id_828) };
               Size id_830 { Size(id_824 + id_829) };
-              Void id_831 { ((void)(sz_ref_371[id_822] = id_830), ::dessser::VOID) };
+              Void id_831 { ((void)(sz_ref_371[id_822] = id_830), ::dessser::Void()) };
               (void)id_831;
               uint8_t id_832 { 0 };
               uint8_t id_833 { 0 };
               int32_t id_834 { repeat_n_372[id_833] };
               int32_t id_835 { 1L };
               int32_t id_836 { int32_t(id_834 + id_835) };
-              Void id_837 { ((void)(repeat_n_372[id_832] = id_836), ::dessser::VOID) };
+              Void id_837 { ((void)(repeat_n_372[id_832] = id_836), ::dessser::Void()) };
               (void)id_837;
               (void)id_837;
             }
           } while (while_flag_815);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
         }
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_838 { 0 };
         Size id_839 { sz_ref_371[id_838] };
         let_res_812 = id_839;
@@ -2380,11 +2379,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )
               uint32_t id_863 { lebsz_ref_376[id_862] };
               uint32_t id_864 { 1U };
               uint32_t id_865 { uint32_t(id_863 + id_864) };
-              Void id_866 { ((void)(lebsz_ref_376[id_861] = id_865), ::dessser::VOID) };
+              Void id_866 { ((void)(lebsz_ref_376[id_861] = id_865), ::dessser::Void()) };
               (void)id_866;
             }
           } while (while_flag_853);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_867 { 0 };
           uint32_t id_868 { lebsz_ref_376[id_867] };
           Size id_869 { Size(id_868) };
@@ -2402,7 +2401,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )
       uint16_t id_875 { uint16_t((*p_0).index()) };
       uint16_t id_876 { 1 };
       bool id_877 { bool(id_875 == id_876) };
-      Void id_878 { ((void)(assert(id_877)), ::dessser::VOID) };
+      Void id_878 { ((void)(assert(id_877)), ::dessser::Void()) };
       (void)id_878;
       Size id_879 { 2UL };
       std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_880 { std::get<1 /* Chart */>((*p_0)) };
@@ -2448,8 +2447,8 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
         bool id_890 { bool(id_889 == dsum1_fst_106) };
         ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_891;
         if (id_890) {
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_892 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<0>, ::dessser::VOID) };
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_892 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<0>, ::dessser::Void()) };
           ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_893 { id_892, dsum1_snd_107 };
           choose_res_891 = id_893;
         } else {
@@ -2457,8 +2456,8 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
           bool id_895 { bool(id_894 == dsum1_fst_106) };
           ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_896;
           if (id_895) {
-            (void)::dessser::VOID;
-            std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_897 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<1>, ::dessser::VOID) };
+            (void)::dessser::Void();
+            std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_897 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<1>, ::dessser::Void()) };
             ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_898 { id_897, dsum1_snd_107 };
             choose_res_896 = id_898;
           } else {
@@ -2466,17 +2465,17 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
             bool id_900 { bool(id_899 == dsum1_fst_106) };
             ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_901;
             if (id_900) {
-              (void)::dessser::VOID;
-              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_902 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<2>, ::dessser::VOID) };
+              (void)::dessser::Void();
+              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_902 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<2>, ::dessser::Void()) };
               ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_903 { id_902, dsum1_snd_107 };
               choose_res_901 = id_903;
             } else {
               uint16_t id_904 { 3 };
               bool id_905 { bool(dsum1_fst_106 == id_904) };
-              Void id_906 { ((void)(assert(id_905)), ::dessser::VOID) };
+              Void id_906 { ((void)(assert(id_905)), ::dessser::Void()) };
               (void)id_906;
-              (void)::dessser::VOID;
-              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_907 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<3>, ::dessser::VOID) };
+              (void)::dessser::Void();
+              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_907 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<3>, ::dessser::Void()) };
               ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_908 { id_907, dsum1_snd_107 };
               choose_res_901 = id_908;
             }
@@ -2663,7 +2662,7 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                             auto leb128_fst_139 { std::get<0>(leb128_138) };
                             auto leb128_snd_140 { std::get<1>(leb128_138) };
                             uint8_t id_938 { 0 };
-                            Void id_939 { ((void)(p_ref_137[id_938] = leb128_snd_140), ::dessser::VOID) };
+                            Void id_939 { ((void)(p_ref_137[id_938] = leb128_snd_140), ::dessser::Void()) };
                             (void)id_939;
                             uint8_t id_940 { 0 };
                             uint8_t id_941 { 127 };
@@ -2675,14 +2674,14 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                             uint8_t id_947 { 0 };
                             uint32_t id_948 { leb_ref_135[id_947] };
                             uint32_t id_949 { uint32_t(id_946 | id_948) };
-                            Void id_950 { ((void)(leb_ref_135[id_940] = id_949), ::dessser::VOID) };
+                            Void id_950 { ((void)(leb_ref_135[id_940] = id_949), ::dessser::Void()) };
                             (void)id_950;
                             uint8_t id_951 { 0 };
                             uint8_t id_952 { 0 };
                             uint8_t id_953 { shft_ref_136[id_952] };
                             uint8_t id_954 { 7 };
                             uint8_t id_955 { uint8_t(id_953 + id_954) };
-                            Void id_956 { ((void)(shft_ref_136[id_951] = id_955), ::dessser::VOID) };
+                            Void id_956 { ((void)(shft_ref_136[id_951] = id_955), ::dessser::Void()) };
                             (void)id_956;
                             uint8_t id_957 { 128 };
                             bool id_958 { bool(leb128_fst_139 >= id_957) };
@@ -2692,10 +2691,10 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                         }
                         while_flag_932 = let_res_936;
                         if (while_flag_932) {
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
                       } while (while_flag_932);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_959 { 0 };
                       uint32_t id_960 { leb_ref_135[id_959] };
                       Size id_961 { Size(id_960) };
@@ -2762,7 +2761,7 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                 auto leb128_fst_154 { std::get<0>(leb128_153) };
                                 auto leb128_snd_155 { std::get<1>(leb128_153) };
                                 uint8_t id_987 { 0 };
-                                Void id_988 { ((void)(p_ref_152[id_987] = leb128_snd_155), ::dessser::VOID) };
+                                Void id_988 { ((void)(p_ref_152[id_987] = leb128_snd_155), ::dessser::Void()) };
                                 (void)id_988;
                                 uint8_t id_989 { 0 };
                                 uint8_t id_990 { 127 };
@@ -2774,14 +2773,14 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                 uint8_t id_996 { 0 };
                                 uint32_t id_997 { leb_ref_150[id_996] };
                                 uint32_t id_998 { uint32_t(id_995 | id_997) };
-                                Void id_999 { ((void)(leb_ref_150[id_989] = id_998), ::dessser::VOID) };
+                                Void id_999 { ((void)(leb_ref_150[id_989] = id_998), ::dessser::Void()) };
                                 (void)id_999;
                                 uint8_t id_1000 { 0 };
                                 uint8_t id_1001 { 0 };
                                 uint8_t id_1002 { shft_ref_151[id_1001] };
                                 uint8_t id_1003 { 7 };
                                 uint8_t id_1004 { uint8_t(id_1002 + id_1003) };
-                                Void id_1005 { ((void)(shft_ref_151[id_1000] = id_1004), ::dessser::VOID) };
+                                Void id_1005 { ((void)(shft_ref_151[id_1000] = id_1004), ::dessser::Void()) };
                                 (void)id_1005;
                                 uint8_t id_1006 { 128 };
                                 bool id_1007 { bool(leb128_fst_154 >= id_1006) };
@@ -2791,10 +2790,10 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                             }
                             while_flag_981 = let_res_985;
                             if (while_flag_981) {
-                              (void)::dessser::VOID;
+                              (void)::dessser::Void();
                             }
                           } while (while_flag_981);
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                           uint8_t id_1008 { 0 };
                           uint32_t id_1009 { leb_ref_150[id_1008] };
                           uint8_t id_1010 { 0 };
@@ -2866,7 +2865,7 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                                 auto leb128_fst_171 { std::get<0>(leb128_170) };
                                                 auto leb128_snd_172 { std::get<1>(leb128_170) };
                                                 uint8_t id_1043 { 0 };
-                                                Void id_1044 { ((void)(p_ref_169[id_1043] = leb128_snd_172), ::dessser::VOID) };
+                                                Void id_1044 { ((void)(p_ref_169[id_1043] = leb128_snd_172), ::dessser::Void()) };
                                                 (void)id_1044;
                                                 uint8_t id_1045 { 0 };
                                                 uint8_t id_1046 { 127 };
@@ -2878,14 +2877,14 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                                 uint8_t id_1052 { 0 };
                                                 uint32_t id_1053 { leb_ref_167[id_1052] };
                                                 uint32_t id_1054 { uint32_t(id_1051 | id_1053) };
-                                                Void id_1055 { ((void)(leb_ref_167[id_1045] = id_1054), ::dessser::VOID) };
+                                                Void id_1055 { ((void)(leb_ref_167[id_1045] = id_1054), ::dessser::Void()) };
                                                 (void)id_1055;
                                                 uint8_t id_1056 { 0 };
                                                 uint8_t id_1057 { 0 };
                                                 uint8_t id_1058 { shft_ref_168[id_1057] };
                                                 uint8_t id_1059 { 7 };
                                                 uint8_t id_1060 { uint8_t(id_1058 + id_1059) };
-                                                Void id_1061 { ((void)(shft_ref_168[id_1056] = id_1060), ::dessser::VOID) };
+                                                Void id_1061 { ((void)(shft_ref_168[id_1056] = id_1060), ::dessser::Void()) };
                                                 (void)id_1061;
                                                 uint8_t id_1062 { 128 };
                                                 bool id_1063 { bool(leb128_fst_171 >= id_1062) };
@@ -2895,10 +2894,10 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                             }
                                             while_flag_1037 = let_res_1041;
                                             if (while_flag_1037) {
-                                              (void)::dessser::VOID;
+                                              (void)::dessser::Void();
                                             }
                                           } while (while_flag_1037);
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                           uint8_t id_1064 { 0 };
                                           uint32_t id_1065 { leb_ref_167[id_1064] };
                                           Size id_1066 { Size(id_1065) };
@@ -2932,25 +2931,25 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                                       }
                                       let_res_1070 = letpair_res_1071;
                                     }
-                                    Void id_1077 { ((void)(inits_src_ref_162[id_1028] = let_res_1070), ::dessser::VOID) };
+                                    Void id_1077 { ((void)(inits_src_ref_162[id_1028] = let_res_1070), ::dessser::Void()) };
                                     (void)id_1077;
                                   }
-                                  (void)::dessser::VOID;
+                                  (void)::dessser::Void();
                                 }
-                                (void)::dessser::VOID;
+                                (void)::dessser::Void();
                                 uint8_t id_1078 { 0 };
                                 uint8_t id_1079 { 0 };
                                 int32_t id_1080 { repeat_n_163[id_1079] };
                                 int32_t id_1081 { 1L };
                                 int32_t id_1082 { int32_t(id_1080 + id_1081) };
-                                Void id_1083 { ((void)(repeat_n_163[id_1078] = id_1082), ::dessser::VOID) };
+                                Void id_1083 { ((void)(repeat_n_163[id_1078] = id_1082), ::dessser::Void()) };
                                 (void)id_1083;
                                 (void)id_1083;
                               }
                             } while (while_flag_1021);
-                            (void)::dessser::VOID;
+                            (void)::dessser::Void();
                           }
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                           uint8_t id_1084 { 0 };
                           ::dessser::gen::dashboard_widget::t941fe844f492c6f2281f99ea362423fc id_1085 { inits_src_ref_162[id_1084] };
                           let_res_1018 = id_1085;
@@ -3110,7 +3109,7 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                         auto leb128_fst_207 { std::get<0>(leb128_206) };
                         auto leb128_snd_208 { std::get<1>(leb128_206) };
                         uint8_t id_1122 { 0 };
-                        Void id_1123 { ((void)(p_ref_205[id_1122] = leb128_snd_208), ::dessser::VOID) };
+                        Void id_1123 { ((void)(p_ref_205[id_1122] = leb128_snd_208), ::dessser::Void()) };
                         (void)id_1123;
                         uint8_t id_1124 { 0 };
                         uint8_t id_1125 { 127 };
@@ -3122,14 +3121,14 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                         uint8_t id_1131 { 0 };
                         uint32_t id_1132 { leb_ref_203[id_1131] };
                         uint32_t id_1133 { uint32_t(id_1130 | id_1132) };
-                        Void id_1134 { ((void)(leb_ref_203[id_1124] = id_1133), ::dessser::VOID) };
+                        Void id_1134 { ((void)(leb_ref_203[id_1124] = id_1133), ::dessser::Void()) };
                         (void)id_1134;
                         uint8_t id_1135 { 0 };
                         uint8_t id_1136 { 0 };
                         uint8_t id_1137 { shft_ref_204[id_1136] };
                         uint8_t id_1138 { 7 };
                         uint8_t id_1139 { uint8_t(id_1137 + id_1138) };
-                        Void id_1140 { ((void)(shft_ref_204[id_1135] = id_1139), ::dessser::VOID) };
+                        Void id_1140 { ((void)(shft_ref_204[id_1135] = id_1139), ::dessser::Void()) };
                         (void)id_1140;
                         uint8_t id_1141 { 128 };
                         bool id_1142 { bool(leb128_fst_207 >= id_1141) };
@@ -3139,10 +3138,10 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                     }
                     while_flag_1116 = let_res_1120;
                     if (while_flag_1116) {
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                     }
                   } while (while_flag_1116);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1143 { 0 };
                   uint32_t id_1144 { leb_ref_203[id_1143] };
                   uint8_t id_1145 { 0 };
@@ -3196,25 +3195,25 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                               ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1167 { id_1166, dlist3_snd_222 };
                               letpair_res_1165 = id_1167;
                             }
-                            Void id_1168 { ((void)(inits_src_ref_215[id_1163] = letpair_res_1165), ::dessser::VOID) };
+                            Void id_1168 { ((void)(inits_src_ref_215[id_1163] = letpair_res_1165), ::dessser::Void()) };
                             (void)id_1168;
                           }
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                         uint8_t id_1169 { 0 };
                         uint8_t id_1170 { 0 };
                         int32_t id_1171 { repeat_n_216[id_1170] };
                         int32_t id_1172 { 1L };
                         int32_t id_1173 { int32_t(id_1171 + id_1172) };
-                        Void id_1174 { ((void)(repeat_n_216[id_1169] = id_1173), ::dessser::VOID) };
+                        Void id_1174 { ((void)(repeat_n_216[id_1169] = id_1173), ::dessser::Void()) };
                         (void)id_1174;
                         (void)id_1174;
                       }
                     } while (while_flag_1156);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1175 { 0 };
                   ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1176 { inits_src_ref_215[id_1175] };
                   let_res_1153 = id_1176;
@@ -3276,17 +3275,17 @@ static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab
         bool id_1188 { bool(id_1187 == dsum1_fst_76) };
         ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f choose_res_1189;
         if (id_1188) {
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1190 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<0>, ::dessser::VOID) };
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1190 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<0>, ::dessser::Void()) };
           ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f id_1191 { id_1190, dsum1_snd_77 };
           choose_res_1189 = id_1191;
         } else {
           uint16_t id_1192 { 1 };
           bool id_1193 { bool(dsum1_fst_76 == id_1192) };
-          Void id_1194 { ((void)(assert(id_1193)), ::dessser::VOID) };
+          Void id_1194 { ((void)(assert(id_1193)), ::dessser::Void()) };
           (void)id_1194;
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1195 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<1>, ::dessser::VOID) };
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1195 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<1>, ::dessser::Void()) };
           ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f id_1196 { id_1195, dsum1_snd_77 };
           choose_res_1189 = id_1196;
         }
@@ -3398,10 +3397,10 @@ static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f9
         auto dsum1_snd_65 { std::get<1>(dsum1_63) };
         uint16_t id_1224 { 0 };
         bool id_1225 { bool(dsum1_fst_64 == id_1224) };
-        Void id_1226 { ((void)(assert(id_1225)), ::dessser::VOID) };
+        Void id_1226 { ((void)(assert(id_1225)), ::dessser::Void()) };
         (void)id_1226;
-        (void)::dessser::VOID;
-        std::shared_ptr<::dessser::gen::dashboard_widget::type>  id_1227 { std::make_shared<::dessser::gen::dashboard_widget::type>(std::in_place_index<0>, ::dessser::VOID) };
+        (void)::dessser::Void();
+        std::shared_ptr<::dessser::gen::dashboard_widget::type>  id_1227 { std::make_shared<::dessser::gen::dashboard_widget::type>(std::in_place_index<0>, ::dessser::Void()) };
         ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 id_1228 { id_1227, dsum1_snd_65 };
         letpair_res_1223 = id_1228;
       }
@@ -3542,7 +3541,7 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                 auto leb128_fst_233 { std::get<0>(leb128_232) };
                 auto leb128_snd_234 { std::get<1>(leb128_232) };
                 uint8_t id_1244 { 0 };
-                Void id_1245 { ((void)(p_ref_231[id_1244] = leb128_snd_234), ::dessser::VOID) };
+                Void id_1245 { ((void)(p_ref_231[id_1244] = leb128_snd_234), ::dessser::Void()) };
                 (void)id_1245;
                 uint8_t id_1246 { 0 };
                 uint8_t id_1247 { 127 };
@@ -3554,14 +3553,14 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                 uint8_t id_1253 { 0 };
                 uint32_t id_1254 { leb_ref_229[id_1253] };
                 uint32_t id_1255 { uint32_t(id_1252 | id_1254) };
-                Void id_1256 { ((void)(leb_ref_229[id_1246] = id_1255), ::dessser::VOID) };
+                Void id_1256 { ((void)(leb_ref_229[id_1246] = id_1255), ::dessser::Void()) };
                 (void)id_1256;
                 uint8_t id_1257 { 0 };
                 uint8_t id_1258 { 0 };
                 uint8_t id_1259 { shft_ref_230[id_1258] };
                 uint8_t id_1260 { 7 };
                 uint8_t id_1261 { uint8_t(id_1259 + id_1260) };
-                Void id_1262 { ((void)(shft_ref_230[id_1257] = id_1261), ::dessser::VOID) };
+                Void id_1262 { ((void)(shft_ref_230[id_1257] = id_1261), ::dessser::Void()) };
                 (void)id_1262;
                 uint8_t id_1263 { 128 };
                 bool id_1264 { bool(leb128_fst_233 >= id_1263) };
@@ -3571,10 +3570,10 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
             }
             while_flag_1238 = let_res_1242;
             if (while_flag_1238) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_1238);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_1265 { 0 };
           uint32_t id_1266 { leb_ref_229[id_1265] };
           Size id_1267 { Size(id_1266) };
@@ -3649,7 +3648,7 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                         auto leb128_fst_251 { std::get<0>(leb128_250) };
                         auto leb128_snd_252 { std::get<1>(leb128_250) };
                         uint8_t id_1296 { 0 };
-                        Void id_1297 { ((void)(p_ref_249[id_1296] = leb128_snd_252), ::dessser::VOID) };
+                        Void id_1297 { ((void)(p_ref_249[id_1296] = leb128_snd_252), ::dessser::Void()) };
                         (void)id_1297;
                         uint8_t id_1298 { 0 };
                         uint8_t id_1299 { 127 };
@@ -3661,14 +3660,14 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                         uint8_t id_1305 { 0 };
                         uint32_t id_1306 { leb_ref_247[id_1305] };
                         uint32_t id_1307 { uint32_t(id_1304 | id_1306) };
-                        Void id_1308 { ((void)(leb_ref_247[id_1298] = id_1307), ::dessser::VOID) };
+                        Void id_1308 { ((void)(leb_ref_247[id_1298] = id_1307), ::dessser::Void()) };
                         (void)id_1308;
                         uint8_t id_1309 { 0 };
                         uint8_t id_1310 { 0 };
                         uint8_t id_1311 { shft_ref_248[id_1310] };
                         uint8_t id_1312 { 7 };
                         uint8_t id_1313 { uint8_t(id_1311 + id_1312) };
-                        Void id_1314 { ((void)(shft_ref_248[id_1309] = id_1313), ::dessser::VOID) };
+                        Void id_1314 { ((void)(shft_ref_248[id_1309] = id_1313), ::dessser::Void()) };
                         (void)id_1314;
                         uint8_t id_1315 { 128 };
                         bool id_1316 { bool(leb128_fst_251 >= id_1315) };
@@ -3678,10 +3677,10 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                     }
                     while_flag_1290 = let_res_1294;
                     if (while_flag_1290) {
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                     }
                   } while (while_flag_1290);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1317 { 0 };
                   uint32_t id_1318 { leb_ref_247[id_1317] };
                   uint8_t id_1319 { 0 };
@@ -3735,25 +3734,25 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                               ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1341 { id_1340, dlist3_snd_266 };
                               letpair_res_1339 = id_1341;
                             }
-                            Void id_1342 { ((void)(inits_src_ref_259[id_1337] = letpair_res_1339), ::dessser::VOID) };
+                            Void id_1342 { ((void)(inits_src_ref_259[id_1337] = letpair_res_1339), ::dessser::Void()) };
                             (void)id_1342;
                           }
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                         uint8_t id_1343 { 0 };
                         uint8_t id_1344 { 0 };
                         int32_t id_1345 { repeat_n_260[id_1344] };
                         int32_t id_1346 { 1L };
                         int32_t id_1347 { int32_t(id_1345 + id_1346) };
-                        Void id_1348 { ((void)(repeat_n_260[id_1343] = id_1347), ::dessser::VOID) };
+                        Void id_1348 { ((void)(repeat_n_260[id_1343] = id_1347), ::dessser::Void()) };
                         (void)id_1348;
                         (void)id_1348;
                       }
                     } while (while_flag_1330);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1349 { 0 };
                   ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1350 { inits_src_ref_259[id_1349] };
                   let_res_1327 = id_1350;
@@ -3804,7 +3803,7 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                             auto leb128_fst_277 { std::get<0>(leb128_276) };
                             auto leb128_snd_278 { std::get<1>(leb128_276) };
                             uint8_t id_1370 { 0 };
-                            Void id_1371 { ((void)(p_ref_275[id_1370] = leb128_snd_278), ::dessser::VOID) };
+                            Void id_1371 { ((void)(p_ref_275[id_1370] = leb128_snd_278), ::dessser::Void()) };
                             (void)id_1371;
                             uint8_t id_1372 { 0 };
                             uint8_t id_1373 { 127 };
@@ -3816,14 +3815,14 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                             uint8_t id_1379 { 0 };
                             uint32_t id_1380 { leb_ref_273[id_1379] };
                             uint32_t id_1381 { uint32_t(id_1378 | id_1380) };
-                            Void id_1382 { ((void)(leb_ref_273[id_1372] = id_1381), ::dessser::VOID) };
+                            Void id_1382 { ((void)(leb_ref_273[id_1372] = id_1381), ::dessser::Void()) };
                             (void)id_1382;
                             uint8_t id_1383 { 0 };
                             uint8_t id_1384 { 0 };
                             uint8_t id_1385 { shft_ref_274[id_1384] };
                             uint8_t id_1386 { 7 };
                             uint8_t id_1387 { uint8_t(id_1385 + id_1386) };
-                            Void id_1388 { ((void)(shft_ref_274[id_1383] = id_1387), ::dessser::VOID) };
+                            Void id_1388 { ((void)(shft_ref_274[id_1383] = id_1387), ::dessser::Void()) };
                             (void)id_1388;
                             uint8_t id_1389 { 128 };
                             bool id_1390 { bool(leb128_fst_277 >= id_1389) };
@@ -3833,10 +3832,10 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                         }
                         while_flag_1364 = let_res_1368;
                         if (while_flag_1364) {
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
                       } while (while_flag_1364);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_1391 { 0 };
                       uint32_t id_1392 { leb_ref_273[id_1391] };
                       uint8_t id_1393 { 0 };
@@ -3890,25 +3889,25 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                                   ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1415 { id_1414, dlist3_snd_292 };
                                   letpair_res_1413 = id_1415;
                                 }
-                                Void id_1416 { ((void)(inits_src_ref_285[id_1411] = letpair_res_1413), ::dessser::VOID) };
+                                Void id_1416 { ((void)(inits_src_ref_285[id_1411] = letpair_res_1413), ::dessser::Void()) };
                                 (void)id_1416;
                               }
-                              (void)::dessser::VOID;
+                              (void)::dessser::Void();
                             }
-                            (void)::dessser::VOID;
+                            (void)::dessser::Void();
                             uint8_t id_1417 { 0 };
                             uint8_t id_1418 { 0 };
                             int32_t id_1419 { repeat_n_286[id_1418] };
                             int32_t id_1420 { 1L };
                             int32_t id_1421 { int32_t(id_1419 + id_1420) };
-                            Void id_1422 { ((void)(repeat_n_286[id_1417] = id_1421), ::dessser::VOID) };
+                            Void id_1422 { ((void)(repeat_n_286[id_1417] = id_1421), ::dessser::Void()) };
                             (void)id_1422;
                             (void)id_1422;
                           }
                         } while (while_flag_1404);
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_1423 { 0 };
                       ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1424 { inits_src_ref_285[id_1423] };
                       let_res_1401 = id_1424;
@@ -4026,7 +4025,7 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
                       auto leb128_fst_315 { std::get<0>(leb128_314) };
                       auto leb128_snd_316 { std::get<1>(leb128_314) };
                       uint8_t id_1452 { 0 };
-                      Void id_1453 { ((void)(p_ref_313[id_1452] = leb128_snd_316), ::dessser::VOID) };
+                      Void id_1453 { ((void)(p_ref_313[id_1452] = leb128_snd_316), ::dessser::Void()) };
                       (void)id_1453;
                       uint8_t id_1454 { 0 };
                       uint8_t id_1455 { 127 };
@@ -4038,14 +4037,14 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
                       uint8_t id_1461 { 0 };
                       uint32_t id_1462 { leb_ref_311[id_1461] };
                       uint32_t id_1463 { uint32_t(id_1460 | id_1462) };
-                      Void id_1464 { ((void)(leb_ref_311[id_1454] = id_1463), ::dessser::VOID) };
+                      Void id_1464 { ((void)(leb_ref_311[id_1454] = id_1463), ::dessser::Void()) };
                       (void)id_1464;
                       uint8_t id_1465 { 0 };
                       uint8_t id_1466 { 0 };
                       uint8_t id_1467 { shft_ref_312[id_1466] };
                       uint8_t id_1468 { 7 };
                       uint8_t id_1469 { uint8_t(id_1467 + id_1468) };
-                      Void id_1470 { ((void)(shft_ref_312[id_1465] = id_1469), ::dessser::VOID) };
+                      Void id_1470 { ((void)(shft_ref_312[id_1465] = id_1469), ::dessser::Void()) };
                       (void)id_1470;
                       uint8_t id_1471 { 128 };
                       bool id_1472 { bool(leb128_fst_315 >= id_1471) };
@@ -4055,10 +4054,10 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
                   }
                   while_flag_1446 = let_res_1450;
                   if (while_flag_1446) {
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
                 } while (while_flag_1446);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_1473 { 0 };
                 uint32_t id_1474 { leb_ref_311[id_1473] };
                 Size id_1475 { Size(id_1474) };
@@ -4096,7 +4095,7 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
         } else {
           uint16_t id_1486 { 1 };
           bool id_1487 { bool(dsum1_fst_306 == id_1486) };
-          Void id_1488 { ((void)(assert(id_1487)), ::dessser::VOID) };
+          Void id_1488 { ((void)(assert(id_1487)), ::dessser::Void()) };
           (void)id_1488;
           ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc id_1489 { chart_of_row_binary(dsum1_snd_307) };
           ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1490;

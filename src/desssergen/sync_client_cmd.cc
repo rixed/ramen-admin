@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -483,7 +482,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_client_cmd::t>
                         } else {
                           uint16_t id_115 { 9 };
                           bool id_116 { bool(label1_185 == id_115) };
-                          Void id_117 { ((void)(assert(id_116)), ::dessser::VOID) };
+                          Void id_117 { ((void)(assert(id_116)), ::dessser::Void()) };
                           (void)id_117;
                           choose_res_111 = ssum_dst_186;
                         }
@@ -695,7 +694,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_client_cmd::t> )>
                       } else {
                         uint16_t id_231 { 9 };
                         bool id_232 { bool(label2_168 == id_231) };
-                        Void id_233 { ((void)(assert(id_232)), ::dessser::VOID) };
+                        Void id_233 { ((void)(assert(id_232)), ::dessser::Void()) };
                         (void)id_233;
                         Size id_234 { 2UL };
                         choose_res_225 = id_234;
@@ -1136,10 +1135,10 @@ static std::function<::dessser::gen::sync_client_cmd::tad950dfaea2a70b4ad0338105
                         } else {
                           uint16_t id_371 { 9 };
                           bool id_372 { bool(dsum1_fst_64 == id_371) };
-                          Void id_373 { ((void)(assert(id_372)), ::dessser::VOID) };
+                          Void id_373 { ((void)(assert(id_372)), ::dessser::Void()) };
                           (void)id_373;
-                          (void)::dessser::VOID;
-                          std::shared_ptr<::dessser::gen::sync_client_cmd::t>  id_374 { std::make_shared<::dessser::gen::sync_client_cmd::t>(std::in_place_index<9>, ::dessser::VOID) };
+                          (void)::dessser::Void();
+                          std::shared_ptr<::dessser::gen::sync_client_cmd::t>  id_374 { std::make_shared<::dessser::gen::sync_client_cmd::t>(std::in_place_index<9>, ::dessser::Void()) };
                           ::dessser::gen::sync_client_cmd::tad950dfaea2a70b4ad0338105e6948fe id_375 { id_374, dsum1_snd_65 };
                           choose_res_365 = id_375;
                         }

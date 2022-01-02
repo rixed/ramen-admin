@@ -20,7 +20,7 @@ StorageForm::StorageForm(QWidget *parent) : AtomicForm(true, parent) {
       std::make_shared<dessser::gen::sync_key::t>(
           std::in_place_index<dessser::gen::sync_key::Storage>,
           std::in_place_index<dessser::gen::sync_key::TotalSize>,
-          dessser::VOID)};
+          dessser::Void())};
   KIntEditor *totalSizeEdit{new KIntEditor(u64OfQString, cw)};
   totalSizeEdit->setKey(totalSizeKey);
   totalSizeEdit->setValueFromStore();
@@ -30,7 +30,7 @@ StorageForm::StorageForm(QWidget *parent) : AtomicForm(true, parent) {
       std::make_shared<dessser::gen::sync_key::t>(
           std::in_place_index<dessser::gen::sync_key::Storage>,
           std::in_place_index<dessser::gen::sync_key::RecallCost>,
-          dessser::VOID)};
+          dessser::Void())};
   KFloatEditor *recallCostEdit{new KFloatEditor(cw, 0., 1.)};
   recallCostEdit->setKey(recallCostKey);
   recallCostEdit->setValueFromStore();

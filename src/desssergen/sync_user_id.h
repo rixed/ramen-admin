@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_sync_user_id
 #define DESSSER_GEN_sync_user_id
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

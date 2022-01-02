@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -171,7 +170,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::event_time_field::t
           uint16_t id_15 { uint16_t(id_14.index()) };
           uint16_t id_16 { 1 };
           bool id_17 { bool(id_15 == id_16) };
-          Void id_18 { ((void)(assert(id_17)), ::dessser::VOID) };
+          Void id_18 { ((void)(assert(id_17)), ::dessser::Void()) };
           (void)id_18;
           choose_res_13 = ssum_dst_93;
         }
@@ -224,7 +223,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::event_time_field::t> )
         uint16_t id_36 { uint16_t(id_35.index()) };
         uint16_t id_37 { 1 };
         bool id_38 { bool(id_36 == id_37) };
-        Void id_39 { ((void)(assert(id_38)), ::dessser::VOID) };
+        Void id_39 { ((void)(assert(id_38)), ::dessser::Void()) };
         (void)id_39;
         Size id_40 { 2UL };
         Size id_41 { Size(sz_88 + id_40) };
@@ -285,17 +284,17 @@ static std::function<::dessser::gen::event_time_field::t3e9f667e2981ef35bfede890
             bool id_55 { bool(id_54 == dsum1_fst_67) };
             ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d choose_res_56;
             if (id_55) {
-              (void)::dessser::VOID;
-              ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_57 { std::in_place_index<0>, ::dessser::VOID };
+              (void)::dessser::Void();
+              ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_57 { std::in_place_index<0>, ::dessser::Void() };
               ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_58 { id_57, dsum1_snd_68 };
               choose_res_56 = id_58;
             } else {
               uint16_t id_59 { 1 };
               bool id_60 { bool(dsum1_fst_67 == id_59) };
-              Void id_61 { ((void)(assert(id_60)), ::dessser::VOID) };
+              Void id_61 { ((void)(assert(id_60)), ::dessser::Void()) };
               (void)id_61;
-              (void)::dessser::VOID;
-              ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_62 { std::in_place_index<1>, ::dessser::VOID };
+              (void)::dessser::Void();
+              ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3 id_62 { std::in_place_index<1>, ::dessser::Void() };
               ::dessser::gen::event_time_field::tc947f151aba986b46667a75dce4e062d id_63 { id_62, dsum1_snd_68 };
               choose_res_56 = id_63;
             }

@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -285,14 +284,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::
               choose_res_35 = id_43;
             }
             Pointer id_44 { id_30.writeU8(choose_res_35) };
-            Void id_45 { ((void)(leb128_ptr_102[id_28] = id_44), ::dessser::VOID) };
+            Void id_45 { ((void)(leb128_ptr_102[id_28] = id_44), ::dessser::Void()) };
             (void)id_45;
             uint8_t id_46 { 0 };
             uint8_t id_47 { 0 };
             uint32_t id_48 { leb128_sz_101[id_47] };
             uint8_t id_49 { 7 };
             uint32_t id_50 { uint32_t(id_48 >> id_49) };
-            Void id_51 { ((void)(leb128_sz_101[id_46] = id_50), ::dessser::VOID) };
+            Void id_51 { ((void)(leb128_sz_101[id_46] = id_50), ::dessser::Void()) };
             (void)id_51;
             uint8_t id_52 { 0 };
             uint32_t id_53 { leb128_sz_101[id_52] };
@@ -300,10 +299,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::
             bool id_55 { bool(id_53 > id_54) };
             while_flag_27 = id_55;
             if (while_flag_27) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_27);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_56 { 0 };
           Pointer id_57 { leb128_ptr_102[id_56] };
           let_res_26 = id_57;
@@ -415,11 +414,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> 
               uint32_t id_105 { lebsz_ref_96[id_104] };
               uint32_t id_106 { 1U };
               uint32_t id_107 { uint32_t(id_105 + id_106) };
-              Void id_108 { ((void)(lebsz_ref_96[id_103] = id_107), ::dessser::VOID) };
+              Void id_108 { ((void)(lebsz_ref_96[id_103] = id_107), ::dessser::Void()) };
               (void)id_108;
             }
           } while (while_flag_95);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_109 { 0 };
           uint32_t id_110 { lebsz_ref_96[id_109] };
           Size id_111 { Size(id_110) };
@@ -573,7 +572,7 @@ static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1
                             auto leb128_fst_73 { std::get<0>(leb128_72) };
                             auto leb128_snd_74 { std::get<1>(leb128_72) };
                             uint8_t id_163 { 0 };
-                            Void id_164 { ((void)(p_ref_71[id_163] = leb128_snd_74), ::dessser::VOID) };
+                            Void id_164 { ((void)(p_ref_71[id_163] = leb128_snd_74), ::dessser::Void()) };
                             (void)id_164;
                             uint8_t id_165 { 0 };
                             uint8_t id_166 { 127 };
@@ -585,14 +584,14 @@ static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1
                             uint8_t id_172 { 0 };
                             uint32_t id_173 { leb_ref_69[id_172] };
                             uint32_t id_174 { uint32_t(id_171 | id_173) };
-                            Void id_175 { ((void)(leb_ref_69[id_165] = id_174), ::dessser::VOID) };
+                            Void id_175 { ((void)(leb_ref_69[id_165] = id_174), ::dessser::Void()) };
                             (void)id_175;
                             uint8_t id_176 { 0 };
                             uint8_t id_177 { 0 };
                             uint8_t id_178 { shft_ref_70[id_177] };
                             uint8_t id_179 { 7 };
                             uint8_t id_180 { uint8_t(id_178 + id_179) };
-                            Void id_181 { ((void)(shft_ref_70[id_176] = id_180), ::dessser::VOID) };
+                            Void id_181 { ((void)(shft_ref_70[id_176] = id_180), ::dessser::Void()) };
                             (void)id_181;
                             uint8_t id_182 { 128 };
                             bool id_183 { bool(leb128_fst_73 >= id_182) };
@@ -602,10 +601,10 @@ static std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1
                         }
                         while_flag_157 = let_res_161;
                         if (while_flag_157) {
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
                       } while (while_flag_157);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_184 { 0 };
                       uint32_t id_185 { leb_ref_69[id_184] };
                       Size id_186 { Size(id_185) };

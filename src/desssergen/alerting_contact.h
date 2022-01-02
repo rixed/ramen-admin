@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_alerting_contact
 #define DESSSER_GEN_alerting_contact
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

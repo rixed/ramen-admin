@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_worker
 #define DESSSER_GEN_worker
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_src_path
 #define DESSSER_GEN_src_path
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

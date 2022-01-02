@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -179,7 +178,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t>
           uint16_t id_16 { uint16_t(id_15.index()) };
           uint16_t id_17 { 2 };
           bool id_18 { bool(id_16 == id_17) };
-          Void id_19 { ((void)(assert(id_18)), ::dessser::VOID) };
+          Void id_19 { ((void)(assert(id_18)), ::dessser::Void()) };
           (void)id_19;
           choose_res_14 = ssum_dst_92;
         }
@@ -243,7 +242,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )>
         uint16_t id_42 { uint16_t(id_41.index()) };
         uint16_t id_43 { 2 };
         bool id_44 { bool(id_42 == id_43) };
-        Void id_45 { ((void)(assert(id_44)), ::dessser::VOID) };
+        Void id_45 { ((void)(assert(id_44)), ::dessser::Void()) };
         (void)id_45;
         Size id_46 { 2UL };
         choose_res_39 = id_46;
@@ -311,8 +310,8 @@ static std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2
         bool id_64 { bool(id_63 == dsum1_fst_64) };
         ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 choose_res_65;
         if (id_64) {
-          (void)::dessser::VOID;
-          ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_66 { std::in_place_index<0>, ::dessser::VOID };
+          (void)::dessser::Void();
+          ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_66 { std::in_place_index<0>, ::dessser::Void() };
           ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_67 { id_66, dsum1_snd_65 };
           choose_res_65 = id_67;
         } else {
@@ -320,17 +319,17 @@ static std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2
           bool id_69 { bool(id_68 == dsum1_fst_64) };
           ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 choose_res_70;
           if (id_69) {
-            (void)::dessser::VOID;
-            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_71 { std::in_place_index<1>, ::dessser::VOID };
+            (void)::dessser::Void();
+            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_71 { std::in_place_index<1>, ::dessser::Void() };
             ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_72 { id_71, dsum1_snd_65 };
             choose_res_70 = id_72;
           } else {
             uint16_t id_73 { 2 };
             bool id_74 { bool(dsum1_fst_64 == id_73) };
-            Void id_75 { ((void)(assert(id_74)), ::dessser::VOID) };
+            Void id_75 { ((void)(assert(id_74)), ::dessser::Void()) };
             (void)id_75;
-            (void)::dessser::VOID;
-            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_76 { std::in_place_index<2>, ::dessser::VOID };
+            (void)::dessser::Void();
+            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_76 { std::in_place_index<2>, ::dessser::Void() };
             ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_77 { id_76, dsum1_snd_65 };
             choose_res_70 = id_77;
           }

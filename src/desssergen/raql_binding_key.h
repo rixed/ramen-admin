@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_binding_key
 #define DESSSER_GEN_raql_binding_key
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -12,7 +12,7 @@
 static std::shared_ptr<dessser::gen::sync_key::t const> targetConfigKey{
     std::make_shared<dessser::gen::sync_key::t>(
         std::in_place_index<dessser::gen::sync_key::TargetConfig>,
-        dessser::VOID)};
+        dessser::Void())};
 
 TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
     std::string const &site_, std::string const &program_,
@@ -47,7 +47,7 @@ TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
                   (customProgram + '/' + customFunction),
                   std::make_shared<dessser::gen::sync_key::per_worker_data>(
                       std::in_place_index<dessser::gen::sync_key::Worker>,
-                      dessser::VOID)))));
+                      dessser::Void())))));
 
   addTransition(WaitSource, WaitInfo, OnSet, sourceKey);
   addTransition(WaitInfo, WaitLockRC, OnSet, infoKey);

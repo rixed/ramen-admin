@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_net_protocol
 #define DESSSER_GEN_raql_net_protocol
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

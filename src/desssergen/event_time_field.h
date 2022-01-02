@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_event_time_field
 #define DESSSER_GEN_event_time_field
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

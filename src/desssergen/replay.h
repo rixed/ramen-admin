@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_replay
 #define DESSSER_GEN_replay
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_fq_function_name
 #define DESSSER_GEN_fq_function_name
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

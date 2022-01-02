@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_runtime_stats
 #define DESSSER_GEN_runtime_stats
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_replayer
 #define DESSSER_GEN_replayer
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

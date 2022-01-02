@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_sync_socket
 #define DESSSER_GEN_sync_socket
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

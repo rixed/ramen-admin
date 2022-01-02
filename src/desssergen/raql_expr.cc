@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -2076,14 +2075,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                   choose_res_24 = id_32;
                 }
                 Pointer id_33 { id_19.writeU8(choose_res_24) };
-                Void id_34 { ((void)(leb128_ptr_1283[id_17] = id_33), ::dessser::VOID) };
+                Void id_34 { ((void)(leb128_ptr_1283[id_17] = id_33), ::dessser::Void()) };
                 (void)id_34;
                 uint8_t id_35 { 0 };
                 uint8_t id_36 { 0 };
                 uint32_t id_37 { leb128_sz_1282[id_36] };
                 uint8_t id_38 { 7 };
                 uint32_t id_39 { uint32_t(id_37 >> id_38) };
-                Void id_40 { ((void)(leb128_sz_1282[id_35] = id_39), ::dessser::VOID) };
+                Void id_40 { ((void)(leb128_sz_1282[id_35] = id_39), ::dessser::Void()) };
                 (void)id_40;
                 uint8_t id_41 { 0 };
                 uint32_t id_42 { leb128_sz_1282[id_41] };
@@ -2091,10 +2090,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                 bool id_44 { bool(id_42 > id_43) };
                 while_flag_16 = id_44;
                 if (while_flag_16) {
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                 }
               } while (while_flag_16);
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
               uint8_t id_45 { 0 };
               Pointer id_46 { leb128_ptr_1283[id_45] };
               let_res_15 = id_46;
@@ -2117,18 +2116,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                 uint8_t id_55 { 0 };
                 Pointer id_56 { dst_ref_1284[id_55] };
                 Pointer id_57 { fun0(x_1286, id_56) };
-                Void id_58 { ((void)(dst_ref_1284[id_54] = id_57), ::dessser::VOID) };
+                Void id_58 { ((void)(dst_ref_1284[id_54] = id_57), ::dessser::Void()) };
                 (void)id_58;
                 uint8_t id_59 { 0 };
                 int32_t id_60 { 1L };
                 uint8_t id_61 { 0 };
                 int32_t id_62 { n_ref_1285[id_61] };
                 int32_t id_63 { int32_t(id_60 + id_62) };
-                Void id_64 { ((void)(n_ref_1285[id_59] = id_63), ::dessser::VOID) };
+                Void id_64 { ((void)(n_ref_1285[id_59] = id_63), ::dessser::Void()) };
                 (void)id_64;
                 (void)id_64;
               }
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
               uint8_t id_65 { 0 };
               Pointer id_66 { dst_ref_1284[id_65] };
               let_res_51 = id_66;
@@ -2176,14 +2175,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                     choose_res_85 = id_93;
                   }
                   Pointer id_94 { id_80.writeU8(choose_res_85) };
-                  Void id_95 { ((void)(leb128_ptr_1276[id_78] = id_94), ::dessser::VOID) };
+                  Void id_95 { ((void)(leb128_ptr_1276[id_78] = id_94), ::dessser::Void()) };
                   (void)id_95;
                   uint8_t id_96 { 0 };
                   uint8_t id_97 { 0 };
                   uint32_t id_98 { leb128_sz_1275[id_97] };
                   uint8_t id_99 { 7 };
                   uint32_t id_100 { uint32_t(id_98 >> id_99) };
-                  Void id_101 { ((void)(leb128_sz_1275[id_96] = id_100), ::dessser::VOID) };
+                  Void id_101 { ((void)(leb128_sz_1275[id_96] = id_100), ::dessser::Void()) };
                   (void)id_101;
                   uint8_t id_102 { 0 };
                   uint32_t id_103 { leb128_sz_1275[id_102] };
@@ -2191,10 +2190,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                   bool id_105 { bool(id_103 > id_104) };
                   while_flag_77 = id_105;
                   if (while_flag_77) {
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
                 } while (while_flag_77);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_106 { 0 };
                 Pointer id_107 { leb128_ptr_1276[id_106] };
                 let_res_76 = id_107;
@@ -2226,18 +2225,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                     let_res_119 = id_122;
                   }
                   Pointer id_123 { fun0(id_116, let_res_119) };
-                  Void id_124 { ((void)(dst_ref_1277[id_115] = id_123), ::dessser::VOID) };
+                  Void id_124 { ((void)(dst_ref_1277[id_115] = id_123), ::dessser::Void()) };
                   (void)id_124;
                   uint8_t id_125 { 0 };
                   int32_t id_126 { 1L };
                   uint8_t id_127 { 0 };
                   int32_t id_128 { n_ref_1278[id_127] };
                   int32_t id_129 { int32_t(id_126 + id_128) };
-                  Void id_130 { ((void)(n_ref_1278[id_125] = id_129), ::dessser::VOID) };
+                  Void id_130 { ((void)(n_ref_1278[id_125] = id_129), ::dessser::Void()) };
                   (void)id_130;
                   (void)id_130;
                 }
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_131 { 0 };
                 Pointer id_132 { dst_ref_1277[id_131] };
                 let_res_112 = id_132;
@@ -2285,14 +2284,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                       choose_res_151 = id_159;
                     }
                     Pointer id_160 { id_146.writeU8(choose_res_151) };
-                    Void id_161 { ((void)(leb128_ptr_1271[id_144] = id_160), ::dessser::VOID) };
+                    Void id_161 { ((void)(leb128_ptr_1271[id_144] = id_160), ::dessser::Void()) };
                     (void)id_161;
                     uint8_t id_162 { 0 };
                     uint8_t id_163 { 0 };
                     uint32_t id_164 { leb128_sz_1270[id_163] };
                     uint8_t id_165 { 7 };
                     uint32_t id_166 { uint32_t(id_164 >> id_165) };
-                    Void id_167 { ((void)(leb128_sz_1270[id_162] = id_166), ::dessser::VOID) };
+                    Void id_167 { ((void)(leb128_sz_1270[id_162] = id_166), ::dessser::Void()) };
                     (void)id_167;
                     uint8_t id_168 { 0 };
                     uint32_t id_169 { leb128_sz_1270[id_168] };
@@ -2300,10 +2299,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                     bool id_171 { bool(id_169 > id_170) };
                     while_flag_143 = id_171;
                     if (while_flag_143) {
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                     }
                   } while (while_flag_143);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_172 { 0 };
                   Pointer id_173 { leb128_ptr_1271[id_172] };
                   let_res_142 = id_173;
@@ -2326,18 +2325,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                     uint8_t id_182 { 0 };
                     Pointer id_183 { dst_ref_1272[id_182] };
                     Pointer id_184 { fun0(x_1274, id_183) };
-                    Void id_185 { ((void)(dst_ref_1272[id_181] = id_184), ::dessser::VOID) };
+                    Void id_185 { ((void)(dst_ref_1272[id_181] = id_184), ::dessser::Void()) };
                     (void)id_185;
                     uint8_t id_186 { 0 };
                     int32_t id_187 { 1L };
                     uint8_t id_188 { 0 };
                     int32_t id_189 { n_ref_1273[id_188] };
                     int32_t id_190 { int32_t(id_187 + id_189) };
-                    Void id_191 { ((void)(n_ref_1273[id_186] = id_190), ::dessser::VOID) };
+                    Void id_191 { ((void)(n_ref_1273[id_186] = id_190), ::dessser::Void()) };
                     (void)id_191;
                     (void)id_191;
                   }
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_192 { 0 };
                   Pointer id_193 { dst_ref_1272[id_192] };
                   let_res_178 = id_193;
@@ -2386,14 +2385,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                         choose_res_213 = id_221;
                       }
                       Pointer id_222 { id_208.writeU8(choose_res_213) };
-                      Void id_223 { ((void)(leb128_ptr_1263[id_206] = id_222), ::dessser::VOID) };
+                      Void id_223 { ((void)(leb128_ptr_1263[id_206] = id_222), ::dessser::Void()) };
                       (void)id_223;
                       uint8_t id_224 { 0 };
                       uint8_t id_225 { 0 };
                       uint32_t id_226 { leb128_sz_1262[id_225] };
                       uint8_t id_227 { 7 };
                       uint32_t id_228 { uint32_t(id_226 >> id_227) };
-                      Void id_229 { ((void)(leb128_sz_1262[id_224] = id_228), ::dessser::VOID) };
+                      Void id_229 { ((void)(leb128_sz_1262[id_224] = id_228), ::dessser::Void()) };
                       (void)id_229;
                       uint8_t id_230 { 0 };
                       uint32_t id_231 { leb128_sz_1262[id_230] };
@@ -2401,10 +2400,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                       bool id_233 { bool(id_231 > id_232) };
                       while_flag_205 = id_233;
                       if (while_flag_205) {
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
                     } while (while_flag_205);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_234 { 0 };
                     Pointer id_235 { leb128_ptr_1263[id_234] };
                     let_res_204 = id_235;
@@ -2431,18 +2430,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                       Pointer id_248 { dst_ref_1264[id_247] };
                       Pointer id_249 { fun0(id_246, id_248) };
                       Pointer id_250 { fun0(id_245, id_249) };
-                      Void id_251 { ((void)(dst_ref_1264[id_244] = id_250), ::dessser::VOID) };
+                      Void id_251 { ((void)(dst_ref_1264[id_244] = id_250), ::dessser::Void()) };
                       (void)id_251;
                       uint8_t id_252 { 0 };
                       int32_t id_253 { 1L };
                       uint8_t id_254 { 0 };
                       int32_t id_255 { n_ref_1265[id_254] };
                       int32_t id_256 { int32_t(id_253 + id_255) };
-                      Void id_257 { ((void)(n_ref_1265[id_252] = id_256), ::dessser::VOID) };
+                      Void id_257 { ((void)(n_ref_1265[id_252] = id_256), ::dessser::Void()) };
                       (void)id_257;
                       (void)id_257;
                     }
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_258 { 0 };
                     Pointer id_259 { dst_ref_1264[id_258] };
                     let_res_240 = id_259;
@@ -2605,14 +2604,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                     choose_res_353 = id_361;
                                                   }
                                                   Pointer id_362 { id_348.writeU8(choose_res_353) };
-                                                  Void id_363 { ((void)(leb128_ptr_1258[id_346] = id_362), ::dessser::VOID) };
+                                                  Void id_363 { ((void)(leb128_ptr_1258[id_346] = id_362), ::dessser::Void()) };
                                                   (void)id_363;
                                                   uint8_t id_364 { 0 };
                                                   uint8_t id_365 { 0 };
                                                   uint32_t id_366 { leb128_sz_1257[id_365] };
                                                   uint8_t id_367 { 7 };
                                                   uint32_t id_368 { uint32_t(id_366 >> id_367) };
-                                                  Void id_369 { ((void)(leb128_sz_1257[id_364] = id_368), ::dessser::VOID) };
+                                                  Void id_369 { ((void)(leb128_sz_1257[id_364] = id_368), ::dessser::Void()) };
                                                   (void)id_369;
                                                   uint8_t id_370 { 0 };
                                                   uint32_t id_371 { leb128_sz_1257[id_370] };
@@ -2620,10 +2619,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                   bool id_373 { bool(id_371 > id_372) };
                                                   while_flag_345 = id_373;
                                                   if (while_flag_345) {
-                                                    (void)::dessser::VOID;
+                                                    (void)::dessser::Void();
                                                   }
                                                 } while (while_flag_345);
-                                                (void)::dessser::VOID;
+                                                (void)::dessser::Void();
                                                 uint8_t id_374 { 0 };
                                                 Pointer id_375 { leb128_ptr_1258[id_374] };
                                                 let_res_344 = id_375;
@@ -2649,18 +2648,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                   uint8_t id_387 { 0 };
                                                   Pointer id_388 { dst_ref_1259[id_387] };
                                                   Pointer id_389 { fun386(x_1261, id_388) };
-                                                  Void id_390 { ((void)(dst_ref_1259[id_385] = id_389), ::dessser::VOID) };
+                                                  Void id_390 { ((void)(dst_ref_1259[id_385] = id_389), ::dessser::Void()) };
                                                   (void)id_390;
                                                   uint8_t id_391 { 0 };
                                                   int32_t id_392 { 1L };
                                                   uint8_t id_393 { 0 };
                                                   int32_t id_394 { n_ref_1260[id_393] };
                                                   int32_t id_395 { int32_t(id_392 + id_394) };
-                                                  Void id_396 { ((void)(n_ref_1260[id_391] = id_395), ::dessser::VOID) };
+                                                  Void id_396 { ((void)(n_ref_1260[id_391] = id_395), ::dessser::Void()) };
                                                   (void)id_396;
                                                   (void)id_396;
                                                 }
-                                                (void)::dessser::VOID;
+                                                (void)::dessser::Void();
                                                 uint8_t id_397 { 0 };
                                                 Pointer id_398 { dst_ref_1259[id_397] };
                                                 let_res_380 = id_398;
@@ -2671,7 +2670,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                           } else {
                                             uint16_t id_399 { 8 };
                                             bool id_400 { bool(label1_1255 == id_399) };
-                                            Void id_401 { ((void)(assert(id_400)), ::dessser::VOID) };
+                                            Void id_401 { ((void)(assert(id_400)), ::dessser::Void()) };
                                             (void)id_401;
                                             choose_res_335 = ssum_dst_1256;
                                           }
@@ -2788,7 +2787,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                             uint16_t id_470 { uint16_t(id_469.index()) };
                                             uint16_t id_471 { 1 };
                                             bool id_472 { bool(id_470 == id_471) };
-                                            Void id_473 { ((void)(assert(id_472)), ::dessser::VOID) };
+                                            Void id_473 { ((void)(assert(id_472)), ::dessser::Void()) };
                                             (void)id_473;
                                             choose_res_463 = ssum_dst_1253;
                                           }
@@ -3032,14 +3031,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                                                                                 choose_res_591 = id_599;
                                                                                                               }
                                                                                                               Pointer id_600 { id_586.writeU8(choose_res_591) };
-                                                                                                              Void id_601 { ((void)(leb128_ptr_1250[id_584] = id_600), ::dessser::VOID) };
+                                                                                                              Void id_601 { ((void)(leb128_ptr_1250[id_584] = id_600), ::dessser::Void()) };
                                                                                                               (void)id_601;
                                                                                                               uint8_t id_602 { 0 };
                                                                                                               uint8_t id_603 { 0 };
                                                                                                               uint32_t id_604 { leb128_sz_1249[id_603] };
                                                                                                               uint8_t id_605 { 7 };
                                                                                                               uint32_t id_606 { uint32_t(id_604 >> id_605) };
-                                                                                                              Void id_607 { ((void)(leb128_sz_1249[id_602] = id_606), ::dessser::VOID) };
+                                                                                                              Void id_607 { ((void)(leb128_sz_1249[id_602] = id_606), ::dessser::Void()) };
                                                                                                               (void)id_607;
                                                                                                               uint8_t id_608 { 0 };
                                                                                                               uint32_t id_609 { leb128_sz_1249[id_608] };
@@ -3047,10 +3046,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                                                                               bool id_611 { bool(id_609 > id_610) };
                                                                                                               while_flag_583 = id_611;
                                                                                                               if (while_flag_583) {
-                                                                                                                (void)::dessser::VOID;
+                                                                                                                (void)::dessser::Void();
                                                                                                               }
                                                                                                             } while (while_flag_583);
-                                                                                                            (void)::dessser::VOID;
+                                                                                                            (void)::dessser::Void();
                                                                                                             uint8_t id_612 { 0 };
                                                                                                             Pointer id_613 { leb128_ptr_1250[id_612] };
                                                                                                             let_res_582 = id_613;
@@ -3086,7 +3085,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                                                                             } else {
                                                                                                               uint16_t id_630 { 40 };
                                                                                                               bool id_631 { bool(label1_1247 == id_630) };
-                                                                                                              Void id_632 { ((void)(assert(id_631)), ::dessser::VOID) };
+                                                                                                              Void id_632 { ((void)(assert(id_631)), ::dessser::Void()) };
                                                                                                               (void)id_632;
                                                                                                               choose_res_629 = ssum_dst_1248;
                                                                                                             }
@@ -3211,7 +3210,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                     } else {
                                       uint16_t id_654 { 3 };
                                       bool id_655 { bool(label1_1239 == id_654) };
-                                      Void id_656 { ((void)(assert(id_655)), ::dessser::VOID) };
+                                      Void id_656 { ((void)(assert(id_655)), ::dessser::Void()) };
                                       (void)id_656;
                                       choose_res_653 = ssum_dst_1240;
                                     }
@@ -3263,14 +3262,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                       choose_res_675 = id_683;
                                     }
                                     Pointer id_684 { id_670.writeU8(choose_res_675) };
-                                    Void id_685 { ((void)(leb128_ptr_1243[id_668] = id_684), ::dessser::VOID) };
+                                    Void id_685 { ((void)(leb128_ptr_1243[id_668] = id_684), ::dessser::Void()) };
                                     (void)id_685;
                                     uint8_t id_686 { 0 };
                                     uint8_t id_687 { 0 };
                                     uint32_t id_688 { leb128_sz_1242[id_687] };
                                     uint8_t id_689 { 7 };
                                     uint32_t id_690 { uint32_t(id_688 >> id_689) };
-                                    Void id_691 { ((void)(leb128_sz_1242[id_686] = id_690), ::dessser::VOID) };
+                                    Void id_691 { ((void)(leb128_sz_1242[id_686] = id_690), ::dessser::Void()) };
                                     (void)id_691;
                                     uint8_t id_692 { 0 };
                                     uint32_t id_693 { leb128_sz_1242[id_692] };
@@ -3278,10 +3277,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                     bool id_695 { bool(id_693 > id_694) };
                                     while_flag_667 = id_695;
                                     if (while_flag_667) {
-                                      (void)::dessser::VOID;
+                                      (void)::dessser::Void();
                                     }
                                   } while (while_flag_667);
-                                  (void)::dessser::VOID;
+                                  (void)::dessser::Void();
                                   uint8_t id_696 { 0 };
                                   Pointer id_697 { leb128_ptr_1243[id_696] };
                                   let_res_666 = id_697;
@@ -3306,18 +3305,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                     uint8_t id_708 { 0 };
                                     Pointer id_709 { dst_ref_1244[id_708] };
                                     Pointer id_710 { fun0(x_1246, id_709) };
-                                    Void id_711 { ((void)(dst_ref_1244[id_707] = id_710), ::dessser::VOID) };
+                                    Void id_711 { ((void)(dst_ref_1244[id_707] = id_710), ::dessser::Void()) };
                                     (void)id_711;
                                     uint8_t id_712 { 0 };
                                     int32_t id_713 { 1L };
                                     uint8_t id_714 { 0 };
                                     int32_t id_715 { n_ref_1245[id_714] };
                                     int32_t id_716 { int32_t(id_713 + id_715) };
-                                    Void id_717 { ((void)(n_ref_1245[id_712] = id_716), ::dessser::VOID) };
+                                    Void id_717 { ((void)(n_ref_1245[id_712] = id_716), ::dessser::Void()) };
                                     (void)id_717;
                                     (void)id_717;
                                   }
-                                  (void)::dessser::VOID;
+                                  (void)::dessser::Void();
                                   uint8_t id_718 { 0 };
                                   Pointer id_719 { dst_ref_1244[id_718] };
                                   let_res_702 = id_719;
@@ -3504,7 +3503,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                                                   } else {
                                                                                     uint16_t id_814 { 25 };
                                                                                     bool id_815 { bool(label1_1235 == id_814) };
-                                                                                    Void id_816 { ((void)(assert(id_815)), ::dessser::VOID) };
+                                                                                    Void id_816 { ((void)(assert(id_815)), ::dessser::Void()) };
                                                                                     (void)id_816;
                                                                                     choose_res_813 = ssum_dst_1236;
                                                                                   }
@@ -3566,7 +3565,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                             } else {
                               uint16_t id_819 { 4 };
                               bool id_820 { bool(label1_1228 == id_819) };
-                              Void id_821 { ((void)(assert(id_820)), ::dessser::VOID) };
+                              Void id_821 { ((void)(assert(id_820)), ::dessser::Void()) };
                               (void)id_821;
                               ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_822 { (*p_0).text };
                               ::dessser::gen::raql_expr::t4f2a1c97d4b8ab12303614ba4866ca7e id_823 { std::get<4 /* Stateless */>(id_822) };
@@ -3607,7 +3606,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                   uint16_t id_853 { uint16_t(id_852.index()) };
                                   uint16_t id_854 { 1 };
                                   bool id_855 { bool(id_853 == id_854) };
-                                  Void id_856 { ((void)(assert(id_855)), ::dessser::VOID) };
+                                  Void id_856 { ((void)(assert(id_855)), ::dessser::Void()) };
                                   (void)id_856;
                                   choose_res_848 = ssum_dst_1231;
                                 }
@@ -3658,7 +3657,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                         uint16_t id_879 { uint16_t(id_878.index()) };
                         uint16_t id_880 { 1 };
                         bool id_881 { bool(id_879 == id_880) };
-                        Void id_882 { ((void)(assert(id_881)), ::dessser::VOID) };
+                        Void id_882 { ((void)(assert(id_881)), ::dessser::Void()) };
                         (void)id_882;
                         choose_res_875 = ssum_dst_1172;
                       }
@@ -3832,7 +3831,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                                           } else {
                                                             uint16_t id_984 { 14 };
                                                             bool id_985 { bool(label1_1223 == id_984) };
-                                                            Void id_986 { ((void)(assert(id_985)), ::dessser::VOID) };
+                                                            Void id_986 { ((void)(assert(id_985)), ::dessser::Void()) };
                                                             (void)id_986;
                                                             choose_res_983 = ssum_dst_1224;
                                                           }
@@ -3916,7 +3915,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                       } else {
                                         uint16_t id_1019 { 3 };
                                         bool id_1020 { bool(label1_1219 == id_1019) };
-                                        Void id_1021 { ((void)(assert(id_1020)), ::dessser::VOID) };
+                                        Void id_1021 { ((void)(assert(id_1020)), ::dessser::Void()) };
                                         (void)id_1021;
                                         choose_res_1018 = ssum_dst_1220;
                                       }
@@ -3978,7 +3977,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                       } else {
                                         uint16_t id_1057 { 2 };
                                         bool id_1058 { bool(label1_1214 == id_1057) };
-                                        Void id_1059 { ((void)(assert(id_1058)), ::dessser::VOID) };
+                                        Void id_1059 { ((void)(assert(id_1058)), ::dessser::Void()) };
                                         (void)id_1059;
                                         ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1060 { (*p_0).text };
                                         ::dessser::gen::raql_expr::t653dea3e3c942d4a754bc69dc55e032d id_1061 { std::get<5 /* Stateful */>(id_1060) };
@@ -4055,7 +4054,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                       uint16_t id_1116 { uint16_t(id_1115.index()) };
                                       uint16_t id_1117 { 1 };
                                       bool id_1118 { bool(id_1116 == id_1117) };
-                                      Void id_1119 { ((void)(assert(id_1118)), ::dessser::VOID) };
+                                      Void id_1119 { ((void)(assert(id_1118)), ::dessser::Void()) };
                                       (void)id_1119;
                                       ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1120 { (*p_0).text };
                                       ::dessser::gen::raql_expr::t653dea3e3c942d4a754bc69dc55e032d id_1121 { std::get<5 /* Stateful */>(id_1120) };
@@ -4124,7 +4123,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                         uint16_t id_1172 { uint16_t(id_1171.index()) };
                                         uint16_t id_1173 { 1 };
                                         bool id_1174 { bool(id_1172 == id_1173) };
-                                        Void id_1175 { ((void)(assert(id_1174)), ::dessser::VOID) };
+                                        Void id_1175 { ((void)(assert(id_1174)), ::dessser::Void()) };
                                         (void)id_1175;
                                         ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1176 { (*p_0).text };
                                         ::dessser::gen::raql_expr::t653dea3e3c942d4a754bc69dc55e032d id_1177 { std::get<5 /* Stateful */>(id_1176) };
@@ -4197,14 +4196,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                               choose_res_1217 = id_1225;
                                             }
                                             Pointer id_1226 { id_1212.writeU8(choose_res_1217) };
-                                            Void id_1227 { ((void)(leb128_ptr_1204[id_1210] = id_1226), ::dessser::VOID) };
+                                            Void id_1227 { ((void)(leb128_ptr_1204[id_1210] = id_1226), ::dessser::Void()) };
                                             (void)id_1227;
                                             uint8_t id_1228 { 0 };
                                             uint8_t id_1229 { 0 };
                                             uint32_t id_1230 { leb128_sz_1203[id_1229] };
                                             uint8_t id_1231 { 7 };
                                             uint32_t id_1232 { uint32_t(id_1230 >> id_1231) };
-                                            Void id_1233 { ((void)(leb128_sz_1203[id_1228] = id_1232), ::dessser::VOID) };
+                                            Void id_1233 { ((void)(leb128_sz_1203[id_1228] = id_1232), ::dessser::Void()) };
                                             (void)id_1233;
                                             uint8_t id_1234 { 0 };
                                             uint32_t id_1235 { leb128_sz_1203[id_1234] };
@@ -4212,10 +4211,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                             bool id_1237 { bool(id_1235 > id_1236) };
                                             while_flag_1209 = id_1237;
                                             if (while_flag_1209) {
-                                              (void)::dessser::VOID;
+                                              (void)::dessser::Void();
                                             }
                                           } while (while_flag_1209);
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                           uint8_t id_1238 { 0 };
                                           Pointer id_1239 { leb128_ptr_1204[id_1238] };
                                           let_res_1208 = id_1239;
@@ -4241,18 +4240,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                             uint8_t id_1251 { 0 };
                                             Pointer id_1252 { dst_ref_1205[id_1251] };
                                             Pointer id_1253 { fun0(x_1207, id_1252) };
-                                            Void id_1254 { ((void)(dst_ref_1205[id_1250] = id_1253), ::dessser::VOID) };
+                                            Void id_1254 { ((void)(dst_ref_1205[id_1250] = id_1253), ::dessser::Void()) };
                                             (void)id_1254;
                                             uint8_t id_1255 { 0 };
                                             int32_t id_1256 { 1L };
                                             uint8_t id_1257 { 0 };
                                             int32_t id_1258 { n_ref_1206[id_1257] };
                                             int32_t id_1259 { int32_t(id_1256 + id_1258) };
-                                            Void id_1260 { ((void)(n_ref_1206[id_1255] = id_1259), ::dessser::VOID) };
+                                            Void id_1260 { ((void)(n_ref_1206[id_1255] = id_1259), ::dessser::Void()) };
                                             (void)id_1260;
                                             (void)id_1260;
                                           }
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                           uint8_t id_1261 { 0 };
                                           Pointer id_1262 { dst_ref_1205[id_1261] };
                                           let_res_1244 = id_1262;
@@ -4315,7 +4314,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                         uint16_t id_1309 { uint16_t(id_1308.index()) };
                                         uint16_t id_1310 { 0 };
                                         bool id_1311 { bool(id_1309 == id_1310) };
-                                        Void id_1312 { ((void)(assert(id_1311)), ::dessser::VOID) };
+                                        Void id_1312 { ((void)(assert(id_1311)), ::dessser::Void()) };
                                         (void)id_1312;
                                         let_res_1303 = ssum_dst_1189;
                                       }
@@ -4406,7 +4405,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                                       } else {
                                         uint16_t id_1384 { 7 };
                                         bool id_1385 { bool(label1_1175 == id_1384) };
-                                        Void id_1386 { ((void)(assert(id_1385)), ::dessser::VOID) };
+                                        Void id_1386 { ((void)(assert(id_1385)), ::dessser::Void()) };
                                         (void)id_1386;
                                         ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1387 { (*p_0).text };
                                         ::dessser::gen::raql_expr::t653dea3e3c942d4a754bc69dc55e032d id_1388 { std::get<5 /* Stateful */>(id_1387) };
@@ -4485,7 +4484,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                   } else {
                     uint16_t id_1431 { 6 };
                     bool id_1432 { bool(label1_1166 == id_1431) };
-                    Void id_1433 { ((void)(assert(id_1432)), ::dessser::VOID) };
+                    Void id_1433 { ((void)(assert(id_1432)), ::dessser::Void()) };
                     (void)id_1433;
                     ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1434 { (*p_0).text };
                     ::dessser::gen::raql_expr::t8411610d7f6cfe33697a36943471c946 id_1435 { std::get<6 /* Generator */>(id_1434) };
@@ -4499,7 +4498,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
                       uint16_t id_1441 { uint16_t(id_1440.index()) };
                       uint16_t id_1442 { 0 };
                       bool id_1443 { bool(id_1441 == id_1442) };
-                      Void id_1444 { ((void)(assert(id_1443)), ::dessser::VOID) };
+                      Void id_1444 { ((void)(assert(id_1443)), ::dessser::Void()) };
                       (void)id_1444;
                       ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_1445 { (*p_0).text };
                       ::dessser::gen::raql_expr::t8411610d7f6cfe33697a36943471c946 id_1446 { std::get<6 /* Generator */>(id_1445) };
@@ -5162,11 +5161,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                   uint32_t id_1503 { lebsz_ref_1160[id_1502] };
                   uint32_t id_1504 { 1U };
                   uint32_t id_1505 { uint32_t(id_1503 + id_1504) };
-                  Void id_1506 { ((void)(lebsz_ref_1160[id_1501] = id_1505), ::dessser::VOID) };
+                  Void id_1506 { ((void)(lebsz_ref_1160[id_1501] = id_1505), ::dessser::Void()) };
                   (void)id_1506;
                 }
               } while (while_flag_1493);
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
               uint8_t id_1507 { 0 };
               uint32_t id_1508 { lebsz_ref_1160[id_1507] };
               Size id_1509 { Size(id_1508) };
@@ -5204,21 +5203,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                   std::shared_ptr<::dessser::gen::raql_expr::t>  id_1530 { id_1529[id_1527] };
                   Size id_1531 { fun1474(id_1530) };
                   Size id_1532 { Size(id_1525 + id_1531) };
-                  Void id_1533 { ((void)(sz_ref_1161[id_1523] = id_1532), ::dessser::VOID) };
+                  Void id_1533 { ((void)(sz_ref_1161[id_1523] = id_1532), ::dessser::Void()) };
                   (void)id_1533;
                   uint8_t id_1534 { 0 };
                   uint8_t id_1535 { 0 };
                   int32_t id_1536 { repeat_n_1162[id_1535] };
                   int32_t id_1537 { 1L };
                   int32_t id_1538 { int32_t(id_1536 + id_1537) };
-                  Void id_1539 { ((void)(repeat_n_1162[id_1534] = id_1538), ::dessser::VOID) };
+                  Void id_1539 { ((void)(repeat_n_1162[id_1534] = id_1538), ::dessser::Void()) };
                   (void)id_1539;
                   (void)id_1539;
                 }
               } while (while_flag_1515);
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
-            (void)::dessser::VOID;
+            (void)::dessser::Void();
             uint8_t id_1540 { 0 };
             Size id_1541 { sz_ref_1161[id_1540] };
             let_res_1512 = id_1541;
@@ -5259,11 +5258,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                     uint32_t id_1565 { lebsz_ref_1154[id_1564] };
                     uint32_t id_1566 { 1U };
                     uint32_t id_1567 { uint32_t(id_1565 + id_1566) };
-                    Void id_1568 { ((void)(lebsz_ref_1154[id_1563] = id_1567), ::dessser::VOID) };
+                    Void id_1568 { ((void)(lebsz_ref_1154[id_1563] = id_1567), ::dessser::Void()) };
                     (void)id_1568;
                   }
                 } while (while_flag_1555);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_1569 { 0 };
                 uint32_t id_1570 { lebsz_ref_1154[id_1569] };
                 Size id_1571 { Size(id_1570) };
@@ -5321,21 +5320,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                       Size id_1606 { Size(sz_1158 + id_1605) };
                       let_res_1598 = id_1606;
                     }
-                    Void id_1607 { ((void)(sz_ref_1155[id_1585] = let_res_1598), ::dessser::VOID) };
+                    Void id_1607 { ((void)(sz_ref_1155[id_1585] = let_res_1598), ::dessser::Void()) };
                     (void)id_1607;
                     uint8_t id_1608 { 0 };
                     uint8_t id_1609 { 0 };
                     int32_t id_1610 { repeat_n_1156[id_1609] };
                     int32_t id_1611 { 1L };
                     int32_t id_1612 { int32_t(id_1610 + id_1611) };
-                    Void id_1613 { ((void)(repeat_n_1156[id_1608] = id_1612), ::dessser::VOID) };
+                    Void id_1613 { ((void)(repeat_n_1156[id_1608] = id_1612), ::dessser::Void()) };
                     (void)id_1613;
                     (void)id_1613;
                   }
                 } while (while_flag_1577);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
               }
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
               uint8_t id_1614 { 0 };
               Size id_1615 { sz_ref_1155[id_1614] };
               let_res_1574 = id_1615;
@@ -5376,11 +5375,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                       uint32_t id_1639 { lebsz_ref_1150[id_1638] };
                       uint32_t id_1640 { 1U };
                       uint32_t id_1641 { uint32_t(id_1639 + id_1640) };
-                      Void id_1642 { ((void)(lebsz_ref_1150[id_1637] = id_1641), ::dessser::VOID) };
+                      Void id_1642 { ((void)(lebsz_ref_1150[id_1637] = id_1641), ::dessser::Void()) };
                       (void)id_1642;
                     }
                   } while (while_flag_1629);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1643 { 0 };
                   uint32_t id_1644 { lebsz_ref_1150[id_1643] };
                   Size id_1645 { Size(id_1644) };
@@ -5418,21 +5417,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                       std::shared_ptr<::dessser::gen::raql_expr::t>  id_1666 { id_1665[id_1663] };
                       Size id_1667 { fun1474(id_1666) };
                       Size id_1668 { Size(id_1661 + id_1667) };
-                      Void id_1669 { ((void)(sz_ref_1151[id_1659] = id_1668), ::dessser::VOID) };
+                      Void id_1669 { ((void)(sz_ref_1151[id_1659] = id_1668), ::dessser::Void()) };
                       (void)id_1669;
                       uint8_t id_1670 { 0 };
                       uint8_t id_1671 { 0 };
                       int32_t id_1672 { repeat_n_1152[id_1671] };
                       int32_t id_1673 { 1L };
                       int32_t id_1674 { int32_t(id_1672 + id_1673) };
-                      Void id_1675 { ((void)(repeat_n_1152[id_1670] = id_1674), ::dessser::VOID) };
+                      Void id_1675 { ((void)(repeat_n_1152[id_1670] = id_1674), ::dessser::Void()) };
                       (void)id_1675;
                       (void)id_1675;
                     }
                   } while (while_flag_1651);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                 }
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_1676 { 0 };
                 Size id_1677 { sz_ref_1151[id_1676] };
                 let_res_1648 = id_1677;
@@ -5474,11 +5473,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                         uint32_t id_1702 { lebsz_ref_1143[id_1701] };
                         uint32_t id_1703 { 1U };
                         uint32_t id_1704 { uint32_t(id_1702 + id_1703) };
-                        Void id_1705 { ((void)(lebsz_ref_1143[id_1700] = id_1704), ::dessser::VOID) };
+                        Void id_1705 { ((void)(lebsz_ref_1143[id_1700] = id_1704), ::dessser::Void()) };
                         (void)id_1705;
                       }
                     } while (while_flag_1692);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_1706 { 0 };
                     uint32_t id_1707 { lebsz_ref_1143[id_1706] };
                     Size id_1708 { Size(id_1707) };
@@ -5528,21 +5527,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                         std::shared_ptr<::dessser::gen::raql_expr::t>  id_1741 { id_1740.case_cons };
                         Size id_1742 { fun1474(id_1741) };
                         Size id_1743 { Size(id_1734 + id_1742) };
-                        Void id_1744 { ((void)(sz_ref_1144[id_1723] = id_1743), ::dessser::VOID) };
+                        Void id_1744 { ((void)(sz_ref_1144[id_1723] = id_1743), ::dessser::Void()) };
                         (void)id_1744;
                         uint8_t id_1745 { 0 };
                         uint8_t id_1746 { 0 };
                         int32_t id_1747 { repeat_n_1145[id_1746] };
                         int32_t id_1748 { 1L };
                         int32_t id_1749 { int32_t(id_1747 + id_1748) };
-                        Void id_1750 { ((void)(repeat_n_1145[id_1745] = id_1749), ::dessser::VOID) };
+                        Void id_1750 { ((void)(repeat_n_1145[id_1745] = id_1749), ::dessser::Void()) };
                         (void)id_1750;
                         (void)id_1750;
                       }
                     } while (while_flag_1714);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_1751 { 0 };
                   Size id_1752 { sz_ref_1144[id_1751] };
                   let_res_1711 = id_1752;
@@ -5737,11 +5736,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                               uint32_t id_1896 { lebsz_ref_1138[id_1895] };
                                               uint32_t id_1897 { 1U };
                                               uint32_t id_1898 { uint32_t(id_1896 + id_1897) };
-                                              Void id_1899 { ((void)(lebsz_ref_1138[id_1894] = id_1898), ::dessser::VOID) };
+                                              Void id_1899 { ((void)(lebsz_ref_1138[id_1894] = id_1898), ::dessser::Void()) };
                                               (void)id_1899;
                                             }
                                           } while (while_flag_1886);
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                           uint8_t id_1900 { 0 };
                                           uint32_t id_1901 { lebsz_ref_1138[id_1900] };
                                           Size id_1902 { Size(id_1901) };
@@ -5784,21 +5783,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                               dessser::gen::raql_path_comp::t_ext id_1928 { id_1927[id_1923] };
                                               Size id_1929 { fun1921(id_1928) };
                                               Size id_1930 { Size(id_1920 + id_1929) };
-                                              Void id_1931 { ((void)(sz_ref_1139[id_1918] = id_1930), ::dessser::VOID) };
+                                              Void id_1931 { ((void)(sz_ref_1139[id_1918] = id_1930), ::dessser::Void()) };
                                               (void)id_1931;
                                               uint8_t id_1932 { 0 };
                                               uint8_t id_1933 { 0 };
                                               int32_t id_1934 { repeat_n_1140[id_1933] };
                                               int32_t id_1935 { 1L };
                                               int32_t id_1936 { int32_t(id_1934 + id_1935) };
-                                              Void id_1937 { ((void)(repeat_n_1140[id_1932] = id_1936), ::dessser::VOID) };
+                                              Void id_1937 { ((void)(repeat_n_1140[id_1932] = id_1936), ::dessser::Void()) };
                                               (void)id_1937;
                                               (void)id_1937;
                                             }
                                           } while (while_flag_1908);
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                         }
-                                        (void)::dessser::VOID;
+                                        (void)::dessser::Void();
                                         uint8_t id_1938 { 0 };
                                         Size id_1939 { sz_ref_1139[id_1938] };
                                         let_res_1905 = id_1939;
@@ -5807,7 +5806,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                     } else {
                                       uint16_t id_1940 { 8 };
                                       bool id_1941 { bool(label2_1136 == id_1940) };
-                                      Void id_1942 { ((void)(assert(id_1941)), ::dessser::VOID) };
+                                      Void id_1942 { ((void)(assert(id_1941)), ::dessser::Void()) };
                                       (void)id_1942;
                                       Size id_1943 { 2UL };
                                       Size id_1944 { Size(sz_1046 + id_1943) };
@@ -5931,7 +5930,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                       uint16_t id_2022 { uint16_t(id_2021.index()) };
                                       uint16_t id_2023 { 1 };
                                       bool id_2024 { bool(id_2022 == id_2023) };
-                                      Void id_2025 { ((void)(assert(id_2024)), ::dessser::VOID) };
+                                      Void id_2025 { ((void)(assert(id_2024)), ::dessser::Void()) };
                                       (void)id_2025;
                                       Size id_2026 { 2UL };
                                       Size id_2027 { Size(sz_1133 + id_2026) };
@@ -6234,11 +6233,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                                                                                             uint32_t id_2214 { lebsz_ref_1131[id_2213] };
                                                                                                             uint32_t id_2215 { 1U };
                                                                                                             uint32_t id_2216 { uint32_t(id_2214 + id_2215) };
-                                                                                                            Void id_2217 { ((void)(lebsz_ref_1131[id_2212] = id_2216), ::dessser::VOID) };
+                                                                                                            Void id_2217 { ((void)(lebsz_ref_1131[id_2212] = id_2216), ::dessser::Void()) };
                                                                                                             (void)id_2217;
                                                                                                           }
                                                                                                         } while (while_flag_2204);
-                                                                                                        (void)::dessser::VOID;
+                                                                                                        (void)::dessser::Void();
                                                                                                         uint8_t id_2218 { 0 };
                                                                                                         uint32_t id_2219 { lebsz_ref_1131[id_2218] };
                                                                                                         Size id_2220 { Size(id_2219) };
@@ -6283,7 +6282,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                                                                                         } else {
                                                                                                           uint16_t id_2245 { 40 };
                                                                                                           bool id_2246 { bool(label2_1128 == id_2245) };
-                                                                                                          Void id_2247 { ((void)(assert(id_2246)), ::dessser::VOID) };
+                                                                                                          Void id_2247 { ((void)(assert(id_2246)), ::dessser::Void()) };
                                                                                                           (void)id_2247;
                                                                                                           Size id_2248 { 2UL };
                                                                                                           Size id_2249 { Size(sz_1127 + id_2248) };
@@ -6432,7 +6431,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                               } else {
                                 uint16_t id_2295 { 3 };
                                 bool id_2296 { bool(label2_1121 == id_2295) };
-                                Void id_2297 { ((void)(assert(id_2296)), ::dessser::VOID) };
+                                Void id_2297 { ((void)(assert(id_2296)), ::dessser::Void()) };
                                 (void)id_2297;
                                 Size id_2298 { 2UL };
                                 Size id_2299 { Size(sz_1046 + id_2298) };
@@ -6481,11 +6480,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                   uint32_t id_2325 { lebsz_ref_1124[id_2324] };
                                   uint32_t id_2326 { 1U };
                                   uint32_t id_2327 { uint32_t(id_2325 + id_2326) };
-                                  Void id_2328 { ((void)(lebsz_ref_1124[id_2323] = id_2327), ::dessser::VOID) };
+                                  Void id_2328 { ((void)(lebsz_ref_1124[id_2323] = id_2327), ::dessser::Void()) };
                                   (void)id_2328;
                                 }
                               } while (while_flag_2315);
-                              (void)::dessser::VOID;
+                              (void)::dessser::Void();
                               uint8_t id_2329 { 0 };
                               uint32_t id_2330 { lebsz_ref_1124[id_2329] };
                               Size id_2331 { Size(id_2330) };
@@ -6527,21 +6526,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                   std::shared_ptr<::dessser::gen::raql_expr::t>  id_2356 { id_2355[id_2351] };
                                   Size id_2357 { fun1474(id_2356) };
                                   Size id_2358 { Size(id_2349 + id_2357) };
-                                  Void id_2359 { ((void)(sz_ref_1125[id_2347] = id_2358), ::dessser::VOID) };
+                                  Void id_2359 { ((void)(sz_ref_1125[id_2347] = id_2358), ::dessser::Void()) };
                                   (void)id_2359;
                                   uint8_t id_2360 { 0 };
                                   uint8_t id_2361 { 0 };
                                   int32_t id_2362 { repeat_n_1126[id_2361] };
                                   int32_t id_2363 { 1L };
                                   int32_t id_2364 { int32_t(id_2362 + id_2363) };
-                                  Void id_2365 { ((void)(repeat_n_1126[id_2360] = id_2364), ::dessser::VOID) };
+                                  Void id_2365 { ((void)(repeat_n_1126[id_2360] = id_2364), ::dessser::Void()) };
                                   (void)id_2365;
                                   (void)id_2365;
                                 }
                               } while (while_flag_2337);
-                              (void)::dessser::VOID;
+                              (void)::dessser::Void();
                             }
-                            (void)::dessser::VOID;
+                            (void)::dessser::Void();
                             uint8_t id_2366 { 0 };
                             Size id_2367 { sz_ref_1125[id_2366] };
                             let_res_2334 = id_2367;
@@ -6774,7 +6773,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                                                               } else {
                                                                                 uint16_t id_2510 { 25 };
                                                                                 bool id_2511 { bool(label2_1117 == id_2510) };
-                                                                                Void id_2512 { ((void)(assert(id_2511)), ::dessser::VOID) };
+                                                                                Void id_2512 { ((void)(assert(id_2511)), ::dessser::Void()) };
                                                                                 (void)id_2512;
                                                                                 Size id_2513 { 2UL };
                                                                                 Size id_2514 { Size(sz_1116 + id_2513) };
@@ -6851,7 +6850,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                           uint16_t id_2529 { uint16_t(id_2528.index()) };
                           uint16_t id_2530 { 4 };
                           bool id_2531 { bool(id_2529 == id_2530) };
-                          Void id_2532 { ((void)(assert(id_2531)), ::dessser::VOID) };
+                          Void id_2532 { ((void)(assert(id_2531)), ::dessser::Void()) };
                           (void)id_2532;
                           uint16_t id_2533 { 0 };
                           ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_2534 { (*p_0).text };
@@ -6877,7 +6876,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                             uint16_t id_2551 { uint16_t(id_2550.index()) };
                             uint16_t id_2552 { 1 };
                             bool id_2553 { bool(id_2551 == id_2552) };
-                            Void id_2554 { ((void)(assert(id_2553)), ::dessser::VOID) };
+                            Void id_2554 { ((void)(assert(id_2553)), ::dessser::Void()) };
                             (void)id_2554;
                             Size id_2555 { 2UL };
                             Size id_2556 { Size(sz_1046 + id_2555) };
@@ -6939,7 +6938,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                       uint16_t id_2596 { uint16_t(id_2595.index()) };
                       uint16_t id_2597 { 1 };
                       bool id_2598 { bool(id_2596 == id_2597) };
-                      Void id_2599 { ((void)(assert(id_2598)), ::dessser::VOID) };
+                      Void id_2599 { ((void)(assert(id_2598)), ::dessser::Void()) };
                       (void)id_2599;
                       Size id_2600 { 2UL };
                       Size id_2601 { Size(sz_1046 + id_2600) };
@@ -7097,7 +7096,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                                         } else {
                                                           uint16_t id_2701 { 14 };
                                                           bool id_2702 { bool(label2_1105 == id_2701) };
-                                                          Void id_2703 { ((void)(assert(id_2702)), ::dessser::VOID) };
+                                                          Void id_2703 { ((void)(assert(id_2702)), ::dessser::Void()) };
                                                           (void)id_2703;
                                                           Size id_2704 { 2UL };
                                                           Size id_2705 { Size(sz_1104 + id_2704) };
@@ -7187,7 +7186,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                   } else {
                                     uint16_t id_2744 { 3 };
                                     bool id_2745 { bool(label2_1101 == id_2744) };
-                                    Void id_2746 { ((void)(assert(id_2745)), ::dessser::VOID) };
+                                    Void id_2746 { ((void)(assert(id_2745)), ::dessser::Void()) };
                                     (void)id_2746;
                                     Size id_2747 { 2UL };
                                     Size id_2748 { Size(sz_1054 + id_2747) };
@@ -7261,7 +7260,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                   uint16_t id_2799 { uint16_t(id_2798.index()) };
                                   uint16_t id_2800 { 2 };
                                   bool id_2801 { bool(id_2799 == id_2800) };
-                                  Void id_2802 { ((void)(assert(id_2801)), ::dessser::VOID) };
+                                  Void id_2802 { ((void)(assert(id_2801)), ::dessser::Void()) };
                                   (void)id_2802;
                                   Size id_2803 { 2UL };
                                   Size id_2804 { Size(sz_1054 + id_2803) };
@@ -7324,7 +7323,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                   uint16_t id_2851 { uint16_t(id_2850.index()) };
                                   uint16_t id_2852 { 1 };
                                   bool id_2853 { bool(id_2851 == id_2852) };
-                                  Void id_2854 { ((void)(assert(id_2853)), ::dessser::VOID) };
+                                  Void id_2854 { ((void)(assert(id_2853)), ::dessser::Void()) };
                                   (void)id_2854;
                                   Size id_2855 { 2UL };
                                   Size id_2856 { Size(sz_1054 + id_2855) };
@@ -7392,7 +7391,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                     uint16_t id_2910 { uint16_t(id_2909.index()) };
                                     uint16_t id_2911 { 1 };
                                     bool id_2912 { bool(id_2910 == id_2911) };
-                                    Void id_2913 { ((void)(assert(id_2912)), ::dessser::VOID) };
+                                    Void id_2913 { ((void)(assert(id_2912)), ::dessser::Void()) };
                                     (void)id_2913;
                                     Size id_2914 { 2UL };
                                     Size id_2915 { Size(sz_1054 + id_2914) };
@@ -7459,11 +7458,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                             uint32_t id_2965 { lebsz_ref_1086[id_2964] };
                                             uint32_t id_2966 { 1U };
                                             uint32_t id_2967 { uint32_t(id_2965 + id_2966) };
-                                            Void id_2968 { ((void)(lebsz_ref_1086[id_2963] = id_2967), ::dessser::VOID) };
+                                            Void id_2968 { ((void)(lebsz_ref_1086[id_2963] = id_2967), ::dessser::Void()) };
                                             (void)id_2968;
                                           }
                                         } while (while_flag_2955);
-                                        (void)::dessser::VOID;
+                                        (void)::dessser::Void();
                                         uint8_t id_2969 { 0 };
                                         uint32_t id_2970 { lebsz_ref_1086[id_2969] };
                                         Size id_2971 { Size(id_2970) };
@@ -7507,21 +7506,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                             std::shared_ptr<::dessser::gen::raql_expr::t>  id_2998 { id_2997[id_2992] };
                                             Size id_2999 { fun1474(id_2998) };
                                             Size id_3000 { Size(id_2990 + id_2999) };
-                                            Void id_3001 { ((void)(sz_ref_1087[id_2988] = id_3000), ::dessser::VOID) };
+                                            Void id_3001 { ((void)(sz_ref_1087[id_2988] = id_3000), ::dessser::Void()) };
                                             (void)id_3001;
                                             uint8_t id_3002 { 0 };
                                             uint8_t id_3003 { 0 };
                                             int32_t id_3004 { repeat_n_1088[id_3003] };
                                             int32_t id_3005 { 1L };
                                             int32_t id_3006 { int32_t(id_3004 + id_3005) };
-                                            Void id_3007 { ((void)(repeat_n_1088[id_3002] = id_3006), ::dessser::VOID) };
+                                            Void id_3007 { ((void)(repeat_n_1088[id_3002] = id_3006), ::dessser::Void()) };
                                             (void)id_3007;
                                             (void)id_3007;
                                           }
                                         } while (while_flag_2977);
-                                        (void)::dessser::VOID;
+                                        (void)::dessser::Void();
                                       }
-                                      (void)::dessser::VOID;
+                                      (void)::dessser::Void();
                                       uint8_t id_3008 { 0 };
                                       Size id_3009 { sz_ref_1087[id_3008] };
                                       let_res_2974 = id_3009;
@@ -7542,7 +7541,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                     uint16_t id_3018 { uint16_t(id_3017.index()) };
                                     uint16_t id_3019 { 0 };
                                     bool id_3020 { bool(id_3018 == id_3019) };
-                                    Void id_3021 { ((void)(assert(id_3020)), ::dessser::VOID) };
+                                    Void id_3021 { ((void)(assert(id_3020)), ::dessser::Void()) };
                                     (void)id_3021;
                                     Size id_3022 { 2UL };
                                     Size id_3023 { Size(sz_1054 + id_3022) };
@@ -7681,7 +7680,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                                     } else {
                                       uint16_t id_3143 { 7 };
                                       bool id_3144 { bool(label2_1055 == id_3143) };
-                                      Void id_3145 { ((void)(assert(id_3144)), ::dessser::VOID) };
+                                      Void id_3145 { ((void)(assert(id_3144)), ::dessser::Void()) };
                                       (void)id_3145;
                                       Size id_3146 { 2UL };
                                       Size id_3147 { Size(sz_1054 + id_3146) };
@@ -7759,14 +7758,14 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
                   } else {
                     uint16_t id_3191 { 6 };
                     bool id_3192 { bool(label2_1047 == id_3191) };
-                    Void id_3193 { ((void)(assert(id_3192)), ::dessser::VOID) };
+                    Void id_3193 { ((void)(assert(id_3192)), ::dessser::Void()) };
                     (void)id_3193;
                     ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf id_3194 { (*p_0).text };
                     ::dessser::gen::raql_expr::t8411610d7f6cfe33697a36943471c946 id_3195 { std::get<6 /* Generator */>(id_3194) };
                     uint16_t id_3196 { uint16_t(id_3195.index()) };
                     uint16_t id_3197 { 0 };
                     bool id_3198 { bool(id_3196 == id_3197) };
-                    Void id_3199 { ((void)(assert(id_3198)), ::dessser::VOID) };
+                    Void id_3199 { ((void)(assert(id_3198)), ::dessser::Void()) };
                     (void)id_3199;
                     Size id_3200 { 2UL };
                     Size id_3201 { Size(sz_1046 + id_3200) };
@@ -9053,7 +9052,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                       auto leb128_fst_1003 { std::get<0>(leb128_1002) };
                       auto leb128_snd_1004 { std::get<1>(leb128_1002) };
                       uint8_t id_3259 { 0 };
-                      Void id_3260 { ((void)(p_ref_1001[id_3259] = leb128_snd_1004), ::dessser::VOID) };
+                      Void id_3260 { ((void)(p_ref_1001[id_3259] = leb128_snd_1004), ::dessser::Void()) };
                       (void)id_3260;
                       uint8_t id_3261 { 0 };
                       uint8_t id_3262 { 127 };
@@ -9065,14 +9064,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                       uint8_t id_3268 { 0 };
                       uint32_t id_3269 { leb_ref_999[id_3268] };
                       uint32_t id_3270 { uint32_t(id_3267 | id_3269) };
-                      Void id_3271 { ((void)(leb_ref_999[id_3261] = id_3270), ::dessser::VOID) };
+                      Void id_3271 { ((void)(leb_ref_999[id_3261] = id_3270), ::dessser::Void()) };
                       (void)id_3271;
                       uint8_t id_3272 { 0 };
                       uint8_t id_3273 { 0 };
                       uint8_t id_3274 { shft_ref_1000[id_3273] };
                       uint8_t id_3275 { 7 };
                       uint8_t id_3276 { uint8_t(id_3274 + id_3275) };
-                      Void id_3277 { ((void)(shft_ref_1000[id_3272] = id_3276), ::dessser::VOID) };
+                      Void id_3277 { ((void)(shft_ref_1000[id_3272] = id_3276), ::dessser::Void()) };
                       (void)id_3277;
                       uint8_t id_3278 { 128 };
                       bool id_3279 { bool(leb128_fst_1003 >= id_3278) };
@@ -9082,10 +9081,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                   }
                   while_flag_3253 = let_res_3257;
                   if (while_flag_3253) {
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
                 } while (while_flag_3253);
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_3280 { 0 };
                 uint32_t id_3281 { leb_ref_999[id_3280] };
                 uint8_t id_3282 { 0 };
@@ -9139,25 +9138,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                             ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_3304 { id_3303, dlist3_snd_1018 };
                             letpair_res_3302 = id_3304;
                           }
-                          Void id_3305 { ((void)(inits_src_ref_1011[id_3300] = letpair_res_3302), ::dessser::VOID) };
+                          Void id_3305 { ((void)(inits_src_ref_1011[id_3300] = letpair_res_3302), ::dessser::Void()) };
                           (void)id_3305;
                         }
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_3306 { 0 };
                       uint8_t id_3307 { 0 };
                       int32_t id_3308 { repeat_n_1012[id_3307] };
                       int32_t id_3309 { 1L };
                       int32_t id_3310 { int32_t(id_3308 + id_3309) };
-                      Void id_3311 { ((void)(repeat_n_1012[id_3306] = id_3310), ::dessser::VOID) };
+                      Void id_3311 { ((void)(repeat_n_1012[id_3306] = id_3310), ::dessser::Void()) };
                       (void)id_3311;
                       (void)id_3311;
                     }
                   } while (while_flag_3293);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                 }
-                (void)::dessser::VOID;
+                (void)::dessser::Void();
                 uint8_t id_3312 { 0 };
                 ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_3313 { inits_src_ref_1011[id_3312] };
                 let_res_3290 = id_3313;
@@ -9207,7 +9206,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                         auto leb128_fst_971 { std::get<0>(leb128_970) };
                         auto leb128_snd_972 { std::get<1>(leb128_970) };
                         uint8_t id_3334 { 0 };
-                        Void id_3335 { ((void)(p_ref_969[id_3334] = leb128_snd_972), ::dessser::VOID) };
+                        Void id_3335 { ((void)(p_ref_969[id_3334] = leb128_snd_972), ::dessser::Void()) };
                         (void)id_3335;
                         uint8_t id_3336 { 0 };
                         uint8_t id_3337 { 127 };
@@ -9219,14 +9218,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                         uint8_t id_3343 { 0 };
                         uint32_t id_3344 { leb_ref_967[id_3343] };
                         uint32_t id_3345 { uint32_t(id_3342 | id_3344) };
-                        Void id_3346 { ((void)(leb_ref_967[id_3336] = id_3345), ::dessser::VOID) };
+                        Void id_3346 { ((void)(leb_ref_967[id_3336] = id_3345), ::dessser::Void()) };
                         (void)id_3346;
                         uint8_t id_3347 { 0 };
                         uint8_t id_3348 { 0 };
                         uint8_t id_3349 { shft_ref_968[id_3348] };
                         uint8_t id_3350 { 7 };
                         uint8_t id_3351 { uint8_t(id_3349 + id_3350) };
-                        Void id_3352 { ((void)(shft_ref_968[id_3347] = id_3351), ::dessser::VOID) };
+                        Void id_3352 { ((void)(shft_ref_968[id_3347] = id_3351), ::dessser::Void()) };
                         (void)id_3352;
                         uint8_t id_3353 { 128 };
                         bool id_3354 { bool(leb128_fst_971 >= id_3353) };
@@ -9236,10 +9235,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                     }
                     while_flag_3328 = let_res_3332;
                     if (while_flag_3328) {
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                     }
                   } while (while_flag_3328);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_3355 { 0 };
                   uint32_t id_3356 { leb_ref_967[id_3355] };
                   uint8_t id_3357 { 0 };
@@ -9302,25 +9301,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                               }
                               letpair_res_3378 = letpair_res_3380;
                             }
-                            Void id_3384 { ((void)(inits_src_ref_979[id_3375] = letpair_res_3378), ::dessser::VOID) };
+                            Void id_3384 { ((void)(inits_src_ref_979[id_3375] = letpair_res_3378), ::dessser::Void()) };
                             (void)id_3384;
                           }
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                         uint8_t id_3385 { 0 };
                         uint8_t id_3386 { 0 };
                         int32_t id_3387 { repeat_n_980[id_3386] };
                         int32_t id_3388 { 1L };
                         int32_t id_3389 { int32_t(id_3387 + id_3388) };
-                        Void id_3390 { ((void)(repeat_n_980[id_3385] = id_3389), ::dessser::VOID) };
+                        Void id_3390 { ((void)(repeat_n_980[id_3385] = id_3389), ::dessser::Void()) };
                         (void)id_3390;
                         (void)id_3390;
                       }
                     } while (while_flag_3368);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                   }
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_3391 { 0 };
                   ::dessser::gen::raql_expr::te61b5292977bf2669de474a297a8d1e4 id_3392 { inits_src_ref_979[id_3391] };
                   let_res_3365 = id_3392;
@@ -9370,7 +9369,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                           auto leb128_fst_945 { std::get<0>(leb128_944) };
                           auto leb128_snd_946 { std::get<1>(leb128_944) };
                           uint8_t id_3413 { 0 };
-                          Void id_3414 { ((void)(p_ref_943[id_3413] = leb128_snd_946), ::dessser::VOID) };
+                          Void id_3414 { ((void)(p_ref_943[id_3413] = leb128_snd_946), ::dessser::Void()) };
                           (void)id_3414;
                           uint8_t id_3415 { 0 };
                           uint8_t id_3416 { 127 };
@@ -9382,14 +9381,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                           uint8_t id_3422 { 0 };
                           uint32_t id_3423 { leb_ref_941[id_3422] };
                           uint32_t id_3424 { uint32_t(id_3421 | id_3423) };
-                          Void id_3425 { ((void)(leb_ref_941[id_3415] = id_3424), ::dessser::VOID) };
+                          Void id_3425 { ((void)(leb_ref_941[id_3415] = id_3424), ::dessser::Void()) };
                           (void)id_3425;
                           uint8_t id_3426 { 0 };
                           uint8_t id_3427 { 0 };
                           uint8_t id_3428 { shft_ref_942[id_3427] };
                           uint8_t id_3429 { 7 };
                           uint8_t id_3430 { uint8_t(id_3428 + id_3429) };
-                          Void id_3431 { ((void)(shft_ref_942[id_3426] = id_3430), ::dessser::VOID) };
+                          Void id_3431 { ((void)(shft_ref_942[id_3426] = id_3430), ::dessser::Void()) };
                           (void)id_3431;
                           uint8_t id_3432 { 128 };
                           bool id_3433 { bool(leb128_fst_945 >= id_3432) };
@@ -9399,10 +9398,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                       }
                       while_flag_3407 = let_res_3411;
                       if (while_flag_3407) {
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
                     } while (while_flag_3407);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_3434 { 0 };
                     uint32_t id_3435 { leb_ref_941[id_3434] };
                     uint8_t id_3436 { 0 };
@@ -9456,25 +9455,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                 ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_3458 { id_3457, dlist3_snd_960 };
                                 letpair_res_3456 = id_3458;
                               }
-                              Void id_3459 { ((void)(inits_src_ref_953[id_3454] = letpair_res_3456), ::dessser::VOID) };
+                              Void id_3459 { ((void)(inits_src_ref_953[id_3454] = letpair_res_3456), ::dessser::Void()) };
                               (void)id_3459;
                             }
-                            (void)::dessser::VOID;
+                            (void)::dessser::Void();
                           }
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                           uint8_t id_3460 { 0 };
                           uint8_t id_3461 { 0 };
                           int32_t id_3462 { repeat_n_954[id_3461] };
                           int32_t id_3463 { 1L };
                           int32_t id_3464 { int32_t(id_3462 + id_3463) };
-                          Void id_3465 { ((void)(repeat_n_954[id_3460] = id_3464), ::dessser::VOID) };
+                          Void id_3465 { ((void)(repeat_n_954[id_3460] = id_3464), ::dessser::Void()) };
                           (void)id_3465;
                           (void)id_3465;
                         }
                       } while (while_flag_3447);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                     }
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_3466 { 0 };
                     ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_3467 { inits_src_ref_953[id_3466] };
                     let_res_3444 = id_3467;
@@ -9524,7 +9523,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                             auto leb128_fst_904 { std::get<0>(leb128_903) };
                             auto leb128_snd_905 { std::get<1>(leb128_903) };
                             uint8_t id_3488 { 0 };
-                            Void id_3489 { ((void)(p_ref_902[id_3488] = leb128_snd_905), ::dessser::VOID) };
+                            Void id_3489 { ((void)(p_ref_902[id_3488] = leb128_snd_905), ::dessser::Void()) };
                             (void)id_3489;
                             uint8_t id_3490 { 0 };
                             uint8_t id_3491 { 127 };
@@ -9536,14 +9535,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                             uint8_t id_3497 { 0 };
                             uint32_t id_3498 { leb_ref_900[id_3497] };
                             uint32_t id_3499 { uint32_t(id_3496 | id_3498) };
-                            Void id_3500 { ((void)(leb_ref_900[id_3490] = id_3499), ::dessser::VOID) };
+                            Void id_3500 { ((void)(leb_ref_900[id_3490] = id_3499), ::dessser::Void()) };
                             (void)id_3500;
                             uint8_t id_3501 { 0 };
                             uint8_t id_3502 { 0 };
                             uint8_t id_3503 { shft_ref_901[id_3502] };
                             uint8_t id_3504 { 7 };
                             uint8_t id_3505 { uint8_t(id_3503 + id_3504) };
-                            Void id_3506 { ((void)(shft_ref_901[id_3501] = id_3505), ::dessser::VOID) };
+                            Void id_3506 { ((void)(shft_ref_901[id_3501] = id_3505), ::dessser::Void()) };
                             (void)id_3506;
                             uint8_t id_3507 { 128 };
                             bool id_3508 { bool(leb128_fst_904 >= id_3507) };
@@ -9553,10 +9552,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                         }
                         while_flag_3482 = let_res_3486;
                         if (while_flag_3482) {
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
                       } while (while_flag_3482);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_3509 { 0 };
                       uint32_t id_3510 { leb_ref_900[id_3509] };
                       uint8_t id_3511 { 0 };
@@ -9618,25 +9617,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   }
                                   letpair_res_3531 = letpair_res_3533;
                                 }
-                                Void id_3537 { ((void)(inits_src_ref_912[id_3529] = letpair_res_3531), ::dessser::VOID) };
+                                Void id_3537 { ((void)(inits_src_ref_912[id_3529] = letpair_res_3531), ::dessser::Void()) };
                                 (void)id_3537;
                               }
-                              (void)::dessser::VOID;
+                              (void)::dessser::Void();
                             }
-                            (void)::dessser::VOID;
+                            (void)::dessser::Void();
                             uint8_t id_3538 { 0 };
                             uint8_t id_3539 { 0 };
                             int32_t id_3540 { repeat_n_913[id_3539] };
                             int32_t id_3541 { 1L };
                             int32_t id_3542 { int32_t(id_3540 + id_3541) };
-                            Void id_3543 { ((void)(repeat_n_913[id_3538] = id_3542), ::dessser::VOID) };
+                            Void id_3543 { ((void)(repeat_n_913[id_3538] = id_3542), ::dessser::Void()) };
                             (void)id_3543;
                             (void)id_3543;
                           }
                         } while (while_flag_3522);
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_3544 { 0 };
                       ::dessser::gen::raql_expr::te88211e2a2e61aaae42952aaddf8e9e2 id_3545 { inits_src_ref_912[id_3544] };
                       let_res_3519 = id_3545;
@@ -9789,8 +9788,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   bool id_3610 { bool(id_3609 == dsum1_fst_842) };
                                   ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 choose_res_3611;
                                   if (id_3610) {
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3612 { std::in_place_index<3>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3612 { std::in_place_index<3>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 id_3613 { id_3612, dsum1_snd_843 };
                                     choose_res_3611 = id_3613;
                                   } else {
@@ -9798,8 +9797,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                     bool id_3615 { bool(id_3614 == dsum1_fst_842) };
                                     ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 choose_res_3616;
                                     if (id_3615) {
-                                      (void)::dessser::VOID;
-                                      ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3617 { std::in_place_index<4>, ::dessser::VOID };
+                                      (void)::dessser::Void();
+                                      ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3617 { std::in_place_index<4>, ::dessser::Void() };
                                       ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 id_3618 { id_3617, dsum1_snd_843 };
                                       choose_res_3616 = id_3618;
                                     } else {
@@ -9807,8 +9806,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                       bool id_3620 { bool(id_3619 == dsum1_fst_842) };
                                       ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 choose_res_3621;
                                       if (id_3620) {
-                                        (void)::dessser::VOID;
-                                        ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3622 { std::in_place_index<5>, ::dessser::VOID };
+                                        (void)::dessser::Void();
+                                        ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3622 { std::in_place_index<5>, ::dessser::Void() };
                                         ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 id_3623 { id_3622, dsum1_snd_843 };
                                         choose_res_3621 = id_3623;
                                       } else {
@@ -9816,8 +9815,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         bool id_3625 { bool(id_3624 == dsum1_fst_842) };
                                         ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 choose_res_3626;
                                         if (id_3625) {
-                                          (void)::dessser::VOID;
-                                          ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3627 { std::in_place_index<6>, ::dessser::VOID };
+                                          (void)::dessser::Void();
+                                          ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3627 { std::in_place_index<6>, ::dessser::Void() };
                                           ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 id_3628 { id_3627, dsum1_snd_843 };
                                           choose_res_3626 = id_3628;
                                         } else {
@@ -9852,7 +9851,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         auto leb128_fst_851 { std::get<0>(leb128_850) };
                                                         auto leb128_snd_852 { std::get<1>(leb128_850) };
                                                         uint8_t id_3646 { 0 };
-                                                        Void id_3647 { ((void)(p_ref_849[id_3646] = leb128_snd_852), ::dessser::VOID) };
+                                                        Void id_3647 { ((void)(p_ref_849[id_3646] = leb128_snd_852), ::dessser::Void()) };
                                                         (void)id_3647;
                                                         uint8_t id_3648 { 0 };
                                                         uint8_t id_3649 { 127 };
@@ -9864,14 +9863,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         uint8_t id_3655 { 0 };
                                                         uint32_t id_3656 { leb_ref_847[id_3655] };
                                                         uint32_t id_3657 { uint32_t(id_3654 | id_3656) };
-                                                        Void id_3658 { ((void)(leb_ref_847[id_3648] = id_3657), ::dessser::VOID) };
+                                                        Void id_3658 { ((void)(leb_ref_847[id_3648] = id_3657), ::dessser::Void()) };
                                                         (void)id_3658;
                                                         uint8_t id_3659 { 0 };
                                                         uint8_t id_3660 { 0 };
                                                         uint8_t id_3661 { shft_ref_848[id_3660] };
                                                         uint8_t id_3662 { 7 };
                                                         uint8_t id_3663 { uint8_t(id_3661 + id_3662) };
-                                                        Void id_3664 { ((void)(shft_ref_848[id_3659] = id_3663), ::dessser::VOID) };
+                                                        Void id_3664 { ((void)(shft_ref_848[id_3659] = id_3663), ::dessser::Void()) };
                                                         (void)id_3664;
                                                         uint8_t id_3665 { 128 };
                                                         bool id_3666 { bool(leb128_fst_851 >= id_3665) };
@@ -9881,10 +9880,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                     }
                                                     while_flag_3640 = let_res_3644;
                                                     if (while_flag_3640) {
-                                                      (void)::dessser::VOID;
+                                                      (void)::dessser::Void();
                                                     }
                                                   } while (while_flag_3640);
-                                                  (void)::dessser::VOID;
+                                                  (void)::dessser::Void();
                                                   uint8_t id_3667 { 0 };
                                                   uint32_t id_3668 { leb_ref_847[id_3667] };
                                                   uint8_t id_3669 { 0 };
@@ -9939,25 +9938,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                               ::dessser::gen::raql_expr::t6459c10486533027b3ba85d163bef4e9 id_3692 { id_3691, dlist3_snd_866 };
                                                               letpair_res_3690 = id_3692;
                                                             }
-                                                            Void id_3693 { ((void)(inits_src_ref_859[id_3687] = letpair_res_3690), ::dessser::VOID) };
+                                                            Void id_3693 { ((void)(inits_src_ref_859[id_3687] = letpair_res_3690), ::dessser::Void()) };
                                                             (void)id_3693;
                                                           }
-                                                          (void)::dessser::VOID;
+                                                          (void)::dessser::Void();
                                                         }
-                                                        (void)::dessser::VOID;
+                                                        (void)::dessser::Void();
                                                         uint8_t id_3694 { 0 };
                                                         uint8_t id_3695 { 0 };
                                                         int32_t id_3696 { repeat_n_860[id_3695] };
                                                         int32_t id_3697 { 1L };
                                                         int32_t id_3698 { int32_t(id_3696 + id_3697) };
-                                                        Void id_3699 { ((void)(repeat_n_860[id_3694] = id_3698), ::dessser::VOID) };
+                                                        Void id_3699 { ((void)(repeat_n_860[id_3694] = id_3698), ::dessser::Void()) };
                                                         (void)id_3699;
                                                         (void)id_3699;
                                                       }
                                                     } while (while_flag_3680);
-                                                    (void)::dessser::VOID;
+                                                    (void)::dessser::Void();
                                                   }
-                                                  (void)::dessser::VOID;
+                                                  (void)::dessser::Void();
                                                   uint8_t id_3700 { 0 };
                                                   ::dessser::gen::raql_expr::t6459c10486533027b3ba85d163bef4e9 id_3701 { inits_src_ref_859[id_3700] };
                                                   let_res_3677 = id_3701;
@@ -9978,10 +9977,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           } else {
                                             uint16_t id_3705 { 8 };
                                             bool id_3706 { bool(dsum1_fst_842 == id_3705) };
-                                            Void id_3707 { ((void)(assert(id_3706)), ::dessser::VOID) };
+                                            Void id_3707 { ((void)(assert(id_3706)), ::dessser::Void()) };
                                             (void)id_3707;
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3708 { std::in_place_index<8>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::tc12b6657c8a8e014a9c0805fe6c1ffaa id_3708 { std::in_place_index<8>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::tadb8577e09b7edb2961f1b2389da22e4 id_3709 { id_3708, dsum1_snd_843 };
                                             choose_res_3631 = id_3709;
                                           }
@@ -10036,8 +10035,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                               bool id_3722 { bool(id_3721 == dsum1_fst_668) };
                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3723;
                               if (id_3722) {
-                                (void)::dessser::VOID;
-                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3724 { std::in_place_index<0>, ::dessser::VOID };
+                                (void)::dessser::Void();
+                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3724 { std::in_place_index<0>, ::dessser::Void() };
                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3725 { id_3724, dsum1_snd_669 };
                                 choose_res_3723 = id_3725;
                               } else {
@@ -10061,8 +10060,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   bool id_3735 { bool(id_3734 == dsum1_fst_668) };
                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3736;
                                   if (id_3735) {
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3737 { std::in_place_index<2>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3737 { std::in_place_index<2>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3738 { id_3737, dsum1_snd_669 };
                                     choose_res_3736 = id_3738;
                                   } else {
@@ -10098,17 +10097,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                               bool id_3752 { bool(id_3751 == dsum1_fst_803) };
                                               ::dessser::gen::raql_expr::t5c43eae682e45d32d0ebee7ea1d6d6d7 choose_res_3753;
                                               if (id_3752) {
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::t1b40a54a2b52ad7dab0061de143378c1 id_3754 { std::in_place_index<0>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::t1b40a54a2b52ad7dab0061de143378c1 id_3754 { std::in_place_index<0>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::t5c43eae682e45d32d0ebee7ea1d6d6d7 id_3755 { id_3754, dsum1_snd_804 };
                                                 choose_res_3753 = id_3755;
                                               } else {
                                                 uint16_t id_3756 { 1 };
                                                 bool id_3757 { bool(dsum1_fst_803 == id_3756) };
-                                                Void id_3758 { ((void)(assert(id_3757)), ::dessser::VOID) };
+                                                Void id_3758 { ((void)(assert(id_3757)), ::dessser::Void()) };
                                                 (void)id_3758;
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::t1b40a54a2b52ad7dab0061de143378c1 id_3759 { std::in_place_index<1>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::t1b40a54a2b52ad7dab0061de143378c1 id_3759 { std::in_place_index<1>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::t5c43eae682e45d32d0ebee7ea1d6d6d7 id_3760 { id_3759, dsum1_snd_804 };
                                                 choose_res_3753 = id_3760;
                                               }
@@ -10135,8 +10134,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                       bool id_3766 { bool(id_3765 == dsum1_fst_668) };
                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3767;
                                       if (id_3766) {
-                                        (void)::dessser::VOID;
-                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3768 { std::in_place_index<4>, ::dessser::VOID };
+                                        (void)::dessser::Void();
+                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3768 { std::in_place_index<4>, ::dessser::Void() };
                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3769 { id_3768, dsum1_snd_669 };
                                         choose_res_3767 = id_3769;
                                       } else {
@@ -10144,8 +10143,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         bool id_3771 { bool(id_3770 == dsum1_fst_668) };
                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3772;
                                         if (id_3771) {
-                                          (void)::dessser::VOID;
-                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3773 { std::in_place_index<5>, ::dessser::VOID };
+                                          (void)::dessser::Void();
+                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3773 { std::in_place_index<5>, ::dessser::Void() };
                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3774 { id_3773, dsum1_snd_669 };
                                           choose_res_3772 = id_3774;
                                         } else {
@@ -10153,8 +10152,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           bool id_3776 { bool(id_3775 == dsum1_fst_668) };
                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3777;
                                           if (id_3776) {
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3778 { std::in_place_index<6>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3778 { std::in_place_index<6>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3779 { id_3778, dsum1_snd_669 };
                                             choose_res_3777 = id_3779;
                                           } else {
@@ -10162,8 +10161,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_3781 { bool(id_3780 == dsum1_fst_668) };
                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3782;
                                             if (id_3781) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3783 { std::in_place_index<7>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3783 { std::in_place_index<7>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3784 { id_3783, dsum1_snd_669 };
                                               choose_res_3782 = id_3784;
                                             } else {
@@ -10171,8 +10170,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                               bool id_3786 { bool(id_3785 == dsum1_fst_668) };
                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3787;
                                               if (id_3786) {
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3788 { std::in_place_index<8>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3788 { std::in_place_index<8>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3789 { id_3788, dsum1_snd_669 };
                                                 choose_res_3787 = id_3789;
                                               } else {
@@ -10180,8 +10179,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                 bool id_3791 { bool(id_3790 == dsum1_fst_668) };
                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3792;
                                                 if (id_3791) {
-                                                  (void)::dessser::VOID;
-                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3793 { std::in_place_index<9>, ::dessser::VOID };
+                                                  (void)::dessser::Void();
+                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3793 { std::in_place_index<9>, ::dessser::Void() };
                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3794 { id_3793, dsum1_snd_669 };
                                                   choose_res_3792 = id_3794;
                                                 } else {
@@ -10189,8 +10188,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                   bool id_3796 { bool(id_3795 == dsum1_fst_668) };
                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3797;
                                                   if (id_3796) {
-                                                    (void)::dessser::VOID;
-                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3798 { std::in_place_index<10>, ::dessser::VOID };
+                                                    (void)::dessser::Void();
+                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3798 { std::in_place_index<10>, ::dessser::Void() };
                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3799 { id_3798, dsum1_snd_669 };
                                                     choose_res_3797 = id_3799;
                                                   } else {
@@ -10198,8 +10197,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                     bool id_3801 { bool(id_3800 == dsum1_fst_668) };
                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3802;
                                                     if (id_3801) {
-                                                      (void)::dessser::VOID;
-                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3803 { std::in_place_index<11>, ::dessser::VOID };
+                                                      (void)::dessser::Void();
+                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3803 { std::in_place_index<11>, ::dessser::Void() };
                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3804 { id_3803, dsum1_snd_669 };
                                                       choose_res_3802 = id_3804;
                                                     } else {
@@ -10207,8 +10206,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                       bool id_3806 { bool(id_3805 == dsum1_fst_668) };
                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3807;
                                                       if (id_3806) {
-                                                        (void)::dessser::VOID;
-                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3808 { std::in_place_index<12>, ::dessser::VOID };
+                                                        (void)::dessser::Void();
+                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3808 { std::in_place_index<12>, ::dessser::Void() };
                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3809 { id_3808, dsum1_snd_669 };
                                                         choose_res_3807 = id_3809;
                                                       } else {
@@ -10216,8 +10215,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         bool id_3811 { bool(id_3810 == dsum1_fst_668) };
                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3812;
                                                         if (id_3811) {
-                                                          (void)::dessser::VOID;
-                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3813 { std::in_place_index<13>, ::dessser::VOID };
+                                                          (void)::dessser::Void();
+                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3813 { std::in_place_index<13>, ::dessser::Void() };
                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3814 { id_3813, dsum1_snd_669 };
                                                           choose_res_3812 = id_3814;
                                                         } else {
@@ -10225,8 +10224,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                           bool id_3816 { bool(id_3815 == dsum1_fst_668) };
                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3817;
                                                           if (id_3816) {
-                                                            (void)::dessser::VOID;
-                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3818 { std::in_place_index<14>, ::dessser::VOID };
+                                                            (void)::dessser::Void();
+                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3818 { std::in_place_index<14>, ::dessser::Void() };
                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3819 { id_3818, dsum1_snd_669 };
                                                             choose_res_3817 = id_3819;
                                                           } else {
@@ -10234,8 +10233,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                             bool id_3821 { bool(id_3820 == dsum1_fst_668) };
                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3822;
                                                             if (id_3821) {
-                                                              (void)::dessser::VOID;
-                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3823 { std::in_place_index<15>, ::dessser::VOID };
+                                                              (void)::dessser::Void();
+                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3823 { std::in_place_index<15>, ::dessser::Void() };
                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3824 { id_3823, dsum1_snd_669 };
                                                               choose_res_3822 = id_3824;
                                                             } else {
@@ -10243,8 +10242,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                               bool id_3826 { bool(id_3825 == dsum1_fst_668) };
                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3827;
                                                               if (id_3826) {
-                                                                (void)::dessser::VOID;
-                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3828 { std::in_place_index<16>, ::dessser::VOID };
+                                                                (void)::dessser::Void();
+                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3828 { std::in_place_index<16>, ::dessser::Void() };
                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3829 { id_3828, dsum1_snd_669 };
                                                                 choose_res_3827 = id_3829;
                                                               } else {
@@ -10252,8 +10251,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                 bool id_3831 { bool(id_3830 == dsum1_fst_668) };
                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3832;
                                                                 if (id_3831) {
-                                                                  (void)::dessser::VOID;
-                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3833 { std::in_place_index<17>, ::dessser::VOID };
+                                                                  (void)::dessser::Void();
+                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3833 { std::in_place_index<17>, ::dessser::Void() };
                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3834 { id_3833, dsum1_snd_669 };
                                                                   choose_res_3832 = id_3834;
                                                                 } else {
@@ -10261,8 +10260,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                   bool id_3836 { bool(id_3835 == dsum1_fst_668) };
                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3837;
                                                                   if (id_3836) {
-                                                                    (void)::dessser::VOID;
-                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3838 { std::in_place_index<18>, ::dessser::VOID };
+                                                                    (void)::dessser::Void();
+                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3838 { std::in_place_index<18>, ::dessser::Void() };
                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3839 { id_3838, dsum1_snd_669 };
                                                                     choose_res_3837 = id_3839;
                                                                   } else {
@@ -10270,8 +10269,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                     bool id_3841 { bool(id_3840 == dsum1_fst_668) };
                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3842;
                                                                     if (id_3841) {
-                                                                      (void)::dessser::VOID;
-                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3843 { std::in_place_index<19>, ::dessser::VOID };
+                                                                      (void)::dessser::Void();
+                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3843 { std::in_place_index<19>, ::dessser::Void() };
                                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3844 { id_3843, dsum1_snd_669 };
                                                                       choose_res_3842 = id_3844;
                                                                     } else {
@@ -10279,8 +10278,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                       bool id_3846 { bool(id_3845 == dsum1_fst_668) };
                                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3847;
                                                                       if (id_3846) {
-                                                                        (void)::dessser::VOID;
-                                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3848 { std::in_place_index<20>, ::dessser::VOID };
+                                                                        (void)::dessser::Void();
+                                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3848 { std::in_place_index<20>, ::dessser::Void() };
                                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3849 { id_3848, dsum1_snd_669 };
                                                                         choose_res_3847 = id_3849;
                                                                       } else {
@@ -10288,8 +10287,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                         bool id_3851 { bool(id_3850 == dsum1_fst_668) };
                                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3852;
                                                                         if (id_3851) {
-                                                                          (void)::dessser::VOID;
-                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3853 { std::in_place_index<21>, ::dessser::VOID };
+                                                                          (void)::dessser::Void();
+                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3853 { std::in_place_index<21>, ::dessser::Void() };
                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3854 { id_3853, dsum1_snd_669 };
                                                                           choose_res_3852 = id_3854;
                                                                         } else {
@@ -10297,8 +10296,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                           bool id_3856 { bool(id_3855 == dsum1_fst_668) };
                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3857;
                                                                           if (id_3856) {
-                                                                            (void)::dessser::VOID;
-                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3858 { std::in_place_index<22>, ::dessser::VOID };
+                                                                            (void)::dessser::Void();
+                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3858 { std::in_place_index<22>, ::dessser::Void() };
                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3859 { id_3858, dsum1_snd_669 };
                                                                             choose_res_3857 = id_3859;
                                                                           } else {
@@ -10306,8 +10305,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                             bool id_3861 { bool(id_3860 == dsum1_fst_668) };
                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3862;
                                                                             if (id_3861) {
-                                                                              (void)::dessser::VOID;
-                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3863 { std::in_place_index<23>, ::dessser::VOID };
+                                                                              (void)::dessser::Void();
+                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3863 { std::in_place_index<23>, ::dessser::Void() };
                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3864 { id_3863, dsum1_snd_669 };
                                                                               choose_res_3862 = id_3864;
                                                                             } else {
@@ -10315,8 +10314,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                               bool id_3866 { bool(id_3865 == dsum1_fst_668) };
                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3867;
                                                                               if (id_3866) {
-                                                                                (void)::dessser::VOID;
-                                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3868 { std::in_place_index<24>, ::dessser::VOID };
+                                                                                (void)::dessser::Void();
+                                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3868 { std::in_place_index<24>, ::dessser::Void() };
                                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3869 { id_3868, dsum1_snd_669 };
                                                                                 choose_res_3867 = id_3869;
                                                                               } else {
@@ -10324,8 +10323,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                 bool id_3871 { bool(id_3870 == dsum1_fst_668) };
                                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3872;
                                                                                 if (id_3871) {
-                                                                                  (void)::dessser::VOID;
-                                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3873 { std::in_place_index<25>, ::dessser::VOID };
+                                                                                  (void)::dessser::Void();
+                                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3873 { std::in_place_index<25>, ::dessser::Void() };
                                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3874 { id_3873, dsum1_snd_669 };
                                                                                   choose_res_3872 = id_3874;
                                                                                 } else {
@@ -10333,8 +10332,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                   bool id_3876 { bool(id_3875 == dsum1_fst_668) };
                                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3877;
                                                                                   if (id_3876) {
-                                                                                    (void)::dessser::VOID;
-                                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3878 { std::in_place_index<26>, ::dessser::VOID };
+                                                                                    (void)::dessser::Void();
+                                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3878 { std::in_place_index<26>, ::dessser::Void() };
                                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3879 { id_3878, dsum1_snd_669 };
                                                                                     choose_res_3877 = id_3879;
                                                                                   } else {
@@ -10342,8 +10341,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                     bool id_3881 { bool(id_3880 == dsum1_fst_668) };
                                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3882;
                                                                                     if (id_3881) {
-                                                                                      (void)::dessser::VOID;
-                                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3883 { std::in_place_index<27>, ::dessser::VOID };
+                                                                                      (void)::dessser::Void();
+                                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3883 { std::in_place_index<27>, ::dessser::Void() };
                                                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3884 { id_3883, dsum1_snd_669 };
                                                                                       choose_res_3882 = id_3884;
                                                                                     } else {
@@ -10351,8 +10350,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                       bool id_3886 { bool(id_3885 == dsum1_fst_668) };
                                                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3887;
                                                                                       if (id_3886) {
-                                                                                        (void)::dessser::VOID;
-                                                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3888 { std::in_place_index<28>, ::dessser::VOID };
+                                                                                        (void)::dessser::Void();
+                                                                                        ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3888 { std::in_place_index<28>, ::dessser::Void() };
                                                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3889 { id_3888, dsum1_snd_669 };
                                                                                         choose_res_3887 = id_3889;
                                                                                       } else {
@@ -10360,8 +10359,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                         bool id_3891 { bool(id_3890 == dsum1_fst_668) };
                                                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3892;
                                                                                         if (id_3891) {
-                                                                                          (void)::dessser::VOID;
-                                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3893 { std::in_place_index<29>, ::dessser::VOID };
+                                                                                          (void)::dessser::Void();
+                                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3893 { std::in_place_index<29>, ::dessser::Void() };
                                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3894 { id_3893, dsum1_snd_669 };
                                                                                           choose_res_3892 = id_3894;
                                                                                         } else {
@@ -10369,8 +10368,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                           bool id_3896 { bool(id_3895 == dsum1_fst_668) };
                                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3897;
                                                                                           if (id_3896) {
-                                                                                            (void)::dessser::VOID;
-                                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3898 { std::in_place_index<30>, ::dessser::VOID };
+                                                                                            (void)::dessser::Void();
+                                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3898 { std::in_place_index<30>, ::dessser::Void() };
                                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3899 { id_3898, dsum1_snd_669 };
                                                                                             choose_res_3897 = id_3899;
                                                                                           } else {
@@ -10378,8 +10377,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                             bool id_3901 { bool(id_3900 == dsum1_fst_668) };
                                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3902;
                                                                                             if (id_3901) {
-                                                                                              (void)::dessser::VOID;
-                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3903 { std::in_place_index<31>, ::dessser::VOID };
+                                                                                              (void)::dessser::Void();
+                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3903 { std::in_place_index<31>, ::dessser::Void() };
                                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3904 { id_3903, dsum1_snd_669 };
                                                                                               choose_res_3902 = id_3904;
                                                                                             } else {
@@ -10387,8 +10386,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                               bool id_3906 { bool(id_3905 == dsum1_fst_668) };
                                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3907;
                                                                                               if (id_3906) {
-                                                                                                (void)::dessser::VOID;
-                                                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3908 { std::in_place_index<32>, ::dessser::VOID };
+                                                                                                (void)::dessser::Void();
+                                                                                                ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3908 { std::in_place_index<32>, ::dessser::Void() };
                                                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3909 { id_3908, dsum1_snd_669 };
                                                                                                 choose_res_3907 = id_3909;
                                                                                               } else {
@@ -10396,8 +10395,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                 bool id_3911 { bool(id_3910 == dsum1_fst_668) };
                                                                                                 ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3912;
                                                                                                 if (id_3911) {
-                                                                                                  (void)::dessser::VOID;
-                                                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3913 { std::in_place_index<33>, ::dessser::VOID };
+                                                                                                  (void)::dessser::Void();
+                                                                                                  ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3913 { std::in_place_index<33>, ::dessser::Void() };
                                                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3914 { id_3913, dsum1_snd_669 };
                                                                                                   choose_res_3912 = id_3914;
                                                                                                 } else {
@@ -10405,8 +10404,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                   bool id_3916 { bool(id_3915 == dsum1_fst_668) };
                                                                                                   ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3917;
                                                                                                   if (id_3916) {
-                                                                                                    (void)::dessser::VOID;
-                                                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3918 { std::in_place_index<34>, ::dessser::VOID };
+                                                                                                    (void)::dessser::Void();
+                                                                                                    ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3918 { std::in_place_index<34>, ::dessser::Void() };
                                                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3919 { id_3918, dsum1_snd_669 };
                                                                                                     choose_res_3917 = id_3919;
                                                                                                   } else {
@@ -10414,8 +10413,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                     bool id_3921 { bool(id_3920 == dsum1_fst_668) };
                                                                                                     ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3922;
                                                                                                     if (id_3921) {
-                                                                                                      (void)::dessser::VOID;
-                                                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3923 { std::in_place_index<35>, ::dessser::VOID };
+                                                                                                      (void)::dessser::Void();
+                                                                                                      ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3923 { std::in_place_index<35>, ::dessser::Void() };
                                                                                                       ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3924 { id_3923, dsum1_snd_669 };
                                                                                                       choose_res_3922 = id_3924;
                                                                                                     } else {
@@ -10450,7 +10449,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                                     auto leb128_fst_686 { std::get<0>(leb128_685) };
                                                                                                                     auto leb128_snd_687 { std::get<1>(leb128_685) };
                                                                                                                     uint8_t id_3942 { 0 };
-                                                                                                                    Void id_3943 { ((void)(p_ref_684[id_3942] = leb128_snd_687), ::dessser::VOID) };
+                                                                                                                    Void id_3943 { ((void)(p_ref_684[id_3942] = leb128_snd_687), ::dessser::Void()) };
                                                                                                                     (void)id_3943;
                                                                                                                     uint8_t id_3944 { 0 };
                                                                                                                     uint8_t id_3945 { 127 };
@@ -10462,14 +10461,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                                     uint8_t id_3951 { 0 };
                                                                                                                     uint32_t id_3952 { leb_ref_682[id_3951] };
                                                                                                                     uint32_t id_3953 { uint32_t(id_3950 | id_3952) };
-                                                                                                                    Void id_3954 { ((void)(leb_ref_682[id_3944] = id_3953), ::dessser::VOID) };
+                                                                                                                    Void id_3954 { ((void)(leb_ref_682[id_3944] = id_3953), ::dessser::Void()) };
                                                                                                                     (void)id_3954;
                                                                                                                     uint8_t id_3955 { 0 };
                                                                                                                     uint8_t id_3956 { 0 };
                                                                                                                     uint8_t id_3957 { shft_ref_683[id_3956] };
                                                                                                                     uint8_t id_3958 { 7 };
                                                                                                                     uint8_t id_3959 { uint8_t(id_3957 + id_3958) };
-                                                                                                                    Void id_3960 { ((void)(shft_ref_683[id_3955] = id_3959), ::dessser::VOID) };
+                                                                                                                    Void id_3960 { ((void)(shft_ref_683[id_3955] = id_3959), ::dessser::Void()) };
                                                                                                                     (void)id_3960;
                                                                                                                     uint8_t id_3961 { 128 };
                                                                                                                     bool id_3962 { bool(leb128_fst_686 >= id_3961) };
@@ -10479,10 +10478,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                                 }
                                                                                                                 while_flag_3936 = let_res_3940;
                                                                                                                 if (while_flag_3936) {
-                                                                                                                  (void)::dessser::VOID;
+                                                                                                                  (void)::dessser::Void();
                                                                                                                 }
                                                                                                               } while (while_flag_3936);
-                                                                                                              (void)::dessser::VOID;
+                                                                                                              (void)::dessser::Void();
                                                                                                               uint8_t id_3963 { 0 };
                                                                                                               uint32_t id_3964 { leb_ref_682[id_3963] };
                                                                                                               Size id_3965 { Size(id_3964) };
@@ -10522,8 +10521,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                         bool id_3977 { bool(id_3976 == dsum1_fst_668) };
                                                                                                         ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3978;
                                                                                                         if (id_3977) {
-                                                                                                          (void)::dessser::VOID;
-                                                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3979 { std::in_place_index<37>, ::dessser::VOID };
+                                                                                                          (void)::dessser::Void();
+                                                                                                          ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3979 { std::in_place_index<37>, ::dessser::Void() };
                                                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3980 { id_3979, dsum1_snd_669 };
                                                                                                           choose_res_3978 = id_3980;
                                                                                                         } else {
@@ -10531,8 +10530,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                           bool id_3982 { bool(id_3981 == dsum1_fst_668) };
                                                                                                           ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3983;
                                                                                                           if (id_3982) {
-                                                                                                            (void)::dessser::VOID;
-                                                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3984 { std::in_place_index<38>, ::dessser::VOID };
+                                                                                                            (void)::dessser::Void();
+                                                                                                            ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3984 { std::in_place_index<38>, ::dessser::Void() };
                                                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3985 { id_3984, dsum1_snd_669 };
                                                                                                             choose_res_3983 = id_3985;
                                                                                                           } else {
@@ -10540,17 +10539,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                                             bool id_3987 { bool(id_3986 == dsum1_fst_668) };
                                                                                                             ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 choose_res_3988;
                                                                                                             if (id_3987) {
-                                                                                                              (void)::dessser::VOID;
-                                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3989 { std::in_place_index<39>, ::dessser::VOID };
+                                                                                                              (void)::dessser::Void();
+                                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3989 { std::in_place_index<39>, ::dessser::Void() };
                                                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3990 { id_3989, dsum1_snd_669 };
                                                                                                               choose_res_3988 = id_3990;
                                                                                                             } else {
                                                                                                               uint16_t id_3991 { 40 };
                                                                                                               bool id_3992 { bool(dsum1_fst_668 == id_3991) };
-                                                                                                              Void id_3993 { ((void)(assert(id_3992)), ::dessser::VOID) };
+                                                                                                              Void id_3993 { ((void)(assert(id_3992)), ::dessser::Void()) };
                                                                                                               (void)id_3993;
-                                                                                                              (void)::dessser::VOID;
-                                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3994 { std::in_place_index<40>, ::dessser::VOID };
+                                                                                                              (void)::dessser::Void();
+                                                                                                              ::dessser::gen::raql_expr::tfc872cc1464cbe96060667943a7c7aa2 id_3994 { std::in_place_index<40>, ::dessser::Void() };
                                                                                                               ::dessser::gen::raql_expr::t9c5f197810798df40b6439c7b9ee5866 id_3995 { id_3994, dsum1_snd_669 };
                                                                                                               choose_res_3988 = id_3995;
                                                                                                             }
@@ -10677,8 +10676,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                 bool id_4011 { bool(id_4010 == dsum1_fst_615) };
                                 ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 choose_res_4012;
                                 if (id_4011) {
-                                  (void)::dessser::VOID;
-                                  ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4013 { std::in_place_index<0>, ::dessser::VOID };
+                                  (void)::dessser::Void();
+                                  ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4013 { std::in_place_index<0>, ::dessser::Void() };
                                   ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 id_4014 { id_4013, dsum1_snd_616 };
                                   choose_res_4012 = id_4014;
                                 } else {
@@ -10686,8 +10685,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   bool id_4016 { bool(id_4015 == dsum1_fst_615) };
                                   ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 choose_res_4017;
                                   if (id_4016) {
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4018 { std::in_place_index<1>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4018 { std::in_place_index<1>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 id_4019 { id_4018, dsum1_snd_616 };
                                     choose_res_4017 = id_4019;
                                   } else {
@@ -10695,17 +10694,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                     bool id_4021 { bool(id_4020 == dsum1_fst_615) };
                                     ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 choose_res_4022;
                                     if (id_4021) {
-                                      (void)::dessser::VOID;
-                                      ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4023 { std::in_place_index<2>, ::dessser::VOID };
+                                      (void)::dessser::Void();
+                                      ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4023 { std::in_place_index<2>, ::dessser::Void() };
                                       ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 id_4024 { id_4023, dsum1_snd_616 };
                                       choose_res_4022 = id_4024;
                                     } else {
                                       uint16_t id_4025 { 3 };
                                       bool id_4026 { bool(dsum1_fst_615 == id_4025) };
-                                      Void id_4027 { ((void)(assert(id_4026)), ::dessser::VOID) };
+                                      Void id_4027 { ((void)(assert(id_4026)), ::dessser::Void()) };
                                       (void)id_4027;
-                                      (void)::dessser::VOID;
-                                      ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4028 { std::in_place_index<3>, ::dessser::VOID };
+                                      (void)::dessser::Void();
+                                      ::dessser::gen::raql_expr::tac06034e7f5ac7e9726a145cb648d152 id_4028 { std::in_place_index<3>, ::dessser::Void() };
                                       ::dessser::gen::raql_expr::t3cba329735221fbd76cad667e976d582 id_4029 { id_4028, dsum1_snd_616 };
                                       choose_res_4022 = id_4029;
                                     }
@@ -10751,7 +10750,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             auto leb128_fst_636 { std::get<0>(leb128_635) };
                                             auto leb128_snd_637 { std::get<1>(leb128_635) };
                                             uint8_t id_4046 { 0 };
-                                            Void id_4047 { ((void)(p_ref_634[id_4046] = leb128_snd_637), ::dessser::VOID) };
+                                            Void id_4047 { ((void)(p_ref_634[id_4046] = leb128_snd_637), ::dessser::Void()) };
                                             (void)id_4047;
                                             uint8_t id_4048 { 0 };
                                             uint8_t id_4049 { 127 };
@@ -10763,14 +10762,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             uint8_t id_4055 { 0 };
                                             uint32_t id_4056 { leb_ref_632[id_4055] };
                                             uint32_t id_4057 { uint32_t(id_4054 | id_4056) };
-                                            Void id_4058 { ((void)(leb_ref_632[id_4048] = id_4057), ::dessser::VOID) };
+                                            Void id_4058 { ((void)(leb_ref_632[id_4048] = id_4057), ::dessser::Void()) };
                                             (void)id_4058;
                                             uint8_t id_4059 { 0 };
                                             uint8_t id_4060 { 0 };
                                             uint8_t id_4061 { shft_ref_633[id_4060] };
                                             uint8_t id_4062 { 7 };
                                             uint8_t id_4063 { uint8_t(id_4061 + id_4062) };
-                                            Void id_4064 { ((void)(shft_ref_633[id_4059] = id_4063), ::dessser::VOID) };
+                                            Void id_4064 { ((void)(shft_ref_633[id_4059] = id_4063), ::dessser::Void()) };
                                             (void)id_4064;
                                             uint8_t id_4065 { 128 };
                                             bool id_4066 { bool(leb128_fst_636 >= id_4065) };
@@ -10780,10 +10779,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         }
                                         while_flag_4040 = let_res_4044;
                                         if (while_flag_4040) {
-                                          (void)::dessser::VOID;
+                                          (void)::dessser::Void();
                                         }
                                       } while (while_flag_4040);
-                                      (void)::dessser::VOID;
+                                      (void)::dessser::Void();
                                       uint8_t id_4067 { 0 };
                                       uint32_t id_4068 { leb_ref_632[id_4067] };
                                       uint8_t id_4069 { 0 };
@@ -10837,25 +10836,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                   ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_4091 { id_4090, dlist3_snd_651 };
                                                   letpair_res_4089 = id_4091;
                                                 }
-                                                Void id_4092 { ((void)(inits_src_ref_644[id_4087] = letpair_res_4089), ::dessser::VOID) };
+                                                Void id_4092 { ((void)(inits_src_ref_644[id_4087] = letpair_res_4089), ::dessser::Void()) };
                                                 (void)id_4092;
                                               }
-                                              (void)::dessser::VOID;
+                                              (void)::dessser::Void();
                                             }
-                                            (void)::dessser::VOID;
+                                            (void)::dessser::Void();
                                             uint8_t id_4093 { 0 };
                                             uint8_t id_4094 { 0 };
                                             int32_t id_4095 { repeat_n_645[id_4094] };
                                             int32_t id_4096 { 1L };
                                             int32_t id_4097 { int32_t(id_4095 + id_4096) };
-                                            Void id_4098 { ((void)(repeat_n_645[id_4093] = id_4097), ::dessser::VOID) };
+                                            Void id_4098 { ((void)(repeat_n_645[id_4093] = id_4097), ::dessser::Void()) };
                                             (void)id_4098;
                                             (void)id_4098;
                                           }
                                         } while (while_flag_4080);
-                                        (void)::dessser::VOID;
+                                        (void)::dessser::Void();
                                       }
-                                      (void)::dessser::VOID;
+                                      (void)::dessser::Void();
                                       uint8_t id_4099 { 0 };
                                       ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_4100 { inits_src_ref_644[id_4099] };
                                       let_res_4077 = id_4100;
@@ -10902,8 +10901,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   bool id_4114 { bool(id_4113 == dsum1_fst_516) };
                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4115;
                                   if (id_4114) {
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4116 { std::in_place_index<0>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4116 { std::in_place_index<0>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4117 { id_4116, dsum1_snd_517 };
                                     choose_res_4115 = id_4117;
                                   } else {
@@ -10911,8 +10910,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                     bool id_4119 { bool(id_4118 == dsum1_fst_516) };
                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4120;
                                     if (id_4119) {
-                                      (void)::dessser::VOID;
-                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4121 { std::in_place_index<1>, ::dessser::VOID };
+                                      (void)::dessser::Void();
+                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4121 { std::in_place_index<1>, ::dessser::Void() };
                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4122 { id_4121, dsum1_snd_517 };
                                       choose_res_4120 = id_4122;
                                     } else {
@@ -10920,8 +10919,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                       bool id_4124 { bool(id_4123 == dsum1_fst_516) };
                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4125;
                                       if (id_4124) {
-                                        (void)::dessser::VOID;
-                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4126 { std::in_place_index<2>, ::dessser::VOID };
+                                        (void)::dessser::Void();
+                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4126 { std::in_place_index<2>, ::dessser::Void() };
                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4127 { id_4126, dsum1_snd_517 };
                                         choose_res_4125 = id_4127;
                                       } else {
@@ -10929,8 +10928,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         bool id_4129 { bool(id_4128 == dsum1_fst_516) };
                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4130;
                                         if (id_4129) {
-                                          (void)::dessser::VOID;
-                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4131 { std::in_place_index<3>, ::dessser::VOID };
+                                          (void)::dessser::Void();
+                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4131 { std::in_place_index<3>, ::dessser::Void() };
                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4132 { id_4131, dsum1_snd_517 };
                                           choose_res_4130 = id_4132;
                                         } else {
@@ -10938,8 +10937,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           bool id_4134 { bool(id_4133 == dsum1_fst_516) };
                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4135;
                                           if (id_4134) {
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4136 { std::in_place_index<4>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4136 { std::in_place_index<4>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4137 { id_4136, dsum1_snd_517 };
                                             choose_res_4135 = id_4137;
                                           } else {
@@ -10947,8 +10946,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_4139 { bool(id_4138 == dsum1_fst_516) };
                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4140;
                                             if (id_4139) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4141 { std::in_place_index<5>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4141 { std::in_place_index<5>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4142 { id_4141, dsum1_snd_517 };
                                               choose_res_4140 = id_4142;
                                             } else {
@@ -10956,8 +10955,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                               bool id_4144 { bool(id_4143 == dsum1_fst_516) };
                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4145;
                                               if (id_4144) {
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4146 { std::in_place_index<6>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4146 { std::in_place_index<6>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4147 { id_4146, dsum1_snd_517 };
                                                 choose_res_4145 = id_4147;
                                               } else {
@@ -10965,8 +10964,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                 bool id_4149 { bool(id_4148 == dsum1_fst_516) };
                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4150;
                                                 if (id_4149) {
-                                                  (void)::dessser::VOID;
-                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4151 { std::in_place_index<7>, ::dessser::VOID };
+                                                  (void)::dessser::Void();
+                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4151 { std::in_place_index<7>, ::dessser::Void() };
                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4152 { id_4151, dsum1_snd_517 };
                                                   choose_res_4150 = id_4152;
                                                 } else {
@@ -10974,8 +10973,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                   bool id_4154 { bool(id_4153 == dsum1_fst_516) };
                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4155;
                                                   if (id_4154) {
-                                                    (void)::dessser::VOID;
-                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4156 { std::in_place_index<8>, ::dessser::VOID };
+                                                    (void)::dessser::Void();
+                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4156 { std::in_place_index<8>, ::dessser::Void() };
                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4157 { id_4156, dsum1_snd_517 };
                                                     choose_res_4155 = id_4157;
                                                   } else {
@@ -10983,8 +10982,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                     bool id_4159 { bool(id_4158 == dsum1_fst_516) };
                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4160;
                                                     if (id_4159) {
-                                                      (void)::dessser::VOID;
-                                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4161 { std::in_place_index<9>, ::dessser::VOID };
+                                                      (void)::dessser::Void();
+                                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4161 { std::in_place_index<9>, ::dessser::Void() };
                                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4162 { id_4161, dsum1_snd_517 };
                                                       choose_res_4160 = id_4162;
                                                     } else {
@@ -10992,8 +10991,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                       bool id_4164 { bool(id_4163 == dsum1_fst_516) };
                                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4165;
                                                       if (id_4164) {
-                                                        (void)::dessser::VOID;
-                                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4166 { std::in_place_index<10>, ::dessser::VOID };
+                                                        (void)::dessser::Void();
+                                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4166 { std::in_place_index<10>, ::dessser::Void() };
                                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4167 { id_4166, dsum1_snd_517 };
                                                         choose_res_4165 = id_4167;
                                                       } else {
@@ -11001,8 +11000,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         bool id_4169 { bool(id_4168 == dsum1_fst_516) };
                                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4170;
                                                         if (id_4169) {
-                                                          (void)::dessser::VOID;
-                                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4171 { std::in_place_index<11>, ::dessser::VOID };
+                                                          (void)::dessser::Void();
+                                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4171 { std::in_place_index<11>, ::dessser::Void() };
                                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4172 { id_4171, dsum1_snd_517 };
                                                           choose_res_4170 = id_4172;
                                                         } else {
@@ -11010,8 +11009,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                           bool id_4174 { bool(id_4173 == dsum1_fst_516) };
                                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4175;
                                                           if (id_4174) {
-                                                            (void)::dessser::VOID;
-                                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4176 { std::in_place_index<12>, ::dessser::VOID };
+                                                            (void)::dessser::Void();
+                                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4176 { std::in_place_index<12>, ::dessser::Void() };
                                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4177 { id_4176, dsum1_snd_517 };
                                                             choose_res_4175 = id_4177;
                                                           } else {
@@ -11019,8 +11018,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                             bool id_4179 { bool(id_4178 == dsum1_fst_516) };
                                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4180;
                                                             if (id_4179) {
-                                                              (void)::dessser::VOID;
-                                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4181 { std::in_place_index<13>, ::dessser::VOID };
+                                                              (void)::dessser::Void();
+                                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4181 { std::in_place_index<13>, ::dessser::Void() };
                                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4182 { id_4181, dsum1_snd_517 };
                                                               choose_res_4180 = id_4182;
                                                             } else {
@@ -11028,8 +11027,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                               bool id_4184 { bool(id_4183 == dsum1_fst_516) };
                                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4185;
                                                               if (id_4184) {
-                                                                (void)::dessser::VOID;
-                                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4186 { std::in_place_index<14>, ::dessser::VOID };
+                                                                (void)::dessser::Void();
+                                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4186 { std::in_place_index<14>, ::dessser::Void() };
                                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4187 { id_4186, dsum1_snd_517 };
                                                                 choose_res_4185 = id_4187;
                                                               } else {
@@ -11037,8 +11036,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                 bool id_4189 { bool(id_4188 == dsum1_fst_516) };
                                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4190;
                                                                 if (id_4189) {
-                                                                  (void)::dessser::VOID;
-                                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4191 { std::in_place_index<15>, ::dessser::VOID };
+                                                                  (void)::dessser::Void();
+                                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4191 { std::in_place_index<15>, ::dessser::Void() };
                                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4192 { id_4191, dsum1_snd_517 };
                                                                   choose_res_4190 = id_4192;
                                                                 } else {
@@ -11046,8 +11045,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                   bool id_4194 { bool(id_4193 == dsum1_fst_516) };
                                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4195;
                                                                   if (id_4194) {
-                                                                    (void)::dessser::VOID;
-                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4196 { std::in_place_index<16>, ::dessser::VOID };
+                                                                    (void)::dessser::Void();
+                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4196 { std::in_place_index<16>, ::dessser::Void() };
                                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4197 { id_4196, dsum1_snd_517 };
                                                                     choose_res_4195 = id_4197;
                                                                   } else {
@@ -11055,8 +11054,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                     bool id_4199 { bool(id_4198 == dsum1_fst_516) };
                                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4200;
                                                                     if (id_4199) {
-                                                                      (void)::dessser::VOID;
-                                                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4201 { std::in_place_index<17>, ::dessser::VOID };
+                                                                      (void)::dessser::Void();
+                                                                      ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4201 { std::in_place_index<17>, ::dessser::Void() };
                                                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4202 { id_4201, dsum1_snd_517 };
                                                                       choose_res_4200 = id_4202;
                                                                     } else {
@@ -11064,8 +11063,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                       bool id_4204 { bool(id_4203 == dsum1_fst_516) };
                                                                       ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4205;
                                                                       if (id_4204) {
-                                                                        (void)::dessser::VOID;
-                                                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4206 { std::in_place_index<18>, ::dessser::VOID };
+                                                                        (void)::dessser::Void();
+                                                                        ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4206 { std::in_place_index<18>, ::dessser::Void() };
                                                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4207 { id_4206, dsum1_snd_517 };
                                                                         choose_res_4205 = id_4207;
                                                                       } else {
@@ -11073,8 +11072,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                         bool id_4209 { bool(id_4208 == dsum1_fst_516) };
                                                                         ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4210;
                                                                         if (id_4209) {
-                                                                          (void)::dessser::VOID;
-                                                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4211 { std::in_place_index<19>, ::dessser::VOID };
+                                                                          (void)::dessser::Void();
+                                                                          ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4211 { std::in_place_index<19>, ::dessser::Void() };
                                                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4212 { id_4211, dsum1_snd_517 };
                                                                           choose_res_4210 = id_4212;
                                                                         } else {
@@ -11082,8 +11081,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                           bool id_4214 { bool(id_4213 == dsum1_fst_516) };
                                                                           ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4215;
                                                                           if (id_4214) {
-                                                                            (void)::dessser::VOID;
-                                                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4216 { std::in_place_index<20>, ::dessser::VOID };
+                                                                            (void)::dessser::Void();
+                                                                            ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4216 { std::in_place_index<20>, ::dessser::Void() };
                                                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4217 { id_4216, dsum1_snd_517 };
                                                                             choose_res_4215 = id_4217;
                                                                           } else {
@@ -11091,8 +11090,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                             bool id_4219 { bool(id_4218 == dsum1_fst_516) };
                                                                             ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4220;
                                                                             if (id_4219) {
-                                                                              (void)::dessser::VOID;
-                                                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4221 { std::in_place_index<21>, ::dessser::VOID };
+                                                                              (void)::dessser::Void();
+                                                                              ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4221 { std::in_place_index<21>, ::dessser::Void() };
                                                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4222 { id_4221, dsum1_snd_517 };
                                                                               choose_res_4220 = id_4222;
                                                                             } else {
@@ -11100,8 +11099,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                               bool id_4224 { bool(id_4223 == dsum1_fst_516) };
                                                                               ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4225;
                                                                               if (id_4224) {
-                                                                                (void)::dessser::VOID;
-                                                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4226 { std::in_place_index<22>, ::dessser::VOID };
+                                                                                (void)::dessser::Void();
+                                                                                ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4226 { std::in_place_index<22>, ::dessser::Void() };
                                                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4227 { id_4226, dsum1_snd_517 };
                                                                                 choose_res_4225 = id_4227;
                                                                               } else {
@@ -11109,8 +11108,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                 bool id_4229 { bool(id_4228 == dsum1_fst_516) };
                                                                                 ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4230;
                                                                                 if (id_4229) {
-                                                                                  (void)::dessser::VOID;
-                                                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4231 { std::in_place_index<23>, ::dessser::VOID };
+                                                                                  (void)::dessser::Void();
+                                                                                  ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4231 { std::in_place_index<23>, ::dessser::Void() };
                                                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4232 { id_4231, dsum1_snd_517 };
                                                                                   choose_res_4230 = id_4232;
                                                                                 } else {
@@ -11118,17 +11117,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                                   bool id_4234 { bool(id_4233 == dsum1_fst_516) };
                                                                                   ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 choose_res_4235;
                                                                                   if (id_4234) {
-                                                                                    (void)::dessser::VOID;
-                                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4236 { std::in_place_index<24>, ::dessser::VOID };
+                                                                                    (void)::dessser::Void();
+                                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4236 { std::in_place_index<24>, ::dessser::Void() };
                                                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4237 { id_4236, dsum1_snd_517 };
                                                                                     choose_res_4235 = id_4237;
                                                                                   } else {
                                                                                     uint16_t id_4238 { 25 };
                                                                                     bool id_4239 { bool(dsum1_fst_516 == id_4238) };
-                                                                                    Void id_4240 { ((void)(assert(id_4239)), ::dessser::VOID) };
+                                                                                    Void id_4240 { ((void)(assert(id_4239)), ::dessser::Void()) };
                                                                                     (void)id_4240;
-                                                                                    (void)::dessser::VOID;
-                                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4241 { std::in_place_index<25>, ::dessser::VOID };
+                                                                                    (void)::dessser::Void();
+                                                                                    ::dessser::gen::raql_expr::te52095a80ad6bacfa83739aedafdd0dd id_4241 { std::in_place_index<25>, ::dessser::Void() };
                                                                                     ::dessser::gen::raql_expr::td7283798d0c8c325d46a0756bc2b3947 id_4242 { id_4241, dsum1_snd_517 };
                                                                                     choose_res_4235 = id_4242;
                                                                                   }
@@ -11211,7 +11210,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                             } else {
                               uint16_t id_4251 { 4 };
                               bool id_4252 { bool(dsum1_fst_477 == id_4251) };
-                              Void id_4253 { ((void)(assert(id_4252)), ::dessser::VOID) };
+                              Void id_4253 { ((void)(assert(id_4252)), ::dessser::Void()) };
                               (void)id_4253;
                               ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 id_4254 { dsum1_snd_478.readU16Le() };
                               ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 letpair_res_4255;
@@ -11232,17 +11231,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                   bool id_4260 { bool(id_4259 == dsum1_fst_486) };
                                   ::dessser::gen::raql_expr::t9736613f01dca47db6cca3883968ee9c choose_res_4261;
                                   if (id_4260) {
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::t1f091b81f8cec4f4b6b65d838465ae9a id_4262 { std::in_place_index<0>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::t1f091b81f8cec4f4b6b65d838465ae9a id_4262 { std::in_place_index<0>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::t9736613f01dca47db6cca3883968ee9c id_4263 { id_4262, dsum1_snd_487 };
                                     choose_res_4261 = id_4263;
                                   } else {
                                     uint16_t id_4264 { 1 };
                                     bool id_4265 { bool(dsum1_fst_486 == id_4264) };
-                                    Void id_4266 { ((void)(assert(id_4265)), ::dessser::VOID) };
+                                    Void id_4266 { ((void)(assert(id_4265)), ::dessser::Void()) };
                                     (void)id_4266;
-                                    (void)::dessser::VOID;
-                                    ::dessser::gen::raql_expr::t1f091b81f8cec4f4b6b65d838465ae9a id_4267 { std::in_place_index<1>, ::dessser::VOID };
+                                    (void)::dessser::Void();
+                                    ::dessser::gen::raql_expr::t1f091b81f8cec4f4b6b65d838465ae9a id_4267 { std::in_place_index<1>, ::dessser::Void() };
                                     ::dessser::gen::raql_expr::t9736613f01dca47db6cca3883968ee9c id_4268 { id_4267, dsum1_snd_487 };
                                     choose_res_4261 = id_4268;
                                   }
@@ -11325,17 +11324,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                         bool id_4291 { bool(id_4290 == dsum1_fst_94) };
                         ::dessser::gen::raql_expr::tc076dec928239095d682f215efcf381c choose_res_4292;
                         if (id_4291) {
-                          (void)::dessser::VOID;
-                          ::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d id_4293 { std::in_place_index<0>, ::dessser::VOID };
+                          (void)::dessser::Void();
+                          ::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d id_4293 { std::in_place_index<0>, ::dessser::Void() };
                           ::dessser::gen::raql_expr::tc076dec928239095d682f215efcf381c id_4294 { id_4293, dsum1_snd_95 };
                           choose_res_4292 = id_4294;
                         } else {
                           uint16_t id_4295 { 1 };
                           bool id_4296 { bool(dsum1_fst_94 == id_4295) };
-                          Void id_4297 { ((void)(assert(id_4296)), ::dessser::VOID) };
+                          Void id_4297 { ((void)(assert(id_4296)), ::dessser::Void()) };
                           (void)id_4297;
-                          (void)::dessser::VOID;
-                          ::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d id_4298 { std::in_place_index<1>, ::dessser::VOID };
+                          (void)::dessser::Void();
+                          ::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d id_4298 { std::in_place_index<1>, ::dessser::Void() };
                           ::dessser::gen::raql_expr::tc076dec928239095d682f215efcf381c id_4299 { id_4298, dsum1_snd_95 };
                           choose_res_4292 = id_4299;
                         }
@@ -11406,8 +11405,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                       bool id_4324 { bool(id_4323 == dsum1_fst_390) };
                                       ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4325;
                                       if (id_4324) {
-                                        (void)::dessser::VOID;
-                                        ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4326 { std::in_place_index<0>, ::dessser::VOID };
+                                        (void)::dessser::Void();
+                                        ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4326 { std::in_place_index<0>, ::dessser::Void() };
                                         ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4327 { id_4326, dsum1_snd_391 };
                                         choose_res_4325 = id_4327;
                                       } else {
@@ -11415,8 +11414,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         bool id_4329 { bool(id_4328 == dsum1_fst_390) };
                                         ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4330;
                                         if (id_4329) {
-                                          (void)::dessser::VOID;
-                                          ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4331 { std::in_place_index<1>, ::dessser::VOID };
+                                          (void)::dessser::Void();
+                                          ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4331 { std::in_place_index<1>, ::dessser::Void() };
                                           ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4332 { id_4331, dsum1_snd_391 };
                                           choose_res_4330 = id_4332;
                                         } else {
@@ -11424,8 +11423,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           bool id_4334 { bool(id_4333 == dsum1_fst_390) };
                                           ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4335;
                                           if (id_4334) {
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4336 { std::in_place_index<2>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4336 { std::in_place_index<2>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4337 { id_4336, dsum1_snd_391 };
                                             choose_res_4335 = id_4337;
                                           } else {
@@ -11433,8 +11432,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_4339 { bool(id_4338 == dsum1_fst_390) };
                                             ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4340;
                                             if (id_4339) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4341 { std::in_place_index<3>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4341 { std::in_place_index<3>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4342 { id_4341, dsum1_snd_391 };
                                               choose_res_4340 = id_4342;
                                             } else {
@@ -11442,8 +11441,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                               bool id_4344 { bool(id_4343 == dsum1_fst_390) };
                                               ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4345;
                                               if (id_4344) {
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4346 { std::in_place_index<4>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4346 { std::in_place_index<4>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4347 { id_4346, dsum1_snd_391 };
                                                 choose_res_4345 = id_4347;
                                               } else {
@@ -11451,8 +11450,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                 bool id_4349 { bool(id_4348 == dsum1_fst_390) };
                                                 ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4350;
                                                 if (id_4349) {
-                                                  (void)::dessser::VOID;
-                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4351 { std::in_place_index<5>, ::dessser::VOID };
+                                                  (void)::dessser::Void();
+                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4351 { std::in_place_index<5>, ::dessser::Void() };
                                                   ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4352 { id_4351, dsum1_snd_391 };
                                                   choose_res_4350 = id_4352;
                                                 } else {
@@ -11460,8 +11459,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                   bool id_4354 { bool(id_4353 == dsum1_fst_390) };
                                                   ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4355;
                                                   if (id_4354) {
-                                                    (void)::dessser::VOID;
-                                                    ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4356 { std::in_place_index<6>, ::dessser::VOID };
+                                                    (void)::dessser::Void();
+                                                    ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4356 { std::in_place_index<6>, ::dessser::Void() };
                                                     ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4357 { id_4356, dsum1_snd_391 };
                                                     choose_res_4355 = id_4357;
                                                   } else {
@@ -11469,8 +11468,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                     bool id_4359 { bool(id_4358 == dsum1_fst_390) };
                                                     ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4360;
                                                     if (id_4359) {
-                                                      (void)::dessser::VOID;
-                                                      ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4361 { std::in_place_index<7>, ::dessser::VOID };
+                                                      (void)::dessser::Void();
+                                                      ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4361 { std::in_place_index<7>, ::dessser::Void() };
                                                       ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4362 { id_4361, dsum1_snd_391 };
                                                       choose_res_4360 = id_4362;
                                                     } else {
@@ -11478,8 +11477,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                       bool id_4364 { bool(id_4363 == dsum1_fst_390) };
                                                       ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4365;
                                                       if (id_4364) {
-                                                        (void)::dessser::VOID;
-                                                        ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4366 { std::in_place_index<8>, ::dessser::VOID };
+                                                        (void)::dessser::Void();
+                                                        ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4366 { std::in_place_index<8>, ::dessser::Void() };
                                                         ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4367 { id_4366, dsum1_snd_391 };
                                                         choose_res_4365 = id_4367;
                                                       } else {
@@ -11487,8 +11486,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                         bool id_4369 { bool(id_4368 == dsum1_fst_390) };
                                                         ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4370;
                                                         if (id_4369) {
-                                                          (void)::dessser::VOID;
-                                                          ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4371 { std::in_place_index<9>, ::dessser::VOID };
+                                                          (void)::dessser::Void();
+                                                          ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4371 { std::in_place_index<9>, ::dessser::Void() };
                                                           ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4372 { id_4371, dsum1_snd_391 };
                                                           choose_res_4370 = id_4372;
                                                         } else {
@@ -11496,8 +11495,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                           bool id_4374 { bool(id_4373 == dsum1_fst_390) };
                                                           ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4375;
                                                           if (id_4374) {
-                                                            (void)::dessser::VOID;
-                                                            ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4376 { std::in_place_index<10>, ::dessser::VOID };
+                                                            (void)::dessser::Void();
+                                                            ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4376 { std::in_place_index<10>, ::dessser::Void() };
                                                             ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4377 { id_4376, dsum1_snd_391 };
                                                             choose_res_4375 = id_4377;
                                                           } else {
@@ -11561,8 +11560,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                               bool id_4399 { bool(id_4398 == dsum1_fst_390) };
                                                               ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4400;
                                                               if (id_4399) {
-                                                                (void)::dessser::VOID;
-                                                                ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4401 { std::in_place_index<12>, ::dessser::VOID };
+                                                                (void)::dessser::Void();
+                                                                ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4401 { std::in_place_index<12>, ::dessser::Void() };
                                                                 ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4402 { id_4401, dsum1_snd_391 };
                                                                 choose_res_4400 = id_4402;
                                                               } else {
@@ -11570,17 +11569,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                 bool id_4404 { bool(id_4403 == dsum1_fst_390) };
                                                                 ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f choose_res_4405;
                                                                 if (id_4404) {
-                                                                  (void)::dessser::VOID;
-                                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4406 { std::in_place_index<13>, ::dessser::VOID };
+                                                                  (void)::dessser::Void();
+                                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4406 { std::in_place_index<13>, ::dessser::Void() };
                                                                   ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4407 { id_4406, dsum1_snd_391 };
                                                                   choose_res_4405 = id_4407;
                                                                 } else {
                                                                   uint16_t id_4408 { 14 };
                                                                   bool id_4409 { bool(dsum1_fst_390 == id_4408) };
-                                                                  Void id_4410 { ((void)(assert(id_4409)), ::dessser::VOID) };
+                                                                  Void id_4410 { ((void)(assert(id_4409)), ::dessser::Void()) };
                                                                   (void)id_4410;
-                                                                  (void)::dessser::VOID;
-                                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4411 { std::in_place_index<14>, ::dessser::VOID };
+                                                                  (void)::dessser::Void();
+                                                                  ::dessser::gen::raql_expr::t72c6a286926f82d38f40c2c2d00ebcc6 id_4411 { std::in_place_index<14>, ::dessser::Void() };
                                                                   ::dessser::gen::raql_expr::tb9364de84f89845fbdcb5e88d743800f id_4412 { id_4411, dsum1_snd_391 };
                                                                   choose_res_4405 = id_4412;
                                                                 }
@@ -11655,8 +11654,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                         bool id_4428 { bool(id_4427 == dsum1_fst_357) };
                                         ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 choose_res_4429;
                                         if (id_4428) {
-                                          (void)::dessser::VOID;
-                                          ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4430 { std::in_place_index<0>, ::dessser::VOID };
+                                          (void)::dessser::Void();
+                                          ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4430 { std::in_place_index<0>, ::dessser::Void() };
                                           ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 id_4431 { id_4430, dsum1_snd_358 };
                                           choose_res_4429 = id_4431;
                                         } else {
@@ -11664,8 +11663,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           bool id_4433 { bool(id_4432 == dsum1_fst_357) };
                                           ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 choose_res_4434;
                                           if (id_4433) {
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4435 { std::in_place_index<1>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4435 { std::in_place_index<1>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 id_4436 { id_4435, dsum1_snd_358 };
                                             choose_res_4434 = id_4436;
                                           } else {
@@ -11673,17 +11672,17 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_4438 { bool(id_4437 == dsum1_fst_357) };
                                             ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 choose_res_4439;
                                             if (id_4438) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4440 { std::in_place_index<2>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4440 { std::in_place_index<2>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 id_4441 { id_4440, dsum1_snd_358 };
                                               choose_res_4439 = id_4441;
                                             } else {
                                               uint16_t id_4442 { 3 };
                                               bool id_4443 { bool(dsum1_fst_357 == id_4442) };
-                                              Void id_4444 { ((void)(assert(id_4443)), ::dessser::VOID) };
+                                              Void id_4444 { ((void)(assert(id_4443)), ::dessser::Void()) };
                                               (void)id_4444;
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4445 { std::in_place_index<3>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::t876d3909cd2abea4388d017534c203f3 id_4445 { std::in_place_index<3>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::t6a60d11aac3ac24379f033a246e9d469 id_4446 { id_4445, dsum1_snd_358 };
                                               choose_res_4439 = id_4446;
                                             }
@@ -11743,8 +11742,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                           bool id_4464 { bool(id_4463 == dsum1_fst_321) };
                                           ::dessser::gen::raql_expr::t3ddb4633a3ccf43793c03838edabfa36 choose_res_4465;
                                           if (id_4464) {
-                                            (void)::dessser::VOID;
-                                            ::dessser::gen::raql_expr::tde6226ab24e2bde569d940f438b90782 id_4466 { std::in_place_index<0>, ::dessser::VOID };
+                                            (void)::dessser::Void();
+                                            ::dessser::gen::raql_expr::tde6226ab24e2bde569d940f438b90782 id_4466 { std::in_place_index<0>, ::dessser::Void() };
                                             ::dessser::gen::raql_expr::t3ddb4633a3ccf43793c03838edabfa36 id_4467 { id_4466, dsum1_snd_322 };
                                             choose_res_4465 = id_4467;
                                           } else {
@@ -11752,14 +11751,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_4469 { bool(id_4468 == dsum1_fst_321) };
                                             ::dessser::gen::raql_expr::t3ddb4633a3ccf43793c03838edabfa36 choose_res_4470;
                                             if (id_4469) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::tde6226ab24e2bde569d940f438b90782 id_4471 { std::in_place_index<1>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::tde6226ab24e2bde569d940f438b90782 id_4471 { std::in_place_index<1>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::t3ddb4633a3ccf43793c03838edabfa36 id_4472 { id_4471, dsum1_snd_322 };
                                               choose_res_4470 = id_4472;
                                             } else {
                                               uint16_t id_4473 { 2 };
                                               bool id_4474 { bool(dsum1_fst_321 == id_4473) };
-                                              Void id_4475 { ((void)(assert(id_4474)), ::dessser::VOID) };
+                                              Void id_4475 { ((void)(assert(id_4474)), ::dessser::Void()) };
                                               (void)id_4475;
                                               ::dessser::gen::raql_expr::t1a5d74abf838df33f185a72a8912f5c9 id_4476 { dsum1_snd_322.readU8() };
                                               ::dessser::gen::raql_expr::t3ddb4633a3ccf43793c03838edabfa36 letpair_res_4477;
@@ -11836,14 +11835,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             bool id_4502 { bool(id_4501 == dsum1_fst_285) };
                                             ::dessser::gen::raql_expr::t4ccad2556e823529795cd21badd54b9e choose_res_4503;
                                             if (id_4502) {
-                                              (void)::dessser::VOID;
-                                              ::dessser::gen::raql_expr::t482aebd3608ffaf2914a7e856b14192b id_4504 { std::in_place_index<0>, ::dessser::VOID };
+                                              (void)::dessser::Void();
+                                              ::dessser::gen::raql_expr::t482aebd3608ffaf2914a7e856b14192b id_4504 { std::in_place_index<0>, ::dessser::Void() };
                                               ::dessser::gen::raql_expr::t4ccad2556e823529795cd21badd54b9e id_4505 { id_4504, dsum1_snd_286 };
                                               choose_res_4503 = id_4505;
                                             } else {
                                               uint16_t id_4506 { 1 };
                                               bool id_4507 { bool(dsum1_fst_285 == id_4506) };
-                                              Void id_4508 { ((void)(assert(id_4507)), ::dessser::VOID) };
+                                              Void id_4508 { ((void)(assert(id_4507)), ::dessser::Void()) };
                                               (void)id_4508;
                                               ::dessser::gen::raql_expr::t1a5d74abf838df33f185a72a8912f5c9 id_4509 { dsum1_snd_286.readU8() };
                                               ::dessser::gen::raql_expr::t4ccad2556e823529795cd21badd54b9e letpair_res_4510;
@@ -11925,14 +11924,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                               bool id_4537 { bool(id_4536 == dsum1_fst_217) };
                                               ::dessser::gen::raql_expr::te93c07274cadb39058f1f0ef45b6ad7c choose_res_4538;
                                               if (id_4537) {
-                                                (void)::dessser::VOID;
-                                                ::dessser::gen::raql_expr::tdd3c5c0a7097ddd3d17c28956240cbea id_4539 { std::in_place_index<0>, ::dessser::VOID };
+                                                (void)::dessser::Void();
+                                                ::dessser::gen::raql_expr::tdd3c5c0a7097ddd3d17c28956240cbea id_4539 { std::in_place_index<0>, ::dessser::Void() };
                                                 ::dessser::gen::raql_expr::te93c07274cadb39058f1f0ef45b6ad7c id_4540 { id_4539, dsum1_snd_218 };
                                                 choose_res_4538 = id_4540;
                                               } else {
                                                 uint16_t id_4541 { 1 };
                                                 bool id_4542 { bool(dsum1_fst_217 == id_4541) };
-                                                Void id_4543 { ((void)(assert(id_4542)), ::dessser::VOID) };
+                                                Void id_4543 { ((void)(assert(id_4542)), ::dessser::Void()) };
                                                 (void)id_4543;
                                                 ::dessser::gen::raql_expr::t1a5d74abf838df33f185a72a8912f5c9 id_4544 { dsum1_snd_218.readU8() };
                                                 ::dessser::gen::raql_expr::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_4545;
@@ -12024,7 +12023,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                 auto leb128_fst_253 { std::get<0>(leb128_252) };
                                                                 auto leb128_snd_254 { std::get<1>(leb128_252) };
                                                                 uint8_t id_4582 { 0 };
-                                                                Void id_4583 { ((void)(p_ref_251[id_4582] = leb128_snd_254), ::dessser::VOID) };
+                                                                Void id_4583 { ((void)(p_ref_251[id_4582] = leb128_snd_254), ::dessser::Void()) };
                                                                 (void)id_4583;
                                                                 uint8_t id_4584 { 0 };
                                                                 uint8_t id_4585 { 127 };
@@ -12036,14 +12035,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                 uint8_t id_4591 { 0 };
                                                                 uint32_t id_4592 { leb_ref_249[id_4591] };
                                                                 uint32_t id_4593 { uint32_t(id_4590 | id_4592) };
-                                                                Void id_4594 { ((void)(leb_ref_249[id_4584] = id_4593), ::dessser::VOID) };
+                                                                Void id_4594 { ((void)(leb_ref_249[id_4584] = id_4593), ::dessser::Void()) };
                                                                 (void)id_4594;
                                                                 uint8_t id_4595 { 0 };
                                                                 uint8_t id_4596 { 0 };
                                                                 uint8_t id_4597 { shft_ref_250[id_4596] };
                                                                 uint8_t id_4598 { 7 };
                                                                 uint8_t id_4599 { uint8_t(id_4597 + id_4598) };
-                                                                Void id_4600 { ((void)(shft_ref_250[id_4595] = id_4599), ::dessser::VOID) };
+                                                                Void id_4600 { ((void)(shft_ref_250[id_4595] = id_4599), ::dessser::Void()) };
                                                                 (void)id_4600;
                                                                 uint8_t id_4601 { 128 };
                                                                 bool id_4602 { bool(leb128_fst_253 >= id_4601) };
@@ -12053,10 +12052,10 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                             }
                                                             while_flag_4576 = let_res_4580;
                                                             if (while_flag_4576) {
-                                                              (void)::dessser::VOID;
+                                                              (void)::dessser::Void();
                                                             }
                                                           } while (while_flag_4576);
-                                                          (void)::dessser::VOID;
+                                                          (void)::dessser::Void();
                                                           uint8_t id_4603 { 0 };
                                                           uint32_t id_4604 { leb_ref_249[id_4603] };
                                                           uint8_t id_4605 { 0 };
@@ -12110,25 +12109,25 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                                       ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_4627 { id_4626, dlist3_snd_268 };
                                                                       letpair_res_4625 = id_4627;
                                                                     }
-                                                                    Void id_4628 { ((void)(inits_src_ref_261[id_4623] = letpair_res_4625), ::dessser::VOID) };
+                                                                    Void id_4628 { ((void)(inits_src_ref_261[id_4623] = letpair_res_4625), ::dessser::Void()) };
                                                                     (void)id_4628;
                                                                   }
-                                                                  (void)::dessser::VOID;
+                                                                  (void)::dessser::Void();
                                                                 }
-                                                                (void)::dessser::VOID;
+                                                                (void)::dessser::Void();
                                                                 uint8_t id_4629 { 0 };
                                                                 uint8_t id_4630 { 0 };
                                                                 int32_t id_4631 { repeat_n_262[id_4630] };
                                                                 int32_t id_4632 { 1L };
                                                                 int32_t id_4633 { int32_t(id_4631 + id_4632) };
-                                                                Void id_4634 { ((void)(repeat_n_262[id_4629] = id_4633), ::dessser::VOID) };
+                                                                Void id_4634 { ((void)(repeat_n_262[id_4629] = id_4633), ::dessser::Void()) };
                                                                 (void)id_4634;
                                                                 (void)id_4634;
                                                               }
                                                             } while (while_flag_4616);
-                                                            (void)::dessser::VOID;
+                                                            (void)::dessser::Void();
                                                           }
-                                                          (void)::dessser::VOID;
+                                                          (void)::dessser::Void();
                                                           uint8_t id_4635 { 0 };
                                                           ::dessser::gen::raql_expr::t60d2a53484b8e0b6653034ad96861c61 id_4636 { inits_src_ref_261[id_4635] };
                                                           let_res_4613 = id_4636;
@@ -12179,7 +12178,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                 auto dsum1_snd_182 { std::get<1>(dsum1_180) };
                                                 uint16_t id_4649 { 0 };
                                                 bool id_4650 { bool(dsum1_fst_181 == id_4649) };
-                                                Void id_4651 { ((void)(assert(id_4650)), ::dessser::VOID) };
+                                                Void id_4651 { ((void)(assert(id_4650)), ::dessser::Void()) };
                                                 (void)id_4651;
                                                 ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 id_4652 { fun3236(dsum1_snd_182) };
                                                 ::dessser::gen::raql_expr::te2557e429400e3a0b269ce183540b5d9 letpair_res_4653;
@@ -12211,8 +12210,8 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                                           {
                                                             auto dtup_fst_205 { std::get<0>(id_4662) };
                                                             auto dtup_snd_206 { std::get<1>(id_4662) };
-                                                            (void)::dessser::VOID;
-                                                            ::dessser::gen::raql_expr::t824eb64756e46021431d5ff2fecbdb47 id_4664 { std::in_place_index<0>, ::dessser::VOID };
+                                                            (void)::dessser::Void();
+                                                            ::dessser::gen::raql_expr::t824eb64756e46021431d5ff2fecbdb47 id_4664 { std::in_place_index<0>, ::dessser::Void() };
                                                             ::dessser::gen::raql_expr::t6d6c48cf4b08d7c4eeda1a11c69738be id_4665 { id_4664, dtup_fst_190, dtup_fst_193, dtup_fst_196, dtup_fst_199, dtup_fst_202, dtup_fst_205 };
                                                             ::dessser::gen::raql_expr::t21c79d7ddf56bf769a52fb1b8eb70a95 id_4666 { std::in_place_index<5>, id_4665 };
                                                             ::dessser::gen::raql_expr::te2557e429400e3a0b269ce183540b5d9 id_4667 { id_4666, dtup_snd_206 };
@@ -12331,7 +12330,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                                             } else {
                                               uint16_t id_4706 { 7 };
                                               bool id_4707 { bool(dsum1_fst_118 == id_4706) };
-                                              Void id_4708 { ((void)(assert(id_4707)), ::dessser::VOID) };
+                                              Void id_4708 { ((void)(assert(id_4707)), ::dessser::Void()) };
                                               (void)id_4708;
                                               ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 id_4709 { fun3236(dsum1_snd_119) };
                                               ::dessser::gen::raql_expr::te2557e429400e3a0b269ce183540b5d9 letpair_res_4710;
@@ -12449,7 +12448,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                   } else {
                     uint16_t id_4746 { 6 };
                     bool id_4747 { bool(dsum1_fst_64 == id_4746) };
-                    Void id_4748 { ((void)(assert(id_4747)), ::dessser::VOID) };
+                    Void id_4748 { ((void)(assert(id_4747)), ::dessser::Void()) };
                     (void)id_4748;
                     ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 id_4749 { dsum1_snd_65.readU16Le() };
                     ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 letpair_res_4750;
@@ -12468,7 +12467,7 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
                         auto dsum1_snd_74 { std::get<1>(dsum1_72) };
                         uint16_t id_4754 { 0 };
                         bool id_4755 { bool(dsum1_fst_73 == id_4754) };
-                        Void id_4756 { ((void)(assert(id_4755)), ::dessser::VOID) };
+                        Void id_4756 { ((void)(assert(id_4755)), ::dessser::Void()) };
                         (void)id_4756;
                         ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 id_4757 { fun3236(dsum1_snd_74) };
                         ::dessser::gen::raql_expr::t9f2b31aaadb420708cbb94af41c9d1f1 letpair_res_4758;

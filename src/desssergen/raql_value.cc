@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -1041,8 +1040,8 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
         bool id_7 { bool(id_6 == dsum1_fst_82) };
         ::dessser::gen::raql_value::t154914fa186327343906567bc094f08e choose_res_8;
         if (id_7) {
-          (void)::dessser::VOID;
-          std::shared_ptr<::dessser::gen::raql_value::t>  id_9 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<0>, ::dessser::VOID) };
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::raql_value::t>  id_9 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<0>, ::dessser::Void()) };
           ::dessser::gen::raql_value::t154914fa186327343906567bc094f08e id_10 { id_9, dsum1_snd_83 };
           choose_res_8 = id_10;
         } else {
@@ -1050,8 +1049,8 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
           bool id_12 { bool(id_11 == dsum1_fst_82) };
           ::dessser::gen::raql_value::t154914fa186327343906567bc094f08e choose_res_13;
           if (id_12) {
-            (void)::dessser::VOID;
-            std::shared_ptr<::dessser::gen::raql_value::t>  id_14 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<1>, ::dessser::VOID) };
+            (void)::dessser::Void();
+            std::shared_ptr<::dessser::gen::raql_value::t>  id_14 { std::make_shared<::dessser::gen::raql_value::t>(std::in_place_index<1>, ::dessser::Void()) };
             ::dessser::gen::raql_value::t154914fa186327343906567bc094f08e id_15 { id_14, dsum1_snd_83 };
             choose_res_13 = id_15;
           } else {
@@ -1102,7 +1101,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                             auto leb128_fst_503 { std::get<0>(leb128_502) };
                             auto leb128_snd_504 { std::get<1>(leb128_502) };
                             uint8_t id_41 { 0 };
-                            Void id_42 { ((void)(p_ref_501[id_41] = leb128_snd_504), ::dessser::VOID) };
+                            Void id_42 { ((void)(p_ref_501[id_41] = leb128_snd_504), ::dessser::Void()) };
                             (void)id_42;
                             uint8_t id_43 { 0 };
                             uint8_t id_44 { 127 };
@@ -1114,14 +1113,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                             uint8_t id_50 { 0 };
                             uint32_t id_51 { leb_ref_499[id_50] };
                             uint32_t id_52 { uint32_t(id_49 | id_51) };
-                            Void id_53 { ((void)(leb_ref_499[id_43] = id_52), ::dessser::VOID) };
+                            Void id_53 { ((void)(leb_ref_499[id_43] = id_52), ::dessser::Void()) };
                             (void)id_53;
                             uint8_t id_54 { 0 };
                             uint8_t id_55 { 0 };
                             uint8_t id_56 { shft_ref_500[id_55] };
                             uint8_t id_57 { 7 };
                             uint8_t id_58 { uint8_t(id_56 + id_57) };
-                            Void id_59 { ((void)(shft_ref_500[id_54] = id_58), ::dessser::VOID) };
+                            Void id_59 { ((void)(shft_ref_500[id_54] = id_58), ::dessser::Void()) };
                             (void)id_59;
                             uint8_t id_60 { 128 };
                             bool id_61 { bool(leb128_fst_503 >= id_60) };
@@ -1131,10 +1130,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                         }
                         while_flag_35 = let_res_39;
                         if (while_flag_35) {
-                          (void)::dessser::VOID;
+                          (void)::dessser::Void();
                         }
                       } while (while_flag_35);
-                      (void)::dessser::VOID;
+                      (void)::dessser::Void();
                       uint8_t id_62 { 0 };
                       uint32_t id_63 { leb_ref_499[id_62] };
                       Size id_64 { Size(id_63) };
@@ -1589,7 +1588,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                     } else {
                                                                       uint16_t id_277 { 1 };
                                                                       bool id_278 { bool(dsum1_fst_326 == id_277) };
-                                                                      Void id_279 { ((void)(assert(id_278)), ::dessser::VOID) };
+                                                                      Void id_279 { ((void)(assert(id_278)), ::dessser::Void()) };
                                                                       (void)id_279;
                                                                       ::dessser::gen::raql_value::t859e6a4cc938643a1d59426a3bf7b15a id_280 { dsum1_snd_327.readU128Le() };
                                                                       ::dessser::gen::raql_value::td5b91cc4eacb7073aad7ac65784b815a letpair_res_281;
@@ -1782,7 +1781,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                           } else {
                                                                             uint16_t id_350 { 1 };
                                                                             bool id_351 { bool(dsum1_fst_227 == id_350) };
-                                                                            Void id_352 { ((void)(assert(id_351)), ::dessser::VOID) };
+                                                                            Void id_352 { ((void)(assert(id_351)), ::dessser::Void()) };
                                                                             (void)id_352;
                                                                             ::dessser::gen::raql_value::t859e6a4cc938643a1d59426a3bf7b15a id_353 { dsum1_snd_228.readU128Le() };
                                                                             ::dessser::gen::raql_value::t859e6a4cc938643a1d59426a3bf7b15a letpair_res_354;
@@ -1875,7 +1874,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                     auto leb128_fst_198 { std::get<0>(leb128_197) };
                                                                                     auto leb128_snd_199 { std::get<1>(leb128_197) };
                                                                                     uint8_t id_389 { 0 };
-                                                                                    Void id_390 { ((void)(p_ref_196[id_389] = leb128_snd_199), ::dessser::VOID) };
+                                                                                    Void id_390 { ((void)(p_ref_196[id_389] = leb128_snd_199), ::dessser::Void()) };
                                                                                     (void)id_390;
                                                                                     uint8_t id_391 { 0 };
                                                                                     uint8_t id_392 { 127 };
@@ -1887,14 +1886,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                     uint8_t id_398 { 0 };
                                                                                     uint32_t id_399 { leb_ref_194[id_398] };
                                                                                     uint32_t id_400 { uint32_t(id_397 | id_399) };
-                                                                                    Void id_401 { ((void)(leb_ref_194[id_391] = id_400), ::dessser::VOID) };
+                                                                                    Void id_401 { ((void)(leb_ref_194[id_391] = id_400), ::dessser::Void()) };
                                                                                     (void)id_401;
                                                                                     uint8_t id_402 { 0 };
                                                                                     uint8_t id_403 { 0 };
                                                                                     uint8_t id_404 { shft_ref_195[id_403] };
                                                                                     uint8_t id_405 { 7 };
                                                                                     uint8_t id_406 { uint8_t(id_404 + id_405) };
-                                                                                    Void id_407 { ((void)(shft_ref_195[id_402] = id_406), ::dessser::VOID) };
+                                                                                    Void id_407 { ((void)(shft_ref_195[id_402] = id_406), ::dessser::Void()) };
                                                                                     (void)id_407;
                                                                                     uint8_t id_408 { 128 };
                                                                                     bool id_409 { bool(leb128_fst_198 >= id_408) };
@@ -1904,10 +1903,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                 }
                                                                                 while_flag_383 = let_res_387;
                                                                                 if (while_flag_383) {
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                 }
                                                                               } while (while_flag_383);
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_410 { 0 };
                                                                               uint32_t id_411 { leb_ref_194[id_410] };
                                                                               uint8_t id_412 { 0 };
@@ -1961,25 +1960,25 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                           ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_434 { id_433, dlist3_snd_213 };
                                                                                           letpair_res_432 = id_434;
                                                                                         }
-                                                                                        Void id_435 { ((void)(inits_src_ref_206[id_430] = letpair_res_432), ::dessser::VOID) };
+                                                                                        Void id_435 { ((void)(inits_src_ref_206[id_430] = letpair_res_432), ::dessser::Void()) };
                                                                                         (void)id_435;
                                                                                       }
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                     uint8_t id_436 { 0 };
                                                                                     uint8_t id_437 { 0 };
                                                                                     int32_t id_438 { repeat_n_207[id_437] };
                                                                                     int32_t id_439 { 1L };
                                                                                     int32_t id_440 { int32_t(id_438 + id_439) };
-                                                                                    Void id_441 { ((void)(repeat_n_207[id_436] = id_440), ::dessser::VOID) };
+                                                                                    Void id_441 { ((void)(repeat_n_207[id_436] = id_440), ::dessser::Void()) };
                                                                                     (void)id_441;
                                                                                     (void)id_441;
                                                                                   }
                                                                                 } while (while_flag_423);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                               }
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_442 { 0 };
                                                                               ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_443 { inits_src_ref_206[id_442] };
                                                                               let_res_420 = id_443;
@@ -2030,7 +2029,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                       auto leb128_fst_172 { std::get<0>(leb128_171) };
                                                                                       auto leb128_snd_173 { std::get<1>(leb128_171) };
                                                                                       uint8_t id_465 { 0 };
-                                                                                      Void id_466 { ((void)(p_ref_170[id_465] = leb128_snd_173), ::dessser::VOID) };
+                                                                                      Void id_466 { ((void)(p_ref_170[id_465] = leb128_snd_173), ::dessser::Void()) };
                                                                                       (void)id_466;
                                                                                       uint8_t id_467 { 0 };
                                                                                       uint8_t id_468 { 127 };
@@ -2042,14 +2041,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                       uint8_t id_474 { 0 };
                                                                                       uint32_t id_475 { leb_ref_168[id_474] };
                                                                                       uint32_t id_476 { uint32_t(id_473 | id_475) };
-                                                                                      Void id_477 { ((void)(leb_ref_168[id_467] = id_476), ::dessser::VOID) };
+                                                                                      Void id_477 { ((void)(leb_ref_168[id_467] = id_476), ::dessser::Void()) };
                                                                                       (void)id_477;
                                                                                       uint8_t id_478 { 0 };
                                                                                       uint8_t id_479 { 0 };
                                                                                       uint8_t id_480 { shft_ref_169[id_479] };
                                                                                       uint8_t id_481 { 7 };
                                                                                       uint8_t id_482 { uint8_t(id_480 + id_481) };
-                                                                                      Void id_483 { ((void)(shft_ref_169[id_478] = id_482), ::dessser::VOID) };
+                                                                                      Void id_483 { ((void)(shft_ref_169[id_478] = id_482), ::dessser::Void()) };
                                                                                       (void)id_483;
                                                                                       uint8_t id_484 { 128 };
                                                                                       bool id_485 { bool(leb128_fst_172 >= id_484) };
@@ -2059,10 +2058,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                   }
                                                                                   while_flag_459 = let_res_463;
                                                                                   if (while_flag_459) {
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                   }
                                                                                 } while (while_flag_459);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_486 { 0 };
                                                                                 uint32_t id_487 { leb_ref_168[id_486] };
                                                                                 uint8_t id_488 { 0 };
@@ -2116,25 +2115,25 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                             ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_510 { id_509, dlist3_snd_187 };
                                                                                             letpair_res_508 = id_510;
                                                                                           }
-                                                                                          Void id_511 { ((void)(inits_src_ref_180[id_506] = letpair_res_508), ::dessser::VOID) };
+                                                                                          Void id_511 { ((void)(inits_src_ref_180[id_506] = letpair_res_508), ::dessser::Void()) };
                                                                                           (void)id_511;
                                                                                         }
-                                                                                        (void)::dessser::VOID;
+                                                                                        (void)::dessser::Void();
                                                                                       }
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                       uint8_t id_512 { 0 };
                                                                                       uint8_t id_513 { 0 };
                                                                                       int32_t id_514 { repeat_n_181[id_513] };
                                                                                       int32_t id_515 { 1L };
                                                                                       int32_t id_516 { int32_t(id_514 + id_515) };
-                                                                                      Void id_517 { ((void)(repeat_n_181[id_512] = id_516), ::dessser::VOID) };
+                                                                                      Void id_517 { ((void)(repeat_n_181[id_512] = id_516), ::dessser::Void()) };
                                                                                       (void)id_517;
                                                                                       (void)id_517;
                                                                                     }
                                                                                   } while (while_flag_499);
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                 }
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_518 { 0 };
                                                                                 ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_519 { inits_src_ref_180[id_518] };
                                                                                 let_res_496 = id_519;
@@ -2185,7 +2184,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                         auto leb128_fst_146 { std::get<0>(leb128_145) };
                                                                                         auto leb128_snd_147 { std::get<1>(leb128_145) };
                                                                                         uint8_t id_541 { 0 };
-                                                                                        Void id_542 { ((void)(p_ref_144[id_541] = leb128_snd_147), ::dessser::VOID) };
+                                                                                        Void id_542 { ((void)(p_ref_144[id_541] = leb128_snd_147), ::dessser::Void()) };
                                                                                         (void)id_542;
                                                                                         uint8_t id_543 { 0 };
                                                                                         uint8_t id_544 { 127 };
@@ -2197,14 +2196,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                         uint8_t id_550 { 0 };
                                                                                         uint32_t id_551 { leb_ref_142[id_550] };
                                                                                         uint32_t id_552 { uint32_t(id_549 | id_551) };
-                                                                                        Void id_553 { ((void)(leb_ref_142[id_543] = id_552), ::dessser::VOID) };
+                                                                                        Void id_553 { ((void)(leb_ref_142[id_543] = id_552), ::dessser::Void()) };
                                                                                         (void)id_553;
                                                                                         uint8_t id_554 { 0 };
                                                                                         uint8_t id_555 { 0 };
                                                                                         uint8_t id_556 { shft_ref_143[id_555] };
                                                                                         uint8_t id_557 { 7 };
                                                                                         uint8_t id_558 { uint8_t(id_556 + id_557) };
-                                                                                        Void id_559 { ((void)(shft_ref_143[id_554] = id_558), ::dessser::VOID) };
+                                                                                        Void id_559 { ((void)(shft_ref_143[id_554] = id_558), ::dessser::Void()) };
                                                                                         (void)id_559;
                                                                                         uint8_t id_560 { 128 };
                                                                                         bool id_561 { bool(leb128_fst_146 >= id_560) };
@@ -2214,10 +2213,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                     }
                                                                                     while_flag_535 = let_res_539;
                                                                                     if (while_flag_535) {
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
                                                                                   } while (while_flag_535);
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_562 { 0 };
                                                                                   uint32_t id_563 { leb_ref_142[id_562] };
                                                                                   uint8_t id_564 { 0 };
@@ -2271,25 +2270,25 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                               ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_586 { id_585, dlist3_snd_161 };
                                                                                               letpair_res_584 = id_586;
                                                                                             }
-                                                                                            Void id_587 { ((void)(inits_src_ref_154[id_582] = letpair_res_584), ::dessser::VOID) };
+                                                                                            Void id_587 { ((void)(inits_src_ref_154[id_582] = letpair_res_584), ::dessser::Void()) };
                                                                                             (void)id_587;
                                                                                           }
-                                                                                          (void)::dessser::VOID;
+                                                                                          (void)::dessser::Void();
                                                                                         }
-                                                                                        (void)::dessser::VOID;
+                                                                                        (void)::dessser::Void();
                                                                                         uint8_t id_588 { 0 };
                                                                                         uint8_t id_589 { 0 };
                                                                                         int32_t id_590 { repeat_n_155[id_589] };
                                                                                         int32_t id_591 { 1L };
                                                                                         int32_t id_592 { int32_t(id_590 + id_591) };
-                                                                                        Void id_593 { ((void)(repeat_n_155[id_588] = id_592), ::dessser::VOID) };
+                                                                                        Void id_593 { ((void)(repeat_n_155[id_588] = id_592), ::dessser::Void()) };
                                                                                         (void)id_593;
                                                                                         (void)id_593;
                                                                                       }
                                                                                     } while (while_flag_575);
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                   }
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_594 { 0 };
                                                                                   ::dessser::gen::raql_value::td7923d3f6d8f6add6849bd1b0a41351f id_595 { inits_src_ref_154[id_594] };
                                                                                   let_res_572 = id_595;
@@ -2340,7 +2339,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                           auto leb128_fst_120 { std::get<0>(leb128_119) };
                                                                                           auto leb128_snd_121 { std::get<1>(leb128_119) };
                                                                                           uint8_t id_617 { 0 };
-                                                                                          Void id_618 { ((void)(p_ref_118[id_617] = leb128_snd_121), ::dessser::VOID) };
+                                                                                          Void id_618 { ((void)(p_ref_118[id_617] = leb128_snd_121), ::dessser::Void()) };
                                                                                           (void)id_618;
                                                                                           uint8_t id_619 { 0 };
                                                                                           uint8_t id_620 { 127 };
@@ -2352,14 +2351,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                           uint8_t id_626 { 0 };
                                                                                           uint32_t id_627 { leb_ref_116[id_626] };
                                                                                           uint32_t id_628 { uint32_t(id_625 | id_627) };
-                                                                                          Void id_629 { ((void)(leb_ref_116[id_619] = id_628), ::dessser::VOID) };
+                                                                                          Void id_629 { ((void)(leb_ref_116[id_619] = id_628), ::dessser::Void()) };
                                                                                           (void)id_629;
                                                                                           uint8_t id_630 { 0 };
                                                                                           uint8_t id_631 { 0 };
                                                                                           uint8_t id_632 { shft_ref_117[id_631] };
                                                                                           uint8_t id_633 { 7 };
                                                                                           uint8_t id_634 { uint8_t(id_632 + id_633) };
-                                                                                          Void id_635 { ((void)(shft_ref_117[id_630] = id_634), ::dessser::VOID) };
+                                                                                          Void id_635 { ((void)(shft_ref_117[id_630] = id_634), ::dessser::Void()) };
                                                                                           (void)id_635;
                                                                                           uint8_t id_636 { 128 };
                                                                                           bool id_637 { bool(leb128_fst_120 >= id_636) };
@@ -2369,10 +2368,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                       }
                                                                                       while_flag_611 = let_res_615;
                                                                                       if (while_flag_611) {
-                                                                                        (void)::dessser::VOID;
+                                                                                        (void)::dessser::Void();
                                                                                       }
                                                                                     } while (while_flag_611);
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                     uint8_t id_638 { 0 };
                                                                                     uint32_t id_639 { leb_ref_116[id_638] };
                                                                                     uint8_t id_640 { 0 };
@@ -2426,25 +2425,25 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                                 ::dessser::gen::raql_value::t7edef2aa82c167066e365042d8a9a97e id_662 { id_661, dlist3_snd_135 };
                                                                                                 letpair_res_660 = id_662;
                                                                                               }
-                                                                                              Void id_663 { ((void)(inits_src_ref_128[id_658] = letpair_res_660), ::dessser::VOID) };
+                                                                                              Void id_663 { ((void)(inits_src_ref_128[id_658] = letpair_res_660), ::dessser::Void()) };
                                                                                               (void)id_663;
                                                                                             }
-                                                                                            (void)::dessser::VOID;
+                                                                                            (void)::dessser::Void();
                                                                                           }
-                                                                                          (void)::dessser::VOID;
+                                                                                          (void)::dessser::Void();
                                                                                           uint8_t id_664 { 0 };
                                                                                           uint8_t id_665 { 0 };
                                                                                           int32_t id_666 { repeat_n_129[id_665] };
                                                                                           int32_t id_667 { 1L };
                                                                                           int32_t id_668 { int32_t(id_666 + id_667) };
-                                                                                          Void id_669 { ((void)(repeat_n_129[id_664] = id_668), ::dessser::VOID) };
+                                                                                          Void id_669 { ((void)(repeat_n_129[id_664] = id_668), ::dessser::Void()) };
                                                                                           (void)id_669;
                                                                                           (void)id_669;
                                                                                         }
                                                                                       } while (while_flag_651);
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                     uint8_t id_670 { 0 };
                                                                                     ::dessser::gen::raql_value::t7edef2aa82c167066e365042d8a9a97e id_671 { inits_src_ref_128[id_670] };
                                                                                     let_res_648 = id_671;
@@ -2466,7 +2465,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                             } else {
                                                                               uint16_t id_676 { 35 };
                                                                               bool id_677 { bool(dsum1_fst_82 == id_676) };
-                                                                              Void id_678 { ((void)(assert(id_677)), ::dessser::VOID) };
+                                                                              Void id_678 { ((void)(assert(id_677)), ::dessser::Void()) };
                                                                               (void)id_678;
                                                                               uint32_t id_679 { 0U };
                                                                               Vec<1, uint32_t> id_680 {  id_679  };
@@ -2495,7 +2494,7 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                           auto leb128_fst_88 { std::get<0>(leb128_87) };
                                                                                           auto leb128_snd_89 { std::get<1>(leb128_87) };
                                                                                           uint8_t id_693 { 0 };
-                                                                                          Void id_694 { ((void)(p_ref_86[id_693] = leb128_snd_89), ::dessser::VOID) };
+                                                                                          Void id_694 { ((void)(p_ref_86[id_693] = leb128_snd_89), ::dessser::Void()) };
                                                                                           (void)id_694;
                                                                                           uint8_t id_695 { 0 };
                                                                                           uint8_t id_696 { 127 };
@@ -2507,14 +2506,14 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                           uint8_t id_702 { 0 };
                                                                                           uint32_t id_703 { leb_ref_84[id_702] };
                                                                                           uint32_t id_704 { uint32_t(id_701 | id_703) };
-                                                                                          Void id_705 { ((void)(leb_ref_84[id_695] = id_704), ::dessser::VOID) };
+                                                                                          Void id_705 { ((void)(leb_ref_84[id_695] = id_704), ::dessser::Void()) };
                                                                                           (void)id_705;
                                                                                           uint8_t id_706 { 0 };
                                                                                           uint8_t id_707 { 0 };
                                                                                           uint8_t id_708 { shft_ref_85[id_707] };
                                                                                           uint8_t id_709 { 7 };
                                                                                           uint8_t id_710 { uint8_t(id_708 + id_709) };
-                                                                                          Void id_711 { ((void)(shft_ref_85[id_706] = id_710), ::dessser::VOID) };
+                                                                                          Void id_711 { ((void)(shft_ref_85[id_706] = id_710), ::dessser::Void()) };
                                                                                           (void)id_711;
                                                                                           uint8_t id_712 { 128 };
                                                                                           bool id_713 { bool(leb128_fst_88 >= id_712) };
@@ -2524,10 +2523,10 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                       }
                                                                                       while_flag_687 = let_res_691;
                                                                                       if (while_flag_687) {
-                                                                                        (void)::dessser::VOID;
+                                                                                        (void)::dessser::Void();
                                                                                       }
                                                                                     } while (while_flag_687);
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                     uint8_t id_714 { 0 };
                                                                                     uint32_t id_715 { leb_ref_84[id_714] };
                                                                                     uint8_t id_716 { 0 };
@@ -2589,25 +2588,25 @@ static std::function<::dessser::gen::raql_value::t154914fa186327343906567bc094f0
                                                                                                 }
                                                                                                 letpair_res_736 = letpair_res_738;
                                                                                               }
-                                                                                              Void id_742 { ((void)(inits_src_ref_96[id_734] = letpair_res_736), ::dessser::VOID) };
+                                                                                              Void id_742 { ((void)(inits_src_ref_96[id_734] = letpair_res_736), ::dessser::Void()) };
                                                                                               (void)id_742;
                                                                                             }
-                                                                                            (void)::dessser::VOID;
+                                                                                            (void)::dessser::Void();
                                                                                           }
-                                                                                          (void)::dessser::VOID;
+                                                                                          (void)::dessser::Void();
                                                                                           uint8_t id_743 { 0 };
                                                                                           uint8_t id_744 { 0 };
                                                                                           int32_t id_745 { repeat_n_97[id_744] };
                                                                                           int32_t id_746 { 1L };
                                                                                           int32_t id_747 { int32_t(id_745 + id_746) };
-                                                                                          Void id_748 { ((void)(repeat_n_97[id_743] = id_747), ::dessser::VOID) };
+                                                                                          Void id_748 { ((void)(repeat_n_97[id_743] = id_747), ::dessser::Void()) };
                                                                                           (void)id_748;
                                                                                           (void)id_748;
                                                                                         }
                                                                                       } while (while_flag_727);
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                     uint8_t id_749 { 0 };
                                                                                     ::dessser::gen::raql_value::t217cee98ec313f21a12369fd1762c5c4 id_750 { inits_src_ref_96[id_749] };
                                                                                     let_res_724 = id_750;
@@ -2758,7 +2757,7 @@ static std::function<::dessser::gen::raql_value::t9f25ed50c831f0d73db2f922456ab5
                 auto leb128_fst_61 { std::get<0>(leb128_60) };
                 auto leb128_snd_62 { std::get<1>(leb128_60) };
                 uint8_t id_770 { 0 };
-                Void id_771 { ((void)(p_ref_59[id_770] = leb128_snd_62), ::dessser::VOID) };
+                Void id_771 { ((void)(p_ref_59[id_770] = leb128_snd_62), ::dessser::Void()) };
                 (void)id_771;
                 uint8_t id_772 { 0 };
                 uint8_t id_773 { 127 };
@@ -2770,14 +2769,14 @@ static std::function<::dessser::gen::raql_value::t9f25ed50c831f0d73db2f922456ab5
                 uint8_t id_779 { 0 };
                 uint32_t id_780 { leb_ref_57[id_779] };
                 uint32_t id_781 { uint32_t(id_778 | id_780) };
-                Void id_782 { ((void)(leb_ref_57[id_772] = id_781), ::dessser::VOID) };
+                Void id_782 { ((void)(leb_ref_57[id_772] = id_781), ::dessser::Void()) };
                 (void)id_782;
                 uint8_t id_783 { 0 };
                 uint8_t id_784 { 0 };
                 uint8_t id_785 { shft_ref_58[id_784] };
                 uint8_t id_786 { 7 };
                 uint8_t id_787 { uint8_t(id_785 + id_786) };
-                Void id_788 { ((void)(shft_ref_58[id_783] = id_787), ::dessser::VOID) };
+                Void id_788 { ((void)(shft_ref_58[id_783] = id_787), ::dessser::Void()) };
                 (void)id_788;
                 uint8_t id_789 { 128 };
                 bool id_790 { bool(leb128_fst_61 >= id_789) };
@@ -2787,10 +2786,10 @@ static std::function<::dessser::gen::raql_value::t9f25ed50c831f0d73db2f922456ab5
             }
             while_flag_764 = let_res_768;
             if (while_flag_764) {
-              (void)::dessser::VOID;
+              (void)::dessser::Void();
             }
           } while (while_flag_764);
-          (void)::dessser::VOID;
+          (void)::dessser::Void();
           uint8_t id_791 { 0 };
           uint32_t id_792 { leb_ref_57[id_791] };
           Size id_793 { Size(id_792) };
@@ -3146,11 +3145,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                       uint32_t id_849 { lebsz_ref_569[id_848] };
                       uint32_t id_850 { 1U };
                       uint32_t id_851 { uint32_t(id_849 + id_850) };
-                      Void id_852 { ((void)(lebsz_ref_569[id_847] = id_851), ::dessser::VOID) };
+                      Void id_852 { ((void)(lebsz_ref_569[id_847] = id_851), ::dessser::Void()) };
                       (void)id_852;
                     }
                   } while (while_flag_839);
-                  (void)::dessser::VOID;
+                  (void)::dessser::Void();
                   uint8_t id_853 { 0 };
                   uint32_t id_854 { lebsz_ref_569[id_853] };
                   Size id_855 { Size(id_854) };
@@ -3343,7 +3342,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                 uint16_t id_963 { uint16_t(id_962.index()) };
                                                                 uint16_t id_964 { 1 };
                                                                 bool id_965 { bool(id_963 == id_964) };
-                                                                Void id_966 { ((void)(assert(id_965)), ::dessser::VOID) };
+                                                                Void id_966 { ((void)(assert(id_965)), ::dessser::Void()) };
                                                                 (void)id_966;
                                                                 Size id_967 { 20UL };
                                                                 choose_res_960 = id_967;
@@ -3381,7 +3380,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                       uint16_t id_986 { uint16_t(id_985.index()) };
                                                                       uint16_t id_987 { 1 };
                                                                       bool id_988 { bool(id_986 == id_987) };
-                                                                      Void id_989 { ((void)(assert(id_988)), ::dessser::VOID) };
+                                                                      Void id_989 { ((void)(assert(id_988)), ::dessser::Void()) };
                                                                       (void)id_989;
                                                                       Size id_990 { 21UL };
                                                                       choose_res_983 = id_990;
@@ -3420,11 +3419,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                               uint32_t id_1012 { lebsz_ref_554[id_1011] };
                                                                               uint32_t id_1013 { 1U };
                                                                               uint32_t id_1014 { uint32_t(id_1012 + id_1013) };
-                                                                              Void id_1015 { ((void)(lebsz_ref_554[id_1010] = id_1014), ::dessser::VOID) };
+                                                                              Void id_1015 { ((void)(lebsz_ref_554[id_1010] = id_1014), ::dessser::Void()) };
                                                                               (void)id_1015;
                                                                             }
                                                                           } while (while_flag_1002);
-                                                                          (void)::dessser::VOID;
+                                                                          (void)::dessser::Void();
                                                                           uint8_t id_1016 { 0 };
                                                                           uint32_t id_1017 { lebsz_ref_554[id_1016] };
                                                                           Size id_1018 { Size(id_1017) };
@@ -3460,21 +3459,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                               std::shared_ptr<::dessser::gen::raql_value::t>  id_1037 { id_1036[id_1035] };
                                                                               Size id_1038 { fun813(id_1037) };
                                                                               Size id_1039 { Size(id_1033 + id_1038) };
-                                                                              Void id_1040 { ((void)(sz_ref_555[id_1031] = id_1039), ::dessser::VOID) };
+                                                                              Void id_1040 { ((void)(sz_ref_555[id_1031] = id_1039), ::dessser::Void()) };
                                                                               (void)id_1040;
                                                                               uint8_t id_1041 { 0 };
                                                                               uint8_t id_1042 { 0 };
                                                                               int32_t id_1043 { repeat_n_556[id_1042] };
                                                                               int32_t id_1044 { 1L };
                                                                               int32_t id_1045 { int32_t(id_1043 + id_1044) };
-                                                                              Void id_1046 { ((void)(repeat_n_556[id_1041] = id_1045), ::dessser::VOID) };
+                                                                              Void id_1046 { ((void)(repeat_n_556[id_1041] = id_1045), ::dessser::Void()) };
                                                                               (void)id_1046;
                                                                               (void)id_1046;
                                                                             }
                                                                           } while (while_flag_1024);
-                                                                          (void)::dessser::VOID;
+                                                                          (void)::dessser::Void();
                                                                         }
-                                                                        (void)::dessser::VOID;
+                                                                        (void)::dessser::Void();
                                                                         uint8_t id_1047 { 0 };
                                                                         Size id_1048 { sz_ref_555[id_1047] };
                                                                         let_res_1021 = id_1048;
@@ -3513,11 +3512,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                 uint32_t id_1070 { lebsz_ref_550[id_1069] };
                                                                                 uint32_t id_1071 { 1U };
                                                                                 uint32_t id_1072 { uint32_t(id_1070 + id_1071) };
-                                                                                Void id_1073 { ((void)(lebsz_ref_550[id_1068] = id_1072), ::dessser::VOID) };
+                                                                                Void id_1073 { ((void)(lebsz_ref_550[id_1068] = id_1072), ::dessser::Void()) };
                                                                                 (void)id_1073;
                                                                               }
                                                                             } while (while_flag_1060);
-                                                                            (void)::dessser::VOID;
+                                                                            (void)::dessser::Void();
                                                                             uint8_t id_1074 { 0 };
                                                                             uint32_t id_1075 { lebsz_ref_550[id_1074] };
                                                                             Size id_1076 { Size(id_1075) };
@@ -3553,21 +3552,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                 std::shared_ptr<::dessser::gen::raql_value::t>  id_1095 { id_1094[id_1093] };
                                                                                 Size id_1096 { fun813(id_1095) };
                                                                                 Size id_1097 { Size(id_1091 + id_1096) };
-                                                                                Void id_1098 { ((void)(sz_ref_551[id_1089] = id_1097), ::dessser::VOID) };
+                                                                                Void id_1098 { ((void)(sz_ref_551[id_1089] = id_1097), ::dessser::Void()) };
                                                                                 (void)id_1098;
                                                                                 uint8_t id_1099 { 0 };
                                                                                 uint8_t id_1100 { 0 };
                                                                                 int32_t id_1101 { repeat_n_552[id_1100] };
                                                                                 int32_t id_1102 { 1L };
                                                                                 int32_t id_1103 { int32_t(id_1101 + id_1102) };
-                                                                                Void id_1104 { ((void)(repeat_n_552[id_1099] = id_1103), ::dessser::VOID) };
+                                                                                Void id_1104 { ((void)(repeat_n_552[id_1099] = id_1103), ::dessser::Void()) };
                                                                                 (void)id_1104;
                                                                                 (void)id_1104;
                                                                               }
                                                                             } while (while_flag_1082);
-                                                                            (void)::dessser::VOID;
+                                                                            (void)::dessser::Void();
                                                                           }
-                                                                          (void)::dessser::VOID;
+                                                                          (void)::dessser::Void();
                                                                           uint8_t id_1105 { 0 };
                                                                           Size id_1106 { sz_ref_551[id_1105] };
                                                                           let_res_1079 = id_1106;
@@ -3606,11 +3605,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                   uint32_t id_1128 { lebsz_ref_546[id_1127] };
                                                                                   uint32_t id_1129 { 1U };
                                                                                   uint32_t id_1130 { uint32_t(id_1128 + id_1129) };
-                                                                                  Void id_1131 { ((void)(lebsz_ref_546[id_1126] = id_1130), ::dessser::VOID) };
+                                                                                  Void id_1131 { ((void)(lebsz_ref_546[id_1126] = id_1130), ::dessser::Void()) };
                                                                                   (void)id_1131;
                                                                                 }
                                                                               } while (while_flag_1118);
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_1132 { 0 };
                                                                               uint32_t id_1133 { lebsz_ref_546[id_1132] };
                                                                               Size id_1134 { Size(id_1133) };
@@ -3646,21 +3645,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                   std::shared_ptr<::dessser::gen::raql_value::t>  id_1153 { id_1152[id_1151] };
                                                                                   Size id_1154 { fun813(id_1153) };
                                                                                   Size id_1155 { Size(id_1149 + id_1154) };
-                                                                                  Void id_1156 { ((void)(sz_ref_547[id_1147] = id_1155), ::dessser::VOID) };
+                                                                                  Void id_1156 { ((void)(sz_ref_547[id_1147] = id_1155), ::dessser::Void()) };
                                                                                   (void)id_1156;
                                                                                   uint8_t id_1157 { 0 };
                                                                                   uint8_t id_1158 { 0 };
                                                                                   int32_t id_1159 { repeat_n_548[id_1158] };
                                                                                   int32_t id_1160 { 1L };
                                                                                   int32_t id_1161 { int32_t(id_1159 + id_1160) };
-                                                                                  Void id_1162 { ((void)(repeat_n_548[id_1157] = id_1161), ::dessser::VOID) };
+                                                                                  Void id_1162 { ((void)(repeat_n_548[id_1157] = id_1161), ::dessser::Void()) };
                                                                                   (void)id_1162;
                                                                                   (void)id_1162;
                                                                                 }
                                                                               } while (while_flag_1140);
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                             }
-                                                                            (void)::dessser::VOID;
+                                                                            (void)::dessser::Void();
                                                                             uint8_t id_1163 { 0 };
                                                                             Size id_1164 { sz_ref_547[id_1163] };
                                                                             let_res_1137 = id_1164;
@@ -3699,11 +3698,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                     uint32_t id_1186 { lebsz_ref_542[id_1185] };
                                                                                     uint32_t id_1187 { 1U };
                                                                                     uint32_t id_1188 { uint32_t(id_1186 + id_1187) };
-                                                                                    Void id_1189 { ((void)(lebsz_ref_542[id_1184] = id_1188), ::dessser::VOID) };
+                                                                                    Void id_1189 { ((void)(lebsz_ref_542[id_1184] = id_1188), ::dessser::Void()) };
                                                                                     (void)id_1189;
                                                                                   }
                                                                                 } while (while_flag_1176);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_1190 { 0 };
                                                                                 uint32_t id_1191 { lebsz_ref_542[id_1190] };
                                                                                 Size id_1192 { Size(id_1191) };
@@ -3739,21 +3738,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                     std::shared_ptr<::dessser::gen::raql_value::named_value>  id_1211 { id_1210[id_1209] };
                                                                                     Size id_1212 { named_value_sersize_of_row_binary(id_1211) };
                                                                                     Size id_1213 { Size(id_1207 + id_1212) };
-                                                                                    Void id_1214 { ((void)(sz_ref_543[id_1205] = id_1213), ::dessser::VOID) };
+                                                                                    Void id_1214 { ((void)(sz_ref_543[id_1205] = id_1213), ::dessser::Void()) };
                                                                                     (void)id_1214;
                                                                                     uint8_t id_1215 { 0 };
                                                                                     uint8_t id_1216 { 0 };
                                                                                     int32_t id_1217 { repeat_n_544[id_1216] };
                                                                                     int32_t id_1218 { 1L };
                                                                                     int32_t id_1219 { int32_t(id_1217 + id_1218) };
-                                                                                    Void id_1220 { ((void)(repeat_n_544[id_1215] = id_1219), ::dessser::VOID) };
+                                                                                    Void id_1220 { ((void)(repeat_n_544[id_1215] = id_1219), ::dessser::Void()) };
                                                                                     (void)id_1220;
                                                                                     (void)id_1220;
                                                                                   }
                                                                                 } while (while_flag_1198);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                               }
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_1221 { 0 };
                                                                               Size id_1222 { sz_ref_543[id_1221] };
                                                                               let_res_1195 = id_1222;
@@ -3762,7 +3761,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                           } else {
                                                                             uint16_t id_1223 { 35 };
                                                                             bool id_1224 { bool(label2_534 == id_1223) };
-                                                                            Void id_1225 { ((void)(assert(id_1224)), ::dessser::VOID) };
+                                                                            Void id_1225 { ((void)(assert(id_1224)), ::dessser::Void()) };
                                                                             (void)id_1225;
                                                                             Size id_1226 { 2UL };
                                                                             Arr<::dessser::gen::raql_value::ta4246d307efc26a581b0c83fdec1c21f> id_1227 { std::get<35 /* VMap */>((*p_0)) };
@@ -3792,11 +3791,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                     uint32_t id_1244 { lebsz_ref_536[id_1243] };
                                                                                     uint32_t id_1245 { 1U };
                                                                                     uint32_t id_1246 { uint32_t(id_1244 + id_1245) };
-                                                                                    Void id_1247 { ((void)(lebsz_ref_536[id_1242] = id_1246), ::dessser::VOID) };
+                                                                                    Void id_1247 { ((void)(lebsz_ref_536[id_1242] = id_1246), ::dessser::Void()) };
                                                                                     (void)id_1247;
                                                                                   }
                                                                                 } while (while_flag_1234);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_1248 { 0 };
                                                                                 uint32_t id_1249 { lebsz_ref_536[id_1248] };
                                                                                 Size id_1250 { Size(id_1249) };
@@ -3840,21 +3839,21 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::t> )> sers
                                                                                     std::shared_ptr<::dessser::gen::raql_value::t>  id_1277 { std::get<1>(id_1276) };
                                                                                     Size id_1278 { fun813(id_1277) };
                                                                                     Size id_1279 { Size(id_1272 + id_1278) };
-                                                                                    Void id_1280 { ((void)(sz_ref_537[id_1263] = id_1279), ::dessser::VOID) };
+                                                                                    Void id_1280 { ((void)(sz_ref_537[id_1263] = id_1279), ::dessser::Void()) };
                                                                                     (void)id_1280;
                                                                                     uint8_t id_1281 { 0 };
                                                                                     uint8_t id_1282 { 0 };
                                                                                     int32_t id_1283 { repeat_n_538[id_1282] };
                                                                                     int32_t id_1284 { 1L };
                                                                                     int32_t id_1285 { int32_t(id_1283 + id_1284) };
-                                                                                    Void id_1286 { ((void)(repeat_n_538[id_1281] = id_1285), ::dessser::VOID) };
+                                                                                    Void id_1286 { ((void)(repeat_n_538[id_1281] = id_1285), ::dessser::Void()) };
                                                                                     (void)id_1286;
                                                                                     (void)id_1286;
                                                                                   }
                                                                                 } while (while_flag_1256);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                               }
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_1287 { 0 };
                                                                               Size id_1288 { sz_ref_537[id_1287] };
                                                                               let_res_1253 = id_1288;
@@ -3980,11 +3979,11 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_value::named_valu
             uint32_t id_1307 { lebsz_ref_532[id_1306] };
             uint32_t id_1308 { 1U };
             uint32_t id_1309 { uint32_t(id_1307 + id_1308) };
-            Void id_1310 { ((void)(lebsz_ref_532[id_1305] = id_1309), ::dessser::VOID) };
+            Void id_1310 { ((void)(lebsz_ref_532[id_1305] = id_1309), ::dessser::Void()) };
             (void)id_1310;
           }
         } while (while_flag_1297);
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_1311 { 0 };
         uint32_t id_1312 { lebsz_ref_532[id_1311] };
         Size id_1313 { Size(id_1312) };
@@ -4346,14 +4345,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                         choose_res_1356 = id_1364;
                       }
                       Pointer id_1365 { id_1351.writeU8(choose_res_1356) };
-                      Void id_1366 { ((void)(leb128_ptr_611[id_1349] = id_1365), ::dessser::VOID) };
+                      Void id_1366 { ((void)(leb128_ptr_611[id_1349] = id_1365), ::dessser::Void()) };
                       (void)id_1366;
                       uint8_t id_1367 { 0 };
                       uint8_t id_1368 { 0 };
                       uint32_t id_1369 { leb128_sz_610[id_1368] };
                       uint8_t id_1370 { 7 };
                       uint32_t id_1371 { uint32_t(id_1369 >> id_1370) };
-                      Void id_1372 { ((void)(leb128_sz_610[id_1367] = id_1371), ::dessser::VOID) };
+                      Void id_1372 { ((void)(leb128_sz_610[id_1367] = id_1371), ::dessser::Void()) };
                       (void)id_1372;
                       uint8_t id_1373 { 0 };
                       uint32_t id_1374 { leb128_sz_610[id_1373] };
@@ -4361,10 +4360,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                       bool id_1376 { bool(id_1374 > id_1375) };
                       while_flag_1348 = id_1376;
                       if (while_flag_1348) {
-                        (void)::dessser::VOID;
+                        (void)::dessser::Void();
                       }
                     } while (while_flag_1348);
-                    (void)::dessser::VOID;
+                    (void)::dessser::Void();
                     uint8_t id_1377 { 0 };
                     Pointer id_1378 { leb128_ptr_611[id_1377] };
                     let_res_1347 = id_1378;
@@ -4605,7 +4604,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                     uint16_t id_1533 { uint16_t(id_1532.index()) };
                                                                     uint16_t id_1534 { 1 };
                                                                     bool id_1535 { bool(id_1533 == id_1534) };
-                                                                    Void id_1536 { ((void)(assert(id_1535)), ::dessser::VOID) };
+                                                                    Void id_1536 { ((void)(assert(id_1535)), ::dessser::Void()) };
                                                                     (void)id_1536;
                                                                     ::dessser::gen::raql_value::t690438e8d106ddec68c668ab00e5188a id_1537 { std::get<27 /* VIp */>((*p_0)) };
                                                                     uint128_t id_1538 { std::get<1 /* v6 */>(id_1537) };
@@ -4685,7 +4684,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                           uint16_t id_1582 { uint16_t(id_1581.index()) };
                                                                           uint16_t id_1583 { 1 };
                                                                           bool id_1584 { bool(id_1582 == id_1583) };
-                                                                          Void id_1585 { ((void)(assert(id_1584)), ::dessser::VOID) };
+                                                                          Void id_1585 { ((void)(assert(id_1584)), ::dessser::Void()) };
                                                                           (void)id_1585;
                                                                           ::dessser::gen::raql_value::teb043643295bb7cc6656bec6dd6fd6e1 id_1586 { std::get<30 /* VCidr */>((*p_0)) };
                                                                           ::dessser::gen::raql_value::t44c6447d638b93b2e8d0887b360afa41 id_1587 { std::get<1 /* v6 */>(id_1586) };
@@ -4744,14 +4743,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                 choose_res_1612 = id_1620;
                                                                               }
                                                                               Pointer id_1621 { id_1607.writeU8(choose_res_1612) };
-                                                                              Void id_1622 { ((void)(leb128_ptr_598[id_1605] = id_1621), ::dessser::VOID) };
+                                                                              Void id_1622 { ((void)(leb128_ptr_598[id_1605] = id_1621), ::dessser::Void()) };
                                                                               (void)id_1622;
                                                                               uint8_t id_1623 { 0 };
                                                                               uint8_t id_1624 { 0 };
                                                                               uint32_t id_1625 { leb128_sz_597[id_1624] };
                                                                               uint8_t id_1626 { 7 };
                                                                               uint32_t id_1627 { uint32_t(id_1625 >> id_1626) };
-                                                                              Void id_1628 { ((void)(leb128_sz_597[id_1623] = id_1627), ::dessser::VOID) };
+                                                                              Void id_1628 { ((void)(leb128_sz_597[id_1623] = id_1627), ::dessser::Void()) };
                                                                               (void)id_1628;
                                                                               uint8_t id_1629 { 0 };
                                                                               uint32_t id_1630 { leb128_sz_597[id_1629] };
@@ -4759,10 +4758,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                               bool id_1632 { bool(id_1630 > id_1631) };
                                                                               while_flag_1604 = id_1632;
                                                                               if (while_flag_1604) {
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                               }
                                                                             } while (while_flag_1604);
-                                                                            (void)::dessser::VOID;
+                                                                            (void)::dessser::Void();
                                                                             uint8_t id_1633 { 0 };
                                                                             Pointer id_1634 { leb128_ptr_598[id_1633] };
                                                                             let_res_1603 = id_1634;
@@ -4784,18 +4783,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                               uint8_t id_1642 { 0 };
                                                                               Pointer id_1643 { dst_ref_599[id_1642] };
                                                                               Pointer id_1644 { fun1322(x_601, id_1643) };
-                                                                              Void id_1645 { ((void)(dst_ref_599[id_1641] = id_1644), ::dessser::VOID) };
+                                                                              Void id_1645 { ((void)(dst_ref_599[id_1641] = id_1644), ::dessser::Void()) };
                                                                               (void)id_1645;
                                                                               uint8_t id_1646 { 0 };
                                                                               int32_t id_1647 { 1L };
                                                                               uint8_t id_1648 { 0 };
                                                                               int32_t id_1649 { n_ref_600[id_1648] };
                                                                               int32_t id_1650 { int32_t(id_1647 + id_1649) };
-                                                                              Void id_1651 { ((void)(n_ref_600[id_1646] = id_1650), ::dessser::VOID) };
+                                                                              Void id_1651 { ((void)(n_ref_600[id_1646] = id_1650), ::dessser::Void()) };
                                                                               (void)id_1651;
                                                                               (void)id_1651;
                                                                             }
-                                                                            (void)::dessser::VOID;
+                                                                            (void)::dessser::Void();
                                                                             uint8_t id_1652 { 0 };
                                                                             Pointer id_1653 { dst_ref_599[id_1652] };
                                                                             let_res_1639 = id_1653;
@@ -4842,14 +4841,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                   choose_res_1671 = id_1679;
                                                                                 }
                                                                                 Pointer id_1680 { id_1666.writeU8(choose_res_1671) };
-                                                                                Void id_1681 { ((void)(leb128_ptr_593[id_1664] = id_1680), ::dessser::VOID) };
+                                                                                Void id_1681 { ((void)(leb128_ptr_593[id_1664] = id_1680), ::dessser::Void()) };
                                                                                 (void)id_1681;
                                                                                 uint8_t id_1682 { 0 };
                                                                                 uint8_t id_1683 { 0 };
                                                                                 uint32_t id_1684 { leb128_sz_592[id_1683] };
                                                                                 uint8_t id_1685 { 7 };
                                                                                 uint32_t id_1686 { uint32_t(id_1684 >> id_1685) };
-                                                                                Void id_1687 { ((void)(leb128_sz_592[id_1682] = id_1686), ::dessser::VOID) };
+                                                                                Void id_1687 { ((void)(leb128_sz_592[id_1682] = id_1686), ::dessser::Void()) };
                                                                                 (void)id_1687;
                                                                                 uint8_t id_1688 { 0 };
                                                                                 uint32_t id_1689 { leb128_sz_592[id_1688] };
@@ -4857,10 +4856,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                 bool id_1691 { bool(id_1689 > id_1690) };
                                                                                 while_flag_1663 = id_1691;
                                                                                 if (while_flag_1663) {
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                 }
                                                                               } while (while_flag_1663);
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_1692 { 0 };
                                                                               Pointer id_1693 { leb128_ptr_593[id_1692] };
                                                                               let_res_1662 = id_1693;
@@ -4882,18 +4881,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                 uint8_t id_1701 { 0 };
                                                                                 Pointer id_1702 { dst_ref_594[id_1701] };
                                                                                 Pointer id_1703 { fun1322(x_596, id_1702) };
-                                                                                Void id_1704 { ((void)(dst_ref_594[id_1700] = id_1703), ::dessser::VOID) };
+                                                                                Void id_1704 { ((void)(dst_ref_594[id_1700] = id_1703), ::dessser::Void()) };
                                                                                 (void)id_1704;
                                                                                 uint8_t id_1705 { 0 };
                                                                                 int32_t id_1706 { 1L };
                                                                                 uint8_t id_1707 { 0 };
                                                                                 int32_t id_1708 { n_ref_595[id_1707] };
                                                                                 int32_t id_1709 { int32_t(id_1706 + id_1708) };
-                                                                                Void id_1710 { ((void)(n_ref_595[id_1705] = id_1709), ::dessser::VOID) };
+                                                                                Void id_1710 { ((void)(n_ref_595[id_1705] = id_1709), ::dessser::Void()) };
                                                                                 (void)id_1710;
                                                                                 (void)id_1710;
                                                                               }
-                                                                              (void)::dessser::VOID;
+                                                                              (void)::dessser::Void();
                                                                               uint8_t id_1711 { 0 };
                                                                               Pointer id_1712 { dst_ref_594[id_1711] };
                                                                               let_res_1698 = id_1712;
@@ -4940,14 +4939,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                     choose_res_1730 = id_1738;
                                                                                   }
                                                                                   Pointer id_1739 { id_1725.writeU8(choose_res_1730) };
-                                                                                  Void id_1740 { ((void)(leb128_ptr_588[id_1723] = id_1739), ::dessser::VOID) };
+                                                                                  Void id_1740 { ((void)(leb128_ptr_588[id_1723] = id_1739), ::dessser::Void()) };
                                                                                   (void)id_1740;
                                                                                   uint8_t id_1741 { 0 };
                                                                                   uint8_t id_1742 { 0 };
                                                                                   uint32_t id_1743 { leb128_sz_587[id_1742] };
                                                                                   uint8_t id_1744 { 7 };
                                                                                   uint32_t id_1745 { uint32_t(id_1743 >> id_1744) };
-                                                                                  Void id_1746 { ((void)(leb128_sz_587[id_1741] = id_1745), ::dessser::VOID) };
+                                                                                  Void id_1746 { ((void)(leb128_sz_587[id_1741] = id_1745), ::dessser::Void()) };
                                                                                   (void)id_1746;
                                                                                   uint8_t id_1747 { 0 };
                                                                                   uint32_t id_1748 { leb128_sz_587[id_1747] };
@@ -4955,10 +4954,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                   bool id_1750 { bool(id_1748 > id_1749) };
                                                                                   while_flag_1722 = id_1750;
                                                                                   if (while_flag_1722) {
-                                                                                    (void)::dessser::VOID;
+                                                                                    (void)::dessser::Void();
                                                                                   }
                                                                                 } while (while_flag_1722);
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_1751 { 0 };
                                                                                 Pointer id_1752 { leb128_ptr_588[id_1751] };
                                                                                 let_res_1721 = id_1752;
@@ -4980,18 +4979,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                   uint8_t id_1760 { 0 };
                                                                                   Pointer id_1761 { dst_ref_589[id_1760] };
                                                                                   Pointer id_1762 { fun1322(x_591, id_1761) };
-                                                                                  Void id_1763 { ((void)(dst_ref_589[id_1759] = id_1762), ::dessser::VOID) };
+                                                                                  Void id_1763 { ((void)(dst_ref_589[id_1759] = id_1762), ::dessser::Void()) };
                                                                                   (void)id_1763;
                                                                                   uint8_t id_1764 { 0 };
                                                                                   int32_t id_1765 { 1L };
                                                                                   uint8_t id_1766 { 0 };
                                                                                   int32_t id_1767 { n_ref_590[id_1766] };
                                                                                   int32_t id_1768 { int32_t(id_1765 + id_1767) };
-                                                                                  Void id_1769 { ((void)(n_ref_590[id_1764] = id_1768), ::dessser::VOID) };
+                                                                                  Void id_1769 { ((void)(n_ref_590[id_1764] = id_1768), ::dessser::Void()) };
                                                                                   (void)id_1769;
                                                                                   (void)id_1769;
                                                                                 }
-                                                                                (void)::dessser::VOID;
+                                                                                (void)::dessser::Void();
                                                                                 uint8_t id_1770 { 0 };
                                                                                 Pointer id_1771 { dst_ref_589[id_1770] };
                                                                                 let_res_1757 = id_1771;
@@ -5038,14 +5037,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                       choose_res_1789 = id_1797;
                                                                                     }
                                                                                     Pointer id_1798 { id_1784.writeU8(choose_res_1789) };
-                                                                                    Void id_1799 { ((void)(leb128_ptr_583[id_1782] = id_1798), ::dessser::VOID) };
+                                                                                    Void id_1799 { ((void)(leb128_ptr_583[id_1782] = id_1798), ::dessser::Void()) };
                                                                                     (void)id_1799;
                                                                                     uint8_t id_1800 { 0 };
                                                                                     uint8_t id_1801 { 0 };
                                                                                     uint32_t id_1802 { leb128_sz_582[id_1801] };
                                                                                     uint8_t id_1803 { 7 };
                                                                                     uint32_t id_1804 { uint32_t(id_1802 >> id_1803) };
-                                                                                    Void id_1805 { ((void)(leb128_sz_582[id_1800] = id_1804), ::dessser::VOID) };
+                                                                                    Void id_1805 { ((void)(leb128_sz_582[id_1800] = id_1804), ::dessser::Void()) };
                                                                                     (void)id_1805;
                                                                                     uint8_t id_1806 { 0 };
                                                                                     uint32_t id_1807 { leb128_sz_582[id_1806] };
@@ -5053,10 +5052,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                     bool id_1809 { bool(id_1807 > id_1808) };
                                                                                     while_flag_1781 = id_1809;
                                                                                     if (while_flag_1781) {
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
                                                                                   } while (while_flag_1781);
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_1810 { 0 };
                                                                                   Pointer id_1811 { leb128_ptr_583[id_1810] };
                                                                                   let_res_1780 = id_1811;
@@ -5078,18 +5077,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                     uint8_t id_1819 { 0 };
                                                                                     Pointer id_1820 { dst_ref_584[id_1819] };
                                                                                     Pointer id_1821 { named_value_to_row_binary(x_586, id_1820) };
-                                                                                    Void id_1822 { ((void)(dst_ref_584[id_1818] = id_1821), ::dessser::VOID) };
+                                                                                    Void id_1822 { ((void)(dst_ref_584[id_1818] = id_1821), ::dessser::Void()) };
                                                                                     (void)id_1822;
                                                                                     uint8_t id_1823 { 0 };
                                                                                     int32_t id_1824 { 1L };
                                                                                     uint8_t id_1825 { 0 };
                                                                                     int32_t id_1826 { n_ref_585[id_1825] };
                                                                                     int32_t id_1827 { int32_t(id_1824 + id_1826) };
-                                                                                    Void id_1828 { ((void)(n_ref_585[id_1823] = id_1827), ::dessser::VOID) };
+                                                                                    Void id_1828 { ((void)(n_ref_585[id_1823] = id_1827), ::dessser::Void()) };
                                                                                     (void)id_1828;
                                                                                     (void)id_1828;
                                                                                   }
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_1829 { 0 };
                                                                                   Pointer id_1830 { dst_ref_584[id_1829] };
                                                                                   let_res_1816 = id_1830;
@@ -5100,7 +5099,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                             } else {
                                                                               uint16_t id_1831 { 35 };
                                                                               bool id_1832 { bool(label1_573 == id_1831) };
-                                                                              Void id_1833 { ((void)(assert(id_1832)), ::dessser::VOID) };
+                                                                              Void id_1833 { ((void)(assert(id_1832)), ::dessser::Void()) };
                                                                               (void)id_1833;
                                                                               Arr<::dessser::gen::raql_value::ta4246d307efc26a581b0c83fdec1c21f> id_1834 { std::get<35 /* VMap */>((*p_0)) };
                                                                               uint32_t id_1835 { id_1834.size() };
@@ -5136,14 +5135,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                       choose_res_1848 = id_1856;
                                                                                     }
                                                                                     Pointer id_1857 { id_1843.writeU8(choose_res_1848) };
-                                                                                    Void id_1858 { ((void)(leb128_ptr_576[id_1841] = id_1857), ::dessser::VOID) };
+                                                                                    Void id_1858 { ((void)(leb128_ptr_576[id_1841] = id_1857), ::dessser::Void()) };
                                                                                     (void)id_1858;
                                                                                     uint8_t id_1859 { 0 };
                                                                                     uint8_t id_1860 { 0 };
                                                                                     uint32_t id_1861 { leb128_sz_575[id_1860] };
                                                                                     uint8_t id_1862 { 7 };
                                                                                     uint32_t id_1863 { uint32_t(id_1861 >> id_1862) };
-                                                                                    Void id_1864 { ((void)(leb128_sz_575[id_1859] = id_1863), ::dessser::VOID) };
+                                                                                    Void id_1864 { ((void)(leb128_sz_575[id_1859] = id_1863), ::dessser::Void()) };
                                                                                     (void)id_1864;
                                                                                     uint8_t id_1865 { 0 };
                                                                                     uint32_t id_1866 { leb128_sz_575[id_1865] };
@@ -5151,10 +5150,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                     bool id_1868 { bool(id_1866 > id_1867) };
                                                                                     while_flag_1840 = id_1868;
                                                                                     if (while_flag_1840) {
-                                                                                      (void)::dessser::VOID;
+                                                                                      (void)::dessser::Void();
                                                                                     }
                                                                                   } while (while_flag_1840);
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_1869 { 0 };
                                                                                   Pointer id_1870 { leb128_ptr_576[id_1869] };
                                                                                   let_res_1839 = id_1870;
@@ -5179,18 +5178,18 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::t> ,Poi
                                                                                     Pointer id_1881 { dst_ref_577[id_1880] };
                                                                                     Pointer id_1882 { fun1322(id_1879, id_1881) };
                                                                                     Pointer id_1883 { fun1322(id_1878, id_1882) };
-                                                                                    Void id_1884 { ((void)(dst_ref_577[id_1877] = id_1883), ::dessser::VOID) };
+                                                                                    Void id_1884 { ((void)(dst_ref_577[id_1877] = id_1883), ::dessser::Void()) };
                                                                                     (void)id_1884;
                                                                                     uint8_t id_1885 { 0 };
                                                                                     int32_t id_1886 { 1L };
                                                                                     uint8_t id_1887 { 0 };
                                                                                     int32_t id_1888 { n_ref_578[id_1887] };
                                                                                     int32_t id_1889 { int32_t(id_1886 + id_1888) };
-                                                                                    Void id_1890 { ((void)(n_ref_578[id_1885] = id_1889), ::dessser::VOID) };
+                                                                                    Void id_1890 { ((void)(n_ref_578[id_1885] = id_1889), ::dessser::Void()) };
                                                                                     (void)id_1890;
                                                                                     (void)id_1890;
                                                                                   }
-                                                                                  (void)::dessser::VOID;
+                                                                                  (void)::dessser::Void();
                                                                                   uint8_t id_1891 { 0 };
                                                                                   Pointer id_1892 { dst_ref_577[id_1891] };
                                                                                   let_res_1875 = id_1892;
@@ -5332,14 +5331,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_v
             choose_res_1908 = id_1916;
           }
           Pointer id_1917 { id_1903.writeU8(choose_res_1908) };
-          Void id_1918 { ((void)(leb128_ptr_571[id_1901] = id_1917), ::dessser::VOID) };
+          Void id_1918 { ((void)(leb128_ptr_571[id_1901] = id_1917), ::dessser::Void()) };
           (void)id_1918;
           uint8_t id_1919 { 0 };
           uint8_t id_1920 { 0 };
           uint32_t id_1921 { leb128_sz_570[id_1920] };
           uint8_t id_1922 { 7 };
           uint32_t id_1923 { uint32_t(id_1921 >> id_1922) };
-          Void id_1924 { ((void)(leb128_sz_570[id_1919] = id_1923), ::dessser::VOID) };
+          Void id_1924 { ((void)(leb128_sz_570[id_1919] = id_1923), ::dessser::Void()) };
           (void)id_1924;
           uint8_t id_1925 { 0 };
           uint32_t id_1926 { leb128_sz_570[id_1925] };
@@ -5347,10 +5346,10 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_value::named_v
           bool id_1928 { bool(id_1926 > id_1927) };
           while_flag_1900 = id_1928;
           if (while_flag_1900) {
-            (void)::dessser::VOID;
+            (void)::dessser::Void();
           }
         } while (while_flag_1900);
-        (void)::dessser::VOID;
+        (void)::dessser::Void();
         uint8_t id_1929 { 0 };
         Pointer id_1930 { leb128_ptr_571[id_1929] };
         let_res_1899 = id_1930;

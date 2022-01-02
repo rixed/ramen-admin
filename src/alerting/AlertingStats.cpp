@@ -95,7 +95,7 @@ void AlertingStats::updateStats() {
             incidentId,
             std::make_shared<dessser::gen::sync_key::incident_key>(
                 std::in_place_index<dessser::gen::sync_key::FirstStartNotif>,
-                dessser::VOID))};
+                dessser::Void()))};
     if (firstStartNotif) {
       updateNotifDates(firstStartNotif);
     }
@@ -105,7 +105,7 @@ void AlertingStats::updateStats() {
             incidentId, std::make_shared<dessser::gen::sync_key::incident_key>(
                             std::in_place_index<
                                 dessser::gen::sync_key::LastStateChangeNotif>,
-                            dessser::VOID))};
+                            dessser::Void()))};
     if (lastChangeNotif) {
       if (lastChangeNotif->firing) numFiringIncidents++;
       updateNotifDates(lastChangeNotif);
@@ -119,7 +119,7 @@ void AlertingStats::updateStats() {
               incidentId, dialogId,
               std::make_shared<dessser::gen::sync_key::dialog_key>(
                   std::in_place_index<dessser::gen::sync_key::DeliveryStatus>,
-                  dessser::VOID))};
+                  dessser::Void()))};
       if (deliveryStatus_v && deliveryStatus_v->index() ==
                                   dessser::gen::sync_value::DeliveryStatus) {
         std::shared_ptr<dessser::gen::alerting_delivery_status::t const> const
@@ -133,7 +133,7 @@ void AlertingStats::updateStats() {
           incidentId, dialogId,
           std::make_shared<dessser::gen::sync_key::dialog_key>(
               std::in_place_index<dessser::gen::sync_key::LastDeliveryAttempt>,
-              dessser::VOID))};
+              dessser::Void()))};
       if (lastDelivAttempt)
         lastDeliveryAttempt =
             std::max<double>(lastDeliveryAttempt, *lastDelivAttempt);
@@ -142,7 +142,7 @@ void AlertingStats::updateStats() {
           incidentId, dialogId,
           std::make_shared<dessser::gen::sync_key::dialog_key>(
               std::in_place_index<dessser::gen::sync_key::NextScheduled>,
-              dessser::VOID))};
+              dessser::Void()))};
       if (nextSched)
         nextSchedule = std::min<double>(nextSchedule, *lastDelivAttempt);
 
@@ -150,7 +150,7 @@ void AlertingStats::updateStats() {
           incidentId, dialogId,
           std::make_shared<dessser::gen::sync_key::dialog_key>(
               std::in_place_index<dessser::gen::sync_key::NextSend>,
-              dessser::VOID))};
+              dessser::Void()))};
       if (nextSnd) nextSend = std::min<double>(nextSend, *nextSnd);
     });
   });

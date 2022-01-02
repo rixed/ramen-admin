@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_raql_expr
 #define DESSSER_GEN_raql_expr
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

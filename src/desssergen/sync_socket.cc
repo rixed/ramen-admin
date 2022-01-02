@@ -1,6 +1,5 @@
 #include <algorithm>
-#include <arpa/inet.h>
-#include <charconv>
+#include <charconv>  // for from_chars
 #include <chrono>
 #include <cmath>
 #include <cstdlib>
@@ -167,7 +166,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Po
         uint16_t id_14 { uint16_t(id_13.index()) };
         uint16_t id_15 { 1 };
         bool id_16 { bool(id_14 == id_15) };
-        Void id_17 { ((void)(assert(id_16)), ::dessser::VOID) };
+        Void id_17 { ((void)(assert(id_16)), ::dessser::Void()) };
         (void)id_17;
         ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_18 { (*p_0).ip };
         uint128_t id_19 { std::get<1 /* v6 */>(id_18) };
@@ -209,7 +208,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> ser
       uint16_t id_32 { uint16_t(id_31.index()) };
       uint16_t id_33 { 1 };
       bool id_34 { bool(id_32 == id_33) };
-      Void id_35 { ((void)(assert(id_34)), ::dessser::VOID) };
+      Void id_35 { ((void)(assert(id_34)), ::dessser::Void()) };
       (void)id_35;
       Size id_36 { 18UL };
       choose_res_29 = id_36;
@@ -279,7 +278,7 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
         } else {
           uint16_t id_54 { 1 };
           bool id_55 { bool(dsum1_fst_64 == id_54) };
-          Void id_56 { ((void)(assert(id_55)), ::dessser::VOID) };
+          Void id_56 { ((void)(assert(id_55)), ::dessser::Void()) };
           (void)id_56;
           ::dessser::gen::sync_socket::t859e6a4cc938643a1d59426a3bf7b15a id_57 { dsum1_snd_65.readU128Le() };
           ::dessser::gen::sync_socket::t1f9e0c0c8d7eb3b4c2d57ec0ad21851a letpair_res_58;

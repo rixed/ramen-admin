@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_sync_client_cmd
 #define DESSSER_GEN_sync_client_cmd
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>

@@ -1,6 +1,5 @@
 #ifndef DESSSER_GEN_alerting_log
 #define DESSSER_GEN_alerting_log
-#include <arpa/inet.h>
 #include <functional>
 #include <memory>
 #include <optional>
