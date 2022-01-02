@@ -4,6 +4,7 @@
 #include <QAbstractItemModel>
 #include <QDateTime>
 #include <QDebug>
+#include <QHostAddress>
 #include <QLayout>
 #include <QLayoutItem>
 #include <QModelIndex>
@@ -229,30 +230,27 @@ QColor blendColor(QColor const &c1, QColor const &c2, double r2) {
       c1.blue() * r1 + c2.blue() * r2, c1.alpha() * r1 + c2.alpha() * r2);
 }
 
-extern "C" {
-#include <arpa/inet.h>
-}
-
 bool parseIpv4(uint32_t *ip, QString const &s) {
-  struct in_addr addr;
-  if (0 == inet_pton(AF_INET, s.toStdString().c_str(), &addr)) return false;
-  *ip = ntohl(addr.s_addr);
-  return true;
+  QHostAddress addr{s};
+  bool ok;
+  *ip = addr.toIPv4Address(&ok);
+  return ok;
 }
 
 bool parseIpv6(uint128_t *ip, QString const &s) {
-  static_assert(sizeof(struct in6_addr) == sizeof(uint128_t));
-  uint128_t addr;
-  if (0 == inet_pton(AF_INET6, s.toStdString().c_str(), &addr)) return false;
-  // Endianness?
-  if (ntohs(0x0102) == 0x0102) {
-    *ip = addr;
-  } else {
-    *((uint32_t *)ip + 0) = ntohl(*((uint32_t *)&addr + 3));
-    *((uint32_t *)ip + 1) = ntohl(*((uint32_t *)&addr + 2));
-    *((uint32_t *)ip + 2) = ntohl(*((uint32_t *)&addr + 1));
-    *((uint32_t *)ip + 3) = ntohl(*((uint32_t *)&addr + 0));
-  }
+  QHostAddress addr{s};
+  // For some reason there is no `ok-flag` equivalent for IPv6:
+  if (addr.isNull()) return false;
+  Q_IPV6ADDR ip_{addr.toIPv6Address()};
+
+  // Q_IPV6ADDR stays in network byte order (aka big endian)
+#if __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+  memcpy(ip, &ip_, 16);
+#else
+  uint8_t *d{reinterpret_cast<uint8_t *>(ip)};
+  for (size_t i = 0; i < 16; ++i) d[i] = ip_[15 - i];
+#endif
+
   return true;
 }
 

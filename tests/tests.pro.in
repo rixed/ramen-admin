@@ -1,7 +1,7 @@
 CONFIG += debug c++1z warn_on testcase no_testcase_installs
 
 TARGET = test
-QT += core widgets testlib
+QT += core network widgets testlib
 
 INCLUDEPATH += .
 INCLUDEPATH += ../src
