@@ -33,8 +33,7 @@ class ProgramItem : public GraphItem {
   /* As the ProgramItem is not really part of the QAbstractItemModel any more,
    * it should never be indexed: */
   QModelIndex index(GraphModel const *, int) const override {
-    Q_ASSERT(false);
-    return QModelIndex();
+    qFatal("ProgramItem.index() called");
   }
 
   QVariant data(int column, int role) const;

@@ -42,11 +42,11 @@ class SiteItem : public GraphItem {
 
   bool isTopHalf() const override { return false; }
 
-  bool isUsed() const override { Q_ASSERT(false); }
+  bool isUsed() const override { qFatal("SiteItem.isUsed() called"); }
 
-  bool isRunning() const override { Q_ASSERT(false); }
+  bool isRunning() const override { qFatal("SiteItem.isRunning() called"); }
 
-  bool isWorking() const override { Q_ASSERT(false); }
+  bool isWorking() const override { qFatal("SiteItem.isWorking() called"); }
 
   operator QString() const;
 

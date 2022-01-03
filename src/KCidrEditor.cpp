@@ -141,12 +141,12 @@ bool KCidrEditor::setValue(
             mask = ofU8(cidrv6.mask);
           } break;
           default:
-            Q_ASSERT(false);
+            qFatal("Invalid cidr.index()");
         }
       }
       break;
     default:
-      Q_ASSERT(false);
+      qFatal("Invalid rv->index()");
   }
 
   /* Take care not to shortcut setting the second value when the first returns
