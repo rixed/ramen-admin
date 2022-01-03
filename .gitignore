@@ -98,7 +98,6 @@ src/qcustomplot.cpp
 src/qcustomplot.h
 icon.iconset
 *.icns
-*.ico
 *.info
 tests/archivist/*/configuration
 src/RmAdmin
