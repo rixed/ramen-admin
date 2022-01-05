@@ -483,8 +483,9 @@ int ConfClient::rcvdNewKey(std::shared_ptr<dessser::gen::sync_key::t const> k,
   auto const it{
       kvs->map.try_emplace(k, v, set_by_uid, mtime, can_write, can_del)};
   if (it.second) [[likely]] {
-    if (!owner.isEmpty()) [[unlikely]]
+    if (!owner.isEmpty()) [[unlikely]] {
       it.first->second.setLock(owner, expiry);
+    }
     kvs->addIncident(k);
     ret = checkDones(*k, *v);
   } else {
