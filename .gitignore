@@ -93,6 +93,7 @@ src/AppDir
 .qmake.stash
 qttest
 src/rmadmin.pro
+src/rmadmin.nsi
 .z3-trace
 src/qcustomplot.cpp
 src/qcustomplot.h
