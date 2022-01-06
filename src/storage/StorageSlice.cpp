@@ -1,7 +1,9 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include "storage/StorageSlice.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 
 static QString labelOfKey(Key const &k) {
   QString label;

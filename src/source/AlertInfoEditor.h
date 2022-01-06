@@ -3,6 +3,7 @@
 #define ALERTINFOEDITOR_H_191129
 #include <dessser/Lst.h>
 
+#include <QStringList>
 #include <QTreeView>
 #include <QWidget>
 #include <memory>

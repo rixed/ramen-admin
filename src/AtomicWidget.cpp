@@ -42,7 +42,7 @@ void AtomicWidget::onChange(QList<ConfChange> const &changes) {
 void AtomicWidget::relayoutWidget(QWidget *w) {
   /* Allows a user to relayout several different widgets, and we will switch
    * between them: */
-  int const idx(layout->indexOf(w));
+  int const idx{layout->indexOf(w)};
   if (idx >= 0) {
     layout->setCurrentIndex(idx);
   } else {

@@ -17,7 +17,8 @@
 #include <string>
 #include <vector>
 
-struct ConfChange;
+#include "ConfChange.h"
+
 struct KValue;
 class KVStore;
 

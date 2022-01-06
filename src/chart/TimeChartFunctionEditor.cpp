@@ -116,7 +116,7 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(std::string const &site,
                 qCritical(
                     "TimeChartFunctionEditor: dataChanged on row %d but model "
                     "has only %d rows!",
-                    row, model->numericFields.count());
+                    row, int(model->numericFields.count()));
                 break;
               }
               if (verbose)

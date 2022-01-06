@@ -832,9 +832,6 @@ bool FunctionItem::isUsed() const {
 }
 
 FunctionItem::operator QString() const {
-  QString s("   Function[");
-  s += row;
-  s += "]:";
-  s += shared->name;
+  QString s{"   Function[" + QString::number(row) + "]:" + shared->name};
   return s;
 }

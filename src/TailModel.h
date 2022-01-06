@@ -9,6 +9,7 @@
 #include <memory>
 #include <vector>
 
+#include "ConfChange.h"
 #include "desssergen/sync_key.h"
 
 /* The model representing lines of tuples, with possibly some tuples skipped
@@ -27,7 +28,6 @@
  * tuples that have one, or 0) and the unserialized RamenValues.
  */
 
-struct ConfChange;
 struct EventTime;
 struct KValue;
 namespace dessser {

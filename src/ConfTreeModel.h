@@ -3,11 +3,12 @@
 #define CONFTREEMODEL_H_200320
 /* Abstract class to help build global tree-models from the configuration */
 #include <QAbstractItemModel>
+#include <QStringList>
 
-struct ConfChange;
+#include "ConfChange.h"
+
 class ConfSubTree;
 struct KValue;
-class QStringList;
 
 class ConfTreeModel : public QAbstractItemModel {
   Q_OBJECT

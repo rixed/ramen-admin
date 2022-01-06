@@ -48,9 +48,9 @@ class ProgramPartItem : public GraphItem {
 
   QRectF operationRect() const override;
 
-  operator QString() const;
+  operator QString() const override;
 
-  QString const typeName() const { return QString("ProgramPartItem"); }
+  QString const typeName() const override { return QString("ProgramPartItem"); }
 };
 
 #endif

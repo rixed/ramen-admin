@@ -7,9 +7,9 @@
 #include <memory>
 #include <vector>
 
+#include "ConfChange.h"
 #include "misc.h"
 
-struct ConfChange;
 class QModelIndex;
 class QVariant;
 

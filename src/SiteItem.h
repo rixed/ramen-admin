@@ -48,9 +48,9 @@ class SiteItem : public GraphItem {
 
   bool isWorking() const override { qFatal("SiteItem.isWorking() called"); }
 
-  operator QString() const;
+  operator QString() const override;
 
-  QString const typeName() const { return QString("SiteItem"); }
+  QString const typeName() const override { return QString("SiteItem"); }
 };
 
 #endif

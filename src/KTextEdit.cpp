@@ -4,9 +4,10 @@
 #include <math.h>
 
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFontMetrics>
+#include <QGuiApplication>
 #include <QPlainTextEdit>
+#include <QScreen>
 #include <cassert>
 
 #include "MakeSyncValue.h"
@@ -28,13 +29,13 @@ KTextEdit::KTextEdit(bool raql_, QWidget *parent)
         textEdit->document());  // the document becomes owner
 
     /* Set a monospaced font: */
-    QFont font = textEdit->document()->defaultFont();
+    QFont font{textEdit->document()->defaultFont()};
     font.setFamily("Courier New");
     textEdit->document()->setDefaultFont(font);
 
     /* Set tab stops to 4 spaces: */
-    QFontMetricsF fontMetrics(font);
-    float tabWidth = fontMetrics.width("    ");
+    QFontMetricsF fontMetrics{font};
+    qreal tabWidth{fontMetrics.boundingRect("    ").width()};
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
     textEdit->setTabStopDistance(roundf(tabWidth));
 #else
@@ -62,11 +63,11 @@ bool KTextEdit::setValue(std::shared_ptr<dessser::gen::sync_value::t const> v) {
     if (raql) {
       /* We'd like the size to be that of the widest line of text,
        * within reason: */
-      QFont font(textEdit->document()->defaultFont());
-      QFontMetrics fontMetrics((QFontMetrics(font)));
+      QFont font{textEdit->document()->defaultFont()};
+      QFontMetrics fontMetrics{(QFontMetrics(font))};
       int const tabWidth{20};  // FIXME: get this from somewhere
-      QSize const maxSize{QDesktopWidget().availableGeometry(this).size() *
-                          0.7};
+      QSize const maxSize{
+          QGuiApplication::primaryScreen()->availableGeometry().size() * 0.7};
       QSize textSize{fontMetrics.size(Qt::TextExpandTabs, new_v, tabWidth)};
       suggestedSize = QSize(std::min(maxSize.width(), textSize.width()),
                             std::min(maxSize.height(), textSize.height()));

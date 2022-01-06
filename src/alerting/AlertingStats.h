@@ -3,7 +3,8 @@
 #define ALERTINGSTATS_H_200525
 #include <QWidget>
 
-struct ConfChange;
+#include "ConfChange.h"
+
 class QLabel;
 class QTimer;
 

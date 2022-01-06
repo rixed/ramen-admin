@@ -55,10 +55,7 @@ QRectF SiteItem::operationRect() const {
 }
 
 SiteItem::operator QString() const {
-  QString s{"Site["};
-  s += row;
-  s += "]:";
-  s += shared->name;
+  QString s{"Site[" + QString::number(row) + "]:" + shared->name};
   for (ProgramItem const *program : programs) {
     s += *program;
   }

@@ -2,7 +2,7 @@ CONFIG += c++1z warn_on
 CONFIG += object_parallel_to_source # As same filenames appear in different directories
 
 # So that dessserc generated C++ does compile:
-QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.14
+QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
 
 TEMPLATE = app
 TARGET = RmAdmin

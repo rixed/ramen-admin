@@ -6,7 +6,8 @@
 #include <list>
 #include <string>
 
-struct ConfChange;
+#include "ConfChange.h"
+
 class DashboardWidgetForm;
 class FunctionSelector;
 struct KValue;

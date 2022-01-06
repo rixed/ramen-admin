@@ -47,7 +47,11 @@ class AbstractTimeLine : public QWidget {
   void wheelEvent(QWheelEvent *) override;
   bool event(QEvent *) override;
   void keyPressEvent(QKeyEvent *) override;
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+  void enterEvent(QEnterEvent *) override { hovered = true; }
+#else
   void enterEvent(QEvent *) override { hovered = true; }
+#endif
   void leaveEvent(QEvent *) override { hovered = false; }
   void paintEvent(QPaintEvent *) override;
 

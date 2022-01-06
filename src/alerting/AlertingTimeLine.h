@@ -5,9 +5,9 @@
 #include <QWidget>
 #include <memory>
 
+#include "ConfChange.h"
 #include "TimeRange.h"
 
-struct ConfChange;
 struct KValue;
 class NotifTimeLine;
 class QFormLayout;

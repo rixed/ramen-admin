@@ -157,7 +157,7 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
 
   QString const fq{site->shared->name + ":" + parentProgram->shared->name +
                    "/" + function->shared->name};
-  return fq.contains(filterRegExp());
+  return fq.contains(filterRegularExpression());
 }
 
 void ProcessesWidgetProxy::viewFinished(bool checked) {

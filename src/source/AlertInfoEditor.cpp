@@ -400,7 +400,7 @@ bool AlertInfoEditor::setValue(
     // TODO: const iterator on Lst:
     for (std::string const &s_ : *(alert->group_by)) {
       QString const s{QString::fromStdString(s_)};
-      int const row{fields.indexOf(s)};
+      qsizetype const row{fields.indexOf(s)};
       if (row >= 0) {
         selModel->select(tableFields->index(row), QItemSelectionModel::Select);
       } else {

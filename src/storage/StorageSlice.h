@@ -3,10 +3,13 @@
 #define STORAGESLICE_H_190523
 #include <QColor>
 #include <QPieSlice>
+#include <QtCharts>
 #include <cassert>
 #include <vector>
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 
 struct Key {
   QString name[3];

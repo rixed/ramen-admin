@@ -511,7 +511,7 @@ void ConfTreeWidget::createItemByNames(
     // Takes a copy of [names] because it's going to be mnodified
     QStringList names, std::shared_ptr<dessser::gen::sync_key::t const> key,
     KValue const &kv, ConfTreeItem *parent, bool topLevel) {
-  int const len{names.count()};
+  qsizetype const len{names.count()};
   Q_ASSERT(len >= 1);
   QString const name{names.takeFirst()};
 
@@ -595,7 +595,7 @@ ConfTreeItem *ConfTreeWidget::itemOfKey(
 ConfTreeItem *ConfTreeWidget::findItemByNames(
     // Takes a copy of [names] because it's going to be modified
     QStringList names, ConfTreeItem *parent) {
-  int const len{names.count()};
+  qsizetype const len{names.count()};
   Q_ASSERT(len >= 1);
   QString const name{names.takeFirst()};
 

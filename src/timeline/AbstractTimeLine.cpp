@@ -7,6 +7,7 @@
 #include <QMouseEvent>
 #include <QPaintEvent>
 #include <QPainter>
+#include <QPair>
 #include <QPinchGesture>
 #include <QPoint>
 #include <QRectF>
@@ -60,7 +61,7 @@ void AbstractTimeLine::mousePressEvent(QMouseEvent *event) {
   switch (event->button()) {
     case Qt::LeftButton:
       if (m_doScroll) {
-        scrollStart = event->x();
+        scrollStart = event->position().x();
         viewPortStartScroll = m_viewPort;
       } else {
         QWidget::mousePressEvent(event);
@@ -105,7 +106,7 @@ void AbstractTimeLine::mouseReleaseEvent(QMouseEvent *event) {
 void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event) {
   if (scrollStart) {
     /* Scrolling mode: offset the viewport */
-    int const dx{event->x() - *scrollStart};
+    int const dx{int(round(event->position().x() - *scrollStart))};
     qreal const ratio{(qreal)dx / width()};
     qreal dt{viewPortWidth() * ratio};
     if (viewPortStartScroll.first - dt < m_beginOfTime) {
@@ -121,7 +122,7 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event) {
 
   /* Normal mouse move: update current time.
    * Note: selection might happen at the same time. */
-  qreal const ratio{(qreal)event->x() / width()};
+  qreal const ratio{(qreal)event->position().x() / width()};
   qreal const offs{viewPortWidth() * ratio};
   qreal t{m_viewPort.first + offs};
   if (t < m_beginOfTime)
@@ -386,7 +387,7 @@ void AbstractTimeLine::setTimeRange(TimeRange const &range) {
   setBeginOfTime(since);
   setEndOfTime(until);
   // Also reset the zoom
-  setViewPort(QPair{since, until});
+  setViewPort(QPair<qreal, qreal>{since, until});
 }
 
 void AbstractTimeLine::highlightRange(QPair<qreal, qreal> const range) {

@@ -36,7 +36,7 @@ class ProgramItem : public GraphItem {
     qFatal("ProgramItem.index() called");
   }
 
-  QVariant data(int column, int role) const;
+  QVariant data(int column, int role) const override;
 
   void reorder(GraphModel *);
 
@@ -52,9 +52,9 @@ class ProgramItem : public GraphItem {
    * program is conditionally disabled: */
   bool isRunning() const override;
 
-  operator QString() const;
+  operator QString() const override;
 
-  QString const typeName() const { return QString("ProgramItem"); }
+  QString const typeName() const override { return QString("ProgramItem"); }
 };
 
 #endif

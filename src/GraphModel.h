@@ -5,6 +5,7 @@
 #include <QPointF>
 #include <vector>
 
+#include "ConfChange.h"
 #include "GraphItem.h"
 
 /* The "Graph" described here is the graph of
@@ -34,7 +35,6 @@
  * positions are part of the data model, can be edited/saved by users...)
  */
 
-struct ConfChange;
 class FunctionItem;
 struct GraphViewSettings;
 struct KValue;

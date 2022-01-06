@@ -7,11 +7,12 @@
 #include <memory>
 #include <string>
 
+#include "ConfChange.h"
+
 /* An editor for a single entry of the target configuration.
  * The actual TargetConfigEditor, bound to the TargetConfig entry in the
  * config tree, will use many of those in a QToolBox. */
 
-struct ConfChange;
 struct KValue;
 class QFormLayout;
 class QLabel;

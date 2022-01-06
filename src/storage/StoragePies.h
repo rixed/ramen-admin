@@ -3,16 +3,18 @@
 #define STORAGEPIES_H_190522
 #include <QTimer>
 #include <QWidget>
+#include <QtCharts>
 
-#include "storage/StorageSlice.h"
+#include "storage/StorageSlice.h"  // for Key
 
 class FunctionItem;
 class GraphModel;
 class QCheckBox;
 class QLabel;
-namespace QtCharts {
-class QChart;
-}
+
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+using namespace QtCharts;
+#endif
 
 /*
  * A Pie chart displaying how the total storage size is divided amongst sites,
@@ -27,7 +29,7 @@ class StoragePies : public QWidget {
   /* Pie Chart displaying the storage size per site+program+function or
    * program+function.
    * So up to three concentric donuts: */
-  QtCharts::QChart *chart;
+  QChart *chart;
   Key selected;        // unless invalid
   bool staysSelected;  // when hover ceases
 

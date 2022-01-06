@@ -140,9 +140,9 @@ class FunctionItem : public GraphItem {
   bool isUsed()
       const override;  // either not lazy, or have no deps (is_used flag)
 
-  operator QString() const;
+  operator QString() const override;
 
-  QString const typeName() const { return QString("FunctionItem"); }
+  QString const typeName() const override { return QString("FunctionItem"); }
 };
 
 #endif

@@ -2,7 +2,6 @@
 #include "processes/ProcessesWidget.h"
 
 #include <QDebug>
-#include <QDesktopWidget>
 #include <QFrame>
 #include <QHBoxLayout>
 #include <QHeaderView>

@@ -58,7 +58,7 @@ Dashboard::Dashboard(std::string const &dash_name, QWidget *parent)
   bottomBar->addWidget(timeRangeEdit);
 
   QVBoxLayout *vboxLayout{new QVBoxLayout};
-  vboxLayout->setMargin(0);
+  vboxLayout->setContentsMargins(0, 0, 0, 0);
   vboxLayout->setContentsMargins(QMargins());
   vboxLayout->addWidget(placeHolder);
   vboxLayout->addWidget(scrollArea);

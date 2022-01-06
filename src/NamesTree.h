@@ -13,13 +13,13 @@
  * QCompleter).
  * So the right QCompleter can be obtained directly from the NamesTree
  */
+#include <QStringList>
 #include <utility>
 
 #include "ConfChange.h"
 #include "ConfTreeModel.h"
 
 struct KValue;
-class QStringList;
 class ConfSubTree;
 
 namespace dessser {

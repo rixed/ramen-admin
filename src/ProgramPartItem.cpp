@@ -60,7 +60,8 @@ bool ProgramPartItem::isWorking() const {
 }
 
 ProgramPartItem::operator QString() const {
-  QString s{" ProgramPart[" + QString(row) + QString("]:") + shared->name};
+  QString s{" ProgramPart[" + QString::number(row) + QString("]:") +
+            shared->name};
   return s;
 }
 

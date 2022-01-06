@@ -4,6 +4,7 @@
 #include <QObject>
 #include <string>
 
+#include "ConfChange.h"
 #include "KVStore.h"
 
 class AboutDialog;

@@ -21,7 +21,9 @@
 #include "colorOfString.h"
 #include "misc.h"
 
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
+#endif
 
 StoragePies::StoragePies(GraphModel *graphModel_, QWidget *parent)
     : QWidget(parent),

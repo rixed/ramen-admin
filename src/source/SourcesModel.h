@@ -6,7 +6,8 @@
 #include <QtGlobal>
 #include <memory>
 
-struct ConfChange;
+#include "ConfChange.h"
+
 struct KValue;
 
 namespace dessser {

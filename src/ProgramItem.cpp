@@ -94,10 +94,7 @@ QVariant ProgramItem::data(int column, int role) const {
 }
 
 ProgramItem::operator QString() const {
-  QString s{" Program["};
-  s += row;
-  s += "]:";
-  s += shared->name;
+  QString s{" Program[" + QString::number(row) + "]:" + shared->name};
   for (FunctionItem const *function : functions) {
     s += *function;
   }
