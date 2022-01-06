@@ -61,7 +61,12 @@ void AbstractTimeLine::mousePressEvent(QMouseEvent *event) {
   switch (event->button()) {
     case Qt::LeftButton:
       if (m_doScroll) {
-        scrollStart = event->position().x();
+        scrollStart =
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+            event->position().x();
+#else
+            event->x();
+#endif
         viewPortStartScroll = m_viewPort;
       } else {
         QWidget::mousePressEvent(event);
@@ -106,7 +111,13 @@ void AbstractTimeLine::mouseReleaseEvent(QMouseEvent *event) {
 void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event) {
   if (scrollStart) {
     /* Scrolling mode: offset the viewport */
-    int const dx{int(round(event->position().x() - *scrollStart))};
+    int const dx {
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+      int(round(event->position().x() - *scrollStart))
+#else
+      event->x() - *scrollStart
+#endif
+    };
     qreal const ratio{(qreal)dx / width()};
     qreal dt{viewPortWidth() * ratio};
     if (viewPortStartScroll.first - dt < m_beginOfTime) {
@@ -122,7 +133,13 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event) {
 
   /* Normal mouse move: update current time.
    * Note: selection might happen at the same time. */
-  qreal const ratio{(qreal)event->position().x() / width()};
+  qreal const ratio {
+#if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
+    event->position().x() / width()
+#else
+    (qreal) event->x() / width()
+#endif
+  };
   qreal const offs{viewPortWidth() * ratio};
   qreal t{m_viewPort.first + offs};
   if (t < m_beginOfTime)
