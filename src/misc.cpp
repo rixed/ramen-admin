@@ -58,13 +58,13 @@ std::string const suffixFromProgramName(std::string const &programName) {
 }
 
 QString const removeExtQ(QString const &s, char const c) {
-  int i{s.lastIndexOf(c)};
+  qsizetype const i{s.lastIndexOf(c)};
   if (i == -1) return s;
   return s.left(i);
 }
 
 QString const removeAmp(QString const &s) {
-  int const i{s.indexOf('&')};
+  qsizetype const i{s.indexOf('&')};
 
   if (i < 0) return s;
 
