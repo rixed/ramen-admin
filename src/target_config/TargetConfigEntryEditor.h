@@ -128,6 +128,7 @@ class TargetConfigEntryEditor : public QWidget {
 
  private slots:
   void onChange(QList<ConfChange> const &);
+  void sourceChanged(QString const &);
 
  private:
   /* Refresh the params each time another source is selected.

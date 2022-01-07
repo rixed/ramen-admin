@@ -71,17 +71,12 @@ TargetConfigEntryEditor::TargetConfigEntryEditor(bool sourceEditable_,
     QVBoxLayout *sourceLayout{new QVBoxLayout};
     sourceBox = new QComboBox;
     sourceBox->setEnabled(sourceEditable);
+    sourceBox->setInsertPolicy(QComboBox::InsertAlphabetically);
 
     sourceLayout->addWidget(sourceBox);
 
-    connect(sourceBox, QOverload<int>::of(&QComboBox::currentIndexChanged),
-            this, [this](int) {
-              setParamValues.clear();
-              updateSourceWarnings();
-              saveParams();
-              resetParams();
-              emit inputChanged();
-            });
+    connect(sourceBox, &QComboBox::currentTextChanged, this,
+            &TargetConfigEntryEditor::sourceChanged);
 
     notCompiledSourceWarning =
         new QLabel(tr("This source is not compiled (yet?)"));
@@ -159,6 +154,15 @@ TargetConfigEntryEditor::TargetConfigEntryEditor(bool sourceEditable_,
    * refresh the source select box and its associated warnings: */
   connect(kvs.get(), &KVStore::keyChanged, this,
           &TargetConfigEntryEditor::onChange);
+}
+
+void TargetConfigEntryEditor::sourceChanged(QString const &text) {
+  if (verbose) qDebug() << "TargetConfigEntryEditor::sourceChanged to" << text;
+  setParamValues.clear();
+  updateSourceWarnings();
+  saveParams();
+  resetParams();
+  emit inputChanged();
 }
 
 void TargetConfigEntryEditor::onChange(QList<ConfChange> const &changes) {
@@ -268,25 +272,22 @@ int TargetConfigEntryEditor::addSource(dessser::gen::sync_key::t const &k) {
 int TargetConfigEntryEditor::findOrAddSourceName(QString const &name) {
   if (name.isEmpty()) return -1;
 
-  // Insert in alphabetic order:
-  for (int i = 0; i <= sourceBox->count(); i++) {
-    // Do not add it once more (can happen when it was preselected)
-    if (i < sourceBox->count() && sourceBox->itemText(i) == name) {
-      return i;
-    }
-    if (i == sourceBox->count() || name < sourceBox->itemText(i)) {
-      /* Add this to the combo but leave the selected index unchanged.
-       * This avoids costly calls to the lambda currentIndexChanged is
-       * connected to. */
-      int const idx = sourceBox->currentIndex();
-      sourceBox->insertItem(i, name);
-      sourceBox->setCurrentIndex(idx);
-      return i;
-    }
-  }
+  int i{sourceBox->findText(name)};
+  if (i >= 0) return i;  // found
 
-  qFatal("Hit by a gamma rays!");
-  return -1;
+  /* Not found, insert it.
+   * This must leave the selection on the same text as before, including if
+   * nothing was selected then we must counter Qt's urge to select anything.
+   * The caller will decide if the selection must change to that new entry. */
+  int const idx{sourceBox->currentIndex()};
+  sourceBox->addItem(name);
+  i = sourceBox->findText(name);
+  if (verbose)
+    qDebug() << "TargetConfigEntryEditor::findOrAddSourceName: adding" << name
+             << "at" << i << "(selection moved from index" << idx << "to"
+             << sourceBox->currentIndex() << ")";
+
+  return i;
 }
 
 void TargetConfigEntryEditor::updateSourceWarnings() {
@@ -448,41 +449,43 @@ void TargetConfigEntryEditor::resetParams() {
   }
 }
 
-void TargetConfigEntryEditor::setValue(
-    dessser::gen::rc_entry::t const &rcEntry) {
-  if (rcEntry.program.length() == 0) {
+void TargetConfigEntryEditor::setValue(dessser::gen::rc_entry::t const &entry) {
+  if (verbose) qDebug() << "TargetConfigEntryEditor::setValue" << entry;
+  if (entry.program.length() == 0) {
     suffixEdit->setEnabled(false);
     sourceBox->setEnabled(false);
   } else {
-    std::string const srcPath = srcPathFromProgramName(rcEntry.program);
-    std::string const programSuffix = suffixFromProgramName(rcEntry.program);
+    std::string const srcPath{srcPathFromProgramName(entry.program)};
+    std::string const programSuffix{suffixFromProgramName(entry.program)};
     suffixEdit->setText(QString::fromStdString(programSuffix));
 
     suffixEdit->setEnabled(enabled);
     sourceBox->setEnabled(sourceEditable && enabled);
-    QString const source = QString::fromStdString(srcPath);
-    int const i = findOrAddSourceName(source);
-    sourceBox->setCurrentIndex(i);
+    QString const source{QString::fromStdString(srcPath)};
+    int const idx{findOrAddSourceName(source)};
+    /* Will call resetParams, in theory only after this event is done, in
+     * practice though much quicker: */
+    sourceBox->setCurrentIndex(idx);
   }
   updateSourceWarnings();
 
-  enabledBox->setCheckState(rcEntry.enabled ? Qt::Checked : Qt::Unchecked);
-  debugBox->setCheckState(rcEntry.debug ? Qt::Checked : Qt::Unchecked);
-  automaticBox->setCheckState(rcEntry.automatic ? Qt::Checked : Qt::Unchecked);
-  sitesEdit->setText(QString::fromStdString(rcEntry.on_site));
-  reportEdit->setText(QString::number(rcEntry.report_period));
-  cwdEdit->setText(QString::fromStdString(rcEntry.cwd));
+  enabledBox->setCheckState(entry.enabled ? Qt::Checked : Qt::Unchecked);
+  debugBox->setCheckState(entry.debug ? Qt::Checked : Qt::Unchecked);
+  automaticBox->setCheckState(entry.automatic ? Qt::Checked : Qt::Unchecked);
+  sitesEdit->setText(QString::fromStdString(entry.on_site));
+  reportEdit->setText(QString::number(entry.report_period));
+  cwdEdit->setText(QString::fromStdString(entry.cwd));
 
   // Also save the parameter values so that resetParams can find them:
   for (std::shared_ptr<dessser::gen::program_run_parameter::t> const &p :
-       rcEntry.params) {
+       entry.params) {
     if (!p->value) continue;
     if (verbose)
       qDebug() << "TargetConfigEntryEditor: Save value" << *p->value
                << "for param" << QString::fromStdString(p->name);
     setParamValues[p->name] = p->value;
   }
-  resetParams();
+  resetParams();  // because it's been called too early
 }
 
 std::shared_ptr<dessser::gen::rc_entry::t> TargetConfigEntryEditor::getValue()

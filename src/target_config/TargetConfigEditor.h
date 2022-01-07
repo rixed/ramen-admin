@@ -24,7 +24,7 @@ class TargetConfigEditor : public AtomicWidget {
   QLabel *noSelectionText;
   QStackedLayout *stackedLayout;
   int entryEditorIdx, noSelectionIdx;  // indices in the stackedLayout
-  std::vector<std::shared_ptr<dessser::gen::rc_entry::t> > rcEntries;
+  std::vector<std::shared_ptr<dessser::gen::rc_entry::t> > entries;
 
   TargetConfigEditor(QWidget *parent = nullptr);
 

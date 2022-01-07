@@ -18,7 +18,7 @@ static bool const verbose{false};
 
 TargetConfigEditor::TargetConfigEditor(QWidget *parent)
     : AtomicWidget(parent), currentIndex(-1) {
-  rcEntries.reserve(10);
+  entries.reserve(10);
 
   entrySelector = new QComboBox;
   entryEditor = new TargetConfigEntryEditor(true);
@@ -30,8 +30,8 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
   noSelectionIdx = stackedLayout->addWidget(noSelectionText);
   stackedLayout->setCurrentIndex(noSelectionIdx);
 
-  QWidget *w = new QWidget;
-  QVBoxLayout *layout = new QVBoxLayout;
+  QWidget *w{new QWidget};
+  QVBoxLayout *layout{new QVBoxLayout};
   layout->addWidget(entrySelector);
   layout->addLayout(stackedLayout);
   w->setLayout(layout);
@@ -46,142 +46,105 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
 
 std::shared_ptr<dessser::gen::sync_value::t const>
 TargetConfigEditor::getValue() const {
-  dessser::Arr<dessser::gen::rc_entry::t_ext> rc;
-
-  for (size_t i = 0; i < rcEntries.size(); i++) {
-    rc.push_back((int)i == currentIndex ? entryEditor->getValue()
-                                        : rcEntries[i]);
+  /* Build a new config copying the current one but for the currently edited
+   * entry: */
+  dessser::Arr<dessser::gen::rc_entry::t_ext> target_config;
+  if (verbose)
+    qDebug() << "TargetConfigEditor:getValue:" << entries.size()
+             << "entries, currently selected:" << currentIndex;
+  for (int i = 0; i < (int)entries.size(); i++) {
+    if (verbose)
+      qDebug() << "TargetConfigEditor::getValue: entry" << i << ":"
+               << *entries[i] << "@" << intptr_t(entries[i].get());
+    target_config.push_back(i == currentIndex ? entryEditor->getValue()
+                                              : entries[i]);
   }
 
   return std::make_shared<dessser::gen::sync_value::t>(
-      std::in_place_index<dessser::gen::sync_value::TargetConfig>, rc);
+      std::in_place_index<dessser::gen::sync_value::TargetConfig>,
+      target_config);
 }
-
-/*
-  // Rebuilt the whole RC from the form:
-  for (int i = 0; i < rcEntries->rowCount(); i++) {
-    TargetConfigEntryEditor const *entry =
-      dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(i));
-    if (! entry) {
-      qCritical() << "TargetConfigEditor entry" << i << "not a
-  TargetConfigEntryEditor?!"; continue;
-    }
-    rc->addEntry(entry->getValue());
-  }
-*/
 
 void TargetConfigEditor::setEnabled(bool enabled) {
   if (verbose) qDebug() << "TargetConfigEditor::setEnabled(" << enabled << ")";
 
+  /* Keep the entrySelector enabled so we can still switch between entries when
+   * edition is disabled. */
   entryEditor->setEnabled(enabled);
 }
 
-/*
-  for (int i = 0; i < rcEntries->count(); i++) {
-    TargetConfigEntryEditor *entry = dynamic_cast<TargetConfigEntryEditor
-  *>(rcEntries->widget(i)); if (! entry) { qCritical() << "TargetConfigEditor:
-  widget" << i << "not an TargetConfigEntryEditor?!"; continue;
-    }
-    entry->setEnabled(enabled);
-  }
-*/
-
 bool TargetConfigEditor::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
+  if (verbose) qDebug() << "TargetConfigEditor::setValue" << *v;
   if (v->index() != dessser::gen::sync_value::TargetConfig) {
     qCritical() << "Target config not of TargetConfig type!?";
     return false;
   }
 
-  dessser::Arr<dessser::gen::rc_entry::t_ext> rc{
+  dessser::Arr<dessser::gen::rc_entry::t_ext> target_config{
       std::get<dessser::gen::sync_value::TargetConfig>(*v)};
 
   /* Since we have a single value and it is locked whenever we want to edit
    * it, the current widget cannot have any modification when a new value is
-   * received. Therefore there is no use for preserving current values: */
-  /* Note that, due to the currentIndexChanged signal, we must unselect first
-   * and then empty: */
-  entrySelector->setCurrentIndex(-1);
-  rcEntries.clear();
+   * received. Therefore there is no use for preserving current values.
+   * Signals must be blocked during the change or the changeEntry slot will
+   * be called when the first item is added and cause mayhem. */
+  entrySelector->blockSignals(true);
+  int const saved_current_idx{currentIndex};
+  entries.clear();
   while (entrySelector->count() > 0) entrySelector->removeItem(0);
 
-  // Copy the RC entries:
-  for (std::shared_ptr<dessser::gen::rc_entry::t> const &rce : rc) {
-    rcEntries.push_back(rce);
-    entrySelector->addItem(QString::fromStdString(rce->program));
+  // Copy the entries:
+  for (std::shared_ptr<dessser::gen::rc_entry::t> const &entry :
+       target_config) {
+    if (verbose)
+      qDebug() << "TargetConfigEditor::setValue entry" << entries.size()
+               << "is now" << *entry << "@" << intptr_t(entry.get());
+    entries.push_back(entry);
+    entrySelector->addItem(QString::fromStdString(entry->program));
   }
+  Q_ASSERT(entrySelector->count() == (int)entries.size());
+  entrySelector->blockSignals(false);
 
-  Q_ASSERT(entrySelector->count() == (int)rcEntries.size());
-
-  if (entrySelector->count() > 0) {
+  /* Select the same entry again (leaving it to currentIndexChanged to update
+   * currentIndex, if necessary). */
+  if (entries.size() > 0) {
     stackedLayout->setCurrentIndex(entryEditorIdx);
-    currentIndex = 0;
-    entryEditor->setValue(*rcEntries[currentIndex]);
-    entrySelector->setCurrentIndex(currentIndex);
+    int const new_idx{saved_current_idx >= 0 &&
+                              saved_current_idx < (int)entries.size()
+                          ? saved_current_idx
+                          : 0};
+    if (verbose)
+      qDebug() << "TargetConfigEditor::setValue: selecting entry" << new_idx
+               << "=" << *entries[new_idx];
+    entryEditor->setValue(*entries[new_idx]);
+    entrySelector->setCurrentIndex(new_idx);
   } else {
     stackedLayout->setCurrentIndex(noSelectionIdx);
-    currentIndex = -1;
+    entrySelector->setCurrentIndex(-1);
   }
-
-  /*
-  TargetConfigEntryEditor *entryEditor = new TargetConfigEntryEditor(true);
-  entryEditor->setProgramName(it.first);
-  entryEditor->setValue(entry);
-  rcEntries->addTab(entryEditor, QString::fromStdString(it.first));
-
-  connect(entryEditor, &TargetConfigEntryEditor::inputChanged,
-          this, &TargetConfigEditor::inputChanged);
-*/
 
   emit valueChanged(v);
 
   return true;
 }
 
-/*
-TargetConfigEntryEditor const *TargetConfigEditor::currentEntry() const
-{
-
-  TargetConfigEntryEditor const *entry =
-    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->currentWidget());
-  if (! entry) {
-    qCritical() << "TargetConfigEditor entry that's not a
-TargetConfigEntryEditor?!";
-  }
-  return entry;
-}
-*/
-
 void TargetConfigEditor::removeCurrentEntry() {
-  int const idx = entrySelector->currentIndex();
+  int const idx{entrySelector->currentIndex()};
   Q_ASSERT(idx == currentIndex);
 
   if (stackedLayout->currentIndex() != entryEditorIdx || idx < 0 ||
-      idx >= (int)rcEntries.size())
+      idx >= (int)entries.size())
     return;
 
-  rcEntries.erase(rcEntries.begin() + idx);
+  entries.erase(entries.begin() + idx);
   entrySelector->removeItem(idx);
+  // In case the last entry was deleted:
   currentIndex = entrySelector->currentIndex();
-
-  /*
-for (int c = 0; c < rcEntries->count(); c ++) {
-  TargetConfigEntryEditor const *entry =
-    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(c));
-  if (! entry) continue;
-  if (entry == toRemove) {
-    rcEntries->removeTab(c);
-    return;
-  }
-}
-
-qCritical() << "Asked to remove entry @" << toRemove << "but coundn't find
-it";
-*/
 }
 
 void TargetConfigEditor::preselect(QString const &programName) {
-  int const idx = entrySelector->findText(programName);
+  int const idx{entrySelector->findText(programName)};
   if (idx < 0) {
     qCritical() << "Could not preselect program" << programName;
     return;
@@ -190,45 +153,27 @@ void TargetConfigEditor::preselect(QString const &programName) {
   if (idx != entrySelector->currentIndex()) {
     entrySelector->setCurrentIndex(idx);
   }
-
-  /*
-std::string const pName = programName.toStdString();
-QString const srcPath =
-  QString::fromStdString(srcPathFromProgramName(pName));
-QString const programSuffix =
-  QString::fromStdString(suffixFromProgramName(pName));
-
-for (int c = 0; c < rcEntries->count(); c ++) {
-  TargetConfigEntryEditor const *entry =
-    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(c));
-  if (! entry) continue;
-  if (entry->suffixEdit->text() == programSuffix &&
-      entry->sourceBox->currentText() == srcPath
-  ) {
-    rcEntries->setCurrentIndex(c);
-    return;
-  }
-}
-
-qCritical() << "Could not preselect program" << programName;
-*/
 }
 
 void TargetConfigEditor::changeEntry(int idx) {
   if (currentIndex >= 0) {
     /* Save the value from the editor: */
-    if (currentIndex < (int)rcEntries.size()) {
-      rcEntries[currentIndex] = entryEditor->getValue();
+    if (currentIndex < (int)entries.size()) {
+      if (verbose)
+        qDebug()
+            << "TargetConfigEditor::changeEntry: saving the current value for"
+            << currentIndex << "from the editor";
+      entries[currentIndex] = entryEditor->getValue();
     } else {
       /* Can happen that currentIndex is right past the end if we deleted
        * the last entry: */
-      Q_ASSERT(currentIndex == (int)rcEntries.size());
+      Q_ASSERT(currentIndex == (int)entries.size());
     }
   }
 
   currentIndex = idx;
 
   if (idx >= 0) {
-    entryEditor->setValue(*rcEntries[idx]);
+    entryEditor->setValue(*entries[idx]);
   }
 }
