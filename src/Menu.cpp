@@ -25,11 +25,11 @@
 #include "dashboard/tools.h"
 #include "misc.h"
 #include "processes/ProcessesDialog.h"
-#include "source/NewProgramDialog.h"
 #include "source/NewSourceDialog.h"
 #include "source/SourcesWin.h"
 #include "storage/StorageWin.h"
 #include "stream/OperationsWin.h"
+#include "target_config/NewTargetConfigEntryDialog.h"
 #include "target_config/TargetConfigEditorWin.h"
 
 static bool const verbose{false};
@@ -38,7 +38,7 @@ AboutDialog *Menu::aboutDialog;
 SourcesWin *Menu::sourcesWin;
 ConfTreeDialog *Menu::confTreeDialog;
 NewSourceDialog *Menu::newSourceDialog;
-NewProgramDialog *Menu::newProgramDialog;
+NewTargetConfigEntryDialog *Menu::newTargetConfigEntryDialog;
 NewDashboardDialog *Menu::newDashboardDialog;
 ProcessesDialog *Menu::processesDialog;
 TargetConfigEditorWin *Menu::targetConfigEditorWin;
@@ -62,8 +62,9 @@ void Menu::initDialogs(QString const &srvUrl) {
   if (!confTreeDialog) confTreeDialog = new ConfTreeDialog;
   if (verbose) qDebug() << "Create NewSourceDialog...";
   if (!newSourceDialog) newSourceDialog = new NewSourceDialog;
-  if (verbose) qDebug() << "Create NewProgramDialog...";
-  if (!newProgramDialog) newProgramDialog = new NewProgramDialog;
+  if (verbose) qDebug() << "Create NewTargetConfigEntryDialog...";
+  if (!newTargetConfigEntryDialog)
+    newTargetConfigEntryDialog = new NewTargetConfigEntryDialog;
   if (verbose) qDebug() << "Create NewDashboardDialog...";
   if (!newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
   if (verbose) qDebug() << "Create ProcessesDialog...";
@@ -102,7 +103,7 @@ void Menu::deleteDialogs() {
   danceOfDelLater<SourcesWin>(&sourcesWin);
   danceOfDelLater<ConfTreeDialog>(&confTreeDialog);
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
-  danceOfDelLater<NewProgramDialog>(&newProgramDialog);
+  danceOfDelLater<NewTargetConfigEntryDialog>(&newTargetConfigEntryDialog);
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
   danceOfDelLater<ProcessesDialog>(&processesDialog);
   danceOfDelLater<TargetConfigEditorWin>(&targetConfigEditorWin);
@@ -132,7 +133,7 @@ void Menu::populateMenu(bool basic, bool extended) {
     fileMenu->addAction(QCoreApplication::translate("QMenuBar", "New Source…"),
                         this, &Menu::openNewSourceDialog, QKeySequence::New);
     fileMenu->addAction(QCoreApplication::translate("QMenuBar", "Run…"), this,
-                        &Menu::openNewProgramDialog,
+                        &Menu::openNewTargetConfigEntryDialog,
                         Qt::CTRL | Qt::Key_R);  // _R_un
 
     fileMenu->addSeparator();
@@ -269,7 +270,9 @@ void Menu::openNewSourceDialog() {
   showRaised(newSourceDialog);
 }
 
-void Menu::openNewProgramDialog() { showRaised(newProgramDialog); }
+void Menu::openNewTargetConfigEntryDialog() {
+  showRaised(newTargetConfigEntryDialog);
+}
 
 void Menu::openNewDashboardDialog() {
   newDashboardDialog->clear();

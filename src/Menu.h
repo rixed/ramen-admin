@@ -1,6 +1,9 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef MENU_H_190731
 #define MENU_H_190731
+/* There exist one instance of a Menu per SavedWindow, but most of what they do
+ * is the same and on the same global state, thus the many static functions and
+ * variables. */
 #include <QObject>
 #include <string>
 
@@ -15,7 +18,7 @@ class LoggerWin;
 class LoginWin;
 class NamesTreeWin;
 class NewDashboardDialog;
-class NewProgramDialog;
+class NewTargetConfigEntryDialog;
 class NewSourceDialog;
 class OperationsWin;
 class ProcessesDialog;
@@ -62,7 +65,7 @@ class Menu : public QObject {
   static SourcesWin *sourcesWin;
   static ConfTreeDialog *confTreeDialog;
   static NewSourceDialog *newSourceDialog;
-  static NewProgramDialog *newProgramDialog;
+  static NewTargetConfigEntryDialog *newTargetConfigEntryDialog;
   static NewDashboardDialog *newDashboardDialog;
   static ProcessesDialog *processesDialog;
   static TargetConfigEditorWin *targetConfigEditorWin;
@@ -81,10 +84,8 @@ class Menu : public QObject {
 
   Menu(bool fullMenu, QMainWindow *);
 
- public slots:
-  void upgradeToFull();  // and show something
   static void openNewSourceDialog();
-  static void openNewProgramDialog();
+  static void openNewTargetConfigEntryDialog();
   static void openNewDashboardDialog();
   static void openSourceEditor();
   static void openProcesses();
@@ -101,6 +102,9 @@ class Menu : public QObject {
   static void prepareQuit();
   static void openDashboard(std::string const &);
   static ConfClient *getClient();
+
+ public slots:
+  void upgradeToFull();  // and show something
 
  protected slots:
   void onChange(QList<ConfChange> const &);

@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "source/NewProgramDialog.h"
+#include "target_config/NewTargetConfigEntryDialog.h"
 
 #include <QDebug>
 #include <QFormLayout>
@@ -21,7 +21,8 @@
 
 static bool const verbose{false};
 
-NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent)
+NewTargetConfigEntryDialog::NewTargetConfigEntryDialog(
+    QString const &sourceName, QWidget *parent)
     : QDialog(parent), mustSave(false) {
   bool const sourceEditable{sourceName.isEmpty()};
   editor = new TargetConfigEntryEditor(sourceEditable);
@@ -50,9 +51,9 @@ NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent)
   validate();
 
   connect(editor, &TargetConfigEntryEditor::inputChanged, this,
-          &NewProgramDialog::validate);
+          &NewTargetConfigEntryDialog::validate);
   connect(okButton, &QPushButton::clicked, this,
-          &NewProgramDialog::createProgram);
+          &NewTargetConfigEntryDialog::createProgram);
   connect(cancelButton, &QPushButton::clicked, this, &QDialog::reject);
 
   QVBoxLayout *layout{new QVBoxLayout};
@@ -61,13 +62,14 @@ NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent)
   setLayout(layout);
 
   // Listen for all locks on the RC:
-  connect(kvs.get(), &KVStore::keyChanged, this, &NewProgramDialog::onChange);
+  connect(kvs.get(), &KVStore::keyChanged, this,
+          &NewTargetConfigEntryDialog::onChange);
 
   setWindowTitle(tr("Start New Program"));
   setModal(true);
 }
 
-void NewProgramDialog::onChange(QList<ConfChange> const &changes) {
+void NewTargetConfigEntryDialog::onChange(QList<ConfChange> const &changes) {
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change{changes.at(i)};
     switch (change.op) {
@@ -80,9 +82,9 @@ void NewProgramDialog::onChange(QList<ConfChange> const &changes) {
   }
 }
 
-void NewProgramDialog::createProgram() {
+void NewTargetConfigEntryDialog::createProgram() {
   if (verbose)
-    qDebug() << "NewProgramDialog: createProgram: editor is"
+    qDebug() << "NewTargetConfigEntryDialog::createProgram: editor is"
              << (editor->isValid() ? "" : "not ") << "valid";
 
   if (!editor->isValid()) return;
@@ -93,52 +95,58 @@ void NewProgramDialog::createProgram() {
    * inconvenient: We have to lock it, modify it, and unlock it.
    * Had we one entry per program we could simply use NewKey.
    * Here instead we write only if/when we obtain the lock. */
-  std::shared_ptr<dessser::gen::sync_value::t const> rc_value;
+  std::shared_ptr<dessser::gen::sync_value::t const> target_config;
   kvs->lock.lock_shared();
   auto it{kvs->map.find(targetConfig)};
-  if (it != kvs->map.end() && it->second.isMine()) rc_value = it->second.val;
+  if (it != kvs->map.end() && it->second.isMine())
+    target_config = it->second.val;
   kvs->lock.unlock_shared();
 
-  if (rc_value) {
-    appendEntry(*rc_value);
+  if (target_config) {
+    appendEntry(*target_config);
   } else {
-    if (verbose) qDebug() << "NewProgramDialog: createProgram: must wait";
+    if (verbose)
+      qDebug() << "NewTargetConfigEntryDialog: createProgram: must wait";
     Menu::getClient()->sendLock(targetConfig);
   }
 }
 
-void NewProgramDialog::mayWriteRC(
+void NewTargetConfigEntryDialog::mayWriteRC(
     std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv) {
   if (*key != *targetConfig) return;
   if (!mustSave) return;
 
-  if (verbose) qDebug() << "NewProgramDialog::mayWriteRC: key=" << *key;
+  if (verbose)
+    qDebug() << "NewTargetConfigEntryDialog::mayWriteRC: key=" << *key;
 
   if (kv.uid == my_uid)
     appendEntry(*kv.val);  // else wait longer...
   else if (verbose)
-    qDebug() << "NewProgramDialog::mayWriteRC: currently locked by" << kv.uid;
+    qDebug() << "NewTargetConfigEntryDialog::mayWriteRC: currently locked by"
+             << kv.uid;
 }
 
-void NewProgramDialog::appendEntry(
-    dessser::gen::sync_value::t const &rc_value) {
+void NewTargetConfigEntryDialog::appendEntry(
+    dessser::gen::sync_value::t const &target_config) {
   if (!mustSave) return;
 
-  if (rc_value.index() == dessser::gen::sync_value::TargetConfig) {
-    std::shared_ptr<dessser::gen::rc_entry::t> rce{editor->getValue()};
+  if (target_config.index() == dessser::gen::sync_value::TargetConfig) {
+    std::shared_ptr<dessser::gen::rc_entry::t> entry{editor->getValue()};
     if (verbose)
-      qDebug() << "NewProgramDialog::appendEntry: Appending new RC entry"
-               << *rce;
+      qDebug() << "NewTargetConfigEntryDialog::appendEntry: Appending new "
+                  "target-config entry"
+               << *entry;
     // Copy the array of rc-entries and append the new one:
-    std::shared_ptr<dessser::gen::sync_value::t> new_rc_value{
-        std::make_shared<dessser::gen::sync_value::t>(rc_value)};
-    std::get<dessser::gen::sync_value::TargetConfig>(*new_rc_value)
-        .push_back(rce);
+    std::shared_ptr<dessser::gen::sync_value::t> new_target_config{
+        std::make_shared<dessser::gen::sync_value::t>(target_config)};
+    std::get<dessser::gen::sync_value::TargetConfig>(*new_target_config)
+        .push_back(entry);
 
-    Menu::getClient()->sendSet(targetConfig, new_rc_value);
+    Menu::getClient()->sendSet(targetConfig, new_target_config);
   } else {
-    qCritical() << "NewProgramDialog::appendEntry:Invalid type for the "
-                   "TargetConfig!?";
+    qCritical()
+        << "NewTargetConfigEntryDialog::appendEntry:Invalid type for the "
+           "TargetConfig!?";
   }
 
   mustSave = false;
@@ -147,4 +155,6 @@ void NewProgramDialog::appendEntry(
   QDialog::accept();
 }
 
-void NewProgramDialog::validate() { okButton->setEnabled(editor->isValid()); }
+void NewTargetConfigEntryDialog::validate() {
+  okButton->setEnabled(editor->isValid());
+}

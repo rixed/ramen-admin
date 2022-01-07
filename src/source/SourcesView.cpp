@@ -20,8 +20,8 @@
 #include "ConfTreeEditorDialog.h"
 #include "misc.h"
 #include "misc_dessser.h"
-#include "source/NewProgramDialog.h"
 #include "source/SourcesModel.h"
+#include "target_config/NewTargetConfigEntryDialog.h"
 
 static bool const verbose{false};
 
@@ -173,7 +173,7 @@ void SourcesView::runSource(QModelIndex const &index) {
       static_cast<SourcesModel::TreeItem const *>(index.internalPointer())};
   QString const baseName{item->fqName()};
 
-  NewProgramDialog *dialog{new NewProgramDialog(baseName)};
+  NewTargetConfigEntryDialog *dialog{new NewTargetConfigEntryDialog(baseName)};
   dialog->show();
   dialog->raise();
 }

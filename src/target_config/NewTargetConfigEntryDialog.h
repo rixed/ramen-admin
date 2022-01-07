@@ -1,6 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef NEWPROGRAMDIALOG_H_190731
-#define NEWPROGRAMDIALOG_H_190731
+#ifndef NEWTARGETCONFIGENTRYDIALOG_H_190731
+#define NEWTARGETCONFIGENTRYDIALOG_H_190731
 #include <QDialog>
 #include <memory>
 
@@ -22,7 +22,7 @@ struct t;
 }  // namespace gen
 }  // namespace dessser
 
-class NewProgramDialog : public QDialog {
+class NewTargetConfigEntryDialog : public QDialog {
   Q_OBJECT
 
   TargetConfigEntryEditor *editor;
@@ -34,7 +34,8 @@ class NewProgramDialog : public QDialog {
                   KValue const &);
 
  public:
-  NewProgramDialog(QString const &sourceName = "", QWidget *parent = nullptr);
+  NewTargetConfigEntryDialog(QString const &sourceName = "",
+                             QWidget *parent = nullptr);
 
  private:
   void appendEntry(dessser::gen::sync_value::t const &);

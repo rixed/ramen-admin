@@ -209,6 +209,7 @@ HEADERS += \
   target_config/TargetConfigEntryEditor.h \
   target_config/TargetConfigEditor.h \
   target_config/TargetConfigEditorWin.h \
+  target_config/NewTargetConfigEntryDialog.h \
   RuntimeStatsViewer.h \
   EditorWidget.h \
   ConfTreeItem.h \
@@ -260,7 +261,6 @@ HEADERS += \
   source/SourceCloneDialog.h \
   source/CodeEditForm.h \
   source/CodeEdit.h \
-  source/NewProgramDialog.h \
   source/NewSourceDialog.h \
   source/SourcesModel.h \
   source/SourcesView.h \
@@ -366,6 +366,7 @@ SOURCES += \
   target_config/TargetConfigEntryEditor.cpp \
   target_config/TargetConfigEditor.cpp \
   target_config/TargetConfigEditorWin.cpp \
+  target_config/NewTargetConfigEntryDialog.cpp \
   RuntimeStatsViewer.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \
@@ -417,7 +418,6 @@ SOURCES += \
   source/SourceCloneDialog.cpp \
   source/CodeEditForm.cpp \
   source/CodeEdit.cpp \
-  source/NewProgramDialog.cpp \
   source/NewSourceDialog.cpp \
   source/SourcesModel.cpp \
   source/SourcesView.cpp \

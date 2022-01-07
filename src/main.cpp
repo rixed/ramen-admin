@@ -71,6 +71,7 @@ int main(int argc, char *argv[]) {
   auto tester = new QAbstractItemModelTester(
       GraphModel::globalGraphModel,
       QAbstractItemModelTester::FailureReportingMode::Fatal);
+  (void)tester;
 
   DashboardTreeModel::globalDashboardTree = new DashboardTreeModel;
   AlertingLogsModel::globalLogsModel = new AlertingLogsModel;
