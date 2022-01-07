@@ -43,7 +43,8 @@ TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
 
   // Prepare the confirmation dialog for deletion:
   confirmDeleteDialog = new QMessageBox(this);
-  confirmDeleteDialog->setText("Are you sure you want to delete this entry?");
+  confirmDeleteDialog->setText(
+      tr("Are you sure you want to delete this entry?"));
   confirmDeleteDialog->setStandardButtons(QMessageBox::Yes |
                                           QMessageBox::Cancel);
   confirmDeleteDialog->setDefaultButton(QMessageBox::Cancel);
@@ -59,8 +60,8 @@ void TargetConfigEditorWin::wantDeleteEntry() {
   QString info{tr("This program will no longer be running.")};
   if (targetConfigEditor->entryEditor->programIsEnabled())
     info.append(
-        "\n\nAlternatively, this program could be "
-        "temporarily disabled.");
+        tr("\n\nAlternatively, this program could be "
+           "temporarily disabled."));
   confirmDeleteDialog->setInformativeText(info);
 
   if (QMessageBox::Yes == confirmDeleteDialog->exec()) {
