@@ -13,18 +13,18 @@
 
 #include "ConfClient.h"
 #include "Menu.h"
-#include "RCEntryEditor.h"
 #include "desssergen/rc_entry.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
+#include "target_config/TargetConfigEntryEditor.h"
 
 static bool const verbose{false};
 
 NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent)
     : QDialog(parent), mustSave(false) {
   bool const sourceEditable{sourceName.isEmpty()};
-  editor = new RCEntryEditor(sourceEditable);
+  editor = new TargetConfigEntryEditor(sourceEditable);
   editor->setProgramName(sourceName.toStdString());
   editor->setEnabled(true);
 
@@ -49,7 +49,7 @@ NewProgramDialog::NewProgramDialog(QString const &sourceName, QWidget *parent)
    * validity of the form: */
   validate();
 
-  connect(editor, &RCEntryEditor::inputChanged, this,
+  connect(editor, &TargetConfigEntryEditor::inputChanged, this,
           &NewProgramDialog::validate);
   connect(okButton, &QPushButton::clicked, this,
           &NewProgramDialog::createProgram);

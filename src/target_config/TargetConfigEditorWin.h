@@ -1,13 +1,13 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef RCEDITORDIALOG_H_190809
-#define RCEDITORDIALOG_H_190809
+#ifndef TARGETCONFIGEDITORWIN_H_190809
+#define TARGETCONFIGEDITORWIN_H_190809
 #include "SavedWindow.h"
 
 class QMessageBox;
 class QString;
 class TargetConfigEditor;
 
-class RCEditorDialog : public SavedWindow {
+class TargetConfigEditorWin : public SavedWindow {
   Q_OBJECT
 
   TargetConfigEditor *targetConfigEditor;
@@ -15,7 +15,7 @@ class RCEditorDialog : public SavedWindow {
   QMessageBox *confirmDeleteDialog;
 
  public:
-  RCEditorDialog(QWidget *parent = nullptr);
+  TargetConfigEditorWin(QWidget *parent = nullptr);
 
   void preselect(QString const &programName);
 

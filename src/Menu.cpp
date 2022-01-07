@@ -17,7 +17,6 @@
 #include "LoggerWin.h"
 #include "LoginWin.h"
 #include "NamesTreeWin.h"
-#include "RCEditorDialog.h"
 #include "SavedWindow.h"
 #include "ServerInfoWin.h"
 #include "alerting/AlertingWin.h"
@@ -31,6 +30,7 @@
 #include "source/SourcesWin.h"
 #include "storage/StorageWin.h"
 #include "stream/OperationsWin.h"
+#include "target_config/TargetConfigEditorWin.h"
 
 static bool const verbose{false};
 
@@ -41,7 +41,7 @@ NewSourceDialog *Menu::newSourceDialog;
 NewProgramDialog *Menu::newProgramDialog;
 NewDashboardDialog *Menu::newDashboardDialog;
 ProcessesDialog *Menu::processesDialog;
-RCEditorDialog *Menu::rcEditorDialog;
+TargetConfigEditorWin *Menu::targetConfigEditorWin;
 NamesTreeWin *Menu::namesTreeWin;
 StorageWin *Menu::storageWin;
 ServerInfoWin *Menu::serverInfoWin;
@@ -68,8 +68,8 @@ void Menu::initDialogs(QString const &srvUrl) {
   if (!newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
   if (verbose) qDebug() << "Create ProcessesDialog...";
   if (!processesDialog) processesDialog = new ProcessesDialog;
-  if (verbose) qDebug() << "Create RCEditorDialog...";
-  if (!rcEditorDialog) rcEditorDialog = new RCEditorDialog;
+  if (verbose) qDebug() << "Create TargetConfigEditorWin...";
+  if (!targetConfigEditorWin) targetConfigEditorWin = new TargetConfigEditorWin;
   if (verbose) qDebug() << "Create NamesTreeWin...";
   if (!namesTreeWin) namesTreeWin = new NamesTreeWin;
   if (verbose) qDebug() << "Create StorageWin...";
@@ -89,7 +89,7 @@ void Menu::showSomething() {
   someOpened |= sourcesWin->isVisible();
   someOpened |= confTreeDialog->isVisible();
   someOpened |= processesDialog->isVisible();
-  someOpened |= rcEditorDialog->isVisible();
+  someOpened |= targetConfigEditorWin->isVisible();
   someOpened |= storageWin->isVisible();
 
   if (!someOpened) sourcesWin->show();
@@ -105,7 +105,7 @@ void Menu::deleteDialogs() {
   danceOfDelLater<NewProgramDialog>(&newProgramDialog);
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
   danceOfDelLater<ProcessesDialog>(&processesDialog);
-  danceOfDelLater<RCEditorDialog>(&rcEditorDialog);
+  danceOfDelLater<TargetConfigEditorWin>(&targetConfigEditorWin);
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
   danceOfDelLater<StorageWin>(&storageWin);
   danceOfDelLater<ServerInfoWin>(&serverInfoWin);
@@ -171,8 +171,8 @@ void Menu::populateMenu(bool basic, bool extended) {
 
     /* The TargetConfig editor: */
     windowMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Running Configuration…"), this,
-        &Menu::openRCEditor);
+        QCoreApplication::translate("QMenuBar", "Target Configuration…"), this,
+        &Menu::openTargetConfigEditor);
 
     /* The Storage configuration window: */
     windowMenu->addAction(
@@ -284,7 +284,7 @@ void Menu::openProcesses() {
   showRaised(processesDialog);
 }
 
-void Menu::openRCEditor() { showRaised(rcEditorDialog); }
+void Menu::openTargetConfigEditor() { showRaised(targetConfigEditorWin); }
 
 void Menu::openConfTreeDialog() { showRaised(confTreeDialog); }
 

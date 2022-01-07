@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "RCEntryEditor.h"
+#include "target_config/TargetConfigEntryEditor.h"
 
 #include <QCheckBox>
 #include <QComboBox>
@@ -32,7 +32,7 @@
 static bool const verbose{false};
 
 QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const> >
-    RCEntryEditor::setParamValues;
+    TargetConfigEntryEditor::setParamValues;
 
 static bool isCompiledSource(KValue const &kv) {
   if (kv.val->index() != dessser::gen::sync_value::SourceInfo) return false;
@@ -57,17 +57,18 @@ static bool isInfoFile(dessser::gen::sync_key::t const &key) {
   return sourceExt(key) == "info";
 }
 
-RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
+TargetConfigEntryEditor::TargetConfigEntryEditor(bool sourceEditable_,
+                                                 QWidget *parent)
     : QWidget(parent),
       sourceDoesExist(false),
       sourceIsCompiled(false),
       enabled(false),
       sourceEditable(sourceEditable_) {
-  QFormLayout *layout = new QFormLayout;
+  QFormLayout *layout{new QFormLayout};
 
   {  // source
 
-    QVBoxLayout *sourceLayout = new QVBoxLayout;
+    QVBoxLayout *sourceLayout{new QVBoxLayout};
     sourceBox = new QComboBox;
     sourceBox->setEnabled(sourceEditable);
 
@@ -102,20 +103,20 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
     suffixEdit->setValidator(new PathSuffixValidator(this));
     layout->addRow(tr("Program &Suffix:"), suffixEdit);
     connect(suffixEdit, &QLineEdit::textChanged, this,
-            &RCEntryEditor::inputChanged);
+            &TargetConfigEntryEditor::inputChanged);
   }
 
   {  // flags
-    QVBoxLayout *flagsLayout = new QVBoxLayout;
+    QVBoxLayout *flagsLayout{new QVBoxLayout};
     enabledBox = new QCheckBox(tr("enabled"));
     enabledBox->setChecked(true);
     connect(enabledBox, &QCheckBox::stateChanged, this,
-            &RCEntryEditor::inputChanged);
+            &TargetConfigEntryEditor::inputChanged);
     flagsLayout->addWidget(enabledBox);
     debugBox = new QCheckBox(tr("debug mode"));
     flagsLayout->addWidget(debugBox);
     connect(debugBox, &QCheckBox::stateChanged, this,
-            &RCEntryEditor::inputChanged);
+            &TargetConfigEntryEditor::inputChanged);
     automaticBox = new QCheckBox(tr("automatic"));
     automaticBox->setEnabled(false);
     flagsLayout->addWidget(automaticBox);
@@ -124,21 +125,22 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
 
   sitesEdit = new QLineEdit;
   sitesEdit->setText("*");
-  static QRegularExpression nonEmpty("\\s*[^\\s]+\\s*");
+  static QRegularExpression nonEmpty{"\\s*[^\\s]+\\s*"};
   sitesEdit->setValidator(new QRegularExpressionValidator(nonEmpty, this));
   connect(sitesEdit, &QLineEdit::textChanged, this,
-          &RCEntryEditor::inputChanged);
+          &TargetConfigEntryEditor::inputChanged);
   layout->addRow(tr("&Only on Sites:"), sitesEdit);
 
   reportEdit = new QLineEdit;
   reportEdit->setText("30");
   reportEdit->setValidator(RangeDoubleValidator::forRange(1, 99999));
   connect(reportEdit, &QLineEdit::textChanged, this,
-          &RCEntryEditor::inputChanged);
+          &TargetConfigEntryEditor::inputChanged);
   layout->addRow(tr("&Reporting Period:"), reportEdit);
 
   cwdEdit = new QLineEdit;
-  connect(cwdEdit, &QLineEdit::textChanged, this, &RCEntryEditor::inputChanged);
+  connect(cwdEdit, &QLineEdit::textChanged, this,
+          &TargetConfigEntryEditor::inputChanged);
   layout->addRow(tr("Working &Directory:"), cwdEdit);
 
   paramsForm = new QFormLayout;
@@ -146,7 +148,7 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
 
   /* Make sure the above form is compressed vertically when parameters are
    * added/removed: */
-  QVBoxLayout *vbox_layout = new QVBoxLayout;
+  QVBoxLayout *vbox_layout{new QVBoxLayout};
   vbox_layout->addLayout(layout);
   vbox_layout->addStretch(1);
   setLayout(vbox_layout);
@@ -155,10 +157,11 @@ RCEntryEditor::RCEntryEditor(bool sourceEditable_, QWidget *parent)
 
   /* Each creation/deletion of source files while this editor is alive should
    * refresh the source select box and its associated warnings: */
-  connect(kvs.get(), &KVStore::keyChanged, this, &RCEntryEditor::onChange);
+  connect(kvs.get(), &KVStore::keyChanged, this,
+          &TargetConfigEntryEditor::onChange);
 }
 
-void RCEntryEditor::onChange(QList<ConfChange> const &changes) {
+void TargetConfigEntryEditor::onChange(QList<ConfChange> const &changes) {
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change{changes.at(i)};
     switch (change.op) {
@@ -177,40 +180,45 @@ void RCEntryEditor::onChange(QList<ConfChange> const &changes) {
   }
 }
 
-void RCEntryEditor::addSourceFromStore(dessser::gen::sync_key::t const &key,
-                                       KValue const &) {
+void TargetConfigEntryEditor::addSourceFromStore(
+    dessser::gen::sync_key::t const &key, KValue const &) {
   if (key.index() != dessser::gen::sync_key::Sources) return;
 
-  if (verbose) qDebug() << "RCEntryEditor::addSourceFromStore: New key:" << key;
+  if (verbose)
+    qDebug() << "TargetConfigEntryEditor::addSourceFromStore: New key:" << key;
 
   if (isSourceFile(key)) {
     if (verbose)
-      qDebug() << "RCEntryEditor::addSourceFromStore: ... is a source key";
+      qDebug()
+          << "TargetConfigEntryEditor::addSourceFromStore: ... is a source key";
     addSource(key);  // Won't change the selection but might change warnings
     updateSourceWarnings();
   } else if (isInfoFile(key)) {
     if (verbose)
-      qDebug() << "RCEntryEditor::addSourceFromStore: ... is an info key";
+      qDebug()
+          << "TargetConfigEntryEditor::addSourceFromStore: ... is an info key";
     updateSourceWarnings();
   }
 }
 
-void RCEntryEditor::updateSourceFromStore(dessser::gen::sync_key::t const &key,
-                                          KValue const &) {
+void TargetConfigEntryEditor::updateSourceFromStore(
+    dessser::gen::sync_key::t const &key, KValue const &) {
   if (key.index() != dessser::gen::sync_key::Sources) return;
 
   if (verbose)
-    qDebug() << "RCEntryEditor::updateSourceFromStore: Upd key:" << key;
+    qDebug() << "TargetConfigEntryEditor::updateSourceFromStore: Upd key:"
+             << key;
 
   if (isInfoFile(key)) {
     if (verbose)
-      qDebug() << "RCEntryEditor::updateSourceFromStore: ... is an info key";
+      qDebug() << "TargetConfigEntryEditor::updateSourceFromStore: ... is an "
+                  "info key";
     updateSourceWarnings();
   }
 }
 
-void RCEntryEditor::removeSourceFromStore(dessser::gen::sync_key::t const &key,
-                                          KValue const &) {
+void TargetConfigEntryEditor::removeSourceFromStore(
+    dessser::gen::sync_key::t const &key, KValue const &) {
   if (key.index() != dessser::gen::sync_key::Sources) return;
 
   /* Do not remove anything, so keep the current selection.
@@ -218,21 +226,22 @@ void RCEntryEditor::removeSourceFromStore(dessser::gen::sync_key::t const &key,
   updateSourceWarnings();
 }
 
-void RCEntryEditor::setProgramName(std::string const &programName) {
+void TargetConfigEntryEditor::setProgramName(std::string const &programName) {
   /* Even if this sourceName does not exist we want to have it preselected
    * (with a warning displayed).
    * If several non-existing sourceNames are set, they will accumulate in
    * the box. Not a big deal as long as the warnings are properly displayed. */
-  std::string const srcPath = srcPathFromProgramName(programName);
-  std::string const programSuffix = suffixFromProgramName(programName);
+  std::string const srcPath{srcPathFromProgramName(programName)};
+  std::string const programSuffix{suffixFromProgramName(programName)};
   suffixEdit->setText(QString::fromStdString(programSuffix));
 
-  int index = findOrAddSourceName(QString::fromStdString(srcPath));
-  if (index >= 0) sourceBox->setCurrentIndex(index);
+  int const idx{findOrAddSourceName(QString::fromStdString(srcPath))};
+  if (idx >= 0) sourceBox->setCurrentIndex(idx);
 }
 
-void RCEntryEditor::setEnabled(bool enabled_) {
-  if (verbose) qDebug() << "RCEntryEditor::setEnabled(" << enabled << ")";
+void TargetConfigEntryEditor::setEnabled(bool enabled_) {
+  if (verbose)
+    qDebug() << "TargetConfigEntryEditor::setEnabled(" << enabled << ")";
 
   enabled = enabled_;  // Save it for resetParams
 
@@ -252,11 +261,11 @@ void RCEntryEditor::setEnabled(bool enabled_) {
   }
 }
 
-int RCEntryEditor::addSource(dessser::gen::sync_key::t const &k) {
+int TargetConfigEntryEditor::addSource(dessser::gen::sync_key::t const &k) {
   return findOrAddSourceName(baseNameOfKey(k));
 }
 
-int RCEntryEditor::findOrAddSourceName(QString const &name) {
+int TargetConfigEntryEditor::findOrAddSourceName(QString const &name) {
   if (name.isEmpty()) return -1;
 
   // Insert in alphabetic order:
@@ -280,15 +289,15 @@ int RCEntryEditor::findOrAddSourceName(QString const &name) {
   return -1;
 }
 
-void RCEntryEditor::updateSourceWarnings() {
-  int i = sourceBox->currentIndex();
+void TargetConfigEntryEditor::updateSourceWarnings() {
+  int const i{sourceBox->currentIndex()};
   if (i < 0 || i > sourceBox->count()) {
     /* No need to warn about the selected entry, the placeholder
      * text is enough. */
     sourceDoesExist = true;
     sourceIsCompiled = true;
   } else {
-    QString const name(sourceBox->currentText());
+    QString const name{sourceBox->currentText()};
     std::shared_ptr<dessser::gen::sync_key::t const> info_key{
         keyOfSourceName(name, "info")};
     kvs->lock.lock_shared();
@@ -309,19 +318,20 @@ void RCEntryEditor::updateSourceWarnings() {
   notCompiledSourceWarning->setVisible(sourceDoesExist && !sourceIsCompiled);
 }
 
-void RCEntryEditor::clearParams() {
+void TargetConfigEntryEditor::clearParams() {
   // Note: emptyLayout(paramsForm) won't update the QFormLayout rowCount :(
   while (paramsForm->rowCount() > 0)
     paramsForm->removeRow(0);  // Note: this also deletes the widgets
 }
 
-std::shared_ptr<dessser::gen::raql_value::t const> RCEntryEditor::paramValue(
+std::shared_ptr<dessser::gen::raql_value::t const>
+TargetConfigEntryEditor::paramValue(
     std::shared_ptr<dessser::gen::program_parameter::t const> p) const {
   /* Try to find a set parameter by that name, falling back on the
    * compiled default: */
   if (verbose)
-    qDebug() << "RCEntryEditor: paramValue(" << QString::fromStdString(p->name)
-             << ") is"
+    qDebug() << "TargetConfigEntryEditor: paramValue("
+             << QString::fromStdString(p->name) << ") is"
              << (setParamValues.contains(p->name) ? "present" : "absent");
   return setParamValues.value(p->name, p->value);
 }
@@ -337,21 +347,21 @@ static std::string const paramNameOfLabel(QString const &label) {
 
 /* Save the values that are currently set (and that can be parsed) into
  * setParamValues, for later reuse (until source is changed). */
-void RCEntryEditor::saveParams() {
+void TargetConfigEntryEditor::saveParams() {
   for (int row = 0; row < paramsForm->rowCount(); row++) {
-    QLayoutItem *item = paramsForm->itemAt(row, QFormLayout::LabelRole);
-    QLabel *label = dynamic_cast<QLabel *>(item->widget());
+    QLayoutItem *item{paramsForm->itemAt(row, QFormLayout::LabelRole)};
+    QLabel *label{dynamic_cast<QLabel *>(item->widget())};
     Q_ASSERT(label);
-    std::string const pname(paramNameOfLabel(label->text()));
+    std::string const pname{paramNameOfLabel(label->text())};
 
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
-    AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
+    AtomicWidget *editor{dynamic_cast<AtomicWidget *>(item->widget())};
     Q_ASSERT(editor);
     std::shared_ptr<dessser::gen::sync_value::t const> val{editor->getValue()};
     if (val) {
       if (val->index() == dessser::gen::sync_value::RamenValue) {
         if (verbose)
-          qDebug() << "RCEntryEditor: set paramValues["
+          qDebug() << "TargetConfigEntryEditor: set paramValues["
                    << QString::fromStdString(pname) << "] to" << *val;
         setParamValues[pname] =
             std::get<dessser::gen::sync_value::RamenValue>(*val);
@@ -370,7 +380,7 @@ void RCEntryEditor::saveParams() {
 /* Rebuilt the parameters form, with one line per parameter, which current
  * value is taken from setParamValues or the default parameter value.
  * Called by setValue and when changing the source. */
-void RCEntryEditor::resetParams() {
+void TargetConfigEntryEditor::resetParams() {
   /* Clear the paramsForm and rebuilt it, taking values from saved values */
   clearParams();
 
@@ -394,7 +404,7 @@ void RCEntryEditor::resetParams() {
   if (!info) {
     /* This can be normal during sync though: */
     if (!Menu::getClient()->isSynced()) {
-      qDebug() << "RCEntryEditor: Cannot get info" << infoKey
+      qDebug() << "TargetConfigEntryEditor: Cannot get info" << infoKey
                << ", more luck later when sync is complete.";
     } else {
       qWarning() << "Cannot get info" << infoKey;
@@ -408,7 +418,7 @@ void RCEntryEditor::resetParams() {
   }
 
   if (info->detail.index() != dessser::gen::source_info::Compiled) {
-    qDebug() << "RCEntryEditor: Info is not compiled for" << infoKey;
+    qDebug() << "TargetConfigEntryEditor: Info is not compiled for" << infoKey;
     return;
   }
 
@@ -433,12 +443,13 @@ void RCEntryEditor::resetParams() {
     paramEdit->setValue(val);
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged, this,
-            &RCEntryEditor::inputChanged);
+            &TargetConfigEntryEditor::inputChanged);
     paramsForm->addRow(labelOfParamName(p->name), paramEdit);
   }
 }
 
-void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry) {
+void TargetConfigEntryEditor::setValue(
+    dessser::gen::rc_entry::t const &rcEntry) {
   if (rcEntry.program.length() == 0) {
     suffixEdit->setEnabled(false);
     sourceBox->setEnabled(false);
@@ -467,14 +478,15 @@ void RCEntryEditor::setValue(dessser::gen::rc_entry::t const &rcEntry) {
        rcEntry.params) {
     if (!p->value) continue;
     if (verbose)
-      qDebug() << "RCEntryEditor: Save value" << *p->value << "for param"
-               << QString::fromStdString(p->name);
+      qDebug() << "TargetConfigEntryEditor: Save value" << *p->value
+               << "for param" << QString::fromStdString(p->name);
     setParamValues[p->name] = p->value;
   }
   resetParams();
 }
 
-std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const {
+std::shared_ptr<dessser::gen::rc_entry::t> TargetConfigEntryEditor::getValue()
+    const {
   bool ok;
   double reportPeriod = reportEdit->text().toDouble(&ok);
   if (!ok) {
@@ -485,15 +497,15 @@ std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const {
     reportPeriod = 30.;
   }
 
-  std::string const cwd(cwdEdit->text().toStdString());
+  std::string const cwd{cwdEdit->text().toStdString()};
 
-  std::string const programName(suffixEdit->text().isEmpty()
+  std::string const programName{suffixEdit->text().isEmpty()
                                     ? sourceBox->currentText().toStdString()
                                     : sourceBox->currentText().toStdString() +
                                           '#' +
-                                          suffixEdit->text().toStdString());
+                                          suffixEdit->text().toStdString()};
 
-  std::shared_ptr<dessser::gen::rc_entry::t> rce{
+  std::shared_ptr<dessser::gen::rc_entry::t> entry{
       std::make_shared<dessser::gen::rc_entry::t>(
           programName, enabledBox->checkState() == Qt::Checked,
           debugBox->checkState() == Qt::Checked, reportPeriod, cwd,
@@ -506,10 +518,10 @@ std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const {
     QLayoutItem *item = paramsForm->itemAt(row, QFormLayout::LabelRole);
     QLabel *label = dynamic_cast<QLabel *>(item->widget());
     Q_ASSERT(label);
-    std::string const pname(paramNameOfLabel(label->text()));
+    std::string const pname{paramNameOfLabel(label->text())};
 
     item = paramsForm->itemAt(row, QFormLayout::FieldRole);
-    AtomicWidget *editor = dynamic_cast<AtomicWidget *>(item->widget());
+    AtomicWidget *editor{dynamic_cast<AtomicWidget *>(item->widget())};
     Q_ASSERT(editor);
     std::shared_ptr<dessser::gen::sync_value::t const> val{editor->getValue()};
     if (!val) continue;
@@ -517,14 +529,16 @@ std::shared_ptr<dessser::gen::rc_entry::t> RCEntryEditor::getValue() const {
     Q_ASSERT(val->index() == dessser::gen::sync_value::RamenValue);
     std::shared_ptr<dessser::gen::raql_value::t> pval{
         std::get<dessser::gen::sync_value::RamenValue>(*val)};
-    rce->params.push_back(
+    entry->params.push_back(
         std::make_shared<dessser::gen::program_run_parameter::t>(pname, pval));
   }
 
-  return rce;
+  if (verbose) qDebug() << "TargetConfigEntryEditor::getValue" << *entry;
+
+  return entry;
 }
 
-bool RCEntryEditor::isValid() const {
+bool TargetConfigEntryEditor::isValid() const {
   if (!sourceDoesExist || !sourceIsCompiled) return false;
   if (!suffixEdit->hasAcceptableInput()) return false;
   if (!sitesEdit->hasAcceptableInput()) return false;

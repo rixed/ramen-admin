@@ -1,6 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef RCENTRYEDITOR_H_190607
-#define RCENTRYEDITOR_H_190607
+#ifndef TARGETCONFIGENTRYEDITOR_H_190607
+#define TARGETCONFIGENTRYEDITOR_H_190607
 #include <QCheckBox>
 #include <QMap>
 #include <QWidget>
@@ -42,7 +42,7 @@ struct t;
 }  // namespace gen
 }  // namespace dessser
 
-class RCEntryEditor : public QWidget {
+class TargetConfigEntryEditor : public QWidget {
   Q_OBJECT
 
   friend class TargetConfigEditor;
@@ -78,7 +78,7 @@ class RCEntryEditor : public QWidget {
    * names can be retrieved: */
   QFormLayout *paramsForm;
 
-  /* Whether the edition of this RC entry is currently enabled or not: */
+  /* Whether the edition of this entry is currently enabled or not: */
   bool enabled;
 
   void addSourceFromStore(dessser::gen::sync_key::t const &, KValue const &);
@@ -88,17 +88,18 @@ class RCEntryEditor : public QWidget {
  public:
   bool sourceEditable;
 
-  RCEntryEditor(bool sourceEditable = true, QWidget *parent = nullptr);
+  TargetConfigEntryEditor(bool sourceEditable = true,
+                          QWidget *parent = nullptr);
 
   // Select that one, even if it does not exist:
   void setProgramName(std::string const &);
 
-  /* An RCEntryEditor can be used to edit an existing entry when editing the
-   * TargetConfig, or to create a new entry when asking to run a new program.
-   * In the former case, the editor must be enabled/disabled according to
-   * the TargetConfig lock state in the confserver, using this setEnabled
-   * function. In the later case, the RCEntryEditor must be enabled once
-   * after creation, as its initially constructed disabled: */
+  /* An TargetConfigEntryEditor can be used to edit an existing entry when
+   * editing the TargetConfig, or to create a new entry when asking to run a new
+   * program. In the former case, the editor must be enabled/disabled according
+   * to the TargetConfig lock state in the confserver, using this setEnabled
+   * function. In the later case, the TargetConfigEntryEditor must be enabled
+   * once after creation, as its initially constructed disabled: */
   void setEnabled(bool);
 
   /* Both addSource and findOrAddSourceName return the position in the select
@@ -114,7 +115,7 @@ class RCEntryEditor : public QWidget {
 
   bool isValid() const;
 
-  /* Build a new RCEntry according to current content.
+  /* Build a new entry according to current content.
    * Caller takes ownership */
   std::shared_ptr<dessser::gen::rc_entry::t> getValue() const;
 
@@ -132,7 +133,7 @@ class RCEntryEditor : public QWidget {
   /* Refresh the params each time another source is selected.
    * Used to reset the parameter table */
   void resetParams();
-  // Set the form values according to this RCEntry:
+  // Set the form values according to this entry:
   void setValue(dessser::gen::rc_entry::t const &);
 };
 

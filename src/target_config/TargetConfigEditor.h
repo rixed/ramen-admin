@@ -7,15 +7,10 @@
 #include "AtomicWidget.h"
 #include "desssergen/rc_entry.h"
 
-/* An editor for the RC file (or any TargetConfig value).
- *
- * It is also an AtomicWidget.
- * This is mostly a QToolBox of RCEditors. */
-
 class QComboBox;
 class QLabel;
 class QStackedLayout;
-class RCEntryEditor;
+class TargetConfigEntryEditor;
 
 class TargetConfigEditor : public AtomicWidget {
   Q_OBJECT
@@ -25,10 +20,10 @@ class TargetConfigEditor : public AtomicWidget {
 
  public:
   QComboBox *entrySelector;
-  RCEntryEditor *entryEditor;
+  TargetConfigEntryEditor *entryEditor;
   QLabel *noSelectionText;
   QStackedLayout *stackedLayout;
-  int entryEditorIdx, noSelectionIdx;
+  int entryEditorIdx, noSelectionIdx;  // indices in the stackedLayout
   std::vector<std::shared_ptr<dessser::gen::rc_entry::t> > rcEntries;
 
   TargetConfigEditor(QWidget *parent = nullptr);

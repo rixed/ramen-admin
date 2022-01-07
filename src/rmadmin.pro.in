@@ -205,10 +205,10 @@ HEADERS += \
   timeline/BinaryHeatLine.h \
   source/SourceInfoViewer.h \
   PathSuffixValidator.h \
-  RCEntryEditor.h \
-  TargetConfigEditor.h \
   AtomicForm.h \
-  RCEditorDialog.h \
+  target_config/TargetConfigEntryEditor.h \
+  target_config/TargetConfigEditor.h \
+  target_config/TargetConfigEditorWin.h \
   RuntimeStatsViewer.h \
   EditorWidget.h \
   ConfTreeItem.h \
@@ -362,10 +362,10 @@ SOURCES += \
   timeline/BinaryHeatLine.cpp \
   source/SourceInfoViewer.cpp \
   PathSuffixValidator.cpp \
-  RCEntryEditor.cpp \
-  TargetConfigEditor.cpp \
   AtomicForm.cpp \
-  RCEditorDialog.cpp \
+  target_config/TargetConfigEntryEditor.cpp \
+  target_config/TargetConfigEditor.cpp \
+  target_config/TargetConfigEditorWin.cpp \
   RuntimeStatsViewer.cpp \
   EditorWidget.cpp \
   ConfTreeItem.cpp \

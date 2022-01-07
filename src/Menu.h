@@ -21,7 +21,7 @@ class OperationsWin;
 class ProcessesDialog;
 class QMainWindow;
 class QMenuBar;
-class RCEditorDialog;
+class TargetConfigEditorWin;
 class ServerInfoWin;
 class SourcesWin;
 class StorageWin;
@@ -65,7 +65,7 @@ class Menu : public QObject {
   static NewProgramDialog *newProgramDialog;
   static NewDashboardDialog *newDashboardDialog;
   static ProcessesDialog *processesDialog;
-  static RCEditorDialog *rcEditorDialog;
+  static TargetConfigEditorWin *targetConfigEditorWin;
   static NamesTreeWin *namesTreeWin;
   static StorageWin *storageWin;
   static ServerInfoWin *serverInfoWin;
@@ -88,7 +88,7 @@ class Menu : public QObject {
   static void openNewDashboardDialog();
   static void openSourceEditor();
   static void openProcesses();
-  static void openRCEditor();
+  static void openTargetConfigEditor();
   static void openConfTreeDialog();
   static void openAboutDialog();
   static void openNamesTreeWin();

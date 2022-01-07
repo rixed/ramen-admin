@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "TargetConfigEditor.h"
+#include "target_config/TargetConfigEditor.h"
 
 #include <QComboBox>
 #include <QDebug>
@@ -9,10 +9,10 @@
 #include <QVBoxLayout>
 #include <QtGlobal>
 
-#include "RCEntryEditor.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
+#include "target_config/TargetConfigEntryEditor.h"
 
 static bool const verbose{false};
 
@@ -21,7 +21,7 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
   rcEntries.reserve(10);
 
   entrySelector = new QComboBox;
-  entryEditor = new RCEntryEditor(true);
+  entryEditor = new TargetConfigEntryEditor(true);
   noSelectionText =
       new QLabel(tr("No programs are running.\n"
                     "Press ⌘ R to run a program."));
@@ -37,7 +37,7 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
   w->setLayout(layout);
   relayoutWidget(w);
 
-  connect(entryEditor, &RCEntryEditor::inputChanged, this,
+  connect(entryEditor, &TargetConfigEntryEditor::inputChanged, this,
           &TargetConfigEditor::inputChanged);
 
   connect(entrySelector, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -60,11 +60,11 @@ TargetConfigEditor::getValue() const {
 /*
   // Rebuilt the whole RC from the form:
   for (int i = 0; i < rcEntries->rowCount(); i++) {
-    RCEntryEditor const *entry =
-      dynamic_cast<RCEntryEditor const *>(rcEntries->widget(i));
+    TargetConfigEntryEditor const *entry =
+      dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(i));
     if (! entry) {
       qCritical() << "TargetConfigEditor entry" << i << "not a
-  RCEntryEditor?!"; continue;
+  TargetConfigEntryEditor?!"; continue;
     }
     rc->addEntry(entry->getValue());
   }
@@ -78,10 +78,9 @@ void TargetConfigEditor::setEnabled(bool enabled) {
 
 /*
   for (int i = 0; i < rcEntries->count(); i++) {
-    RCEntryEditor *entry = dynamic_cast<RCEntryEditor *>(rcEntries->widget(i));
-    if (! entry) {
-      qCritical() << "TargetConfigEditor: widget" << i << "not an
-  RCEntryEditor?!"; continue;
+    TargetConfigEntryEditor *entry = dynamic_cast<TargetConfigEntryEditor
+  *>(rcEntries->widget(i)); if (! entry) { qCritical() << "TargetConfigEditor:
+  widget" << i << "not an TargetConfigEntryEditor?!"; continue;
     }
     entry->setEnabled(enabled);
   }
@@ -125,12 +124,12 @@ bool TargetConfigEditor::setValue(
   }
 
   /*
-  RCEntryEditor *entryEditor = new RCEntryEditor(true);
+  TargetConfigEntryEditor *entryEditor = new TargetConfigEntryEditor(true);
   entryEditor->setProgramName(it.first);
   entryEditor->setValue(entry);
   rcEntries->addTab(entryEditor, QString::fromStdString(it.first));
 
-  connect(entryEditor, &RCEntryEditor::inputChanged,
+  connect(entryEditor, &TargetConfigEntryEditor::inputChanged,
           this, &TargetConfigEditor::inputChanged);
 */
 
@@ -140,13 +139,14 @@ bool TargetConfigEditor::setValue(
 }
 
 /*
-RCEntryEditor const *TargetConfigEditor::currentEntry() const
+TargetConfigEntryEditor const *TargetConfigEditor::currentEntry() const
 {
 
-  RCEntryEditor const *entry =
-    dynamic_cast<RCEntryEditor const *>(rcEntries->currentWidget());
+  TargetConfigEntryEditor const *entry =
+    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->currentWidget());
   if (! entry) {
-    qCritical() << "TargetConfigEditor entry that's not a RCEntryEditor?!";
+    qCritical() << "TargetConfigEditor entry that's not a
+TargetConfigEntryEditor?!";
   }
   return entry;
 }
@@ -166,8 +166,8 @@ void TargetConfigEditor::removeCurrentEntry() {
 
   /*
 for (int c = 0; c < rcEntries->count(); c ++) {
-  RCEntryEditor const *entry =
-    dynamic_cast<RCEntryEditor const *>(rcEntries->widget(c));
+  TargetConfigEntryEditor const *entry =
+    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(c));
   if (! entry) continue;
   if (entry == toRemove) {
     rcEntries->removeTab(c);
@@ -199,8 +199,8 @@ QString const programSuffix =
   QString::fromStdString(suffixFromProgramName(pName));
 
 for (int c = 0; c < rcEntries->count(); c ++) {
-  RCEntryEditor const *entry =
-    dynamic_cast<RCEntryEditor const *>(rcEntries->widget(c));
+  TargetConfigEntryEditor const *entry =
+    dynamic_cast<TargetConfigEntryEditor const *>(rcEntries->widget(c));
   if (! entry) continue;
   if (entry->suffixEdit->text() == programSuffix &&
       entry->sourceBox->currentText() == srcPath

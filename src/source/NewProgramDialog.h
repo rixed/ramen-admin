@@ -7,7 +7,7 @@
 #include "ConfChange.h"
 
 class QPushButton;
-class RCEntryEditor;
+class TargetConfigEntryEditor;
 
 struct KValue;
 
@@ -25,7 +25,7 @@ struct t;
 class NewProgramDialog : public QDialog {
   Q_OBJECT
 
-  RCEntryEditor *editor;
+  TargetConfigEntryEditor *editor;
   bool mustSave;
 
   QPushButton *okButton;

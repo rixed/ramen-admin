@@ -23,8 +23,8 @@
 #include "GraphModel.h"
 #include "Menu.h"
 #include "ProgramItem.h"
-#include "RCEditorDialog.h"
 #include "Resources.h"
+#include "SavedWindow.h"
 #include "SiteItem.h"
 #include "TailTableDialog.h"
 #include "UserIdentity.h"
@@ -32,6 +32,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 #include "processes/ProcessesWidgetProxy.h"
+#include "target_config/TargetConfigEditorWin.h"
 
 static bool const verbose{false};
 
@@ -257,8 +258,8 @@ void ProcessesWidget::wantEdit(std::shared_ptr<Program const> program) {
     return;
   }
 
-  win->menu->openRCEditor();
-  win->menu->rcEditorDialog->preselect(program->name);
+  win->menu->openTargetConfigEditor();
+  win->menu->targetConfigEditorWin->preselect(program->name);
 }
 
 void ProcessesWidget::wantTable(std::shared_ptr<Function> function) {

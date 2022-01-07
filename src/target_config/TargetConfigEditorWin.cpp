@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "RCEditorDialog.h"
+#include "TargetConfigEditorWin.h"
 
 #include <QHBoxLayout>
 #include <QMessageBox>
@@ -7,22 +7,23 @@
 #include <QStackedLayout>
 
 #include "AtomicForm.h"
-#include "RCEntryEditor.h"
 #include "Resources.h"
 #include "TargetConfigEditor.h"
 #include "misc_dessser.h"
+#include "target_config/TargetConfigEntryEditor.h"
 
-RCEditorDialog::RCEditorDialog(QWidget *parent)
-    : SavedWindow("RCWindow", tr("Running Configuration"), true, parent) {
-  AtomicForm *form = new AtomicForm(true, this);
+TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
+    : SavedWindow("TargetConfigWindow", tr("Target Configuration"), true,
+                  parent) {
+  AtomicForm *form{new AtomicForm(true, this)};
 
-  Resources *r = Resources::get();
+  Resources *r{Resources::get()};
   /* Prepare to add a delete button to the form.
    * Notice that RC entries being just elements of the TargetConfig
    * they have no independent keys that could be deleted independently.
    * Instead, we need an ad-hoc delete function. */
-  QPushButton *deleteButton =
-      new QPushButton(r->deletePixmap, tr("Delete this entry"));
+  QPushButton *deleteButton{
+      new QPushButton(r->deletePixmap, tr("Delete this entry"))};
   form->buttonsLayout->insertWidget(2, deleteButton);
   connect(form, &AtomicForm::changeEnabled, deleteButton,
           &QPushButton::setEnabled);
@@ -30,7 +31,7 @@ RCEditorDialog::RCEditorDialog(QWidget *parent)
   deleteButton->setEnabled(form->isEnabled());
 
   connect(deleteButton, &QPushButton::clicked, this,
-          &RCEditorDialog::wantDeleteEntry);
+          &TargetConfigEditorWin::wantDeleteEntry);
 
   targetConfigEditor = new TargetConfigEditor;
   targetConfigEditor->setKey(targetConfig);
@@ -49,13 +50,13 @@ RCEditorDialog::RCEditorDialog(QWidget *parent)
   confirmDeleteDialog->setIcon(QMessageBox::Warning);
 }
 
-void RCEditorDialog::wantDeleteEntry() {
+void TargetConfigEditorWin::wantDeleteEntry() {
   // Retrieve the entry.
   if (targetConfigEditor->stackedLayout->currentIndex() !=
       targetConfigEditor->entryEditorIdx)
     return;
 
-  QString info(tr("This program will no longer be running."));
+  QString info{tr("This program will no longer be running.")};
   if (targetConfigEditor->entryEditor->programIsEnabled())
     info.append(
         "\n\nAlternatively, this program could be "
@@ -67,6 +68,6 @@ void RCEditorDialog::wantDeleteEntry() {
   }
 }
 
-void RCEditorDialog::preselect(QString const &programName) {
+void TargetConfigEditorWin::preselect(QString const &programName) {
   targetConfigEditor->preselect(programName);
 }
