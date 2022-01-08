@@ -106,8 +106,7 @@ bool TargetConfigEditor::setValue(
   Q_ASSERT(entrySelector->count() == (int)entries.size());
   entrySelector->blockSignals(false);
 
-  /* Select the same entry again (leaving it to currentIndexChanged to update
-   * currentIndex, if necessary). */
+  /* Select the same entry again */
   if (entries.size() > 0) {
     stackedLayout->setCurrentIndex(entryEditorIdx);
     int const new_idx{saved_current_idx >= 0 &&
@@ -119,9 +118,14 @@ bool TargetConfigEditor::setValue(
                << "=" << *entries[new_idx];
     entryEditor->setValue(*entries[new_idx]);
     entrySelector->setCurrentIndex(new_idx);
+    /* In case we moved from 0 to 1 entry, the addItem had already moved the
+     * current index to 0 so the above setCurrentIndex won't trigger a new
+     * currentTextChanged signal, so let's update currentIndex ourselves: */
+    currentIndex = new_idx;
   } else {
     stackedLayout->setCurrentIndex(noSelectionIdx);
     entrySelector->setCurrentIndex(-1);
+    currentIndex = -1;
   }
 
   emit valueChanged(v);
