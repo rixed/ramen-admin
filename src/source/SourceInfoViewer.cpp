@@ -140,9 +140,13 @@ bool SourceInfoViewer::setValue(
       layout->addWidget(functions);
     }
     layout->addSpacing(10);
-    QString md5s{QString("For sources which MD5 are ")};
-    for (auto const &s : info->md5s) md5s += ", " + QString::fromStdString(s);
-    QLabel *md5{new QLabel(md5s)};
+    QStringList md5s;
+    for (auto const &s : info->md5s) md5s.append(QString::fromStdString(s));
+    QString md5s_label{
+        QString(tr(md5s.length() > 1 ? "For sources which MD5s are: %1"
+                                     : "For source which MD5 is: %1")
+                    .arg(md5s.join(", ")))};
+    QLabel *md5{new QLabel(md5s_label)};
     md5->setWordWrap(true);
     layout->addWidget(md5);
     // TODO: emit valueChanged?

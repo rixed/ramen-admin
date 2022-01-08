@@ -47,12 +47,12 @@ CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
   connect(textEditor, &KTextEdit::inputChanged, this, &CodeEdit::inputChanged);
 
   textEditorIndex = stackedLayout->addWidget(textEditor);
-  extensionsCombo->addItem(tr("Ramen Language"), "ramen");
+  extensionsCombo->addItem(tr("Ramen Language (RaQL)"), "ramen");
 
   infoEditor = new SourceInfoViewer;
   infoEditor->setObjectName("infoEditor");
   infoEditorIndex = stackedLayout->addWidget(infoEditor);
-  extensionsCombo->addItem(tr("Informations"), "info");
+  extensionsCombo->addItem(tr("Compiled Informations"), "info");
 
   QFormLayout *switcherLayout{new QFormLayout};
   switcherLayout->setObjectName("switcherLayout");
