@@ -692,7 +692,8 @@ int ConfClient::sendMsg(
     return -1;
   }
 
-  qDebug().nospace() << "Sending: " << *msg << " (" << ser_sz << " bytes)";
+  if (verbose)
+    qDebug().nospace() << "Sending: " << *msg << " (" << ser_sz << " bytes)";
 
   /* Second serialization: Wrap the message into an Authn message */
   dessser::Bytes const text{std::get<0>(ptr.readBytes(act_sz))};

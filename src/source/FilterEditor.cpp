@@ -79,8 +79,7 @@ bool FilterEditor::setValue(dessser::gen::simple_filter::t const &v) {
 
 std::shared_ptr<dessser::gen::simple_filter::t> FilterEditor::getValue() const {
   return std::make_shared<dessser::gen::simple_filter::t>(
-      lhsEdit->text().toStdString(),
-      rhsEdit->text().toStdString(),
+      lhsEdit->text().toStdString(), rhsEdit->text().toStdString(),
       opEdit->currentData().toString().toStdString());
 }
 

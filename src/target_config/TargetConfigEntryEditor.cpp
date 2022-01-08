@@ -485,7 +485,9 @@ void TargetConfigEntryEditor::setValue(dessser::gen::rc_entry::t const &entry) {
                << "for param" << QString::fromStdString(p->name);
     setParamValues[p->name] = p->value;
   }
-  resetParams();  // because it's been called too early
+  /* Call explicitly here because it's been called too early by sourceBox
+   * currentTextChanged: */
+  resetParams();
 }
 
 std::shared_ptr<dessser::gen::rc_entry::t> TargetConfigEntryEditor::getValue()
