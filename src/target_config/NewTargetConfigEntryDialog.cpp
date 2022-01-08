@@ -120,11 +120,11 @@ void NewTargetConfigEntryDialog::mayWriteRC(
 
   if (!mustSave) return;
 
-  if (kv.uid == my_uid)
+  if (kv.owner == my_uid)
     appendEntry(*kv.val);  // else wait longer...
   else if (verbose)
     qDebug() << "NewTargetConfigEntryDialog::mayWriteRC: currently locked by"
-             << kv.uid;
+             << kv.owner;
 }
 
 void NewTargetConfigEntryDialog::appendEntry(
