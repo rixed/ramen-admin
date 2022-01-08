@@ -7,6 +7,7 @@
 #include <QStackedLayout>
 
 #include "AtomicForm.h"
+#include "Menu.h"
 #include "Resources.h"
 #include "TargetConfigEditor.h"
 #include "misc_dessser.h"
@@ -29,9 +30,13 @@ TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
           &QPushButton::setEnabled);
   // Every form start disabled (thus won't signal changeEnabled at init):
   deleteButton->setEnabled(form->isEnabled());
-
   connect(deleteButton, &QPushButton::clicked, this,
           &TargetConfigEditorWin::wantDeleteEntry);
+  /* Similarly, we want a "new" button that will add an entry */
+  QPushButton *newButton{new QPushButton(r->addPixmap, tr("New entry"))};
+  form->buttonsLayout->addWidget(newButton);
+  connect(newButton, &QPushButton::clicked, this,
+          &TargetConfigEditorWin::wantNewEntry);
 
   targetConfigEditor = new TargetConfigEditor;
   targetConfigEditor->setKey(targetConfig);
@@ -67,6 +72,10 @@ void TargetConfigEditorWin::wantDeleteEntry() {
   if (QMessageBox::Yes == confirmDeleteDialog->exec()) {
     targetConfigEditor->removeCurrentEntry();
   }
+}
+
+void TargetConfigEditorWin::wantNewEntry() {
+  Menu::openNewTargetConfigEntryDialog();
 }
 
 void TargetConfigEditorWin::preselect(QString const &programName) {

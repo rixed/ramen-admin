@@ -21,6 +21,7 @@ class TargetConfigEditorWin : public SavedWindow {
 
  protected slots:
   void wantDeleteEntry();
+  void wantNewEntry();
 };
 
 #endif
