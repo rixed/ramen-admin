@@ -637,6 +637,7 @@ void GraphModel::setFunctionProperty(
           std::get<dessser::gen::sync_value::RamenValue>(*v)};               \
       if (rv->index() == dessser::gen::raql_value::type) {                   \
         function->var = conv(std::get<dessser::gen::raql_value::type>(*rv)); \
+        changed |= whatChanged;                                              \
       }                                                                      \
     }                                                                        \
   } while (0)
