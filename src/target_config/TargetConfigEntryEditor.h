@@ -15,6 +15,7 @@
 
 struct KValue;
 class QFormLayout;
+class QStackedLayout;
 class QLabel;
 class QComboBox;
 class QLineEdit;
@@ -46,6 +47,12 @@ class TargetConfigEntryEditor : public QWidget {
   Q_OBJECT
 
   friend class TargetConfigEditor;
+
+  /* Alternate between the parameters QFormLayout or a message in case there
+   * are no parameters: */
+  QStackedLayout *paramsOrInfo;
+  int paramsFormIdx;
+  int noParamsInfoIdx;
 
  protected:
   QLineEdit *suffixEdit;

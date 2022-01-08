@@ -7,6 +7,7 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
+#include <QStackedLayout>
 #include <QVBoxLayout>
 #include <QtGlobal>
 #include <memory>
@@ -138,8 +139,15 @@ TargetConfigEntryEditor::TargetConfigEntryEditor(bool sourceEditable_,
           &TargetConfigEntryEditor::inputChanged);
   layout->addRow(tr("Working &Directory:"), cwdEdit);
 
+  paramsOrInfo = new QStackedLayout;
   paramsForm = new QFormLayout;
-  layout->addRow(new QLabel(tr("Parameters:")), paramsForm);
+  QWidget *paramsFormWidget{new QWidget};
+  paramsFormWidget->setLayout(paramsForm);
+  paramsFormIdx = paramsOrInfo->addWidget(paramsFormWidget);
+  QLabel *noParamsInfo{new QLabel(tr("This program has no parameters"))};
+  noParamsInfoIdx = paramsOrInfo->addWidget(noParamsInfo);
+  layout->addRow(new QLabel(tr("Parameters:")), paramsOrInfo);
+  paramsOrInfo->setCurrentIndex(noParamsInfoIdx);
 
   /* Make sure the above form is compressed vertically when parameters are
    * added/removed: */
@@ -426,6 +434,7 @@ void TargetConfigEntryEditor::resetParams() {
   std::shared_ptr<dessser::gen::source_info::compiled_program> prog{
       std::get<dessser::gen::source_info::Compiled>(info->detail)};
 
+  bool has_params{false};
   for (std::shared_ptr<dessser::gen::program_parameter::t> const &p :
        prog->default_params) {
     // TODO: a tooltip with the parameter doc
@@ -446,7 +455,10 @@ void TargetConfigEntryEditor::resetParams() {
     connect(paramEdit, &AtomicWidget::inputChanged, this,
             &TargetConfigEntryEditor::inputChanged);
     paramsForm->addRow(labelOfParamName(p->name), paramEdit);
+    has_params = true;
   }
+
+  paramsOrInfo->setCurrentIndex(has_params ? paramsFormIdx : noParamsInfoIdx);
 }
 
 void TargetConfigEntryEditor::setValue(dessser::gen::rc_entry::t const &entry) {
