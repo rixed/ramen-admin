@@ -415,6 +415,9 @@ void TargetConfigEntryEditor::resetParams() {
     if (!Menu::getClient()->isSynced()) {
       qDebug() << "TargetConfigEntryEditor: Cannot get info" << infoKey
                << ", more luck later when sync is complete.";
+    } else if (it != kvs->map.end() && isNull(*it->second.val)) {
+      /* Or if it's still being compiled */
+      qDebug() << "TargetConfigEntryEditor: info" << infoKey << "is still NULL";
     } else {
       qWarning() << "Cannot get info" << infoKey;
       qWarning() << "conf map is:";

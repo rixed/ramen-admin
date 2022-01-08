@@ -204,17 +204,17 @@ SourcesModel::FileItem *SourcesModel::createAll(std::string const &src_path,
                                                 DirItem *root) {
   FileItem *ret = nullptr;
   do {
-    QString const &nextName = names.takeFirst();
-    bool const lastName = names.isEmpty();
+    QString const &nextName{names.takeFirst()};
+    bool const lastName{names.isEmpty()};
     // Look for either a dir by that name or where to add it:
-    int row = 0;
-    bool needNewItem = true;
+    int row{0};
+    bool needNewItem{true};
     for (auto it = root->children.constBegin(); it != root->children.constEnd();
          it++) {
       if ((*it)->name == nextName) {
         if (!lastName && (*it)->isDir()) {
           if (verbose) qDebug() << "createAll: Same directory name";
-          DirItem *sub = dynamic_cast<DirItem *>(*it);
+          DirItem *sub{dynamic_cast<DirItem *>(*it)};
           Q_ASSERT(sub);  // because isDir()
           root = sub;
           needNewItem = false;
@@ -233,12 +233,15 @@ SourcesModel::FileItem *SourcesModel::createAll(std::string const &src_path,
           break;
         }
       } else if ((*it)->name > nextName) {
+        if (verbose)
+          qDebug() << "createAll: reached past" << lastName << "(" << nextName
+                   << ")";
         break;
       }
       row++;
     }
     if (needNewItem) {
-      if (verbose) qDebug() << "createAll: create new" << lastName;
+      if (verbose) qDebug() << "createAll: create new" << nextName;
       beginInsertRows(indexOfItem(root), row /* first row */, row /* last */);
       if (lastName) {
         // Create the final file
@@ -247,7 +250,7 @@ SourcesModel::FileItem *SourcesModel::createAll(std::string const &src_path,
         root->addItem(ret, row);
       } else {
         // Add a subdirectory and "recurse"
-        DirItem *sub = new DirItem(nextName, root);
+        DirItem *sub{new DirItem(nextName, root)};
         root->addItem(sub, row);
         root = sub;
       }
@@ -286,14 +289,14 @@ SourcesModel::TreeItem *SourcesModel::itemOfSrcPath(std::string const &prefix) {
   QStringList names{
       QString::fromStdString(prefix).split('/', Qt::SkipEmptyParts)};
 
-  TreeItem *item = root;
+  TreeItem *item{root};
   do {
     if (names.isEmpty()) return item;
-    QString const &nextName = names.takeFirst();
+    QString const &nextName{names.takeFirst()};
     /* Because we have at least one name left after item.
      * Crash here? Check you've sent a key _prefix_ not a full key. */
     Q_ASSERT(item->isDir());
-    DirItem *dir = static_cast<DirItem *>(item);
+    DirItem *dir{static_cast<DirItem *>(item)};
 
     for (auto it = dir->children.begin(); it != dir->children.end(); it++) {
       if ((*it)->name == nextName) {
@@ -326,7 +329,9 @@ SourcesModel::sourceInfoOfItem(TreeItem const *item) const {
 
   if (!v) return nullptr;
   if (v->index() != dessser::gen::sync_value::SourceInfo) {
-    qCritical() << "Key" << *infoKey << "is not a SourceInfo!?";
+    if (verbose)
+      qDebug() << "SourcesModel::sourceInfoOfItem: Key" << *infoKey
+               << "is not a SourceInfo but" << *v;
     return nullptr;
   }
   return std::shared_ptr<dessser::gen::source_info::t const>(

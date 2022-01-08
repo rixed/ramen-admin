@@ -678,6 +678,7 @@ void GraphModel::setFunctionProperty(
     emit dataChanged(topLeft, bottomRight, {Qt::DisplayRole});
   }
   if (changed & WORKER_CHANGED) {
+    if (verbose) qDebug() << "Emitting workerChanged";
     function->checkTail();
     emit workerChanged(
         prevWorkerSign,
@@ -837,7 +838,6 @@ ProgramPartItem *GraphModel::createProgramParts(ProgramPartItem *parent,
     QModelIndex parentIndex{
         createIndex(parent->row, 0, static_cast<GraphItem *>(parent))};
     beginInsertRows(parentIndex, idx, idx);
-
     child =
         new ProgramPartItem(parent, std::make_unique<ProgramPart>(firstName),
                             programNames.isEmpty() ? actualProgram : nullptr);
@@ -913,9 +913,9 @@ void GraphModel::updateKey(dessser::gen::sync_key::t const &key,
 
         // This needs to be signaled:
         size_t idx{siteItem->programParts.size()};
-        QModelIndex parent{
+        QModelIndex parentIndex{
             createIndex(siteItem->row, 0, static_cast<GraphItem *>(siteItem))};
-        beginInsertRows(parent, idx, idx);
+        beginInsertRows(parentIndex, idx, idx);
 
         first = new ProgramPartItem(
             siteItem, std::make_unique<ProgramPart>(firstName),

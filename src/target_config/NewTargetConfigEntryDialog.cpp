@@ -114,10 +114,11 @@ void NewTargetConfigEntryDialog::createProgram() {
 void NewTargetConfigEntryDialog::mayWriteRC(
     std::shared_ptr<dessser::gen::sync_key::t const> key, KValue const &kv) {
   if (*key != *targetConfig) return;
-  if (!mustSave) return;
 
   if (verbose)
-    qDebug() << "NewTargetConfigEntryDialog::mayWriteRC: key=" << *key;
+    qDebug() << "NewTargetConfigEntryDialog::mayWriteRC: mustSave=" << mustSave;
+
+  if (!mustSave) return;
 
   if (kv.uid == my_uid)
     appendEntry(*kv.val);  // else wait longer...
