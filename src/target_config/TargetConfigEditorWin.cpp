@@ -16,7 +16,7 @@
 TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
     : SavedWindow("TargetConfigWindow", tr("Target Configuration"), true,
                   parent) {
-  AtomicForm *form{new AtomicForm(true, this)};
+  form = new AtomicForm(true, this);
 
   Resources *r{Resources::get()};
   /* Prepare to add a delete button to the form.
@@ -71,6 +71,8 @@ void TargetConfigEditorWin::wantDeleteEntry() {
 
   if (QMessageBox::Yes == confirmDeleteDialog->exec()) {
     targetConfigEditor->removeCurrentEntry();
+    // Also submit the form:
+    form->wantSubmit();
   }
 }
 

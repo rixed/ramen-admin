@@ -3,12 +3,15 @@
 #define TARGETCONFIGEDITORWIN_H_190809
 #include "SavedWindow.h"
 
+class AtomicForm;
 class QMessageBox;
 class QString;
 class TargetConfigEditor;
 
 class TargetConfigEditorWin : public SavedWindow {
   Q_OBJECT
+
+  AtomicForm *form;
 
   TargetConfigEditor *targetConfigEditor;
 
