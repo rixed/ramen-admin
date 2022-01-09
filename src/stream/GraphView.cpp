@@ -336,7 +336,7 @@ void GraphView::startLayout() {
   // TODO: scene.setSceneRect(global bouning box)?
 }
 
-/* When the selection of the scene have changed. Reemit a simpler signal
+/* When the selection of the scene have changed. Re-emit a simpler signal
  * with the QModelIndex. */
 void GraphView::selectionChanged() {
   if (!model) return;

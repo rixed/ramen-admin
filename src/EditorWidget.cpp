@@ -21,7 +21,6 @@
 #include "KVoidEditor.h"
 #include "MakeSyncValue.h"
 #include "RuntimeStatsViewer.h"
-#include "TargetConfigEditor.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
 #include "chart/TimeChartEditWidget.h"
@@ -32,6 +31,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 #include "source/SourceInfoViewer.h"
+#include "target_config/TargetConfigEditor.h"
 
 /*
  * Returns an editor widget for the desired raql type:

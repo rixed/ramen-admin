@@ -9,8 +9,8 @@
 #include "AtomicForm.h"
 #include "Menu.h"
 #include "Resources.h"
-#include "TargetConfigEditor.h"
 #include "misc_dessser.h"
+#include "target_config/TargetConfigEditor.h"
 #include "target_config/TargetConfigEntryEditor.h"
 
 TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
