@@ -103,12 +103,15 @@ void GraphView::setModel(GraphModel const *model_) {
           &GraphView::relationRemoved);
 }
 
+/* Called when an item is collapsed in the tree view; supposed to also collapse
+ * it in the graph view (ie. makes its children invisible) */
 void GraphView::collapse(QModelIndex const &index) {
   GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
   item->setCollapsed(true);
   updateArrows();
 }
 
+/* the reverse of the above */
 void GraphView::expand(QModelIndex const &index) {
   GraphItem *item{static_cast<GraphItem *>(index.internalPointer())};
   item->setCollapsed(false);
@@ -124,10 +127,16 @@ void GraphView::select(QModelIndex const &index) {
              << (item->isCollapsed() ? "(collapsed)" : "");
 
   // Only allow to select tree leaves:
-  if (item->isCollapsed() && item->isViewable()) {
-    scene.clearSelection();
-    item->setSelected(true);
-  }
+  ProgramPartItem const *programPart{
+      dynamic_cast<ProgramPartItem const *>(item)};
+  if (programPart && verbose)
+    if (item->isCollapsed() && (!programPart || programPart->actualProgram)) {
+      scene.clearSelection();
+      if (programPart)
+        programPart->actualProgram->setSelected(true);
+      else
+        item->setSelected(true);
+    }
 }
 
 static int layoutTimeout{500};  // ms

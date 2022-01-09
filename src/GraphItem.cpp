@@ -13,7 +13,7 @@
 #include "colorOfString.h"
 #include "stream/GraphViewSettings.h"
 
-static const bool verbose{true};
+static const bool verbose{false};
 
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,
  * but can be used to hide/move/transform its children in one go.
@@ -248,6 +248,8 @@ QVariant GraphItem::itemChange(QGraphicsItem::GraphicsItemChange change,
   if (treeParent && change == QGraphicsItem::ItemPositionHasChanged) {
     update();
   } else if (change == ItemSelectedChange) {
+    /* Allow to select only leaves, ie. collapsed items (note: functions, which
+     * are always leaves, are constantly collapsed) */
     if (v.toBool() && !isCollapsed()) return false;
     return v;
   } else if (change == ItemSelectedHasChanged) {

@@ -61,7 +61,6 @@ class GraphItem : public QObject, public QGraphicsItem {
   /* All subItems will be children of this one, which in turn is our child
    * node. So to collapse subitems it's enough to subItems.hide() */
   QGraphicsItem *subItems;
-  bool collapsed;
 
   void paintLabels(
       QPainter *, std::vector<std::pair<QString const, QString const> > const &,
@@ -72,6 +71,8 @@ class GraphItem : public QObject, public QGraphicsItem {
   static QGraphicsItem *graphicsItemOfTreeItem(GraphItem *item);
 
  protected:
+  bool collapsed;
+
   GraphViewSettings const *settings;
 
   // Displayed in the graph:
@@ -117,9 +118,6 @@ class GraphItem : public QObject, public QGraphicsItem {
   virtual bool isRunning() const = 0;
 
   virtual bool isWorking() const = 0;
-
-  // ProgramPartItem is not viewable
-  virtual bool isViewable() const { return true; }
 
   virtual operator QString() const = 0;
 

@@ -127,6 +127,8 @@ class FunctionItem : public GraphItem {
   FunctionItem(GraphItem *treeParent, std::unique_ptr<Function>,
                GraphViewSettings const *);
 
+  void setCollapsed(bool) override;
+
   QVariant data(int, int) const override;
 
   QRectF operationRect() const override;

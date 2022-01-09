@@ -326,11 +326,18 @@ FunctionItem::FunctionItem(GraphItem *treeParent,
                            std::unique_ptr<Function> function,
                            GraphViewSettings const *settings)
     : GraphItem(treeParent, std::move(function), settings) {
+  /* Functions are considered collapsed (they have no content anyway, but that
+   * simplifies the selection logic). */
+  collapsed = true;
   Q_ASSERT(treeParent);
   Q_ASSERT(settings);
   // TODO: updateArrows should reallocate the channels:
   channel = std::rand() % settings->numArrowChannels;
   setZValue(3);
+}
+
+void FunctionItem::setCollapsed(bool) {
+  // Ignore expansion requests
 }
 
 QVariant FunctionItem::data(int column, int role) const {

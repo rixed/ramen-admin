@@ -44,8 +44,6 @@ class ProgramPartItem : public GraphItem {
    * program is conditionally disabled: */
   bool isRunning() const override;
 
-  bool isViewable() const override { return false; }
-
   void reorder(GraphModel *);
 
   QRectF operationRect() const override;
