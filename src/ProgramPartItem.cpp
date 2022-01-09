@@ -73,3 +73,8 @@ void ProgramPartItem::reorder(GraphModel *) {
     }
   }
 }
+
+void ProgramPartItem::setCollapsed(bool c) {
+  GraphItem::setCollapsed(c);
+  if (actualProgram) actualProgram->setCollapsed(c);
+}

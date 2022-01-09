@@ -13,6 +13,8 @@
 #include "colorOfString.h"
 #include "stream/GraphViewSettings.h"
 
+static const bool verbose{true};
+
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,
  * but can be used to hide/move/transform its children in one go.
  * And unlike QGrpahicsItemGroup, will not hide events.
@@ -26,6 +28,18 @@ class GraphicsEmpty : public QAbstractGraphicsShapeItem {
              QWidget * = nullptr) {}
 };
 
+QGraphicsItem *GraphItem::GraphicsItemOfTreeItem(GraphItem *item) {
+  if (!item) return nullptr;  // for sites
+  ProgramPartItem *part{dynamic_cast<ProgramPartItem *>(item)};
+  if (part && part->actualProgram) {
+    if (verbose)
+      qDebug() << "GraphItem: attaching to actualProgram"
+               << part->actualProgram->shared->name << "instead";
+    return part->actualProgram->subItems;
+  } else
+    return item->subItems;
+}
+
 // Notice that we use our parent's subItems as the parent of the GraphItem,
 // meaning all coordinates will be relative to that parent. Easier when it
 // moves.
@@ -33,7 +47,7 @@ class GraphicsEmpty : public QAbstractGraphicsShapeItem {
 // reorder detect that it's indeed a new value when we insert the first one!
 GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
                      GraphViewSettings const *settings_)
-    : QGraphicsItem(treeParent_ ? treeParent_->subItems : nullptr),
+    : QGraphicsItem(GraphicsItemOfTreeItem(treeParent_)),
       border_(2),
       collapsed(true),
       settings(settings_),
@@ -70,6 +84,9 @@ QVariant GraphItem::data(int column, int role) const {
 bool GraphItem::isCollapsed() const { return collapsed; }
 
 void GraphItem::setCollapsed(bool c) {
+  if (verbose)
+    qDebug() << "GraphItem::setCollapsed(" << c << ") for item" << shared->name
+             << "(" << typeName() << ")";
   collapsed = c;
   if (subItems) subItems->setVisible(!c);
 }
@@ -173,9 +190,12 @@ QRectF GraphItem::boundingRect() const {
 // Every node in the graph start by displaying a set of properties:
 void GraphItem::paint(QPainter *painter, const QStyleOptionGraphicsItem *,
                       QWidget *) {
-  if (!settings) return;
+  if (verbose)
+    qDebug() << "GraphItem::painting" << shared->name << "(" << typeName()
+             << ")";
 
-  Q_ASSERT(settings);  // Or this should not be called
+  // ProgramPartItem objects has nothing to draw:
+  if (!settings) return;
 
   qreal b{border()};
   QBrush bru{brush};

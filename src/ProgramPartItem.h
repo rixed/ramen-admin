@@ -51,6 +51,8 @@ class ProgramPartItem : public GraphItem {
   operator QString() const override;
 
   QString const typeName() const override { return QString("ProgramPartItem"); }
+
+  void setCollapsed(bool) override;
 };
 
 #endif

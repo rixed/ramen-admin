@@ -69,7 +69,7 @@ class GraphItem : public QObject, public QGraphicsItem {
   QRect labelsBoundingRect(
       std::vector<std::pair<QString const, QString const> > const &) const;
 
-  QGraphicsItem *GraphicsParent(GraphItem *treeParent) const;
+  static QGraphicsItem *GraphicsItemOfTreeItem(GraphItem *item);
 
  protected:
   GraphViewSettings const *settings;
@@ -130,7 +130,7 @@ class GraphItem : public QObject, public QGraphicsItem {
    * boundingRect): */
   virtual QRectF operationRect() const = 0;
 
-  void setCollapsed(bool);
+  virtual void setCollapsed(bool);
 
   /* Returns "$site:$program/$function" */
   QString sfqName() const;
