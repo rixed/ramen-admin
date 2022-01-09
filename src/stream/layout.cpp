@@ -169,14 +169,13 @@ bool solve(std::vector<SiteItem *> const &sites) {
         for (FunctionItem *parFunc : func->parents) {
           func->parentOps.insert(parFunc);
 
-          ProgramPartItem *parProgPart{
-              dynamic_cast<ProgramPartItem *>(parFunc->treeParent)};
-          Q_ASSERT(parProgPart);
-          ProgramItem *parProg{parProgPart->actualProgram};
+          ProgramItem *parProg{
+              dynamic_cast<ProgramItem *>(parFunc->graphicsParent())};
           Q_ASSERT(parProg);
           if (parProg != prog) prog->parentOps.insert(parProg);
 
-          SiteItem *parSite{dynamic_cast<SiteItem *>(parProg->treeParent)};
+          SiteItem *parSite{
+              dynamic_cast<SiteItem *>(parProg->graphicsParent())};
           Q_ASSERT(parSite);
           if (parSite != site) site->parentOps.insert(parSite);
         }

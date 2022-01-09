@@ -28,7 +28,23 @@ class GraphicsEmpty : public QAbstractGraphicsShapeItem {
              QWidget * = nullptr) {}
 };
 
-QGraphicsItem *GraphItem::GraphicsItemOfTreeItem(GraphItem *item) {
+GraphItem const *GraphItem::graphicsParent() const {
+  ProgramPartItem *parentPart{dynamic_cast<ProgramPartItem *>(treeParent)};
+  if (parentPart) {
+    if (parentPart->actualProgram)
+      return parentPart->actualProgram;
+    else
+      return parentPart->graphicsParent();
+  } else
+    return treeParent;
+}
+
+GraphItem *GraphItem::graphicsParent() {
+  return const_cast<GraphItem *>(
+      const_cast<GraphItem const *>(this)->graphicsParent());
+}
+
+QGraphicsItem *GraphItem::graphicsItemOfTreeItem(GraphItem *item) {
   if (!item) return nullptr;  // for sites
   ProgramPartItem *part{dynamic_cast<ProgramPartItem *>(item)};
   if (part && part->actualProgram) {
@@ -47,7 +63,7 @@ QGraphicsItem *GraphItem::GraphicsItemOfTreeItem(GraphItem *item) {
 // reorder detect that it's indeed a new value when we insert the first one!
 GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
                      GraphViewSettings const *settings_)
-    : QGraphicsItem(GraphicsItemOfTreeItem(treeParent_)),
+    : QGraphicsItem(graphicsItemOfTreeItem(treeParent_)),
       border_(2),
       collapsed(true),
       settings(settings_),

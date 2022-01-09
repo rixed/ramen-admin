@@ -166,13 +166,12 @@ void OperationsView::showSource(ProgramItem const *p) {
 void OperationsView::showFuncInfo(FunctionItem const *f) {
   if (!Menu::sourcesWin) return;
 
-  ProgramPartItem *programPartItem{
-      dynamic_cast<ProgramPartItem *>(f->treeParent)};
-  Q_ASSERT(programPartItem);
-  Q_ASSERT(programPartItem->actualProgram);
+  ProgramItem const *programItem{
+      dynamic_cast<ProgramItem const *>(f->graphicsParent())};
+  Q_ASSERT(programItem);
 
-  std::string const src_path{srcPathFromProgramName(
-      programPartItem->actualProgram->shared->name.toStdString())};
+  std::string const src_path{
+      srcPathFromProgramName(programItem->shared->name.toStdString())};
   if (verbose)
     qDebug() << "Show source of function" << QString::fromStdString(src_path);
   Menu::sourcesWin->showFile(src_path);

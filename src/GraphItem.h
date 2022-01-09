@@ -69,7 +69,7 @@ class GraphItem : public QObject, public QGraphicsItem {
   QRect labelsBoundingRect(
       std::vector<std::pair<QString const, QString const> > const &) const;
 
-  static QGraphicsItem *GraphicsItemOfTreeItem(GraphItem *item);
+  static QGraphicsItem *graphicsItemOfTreeItem(GraphItem *item);
 
  protected:
   GraphViewSettings const *settings;
@@ -95,6 +95,11 @@ class GraphItem : public QObject, public QGraphicsItem {
 
   GraphItem(GraphItem *treeParent, std::unique_ptr<GraphData> data,
             GraphViewSettings const *);
+
+  /* Returns the parent in Ops view (owner of the subItems this graphItem is
+   * attached to) rather than the parent in tree view (teeParent): */
+  GraphItem *graphicsParent();
+  GraphItem const *graphicsParent() const;
 
   virtual QVariant data(int col, int role) const;
 
