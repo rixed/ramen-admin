@@ -74,7 +74,27 @@ void ProgramPartItem::reorder(GraphModel *) {
   }
 }
 
+/* Collapse or expand any actual descendent subprogram, while keeping the
+ * ProgramPartItem collapse flag flag as they are, ie representative of the
+ * state in the treeview, as required for further handling of those events. */
+void ProgramPartItem::propagateSetCollapse(bool c) {
+  /* If we are collapsing, collapse actual programs. If we are expanding,
+   * restore their original state (ie. that of the parent ProgramPart): */
+  if (actualProgram) actualProgram->setCollapsed(c || isCollapsed());
+  for (ProgramPartItem *subPart : subParts) {
+    if (subPart->isCollapsed()) continue;
+    subPart->propagateSetCollapse(c);
+  }
+}
+
 void ProgramPartItem::setCollapsed(bool c) {
   GraphItem::setCollapsed(c);
-  if (actualProgram) actualProgram->setCollapsed(c);
+  if (actualProgram)
+    actualProgram->setCollapsed(c);
+  else {
+    /* Bummer! Below actual programs won't be hidden/shown as they are not our
+     * subItems but sites'.  So walk the subtree (as long as it's expanded)
+     * and manually collapse/expand them. */
+    propagateSetCollapse(c);
+  }
 }

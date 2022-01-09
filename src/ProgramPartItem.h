@@ -15,6 +15,8 @@ struct ProgramPart : public GraphData {
 };
 
 class ProgramPartItem : public GraphItem {
+  void propagateSetCollapse(bool);
+
  protected:
   std::vector<std::pair<QString const, QString const> > labels()
       const override {
