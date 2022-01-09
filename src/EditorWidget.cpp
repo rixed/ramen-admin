@@ -306,7 +306,9 @@ AtomicWidget *newEditorWidget(
       break;
     }
     default:
-      editor = new KLabel(parent);
+      /* Enable word-wrap as the text-representation of some values may be very
+       * large: */
+      editor = new KLabel(parent, true);
       break;
   }
 
