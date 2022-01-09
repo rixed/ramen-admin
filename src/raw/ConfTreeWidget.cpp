@@ -10,8 +10,6 @@
 #include <QStackedLayout>
 
 #include "ConfClient.h"
-#include "ConfTreeEditorDialog.h"
-#include "ConfTreeItem.h"
 #include "KFloatEditor.h"
 #include "KShortLabel.h"
 #include "Menu.h"
@@ -19,6 +17,8 @@
 #include "desssergen/sync_value.h"
 #include "misc.h"
 #include "misc_dessser.h"
+#include "raw/ConfTreeItem.h"
+#include "raw/RawConfEditorDialog.h"
 
 static bool const verbose{false};
 
@@ -451,13 +451,13 @@ void ConfTreeWidget::deleteClicked(
 
 void ConfTreeWidget::openViewWindow(
     std::shared_ptr<dessser::gen::sync_key::t const> key) {
-  QDialog *editor{new ConfTreeEditorDialog(key, false)};
+  QDialog *editor{new RawConfEditorDialog(key, false)};
   editor->show();
 }
 
 void ConfTreeWidget::openEditorWindow(
     std::shared_ptr<dessser::gen::sync_key::t const> key) {
-  QDialog *editor{new ConfTreeEditorDialog(key, true)};
+  QDialog *editor{new RawConfEditorDialog(key, true)};
   editor->show();
 }
 

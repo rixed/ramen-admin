@@ -1,6 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef CONFTREEEDITORDIALOG_H_190729
-#define CONFTREEEDITORDIALOG_H_190729
+#ifndef RAWCONFEDITORDIALOG_H_190729
+#define RAWCONFEDITORDIALOG_H_190729
 #include <QDialog>
 #include <memory>
 
@@ -8,7 +8,7 @@
 
 class AtomicWidget;
 
-class ConfTreeEditorDialog : public QDialog {
+class RawConfEditorDialog : public QDialog {
   Q_OBJECT
 
   AtomicWidget *editor;
@@ -16,7 +16,7 @@ class ConfTreeEditorDialog : public QDialog {
   bool canWrite, showEditor;
 
  public:
-  ConfTreeEditorDialog(
+  RawConfEditorDialog(
       std::shared_ptr<dessser::gen::sync_key::t const>,
       // Even if we can write that key we might prefer not to show the editor:
       bool show_editor = true, QWidget *parent = nullptr);

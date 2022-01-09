@@ -17,9 +17,9 @@
 #include "ButtonDelegate.h"
 #include "CodeEdit.h"
 #include "CodeEditForm.h"
-#include "ConfTreeEditorDialog.h"
 #include "misc.h"
 #include "misc_dessser.h"
+#include "raw/RawConfEditorDialog.h"
 #include "source/SourcesModel.h"
 #include "target_config/NewTargetConfigEntryDialog.h"
 
@@ -164,7 +164,7 @@ void SourcesView::openInfo(QModelIndex const &index) {
   std::shared_ptr<dessser::gen::sync_key::t const> infoKey{
       keyOfSrcPath(sourcesModel->SrcPathOfIndex(index), "info")};
 
-  ConfTreeEditorDialog *dialog{new ConfTreeEditorDialog(infoKey)};
+  RawConfEditorDialog *dialog{new RawConfEditorDialog(infoKey)};
   dialog->show();
 }
 

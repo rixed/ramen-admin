@@ -12,7 +12,7 @@
 
 class AboutDialog;
 class ConfClient;
-class ConfTreeDialog;
+class RawConfWin;
 struct KValue;
 class LoggerWin;
 class LoginWin;
@@ -63,7 +63,7 @@ class Menu : public QObject {
 
   static AboutDialog *aboutDialog;
   static SourcesWin *sourcesWin;
-  static ConfTreeDialog *confTreeDialog;
+  static RawConfWin *rawConfWin;
   static NewSourceDialog *newSourceDialog;
   static NewTargetConfigEntryDialog *newTargetConfigEntryDialog;
   static NewDashboardDialog *newDashboardDialog;
@@ -90,7 +90,7 @@ class Menu : public QObject {
   static void openSourceEditor();
   static void openProcesses();
   static void openTargetConfigEditor();
-  static void openConfTreeDialog();
+  static void openRawConfWin();
   static void openAboutDialog();
   static void openNamesTreeWin();
   static void openStorageWin();

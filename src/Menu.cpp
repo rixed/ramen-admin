@@ -12,7 +12,6 @@
 
 #include "AboutDialog.h"
 #include "ConfClient.h"
-#include "ConfTreeDialog.h"
 #include "LoggerView.h"
 #include "LoggerWin.h"
 #include "LoginWin.h"
@@ -25,6 +24,7 @@
 #include "dashboard/tools.h"
 #include "misc.h"
 #include "processes/ProcessesDialog.h"
+#include "raw/RawConfWin.h"
 #include "source/NewSourceDialog.h"
 #include "source/SourcesWin.h"
 #include "storage/StorageWin.h"
@@ -36,7 +36,7 @@ static bool const verbose{false};
 
 AboutDialog *Menu::aboutDialog;
 SourcesWin *Menu::sourcesWin;
-ConfTreeDialog *Menu::confTreeDialog;
+RawConfWin *Menu::rawConfWin;
 NewSourceDialog *Menu::newSourceDialog;
 NewTargetConfigEntryDialog *Menu::newTargetConfigEntryDialog;
 NewDashboardDialog *Menu::newDashboardDialog;
@@ -58,8 +58,8 @@ void Menu::initLoginWin(QString const &configDir) {
 void Menu::initDialogs(QString const &srvUrl) {
   if (verbose) qDebug() << "Create SourceEditor...";
   if (!sourcesWin) sourcesWin = new SourcesWin;
-  if (verbose) qDebug() << "Create ConfTreeDialog...";
-  if (!confTreeDialog) confTreeDialog = new ConfTreeDialog;
+  if (verbose) qDebug() << "Create RawConfWin...";
+  if (!rawConfWin) rawConfWin = new RawConfWin;
   if (verbose) qDebug() << "Create NewSourceDialog...";
   if (!newSourceDialog) newSourceDialog = new NewSourceDialog;
   if (verbose) qDebug() << "Create NewTargetConfigEntryDialog...";
@@ -88,7 +88,7 @@ void Menu::initDialogs(QString const &srvUrl) {
 void Menu::showSomething() {
   bool someOpened = false;
   someOpened |= sourcesWin->isVisible();
-  someOpened |= confTreeDialog->isVisible();
+  someOpened |= rawConfWin->isVisible();
   someOpened |= processesDialog->isVisible();
   someOpened |= targetConfigEditorWin->isVisible();
   someOpened |= storageWin->isVisible();
@@ -101,7 +101,7 @@ void Menu::deleteDialogs() {
 
   danceOfDelLater<AboutDialog>(&aboutDialog);
   danceOfDelLater<SourcesWin>(&sourcesWin);
-  danceOfDelLater<ConfTreeDialog>(&confTreeDialog);
+  danceOfDelLater<RawConfWin>(&rawConfWin);
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
   danceOfDelLater<NewTargetConfigEntryDialog>(&newTargetConfigEntryDialog);
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
@@ -192,7 +192,7 @@ void Menu::populateMenu(bool basic, bool extended) {
     /* As a last resort, a raw edition window: */
     windowMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Raw Configuration…"), this,
-        &Menu::openConfTreeDialog);
+        &Menu::openRawConfWin);
   }
 
   if (basic) {
@@ -289,7 +289,7 @@ void Menu::openProcesses() {
 
 void Menu::openTargetConfigEditor() { showRaised(targetConfigEditorWin); }
 
-void Menu::openConfTreeDialog() { showRaised(confTreeDialog); }
+void Menu::openRawConfWin() { showRaised(rawConfWin); }
 
 void Menu::openAboutDialog() {
   if (!aboutDialog) aboutDialog = new AboutDialog;

@@ -1,9 +1,9 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "ConfTreeDialog.h"
+#include "raw/RawConfWin.h"
 
 #include "ConfTreeWidget.h"
 
-ConfTreeDialog::ConfTreeDialog(QWidget *parent)
+RawConfWin::RawConfWin(QWidget *parent)
     : SavedWindow("ConfigTreeWindow", tr("Raw Configuration"), true, parent) {
   confTreeWidget = new ConfTreeWidget(this);
   setCentralWidget(confTreeWidget);

@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "ConfTreeEditorDialog.h"
+#include "raw/RawConfEditorDialog.h"
 
 #include <QDialogButtonBox>
 #include <QFormLayout>
@@ -20,7 +20,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-ConfTreeEditorDialog::ConfTreeEditorDialog(
+RawConfEditorDialog::RawConfEditorDialog(
     std::shared_ptr<dessser::gen::sync_key::t const> key_, bool show_editor,
     QWidget *parent)
     : QDialog(parent), key(key_), showEditor(show_editor) {
@@ -70,12 +70,12 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
 
   if (canWrite && showEditor)
     connect(buttonBox, &QDialogButtonBox::accepted, this,
-            &ConfTreeEditorDialog::save);
+            &RawConfEditorDialog::save);
   /* Connect first the cancel button to the normal reject signal, and
    * then this signal to our cancel slot, so that cancel is also called
    * when user presses the escape key: */
   connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
-  connect(this, &QDialog::rejected, this, &ConfTreeEditorDialog::cancel);
+  connect(this, &QDialog::rejected, this, &RawConfEditorDialog::cancel);
 
   /* The editor will start in read-only mode (unless we already own the
    * value). Reception of the lock ack from the confserver will turn it
@@ -98,7 +98,7 @@ ConfTreeEditorDialog::ConfTreeEditorDialog(
   setSizeGripEnabled(true);  // editors of various types vary largely in size
 }
 
-void ConfTreeEditorDialog::save() {
+void RawConfEditorDialog::save() {
   std::shared_ptr<dessser::gen::sync_value::t const> v{editor->getValue()};
   ConfClient *client = Menu::getClient();
   if (v) client->sendSet(key, v);  // read-only editors return no value
@@ -106,6 +106,6 @@ void ConfTreeEditorDialog::save() {
   QDialog::accept();
 }
 
-void ConfTreeEditorDialog::cancel() {
+void RawConfEditorDialog::cancel() {
   if (canWrite && showEditor) Menu::getClient()->sendUnlock(key);
 }

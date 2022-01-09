@@ -212,10 +212,10 @@ HEADERS += \
   target_config/NewTargetConfigEntryDialog.h \
   RuntimeStatsViewer.h \
   EditorWidget.h \
-  ConfTreeItem.h \
-  ConfTreeEditorDialog.h \
-  ConfTreeWidget.h \
-  ConfTreeDialog.h \
+  raw/RawConfEditorDialog.h \
+  raw/ConfTreeItem.h \
+  raw/ConfTreeWidget.h \
+  raw/RawConfWin.h \
   ButtonDelegate.h \
   TreeComboBox.h \
   Automaton.h \
@@ -369,10 +369,10 @@ SOURCES += \
   target_config/NewTargetConfigEntryDialog.cpp \
   RuntimeStatsViewer.cpp \
   EditorWidget.cpp \
-  ConfTreeItem.cpp \
-  ConfTreeEditorDialog.cpp \
-  ConfTreeWidget.cpp \
-  ConfTreeDialog.cpp \
+  raw/RawConfEditorDialog.cpp \
+  raw/ConfTreeItem.cpp \
+  raw/ConfTreeWidget.cpp \
+  raw/RawConfWin.cpp \
   ButtonDelegate.cpp \
   TreeComboBox.cpp \
   Automaton.cpp \
