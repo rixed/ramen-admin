@@ -58,10 +58,11 @@ struct Rules {
     func.setForeground(Qt::darkYellow);
     rules.emplace_back(
         func,
-        "\\b(age|abs|length|lower|upper|now|random|exp|log|log10|sqrt|"
-        "ceil|floor|round|truncate|hash|min|max|sum|avg|and|or|first|"
-        "largest|smallest|latest|oldest|earlier|all|percentile|th|lag|"
-        "season_moveavg|moveavg|"
+        "\\b(age|abs|length|lower|upper|now|random|exp|log|log10|sqrt|sq|"
+        "ceil|floor|round|cos|sin|tan|acos|asin|atan|cosh|sinh|tanh|"
+        "hash|countrycode|ipfamily|basename|truncate|min|max|sum|avg|"
+        "chr|and|or|first|largest|smallest|latest|oldest|earlier|all|"
+        "percentile|th|lag|season_moveavg|moveavg|"
         "season_fit|fit|season_fit_multi|fit_multi|smooth|remember|"
         "distinct|hysteresis|histogram|split|format_time|parse_time|"
         "variant|max|greatest|min|least|print|reldiff|sample|substring|"
