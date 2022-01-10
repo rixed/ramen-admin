@@ -14,6 +14,7 @@
 #include <cmath>
 #include <limits>
 #include <mutex>
+#include <optional>
 
 #include "EventTime.h"
 #include "FunctionItem.h"
@@ -289,12 +290,13 @@ void TimeChart::paintAxis(Axis const &axis) {
       painter.drawLine(QPointF(x_start, 0.), QPointF(x_start, height()));
       painter.drawLine(QPointF(x_stop, 0.), QPointF(x_stop, height()));
       painter.setPen(line.color);
-      painter.rotate(-90);
+      painter.rotate(-90);  // Note: rotate is clockwise
       static QString const tail_end_str{"…tail end"};
       static QStaticText const start_tail_text{"Tail start…"},
           stop_tail_text{tail_end_str};
       QRectF bbox{fontMetrics.boundingRect(tail_end_str)};
       // Possibly: display tail size
+      // Note: unlike drawFont, y is here the top f the font
       painter.drawStaticText(-height(), x_start, start_tail_text);
       // Note: additional shift required for some reason
       painter.drawStaticText(-(4 + bbox.width()), x_stop - bbox.height(),
@@ -305,32 +307,69 @@ void TimeChart::paintAxis(Axis const &axis) {
     if (past) {
       for (ReplayRequest &replay : past->replayRequests) {
         qreal x1, x2;
-        size_t numTuples;
-        QColor dimCol{darkCol};
+        QColor bgCol{darkCol};
+        bool drawBg{false};
+        QString status;
+        // Ratio of the requested time covered by the received tuples:
+        std::optional<double> gauge;
         {
           std::lock_guard<std::mutex> guard{replay.lock};
           if (replay.isCompleted(guard)) {
             // Dim the color with age
             double const age{now - replay.started};
-            double const maxAge{20};
-            if (age < 0 || age > maxAge) continue;
-            dimCol =
-                blendColor(dimCol, painter.background().color(), age / maxAge);
+            static double const maxAge{20};
+            if (age < 0) continue;
+            if (age < maxAge) {
+              bgCol =
+                  blendColor(darkCol, painter.background().color(), age / maxAge);
+              drawBg = true;
+            }
+            size_t const num_tuples{replay.tuples.size()};
+            status = QString("completed %1 tuples").arg(num_tuples);
+          } else if (replay.isWaiting(guard)) {  // Not yet sent
+            status = "preparing…";
+          } else {  // Sent
+            size_t const num_tuples{replay.tuples.size()};
+            if (num_tuples > 0) {
+              double const recvd_dt{replay.tuples.crbegin()->first -
+                                    replay.tuples.cbegin()->first};
+              Q_ASSERT(recvd_dt >= 0 && replay.until > replay.since);
+              if (recvd_dt > 0)
+                gauge = recvd_dt / (replay.until - replay.since);
+            }
+            status = QString("received %1 tuples").arg(num_tuples);
           }
           x1 = toPixel(replay.since);
           x2 = toPixel(replay.until);
-          numTuples = replay.tuples.size();
-        }
-        QBrush const brush{dimCol, Qt::BDiagPattern};
-        painter.setBrush(brush);
-        QRectF const r{x1, 0., x2 - x1, static_cast<qreal>(height())};
-        QPen pen{dimCol};
+        }  // replay locked
+        QPen pen{darkCol};
         pen.setStyle(Qt::DashDotLine);
         painter.setPen(pen);
-        painter.drawRect(r);
+        if (drawBg) {
+          /* Draw a hashed pattern in the background of this replay to help
+           * visually distinguish several replays from each others: */
+          QBrush const brush{bgCol, Qt::BDiagPattern};
+          painter.setBrush(brush);
+          QRectF const r{x1, 0., x2 - x1, static_cast<qreal>(height())};
+          painter.drawRect(r);
+        }
         painter.rotate(-90);
-        painter.drawText(-height(), x1,
-                         QString::number(numTuples) + QString(" tuples"));
+        // Note: unlike drawStaticText, y is here the baseline of the font
+        QRectF bbox{fontMetrics.boundingRect(status)};
+        painter.drawText(-height(), x1 + bbox.height(), status);
+        if (gauge) {
+          qreal const gauge_height{0.7 * bbox.height()};
+          qreal const gauge_line_width{3.};
+          painter.setPen(QPen{QBrush{darkCol}, gauge_line_width});
+          painter.setBrush(Qt::NoBrush);
+          painter.drawRect(-height() + gauge_line_width, x1 + bbox.height() * 2,
+                           height() - gauge_line_width * 2, gauge_height);
+          painter.setBrush(QBrush{darkCol});
+          painter.drawRect(-height() + gauge_line_width * 3,
+                           x1 + bbox.height() * 1.5 + gauge_line_width * 2,
+                           *gauge * height() - gauge_line_width * 6,
+                           gauge_height - gauge_line_width * 4);
+        }
         painter.rotate(90);
       }
     }
