@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QDebug>
 #include <QFont>
+#include <QFontMetricsF>
 #include <QPainter>
 #include <QPen>
 #include <QPointF>
@@ -278,17 +279,26 @@ void TimeChart::paintAxis(Axis const &axis) {
     QFont font{painter.font()};
     font.setPixelSize(metaFontHeight);
     painter.setFont(font);
+    QFontMetricsF const fontMetrics{font};
     if (tail) {
-      qreal const x{toPixel(tail->minEventTime())};
+      qreal const x_start{toPixel(tail->minEventTime())},
+          x_stop{toPixel(tail->maxEventTime())};
       QPen pen{darkCol};
       pen.setStyle(Qt::DashDotLine);
       painter.setPen(pen);
-      painter.drawLine(QPointF(x, 0.), QPointF(x, height()));
+      painter.drawLine(QPointF(x_start, 0.), QPointF(x_start, height()));
+      painter.drawLine(QPointF(x_stop, 0.), QPointF(x_stop, height()));
       painter.setPen(line.color);
       painter.rotate(-90);
-      static const QStaticText tailText{"Tail..."};
+      static QString const tail_end_str{"…tail end"};
+      static QStaticText const start_tail_text{"Tail start…"},
+          stop_tail_text{tail_end_str};
+      QRectF bbox{fontMetrics.boundingRect(tail_end_str)};
       // Possibly: display tail size
-      painter.drawStaticText(-height(), x, tailText);
+      painter.drawStaticText(-height(), x_start, start_tail_text);
+      // Note: additional shift required for some reason
+      painter.drawStaticText(-(4 + bbox.width()), x_stop - bbox.height(),
+                             stop_tail_text);
       painter.rotate(90);
     }
     std::shared_ptr<PastData> past{line.res->func->getPast()};
