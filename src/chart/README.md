@@ -4,10 +4,14 @@ All objects to render charts
 Non-members of "chart/"
 -----------------------
 
-- FunctionItem: Represents a single worker.
+- FunctionItem: Represents a single worker. Owns a shared instance of PastData
+  and of TailModel.
 
 - PastData: Stores (and cache) all known past tuples for that workers, as a
   list of ReplayRequest objects.
+
+- TailModel: A QAbstractTableModel containing the tuples as they arrive from
+  a worker's tail.
 
 - ReplayRequest: A pending or past replay request data obtained from the server.
   Tuples has all the columns.
@@ -40,7 +44,7 @@ Members of "chart/"
 
 - TimeChart: an AbstractTimeLine that displays several time series.
   Time range is given by a slot and values are taken from a
-  conf::DashWidgetChart.
+  DashboardWidgetChart.
   TimeChart takes actual data tuples from the iterator function of all
   involved functions (which name is obtained from the configuration).
 

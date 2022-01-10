@@ -65,8 +65,8 @@ class ReplayRequest : public QObject {
 
   double since, until;
 
-  /* Where the results are stored (in event time order. */
-  std::multimap<double, std::shared_ptr<dessser::gen::raql_value::t const> >
+  /* Where the results are stored (in event time order) */
+  std::multimap<double, std::shared_ptr<dessser::gen::raql_value::t const>>
       tuples;
 
   /* Also start the actual request: */

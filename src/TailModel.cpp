@@ -99,10 +99,14 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
   dessser::Arr<std::shared_ptr<dessser::gen::sync_value::tuple> > const &batch{
       std::get<dessser::gen::sync_value::Tuples>(*kv.val)};
 
-  size_t const numTuples{batch.size()};
-  if (0 == numTuples) return;
+  size_t const num_tuples{batch.size()};
+  if (0 == num_tuples) return;
 
-  beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + numTuples - 1);
+  if (verbose)
+    qDebug() << "TailModel::addTuple: received" << num_tuples << " tuples for"
+             << fqName;
+
+  beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + num_tuples - 1);
 
   for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple : batch) {
     /* If a function has no event time info, all tuples will have time 0.

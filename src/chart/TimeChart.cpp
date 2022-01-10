@@ -835,7 +835,7 @@ void TimeChart::Axis::iterTime(
       values(  // Not list-init
           numValues, std::make_pair(std::nullopt, QColor()));
 
-  size_t numTuples[1 + numValues];  // 1+ to satisfies clang-tidy
+  size_t num_tuples[1 + numValues];  // 1+ to satisfies clang-tidy
 
   size_t valIdx{0};
   for (Line const &line : lines) {
@@ -847,7 +847,7 @@ void TimeChart::Axis::iterTime(
       std::vector<size_t> const &tupleIndices{p.second};
 
       values[valIdx].second = noFactor ? line.color : colorOfString(label);
-      numTuples[valIdx] = tupleIndices.size();
+      num_tuples[valIdx] = tupleIndices.size();
 
       valIdx++;
     }
@@ -906,7 +906,7 @@ void TimeChart::Axis::iterTime(
             if (tuple.time > minTime + minDT) break;
             *values[valIdx].first +=
                 tuple.values[line.columnIndex].value_or(0.);
-            if (++nextTupleIdx[valIdx] >= numTuples[valIdx]) {
+            if (++nextTupleIdx[valIdx] >= num_tuples[valIdx]) {
               done[valIdx] = true;
               numDone++;
               break;
