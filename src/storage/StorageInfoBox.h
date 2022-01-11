@@ -2,17 +2,17 @@
 #ifndef STORAGEINFOBOX_H_190522
 #define STORAGEINFOBOX_H_190522
 #include <QLabel>
-#include <QTimer>
 #include <optional>
 
 class FunctionItem;
 class GraphModel;
+class QTimer;
 
 class StorageInfoBox : public QWidget {
   Q_OBJECT
 
   GraphModel *graphModel;
-  QTimer recomputeTimer;
+  QTimer *recomputeTimer;
 
   /*
    * Infos to be displayed:

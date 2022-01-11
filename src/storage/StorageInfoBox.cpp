@@ -3,6 +3,7 @@
 
 #include <QGridLayout>
 #include <QLabel>
+#include <QTimer>
 
 #include "FunctionItem.h"
 #include "GraphModel.h"
@@ -13,7 +14,6 @@
 StorageInfoBox::StorageInfoBox(GraphModel *graphModel_, QWidget *parent)
     : QWidget(parent),
       graphModel(graphModel_),
-      recomputeTimer(this),
       knowAllArcWorkers(false),
       knowAllArcFiles(false),
       knowAllArcBytes(false) {
@@ -42,14 +42,13 @@ StorageInfoBox::StorageInfoBox(GraphModel *graphModel_, QWidget *parent)
 
   setLayout(layout);
 
-  recomputeTimer.setSingleShot(true);
+  recomputeTimer = new QTimer(this);
+  recomputeTimer->setSingleShot(true);
   connect(graphModel, &GraphModel::storagePropertyChanged, this,
           &StorageInfoBox::rearmRecomputeTimer);
-  connect(&recomputeTimer, &QTimer::timeout, this,
+  connect(recomputeTimer, &QTimer::timeout, this,
           &StorageInfoBox::recomputeStats);
 }
-
-static int recomputeTimeout{1000};
 
 static QString orMore(QString const s, bool knowAll) {
   if (knowAll) return s;
@@ -108,5 +107,6 @@ void StorageInfoBox::recomputeStats() {
 }
 
 void StorageInfoBox::rearmRecomputeTimer(FunctionItem const *) {
-  recomputeTimer.start(recomputeTimeout);
+  static int const recomputeTimeout{1000};
+  recomputeTimer->start(recomputeTimeout);
 }

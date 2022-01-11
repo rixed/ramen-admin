@@ -1,7 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef STORAGEPIES_H_190522
 #define STORAGEPIES_H_190522
-#include <QTimer>
 #include <QWidget>
 #include <QtCharts>
 
@@ -11,6 +10,7 @@ class FunctionItem;
 class GraphModel;
 class QCheckBox;
 class QLabel;
+class QTimer;
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 using namespace QtCharts;
@@ -25,7 +25,7 @@ class StoragePies : public QWidget {
   Q_OBJECT
 
   GraphModel *graphModel;
-  QTimer reallocTimer;
+  QTimer *reallocTimer;
   /* Pie Chart displaying the storage size per site+program+function or
    * program+function.
    * So up to three concentric donuts: */

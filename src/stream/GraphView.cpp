@@ -5,6 +5,7 @@
 #include <QGestureEvent>
 #include <QParallelAnimationGroup>
 #include <QPropertyAnimation>
+#include <QTimer>
 #include <QTouchEvent>
 #include <cstdlib>
 #include <limits>
@@ -22,7 +23,6 @@ static bool const verbose{false};
 GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent)
     : QGraphicsView(parent),
       model(nullptr),
-      layoutTimer(this),
       settings(settings_),
       currentScale(1.),
       lastScale(1.) {
@@ -32,8 +32,9 @@ GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent)
   setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
   setScene(&scene);
 
-  layoutTimer.setSingleShot(true);
-  connect(&layoutTimer, &QTimer::timeout, this, &GraphView::startLayout);
+  layoutTimer = new QTimer(this);
+  layoutTimer->setSingleShot(true);
+  connect(layoutTimer, &QTimer::timeout, this, &GraphView::startLayout);
 
   /* Connect selectionChanged to our selectionChanged slot that will then
    * get the first item of the list (should be a singleton) and emit that */
@@ -145,7 +146,7 @@ void GraphView::insertRows(const QModelIndex &parent, int first, int last) {
   // Start (or restart) the layoutTimer to trigger a re-layout in 100ms:
   if (verbose)
     qDebug() << "insertRow in graphModel from" << first << "to" << last;
-  layoutTimer.start(layoutTimeout);
+  layoutTimer->start(layoutTimeout);
 
   /* We only need to add to the scene the toplevel sites.
    * Other GraphItem objects will be painted because they have this site as
@@ -255,7 +256,7 @@ void GraphView::relationAdded(FunctionItem const *parent,
   relations.insert(
       std::pair<FunctionItem const *, FunctionItem const *>(parent, child));
   updateArrows();
-  layoutTimer.start(layoutTimeout);
+  layoutTimer->start(layoutTimeout);
 }
 
 void GraphView::relationRemoved(FunctionItem const *parent,
@@ -266,7 +267,7 @@ void GraphView::relationRemoved(FunctionItem const *parent,
   if (it != relations.end()) {
     relations.erase(it);
     updateArrows();
-    layoutTimer.start(layoutTimeout);
+    layoutTimer->start(layoutTimeout);
   } else {
     qWarning() << "Removal of an unknown relation (good riddance!)";
   }

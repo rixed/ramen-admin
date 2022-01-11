@@ -28,7 +28,6 @@ using namespace QtCharts;
 StoragePies::StoragePies(GraphModel *graphModel_, QWidget *parent)
     : QWidget(parent),
       graphModel(graphModel_),
-      reallocTimer(this),
       staysSelected(false),
       dataMode(CurrentBytes) {
   QVBoxLayout *layout{new QVBoxLayout};
@@ -101,10 +100,11 @@ StoragePies::StoragePies(GraphModel *graphModel_, QWidget *parent)
   setLayout(layout);
 
   // Refresh the chart whenever some allocation property changes:
-  reallocTimer.setSingleShot(true);
+  reallocTimer = new QTimer(this);
+  reallocTimer->setSingleShot(true);
   connect(graphModel, &GraphModel::storagePropertyChanged, this,
           &StoragePies::rearmReallocTimer);
-  connect(&reallocTimer, &QTimer::timeout, this, &StoragePies::refreshChart);
+  connect(reallocTimer, &QTimer::timeout, this, &StoragePies::refreshChart);
 }
 
 void StoragePies::refreshChart() {
@@ -212,7 +212,7 @@ void StoragePies::updateSumSitesCheckBox() {
 
 void StoragePies::rearmReallocTimer(FunctionItem const *) {
   static int const reallocTimeout{1000};
-  reallocTimer.start(reallocTimeout);
+  reallocTimer->start(reallocTimeout);
 }
 
 void StoragePies::displaySelection(Key const &k, Values const &val) {

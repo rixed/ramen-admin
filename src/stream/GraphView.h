@@ -3,12 +3,12 @@
 #define GRAPHVIEW_H_190508
 #include <QGraphicsScene>
 #include <QGraphicsView>
-#include <QTimer>
 #include <unordered_map>
 
 #include "GraphModel.h"
 
 class GraphArrow;
+class QTimer;
 
 /* Graph is layout on a fixed size grid, where functions occupy the cells.
  * Each cell dimension is functionGridWidth * functionGridHeight.
@@ -60,7 +60,7 @@ class GraphView : public QGraphicsView {
 
   /* Used to trigger a layout computation after no functions were updated
    * for a short while: */
-  QTimer layoutTimer;
+  QTimer *layoutTimer;
 
   // Parameters we must share with the GraphItems:
   GraphViewSettings const &settings;
