@@ -328,7 +328,25 @@ void GraphModel::reorder() {
 class ParsedKey {
  public:
   bool valid;
-  QString site, program, function, property, instanceSignature;
+  QString site, program, function, instanceSignature;
+  enum Property {
+    Worker,
+    RuntimeStats,
+    ArchivedTimes,
+    ArchivedFiles,
+    ArchivedSize,
+    ArchivedAllocSize,
+    StateFile,
+    InputRingbuf,
+    Pid,
+    LastKilled,
+    LastExit,
+    LastExitCode,
+    LastExitStatus,
+    SuccessiveFailures,
+    QuarantineUntil,
+    IsMaster
+  } property;
 
   ParsedKey(dessser::gen::sync_key::t const &k) {
     valid = false;
@@ -355,27 +373,27 @@ class ParsedKey {
                 per_worker_data{std::get<1>(*per_worker)};
             switch (per_worker_data->index()) {
               case dessser::gen::sync_key::Worker:
-                property = QString("worker");
+                property = ParsedKey::Worker;
                 valid = true;
                 break;
               case dessser::gen::sync_key::RuntimeStats:
-                property = QString("stats/runtime");
+                property = ParsedKey::RuntimeStats;
                 valid = true;
                 break;
               case dessser::gen::sync_key::ArchivedTimes:
-                property = QString("archives/times");
+                property = ParsedKey::ArchivedTimes;
                 valid = true;
                 break;
               case dessser::gen::sync_key::NumArcFiles:
-                property = QString("archives/num_files");
+                property = ParsedKey::ArchivedFiles;
                 valid = true;
                 break;
               case dessser::gen::sync_key::NumArcBytes:
-                property = QString("archives/current_size");
+                property = ParsedKey::ArchivedSize;
                 valid = true;
                 break;
               case dessser::gen::sync_key::AllocedArcBytes:
-                property = QString("archives/alloc_size");
+                property = ParsedKey::ArchivedAllocSize;
                 valid = true;
                 break;
               case dessser::gen::sync_key::PerInstance: {
@@ -388,28 +406,28 @@ class ParsedKey {
                 valid = true;
                 switch (per_inst_prop.index()) {
                   case dessser::gen::sync_key::StateFile:
-                    property = QString("state_file");
+                    property = ParsedKey::StateFile;
                     break;
                   case dessser::gen::sync_key::InputRingFile:
-                    property = QString("input_ringbuf");
+                    property = ParsedKey::InputRingbuf;
                     break;
                   case dessser::gen::sync_key::Pid:
-                    property = QString("pid");
+                    property = ParsedKey::Pid;
                     break;
                   case dessser::gen::sync_key::LastKilled:
-                    property = QString("last_killed");
+                    property = ParsedKey::LastKilled;
                     break;
                   case dessser::gen::sync_key::LastExit:
-                    property = QString("last_exit");
+                    property = ParsedKey::LastExit;
                     break;
                   case dessser::gen::sync_key::LastExitStatus:
-                    property = QString("last_exit_status");
+                    property = ParsedKey::LastExitStatus;
                     break;
                   case dessser::gen::sync_key::SuccessiveFailures:
-                    property = QString("successive_failures");
+                    property = ParsedKey::SuccessiveFailures;
                     break;
                   case dessser::gen::sync_key::QuarantineUntil:
-                    property = QString("quarantine_until");
+                    property = ParsedKey::QuarantineUntil;
                     break;
                   default:
                     valid = false;
@@ -421,7 +439,7 @@ class ParsedKey {
             }
           } break;
           case dessser::gen::sync_key::IsMaster:
-            property = QString("is_master");
+            property = ParsedKey::IsMaster;
             valid = true;
             break;
           default:
@@ -522,8 +540,6 @@ void GraphModel::setFunctionProperty(
     SiteItem const *siteItem, ProgramItem const *programItem,
     FunctionItem *functionItem, ParsedKey const &pk,
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
-  if (verbose) qDebug() << "setFunctionProperty for" << pk.property;
-
   int changed{0};
 #define PROPERTY_CHANGED 0x1
 #define STORAGE_CHANGED 0x2
@@ -571,7 +587,7 @@ void GraphModel::setFunctionProperty(
           ? QString::fromStdString(function->worker->worker_signature)
           : QString()};
 
-  if (pk.property == "worker") {
+  if (pk.property == ParsedKey::Worker) {
     if (v->index() == dessser::gen::sync_value::Worker) [[likely]] {
       function->worker = std::get<dessser::gen::sync_value::Worker>(*v);
 
@@ -615,20 +631,20 @@ void GraphModel::setFunctionProperty(
       }
       changed |= STORAGE_CHANGED;
     }
-  } else if (pk.property == "stats/runtime") {
+  } else if (pk.property == ParsedKey::RuntimeStats) {
     if (v->index() == dessser::gen::sync_value::RuntimeStats) {
       function->runtimeStats =
           std::get<dessser::gen::sync_value::RuntimeStats>(*v);
       changed |= PROPERTY_CHANGED;
     }
-  } else if (pk.property == "archives/times") {
+  } else if (pk.property == ParsedKey::ArchivedTimes) {
     if (v->index() == dessser::gen::sync_value::TimeRange) {
       function->archivedTimes =
           std::shared_ptr<dessser::gen::time_range::t const>(
               v, &std::get<dessser::gen::sync_value::TimeRange>(*v));
       changed |= STORAGE_CHANGED;
     }
-  } else if (pk.property == "archives/num_files") {
+  } else if (pk.property == ParsedKey::ArchivedFiles) {
     // All the following keys values are RamenValues
 #define SET_RAMENVALUE(type, var, conv, whatChanged)                         \
   do {                                                                       \
@@ -643,27 +659,27 @@ void GraphModel::setFunctionProperty(
   } while (0)
 
     SET_RAMENVALUE(VI64, numArcFiles, , STORAGE_CHANGED);
-  } else if (pk.property == "archives/current_size") {
+  } else if (pk.property == ParsedKey::ArchivedSize) {
     SET_RAMENVALUE(VI64, numArcBytes, , STORAGE_CHANGED);
-  } else if (pk.property == "archives/alloc_size") {
+  } else if (pk.property == ParsedKey::ArchivedAllocSize) {
     SET_RAMENVALUE(VI64, allocArcBytes, , STORAGE_CHANGED);
-  } else if (pk.property == "pid") {
+  } else if (pk.property == ParsedKey::Pid) {
     /* Worker did not really change, but everything that requires the process
      * list to be invalidated must emit that signal: */
     SET_RAMENVALUE(VU32, pid, , PROPERTY_CHANGED | WORKER_CHANGED);
-  } else if (pk.property == "last_killed") {
+  } else if (pk.property == ParsedKey::LastKilled) {
     SET_RAMENVALUE(VFloat, lastKilled, , PROPERTY_CHANGED | WORKER_CHANGED);
-  } else if (pk.property == "last_exit") {
+  } else if (pk.property == ParsedKey::LastExit) {
     SET_RAMENVALUE(VFloat, lastExit, , PROPERTY_CHANGED | WORKER_CHANGED);
-  } else if (pk.property == "last_exit_status") {
+  } else if (pk.property == ParsedKey::LastExitStatus) {
     SET_RAMENVALUE(VString, lastExitStatus, QString::fromStdString,
                    PROPERTY_CHANGED | WORKER_CHANGED);
-  } else if (pk.property == "successive_failures") {
+  } else if (pk.property == ParsedKey::SuccessiveFailures) {
     SET_RAMENVALUE(VI64, successiveFailures, , PROPERTY_CHANGED);
-  } else if (pk.property == "quarantine_until") {
+  } else if (pk.property == ParsedKey::QuarantineUntil) {
     SET_RAMENVALUE(VFloat, quarantineUntil, , PROPERTY_CHANGED);
   } else {
-    if (verbose) qDebug() << "Useless property" << pk.property;
+    if (verbose) qDebug() << "Useless property";
   }
 
   if (changed & STORAGE_CHANGED) {
@@ -690,15 +706,13 @@ void GraphModel::setFunctionProperty(
 
 void GraphModel::delFunctionProperty(FunctionItem *functionItem,
                                      ParsedKey const &pk) {
-  if (verbose) qDebug() << "delFunctionProperty for" << pk.property;
-
   int changed{0};
   QString prevWorkerSign;
 
   std::shared_ptr<Function> function{
       std::static_pointer_cast<Function>(functionItem->shared)};
 
-  if (pk.property == "worker") {
+  if (pk.property == ParsedKey::Worker) {
     if (function->worker) {
       /* As we have connected this function to its parents (not
        * treeParents!) when the worker was received, disconnect it now: */
@@ -712,17 +726,17 @@ void GraphModel::delFunctionProperty(FunctionItem *functionItem,
       function->worker.reset();
       changed |= WORKER_CHANGED;
     }
-  } else if (pk.property == "stats/runtime") {
+  } else if (pk.property == ParsedKey::RuntimeStats) {
     if (function->runtimeStats) {
       function->runtimeStats.reset();
       changed |= PROPERTY_CHANGED;
     }
-  } else if (pk.property == "archives/times") {
+  } else if (pk.property == ParsedKey::ArchivedTimes) {
     if (function->archivedTimes) {
       function->archivedTimes.reset();
       changed |= STORAGE_CHANGED;
     }
-  } else if (pk.property == "archives/num_files") {
+  } else if (pk.property == ParsedKey::ArchivedFiles) {
 #define DEL_RAMENVALUE(var, whatChanged) \
   do {                                   \
     if (function->var.has_value()) {     \
@@ -732,25 +746,25 @@ void GraphModel::delFunctionProperty(FunctionItem *functionItem,
   } while (0)
 
     DEL_RAMENVALUE(numArcFiles, STORAGE_CHANGED);
-  } else if (pk.property == "archives/current_size") {
+  } else if (pk.property == ParsedKey::ArchivedSize) {
     DEL_RAMENVALUE(numArcBytes, STORAGE_CHANGED);
-  } else if (pk.property == "archives/alloc_size") {
+  } else if (pk.property == ParsedKey::ArchivedAllocSize) {
     DEL_RAMENVALUE(allocArcBytes, STORAGE_CHANGED);
   } else {
     if (!pk.instanceSignature.isEmpty() &&
         function->instanceSignature.has_value() &&
         pk.instanceSignature == function->instanceSignature) {
-      if (pk.property == "pid") {
+      if (pk.property == ParsedKey::Pid) {
         DEL_RAMENVALUE(pid, PROPERTY_CHANGED);
-      } else if (pk.property == "last_killed") {
+      } else if (pk.property == ParsedKey::LastKilled) {
         DEL_RAMENVALUE(lastKilled, PROPERTY_CHANGED);
-      } else if (pk.property == "last_exit") {
+      } else if (pk.property == ParsedKey::LastExit) {
         DEL_RAMENVALUE(lastExit, PROPERTY_CHANGED);
-      } else if (pk.property == "last_exit_status") {
+      } else if (pk.property == ParsedKey::LastExitStatus) {
         DEL_RAMENVALUE(lastExitStatus, PROPERTY_CHANGED);
-      } else if (pk.property == "successive_failures") {
+      } else if (pk.property == ParsedKey::SuccessiveFailures) {
         DEL_RAMENVALUE(successiveFailures, PROPERTY_CHANGED);
-      } else if (pk.property == "quarantine_until") {
+      } else if (pk.property == ParsedKey::QuarantineUntil) {
         DEL_RAMENVALUE(quarantineUntil, PROPERTY_CHANGED);
       }
     }
@@ -782,7 +796,7 @@ void GraphModel::delProgramProperty(ProgramItem *, ParsedKey const &) {}
 void GraphModel::setSiteProperty(
     SiteItem *siteItem, ParsedKey const &pk,
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
-  if (pk.property == "is_master") {
+  if (pk.property == ParsedKey::IsMaster) {
     if (v->index() == dessser::gen::sync_value::RamenValue) {
       std::shared_ptr<dessser::gen::raql_value::t const> rv{
           std::get<dessser::gen::sync_value::RamenValue>(*v)};
@@ -801,7 +815,7 @@ void GraphModel::setSiteProperty(
 }
 
 void GraphModel::delSiteProperty(SiteItem *siteItem, ParsedKey const &pk) {
-  if (pk.property == "is_master") {
+  if (pk.property == ParsedKey::IsMaster) {
     std::shared_ptr<Site> site{
         std::static_pointer_cast<Site>(siteItem->shared)};
 
