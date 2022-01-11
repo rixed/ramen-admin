@@ -9,6 +9,7 @@
 #include <QVBoxLayout>
 #include <QtGlobal>
 
+#include "Menu.h"
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
@@ -22,9 +23,9 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
 
   entrySelector = new QComboBox;
   entryEditor = new TargetConfigEntryEditor(true);
-  noSelectionText =
-      new QLabel(tr("No programs are running.\n"
-                    "Press ⌘ R to run a program."));
+  noSelectionText = new QLabel(tr("No programs are running.\n"
+                                  "Press %1+R to run a program.")
+                                   .arg(Menu::commandKey));
   stackedLayout = new QStackedLayout;
   entryEditorIdx = stackedLayout->addWidget(entryEditor);
   noSelectionIdx = stackedLayout->addWidget(noSelectionText);

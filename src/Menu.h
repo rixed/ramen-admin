@@ -103,6 +103,9 @@ class Menu : public QObject {
   static void openDashboard(std::string const &);
   static ConfClient *getClient();
 
+  /* Which key acts as the command key for shot-cuts: */
+  static QString const commandKey;
+
  public slots:
   void upgradeToFull();  // and show something
 

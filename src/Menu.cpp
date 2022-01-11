@@ -50,6 +50,15 @@ LoginWin *Menu::loginWin;
 LoggerWin *Menu::loggerWin;
 AlertingWin *Menu::alertingWin;
 
+QString const Menu::commandKey{
+/* Assuming compilation time OS == runtime OS: */
+#ifdef __APPLE__
+    "⌘"
+#else
+    "Ctrl"
+#endif
+};
+
 void Menu::initLoginWin(QString const &configDir) {
   if (verbose) qDebug() << "Create LoginWin...";
   if (!loginWin) loginWin = new LoginWin(configDir);
