@@ -163,7 +163,7 @@ void NotifTimeLine::paintEvent(QPaintEvent *event) {
   QPainter painter{this};
 
   /* Paint the background: */
-  std::optional<qreal> prevX{std::nullopt};
+  std::optional<qreal> prevX;
   bool was_selected;
   for (std::pair<double,
                  std::shared_ptr<dessser::gen::alerting_log::t const> > const

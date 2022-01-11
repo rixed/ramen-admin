@@ -60,7 +60,7 @@ setKey(k);
   QString dbgId() const;
 
   bool sameKey(dessser::gen::sync_key::t const &k) const {
-    std::shared_ptr<dessser::gen::sync_key::t const> current{key()};
+    std::shared_ptr<dessser::gen::sync_key::t const> const current{key()};
     return current && k == *current;
   }
 

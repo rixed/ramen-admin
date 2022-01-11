@@ -320,8 +320,8 @@ void TimeChart::paintAxis(Axis const &axis) {
             static double const maxAge{20};
             if (age < 0) continue;
             if (age < maxAge) {
-              bgCol =
-                  blendColor(darkCol, painter.background().color(), age / maxAge);
+              bgCol = blendColor(darkCol, painter.background().color(),
+                                 age / maxAge);
               drawBg = true;
             }
             size_t const num_tuples{replay.tuples.size()};
