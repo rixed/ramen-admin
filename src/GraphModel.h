@@ -145,6 +145,8 @@ class GraphModel : public QAbstractItemModel {
     StatsAverageTupleSize,
     StatsNumAverageTupleSizeSamples,
     ArchivedTimes,
+    OldestArchive,
+    LatestArchive,
     // Stats about event times:
     StatsMinEventTime,
     StatsMaxEventTime,

@@ -239,6 +239,10 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
       return tr("Full Event Size Samples");
     case ArchivedTimes:
       return tr("Archives Duration");
+    case OldestArchive:
+      return tr("Oldest Archive");
+    case LatestArchive:
+      return tr("Latest Archive");
     case WorkerReportPeriod:
       return tr("Report Period");
     case WorkerCWD:
@@ -302,6 +306,8 @@ bool GraphModel::columnIsAboutArchives(Columns c) {
     case NumArcBytes:
     case AllocedArcBytes:
     case ArchivedTimes:
+    case OldestArchive:
+    case LatestArchive:
       return true;
     default:
       return false;

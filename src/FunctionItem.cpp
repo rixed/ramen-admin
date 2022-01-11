@@ -666,6 +666,30 @@ QVariant FunctionItem::data(int column, int role) const {
                                         *shr->archivedTimes))
                                   : na;
 
+    case GraphModel::OldestArchive:
+      if (role == GraphModel::SortRole)
+        return shr->archivedTimes && shr->archivedTimes->size() > 0
+                   ? (qulonglong)(*shr->archivedTimes)[0].since
+                   : (qulonglong)0;
+      else
+        return shr->archivedTimes && shr->archivedTimes->size() > 0
+                   ? stringOfDate((*shr->archivedTimes)[0].since)
+                   : na;
+
+    case GraphModel::LatestArchive:
+      if (role == GraphModel::SortRole)
+        return shr->archivedTimes && shr->archivedTimes->size() > 0
+                   ? (qulonglong)(
+                         *shr->archivedTimes)[shr->archivedTimes->size() - 1]
+                         .until
+                   : (qulonglong)0;
+      else
+        return shr->archivedTimes && shr->archivedTimes->size() > 0
+                   ? stringOfDate(
+                         (*shr->archivedTimes)[shr->archivedTimes->size() - 1]
+                             .until)
+                   : na;
+
     case GraphModel::WorkerReportPeriod:
       if (role == GraphModel::SortRole)
         return shr->worker ? shr->worker->report_period : 0.;
