@@ -3,12 +3,13 @@
 
 #include <QHeaderView>
 #include <QTableView>
+#include <QTimer>
 #include <QVBoxLayout>
 
 #include "alerting/AlertingLogsModel.h"
 
 AlertingJournal::AlertingJournal(AlertingLogsModel *model, QWidget *parent)
-    : QWidget(parent) {
+    : QWidget(parent), wantResize(false) {
   tableView = new QTableView;
   tableView->setSelectionMode(QAbstractItemView::NoSelection);
   tableView->setShowGrid(false);
@@ -25,11 +26,18 @@ AlertingJournal::AlertingJournal(AlertingLogsModel *model, QWidget *parent)
 
   setLayout(layout);
 
+  QTimer *resizeTimer{new QTimer(this)};
+  connect(resizeTimer, &QTimer::timeout, this, &AlertingJournal::resizeColumns);
+  resizeTimer->start(300);  // msec
+
   connect(model, &AlertingLogsModel::rowsInserted, this,
-          &AlertingJournal::resizeColumns);
+          &AlertingJournal::wantResizeColumns);
 }
 
+void AlertingJournal::wantResizeColumns() { wantResize = true; }
+
 void AlertingJournal::resizeColumns() {
-  int const rows{tableView->model()->rowCount()};
-  if (rows < 16 || (rows & 15) == 0) tableView->resizeColumnToContents(0);
+  if (!wantResize) return;
+  wantResize = false;
+  tableView->resizeColumnToContents(0);
 }

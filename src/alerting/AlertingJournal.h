@@ -11,10 +11,16 @@ class AlertingJournal : public QWidget {
 
   QTableView *tableView;
 
+  bool wantResize;
+
  public:
   AlertingJournal(AlertingLogsModel *model, QWidget *parent = nullptr);
 
  private slots:
+  /* Initial synchronization can be slowed down significantly by the
+   * constant addition and resizing of the AlertingJournal therefore a timer
+   * limits the rate of calls to resizeColumns: */
+  void wantResizeColumns();
   void resizeColumns();
 };
 #endif
