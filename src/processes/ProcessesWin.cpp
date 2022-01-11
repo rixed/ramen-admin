@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "processes/ProcessesDialog.h"
+#include "processes/ProcessesWin.h"
 
 #include <QCoreApplication>
 #include <QKeyEvent>
@@ -9,11 +9,11 @@
 #include <QMenuBar>
 #include <QTreeView>
 
-#include "processes/ProcessesDialog.h"
 #include "processes/ProcessesWidget.h"
 #include "processes/ProcessesWidgetProxy.h"
+#include "processes/ProcessesWin.h"
 
-ProcessesDialog::ProcessesDialog(QWidget *parent)
+ProcessesWin::ProcessesWin(QWidget *parent)
     : SavedWindow("ProcessesWindow", tr("Processes List"), true, parent) {
   if (GraphModel::globalGraphModel) {
     processesWidget = new ProcessesWidget(GraphModel::globalGraphModel, this);
@@ -99,7 +99,7 @@ ProcessesDialog::ProcessesDialog(QWidget *parent)
   }
 }
 
-void ProcessesDialog::keyPressEvent(QKeyEvent *event) {
+void ProcessesWin::keyPressEvent(QKeyEvent *event) {
   if (!processesWidget) return;
 
   if (event->key() == Qt::Key_Escape &&

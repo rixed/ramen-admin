@@ -16,7 +16,7 @@ static bool const verbose{false};
 
 ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent)
     : QSortFilterProxyModel(parent),
-      /* Will be set by ProcessesDialog ctor, but avoids manipulation of
+      /* Will be set by ProcessesWin ctor, but avoids manipulation of
        * uninitialized data: */
       includeFinished(false),
       includeUnused(false),

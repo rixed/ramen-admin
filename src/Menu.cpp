@@ -23,7 +23,7 @@
 #include "dashboard/NewDashboardDialog.h"
 #include "dashboard/tools.h"
 #include "misc.h"
-#include "processes/ProcessesDialog.h"
+#include "processes/ProcessesWin.h"
 #include "raw/RawConfWin.h"
 #include "source/NewSourceDialog.h"
 #include "source/SourcesWin.h"
@@ -40,7 +40,7 @@ RawConfWin *Menu::rawConfWin;
 NewSourceDialog *Menu::newSourceDialog;
 NewTargetConfigEntryDialog *Menu::newTargetConfigEntryDialog;
 NewDashboardDialog *Menu::newDashboardDialog;
-ProcessesDialog *Menu::processesDialog;
+ProcessesWin *Menu::processesWin;
 TargetConfigEditorWin *Menu::targetConfigEditorWin;
 NamesTreeWin *Menu::namesTreeWin;
 StorageWin *Menu::storageWin;
@@ -76,8 +76,8 @@ void Menu::initDialogs(QString const &srvUrl) {
     newTargetConfigEntryDialog = new NewTargetConfigEntryDialog;
   if (verbose) qDebug() << "Create NewDashboardDialog...";
   if (!newDashboardDialog) newDashboardDialog = new NewDashboardDialog;
-  if (verbose) qDebug() << "Create ProcessesDialog...";
-  if (!processesDialog) processesDialog = new ProcessesDialog;
+  if (verbose) qDebug() << "Create ProcessesWin...";
+  if (!processesWin) processesWin = new ProcessesWin;
   if (verbose) qDebug() << "Create TargetConfigEditorWin...";
   if (!targetConfigEditorWin) targetConfigEditorWin = new TargetConfigEditorWin;
   if (verbose) qDebug() << "Create NamesTreeWin...";
@@ -98,7 +98,7 @@ void Menu::showSomething() {
   bool someOpened = false;
   someOpened |= sourcesWin->isVisible();
   someOpened |= rawConfWin->isVisible();
-  someOpened |= processesDialog->isVisible();
+  someOpened |= processesWin->isVisible();
   someOpened |= targetConfigEditorWin->isVisible();
   someOpened |= storageWin->isVisible();
 
@@ -114,7 +114,7 @@ void Menu::deleteDialogs() {
   danceOfDelLater<NewSourceDialog>(&newSourceDialog);
   danceOfDelLater<NewTargetConfigEntryDialog>(&newTargetConfigEntryDialog);
   danceOfDelLater<NewDashboardDialog>(&newDashboardDialog);
-  danceOfDelLater<ProcessesDialog>(&processesDialog);
+  danceOfDelLater<ProcessesWin>(&processesWin);
   danceOfDelLater<TargetConfigEditorWin>(&targetConfigEditorWin);
   danceOfDelLater<NamesTreeWin>(&namesTreeWin);
   danceOfDelLater<StorageWin>(&storageWin);
@@ -292,8 +292,8 @@ void Menu::openSourceEditor() { showRaised(sourcesWin); }
 
 void Menu::openProcesses() {
   // If opened too early that window will actually be deleted on close:
-  if (!processesDialog) processesDialog = new ProcessesDialog;
-  showRaised(processesDialog);
+  if (!processesWin) processesWin = new ProcessesWin;
+  showRaised(processesWin);
 }
 
 void Menu::openTargetConfigEditor() { showRaised(targetConfigEditorWin); }

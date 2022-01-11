@@ -21,7 +21,7 @@ class NewDashboardDialog;
 class NewTargetConfigEntryDialog;
 class NewSourceDialog;
 class OperationsWin;
-class ProcessesDialog;
+class ProcessesWin;
 class QMainWindow;
 class QMenuBar;
 class TargetConfigEditorWin;
@@ -67,7 +67,7 @@ class Menu : public QObject {
   static NewSourceDialog *newSourceDialog;
   static NewTargetConfigEntryDialog *newTargetConfigEntryDialog;
   static NewDashboardDialog *newDashboardDialog;
-  static ProcessesDialog *processesDialog;
+  static ProcessesWin *processesWin;
   static TargetConfigEditorWin *targetConfigEditorWin;
   static NamesTreeWin *namesTreeWin;
   static StorageWin *storageWin;
