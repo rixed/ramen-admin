@@ -18,6 +18,8 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
+static bool const verbose{false};
+
 TailModel::TailModel(std::string const &siteName_, std::string const &fqName_,
                      std::string const &workerSign_,
                      std::shared_ptr<dessser::gen::raql_type::t const> type_,
@@ -103,7 +105,7 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
   if (0 == num_tuples) return;
 
   if (verbose)
-    qDebug() << "TailModel::addTuple: received" << num_tuples << " tuples for"
+    qDebug() << "TailModel::addTuple: received" << num_tuples << "tuples for"
              << fqName;
 
   beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + num_tuples - 1);
