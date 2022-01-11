@@ -1,7 +1,7 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include <sodium.h>
 
-#include <QAbstractItemModelTester>
+//#include <QAbstractItemModelTester>
 #include <QAbstractSocket>
 #include <QApplication>
 #include <QCommandLineParser>
@@ -68,10 +68,12 @@ int main(int argc, char *argv[]) {
    * requirements: */
   GraphViewSettings settings;
   GraphModel::globalGraphModel = new GraphModel(settings);
-  auto tester = new QAbstractItemModelTester(
-      GraphModel::globalGraphModel,
-      QAbstractItemModelTester::FailureReportingMode::Fatal);
-  (void)tester;
+  /*
+    auto tester = new QAbstractItemModelTester(
+        GraphModel::globalGraphModel,
+        QAbstractItemModelTester::FailureReportingMode::Fatal);
+    (void)tester;
+  */
 
   DashboardTreeModel::globalDashboardTree = new DashboardTreeModel;
   AlertingLogsModel::globalLogsModel = new AlertingLogsModel;

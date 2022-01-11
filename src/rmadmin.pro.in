@@ -7,7 +7,10 @@ QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.15
 TEMPLATE = app
 TARGET = RmAdmin
 VERSION = @PACKAGE_VERSION@
-QT += core network widgets charts printsupport testlib
+QT += core network widgets charts printsupport
+
+# If checking the globalGraphModel in main.cpp:
+# QT += testlib
 
 # For Windows:
 RC_ICONS = rmadmin.ico
