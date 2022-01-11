@@ -73,6 +73,7 @@ void ReplayRequest::onChange(QList<ConfChange> const &changes) {
     ConfChange const &change{changes.at(i)};
     // React to writes to/deletion of our response-key:
     switch (change.op) {
+      case KeyCreated:
       case KeyChanged:
         receiveValue(*change.key, change.kv);
         break;
