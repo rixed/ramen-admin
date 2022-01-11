@@ -43,13 +43,18 @@ StorageTreeView::StorageTreeView(GraphModel *graphModel,
   // Make sure all new rows are always initially expanded:
   expandAll();
   connect(storageTreeModel, &QAbstractItemModel::rowsInserted, this,
-          &StorageTreeView::expandRows);
+          &StorageTreeView::expandAndResizeRows);
 }
 
-// FIXME: Does not work for some reason:
-void StorageTreeView::expandRows(QModelIndex const &parent, int first,
-                                 int last) {
+void StorageTreeView::expandAndResizeRows(QModelIndex const &parent, int first,
+                                          int last) {
   expandAllFromParent(this, parent, first, last);
+
+  for (unsigned c = 0; c < GraphModel::NumColumns; c++) {
+    if (GraphModel::columnIsAboutArchives((GraphModel::Columns)c)) {
+      resizeColumnToContents(c);
+    }
+  }
 }
 
 void StorageTreeView::mayInvalidateModel() {

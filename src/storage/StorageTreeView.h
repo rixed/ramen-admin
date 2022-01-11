@@ -17,7 +17,7 @@ class StorageTreeView : public QTreeView {
   StorageTreeView(GraphModel *, StorageTreeModel *, QWidget *parent = nullptr);
 
  protected slots:
-  void expandRows(const QModelIndex &, int, int);
+  void expandAndResizeRows(const QModelIndex &, int, int);
   void mayInvalidateModel();
   void doInvalidateModel();
 };
