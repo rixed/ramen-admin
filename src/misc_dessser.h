@@ -10,6 +10,9 @@
 #include <string>
 #include <utility>
 
+// Has to be included because uses a typedef for t:
+#include "desssergen/time_range.h"
+
 namespace dessser {
 namespace gen {
 namespace alerting_log {
@@ -143,6 +146,8 @@ QString syncValToQString(
     std::shared_ptr<dessser::gen::sync_key::t const> = nullptr);
 
 QString syncKeyToQString(dessser::gen::sync_key::t const &);
+
+double durationOfArchivedTimes(dessser::gen::time_range::t const &);
 
 /* Debug printer for some dessser generated types: */
 

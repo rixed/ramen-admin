@@ -658,10 +658,12 @@ QVariant FunctionItem::data(int column, int role) const {
 
     case GraphModel::ArchivedTimes:
       if (role == GraphModel::SortRole)
-        return shr->archivedTimes ? (qulonglong)shr->archivedTimes->size()
-                                  : (qulonglong)0;
+        return shr->archivedTimes
+                   ? (qulonglong)durationOfArchivedTimes(*shr->archivedTimes)
+                   : (qulonglong)0;
       else
-        return shr->archivedTimes ? stringOfDuration(shr->archivedTimes->size())
+        return shr->archivedTimes ? stringOfDuration(durationOfArchivedTimes(
+                                        *shr->archivedTimes))
                                   : na;
 
     case GraphModel::WorkerReportPeriod:

@@ -1,4 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
+#include <cmath>
 #include <cstring>
 #include <memory>
 #include <sstream>
@@ -19,6 +20,7 @@ extern "C" {
 #include "desssergen/sync_client_msg.h"
 #include "desssergen/sync_msg.h"
 #include "desssergen/sync_server_msg.h"
+#include "desssergen/time_range.h"
 #include "misc.h"
 #include "misc_dessser.h"
 
@@ -685,6 +687,15 @@ QString syncKeyToQString(dessser::gen::sync_key::t const &k) {
   std::ostringstream s;
   s << k;
   return QString::fromStdString(s.str());
+}
+
+double durationOfArchivedTimes(dessser::gen::time_range::t const &rs) {
+  using namespace dessser::gen::time_range;
+  double d{0};
+  for (auto const &r : rs) {
+    d += std::abs(r.until - r.since);
+  }
+  return d;
 }
 
 /* Generic qDebug printer using stringstream: */
