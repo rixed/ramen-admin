@@ -32,18 +32,25 @@ AlertingLogsModel::AlertingLogsModel(QObject *parent)
   connect(kvs.get(), &KVStore::keyChanged, this, &AlertingLogsModel::onChange);
 }
 
+AlertingLogsModel::~AlertingLogsModel() {
+  for (Log const *l : journal) delete l;
+}
+
 void AlertingLogsModel::addLog(
     std::string const &incidentId, double time,
     std::shared_ptr<dessser::gen::alerting_log::t const> log) {
-  /* Insert it into the journal (most of the time, will be merely appended): */
-  size_t i;
-  for (i = 0; i < journal.size(); i++) {
-    if (journal[i].time < time) break;
+  /* Insert it into the journal (most of the time, will be merely appended,
+   * so start looking from the end): */
+  size_t i{journal.size()};
+  while (i--) {
+    if (journal[i]->time < time) break;
   }
+  i++;
   // Insert at position i:
   beginInsertRows(QModelIndex(), i, i);
-  std::vector<AlertingLogsModel::Log>::const_iterator it{journal.cbegin() + i};
-  journal.emplace(it, incidentId, time, log);
+  std::vector<AlertingLogsModel::Log const *>::const_iterator it{
+      journal.cbegin() + i};
+  journal.insert(it, new Log{incidentId, time, log});
   endInsertRows();
 
   if (verbose)
@@ -147,9 +154,9 @@ QVariant AlertingLogsModel::data(QModelIndex const &index, int role) const {
 
   switch (static_cast<AlertingLogsModel::Columns>(index.column())) {
     case AlertingLogsModel::Time:
-      return journal[row].timeStr;
+      return journal[row]->timeStr;
     case AlertingLogsModel::Text:
-      return alertingLogToQString(*journal[row].log);
+      return alertingLogToQString(*journal[row]->log);
     default:
       return QVariant();
   }

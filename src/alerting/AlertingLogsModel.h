@@ -41,7 +41,10 @@ class AlertingLogsModel : public QAbstractTableModel {
           timeStr(stringOfDate(time_)) {}
   };
 
-  std::vector<Log> journal;
+  /* We want quick indexed array, but also quick random insertion during the
+   * initial synchronization, thus a vector of pointers (since Log is large
+   * enough than moving them around for sorting can be slow) */
+  std::vector<Log const *> journal;
 
   void addLog(std::string const &, double,
               std::shared_ptr<dessser::gen::alerting_log::t const>);
@@ -50,6 +53,8 @@ class AlertingLogsModel : public QAbstractTableModel {
   enum Columns { Time, Text, NUM_COLUMNS };
 
   AlertingLogsModel(QObject *parent = nullptr);
+
+  ~AlertingLogsModel();
 
   int rowCount(QModelIndex const &) const override;
 
