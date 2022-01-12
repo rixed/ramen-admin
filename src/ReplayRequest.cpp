@@ -161,10 +161,9 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key,
         continue;
       }
 
-      if (verbose) {
-        qDebug() << "ReplayRequest: received" << *tuple->values;
-        qDebug() << "EventTime:" << *eventTime;
-      }
+      if (verbose)
+        qDebug() << "ReplayRequest: received" << *tuple->values
+                 << ", eventTime:" << *eventTime;
 
       if (*start >= since && *start <= until) {
         tuples.insert(std::make_pair(*start, tuple->values));

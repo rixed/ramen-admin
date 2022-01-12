@@ -362,7 +362,8 @@ void TimeChart::paintAxis(Axis const &axis) {
           qreal const gauge_line_width{2.};
           painter.setPen(QPen{QBrush{darkCol}, gauge_line_width});
           painter.setBrush(Qt::NoBrush);
-          painter.drawRect(-height() + gauge_line_width, x1 + bbox.height() * 1.5,
+          painter.drawRect(-height() + gauge_line_width,
+                           x1 + bbox.height() * 1.5,
                            height() - gauge_line_width * 2, gauge_height);
           painter.setBrush(QBrush{darkCol});
           painter.drawRect(-height() + gauge_line_width * 3,

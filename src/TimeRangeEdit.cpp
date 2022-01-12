@@ -19,7 +19,7 @@
 static bool const verbose{false};
 
 TimeRangeEdit::TimeRangeEdit(QWidget *parent)
-    : QPushButton(tr("Last XXX seconds (TODO)"), parent),
+    : QPushButton(parent),  // label set by updateLabel
       range(true, -600., 0.) {
   selectLastSeconds = new QRadioButton(tr("last…"));
   selectLastSeconds->setChecked(true);

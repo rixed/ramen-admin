@@ -59,6 +59,9 @@ bool PastData::merge(ReplayRequest &r, ReplayRequest *next, double since,
       until < r.since - minGapBetweenReplays)
     return false;
 
+  // Avoid spamming qDebug if since..until are comprised in r.since..r.until:
+  if (since >= r.since && until <= r.until) return true;
+
   /* Extending on the left is always possible since there can be no
    * other requests in between since and r.since: */
   if (since < r.since) r.since = since;
