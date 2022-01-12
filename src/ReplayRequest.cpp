@@ -100,6 +100,12 @@ void ReplayRequest::sendRequest() {
   Q_ASSERT(status == ReplayRequest::Waiting);
   status = Sent;
 
+  /* Create the response key since its deletion signals the end of the results.
+   * When everything is fine the worker would create it, but the replayer
+   * service might decide that it's not even worth a replayer and delete it
+   * itself. */
+  Menu::getClient()->sendNew(respKey);
+
   std::shared_ptr<dessser::gen::sync_value::t const> val{
       makeReplayRequest(site, program, function, since, until, respKey)};
 
