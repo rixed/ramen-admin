@@ -191,9 +191,6 @@ class TimeChart : public AbstractTimeLine {
   /* Focus this field and redraw it: */
   void redrawField(std::string const &site, std::string const &program,
                    std::string const &function, std::string const &field);
-
- signals:
-  void newTailTime(double);
 };
 
 #endif

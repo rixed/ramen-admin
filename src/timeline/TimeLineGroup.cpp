@@ -2,6 +2,7 @@
 #include "timeline/TimeLineGroup.h"
 
 #include <QDebug>
+#include <QTimer>
 #include <limits>
 
 #include "TimeRange.h"
@@ -18,6 +19,14 @@ TimeLineGroup::TimeLineGroup(QObject *parent)
       largestViewPort(QPair<qreal, qreal>(std::numeric_limits<qreal>::max(),
                                           std::numeric_limits<qreal>::min())) {
   items.reserve(20);
+
+  /* First connect a 1sec timer to a slot in this TimeLineGroup, that will then
+   * emit a signal with the desired offset, to which all items will be
+   * connected. */
+  relativeRangeTimer = new QTimer(this);
+  connect(relativeRangeTimer, &QTimer::timeout, this,
+          &TimeLineGroup::mayOffsetItems);
+  relativeRangeTimer->start(1000);
 }
 
 void TimeLineGroup::add(AbstractTimeLine *w) {
@@ -73,6 +82,9 @@ void TimeLineGroup::add(AbstractTimeLine *w) {
     }
   }
 
+  // Finally, connect this new item to our offsetItems signal:
+  connect(this, &TimeLineGroup::offsetItems, w, &AbstractTimeLine::offset);
+
   items.append(w);
   connect(w, &AbstractTimeLine::destroyed, this, &TimeLineGroup::remove);
 }
@@ -111,11 +123,24 @@ void TimeLineGroup::setEndOfTimes(qreal t) const {
   }
 }
 
-void TimeLineGroup::setTimeRange(TimeRange const &range) const {
+void TimeLineGroup::setTimeRange(TimeRange const &range) {
   if (verbose) qDebug() << "TimeLineGroup::setTimeRange to" << range;
 
   for (AbstractTimeLine *w : items) {
     if (w == sender()) continue;
     w->setTimeRange(range);
   }
+
+  if (range.relative) {
+    relativeRangeEnd = getTime() + range.until;
+  } else {
+    relativeRangeEnd = std::nullopt;
+  }
+}
+
+void TimeLineGroup::mayOffsetItems() {
+  if (!relativeRangeEnd) return;
+  double const now{getTime()};
+  emit offsetItems(now - *relativeRangeEnd);
+  relativeRangeEnd = now;
 }

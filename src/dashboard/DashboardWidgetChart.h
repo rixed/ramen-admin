@@ -44,7 +44,6 @@ class DashboardWidgetChart : public AtomicWidget {
  signals:
   // Re-emitted from the controlling TimeRangeEditor:
   void timeRangeChanged(TimeRange const &);
-  void newTailTime(double);
 };
 
 #endif

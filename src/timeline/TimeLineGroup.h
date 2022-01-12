@@ -9,9 +9,11 @@
 #include <QObject>
 #include <QPair>
 #include <QVector>
+#include <optional>
 
 class AbstractTimeLine;
 struct TimeRange;
+class QTimer;
 
 class TimeLineGroup : public QObject {
   Q_OBJECT
@@ -19,6 +21,12 @@ class TimeLineGroup : public QObject {
   QVector<AbstractTimeLine *> items;
   qreal minBeginOfTime, maxEndOfTime;
   QPair<qreal, qreal> largestViewPort;
+
+  /* The TimeLineGroup will track current time whenever the time range is set to
+   * a relative time, signaling all its items (using their `offset` slot) every
+   * seconds: */
+  std::optional<double> relativeRangeEnd;
+  QTimer *relativeRangeTimer;
 
  public:
   TimeLineGroup(QObject *parent = nullptr);
@@ -32,10 +40,14 @@ class TimeLineGroup : public QObject {
   void setCurrentTimes(qreal) const;
   void setBeginOfTimes(qreal) const;
   void setEndOfTimes(qreal) const;
+  void mayOffsetItems();
 
  public slots:
   // Typically connected to a TimeRangeEditor:
-  void setTimeRange(TimeRange const &) const;
+  void setTimeRange(TimeRange const &);
+
+ signals:
+  void offsetItems(double dt);
 };
 
 #endif

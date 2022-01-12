@@ -14,6 +14,8 @@
 #include <QStackedLayout>
 #include <QVBoxLayout>
 
+#include "misc.h"
+
 static bool const verbose{false};
 
 TimeRangeEdit::TimeRangeEdit(QWidget *parent)
@@ -112,10 +114,11 @@ void TimeRangeEdit::updateEnabled() {
 }
 
 void TimeRangeEdit::offset(double dt) {
-  if (!range.relative) {
-    range.since += dt;
-    range.until += dt;
-  }
+  if (verbose)
+    qDebug() << "TimeRangeEdit::offset(" << stringOfDuration(dt) << ")";
+
+  range.since += dt;
+  range.until += dt;
 
   emit valueChanged(range);
 }

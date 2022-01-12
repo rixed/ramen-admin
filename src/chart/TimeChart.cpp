@@ -584,13 +584,7 @@ void TimeChart::paintEvent(QPaintEvent *event) {
             tailModel = func->getOrCreateTail();
             if (tailModel) {
               connect(tailModel.get(), &TailModel::rowsInserted, this,
-                      [this, tailModel]() {
-                        // Signal the new front time
-                        double const t{tailModel->maxEventTime()};
-                        if (!std::isnan(t)) emit newTailTime(t);
-                        // Redraw the chart
-                        update();
-                      });
+                      qOverload<>(&QWidget::update));
             } else {
               qCritical().nospace()
                   << "TimeChart: Cannot get tail for function "

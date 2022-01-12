@@ -23,8 +23,6 @@ DashboardWidgetChart::DashboardWidgetChart(DashboardWidgetForm *widgetForm,
 
   connect(this, &DashboardWidgetChart::timeRangeChanged, chart,
           &TimeChartEditor::timeRangeChanged);
-  connect(chart, &TimeChartEditor::newTailTime, this,
-          &DashboardWidgetChart::newTailTime);
 
   /* Open/close the editor when the AtomicForm is enabled/disabled: */
   if (widgetForm) {

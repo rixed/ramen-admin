@@ -67,9 +67,6 @@ class Dashboard : public QWidget {
 
   void delWidget(uint32_t);
 
- public slots:
-  void setTailTime(double);
-
  protected slots:
   void onChange(QList<ConfChange> const &);
 

@@ -21,12 +21,8 @@
 struct TimeRange;
 
 class AbstractTimeLine : public QWidget {
-  /* FIXME: Make this work with relative times.
-   * 1. Use a TimeRange instead of begin/end of time as qreal
-   * 2. In paintEvent, update the endOfTime/viewPort if timeRange.relative.
-   */
-
   Q_OBJECT
+
   Q_PROPERTY(qreal beginOfTime READ beginOfTime WRITE setBeginOfTime NOTIFY
                  beginOfTimeChanged)
   Q_PROPERTY(
@@ -118,6 +114,10 @@ class AbstractTimeLine : public QWidget {
    * On reception of that signal the zoom is reset so that the full new
    * time range is visible, though. */
   void setTimeRange(TimeRange const &);
+
+  /* Move the time range while keeping the viewport as it was unless it's
+   * tracking the beginning of end of the time window: */
+  void offset(double dt);
 
  signals:
   void beginOfTimeChanged(qreal);

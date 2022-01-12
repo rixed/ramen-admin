@@ -86,10 +86,8 @@ bool DashboardWidget::setValue(
 
         if (dashboard) {
           connect(dashboard->timeRangeEdit, &TimeRangeEdit::valueChanged,
-                  widgetChart, &DashboardWidgetChart::timeRangeChanged);
+                  widgetChart, &DashboardWidgetChart::setTimeRange);
           widgetChart->setTimeRange(dashboard->timeRangeEdit->range);
-          connect(widgetChart, &DashboardWidgetChart::newTailTime, dashboard,
-                  &Dashboard::setTailTime);
         }
       }
       newCurrent = widgetChart;

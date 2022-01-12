@@ -26,7 +26,6 @@ TimeChartEditor::TimeChartEditor(QPushButton *submitButton,
   /* Make closing the window the same as cancel */
 
   chart = new TimeChart(editWidget, this);
-  connect(chart, &TimeChart::newTailTime, this, &TimeChartEditor::newTailTime);
 
   timeLine = new TimeLine(0., 600., TimeLine::TicksTop);
   timeLine->setMinimumHeight(minTimeLineHeight);

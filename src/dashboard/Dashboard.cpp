@@ -181,16 +181,6 @@ void Dashboard::delValue(std::shared_ptr<dessser::gen::sync_key::t const> key,
   delWidget(*idx);
 }
 
-void Dashboard::setTailTime(double t) {
-  /* If the time range editor is relative (last ...) and this time is greater
-   * than now, then advance the time range: */
-  if (!timeRangeEdit->range.relative) return;
-  double const now(getTime());
-  if (t <= now) return;
-
-  timeRangeEdit->offset(t - now);
-}
-
 void Dashboard::addCurrentFunction() {
   FunctionItem *f{functionSelector->getCurrent()};
   if (!f) {

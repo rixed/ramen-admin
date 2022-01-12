@@ -269,57 +269,56 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event) {
  */
 
 void AbstractTimeLine::setBeginOfTime(qreal t) {
-  if (m_beginOfTime != t) {
-    if (verbose)
-      qDebug() << "AbstractTimeLine: setBeginOfTime" << stringOfDate(t);
+  if (m_beginOfTime == t) return;
 
-    // If we were looking at the end, keep tracking
-    bool const trackEnd{m_viewPort.second >= m_endOfTime};
+  if (verbose)
+    qDebug() << "AbstractTimeLine: setBeginOfTime" << stringOfDate(t);
 
-    if (m_endOfTime <= t) m_endOfTime += t - m_beginOfTime;
+  // If we were looking at the end, keep tracking
+  bool const trackEnd{m_viewPort.second >= m_endOfTime};
 
-    m_beginOfTime = t;
-    if (m_viewPort.first < t) {
-      m_viewPort.second = std::min<qreal>(
-          m_endOfTime, m_viewPort.second + (t - m_viewPort.first));
-      m_viewPort.first = t;
-    }
+  if (m_endOfTime <= t) m_endOfTime += t - m_beginOfTime;
 
-    if (trackEnd) {
-      double const dt{m_endOfTime - m_viewPort.second};
-      m_viewPort.first += dt;
-      m_viewPort.second += dt;
-    }
-
-    update();
+  m_beginOfTime = t;
+  if (m_viewPort.first < t) {
+    m_viewPort.second = std::min<qreal>(
+        m_endOfTime, m_viewPort.second + (t - m_viewPort.first));
+    m_viewPort.first = t;
   }
+
+  if (trackEnd) {
+    double const dt{m_endOfTime - m_viewPort.second};
+    m_viewPort.first += dt;
+    m_viewPort.second += dt;
+  }
+
+  update();
 }
 
 void AbstractTimeLine::setEndOfTime(qreal t) {
-  if (m_endOfTime != t) {
-    if (verbose)
-      qDebug() << "AbstractTimeLine: setEndOfTime" << stringOfDate(t);
+  if (m_endOfTime == t) return;
 
-    // If we were looking at the end, keep tracking
-    bool const trackEnd{m_viewPort.second >= m_endOfTime};
+  if (verbose) qDebug() << "AbstractTimeLine: setEndOfTime" << stringOfDate(t);
 
-    if (m_beginOfTime >= t) m_beginOfTime -= m_endOfTime - t;
+  // If we were looking at the end, keep tracking
+  bool const trackEnd{m_viewPort.second >= m_endOfTime};
 
-    m_endOfTime = t;
-    if (m_viewPort.second > t) {
-      m_viewPort.first = std::max<qreal>(
-          m_beginOfTime, m_viewPort.first - (m_viewPort.second - t));
-      m_viewPort.second = t;
-    }
+  if (m_beginOfTime >= t) m_beginOfTime -= m_endOfTime - t;
 
-    if (trackEnd) {
-      double const dt{m_endOfTime - m_viewPort.second};
-      m_viewPort.first += dt;
-      m_viewPort.second += dt;
-    }
-
-    update();
+  m_endOfTime = t;
+  if (m_viewPort.second > t) {
+    m_viewPort.first = std::max<qreal>(
+        m_beginOfTime, m_viewPort.first - (m_viewPort.second - t));
+    m_viewPort.second = t;
   }
+
+  if (trackEnd) {
+    double const dt{m_endOfTime - m_viewPort.second};
+    m_viewPort.first += dt;
+    m_viewPort.second += dt;
+  }
+
+  update();
 }
 
 void AbstractTimeLine::setCurrentTime(qreal t) {
@@ -395,6 +394,10 @@ QPair<qreal, qreal> AbstractTimeLine::noSelection(0, 0);
 
 void AbstractTimeLine::clearSelection() { m_selection = noSelection; }
 
+/* This is called when the time range selector is changed by the user.
+ * If the range is relative though our controlling TimeLineGroup will use
+ * a 1sec timer to offset the begin and end of time (while keeping the viewport
+ * steady as long as possible). */
 void AbstractTimeLine::setTimeRange(TimeRange const &range) {
   double since, until;
   range.absRange(&since, &until);
@@ -405,6 +408,12 @@ void AbstractTimeLine::setTimeRange(TimeRange const &range) {
   setEndOfTime(until);
   // Also reset the zoom
   setViewPort(QPair<qreal, qreal>{since, until});
+}
+
+void AbstractTimeLine::offset(double dt) {
+  setBeginOfTime(m_beginOfTime + dt);
+  setEndOfTime(m_endOfTime + dt);
+  setCurrentTime(m_currentTime + dt);
 }
 
 void AbstractTimeLine::highlightRange(QPair<qreal, qreal> const range) {

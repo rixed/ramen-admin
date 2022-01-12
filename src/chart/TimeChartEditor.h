@@ -33,7 +33,6 @@ class TimeChartEditor : public QWidget {
  signals:
   // Re-emitted (after a few bounces) from the controlling TimeRangeEditor
   void timeRangeChanged(TimeRange const &);
-  void newTailTime(double);
 };
 
 #endif
