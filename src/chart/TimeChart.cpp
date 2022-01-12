@@ -570,8 +570,9 @@ void TimeChart::paintEvent(QPaintEvent *event) {
           // Redisplay on new arrivals:
           std::shared_ptr<PastData> past{func->getPast()};
           if (past) {
+            // Trust Qt to return quickly if it's already connected
             connect(past.get(), &PastData::tupleReceived, this,
-                    [this]() { update(); });
+                    qOverload<>(&QWidget::update), Qt::UniqueConnection);
           }
 
           auto emplaced{funcs.emplace(funcFq, func)};
