@@ -243,6 +243,10 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
       return tr("Oldest Archive");
     case LatestArchive:
       return tr("Latest Archive");
+    case TupleRateSinceOrigin:
+      return tr("Tuple Rate since Origin");
+    case ArchivedTupleRate:
+      return tr("Tuple Rate in Archives");
     case WorkerReportPeriod:
       return tr("Report Period");
     case WorkerCWD:
@@ -308,6 +312,10 @@ bool GraphModel::columnIsAboutArchives(Columns c) {
     case ArchivedTimes:
     case OldestArchive:
     case LatestArchive:
+    case StatsAverageTupleSize:
+    case StatsNumAverageTupleSizeSamples:
+    case TupleRateSinceOrigin:
+    case ArchivedTupleRate:
       return true;
     default:
       return false;

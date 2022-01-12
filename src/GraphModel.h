@@ -142,11 +142,13 @@ class GraphModel : public QAbstractItemModel {
     NumArcFiles,
     NumArcBytes,
     AllocedArcBytes,
-    StatsAverageTupleSize,
-    StatsNumAverageTupleSizeSamples,
     ArchivedTimes,
     OldestArchive,
     LatestArchive,
+    TupleRateSinceOrigin,  // As used in the archivist
+    ArchivedTupleRate,     // As should maybe be used instead after a while
+    StatsAverageTupleSize,
+    StatsNumAverageTupleSizeSamples,
     // Stats about event times:
     StatsMinEventTime,
     StatsMaxEventTime,

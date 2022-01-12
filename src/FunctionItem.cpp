@@ -676,19 +676,51 @@ QVariant FunctionItem::data(int column, int role) const {
                    ? stringOfDate((*shr->archivedTimes)[0].since)
                    : na;
 
-    case GraphModel::LatestArchive:
+    case GraphModel::LatestArchive: {
+      bool const has_archives{shr->archivedTimes &&
+                              shr->archivedTimes->size() > 0};
       if (role == GraphModel::SortRole)
-        return shr->archivedTimes && shr->archivedTimes->size() > 0
+        return has_archives
                    ? (qulonglong)(
                          *shr->archivedTimes)[shr->archivedTimes->size() - 1]
                          .until
                    : (qulonglong)0;
       else
-        return shr->archivedTimes && shr->archivedTimes->size() > 0
+        return has_archives
                    ? stringOfDate(
                          (*shr->archivedTimes)[shr->archivedTimes->size() - 1]
                              .until)
                    : na;
+    }
+
+    case GraphModel::TupleRateSinceOrigin:
+      if (shr->runtimeStats && shr->runtimeStats->max_etime &&
+          shr->runtimeStats->min_etime &&
+          shr->runtimeStats->max_etime > shr->runtimeStats->min_etime) {
+        double const rate{
+            shr->runtimeStats->tot_out_tuples /
+            (*shr->runtimeStats->max_etime - *shr->runtimeStats->min_etime)};
+        return rate;
+      } else {
+        return 0.;
+      }
+
+    case GraphModel::ArchivedTupleRate:
+      /* Since we have no data about the number of archived tuples, deduce it
+       * from the total size and average tuple size: */
+      if (shr->numArcBytes && shr->runtimeStats &&
+          shr->runtimeStats->tot_full_bytes_samples > 0 &&
+          shr->runtimeStats->tot_full_bytes > 0 && shr->archivedTimes &&
+          shr->archivedTimes->size() > 0) {
+        double const num_tuples{*shr->numArcBytes /
+                                ((double)shr->runtimeStats->tot_full_bytes /
+                                 shr->runtimeStats->tot_full_bytes_samples)};
+        double const rate{num_tuples /
+                          durationOfArchivedTimes(*shr->archivedTimes)};
+        return rate;
+      } else {
+        return 0.;
+      }
 
     case GraphModel::WorkerReportPeriod:
       if (role == GraphModel::SortRole)
