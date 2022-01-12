@@ -182,11 +182,11 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
     case StatsTime:
       return tr("Stats Emission");
     case StatsNumInputs:
-      return tr("Inputs Events");
+      return tr("Inputs Tuples");
     case StatsNumSelected:
-      return tr("Selected Events");
+      return tr("Selected Tuples");
     case StatsNumFiltered:
-      return tr("Filtered Events");
+      return tr("Filtered Tuples");
     case StatsTotWaitIn:
       return tr("Waiting for Input");
     case StatsTotInputBytes:
@@ -200,7 +200,7 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
     case StatsMaxGroups:
       return tr("Groups (max)");
     case StatsNumOutputs:
-      return tr("Output Events");
+      return tr("Output Tuples");
     case StatsTotWaitOut:
       return tr("Waiting for Output");
     case StatsFirstOutput:
@@ -234,9 +234,9 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
     case StatsLastStartup:
       return tr("Last Startup");
     case StatsAverageTupleSize:
-      return tr("Avg Bytes per Archived Event");
+      return tr("Avg Size of Archived Tuple");
     case StatsNumAverageTupleSizeSamples:
-      return tr("Full Event Size Samples");
+      return tr("Full Tuple Size Samples");
     case ArchivedTimes:
       return tr("Archives Duration");
     case OldestArchive:
@@ -278,7 +278,7 @@ QString const GraphModel::columnName(GraphModel::Columns c) {
     case WorkerBinSignature:
       return tr("Binary Signature");
     case NumTailTuples:
-      return tr("Received Tail Events");
+      return tr("Received Tail Tuples");
     case NumColumns:
       break;
   }
