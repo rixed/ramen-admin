@@ -359,10 +359,10 @@ void TimeChart::paintAxis(Axis const &axis) {
         painter.drawText(-height(), x1 + bbox.height(), status);
         if (gauge) {
           qreal const gauge_height{0.7 * bbox.height()};
-          qreal const gauge_line_width{3.};
+          qreal const gauge_line_width{2.};
           painter.setPen(QPen{QBrush{darkCol}, gauge_line_width});
           painter.setBrush(Qt::NoBrush);
-          painter.drawRect(-height() + gauge_line_width, x1 + bbox.height() * 2,
+          painter.drawRect(-height() + gauge_line_width, x1 + bbox.height() * 1.5,
                            height() - gauge_line_width * 2, gauge_height);
           painter.setBrush(QBrush{darkCol});
           painter.drawRect(-height() + gauge_line_width * 3,
