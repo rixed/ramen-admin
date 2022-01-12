@@ -74,6 +74,7 @@ class AbstractTimeLine : public QWidget {
                    bool doScroll = false, QWidget *parent = nullptr);
 
   static QColor const cursorColor;
+  static QColor const highlightColor;
 
   QSize sizeHint() const override { return QSize(250, 20); }
 

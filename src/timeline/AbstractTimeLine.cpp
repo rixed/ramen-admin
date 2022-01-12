@@ -21,6 +21,7 @@
 static bool const verbose{false};
 
 QColor const AbstractTimeLine::cursorColor{"orange"};
+QColor const AbstractTimeLine::highlightColor{"orange"};
 
 AbstractTimeLine::AbstractTimeLine(qreal beginOftime, qreal endOfTime,
                                    bool withCursor, bool doScroll,
@@ -243,7 +244,6 @@ void AbstractTimeLine::paintEvent(QPaintEvent *event) {
 
   QPainter painter{this};
 
-  static QColor const highlightColor{255, 255, 255, 125};
   painter.setPen(Qt::NoPen);
   painter.setBrush(highlightColor);
   for (QPair<qreal, qreal> const &range : qAsConst(highlights)) {
