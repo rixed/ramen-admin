@@ -8,24 +8,24 @@
 #undef major  // Helps compilation with some older GNU libc
 
 // v is assumed > 0
-inline qreal sameSign(qreal s, qreal v) { return s >= 0 ? v : -v; }
+inline double sameSign(double s, double v) { return s >= 0 ? v : -v; }
 
-inline qreal logOfBase(int base, qreal x) {
+inline double logOfBase(int base, double x) {
   return sameSign(x, std::log(std::abs(x) + 1) / std::log(base));
 }
 
 struct Tick {
-  qreal pos;
+  double pos;  // in value not pixels
   bool major;
   QString label;
 
-  Tick(qreal p, bool m, QString const &l) : pos(p), major(m), label(l) {}
+  Tick(double p, bool m, QString const &l) : pos(p), major(m), label(l) {}
 };
 
 struct Ticks {
   std::vector<Tick> ticks;
 
-  Ticks(qreal min, qreal max, bool log = false, int base = 10);
+  Ticks(double min, double max, bool log = false, int base = 10);
 };
 
 #endif

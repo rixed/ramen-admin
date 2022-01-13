@@ -6,10 +6,10 @@
 
 static constexpr bool verbose{false};
 
-extern inline qreal logOfBase(int base, qreal x);
-extern inline qreal sameSign(qreal sign, qreal value);
+extern inline double logOfBase(int base, double x);
+extern inline double sameSign(double sign, double value);
 
-static qreal valueOfPos(qreal p, bool log, int base) {
+static double valueOfPos(double p, bool log, int base) {
   if (log) {
     return sameSign(p, std::pow(base, std::abs(p)));
   } else {
@@ -17,7 +17,7 @@ static qreal valueOfPos(qreal p, bool log, int base) {
   }
 }
 
-static QString labelOfPos(qreal p, bool log, int base) {
+static QString labelOfPos(double p, bool log, int base) {
   if (log) {
     double iptr;
     if (0 == std::modf(p, &iptr)) {
@@ -30,20 +30,20 @@ static QString labelOfPos(qreal p, bool log, int base) {
   }
 }
 
-Ticks::Ticks(qreal min_, qreal max_, bool log, int base) {
-  qreal const min{log ? logOfBase(base, min_) : min_};
-  qreal const max{log ? logOfBase(base, max_) : max_};
+Ticks::Ticks(double min_, double max_, bool log, int base) {
+  double const min{log ? logOfBase(base, min_) : min_};
+  double const max{log ? logOfBase(base, max_) : max_};
 
-  qreal const d{max - min};
+  double const d{max - min};
   if (d <= 0) {
     qWarning() << "Ticks: invalid min max range:" << min << "..." << max;
     return;
   }
 
-  qreal const dist{std::pow(base, std::round(std::log(d) / std::log(base)))};
-  qreal const subDist{dist / base};
+  double const dist{std::pow(base, std::round(std::log(d) / std::log(base)))};
+  double const subDist{dist / base};
 
-  qreal p{dist * std::floor(min / dist)};
+  double p{dist * std::floor(min / dist)};
   if (verbose)
     qDebug() << "Ticks: min=" << min << "max=" << max << "dist=" << dist
              << "subDist=" << subDist << "p=" << p;
@@ -51,7 +51,7 @@ Ticks::Ticks(qreal min_, qreal max_, bool log, int base) {
   for (int i = 0; i < base + 2; i++) {
     ticks.emplace_back(valueOfPos(p, log, base), true,
                        labelOfPos(p, log, base));
-    qreal q{p + subDist};
+    double q{p + subDist};
     for (int j = 1; j < base; j++) {
       ticks.emplace_back(valueOfPos(q, log, base), false,
                          labelOfPos(q, log, base));

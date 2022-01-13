@@ -31,20 +31,25 @@
 
 static constexpr bool verbose{false};
 
-static double const defaultBeginOftime{0.};
-static double const defaultEndOfTime{600.};
+static constexpr double defaultBeginOftime{0.};
+static constexpr double defaultEndOfTime{600.};
 
-static int const tickLabelWidth{50};
-static int const tickLabelHeight{15};
-static int const minorTickLabelHeight{10};
-static int const minPlotWidth{300};
-static int const metaFontHeight{18};
+static constexpr int tickLabelWidth{50};
+static constexpr int tickLabelHeight{15};
+static constexpr int minorTickLabelHeight{10};
+static constexpr int dotLabelHeight{10};
+static constexpr int minPlotWidth{300};
+static constexpr int metaFontHeight{18};
+/* Leave that many pixels above and below a chart to leave some room to draw dot
+ * labels: */
+static constexpr int plotVerticalMargin{1 + dotLabelHeight / 2};
 
 TimeChart::TimeChart(TimeChartEditWidget *editWidget_, QWidget *parent)
     : AbstractTimeLine(defaultBeginOftime, defaultEndOfTime, true, true,
                        parent),
       editWidget(editWidget_) {
-  setMinimumSize(tickLabelWidth * 2 + minPlotWidth, tickLabelHeight * 5);
+  setMinimumSize(tickLabelWidth * 2 + minPlotWidth + 2 * plotVerticalMargin,
+                 tickLabelHeight * 5);
 
   /* Connect to signals from the editWidget:
    * - for axis, a signal when any axis config is changed
@@ -129,23 +134,29 @@ void TimeChart::redrawField(std::string const &site, std::string const &program,
 }
 
 /* Given v_ratio = (v-min)/(max-min), return the Y pixel coordinate: */
-qreal TimeChart::YofV(qreal v, qreal min, qreal max, bool log, int base) const {
+qreal TimeChart::YofV(double v, double min, double max, bool log,
+                      int base) const {
   if (log) {
     v = logOfBase(base, v);
     min = logOfBase(base, min);
     max = logOfBase(base, max);
   }
 
-  return (1 - (v - min) / (max - min)) * height();
+  int const h{height() - 2 * plotVerticalMargin};
+
+  return plotVerticalMargin + (1 - (v - min) / (max - min)) * qreal(h);
 }
 
-qreal TimeChart::VofY(int y, qreal min, qreal max, bool log, int base) const {
+double TimeChart::VofY(qreal y, qreal min, qreal max, bool log,
+                       int base) const {
   if (log) {
     min = logOfBase(base, min);
     max = logOfBase(base, max);
   }
 
-  qreal v{(1 - static_cast<qreal>(y) / height()) * (max - min) + min};
+  int const h{height() - 2 * plotVerticalMargin};
+
+  qreal v{(1 - (y - plotVerticalMargin) / qreal(h)) * (max - min) + min};
 
   if (log) {
     return sameSign(v, std::pow(base, std::abs(v)));
@@ -302,7 +313,7 @@ void TimeChart::paintReplayRequestsMeta(QPainter &painter, PastData &past,
       if (replay.isCompleted(guard)) {
         // Dim the color with age
         double const age{now - replay.started};
-        static double const maxAge{20};
+        static double const maxAge{10};
         if (age < 0) continue;
         if (age < maxAge) {
           bgCol =
@@ -592,7 +603,7 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
   /* Finally, draw all dots on top of this: */
   // TODO: radius and font larger if the axis is focused?
   QFont font{painter.font()};
-  font.setPixelSize(minorTickLabelHeight);
+  font.setPixelSize(dotLabelHeight);
   painter.setFont(font);
   static constexpr qreal radius{5.};
   for (Dot const &dot : dots) dot.paint(painter, radius);

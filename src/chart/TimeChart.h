@@ -201,9 +201,9 @@ class TimeChart : public AbstractTimeLine {
 
   void paintEvent(QPaintEvent *) override;
 
-  qreal YofV(qreal v, qreal min, qreal max, bool log, int base) const;
+  qreal YofV(double v, double min, double max, bool log, int base) const;
 
-  qreal VofY(int y, qreal min, qreal max, bool log, int base) const;
+  double VofY(qreal y, double min, double max, bool log, int base) const;
 
  protected slots:
   /* Focus this axis and redraw it: */
