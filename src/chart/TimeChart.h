@@ -156,7 +156,7 @@ class TimeChart : public AbstractTimeLine {
 
     Axis(std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf_)
         : min(std::numeric_limits<qreal>::max()),
-          max(std::numeric_limits<qreal>::min()),
+          max(std::numeric_limits<qreal>::lowest()),
           conf(conf_) {
       stacked.reserve(10);
       stackCentered.reserve(10);
