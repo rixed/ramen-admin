@@ -119,38 +119,17 @@ void AbstractTimeLine::mouseMoveEvent(QMouseEvent *event) {
       event->x() - *scrollStart
 #endif
     };
-    qreal const ratio{(qreal)dx / width()};
-    qreal dt{viewPortWidth() * ratio};
-    if (viewPortStartScroll.first - dt < m_beginOfTime) {
-      dt = viewPortStartScroll.first - m_beginOfTime;
-    } else if (viewPortStartScroll.second - dt > m_endOfTime) {
-      dt = viewPortStartScroll.second - m_endOfTime;
-    }
-    setViewPort(QPair<qreal, qreal>(
-        std::max(viewPortStartScroll.first - dt, m_beginOfTime),
-        std::min(viewPortStartScroll.second - dt, m_endOfTime)));
-    emit viewPortChanged(m_viewPort);
+    panViewPort(dx, &viewPortStartScroll);
   }
 
   /* Normal mouse move: update current time.
    * Note: selection might happen at the same time. */
-  qreal const ratio {
 #if QT_VERSION > QT_VERSION_CHECK(6, 0, 0)
-    event->position().x() / width()
+  qreal const x{event->position().x()};
 #else
-    (qreal) event->x() / width()
+  qreal const x{(qreal)event->x()};
 #endif
-  };
-  qreal const offs{viewPortWidth() * ratio};
-  qreal t{m_viewPort.first + offs};
-  if (t < m_beginOfTime)
-    t = m_beginOfTime;
-  else if (t > m_endOfTime)
-    t = m_endOfTime;
-  if (t != m_currentTime) {
-    setCurrentTime(t);
-    emit currentTimeChanged(t);
-  }
+  setCurrentPos(x, true);
   QWidget::mouseMoveEvent(event);
 }
 
@@ -184,6 +163,21 @@ void AbstractTimeLine::wheelEvent(QWheelEvent *event) {
     return;
   }
 
+  QPoint p{event->pixelDelta()};
+  if (p.isNull()) {
+    p = event->angleDelta() / 8;
+  }
+
+  /* Handle horizontal panning */
+  if (!p.isNull()) {
+    int const dx{p.x()};
+    panViewPort(dx);
+    setCurrentPos(event->position().x(), true);
+    /* Ideally we would reset this coordinate in the event so that it's
+     * not again used by the parent event handers in case we eventually do not
+     * accept the event. */
+  }
+
   /* Zooming with the mouse wheel is more convenient than with the keyboard,
    * but it will prevent any enclosing scroll area to get the event, so for
    * instance in a long dashboard the user scrolling through the dashboard
@@ -191,11 +185,6 @@ void AbstractTimeLine::wheelEvent(QWheelEvent *event) {
    * corner is sensitive to zoom (FIXME: at least, display something there) */
   QPointF const mouse_pos{event->position()};
   if (mouse_pos.x() > 20 || mouse_pos.y() > 20) goto ignore;
-
-  QPoint p{event->pixelDelta()};
-  if (p.isNull()) {
-    p = event->angleDelta() / 8;
-  }
 
   if (!p.isNull()) {
     qreal zoom{p.y() >= 0 ? 0.97 : 1.03};
@@ -321,7 +310,7 @@ void AbstractTimeLine::setEndOfTime(qreal t) {
   update();
 }
 
-void AbstractTimeLine::setCurrentTime(qreal t) {
+void AbstractTimeLine::setCurrentTime(qreal t, bool signal_if_changed) {
   if (t < m_beginOfTime)
     t = m_beginOfTime;
   else if (t > m_endOfTime)
@@ -329,8 +318,16 @@ void AbstractTimeLine::setCurrentTime(qreal t) {
 
   if (t != m_currentTime) {
     m_currentTime = t;
+    if (signal_if_changed) emit currentTimeChanged(t);
     update();
   }
+}
+
+void AbstractTimeLine::setCurrentPos(int const x, bool signal_if_changed) {
+  qreal const ratio{qreal(x) / width()};
+  qreal const offs{viewPortWidth() * ratio};
+  qreal t{m_viewPort.first + offs};
+  setCurrentTime(t, signal_if_changed);
 }
 
 void AbstractTimeLine::setViewPort(QPair<qreal, qreal> const &vp) {
@@ -382,6 +379,24 @@ void AbstractTimeLine::moveViewPort(qreal ratio) {
   emit viewPortChanged(m_viewPort);
 }
 
+void AbstractTimeLine::panViewPort(int const dx,
+                                   QPair<qreal, qreal> const *origin) {
+  if (dx == 0) return;
+
+  if (!origin) origin = &m_viewPort;
+
+  qreal const ratio{(qreal)dx / width()};
+  qreal dt{viewPortWidth() * ratio};
+  if (origin->first - dt < m_beginOfTime) {
+    dt = origin->first - m_beginOfTime;
+  } else if (origin->second - dt > m_endOfTime) {
+    dt = origin->second - m_endOfTime;
+  }
+  setViewPort(QPair<qreal, qreal>(std::max(origin->first - dt, m_beginOfTime),
+                                  std::min(origin->second - dt, m_endOfTime)));
+  emit viewPortChanged(m_viewPort);
+}
+
 void AbstractTimeLine::setSelection(QPair<qreal, qreal> const &sel) {
   m_selection = QPair<qreal, qreal>(std::min<qreal>(sel.first, sel.second),
                                     std::max<qreal>(sel.first, sel.second));
@@ -413,7 +428,7 @@ void AbstractTimeLine::setTimeRange(TimeRange const &range) {
 void AbstractTimeLine::offset(double dt) {
   setBeginOfTime(m_beginOfTime + dt);
   setEndOfTime(m_endOfTime + dt);
-  setCurrentTime(m_currentTime + dt);
+  setCurrentTime(m_currentTime + dt, false);
 }
 
 void AbstractTimeLine::highlightRange(QPair<qreal, qreal> const range) {

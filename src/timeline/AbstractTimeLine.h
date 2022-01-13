@@ -92,7 +92,10 @@ class AbstractTimeLine : public QWidget {
   QPair<qreal, qreal> viewPort() const { return m_viewPort; }
 
  public slots:
-  void setCurrentTime(qreal);
+  void setCurrentTime(qreal, bool signal_if_changed = false);
+
+  /* Same as setCurrentTime but takes an x coordinate within the window: */
+  void setCurrentPos(int x, bool signal_if_changed = false);
 
   /* The new viewport will be clipped to the begin and end of times: */
   void setViewPort(QPair<qreal, qreal> const &);
@@ -102,8 +105,12 @@ class AbstractTimeLine : public QWidget {
    * zoom possible. */
   void setZoom(qreal zoom, qreal centerTime);
 
-  /* Move the viewport left or right. */
+  /* Move the viewport left or right, by a number of seconds. */
   void moveViewPort(qreal ratio);
+
+  /* Move the view port some amount of pixels compared to the view port we
+   * started from (default: current view port): */
+  void panViewPort(int const dx, QPair<qreal, qreal> const *origin = nullptr);
 
   void setSelection(QPair<qreal, qreal> const &);
   void clearSelection();
