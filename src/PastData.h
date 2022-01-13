@@ -47,11 +47,6 @@ class PastData : public QObject {
 
   std::string const site, program, function;
 
-  /* Limit the number of in-flight requests
-   * Note that from PastData point of view, a request is in-flight as soon as
-   * a ReplayRequest has been created. */
-  int numInFlight;
-
   /* Request for past data that have to wait, in no particular order.
    * Maybe ordering these according to start would provide more merging
    * opportunities? */

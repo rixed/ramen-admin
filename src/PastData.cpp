@@ -3,7 +3,9 @@
 
 #include <QDebug>
 #include <algorithm>
+#include <cstdint>  // for explicit int types
 #include <functional>
+#include <mutex>
 
 #include "ReplayRequest.h"
 #include "desssergen/event_time.h"
@@ -14,7 +16,37 @@
 
 static constexpr bool verbose{true};
 
-static int const maxInFlight{3};
+/* Limit the number of in-flight requests.
+ * Note that from PastData point of view, a request is in-flight as soon as
+ * a ReplayRequest has been created. */
+static constexpr int maxInFlight{3};
+static int numInFlight{0};
+/* Also limit the rate of requests: */
+static constexpr int maxPerSecs{3};
+static std::int_least64_t lastSentSec{0};
+static int numSameSec{0};
+static std::mutex inFlightLock;
+
+static bool canIncInFlight() {
+  std::lock_guard<std::mutex> guard(inFlightLock);
+  if (numInFlight >= maxInFlight) return false;
+  std::int_least64_t const now{std::int_least64_t(getTime())};
+  if (now == lastSentSec) {
+    if (numSameSec >= maxPerSecs) return false;
+    numSameSec++;
+  } else {
+    lastSentSec = now;
+    numSameSec = 1;
+  }
+  numInFlight++;
+  return true;
+}
+
+static void decInFlight() {
+  std::lock_guard<std::mutex> guard(inFlightLock);
+  Q_ASSERT(numInFlight > 0);
+  numInFlight--;
+}
 
 /* Max number of seconds between two time ranges for them being merged in a
  * single ReplayRequest. A bit arbitrary, should depend on the tuple density:
@@ -30,24 +62,18 @@ PastData::PastData(std::string const &site_, std::string const &program_,
       site(site_),
       program(program_),
       function(function_),
-      numInFlight(0),
       type(type_),
       eventTime(eventTime_),
       maxTime(maxTime_) {}
 
 void PastData::check() const {
   ReplayRequest const *last{nullptr};
-  int numInFlight_{0};
 
   for (ReplayRequest const &r : replayRequests) {
     Q_ASSERT(r.since < r.until);
     if (last) Q_ASSERT(last->until <= r.since);
     last = &r;
-
-    if (r.status != ReplayRequest::Completed) numInFlight_++;
   }
-
-  Q_ASSERT(numInFlight == numInFlight_);
 }
 
 /* Try to merge this new request with that previous one.
@@ -91,17 +117,7 @@ bool PastData::insert(std::list<ReplayRequest>::iterator it, double since,
   /* TODO: if the duration is tiny (TBD), ignores the request and returns true
    */
 
-  if (numInFlight >= maxInFlight) {
-    if (canPostpone) {
-      if (verbose)
-        qDebug() << "PastData: too many replay requests in flight, postponing.";
-      postponedRequests.emplace_back(since, until);
-      return true;
-    } else {
-      if (verbose) qDebug() << "PastData: too many replay requests in flight";
-      return false;
-    }
-  } else {
+  if (canIncInFlight()) {
     if (verbose)
       qDebug() << "PastData: Enqueuing a new ReplayRequest (since="
                << stringOfDate(since) << ", until=" << stringOfDate(until)
@@ -109,7 +125,6 @@ bool PastData::insert(std::list<ReplayRequest>::iterator it, double since,
 
     std::list<ReplayRequest>::iterator const &emplaced{replayRequests.emplace(
         it, site, program, function, since, until, type, eventTime)};
-    numInFlight++;
     connect(&*emplaced, &ReplayRequest::tupleBatchReceived, this,
             &PastData::tupleReceived);
     connect(&*emplaced, &ReplayRequest::endReceived, this,
@@ -117,6 +132,16 @@ bool PastData::insert(std::list<ReplayRequest>::iterator it, double since,
 
     check();
     return true;
+  } else {
+    if (canPostpone) {
+      if (verbose)
+        qDebug() << "PastData: too many replay requests, postponing.";
+      postponedRequests.emplace_back(since, until);
+      return true;
+    } else {
+      if (verbose) qDebug() << "PastData: too many replay requests";
+      return false;
+    }
   }
 }
 
@@ -222,18 +247,20 @@ void PastData::iterTuples(
 }
 
 void PastData::replayEnded() {
-  Q_ASSERT(numInFlight > 0);
-  numInFlight--;
+  decInFlight();
 
   if (verbose)
     qDebug() << "PastData: a replay ended (still" << numInFlight
              << "in flight)";
 
   if (!postponedRequests.empty()) {
-    if (verbose) qDebug() << "PastData: retrying postponed queries";
+    if (verbose)
+      qDebug() << "PastData: retrying" << postponedRequests.size()
+               << "postponed queries";
     auto it{postponedRequests.begin()};
     while (it != postponedRequests.end()) {
       if (request(it->first, it->second, false)) {
+        if (verbose) qDebug() << "PastData: dealt with postponed query";
         postponedRequests.erase(it++);
       } else {
         it++;
