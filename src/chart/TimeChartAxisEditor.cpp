@@ -90,5 +90,5 @@ TimeChartAxisEditor::getValue() const {
                 dessser::Void())};
 
   return std::make_shared<dessser::gen::dashboard_widget::axis>(
-      forceZero->isChecked(), left->isChecked(), scale);
+      left->isChecked(), forceZero->isChecked(), scale);
 }
