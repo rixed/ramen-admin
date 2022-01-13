@@ -385,8 +385,9 @@ void TimeChart::paintAxis(Axis const &axis) {
       /* We use the color of the line if there is only one possible value
        * for the functors, or the color associated with the factor labels
        * otherwise. */
-      QColor const color{
-          factorValues.labels.size() <= 1 ? line.color : colorOfString(label)};
+      QColor const color{factorValues.labels.size() <= 1
+                             ? line.color
+                             : colorOfString(label, 0.6)};
       painter.setPen(color);
       std::optional<QPointF> last;  // the last point
       bool lastDrawn{false};        // was the last point drawn somehow?

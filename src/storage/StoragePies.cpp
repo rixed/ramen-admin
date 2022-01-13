@@ -165,7 +165,7 @@ void StoragePies::refreshChart() {
       for (auto const &it : rings[r]) {
         Key const &k{it.first};
         Values const v{it.second};
-        QColor c{colorOfString(k.name[r])};
+        QColor c{colorOfString(k.name[r], 0.2)};
         c.setAlpha(isLastRing ? 200 : 25);
         bool labelVisible{v.forMode(dataMode) >= minValueForLabel &&
                           isLastRing};

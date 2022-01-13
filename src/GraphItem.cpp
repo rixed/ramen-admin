@@ -76,7 +76,7 @@ GraphItem::GraphItem(GraphItem *treeParent_, std::unique_ptr<GraphData> data,
       treeParent(treeParent_),
       row(-1),
       shared(std::move(data)) {
-  brush = QBrush(colorOfString(shared->name));
+  brush = QBrush(colorOfString(shared->name, 0.6, false));
 
   if (settings) {  // ProgramPartItem is not graphical:
     // Notifies itemChange whenever the position is changed:
