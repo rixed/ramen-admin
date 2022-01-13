@@ -13,7 +13,7 @@
 #include "timeline/TimeLine.h"
 #include "timeline/TimeLineGroup.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeLineView::TimeLineView(GraphModel *graphModel_, QWidget *parent)
     : QWidget(parent), graphModel(graphModel_) {

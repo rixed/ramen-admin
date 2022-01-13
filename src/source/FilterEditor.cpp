@@ -11,7 +11,7 @@
 #include "NamesTree.h"
 #include "desssergen/simple_filter.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 FilterEditor::FilterEditor(QWidget *parent) : QWidget(parent) {
   lhsEdit = new QLineEdit;

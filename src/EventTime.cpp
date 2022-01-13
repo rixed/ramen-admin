@@ -8,7 +8,7 @@
 #include "desssergen/raql_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 EventTime::EventTime(dessser::gen::raql_type::t const &type)
     : startColumn(-1), stopColumn(-1) {

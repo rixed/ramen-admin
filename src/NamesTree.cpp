@@ -15,7 +15,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 NamesTree *NamesTree::globalNamesTree;
 NamesTree *NamesTree::globalNamesTreeAnySites;

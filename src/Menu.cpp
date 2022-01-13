@@ -32,7 +32,7 @@
 #include "target_config/NewTargetConfigEntryDialog.h"
 #include "target_config/TargetConfigEditorWin.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 AboutDialog *Menu::aboutDialog;
 SourcesWin *Menu::sourcesWin;

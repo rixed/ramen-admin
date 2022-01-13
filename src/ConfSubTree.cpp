@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <iostream>
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 ConfSubTree::ConfSubTree(QString const &name_, ConfSubTree *parent_,
                          QString const &termValue_)

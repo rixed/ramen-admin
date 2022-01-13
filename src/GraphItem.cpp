@@ -13,7 +13,7 @@
 #include "colorOfString.h"
 #include "stream/GraphViewSettings.h"
 
-static const bool verbose{false};
+static constexpr bool verbose{false};
 
 /* The dummbest QGraphicsItem I can made. Does nothing, paint nothing,
  * but can be used to hide/move/transform its children in one go.

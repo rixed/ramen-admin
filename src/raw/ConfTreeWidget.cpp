@@ -20,7 +20,7 @@
 #include "raw/ConfTreeItem.h"
 #include "raw/RawConfEditorDialog.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 /* In order to display the conftree as an actual tree we need the keys to be
  * split in a meaningful way. Unfortunately, using dessser automatic conversion

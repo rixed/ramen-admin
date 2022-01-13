@@ -19,7 +19,7 @@
 #include "misc_dessser.h"
 #include "target_config/TargetConfigEntryEditor.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 NewTargetConfigEntryDialog::NewTargetConfigEntryDialog(
     QString const &sourceName, QWidget *parent)

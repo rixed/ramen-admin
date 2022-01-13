@@ -17,7 +17,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeChartFunctionFieldsModel::TimeChartFunctionFieldsModel(
     std::string const &site, std::string const &program,

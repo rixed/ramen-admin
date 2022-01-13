@@ -16,7 +16,7 @@
 #include "source/SourceCloneDialog.h"
 #include "source/SourceInfoViewer.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 CodeEditForm::CodeEditForm(QWidget *parent) : AtomicForm(true, parent) {
   layout()->setContentsMargins(QMargins());

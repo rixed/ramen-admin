@@ -16,7 +16,7 @@
 #include "desssergen/dashboard_widget.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeChartFunctionsEditor::TimeChartFunctionsEditor(QWidget *parent)
     : QWidget(parent) {

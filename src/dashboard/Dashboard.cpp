@@ -25,7 +25,7 @@
 #include "misc_dessser.h"
 #include "timeline/TimeLineGroup.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 Dashboard::Dashboard(std::string const &dash_name, QWidget *parent)
     : QWidget(parent), name(dash_name) {

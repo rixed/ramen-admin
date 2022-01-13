@@ -19,7 +19,7 @@
 #include "misc_dessser.h"
 #include "source/CodeEdit.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 NewSourceDialog::NewSourceDialog(QWidget *parent) : QDialog(parent) {
   nameEdit = new QLineEdit;

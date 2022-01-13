@@ -24,7 +24,7 @@
 #include "stream/GraphView.h"
 #include "stream/GraphViewSettings.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 Function::Function(std::string const &siteName_,
                    std::string const &programName_,

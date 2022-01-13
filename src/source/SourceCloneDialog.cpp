@@ -14,7 +14,7 @@
 #include "PathNameValidator.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 SourceCloneDialog::SourceCloneDialog(
     std::shared_ptr<dessser::gen::sync_key::t const> origKey, QWidget *parent)

@@ -18,7 +18,7 @@
 #include "TimeRange.h"
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 QColor const AbstractTimeLine::cursorColor{"orange"};
 QColor const AbstractTimeLine::highlightColor{"orange"};
@@ -334,7 +334,9 @@ void AbstractTimeLine::setViewPort(QPair<qreal, qreal> const &vp) {
   /* Should not happen but better safe than sorry: */
   if (vp.first < m_beginOfTime || vp.first >= m_endOfTime ||
       vp.second <= m_beginOfTime || vp.second > m_endOfTime) {
-    qCritical() << "AbstractTimeLine: Invalid viewPort:" << vp;
+    qCritical() << "AbstractTimeLine: Invalid viewPort:"
+                << qSetRealNumberPrecision(13) << vp << "not within"
+                << m_beginOfTime << "…" << m_endOfTime;
     return;
   }
 

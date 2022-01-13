@@ -27,7 +27,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 static double const defaultBeginOftime{0.};
 static double const defaultEndOfTime{600.};

@@ -15,7 +15,7 @@
 #include "desssergen/alerting_log.h"
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 static constexpr qreal unselected_opacity{0.3};
 

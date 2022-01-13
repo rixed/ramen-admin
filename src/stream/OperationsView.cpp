@@ -20,7 +20,7 @@
 #include "misc.h"
 #include "source/SourcesWin.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 /* For some unfathomable reason the QTreeView sizeHint always return a width
  * of 256, and this is read only. So to change the actual default size of a

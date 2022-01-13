@@ -7,7 +7,7 @@
 #include "KVStore.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 AtomicWidget::AtomicWidget(QWidget *parent) : QWidget(parent) {
   connect(kvs.get(), &KVStore::keyChanged, this, &AtomicWidget::onChange);

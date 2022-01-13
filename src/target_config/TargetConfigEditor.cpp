@@ -15,7 +15,7 @@
 #include "misc_dessser.h"
 #include "target_config/TargetConfigEntryEditor.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TargetConfigEditor::TargetConfigEditor(QWidget *parent)
     : AtomicWidget(parent), currentIndex(-1) {

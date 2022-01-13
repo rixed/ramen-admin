@@ -9,7 +9,7 @@
 #include "ConfSubTree.h"
 #include "KVStore.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 ConfTreeModel::ConfTreeModel(QObject *parent) : QAbstractItemModel(parent) {
   root = new ConfSubTree(QString(), nullptr, QString());

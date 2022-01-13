@@ -6,7 +6,7 @@
 #include "Menu.h"
 #include "dashboard/Dashboard.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 DashboardWindow::DashboardWindow(std::string const &dash_name, QWidget *parent)
     : SavedWindow(

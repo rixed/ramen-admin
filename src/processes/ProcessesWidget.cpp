@@ -34,7 +34,7 @@
 #include "processes/ProcessesWidgetProxy.h"
 #include "target_config/TargetConfigEditorWin.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 /*
  * Now for the actual Processes list widget:

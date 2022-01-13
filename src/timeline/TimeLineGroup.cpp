@@ -10,7 +10,7 @@
 #include "timeline/AbstractTimeLine.h"
 #include "timeline/TimeLine.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeLineGroup::TimeLineGroup(QObject *parent)
     : QObject(parent),

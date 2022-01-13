@@ -11,7 +11,7 @@
 
 #include "IconSelector.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 RollButtonDelegate::RollButtonDelegate(QObject *parent)
     : QStyledItemDelegate(parent), minSize(QSize(0, 0)) {}

@@ -33,7 +33,7 @@
 #include "misc_dessser.h"
 #include "source/SourcesWin.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 namespace dessser {
 namespace gen {

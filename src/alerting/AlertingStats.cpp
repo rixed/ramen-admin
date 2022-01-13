@@ -17,7 +17,7 @@
 #include "desssergen/sync_value.h"
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 AlertingStats::AlertingStats(QWidget *parent) : QWidget(parent) {
   lastNotificationWidget = new QLabel;

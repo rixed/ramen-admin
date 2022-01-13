@@ -9,7 +9,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 KErrorMsg::KErrorMsg(QWidget *parent) : QLabel(parent) {
   connect(kvs.get(), &KVStore::keyChanged, this, &KErrorMsg::onChange);

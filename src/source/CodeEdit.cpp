@@ -21,7 +21,7 @@
 #include "source/AlertInfoEditor.h"
 #include "source/SourceInfoViewer.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
   extensionsCombo = new QComboBox;

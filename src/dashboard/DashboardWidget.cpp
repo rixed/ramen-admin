@@ -19,7 +19,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 DashboardWidget::DashboardWidget(Dashboard *dashboard_,
                                  DashboardWidgetForm *widgetForm_,

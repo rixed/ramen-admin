@@ -12,7 +12,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{true};
 
 static int const maxInFlight{3};
 

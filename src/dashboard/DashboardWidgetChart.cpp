@@ -10,7 +10,7 @@
 #include "dashboard/Dashboard.h"
 #include "dashboard/DashboardWidgetForm.h"
 
-static bool const verbose(false);
+static constexpr bool verbose(false);
 
 DashboardWidgetChart::DashboardWidgetChart(DashboardWidgetForm *widgetForm,
                                            QWidget *parent)

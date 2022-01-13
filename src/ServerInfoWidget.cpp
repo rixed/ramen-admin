@@ -11,7 +11,7 @@
 #include "desssergen/sync_value.h"
 #include "misc.h"
 
-static bool const verbose(false);
+static constexpr bool verbose(false);
 
 ServerInfoWidget::ServerInfoWidget(QString const &srvUrl, QWidget *parent)
     : QWidget(parent) {

@@ -21,7 +21,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 static std::chrono::milliseconds const batchReplaysForMs{2000};
 

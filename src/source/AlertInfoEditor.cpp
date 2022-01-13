@@ -27,7 +27,7 @@
 #include "desssergen/sync_value.h"
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 NameTreeView::NameTreeView(QWidget *parent) : QTreeView(parent) {
   setUniformRowHeights(true);

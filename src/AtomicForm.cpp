@@ -17,7 +17,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent) : QWidget(parent) {
   groupLayout = new QVBoxLayout(this);

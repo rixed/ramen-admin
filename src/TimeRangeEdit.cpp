@@ -16,7 +16,7 @@
 
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeRangeEdit::TimeRangeEdit(QWidget *parent)
     : QPushButton(parent),  // label set by updateLabel

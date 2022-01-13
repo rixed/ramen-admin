@@ -15,7 +15,7 @@
 #include "desssergen/sync_key.h"
 #include "desssergen/sync_value.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 NewDashboardDialog::NewDashboardDialog(QWidget *parent) : QDialog(parent) {
   nameEdit = new QLineEdit;

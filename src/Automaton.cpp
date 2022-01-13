@@ -12,7 +12,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 Automaton::Automaton(QString const name_, size_t numStates, QObject *parent)
     : QObject(parent), name(name_), states(numStates) {

@@ -29,7 +29,7 @@
 #include "misc_dessser.h"
 #include "timeline/TimeLineView.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 StorageTimeline::StorageTimeline(GraphModel *graphModel, QWidget *parent)
     : QWidget(parent), respKey(nullptr) {

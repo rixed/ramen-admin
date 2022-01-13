@@ -10,7 +10,7 @@
 #include "Resources.h"
 #include "stream/GraphView.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 ProgramPartItem::ProgramPartItem(GraphItem *treeParent,
                                  std::unique_ptr<ProgramPart> program,

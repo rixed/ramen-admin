@@ -17,6 +17,8 @@
 #include "timeline/TimeLine.h"
 #include "timeline/TimeLineGroup.h"
 
+static constexpr bool verbose{false};
+
 AlertingTimeLine::AlertingTimeLine(QWidget *parent) : QWidget(parent) {
   formLayout = new QFormLayout;
   formLayout->setSpacing(0);
@@ -80,7 +82,8 @@ void AlertingTimeLine::addLog(
                 std::in_place_index<dessser::gen::sync_key::FirstStartNotif>,
                 dessser::Void()))};
     if (!firstStart) {
-      qWarning() << "Cannot find first_start notif for incident"
+      if (verbose)
+        qDebug() << "Cannot find first_start notif for incident"
                  << QString::fromStdString(incidentId);
       return;
     }

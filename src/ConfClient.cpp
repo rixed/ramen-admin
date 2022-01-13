@@ -24,7 +24,7 @@
 #include "misc_dessser.h"
 #include "z85.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 static double const sessionTimeout{300.};
 
@@ -834,12 +834,12 @@ int ConfClient::checkDones(dessser::gen::sync_key::t const &k,
   for (auto it = onDoneCallbacks.begin(); it != onDoneCallbacks.end(); it++) {
     if (it->seq != err_seq) continue;
 
-    qDebug() << "onDone callback found for" << err_seq;
+    if (verbose) qDebug() << "onDone callback found for" << err_seq;
     int const ret{it->callback(err_msg)};
     onDoneCallbacks.erase(it);
     return ret;
   }
 
-  qDebug() << "No callback was found for" << err_seq;
+  if (verbose) qDebug() << "No callback was found for" << err_seq;
   return 0;
 }

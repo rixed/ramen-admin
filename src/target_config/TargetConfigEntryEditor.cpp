@@ -30,7 +30,7 @@
 #include "misc_dessser.h"
 #include "source/SourcesModel.h"  // for baseNameOfKey and friends
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const> >
     TargetConfigEntryEditor::setParamValues;

@@ -12,7 +12,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
     std::string const &incident_id,

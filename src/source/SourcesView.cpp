@@ -23,7 +23,7 @@
 #include "source/SourcesModel.h"
 #include "target_config/NewTargetConfigEntryDialog.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 SourcesTreeView::SourcesTreeView(QWidget *parent) : QTreeView(parent) {}
 

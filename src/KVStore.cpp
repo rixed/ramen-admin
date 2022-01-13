@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QTimer>
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 std::shared_ptr<KVStore> kvs;
 

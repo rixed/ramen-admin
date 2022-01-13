@@ -11,7 +11,7 @@
 #include "dashboard/tools.h"
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 DashboardTreeModel *DashboardTreeModel::globalDashboardTree;
 

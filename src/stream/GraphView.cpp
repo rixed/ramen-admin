@@ -18,7 +18,7 @@
 #include "stream/GraphViewSettings.h"
 #include "stream/layout.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 GraphView::GraphView(GraphViewSettings const &settings_, QWidget *parent)
     : QGraphicsView(parent),

@@ -12,7 +12,7 @@
 
 #include "misc.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 TimeLine::TimeLine(qreal beginOftime, qreal endOfTime,
                    TicksPosition ticksPosition_, bool withCursor,

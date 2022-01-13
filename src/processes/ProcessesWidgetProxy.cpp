@@ -12,7 +12,7 @@
 #include "ProgramPartItem.h"
 #include "SiteItem.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 ProcessesWidgetProxy::ProcessesWidgetProxy(QObject *parent)
     : QSortFilterProxyModel(parent),

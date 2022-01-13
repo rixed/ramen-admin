@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <cmath>
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 extern inline qreal logOfBase(int base, qreal x);
 extern inline qreal sameSign(qreal sign, qreal value);

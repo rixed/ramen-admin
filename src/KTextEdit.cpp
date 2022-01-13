@@ -17,7 +17,7 @@
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 
-static bool const verbose{false};
+static constexpr bool verbose{false};
 
 KTextEdit::KTextEdit(bool raql_, QWidget *parent)
     : AtomicWidget(parent), raql(raql_) {

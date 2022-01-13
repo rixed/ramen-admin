@@ -5,7 +5,7 @@
 
 #include "confValue.h"
 
-static bool const verbose(false);
+static constexpr bool verbose(false);
 
 AtomicWidgetAlternative::AtomicWidgetAlternative(QWidget *parent)
     : AtomicWidget(parent), currentWidget(-1) {}
