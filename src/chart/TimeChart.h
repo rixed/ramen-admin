@@ -2,11 +2,13 @@
 #ifndef TIMECHART_H_200203
 #define TIMECHART_H_200203
 #include <QDebug>
+#include <QPointF>
 #include <QString>
 #include <map>
 #include <memory>
 #include <optional>
 #include <string>
+#include <tuple>
 #include <utility>
 #include <vector>
 
@@ -46,22 +48,22 @@ class TimeChart : public AbstractTimeLine {
   /* Possible values for a combination of factor: */
   struct FactorValues {
     // factor name * factor index in columns:
-    std::vector<std::pair<std::string, int> > indices;
+    std::vector<std::pair<std::string, int>> indices;
     /* Possible values, as a map from the label to all tuple indices (ordered)
      * with this label: */
-    std::map<QString, std::vector<size_t> > labels;
+    std::map<QString, std::vector<size_t>> labels;
 
-    FactorValues(std::vector<std::pair<std::string, int> > indices_)
+    FactorValues(std::vector<std::pair<std::string, int>> indices_)
         : indices(indices_) {}
   };
 
   struct CategorizedTuple {
     double time;
-    std::vector<std::optional<double> > values;
+    std::vector<std::optional<double>> values;
 
     CategorizedTuple(
         double time_,
-        std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > const
+        std::vector<std::shared_ptr<dessser::gen::raql_value::t const>> const
             tuple)
         : time(time_) {
       /* Convert the whole tuple into a vector of doubles.
@@ -145,7 +147,8 @@ class TimeChart : public AbstractTimeLine {
     static void iterTime(
         std::vector<Line> const &lines,
         std::function<void(
-            double, std::vector<std::pair<std::optional<qreal>, QColor> >)>);
+            double,
+            std::vector<std::tuple<std::optional<qreal>, QString, QColor>>)>);
 
     /* extremums of all the plots/stacks.
      * This is the min/max of the global resulting picture, used to draw the
@@ -168,6 +171,17 @@ class TimeChart : public AbstractTimeLine {
     bool hasEventTime() const;
   };
 
+  // An hovered value:
+  struct Dot {
+    QPointF pos;  // pixel coordinates
+    QColor color;
+    QString label;
+
+    Dot(QPointF const &pos_, QColor const &color_, QString const &label_)
+        : pos(pos_), color(color_), label(label_) {}
+    void paint(QPainter &, qreal) const;
+  };
+
   void paintGrid(Axis const &);
 
   void paintTicks(Side const, Axis const &,
@@ -177,7 +191,7 @@ class TimeChart : public AbstractTimeLine {
 
   void paintReplayRequestsMeta(QPainter &, PastData &, QColor const &, double);
 
-  void paintAxis(Axis const &);
+  void paintAxis(Axis const &, double const);
 
  public:
   TimeChart(TimeChartEditWidget *editWidget, QWidget *parent = nullptr);

@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QDebug>
 #include <QFont>
+#include <QFontMetrics>
 #include <QFontMetricsF>
 #include <QPainter>
 #include <QPen>
@@ -15,6 +16,7 @@
 #include <limits>
 #include <mutex>
 #include <optional>
+#include <tuple>
 
 #include "EventTime.h"
 #include "FunctionItem.h"
@@ -356,7 +358,7 @@ void TimeChart::paintReplayRequestsMeta(QPainter &painter, PastData &past,
   }
 }
 
-void TimeChart::paintAxis(Axis const &axis) {
+void TimeChart::paintAxis(Axis const &axis, double const now) {
   if (axis.min >= axis.max) return;
 
   std::pair<bool, int> log_base{get_log_base(axis.conf)};
@@ -365,7 +367,10 @@ void TimeChart::paintAxis(Axis const &axis) {
   painter.setRenderHint(QPainter::Antialiasing);
   painter.setRenderHint(QPainter::TextAntialiasing);
 
-  double const now{getTime()};
+  /* Save the set of dots that are going to be drawn over all this at the
+   * end: */
+  std::vector<Dot> dots;
+  dots.reserve(20);
 
   // Draw each independent fields
   for (Line const &line : axis.independent) {
@@ -378,6 +383,10 @@ void TimeChart::paintAxis(Axis const &axis) {
       continue;
     }
 
+    QString const line_label{axis.independent.size() > 1
+                                 ? QString::fromStdString(line.fieldName)
+                                 : QString()};
+
     /* Draw some meta informations: ongoing queries, where the tail begin. */
     std::shared_ptr<TailModel> tail{line.res->func->getTail()};
     if (tail) paintTailMeta(painter, *tail, line.color);
@@ -386,20 +395,25 @@ void TimeChart::paintAxis(Axis const &axis) {
 
     /* Now draw the line, actually one per factor combination. */
     FactorValues const &factorValues{line.res->factorValues[line.factorValues]};
-    for (std::pair<QString const, std::vector<size_t> > const &p :
+    for (std::pair<QString const, std::vector<size_t>> const &p :
          factorValues.labels) {
-      QString const &label{p.first};
+      QString const &factor_label{p.first};
       std::vector<size_t> const &tupleIndices{p.second};
 
       /* We use the color of the line if there is only one possible value
        * for the functors, or the color associated with the factor labels
        * otherwise. */
+      // FIXME: precompute those colorOfString and store them in factorValues!
       QColor const color{factorValues.labels.size() <= 1
                              ? line.color
-                             : colorOfString(label, 0.6)};
+                             : colorOfString(factor_label, 0.7)};
       painter.setPen(color);
       std::optional<QPointF> last;  // the last point
-      bool lastDrawn{false};        // was the last point drawn somehow?
+      bool last_drawn{false};       // was the last point drawn somehow?
+      // Best distance so far from m_currentTime and location where it happened:
+      std::optional<double> best_dt;
+      double closest_value;
+      QPointF closest_location;
       for (size_t i = 0; i < tupleIndices.size(); i++) {
         CategorizedTuple const &tuple{line.res->tuples[tupleIndices[i]]};
         std::optional<double> const v{tuple.values[line.columnIndex]};
@@ -409,18 +423,37 @@ void TimeChart::paintAxis(Axis const &axis) {
           if (!std::isnan(y)) {
             QPointF cur{toPixel(tuple.time), y};
             if (last) painter.drawLine(*last, cur);
-            lastDrawn = (bool)last;
+            last_drawn = (bool)last;
             last = cur;
+            // Check time distance:
+            double const dt{std::abs(tuple.time - m_currentTime)};
+            if (!best_dt || dt < *best_dt) {
+              best_dt = dt;
+              closest_value = *v;
+              closest_location = cur;
+            }
           } else {
             last = std::nullopt;
           }
         } else {
-          if (last && !lastDrawn)
+          if (last && !last_drawn)
             painter.drawPoint(*last);  // Probably a larger pen is in order
           last = std::nullopt;
         }
       }
-      if (last && !lastDrawn) painter.drawPoint(*last);
+      if (last && !last_drawn) painter.drawPoint(*last);
+      if (best_dt) {
+        QString const value_label{QString::number(closest_value)};
+        QString const dot_label{
+            factor_label.isEmpty()
+                ? line_label +
+                      (line_label.isEmpty() ? QString() : QString(": ")) +
+                      value_label
+                : line_label +
+                      (line_label.isEmpty() ? QString() : QString(' ')) +
+                      factor_label + QString(": ") + value_label};
+        dots.emplace_back(closest_location, color, dot_label);
+      }
     }
   }
 
@@ -428,8 +461,8 @@ void TimeChart::paintAxis(Axis const &axis) {
    * That's a bit more involved as each stacked "line" can use factors,
    * and then some factor values may be missing for some time steps. */
   std::function<void(std::vector<Line> const &, bool)> drawStacked =
-      [this, &axis, log_base, &painter, now](std::vector<Line> const &lines,
-                                             bool center) {
+      [this, &axis, log_base, &painter, now, &dots](
+          std::vector<Line> const &lines, bool center) {
         qreal const zeroY{
             YofV(0, axis.min, axis.max, log_base.first, log_base.second)};
 
@@ -441,21 +474,28 @@ void TimeChart::paintAxis(Axis const &axis) {
         qreal lastOffs[numValues];
         for (size_t l = 0; l < numValues; l++) lastOffs[l] = zeroY;
         qreal lastX{0};
-
+        // Best distance so far from m_currentTime and location where it
+        // happened:
+        std::optional<double> best_dt;
+        std::optional<std::tuple<double, qreal, QString, QColor>>
+            closest_ys[numValues];
+        qreal closest_x;
         // Now loop over all factor values of all lines
         Axis::iterTime(
             lines,
             [this, &axis, &painter, log_base, numValues, &last, &lastOffs,
-             &lastX, center](
+             &lastX, center, &dots, &best_dt, &closest_ys, &closest_x](
                 double time,
-                std::vector<std::pair<std::optional<qreal>, QColor> > values) {
+                std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
+                    values) {
               Q_ASSERT(values.size() == numValues);
               if (false && verbose) {
                 std::vector<QString> dbgValues;
                 dbgValues.reserve(numValues);
-                for (auto &p : values)
-                  dbgValues.push_back(p.first ? QString::number(*p.first)
-                                              : QString("null"));
+                for (auto const &value : values)
+                  dbgValues.push_back(std::get<0>(value)
+                                          ? QString::number(*std::get<0>(value))
+                                          : QString("null"));
                 qDebug() << qSetRealNumberPrecision(13) << "t=" << time
                          << "values=" << dbgValues;
               }
@@ -463,17 +503,29 @@ void TimeChart::paintAxis(Axis const &axis) {
               qreal totVal{0.};
               if (center) {
                 for (auto const &value : values)
-                  if (value.first) totVal += *value.first;
+                  totVal += std::get<0>(value).value_or(0);
               }
               qreal const x{toPixel(time)};
               qreal tot{-totVal / 2};
               qreal prevY{YofV(tot, axis.min, axis.max, log_base.first,
                                log_base.second)};
+              // Check time distance:
+              double const dt{std::abs(time - m_currentTime)};
+              bool save_values{false};
+              if (!best_dt || dt < *best_dt) {
+                best_dt = dt;
+                closest_x = x;
+                save_values = true;
+              }
+
               for (size_t l = 0; l < values.size(); l++) {
-                if (values[l].first) {
-                  if (verbose && *values[l].first < 0)
+                if (std::get<0>(values[l])) {
+                  qreal const v{*std::get<0>(values[l])};
+                  if (verbose && v < 0)
                     qDebug() << "Stacked chart with negative values";
-                  qreal const y{YofV(*values[l].first + tot, axis.min, axis.max,
+                  QString const &label{std::get<1>(values[l])};
+                  QColor const &color{std::get<2>(values[l])};
+                  qreal const y{YofV(v + tot, axis.min, axis.max,
                                      log_base.first, log_base.second)};
                   if (!std::isnan(y)) {
                     QPointF cur{x, y};
@@ -482,28 +534,48 @@ void TimeChart::paintAxis(Axis const &axis) {
                                               QPointF(lastX, lastOffs[l]),
                                               QPointF(x, prevY), cur};
                       painter.setPen(Qt::NoPen);
-                      QColor fill{values[l].second};
+                      QColor fill{color};
                       fill.setAlpha(100);
                       painter.setBrush(fill);
                       painter.setRenderHint(QPainter::Antialiasing, false);
                       painter.drawConvexPolygon(points, 4);
-                      painter.setPen(values[l].second);
+                      painter.setPen(color);
                       painter.setRenderHint(QPainter::Antialiasing);
                       painter.drawLine(*last[l], cur);
                     }
                     last[l] = cur;
                     lastOffs[l] = prevY;
                     prevY = y;
-                    tot += *values[l].first;
+                    tot += v;
+                    if (save_values)
+                      closest_ys[l] = std::make_tuple(v, y, label, color);
                   } else {
                     last[l] = std::nullopt;
+                    if (save_values) closest_ys[l] = std::nullopt;
                   }
                 } else {
                   last[l] = std::nullopt;
+                  if (save_values) closest_ys[l] = std::nullopt;
                 }
               }
               lastX = x;
             });
+
+        /* Save the dots: */
+        if (best_dt) {
+          for (size_t i = 0; i < numValues; i++) {
+            if (!closest_ys[i]) continue;
+            double const v{std::get<0>(*closest_ys[i])};
+            qreal const closest_y{std::get<1>(*closest_ys[i])};
+            QString const &label{std::get<2>(*closest_ys[i])};
+            QColor const &color{std::get<3>(*closest_ys[i])};
+            QString const value_label{QString::number(v)};
+            QString const dot_label{label.isEmpty()
+                                        ? value_label
+                                        : label + QString(": ") + value_label};
+            dots.emplace_back(QPointF(closest_x, closest_y), color, dot_label);
+          }
+        }
 
         /* Also display tails and replay requests: */
         for (Line const &line : lines) {
@@ -516,6 +588,14 @@ void TimeChart::paintAxis(Axis const &axis) {
 
   drawStacked(axis.stacked, false);
   drawStacked(axis.stackCentered, true);
+
+  /* Finally, draw all dots on top of this: */
+  // TODO: radius and font larger if the axis is focused?
+  QFont font{painter.font()};
+  font.setPixelSize(minorTickLabelHeight);
+  painter.setFont(font);
+  static constexpr qreal radius{5.};
+  for (Dot const &dot : dots) dot.paint(painter, radius);
 }
 
 static int getFieldNum(std::shared_ptr<Function const> func,
@@ -672,7 +752,7 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         m_viewPort.first, m_viewPort.second, true, res.columns,
         [&res](double time,
                std::vector<std::shared_ptr<
-                   dessser::gen::raql_value::t const> > const values) {
+                   dessser::gen::raql_value::t const>> const values) {
           /* Store this tuple (as doubles) */
           size_t const tupleIdx{res.tuples.size()};
           res.tuples.emplace_back(time, values);
@@ -684,11 +764,12 @@ void TimeChart::paintEvent(QPaintEvent *event) {
             QString label;
             for (std::pair<std::string, int> const &idx : f.indices) {
               QString const value{raqlValToQString(*values[idx.second])};
-              label += QString::fromStdString(idx.first) + '=' + value + ' ';
+              label += (label.isEmpty() ? QString() : QString(',')) +
+                       QString::fromStdString(idx.first) + '=' + value;
             }
-            auto emplaced = f.labels.emplace(std::piecewise_construct,
-                                             std::forward_as_tuple(label),
-                                             std::forward_as_tuple());
+            auto emplaced{f.labels.emplace(std::piecewise_construct,
+                                           std::forward_as_tuple(label),
+                                           std::forward_as_tuple())};
             bool const isNew{emplaced.second};
             std::vector<size_t> &tupleIndices{emplaced.first->second};
             if (isNew) tupleIndices.reserve(100);
@@ -731,10 +812,11 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         axis.stacked,
         [updateExtremums](
             double,
-            std::vector<std::pair<std::optional<qreal>, QColor> > values) {
+            std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
+                values) {
           qreal totHeight{0.};
           for (auto const &value : values) {
-            if (value.first) totHeight += *value.first;
+            totHeight += std::get<0>(value).value_or(0.);
           }
           updateExtremums(0., totHeight);
         });
@@ -744,10 +826,11 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         axis.stackCentered,
         [updateExtremums](
             double,
-            std::vector<std::pair<std::optional<qreal>, QColor> > values) {
+            std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
+                values) {
           qreal totHeight{0.};
           for (auto const &value : values) {
-            if (value.first) totHeight += *value.first;
+            totHeight += std::get<0>(value).value_or(0.);
           }
           updateExtremums(-totHeight / 2, totHeight / 2);
         });
@@ -776,21 +859,23 @@ void TimeChart::paintEvent(QPaintEvent *event) {
     paintTicks(Right, axes[*focusedAxis[Right]], funcs);
   }
 
+  double const now{getTime()};
+
   /* Draw all axes but the main one: */
   for (int i = 0; i < numAxes; i++) {
     if (focusedGridAxis && i == *focusedGridAxis)
       continue;  // keep this for later
 
-    paintAxis(axes[i]);
+    paintAxis(axes[i], now);
   }
 
   // Finally, the focused one:
-  if (focusedGridAxis) paintAxis(axes[*focusedGridAxis]);
+  if (focusedGridAxis) paintAxis(axes[*focusedGridAxis], now);
 }
 
 size_t TimeChart::PerFunctionResults::addFactors(
     std::vector<std::string> const &factors) {
-  std::vector<std::pair<std::string, int> > factorIndices;
+  std::vector<std::pair<std::string, int>> factorIndices;
   factorIndices.reserve(2);
 
   bool canHaveIt{true};
@@ -834,8 +919,8 @@ size_t TimeChart::PerFunctionResults::addFactors(
  * per factor value per line. */
 void TimeChart::Axis::iterTime(
     std::vector<Line> const &lines,
-    std::function<void(double,
-                       std::vector<std::pair<std::optional<qreal>, QColor> >)>
+    std::function<void(
+        double, std::vector<std::tuple<std::optional<qreal>, QString, QColor>>)>
         cb) {
   /* For every time step, we will have as many values as we have possible
    * factor values per lines: */
@@ -845,9 +930,9 @@ void TimeChart::Axis::iterTime(
 
   if (0 == numValues) return;
 
-  std::vector<std::pair<std::optional<qreal>, QColor> >
+  std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
       values(  // Not list-init
-          numValues, std::make_pair(std::nullopt, QColor()));
+          numValues, std::make_tuple(std::nullopt, QString(), QColor()));
 
   size_t num_tuples[1 + numValues];  // 1+ to satisfies clang-tidy
 
@@ -855,12 +940,20 @@ void TimeChart::Axis::iterTime(
   for (Line const &line : lines) {
     FactorValues const &factorValues{line.res->factorValues[line.factorValues]};
     bool const noFactor{factorValues.labels.size() <= 1};
-    for (std::pair<QString const, std::vector<size_t> > const &p :
+    for (std::pair<QString const, std::vector<size_t>> const &p :
          factorValues.labels) {
       QString const &label{p.first};
       std::vector<size_t> const &tupleIndices{p.second};
-
-      values[valIdx].second = noFactor ? line.color : colorOfString(label);
+      // FIXME: have the color in factorValues
+      std::get<1>(values[valIdx]) =
+          // Only prefix with the fieldName if we have several:
+          lines.size() > 1
+              ? (label.isEmpty() ? QString::fromStdString(line.fieldName)
+                                 : QString::fromStdString(line.fieldName) +
+                                       QString(' ') + label)
+              : label;
+      std::get<2>(values[valIdx]) =
+          noFactor ? line.color : colorOfString(label, 0.7, false);
       num_tuples[valIdx] = tupleIndices.size();
 
       valIdx++;
@@ -880,7 +973,7 @@ void TimeChart::Axis::iterTime(
       FactorValues const &factorValues{
           line.res->factorValues[line.factorValues]};
 
-      for (std::pair<QString const, std::vector<size_t> > const &p :
+      for (std::pair<QString const, std::vector<size_t>> const &p :
            factorValues.labels) {
         std::vector<size_t> const &tupleIndices{p.second};
 
@@ -903,11 +996,11 @@ void TimeChart::Axis::iterTime(
       FactorValues const &factorValues{
           line.res->factorValues[line.factorValues]};
 
-      for (std::pair<QString const, std::vector<size_t> > const &p :
+      for (std::pair<QString const, std::vector<size_t>> const &p :
            factorValues.labels) {
         std::vector<size_t> const &tupleIndices{p.second};
 
-        values[valIdx].first = 0.;
+        std::get<0>(values[valIdx]) = 0.;
 
         if (!done[valIdx]) {
           /* While nextTupleIdx < limit and time is in range, sum the
@@ -918,7 +1011,8 @@ void TimeChart::Axis::iterTime(
             size_t const tupleIdx{tupleIndices[nextTupleIdx[valIdx]]};
             CategorizedTuple const &tuple{line.res->tuples[tupleIdx]};
             if (tuple.time > minTime + minDT) break;
-            *values[valIdx].first +=
+            std::get<0>(values[valIdx]) =
+                *std::get<0>(values[valIdx]) +
                 tuple.values[line.columnIndex].value_or(0.);
             if (++nextTupleIdx[valIdx] >= num_tuples[valIdx]) {
               done[valIdx] = true;
@@ -945,4 +1039,26 @@ bool TimeChart::Axis::hasEventTime() const {
     if (l.res->noEventTime) return false;
 
   return true;
+}
+
+void TimeChart::Dot::paint(QPainter &painter, qreal radius) const {
+  QFontMetricsF const font_metrics{painter.font()};
+  QRectF const text_metrics{font_metrics.boundingRect(label)};
+
+  QPen pen{painter.pen()};
+  pen.setColor(color);
+  pen.setWidth(2);
+  painter.setPen(pen);
+  painter.drawEllipse(pos, radius, radius);
+  painter.setPen(color.darker(300));
+  QPointF const label_offset{
+      (pos.x() + 2 * radius + text_metrics.width() <= painter.viewport().width()
+           ?
+           // Draw label at right:
+           QPointF(2 * radius, text_metrics.height() / 2)
+           :
+           // Draw label at left:
+           QPointF(-(2 * radius + text_metrics.width()),
+                   text_metrics.height() / 2))};
+  painter.drawText(pos + label_offset, label);
 }
