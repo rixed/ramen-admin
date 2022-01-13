@@ -14,7 +14,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 
-static constexpr bool verbose{true};
+static constexpr bool verbose{false};
 
 /* Limit the number of in-flight requests.
  * Note that from PastData point of view, a request is in-flight as soon as
