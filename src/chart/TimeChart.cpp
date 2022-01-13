@@ -406,18 +406,17 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
 
     /* Now draw the line, actually one per factor combination. */
     FactorValues const &factorValues{line.res->factorValues[line.factorValues]};
-    for (std::pair<QString const, std::vector<size_t>> const &p :
-         factorValues.labels) {
+    for (std::pair<QString const, std::pair<std::vector<size_t>, QColor>> const
+             &p : factorValues.labels) {
       QString const &factor_label{p.first};
-      std::vector<size_t> const &tupleIndices{p.second};
+      std::vector<size_t> const &tupleIndices{p.second.first};
+      QColor const &factor_color{p.second.second};
 
       /* We use the color of the line if there is only one possible value
        * for the functors, or the color associated with the factor labels
        * otherwise. */
-      // FIXME: precompute those colorOfString and store them in factorValues!
-      QColor const color{factorValues.labels.size() <= 1
-                             ? line.color
-                             : colorOfString(factor_label, 0.7)};
+      QColor const color{factorValues.labels.size() <= 1 ? line.color
+                                                         : factor_color};
       painter.setPen(color);
       std::optional<QPointF> last;  // the last point
       bool last_drawn{false};       // was the last point drawn somehow?
@@ -778,11 +777,11 @@ void TimeChart::paintEvent(QPaintEvent *event) {
               label += (label.isEmpty() ? QString() : QString(',')) +
                        QString::fromStdString(idx.first) + '=' + value;
             }
-            auto emplaced{f.labels.emplace(std::piecewise_construct,
-                                           std::forward_as_tuple(label),
-                                           std::forward_as_tuple())};
+            auto emplaced{f.labels.emplace(std::make_pair(
+                label, std::make_pair(std::vector<size_t>(),
+                                      colorOfString(label, 0.7))))};
             bool const isNew{emplaced.second};
-            std::vector<size_t> &tupleIndices{emplaced.first->second};
+            std::vector<size_t> &tupleIndices{emplaced.first->second.first};
             if (isNew) tupleIndices.reserve(100);
             tupleIndices.push_back(tupleIdx);
           }
@@ -951,11 +950,11 @@ void TimeChart::Axis::iterTime(
   for (Line const &line : lines) {
     FactorValues const &factorValues{line.res->factorValues[line.factorValues]};
     bool const noFactor{factorValues.labels.size() <= 1};
-    for (std::pair<QString const, std::vector<size_t>> const &p :
-         factorValues.labels) {
+    for (std::pair<QString const, std::pair<std::vector<size_t>, QColor>> const
+             &p : factorValues.labels) {
       QString const &label{p.first};
-      std::vector<size_t> const &tupleIndices{p.second};
-      // FIXME: have the color in factorValues
+      std::vector<size_t> const &tupleIndices{p.second.first};
+      QColor const &label_color{p.second.second};
       std::get<1>(values[valIdx]) =
           // Only prefix with the fieldName if we have several:
           lines.size() > 1
@@ -963,8 +962,7 @@ void TimeChart::Axis::iterTime(
                                  : QString::fromStdString(line.fieldName) +
                                        QString(' ') + label)
               : label;
-      std::get<2>(values[valIdx]) =
-          noFactor ? line.color : colorOfString(label, 0.7, false);
+      std::get<2>(values[valIdx]) = noFactor ? line.color : label_color;
       num_tuples[valIdx] = tupleIndices.size();
 
       valIdx++;
@@ -984,9 +982,10 @@ void TimeChart::Axis::iterTime(
       FactorValues const &factorValues{
           line.res->factorValues[line.factorValues]};
 
-      for (std::pair<QString const, std::vector<size_t>> const &p :
+      for (std::pair<QString const,
+                     std::pair<std::vector<size_t>, QColor>> const &p :
            factorValues.labels) {
-        std::vector<size_t> const &tupleIndices{p.second};
+        std::vector<size_t> const &tupleIndices{p.second.first};
 
         if (!done[valIdx]) {
           size_t const tupleIdx{tupleIndices[nextTupleIdx[valIdx]]};
@@ -1007,9 +1006,10 @@ void TimeChart::Axis::iterTime(
       FactorValues const &factorValues{
           line.res->factorValues[line.factorValues]};
 
-      for (std::pair<QString const, std::vector<size_t>> const &p :
+      for (std::pair<QString const,
+                     std::pair<std::vector<size_t>, QColor>> const &p :
            factorValues.labels) {
-        std::vector<size_t> const &tupleIndices{p.second};
+        std::vector<size_t> const &tupleIndices{p.second.first};
 
         std::get<0>(values[valIdx]) = 0.;
 

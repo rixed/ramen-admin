@@ -51,7 +51,7 @@ class TimeChart : public AbstractTimeLine {
     std::vector<std::pair<std::string, int>> indices;
     /* Possible values, as a map from the label to all tuple indices (ordered)
      * with this label: */
-    std::map<QString, std::vector<size_t>> labels;
+    std::map<QString, std::pair<std::vector<size_t>, QColor>> labels;
 
     FactorValues(std::vector<std::pair<std::string, int>> indices_)
         : indices(indices_) {}
