@@ -71,6 +71,7 @@ void TailModel::onChange(QList<ConfChange> const &changes) {
     ConfChange const &change{changes.at(i)};
     switch (change.op) {
       case KeyCreated:
+      case KeyChanged:
         addTuple(*change.key, change.kv);
         break;
       default:
