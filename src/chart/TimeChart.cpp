@@ -251,6 +251,111 @@ void TimeChart::paintTicks(Side const side, Axis const &axis,
   }
 }
 
+void TimeChart::paintTailMeta(QPainter &painter, TailModel const &tail,
+                              QColor const &col) {
+  QFont font{painter.font()};
+  font.setPixelSize(metaFontHeight);
+  painter.setFont(font);
+  QFontMetricsF const fontMetrics{font};
+
+  qreal const x_start{toPixel(tail.minEventTime())},
+      x_stop{toPixel(tail.maxEventTime())};
+  QPen pen{col.darker()};
+  pen.setStyle(Qt::DashDotLine);
+  painter.setPen(pen);
+  painter.drawLine(QPointF(x_start, 0.), QPointF(x_start, height()));
+  painter.drawLine(QPointF(x_stop, 0.), QPointF(x_stop, height()));
+  painter.setPen(col);
+  painter.rotate(-90);  // Note: rotate is clockwise
+  static QString const tail_end_str{"…tail end"};
+  static QStaticText const start_tail_text{"Tail start…"},
+      stop_tail_text{tail_end_str};
+  QRectF bbox{fontMetrics.boundingRect(tail_end_str)};
+  // Possibly: display tail size
+  // Note: unlike drawFont, y is here the top f the font
+  painter.drawStaticText(-height(), x_start, start_tail_text);
+  // Note: additional shift required for some reason
+  painter.drawStaticText(-(4 + bbox.width()), x_stop - bbox.height(),
+                         stop_tail_text);
+  painter.rotate(90);
+}
+
+void TimeChart::paintReplayRequestsMeta(QPainter &painter, PastData &past,
+                                        QColor const &col, double now) {
+  QFont font{painter.font()};
+  font.setPixelSize(metaFontHeight);
+  painter.setFont(font);
+  QFontMetricsF const fontMetrics{font};
+  QColor const darkCol{col.darker()};
+
+  for (ReplayRequest &replay : past.replayRequests) {
+    qreal x1, x2;
+    QColor bgCol{darkCol};
+    bool drawBg{false};
+    QString status;
+    // Ratio of the requested time covered by the received tuples:
+    std::optional<double> gauge;
+    {
+      std::lock_guard<std::mutex> guard{replay.lock};
+      if (replay.isCompleted(guard)) {
+        // Dim the color with age
+        double const age{now - replay.started};
+        static double const maxAge{20};
+        if (age < 0) continue;
+        if (age < maxAge) {
+          bgCol =
+              blendColor(darkCol, painter.background().color(), age / maxAge);
+          drawBg = true;
+        }
+        size_t const num_tuples{replay.tuples.size()};
+        status = QString("completed %1 tuples").arg(num_tuples);
+      } else if (replay.isWaiting(guard)) {  // Not yet sent
+        status = "preparing…";
+      } else {  // Sent
+        size_t const num_tuples{replay.tuples.size()};
+        if (num_tuples > 0) {
+          double const recvd_dt{replay.tuples.crbegin()->first -
+                                replay.tuples.cbegin()->first};
+          Q_ASSERT(recvd_dt >= 0 && replay.until > replay.since);
+          if (recvd_dt > 0) gauge = recvd_dt / (replay.until - replay.since);
+        }
+        status = QString("received %1 tuples").arg(num_tuples);
+      }
+      x1 = toPixel(replay.since);
+      x2 = toPixel(replay.until);
+    }  // replay locked
+    QPen pen{darkCol};
+    pen.setStyle(Qt::DashDotLine);
+    painter.setPen(pen);
+    if (drawBg) {
+      /* Draw a hashed pattern in the background of this replay to help
+       * visually distinguish several replays from each others: */
+      QBrush const brush{bgCol, Qt::BDiagPattern};
+      painter.setBrush(brush);
+      QRectF const r{x1, 0., x2 - x1, static_cast<qreal>(height())};
+      painter.drawRect(r);
+    }
+    painter.rotate(-90);
+    // Note: unlike drawStaticText, y is here the baseline of the font
+    QRectF bbox{fontMetrics.boundingRect(status)};
+    painter.drawText(-height(), x1 + bbox.height(), status);
+    if (gauge) {
+      qreal const gauge_height{0.7 * bbox.height()};
+      qreal const gauge_line_width{2.};
+      painter.setPen(QPen{QBrush{darkCol}, gauge_line_width});
+      painter.setBrush(Qt::NoBrush);
+      painter.drawRect(-height() + gauge_line_width, x1 + bbox.height() * 1.5,
+                       height() - gauge_line_width * 2, gauge_height);
+      painter.setBrush(QBrush{darkCol});
+      painter.drawRect(-height() + gauge_line_width * 3,
+                       x1 + bbox.height() * 1.5 + gauge_line_width * 2,
+                       *gauge * height() - gauge_line_width * 6,
+                       gauge_height - gauge_line_width * 4);
+    }
+    painter.rotate(90);
+  }
+}
+
 void TimeChart::paintAxis(Axis const &axis) {
   if (axis.min >= axis.max) return;
 
@@ -273,107 +378,11 @@ void TimeChart::paintAxis(Axis const &axis) {
       continue;
     }
 
-    QColor const darkCol{line.color.darker()};
-
     /* Draw some meta informations: ongoing queries, where the tail begin. */
     std::shared_ptr<TailModel> tail{line.res->func->getTail()};
-    QFont font{painter.font()};
-    font.setPixelSize(metaFontHeight);
-    painter.setFont(font);
-    QFontMetricsF const fontMetrics{font};
-    if (tail) {
-      qreal const x_start{toPixel(tail->minEventTime())},
-          x_stop{toPixel(tail->maxEventTime())};
-      QPen pen{darkCol};
-      pen.setStyle(Qt::DashDotLine);
-      painter.setPen(pen);
-      painter.drawLine(QPointF(x_start, 0.), QPointF(x_start, height()));
-      painter.drawLine(QPointF(x_stop, 0.), QPointF(x_stop, height()));
-      painter.setPen(line.color);
-      painter.rotate(-90);  // Note: rotate is clockwise
-      static QString const tail_end_str{"…tail end"};
-      static QStaticText const start_tail_text{"Tail start…"},
-          stop_tail_text{tail_end_str};
-      QRectF bbox{fontMetrics.boundingRect(tail_end_str)};
-      // Possibly: display tail size
-      // Note: unlike drawFont, y is here the top f the font
-      painter.drawStaticText(-height(), x_start, start_tail_text);
-      // Note: additional shift required for some reason
-      painter.drawStaticText(-(4 + bbox.width()), x_stop - bbox.height(),
-                             stop_tail_text);
-      painter.rotate(90);
-    }
+    if (tail) paintTailMeta(painter, *tail, line.color);
     std::shared_ptr<PastData> past{line.res->func->getPast()};
-    if (past) {
-      for (ReplayRequest &replay : past->replayRequests) {
-        qreal x1, x2;
-        QColor bgCol{darkCol};
-        bool drawBg{false};
-        QString status;
-        // Ratio of the requested time covered by the received tuples:
-        std::optional<double> gauge;
-        {
-          std::lock_guard<std::mutex> guard{replay.lock};
-          if (replay.isCompleted(guard)) {
-            // Dim the color with age
-            double const age{now - replay.started};
-            static double const maxAge{20};
-            if (age < 0) continue;
-            if (age < maxAge) {
-              bgCol = blendColor(darkCol, painter.background().color(),
-                                 age / maxAge);
-              drawBg = true;
-            }
-            size_t const num_tuples{replay.tuples.size()};
-            status = QString("completed %1 tuples").arg(num_tuples);
-          } else if (replay.isWaiting(guard)) {  // Not yet sent
-            status = "preparing…";
-          } else {  // Sent
-            size_t const num_tuples{replay.tuples.size()};
-            if (num_tuples > 0) {
-              double const recvd_dt{replay.tuples.crbegin()->first -
-                                    replay.tuples.cbegin()->first};
-              Q_ASSERT(recvd_dt >= 0 && replay.until > replay.since);
-              if (recvd_dt > 0)
-                gauge = recvd_dt / (replay.until - replay.since);
-            }
-            status = QString("received %1 tuples").arg(num_tuples);
-          }
-          x1 = toPixel(replay.since);
-          x2 = toPixel(replay.until);
-        }  // replay locked
-        QPen pen{darkCol};
-        pen.setStyle(Qt::DashDotLine);
-        painter.setPen(pen);
-        if (drawBg) {
-          /* Draw a hashed pattern in the background of this replay to help
-           * visually distinguish several replays from each others: */
-          QBrush const brush{bgCol, Qt::BDiagPattern};
-          painter.setBrush(brush);
-          QRectF const r{x1, 0., x2 - x1, static_cast<qreal>(height())};
-          painter.drawRect(r);
-        }
-        painter.rotate(-90);
-        // Note: unlike drawStaticText, y is here the baseline of the font
-        QRectF bbox{fontMetrics.boundingRect(status)};
-        painter.drawText(-height(), x1 + bbox.height(), status);
-        if (gauge) {
-          qreal const gauge_height{0.7 * bbox.height()};
-          qreal const gauge_line_width{2.};
-          painter.setPen(QPen{QBrush{darkCol}, gauge_line_width});
-          painter.setBrush(Qt::NoBrush);
-          painter.drawRect(-height() + gauge_line_width,
-                           x1 + bbox.height() * 1.5,
-                           height() - gauge_line_width * 2, gauge_height);
-          painter.setBrush(QBrush{darkCol});
-          painter.drawRect(-height() + gauge_line_width * 3,
-                           x1 + bbox.height() * 1.5 + gauge_line_width * 2,
-                           *gauge * height() - gauge_line_width * 6,
-                           gauge_height - gauge_line_width * 4);
-        }
-        painter.rotate(90);
-      }
-    }
+    if (past) paintReplayRequestsMeta(painter, *past, line.color, now);
 
     /* Now draw the line, actually one per factor combination. */
     FactorValues const &factorValues{line.res->factorValues[line.factorValues]};
@@ -419,8 +428,8 @@ void TimeChart::paintAxis(Axis const &axis) {
    * That's a bit more involved as each stacked "line" can use factors,
    * and then some factor values may be missing for some time steps. */
   std::function<void(std::vector<Line> const &, bool)> drawStacked =
-      [this, &axis, log_base](std::vector<Line> const &lines, bool center) {
-        QPainter painter{this};
+      [this, &axis, log_base, &painter, now](std::vector<Line> const &lines,
+                                             bool center) {
         qreal const zeroY{
             YofV(0, axis.min, axis.max, log_base.first, log_base.second)};
 
@@ -495,6 +504,14 @@ void TimeChart::paintAxis(Axis const &axis) {
               }
               lastX = x;
             });
+
+        /* Also display tails and replay requests: */
+        for (Line const &line : lines) {
+          std::shared_ptr<TailModel> tail{line.res->func->getTail()};
+          if (tail) paintTailMeta(painter, *tail, line.color);
+          std::shared_ptr<PastData> past{line.res->func->getPast()};
+          if (past) paintReplayRequestsMeta(painter, *past, line.color, now);
+        }
       };
 
   drawStacked(axis.stacked, false);

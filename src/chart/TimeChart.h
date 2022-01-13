@@ -19,7 +19,10 @@
  * to which it attaches to receive the various changes. */
 
 class Function;
+class PastData;
 class QPaintEvent;
+class QPainter;
+class TailModel;
 class TimeChartEditWidget;
 
 namespace dessser {
@@ -169,6 +172,10 @@ class TimeChart : public AbstractTimeLine {
 
   void paintTicks(Side const, Axis const &,
                   std::map<QString, PerFunctionResults> &);
+
+  void paintTailMeta(QPainter &, TailModel const &, QColor const &);
+
+  void paintReplayRequestsMeta(QPainter &, PastData &, QColor const &, double);
 
   void paintAxis(Axis const &);
 
