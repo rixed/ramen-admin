@@ -54,7 +54,7 @@ static void decInFlight() {
 static double const minGapBetweenReplays{10.};
 
 PastData::PastData(std::string const &site_, std::string const &program_,
-                   std::string const &function_,
+                   std::string const &function_, std::string const &workerSign_,
                    std::shared_ptr<dessser::gen::raql_type::t const> type_,
                    std::shared_ptr<EventTime const> eventTime_, double maxTime_,
                    QObject *parent)
@@ -62,6 +62,7 @@ PastData::PastData(std::string const &site_, std::string const &program_,
       site(site_),
       program(program_),
       function(function_),
+      workerSign(workerSign_),
       type(type_),
       eventTime(eventTime_),
       maxTime(maxTime_) {}

@@ -41,7 +41,8 @@ class Function : public QObject, public GraphData {
   /* All past data that will ever be asked for this function.
    * Shared pointer anyway, since some callee might want to keep it longer
    * than the lifetime of this FunctionItem.
-   * Null until we get the event-time. */
+   * Null until we get the event-time.
+   * Also reset when the worker changes. */
   std::shared_ptr<PastData> pastData;
 
  public:

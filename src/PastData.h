@@ -61,6 +61,9 @@ class PastData : public QObject {
   bool insert(std::list<ReplayRequest>::iterator, double, double, bool);
 
  public:
+  // Used to detect function model changes:
+  std::string const workerSign;
+
   /* List of queries (pending or past!) for this worker, ordered by time.
    * This is where the data is eventually stored. */
   std::list<ReplayRequest> replayRequests;
@@ -72,7 +75,7 @@ class PastData : public QObject {
   double maxTime = NAN;
 
   PastData(std::string const &site, std::string const &program,
-           std::string const &function,
+           std::string const &function, std::string const &workerSign,
            std::shared_ptr<dessser::gen::raql_type::t const>,
            std::shared_ptr<EventTime const>, double maxTime_ = NAN,
            QObject *parent = nullptr);

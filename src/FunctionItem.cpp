@@ -79,17 +79,20 @@ void Function::setMinTail(double time) {
 }
 
 /* Called when the function worker changes.
- * Release the tailModel and pastData if it does not match the worker any
+ * Release the tailModel and pastData if they do not match the worker any
  * longer */
 void Function::checkTail() {
-  if (!tailModel) return;
-
-  if (worker && worker->worker_signature == tailModel->workerSign) return;
-
-  qInfo() << "Function" << QString::fromStdString(fqName) << "model changed";
-
-  tailModel.reset();
-  pastData.reset();
+  if (tailModel && worker &&
+      worker->worker_signature != tailModel->workerSign) {
+    qInfo() << "Function" << QString::fromStdString(fqName)
+            << "model changed, resetting tail data";
+    tailModel.reset();
+  }
+  if (pastData && worker && worker->worker_signature != pastData->workerSign) {
+    qInfo() << "Function" << QString::fromStdString(fqName)
+            << "model changed, resetting past data";
+    pastData.reset();
+  }
 }
 
 /* Look for it in the kvs at every call rather than caching a value that
@@ -196,11 +199,19 @@ std::shared_ptr<PastData> Function::getPast() {
     return nullptr;
   }
 
+  /* FIXME: in theory we could, choreographer would create the necessary
+   * worker. But then how to detect model changes? */
+  if (!worker) {
+    if (verbose) qDebug() << "Cannot get past data without the worker";
+    return nullptr;
+  }
+
   // Never allow to query past the tail start if we have a tail:
   double const maxDate{tailModel ? tailModel->minEventTime() : NAN};
 
   pastData = std::make_shared<PastData>(
-      siteName, programName, name.toStdString(), type, eventTime, maxDate);
+      siteName, programName, name.toStdString(), worker->worker_signature, type,
+      eventTime, maxDate);
 
   return pastData;
 }

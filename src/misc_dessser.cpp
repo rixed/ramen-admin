@@ -215,26 +215,32 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
   switch (v.index()) {
     case dessser::gen::raql_value::VTup:
       arr = &(std::get<dessser::gen::raql_value::VTup>(v));
-      Q_ASSERT(i < arr->size());
+      if (i >= arr->size()) goto err;
       return (*arr)[i];
     case dessser::gen::raql_value::VVec:
       arr = &(std::get<dessser::gen::raql_value::VVec>(v));
-      Q_ASSERT(i < arr->size());
+      if (i >= arr->size()) goto err;
       return (*arr)[i];
     case dessser::gen::raql_value::VArr:
       arr = &(std::get<dessser::gen::raql_value::VArr>(v));
-      Q_ASSERT(i < arr->size());
+      if (i >= arr->size()) goto err;
       return (*arr)[i];
     case dessser::gen::raql_value::VRec: {
       dessser::Arr<
           std::shared_ptr<dessser::gen::raql_value::named_value> > const &rec{
           std::get<dessser::gen::raql_value::VRec>(v)};
-      Q_ASSERT(i < rec.size());
+      if (i >= rec.size()) goto err;
       return std::get<1>(*rec[i]);
     }
     default:
       return nullptr;
   }
+
+err:
+  /* Should be an assertion but this log will help with
+   * https://github.com/rixed/ramen-admin/issues/137 */
+  qWarning() << "Asked for column" << i << "of" << v;
+  return nullptr;
 }
 
 std::optional<double> toDouble(dessser::gen::raql_value::t const &v) {
