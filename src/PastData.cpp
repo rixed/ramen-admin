@@ -262,7 +262,7 @@ void PastData::replayEnded() {
     while (it != postponedRequests.end()) {
       if (request(it->first, it->second, false)) {
         if (verbose) qDebug() << "PastData: dealt with postponed query";
-        postponedRequests.erase(it++);
+        it = postponedRequests.erase(it);
       } else {
         it++;
       }

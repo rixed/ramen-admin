@@ -329,13 +329,12 @@ bool TimeChartFunctionFieldsModel::setValue(
   /* Filter out fields that are not numeric (or does not exist any longer) */
   {
     auto it{source.fields.begin()};
-    auto end{source.fields.end()};
-    while (it != end) {
+    while (it != source.fields.end()) {
       QString const name{QString::fromStdString((*it)->column)};
       if (!numericFields.contains(name)) {
         qWarning() << "configured field" << name
                    << "does not exist or is not numeric";
-        source.fields.erase(it++);
+        it = source.fields.erase(it);
       } else {
         ++it;
       }
