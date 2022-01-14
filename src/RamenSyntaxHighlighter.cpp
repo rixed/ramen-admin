@@ -42,7 +42,7 @@ struct Rules {
         "at|with|duration|stops|stopping|ending|select|program|global|"
         "yield|merge|on|timeout|after|sort|until|by|where|"
         "group|notify|commit|flush|keep|all|before|collectd|netflow|"
-        "graphite|listen|read|delete|file|separator|no|escape|"
+        "graphite|listen|proto|tcp|udp|read|delete|file|separator|no|escape|"
         "preprocess|factor|factors|from|this|scope|site|sites|globally|"
         "locally|skip|nulls)\\b");
 

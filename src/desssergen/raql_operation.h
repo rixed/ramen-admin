@@ -9,6 +9,7 @@
 #include "dessser/runtime.h"
 #include "desssergen/field_name.h"
 #include "desssergen/raql_net_protocol.h"
+#include "desssergen/raql_ip_protocol.h"
 #include "desssergen/field_name.h"
 #include "desssergen/event_time.h"
 #include "desssergen/field_type.h"
@@ -526,36 +527,38 @@ inline std::ostream &operator<<(std::ostream &os, teabb4aa6beb374b8a3faf63ed92e5
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<teabb4aa6beb374b8a3faf63ed92e59d1> const r) { os << *r; return os; }
 
-struct tfb55a595623604efa44696c62f9afcc5 {
+struct tb24aca08586dad8e1ea84f2fd44f4bd3 {
   std::string net_addr;
   uint16_t port;
+  dessser::gen::raql_ip_protocol::t_ext ip_proto;
   dessser::gen::raql_net_protocol::t_ext proto;
   Lst<dessser::gen::field_name::t_ext> factors;
-  tfb55a595623604efa44696c62f9afcc5(std::string net_addr_, uint16_t port_, dessser::gen::raql_net_protocol::t_ext proto_, Lst<dessser::gen::field_name::t_ext> factors_) : net_addr(net_addr_), port(port_), proto(proto_), factors(factors_) {}
-  tfb55a595623604efa44696c62f9afcc5() = default;
+  tb24aca08586dad8e1ea84f2fd44f4bd3(std::string net_addr_, uint16_t port_, dessser::gen::raql_ip_protocol::t_ext ip_proto_, dessser::gen::raql_net_protocol::t_ext proto_, Lst<dessser::gen::field_name::t_ext> factors_) : net_addr(net_addr_), port(port_), ip_proto(ip_proto_), proto(proto_), factors(factors_) {}
+  tb24aca08586dad8e1ea84f2fd44f4bd3() = default;
 };
-inline bool operator==(tfb55a595623604efa44696c62f9afcc5 const &a, tfb55a595623604efa44696c62f9afcc5 const &b) {
-  return a.net_addr == b.net_addr && a.port == b.port && ::dessser::gen::raql_net_protocol::Deref(a.proto) == ::dessser::gen::raql_net_protocol::Deref(b.proto) && a.factors == b.factors;
+inline bool operator==(tb24aca08586dad8e1ea84f2fd44f4bd3 const &a, tb24aca08586dad8e1ea84f2fd44f4bd3 const &b) {
+  return a.net_addr == b.net_addr && a.port == b.port && ::dessser::gen::raql_ip_protocol::Deref(a.ip_proto) == ::dessser::gen::raql_ip_protocol::Deref(b.ip_proto) && ::dessser::gen::raql_net_protocol::Deref(a.proto) == ::dessser::gen::raql_net_protocol::Deref(b.proto) && a.factors == b.factors;
 }
 
-inline bool operator!=(tfb55a595623604efa44696c62f9afcc5 const &a, tfb55a595623604efa44696c62f9afcc5 const &b) {
+inline bool operator!=(tb24aca08586dad8e1ea84f2fd44f4bd3 const &a, tb24aca08586dad8e1ea84f2fd44f4bd3 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tfb55a595623604efa44696c62f9afcc5 const &r) {
+inline std::ostream &operator<<(std::ostream &os, tb24aca08586dad8e1ea84f2fd44f4bd3 const &r) {
   os << '{';
   os << "net_addr:" << r.net_addr << ',';
   os << "port:" << r.port << ',';
+  os << "ip_proto:" << r.ip_proto << ',';
   os << "proto:" << r.proto << ',';
   os << "factors:" << r.factors;
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tfb55a595623604efa44696c62f9afcc5> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb24aca08586dad8e1ea84f2fd44f4bd3> const r) { os << *r; return os; }
 
 struct t : public std::variant<
   ::dessser::gen::raql_operation::t2924eb63c15624d94238446da8ddd5a5, // Aggregate
   ::dessser::gen::raql_operation::teabb4aa6beb374b8a3faf63ed92e59d1, // ReadExternal
-  ::dessser::gen::raql_operation::tfb55a595623604efa44696c62f9afcc5 // ListenFor
+  ::dessser::gen::raql_operation::tb24aca08586dad8e1ea84f2fd44f4bd3 // ListenFor
 > {
   using variant::variant;
   using variant::operator=;

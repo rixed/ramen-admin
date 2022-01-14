@@ -68,6 +68,7 @@ TYPE_SOURCES = \
 	raql_binding_key.type \
 	raql_expr.type \
 	raql_net_protocol.type \
+	raql_ip_protocol.type \
 	raql_select_field.type \
 	raql_flush_method.type \
 	raql_operation.type \

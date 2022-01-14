@@ -52,6 +52,7 @@ HEADERS_DESSSERC_GEN = \
   desssergen/raql_binding_key.h \
   desssergen/raql_expr.h \
   desssergen/raql_net_protocol.h \
+  desssergen/raql_ip_protocol.h \
   desssergen/raql_select_field.h \
   desssergen/raql_flush_method.h \
   desssergen/raql_operation.h \
@@ -110,6 +111,7 @@ SOURCES_DESSSERC_GEN = \
   desssergen/raql_binding_key.cc \
   desssergen/raql_expr.cc \
   desssergen/raql_net_protocol.cc \
+  desssergen/raql_ip_protocol.cc \
   desssergen/raql_select_field.cc \
   desssergen/raql_flush_method.cc \
   desssergen/raql_operation.cc \
