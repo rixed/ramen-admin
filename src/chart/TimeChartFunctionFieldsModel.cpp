@@ -274,7 +274,7 @@ bool TimeChartFunctionFieldsModel::setValue(
   std::shared_ptr<dessser::gen::source_info::t const> sourceInfo;
   {
     kvs->lock.lock_shared();
-    auto it = kvs->map.find(infoKey);
+    auto it{kvs->map.find(infoKey)};
     if (it != kvs->map.end()) {
       std::shared_ptr<dessser::gen::sync_value::t const> v{it->second.val};
       if (v->index() == dessser::gen::sync_value::SourceInfo) {

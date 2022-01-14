@@ -44,7 +44,7 @@ struct Rules {
         "group|notify|commit|flush|keep|all|before|collectd|netflow|"
         "graphite|listen|proto|tcp|udp|read|delete|file|separator|no|escape|"
         "preprocess|factor|factors|from|this|scope|site|sites|globally|"
-        "locally|skip|nulls)\\b");
+        "locally|skip|nulls|in|out)\\b");
 
     QTextCharFormat ops;
     ops.setFontWeight(QFont::Bold);
