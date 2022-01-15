@@ -88,6 +88,13 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
 
   SiteItem const *parentSite{dynamic_cast<SiteItem const *>(parentPtr)};
   if (parentSite) {
+    /* The row denotes a programPart.
+     * For now always accept intermediary programPart objects, and start
+     * to filter only actual programs: */
+    Q_ASSERT((size_t)sourceRow < parentSite->programParts.size());
+    ProgramPartItem const *programPart{parentSite->programParts[sourceRow]};
+    ProgramItem const *program{programPart->actualProgram};
+    if (!program) return true;
     /* If that program is running only top-halves or non-working functions,
      * then also filter it. There is a vicious consequence though: if it's
      * just empty, and we later add a function that should not be filtered,
@@ -106,13 +113,13 @@ bool ProcessesWidgetProxy::filterAcceptsRow(
      * the case.
      * Sites cause no such trouble because we always display even empty
      * sites. */
-    Q_ASSERT((size_t)sourceRow < parentSite->programs.size());
-    if (verbose) qDebug() << "Filtering program #" << sourceRow << "?";
-    ProgramItem const *program{parentSite->programs[sourceRow]};
+    if (verbose)
+      qDebug() << "Filtering program" << program->shared->name << "?";
 
     // Filter entire programs if all their functions are filtered:
     if (0 == program->functions.size()) {
-      if (verbose) qDebug() << "Filter empty program" << program->shared->name;
+      if (verbose)
+        qDebug() << "Filter out empty program" << program->shared->name;
       return false;
     }
     bool accepted{false};
