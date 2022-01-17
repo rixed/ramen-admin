@@ -20,7 +20,10 @@ TimeLineGroup::TimeLineGroup(QObject *parent)
                                           std::numeric_limits<qreal>::min())) {
   items.reserve(20);
 
-  /* First connect a 1sec timer to a slot in this TimeLineGroup, that will then
+  /* We want relative time ranges (Last X seconds) to track real time, for
+   * simplicity and also because that's probably the intent (rather than
+   * "Last X seconds _of_data_").
+   * Connect a 1sec timer to a slot in this TimeLineGroup, that will then
    * emit a signal with the desired offset, to which all items will be
    * connected. */
   relativeRangeTimer = new QTimer(this);

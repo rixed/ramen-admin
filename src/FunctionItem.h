@@ -109,7 +109,7 @@ class Function : public QObject, public GraphData {
                                         QString const &name);
 
  protected slots:
-  void setMinTail(double);
+  void setMaxTail(double);
 };
 
 class FunctionItem : public GraphItem {

@@ -62,20 +62,18 @@ std::shared_ptr<TailModel> Function::getOrCreateTail() {
       siteName, fqName, worker->worker_signature, outType(), getTime(), this);
 
   connect(tailModel.get(), &TailModel::receivedTuple, this,
-          &Function::setMinTail);
+          &Function::setMaxTail);
 
   return tailModel;
 }
 
-void Function::setMinTail(double time) {
+void Function::setMaxTail(double time) {
   if (!pastData) return;
   if (time >= pastData->maxTime) return;
 
   if (verbose) qDebug() << "Function: update pastData max time with" << time;
 
   pastData->maxTime = time;
-
-  // Keep the connection because the first tail tuple may not be the min time
 }
 
 /* Called when the function worker changes.
