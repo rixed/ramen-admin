@@ -9,6 +9,7 @@
 #include "AtomicForm.h"
 #include "Menu.h"
 #include "Resources.h"
+#include "desssergen/sync_value.h"
 #include "misc_dessser.h"
 #include "target_config/TargetConfigEditor.h"
 #include "target_config/TargetConfigEntryEditor.h"
@@ -23,8 +24,7 @@ TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
    * Notice that RC entries being just elements of the TargetConfig
    * they have no independent keys that could be deleted independently.
    * Instead, we need an ad-hoc delete function. */
-  QPushButton *deleteButton{
-      new QPushButton(r->deletePixmap, tr("Delete this entry"))};
+  deleteButton = new QPushButton(r->deletePixmap, tr("Delete this entry"));
   form->buttonsLayout->insertWidget(2, deleteButton);
   connect(form, &AtomicForm::changeEnabled, deleteButton,
           &QPushButton::setEnabled);
@@ -39,6 +39,8 @@ TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
           &TargetConfigEditorWin::wantNewEntry);
 
   targetConfigEditor = new TargetConfigEditor;
+  connect(targetConfigEditor, &TargetConfigEditor::valueChanged, this,
+          &TargetConfigEditorWin::disableEditIfEmpty);
   targetConfigEditor->setKey(targetConfig);
   targetConfigEditor->setValueFromStore();
   form->setCentralWidget(targetConfigEditor);
@@ -82,4 +84,22 @@ void TargetConfigEditorWin::wantNewEntry() {
 
 void TargetConfigEditorWin::preselect(QString const &programName) {
   targetConfigEditor->preselect(programName);
+}
+
+void TargetConfigEditorWin::disableEditIfEmpty(
+    std::shared_ptr<dessser::gen::sync_value::t const> sync_value) {
+  if (sync_value->index() != dessser::gen::sync_value::TargetConfig) {
+    qWarning() << "target-config is actually:" << *sync_value;
+    return;
+  }
+  dessser::Arr<dessser::gen::rc_entry::t_ext> const &target_config{
+      std::get<dessser::gen::sync_value::TargetConfig>(*sync_value)};
+
+  bool has_entries{target_config.size() > 0};
+  form->editButton->setVisible(has_entries);
+  form->cancelButton->setVisible(has_entries ||
+                                 form->cancelButton->isEnabled());
+  deleteButton->setVisible(has_entries);
+  form->submitButton->setVisible(has_entries ||
+                                 form->submitButton->isEnabled());
 }
