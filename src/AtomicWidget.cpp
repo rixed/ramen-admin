@@ -23,6 +23,9 @@ void AtomicWidget::onChange(QList<ConfChange> const &changes) {
     if (!sameKey(*change.key)) continue;
     switch (change.op) {
       case KeyCreated:
+        lockValue(*change.key, change.kv);
+        setValue(change.kv.val);
+        break;
       case KeyChanged:
         setValue(change.kv.val);
         break;
