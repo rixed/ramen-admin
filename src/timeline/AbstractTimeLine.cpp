@@ -432,8 +432,7 @@ void AbstractTimeLine::offset(double dt) {
   setBeginOfTime(m_beginOfTime + dt);
   setEndOfTime(m_endOfTime + dt);
   // Only if the viewport has changed to tracks the time!
-  if (m_viewPort.first != vp_start)
-    setCurrentTime(m_currentTime + dt, false);
+  if (m_viewPort.first != vp_start) setCurrentTime(m_currentTime + dt, false);
 }
 
 void AbstractTimeLine::highlightRange(QPair<qreal, qreal> const range) {

@@ -6,6 +6,7 @@
 #include <QHBoxLayout>
 #include <QHeaderView>
 #include <QLabel>
+#include <QStackedLayout>
 #include <QTabWidget>
 #include <QTableWidget>
 #include <QVBoxLayout>
@@ -20,12 +21,27 @@
 #include "misc_dessser.h"
 
 SourceInfoViewer::SourceInfoViewer(QWidget *parent) : AtomicWidget(parent) {
-  layout = new QVBoxLayout;
+  stackedLayout = new QStackedLayout;
+
+  QWidget *readOnlyWidget{new QWidget};
+  readOnlyWidget->setObjectName("infoViewerContents");
+  readOnlyLayout = new QVBoxLayout;
+  readOnlyWidget->setLayout(readOnlyLayout);
+  readOnlyWidget->setMinimumHeight(400);
+  readOnlyIndex = stackedLayout->addWidget(readOnlyWidget);
+
+  QLabel *readWriteError{
+      new QLabel(tr("Object informations can not be edited"))};
+  readWriteError->setAlignment(Qt::AlignHCenter | Qt::AlignVCenter);
+  readWriteIndex = stackedLayout->addWidget(readWriteError);
+
   QWidget *contents{new QWidget};
-  contents->setObjectName("infoViewerContents");
-  contents->setLayout(layout);
-  contents->setMinimumHeight(400);
+  contents->setLayout(stackedLayout);
   relayoutWidget(contents);
+}
+
+void SourceInfoViewer::setEnabled(bool enabled) {
+  stackedLayout->setCurrentIndex(enabled ? readWriteIndex : readOnlyIndex);
 }
 
 static QString const QStringOfRetention(dessser::gen::retention::t const &r) {
@@ -37,7 +53,7 @@ bool SourceInfoViewer::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   /* Empty the previous params/parents layouts: */
   /* FIXME: rather instanciate the widgets only once and hide those unused */
-  emptyLayout(layout);
+  emptyLayout(readOnlyLayout);
 
   if (v->index() == dessser::gen::sync_value::SourceInfo) {
     std::shared_ptr<dessser::gen::source_info::t> info{
@@ -49,18 +65,18 @@ bool SourceInfoViewer::setValue(
       QLabel *l{new QLabel(QString::fromStdString(failed.err_msg))};
       l->setWordWrap(true);
       l->setAlignment(Qt::AlignCenter);
-      layout->addWidget(l);
+      readOnlyLayout->addWidget(l);
     } else {
       Q_ASSERT(info->detail.index() == dessser::gen::source_info::Compiled);
       std::shared_ptr<dessser::gen::source_info::compiled_program> compiled{
           std::get<dessser::gen::source_info::Compiled>(info->detail)};
 
-      layout->addWidget(new QLabel("<b>" + tr("Parameters") + "</b>"));
+      readOnlyLayout->addWidget(new QLabel("<b>" + tr("Parameters") + "</b>"));
 
       if (compiled->default_params.size() == 0) {
         QLabel *none{new QLabel("<i>" + tr("none") + "</i>")};
         none->setAlignment(Qt::AlignCenter);
-        layout->addWidget(none);
+        readOnlyLayout->addWidget(none);
       } else {
         QFormLayout *paramsLayout{new QFormLayout};
         for (std::shared_ptr<dessser::gen::program_parameter::t> const &p :
@@ -74,7 +90,7 @@ bool SourceInfoViewer::setValue(
             paramsLayout->addRow(doc);
           }
         }
-        layout->addLayout(paramsLayout);
+        readOnlyLayout->addLayout(paramsLayout);
       }
 
       QTabWidget *functions{new QTabWidget};
@@ -136,10 +152,10 @@ bool SourceInfoViewer::setValue(
         sign->setWordWrap(true);
         l->addWidget(sign);
       }
-      layout->addWidget(new QLabel("<b>" + tr("Functions") + "</b>"));
-      layout->addWidget(functions);
+      readOnlyLayout->addWidget(new QLabel("<b>" + tr("Functions") + "</b>"));
+      readOnlyLayout->addWidget(functions);
     }
-    layout->addSpacing(10);
+    readOnlyLayout->addSpacing(10);
     QStringList md5s;
     for (auto const &s : info->md5s) md5s.append(QString::fromStdString(s));
     QString md5s_label{
@@ -148,7 +164,7 @@ bool SourceInfoViewer::setValue(
                     .arg(md5s.join(", ")))};
     QLabel *md5{new QLabel(md5s_label)};
     md5->setWordWrap(true);
-    layout->addWidget(md5);
+    readOnlyLayout->addWidget(md5);
     // TODO: emit valueChanged?
     return true;
   } else {

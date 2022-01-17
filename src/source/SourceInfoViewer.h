@@ -6,15 +6,22 @@
 #include "AtomicWidget.h"
 
 class QVBoxLayout;
+class QStackedLayout;
 
 class SourceInfoViewer : public AtomicWidget {
   Q_OBJECT
 
-  QVBoxLayout *layout;
+  /* Either the editor in RO or an error message in RW mode */
+  QStackedLayout *stackedLayout;
+  int readOnlyIndex, readWriteIndex;
+
+  /* Storing all the widgets required to display a value */
+  QVBoxLayout *readOnlyLayout;
 
  public:
   SourceInfoViewer(QWidget *parent = nullptr);
-  void setEnabled(bool) {}
+
+  void setEnabled(bool);
 
  public slots:
   bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
