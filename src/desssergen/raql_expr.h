@@ -1388,29 +1388,29 @@ inline std::ostream &operator<<(std::ostream &os, t21c79d7ddf56bf769a52fb1b8eb70
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t21c79d7ddf56bf769a52fb1b8eb70a95> const v) { os << *v; return os; }
 
-struct t653dea3e3c942d4a754bc69dc55e032d : public std::tuple<
-  ::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d,
-  bool,
-  ::dessser::gen::raql_expr::t21c79d7ddf56bf769a52fb1b8eb70a95
-> {
-  using tuple::tuple;
+struct t833a36cfc8bd2630dc451aaf12f7f4a3 {
+  std::optional<::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d> lifespan;
+  bool skip_nulls;
+  ::dessser::gen::raql_expr::t21c79d7ddf56bf769a52fb1b8eb70a95 operation;
+  t833a36cfc8bd2630dc451aaf12f7f4a3(std::optional<::dessser::gen::raql_expr::t7a3f24e16c0115a0d24774d9e09d3c1d> lifespan_, bool skip_nulls_, ::dessser::gen::raql_expr::t21c79d7ddf56bf769a52fb1b8eb70a95 operation_) : lifespan(lifespan_), skip_nulls(skip_nulls_), operation(operation_) {}
+  t833a36cfc8bd2630dc451aaf12f7f4a3() = default;
 };
-inline bool operator==(t653dea3e3c942d4a754bc69dc55e032d const &a, t653dea3e3c942d4a754bc69dc55e032d const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b) && std::get<2>(a) == std::get<2>(b);
-}
-inline bool operator!=(t653dea3e3c942d4a754bc69dc55e032d const &a, t653dea3e3c942d4a754bc69dc55e032d const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, t653dea3e3c942d4a754bc69dc55e032d const &t) {
-  os << '<';
-  os << std::get<0>(t) << ", ";
-  os << std::get<1>(t) << ", ";
-  os << std::get<2>(t);
-  os << '>';
-  return os;
+inline bool operator==(t833a36cfc8bd2630dc451aaf12f7f4a3 const &a, t833a36cfc8bd2630dc451aaf12f7f4a3 const &b) {
+  return ((a.lifespan && b.lifespan && a.lifespan.value() == b.lifespan.value()) || (!a.lifespan && !b.lifespan)) && a.skip_nulls == b.skip_nulls && a.operation == b.operation;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t653dea3e3c942d4a754bc69dc55e032d> const t) { os << *t; return os; }
+inline bool operator!=(t833a36cfc8bd2630dc451aaf12f7f4a3 const &a, t833a36cfc8bd2630dc451aaf12f7f4a3 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t833a36cfc8bd2630dc451aaf12f7f4a3 const &r) {
+  os << '{';
+  if (r.lifespan) os << "lifespan:" << r.lifespan.value() << ',';
+  os << "skip_nulls:" << r.skip_nulls << ',';
+  os << "operation:" << r.operation;
+  os << '}';
+  return os;
+}
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t833a36cfc8bd2630dc451aaf12f7f4a3> const r) { os << *r; return os; }
 
 struct t09ebe067ef7b13158d058ba3ce6f150c : public std::tuple<
   std::shared_ptr<::dessser::gen::raql_expr::t> ,
@@ -1465,13 +1465,13 @@ inline std::ostream &operator<<(std::ostream &os, t8411610d7f6cfe33697a36943471c
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8411610d7f6cfe33697a36943471c946> const v) { os << *v; return os; }
 
-struct ta7428910423efc9022a45e3089eeb5bf : public std::variant<
+struct t85ee0500a075c8dae90c7cba5793a050 : public std::variant<
   Lst<std::shared_ptr<::dessser::gen::raql_expr::t> >, // Tuple
   Lst<::dessser::gen::raql_expr::t893212699a9dab9c7aae59235cac13d9>, // Record
   Lst<std::shared_ptr<::dessser::gen::raql_expr::t> >, // Vector
   ::dessser::gen::raql_expr::t7a300b42842ab70bb0c47c946967b5e9, // Case
   ::dessser::gen::raql_expr::t4f2a1c97d4b8ab12303614ba4866ca7e, // Stateless
-  ::dessser::gen::raql_expr::t653dea3e3c942d4a754bc69dc55e032d, // Stateful
+  ::dessser::gen::raql_expr::t833a36cfc8bd2630dc451aaf12f7f4a3, // Stateful
   ::dessser::gen::raql_expr::t8411610d7f6cfe33697a36943471c946 // Generator
 > {
   using variant::variant;
@@ -1479,7 +1479,7 @@ struct ta7428910423efc9022a45e3089eeb5bf : public std::variant<
   static constexpr size_t size { 7 };
 };
 
-inline bool operator==(ta7428910423efc9022a45e3089eeb5bf const &a, ta7428910423efc9022a45e3089eeb5bf const &b) {
+inline bool operator==(t85ee0500a075c8dae90c7cba5793a050 const &a, t85ee0500a075c8dae90c7cba5793a050 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Tuple
@@ -1492,10 +1492,10 @@ inline bool operator==(ta7428910423efc9022a45e3089eeb5bf const &a, ta7428910423e
   };
   return false;
 }
-inline bool operator!=(ta7428910423efc9022a45e3089eeb5bf const &a, ta7428910423efc9022a45e3089eeb5bf const &b) {
+inline bool operator!=(t85ee0500a075c8dae90c7cba5793a050 const &a, t85ee0500a075c8dae90c7cba5793a050 const &b) {
   return !operator==(a, b);
 }
-enum Constr_ta7428910423efc9022a45e3089eeb5bf {
+enum Constr_t85ee0500a075c8dae90c7cba5793a050 {
   Tuple,
   Record,
   Vector,
@@ -1505,7 +1505,7 @@ enum Constr_ta7428910423efc9022a45e3089eeb5bf {
   Generator,
 };
 
-inline std::ostream &operator<<(std::ostream &os, ta7428910423efc9022a45e3089eeb5bf const &v) {
+inline std::ostream &operator<<(std::ostream &os, t85ee0500a075c8dae90c7cba5793a050 const &v) {
   switch (v.index()) {
     case 0: os << "Tuple " << std::get<0>(v); break;
     case 1: os << "Record " << std::get<1>(v); break;
@@ -1518,14 +1518,14 @@ inline std::ostream &operator<<(std::ostream &os, ta7428910423efc9022a45e3089eeb
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta7428910423efc9022a45e3089eeb5bf> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t85ee0500a075c8dae90c7cba5793a050> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf text;
+  ::dessser::gen::raql_expr::t85ee0500a075c8dae90c7cba5793a050 text;
   uint32_t uniq_num;
   dessser::gen::raql_type::t_ext typ;
   std::optional<dessser::gen::units::t_ext> units;
-  t(::dessser::gen::raql_expr::ta7428910423efc9022a45e3089eeb5bf text_, uint32_t uniq_num_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), uniq_num(uniq_num_), typ(typ_), units(units_) {}
+  t(::dessser::gen::raql_expr::t85ee0500a075c8dae90c7cba5793a050 text_, uint32_t uniq_num_, dessser::gen::raql_type::t_ext typ_, std::optional<dessser::gen::units::t_ext> units_) : text(text_), uniq_num(uniq_num_), typ(typ_), units(units_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
