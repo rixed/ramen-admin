@@ -17,7 +17,7 @@
 #include "PathNameValidator.h"
 #include "desssergen/sync_value.h"
 #include "misc_dessser.h"
-#include "source/CodeEdit.h"
+#include "source/SourceEdit.h"
 
 static constexpr bool verbose{false};
 
@@ -29,9 +29,9 @@ NewSourceDialog::NewSourceDialog(QWidget *parent) : QDialog(parent) {
           &NewSourceDialog::checkValidity);
   // TODO: Validate that the name is unique
 
-  codeEdit = new CodeEdit;
-  codeEdit->setEnabled(true);
-  connect(codeEdit, &CodeEdit::inputChanged, this,
+  sourceEdit = new SourceEdit;
+  sourceEdit->setEnabled(true);
+  connect(sourceEdit, &SourceEdit::inputChanged, this,
           &NewSourceDialog::checkValidity);
 
   buttonBox =
@@ -44,7 +44,7 @@ NewSourceDialog::NewSourceDialog(QWidget *parent) : QDialog(parent) {
 
   QFormLayout *formLayout{new QFormLayout};
   formLayout->addRow(tr("Source name"), nameEdit);
-  formLayout->addRow(codeEdit);
+  formLayout->addRow(sourceEdit);
   QVBoxLayout *layout{new QVBoxLayout};
   layout->addLayout(formLayout);
   layout->addWidget(buttonBox);
@@ -58,13 +58,15 @@ void NewSourceDialog::checkValidity() {
   if (verbose) qDebug() << "NewSourceDialog::checkValidity()";
 
   buttonBox->button(QDialogButtonBox::Ok)
-      ->setEnabled(nameEdit->hasAcceptableInput() && codeEdit->hasValidInput());
+      ->setEnabled(nameEdit->hasAcceptableInput() &&
+                   sourceEdit->hasValidInput());
 }
 
 void NewSourceDialog::createSource() {
   std::string const extension{
-      codeEdit->extensionsCombo->currentData().toString().toStdString()};
-  std::shared_ptr<dessser::gen::sync_value::t const> val{codeEdit->getValue()};
+      sourceEdit->extensionsCombo->currentData().toString().toStdString()};
+  std::shared_ptr<dessser::gen::sync_value::t const> val{
+      sourceEdit->getValue()};
 
   std::shared_ptr<dessser::gen::sync_key::t const> key{
       keyOfSrcPath(nameEdit->text().toStdString(), extension)};
@@ -75,11 +77,11 @@ void NewSourceDialog::createSource() {
 }
 
 void NewSourceDialog::clear() {
-  codeEdit->enableLanguage(codeEdit->alertEditorIndex, true);
-  codeEdit->enableLanguage(codeEdit->textEditorIndex, true);
-  codeEdit->enableLanguage(codeEdit->infoEditorIndex, false);
-  codeEdit->setLanguage(codeEdit->textEditorIndex);
-  codeEdit->textEditor->setValue(
+  sourceEdit->enableLanguage(sourceEdit->alertEditorIndex, true);
+  sourceEdit->enableLanguage(sourceEdit->textEditorIndex, true);
+  sourceEdit->enableLanguage(sourceEdit->infoEditorIndex, false);
+  sourceEdit->setLanguage(sourceEdit->textEditorIndex);
+  sourceEdit->textEditor->setValue(
       ofString("-- Created by " + my_uid->toStdString() + " the " +
                stringOfDate(std::time(nullptr)).toStdString()));
 }

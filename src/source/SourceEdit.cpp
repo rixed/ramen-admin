@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "source/CodeEdit.h"
+#include "source/SourceEdit.h"
 
 #include <QComboBox>
 #include <QDebug>
@@ -23,11 +23,11 @@
 
 static constexpr bool verbose{false};
 
-CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
+SourceEdit::SourceEdit(QWidget *parent) : QWidget(parent) {
   extensionsCombo = new QComboBox;
   extensionsCombo->setObjectName("extensionsCombo");
   connect(extensionsCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-          this, &CodeEdit::inputChanged);
+          this, &SourceEdit::inputChanged);
 
   stackedLayout = new QStackedLayout;
   stackedLayout->setObjectName("stackedLayout");
@@ -35,7 +35,7 @@ CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
   alertEditor = new AlertInfoEditor;
   alertEditor->setObjectName("alertEditor");
   connect(alertEditor, &AlertInfoEditor::inputChanged, this,
-          &CodeEdit::inputChanged);
+          &SourceEdit::inputChanged);
 
   /* Beware: Same indices are used to access currentWidget, stackedLayout,
    * extensionsCombo: */
@@ -44,7 +44,8 @@ CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
 
   textEditor = new KTextEdit;
   textEditor->setObjectName("textEditor");
-  connect(textEditor, &KTextEdit::inputChanged, this, &CodeEdit::inputChanged);
+  connect(textEditor, &KTextEdit::inputChanged, this,
+          &SourceEdit::inputChanged);
 
   textEditorIndex = stackedLayout->addWidget(textEditor);
   extensionsCombo->addItem(tr("Ramen Language (RaQL)"), "ramen");
@@ -75,14 +76,14 @@ CodeEdit::CodeEdit(QWidget *parent) : QWidget(parent) {
   setLayout(layout);
 
   // Connect the error label to this hide/show slot
-  connect(kvs.get(), &KVStore::keyChanged, this, &CodeEdit::onChange);
+  connect(kvs.get(), &KVStore::keyChanged, this, &SourceEdit::onChange);
 
   // Display the corresponding widget when the extension combobox changes:
   connect(extensionsCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
-          this, &CodeEdit::setLanguage);
+          this, &SourceEdit::setLanguage);
 }
 
-void CodeEdit::onChange(QList<ConfChange> const &changes) {
+void SourceEdit::onChange(QList<ConfChange> const &changes) {
   for (int i = 0; i < changes.length(); i++) {
     ConfChange const &change{changes.at(i)};
     switch (change.op) {
@@ -96,7 +97,7 @@ void CodeEdit::onChange(QList<ConfChange> const &changes) {
   }
 }
 
-AtomicWidget const *CodeEdit::currentWidget() const {
+AtomicWidget const *SourceEdit::currentWidget() const {
   int const editorIndex{extensionsCombo->currentIndex()};
 
   if (editorIndex == textEditorIndex) {
@@ -107,24 +108,25 @@ AtomicWidget const *CodeEdit::currentWidget() const {
     return infoEditor;
   }
 
-  qFatal("CodeEdit: invalid editorIndex=%d", editorIndex);
+  qFatal("SourceEdit: invalid editorIndex=%d", editorIndex);
 }
 
-std::shared_ptr<dessser::gen::sync_value::t const> CodeEdit::getValue() const {
+std::shared_ptr<dessser::gen::sync_value::t const> SourceEdit::getValue()
+    const {
   return currentWidget()->getValue();
 }
 
-bool CodeEdit::hasValidInput() const {
+bool SourceEdit::hasValidInput() const {
   return currentWidget()->hasValidInput();
 }
 
-void CodeEdit::enableLanguage(int index, bool enabled) {
+void SourceEdit::enableLanguage(int index, bool enabled) {
   QStandardItemModel *model{
       static_cast<QStandardItemModel *>(extensionsCombo->model())};
 
   if (enabled != model->item(index)->isEnabled()) {
     if (verbose)
-      qDebug() << "CodeEdit: language" << index
+      qDebug() << "SourceEdit: language" << index
                << (extensionsCombo->currentIndex() == index ? " (current)" : "")
                << "is now" << enabled;
 
@@ -137,7 +139,7 @@ void CodeEdit::enableLanguage(int index, bool enabled) {
   if (!model->item(extensionsCombo->currentIndex())->isEnabled()) {
     for (int row = 0; row < model->rowCount(); row++) {
       if (model->item(row)->isEnabled()) {
-        if (verbose) qDebug() << "CodeEdit: switching extension to" << row;
+        if (verbose) qDebug() << "SourceEdit: switching extension to" << row;
         extensionsCombo->setCurrentIndex(row);
         break;
       }
@@ -145,15 +147,15 @@ void CodeEdit::enableLanguage(int index, bool enabled) {
   }
 }
 
-void CodeEdit::setLanguageKey(
+void SourceEdit::setLanguageKey(
     int index, AtomicWidget *editor,
     std::shared_ptr<dessser::gen::sync_key::t const> key) {
   if (verbose) {
     if (key)
-      qDebug() << "CodeEdit: set language key for index" << index << "to"
+      qDebug() << "SourceEdit: set language key for index" << index << "to"
                << *key;
     else
-      qDebug() << "CodeEdit: no key for language index" << index;
+      qDebug() << "SourceEdit: no key for language index" << index;
   }
 
   enableLanguage(index, !!key);
@@ -161,9 +163,9 @@ void CodeEdit::setLanguageKey(
   editor->setValueFromStore();
 }
 
-void CodeEdit::setLanguage(int index) {
+void SourceEdit::setLanguage(int index) {
   if (verbose)
-    qDebug() << "CodeEdit::setLanguage: Switching to language" << index;
+    qDebug() << "SourceEdit::setLanguage: Switching to language" << index;
 
   stackedLayout->setCurrentIndex(index);
   /* Useful when called by NewSourceDialog but not so much when signaling
@@ -171,8 +173,8 @@ void CodeEdit::setLanguage(int index) {
   extensionsCombo->setCurrentIndex(index);
 }
 
-void CodeEdit::setError(std::shared_ptr<dessser::gen::sync_key::t const> key,
-                        KValue const &kv) {
+void SourceEdit::setError(std::shared_ptr<dessser::gen::sync_key::t const> key,
+                          KValue const &kv) {
   std::optional<std::pair<std::string const, std::string const> > src_path{
       srcPathOfKey(*key)};
   if (!src_path || src_path->first != srcPath || src_path->second != "info")
@@ -180,9 +182,9 @@ void CodeEdit::setError(std::shared_ptr<dessser::gen::sync_key::t const> key,
   doResetError(kv);
 }
 
-void CodeEdit::doResetError(KValue const &kv) {
+void SourceEdit::doResetError(KValue const &kv) {
   if (kv.val->index() != dessser::gen::sync_value::SourceInfo) {
-    qCritical() << "CodeEdit::doResetError: Not a SourceInfo:" << *kv.val;
+    qCritical() << "SourceEdit::doResetError: Not a SourceInfo:" << *kv.val;
     return;
   }
 
@@ -202,7 +204,7 @@ void CodeEdit::doResetError(KValue const &kv) {
   }
 }
 
-void CodeEdit::resetError(KValue const *kv) {
+void SourceEdit::resetError(KValue const *kv) {
   if (kv) {
     doResetError(*kv);
   } else {
@@ -211,9 +213,9 @@ void CodeEdit::resetError(KValue const *kv) {
   }
 }
 
-void CodeEdit::setSrcPath(std::string const &path) {
+void SourceEdit::setSrcPath(std::string const &path) {
   if (verbose)
-    qDebug() << "CodeEdit::setSrcPath:" << QString::fromStdString(path)
+    qDebug() << "SourceEdit::setSrcPath:" << QString::fromStdString(path)
              << "replacing " << QString::fromStdString(srcPath);
 
   if (path == srcPath) return;
@@ -256,7 +258,7 @@ void CodeEdit::setSrcPath(std::string const &path) {
       /* Skip Null values that are created as placeholder during compilation:
        */
       !isNull(*it->second.val)) {
-    if (verbose) qDebug() << "CodeEdit::setSrcPath: found an alert";
+    if (verbose) qDebug() << "SourceEdit::setSrcPath: found an alert";
     setLanguageKey(alertEditorIndex, alertEditor, alertKey);
     numSources++;
     compete_latest(it->second.mtime, it->second.uid, alertEditorIndex);
@@ -270,7 +272,7 @@ void CodeEdit::setSrcPath(std::string const &path) {
       /* Skip Null values that are created as placeholder during compilation:
        */
       !isNull(*it->second.val)) {
-    if (verbose) qDebug() << "CodeEdit::setSrcPath: found ramen code";
+    if (verbose) qDebug() << "SourceEdit::setSrcPath: found ramen code";
     setLanguageKey(textEditorIndex, textEditor, ramenKey);
     numSources++;
     compete_latest(it->second.mtime, it->second.uid, textEditorIndex);
@@ -284,7 +286,7 @@ void CodeEdit::setSrcPath(std::string const &path) {
       /* Skip Null values that are created as placeholder during compilation:
        */
       !isNull(*it->second.val)) {
-    if (verbose) qDebug() << "CodeEdit::setSrcPath: found info";
+    if (verbose) qDebug() << "SourceEdit::setSrcPath: found info";
     setLanguageKey(infoEditorIndex, infoEditor, infoKey);
     numSources++;
     // To show error messages prominently regardless of the current editor:
@@ -303,6 +305,6 @@ void CodeEdit::setSrcPath(std::string const &path) {
   kvs->lock.unlock_shared();
 }
 
-void CodeEdit::disableLanguageSwitch(bool disabled) {
+void SourceEdit::disableLanguageSwitch(bool disabled) {
   extensionsCombo->setEnabled(!disabled);
 }

@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "source/CodeEditForm.h"
+#include "source/SourceEditForm.h"
 
 #include <QComboBox>
 #include <QDebug>
@@ -12,13 +12,13 @@
 #include "ProgramItem.h"
 #include "misc_dessser.h"
 #include "source/AlertInfoEditor.h"
-#include "source/CodeEdit.h"
 #include "source/SourceCloneDialog.h"
+#include "source/SourceEdit.h"
 #include "source/SourceInfoViewer.h"
 
 static constexpr bool verbose{false};
 
-CodeEditForm::CodeEditForm(QWidget *parent) : AtomicForm(true, parent) {
+SourceEditForm::SourceEditForm(QWidget *parent) : AtomicForm(true, parent) {
   layout()->setContentsMargins(QMargins());
 
   QPushButton *cloneButton{new QPushButton("&Clone…")};
@@ -26,7 +26,7 @@ CodeEditForm::CodeEditForm(QWidget *parent) : AtomicForm(true, parent) {
   Q_ASSERT(buttonsLayout);
   buttonsLayout->insertWidget(0, cloneButton);
 
-  codeEdit = new CodeEdit;
+  codeEdit = new SourceEdit;
   codeEdit->setObjectName("codeEdit");
   // FIXME: codeEdit should inherit AtomicWidgetAlternative
   setCentralWidget(codeEdit);
@@ -35,15 +35,15 @@ CodeEditForm::CodeEditForm(QWidget *parent) : AtomicForm(true, parent) {
   addWidget(codeEdit->infoEditor, true);
 
   // Connect the clone button to the creation of a cloning dialog:
-  connect(cloneButton, &QPushButton::clicked, this, &CodeEditForm::wantClone);
+  connect(cloneButton, &QPushButton::clicked, this, &SourceEditForm::wantClone);
   // Disable language switcher in edit mode
-  connect(this, &CodeEditForm::changeEnabled, codeEdit,
-          &CodeEdit::disableLanguageSwitch);
+  connect(this, &SourceEditForm::changeEnabled, codeEdit,
+          &SourceEdit::disableLanguageSwitch);
 }
 
-void CodeEditForm::wantClone() {
+void SourceEditForm::wantClone() {
   if (verbose)
-    qDebug() << "CodeEditForm::wantClone: srcPath="
+    qDebug() << "SourceEditForm::wantClone: srcPath="
              << QString::fromStdString(codeEdit->srcPath) << ", extension="
              << codeEdit->extensionsCombo->currentData().toString();
 

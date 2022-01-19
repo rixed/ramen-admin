@@ -1,6 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef CODEEDIT_H_190516
-#define CODEEDIT_H_190516
+#ifndef SOURCEEDIT_H_190516
+#define SOURCEEDIT_H_190516
 #include <QWidget>
 #include <memory>
 #include <string>
@@ -25,7 +25,7 @@ struct t;
 }  // namespace gen
 }  // namespace dessser
 
-class CodeEdit : public QWidget {
+class SourceEdit : public QWidget {
   Q_OBJECT
 
   AtomicWidget const *currentWidget() const;
@@ -67,7 +67,7 @@ class CodeEdit : public QWidget {
 
   QLabel *compilationError;
 
-  CodeEdit(QWidget *parent = nullptr);
+  SourceEdit(QWidget *parent = nullptr);
 
   // Returns the value of the value of the currently selected editor:
   std::shared_ptr<dessser::gen::sync_value::t const> getValue() const;

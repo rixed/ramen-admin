@@ -15,8 +15,8 @@
 
 #include "AtomicForm.h"
 #include "ButtonDelegate.h"
-#include "CodeEdit.h"
-#include "CodeEditForm.h"
+#include "SourceEdit.h"
+#include "SourceEditForm.h"
 #include "misc.h"
 #include "misc_dessser.h"
 #include "raw/RawConfEditorDialog.h"
@@ -85,7 +85,7 @@ SourcesView::SourcesView(SourcesModel *sourceModel_, QWidget *parent)
 
   rightLayout = new QStackedLayout;
 
-  editorForm = new CodeEditForm;
+  editorForm = new SourceEditForm;
   editorForm->setObjectName("editorForm");
   codeEditorIndex = rightLayout->addWidget(editorForm);
 

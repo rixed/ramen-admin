@@ -6,7 +6,7 @@
 
 /* The SourcesView displays on the left the list of all known sources
  * and on the right an editor window. */
-class CodeEditForm;
+class SourceEditForm;
 class GraphItem;
 class QLabel;
 class QStackedLayout;
@@ -31,7 +31,7 @@ class SourcesView : public QSplitter {
   SourcesTreeView *sourcesList;
 
   /* The editor for any type of sources: */
-  CodeEditForm *editorForm;
+  SourceEditForm *editorForm;
 
   /* A message when no source files is selected: */
   QLabel *noSelection;

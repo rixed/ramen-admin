@@ -5,12 +5,12 @@
 
 #include "AtomicWidget.h"
 
-class QPlainTextEdit;
+class CodeEdit;
 
 class KTextEdit : public AtomicWidget {
   Q_OBJECT
 
-  QPlainTextEdit *textEdit;
+  CodeEdit *codeEdit;
 
   QSize suggestedSize;
 

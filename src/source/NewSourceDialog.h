@@ -3,7 +3,7 @@
 #define NEWSOURCEDIALOG_H_190731
 #include <QDialog>
 
-class CodeEdit;
+class SourceEdit;
 class QComboBox;
 class QDialogButtonBox;
 class QLineEdit;
@@ -13,7 +13,7 @@ class NewSourceDialog : public QDialog {
 
   QDialogButtonBox *buttonBox;
   QLineEdit *nameEdit;
-  CodeEdit *codeEdit;
+  SourceEdit *sourceEdit;
 
  public:
   NewSourceDialog(QWidget *parent = nullptr);

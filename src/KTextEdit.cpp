@@ -6,10 +6,10 @@
 #include <QDebug>
 #include <QFontMetrics>
 #include <QGuiApplication>
-#include <QPlainTextEdit>
 #include <QScreen>
 #include <cassert>
 
+#include "CodeEdit.h"
 #include "MakeSyncValue.h"
 #include "RamenSyntaxHighlighter.h"
 #include "RangeDoubleValidator.h"
@@ -21,49 +21,49 @@ static constexpr bool verbose{false};
 
 KTextEdit::KTextEdit(bool raql_, QWidget *parent)
     : AtomicWidget(parent), raql(raql_) {
-  textEdit = new QPlainTextEdit;
-  relayoutWidget(textEdit);
+  codeEdit = new CodeEdit;
+  relayoutWidget(codeEdit);
 
   if (raql) {
     new RamenSyntaxHighlighter(
-        textEdit->document());  // the document becomes owner
+        codeEdit->document());  // the document becomes owner
 
     /* Set a monospaced font: */
-    QFont font{textEdit->document()->defaultFont()};
+    QFont font{codeEdit->document()->defaultFont()};
     font.setFamily("Courier New");
-    textEdit->document()->setDefaultFont(font);
+    codeEdit->document()->setDefaultFont(font);
 
     /* Set tab stops to 4 spaces: */
     QFontMetricsF fontMetrics{font};
     qreal tabWidth{fontMetrics.boundingRect("    ").width()};
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 10, 0))
-    textEdit->setTabStopDistance(roundf(tabWidth));
+    codeEdit->setTabStopDistance(roundf(tabWidth));
 #else
-    textEdit->setTabStopWidth(roundf(tabWidth));
+    codeEdit->setTabStopWidth(roundf(tabWidth));
 #endif
   }
 
-  connect(textEdit,
-          &QPlainTextEdit::textChanged,  // ouch!
+  connect(codeEdit,
+          &CodeEdit::textChanged,  // ouch!
           this, &KTextEdit::inputChanged);
 }
 
 std::shared_ptr<dessser::gen::sync_value::t const> KTextEdit::getValue() const {
-  return stringOfQString(textEdit->toPlainText());
+  return stringOfQString(codeEdit->toPlainText());
 }
 
-void KTextEdit::setEnabled(bool enabled) { textEdit->setReadOnly(!enabled); }
+void KTextEdit::setEnabled(bool enabled) { codeEdit->setReadOnly(!enabled); }
 
 bool KTextEdit::setValue(std::shared_ptr<dessser::gen::sync_value::t const> v) {
   QString new_v{syncValToQString(*v, key())};
 
-  if (new_v != textEdit->toPlainText()) {
-    textEdit->setPlainText(new_v);
+  if (new_v != codeEdit->toPlainText()) {
+    codeEdit->setPlainText(new_v);
 
     if (raql) {
       /* We'd like the size to be that of the widest line of text,
        * within reason: */
-      QFont font{textEdit->document()->defaultFont()};
+      QFont font{codeEdit->document()->defaultFont()};
       QFontMetrics fontMetrics{(QFontMetrics(font))};
       int const tabWidth{20};  // FIXME: get this from somewhere
       QSize const maxSize{

@@ -194,6 +194,8 @@ HEADERS += \
   KVecEditor.h \
   KVoidEditor.h \
   RamenSyntaxHighlighter.h \
+  LineNumberArea.h \
+  CodeEdit.h \
   KTextEdit.h \
   KChoice.h \
   KBoolEditor.h \
@@ -264,8 +266,8 @@ HEADERS += \
   source/FilterEditor.h \
   source/AlertInfoEditor.h \
   source/SourceCloneDialog.h \
-  source/CodeEditForm.h \
-  source/CodeEdit.h \
+  source/SourceEditForm.h \
+  source/SourceEdit.h \
   source/NewSourceDialog.h \
   source/SourcesModel.h \
   source/SourcesView.h \
@@ -351,6 +353,8 @@ SOURCES += \
   KVecEditor.cpp \
   KVoidEditor.cpp \
   RamenSyntaxHighlighter.cpp \
+  LineNumberArea.cpp \
+  CodeEdit.cpp \
   KTextEdit.cpp \
   KChoice.cpp \
   KBoolEditor.cpp \
@@ -421,8 +425,8 @@ SOURCES += \
   source/FilterEditor.cpp \
   source/AlertInfoEditor.cpp \
   source/SourceCloneDialog.cpp \
-  source/CodeEditForm.cpp \
-  source/CodeEdit.cpp \
+  source/SourceEditForm.cpp \
+  source/SourceEdit.cpp \
   source/NewSourceDialog.cpp \
   source/SourcesModel.cpp \
   source/SourcesView.cpp \
