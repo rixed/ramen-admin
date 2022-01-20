@@ -13,25 +13,51 @@ class CodeEdit : public QPlainTextEdit {
 
   QWidget *lineNumberArea;
 
+  QWidget *annotationArea;
+
+  // Ordered by line/column:
+ public:
+  struct Annotation {
+    int line;
+    int column;  // if >= 0
+    bool isErr;  // or warning
+    QString text;
+  };
+
+ private:
+  QVector<Annotation> annotations;
+
+  int charWidth;
+
  public:
   CodeEdit(QWidget *parent = nullptr);
 
-  void lineNumberAreaPaintEvent(QPaintEvent *event);
+  void lineNumberAreaPaintEvent(QPaintEvent *);
+
+  void annotationAreaPaintEvent(QPaintEvent *);
 
   int lineNumberAreaWidth();
+
+  int annotationAreaWidth();
+
+  void setAnnotations(QVector<Annotation> const &);
 
   // "Override" this because the readOnly property has no associated signal:
   void setReadOnly(bool);
 
  protected:
-  void resizeEvent(QResizeEvent *event) override;
+  void resizeEvent(QResizeEvent *) override;
 
  private slots:
-  void updateLineNumberAreaWidth(int newBlockCount);
+  void updateLeftAreaWidth(int newBlockCount);
 
-  void highlightCurrentLine();
+  void highlightImportantLines();
 
-  void updateLineNumberArea(QRect const &rect, int dy);
+  void updateLineNumberArea(QRect const &, int dy);
+
+  void updateAnnotationArea(QRect const &, int dy);
+
+  void resetAnnotations();
 };
 
 #endif

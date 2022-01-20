@@ -315,6 +315,13 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
       std::in_place_index<dessser::gen::sync_key::Sources>, path, ext);
 }
 
+std::shared_ptr<dessser::gen::sync_key::t> changeSourceExtension(
+    dessser::gen::sync_key::t const &key, std::string const &new_ext) {
+  if (key.index() != dessser::gen::sync_key::Sources) return nullptr;
+  auto const &source{std::get<dessser::gen::sync_key::Sources>(key)};
+  return keyOfSrcPath(std::get<0>(source), new_ext);
+}
+
 /* The name used by a chart source in the list of functions (also to order
  * them)
  */

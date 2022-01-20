@@ -5,7 +5,7 @@
  * Largely from https://doc.qt.io/qt-5/qtwidgets-widgets-codeeditor-example.html
  *
  * Important design note worth keeping in mind:
- * " Note that we could simply paint the line numbers directly on the code
+ * "Note that we could simply paint the line numbers directly on the code
  * editor, and drop the LineNumberArea class. However, the QWidget class helps
  * us to scroll() its contents. Also, having a separate widget is the right
  * choice if we wish to extend the editor with breakpoints or other code editor
@@ -22,7 +22,7 @@ class LineNumberArea : public QWidget {
   CodeEdit *codeEdit;
 
  public:
-  LineNumberArea(CodeEdit *codeEdit);
+  LineNumberArea(CodeEdit *);
 
   QSize sizeHint() const override;
 

@@ -17,6 +17,8 @@ class KTextEdit : public AtomicWidget {
   // If true (default), editor is configured to edit RaQL syntax
   bool raql;
 
+  void resetAnnotations();
+
  public:
   KTextEdit(bool raql = true, QWidget *parent = nullptr);
 

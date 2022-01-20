@@ -199,6 +199,7 @@ HEADERS += \
   KVoidEditor.h \
   RamenSyntaxHighlighter.h \
   LineNumberArea.h \
+  AnnotationArea.h \
   CodeEdit.h \
   KTextEdit.h \
   KChoice.h \
@@ -358,6 +359,7 @@ SOURCES += \
   KVoidEditor.cpp \
   RamenSyntaxHighlighter.cpp \
   LineNumberArea.cpp \
+  AnnotationArea.cpp \
   CodeEdit.cpp \
   KTextEdit.cpp \
   KChoice.cpp \

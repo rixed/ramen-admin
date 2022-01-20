@@ -122,6 +122,9 @@ std::optional<std::pair<std::string const, std::string const> > srcPathOfKey(
 std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(std::string const &path,
                                                         std::string const &ext);
 
+std::shared_ptr<dessser::gen::sync_key::t> changeSourceExtension(
+    dessser::gen::sync_key::t const &, std::string const &new_ext);
+
 std::string const siteFqName(dessser::gen::fq_function_name::t const &);
 
 std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
