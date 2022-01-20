@@ -195,8 +195,10 @@ void SourceEdit::doResetError(KValue const &kv) {
     case dessser::gen::source_info::Failed: {
       auto const &failed{
           std::get<dessser::gen::source_info::Failed>(info->detail)};
-      compilationError->setText(stringOfDate(kv.mtime) + ": " +
-                                QString::fromStdString(failed.err_msg));
+      QString err_msg;
+      for (auto const &err : failed.errors)
+        err_msg += raqlErrorToQString(*err) + '\n';
+      compilationError->setText(stringOfDate(kv.mtime) + ": " + err_msg);
       compilationError->setVisible(true);
     } break;
     default:

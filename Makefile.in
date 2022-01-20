@@ -73,6 +73,8 @@ TYPE_SOURCES = \
 	raql_flush_method.type \
 	raql_operation.type \
 	retention.type \
+	raql_error.type \
+	raql_warning.type \
 	source_info.type \
 	simple_filter.type \
 	alert.type \

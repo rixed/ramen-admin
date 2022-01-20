@@ -695,6 +695,18 @@ QString syncKeyToQString(dessser::gen::sync_key::t const &k) {
   return QString::fromStdString(s.str());
 }
 
+QString raqlErrorToQString(dessser::gen::raql_error::t const &err) {
+  QString msg;
+  if (err.line) {
+    msg = "Line " + QString::number(*err.line);
+    if (err.column) msg += ", column " + QString::number(*err.column);
+    msg += ": ";
+  }
+  msg += QString::fromStdString(err.message);
+
+  return msg;
+}
+
 double durationOfArchivedTimes(dessser::gen::time_range::t const &rs) {
   using namespace dessser::gen::time_range;
   double d{0};

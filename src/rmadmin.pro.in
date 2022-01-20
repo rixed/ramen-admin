@@ -57,6 +57,8 @@ HEADERS_DESSSERC_GEN = \
   desssergen/raql_flush_method.h \
   desssergen/raql_operation.h \
   desssergen/retention.h \
+  desssergen/raql_error.h \
+  desssergen/raql_warning.h \
   desssergen/source_info.h \
   desssergen/simple_filter.h \
   desssergen/alert.h \
@@ -116,6 +118,8 @@ SOURCES_DESSSERC_GEN = \
   desssergen/raql_flush_method.cc \
   desssergen/raql_operation.cc \
   desssergen/retention.cc \
+  desssergen/raql_error.cc \
+  desssergen/raql_warning.cc \
   desssergen/source_info.cc \
   desssergen/simple_filter.cc \
   desssergen/alert.cc \

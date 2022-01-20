@@ -8,6 +8,8 @@
 #include <vector>
 #include "dessser/runtime.h"
 #include "desssergen/src_path.h"
+#include "desssergen/raql_error.h"
+#include "desssergen/raql_warning.h"
 #include "desssergen/field_name.h"
 #include "desssergen/raql_type.h"
 #include "desssergen/raql_operation.h"
@@ -64,11 +66,12 @@ struct compiled_program {
   dessser::gen::raql_expr::t_ext condition;
   Lst<dessser::gen::global_variable::t_ext> globals;
   Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs;
-  compiled_program(Lst<dessser::gen::program_parameter::t_ext> default_params_, dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::global_variable::t_ext> globals_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_) : default_params(default_params_), condition(condition_), globals(globals_), funcs(funcs_) {}
+  Lst<dessser::gen::raql_warning::t_ext> warnings;
+  compiled_program(Lst<dessser::gen::program_parameter::t_ext> default_params_, dessser::gen::raql_expr::t_ext condition_, Lst<dessser::gen::global_variable::t_ext> globals_, Lst<std::shared_ptr<::dessser::gen::source_info::compiled_func> > funcs_, Lst<dessser::gen::raql_warning::t_ext> warnings_) : default_params(default_params_), condition(condition_), globals(globals_), funcs(funcs_), warnings(warnings_) {}
   compiled_program() = default;
 };
 inline bool operator==(compiled_program const &a, compiled_program const &b) {
-  return a.default_params == b.default_params && ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.globals == b.globals && a.funcs == b.funcs;
+  return a.default_params == b.default_params && ::dessser::gen::raql_expr::Deref(a.condition) == ::dessser::gen::raql_expr::Deref(b.condition) && a.globals == b.globals && a.funcs == b.funcs && a.warnings == b.warnings;
 }
 
 inline bool operator!=(compiled_program const &a, compiled_program const &b) {
@@ -79,44 +82,45 @@ inline std::ostream &operator<<(std::ostream &os, compiled_program const &r) {
   os << "default_params:" << r.default_params << ',';
   os << "condition:" << r.condition << ',';
   os << "globals:" << r.globals << ',';
-  os << "funcs:" << r.funcs;
+  os << "funcs:" << r.funcs << ',';
+  os << "warnings:" << r.warnings;
   os << '}';
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<compiled_program> const r) { os << *r; return os; }
 
-struct t7904aca1b7c7094ac41533a38083131a {
-  std::string err_msg;
+struct td7297575b32536089f1cb63910c9de8b {
+  Lst<dessser::gen::raql_error::t_ext> errors;
   std::optional<dessser::gen::src_path::t_ext> depends_on;
-  t7904aca1b7c7094ac41533a38083131a(std::string err_msg_, std::optional<dessser::gen::src_path::t_ext> depends_on_) : err_msg(err_msg_), depends_on(depends_on_) {}
-  t7904aca1b7c7094ac41533a38083131a() = default;
+  td7297575b32536089f1cb63910c9de8b(Lst<dessser::gen::raql_error::t_ext> errors_, std::optional<dessser::gen::src_path::t_ext> depends_on_) : errors(errors_), depends_on(depends_on_) {}
+  td7297575b32536089f1cb63910c9de8b() = default;
 };
-inline bool operator==(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
-  return a.err_msg == b.err_msg && ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on));
+inline bool operator==(td7297575b32536089f1cb63910c9de8b const &a, td7297575b32536089f1cb63910c9de8b const &b) {
+  return a.errors == b.errors && ((a.depends_on && b.depends_on && ::dessser::gen::src_path::Deref(a.depends_on.value()) == ::dessser::gen::src_path::Deref(b.depends_on.value())) || (!a.depends_on && !b.depends_on));
 }
 
-inline bool operator!=(t7904aca1b7c7094ac41533a38083131a const &a, t7904aca1b7c7094ac41533a38083131a const &b) {
+inline bool operator!=(td7297575b32536089f1cb63910c9de8b const &a, td7297575b32536089f1cb63910c9de8b const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t7904aca1b7c7094ac41533a38083131a const &r) {
+inline std::ostream &operator<<(std::ostream &os, td7297575b32536089f1cb63910c9de8b const &r) {
   os << '{';
-  os << "err_msg:" << r.err_msg << ',';
+  os << "errors:" << r.errors << ',';
   if (r.depends_on) os << "depends_on:" << r.depends_on.value();
   os << '}';
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7904aca1b7c7094ac41533a38083131a> const r) { os << *r; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td7297575b32536089f1cb63910c9de8b> const r) { os << *r; return os; }
 
-struct t01907297530734eeb2fea6f30cc7354a : public std::variant<
+struct t39aa42e5bfed35fd9fe6b7649dfa4b04 : public std::variant<
   std::shared_ptr<::dessser::gen::source_info::compiled_program> , // Compiled
-  ::dessser::gen::source_info::t7904aca1b7c7094ac41533a38083131a // Failed
+  ::dessser::gen::source_info::td7297575b32536089f1cb63910c9de8b // Failed
 > {
   using variant::variant;
   using variant::operator=;
   static constexpr size_t size { 2 };
 };
 
-inline bool operator==(t01907297530734eeb2fea6f30cc7354a const &a, t01907297530734eeb2fea6f30cc7354a const &b) {
+inline bool operator==(t39aa42e5bfed35fd9fe6b7649dfa4b04 const &a, t39aa42e5bfed35fd9fe6b7649dfa4b04 const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return (*std::get<0>(a)) == (*std::get<0>(b)); // Compiled
@@ -124,15 +128,15 @@ inline bool operator==(t01907297530734eeb2fea6f30cc7354a const &a, t019072975307
   };
   return false;
 }
-inline bool operator!=(t01907297530734eeb2fea6f30cc7354a const &a, t01907297530734eeb2fea6f30cc7354a const &b) {
+inline bool operator!=(t39aa42e5bfed35fd9fe6b7649dfa4b04 const &a, t39aa42e5bfed35fd9fe6b7649dfa4b04 const &b) {
   return !operator==(a, b);
 }
-enum Constr_t01907297530734eeb2fea6f30cc7354a {
+enum Constr_t39aa42e5bfed35fd9fe6b7649dfa4b04 {
   Compiled,
   Failed,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t01907297530734eeb2fea6f30cc7354a const &v) {
+inline std::ostream &operator<<(std::ostream &os, t39aa42e5bfed35fd9fe6b7649dfa4b04 const &v) {
   switch (v.index()) {
     case 0: os << "Compiled " << std::get<0>(v); break;
     case 1: os << "Failed " << std::get<1>(v); break;
@@ -140,13 +144,13 @@ inline std::ostream &operator<<(std::ostream &os, t01907297530734eeb2fea6f30cc73
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t01907297530734eeb2fea6f30cc7354a> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t39aa42e5bfed35fd9fe6b7649dfa4b04> const v) { os << *v; return os; }
 
 struct t {
   std::string src_ext;
   Lst<std::string> md5s;
-  ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail;
-  t(std::string src_ext_, Lst<std::string> md5s_, ::dessser::gen::source_info::t01907297530734eeb2fea6f30cc7354a detail_) : src_ext(src_ext_), md5s(md5s_), detail(detail_) {}
+  ::dessser::gen::source_info::t39aa42e5bfed35fd9fe6b7649dfa4b04 detail;
+  t(std::string src_ext_, Lst<std::string> md5s_, ::dessser::gen::source_info::t39aa42e5bfed35fd9fe6b7649dfa4b04 detail_) : src_ext(src_ext_), md5s(md5s_), detail(detail_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

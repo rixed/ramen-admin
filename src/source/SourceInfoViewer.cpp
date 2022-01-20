@@ -60,9 +60,11 @@ bool SourceInfoViewer::setValue(
         std::get<dessser::gen::sync_value::SourceInfo>(*v)};
 
     if (info->detail.index() == dessser::gen::source_info::Failed) {
-      auto const &failed{
-          std::get<dessser::gen::source_info::Failed>(info->detail)};
-      QLabel *l{new QLabel(QString::fromStdString(failed.err_msg))};
+      auto &failed{std::get<dessser::gen::source_info::Failed>(info->detail)};
+      QString err_msg;
+      for (auto const &err : failed.errors)
+        err_msg += raqlErrorToQString(*err) + '\n';
+      QLabel *l{new QLabel(err_msg)};
       l->setWordWrap(true);
       l->setAlignment(Qt::AlignCenter);
       readOnlyLayout->addWidget(l);
