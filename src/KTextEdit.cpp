@@ -7,7 +7,6 @@
 #include <QFontMetrics>
 #include <QGuiApplication>
 #include <QScreen>
-#include <cassert>
 
 #include "CodeEdit.h"
 #include "KVStore.h"

@@ -3,7 +3,6 @@
 
 #include <QDebug>
 #include <QtGlobal>
-#include <cassert>
 #include <cmath>
 #include <memory>
 #include <string>

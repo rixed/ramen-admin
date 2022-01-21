@@ -4,7 +4,6 @@
 #include <QHBoxLayout>
 #include <QRadioButton>
 #include <QVBoxLayout>
-#include <cassert>
 #include <limits>
 
 #include "desssergen/sync_key.h"

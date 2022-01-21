@@ -3,7 +3,6 @@
 
 #include <QHBoxLayout>
 #include <QLabel>
-#include <cassert>
 
 #include "KIntEditor.h"
 #include "KIpEditor.h"

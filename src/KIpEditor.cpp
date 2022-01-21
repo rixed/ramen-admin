@@ -2,7 +2,6 @@
 #include "KIpEditor.h"
 
 #include <QLineEdit>
-#include <cassert>
 
 #include "MakeSyncValue.h"
 #include "desssergen/sync_value.h"

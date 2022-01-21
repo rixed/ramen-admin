@@ -4,7 +4,6 @@
 #include <QColor>
 #include <QPieSlice>
 #include <QtCharts>
-#include <cassert>
 #include <vector>
 
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -58,8 +57,7 @@ struct Values {
       case AllocedBytes:
         return allocated;
     }
-    assert(!"Invalid mode");
-    return 0;
+    qFatal("Invalid mode");
   }
   void operator+=(Values const &other) {
     current += other.current;

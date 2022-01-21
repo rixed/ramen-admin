@@ -7,7 +7,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QtGlobal>
-#include <cassert>
 #include <ctime>
 #include <string>
 

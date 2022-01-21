@@ -4,7 +4,6 @@
 #include <QDebug>
 #include <QRegularExpression>
 #include <QTextCharFormat>
-#include <cassert>
 #include <vector>
 
 RamenSyntaxHighlighter::RamenSyntaxHighlighter(QTextDocument *parent)
@@ -19,8 +18,10 @@ struct Rules {
           re(str, QRegularExpression::CaseInsensitiveOption |
                       QRegularExpression::DontCaptureOption) {
       if (!re.isValid()) {
-        qDebug() << "Invalid regexp" << str << ":" << re.errorString();
-        assert(!"Invalid RE");
+        qFatal(
+            (QString("Invalid regexp") + str + QString(": ") + re.errorString())
+                .toStdString()
+                .c_str());
       }
       re.optimize();
     }

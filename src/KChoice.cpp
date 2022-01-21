@@ -4,7 +4,6 @@
 #include <QDebug>
 #include <QRadioButton>
 #include <QVBoxLayout>
-#include <cassert>
 
 #include "MakeSyncValue.h"
 #include "desssergen/sync_key.h"

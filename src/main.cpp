@@ -10,7 +10,6 @@
 #include <QCommandLineParser>
 #include <QDebug>
 #include <QVector>
-#include <cassert>
 #include <cstdlib>
 #include <iostream>
 #include <string>
