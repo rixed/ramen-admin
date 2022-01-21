@@ -172,16 +172,16 @@ void CodeEdit::annotationAreaPaintEvent(QPaintEvent *event) {
   int bottom{top + qRound(blockBoundingRect(block).height())};
   int nextAnnotation{0};
 
-  painter.setPen(Qt::red);
-
   while (block.isValid() && top <= event->rect().bottom()) {
     if (block.isVisible() && bottom >= event->rect().top()) {
       while (nextAnnotation < annotations.size() &&
              annotations[nextAnnotation].line < line_num)
         nextAnnotation++;
       if (nextAnnotation >= annotations.size()) break;
-      if (line_num == annotations[nextAnnotation].line) {
-        QString mark{'X'};
+      Annotation const &a{annotations[nextAnnotation]};
+      if (line_num == a.line) {
+        painter.setPen(a.isErr ? Qt::red : Qt::darkYellow);
+        QString mark{a.isErr ? 'X' : '?'};
         painter.drawText(0, top, annotationArea->width(),
                          fontMetrics().height(), Qt::AlignCenter, mark);
       }

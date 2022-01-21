@@ -65,7 +65,10 @@ class SourceEdit : public QWidget {
   int alertEditorIndex;
   int infoEditorIndex;
 
-  QLabel *compilationError;
+  QWidget *errorsBox;         // Hide or show depending on presence of errors
+  QLabel *compilationErrors;  // Text of errors
+  QWidget *warningsBox;
+  QLabel *compilationWarnings;
 
   SourceEdit(QWidget *parent = nullptr);
 

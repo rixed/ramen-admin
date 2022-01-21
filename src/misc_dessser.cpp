@@ -714,6 +714,18 @@ QString raqlErrorToQString(dessser::gen::raql_error::t const &err) {
   return msg;
 }
 
+QString raqlWarningToQString(dessser::gen::raql_warning::t const &warn) {
+  QString msg;
+  if (warn.line) {
+    msg = "Line " + QString::number(*warn.line);
+    if (warn.column) msg += ", column " + QString::number(*warn.column);
+    msg += ": ";
+  }
+  msg += QString::fromStdString(warn.message);
+
+  return msg;
+}
+
 double durationOfArchivedTimes(dessser::gen::time_range::t const &rs) {
   using namespace dessser::gen::time_range;
   double d{0};

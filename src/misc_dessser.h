@@ -38,6 +38,9 @@ struct t;
 namespace raql_error {
 struct t;
 }
+namespace raql_warning {
+struct t;
+}
 namespace replay {
 struct t;
 }
@@ -154,6 +157,8 @@ QString syncValToQString(
 QString syncKeyToQString(dessser::gen::sync_key::t const &);
 
 QString raqlErrorToQString(dessser::gen::raql_error::t const &);
+
+QString raqlWarningToQString(dessser::gen::raql_warning::t const &);
 
 double durationOfArchivedTimes(dessser::gen::time_range::t const &);
 

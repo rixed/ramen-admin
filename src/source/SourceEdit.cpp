@@ -63,16 +63,32 @@ SourceEdit::SourceEdit(QWidget *parent) : QWidget(parent) {
   extensionSwitcher->setObjectName("extensionSwitcher");
   extensionSwitcher->setLayout(switcherLayout);
 
-  compilationError = new QLabel;
-  compilationError->setObjectName("compilationError");
-  compilationError->setWordWrap(true);
-  compilationError->hide();
+  errorsBox = new QWidget;
+  QVBoxLayout *errLayout{new QVBoxLayout};
+  errLayout->addWidget(new QLabel(tr("Errors:")));
+  compilationErrors = new QLabel;
+  compilationErrors->setObjectName("compilationErrors");
+  compilationErrors->setWordWrap(true);
+  errLayout->addWidget(compilationErrors);
+  errorsBox->setLayout(errLayout);
+  errorsBox->hide();
+
+  warningsBox = new QWidget;
+  QVBoxLayout *wrnLayout{new QVBoxLayout};
+  wrnLayout->addWidget(new QLabel(tr("Warnings:")));
+  compilationWarnings = new QLabel;
+  compilationWarnings->setObjectName("compilationWarnings");
+  compilationWarnings->setWordWrap(true);
+  wrnLayout->addWidget(compilationWarnings);
+  warningsBox->setLayout(wrnLayout);
+  warningsBox->hide();
 
   QVBoxLayout *layout{new QVBoxLayout};
   layout->setContentsMargins(QMargins());
   layout->addWidget(extensionSwitcher);
   layout->addLayout(stackedLayout);
-  layout->addWidget(compilationError);
+  layout->addWidget(errorsBox);
+  layout->addWidget(warningsBox);
   setLayout(layout);
 
   // Connect the error label to this hide/show slot
@@ -188,21 +204,38 @@ void SourceEdit::doResetError(KValue const &kv) {
     return;
   }
 
-  std::shared_ptr<dessser::gen::source_info::t const> info{
-      std::get<dessser::gen::sync_value::SourceInfo>(*kv.val)};
+  errorsBox->setVisible(false);
+  warningsBox->setVisible(false);
 
-  switch (info->detail.index()) {
+  auto const &info_detail{
+      std::get<dessser::gen::sync_value::SourceInfo>(*kv.val)->detail};
+
+  switch (info_detail.index()) {
     case dessser::gen::source_info::Failed: {
       auto const &failed{
-          std::get<dessser::gen::source_info::Failed>(info->detail)};
+          std::get<dessser::gen::source_info::Failed>(info_detail)};
       QString err_msg;
       for (auto const &err : failed.errors)
         err_msg += raqlErrorToQString(*err) + '\n';
-      compilationError->setText(stringOfDate(kv.mtime) + ": " + err_msg);
-      compilationError->setVisible(true);
+      if (!err_msg.isEmpty()) {
+        compilationErrors->setText(stringOfDate(kv.mtime) + ":\n" + err_msg);
+        errorsBox->setVisible(true);
+      }
+    } break;
+    case dessser::gen::source_info::Compiled: {
+      auto const &compiled{
+          std::get<dessser::gen::source_info::Compiled>(info_detail)};
+      QString warnings;
+      for (auto const &warn : compiled->warnings)
+        warnings += raqlWarningToQString(*warn) + '\n';
+      if (!warnings.isEmpty()) {
+        compilationWarnings->setText(stringOfDate(kv.mtime) + ":\n" + warnings);
+        warningsBox->setVisible(true);
+      }
     } break;
     default:
-      compilationError->setVisible(false);
+      qFatal("Invalid info_detail index");
+      break;
   }
 }
 
@@ -210,8 +243,10 @@ void SourceEdit::resetError(KValue const *kv) {
   if (kv) {
     doResetError(*kv);
   } else {
-    compilationError->setText(tr("Not compiled yet"));
-    compilationError->setVisible(true);
+    compilationErrors->setText("");
+    errorsBox->setVisible(false);
+    compilationWarnings->setText(tr("Not compiled yet"));
+    warningsBox->setVisible(true);
   }
 }
 
