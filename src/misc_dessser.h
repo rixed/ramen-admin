@@ -112,6 +112,7 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
 
 // Returns the float representation of that value
 std::optional<double> toDouble(dessser::gen::raql_value::t const &);
+std::optional<double> toDouble(dessser::gen::raql_expr::t const &);
 
 // Returns the compiled function, or nullptr:
 std::shared_ptr<dessser::gen::source_info::compiled_program const>

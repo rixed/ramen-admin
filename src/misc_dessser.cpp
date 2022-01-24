@@ -288,8 +288,22 @@ std::optional<double> toDouble(dessser::gen::raql_value::t const &v) {
     case dessser::gen::raql_value::VI128:
       return (double)std::get<dessser::gen::raql_value::VI128>(v);
     default:
-      return std::optional<double>();
+      return std::nullopt;
   }
+}
+
+std::optional<double> toDouble(dessser::gen::raql_expr::t const &e) {
+  if (e.text.index() == dessser::gen::raql_expr::Stateless) {
+    auto const &stateless{std::get<dessser::gen::raql_expr::Stateless>(e.text)};
+    if (stateless.index() == dessser::gen::raql_expr::SL0) {
+      auto const &sl0{std::get<dessser::gen::raql_expr::SL0>(stateless)};
+      if (sl0.index() == dessser::gen::raql_expr::Const) {
+        auto const &raql_value{std::get<dessser::gen::raql_expr::Const>(sl0)};
+        return toDouble(*raql_value);
+      }
+    }
+  }
+  return std::nullopt;
 }
 
 std::shared_ptr<dessser::gen::source_info::compiled_program const>

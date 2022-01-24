@@ -13,6 +13,7 @@
 #include "desssergen/field_name.h"
 #include "desssergen/raql_type.h"
 #include "desssergen/raql_operation.h"
+#include "desssergen/raql_expr.h"
 #include "desssergen/retention.h"
 #include "desssergen/function_name.h"
 #include "desssergen/global_variable.h"
@@ -29,17 +30,18 @@ struct compiled_func {
   dessser::gen::function_name::t_ext name;
   std::optional<dessser::gen::retention::t_ext> retention;
   bool is_lazy;
+  std::optional<dessser::gen::raql_expr::t_ext> best_after;
   std::string doc;
   dessser::gen::raql_operation::t_ext operation;
   dessser::gen::raql_type::t_ext out_record;
   Lst<dessser::gen::field_name::t_ext> factors;
   std::string signature;
   std::string in_signature;
-  compiled_func(dessser::gen::function_name::t_ext name_, std::optional<dessser::gen::retention::t_ext> retention_, bool is_lazy_, std::string doc_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, Lst<dessser::gen::field_name::t_ext> factors_, std::string signature_, std::string in_signature_) : name(name_), retention(retention_), is_lazy(is_lazy_), doc(doc_), operation(operation_), out_record(out_record_), factors(factors_), signature(signature_), in_signature(in_signature_) {}
+  compiled_func(dessser::gen::function_name::t_ext name_, std::optional<dessser::gen::retention::t_ext> retention_, bool is_lazy_, std::optional<dessser::gen::raql_expr::t_ext> best_after_, std::string doc_, dessser::gen::raql_operation::t_ext operation_, dessser::gen::raql_type::t_ext out_record_, Lst<dessser::gen::field_name::t_ext> factors_, std::string signature_, std::string in_signature_) : name(name_), retention(retention_), is_lazy(is_lazy_), best_after(best_after_), doc(doc_), operation(operation_), out_record(out_record_), factors(factors_), signature(signature_), in_signature(in_signature_) {}
   compiled_func() = default;
 };
 inline bool operator==(compiled_func const &a, compiled_func const &b) {
-  return ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.is_lazy == b.is_lazy && a.doc == b.doc && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && a.factors == b.factors && a.signature == b.signature && a.in_signature == b.in_signature;
+  return ::dessser::gen::function_name::Deref(a.name) == ::dessser::gen::function_name::Deref(b.name) && ((a.retention && b.retention && ::dessser::gen::retention::Deref(a.retention.value()) == ::dessser::gen::retention::Deref(b.retention.value())) || (!a.retention && !b.retention)) && a.is_lazy == b.is_lazy && ((a.best_after && b.best_after && ::dessser::gen::raql_expr::Deref(a.best_after.value()) == ::dessser::gen::raql_expr::Deref(b.best_after.value())) || (!a.best_after && !b.best_after)) && a.doc == b.doc && ::dessser::gen::raql_operation::Deref(a.operation) == ::dessser::gen::raql_operation::Deref(b.operation) && ::dessser::gen::raql_type::Deref(a.out_record) == ::dessser::gen::raql_type::Deref(b.out_record) && a.factors == b.factors && a.signature == b.signature && a.in_signature == b.in_signature;
 }
 
 inline bool operator!=(compiled_func const &a, compiled_func const &b) {
@@ -50,6 +52,7 @@ inline std::ostream &operator<<(std::ostream &os, compiled_func const &r) {
   os << "name:" << r.name << ',';
   if (r.retention) os << "retention:" << r.retention.value() << ',';
   os << "is_lazy:" << r.is_lazy << ',';
+  if (r.best_after) os << "best_after:" << r.best_after.value() << ',';
   os << "doc:" << r.doc << ',';
   os << "operation:" << r.operation << ',';
   os << "out_record:" << r.out_record << ',';

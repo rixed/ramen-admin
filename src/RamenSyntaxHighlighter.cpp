@@ -38,7 +38,7 @@ struct Rules {
     rules.emplace_back(
         keyword,
         "\\b(parameter|parameters|declare|default|defaults|to|run|if|define|"
-        "lazy|"
+        "lazy|best|"
         "persist|for|querying|query|every|while|as|doc|event|starts|starting|"
         "at|with|duration|stops|stopping|ending|select|program|global|"
         "yield|merge|on|timeout|after|sort|until|by|where|"

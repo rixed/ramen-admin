@@ -49,6 +49,12 @@ static QString const QStringOfRetention(dessser::gen::retention::t const &r) {
          QString(", every ") + stringOfDuration(r.period);
 }
 
+static QString const QStringOfBestAfter(dessser::gen::raql_expr::t const &e) {
+  std::optional<double> d{toDouble(e)};
+  if (d) return stringOfDuration(*d);
+  return raqlExprToQString(e);
+}
+
 bool SourceInfoViewer::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   /* Empty the previous params/parents layouts: */
@@ -101,20 +107,29 @@ bool SourceInfoViewer::setValue(
         QVBoxLayout *l{new QVBoxLayout};
         QWidget *w{new QWidget};
         w->setLayout(l);
+
         QString title{QString(QString::fromStdString(func->name) +
                               (func->is_lazy ? " (lazy)" : ""))};
         functions->addTab(w, title);
+
         if (func->doc.length() > 0) {
           QLabel *doc{new QLabel(QString::fromStdString(func->doc))};
           doc->setWordWrap(true);
           l->addWidget(doc);
         }
+
         QLabel *retention{new QLabel(
             tr("Retention: %1")
                 .arg(func->retention ? QStringOfRetention(**func->retention)
                                      : "<i>" + tr("none") + "</i>"))};
         retention->setWordWrap(true);
         l->addWidget(retention);
+
+        QLabel *best_after{new QLabel(
+            tr("Extra history: %1")
+              .arg(func->best_after ? QStringOfBestAfter(**func->best_after)
+                                    : "<i>" + tr("none") + "</i>"))};
+        l->addWidget(best_after);
 
         l->addWidget(new QLabel(tr("Output Type:")));
         // One line per "column" of the outType:
