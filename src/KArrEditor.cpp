@@ -12,6 +12,7 @@
 #include "desssergen/raql_type.h"
 #include "desssergen/raql_value.h"
 #include "desssergen/sync_value.h"
+#include "misc_dessser.h"
 
 KArrEditor::KArrEditor(std::shared_ptr<dessser::gen::raql_type::t const> type_,
                        QWidget *parent)
@@ -81,6 +82,10 @@ bool KArrEditor::setValue(
   Q_ASSERT(v->index() == dessser::gen::sync_value::RamenValue);
   std::shared_ptr<dessser::gen::raql_value::t const> rv{
       std::get<dessser::gen::sync_value::RamenValue>(*v)};
+  if (rv->index() != dessser::gen::raql_value::VArr) {
+    qWarning() << "KArrEditor::setValue: value=" << *rv;
+    if (key()) qWarning() << "   for key=" << *key();
+  }
   Q_ASSERT(rv->index() == dessser::gen::raql_value::VArr);
   dessser::Arr<std::shared_ptr<dessser::gen::raql_value::t> > lst{
       std::get<dessser::gen::raql_value::VArr>(*rv)};

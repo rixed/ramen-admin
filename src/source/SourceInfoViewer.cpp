@@ -127,8 +127,8 @@ bool SourceInfoViewer::setValue(
 
         QLabel *best_after{new QLabel(
             tr("Extra history: %1")
-              .arg(func->best_after ? QStringOfBestAfter(**func->best_after)
-                                    : "<i>" + tr("none") + "</i>"))};
+                .arg(func->best_after ? QStringOfBestAfter(**func->best_after)
+                                      : "<i>" + tr("none") + "</i>"))};
         l->addWidget(best_after);
 
         l->addWidget(new QLabel(tr("Output Type:")));

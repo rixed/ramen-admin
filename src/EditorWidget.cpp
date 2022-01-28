@@ -143,7 +143,8 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t,
     case Vec: {
       auto const &vec{std::get<Vec>(*t.type)};
       editor = new KVecEditor(std::get<0>(vec), *std::get<1>(vec), parent);
-    } break;
+      break;
+    }
     case Arr:
       editor = new KArrEditor(std::get<Arr>(*t.type), parent);
       break;

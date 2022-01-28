@@ -83,7 +83,10 @@ bool TimeChartFunctionsEditor::setValue(
                  << t_i << "for" << QString::fromStdString(src->name->function);
       TimeChartFunctionEditor *e{addFunctionByName(
           src->name->site, src->name->program, src->name->function, true)};
-      Q_ASSERT(e);
+      if (!e) {
+        qWarning() << "TimeChartFunctionsEditor::setValue: Cannot set value";
+        return false;
+      }
       e->setValue(*src);
       functions->addItem(e, QString::fromStdString(siteFqName(*src->name)));
     } else {
@@ -108,7 +111,10 @@ bool TimeChartFunctionsEditor::setValue(
                    << QString::fromStdString(src->name->function);
         TimeChartFunctionEditor *e{addFunctionByName(
             src->name->site, src->name->program, src->name->function, true)};
-        Q_ASSERT(e);
+        if (!e) {
+          qWarning() << "TimeChartFunctionsEditor::setValue: Cannot set value";
+          return false;
+        }
         e->setValue(*src);
         (void)functions->insertItem(t_i, e, name_i);
       } else if (c > 0) {
@@ -184,7 +190,10 @@ void TimeChartFunctionsEditor::addOrFocus(std::string const &site,
 
   TimeChartFunctionEditor *e{
       addFunctionByName(site, program, function, customizable)};
-  Q_ASSERT(e);
+  if (!e) {
+    qWarning() << "TimeChartFunctionsEditor::addOrFocus: Cannot add function";
+    return;
+  }
   dessser::gen::dashboard_widget::source defaultSrc{
       std::make_shared<dessser::gen::fq_function_name::t>(site, program,
                                                           function),
@@ -204,7 +213,8 @@ TimeChartFunctionEditor *TimeChartFunctionsEditor::addFunctionByName(
       QString::fromStdString(function))};
 
   if (!f) {
-    qCritical() << "Customized function does not exist yet!";
+    qCritical() << "Function" << site << program << function
+                << "does not exist yet!";
     return nullptr;
   }
 
