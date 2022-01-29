@@ -150,16 +150,16 @@ class TimeChart : public AbstractTimeLine {
             double,
             std::vector<std::tuple<std::optional<qreal>, QString, QColor>>)>);
 
-    /* extremums of all the plots/stacks.
+    /* Extremums of all the plots/stacks.
      * This is the min/max of the global resulting picture, used to draw the
      * axis tick marks. */
-    qreal min, max;
+    double min, max;
 
     std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf;
 
     Axis(std::shared_ptr<dessser::gen::dashboard_widget::axis const> conf_)
-        : min(std::numeric_limits<qreal>::max()),
-          max(std::numeric_limits<qreal>::lowest()),
+        : min(std::numeric_limits<double>::max()),
+          max(std::numeric_limits<double>::lowest()),
           conf(conf_) {
       stacked.reserve(10);
       stackCentered.reserve(10);

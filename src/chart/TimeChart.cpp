@@ -827,9 +827,9 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         axis.stacked,
         [updateExtremums](
             double,
-            std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
+            std::vector<std::tuple<std::optional<double>, QString, QColor>>
                 values) {
-          qreal totHeight{0.};
+          double totHeight{0.};
           for (auto const &value : values) {
             totHeight += std::get<0>(value).value_or(0.);
           }
@@ -841,9 +841,9 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         axis.stackCentered,
         [updateExtremums](
             double,
-            std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
+            std::vector<std::tuple<std::optional<double>, QString, QColor>>
                 values) {
-          qreal totHeight{0.};
+          double totHeight{0.};
           for (auto const &value : values) {
             totHeight += std::get<0>(value).value_or(0.);
           }
