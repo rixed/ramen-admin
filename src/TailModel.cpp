@@ -36,16 +36,7 @@ TailModel::TailModel(std::string const &siteName_, std::string const &fqName_,
 
   // Subscribe
   std::shared_ptr<dessser::gen::sync_key::t const> k{subscriberKey()};
-  static std::shared_ptr<dessser::gen::raql_value::t> const dummy{
-      std::make_shared<dessser::gen::raql_value::t>(
-          std::in_place_index<dessser::gen::raql_value::VNull>,
-          dessser::Void())};
-  static std::shared_ptr<dessser::gen::sync_value::t> const v{
-      std::make_shared<dessser::gen::sync_value::t>(
-          std::in_place_index<dessser::gen::sync_value::RamenValue>,
-          std::static_pointer_cast<dessser::gen::raql_value::t>(dummy))};
-  Menu::getClient()->sendSet(
-      k, std::static_pointer_cast<dessser::gen::sync_value::t>(v));
+  Menu::getClient()->sendSet(k, nullVal);
 }
 
 TailModel::~TailModel() {
