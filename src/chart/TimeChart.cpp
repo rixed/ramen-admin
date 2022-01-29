@@ -801,10 +801,15 @@ void TimeChart::paintEvent(QPaintEvent *event) {
   /* Compute the extremums per axis: */
   for (int i = 0; i < numAxes; i++) {
     Axis &axis{axes[i]};
-    std::function<void(qreal const min, qreal const max)> updateExtremums =
-        [&axis](qreal const min, qreal const max) {
-          if (min < axis.min) axis.min = min;
-          if (max > axis.max) axis.max = max;
+    std::function<void(double const min, double const max)> updateExtremums =
+        [&axis](double const min, double const max) {
+          if (min < axis.min &&
+              min > -std::numeric_limits<double>::infinity() &&
+              !std::isnan(min))
+            axis.min = min;
+          if (max > axis.max && max < std::numeric_limits<double>::infinity() &&
+              !std::isnan(max))
+            axis.max = max;
         };
 
     if (axis.conf && axis.conf->force_zero) updateExtremums(0., 0.);
