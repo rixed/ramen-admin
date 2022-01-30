@@ -494,6 +494,8 @@ std::optional<dessser::Lst<std::string> > const AlertEditor::getGroupBy()
 
 std::shared_ptr<dessser::gen::sync_value::t const> AlertEditor::getValue()
     const {
+  std::string const column{getColumn()};
+
   dessser::Lst<std::string> carry_fields;
   if (!carryFields->text().isEmpty())
     carry_fields = dessser::Lst<std::string>{carryFields->text().toStdString()};
