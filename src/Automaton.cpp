@@ -33,7 +33,7 @@ void Automaton::addTransition(
 }
 
 void Automaton::start() {
-  if (verbose) qInfo() << "Automaton" << name << ": starting";
+  if (verbose) qDebug() << "Automaton" << name << ": Starting";
 
   connect(kvs.get(), &KVStore::keyChanged, this, &Automaton::onChange);
 
@@ -44,7 +44,9 @@ void Automaton::moveTo(size_t toState) {
   // Still check that we add this transition declared:
   for (Transition const &t : states[currentState].transitions) {
     if (t.toState == toState) {
-      qInfo() << "Automaton" << name << ": forcibly moving to state" << toState;
+      if (verbose)
+        qDebug() << "Automaton" << name << ": Forcibly moving to state"
+                 << toState;
       currentState = toState;
       emit transitionTo(this, t.toState, nullptr);
       return;
@@ -63,7 +65,7 @@ void Automaton::tryTransition(
     std::shared_ptr<dessser::gen::raql_value::t const> rv{
         std::get<dessser::gen::sync_value::RamenValue>(*kv.val)};
     if (rv->index() == dessser::gen::raql_value::VNull) {
-      if (verbose) qDebug() << "Automaton: ignoring VNull";
+      if (verbose) qDebug() << "Automaton: Ignoring VNull";
       return;
     }
   }
@@ -81,7 +83,9 @@ void Automaton::tryTransition(
     if (!(t.keyOperations & op)) continue;
     if (*key != *t.key) continue;
 
-    qInfo() << "Automaton" << name << ": transitioning to state" << t.toState;
+    if (verbose)
+      qDebug() << "Automaton" << name << ": Transitioning to state"
+               << t.toState;
     currentState = t.toState;
     emit transitionTo(this, t.toState, kv.val);
     break;
@@ -89,7 +93,7 @@ void Automaton::tryTransition(
 
   if (currentState >= states.size() ||
       states[currentState].transitions.size() == 0) {
-    qInfo() << "Automaton" << name << ": Done";
+    if (verbose) qDebug() << "Automaton" << name << ": Done";
     /* Beware: if events are queued for this object it is going to be called
      * again before it gets actually deleted! */
     deleteLater();
@@ -128,8 +132,9 @@ void Automaton::tryDirectTransition() {
     kvs->lock.unlock_shared();
 
     if (val) {
-      qInfo() << "Automaton" << name << ": Already own key" << *t.key
-              << ", transitioning to state" << t.toState;
+      if (verbose)
+        qDebug() << "Automaton" << name << ": Already own key" << *t.key
+                 << ", transitioning to state" << t.toState;
       currentState = t.toState;
       emit transitionTo(this, t.toState, val);
       break;

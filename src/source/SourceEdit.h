@@ -7,7 +7,7 @@
 
 #include "ConfChange.h"
 
-class AlertInfoEditor;
+class AlertEditor;
 class AtomicWidget;
 class KTextEdit;
 struct KValue;
@@ -47,7 +47,7 @@ class SourceEdit : public QWidget {
   QWidget *extensionSwitcher;
 
   /* The editor for alert sources: */
-  AlertInfoEditor *alertEditor;
+  AlertEditor *alertEditor;
 
   /* The editor for ramen language sources: */
   KTextEdit *textEditor;

@@ -1,5 +1,5 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#include "AlertInfoEditor.h"
+#include "AlertEditor.h"
 
 #include <dessser/Lst.h>
 
@@ -41,15 +41,15 @@ void NameTreeView::currentChanged(QModelIndex const &current,
   emit selectedChanged(current);
 }
 
-AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
+AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
   source = new NameTreeView;
   // TODO: restrict to numerical fields
   // QTreeView to select the parent function field (aka "table" + "column")
   source->setModel(NamesTree::globalNamesTreeAnySites);
   connect(source, &NameTreeView::selectedChanged, this,
-          &AlertInfoEditor::checkSource);
+          &AlertEditor::checkSource);
   connect(source, &NameTreeView::selectedChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
   /* connect(source->model(), &NamesTree::rowsInserted,
       source, &NameTreeView::expand);*/
 
@@ -64,19 +64,18 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
   isEnabled = new QCheckBox(tr("enabled"));
   isEnabled->setChecked(true);
   connect(isEnabled, &QCheckBox::stateChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
 
   // TODO: list of FilterEditors rather
   where = new FilterEditor;
-  connect(where, &FilterEditor::inputChanged, this,
-          &AlertInfoEditor::inputChanged);
+  connect(where, &FilterEditor::inputChanged, this, &AlertEditor::inputChanged);
 
   autoGroupBy = new QCheckBox(tr("automatic"));
   autoGroupBy->setChecked(true);
   connect(autoGroupBy, &QCheckBox::stateChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
   connect(autoGroupBy, &QCheckBox::stateChanged, this,
-          &AlertInfoEditor::toggleAutoGroupBy);
+          &AlertEditor::toggleAutoGroupBy);
   tableFields = new QStringListModel;
   // Must set the parent explicitly as it is not in the layout:
   groupBy = new PopupListView(this);
@@ -84,35 +83,33 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
   groupBy->setSelectionMode(QAbstractItemView::MultiSelection);
   openGroupBy = new QPushButton;
   connect(groupBy->selectionModel(), &QItemSelectionModel::selectionChanged,
-          this, &AlertInfoEditor::inputChanged);
+          this, &AlertEditor::inputChanged);
   connect(source, &NameTreeView::selectedChanged, this,
-          &AlertInfoEditor::checkGroupBy);
+          &AlertEditor::checkGroupBy);
 
   having = new FilterEditor;
   connect(having, &FilterEditor::inputChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
 
   threshold = new QLineEdit;
   threshold->setValidator(new QDoubleValidator);
-  connect(threshold, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+  connect(threshold, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
   hysteresis = new QLineEdit("10");
   hysteresis->setValidator(new QDoubleValidator(0., 100., 5));
   hysteresis->setPlaceholderText(tr("% of the value magnitude"));
   connect(hysteresis, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
   duration = new QLineEdit;
   duration->setValidator(
       // TODO: DurationValidator
       new QDoubleValidator(0., std::numeric_limits<double>::max(), 5));
   duration->setPlaceholderText(tr("duration"));
-  connect(duration, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+  connect(duration, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
   percentage = new QLineEdit("100");
   percentage->setValidator(new QDoubleValidator(0., 100., 5));
   percentage->setPlaceholderText(tr("% of past measures"));
   connect(percentage, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
   timeStep = new QLineEdit;
   timeStep->setValidator(new QDoubleValidator(0., 999999., 6));
   timeStep->setPlaceholderText(tr("seconds"));
@@ -123,16 +120,15 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
    * automatically anchor the pattern: */
   QRegularExpression nonEmpty(".*\\S+.*");
   descTitle->setValidator(new QRegularExpressionValidator(nonEmpty));
-  connect(descTitle, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+  connect(descTitle, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
   descFiring = new QLineEdit;
   descFiring->setPlaceholderText(tr("alert!"));
   connect(descFiring, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
   descRecovery = new QLineEdit;
   descRecovery->setPlaceholderText(tr("recovered"));
   connect(descRecovery, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::inputChanged);
+          &AlertEditor::inputChanged);
 
   // TODO: List of tops/carry rather
   top = new QLineEdit;
@@ -205,7 +201,7 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
         limitLayout->addRow(tr("Group By:"), groupByGroup);
         /* Display the list below that button as a popup; */
         connect(openGroupBy, &QPushButton::clicked, this,
-                &AlertInfoEditor::toggleGroupByView);
+                &AlertEditor::toggleGroupByView);
         limitLayout->addRow(tr("Having:"), having);
       }
       conditionLayout->addLayout(limitLayout);
@@ -250,52 +246,50 @@ AlertInfoEditor::AlertInfoEditor(QWidget *parent) : AtomicWidget(parent) {
    * is extracted from the form, yet we want to update the textual description
    * of the alert at every change: */
   connect(source, &NameTreeView::selectedChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   /* When a new table is selected the possible LHS of where and having has
    * to adapt: */
   connect(source, &NameTreeView::selectedChanged, this,
-          &AlertInfoEditor::updateFilters);
+          &AlertEditor::updateFilters);
   /* Update the openGroupBy button label whenever the selection changes: */
   connect(groupBy->selectionModel(), &QItemSelectionModel::selectionChanged,
-          this, &AlertInfoEditor::updateGroupByLabel);
+          this, &AlertEditor::updateGroupByLabel);
   connect(thresholdIsMax, &QRadioButton::toggled, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(threshold, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(hysteresis, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(duration, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(percentage, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
-  connect(id, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
+  connect(id, &QLineEdit::textChanged, this, &AlertEditor::updateDescription);
   connect(descTitle, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(descFiring, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(descRecovery, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(where, &FilterEditor::inputChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(having, &FilterEditor::inputChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
   connect(timeStep, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
-  connect(top, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
+  connect(top, &QLineEdit::textChanged, this, &AlertEditor::updateDescription);
   connect(carryFields, &QLineEdit::textChanged, this,
-          &AlertInfoEditor::updateDescription);
+          &AlertEditor::updateDescription);
 }
 
-void AlertInfoEditor::updateGroupByLabel() {
+void AlertEditor::updateGroupByLabel() {
   QStringList const lst{getGroupByQStrings()};
 
   openGroupBy->setText(lst.isEmpty() ? tr("select fields")
                                      : abbrev(50, lst.join(", ")));
 }
 
-void AlertInfoEditor::toggleGroupByView() {
+void AlertEditor::toggleGroupByView() {
   if (groupBy->isVisible()) {
     groupBy->hide();
   } else {
@@ -306,14 +300,14 @@ void AlertInfoEditor::toggleGroupByView() {
   }
 }
 
-void AlertInfoEditor::toggleAutoGroupBy(int state) {
+void AlertEditor::toggleAutoGroupBy(int state) {
   bool const manualGroupBy{state == Qt::Unchecked};
   openGroupBy->setEnabled(manualGroupBy);
   groupBy->setEnabled(manualGroupBy);
   if (!manualGroupBy) groupBy->hide();
 }
 
-void AlertInfoEditor::setEnabled(bool enabled) {
+void AlertEditor::setEnabled(bool enabled) {
   source->setEnabled(enabled);
   isEnabled->setEnabled(enabled);
   thresholdIsMax->setEnabled(enabled);
@@ -343,7 +337,7 @@ void AlertInfoEditor::setEnabled(bool enabled) {
   }
 }
 
-bool AlertInfoEditor::setValue(
+bool AlertEditor::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   if (v->index() != dessser::gen::sync_value::Alert) {
     qCritical() << "Not a dessser::gen::alert::t?!";
@@ -404,7 +398,7 @@ bool AlertInfoEditor::setValue(
       if (row >= 0) {
         selModel->select(tableFields->index(row), QItemSelectionModel::Select);
       } else {
-        qCritical() << "AlertInfoEditor::setValue: Cannot find field " << s;
+        qCritical() << "AlertEditor::setValue: Cannot find field " << s;
       }
     }
   } else {
@@ -459,21 +453,21 @@ bool AlertInfoEditor::setValue(
   return true;
 }
 
-std::string const AlertInfoEditor::getTable() const {
+std::string const AlertEditor::getTable() const {
   NamesTree const *model{static_cast<NamesTree const *>(source->model())};
   std::pair<std::string, std::string> const path{
       model->pathOfIndex(source->currentIndex())};
   return path.first.empty() ? table : path.first;
 }
 
-std::string const AlertInfoEditor::getColumn() const {
+std::string const AlertEditor::getColumn() const {
   NamesTree const *model{static_cast<NamesTree const *>(source->model())};
   std::pair<std::string, std::string> const path{
       model->pathOfIndex(source->currentIndex())};
   return path.second.empty() ? column : path.second;
 }
 
-QStringList const AlertInfoEditor::getGroupByQStrings() const {
+QStringList const AlertEditor::getGroupByQStrings() const {
   QItemSelectionModel const *selModel{groupBy->selectionModel()};
   QModelIndexList selIdxs{selModel->selectedRows()};
   QStringList lst;
@@ -485,7 +479,7 @@ QStringList const AlertInfoEditor::getGroupByQStrings() const {
   return lst;
 }
 
-std::optional<dessser::Lst<std::string> > const AlertInfoEditor::getGroupBy()
+std::optional<dessser::Lst<std::string> > const AlertEditor::getGroupBy()
     const {
   if (autoGroupBy->isChecked()) return std::nullopt;
 
@@ -498,7 +492,7 @@ std::optional<dessser::Lst<std::string> > const AlertInfoEditor::getGroupBy()
   return ret;
 }
 
-std::shared_ptr<dessser::gen::sync_value::t const> AlertInfoEditor::getValue()
+std::shared_ptr<dessser::gen::sync_value::t const> AlertEditor::getValue()
     const {
   dessser::Lst<std::string> carry_fields;
   if (!carryFields->text().isEmpty())
@@ -538,13 +532,13 @@ std::shared_ptr<dessser::gen::sync_value::t const> AlertInfoEditor::getValue()
 }
 
 /* This is called each time we change or set the source to some value: */
-void AlertInfoEditor::checkSource(QModelIndex const &current) const {
+void AlertEditor::checkSource(QModelIndex const &current) const {
   inexistantSourceError->hide();
   NamesTree *model{static_cast<NamesTree *>(source->model())};
   mustSelectAField->setVisible(!model->isField(current));
 }
 
-void AlertInfoEditor::checkGroupBy(QModelIndex const &current) {
+void AlertEditor::checkGroupBy(QModelIndex const &current) {
   NamesTree *model{static_cast<NamesTree *>(source->model())};
   if (!model->isField(current)) return;
 
@@ -595,7 +589,7 @@ void AlertInfoEditor::checkGroupBy(QModelIndex const &current) {
   if (changedSel) updateGroupByLabel();
 }
 
-void AlertInfoEditor::updateDescription() {
+void AlertEditor::updateDescription() {
   std::string const table{getTable()};
   std::string const column{getColumn()};
   bool const has_table{table.length() > 0};
@@ -703,21 +697,20 @@ void AlertInfoEditor::updateDescription() {
 
 /* Check that this index is a field and if so reset the where and filter
  * function with this field parent: */
-void AlertInfoEditor::updateFilters(QModelIndex const &current) {
+void AlertEditor::updateFilters(QModelIndex const &current) {
   if (!current.isValid()) return;
 
   NamesTree const *model{static_cast<NamesTree const *>(source->model())};
   if (!model->isField(current)) {
-    if (verbose)
-      qDebug() << "AlertInfoEditor: selected source is not in a field";
+    if (verbose) qDebug() << "AlertEditor: selected source is not in a field";
     return;
   }
 
   QModelIndex const parent{current.parent()};
   if (verbose)
-    qDebug() << "AlertInfoEditor: selecting parent" << model->data(parent, 0);
+    qDebug() << "AlertEditor: selecting parent" << model->data(parent, 0);
   if (!parent.isValid()) {
-    qCritical() << "AlertInfoEditor: field has no parent?!";
+    qCritical() << "AlertEditor: field has no parent?!";
     return;
   }
 
@@ -738,46 +731,46 @@ void AlertInfoEditor::updateFilters(QModelIndex const &current) {
   carryFields->setCompleter(carryFieldsCompleter);
 }
 
-bool AlertInfoEditor::hasValidInput() const {
+bool AlertEditor::hasValidInput() const {
   NamesTree const *model{static_cast<NamesTree *>(source->model())};
   if (!model->isField(source->currentIndex())) {
-    if (verbose) qDebug() << "AlertInfoEditor: selected source is not a field";
+    if (verbose) qDebug() << "AlertEditor: selected source is not a field";
     return false;
   }
   if (!threshold->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: threshold invalid";
+    if (verbose) qDebug() << "AlertEditor: threshold invalid";
     return false;
   }
   if (!hysteresis->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: hysteresis invalid";
+    if (verbose) qDebug() << "AlertEditor: hysteresis invalid";
     return false;
   }
   if (!duration->text().isEmpty() && !duration->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: duration invalid";
+    if (verbose) qDebug() << "AlertEditor: duration invalid";
     return false;
   }
   if (!timeStep->text().isEmpty() && !timeStep->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: time-step invalid";
+    if (verbose) qDebug() << "AlertEditor: time-step invalid";
     return false;
   }
   if (!percentage->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: percentage invalid";
+    if (verbose) qDebug() << "AlertEditor: percentage invalid";
     return false;
   }
   if (!descTitle->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: name invalid";
+    if (verbose) qDebug() << "AlertEditor: name invalid";
     return false;
   }
   if (!where->isEmpty() && !where->hasValidInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: where invalid";
+    if (verbose) qDebug() << "AlertEditor: where invalid";
     return false;
   }
   if (!having->isEmpty() && !having->hasValidInput()) {
-    if (verbose) qDebug() << "AlertInfoEditor: having invalid";
+    if (verbose) qDebug() << "AlertEditor: having invalid";
     return false;
   }
 
-  if (verbose) qDebug() << "AlertInfoEditor: is valid";
+  if (verbose) qDebug() << "AlertEditor: is valid";
 
   return true;
 }

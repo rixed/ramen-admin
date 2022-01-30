@@ -1,6 +1,6 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
-#ifndef ALERTINFOEDITOR_H_191129
-#define ALERTINFOEDITOR_H_191129
+#ifndef ALERTEDITOR_H_191129
+#define ALERTEDITOR_H_191129
 #include <dessser/Lst.h>
 
 #include <QStringList>
@@ -47,7 +47,7 @@ class NameTreeView : public QTreeView {
   void selectedChanged(QModelIndex const &);
 };
 
-class AlertInfoEditor : public AtomicWidget {
+class AlertEditor : public AtomicWidget {
   Q_OBJECT
 
   // Some error messages shown/hidden depending on selection:
@@ -119,7 +119,7 @@ class AlertInfoEditor : public AtomicWidget {
   QLabel *description;
   FilterEditor *where, *having;
 
-  AlertInfoEditor(QWidget *parent = nullptr);
+  AlertEditor(QWidget *parent = nullptr);
 
   void setEnabled(bool) override;
 

@@ -18,7 +18,7 @@
 #include "desssergen/sync_value.h"
 #include "misc.h"
 #include "misc_dessser.h"
-#include "source/AlertInfoEditor.h"
+#include "source/AlertEditor.h"
 #include "source/SourceInfoViewer.h"
 
 static constexpr bool verbose{false};
@@ -32,9 +32,9 @@ SourceEdit::SourceEdit(QWidget *parent) : QWidget(parent) {
   stackedLayout = new QStackedLayout;
   stackedLayout->setObjectName("stackedLayout");
 
-  alertEditor = new AlertInfoEditor;
+  alertEditor = new AlertEditor;
   alertEditor->setObjectName("alertEditor");
-  connect(alertEditor, &AlertInfoEditor::inputChanged, this,
+  connect(alertEditor, &AlertEditor::inputChanged, this,
           &SourceEdit::inputChanged);
 
   /* Beware: Same indices are used to access currentWidget, stackedLayout,

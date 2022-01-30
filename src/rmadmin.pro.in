@@ -269,7 +269,7 @@ HEADERS += \
   processes/ProcessesWidgetProxy.h \
   processes/ProcessesWin.h \
   source/FilterEditor.h \
-  source/AlertInfoEditor.h \
+  source/AlertEditor.h \
   source/SourceCloneDialog.h \
   source/SourceEditForm.h \
   source/SourceEdit.h \
@@ -429,7 +429,7 @@ SOURCES += \
   processes/ProcessesWidgetProxy.cpp \
   processes/ProcessesWin.cpp \
   source/FilterEditor.cpp \
-  source/AlertInfoEditor.cpp \
+  source/AlertEditor.cpp \
   source/SourceCloneDialog.cpp \
   source/SourceEditForm.cpp \
   source/SourceEdit.cpp \

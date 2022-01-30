@@ -11,7 +11,7 @@
 #include "KTextEdit.h"
 #include "ProgramItem.h"
 #include "misc_dessser.h"
-#include "source/AlertInfoEditor.h"
+#include "source/AlertEditor.h"
 #include "source/SourceCloneDialog.h"
 #include "source/SourceEdit.h"
 #include "source/SourceInfoViewer.h"
