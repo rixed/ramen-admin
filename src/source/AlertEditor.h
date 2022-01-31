@@ -103,7 +103,7 @@ class AlertEditor : public AtomicWidget {
   QRadioButton *thresholdIsMax;
   QRadioButton *thresholdIsMin;
   QLineEdit *threshold;
-  QLineEdit *hysteresis;
+  QLineEdit *recovery;
   QLineEdit *duration;
   QLineEdit *percentage;
   QLineEdit *timeStep;
@@ -127,6 +127,8 @@ class AlertEditor : public AtomicWidget {
 
   bool hasValidInput() const override;
 
+  bool hasRecovery() const;
+
  public slots:
   bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>) override;
 
@@ -137,6 +139,7 @@ class AlertEditor : public AtomicWidget {
   void updateFilters(QModelIndex const &);
   void toggleGroupByView();
   void toggleAutoGroupBy(int);
+  void updateMinMax();
 };
 
 #endif

@@ -94,10 +94,9 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
   threshold = new QLineEdit;
   threshold->setValidator(new QDoubleValidator);
   connect(threshold, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
-  hysteresis = new QLineEdit("10");
-  hysteresis->setValidator(new QDoubleValidator(0., 100., 5));
-  hysteresis->setPlaceholderText(tr("% of the value magnitude"));
-  connect(hysteresis, &QLineEdit::textChanged, this,
+  recovery = new QLineEdit;
+  recovery->setValidator(new QDoubleValidator);
+  connect(recovery, &QLineEdit::textChanged, this,
           &AlertEditor::inputChanged);
   duration = new QLineEdit;
   duration->setValidator(
@@ -191,8 +190,8 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
         minMaxLayout->addWidget(threshold);
         QWidget *minMaxBox{new QWidget};
         minMaxBox->setLayout(minMaxLayout);
-        limitLayout->addRow(tr("Threshold:"), minMaxBox);
-        limitLayout->addRow(tr("Hysteresis:"), hysteresis);
+        limitLayout->addRow(tr("Alerting threshold:"), minMaxBox);
+        limitLayout->addRow(tr("Recovery threshold:"), recovery);
         limitLayout->addRow(tr("Measurements (%):"), percentage);
         limitLayout->addRow(tr("During the last (secs):"), duration);
         QHBoxLayout *groupByGroup{new QHBoxLayout};
@@ -258,8 +257,12 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
           &AlertEditor::updateDescription);
   connect(threshold, &QLineEdit::textChanged, this,
           &AlertEditor::updateDescription);
-  connect(hysteresis, &QLineEdit::textChanged, this,
+  connect(recovery, &QLineEdit::textChanged, this,
           &AlertEditor::updateDescription);
+  /* Whenever the recovery is set then the value of min/max radios becomes
+   * read-only */
+  connect(recovery, &QLineEdit::textChanged, this,
+          &AlertEditor::updateMinMax);
   connect(duration, &QLineEdit::textChanged, this,
           &AlertEditor::updateDescription);
   connect(percentage, &QLineEdit::textChanged, this,
@@ -307,13 +310,35 @@ void AlertEditor::toggleAutoGroupBy(int state) {
   if (!manualGroupBy) groupBy->hide();
 }
 
+bool AlertEditor::hasRecovery() const {
+  return !recovery->text().isEmpty();
+}
+
+void AlertEditor::updateMinMax() {
+  if (!recovery->isEnabled()) return; // wtv
+
+  bool enabled{true};
+  if (!recovery->text().isEmpty() && !threshold->text().isEmpty()) {
+    double const threshold_val{threshold->text().toDouble()};
+    double const recovery_val{recovery->text().toDouble()};
+    if (threshold_val != recovery_val) {
+      enabled = false;
+      if (threshold_val > recovery_val) {
+        thresholdIsMax->setChecked(true);
+      } else {
+        thresholdIsMin->setChecked(true);
+      }
+    }
+  }
+  thresholdIsMax->setEnabled(enabled);
+  thresholdIsMin->setEnabled(enabled);
+}
+
 void AlertEditor::setEnabled(bool enabled) {
   source->setEnabled(enabled);
   isEnabled->setEnabled(enabled);
-  thresholdIsMax->setEnabled(enabled);
-  thresholdIsMin->setEnabled(enabled);
   threshold->setEnabled(enabled);
-  hysteresis->setEnabled(enabled);
+  recovery->setEnabled(enabled);
   duration->setEnabled(enabled);
   percentage->setEnabled(enabled);
   id->setEnabled(enabled);
@@ -332,8 +357,11 @@ void AlertEditor::setEnabled(bool enabled) {
 
   if (enabled) {
     checkSource(source->currentIndex());
+    updateMinMax();
   } else {
     mustSelectAField->hide();
+    thresholdIsMax->setEnabled(false);
+    thresholdIsMin->setEnabled(false);
   }
 }
 
@@ -417,12 +445,11 @@ bool AlertEditor::setValue(
   if (alert->threshold->index() == dessser::gen::alert::Constant) {
     double const t{std::get<dessser::gen::alert::Constant>(*alert->threshold)};
     threshold->setText(QString::number(t));
+    recovery->setText(QString::number(t + alert->hysteresis));
   } else {
     threshold->setText("TODO");  // QString::number(alert->threshold));
+    recovery->setText("TODO");
   }
-
-  // Display the hysteresis in absolute value as defined
-  hysteresis->setText(QString::number(alert->hysteresis));
 
   duration->setText(QString::number(alert->duration));
 
@@ -516,14 +543,17 @@ std::shared_ptr<dessser::gen::sync_value::t const> AlertEditor::getValue()
 
   dessser::Lst<std::shared_ptr<dessser::gen::alert::constant> > carry_csts_{};
 
+  double const threshold_val{threshold->text().toDouble()};
+  double const recovery_val{recovery->text().toDouble() - threshold_val};
+
   std::shared_ptr<dessser::gen::alert::t> alert{
       std::make_shared<dessser::gen::alert::t>(
           getTable(), column, isEnabled->isChecked(), where_, getGroupBy(),
           having_,
           std::make_shared<dessser::gen::alert::threshold>(
               std::in_place_index<dessser::gen::alert::Constant>,
-              threshold->text().toDouble()),
-          hysteresis->text().toDouble(), duration->text().toDouble(),
+              threshold_val),
+          recovery_val, duration->text().toDouble(),
           0.01 * percentage->text().toDouble(), timeStep->text().toDouble(),
           tops, carry_fields, carry_csts_, id->text().toStdString(),
           descTitle->text().toStdString(), descFiring->text().toStdString(),
@@ -597,7 +627,7 @@ void AlertEditor::updateDescription() {
   bool const has_table{table.length() > 0};
   bool const has_column{has_table && column.length() > 0};
   bool const has_threshold{threshold->hasAcceptableInput()};
-  bool const has_hysteresis{hysteresis->hasAcceptableInput()};
+  bool const has_recovery{recovery->hasAcceptableInput()};
   bool const has_duration{duration->hasAcceptableInput()};
   bool const has_timeStep{timeStep->hasAcceptableInput()};
   bool const has_percentage{percentage->hasAcceptableInput()};
@@ -605,9 +635,7 @@ void AlertEditor::updateDescription() {
       where->description("\n(considering only values which ", "), ")};
   QString const having_desc{
       having->description("\nwhenever the aggregated ", ", ")};
-  double const threshold_val{threshold->text().toDouble()};
-  double const hysteresis_val{hysteresis->text().toDouble()};
-  double const recovery{threshold_val + hysteresis_val};
+  QString const recovery_str{recovery->text()};
   double const percentage_val{percentage->text().toDouble()};
   double const duration_val{duration->text().toDouble()};
   QString const timeStep_text{
@@ -648,8 +676,7 @@ void AlertEditor::updateDescription() {
                  has_threshold ? threshold->text() : QString("…"), where_desc,
                  having_desc,
                  thresholdIsMax->isChecked() ? tr("below") : tr("above"),
-                 has_threshold && has_hysteresis ? QString::number(recovery)
-                                                 : QString("…"),
+                 has_threshold && has_recovery ? recovery_str : QString("…"),
                  attachedFields_text));
   } else if (percentage_val >= 100.) {
     description->setText(
@@ -667,8 +694,7 @@ void AlertEditor::updateDescription() {
                  has_duration ? stringOfDuration(duration_val) : QString("…"),
                  where_desc, having_desc,
                  thresholdIsMax->isChecked() ? tr("below") : tr("above"),
-                 has_threshold && has_hysteresis ? QString::number(recovery)
-                                                 : QString("…"),
+                 has_threshold && has_recovery ? recovery_str : QString("…"),
                  attachedFields_text));
   } else {
     description->setText(
@@ -691,8 +717,7 @@ void AlertEditor::updateDescription() {
                 has_duration ? stringOfDuration(duration_val) : QString("…"),
                 having_desc,
                 thresholdIsMax->isChecked() ? tr("below") : tr("above"),
-                has_threshold && has_hysteresis ? QString::number(recovery)
-                                                : QString("…"),
+                has_threshold && has_recovery ? recovery_str : QString("…"),
                 attachedFields_text));
   }
 }
@@ -743,8 +768,8 @@ bool AlertEditor::hasValidInput() const {
     if (verbose) qDebug() << "AlertEditor: threshold invalid";
     return false;
   }
-  if (!hysteresis->hasAcceptableInput()) {
-    if (verbose) qDebug() << "AlertEditor: hysteresis invalid";
+  if (!recovery->hasAcceptableInput()) {
+    if (verbose) qDebug() << "AlertEditor: recovery invalid";
     return false;
   }
   if (!duration->text().isEmpty() && !duration->hasAcceptableInput()) {
