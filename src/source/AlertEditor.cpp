@@ -131,8 +131,10 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
 
   // TODO: List of tops/carry rather
   top = new QLineEdit;
+  top->setValidator(new QRegularExpressionValidator(nonEmpty));
   top->setPlaceholderText(tr("feature major contributors"));
   carryFields = new QLineEdit;
+  carryFields->setValidator(new QRegularExpressionValidator(nonEmpty));
   carryFields->setPlaceholderText(tr("field to carry along"));
   // TODO: CarryCsts
 
