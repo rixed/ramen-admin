@@ -10,7 +10,7 @@
  * Those colors are actually just tints away from the foreground or background
  * color in order that the vivid colors reserved for alerting stand out more.
  *
- * The last parameter [p] controls the blending, the resulting color being
+ * The parameter [p] controls the blending, the resulting color being
  * closer to the foreground (or background) the closer p get to 1. [p]=0 disable
  * the blending.
  */

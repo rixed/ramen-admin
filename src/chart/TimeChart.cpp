@@ -744,7 +744,6 @@ void TimeChart::paintEvent(QPaintEvent *event) {
 
     std::shared_ptr<EventTime const> eventTime{res.func->getTime()};
     if (!eventTime || !eventTime->isValid()) {
-      qWarning() << "Cannot chart data without an event time";
       res.noEventTime = true;
       continue;
     }
@@ -779,7 +778,7 @@ void TimeChart::paintEvent(QPaintEvent *event) {
             }
             auto emplaced{f.labels.emplace(std::make_pair(
                 label, std::make_pair(std::vector<size_t>(),
-                                      colorOfString(label, 0.7))))};
+                                      colorOfString(label, 0.3))))};
             bool const isNew{emplaced.second};
             std::vector<size_t> &tupleIndices{emplaced.first->second.first};
             if (isNew) tupleIndices.reserve(100);
