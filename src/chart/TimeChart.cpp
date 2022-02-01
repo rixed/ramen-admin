@@ -848,6 +848,19 @@ void TimeChart::paintEvent(QPaintEvent *event) {
           }
           updateExtremums(-totHeight / 2, totHeight / 2);
         });
+
+    /* Improve readability (and fix issues when all values are constant for the
+     * whole duration of the chart) by enlarging the scale a bit) */
+    double const dy{axis.max - axis.min};
+    if (dy == 0) {
+      axis.max += 1.;
+      axis.min -= 1.;
+    } else if (dy > 0) {
+      // Makes the scale 5% larger:
+      double const p{dy * 0.025};
+      axis.max += p;
+      axis.min -= p;
+    }
   }
 
   /* If no axis is focused, focus the first left and right ones: */
