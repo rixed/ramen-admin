@@ -28,7 +28,6 @@ SourceEditForm::SourceEditForm(QWidget *parent) : AtomicForm(true, parent) {
 
   codeEdit = new SourceEdit;
   codeEdit->setObjectName("codeEdit");
-  // FIXME: codeEdit should inherit AtomicWidgetAlternative
   setCentralWidget(codeEdit);
   addWidget(codeEdit->alertEditor, true);
   addWidget(codeEdit->textEditor, true);
