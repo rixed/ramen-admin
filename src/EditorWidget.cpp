@@ -23,6 +23,7 @@
 #include "RuntimeStatsViewer.h"
 #include "TimeRangeViewer.h"
 #include "WorkerViewer.h"
+#include "alerting/AlertingContactEditor.h"
 #include "chart/TimeChartEditWidget.h"
 #include "dashboard/DashboardWidgetText.h"
 #include "desssergen/raql_type.h"
@@ -306,6 +307,9 @@ AtomicWidget *newEditorWidget(
       };
       break;
     }
+    case dessser::gen::sync_value::AlertingContact:
+      editor = new AlertingContactEditor(parent);
+      break;
     default:
       /* Enable word-wrap as the text-representation of some values may be very
        * large: */

@@ -86,7 +86,7 @@ inline std::ostream &operator<<(std::ostream &os, t5a8393235cc21d52708273e644b80
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5a8393235cc21d52708273e644b80be6> const r) { os << *r; return os; }
 
-struct t1558ab2cac2ec9cd59eeb75b3e9a4313 : public std::variant<
+struct via : public std::variant<
   Void, // Ignore
   std::string, // Exec
   std::string, // SysLog
@@ -98,7 +98,7 @@ struct t1558ab2cac2ec9cd59eeb75b3e9a4313 : public std::variant<
   static constexpr size_t size { 5 };
 };
 
-inline bool operator==(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2ec9cd59eeb75b3e9a4313 const &b) {
+inline bool operator==(via const &a, via const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Ignore
@@ -109,10 +109,10 @@ inline bool operator==(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2e
   };
   return false;
 }
-inline bool operator!=(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2ec9cd59eeb75b3e9a4313 const &b) {
+inline bool operator!=(via const &a, via const &b) {
   return !operator==(a, b);
 }
-enum Constr_t1558ab2cac2ec9cd59eeb75b3e9a4313 {
+enum Constr_via {
   Ignore,
   Exec,
   SysLog,
@@ -120,7 +120,7 @@ enum Constr_t1558ab2cac2ec9cd59eeb75b3e9a4313 {
   Kafka,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t1558ab2cac2ec9cd59eeb75b3e9a4313 const &v) {
+inline std::ostream &operator<<(std::ostream &os, via const &v) {
   switch (v.index()) {
     case 0: os << "Ignore" << std::get<0>(v); break;
     case 1: os << "Exec " << std::get<1>(v); break;
@@ -131,16 +131,16 @@ inline std::ostream &operator<<(std::ostream &os, t1558ab2cac2ec9cd59eeb75b3e9a4
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t1558ab2cac2ec9cd59eeb75b3e9a4313> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<via> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 via;
+  std::shared_ptr<::dessser::gen::alerting_contact::via>  via;
   double timeout;
-  t(::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 via_, double timeout_) : via(via_), timeout(timeout_) {}
+  t(std::shared_ptr<::dessser::gen::alerting_contact::via>  via_, double timeout_) : via(via_), timeout(timeout_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.via == b.via && a.timeout == b.timeout;
+  return (*a.via) == (*b.via) && a.timeout == b.timeout;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -154,6 +154,30 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
   return os;
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
+
+struct t4f2037d06e9b8c11be7f16b6ac8dd523 : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_contact::via> ,
+  Pointer
+> {
+  using tuple::tuple;
+  t4f2037d06e9b8c11be7f16b6ac8dd523(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, t4f2037d06e9b8c11be7f16b6ac8dd523 const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t4f2037d06e9b8c11be7f16b6ac8dd523> const t) { os << *t; return os; }
 
 struct tf575ebd2244aa6b126ef4291c9e6f8ae : public std::tuple<
   std::shared_ptr<::dessser::gen::alerting_contact::t> ,
@@ -182,8 +206,11 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf575ebd2244aa
 /* ----------- */
 /* Definitions */
 /* ----------- */
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> via_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> via_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> via_of_row_binary;
 extern std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> of_row_binary;
 extern std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> wrap_of_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> wrap_to_row_binary;

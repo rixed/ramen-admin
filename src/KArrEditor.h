@@ -23,6 +23,8 @@ class KArrEditor : public AtomicWidget {
   Q_OBJECT
 
   std::shared_ptr<dessser::gen::raql_type::t const> type;
+
+  // FIXME: uses ListEditor
   // Layout where to find all the editors:
   QVBoxLayout *layout;
   QPushButton *addButton;

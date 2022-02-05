@@ -69,7 +69,7 @@ inline bool operator==(t5a8393235cc21d52708273e644b80be6 const &a, t5a8393235cc2
 inline bool operator!=(t5a8393235cc21d52708273e644b80be6 const &a, t5a8393235cc21d52708273e644b80be6 const &b) {
   return !operator==(a, b);
 }
-struct t1558ab2cac2ec9cd59eeb75b3e9a4313 : public std::variant<
+struct via : public std::variant<
   Void, // Ignore
   std::string, // Exec
   std::string, // SysLog
@@ -81,7 +81,7 @@ struct t1558ab2cac2ec9cd59eeb75b3e9a4313 : public std::variant<
   static constexpr size_t size { 5 };
 };
 
-inline bool operator==(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2ec9cd59eeb75b3e9a4313 const &b) {
+inline bool operator==(via const &a, via const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Ignore
@@ -92,34 +92,34 @@ inline bool operator==(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2e
   };
   return false;
 }
-inline bool operator!=(t1558ab2cac2ec9cd59eeb75b3e9a4313 const &a, t1558ab2cac2ec9cd59eeb75b3e9a4313 const &b) {
+inline bool operator!=(via const &a, via const &b) {
   return !operator==(a, b);
 }
 struct t {
-  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 via;
+  std::shared_ptr<::dessser::gen::alerting_contact::via>  via;
   double timeout;
-  t(::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 via_, double timeout_) : via(via_), timeout(timeout_) {}
+  t(std::shared_ptr<::dessser::gen::alerting_contact::via>  via_, double timeout_) : via(via_), timeout(timeout_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return a.via == b.via && a.timeout == b.timeout;
+  return (*a.via) == (*b.via) && a.timeout == b.timeout;
 }
 
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tf575ebd2244aa6b126ef4291c9e6f8ae : public std::tuple<
-  std::shared_ptr<::dessser::gen::alerting_contact::t> ,
+struct t4f2037d06e9b8c11be7f16b6ac8dd523 : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_contact::via> ,
   Pointer
 > {
   using tuple::tuple;
-  tf575ebd2244aa6b126ef4291c9e6f8ae(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t4f2037d06e9b8c11be7f16b6ac8dd523(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
+inline bool operator==(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
   return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
+inline bool operator!=(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -134,20 +134,6 @@ inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
 inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
-  return !operator==(a, b);
-}
-struct tf9b6d753849d589dc801eb6a515665f8 : public std::tuple<
-  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313,
-  Pointer
-> {
-  using tuple::tuple;
-  tf9b6d753849d589dc801eb6a515665f8(std::tuple<::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313, Pointer> p)
-    : std::tuple<::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313, Pointer>(std::get<0>(p), std::get<1>(p)) {}
-};
-inline bool operator==(tf9b6d753849d589dc801eb6a515665f8 const &a, tf9b6d753849d589dc801eb6a515665f8 const &b) {
-  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf9b6d753849d589dc801eb6a515665f8 const &a, tf9b6d753849d589dc801eb6a515665f8 const &b) {
   return !operator==(a, b);
 }
 struct t12fb9c475959b52bf7b17b155a955ffa : public std::tuple<
@@ -234,6 +220,20 @@ inline bool operator==(t0ec843672514be25b144f299b8cb3149 const &a, t0ec843672514
 inline bool operator!=(t0ec843672514be25b144f299b8cb3149 const &a, t0ec843672514be25b144f299b8cb3149 const &b) {
   return !operator==(a, b);
 }
+struct tf575ebd2244aa6b126ef4291c9e6f8ae : public std::tuple<
+  std::shared_ptr<::dessser::gen::alerting_contact::t> ,
+  Pointer
+> {
+  using tuple::tuple;
+  tf575ebd2244aa6b126ef4291c9e6f8ae(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
+  return !operator==(a, b);
+}
 struct td2cd337bb3c8bc04d5603393d084985b : public std::tuple<
   uint64_t,
   Pointer
@@ -252,3111 +252,3095 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
 /* Definitions */
 /* ----------- */
 /* 
-    (fun ("{via: [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]; timeout: FLOAT}" "Ptr")
-      (let "srec_dst_329"
-        (let "ssum_dst_298" (write-u16 little-endian (param 1) (label-of (get-field "via" (param 0))))
-          (if (eq (u16 0) (label-of (get-field "via" (param 0)))) (identifier "ssum_dst_298")
-            (if (eq (u16 1) (label-of (get-field "via" (param 0))))
+    (fun ("[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" "Ptr")
+      (let "ssum_dst_298" (write-u16 little-endian (param 1) (label-of (param 0)))
+        (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_298")
+          (if (eq (u16 1) (label-of (param 0)))
+            (write-bytes
+              (let "leb128_sz_327" (make-vec (string-length (get-alt "Exec" (param 0))))
+                (let "leb128_ptr_328" (make-vec (identifier "ssum_dst_298"))
+                  (seq
+                    (while
+                      (seq
+                        (set-vec (u8 0) (identifier "leb128_ptr_328")
+                          (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_328"))
+                            (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) (u8 128)))))
+                        (set-vec (u8 0) (identifier "leb128_sz_327") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_327")) (u8 7))) 
+                        (gt (unsafe-nth (u8 0) (identifier "leb128_sz_327")) (u32 0))) 
+                      (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_328"))))) 
+              (bytes-of-string (get-alt "Exec" (param 0))))
+            (if (eq (u16 2) (label-of (param 0)))
               (write-bytes
-                (let "leb128_sz_327" (make-vec (string-length (get-alt "Exec" (get-field "via" (param 0)))))
-                  (let "leb128_ptr_328" (make-vec (identifier "ssum_dst_298"))
+                (let "leb128_sz_325" (make-vec (string-length (get-alt "SysLog" (param 0))))
+                  (let "leb128_ptr_326" (make-vec (identifier "ssum_dst_298"))
                     (seq
                       (while
                         (seq
-                          (set-vec (u8 0) (identifier "leb128_ptr_328")
-                            (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_328"))
-                              (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) 
-                                (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) 
-                                (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_327"))) (u8 128))))) 
-                          (set-vec (u8 0) (identifier "leb128_sz_327") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_327")) (u8 7))) 
-                          (gt (unsafe-nth (u8 0) (identifier "leb128_sz_327")) (u32 0))) 
-                        (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_328"))))) 
-                (bytes-of-string (get-alt "Exec" (get-field "via" (param 0)))))
-              (if (eq (u16 2) (label-of (get-field "via" (param 0))))
-                (write-bytes
-                  (let "leb128_sz_325" (make-vec (string-length (get-alt "SysLog" (get-field "via" (param 0)))))
-                    (let "leb128_ptr_326" (make-vec (identifier "ssum_dst_298"))
-                      (seq
-                        (while
-                          (seq
-                            (set-vec (u8 0) (identifier "leb128_ptr_326")
-                              (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_326"))
-                                (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) 
-                                  (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) 
-                                  (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) (u8 128))))) 
-                            (set-vec (u8 0) (identifier "leb128_sz_325") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_325")) (u8 7))) 
-                            (gt (unsafe-nth (u8 0) (identifier "leb128_sz_325")) (u32 0))) 
-                          (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_326"))))) 
-                  (bytes-of-string (get-alt "SysLog" (get-field "via" (param 0)))))
-                (if (eq (u16 3) (label-of (get-field "via" (param 0))))
-                  (let "srec_dst_322"
-                    (let "srec_dst_319"
-                      (write-bytes
-                        (let "leb128_sz_317" (make-vec (string-length (get-field "file" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                          (let "leb128_ptr_318" (make-vec (identifier "ssum_dst_298"))
-                            (seq
-                              (while
-                                (seq
-                                  (set-vec (u8 0) (identifier "leb128_ptr_318")
-                                    (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_318"))
-                                      (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) 
-                                        (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) 
-                                        (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) (u8 128)))))
-                                  (set-vec (u8 0) (identifier "leb128_sz_317") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_317")) (u8 7))) 
-                                  (gt (unsafe-nth (u8 0) (identifier "leb128_sz_317")) (u32 0))) 
-                                (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_318"))))) 
-                        (bytes-of-string (get-field "file" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                      (write-bytes
-                        (let "leb128_sz_320" (make-vec (string-length (get-field "insert" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                          (let "leb128_ptr_321" (make-vec (identifier "srec_dst_319"))
-                            (seq
-                              (while
-                                (seq
-                                  (set-vec (u8 0) (identifier "leb128_ptr_321")
-                                    (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_321"))
-                                      (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) 
-                                        (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) 
-                                        (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) (u8 128)))))
-                                  (set-vec (u8 0) (identifier "leb128_sz_320") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_320")) (u8 7))) 
-                                  (gt (unsafe-nth (u8 0) (identifier "leb128_sz_320")) (u32 0))) 
-                                (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_321"))))) 
-                        (bytes-of-string (get-field "insert" (get-alt "Sqlite" (get-field "via" (param 0)))))))
+                          (set-vec (u8 0) (identifier "leb128_ptr_326")
+                            (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_326"))
+                              (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) 
+                                (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) 
+                                (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_325"))) (u8 128))))) 
+                          (set-vec (u8 0) (identifier "leb128_sz_325") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_325")) (u8 7))) 
+                          (gt (unsafe-nth (u8 0) (identifier "leb128_sz_325")) (u32 0))) 
+                        (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_326"))))) 
+                (bytes-of-string (get-alt "SysLog" (param 0))))
+              (if (eq (u16 3) (label-of (param 0)))
+                (let "srec_dst_322"
+                  (let "srec_dst_319"
                     (write-bytes
-                      (let "leb128_sz_323" (make-vec (string-length (get-field "create" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                        (let "leb128_ptr_324" (make-vec (identifier "srec_dst_322"))
+                      (let "leb128_sz_317" (make-vec (string-length (get-field "file" (get-alt "Sqlite" (param 0)))))
+                        (let "leb128_ptr_318" (make-vec (identifier "ssum_dst_298"))
                           (seq
                             (while
                               (seq
-                                (set-vec (u8 0) (identifier "leb128_ptr_324")
-                                  (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_324"))
-                                    (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) 
-                                      (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) 
-                                      (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) (u8 128)))))
-                                (set-vec (u8 0) (identifier "leb128_sz_323") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_323")) (u8 7))) 
-                                (gt (unsafe-nth (u8 0) (identifier "leb128_sz_323")) (u32 0))) 
-                              (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_324"))))) 
-                      (bytes-of-string (get-field "create" (get-alt "Sqlite" (get-field "via" (param 0)))))))
-                  (seq (assert (eq (label-of (get-field "via" (param 0))) (u16 4)))
-                    (let "srec_dst_314"
-                      (let "srec_dst_313"
-                        (let "srec_dst_310"
-                          (let "dst_ref_301"
-                            (make-vec
-                              (let "leb128_sz_299" (make-vec (cardinality (get-field "options" (get-alt "Kafka" (get-field "via" (param 0))))))
-                                (let "leb128_ptr_300" (make-vec (identifier "ssum_dst_298"))
-                                  (seq
-                                    (while
-                                      (seq
-                                        (set-vec (u8 0) (identifier "leb128_ptr_300")
-                                          (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_300"))
-                                            (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) 
-                                              (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) 
-                                              (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) (u8 128)))))
-                                        (set-vec (u8 0) (identifier "leb128_sz_299") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_299")) (u8 7))) 
-                                        (gt (unsafe-nth (u8 0) (identifier "leb128_sz_299")) (u32 0))) 
-                                      (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_300"))))))
-                            (let "n_ref_302" (make-vec (i32 0))
+                                (set-vec (u8 0) (identifier "leb128_ptr_318")
+                                  (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_318"))
+                                    (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) 
+                                      (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) 
+                                      (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_317"))) (u8 128)))))
+                                (set-vec (u8 0) (identifier "leb128_sz_317") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_317")) (u8 7))) 
+                                (gt (unsafe-nth (u8 0) (identifier "leb128_sz_317")) (u32 0))) 
+                              (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_318"))))) 
+                      (bytes-of-string (get-field "file" (get-alt "Sqlite" (param 0)))))
+                    (write-bytes
+                      (let "leb128_sz_320" (make-vec (string-length (get-field "insert" (get-alt "Sqlite" (param 0)))))
+                        (let "leb128_ptr_321" (make-vec (identifier "srec_dst_319"))
+                          (seq
+                            (while
                               (seq
-                                (for-each "x_303" (get-field "options" (get-alt "Kafka" (get-field "via" (param 0))))
-                                  (seq
-                                    (set-vec (u8 0) (identifier "dst_ref_301")
-                                      (let "stup_dst_307"
-                                        (let "stup_dst_304" (unsafe-nth (u8 0) (identifier "dst_ref_301"))
-                                          (write-bytes
-                                            (let "leb128_sz_305" (make-vec (string-length (get-item 0 (identifier "x_303"))))
-                                              (let "leb128_ptr_306" (make-vec (identifier "stup_dst_304"))
-                                                (seq
-                                                  (while
-                                                    (seq
-                                                      (set-vec (u8 0) 
-                                                        (identifier "leb128_ptr_306")
-                                                        (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_306"))
-                                                          (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) 
-                                                            (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) 
-                                                            (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) (u8 128)))))
-                                                      (set-vec (u8 0) (identifier "leb128_sz_305") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_305")) (u8 7)))
-                                                      (gt (unsafe-nth (u8 0) (identifier "leb128_sz_305")) (u32 0))) 
-                                                    (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_306"))))) 
-                                            (bytes-of-string (get-item 0 (identifier "x_303")))))
-                                        (write-bytes
-                                          (let "leb128_sz_308" (make-vec (string-length (get-item 1 (identifier "x_303"))))
-                                            (let "leb128_ptr_309" (make-vec (identifier "stup_dst_307"))
-                                              (seq
-                                                (while
-                                                  (seq
-                                                    (set-vec (u8 0) (identifier "leb128_ptr_309")
-                                                      (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_309"))
-                                                        (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) 
-                                                          (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) 
-                                                          (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) (u8 128)))))
-                                                    (set-vec (u8 0) (identifier "leb128_sz_308") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_308")) (u8 7)))
-                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_308")) (u32 0))) 
-                                                  (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_309"))))) 
-                                          (bytes-of-string (get-item 1 (identifier "x_303")))))) 
-                                    (set-vec (u8 0) (identifier "n_ref_302") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_302")))))) 
-                                (unsafe-nth (u8 0) (identifier "dst_ref_301")))))
-                          (write-bytes
-                            (let "leb128_sz_311" (make-vec (string-length (get-field "topic" (get-alt "Kafka" (get-field "via" (param 0))))))
-                              (let "leb128_ptr_312" (make-vec (identifier "srec_dst_310"))
+                                (set-vec (u8 0) (identifier "leb128_ptr_321")
+                                  (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_321"))
+                                    (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) 
+                                      (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) 
+                                      (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_320"))) (u8 128)))))
+                                (set-vec (u8 0) (identifier "leb128_sz_320") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_320")) (u8 7))) 
+                                (gt (unsafe-nth (u8 0) (identifier "leb128_sz_320")) (u32 0))) 
+                              (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_321"))))) 
+                      (bytes-of-string (get-field "insert" (get-alt "Sqlite" (param 0))))))
+                  (write-bytes
+                    (let "leb128_sz_323" (make-vec (string-length (get-field "create" (get-alt "Sqlite" (param 0)))))
+                      (let "leb128_ptr_324" (make-vec (identifier "srec_dst_322"))
+                        (seq
+                          (while
+                            (seq
+                              (set-vec (u8 0) (identifier "leb128_ptr_324")
+                                (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_324"))
+                                  (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) 
+                                    (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) 
+                                    (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_323"))) (u8 128))))) 
+                              (set-vec (u8 0) (identifier "leb128_sz_323") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_323")) (u8 7))) 
+                              (gt (unsafe-nth (u8 0) (identifier "leb128_sz_323")) (u32 0))) 
+                            (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_324"))))) 
+                    (bytes-of-string (get-field "create" (get-alt "Sqlite" (param 0))))))
+                (seq (assert (eq (label-of (param 0)) (u16 4)))
+                  (let "srec_dst_314"
+                    (let "srec_dst_313"
+                      (let "srec_dst_310"
+                        (let "dst_ref_301"
+                          (make-vec
+                            (let "leb128_sz_299" (make-vec (cardinality (get-field "options" (get-alt "Kafka" (param 0)))))
+                              (let "leb128_ptr_300" (make-vec (identifier "ssum_dst_298"))
                                 (seq
                                   (while
                                     (seq
-                                      (set-vec (u8 0) (identifier "leb128_ptr_312")
-                                        (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_312"))
-                                          (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) 
-                                            (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) 
-                                            (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) (u8 128)))))
-                                      (set-vec (u8 0) (identifier "leb128_sz_311") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_311")) (u8 7))) 
-                                      (gt (unsafe-nth (u8 0) (identifier "leb128_sz_311")) (u32 0))) 
-                                    (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_312"))))) 
-                            (bytes-of-string (get-field "topic" (get-alt "Kafka" (get-field "via" (param 0)))))))
-                        (write-u16 little-endian (identifier "srec_dst_313") (get-field "partition" (get-alt "Kafka" (get-field "via" (param 0))))))
-                      (write-bytes
-                        (let "leb128_sz_315" (make-vec (string-length (get-field "text" (get-alt "Kafka" (get-field "via" (param 0))))))
-                          (let "leb128_ptr_316" (make-vec (identifier "srec_dst_314"))
+                                      (set-vec (u8 0) (identifier "leb128_ptr_300")
+                                        (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_300"))
+                                          (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) 
+                                            (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) 
+                                            (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_299"))) (u8 128)))))
+                                      (set-vec (u8 0) (identifier "leb128_sz_299") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_299")) (u8 7))) 
+                                      (gt (unsafe-nth (u8 0) (identifier "leb128_sz_299")) (u32 0))) 
+                                    (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_300"))))))
+                          (let "n_ref_302" (make-vec (i32 0))
                             (seq
-                              (while
+                              (for-each "x_303" (get-field "options" (get-alt "Kafka" (param 0)))
                                 (seq
-                                  (set-vec (u8 0) (identifier "leb128_ptr_316")
-                                    (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_316"))
-                                      (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) 
-                                        (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) 
-                                        (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) (u8 128)))))
-                                  (set-vec (u8 0) (identifier "leb128_sz_315") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_315")) (u8 7))) 
-                                  (gt (unsafe-nth (u8 0) (identifier "leb128_sz_315")) (u32 0))) 
-                                (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_316"))))) 
-                        (bytes-of-string (get-field "text" (get-alt "Kafka" (get-field "via" (param 0))))))))))))) 
-        (write-u64 little-endian (identifier "srec_dst_329") (u64-of-float (get-field "timeout" (param 0))))))
+                                  (set-vec (u8 0) (identifier "dst_ref_301")
+                                    (let "stup_dst_307"
+                                      (let "stup_dst_304" (unsafe-nth (u8 0) (identifier "dst_ref_301"))
+                                        (write-bytes
+                                          (let "leb128_sz_305" (make-vec (string-length (get-item 0 (identifier "x_303"))))
+                                            (let "leb128_ptr_306" (make-vec (identifier "stup_dst_304"))
+                                              (seq
+                                                (while
+                                                  (seq
+                                                    (set-vec (u8 0) (identifier "leb128_ptr_306")
+                                                      (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_306"))
+                                                        (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) 
+                                                          (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) 
+                                                          (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_305"))) (u8 128)))))
+                                                    (set-vec (u8 0) (identifier "leb128_sz_305") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_305")) (u8 7)))
+                                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_305")) (u32 0))) 
+                                                  (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_306"))))) 
+                                          (bytes-of-string (get-item 0 (identifier "x_303")))))
+                                      (write-bytes
+                                        (let "leb128_sz_308" (make-vec (string-length (get-item 1 (identifier "x_303"))))
+                                          (let "leb128_ptr_309" (make-vec (identifier "stup_dst_307"))
+                                            (seq
+                                              (while
+                                                (seq
+                                                  (set-vec (u8 0) (identifier "leb128_ptr_309")
+                                                    (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_309"))
+                                                      (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) 
+                                                        (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) 
+                                                        (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_308"))) (u8 128)))))
+                                                  (set-vec (u8 0) (identifier "leb128_sz_308") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_308")) (u8 7))) 
+                                                  (gt (unsafe-nth (u8 0) (identifier "leb128_sz_308")) (u32 0))) 
+                                                (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_309"))))) 
+                                        (bytes-of-string (get-item 1 (identifier "x_303")))))) 
+                                  (set-vec (u8 0) (identifier "n_ref_302") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_302")))))) 
+                              (unsafe-nth (u8 0) (identifier "dst_ref_301")))))
+                        (write-bytes
+                          (let "leb128_sz_311" (make-vec (string-length (get-field "topic" (get-alt "Kafka" (param 0)))))
+                            (let "leb128_ptr_312" (make-vec (identifier "srec_dst_310"))
+                              (seq
+                                (while
+                                  (seq
+                                    (set-vec (u8 0) (identifier "leb128_ptr_312")
+                                      (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_312"))
+                                        (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) 
+                                          (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) 
+                                          (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_311"))) (u8 128)))))
+                                    (set-vec (u8 0) (identifier "leb128_sz_311") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_311")) (u8 7))) 
+                                    (gt (unsafe-nth (u8 0) (identifier "leb128_sz_311")) (u32 0))) 
+                                  (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_312"))))) 
+                          (bytes-of-string (get-field "topic" (get-alt "Kafka" (param 0)))))) 
+                      (write-u16 little-endian (identifier "srec_dst_313") (get-field "partition" (get-alt "Kafka" (param 0)))))
+                    (write-bytes
+                      (let "leb128_sz_315" (make-vec (string-length (get-field "text" (get-alt "Kafka" (param 0)))))
+                        (let "leb128_ptr_316" (make-vec (identifier "srec_dst_314"))
+                          (seq
+                            (while
+                              (seq
+                                (set-vec (u8 0) (identifier "leb128_ptr_316")
+                                  (write-u8 (unsafe-nth (u8 0) (identifier "leb128_ptr_316"))
+                                    (if (gt (u32 128) (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) 
+                                      (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) 
+                                      (bit-or (to-u8 (unsafe-nth (u8 0) (identifier "leb128_sz_315"))) (u8 128)))))
+                                (set-vec (u8 0) (identifier "leb128_sz_315") (right-shift (unsafe-nth (u8 0) (identifier "leb128_sz_315")) (u8 7))) 
+                                (gt (unsafe-nth (u8 0) (identifier "leb128_sz_315")) (u32 0))) 
+                              (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_316"))))) 
+                      (bytes-of-string (get-field "text" (get-alt "Kafka" (param 0)))))))))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> via_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
-    ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_1 { (*p_0).via };
-    uint16_t id_2 { uint16_t(id_1.index()) };
-    Pointer id_3 { p_1.writeU16Le(id_2) };
-    Pointer let_res_4;
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_contact::via>  p_0, Pointer p_1) {
+    uint16_t id_1 { uint16_t((*p_0).index()) };
+    Pointer id_2 { p_1.writeU16Le(id_1) };
+    Pointer let_res_3;
     {
-      Pointer ssum_dst_298 { id_3 };
-      uint16_t id_5 { 0 };
-      ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_6 { (*p_0).via };
-      uint16_t id_7 { uint16_t(id_6.index()) };
-      bool id_8 { bool(id_5 == id_7) };
-      Pointer choose_res_9;
-      if (id_8) {
-        choose_res_9 = ssum_dst_298;
+      Pointer ssum_dst_298 { id_2 };
+      uint16_t id_4 { 0 };
+      uint16_t id_5 { uint16_t((*p_0).index()) };
+      bool id_6 { bool(id_4 == id_5) };
+      Pointer choose_res_7;
+      if (id_6) {
+        choose_res_7 = ssum_dst_298;
       } else {
-        uint16_t id_10 { 1 };
-        ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_11 { (*p_0).via };
-        uint16_t id_12 { uint16_t(id_11.index()) };
-        bool id_13 { bool(id_10 == id_12) };
-        Pointer choose_res_14;
-        if (id_13) {
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_15 { (*p_0).via };
-          std::string id_16 { std::get<1 /* Exec */>(id_15) };
-          uint32_t id_17 { (uint32_t)id_16.size() };
-          Vec<1, uint32_t> id_18 {  id_17  };
-          Pointer let_res_19;
+        uint16_t id_8 { 1 };
+        uint16_t id_9 { uint16_t((*p_0).index()) };
+        bool id_10 { bool(id_8 == id_9) };
+        Pointer choose_res_11;
+        if (id_10) {
+          std::string id_12 { std::get<1 /* Exec */>((*p_0)) };
+          uint32_t id_13 { (uint32_t)id_12.size() };
+          Vec<1, uint32_t> id_14 {  id_13  };
+          Pointer let_res_15;
           {
-            Vec<1, uint32_t> leb128_sz_327 { id_18 };
-            Vec<1, Pointer> id_20 {  ssum_dst_298  };
-            Pointer let_res_21;
+            Vec<1, uint32_t> leb128_sz_327 { id_14 };
+            Vec<1, Pointer> id_16 {  ssum_dst_298  };
+            Pointer let_res_17;
             {
-              Vec<1, Pointer> leb128_ptr_328 { id_20 };
-              bool while_flag_22 { true };
+              Vec<1, Pointer> leb128_ptr_328 { id_16 };
+              bool while_flag_18 { true };
               do {
+                uint8_t id_19 { 0 };
+                uint8_t id_20 { 0 };
+                Pointer id_21 { leb128_ptr_328[id_20] };
+                uint32_t id_22 { 128U };
                 uint8_t id_23 { 0 };
-                uint8_t id_24 { 0 };
-                Pointer id_25 { leb128_ptr_328[id_24] };
-                uint32_t id_26 { 128U };
-                uint8_t id_27 { 0 };
-                uint32_t id_28 { leb128_sz_327[id_27] };
-                bool id_29 { bool(id_26 > id_28) };
-                uint8_t choose_res_30;
-                if (id_29) {
-                  uint8_t id_31 { 0 };
-                  uint32_t id_32 { leb128_sz_327[id_31] };
-                  uint8_t id_33 { uint8_t(id_32) };
-                  choose_res_30 = id_33;
+                uint32_t id_24 { leb128_sz_327[id_23] };
+                bool id_25 { bool(id_22 > id_24) };
+                uint8_t choose_res_26;
+                if (id_25) {
+                  uint8_t id_27 { 0 };
+                  uint32_t id_28 { leb128_sz_327[id_27] };
+                  uint8_t id_29 { uint8_t(id_28) };
+                  choose_res_26 = id_29;
                 } else {
-                  uint8_t id_34 { 0 };
-                  uint32_t id_35 { leb128_sz_327[id_34] };
-                  uint8_t id_36 { uint8_t(id_35) };
-                  uint8_t id_37 { 128 };
-                  uint8_t id_38 { uint8_t(id_36 | id_37) };
-                  choose_res_30 = id_38;
+                  uint8_t id_30 { 0 };
+                  uint32_t id_31 { leb128_sz_327[id_30] };
+                  uint8_t id_32 { uint8_t(id_31) };
+                  uint8_t id_33 { 128 };
+                  uint8_t id_34 { uint8_t(id_32 | id_33) };
+                  choose_res_26 = id_34;
                 }
-                Pointer id_39 { id_25.writeU8(choose_res_30) };
-                Void id_40 { ((void)(leb128_ptr_328[id_23] = id_39), ::dessser::Void()) };
-                (void)id_40;
-                uint8_t id_41 { 0 };
-                uint8_t id_42 { 0 };
-                uint32_t id_43 { leb128_sz_327[id_42] };
-                uint8_t id_44 { 7 };
-                uint32_t id_45 { uint32_t(id_43 >> id_44) };
-                Void id_46 { ((void)(leb128_sz_327[id_41] = id_45), ::dessser::Void()) };
-                (void)id_46;
-                uint8_t id_47 { 0 };
-                uint32_t id_48 { leb128_sz_327[id_47] };
-                uint32_t id_49 { 0U };
-                bool id_50 { bool(id_48 > id_49) };
-                while_flag_22 = id_50;
-                if (while_flag_22) {
+                Pointer id_35 { id_21.writeU8(choose_res_26) };
+                Void id_36 { ((void)(leb128_ptr_328[id_19] = id_35), ::dessser::Void()) };
+                (void)id_36;
+                uint8_t id_37 { 0 };
+                uint8_t id_38 { 0 };
+                uint32_t id_39 { leb128_sz_327[id_38] };
+                uint8_t id_40 { 7 };
+                uint32_t id_41 { uint32_t(id_39 >> id_40) };
+                Void id_42 { ((void)(leb128_sz_327[id_37] = id_41), ::dessser::Void()) };
+                (void)id_42;
+                uint8_t id_43 { 0 };
+                uint32_t id_44 { leb128_sz_327[id_43] };
+                uint32_t id_45 { 0U };
+                bool id_46 { bool(id_44 > id_45) };
+                while_flag_18 = id_46;
+                if (while_flag_18) {
                   (void)::dessser::Void();
                 }
-              } while (while_flag_22);
+              } while (while_flag_18);
               (void)::dessser::Void();
-              uint8_t id_51 { 0 };
-              Pointer id_52 { leb128_ptr_328[id_51] };
-              let_res_21 = id_52;
+              uint8_t id_47 { 0 };
+              Pointer id_48 { leb128_ptr_328[id_47] };
+              let_res_17 = id_48;
             }
-            let_res_19 = let_res_21;
+            let_res_15 = let_res_17;
           }
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_53 { (*p_0).via };
-          std::string id_54 { std::get<1 /* Exec */>(id_53) };
-          Bytes id_55 { id_54 };
-          Pointer id_56 { let_res_19.writeBytes(id_55) };
-          choose_res_14 = id_56;
+          std::string id_49 { std::get<1 /* Exec */>((*p_0)) };
+          Bytes id_50 { id_49 };
+          Pointer id_51 { let_res_15.writeBytes(id_50) };
+          choose_res_11 = id_51;
         } else {
-          uint16_t id_57 { 2 };
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_58 { (*p_0).via };
-          uint16_t id_59 { uint16_t(id_58.index()) };
-          bool id_60 { bool(id_57 == id_59) };
-          Pointer choose_res_61;
-          if (id_60) {
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_62 { (*p_0).via };
-            std::string id_63 { std::get<2 /* SysLog */>(id_62) };
-            uint32_t id_64 { (uint32_t)id_63.size() };
-            Vec<1, uint32_t> id_65 {  id_64  };
-            Pointer let_res_66;
+          uint16_t id_52 { 2 };
+          uint16_t id_53 { uint16_t((*p_0).index()) };
+          bool id_54 { bool(id_52 == id_53) };
+          Pointer choose_res_55;
+          if (id_54) {
+            std::string id_56 { std::get<2 /* SysLog */>((*p_0)) };
+            uint32_t id_57 { (uint32_t)id_56.size() };
+            Vec<1, uint32_t> id_58 {  id_57  };
+            Pointer let_res_59;
             {
-              Vec<1, uint32_t> leb128_sz_325 { id_65 };
-              Vec<1, Pointer> id_67 {  ssum_dst_298  };
-              Pointer let_res_68;
+              Vec<1, uint32_t> leb128_sz_325 { id_58 };
+              Vec<1, Pointer> id_60 {  ssum_dst_298  };
+              Pointer let_res_61;
               {
-                Vec<1, Pointer> leb128_ptr_326 { id_67 };
-                bool while_flag_69 { true };
+                Vec<1, Pointer> leb128_ptr_326 { id_60 };
+                bool while_flag_62 { true };
                 do {
-                  uint8_t id_70 { 0 };
-                  uint8_t id_71 { 0 };
-                  Pointer id_72 { leb128_ptr_326[id_71] };
-                  uint32_t id_73 { 128U };
-                  uint8_t id_74 { 0 };
-                  uint32_t id_75 { leb128_sz_325[id_74] };
-                  bool id_76 { bool(id_73 > id_75) };
-                  uint8_t choose_res_77;
-                  if (id_76) {
-                    uint8_t id_78 { 0 };
-                    uint32_t id_79 { leb128_sz_325[id_78] };
-                    uint8_t id_80 { uint8_t(id_79) };
-                    choose_res_77 = id_80;
+                  uint8_t id_63 { 0 };
+                  uint8_t id_64 { 0 };
+                  Pointer id_65 { leb128_ptr_326[id_64] };
+                  uint32_t id_66 { 128U };
+                  uint8_t id_67 { 0 };
+                  uint32_t id_68 { leb128_sz_325[id_67] };
+                  bool id_69 { bool(id_66 > id_68) };
+                  uint8_t choose_res_70;
+                  if (id_69) {
+                    uint8_t id_71 { 0 };
+                    uint32_t id_72 { leb128_sz_325[id_71] };
+                    uint8_t id_73 { uint8_t(id_72) };
+                    choose_res_70 = id_73;
                   } else {
-                    uint8_t id_81 { 0 };
-                    uint32_t id_82 { leb128_sz_325[id_81] };
-                    uint8_t id_83 { uint8_t(id_82) };
-                    uint8_t id_84 { 128 };
-                    uint8_t id_85 { uint8_t(id_83 | id_84) };
-                    choose_res_77 = id_85;
+                    uint8_t id_74 { 0 };
+                    uint32_t id_75 { leb128_sz_325[id_74] };
+                    uint8_t id_76 { uint8_t(id_75) };
+                    uint8_t id_77 { 128 };
+                    uint8_t id_78 { uint8_t(id_76 | id_77) };
+                    choose_res_70 = id_78;
                   }
-                  Pointer id_86 { id_72.writeU8(choose_res_77) };
-                  Void id_87 { ((void)(leb128_ptr_326[id_70] = id_86), ::dessser::Void()) };
-                  (void)id_87;
-                  uint8_t id_88 { 0 };
-                  uint8_t id_89 { 0 };
-                  uint32_t id_90 { leb128_sz_325[id_89] };
-                  uint8_t id_91 { 7 };
-                  uint32_t id_92 { uint32_t(id_90 >> id_91) };
-                  Void id_93 { ((void)(leb128_sz_325[id_88] = id_92), ::dessser::Void()) };
-                  (void)id_93;
-                  uint8_t id_94 { 0 };
-                  uint32_t id_95 { leb128_sz_325[id_94] };
-                  uint32_t id_96 { 0U };
-                  bool id_97 { bool(id_95 > id_96) };
-                  while_flag_69 = id_97;
-                  if (while_flag_69) {
+                  Pointer id_79 { id_65.writeU8(choose_res_70) };
+                  Void id_80 { ((void)(leb128_ptr_326[id_63] = id_79), ::dessser::Void()) };
+                  (void)id_80;
+                  uint8_t id_81 { 0 };
+                  uint8_t id_82 { 0 };
+                  uint32_t id_83 { leb128_sz_325[id_82] };
+                  uint8_t id_84 { 7 };
+                  uint32_t id_85 { uint32_t(id_83 >> id_84) };
+                  Void id_86 { ((void)(leb128_sz_325[id_81] = id_85), ::dessser::Void()) };
+                  (void)id_86;
+                  uint8_t id_87 { 0 };
+                  uint32_t id_88 { leb128_sz_325[id_87] };
+                  uint32_t id_89 { 0U };
+                  bool id_90 { bool(id_88 > id_89) };
+                  while_flag_62 = id_90;
+                  if (while_flag_62) {
                     (void)::dessser::Void();
                   }
-                } while (while_flag_69);
+                } while (while_flag_62);
                 (void)::dessser::Void();
-                uint8_t id_98 { 0 };
-                Pointer id_99 { leb128_ptr_326[id_98] };
-                let_res_68 = id_99;
+                uint8_t id_91 { 0 };
+                Pointer id_92 { leb128_ptr_326[id_91] };
+                let_res_61 = id_92;
               }
-              let_res_66 = let_res_68;
+              let_res_59 = let_res_61;
             }
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_100 { (*p_0).via };
-            std::string id_101 { std::get<2 /* SysLog */>(id_100) };
-            Bytes id_102 { id_101 };
-            Pointer id_103 { let_res_66.writeBytes(id_102) };
-            choose_res_61 = id_103;
+            std::string id_93 { std::get<2 /* SysLog */>((*p_0)) };
+            Bytes id_94 { id_93 };
+            Pointer id_95 { let_res_59.writeBytes(id_94) };
+            choose_res_55 = id_95;
           } else {
-            uint16_t id_104 { 3 };
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_105 { (*p_0).via };
-            uint16_t id_106 { uint16_t(id_105.index()) };
-            bool id_107 { bool(id_104 == id_106) };
-            Pointer choose_res_108;
-            if (id_107) {
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_109 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_110 { std::get<3 /* Sqlite */>(id_109) };
-              std::string id_111 { id_110.file };
-              uint32_t id_112 { (uint32_t)id_111.size() };
-              Vec<1, uint32_t> id_113 {  id_112  };
-              Pointer let_res_114;
+            uint16_t id_96 { 3 };
+            uint16_t id_97 { uint16_t((*p_0).index()) };
+            bool id_98 { bool(id_96 == id_97) };
+            Pointer choose_res_99;
+            if (id_98) {
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_100 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_101 { id_100.file };
+              uint32_t id_102 { (uint32_t)id_101.size() };
+              Vec<1, uint32_t> id_103 {  id_102  };
+              Pointer let_res_104;
               {
-                Vec<1, uint32_t> leb128_sz_317 { id_113 };
-                Vec<1, Pointer> id_115 {  ssum_dst_298  };
-                Pointer let_res_116;
+                Vec<1, uint32_t> leb128_sz_317 { id_103 };
+                Vec<1, Pointer> id_105 {  ssum_dst_298  };
+                Pointer let_res_106;
                 {
-                  Vec<1, Pointer> leb128_ptr_318 { id_115 };
-                  bool while_flag_117 { true };
+                  Vec<1, Pointer> leb128_ptr_318 { id_105 };
+                  bool while_flag_107 { true };
                   do {
-                    uint8_t id_118 { 0 };
-                    uint8_t id_119 { 0 };
-                    Pointer id_120 { leb128_ptr_318[id_119] };
-                    uint32_t id_121 { 128U };
-                    uint8_t id_122 { 0 };
-                    uint32_t id_123 { leb128_sz_317[id_122] };
-                    bool id_124 { bool(id_121 > id_123) };
-                    uint8_t choose_res_125;
-                    if (id_124) {
-                      uint8_t id_126 { 0 };
-                      uint32_t id_127 { leb128_sz_317[id_126] };
-                      uint8_t id_128 { uint8_t(id_127) };
-                      choose_res_125 = id_128;
+                    uint8_t id_108 { 0 };
+                    uint8_t id_109 { 0 };
+                    Pointer id_110 { leb128_ptr_318[id_109] };
+                    uint32_t id_111 { 128U };
+                    uint8_t id_112 { 0 };
+                    uint32_t id_113 { leb128_sz_317[id_112] };
+                    bool id_114 { bool(id_111 > id_113) };
+                    uint8_t choose_res_115;
+                    if (id_114) {
+                      uint8_t id_116 { 0 };
+                      uint32_t id_117 { leb128_sz_317[id_116] };
+                      uint8_t id_118 { uint8_t(id_117) };
+                      choose_res_115 = id_118;
                     } else {
-                      uint8_t id_129 { 0 };
-                      uint32_t id_130 { leb128_sz_317[id_129] };
-                      uint8_t id_131 { uint8_t(id_130) };
-                      uint8_t id_132 { 128 };
-                      uint8_t id_133 { uint8_t(id_131 | id_132) };
-                      choose_res_125 = id_133;
+                      uint8_t id_119 { 0 };
+                      uint32_t id_120 { leb128_sz_317[id_119] };
+                      uint8_t id_121 { uint8_t(id_120) };
+                      uint8_t id_122 { 128 };
+                      uint8_t id_123 { uint8_t(id_121 | id_122) };
+                      choose_res_115 = id_123;
                     }
-                    Pointer id_134 { id_120.writeU8(choose_res_125) };
-                    Void id_135 { ((void)(leb128_ptr_318[id_118] = id_134), ::dessser::Void()) };
-                    (void)id_135;
-                    uint8_t id_136 { 0 };
-                    uint8_t id_137 { 0 };
-                    uint32_t id_138 { leb128_sz_317[id_137] };
-                    uint8_t id_139 { 7 };
-                    uint32_t id_140 { uint32_t(id_138 >> id_139) };
-                    Void id_141 { ((void)(leb128_sz_317[id_136] = id_140), ::dessser::Void()) };
-                    (void)id_141;
-                    uint8_t id_142 { 0 };
-                    uint32_t id_143 { leb128_sz_317[id_142] };
-                    uint32_t id_144 { 0U };
-                    bool id_145 { bool(id_143 > id_144) };
-                    while_flag_117 = id_145;
-                    if (while_flag_117) {
+                    Pointer id_124 { id_110.writeU8(choose_res_115) };
+                    Void id_125 { ((void)(leb128_ptr_318[id_108] = id_124), ::dessser::Void()) };
+                    (void)id_125;
+                    uint8_t id_126 { 0 };
+                    uint8_t id_127 { 0 };
+                    uint32_t id_128 { leb128_sz_317[id_127] };
+                    uint8_t id_129 { 7 };
+                    uint32_t id_130 { uint32_t(id_128 >> id_129) };
+                    Void id_131 { ((void)(leb128_sz_317[id_126] = id_130), ::dessser::Void()) };
+                    (void)id_131;
+                    uint8_t id_132 { 0 };
+                    uint32_t id_133 { leb128_sz_317[id_132] };
+                    uint32_t id_134 { 0U };
+                    bool id_135 { bool(id_133 > id_134) };
+                    while_flag_107 = id_135;
+                    if (while_flag_107) {
                       (void)::dessser::Void();
                     }
-                  } while (while_flag_117);
+                  } while (while_flag_107);
                   (void)::dessser::Void();
-                  uint8_t id_146 { 0 };
-                  Pointer id_147 { leb128_ptr_318[id_146] };
-                  let_res_116 = id_147;
+                  uint8_t id_136 { 0 };
+                  Pointer id_137 { leb128_ptr_318[id_136] };
+                  let_res_106 = id_137;
                 }
-                let_res_114 = let_res_116;
+                let_res_104 = let_res_106;
               }
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_148 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_149 { std::get<3 /* Sqlite */>(id_148) };
-              std::string id_150 { id_149.file };
-              Bytes id_151 { id_150 };
-              Pointer id_152 { let_res_114.writeBytes(id_151) };
-              Pointer let_res_153;
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_138 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_139 { id_138.file };
+              Bytes id_140 { id_139 };
+              Pointer id_141 { let_res_104.writeBytes(id_140) };
+              Pointer let_res_142;
               {
-                Pointer srec_dst_319 { id_152 };
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_154 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_155 { std::get<3 /* Sqlite */>(id_154) };
-                std::string id_156 { id_155.insert };
-                uint32_t id_157 { (uint32_t)id_156.size() };
-                Vec<1, uint32_t> id_158 {  id_157  };
-                Pointer let_res_159;
+                Pointer srec_dst_319 { id_141 };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_143 { std::get<3 /* Sqlite */>((*p_0)) };
+                std::string id_144 { id_143.insert };
+                uint32_t id_145 { (uint32_t)id_144.size() };
+                Vec<1, uint32_t> id_146 {  id_145  };
+                Pointer let_res_147;
                 {
-                  Vec<1, uint32_t> leb128_sz_320 { id_158 };
-                  Vec<1, Pointer> id_160 {  srec_dst_319  };
-                  Pointer let_res_161;
+                  Vec<1, uint32_t> leb128_sz_320 { id_146 };
+                  Vec<1, Pointer> id_148 {  srec_dst_319  };
+                  Pointer let_res_149;
                   {
-                    Vec<1, Pointer> leb128_ptr_321 { id_160 };
-                    bool while_flag_162 { true };
+                    Vec<1, Pointer> leb128_ptr_321 { id_148 };
+                    bool while_flag_150 { true };
                     do {
-                      uint8_t id_163 { 0 };
-                      uint8_t id_164 { 0 };
-                      Pointer id_165 { leb128_ptr_321[id_164] };
-                      uint32_t id_166 { 128U };
-                      uint8_t id_167 { 0 };
-                      uint32_t id_168 { leb128_sz_320[id_167] };
-                      bool id_169 { bool(id_166 > id_168) };
-                      uint8_t choose_res_170;
-                      if (id_169) {
-                        uint8_t id_171 { 0 };
-                        uint32_t id_172 { leb128_sz_320[id_171] };
-                        uint8_t id_173 { uint8_t(id_172) };
-                        choose_res_170 = id_173;
+                      uint8_t id_151 { 0 };
+                      uint8_t id_152 { 0 };
+                      Pointer id_153 { leb128_ptr_321[id_152] };
+                      uint32_t id_154 { 128U };
+                      uint8_t id_155 { 0 };
+                      uint32_t id_156 { leb128_sz_320[id_155] };
+                      bool id_157 { bool(id_154 > id_156) };
+                      uint8_t choose_res_158;
+                      if (id_157) {
+                        uint8_t id_159 { 0 };
+                        uint32_t id_160 { leb128_sz_320[id_159] };
+                        uint8_t id_161 { uint8_t(id_160) };
+                        choose_res_158 = id_161;
                       } else {
-                        uint8_t id_174 { 0 };
-                        uint32_t id_175 { leb128_sz_320[id_174] };
-                        uint8_t id_176 { uint8_t(id_175) };
-                        uint8_t id_177 { 128 };
-                        uint8_t id_178 { uint8_t(id_176 | id_177) };
-                        choose_res_170 = id_178;
+                        uint8_t id_162 { 0 };
+                        uint32_t id_163 { leb128_sz_320[id_162] };
+                        uint8_t id_164 { uint8_t(id_163) };
+                        uint8_t id_165 { 128 };
+                        uint8_t id_166 { uint8_t(id_164 | id_165) };
+                        choose_res_158 = id_166;
                       }
-                      Pointer id_179 { id_165.writeU8(choose_res_170) };
-                      Void id_180 { ((void)(leb128_ptr_321[id_163] = id_179), ::dessser::Void()) };
-                      (void)id_180;
-                      uint8_t id_181 { 0 };
-                      uint8_t id_182 { 0 };
-                      uint32_t id_183 { leb128_sz_320[id_182] };
-                      uint8_t id_184 { 7 };
-                      uint32_t id_185 { uint32_t(id_183 >> id_184) };
-                      Void id_186 { ((void)(leb128_sz_320[id_181] = id_185), ::dessser::Void()) };
-                      (void)id_186;
-                      uint8_t id_187 { 0 };
-                      uint32_t id_188 { leb128_sz_320[id_187] };
-                      uint32_t id_189 { 0U };
-                      bool id_190 { bool(id_188 > id_189) };
-                      while_flag_162 = id_190;
-                      if (while_flag_162) {
+                      Pointer id_167 { id_153.writeU8(choose_res_158) };
+                      Void id_168 { ((void)(leb128_ptr_321[id_151] = id_167), ::dessser::Void()) };
+                      (void)id_168;
+                      uint8_t id_169 { 0 };
+                      uint8_t id_170 { 0 };
+                      uint32_t id_171 { leb128_sz_320[id_170] };
+                      uint8_t id_172 { 7 };
+                      uint32_t id_173 { uint32_t(id_171 >> id_172) };
+                      Void id_174 { ((void)(leb128_sz_320[id_169] = id_173), ::dessser::Void()) };
+                      (void)id_174;
+                      uint8_t id_175 { 0 };
+                      uint32_t id_176 { leb128_sz_320[id_175] };
+                      uint32_t id_177 { 0U };
+                      bool id_178 { bool(id_176 > id_177) };
+                      while_flag_150 = id_178;
+                      if (while_flag_150) {
                         (void)::dessser::Void();
                       }
-                    } while (while_flag_162);
+                    } while (while_flag_150);
                     (void)::dessser::Void();
-                    uint8_t id_191 { 0 };
-                    Pointer id_192 { leb128_ptr_321[id_191] };
-                    let_res_161 = id_192;
+                    uint8_t id_179 { 0 };
+                    Pointer id_180 { leb128_ptr_321[id_179] };
+                    let_res_149 = id_180;
                   }
-                  let_res_159 = let_res_161;
+                  let_res_147 = let_res_149;
                 }
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_193 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_194 { std::get<3 /* Sqlite */>(id_193) };
-                std::string id_195 { id_194.insert };
-                Bytes id_196 { id_195 };
-                Pointer id_197 { let_res_159.writeBytes(id_196) };
-                let_res_153 = id_197;
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_181 { std::get<3 /* Sqlite */>((*p_0)) };
+                std::string id_182 { id_181.insert };
+                Bytes id_183 { id_182 };
+                Pointer id_184 { let_res_147.writeBytes(id_183) };
+                let_res_142 = id_184;
               }
-              Pointer let_res_198;
+              Pointer let_res_185;
               {
-                Pointer srec_dst_322 { let_res_153 };
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_199 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_200 { std::get<3 /* Sqlite */>(id_199) };
-                std::string id_201 { id_200.create };
-                uint32_t id_202 { (uint32_t)id_201.size() };
-                Vec<1, uint32_t> id_203 {  id_202  };
-                Pointer let_res_204;
+                Pointer srec_dst_322 { let_res_142 };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_186 { std::get<3 /* Sqlite */>((*p_0)) };
+                std::string id_187 { id_186.create };
+                uint32_t id_188 { (uint32_t)id_187.size() };
+                Vec<1, uint32_t> id_189 {  id_188  };
+                Pointer let_res_190;
                 {
-                  Vec<1, uint32_t> leb128_sz_323 { id_203 };
-                  Vec<1, Pointer> id_205 {  srec_dst_322  };
-                  Pointer let_res_206;
+                  Vec<1, uint32_t> leb128_sz_323 { id_189 };
+                  Vec<1, Pointer> id_191 {  srec_dst_322  };
+                  Pointer let_res_192;
                   {
-                    Vec<1, Pointer> leb128_ptr_324 { id_205 };
-                    bool while_flag_207 { true };
+                    Vec<1, Pointer> leb128_ptr_324 { id_191 };
+                    bool while_flag_193 { true };
                     do {
-                      uint8_t id_208 { 0 };
-                      uint8_t id_209 { 0 };
-                      Pointer id_210 { leb128_ptr_324[id_209] };
-                      uint32_t id_211 { 128U };
+                      uint8_t id_194 { 0 };
+                      uint8_t id_195 { 0 };
+                      Pointer id_196 { leb128_ptr_324[id_195] };
+                      uint32_t id_197 { 128U };
+                      uint8_t id_198 { 0 };
+                      uint32_t id_199 { leb128_sz_323[id_198] };
+                      bool id_200 { bool(id_197 > id_199) };
+                      uint8_t choose_res_201;
+                      if (id_200) {
+                        uint8_t id_202 { 0 };
+                        uint32_t id_203 { leb128_sz_323[id_202] };
+                        uint8_t id_204 { uint8_t(id_203) };
+                        choose_res_201 = id_204;
+                      } else {
+                        uint8_t id_205 { 0 };
+                        uint32_t id_206 { leb128_sz_323[id_205] };
+                        uint8_t id_207 { uint8_t(id_206) };
+                        uint8_t id_208 { 128 };
+                        uint8_t id_209 { uint8_t(id_207 | id_208) };
+                        choose_res_201 = id_209;
+                      }
+                      Pointer id_210 { id_196.writeU8(choose_res_201) };
+                      Void id_211 { ((void)(leb128_ptr_324[id_194] = id_210), ::dessser::Void()) };
+                      (void)id_211;
                       uint8_t id_212 { 0 };
-                      uint32_t id_213 { leb128_sz_323[id_212] };
-                      bool id_214 { bool(id_211 > id_213) };
-                      uint8_t choose_res_215;
-                      if (id_214) {
-                        uint8_t id_216 { 0 };
-                        uint32_t id_217 { leb128_sz_323[id_216] };
-                        uint8_t id_218 { uint8_t(id_217) };
-                        choose_res_215 = id_218;
-                      } else {
-                        uint8_t id_219 { 0 };
-                        uint32_t id_220 { leb128_sz_323[id_219] };
-                        uint8_t id_221 { uint8_t(id_220) };
-                        uint8_t id_222 { 128 };
-                        uint8_t id_223 { uint8_t(id_221 | id_222) };
-                        choose_res_215 = id_223;
-                      }
-                      Pointer id_224 { id_210.writeU8(choose_res_215) };
-                      Void id_225 { ((void)(leb128_ptr_324[id_208] = id_224), ::dessser::Void()) };
-                      (void)id_225;
-                      uint8_t id_226 { 0 };
-                      uint8_t id_227 { 0 };
-                      uint32_t id_228 { leb128_sz_323[id_227] };
-                      uint8_t id_229 { 7 };
-                      uint32_t id_230 { uint32_t(id_228 >> id_229) };
-                      Void id_231 { ((void)(leb128_sz_323[id_226] = id_230), ::dessser::Void()) };
-                      (void)id_231;
-                      uint8_t id_232 { 0 };
-                      uint32_t id_233 { leb128_sz_323[id_232] };
-                      uint32_t id_234 { 0U };
-                      bool id_235 { bool(id_233 > id_234) };
-                      while_flag_207 = id_235;
-                      if (while_flag_207) {
+                      uint8_t id_213 { 0 };
+                      uint32_t id_214 { leb128_sz_323[id_213] };
+                      uint8_t id_215 { 7 };
+                      uint32_t id_216 { uint32_t(id_214 >> id_215) };
+                      Void id_217 { ((void)(leb128_sz_323[id_212] = id_216), ::dessser::Void()) };
+                      (void)id_217;
+                      uint8_t id_218 { 0 };
+                      uint32_t id_219 { leb128_sz_323[id_218] };
+                      uint32_t id_220 { 0U };
+                      bool id_221 { bool(id_219 > id_220) };
+                      while_flag_193 = id_221;
+                      if (while_flag_193) {
                         (void)::dessser::Void();
                       }
-                    } while (while_flag_207);
+                    } while (while_flag_193);
                     (void)::dessser::Void();
-                    uint8_t id_236 { 0 };
-                    Pointer id_237 { leb128_ptr_324[id_236] };
-                    let_res_206 = id_237;
+                    uint8_t id_222 { 0 };
+                    Pointer id_223 { leb128_ptr_324[id_222] };
+                    let_res_192 = id_223;
                   }
-                  let_res_204 = let_res_206;
+                  let_res_190 = let_res_192;
                 }
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_238 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_239 { std::get<3 /* Sqlite */>(id_238) };
-                std::string id_240 { id_239.create };
-                Bytes id_241 { id_240 };
-                Pointer id_242 { let_res_204.writeBytes(id_241) };
-                let_res_198 = id_242;
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_224 { std::get<3 /* Sqlite */>((*p_0)) };
+                std::string id_225 { id_224.create };
+                Bytes id_226 { id_225 };
+                Pointer id_227 { let_res_190.writeBytes(id_226) };
+                let_res_185 = id_227;
               }
-              choose_res_108 = let_res_198;
+              choose_res_99 = let_res_185;
             } else {
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_243 { (*p_0).via };
-              uint16_t id_244 { uint16_t(id_243.index()) };
-              uint16_t id_245 { 4 };
-              bool id_246 { bool(id_244 == id_245) };
-              Void id_247 { ((void)(assert(id_246)), ::dessser::Void()) };
-              (void)id_247;
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_248 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_249 { std::get<4 /* Kafka */>(id_248) };
-              Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_250 { id_249.options };
-              uint32_t id_251 { id_250.size() };
-              Vec<1, uint32_t> id_252 {  id_251  };
-              Pointer let_res_253;
+              uint16_t id_228 { uint16_t((*p_0).index()) };
+              uint16_t id_229 { 4 };
+              bool id_230 { bool(id_228 == id_229) };
+              Void id_231 { ((void)(assert(id_230)), ::dessser::Void()) };
+              (void)id_231;
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_232 { std::get<4 /* Kafka */>((*p_0)) };
+              Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_233 { id_232.options };
+              uint32_t id_234 { id_233.size() };
+              Vec<1, uint32_t> id_235 {  id_234  };
+              Pointer let_res_236;
               {
-                Vec<1, uint32_t> leb128_sz_299 { id_252 };
-                Vec<1, Pointer> id_254 {  ssum_dst_298  };
-                Pointer let_res_255;
+                Vec<1, uint32_t> leb128_sz_299 { id_235 };
+                Vec<1, Pointer> id_237 {  ssum_dst_298  };
+                Pointer let_res_238;
                 {
-                  Vec<1, Pointer> leb128_ptr_300 { id_254 };
-                  bool while_flag_256 { true };
+                  Vec<1, Pointer> leb128_ptr_300 { id_237 };
+                  bool while_flag_239 { true };
                   do {
-                    uint8_t id_257 { 0 };
-                    uint8_t id_258 { 0 };
-                    Pointer id_259 { leb128_ptr_300[id_258] };
-                    uint32_t id_260 { 128U };
-                    uint8_t id_261 { 0 };
-                    uint32_t id_262 { leb128_sz_299[id_261] };
-                    bool id_263 { bool(id_260 > id_262) };
-                    uint8_t choose_res_264;
-                    if (id_263) {
-                      uint8_t id_265 { 0 };
-                      uint32_t id_266 { leb128_sz_299[id_265] };
-                      uint8_t id_267 { uint8_t(id_266) };
-                      choose_res_264 = id_267;
+                    uint8_t id_240 { 0 };
+                    uint8_t id_241 { 0 };
+                    Pointer id_242 { leb128_ptr_300[id_241] };
+                    uint32_t id_243 { 128U };
+                    uint8_t id_244 { 0 };
+                    uint32_t id_245 { leb128_sz_299[id_244] };
+                    bool id_246 { bool(id_243 > id_245) };
+                    uint8_t choose_res_247;
+                    if (id_246) {
+                      uint8_t id_248 { 0 };
+                      uint32_t id_249 { leb128_sz_299[id_248] };
+                      uint8_t id_250 { uint8_t(id_249) };
+                      choose_res_247 = id_250;
                     } else {
-                      uint8_t id_268 { 0 };
-                      uint32_t id_269 { leb128_sz_299[id_268] };
-                      uint8_t id_270 { uint8_t(id_269) };
-                      uint8_t id_271 { 128 };
-                      uint8_t id_272 { uint8_t(id_270 | id_271) };
-                      choose_res_264 = id_272;
+                      uint8_t id_251 { 0 };
+                      uint32_t id_252 { leb128_sz_299[id_251] };
+                      uint8_t id_253 { uint8_t(id_252) };
+                      uint8_t id_254 { 128 };
+                      uint8_t id_255 { uint8_t(id_253 | id_254) };
+                      choose_res_247 = id_255;
                     }
-                    Pointer id_273 { id_259.writeU8(choose_res_264) };
-                    Void id_274 { ((void)(leb128_ptr_300[id_257] = id_273), ::dessser::Void()) };
-                    (void)id_274;
-                    uint8_t id_275 { 0 };
-                    uint8_t id_276 { 0 };
-                    uint32_t id_277 { leb128_sz_299[id_276] };
-                    uint8_t id_278 { 7 };
-                    uint32_t id_279 { uint32_t(id_277 >> id_278) };
-                    Void id_280 { ((void)(leb128_sz_299[id_275] = id_279), ::dessser::Void()) };
-                    (void)id_280;
-                    uint8_t id_281 { 0 };
-                    uint32_t id_282 { leb128_sz_299[id_281] };
-                    uint32_t id_283 { 0U };
-                    bool id_284 { bool(id_282 > id_283) };
-                    while_flag_256 = id_284;
-                    if (while_flag_256) {
+                    Pointer id_256 { id_242.writeU8(choose_res_247) };
+                    Void id_257 { ((void)(leb128_ptr_300[id_240] = id_256), ::dessser::Void()) };
+                    (void)id_257;
+                    uint8_t id_258 { 0 };
+                    uint8_t id_259 { 0 };
+                    uint32_t id_260 { leb128_sz_299[id_259] };
+                    uint8_t id_261 { 7 };
+                    uint32_t id_262 { uint32_t(id_260 >> id_261) };
+                    Void id_263 { ((void)(leb128_sz_299[id_258] = id_262), ::dessser::Void()) };
+                    (void)id_263;
+                    uint8_t id_264 { 0 };
+                    uint32_t id_265 { leb128_sz_299[id_264] };
+                    uint32_t id_266 { 0U };
+                    bool id_267 { bool(id_265 > id_266) };
+                    while_flag_239 = id_267;
+                    if (while_flag_239) {
                       (void)::dessser::Void();
                     }
-                  } while (while_flag_256);
+                  } while (while_flag_239);
                   (void)::dessser::Void();
-                  uint8_t id_285 { 0 };
-                  Pointer id_286 { leb128_ptr_300[id_285] };
-                  let_res_255 = id_286;
+                  uint8_t id_268 { 0 };
+                  Pointer id_269 { leb128_ptr_300[id_268] };
+                  let_res_238 = id_269;
                 }
-                let_res_253 = let_res_255;
+                let_res_236 = let_res_238;
               }
-              Vec<1, Pointer> id_287 {  let_res_253  };
-              Pointer let_res_288;
+              Vec<1, Pointer> id_270 {  let_res_236  };
+              Pointer let_res_271;
               {
-                Vec<1, Pointer> dst_ref_301 { id_287 };
-                int32_t id_289 { 0L };
-                Vec<1, int32_t> id_290 {  id_289  };
-                Pointer let_res_291;
+                Vec<1, Pointer> dst_ref_301 { id_270 };
+                int32_t id_272 { 0L };
+                Vec<1, int32_t> id_273 {  id_272  };
+                Pointer let_res_274;
                 {
-                  Vec<1, int32_t> n_ref_302 { id_290 };
-                  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_292 { (*p_0).via };
-                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_293 { std::get<4 /* Kafka */>(id_292) };
-                  Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_294 { id_293.options };
-                  for (::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 const &x_303 : id_294) {
-                    uint8_t id_295 { 0 };
-                    uint8_t id_296 { 0 };
-                    Pointer id_297 { dst_ref_301[id_296] };
-                    Pointer let_res_298;
+                  Vec<1, int32_t> n_ref_302 { id_273 };
+                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_275 { std::get<4 /* Kafka */>((*p_0)) };
+                  Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_276 { id_275.options };
+                  for (::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 const &x_303 : id_276) {
+                    uint8_t id_277 { 0 };
+                    uint8_t id_278 { 0 };
+                    Pointer id_279 { dst_ref_301[id_278] };
+                    Pointer let_res_280;
                     {
-                      Pointer stup_dst_304 { id_297 };
-                      std::string id_299 { std::get<0>(x_303) };
-                      uint32_t id_300 { (uint32_t)id_299.size() };
-                      Vec<1, uint32_t> id_301 {  id_300  };
-                      Pointer let_res_302;
+                      Pointer stup_dst_304 { id_279 };
+                      std::string id_281 { std::get<0>(x_303) };
+                      uint32_t id_282 { (uint32_t)id_281.size() };
+                      Vec<1, uint32_t> id_283 {  id_282  };
+                      Pointer let_res_284;
                       {
-                        Vec<1, uint32_t> leb128_sz_305 { id_301 };
-                        Vec<1, Pointer> id_303 {  stup_dst_304  };
-                        Pointer let_res_304;
+                        Vec<1, uint32_t> leb128_sz_305 { id_283 };
+                        Vec<1, Pointer> id_285 {  stup_dst_304  };
+                        Pointer let_res_286;
                         {
-                          Vec<1, Pointer> leb128_ptr_306 { id_303 };
-                          bool while_flag_305 { true };
+                          Vec<1, Pointer> leb128_ptr_306 { id_285 };
+                          bool while_flag_287 { true };
                           do {
+                            uint8_t id_288 { 0 };
+                            uint8_t id_289 { 0 };
+                            Pointer id_290 { leb128_ptr_306[id_289] };
+                            uint32_t id_291 { 128U };
+                            uint8_t id_292 { 0 };
+                            uint32_t id_293 { leb128_sz_305[id_292] };
+                            bool id_294 { bool(id_291 > id_293) };
+                            uint8_t choose_res_295;
+                            if (id_294) {
+                              uint8_t id_296 { 0 };
+                              uint32_t id_297 { leb128_sz_305[id_296] };
+                              uint8_t id_298 { uint8_t(id_297) };
+                              choose_res_295 = id_298;
+                            } else {
+                              uint8_t id_299 { 0 };
+                              uint32_t id_300 { leb128_sz_305[id_299] };
+                              uint8_t id_301 { uint8_t(id_300) };
+                              uint8_t id_302 { 128 };
+                              uint8_t id_303 { uint8_t(id_301 | id_302) };
+                              choose_res_295 = id_303;
+                            }
+                            Pointer id_304 { id_290.writeU8(choose_res_295) };
+                            Void id_305 { ((void)(leb128_ptr_306[id_288] = id_304), ::dessser::Void()) };
+                            (void)id_305;
                             uint8_t id_306 { 0 };
                             uint8_t id_307 { 0 };
-                            Pointer id_308 { leb128_ptr_306[id_307] };
-                            uint32_t id_309 { 128U };
-                            uint8_t id_310 { 0 };
-                            uint32_t id_311 { leb128_sz_305[id_310] };
-                            bool id_312 { bool(id_309 > id_311) };
-                            uint8_t choose_res_313;
-                            if (id_312) {
-                              uint8_t id_314 { 0 };
-                              uint32_t id_315 { leb128_sz_305[id_314] };
-                              uint8_t id_316 { uint8_t(id_315) };
-                              choose_res_313 = id_316;
-                            } else {
-                              uint8_t id_317 { 0 };
-                              uint32_t id_318 { leb128_sz_305[id_317] };
-                              uint8_t id_319 { uint8_t(id_318) };
-                              uint8_t id_320 { 128 };
-                              uint8_t id_321 { uint8_t(id_319 | id_320) };
-                              choose_res_313 = id_321;
-                            }
-                            Pointer id_322 { id_308.writeU8(choose_res_313) };
-                            Void id_323 { ((void)(leb128_ptr_306[id_306] = id_322), ::dessser::Void()) };
-                            (void)id_323;
-                            uint8_t id_324 { 0 };
-                            uint8_t id_325 { 0 };
-                            uint32_t id_326 { leb128_sz_305[id_325] };
-                            uint8_t id_327 { 7 };
-                            uint32_t id_328 { uint32_t(id_326 >> id_327) };
-                            Void id_329 { ((void)(leb128_sz_305[id_324] = id_328), ::dessser::Void()) };
-                            (void)id_329;
-                            uint8_t id_330 { 0 };
-                            uint32_t id_331 { leb128_sz_305[id_330] };
-                            uint32_t id_332 { 0U };
-                            bool id_333 { bool(id_331 > id_332) };
-                            while_flag_305 = id_333;
-                            if (while_flag_305) {
+                            uint32_t id_308 { leb128_sz_305[id_307] };
+                            uint8_t id_309 { 7 };
+                            uint32_t id_310 { uint32_t(id_308 >> id_309) };
+                            Void id_311 { ((void)(leb128_sz_305[id_306] = id_310), ::dessser::Void()) };
+                            (void)id_311;
+                            uint8_t id_312 { 0 };
+                            uint32_t id_313 { leb128_sz_305[id_312] };
+                            uint32_t id_314 { 0U };
+                            bool id_315 { bool(id_313 > id_314) };
+                            while_flag_287 = id_315;
+                            if (while_flag_287) {
                               (void)::dessser::Void();
                             }
-                          } while (while_flag_305);
+                          } while (while_flag_287);
                           (void)::dessser::Void();
-                          uint8_t id_334 { 0 };
-                          Pointer id_335 { leb128_ptr_306[id_334] };
-                          let_res_304 = id_335;
+                          uint8_t id_316 { 0 };
+                          Pointer id_317 { leb128_ptr_306[id_316] };
+                          let_res_286 = id_317;
                         }
-                        let_res_302 = let_res_304;
+                        let_res_284 = let_res_286;
                       }
-                      std::string id_336 { std::get<0>(x_303) };
-                      Bytes id_337 { id_336 };
-                      Pointer id_338 { let_res_302.writeBytes(id_337) };
-                      let_res_298 = id_338;
+                      std::string id_318 { std::get<0>(x_303) };
+                      Bytes id_319 { id_318 };
+                      Pointer id_320 { let_res_284.writeBytes(id_319) };
+                      let_res_280 = id_320;
                     }
-                    Pointer let_res_339;
+                    Pointer let_res_321;
                     {
-                      Pointer stup_dst_307 { let_res_298 };
-                      std::string id_340 { std::get<1>(x_303) };
-                      uint32_t id_341 { (uint32_t)id_340.size() };
-                      Vec<1, uint32_t> id_342 {  id_341  };
-                      Pointer let_res_343;
+                      Pointer stup_dst_307 { let_res_280 };
+                      std::string id_322 { std::get<1>(x_303) };
+                      uint32_t id_323 { (uint32_t)id_322.size() };
+                      Vec<1, uint32_t> id_324 {  id_323  };
+                      Pointer let_res_325;
                       {
-                        Vec<1, uint32_t> leb128_sz_308 { id_342 };
-                        Vec<1, Pointer> id_344 {  stup_dst_307  };
-                        Pointer let_res_345;
+                        Vec<1, uint32_t> leb128_sz_308 { id_324 };
+                        Vec<1, Pointer> id_326 {  stup_dst_307  };
+                        Pointer let_res_327;
                         {
-                          Vec<1, Pointer> leb128_ptr_309 { id_344 };
-                          bool while_flag_346 { true };
+                          Vec<1, Pointer> leb128_ptr_309 { id_326 };
+                          bool while_flag_328 { true };
                           do {
+                            uint8_t id_329 { 0 };
+                            uint8_t id_330 { 0 };
+                            Pointer id_331 { leb128_ptr_309[id_330] };
+                            uint32_t id_332 { 128U };
+                            uint8_t id_333 { 0 };
+                            uint32_t id_334 { leb128_sz_308[id_333] };
+                            bool id_335 { bool(id_332 > id_334) };
+                            uint8_t choose_res_336;
+                            if (id_335) {
+                              uint8_t id_337 { 0 };
+                              uint32_t id_338 { leb128_sz_308[id_337] };
+                              uint8_t id_339 { uint8_t(id_338) };
+                              choose_res_336 = id_339;
+                            } else {
+                              uint8_t id_340 { 0 };
+                              uint32_t id_341 { leb128_sz_308[id_340] };
+                              uint8_t id_342 { uint8_t(id_341) };
+                              uint8_t id_343 { 128 };
+                              uint8_t id_344 { uint8_t(id_342 | id_343) };
+                              choose_res_336 = id_344;
+                            }
+                            Pointer id_345 { id_331.writeU8(choose_res_336) };
+                            Void id_346 { ((void)(leb128_ptr_309[id_329] = id_345), ::dessser::Void()) };
+                            (void)id_346;
                             uint8_t id_347 { 0 };
                             uint8_t id_348 { 0 };
-                            Pointer id_349 { leb128_ptr_309[id_348] };
-                            uint32_t id_350 { 128U };
-                            uint8_t id_351 { 0 };
-                            uint32_t id_352 { leb128_sz_308[id_351] };
-                            bool id_353 { bool(id_350 > id_352) };
-                            uint8_t choose_res_354;
-                            if (id_353) {
-                              uint8_t id_355 { 0 };
-                              uint32_t id_356 { leb128_sz_308[id_355] };
-                              uint8_t id_357 { uint8_t(id_356) };
-                              choose_res_354 = id_357;
-                            } else {
-                              uint8_t id_358 { 0 };
-                              uint32_t id_359 { leb128_sz_308[id_358] };
-                              uint8_t id_360 { uint8_t(id_359) };
-                              uint8_t id_361 { 128 };
-                              uint8_t id_362 { uint8_t(id_360 | id_361) };
-                              choose_res_354 = id_362;
-                            }
-                            Pointer id_363 { id_349.writeU8(choose_res_354) };
-                            Void id_364 { ((void)(leb128_ptr_309[id_347] = id_363), ::dessser::Void()) };
-                            (void)id_364;
-                            uint8_t id_365 { 0 };
-                            uint8_t id_366 { 0 };
-                            uint32_t id_367 { leb128_sz_308[id_366] };
-                            uint8_t id_368 { 7 };
-                            uint32_t id_369 { uint32_t(id_367 >> id_368) };
-                            Void id_370 { ((void)(leb128_sz_308[id_365] = id_369), ::dessser::Void()) };
-                            (void)id_370;
-                            uint8_t id_371 { 0 };
-                            uint32_t id_372 { leb128_sz_308[id_371] };
-                            uint32_t id_373 { 0U };
-                            bool id_374 { bool(id_372 > id_373) };
-                            while_flag_346 = id_374;
-                            if (while_flag_346) {
+                            uint32_t id_349 { leb128_sz_308[id_348] };
+                            uint8_t id_350 { 7 };
+                            uint32_t id_351 { uint32_t(id_349 >> id_350) };
+                            Void id_352 { ((void)(leb128_sz_308[id_347] = id_351), ::dessser::Void()) };
+                            (void)id_352;
+                            uint8_t id_353 { 0 };
+                            uint32_t id_354 { leb128_sz_308[id_353] };
+                            uint32_t id_355 { 0U };
+                            bool id_356 { bool(id_354 > id_355) };
+                            while_flag_328 = id_356;
+                            if (while_flag_328) {
                               (void)::dessser::Void();
                             }
-                          } while (while_flag_346);
+                          } while (while_flag_328);
                           (void)::dessser::Void();
-                          uint8_t id_375 { 0 };
-                          Pointer id_376 { leb128_ptr_309[id_375] };
-                          let_res_345 = id_376;
+                          uint8_t id_357 { 0 };
+                          Pointer id_358 { leb128_ptr_309[id_357] };
+                          let_res_327 = id_358;
                         }
-                        let_res_343 = let_res_345;
+                        let_res_325 = let_res_327;
                       }
-                      std::string id_377 { std::get<1>(x_303) };
-                      Bytes id_378 { id_377 };
-                      Pointer id_379 { let_res_343.writeBytes(id_378) };
-                      let_res_339 = id_379;
+                      std::string id_359 { std::get<1>(x_303) };
+                      Bytes id_360 { id_359 };
+                      Pointer id_361 { let_res_325.writeBytes(id_360) };
+                      let_res_321 = id_361;
                     }
-                    Void id_380 { ((void)(dst_ref_301[id_295] = let_res_339), ::dessser::Void()) };
-                    (void)id_380;
-                    uint8_t id_381 { 0 };
-                    int32_t id_382 { 1L };
-                    uint8_t id_383 { 0 };
-                    int32_t id_384 { n_ref_302[id_383] };
-                    int32_t id_385 { int32_t(id_382 + id_384) };
-                    Void id_386 { ((void)(n_ref_302[id_381] = id_385), ::dessser::Void()) };
-                    (void)id_386;
-                    (void)id_386;
+                    Void id_362 { ((void)(dst_ref_301[id_277] = let_res_321), ::dessser::Void()) };
+                    (void)id_362;
+                    uint8_t id_363 { 0 };
+                    int32_t id_364 { 1L };
+                    uint8_t id_365 { 0 };
+                    int32_t id_366 { n_ref_302[id_365] };
+                    int32_t id_367 { int32_t(id_364 + id_366) };
+                    Void id_368 { ((void)(n_ref_302[id_363] = id_367), ::dessser::Void()) };
+                    (void)id_368;
+                    (void)id_368;
                   }
                   (void)::dessser::Void();
-                  uint8_t id_387 { 0 };
-                  Pointer id_388 { dst_ref_301[id_387] };
-                  let_res_291 = id_388;
+                  uint8_t id_369 { 0 };
+                  Pointer id_370 { dst_ref_301[id_369] };
+                  let_res_274 = id_370;
                 }
-                let_res_288 = let_res_291;
+                let_res_271 = let_res_274;
               }
-              Pointer let_res_389;
+              Pointer let_res_371;
               {
-                Pointer srec_dst_310 { let_res_288 };
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_390 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_391 { std::get<4 /* Kafka */>(id_390) };
-                std::string id_392 { id_391.topic };
-                uint32_t id_393 { (uint32_t)id_392.size() };
-                Vec<1, uint32_t> id_394 {  id_393  };
-                Pointer let_res_395;
+                Pointer srec_dst_310 { let_res_271 };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_372 { std::get<4 /* Kafka */>((*p_0)) };
+                std::string id_373 { id_372.topic };
+                uint32_t id_374 { (uint32_t)id_373.size() };
+                Vec<1, uint32_t> id_375 {  id_374  };
+                Pointer let_res_376;
                 {
-                  Vec<1, uint32_t> leb128_sz_311 { id_394 };
-                  Vec<1, Pointer> id_396 {  srec_dst_310  };
-                  Pointer let_res_397;
+                  Vec<1, uint32_t> leb128_sz_311 { id_375 };
+                  Vec<1, Pointer> id_377 {  srec_dst_310  };
+                  Pointer let_res_378;
                   {
-                    Vec<1, Pointer> leb128_ptr_312 { id_396 };
-                    bool while_flag_398 { true };
+                    Vec<1, Pointer> leb128_ptr_312 { id_377 };
+                    bool while_flag_379 { true };
                     do {
+                      uint8_t id_380 { 0 };
+                      uint8_t id_381 { 0 };
+                      Pointer id_382 { leb128_ptr_312[id_381] };
+                      uint32_t id_383 { 128U };
+                      uint8_t id_384 { 0 };
+                      uint32_t id_385 { leb128_sz_311[id_384] };
+                      bool id_386 { bool(id_383 > id_385) };
+                      uint8_t choose_res_387;
+                      if (id_386) {
+                        uint8_t id_388 { 0 };
+                        uint32_t id_389 { leb128_sz_311[id_388] };
+                        uint8_t id_390 { uint8_t(id_389) };
+                        choose_res_387 = id_390;
+                      } else {
+                        uint8_t id_391 { 0 };
+                        uint32_t id_392 { leb128_sz_311[id_391] };
+                        uint8_t id_393 { uint8_t(id_392) };
+                        uint8_t id_394 { 128 };
+                        uint8_t id_395 { uint8_t(id_393 | id_394) };
+                        choose_res_387 = id_395;
+                      }
+                      Pointer id_396 { id_382.writeU8(choose_res_387) };
+                      Void id_397 { ((void)(leb128_ptr_312[id_380] = id_396), ::dessser::Void()) };
+                      (void)id_397;
+                      uint8_t id_398 { 0 };
                       uint8_t id_399 { 0 };
-                      uint8_t id_400 { 0 };
-                      Pointer id_401 { leb128_ptr_312[id_400] };
-                      uint32_t id_402 { 128U };
-                      uint8_t id_403 { 0 };
-                      uint32_t id_404 { leb128_sz_311[id_403] };
-                      bool id_405 { bool(id_402 > id_404) };
-                      uint8_t choose_res_406;
-                      if (id_405) {
-                        uint8_t id_407 { 0 };
-                        uint32_t id_408 { leb128_sz_311[id_407] };
-                        uint8_t id_409 { uint8_t(id_408) };
-                        choose_res_406 = id_409;
-                      } else {
-                        uint8_t id_410 { 0 };
-                        uint32_t id_411 { leb128_sz_311[id_410] };
-                        uint8_t id_412 { uint8_t(id_411) };
-                        uint8_t id_413 { 128 };
-                        uint8_t id_414 { uint8_t(id_412 | id_413) };
-                        choose_res_406 = id_414;
-                      }
-                      Pointer id_415 { id_401.writeU8(choose_res_406) };
-                      Void id_416 { ((void)(leb128_ptr_312[id_399] = id_415), ::dessser::Void()) };
-                      (void)id_416;
-                      uint8_t id_417 { 0 };
-                      uint8_t id_418 { 0 };
-                      uint32_t id_419 { leb128_sz_311[id_418] };
-                      uint8_t id_420 { 7 };
-                      uint32_t id_421 { uint32_t(id_419 >> id_420) };
-                      Void id_422 { ((void)(leb128_sz_311[id_417] = id_421), ::dessser::Void()) };
-                      (void)id_422;
-                      uint8_t id_423 { 0 };
-                      uint32_t id_424 { leb128_sz_311[id_423] };
-                      uint32_t id_425 { 0U };
-                      bool id_426 { bool(id_424 > id_425) };
-                      while_flag_398 = id_426;
-                      if (while_flag_398) {
+                      uint32_t id_400 { leb128_sz_311[id_399] };
+                      uint8_t id_401 { 7 };
+                      uint32_t id_402 { uint32_t(id_400 >> id_401) };
+                      Void id_403 { ((void)(leb128_sz_311[id_398] = id_402), ::dessser::Void()) };
+                      (void)id_403;
+                      uint8_t id_404 { 0 };
+                      uint32_t id_405 { leb128_sz_311[id_404] };
+                      uint32_t id_406 { 0U };
+                      bool id_407 { bool(id_405 > id_406) };
+                      while_flag_379 = id_407;
+                      if (while_flag_379) {
                         (void)::dessser::Void();
                       }
-                    } while (while_flag_398);
+                    } while (while_flag_379);
                     (void)::dessser::Void();
-                    uint8_t id_427 { 0 };
-                    Pointer id_428 { leb128_ptr_312[id_427] };
-                    let_res_397 = id_428;
+                    uint8_t id_408 { 0 };
+                    Pointer id_409 { leb128_ptr_312[id_408] };
+                    let_res_378 = id_409;
                   }
-                  let_res_395 = let_res_397;
+                  let_res_376 = let_res_378;
                 }
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_429 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_430 { std::get<4 /* Kafka */>(id_429) };
-                std::string id_431 { id_430.topic };
-                Bytes id_432 { id_431 };
-                Pointer id_433 { let_res_395.writeBytes(id_432) };
-                let_res_389 = id_433;
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_410 { std::get<4 /* Kafka */>((*p_0)) };
+                std::string id_411 { id_410.topic };
+                Bytes id_412 { id_411 };
+                Pointer id_413 { let_res_376.writeBytes(id_412) };
+                let_res_371 = id_413;
               }
-              Pointer let_res_434;
+              Pointer let_res_414;
               {
-                Pointer srec_dst_313 { let_res_389 };
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_435 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_436 { std::get<4 /* Kafka */>(id_435) };
-                uint16_t id_437 { id_436.partition };
-                Pointer id_438 { srec_dst_313.writeU16Le(id_437) };
-                let_res_434 = id_438;
+                Pointer srec_dst_313 { let_res_371 };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_415 { std::get<4 /* Kafka */>((*p_0)) };
+                uint16_t id_416 { id_415.partition };
+                Pointer id_417 { srec_dst_313.writeU16Le(id_416) };
+                let_res_414 = id_417;
               }
-              Pointer let_res_439;
+              Pointer let_res_418;
               {
-                Pointer srec_dst_314 { let_res_434 };
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_440 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_441 { std::get<4 /* Kafka */>(id_440) };
-                std::string id_442 { id_441.text };
-                uint32_t id_443 { (uint32_t)id_442.size() };
-                Vec<1, uint32_t> id_444 {  id_443  };
-                Pointer let_res_445;
+                Pointer srec_dst_314 { let_res_414 };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_419 { std::get<4 /* Kafka */>((*p_0)) };
+                std::string id_420 { id_419.text };
+                uint32_t id_421 { (uint32_t)id_420.size() };
+                Vec<1, uint32_t> id_422 {  id_421  };
+                Pointer let_res_423;
                 {
-                  Vec<1, uint32_t> leb128_sz_315 { id_444 };
-                  Vec<1, Pointer> id_446 {  srec_dst_314  };
-                  Pointer let_res_447;
+                  Vec<1, uint32_t> leb128_sz_315 { id_422 };
+                  Vec<1, Pointer> id_424 {  srec_dst_314  };
+                  Pointer let_res_425;
                   {
-                    Vec<1, Pointer> leb128_ptr_316 { id_446 };
-                    bool while_flag_448 { true };
+                    Vec<1, Pointer> leb128_ptr_316 { id_424 };
+                    bool while_flag_426 { true };
                     do {
-                      uint8_t id_449 { 0 };
-                      uint8_t id_450 { 0 };
-                      Pointer id_451 { leb128_ptr_316[id_450] };
-                      uint32_t id_452 { 128U };
-                      uint8_t id_453 { 0 };
-                      uint32_t id_454 { leb128_sz_315[id_453] };
-                      bool id_455 { bool(id_452 > id_454) };
-                      uint8_t choose_res_456;
-                      if (id_455) {
-                        uint8_t id_457 { 0 };
-                        uint32_t id_458 { leb128_sz_315[id_457] };
-                        uint8_t id_459 { uint8_t(id_458) };
-                        choose_res_456 = id_459;
+                      uint8_t id_427 { 0 };
+                      uint8_t id_428 { 0 };
+                      Pointer id_429 { leb128_ptr_316[id_428] };
+                      uint32_t id_430 { 128U };
+                      uint8_t id_431 { 0 };
+                      uint32_t id_432 { leb128_sz_315[id_431] };
+                      bool id_433 { bool(id_430 > id_432) };
+                      uint8_t choose_res_434;
+                      if (id_433) {
+                        uint8_t id_435 { 0 };
+                        uint32_t id_436 { leb128_sz_315[id_435] };
+                        uint8_t id_437 { uint8_t(id_436) };
+                        choose_res_434 = id_437;
                       } else {
-                        uint8_t id_460 { 0 };
-                        uint32_t id_461 { leb128_sz_315[id_460] };
-                        uint8_t id_462 { uint8_t(id_461) };
-                        uint8_t id_463 { 128 };
-                        uint8_t id_464 { uint8_t(id_462 | id_463) };
-                        choose_res_456 = id_464;
+                        uint8_t id_438 { 0 };
+                        uint32_t id_439 { leb128_sz_315[id_438] };
+                        uint8_t id_440 { uint8_t(id_439) };
+                        uint8_t id_441 { 128 };
+                        uint8_t id_442 { uint8_t(id_440 | id_441) };
+                        choose_res_434 = id_442;
                       }
-                      Pointer id_465 { id_451.writeU8(choose_res_456) };
-                      Void id_466 { ((void)(leb128_ptr_316[id_449] = id_465), ::dessser::Void()) };
-                      (void)id_466;
-                      uint8_t id_467 { 0 };
-                      uint8_t id_468 { 0 };
-                      uint32_t id_469 { leb128_sz_315[id_468] };
-                      uint8_t id_470 { 7 };
-                      uint32_t id_471 { uint32_t(id_469 >> id_470) };
-                      Void id_472 { ((void)(leb128_sz_315[id_467] = id_471), ::dessser::Void()) };
-                      (void)id_472;
-                      uint8_t id_473 { 0 };
-                      uint32_t id_474 { leb128_sz_315[id_473] };
-                      uint32_t id_475 { 0U };
-                      bool id_476 { bool(id_474 > id_475) };
-                      while_flag_448 = id_476;
-                      if (while_flag_448) {
+                      Pointer id_443 { id_429.writeU8(choose_res_434) };
+                      Void id_444 { ((void)(leb128_ptr_316[id_427] = id_443), ::dessser::Void()) };
+                      (void)id_444;
+                      uint8_t id_445 { 0 };
+                      uint8_t id_446 { 0 };
+                      uint32_t id_447 { leb128_sz_315[id_446] };
+                      uint8_t id_448 { 7 };
+                      uint32_t id_449 { uint32_t(id_447 >> id_448) };
+                      Void id_450 { ((void)(leb128_sz_315[id_445] = id_449), ::dessser::Void()) };
+                      (void)id_450;
+                      uint8_t id_451 { 0 };
+                      uint32_t id_452 { leb128_sz_315[id_451] };
+                      uint32_t id_453 { 0U };
+                      bool id_454 { bool(id_452 > id_453) };
+                      while_flag_426 = id_454;
+                      if (while_flag_426) {
                         (void)::dessser::Void();
                       }
-                    } while (while_flag_448);
+                    } while (while_flag_426);
                     (void)::dessser::Void();
-                    uint8_t id_477 { 0 };
-                    Pointer id_478 { leb128_ptr_316[id_477] };
-                    let_res_447 = id_478;
+                    uint8_t id_455 { 0 };
+                    Pointer id_456 { leb128_ptr_316[id_455] };
+                    let_res_425 = id_456;
                   }
-                  let_res_445 = let_res_447;
+                  let_res_423 = let_res_425;
                 }
-                ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_479 { (*p_0).via };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_480 { std::get<4 /* Kafka */>(id_479) };
-                std::string id_481 { id_480.text };
-                Bytes id_482 { id_481 };
-                Pointer id_483 { let_res_445.writeBytes(id_482) };
-                let_res_439 = id_483;
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_457 { std::get<4 /* Kafka */>((*p_0)) };
+                std::string id_458 { id_457.text };
+                Bytes id_459 { id_458 };
+                Pointer id_460 { let_res_423.writeBytes(id_459) };
+                let_res_418 = id_460;
               }
-              choose_res_108 = let_res_439;
+              choose_res_99 = let_res_418;
             }
-            choose_res_61 = choose_res_108;
+            choose_res_55 = choose_res_99;
           }
-          choose_res_14 = choose_res_61;
+          choose_res_11 = choose_res_55;
         }
-        choose_res_9 = choose_res_14;
+        choose_res_7 = choose_res_11;
       }
-      let_res_4 = choose_res_9;
+      let_res_3 = choose_res_7;
     }
-    Pointer let_res_484;
-    {
-      Pointer srec_dst_329 { let_res_4 };
-      double id_485 { (*p_0).timeout };
-      uint64_t id_486 { qword_of_float(id_485) };
-      Pointer id_487 { srec_dst_329.writeU64Le(id_486) };
-      let_res_484 = id_487;
-    }
-    return let_res_484;
+    return let_res_3;
   }
    };
   return fun0;
 }
+std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> via_to_row_binary(via_to_row_binary_init());
+
+/* 
+    (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}" "Ptr")
+      (let "srec_dst_329" (apply (identifier "via-to-row-binary") (get-field "via" (param 0)) (param 1)) (write-u64 little-endian (identifier "srec_dst_329") (u64-of-float (get-field "timeout" (param 0))))))
+ */
+static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary_init()
+{
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun461 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
+    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_462 { (*p_0).via };
+    Pointer id_463 { via_to_row_binary(id_462, p_1) };
+    Pointer let_res_464;
+    {
+      Pointer srec_dst_329 { id_463 };
+      double id_465 { (*p_0).timeout };
+      uint64_t id_466 { qword_of_float(id_465) };
+      Pointer id_467 { srec_dst_329.writeU64Le(id_466) };
+      let_res_464 = id_467;
+    }
+    return let_res_464;
+  }
+   };
+  return fun461;
+}
 std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary(to_row_binary_init());
 
 /* 
-    (fun ("{via: [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]; timeout: FLOAT}")
-      (add
-        (if (eq (u16 0) (label-of (get-field "via" (param 0)))) (size 2)
-          (if (eq (u16 1) (label-of (get-field "via" (param 0))))
+    (fun ("[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]")
+      (if (eq (u16 0) (label-of (param 0))) (size 2)
+        (if (eq (u16 1) (label-of (param 0)))
+          (add (size 2)
+            (add
+              (let "n_ref_293" (make-vec (string-length (get-alt "Exec" (param 0))))
+                (let "lebsz_ref_294" (make-vec (u32 1))
+                  (seq
+                    (while (ge (unsafe-nth (u8 0) (identifier "n_ref_293")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_294")) (u8 7)))
+                      (set-vec (u8 0) (identifier "lebsz_ref_294") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_294")) (u32 1)))) 
+                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_294")))))) 
+              (size-of-u32 (string-length (get-alt "Exec" (param 0))))))
+          (if (eq (u16 2) (label-of (param 0)))
             (add (size 2)
               (add
-                (let "n_ref_294" (make-vec (string-length (get-alt "Exec" (get-field "via" (param 0)))))
-                  (let "lebsz_ref_295" (make-vec (u32 1))
+                (let "n_ref_290" (make-vec (string-length (get-alt "SysLog" (param 0))))
+                  (let "lebsz_ref_291" (make-vec (u32 1))
                     (seq
-                      (while (ge (unsafe-nth (u8 0) (identifier "n_ref_294")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_295")) (u8 7)))
-                        (set-vec (u8 0) (identifier "lebsz_ref_295") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_295")) (u32 1)))) 
-                      (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_295")))))) 
-                (size-of-u32 (string-length (get-alt "Exec" (get-field "via" (param 0)))))))
-            (if (eq (u16 2) (label-of (get-field "via" (param 0))))
-              (add (size 2)
-                (add
-                  (let "n_ref_291" (make-vec (string-length (get-alt "SysLog" (get-field "via" (param 0)))))
-                    (let "lebsz_ref_292" (make-vec (u32 1))
-                      (seq
-                        (while (ge (unsafe-nth (u8 0) (identifier "n_ref_291")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_292")) (u8 7)))
-                          (set-vec (u8 0) (identifier "lebsz_ref_292") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_292")) (u32 1)))) 
-                        (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_292")))))) 
-                  (size-of-u32 (string-length (get-alt "SysLog" (get-field "via" (param 0)))))))
-              (if (eq (u16 3) (label-of (get-field "via" (param 0))))
-                (let "sz_286"
-                  (let "sz_282"
-                    (add (size 2)
-                      (add
-                        (let "n_ref_280" (make-vec (string-length (get-field "file" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                          (let "lebsz_ref_281" (make-vec (u32 1))
-                            (seq
-                              (while (ge (unsafe-nth (u8 0) (identifier "n_ref_280")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_281")) (u8 7)))
-                                (set-vec (u8 0) (identifier "lebsz_ref_281") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_281")) (u32 1)))) 
-                              (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_281")))))) 
-                        (size-of-u32 (string-length (get-field "file" (get-alt "Sqlite" (get-field "via" (param 0))))))))
-                    (add (identifier "sz_282")
-                      (add
-                        (let "n_ref_284" (make-vec (string-length (get-field "insert" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                          (let "lebsz_ref_285" (make-vec (u32 1))
-                            (seq
-                              (while (ge (unsafe-nth (u8 0) (identifier "n_ref_284")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_285")) (u8 7)))
-                                (set-vec (u8 0) (identifier "lebsz_ref_285") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_285")) (u32 1)))) 
-                              (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_285")))))) 
-                        (size-of-u32 (string-length (get-field "insert" (get-alt "Sqlite" (get-field "via" (param 0)))))))))
-                  (add (identifier "sz_286")
+                      (while (ge (unsafe-nth (u8 0) (identifier "n_ref_290")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_291")) (u8 7)))
+                        (set-vec (u8 0) (identifier "lebsz_ref_291") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_291")) (u32 1)))) 
+                      (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_291")))))) 
+                (size-of-u32 (string-length (get-alt "SysLog" (param 0))))))
+            (if (eq (u16 3) (label-of (param 0)))
+              (let "sz_285"
+                (let "sz_281"
+                  (add (size 2)
                     (add
-                      (let "n_ref_288" (make-vec (string-length (get-field "create" (get-alt "Sqlite" (get-field "via" (param 0))))))
-                        (let "lebsz_ref_289" (make-vec (u32 1))
+                      (let "n_ref_279" (make-vec (string-length (get-field "file" (get-alt "Sqlite" (param 0)))))
+                        (let "lebsz_ref_280" (make-vec (u32 1))
                           (seq
-                            (while (ge (unsafe-nth (u8 0) (identifier "n_ref_288")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_289")) (u8 7)))
-                              (set-vec (u8 0) (identifier "lebsz_ref_289") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_289")) (u32 1)))) 
-                            (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_289")))))) 
-                      (size-of-u32 (string-length (get-field "create" (get-alt "Sqlite" (get-field "via" (param 0)))))))))
-                (seq (assert (eq (label-of (get-field "via" (param 0))) (u16 4)))
-                  (let "sz_274"
+                            (while (ge (unsafe-nth (u8 0) (identifier "n_ref_279")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_280")) (u8 7)))
+                              (set-vec (u8 0) (identifier "lebsz_ref_280") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_280")) (u32 1)))) 
+                            (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_280")))))) 
+                      (size-of-u32 (string-length (get-field "file" (get-alt "Sqlite" (param 0)))))))
+                  (add (identifier "sz_281")
                     (add
-                      (let "sz_269"
-                        (let "sz_ref_259"
-                          (make-vec
-                            (add (size 2)
-                              (let "n_ref_257" (make-vec (cardinality (get-field "options" (get-alt "Kafka" (get-field "via" (param 0))))))
-                                (let "lebsz_ref_258" (make-vec (u32 1))
-                                  (seq
-                                    (while (ge (unsafe-nth (u8 0) (identifier "n_ref_257")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_258")) (u8 7)))
-                                      (set-vec (u8 0) (identifier "lebsz_ref_258") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_258")) (u32 1)))) 
-                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_258"))))))))
+                      (let "n_ref_283" (make-vec (string-length (get-field "insert" (get-alt "Sqlite" (param 0)))))
+                        (let "lebsz_ref_284" (make-vec (u32 1))
                           (seq
-                            (let "repeat_n_260" (make-vec (i32 0))
-                              (while (gt (to-i32 (cardinality (get-field "options" (get-alt "Kafka" (get-field "via" (param 0)))))) (unsafe-nth (u8 0) (identifier "repeat_n_260")))
+                            (while (ge (unsafe-nth (u8 0) (identifier "n_ref_283")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_284")) (u8 7)))
+                              (set-vec (u8 0) (identifier "lebsz_ref_284") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_284")) (u32 1)))) 
+                            (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_284")))))) 
+                      (size-of-u32 (string-length (get-field "insert" (get-alt "Sqlite" (param 0))))))))
+                (add (identifier "sz_285")
+                  (add
+                    (let "n_ref_287" (make-vec (string-length (get-field "create" (get-alt "Sqlite" (param 0)))))
+                      (let "lebsz_ref_288" (make-vec (u32 1))
+                        (seq
+                          (while (ge (unsafe-nth (u8 0) (identifier "n_ref_287")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_288")) (u8 7)))
+                            (set-vec (u8 0) (identifier "lebsz_ref_288") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_288")) (u32 1)))) 
+                          (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_288")))))) 
+                    (size-of-u32 (string-length (get-field "create" (get-alt "Sqlite" (param 0))))))))
+              (seq (assert (eq (label-of (param 0)) (u16 4)))
+                (let "sz_273"
+                  (add
+                    (let "sz_268"
+                      (let "sz_ref_258"
+                        (make-vec
+                          (add (size 2)
+                            (let "n_ref_256" (make-vec (cardinality (get-field "options" (get-alt "Kafka" (param 0)))))
+                              (let "lebsz_ref_257" (make-vec (u32 1))
                                 (seq
-                                  (set-vec (u8 0) (identifier "sz_ref_259")
-                                    (let "sz_265"
-                                      (let "sz_261" (unsafe-nth (u8 0) (identifier "sz_ref_259"))
-                                        (add (identifier "sz_261")
-                                          (let "wlen_262" (string-length (get-item 0 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_260")) (get-field "options" (get-alt "Kafka" (get-field "via" (param 0)))))))
-                                            (add
-                                              (let "n_ref_263" (make-vec (identifier "wlen_262"))
-                                                (let "lebsz_ref_264" 
-                                                  (make-vec (u32 1))
-                                                  (seq
-                                                    (while (ge (unsafe-nth (u8 0) (identifier "n_ref_263")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_264")) (u8 7)))
-                                                      (set-vec (u8 0) (identifier "lebsz_ref_264") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_264")) (u32 1)))) 
-                                                    (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_264")))))) 
-                                              (size-of-u32 (identifier "wlen_262"))))))
-                                      (add (identifier "sz_265")
-                                        (let "wlen_266" (string-length (get-item 1 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_260")) (get-field "options" (get-alt "Kafka" (get-field "via" (param 0)))))))
+                                  (while (ge (unsafe-nth (u8 0) (identifier "n_ref_256")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_257")) (u8 7)))
+                                    (set-vec (u8 0) (identifier "lebsz_ref_257") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_257")) (u32 1)))) 
+                                  (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_257"))))))))
+                        (seq
+                          (let "repeat_n_259" (make-vec (i32 0))
+                            (while (gt (to-i32 (cardinality (get-field "options" (get-alt "Kafka" (param 0))))) (unsafe-nth (u8 0) (identifier "repeat_n_259")))
+                              (seq
+                                (set-vec (u8 0) (identifier "sz_ref_258")
+                                  (let "sz_264"
+                                    (let "sz_260" (unsafe-nth (u8 0) (identifier "sz_ref_258"))
+                                      (add (identifier "sz_260")
+                                        (let "wlen_261" (string-length (get-item 0 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_259")) (get-field "options" (get-alt "Kafka" (param 0))))))
                                           (add
-                                            (let "n_ref_267" (make-vec (identifier "wlen_266"))
-                                              (let "lebsz_ref_268" (make-vec (u32 1))
+                                            (let "n_ref_262" (make-vec (identifier "wlen_261"))
+                                              (let "lebsz_ref_263" (make-vec (u32 1))
                                                 (seq
-                                                  (while (ge (unsafe-nth (u8 0) (identifier "n_ref_267")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_268")) (u8 7)))
-                                                    (set-vec (u8 0) (identifier "lebsz_ref_268") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_268")) (u32 1)))) 
-                                                  (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_268")))))) 
-                                            (size-of-u32 (identifier "wlen_266"))))))) 
-                                  (set-vec (u8 0) (identifier "repeat_n_260") (add (unsafe-nth (u8 0) (identifier "repeat_n_260")) (i32 1)))))) 
-                            (unsafe-nth (u8 0) (identifier "sz_ref_259"))))
-                        (add (identifier "sz_269")
-                          (add
-                            (let "n_ref_271" (make-vec (string-length (get-field "topic" (get-alt "Kafka" (get-field "via" (param 0))))))
-                              (let "lebsz_ref_272" (make-vec (u32 1))
-                                (seq
-                                  (while (ge (unsafe-nth (u8 0) (identifier "n_ref_271")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_272")) (u8 7)))
-                                    (set-vec (u8 0) (identifier "lebsz_ref_272") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_272")) (u32 1)))) 
-                                  (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_272")))))) 
-                            (size-of-u32 (string-length (get-field "topic" (get-alt "Kafka" (get-field "via" (param 0))))))))) 
-                      (size 2))
-                    (add (identifier "sz_274")
-                      (add
-                        (let "n_ref_276" (make-vec (string-length (get-field "text" (get-alt "Kafka" (get-field "via" (param 0))))))
-                          (let "lebsz_ref_277" (make-vec (u32 1))
-                            (seq
-                              (while (ge (unsafe-nth (u8 0) (identifier "n_ref_276")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_277")) (u8 7)))
-                                (set-vec (u8 0) (identifier "lebsz_ref_277") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_277")) (u32 1)))) 
-                              (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_277")))))) 
-                        (size-of-u32 (string-length (get-field "text" (get-alt "Kafka" (get-field "via" (param 0)))))))))))))) 
-        (size 8)))
+                                                  (while (ge (unsafe-nth (u8 0) (identifier "n_ref_262")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_263")) (u8 7)))
+                                                    (set-vec (u8 0) (identifier "lebsz_ref_263") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_263")) (u32 1)))) 
+                                                  (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_263")))))) 
+                                            (size-of-u32 (identifier "wlen_261"))))))
+                                    (add (identifier "sz_264")
+                                      (let "wlen_265" (string-length (get-item 1 (unsafe-nth (unsafe-nth (u8 0) (identifier "repeat_n_259")) (get-field "options" (get-alt "Kafka" (param 0))))))
+                                        (add
+                                          (let "n_ref_266" (make-vec (identifier "wlen_265"))
+                                            (let "lebsz_ref_267" (make-vec (u32 1))
+                                              (seq
+                                                (while (ge (unsafe-nth (u8 0) (identifier "n_ref_266")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_267")) (u8 7)))
+                                                  (set-vec (u8 0) (identifier "lebsz_ref_267") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_267")) (u32 1)))) 
+                                                (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_267")))))) 
+                                          (size-of-u32 (identifier "wlen_265"))))))) 
+                                (set-vec (u8 0) (identifier "repeat_n_259") (add (unsafe-nth (u8 0) (identifier "repeat_n_259")) (i32 1)))))) 
+                          (unsafe-nth (u8 0) (identifier "sz_ref_258"))))
+                      (add (identifier "sz_268")
+                        (add
+                          (let "n_ref_270" (make-vec (string-length (get-field "topic" (get-alt "Kafka" (param 0)))))
+                            (let "lebsz_ref_271" (make-vec (u32 1))
+                              (seq
+                                (while (ge (unsafe-nth (u8 0) (identifier "n_ref_270")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_271")) (u8 7)))
+                                  (set-vec (u8 0) (identifier "lebsz_ref_271") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_271")) (u32 1)))) 
+                                (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_271")))))) 
+                          (size-of-u32 (string-length (get-field "topic" (get-alt "Kafka" (param 0)))))))) 
+                    (size 2))
+                  (add (identifier "sz_273")
+                    (add
+                      (let "n_ref_275" (make-vec (string-length (get-field "text" (get-alt "Kafka" (param 0)))))
+                        (let "lebsz_ref_276" (make-vec (u32 1))
+                          (seq
+                            (while (ge (unsafe-nth (u8 0) (identifier "n_ref_275")) (left-shift (unsafe-nth (u8 0) (identifier "lebsz_ref_276")) (u8 7)))
+                              (set-vec (u8 0) (identifier "lebsz_ref_276") (add (unsafe-nth (u8 0) (identifier "lebsz_ref_276")) (u32 1)))) 
+                            (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_276")))))) 
+                      (size-of-u32 (string-length (get-field "text" (get-alt "Kafka" (param 0))))))))))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> via_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> fun488 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0) {
-    uint16_t id_489 { 0 };
-    ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_490 { (*p_0).via };
-    uint16_t id_491 { uint16_t(id_490.index()) };
-    bool id_492 { bool(id_489 == id_491) };
-    Size choose_res_493;
-    if (id_492) {
-      Size id_494 { 2UL };
-      choose_res_493 = id_494;
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> fun468 { [&](std::shared_ptr<::dessser::gen::alerting_contact::via>  p_0) {
+    uint16_t id_469 { 0 };
+    uint16_t id_470 { uint16_t((*p_0).index()) };
+    bool id_471 { bool(id_469 == id_470) };
+    Size choose_res_472;
+    if (id_471) {
+      Size id_473 { 2UL };
+      choose_res_472 = id_473;
     } else {
-      uint16_t id_495 { 1 };
-      ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_496 { (*p_0).via };
-      uint16_t id_497 { uint16_t(id_496.index()) };
-      bool id_498 { bool(id_495 == id_497) };
-      Size choose_res_499;
-      if (id_498) {
-        Size id_500 { 2UL };
-        ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_501 { (*p_0).via };
-        std::string id_502 { std::get<1 /* Exec */>(id_501) };
-        uint32_t id_503 { (uint32_t)id_502.size() };
-        Vec<1, uint32_t> id_504 {  id_503  };
-        Size let_res_505;
+      uint16_t id_474 { 1 };
+      uint16_t id_475 { uint16_t((*p_0).index()) };
+      bool id_476 { bool(id_474 == id_475) };
+      Size choose_res_477;
+      if (id_476) {
+        Size id_478 { 2UL };
+        std::string id_479 { std::get<1 /* Exec */>((*p_0)) };
+        uint32_t id_480 { (uint32_t)id_479.size() };
+        Vec<1, uint32_t> id_481 {  id_480  };
+        Size let_res_482;
         {
-          Vec<1, uint32_t> n_ref_294 { id_504 };
-          uint32_t id_506 { 1U };
-          Vec<1, uint32_t> id_507 {  id_506  };
-          Size let_res_508;
+          Vec<1, uint32_t> n_ref_293 { id_481 };
+          uint32_t id_483 { 1U };
+          Vec<1, uint32_t> id_484 {  id_483  };
+          Size let_res_485;
           {
-            Vec<1, uint32_t> lebsz_ref_295 { id_507 };
-            bool while_flag_509 { true };
+            Vec<1, uint32_t> lebsz_ref_294 { id_484 };
+            bool while_flag_486 { true };
             do {
-              uint8_t id_510 { 0 };
-              uint32_t id_511 { n_ref_294[id_510] };
-              uint8_t id_512 { 0 };
-              uint32_t id_513 { lebsz_ref_295[id_512] };
-              uint8_t id_514 { 7 };
-              uint32_t id_515 { uint32_t(id_513 << id_514) };
-              bool id_516 { bool(id_511 >= id_515) };
-              while_flag_509 = id_516;
-              if (while_flag_509) {
-                uint8_t id_517 { 0 };
-                uint8_t id_518 { 0 };
-                uint32_t id_519 { lebsz_ref_295[id_518] };
-                uint32_t id_520 { 1U };
-                uint32_t id_521 { uint32_t(id_519 + id_520) };
-                Void id_522 { ((void)(lebsz_ref_295[id_517] = id_521), ::dessser::Void()) };
-                (void)id_522;
+              uint8_t id_487 { 0 };
+              uint32_t id_488 { n_ref_293[id_487] };
+              uint8_t id_489 { 0 };
+              uint32_t id_490 { lebsz_ref_294[id_489] };
+              uint8_t id_491 { 7 };
+              uint32_t id_492 { uint32_t(id_490 << id_491) };
+              bool id_493 { bool(id_488 >= id_492) };
+              while_flag_486 = id_493;
+              if (while_flag_486) {
+                uint8_t id_494 { 0 };
+                uint8_t id_495 { 0 };
+                uint32_t id_496 { lebsz_ref_294[id_495] };
+                uint32_t id_497 { 1U };
+                uint32_t id_498 { uint32_t(id_496 + id_497) };
+                Void id_499 { ((void)(lebsz_ref_294[id_494] = id_498), ::dessser::Void()) };
+                (void)id_499;
               }
-            } while (while_flag_509);
+            } while (while_flag_486);
             (void)::dessser::Void();
-            uint8_t id_523 { 0 };
-            uint32_t id_524 { lebsz_ref_295[id_523] };
-            Size id_525 { Size(id_524) };
-            let_res_508 = id_525;
+            uint8_t id_500 { 0 };
+            uint32_t id_501 { lebsz_ref_294[id_500] };
+            Size id_502 { Size(id_501) };
+            let_res_485 = id_502;
           }
-          let_res_505 = let_res_508;
+          let_res_482 = let_res_485;
         }
-        ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_526 { (*p_0).via };
-        std::string id_527 { std::get<1 /* Exec */>(id_526) };
-        uint32_t id_528 { (uint32_t)id_527.size() };
-        Size id_529 { Size(id_528) };
-        Size id_530 { Size(let_res_505 + id_529) };
-        Size id_531 { Size(id_500 + id_530) };
-        choose_res_499 = id_531;
+        std::string id_503 { std::get<1 /* Exec */>((*p_0)) };
+        uint32_t id_504 { (uint32_t)id_503.size() };
+        Size id_505 { Size(id_504) };
+        Size id_506 { Size(let_res_482 + id_505) };
+        Size id_507 { Size(id_478 + id_506) };
+        choose_res_477 = id_507;
       } else {
-        uint16_t id_532 { 2 };
-        ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_533 { (*p_0).via };
-        uint16_t id_534 { uint16_t(id_533.index()) };
-        bool id_535 { bool(id_532 == id_534) };
-        Size choose_res_536;
-        if (id_535) {
-          Size id_537 { 2UL };
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_538 { (*p_0).via };
-          std::string id_539 { std::get<2 /* SysLog */>(id_538) };
-          uint32_t id_540 { (uint32_t)id_539.size() };
-          Vec<1, uint32_t> id_541 {  id_540  };
-          Size let_res_542;
+        uint16_t id_508 { 2 };
+        uint16_t id_509 { uint16_t((*p_0).index()) };
+        bool id_510 { bool(id_508 == id_509) };
+        Size choose_res_511;
+        if (id_510) {
+          Size id_512 { 2UL };
+          std::string id_513 { std::get<2 /* SysLog */>((*p_0)) };
+          uint32_t id_514 { (uint32_t)id_513.size() };
+          Vec<1, uint32_t> id_515 {  id_514  };
+          Size let_res_516;
           {
-            Vec<1, uint32_t> n_ref_291 { id_541 };
-            uint32_t id_543 { 1U };
-            Vec<1, uint32_t> id_544 {  id_543  };
-            Size let_res_545;
+            Vec<1, uint32_t> n_ref_290 { id_515 };
+            uint32_t id_517 { 1U };
+            Vec<1, uint32_t> id_518 {  id_517  };
+            Size let_res_519;
             {
-              Vec<1, uint32_t> lebsz_ref_292 { id_544 };
-              bool while_flag_546 { true };
+              Vec<1, uint32_t> lebsz_ref_291 { id_518 };
+              bool while_flag_520 { true };
               do {
-                uint8_t id_547 { 0 };
-                uint32_t id_548 { n_ref_291[id_547] };
-                uint8_t id_549 { 0 };
-                uint32_t id_550 { lebsz_ref_292[id_549] };
-                uint8_t id_551 { 7 };
-                uint32_t id_552 { uint32_t(id_550 << id_551) };
-                bool id_553 { bool(id_548 >= id_552) };
-                while_flag_546 = id_553;
-                if (while_flag_546) {
-                  uint8_t id_554 { 0 };
-                  uint8_t id_555 { 0 };
-                  uint32_t id_556 { lebsz_ref_292[id_555] };
-                  uint32_t id_557 { 1U };
-                  uint32_t id_558 { uint32_t(id_556 + id_557) };
-                  Void id_559 { ((void)(lebsz_ref_292[id_554] = id_558), ::dessser::Void()) };
-                  (void)id_559;
+                uint8_t id_521 { 0 };
+                uint32_t id_522 { n_ref_290[id_521] };
+                uint8_t id_523 { 0 };
+                uint32_t id_524 { lebsz_ref_291[id_523] };
+                uint8_t id_525 { 7 };
+                uint32_t id_526 { uint32_t(id_524 << id_525) };
+                bool id_527 { bool(id_522 >= id_526) };
+                while_flag_520 = id_527;
+                if (while_flag_520) {
+                  uint8_t id_528 { 0 };
+                  uint8_t id_529 { 0 };
+                  uint32_t id_530 { lebsz_ref_291[id_529] };
+                  uint32_t id_531 { 1U };
+                  uint32_t id_532 { uint32_t(id_530 + id_531) };
+                  Void id_533 { ((void)(lebsz_ref_291[id_528] = id_532), ::dessser::Void()) };
+                  (void)id_533;
                 }
-              } while (while_flag_546);
+              } while (while_flag_520);
               (void)::dessser::Void();
-              uint8_t id_560 { 0 };
-              uint32_t id_561 { lebsz_ref_292[id_560] };
-              Size id_562 { Size(id_561) };
-              let_res_545 = id_562;
+              uint8_t id_534 { 0 };
+              uint32_t id_535 { lebsz_ref_291[id_534] };
+              Size id_536 { Size(id_535) };
+              let_res_519 = id_536;
             }
-            let_res_542 = let_res_545;
+            let_res_516 = let_res_519;
           }
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_563 { (*p_0).via };
-          std::string id_564 { std::get<2 /* SysLog */>(id_563) };
-          uint32_t id_565 { (uint32_t)id_564.size() };
-          Size id_566 { Size(id_565) };
-          Size id_567 { Size(let_res_542 + id_566) };
-          Size id_568 { Size(id_537 + id_567) };
-          choose_res_536 = id_568;
+          std::string id_537 { std::get<2 /* SysLog */>((*p_0)) };
+          uint32_t id_538 { (uint32_t)id_537.size() };
+          Size id_539 { Size(id_538) };
+          Size id_540 { Size(let_res_516 + id_539) };
+          Size id_541 { Size(id_512 + id_540) };
+          choose_res_511 = id_541;
         } else {
-          uint16_t id_569 { 3 };
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_570 { (*p_0).via };
-          uint16_t id_571 { uint16_t(id_570.index()) };
-          bool id_572 { bool(id_569 == id_571) };
-          Size choose_res_573;
-          if (id_572) {
-            Size id_574 { 2UL };
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_575 { (*p_0).via };
-            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_576 { std::get<3 /* Sqlite */>(id_575) };
-            std::string id_577 { id_576.file };
-            uint32_t id_578 { (uint32_t)id_577.size() };
-            Vec<1, uint32_t> id_579 {  id_578  };
-            Size let_res_580;
+          uint16_t id_542 { 3 };
+          uint16_t id_543 { uint16_t((*p_0).index()) };
+          bool id_544 { bool(id_542 == id_543) };
+          Size choose_res_545;
+          if (id_544) {
+            Size id_546 { 2UL };
+            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_547 { std::get<3 /* Sqlite */>((*p_0)) };
+            std::string id_548 { id_547.file };
+            uint32_t id_549 { (uint32_t)id_548.size() };
+            Vec<1, uint32_t> id_550 {  id_549  };
+            Size let_res_551;
             {
-              Vec<1, uint32_t> n_ref_280 { id_579 };
-              uint32_t id_581 { 1U };
+              Vec<1, uint32_t> n_ref_279 { id_550 };
+              uint32_t id_552 { 1U };
+              Vec<1, uint32_t> id_553 {  id_552  };
+              Size let_res_554;
+              {
+                Vec<1, uint32_t> lebsz_ref_280 { id_553 };
+                bool while_flag_555 { true };
+                do {
+                  uint8_t id_556 { 0 };
+                  uint32_t id_557 { n_ref_279[id_556] };
+                  uint8_t id_558 { 0 };
+                  uint32_t id_559 { lebsz_ref_280[id_558] };
+                  uint8_t id_560 { 7 };
+                  uint32_t id_561 { uint32_t(id_559 << id_560) };
+                  bool id_562 { bool(id_557 >= id_561) };
+                  while_flag_555 = id_562;
+                  if (while_flag_555) {
+                    uint8_t id_563 { 0 };
+                    uint8_t id_564 { 0 };
+                    uint32_t id_565 { lebsz_ref_280[id_564] };
+                    uint32_t id_566 { 1U };
+                    uint32_t id_567 { uint32_t(id_565 + id_566) };
+                    Void id_568 { ((void)(lebsz_ref_280[id_563] = id_567), ::dessser::Void()) };
+                    (void)id_568;
+                  }
+                } while (while_flag_555);
+                (void)::dessser::Void();
+                uint8_t id_569 { 0 };
+                uint32_t id_570 { lebsz_ref_280[id_569] };
+                Size id_571 { Size(id_570) };
+                let_res_554 = id_571;
+              }
+              let_res_551 = let_res_554;
+            }
+            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_572 { std::get<3 /* Sqlite */>((*p_0)) };
+            std::string id_573 { id_572.file };
+            uint32_t id_574 { (uint32_t)id_573.size() };
+            Size id_575 { Size(id_574) };
+            Size id_576 { Size(let_res_551 + id_575) };
+            Size id_577 { Size(id_546 + id_576) };
+            Size let_res_578;
+            {
+              Size sz_281 { id_577 };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_579 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_580 { id_579.insert };
+              uint32_t id_581 { (uint32_t)id_580.size() };
               Vec<1, uint32_t> id_582 {  id_581  };
               Size let_res_583;
               {
-                Vec<1, uint32_t> lebsz_ref_281 { id_582 };
-                bool while_flag_584 { true };
-                do {
-                  uint8_t id_585 { 0 };
-                  uint32_t id_586 { n_ref_280[id_585] };
-                  uint8_t id_587 { 0 };
-                  uint32_t id_588 { lebsz_ref_281[id_587] };
-                  uint8_t id_589 { 7 };
-                  uint32_t id_590 { uint32_t(id_588 << id_589) };
-                  bool id_591 { bool(id_586 >= id_590) };
-                  while_flag_584 = id_591;
-                  if (while_flag_584) {
-                    uint8_t id_592 { 0 };
-                    uint8_t id_593 { 0 };
-                    uint32_t id_594 { lebsz_ref_281[id_593] };
-                    uint32_t id_595 { 1U };
-                    uint32_t id_596 { uint32_t(id_594 + id_595) };
-                    Void id_597 { ((void)(lebsz_ref_281[id_592] = id_596), ::dessser::Void()) };
-                    (void)id_597;
-                  }
-                } while (while_flag_584);
-                (void)::dessser::Void();
-                uint8_t id_598 { 0 };
-                uint32_t id_599 { lebsz_ref_281[id_598] };
-                Size id_600 { Size(id_599) };
-                let_res_583 = id_600;
-              }
-              let_res_580 = let_res_583;
-            }
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_601 { (*p_0).via };
-            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_602 { std::get<3 /* Sqlite */>(id_601) };
-            std::string id_603 { id_602.file };
-            uint32_t id_604 { (uint32_t)id_603.size() };
-            Size id_605 { Size(id_604) };
-            Size id_606 { Size(let_res_580 + id_605) };
-            Size id_607 { Size(id_574 + id_606) };
-            Size let_res_608;
-            {
-              Size sz_282 { id_607 };
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_609 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_610 { std::get<3 /* Sqlite */>(id_609) };
-              std::string id_611 { id_610.insert };
-              uint32_t id_612 { (uint32_t)id_611.size() };
-              Vec<1, uint32_t> id_613 {  id_612  };
-              Size let_res_614;
-              {
-                Vec<1, uint32_t> n_ref_284 { id_613 };
-                uint32_t id_615 { 1U };
-                Vec<1, uint32_t> id_616 {  id_615  };
-                Size let_res_617;
+                Vec<1, uint32_t> n_ref_283 { id_582 };
+                uint32_t id_584 { 1U };
+                Vec<1, uint32_t> id_585 {  id_584  };
+                Size let_res_586;
                 {
-                  Vec<1, uint32_t> lebsz_ref_285 { id_616 };
-                  bool while_flag_618 { true };
+                  Vec<1, uint32_t> lebsz_ref_284 { id_585 };
+                  bool while_flag_587 { true };
                   do {
-                    uint8_t id_619 { 0 };
-                    uint32_t id_620 { n_ref_284[id_619] };
-                    uint8_t id_621 { 0 };
-                    uint32_t id_622 { lebsz_ref_285[id_621] };
-                    uint8_t id_623 { 7 };
-                    uint32_t id_624 { uint32_t(id_622 << id_623) };
-                    bool id_625 { bool(id_620 >= id_624) };
-                    while_flag_618 = id_625;
-                    if (while_flag_618) {
-                      uint8_t id_626 { 0 };
-                      uint8_t id_627 { 0 };
-                      uint32_t id_628 { lebsz_ref_285[id_627] };
-                      uint32_t id_629 { 1U };
-                      uint32_t id_630 { uint32_t(id_628 + id_629) };
-                      Void id_631 { ((void)(lebsz_ref_285[id_626] = id_630), ::dessser::Void()) };
-                      (void)id_631;
+                    uint8_t id_588 { 0 };
+                    uint32_t id_589 { n_ref_283[id_588] };
+                    uint8_t id_590 { 0 };
+                    uint32_t id_591 { lebsz_ref_284[id_590] };
+                    uint8_t id_592 { 7 };
+                    uint32_t id_593 { uint32_t(id_591 << id_592) };
+                    bool id_594 { bool(id_589 >= id_593) };
+                    while_flag_587 = id_594;
+                    if (while_flag_587) {
+                      uint8_t id_595 { 0 };
+                      uint8_t id_596 { 0 };
+                      uint32_t id_597 { lebsz_ref_284[id_596] };
+                      uint32_t id_598 { 1U };
+                      uint32_t id_599 { uint32_t(id_597 + id_598) };
+                      Void id_600 { ((void)(lebsz_ref_284[id_595] = id_599), ::dessser::Void()) };
+                      (void)id_600;
                     }
-                  } while (while_flag_618);
+                  } while (while_flag_587);
                   (void)::dessser::Void();
-                  uint8_t id_632 { 0 };
-                  uint32_t id_633 { lebsz_ref_285[id_632] };
-                  Size id_634 { Size(id_633) };
-                  let_res_617 = id_634;
+                  uint8_t id_601 { 0 };
+                  uint32_t id_602 { lebsz_ref_284[id_601] };
+                  Size id_603 { Size(id_602) };
+                  let_res_586 = id_603;
                 }
-                let_res_614 = let_res_617;
+                let_res_583 = let_res_586;
               }
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_635 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_636 { std::get<3 /* Sqlite */>(id_635) };
-              std::string id_637 { id_636.insert };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_604 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_605 { id_604.insert };
+              uint32_t id_606 { (uint32_t)id_605.size() };
+              Size id_607 { Size(id_606) };
+              Size id_608 { Size(let_res_583 + id_607) };
+              Size id_609 { Size(sz_281 + id_608) };
+              let_res_578 = id_609;
+            }
+            Size let_res_610;
+            {
+              Size sz_285 { let_res_578 };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_611 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_612 { id_611.create };
+              uint32_t id_613 { (uint32_t)id_612.size() };
+              Vec<1, uint32_t> id_614 {  id_613  };
+              Size let_res_615;
+              {
+                Vec<1, uint32_t> n_ref_287 { id_614 };
+                uint32_t id_616 { 1U };
+                Vec<1, uint32_t> id_617 {  id_616  };
+                Size let_res_618;
+                {
+                  Vec<1, uint32_t> lebsz_ref_288 { id_617 };
+                  bool while_flag_619 { true };
+                  do {
+                    uint8_t id_620 { 0 };
+                    uint32_t id_621 { n_ref_287[id_620] };
+                    uint8_t id_622 { 0 };
+                    uint32_t id_623 { lebsz_ref_288[id_622] };
+                    uint8_t id_624 { 7 };
+                    uint32_t id_625 { uint32_t(id_623 << id_624) };
+                    bool id_626 { bool(id_621 >= id_625) };
+                    while_flag_619 = id_626;
+                    if (while_flag_619) {
+                      uint8_t id_627 { 0 };
+                      uint8_t id_628 { 0 };
+                      uint32_t id_629 { lebsz_ref_288[id_628] };
+                      uint32_t id_630 { 1U };
+                      uint32_t id_631 { uint32_t(id_629 + id_630) };
+                      Void id_632 { ((void)(lebsz_ref_288[id_627] = id_631), ::dessser::Void()) };
+                      (void)id_632;
+                    }
+                  } while (while_flag_619);
+                  (void)::dessser::Void();
+                  uint8_t id_633 { 0 };
+                  uint32_t id_634 { lebsz_ref_288[id_633] };
+                  Size id_635 { Size(id_634) };
+                  let_res_618 = id_635;
+                }
+                let_res_615 = let_res_618;
+              }
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_636 { std::get<3 /* Sqlite */>((*p_0)) };
+              std::string id_637 { id_636.create };
               uint32_t id_638 { (uint32_t)id_637.size() };
               Size id_639 { Size(id_638) };
-              Size id_640 { Size(let_res_614 + id_639) };
-              Size id_641 { Size(sz_282 + id_640) };
-              let_res_608 = id_641;
+              Size id_640 { Size(let_res_615 + id_639) };
+              Size id_641 { Size(sz_285 + id_640) };
+              let_res_610 = id_641;
             }
-            Size let_res_642;
-            {
-              Size sz_286 { let_res_608 };
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_643 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_644 { std::get<3 /* Sqlite */>(id_643) };
-              std::string id_645 { id_644.create };
-              uint32_t id_646 { (uint32_t)id_645.size() };
-              Vec<1, uint32_t> id_647 {  id_646  };
-              Size let_res_648;
-              {
-                Vec<1, uint32_t> n_ref_288 { id_647 };
-                uint32_t id_649 { 1U };
-                Vec<1, uint32_t> id_650 {  id_649  };
-                Size let_res_651;
-                {
-                  Vec<1, uint32_t> lebsz_ref_289 { id_650 };
-                  bool while_flag_652 { true };
-                  do {
-                    uint8_t id_653 { 0 };
-                    uint32_t id_654 { n_ref_288[id_653] };
-                    uint8_t id_655 { 0 };
-                    uint32_t id_656 { lebsz_ref_289[id_655] };
-                    uint8_t id_657 { 7 };
-                    uint32_t id_658 { uint32_t(id_656 << id_657) };
-                    bool id_659 { bool(id_654 >= id_658) };
-                    while_flag_652 = id_659;
-                    if (while_flag_652) {
-                      uint8_t id_660 { 0 };
-                      uint8_t id_661 { 0 };
-                      uint32_t id_662 { lebsz_ref_289[id_661] };
-                      uint32_t id_663 { 1U };
-                      uint32_t id_664 { uint32_t(id_662 + id_663) };
-                      Void id_665 { ((void)(lebsz_ref_289[id_660] = id_664), ::dessser::Void()) };
-                      (void)id_665;
-                    }
-                  } while (while_flag_652);
-                  (void)::dessser::Void();
-                  uint8_t id_666 { 0 };
-                  uint32_t id_667 { lebsz_ref_289[id_666] };
-                  Size id_668 { Size(id_667) };
-                  let_res_651 = id_668;
-                }
-                let_res_648 = let_res_651;
-              }
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_669 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_670 { std::get<3 /* Sqlite */>(id_669) };
-              std::string id_671 { id_670.create };
-              uint32_t id_672 { (uint32_t)id_671.size() };
-              Size id_673 { Size(id_672) };
-              Size id_674 { Size(let_res_648 + id_673) };
-              Size id_675 { Size(sz_286 + id_674) };
-              let_res_642 = id_675;
-            }
-            choose_res_573 = let_res_642;
+            choose_res_545 = let_res_610;
           } else {
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_676 { (*p_0).via };
-            uint16_t id_677 { uint16_t(id_676.index()) };
-            uint16_t id_678 { 4 };
-            bool id_679 { bool(id_677 == id_678) };
-            Void id_680 { ((void)(assert(id_679)), ::dessser::Void()) };
-            (void)id_680;
-            Size id_681 { 2UL };
-            ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_682 { (*p_0).via };
-            ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_683 { std::get<4 /* Kafka */>(id_682) };
-            Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_684 { id_683.options };
-            uint32_t id_685 { id_684.size() };
-            Vec<1, uint32_t> id_686 {  id_685  };
-            Size let_res_687;
+            uint16_t id_642 { uint16_t((*p_0).index()) };
+            uint16_t id_643 { 4 };
+            bool id_644 { bool(id_642 == id_643) };
+            Void id_645 { ((void)(assert(id_644)), ::dessser::Void()) };
+            (void)id_645;
+            Size id_646 { 2UL };
+            ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_647 { std::get<4 /* Kafka */>((*p_0)) };
+            Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_648 { id_647.options };
+            uint32_t id_649 { id_648.size() };
+            Vec<1, uint32_t> id_650 {  id_649  };
+            Size let_res_651;
             {
-              Vec<1, uint32_t> n_ref_257 { id_686 };
-              uint32_t id_688 { 1U };
-              Vec<1, uint32_t> id_689 {  id_688  };
-              Size let_res_690;
+              Vec<1, uint32_t> n_ref_256 { id_650 };
+              uint32_t id_652 { 1U };
+              Vec<1, uint32_t> id_653 {  id_652  };
+              Size let_res_654;
               {
-                Vec<1, uint32_t> lebsz_ref_258 { id_689 };
-                bool while_flag_691 { true };
+                Vec<1, uint32_t> lebsz_ref_257 { id_653 };
+                bool while_flag_655 { true };
                 do {
-                  uint8_t id_692 { 0 };
-                  uint32_t id_693 { n_ref_257[id_692] };
-                  uint8_t id_694 { 0 };
-                  uint32_t id_695 { lebsz_ref_258[id_694] };
-                  uint8_t id_696 { 7 };
-                  uint32_t id_697 { uint32_t(id_695 << id_696) };
-                  bool id_698 { bool(id_693 >= id_697) };
-                  while_flag_691 = id_698;
-                  if (while_flag_691) {
-                    uint8_t id_699 { 0 };
-                    uint8_t id_700 { 0 };
-                    uint32_t id_701 { lebsz_ref_258[id_700] };
-                    uint32_t id_702 { 1U };
-                    uint32_t id_703 { uint32_t(id_701 + id_702) };
-                    Void id_704 { ((void)(lebsz_ref_258[id_699] = id_703), ::dessser::Void()) };
-                    (void)id_704;
+                  uint8_t id_656 { 0 };
+                  uint32_t id_657 { n_ref_256[id_656] };
+                  uint8_t id_658 { 0 };
+                  uint32_t id_659 { lebsz_ref_257[id_658] };
+                  uint8_t id_660 { 7 };
+                  uint32_t id_661 { uint32_t(id_659 << id_660) };
+                  bool id_662 { bool(id_657 >= id_661) };
+                  while_flag_655 = id_662;
+                  if (while_flag_655) {
+                    uint8_t id_663 { 0 };
+                    uint8_t id_664 { 0 };
+                    uint32_t id_665 { lebsz_ref_257[id_664] };
+                    uint32_t id_666 { 1U };
+                    uint32_t id_667 { uint32_t(id_665 + id_666) };
+                    Void id_668 { ((void)(lebsz_ref_257[id_663] = id_667), ::dessser::Void()) };
+                    (void)id_668;
                   }
-                } while (while_flag_691);
+                } while (while_flag_655);
                 (void)::dessser::Void();
-                uint8_t id_705 { 0 };
-                uint32_t id_706 { lebsz_ref_258[id_705] };
-                Size id_707 { Size(id_706) };
-                let_res_690 = id_707;
+                uint8_t id_669 { 0 };
+                uint32_t id_670 { lebsz_ref_257[id_669] };
+                Size id_671 { Size(id_670) };
+                let_res_654 = id_671;
               }
-              let_res_687 = let_res_690;
+              let_res_651 = let_res_654;
             }
-            Size id_708 { Size(id_681 + let_res_687) };
-            Vec<1, Size> id_709 {  id_708  };
-            Size let_res_710;
+            Size id_672 { Size(id_646 + let_res_651) };
+            Vec<1, Size> id_673 {  id_672  };
+            Size let_res_674;
             {
-              Vec<1, Size> sz_ref_259 { id_709 };
-              int32_t id_711 { 0L };
-              Vec<1, int32_t> id_712 {  id_711  };
+              Vec<1, Size> sz_ref_258 { id_673 };
+              int32_t id_675 { 0L };
+              Vec<1, int32_t> id_676 {  id_675  };
               {
-                Vec<1, int32_t> repeat_n_260 { id_712 };
-                bool while_flag_713 { true };
+                Vec<1, int32_t> repeat_n_259 { id_676 };
+                bool while_flag_677 { true };
                 do {
-                  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_714 { (*p_0).via };
-                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_715 { std::get<4 /* Kafka */>(id_714) };
-                  Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_716 { id_715.options };
-                  uint32_t id_717 { id_716.size() };
-                  int32_t id_718 { int32_t(id_717) };
-                  uint8_t id_719 { 0 };
-                  int32_t id_720 { repeat_n_260[id_719] };
-                  bool id_721 { bool(id_718 > id_720) };
-                  while_flag_713 = id_721;
-                  if (while_flag_713) {
-                    uint8_t id_722 { 0 };
-                    uint8_t id_723 { 0 };
-                    Size id_724 { sz_ref_259[id_723] };
-                    Size let_res_725;
+                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_678 { std::get<4 /* Kafka */>((*p_0)) };
+                  Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_679 { id_678.options };
+                  uint32_t id_680 { id_679.size() };
+                  int32_t id_681 { int32_t(id_680) };
+                  uint8_t id_682 { 0 };
+                  int32_t id_683 { repeat_n_259[id_682] };
+                  bool id_684 { bool(id_681 > id_683) };
+                  while_flag_677 = id_684;
+                  if (while_flag_677) {
+                    uint8_t id_685 { 0 };
+                    uint8_t id_686 { 0 };
+                    Size id_687 { sz_ref_258[id_686] };
+                    Size let_res_688;
                     {
-                      Size sz_261 { id_724 };
-                      uint8_t id_726 { 0 };
-                      int32_t id_727 { repeat_n_260[id_726] };
-                      ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_728 { (*p_0).via };
-                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_729 { std::get<4 /* Kafka */>(id_728) };
-                      Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_730 { id_729.options };
-                      ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_731 { id_730[id_727] };
-                      std::string id_732 { std::get<0>(id_731) };
-                      uint32_t id_733 { (uint32_t)id_732.size() };
-                      Size let_res_734;
+                      Size sz_260 { id_687 };
+                      uint8_t id_689 { 0 };
+                      int32_t id_690 { repeat_n_259[id_689] };
+                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_691 { std::get<4 /* Kafka */>((*p_0)) };
+                      Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_692 { id_691.options };
+                      ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_693 { id_692[id_690] };
+                      std::string id_694 { std::get<0>(id_693) };
+                      uint32_t id_695 { (uint32_t)id_694.size() };
+                      Size let_res_696;
                       {
-                        uint32_t wlen_262 { id_733 };
-                        Vec<1, uint32_t> id_735 {  wlen_262  };
-                        Size let_res_736;
+                        uint32_t wlen_261 { id_695 };
+                        Vec<1, uint32_t> id_697 {  wlen_261  };
+                        Size let_res_698;
                         {
-                          Vec<1, uint32_t> n_ref_263 { id_735 };
-                          uint32_t id_737 { 1U };
-                          Vec<1, uint32_t> id_738 {  id_737  };
-                          Size let_res_739;
+                          Vec<1, uint32_t> n_ref_262 { id_697 };
+                          uint32_t id_699 { 1U };
+                          Vec<1, uint32_t> id_700 {  id_699  };
+                          Size let_res_701;
                           {
-                            Vec<1, uint32_t> lebsz_ref_264 { id_738 };
-                            bool while_flag_740 { true };
+                            Vec<1, uint32_t> lebsz_ref_263 { id_700 };
+                            bool while_flag_702 { true };
                             do {
-                              uint8_t id_741 { 0 };
-                              uint32_t id_742 { n_ref_263[id_741] };
-                              uint8_t id_743 { 0 };
-                              uint32_t id_744 { lebsz_ref_264[id_743] };
-                              uint8_t id_745 { 7 };
-                              uint32_t id_746 { uint32_t(id_744 << id_745) };
-                              bool id_747 { bool(id_742 >= id_746) };
-                              while_flag_740 = id_747;
-                              if (while_flag_740) {
-                                uint8_t id_748 { 0 };
-                                uint8_t id_749 { 0 };
-                                uint32_t id_750 { lebsz_ref_264[id_749] };
-                                uint32_t id_751 { 1U };
-                                uint32_t id_752 { uint32_t(id_750 + id_751) };
-                                Void id_753 { ((void)(lebsz_ref_264[id_748] = id_752), ::dessser::Void()) };
-                                (void)id_753;
+                              uint8_t id_703 { 0 };
+                              uint32_t id_704 { n_ref_262[id_703] };
+                              uint8_t id_705 { 0 };
+                              uint32_t id_706 { lebsz_ref_263[id_705] };
+                              uint8_t id_707 { 7 };
+                              uint32_t id_708 { uint32_t(id_706 << id_707) };
+                              bool id_709 { bool(id_704 >= id_708) };
+                              while_flag_702 = id_709;
+                              if (while_flag_702) {
+                                uint8_t id_710 { 0 };
+                                uint8_t id_711 { 0 };
+                                uint32_t id_712 { lebsz_ref_263[id_711] };
+                                uint32_t id_713 { 1U };
+                                uint32_t id_714 { uint32_t(id_712 + id_713) };
+                                Void id_715 { ((void)(lebsz_ref_263[id_710] = id_714), ::dessser::Void()) };
+                                (void)id_715;
                               }
-                            } while (while_flag_740);
+                            } while (while_flag_702);
                             (void)::dessser::Void();
-                            uint8_t id_754 { 0 };
-                            uint32_t id_755 { lebsz_ref_264[id_754] };
-                            Size id_756 { Size(id_755) };
-                            let_res_739 = id_756;
+                            uint8_t id_716 { 0 };
+                            uint32_t id_717 { lebsz_ref_263[id_716] };
+                            Size id_718 { Size(id_717) };
+                            let_res_701 = id_718;
                           }
-                          let_res_736 = let_res_739;
+                          let_res_698 = let_res_701;
                         }
-                        Size id_757 { Size(wlen_262) };
-                        Size id_758 { Size(let_res_736 + id_757) };
-                        let_res_734 = id_758;
+                        Size id_719 { Size(wlen_261) };
+                        Size id_720 { Size(let_res_698 + id_719) };
+                        let_res_696 = id_720;
                       }
-                      Size id_759 { Size(sz_261 + let_res_734) };
-                      let_res_725 = id_759;
+                      Size id_721 { Size(sz_260 + let_res_696) };
+                      let_res_688 = id_721;
                     }
-                    Size let_res_760;
+                    Size let_res_722;
                     {
-                      Size sz_265 { let_res_725 };
-                      uint8_t id_761 { 0 };
-                      int32_t id_762 { repeat_n_260[id_761] };
-                      ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_763 { (*p_0).via };
-                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_764 { std::get<4 /* Kafka */>(id_763) };
-                      Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_765 { id_764.options };
-                      ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_766 { id_765[id_762] };
-                      std::string id_767 { std::get<1>(id_766) };
-                      uint32_t id_768 { (uint32_t)id_767.size() };
-                      Size let_res_769;
+                      Size sz_264 { let_res_688 };
+                      uint8_t id_723 { 0 };
+                      int32_t id_724 { repeat_n_259[id_723] };
+                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_725 { std::get<4 /* Kafka */>((*p_0)) };
+                      Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_726 { id_725.options };
+                      ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_727 { id_726[id_724] };
+                      std::string id_728 { std::get<1>(id_727) };
+                      uint32_t id_729 { (uint32_t)id_728.size() };
+                      Size let_res_730;
                       {
-                        uint32_t wlen_266 { id_768 };
-                        Vec<1, uint32_t> id_770 {  wlen_266  };
-                        Size let_res_771;
+                        uint32_t wlen_265 { id_729 };
+                        Vec<1, uint32_t> id_731 {  wlen_265  };
+                        Size let_res_732;
                         {
-                          Vec<1, uint32_t> n_ref_267 { id_770 };
-                          uint32_t id_772 { 1U };
-                          Vec<1, uint32_t> id_773 {  id_772  };
-                          Size let_res_774;
+                          Vec<1, uint32_t> n_ref_266 { id_731 };
+                          uint32_t id_733 { 1U };
+                          Vec<1, uint32_t> id_734 {  id_733  };
+                          Size let_res_735;
                           {
-                            Vec<1, uint32_t> lebsz_ref_268 { id_773 };
-                            bool while_flag_775 { true };
+                            Vec<1, uint32_t> lebsz_ref_267 { id_734 };
+                            bool while_flag_736 { true };
                             do {
-                              uint8_t id_776 { 0 };
-                              uint32_t id_777 { n_ref_267[id_776] };
-                              uint8_t id_778 { 0 };
-                              uint32_t id_779 { lebsz_ref_268[id_778] };
-                              uint8_t id_780 { 7 };
-                              uint32_t id_781 { uint32_t(id_779 << id_780) };
-                              bool id_782 { bool(id_777 >= id_781) };
-                              while_flag_775 = id_782;
-                              if (while_flag_775) {
-                                uint8_t id_783 { 0 };
-                                uint8_t id_784 { 0 };
-                                uint32_t id_785 { lebsz_ref_268[id_784] };
-                                uint32_t id_786 { 1U };
-                                uint32_t id_787 { uint32_t(id_785 + id_786) };
-                                Void id_788 { ((void)(lebsz_ref_268[id_783] = id_787), ::dessser::Void()) };
-                                (void)id_788;
+                              uint8_t id_737 { 0 };
+                              uint32_t id_738 { n_ref_266[id_737] };
+                              uint8_t id_739 { 0 };
+                              uint32_t id_740 { lebsz_ref_267[id_739] };
+                              uint8_t id_741 { 7 };
+                              uint32_t id_742 { uint32_t(id_740 << id_741) };
+                              bool id_743 { bool(id_738 >= id_742) };
+                              while_flag_736 = id_743;
+                              if (while_flag_736) {
+                                uint8_t id_744 { 0 };
+                                uint8_t id_745 { 0 };
+                                uint32_t id_746 { lebsz_ref_267[id_745] };
+                                uint32_t id_747 { 1U };
+                                uint32_t id_748 { uint32_t(id_746 + id_747) };
+                                Void id_749 { ((void)(lebsz_ref_267[id_744] = id_748), ::dessser::Void()) };
+                                (void)id_749;
                               }
-                            } while (while_flag_775);
+                            } while (while_flag_736);
                             (void)::dessser::Void();
-                            uint8_t id_789 { 0 };
-                            uint32_t id_790 { lebsz_ref_268[id_789] };
-                            Size id_791 { Size(id_790) };
-                            let_res_774 = id_791;
+                            uint8_t id_750 { 0 };
+                            uint32_t id_751 { lebsz_ref_267[id_750] };
+                            Size id_752 { Size(id_751) };
+                            let_res_735 = id_752;
                           }
-                          let_res_771 = let_res_774;
+                          let_res_732 = let_res_735;
                         }
-                        Size id_792 { Size(wlen_266) };
-                        Size id_793 { Size(let_res_771 + id_792) };
-                        let_res_769 = id_793;
+                        Size id_753 { Size(wlen_265) };
+                        Size id_754 { Size(let_res_732 + id_753) };
+                        let_res_730 = id_754;
                       }
-                      Size id_794 { Size(sz_265 + let_res_769) };
-                      let_res_760 = id_794;
+                      Size id_755 { Size(sz_264 + let_res_730) };
+                      let_res_722 = id_755;
                     }
-                    Void id_795 { ((void)(sz_ref_259[id_722] = let_res_760), ::dessser::Void()) };
-                    (void)id_795;
-                    uint8_t id_796 { 0 };
-                    uint8_t id_797 { 0 };
-                    int32_t id_798 { repeat_n_260[id_797] };
-                    int32_t id_799 { 1L };
-                    int32_t id_800 { int32_t(id_798 + id_799) };
-                    Void id_801 { ((void)(repeat_n_260[id_796] = id_800), ::dessser::Void()) };
-                    (void)id_801;
-                    (void)id_801;
+                    Void id_756 { ((void)(sz_ref_258[id_685] = let_res_722), ::dessser::Void()) };
+                    (void)id_756;
+                    uint8_t id_757 { 0 };
+                    uint8_t id_758 { 0 };
+                    int32_t id_759 { repeat_n_259[id_758] };
+                    int32_t id_760 { 1L };
+                    int32_t id_761 { int32_t(id_759 + id_760) };
+                    Void id_762 { ((void)(repeat_n_259[id_757] = id_761), ::dessser::Void()) };
+                    (void)id_762;
+                    (void)id_762;
                   }
-                } while (while_flag_713);
+                } while (while_flag_677);
                 (void)::dessser::Void();
               }
               (void)::dessser::Void();
-              uint8_t id_802 { 0 };
-              Size id_803 { sz_ref_259[id_802] };
-              let_res_710 = id_803;
+              uint8_t id_763 { 0 };
+              Size id_764 { sz_ref_258[id_763] };
+              let_res_674 = id_764;
             }
-            Size let_res_804;
+            Size let_res_765;
             {
-              Size sz_269 { let_res_710 };
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_805 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_806 { std::get<4 /* Kafka */>(id_805) };
-              std::string id_807 { id_806.topic };
-              uint32_t id_808 { (uint32_t)id_807.size() };
-              Vec<1, uint32_t> id_809 {  id_808  };
-              Size let_res_810;
+              Size sz_268 { let_res_674 };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_766 { std::get<4 /* Kafka */>((*p_0)) };
+              std::string id_767 { id_766.topic };
+              uint32_t id_768 { (uint32_t)id_767.size() };
+              Vec<1, uint32_t> id_769 {  id_768  };
+              Size let_res_770;
               {
-                Vec<1, uint32_t> n_ref_271 { id_809 };
-                uint32_t id_811 { 1U };
-                Vec<1, uint32_t> id_812 {  id_811  };
-                Size let_res_813;
+                Vec<1, uint32_t> n_ref_270 { id_769 };
+                uint32_t id_771 { 1U };
+                Vec<1, uint32_t> id_772 {  id_771  };
+                Size let_res_773;
                 {
-                  Vec<1, uint32_t> lebsz_ref_272 { id_812 };
-                  bool while_flag_814 { true };
+                  Vec<1, uint32_t> lebsz_ref_271 { id_772 };
+                  bool while_flag_774 { true };
                   do {
-                    uint8_t id_815 { 0 };
-                    uint32_t id_816 { n_ref_271[id_815] };
-                    uint8_t id_817 { 0 };
-                    uint32_t id_818 { lebsz_ref_272[id_817] };
-                    uint8_t id_819 { 7 };
-                    uint32_t id_820 { uint32_t(id_818 << id_819) };
-                    bool id_821 { bool(id_816 >= id_820) };
-                    while_flag_814 = id_821;
-                    if (while_flag_814) {
-                      uint8_t id_822 { 0 };
-                      uint8_t id_823 { 0 };
-                      uint32_t id_824 { lebsz_ref_272[id_823] };
-                      uint32_t id_825 { 1U };
-                      uint32_t id_826 { uint32_t(id_824 + id_825) };
-                      Void id_827 { ((void)(lebsz_ref_272[id_822] = id_826), ::dessser::Void()) };
-                      (void)id_827;
+                    uint8_t id_775 { 0 };
+                    uint32_t id_776 { n_ref_270[id_775] };
+                    uint8_t id_777 { 0 };
+                    uint32_t id_778 { lebsz_ref_271[id_777] };
+                    uint8_t id_779 { 7 };
+                    uint32_t id_780 { uint32_t(id_778 << id_779) };
+                    bool id_781 { bool(id_776 >= id_780) };
+                    while_flag_774 = id_781;
+                    if (while_flag_774) {
+                      uint8_t id_782 { 0 };
+                      uint8_t id_783 { 0 };
+                      uint32_t id_784 { lebsz_ref_271[id_783] };
+                      uint32_t id_785 { 1U };
+                      uint32_t id_786 { uint32_t(id_784 + id_785) };
+                      Void id_787 { ((void)(lebsz_ref_271[id_782] = id_786), ::dessser::Void()) };
+                      (void)id_787;
                     }
-                  } while (while_flag_814);
+                  } while (while_flag_774);
                   (void)::dessser::Void();
-                  uint8_t id_828 { 0 };
-                  uint32_t id_829 { lebsz_ref_272[id_828] };
-                  Size id_830 { Size(id_829) };
-                  let_res_813 = id_830;
+                  uint8_t id_788 { 0 };
+                  uint32_t id_789 { lebsz_ref_271[id_788] };
+                  Size id_790 { Size(id_789) };
+                  let_res_773 = id_790;
                 }
-                let_res_810 = let_res_813;
+                let_res_770 = let_res_773;
               }
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_831 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_832 { std::get<4 /* Kafka */>(id_831) };
-              std::string id_833 { id_832.topic };
-              uint32_t id_834 { (uint32_t)id_833.size() };
-              Size id_835 { Size(id_834) };
-              Size id_836 { Size(let_res_810 + id_835) };
-              Size id_837 { Size(sz_269 + id_836) };
-              let_res_804 = id_837;
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_791 { std::get<4 /* Kafka */>((*p_0)) };
+              std::string id_792 { id_791.topic };
+              uint32_t id_793 { (uint32_t)id_792.size() };
+              Size id_794 { Size(id_793) };
+              Size id_795 { Size(let_res_770 + id_794) };
+              Size id_796 { Size(sz_268 + id_795) };
+              let_res_765 = id_796;
             }
-            Size id_838 { 2UL };
-            Size id_839 { Size(let_res_804 + id_838) };
-            Size let_res_840;
+            Size id_797 { 2UL };
+            Size id_798 { Size(let_res_765 + id_797) };
+            Size let_res_799;
             {
-              Size sz_274 { id_839 };
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_841 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_842 { std::get<4 /* Kafka */>(id_841) };
-              std::string id_843 { id_842.text };
-              uint32_t id_844 { (uint32_t)id_843.size() };
-              Vec<1, uint32_t> id_845 {  id_844  };
-              Size let_res_846;
+              Size sz_273 { id_798 };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_800 { std::get<4 /* Kafka */>((*p_0)) };
+              std::string id_801 { id_800.text };
+              uint32_t id_802 { (uint32_t)id_801.size() };
+              Vec<1, uint32_t> id_803 {  id_802  };
+              Size let_res_804;
               {
-                Vec<1, uint32_t> n_ref_276 { id_845 };
-                uint32_t id_847 { 1U };
-                Vec<1, uint32_t> id_848 {  id_847  };
-                Size let_res_849;
+                Vec<1, uint32_t> n_ref_275 { id_803 };
+                uint32_t id_805 { 1U };
+                Vec<1, uint32_t> id_806 {  id_805  };
+                Size let_res_807;
                 {
-                  Vec<1, uint32_t> lebsz_ref_277 { id_848 };
-                  bool while_flag_850 { true };
+                  Vec<1, uint32_t> lebsz_ref_276 { id_806 };
+                  bool while_flag_808 { true };
                   do {
-                    uint8_t id_851 { 0 };
-                    uint32_t id_852 { n_ref_276[id_851] };
-                    uint8_t id_853 { 0 };
-                    uint32_t id_854 { lebsz_ref_277[id_853] };
-                    uint8_t id_855 { 7 };
-                    uint32_t id_856 { uint32_t(id_854 << id_855) };
-                    bool id_857 { bool(id_852 >= id_856) };
-                    while_flag_850 = id_857;
-                    if (while_flag_850) {
-                      uint8_t id_858 { 0 };
-                      uint8_t id_859 { 0 };
-                      uint32_t id_860 { lebsz_ref_277[id_859] };
-                      uint32_t id_861 { 1U };
-                      uint32_t id_862 { uint32_t(id_860 + id_861) };
-                      Void id_863 { ((void)(lebsz_ref_277[id_858] = id_862), ::dessser::Void()) };
-                      (void)id_863;
+                    uint8_t id_809 { 0 };
+                    uint32_t id_810 { n_ref_275[id_809] };
+                    uint8_t id_811 { 0 };
+                    uint32_t id_812 { lebsz_ref_276[id_811] };
+                    uint8_t id_813 { 7 };
+                    uint32_t id_814 { uint32_t(id_812 << id_813) };
+                    bool id_815 { bool(id_810 >= id_814) };
+                    while_flag_808 = id_815;
+                    if (while_flag_808) {
+                      uint8_t id_816 { 0 };
+                      uint8_t id_817 { 0 };
+                      uint32_t id_818 { lebsz_ref_276[id_817] };
+                      uint32_t id_819 { 1U };
+                      uint32_t id_820 { uint32_t(id_818 + id_819) };
+                      Void id_821 { ((void)(lebsz_ref_276[id_816] = id_820), ::dessser::Void()) };
+                      (void)id_821;
                     }
-                  } while (while_flag_850);
+                  } while (while_flag_808);
                   (void)::dessser::Void();
-                  uint8_t id_864 { 0 };
-                  uint32_t id_865 { lebsz_ref_277[id_864] };
-                  Size id_866 { Size(id_865) };
-                  let_res_849 = id_866;
+                  uint8_t id_822 { 0 };
+                  uint32_t id_823 { lebsz_ref_276[id_822] };
+                  Size id_824 { Size(id_823) };
+                  let_res_807 = id_824;
                 }
-                let_res_846 = let_res_849;
+                let_res_804 = let_res_807;
               }
-              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_867 { (*p_0).via };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_868 { std::get<4 /* Kafka */>(id_867) };
-              std::string id_869 { id_868.text };
-              uint32_t id_870 { (uint32_t)id_869.size() };
-              Size id_871 { Size(id_870) };
-              Size id_872 { Size(let_res_846 + id_871) };
-              Size id_873 { Size(sz_274 + id_872) };
-              let_res_840 = id_873;
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_825 { std::get<4 /* Kafka */>((*p_0)) };
+              std::string id_826 { id_825.text };
+              uint32_t id_827 { (uint32_t)id_826.size() };
+              Size id_828 { Size(id_827) };
+              Size id_829 { Size(let_res_804 + id_828) };
+              Size id_830 { Size(sz_273 + id_829) };
+              let_res_799 = id_830;
             }
-            choose_res_573 = let_res_840;
+            choose_res_545 = let_res_799;
           }
-          choose_res_536 = choose_res_573;
+          choose_res_511 = choose_res_545;
         }
-        choose_res_499 = choose_res_536;
+        choose_res_477 = choose_res_511;
       }
-      choose_res_493 = choose_res_499;
+      choose_res_472 = choose_res_477;
     }
-    Size id_874 { 8UL };
-    Size id_875 { Size(choose_res_493 + id_874) };
-    return id_875;
+    return choose_res_472;
   }
    };
-  return fun488;
+  return fun468;
+}
+std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> via_sersize_of_row_binary(via_sersize_of_row_binary_init());
+
+/* 
+    (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}")
+      (add (apply (identifier "via-sersize-of-row-binary") (get-field "via" (param 0))) (size 8)))
+ */
+static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary_init()
+{
+  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> fun831 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0) {
+    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_832 { (*p_0).via };
+    Size id_833 { via_sersize_of_row_binary(id_832) };
+    Size id_834 { 8UL };
+    Size id_835 { Size(id_833 + id_834) };
+    return id_835;
+  }
+   };
+  return fun831;
 }
 std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
-      (let "drec_242"
-        (let "dsum1_63" (let-pair "du16_fst_58" "du16_snd_59" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_58") (identifier "du16_snd_59")))
-          (let-pair "dsum1_fst_64" "dsum1_snd_65" (identifier "dsum1_63")
-            (if (eq (u16 0) (identifier "dsum1_fst_64"))
-              (make-tup
-                (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 0 (nop))
-                (identifier "dsum1_snd_65"))
-              (if (eq (u16 1) (identifier "dsum1_fst_64"))
-                (let "dstring1_230"
-                  (let "leb_ref_224" (make-vec (u32 0))
-                    (let "shft_ref_225" (make-vec (u8 0))
-                      (let "p_ref_226" (make-vec (identifier "dsum1_snd_65"))
+      (let "dsum1_63" (let-pair "du16_fst_58" "du16_snd_59" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_58") (identifier "du16_snd_59")))
+        (let-pair "dsum1_fst_64" "dsum1_snd_65" (identifier "dsum1_63")
+          (if (eq (u16 0) (identifier "dsum1_fst_64"))
+            (make-tup (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 0 (nop))
+              (identifier "dsum1_snd_65"))
+            (if (eq (u16 1) (identifier "dsum1_fst_64"))
+              (let "dstring1_230"
+                (let "leb_ref_224" (make-vec (u32 0))
+                  (let "shft_ref_225" (make-vec (u8 0))
+                    (let "p_ref_226" (make-vec (identifier "dsum1_snd_65"))
+                      (seq
+                        (while
+                          (let "leb128_227" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_226")))
+                            (let-pair "leb128_fst_228" "leb128_snd_229" 
+                              (identifier "leb128_227")
+                              (seq (set-vec (u8 0) (identifier "p_ref_226") (identifier "leb128_snd_229"))
+                                (set-vec (u8 0) (identifier "leb_ref_224")
+                                  (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_228") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_225"))) (unsafe-nth (u8 0) (identifier "leb_ref_224"))))
+                                (set-vec (u8 0) (identifier "shft_ref_225") (add (unsafe-nth (u8 0) (identifier "shft_ref_225")) (u8 7))) 
+                                (ge (identifier "leb128_fst_228") (u8 128))))) 
+                          (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_224"))) (unsafe-nth (u8 0) (identifier "p_ref_226")))))))
+                (let-pair "dstring1_fst_231" "dstring1_snd_232" (identifier "dstring1_230")
+                  (let-pair "dstring2_fst_234" "dstring2_snd_235" (read-bytes (identifier "dstring1_snd_232") (identifier "dstring1_fst_231"))
+                    (make-tup
+                      (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 1
+                        (string-of-bytes (identifier "dstring2_fst_234"))) 
+                      (identifier "dstring2_snd_235")))))
+              (if (eq (u16 2) (identifier "dsum1_fst_64"))
+                (let "dstring1_215"
+                  (let "leb_ref_209" (make-vec (u32 0))
+                    (let "shft_ref_210" (make-vec (u8 0))
+                      (let "p_ref_211" (make-vec (identifier "dsum1_snd_65"))
                         (seq
                           (while
-                            (let "leb128_227" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_226")))
-                              (let-pair "leb128_fst_228" "leb128_snd_229" 
-                                (identifier "leb128_227")
-                                (seq (set-vec (u8 0) (identifier "p_ref_226") (identifier "leb128_snd_229"))
-                                  (set-vec (u8 0) (identifier "leb_ref_224")
-                                    (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_228") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_225"))) (unsafe-nth (u8 0) (identifier "leb_ref_224"))))
-                                  (set-vec (u8 0) (identifier "shft_ref_225") (add (unsafe-nth (u8 0) (identifier "shft_ref_225")) (u8 7))) 
-                                  (ge (identifier "leb128_fst_228") (u8 128))))) 
-                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_224"))) (unsafe-nth (u8 0) (identifier "p_ref_226")))))))
-                  (let-pair "dstring1_fst_231" "dstring1_snd_232" (identifier "dstring1_230")
-                    (let-pair "dstring2_fst_234" "dstring2_snd_235" (read-bytes (identifier "dstring1_snd_232") (identifier "dstring1_fst_231"))
+                            (let "leb128_212" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_211")))
+                              (let-pair "leb128_fst_213" "leb128_snd_214" 
+                                (identifier "leb128_212")
+                                (seq (set-vec (u8 0) (identifier "p_ref_211") (identifier "leb128_snd_214"))
+                                  (set-vec (u8 0) (identifier "leb_ref_209")
+                                    (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_213") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_210"))) (unsafe-nth (u8 0) (identifier "leb_ref_209"))))
+                                  (set-vec (u8 0) (identifier "shft_ref_210") (add (unsafe-nth (u8 0) (identifier "shft_ref_210")) (u8 7))) 
+                                  (ge (identifier "leb128_fst_213") (u8 128))))) 
+                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_209"))) (unsafe-nth (u8 0) (identifier "p_ref_211")))))))
+                  (let-pair "dstring1_fst_216" "dstring1_snd_217" (identifier "dstring1_215")
+                    (let-pair "dstring2_fst_219" "dstring2_snd_220" (read-bytes (identifier "dstring1_snd_217") (identifier "dstring1_fst_216"))
                       (make-tup
-                        (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 1
-                          (string-of-bytes (identifier "dstring2_fst_234"))) 
-                        (identifier "dstring2_snd_235")))))
-                (if (eq (u16 2) (identifier "dsum1_fst_64"))
-                  (let "dstring1_215"
-                    (let "leb_ref_209" (make-vec (u32 0))
-                      (let "shft_ref_210" (make-vec (u8 0))
-                        (let "p_ref_211" (make-vec (identifier "dsum1_snd_65"))
-                          (seq
-                            (while
-                              (let "leb128_212" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_211")))
-                                (let-pair "leb128_fst_213" "leb128_snd_214" 
-                                  (identifier "leb128_212")
-                                  (seq (set-vec (u8 0) (identifier "p_ref_211") (identifier "leb128_snd_214"))
-                                    (set-vec (u8 0) (identifier "leb_ref_209")
-                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_213") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_210"))) (unsafe-nth (u8 0) (identifier "leb_ref_209"))))
-                                    (set-vec (u8 0) (identifier "shft_ref_210") (add (unsafe-nth (u8 0) (identifier "shft_ref_210")) (u8 7))) 
-                                    (ge (identifier "leb128_fst_213") (u8 128))))) 
-                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_209"))) (unsafe-nth (u8 0) (identifier "p_ref_211")))))))
-                    (let-pair "dstring1_fst_216" "dstring1_snd_217" (identifier "dstring1_215")
-                      (let-pair "dstring2_fst_219" "dstring2_snd_220" 
-                        (read-bytes (identifier "dstring1_snd_217") (identifier "dstring1_fst_216"))
-                        (make-tup
-                          (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 2
-                            (string-of-bytes (identifier "dstring2_fst_219"))) 
-                          (identifier "dstring2_snd_220")))))
-                  (if (eq (u16 3) (identifier "dsum1_fst_64"))
-                    (let "drec_173"
-                      (let "dstring1_167"
-                        (let "leb_ref_161" (make-vec (u32 0))
-                          (let "shft_ref_162" (make-vec (u8 0))
-                            (let "p_ref_163" (make-vec (identifier "dsum1_snd_65"))
-                              (seq
-                                (while
-                                  (let "leb128_164" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_163")))
-                                    (let-pair "leb128_fst_165" "leb128_snd_166" 
-                                      (identifier "leb128_164")
-                                      (seq (set-vec (u8 0) (identifier "p_ref_163") (identifier "leb128_snd_166"))
-                                        (set-vec (u8 0) (identifier "leb_ref_161")
-                                          (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_165") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_162"))) (unsafe-nth (u8 0) (identifier "leb_ref_161"))))
-                                        (set-vec (u8 0) (identifier "shft_ref_162") (add (unsafe-nth (u8 0) (identifier "shft_ref_162")) (u8 7))) 
-                                        (ge (identifier "leb128_fst_165") (u8 128))))) 
-                                  (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_161"))) (unsafe-nth (u8 0) (identifier "p_ref_163")))))))
-                        (let-pair "dstring1_fst_168" "dstring1_snd_169" 
-                          (identifier "dstring1_167")
-                          (let-pair "dstring2_fst_171" "dstring2_snd_172" 
-                            (read-bytes (identifier "dstring1_snd_169") (identifier "dstring1_fst_168")) 
-                            (make-tup (string-of-bytes (identifier "dstring2_fst_171")) (identifier "dstring2_snd_172")))))
-                      (let-pair "drec_fst_174" "drec_snd_175" (identifier "drec_173")
-                        (let "drec_188"
-                          (let "dstring1_182"
-                            (let "leb_ref_176" (make-vec (u32 0))
-                              (let "shft_ref_177" (make-vec (u8 0))
-                                (let "p_ref_178" (make-vec (identifier "drec_snd_175"))
-                                  (seq
-                                    (while
-                                      (let "leb128_179" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_178")))
-                                        (let-pair "leb128_fst_180" "leb128_snd_181" 
-                                          (identifier "leb128_179")
-                                          (seq (set-vec (u8 0) (identifier "p_ref_178") (identifier "leb128_snd_181"))
-                                            (set-vec (u8 0) (identifier "leb_ref_176")
-                                              (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_180") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_177"))) (unsafe-nth (u8 0) (identifier "leb_ref_176"))))
-                                            (set-vec (u8 0) (identifier "shft_ref_177") (add (unsafe-nth (u8 0) (identifier "shft_ref_177")) (u8 7))) 
-                                            (ge (identifier "leb128_fst_180") (u8 128))))) 
-                                      (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_176"))) (unsafe-nth (u8 0) (identifier "p_ref_178")))))))
-                            (let-pair "dstring1_fst_183" "dstring1_snd_184" 
-                              (identifier "dstring1_182")
-                              (let-pair "dstring2_fst_186" "dstring2_snd_187" 
-                                (read-bytes (identifier "dstring1_snd_184") (identifier "dstring1_fst_183")) 
-                                (make-tup (string-of-bytes (identifier "dstring2_fst_186")) (identifier "dstring2_snd_187")))))
-                          (let-pair "drec_fst_189" "drec_snd_190" (identifier "drec_188")
-                            (let "dstring1_197"
-                              (let "leb_ref_191" (make-vec (u32 0))
-                                (let "shft_ref_192" (make-vec (u8 0))
-                                  (let "p_ref_193" (make-vec (identifier "drec_snd_190"))
-                                    (seq
-                                      (while
-                                        (let "leb128_194" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_193")))
-                                          (let-pair "leb128_fst_195" "leb128_snd_196" 
-                                            (identifier "leb128_194")
-                                            (seq (set-vec (u8 0) (identifier "p_ref_193") (identifier "leb128_snd_196"))
-                                              (set-vec (u8 0) (identifier "leb_ref_191")
-                                                (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_195") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_192"))) (unsafe-nth (u8 0) (identifier "leb_ref_191"))))
-                                              (set-vec (u8 0) (identifier "shft_ref_192") (add (unsafe-nth (u8 0) (identifier "shft_ref_192")) (u8 7))) 
-                                              (ge (identifier "leb128_fst_195") (u8 128))))) 
-                                        (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_191"))) (unsafe-nth (u8 0) (identifier "p_ref_193")))))))
-                              (let-pair "dstring1_fst_198" "dstring1_snd_199" 
-                                (identifier "dstring1_197")
-                                (let-pair "dstring2_fst_201" "dstring2_snd_202" 
-                                  (read-bytes (identifier "dstring1_snd_199") (identifier "dstring1_fst_198"))
-                                  (make-tup
-                                    (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 3
-                                      (make-rec (string "create") (string-of-bytes (identifier "dstring2_fst_201")) (string "insert") (identifier "drec_fst_189") (string "file") (identifier "drec_fst_174")))
-                                    (identifier "dstring2_snd_202")))))))))
-                    (seq (assert (eq (identifier "dsum1_fst_64") (u16 4)))
-                      (let "drec_119"
-                        (let-pair "dlist4_fst_117" "dlist4_snd_118"
-                          (let "dlist1_75"
-                            (let "leb_ref_66" (make-vec (u32 0))
-                              (let "shft_ref_67" (make-vec (u8 0))
-                                (let "p_ref_68" (make-vec (identifier "dsum1_snd_65"))
-                                  (seq
-                                    (while
-                                      (let "leb128_69" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_68")))
-                                        (let-pair "leb128_fst_70" "leb128_snd_71" 
-                                          (identifier "leb128_69")
-                                          (seq (set-vec (u8 0) (identifier "p_ref_68") (identifier "leb128_snd_71"))
-                                            (set-vec (u8 0) (identifier "leb_ref_66")
-                                              (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_70") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_67"))) (unsafe-nth (u8 0) (identifier "leb_ref_66"))))
-                                            (set-vec (u8 0) (identifier "shft_ref_67") (add (unsafe-nth (u8 0) (identifier "shft_ref_67")) (u8 7))) 
-                                            (ge (identifier "leb128_fst_70") (u8 128))))) 
-                                      (nop)) (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_66")) (unsafe-nth (u8 0) (identifier "p_ref_68")))))))
-                            (let-pair "dlist1_fst_76" "dlist1_snd_77" 
-                              (identifier "dlist1_75")
-                              (let "inits_src_ref_78" (make-vec (make-tup (end-of-list "(STRING; STRING)") (identifier "dlist1_snd_77")))
+                        (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 2
+                          (string-of-bytes (identifier "dstring2_fst_219"))) 
+                        (identifier "dstring2_snd_220")))))
+                (if (eq (u16 3) (identifier "dsum1_fst_64"))
+                  (let "drec_173"
+                    (let "dstring1_167"
+                      (let "leb_ref_161" (make-vec (u32 0))
+                        (let "shft_ref_162" (make-vec (u8 0))
+                          (let "p_ref_163" (make-vec (identifier "dsum1_snd_65"))
+                            (seq
+                              (while
+                                (let "leb128_164" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_163")))
+                                  (let-pair "leb128_fst_165" "leb128_snd_166" 
+                                    (identifier "leb128_164")
+                                    (seq (set-vec (u8 0) (identifier "p_ref_163") (identifier "leb128_snd_166"))
+                                      (set-vec (u8 0) (identifier "leb_ref_161")
+                                        (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_165") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_162"))) (unsafe-nth (u8 0) (identifier "leb_ref_161"))))
+                                      (set-vec (u8 0) (identifier "shft_ref_162") (add (unsafe-nth (u8 0) (identifier "shft_ref_162")) (u8 7))) 
+                                      (ge (identifier "leb128_fst_165") (u8 128))))) 
+                                (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_161"))) (unsafe-nth (u8 0) (identifier "p_ref_163")))))))
+                      (let-pair "dstring1_fst_168" "dstring1_snd_169" 
+                        (identifier "dstring1_167")
+                        (let-pair "dstring2_fst_171" "dstring2_snd_172" 
+                          (read-bytes (identifier "dstring1_snd_169") (identifier "dstring1_fst_168")) 
+                          (make-tup (string-of-bytes (identifier "dstring2_fst_171")) (identifier "dstring2_snd_172")))))
+                    (let-pair "drec_fst_174" "drec_snd_175" (identifier "drec_173")
+                      (let "drec_188"
+                        (let "dstring1_182"
+                          (let "leb_ref_176" (make-vec (u32 0))
+                            (let "shft_ref_177" (make-vec (u8 0))
+                              (let "p_ref_178" (make-vec (identifier "drec_snd_175"))
                                 (seq
-                                  (let "repeat_n_79" (make-vec (i32 0))
-                                    (while (gt (to-i32 (identifier "dlist1_fst_76")) (unsafe-nth (u8 0) (identifier "repeat_n_79")))
-                                      (seq
-                                        (let "dlist2_80" (unsafe-nth (u8 0) (identifier "inits_src_ref_78"))
-                                          (let-pair "dlist2_fst_81" "dlist2_snd_82" 
-                                            (identifier "dlist2_80")
-                                            (set-vec (u8 0) (identifier "inits_src_ref_78")
-                                              (let "dtup_95"
-                                                (let "dstring1_89"
-                                                  (let "leb_ref_83" (make-vec (u32 0))
-                                                    (let "shft_ref_84" 
-                                                      (make-vec (u8 0))
-                                                      (let "p_ref_85" 
-                                                        (make-vec (identifier "dlist2_snd_82"))
-                                                        (seq
-                                                          (while
-                                                            (let "leb128_86" 
-                                                              (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_85")))
-                                                              (let-pair "leb128_fst_87" "leb128_snd_88" 
-                                                                (identifier "leb128_86")
-                                                                (seq 
-                                                                  (set-vec (u8 0) (identifier "p_ref_85") (identifier "leb128_snd_88"))
-                                                                  (set-vec 
-                                                                    (u8 0) 
-                                                                    (identifier "leb_ref_83")
-                                                                    (bit-or 
+                                  (while
+                                    (let "leb128_179" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_178")))
+                                      (let-pair "leb128_fst_180" "leb128_snd_181" 
+                                        (identifier "leb128_179")
+                                        (seq (set-vec (u8 0) (identifier "p_ref_178") (identifier "leb128_snd_181"))
+                                          (set-vec (u8 0) (identifier "leb_ref_176")
+                                            (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_180") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_177"))) (unsafe-nth (u8 0) (identifier "leb_ref_176"))))
+                                          (set-vec (u8 0) (identifier "shft_ref_177") (add (unsafe-nth (u8 0) (identifier "shft_ref_177")) (u8 7))) 
+                                          (ge (identifier "leb128_fst_180") (u8 128))))) 
+                                    (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_176"))) (unsafe-nth (u8 0) (identifier "p_ref_178")))))))
+                          (let-pair "dstring1_fst_183" "dstring1_snd_184" 
+                            (identifier "dstring1_182")
+                            (let-pair "dstring2_fst_186" "dstring2_snd_187" 
+                              (read-bytes (identifier "dstring1_snd_184") (identifier "dstring1_fst_183")) 
+                              (make-tup (string-of-bytes (identifier "dstring2_fst_186")) (identifier "dstring2_snd_187")))))
+                        (let-pair "drec_fst_189" "drec_snd_190" (identifier "drec_188")
+                          (let "dstring1_197"
+                            (let "leb_ref_191" (make-vec (u32 0))
+                              (let "shft_ref_192" (make-vec (u8 0))
+                                (let "p_ref_193" (make-vec (identifier "drec_snd_190"))
+                                  (seq
+                                    (while
+                                      (let "leb128_194" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_193")))
+                                        (let-pair "leb128_fst_195" "leb128_snd_196" 
+                                          (identifier "leb128_194")
+                                          (seq (set-vec (u8 0) (identifier "p_ref_193") (identifier "leb128_snd_196"))
+                                            (set-vec (u8 0) (identifier "leb_ref_191")
+                                              (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_195") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_192"))) (unsafe-nth (u8 0) (identifier "leb_ref_191"))))
+                                            (set-vec (u8 0) (identifier "shft_ref_192") (add (unsafe-nth (u8 0) (identifier "shft_ref_192")) (u8 7))) 
+                                            (ge (identifier "leb128_fst_195") (u8 128))))) 
+                                      (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_191"))) (unsafe-nth (u8 0) (identifier "p_ref_193")))))))
+                            (let-pair "dstring1_fst_198" "dstring1_snd_199" 
+                              (identifier "dstring1_197")
+                              (let-pair "dstring2_fst_201" "dstring2_snd_202" 
+                                (read-bytes (identifier "dstring1_snd_199") (identifier "dstring1_fst_198"))
+                                (make-tup
+                                  (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 3
+                                    (make-rec (string "create") (string-of-bytes (identifier "dstring2_fst_201")) (string "insert") (identifier "drec_fst_189") (string "file") (identifier "drec_fst_174")))
+                                  (identifier "dstring2_snd_202")))))))))
+                  (seq (assert (eq (identifier "dsum1_fst_64") (u16 4)))
+                    (let "drec_119"
+                      (let-pair "dlist4_fst_117" "dlist4_snd_118"
+                        (let "dlist1_75"
+                          (let "leb_ref_66" (make-vec (u32 0))
+                            (let "shft_ref_67" (make-vec (u8 0))
+                              (let "p_ref_68" (make-vec (identifier "dsum1_snd_65"))
+                                (seq
+                                  (while
+                                    (let "leb128_69" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_68")))
+                                      (let-pair "leb128_fst_70" "leb128_snd_71" 
+                                        (identifier "leb128_69")
+                                        (seq (set-vec (u8 0) (identifier "p_ref_68") (identifier "leb128_snd_71"))
+                                          (set-vec (u8 0) (identifier "leb_ref_66")
+                                            (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_70") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_67"))) (unsafe-nth (u8 0) (identifier "leb_ref_66"))))
+                                          (set-vec (u8 0) (identifier "shft_ref_67") (add (unsafe-nth (u8 0) (identifier "shft_ref_67")) (u8 7))) 
+                                          (ge (identifier "leb128_fst_70") (u8 128))))) 
+                                    (nop)) (make-tup (unsafe-nth (u8 0) (identifier "leb_ref_66")) (unsafe-nth (u8 0) (identifier "p_ref_68")))))))
+                          (let-pair "dlist1_fst_76" "dlist1_snd_77" (identifier "dlist1_75")
+                            (let "inits_src_ref_78" (make-vec (make-tup (end-of-list "(STRING; STRING)") (identifier "dlist1_snd_77")))
+                              (seq
+                                (let "repeat_n_79" (make-vec (i32 0))
+                                  (while (gt (to-i32 (identifier "dlist1_fst_76")) (unsafe-nth (u8 0) (identifier "repeat_n_79")))
+                                    (seq
+                                      (let "dlist2_80" (unsafe-nth (u8 0) (identifier "inits_src_ref_78"))
+                                        (let-pair "dlist2_fst_81" "dlist2_snd_82" 
+                                          (identifier "dlist2_80")
+                                          (set-vec (u8 0) (identifier "inits_src_ref_78")
+                                            (let "dtup_95"
+                                              (let "dstring1_89"
+                                                (let "leb_ref_83" (make-vec (u32 0))
+                                                  (let "shft_ref_84" 
+                                                    (make-vec (u8 0))
+                                                    (let "p_ref_85" (make-vec (identifier "dlist2_snd_82"))
+                                                      (seq
+                                                        (while
+                                                          (let "leb128_86" 
+                                                            (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_85")))
+                                                            (let-pair "leb128_fst_87" "leb128_snd_88" 
+                                                              (identifier "leb128_86")
+                                                              (seq (set-vec (u8 0) (identifier "p_ref_85") (identifier "leb128_snd_88"))
+                                                                (set-vec 
+                                                                  (u8 0) 
+                                                                  (identifier "leb_ref_83")
+                                                                  (bit-or 
                                                                     (left-shift (to-u32 (bit-and (identifier "leb128_fst_87") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_84")))
                                                                     (unsafe-nth (u8 0) (identifier "leb_ref_83")))) 
-                                                                  (set-vec (u8 0) (identifier "shft_ref_84") (add (unsafe-nth (u8 0) (identifier "shft_ref_84")) (u8 7))) 
-                                                                  (ge (identifier "leb128_fst_87") (u8 128))))) 
-                                                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_83"))) (unsafe-nth (u8 0) (identifier "p_ref_85")))))))
-                                                  (let-pair "dstring1_fst_90" "dstring1_snd_91" 
-                                                    (identifier "dstring1_89")
-                                                    (let-pair "dstring2_fst_93" "dstring2_snd_94" 
-                                                      (read-bytes (identifier "dstring1_snd_91") (identifier "dstring1_fst_90")) 
-                                                      (make-tup (string-of-bytes (identifier "dstring2_fst_93")) (identifier "dstring2_snd_94")))))
-                                                (let-pair "dtup_fst_96" "dtup_snd_97" 
-                                                  (identifier "dtup_95")
-                                                  (let "dstring1_104"
-                                                    (let "leb_ref_98" 
-                                                      (make-vec (u32 0))
-                                                      (let "shft_ref_99" 
-                                                        (make-vec (u8 0))
-                                                        (let "p_ref_100" 
-                                                          (make-vec (identifier "dtup_snd_97"))
-                                                          (seq
-                                                            (while
-                                                              (let "leb128_101" 
-                                                                (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_100")))
-                                                                (let-pair "leb128_fst_102" "leb128_snd_103" 
-                                                                  (identifier "leb128_101")
-                                                                  (seq 
-                                                                    (set-vec (u8 0) (identifier "p_ref_100") (identifier "leb128_snd_103"))
-                                                                    (set-vec 
+                                                                (set-vec (u8 0) (identifier "shft_ref_84") (add (unsafe-nth (u8 0) (identifier "shft_ref_84")) (u8 7))) 
+                                                                (ge (identifier "leb128_fst_87") (u8 128))))) 
+                                                          (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_83"))) (unsafe-nth (u8 0) (identifier "p_ref_85")))))))
+                                                (let-pair "dstring1_fst_90" "dstring1_snd_91" 
+                                                  (identifier "dstring1_89")
+                                                  (let-pair "dstring2_fst_93" "dstring2_snd_94" 
+                                                    (read-bytes (identifier "dstring1_snd_91") (identifier "dstring1_fst_90")) 
+                                                    (make-tup (string-of-bytes (identifier "dstring2_fst_93")) (identifier "dstring2_snd_94")))))
+                                              (let-pair "dtup_fst_96" "dtup_snd_97" 
+                                                (identifier "dtup_95")
+                                                (let "dstring1_104"
+                                                  (let "leb_ref_98" (make-vec (u32 0))
+                                                    (let "shft_ref_99" 
+                                                      (make-vec (u8 0))
+                                                      (let "p_ref_100" 
+                                                        (make-vec (identifier "dtup_snd_97"))
+                                                        (seq
+                                                          (while
+                                                            (let "leb128_101" 
+                                                              (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_100")))
+                                                              (let-pair "leb128_fst_102" "leb128_snd_103" 
+                                                                (identifier "leb128_101")
+                                                                (seq 
+                                                                  (set-vec (u8 0) (identifier "p_ref_100") (identifier "leb128_snd_103"))
+                                                                  (set-vec 
                                                                     (u8 0) 
                                                                     (identifier "leb_ref_98")
                                                                     (bit-or 
                                                                     (left-shift (to-u32 (bit-and (identifier "leb128_fst_102") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_99")))
                                                                     (unsafe-nth (u8 0) (identifier "leb_ref_98")))) 
-                                                                    (set-vec (u8 0) (identifier "shft_ref_99") (add (unsafe-nth (u8 0) (identifier "shft_ref_99")) (u8 7))) 
-                                                                    (ge (identifier "leb128_fst_102") (u8 128))))) 
-                                                              (nop)) 
-                                                            (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_98"))) (unsafe-nth (u8 0) (identifier "p_ref_100")))))))
-                                                    (let-pair "dstring1_fst_105" "dstring1_snd_106" 
-                                                      (identifier "dstring1_104")
-                                                      (let-pair "dstring2_fst_108" "dstring2_snd_109" 
-                                                        (read-bytes (identifier "dstring1_snd_106") (identifier "dstring1_fst_105"))
-                                                        (make-tup (cons (make-tup (identifier "dtup_fst_96") (string-of-bytes (identifier "dstring2_fst_108"))) (identifier "dlist2_fst_81")) (identifier "dstring2_snd_109"))))))))))
-                                        (set-vec (u8 0) (identifier "repeat_n_79") (add (unsafe-nth (u8 0) (identifier "repeat_n_79")) (i32 1)))))) 
-                                  (unsafe-nth (u8 0) (identifier "inits_src_ref_78")))))) 
-                          (make-tup (identity (identifier "dlist4_fst_117")) (identifier "dlist4_snd_118")))
-                        (let-pair "drec_fst_120" "drec_snd_121" (identifier "drec_119")
-                          (let "drec_134"
-                            (let "dstring1_128"
-                              (let "leb_ref_122" (make-vec (u32 0))
-                                (let "shft_ref_123" (make-vec (u8 0))
-                                  (let "p_ref_124" (make-vec (identifier "drec_snd_121"))
-                                    (seq
-                                      (while
-                                        (let "leb128_125" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_124")))
-                                          (let-pair "leb128_fst_126" "leb128_snd_127" 
-                                            (identifier "leb128_125")
-                                            (seq (set-vec (u8 0) (identifier "p_ref_124") (identifier "leb128_snd_127"))
-                                              (set-vec (u8 0) (identifier "leb_ref_122")
-                                                (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_126") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_123"))) (unsafe-nth (u8 0) (identifier "leb_ref_122"))))
-                                              (set-vec (u8 0) (identifier "shft_ref_123") (add (unsafe-nth (u8 0) (identifier "shft_ref_123")) (u8 7))) 
-                                              (ge (identifier "leb128_fst_126") (u8 128))))) 
-                                        (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_122"))) (unsafe-nth (u8 0) (identifier "p_ref_124")))))))
-                              (let-pair "dstring1_fst_129" "dstring1_snd_130" 
-                                (identifier "dstring1_128")
-                                (let-pair "dstring2_fst_132" "dstring2_snd_133" 
-                                  (read-bytes (identifier "dstring1_snd_130") (identifier "dstring1_fst_129")) 
-                                  (make-tup (string-of-bytes (identifier "dstring2_fst_132")) (identifier "dstring2_snd_133")))))
-                            (let-pair "drec_fst_135" "drec_snd_136" (identifier "drec_134")
-                              (let "drec_140" (let-pair "du16_fst_138" "du16_snd_139" (read-u16 little-endian (identifier "drec_snd_136")) (make-tup (identifier "du16_fst_138") (identifier "du16_snd_139")))
-                                (let-pair "drec_fst_141" "drec_snd_142" 
-                                  (identifier "drec_140")
-                                  (let "dstring1_149"
-                                    (let "leb_ref_143" (make-vec (u32 0))
-                                      (let "shft_ref_144" (make-vec (u8 0))
-                                        (let "p_ref_145" (make-vec (identifier "drec_snd_142"))
-                                          (seq
-                                            (while
-                                              (let "leb128_146" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_145")))
-                                                (let-pair "leb128_fst_147" "leb128_snd_148" 
-                                                  (identifier "leb128_146")
-                                                  (seq (set-vec (u8 0) (identifier "p_ref_145") (identifier "leb128_snd_148"))
-                                                    (set-vec (u8 0) (identifier "leb_ref_143")
-                                                      (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_147") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_144"))) (unsafe-nth (u8 0) (identifier "leb_ref_143"))))
-                                                    (set-vec (u8 0) (identifier "shft_ref_144") (add (unsafe-nth (u8 0) (identifier "shft_ref_144")) (u8 7))) 
-                                                    (ge (identifier "leb128_fst_147") (u8 128))))) 
-                                              (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_143"))) (unsafe-nth (u8 0) (identifier "p_ref_145")))))))
-                                    (let-pair "dstring1_fst_150" "dstring1_snd_151" 
-                                      (identifier "dstring1_149")
-                                      (let-pair "dstring2_fst_153" "dstring2_snd_154" 
-                                        (read-bytes (identifier "dstring1_snd_151") (identifier "dstring1_fst_150"))
-                                        (make-tup
-                                          (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 4
-                                            (make-rec (string "text") 
-                                              (string-of-bytes (identifier "dstring2_fst_153")) 
-                                              (string "partition") (identifier "drec_fst_141") 
-                                              (string "topic") (identifier "drec_fst_135") 
-                                              (string "options") (identifier "drec_fst_120"))) 
-                                          (identifier "dstring2_snd_154"))))))))))))))))))
+                                                                  (set-vec (u8 0) (identifier "shft_ref_99") (add (unsafe-nth (u8 0) (identifier "shft_ref_99")) (u8 7))) 
+                                                                  (ge (identifier "leb128_fst_102") (u8 128))))) 
+                                                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_98"))) (unsafe-nth (u8 0) (identifier "p_ref_100")))))))
+                                                  (let-pair "dstring1_fst_105" "dstring1_snd_106" 
+                                                    (identifier "dstring1_104")
+                                                    (let-pair "dstring2_fst_108" "dstring2_snd_109" 
+                                                      (read-bytes (identifier "dstring1_snd_106") (identifier "dstring1_fst_105"))
+                                                      (make-tup (cons (make-tup (identifier "dtup_fst_96") (string-of-bytes (identifier "dstring2_fst_108"))) (identifier "dlist2_fst_81")) (identifier "dstring2_snd_109"))))))))))
+                                      (set-vec (u8 0) (identifier "repeat_n_79") (add (unsafe-nth (u8 0) (identifier "repeat_n_79")) (i32 1)))))) 
+                                (unsafe-nth (u8 0) (identifier "inits_src_ref_78")))))) 
+                        (make-tup (identity (identifier "dlist4_fst_117")) (identifier "dlist4_snd_118")))
+                      (let-pair "drec_fst_120" "drec_snd_121" (identifier "drec_119")
+                        (let "drec_134"
+                          (let "dstring1_128"
+                            (let "leb_ref_122" (make-vec (u32 0))
+                              (let "shft_ref_123" (make-vec (u8 0))
+                                (let "p_ref_124" (make-vec (identifier "drec_snd_121"))
+                                  (seq
+                                    (while
+                                      (let "leb128_125" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_124")))
+                                        (let-pair "leb128_fst_126" "leb128_snd_127" 
+                                          (identifier "leb128_125")
+                                          (seq (set-vec (u8 0) (identifier "p_ref_124") (identifier "leb128_snd_127"))
+                                            (set-vec (u8 0) (identifier "leb_ref_122")
+                                              (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_126") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_123"))) (unsafe-nth (u8 0) (identifier "leb_ref_122"))))
+                                            (set-vec (u8 0) (identifier "shft_ref_123") (add (unsafe-nth (u8 0) (identifier "shft_ref_123")) (u8 7))) 
+                                            (ge (identifier "leb128_fst_126") (u8 128))))) 
+                                      (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_122"))) (unsafe-nth (u8 0) (identifier "p_ref_124")))))))
+                            (let-pair "dstring1_fst_129" "dstring1_snd_130" 
+                              (identifier "dstring1_128")
+                              (let-pair "dstring2_fst_132" "dstring2_snd_133" 
+                                (read-bytes (identifier "dstring1_snd_130") (identifier "dstring1_fst_129")) 
+                                (make-tup (string-of-bytes (identifier "dstring2_fst_132")) (identifier "dstring2_snd_133")))))
+                          (let-pair "drec_fst_135" "drec_snd_136" (identifier "drec_134")
+                            (let "drec_140" (let-pair "du16_fst_138" "du16_snd_139" (read-u16 little-endian (identifier "drec_snd_136")) (make-tup (identifier "du16_fst_138") (identifier "du16_snd_139")))
+                              (let-pair "drec_fst_141" "drec_snd_142" 
+                                (identifier "drec_140")
+                                (let "dstring1_149"
+                                  (let "leb_ref_143" (make-vec (u32 0))
+                                    (let "shft_ref_144" (make-vec (u8 0))
+                                      (let "p_ref_145" (make-vec (identifier "drec_snd_142"))
+                                        (seq
+                                          (while
+                                            (let "leb128_146" (read-u8 (unsafe-nth (u8 0) (identifier "p_ref_145")))
+                                              (let-pair "leb128_fst_147" "leb128_snd_148" 
+                                                (identifier "leb128_146")
+                                                (seq (set-vec (u8 0) (identifier "p_ref_145") (identifier "leb128_snd_148"))
+                                                  (set-vec (u8 0) (identifier "leb_ref_143")
+                                                    (bit-or (left-shift (to-u32 (bit-and (identifier "leb128_fst_147") (u8 127))) (unsafe-nth (u8 0) (identifier "shft_ref_144"))) (unsafe-nth (u8 0) (identifier "leb_ref_143"))))
+                                                  (set-vec (u8 0) (identifier "shft_ref_144") (add (unsafe-nth (u8 0) (identifier "shft_ref_144")) (u8 7))) 
+                                                  (ge (identifier "leb128_fst_147") (u8 128))))) 
+                                            (nop)) (make-tup (size-of-u32 (unsafe-nth (u8 0) (identifier "leb_ref_143"))) (unsafe-nth (u8 0) (identifier "p_ref_145")))))))
+                                  (let-pair "dstring1_fst_150" "dstring1_snd_151" 
+                                    (identifier "dstring1_149")
+                                    (let-pair "dstring2_fst_153" "dstring2_snd_154" 
+                                      (read-bytes (identifier "dstring1_snd_151") (identifier "dstring1_fst_150"))
+                                      (make-tup
+                                        (construct "[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]" 4
+                                          (make-rec (string "text") (string-of-bytes (identifier "dstring2_fst_153")) 
+                                            (string "partition") (identifier "drec_fst_141") 
+                                            (string "topic") (identifier "drec_fst_135") 
+                                            (string "options") (identifier "drec_fst_120"))) 
+                                        (identifier "dstring2_snd_154")))))))))))))))))))
+ */
+static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> via_of_row_binary_init()
+{
+  std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> fun836 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_837 { p_0.readU16Le() };
+    ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 letpair_res_838;
+    {
+      auto du16_fst_58 { std::get<0>(id_837) };
+      auto du16_snd_59 { std::get<1>(id_837) };
+      ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_839 { du16_fst_58, du16_snd_59 };
+      letpair_res_838 = id_839;
+    }
+    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_840;
+    {
+      ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 dsum1_63 { letpair_res_838 };
+      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_841;
+      {
+        auto dsum1_fst_64 { std::get<0>(dsum1_63) };
+        auto dsum1_snd_65 { std::get<1>(dsum1_63) };
+        uint16_t id_842 { 0 };
+        bool id_843 { bool(id_842 == dsum1_fst_64) };
+        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_844;
+        if (id_843) {
+          (void)::dessser::Void();
+          std::shared_ptr<::dessser::gen::alerting_contact::via>  id_845 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<0>, ::dessser::Void()) };
+          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_846 { id_845, dsum1_snd_65 };
+          choose_res_844 = id_846;
+        } else {
+          uint16_t id_847 { 1 };
+          bool id_848 { bool(id_847 == dsum1_fst_64) };
+          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_849;
+          if (id_848) {
+            uint32_t id_850 { 0U };
+            Vec<1, uint32_t> id_851 {  id_850  };
+            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_852;
+            {
+              Vec<1, uint32_t> leb_ref_224 { id_851 };
+              uint8_t id_853 { 0 };
+              Vec<1, uint8_t> id_854 {  id_853  };
+              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_855;
+              {
+                Vec<1, uint8_t> shft_ref_225 { id_854 };
+                Vec<1, Pointer> id_856 {  dsum1_snd_65  };
+                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_857;
+                {
+                  Vec<1, Pointer> p_ref_226 { id_856 };
+                  bool while_flag_858 { true };
+                  do {
+                    uint8_t id_859 { 0 };
+                    Pointer id_860 { p_ref_226[id_859] };
+                    ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_861 { id_860.readU8() };
+                    bool let_res_862;
+                    {
+                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_227 { id_861 };
+                      bool letpair_res_863;
+                      {
+                        auto leb128_fst_228 { std::get<0>(leb128_227) };
+                        auto leb128_snd_229 { std::get<1>(leb128_227) };
+                        uint8_t id_864 { 0 };
+                        Void id_865 { ((void)(p_ref_226[id_864] = leb128_snd_229), ::dessser::Void()) };
+                        (void)id_865;
+                        uint8_t id_866 { 0 };
+                        uint8_t id_867 { 127 };
+                        uint8_t id_868 { uint8_t(leb128_fst_228 & id_867) };
+                        uint32_t id_869 { uint32_t(id_868) };
+                        uint8_t id_870 { 0 };
+                        uint8_t id_871 { shft_ref_225[id_870] };
+                        uint32_t id_872 { uint32_t(id_869 << id_871) };
+                        uint8_t id_873 { 0 };
+                        uint32_t id_874 { leb_ref_224[id_873] };
+                        uint32_t id_875 { uint32_t(id_872 | id_874) };
+                        Void id_876 { ((void)(leb_ref_224[id_866] = id_875), ::dessser::Void()) };
+                        (void)id_876;
+                        uint8_t id_877 { 0 };
+                        uint8_t id_878 { 0 };
+                        uint8_t id_879 { shft_ref_225[id_878] };
+                        uint8_t id_880 { 7 };
+                        uint8_t id_881 { uint8_t(id_879 + id_880) };
+                        Void id_882 { ((void)(shft_ref_225[id_877] = id_881), ::dessser::Void()) };
+                        (void)id_882;
+                        uint8_t id_883 { 128 };
+                        bool id_884 { bool(leb128_fst_228 >= id_883) };
+                        letpair_res_863 = id_884;
+                      }
+                      let_res_862 = letpair_res_863;
+                    }
+                    while_flag_858 = let_res_862;
+                    if (while_flag_858) {
+                      (void)::dessser::Void();
+                    }
+                  } while (while_flag_858);
+                  (void)::dessser::Void();
+                  uint8_t id_885 { 0 };
+                  uint32_t id_886 { leb_ref_224[id_885] };
+                  Size id_887 { Size(id_886) };
+                  uint8_t id_888 { 0 };
+                  Pointer id_889 { p_ref_226[id_888] };
+                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_890 { id_887, id_889 };
+                  let_res_857 = id_890;
+                }
+                let_res_855 = let_res_857;
+              }
+              let_res_852 = let_res_855;
+            }
+            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_891;
+            {
+              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_230 { let_res_852 };
+              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_892;
+              {
+                auto dstring1_fst_231 { std::get<0>(dstring1_230) };
+                auto dstring1_snd_232 { std::get<1>(dstring1_230) };
+                ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_893 { dstring1_snd_232.readBytes(dstring1_fst_231) };
+                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_894;
+                {
+                  auto dstring2_fst_234 { std::get<0>(id_893) };
+                  auto dstring2_snd_235 { std::get<1>(id_893) };
+                  std::string id_895 { dstring2_fst_234.toString() };
+                  std::shared_ptr<::dessser::gen::alerting_contact::via>  id_896 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<1>, id_895) };
+                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_897 { id_896, dstring2_snd_235 };
+                  letpair_res_894 = id_897;
+                }
+                letpair_res_892 = letpair_res_894;
+              }
+              let_res_891 = letpair_res_892;
+            }
+            choose_res_849 = let_res_891;
+          } else {
+            uint16_t id_898 { 2 };
+            bool id_899 { bool(id_898 == dsum1_fst_64) };
+            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_900;
+            if (id_899) {
+              uint32_t id_901 { 0U };
+              Vec<1, uint32_t> id_902 {  id_901  };
+              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_903;
+              {
+                Vec<1, uint32_t> leb_ref_209 { id_902 };
+                uint8_t id_904 { 0 };
+                Vec<1, uint8_t> id_905 {  id_904  };
+                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_906;
+                {
+                  Vec<1, uint8_t> shft_ref_210 { id_905 };
+                  Vec<1, Pointer> id_907 {  dsum1_snd_65  };
+                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_908;
+                  {
+                    Vec<1, Pointer> p_ref_211 { id_907 };
+                    bool while_flag_909 { true };
+                    do {
+                      uint8_t id_910 { 0 };
+                      Pointer id_911 { p_ref_211[id_910] };
+                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_912 { id_911.readU8() };
+                      bool let_res_913;
+                      {
+                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_212 { id_912 };
+                        bool letpair_res_914;
+                        {
+                          auto leb128_fst_213 { std::get<0>(leb128_212) };
+                          auto leb128_snd_214 { std::get<1>(leb128_212) };
+                          uint8_t id_915 { 0 };
+                          Void id_916 { ((void)(p_ref_211[id_915] = leb128_snd_214), ::dessser::Void()) };
+                          (void)id_916;
+                          uint8_t id_917 { 0 };
+                          uint8_t id_918 { 127 };
+                          uint8_t id_919 { uint8_t(leb128_fst_213 & id_918) };
+                          uint32_t id_920 { uint32_t(id_919) };
+                          uint8_t id_921 { 0 };
+                          uint8_t id_922 { shft_ref_210[id_921] };
+                          uint32_t id_923 { uint32_t(id_920 << id_922) };
+                          uint8_t id_924 { 0 };
+                          uint32_t id_925 { leb_ref_209[id_924] };
+                          uint32_t id_926 { uint32_t(id_923 | id_925) };
+                          Void id_927 { ((void)(leb_ref_209[id_917] = id_926), ::dessser::Void()) };
+                          (void)id_927;
+                          uint8_t id_928 { 0 };
+                          uint8_t id_929 { 0 };
+                          uint8_t id_930 { shft_ref_210[id_929] };
+                          uint8_t id_931 { 7 };
+                          uint8_t id_932 { uint8_t(id_930 + id_931) };
+                          Void id_933 { ((void)(shft_ref_210[id_928] = id_932), ::dessser::Void()) };
+                          (void)id_933;
+                          uint8_t id_934 { 128 };
+                          bool id_935 { bool(leb128_fst_213 >= id_934) };
+                          letpair_res_914 = id_935;
+                        }
+                        let_res_913 = letpair_res_914;
+                      }
+                      while_flag_909 = let_res_913;
+                      if (while_flag_909) {
+                        (void)::dessser::Void();
+                      }
+                    } while (while_flag_909);
+                    (void)::dessser::Void();
+                    uint8_t id_936 { 0 };
+                    uint32_t id_937 { leb_ref_209[id_936] };
+                    Size id_938 { Size(id_937) };
+                    uint8_t id_939 { 0 };
+                    Pointer id_940 { p_ref_211[id_939] };
+                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_941 { id_938, id_940 };
+                    let_res_908 = id_941;
+                  }
+                  let_res_906 = let_res_908;
+                }
+                let_res_903 = let_res_906;
+              }
+              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_942;
+              {
+                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_215 { let_res_903 };
+                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_943;
+                {
+                  auto dstring1_fst_216 { std::get<0>(dstring1_215) };
+                  auto dstring1_snd_217 { std::get<1>(dstring1_215) };
+                  ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_944 { dstring1_snd_217.readBytes(dstring1_fst_216) };
+                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_945;
+                  {
+                    auto dstring2_fst_219 { std::get<0>(id_944) };
+                    auto dstring2_snd_220 { std::get<1>(id_944) };
+                    std::string id_946 { dstring2_fst_219.toString() };
+                    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_947 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<2>, id_946) };
+                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_948 { id_947, dstring2_snd_220 };
+                    letpair_res_945 = id_948;
+                  }
+                  letpair_res_943 = letpair_res_945;
+                }
+                let_res_942 = letpair_res_943;
+              }
+              choose_res_900 = let_res_942;
+            } else {
+              uint16_t id_949 { 3 };
+              bool id_950 { bool(id_949 == dsum1_fst_64) };
+              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_951;
+              if (id_950) {
+                uint32_t id_952 { 0U };
+                Vec<1, uint32_t> id_953 {  id_952  };
+                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_954;
+                {
+                  Vec<1, uint32_t> leb_ref_161 { id_953 };
+                  uint8_t id_955 { 0 };
+                  Vec<1, uint8_t> id_956 {  id_955  };
+                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_957;
+                  {
+                    Vec<1, uint8_t> shft_ref_162 { id_956 };
+                    Vec<1, Pointer> id_958 {  dsum1_snd_65  };
+                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_959;
+                    {
+                      Vec<1, Pointer> p_ref_163 { id_958 };
+                      bool while_flag_960 { true };
+                      do {
+                        uint8_t id_961 { 0 };
+                        Pointer id_962 { p_ref_163[id_961] };
+                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_963 { id_962.readU8() };
+                        bool let_res_964;
+                        {
+                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_164 { id_963 };
+                          bool letpair_res_965;
+                          {
+                            auto leb128_fst_165 { std::get<0>(leb128_164) };
+                            auto leb128_snd_166 { std::get<1>(leb128_164) };
+                            uint8_t id_966 { 0 };
+                            Void id_967 { ((void)(p_ref_163[id_966] = leb128_snd_166), ::dessser::Void()) };
+                            (void)id_967;
+                            uint8_t id_968 { 0 };
+                            uint8_t id_969 { 127 };
+                            uint8_t id_970 { uint8_t(leb128_fst_165 & id_969) };
+                            uint32_t id_971 { uint32_t(id_970) };
+                            uint8_t id_972 { 0 };
+                            uint8_t id_973 { shft_ref_162[id_972] };
+                            uint32_t id_974 { uint32_t(id_971 << id_973) };
+                            uint8_t id_975 { 0 };
+                            uint32_t id_976 { leb_ref_161[id_975] };
+                            uint32_t id_977 { uint32_t(id_974 | id_976) };
+                            Void id_978 { ((void)(leb_ref_161[id_968] = id_977), ::dessser::Void()) };
+                            (void)id_978;
+                            uint8_t id_979 { 0 };
+                            uint8_t id_980 { 0 };
+                            uint8_t id_981 { shft_ref_162[id_980] };
+                            uint8_t id_982 { 7 };
+                            uint8_t id_983 { uint8_t(id_981 + id_982) };
+                            Void id_984 { ((void)(shft_ref_162[id_979] = id_983), ::dessser::Void()) };
+                            (void)id_984;
+                            uint8_t id_985 { 128 };
+                            bool id_986 { bool(leb128_fst_165 >= id_985) };
+                            letpair_res_965 = id_986;
+                          }
+                          let_res_964 = letpair_res_965;
+                        }
+                        while_flag_960 = let_res_964;
+                        if (while_flag_960) {
+                          (void)::dessser::Void();
+                        }
+                      } while (while_flag_960);
+                      (void)::dessser::Void();
+                      uint8_t id_987 { 0 };
+                      uint32_t id_988 { leb_ref_161[id_987] };
+                      Size id_989 { Size(id_988) };
+                      uint8_t id_990 { 0 };
+                      Pointer id_991 { p_ref_163[id_990] };
+                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_992 { id_989, id_991 };
+                      let_res_959 = id_992;
+                    }
+                    let_res_957 = let_res_959;
+                  }
+                  let_res_954 = let_res_957;
+                }
+                ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_993;
+                {
+                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_167 { let_res_954 };
+                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_994;
+                  {
+                    auto dstring1_fst_168 { std::get<0>(dstring1_167) };
+                    auto dstring1_snd_169 { std::get<1>(dstring1_167) };
+                    ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_995 { dstring1_snd_169.readBytes(dstring1_fst_168) };
+                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_996;
+                    {
+                      auto dstring2_fst_171 { std::get<0>(id_995) };
+                      auto dstring2_snd_172 { std::get<1>(id_995) };
+                      std::string id_997 { dstring2_fst_171.toString() };
+                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_998 { id_997, dstring2_snd_172 };
+                      letpair_res_996 = id_998;
+                    }
+                    letpair_res_994 = letpair_res_996;
+                  }
+                  let_res_993 = letpair_res_994;
+                }
+                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_999;
+                {
+                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_173 { let_res_993 };
+                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1000;
+                  {
+                    auto drec_fst_174 { std::get<0>(drec_173) };
+                    auto drec_snd_175 { std::get<1>(drec_173) };
+                    uint32_t id_1001 { 0U };
+                    Vec<1, uint32_t> id_1002 {  id_1001  };
+                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1003;
+                    {
+                      Vec<1, uint32_t> leb_ref_176 { id_1002 };
+                      uint8_t id_1004 { 0 };
+                      Vec<1, uint8_t> id_1005 {  id_1004  };
+                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1006;
+                      {
+                        Vec<1, uint8_t> shft_ref_177 { id_1005 };
+                        Vec<1, Pointer> id_1007 {  drec_snd_175  };
+                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1008;
+                        {
+                          Vec<1, Pointer> p_ref_178 { id_1007 };
+                          bool while_flag_1009 { true };
+                          do {
+                            uint8_t id_1010 { 0 };
+                            Pointer id_1011 { p_ref_178[id_1010] };
+                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1012 { id_1011.readU8() };
+                            bool let_res_1013;
+                            {
+                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_179 { id_1012 };
+                              bool letpair_res_1014;
+                              {
+                                auto leb128_fst_180 { std::get<0>(leb128_179) };
+                                auto leb128_snd_181 { std::get<1>(leb128_179) };
+                                uint8_t id_1015 { 0 };
+                                Void id_1016 { ((void)(p_ref_178[id_1015] = leb128_snd_181), ::dessser::Void()) };
+                                (void)id_1016;
+                                uint8_t id_1017 { 0 };
+                                uint8_t id_1018 { 127 };
+                                uint8_t id_1019 { uint8_t(leb128_fst_180 & id_1018) };
+                                uint32_t id_1020 { uint32_t(id_1019) };
+                                uint8_t id_1021 { 0 };
+                                uint8_t id_1022 { shft_ref_177[id_1021] };
+                                uint32_t id_1023 { uint32_t(id_1020 << id_1022) };
+                                uint8_t id_1024 { 0 };
+                                uint32_t id_1025 { leb_ref_176[id_1024] };
+                                uint32_t id_1026 { uint32_t(id_1023 | id_1025) };
+                                Void id_1027 { ((void)(leb_ref_176[id_1017] = id_1026), ::dessser::Void()) };
+                                (void)id_1027;
+                                uint8_t id_1028 { 0 };
+                                uint8_t id_1029 { 0 };
+                                uint8_t id_1030 { shft_ref_177[id_1029] };
+                                uint8_t id_1031 { 7 };
+                                uint8_t id_1032 { uint8_t(id_1030 + id_1031) };
+                                Void id_1033 { ((void)(shft_ref_177[id_1028] = id_1032), ::dessser::Void()) };
+                                (void)id_1033;
+                                uint8_t id_1034 { 128 };
+                                bool id_1035 { bool(leb128_fst_180 >= id_1034) };
+                                letpair_res_1014 = id_1035;
+                              }
+                              let_res_1013 = letpair_res_1014;
+                            }
+                            while_flag_1009 = let_res_1013;
+                            if (while_flag_1009) {
+                              (void)::dessser::Void();
+                            }
+                          } while (while_flag_1009);
+                          (void)::dessser::Void();
+                          uint8_t id_1036 { 0 };
+                          uint32_t id_1037 { leb_ref_176[id_1036] };
+                          Size id_1038 { Size(id_1037) };
+                          uint8_t id_1039 { 0 };
+                          Pointer id_1040 { p_ref_178[id_1039] };
+                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1041 { id_1038, id_1040 };
+                          let_res_1008 = id_1041;
+                        }
+                        let_res_1006 = let_res_1008;
+                      }
+                      let_res_1003 = let_res_1006;
+                    }
+                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1042;
+                    {
+                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_182 { let_res_1003 };
+                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1043;
+                      {
+                        auto dstring1_fst_183 { std::get<0>(dstring1_182) };
+                        auto dstring1_snd_184 { std::get<1>(dstring1_182) };
+                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1044 { dstring1_snd_184.readBytes(dstring1_fst_183) };
+                        ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1045;
+                        {
+                          auto dstring2_fst_186 { std::get<0>(id_1044) };
+                          auto dstring2_snd_187 { std::get<1>(id_1044) };
+                          std::string id_1046 { dstring2_fst_186.toString() };
+                          ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1047 { id_1046, dstring2_snd_187 };
+                          letpair_res_1045 = id_1047;
+                        }
+                        letpair_res_1043 = letpair_res_1045;
+                      }
+                      let_res_1042 = letpair_res_1043;
+                    }
+                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1048;
+                    {
+                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_188 { let_res_1042 };
+                      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1049;
+                      {
+                        auto drec_fst_189 { std::get<0>(drec_188) };
+                        auto drec_snd_190 { std::get<1>(drec_188) };
+                        uint32_t id_1050 { 0U };
+                        Vec<1, uint32_t> id_1051 {  id_1050  };
+                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1052;
+                        {
+                          Vec<1, uint32_t> leb_ref_191 { id_1051 };
+                          uint8_t id_1053 { 0 };
+                          Vec<1, uint8_t> id_1054 {  id_1053  };
+                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1055;
+                          {
+                            Vec<1, uint8_t> shft_ref_192 { id_1054 };
+                            Vec<1, Pointer> id_1056 {  drec_snd_190  };
+                            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1057;
+                            {
+                              Vec<1, Pointer> p_ref_193 { id_1056 };
+                              bool while_flag_1058 { true };
+                              do {
+                                uint8_t id_1059 { 0 };
+                                Pointer id_1060 { p_ref_193[id_1059] };
+                                ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1061 { id_1060.readU8() };
+                                bool let_res_1062;
+                                {
+                                  ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_194 { id_1061 };
+                                  bool letpair_res_1063;
+                                  {
+                                    auto leb128_fst_195 { std::get<0>(leb128_194) };
+                                    auto leb128_snd_196 { std::get<1>(leb128_194) };
+                                    uint8_t id_1064 { 0 };
+                                    Void id_1065 { ((void)(p_ref_193[id_1064] = leb128_snd_196), ::dessser::Void()) };
+                                    (void)id_1065;
+                                    uint8_t id_1066 { 0 };
+                                    uint8_t id_1067 { 127 };
+                                    uint8_t id_1068 { uint8_t(leb128_fst_195 & id_1067) };
+                                    uint32_t id_1069 { uint32_t(id_1068) };
+                                    uint8_t id_1070 { 0 };
+                                    uint8_t id_1071 { shft_ref_192[id_1070] };
+                                    uint32_t id_1072 { uint32_t(id_1069 << id_1071) };
+                                    uint8_t id_1073 { 0 };
+                                    uint32_t id_1074 { leb_ref_191[id_1073] };
+                                    uint32_t id_1075 { uint32_t(id_1072 | id_1074) };
+                                    Void id_1076 { ((void)(leb_ref_191[id_1066] = id_1075), ::dessser::Void()) };
+                                    (void)id_1076;
+                                    uint8_t id_1077 { 0 };
+                                    uint8_t id_1078 { 0 };
+                                    uint8_t id_1079 { shft_ref_192[id_1078] };
+                                    uint8_t id_1080 { 7 };
+                                    uint8_t id_1081 { uint8_t(id_1079 + id_1080) };
+                                    Void id_1082 { ((void)(shft_ref_192[id_1077] = id_1081), ::dessser::Void()) };
+                                    (void)id_1082;
+                                    uint8_t id_1083 { 128 };
+                                    bool id_1084 { bool(leb128_fst_195 >= id_1083) };
+                                    letpair_res_1063 = id_1084;
+                                  }
+                                  let_res_1062 = letpair_res_1063;
+                                }
+                                while_flag_1058 = let_res_1062;
+                                if (while_flag_1058) {
+                                  (void)::dessser::Void();
+                                }
+                              } while (while_flag_1058);
+                              (void)::dessser::Void();
+                              uint8_t id_1085 { 0 };
+                              uint32_t id_1086 { leb_ref_191[id_1085] };
+                              Size id_1087 { Size(id_1086) };
+                              uint8_t id_1088 { 0 };
+                              Pointer id_1089 { p_ref_193[id_1088] };
+                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1090 { id_1087, id_1089 };
+                              let_res_1057 = id_1090;
+                            }
+                            let_res_1055 = let_res_1057;
+                          }
+                          let_res_1052 = let_res_1055;
+                        }
+                        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1091;
+                        {
+                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_197 { let_res_1052 };
+                          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1092;
+                          {
+                            auto dstring1_fst_198 { std::get<0>(dstring1_197) };
+                            auto dstring1_snd_199 { std::get<1>(dstring1_197) };
+                            ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1093 { dstring1_snd_199.readBytes(dstring1_fst_198) };
+                            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1094;
+                            {
+                              auto dstring2_fst_201 { std::get<0>(id_1093) };
+                              auto dstring2_snd_202 { std::get<1>(id_1093) };
+                              std::string id_1095 { dstring2_fst_201.toString() };
+                              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_1096 { drec_fst_174, drec_fst_189, id_1095 };
+                              std::shared_ptr<::dessser::gen::alerting_contact::via>  id_1097 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<3>, id_1096) };
+                              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1098 { id_1097, dstring2_snd_202 };
+                              letpair_res_1094 = id_1098;
+                            }
+                            letpair_res_1092 = letpair_res_1094;
+                          }
+                          let_res_1091 = letpair_res_1092;
+                        }
+                        letpair_res_1049 = let_res_1091;
+                      }
+                      let_res_1048 = letpair_res_1049;
+                    }
+                    letpair_res_1000 = let_res_1048;
+                  }
+                  let_res_999 = letpair_res_1000;
+                }
+                choose_res_951 = let_res_999;
+              } else {
+                uint16_t id_1099 { 4 };
+                bool id_1100 { bool(dsum1_fst_64 == id_1099) };
+                Void id_1101 { ((void)(assert(id_1100)), ::dessser::Void()) };
+                (void)id_1101;
+                uint32_t id_1102 { 0U };
+                Vec<1, uint32_t> id_1103 {  id_1102  };
+                ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1104;
+                {
+                  Vec<1, uint32_t> leb_ref_66 { id_1103 };
+                  uint8_t id_1105 { 0 };
+                  Vec<1, uint8_t> id_1106 {  id_1105  };
+                  ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1107;
+                  {
+                    Vec<1, uint8_t> shft_ref_67 { id_1106 };
+                    Vec<1, Pointer> id_1108 {  dsum1_snd_65  };
+                    ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1109;
+                    {
+                      Vec<1, Pointer> p_ref_68 { id_1108 };
+                      bool while_flag_1110 { true };
+                      do {
+                        uint8_t id_1111 { 0 };
+                        Pointer id_1112 { p_ref_68[id_1111] };
+                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1113 { id_1112.readU8() };
+                        bool let_res_1114;
+                        {
+                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_69 { id_1113 };
+                          bool letpair_res_1115;
+                          {
+                            auto leb128_fst_70 { std::get<0>(leb128_69) };
+                            auto leb128_snd_71 { std::get<1>(leb128_69) };
+                            uint8_t id_1116 { 0 };
+                            Void id_1117 { ((void)(p_ref_68[id_1116] = leb128_snd_71), ::dessser::Void()) };
+                            (void)id_1117;
+                            uint8_t id_1118 { 0 };
+                            uint8_t id_1119 { 127 };
+                            uint8_t id_1120 { uint8_t(leb128_fst_70 & id_1119) };
+                            uint32_t id_1121 { uint32_t(id_1120) };
+                            uint8_t id_1122 { 0 };
+                            uint8_t id_1123 { shft_ref_67[id_1122] };
+                            uint32_t id_1124 { uint32_t(id_1121 << id_1123) };
+                            uint8_t id_1125 { 0 };
+                            uint32_t id_1126 { leb_ref_66[id_1125] };
+                            uint32_t id_1127 { uint32_t(id_1124 | id_1126) };
+                            Void id_1128 { ((void)(leb_ref_66[id_1118] = id_1127), ::dessser::Void()) };
+                            (void)id_1128;
+                            uint8_t id_1129 { 0 };
+                            uint8_t id_1130 { 0 };
+                            uint8_t id_1131 { shft_ref_67[id_1130] };
+                            uint8_t id_1132 { 7 };
+                            uint8_t id_1133 { uint8_t(id_1131 + id_1132) };
+                            Void id_1134 { ((void)(shft_ref_67[id_1129] = id_1133), ::dessser::Void()) };
+                            (void)id_1134;
+                            uint8_t id_1135 { 128 };
+                            bool id_1136 { bool(leb128_fst_70 >= id_1135) };
+                            letpair_res_1115 = id_1136;
+                          }
+                          let_res_1114 = letpair_res_1115;
+                        }
+                        while_flag_1110 = let_res_1114;
+                        if (while_flag_1110) {
+                          (void)::dessser::Void();
+                        }
+                      } while (while_flag_1110);
+                      (void)::dessser::Void();
+                      uint8_t id_1137 { 0 };
+                      uint32_t id_1138 { leb_ref_66[id_1137] };
+                      uint8_t id_1139 { 0 };
+                      Pointer id_1140 { p_ref_68[id_1139] };
+                      ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 id_1141 { id_1138, id_1140 };
+                      let_res_1109 = id_1141;
+                    }
+                    let_res_1107 = let_res_1109;
+                  }
+                  let_res_1104 = let_res_1107;
+                }
+                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1142;
+                {
+                  ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 dlist1_75 { let_res_1104 };
+                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1143;
+                  {
+                    auto dlist1_fst_76 { std::get<0>(dlist1_75) };
+                    auto dlist1_snd_77 { std::get<1>(dlist1_75) };
+                    Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> endoflist_1144;
+                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1145 { endoflist_1144, dlist1_snd_77 };
+                    Vec<1, ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149> id_1146 {  id_1145  };
+                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1147;
+                    {
+                      Vec<1, ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149> inits_src_ref_78 { id_1146 };
+                      int32_t id_1148 { 0L };
+                      Vec<1, int32_t> id_1149 {  id_1148  };
+                      {
+                        Vec<1, int32_t> repeat_n_79 { id_1149 };
+                        bool while_flag_1150 { true };
+                        do {
+                          int32_t id_1151 { int32_t(dlist1_fst_76) };
+                          uint8_t id_1152 { 0 };
+                          int32_t id_1153 { repeat_n_79[id_1152] };
+                          bool id_1154 { bool(id_1151 > id_1153) };
+                          while_flag_1150 = id_1154;
+                          if (while_flag_1150) {
+                            uint8_t id_1155 { 0 };
+                            ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1156 { inits_src_ref_78[id_1155] };
+                            {
+                              ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 dlist2_80 { id_1156 };
+                              {
+                                auto dlist2_fst_81 { std::get<0>(dlist2_80) };
+                                auto dlist2_snd_82 { std::get<1>(dlist2_80) };
+                                uint8_t id_1157 { 0 };
+                                uint32_t id_1158 { 0U };
+                                Vec<1, uint32_t> id_1159 {  id_1158  };
+                                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1160;
+                                {
+                                  Vec<1, uint32_t> leb_ref_83 { id_1159 };
+                                  uint8_t id_1161 { 0 };
+                                  Vec<1, uint8_t> id_1162 {  id_1161  };
+                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1163;
+                                  {
+                                    Vec<1, uint8_t> shft_ref_84 { id_1162 };
+                                    Vec<1, Pointer> id_1164 {  dlist2_snd_82  };
+                                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1165;
+                                    {
+                                      Vec<1, Pointer> p_ref_85 { id_1164 };
+                                      bool while_flag_1166 { true };
+                                      do {
+                                        uint8_t id_1167 { 0 };
+                                        Pointer id_1168 { p_ref_85[id_1167] };
+                                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1169 { id_1168.readU8() };
+                                        bool let_res_1170;
+                                        {
+                                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_86 { id_1169 };
+                                          bool letpair_res_1171;
+                                          {
+                                            auto leb128_fst_87 { std::get<0>(leb128_86) };
+                                            auto leb128_snd_88 { std::get<1>(leb128_86) };
+                                            uint8_t id_1172 { 0 };
+                                            Void id_1173 { ((void)(p_ref_85[id_1172] = leb128_snd_88), ::dessser::Void()) };
+                                            (void)id_1173;
+                                            uint8_t id_1174 { 0 };
+                                            uint8_t id_1175 { 127 };
+                                            uint8_t id_1176 { uint8_t(leb128_fst_87 & id_1175) };
+                                            uint32_t id_1177 { uint32_t(id_1176) };
+                                            uint8_t id_1178 { 0 };
+                                            uint8_t id_1179 { shft_ref_84[id_1178] };
+                                            uint32_t id_1180 { uint32_t(id_1177 << id_1179) };
+                                            uint8_t id_1181 { 0 };
+                                            uint32_t id_1182 { leb_ref_83[id_1181] };
+                                            uint32_t id_1183 { uint32_t(id_1180 | id_1182) };
+                                            Void id_1184 { ((void)(leb_ref_83[id_1174] = id_1183), ::dessser::Void()) };
+                                            (void)id_1184;
+                                            uint8_t id_1185 { 0 };
+                                            uint8_t id_1186 { 0 };
+                                            uint8_t id_1187 { shft_ref_84[id_1186] };
+                                            uint8_t id_1188 { 7 };
+                                            uint8_t id_1189 { uint8_t(id_1187 + id_1188) };
+                                            Void id_1190 { ((void)(shft_ref_84[id_1185] = id_1189), ::dessser::Void()) };
+                                            (void)id_1190;
+                                            uint8_t id_1191 { 128 };
+                                            bool id_1192 { bool(leb128_fst_87 >= id_1191) };
+                                            letpair_res_1171 = id_1192;
+                                          }
+                                          let_res_1170 = letpair_res_1171;
+                                        }
+                                        while_flag_1166 = let_res_1170;
+                                        if (while_flag_1166) {
+                                          (void)::dessser::Void();
+                                        }
+                                      } while (while_flag_1166);
+                                      (void)::dessser::Void();
+                                      uint8_t id_1193 { 0 };
+                                      uint32_t id_1194 { leb_ref_83[id_1193] };
+                                      Size id_1195 { Size(id_1194) };
+                                      uint8_t id_1196 { 0 };
+                                      Pointer id_1197 { p_ref_85[id_1196] };
+                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1198 { id_1195, id_1197 };
+                                      let_res_1165 = id_1198;
+                                    }
+                                    let_res_1163 = let_res_1165;
+                                  }
+                                  let_res_1160 = let_res_1163;
+                                }
+                                ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1199;
+                                {
+                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_89 { let_res_1160 };
+                                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1200;
+                                  {
+                                    auto dstring1_fst_90 { std::get<0>(dstring1_89) };
+                                    auto dstring1_snd_91 { std::get<1>(dstring1_89) };
+                                    ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1201 { dstring1_snd_91.readBytes(dstring1_fst_90) };
+                                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1202;
+                                    {
+                                      auto dstring2_fst_93 { std::get<0>(id_1201) };
+                                      auto dstring2_snd_94 { std::get<1>(id_1201) };
+                                      std::string id_1203 { dstring2_fst_93.toString() };
+                                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1204 { id_1203, dstring2_snd_94 };
+                                      letpair_res_1202 = id_1204;
+                                    }
+                                    letpair_res_1200 = letpair_res_1202;
+                                  }
+                                  let_res_1199 = letpair_res_1200;
+                                }
+                                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1205;
+                                {
+                                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 dtup_95 { let_res_1199 };
+                                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1206;
+                                  {
+                                    auto dtup_fst_96 { std::get<0>(dtup_95) };
+                                    auto dtup_snd_97 { std::get<1>(dtup_95) };
+                                    uint32_t id_1207 { 0U };
+                                    Vec<1, uint32_t> id_1208 {  id_1207  };
+                                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1209;
+                                    {
+                                      Vec<1, uint32_t> leb_ref_98 { id_1208 };
+                                      uint8_t id_1210 { 0 };
+                                      Vec<1, uint8_t> id_1211 {  id_1210  };
+                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1212;
+                                      {
+                                        Vec<1, uint8_t> shft_ref_99 { id_1211 };
+                                        Vec<1, Pointer> id_1213 {  dtup_snd_97  };
+                                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1214;
+                                        {
+                                          Vec<1, Pointer> p_ref_100 { id_1213 };
+                                          bool while_flag_1215 { true };
+                                          do {
+                                            uint8_t id_1216 { 0 };
+                                            Pointer id_1217 { p_ref_100[id_1216] };
+                                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1218 { id_1217.readU8() };
+                                            bool let_res_1219;
+                                            {
+                                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_101 { id_1218 };
+                                              bool letpair_res_1220;
+                                              {
+                                                auto leb128_fst_102 { std::get<0>(leb128_101) };
+                                                auto leb128_snd_103 { std::get<1>(leb128_101) };
+                                                uint8_t id_1221 { 0 };
+                                                Void id_1222 { ((void)(p_ref_100[id_1221] = leb128_snd_103), ::dessser::Void()) };
+                                                (void)id_1222;
+                                                uint8_t id_1223 { 0 };
+                                                uint8_t id_1224 { 127 };
+                                                uint8_t id_1225 { uint8_t(leb128_fst_102 & id_1224) };
+                                                uint32_t id_1226 { uint32_t(id_1225) };
+                                                uint8_t id_1227 { 0 };
+                                                uint8_t id_1228 { shft_ref_99[id_1227] };
+                                                uint32_t id_1229 { uint32_t(id_1226 << id_1228) };
+                                                uint8_t id_1230 { 0 };
+                                                uint32_t id_1231 { leb_ref_98[id_1230] };
+                                                uint32_t id_1232 { uint32_t(id_1229 | id_1231) };
+                                                Void id_1233 { ((void)(leb_ref_98[id_1223] = id_1232), ::dessser::Void()) };
+                                                (void)id_1233;
+                                                uint8_t id_1234 { 0 };
+                                                uint8_t id_1235 { 0 };
+                                                uint8_t id_1236 { shft_ref_99[id_1235] };
+                                                uint8_t id_1237 { 7 };
+                                                uint8_t id_1238 { uint8_t(id_1236 + id_1237) };
+                                                Void id_1239 { ((void)(shft_ref_99[id_1234] = id_1238), ::dessser::Void()) };
+                                                (void)id_1239;
+                                                uint8_t id_1240 { 128 };
+                                                bool id_1241 { bool(leb128_fst_102 >= id_1240) };
+                                                letpair_res_1220 = id_1241;
+                                              }
+                                              let_res_1219 = letpair_res_1220;
+                                            }
+                                            while_flag_1215 = let_res_1219;
+                                            if (while_flag_1215) {
+                                              (void)::dessser::Void();
+                                            }
+                                          } while (while_flag_1215);
+                                          (void)::dessser::Void();
+                                          uint8_t id_1242 { 0 };
+                                          uint32_t id_1243 { leb_ref_98[id_1242] };
+                                          Size id_1244 { Size(id_1243) };
+                                          uint8_t id_1245 { 0 };
+                                          Pointer id_1246 { p_ref_100[id_1245] };
+                                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1247 { id_1244, id_1246 };
+                                          let_res_1214 = id_1247;
+                                        }
+                                        let_res_1212 = let_res_1214;
+                                      }
+                                      let_res_1209 = let_res_1212;
+                                    }
+                                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1248;
+                                    {
+                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_104 { let_res_1209 };
+                                      ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1249;
+                                      {
+                                        auto dstring1_fst_105 { std::get<0>(dstring1_104) };
+                                        auto dstring1_snd_106 { std::get<1>(dstring1_104) };
+                                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1250 { dstring1_snd_106.readBytes(dstring1_fst_105) };
+                                        ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1251;
+                                        {
+                                          auto dstring2_fst_108 { std::get<0>(id_1250) };
+                                          auto dstring2_snd_109 { std::get<1>(id_1250) };
+                                          std::string id_1252 { dstring2_fst_108.toString() };
+                                          ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_1253 { dtup_fst_96, id_1252 };
+                                          Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_1254 { id_1253, dlist2_fst_81 };
+                                          ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1255 { id_1254, dstring2_snd_109 };
+                                          letpair_res_1251 = id_1255;
+                                        }
+                                        letpair_res_1249 = letpair_res_1251;
+                                      }
+                                      let_res_1248 = letpair_res_1249;
+                                    }
+                                    letpair_res_1206 = let_res_1248;
+                                  }
+                                  let_res_1205 = letpair_res_1206;
+                                }
+                                Void id_1256 { ((void)(inits_src_ref_78[id_1157] = let_res_1205), ::dessser::Void()) };
+                                (void)id_1256;
+                              }
+                              (void)::dessser::Void();
+                            }
+                            (void)::dessser::Void();
+                            uint8_t id_1257 { 0 };
+                            uint8_t id_1258 { 0 };
+                            int32_t id_1259 { repeat_n_79[id_1258] };
+                            int32_t id_1260 { 1L };
+                            int32_t id_1261 { int32_t(id_1259 + id_1260) };
+                            Void id_1262 { ((void)(repeat_n_79[id_1257] = id_1261), ::dessser::Void()) };
+                            (void)id_1262;
+                            (void)id_1262;
+                          }
+                        } while (while_flag_1150);
+                        (void)::dessser::Void();
+                      }
+                      (void)::dessser::Void();
+                      uint8_t id_1263 { 0 };
+                      ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1264 { inits_src_ref_78[id_1263] };
+                      let_res_1147 = id_1264;
+                    }
+                    letpair_res_1143 = let_res_1147;
+                  }
+                  let_res_1142 = letpair_res_1143;
+                }
+                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1265;
+                {
+                  auto dlist4_fst_117 { std::get<0>(let_res_1142) };
+                  auto dlist4_snd_118 { std::get<1>(let_res_1142) };
+                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1266 { dlist4_fst_117, dlist4_snd_118 };
+                  letpair_res_1265 = id_1266;
+                }
+                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1267;
+                {
+                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 drec_119 { letpair_res_1265 };
+                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1268;
+                  {
+                    auto drec_fst_120 { std::get<0>(drec_119) };
+                    auto drec_snd_121 { std::get<1>(drec_119) };
+                    uint32_t id_1269 { 0U };
+                    Vec<1, uint32_t> id_1270 {  id_1269  };
+                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1271;
+                    {
+                      Vec<1, uint32_t> leb_ref_122 { id_1270 };
+                      uint8_t id_1272 { 0 };
+                      Vec<1, uint8_t> id_1273 {  id_1272  };
+                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1274;
+                      {
+                        Vec<1, uint8_t> shft_ref_123 { id_1273 };
+                        Vec<1, Pointer> id_1275 {  drec_snd_121  };
+                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1276;
+                        {
+                          Vec<1, Pointer> p_ref_124 { id_1275 };
+                          bool while_flag_1277 { true };
+                          do {
+                            uint8_t id_1278 { 0 };
+                            Pointer id_1279 { p_ref_124[id_1278] };
+                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1280 { id_1279.readU8() };
+                            bool let_res_1281;
+                            {
+                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_125 { id_1280 };
+                              bool letpair_res_1282;
+                              {
+                                auto leb128_fst_126 { std::get<0>(leb128_125) };
+                                auto leb128_snd_127 { std::get<1>(leb128_125) };
+                                uint8_t id_1283 { 0 };
+                                Void id_1284 { ((void)(p_ref_124[id_1283] = leb128_snd_127), ::dessser::Void()) };
+                                (void)id_1284;
+                                uint8_t id_1285 { 0 };
+                                uint8_t id_1286 { 127 };
+                                uint8_t id_1287 { uint8_t(leb128_fst_126 & id_1286) };
+                                uint32_t id_1288 { uint32_t(id_1287) };
+                                uint8_t id_1289 { 0 };
+                                uint8_t id_1290 { shft_ref_123[id_1289] };
+                                uint32_t id_1291 { uint32_t(id_1288 << id_1290) };
+                                uint8_t id_1292 { 0 };
+                                uint32_t id_1293 { leb_ref_122[id_1292] };
+                                uint32_t id_1294 { uint32_t(id_1291 | id_1293) };
+                                Void id_1295 { ((void)(leb_ref_122[id_1285] = id_1294), ::dessser::Void()) };
+                                (void)id_1295;
+                                uint8_t id_1296 { 0 };
+                                uint8_t id_1297 { 0 };
+                                uint8_t id_1298 { shft_ref_123[id_1297] };
+                                uint8_t id_1299 { 7 };
+                                uint8_t id_1300 { uint8_t(id_1298 + id_1299) };
+                                Void id_1301 { ((void)(shft_ref_123[id_1296] = id_1300), ::dessser::Void()) };
+                                (void)id_1301;
+                                uint8_t id_1302 { 128 };
+                                bool id_1303 { bool(leb128_fst_126 >= id_1302) };
+                                letpair_res_1282 = id_1303;
+                              }
+                              let_res_1281 = letpair_res_1282;
+                            }
+                            while_flag_1277 = let_res_1281;
+                            if (while_flag_1277) {
+                              (void)::dessser::Void();
+                            }
+                          } while (while_flag_1277);
+                          (void)::dessser::Void();
+                          uint8_t id_1304 { 0 };
+                          uint32_t id_1305 { leb_ref_122[id_1304] };
+                          Size id_1306 { Size(id_1305) };
+                          uint8_t id_1307 { 0 };
+                          Pointer id_1308 { p_ref_124[id_1307] };
+                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1309 { id_1306, id_1308 };
+                          let_res_1276 = id_1309;
+                        }
+                        let_res_1274 = let_res_1276;
+                      }
+                      let_res_1271 = let_res_1274;
+                    }
+                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1310;
+                    {
+                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_128 { let_res_1271 };
+                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1311;
+                      {
+                        auto dstring1_fst_129 { std::get<0>(dstring1_128) };
+                        auto dstring1_snd_130 { std::get<1>(dstring1_128) };
+                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1312 { dstring1_snd_130.readBytes(dstring1_fst_129) };
+                        ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1313;
+                        {
+                          auto dstring2_fst_132 { std::get<0>(id_1312) };
+                          auto dstring2_snd_133 { std::get<1>(id_1312) };
+                          std::string id_1314 { dstring2_fst_132.toString() };
+                          ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1315 { id_1314, dstring2_snd_133 };
+                          letpair_res_1313 = id_1315;
+                        }
+                        letpair_res_1311 = letpair_res_1313;
+                      }
+                      let_res_1310 = letpair_res_1311;
+                    }
+                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1316;
+                    {
+                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_134 { let_res_1310 };
+                      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1317;
+                      {
+                        auto drec_fst_135 { std::get<0>(drec_134) };
+                        auto drec_snd_136 { std::get<1>(drec_134) };
+                        ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_1318 { drec_snd_136.readU16Le() };
+                        ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1319;
+                        {
+                          auto du16_fst_138 { std::get<0>(id_1318) };
+                          auto du16_snd_139 { std::get<1>(id_1318) };
+                          ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_1320 { du16_fst_138, du16_snd_139 };
+                          letpair_res_1319 = id_1320;
+                        }
+                        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1321;
+                        {
+                          ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 drec_140 { letpair_res_1319 };
+                          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1322;
+                          {
+                            auto drec_fst_141 { std::get<0>(drec_140) };
+                            auto drec_snd_142 { std::get<1>(drec_140) };
+                            uint32_t id_1323 { 0U };
+                            Vec<1, uint32_t> id_1324 {  id_1323  };
+                            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1325;
+                            {
+                              Vec<1, uint32_t> leb_ref_143 { id_1324 };
+                              uint8_t id_1326 { 0 };
+                              Vec<1, uint8_t> id_1327 {  id_1326  };
+                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1328;
+                              {
+                                Vec<1, uint8_t> shft_ref_144 { id_1327 };
+                                Vec<1, Pointer> id_1329 {  drec_snd_142  };
+                                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1330;
+                                {
+                                  Vec<1, Pointer> p_ref_145 { id_1329 };
+                                  bool while_flag_1331 { true };
+                                  do {
+                                    uint8_t id_1332 { 0 };
+                                    Pointer id_1333 { p_ref_145[id_1332] };
+                                    ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1334 { id_1333.readU8() };
+                                    bool let_res_1335;
+                                    {
+                                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_146 { id_1334 };
+                                      bool letpair_res_1336;
+                                      {
+                                        auto leb128_fst_147 { std::get<0>(leb128_146) };
+                                        auto leb128_snd_148 { std::get<1>(leb128_146) };
+                                        uint8_t id_1337 { 0 };
+                                        Void id_1338 { ((void)(p_ref_145[id_1337] = leb128_snd_148), ::dessser::Void()) };
+                                        (void)id_1338;
+                                        uint8_t id_1339 { 0 };
+                                        uint8_t id_1340 { 127 };
+                                        uint8_t id_1341 { uint8_t(leb128_fst_147 & id_1340) };
+                                        uint32_t id_1342 { uint32_t(id_1341) };
+                                        uint8_t id_1343 { 0 };
+                                        uint8_t id_1344 { shft_ref_144[id_1343] };
+                                        uint32_t id_1345 { uint32_t(id_1342 << id_1344) };
+                                        uint8_t id_1346 { 0 };
+                                        uint32_t id_1347 { leb_ref_143[id_1346] };
+                                        uint32_t id_1348 { uint32_t(id_1345 | id_1347) };
+                                        Void id_1349 { ((void)(leb_ref_143[id_1339] = id_1348), ::dessser::Void()) };
+                                        (void)id_1349;
+                                        uint8_t id_1350 { 0 };
+                                        uint8_t id_1351 { 0 };
+                                        uint8_t id_1352 { shft_ref_144[id_1351] };
+                                        uint8_t id_1353 { 7 };
+                                        uint8_t id_1354 { uint8_t(id_1352 + id_1353) };
+                                        Void id_1355 { ((void)(shft_ref_144[id_1350] = id_1354), ::dessser::Void()) };
+                                        (void)id_1355;
+                                        uint8_t id_1356 { 128 };
+                                        bool id_1357 { bool(leb128_fst_147 >= id_1356) };
+                                        letpair_res_1336 = id_1357;
+                                      }
+                                      let_res_1335 = letpair_res_1336;
+                                    }
+                                    while_flag_1331 = let_res_1335;
+                                    if (while_flag_1331) {
+                                      (void)::dessser::Void();
+                                    }
+                                  } while (while_flag_1331);
+                                  (void)::dessser::Void();
+                                  uint8_t id_1358 { 0 };
+                                  uint32_t id_1359 { leb_ref_143[id_1358] };
+                                  Size id_1360 { Size(id_1359) };
+                                  uint8_t id_1361 { 0 };
+                                  Pointer id_1362 { p_ref_145[id_1361] };
+                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1363 { id_1360, id_1362 };
+                                  let_res_1330 = id_1363;
+                                }
+                                let_res_1328 = let_res_1330;
+                              }
+                              let_res_1325 = let_res_1328;
+                            }
+                            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1364;
+                            {
+                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_149 { let_res_1325 };
+                              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1365;
+                              {
+                                auto dstring1_fst_150 { std::get<0>(dstring1_149) };
+                                auto dstring1_snd_151 { std::get<1>(dstring1_149) };
+                                ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1366 { dstring1_snd_151.readBytes(dstring1_fst_150) };
+                                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1367;
+                                {
+                                  auto dstring2_fst_153 { std::get<0>(id_1366) };
+                                  auto dstring2_snd_154 { std::get<1>(id_1366) };
+                                  std::string id_1368 { dstring2_fst_153.toString() };
+                                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_1369 { drec_fst_120, drec_fst_135, drec_fst_141, id_1368 };
+                                  std::shared_ptr<::dessser::gen::alerting_contact::via>  id_1370 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<4>, id_1369) };
+                                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1371 { id_1370, dstring2_snd_154 };
+                                  letpair_res_1367 = id_1371;
+                                }
+                                letpair_res_1365 = letpair_res_1367;
+                              }
+                              let_res_1364 = letpair_res_1365;
+                            }
+                            letpair_res_1322 = let_res_1364;
+                          }
+                          let_res_1321 = letpair_res_1322;
+                        }
+                        letpair_res_1317 = let_res_1321;
+                      }
+                      let_res_1316 = letpair_res_1317;
+                    }
+                    letpair_res_1268 = let_res_1316;
+                  }
+                  let_res_1267 = letpair_res_1268;
+                }
+                choose_res_951 = let_res_1267;
+              }
+              choose_res_900 = choose_res_951;
+            }
+            choose_res_849 = choose_res_900;
+          }
+          choose_res_844 = choose_res_849;
+        }
+        letpair_res_841 = choose_res_844;
+      }
+      let_res_840 = letpair_res_841;
+    }
+    return let_res_840;
+  }
+   };
+  return fun836;
+}
+std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> via_of_row_binary(via_of_row_binary_init());
+
+/* 
+    (fun ("Ptr")
+      (let "drec_242" (apply (identifier "via-of-row-binary") (param 0))
         (let-pair "drec_fst_243" "drec_snd_244" (identifier "drec_242")
           (let-pair "dfloat_fst_246" "dfloat_snd_247" (read-u64 little-endian (identifier "drec_snd_244"))
             (make-tup (make-rec (string "timeout") (float-of-u64 (identifier "dfloat_fst_246")) (string "via") (identifier "drec_fst_243")) (identifier "dfloat_snd_247"))))))
  */
 static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun876 { [&](Pointer p_0) {
-    ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_877 { p_0.readU16Le() };
-    ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 letpair_res_878;
+  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun1372 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1373 { via_of_row_binary(p_0) };
+    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae let_res_1374;
     {
-      auto du16_fst_58 { std::get<0>(id_877) };
-      auto du16_snd_59 { std::get<1>(id_877) };
-      ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_879 { du16_fst_58, du16_snd_59 };
-      letpair_res_878 = id_879;
-    }
-    ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_880;
-    {
-      ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 dsum1_63 { letpair_res_878 };
-      ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_881;
-      {
-        auto dsum1_fst_64 { std::get<0>(dsum1_63) };
-        auto dsum1_snd_65 { std::get<1>(dsum1_63) };
-        uint16_t id_882 { 0 };
-        bool id_883 { bool(id_882 == dsum1_fst_64) };
-        ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 choose_res_884;
-        if (id_883) {
-          (void)::dessser::Void();
-          ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_885 { std::in_place_index<0>, ::dessser::Void() };
-          ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 id_886 { id_885, dsum1_snd_65 };
-          choose_res_884 = id_886;
-        } else {
-          uint16_t id_887 { 1 };
-          bool id_888 { bool(id_887 == dsum1_fst_64) };
-          ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 choose_res_889;
-          if (id_888) {
-            uint32_t id_890 { 0U };
-            Vec<1, uint32_t> id_891 {  id_890  };
-            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_892;
-            {
-              Vec<1, uint32_t> leb_ref_224 { id_891 };
-              uint8_t id_893 { 0 };
-              Vec<1, uint8_t> id_894 {  id_893  };
-              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_895;
-              {
-                Vec<1, uint8_t> shft_ref_225 { id_894 };
-                Vec<1, Pointer> id_896 {  dsum1_snd_65  };
-                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_897;
-                {
-                  Vec<1, Pointer> p_ref_226 { id_896 };
-                  bool while_flag_898 { true };
-                  do {
-                    uint8_t id_899 { 0 };
-                    Pointer id_900 { p_ref_226[id_899] };
-                    ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_901 { id_900.readU8() };
-                    bool let_res_902;
-                    {
-                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_227 { id_901 };
-                      bool letpair_res_903;
-                      {
-                        auto leb128_fst_228 { std::get<0>(leb128_227) };
-                        auto leb128_snd_229 { std::get<1>(leb128_227) };
-                        uint8_t id_904 { 0 };
-                        Void id_905 { ((void)(p_ref_226[id_904] = leb128_snd_229), ::dessser::Void()) };
-                        (void)id_905;
-                        uint8_t id_906 { 0 };
-                        uint8_t id_907 { 127 };
-                        uint8_t id_908 { uint8_t(leb128_fst_228 & id_907) };
-                        uint32_t id_909 { uint32_t(id_908) };
-                        uint8_t id_910 { 0 };
-                        uint8_t id_911 { shft_ref_225[id_910] };
-                        uint32_t id_912 { uint32_t(id_909 << id_911) };
-                        uint8_t id_913 { 0 };
-                        uint32_t id_914 { leb_ref_224[id_913] };
-                        uint32_t id_915 { uint32_t(id_912 | id_914) };
-                        Void id_916 { ((void)(leb_ref_224[id_906] = id_915), ::dessser::Void()) };
-                        (void)id_916;
-                        uint8_t id_917 { 0 };
-                        uint8_t id_918 { 0 };
-                        uint8_t id_919 { shft_ref_225[id_918] };
-                        uint8_t id_920 { 7 };
-                        uint8_t id_921 { uint8_t(id_919 + id_920) };
-                        Void id_922 { ((void)(shft_ref_225[id_917] = id_921), ::dessser::Void()) };
-                        (void)id_922;
-                        uint8_t id_923 { 128 };
-                        bool id_924 { bool(leb128_fst_228 >= id_923) };
-                        letpair_res_903 = id_924;
-                      }
-                      let_res_902 = letpair_res_903;
-                    }
-                    while_flag_898 = let_res_902;
-                    if (while_flag_898) {
-                      (void)::dessser::Void();
-                    }
-                  } while (while_flag_898);
-                  (void)::dessser::Void();
-                  uint8_t id_925 { 0 };
-                  uint32_t id_926 { leb_ref_224[id_925] };
-                  Size id_927 { Size(id_926) };
-                  uint8_t id_928 { 0 };
-                  Pointer id_929 { p_ref_226[id_928] };
-                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_930 { id_927, id_929 };
-                  let_res_897 = id_930;
-                }
-                let_res_895 = let_res_897;
-              }
-              let_res_892 = let_res_895;
-            }
-            ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_931;
-            {
-              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_230 { let_res_892 };
-              ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_932;
-              {
-                auto dstring1_fst_231 { std::get<0>(dstring1_230) };
-                auto dstring1_snd_232 { std::get<1>(dstring1_230) };
-                ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_933 { dstring1_snd_232.readBytes(dstring1_fst_231) };
-                ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_934;
-                {
-                  auto dstring2_fst_234 { std::get<0>(id_933) };
-                  auto dstring2_snd_235 { std::get<1>(id_933) };
-                  std::string id_935 { dstring2_fst_234.toString() };
-                  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_936 { std::in_place_index<1>, id_935 };
-                  ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 id_937 { id_936, dstring2_snd_235 };
-                  letpair_res_934 = id_937;
-                }
-                letpair_res_932 = letpair_res_934;
-              }
-              let_res_931 = letpair_res_932;
-            }
-            choose_res_889 = let_res_931;
-          } else {
-            uint16_t id_938 { 2 };
-            bool id_939 { bool(id_938 == dsum1_fst_64) };
-            ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 choose_res_940;
-            if (id_939) {
-              uint32_t id_941 { 0U };
-              Vec<1, uint32_t> id_942 {  id_941  };
-              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_943;
-              {
-                Vec<1, uint32_t> leb_ref_209 { id_942 };
-                uint8_t id_944 { 0 };
-                Vec<1, uint8_t> id_945 {  id_944  };
-                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_946;
-                {
-                  Vec<1, uint8_t> shft_ref_210 { id_945 };
-                  Vec<1, Pointer> id_947 {  dsum1_snd_65  };
-                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_948;
-                  {
-                    Vec<1, Pointer> p_ref_211 { id_947 };
-                    bool while_flag_949 { true };
-                    do {
-                      uint8_t id_950 { 0 };
-                      Pointer id_951 { p_ref_211[id_950] };
-                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_952 { id_951.readU8() };
-                      bool let_res_953;
-                      {
-                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_212 { id_952 };
-                        bool letpair_res_954;
-                        {
-                          auto leb128_fst_213 { std::get<0>(leb128_212) };
-                          auto leb128_snd_214 { std::get<1>(leb128_212) };
-                          uint8_t id_955 { 0 };
-                          Void id_956 { ((void)(p_ref_211[id_955] = leb128_snd_214), ::dessser::Void()) };
-                          (void)id_956;
-                          uint8_t id_957 { 0 };
-                          uint8_t id_958 { 127 };
-                          uint8_t id_959 { uint8_t(leb128_fst_213 & id_958) };
-                          uint32_t id_960 { uint32_t(id_959) };
-                          uint8_t id_961 { 0 };
-                          uint8_t id_962 { shft_ref_210[id_961] };
-                          uint32_t id_963 { uint32_t(id_960 << id_962) };
-                          uint8_t id_964 { 0 };
-                          uint32_t id_965 { leb_ref_209[id_964] };
-                          uint32_t id_966 { uint32_t(id_963 | id_965) };
-                          Void id_967 { ((void)(leb_ref_209[id_957] = id_966), ::dessser::Void()) };
-                          (void)id_967;
-                          uint8_t id_968 { 0 };
-                          uint8_t id_969 { 0 };
-                          uint8_t id_970 { shft_ref_210[id_969] };
-                          uint8_t id_971 { 7 };
-                          uint8_t id_972 { uint8_t(id_970 + id_971) };
-                          Void id_973 { ((void)(shft_ref_210[id_968] = id_972), ::dessser::Void()) };
-                          (void)id_973;
-                          uint8_t id_974 { 128 };
-                          bool id_975 { bool(leb128_fst_213 >= id_974) };
-                          letpair_res_954 = id_975;
-                        }
-                        let_res_953 = letpair_res_954;
-                      }
-                      while_flag_949 = let_res_953;
-                      if (while_flag_949) {
-                        (void)::dessser::Void();
-                      }
-                    } while (while_flag_949);
-                    (void)::dessser::Void();
-                    uint8_t id_976 { 0 };
-                    uint32_t id_977 { leb_ref_209[id_976] };
-                    Size id_978 { Size(id_977) };
-                    uint8_t id_979 { 0 };
-                    Pointer id_980 { p_ref_211[id_979] };
-                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_981 { id_978, id_980 };
-                    let_res_948 = id_981;
-                  }
-                  let_res_946 = let_res_948;
-                }
-                let_res_943 = let_res_946;
-              }
-              ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_982;
-              {
-                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_215 { let_res_943 };
-                ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_983;
-                {
-                  auto dstring1_fst_216 { std::get<0>(dstring1_215) };
-                  auto dstring1_snd_217 { std::get<1>(dstring1_215) };
-                  ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_984 { dstring1_snd_217.readBytes(dstring1_fst_216) };
-                  ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_985;
-                  {
-                    auto dstring2_fst_219 { std::get<0>(id_984) };
-                    auto dstring2_snd_220 { std::get<1>(id_984) };
-                    std::string id_986 { dstring2_fst_219.toString() };
-                    ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_987 { std::in_place_index<2>, id_986 };
-                    ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 id_988 { id_987, dstring2_snd_220 };
-                    letpair_res_985 = id_988;
-                  }
-                  letpair_res_983 = letpair_res_985;
-                }
-                let_res_982 = letpair_res_983;
-              }
-              choose_res_940 = let_res_982;
-            } else {
-              uint16_t id_989 { 3 };
-              bool id_990 { bool(id_989 == dsum1_fst_64) };
-              ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 choose_res_991;
-              if (id_990) {
-                uint32_t id_992 { 0U };
-                Vec<1, uint32_t> id_993 {  id_992  };
-                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_994;
-                {
-                  Vec<1, uint32_t> leb_ref_161 { id_993 };
-                  uint8_t id_995 { 0 };
-                  Vec<1, uint8_t> id_996 {  id_995  };
-                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_997;
-                  {
-                    Vec<1, uint8_t> shft_ref_162 { id_996 };
-                    Vec<1, Pointer> id_998 {  dsum1_snd_65  };
-                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_999;
-                    {
-                      Vec<1, Pointer> p_ref_163 { id_998 };
-                      bool while_flag_1000 { true };
-                      do {
-                        uint8_t id_1001 { 0 };
-                        Pointer id_1002 { p_ref_163[id_1001] };
-                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1003 { id_1002.readU8() };
-                        bool let_res_1004;
-                        {
-                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_164 { id_1003 };
-                          bool letpair_res_1005;
-                          {
-                            auto leb128_fst_165 { std::get<0>(leb128_164) };
-                            auto leb128_snd_166 { std::get<1>(leb128_164) };
-                            uint8_t id_1006 { 0 };
-                            Void id_1007 { ((void)(p_ref_163[id_1006] = leb128_snd_166), ::dessser::Void()) };
-                            (void)id_1007;
-                            uint8_t id_1008 { 0 };
-                            uint8_t id_1009 { 127 };
-                            uint8_t id_1010 { uint8_t(leb128_fst_165 & id_1009) };
-                            uint32_t id_1011 { uint32_t(id_1010) };
-                            uint8_t id_1012 { 0 };
-                            uint8_t id_1013 { shft_ref_162[id_1012] };
-                            uint32_t id_1014 { uint32_t(id_1011 << id_1013) };
-                            uint8_t id_1015 { 0 };
-                            uint32_t id_1016 { leb_ref_161[id_1015] };
-                            uint32_t id_1017 { uint32_t(id_1014 | id_1016) };
-                            Void id_1018 { ((void)(leb_ref_161[id_1008] = id_1017), ::dessser::Void()) };
-                            (void)id_1018;
-                            uint8_t id_1019 { 0 };
-                            uint8_t id_1020 { 0 };
-                            uint8_t id_1021 { shft_ref_162[id_1020] };
-                            uint8_t id_1022 { 7 };
-                            uint8_t id_1023 { uint8_t(id_1021 + id_1022) };
-                            Void id_1024 { ((void)(shft_ref_162[id_1019] = id_1023), ::dessser::Void()) };
-                            (void)id_1024;
-                            uint8_t id_1025 { 128 };
-                            bool id_1026 { bool(leb128_fst_165 >= id_1025) };
-                            letpair_res_1005 = id_1026;
-                          }
-                          let_res_1004 = letpair_res_1005;
-                        }
-                        while_flag_1000 = let_res_1004;
-                        if (while_flag_1000) {
-                          (void)::dessser::Void();
-                        }
-                      } while (while_flag_1000);
-                      (void)::dessser::Void();
-                      uint8_t id_1027 { 0 };
-                      uint32_t id_1028 { leb_ref_161[id_1027] };
-                      Size id_1029 { Size(id_1028) };
-                      uint8_t id_1030 { 0 };
-                      Pointer id_1031 { p_ref_163[id_1030] };
-                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1032 { id_1029, id_1031 };
-                      let_res_999 = id_1032;
-                    }
-                    let_res_997 = let_res_999;
-                  }
-                  let_res_994 = let_res_997;
-                }
-                ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1033;
-                {
-                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_167 { let_res_994 };
-                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1034;
-                  {
-                    auto dstring1_fst_168 { std::get<0>(dstring1_167) };
-                    auto dstring1_snd_169 { std::get<1>(dstring1_167) };
-                    ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1035 { dstring1_snd_169.readBytes(dstring1_fst_168) };
-                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1036;
-                    {
-                      auto dstring2_fst_171 { std::get<0>(id_1035) };
-                      auto dstring2_snd_172 { std::get<1>(id_1035) };
-                      std::string id_1037 { dstring2_fst_171.toString() };
-                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1038 { id_1037, dstring2_snd_172 };
-                      letpair_res_1036 = id_1038;
-                    }
-                    letpair_res_1034 = letpair_res_1036;
-                  }
-                  let_res_1033 = letpair_res_1034;
-                }
-                ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1039;
-                {
-                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_173 { let_res_1033 };
-                  ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1040;
-                  {
-                    auto drec_fst_174 { std::get<0>(drec_173) };
-                    auto drec_snd_175 { std::get<1>(drec_173) };
-                    uint32_t id_1041 { 0U };
-                    Vec<1, uint32_t> id_1042 {  id_1041  };
-                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1043;
-                    {
-                      Vec<1, uint32_t> leb_ref_176 { id_1042 };
-                      uint8_t id_1044 { 0 };
-                      Vec<1, uint8_t> id_1045 {  id_1044  };
-                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1046;
-                      {
-                        Vec<1, uint8_t> shft_ref_177 { id_1045 };
-                        Vec<1, Pointer> id_1047 {  drec_snd_175  };
-                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1048;
-                        {
-                          Vec<1, Pointer> p_ref_178 { id_1047 };
-                          bool while_flag_1049 { true };
-                          do {
-                            uint8_t id_1050 { 0 };
-                            Pointer id_1051 { p_ref_178[id_1050] };
-                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1052 { id_1051.readU8() };
-                            bool let_res_1053;
-                            {
-                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_179 { id_1052 };
-                              bool letpair_res_1054;
-                              {
-                                auto leb128_fst_180 { std::get<0>(leb128_179) };
-                                auto leb128_snd_181 { std::get<1>(leb128_179) };
-                                uint8_t id_1055 { 0 };
-                                Void id_1056 { ((void)(p_ref_178[id_1055] = leb128_snd_181), ::dessser::Void()) };
-                                (void)id_1056;
-                                uint8_t id_1057 { 0 };
-                                uint8_t id_1058 { 127 };
-                                uint8_t id_1059 { uint8_t(leb128_fst_180 & id_1058) };
-                                uint32_t id_1060 { uint32_t(id_1059) };
-                                uint8_t id_1061 { 0 };
-                                uint8_t id_1062 { shft_ref_177[id_1061] };
-                                uint32_t id_1063 { uint32_t(id_1060 << id_1062) };
-                                uint8_t id_1064 { 0 };
-                                uint32_t id_1065 { leb_ref_176[id_1064] };
-                                uint32_t id_1066 { uint32_t(id_1063 | id_1065) };
-                                Void id_1067 { ((void)(leb_ref_176[id_1057] = id_1066), ::dessser::Void()) };
-                                (void)id_1067;
-                                uint8_t id_1068 { 0 };
-                                uint8_t id_1069 { 0 };
-                                uint8_t id_1070 { shft_ref_177[id_1069] };
-                                uint8_t id_1071 { 7 };
-                                uint8_t id_1072 { uint8_t(id_1070 + id_1071) };
-                                Void id_1073 { ((void)(shft_ref_177[id_1068] = id_1072), ::dessser::Void()) };
-                                (void)id_1073;
-                                uint8_t id_1074 { 128 };
-                                bool id_1075 { bool(leb128_fst_180 >= id_1074) };
-                                letpair_res_1054 = id_1075;
-                              }
-                              let_res_1053 = letpair_res_1054;
-                            }
-                            while_flag_1049 = let_res_1053;
-                            if (while_flag_1049) {
-                              (void)::dessser::Void();
-                            }
-                          } while (while_flag_1049);
-                          (void)::dessser::Void();
-                          uint8_t id_1076 { 0 };
-                          uint32_t id_1077 { leb_ref_176[id_1076] };
-                          Size id_1078 { Size(id_1077) };
-                          uint8_t id_1079 { 0 };
-                          Pointer id_1080 { p_ref_178[id_1079] };
-                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1081 { id_1078, id_1080 };
-                          let_res_1048 = id_1081;
-                        }
-                        let_res_1046 = let_res_1048;
-                      }
-                      let_res_1043 = let_res_1046;
-                    }
-                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1082;
-                    {
-                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_182 { let_res_1043 };
-                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1083;
-                      {
-                        auto dstring1_fst_183 { std::get<0>(dstring1_182) };
-                        auto dstring1_snd_184 { std::get<1>(dstring1_182) };
-                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1084 { dstring1_snd_184.readBytes(dstring1_fst_183) };
-                        ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1085;
-                        {
-                          auto dstring2_fst_186 { std::get<0>(id_1084) };
-                          auto dstring2_snd_187 { std::get<1>(id_1084) };
-                          std::string id_1086 { dstring2_fst_186.toString() };
-                          ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1087 { id_1086, dstring2_snd_187 };
-                          letpair_res_1085 = id_1087;
-                        }
-                        letpair_res_1083 = letpair_res_1085;
-                      }
-                      let_res_1082 = letpair_res_1083;
-                    }
-                    ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1088;
-                    {
-                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_188 { let_res_1082 };
-                      ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1089;
-                      {
-                        auto drec_fst_189 { std::get<0>(drec_188) };
-                        auto drec_snd_190 { std::get<1>(drec_188) };
-                        uint32_t id_1090 { 0U };
-                        Vec<1, uint32_t> id_1091 {  id_1090  };
-                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1092;
-                        {
-                          Vec<1, uint32_t> leb_ref_191 { id_1091 };
-                          uint8_t id_1093 { 0 };
-                          Vec<1, uint8_t> id_1094 {  id_1093  };
-                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1095;
-                          {
-                            Vec<1, uint8_t> shft_ref_192 { id_1094 };
-                            Vec<1, Pointer> id_1096 {  drec_snd_190  };
-                            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1097;
-                            {
-                              Vec<1, Pointer> p_ref_193 { id_1096 };
-                              bool while_flag_1098 { true };
-                              do {
-                                uint8_t id_1099 { 0 };
-                                Pointer id_1100 { p_ref_193[id_1099] };
-                                ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1101 { id_1100.readU8() };
-                                bool let_res_1102;
-                                {
-                                  ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_194 { id_1101 };
-                                  bool letpair_res_1103;
-                                  {
-                                    auto leb128_fst_195 { std::get<0>(leb128_194) };
-                                    auto leb128_snd_196 { std::get<1>(leb128_194) };
-                                    uint8_t id_1104 { 0 };
-                                    Void id_1105 { ((void)(p_ref_193[id_1104] = leb128_snd_196), ::dessser::Void()) };
-                                    (void)id_1105;
-                                    uint8_t id_1106 { 0 };
-                                    uint8_t id_1107 { 127 };
-                                    uint8_t id_1108 { uint8_t(leb128_fst_195 & id_1107) };
-                                    uint32_t id_1109 { uint32_t(id_1108) };
-                                    uint8_t id_1110 { 0 };
-                                    uint8_t id_1111 { shft_ref_192[id_1110] };
-                                    uint32_t id_1112 { uint32_t(id_1109 << id_1111) };
-                                    uint8_t id_1113 { 0 };
-                                    uint32_t id_1114 { leb_ref_191[id_1113] };
-                                    uint32_t id_1115 { uint32_t(id_1112 | id_1114) };
-                                    Void id_1116 { ((void)(leb_ref_191[id_1106] = id_1115), ::dessser::Void()) };
-                                    (void)id_1116;
-                                    uint8_t id_1117 { 0 };
-                                    uint8_t id_1118 { 0 };
-                                    uint8_t id_1119 { shft_ref_192[id_1118] };
-                                    uint8_t id_1120 { 7 };
-                                    uint8_t id_1121 { uint8_t(id_1119 + id_1120) };
-                                    Void id_1122 { ((void)(shft_ref_192[id_1117] = id_1121), ::dessser::Void()) };
-                                    (void)id_1122;
-                                    uint8_t id_1123 { 128 };
-                                    bool id_1124 { bool(leb128_fst_195 >= id_1123) };
-                                    letpair_res_1103 = id_1124;
-                                  }
-                                  let_res_1102 = letpair_res_1103;
-                                }
-                                while_flag_1098 = let_res_1102;
-                                if (while_flag_1098) {
-                                  (void)::dessser::Void();
-                                }
-                              } while (while_flag_1098);
-                              (void)::dessser::Void();
-                              uint8_t id_1125 { 0 };
-                              uint32_t id_1126 { leb_ref_191[id_1125] };
-                              Size id_1127 { Size(id_1126) };
-                              uint8_t id_1128 { 0 };
-                              Pointer id_1129 { p_ref_193[id_1128] };
-                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1130 { id_1127, id_1129 };
-                              let_res_1097 = id_1130;
-                            }
-                            let_res_1095 = let_res_1097;
-                          }
-                          let_res_1092 = let_res_1095;
-                        }
-                        ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1131;
-                        {
-                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_197 { let_res_1092 };
-                          ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1132;
-                          {
-                            auto dstring1_fst_198 { std::get<0>(dstring1_197) };
-                            auto dstring1_snd_199 { std::get<1>(dstring1_197) };
-                            ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1133 { dstring1_snd_199.readBytes(dstring1_fst_198) };
-                            ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1134;
-                            {
-                              auto dstring2_fst_201 { std::get<0>(id_1133) };
-                              auto dstring2_snd_202 { std::get<1>(id_1133) };
-                              std::string id_1135 { dstring2_fst_201.toString() };
-                              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_1136 { drec_fst_174, drec_fst_189, id_1135 };
-                              ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_1137 { std::in_place_index<3>, id_1136 };
-                              ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 id_1138 { id_1137, dstring2_snd_202 };
-                              letpair_res_1134 = id_1138;
-                            }
-                            letpair_res_1132 = letpair_res_1134;
-                          }
-                          let_res_1131 = letpair_res_1132;
-                        }
-                        letpair_res_1089 = let_res_1131;
-                      }
-                      let_res_1088 = letpair_res_1089;
-                    }
-                    letpair_res_1040 = let_res_1088;
-                  }
-                  let_res_1039 = letpair_res_1040;
-                }
-                choose_res_991 = let_res_1039;
-              } else {
-                uint16_t id_1139 { 4 };
-                bool id_1140 { bool(dsum1_fst_64 == id_1139) };
-                Void id_1141 { ((void)(assert(id_1140)), ::dessser::Void()) };
-                (void)id_1141;
-                uint32_t id_1142 { 0U };
-                Vec<1, uint32_t> id_1143 {  id_1142  };
-                ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1144;
-                {
-                  Vec<1, uint32_t> leb_ref_66 { id_1143 };
-                  uint8_t id_1145 { 0 };
-                  Vec<1, uint8_t> id_1146 {  id_1145  };
-                  ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1147;
-                  {
-                    Vec<1, uint8_t> shft_ref_67 { id_1146 };
-                    Vec<1, Pointer> id_1148 {  dsum1_snd_65  };
-                    ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 let_res_1149;
-                    {
-                      Vec<1, Pointer> p_ref_68 { id_1148 };
-                      bool while_flag_1150 { true };
-                      do {
-                        uint8_t id_1151 { 0 };
-                        Pointer id_1152 { p_ref_68[id_1151] };
-                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1153 { id_1152.readU8() };
-                        bool let_res_1154;
-                        {
-                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_69 { id_1153 };
-                          bool letpair_res_1155;
-                          {
-                            auto leb128_fst_70 { std::get<0>(leb128_69) };
-                            auto leb128_snd_71 { std::get<1>(leb128_69) };
-                            uint8_t id_1156 { 0 };
-                            Void id_1157 { ((void)(p_ref_68[id_1156] = leb128_snd_71), ::dessser::Void()) };
-                            (void)id_1157;
-                            uint8_t id_1158 { 0 };
-                            uint8_t id_1159 { 127 };
-                            uint8_t id_1160 { uint8_t(leb128_fst_70 & id_1159) };
-                            uint32_t id_1161 { uint32_t(id_1160) };
-                            uint8_t id_1162 { 0 };
-                            uint8_t id_1163 { shft_ref_67[id_1162] };
-                            uint32_t id_1164 { uint32_t(id_1161 << id_1163) };
-                            uint8_t id_1165 { 0 };
-                            uint32_t id_1166 { leb_ref_66[id_1165] };
-                            uint32_t id_1167 { uint32_t(id_1164 | id_1166) };
-                            Void id_1168 { ((void)(leb_ref_66[id_1158] = id_1167), ::dessser::Void()) };
-                            (void)id_1168;
-                            uint8_t id_1169 { 0 };
-                            uint8_t id_1170 { 0 };
-                            uint8_t id_1171 { shft_ref_67[id_1170] };
-                            uint8_t id_1172 { 7 };
-                            uint8_t id_1173 { uint8_t(id_1171 + id_1172) };
-                            Void id_1174 { ((void)(shft_ref_67[id_1169] = id_1173), ::dessser::Void()) };
-                            (void)id_1174;
-                            uint8_t id_1175 { 128 };
-                            bool id_1176 { bool(leb128_fst_70 >= id_1175) };
-                            letpair_res_1155 = id_1176;
-                          }
-                          let_res_1154 = letpair_res_1155;
-                        }
-                        while_flag_1150 = let_res_1154;
-                        if (while_flag_1150) {
-                          (void)::dessser::Void();
-                        }
-                      } while (while_flag_1150);
-                      (void)::dessser::Void();
-                      uint8_t id_1177 { 0 };
-                      uint32_t id_1178 { leb_ref_66[id_1177] };
-                      uint8_t id_1179 { 0 };
-                      Pointer id_1180 { p_ref_68[id_1179] };
-                      ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 id_1181 { id_1178, id_1180 };
-                      let_res_1149 = id_1181;
-                    }
-                    let_res_1147 = let_res_1149;
-                  }
-                  let_res_1144 = let_res_1147;
-                }
-                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1182;
-                {
-                  ::dessser::gen::alerting_contact::t491c44439106a32f896827242e8e76a1 dlist1_75 { let_res_1144 };
-                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1183;
-                  {
-                    auto dlist1_fst_76 { std::get<0>(dlist1_75) };
-                    auto dlist1_snd_77 { std::get<1>(dlist1_75) };
-                    Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> endoflist_1184;
-                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1185 { endoflist_1184, dlist1_snd_77 };
-                    Vec<1, ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149> id_1186 {  id_1185  };
-                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1187;
-                    {
-                      Vec<1, ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149> inits_src_ref_78 { id_1186 };
-                      int32_t id_1188 { 0L };
-                      Vec<1, int32_t> id_1189 {  id_1188  };
-                      {
-                        Vec<1, int32_t> repeat_n_79 { id_1189 };
-                        bool while_flag_1190 { true };
-                        do {
-                          int32_t id_1191 { int32_t(dlist1_fst_76) };
-                          uint8_t id_1192 { 0 };
-                          int32_t id_1193 { repeat_n_79[id_1192] };
-                          bool id_1194 { bool(id_1191 > id_1193) };
-                          while_flag_1190 = id_1194;
-                          if (while_flag_1190) {
-                            uint8_t id_1195 { 0 };
-                            ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1196 { inits_src_ref_78[id_1195] };
-                            {
-                              ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 dlist2_80 { id_1196 };
-                              {
-                                auto dlist2_fst_81 { std::get<0>(dlist2_80) };
-                                auto dlist2_snd_82 { std::get<1>(dlist2_80) };
-                                uint8_t id_1197 { 0 };
-                                uint32_t id_1198 { 0U };
-                                Vec<1, uint32_t> id_1199 {  id_1198  };
-                                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1200;
-                                {
-                                  Vec<1, uint32_t> leb_ref_83 { id_1199 };
-                                  uint8_t id_1201 { 0 };
-                                  Vec<1, uint8_t> id_1202 {  id_1201  };
-                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1203;
-                                  {
-                                    Vec<1, uint8_t> shft_ref_84 { id_1202 };
-                                    Vec<1, Pointer> id_1204 {  dlist2_snd_82  };
-                                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1205;
-                                    {
-                                      Vec<1, Pointer> p_ref_85 { id_1204 };
-                                      bool while_flag_1206 { true };
-                                      do {
-                                        uint8_t id_1207 { 0 };
-                                        Pointer id_1208 { p_ref_85[id_1207] };
-                                        ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1209 { id_1208.readU8() };
-                                        bool let_res_1210;
-                                        {
-                                          ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_86 { id_1209 };
-                                          bool letpair_res_1211;
-                                          {
-                                            auto leb128_fst_87 { std::get<0>(leb128_86) };
-                                            auto leb128_snd_88 { std::get<1>(leb128_86) };
-                                            uint8_t id_1212 { 0 };
-                                            Void id_1213 { ((void)(p_ref_85[id_1212] = leb128_snd_88), ::dessser::Void()) };
-                                            (void)id_1213;
-                                            uint8_t id_1214 { 0 };
-                                            uint8_t id_1215 { 127 };
-                                            uint8_t id_1216 { uint8_t(leb128_fst_87 & id_1215) };
-                                            uint32_t id_1217 { uint32_t(id_1216) };
-                                            uint8_t id_1218 { 0 };
-                                            uint8_t id_1219 { shft_ref_84[id_1218] };
-                                            uint32_t id_1220 { uint32_t(id_1217 << id_1219) };
-                                            uint8_t id_1221 { 0 };
-                                            uint32_t id_1222 { leb_ref_83[id_1221] };
-                                            uint32_t id_1223 { uint32_t(id_1220 | id_1222) };
-                                            Void id_1224 { ((void)(leb_ref_83[id_1214] = id_1223), ::dessser::Void()) };
-                                            (void)id_1224;
-                                            uint8_t id_1225 { 0 };
-                                            uint8_t id_1226 { 0 };
-                                            uint8_t id_1227 { shft_ref_84[id_1226] };
-                                            uint8_t id_1228 { 7 };
-                                            uint8_t id_1229 { uint8_t(id_1227 + id_1228) };
-                                            Void id_1230 { ((void)(shft_ref_84[id_1225] = id_1229), ::dessser::Void()) };
-                                            (void)id_1230;
-                                            uint8_t id_1231 { 128 };
-                                            bool id_1232 { bool(leb128_fst_87 >= id_1231) };
-                                            letpair_res_1211 = id_1232;
-                                          }
-                                          let_res_1210 = letpair_res_1211;
-                                        }
-                                        while_flag_1206 = let_res_1210;
-                                        if (while_flag_1206) {
-                                          (void)::dessser::Void();
-                                        }
-                                      } while (while_flag_1206);
-                                      (void)::dessser::Void();
-                                      uint8_t id_1233 { 0 };
-                                      uint32_t id_1234 { leb_ref_83[id_1233] };
-                                      Size id_1235 { Size(id_1234) };
-                                      uint8_t id_1236 { 0 };
-                                      Pointer id_1237 { p_ref_85[id_1236] };
-                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1238 { id_1235, id_1237 };
-                                      let_res_1205 = id_1238;
-                                    }
-                                    let_res_1203 = let_res_1205;
-                                  }
-                                  let_res_1200 = let_res_1203;
-                                }
-                                ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1239;
-                                {
-                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_89 { let_res_1200 };
-                                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1240;
-                                  {
-                                    auto dstring1_fst_90 { std::get<0>(dstring1_89) };
-                                    auto dstring1_snd_91 { std::get<1>(dstring1_89) };
-                                    ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1241 { dstring1_snd_91.readBytes(dstring1_fst_90) };
-                                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1242;
-                                    {
-                                      auto dstring2_fst_93 { std::get<0>(id_1241) };
-                                      auto dstring2_snd_94 { std::get<1>(id_1241) };
-                                      std::string id_1243 { dstring2_fst_93.toString() };
-                                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1244 { id_1243, dstring2_snd_94 };
-                                      letpair_res_1242 = id_1244;
-                                    }
-                                    letpair_res_1240 = letpair_res_1242;
-                                  }
-                                  let_res_1239 = letpair_res_1240;
-                                }
-                                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1245;
-                                {
-                                  ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 dtup_95 { let_res_1239 };
-                                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1246;
-                                  {
-                                    auto dtup_fst_96 { std::get<0>(dtup_95) };
-                                    auto dtup_snd_97 { std::get<1>(dtup_95) };
-                                    uint32_t id_1247 { 0U };
-                                    Vec<1, uint32_t> id_1248 {  id_1247  };
-                                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1249;
-                                    {
-                                      Vec<1, uint32_t> leb_ref_98 { id_1248 };
-                                      uint8_t id_1250 { 0 };
-                                      Vec<1, uint8_t> id_1251 {  id_1250  };
-                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1252;
-                                      {
-                                        Vec<1, uint8_t> shft_ref_99 { id_1251 };
-                                        Vec<1, Pointer> id_1253 {  dtup_snd_97  };
-                                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1254;
-                                        {
-                                          Vec<1, Pointer> p_ref_100 { id_1253 };
-                                          bool while_flag_1255 { true };
-                                          do {
-                                            uint8_t id_1256 { 0 };
-                                            Pointer id_1257 { p_ref_100[id_1256] };
-                                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1258 { id_1257.readU8() };
-                                            bool let_res_1259;
-                                            {
-                                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_101 { id_1258 };
-                                              bool letpair_res_1260;
-                                              {
-                                                auto leb128_fst_102 { std::get<0>(leb128_101) };
-                                                auto leb128_snd_103 { std::get<1>(leb128_101) };
-                                                uint8_t id_1261 { 0 };
-                                                Void id_1262 { ((void)(p_ref_100[id_1261] = leb128_snd_103), ::dessser::Void()) };
-                                                (void)id_1262;
-                                                uint8_t id_1263 { 0 };
-                                                uint8_t id_1264 { 127 };
-                                                uint8_t id_1265 { uint8_t(leb128_fst_102 & id_1264) };
-                                                uint32_t id_1266 { uint32_t(id_1265) };
-                                                uint8_t id_1267 { 0 };
-                                                uint8_t id_1268 { shft_ref_99[id_1267] };
-                                                uint32_t id_1269 { uint32_t(id_1266 << id_1268) };
-                                                uint8_t id_1270 { 0 };
-                                                uint32_t id_1271 { leb_ref_98[id_1270] };
-                                                uint32_t id_1272 { uint32_t(id_1269 | id_1271) };
-                                                Void id_1273 { ((void)(leb_ref_98[id_1263] = id_1272), ::dessser::Void()) };
-                                                (void)id_1273;
-                                                uint8_t id_1274 { 0 };
-                                                uint8_t id_1275 { 0 };
-                                                uint8_t id_1276 { shft_ref_99[id_1275] };
-                                                uint8_t id_1277 { 7 };
-                                                uint8_t id_1278 { uint8_t(id_1276 + id_1277) };
-                                                Void id_1279 { ((void)(shft_ref_99[id_1274] = id_1278), ::dessser::Void()) };
-                                                (void)id_1279;
-                                                uint8_t id_1280 { 128 };
-                                                bool id_1281 { bool(leb128_fst_102 >= id_1280) };
-                                                letpair_res_1260 = id_1281;
-                                              }
-                                              let_res_1259 = letpair_res_1260;
-                                            }
-                                            while_flag_1255 = let_res_1259;
-                                            if (while_flag_1255) {
-                                              (void)::dessser::Void();
-                                            }
-                                          } while (while_flag_1255);
-                                          (void)::dessser::Void();
-                                          uint8_t id_1282 { 0 };
-                                          uint32_t id_1283 { leb_ref_98[id_1282] };
-                                          Size id_1284 { Size(id_1283) };
-                                          uint8_t id_1285 { 0 };
-                                          Pointer id_1286 { p_ref_100[id_1285] };
-                                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1287 { id_1284, id_1286 };
-                                          let_res_1254 = id_1287;
-                                        }
-                                        let_res_1252 = let_res_1254;
-                                      }
-                                      let_res_1249 = let_res_1252;
-                                    }
-                                    ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 let_res_1288;
-                                    {
-                                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_104 { let_res_1249 };
-                                      ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1289;
-                                      {
-                                        auto dstring1_fst_105 { std::get<0>(dstring1_104) };
-                                        auto dstring1_snd_106 { std::get<1>(dstring1_104) };
-                                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1290 { dstring1_snd_106.readBytes(dstring1_fst_105) };
-                                        ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1291;
-                                        {
-                                          auto dstring2_fst_108 { std::get<0>(id_1290) };
-                                          auto dstring2_snd_109 { std::get<1>(id_1290) };
-                                          std::string id_1292 { dstring2_fst_108.toString() };
-                                          ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_1293 { dtup_fst_96, id_1292 };
-                                          Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_1294 { id_1293, dlist2_fst_81 };
-                                          ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1295 { id_1294, dstring2_snd_109 };
-                                          letpair_res_1291 = id_1295;
-                                        }
-                                        letpair_res_1289 = letpair_res_1291;
-                                      }
-                                      let_res_1288 = letpair_res_1289;
-                                    }
-                                    letpair_res_1246 = let_res_1288;
-                                  }
-                                  let_res_1245 = letpair_res_1246;
-                                }
-                                Void id_1296 { ((void)(inits_src_ref_78[id_1197] = let_res_1245), ::dessser::Void()) };
-                                (void)id_1296;
-                              }
-                              (void)::dessser::Void();
-                            }
-                            (void)::dessser::Void();
-                            uint8_t id_1297 { 0 };
-                            uint8_t id_1298 { 0 };
-                            int32_t id_1299 { repeat_n_79[id_1298] };
-                            int32_t id_1300 { 1L };
-                            int32_t id_1301 { int32_t(id_1299 + id_1300) };
-                            Void id_1302 { ((void)(repeat_n_79[id_1297] = id_1301), ::dessser::Void()) };
-                            (void)id_1302;
-                            (void)id_1302;
-                          }
-                        } while (while_flag_1190);
-                        (void)::dessser::Void();
-                      }
-                      (void)::dessser::Void();
-                      uint8_t id_1303 { 0 };
-                      ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1304 { inits_src_ref_78[id_1303] };
-                      let_res_1187 = id_1304;
-                    }
-                    letpair_res_1183 = let_res_1187;
-                  }
-                  let_res_1182 = letpair_res_1183;
-                }
-                ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 letpair_res_1305;
-                {
-                  auto dlist4_fst_117 { std::get<0>(let_res_1182) };
-                  auto dlist4_snd_118 { std::get<1>(let_res_1182) };
-                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1306 { dlist4_fst_117, dlist4_snd_118 };
-                  letpair_res_1305 = id_1306;
-                }
-                ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1307;
-                {
-                  ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 drec_119 { letpair_res_1305 };
-                  ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1308;
-                  {
-                    auto drec_fst_120 { std::get<0>(drec_119) };
-                    auto drec_snd_121 { std::get<1>(drec_119) };
-                    uint32_t id_1309 { 0U };
-                    Vec<1, uint32_t> id_1310 {  id_1309  };
-                    ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1311;
-                    {
-                      Vec<1, uint32_t> leb_ref_122 { id_1310 };
-                      uint8_t id_1312 { 0 };
-                      Vec<1, uint8_t> id_1313 {  id_1312  };
-                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1314;
-                      {
-                        Vec<1, uint8_t> shft_ref_123 { id_1313 };
-                        Vec<1, Pointer> id_1315 {  drec_snd_121  };
-                        ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1316;
-                        {
-                          Vec<1, Pointer> p_ref_124 { id_1315 };
-                          bool while_flag_1317 { true };
-                          do {
-                            uint8_t id_1318 { 0 };
-                            Pointer id_1319 { p_ref_124[id_1318] };
-                            ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1320 { id_1319.readU8() };
-                            bool let_res_1321;
-                            {
-                              ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_125 { id_1320 };
-                              bool letpair_res_1322;
-                              {
-                                auto leb128_fst_126 { std::get<0>(leb128_125) };
-                                auto leb128_snd_127 { std::get<1>(leb128_125) };
-                                uint8_t id_1323 { 0 };
-                                Void id_1324 { ((void)(p_ref_124[id_1323] = leb128_snd_127), ::dessser::Void()) };
-                                (void)id_1324;
-                                uint8_t id_1325 { 0 };
-                                uint8_t id_1326 { 127 };
-                                uint8_t id_1327 { uint8_t(leb128_fst_126 & id_1326) };
-                                uint32_t id_1328 { uint32_t(id_1327) };
-                                uint8_t id_1329 { 0 };
-                                uint8_t id_1330 { shft_ref_123[id_1329] };
-                                uint32_t id_1331 { uint32_t(id_1328 << id_1330) };
-                                uint8_t id_1332 { 0 };
-                                uint32_t id_1333 { leb_ref_122[id_1332] };
-                                uint32_t id_1334 { uint32_t(id_1331 | id_1333) };
-                                Void id_1335 { ((void)(leb_ref_122[id_1325] = id_1334), ::dessser::Void()) };
-                                (void)id_1335;
-                                uint8_t id_1336 { 0 };
-                                uint8_t id_1337 { 0 };
-                                uint8_t id_1338 { shft_ref_123[id_1337] };
-                                uint8_t id_1339 { 7 };
-                                uint8_t id_1340 { uint8_t(id_1338 + id_1339) };
-                                Void id_1341 { ((void)(shft_ref_123[id_1336] = id_1340), ::dessser::Void()) };
-                                (void)id_1341;
-                                uint8_t id_1342 { 128 };
-                                bool id_1343 { bool(leb128_fst_126 >= id_1342) };
-                                letpair_res_1322 = id_1343;
-                              }
-                              let_res_1321 = letpair_res_1322;
-                            }
-                            while_flag_1317 = let_res_1321;
-                            if (while_flag_1317) {
-                              (void)::dessser::Void();
-                            }
-                          } while (while_flag_1317);
-                          (void)::dessser::Void();
-                          uint8_t id_1344 { 0 };
-                          uint32_t id_1345 { leb_ref_122[id_1344] };
-                          Size id_1346 { Size(id_1345) };
-                          uint8_t id_1347 { 0 };
-                          Pointer id_1348 { p_ref_124[id_1347] };
-                          ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1349 { id_1346, id_1348 };
-                          let_res_1316 = id_1349;
-                        }
-                        let_res_1314 = let_res_1316;
-                      }
-                      let_res_1311 = let_res_1314;
-                    }
-                    ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 let_res_1350;
-                    {
-                      ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_128 { let_res_1311 };
-                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1351;
-                      {
-                        auto dstring1_fst_129 { std::get<0>(dstring1_128) };
-                        auto dstring1_snd_130 { std::get<1>(dstring1_128) };
-                        ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1352 { dstring1_snd_130.readBytes(dstring1_fst_129) };
-                        ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 letpair_res_1353;
-                        {
-                          auto dstring2_fst_132 { std::get<0>(id_1352) };
-                          auto dstring2_snd_133 { std::get<1>(id_1352) };
-                          std::string id_1354 { dstring2_fst_132.toString() };
-                          ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 id_1355 { id_1354, dstring2_snd_133 };
-                          letpair_res_1353 = id_1355;
-                        }
-                        letpair_res_1351 = letpair_res_1353;
-                      }
-                      let_res_1350 = letpair_res_1351;
-                    }
-                    ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1356;
-                    {
-                      ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_134 { let_res_1350 };
-                      ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1357;
-                      {
-                        auto drec_fst_135 { std::get<0>(drec_134) };
-                        auto drec_snd_136 { std::get<1>(drec_134) };
-                        ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_1358 { drec_snd_136.readU16Le() };
-                        ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1359;
-                        {
-                          auto du16_fst_138 { std::get<0>(id_1358) };
-                          auto du16_snd_139 { std::get<1>(id_1358) };
-                          ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_1360 { du16_fst_138, du16_snd_139 };
-                          letpair_res_1359 = id_1360;
-                        }
-                        ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1361;
-                        {
-                          ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 drec_140 { letpair_res_1359 };
-                          ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1362;
-                          {
-                            auto drec_fst_141 { std::get<0>(drec_140) };
-                            auto drec_snd_142 { std::get<1>(drec_140) };
-                            uint32_t id_1363 { 0U };
-                            Vec<1, uint32_t> id_1364 {  id_1363  };
-                            ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1365;
-                            {
-                              Vec<1, uint32_t> leb_ref_143 { id_1364 };
-                              uint8_t id_1366 { 0 };
-                              Vec<1, uint8_t> id_1367 {  id_1366  };
-                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1368;
-                              {
-                                Vec<1, uint8_t> shft_ref_144 { id_1367 };
-                                Vec<1, Pointer> id_1369 {  drec_snd_142  };
-                                ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa let_res_1370;
-                                {
-                                  Vec<1, Pointer> p_ref_145 { id_1369 };
-                                  bool while_flag_1371 { true };
-                                  do {
-                                    uint8_t id_1372 { 0 };
-                                    Pointer id_1373 { p_ref_145[id_1372] };
-                                    ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 id_1374 { id_1373.readU8() };
-                                    bool let_res_1375;
-                                    {
-                                      ::dessser::gen::alerting_contact::t1a5d74abf838df33f185a72a8912f5c9 leb128_146 { id_1374 };
-                                      bool letpair_res_1376;
-                                      {
-                                        auto leb128_fst_147 { std::get<0>(leb128_146) };
-                                        auto leb128_snd_148 { std::get<1>(leb128_146) };
-                                        uint8_t id_1377 { 0 };
-                                        Void id_1378 { ((void)(p_ref_145[id_1377] = leb128_snd_148), ::dessser::Void()) };
-                                        (void)id_1378;
-                                        uint8_t id_1379 { 0 };
-                                        uint8_t id_1380 { 127 };
-                                        uint8_t id_1381 { uint8_t(leb128_fst_147 & id_1380) };
-                                        uint32_t id_1382 { uint32_t(id_1381) };
-                                        uint8_t id_1383 { 0 };
-                                        uint8_t id_1384 { shft_ref_144[id_1383] };
-                                        uint32_t id_1385 { uint32_t(id_1382 << id_1384) };
-                                        uint8_t id_1386 { 0 };
-                                        uint32_t id_1387 { leb_ref_143[id_1386] };
-                                        uint32_t id_1388 { uint32_t(id_1385 | id_1387) };
-                                        Void id_1389 { ((void)(leb_ref_143[id_1379] = id_1388), ::dessser::Void()) };
-                                        (void)id_1389;
-                                        uint8_t id_1390 { 0 };
-                                        uint8_t id_1391 { 0 };
-                                        uint8_t id_1392 { shft_ref_144[id_1391] };
-                                        uint8_t id_1393 { 7 };
-                                        uint8_t id_1394 { uint8_t(id_1392 + id_1393) };
-                                        Void id_1395 { ((void)(shft_ref_144[id_1390] = id_1394), ::dessser::Void()) };
-                                        (void)id_1395;
-                                        uint8_t id_1396 { 128 };
-                                        bool id_1397 { bool(leb128_fst_147 >= id_1396) };
-                                        letpair_res_1376 = id_1397;
-                                      }
-                                      let_res_1375 = letpair_res_1376;
-                                    }
-                                    while_flag_1371 = let_res_1375;
-                                    if (while_flag_1371) {
-                                      (void)::dessser::Void();
-                                    }
-                                  } while (while_flag_1371);
-                                  (void)::dessser::Void();
-                                  uint8_t id_1398 { 0 };
-                                  uint32_t id_1399 { leb_ref_143[id_1398] };
-                                  Size id_1400 { Size(id_1399) };
-                                  uint8_t id_1401 { 0 };
-                                  Pointer id_1402 { p_ref_145[id_1401] };
-                                  ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa id_1403 { id_1400, id_1402 };
-                                  let_res_1370 = id_1403;
-                                }
-                                let_res_1368 = let_res_1370;
-                              }
-                              let_res_1365 = let_res_1368;
-                            }
-                            ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 let_res_1404;
-                            {
-                              ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_149 { let_res_1365 };
-                              ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1405;
-                              {
-                                auto dstring1_fst_150 { std::get<0>(dstring1_149) };
-                                auto dstring1_snd_151 { std::get<1>(dstring1_149) };
-                                ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1406 { dstring1_snd_151.readBytes(dstring1_fst_150) };
-                                ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 letpair_res_1407;
-                                {
-                                  auto dstring2_fst_153 { std::get<0>(id_1406) };
-                                  auto dstring2_snd_154 { std::get<1>(id_1406) };
-                                  std::string id_1408 { dstring2_fst_153.toString() };
-                                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_1409 { drec_fst_120, drec_fst_135, drec_fst_141, id_1408 };
-                                  ::dessser::gen::alerting_contact::t1558ab2cac2ec9cd59eeb75b3e9a4313 id_1410 { std::in_place_index<4>, id_1409 };
-                                  ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 id_1411 { id_1410, dstring2_snd_154 };
-                                  letpair_res_1407 = id_1411;
-                                }
-                                letpair_res_1405 = letpair_res_1407;
-                              }
-                              let_res_1404 = letpair_res_1405;
-                            }
-                            letpair_res_1362 = let_res_1404;
-                          }
-                          let_res_1361 = letpair_res_1362;
-                        }
-                        letpair_res_1357 = let_res_1361;
-                      }
-                      let_res_1356 = letpair_res_1357;
-                    }
-                    letpair_res_1308 = let_res_1356;
-                  }
-                  let_res_1307 = letpair_res_1308;
-                }
-                choose_res_991 = let_res_1307;
-              }
-              choose_res_940 = choose_res_991;
-            }
-            choose_res_889 = choose_res_940;
-          }
-          choose_res_884 = choose_res_889;
-        }
-        letpair_res_881 = choose_res_884;
-      }
-      let_res_880 = letpair_res_881;
-    }
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae let_res_1412;
-    {
-      ::dessser::gen::alerting_contact::tf9b6d753849d589dc801eb6a515665f8 drec_242 { let_res_880 };
-      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1413;
+      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 drec_242 { id_1373 };
+      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1375;
       {
         auto drec_fst_243 { std::get<0>(drec_242) };
         auto drec_snd_244 { std::get<1>(drec_242) };
-        ::dessser::gen::alerting_contact::td2cd337bb3c8bc04d5603393d084985b id_1414 { drec_snd_244.readU64Le() };
-        ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1415;
+        ::dessser::gen::alerting_contact::td2cd337bb3c8bc04d5603393d084985b id_1376 { drec_snd_244.readU64Le() };
+        ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1377;
         {
-          auto dfloat_fst_246 { std::get<0>(id_1414) };
-          auto dfloat_snd_247 { std::get<1>(id_1414) };
-          double id_1416 { float_of_qword(dfloat_fst_246) };
-          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1417 { std::make_shared<::dessser::gen::alerting_contact::t>(drec_fst_243, id_1416) };
-          ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1418 { id_1417, dfloat_snd_247 };
-          letpair_res_1415 = id_1418;
+          auto dfloat_fst_246 { std::get<0>(id_1376) };
+          auto dfloat_snd_247 { std::get<1>(id_1376) };
+          double id_1378 { float_of_qword(dfloat_fst_246) };
+          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1379 { std::make_shared<::dessser::gen::alerting_contact::t>(drec_fst_243, id_1378) };
+          ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1380 { id_1379, dfloat_snd_247 };
+          letpair_res_1377 = id_1380;
         }
-        letpair_res_1413 = letpair_res_1415;
+        letpair_res_1375 = letpair_res_1377;
       }
-      let_res_1412 = letpair_res_1413;
+      let_res_1374 = letpair_res_1375;
     }
-    return let_res_1412;
+    return let_res_1374;
   }
    };
-  return fun876;
+  return fun1372;
 }
 std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> of_row_binary(of_row_binary_init());
 
@@ -3365,34 +3349,34 @@ std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8a
  */
 static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun1419 { [&](Pointer p_0) {
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1420 { of_row_binary(p_0) };
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1421;
+  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun1381 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1382 { of_row_binary(p_0) };
+    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1383;
     {
-      auto make_fst_252 { std::get<0>(id_1420) };
-      auto make_snd_253 { std::get<1>(id_1420) };
-      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1422 { make_fst_252, make_snd_253 };
-      letpair_res_1421 = id_1422;
+      auto make_fst_252 { std::get<0>(id_1382) };
+      auto make_snd_253 { std::get<1>(id_1382) };
+      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1384 { make_fst_252, make_snd_253 };
+      letpair_res_1383 = id_1384;
     }
-    return letpair_res_1421;
+    return letpair_res_1383;
   }
    };
-  return fun1419;
+  return fun1381;
 }
 std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
-    (fun ("{via: [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]; timeout: FLOAT}" "Ptr")
+    (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
 static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun1423 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
-    Pointer id_1424 { to_row_binary(p_0, p_1) };
-    return id_1424;
+  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun1385 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
+    Pointer id_1386 { to_row_binary(p_0, p_1) };
+    return id_1386;
   }
    };
-  return fun1423;
+  return fun1385;
 }
 std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
 

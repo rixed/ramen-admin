@@ -186,6 +186,7 @@ HEADERS += \
   KShortLabel.h \
   RangeIntValidator.h \
   PathNameValidator.h \
+  ListEditor.h \
   KArrEditor.h \
   KIntEditor.h \
   KCharEditor.h \
@@ -294,6 +295,13 @@ HEADERS += \
   alerting/NotifTimeLine.h \
   alerting/AlertingTimeLine.h \
   alerting/AlertingWin.h \
+  alerting/AlertingContactEditor.h \
+  alerting/AlertingContactViaEditor.h \
+  alerting/AlertingContactIgnoreEditor.h \
+  alerting/AlertingContactExecuteEditor.h \
+  alerting/AlertingContactSyslogEditor.h \
+  alerting/AlertingContactSqliteEditor.h\
+  alerting/AlertingContactKafkaEditor.h\
   stream/OperationsView.h \
   stream/OperationsWin.h \
   Menu.h \
@@ -346,6 +354,7 @@ SOURCES += \
   KShortLabel.cpp \
   RangeIntValidator.cpp \
   PathNameValidator.cpp \
+  ListEditor.cpp \
   KArrEditor.cpp \
   KIntEditor.cpp \
   KCharEditor.cpp \
@@ -454,6 +463,13 @@ SOURCES += \
   alerting/NotifTimeLine.cpp \
   alerting/AlertingTimeLine.cpp \
   alerting/AlertingWin.cpp \
+  alerting/AlertingContactEditor.cpp \
+  alerting/AlertingContactViaEditor.cpp \
+  alerting/AlertingContactIgnoreEditor.cpp \
+  alerting/AlertingContactExecuteEditor.cpp \
+  alerting/AlertingContactSyslogEditor.cpp \
+  alerting/AlertingContactSqliteEditor.cpp \
+  alerting/AlertingContactKafkaEditor.cpp \
   stream/OperationsView.cpp \
   stream/OperationsWin.cpp \
   Menu.cpp \
