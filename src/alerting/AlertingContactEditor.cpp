@@ -88,8 +88,8 @@ bool AlertingContactEditor::setValue(
     return false;
   }
   if (!editors[index]->setValue(contact->via)) return false;
-  //stackedLayout->setCurrentIndex(index);
-  typeEdit->setCurrentIndex(index); // Will set stackedLayout
+  // stackedLayout->setCurrentIndex(index);
+  typeEdit->setCurrentIndex(index);  // Will set stackedLayout
   timeoutEditor->setText(QString::number(contact->timeout));
   return true;
 }

@@ -96,8 +96,7 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
   connect(threshold, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
   recovery = new QLineEdit;
   recovery->setValidator(new QDoubleValidator);
-  connect(recovery, &QLineEdit::textChanged, this,
-          &AlertEditor::inputChanged);
+  connect(recovery, &QLineEdit::textChanged, this, &AlertEditor::inputChanged);
   duration = new QLineEdit;
   duration->setValidator(
       // TODO: DurationValidator
@@ -263,8 +262,7 @@ AlertEditor::AlertEditor(QWidget *parent) : AtomicWidget(parent) {
           &AlertEditor::updateDescription);
   /* Whenever the recovery is set then the value of min/max radios becomes
    * read-only */
-  connect(recovery, &QLineEdit::textChanged, this,
-          &AlertEditor::updateMinMax);
+  connect(recovery, &QLineEdit::textChanged, this, &AlertEditor::updateMinMax);
   connect(duration, &QLineEdit::textChanged, this,
           &AlertEditor::updateDescription);
   connect(percentage, &QLineEdit::textChanged, this,
@@ -312,12 +310,10 @@ void AlertEditor::toggleAutoGroupBy(int state) {
   if (!manualGroupBy) groupBy->hide();
 }
 
-bool AlertEditor::hasRecovery() const {
-  return !recovery->text().isEmpty();
-}
+bool AlertEditor::hasRecovery() const { return !recovery->text().isEmpty(); }
 
 void AlertEditor::updateMinMax() {
-  if (!recovery->isEnabled()) return; // wtv
+  if (!recovery->isEnabled()) return;  // wtv
 
   bool enabled{true};
   if (!recovery->text().isEmpty() && !threshold->text().isEmpty()) {

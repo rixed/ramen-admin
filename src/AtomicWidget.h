@@ -26,7 +26,9 @@ struct t;
  * QWidget). Instead they will have to include this QWidget they wish they
  * inherited from as a member and redirect calls to the few interesting QWidget
  * functions to that member. To help with this (esp. sizing) pass your widget
- * to relayoutWidget. This allows us to use an AtomicWidget to indiscriminately
+ * to relayoutWidget.
+ * It is possible to relayoutWidget several times when the widget changes.
+ * This allows us to use an AtomicWidget to indiscriminately
  * manipulate any value editor. */
 class AtomicWidget : public QWidget {
   Q_OBJECT

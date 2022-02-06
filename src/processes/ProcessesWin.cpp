@@ -20,49 +20,47 @@ ProcessesWin::ProcessesWin(QWidget *parent)
     setCentralWidget(processesWidget);
 
     /* The menu bar */
-    QMenu *viewMenu{this->menuBar()->addMenu(
-        QCoreApplication::translate("QMenuBar", "&View"))};
+    QMenu *viewMenu{this->menuBar()->addMenu(tr("&View"))};
 
-    viewMenu->addAction(QCoreApplication::translate("QMenuBar", "Search…"),
-                        processesWidget, &ProcessesWidget::openSearch,
-                        QKeySequence::Find);
+    viewMenu->addAction(tr("Search…"), processesWidget,
+                        &ProcessesWidget::openSearch, QKeySequence::Find);
 
     // Also list unused workers (from lazy functions):
-    QAction *viewUnused{viewMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Unused"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewUnused)};
+    QAction *viewUnused{viewMenu->addAction(tr("Unused"),
+                                            processesWidget->proxyModel,
+                                            &ProcessesWidgetProxy::viewUnused)};
     viewUnused->setCheckable(true);
     viewUnused->setChecked(false);
     processesWidget->proxyModel->viewUnused(false);
 
     // Also list temporarily disabled functions:
-    QAction *viewDisabled{viewMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Disabled"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewDisabled)};
+    QAction *viewDisabled{
+        viewMenu->addAction(tr("Disabled"), processesWidget->proxyModel,
+                            &ProcessesWidgetProxy::viewDisabled)};
     viewDisabled->setCheckable(true);
     viewDisabled->setChecked(true);
     processesWidget->proxyModel->viewDisabled(true);
 
     /* Also list workers with no pid (such as conditionally disabled workers).
      * Notice that unused or disabled workers won't have a pid. */
-    QAction *viewNonRunning{viewMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Non-Running"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewNonRunning)};
+    QAction *viewNonRunning{
+        viewMenu->addAction(tr("Non-Running"), processesWidget->proxyModel,
+                            &ProcessesWidgetProxy::viewNonRunning)};
     viewNonRunning->setCheckable(true);
     viewNonRunning->setChecked(false);
     processesWidget->proxyModel->viewNonRunning(false);
 
     // Also list instances without any worker at all:
-    QAction *viewFinished{viewMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Finished"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewFinished)};
+    QAction *viewFinished{
+        viewMenu->addAction(tr("Finished"), processesWidget->proxyModel,
+                            &ProcessesWidgetProxy::viewFinished)};
     viewFinished->setCheckable(true);
     viewFinished->setChecked(false);
     processesWidget->proxyModel->viewFinished(false);
 
-    QAction *viewTopHalves{viewMenu->addAction(
-        QCoreApplication::translate("QMenuBar", "Top-Halves"),
-        processesWidget->proxyModel, &ProcessesWidgetProxy::viewTopHalves)};
+    QAction *viewTopHalves{
+        viewMenu->addAction(tr("Top-Halves"), processesWidget->proxyModel,
+                            &ProcessesWidgetProxy::viewTopHalves)};
     viewTopHalves->setCheckable(true);
     viewTopHalves->setChecked(false);
     processesWidget->proxyModel->viewTopHalves(false);

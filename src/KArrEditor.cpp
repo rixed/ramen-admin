@@ -23,7 +23,7 @@ KArrEditor::KArrEditor(std::shared_ptr<dessser::gen::raql_type::t const> type_,
   /* TODO: add a label "empty list" that's made hidden/visible on setValue
    * depending on the emptyness of the list */
   l->addStretch(1);
-  Resources *r = Resources::get();
+  Resources *r{Resources::get()};
   addButton = new QPushButton(r->addPixmap, tr("&add"));
   l->addWidget(addButton);
   layout->addLayout(l);
@@ -122,7 +122,7 @@ AtomicWidget *KArrEditor::insertNewEditor(int i) {
   connect(editor, &AtomicWidget::inputChanged, this, &KArrEditor::inputChanged);
   l->addWidget(editor);
 
-  Resources *r = Resources::get();
+  Resources *r{Resources::get()};
   QPushButton *deleteButton{new QPushButton(r->deletePixmap, tr("delete"))};
   l->addWidget(deleteButton);
   connect(deleteButton, &QPushButton::clicked,
