@@ -27,8 +27,9 @@ class AlertingContactEditor : public AtomicWidget {
 
   void setEnabled(bool);
 
- public slots:
   bool setValue(std::shared_ptr<dessser::gen::sync_value::t const>);
+
+  void clear();
 };
 
 #endif

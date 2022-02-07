@@ -25,6 +25,8 @@ class AlertingContactKafkaEditor : public AlertingContactViaEditor {
       const override;
 
   bool setValue(std::shared_ptr<dessser::gen::alerting_contact::via const>);
+
+  void clear();
 };
 
 #endif

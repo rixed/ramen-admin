@@ -50,3 +50,9 @@ bool AlertingContactKafkaEditor::setValue(
   textEdit->setPlainText(QString::fromStdString(k.text));
   return true;
 }
+
+void AlertingContactKafkaEditor::clear() {
+  topicEdit->clear();
+  partitionEdit->clear();
+  textEdit->clear();
+}

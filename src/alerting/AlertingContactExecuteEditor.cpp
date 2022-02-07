@@ -31,3 +31,5 @@ bool AlertingContactExecuteEditor::setValue(
       std::get<dessser::gen::alerting_contact::Exec>(*v)));
   return true;
 }
+
+void AlertingContactExecuteEditor::clear() { edit->clear(); }

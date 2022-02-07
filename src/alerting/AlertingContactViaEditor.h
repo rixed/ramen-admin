@@ -23,6 +23,8 @@ class AlertingContactViaEditor : public QWidget {
 
   virtual bool setValue(
       std::shared_ptr<dessser::gen::alerting_contact::via const>) = 0;
+
+  virtual void clear() = 0;
 };
 
 #endif

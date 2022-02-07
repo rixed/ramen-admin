@@ -19,7 +19,9 @@
 
 static constexpr bool verbose{false};
 
-AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent) : QWidget(parent) {
+AtomicForm::AtomicForm(bool visibleButtons, bool cancel_stays_enabled,
+                       QWidget *parent)
+    : QWidget(parent), cancelStaysEnabled(cancel_stays_enabled) {
   groupLayout = new QVBoxLayout(this);
   groupLayout->setObjectName("groupLayout");
   groupLayout->setContentsMargins(QMargins());
@@ -55,7 +57,7 @@ AtomicForm::AtomicForm(bool visibleButtons, QWidget *parent) : QWidget(parent) {
   cancelButton = new QPushButton(tr("&cancel"));
   buttonsLayout->addWidget(cancelButton);
   connect(cancelButton, &QPushButton::clicked, this, &AtomicForm::wantCancel);
-  cancelButton->setEnabled(false);
+  cancelButton->setEnabled(cancelStaysEnabled);
 
   deleteButton = new QPushButton(r->deletePixmap, tr("&delete"));
   buttonsLayout->addWidget(deleteButton);
@@ -247,6 +249,8 @@ void AtomicForm::doCancel() {
 }
 
 void AtomicForm::wantCancel() {
+  if (!isEnabled()) return;
+
   if (someEdited()) {
     if (QMessageBox::Yes == confirmCancelDialog->exec()) {
       doCancel();
@@ -303,7 +307,7 @@ void AtomicForm::wantSubmit() {
 
 /* Overwrite QWidget::isEnabled/setEnabled: */
 
-bool AtomicForm::isEnabled() const { return cancelButton->isEnabled(); }
+bool AtomicForm::isEnabled() const { return !editButton->isEnabled(); }
 
 void AtomicForm::setEnabled(bool enabled) {
   bool const wasEnabled{isEnabled()};
@@ -331,7 +335,7 @@ void AtomicForm::setEnabled(bool enabled) {
 
   // An enabled form is a form that's editable:
   editButton->setEnabled(!enabled);
-  cancelButton->setEnabled(enabled);
+  cancelButton->setEnabled(cancelStaysEnabled || enabled);
   deleteButton->setEnabled(enabled);
   checkValidity();
 

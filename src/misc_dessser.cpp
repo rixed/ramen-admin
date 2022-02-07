@@ -329,6 +329,23 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(
       std::in_place_index<dessser::gen::sync_key::Sources>, path, ext);
 }
 
+std::shared_ptr<dessser::gen::sync_key::t> keyOfTeamContact(
+    std::string const &team_name, std::string const &contact_name) {
+  return std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::Teams>, team_name,
+      std::make_shared<dessser::gen::sync_key::team_key_info>(
+          std::in_place_index<dessser::gen::sync_key::Contacts>, contact_name));
+}
+
+std::shared_ptr<dessser::gen::sync_key::t> keyOfInhibition(
+    std::string const &team_name, std::string const &inhibition_name) {
+  return std::make_shared<dessser::gen::sync_key::t>(
+      std::in_place_index<dessser::gen::sync_key::Teams>, team_name,
+      std::make_shared<dessser::gen::sync_key::team_key_info>(
+          std::in_place_index<dessser::gen::sync_key::Inhibition>,
+          inhibition_name));
+}
+
 std::shared_ptr<dessser::gen::sync_key::t> changeSourceExtension(
     dessser::gen::sync_key::t const &key, std::string const &new_ext) {
   if (key.index() != dessser::gen::sync_key::Sources) return nullptr;

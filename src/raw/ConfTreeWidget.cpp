@@ -229,21 +229,19 @@ static QStringList treeNamesOfPerClientKey(dessser::gen::sync_key::t const &k) {
 
 static QStringList treeNamesOfTeamsKey(dessser::gen::sync_key::t const &k) {
   using namespace dessser::gen::sync_key;
-  auto const &teams{std::get<Teams>(k)};
-  std::string const &team_name{std::get<0>(teams)};
-  auto const &team_data{std::get<1>(teams)};
+  auto const &team{std::get<Teams>(k)};
   QStringList ret{QStringList("Teams")
-                  << QString::fromStdString(team_name).split(
+                  << QString::fromStdString(team.name).split(
                          '/', Qt::SkipEmptyParts)};
-  switch (team_data.index()) {
+  switch (team.info->index()) {
     case Contacts:
       return ret << "Contacts"
-                 << QString::fromStdString(std::get<Contacts>(team_data));
+                 << QString::fromStdString(std::get<Contacts>(*team.info));
     case Inhibition:
       return ret << "Inhibition"
-                 << QString::fromStdString(std::get<Inhibition>(team_data));
+                 << QString::fromStdString(std::get<Inhibition>(*team.info));
     default:
-      qFatal("Invalid team_data");
+      qFatal("Invalid team.info");
   }
 }
 

@@ -69,6 +69,8 @@ class AtomicForm : public QWidget {
   std::list<FormWidget> widgets;
   std::set<AtomicWidget *> deletables;
 
+  bool cancelStaysEnabled;
+
   QVBoxLayout *groupLayout;
   QWidget *errorArea;
   QMessageBox *confirmCancelDialog, *confirmDeleteDialog;
@@ -99,7 +101,10 @@ class AtomicForm : public QWidget {
 
   QWidget *centralWidget;
 
-  AtomicForm(bool visibleButtons = true, QWidget *parent = nullptr);
+  /* Note: When the form is displayed on a dialog we might want to keep the
+   * cancel button enabled at all times to close the dialog. */
+  AtomicForm(bool visibleButtons = true, bool cancelStaysEnabled = false,
+             QWidget *parent = nullptr);
 
   ~AtomicForm();
 

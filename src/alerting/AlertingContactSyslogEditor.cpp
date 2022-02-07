@@ -31,3 +31,5 @@ bool AlertingContactSyslogEditor::setValue(
       std::get<dessser::gen::alerting_contact::SysLog>(*v)));
   return true;
 }
+
+void AlertingContactSyslogEditor::clear() { edit->clear(); }

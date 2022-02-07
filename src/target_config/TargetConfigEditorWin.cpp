@@ -17,7 +17,7 @@
 TargetConfigEditorWin::TargetConfigEditorWin(QWidget *parent)
     : SavedWindow("TargetConfigWindow", tr("Target Configuration"), true,
                   parent) {
-  form = new AtomicForm(true, this);
+  form = new AtomicForm(true, false, this);
 
   Resources *r{Resources::get()};
   /* Prepare to add a delete button to the form.

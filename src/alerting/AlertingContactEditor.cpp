@@ -26,7 +26,6 @@ AlertingContactEditor::AlertingContactEditor(QWidget *parent)
     : AtomicWidget(parent) {
   QWidget *widget{new QWidget};
   QVBoxLayout *layout{new QVBoxLayout};
-  widget->setLayout(layout);
 
   QHBoxLayout *top_row{new QHBoxLayout};
   top_row->addWidget(new QLabel(tr("Select the desired type:")));
@@ -53,6 +52,7 @@ AlertingContactEditor::AlertingContactEditor(QWidget *parent)
   bottom_row->addWidget(timeoutEditor);
   layout->addLayout(bottom_row);
 
+  widget->setLayout(layout);
   relayoutWidget(widget);
 
   connect(typeEdit, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -92,4 +92,10 @@ bool AlertingContactEditor::setValue(
   typeEdit->setCurrentIndex(index);  // Will set stackedLayout
   timeoutEditor->setText(QString::number(contact->timeout));
   return true;
+}
+
+void AlertingContactEditor::clear() {
+  typeEdit->setCurrentIndex(0);
+  for (AlertingContactViaEditor *e : editors) e->clear();
+  timeoutEditor->clear();
 }

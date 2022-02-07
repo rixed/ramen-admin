@@ -60,8 +60,7 @@ void iterTeams(std::function<void(std::string const &)> f) {
                  KValue> const &p : kvs->map) {
     std::shared_ptr<dessser::gen::sync_key::t const> key{p.first};
     if (key->index() != dessser::gen::sync_key::Teams) continue;
-    std::string const &name{
-        std::get<0>(std::get<dessser::gen::sync_key::Teams>(*key))};
+    std::string const &name{std::get<dessser::gen::sync_key::Teams>(*key).name};
     auto it_new{names.insert(name)};
     if (it_new.second) {
       if (verbose) qDebug() << "New teamName:" << QString::fromStdString(name);

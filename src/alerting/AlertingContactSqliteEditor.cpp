@@ -45,3 +45,9 @@ bool AlertingContactSqliteEditor::setValue(
   createEdit->setPlainText(QString::fromStdString(s.create));
   return true;
 }
+
+void AlertingContactSqliteEditor::clear() {
+  fileEdit->clear();
+  insertEdit->clear();
+  createEdit->clear();
+}

@@ -176,6 +176,41 @@ inline std::ostream &operator<<(std::ostream &os, incident_key const &v) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<incident_key> const v) { os << *v; return os; }
 
+struct team_key_info : public std::variant<
+  std::string, // Contacts
+  std::string // Inhibition
+> {
+  using variant::variant;
+  using variant::operator=;
+  static constexpr size_t size { 2 };
+};
+
+inline bool operator==(team_key_info const &a, team_key_info const &b) {
+  if (a.index() != b.index()) return false;
+  switch (a.index()) {
+    case 0: return std::get<0>(a) == std::get<0>(b); // Contacts
+    case 1: return std::get<1>(a) == std::get<1>(b); // Inhibition
+  };
+  return false;
+}
+inline bool operator!=(team_key_info const &a, team_key_info const &b) {
+  return !operator==(a, b);
+}
+enum Constr_team_key_info {
+  Contacts,
+  Inhibition,
+};
+
+inline std::ostream &operator<<(std::ostream &os, team_key_info const &v) {
+  switch (v.index()) {
+    case 0: os << "Contacts " << std::get<0>(v); break;
+    case 1: os << "Inhibition " << std::get<1>(v); break;
+  }
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<team_key_info> const v) { os << *v; return os; }
+
 struct per_dash_key : public std::variant<
   uint32_t // Widgets
 > {
@@ -754,62 +789,27 @@ inline std::ostream &operator<<(std::ostream &os, ta05201a250c67cd2df71e6345b0a4
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta05201a250c67cd2df71e6345b0a4f16> const t) { os << *t; return os; }
 
-struct t7c3b4d666d784c1e1d7f41f4fe6019cb : public std::variant<
-  std::string, // Contacts
-  std::string // Inhibition
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
+struct t11bc8831ef8882e6068053e8f5efca0b {
+  dessser::gen::team_name::t_ext name;
+  std::shared_ptr<::dessser::gen::sync_key::team_key_info>  info;
+  t11bc8831ef8882e6068053e8f5efca0b(dessser::gen::team_name::t_ext name_, std::shared_ptr<::dessser::gen::sync_key::team_key_info>  info_) : name(name_), info(info_) {}
+  t11bc8831ef8882e6068053e8f5efca0b() = default;
 };
-
-inline bool operator==(t7c3b4d666d784c1e1d7f41f4fe6019cb const &a, t7c3b4d666d784c1e1d7f41f4fe6019cb const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Contacts
-    case 1: return std::get<1>(a) == std::get<1>(b); // Inhibition
-  };
-  return false;
+inline bool operator==(t11bc8831ef8882e6068053e8f5efca0b const &a, t11bc8831ef8882e6068053e8f5efca0b const &b) {
+  return ::dessser::gen::team_name::Deref(a.name) == ::dessser::gen::team_name::Deref(b.name) && (*a.info) == (*b.info);
 }
-inline bool operator!=(t7c3b4d666d784c1e1d7f41f4fe6019cb const &a, t7c3b4d666d784c1e1d7f41f4fe6019cb const &b) {
+
+inline bool operator!=(t11bc8831ef8882e6068053e8f5efca0b const &a, t11bc8831ef8882e6068053e8f5efca0b const &b) {
   return !operator==(a, b);
 }
-enum Constr_t7c3b4d666d784c1e1d7f41f4fe6019cb {
-  Contacts,
-  Inhibition,
-};
-
-inline std::ostream &operator<<(std::ostream &os, t7c3b4d666d784c1e1d7f41f4fe6019cb const &v) {
-  switch (v.index()) {
-    case 0: os << "Contacts " << std::get<0>(v); break;
-    case 1: os << "Inhibition " << std::get<1>(v); break;
-  }
+inline std::ostream &operator<<(std::ostream &os, t11bc8831ef8882e6068053e8f5efca0b const &r) {
+  os << '{';
+  os << "name:" << r.name << ',';
+  os << "info:" << r.info;
+  os << '}';
   return os;
 }
-
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t7c3b4d666d784c1e1d7f41f4fe6019cb> const v) { os << *v; return os; }
-
-struct t1fe305ebed4021f1552512f2753ee099 : public std::tuple<
-  dessser::gen::team_name::t_ext,
-  ::dessser::gen::sync_key::t7c3b4d666d784c1e1d7f41f4fe6019cb
-> {
-  using tuple::tuple;
-};
-inline bool operator==(t1fe305ebed4021f1552512f2753ee099 const &a, t1fe305ebed4021f1552512f2753ee099 const &b) {
-  return ::dessser::gen::team_name::Deref(std::get<0>(a)) == ::dessser::gen::team_name::Deref(std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t1fe305ebed4021f1552512f2753ee099 const &a, t1fe305ebed4021f1552512f2753ee099 const &b) {
-  return !operator==(a, b);
-}
-inline std::ostream &operator<<(std::ostream &os, t1fe305ebed4021f1552512f2753ee099 const &t) {
-  os << '<';
-  os << std::get<0>(t) << ", ";
-  os << std::get<1>(t);
-  os << '>';
-  return os;
-}
-
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t1fe305ebed4021f1552512f2753ee099> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t11bc8831ef8882e6068053e8f5efca0b> const r) { os << *r; return os; }
 
 struct t401820a4624980e1b48c1031a82f4554 : public std::tuple<
   std::string,
@@ -848,7 +848,7 @@ struct t : public std::variant<
   ::dessser::gen::sync_key::tad3d72cbcbac129b71b1e72a57567c05, // PerClient
   ::dessser::gen::sync_key::ta05201a250c67cd2df71e6345b0a4f16, // Dashboards
   Void, // Notifications
-  ::dessser::gen::sync_key::t1fe305ebed4021f1552512f2753ee099, // Teams
+  ::dessser::gen::sync_key::t11bc8831ef8882e6068053e8f5efca0b, // Teams
   ::dessser::gen::sync_key::t401820a4624980e1b48c1031a82f4554 // Incidents
 > {
   using variant::variant;
@@ -976,6 +976,30 @@ inline std::ostream &operator<<(std::ostream &os, t81a0c931c4f6d47a526068c7b84a4
 }
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t81a0c931c4f6d47a526068c7b84a436d> const t) { os << *t; return os; }
+
+struct tb1b432e6bbd6e8d602aaaad6d4e81e9f : public std::tuple<
+  std::shared_ptr<::dessser::gen::sync_key::team_key_info> ,
+  Pointer
+> {
+  using tuple::tuple;
+  tb1b432e6bbd6e8d602aaaad6d4e81e9f(std::tuple<std::shared_ptr<::dessser::gen::sync_key::team_key_info> , Pointer> p)
+    : std::tuple<std::shared_ptr<::dessser::gen::sync_key::team_key_info> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tb1b432e6bbd6e8d602aaaad6d4e81e9f const &a, tb1b432e6bbd6e8d602aaaad6d4e81e9f const &b) {
+  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tb1b432e6bbd6e8d602aaaad6d4e81e9f const &a, tb1b432e6bbd6e8d602aaaad6d4e81e9f const &b) {
+  return !operator==(a, b);
+}
+inline std::ostream &operator<<(std::ostream &os, tb1b432e6bbd6e8d602aaaad6d4e81e9f const &t) {
+  os << '<';
+  os << std::get<0>(t) << ", ";
+  os << std::get<1>(t);
+  os << '>';
+  return os;
+}
+
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb1b432e6bbd6e8d602aaaad6d4e81e9f> const t) { os << *t; return os; }
 
 struct tddfcfedf3e7ada7bc193bdea642cf713 : public std::tuple<
   std::shared_ptr<::dessser::gen::sync_key::per_dash_key> ,
@@ -1189,6 +1213,7 @@ inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &)
 /* ----------- */
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::dialog_key> ,Pointer)> dialog_key_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::incident_key> ,Pointer)> incident_key_to_row_binary;
+extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::team_key_info> ,Pointer)> team_key_info_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_dash_key> ,Pointer)> per_dash_key_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_client> ,Pointer)> per_client_to_row_binary;
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_tail> ,Pointer)> per_tail_to_row_binary;
@@ -1199,6 +1224,7 @@ extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::per_site>
 extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_key::t> ,Pointer)> to_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::dialog_key> )> dialog_key_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::incident_key> )> incident_key_sersize_of_row_binary;
+extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::team_key_info> )> team_key_info_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_dash_key> )> per_dash_key_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_client> )> per_client_sersize_of_row_binary;
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_tail> )> per_tail_sersize_of_row_binary;
@@ -1209,6 +1235,7 @@ extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::per_site> )>
 extern std::function<Size(std::shared_ptr<::dessser::gen::sync_key::t> )> sersize_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t4585ac1860331d8d8108dff115815fc1(Pointer)> dialog_key_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t81a0c931c4f6d47a526068c7b84a436d(Pointer)> incident_key_of_row_binary;
+extern std::function<::dessser::gen::sync_key::tb1b432e6bbd6e8d602aaaad6d4e81e9f(Pointer)> team_key_info_of_row_binary;
 extern std::function<::dessser::gen::sync_key::tddfcfedf3e7ada7bc193bdea642cf713(Pointer)> per_dash_key_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t56898a81c1f17af3902c13e6570a4796(Pointer)> per_client_of_row_binary;
 extern std::function<::dessser::gen::sync_key::t4033af6a94e2f1d0f849f8e9c28f066e(Pointer)> per_tail_of_row_binary;

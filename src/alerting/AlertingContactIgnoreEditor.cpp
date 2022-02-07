@@ -25,3 +25,5 @@ bool AlertingContactIgnoreEditor::setValue(
     std::shared_ptr<dessser::gen::alerting_contact::via const> v) {
   return v->index() == dessser::gen::alerting_contact::Ignore;
 }
+
+void AlertingContactIgnoreEditor::clear() {}

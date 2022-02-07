@@ -126,6 +126,14 @@ std::optional<std::pair<std::string const, std::string const> > srcPathOfKey(
 std::shared_ptr<dessser::gen::sync_key::t> keyOfSrcPath(std::string const &path,
                                                         std::string const &ext);
 
+// Returns the key identifying that contact from that team
+std::shared_ptr<dessser::gen::sync_key::t> keyOfTeamContact(
+    std::string const &team_name, std::string const &contact_name);
+
+// Returns the key identifying that inhibition from that team
+std::shared_ptr<dessser::gen::sync_key::t> keyOfInhibition(
+    std::string const &team_name, std::string const &inhibition_name);
+
 std::shared_ptr<dessser::gen::sync_key::t> changeSourceExtension(
     dessser::gen::sync_key::t const &, std::string const &new_ext);
 
