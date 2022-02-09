@@ -1,7 +1,7 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #include "AlertEditor.h"
 
-#include <dessser/Lst.h>
+#include <dessser/Arr.h>
 
 #include <QCheckBox>
 #include <QCompleter>
@@ -407,7 +407,7 @@ bool AlertEditor::setValue(
     where->clear();
   } else {
     // TODO: support multiple where/having
-    where->setValue(*alert->where.head());
+    where->setValue(*alert->where[0]);
   }
 
   _groupBy = alert->group_by;
@@ -417,7 +417,6 @@ bool AlertEditor::setValue(
     autoGroupBy->setChecked(false);
     toggleAutoGroupBy(Qt::Unchecked);
     QStringList const fields{tableFields->stringList()};
-    // TODO: const iterator on Lst:
     for (std::string const &s_ : *(alert->group_by)) {
       QString const s{QString::fromStdString(s_)};
       qsizetype const row{fields.indexOf(s)};
@@ -436,7 +435,7 @@ bool AlertEditor::setValue(
   if (alert->having.empty()) {
     having->clear();
   } else {
-    having->setValue(*alert->having.head());
+    having->setValue(*alert->having[0]);
   }
 
   // FIXME: threshold can optionally be a baseline now:
@@ -467,12 +466,12 @@ bool AlertEditor::setValue(
   if (alert->tops.empty()) {
     top->clear();
   } else {
-    top->setText(QString::fromStdString(alert->tops.head()));
+    top->setText(QString::fromStdString(alert->tops[0]));
   }
   if (alert->carry_fields.empty()) {
     carryFields->clear();
   } else {
-    carryFields->setText(QString::fromStdString(alert->carry_fields.head()));
+    carryFields->setText(QString::fromStdString(alert->carry_fields[0]));
   }
 
   return true;
@@ -504,15 +503,15 @@ QStringList const AlertEditor::getGroupByQStrings() const {
   return lst;
 }
 
-std::optional<dessser::Lst<std::string> > const AlertEditor::getGroupBy()
+std::optional<dessser::Arr<std::string> > const AlertEditor::getGroupBy()
     const {
   if (autoGroupBy->isChecked()) return std::nullopt;
 
   QStringList const lst{getGroupByQStrings()};
-  dessser::Lst<std::string> ret;
+  dessser::Arr<std::string> ret;
 
-  for (int i = lst.length() - 1; i >= 0; i--)
-    ret.push_front(lst[i].toStdString());
+  for (int i = 0; i < lst.length(); i++)
+    ret.push_back(lst[i].toStdString());
 
   return ret;
 }
@@ -521,25 +520,25 @@ std::shared_ptr<dessser::gen::sync_value::t const> AlertEditor::getValue()
     const {
   std::string const column{getColumn()};
 
-  dessser::Lst<std::string> carry_fields;
+  dessser::Arr<std::string> carry_fields;
   if (!carryFields->text().isEmpty())
-    carry_fields = dessser::Lst<std::string>{carryFields->text().toStdString()};
+    carry_fields = dessser::Arr<std::string>{carryFields->text().toStdString()};
 
-  dessser::Lst<std::string> tops;
+  dessser::Arr<std::string> tops;
   if (!carryFields->text().isEmpty())
-    tops = dessser::Lst<std::string>{top->text().toStdString()};
+    tops = dessser::Arr<std::string>{top->text().toStdString()};
 
-  dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t> > where_;
+  dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> > where_;
   if (!where->isEmpty() && where->hasValidInput())
-    where_ = dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t> >{
+    where_ = dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> >{
         where->getValue()};
 
-  dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t> > having_;
+  dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> > having_;
   if (!having->isEmpty() && having->hasValidInput())
-    having_ = dessser::Lst<std::shared_ptr<dessser::gen::simple_filter::t> >{
+    having_ = dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> >{
         having->getValue()};
 
-  dessser::Lst<std::shared_ptr<dessser::gen::alert::constant> > carry_csts_{};
+  dessser::Arr<std::shared_ptr<dessser::gen::alert::constant> > carry_csts_{};
 
   double const threshold_val{threshold->text().toDouble()};
   double const recovery_val{recovery->text().toDouble() - threshold_val};

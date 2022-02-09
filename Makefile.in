@@ -78,6 +78,7 @@ TYPE_SOURCES = \
 	source_info.type \
 	simple_filter.type \
 	alert.type \
+	pivot.type \
 	runtime_stats.type \
 	time_range.type \
 	replay.type \

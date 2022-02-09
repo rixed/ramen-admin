@@ -62,6 +62,7 @@ HEADERS_DESSSERC_GEN = \
   desssergen/source_info.h \
   desssergen/simple_filter.h \
   desssergen/alert.h \
+  desssergen/pivot.h \
   desssergen/runtime_stats.h \
   desssergen/time_range.h \
   desssergen/replay.h \
@@ -123,6 +124,7 @@ SOURCES_DESSSERC_GEN = \
   desssergen/source_info.cc \
   desssergen/simple_filter.cc \
   desssergen/alert.cc \
+  desssergen/pivot.cc \
   desssergen/runtime_stats.cc \
   desssergen/time_range.cc \
   desssergen/replay.cc \

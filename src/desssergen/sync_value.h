@@ -14,6 +14,7 @@
 #include "desssergen/alerting_contact.h"
 #include "desssergen/dashboard_widget.h"
 #include "desssergen/output_specs.h"
+#include "desssergen/pivot.h"
 #include "desssergen/alert.h"
 #include "desssergen/replay_request.h"
 #include "desssergen/replayer.h"
@@ -93,6 +94,7 @@ struct t : public std::variant<
   dessser::gen::replayer::t_ext, // Replayer
   dessser::gen::replay_request::t_ext, // ReplayRequest
   dessser::gen::alert::t_ext, // Alert
+  dessser::gen::pivot::t_ext, // Pivot
   dessser::gen::output_specs::t_ext, // OutputSpecs
   dessser::gen::dashboard_widget::t_ext, // DashboardWidget
   dessser::gen::alerting_contact::t_ext, // AlertingContact
@@ -103,7 +105,7 @@ struct t : public std::variant<
 > {
   using variant::variant;
   using variant::operator=;
-  static constexpr size_t size { 20 };
+  static constexpr size_t size { 21 };
 };
 
 inline bool operator==(t const &a, t const &b) {
@@ -122,13 +124,14 @@ inline bool operator==(t const &a, t const &b) {
     case 10: return ::dessser::gen::replayer::Deref(std::get<10>(a)) == ::dessser::gen::replayer::Deref(std::get<10>(b)); // Replayer
     case 11: return ::dessser::gen::replay_request::Deref(std::get<11>(a)) == ::dessser::gen::replay_request::Deref(std::get<11>(b)); // ReplayRequest
     case 12: return ::dessser::gen::alert::Deref(std::get<12>(a)) == ::dessser::gen::alert::Deref(std::get<12>(b)); // Alert
-    case 13: return ::dessser::gen::output_specs::Deref(std::get<13>(a)) == ::dessser::gen::output_specs::Deref(std::get<13>(b)); // OutputSpecs
-    case 14: return ::dessser::gen::dashboard_widget::Deref(std::get<14>(a)) == ::dessser::gen::dashboard_widget::Deref(std::get<14>(b)); // DashboardWidget
-    case 15: return ::dessser::gen::alerting_contact::Deref(std::get<15>(a)) == ::dessser::gen::alerting_contact::Deref(std::get<15>(b)); // AlertingContact
-    case 16: return ::dessser::gen::alerting_notification::Deref(std::get<16>(a)) == ::dessser::gen::alerting_notification::Deref(std::get<16>(b)); // Notification
-    case 17: return ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(a)) == ::dessser::gen::alerting_delivery_status::Deref(std::get<17>(b)); // DeliveryStatus
-    case 18: return ::dessser::gen::alerting_log::Deref(std::get<18>(a)) == ::dessser::gen::alerting_log::Deref(std::get<18>(b)); // IncidentLog
-    case 19: return ::dessser::gen::alerting_inhibition::Deref(std::get<19>(a)) == ::dessser::gen::alerting_inhibition::Deref(std::get<19>(b)); // Inhibition
+    case 13: return ::dessser::gen::pivot::Deref(std::get<13>(a)) == ::dessser::gen::pivot::Deref(std::get<13>(b)); // Pivot
+    case 14: return ::dessser::gen::output_specs::Deref(std::get<14>(a)) == ::dessser::gen::output_specs::Deref(std::get<14>(b)); // OutputSpecs
+    case 15: return ::dessser::gen::dashboard_widget::Deref(std::get<15>(a)) == ::dessser::gen::dashboard_widget::Deref(std::get<15>(b)); // DashboardWidget
+    case 16: return ::dessser::gen::alerting_contact::Deref(std::get<16>(a)) == ::dessser::gen::alerting_contact::Deref(std::get<16>(b)); // AlertingContact
+    case 17: return ::dessser::gen::alerting_notification::Deref(std::get<17>(a)) == ::dessser::gen::alerting_notification::Deref(std::get<17>(b)); // Notification
+    case 18: return ::dessser::gen::alerting_delivery_status::Deref(std::get<18>(a)) == ::dessser::gen::alerting_delivery_status::Deref(std::get<18>(b)); // DeliveryStatus
+    case 19: return ::dessser::gen::alerting_log::Deref(std::get<19>(a)) == ::dessser::gen::alerting_log::Deref(std::get<19>(b)); // IncidentLog
+    case 20: return ::dessser::gen::alerting_inhibition::Deref(std::get<20>(a)) == ::dessser::gen::alerting_inhibition::Deref(std::get<20>(b)); // Inhibition
   };
   return false;
 }
@@ -149,6 +152,7 @@ enum Constr_t {
   Replayer,
   ReplayRequest,
   Alert,
+  Pivot,
   OutputSpecs,
   DashboardWidget,
   AlertingContact,
@@ -173,13 +177,14 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
     case 10: os << "Replayer " << std::get<10>(v); break;
     case 11: os << "ReplayRequest " << std::get<11>(v); break;
     case 12: os << "Alert " << std::get<12>(v); break;
-    case 13: os << "OutputSpecs " << std::get<13>(v); break;
-    case 14: os << "DashboardWidget " << std::get<14>(v); break;
-    case 15: os << "AlertingContact " << std::get<15>(v); break;
-    case 16: os << "Notification " << std::get<16>(v); break;
-    case 17: os << "DeliveryStatus " << std::get<17>(v); break;
-    case 18: os << "IncidentLog " << std::get<18>(v); break;
-    case 19: os << "Inhibition " << std::get<19>(v); break;
+    case 13: os << "Pivot " << std::get<13>(v); break;
+    case 14: os << "OutputSpecs " << std::get<14>(v); break;
+    case 15: os << "DashboardWidget " << std::get<15>(v); break;
+    case 16: os << "AlertingContact " << std::get<16>(v); break;
+    case 17: os << "Notification " << std::get<17>(v); break;
+    case 18: os << "DeliveryStatus " << std::get<18>(v); break;
+    case 19: os << "IncidentLog " << std::get<19>(v); break;
+    case 20: os << "Inhibition " << std::get<20>(v); break;
   }
   return os;
 }

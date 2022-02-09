@@ -1,7 +1,7 @@
 // vim: sw=2 ts=2 sts=2 expandtab tw=80
 #ifndef ALERTEDITOR_H_191129
 #define ALERTEDITOR_H_191129
-#include <dessser/Lst.h>
+#include <dessser/Arr.h>
 
 #include <QStringList>
 #include <QTreeView>
@@ -60,7 +60,7 @@ class AlertEditor : public AtomicWidget {
   std::string table, column;
 
   /* Similarly for groupBy fields: */
-  std::optional<dessser::Lst<std::string> > _groupBy;
+  std::optional<dessser::Arr<std::string> > _groupBy;
 
   /* Returns the current selection of group-by fields as a QStringList
    * (empty list for automatic group-by as well as explicit empty group-by,
@@ -97,7 +97,7 @@ class AlertEditor : public AtomicWidget {
 
   std::string const getColumn() const;
 
-  std::optional<dessser::Lst<std::string> > const getGroupBy() const;
+  std::optional<dessser::Arr<std::string> > const getGroupBy() const;
 
   QCheckBox *isEnabled;  // the editor, not the alert
   QRadioButton *thresholdIsMax;

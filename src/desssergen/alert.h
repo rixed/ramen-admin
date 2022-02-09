@@ -148,22 +148,22 @@ struct t {
   dessser::gen::fq_name::t_ext table;
   dessser::gen::field_name::t_ext column;
   bool enabled;
-  Lst<dessser::gen::simple_filter::t_ext> where;
-  std::optional<Lst<dessser::gen::field_name::t_ext>> group_by;
-  Lst<dessser::gen::simple_filter::t_ext> having;
+  Arr<dessser::gen::simple_filter::t_ext> where;
+  std::optional<Arr<dessser::gen::field_name::t_ext>> group_by;
+  Arr<dessser::gen::simple_filter::t_ext> having;
   std::shared_ptr<::dessser::gen::alert::threshold>  threshold;
   double hysteresis;
   double duration;
   double ratio;
   double time_step;
-  Lst<dessser::gen::field_name::t_ext> tops;
-  Lst<dessser::gen::field_name::t_ext> carry_fields;
-  Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts;
+  Arr<dessser::gen::field_name::t_ext> tops;
+  Arr<dessser::gen::field_name::t_ext> carry_fields;
+  Arr<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts;
   std::string id;
   std::string desc_title;
   std::string desc_firing;
   std::string desc_recovery;
-  t(dessser::gen::fq_name::t_ext table_, dessser::gen::field_name::t_ext column_, bool enabled_, Lst<dessser::gen::simple_filter::t_ext> where_, std::optional<Lst<dessser::gen::field_name::t_ext>> group_by_, Lst<dessser::gen::simple_filter::t_ext> having_, std::shared_ptr<::dessser::gen::alert::threshold>  threshold_, double hysteresis_, double duration_, double ratio_, double time_step_, Lst<dessser::gen::field_name::t_ext> tops_, Lst<dessser::gen::field_name::t_ext> carry_fields_, Lst<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts_, std::string id_, std::string desc_title_, std::string desc_firing_, std::string desc_recovery_) : table(table_), column(column_), enabled(enabled_), where(where_), group_by(group_by_), having(having_), threshold(threshold_), hysteresis(hysteresis_), duration(duration_), ratio(ratio_), time_step(time_step_), tops(tops_), carry_fields(carry_fields_), carry_csts(carry_csts_), id(id_), desc_title(desc_title_), desc_firing(desc_firing_), desc_recovery(desc_recovery_) {}
+  t(dessser::gen::fq_name::t_ext table_, dessser::gen::field_name::t_ext column_, bool enabled_, Arr<dessser::gen::simple_filter::t_ext> where_, std::optional<Arr<dessser::gen::field_name::t_ext>> group_by_, Arr<dessser::gen::simple_filter::t_ext> having_, std::shared_ptr<::dessser::gen::alert::threshold>  threshold_, double hysteresis_, double duration_, double ratio_, double time_step_, Arr<dessser::gen::field_name::t_ext> tops_, Arr<dessser::gen::field_name::t_ext> carry_fields_, Arr<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts_, std::string id_, std::string desc_title_, std::string desc_firing_, std::string desc_recovery_) : table(table_), column(column_), enabled(enabled_), where(where_), group_by(group_by_), having(having_), threshold(threshold_), hysteresis(hysteresis_), duration(duration_), ratio(ratio_), time_step(time_step_), tops(tops_), carry_fields(carry_fields_), carry_csts(carry_csts_), id(id_), desc_title(desc_title_), desc_firing(desc_firing_), desc_recovery(desc_recovery_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
