@@ -6,7 +6,6 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QVBoxLayout>
 
 NewTeamDialog::NewTeamDialog(QWidget *parent) : QDialog(parent) {
   nameEdit = new QLineEdit;
@@ -17,16 +16,15 @@ NewTeamDialog::NewTeamDialog(QWidget *parent) : QDialog(parent) {
       new QLabel(tr("Alerts will be assigned to the team which name has the "
                     "longest matching prefix with the alert name."))};
   doc->setStyleSheet("font-style: italic");
+  doc->setWordWrap(true);
 
   QDialogButtonBox *buttonBox{
       new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel)};
 
-  QFormLayout *formLayout{new QFormLayout};
-  formLayout->addRow(tr("Team name"), nameEdit);
-  formLayout->addRow(doc);
-  QVBoxLayout *layout{new QVBoxLayout};
-  layout->addLayout(formLayout);
-  layout->addWidget(buttonBox);
+  QFormLayout *layout{new QFormLayout};
+  layout->addRow(tr("Team name"), nameEdit);
+  layout->addRow(doc);
+  layout->addRow(buttonBox);
   setLayout(layout);
 
   setWindowTitle(tr("Create A New Team"));

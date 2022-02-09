@@ -2,11 +2,10 @@
 #include "alerting/AlertingContactEditor.h"
 
 #include <QComboBox>
-#include <QHBoxLayout>
+#include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
 #include <QStackedLayout>
-#include <QVBoxLayout>
 
 #include "RangeDoubleValidator.h"
 #include "alerting/AlertingContactExecuteEditor.h"
@@ -25,14 +24,10 @@ static QStringList alternatives{"Ignore", "Execute", "Syslog", "Sqlite",
 AlertingContactEditor::AlertingContactEditor(QWidget *parent)
     : AtomicWidget(parent) {
   QWidget *widget{new QWidget};
-  QVBoxLayout *layout{new QVBoxLayout};
+  QFormLayout *layout{new QFormLayout};
 
-  QHBoxLayout *top_row{new QHBoxLayout};
-  top_row->addWidget(new QLabel(tr("Select the desired type:")));
   typeEdit = new QComboBox;
   typeEdit->insertItems(0, alternatives);
-  top_row->addWidget(typeEdit);
-  layout->addLayout(top_row);
 
   editors.reserve(alternatives.length());
   editors.emplace_back(new AlertingContactIgnoreEditor);
@@ -41,16 +36,21 @@ AlertingContactEditor::AlertingContactEditor(QWidget *parent)
   editors.emplace_back(new AlertingContactSqliteEditor);
   editors.emplace_back(new AlertingContactKafkaEditor);
   stackedLayout = new QStackedLayout;
-  layout->addLayout(stackedLayout);
   for (AlertingContactViaEditor *w : editors) stackedLayout->addWidget(w);
 
-  QHBoxLayout *bottom_row{new QHBoxLayout};
-  bottom_row->addWidget(new QLabel(tr("How long before escalating:")));
   timeoutEditor = new QLineEdit;
   timeoutEditor->setValidator(RangeDoubleValidator::forRange(0, 9999));
   timeoutEditor->setPlaceholderText(tr("seconds"));
-  bottom_row->addWidget(timeoutEditor);
-  layout->addLayout(bottom_row);
+  QLabel *doc{
+      new QLabel(tr("If timeout is set to a positive number of seconds then "
+                    "alerts will be delivered again unless acknowledged."))};
+  doc->setStyleSheet("font-style: italic");
+  doc->setWordWrap(true);
+
+  layout->addRow(tr("Select the desired type:"), typeEdit);
+  layout->addRow(stackedLayout);
+  layout->addRow(tr("How long before escalating:"), timeoutEditor);
+  layout->addRow(doc);
 
   widget->setLayout(layout);
   relayoutWidget(widget);

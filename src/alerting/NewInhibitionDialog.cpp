@@ -6,7 +6,6 @@
 #include <QFormLayout>
 #include <QLabel>
 #include <QLineEdit>
-#include <QVBoxLayout>
 
 #include "alerting/AlertingInhibitionEditor.h"
 
@@ -22,14 +21,11 @@ NewInhibitionDialog::NewInhibitionDialog(QWidget *parent) : QDialog(parent) {
   QDialogButtonBox *buttonBox{
       new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel)};
 
-  QFormLayout *formLayout{new QFormLayout};
-  formLayout->addRow(tr("Name"), nameEdit);
-
-  QVBoxLayout *layout{new QVBoxLayout};
-  layout->addWidget(title);
-  layout->addLayout(formLayout);
-  layout->addWidget(editor);
-  layout->addWidget(buttonBox);
+  QFormLayout *layout{new QFormLayout};
+  layout->addRow(title);
+  layout->addRow(tr("Name"), nameEdit);
+  layout->addRow(editor);
+  layout->addRow(buttonBox);
   setLayout(layout);
 
   setWindowTitle(tr("Create A New Inhibition"));

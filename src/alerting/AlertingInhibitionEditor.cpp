@@ -28,10 +28,10 @@ AlertingInhibitionEditor::AlertingInhibitionEditor(QWidget *parent)
 
   QWidget *widget{new QWidget};
   QFormLayout *layout{new QFormLayout};
-  layout->addRow(tr("Silence alerts matching"), whatEditor);
+  layout->addRow(tr("Alerts matching"), whatEditor);
   layout->addRow(tr("From"), startEditor);
   layout->addRow(tr("To"), stopEditor);
-  layout->addRow(new QLabel(tr("Reason for silencing the alerts:")));
+  layout->addRow(new QLabel(tr("Reason for silencing those alerts")));
   layout->addRow(whyEditor);
   layout->addRow(tr("Creator"), whoLabel);
 
