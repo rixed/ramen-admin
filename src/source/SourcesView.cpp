@@ -113,6 +113,7 @@ SourcesView::SourcesView(SourcesModel *sourceModel_, QWidget *parent)
    * selection in the QTreeWidget: */
   connect(editorForm, &AtomicForm::changeEnabled, sourcesList,
           &SourcesTreeView::setDisabled);
+
   // TODO: same for the alertInfoEditor
 
   /* Connect the deletion of a source to hiding the editorForm if that's the

@@ -510,8 +510,7 @@ std::optional<dessser::Arr<std::string> > const AlertEditor::getGroupBy()
   QStringList const lst{getGroupByQStrings()};
   dessser::Arr<std::string> ret;
 
-  for (int i = 0; i < lst.length(); i++)
-    ret.push_back(lst[i].toStdString());
+  for (int i = 0; i < lst.length(); i++) ret.push_back(lst[i].toStdString());
 
   return ret;
 }

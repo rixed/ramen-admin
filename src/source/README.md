@@ -27,7 +27,7 @@ Members of "source/"
 - SourcesModel: a QAbstractItemModel for the sources in the configuration.
 
 - SourcesView: A QWidget displaying the selected source.
-  Make use internaly of a SourcesTreeView (fed by the above SourcesModel)
+  Make use internally of a SourcesTreeView (fed by the above SourcesModel)
   that's a QTreeView displaying the defined sources.
 
 - SourcesWin: The SavedWindow made of the SourcesView.
