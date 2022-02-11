@@ -79,21 +79,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct taf65a2957250625a7a5650ae2ff774d3 : public std::tuple<
-  std::shared_ptr<::dessser::gen::global_variable::t> ,
+struct tc84f2fcbb1d2467c59aba5c8fcedbcc6 : public std::tuple<
+  ::dessser::gen::global_variable::t,
   Pointer
 > {
   using tuple::tuple;
-  taf65a2957250625a7a5650ae2ff774d3(std::tuple<std::shared_ptr<::dessser::gen::global_variable::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::global_variable::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc84f2fcbb1d2467c59aba5c8fcedbcc6(std::tuple<::dessser::gen::global_variable::t, Pointer> p)
+    : std::tuple<::dessser::gen::global_variable::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(taf65a2957250625a7a5650ae2ff774d3 const &a, taf65a2957250625a7a5650ae2ff774d3 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tc84f2fcbb1d2467c59aba5c8fcedbcc6 const &a, tc84f2fcbb1d2467c59aba5c8fcedbcc6 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(taf65a2957250625a7a5650ae2ff774d3 const &a, taf65a2957250625a7a5650ae2ff774d3 const &b) {
+inline bool operator!=(tc84f2fcbb1d2467c59aba5c8fcedbcc6 const &a, tc84f2fcbb1d2467c59aba5c8fcedbcc6 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, taf65a2957250625a7a5650ae2ff774d3 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tc84f2fcbb1d2467c59aba5c8fcedbcc6 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -101,18 +101,18 @@ inline std::ostream &operator<<(std::ostream &os, taf65a2957250625a7a5650ae2ff77
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<taf65a2957250625a7a5650ae2ff774d3> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc84f2fcbb1d2467c59aba5c8fcedbcc6> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::global_variable::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::global_variable::taf65a2957250625a7a5650ae2ff774d3(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::global_variable::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::global_variable::t &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::global_variable::t &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8fcedbcc6(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8fcedbcc6(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::global_variable::t &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

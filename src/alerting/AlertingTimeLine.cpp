@@ -121,7 +121,7 @@ void AlertingTimeLine::addLogKey(dessser::gen::sync_key::t const &key,
   if (kv.val->index() != dessser::gen::sync_value::IncidentLog) goto not_log;
 
   std::shared_ptr<dessser::gen::alerting_log::t const> log{
-      std::get<dessser::gen::sync_value::IncidentLog>(*kv.val)};
+      kv.val, &std::get<dessser::gen::sync_value::IncidentLog>(*kv.val)};
 
   addLog(incidentId, time, log);
 }

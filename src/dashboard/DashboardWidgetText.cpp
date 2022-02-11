@@ -67,25 +67,23 @@ bool DashboardWidgetText::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::dashboard_widget::t> w{
+  dessser::gen::dashboard_widget::t const &w{
       std::get<dessser::gen::sync_value::DashboardWidget>(*v)};
 
-  if (w->index() != dessser::gen::dashboard_widget::Text) goto not_a_dash;
+  if (w.index() != dessser::gen::dashboard_widget::Text) goto not_a_dash;
 
   // TODO: emit valueChanged?
   text->setHtml(QString::fromStdString(
-      std::get<dessser::gen::dashboard_widget::Text>(*w)));
+      std::get<dessser::gen::dashboard_widget::Text>(w)));
 
   return true;
 }
 
 std::shared_ptr<dessser::gen::sync_value::t const>
 DashboardWidgetText::getValue() const {
-  std::shared_ptr<dessser::gen::dashboard_widget::t> w{
-      std::make_shared<dessser::gen::dashboard_widget::t>(
-          std::in_place_index<dessser::gen::dashboard_widget::Text>,
-          text->document()->toHtml().toStdString())};
-
   return std::make_shared<dessser::gen::sync_value::t>(
-      std::in_place_index<dessser::gen::sync_value::DashboardWidget>, w);
+      std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
+      dessser::gen::dashboard_widget::t{
+          std::in_place_index<dessser::gen::dashboard_widget::Text>,
+          text->document()->toHtml().toStdString()});
 }

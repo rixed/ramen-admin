@@ -79,7 +79,7 @@ struct t : public std::variant<
   dessser::gen::worker::t_ext, // Worker
   dessser::gen::retention::t_ext, // Retention
   dessser::gen::time_range::t_ext, // TimeRange
-  Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> >, // Tuples
+  Arr<::dessser::gen::sync_value::tuple>, // Tuples
   dessser::gen::raql_value::t_ext, // RamenValue
   Arr<dessser::gen::rc_entry::t_ext>, // TargetConfig
   dessser::gen::source_info::t_ext, // SourceInfo
@@ -132,18 +132,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t69580374758c5cd49d653ee83c7fa90f : public std::tuple<
-  std::shared_ptr<::dessser::gen::sync_value::tuple> ,
+struct tc689a7a5ea052f6c0e885d3374325d5b : public std::tuple<
+  ::dessser::gen::sync_value::tuple,
   Pointer
 > {
   using tuple::tuple;
-  t69580374758c5cd49d653ee83c7fa90f(std::tuple<std::shared_ptr<::dessser::gen::sync_value::tuple> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::sync_value::tuple> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc689a7a5ea052f6c0e885d3374325d5b(std::tuple<::dessser::gen::sync_value::tuple, Pointer> p)
+    : std::tuple<::dessser::gen::sync_value::tuple, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t69580374758c5cd49d653ee83c7fa90f const &a, t69580374758c5cd49d653ee83c7fa90f const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tc689a7a5ea052f6c0e885d3374325d5b const &a, tc689a7a5ea052f6c0e885d3374325d5b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t69580374758c5cd49d653ee83c7fa90f const &a, t69580374758c5cd49d653ee83c7fa90f const &b) {
+inline bool operator!=(tc689a7a5ea052f6c0e885d3374325d5b const &a, tc689a7a5ea052f6c0e885d3374325d5b const &b) {
   return !operator==(a, b);
 }
 struct t491c44439106a32f896827242e8e76a1 : public std::tuple<
@@ -174,18 +174,18 @@ inline bool operator==(tf3063cfb73e0f06d3ea99ebd15a86d50 const &a, tf3063cfb73e0
 inline bool operator!=(tf3063cfb73e0f06d3ea99ebd15a86d50 const &a, tf3063cfb73e0f06d3ea99ebd15a86d50 const &b) {
   return !operator==(a, b);
 }
-struct t15098b8456ebfe3bc6bbe8b1695dacf3 : public std::tuple<
-  std::shared_ptr<::dessser::gen::sync_value::t> ,
+struct t0fc9c7c3447925ba31ecb766cf775e79 : public std::tuple<
+  ::dessser::gen::sync_value::t,
   Pointer
 > {
   using tuple::tuple;
-  t15098b8456ebfe3bc6bbe8b1695dacf3(std::tuple<std::shared_ptr<::dessser::gen::sync_value::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::sync_value::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t0fc9c7c3447925ba31ecb766cf775e79(std::tuple<::dessser::gen::sync_value::t, Pointer> p)
+    : std::tuple<::dessser::gen::sync_value::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t15098b8456ebfe3bc6bbe8b1695dacf3 const &a, t15098b8456ebfe3bc6bbe8b1695dacf3 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t0fc9c7c3447925ba31ecb766cf775e79 const &a, t0fc9c7c3447925ba31ecb766cf775e79 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t15098b8456ebfe3bc6bbe8b1695dacf3 const &a, t15098b8456ebfe3bc6bbe8b1695dacf3 const &b) {
+inline bool operator!=(t0fc9c7c3447925ba31ecb766cf775e79 const &a, t0fc9c7c3447925ba31ecb766cf775e79 const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -314,18 +314,18 @@ inline bool operator==(t7ed2098d1a18c9b684db63350a7b96cb const &a, t7ed2098d1a18
 inline bool operator!=(t7ed2098d1a18c9b684db63350a7b96cb const &a, t7ed2098d1a18c9b684db63350a7b96cb const &b) {
   return !operator==(a, b);
 }
-struct t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 : public std::tuple<
-  Lst<std::shared_ptr<::dessser::gen::sync_value::tuple> >,
+struct tfce5b5f196eaf1540bed56507f219516 : public std::tuple<
+  Lst<::dessser::gen::sync_value::tuple>,
   Pointer
 > {
   using tuple::tuple;
-  t1bf5fe51ea8ba8f996ee38d2f7ebf6a3(std::tuple<Lst<std::shared_ptr<::dessser::gen::sync_value::tuple> >, Pointer> p)
-    : std::tuple<Lst<std::shared_ptr<::dessser::gen::sync_value::tuple> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tfce5b5f196eaf1540bed56507f219516(std::tuple<Lst<::dessser::gen::sync_value::tuple>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::sync_value::tuple>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 const &a, t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 const &b) {
+inline bool operator==(tfce5b5f196eaf1540bed56507f219516 const &a, tfce5b5f196eaf1540bed56507f219516 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 const &a, t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 const &b) {
+inline bool operator!=(tfce5b5f196eaf1540bed56507f219516 const &a, tfce5b5f196eaf1540bed56507f219516 const &b) {
   return !operator==(a, b);
 }
 struct t09ff74b441bf867176e1b0fd591831e9 : public std::tuple<
@@ -559,16 +559,16 @@ inline bool operator!=(t511ff94fe7190561084aee555c49cbe8 const &a, t511ff94fe719
     (fun ("{skipped: U32; values: $raql_value}" "Ptr")
       (let "srec_dst_231" (write-u32 little-endian (param 1) (get-field "skipped" (param 0))) (apply (ext-identifier raql_value to-row-binary) (get-field "values" (param 0)) (identifier "srec_dst_231"))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> tuple_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::sync_value::tuple &,Pointer &)> tuple_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0, Pointer p_1) {
-    uint32_t id_1 { (*p_0).skipped };
+  std::function<Pointer(::dessser::gen::sync_value::tuple &,Pointer &)> fun0 { [&](::dessser::gen::sync_value::tuple p_0, Pointer p_1) {
+    uint32_t id_1 { p_0.skipped };
     Pointer id_2 { p_1.writeU32Le(id_1) };
     Pointer let_res_3;
     {
       Pointer srec_dst_231 { id_2 };
       auto fun4 { dessser::gen::raql_value::to_row_binary };
-      dessser::gen::raql_value::t_ext id_5 { (*p_0).values };
+      dessser::gen::raql_value::t_ext id_5 { p_0.values };
       Pointer id_6 { fun4(id_5, srec_dst_231) };
       let_res_3 = id_6;
     }
@@ -577,7 +577,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> 
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointer)> tuple_to_row_binary(tuple_to_row_binary_init());
+std::function<Pointer(::dessser::gen::sync_value::tuple &,Pointer &)> tuple_to_row_binary(tuple_to_row_binary_init());
 
 /* 
     (fun ("[Error (FLOAT; U32; STRING) | Worker $worker | Retention $retention | TimeRange $time_range | Tuples (tuple AS {skipped: U32; values: $raql_value})[] | RamenValue $raql_value | TargetConfig $rc_entry[] | SourceInfo $source_info | RuntimeStats $runtime_stats | Replay $replay | Replayer $replayer | ReplayRequest $replay_request | Alert $alert | Pivot $pivot | OutputSpecs $output_specs | DashboardWidget $dashboard_widget | AlertingContact $alerting_contact | Notification $alerting_notification | DeliveryStatus $alerting_delivery_status | IncidentLog $alerting_log | Inhibition $alerting_inhibition]" "Ptr")
@@ -677,10 +677,10 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::tuple> ,Pointe
                                                   (apply (ext-identifier alerting_log to-row-binary) (get-alt "IncidentLog" (param 0)) (identifier "ssum_dst_233"))
                                                   (seq (assert (eq (identifier "label1_232") (u16 20))) (apply (ext-identifier alerting_inhibition to-row-binary) (get-alt "Inhibition" (param 0)) (identifier "ssum_dst_233"))))))))))))))))))))))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun7 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
-    uint16_t id_8 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> fun7 { [&](::dessser::gen::sync_value::t p_0, Pointer p_1) {
+    uint16_t id_8 { uint16_t(p_0.index()) };
     Pointer let_res_9;
     {
       uint16_t label1_232 { id_8 };
@@ -692,14 +692,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
         bool id_13 { bool(id_12 == label1_232) };
         Pointer choose_res_14;
         if (id_13) {
-          ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_15 { std::get<0 /* Error */>((*p_0)) };
+          ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_15 { std::get<0 /* Error */>(p_0) };
           double id_16 { std::get<0>(id_15) };
           uint64_t id_17 { qword_of_float(id_16) };
           Pointer id_18 { ssum_dst_233.writeU64Le(id_17) };
           Pointer let_res_19;
           {
             Pointer stup_dst_244 { id_18 };
-            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_20 { std::get<0 /* Error */>((*p_0)) };
+            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_20 { std::get<0 /* Error */>(p_0) };
             uint32_t id_21 { std::get<1>(id_20) };
             Pointer id_22 { stup_dst_244.writeU32Le(id_21) };
             let_res_19 = id_22;
@@ -707,7 +707,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
           Pointer let_res_23;
           {
             Pointer stup_dst_245 { let_res_19 };
-            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_24 { std::get<0 /* Error */>((*p_0)) };
+            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_24 { std::get<0 /* Error */>(p_0) };
             std::string id_25 { std::get<2>(id_24) };
             uint32_t id_26 { (uint32_t)id_25.size() };
             Vec<1, uint32_t> id_27 {  id_26  };
@@ -767,7 +767,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
               }
               let_res_28 = let_res_30;
             }
-            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_62 { std::get<0 /* Error */>((*p_0)) };
+            ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_62 { std::get<0 /* Error */>(p_0) };
             std::string id_63 { std::get<2>(id_62) };
             Bytes id_64 { id_63 };
             Pointer id_65 { let_res_28.writeBytes(id_64) };
@@ -780,7 +780,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
           Pointer choose_res_68;
           if (id_67) {
             auto fun69 { dessser::gen::worker::to_row_binary };
-            dessser::gen::worker::t_ext id_70 { std::get<1 /* Worker */>((*p_0)) };
+            dessser::gen::worker::t_ext id_70 { std::get<1 /* Worker */>(p_0) };
             Pointer id_71 { fun69(id_70, ssum_dst_233) };
             choose_res_68 = id_71;
           } else {
@@ -789,7 +789,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
             Pointer choose_res_74;
             if (id_73) {
               auto fun75 { dessser::gen::retention::to_row_binary };
-              dessser::gen::retention::t_ext id_76 { std::get<2 /* Retention */>((*p_0)) };
+              dessser::gen::retention::t_ext id_76 { std::get<2 /* Retention */>(p_0) };
               Pointer id_77 { fun75(id_76, ssum_dst_233) };
               choose_res_74 = id_77;
             } else {
@@ -798,7 +798,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
               Pointer choose_res_80;
               if (id_79) {
                 auto fun81 { dessser::gen::time_range::to_row_binary };
-                dessser::gen::time_range::t_ext id_82 { std::get<3 /* TimeRange */>((*p_0)) };
+                dessser::gen::time_range::t_ext id_82 { std::get<3 /* TimeRange */>(p_0) };
                 Pointer id_83 { fun81(id_82, ssum_dst_233) };
                 choose_res_80 = id_83;
               } else {
@@ -806,7 +806,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                 bool id_85 { bool(id_84 == label1_232) };
                 Pointer choose_res_86;
                 if (id_85) {
-                  Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_87 { std::get<4 /* Tuples */>((*p_0)) };
+                  Arr<::dessser::gen::sync_value::tuple> id_87 { std::get<4 /* Tuples */>(p_0) };
                   uint32_t id_88 { id_87.size() };
                   Vec<1, uint32_t> id_89 {  id_88  };
                   Pointer let_res_90;
@@ -874,8 +874,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                     Pointer let_res_128;
                     {
                       Vec<1, int32_t> n_ref_242 { id_127 };
-                      Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_129 { std::get<4 /* Tuples */>((*p_0)) };
-                      for (std::shared_ptr<::dessser::gen::sync_value::tuple>  &x_243 : id_129) {
+                      Arr<::dessser::gen::sync_value::tuple> id_129 { std::get<4 /* Tuples */>(p_0) };
+                      for (::dessser::gen::sync_value::tuple &x_243 : id_129) {
                         uint8_t id_130 { 0 };
                         uint8_t id_131 { 0 };
                         Pointer id_132 { dst_ref_241[id_131] };
@@ -905,7 +905,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                   Pointer choose_res_145;
                   if (id_144) {
                     auto fun146 { dessser::gen::raql_value::to_row_binary };
-                    dessser::gen::raql_value::t_ext id_147 { std::get<5 /* RamenValue */>((*p_0)) };
+                    dessser::gen::raql_value::t_ext id_147 { std::get<5 /* RamenValue */>(p_0) };
                     Pointer id_148 { fun146(id_147, ssum_dst_233) };
                     choose_res_145 = id_148;
                   } else {
@@ -913,7 +913,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                     bool id_150 { bool(id_149 == label1_232) };
                     Pointer choose_res_151;
                     if (id_150) {
-                      Arr<dessser::gen::rc_entry::t_ext> id_152 { std::get<6 /* TargetConfig */>((*p_0)) };
+                      Arr<dessser::gen::rc_entry::t_ext> id_152 { std::get<6 /* TargetConfig */>(p_0) };
                       uint32_t id_153 { id_152.size() };
                       Vec<1, uint32_t> id_154 {  id_153  };
                       Pointer let_res_155;
@@ -981,7 +981,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                         Pointer let_res_193;
                         {
                           Vec<1, int32_t> n_ref_237 { id_192 };
-                          Arr<dessser::gen::rc_entry::t_ext> id_194 { std::get<6 /* TargetConfig */>((*p_0)) };
+                          Arr<dessser::gen::rc_entry::t_ext> id_194 { std::get<6 /* TargetConfig */>(p_0) };
                           for (dessser::gen::rc_entry::t_ext &x_238 : id_194) {
                             uint8_t id_195 { 0 };
                             auto fun196 { dessser::gen::rc_entry::to_row_binary };
@@ -1013,7 +1013,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                       Pointer choose_res_211;
                       if (id_210) {
                         auto fun212 { dessser::gen::source_info::to_row_binary };
-                        dessser::gen::source_info::t_ext id_213 { std::get<7 /* SourceInfo */>((*p_0)) };
+                        dessser::gen::source_info::t_ext id_213 { std::get<7 /* SourceInfo */>(p_0) };
                         Pointer id_214 { fun212(id_213, ssum_dst_233) };
                         choose_res_211 = id_214;
                       } else {
@@ -1022,7 +1022,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                         Pointer choose_res_217;
                         if (id_216) {
                           auto fun218 { dessser::gen::runtime_stats::to_row_binary };
-                          dessser::gen::runtime_stats::t_ext id_219 { std::get<8 /* RuntimeStats */>((*p_0)) };
+                          dessser::gen::runtime_stats::t_ext id_219 { std::get<8 /* RuntimeStats */>(p_0) };
                           Pointer id_220 { fun218(id_219, ssum_dst_233) };
                           choose_res_217 = id_220;
                         } else {
@@ -1031,7 +1031,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                           Pointer choose_res_223;
                           if (id_222) {
                             auto fun224 { dessser::gen::replay::to_row_binary };
-                            dessser::gen::replay::t_ext id_225 { std::get<9 /* Replay */>((*p_0)) };
+                            dessser::gen::replay::t_ext id_225 { std::get<9 /* Replay */>(p_0) };
                             Pointer id_226 { fun224(id_225, ssum_dst_233) };
                             choose_res_223 = id_226;
                           } else {
@@ -1040,7 +1040,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                             Pointer choose_res_229;
                             if (id_228) {
                               auto fun230 { dessser::gen::replayer::to_row_binary };
-                              dessser::gen::replayer::t_ext id_231 { std::get<10 /* Replayer */>((*p_0)) };
+                              dessser::gen::replayer::t_ext id_231 { std::get<10 /* Replayer */>(p_0) };
                               Pointer id_232 { fun230(id_231, ssum_dst_233) };
                               choose_res_229 = id_232;
                             } else {
@@ -1049,7 +1049,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                               Pointer choose_res_235;
                               if (id_234) {
                                 auto fun236 { dessser::gen::replay_request::to_row_binary };
-                                dessser::gen::replay_request::t_ext id_237 { std::get<11 /* ReplayRequest */>((*p_0)) };
+                                dessser::gen::replay_request::t_ext id_237 { std::get<11 /* ReplayRequest */>(p_0) };
                                 Pointer id_238 { fun236(id_237, ssum_dst_233) };
                                 choose_res_235 = id_238;
                               } else {
@@ -1058,7 +1058,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                 Pointer choose_res_241;
                                 if (id_240) {
                                   auto fun242 { dessser::gen::alert::to_row_binary };
-                                  dessser::gen::alert::t_ext id_243 { std::get<12 /* Alert */>((*p_0)) };
+                                  dessser::gen::alert::t_ext id_243 { std::get<12 /* Alert */>(p_0) };
                                   Pointer id_244 { fun242(id_243, ssum_dst_233) };
                                   choose_res_241 = id_244;
                                 } else {
@@ -1067,7 +1067,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                   Pointer choose_res_247;
                                   if (id_246) {
                                     auto fun248 { dessser::gen::pivot::to_row_binary };
-                                    dessser::gen::pivot::t_ext id_249 { std::get<13 /* Pivot */>((*p_0)) };
+                                    dessser::gen::pivot::t_ext id_249 { std::get<13 /* Pivot */>(p_0) };
                                     Pointer id_250 { fun248(id_249, ssum_dst_233) };
                                     choose_res_247 = id_250;
                                   } else {
@@ -1076,7 +1076,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                     Pointer choose_res_253;
                                     if (id_252) {
                                       auto fun254 { dessser::gen::output_specs::to_row_binary };
-                                      dessser::gen::output_specs::t_ext id_255 { std::get<14 /* OutputSpecs */>((*p_0)) };
+                                      dessser::gen::output_specs::t_ext id_255 { std::get<14 /* OutputSpecs */>(p_0) };
                                       Pointer id_256 { fun254(id_255, ssum_dst_233) };
                                       choose_res_253 = id_256;
                                     } else {
@@ -1085,7 +1085,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                       Pointer choose_res_259;
                                       if (id_258) {
                                         auto fun260 { dessser::gen::dashboard_widget::to_row_binary };
-                                        dessser::gen::dashboard_widget::t_ext id_261 { std::get<15 /* DashboardWidget */>((*p_0)) };
+                                        dessser::gen::dashboard_widget::t_ext id_261 { std::get<15 /* DashboardWidget */>(p_0) };
                                         Pointer id_262 { fun260(id_261, ssum_dst_233) };
                                         choose_res_259 = id_262;
                                       } else {
@@ -1094,7 +1094,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                         Pointer choose_res_265;
                                         if (id_264) {
                                           auto fun266 { dessser::gen::alerting_contact::to_row_binary };
-                                          dessser::gen::alerting_contact::t_ext id_267 { std::get<16 /* AlertingContact */>((*p_0)) };
+                                          dessser::gen::alerting_contact::t_ext id_267 { std::get<16 /* AlertingContact */>(p_0) };
                                           Pointer id_268 { fun266(id_267, ssum_dst_233) };
                                           choose_res_265 = id_268;
                                         } else {
@@ -1103,7 +1103,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                           Pointer choose_res_271;
                                           if (id_270) {
                                             auto fun272 { dessser::gen::alerting_notification::to_row_binary };
-                                            dessser::gen::alerting_notification::t_ext id_273 { std::get<17 /* Notification */>((*p_0)) };
+                                            dessser::gen::alerting_notification::t_ext id_273 { std::get<17 /* Notification */>(p_0) };
                                             Pointer id_274 { fun272(id_273, ssum_dst_233) };
                                             choose_res_271 = id_274;
                                           } else {
@@ -1112,7 +1112,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                             Pointer choose_res_277;
                                             if (id_276) {
                                               auto fun278 { dessser::gen::alerting_delivery_status::to_row_binary };
-                                              dessser::gen::alerting_delivery_status::t_ext id_279 { std::get<18 /* DeliveryStatus */>((*p_0)) };
+                                              dessser::gen::alerting_delivery_status::t_ext id_279 { std::get<18 /* DeliveryStatus */>(p_0) };
                                               Pointer id_280 { fun278(id_279, ssum_dst_233) };
                                               choose_res_277 = id_280;
                                             } else {
@@ -1121,7 +1121,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                               Pointer choose_res_283;
                                               if (id_282) {
                                                 auto fun284 { dessser::gen::alerting_log::to_row_binary };
-                                                dessser::gen::alerting_log::t_ext id_285 { std::get<19 /* IncidentLog */>((*p_0)) };
+                                                dessser::gen::alerting_log::t_ext id_285 { std::get<19 /* IncidentLog */>(p_0) };
                                                 Pointer id_286 { fun284(id_285, ssum_dst_233) };
                                                 choose_res_283 = id_286;
                                               } else {
@@ -1130,7 +1130,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
                                                 Void id_289 { ((void)(assert(id_288)), ::dessser::Void()) };
                                                 (void)id_289;
                                                 auto fun290 { dessser::gen::alerting_inhibition::to_row_binary };
-                                                dessser::gen::alerting_inhibition::t_ext id_291 { std::get<20 /* Inhibition */>((*p_0)) };
+                                                dessser::gen::alerting_inhibition::t_ext id_291 { std::get<20 /* Inhibition */>(p_0) };
                                                 Pointer id_292 { fun290(id_291, ssum_dst_233) };
                                                 choose_res_283 = id_292;
                                               }
@@ -1181,17 +1181,17 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Poi
    };
   return fun7;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{skipped: U32; values: $raql_value}") (add (size 4) (apply (ext-identifier raql_value sersize-of-row-binary) (get-field "values" (param 0)))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::sync_value::tuple &)> tuple_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> fun293 { [&](std::shared_ptr<::dessser::gen::sync_value::tuple>  p_0) {
+  std::function<Size(::dessser::gen::sync_value::tuple &)> fun293 { [&](::dessser::gen::sync_value::tuple p_0) {
     Size id_294 { 4UL };
     auto fun295 { dessser::gen::raql_value::sersize_of_row_binary };
-    dessser::gen::raql_value::t_ext id_296 { (*p_0).values };
+    dessser::gen::raql_value::t_ext id_296 { p_0.values };
     Size id_297 { fun295(id_296) };
     Size id_298 { Size(id_294 + id_297) };
     return id_298;
@@ -1199,7 +1199,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> 
    };
   return fun293;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_sersize_of_row_binary(tuple_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::sync_value::tuple &)> tuple_sersize_of_row_binary(tuple_sersize_of_row_binary_init());
 
 /* 
     (fun ("[Error (FLOAT; U32; STRING) | Worker $worker | Retention $retention | TimeRange $time_range | Tuples (tuple AS {skipped: U32; values: $raql_value})[] | RamenValue $raql_value | TargetConfig $rc_entry[] | SourceInfo $source_info | RuntimeStats $runtime_stats | Replay $replay | Replayer $replayer | ReplayRequest $replay_request | Alert $alert | Pivot $pivot | OutputSpecs $output_specs | DashboardWidget $dashboard_widget | AlertingContact $alerting_contact | Notification $alerting_notification | DeliveryStatus $alerting_delivery_status | IncidentLog $alerting_log | Inhibition $alerting_inhibition]")
@@ -1281,10 +1281,10 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_value::tuple> )> tuple_s
                                                 (add (size 2) (apply (ext-identifier alerting_log sersize-of-row-binary) (get-alt "IncidentLog" (param 0))))
                                                 (seq (assert (eq (identifier "label2_216") (u16 20))) (add (size 2) (apply (ext-identifier alerting_inhibition sersize-of-row-binary) (get-alt "Inhibition" (param 0)))))))))))))))))))))))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::sync_value::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> fun299 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0) {
-    uint16_t id_300 { uint16_t((*p_0).index()) };
+  std::function<Size(::dessser::gen::sync_value::t &)> fun299 { [&](::dessser::gen::sync_value::t p_0) {
+    uint16_t id_300 { uint16_t(p_0.index()) };
     Size let_res_301;
     {
       uint16_t label2_216 { id_300 };
@@ -1293,7 +1293,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
       Size choose_res_304;
       if (id_303) {
         Size id_305 { 14UL };
-        ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_306 { std::get<0 /* Error */>((*p_0)) };
+        ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_306 { std::get<0 /* Error */>(p_0) };
         std::string id_307 { std::get<2>(id_306) };
         uint32_t id_308 { (uint32_t)id_307.size() };
         Vec<1, uint32_t> id_309 {  id_308  };
@@ -1333,7 +1333,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
           }
           let_res_310 = let_res_313;
         }
-        ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_331 { std::get<0 /* Error */>((*p_0)) };
+        ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_331 { std::get<0 /* Error */>(p_0) };
         std::string id_332 { std::get<2>(id_331) };
         uint32_t id_333 { (uint32_t)id_332.size() };
         Size id_334 { Size(id_333) };
@@ -1347,7 +1347,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
         if (id_338) {
           Size id_340 { 2UL };
           auto fun341 { dessser::gen::worker::sersize_of_row_binary };
-          dessser::gen::worker::t_ext id_342 { std::get<1 /* Worker */>((*p_0)) };
+          dessser::gen::worker::t_ext id_342 { std::get<1 /* Worker */>(p_0) };
           Size id_343 { fun341(id_342) };
           Size id_344 { Size(id_340 + id_343) };
           choose_res_339 = id_344;
@@ -1358,7 +1358,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
           if (id_346) {
             Size id_348 { 2UL };
             auto fun349 { dessser::gen::retention::sersize_of_row_binary };
-            dessser::gen::retention::t_ext id_350 { std::get<2 /* Retention */>((*p_0)) };
+            dessser::gen::retention::t_ext id_350 { std::get<2 /* Retention */>(p_0) };
             Size id_351 { fun349(id_350) };
             Size id_352 { Size(id_348 + id_351) };
             choose_res_347 = id_352;
@@ -1369,7 +1369,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
             if (id_354) {
               Size id_356 { 2UL };
               auto fun357 { dessser::gen::time_range::sersize_of_row_binary };
-              dessser::gen::time_range::t_ext id_358 { std::get<3 /* TimeRange */>((*p_0)) };
+              dessser::gen::time_range::t_ext id_358 { std::get<3 /* TimeRange */>(p_0) };
               Size id_359 { fun357(id_358) };
               Size id_360 { Size(id_356 + id_359) };
               choose_res_355 = id_360;
@@ -1379,7 +1379,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
               Size choose_res_363;
               if (id_362) {
                 Size id_364 { 2UL };
-                Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_365 { std::get<4 /* Tuples */>((*p_0)) };
+                Arr<::dessser::gen::sync_value::tuple> id_365 { std::get<4 /* Tuples */>(p_0) };
                 uint32_t id_366 { id_365.size() };
                 Vec<1, uint32_t> id_367 {  id_366  };
                 Size let_res_368;
@@ -1429,7 +1429,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                     Vec<1, int32_t> repeat_n_224 { id_393 };
                     bool while_flag_394 { true };
                     do {
-                      Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_395 { std::get<4 /* Tuples */>((*p_0)) };
+                      Arr<::dessser::gen::sync_value::tuple> id_395 { std::get<4 /* Tuples */>(p_0) };
                       uint32_t id_396 { id_395.size() };
                       int32_t id_397 { int32_t(id_396) };
                       uint8_t id_398 { 0 };
@@ -1442,8 +1442,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                         Size id_403 { sz_ref_223[id_402] };
                         uint8_t id_404 { 0 };
                         int32_t id_405 { repeat_n_224[id_404] };
-                        Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_406 { std::get<4 /* Tuples */>((*p_0)) };
-                        std::shared_ptr<::dessser::gen::sync_value::tuple>  id_407 { id_406[id_405] };
+                        Arr<::dessser::gen::sync_value::tuple> id_406 { std::get<4 /* Tuples */>(p_0) };
+                        ::dessser::gen::sync_value::tuple id_407 { id_406[id_405] };
                         Size id_408 { tuple_sersize_of_row_binary(id_407) };
                         Size id_409 { Size(id_403 + id_408) };
                         Void id_410 { ((void)(sz_ref_223[id_401] = id_409), ::dessser::Void()) };
@@ -1473,7 +1473,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                 if (id_420) {
                   Size id_422 { 2UL };
                   auto fun423 { dessser::gen::raql_value::sersize_of_row_binary };
-                  dessser::gen::raql_value::t_ext id_424 { std::get<5 /* RamenValue */>((*p_0)) };
+                  dessser::gen::raql_value::t_ext id_424 { std::get<5 /* RamenValue */>(p_0) };
                   Size id_425 { fun423(id_424) };
                   Size id_426 { Size(id_422 + id_425) };
                   choose_res_421 = id_426;
@@ -1483,7 +1483,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                   Size choose_res_429;
                   if (id_428) {
                     Size id_430 { 2UL };
-                    Arr<dessser::gen::rc_entry::t_ext> id_431 { std::get<6 /* TargetConfig */>((*p_0)) };
+                    Arr<dessser::gen::rc_entry::t_ext> id_431 { std::get<6 /* TargetConfig */>(p_0) };
                     uint32_t id_432 { id_431.size() };
                     Vec<1, uint32_t> id_433 {  id_432  };
                     Size let_res_434;
@@ -1533,7 +1533,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                         Vec<1, int32_t> repeat_n_220 { id_459 };
                         bool while_flag_460 { true };
                         do {
-                          Arr<dessser::gen::rc_entry::t_ext> id_461 { std::get<6 /* TargetConfig */>((*p_0)) };
+                          Arr<dessser::gen::rc_entry::t_ext> id_461 { std::get<6 /* TargetConfig */>(p_0) };
                           uint32_t id_462 { id_461.size() };
                           int32_t id_463 { int32_t(id_462) };
                           uint8_t id_464 { 0 };
@@ -1547,7 +1547,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                             auto fun470 { dessser::gen::rc_entry::sersize_of_row_binary };
                             uint8_t id_471 { 0 };
                             int32_t id_472 { repeat_n_220[id_471] };
-                            Arr<dessser::gen::rc_entry::t_ext> id_473 { std::get<6 /* TargetConfig */>((*p_0)) };
+                            Arr<dessser::gen::rc_entry::t_ext> id_473 { std::get<6 /* TargetConfig */>(p_0) };
                             dessser::gen::rc_entry::t_ext id_474 { id_473[id_472] };
                             Size id_475 { fun470(id_474) };
                             Size id_476 { Size(id_469 + id_475) };
@@ -1578,7 +1578,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                     if (id_487) {
                       Size id_489 { 2UL };
                       auto fun490 { dessser::gen::source_info::sersize_of_row_binary };
-                      dessser::gen::source_info::t_ext id_491 { std::get<7 /* SourceInfo */>((*p_0)) };
+                      dessser::gen::source_info::t_ext id_491 { std::get<7 /* SourceInfo */>(p_0) };
                       Size id_492 { fun490(id_491) };
                       Size id_493 { Size(id_489 + id_492) };
                       choose_res_488 = id_493;
@@ -1589,7 +1589,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                       if (id_495) {
                         Size id_497 { 2UL };
                         auto fun498 { dessser::gen::runtime_stats::sersize_of_row_binary };
-                        dessser::gen::runtime_stats::t_ext id_499 { std::get<8 /* RuntimeStats */>((*p_0)) };
+                        dessser::gen::runtime_stats::t_ext id_499 { std::get<8 /* RuntimeStats */>(p_0) };
                         Size id_500 { fun498(id_499) };
                         Size id_501 { Size(id_497 + id_500) };
                         choose_res_496 = id_501;
@@ -1600,7 +1600,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                         if (id_503) {
                           Size id_505 { 2UL };
                           auto fun506 { dessser::gen::replay::sersize_of_row_binary };
-                          dessser::gen::replay::t_ext id_507 { std::get<9 /* Replay */>((*p_0)) };
+                          dessser::gen::replay::t_ext id_507 { std::get<9 /* Replay */>(p_0) };
                           Size id_508 { fun506(id_507) };
                           Size id_509 { Size(id_505 + id_508) };
                           choose_res_504 = id_509;
@@ -1611,7 +1611,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                           if (id_511) {
                             Size id_513 { 2UL };
                             auto fun514 { dessser::gen::replayer::sersize_of_row_binary };
-                            dessser::gen::replayer::t_ext id_515 { std::get<10 /* Replayer */>((*p_0)) };
+                            dessser::gen::replayer::t_ext id_515 { std::get<10 /* Replayer */>(p_0) };
                             Size id_516 { fun514(id_515) };
                             Size id_517 { Size(id_513 + id_516) };
                             choose_res_512 = id_517;
@@ -1622,7 +1622,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                             if (id_519) {
                               Size id_521 { 2UL };
                               auto fun522 { dessser::gen::replay_request::sersize_of_row_binary };
-                              dessser::gen::replay_request::t_ext id_523 { std::get<11 /* ReplayRequest */>((*p_0)) };
+                              dessser::gen::replay_request::t_ext id_523 { std::get<11 /* ReplayRequest */>(p_0) };
                               Size id_524 { fun522(id_523) };
                               Size id_525 { Size(id_521 + id_524) };
                               choose_res_520 = id_525;
@@ -1633,7 +1633,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                               if (id_527) {
                                 Size id_529 { 2UL };
                                 auto fun530 { dessser::gen::alert::sersize_of_row_binary };
-                                dessser::gen::alert::t_ext id_531 { std::get<12 /* Alert */>((*p_0)) };
+                                dessser::gen::alert::t_ext id_531 { std::get<12 /* Alert */>(p_0) };
                                 Size id_532 { fun530(id_531) };
                                 Size id_533 { Size(id_529 + id_532) };
                                 choose_res_528 = id_533;
@@ -1644,7 +1644,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                 if (id_535) {
                                   Size id_537 { 2UL };
                                   auto fun538 { dessser::gen::pivot::sersize_of_row_binary };
-                                  dessser::gen::pivot::t_ext id_539 { std::get<13 /* Pivot */>((*p_0)) };
+                                  dessser::gen::pivot::t_ext id_539 { std::get<13 /* Pivot */>(p_0) };
                                   Size id_540 { fun538(id_539) };
                                   Size id_541 { Size(id_537 + id_540) };
                                   choose_res_536 = id_541;
@@ -1655,7 +1655,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                   if (id_543) {
                                     Size id_545 { 2UL };
                                     auto fun546 { dessser::gen::output_specs::sersize_of_row_binary };
-                                    dessser::gen::output_specs::t_ext id_547 { std::get<14 /* OutputSpecs */>((*p_0)) };
+                                    dessser::gen::output_specs::t_ext id_547 { std::get<14 /* OutputSpecs */>(p_0) };
                                     Size id_548 { fun546(id_547) };
                                     Size id_549 { Size(id_545 + id_548) };
                                     choose_res_544 = id_549;
@@ -1666,7 +1666,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                     if (id_551) {
                                       Size id_553 { 2UL };
                                       auto fun554 { dessser::gen::dashboard_widget::sersize_of_row_binary };
-                                      dessser::gen::dashboard_widget::t_ext id_555 { std::get<15 /* DashboardWidget */>((*p_0)) };
+                                      dessser::gen::dashboard_widget::t_ext id_555 { std::get<15 /* DashboardWidget */>(p_0) };
                                       Size id_556 { fun554(id_555) };
                                       Size id_557 { Size(id_553 + id_556) };
                                       choose_res_552 = id_557;
@@ -1677,7 +1677,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                       if (id_559) {
                                         Size id_561 { 2UL };
                                         auto fun562 { dessser::gen::alerting_contact::sersize_of_row_binary };
-                                        dessser::gen::alerting_contact::t_ext id_563 { std::get<16 /* AlertingContact */>((*p_0)) };
+                                        dessser::gen::alerting_contact::t_ext id_563 { std::get<16 /* AlertingContact */>(p_0) };
                                         Size id_564 { fun562(id_563) };
                                         Size id_565 { Size(id_561 + id_564) };
                                         choose_res_560 = id_565;
@@ -1688,7 +1688,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                         if (id_567) {
                                           Size id_569 { 2UL };
                                           auto fun570 { dessser::gen::alerting_notification::sersize_of_row_binary };
-                                          dessser::gen::alerting_notification::t_ext id_571 { std::get<17 /* Notification */>((*p_0)) };
+                                          dessser::gen::alerting_notification::t_ext id_571 { std::get<17 /* Notification */>(p_0) };
                                           Size id_572 { fun570(id_571) };
                                           Size id_573 { Size(id_569 + id_572) };
                                           choose_res_568 = id_573;
@@ -1699,7 +1699,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                           if (id_575) {
                                             Size id_577 { 2UL };
                                             auto fun578 { dessser::gen::alerting_delivery_status::sersize_of_row_binary };
-                                            dessser::gen::alerting_delivery_status::t_ext id_579 { std::get<18 /* DeliveryStatus */>((*p_0)) };
+                                            dessser::gen::alerting_delivery_status::t_ext id_579 { std::get<18 /* DeliveryStatus */>(p_0) };
                                             Size id_580 { fun578(id_579) };
                                             Size id_581 { Size(id_577 + id_580) };
                                             choose_res_576 = id_581;
@@ -1710,7 +1710,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                             if (id_583) {
                                               Size id_585 { 2UL };
                                               auto fun586 { dessser::gen::alerting_log::sersize_of_row_binary };
-                                              dessser::gen::alerting_log::t_ext id_587 { std::get<19 /* IncidentLog */>((*p_0)) };
+                                              dessser::gen::alerting_log::t_ext id_587 { std::get<19 /* IncidentLog */>(p_0) };
                                               Size id_588 { fun586(id_587) };
                                               Size id_589 { Size(id_585 + id_588) };
                                               choose_res_584 = id_589;
@@ -1721,7 +1721,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
                                               (void)id_592;
                                               Size id_593 { 2UL };
                                               auto fun594 { dessser::gen::alerting_inhibition::sersize_of_row_binary };
-                                              dessser::gen::alerting_inhibition::t_ext id_595 { std::get<20 /* Inhibition */>((*p_0)) };
+                                              dessser::gen::alerting_inhibition::t_ext id_595 { std::get<20 /* Inhibition */>(p_0) };
                                               Size id_596 { fun594(id_595) };
                                               Size id_597 { Size(id_593 + id_596) };
                                               choose_res_584 = id_597;
@@ -1771,7 +1771,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sers
    };
   return fun299;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::sync_value::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -1780,9 +1780,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_value::t> )> sersize_of_
           (let-pair "drec_fst_64" "drec_snd_65" (apply (ext-identifier raql_value of-row-binary) (identifier "drec_snd_62"))
             (make-tup (make-rec (string "values") (identifier "drec_fst_64") (string "skipped") (identifier "drec_fst_61")) (identifier "drec_snd_65"))))))
  */
-static std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> tuple_of_row_binary_init()
+static std::function<::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b(Pointer &)> tuple_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> fun598 { [&](Pointer p_0) {
+  std::function<::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b(Pointer &)> fun598 { [&](Pointer p_0) {
     ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 id_599 { p_0.readU32Le() };
     ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 letpair_res_600;
     {
@@ -1791,21 +1791,21 @@ static std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa9
       ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 id_601 { du32_fst_58, du32_snd_59 };
       letpair_res_600 = id_601;
     }
-    ::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f let_res_602;
+    ::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b let_res_602;
     {
       ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 drec_60 { letpair_res_600 };
-      ::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f letpair_res_603;
+      ::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b letpair_res_603;
       {
         auto drec_fst_61 { std::get<0>(drec_60) };
         auto drec_snd_62 { std::get<1>(drec_60) };
         auto fun604 { dessser::gen::raql_value::of_row_binary };
         ::dessser::gen::sync_value::tf3063cfb73e0f06d3ea99ebd15a86d50 id_605 { fun604(drec_snd_62) };
-        ::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f letpair_res_606;
+        ::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b letpair_res_606;
         {
           auto drec_fst_64 { std::get<0>(id_605) };
           auto drec_snd_65 { std::get<1>(id_605) };
-          std::shared_ptr<::dessser::gen::sync_value::tuple>  id_607 { std::make_shared<::dessser::gen::sync_value::tuple>(drec_fst_61, drec_fst_64) };
-          ::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f id_608 { id_607, drec_snd_65 };
+          ::dessser::gen::sync_value::tuple id_607 { drec_fst_61, drec_fst_64 };
+          ::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b id_608 { id_607, drec_snd_65 };
           letpair_res_606 = id_608;
         }
         letpair_res_603 = letpair_res_606;
@@ -1817,7 +1817,7 @@ static std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa9
    };
   return fun598;
 }
-std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Pointer)> tuple_of_row_binary(tuple_of_row_binary_init());
+std::function<::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b(Pointer &)> tuple_of_row_binary(tuple_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2038,9 +2038,9 @@ std::function<::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f(Poin
                                                           (identifier "dsum2_fst_76")) 
                                                         (identifier "dsum2_snd_77")))))))))))))))))))))))))))
  */
-static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun609 { [&](Pointer p_0) {
+  std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> fun609 { [&](Pointer p_0) {
     ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 id_610 { p_0.readU16Le() };
     ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 letpair_res_611;
     {
@@ -2049,16 +2049,16 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
       ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 id_612 { du16_fst_67, du16_snd_68 };
       letpair_res_611 = id_612;
     }
-    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 let_res_613;
+    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 let_res_613;
     {
       ::dessser::gen::sync_value::ta97bb48ed75bbda6173555873826c8c6 dsum1_72 { letpair_res_611 };
-      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_614;
+      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_614;
       {
         auto dsum1_fst_73 { std::get<0>(dsum1_72) };
         auto dsum1_snd_74 { std::get<1>(dsum1_72) };
         uint16_t id_615 { 0 };
         bool id_616 { bool(id_615 == dsum1_fst_73) };
-        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_617;
+        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_617;
         if (id_616) {
           ::dessser::gen::sync_value::td2cd337bb3c8bc04d5603393d084985b id_618 { dsum1_snd_74.readU64Le() };
           ::dessser::gen::sync_value::t9a758baeff17224a77e1a522010b4168 letpair_res_619;
@@ -2069,10 +2069,10 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
             ::dessser::gen::sync_value::t9a758baeff17224a77e1a522010b4168 id_621 { id_620, dfloat_snd_183 };
             letpair_res_619 = id_621;
           }
-          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 let_res_622;
+          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 let_res_622;
           {
             ::dessser::gen::sync_value::t9a758baeff17224a77e1a522010b4168 dtup_184 { letpair_res_619 };
-            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_623;
+            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_623;
             {
               auto dtup_fst_185 { std::get<0>(dtup_184) };
               auto dtup_snd_186 { std::get<1>(dtup_184) };
@@ -2084,10 +2084,10 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                 ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 id_626 { du32_fst_188, du32_snd_189 };
                 letpair_res_625 = id_626;
               }
-              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 let_res_627;
+              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 let_res_627;
               {
                 ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 dtup_190 { letpair_res_625 };
-                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_628;
+                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_628;
                 {
                   auto dtup_fst_191 { std::get<0>(dtup_190) };
                   auto dtup_snd_192 { std::get<1>(dtup_190) };
@@ -2163,22 +2163,22 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                     }
                     let_res_631 = let_res_634;
                   }
-                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 let_res_670;
+                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 let_res_670;
                   {
                     ::dessser::gen::sync_value::t12fb9c475959b52bf7b17b155a955ffa dstring1_199 { let_res_631 };
-                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_671;
+                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_671;
                     {
                       auto dstring1_fst_200 { std::get<0>(dstring1_199) };
                       auto dstring1_snd_201 { std::get<1>(dstring1_199) };
                       ::dessser::gen::sync_value::t9ef6882174ae71a34a3c5ef6b29242fb id_672 { dstring1_snd_201.readBytes(dstring1_fst_200) };
-                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_673;
+                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_673;
                       {
                         auto dstring2_fst_203 { std::get<0>(id_672) };
                         auto dstring2_snd_204 { std::get<1>(id_672) };
                         std::string id_674 { dstring2_fst_203.toString() };
                         ::dessser::gen::sync_value::tbf54298650775373958fa9b35bb96a35 id_675 { dtup_fst_185, dtup_fst_191, id_674 };
-                        std::shared_ptr<::dessser::gen::sync_value::t>  id_676 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<0>, id_675) };
-                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_677 { id_676, dstring2_snd_204 };
+                        ::dessser::gen::sync_value::t id_676 { std::in_place_index<0>, id_675 };
+                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_677 { id_676, dstring2_snd_204 };
                         letpair_res_673 = id_677;
                       }
                       letpair_res_671 = letpair_res_673;
@@ -2197,55 +2197,55 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
         } else {
           uint16_t id_678 { 1 };
           bool id_679 { bool(id_678 == dsum1_fst_73) };
-          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_680;
+          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_680;
           if (id_679) {
             auto fun681 { dessser::gen::worker::of_row_binary };
             ::dessser::gen::sync_value::tf1a9e54f73426165b2d5dbb064eb3fed id_682 { fun681(dsum1_snd_74) };
-            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_683;
+            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_683;
             {
               auto dsum2_fst_179 { std::get<0>(id_682) };
               auto dsum2_snd_180 { std::get<1>(id_682) };
-              std::shared_ptr<::dessser::gen::sync_value::t>  id_684 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<1>, dsum2_fst_179) };
-              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_685 { id_684, dsum2_snd_180 };
+              ::dessser::gen::sync_value::t id_684 { std::in_place_index<1>, dsum2_fst_179 };
+              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_685 { id_684, dsum2_snd_180 };
               letpair_res_683 = id_685;
             }
             choose_res_680 = letpair_res_683;
           } else {
             uint16_t id_686 { 2 };
             bool id_687 { bool(id_686 == dsum1_fst_73) };
-            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_688;
+            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_688;
             if (id_687) {
               auto fun689 { dessser::gen::retention::of_row_binary };
               ::dessser::gen::sync_value::tde821e6d031c399b029ea4a78810ecf6 id_690 { fun689(dsum1_snd_74) };
-              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_691;
+              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_691;
               {
                 auto dsum2_fst_176 { std::get<0>(id_690) };
                 auto dsum2_snd_177 { std::get<1>(id_690) };
-                std::shared_ptr<::dessser::gen::sync_value::t>  id_692 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<2>, dsum2_fst_176) };
-                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_693 { id_692, dsum2_snd_177 };
+                ::dessser::gen::sync_value::t id_692 { std::in_place_index<2>, dsum2_fst_176 };
+                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_693 { id_692, dsum2_snd_177 };
                 letpair_res_691 = id_693;
               }
               choose_res_688 = letpair_res_691;
             } else {
               uint16_t id_694 { 3 };
               bool id_695 { bool(id_694 == dsum1_fst_73) };
-              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_696;
+              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_696;
               if (id_695) {
                 auto fun697 { dessser::gen::time_range::of_row_binary };
                 ::dessser::gen::sync_value::t7ed2098d1a18c9b684db63350a7b96cb id_698 { fun697(dsum1_snd_74) };
-                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_699;
+                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_699;
                 {
                   auto dsum2_fst_173 { std::get<0>(id_698) };
                   auto dsum2_snd_174 { std::get<1>(id_698) };
-                  std::shared_ptr<::dessser::gen::sync_value::t>  id_700 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<3>, dsum2_fst_173) };
-                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_701 { id_700, dsum2_snd_174 };
+                  ::dessser::gen::sync_value::t id_700 { std::in_place_index<3>, dsum2_fst_173 };
+                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_701 { id_700, dsum2_snd_174 };
                   letpair_res_699 = id_701;
                 }
                 choose_res_696 = letpair_res_699;
               } else {
                 uint16_t id_702 { 4 };
                 bool id_703 { bool(id_702 == dsum1_fst_73) };
-                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_704;
+                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_704;
                 if (id_703) {
                   uint32_t id_705 { 0U };
                   Vec<1, uint32_t> id_706 {  id_705  };
@@ -2318,19 +2318,19 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                     }
                     let_res_707 = let_res_710;
                   }
-                  ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 let_res_745;
+                  ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 let_res_745;
                   {
                     ::dessser::gen::sync_value::t491c44439106a32f896827242e8e76a1 dlist1_155 { let_res_707 };
-                    ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 letpair_res_746;
+                    ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 letpair_res_746;
                     {
                       auto dlist1_fst_156 { std::get<0>(dlist1_155) };
                       auto dlist1_snd_157 { std::get<1>(dlist1_155) };
-                      Lst<std::shared_ptr<::dessser::gen::sync_value::tuple> > endoflist_747;
-                      ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 id_748 { endoflist_747, dlist1_snd_157 };
-                      Vec<1, ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3> id_749 {  id_748  };
-                      ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 let_res_750;
+                      Lst<::dessser::gen::sync_value::tuple> endoflist_747;
+                      ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 id_748 { endoflist_747, dlist1_snd_157 };
+                      Vec<1, ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516> id_749 {  id_748  };
+                      ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 let_res_750;
                       {
-                        Vec<1, ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3> inits_src_ref_158 { id_749 };
+                        Vec<1, ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516> inits_src_ref_158 { id_749 };
                         int32_t id_751 { 0L };
                         Vec<1, int32_t> id_752 {  id_751  };
                         {
@@ -2344,20 +2344,20 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                             while_flag_753 = id_757;
                             if (while_flag_753) {
                               uint8_t id_758 { 0 };
-                              ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 id_759 { inits_src_ref_158[id_758] };
+                              ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 id_759 { inits_src_ref_158[id_758] };
                               {
-                                ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 dlist2_160 { id_759 };
+                                ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 dlist2_160 { id_759 };
                                 {
                                   auto dlist2_fst_161 { std::get<0>(dlist2_160) };
                                   auto dlist2_snd_162 { std::get<1>(dlist2_160) };
                                   uint8_t id_760 { 0 };
-                                  ::dessser::gen::sync_value::t69580374758c5cd49d653ee83c7fa90f id_761 { tuple_of_row_binary(dlist2_snd_162) };
-                                  ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 letpair_res_762;
+                                  ::dessser::gen::sync_value::tc689a7a5ea052f6c0e885d3374325d5b id_761 { tuple_of_row_binary(dlist2_snd_162) };
+                                  ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 letpair_res_762;
                                   {
                                     auto dlist3_fst_164 { std::get<0>(id_761) };
                                     auto dlist3_snd_165 { std::get<1>(id_761) };
-                                    Lst<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_763 { dlist3_fst_164, dlist2_fst_161 };
-                                    ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 id_764 { id_763, dlist3_snd_165 };
+                                    Lst<::dessser::gen::sync_value::tuple> id_763 { dlist3_fst_164, dlist2_fst_161 };
+                                    ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 id_764 { id_763, dlist3_snd_165 };
                                     letpair_res_762 = id_764;
                                   }
                                   Void id_765 { ((void)(inits_src_ref_158[id_760] = letpair_res_762), ::dessser::Void()) };
@@ -2380,43 +2380,43 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                         }
                         (void)::dessser::Void();
                         uint8_t id_772 { 0 };
-                        ::dessser::gen::sync_value::t1bf5fe51ea8ba8f996ee38d2f7ebf6a3 id_773 { inits_src_ref_158[id_772] };
+                        ::dessser::gen::sync_value::tfce5b5f196eaf1540bed56507f219516 id_773 { inits_src_ref_158[id_772] };
                         let_res_750 = id_773;
                       }
                       letpair_res_746 = let_res_750;
                     }
                     let_res_745 = letpair_res_746;
                   }
-                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_774;
+                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_774;
                   {
                     auto dlist4_fst_167 { std::get<0>(let_res_745) };
                     auto dlist4_snd_168 { std::get<1>(let_res_745) };
-                    Arr<std::shared_ptr<::dessser::gen::sync_value::tuple> > id_775 { dlist4_fst_167.toListRev() };
-                    std::shared_ptr<::dessser::gen::sync_value::t>  id_776 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<4>, id_775) };
-                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_777 { id_776, dlist4_snd_168 };
+                    Arr<::dessser::gen::sync_value::tuple> id_775 { dlist4_fst_167.toArrRev() };
+                    ::dessser::gen::sync_value::t id_776 { std::in_place_index<4>, id_775 };
+                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_777 { id_776, dlist4_snd_168 };
                     letpair_res_774 = id_777;
                   }
                   choose_res_704 = letpair_res_774;
                 } else {
                   uint16_t id_778 { 5 };
                   bool id_779 { bool(id_778 == dsum1_fst_73) };
-                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_780;
+                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_780;
                   if (id_779) {
                     auto fun781 { dessser::gen::raql_value::of_row_binary };
                     ::dessser::gen::sync_value::tf3063cfb73e0f06d3ea99ebd15a86d50 id_782 { fun781(dsum1_snd_74) };
-                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_783;
+                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_783;
                     {
                       auto dsum2_fst_144 { std::get<0>(id_782) };
                       auto dsum2_snd_145 { std::get<1>(id_782) };
-                      std::shared_ptr<::dessser::gen::sync_value::t>  id_784 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<5>, dsum2_fst_144) };
-                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_785 { id_784, dsum2_snd_145 };
+                      ::dessser::gen::sync_value::t id_784 { std::in_place_index<5>, dsum2_fst_144 };
+                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_785 { id_784, dsum2_snd_145 };
                       letpair_res_783 = id_785;
                     }
                     choose_res_780 = letpair_res_783;
                   } else {
                     uint16_t id_786 { 6 };
                     bool id_787 { bool(id_786 == dsum1_fst_73) };
-                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_788;
+                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_788;
                     if (id_787) {
                       uint32_t id_789 { 0U };
                       Vec<1, uint32_t> id_790 {  id_789  };
@@ -2559,221 +2559,221 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                         }
                         let_res_829 = letpair_res_830;
                       }
-                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_859;
+                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_859;
                       {
                         auto dlist4_fst_138 { std::get<0>(let_res_829) };
                         auto dlist4_snd_139 { std::get<1>(let_res_829) };
-                        Arr<dessser::gen::rc_entry::t_ext> id_860 { dlist4_fst_138.toListRev() };
-                        std::shared_ptr<::dessser::gen::sync_value::t>  id_861 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<6>, id_860) };
-                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_862 { id_861, dlist4_snd_139 };
+                        Arr<dessser::gen::rc_entry::t_ext> id_860 { dlist4_fst_138.toArrRev() };
+                        ::dessser::gen::sync_value::t id_861 { std::in_place_index<6>, id_860 };
+                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_862 { id_861, dlist4_snd_139 };
                         letpair_res_859 = id_862;
                       }
                       choose_res_788 = letpair_res_859;
                     } else {
                       uint16_t id_863 { 7 };
                       bool id_864 { bool(id_863 == dsum1_fst_73) };
-                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_865;
+                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_865;
                       if (id_864) {
                         auto fun866 { dessser::gen::source_info::of_row_binary };
                         ::dessser::gen::sync_value::tf1b07204c9c2214dfaf5f174f6300e9a id_867 { fun866(dsum1_snd_74) };
-                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_868;
+                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_868;
                         {
                           auto dsum2_fst_115 { std::get<0>(id_867) };
                           auto dsum2_snd_116 { std::get<1>(id_867) };
-                          std::shared_ptr<::dessser::gen::sync_value::t>  id_869 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<7>, dsum2_fst_115) };
-                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_870 { id_869, dsum2_snd_116 };
+                          ::dessser::gen::sync_value::t id_869 { std::in_place_index<7>, dsum2_fst_115 };
+                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_870 { id_869, dsum2_snd_116 };
                           letpair_res_868 = id_870;
                         }
                         choose_res_865 = letpair_res_868;
                       } else {
                         uint16_t id_871 { 8 };
                         bool id_872 { bool(id_871 == dsum1_fst_73) };
-                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_873;
+                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_873;
                         if (id_872) {
                           auto fun874 { dessser::gen::runtime_stats::of_row_binary };
                           ::dessser::gen::sync_value::t0404418c5456e6c318afcd8cf14b75c1 id_875 { fun874(dsum1_snd_74) };
-                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_876;
+                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_876;
                           {
                             auto dsum2_fst_112 { std::get<0>(id_875) };
                             auto dsum2_snd_113 { std::get<1>(id_875) };
-                            std::shared_ptr<::dessser::gen::sync_value::t>  id_877 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<8>, dsum2_fst_112) };
-                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_878 { id_877, dsum2_snd_113 };
+                            ::dessser::gen::sync_value::t id_877 { std::in_place_index<8>, dsum2_fst_112 };
+                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_878 { id_877, dsum2_snd_113 };
                             letpair_res_876 = id_878;
                           }
                           choose_res_873 = letpair_res_876;
                         } else {
                           uint16_t id_879 { 9 };
                           bool id_880 { bool(id_879 == dsum1_fst_73) };
-                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_881;
+                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_881;
                           if (id_880) {
                             auto fun882 { dessser::gen::replay::of_row_binary };
                             ::dessser::gen::sync_value::t4f69e417cce4a8fd9a6492bd06fc9968 id_883 { fun882(dsum1_snd_74) };
-                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_884;
+                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_884;
                             {
                               auto dsum2_fst_109 { std::get<0>(id_883) };
                               auto dsum2_snd_110 { std::get<1>(id_883) };
-                              std::shared_ptr<::dessser::gen::sync_value::t>  id_885 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<9>, dsum2_fst_109) };
-                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_886 { id_885, dsum2_snd_110 };
+                              ::dessser::gen::sync_value::t id_885 { std::in_place_index<9>, dsum2_fst_109 };
+                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_886 { id_885, dsum2_snd_110 };
                               letpair_res_884 = id_886;
                             }
                             choose_res_881 = letpair_res_884;
                           } else {
                             uint16_t id_887 { 10 };
                             bool id_888 { bool(id_887 == dsum1_fst_73) };
-                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_889;
+                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_889;
                             if (id_888) {
                               auto fun890 { dessser::gen::replayer::of_row_binary };
                               ::dessser::gen::sync_value::t0d3332e65eb58017bd9ce92925526fe1 id_891 { fun890(dsum1_snd_74) };
-                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_892;
+                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_892;
                               {
                                 auto dsum2_fst_106 { std::get<0>(id_891) };
                                 auto dsum2_snd_107 { std::get<1>(id_891) };
-                                std::shared_ptr<::dessser::gen::sync_value::t>  id_893 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<10>, dsum2_fst_106) };
-                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_894 { id_893, dsum2_snd_107 };
+                                ::dessser::gen::sync_value::t id_893 { std::in_place_index<10>, dsum2_fst_106 };
+                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_894 { id_893, dsum2_snd_107 };
                                 letpair_res_892 = id_894;
                               }
                               choose_res_889 = letpair_res_892;
                             } else {
                               uint16_t id_895 { 11 };
                               bool id_896 { bool(id_895 == dsum1_fst_73) };
-                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_897;
+                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_897;
                               if (id_896) {
                                 auto fun898 { dessser::gen::replay_request::of_row_binary };
                                 ::dessser::gen::sync_value::tb04e7483a47551f3c586f859338754a3 id_899 { fun898(dsum1_snd_74) };
-                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_900;
+                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_900;
                                 {
                                   auto dsum2_fst_103 { std::get<0>(id_899) };
                                   auto dsum2_snd_104 { std::get<1>(id_899) };
-                                  std::shared_ptr<::dessser::gen::sync_value::t>  id_901 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<11>, dsum2_fst_103) };
-                                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_902 { id_901, dsum2_snd_104 };
+                                  ::dessser::gen::sync_value::t id_901 { std::in_place_index<11>, dsum2_fst_103 };
+                                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_902 { id_901, dsum2_snd_104 };
                                   letpair_res_900 = id_902;
                                 }
                                 choose_res_897 = letpair_res_900;
                               } else {
                                 uint16_t id_903 { 12 };
                                 bool id_904 { bool(id_903 == dsum1_fst_73) };
-                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_905;
+                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_905;
                                 if (id_904) {
                                   auto fun906 { dessser::gen::alert::of_row_binary };
                                   ::dessser::gen::sync_value::t444e608a3269594da3e48ff9117a0d03 id_907 { fun906(dsum1_snd_74) };
-                                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_908;
+                                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_908;
                                   {
                                     auto dsum2_fst_100 { std::get<0>(id_907) };
                                     auto dsum2_snd_101 { std::get<1>(id_907) };
-                                    std::shared_ptr<::dessser::gen::sync_value::t>  id_909 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<12>, dsum2_fst_100) };
-                                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_910 { id_909, dsum2_snd_101 };
+                                    ::dessser::gen::sync_value::t id_909 { std::in_place_index<12>, dsum2_fst_100 };
+                                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_910 { id_909, dsum2_snd_101 };
                                     letpair_res_908 = id_910;
                                   }
                                   choose_res_905 = letpair_res_908;
                                 } else {
                                   uint16_t id_911 { 13 };
                                   bool id_912 { bool(id_911 == dsum1_fst_73) };
-                                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_913;
+                                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_913;
                                   if (id_912) {
                                     auto fun914 { dessser::gen::pivot::of_row_binary };
                                     ::dessser::gen::sync_value::t2a03b8ab7cecf56205c765b69d16f216 id_915 { fun914(dsum1_snd_74) };
-                                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_916;
+                                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_916;
                                     {
                                       auto dsum2_fst_97 { std::get<0>(id_915) };
                                       auto dsum2_snd_98 { std::get<1>(id_915) };
-                                      std::shared_ptr<::dessser::gen::sync_value::t>  id_917 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<13>, dsum2_fst_97) };
-                                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_918 { id_917, dsum2_snd_98 };
+                                      ::dessser::gen::sync_value::t id_917 { std::in_place_index<13>, dsum2_fst_97 };
+                                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_918 { id_917, dsum2_snd_98 };
                                       letpair_res_916 = id_918;
                                     }
                                     choose_res_913 = letpair_res_916;
                                   } else {
                                     uint16_t id_919 { 14 };
                                     bool id_920 { bool(id_919 == dsum1_fst_73) };
-                                    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_921;
+                                    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_921;
                                     if (id_920) {
                                       auto fun922 { dessser::gen::output_specs::of_row_binary };
                                       ::dessser::gen::sync_value::tf66ee8ddea68e7658659620791429c2e id_923 { fun922(dsum1_snd_74) };
-                                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_924;
+                                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_924;
                                       {
                                         auto dsum2_fst_94 { std::get<0>(id_923) };
                                         auto dsum2_snd_95 { std::get<1>(id_923) };
-                                        std::shared_ptr<::dessser::gen::sync_value::t>  id_925 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<14>, dsum2_fst_94) };
-                                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_926 { id_925, dsum2_snd_95 };
+                                        ::dessser::gen::sync_value::t id_925 { std::in_place_index<14>, dsum2_fst_94 };
+                                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_926 { id_925, dsum2_snd_95 };
                                         letpair_res_924 = id_926;
                                       }
                                       choose_res_921 = letpair_res_924;
                                     } else {
                                       uint16_t id_927 { 15 };
                                       bool id_928 { bool(id_927 == dsum1_fst_73) };
-                                      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_929;
+                                      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_929;
                                       if (id_928) {
                                         auto fun930 { dessser::gen::dashboard_widget::of_row_binary };
                                         ::dessser::gen::sync_value::t7b3e7c64daee99819044254f252b16cd id_931 { fun930(dsum1_snd_74) };
-                                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_932;
+                                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_932;
                                         {
                                           auto dsum2_fst_91 { std::get<0>(id_931) };
                                           auto dsum2_snd_92 { std::get<1>(id_931) };
-                                          std::shared_ptr<::dessser::gen::sync_value::t>  id_933 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<15>, dsum2_fst_91) };
-                                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_934 { id_933, dsum2_snd_92 };
+                                          ::dessser::gen::sync_value::t id_933 { std::in_place_index<15>, dsum2_fst_91 };
+                                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_934 { id_933, dsum2_snd_92 };
                                           letpair_res_932 = id_934;
                                         }
                                         choose_res_929 = letpair_res_932;
                                       } else {
                                         uint16_t id_935 { 16 };
                                         bool id_936 { bool(id_935 == dsum1_fst_73) };
-                                        ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_937;
+                                        ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_937;
                                         if (id_936) {
                                           auto fun938 { dessser::gen::alerting_contact::of_row_binary };
                                           ::dessser::gen::sync_value::t63085be0ace05d30e702e98f7d406fb6 id_939 { fun938(dsum1_snd_74) };
-                                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_940;
+                                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_940;
                                           {
                                             auto dsum2_fst_88 { std::get<0>(id_939) };
                                             auto dsum2_snd_89 { std::get<1>(id_939) };
-                                            std::shared_ptr<::dessser::gen::sync_value::t>  id_941 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<16>, dsum2_fst_88) };
-                                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_942 { id_941, dsum2_snd_89 };
+                                            ::dessser::gen::sync_value::t id_941 { std::in_place_index<16>, dsum2_fst_88 };
+                                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_942 { id_941, dsum2_snd_89 };
                                             letpair_res_940 = id_942;
                                           }
                                           choose_res_937 = letpair_res_940;
                                         } else {
                                           uint16_t id_943 { 17 };
                                           bool id_944 { bool(id_943 == dsum1_fst_73) };
-                                          ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_945;
+                                          ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_945;
                                           if (id_944) {
                                             auto fun946 { dessser::gen::alerting_notification::of_row_binary };
                                             ::dessser::gen::sync_value::t2587780bdb272f24e6438b12cbc61e92 id_947 { fun946(dsum1_snd_74) };
-                                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_948;
+                                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_948;
                                             {
                                               auto dsum2_fst_85 { std::get<0>(id_947) };
                                               auto dsum2_snd_86 { std::get<1>(id_947) };
-                                              std::shared_ptr<::dessser::gen::sync_value::t>  id_949 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<17>, dsum2_fst_85) };
-                                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_950 { id_949, dsum2_snd_86 };
+                                              ::dessser::gen::sync_value::t id_949 { std::in_place_index<17>, dsum2_fst_85 };
+                                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_950 { id_949, dsum2_snd_86 };
                                               letpair_res_948 = id_950;
                                             }
                                             choose_res_945 = letpair_res_948;
                                           } else {
                                             uint16_t id_951 { 18 };
                                             bool id_952 { bool(id_951 == dsum1_fst_73) };
-                                            ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_953;
+                                            ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_953;
                                             if (id_952) {
                                               auto fun954 { dessser::gen::alerting_delivery_status::of_row_binary };
                                               ::dessser::gen::sync_value::te49867912245e444e88027721575ec35 id_955 { fun954(dsum1_snd_74) };
-                                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_956;
+                                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_956;
                                               {
                                                 auto dsum2_fst_82 { std::get<0>(id_955) };
                                                 auto dsum2_snd_83 { std::get<1>(id_955) };
-                                                std::shared_ptr<::dessser::gen::sync_value::t>  id_957 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<18>, dsum2_fst_82) };
-                                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_958 { id_957, dsum2_snd_83 };
+                                                ::dessser::gen::sync_value::t id_957 { std::in_place_index<18>, dsum2_fst_82 };
+                                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_958 { id_957, dsum2_snd_83 };
                                                 letpair_res_956 = id_958;
                                               }
                                               choose_res_953 = letpair_res_956;
                                             } else {
                                               uint16_t id_959 { 19 };
                                               bool id_960 { bool(id_959 == dsum1_fst_73) };
-                                              ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 choose_res_961;
+                                              ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 choose_res_961;
                                               if (id_960) {
                                                 auto fun962 { dessser::gen::alerting_log::of_row_binary };
                                                 ::dessser::gen::sync_value::t555ce468db008991e3ea7cea3f54910f id_963 { fun962(dsum1_snd_74) };
-                                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_964;
+                                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_964;
                                                 {
                                                   auto dsum2_fst_79 { std::get<0>(id_963) };
                                                   auto dsum2_snd_80 { std::get<1>(id_963) };
-                                                  std::shared_ptr<::dessser::gen::sync_value::t>  id_965 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<19>, dsum2_fst_79) };
-                                                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_966 { id_965, dsum2_snd_80 };
+                                                  ::dessser::gen::sync_value::t id_965 { std::in_place_index<19>, dsum2_fst_79 };
+                                                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_966 { id_965, dsum2_snd_80 };
                                                   letpair_res_964 = id_966;
                                                 }
                                                 choose_res_961 = letpair_res_964;
@@ -2784,12 +2784,12 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
                                                 (void)id_969;
                                                 auto fun970 { dessser::gen::alerting_inhibition::of_row_binary };
                                                 ::dessser::gen::sync_value::t511ff94fe7190561084aee555c49cbe8 id_971 { fun970(dsum1_snd_74) };
-                                                ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_972;
+                                                ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_972;
                                                 {
                                                   auto dsum2_fst_76 { std::get<0>(id_971) };
                                                   auto dsum2_snd_77 { std::get<1>(id_971) };
-                                                  std::shared_ptr<::dessser::gen::sync_value::t>  id_973 { std::make_shared<::dessser::gen::sync_value::t>(std::in_place_index<20>, dsum2_fst_76) };
-                                                  ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_974 { id_973, dsum2_snd_77 };
+                                                  ::dessser::gen::sync_value::t id_973 { std::in_place_index<20>, dsum2_fst_76 };
+                                                  ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_974 { id_973, dsum2_snd_77 };
                                                   letpair_res_972 = id_974;
                                                 }
                                                 choose_res_961 = letpair_res_972;
@@ -2841,20 +2841,20 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
    };
   return fun609;
 }
-std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_212" "make_snd_213" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_212") (identifier "make_snd_213"))))
  */
-static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> fun975 { [&](Pointer p_0) {
-    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_976 { of_row_binary(p_0) };
-    ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 letpair_res_977;
+  std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> fun975 { [&](Pointer p_0) {
+    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_976 { of_row_binary(p_0) };
+    ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 letpair_res_977;
     {
       auto make_fst_212 { std::get<0>(id_976) };
       auto make_snd_213 { std::get<1>(id_976) };
-      ::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3 id_978 { make_fst_212, make_snd_213 };
+      ::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79 id_978 { make_fst_212, make_snd_213 };
       letpair_res_977 = id_978;
     }
     return letpair_res_977;
@@ -2862,22 +2862,22 @@ static std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dac
    };
   return fun975;
 }
-std::function<::dessser::gen::sync_value::t15098b8456ebfe3bc6bbe8b1695dacf3(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::sync_value::t0fc9c7c3447925ba31ecb766cf775e79(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("[Error (FLOAT; U32; STRING) | Worker $worker | Retention $retention | TimeRange $time_range | Tuples (tuple AS {skipped: U32; values: $raql_value})[] | RamenValue $raql_value | TargetConfig $rc_entry[] | SourceInfo $source_info | RuntimeStats $runtime_stats | Replay $replay | Replayer $replayer | ReplayRequest $replay_request | Alert $alert | Pivot $pivot | OutputSpecs $output_specs | DashboardWidget $dashboard_widget | AlertingContact $alerting_contact | Notification $alerting_notification | DeliveryStatus $alerting_delivery_status | IncidentLog $alerting_log | Inhibition $alerting_inhibition]" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> fun979 { [&](std::shared_ptr<::dessser::gen::sync_value::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> fun979 { [&](::dessser::gen::sync_value::t p_0, Pointer p_1) {
     Pointer id_980 { to_row_binary(p_0, p_1) };
     return id_980;
   }
    };
   return fun979;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::sync_value::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::sync_value::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

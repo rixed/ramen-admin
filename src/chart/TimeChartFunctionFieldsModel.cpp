@@ -23,9 +23,8 @@ TimeChartFunctionFieldsModel::TimeChartFunctionFieldsModel(
     std::string const &site, std::string const &program,
     std::string const &function, QObject *parent)
     : QAbstractTableModel(parent),
-      source(std::make_shared<dessser::gen::fq_function_name::t>(site, program,
-                                                                 function),
-             true, {}) {
+      source(dessser::gen::fq_function_name::t{site, program, function}, true,
+             {}) {
   connect(GraphModel::globalGraphModel, &GraphModel::workerChanged, this,
           &TimeChartFunctionFieldsModel::checkSource);
 }
@@ -38,25 +37,22 @@ int TimeChartFunctionFieldsModel::columnCount(QModelIndex const &) const {
   return NumColumns;
 }
 
-std::shared_ptr<dessser::gen::dashboard_widget::field const>
+dessser::gen::dashboard_widget::field const *
 TimeChartFunctionFieldsModel::findFieldConfiguration(
     std::string const &name) const {
-  for (std::shared_ptr<dessser::gen::dashboard_widget::field const> field :
-       source.fields) {
-    if (field->column == name) return field;
+  for (dessser::gen::dashboard_widget::field const &field : source.fields) {
+    if (field.column == name) return &field;
   }
 
   return nullptr;
 }
 
-static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
+static dessser::gen::dashboard_widget::field makeField(
     std::string const &program, std::string const &function,
     std::string const &field) {
-  std::shared_ptr<dessser::gen::dashboard_widget::representation>
-      representation{
-          std::make_shared<dessser::gen::dashboard_widget::representation>(
-              std::in_place_index<dessser::gen::dashboard_widget::Unused>,
-              dessser::Void())};
+  dessser::gen::dashboard_widget::representation representation{
+      std::in_place_index<dessser::gen::dashboard_widget::Unused>,
+      dessser::Void()};
 
   QString const full_name{QString::fromStdString(program) + "/" +
                           QString::fromStdString(function) + "/" +
@@ -66,10 +62,12 @@ static std::shared_ptr<dessser::gen::dashboard_widget::field> makeField(
 
   dessser::Arr<std::string> factors;
 
-  return std::make_shared<dessser::gen::dashboard_widget::field>(
-      (double)c.alphaF(),  // opacity
-      (uint32_t)(c.rgb() & 0xffffffU), representation, field, factors,
-      (uint8_t)0);  // axis number
+  return dessser::gen::dashboard_widget::field{(double)c.alphaF(),  // opacity
+                                               (uint32_t)(c.rgb() & 0xffffffU),
+                                               representation,
+                                               field,
+                                               factors,
+                                               (uint8_t)0};  // axis number
 }
 
 dessser::gen::dashboard_widget::field
@@ -77,31 +75,28 @@ TimeChartFunctionFieldsModel::findFieldConfiguration(int row) const {
   std::string const name{
       headerData(row, Qt::Vertical).toString().toStdString()};
 
-  std::shared_ptr<dessser::gen::dashboard_widget::field> field{
-      std::const_pointer_cast<dessser::gen::dashboard_widget::field>(
-          findFieldConfiguration(name))};
+  dessser::gen::dashboard_widget::field const *field{
+      findFieldConfiguration(name)};
 
-  if (!field) {
-    field = makeField(source.name->program, source.name->function, name);
-  }
-  return *field;
+  if (field) return *field;
+
+  return makeField(source.name.program, source.name.function, name);
 }
 
-std::shared_ptr<dessser::gen::dashboard_widget::field>
+dessser::gen::dashboard_widget::field *
 TimeChartFunctionFieldsModel::findFieldConfiguration(int row) {
   std::string const name{
       headerData(row, Qt::Vertical).toString().toStdString()};
 
-  std::shared_ptr<dessser::gen::dashboard_widget::field> field{
-      std::const_pointer_cast<dessser::gen::dashboard_widget::field>(
-          findFieldConfiguration(name))};
+  dessser::gen::dashboard_widget::field const *field{
+      findFieldConfiguration(name)};
 
-  if (!field) {
-    field = makeField(source.name->program, source.name->function, name);
-    if (verbose) qDebug() << "model: adding a field";
-    source.fields.push_back(field);
-  }
-  return field;
+  if (field) return const_cast<dessser::gen::dashboard_widget::field *>(field);
+
+  if (verbose) qDebug() << "model: adding a field";
+  source.fields.push_back(
+      makeField(source.name.program, source.name.function, name));
+  return &source.fields[source.fields.size() - 1];
 }
 
 QVariant TimeChartFunctionFieldsModel::data(QModelIndex const &index,
@@ -119,7 +114,7 @@ QVariant TimeChartFunctionFieldsModel::data(QModelIndex const &index,
 
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:
-      return (uint)field.representation->index();
+      return (uint)field.representation.index();
 
     case ColFactors:
       if (role == Qt::DisplayRole) {
@@ -191,8 +186,7 @@ bool TimeChartFunctionFieldsModel::setData(QModelIndex const &index,
   int const col{index.column()};
   if (col < 0 || col >= NumColumns) return false;
 
-  std::shared_ptr<dessser::gen::dashboard_widget::field> field{
-      findFieldConfiguration(row)};
+  dessser::gen::dashboard_widget::field *field{findFieldConfiguration(row)};
 
   // Required to assign variants:
   static dessser::gen::dashboard_widget::representation const reprUnused{
@@ -212,16 +206,16 @@ bool TimeChartFunctionFieldsModel::setData(QModelIndex const &index,
     case ColRepresentation:
       switch (value.toInt()) {
         case 0:
-          *field->representation = reprUnused;
+          field->representation = reprUnused;
           break;
         case 1:
-          *field->representation = reprIndependent;
+          field->representation = reprIndependent;
           break;
         case 2:
-          *field->representation = reprStacked;
+          field->representation = reprStacked;
           break;
         case 3:
-          *field->representation = reprStackCentered;
+          field->representation = reprStackCentered;
           break;
         default:
           qFatal("TimeChartFunctionFieldsModel::setData: invalid column");
@@ -269,9 +263,9 @@ bool TimeChartFunctionFieldsModel::setValue(
   std::shared_ptr<dessser::gen::sync_key::t const> infoKey{
       std::make_shared<dessser::gen::sync_key::t>(
           std::in_place_index<dessser::gen::sync_key::Sources>,
-          srcPathFromProgramName(source_.name->program), "info")};
+          srcPathFromProgramName(source_.name.program), "info")};
 
-  std::shared_ptr<dessser::gen::source_info::t const> sourceInfo;
+  std::optional<dessser::gen::source_info::t> sourceInfo;
   {
     kvs->lock.lock_shared();
     auto it{kvs->map.find(infoKey)};
@@ -299,23 +293,22 @@ bool TimeChartFunctionFieldsModel::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::source_info::compiled_program> prog{
+  dessser::gen::source_info::compiled_program const &prog{
       std::get<dessser::gen::source_info::Compiled>(sourceInfo->detail)};
 
   beginResetModel();
   numericFields.clear();
   factors.clear();
 
-  for (std::shared_ptr<dessser::gen::source_info::compiled_func> const &func :
-       prog->funcs) {
-    if (func->name != source_.name->function) continue;
-    std::shared_ptr<dessser::gen::raql_type::t const> typ{func->out_record};
+  for (dessser::gen::source_info::compiled_func const &func : prog.funcs) {
+    if (func.name != source_.name.function) continue;
+    std::shared_ptr<dessser::gen::raql_type::t const> typ{func.out_record};
     for (unsigned c = 0; c < numColumns(*typ); c++) {
       std::string const name{columnName(*typ, c)};
       std::shared_ptr<dessser::gen::raql_type::t const> t{columnType(*typ, c)};
       QString name_{QString::fromStdString(name)};
       if (isNumeric(*t)) numericFields += name_;
-      if (func->factors.contains(name)) factors += name_;
+      if (func.factors.contains(name)) factors += name_;
     }
     break;
   }
@@ -330,7 +323,7 @@ bool TimeChartFunctionFieldsModel::setValue(
   {
     auto it{source.fields.begin()};
     while (it != source.fields.end()) {
-      QString const name{QString::fromStdString((*it)->column)};
+      QString const name{QString::fromStdString((*it).column)};
       if (!numericFields.contains(name)) {
         qWarning() << "configured field" << name
                    << "does not exist or is not numeric";
@@ -354,10 +347,8 @@ void TimeChartFunctionFieldsModel::checkSource(QString const &oldSign,
 }
 
 bool TimeChartFunctionFieldsModel::hasSelection() const {
-  for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field :
-       source.fields) {
-    if (field->representation->index() !=
-        dessser::gen::dashboard_widget::Unused)
+  for (dessser::gen::dashboard_widget::field const &field : source.fields) {
+    if (field.representation.index() != dessser::gen::dashboard_widget::Unused)
       return true;
   }
 

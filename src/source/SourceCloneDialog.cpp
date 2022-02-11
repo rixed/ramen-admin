@@ -83,7 +83,7 @@ void SourceCloneDialog::cloneSource() {
 
   if (verbose) qDebug() << "Saving cloned value into" << *newKey;
 
-  Menu::getClient()->sendNew(newKey, value);
+  Menu::getClient()->sendNew(*newKey, *value);
   QDialog::accept();
 }
 

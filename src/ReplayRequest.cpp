@@ -31,16 +31,12 @@ static std::mutex respKeySeqLock;
 static std::shared_ptr<dessser::gen::sync_key::t const> nextRespKey() {
   std::lock_guard<std::mutex> guard{respKeySeqLock};
 
-  std::shared_ptr<dessser::gen::sync_key::per_client> resp{
-      std::make_shared<dessser::gen::sync_key::per_client>(
-          std::in_place_index<dessser::gen::sync_key::Response>,
-          respKeyPrefix + std::to_string(respKeySeq++))};
-
   return std::make_shared<dessser::gen::sync_key::t const>(
       std::in_place_index<dessser::gen::sync_key::PerClient>,
-      std::const_pointer_cast<dessser::gen::sync_socket::t>(
-          Menu::getClient()->syncSocket),
-      resp);
+      *Menu::getClient()->syncSocket,
+      dessser::gen::sync_key::per_client{
+          std::in_place_index<dessser::gen::sync_key::Response>,
+          respKeyPrefix + std::to_string(respKeySeq++)});
 }
 
 ReplayRequest::ReplayRequest(
@@ -104,7 +100,7 @@ void ReplayRequest::sendRequest() {
    * When everything is fine the worker would create it, but the replayer
    * service might decide that it's not even worth a replayer and delete it
    * itself. */
-  Menu::getClient()->sendNew(respKey);
+  Menu::getClient()->sendNew(*respKey, *nullVal);
 
   std::shared_ptr<dessser::gen::sync_value::t const> val{
       makeReplayRequest(site, program, function, since, until, respKey)};
@@ -120,7 +116,7 @@ void ReplayRequest::sendRequest() {
           std::in_place_index<dessser::gen::sync_key::ReplayRequests>,
           dessser::Void())};
 
-  Menu::getClient()->sendSet(key, val);
+  Menu::getClient()->sendSet(*key, *val);
 }
 
 void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key,
@@ -137,7 +133,7 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key,
     return;
   }
 
-  dessser::Arr<std::shared_ptr<dessser::gen::sync_value::tuple> > const &batch{
+  dessser::Arr<dessser::gen::sync_value::tuple> const &batch{
       std::get<dessser::gen::sync_value::Tuples>(*kv.val)};
 
   bool hadTuple{false};
@@ -153,23 +149,22 @@ void ReplayRequest::receiveValue(dessser::gen::sync_key::t const &key,
 
     if (verbose) qDebug() << "Received a batch of" << batch.size() << "tuples";
 
-    for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple :
-         batch) {
-      std::optional<double> start{eventTime->startOfTuple(*tuple->values)};
+    for (dessser::gen::sync_value::tuple const &tuple : batch) {
+      std::optional<double> start{eventTime->startOfTuple(*tuple.values)};
       if (!start) {
         qCritical() << "Dropping tuple missing event time";
         continue;
       }
 
       if (verbose)
-        qDebug() << "ReplayRequest: received" << *tuple->values
+        qDebug() << "ReplayRequest: received" << *tuple.values
                  << ", eventTime:" << *eventTime;
 
       if (*start >= since && *start <= until) {
-        tuples.insert(std::make_pair(*start, tuple->values));
+        tuples.insert(std::make_pair(*start, tuple.values));
         hadTuple = true;
       } else {
-        std::optional<double> stop{eventTime->stopOfTuple(*tuple->values)};
+        std::optional<double> stop{eventTime->stopOfTuple(*tuple.values)};
         if (!stop || !overlap(*start, *stop, since, until)) {
           qCritical() << qSetRealNumberPrecision(13)
                       << "Ignoring a tuple which time" << int64_t(*start)

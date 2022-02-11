@@ -42,16 +42,16 @@ static QStringList treeNamesOfSourcesKey(dessser::gen::sync_key::t const &k) {
 
 static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
   using namespace dessser::gen::sync_key;
-  std::shared_ptr<per_site const> per_site{std::get<PerSite>(k)};
-  std::string const &site_name{std::get<0>(*per_site)};
-  std::shared_ptr<per_site_data const> data{std::get<1>(*per_site)};
+  per_site const &per_site{std::get<PerSite>(k)};
+  std::string const &site_name{std::get<0>(per_site)};
+  per_site_data const &data{std::get<1>(per_site)};
   QStringList ret{"PerSite", QString::fromStdString(site_name)};
 
-  switch (data->index()) {
+  switch (data.index()) {
     case IsMaster:
       return ret << "IsMaster";
     case PerService: {
-      auto const &service{std::get<PerService>(*data)};
+      auto const &service{std::get<PerService>(data)};
       std::string const &service_name{std::get<0>(service)};
       auto const &service_data{std::get<1>(service)};
       ret = ret << "PerService" << QString::fromStdString(service_name);
@@ -65,15 +65,14 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       }
     }
     case PerWorker: {
-      std::shared_ptr<per_worker const> per_worker{std::get<PerWorker>(*data)};
-      std::string const &worker_name{std::get<0>(*per_worker)};
-      std::shared_ptr<per_worker_data const> worker_data{
-          std::get<1>(*per_worker)};
+      per_worker const &per_worker{std::get<PerWorker>(data)};
+      std::string const &worker_name{std::get<0>(per_worker)};
+      per_worker_data const &worker_data{std::get<1>(per_worker)};
       ret =
           ret
           << "PerWorker"
           << QString::fromStdString(worker_name).split('/', Qt::SkipEmptyParts);
-      switch (worker_data->index()) {
+      switch (worker_data.index()) {
         case RuntimeStats:
           return ret << "RuntimeStats";
         case ArchivedTimes:
@@ -87,7 +86,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
         case Worker:
           return ret << "Worker";
         case PerInstance: {
-          auto const &instance{std::get<PerInstance>(*worker_data)};
+          auto const &instance{std::get<PerInstance>(worker_data)};
           std::string const &instance_name{std::get<0>(instance)};
           auto const &instance_data{std::get<1>(instance)};
           ret = ret << "PerInstance" << QString::fromStdString(instance_name);
@@ -114,7 +113,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
         }
         case PerReplayer:
           return ret << "PerReplayer"
-                     << QString::number(std::get<PerReplayer>(*worker_data));
+                     << QString::number(std::get<PerReplayer>(worker_data));
         case OutputSpecs:
           return ret << "OutputSpecs";
         default:
@@ -122,7 +121,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       }
     }
     case PerProgram: {
-      auto const &program{std::get<PerProgram>(*data)};
+      auto const &program{std::get<PerProgram>(data)};
       std::string const &program_name{std::get<0>(program)};
       auto const &program_data{std::get<1>(program)};
       ret = ret << "PerProgram"
@@ -136,7 +135,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       }
     }
     default:
-      qFatal("Invalid data->index");
+      qFatal("Invalid data.index");
   }
 }
 
@@ -164,19 +163,19 @@ static QStringList treeNamesOfTailsKey(dessser::gen::sync_key::t const &k) {
   std::string const &site_name{std::get<0>(tails)};
   std::string const &fq_name{std::get<1>(tails)};
   std::string const &instance{std::get<2>(tails)};
-  std::shared_ptr<per_tail const> subscriber_data{std::get<3>(tails)};
+  per_tail const &subscriber_data{std::get<3>(tails)};
   QStringList ret{QStringList("Tails") << QString::fromStdString(site_name)
                                        << QString::fromStdString(fq_name).split(
                                               '/', Qt::SkipEmptyParts)
                                        << QString::fromStdString(instance)};
-  switch (subscriber_data->index()) {
+  switch (subscriber_data.index()) {
     case Subscriber:
       return ret << "Subscriber"
                  << QString::fromStdString(
-                        std::get<Subscriber>(*subscriber_data));
+                        std::get<Subscriber>(subscriber_data));
     case LastTuple:
       return ret << "LastTuple"
-                 << QString::number(std::get<LastTuple>(*subscriber_data));
+                 << QString::number(std::get<LastTuple>(subscriber_data));
     default:
       qFatal("Invalid subscriber_data");
   }
@@ -211,9 +210,9 @@ static QStringList treeNamesOfDashKey(
 static QStringList treeNamesOfPerClientKey(dessser::gen::sync_key::t const &k) {
   using namespace dessser::gen::sync_key;
   auto const &per_client{std::get<PerClient>(k)};
-  dessser::gen::sync_socket::t const &sock{*std::get<0>(per_client)};
+  dessser::gen::sync_socket::t const &sock{std::get<0>(per_client)};
   dessser::gen::sync_key::per_client const &per_client_data{
-      *std::get<1>(per_client)};
+      std::get<1>(per_client)};
   QStringList ret{QStringList("PerClient") << treeNamesOfSyncSocket(sock)};
   switch (per_client_data.index()) {
     case Response:
@@ -233,13 +232,13 @@ static QStringList treeNamesOfTeamsKey(dessser::gen::sync_key::t const &k) {
   QStringList ret{QStringList("Teams")
                   << QString::fromStdString(team.name).split(
                          '/', Qt::SkipEmptyParts)};
-  switch (team.info->index()) {
+  switch (team.info.index()) {
     case Contacts:
       return ret << "Contacts"
-                 << QString::fromStdString(std::get<Contacts>(*team.info));
+                 << QString::fromStdString(std::get<Contacts>(team.info));
     case Inhibition:
       return ret << "Inhibition"
-                 << QString::fromStdString(std::get<Inhibition>(*team.info));
+                 << QString::fromStdString(std::get<Inhibition>(team.info));
     default:
       qFatal("Invalid team.info");
   }
@@ -249,11 +248,11 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
   using namespace dessser::gen::sync_key;
   auto const &incidents{std::get<Incidents>(k)};
   std::string const &incident_id{std::get<0>(incidents)};
-  std::shared_ptr<dessser::gen::sync_key::incident_key const> incident_data{
+  dessser::gen::sync_key::incident_key const &incident_data{
       std::get<1>(incidents)};
   QStringList ret{QStringList("Incidents")
                   << QString::fromStdString(incident_id)};
-  switch (incident_data->index()) {
+  switch (incident_data.index()) {
     case FirstStartNotif:
       return ret << "FirstStartNotif";
     case LastStartNotif:
@@ -265,13 +264,13 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
     case Team:
       return ret << "Team";
     case Dialogs: {
-      auto const &dialogs{std::get<Dialogs>(*incident_data)};
+      auto const &dialogs{std::get<Dialogs>(incident_data)};
       ret = ret << "Dialogs"
                 << QString::fromStdString(std::get<0>(dialogs))
                        .split('/', Qt::SkipEmptyParts);
-      std::shared_ptr<dessser::gen::sync_key::dialog_key const> dialog_data{
+      dessser::gen::sync_key::dialog_key const &dialog_data{
           std::get<1>(dialogs)};
-      switch (dialog_data->index()) {
+      switch (dialog_data.index()) {
         case NumDeliveryAttempts:
           return ret << "NumDeliveryAttempts";
         case FirstDeliveryAttempt:
@@ -291,7 +290,7 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
       }
     }
     case Journal: {
-      auto const &journal{std::get<Journal>(*incident_data)};
+      auto const &journal{std::get<Journal>(incident_data)};
       return ret << "Journal" << stringOfDate(std::get<0>(journal))
                  << QString::number(std::get<1>(journal));
     }
@@ -323,10 +322,10 @@ static QStringList treeNamesOfSyncKey(dessser::gen::sync_key::t const &k) {
     case Replays:
       return QStringList("Replays") << QString::number(std::get<Replays>(k));
     case Error: {
-      std::optional<dessser::gen::sync_socket::t_ext> const error{
+      std::optional<dessser::gen::sync_socket::t_ext> const &error{
           std::get<Error>(k)};
-      if (*error) {
-        return QStringList("Error") << treeNamesOfSyncSocket(**error);
+      if (error) {
+        return QStringList("Error") << treeNamesOfSyncSocket(*error);
       } else {
         return QStringList("Error") << "None";
       }
@@ -375,9 +374,8 @@ ConfTreeItem *ConfTreeWidget::findItem(QString const &name,
 static bool isASubscriber(dessser::gen::sync_key::t const &key) {
   if (key.index() != dessser::gen::sync_key::Tails) return false;
   auto const &tail{std::get<dessser::gen::sync_key::Tails>(key)};
-  std::shared_ptr<dessser::gen::sync_key::per_tail const> per_tail{
-      std::get<3>(tail)};
-  return per_tail->index() == dessser::gen::sync_key::Subscriber;
+  dessser::gen::sync_key::per_tail const &per_tail{std::get<3>(tail)};
+  return per_tail.index() == dessser::gen::sync_key::Subscriber;
 }
 
 static bool betterSkipKey(dessser::gen::sync_key::t const &key) {
@@ -444,7 +442,7 @@ void ConfTreeWidget::deleteClicked(
   msg.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
   msg.setDefaultButton(QMessageBox::Cancel);
   msg.setIcon(QMessageBox::Warning);
-  if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(key);
+  if (QMessageBox::Ok == msg.exec()) Menu::getClient()->sendDel(*key);
 }
 
 void ConfTreeWidget::openViewWindow(

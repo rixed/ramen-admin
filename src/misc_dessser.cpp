@@ -43,13 +43,11 @@ std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig{
         std::in_place_index<dessser::gen::sync_key::TargetConfig>,
         dessser::Void())};
 
-std::shared_ptr<dessser::gen::dashboard_widget::type const> const chartPlotType{
-    std::make_shared<dessser::gen::dashboard_widget::type>(
-        std::in_place_index<dessser::gen::dashboard_widget::Plot>,
-        dessser::Void())};
+dessser::gen::dashboard_widget::type const chartPlotType{
+    std::in_place_index<dessser::gen::dashboard_widget::Plot>, dessser::Void()};
 
 bool isScalar(dessser::gen::raql_type::t const &t) {
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case dessser::gen::raql_type::Vec:
     case dessser::gen::raql_type::Arr:
     case dessser::gen::raql_type::Tup:
@@ -62,7 +60,7 @@ bool isScalar(dessser::gen::raql_type::t const &t) {
 }
 
 bool isNumeric(dessser::gen::raql_type::t const &t) {
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case dessser::gen::raql_type::Bool:
     case dessser::gen::raql_type::Float:
     case dessser::gen::raql_type::U8:
@@ -91,16 +89,17 @@ bool isNumeric(dessser::gen::raql_type::t const &t) {
 
 bool isAWorker(dessser::gen::sync_key::t const &key) {
   if (key.index() != dessser::gen::sync_key::PerSite) return false;
-  std::shared_ptr<dessser::gen::sync_key::per_site const> per_site{
+
+  dessser::gen::sync_key::per_site const &per_site{
       std::get<dessser::gen::sync_key::PerSite>(key)};
-  std::shared_ptr<dessser::gen::sync_key::per_site_data const> per_site_data{
-      std::get<1>(*per_site)};
-  if (per_site_data->index() != dessser::gen::sync_key::PerWorker) return false;
-  std::shared_ptr<dessser::gen::sync_key::per_worker const> per_worker{
-      std::get<dessser::gen::sync_key::PerWorker>(*per_site_data)};
-  std::shared_ptr<dessser::gen::sync_key::per_worker_data const>
-      per_worker_data{std::get<1>(*per_worker)};
-  return per_worker_data->index() == dessser::gen::sync_key::Worker;
+  dessser::gen::sync_key::per_site_data const &per_site_data{
+      std::get<1>(per_site)};
+  if (per_site_data.index() != dessser::gen::sync_key::PerWorker) return false;
+  dessser::gen::sync_key::per_worker const &per_worker{
+      std::get<dessser::gen::sync_key::PerWorker>(per_site_data)};
+  dessser::gen::sync_key::per_worker_data const &per_worker_data{
+      std::get<1>(per_worker)};
+  return per_worker_data.index() == dessser::gen::sync_key::Worker;
 }
 
 bool isNull(dessser::gen::sync_value::t const &v) {
@@ -112,58 +111,49 @@ bool isNull(dessser::gen::sync_value::t const &v) {
 std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
     std::string const &site_name, std::string const &program_name,
     std::string const &function_name) {
-  std::shared_ptr<dessser::gen::dashboard_widget::axis> axis{
-      std::make_shared<dessser::gen::dashboard_widget::axis>(
-          true, false,
-          std::make_shared<dessser::gen::dashboard_widget::scale>(
-              std::in_place_index<dessser::gen::dashboard_widget::Linear>,
-              dessser::Void()))};
+  dessser::gen::dashboard_widget::axis axis{
+      true, false,
+      dessser::gen::dashboard_widget::scale{
+          std::in_place_index<dessser::gen::dashboard_widget::Linear>,
+          dessser::Void()}};
 
-  dessser::Arr<std::shared_ptr< ::dessser::gen::dashboard_widget::axis> > axes{
-      axis};
+  dessser::Arr<dessser::gen::dashboard_widget::axis> axes{axis};
 
-  std::shared_ptr<dessser::gen::dashboard_widget::source> source{
-      std::make_shared<dessser::gen::dashboard_widget::source>(
-          std::make_shared<dessser::gen::fq_function_name::t>(
-              site_name, program_name, function_name),
-          true,
-          dessser::Arr<
-              std::shared_ptr<dessser::gen::dashboard_widget::field> >())};
+  dessser::gen::dashboard_widget::source source{
+      dessser::gen::fq_function_name::t{site_name, program_name, function_name},
+      true, dessser::Arr<dessser::gen::dashboard_widget::field>()};
 
-  dessser::Arr<std::shared_ptr< ::dessser::gen::dashboard_widget::source> >
-      sources{source};
+  dessser::Arr<dessser::gen::dashboard_widget::source> sources{source};
 
   std::shared_ptr<dessser::gen::sync_value::t> chart{
       std::make_shared<dessser::gen::sync_value::t>(
           std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
-          std::make_shared<dessser::gen::dashboard_widget::t>(
+          dessser::gen::dashboard_widget::t{
               std::in_place_index<dessser::gen::dashboard_widget::Chart>,
-              std::make_shared<dessser::gen::dashboard_widget::chart>(
-                  // Title
-                  site_name + ':' + program_name + '/' + function_name,
-                  // Type: plot
-                  std::const_pointer_cast<dessser::gen::dashboard_widget::type>(
-                      chartPlotType),
-                  // Single axis: left=true, forceZero=false, scale=Linear
-                  axes,
-                  // Single source: visible: true
-                  sources)))};
+              // Title
+              site_name + ':' + program_name + '/' + function_name,
+              // Type: plot
+              chartPlotType,
+              // Single axis: left=true, forceZero=false, scale=Linear
+              axes,
+              // Single source: visible: true
+              sources})};
 
   return chart;
 }
 
 unsigned numColumns(dessser::gen::raql_type::t const &t) {
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case dessser::gen::raql_type::Tup: {
-      auto const &tup{std::get<dessser::gen::raql_type::Tup>(*t.type)};
+      auto const &tup{std::get<dessser::gen::raql_type::Tup>(t.type)};
       return tup.size();
     }
     case dessser::gen::raql_type::Vec: {
-      auto const &vec{std::get<dessser::gen::raql_type::Vec>(*t.type)};
+      auto const &vec{std::get<dessser::gen::raql_type::Vec>(t.type)};
       return std::get<0>(vec);
     }
     case dessser::gen::raql_type::Rec: {
-      auto const &rec{std::get<dessser::gen::raql_type::Rec>(*t.type)};
+      auto const &rec{std::get<dessser::gen::raql_type::Rec>(t.type)};
       return rec.size();
     }
     default:
@@ -172,12 +162,12 @@ unsigned numColumns(dessser::gen::raql_type::t const &t) {
 }
 
 std::string const columnName(dessser::gen::raql_type::t const &t, unsigned i) {
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case dessser::gen::raql_type::Tup:
     case dessser::gen::raql_type::Vec:
       return std::string("#") + std::to_string(i);
     case dessser::gen::raql_type::Rec: {
-      auto const &rec{std::get<dessser::gen::raql_type::Rec>(*t.type)};
+      auto const &rec{std::get<dessser::gen::raql_type::Rec>(t.type)};
       return std::get<0>(*rec[i]);
     }
     default:
@@ -187,20 +177,20 @@ std::string const columnName(dessser::gen::raql_type::t const &t, unsigned i) {
 
 std::shared_ptr<dessser::gen::raql_type::t const> columnType(
     dessser::gen::raql_type::t const &t, unsigned i) {
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case dessser::gen::raql_type::Tup: {
-      auto const &arr{std::get<dessser::gen::raql_type::Tup>(*t.type)};
+      auto const &arr{std::get<dessser::gen::raql_type::Tup>(t.type)};
       if (i >= arr.size()) return nullptr;
       return arr[i];
     }
     case dessser::gen::raql_type::Vec: {
-      auto const &vec{std::get<dessser::gen::raql_type::Vec>(*t.type)};
+      auto const &vec{std::get<dessser::gen::raql_type::Vec>(t.type)};
       uint32_t const len{std::get<0>(vec)};
       if (i >= len) return nullptr;
       return std::get<1>(vec);
     }
     case dessser::gen::raql_type::Rec: {
-      auto const &arr{std::get<dessser::gen::raql_type::Rec>(*t.type)};
+      auto const &arr{std::get<dessser::gen::raql_type::Rec>(t.type)};
       if (i >= arr.size()) return nullptr;
       return std::get<1>(*arr[i]);
     }
@@ -226,11 +216,10 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
       if (i >= arr->size()) goto err;
       return (*arr)[i];
     case dessser::gen::raql_value::VRec: {
-      dessser::Arr<
-          std::shared_ptr<dessser::gen::raql_value::named_value> > const &rec{
+      dessser::Arr<dessser::gen::raql_value::named_value> const &rec{
           std::get<dessser::gen::raql_value::VRec>(v)};
       if (i >= rec.size()) goto err;
-      return std::get<1>(*rec[i]);
+      return std::get<1>(rec[i]);
     }
     default:
       return nullptr;
@@ -306,14 +295,14 @@ std::optional<double> toDouble(dessser::gen::raql_expr::t const &e) {
   return std::nullopt;
 }
 
-std::shared_ptr<dessser::gen::source_info::compiled_program const>
+std::optional<dessser::gen::source_info::compiled_program const>
 getCompiledProgram(dessser::gen::sync_value::t const &v) {
-  if (v.index() != dessser::gen::sync_value::SourceInfo) return nullptr;
-  std::shared_ptr<dessser::gen::source_info::t const> source_info{
+  if (v.index() != dessser::gen::sync_value::SourceInfo) return std::nullopt;
+  dessser::gen::source_info::t const &source_info{
       std::get<dessser::gen::sync_value::SourceInfo>(v)};
-  if (source_info->detail.index() != dessser::gen::source_info::Compiled)
-    return nullptr;
-  return std::get<dessser::gen::source_info::Compiled>(source_info->detail);
+  if (source_info.detail.index() != dessser::gen::source_info::Compiled)
+    return std::nullopt;
+  return std::get<dessser::gen::source_info::Compiled>(source_info.detail);
 }
 
 std::optional<std::pair<std::string const, std::string const> > srcPathOfKey(
@@ -333,17 +322,17 @@ std::shared_ptr<dessser::gen::sync_key::t> keyOfTeamContact(
     std::string const &team_name, std::string const &contact_name) {
   return std::make_shared<dessser::gen::sync_key::t>(
       std::in_place_index<dessser::gen::sync_key::Teams>, team_name,
-      std::make_shared<dessser::gen::sync_key::team_key_info>(
-          std::in_place_index<dessser::gen::sync_key::Contacts>, contact_name));
+      dessser::gen::sync_key::team_key_info{
+          std::in_place_index<dessser::gen::sync_key::Contacts>, contact_name});
 }
 
 std::shared_ptr<dessser::gen::sync_key::t> keyOfInhibition(
     std::string const &team_name, std::string const &inhibition_name) {
   return std::make_shared<dessser::gen::sync_key::t>(
       std::in_place_index<dessser::gen::sync_key::Teams>, team_name,
-      std::make_shared<dessser::gen::sync_key::team_key_info>(
+      dessser::gen::sync_key::team_key_info{
           std::in_place_index<dessser::gen::sync_key::Inhibition>,
-          inhibition_name));
+          inhibition_name});
 }
 
 std::shared_ptr<dessser::gen::sync_key::t> changeSourceExtension(
@@ -364,23 +353,17 @@ std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
     std::string const &site, std::string const &program,
     std::string const &function, double since, double until,
     std::shared_ptr<dessser::gen::sync_key::t const> respKey, bool explain) {
-  std::shared_ptr<dessser::gen::fq_function_name::t> fq_target{
-      std::make_shared<dessser::gen::fq_function_name::t>(site, program,
-                                                          function)};
+  dessser::gen::fq_function_name::t fq_target{site, program, function};
 
-  std::shared_ptr<dessser::gen::replay_request::t> req{
-      std::make_shared<dessser::gen::replay_request::t>(
-          std::const_pointer_cast<dessser::gen::fq_function_name::t>(fq_target),
-          since, until, explain,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(respKey))};
+  dessser::gen::replay_request::t req{fq_target, since, until, explain,
+                                      *respKey};
 
   return std::make_shared<dessser::gen::sync_value::t>(
-      std::in_place_index<dessser::gen::sync_value::ReplayRequest>,
-      std::const_pointer_cast<dessser::gen::replay_request::t>(req));
+      std::in_place_index<dessser::gen::sync_value::ReplayRequest>, req);
 }
 
 // Returns the TargetConfig value, or nullptr:
-dessser::Arr<dessser::gen::rc_entry::t_ext> const *getTargetConfig(
+dessser::Arr<dessser::gen::rc_entry::t> const *getTargetConfig(
     dessser::gen::sync_value::t const &v) {
   if (v.index() != dessser::gen::sync_value::TargetConfig) return nullptr;
   return &std::get<dessser::gen::sync_value::TargetConfig>(v);
@@ -426,22 +409,21 @@ static QString toQStringSpecKey(dessser::gen::raql_value::t const &v,
         case dessser::gen::sync_key::Time:
           return stringOfDate(f);
         case dessser::gen::sync_key::PerSite: {
-          std::shared_ptr<dessser::gen::sync_key::per_site const> per_site{
+          dessser::gen::sync_key::per_site const &per_site{
               std::get<dessser::gen::sync_key::PerSite>(k)};
-          std::shared_ptr<dessser::gen::sync_key::per_site_data const>
-              per_site_data{std::get<1>(*per_site)};
-          switch (per_site_data->index()) {
+          dessser::gen::sync_key::per_site_data const &per_site_data{
+              std::get<1>(per_site)};
+          switch (per_site_data.index()) {
             case dessser::gen::sync_key::PerWorker: {
-              std::shared_ptr<dessser::gen::sync_key::per_worker const>
-                  per_worker{std::get<dessser::gen::sync_key::PerWorker>(
-                      *per_site_data)};
-              std::shared_ptr<dessser::gen::sync_key::per_worker_data const>
-                  per_work_data{std::get<1>(*per_worker)};
-              switch (per_work_data->index()) {
+              dessser::gen::sync_key::per_worker const &per_worker{
+                  std::get<dessser::gen::sync_key::PerWorker>(per_site_data)};
+              dessser::gen::sync_key::per_worker_data const &per_work_data{
+                  std::get<1>(per_worker)};
+              switch (per_work_data.index()) {
                 case dessser::gen::sync_key::PerInstance: {
                   auto const &per_inst{
                       std::get<dessser::gen::sync_key::PerInstance>(
-                          *per_work_data)};
+                          per_work_data)};
                   auto const &per_inst_key{std::get<1>(per_inst)};
                   switch (per_inst_key.index()) {
                     case dessser::gen::sync_key::LastKilled:
@@ -465,15 +447,15 @@ static QString toQStringSpecKey(dessser::gen::raql_value::t const &v,
         }
         case dessser::gen::sync_key::Incidents: {
           auto const &per_inc{std::get<dessser::gen::sync_key::Incidents>(k)};
-          std::shared_ptr<dessser::gen::sync_key::incident_key const>
-              per_inc_key{std::get<1>(per_inc)};
-          switch (per_inc_key->index()) {
+          dessser::gen::sync_key::incident_key const &per_inc_key{
+              std::get<1>(per_inc)};
+          switch (per_inc_key.index()) {
             case dessser::gen::sync_key::Dialogs: {
               auto const &per_diag{
-                  std::get<dessser::gen::sync_key::Dialogs>(*per_inc_key)};
-              std::shared_ptr<dessser::gen::sync_key::dialog_key const>
-                  per_diag_key{std::get<1>(per_diag)};
-              switch (per_diag_key->index()) {
+                  std::get<dessser::gen::sync_key::Dialogs>(per_inc_key)};
+              dessser::gen::sync_key::dialog_key const &per_diag_key{
+                  std::get<1>(per_diag)};
+              switch (per_diag_key.index()) {
                 case dessser::gen::sync_key::FirstDeliveryAttempt:
                 case dessser::gen::sync_key::LastDeliveryAttempt:
                 case dessser::gen::sync_key::NextScheduled:
@@ -617,15 +599,13 @@ QString raqlValToQString(dessser::gen::raql_value::t const &v,
              arrToQString(std::get<dessser::gen::raql_value::VArr>(v)) +
              QString("]");
     case dessser::gen::raql_value::VRec: {
-      dessser::Arr<
-          std::shared_ptr<dessser::gen::raql_value::named_value> > const &arr{
+      dessser::Arr<dessser::gen::raql_value::named_value> const &arr{
           std::get<dessser::gen::raql_value::VRec>(v)};
       QString s;
-      for (std::shared_ptr<dessser::gen::raql_value::named_value> const &v :
-           arr) {
+      for (dessser::gen::raql_value::named_value const &v : arr) {
         if (s.length() > 0) s += ", ";
-        s += QString::fromStdString(std::get<0>(*v)) + QString(":") +
-             raqlValToQString(*std::get<1>(*v));
+        s += QString::fromStdString(std::get<0>(v)) + QString(":") +
+             raqlValToQString(*std::get<1>(v));
       }
       return QString("{") + s + QString("}");
     }
@@ -702,7 +682,7 @@ static QString raqlBaseType2QString(dessser::gen::raql_type::base const &b) {
 }
 
 QString raqlTypeToQString(dessser::gen::raql_type::t const &t) {
-  QString b{raqlBaseType2QString(*t.type)};
+  QString b{raqlBaseType2QString(t.type)};
   if (t.nullable) b += '?';
   return b;
 }

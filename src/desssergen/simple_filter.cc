@@ -43,18 +43,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct tb507a8f2c568f9319d8e16dafa079fc1 : public std::tuple<
-  std::shared_ptr<::dessser::gen::simple_filter::t> ,
+struct t996e97f91d2b9cc027d79136a291a516 : public std::tuple<
+  ::dessser::gen::simple_filter::t,
   Pointer
 > {
   using tuple::tuple;
-  tb507a8f2c568f9319d8e16dafa079fc1(std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t996e97f91d2b9cc027d79136a291a516(std::tuple<::dessser::gen::simple_filter::t, Pointer> p)
+    : std::tuple<::dessser::gen::simple_filter::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb507a8f2c568f9319d8e16dafa079fc1 const &a, tb507a8f2c568f9319d8e16dafa079fc1 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t996e97f91d2b9cc027d79136a291a516 const &a, t996e97f91d2b9cc027d79136a291a516 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tb507a8f2c568f9319d8e16dafa079fc1 const &a, tb507a8f2c568f9319d8e16dafa079fc1 const &b) {
+inline bool operator!=(t996e97f91d2b9cc027d79136a291a516 const &a, t996e97f91d2b9cc027d79136a291a516 const &b) {
   return !operator==(a, b);
 }
 struct t18cecf882d7ac80cef37dfe6b22279d4 : public std::tuple<
@@ -161,16 +161,16 @@ inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae
                   (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_107"))))) 
           (bytes-of-string (get-field "op" (param 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::simple_filter::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> fun0 { [&](::dessser::gen::simple_filter::t p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { (*p_0).lhs };
+    dessser::gen::field_name::t_ext id_2 { p_0.lhs };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_102 { id_3 };
-      std::string id_5 { (*p_0).rhs };
+      std::string id_5 { p_0.rhs };
       uint32_t id_6 { (uint32_t)id_5.size() };
       Vec<1, uint32_t> id_7 {  id_6  };
       Pointer let_res_8;
@@ -229,7 +229,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,
         }
         let_res_8 = let_res_10;
       }
-      std::string id_42 { (*p_0).rhs };
+      std::string id_42 { p_0.rhs };
       Bytes id_43 { id_42 };
       Pointer id_44 { let_res_8.writeBytes(id_43) };
       let_res_4 = id_44;
@@ -237,7 +237,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,
     Pointer let_res_45;
     {
       Pointer srec_dst_105 { let_res_4 };
-      std::string id_46 { (*p_0).op };
+      std::string id_46 { p_0.op };
       uint32_t id_47 { (uint32_t)id_46.size() };
       Vec<1, uint32_t> id_48 {  id_47  };
       Pointer let_res_49;
@@ -296,7 +296,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,
         }
         let_res_49 = let_res_51;
       }
-      std::string id_83 { (*p_0).op };
+      std::string id_83 { p_0.op };
       Bytes id_84 { id_83 };
       Pointer id_85 { let_res_49.writeBytes(id_84) };
       let_res_45 = id_85;
@@ -306,7 +306,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{lhs: $field_name; rhs: STRING; op: STRING}")
@@ -331,16 +331,16 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer
                   (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_101")))))) 
             (size-of-u32 (string-length (get-field "op" (param 0))))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::simple_filter::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> fun86 { [&](std::shared_ptr<::dessser::gen::simple_filter::t>  p_0) {
+  std::function<Size(::dessser::gen::simple_filter::t &)> fun86 { [&](::dessser::gen::simple_filter::t p_0) {
     auto fun87 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_88 { (*p_0).lhs };
+    dessser::gen::field_name::t_ext id_88 { p_0.lhs };
     Size id_89 { fun87(id_88) };
     Size let_res_90;
     {
       Size sz_94 { id_89 };
-      std::string id_91 { (*p_0).rhs };
+      std::string id_91 { p_0.rhs };
       uint32_t id_92 { (uint32_t)id_91.size() };
       Vec<1, uint32_t> id_93 {  id_92  };
       Size let_res_94;
@@ -379,7 +379,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> s
         }
         let_res_94 = let_res_97;
       }
-      std::string id_115 { (*p_0).rhs };
+      std::string id_115 { p_0.rhs };
       uint32_t id_116 { (uint32_t)id_115.size() };
       Size id_117 { Size(id_116) };
       Size id_118 { Size(let_res_94 + id_117) };
@@ -389,7 +389,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> s
     Size let_res_120;
     {
       Size sz_98 { let_res_90 };
-      std::string id_121 { (*p_0).op };
+      std::string id_121 { p_0.op };
       uint32_t id_122 { (uint32_t)id_121.size() };
       Vec<1, uint32_t> id_123 {  id_122  };
       Size let_res_124;
@@ -428,7 +428,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> s
         }
         let_res_124 = let_res_127;
       }
-      std::string id_145 { (*p_0).op };
+      std::string id_145 { p_0.op };
       uint32_t id_146 { (uint32_t)id_145.size() };
       Size id_147 { Size(id_146) };
       Size id_148 { Size(let_res_124 + id_147) };
@@ -440,7 +440,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> s
    };
   return fun86;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::simple_filter::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -483,15 +483,15 @@ std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> sersize_
                   (let-pair "dstring2_fst_85" "dstring2_snd_86" (read-bytes (identifier "dstring1_snd_83") (identifier "dstring1_fst_82"))
                     (make-tup (make-rec (string "op") (string-of-bytes (identifier "dstring2_fst_85")) (string "rhs") (identifier "drec_fst_73") (string "lhs") (identifier "drec_fst_58")) (identifier "dstring2_snd_86"))))))))))
  */
-static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> fun150 { [&](Pointer p_0) {
+  std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> fun150 { [&](Pointer p_0) {
     auto fun151 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::simple_filter::t18cecf882d7ac80cef37dfe6b22279d4 id_152 { fun151(p_0) };
-    ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 let_res_153;
+    ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 let_res_153;
     {
       ::dessser::gen::simple_filter::t18cecf882d7ac80cef37dfe6b22279d4 drec_57 { id_152 };
-      ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 letpair_res_154;
+      ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 letpair_res_154;
       {
         auto drec_fst_58 { std::get<0>(drec_57) };
         auto drec_snd_59 { std::get<1>(drec_57) };
@@ -587,10 +587,10 @@ static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa0
           }
           let_res_196 = letpair_res_197;
         }
-        ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 let_res_202;
+        ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 let_res_202;
         {
           ::dessser::gen::simple_filter::t13a07ee37ab40962540da8534858dc07 drec_72 { let_res_196 };
-          ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 letpair_res_203;
+          ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 letpair_res_203;
           {
             auto drec_fst_73 { std::get<0>(drec_72) };
             auto drec_snd_74 { std::get<1>(drec_72) };
@@ -666,21 +666,21 @@ static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa0
               }
               let_res_206 = let_res_209;
             }
-            ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 let_res_245;
+            ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 let_res_245;
             {
               ::dessser::gen::simple_filter::t12fb9c475959b52bf7b17b155a955ffa dstring1_81 { let_res_206 };
-              ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 letpair_res_246;
+              ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 letpair_res_246;
               {
                 auto dstring1_fst_82 { std::get<0>(dstring1_81) };
                 auto dstring1_snd_83 { std::get<1>(dstring1_81) };
                 ::dessser::gen::simple_filter::t9ef6882174ae71a34a3c5ef6b29242fb id_247 { dstring1_snd_83.readBytes(dstring1_fst_82) };
-                ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 letpair_res_248;
+                ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 letpair_res_248;
                 {
                   auto dstring2_fst_85 { std::get<0>(id_247) };
                   auto dstring2_snd_86 { std::get<1>(id_247) };
                   std::string id_249 { dstring2_fst_85.toString() };
-                  std::shared_ptr<::dessser::gen::simple_filter::t>  id_250 { std::make_shared<::dessser::gen::simple_filter::t>(drec_fst_58, drec_fst_73, id_249) };
-                  ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 id_251 { id_250, dstring2_snd_86 };
+                  ::dessser::gen::simple_filter::t id_250 { drec_fst_58, drec_fst_73, id_249 };
+                  ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 id_251 { id_250, dstring2_snd_86 };
                   letpair_res_248 = id_251;
                 }
                 letpair_res_246 = letpair_res_248;
@@ -700,20 +700,20 @@ static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa0
    };
   return fun150;
 }
-std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_91" "make_snd_92" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_91") (identifier "make_snd_92"))))
  */
-static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> fun252 { [&](Pointer p_0) {
-    ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 id_253 { of_row_binary(p_0) };
-    ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 letpair_res_254;
+  std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> fun252 { [&](Pointer p_0) {
+    ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 id_253 { of_row_binary(p_0) };
+    ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 letpair_res_254;
     {
       auto make_fst_91 { std::get<0>(id_253) };
       auto make_snd_92 { std::get<1>(id_253) };
-      ::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1 id_255 { make_fst_91, make_snd_92 };
+      ::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516 id_255 { make_fst_91, make_snd_92 };
       letpair_res_254 = id_255;
     }
     return letpair_res_254;
@@ -721,21 +721,21 @@ static std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa0
    };
   return fun252;
 }
-std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{lhs: $field_name; rhs: STRING; op: STRING}" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> fun256 { [&](std::shared_ptr<::dessser::gen::simple_filter::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> fun256 { [&](::dessser::gen::simple_filter::t p_0, Pointer p_1) {
     Pointer id_257 { to_row_binary(p_0, p_1) };
     return id_257;
   }
    };
   return fun256;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

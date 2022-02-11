@@ -72,7 +72,8 @@ void AlertingLogsModel::onChange(QList<ConfChange> const &changes) {
     }
 
     std::shared_ptr<dessser::gen::alerting_log::t const> log{
-        std::get<dessser::gen::sync_value::IncidentLog>(*change.kv.val)};
+        change.kv.val,
+        &std::get<dessser::gen::sync_value::IncidentLog>(*change.kv.val)};
 
     addLog(incidentId, time, log);
   }

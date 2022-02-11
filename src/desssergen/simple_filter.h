@@ -39,21 +39,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct tb507a8f2c568f9319d8e16dafa079fc1 : public std::tuple<
-  std::shared_ptr<::dessser::gen::simple_filter::t> ,
+struct t996e97f91d2b9cc027d79136a291a516 : public std::tuple<
+  ::dessser::gen::simple_filter::t,
   Pointer
 > {
   using tuple::tuple;
-  tb507a8f2c568f9319d8e16dafa079fc1(std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::simple_filter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t996e97f91d2b9cc027d79136a291a516(std::tuple<::dessser::gen::simple_filter::t, Pointer> p)
+    : std::tuple<::dessser::gen::simple_filter::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb507a8f2c568f9319d8e16dafa079fc1 const &a, tb507a8f2c568f9319d8e16dafa079fc1 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t996e97f91d2b9cc027d79136a291a516 const &a, t996e97f91d2b9cc027d79136a291a516 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tb507a8f2c568f9319d8e16dafa079fc1 const &a, tb507a8f2c568f9319d8e16dafa079fc1 const &b) {
+inline bool operator!=(t996e97f91d2b9cc027d79136a291a516 const &a, t996e97f91d2b9cc027d79136a291a516 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tb507a8f2c568f9319d8e16dafa079fc1 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t996e97f91d2b9cc027d79136a291a516 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -61,18 +61,18 @@ inline std::ostream &operator<<(std::ostream &os, tb507a8f2c568f9319d8e16dafa079
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb507a8f2c568f9319d8e16dafa079fc1> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t996e97f91d2b9cc027d79136a291a516> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::simple_filter::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::simple_filter::tb507a8f2c568f9319d8e16dafa079fc1(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::simple_filter::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::simple_filter::t &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::simple_filter::t996e97f91d2b9cc027d79136a291a516(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::simple_filter::t &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

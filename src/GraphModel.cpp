@@ -367,25 +367,24 @@ class ParsedKey {
 
     switch (k.index()) {
       case dessser::gen::sync_key::PerSite: {
-        std::shared_ptr<dessser::gen::sync_key::per_site const> per_site{
+        dessser::gen::sync_key::per_site const &per_site{
             std::get<dessser::gen::sync_key::PerSite>(k)};
-        site = QString::fromStdString(std::get<0>(*per_site));
-        std::shared_ptr<dessser::gen::sync_key::per_site_data> per_site_data{
-            std::get<1>(*per_site)};
-        switch (per_site_data->index()) {
+        site = QString::fromStdString(std::get<0>(per_site));
+        dessser::gen::sync_key::per_site_data const &per_site_data{
+            std::get<1>(per_site)};
+        switch (per_site_data.index()) {
           case dessser::gen::sync_key::PerWorker: {
-            std::shared_ptr<dessser::gen::sync_key::per_worker const>
-                per_worker{std::get<dessser::gen::sync_key::PerWorker>(
-                    *per_site_data)};
-            std::string const &fq_name{std::get<0>(*per_worker)};
+            dessser::gen::sync_key::per_worker const &per_worker{
+                std::get<dessser::gen::sync_key::PerWorker>(per_site_data)};
+            std::string const &fq_name{std::get<0>(per_worker)};
             size_t const l{fq_name.rfind('/')};
             if (l == std::string::npos || l == 0 || l >= fq_name.size() - 1)
               return;
             program = QString::fromStdString(fq_name.substr(0, l));
             function = QString::fromStdString(fq_name.substr(l + 1));
-            std::shared_ptr<dessser::gen::sync_key::per_worker_data const>
-                per_worker_data{std::get<1>(*per_worker)};
-            switch (per_worker_data->index()) {
+            dessser::gen::sync_key::per_worker_data const &per_worker_data{
+                std::get<1>(per_worker)};
+            switch (per_worker_data.index()) {
               case dessser::gen::sync_key::Worker:
                 property = ParsedKey::Worker;
                 valid = true;
@@ -413,7 +412,7 @@ class ParsedKey {
               case dessser::gen::sync_key::PerInstance: {
                 auto const &per_inst{
                     std::get<dessser::gen::sync_key::PerInstance>(
-                        *per_worker_data)};
+                        per_worker_data)};
                 instanceSignature =
                     QString::fromStdString(std::get<0>(per_inst));
                 auto const &per_inst_prop{std::get<1>(per_inst)};
@@ -603,7 +602,8 @@ void GraphModel::setFunctionProperty(
 
   if (pk.property == ParsedKey::Worker) {
     if (v->index() == dessser::gen::sync_value::Worker) [[likely]] {
-      function->worker = std::get<dessser::gen::sync_value::Worker>(*v);
+      function->worker = std::shared_ptr<dessser::gen::worker::t const>(
+          v, &std::get<dessser::gen::sync_value::Worker>(*v));
 
       std::shared_ptr<Site> site{
           std::static_pointer_cast<Site>(siteItem->shared)};
@@ -617,16 +617,16 @@ void GraphModel::setFunctionProperty(
                  << QString::fromStdString(function->worker->worker_signature);
 
       if (function->worker->parents) [[likely]] {
-        for (auto const &p : *function->worker->parents) {
+        for (dessser::gen::func_ref::t const &p : *function->worker->parents) {
           /* If the parent is not local then assume the existence of a
            * top-half for this function running on the remote site: */
           QString psite, pprog, pfunc;
-          if (QString::fromStdString(p->site) == site->name) {
-            psite = QString::fromStdString(p->site);
-            pprog = QString::fromStdString(p->program);
-            pfunc = QString::fromStdString(p->func);
+          if (QString::fromStdString(p.site) == site->name) {
+            psite = QString::fromStdString(p.site);
+            pprog = QString::fromStdString(p.program);
+            pfunc = QString::fromStdString(p.func);
           } else {
-            psite = QString::fromStdString(p->site);
+            psite = QString::fromStdString(p.site);
             pprog = program->name;
             pfunc = function->name;
           }
@@ -648,7 +648,8 @@ void GraphModel::setFunctionProperty(
   } else if (pk.property == ParsedKey::RuntimeStats) {
     if (v->index() == dessser::gen::sync_value::RuntimeStats) {
       function->runtimeStats =
-          std::get<dessser::gen::sync_value::RuntimeStats>(*v);
+          std::shared_ptr<dessser::gen::runtime_stats::t const>(
+              v, &std::get<dessser::gen::sync_value::RuntimeStats>(*v));
       changed |= PROPERTY_CHANGED;
     }
   } else if (pk.property == ParsedKey::ArchivedTimes) {

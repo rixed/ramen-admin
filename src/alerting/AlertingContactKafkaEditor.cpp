@@ -41,9 +41,9 @@ AlertingContactKafkaEditor::getValue() const {
 }
 
 bool AlertingContactKafkaEditor::setValue(
-    std::shared_ptr<dessser::gen::alerting_contact::via const> v) {
-  if (v->index() != dessser::gen::alerting_contact::Kafka) return false;
-  auto const &k{std::get<dessser::gen::alerting_contact::Kafka>(*v)};
+    dessser::gen::alerting_contact::via const &v) {
+  if (v.index() != dessser::gen::alerting_contact::Kafka) return false;
+  auto const &k{std::get<dessser::gen::alerting_contact::Kafka>(v)};
   // TODO: options
   topicEdit->setText(QString::fromStdString(k.topic));
   partitionEdit->setText(QString::number(k.partition));

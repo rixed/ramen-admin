@@ -116,21 +116,20 @@ Function::compiledInfo() const {
     return nullptr;
   }
 
-  std::shared_ptr<dessser::gen::source_info::t const> info{
+  dessser::gen::source_info::t const &info{
       std::get<dessser::gen::sync_value::SourceInfo>(*kv->val)};
 
-  if (info->detail.index() != dessser::gen::source_info::Compiled) {
+  if (info.detail.index() != dessser::gen::source_info::Compiled) {
     qWarning() << k << "is not compiled";
     return nullptr;
   }
 
-  std::shared_ptr<dessser::gen::source_info::compiled_program const> compiled{
-      std::get<dessser::gen::source_info::Compiled>(info->detail)};
-  for (std::shared_ptr<dessser::gen::source_info::compiled_func const> f :
-       std::const_pointer_cast<dessser::gen::source_info::compiled_program>(
-           compiled)
-           ->funcs) {
-    if (QString::fromStdString(f->name) == name) return f;
+  dessser::gen::source_info::compiled_program const &compiled{
+      std::get<dessser::gen::source_info::Compiled>(info.detail)};
+  for (dessser::gen::source_info::compiled_func const &f : compiled.funcs) {
+    if (QString::fromStdString(f.name) == name)
+      return std::shared_ptr<dessser::gen::source_info::compiled_func const>(
+          kv->val, &f);
   }
 
   qCritical() << k << "has no function" << name;
@@ -155,30 +154,30 @@ std::shared_ptr<EventTime const> Function::getTime() const {
   return std::make_shared<EventTime>(*func->out_record);
 }
 
-std::shared_ptr<dessser::gen::event_time::t const> Function::get_event_time()
+std::optional<dessser::gen::event_time::t const> Function::get_event_time()
     const {
   std::shared_ptr<dessser::gen::source_info::compiled_func const> func{
       compiledInfo()};
   if (!func) {
     qWarning() << "Function" << name << "has no compiledInfo";
-    return nullptr;
+    return std::nullopt;
   }
 
   switch (func->operation->index()) {
     case dessser::gen::raql_operation::Aggregate: {
       auto const op{
           std::get<dessser::gen::raql_operation::Aggregate>(*func->operation)};
-      return op.Aggregate_event_time ? *op.Aggregate_event_time : nullptr;
+      return op.Aggregate_event_time;
     }
     case dessser::gen::raql_operation::ReadExternal: {
       auto const op{std::get<dessser::gen::raql_operation::ReadExternal>(
           *func->operation)};
-      return op.event_time ? *op.event_time : nullptr;
+      return op.event_time;
     }
     case dessser::gen::raql_operation::ListenFor:
-      return nullptr;
+      return std::nullopt;
     default:
-      return nullptr;
+      return std::nullopt;
   }
 }
 

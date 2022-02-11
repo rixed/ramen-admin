@@ -2044,9 +2044,9 @@ inline bool operator!=(struct t const &, struct t const &);
           (apply (ext-identifier raql_type to-row-binary) (get-field "typ" (param 0)) (identifier "srec_dst_1291")))
         (if (is-null (get-field "units" (param 0))) (write-u8 (identifier "srec_dst_1292") (u8 1)) (apply (ext-identifier units to-row-binary) (force (get-field "units" (param 0))) (write-u8 (identifier "srec_dst_1292") (u8 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0, Pointer p_1) {
     ::dessser::gen::raql_expr::t85ee0500a075c8dae90c7cba5793a050 id_1 { (*p_0).text };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer let_res_3;
@@ -4606,7 +4606,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Poin
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{text: [Tuple THIS[[]] | Record ($field_name; THIS)[[]] | Vector THIS[[]] | Case ({case_cond: THIS; case_cons: THIS}[[]]; THIS?) | Stateless [SL0 [Const $raql_value | Variable $raql_variable | Binding $raql_binding_key | Now Void | Random Void | EventStart Void | EventStop Void | Path $raql_path_comp[[]] | Pi Void] | SL1 ([Age Void | Cast $raql_type | Force Void | Peek ($raql_type; [LittleEndian Void | BigEndian Void]) | Length Void | Lower Void | Upper Void | UuidOfU128 Void | Not Void | Abs Void | Minus Void | Defined Void | Exp Void | Log Void | Log10 Void | Sqrt Void | Sq Void | Ceil Void | Floor Void | Round Void | Cos Void | Sin Void | Tan Void | ACos Void | ASin Void | ATan Void | CosH Void | SinH Void | TanH Void | Hash Void | BeginOfRange Void | EndOfRange Void | Sparkline Void | Strptime Void | Variant Void | Chr Void | Like STRING | Fit Void | CountryCode Void | IpFamily Void | Basename Void]; THIS) | SL1s ([Max Void | Min Void | Print Void | Coalesce Void]; THIS[[]]) | SL2 ([Add Void | Sub Void | Mul Void | Div Void | IDiv Void | Mod Void | Pow Void | Trunc Void | Reldiff Void | And Void | Or Void | Ge Void | Gt Void | Eq Void | Concat Void | StartsWith Void | EndsWith Void | BitAnd Void | BitOr Void | BitXor Void | BitShift Void | Get Void | In Void | Strftime Void | Index Void | Percentile Void]; THIS; THIS) | SL3 ([SubString Void | MapSet Void]; THIS; THIS; THIS)] | Stateful {lifespan: [LocalState Void | GlobalState Void]?; skip_nulls: BOOL; operation: [SF1 ([AggrMin Void | AggrMax Void | AggrSum Void | AggrAvg Void | AggrAnd Void | AggrOr Void | AggrBitAnd Void | AggrBitOr Void | AggrBitXor Void | AggrFirst Void | AggrLast Void | AggrHistogram (FLOAT; FLOAT; U32) | Group Void | Count Void | Distinct Void]; THIS) | SF2 ([Lag Void | ExpSmooth Void | Sample Void | OneOutOf Void]; THIS; THIS) | SF3 ([MovingAvg Void | Hysteresis Void | OnceEvery BOOL]; THIS; THIS; THIS) | SF4 ([DampedHolt Void | Remember BOOL]; THIS; THIS; THIS; THIS) | SF4s ([MultiLinReg Void | Largest {inv: BOOL; up_to: BOOL}]; THIS; THIS; THIS; THIS[[]]) | SF6 ([DampedHoltWinter Void]; THIS; THIS; THIS; THIS; THIS; THIS) | Top {output: $raql_top_output; size: THIS; max_size: THIS?; what: THIS; by: THIS; time: THIS; duration: THIS; sigmas: THIS} | Past {what: THIS; time: THIS; max_age: THIS; tumbling: BOOL; sample_size: THIS?}]} | Generator [Split (THIS; THIS)]]; uniq_num: U32; typ: $raql_type; units: $units?}")
@@ -5165,9 +5165,9 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> t
             (size 4)) (add (identifier "sz_1167") (apply (ext-identifier raql_type sersize-of-row-binary) (get-field "typ" (param 0)))))
         (if (is-null (get-field "units" (param 0))) (add (identifier "sz_1168") (size 1)) (add (add (identifier "sz_1168") (apply (ext-identifier units sersize-of-row-binary) (force (get-field "units" (param 0))))) (size 1)))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersize_of_row_binary_init()
+static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t>  &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> fun1486 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0) {
+  std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t>  &)> fun1486 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0) {
     Size id_1487 { 0UL };
     Size let_res_1488;
     {
@@ -7905,7 +7905,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersi
    };
   return fun1486;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t>  &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -9076,9 +9076,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_expr::t> )> sersize_of_r
                     (make-tup (make-rec (string "units") (identifier "drec_fst_1044") (string "typ") (identifier "drec_fst_1038") (string "uniq_num") (identifier "drec_fst_1035") (string "text") (identifier "drec_fst_1029"))
                       (identifier "drec_snd_1045"))))))))))
  */
-static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> fun3261 { [&](Pointer p_0) {
+  std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> fun3261 { [&](Pointer p_0) {
     ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 id_3262 { p_0.readU16Le() };
     ::dessser::gen::raql_expr::ta97bb48ed75bbda6173555873826c8c6 letpair_res_3263;
     {
@@ -12686,14 +12686,14 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
    };
   return fun3261;
 }
-std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_1047" "make_snd_1048" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_1047") (identifier "make_snd_1048"))))
  */
-static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> fun4834 { [&](Pointer p_0) {
+  std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> fun4834 { [&](Pointer p_0) {
     ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 id_4835 { of_row_binary(p_0) };
     ::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517 letpair_res_4836;
     {
@@ -12707,22 +12707,22 @@ static std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e51
    };
   return fun4834;
 }
-std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::raql_expr::tf4faeadcb1d4bc08688cd9dc4070e517(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{text: [Tuple THIS[[]] | Record ($field_name; THIS)[[]] | Vector THIS[[]] | Case ({case_cond: THIS; case_cons: THIS}[[]]; THIS?) | Stateless [SL0 [Const $raql_value | Variable $raql_variable | Binding $raql_binding_key | Now Void | Random Void | EventStart Void | EventStop Void | Path $raql_path_comp[[]] | Pi Void] | SL1 ([Age Void | Cast $raql_type | Force Void | Peek ($raql_type; [LittleEndian Void | BigEndian Void]) | Length Void | Lower Void | Upper Void | UuidOfU128 Void | Not Void | Abs Void | Minus Void | Defined Void | Exp Void | Log Void | Log10 Void | Sqrt Void | Sq Void | Ceil Void | Floor Void | Round Void | Cos Void | Sin Void | Tan Void | ACos Void | ASin Void | ATan Void | CosH Void | SinH Void | TanH Void | Hash Void | BeginOfRange Void | EndOfRange Void | Sparkline Void | Strptime Void | Variant Void | Chr Void | Like STRING | Fit Void | CountryCode Void | IpFamily Void | Basename Void]; THIS) | SL1s ([Max Void | Min Void | Print Void | Coalesce Void]; THIS[[]]) | SL2 ([Add Void | Sub Void | Mul Void | Div Void | IDiv Void | Mod Void | Pow Void | Trunc Void | Reldiff Void | And Void | Or Void | Ge Void | Gt Void | Eq Void | Concat Void | StartsWith Void | EndsWith Void | BitAnd Void | BitOr Void | BitXor Void | BitShift Void | Get Void | In Void | Strftime Void | Index Void | Percentile Void]; THIS; THIS) | SL3 ([SubString Void | MapSet Void]; THIS; THIS; THIS)] | Stateful {lifespan: [LocalState Void | GlobalState Void]?; skip_nulls: BOOL; operation: [SF1 ([AggrMin Void | AggrMax Void | AggrSum Void | AggrAvg Void | AggrAnd Void | AggrOr Void | AggrBitAnd Void | AggrBitOr Void | AggrBitXor Void | AggrFirst Void | AggrLast Void | AggrHistogram (FLOAT; FLOAT; U32) | Group Void | Count Void | Distinct Void]; THIS) | SF2 ([Lag Void | ExpSmooth Void | Sample Void | OneOutOf Void]; THIS; THIS) | SF3 ([MovingAvg Void | Hysteresis Void | OnceEvery BOOL]; THIS; THIS; THIS) | SF4 ([DampedHolt Void | Remember BOOL]; THIS; THIS; THIS; THIS) | SF4s ([MultiLinReg Void | Largest {inv: BOOL; up_to: BOOL}]; THIS; THIS; THIS; THIS[[]]) | SF6 ([DampedHoltWinter Void]; THIS; THIS; THIS; THIS; THIS; THIS) | Top {output: $raql_top_output; size: THIS; max_size: THIS?; what: THIS; by: THIS; time: THIS; duration: THIS; sigmas: THIS} | Past {what: THIS; time: THIS; max_age: THIS; tumbling: BOOL; sample_size: THIS?}]} | Generator [Split (THIS; THIS)]]; uniq_num: U32; typ: $raql_type; units: $units?}" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> fun4838 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0, Pointer p_1) {
+  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> fun4838 { [&](std::shared_ptr<::dessser::gen::raql_expr::t>  p_0, Pointer p_1) {
     Pointer id_4839 { to_row_binary(p_0, p_1) };
     return id_4839;
   }
    };
   return fun4838;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(std::shared_ptr<::dessser::gen::raql_expr::t>  &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

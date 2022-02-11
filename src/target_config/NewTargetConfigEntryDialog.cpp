@@ -106,7 +106,7 @@ void NewTargetConfigEntryDialog::createProgram() {
   } else {
     if (verbose)
       qDebug() << "NewTargetConfigEntryDialog: createProgram: must wait";
-    Menu::getClient()->sendLock(targetConfig);
+    Menu::getClient()->sendLock(*targetConfig);
   }
 }
 
@@ -137,12 +137,11 @@ void NewTargetConfigEntryDialog::appendEntry(
                   "target-config entry"
                << *entry;
     // Copy the array of rc-entries and append the new one:
-    std::shared_ptr<dessser::gen::sync_value::t> new_target_config{
-        std::make_shared<dessser::gen::sync_value::t>(target_config)};
-    std::get<dessser::gen::sync_value::TargetConfig>(*new_target_config)
-        .push_back(entry);
+    dessser::gen::sync_value::t new_target_config{target_config};
+    std::get<dessser::gen::sync_value::TargetConfig>(new_target_config)
+        .push_back(*entry);
 
-    Menu::getClient()->sendSet(targetConfig, new_target_config);
+    Menu::getClient()->sendSet(*targetConfig, new_target_config);
   } else {
     qCritical()
         << "NewTargetConfigEntryDialog::appendEntry:Invalid type for the "
@@ -150,7 +149,7 @@ void NewTargetConfigEntryDialog::appendEntry(
   }
 
   mustSave = false;
-  Menu::getClient()->sendUnlock(targetConfig);
+  Menu::getClient()->sendUnlock(*targetConfig);
   /* Maybe reset the editor? */
   QDialog::accept();
 }

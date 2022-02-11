@@ -151,23 +151,23 @@ struct t {
   Arr<dessser::gen::simple_filter::t_ext> where;
   std::optional<Arr<dessser::gen::field_name::t_ext>> group_by;
   Arr<dessser::gen::simple_filter::t_ext> having;
-  std::shared_ptr<::dessser::gen::alert::threshold>  threshold;
+  ::dessser::gen::alert::threshold threshold;
   double hysteresis;
   double duration;
   double ratio;
   double time_step;
   Arr<dessser::gen::field_name::t_ext> tops;
   Arr<dessser::gen::field_name::t_ext> carry_fields;
-  Arr<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts;
+  Arr<::dessser::gen::alert::constant> carry_csts;
   std::string id;
   std::string desc_title;
   std::string desc_firing;
   std::string desc_recovery;
-  t(dessser::gen::fq_name::t_ext table_, dessser::gen::field_name::t_ext column_, bool enabled_, Arr<dessser::gen::simple_filter::t_ext> where_, std::optional<Arr<dessser::gen::field_name::t_ext>> group_by_, Arr<dessser::gen::simple_filter::t_ext> having_, std::shared_ptr<::dessser::gen::alert::threshold>  threshold_, double hysteresis_, double duration_, double ratio_, double time_step_, Arr<dessser::gen::field_name::t_ext> tops_, Arr<dessser::gen::field_name::t_ext> carry_fields_, Arr<std::shared_ptr<::dessser::gen::alert::constant> > carry_csts_, std::string id_, std::string desc_title_, std::string desc_firing_, std::string desc_recovery_) : table(table_), column(column_), enabled(enabled_), where(where_), group_by(group_by_), having(having_), threshold(threshold_), hysteresis(hysteresis_), duration(duration_), ratio(ratio_), time_step(time_step_), tops(tops_), carry_fields(carry_fields_), carry_csts(carry_csts_), id(id_), desc_title(desc_title_), desc_firing(desc_firing_), desc_recovery(desc_recovery_) {}
+  t(dessser::gen::fq_name::t_ext table_, dessser::gen::field_name::t_ext column_, bool enabled_, Arr<dessser::gen::simple_filter::t_ext> where_, std::optional<Arr<dessser::gen::field_name::t_ext>> group_by_, Arr<dessser::gen::simple_filter::t_ext> having_, ::dessser::gen::alert::threshold threshold_, double hysteresis_, double duration_, double ratio_, double time_step_, Arr<dessser::gen::field_name::t_ext> tops_, Arr<dessser::gen::field_name::t_ext> carry_fields_, Arr<::dessser::gen::alert::constant> carry_csts_, std::string id_, std::string desc_title_, std::string desc_firing_, std::string desc_recovery_) : table(table_), column(column_), enabled(enabled_), where(where_), group_by(group_by_), having(having_), threshold(threshold_), hysteresis(hysteresis_), duration(duration_), ratio(ratio_), time_step(time_step_), tops(tops_), carry_fields(carry_fields_), carry_csts(carry_csts_), id(id_), desc_title(desc_title_), desc_firing(desc_firing_), desc_recovery(desc_recovery_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return ::dessser::gen::fq_name::Deref(a.table) == ::dessser::gen::fq_name::Deref(b.table) && ::dessser::gen::field_name::Deref(a.column) == ::dessser::gen::field_name::Deref(b.column) && a.enabled == b.enabled && a.where == b.where && ((a.group_by && b.group_by && a.group_by.value() == b.group_by.value()) || (!a.group_by && !b.group_by)) && a.having == b.having && (*a.threshold) == (*b.threshold) && a.hysteresis == b.hysteresis && a.duration == b.duration && a.ratio == b.ratio && a.time_step == b.time_step && a.tops == b.tops && a.carry_fields == b.carry_fields && a.carry_csts == b.carry_csts && a.id == b.id && a.desc_title == b.desc_title && a.desc_firing == b.desc_firing && a.desc_recovery == b.desc_recovery;
+  return ::dessser::gen::fq_name::Deref(a.table) == ::dessser::gen::fq_name::Deref(b.table) && ::dessser::gen::field_name::Deref(a.column) == ::dessser::gen::field_name::Deref(b.column) && a.enabled == b.enabled && a.where == b.where && ((a.group_by && b.group_by && a.group_by.value() == b.group_by.value()) || (!a.group_by && !b.group_by)) && a.having == b.having && a.threshold == b.threshold && a.hysteresis == b.hysteresis && a.duration == b.duration && a.ratio == b.ratio && a.time_step == b.time_step && a.tops == b.tops && a.carry_fields == b.carry_fields && a.carry_csts == b.carry_csts && a.id == b.id && a.desc_title == b.desc_title && a.desc_firing == b.desc_firing && a.desc_recovery == b.desc_recovery;
 }
 
 inline bool operator!=(t const &a, t const &b) {
@@ -198,21 +198,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct t0bfcffcbe1f8fa26793acf604a6fe904 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alert::constant> ,
+struct tbba7e1164dfe2bee4f085ba6914431f0 : public std::tuple<
+  ::dessser::gen::alert::constant,
   Pointer
 > {
   using tuple::tuple;
-  t0bfcffcbe1f8fa26793acf604a6fe904(std::tuple<std::shared_ptr<::dessser::gen::alert::constant> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alert::constant> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tbba7e1164dfe2bee4f085ba6914431f0(std::tuple<::dessser::gen::alert::constant, Pointer> p)
+    : std::tuple<::dessser::gen::alert::constant, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t0bfcffcbe1f8fa26793acf604a6fe904 const &a, t0bfcffcbe1f8fa26793acf604a6fe904 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tbba7e1164dfe2bee4f085ba6914431f0 const &a, tbba7e1164dfe2bee4f085ba6914431f0 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t0bfcffcbe1f8fa26793acf604a6fe904 const &a, t0bfcffcbe1f8fa26793acf604a6fe904 const &b) {
+inline bool operator!=(tbba7e1164dfe2bee4f085ba6914431f0 const &a, tbba7e1164dfe2bee4f085ba6914431f0 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t0bfcffcbe1f8fa26793acf604a6fe904 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tbba7e1164dfe2bee4f085ba6914431f0 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -220,23 +220,23 @@ inline std::ostream &operator<<(std::ostream &os, t0bfcffcbe1f8fa26793acf604a6fe
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t0bfcffcbe1f8fa26793acf604a6fe904> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tbba7e1164dfe2bee4f085ba6914431f0> const t) { os << *t; return os; }
 
-struct t55387dac503088b8cd86859bdfba5c91 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alert::threshold> ,
+struct t9c5031c324db4d785b63a3fba0d407ed : public std::tuple<
+  ::dessser::gen::alert::threshold,
   Pointer
 > {
   using tuple::tuple;
-  t55387dac503088b8cd86859bdfba5c91(std::tuple<std::shared_ptr<::dessser::gen::alert::threshold> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alert::threshold> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t9c5031c324db4d785b63a3fba0d407ed(std::tuple<::dessser::gen::alert::threshold, Pointer> p)
+    : std::tuple<::dessser::gen::alert::threshold, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t55387dac503088b8cd86859bdfba5c91 const &a, t55387dac503088b8cd86859bdfba5c91 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t9c5031c324db4d785b63a3fba0d407ed const &a, t9c5031c324db4d785b63a3fba0d407ed const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t55387dac503088b8cd86859bdfba5c91 const &a, t55387dac503088b8cd86859bdfba5c91 const &b) {
+inline bool operator!=(t9c5031c324db4d785b63a3fba0d407ed const &a, t9c5031c324db4d785b63a3fba0d407ed const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t55387dac503088b8cd86859bdfba5c91 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t9c5031c324db4d785b63a3fba0d407ed const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -244,23 +244,23 @@ inline std::ostream &operator<<(std::ostream &os, t55387dac503088b8cd86859bdfba5
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t55387dac503088b8cd86859bdfba5c91> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9c5031c324db4d785b63a3fba0d407ed> const t) { os << *t; return os; }
 
-struct tc6d52773763d322654577a54bd0001f6 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alert::t> ,
+struct tcfd366a0398a3b3e2eef85934996309d : public std::tuple<
+  ::dessser::gen::alert::t,
   Pointer
 > {
   using tuple::tuple;
-  tc6d52773763d322654577a54bd0001f6(std::tuple<std::shared_ptr<::dessser::gen::alert::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alert::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcfd366a0398a3b3e2eef85934996309d(std::tuple<::dessser::gen::alert::t, Pointer> p)
+    : std::tuple<::dessser::gen::alert::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc6d52773763d322654577a54bd0001f6 const &a, tc6d52773763d322654577a54bd0001f6 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tcfd366a0398a3b3e2eef85934996309d const &a, tcfd366a0398a3b3e2eef85934996309d const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tc6d52773763d322654577a54bd0001f6 const &a, tc6d52773763d322654577a54bd0001f6 const &b) {
+inline bool operator!=(tcfd366a0398a3b3e2eef85934996309d const &a, tcfd366a0398a3b3e2eef85934996309d const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tc6d52773763d322654577a54bd0001f6 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tcfd366a0398a3b3e2eef85934996309d const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -268,24 +268,24 @@ inline std::ostream &operator<<(std::ostream &os, tc6d52773763d322654577a54bd000
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc6d52773763d322654577a54bd0001f6> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tcfd366a0398a3b3e2eef85934996309d> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alert::constant> ,Pointer)> constant_to_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alert::threshold> ,Pointer)> threshold_to_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::alert::constant> )> constant_sersize_of_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::alert::threshold> )> threshold_sersize_of_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::alert::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::alert::t0bfcffcbe1f8fa26793acf604a6fe904(Pointer)> constant_of_row_binary;
-extern std::function<::dessser::gen::alert::t55387dac503088b8cd86859bdfba5c91(Pointer)> threshold_of_row_binary;
-extern std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::alert::tc6d52773763d322654577a54bd0001f6(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alert::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::alert::constant &,Pointer &)> constant_to_row_binary;
+extern std::function<Pointer(::dessser::gen::alert::threshold const &,Pointer &)> threshold_to_row_binary;
+extern std::function<Pointer(::dessser::gen::alert::t &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::alert::constant &)> constant_sersize_of_row_binary;
+extern std::function<Size(::dessser::gen::alert::threshold const &)> threshold_sersize_of_row_binary;
+extern std::function<Size(::dessser::gen::alert::t &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::alert::tbba7e1164dfe2bee4f085ba6914431f0(Pointer &)> constant_of_row_binary;
+extern std::function<::dessser::gen::alert::t9c5031c324db4d785b63a3fba0d407ed(Pointer &)> threshold_of_row_binary;
+extern std::function<::dessser::gen::alert::tcfd366a0398a3b3e2eef85934996309d(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::alert::tcfd366a0398a3b3e2eef85934996309d(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::alert::t &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

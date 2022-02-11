@@ -122,11 +122,11 @@ void AlertingStats::updateStats() {
                   dessser::Void()))};
       if (deliveryStatus_v && deliveryStatus_v->index() ==
                                   dessser::gen::sync_value::DeliveryStatus) {
-        std::shared_ptr<dessser::gen::alerting_delivery_status::t const> const
-            deliveryStatus{std::get<dessser::gen::sync_value::DeliveryStatus>(
+        dessser::gen::alerting_delivery_status::t const &deliveryStatus{
+            std::get<dessser::gen::sync_value::DeliveryStatus>(
                 *deliveryStatus_v)};
-        Q_ASSERT(deliveryStatus->index() < SIZEOF_ARRAY(numDialogs));
-        numDialogs[deliveryStatus->index()]++;
+        Q_ASSERT(deliveryStatus.index() < SIZEOF_ARRAY(numDialogs));
+        numDialogs[deliveryStatus.index()]++;
       }
 
       std::optional<double> const lastDelivAttempt{getDialogDate(

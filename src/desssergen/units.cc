@@ -224,9 +224,9 @@ inline bool operator!=(t9a758baeff17224a77e1a522010b4168 const &a, t9a758baeff17
                 (set-vec (u8 0) (identifier "n_ref_127") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_127")))))) 
             (unsafe-nth (u8 0) (identifier "dst_ref_126"))))))
  */
-static std::function<Pointer(t&,Pointer)> to_row_binary_init()
+static std::function<Pointer(t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(t&,Pointer)> fun0 { [&](t& p_0, Pointer p_1) {
+  std::function<Pointer(t &,Pointer &)> fun0 { [&](t& p_0, Pointer p_1) {
     uint32_t id_1 { p_0.size() };
     Vec<1, uint32_t> id_2 {  id_1  };
     Pointer let_res_3;
@@ -406,7 +406,7 @@ static std::function<Pointer(t&,Pointer)> to_row_binary_init()
    };
   return fun0;
 }
-std::function<Pointer(t&,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("(STRING; (FLOAT; BOOL))[]")
@@ -439,9 +439,9 @@ std::function<Pointer(t&,Pointer)> to_row_binary(to_row_binary_init());
                       (size 8)) (size 1))) (set-vec (u8 0) (identifier "repeat_n_116") (add (unsafe-nth (u8 0) (identifier "repeat_n_116")) (i32 1)))))) 
           (unsafe-nth (u8 0) (identifier "sz_ref_115")))))
  */
-static std::function<Size(t&)> sersize_of_row_binary_init()
+static std::function<Size(t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(t&)> fun105 { [&](t& p_0) {
+  std::function<Size(t &)> fun105 { [&](t& p_0) {
     uint32_t id_106 { p_0.size() };
     Vec<1, uint32_t> id_107 {  id_106  };
     Size let_res_108;
@@ -583,7 +583,7 @@ static std::function<Size(t&)> sersize_of_row_binary_init()
    };
   return fun105;
 }
-std::function<Size(t&)> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -644,9 +644,9 @@ std::function<Size(t&)> sersize_of_row_binary(sersize_of_row_binary_init());
                 (unsafe-nth (u8 0) (identifier "inits_src_ref_69")))))) 
         (make-tup (arr-of-lst-rev (identifier "dlist4_fst_108")) (identifier "dlist4_snd_109"))))
  */
-static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> fun187 { [&](Pointer p_0) {
+  std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> fun187 { [&](Pointer p_0) {
     uint32_t id_188 { 0U };
     Vec<1, uint32_t> id_189 {  id_188  };
     ::dessser::gen::units::t491c44439106a32f896827242e8e76a1 let_res_190;
@@ -919,7 +919,7 @@ static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Po
     {
       auto dlist4_fst_108 { std::get<0>(let_res_228) };
       auto dlist4_snd_109 { std::get<1>(let_res_228) };
-      t id_318 { dlist4_fst_108.toListRev() };
+      t id_318 { dlist4_fst_108.toArrRev() };
       ::dessser::gen::units::ta30293a82943182cab78182f33b18016 id_319 { id_318, dlist4_snd_109 };
       letpair_res_317 = id_319;
     }
@@ -928,14 +928,14 @@ static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Po
    };
   return fun187;
 }
-std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_111" "make_snd_112" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_111") (identifier "make_snd_112"))))
  */
-static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> fun320 { [&](Pointer p_0) {
+  std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> fun320 { [&](Pointer p_0) {
     ::dessser::gen::units::ta30293a82943182cab78182f33b18016 id_321 { of_row_binary(p_0) };
     ::dessser::gen::units::ta30293a82943182cab78182f33b18016 letpair_res_322;
     {
@@ -949,21 +949,21 @@ static std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Po
    };
   return fun320;
 }
-std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::units::ta30293a82943182cab78182f33b18016(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("(STRING; (FLOAT; BOOL))[]" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(t&,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(t&,Pointer)> fun324 { [&](t& p_0, Pointer p_1) {
+  std::function<Pointer(t &,Pointer &)> fun324 { [&](t& p_0, Pointer p_1) {
     Pointer id_325 { to_row_binary(p_0, p_1) };
     return id_325;
   }
    };
   return fun324;
 }
-std::function<Pointer(t&,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

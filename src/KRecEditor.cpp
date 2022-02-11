@@ -37,18 +37,17 @@ KRecEditor::KRecEditor(
 
 std::shared_ptr<dessser::gen::sync_value::t const> KRecEditor::getValue()
     const {
-  std::shared_ptr<dessser::gen::raql_value::t> res{std::make_shared<
-      dessser::gen::raql_value::t>(
-      std::in_place_index<dessser::gen::raql_value::VRec>,
-      dessser::Arr<std::shared_ptr<dessser::gen::raql_value::named_value> >())};
+  std::shared_ptr<dessser::gen::raql_value::t> res{
+      std::make_shared<dessser::gen::raql_value::t>(
+          std::in_place_index<dessser::gen::raql_value::VRec>,
+          dessser::Arr<dessser::gen::raql_value::named_value>())};
   // Each editors should return a RamenValue:
   for (auto const &editor : editors) {
     std::shared_ptr<dessser::gen::sync_value::t const> v{
         editor.second->getValue()};
     Q_ASSERT(v->index() == dessser::gen::sync_value::RamenValue);
-    std::get<dessser::gen::raql_value::VRec>(*res).push_back(
-        std::make_shared<dessser::gen::raql_value::named_value>(
-            editor.first, std::get<dessser::gen::sync_value::RamenValue>(*v)));
+    std::get<dessser::gen::raql_value::VRec>(*res).emplace_back(
+        editor.first, std::get<dessser::gen::sync_value::RamenValue>(*v));
   }
 
   return makeRamenValue(res);
@@ -67,15 +66,15 @@ bool KRecEditor::setValue(
   std::shared_ptr<dessser::gen::raql_value::t const> rv{
       std::get<dessser::gen::sync_value::RamenValue>(*v)};
   Q_ASSERT(rv->index() == dessser::gen::raql_value::VRec);
-  dessser::Arr<std::shared_ptr<dessser::gen::raql_value::named_value> > rec{
+  dessser::Arr<dessser::gen::raql_value::named_value> rec{
       std::get<dessser::gen::raql_value::VRec>(*rv)};
   Q_ASSERT(rec.size() == editors.size());
 
   bool res{false};
   for (size_t i = 0; i < rec.size(); i++) {
     for (size_t j = 0; j < editors.size(); j++) {
-      if (editors[j].first != std::get<0>(*rec[i])) continue;
-      res = editors[i].second->setValue(makeRamenValue(std::get<1>(*rec[i]))) ||
+      if (editors[j].first != std::get<0>(rec[i])) continue;
+      res = editors[i].second->setValue(makeRamenValue(std::get<1>(rec[i]))) ||
             res;
       break;
     }

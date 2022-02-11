@@ -46,21 +46,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct tb6711e674917c07d8a108a1cb42aa8d4 : public std::tuple<
-  std::shared_ptr<::dessser::gen::program_parameter::t> ,
+struct t9b90f97bf6f5fbd106f227cd54c9acfb : public std::tuple<
+  ::dessser::gen::program_parameter::t,
   Pointer
 > {
   using tuple::tuple;
-  tb6711e674917c07d8a108a1cb42aa8d4(std::tuple<std::shared_ptr<::dessser::gen::program_parameter::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::program_parameter::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t9b90f97bf6f5fbd106f227cd54c9acfb(std::tuple<::dessser::gen::program_parameter::t, Pointer> p)
+    : std::tuple<::dessser::gen::program_parameter::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tb6711e674917c07d8a108a1cb42aa8d4 const &a, tb6711e674917c07d8a108a1cb42aa8d4 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t9b90f97bf6f5fbd106f227cd54c9acfb const &a, t9b90f97bf6f5fbd106f227cd54c9acfb const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tb6711e674917c07d8a108a1cb42aa8d4 const &a, tb6711e674917c07d8a108a1cb42aa8d4 const &b) {
+inline bool operator!=(t9b90f97bf6f5fbd106f227cd54c9acfb const &a, t9b90f97bf6f5fbd106f227cd54c9acfb const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tb6711e674917c07d8a108a1cb42aa8d4 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t9b90f97bf6f5fbd106f227cd54c9acfb const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -68,18 +68,18 @@ inline std::ostream &operator<<(std::ostream &os, tb6711e674917c07d8a108a1cb42aa
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb6711e674917c07d8a108a1cb42aa8d4> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t9b90f97bf6f5fbd106f227cd54c9acfb> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::program_parameter::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::program_parameter::tb6711e674917c07d8a108a1cb42aa8d4(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::program_parameter::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::program_parameter::t &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::program_parameter::t &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::program_parameter::t9b90f97bf6f5fbd106f227cd54c9acfb(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::program_parameter::t9b90f97bf6f5fbd106f227cd54c9acfb(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::program_parameter::t &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

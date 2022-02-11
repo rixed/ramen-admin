@@ -47,21 +47,20 @@ bool TimeChartFunctionsEditor::setValue(
 
   /* We want the function list to be ordered by FQ name, but the sources in [v]
    * come in no particular order, so let's start by ordering them: */
-  std::vector<std::shared_ptr<dessser::gen::dashboard_widget::source> >
-      ordered_sources{v.sources};
-  std::sort(
-      ordered_sources.begin(), ordered_sources.end(),
-      [](std::shared_ptr<dessser::gen::dashboard_widget::source> const &a,
-         std::shared_ptr<dessser::gen::dashboard_widget::source> const &b) {
-        int const c1{a->name->site.compare(b->name->site)};
-        if (c1 < 0) return true;
-        if (c1 > 0) return false;
-        int const c2{a->name->program.compare(b->name->program)};
-        if (c2 < 0) return true;
-        if (c2 > 0) return false;
-        int const c3{a->name->function.compare(b->name->function)};
-        return c3 <= 0;
-      });
+  std::vector<dessser::gen::dashboard_widget::source> ordered_sources{
+      v.sources};
+  std::sort(ordered_sources.begin(), ordered_sources.end(),
+            [](dessser::gen::dashboard_widget::source const &a,
+               dessser::gen::dashboard_widget::source const &b) {
+              int const c1{a.name.site.compare(b.name.site)};
+              if (c1 < 0) return true;
+              if (c1 > 0) return false;
+              int const c2{a.name.program.compare(b.name.program)};
+              if (c2 < 0) return true;
+              if (c2 > 0) return false;
+              int const c3{a.name.function.compare(b.name.function)};
+              return c3 <= 0;
+            });
 
   size_t v_i{0};  // index in v.sources
   int t_i{0};     // index in items
@@ -75,23 +74,22 @@ bool TimeChartFunctionsEditor::setValue(
       allFieldsChanged(t_i);
       functions->removeItem(t_i--);
     } else if (t_i >= functions->count()) {
-      std::shared_ptr<dessser::gen::dashboard_widget::source const> src{
-          ordered_sources[v_i]};
+      dessser::gen::dashboard_widget::source const &src{ordered_sources[v_i]};
       if (verbose)
         qDebug() << "TimeChartFunctionsEditor::setValue: appending new "
                     "function at"
-                 << t_i << "for" << QString::fromStdString(src->name->function);
+                 << t_i << "for" << QString::fromStdString(src.name.function);
       TimeChartFunctionEditor *e{addFunctionByName(
-          src->name->site, src->name->program, src->name->function, true)};
+          src.name.site, src.name.program, src.name.function, true)};
       if (!e) {
         qWarning() << "TimeChartFunctionsEditor::setValue: Cannot set value";
         return false;
       }
-      e->setValue(*src);
-      functions->addItem(e, QString::fromStdString(siteFqName(*src->name)));
+      e->setValue(src);
+      functions->addItem(e, QString::fromStdString(siteFqName(src.name)));
     } else {
       QString const name_i{
-          QString::fromStdString(siteFqName(*ordered_sources[v_i]->name))};
+          QString::fromStdString(siteFqName(ordered_sources[v_i].name))};
       int const c{name_i.compare(functions->itemText(t_i))};
       if (c == 0) {
         if (verbose)
@@ -99,23 +97,21 @@ bool TimeChartFunctionsEditor::setValue(
                    << t_i;
         TimeChartFunctionEditor *e{
             static_cast<TimeChartFunctionEditor *>(functions->widget(t_i))};
-        e->setValue(*ordered_sources[v_i]);
+        e->setValue(ordered_sources[v_i]);
       } else if (c < 0) {
         // v->source comes first
-        std::shared_ptr<dessser::gen::dashboard_widget::source const> src{
-            ordered_sources[v_i]};
+        dessser::gen::dashboard_widget::source const &src{ordered_sources[v_i]};
         if (verbose)
           qDebug() << "TimeChartFunctionsEditor::setValue: inserting "
                       "function at"
-                   << t_i << "for"
-                   << QString::fromStdString(src->name->function);
+                   << t_i << "for" << QString::fromStdString(src.name.function);
         TimeChartFunctionEditor *e{addFunctionByName(
-            src->name->site, src->name->program, src->name->function, true)};
+            src.name.site, src.name.program, src.name.function, true)};
         if (!e) {
           qWarning() << "TimeChartFunctionsEditor::setValue: Cannot set value";
           return false;
         }
-        e->setValue(*src);
+        e->setValue(src);
         (void)functions->insertItem(t_i, e, name_i);
       } else if (c > 0) {
         /* The current function is no more: */
@@ -137,13 +133,12 @@ void TimeChartFunctionsEditor::allFieldsChanged(int tab_idx) {
   TimeChartFunctionEditor *e{
       static_cast<TimeChartFunctionEditor *>(functions->widget(tab_idx))};
   dessser::gen::dashboard_widget::source const &source{e->model->source};
-  for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field :
-       source.fields) {
+  for (dessser::gen::dashboard_widget::field const &field : source.fields) {
     if (verbose)
       qDebug() << "TimeChartFunctionsEditor::allFieldsChanged for column"
-               << field->column;
-    emit fieldChanged(source.name->site, source.name->program,
-                      source.name->function, field->column);
+               << field.column;
+    emit fieldChanged(source.name.site, source.name.program,
+                      source.name.function, field.column);
   }
 }
 
@@ -195,8 +190,7 @@ void TimeChartFunctionsEditor::addOrFocus(std::string const &site,
     return;
   }
   dessser::gen::dashboard_widget::source defaultSrc{
-      std::make_shared<dessser::gen::fq_function_name::t>(site, program,
-                                                          function),
+      dessser::gen::fq_function_name::t(site, program, function),
       true,  // visible
       {}     // fields
   };

@@ -129,8 +129,8 @@ void DashboardWidgetForm::doCopy(bool andDelete) {
     /* FIXME: wait for the new widget to be created. And to be sure that's
      * ours, lock and unlock the destination dashboard around these
      * operations, which implies to perform all this asynchronously. */
-    Menu::getClient()->sendNew(dest_key, v);
-    if (andDelete) Menu::getClient()->sendDel(widgetKey);
+    Menu::getClient()->sendNew(*dest_key, *v);
+    if (andDelete) Menu::getClient()->sendDel(*widgetKey);
   }
 }
 
@@ -198,8 +198,8 @@ void DashboardWidgetForm::switchPosition(
     return;
   }
 
-  Menu::getClient()->sendSet(destKey, widget->getValue());
-  Menu::getClient()->sendSet(widgetKey, destVal.val);
+  Menu::getClient()->sendSet(*destKey, *widget->getValue());
+  Menu::getClient()->sendSet(*widgetKey, *destVal.val);
 }
 
 void DashboardWidgetForm::setTitle(QString const &s) {

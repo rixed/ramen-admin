@@ -117,7 +117,7 @@ AtomicForm::~AtomicForm() {
   // Unlock everything that's locked:
   for (std::shared_ptr<dessser::gen::sync_key::t const> const &k : locked) {
     if (verbose) qDebug() << "AtomicForm: Unlocking" << *k;
-    Menu::getClient()->sendUnlock(k);
+    Menu::getClient()->sendUnlock(*k);
   }
 }
 
@@ -180,7 +180,7 @@ void AtomicForm::changeKey(
    * with isMyKey() when the unlock is answered. So also forcibly remove that
    * key: */
   if (oldKey && locked.erase(oldKey) > 0) {
-    Menu::getClient()->sendUnlock(oldKey);
+    Menu::getClient()->sendUnlock(*oldKey);
   }
 
   if (!newKey) {
@@ -209,7 +209,7 @@ void AtomicForm::wantEdit() {
     if (!key) continue;
     if (locked.find(key) == locked.end()) {
       if (verbose) qDebug() << "AtomicForm: yes";
-      Menu::getClient()->sendLock(key);
+      Menu::getClient()->sendLock(*key);
     }
   }
 
@@ -244,7 +244,7 @@ void AtomicForm::doCancel() {
     std::shared_ptr<dessser::gen::sync_key::t const> key{w.widget->key()};
     if (!key) continue;
     if (w.initValue) w.widget->setValue(w.initValue);
-    Menu::getClient()->sendUnlock(key);
+    Menu::getClient()->sendUnlock(*key);
   }
 }
 
@@ -279,7 +279,7 @@ void AtomicForm::wantDelete() {
       // Start by detaching this key from the widget so this lock is no
       // longer needed
       aw->setKey(nullptr);
-      Menu::getClient()->sendDel(key);
+      Menu::getClient()->sendDel(*key);
     }
   }
 }
@@ -290,8 +290,8 @@ void AtomicForm::doSubmit() {
     if (!key) continue;
     std::shared_ptr<dessser::gen::sync_value::t const> v{w.widget->getValue()};
     if (v && (!w.initValue || *v != *w.initValue))
-      Menu::getClient()->sendSet(key, v);
-    Menu::getClient()->sendUnlock(key);
+      Menu::getClient()->sendSet(*key, *v);
+    Menu::getClient()->sendUnlock(*key);
   }
 }
 

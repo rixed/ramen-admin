@@ -64,18 +64,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t7f2136c011f4f9749d693ec511eb7e45 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alerting_notification::t> ,
+struct t2121d05b136405d13d775e2163f6c661 : public std::tuple<
+  ::dessser::gen::alerting_notification::t,
   Pointer
 > {
   using tuple::tuple;
-  t7f2136c011f4f9749d693ec511eb7e45(std::tuple<std::shared_ptr<::dessser::gen::alerting_notification::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alerting_notification::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t2121d05b136405d13d775e2163f6c661(std::tuple<::dessser::gen::alerting_notification::t, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_notification::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t7f2136c011f4f9749d693ec511eb7e45 const &a, t7f2136c011f4f9749d693ec511eb7e45 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t2121d05b136405d13d775e2163f6c661 const &a, t2121d05b136405d13d775e2163f6c661 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t7f2136c011f4f9749d693ec511eb7e45 const &a, t7f2136c011f4f9749d693ec511eb7e45 const &b) {
+inline bool operator!=(t2121d05b136405d13d775e2163f6c661 const &a, t2121d05b136405d13d775e2163f6c661 const &b) {
   return !operator==(a, b);
 }
 struct t5fda3fa18a9129079240e343cc4c7827 : public std::tuple<
@@ -338,24 +338,24 @@ inline bool operator!=(t04c010aa669f57c823f73bc91e6e8628 const &a, t04c010aa669f
                   (set-vec (u8 0) (identifier "n_ref_223") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_223")))))) 
               (unsafe-nth (u8 0) (identifier "dst_ref_222")))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_notification::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> fun0 { [&](::dessser::gen::alerting_notification::t p_0, Pointer p_1) {
     auto fun1 { dessser::gen::site_name::to_row_binary };
-    dessser::gen::site_name::t_ext id_2 { (*p_0).site };
+    dessser::gen::site_name::t_ext id_2 { p_0.site };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_208 { id_3 };
       auto fun5 { dessser::gen::fq_name::to_row_binary };
-      dessser::gen::fq_name::t_ext id_6 { (*p_0).worker };
+      dessser::gen::fq_name::t_ext id_6 { p_0.worker };
       Pointer id_7 { fun5(id_6, srec_dst_208) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_209 { let_res_4 };
-      bool id_9 { (*p_0).test };
+      bool id_9 { p_0.test };
       uint8_t id_10 { uint8_t(id_9) };
       Pointer id_11 { srec_dst_209.writeU8(id_10) };
       let_res_8 = id_11;
@@ -363,7 +363,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_12;
     {
       Pointer srec_dst_210 { let_res_8 };
-      double id_13 { (*p_0).sent_time };
+      double id_13 { p_0.sent_time };
       uint64_t id_14 { qword_of_float(id_13) };
       Pointer id_15 { srec_dst_210.writeU64Le(id_14) };
       let_res_12 = id_15;
@@ -371,7 +371,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_16;
     {
       Pointer srec_dst_211 { let_res_12 };
-      std::optional<double> id_17 { (*p_0).event_time };
+      std::optional<double> id_17 { p_0.event_time };
       bool id_18 { !(id_17.has_value ()) };
       Pointer choose_res_19;
       if (id_18) {
@@ -381,7 +381,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
       } else {
         uint8_t id_22 { 0 };
         Pointer id_23 { srec_dst_211.writeU8(id_22) };
-        std::optional<double> id_24 { (*p_0).event_time };
+        std::optional<double> id_24 { p_0.event_time };
         double id_25 { id_24.value() };
         uint64_t id_26 { qword_of_float(id_25) };
         Pointer id_27 { id_23.writeU64Le(id_26) };
@@ -392,7 +392,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_28;
     {
       Pointer srec_dst_212 { let_res_16 };
-      std::string id_29 { (*p_0).name };
+      std::string id_29 { p_0.name };
       uint32_t id_30 { (uint32_t)id_29.size() };
       Vec<1, uint32_t> id_31 {  id_30  };
       Pointer let_res_32;
@@ -451,7 +451,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
         }
         let_res_32 = let_res_34;
       }
-      std::string id_66 { (*p_0).name };
+      std::string id_66 { p_0.name };
       Bytes id_67 { id_66 };
       Pointer id_68 { let_res_32.writeBytes(id_67) };
       let_res_28 = id_68;
@@ -459,7 +459,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_69;
     {
       Pointer srec_dst_215 { let_res_28 };
-      bool id_70 { (*p_0).firing };
+      bool id_70 { p_0.firing };
       uint8_t id_71 { uint8_t(id_70) };
       Pointer id_72 { srec_dst_215.writeU8(id_71) };
       let_res_69 = id_72;
@@ -467,7 +467,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_73;
     {
       Pointer srec_dst_216 { let_res_69 };
-      double id_74 { (*p_0).certainty };
+      double id_74 { p_0.certainty };
       uint64_t id_75 { qword_of_float(id_74) };
       Pointer id_76 { srec_dst_216.writeU64Le(id_75) };
       let_res_73 = id_76;
@@ -475,7 +475,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_77;
     {
       Pointer srec_dst_217 { let_res_73 };
-      double id_78 { (*p_0).debounce };
+      double id_78 { p_0.debounce };
       uint64_t id_79 { qword_of_float(id_78) };
       Pointer id_80 { srec_dst_217.writeU64Le(id_79) };
       let_res_77 = id_80;
@@ -483,7 +483,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_81;
     {
       Pointer srec_dst_218 { let_res_77 };
-      double id_82 { (*p_0).timeout };
+      double id_82 { p_0.timeout };
       uint64_t id_83 { qword_of_float(id_82) };
       Pointer id_84 { srec_dst_218.writeU64Le(id_83) };
       let_res_81 = id_84;
@@ -491,7 +491,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
     Pointer let_res_85;
     {
       Pointer srec_dst_219 { let_res_81 };
-      Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_86 { (*p_0).parameters };
+      Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_86 { p_0.parameters };
       uint32_t id_87 { id_86.size() };
       Vec<1, uint32_t> id_88 {  id_87  };
       Pointer let_res_89;
@@ -559,7 +559,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
         Pointer let_res_127;
         {
           Vec<1, int32_t> n_ref_223 { id_126 };
-          Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_128 { (*p_0).parameters };
+          Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_128 { p_0.parameters };
           for (::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463 const &x_224 : id_128) {
             uint8_t id_129 { 0 };
             uint8_t id_130 { 0 };
@@ -723,7 +723,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notificati
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{site: $site_name; worker: $fq_name; test: BOOL; sent_time: FLOAT; event_time: FLOAT?; name: STRING; firing: BOOL; certainty: FLOAT; debounce: FLOAT; timeout: FLOAT; parameters: (STRING; STRING)[[]]}")
@@ -788,17 +788,17 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> 
                   (set-vec (u8 0) (identifier "repeat_n_199") (add (unsafe-nth (u8 0) (identifier "repeat_n_199")) (i32 1)))))) 
             (unsafe-nth (u8 0) (identifier "sz_ref_198"))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::alerting_notification::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification::t> )> fun223 { [&](std::shared_ptr<::dessser::gen::alerting_notification::t>  p_0) {
+  std::function<Size(::dessser::gen::alerting_notification::t &)> fun223 { [&](::dessser::gen::alerting_notification::t p_0) {
     auto fun224 { dessser::gen::site_name::sersize_of_row_binary };
-    dessser::gen::site_name::t_ext id_225 { (*p_0).site };
+    dessser::gen::site_name::t_ext id_225 { p_0.site };
     Size id_226 { fun224(id_225) };
     Size let_res_227;
     {
       Size sz_183 { id_226 };
       auto fun228 { dessser::gen::fq_name::sersize_of_row_binary };
-      dessser::gen::fq_name::t_ext id_229 { (*p_0).worker };
+      dessser::gen::fq_name::t_ext id_229 { p_0.worker };
       Size id_230 { fun228(id_229) };
       Size id_231 { Size(sz_183 + id_230) };
       let_res_227 = id_231;
@@ -810,7 +810,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
     Size let_res_236;
     {
       Size sz_186 { id_235 };
-      std::optional<double> id_237 { (*p_0).event_time };
+      std::optional<double> id_237 { p_0.event_time };
       bool id_238 { !(id_237.has_value ()) };
       Size choose_res_239;
       if (id_238) {
@@ -829,7 +829,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
     Size let_res_246;
     {
       Size sz_187 { let_res_236 };
-      std::string id_247 { (*p_0).name };
+      std::string id_247 { p_0.name };
       uint32_t id_248 { (uint32_t)id_247.size() };
       Vec<1, uint32_t> id_249 {  id_248  };
       Size let_res_250;
@@ -868,7 +868,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
         }
         let_res_250 = let_res_253;
       }
-      std::string id_271 { (*p_0).name };
+      std::string id_271 { p_0.name };
       uint32_t id_272 { (uint32_t)id_271.size() };
       Size id_273 { Size(id_272) };
       Size id_274 { Size(let_res_250 + id_273) };
@@ -886,7 +886,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
     Size let_res_284;
     {
       Size sz_195 { id_283 };
-      Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_285 { (*p_0).parameters };
+      Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_285 { p_0.parameters };
       uint32_t id_286 { id_285.size() };
       Vec<1, uint32_t> id_287 {  id_286  };
       Size let_res_288;
@@ -936,7 +936,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
           Vec<1, int32_t> repeat_n_199 { id_313 };
           bool while_flag_314 { true };
           do {
-            Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_315 { (*p_0).parameters };
+            Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_315 { p_0.parameters };
             uint32_t id_316 { id_315.size() };
             int32_t id_317 { int32_t(id_316) };
             uint8_t id_318 { 0 };
@@ -952,7 +952,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
                 Size sz_200 { id_323 };
                 uint8_t id_325 { 0 };
                 int32_t id_326 { repeat_n_199[id_325] };
-                Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_327 { (*p_0).parameters };
+                Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_327 { p_0.parameters };
                 ::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463 id_328 { id_327[id_326] };
                 std::string id_329 { std::get<0>(id_328) };
                 uint32_t id_330 { (uint32_t)id_329.size() };
@@ -1008,7 +1008,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
                 Size sz_204 { let_res_324 };
                 uint8_t id_358 { 0 };
                 int32_t id_359 { repeat_n_199[id_358] };
-                Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_360 { (*p_0).parameters };
+                Lst<::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463> id_360 { p_0.parameters };
                 ::dessser::gen::alerting_notification::t720047405469e43c41ae902df9d2c463 id_361 { id_360[id_359] };
                 std::string id_362 { std::get<1>(id_361) };
                 uint32_t id_363 { (uint32_t)id_362.size() };
@@ -1085,7 +1085,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification:
    };
   return fun223;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::alerting_notification::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -1270,24 +1270,24 @@ std::function<Size(std::shared_ptr<::dessser::gen::alerting_notification::t> )> 
                                                     (string "site") (identifier "drec_fst_58")) 
                                                   (identifier "dlist4_snd_175"))))))))))))))))))))))))
  */
-static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> fun399 { [&](Pointer p_0) {
+  std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> fun399 { [&](Pointer p_0) {
     auto fun400 { dessser::gen::site_name::of_row_binary };
     ::dessser::gen::alerting_notification::t5fda3fa18a9129079240e343cc4c7827 id_401 { fun400(p_0) };
-    ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_402;
+    ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_402;
     {
       ::dessser::gen::alerting_notification::t5fda3fa18a9129079240e343cc4c7827 drec_57 { id_401 };
-      ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_403;
+      ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_403;
       {
         auto drec_fst_58 { std::get<0>(drec_57) };
         auto drec_snd_59 { std::get<1>(drec_57) };
         auto fun404 { dessser::gen::fq_name::of_row_binary };
         ::dessser::gen::alerting_notification::t1067cf8ed87e4e016349f71797fb0661 id_405 { fun404(drec_snd_59) };
-        ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_406;
+        ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_406;
         {
           ::dessser::gen::alerting_notification::t1067cf8ed87e4e016349f71797fb0661 drec_60 { id_405 };
-          ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_407;
+          ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_407;
           {
             auto drec_fst_61 { std::get<0>(drec_60) };
             auto drec_snd_62 { std::get<1>(drec_60) };
@@ -1302,10 +1302,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
               ::dessser::gen::alerting_notification::tf9a0a3fefc87c9e10a93d3a172850c26 id_413 { id_412, dbool_snd_65 };
               letpair_res_409 = id_413;
             }
-            ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_414;
+            ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_414;
             {
               ::dessser::gen::alerting_notification::tf9a0a3fefc87c9e10a93d3a172850c26 drec_66 { letpair_res_409 };
-              ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_415;
+              ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_415;
               {
                 auto drec_fst_67 { std::get<0>(drec_66) };
                 auto drec_snd_68 { std::get<1>(drec_66) };
@@ -1318,10 +1318,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                   ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 id_419 { id_418, dfloat_snd_71 };
                   letpair_res_417 = id_419;
                 }
-                ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_420;
+                ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_420;
                 {
                   ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 drec_72 { letpair_res_417 };
-                  ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_421;
+                  ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_421;
                   {
                     auto drec_fst_73 { std::get<0>(drec_72) };
                     auto drec_snd_74 { std::get<1>(drec_72) };
@@ -1351,10 +1351,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                       }
                       choose_res_426 = letpair_res_434;
                     }
-                    ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_438;
+                    ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_438;
                     {
                       ::dessser::gen::alerting_notification::t55727524d16738c6d5fa67218480136d drec_81 { choose_res_426 };
-                      ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_439;
+                      ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_439;
                       {
                         auto drec_fst_82 { std::get<0>(drec_81) };
                         auto drec_snd_83 { std::get<1>(drec_81) };
@@ -1450,10 +1450,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                           }
                           let_res_481 = letpair_res_482;
                         }
-                        ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_487;
+                        ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_487;
                         {
                           ::dessser::gen::alerting_notification::t13a07ee37ab40962540da8534858dc07 drec_96 { let_res_481 };
-                          ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_488;
+                          ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_488;
                           {
                             auto drec_fst_97 { std::get<0>(drec_96) };
                             auto drec_snd_98 { std::get<1>(drec_96) };
@@ -1468,10 +1468,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                               ::dessser::gen::alerting_notification::tf9a0a3fefc87c9e10a93d3a172850c26 id_494 { id_493, dbool_snd_101 };
                               letpair_res_490 = id_494;
                             }
-                            ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_495;
+                            ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_495;
                             {
                               ::dessser::gen::alerting_notification::tf9a0a3fefc87c9e10a93d3a172850c26 drec_102 { letpair_res_490 };
-                              ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_496;
+                              ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_496;
                               {
                                 auto drec_fst_103 { std::get<0>(drec_102) };
                                 auto drec_snd_104 { std::get<1>(drec_102) };
@@ -1484,10 +1484,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                                   ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 id_500 { id_499, dfloat_snd_107 };
                                   letpair_res_498 = id_500;
                                 }
-                                ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_501;
+                                ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_501;
                                 {
                                   ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 drec_108 { letpair_res_498 };
-                                  ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_502;
+                                  ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_502;
                                   {
                                     auto drec_fst_109 { std::get<0>(drec_108) };
                                     auto drec_snd_110 { std::get<1>(drec_108) };
@@ -1500,10 +1500,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                                       ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 id_506 { id_505, dfloat_snd_113 };
                                       letpair_res_504 = id_506;
                                     }
-                                    ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_507;
+                                    ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_507;
                                     {
                                       ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 drec_114 { letpair_res_504 };
-                                      ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_508;
+                                      ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_508;
                                       {
                                         auto drec_fst_115 { std::get<0>(drec_114) };
                                         auto drec_snd_116 { std::get<1>(drec_114) };
@@ -1516,10 +1516,10 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                                           ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 id_512 { id_511, dfloat_snd_119 };
                                           letpair_res_510 = id_512;
                                         }
-                                        ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 let_res_513;
+                                        ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 let_res_513;
                                         {
                                           ::dessser::gen::alerting_notification::t9a758baeff17224a77e1a522010b4168 drec_120 { letpair_res_510 };
-                                          ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_514;
+                                          ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_514;
                                           {
                                             auto drec_fst_121 { std::get<0>(drec_120) };
                                             auto drec_snd_122 { std::get<1>(drec_120) };
@@ -1851,12 +1851,12 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
                                               }
                                               let_res_555 = letpair_res_556;
                                             }
-                                            ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_678;
+                                            ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_678;
                                             {
                                               auto dlist4_fst_174 { std::get<0>(let_res_555) };
                                               auto dlist4_snd_175 { std::get<1>(let_res_555) };
-                                              std::shared_ptr<::dessser::gen::alerting_notification::t>  id_679 { std::make_shared<::dessser::gen::alerting_notification::t>(drec_fst_58, drec_fst_61, drec_fst_67, drec_fst_73, drec_fst_82, drec_fst_97, drec_fst_103, drec_fst_109, drec_fst_115, drec_fst_121, dlist4_fst_174) };
-                                              ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 id_680 { id_679, dlist4_snd_175 };
+                                              ::dessser::gen::alerting_notification::t id_679 { drec_fst_58, drec_fst_61, drec_fst_67, drec_fst_73, drec_fst_82, drec_fst_97, drec_fst_103, drec_fst_109, drec_fst_115, drec_fst_121, dlist4_fst_174 };
+                                              ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 id_680 { id_679, dlist4_snd_175 };
                                               letpair_res_678 = id_680;
                                             }
                                             letpair_res_514 = letpair_res_678;
@@ -1904,20 +1904,20 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
    };
   return fun399;
 }
-std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_180" "make_snd_181" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_180") (identifier "make_snd_181"))))
  */
-static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> fun681 { [&](Pointer p_0) {
-    ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 id_682 { of_row_binary(p_0) };
-    ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 letpair_res_683;
+  std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> fun681 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 id_682 { of_row_binary(p_0) };
+    ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 letpair_res_683;
     {
       auto make_fst_180 { std::get<0>(id_682) };
       auto make_snd_181 { std::get<1>(id_682) };
-      ::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45 id_684 { make_fst_180, make_snd_181 };
+      ::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661 id_684 { make_fst_180, make_snd_181 };
       letpair_res_683 = id_684;
     }
     return letpair_res_683;
@@ -1925,22 +1925,22 @@ static std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d6
    };
   return fun681;
 }
-std::function<::dessser::gen::alerting_notification::t7f2136c011f4f9749d693ec511eb7e45(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::alerting_notification::t2121d05b136405d13d775e2163f6c661(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{site: $site_name; worker: $fq_name; test: BOOL; sent_time: FLOAT; event_time: FLOAT?; name: STRING; firing: BOOL; certainty: FLOAT; debounce: FLOAT; timeout: FLOAT; parameters: (STRING; STRING)[[]]}" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> fun685 { [&](std::shared_ptr<::dessser::gen::alerting_notification::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> fun685 { [&](::dessser::gen::alerting_notification::t p_0, Pointer p_1) {
     Pointer id_686 { to_row_binary(p_0, p_1) };
     return id_686;
   }
    };
   return fun685;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_notification::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_notification::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

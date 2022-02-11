@@ -154,8 +154,7 @@ class SourcesModel : public QAbstractItemModel {
 
   QModelIndex const indexOfSrcPath(std::string const &);
 
-  std::shared_ptr<dessser::gen::source_info::t const> sourceInfoOfItem(
-      TreeItem const *) const;
+  dessser::gen::source_info::t const *sourceInfoOfItem(TreeItem const *) const;
 
  private slots:
   void onChange(QList<ConfChange> const &);

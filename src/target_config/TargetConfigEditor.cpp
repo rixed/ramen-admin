@@ -47,23 +47,28 @@ TargetConfigEditor::TargetConfigEditor(QWidget *parent)
 
 std::shared_ptr<dessser::gen::sync_value::t const>
 TargetConfigEditor::getValue() const {
+  std::shared_ptr<dessser::gen::sync_value::t> val{
+      std::make_shared<dessser::gen::sync_value::t>(
+          std::in_place_index<dessser::gen::sync_value::TargetConfig>,
+          dessser::Arr<dessser::gen::rc_entry::t>{})};
+  dessser::Arr<dessser::gen::rc_entry::t> *target_config{
+      &std::get<dessser::gen::sync_value::TargetConfig>(*val)};
+
   /* Build a new config copying the current one but for the currently edited
    * entry: */
-  dessser::Arr<dessser::gen::rc_entry::t_ext> target_config;
   if (verbose)
     qDebug() << "TargetConfigEditor:getValue:" << entries.size()
              << "entries, currently selected:" << currentIndex;
+  target_config->reserve(entries.size());
   for (int i = 0; i < (int)entries.size(); i++) {
     if (verbose)
       qDebug() << "TargetConfigEditor::getValue: entry" << i << ":"
-               << *entries[i] << "@" << intptr_t(entries[i].get());
-    target_config.push_back(i == currentIndex ? entryEditor->getValue()
-                                              : entries[i]);
+               << entries[i];
+    target_config->push_back(i == currentIndex ? *entryEditor->getValue()
+                                               : entries[i]);
   }
 
-  return std::make_shared<dessser::gen::sync_value::t>(
-      std::in_place_index<dessser::gen::sync_value::TargetConfig>,
-      target_config);
+  return val;
 }
 
 void TargetConfigEditor::setEnabled(bool enabled) {
@@ -96,13 +101,12 @@ bool TargetConfigEditor::setValue(
   while (entrySelector->count() > 0) entrySelector->removeItem(0);
 
   // Copy the entries:
-  for (std::shared_ptr<dessser::gen::rc_entry::t> const &entry :
-       target_config) {
+  for (dessser::gen::rc_entry::t const &entry : target_config) {
     if (verbose)
       qDebug() << "TargetConfigEditor::setValue entry" << entries.size()
-               << "is now" << *entry << "@" << intptr_t(entry.get());
+               << "is now" << entry;
     entries.push_back(entry);
-    entrySelector->addItem(QString::fromStdString(entry->program));
+    entrySelector->addItem(QString::fromStdString(entry.program));
   }
   Q_ASSERT(entrySelector->count() == (int)entries.size());
   entrySelector->blockSignals(false);
@@ -116,8 +120,8 @@ bool TargetConfigEditor::setValue(
                           : 0};
     if (verbose)
       qDebug() << "TargetConfigEditor::setValue: selecting entry" << new_idx
-               << "=" << *entries[new_idx];
-    entryEditor->setValue(*entries[new_idx]);
+               << "=" << entries[new_idx];
+    entryEditor->setValue(entries[new_idx]);
     entrySelector->setCurrentIndex(new_idx);
     /* In case we moved from 0 to 1 entry, the addItem had already moved the
      * current index to 0 so the above setCurrentIndex won't trigger a new
@@ -168,7 +172,7 @@ void TargetConfigEditor::changeEntry(int idx) {
         qDebug()
             << "TargetConfigEditor::changeEntry: saving the current value for"
             << currentIndex << "from the editor";
-      entries[currentIndex] = entryEditor->getValue();
+      entries[currentIndex] = *entryEditor->getValue();
     } else {
       /* Can happen that currentIndex is right past the end if we deleted
        * the last entry: */
@@ -179,6 +183,6 @@ void TargetConfigEditor::changeEntry(int idx) {
   currentIndex = idx;
 
   if (idx >= 0) {
-    entryEditor->setValue(*entries[idx]);
+    entryEditor->setValue(entries[idx]);
   }
 }

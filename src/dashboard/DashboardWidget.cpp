@@ -48,13 +48,13 @@ bool DashboardWidget::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::dashboard_widget::t const> w{
+  dessser::gen::dashboard_widget::t const &w{
       std::get<dessser::gen::sync_value::DashboardWidget>(*val)};
 
   AtomicWidget *newCurrent;
   QString newTitle;
 
-  switch (w->index()) {
+  switch (w.index()) {
     case dessser::gen::dashboard_widget::Text:
       if (!widgetText) {
         if (verbose) qDebug() << "DashboardWidget: create a new text widget";
@@ -70,8 +70,8 @@ bool DashboardWidget::setValue(
       newCurrent = widgetText;
       break;
     case dessser::gen::dashboard_widget::Chart: {
-      std::shared_ptr<dessser::gen::dashboard_widget::chart const> confChart{
-          std::get<dessser::gen::dashboard_widget::Chart>(*w)};
+      dessser::gen::dashboard_widget::chart const &confChart{
+          std::get<dessser::gen::dashboard_widget::Chart>(w)};
 
       if (!widgetChart) {
         if (verbose) qDebug() << "DashboardWidget: create a new chart widget";
@@ -91,7 +91,7 @@ bool DashboardWidget::setValue(
         }
       }
       newCurrent = widgetChart;
-      newTitle = QString::fromStdString(confChart->title);
+      newTitle = QString::fromStdString(confChart.title);
     } break;
 
     default:

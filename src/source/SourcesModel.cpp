@@ -86,8 +86,7 @@ QVariant SourcesModel::data(QModelIndex const &index, int role) const {
         case Action1: {
           // Button to show the compilation result:
           if (item->isDir()) return QVariant();
-          std::shared_ptr<dessser::gen::source_info::t const> info{
-              sourceInfoOfItem(item)};
+          dessser::gen::source_info::t const *info{sourceInfoOfItem(item)};
           if (!info) {
             return QVariant();
           } else if (info->detail.index() ==
@@ -101,8 +100,7 @@ QVariant SourcesModel::data(QModelIndex const &index, int role) const {
         case Action2: {
           // Button to run the program
           if (item->isDir()) return QVariant();
-          std::shared_ptr<dessser::gen::source_info::t const> info{
-              sourceInfoOfItem(item)};
+          dessser::gen::source_info::t const *info{sourceInfoOfItem(item)};
           if (!info) {
             return Resources::get()->waitPixmap;
           } else if (info->detail.index() ==
@@ -310,8 +308,8 @@ SourcesModel::TreeItem *SourcesModel::itemOfSrcPath(std::string const &prefix) {
   } while (true);
 }
 
-std::shared_ptr<dessser::gen::source_info::t const>
-SourcesModel::sourceInfoOfItem(TreeItem const *item) const {
+dessser::gen::source_info::t const *SourcesModel::sourceInfoOfItem(
+    TreeItem const *item) const {
   if (item->isDir()) return nullptr;
 
   SourcesModel::FileItem const *file{
@@ -334,8 +332,7 @@ SourcesModel::sourceInfoOfItem(TreeItem const *item) const {
                << "is not a SourceInfo but" << *v;
     return nullptr;
   }
-  return std::shared_ptr<dessser::gen::source_info::t const>(
-      std::get<dessser::gen::sync_value::SourceInfo>(*v));
+  return &std::get<dessser::gen::sync_value::SourceInfo>(*v);
 }
 
 void SourcesModel::delSource(dessser::gen::sync_key::t const &key,

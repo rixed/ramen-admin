@@ -57,14 +57,14 @@ void NewDashboardDialog::createDashboard() {
   std::shared_ptr<dessser::gen::sync_value::t const> val{
       std::make_shared<dessser::gen::sync_value::t const>(
           std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
-          std::make_shared<dessser::gen::dashboard_widget::t>(
+          dessser::gen::dashboard_widget::t{
               std::in_place_index<dessser::gen::dashboard_widget::Text>,
-              placeholder))};
+              placeholder})};
 
   std::shared_ptr<dessser::gen::sync_key::t> key{
       dashboardNextWidget(dash_name)};
 
-  Menu::getClient()->sendNew(key, val);
+  Menu::getClient()->sendNew(*key, *val);
 
   clear();
   QDialog::accept();

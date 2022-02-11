@@ -37,9 +37,9 @@ AlertingContactSqliteEditor::getValue() const {
 }
 
 bool AlertingContactSqliteEditor::setValue(
-    std::shared_ptr<dessser::gen::alerting_contact::via const> v) {
-  if (v->index() != dessser::gen::alerting_contact::Sqlite) return false;
-  auto const &s{std::get<dessser::gen::alerting_contact::Sqlite>(*v)};
+    dessser::gen::alerting_contact::via const &v) {
+  if (v.index() != dessser::gen::alerting_contact::Sqlite) return false;
+  auto const &s{std::get<dessser::gen::alerting_contact::Sqlite>(v)};
   fileEdit->setText(QString::fromStdString(s.file));
   insertEdit->setPlainText(QString::fromStdString(s.insert));
   createEdit->setPlainText(QString::fromStdString(s.create));

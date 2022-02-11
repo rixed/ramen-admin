@@ -229,29 +229,29 @@ void ConfClient::readMsg() {
                  << dec_sz << "bytes out of" << msg_sz;
       goto cannot_decode;
     }
-    std::shared_ptr<dessser::gen::sync_msg::t> authn{std::get<0>(t_ptr)};
+    dessser::gen::sync_msg::t const &authn{std::get<0>(t_ptr)};
 
-    switch ((dessser::gen::sync_msg::Constr_t)authn->index()) {
+    switch ((dessser::gen::sync_msg::Constr_t)authn.index()) {
       case dessser::gen::sync_msg::SendSessionKey: {
         auto const sess_keys{
-            std::get<dessser::gen::sync_msg::SendSessionKey>(*authn)};
+            std::get<dessser::gen::sync_msg::SendSessionKey>(authn)};
         if (0 != rcvdSessionKey(sess_keys.public_key, sess_keys.nonce,
                                 sess_keys.message))
           goto cannot_decode;
       } break;
       case dessser::gen::sync_msg::Crypted: {
         dessser::Bytes const cipher{
-            std::get<dessser::gen::sync_msg::Crypted>(*authn)};
+            std::get<dessser::gen::sync_msg::Crypted>(authn)};
         if (0 != readCrypted(cipher)) goto cannot_decode;
       } break;
       case dessser::gen::sync_msg::ClearText: {
         dessser::Bytes const msg_{
-            std::get<dessser::gen::sync_msg::ClearText>(*authn)};
+            std::get<dessser::gen::sync_msg::ClearText>(authn)};
         if (0 != readSrvMsg(msg_)) goto cannot_decode;
       } break;
       case dessser::gen::sync_msg::Error: {
         QString errMsg{QString::fromStdString(
-            std::get<dessser::gen::sync_msg::Error>(*authn))};
+            std::get<dessser::gen::sync_msg::Error>(authn))};
         qCritical() << "Error from confserver:" << errMsg;
         emit connectionNonFatalError(syncStatus, errMsg);
       } break;
@@ -334,10 +334,9 @@ int ConfClient::startSynchronization() {
   emit connectionProgressed(syncStatus);
 
   /* Subscribe to all keys for now: */
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> start_sync{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::StartSync>,
-          std::string("*"))};
+  dessser::gen::sync_client_cmd::t const start_sync{
+      std::in_place_index<dessser::gen::sync_client_cmd::StartSync>,
+      std::string("*")};
 
   return sendCmd(start_sync, [this](std::string const &err) {
     if (err.empty()) {
@@ -366,53 +365,59 @@ int ConfClient::readSrvMsg(dessser::Bytes const &bytes) {
     return -1;
   }
 
-  std::shared_ptr<dessser::gen::sync_server_msg::t> msg{std::get<0>(t_ptr)};
-  if (verbose) qDebug() << "Received:" << *msg;
+  dessser::gen::sync_server_msg::t const &msg{std::get<0>(t_ptr)};
+  if (verbose) qDebug() << "Received:" << msg;
 
-  switch ((dessser::gen::sync_server_msg::Constr_t)msg->index()) {
+  switch ((dessser::gen::sync_server_msg::Constr_t)msg.index()) {
     case dessser::gen::sync_server_msg::AuthOk: {
-      std::shared_ptr<dessser::gen::sync_socket::t const> sync_socket{
-          std::get<dessser::gen::sync_server_msg::AuthOk>(*msg)};
+      dessser::gen::sync_socket::t const &sync_socket{
+          std::get<dessser::gen::sync_server_msg::AuthOk>(msg)};
       return rcvdAuthOk(sync_socket);
     }
     case dessser::gen::sync_server_msg::AuthErr: {
       std::string const err{
-          std::get<dessser::gen::sync_server_msg::AuthErr>(*msg)};
+          std::get<dessser::gen::sync_server_msg::AuthErr>(msg)};
       return rcvdAuthErr(QString::fromStdString(err));
     }
     case dessser::gen::sync_server_msg::SetKey: {
-      auto const &set_key{
-          std::get<dessser::gen::sync_server_msg::SetKey>(*msg)};
-      std::shared_ptr<dessser::gen::sync_key::t const> k{set_key.SetKey_k};
-      std::shared_ptr<dessser::gen::sync_value::t const> v{set_key.SetKey_v};
+      auto const &set_key{std::get<dessser::gen::sync_server_msg::SetKey>(msg)};
+      /* Copy the key and value in the heap and make them shared,
+       * this might save a few copies later on */
+      std::shared_ptr<dessser::gen::sync_key::t const> k{
+          std::make_shared<dessser::gen::sync_key::t>(set_key.SetKey_k)};
+      std::shared_ptr<dessser::gen::sync_value::t const> v{
+          std::make_shared<dessser::gen::sync_value::t>(set_key.SetKey_v)};
       return rcvdSetKey(k, v, QString::fromStdString(set_key.SetKey_uid),
                         set_key.SetKey_mtime);
     }
     case dessser::gen::sync_server_msg::NewKey: {
-      auto const &new_key{
-          std::get<dessser::gen::sync_server_msg::NewKey>(*msg)};
-      std::shared_ptr<dessser::gen::sync_key::t const> k{new_key.NewKey_k};
-      std::shared_ptr<dessser::gen::sync_value::t const> v{new_key.v};
+      auto const &new_key{std::get<dessser::gen::sync_server_msg::NewKey>(msg)};
+      std::shared_ptr<dessser::gen::sync_key::t const> k{
+          std::make_shared<dessser::gen::sync_key::t>(new_key.NewKey_k)};
+      std::shared_ptr<dessser::gen::sync_value::t const> v{
+          std::make_shared<dessser::gen::sync_value::t>(new_key.v)};
       return rcvdNewKey(k, v, QString::fromStdString(new_key.NewKey_uid),
                         new_key.mtime, new_key.can_write, new_key.can_del,
                         QString::fromStdString(new_key.NewKey_owner),
                         new_key.NewKey_expiry);
     }
     case dessser::gen::sync_server_msg::DelKey: {
-      auto const &del_key{
-          std::get<dessser::gen::sync_server_msg::DelKey>(*msg)};
-      std::shared_ptr<dessser::gen::sync_key::t const> k{del_key.DelKey_k};
+      auto const &del_key{std::get<dessser::gen::sync_server_msg::DelKey>(msg)};
+      std::shared_ptr<dessser::gen::sync_key::t const> k{
+          std::make_shared<dessser::gen::sync_key::t>(del_key.DelKey_k)};
       std::string const &uid{del_key.uid};
       return rcvdDelKey(k, uid);
     }
     case dessser::gen::sync_server_msg::LockKey: {
-      auto const &lock{std::get<dessser::gen::sync_server_msg::LockKey>(*msg)};
-      std::shared_ptr<dessser::gen::sync_key::t const> k{lock.k};
+      auto const &lock{std::get<dessser::gen::sync_server_msg::LockKey>(msg)};
+      std::shared_ptr<dessser::gen::sync_key::t const> k{
+          std::make_shared<dessser::gen::sync_key::t>(lock.k)};
       return rcvdLockKey(k, QString::fromStdString(lock.owner), lock.expiry);
     }
     case dessser::gen::sync_server_msg::UnlockKey: {
       std::shared_ptr<dessser::gen::sync_key::t const> k{
-          std::get<dessser::gen::sync_server_msg::UnlockKey>(*msg)};
+          std::make_shared<dessser::gen::sync_key::t>(
+              std::get<dessser::gen::sync_server_msg::UnlockKey>(msg))};
       return rcvdUnlockKey(k);
     }
     default:
@@ -428,8 +433,7 @@ int ConfClient::rcvdAuthErr(QString const &err) {
   return 0;
 }
 
-int ConfClient::rcvdAuthOk(
-    std::shared_ptr<dessser::gen::sync_socket::t const> sync_socket) {
+int ConfClient::rcvdAuthOk(dessser::gen::sync_socket::t const &sync_socket) {
   syncSocket = sync_socket;
   // Also precompute our error key for faster comparison when messages are
   // received:
@@ -438,9 +442,7 @@ int ConfClient::rcvdAuthOk(
       /* WARNING: the variant takes a *pointer* to the socket. Here we
        * reuse the one in syncSocket, which lifespan is the same as
        * myErrKey. */
-      std::optional<dessser::gen::sync_socket::t_ext>(
-          // dessser requires non-const although does not modify it:
-          std::const_pointer_cast<dessser::gen::sync_socket::t>(syncSocket)));
+      syncSocket);
   emit knownErrKey(myErrKey);
   return startSynchronization();
 }
@@ -567,91 +569,67 @@ int ConfClient::rcvdUnlockKey(
 int ConfClient::sendAuth() {
   if (verbose) qDebug() << "ConfClient::sendAuth";
 
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> auth{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::Auth>,
-          username().toStdString(), sessionTimeout)};
+  dessser::gen::sync_client_cmd::t const auth{
+      std::in_place_index<dessser::gen::sync_client_cmd::Auth>,
+      username().toStdString(), sessionTimeout};
 
   return sendCmd(auth);
 }
 
-int ConfClient::sendNew(std::shared_ptr<dessser::gen::sync_key::t const> key,
-                        std::shared_ptr<dessser::gen::sync_value::t const> val,
+int ConfClient::sendNew(dessser::gen::sync_key::t const &key,
+                        dessser::gen::sync_value::t const &val,
                         double timeout) {
-  // Set a placeholder null value by default:
-  if (!val)
-    val = std::static_pointer_cast<dessser::gen::sync_value::t const>(nullVal);
+  if (verbose) qDebug() << "ConfClient::sendNew:" << key << "=" << val;
 
-  if (verbose)
-    if (val) qDebug() << "ConfClient::sendNew:" << *key << "=" << *val;
-
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::NewKey>,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(key),
-          std::const_pointer_cast<dessser::gen::sync_value::t>(val), timeout,
-          false /* TODO: also pass recurs */)};
+  dessser::gen::sync_client_cmd::t const cmd{
+      std::in_place_index<dessser::gen::sync_client_cmd::NewKey>, key, val,
+      timeout, false /* TODO: also pass recurs */};
 
   return sendCmd(cmd);
 }
 
-int ConfClient::sendSet(
-    std::shared_ptr<dessser::gen::sync_key::t const> key,
-    std::shared_ptr<dessser::gen::sync_value::t const> val) {
-  if (verbose) qDebug() << "ConfClient::sendSet:" << *key << "=" << *val;
+int ConfClient::sendSet(dessser::gen::sync_key::t const &key,
+                        dessser::gen::sync_value::t const &val) {
+  if (verbose) qDebug() << "ConfClient::sendSet:" << key << "=" << val;
 
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::SetKey>,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(key),
-          std::const_pointer_cast<dessser::gen::sync_value::t>(val))};
+  dessser::gen::sync_client_cmd::t const cmd{
+      std::in_place_index<dessser::gen::sync_client_cmd::SetKey>, key, val};
 
   return sendCmd(cmd);
 }
 
-int ConfClient::sendLock(std::shared_ptr<dessser::gen::sync_key::t const> key,
-                         double timeout) {
-  if (verbose) qDebug() << "ConfClient::sendLock:" << *key;
+int ConfClient::sendLock(dessser::gen::sync_key::t const &key, double timeout) {
+  if (verbose) qDebug() << "ConfClient::sendLock:" << key;
 
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::LockKey>,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(key), timeout,
-          false /* TODO: also pass recurs */)};
+  dessser::gen::sync_client_cmd::t const cmd{
+      std::in_place_index<dessser::gen::sync_client_cmd::LockKey>, key, timeout,
+      false /* TODO: also pass recurs */};
 
   return sendCmd(cmd);
 }
 
-int ConfClient::sendUnlock(
-    std::shared_ptr<dessser::gen::sync_key::t const> key) {
-  if (verbose) qDebug() << "ConfClient::sendUnlock:" << *key;
+int ConfClient::sendUnlock(dessser::gen::sync_key::t const &key) {
+  if (verbose) qDebug() << "ConfClient::sendUnlock:" << key;
 
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::UnlockKey>,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(key))};
+  dessser::gen::sync_client_cmd::t const cmd{
+      std::in_place_index<dessser::gen::sync_client_cmd::UnlockKey>, key};
 
   return sendCmd(cmd);
 }
 
-int ConfClient::sendDel(std::shared_ptr<dessser::gen::sync_key::t const> key) {
-  if (verbose) qDebug() << "ConfClient::sendDel:" << *key;
+int ConfClient::sendDel(dessser::gen::sync_key::t const &key) {
+  if (verbose) qDebug() << "ConfClient::sendDel:" << key;
 
-  std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd{
-      std::make_shared<dessser::gen::sync_client_cmd::t const>(
-          std::in_place_index<dessser::gen::sync_client_cmd::DelKey>,
-          std::const_pointer_cast<dessser::gen::sync_key::t>(key))};
+  dessser::gen::sync_client_cmd::t const cmd{
+      std::in_place_index<dessser::gen::sync_client_cmd::DelKey>, key};
 
   return sendCmd(cmd);
 }
 
 int ConfClient::sendCmd(
-    std::shared_ptr<dessser::gen::sync_client_cmd::t const> cmd,
+    dessser::gen::sync_client_cmd::t const &cmd,
     std::optional<std::function<int(std::string const &)> > onDone, bool echo) {
-  dessser::gen::sync_client_msg::t_ext msg{
-      std::make_shared<dessser::gen::sync_client_msg::t>(
-          seq, onDone.has_value(), echo,
-          std::const_pointer_cast<dessser::gen::sync_client_cmd::t>(cmd))};
+  dessser::gen::sync_client_msg::t msg{seq, onDone.has_value(), echo, cmd};
 
   if (onDone.has_value()) {
     onDoneCallbacks.emplace_back(seq, *onDone);
@@ -667,8 +645,7 @@ int ConfClient::sendCmd(
   return err;
 }
 
-int ConfClient::sendMsg(
-    std::shared_ptr<dessser::gen::sync_client_msg::t const> msg) {
+int ConfClient::sendMsg(dessser::gen::sync_client_msg::t const &msg) {
   /*
    * Serialize
    *
@@ -679,25 +656,25 @@ int ConfClient::sendMsg(
    * client and server messages under the same sum type.
    */
   size_t const ser_sz{dessser::gen::sync_client_msg::sersize_of_row_binary(
-      std::const_pointer_cast<dessser::gen::sync_client_msg::t>(msg))};
+      const_cast<dessser::gen::sync_client_msg::t &>(msg))};
   dessser::Pointer ptr{ser_sz};
   dessser::Pointer const end{dessser::gen::sync_client_msg::to_row_binary(
-      std::const_pointer_cast<dessser::gen::sync_client_msg::t>(msg), ptr)};
+      const_cast<dessser::gen::sync_client_msg::t &>(msg), ptr)};
   size_t const act_sz{end.getOffset()};
 
   if (act_sz > ser_sz) {
-    qCritical().nospace() << "Failed to serialize message " << *msg
+    qCritical().nospace() << "Failed to serialize message " << msg
                           << ": actual size (" << act_sz
                           << ") is larger than expected (" << ser_sz << ")";
     return -1;
   }
 
   if (verbose)
-    qDebug().nospace() << "Sending: " << *msg << " (" << ser_sz << " bytes)";
+    qDebug().nospace() << "Sending: " << msg << " (" << ser_sz << " bytes)";
 
   /* Second serialization: Wrap the message into an Authn message */
   dessser::Bytes const text{std::get<0>(ptr.readBytes(act_sz))};
-  dessser::gen::sync_msg::t_ext auth;
+  std::optional<dessser::gen::sync_msg::t> auth;
   /* Prepare all the buffers that may appear in the sent message: */
   size_t text_len{text.length()};
   /* clear_text must have some zeros header:
@@ -732,7 +709,7 @@ int ConfClient::sendMsg(
             /* Do not delete for real: */ [](uint8_t *) {}),
         sizeof cipher_text - crypto_box_BOXZEROBYTES, size_t(0)};
     if (keySent) {  // encrypt
-      auth = std::make_shared<dessser::gen::sync_msg::t>(
+      auth = std::make_optional<dessser::gen::sync_msg::t>(
           std::in_place_index<dessser::gen::sync_msg::Crypted>, send_msg);
     } else {
       dessser::Bytes const send_nonce{
@@ -743,21 +720,22 @@ int ConfClient::sendMsg(
           std::shared_ptr<uint8_t[]>(reinterpret_cast<uint8_t *>(clt_pub_key),
                                      [](uint8_t *) {}),
           sizeof(clt_pub_key), size_t(0)};
-      auth = std::make_shared<dessser::gen::sync_msg::t>(
+      auth = std::make_optional<dessser::gen::sync_msg::t>(
           std::in_place_index<dessser::gen::sync_msg::SendSessionKey>,
           send_nonce, send_clt_pub_key, send_msg);
       keySent = true;
     }
   } else {
-    auth = std::make_shared<dessser::gen::sync_msg::t>(
+    auth = std::make_optional<dessser::gen::sync_msg::t>(
         std::in_place_index<dessser::gen::sync_msg::ClearText>, text);
   }
 
   Q_ASSERT(!auth->valueless_by_exception());
-  size_t const auth_ser_sz{dessser::gen::sync_msg::sersize_of_row_binary(auth)};
+  size_t const auth_ser_sz{
+      dessser::gen::sync_msg::sersize_of_row_binary(*auth)};
   dessser::Pointer auth_ptr{auth_ser_sz};
   dessser::Pointer const auth_end{
-      dessser::gen::sync_msg::to_row_binary(auth, auth_ptr)};
+      dessser::gen::sync_msg::to_row_binary(*auth, auth_ptr)};
   size_t const auth_act_sz{auth_end.getOffset()};
 
   if (auth_act_sz > auth_ser_sz) {
@@ -788,7 +766,8 @@ int ConfClient::sendMsg(
 void ConfClient::keepAlive() {
   qint64 const now{QDateTime::currentMSecsSinceEpoch()};
 
-  if (now - lastSent > 1000. * 0.7 * sessionTimeout) sendSet(devNull, nullVal);
+  if (now - lastSent > 1000. * 0.7 * sessionTimeout)
+    sendSet(*devNull, *nullVal);
 }
 
 bool ConfClient::isCrypted() const { return id && !id->srv_pub_key.isEmpty(); }

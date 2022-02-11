@@ -14,17 +14,16 @@
 
 static constexpr bool verbose{false};
 
-std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
+static std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
     std::string const &incident_id,
-    std::shared_ptr<dessser::gen::sync_key::incident_key const> k) {
+    dessser::gen::sync_key::incident_key const &k) {
   return std::make_shared<dessser::gen::sync_key::t>(
-      std::in_place_index<dessser::gen::sync_key::Incidents>, incident_id,
-      std::const_pointer_cast<dessser::gen::sync_key::incident_key>(k));
+      std::in_place_index<dessser::gen::sync_key::Incidents>, incident_id, k);
 }
 
 std::shared_ptr<dessser::gen::sync_value::t const> getIncident(
     std::string const &incident_id,
-    std::shared_ptr<dessser::gen::sync_key::incident_key const> k) {
+    dessser::gen::sync_key::incident_key const &k) {
   return kvs->get(incidentKey(incident_id, k));
 }
 
@@ -32,18 +31,19 @@ std::shared_ptr<dessser::gen::alerting_notification::t const> getIncidentNotif(
     std::string const &incident_id,
     std::shared_ptr<dessser::gen::sync_key::incident_key const> k) {
   std::shared_ptr<dessser::gen::sync_value::t const> v{
-      getIncident(incident_id, k)};
+      getIncident(incident_id, *k)};
   if (!v || v->index() != dessser::gen::sync_value::Notification)
     return nullptr;
-  return std::get<dessser::gen::sync_value::Notification>(*v);
+  return std::shared_ptr<dessser::gen::alerting_notification::t const>(
+      v, &std::get<dessser::gen::sync_value::Notification>(*v));
 }
 
 std::shared_ptr<std::string const> getAssignedTeam(
     std::string const &incident_id) {
   std::shared_ptr<dessser::gen::sync_value::t const> v{getIncident(
       incident_id,
-      std::make_shared<dessser::gen::sync_key::incident_key>(
-          std::in_place_index<dessser::gen::sync_key::Team>, dessser::Void()))};
+      dessser::gen::sync_key::incident_key{
+          std::in_place_index<dessser::gen::sync_key::Team>, dessser::Void()})};
   if (!v || v->index() != dessser::gen::sync_value::RamenValue) return nullptr;
   std::shared_ptr<dessser::gen::raql_value::t const> rv{
       std::get<dessser::gen::sync_value::RamenValue>(*v)};
@@ -113,11 +113,11 @@ void iterLogs(std::string const &incident_id,
     Q_ASSERT(key->index() == dessser::gen::sync_key::Incidents);
     Q_ASSERT(std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*key)) ==
              incident_id);
-    std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key{
+    dessser::gen::sync_key::incident_key const &incident_key{
         std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*key))};
-    Q_ASSERT(incident_key->index() == dessser::gen::sync_key::Journal);
+    Q_ASSERT(incident_key.index() == dessser::gen::sync_key::Journal);
     double const time{
-        std::get<0>(std::get<dessser::gen::sync_key::Journal>(*incident_key))};
+        std::get<0>(std::get<dessser::gen::sync_key::Journal>(incident_key))};
     auto const &found_it{kvs->map.find(key)};
     Q_ASSERT(found_it != kvs->map.end());
     std::shared_ptr<dessser::gen::sync_value::t const> v{found_it->second.val};
@@ -127,7 +127,7 @@ void iterLogs(std::string const &incident_id,
       continue;
     }
     std::shared_ptr<dessser::gen::alerting_log::t const> log{
-        std::get<dessser::gen::sync_value::IncidentLog>(*v)};
+        v, &std::get<dessser::gen::sync_value::IncidentLog>(*v)};
     if (verbose) qDebug() << "New log for time:" << time << ":" << *log;
     f(time, log);
   }
@@ -145,11 +145,11 @@ bool parseLogKey(dessser::gen::sync_key::t const &key, std::string *incident_id,
                << QString::fromStdString(*incident_id);
   }
 
-  std::shared_ptr<dessser::gen::sync_key::incident_key const> ikey{
+  dessser::gen::sync_key::incident_key const &ikey{
       std::get<1>(std::get<dessser::gen::sync_key::Incidents>(key))};
-  if (ikey->index() != dessser::gen::sync_key::Journal) return false;
+  if (ikey.index() != dessser::gen::sync_key::Journal) return false;
   if (time) {
-    *time = std::get<0>(std::get<dessser::gen::sync_key::Journal>(*ikey));
+    *time = std::get<0>(std::get<dessser::gen::sync_key::Journal>(ikey));
     if (verbose) qDebug() << "parseLogKey: Found time" << *time;
   }
 
@@ -159,11 +159,10 @@ bool parseLogKey(dessser::gen::sync_key::t const &key, std::string *incident_id,
 std::shared_ptr<dessser::gen::sync_key::t const> dialogKey(
     std::string const &incident_id, std::string const &dialog_id,
     std::shared_ptr<dessser::gen::sync_key::dialog_key const> k) {
-  std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key{
-      std::make_shared<dessser::gen::sync_key::incident_key>(
-          std::in_place_index<dessser::gen::sync_key::Dialogs>, dialog_id,
-          std::const_pointer_cast<dessser::gen::sync_key::dialog_key>(k))};
-  return incidentKey(incident_id, incident_key);
+  return incidentKey(
+      incident_id,
+      dessser::gen::sync_key::incident_key{
+          std::in_place_index<dessser::gen::sync_key::Dialogs>, dialog_id, *k});
 }
 
 std::shared_ptr<dessser::gen::sync_value::t const> getDialog(

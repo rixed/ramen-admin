@@ -43,11 +43,11 @@ std::shared_ptr<dessser::gen::sync_value::t const>
 AlertingInhibitionEditor::getValue() const {
   return std::make_shared<dessser::gen::sync_value::t>(
       std::in_place_index<dessser::gen::sync_value::Inhibition>,
-      std::make_shared<dessser::gen::alerting_inhibition::t>(
+      dessser::gen::alerting_inhibition::t{
           whatEditor->text().toStdString(),
           double(startEditor->dateTime().toSecsSinceEpoch()),
           double(stopEditor->dateTime().toSecsSinceEpoch()), who,
-          whyEditor->toPlainText().toStdString()));
+          whyEditor->toPlainText().toStdString()});
 }
 
 void AlertingInhibitionEditor::setEnabled(bool enabled) {
@@ -61,14 +61,14 @@ bool AlertingInhibitionEditor::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   if (v->index() != dessser::gen::sync_value::Inhibition) return false;
 
-  std::shared_ptr<dessser::gen::alerting_inhibition::t const> inhibition{
+  dessser::gen::alerting_inhibition::t const &inhibition{
       std::get<dessser::gen::sync_value::Inhibition>(*v)};
-  whatEditor->setText(QString::fromStdString(inhibition->what));
+  whatEditor->setText(QString::fromStdString(inhibition.what));
   startEditor->setDateTime(
-      QDateTime::fromSecsSinceEpoch(inhibition->start_date));
-  stopEditor->setDateTime(QDateTime::fromSecsSinceEpoch(inhibition->stop_date));
-  whyEditor->setPlainText(QString::fromStdString(inhibition->why));
-  who = inhibition->who;
+      QDateTime::fromSecsSinceEpoch(inhibition.start_date));
+  stopEditor->setDateTime(QDateTime::fromSecsSinceEpoch(inhibition.stop_date));
+  whyEditor->setPlainText(QString::fromStdString(inhibition.why));
+  who = inhibition.who;
   whoLabel->setText(QString::fromStdString(who));
 
   return true;

@@ -42,18 +42,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t295f2df97e866209f4856553b103991a : public std::tuple<
-  std::shared_ptr<::dessser::gen::raql_warning::t> ,
+struct tde111694a17169793df63837585293d4 : public std::tuple<
+  ::dessser::gen::raql_warning::t,
   Pointer
 > {
   using tuple::tuple;
-  t295f2df97e866209f4856553b103991a(std::tuple<std::shared_ptr<::dessser::gen::raql_warning::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::raql_warning::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tde111694a17169793df63837585293d4(std::tuple<::dessser::gen::raql_warning::t, Pointer> p)
+    : std::tuple<::dessser::gen::raql_warning::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t295f2df97e866209f4856553b103991a const &a, t295f2df97e866209f4856553b103991a const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tde111694a17169793df63837585293d4 const &a, tde111694a17169793df63837585293d4 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t295f2df97e866209f4856553b103991a const &a, t295f2df97e866209f4856553b103991a const &b) {
+inline bool operator!=(tde111694a17169793df63837585293d4 const &a, tde111694a17169793df63837585293d4 const &b) {
   return !operator==(a, b);
 }
 struct t112740284841ba75ec1e9fc60758e609 : public std::tuple<
@@ -148,10 +148,10 @@ inline bool operator!=(t9ef6882174ae71a34a3c5ef6b29242fb const &a, t9ef6882174ae
                   (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_102"))))) 
           (bytes-of-string (get-field "message" (param 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::raql_warning::t>  p_0, Pointer p_1) {
-    std::optional<uint32_t> id_1 { (*p_0).line };
+  std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> fun0 { [&](::dessser::gen::raql_warning::t p_0, Pointer p_1) {
+    std::optional<uint32_t> id_1 { p_0.line };
     bool id_2 { !(id_1.has_value ()) };
     Pointer choose_res_3;
     if (id_2) {
@@ -161,7 +161,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
     } else {
       uint8_t id_6 { 0 };
       Pointer id_7 { p_1.writeU8(id_6) };
-      std::optional<uint32_t> id_8 { (*p_0).line };
+      std::optional<uint32_t> id_8 { p_0.line };
       uint32_t id_9 { id_8.value() };
       Pointer id_10 { id_7.writeU32Le(id_9) };
       choose_res_3 = id_10;
@@ -169,7 +169,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
     Pointer let_res_11;
     {
       Pointer srec_dst_99 { choose_res_3 };
-      std::optional<uint32_t> id_12 { (*p_0).column };
+      std::optional<uint32_t> id_12 { p_0.column };
       bool id_13 { !(id_12.has_value ()) };
       Pointer choose_res_14;
       if (id_13) {
@@ -179,7 +179,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
       } else {
         uint8_t id_17 { 0 };
         Pointer id_18 { srec_dst_99.writeU8(id_17) };
-        std::optional<uint32_t> id_19 { (*p_0).column };
+        std::optional<uint32_t> id_19 { p_0.column };
         uint32_t id_20 { id_19.value() };
         Pointer id_21 { id_18.writeU32Le(id_20) };
         choose_res_14 = id_21;
@@ -189,7 +189,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
     Pointer let_res_22;
     {
       Pointer srec_dst_100 { let_res_11 };
-      std::string id_23 { (*p_0).message };
+      std::string id_23 { p_0.message };
       uint32_t id_24 { (uint32_t)id_23.size() };
       Vec<1, uint32_t> id_25 {  id_24  };
       Pointer let_res_26;
@@ -248,7 +248,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
         }
         let_res_26 = let_res_28;
       }
-      std::string id_60 { (*p_0).message };
+      std::string id_60 { p_0.message };
       Bytes id_61 { id_60 };
       Pointer id_62 { let_res_26.writeBytes(id_61) };
       let_res_22 = id_62;
@@ -258,7 +258,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,P
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{line: U32?; column: U32?; message: STRING}")
@@ -272,14 +272,14 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)
                 (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_98")))))) 
           (size-of-u32 (string-length (get-field "message" (param 0)))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::raql_warning::t const &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> fun63 { [&](std::shared_ptr<::dessser::gen::raql_warning::t>  p_0) {
-    std::optional<uint32_t> id_64 { (*p_0).column };
+  std::function<Size(::dessser::gen::raql_warning::t const &)> fun63 { [&](::dessser::gen::raql_warning::t p_0) {
+    std::optional<uint32_t> id_64 { p_0.column };
     bool id_65 { !(id_64.has_value ()) };
     Size choose_res_66;
     if (id_65) {
-      std::optional<uint32_t> id_67 { (*p_0).line };
+      std::optional<uint32_t> id_67 { p_0.line };
       bool id_68 { !(id_67.has_value ()) };
       Size choose_res_69;
       if (id_68) {
@@ -293,7 +293,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> se
       Size id_73 { Size(choose_res_69 + id_72) };
       choose_res_66 = id_73;
     } else {
-      std::optional<uint32_t> id_74 { (*p_0).line };
+      std::optional<uint32_t> id_74 { p_0.line };
       bool id_75 { !(id_74.has_value ()) };
       Size choose_res_76;
       if (id_75) {
@@ -309,7 +309,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> se
       Size id_82 { Size(id_80 + id_81) };
       choose_res_66 = id_82;
     }
-    std::string id_83 { (*p_0).message };
+    std::string id_83 { p_0.message };
     uint32_t id_84 { (uint32_t)id_83.size() };
     Vec<1, uint32_t> id_85 {  id_84  };
     Size let_res_86;
@@ -348,7 +348,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> se
       }
       let_res_86 = let_res_89;
     }
-    std::string id_107 { (*p_0).message };
+    std::string id_107 { p_0.message };
     uint32_t id_108 { (uint32_t)id_107.size() };
     Size id_109 { Size(id_108) };
     Size id_110 { Size(let_res_86 + id_109) };
@@ -358,7 +358,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> se
    };
   return fun63;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::raql_warning::t const &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -390,9 +390,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::raql_warning::t> )> sersize_o
                   (let-pair "dstring2_fst_85" "dstring2_snd_86" (read-bytes (identifier "dstring1_snd_83") (identifier "dstring1_fst_82"))
                     (make-tup (make-rec (string "message") (string-of-bytes (identifier "dstring2_fst_85")) (string "column") (identifier "drec_fst_73") (string "line") (identifier "drec_fst_64")) (identifier "dstring2_snd_86"))))))))))
  */
-static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> fun112 { [&](Pointer p_0) {
+  std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> fun112 { [&](Pointer p_0) {
     Size id_113 { 0UL };
     uint8_t id_114 { p_0.peekU8(id_113) };
     uint8_t id_115 { 1 };
@@ -418,10 +418,10 @@ static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103
       }
       choose_res_117 = letpair_res_125;
     }
-    ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a let_res_128;
+    ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 let_res_128;
     {
       ::dessser::gen::raql_warning::t112740284841ba75ec1e9fc60758e609 drec_63 { choose_res_117 };
-      ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a letpair_res_129;
+      ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 letpair_res_129;
       {
         auto drec_fst_64 { std::get<0>(drec_63) };
         auto drec_snd_65 { std::get<1>(drec_63) };
@@ -450,10 +450,10 @@ static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103
           }
           choose_res_134 = letpair_res_142;
         }
-        ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a let_res_145;
+        ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 let_res_145;
         {
           ::dessser::gen::raql_warning::t112740284841ba75ec1e9fc60758e609 drec_72 { choose_res_134 };
-          ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a letpair_res_146;
+          ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 letpair_res_146;
           {
             auto drec_fst_73 { std::get<0>(drec_72) };
             auto drec_snd_74 { std::get<1>(drec_72) };
@@ -529,21 +529,21 @@ static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103
               }
               let_res_149 = let_res_152;
             }
-            ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a let_res_188;
+            ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 let_res_188;
             {
               ::dessser::gen::raql_warning::t12fb9c475959b52bf7b17b155a955ffa dstring1_81 { let_res_149 };
-              ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a letpair_res_189;
+              ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 letpair_res_189;
               {
                 auto dstring1_fst_82 { std::get<0>(dstring1_81) };
                 auto dstring1_snd_83 { std::get<1>(dstring1_81) };
                 ::dessser::gen::raql_warning::t9ef6882174ae71a34a3c5ef6b29242fb id_190 { dstring1_snd_83.readBytes(dstring1_fst_82) };
-                ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a letpair_res_191;
+                ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 letpair_res_191;
                 {
                   auto dstring2_fst_85 { std::get<0>(id_190) };
                   auto dstring2_snd_86 { std::get<1>(id_190) };
                   std::string id_192 { dstring2_fst_85.toString() };
-                  std::shared_ptr<::dessser::gen::raql_warning::t>  id_193 { std::make_shared<::dessser::gen::raql_warning::t>(drec_fst_64, drec_fst_73, id_192) };
-                  ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a id_194 { id_193, dstring2_snd_86 };
+                  ::dessser::gen::raql_warning::t id_193 { drec_fst_64, drec_fst_73, id_192 };
+                  ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 id_194 { id_193, dstring2_snd_86 };
                   letpair_res_191 = id_194;
                 }
                 letpair_res_189 = letpair_res_191;
@@ -563,20 +563,20 @@ static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103
    };
   return fun112;
 }
-std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_91" "make_snd_92" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_91") (identifier "make_snd_92"))))
  */
-static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> fun195 { [&](Pointer p_0) {
-    ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a id_196 { of_row_binary(p_0) };
-    ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a letpair_res_197;
+  std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> fun195 { [&](Pointer p_0) {
+    ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 id_196 { of_row_binary(p_0) };
+    ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 letpair_res_197;
     {
       auto make_fst_91 { std::get<0>(id_196) };
       auto make_snd_92 { std::get<1>(id_196) };
-      ::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a id_198 { make_fst_91, make_snd_92 };
+      ::dessser::gen::raql_warning::tde111694a17169793df63837585293d4 id_198 { make_fst_91, make_snd_92 };
       letpair_res_197 = id_198;
     }
     return letpair_res_197;
@@ -584,21 +584,21 @@ static std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103
    };
   return fun195;
 }
-std::function<::dessser::gen::raql_warning::t295f2df97e866209f4856553b103991a(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::raql_warning::tde111694a17169793df63837585293d4(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{line: U32?; column: U32?; message: STRING}" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> fun199 { [&](std::shared_ptr<::dessser::gen::raql_warning::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> fun199 { [&](::dessser::gen::raql_warning::t p_0, Pointer p_1) {
     Pointer id_200 { to_row_binary(p_0, p_1) };
     return id_200;
   }
    };
   return fun199;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::raql_warning::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::raql_warning::t const &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

@@ -42,14 +42,6 @@ void iterLogs(
 bool parseLogKey(dessser::gen::sync_key::t const &, std::string *incident_id,
                  double *time);
 
-std::shared_ptr<dessser::gen::sync_key::t const> incidentKey(
-    std::string const &incident_id,
-    std::shared_ptr<dessser::gen::sync_key::incident_key const>);
-
-std::shared_ptr<dessser::gen::sync_value::t const> getIncident(
-    std::string const &incident_id,
-    std::shared_ptr<dessser::gen::sync_key::incident_key const>);
-
 std::shared_ptr<dessser::gen::alerting_notification::t const> getIncidentNotif(
     std::string const &incident_id,
     std::shared_ptr<dessser::gen::sync_key::incident_key const>);

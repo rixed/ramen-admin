@@ -131,11 +131,10 @@ void StorageTimeline::requestQueryPlan() {
 
     respKey = std::make_shared<dessser::gen::sync_key::t const>(
         std::in_place_index<dessser::gen::sync_key::PerClient>,
-        std::const_pointer_cast<dessser::gen::sync_socket::t>(
-            client->syncSocket),
-        std::make_shared<dessser::gen::sync_key::per_client>(
+        *client->syncSocket,
+        dessser::gen::sync_key::per_client{
             std::in_place_index<dessser::gen::sync_key::Response>,
-            respKeyPrefix + "explain"));
+            std::string(respKeyPrefix + "explain")});
   }
 
   FunctionItem *functionItem{explainTarget->getCurrent()};
@@ -163,7 +162,7 @@ void StorageTimeline::requestQueryPlan() {
     qDebug() << "StorageTimeline: request QueryPlan for target"
              << functionItem->sfqName() << "and response key" << *respKey;
 
-  client->sendSet(key, req);
+  client->sendSet(*key, *req);
 }
 
 void StorageTimeline::resetQueryPlan() {
@@ -180,19 +179,18 @@ void StorageTimeline::receiveExplain(
     return;
   }
 
-  std::shared_ptr<dessser::gen::replay::t const> replay{
+  dessser::gen::replay::t const &replay{
       std::get<dessser::gen::sync_value::Replay>(*kv.val)};
 
-  if (verbose) qDebug() << "StorageTimeline: received a query plan:" << *replay;
+  if (verbose) qDebug() << "StorageTimeline: received a query plan:" << replay;
 
   timeLineView->resetHighlights();
 
-  QPair<qreal, qreal> range{replay->since, replay->until};
+  QPair<qreal, qreal> range{replay.since, replay.until};
 
-  for (std::shared_ptr<dessser::gen::fq_function_name::t> const &source :
-       replay->sources) {
+  for (dessser::gen::fq_function_name::t const &source : replay.sources) {
     QString const label{QString::fromStdString(
-        source->site + ":" + source->program + "/" + source->function)};
+        source.site + ":" + source.program + "/" + source.function)};
     timeLineView->highlightRange(label, range);
   }
 

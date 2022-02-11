@@ -71,21 +71,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct td68d92c546e96e190f81dbcb5e4b1574 : public std::tuple<
-  std::shared_ptr<::dessser::gen::sync_socket::t> ,
+struct tc5e6846e85f79c9786f90afd8b73dfb1 : public std::tuple<
+  ::dessser::gen::sync_socket::t,
   Pointer
 > {
   using tuple::tuple;
-  td68d92c546e96e190f81dbcb5e4b1574(std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc5e6846e85f79c9786f90afd8b73dfb1(std::tuple<::dessser::gen::sync_socket::t, Pointer> p)
+    : std::tuple<::dessser::gen::sync_socket::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(td68d92c546e96e190f81dbcb5e4b1574 const &a, td68d92c546e96e190f81dbcb5e4b1574 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tc5e6846e85f79c9786f90afd8b73dfb1 const &a, tc5e6846e85f79c9786f90afd8b73dfb1 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(td68d92c546e96e190f81dbcb5e4b1574 const &a, td68d92c546e96e190f81dbcb5e4b1574 const &b) {
+inline bool operator!=(tc5e6846e85f79c9786f90afd8b73dfb1 const &a, tc5e6846e85f79c9786f90afd8b73dfb1 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, td68d92c546e96e190f81dbcb5e4b1574 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tc5e6846e85f79c9786f90afd8b73dfb1 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -93,18 +93,18 @@ inline std::ostream &operator<<(std::ostream &os, td68d92c546e96e190f81dbcb5e4b1
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<td68d92c546e96e190f81dbcb5e4b1574> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc5e6846e85f79c9786f90afd8b73dfb1> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::sync_socket::t const &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

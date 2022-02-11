@@ -17,6 +17,7 @@
 #include <string>
 
 #include "SyncStatus.h"
+#include "desssergen/sync_socket.h"
 
 class QTcpSocket;
 class QTimer;
@@ -37,9 +38,6 @@ namespace sync_server_msg {
 struct t;
 }
 namespace sync_msg {
-struct t;
-}
-namespace sync_socket {
 struct t;
 }
 namespace sync_key {
@@ -96,7 +94,7 @@ class ConfClient : public QObject {
 
   int sendAuth();
 
-  int sendMsg(std::shared_ptr<dessser::gen::sync_client_msg::t const>);
+  int sendMsg(dessser::gen::sync_client_msg::t const &);
 
   int sendBytes(char const *, size_t);
 
@@ -109,7 +107,7 @@ class ConfClient : public QObject {
   // Decrypt the given message and call readSrvMsg:
   int readCrypted(dessser::Bytes const &);
 
-  int rcvdAuthOk(std::shared_ptr<dessser::gen::sync_socket::t const>);
+  int rcvdAuthOk(dessser::gen::sync_socket::t const &);
 
   int rcvdAuthErr(QString const &err);
 
@@ -149,7 +147,7 @@ class ConfClient : public QObject {
   /* Configuration server's representation of my socket, identifying this
    * connection (although most configuration objects are associated to a user
    * name, some are with a specific socket). */
-  std::shared_ptr<dessser::gen::sync_socket::t const> syncSocket;
+  std::optional<dessser::gen::sync_socket::t> syncSocket;
   std::shared_ptr<dessser::gen::sync_key::t const> myErrKey;
 
   // confserver as in "host:port"
@@ -158,23 +156,22 @@ class ConfClient : public QObject {
 
   bool isSynced() const;
 
-  int sendNew(std::shared_ptr<dessser::gen::sync_key::t const>,
-              std::shared_ptr<dessser::gen::sync_value::t const> = nullptr,
-              double timeout = 0.);
+  int sendNew(dessser::gen::sync_key::t const &,
+              dessser::gen::sync_value::t const &, double timeout = 0.);
 
-  int sendSet(std::shared_ptr<dessser::gen::sync_key::t const>,
-              std::shared_ptr<dessser::gen::sync_value::t const>);
+  int sendSet(dessser::gen::sync_key::t const &,
+              dessser::gen::sync_value::t const &);
 
 #define DEFAULT_LOCK_TIMEOUT 600.
-  int sendLock(std::shared_ptr<dessser::gen::sync_key::t const>,
+  int sendLock(dessser::gen::sync_key::t const &,
                double timeout = DEFAULT_LOCK_TIMEOUT);
 
-  int sendUnlock(std::shared_ptr<dessser::gen::sync_key::t const>);
+  int sendUnlock(dessser::gen::sync_key::t const &);
 
-  int sendDel(std::shared_ptr<dessser::gen::sync_key::t const>);
+  int sendDel(dessser::gen::sync_key::t const &);
 
   int sendCmd(
-      std::shared_ptr<dessser::gen::sync_client_cmd::t const>,
+      dessser::gen::sync_client_cmd::t const &,
       /* Register what should happen when the result is received (with err
        * message, empty if no error). */
       std::optional<std::function<int(std::string const &)> > = std::nullopt,

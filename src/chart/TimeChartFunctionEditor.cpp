@@ -122,8 +122,8 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(std::string const &site,
               if (verbose)
                 qDebug() << "TimeChartFunctionEditor: fieldChanged"
                          << model->numericFields[row];
-              emit fieldChanged(source.name->site, source.name->program,
-                                source.name->function,
+              emit fieldChanged(source.name.site, source.name.program,
+                                source.name.function,
                                 model->numericFields[row].toStdString());
             }
           });
@@ -134,8 +134,8 @@ TimeChartFunctionEditor::TimeChartFunctionEditor(std::string const &site,
       if (verbose)
         qDebug() << "TimeChartFunctionEditor: fieldChanged" << numericField;
       dessser::gen::dashboard_widget::source const &source{model->source};
-      emit fieldChanged(source.name->site, source.name->program,
-                        source.name->function, numericField.toStdString());
+      emit fieldChanged(source.name.site, source.name.program,
+                        source.name.function, numericField.toStdString());
     }
   });
 
@@ -157,7 +157,7 @@ void TimeChartFunctionEditor::wantSource() {
   if (!Menu::sourcesWin) return;
 
   Menu::sourcesWin->showFile(
-      srcPathFromProgramName(model->source.name->program));
+      srcPathFromProgramName(model->source.name.program));
   Menu::openSourceEditor();
 }
 
@@ -170,22 +170,22 @@ void TimeChartFunctionEditor::wantSource() {
 
 void TimeChartFunctionEditor::wantCustomize() {
   TimeChartAutomatonCustomize *automaton{new TimeChartAutomatonCustomize(
-      model->source.name->site, model->source.name->program,
-      model->source.name->function, this)};
+      model->source.name.site, model->source.name.program,
+      model->source.name.function, this)};
 
   connect(automaton, &TimeChartAutomatonCustomize::transitionTo, this,
           &TimeChartFunctionEditor::automatonTransition);
 
-  std::shared_ptr<dessser::gen::sync_value::t const> newSource{ofString(
+  std::unique_ptr<dessser::gen::sync_value::t const> newSource{ofString(
       "DEFINE LAZY '" + automaton->customFunction +
       "' AS\n"
       "  SELECT\n"
       "    *\n"  // TODO: rather list the fields explicitly, with their doc
       "  FROM '" +
-      model->source.name->program + "/" + model->source.name->function +
+      model->source.name.program + "/" + model->source.name.function +
       "' ON THIS SITE;\n")};
 
-  Menu::getClient()->sendNew(automaton->sourceKey, newSource);
+  Menu::getClient()->sendNew(*automaton->sourceKey, *newSource);
 }
 
 void TimeChartFunctionEditor::automatonTransition(
@@ -218,7 +218,7 @@ void TimeChartFunctionEditor::automatonTransition(
                  "running configuration";
       {
         // Check that compilation worked
-        std::shared_ptr<dessser::gen::source_info::compiled_program const> comp{
+        std::optional<dessser::gen::source_info::compiled_program const> comp{
             getCompiledProgram(*val)};
         if (!comp) {
           qCritical() << "key" << *automaton->infoKey
@@ -227,14 +227,14 @@ void TimeChartFunctionEditor::automatonTransition(
           return;
         }
         // Lock target_config
-        Menu::getClient()->sendLock(targetConfig);
+        Menu::getClient()->sendLock(*targetConfig);
       }
       break;
 
     case TimeChartAutomatonCustomize::WaitWorkerOrGraph:
       qInfo() << "TimeChartFunctionEditor: running that program";
       {
-        dessser::Arr<dessser::gen::rc_entry::t_ext> const *rc{
+        dessser::Arr<dessser::gen::rc_entry::t> const *rc{
             getTargetConfig(*val)};
         if (!rc) {
           qCritical() << "target_config not a TargetConfig?!";
@@ -242,39 +242,33 @@ void TimeChartFunctionEditor::automatonTransition(
           return;
         }
         // Look at the RC for this function for inspiration:
-        std::shared_ptr<dessser::gen::rc_entry::t const> sourceEntry;
-        for (std::shared_ptr<dessser::gen::rc_entry::t> const &rce : *rc) {
+        std::optional<dessser::gen::rc_entry::t> sourceEntry;
+        for (dessser::gen::rc_entry::t const &rce : *rc) {
           /* Ideally check also the site: */
-          if (rce->program == model->source.name->program) {
+          if (rce.program == model->source.name.program) {
             sourceEntry = rce;
             break;
           }
         }
         if (!sourceEntry) {
           qWarning() << "Cannot find program"
-                     << QString::fromStdString(model->source.name->program)
+                     << QString::fromStdString(model->source.name.program)
                      << "in the RC file";
           automaton->deleteLater();
           return;
         }
-        // Copy sourceEntry:
-        dessser::Arr<std::shared_ptr<dessser::gen::program_run_parameter::t> >
-            params;
-        std::shared_ptr<dessser::gen::rc_entry::t> rce{
-            std::make_shared<dessser::gen::rc_entry::t>(
-                automaton->customProgram,
-                true,  // enabled
-                sourceEntry->debug, sourceEntry->report_period,
-                sourceEntry->cwd, params, model->source.name->site,
-                false)};  // automatic
         // Create a new array with all same entries (shared) + rce:
         dessser::Arr<dessser::gen::rc_entry::t_ext> rc2{*rc};
-        rc2.push_back(rce);
-        std::shared_ptr<dessser::gen::sync_value::t> target_config{
-            std::make_shared<dessser::gen::sync_value::t>(
-                std::in_place_index<dessser::gen::sync_value::TargetConfig>,
-                rc2)};
-        Menu::getClient()->sendSet(targetConfig, target_config);
+        rc2.emplace_back(automaton->customProgram,
+                         true,  // enabled
+                         sourceEntry->debug, sourceEntry->report_period,
+                         sourceEntry->cwd,
+                         dessser::Arr<dessser::gen::program_run_parameter::t>{},
+                         model->source.name.site,
+                         false);  // automatic
+        dessser::gen::sync_value::t target_config{
+            std::in_place_index<dessser::gen::sync_value::TargetConfig>, rc2};
+        Menu::getClient()->sendSet(*targetConfig, target_config);
       }
       break;
 

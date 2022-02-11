@@ -5,6 +5,7 @@
 
 #include "desssergen/sync_value.h"
 
+// TODO: return a value directly
 std::unique_ptr<dessser::gen::sync_value::t> makeRamenValue(
     std::shared_ptr<dessser::gen::raql_value::t> rv) {
   return std::make_unique<dessser::gen::sync_value::t>(

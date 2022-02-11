@@ -201,5 +201,5 @@ void Dashboard::addCurrentFunction() {
   std::shared_ptr<dessser::gen::sync_key::t> const key{
       dashboardNextWidget(name)};
 
-  Menu::getClient()->sendNew(key, chart, DEFAULT_LOCK_TIMEOUT);
+  Menu::getClient()->sendNew(*key, *chart, DEFAULT_LOCK_TIMEOUT);
 }

@@ -66,8 +66,8 @@ AlertingContactEditor::getValue() const {
   Q_ASSERT(editor_index < (ssize_t)editors.size());
   return std::make_shared<dessser::gen::sync_value::t>(
       std::in_place_index<dessser::gen::sync_value::AlertingContact>,
-      std::make_shared<dessser::gen::alerting_contact::t>(
-          editors[editor_index]->getValue(), timeout));
+      dessser::gen::alerting_contact::t{*editors[editor_index]->getValue(),
+                                        timeout});
 }
 
 void AlertingContactEditor::setEnabled(bool enabled) {
@@ -80,17 +80,17 @@ bool AlertingContactEditor::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   if (v->index() != dessser::gen::sync_value::AlertingContact) return false;
 
-  std::shared_ptr<dessser::gen::alerting_contact::t const> contact{
+  dessser::gen::alerting_contact::t const &contact{
       std::get<dessser::gen::sync_value::AlertingContact>(*v)};
-  size_t const index{contact->via->index()};
+  size_t const index{contact.via.index()};
   if (index > editors.size()) {
     qFatal("AlertingContactEditor::setValue: Invalid via->index");
     return false;
   }
-  if (!editors[index]->setValue(contact->via)) return false;
+  if (!editors[index]->setValue(contact.via)) return false;
   // stackedLayout->setCurrentIndex(index);
   typeEdit->setCurrentIndex(index);  // Will set stackedLayout
-  timeoutEditor->setText(QString::number(contact->timeout));
+  timeoutEditor->setText(QString::number(contact.timeout));
   return true;
 }
 

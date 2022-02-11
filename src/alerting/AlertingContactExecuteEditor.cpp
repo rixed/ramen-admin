@@ -25,10 +25,10 @@ AlertingContactExecuteEditor::getValue() const {
 }
 
 bool AlertingContactExecuteEditor::setValue(
-    std::shared_ptr<dessser::gen::alerting_contact::via const> v) {
-  if (v->index() != dessser::gen::alerting_contact::Exec) return false;
+    dessser::gen::alerting_contact::via const &v) {
+  if (v.index() != dessser::gen::alerting_contact::Exec) return false;
   edit->setPlainText(QString::fromStdString(
-      std::get<dessser::gen::alerting_contact::Exec>(*v)));
+      std::get<dessser::gen::alerting_contact::Exec>(v)));
   return true;
 }
 

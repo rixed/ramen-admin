@@ -36,24 +36,22 @@ TailModel::TailModel(std::string const &siteName_, std::string const &fqName_,
 
   // Subscribe
   std::shared_ptr<dessser::gen::sync_key::t const> k{subscriberKey()};
-  Menu::getClient()->sendSet(k, nullVal);
+  Menu::getClient()->sendSet(*k, *nullVal);
 }
 
 TailModel::~TailModel() {
   // Unsubscribe
   std::shared_ptr<dessser::gen::sync_key::t const> k{subscriberKey()};
-  Menu::getClient()->sendDel(k);
+  Menu::getClient()->sendDel(*k);
 }
 
 std::shared_ptr<dessser::gen::sync_key::t> TailModel::subscriberKey() const {
-  std::shared_ptr<dessser::gen::sync_key::per_tail> sub{
-      std::make_shared<dessser::gen::sync_key::per_tail>(
-          std::in_place_index<dessser::gen::sync_key::Subscriber>,
-          my_uid->toStdString())};
-
   return std::make_shared<dessser::gen::sync_key::t>(
       std::in_place_index<dessser::gen::sync_key::Tails>, siteName, fqName,
-      workerSign, sub);
+      workerSign,
+      dessser::gen::sync_key::per_tail{
+          std::in_place_index<dessser::gen::sync_key::Subscriber>,
+          my_uid->toStdString()});
 }
 
 void TailModel::onChange(QList<ConfChange> const &changes) {
@@ -79,9 +77,8 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
       std::get<2>(tails) != workerSign)
     return;
 
-  std::shared_ptr<dessser::gen::sync_key::per_tail const> per_tail{
-      std::get<3>(tails)};
-  if (per_tail->index() != dessser::gen::sync_key::LastTuple) return;
+  dessser::gen::sync_key::per_tail const &per_tail{std::get<3>(tails)};
+  if (per_tail.index() != dessser::gen::sync_key::LastTuple) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Tuples) {
     qCritical() << "TailModel::addTuple: Received a Tail that is not tuples:"
@@ -89,7 +86,7 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
     return;
   }
 
-  dessser::Arr<std::shared_ptr<dessser::gen::sync_value::tuple> > const &batch{
+  dessser::Arr<dessser::gen::sync_value::tuple> const &batch{
       std::get<dessser::gen::sync_value::Tuples>(*kv.val)};
 
   size_t const num_tuples{batch.size()};
@@ -101,11 +98,11 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
 
   beginInsertRows(QModelIndex(), tuples.size(), tuples.size() + num_tuples - 1);
 
-  for (std::shared_ptr<dessser::gen::sync_value::tuple> const &tuple : batch) {
+  for (dessser::gen::sync_value::tuple const &tuple : batch) {
     /* If a function has no event time info, all tuples will have time 0.
      * Past data is disabled in that case anyway. */
-    double start{
-        eventTime ? eventTime->startOfTuple(*tuple->values).value_or(0.) : 0.};
+    double start{eventTime ? eventTime->startOfTuple(*tuple.values).value_or(0.)
+                           : 0.};
 
     minEventTime_ =
         std::isnan(minEventTime_) ? start : std::min(minEventTime_, start);
@@ -113,7 +110,7 @@ void TailModel::addTuple(dessser::gen::sync_key::t const &key,
         std::isnan(maxEventTime_) ? start : std::max(maxEventTime_, start);
 
     order.insert(std::make_pair(start, tuples.size()));
-    tuples.emplace_back(start, tuple->values);
+    tuples.emplace_back(start, tuple.values);
   }
   endInsertRows();
 }

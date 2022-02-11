@@ -80,7 +80,7 @@ RawConfEditorDialog::RawConfEditorDialog(
   /* The editor will start in read-only mode (unless we already own the
    * value). Reception of the lock ack from the confserver will turn it
    * into read-write mode: */
-  if (canWrite && showEditor) Menu::getClient()->sendLock(key);
+  if (canWrite && showEditor) Menu::getClient()->sendLock(*key);
 
   /* Now the layout: */
   QVBoxLayout *mainLayout{new QVBoxLayout};
@@ -101,11 +101,11 @@ RawConfEditorDialog::RawConfEditorDialog(
 void RawConfEditorDialog::save() {
   std::shared_ptr<dessser::gen::sync_value::t const> v{editor->getValue()};
   ConfClient *client = Menu::getClient();
-  if (v) client->sendSet(key, v);  // read-only editors return no value
-  if (canWrite && showEditor) client->sendUnlock(key);
+  if (v) client->sendSet(*key, *v);  // read-only editors return no value
+  if (canWrite && showEditor) client->sendUnlock(*key);
   QDialog::accept();
 }
 
 void RawConfEditorDialog::cancel() {
-  if (canWrite && showEditor) Menu::getClient()->sendUnlock(key);
+  if (canWrite && showEditor) Menu::getClient()->sendUnlock(*key);
 }

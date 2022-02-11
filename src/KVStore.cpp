@@ -57,13 +57,13 @@ void KVStore::addIncident(std::shared_ptr<dessser::gen::sync_key::t const> k) {
       std::get<0>(std::get<dessser::gen::sync_key::Incidents>(*k))};
   incident_ids.insert(incident_id);
   /* Maybe also update the set of dialog ids: */
-  std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key{
+  dessser::gen::sync_key::incident_key const &incident_key{
       std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*k))};
-  if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
+  if (incident_key.index() == dessser::gen::sync_key::Dialogs) {
     std::string const &dialog_id{
-        std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key))};
+        std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(incident_key))};
     dialog_ids.insert(std::make_pair(incident_id, dialog_id));
-  } else if (incident_key->index() == dessser::gen::sync_key::Journal) {
+  } else if (incident_key.index() == dessser::gen::sync_key::Journal) {
     incident_logs.insert(std::make_pair(incident_id, k));
   }
 }
@@ -79,11 +79,11 @@ void KVStore::delIncident(std::shared_ptr<dessser::gen::sync_key::t const> k) {
   incident_ids.erase(it);
 
   /* Maybe also deletes a dialog: */
-  std::shared_ptr<dessser::gen::sync_key::incident_key> incident_key{
+  dessser::gen::sync_key::incident_key const &incident_key{
       std::get<1>(std::get<dessser::gen::sync_key::Incidents>(*k))};
-  if (incident_key->index() == dessser::gen::sync_key::Dialogs) {
+  if (incident_key.index() == dessser::gen::sync_key::Dialogs) {
     std::string const &dialog_id{
-        std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(*incident_key))};
+        std::get<0>(std::get<dessser::gen::sync_key::Dialogs>(incident_key))};
     // Remove again the first occurrence:
     bool deleted{false};
     auto range{dialog_ids.equal_range(incident_id)};
@@ -98,7 +98,7 @@ void KVStore::delIncident(std::shared_ptr<dessser::gen::sync_key::t const> k) {
       }
     }
     Q_ASSERT(deleted);
-  } else if (incident_key->index() == dessser::gen::sync_key::Journal) {
+  } else if (incident_key.index() == dessser::gen::sync_key::Journal) {
     bool deleted{false};
     auto range{incident_logs.equal_range(incident_id)};
     for (auto it = range.first; it != range.second; ++it) {

@@ -288,7 +288,7 @@ void ProcessesWidget::wantChart(std::shared_ptr<Function> function) {
 
   /* No need to lock in theory, as the scratchpad is per socket, but
    * lock ownership is how we know to activate the editor: */
-  Menu::getClient()->sendNew(widget_key, chart, DEFAULT_LOCK_TIMEOUT);
+  Menu::getClient()->sendNew(*widget_key, *chart, DEFAULT_LOCK_TIMEOUT);
 
   /* And let's open it (the chart editor will pop-up open because of the lock):
    */

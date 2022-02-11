@@ -60,7 +60,7 @@ bool TimeChartAxisEditor::setValue(
     forceZero->setChecked(a.force_zero);
   }
 
-  switch (a.scale->index()) {
+  switch (a.scale.index()) {
     case dessser::gen::dashboard_widget::Linear:
       if (!linear->isChecked()) {
         linear->click();
@@ -79,12 +79,12 @@ bool TimeChartAxisEditor::setValue(
 
 std::shared_ptr<dessser::gen::dashboard_widget::axis>
 TimeChartAxisEditor::getValue() const {
-  std::shared_ptr<dessser::gen::dashboard_widget::scale> scale{
+  dessser::gen::dashboard_widget::scale scale{
       linear->isChecked()
-          ? std::make_shared<dessser::gen::dashboard_widget::scale>(
+          ? dessser::gen::dashboard_widget::scale(
                 std::in_place_index<dessser::gen::dashboard_widget::Linear>,
                 dessser::Void())
-          : std::make_shared<dessser::gen::dashboard_widget::scale>(
+          : dessser::gen::dashboard_widget::scale(
                 std::in_place_index<
                     dessser::gen::dashboard_widget::Logarithmic>,
                 dessser::Void())};

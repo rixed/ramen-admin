@@ -48,7 +48,7 @@ inline bool operator==(top const &a, top const &b) {
 inline bool operator!=(top const &a, top const &b) {
   return !operator==(a, b);
 }
-struct t059f1fa93342ed0bef3dcabcd095d2f9 {
+struct t26b95203b7d109bdca2c935b0d6e7ca0 {
   dessser::gen::field_name::t_ext name;
   Arr<std::string> types;
   bool count;
@@ -59,15 +59,15 @@ struct t059f1fa93342ed0bef3dcabcd095d2f9 {
   bool sum;
   bool avg;
   Arr<double> percentiles;
-  Arr<std::shared_ptr<::dessser::gen::pivot::top> > tops;
-  t059f1fa93342ed0bef3dcabcd095d2f9(dessser::gen::field_name::t_ext name_, Arr<std::string> types_, bool count_, bool first_, bool last_, bool min_, bool max_, bool sum_, bool avg_, Arr<double> percentiles_, Arr<std::shared_ptr<::dessser::gen::pivot::top> > tops_) : name(name_), types(types_), count(count_), first(first_), last(last_), min(min_), max(max_), sum(sum_), avg(avg_), percentiles(percentiles_), tops(tops_) {}
-  t059f1fa93342ed0bef3dcabcd095d2f9() = default;
+  Arr<::dessser::gen::pivot::top> tops;
+  t26b95203b7d109bdca2c935b0d6e7ca0(dessser::gen::field_name::t_ext name_, Arr<std::string> types_, bool count_, bool first_, bool last_, bool min_, bool max_, bool sum_, bool avg_, Arr<double> percentiles_, Arr<::dessser::gen::pivot::top> tops_) : name(name_), types(types_), count(count_), first(first_), last(last_), min(min_), max(max_), sum(sum_), avg(avg_), percentiles(percentiles_), tops(tops_) {}
+  t26b95203b7d109bdca2c935b0d6e7ca0() = default;
 };
-inline bool operator==(t059f1fa93342ed0bef3dcabcd095d2f9 const &a, t059f1fa93342ed0bef3dcabcd095d2f9 const &b) {
+inline bool operator==(t26b95203b7d109bdca2c935b0d6e7ca0 const &a, t26b95203b7d109bdca2c935b0d6e7ca0 const &b) {
   return ::dessser::gen::field_name::Deref(a.name) == ::dessser::gen::field_name::Deref(b.name) && a.types == b.types && a.count == b.count && a.first == b.first && a.last == b.last && a.min == b.min && a.max == b.max && a.sum == b.sum && a.avg == b.avg && a.percentiles == b.percentiles && a.tops == b.tops;
 }
 
-inline bool operator!=(t059f1fa93342ed0bef3dcabcd095d2f9 const &a, t059f1fa93342ed0bef3dcabcd095d2f9 const &b) {
+inline bool operator!=(t26b95203b7d109bdca2c935b0d6e7ca0 const &a, t26b95203b7d109bdca2c935b0d6e7ca0 const &b) {
   return !operator==(a, b);
 }
 struct t {
@@ -75,11 +75,11 @@ struct t {
   Arr<dessser::gen::simple_filter::t_ext> where;
   dessser::gen::field_name::t_ext type_field;
   dessser::gen::field_name::t_ext value_field;
-  Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> fields;
+  Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> fields;
   Arr<dessser::gen::field_name::t_ext> group_by;
   double duration;
   double max_lateness;
-  t(dessser::gen::fq_name::t_ext from_, Arr<dessser::gen::simple_filter::t_ext> where_, dessser::gen::field_name::t_ext type_field_, dessser::gen::field_name::t_ext value_field_, Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> fields_, Arr<dessser::gen::field_name::t_ext> group_by_, double duration_, double max_lateness_) : from(from_), where(where_), type_field(type_field_), value_field(value_field_), fields(fields_), group_by(group_by_), duration(duration_), max_lateness(max_lateness_) {}
+  t(dessser::gen::fq_name::t_ext from_, Arr<dessser::gen::simple_filter::t_ext> where_, dessser::gen::field_name::t_ext type_field_, dessser::gen::field_name::t_ext value_field_, Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> fields_, Arr<dessser::gen::field_name::t_ext> group_by_, double duration_, double max_lateness_) : from(from_), where(where_), type_field(type_field_), value_field(value_field_), fields(fields_), group_by(group_by_), duration(duration_), max_lateness(max_lateness_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
@@ -89,18 +89,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t498521851bf7a2257815e2a638462f1b : public std::tuple<
-  std::shared_ptr<::dessser::gen::pivot::top> ,
+struct t7aae03d1a1a74f1dfca1edade27a0c74 : public std::tuple<
+  ::dessser::gen::pivot::top,
   Pointer
 > {
   using tuple::tuple;
-  t498521851bf7a2257815e2a638462f1b(std::tuple<std::shared_ptr<::dessser::gen::pivot::top> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::pivot::top> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t7aae03d1a1a74f1dfca1edade27a0c74(std::tuple<::dessser::gen::pivot::top, Pointer> p)
+    : std::tuple<::dessser::gen::pivot::top, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t498521851bf7a2257815e2a638462f1b const &a, t498521851bf7a2257815e2a638462f1b const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t7aae03d1a1a74f1dfca1edade27a0c74 const &a, t7aae03d1a1a74f1dfca1edade27a0c74 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t498521851bf7a2257815e2a638462f1b const &a, t498521851bf7a2257815e2a638462f1b const &b) {
+inline bool operator!=(t7aae03d1a1a74f1dfca1edade27a0c74 const &a, t7aae03d1a1a74f1dfca1edade27a0c74 const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -145,18 +145,18 @@ inline bool operator==(t18cecf882d7ac80cef37dfe6b22279d4 const &a, t18cecf882d7a
 inline bool operator!=(t18cecf882d7ac80cef37dfe6b22279d4 const &a, t18cecf882d7ac80cef37dfe6b22279d4 const &b) {
   return !operator==(a, b);
 }
-struct t38a0a078e14635d651c18914486e10a0 : public std::tuple<
-  std::shared_ptr<::dessser::gen::pivot::t> ,
+struct t8ee925d72cfbfe36ed4ad9adbc5f4519 : public std::tuple<
+  ::dessser::gen::pivot::t,
   Pointer
 > {
   using tuple::tuple;
-  t38a0a078e14635d651c18914486e10a0(std::tuple<std::shared_ptr<::dessser::gen::pivot::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::pivot::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t8ee925d72cfbfe36ed4ad9adbc5f4519(std::tuple<::dessser::gen::pivot::t, Pointer> p)
+    : std::tuple<::dessser::gen::pivot::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t38a0a078e14635d651c18914486e10a0 const &a, t38a0a078e14635d651c18914486e10a0 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t8ee925d72cfbfe36ed4ad9adbc5f4519 const &a, t8ee925d72cfbfe36ed4ad9adbc5f4519 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t38a0a078e14635d651c18914486e10a0 const &a, t38a0a078e14635d651c18914486e10a0 const &b) {
+inline bool operator!=(t8ee925d72cfbfe36ed4ad9adbc5f4519 const &a, t8ee925d72cfbfe36ed4ad9adbc5f4519 const &b) {
   return !operator==(a, b);
 }
 struct t1067cf8ed87e4e016349f71797fb0661 : public std::tuple<
@@ -243,18 +243,18 @@ inline bool operator==(td403d13122fd20ecb97f01e7b85a9dea const &a, td403d13122fd
 inline bool operator!=(td403d13122fd20ecb97f01e7b85a9dea const &a, td403d13122fd20ecb97f01e7b85a9dea const &b) {
   return !operator==(a, b);
 }
-struct tc62c4bad2a36c53cc269d83caa502e8c : public std::tuple<
-  Lst<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>,
+struct ta0e4b5c632ab9a7e56d2036a227274e7 : public std::tuple<
+  Lst<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>,
   Pointer
 > {
   using tuple::tuple;
-  tc62c4bad2a36c53cc269d83caa502e8c(std::tuple<Lst<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>, Pointer> p)
-    : std::tuple<Lst<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  ta0e4b5c632ab9a7e56d2036a227274e7(std::tuple<Lst<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tc62c4bad2a36c53cc269d83caa502e8c const &a, tc62c4bad2a36c53cc269d83caa502e8c const &b) {
+inline bool operator==(ta0e4b5c632ab9a7e56d2036a227274e7 const &a, ta0e4b5c632ab9a7e56d2036a227274e7 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tc62c4bad2a36c53cc269d83caa502e8c const &a, tc62c4bad2a36c53cc269d83caa502e8c const &b) {
+inline bool operator!=(ta0e4b5c632ab9a7e56d2036a227274e7 const &a, ta0e4b5c632ab9a7e56d2036a227274e7 const &b) {
   return !operator==(a, b);
 }
 struct t941fe844f492c6f2281f99ea362423fc : public std::tuple<
@@ -369,32 +369,32 @@ inline bool operator==(t72f695ab4fb53702c7aa92b69429e954 const &a, t72f695ab4fb5
 inline bool operator!=(t72f695ab4fb53702c7aa92b69429e954 const &a, t72f695ab4fb53702c7aa92b69429e954 const &b) {
   return !operator==(a, b);
 }
-struct t2d8378fc0359d0e0bfde14da99b317fa : public std::tuple<
-  Lst<std::shared_ptr<::dessser::gen::pivot::top> >,
+struct t2fb7622ec11d8dfa2277a4f79bf3dc30 : public std::tuple<
+  Lst<::dessser::gen::pivot::top>,
   Pointer
 > {
   using tuple::tuple;
-  t2d8378fc0359d0e0bfde14da99b317fa(std::tuple<Lst<std::shared_ptr<::dessser::gen::pivot::top> >, Pointer> p)
-    : std::tuple<Lst<std::shared_ptr<::dessser::gen::pivot::top> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t2fb7622ec11d8dfa2277a4f79bf3dc30(std::tuple<Lst<::dessser::gen::pivot::top>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::pivot::top>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t2d8378fc0359d0e0bfde14da99b317fa const &a, t2d8378fc0359d0e0bfde14da99b317fa const &b) {
+inline bool operator==(t2fb7622ec11d8dfa2277a4f79bf3dc30 const &a, t2fb7622ec11d8dfa2277a4f79bf3dc30 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t2d8378fc0359d0e0bfde14da99b317fa const &a, t2d8378fc0359d0e0bfde14da99b317fa const &b) {
+inline bool operator!=(t2fb7622ec11d8dfa2277a4f79bf3dc30 const &a, t2fb7622ec11d8dfa2277a4f79bf3dc30 const &b) {
   return !operator==(a, b);
 }
-struct t06091b7d1e2ec8c81d5958a26eee93d8 : public std::tuple<
-  Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>,
+struct t6eabb53e3ce0d815c25a2418c3f9e53e : public std::tuple<
+  Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>,
   Pointer
 > {
   using tuple::tuple;
-  t06091b7d1e2ec8c81d5958a26eee93d8(std::tuple<Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>, Pointer> p)
-    : std::tuple<Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t6eabb53e3ce0d815c25a2418c3f9e53e(std::tuple<Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>, Pointer> p)
+    : std::tuple<Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t06091b7d1e2ec8c81d5958a26eee93d8 const &a, t06091b7d1e2ec8c81d5958a26eee93d8 const &b) {
+inline bool operator==(t6eabb53e3ce0d815c25a2418c3f9e53e const &a, t6eabb53e3ce0d815c25a2418c3f9e53e const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t06091b7d1e2ec8c81d5958a26eee93d8 const &a, t06091b7d1e2ec8c81d5958a26eee93d8 const &b) {
+inline bool operator!=(t6eabb53e3ce0d815c25a2418c3f9e53e const &a, t6eabb53e3ce0d815c25a2418c3f9e53e const &b) {
   return !operator==(a, b);
 }
 struct tae4ac4fd187cdebd0a4f6d30f229fbc5 : public std::tuple<
@@ -447,15 +447,15 @@ inline bool operator!=(t9a758baeff17224a77e1a522010b4168 const &a, t9a758baeff17
       (let "srec_dst_357" (write-u16 little-endian (param 1) (get-field "n" (param 0)))
         (if (is-null (get-field "by" (param 0))) (write-u8 (identifier "srec_dst_357") (u8 1)) (apply (ext-identifier field_name to-row-binary) (force (get-field "by" (param 0))) (write-u8 (identifier "srec_dst_357") (u8 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointer)> top_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::pivot::top &,Pointer &)> top_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::pivot::top>  p_0, Pointer p_1) {
-    uint16_t id_1 { (*p_0).n };
+  std::function<Pointer(::dessser::gen::pivot::top &,Pointer &)> fun0 { [&](::dessser::gen::pivot::top p_0, Pointer p_1) {
+    uint16_t id_1 { p_0.n };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer srec_dst_357 { id_2 };
-      std::optional<dessser::gen::field_name::t_ext> id_4 { (*p_0).by };
+      std::optional<dessser::gen::field_name::t_ext> id_4 { p_0.by };
       bool id_5 { !(id_4.has_value ()) };
       Pointer choose_res_6;
       if (id_5) {
@@ -464,7 +464,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointe
         choose_res_6 = id_8;
       } else {
         auto fun9 { dessser::gen::field_name::to_row_binary };
-        std::optional<dessser::gen::field_name::t_ext> id_10 { (*p_0).by };
+        std::optional<dessser::gen::field_name::t_ext> id_10 { p_0.by };
         dessser::gen::field_name::t_ext id_11 { id_10.value() };
         uint8_t id_12 { 0 };
         Pointer id_13 { srec_dst_357.writeU8(id_12) };
@@ -478,7 +478,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointe
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointer)> top_to_row_binary(top_to_row_binary_init());
+std::function<Pointer(::dessser::gen::pivot::top &,Pointer &)> top_to_row_binary(top_to_row_binary_init());
 
 /* 
     (fun ("{from: $fq_name; where: $simple_filter[]; type-field: $field_name; value-field: $field_name; fields: {name: $field_name; types: STRING[]; count: BOOL; first: BOOL; last: BOOL; min: BOOL; max: BOOL; sum: BOOL; avg: BOOL; percentiles: FLOAT[]; tops: (top AS {n: U16; by: $field_name?})[]}[]; group-by: $field_name[]; duration: FLOAT; max-lateness: FLOAT}" "Ptr")
@@ -670,16 +670,16 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::top> ,Pointer)> top
           (write-u64 little-endian (identifier "srec_dst_406") (u64-of-float (get-field "duration" (param 0))))) 
         (write-u64 little-endian (identifier "srec_dst_407") (u64-of-float (get-field "max-lateness" (param 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> fun15 { [&](std::shared_ptr<::dessser::gen::pivot::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> fun15 { [&](::dessser::gen::pivot::t p_0, Pointer p_1) {
     auto fun16 { dessser::gen::fq_name::to_row_binary };
-    dessser::gen::fq_name::t_ext id_17 { (*p_0).from };
+    dessser::gen::fq_name::t_ext id_17 { p_0.from };
     Pointer id_18 { fun16(id_17, p_1) };
     Pointer let_res_19;
     {
       Pointer srec_dst_358 { id_18 };
-      Arr<dessser::gen::simple_filter::t_ext> id_20 { (*p_0).where };
+      Arr<dessser::gen::simple_filter::t_ext> id_20 { p_0.where };
       uint32_t id_21 { id_20.size() };
       Vec<1, uint32_t> id_22 {  id_21  };
       Pointer let_res_23;
@@ -747,7 +747,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
         Pointer let_res_61;
         {
           Vec<1, int32_t> n_ref_362 { id_60 };
-          Arr<dessser::gen::simple_filter::t_ext> id_62 { (*p_0).where };
+          Arr<dessser::gen::simple_filter::t_ext> id_62 { p_0.where };
           for (dessser::gen::simple_filter::t_ext &x_363 : id_62) {
             uint8_t id_63 { 0 };
             auto fun64 { dessser::gen::simple_filter::to_row_binary };
@@ -778,7 +778,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
     {
       Pointer srec_dst_364 { let_res_19 };
       auto fun78 { dessser::gen::field_name::to_row_binary };
-      dessser::gen::field_name::t_ext id_79 { (*p_0).type_field };
+      dessser::gen::field_name::t_ext id_79 { p_0.type_field };
       Pointer id_80 { fun78(id_79, srec_dst_364) };
       let_res_77 = id_80;
     }
@@ -786,14 +786,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
     {
       Pointer srec_dst_365 { let_res_77 };
       auto fun82 { dessser::gen::field_name::to_row_binary };
-      dessser::gen::field_name::t_ext id_83 { (*p_0).value_field };
+      dessser::gen::field_name::t_ext id_83 { p_0.value_field };
       Pointer id_84 { fun82(id_83, srec_dst_365) };
       let_res_81 = id_84;
     }
     Pointer let_res_85;
     {
       Pointer srec_dst_366 { let_res_81 };
-      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_86 { (*p_0).fields };
+      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_86 { p_0.fields };
       uint32_t id_87 { id_86.size() };
       Vec<1, uint32_t> id_88 {  id_87  };
       Pointer let_res_89;
@@ -861,8 +861,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
         Pointer let_res_127;
         {
           Vec<1, int32_t> n_ref_370 { id_126 };
-          Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_128 { (*p_0).fields };
-          for (::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 &x_371 : id_128) {
+          Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_128 { p_0.fields };
+          for (::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 &x_371 : id_128) {
             uint8_t id_129 { 0 };
             uint8_t id_130 { 0 };
             Pointer id_131 { dst_ref_369[id_130] };
@@ -1158,7 +1158,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
                 {
                   Vec<1, int32_t> n_ref_392 { id_299 };
                   Arr<double> id_301 { x_371.percentiles };
-                  for (double const &x_393 : id_301) {
+                  for (double const x_393 : id_301) {
                     uint8_t id_302 { 0 };
                     uint8_t id_303 { 0 };
                     Pointer id_304 { dst_ref_391[id_303] };
@@ -1187,7 +1187,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
             Pointer let_res_316;
             {
               Pointer srec_dst_394 { let_res_258 };
-              Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_317 { x_371.tops };
+              Arr<::dessser::gen::pivot::top> id_317 { x_371.tops };
               uint32_t id_318 { id_317.size() };
               Vec<1, uint32_t> id_319 {  id_318  };
               Pointer let_res_320;
@@ -1255,8 +1255,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
                 Pointer let_res_358;
                 {
                   Vec<1, int32_t> n_ref_398 { id_357 };
-                  Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_359 { x_371.tops };
-                  for (std::shared_ptr<::dessser::gen::pivot::top>  &x_399 : id_359) {
+                  Arr<::dessser::gen::pivot::top> id_359 { x_371.tops };
+                  for (::dessser::gen::pivot::top &x_399 : id_359) {
                     uint8_t id_360 { 0 };
                     uint8_t id_361 { 0 };
                     Pointer id_362 { dst_ref_397[id_361] };
@@ -1304,7 +1304,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
     Pointer let_res_382;
     {
       Pointer srec_dst_400 { let_res_85 };
-      Arr<dessser::gen::field_name::t_ext> id_383 { (*p_0).group_by };
+      Arr<dessser::gen::field_name::t_ext> id_383 { p_0.group_by };
       uint32_t id_384 { id_383.size() };
       Vec<1, uint32_t> id_385 {  id_384  };
       Pointer let_res_386;
@@ -1372,7 +1372,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
         Pointer let_res_424;
         {
           Vec<1, int32_t> n_ref_404 { id_423 };
-          Arr<dessser::gen::field_name::t_ext> id_425 { (*p_0).group_by };
+          Arr<dessser::gen::field_name::t_ext> id_425 { p_0.group_by };
           for (dessser::gen::field_name::t_ext &x_405 : id_425) {
             uint8_t id_426 { 0 };
             auto fun427 { dessser::gen::field_name::to_row_binary };
@@ -1402,7 +1402,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
     Pointer let_res_440;
     {
       Pointer srec_dst_406 { let_res_382 };
-      double id_441 { (*p_0).duration };
+      double id_441 { p_0.duration };
       uint64_t id_442 { qword_of_float(id_441) };
       Pointer id_443 { srec_dst_406.writeU64Le(id_442) };
       let_res_440 = id_443;
@@ -1410,7 +1410,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
     Pointer let_res_444;
     {
       Pointer srec_dst_407 { let_res_440 };
-      double id_445 { (*p_0).max_lateness };
+      double id_445 { p_0.max_lateness };
       uint64_t id_446 { qword_of_float(id_445) };
       Pointer id_447 { srec_dst_407.writeU64Le(id_446) };
       let_res_444 = id_447;
@@ -1420,15 +1420,15 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)
    };
   return fun15;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{n: U16; by: $field_name?}") (if (is-null (get-field "by" (param 0))) (size 3) (add (add (size 2) (apply (ext-identifier field_name sersize-of-row-binary) (force (get-field "by" (param 0))))) (size 1))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> top_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::pivot::top &)> top_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> fun448 { [&](std::shared_ptr<::dessser::gen::pivot::top>  p_0) {
-    std::optional<dessser::gen::field_name::t_ext> id_449 { (*p_0).by };
+  std::function<Size(::dessser::gen::pivot::top &)> fun448 { [&](::dessser::gen::pivot::top p_0) {
+    std::optional<dessser::gen::field_name::t_ext> id_449 { p_0.by };
     bool id_450 { !(id_449.has_value ()) };
     Size choose_res_451;
     if (id_450) {
@@ -1437,7 +1437,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> top_ser
     } else {
       Size id_453 { 2UL };
       auto fun454 { dessser::gen::field_name::sersize_of_row_binary };
-      std::optional<dessser::gen::field_name::t_ext> id_455 { (*p_0).by };
+      std::optional<dessser::gen::field_name::t_ext> id_455 { p_0.by };
       dessser::gen::field_name::t_ext id_456 { id_455.value() };
       Size id_457 { fun454(id_456) };
       Size id_458 { Size(id_453 + id_457) };
@@ -1450,7 +1450,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> top_ser
    };
   return fun448;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> top_sersize_of_row_binary(top_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::pivot::top &)> top_sersize_of_row_binary(top_sersize_of_row_binary_init());
 
 /* 
     (fun ("{from: $fq_name; where: $simple_filter[]; type-field: $field_name; value-field: $field_name; fields: {name: $field_name; types: STRING[]; count: BOOL; first: BOOL; last: BOOL; min: BOOL; max: BOOL; sum: BOOL; avg: BOOL; percentiles: FLOAT[]; tops: (top AS {n: U16; by: $field_name?})[]}[]; group-by: $field_name[]; duration: FLOAT; max-lateness: FLOAT}")
@@ -1606,16 +1606,16 @@ std::function<Size(std::shared_ptr<::dessser::gen::pivot::top> )> top_sersize_of
                 (unsafe-nth (u8 0) (identifier "sz_ref_353"))))) (size 8)) 
         (size 8)))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::pivot::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> fun461 { [&](std::shared_ptr<::dessser::gen::pivot::t>  p_0) {
+  std::function<Size(::dessser::gen::pivot::t &)> fun461 { [&](::dessser::gen::pivot::t p_0) {
     auto fun462 { dessser::gen::fq_name::sersize_of_row_binary };
-    dessser::gen::fq_name::t_ext id_463 { (*p_0).from };
+    dessser::gen::fq_name::t_ext id_463 { p_0.from };
     Size id_464 { fun462(id_463) };
     Size let_res_465;
     {
       Size sz_312 { id_464 };
-      Arr<dessser::gen::simple_filter::t_ext> id_466 { (*p_0).where };
+      Arr<dessser::gen::simple_filter::t_ext> id_466 { p_0.where };
       uint32_t id_467 { id_466.size() };
       Vec<1, uint32_t> id_468 {  id_467  };
       Size let_res_469;
@@ -1665,7 +1665,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
           Vec<1, int32_t> repeat_n_316 { id_494 };
           bool while_flag_495 { true };
           do {
-            Arr<dessser::gen::simple_filter::t_ext> id_496 { (*p_0).where };
+            Arr<dessser::gen::simple_filter::t_ext> id_496 { p_0.where };
             uint32_t id_497 { id_496.size() };
             int32_t id_498 { int32_t(id_497) };
             uint8_t id_499 { 0 };
@@ -1679,7 +1679,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
               auto fun505 { dessser::gen::simple_filter::sersize_of_row_binary };
               uint8_t id_506 { 0 };
               int32_t id_507 { repeat_n_316[id_506] };
-              Arr<dessser::gen::simple_filter::t_ext> id_508 { (*p_0).where };
+              Arr<dessser::gen::simple_filter::t_ext> id_508 { p_0.where };
               dessser::gen::simple_filter::t_ext id_509 { id_508[id_507] };
               Size id_510 { fun505(id_509) };
               Size id_511 { Size(id_504 + id_510) };
@@ -1708,7 +1708,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
     {
       Size sz_317 { let_res_465 };
       auto fun522 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_523 { (*p_0).type_field };
+      dessser::gen::field_name::t_ext id_523 { p_0.type_field };
       Size id_524 { fun522(id_523) };
       Size id_525 { Size(sz_317 + id_524) };
       let_res_521 = id_525;
@@ -1717,7 +1717,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
     {
       Size sz_318 { let_res_521 };
       auto fun527 { dessser::gen::field_name::sersize_of_row_binary };
-      dessser::gen::field_name::t_ext id_528 { (*p_0).value_field };
+      dessser::gen::field_name::t_ext id_528 { p_0.value_field };
       Size id_529 { fun527(id_528) };
       Size id_530 { Size(sz_318 + id_529) };
       let_res_526 = id_530;
@@ -1725,7 +1725,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
     Size let_res_531;
     {
       Size sz_319 { let_res_526 };
-      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_532 { (*p_0).fields };
+      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_532 { p_0.fields };
       uint32_t id_533 { id_532.size() };
       Vec<1, uint32_t> id_534 {  id_533  };
       Size let_res_535;
@@ -1775,7 +1775,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
           Vec<1, int32_t> repeat_n_323 { id_560 };
           bool while_flag_561 { true };
           do {
-            Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_562 { (*p_0).fields };
+            Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_562 { p_0.fields };
             uint32_t id_563 { id_562.size() };
             int32_t id_564 { int32_t(id_563) };
             uint8_t id_565 { 0 };
@@ -1792,8 +1792,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                 auto fun572 { dessser::gen::field_name::sersize_of_row_binary };
                 uint8_t id_573 { 0 };
                 int32_t id_574 { repeat_n_323[id_573] };
-                Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_575 { (*p_0).fields };
-                ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_576 { id_575[id_574] };
+                Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_575 { p_0.fields };
+                ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_576 { id_575[id_574] };
                 dessser::gen::field_name::t_ext id_577 { id_576.name };
                 Size id_578 { fun572(id_577) };
                 Size id_579 { Size(sz_324 + id_578) };
@@ -1804,8 +1804,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                 Size sz_325 { let_res_571 };
                 uint8_t id_581 { 0 };
                 int32_t id_582 { repeat_n_323[id_581] };
-                Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_583 { (*p_0).fields };
-                ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_584 { id_583[id_582] };
+                Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_583 { p_0.fields };
+                ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_584 { id_583[id_582] };
                 Arr<std::string> id_585 { id_584.types };
                 uint32_t id_586 { id_585.size() };
                 Vec<1, uint32_t> id_587 {  id_586  };
@@ -1858,8 +1858,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                     do {
                       uint8_t id_615 { 0 };
                       int32_t id_616 { repeat_n_323[id_615] };
-                      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_617 { (*p_0).fields };
-                      ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_618 { id_617[id_616] };
+                      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_617 { p_0.fields };
+                      ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_618 { id_617[id_616] };
                       Arr<std::string> id_619 { id_618.types };
                       uint32_t id_620 { id_619.size() };
                       int32_t id_621 { int32_t(id_620) };
@@ -1875,8 +1875,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                         int32_t id_629 { repeat_n_329[id_628] };
                         uint8_t id_630 { 0 };
                         int32_t id_631 { repeat_n_323[id_630] };
-                        Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_632 { (*p_0).fields };
-                        ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_633 { id_632[id_631] };
+                        Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_632 { p_0.fields };
+                        ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_633 { id_632[id_631] };
                         Arr<std::string> id_634 { id_633.types };
                         std::string id_635 { id_634[id_629] };
                         uint32_t id_636 { (uint32_t)id_635.size() };
@@ -1965,8 +1965,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                 Size sz_340 { id_685 };
                 uint8_t id_687 { 0 };
                 int32_t id_688 { repeat_n_323[id_687] };
-                Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_689 { (*p_0).fields };
-                ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_690 { id_689[id_688] };
+                Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_689 { p_0.fields };
+                ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_690 { id_689[id_688] };
                 Arr<double> id_691 { id_690.percentiles };
                 uint32_t id_692 { id_691.size() };
                 Vec<1, uint32_t> id_693 {  id_692  };
@@ -2019,8 +2019,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                     do {
                       uint8_t id_721 { 0 };
                       int32_t id_722 { repeat_n_323[id_721] };
-                      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_723 { (*p_0).fields };
-                      ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_724 { id_723[id_722] };
+                      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_723 { p_0.fields };
+                      ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_724 { id_723[id_722] };
                       Arr<double> id_725 { id_724.percentiles };
                       uint32_t id_726 { id_725.size() };
                       int32_t id_727 { int32_t(id_726) };
@@ -2060,9 +2060,9 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                 Size sz_345 { let_res_686 };
                 uint8_t id_746 { 0 };
                 int32_t id_747 { repeat_n_323[id_746] };
-                Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_748 { (*p_0).fields };
-                ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_749 { id_748[id_747] };
-                Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_750 { id_749.tops };
+                Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_748 { p_0.fields };
+                ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_749 { id_748[id_747] };
+                Arr<::dessser::gen::pivot::top> id_750 { id_749.tops };
                 uint32_t id_751 { id_750.size() };
                 Vec<1, uint32_t> id_752 {  id_751  };
                 Size let_res_753;
@@ -2114,9 +2114,9 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                     do {
                       uint8_t id_780 { 0 };
                       int32_t id_781 { repeat_n_323[id_780] };
-                      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_782 { (*p_0).fields };
-                      ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_783 { id_782[id_781] };
-                      Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_784 { id_783.tops };
+                      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_782 { p_0.fields };
+                      ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_783 { id_782[id_781] };
+                      Arr<::dessser::gen::pivot::top> id_784 { id_783.tops };
                       uint32_t id_785 { id_784.size() };
                       int32_t id_786 { int32_t(id_785) };
                       uint8_t id_787 { 0 };
@@ -2131,10 +2131,10 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
                         int32_t id_794 { repeat_n_349[id_793] };
                         uint8_t id_795 { 0 };
                         int32_t id_796 { repeat_n_323[id_795] };
-                        Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_797 { (*p_0).fields };
-                        ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_798 { id_797[id_796] };
-                        Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_799 { id_798.tops };
-                        std::shared_ptr<::dessser::gen::pivot::top>  id_800 { id_799[id_794] };
+                        Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_797 { p_0.fields };
+                        ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_798 { id_797[id_796] };
+                        Arr<::dessser::gen::pivot::top> id_799 { id_798.tops };
+                        ::dessser::gen::pivot::top id_800 { id_799[id_794] };
                         Size id_801 { top_sersize_of_row_binary(id_800) };
                         Size id_802 { Size(id_792 + id_801) };
                         Void id_803 { ((void)(sz_ref_348[id_790] = id_802), ::dessser::Void()) };
@@ -2182,7 +2182,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
     Size let_res_821;
     {
       Size sz_350 { let_res_531 };
-      Arr<dessser::gen::field_name::t_ext> id_822 { (*p_0).group_by };
+      Arr<dessser::gen::field_name::t_ext> id_822 { p_0.group_by };
       uint32_t id_823 { id_822.size() };
       Vec<1, uint32_t> id_824 {  id_823  };
       Size let_res_825;
@@ -2232,7 +2232,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
           Vec<1, int32_t> repeat_n_354 { id_850 };
           bool while_flag_851 { true };
           do {
-            Arr<dessser::gen::field_name::t_ext> id_852 { (*p_0).group_by };
+            Arr<dessser::gen::field_name::t_ext> id_852 { p_0.group_by };
             uint32_t id_853 { id_852.size() };
             int32_t id_854 { int32_t(id_853) };
             uint8_t id_855 { 0 };
@@ -2246,7 +2246,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
               auto fun861 { dessser::gen::field_name::sersize_of_row_binary };
               uint8_t id_862 { 0 };
               int32_t id_863 { repeat_n_354[id_862] };
-              Arr<dessser::gen::field_name::t_ext> id_864 { (*p_0).group_by };
+              Arr<dessser::gen::field_name::t_ext> id_864 { p_0.group_by };
               dessser::gen::field_name::t_ext id_865 { id_864[id_863] };
               Size id_866 { fun861(id_865) };
               Size id_867 { Size(id_860 + id_866) };
@@ -2280,7 +2280,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_o
    };
   return fun461;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::pivot::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2293,9 +2293,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::pivot::t> )> sersize_of_row_b
                 (make-tup (not-null (identifier "make1_1_fst_64")) (identifier "make1_1_snd_65"))))
             (make-tup (make-rec (string "by") (identifier "drec_fst_67") (string "n") (identifier "drec_fst_61")) (identifier "drec_snd_68"))))))
  */
-static std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Pointer)> top_of_row_binary_init()
+static std::function<::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74(Pointer &)> top_of_row_binary_init()
 {
-  std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Pointer)> fun881 { [&](Pointer p_0) {
+  std::function<::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74(Pointer &)> fun881 { [&](Pointer p_0) {
     ::dessser::gen::pivot::ta97bb48ed75bbda6173555873826c8c6 id_882 { p_0.readU16Le() };
     ::dessser::gen::pivot::ta97bb48ed75bbda6173555873826c8c6 letpair_res_883;
     {
@@ -2304,10 +2304,10 @@ static std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Po
       ::dessser::gen::pivot::ta97bb48ed75bbda6173555873826c8c6 id_884 { du16_fst_58, du16_snd_59 };
       letpair_res_883 = id_884;
     }
-    ::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b let_res_885;
+    ::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74 let_res_885;
     {
       ::dessser::gen::pivot::ta97bb48ed75bbda6173555873826c8c6 drec_60 { letpair_res_883 };
-      ::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b letpair_res_886;
+      ::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74 letpair_res_886;
       {
         auto drec_fst_61 { std::get<0>(drec_60) };
         auto drec_snd_62 { std::get<1>(drec_60) };
@@ -2337,12 +2337,12 @@ static std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Po
           }
           choose_res_891 = letpair_res_900;
         }
-        ::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b letpair_res_903;
+        ::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74 letpair_res_903;
         {
           auto drec_fst_67 { std::get<0>(choose_res_891) };
           auto drec_snd_68 { std::get<1>(choose_res_891) };
-          std::shared_ptr<::dessser::gen::pivot::top>  id_904 { std::make_shared<::dessser::gen::pivot::top>(drec_fst_61, drec_fst_67) };
-          ::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b id_905 { id_904, drec_snd_68 };
+          ::dessser::gen::pivot::top id_904 { drec_fst_61, drec_fst_67 };
+          ::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74 id_905 { id_904, drec_snd_68 };
           letpair_res_903 = id_905;
         }
         letpair_res_886 = letpair_res_903;
@@ -2354,7 +2354,7 @@ static std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Po
    };
   return fun881;
 }
-std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Pointer)> top_of_row_binary(top_of_row_binary_init());
+std::function<::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74(Pointer &)> top_of_row_binary(top_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2733,15 +2733,15 @@ std::function<::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b(Pointer)>
                                         (string "from") (identifier "drec_fst_70")) 
                                       (identifier "dfloat_snd_302"))))))))))))))))))
  */
-static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> fun906 { [&](Pointer p_0) {
+  std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> fun906 { [&](Pointer p_0) {
     auto fun907 { dessser::gen::fq_name::of_row_binary };
     ::dessser::gen::pivot::t1067cf8ed87e4e016349f71797fb0661 id_908 { fun907(p_0) };
-    ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_909;
+    ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_909;
     {
       ::dessser::gen::pivot::t1067cf8ed87e4e016349f71797fb0661 drec_69 { id_908 };
-      ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_910;
+      ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_910;
       {
         auto drec_fst_70 { std::get<0>(drec_69) };
         auto drec_snd_71 { std::get<1>(drec_69) };
@@ -2890,32 +2890,32 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
         {
           auto dlist4_fst_93 { std::get<0>(let_res_951) };
           auto dlist4_snd_94 { std::get<1>(let_res_951) };
-          Arr<dessser::gen::simple_filter::t_ext> id_982 { dlist4_fst_93.toListRev() };
+          Arr<dessser::gen::simple_filter::t_ext> id_982 { dlist4_fst_93.toArrRev() };
           ::dessser::gen::pivot::td403d13122fd20ecb97f01e7b85a9dea id_983 { id_982, dlist4_snd_94 };
           letpair_res_981 = id_983;
         }
-        ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_984;
+        ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_984;
         {
           ::dessser::gen::pivot::td403d13122fd20ecb97f01e7b85a9dea drec_95 { letpair_res_981 };
-          ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_985;
+          ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_985;
           {
             auto drec_fst_96 { std::get<0>(drec_95) };
             auto drec_snd_97 { std::get<1>(drec_95) };
             auto fun986 { dessser::gen::field_name::of_row_binary };
             ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 id_987 { fun986(drec_snd_97) };
-            ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_988;
+            ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_988;
             {
               ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 drec_98 { id_987 };
-              ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_989;
+              ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_989;
               {
                 auto drec_fst_99 { std::get<0>(drec_98) };
                 auto drec_snd_100 { std::get<1>(drec_98) };
                 auto fun990 { dessser::gen::field_name::of_row_binary };
                 ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 id_991 { fun990(drec_snd_100) };
-                ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_992;
+                ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_992;
                 {
                   ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 drec_101 { id_991 };
-                  ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_993;
+                  ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_993;
                   {
                     auto drec_fst_102 { std::get<0>(drec_101) };
                     auto drec_snd_103 { std::get<1>(drec_101) };
@@ -2990,19 +2990,19 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                       }
                       let_res_996 = let_res_999;
                     }
-                    ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1034;
+                    ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1034;
                     {
                       ::dessser::gen::pivot::t491c44439106a32f896827242e8e76a1 dlist1_113 { let_res_996 };
-                      ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1035;
+                      ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1035;
                       {
                         auto dlist1_fst_114 { std::get<0>(dlist1_113) };
                         auto dlist1_snd_115 { std::get<1>(dlist1_113) };
-                        Lst<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> endoflist_1036;
-                        ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c id_1037 { endoflist_1036, dlist1_snd_115 };
-                        Vec<1, ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c> id_1038 {  id_1037  };
-                        ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1039;
+                        Lst<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> endoflist_1036;
+                        ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 id_1037 { endoflist_1036, dlist1_snd_115 };
+                        Vec<1, ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7> id_1038 {  id_1037  };
+                        ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1039;
                         {
-                          Vec<1, ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c> inits_src_ref_116 { id_1038 };
+                          Vec<1, ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7> inits_src_ref_116 { id_1038 };
                           int32_t id_1040 { 0L };
                           Vec<1, int32_t> id_1041 {  id_1040  };
                           {
@@ -3016,19 +3016,19 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                               while_flag_1042 = id_1046;
                               if (while_flag_1042) {
                                 uint8_t id_1047 { 0 };
-                                ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c id_1048 { inits_src_ref_116[id_1047] };
+                                ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 id_1048 { inits_src_ref_116[id_1047] };
                                 {
-                                  ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c dlist2_118 { id_1048 };
+                                  ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 dlist2_118 { id_1048 };
                                   {
                                     auto dlist2_fst_119 { std::get<0>(dlist2_118) };
                                     auto dlist2_snd_120 { std::get<1>(dlist2_118) };
                                     uint8_t id_1049 { 0 };
                                     auto fun1050 { dessser::gen::field_name::of_row_binary };
                                     ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 id_1051 { fun1050(dlist2_snd_120) };
-                                    ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1052;
+                                    ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1052;
                                     {
                                       ::dessser::gen::pivot::t18cecf882d7ac80cef37dfe6b22279d4 drec_121 { id_1051 };
-                                      ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1053;
+                                      ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1053;
                                       {
                                         auto drec_fst_122 { std::get<0>(drec_121) };
                                         auto drec_snd_123 { std::get<1>(drec_121) };
@@ -3260,14 +3260,14 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                         {
                                           auto dlist4_fst_157 { std::get<0>(let_res_1094) };
                                           auto dlist4_snd_158 { std::get<1>(let_res_1094) };
-                                          Arr<std::string> id_1168 { dlist4_fst_157.toListRev() };
+                                          Arr<std::string> id_1168 { dlist4_fst_157.toArrRev() };
                                           ::dessser::gen::pivot::t8293f5c3f24638d91c1ca307ed4a5278 id_1169 { id_1168, dlist4_snd_158 };
                                           letpair_res_1167 = id_1169;
                                         }
-                                        ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1170;
+                                        ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1170;
                                         {
                                           ::dessser::gen::pivot::t8293f5c3f24638d91c1ca307ed4a5278 drec_159 { letpair_res_1167 };
-                                          ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1171;
+                                          ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1171;
                                           {
                                             auto drec_fst_160 { std::get<0>(drec_159) };
                                             auto drec_snd_161 { std::get<1>(drec_159) };
@@ -3282,10 +3282,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                               ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1177 { id_1176, dbool_snd_164 };
                                               letpair_res_1173 = id_1177;
                                             }
-                                            ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1178;
+                                            ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1178;
                                             {
                                               ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_165 { letpair_res_1173 };
-                                              ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1179;
+                                              ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1179;
                                               {
                                                 auto drec_fst_166 { std::get<0>(drec_165) };
                                                 auto drec_snd_167 { std::get<1>(drec_165) };
@@ -3300,10 +3300,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                   ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1185 { id_1184, dbool_snd_170 };
                                                   letpair_res_1181 = id_1185;
                                                 }
-                                                ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1186;
+                                                ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1186;
                                                 {
                                                   ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_171 { letpair_res_1181 };
-                                                  ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1187;
+                                                  ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1187;
                                                   {
                                                     auto drec_fst_172 { std::get<0>(drec_171) };
                                                     auto drec_snd_173 { std::get<1>(drec_171) };
@@ -3318,10 +3318,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                       ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1193 { id_1192, dbool_snd_176 };
                                                       letpair_res_1189 = id_1193;
                                                     }
-                                                    ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1194;
+                                                    ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1194;
                                                     {
                                                       ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_177 { letpair_res_1189 };
-                                                      ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1195;
+                                                      ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1195;
                                                       {
                                                         auto drec_fst_178 { std::get<0>(drec_177) };
                                                         auto drec_snd_179 { std::get<1>(drec_177) };
@@ -3336,10 +3336,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                           ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1201 { id_1200, dbool_snd_182 };
                                                           letpair_res_1197 = id_1201;
                                                         }
-                                                        ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1202;
+                                                        ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1202;
                                                         {
                                                           ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_183 { letpair_res_1197 };
-                                                          ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1203;
+                                                          ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1203;
                                                           {
                                                             auto drec_fst_184 { std::get<0>(drec_183) };
                                                             auto drec_snd_185 { std::get<1>(drec_183) };
@@ -3354,10 +3354,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                               ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1209 { id_1208, dbool_snd_188 };
                                                               letpair_res_1205 = id_1209;
                                                             }
-                                                            ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1210;
+                                                            ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1210;
                                                             {
                                                               ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_189 { letpair_res_1205 };
-                                                              ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1211;
+                                                              ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1211;
                                                               {
                                                                 auto drec_fst_190 { std::get<0>(drec_189) };
                                                                 auto drec_snd_191 { std::get<1>(drec_189) };
@@ -3372,10 +3372,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                   ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1217 { id_1216, dbool_snd_194 };
                                                                   letpair_res_1213 = id_1217;
                                                                 }
-                                                                ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1218;
+                                                                ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1218;
                                                                 {
                                                                   ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_195 { letpair_res_1213 };
-                                                                  ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1219;
+                                                                  ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1219;
                                                                   {
                                                                     auto drec_fst_196 { std::get<0>(drec_195) };
                                                                     auto drec_snd_197 { std::get<1>(drec_195) };
@@ -3390,10 +3390,10 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                       ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 id_1225 { id_1224, dbool_snd_200 };
                                                                       letpair_res_1221 = id_1225;
                                                                     }
-                                                                    ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1226;
+                                                                    ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1226;
                                                                     {
                                                                       ::dessser::gen::pivot::tf9a0a3fefc87c9e10a93d3a172850c26 drec_201 { letpair_res_1221 };
-                                                                      ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1227;
+                                                                      ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1227;
                                                                       {
                                                                         auto drec_fst_202 { std::get<0>(drec_201) };
                                                                         auto drec_snd_203 { std::get<1>(drec_201) };
@@ -3542,14 +3542,14 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                         {
                                                                           auto dlist4_fst_228 { std::get<0>(let_res_1268) };
                                                                           auto dlist4_snd_229 { std::get<1>(let_res_1268) };
-                                                                          Arr<double> id_1299 { dlist4_fst_228.toListRev() };
+                                                                          Arr<double> id_1299 { dlist4_fst_228.toArrRev() };
                                                                           ::dessser::gen::pivot::t72f695ab4fb53702c7aa92b69429e954 id_1300 { id_1299, dlist4_snd_229 };
                                                                           letpair_res_1298 = id_1300;
                                                                         }
-                                                                        ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c let_res_1301;
+                                                                        ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 let_res_1301;
                                                                         {
                                                                           ::dessser::gen::pivot::t72f695ab4fb53702c7aa92b69429e954 drec_230 { letpair_res_1298 };
-                                                                          ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1302;
+                                                                          ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1302;
                                                                           {
                                                                             auto drec_fst_231 { std::get<0>(drec_230) };
                                                                             auto drec_snd_232 { std::get<1>(drec_230) };
@@ -3624,19 +3624,19 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                               }
                                                                               let_res_1305 = let_res_1308;
                                                                             }
-                                                                            ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa let_res_1343;
+                                                                            ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 let_res_1343;
                                                                             {
                                                                               ::dessser::gen::pivot::t491c44439106a32f896827242e8e76a1 dlist1_242 { let_res_1305 };
-                                                                              ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa letpair_res_1344;
+                                                                              ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 letpair_res_1344;
                                                                               {
                                                                                 auto dlist1_fst_243 { std::get<0>(dlist1_242) };
                                                                                 auto dlist1_snd_244 { std::get<1>(dlist1_242) };
-                                                                                Lst<std::shared_ptr<::dessser::gen::pivot::top> > endoflist_1345;
-                                                                                ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa id_1346 { endoflist_1345, dlist1_snd_244 };
-                                                                                Vec<1, ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa> id_1347 {  id_1346  };
-                                                                                ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa let_res_1348;
+                                                                                Lst<::dessser::gen::pivot::top> endoflist_1345;
+                                                                                ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 id_1346 { endoflist_1345, dlist1_snd_244 };
+                                                                                Vec<1, ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30> id_1347 {  id_1346  };
+                                                                                ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 let_res_1348;
                                                                                 {
-                                                                                  Vec<1, ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa> inits_src_ref_245 { id_1347 };
+                                                                                  Vec<1, ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30> inits_src_ref_245 { id_1347 };
                                                                                   int32_t id_1349 { 0L };
                                                                                   Vec<1, int32_t> id_1350 {  id_1349  };
                                                                                   {
@@ -3650,20 +3650,20 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                                       while_flag_1351 = id_1355;
                                                                                       if (while_flag_1351) {
                                                                                         uint8_t id_1356 { 0 };
-                                                                                        ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa id_1357 { inits_src_ref_245[id_1356] };
+                                                                                        ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 id_1357 { inits_src_ref_245[id_1356] };
                                                                                         {
-                                                                                          ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa dlist2_247 { id_1357 };
+                                                                                          ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 dlist2_247 { id_1357 };
                                                                                           {
                                                                                             auto dlist2_fst_248 { std::get<0>(dlist2_247) };
                                                                                             auto dlist2_snd_249 { std::get<1>(dlist2_247) };
                                                                                             uint8_t id_1358 { 0 };
-                                                                                            ::dessser::gen::pivot::t498521851bf7a2257815e2a638462f1b id_1359 { top_of_row_binary(dlist2_snd_249) };
-                                                                                            ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa letpair_res_1360;
+                                                                                            ::dessser::gen::pivot::t7aae03d1a1a74f1dfca1edade27a0c74 id_1359 { top_of_row_binary(dlist2_snd_249) };
+                                                                                            ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 letpair_res_1360;
                                                                                             {
                                                                                               auto dlist3_fst_251 { std::get<0>(id_1359) };
                                                                                               auto dlist3_snd_252 { std::get<1>(id_1359) };
-                                                                                              Lst<std::shared_ptr<::dessser::gen::pivot::top> > id_1361 { dlist3_fst_251, dlist2_fst_248 };
-                                                                                              ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa id_1362 { id_1361, dlist3_snd_252 };
+                                                                                              Lst<::dessser::gen::pivot::top> id_1361 { dlist3_fst_251, dlist2_fst_248 };
+                                                                                              ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 id_1362 { id_1361, dlist3_snd_252 };
                                                                                               letpair_res_1360 = id_1362;
                                                                                             }
                                                                                             Void id_1363 { ((void)(inits_src_ref_245[id_1358] = letpair_res_1360), ::dessser::Void()) };
@@ -3686,21 +3686,21 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                                                                                   }
                                                                                   (void)::dessser::Void();
                                                                                   uint8_t id_1370 { 0 };
-                                                                                  ::dessser::gen::pivot::t2d8378fc0359d0e0bfde14da99b317fa id_1371 { inits_src_ref_245[id_1370] };
+                                                                                  ::dessser::gen::pivot::t2fb7622ec11d8dfa2277a4f79bf3dc30 id_1371 { inits_src_ref_245[id_1370] };
                                                                                   let_res_1348 = id_1371;
                                                                                 }
                                                                                 letpair_res_1344 = let_res_1348;
                                                                               }
                                                                               let_res_1343 = letpair_res_1344;
                                                                             }
-                                                                            ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c letpair_res_1372;
+                                                                            ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 letpair_res_1372;
                                                                             {
                                                                               auto dlist4_fst_254 { std::get<0>(let_res_1343) };
                                                                               auto dlist4_snd_255 { std::get<1>(let_res_1343) };
-                                                                              Arr<std::shared_ptr<::dessser::gen::pivot::top> > id_1373 { dlist4_fst_254.toListRev() };
-                                                                              ::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9 id_1374 { drec_fst_122, drec_fst_160, drec_fst_166, drec_fst_172, drec_fst_178, drec_fst_184, drec_fst_190, drec_fst_196, drec_fst_202, drec_fst_231, id_1373 };
-                                                                              Lst<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_1375 { id_1374, dlist2_fst_119 };
-                                                                              ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c id_1376 { id_1375, dlist4_snd_255 };
+                                                                              Arr<::dessser::gen::pivot::top> id_1373 { dlist4_fst_254.toArrRev() };
+                                                                              ::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0 id_1374 { drec_fst_122, drec_fst_160, drec_fst_166, drec_fst_172, drec_fst_178, drec_fst_184, drec_fst_190, drec_fst_196, drec_fst_202, drec_fst_231, id_1373 };
+                                                                              Lst<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_1375 { id_1374, dlist2_fst_119 };
+                                                                              ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 id_1376 { id_1375, dlist4_snd_255 };
                                                                               letpair_res_1372 = id_1376;
                                                                             }
                                                                             letpair_res_1302 = letpair_res_1372;
@@ -3763,25 +3763,25 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                           }
                           (void)::dessser::Void();
                           uint8_t id_1384 { 0 };
-                          ::dessser::gen::pivot::tc62c4bad2a36c53cc269d83caa502e8c id_1385 { inits_src_ref_116[id_1384] };
+                          ::dessser::gen::pivot::ta0e4b5c632ab9a7e56d2036a227274e7 id_1385 { inits_src_ref_116[id_1384] };
                           let_res_1039 = id_1385;
                         }
                         letpair_res_1035 = let_res_1039;
                       }
                       let_res_1034 = letpair_res_1035;
                     }
-                    ::dessser::gen::pivot::t06091b7d1e2ec8c81d5958a26eee93d8 letpair_res_1386;
+                    ::dessser::gen::pivot::t6eabb53e3ce0d815c25a2418c3f9e53e letpair_res_1386;
                     {
                       auto dlist4_fst_263 { std::get<0>(let_res_1034) };
                       auto dlist4_snd_264 { std::get<1>(let_res_1034) };
-                      Arr<::dessser::gen::pivot::t059f1fa93342ed0bef3dcabcd095d2f9> id_1387 { dlist4_fst_263.toListRev() };
-                      ::dessser::gen::pivot::t06091b7d1e2ec8c81d5958a26eee93d8 id_1388 { id_1387, dlist4_snd_264 };
+                      Arr<::dessser::gen::pivot::t26b95203b7d109bdca2c935b0d6e7ca0> id_1387 { dlist4_fst_263.toArrRev() };
+                      ::dessser::gen::pivot::t6eabb53e3ce0d815c25a2418c3f9e53e id_1388 { id_1387, dlist4_snd_264 };
                       letpair_res_1386 = id_1388;
                     }
-                    ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_1389;
+                    ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_1389;
                     {
-                      ::dessser::gen::pivot::t06091b7d1e2ec8c81d5958a26eee93d8 drec_265 { letpair_res_1386 };
-                      ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_1390;
+                      ::dessser::gen::pivot::t6eabb53e3ce0d815c25a2418c3f9e53e drec_265 { letpair_res_1386 };
+                      ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_1390;
                       {
                         auto drec_fst_266 { std::get<0>(drec_265) };
                         auto drec_snd_267 { std::get<1>(drec_265) };
@@ -3930,14 +3930,14 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                         {
                           auto dlist4_fst_289 { std::get<0>(let_res_1431) };
                           auto dlist4_snd_290 { std::get<1>(let_res_1431) };
-                          Arr<dessser::gen::field_name::t_ext> id_1462 { dlist4_fst_289.toListRev() };
+                          Arr<dessser::gen::field_name::t_ext> id_1462 { dlist4_fst_289.toArrRev() };
                           ::dessser::gen::pivot::t5f8c7f0089c13d8e90b66cd6d8db085d id_1463 { id_1462, dlist4_snd_290 };
                           letpair_res_1461 = id_1463;
                         }
-                        ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_1464;
+                        ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_1464;
                         {
                           ::dessser::gen::pivot::t5f8c7f0089c13d8e90b66cd6d8db085d drec_291 { letpair_res_1461 };
-                          ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_1465;
+                          ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_1465;
                           {
                             auto drec_fst_292 { std::get<0>(drec_291) };
                             auto drec_snd_293 { std::get<1>(drec_291) };
@@ -3950,21 +3950,21 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
                               ::dessser::gen::pivot::t9a758baeff17224a77e1a522010b4168 id_1469 { id_1468, dfloat_snd_296 };
                               letpair_res_1467 = id_1469;
                             }
-                            ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 let_res_1470;
+                            ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 let_res_1470;
                             {
                               ::dessser::gen::pivot::t9a758baeff17224a77e1a522010b4168 drec_297 { letpair_res_1467 };
-                              ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_1471;
+                              ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_1471;
                               {
                                 auto drec_fst_298 { std::get<0>(drec_297) };
                                 auto drec_snd_299 { std::get<1>(drec_297) };
                                 ::dessser::gen::pivot::td2cd337bb3c8bc04d5603393d084985b id_1472 { drec_snd_299.readU64Le() };
-                                ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_1473;
+                                ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_1473;
                                 {
                                   auto dfloat_fst_301 { std::get<0>(id_1472) };
                                   auto dfloat_snd_302 { std::get<1>(id_1472) };
                                   double id_1474 { float_of_qword(dfloat_fst_301) };
-                                  std::shared_ptr<::dessser::gen::pivot::t>  id_1475 { std::make_shared<::dessser::gen::pivot::t>(drec_fst_70, drec_fst_96, drec_fst_99, drec_fst_102, drec_fst_266, drec_fst_292, drec_fst_298, id_1474) };
-                                  ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 id_1476 { id_1475, dfloat_snd_302 };
+                                  ::dessser::gen::pivot::t id_1475 { drec_fst_70, drec_fst_96, drec_fst_99, drec_fst_102, drec_fst_266, drec_fst_292, drec_fst_298, id_1474 };
+                                  ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 id_1476 { id_1475, dfloat_snd_302 };
                                   letpair_res_1473 = id_1476;
                                 }
                                 letpair_res_1471 = letpair_res_1473;
@@ -4000,20 +4000,20 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
    };
   return fun906;
 }
-std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_307" "make_snd_308" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_307") (identifier "make_snd_308"))))
  */
-static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> fun1477 { [&](Pointer p_0) {
-    ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 id_1478 { of_row_binary(p_0) };
-    ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 letpair_res_1479;
+  std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> fun1477 { [&](Pointer p_0) {
+    ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 id_1478 { of_row_binary(p_0) };
+    ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 letpair_res_1479;
     {
       auto make_fst_307 { std::get<0>(id_1478) };
       auto make_snd_308 { std::get<1>(id_1478) };
-      ::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0 id_1480 { make_fst_307, make_snd_308 };
+      ::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519 id_1480 { make_fst_307, make_snd_308 };
       letpair_res_1479 = id_1480;
     }
     return letpair_res_1479;
@@ -4021,22 +4021,22 @@ static std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Po
    };
   return fun1477;
 }
-std::function<::dessser::gen::pivot::t38a0a078e14635d651c18914486e10a0(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::pivot::t8ee925d72cfbfe36ed4ad9adbc5f4519(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{from: $fq_name; where: $simple_filter[]; type-field: $field_name; value-field: $field_name; fields: {name: $field_name; types: STRING[]; count: BOOL; first: BOOL; last: BOOL; min: BOOL; max: BOOL; sum: BOOL; avg: BOOL; percentiles: FLOAT[]; tops: (top AS {n: U16; by: $field_name?})[]}[]; group-by: $field_name[]; duration: FLOAT; max-lateness: FLOAT}" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> fun1481 { [&](std::shared_ptr<::dessser::gen::pivot::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> fun1481 { [&](::dessser::gen::pivot::t p_0, Pointer p_1) {
     Pointer id_1482 { to_row_binary(p_0, p_1) };
     return id_1482;
   }
    };
   return fun1481;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::pivot::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::pivot::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

@@ -56,15 +56,15 @@ inline bool operator!=(representation const &a, representation const &b) {
 struct field {
   double opacity;
   uint32_t color;
-  std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation;
+  ::dessser::gen::dashboard_widget::representation representation;
   std::string column;
   Arr<std::string> factors;
   uint8_t axis;
-  field(double opacity_, uint32_t color_, std::shared_ptr<::dessser::gen::dashboard_widget::representation>  representation_, std::string column_, Arr<std::string> factors_, uint8_t axis_) : opacity(opacity_), color(color_), representation(representation_), column(column_), factors(factors_), axis(axis_) {}
+  field(double opacity_, uint32_t color_, ::dessser::gen::dashboard_widget::representation representation_, std::string column_, Arr<std::string> factors_, uint8_t axis_) : opacity(opacity_), color(color_), representation(representation_), column(column_), factors(factors_), axis(axis_) {}
   field() = default;
 };
 inline bool operator==(field const &a, field const &b) {
-  return a.opacity == b.opacity && a.color == b.color && (*a.representation) == (*b.representation) && a.column == b.column && a.factors == b.factors && a.axis == b.axis;
+  return a.opacity == b.opacity && a.color == b.color && a.representation == b.representation && a.column == b.column && a.factors == b.factors && a.axis == b.axis;
 }
 
 inline bool operator!=(field const &a, field const &b) {
@@ -73,8 +73,8 @@ inline bool operator!=(field const &a, field const &b) {
 struct source {
   dessser::gen::fq_function_name::t_ext name;
   bool visible;
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields;
-  source(dessser::gen::fq_function_name::t_ext name_, bool visible_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > fields_) : name(name_), visible(visible_), fields(fields_) {}
+  Arr<::dessser::gen::dashboard_widget::field> fields;
+  source(dessser::gen::fq_function_name::t_ext name_, bool visible_, Arr<::dessser::gen::dashboard_widget::field> fields_) : name(name_), visible(visible_), fields(fields_) {}
   source() = default;
 };
 inline bool operator==(source const &a, source const &b) {
@@ -107,12 +107,12 @@ inline bool operator!=(scale const &a, scale const &b) {
 struct axis {
   bool left;
   bool force_zero;
-  std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale;
-  axis(bool left_, bool force_zero_, std::shared_ptr<::dessser::gen::dashboard_widget::scale>  scale_) : left(left_), force_zero(force_zero_), scale(scale_) {}
+  ::dessser::gen::dashboard_widget::scale scale;
+  axis(bool left_, bool force_zero_, ::dessser::gen::dashboard_widget::scale scale_) : left(left_), force_zero(force_zero_), scale(scale_) {}
   axis() = default;
 };
 inline bool operator==(axis const &a, axis const &b) {
-  return a.left == b.left && a.force_zero == b.force_zero && (*a.scale) == (*b.scale);
+  return a.left == b.left && a.force_zero == b.force_zero && a.scale == b.scale;
 }
 
 inline bool operator!=(axis const &a, axis const &b) {
@@ -138,14 +138,14 @@ inline bool operator!=(type const &a, type const &b) {
 }
 struct chart {
   std::string title;
-  std::shared_ptr<::dessser::gen::dashboard_widget::type>  type;
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes;
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources;
-  chart(std::string title_, std::shared_ptr<::dessser::gen::dashboard_widget::type>  type_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > axes_, Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > sources_) : title(title_), type(type_), axes(axes_), sources(sources_) {}
+  ::dessser::gen::dashboard_widget::type type;
+  Arr<::dessser::gen::dashboard_widget::axis> axes;
+  Arr<::dessser::gen::dashboard_widget::source> sources;
+  chart(std::string title_, ::dessser::gen::dashboard_widget::type type_, Arr<::dessser::gen::dashboard_widget::axis> axes_, Arr<::dessser::gen::dashboard_widget::source> sources_) : title(title_), type(type_), axes(axes_), sources(sources_) {}
   chart() = default;
 };
 inline bool operator==(chart const &a, chart const &b) {
-  return a.title == b.title && (*a.type) == (*b.type) && a.axes == b.axes && a.sources == b.sources;
+  return a.title == b.title && a.type == b.type && a.axes == b.axes && a.sources == b.sources;
 }
 
 inline bool operator!=(chart const &a, chart const &b) {
@@ -153,7 +153,7 @@ inline bool operator!=(chart const &a, chart const &b) {
 }
 struct t : public std::variant<
   std::string, // Text
-  std::shared_ptr<::dessser::gen::dashboard_widget::chart>  // Chart
+  ::dessser::gen::dashboard_widget::chart // Chart
 > {
   using variant::variant;
   using variant::operator=;
@@ -164,25 +164,25 @@ inline bool operator==(t const &a, t const &b) {
   if (a.index() != b.index()) return false;
   switch (a.index()) {
     case 0: return std::get<0>(a) == std::get<0>(b); // Text
-    case 1: return (*std::get<1>(a)) == (*std::get<1>(b)); // Chart
+    case 1: return std::get<1>(a) == std::get<1>(b); // Chart
   };
   return false;
 }
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t945b5fb3b836d2a43f805e6f4355d00c : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,
+struct tc1bf32b9478802aec66a4e35731c20e3 : public std::tuple<
+  ::dessser::gen::dashboard_widget::representation,
   Pointer
 > {
   using tuple::tuple;
-  t945b5fb3b836d2a43f805e6f4355d00c(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::representation> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::representation> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc1bf32b9478802aec66a4e35731c20e3(std::tuple<::dessser::gen::dashboard_widget::representation, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::representation, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t945b5fb3b836d2a43f805e6f4355d00c const &a, t945b5fb3b836d2a43f805e6f4355d00c const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tc1bf32b9478802aec66a4e35731c20e3 const &a, tc1bf32b9478802aec66a4e35731c20e3 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t945b5fb3b836d2a43f805e6f4355d00c const &a, t945b5fb3b836d2a43f805e6f4355d00c const &b) {
+inline bool operator!=(tc1bf32b9478802aec66a4e35731c20e3 const &a, tc1bf32b9478802aec66a4e35731c20e3 const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -199,18 +199,18 @@ inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
   return !operator==(a, b);
 }
-struct tcdb2d0cead9dfbfdfb999905d0e0abf4 : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::field> ,
+struct t749cc30fe799f5ca72ede312d96197a8 : public std::tuple<
+  ::dessser::gen::dashboard_widget::field,
   Pointer
 > {
   using tuple::tuple;
-  tcdb2d0cead9dfbfdfb999905d0e0abf4(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::field> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::field> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t749cc30fe799f5ca72ede312d96197a8(std::tuple<::dessser::gen::dashboard_widget::field, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::field, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tcdb2d0cead9dfbfdfb999905d0e0abf4 const &a, tcdb2d0cead9dfbfdfb999905d0e0abf4 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t749cc30fe799f5ca72ede312d96197a8 const &a, t749cc30fe799f5ca72ede312d96197a8 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tcdb2d0cead9dfbfdfb999905d0e0abf4 const &a, tcdb2d0cead9dfbfdfb999905d0e0abf4 const &b) {
+inline bool operator!=(t749cc30fe799f5ca72ede312d96197a8 const &a, t749cc30fe799f5ca72ede312d96197a8 const &b) {
   return !operator==(a, b);
 }
 struct td2cd337bb3c8bc04d5603393d084985b : public std::tuple<
@@ -339,18 +339,18 @@ inline bool operator==(t8293f5c3f24638d91c1ca307ed4a5278 const &a, t8293f5c3f246
 inline bool operator!=(t8293f5c3f24638d91c1ca307ed4a5278 const &a, t8293f5c3f24638d91c1ca307ed4a5278 const &b) {
   return !operator==(a, b);
 }
-struct tca96cdae6bc4278a47336118841a27ae : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::source> ,
+struct t98c1df55b587e112639e677d8810f238 : public std::tuple<
+  ::dessser::gen::dashboard_widget::source,
   Pointer
 > {
   using tuple::tuple;
-  tca96cdae6bc4278a47336118841a27ae(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::source> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::source> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t98c1df55b587e112639e677d8810f238(std::tuple<::dessser::gen::dashboard_widget::source, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::source, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tca96cdae6bc4278a47336118841a27ae const &a, tca96cdae6bc4278a47336118841a27ae const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t98c1df55b587e112639e677d8810f238 const &a, t98c1df55b587e112639e677d8810f238 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tca96cdae6bc4278a47336118841a27ae const &a, tca96cdae6bc4278a47336118841a27ae const &b) {
+inline bool operator!=(t98c1df55b587e112639e677d8810f238 const &a, t98c1df55b587e112639e677d8810f238 const &b) {
   return !operator==(a, b);
 }
 struct tafdf48d85e3efdf5b24e3fa2741562be : public std::tuple<
@@ -381,130 +381,130 @@ inline bool operator==(tf9a0a3fefc87c9e10a93d3a172850c26 const &a, tf9a0a3fefc87
 inline bool operator!=(tf9a0a3fefc87c9e10a93d3a172850c26 const &a, tf9a0a3fefc87c9e10a93d3a172850c26 const &b) {
   return !operator==(a, b);
 }
-struct tf235ef729d021690f41878c58e594ddb : public std::tuple<
-  Lst<std::shared_ptr<::dessser::gen::dashboard_widget::field> >,
+struct tcb7b01c316b4ea76130319ada34983b6 : public std::tuple<
+  Lst<::dessser::gen::dashboard_widget::field>,
   Pointer
 > {
   using tuple::tuple;
-  tf235ef729d021690f41878c58e594ddb(std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::field> >, Pointer> p)
-    : std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::field> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcb7b01c316b4ea76130319ada34983b6(std::tuple<Lst<::dessser::gen::dashboard_widget::field>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::dashboard_widget::field>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf235ef729d021690f41878c58e594ddb const &a, tf235ef729d021690f41878c58e594ddb const &b) {
+inline bool operator==(tcb7b01c316b4ea76130319ada34983b6 const &a, tcb7b01c316b4ea76130319ada34983b6 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf235ef729d021690f41878c58e594ddb const &a, tf235ef729d021690f41878c58e594ddb const &b) {
+inline bool operator!=(tcb7b01c316b4ea76130319ada34983b6 const &a, tcb7b01c316b4ea76130319ada34983b6 const &b) {
   return !operator==(a, b);
 }
-struct t416f15a8b2d514fc885764ab28b5e70f : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,
+struct te827b27d5f16cf2c14d368442731b974 : public std::tuple<
+  ::dessser::gen::dashboard_widget::scale,
   Pointer
 > {
   using tuple::tuple;
-  t416f15a8b2d514fc885764ab28b5e70f(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::scale> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::scale> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  te827b27d5f16cf2c14d368442731b974(std::tuple<::dessser::gen::dashboard_widget::scale, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::scale, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t416f15a8b2d514fc885764ab28b5e70f const &a, t416f15a8b2d514fc885764ab28b5e70f const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t416f15a8b2d514fc885764ab28b5e70f const &a, t416f15a8b2d514fc885764ab28b5e70f const &b) {
-  return !operator==(a, b);
-}
-struct t4c6caa6620f6f91a65b92915a2abd7f0 : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,
-  Pointer
-> {
-  using tuple::tuple;
-  t4c6caa6620f6f91a65b92915a2abd7f0(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::axis> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::axis> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
-};
-inline bool operator==(t4c6caa6620f6f91a65b92915a2abd7f0 const &a, t4c6caa6620f6f91a65b92915a2abd7f0 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t4c6caa6620f6f91a65b92915a2abd7f0 const &a, t4c6caa6620f6f91a65b92915a2abd7f0 const &b) {
-  return !operator==(a, b);
-}
-struct tf3a8910aed7f828bbd9860f996df6e62 : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::type> ,
-  Pointer
-> {
-  using tuple::tuple;
-  tf3a8910aed7f828bbd9860f996df6e62(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::type> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::type> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
-};
-inline bool operator==(tf3a8910aed7f828bbd9860f996df6e62 const &a, tf3a8910aed7f828bbd9860f996df6e62 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(tf3a8910aed7f828bbd9860f996df6e62 const &a, tf3a8910aed7f828bbd9860f996df6e62 const &b) {
-  return !operator==(a, b);
-}
-struct t70bc3c9f630046e2593504ce8a2695cc : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,
-  Pointer
-> {
-  using tuple::tuple;
-  t70bc3c9f630046e2593504ce8a2695cc(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::chart> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::chart> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
-};
-inline bool operator==(t70bc3c9f630046e2593504ce8a2695cc const &a, t70bc3c9f630046e2593504ce8a2695cc const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
-}
-inline bool operator!=(t70bc3c9f630046e2593504ce8a2695cc const &a, t70bc3c9f630046e2593504ce8a2695cc const &b) {
-  return !operator==(a, b);
-}
-struct t0de5f73fc4a6809d1f7fbc720887b84a : public std::tuple<
-  Lst<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >,
-  Pointer
-> {
-  using tuple::tuple;
-  t0de5f73fc4a6809d1f7fbc720887b84a(std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >, Pointer> p)
-    : std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
-};
-inline bool operator==(t0de5f73fc4a6809d1f7fbc720887b84a const &a, t0de5f73fc4a6809d1f7fbc720887b84a const &b) {
+inline bool operator==(te827b27d5f16cf2c14d368442731b974 const &a, te827b27d5f16cf2c14d368442731b974 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t0de5f73fc4a6809d1f7fbc720887b84a const &a, t0de5f73fc4a6809d1f7fbc720887b84a const &b) {
+inline bool operator!=(te827b27d5f16cf2c14d368442731b974 const &a, te827b27d5f16cf2c14d368442731b974 const &b) {
   return !operator==(a, b);
 }
-struct t2687f8ef0d45e37c74d267205343eb70 : public std::tuple<
-  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >,
+struct t9a8d4d78c988f5d0b49fc7d7daee92e4 : public std::tuple<
+  ::dessser::gen::dashboard_widget::axis,
   Pointer
 > {
   using tuple::tuple;
-  t2687f8ef0d45e37c74d267205343eb70(std::tuple<Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >, Pointer> p)
-    : std::tuple<Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t9a8d4d78c988f5d0b49fc7d7daee92e4(std::tuple<::dessser::gen::dashboard_widget::axis, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::axis, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t2687f8ef0d45e37c74d267205343eb70 const &a, t2687f8ef0d45e37c74d267205343eb70 const &b) {
+inline bool operator==(t9a8d4d78c988f5d0b49fc7d7daee92e4 const &a, t9a8d4d78c988f5d0b49fc7d7daee92e4 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t2687f8ef0d45e37c74d267205343eb70 const &a, t2687f8ef0d45e37c74d267205343eb70 const &b) {
+inline bool operator!=(t9a8d4d78c988f5d0b49fc7d7daee92e4 const &a, t9a8d4d78c988f5d0b49fc7d7daee92e4 const &b) {
   return !operator==(a, b);
 }
-struct teebceca4fff894920697f553a2c09cf9 : public std::tuple<
-  Lst<std::shared_ptr<::dessser::gen::dashboard_widget::source> >,
+struct td081d579116db2384d0a1d4e0dd44fc6 : public std::tuple<
+  ::dessser::gen::dashboard_widget::type,
   Pointer
 > {
   using tuple::tuple;
-  teebceca4fff894920697f553a2c09cf9(std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::source> >, Pointer> p)
-    : std::tuple<Lst<std::shared_ptr<::dessser::gen::dashboard_widget::source> >, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  td081d579116db2384d0a1d4e0dd44fc6(std::tuple<::dessser::gen::dashboard_widget::type, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::type, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(teebceca4fff894920697f553a2c09cf9 const &a, teebceca4fff894920697f553a2c09cf9 const &b) {
+inline bool operator==(td081d579116db2384d0a1d4e0dd44fc6 const &a, td081d579116db2384d0a1d4e0dd44fc6 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(teebceca4fff894920697f553a2c09cf9 const &a, teebceca4fff894920697f553a2c09cf9 const &b) {
+inline bool operator!=(td081d579116db2384d0a1d4e0dd44fc6 const &a, td081d579116db2384d0a1d4e0dd44fc6 const &b) {
   return !operator==(a, b);
 }
-struct tcedbe6db9a2ca1abdf03f15044f3916c : public std::tuple<
-  std::shared_ptr<::dessser::gen::dashboard_widget::t> ,
+struct t62f7c15233495a7fd1923d1cb45a742f : public std::tuple<
+  ::dessser::gen::dashboard_widget::chart,
   Pointer
 > {
   using tuple::tuple;
-  tcedbe6db9a2ca1abdf03f15044f3916c(std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::dashboard_widget::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t62f7c15233495a7fd1923d1cb45a742f(std::tuple<::dessser::gen::dashboard_widget::chart, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::chart, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tcedbe6db9a2ca1abdf03f15044f3916c const &a, tcedbe6db9a2ca1abdf03f15044f3916c const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t62f7c15233495a7fd1923d1cb45a742f const &a, t62f7c15233495a7fd1923d1cb45a742f const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tcedbe6db9a2ca1abdf03f15044f3916c const &a, tcedbe6db9a2ca1abdf03f15044f3916c const &b) {
+inline bool operator!=(t62f7c15233495a7fd1923d1cb45a742f const &a, t62f7c15233495a7fd1923d1cb45a742f const &b) {
+  return !operator==(a, b);
+}
+struct t4c3e9d1a56152b42310744919f17b6d8 : public std::tuple<
+  Lst<::dessser::gen::dashboard_widget::axis>,
+  Pointer
+> {
+  using tuple::tuple;
+  t4c3e9d1a56152b42310744919f17b6d8(std::tuple<Lst<::dessser::gen::dashboard_widget::axis>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::dashboard_widget::axis>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t4c3e9d1a56152b42310744919f17b6d8 const &a, t4c3e9d1a56152b42310744919f17b6d8 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t4c3e9d1a56152b42310744919f17b6d8 const &a, t4c3e9d1a56152b42310744919f17b6d8 const &b) {
+  return !operator==(a, b);
+}
+struct t747bb378febaae5fd0b66480643426e2 : public std::tuple<
+  Arr<::dessser::gen::dashboard_widget::axis>,
+  Pointer
+> {
+  using tuple::tuple;
+  t747bb378febaae5fd0b66480643426e2(std::tuple<Arr<::dessser::gen::dashboard_widget::axis>, Pointer> p)
+    : std::tuple<Arr<::dessser::gen::dashboard_widget::axis>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t747bb378febaae5fd0b66480643426e2 const &a, t747bb378febaae5fd0b66480643426e2 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t747bb378febaae5fd0b66480643426e2 const &a, t747bb378febaae5fd0b66480643426e2 const &b) {
+  return !operator==(a, b);
+}
+struct tddb6f2327241eb998908208af4a5b9a0 : public std::tuple<
+  Lst<::dessser::gen::dashboard_widget::source>,
+  Pointer
+> {
+  using tuple::tuple;
+  tddb6f2327241eb998908208af4a5b9a0(std::tuple<Lst<::dessser::gen::dashboard_widget::source>, Pointer> p)
+    : std::tuple<Lst<::dessser::gen::dashboard_widget::source>, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(tddb6f2327241eb998908208af4a5b9a0 const &a, tddb6f2327241eb998908208af4a5b9a0 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(tddb6f2327241eb998908208af4a5b9a0 const &a, tddb6f2327241eb998908208af4a5b9a0 const &b) {
+  return !operator==(a, b);
+}
+struct t02960804d32fdda6972311266df50308 : public std::tuple<
+  ::dessser::gen::dashboard_widget::t,
+  Pointer
+> {
+  using tuple::tuple;
+  t02960804d32fdda6972311266df50308(std::tuple<::dessser::gen::dashboard_widget::t, Pointer> p)
+    : std::tuple<::dessser::gen::dashboard_widget::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+};
+inline bool operator==(t02960804d32fdda6972311266df50308 const &a, t02960804d32fdda6972311266df50308 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
+}
+inline bool operator!=(t02960804d32fdda6972311266df50308 const &a, t02960804d32fdda6972311266df50308 const &b) {
   return !operator==(a, b);
 }
 /* ----------- */
@@ -516,36 +516,36 @@ inline bool operator!=(tcedbe6db9a2ca1abdf03f15044f3916c const &a, tcedbe6db9a2c
         (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_384")
           (if (eq (u16 1) (label-of (param 0))) (identifier "ssum_dst_384") (if (eq (u16 2) (label-of (param 0))) (identifier "ssum_dst_384") (seq (assert (eq (label-of (param 0)) (u16 3))) (identifier "ssum_dst_384")))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> representation_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::representation const &,Pointer &)> representation_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::dashboard_widget::representation const &,Pointer &)> fun0 { [&](::dessser::gen::dashboard_widget::representation p_0, Pointer p_1) {
+    uint16_t id_1 { uint16_t(p_0.index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_384 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t((*p_0).index()) };
+      uint16_t id_5 { uint16_t(p_0.index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_384;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t((*p_0).index()) };
+        uint16_t id_9 { uint16_t(p_0.index()) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_384;
         } else {
           uint16_t id_12 { 2 };
-          uint16_t id_13 { uint16_t((*p_0).index()) };
+          uint16_t id_13 { uint16_t(p_0.index()) };
           bool id_14 { bool(id_12 == id_13) };
           Pointer choose_res_15;
           if (id_14) {
             choose_res_15 = ssum_dst_384;
           } else {
-            uint16_t id_16 { uint16_t((*p_0).index()) };
+            uint16_t id_16 { uint16_t(p_0.index()) };
             uint16_t id_17 { 3 };
             bool id_18 { bool(id_16 == id_17) };
             Void id_19 { ((void)(assert(id_18)), ::dessser::Void()) };
@@ -563,7 +563,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::r
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::representation> ,Pointer)> representation_to_row_binary(representation_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::representation const &,Pointer &)> representation_to_row_binary(representation_to_row_binary_init());
 
 /* 
     (fun ("{opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8}" "Ptr")
@@ -620,30 +620,30 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::represen
                         (bytes-of-string (identifier "x_395")))) (set-vec (u8 0) (identifier "n_ref_394") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_394")))))) 
                 (unsafe-nth (u8 0) (identifier "dst_ref_393")))))) (write-u8 (identifier "srec_dst_398") (get-field "axis" (param 0)))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> field_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::field &,Pointer &)> field_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> fun20 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0, Pointer p_1) {
-    double id_21 { (*p_0).opacity };
+  std::function<Pointer(::dessser::gen::dashboard_widget::field &,Pointer &)> fun20 { [&](::dessser::gen::dashboard_widget::field p_0, Pointer p_1) {
+    double id_21 { p_0.opacity };
     uint64_t id_22 { qword_of_float(id_21) };
     Pointer id_23 { p_1.writeU64Le(id_22) };
     Pointer let_res_24;
     {
       Pointer srec_dst_385 { id_23 };
-      uint32_t id_25 { (*p_0).color };
+      uint32_t id_25 { p_0.color };
       Pointer id_26 { srec_dst_385.writeU32Le(id_25) };
       let_res_24 = id_26;
     }
     Pointer let_res_27;
     {
       Pointer srec_dst_386 { let_res_24 };
-      std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_28 { (*p_0).representation };
+      ::dessser::gen::dashboard_widget::representation id_28 { p_0.representation };
       Pointer id_29 { representation_to_row_binary(id_28, srec_dst_386) };
       let_res_27 = id_29;
     }
     Pointer let_res_30;
     {
       Pointer srec_dst_387 { let_res_27 };
-      std::string id_31 { (*p_0).column };
+      std::string id_31 { p_0.column };
       uint32_t id_32 { (uint32_t)id_31.size() };
       Vec<1, uint32_t> id_33 {  id_32  };
       Pointer let_res_34;
@@ -702,7 +702,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
         }
         let_res_34 = let_res_36;
       }
-      std::string id_68 { (*p_0).column };
+      std::string id_68 { p_0.column };
       Bytes id_69 { id_68 };
       Pointer id_70 { let_res_34.writeBytes(id_69) };
       let_res_30 = id_70;
@@ -710,7 +710,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
     Pointer let_res_71;
     {
       Pointer srec_dst_390 { let_res_30 };
-      Arr<std::string> id_72 { (*p_0).factors };
+      Arr<std::string> id_72 { p_0.factors };
       uint32_t id_73 { id_72.size() };
       Vec<1, uint32_t> id_74 {  id_73  };
       Pointer let_res_75;
@@ -778,7 +778,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
         Pointer let_res_113;
         {
           Vec<1, int32_t> n_ref_394 { id_112 };
-          Arr<std::string> id_114 { (*p_0).factors };
+          Arr<std::string> id_114 { p_0.factors };
           for (std::string const &x_395 : id_114) {
             uint8_t id_115 { 0 };
             uint32_t id_116 { (uint32_t)x_395.size() };
@@ -866,7 +866,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
     Pointer let_res_165;
     {
       Pointer srec_dst_398 { let_res_71 };
-      uint8_t id_166 { (*p_0).axis };
+      uint8_t id_166 { p_0.axis };
       Pointer id_167 { srec_dst_398.writeU8(id_166) };
       let_res_165 = id_167;
     }
@@ -875,7 +875,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::f
    };
   return fun20;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,Pointer)> field_to_row_binary(field_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::field &,Pointer &)> field_to_row_binary(field_to_row_binary_init());
 
 /* 
     (fun ("{name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]}" "Ptr")
@@ -900,16 +900,16 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::field> ,
                   (set-vec (u8 0) (identifier "n_ref_404") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_404")))))) 
               (unsafe-nth (u8 0) (identifier "dst_ref_403")))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> source_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::source &,Pointer &)> source_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> fun168 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::dashboard_widget::source &,Pointer &)> fun168 { [&](::dessser::gen::dashboard_widget::source p_0, Pointer p_1) {
     auto fun169 { dessser::gen::fq_function_name::to_row_binary };
-    dessser::gen::fq_function_name::t_ext id_170 { (*p_0).name };
+    dessser::gen::fq_function_name::t_ext id_170 { p_0.name };
     Pointer id_171 { fun169(id_170, p_1) };
     Pointer let_res_172;
     {
       Pointer srec_dst_399 { id_171 };
-      bool id_173 { (*p_0).visible };
+      bool id_173 { p_0.visible };
       uint8_t id_174 { uint8_t(id_173) };
       Pointer id_175 { srec_dst_399.writeU8(id_174) };
       let_res_172 = id_175;
@@ -917,7 +917,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
     Pointer let_res_176;
     {
       Pointer srec_dst_400 { let_res_172 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_177 { (*p_0).fields };
+      Arr<::dessser::gen::dashboard_widget::field> id_177 { p_0.fields };
       uint32_t id_178 { id_177.size() };
       Vec<1, uint32_t> id_179 {  id_178  };
       Pointer let_res_180;
@@ -985,8 +985,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
         Pointer let_res_218;
         {
           Vec<1, int32_t> n_ref_404 { id_217 };
-          Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_219 { (*p_0).fields };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::field>  &x_405 : id_219) {
+          Arr<::dessser::gen::dashboard_widget::field> id_219 { p_0.fields };
+          for (::dessser::gen::dashboard_widget::field &x_405 : id_219) {
             uint8_t id_220 { 0 };
             uint8_t id_221 { 0 };
             Pointer id_222 { dst_ref_403[id_221] };
@@ -1016,28 +1016,28 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
    };
   return fun168;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::source> ,Pointer)> source_to_row_binary(source_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::source &,Pointer &)> source_to_row_binary(source_to_row_binary_init());
 
 /* 
     (fun ("[Linear Void | Logarithmic Void]" "Ptr")
       (let "ssum_dst_380" (write-u16 little-endian (param 1) (label-of (param 0))) (if (eq (u16 0) (label-of (param 0))) (identifier "ssum_dst_380") (seq (assert (eq (label-of (param 0)) (u16 1))) (identifier "ssum_dst_380")))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> scale_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::scale const &,Pointer &)> scale_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> fun233 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0, Pointer p_1) {
-    uint16_t id_234 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::dashboard_widget::scale const &,Pointer &)> fun233 { [&](::dessser::gen::dashboard_widget::scale p_0, Pointer p_1) {
+    uint16_t id_234 { uint16_t(p_0.index()) };
     Pointer id_235 { p_1.writeU16Le(id_234) };
     Pointer let_res_236;
     {
       Pointer ssum_dst_380 { id_235 };
       uint16_t id_237 { 0 };
-      uint16_t id_238 { uint16_t((*p_0).index()) };
+      uint16_t id_238 { uint16_t(p_0.index()) };
       bool id_239 { bool(id_237 == id_238) };
       Pointer choose_res_240;
       if (id_239) {
         choose_res_240 = ssum_dst_380;
       } else {
-        uint16_t id_241 { uint16_t((*p_0).index()) };
+        uint16_t id_241 { uint16_t(p_0.index()) };
         uint16_t id_242 { 1 };
         bool id_243 { bool(id_241 == id_242) };
         Void id_244 { ((void)(assert(id_243)), ::dessser::Void()) };
@@ -1051,23 +1051,23 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::s
    };
   return fun233;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::scale> ,Pointer)> scale_to_row_binary(scale_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::scale const &,Pointer &)> scale_to_row_binary(scale_to_row_binary_init());
 
 /* 
     (fun ("{left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])}" "Ptr")
       (let "srec_dst_382" (let "srec_dst_381" (write-u8 (param 1) (u8-of-bool (get-field "left" (param 0)))) (write-u8 (identifier "srec_dst_381") (u8-of-bool (get-field "force_zero" (param 0)))))
         (apply (identifier "scale-to-row-binary") (get-field "scale" (param 0)) (identifier "srec_dst_382"))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> axis_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::axis const &,Pointer &)> axis_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> fun245 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0, Pointer p_1) {
-    bool id_246 { (*p_0).left };
+  std::function<Pointer(::dessser::gen::dashboard_widget::axis const &,Pointer &)> fun245 { [&](::dessser::gen::dashboard_widget::axis p_0, Pointer p_1) {
+    bool id_246 { p_0.left };
     uint8_t id_247 { uint8_t(id_246) };
     Pointer id_248 { p_1.writeU8(id_247) };
     Pointer let_res_249;
     {
       Pointer srec_dst_381 { id_248 };
-      bool id_250 { (*p_0).force_zero };
+      bool id_250 { p_0.force_zero };
       uint8_t id_251 { uint8_t(id_250) };
       Pointer id_252 { srec_dst_381.writeU8(id_251) };
       let_res_249 = id_252;
@@ -1075,7 +1075,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::a
     Pointer let_res_253;
     {
       Pointer srec_dst_382 { let_res_249 };
-      std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_254 { (*p_0).scale };
+      ::dessser::gen::dashboard_widget::scale id_254 { p_0.scale };
       Pointer id_255 { scale_to_row_binary(id_254, srec_dst_382) };
       let_res_253 = id_255;
     }
@@ -1084,20 +1084,20 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::a
    };
   return fun245;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::axis> ,Pointer)> axis_to_row_binary(axis_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::axis const &,Pointer &)> axis_to_row_binary(axis_to_row_binary_init());
 
 /* 
     (fun ("[Plot Void]" "Ptr") (let "ssum_dst_378" (write-u16 little-endian (param 1) (label-of (param 0))) (seq (assert (eq (label-of (param 0)) (u16 0))) (identifier "ssum_dst_378"))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> type_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::type const &,Pointer &)> type_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> fun256 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0, Pointer p_1) {
-    uint16_t id_257 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::dashboard_widget::type const &,Pointer &)> fun256 { [&](::dessser::gen::dashboard_widget::type p_0, Pointer p_1) {
+    uint16_t id_257 { uint16_t(p_0.index()) };
     Pointer id_258 { p_1.writeU16Le(id_257) };
     Pointer let_res_259;
     {
       Pointer ssum_dst_378 { id_258 };
-      uint16_t id_260 { uint16_t((*p_0).index()) };
+      uint16_t id_260 { uint16_t(p_0.index()) };
       uint16_t id_261 { 0 };
       bool id_262 { bool(id_260 == id_261) };
       Void id_263 { ((void)(assert(id_262)), ::dessser::Void()) };
@@ -1109,7 +1109,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
    };
   return fun256;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,Pointer)> type_to_row_binary(type_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::type const &,Pointer &)> type_to_row_binary(type_to_row_binary_init());
 
 /* 
     (fun ("{title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]}" "Ptr")
@@ -1168,10 +1168,10 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::type> ,P
                   (set-vec (u8 0) (identifier "n_ref_419") (add (i32 1) (unsafe-nth (u8 0) (identifier "n_ref_419")))))) 
               (unsafe-nth (u8 0) (identifier "dst_ref_418")))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> chart_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::chart &,Pointer &)> chart_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> fun264 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0, Pointer p_1) {
-    std::string id_265 { (*p_0).title };
+  std::function<Pointer(::dessser::gen::dashboard_widget::chart &,Pointer &)> fun264 { [&](::dessser::gen::dashboard_widget::chart p_0, Pointer p_1) {
+    std::string id_265 { p_0.title };
     uint32_t id_266 { (uint32_t)id_265.size() };
     Vec<1, uint32_t> id_267 {  id_266  };
     Pointer let_res_268;
@@ -1230,20 +1230,20 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
       }
       let_res_268 = let_res_270;
     }
-    std::string id_302 { (*p_0).title };
+    std::string id_302 { p_0.title };
     Bytes id_303 { id_302 };
     Pointer id_304 { let_res_268.writeBytes(id_303) };
     Pointer let_res_305;
     {
       Pointer srec_dst_408 { id_304 };
-      std::shared_ptr<::dessser::gen::dashboard_widget::type>  id_306 { (*p_0).type };
+      ::dessser::gen::dashboard_widget::type id_306 { p_0.type };
       Pointer id_307 { type_to_row_binary(id_306, srec_dst_408) };
       let_res_305 = id_307;
     }
     Pointer let_res_308;
     {
       Pointer srec_dst_409 { let_res_305 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_309 { (*p_0).axes };
+      Arr<::dessser::gen::dashboard_widget::axis> id_309 { p_0.axes };
       uint32_t id_310 { id_309.size() };
       Vec<1, uint32_t> id_311 {  id_310  };
       Pointer let_res_312;
@@ -1311,8 +1311,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
         Pointer let_res_350;
         {
           Vec<1, int32_t> n_ref_413 { id_349 };
-          Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_351 { (*p_0).axes };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::axis>  const &x_414 : id_351) {
+          Arr<::dessser::gen::dashboard_widget::axis> id_351 { p_0.axes };
+          for (::dessser::gen::dashboard_widget::axis const &x_414 : id_351) {
             uint8_t id_352 { 0 };
             uint8_t id_353 { 0 };
             Pointer id_354 { dst_ref_412[id_353] };
@@ -1340,7 +1340,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
     Pointer let_res_365;
     {
       Pointer srec_dst_415 { let_res_308 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_366 { (*p_0).sources };
+      Arr<::dessser::gen::dashboard_widget::source> id_366 { p_0.sources };
       uint32_t id_367 { id_366.size() };
       Vec<1, uint32_t> id_368 {  id_367  };
       Pointer let_res_369;
@@ -1408,8 +1408,8 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
         Pointer let_res_407;
         {
           Vec<1, int32_t> n_ref_419 { id_406 };
-          Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_408 { (*p_0).sources };
-          for (std::shared_ptr<::dessser::gen::dashboard_widget::source>  &x_420 : id_408) {
+          Arr<::dessser::gen::dashboard_widget::source> id_408 { p_0.sources };
+          for (::dessser::gen::dashboard_widget::source &x_420 : id_408) {
             uint8_t id_409 { 0 };
             uint8_t id_410 { 0 };
             Pointer id_411 { dst_ref_418[id_410] };
@@ -1439,7 +1439,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::c
    };
   return fun264;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,Pointer)> chart_to_row_binary(chart_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::chart &,Pointer &)> chart_to_row_binary(chart_to_row_binary_init());
 
 /* 
     (fun ("[Text STRING | Chart (chart AS {title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]})]" "Ptr")
@@ -1459,20 +1459,20 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::chart> ,
                     (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_424"))))) 
             (bytes-of-string (get-alt "Text" (param 0)))) (seq (assert (eq (label-of (param 0)) (u16 1))) (apply (identifier "chart-to-row-binary") (get-alt "Chart" (param 0)) (identifier "ssum_dst_422"))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun422 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
-    uint16_t id_423 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> fun422 { [&](::dessser::gen::dashboard_widget::t p_0, Pointer p_1) {
+    uint16_t id_423 { uint16_t(p_0.index()) };
     Pointer id_424 { p_1.writeU16Le(id_423) };
     Pointer let_res_425;
     {
       Pointer ssum_dst_422 { id_424 };
       uint16_t id_426 { 0 };
-      uint16_t id_427 { uint16_t((*p_0).index()) };
+      uint16_t id_427 { uint16_t(p_0.index()) };
       bool id_428 { bool(id_426 == id_427) };
       Pointer choose_res_429;
       if (id_428) {
-        std::string id_430 { std::get<0 /* Text */>((*p_0)) };
+        std::string id_430 { std::get<0 /* Text */>(p_0) };
         uint32_t id_431 { (uint32_t)id_430.size() };
         Vec<1, uint32_t> id_432 {  id_431  };
         Pointer let_res_433;
@@ -1531,17 +1531,17 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
           }
           let_res_433 = let_res_435;
         }
-        std::string id_467 { std::get<0 /* Text */>((*p_0)) };
+        std::string id_467 { std::get<0 /* Text */>(p_0) };
         Bytes id_468 { id_467 };
         Pointer id_469 { let_res_433.writeBytes(id_468) };
         choose_res_429 = id_469;
       } else {
-        uint16_t id_470 { uint16_t((*p_0).index()) };
+        uint16_t id_470 { uint16_t(p_0.index()) };
         uint16_t id_471 { 1 };
         bool id_472 { bool(id_470 == id_471) };
         Void id_473 { ((void)(assert(id_472)), ::dessser::Void()) };
         (void)id_473;
-        std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_474 { std::get<1 /* Chart */>((*p_0)) };
+        ::dessser::gen::dashboard_widget::chart id_474 { std::get<1 /* Chart */>(p_0) };
         Pointer id_475 { chart_to_row_binary(id_474, ssum_dst_422) };
         choose_res_429 = id_475;
       }
@@ -1552,17 +1552,17 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t
    };
   return fun422;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[Unused Void | Independent Void | Stacked Void | StackCentered Void]")
       (if (eq (u16 0) (label-of (param 0))) (size 2) (if (eq (u16 1) (label-of (param 0))) (size 2) (if (eq (u16 2) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 3))) (size 2))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> representation_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::representation const &)> representation_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> fun476 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::representation>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::representation const &)> fun476 { [&](::dessser::gen::dashboard_widget::representation p_0) {
     uint16_t id_477 { 0 };
-    uint16_t id_478 { uint16_t((*p_0).index()) };
+    uint16_t id_478 { uint16_t(p_0.index()) };
     bool id_479 { bool(id_477 == id_478) };
     Size choose_res_480;
     if (id_479) {
@@ -1570,7 +1570,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::repr
       choose_res_480 = id_481;
     } else {
       uint16_t id_482 { 1 };
-      uint16_t id_483 { uint16_t((*p_0).index()) };
+      uint16_t id_483 { uint16_t(p_0.index()) };
       bool id_484 { bool(id_482 == id_483) };
       Size choose_res_485;
       if (id_484) {
@@ -1578,14 +1578,14 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::repr
         choose_res_485 = id_486;
       } else {
         uint16_t id_487 { 2 };
-        uint16_t id_488 { uint16_t((*p_0).index()) };
+        uint16_t id_488 { uint16_t(p_0.index()) };
         bool id_489 { bool(id_487 == id_488) };
         Size choose_res_490;
         if (id_489) {
           Size id_491 { 2UL };
           choose_res_490 = id_491;
         } else {
-          uint16_t id_492 { uint16_t((*p_0).index()) };
+          uint16_t id_492 { uint16_t(p_0.index()) };
           uint16_t id_493 { 3 };
           bool id_494 { bool(id_492 == id_493) };
           Void id_495 { ((void)(assert(id_494)), ::dessser::Void()) };
@@ -1602,7 +1602,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::repr
    };
   return fun476;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representation> )> representation_sersize_of_row_binary(representation_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::representation const &)> representation_sersize_of_row_binary(representation_sersize_of_row_binary_init());
 
 /* 
     (fun ("{opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8}")
@@ -1645,17 +1645,17 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::representat
                     (set-vec (u8 0) (identifier "repeat_n_346") (add (unsafe-nth (u8 0) (identifier "repeat_n_346")) (i32 1)))))) 
               (unsafe-nth (u8 0) (identifier "sz_ref_345"))))) (size 1)))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> field_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::field &)> field_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> fun497 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::field>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::field &)> fun497 { [&](::dessser::gen::dashboard_widget::field p_0) {
     Size id_498 { 12UL };
-    std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_499 { (*p_0).representation };
+    ::dessser::gen::dashboard_widget::representation id_499 { p_0.representation };
     Size id_500 { representation_sersize_of_row_binary(id_499) };
     Size id_501 { Size(id_498 + id_500) };
     Size let_res_502;
     {
       Size sz_338 { id_501 };
-      std::string id_503 { (*p_0).column };
+      std::string id_503 { p_0.column };
       uint32_t id_504 { (uint32_t)id_503.size() };
       Vec<1, uint32_t> id_505 {  id_504  };
       Size let_res_506;
@@ -1694,7 +1694,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
         }
         let_res_506 = let_res_509;
       }
-      std::string id_527 { (*p_0).column };
+      std::string id_527 { p_0.column };
       uint32_t id_528 { (uint32_t)id_527.size() };
       Size id_529 { Size(id_528) };
       Size id_530 { Size(let_res_506 + id_529) };
@@ -1704,7 +1704,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
     Size let_res_532;
     {
       Size sz_342 { let_res_502 };
-      Arr<std::string> id_533 { (*p_0).factors };
+      Arr<std::string> id_533 { p_0.factors };
       uint32_t id_534 { id_533.size() };
       Vec<1, uint32_t> id_535 {  id_534  };
       Size let_res_536;
@@ -1754,7 +1754,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
           Vec<1, int32_t> repeat_n_346 { id_561 };
           bool while_flag_562 { true };
           do {
-            Arr<std::string> id_563 { (*p_0).factors };
+            Arr<std::string> id_563 { p_0.factors };
             uint32_t id_564 { id_563.size() };
             int32_t id_565 { int32_t(id_564) };
             uint8_t id_566 { 0 };
@@ -1767,7 +1767,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
               Size id_571 { sz_ref_345[id_570] };
               uint8_t id_572 { 0 };
               int32_t id_573 { repeat_n_346[id_572] };
-              Arr<std::string> id_574 { (*p_0).factors };
+              Arr<std::string> id_574 { p_0.factors };
               std::string id_575 { id_574[id_573] };
               uint32_t id_576 { (uint32_t)id_575.size() };
               Size let_res_577;
@@ -1843,7 +1843,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::fiel
    };
   return fun497;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> field_sersize_of_row_binary(field_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::field &)> field_sersize_of_row_binary(field_sersize_of_row_binary_init());
 
 /* 
     (fun ("{name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]}")
@@ -1866,18 +1866,18 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::field> )> f
                   (set-vec (u8 0) (identifier "repeat_n_357") (add (unsafe-nth (u8 0) (identifier "repeat_n_357")) (i32 1)))))) 
             (unsafe-nth (u8 0) (identifier "sz_ref_356"))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> source_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::source &)> source_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> fun614 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::source>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::source &)> fun614 { [&](::dessser::gen::dashboard_widget::source p_0) {
     auto fun615 { dessser::gen::fq_function_name::sersize_of_row_binary };
-    dessser::gen::fq_function_name::t_ext id_616 { (*p_0).name };
+    dessser::gen::fq_function_name::t_ext id_616 { p_0.name };
     Size id_617 { fun615(id_616) };
     Size id_618 { 1UL };
     Size id_619 { Size(id_617 + id_618) };
     Size let_res_620;
     {
       Size sz_353 { id_619 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_621 { (*p_0).fields };
+      Arr<::dessser::gen::dashboard_widget::field> id_621 { p_0.fields };
       uint32_t id_622 { id_621.size() };
       Vec<1, uint32_t> id_623 {  id_622  };
       Size let_res_624;
@@ -1927,7 +1927,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::sour
           Vec<1, int32_t> repeat_n_357 { id_649 };
           bool while_flag_650 { true };
           do {
-            Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_651 { (*p_0).fields };
+            Arr<::dessser::gen::dashboard_widget::field> id_651 { p_0.fields };
             uint32_t id_652 { id_651.size() };
             int32_t id_653 { int32_t(id_652) };
             uint8_t id_654 { 0 };
@@ -1940,8 +1940,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::sour
               Size id_659 { sz_ref_356[id_658] };
               uint8_t id_660 { 0 };
               int32_t id_661 { repeat_n_357[id_660] };
-              Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_662 { (*p_0).fields };
-              std::shared_ptr<::dessser::gen::dashboard_widget::field>  id_663 { id_662[id_661] };
+              Arr<::dessser::gen::dashboard_widget::field> id_662 { p_0.fields };
+              ::dessser::gen::dashboard_widget::field id_663 { id_662[id_661] };
               Size id_664 { field_sersize_of_row_binary(id_663) };
               Size id_665 { Size(id_659 + id_664) };
               Void id_666 { ((void)(sz_ref_356[id_657] = id_665), ::dessser::Void()) };
@@ -1970,23 +1970,23 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::sour
    };
   return fun614;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::source> )> source_sersize_of_row_binary(source_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::source &)> source_sersize_of_row_binary(source_sersize_of_row_binary_init());
 
 /* 
     (fun ("[Linear Void | Logarithmic Void]") (if (eq (u16 0) (label-of (param 0))) (size 2) (seq (assert (eq (label-of (param 0)) (u16 1))) (size 2))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> scale_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::scale const &)> scale_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> fun675 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::scale>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::scale const &)> fun675 { [&](::dessser::gen::dashboard_widget::scale p_0) {
     uint16_t id_676 { 0 };
-    uint16_t id_677 { uint16_t((*p_0).index()) };
+    uint16_t id_677 { uint16_t(p_0.index()) };
     bool id_678 { bool(id_676 == id_677) };
     Size choose_res_679;
     if (id_678) {
       Size id_680 { 2UL };
       choose_res_679 = id_680;
     } else {
-      uint16_t id_681 { uint16_t((*p_0).index()) };
+      uint16_t id_681 { uint16_t(p_0.index()) };
       uint16_t id_682 { 1 };
       bool id_683 { bool(id_681 == id_682) };
       Void id_684 { ((void)(assert(id_683)), ::dessser::Void()) };
@@ -1999,16 +1999,16 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scal
    };
   return fun675;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::scale> )> scale_sersize_of_row_binary(scale_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::scale const &)> scale_sersize_of_row_binary(scale_sersize_of_row_binary_init());
 
 /* 
     (fun ("{left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])}") (add (size 2) (apply (identifier "scale-sersize-of-row-binary") (get-field "scale" (param 0)))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> axis_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::axis const &)> axis_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> fun686 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::axis>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::axis const &)> fun686 { [&](::dessser::gen::dashboard_widget::axis p_0) {
     Size id_687 { 2UL };
-    std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_688 { (*p_0).scale };
+    ::dessser::gen::dashboard_widget::scale id_688 { p_0.scale };
     Size id_689 { scale_sersize_of_row_binary(id_688) };
     Size id_690 { Size(id_687 + id_689) };
     return id_690;
@@ -2016,15 +2016,15 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis
    };
   return fun686;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::axis> )> axis_sersize_of_row_binary(axis_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::axis const &)> axis_sersize_of_row_binary(axis_sersize_of_row_binary_init());
 
 /* 
     (fun ("[Plot Void]") (seq (assert (eq (label-of (param 0)) (u16 0))) (size 2)))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> type_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::type const &)> type_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> fun691 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::type>  p_0) {
-    uint16_t id_692 { uint16_t((*p_0).index()) };
+  std::function<Size(::dessser::gen::dashboard_widget::type const &)> fun691 { [&](::dessser::gen::dashboard_widget::type p_0) {
+    uint16_t id_692 { uint16_t(p_0.index()) };
     uint16_t id_693 { 0 };
     bool id_694 { bool(id_692 == id_693) };
     Void id_695 { ((void)(assert(id_694)), ::dessser::Void()) };
@@ -2035,7 +2035,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type
    };
   return fun691;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> type_sersize_of_row_binary(type_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::type const &)> type_sersize_of_row_binary(type_sersize_of_row_binary_init());
 
 /* 
     (fun ("{title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]}")
@@ -2086,10 +2086,10 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::type> )> ty
                   (set-vec (u8 0) (identifier "repeat_n_372") (add (unsafe-nth (u8 0) (identifier "repeat_n_372")) (i32 1)))))) 
             (unsafe-nth (u8 0) (identifier "sz_ref_371"))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> chart_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::chart &)> chart_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> fun697 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::chart>  p_0) {
-    std::string id_698 { (*p_0).title };
+  std::function<Size(::dessser::gen::dashboard_widget::chart &)> fun697 { [&](::dessser::gen::dashboard_widget::chart p_0) {
+    std::string id_698 { p_0.title };
     uint32_t id_699 { (uint32_t)id_698.size() };
     Vec<1, uint32_t> id_700 {  id_699  };
     Size let_res_701;
@@ -2128,14 +2128,14 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
       }
       let_res_701 = let_res_704;
     }
-    std::string id_722 { (*p_0).title };
+    std::string id_722 { p_0.title };
     uint32_t id_723 { (uint32_t)id_722.size() };
     Size id_724 { Size(id_723) };
     Size id_725 { Size(let_res_701 + id_724) };
     Size let_res_726;
     {
       Size sz_362 { id_725 };
-      std::shared_ptr<::dessser::gen::dashboard_widget::type>  id_727 { (*p_0).type };
+      ::dessser::gen::dashboard_widget::type id_727 { p_0.type };
       Size id_728 { type_sersize_of_row_binary(id_727) };
       Size id_729 { Size(sz_362 + id_728) };
       let_res_726 = id_729;
@@ -2143,7 +2143,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
     Size let_res_730;
     {
       Size sz_363 { let_res_726 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_731 { (*p_0).axes };
+      Arr<::dessser::gen::dashboard_widget::axis> id_731 { p_0.axes };
       uint32_t id_732 { id_731.size() };
       Vec<1, uint32_t> id_733 {  id_732  };
       Size let_res_734;
@@ -2193,7 +2193,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
           Vec<1, int32_t> repeat_n_367 { id_759 };
           bool while_flag_760 { true };
           do {
-            Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_761 { (*p_0).axes };
+            Arr<::dessser::gen::dashboard_widget::axis> id_761 { p_0.axes };
             uint32_t id_762 { id_761.size() };
             int32_t id_763 { int32_t(id_762) };
             uint8_t id_764 { 0 };
@@ -2206,8 +2206,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               Size id_769 { sz_ref_366[id_768] };
               uint8_t id_770 { 0 };
               int32_t id_771 { repeat_n_367[id_770] };
-              Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_772 { (*p_0).axes };
-              std::shared_ptr<::dessser::gen::dashboard_widget::axis>  id_773 { id_772[id_771] };
+              Arr<::dessser::gen::dashboard_widget::axis> id_772 { p_0.axes };
+              ::dessser::gen::dashboard_widget::axis id_773 { id_772[id_771] };
               Size id_774 { axis_sersize_of_row_binary(id_773) };
               Size id_775 { Size(id_769 + id_774) };
               Void id_776 { ((void)(sz_ref_366[id_767] = id_775), ::dessser::Void()) };
@@ -2234,7 +2234,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
     Size let_res_785;
     {
       Size sz_368 { let_res_730 };
-      Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_786 { (*p_0).sources };
+      Arr<::dessser::gen::dashboard_widget::source> id_786 { p_0.sources };
       uint32_t id_787 { id_786.size() };
       Vec<1, uint32_t> id_788 {  id_787  };
       Size let_res_789;
@@ -2284,7 +2284,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
           Vec<1, int32_t> repeat_n_372 { id_814 };
           bool while_flag_815 { true };
           do {
-            Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_816 { (*p_0).sources };
+            Arr<::dessser::gen::dashboard_widget::source> id_816 { p_0.sources };
             uint32_t id_817 { id_816.size() };
             int32_t id_818 { int32_t(id_817) };
             uint8_t id_819 { 0 };
@@ -2297,8 +2297,8 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
               Size id_824 { sz_ref_371[id_823] };
               uint8_t id_825 { 0 };
               int32_t id_826 { repeat_n_372[id_825] };
-              Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_827 { (*p_0).sources };
-              std::shared_ptr<::dessser::gen::dashboard_widget::source>  id_828 { id_827[id_826] };
+              Arr<::dessser::gen::dashboard_widget::source> id_827 { p_0.sources };
+              ::dessser::gen::dashboard_widget::source id_828 { id_827[id_826] };
               Size id_829 { source_sersize_of_row_binary(id_828) };
               Size id_830 { Size(id_824 + id_829) };
               Void id_831 { ((void)(sz_ref_371[id_822] = id_830), ::dessser::Void()) };
@@ -2327,7 +2327,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::char
    };
   return fun697;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> chart_sersize_of_row_binary(chart_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::chart &)> chart_sersize_of_row_binary(chart_sersize_of_row_binary_init());
 
 /* 
     (fun ("[Text STRING | Chart (chart AS {title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]})]")
@@ -2343,16 +2343,16 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::chart> )> c
             (size-of-u32 (string-length (get-alt "Text" (param 0)))))) 
         (seq (assert (eq (label-of (param 0)) (u16 1))) (add (size 2) (apply (identifier "chart-sersize-of-row-binary") (get-alt "Chart" (param 0)))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::dashboard_widget::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> fun840 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0) {
+  std::function<Size(::dessser::gen::dashboard_widget::t &)> fun840 { [&](::dessser::gen::dashboard_widget::t p_0) {
     uint16_t id_841 { 0 };
-    uint16_t id_842 { uint16_t((*p_0).index()) };
+    uint16_t id_842 { uint16_t(p_0.index()) };
     bool id_843 { bool(id_841 == id_842) };
     Size choose_res_844;
     if (id_843) {
       Size id_845 { 2UL };
-      std::string id_846 { std::get<0 /* Text */>((*p_0)) };
+      std::string id_846 { std::get<0 /* Text */>(p_0) };
       uint32_t id_847 { (uint32_t)id_846.size() };
       Vec<1, uint32_t> id_848 {  id_847  };
       Size let_res_849;
@@ -2391,20 +2391,20 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )
         }
         let_res_849 = let_res_852;
       }
-      std::string id_870 { std::get<0 /* Text */>((*p_0)) };
+      std::string id_870 { std::get<0 /* Text */>(p_0) };
       uint32_t id_871 { (uint32_t)id_870.size() };
       Size id_872 { Size(id_871) };
       Size id_873 { Size(let_res_849 + id_872) };
       Size id_874 { Size(id_845 + id_873) };
       choose_res_844 = id_874;
     } else {
-      uint16_t id_875 { uint16_t((*p_0).index()) };
+      uint16_t id_875 { uint16_t(p_0.index()) };
       uint16_t id_876 { 1 };
       bool id_877 { bool(id_875 == id_876) };
       Void id_878 { ((void)(assert(id_877)), ::dessser::Void()) };
       (void)id_878;
       Size id_879 { 2UL };
-      std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_880 { std::get<1 /* Chart */>((*p_0)) };
+      ::dessser::gen::dashboard_widget::chart id_880 { std::get<1 /* Chart */>(p_0) };
       Size id_881 { chart_sersize_of_row_binary(id_880) };
       Size id_882 { Size(id_879 + id_881) };
       choose_res_844 = id_882;
@@ -2414,7 +2414,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )
    };
   return fun840;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::dashboard_widget::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2425,9 +2425,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::dashboard_widget::t> )> sersi
               (if (eq (u16 2) (identifier "dsum1_fst_106")) (make-tup (construct "[Unused Void | Independent Void | Stacked Void | StackCentered Void]" 2 (nop)) (identifier "dsum1_snd_107"))
                 (seq (assert (eq (identifier "dsum1_fst_106") (u16 3))) (make-tup (construct "[Unused Void | Independent Void | Stacked Void | StackCentered Void]" 3 (nop)) (identifier "dsum1_snd_107")))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> representation_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3(Pointer &)> representation_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> fun883 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3(Pointer &)> fun883 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_884 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_885;
     {
@@ -2436,38 +2436,38 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_886 { du16_fst_100, du16_snd_101 };
       letpair_res_885 = id_886;
     }
-    ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c let_res_887;
+    ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 let_res_887;
     {
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 dsum1_105 { letpair_res_885 };
-      ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c letpair_res_888;
+      ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 letpair_res_888;
       {
         auto dsum1_fst_106 { std::get<0>(dsum1_105) };
         auto dsum1_snd_107 { std::get<1>(dsum1_105) };
         uint16_t id_889 { 0 };
         bool id_890 { bool(id_889 == dsum1_fst_106) };
-        ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_891;
+        ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_891;
         if (id_890) {
           (void)::dessser::Void();
-          std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_892 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<0>, ::dessser::Void()) };
-          ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_893 { id_892, dsum1_snd_107 };
+          ::dessser::gen::dashboard_widget::representation id_892 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_893 { id_892, dsum1_snd_107 };
           choose_res_891 = id_893;
         } else {
           uint16_t id_894 { 1 };
           bool id_895 { bool(id_894 == dsum1_fst_106) };
-          ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_896;
+          ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_896;
           if (id_895) {
             (void)::dessser::Void();
-            std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_897 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<1>, ::dessser::Void()) };
-            ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_898 { id_897, dsum1_snd_107 };
+            ::dessser::gen::dashboard_widget::representation id_897 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_898 { id_897, dsum1_snd_107 };
             choose_res_896 = id_898;
           } else {
             uint16_t id_899 { 2 };
             bool id_900 { bool(id_899 == dsum1_fst_106) };
-            ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c choose_res_901;
+            ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_901;
             if (id_900) {
               (void)::dessser::Void();
-              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_902 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<2>, ::dessser::Void()) };
-              ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_903 { id_902, dsum1_snd_107 };
+              ::dessser::gen::dashboard_widget::representation id_902 { std::in_place_index<2>, ::dessser::Void() };
+              ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_903 { id_902, dsum1_snd_107 };
               choose_res_901 = id_903;
             } else {
               uint16_t id_904 { 3 };
@@ -2475,8 +2475,8 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
               Void id_906 { ((void)(assert(id_905)), ::dessser::Void()) };
               (void)id_906;
               (void)::dessser::Void();
-              std::shared_ptr<::dessser::gen::dashboard_widget::representation>  id_907 { std::make_shared<::dessser::gen::dashboard_widget::representation>(std::in_place_index<3>, ::dessser::Void()) };
-              ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_908 { id_907, dsum1_snd_107 };
+              ::dessser::gen::dashboard_widget::representation id_907 { std::in_place_index<3>, ::dessser::Void() };
+              ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_908 { id_907, dsum1_snd_107 };
               choose_res_901 = id_908;
             }
             choose_res_896 = choose_res_901;
@@ -2492,7 +2492,7 @@ static std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f
    };
   return fun883;
 }
-std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c(Pointer)> representation_of_row_binary(representation_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3(Pointer &)> representation_of_row_binary(representation_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2593,9 +2593,9 @@ std::function<::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00
                                 (string "opacity") (identifier "drec_fst_124")) 
                               (identifier "du8_snd_190"))))))))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> field_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8(Pointer &)> field_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> fun909 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8(Pointer &)> fun909 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::td2cd337bb3c8bc04d5603393d084985b id_910 { p_0.readU64Le() };
     ::dessser::gen::dashboard_widget::t9a758baeff17224a77e1a522010b4168 letpair_res_911;
     {
@@ -2605,10 +2605,10 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
       ::dessser::gen::dashboard_widget::t9a758baeff17224a77e1a522010b4168 id_913 { id_912, dfloat_snd_122 };
       letpair_res_911 = id_913;
     }
-    ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 let_res_914;
+    ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 let_res_914;
     {
       ::dessser::gen::dashboard_widget::t9a758baeff17224a77e1a522010b4168 drec_123 { letpair_res_911 };
-      ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_915;
+      ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_915;
       {
         auto drec_fst_124 { std::get<0>(drec_123) };
         auto drec_snd_125 { std::get<1>(drec_123) };
@@ -2620,18 +2620,18 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
           ::dessser::gen::dashboard_widget::t491c44439106a32f896827242e8e76a1 id_918 { du32_fst_127, du32_snd_128 };
           letpair_res_917 = id_918;
         }
-        ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 let_res_919;
+        ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 let_res_919;
         {
           ::dessser::gen::dashboard_widget::t491c44439106a32f896827242e8e76a1 drec_129 { letpair_res_917 };
-          ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_920;
+          ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_920;
           {
             auto drec_fst_130 { std::get<0>(drec_129) };
             auto drec_snd_131 { std::get<1>(drec_129) };
-            ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c id_921 { representation_of_row_binary(drec_snd_131) };
-            ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 let_res_922;
+            ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_921 { representation_of_row_binary(drec_snd_131) };
+            ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 let_res_922;
             {
-              ::dessser::gen::dashboard_widget::t945b5fb3b836d2a43f805e6f4355d00c drec_132 { id_921 };
-              ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_923;
+              ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 drec_132 { id_921 };
+              ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_923;
               {
                 auto drec_fst_133 { std::get<0>(drec_132) };
                 auto drec_snd_134 { std::get<1>(drec_132) };
@@ -2727,10 +2727,10 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                   }
                   let_res_965 = letpair_res_966;
                 }
-                ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 let_res_971;
+                ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 let_res_971;
                 {
                   ::dessser::gen::dashboard_widget::t13a07ee37ab40962540da8534858dc07 drec_147 { let_res_965 };
-                  ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_972;
+                  ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_972;
                   {
                     auto drec_fst_148 { std::get<0>(drec_147) };
                     auto drec_snd_149 { std::get<1>(drec_147) };
@@ -2962,24 +2962,24 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
                     {
                       auto dlist4_fst_183 { std::get<0>(let_res_1013) };
                       auto dlist4_snd_184 { std::get<1>(let_res_1013) };
-                      Arr<std::string> id_1087 { dlist4_fst_183.toListRev() };
+                      Arr<std::string> id_1087 { dlist4_fst_183.toArrRev() };
                       ::dessser::gen::dashboard_widget::t8293f5c3f24638d91c1ca307ed4a5278 id_1088 { id_1087, dlist4_snd_184 };
                       letpair_res_1086 = id_1088;
                     }
-                    ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 let_res_1089;
+                    ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 let_res_1089;
                     {
                       ::dessser::gen::dashboard_widget::t8293f5c3f24638d91c1ca307ed4a5278 drec_185 { letpair_res_1086 };
-                      ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_1090;
+                      ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_1090;
                       {
                         auto drec_fst_186 { std::get<0>(drec_185) };
                         auto drec_snd_187 { std::get<1>(drec_185) };
                         ::dessser::gen::dashboard_widget::t1a5d74abf838df33f185a72a8912f5c9 id_1091 { drec_snd_187.readU8() };
-                        ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 letpair_res_1092;
+                        ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 letpair_res_1092;
                         {
                           auto du8_fst_189 { std::get<0>(id_1091) };
                           auto du8_snd_190 { std::get<1>(id_1091) };
-                          std::shared_ptr<::dessser::gen::dashboard_widget::field>  id_1093 { std::make_shared<::dessser::gen::dashboard_widget::field>(drec_fst_124, drec_fst_130, drec_fst_133, drec_fst_148, drec_fst_186, du8_fst_189) };
-                          ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 id_1094 { id_1093, du8_snd_190 };
+                          ::dessser::gen::dashboard_widget::field id_1093 { drec_fst_124, drec_fst_130, drec_fst_133, drec_fst_148, drec_fst_186, du8_fst_189 };
+                          ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 id_1094 { id_1093, du8_snd_190 };
                           letpair_res_1092 = id_1094;
                         }
                         letpair_res_1090 = letpair_res_1092;
@@ -3007,7 +3007,7 @@ static std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905
    };
   return fun909;
 }
-std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4(Pointer)> field_of_row_binary(field_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8(Pointer &)> field_of_row_binary(field_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3052,15 +3052,15 @@ std::function<::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf
                         (unsafe-nth (u8 0) (identifier "inits_src_ref_215"))))))
                 (make-tup (make-rec (string "fields") (arr-of-lst-rev (identifier "dlist4_fst_224")) (string "visible") (identifier "drec_fst_201") (string "name") (identifier "drec_fst_195")) (identifier "dlist4_snd_225"))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> source_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238(Pointer &)> source_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> fun1095 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238(Pointer &)> fun1095 { [&](Pointer p_0) {
     auto fun1096 { dessser::gen::fq_function_name::of_row_binary };
     ::dessser::gen::dashboard_widget::tafdf48d85e3efdf5b24e3fa2741562be id_1097 { fun1096(p_0) };
-    ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae let_res_1098;
+    ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 let_res_1098;
     {
       ::dessser::gen::dashboard_widget::tafdf48d85e3efdf5b24e3fa2741562be drec_194 { id_1097 };
-      ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae letpair_res_1099;
+      ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 letpair_res_1099;
       {
         auto drec_fst_195 { std::get<0>(drec_194) };
         auto drec_snd_196 { std::get<1>(drec_194) };
@@ -3075,10 +3075,10 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
           ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 id_1105 { id_1104, dbool_snd_199 };
           letpair_res_1101 = id_1105;
         }
-        ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae let_res_1106;
+        ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 let_res_1106;
         {
           ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 drec_200 { letpair_res_1101 };
-          ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae letpair_res_1107;
+          ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 letpair_res_1107;
           {
             auto drec_fst_201 { std::get<0>(drec_200) };
             auto drec_snd_202 { std::get<1>(drec_200) };
@@ -3153,19 +3153,19 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
               }
               let_res_1110 = let_res_1113;
             }
-            ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb let_res_1148;
+            ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 let_res_1148;
             {
               ::dessser::gen::dashboard_widget::t491c44439106a32f896827242e8e76a1 dlist1_212 { let_res_1110 };
-              ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb letpair_res_1149;
+              ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 letpair_res_1149;
               {
                 auto dlist1_fst_213 { std::get<0>(dlist1_212) };
                 auto dlist1_snd_214 { std::get<1>(dlist1_212) };
-                Lst<std::shared_ptr<::dessser::gen::dashboard_widget::field> > endoflist_1150;
-                ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1151 { endoflist_1150, dlist1_snd_214 };
-                Vec<1, ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb> id_1152 {  id_1151  };
-                ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb let_res_1153;
+                Lst<::dessser::gen::dashboard_widget::field> endoflist_1150;
+                ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 id_1151 { endoflist_1150, dlist1_snd_214 };
+                Vec<1, ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6> id_1152 {  id_1151  };
+                ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 let_res_1153;
                 {
-                  Vec<1, ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb> inits_src_ref_215 { id_1152 };
+                  Vec<1, ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6> inits_src_ref_215 { id_1152 };
                   int32_t id_1154 { 0L };
                   Vec<1, int32_t> id_1155 {  id_1154  };
                   {
@@ -3179,20 +3179,20 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                       while_flag_1156 = id_1160;
                       if (while_flag_1156) {
                         uint8_t id_1161 { 0 };
-                        ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1162 { inits_src_ref_215[id_1161] };
+                        ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 id_1162 { inits_src_ref_215[id_1161] };
                         {
-                          ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb dlist2_217 { id_1162 };
+                          ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 dlist2_217 { id_1162 };
                           {
                             auto dlist2_fst_218 { std::get<0>(dlist2_217) };
                             auto dlist2_snd_219 { std::get<1>(dlist2_217) };
                             uint8_t id_1163 { 0 };
-                            ::dessser::gen::dashboard_widget::tcdb2d0cead9dfbfdfb999905d0e0abf4 id_1164 { field_of_row_binary(dlist2_snd_219) };
-                            ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb letpair_res_1165;
+                            ::dessser::gen::dashboard_widget::t749cc30fe799f5ca72ede312d96197a8 id_1164 { field_of_row_binary(dlist2_snd_219) };
+                            ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 letpair_res_1165;
                             {
                               auto dlist3_fst_221 { std::get<0>(id_1164) };
                               auto dlist3_snd_222 { std::get<1>(id_1164) };
-                              Lst<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_1166 { dlist3_fst_221, dlist2_fst_218 };
-                              ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1167 { id_1166, dlist3_snd_222 };
+                              Lst<::dessser::gen::dashboard_widget::field> id_1166 { dlist3_fst_221, dlist2_fst_218 };
+                              ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 id_1167 { id_1166, dlist3_snd_222 };
                               letpair_res_1165 = id_1167;
                             }
                             Void id_1168 { ((void)(inits_src_ref_215[id_1163] = letpair_res_1165), ::dessser::Void()) };
@@ -3215,20 +3215,20 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
                   }
                   (void)::dessser::Void();
                   uint8_t id_1175 { 0 };
-                  ::dessser::gen::dashboard_widget::tf235ef729d021690f41878c58e594ddb id_1176 { inits_src_ref_215[id_1175] };
+                  ::dessser::gen::dashboard_widget::tcb7b01c316b4ea76130319ada34983b6 id_1176 { inits_src_ref_215[id_1175] };
                   let_res_1153 = id_1176;
                 }
                 letpair_res_1149 = let_res_1153;
               }
               let_res_1148 = letpair_res_1149;
             }
-            ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae letpair_res_1177;
+            ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 letpair_res_1177;
             {
               auto dlist4_fst_224 { std::get<0>(let_res_1148) };
               auto dlist4_snd_225 { std::get<1>(let_res_1148) };
-              Arr<std::shared_ptr<::dessser::gen::dashboard_widget::field> > id_1178 { dlist4_fst_224.toListRev() };
-              std::shared_ptr<::dessser::gen::dashboard_widget::source>  id_1179 { std::make_shared<::dessser::gen::dashboard_widget::source>(drec_fst_195, drec_fst_201, id_1178) };
-              ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae id_1180 { id_1179, dlist4_snd_225 };
+              Arr<::dessser::gen::dashboard_widget::field> id_1178 { dlist4_fst_224.toArrRev() };
+              ::dessser::gen::dashboard_widget::source id_1179 { drec_fst_195, drec_fst_201, id_1178 };
+              ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 id_1180 { id_1179, dlist4_snd_225 };
               letpair_res_1177 = id_1180;
             }
             letpair_res_1107 = letpair_res_1177;
@@ -3244,7 +3244,7 @@ static std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118
    };
   return fun1095;
 }
-std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae(Pointer)> source_of_row_binary(source_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238(Pointer &)> source_of_row_binary(source_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3253,9 +3253,9 @@ std::function<::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27a
           (if (eq (u16 0) (identifier "dsum1_fst_76")) (make-tup (construct "[Linear Void | Logarithmic Void]" 0 (nop)) (identifier "dsum1_snd_77"))
             (seq (assert (eq (identifier "dsum1_fst_76") (u16 1))) (make-tup (construct "[Linear Void | Logarithmic Void]" 1 (nop)) (identifier "dsum1_snd_77")))))))
  */
-static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> scale_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974(Pointer &)> scale_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> fun1181 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974(Pointer &)> fun1181 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1182 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1183;
     {
@@ -3264,20 +3264,20 @@ static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1184 { du16_fst_70, du16_snd_71 };
       letpair_res_1183 = id_1184;
     }
-    ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f let_res_1185;
+    ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 let_res_1185;
     {
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 dsum1_75 { letpair_res_1183 };
-      ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f letpair_res_1186;
+      ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 letpair_res_1186;
       {
         auto dsum1_fst_76 { std::get<0>(dsum1_75) };
         auto dsum1_snd_77 { std::get<1>(dsum1_75) };
         uint16_t id_1187 { 0 };
         bool id_1188 { bool(id_1187 == dsum1_fst_76) };
-        ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f choose_res_1189;
+        ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 choose_res_1189;
         if (id_1188) {
           (void)::dessser::Void();
-          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1190 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<0>, ::dessser::Void()) };
-          ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f id_1191 { id_1190, dsum1_snd_77 };
+          ::dessser::gen::dashboard_widget::scale id_1190 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 id_1191 { id_1190, dsum1_snd_77 };
           choose_res_1189 = id_1191;
         } else {
           uint16_t id_1192 { 1 };
@@ -3285,8 +3285,8 @@ static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab
           Void id_1194 { ((void)(assert(id_1193)), ::dessser::Void()) };
           (void)id_1194;
           (void)::dessser::Void();
-          std::shared_ptr<::dessser::gen::dashboard_widget::scale>  id_1195 { std::make_shared<::dessser::gen::dashboard_widget::scale>(std::in_place_index<1>, ::dessser::Void()) };
-          ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f id_1196 { id_1195, dsum1_snd_77 };
+          ::dessser::gen::dashboard_widget::scale id_1195 { std::in_place_index<1>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 id_1196 { id_1195, dsum1_snd_77 };
           choose_res_1189 = id_1196;
         }
         letpair_res_1186 = choose_res_1189;
@@ -3298,7 +3298,7 @@ static std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab
    };
   return fun1181;
 }
-std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f(Pointer)> scale_of_row_binary(scale_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974(Pointer &)> scale_of_row_binary(scale_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3309,9 +3309,9 @@ std::function<::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70
               (let-pair "drec_fst_97" "drec_snd_98" (apply (identifier "scale-of-row-binary") (identifier "drec_snd_95"))
                 (make-tup (make-rec (string "scale") (identifier "drec_fst_97") (string "force_zero") (identifier "drec_fst_94") (string "left") (identifier "drec_fst_88")) (identifier "drec_snd_98"))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> axis_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4(Pointer &)> axis_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> fun1197 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4(Pointer &)> fun1197 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::t1a5d74abf838df33f185a72a8912f5c9 id_1198 { p_0.readU8() };
     ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 letpair_res_1199;
     {
@@ -3323,10 +3323,10 @@ static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915
       ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 id_1203 { id_1202, dbool_snd_86 };
       letpair_res_1199 = id_1203;
     }
-    ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 let_res_1204;
+    ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 let_res_1204;
     {
       ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 drec_87 { letpair_res_1199 };
-      ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 letpair_res_1205;
+      ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 letpair_res_1205;
       {
         auto drec_fst_88 { std::get<0>(drec_87) };
         auto drec_snd_89 { std::get<1>(drec_87) };
@@ -3341,20 +3341,20 @@ static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915
           ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 id_1211 { id_1210, dbool_snd_92 };
           letpair_res_1207 = id_1211;
         }
-        ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 let_res_1212;
+        ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 let_res_1212;
         {
           ::dessser::gen::dashboard_widget::tf9a0a3fefc87c9e10a93d3a172850c26 drec_93 { letpair_res_1207 };
-          ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 letpair_res_1213;
+          ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 letpair_res_1213;
           {
             auto drec_fst_94 { std::get<0>(drec_93) };
             auto drec_snd_95 { std::get<1>(drec_93) };
-            ::dessser::gen::dashboard_widget::t416f15a8b2d514fc885764ab28b5e70f id_1214 { scale_of_row_binary(drec_snd_95) };
-            ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 letpair_res_1215;
+            ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 id_1214 { scale_of_row_binary(drec_snd_95) };
+            ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 letpair_res_1215;
             {
               auto drec_fst_97 { std::get<0>(id_1214) };
               auto drec_snd_98 { std::get<1>(id_1214) };
-              std::shared_ptr<::dessser::gen::dashboard_widget::axis>  id_1216 { std::make_shared<::dessser::gen::dashboard_widget::axis>(drec_fst_88, drec_fst_94, drec_fst_97) };
-              ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 id_1217 { id_1216, drec_snd_98 };
+              ::dessser::gen::dashboard_widget::axis id_1216 { drec_fst_88, drec_fst_94, drec_fst_97 };
+              ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 id_1217 { id_1216, drec_snd_98 };
               letpair_res_1215 = id_1217;
             }
             letpair_res_1213 = letpair_res_1215;
@@ -3370,16 +3370,16 @@ static std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915
    };
   return fun1197;
 }
-std::function<::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0(Pointer)> axis_of_row_binary(axis_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4(Pointer &)> axis_of_row_binary(axis_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
       (let "dsum1_63" (let-pair "du16_fst_58" "du16_snd_59" (read-u16 little-endian (param 0)) (make-tup (identifier "du16_fst_58") (identifier "du16_snd_59")))
         (let-pair "dsum1_fst_64" "dsum1_snd_65" (identifier "dsum1_63") (seq (assert (eq (identifier "dsum1_fst_64") (u16 0))) (make-tup (construct "[Plot Void]" 0 (nop)) (identifier "dsum1_snd_65"))))))
  */
-static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> type_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6(Pointer &)> type_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> fun1218 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6(Pointer &)> fun1218 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1219 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1220;
     {
@@ -3388,10 +3388,10 @@ static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f9
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1221 { du16_fst_58, du16_snd_59 };
       letpair_res_1220 = id_1221;
     }
-    ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 let_res_1222;
+    ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 let_res_1222;
     {
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 dsum1_63 { letpair_res_1220 };
-      ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 letpair_res_1223;
+      ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 letpair_res_1223;
       {
         auto dsum1_fst_64 { std::get<0>(dsum1_63) };
         auto dsum1_snd_65 { std::get<1>(dsum1_63) };
@@ -3400,8 +3400,8 @@ static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f9
         Void id_1226 { ((void)(assert(id_1225)), ::dessser::Void()) };
         (void)id_1226;
         (void)::dessser::Void();
-        std::shared_ptr<::dessser::gen::dashboard_widget::type>  id_1227 { std::make_shared<::dessser::gen::dashboard_widget::type>(std::in_place_index<0>, ::dessser::Void()) };
-        ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 id_1228 { id_1227, dsum1_snd_65 };
+        ::dessser::gen::dashboard_widget::type id_1227 { std::in_place_index<0>, ::dessser::Void() };
+        ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 id_1228 { id_1227, dsum1_snd_65 };
         letpair_res_1223 = id_1228;
       }
       let_res_1222 = letpair_res_1223;
@@ -3411,7 +3411,7 @@ static std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f9
    };
   return fun1218;
 }
-std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62(Pointer)> type_of_row_binary(type_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6(Pointer &)> type_of_row_binary(type_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3511,9 +3511,9 @@ std::function<::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e6
                         (identifier "drec_fst_245") (string "title") 
                         (identifier "drec_fst_242")) (identifier "dlist4_snd_295"))))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> chart_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f(Pointer &)> chart_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> fun1229 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f(Pointer &)> fun1229 { [&](Pointer p_0) {
     uint32_t id_1230 { 0U };
     Vec<1, uint32_t> id_1231 {  id_1230  };
     ::dessser::gen::dashboard_widget::t12fb9c475959b52bf7b17b155a955ffa let_res_1232;
@@ -3606,18 +3606,18 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
       }
       let_res_1271 = letpair_res_1272;
     }
-    ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc let_res_1277;
+    ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f let_res_1277;
     {
       ::dessser::gen::dashboard_widget::t13a07ee37ab40962540da8534858dc07 drec_241 { let_res_1271 };
-      ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc letpair_res_1278;
+      ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f letpair_res_1278;
       {
         auto drec_fst_242 { std::get<0>(drec_241) };
         auto drec_snd_243 { std::get<1>(drec_241) };
-        ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 id_1279 { type_of_row_binary(drec_snd_243) };
-        ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc let_res_1280;
+        ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 id_1279 { type_of_row_binary(drec_snd_243) };
+        ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f let_res_1280;
         {
-          ::dessser::gen::dashboard_widget::tf3a8910aed7f828bbd9860f996df6e62 drec_244 { id_1279 };
-          ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc letpair_res_1281;
+          ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 drec_244 { id_1279 };
+          ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f letpair_res_1281;
           {
             auto drec_fst_245 { std::get<0>(drec_244) };
             auto drec_snd_246 { std::get<1>(drec_244) };
@@ -3692,19 +3692,19 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
               }
               let_res_1284 = let_res_1287;
             }
-            ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a let_res_1322;
+            ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 let_res_1322;
             {
               ::dessser::gen::dashboard_widget::t491c44439106a32f896827242e8e76a1 dlist1_256 { let_res_1284 };
-              ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a letpair_res_1323;
+              ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 letpair_res_1323;
               {
                 auto dlist1_fst_257 { std::get<0>(dlist1_256) };
                 auto dlist1_snd_258 { std::get<1>(dlist1_256) };
-                Lst<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > endoflist_1324;
-                ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1325 { endoflist_1324, dlist1_snd_258 };
-                Vec<1, ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a> id_1326 {  id_1325  };
-                ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a let_res_1327;
+                Lst<::dessser::gen::dashboard_widget::axis> endoflist_1324;
+                ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 id_1325 { endoflist_1324, dlist1_snd_258 };
+                Vec<1, ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8> id_1326 {  id_1325  };
+                ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 let_res_1327;
                 {
-                  Vec<1, ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a> inits_src_ref_259 { id_1326 };
+                  Vec<1, ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8> inits_src_ref_259 { id_1326 };
                   int32_t id_1328 { 0L };
                   Vec<1, int32_t> id_1329 {  id_1328  };
                   {
@@ -3718,20 +3718,20 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                       while_flag_1330 = id_1334;
                       if (while_flag_1330) {
                         uint8_t id_1335 { 0 };
-                        ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1336 { inits_src_ref_259[id_1335] };
+                        ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 id_1336 { inits_src_ref_259[id_1335] };
                         {
-                          ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a dlist2_261 { id_1336 };
+                          ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 dlist2_261 { id_1336 };
                           {
                             auto dlist2_fst_262 { std::get<0>(dlist2_261) };
                             auto dlist2_snd_263 { std::get<1>(dlist2_261) };
                             uint8_t id_1337 { 0 };
-                            ::dessser::gen::dashboard_widget::t4c6caa6620f6f91a65b92915a2abd7f0 id_1338 { axis_of_row_binary(dlist2_snd_263) };
-                            ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a letpair_res_1339;
+                            ::dessser::gen::dashboard_widget::t9a8d4d78c988f5d0b49fc7d7daee92e4 id_1338 { axis_of_row_binary(dlist2_snd_263) };
+                            ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 letpair_res_1339;
                             {
                               auto dlist3_fst_265 { std::get<0>(id_1338) };
                               auto dlist3_snd_266 { std::get<1>(id_1338) };
-                              Lst<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_1340 { dlist3_fst_265, dlist2_fst_262 };
-                              ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1341 { id_1340, dlist3_snd_266 };
+                              Lst<::dessser::gen::dashboard_widget::axis> id_1340 { dlist3_fst_265, dlist2_fst_262 };
+                              ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 id_1341 { id_1340, dlist3_snd_266 };
                               letpair_res_1339 = id_1341;
                             }
                             Void id_1342 { ((void)(inits_src_ref_259[id_1337] = letpair_res_1339), ::dessser::Void()) };
@@ -3754,25 +3754,25 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                   }
                   (void)::dessser::Void();
                   uint8_t id_1349 { 0 };
-                  ::dessser::gen::dashboard_widget::t0de5f73fc4a6809d1f7fbc720887b84a id_1350 { inits_src_ref_259[id_1349] };
+                  ::dessser::gen::dashboard_widget::t4c3e9d1a56152b42310744919f17b6d8 id_1350 { inits_src_ref_259[id_1349] };
                   let_res_1327 = id_1350;
                 }
                 letpair_res_1323 = let_res_1327;
               }
               let_res_1322 = letpair_res_1323;
             }
-            ::dessser::gen::dashboard_widget::t2687f8ef0d45e37c74d267205343eb70 letpair_res_1351;
+            ::dessser::gen::dashboard_widget::t747bb378febaae5fd0b66480643426e2 letpair_res_1351;
             {
               auto dlist4_fst_268 { std::get<0>(let_res_1322) };
               auto dlist4_snd_269 { std::get<1>(let_res_1322) };
-              Arr<std::shared_ptr<::dessser::gen::dashboard_widget::axis> > id_1352 { dlist4_fst_268.toListRev() };
-              ::dessser::gen::dashboard_widget::t2687f8ef0d45e37c74d267205343eb70 id_1353 { id_1352, dlist4_snd_269 };
+              Arr<::dessser::gen::dashboard_widget::axis> id_1352 { dlist4_fst_268.toArrRev() };
+              ::dessser::gen::dashboard_widget::t747bb378febaae5fd0b66480643426e2 id_1353 { id_1352, dlist4_snd_269 };
               letpair_res_1351 = id_1353;
             }
-            ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc let_res_1354;
+            ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f let_res_1354;
             {
-              ::dessser::gen::dashboard_widget::t2687f8ef0d45e37c74d267205343eb70 drec_270 { letpair_res_1351 };
-              ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc letpair_res_1355;
+              ::dessser::gen::dashboard_widget::t747bb378febaae5fd0b66480643426e2 drec_270 { letpair_res_1351 };
+              ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f letpair_res_1355;
               {
                 auto drec_fst_271 { std::get<0>(drec_270) };
                 auto drec_snd_272 { std::get<1>(drec_270) };
@@ -3847,19 +3847,19 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                   }
                   let_res_1358 = let_res_1361;
                 }
-                ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 let_res_1396;
+                ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 let_res_1396;
                 {
                   ::dessser::gen::dashboard_widget::t491c44439106a32f896827242e8e76a1 dlist1_282 { let_res_1358 };
-                  ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 letpair_res_1397;
+                  ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 letpair_res_1397;
                   {
                     auto dlist1_fst_283 { std::get<0>(dlist1_282) };
                     auto dlist1_snd_284 { std::get<1>(dlist1_282) };
-                    Lst<std::shared_ptr<::dessser::gen::dashboard_widget::source> > endoflist_1398;
-                    ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1399 { endoflist_1398, dlist1_snd_284 };
-                    Vec<1, ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9> id_1400 {  id_1399  };
-                    ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 let_res_1401;
+                    Lst<::dessser::gen::dashboard_widget::source> endoflist_1398;
+                    ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 id_1399 { endoflist_1398, dlist1_snd_284 };
+                    Vec<1, ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0> id_1400 {  id_1399  };
+                    ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 let_res_1401;
                     {
-                      Vec<1, ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9> inits_src_ref_285 { id_1400 };
+                      Vec<1, ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0> inits_src_ref_285 { id_1400 };
                       int32_t id_1402 { 0L };
                       Vec<1, int32_t> id_1403 {  id_1402  };
                       {
@@ -3873,20 +3873,20 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                           while_flag_1404 = id_1408;
                           if (while_flag_1404) {
                             uint8_t id_1409 { 0 };
-                            ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1410 { inits_src_ref_285[id_1409] };
+                            ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 id_1410 { inits_src_ref_285[id_1409] };
                             {
-                              ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 dlist2_287 { id_1410 };
+                              ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 dlist2_287 { id_1410 };
                               {
                                 auto dlist2_fst_288 { std::get<0>(dlist2_287) };
                                 auto dlist2_snd_289 { std::get<1>(dlist2_287) };
                                 uint8_t id_1411 { 0 };
-                                ::dessser::gen::dashboard_widget::tca96cdae6bc4278a47336118841a27ae id_1412 { source_of_row_binary(dlist2_snd_289) };
-                                ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 letpair_res_1413;
+                                ::dessser::gen::dashboard_widget::t98c1df55b587e112639e677d8810f238 id_1412 { source_of_row_binary(dlist2_snd_289) };
+                                ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 letpair_res_1413;
                                 {
                                   auto dlist3_fst_291 { std::get<0>(id_1412) };
                                   auto dlist3_snd_292 { std::get<1>(id_1412) };
-                                  Lst<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_1414 { dlist3_fst_291, dlist2_fst_288 };
-                                  ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1415 { id_1414, dlist3_snd_292 };
+                                  Lst<::dessser::gen::dashboard_widget::source> id_1414 { dlist3_fst_291, dlist2_fst_288 };
+                                  ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 id_1415 { id_1414, dlist3_snd_292 };
                                   letpair_res_1413 = id_1415;
                                 }
                                 Void id_1416 { ((void)(inits_src_ref_285[id_1411] = letpair_res_1413), ::dessser::Void()) };
@@ -3909,20 +3909,20 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
                       }
                       (void)::dessser::Void();
                       uint8_t id_1423 { 0 };
-                      ::dessser::gen::dashboard_widget::teebceca4fff894920697f553a2c09cf9 id_1424 { inits_src_ref_285[id_1423] };
+                      ::dessser::gen::dashboard_widget::tddb6f2327241eb998908208af4a5b9a0 id_1424 { inits_src_ref_285[id_1423] };
                       let_res_1401 = id_1424;
                     }
                     letpair_res_1397 = let_res_1401;
                   }
                   let_res_1396 = letpair_res_1397;
                 }
-                ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc letpair_res_1425;
+                ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f letpair_res_1425;
                 {
                   auto dlist4_fst_294 { std::get<0>(let_res_1396) };
                   auto dlist4_snd_295 { std::get<1>(let_res_1396) };
-                  Arr<std::shared_ptr<::dessser::gen::dashboard_widget::source> > id_1426 { dlist4_fst_294.toListRev() };
-                  std::shared_ptr<::dessser::gen::dashboard_widget::chart>  id_1427 { std::make_shared<::dessser::gen::dashboard_widget::chart>(drec_fst_242, drec_fst_245, drec_fst_271, id_1426) };
-                  ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc id_1428 { id_1427, dlist4_snd_295 };
+                  Arr<::dessser::gen::dashboard_widget::source> id_1426 { dlist4_fst_294.toArrRev() };
+                  ::dessser::gen::dashboard_widget::chart id_1427 { drec_fst_242, drec_fst_245, drec_fst_271, id_1426 };
+                  ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f id_1428 { id_1427, dlist4_snd_295 };
                   letpair_res_1425 = id_1428;
                 }
                 letpair_res_1355 = letpair_res_1425;
@@ -3942,7 +3942,7 @@ static std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce
    };
   return fun1229;
 }
-std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc(Pointer)> chart_of_row_binary(chart_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f(Pointer &)> chart_of_row_binary(chart_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3976,9 +3976,9 @@ std::function<::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695c
                   (construct "[Text STRING | Chart (chart AS {title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]})]" 1
                     (identifier "dsum2_fst_309")) (identifier "dsum2_snd_310"))))))))
  */
-static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1429 { [&](Pointer p_0) {
+  std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> fun1429 { [&](Pointer p_0) {
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1430 { p_0.readU16Le() };
     ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 letpair_res_1431;
     {
@@ -3987,16 +3987,16 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 id_1432 { du16_fst_300, du16_snd_301 };
       letpair_res_1431 = id_1432;
     }
-    ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c let_res_1433;
+    ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 let_res_1433;
     {
       ::dessser::gen::dashboard_widget::ta97bb48ed75bbda6173555873826c8c6 dsum1_305 { letpair_res_1431 };
-      ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1434;
+      ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 letpair_res_1434;
       {
         auto dsum1_fst_306 { std::get<0>(dsum1_305) };
         auto dsum1_snd_307 { std::get<1>(dsum1_305) };
         uint16_t id_1435 { 0 };
         bool id_1436 { bool(id_1435 == dsum1_fst_306) };
-        ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c choose_res_1437;
+        ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 choose_res_1437;
         if (id_1436) {
           uint32_t id_1438 { 0U };
           Vec<1, uint32_t> id_1439 {  id_1438  };
@@ -4070,21 +4070,21 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
             }
             let_res_1440 = let_res_1443;
           }
-          ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c let_res_1479;
+          ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 let_res_1479;
           {
             ::dessser::gen::dashboard_widget::t12fb9c475959b52bf7b17b155a955ffa dstring1_317 { let_res_1440 };
-            ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1480;
+            ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 letpair_res_1480;
             {
               auto dstring1_fst_318 { std::get<0>(dstring1_317) };
               auto dstring1_snd_319 { std::get<1>(dstring1_317) };
               ::dessser::gen::dashboard_widget::t9ef6882174ae71a34a3c5ef6b29242fb id_1481 { dstring1_snd_319.readBytes(dstring1_fst_318) };
-              ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1482;
+              ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 letpair_res_1482;
               {
                 auto dstring2_fst_321 { std::get<0>(id_1481) };
                 auto dstring2_snd_322 { std::get<1>(id_1481) };
                 std::string id_1483 { dstring2_fst_321.toString() };
-                std::shared_ptr<::dessser::gen::dashboard_widget::t>  id_1484 { std::make_shared<::dessser::gen::dashboard_widget::t>(std::in_place_index<0>, id_1483) };
-                ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c id_1485 { id_1484, dstring2_snd_322 };
+                ::dessser::gen::dashboard_widget::t id_1484 { std::in_place_index<0>, id_1483 };
+                ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 id_1485 { id_1484, dstring2_snd_322 };
                 letpair_res_1482 = id_1485;
               }
               letpair_res_1480 = letpair_res_1482;
@@ -4097,13 +4097,13 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
           bool id_1487 { bool(dsum1_fst_306 == id_1486) };
           Void id_1488 { ((void)(assert(id_1487)), ::dessser::Void()) };
           (void)id_1488;
-          ::dessser::gen::dashboard_widget::t70bc3c9f630046e2593504ce8a2695cc id_1489 { chart_of_row_binary(dsum1_snd_307) };
-          ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1490;
+          ::dessser::gen::dashboard_widget::t62f7c15233495a7fd1923d1cb45a742f id_1489 { chart_of_row_binary(dsum1_snd_307) };
+          ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 letpair_res_1490;
           {
             auto dsum2_fst_309 { std::get<0>(id_1489) };
             auto dsum2_snd_310 { std::get<1>(id_1489) };
-            std::shared_ptr<::dessser::gen::dashboard_widget::t>  id_1491 { std::make_shared<::dessser::gen::dashboard_widget::t>(std::in_place_index<1>, dsum2_fst_309) };
-            ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c id_1492 { id_1491, dsum2_snd_310 };
+            ::dessser::gen::dashboard_widget::t id_1491 { std::in_place_index<1>, dsum2_fst_309 };
+            ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 id_1492 { id_1491, dsum2_snd_310 };
             letpair_res_1490 = id_1492;
           }
           choose_res_1437 = letpair_res_1490;
@@ -4117,20 +4117,20 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
    };
   return fun1429;
 }
-std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_327" "make_snd_328" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_327") (identifier "make_snd_328"))))
  */
-static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> fun1493 { [&](Pointer p_0) {
-    ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c id_1494 { of_row_binary(p_0) };
-    ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c letpair_res_1495;
+  std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> fun1493 { [&](Pointer p_0) {
+    ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 id_1494 { of_row_binary(p_0) };
+    ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 letpair_res_1495;
     {
       auto make_fst_327 { std::get<0>(id_1494) };
       auto make_snd_328 { std::get<1>(id_1494) };
-      ::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c id_1496 { make_fst_327, make_snd_328 };
+      ::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308 id_1496 { make_fst_327, make_snd_328 };
       letpair_res_1495 = id_1496;
     }
     return letpair_res_1495;
@@ -4138,22 +4138,22 @@ static std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f150
    };
   return fun1493;
 }
-std::function<::dessser::gen::dashboard_widget::tcedbe6db9a2ca1abdf03f15044f3916c(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::dashboard_widget::t02960804d32fdda6972311266df50308(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("[Text STRING | Chart (chart AS {title: STRING; type: (type AS [Plot Void]); axes: (axis AS {left: BOOL; force_zero: BOOL; scale: (scale AS [Linear Void | Logarithmic Void])})[]; sources: (source AS {name: $fq_function_name; visible: BOOL; fields: (field AS {opacity: FLOAT; color: U32; representation: (representation AS [Unused Void | Independent Void | Stacked Void | StackCentered Void]); column: STRING; factors: STRING[]; axis: U8})[]})[]})]" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> fun1497 { [&](std::shared_ptr<::dessser::gen::dashboard_widget::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> fun1497 { [&](::dessser::gen::dashboard_widget::t p_0, Pointer p_1) {
     Pointer id_1498 { to_row_binary(p_0, p_1) };
     return id_1498;
   }
    };
   return fun1497;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::dashboard_widget::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::dashboard_widget::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

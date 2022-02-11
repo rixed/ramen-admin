@@ -43,7 +43,7 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t,
                                        QWidget *parent) {
   using namespace dessser::gen::raql_type;
   AtomicWidget *editor = nullptr;
-  switch (t.type->index()) {
+  switch (t.type.index()) {
     case Void:
       editor = new KVoidEditor(parent);
       break;
@@ -139,24 +139,24 @@ AtomicWidget *newRaqlValueEditorWidget(dessser::gen::raql_type::t const &t,
       break;
     /* Compound types: */
     case Tup:
-      editor = new KTupEditor(std::get<Tup>(*t.type), parent);
+      editor = new KTupEditor(std::get<Tup>(t.type), parent);
       break;
     case Vec: {
-      auto const &vec{std::get<Vec>(*t.type)};
+      auto const &vec{std::get<Vec>(t.type)};
       editor = new KVecEditor(std::get<0>(vec), *std::get<1>(vec), parent);
       break;
     }
     case Arr:
-      editor = new KArrEditor(std::get<Arr>(*t.type), parent);
+      editor = new KArrEditor(std::get<Arr>(t.type), parent);
       break;
     case Rec:
-      editor = new KRecEditor(std::get<Rec>(*t.type), parent);
+      editor = new KRecEditor(std::get<Rec>(t.type), parent);
       break;
 
     default:
       qCritical()
           << "Not implemented: newRaqlValueEditorWidget for raql_type::base"
-          << *t.type;
+          << t.type;
   }
 
   if (t.nullable) editor = new KNullableEditor(editor);
@@ -292,9 +292,9 @@ AtomicWidget *newEditorWidget(
       editor = new RuntimeStatsViewer(parent);
       break;
     case dessser::gen::sync_value::DashboardWidget: {
-      std::shared_ptr<dessser::gen::dashboard_widget::t const> dash{
+      dessser::gen::dashboard_widget::t const &dash{
           std::get<dessser::gen::sync_value::DashboardWidget>(v)};
-      switch (dash->index()) {
+      switch (dash.index()) {
         case dessser::gen::dashboard_widget::Text:
           editor = new DashboardWidgetText(nullptr, parent);
           break;
@@ -302,7 +302,7 @@ AtomicWidget *newEditorWidget(
           editor = new TimeChartEditWidget(nullptr, nullptr, nullptr, parent);
           break;
         default:
-          qFatal("newEditorWidget: invalid dash->index()");
+          qFatal("newEditorWidget: invalid dash.index()");
           break;
       };
       break;

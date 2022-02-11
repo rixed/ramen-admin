@@ -47,18 +47,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t17783e9e04d504e04563e9d950fd4c39 : public std::tuple<
-  std::shared_ptr<::dessser::gen::field_type::t> ,
+struct t921535443ae57671142073d223933533 : public std::tuple<
+  ::dessser::gen::field_type::t,
   Pointer
 > {
   using tuple::tuple;
-  t17783e9e04d504e04563e9d950fd4c39(std::tuple<std::shared_ptr<::dessser::gen::field_type::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::field_type::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t921535443ae57671142073d223933533(std::tuple<::dessser::gen::field_type::t, Pointer> p)
+    : std::tuple<::dessser::gen::field_type::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t17783e9e04d504e04563e9d950fd4c39 const &a, t17783e9e04d504e04563e9d950fd4c39 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t921535443ae57671142073d223933533 const &a, t921535443ae57671142073d223933533 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t17783e9e04d504e04563e9d950fd4c39 const &a, t17783e9e04d504e04563e9d950fd4c39 const &b) {
+inline bool operator!=(t921535443ae57671142073d223933533 const &a, t921535443ae57671142073d223933533 const &b) {
   return !operator==(a, b);
 }
 struct t18cecf882d7ac80cef37dfe6b22279d4 : public std::tuple<
@@ -226,24 +226,24 @@ inline bool operator!=(ta18b971ad5bf537b68fb1bbf5fd2b926 const &a, ta18b971ad5bf
                     (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_123"))))) 
             (bytes-of-string (force (get-field "aggr" (param 0))))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> fun0 { [&](::dessser::gen::field_type::t p_0, Pointer p_1) {
     auto fun1 { dessser::gen::field_name::to_row_binary };
-    dessser::gen::field_name::t_ext id_2 { (*p_0).name };
+    dessser::gen::field_name::t_ext id_2 { p_0.name };
     Pointer id_3 { fun1(id_2, p_1) };
     Pointer let_res_4;
     {
       Pointer srec_dst_116 { id_3 };
       auto fun5 { dessser::gen::raql_type::to_row_binary };
-      dessser::gen::raql_type::t_ext id_6 { (*p_0).typ };
+      dessser::gen::raql_type::t_ext id_6 { p_0.typ };
       Pointer id_7 { fun5(id_6, srec_dst_116) };
       let_res_4 = id_7;
     }
     Pointer let_res_8;
     {
       Pointer srec_dst_117 { let_res_4 };
-      std::optional<dessser::gen::units::t_ext> id_9 { (*p_0).units };
+      std::optional<dessser::gen::units::t_ext> id_9 { p_0.units };
       bool id_10 { !(id_9.has_value ()) };
       Pointer choose_res_11;
       if (id_10) {
@@ -252,7 +252,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
         choose_res_11 = id_13;
       } else {
         auto fun14 { dessser::gen::units::to_row_binary };
-        std::optional<dessser::gen::units::t_ext> id_15 { (*p_0).units };
+        std::optional<dessser::gen::units::t_ext> id_15 { p_0.units };
         dessser::gen::units::t_ext id_16 { id_15.value() };
         uint8_t id_17 { 0 };
         Pointer id_18 { srec_dst_117.writeU8(id_17) };
@@ -264,7 +264,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
     Pointer let_res_20;
     {
       Pointer srec_dst_118 { let_res_8 };
-      std::string id_21 { (*p_0).doc };
+      std::string id_21 { p_0.doc };
       uint32_t id_22 { (uint32_t)id_21.size() };
       Vec<1, uint32_t> id_23 {  id_22  };
       Pointer let_res_24;
@@ -323,7 +323,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
         }
         let_res_24 = let_res_26;
       }
-      std::string id_58 { (*p_0).doc };
+      std::string id_58 { p_0.doc };
       Bytes id_59 { id_58 };
       Pointer id_60 { let_res_24.writeBytes(id_59) };
       let_res_20 = id_60;
@@ -331,7 +331,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
     Pointer let_res_61;
     {
       Pointer srec_dst_121 { let_res_20 };
-      std::optional<std::string> id_62 { (*p_0).aggr };
+      std::optional<std::string> id_62 { p_0.aggr };
       bool id_63 { !(id_62.has_value ()) };
       Pointer choose_res_64;
       if (id_63) {
@@ -339,7 +339,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
         Pointer id_66 { srec_dst_121.writeU8(id_65) };
         choose_res_64 = id_66;
       } else {
-        std::optional<std::string> id_67 { (*p_0).aggr };
+        std::optional<std::string> id_67 { p_0.aggr };
         std::string id_68 { id_67.value() };
         uint32_t id_69 { (uint32_t)id_68.size() };
         Vec<1, uint32_t> id_70 {  id_69  };
@@ -401,7 +401,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
           }
           let_res_71 = let_res_75;
         }
-        std::optional<std::string> id_107 { (*p_0).aggr };
+        std::optional<std::string> id_107 { p_0.aggr };
         std::string id_108 { id_107.value() };
         Bytes id_109 { id_108 };
         Pointer id_110 { let_res_71.writeBytes(id_109) };
@@ -414,7 +414,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Poi
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{name: $field_name; typ: $raql_type; units: $units?; doc: STRING; aggr: STRING?}")
@@ -445,17 +445,17 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> 
                 (size-of-u32 (string-length (force (get-field "aggr" (param 0))))))) 
             (size 1)))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::field_type::t &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> fun111 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0) {
+  std::function<Size(::dessser::gen::field_type::t &)> fun111 { [&](::dessser::gen::field_type::t p_0) {
     auto fun112 { dessser::gen::field_name::sersize_of_row_binary };
-    dessser::gen::field_name::t_ext id_113 { (*p_0).name };
+    dessser::gen::field_name::t_ext id_113 { p_0.name };
     Size id_114 { fun112(id_113) };
     Size let_res_115;
     {
       Size sz_106 { id_114 };
       auto fun116 { dessser::gen::raql_type::sersize_of_row_binary };
-      dessser::gen::raql_type::t_ext id_117 { (*p_0).typ };
+      dessser::gen::raql_type::t_ext id_117 { p_0.typ };
       Size id_118 { fun116(id_117) };
       Size id_119 { Size(sz_106 + id_118) };
       let_res_115 = id_119;
@@ -463,7 +463,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
     Size let_res_120;
     {
       Size sz_107 { let_res_115 };
-      std::optional<dessser::gen::units::t_ext> id_121 { (*p_0).units };
+      std::optional<dessser::gen::units::t_ext> id_121 { p_0.units };
       bool id_122 { !(id_121.has_value ()) };
       Size choose_res_123;
       if (id_122) {
@@ -472,7 +472,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
         choose_res_123 = id_125;
       } else {
         auto fun126 { dessser::gen::units::sersize_of_row_binary };
-        std::optional<dessser::gen::units::t_ext> id_127 { (*p_0).units };
+        std::optional<dessser::gen::units::t_ext> id_127 { p_0.units };
         dessser::gen::units::t_ext id_128 { id_127.value() };
         Size id_129 { fun126(id_128) };
         Size id_130 { Size(sz_107 + id_129) };
@@ -485,7 +485,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
     Size let_res_133;
     {
       Size sz_108 { let_res_120 };
-      std::string id_134 { (*p_0).doc };
+      std::string id_134 { p_0.doc };
       uint32_t id_135 { (uint32_t)id_134.size() };
       Vec<1, uint32_t> id_136 {  id_135  };
       Size let_res_137;
@@ -524,7 +524,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
         }
         let_res_137 = let_res_140;
       }
-      std::string id_158 { (*p_0).doc };
+      std::string id_158 { p_0.doc };
       uint32_t id_159 { (uint32_t)id_158.size() };
       Size id_160 { Size(id_159) };
       Size id_161 { Size(let_res_137 + id_160) };
@@ -534,7 +534,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
     Size let_res_163;
     {
       Size sz_112 { let_res_133 };
-      std::optional<std::string> id_164 { (*p_0).aggr };
+      std::optional<std::string> id_164 { p_0.aggr };
       bool id_165 { !(id_164.has_value ()) };
       Size choose_res_166;
       if (id_165) {
@@ -542,7 +542,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
         Size id_168 { Size(sz_112 + id_167) };
         choose_res_166 = id_168;
       } else {
-        std::optional<std::string> id_169 { (*p_0).aggr };
+        std::optional<std::string> id_169 { p_0.aggr };
         std::string id_170 { id_169.value() };
         uint32_t id_171 { (uint32_t)id_170.size() };
         Vec<1, uint32_t> id_172 {  id_171  };
@@ -582,7 +582,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
           }
           let_res_173 = let_res_176;
         }
-        std::optional<std::string> id_194 { (*p_0).aggr };
+        std::optional<std::string> id_194 { p_0.aggr };
         std::string id_195 { id_194.value() };
         uint32_t id_196 { (uint32_t)id_195.size() };
         Size id_197 { Size(id_196) };
@@ -599,7 +599,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sers
    };
   return fun111;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::field_type::t &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -665,24 +665,24 @@ std::function<Size(std::shared_ptr<::dessser::gen::field_type::t> )> sersize_of_
                             (string "name") (identifier "drec_fst_58")) 
                           (identifier "drec_snd_101"))))))))))))
  */
-static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun202 { [&](Pointer p_0) {
+  std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> fun202 { [&](Pointer p_0) {
     auto fun203 { dessser::gen::field_name::of_row_binary };
     ::dessser::gen::field_type::t18cecf882d7ac80cef37dfe6b22279d4 id_204 { fun203(p_0) };
-    ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 let_res_205;
+    ::dessser::gen::field_type::t921535443ae57671142073d223933533 let_res_205;
     {
       ::dessser::gen::field_type::t18cecf882d7ac80cef37dfe6b22279d4 drec_57 { id_204 };
-      ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_206;
+      ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_206;
       {
         auto drec_fst_58 { std::get<0>(drec_57) };
         auto drec_snd_59 { std::get<1>(drec_57) };
         auto fun207 { dessser::gen::raql_type::of_row_binary };
         ::dessser::gen::field_type::t101502ffd7fb38beafe4b49259f92ba1 id_208 { fun207(drec_snd_59) };
-        ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 let_res_209;
+        ::dessser::gen::field_type::t921535443ae57671142073d223933533 let_res_209;
         {
           ::dessser::gen::field_type::t101502ffd7fb38beafe4b49259f92ba1 drec_60 { id_208 };
-          ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_210;
+          ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_210;
           {
             auto drec_fst_61 { std::get<0>(drec_60) };
             auto drec_snd_62 { std::get<1>(drec_60) };
@@ -712,10 +712,10 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
               }
               choose_res_215 = letpair_res_224;
             }
-            ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 let_res_227;
+            ::dessser::gen::field_type::t921535443ae57671142073d223933533 let_res_227;
             {
               ::dessser::gen::field_type::t096d6a0956a2df6dec7d0945ab177a4b drec_66 { choose_res_215 };
-              ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_228;
+              ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_228;
               {
                 auto drec_fst_67 { std::get<0>(drec_66) };
                 auto drec_snd_68 { std::get<1>(drec_66) };
@@ -811,10 +811,10 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
                   }
                   let_res_270 = letpair_res_271;
                 }
-                ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 let_res_276;
+                ::dessser::gen::field_type::t921535443ae57671142073d223933533 let_res_276;
                 {
                   ::dessser::gen::field_type::t13a07ee37ab40962540da8534858dc07 drec_81 { let_res_270 };
-                  ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_277;
+                  ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_277;
                   {
                     auto drec_fst_82 { std::get<0>(drec_81) };
                     auto drec_snd_83 { std::get<1>(drec_81) };
@@ -927,12 +927,12 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
                       }
                       choose_res_282 = let_res_330;
                     }
-                    ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_337;
+                    ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_337;
                     {
                       auto drec_fst_100 { std::get<0>(choose_res_282) };
                       auto drec_snd_101 { std::get<1>(choose_res_282) };
-                      std::shared_ptr<::dessser::gen::field_type::t>  id_338 { std::make_shared<::dessser::gen::field_type::t>(drec_fst_58, drec_fst_61, drec_fst_67, drec_fst_82, drec_fst_100) };
-                      ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 id_339 { id_338, drec_snd_101 };
+                      ::dessser::gen::field_type::t id_338 { drec_fst_58, drec_fst_61, drec_fst_67, drec_fst_82, drec_fst_100 };
+                      ::dessser::gen::field_type::t921535443ae57671142073d223933533 id_339 { id_338, drec_snd_101 };
                       letpair_res_337 = id_339;
                     }
                     letpair_res_277 = letpair_res_337;
@@ -956,20 +956,20 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
    };
   return fun202;
 }
-std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_103" "make_snd_104" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_103") (identifier "make_snd_104"))))
  */
-static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> fun340 { [&](Pointer p_0) {
-    ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 id_341 { of_row_binary(p_0) };
-    ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 letpair_res_342;
+  std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> fun340 { [&](Pointer p_0) {
+    ::dessser::gen::field_type::t921535443ae57671142073d223933533 id_341 { of_row_binary(p_0) };
+    ::dessser::gen::field_type::t921535443ae57671142073d223933533 letpair_res_342;
     {
       auto make_fst_103 { std::get<0>(id_341) };
       auto make_snd_104 { std::get<1>(id_341) };
-      ::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39 id_343 { make_fst_103, make_snd_104 };
+      ::dessser::gen::field_type::t921535443ae57671142073d223933533 id_343 { make_fst_103, make_snd_104 };
       letpair_res_342 = id_343;
     }
     return letpair_res_342;
@@ -977,21 +977,21 @@ static std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c
    };
   return fun340;
 }
-std::function<::dessser::gen::field_type::t17783e9e04d504e04563e9d950fd4c39(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::field_type::t921535443ae57671142073d223933533(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{name: $field_name; typ: $raql_type; units: $units?; doc: STRING; aggr: STRING?}" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> fun344 { [&](std::shared_ptr<::dessser::gen::field_type::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> fun344 { [&](::dessser::gen::field_type::t p_0, Pointer p_1) {
     Pointer id_345 { to_row_binary(p_0, p_1) };
     return id_345;
   }
    };
   return fun344;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::field_type::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::field_type::t &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

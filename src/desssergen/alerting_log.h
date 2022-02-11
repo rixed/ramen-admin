@@ -165,21 +165,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &v) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const v) { os << *v; return os; }
 
-struct te9c1cd78a0ebfca77aef3940bddf8190 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alerting_log::t> ,
+struct t5155edc4207df08099702763ed6a6662 : public std::tuple<
+  ::dessser::gen::alerting_log::t,
   Pointer
 > {
   using tuple::tuple;
-  te9c1cd78a0ebfca77aef3940bddf8190(std::tuple<std::shared_ptr<::dessser::gen::alerting_log::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alerting_log::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t5155edc4207df08099702763ed6a6662(std::tuple<::dessser::gen::alerting_log::t, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_log::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(te9c1cd78a0ebfca77aef3940bddf8190 const &a, te9c1cd78a0ebfca77aef3940bddf8190 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t5155edc4207df08099702763ed6a6662 const &a, t5155edc4207df08099702763ed6a6662 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(te9c1cd78a0ebfca77aef3940bddf8190 const &a, te9c1cd78a0ebfca77aef3940bddf8190 const &b) {
+inline bool operator!=(t5155edc4207df08099702763ed6a6662 const &a, t5155edc4207df08099702763ed6a6662 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, te9c1cd78a0ebfca77aef3940bddf8190 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t5155edc4207df08099702763ed6a6662 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -187,18 +187,18 @@ inline std::ostream &operator<<(std::ostream &os, te9c1cd78a0ebfca77aef3940bddf8
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<te9c1cd78a0ebfca77aef3940bddf8190> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5155edc4207df08099702763ed6a6662> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::alerting_log::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::alerting_log::te9c1cd78a0ebfca77aef3940bddf8190(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_log::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::alerting_log::t const &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::alerting_log::t const &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::alerting_log::t5155edc4207df08099702763ed6a6662(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::alerting_log::t5155edc4207df08099702763ed6a6662(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::alerting_log::t const &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

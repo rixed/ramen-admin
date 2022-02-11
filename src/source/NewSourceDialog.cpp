@@ -70,7 +70,7 @@ void NewSourceDialog::createSource() {
 
   std::shared_ptr<dessser::gen::sync_key::t const> key{
       keyOfSrcPath(nameEdit->text().toStdString(), extension)};
-  Menu::getClient()->sendNew(key, val);
+  Menu::getClient()->sendNew(*key, *val);
 
   clear();
   QDialog::accept();

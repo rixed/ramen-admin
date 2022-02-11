@@ -4,6 +4,7 @@
 #include <QAbstractTableModel>
 #include <QStringList>
 #include <memory>
+#include <optional>
 #include <string>
 
 #include "desssergen/dashboard_widget.h"
@@ -20,8 +21,8 @@ class TimeChartFunctionFieldsModel : public QAbstractTableModel {
 
   /* Returns a R-O pointer to the known configuration for that field, or
    * null: */
-  std::shared_ptr<dessser::gen::dashboard_widget::field const>
-  findFieldConfiguration(std::string const &field_name) const;
+  dessser::gen::dashboard_widget::field const *findFieldConfiguration(
+      std::string const &field_name) const;
 
   /* Returns a copy of the stored Column in source or a fresh default value
    * if there is no stored configuration for that field yet. */
@@ -29,8 +30,7 @@ class TimeChartFunctionFieldsModel : public QAbstractTableModel {
 
   /* Same as above, but returns the value from the configuration (and add it if
    * needed) */
-  std::shared_ptr<dessser::gen::dashboard_widget::field> findFieldConfiguration(
-      int);
+  dessser::gen::dashboard_widget::field *findFieldConfiguration(int);
 
  public:
   /* Used to answer data(), can be changed at any time.

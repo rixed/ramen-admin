@@ -16,8 +16,8 @@ bool isDashboardKey(dessser::gen::sync_key::t const &key) {
     return true;
   } else if (key.index() == dessser::gen::sync_key::PerClient) {
     auto const &per_client{std::get<dessser::gen::sync_key::PerClient>(key)};
-    if (*Menu::getClient()->syncSocket == *std::get<0>(per_client) &&
-        std::get<1>(per_client)->index() == dessser::gen::sync_key::Scratchpad)
+    if (*Menu::getClient()->syncSocket == std::get<0>(per_client) &&
+        std::get<1>(per_client).index() == dessser::gen::sync_key::Scratchpad)
       return true;
   }
 
@@ -30,8 +30,8 @@ std::string const dashboardNameOfKey(dessser::gen::sync_key::t const &key) {
     return std::get<0>(dashboards);
   } else if (key.index() == dessser::gen::sync_key::PerClient) {
     auto const &per_client{std::get<dessser::gen::sync_key::PerClient>(key)};
-    if (*Menu::getClient()->syncSocket == *std::get<0>(per_client) &&
-        std::get<1>(per_client)->index() == dessser::gen::sync_key::Scratchpad)
+    if (*Menu::getClient()->syncSocket == std::get<0>(per_client) &&
+        std::get<1>(per_client).index() == dessser::gen::sync_key::Scratchpad)
       return SCRATCHPAD;
   }
 
@@ -52,12 +52,11 @@ void iterDashboards(std::function<void(std::string const &)> f) {
       case dessser::gen::sync_key::PerClient: {
         auto const &per_client{
             std::get<dessser::gen::sync_key::PerClient>(*key)};
-        std::shared_ptr<dessser::gen::sync_socket::t const> sock{
-            std::get<0>(per_client)};
-        if (*sock != *Menu::getClient()->syncSocket) break;
-        std::shared_ptr<dessser::gen::sync_key::per_client const>
-            per_client_data{std::get<1>(per_client)};
-        if (per_client_data->index() != dessser::gen::sync_key::Scratchpad)
+        dessser::gen::sync_socket::t const &sock{std::get<0>(per_client)};
+        if (sock != *Menu::getClient()->syncSocket) break;
+        dessser::gen::sync_key::per_client const &per_client_data{
+            std::get<1>(per_client)};
+        if (per_client_data.index() != dessser::gen::sync_key::Scratchpad)
           break;
         to_visit = key;
       } break;
@@ -96,11 +95,11 @@ std::optional<uint32_t> widgetIndexOfKey(dessser::gen::sync_key::t const &key) {
   switch (key.index()) {
     case dessser::gen::sync_key::PerClient: {
       auto const &per_client{std::get<dessser::gen::sync_key::PerClient>(key)};
-      std::shared_ptr<dessser::gen::sync_key::per_client const> per_client_data{
+      dessser::gen::sync_key::per_client const &per_client_data{
           std::get<1>(per_client)};
-      if (per_client_data->index() != dessser::gen::sync_key::Scratchpad) break;
+      if (per_client_data.index() != dessser::gen::sync_key::Scratchpad) break;
       per_dash_key =
-          std::get<dessser::gen::sync_key::Scratchpad>(*per_client_data);
+          std::get<dessser::gen::sync_key::Scratchpad>(per_client_data);
     } break;
     case dessser::gen::sync_key::Dashboards: {
       auto const &per_dash{std::get<dessser::gen::sync_key::Dashboards>(key)};
@@ -135,15 +134,14 @@ void iterDashboardWidgets(
             dash_name)) {  // Skip all keys but widgets from the scratchpad:
       if (key->index() != dessser::gen::sync_key::PerClient) continue;
       auto const &per_client{std::get<dessser::gen::sync_key::PerClient>(*key)};
-      std::shared_ptr<dessser::gen::sync_socket::t const> sock{
-          std::get<0>(per_client)};
-      if (*sock != *Menu::getClient()->syncSocket) continue;
-      std::shared_ptr<dessser::gen::sync_key::per_client const> per_client_data{
+      dessser::gen::sync_socket::t const &sock{std::get<0>(per_client)};
+      if (sock != *Menu::getClient()->syncSocket) continue;
+      dessser::gen::sync_key::per_client const &per_client_data{
           std::get<1>(per_client)};
-      if (per_client_data->index() != dessser::gen::sync_key::Scratchpad)
+      if (per_client_data.index() != dessser::gen::sync_key::Scratchpad)
         continue;
       per_dash_key =
-          std::get<dessser::gen::sync_key::Scratchpad>(*per_client_data);
+          std::get<dessser::gen::sync_key::Scratchpad>(per_client_data);
     } else {  // Skip all keys but that dashboard widgets:
       if (key->index() != dessser::gen::sync_key::Dashboards) continue;
       auto const &per_dash{std::get<dessser::gen::sync_key::Dashboards>(*key)};
@@ -189,11 +187,10 @@ std::shared_ptr<dessser::gen::sync_key::t> dashboardNextWidget(
   if (isScratchpad(dash_name)) {
     return std::make_shared<dessser::gen::sync_key::t>(
         std::in_place_index<dessser::gen::sync_key::PerClient>,
-        std::const_pointer_cast<dessser::gen::sync_socket::t>(
-            Menu::getClient()->syncSocket),
-        std::make_shared<dessser::gen::sync_key::per_client>(
+        *Menu::getClient()->syncSocket,
+        dessser::gen::sync_key::per_client{
             std::in_place_index<dessser::gen::sync_key::Scratchpad>,
-            per_dash_key));
+            per_dash_key});
   } else {
     return std::make_shared<dessser::gen::sync_key::t>(
         std::in_place_index<dessser::gen::sync_key::Dashboards>, dash_name,

@@ -59,31 +59,31 @@ bool RuntimeStatsViewer::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::runtime_stats::t> s{
+  dessser::gen::runtime_stats::t const &s{
       std::get<dessser::gen::sync_value::RuntimeStats>(*v)};
 
-#define SET_DATE(var) var->setText(stringOfDate(s->var))
+#define SET_DATE(var) var->setText(stringOfDate(s.var))
   SET_DATE(stats_time);
   SET_DATE(first_startup);
   SET_DATE(last_startup);
 #define SET_OPT_DATE(var) \
-  var->setText(s->var.has_value() ? stringOfDate(*s->var) : "n.a.")
+  var->setText(s.var.has_value() ? stringOfDate(*s.var) : "n.a.")
   SET_OPT_DATE(min_etime);
   SET_OPT_DATE(max_etime);
   SET_OPT_DATE(first_input);
   SET_OPT_DATE(last_input);
   SET_OPT_DATE(first_output);
   SET_OPT_DATE(last_output);
-#define SET_NUM(var) var->setText(QString::number(s->var))
+#define SET_NUM(var) var->setText(QString::number(s.var))
   SET_NUM(tot_in_tuples);
   SET_NUM(tot_sel_tuples);
   SET_NUM(tot_out_filtered);
   SET_NUM(tot_out_tuples);
   SET_NUM(tot_out_errs);
-  if (s->tot_full_bytes_samples > 0) {
-    double avg{(double)s->tot_full_bytes / s->tot_full_bytes_samples};
+  if (s.tot_full_bytes_samples > 0) {
+    double avg{(double)s.tot_full_bytes / s.tot_full_bytes_samples};
     avg_full_bytes->setText(QString::number(avg) + QString(" (from ") +
-                            QString::number(s->tot_full_bytes_samples) +
+                            QString::number(s.tot_full_bytes_samples) +
                             QString(" samples)"));
   } else {
     avg_full_bytes->setText("no samples");

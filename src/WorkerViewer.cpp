@@ -81,34 +81,34 @@ bool WorkerViewer::setValue(
   emptyLayout(parents);
 
   if (v->index() == dessser::gen::sync_value::Worker) {
-    std::shared_ptr<dessser::gen::worker::t const> w{
+    dessser::gen::worker::t const &w{
         std::get<dessser::gen::sync_value::Worker>(*v)};
 
-    enabled->setChecked(w->enabled);
-    debug->setChecked(w->debug);
-    used->setChecked(w->is_used);
-    reportPeriod->setText(stringOfDuration(w->report_period));
-    cwd->setText(QString::fromStdString(w->cwd));
-    workerSign->setText(QString::fromStdString(w->worker_signature));
-    binSign->setText(QString::fromStdString(w->info_signature));
-    role->setText(qstringOfRole(*w));
-    if (w->params.size() == 0) {
+    enabled->setChecked(w.enabled);
+    debug->setChecked(w.debug);
+    used->setChecked(w.is_used);
+    reportPeriod->setText(stringOfDuration(w.report_period));
+    cwd->setText(QString::fromStdString(w.cwd));
+    workerSign->setText(QString::fromStdString(w.worker_signature));
+    binSign->setText(QString::fromStdString(w.info_signature));
+    role->setText(qstringOfRole(w));
+    if (w.params.size() == 0) {
       QLabel *none = new QLabel("<i>" + tr("none") + "</i>");
       none->setAlignment(Qt::AlignCenter);
       params->addRow(none);
     } else {
-      for (auto &p : w->params) {
+      for (auto &p : w.params) {
         params->addRow(QString::fromStdString(std::get<0>(p)) + QString(":"),
                        new QLabel(raqlValToQString(*std::get<1>(p))));
       }
     }
-    if (!w->parents || w->parents->size() == 0) {
+    if (!w.parents || w.parents->size() == 0) {
       QLabel *none = new QLabel("<i>" + tr("none") + "</i>");
       none->setAlignment(Qt::AlignCenter);
       parents->addWidget(none);
     } else {
-      for (auto const &p : *w->parents) {
-        QLabel *l{new QLabel(qstringOfRef(*p))};
+      for (auto const &p : *w.parents) {
+        QLabel *l{new QLabel(qstringOfRef(p))};
         l->setAlignment(Qt::AlignCenter);
         parents->addWidget(l);
       }

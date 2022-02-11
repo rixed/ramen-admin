@@ -81,8 +81,7 @@ extern std::string const respKeyPrefix;
 extern std::shared_ptr<dessser::gen::raql_value::t const> const vnull;
 extern std::shared_ptr<dessser::gen::sync_value::t const> const nullVal;
 extern std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig;
-extern std::shared_ptr<dessser::gen::dashboard_widget::type const> const
-    chartPlotType;
+extern dessser::gen::dashboard_widget::type const chartPlotType;
 
 // All but vectors, lists, tuples, records, sum types
 bool isScalar(dessser::gen::raql_type::t const &);
@@ -114,8 +113,8 @@ std::shared_ptr<dessser::gen::raql_value::t const> columnValue(
 std::optional<double> toDouble(dessser::gen::raql_value::t const &);
 std::optional<double> toDouble(dessser::gen::raql_expr::t const &);
 
-// Returns the compiled function, or nullptr:
-std::shared_ptr<dessser::gen::source_info::compiled_program const>
+// Returns the compiled function, or nullopt:
+std::optional<dessser::gen::source_info::compiled_program const>
 getCompiledProgram(dessser::gen::sync_value::t const &);
 
 // Returns the source path and extension of the source which key is given
@@ -145,9 +144,10 @@ std::shared_ptr<dessser::gen::sync_value::t> makeReplayRequest(
     std::shared_ptr<dessser::gen::sync_key::t const> respKey,
     bool explain = false);
 
-// Returns the TargetConfig value, or nullptr:
-dessser::Arr<std::shared_ptr<dessser::gen::rc_entry::t> > const *
-getTargetConfig(dessser::gen::sync_value::t const &);
+/* Returns the TargetConfig value (from within the passed sync_value), or
+ * nullptr: */
+dessser::Arr<dessser::gen::rc_entry::t> const *getTargetConfig(
+    dessser::gen::sync_value::t const &);
 
 /* Returns the string representation of that value (the optional key gives a
  * hint about the type of conversion desired) */

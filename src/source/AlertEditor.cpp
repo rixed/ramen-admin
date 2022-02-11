@@ -370,17 +370,17 @@ bool AlertEditor::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::alert::t> alert{
+  dessser::gen::alert::t const &alert{
       std::get<dessser::gen::sync_value::Alert>(*v)};
 
   /* Source:
    * Look for the name "$table/$column" and select it, but
    * also save the table and column names in case they are not
    * known (for instance if the program is not running (yet)). */
-  table = alert->table;
-  column = alert->column;
+  table = alert.table;
+  column = alert.column;
   NamesTree *model{static_cast<NamesTree *>(source->model())};
-  std::string const path{alert->table + "/" + alert->column};
+  std::string const path{alert.table + "/" + alert.column};
   QModelIndex index{model->find(path)};
   if (index.isValid()) {
     source->setCurrentIndex(index);
@@ -396,28 +396,28 @@ bool AlertEditor::setValue(
       qDebug() << "Cannot find field" << QString::fromStdString(path);
     inexistantSourceError->setText(
         tr("Field %1/%2 does not exist")
-            .arg(QString::fromStdString(alert->table),
-                 QString::fromStdString(alert->column)));
+            .arg(QString::fromStdString(alert.table),
+                 QString::fromStdString(alert.column)));
     inexistantSourceError->show();
   }
 
-  isEnabled->setChecked(alert->enabled);
+  isEnabled->setChecked(alert.enabled);
 
-  if (alert->where.empty()) {
+  if (alert.where.empty()) {
     where->clear();
   } else {
     // TODO: support multiple where/having
-    where->setValue(*alert->where[0]);
+    where->setValue(alert.where[0]);
   }
 
-  _groupBy = alert->group_by;
+  _groupBy = alert.group_by;  // FIXME: unused?!
   QItemSelectionModel *selModel{groupBy->selectionModel()};
   selModel->clearSelection();
-  if (alert->group_by) {
+  if (alert.group_by) {
     autoGroupBy->setChecked(false);
     toggleAutoGroupBy(Qt::Unchecked);
     QStringList const fields{tableFields->stringList()};
-    for (std::string const &s_ : *(alert->group_by)) {
+    for (std::string const &s_ : *alert.group_by) {
       QString const s{QString::fromStdString(s_)};
       qsizetype const row{fields.indexOf(s)};
       if (row >= 0) {
@@ -432,46 +432,46 @@ bool AlertEditor::setValue(
   }
   updateGroupByLabel();
 
-  if (alert->having.empty()) {
+  if (alert.having.empty()) {
     having->clear();
   } else {
-    having->setValue(*alert->having[0]);
+    having->setValue(alert.having[0]);
   }
 
   // FIXME: threshold can optionally be a baseline now:
-  if (alert->threshold->index() == dessser::gen::alert::Constant) {
-    double const t{std::get<dessser::gen::alert::Constant>(*alert->threshold)};
+  if (alert.threshold.index() == dessser::gen::alert::Constant) {
+    double const t{std::get<dessser::gen::alert::Constant>(alert.threshold)};
     threshold->setText(QString::number(t));
-    recovery->setText(QString::number(t + alert->hysteresis));
+    recovery->setText(QString::number(t + alert.hysteresis));
   } else {
-    threshold->setText("TODO");  // QString::number(alert->threshold));
+    threshold->setText("TODO");  // QString::number(alert.threshold));
     recovery->setText("TODO");
   }
 
-  duration->setText(QString::number(alert->duration));
+  duration->setText(QString::number(alert.duration));
 
-  percentage->setText(QString::number(100. * alert->ratio));
+  percentage->setText(QString::number(100. * alert.ratio));
 
-  timeStep->setText(alert->time_step > 0 ? QString::number(alert->time_step)
-                                         : QString());
+  timeStep->setText(alert.time_step > 0 ? QString::number(alert.time_step)
+                                        : QString());
 
-  id->setText(QString::fromStdString(alert->id));
+  id->setText(QString::fromStdString(alert.id));
 
-  descTitle->setText(QString::fromStdString(alert->desc_title));
+  descTitle->setText(QString::fromStdString(alert.desc_title));
 
-  descFiring->setText(QString::fromStdString(alert->desc_firing));
+  descFiring->setText(QString::fromStdString(alert.desc_firing));
 
-  descRecovery->setText(QString::fromStdString(alert->desc_recovery));
+  descRecovery->setText(QString::fromStdString(alert.desc_recovery));
 
-  if (alert->tops.empty()) {
+  if (alert.tops.empty()) {
     top->clear();
   } else {
-    top->setText(QString::fromStdString(alert->tops[0]));
+    top->setText(QString::fromStdString(alert.tops[0]));
   }
-  if (alert->carry_fields.empty()) {
+  if (alert.carry_fields.empty()) {
     carryFields->clear();
   } else {
-    carryFields->setText(QString::fromStdString(alert->carry_fields[0]));
+    carryFields->setText(QString::fromStdString(alert.carry_fields[0]));
   }
 
   return true;
@@ -527,36 +527,32 @@ std::shared_ptr<dessser::gen::sync_value::t const> AlertEditor::getValue()
   if (!carryFields->text().isEmpty())
     tops = dessser::Arr<std::string>{top->text().toStdString()};
 
-  dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> > where_;
+  dessser::Arr<dessser::gen::simple_filter::t> where_;
   if (!where->isEmpty() && where->hasValidInput())
-    where_ = dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> >{
-        where->getValue()};
+    where_ = dessser::Arr<dessser::gen::simple_filter::t>{*where->getValue()};
 
-  dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> > having_;
+  dessser::Arr<dessser::gen::simple_filter::t> having_;
   if (!having->isEmpty() && having->hasValidInput())
-    having_ = dessser::Arr<std::shared_ptr<dessser::gen::simple_filter::t> >{
-        having->getValue()};
+    having_ = dessser::Arr<dessser::gen::simple_filter::t>{*having->getValue()};
 
-  dessser::Arr<std::shared_ptr<dessser::gen::alert::constant> > carry_csts_{};
+  dessser::Arr<dessser::gen::alert::constant> carry_csts_{};
 
   double const threshold_val{threshold->text().toDouble()};
   double const recovery_val{recovery->text().toDouble() - threshold_val};
 
-  std::shared_ptr<dessser::gen::alert::t> alert{
-      std::make_shared<dessser::gen::alert::t>(
+  return std::make_shared<dessser::gen::sync_value::t const>(
+      std::in_place_index<dessser::gen::sync_value::Alert>,
+      dessser::gen::alert::t{
           getTable(), column, isEnabled->isChecked(), where_, getGroupBy(),
           having_,
-          std::make_shared<dessser::gen::alert::threshold>(
+          dessser::gen::alert::threshold{
               std::in_place_index<dessser::gen::alert::Constant>,
-              threshold_val),
+              threshold_val},
           recovery_val, duration->text().toDouble(),
           0.01 * percentage->text().toDouble(), timeStep->text().toDouble(),
           tops, carry_fields, carry_csts_, id->text().toStdString(),
           descTitle->text().toStdString(), descFiring->text().toStdString(),
-          descRecovery->text().toStdString())};
-
-  return std::make_shared<dessser::gen::sync_value::t const>(
-      std::in_place_index<dessser::gen::sync_value::Alert>, alert);
+          descRecovery->text().toStdString()});
 }
 
 /* This is called each time we change or set the source to some value: */

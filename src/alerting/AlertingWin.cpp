@@ -200,10 +200,10 @@ void AlertingWin::addTeamEntry(dessser::gen::sync_key::t const &k) {
   QMenu *team_menu{
       findOrCreateTeamMenuEntry(QString::fromStdString(team.name))->menu()};
 
-  switch (team.info->index()) {
+  switch (team.info.index()) {
     case dessser::gen::sync_key::Contacts: {
       std::string const &contact_name{
-          std::get<dessser::gen::sync_key::Contacts>(*team.info)};
+          std::get<dessser::gen::sync_key::Contacts>(team.info)};
       /* Make sure this contact name is in the team submenu */
       findOrCreateContactMenuEntry(team_menu, QString::fromStdString(team.name),
                                    QString::fromStdString(contact_name));
@@ -211,7 +211,7 @@ void AlertingWin::addTeamEntry(dessser::gen::sync_key::t const &k) {
     }
     case dessser::gen::sync_key::Inhibition: {
       std::string const &inhibition_name{
-          std::get<dessser::gen::sync_key::Inhibition>(*team.info)};
+          std::get<dessser::gen::sync_key::Inhibition>(team.info)};
       /* Make sure this inhibition name is in the team submenu */
       findOrCreateInhibitionMenuEntry(team_menu,
                                       QString::fromStdString(team.name),
@@ -238,16 +238,15 @@ void AlertingWin::newTeam(int result) {
   std::shared_ptr<dessser::gen::sync_key::t const> k{
       keyOfTeamContact(name.toStdString(), std::string("default"))};
 
-  std::shared_ptr<dessser::gen::sync_value::t const> v{
-      std::make_shared<dessser::gen::sync_value::t>(
-          std::in_place_index<dessser::gen::sync_value::AlertingContact>,
-          std::make_shared<dessser::gen::alerting_contact::t>(
-              std::make_shared<dessser::gen::alerting_contact::via>(
-                  std::in_place_index<dessser::gen::alerting_contact::Ignore>,
-                  dessser::Void()),
-              0.))};
+  dessser::gen::sync_value::t const v{
+      std::in_place_index<dessser::gen::sync_value::AlertingContact>,
+      dessser::gen::alerting_contact::t{
+          dessser::gen::alerting_contact::via{
+              std::in_place_index<dessser::gen::alerting_contact::Ignore>,
+              dessser::Void()},
+          0.}};
 
-  Menu::getClient()->sendNew(k, v);
+  Menu::getClient()->sendNew(*k, v);
 }
 
 void AlertingWin::newContact(int result) {
@@ -264,7 +263,7 @@ void AlertingWin::newContact(int result) {
   std::shared_ptr<dessser::gen::sync_value::t const> v{
       newContactDialog->getValue()};
 
-  Menu::getClient()->sendNew(k, v);
+  Menu::getClient()->sendNew(*k, *v);
 }
 
 void AlertingWin::newInhibition(int result) {
@@ -281,5 +280,5 @@ void AlertingWin::newInhibition(int result) {
   std::shared_ptr<dessser::gen::sync_value::t const> v{
       newInhibitionDialog->getValue()};
 
-  Menu::getClient()->sendNew(k, v);
+  Menu::getClient()->sendNew(*k, *v);
 }

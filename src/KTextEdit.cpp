@@ -100,26 +100,26 @@ void KTextEdit::resetAnnotations() {
     return;
 
   auto const &detail{
-      std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val)->detail};
+      std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val).detail};
   QVector<CodeEdit::Annotation> annotations;
   switch (detail.index()) {
     case dessser::gen::source_info::Compiled:
       for (auto const &err :
-           std::get<dessser::gen::source_info::Compiled>(detail)->warnings) {
-        if (err->line) {
+           std::get<dessser::gen::source_info::Compiled>(detail).warnings) {
+        if (err.line) {
           annotations.append(CodeEdit::Annotation{
-              (int)*err->line, err->column ? (int)*err->column : -1, false,
-              QString::fromStdString(err->message)});
+              (int)*err.line, err.column ? (int)*err.column : -1, false,
+              QString::fromStdString(err.message)});
         }
       }
       break;
     case dessser::gen::source_info::Failed:
       for (auto const &err :
            std::get<dessser::gen::source_info::Failed>(detail).errors) {
-        if (err->line) {
+        if (err.line) {
           annotations.append(CodeEdit::Annotation{
-              (int)*err->line, err->column ? (int)*err->column : -1, true,
-              QString::fromStdString(err->message)});
+              (int)*err.line, err.column ? (int)*err.column : -1, true,
+              QString::fromStdString(err.message)});
         }
       }
       break;

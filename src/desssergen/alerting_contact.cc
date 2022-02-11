@@ -96,30 +96,30 @@ inline bool operator!=(via const &a, via const &b) {
   return !operator==(a, b);
 }
 struct t {
-  std::shared_ptr<::dessser::gen::alerting_contact::via>  via;
+  ::dessser::gen::alerting_contact::via via;
   double timeout;
-  t(std::shared_ptr<::dessser::gen::alerting_contact::via>  via_, double timeout_) : via(via_), timeout(timeout_) {}
+  t(::dessser::gen::alerting_contact::via via_, double timeout_) : via(via_), timeout(timeout_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
-  return (*a.via) == (*b.via) && a.timeout == b.timeout;
+  return a.via == b.via && a.timeout == b.timeout;
 }
 
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct t4f2037d06e9b8c11be7f16b6ac8dd523 : public std::tuple<
-  std::shared_ptr<::dessser::gen::alerting_contact::via> ,
+struct ted05cba1f8f5a8627f66e87a358c029b : public std::tuple<
+  ::dessser::gen::alerting_contact::via,
   Pointer
 > {
   using tuple::tuple;
-  t4f2037d06e9b8c11be7f16b6ac8dd523(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::via> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  ted05cba1f8f5a8627f66e87a358c029b(std::tuple<::dessser::gen::alerting_contact::via, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_contact::via, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(ted05cba1f8f5a8627f66e87a358c029b const &a, ted05cba1f8f5a8627f66e87a358c029b const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t4f2037d06e9b8c11be7f16b6ac8dd523 const &a, t4f2037d06e9b8c11be7f16b6ac8dd523 const &b) {
+inline bool operator!=(ted05cba1f8f5a8627f66e87a358c029b const &a, ted05cba1f8f5a8627f66e87a358c029b const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -220,18 +220,18 @@ inline bool operator==(t0ec843672514be25b144f299b8cb3149 const &a, t0ec843672514
 inline bool operator!=(t0ec843672514be25b144f299b8cb3149 const &a, t0ec843672514be25b144f299b8cb3149 const &b) {
   return !operator==(a, b);
 }
-struct tf575ebd2244aa6b126ef4291c9e6f8ae : public std::tuple<
-  std::shared_ptr<::dessser::gen::alerting_contact::t> ,
+struct t4dd2ce6c858fde4b72fd30927a9bfbe9 : public std::tuple<
+  ::dessser::gen::alerting_contact::t,
   Pointer
 > {
   using tuple::tuple;
-  tf575ebd2244aa6b126ef4291c9e6f8ae(std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::alerting_contact::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t4dd2ce6c858fde4b72fd30927a9bfbe9(std::tuple<::dessser::gen::alerting_contact::t, Pointer> p)
+    : std::tuple<::dessser::gen::alerting_contact::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(t4dd2ce6c858fde4b72fd30927a9bfbe9 const &a, t4dd2ce6c858fde4b72fd30927a9bfbe9 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf575ebd2244aa6b126ef4291c9e6f8ae const &a, tf575ebd2244aa6b126ef4291c9e6f8ae const &b) {
+inline bool operator!=(t4dd2ce6c858fde4b72fd30927a9bfbe9 const &a, t4dd2ce6c858fde4b72fd30927a9bfbe9 const &b) {
   return !operator==(a, b);
 }
 struct td2cd337bb3c8bc04d5603393d084985b : public std::tuple<
@@ -423,27 +423,27 @@ inline bool operator!=(td2cd337bb3c8bc04d5603393d084985b const &a, td2cd337bb3c8
                               (nop)) (unsafe-nth (u8 0) (identifier "leb128_ptr_316"))))) 
                       (bytes-of-string (get-field "text" (get-alt "Kafka" (param 0)))))))))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> via_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_contact::via const &,Pointer &)> via_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::alerting_contact::via>  p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t((*p_0).index()) };
+  std::function<Pointer(::dessser::gen::alerting_contact::via const &,Pointer &)> fun0 { [&](::dessser::gen::alerting_contact::via p_0, Pointer p_1) {
+    uint16_t id_1 { uint16_t(p_0.index()) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_298 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t((*p_0).index()) };
+      uint16_t id_5 { uint16_t(p_0.index()) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_298;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t((*p_0).index()) };
+        uint16_t id_9 { uint16_t(p_0.index()) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
-          std::string id_12 { std::get<1 /* Exec */>((*p_0)) };
+          std::string id_12 { std::get<1 /* Exec */>(p_0) };
           uint32_t id_13 { (uint32_t)id_12.size() };
           Vec<1, uint32_t> id_14 {  id_13  };
           Pointer let_res_15;
@@ -502,17 +502,17 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
             }
             let_res_15 = let_res_17;
           }
-          std::string id_49 { std::get<1 /* Exec */>((*p_0)) };
+          std::string id_49 { std::get<1 /* Exec */>(p_0) };
           Bytes id_50 { id_49 };
           Pointer id_51 { let_res_15.writeBytes(id_50) };
           choose_res_11 = id_51;
         } else {
           uint16_t id_52 { 2 };
-          uint16_t id_53 { uint16_t((*p_0).index()) };
+          uint16_t id_53 { uint16_t(p_0.index()) };
           bool id_54 { bool(id_52 == id_53) };
           Pointer choose_res_55;
           if (id_54) {
-            std::string id_56 { std::get<2 /* SysLog */>((*p_0)) };
+            std::string id_56 { std::get<2 /* SysLog */>(p_0) };
             uint32_t id_57 { (uint32_t)id_56.size() };
             Vec<1, uint32_t> id_58 {  id_57  };
             Pointer let_res_59;
@@ -571,17 +571,17 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               }
               let_res_59 = let_res_61;
             }
-            std::string id_93 { std::get<2 /* SysLog */>((*p_0)) };
+            std::string id_93 { std::get<2 /* SysLog */>(p_0) };
             Bytes id_94 { id_93 };
             Pointer id_95 { let_res_59.writeBytes(id_94) };
             choose_res_55 = id_95;
           } else {
             uint16_t id_96 { 3 };
-            uint16_t id_97 { uint16_t((*p_0).index()) };
+            uint16_t id_97 { uint16_t(p_0.index()) };
             bool id_98 { bool(id_96 == id_97) };
             Pointer choose_res_99;
             if (id_98) {
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_100 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_100 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_101 { id_100.file };
               uint32_t id_102 { (uint32_t)id_101.size() };
               Vec<1, uint32_t> id_103 {  id_102  };
@@ -641,14 +641,14 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                 }
                 let_res_104 = let_res_106;
               }
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_138 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_138 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_139 { id_138.file };
               Bytes id_140 { id_139 };
               Pointer id_141 { let_res_104.writeBytes(id_140) };
               Pointer let_res_142;
               {
                 Pointer srec_dst_319 { id_141 };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_143 { std::get<3 /* Sqlite */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_143 { std::get<3 /* Sqlite */>(p_0) };
                 std::string id_144 { id_143.insert };
                 uint32_t id_145 { (uint32_t)id_144.size() };
                 Vec<1, uint32_t> id_146 {  id_145  };
@@ -708,7 +708,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                   }
                   let_res_147 = let_res_149;
                 }
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_181 { std::get<3 /* Sqlite */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_181 { std::get<3 /* Sqlite */>(p_0) };
                 std::string id_182 { id_181.insert };
                 Bytes id_183 { id_182 };
                 Pointer id_184 { let_res_147.writeBytes(id_183) };
@@ -717,7 +717,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               Pointer let_res_185;
               {
                 Pointer srec_dst_322 { let_res_142 };
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_186 { std::get<3 /* Sqlite */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_186 { std::get<3 /* Sqlite */>(p_0) };
                 std::string id_187 { id_186.create };
                 uint32_t id_188 { (uint32_t)id_187.size() };
                 Vec<1, uint32_t> id_189 {  id_188  };
@@ -777,7 +777,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                   }
                   let_res_190 = let_res_192;
                 }
-                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_224 { std::get<3 /* Sqlite */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_224 { std::get<3 /* Sqlite */>(p_0) };
                 std::string id_225 { id_224.create };
                 Bytes id_226 { id_225 };
                 Pointer id_227 { let_res_190.writeBytes(id_226) };
@@ -785,12 +785,12 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               }
               choose_res_99 = let_res_185;
             } else {
-              uint16_t id_228 { uint16_t((*p_0).index()) };
+              uint16_t id_228 { uint16_t(p_0.index()) };
               uint16_t id_229 { 4 };
               bool id_230 { bool(id_228 == id_229) };
               Void id_231 { ((void)(assert(id_230)), ::dessser::Void()) };
               (void)id_231;
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_232 { std::get<4 /* Kafka */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_232 { std::get<4 /* Kafka */>(p_0) };
               Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_233 { id_232.options };
               uint32_t id_234 { id_233.size() };
               Vec<1, uint32_t> id_235 {  id_234  };
@@ -859,7 +859,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                 Pointer let_res_274;
                 {
                   Vec<1, int32_t> n_ref_302 { id_273 };
-                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_275 { std::get<4 /* Kafka */>((*p_0)) };
+                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_275 { std::get<4 /* Kafka */>(p_0) };
                   Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_276 { id_275.options };
                   for (::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 const &x_303 : id_276) {
                     uint8_t id_277 { 0 };
@@ -1020,7 +1020,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               Pointer let_res_371;
               {
                 Pointer srec_dst_310 { let_res_271 };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_372 { std::get<4 /* Kafka */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_372 { std::get<4 /* Kafka */>(p_0) };
                 std::string id_373 { id_372.topic };
                 uint32_t id_374 { (uint32_t)id_373.size() };
                 Vec<1, uint32_t> id_375 {  id_374  };
@@ -1080,7 +1080,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                   }
                   let_res_376 = let_res_378;
                 }
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_410 { std::get<4 /* Kafka */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_410 { std::get<4 /* Kafka */>(p_0) };
                 std::string id_411 { id_410.topic };
                 Bytes id_412 { id_411 };
                 Pointer id_413 { let_res_376.writeBytes(id_412) };
@@ -1089,7 +1089,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               Pointer let_res_414;
               {
                 Pointer srec_dst_313 { let_res_371 };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_415 { std::get<4 /* Kafka */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_415 { std::get<4 /* Kafka */>(p_0) };
                 uint16_t id_416 { id_415.partition };
                 Pointer id_417 { srec_dst_313.writeU16Le(id_416) };
                 let_res_414 = id_417;
@@ -1097,7 +1097,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
               Pointer let_res_418;
               {
                 Pointer srec_dst_314 { let_res_414 };
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_419 { std::get<4 /* Kafka */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_419 { std::get<4 /* Kafka */>(p_0) };
                 std::string id_420 { id_419.text };
                 uint32_t id_421 { (uint32_t)id_420.size() };
                 Vec<1, uint32_t> id_422 {  id_421  };
@@ -1157,7 +1157,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
                   }
                   let_res_423 = let_res_425;
                 }
-                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_457 { std::get<4 /* Kafka */>((*p_0)) };
+                ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_457 { std::get<4 /* Kafka */>(p_0) };
                 std::string id_458 { id_457.text };
                 Bytes id_459 { id_458 };
                 Pointer id_460 { let_res_423.writeBytes(id_459) };
@@ -1178,21 +1178,21 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::v
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::via> ,Pointer)> via_to_row_binary(via_to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_contact::via const &,Pointer &)> via_to_row_binary(via_to_row_binary_init());
 
 /* 
     (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}" "Ptr")
       (let "srec_dst_329" (apply (identifier "via-to-row-binary") (get-field "via" (param 0)) (param 1)) (write-u64 little-endian (identifier "srec_dst_329") (u64-of-float (get-field "timeout" (param 0))))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun461 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
-    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_462 { (*p_0).via };
+  std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> fun461 { [&](::dessser::gen::alerting_contact::t p_0, Pointer p_1) {
+    ::dessser::gen::alerting_contact::via id_462 { p_0.via };
     Pointer id_463 { via_to_row_binary(id_462, p_1) };
     Pointer let_res_464;
     {
       Pointer srec_dst_329 { id_463 };
-      double id_465 { (*p_0).timeout };
+      double id_465 { p_0.timeout };
       uint64_t id_466 { qword_of_float(id_465) };
       Pointer id_467 { srec_dst_329.writeU64Le(id_466) };
       let_res_464 = id_467;
@@ -1202,7 +1202,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t
    };
   return fun461;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("[Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]")
@@ -1319,11 +1319,11 @@ std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Poin
                             (size-of-u32 (unsafe-nth (u8 0) (identifier "lebsz_ref_276")))))) 
                       (size-of-u32 (string-length (get-field "text" (get-alt "Kafka" (param 0))))))))))))))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> via_sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::alerting_contact::via const &)> via_sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> fun468 { [&](std::shared_ptr<::dessser::gen::alerting_contact::via>  p_0) {
+  std::function<Size(::dessser::gen::alerting_contact::via const &)> fun468 { [&](::dessser::gen::alerting_contact::via p_0) {
     uint16_t id_469 { 0 };
-    uint16_t id_470 { uint16_t((*p_0).index()) };
+    uint16_t id_470 { uint16_t(p_0.index()) };
     bool id_471 { bool(id_469 == id_470) };
     Size choose_res_472;
     if (id_471) {
@@ -1331,12 +1331,12 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
       choose_res_472 = id_473;
     } else {
       uint16_t id_474 { 1 };
-      uint16_t id_475 { uint16_t((*p_0).index()) };
+      uint16_t id_475 { uint16_t(p_0.index()) };
       bool id_476 { bool(id_474 == id_475) };
       Size choose_res_477;
       if (id_476) {
         Size id_478 { 2UL };
-        std::string id_479 { std::get<1 /* Exec */>((*p_0)) };
+        std::string id_479 { std::get<1 /* Exec */>(p_0) };
         uint32_t id_480 { (uint32_t)id_479.size() };
         Vec<1, uint32_t> id_481 {  id_480  };
         Size let_res_482;
@@ -1375,7 +1375,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
           }
           let_res_482 = let_res_485;
         }
-        std::string id_503 { std::get<1 /* Exec */>((*p_0)) };
+        std::string id_503 { std::get<1 /* Exec */>(p_0) };
         uint32_t id_504 { (uint32_t)id_503.size() };
         Size id_505 { Size(id_504) };
         Size id_506 { Size(let_res_482 + id_505) };
@@ -1383,12 +1383,12 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
         choose_res_477 = id_507;
       } else {
         uint16_t id_508 { 2 };
-        uint16_t id_509 { uint16_t((*p_0).index()) };
+        uint16_t id_509 { uint16_t(p_0.index()) };
         bool id_510 { bool(id_508 == id_509) };
         Size choose_res_511;
         if (id_510) {
           Size id_512 { 2UL };
-          std::string id_513 { std::get<2 /* SysLog */>((*p_0)) };
+          std::string id_513 { std::get<2 /* SysLog */>(p_0) };
           uint32_t id_514 { (uint32_t)id_513.size() };
           Vec<1, uint32_t> id_515 {  id_514  };
           Size let_res_516;
@@ -1427,7 +1427,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             }
             let_res_516 = let_res_519;
           }
-          std::string id_537 { std::get<2 /* SysLog */>((*p_0)) };
+          std::string id_537 { std::get<2 /* SysLog */>(p_0) };
           uint32_t id_538 { (uint32_t)id_537.size() };
           Size id_539 { Size(id_538) };
           Size id_540 { Size(let_res_516 + id_539) };
@@ -1435,12 +1435,12 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
           choose_res_511 = id_541;
         } else {
           uint16_t id_542 { 3 };
-          uint16_t id_543 { uint16_t((*p_0).index()) };
+          uint16_t id_543 { uint16_t(p_0.index()) };
           bool id_544 { bool(id_542 == id_543) };
           Size choose_res_545;
           if (id_544) {
             Size id_546 { 2UL };
-            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_547 { std::get<3 /* Sqlite */>((*p_0)) };
+            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_547 { std::get<3 /* Sqlite */>(p_0) };
             std::string id_548 { id_547.file };
             uint32_t id_549 { (uint32_t)id_548.size() };
             Vec<1, uint32_t> id_550 {  id_549  };
@@ -1480,7 +1480,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
               }
               let_res_551 = let_res_554;
             }
-            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_572 { std::get<3 /* Sqlite */>((*p_0)) };
+            ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_572 { std::get<3 /* Sqlite */>(p_0) };
             std::string id_573 { id_572.file };
             uint32_t id_574 { (uint32_t)id_573.size() };
             Size id_575 { Size(id_574) };
@@ -1489,7 +1489,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             Size let_res_578;
             {
               Size sz_281 { id_577 };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_579 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_579 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_580 { id_579.insert };
               uint32_t id_581 { (uint32_t)id_580.size() };
               Vec<1, uint32_t> id_582 {  id_581  };
@@ -1529,7 +1529,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                 }
                 let_res_583 = let_res_586;
               }
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_604 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_604 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_605 { id_604.insert };
               uint32_t id_606 { (uint32_t)id_605.size() };
               Size id_607 { Size(id_606) };
@@ -1540,7 +1540,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             Size let_res_610;
             {
               Size sz_285 { let_res_578 };
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_611 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_611 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_612 { id_611.create };
               uint32_t id_613 { (uint32_t)id_612.size() };
               Vec<1, uint32_t> id_614 {  id_613  };
@@ -1580,7 +1580,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                 }
                 let_res_615 = let_res_618;
               }
-              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_636 { std::get<3 /* Sqlite */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_636 { std::get<3 /* Sqlite */>(p_0) };
               std::string id_637 { id_636.create };
               uint32_t id_638 { (uint32_t)id_637.size() };
               Size id_639 { Size(id_638) };
@@ -1590,13 +1590,13 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             }
             choose_res_545 = let_res_610;
           } else {
-            uint16_t id_642 { uint16_t((*p_0).index()) };
+            uint16_t id_642 { uint16_t(p_0.index()) };
             uint16_t id_643 { 4 };
             bool id_644 { bool(id_642 == id_643) };
             Void id_645 { ((void)(assert(id_644)), ::dessser::Void()) };
             (void)id_645;
             Size id_646 { 2UL };
-            ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_647 { std::get<4 /* Kafka */>((*p_0)) };
+            ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_647 { std::get<4 /* Kafka */>(p_0) };
             Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_648 { id_647.options };
             uint32_t id_649 { id_648.size() };
             Vec<1, uint32_t> id_650 {  id_649  };
@@ -1647,7 +1647,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                 Vec<1, int32_t> repeat_n_259 { id_676 };
                 bool while_flag_677 { true };
                 do {
-                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_678 { std::get<4 /* Kafka */>((*p_0)) };
+                  ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_678 { std::get<4 /* Kafka */>(p_0) };
                   Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_679 { id_678.options };
                   uint32_t id_680 { id_679.size() };
                   int32_t id_681 { int32_t(id_680) };
@@ -1664,7 +1664,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                       Size sz_260 { id_687 };
                       uint8_t id_689 { 0 };
                       int32_t id_690 { repeat_n_259[id_689] };
-                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_691 { std::get<4 /* Kafka */>((*p_0)) };
+                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_691 { std::get<4 /* Kafka */>(p_0) };
                       Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_692 { id_691.options };
                       ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_693 { id_692[id_690] };
                       std::string id_694 { std::get<0>(id_693) };
@@ -1721,7 +1721,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                       Size sz_264 { let_res_688 };
                       uint8_t id_723 { 0 };
                       int32_t id_724 { repeat_n_259[id_723] };
-                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_725 { std::get<4 /* Kafka */>((*p_0)) };
+                      ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_725 { std::get<4 /* Kafka */>(p_0) };
                       Lst<::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463> id_726 { id_725.options };
                       ::dessser::gen::alerting_contact::t720047405469e43c41ae902df9d2c463 id_727 { id_726[id_724] };
                       std::string id_728 { std::get<1>(id_727) };
@@ -1795,7 +1795,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             Size let_res_765;
             {
               Size sz_268 { let_res_674 };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_766 { std::get<4 /* Kafka */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_766 { std::get<4 /* Kafka */>(p_0) };
               std::string id_767 { id_766.topic };
               uint32_t id_768 { (uint32_t)id_767.size() };
               Vec<1, uint32_t> id_769 {  id_768  };
@@ -1835,7 +1835,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                 }
                 let_res_770 = let_res_773;
               }
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_791 { std::get<4 /* Kafka */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_791 { std::get<4 /* Kafka */>(p_0) };
               std::string id_792 { id_791.topic };
               uint32_t id_793 { (uint32_t)id_792.size() };
               Size id_794 { Size(id_793) };
@@ -1848,7 +1848,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
             Size let_res_799;
             {
               Size sz_273 { id_798 };
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_800 { std::get<4 /* Kafka */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_800 { std::get<4 /* Kafka */>(p_0) };
               std::string id_801 { id_800.text };
               uint32_t id_802 { (uint32_t)id_801.size() };
               Vec<1, uint32_t> id_803 {  id_802  };
@@ -1888,7 +1888,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
                 }
                 let_res_804 = let_res_807;
               }
-              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_825 { std::get<4 /* Kafka */>((*p_0)) };
+              ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_825 { std::get<4 /* Kafka */>(p_0) };
               std::string id_826 { id_825.text };
               uint32_t id_827 { (uint32_t)id_826.size() };
               Size id_828 { Size(id_827) };
@@ -1909,16 +1909,16 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via>
    };
   return fun468;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::via> )> via_sersize_of_row_binary(via_sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::alerting_contact::via const &)> via_sersize_of_row_binary(via_sersize_of_row_binary_init());
 
 /* 
     (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}")
       (add (apply (identifier "via-sersize-of-row-binary") (get-field "via" (param 0))) (size 8)))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::alerting_contact::t const &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> fun831 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0) {
-    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_832 { (*p_0).via };
+  std::function<Size(::dessser::gen::alerting_contact::t const &)> fun831 { [&](::dessser::gen::alerting_contact::t p_0) {
+    ::dessser::gen::alerting_contact::via id_832 { p_0.via };
     Size id_833 { via_sersize_of_row_binary(id_832) };
     Size id_834 { 8UL };
     Size id_835 { Size(id_833 + id_834) };
@@ -1927,7 +1927,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )
    };
   return fun831;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::alerting_contact::t const &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -2189,9 +2189,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::alerting_contact::t> )> sersi
                                             (string "options") (identifier "drec_fst_120"))) 
                                         (identifier "dstring2_snd_154")))))))))))))))))))
  */
-static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> via_of_row_binary_init()
+static std::function<::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b(Pointer &)> via_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> fun836 { [&](Pointer p_0) {
+  std::function<::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b(Pointer &)> fun836 { [&](Pointer p_0) {
     ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_837 { p_0.readU16Le() };
     ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 letpair_res_838;
     {
@@ -2200,25 +2200,25 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
       ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_839 { du16_fst_58, du16_snd_59 };
       letpair_res_838 = id_839;
     }
-    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_840;
+    ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_840;
     {
       ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 dsum1_63 { letpair_res_838 };
-      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_841;
+      ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_841;
       {
         auto dsum1_fst_64 { std::get<0>(dsum1_63) };
         auto dsum1_snd_65 { std::get<1>(dsum1_63) };
         uint16_t id_842 { 0 };
         bool id_843 { bool(id_842 == dsum1_fst_64) };
-        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_844;
+        ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b choose_res_844;
         if (id_843) {
           (void)::dessser::Void();
-          std::shared_ptr<::dessser::gen::alerting_contact::via>  id_845 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<0>, ::dessser::Void()) };
-          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_846 { id_845, dsum1_snd_65 };
+          ::dessser::gen::alerting_contact::via id_845 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_846 { id_845, dsum1_snd_65 };
           choose_res_844 = id_846;
         } else {
           uint16_t id_847 { 1 };
           bool id_848 { bool(id_847 == dsum1_fst_64) };
-          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_849;
+          ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b choose_res_849;
           if (id_848) {
             uint32_t id_850 { 0U };
             Vec<1, uint32_t> id_851 {  id_850  };
@@ -2292,21 +2292,21 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
               }
               let_res_852 = let_res_855;
             }
-            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_891;
+            ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_891;
             {
               ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_230 { let_res_852 };
-              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_892;
+              ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_892;
               {
                 auto dstring1_fst_231 { std::get<0>(dstring1_230) };
                 auto dstring1_snd_232 { std::get<1>(dstring1_230) };
                 ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_893 { dstring1_snd_232.readBytes(dstring1_fst_231) };
-                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_894;
+                ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_894;
                 {
                   auto dstring2_fst_234 { std::get<0>(id_893) };
                   auto dstring2_snd_235 { std::get<1>(id_893) };
                   std::string id_895 { dstring2_fst_234.toString() };
-                  std::shared_ptr<::dessser::gen::alerting_contact::via>  id_896 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<1>, id_895) };
-                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_897 { id_896, dstring2_snd_235 };
+                  ::dessser::gen::alerting_contact::via id_896 { std::in_place_index<1>, id_895 };
+                  ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_897 { id_896, dstring2_snd_235 };
                   letpair_res_894 = id_897;
                 }
                 letpair_res_892 = letpair_res_894;
@@ -2317,7 +2317,7 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
           } else {
             uint16_t id_898 { 2 };
             bool id_899 { bool(id_898 == dsum1_fst_64) };
-            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_900;
+            ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b choose_res_900;
             if (id_899) {
               uint32_t id_901 { 0U };
               Vec<1, uint32_t> id_902 {  id_901  };
@@ -2391,21 +2391,21 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                 }
                 let_res_903 = let_res_906;
               }
-              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_942;
+              ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_942;
               {
                 ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_215 { let_res_903 };
-                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_943;
+                ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_943;
                 {
                   auto dstring1_fst_216 { std::get<0>(dstring1_215) };
                   auto dstring1_snd_217 { std::get<1>(dstring1_215) };
                   ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_944 { dstring1_snd_217.readBytes(dstring1_fst_216) };
-                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_945;
+                  ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_945;
                   {
                     auto dstring2_fst_219 { std::get<0>(id_944) };
                     auto dstring2_snd_220 { std::get<1>(id_944) };
                     std::string id_946 { dstring2_fst_219.toString() };
-                    std::shared_ptr<::dessser::gen::alerting_contact::via>  id_947 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<2>, id_946) };
-                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_948 { id_947, dstring2_snd_220 };
+                    ::dessser::gen::alerting_contact::via id_947 { std::in_place_index<2>, id_946 };
+                    ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_948 { id_947, dstring2_snd_220 };
                     letpair_res_945 = id_948;
                   }
                   letpair_res_943 = letpair_res_945;
@@ -2416,7 +2416,7 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
             } else {
               uint16_t id_949 { 3 };
               bool id_950 { bool(id_949 == dsum1_fst_64) };
-              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 choose_res_951;
+              ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b choose_res_951;
               if (id_950) {
                 uint32_t id_952 { 0U };
                 Vec<1, uint32_t> id_953 {  id_952  };
@@ -2510,10 +2510,10 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                   }
                   let_res_993 = letpair_res_994;
                 }
-                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_999;
+                ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_999;
                 {
                   ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_173 { let_res_993 };
-                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1000;
+                  ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1000;
                   {
                     auto drec_fst_174 { std::get<0>(drec_173) };
                     auto drec_snd_175 { std::get<1>(drec_173) };
@@ -2609,10 +2609,10 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                       }
                       let_res_1042 = letpair_res_1043;
                     }
-                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1048;
+                    ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1048;
                     {
                       ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_188 { let_res_1042 };
-                      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1049;
+                      ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1049;
                       {
                         auto drec_fst_189 { std::get<0>(drec_188) };
                         auto drec_snd_190 { std::get<1>(drec_188) };
@@ -2688,22 +2688,22 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                           }
                           let_res_1052 = let_res_1055;
                         }
-                        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1091;
+                        ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1091;
                         {
                           ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_197 { let_res_1052 };
-                          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1092;
+                          ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1092;
                           {
                             auto dstring1_fst_198 { std::get<0>(dstring1_197) };
                             auto dstring1_snd_199 { std::get<1>(dstring1_197) };
                             ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1093 { dstring1_snd_199.readBytes(dstring1_fst_198) };
-                            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1094;
+                            ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1094;
                             {
                               auto dstring2_fst_201 { std::get<0>(id_1093) };
                               auto dstring2_snd_202 { std::get<1>(id_1093) };
                               std::string id_1095 { dstring2_fst_201.toString() };
                               ::dessser::gen::alerting_contact::t2295780c8d3630e8bc9d277e6fa82e3b id_1096 { drec_fst_174, drec_fst_189, id_1095 };
-                              std::shared_ptr<::dessser::gen::alerting_contact::via>  id_1097 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<3>, id_1096) };
-                              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1098 { id_1097, dstring2_snd_202 };
+                              ::dessser::gen::alerting_contact::via id_1097 { std::in_place_index<3>, id_1096 };
+                              ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_1098 { id_1097, dstring2_snd_202 };
                               letpair_res_1094 = id_1098;
                             }
                             letpair_res_1092 = letpair_res_1094;
@@ -3059,10 +3059,10 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                   ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 id_1266 { dlist4_fst_117, dlist4_snd_118 };
                   letpair_res_1265 = id_1266;
                 }
-                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1267;
+                ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1267;
                 {
                   ::dessser::gen::alerting_contact::t0ec843672514be25b144f299b8cb3149 drec_119 { letpair_res_1265 };
-                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1268;
+                  ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1268;
                   {
                     auto drec_fst_120 { std::get<0>(drec_119) };
                     auto drec_snd_121 { std::get<1>(drec_119) };
@@ -3158,10 +3158,10 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                       }
                       let_res_1310 = letpair_res_1311;
                     }
-                    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1316;
+                    ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1316;
                     {
                       ::dessser::gen::alerting_contact::t13a07ee37ab40962540da8534858dc07 drec_134 { let_res_1310 };
-                      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1317;
+                      ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1317;
                       {
                         auto drec_fst_135 { std::get<0>(drec_134) };
                         auto drec_snd_136 { std::get<1>(drec_134) };
@@ -3173,10 +3173,10 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                           ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 id_1320 { du16_fst_138, du16_snd_139 };
                           letpair_res_1319 = id_1320;
                         }
-                        ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1321;
+                        ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1321;
                         {
                           ::dessser::gen::alerting_contact::ta97bb48ed75bbda6173555873826c8c6 drec_140 { letpair_res_1319 };
-                          ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1322;
+                          ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1322;
                           {
                             auto drec_fst_141 { std::get<0>(drec_140) };
                             auto drec_snd_142 { std::get<1>(drec_140) };
@@ -3252,22 +3252,22 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
                               }
                               let_res_1325 = let_res_1328;
                             }
-                            ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 let_res_1364;
+                            ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b let_res_1364;
                             {
                               ::dessser::gen::alerting_contact::t12fb9c475959b52bf7b17b155a955ffa dstring1_149 { let_res_1325 };
-                              ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1365;
+                              ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1365;
                               {
                                 auto dstring1_fst_150 { std::get<0>(dstring1_149) };
                                 auto dstring1_snd_151 { std::get<1>(dstring1_149) };
                                 ::dessser::gen::alerting_contact::t9ef6882174ae71a34a3c5ef6b29242fb id_1366 { dstring1_snd_151.readBytes(dstring1_fst_150) };
-                                ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 letpair_res_1367;
+                                ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b letpair_res_1367;
                                 {
                                   auto dstring2_fst_153 { std::get<0>(id_1366) };
                                   auto dstring2_snd_154 { std::get<1>(id_1366) };
                                   std::string id_1368 { dstring2_fst_153.toString() };
                                   ::dessser::gen::alerting_contact::t5a8393235cc21d52708273e644b80be6 id_1369 { drec_fst_120, drec_fst_135, drec_fst_141, id_1368 };
-                                  std::shared_ptr<::dessser::gen::alerting_contact::via>  id_1370 { std::make_shared<::dessser::gen::alerting_contact::via>(std::in_place_index<4>, id_1369) };
-                                  ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1371 { id_1370, dstring2_snd_154 };
+                                  ::dessser::gen::alerting_contact::via id_1370 { std::in_place_index<4>, id_1369 };
+                                  ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_1371 { id_1370, dstring2_snd_154 };
                                   letpair_res_1367 = id_1371;
                                 }
                                 letpair_res_1365 = letpair_res_1367;
@@ -3303,7 +3303,7 @@ static std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6
    };
   return fun836;
 }
-std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523(Pointer)> via_of_row_binary(via_of_row_binary_init());
+std::function<::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b(Pointer &)> via_of_row_binary(via_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -3312,25 +3312,25 @@ std::function<::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd52
           (let-pair "dfloat_fst_246" "dfloat_snd_247" (read-u64 little-endian (identifier "drec_snd_244"))
             (make-tup (make-rec (string "timeout") (float-of-u64 (identifier "dfloat_fst_246")) (string "via") (identifier "drec_fst_243")) (identifier "dfloat_snd_247"))))))
  */
-static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun1372 { [&](Pointer p_0) {
-    ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 id_1373 { via_of_row_binary(p_0) };
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae let_res_1374;
+  std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> fun1372 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b id_1373 { via_of_row_binary(p_0) };
+    ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 let_res_1374;
     {
-      ::dessser::gen::alerting_contact::t4f2037d06e9b8c11be7f16b6ac8dd523 drec_242 { id_1373 };
-      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1375;
+      ::dessser::gen::alerting_contact::ted05cba1f8f5a8627f66e87a358c029b drec_242 { id_1373 };
+      ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 letpair_res_1375;
       {
         auto drec_fst_243 { std::get<0>(drec_242) };
         auto drec_snd_244 { std::get<1>(drec_242) };
         ::dessser::gen::alerting_contact::td2cd337bb3c8bc04d5603393d084985b id_1376 { drec_snd_244.readU64Le() };
-        ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1377;
+        ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 letpair_res_1377;
         {
           auto dfloat_fst_246 { std::get<0>(id_1376) };
           auto dfloat_snd_247 { std::get<1>(id_1376) };
           double id_1378 { float_of_qword(dfloat_fst_246) };
-          std::shared_ptr<::dessser::gen::alerting_contact::t>  id_1379 { std::make_shared<::dessser::gen::alerting_contact::t>(drec_fst_243, id_1378) };
-          ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1380 { id_1379, dfloat_snd_247 };
+          ::dessser::gen::alerting_contact::t id_1379 { drec_fst_243, id_1378 };
+          ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 id_1380 { id_1379, dfloat_snd_247 };
           letpair_res_1377 = id_1380;
         }
         letpair_res_1375 = letpair_res_1377;
@@ -3342,20 +3342,20 @@ static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291
    };
   return fun1372;
 }
-std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_252" "make_snd_253" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_252") (identifier "make_snd_253"))))
  */
-static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> fun1381 { [&](Pointer p_0) {
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1382 { of_row_binary(p_0) };
-    ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae letpair_res_1383;
+  std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> fun1381 { [&](Pointer p_0) {
+    ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 id_1382 { of_row_binary(p_0) };
+    ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 letpair_res_1383;
     {
       auto make_fst_252 { std::get<0>(id_1382) };
       auto make_snd_253 { std::get<1>(id_1382) };
-      ::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae id_1384 { make_fst_252, make_snd_253 };
+      ::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9 id_1384 { make_fst_252, make_snd_253 };
       letpair_res_1383 = id_1384;
     }
     return letpair_res_1383;
@@ -3363,22 +3363,22 @@ static std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291
    };
   return fun1381;
 }
-std::function<::dessser::gen::alerting_contact::tf575ebd2244aa6b126ef4291c9e6f8ae(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::alerting_contact::t4dd2ce6c858fde4b72fd30927a9bfbe9(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{via: (via AS [Ignore Void | Exec STRING | SysLog STRING | Sqlite {file: STRING; insert: STRING; create: STRING} | Kafka {options: (STRING; STRING)[[]]; topic: STRING; partition: U16; text: STRING}]); timeout: FLOAT}" "Ptr")
       (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> fun1385 { [&](std::shared_ptr<::dessser::gen::alerting_contact::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> fun1385 { [&](::dessser::gen::alerting_contact::t p_0, Pointer p_1) {
     Pointer id_1386 { to_row_binary(p_0, p_1) };
     return id_1386;
   }
    };
   return fun1385;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::alerting_contact::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::alerting_contact::t const &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

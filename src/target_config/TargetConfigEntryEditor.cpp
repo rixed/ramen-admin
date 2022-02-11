@@ -38,10 +38,10 @@ QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const> >
 static bool isCompiledSource(KValue const &kv) {
   if (kv.val->index() != dessser::gen::sync_value::SourceInfo) return false;
 
-  std::shared_ptr<dessser::gen::source_info::t const> info{
+  dessser::gen::source_info::t const &info{
       std::get<dessser::gen::sync_value::SourceInfo>(*kv.val)};
 
-  return info->detail.index() == dessser::gen::source_info::Compiled;
+  return info.detail.index() == dessser::gen::source_info::Compiled;
 }
 
 static std::string const sourceExt(dessser::gen::sync_key::t const &key) {
@@ -335,14 +335,14 @@ void TargetConfigEntryEditor::clearParams() {
 
 std::shared_ptr<dessser::gen::raql_value::t const>
 TargetConfigEntryEditor::paramValue(
-    std::shared_ptr<dessser::gen::program_parameter::t const> p) const {
+    dessser::gen::program_parameter::t const &p) const {
   /* Try to find a set parameter by that name, falling back on the
    * compiled default: */
   if (verbose)
     qDebug() << "TargetConfigEntryEditor: paramValue("
-             << QString::fromStdString(p->name) << ") is"
-             << (setParamValues.contains(p->name) ? "present" : "absent");
-  return setParamValues.value(p->name, p->value);
+             << QString::fromStdString(p.name) << ") is"
+             << (setParamValues.contains(p.name) ? "present" : "absent");
+  return setParamValues.value(p.name, p.value);
 }
 
 /* Not the brightest idea to use labels as value store, but there you go: */
@@ -401,12 +401,12 @@ void TargetConfigEntryEditor::resetParams() {
       baseName.toStdString(), "info"};
 
   kvs->lock.lock_shared();
-  std::shared_ptr<dessser::gen::source_info::t> info;
+  dessser::gen::source_info::t const *info;
   auto it{kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
       &infoKey, /* No del */ [](dessser::gen::sync_key::t const *) {}))};
   if (it != kvs->map.end()) {
     if (it->second.val->index() == dessser::gen::sync_value::SourceInfo)
-      info = std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val);
+      info = &std::get<dessser::gen::sync_value::SourceInfo>(*it->second.val);
   }
   kvs->lock.unlock_shared();
 
@@ -434,12 +434,11 @@ void TargetConfigEntryEditor::resetParams() {
     return;
   }
 
-  std::shared_ptr<dessser::gen::source_info::compiled_program> prog{
+  dessser::gen::source_info::compiled_program const &prog{
       std::get<dessser::gen::source_info::Compiled>(info->detail)};
 
   bool has_params{false};
-  for (std::shared_ptr<dessser::gen::program_parameter::t> const &p :
-       prog->default_params) {
+  for (dessser::gen::program_parameter::t const &p : prog.default_params) {
     // TODO: a tooltip with the parameter doc
     std::shared_ptr<dessser::gen::raql_value::t const> rval{paramValue(p)};
     /* paramEdit->setValue wants the value to be a shared_ptr<sync_value>,
@@ -450,14 +449,14 @@ void TargetConfigEntryEditor::resetParams() {
             std::in_place_index<dessser::gen::sync_value::RamenValue>,
             std::const_pointer_cast<dessser::gen::raql_value::t>(rval))};
     // Get an editor for that type of value:
-    AtomicWidget *paramEdit{newRaqlValueEditorWidget(*p->typ)};
+    AtomicWidget *paramEdit{newRaqlValueEditorWidget(*p.typ)};
     /* In theory, AtomicWidget got their value from the key. But here we
      * have no key but we know the value so let's just set it: */
     paramEdit->setValue(val);
     paramEdit->setEnabled(enabled);
     connect(paramEdit, &AtomicWidget::inputChanged, this,
             &TargetConfigEntryEditor::inputChanged);
-    paramsForm->addRow(labelOfParamName(p->name), paramEdit);
+    paramsForm->addRow(labelOfParamName(p.name), paramEdit);
     has_params = true;
   }
 
@@ -492,13 +491,12 @@ void TargetConfigEntryEditor::setValue(dessser::gen::rc_entry::t const &entry) {
   cwdEdit->setText(QString::fromStdString(entry.cwd));
 
   // Also save the parameter values so that resetParams can find them:
-  for (std::shared_ptr<dessser::gen::program_run_parameter::t> const &p :
-       entry.params) {
-    if (!p->value) continue;
+  for (dessser::gen::program_run_parameter::t const &p : entry.params) {
+    if (!p.value) continue;
     if (verbose)
-      qDebug() << "TargetConfigEntryEditor: Save value" << *p->value
-               << "for param" << QString::fromStdString(p->name);
-    setParamValues[p->name] = p->value;
+      qDebug() << "TargetConfigEntryEditor: Save value" << *p.value
+               << "for param" << QString::fromStdString(p.name);
+    setParamValues[p.name] = p.value;
   }
   /* Call explicitly here because it's been called too early by sourceBox
    * currentTextChanged: */
@@ -550,7 +548,7 @@ std::shared_ptr<dessser::gen::rc_entry::t> TargetConfigEntryEditor::getValue()
     std::shared_ptr<dessser::gen::raql_value::t> pval{
         std::get<dessser::gen::sync_value::RamenValue>(*val)};
     entry->params.push_back(
-        std::make_shared<dessser::gen::program_run_parameter::t>(pname, pval));
+        dessser::gen::program_run_parameter::t{pname, pval});
   }
 
   if (verbose) qDebug() << "TargetConfigEntryEditor::getValue" << *entry;

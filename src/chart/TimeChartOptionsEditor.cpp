@@ -52,7 +52,7 @@ bool TimeChartOptionsEditor::setValue(
       // change:
       QString name{QString::number(t_idx)};
       axes->addTab(e, name);
-      e->setValue(*conf->axes[c_idx]);
+      e->setValue(conf->axes[c_idx]);
       t_idx++;
       c_idx++;
     } else if (c_idx >= conf->axes.size()) {
@@ -61,7 +61,7 @@ bool TimeChartOptionsEditor::setValue(
     } else {
       TimeChartAxisEditor *e{
           static_cast<TimeChartAxisEditor *>(axes->widget(t_idx))};
-      e->setValue(*conf->axes[c_idx]);
+      e->setValue(conf->axes[c_idx]);
       t_idx++;
       c_idx++;
     }

@@ -39,15 +39,14 @@ TimeChartAutomatonCustomize::TimeChartAutomatonCustomize(
    * graphModel, so that the function editors can find it as well! */
   workerKey = std::make_shared<dessser::gen::sync_key::t>(
       std::in_place_index<dessser::gen::sync_key::PerSite>,
-      std::make_shared<dessser::gen::sync_key::per_site>(
-          site,
-          std::make_shared<dessser::gen::sync_key::per_site_data>(
-              std::in_place_index<dessser::gen::sync_key::PerWorker>,
-              std::make_shared<dessser::gen::sync_key::per_worker>(
-                  (customProgram + '/' + customFunction),
-                  std::make_shared<dessser::gen::sync_key::per_worker_data>(
-                      std::in_place_index<dessser::gen::sync_key::Worker>,
-                      dessser::Void())))));
+      dessser::gen::sync_key::per_site{
+          site, dessser::gen::sync_key::per_site_data{
+                    std::in_place_index<dessser::gen::sync_key::PerWorker>,
+                    dessser::gen::sync_key::per_worker{
+                        (customProgram + '/' + customFunction),
+                        dessser::gen::sync_key::per_worker_data{
+                            std::in_place_index<dessser::gen::sync_key::Worker>,
+                            dessser::Void()}}}});
 
   addTransition(WaitSource, WaitInfo, OnSet, sourceKey);
   addTransition(WaitInfo, WaitLockRC, OnSet, infoKey);

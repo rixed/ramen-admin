@@ -219,7 +219,7 @@ void SourceEdit::doResetError(KValue const &kv) {
   warningsBox->setVisible(false);
 
   auto const &info_detail{
-      std::get<dessser::gen::sync_value::SourceInfo>(*kv.val)->detail};
+      std::get<dessser::gen::sync_value::SourceInfo>(*kv.val).detail};
 
   switch (info_detail.index()) {
     case dessser::gen::source_info::Failed: {
@@ -227,7 +227,7 @@ void SourceEdit::doResetError(KValue const &kv) {
           std::get<dessser::gen::source_info::Failed>(info_detail)};
       QString err_msg;
       for (auto const &err : failed.errors)
-        err_msg += raqlErrorToQString(*err) + '\n';
+        err_msg += raqlErrorToQString(err) + '\n';
       if (!err_msg.isEmpty()) {
         compilationErrors->setText(stringOfDate(kv.mtime) + ":\n" + err_msg);
         errorsBox->setVisible(true);
@@ -237,8 +237,8 @@ void SourceEdit::doResetError(KValue const &kv) {
       auto const &compiled{
           std::get<dessser::gen::source_info::Compiled>(info_detail)};
       QString warnings;
-      for (auto const &warn : compiled->warnings)
-        warnings += raqlWarningToQString(*warn) + '\n';
+      for (auto const &warn : compiled.warnings)
+        warnings += raqlWarningToQString(warn) + '\n';
       if (!warnings.isEmpty()) {
         compilationWarnings->setText(stringOfDate(kv.mtime) + ":\n" + warnings);
         warningsBox->setVisible(true);

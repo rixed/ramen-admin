@@ -75,7 +75,7 @@ class TargetConfigEntryEditor : public QWidget {
    * AtomicWidget will reset the value it witnessed initially. */
   // Returned value still owned by the callee
   std::shared_ptr<dessser::gen::raql_value::t const> paramValue(
-      std::shared_ptr<dessser::gen::program_parameter::t const>) const;
+      dessser::gen::program_parameter::t const &) const;
 
   // Bag of previously set parameter values:
   static QMap<std::string, std::shared_ptr<dessser::gen::raql_value::t const> >

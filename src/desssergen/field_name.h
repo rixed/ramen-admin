@@ -42,11 +42,11 @@ inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta30293a829431
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(t,Pointer)> to_row_binary;
-extern std::function<Size(t)> sersize_of_row_binary;
-extern std::function<::dessser::gen::field_name::ta30293a82943182cab78182f33b18016(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::field_name::ta30293a82943182cab78182f33b18016(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(t,Pointer)> wrap_to_row_binary;
+extern std::function<Pointer(t const &,Pointer &)> to_row_binary;
+extern std::function<Size(t const &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::field_name::ta30293a82943182cab78182f33b18016(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::field_name::ta30293a82943182cab78182f33b18016(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(t const &,Pointer &)> wrap_to_row_binary;
 typedef t t_ext;
 inline t Deref(t_ext x) { return x; }
 

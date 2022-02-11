@@ -25,10 +25,10 @@ AlertingContactSyslogEditor::getValue() const {
 }
 
 bool AlertingContactSyslogEditor::setValue(
-    std::shared_ptr<dessser::gen::alerting_contact::via const> v) {
-  if (v->index() != dessser::gen::alerting_contact::SysLog) return false;
+    dessser::gen::alerting_contact::via const &v) {
+  if (v.index() != dessser::gen::alerting_contact::SysLog) return false;
   edit->setText(QString::fromStdString(
-      std::get<dessser::gen::alerting_contact::SysLog>(*v)));
+      std::get<dessser::gen::alerting_contact::SysLog>(v)));
   return true;
 }
 

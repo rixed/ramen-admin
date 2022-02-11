@@ -75,12 +75,11 @@ bool TimeChartEditWidget::setValue(
     return false;
   }
 
-  std::shared_ptr<dessser::gen::dashboard_widget::t const> widget{
+  dessser::gen::dashboard_widget::t const &widget{
       std::get<dessser::gen::sync_value::DashboardWidget>(*v)};
-  if (widget->index() != dessser::gen::dashboard_widget::Chart)
-    goto not_a_chart;
+  if (widget.index() != dessser::gen::dashboard_widget::Chart) goto not_a_chart;
   std::shared_ptr<dessser::gen::dashboard_widget::chart const> conf{
-      std::get<dessser::gen::dashboard_widget::Chart>(*widget)};
+      v, &std::get<dessser::gen::dashboard_widget::Chart>(widget)};
 
   if (verbose) {
     qDebug() << "TimeChartEditWidget::setValue: setting value" << *conf;
@@ -96,18 +95,14 @@ bool TimeChartEditWidget::setValue(
 std::shared_ptr<dessser::gen::sync_value::t const>
 TimeChartEditWidget::getValue() const {
   // Start from an empty configuration:
-  std::shared_ptr<dessser::gen::dashboard_widget::chart> conf{std::make_shared<
-      dessser::gen::dashboard_widget::chart>(
-      optionsEditor->title->text().toStdString(),
-      std::const_pointer_cast<dessser::gen::dashboard_widget::type>(
-          chartPlotType),
-      dessser::Arr<std::shared_ptr< ::dessser::gen::dashboard_widget::axis> >{},
-      dessser::Arr<
-          std::shared_ptr< ::dessser::gen::dashboard_widget::source> >{})};
+  dessser::gen::dashboard_widget::chart conf{
+      optionsEditor->title->text().toStdString(), chartPlotType,
+      dessser::Arr<dessser::gen::dashboard_widget::axis>{},
+      dessser::Arr<dessser::gen::dashboard_widget::source>{}};
 
   if (verbose)
     qDebug() << "TimeChartEditWidget::getValue: title ="
-             << QString::fromStdString(conf->title);
+             << QString::fromStdString(conf.title);
 
   /* TODO: a signal from functionsEditor when a new axis is requested, that
    * would be connected to the AxisEditor.addAxis(where). */
@@ -118,7 +113,7 @@ TimeChartEditWidget::getValue() const {
             optionsEditor->axes->widget(a_idx))};
     std::shared_ptr<dessser::gen::dashboard_widget::axis> axisConf{
         axisEditor->getValue()};
-    conf->axes.push_back(axisConf);
+    conf.axes.push_back(*axisConf);
   }
 
   int const numFunctions{functionsEditor->functions->count()};
@@ -126,18 +121,18 @@ TimeChartEditWidget::getValue() const {
     TimeChartFunctionEditor const *funcEditor{
         static_cast<TimeChartFunctionEditor const *>(
             functionsEditor->functions->widget(f_idx))};
-    conf->sources.push_back(funcEditor->getValue());
+    conf.sources.push_back(*funcEditor->getValue());
   }
 
   if (verbose)
     qDebug() << "TimeChartEditWidget::getValue: returning a value with"
-             << conf->axes.size() << "axes and" << conf->sources.size()
+             << conf.axes.size() << "axes and" << conf.sources.size()
              << "sources.";
 
   return std::make_shared<dessser::gen::sync_value::t>(
       std::in_place_index<dessser::gen::sync_value::DashboardWidget>,
-      std::make_shared<dessser::gen::dashboard_widget::t>(
-          std::in_place_index<dessser::gen::dashboard_widget::Chart>, conf));
+      dessser::gen::dashboard_widget::t{
+          std::in_place_index<dessser::gen::dashboard_widget::Chart>, conf});
 }
 
 int TimeChartEditWidget::axisCountOnSide(bool left) const {
@@ -200,13 +195,11 @@ void TimeChartEditWidget::iterFields(
 
     dessser::gen::dashboard_widget::source const &source{
         funcEditor->model->source};
-    for (std::shared_ptr<dessser::gen::dashboard_widget::field> const &field :
-         source.fields) {
-      if (field->representation->index() ==
+    for (dessser::gen::dashboard_widget::field const &field : source.fields) {
+      if (field.representation.index() ==
           dessser::gen::dashboard_widget::Unused)
         continue;
-      cb(source.name->site, source.name->program, source.name->function,
-         *field);
+      cb(source.name.site, source.name.program, source.name.function, field);
     }
   }
 }

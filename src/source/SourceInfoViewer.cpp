@@ -58,42 +58,42 @@ static QString const QStringOfBestAfter(dessser::gen::raql_expr::t const &e) {
 bool SourceInfoViewer::setValue(
     std::shared_ptr<dessser::gen::sync_value::t const> v) {
   /* Empty the previous params/parents layouts: */
-  /* FIXME: rather instanciate the widgets only once and hide those unused */
+  /* FIXME: rather instantiate the widgets only once and hide those unused */
   emptyLayout(readOnlyLayout);
 
   if (v->index() == dessser::gen::sync_value::SourceInfo) {
-    std::shared_ptr<dessser::gen::source_info::t> info{
+    dessser::gen::source_info::t info{
         std::get<dessser::gen::sync_value::SourceInfo>(*v)};
 
-    if (info->detail.index() == dessser::gen::source_info::Failed) {
-      auto &failed{std::get<dessser::gen::source_info::Failed>(info->detail)};
+    if (info.detail.index() == dessser::gen::source_info::Failed) {
+      auto &failed{std::get<dessser::gen::source_info::Failed>(info.detail)};
       QString err_msg;
-      for (auto const &err : failed.errors)
-        err_msg += raqlErrorToQString(*err) + '\n';
+      for (dessser::gen::raql_error::t const &err : failed.errors)
+        err_msg += raqlErrorToQString(err) + '\n';
       QLabel *l{new QLabel(err_msg)};
       l->setWordWrap(true);
       l->setAlignment(Qt::AlignCenter);
       readOnlyLayout->addWidget(l);
     } else {
-      Q_ASSERT(info->detail.index() == dessser::gen::source_info::Compiled);
-      std::shared_ptr<dessser::gen::source_info::compiled_program> compiled{
-          std::get<dessser::gen::source_info::Compiled>(info->detail)};
+      Q_ASSERT(info.detail.index() == dessser::gen::source_info::Compiled);
+      dessser::gen::source_info::compiled_program const &compiled{
+          std::get<dessser::gen::source_info::Compiled>(info.detail)};
 
       readOnlyLayout->addWidget(new QLabel("<b>" + tr("Parameters") + "</b>"));
 
-      if (compiled->default_params.size() == 0) {
+      if (compiled.default_params.size() == 0) {
         QLabel *none{new QLabel("<i>" + tr("none") + "</i>")};
         none->setAlignment(Qt::AlignCenter);
         readOnlyLayout->addWidget(none);
       } else {
         QFormLayout *paramsLayout{new QFormLayout};
-        for (std::shared_ptr<dessser::gen::program_parameter::t> const &p :
-             compiled->default_params) {
-          QLabel *l{new QLabel(raqlValToQString(*p->value))};
+        for (dessser::gen::program_parameter::t const &p :
+             compiled.default_params) {
+          QLabel *l{new QLabel(raqlValToQString(*p.value))};
           l->setWordWrap(true);
-          paramsLayout->addRow(QString::fromStdString(p->name) + ":", l);
-          if (p->doc.size() > 0) {
-            QLabel *doc{new QLabel(QString::fromStdString(p->doc))};
+          paramsLayout->addRow(QString::fromStdString(p.name) + ":", l);
+          if (p.doc.size() > 0) {
+            QLabel *doc{new QLabel(QString::fromStdString(p.doc))};
             doc->setWordWrap(true);
             paramsLayout->addRow(doc);
           }
@@ -102,33 +102,33 @@ bool SourceInfoViewer::setValue(
       }
 
       QTabWidget *functions{new QTabWidget};
-      for (std::shared_ptr<dessser::gen::source_info::compiled_func> const
-               &func : compiled->funcs) {
+      for (dessser::gen::source_info::compiled_func const &func :
+           compiled.funcs) {
         QVBoxLayout *l{new QVBoxLayout};
         QWidget *w{new QWidget};
         w->setLayout(l);
 
-        QString title{QString(QString::fromStdString(func->name) +
-                              (func->is_lazy ? " (lazy)" : ""))};
+        QString title{QString(QString::fromStdString(func.name) +
+                              (func.is_lazy ? " (lazy)" : ""))};
         functions->addTab(w, title);
 
-        if (func->doc.length() > 0) {
-          QLabel *doc{new QLabel(QString::fromStdString(func->doc))};
+        if (func.doc.length() > 0) {
+          QLabel *doc{new QLabel(QString::fromStdString(func.doc))};
           doc->setWordWrap(true);
           l->addWidget(doc);
         }
 
         QLabel *retention{new QLabel(
             tr("Retention: %1")
-                .arg(func->retention ? QStringOfRetention(**func->retention)
-                                     : "<i>" + tr("none") + "</i>"))};
+                .arg(func.retention ? QStringOfRetention(*func.retention)
+                                    : "<i>" + tr("none") + "</i>"))};
         retention->setWordWrap(true);
         l->addWidget(retention);
 
         QLabel *best_after{new QLabel(
             tr("Extra history: %1")
-                .arg(func->best_after ? QStringOfBestAfter(**func->best_after)
-                                      : "<i>" + tr("none") + "</i>"))};
+                .arg(func.best_after ? QStringOfBestAfter(**func.best_after)
+                                     : "<i>" + tr("none") + "</i>"))};
         l->addWidget(best_after);
 
         l->addWidget(new QLabel(tr("Output Type:")));
@@ -139,13 +139,13 @@ bool SourceInfoViewer::setValue(
         columns->setHorizontalHeaderLabels({"Name", "Type", "Low Card."});
         columns->setEditTriggers(QAbstractItemView::NoEditTriggers);
         columns->verticalHeader()->setVisible(false);
-        unsigned num_cols{numColumns(*func->out_record)};
+        unsigned num_cols{numColumns(*func.out_record)};
         columns->setRowCount(num_cols);
 
         for (unsigned c = 0; c < num_cols; c++) {
-          std::string const name{columnName(*func->out_record, c)};
+          std::string const name{columnName(*func.out_record, c)};
           bool isFactor{false};
-          for (std::string const &factor : func->factors) {
+          for (std::string const &factor : func.factors) {
             if (factor == name) {
               isFactor = true;
               break;
@@ -153,19 +153,19 @@ bool SourceInfoViewer::setValue(
           }
 
           std::shared_ptr<dessser::gen::raql_type::t const> subtype{
-              columnType(*func->out_record, c)};
+              columnType(*func.out_record, c)};
           columns->setItem(c, 0,
                            new QTableWidgetItem(QString::fromStdString(name)));
           columns->setItem(c, 1,
                            new QTableWidgetItem(
                                subtype ? raqlTypeToQString(*subtype)
-                                       : raqlTypeToQString(*func->out_record)));
+                                       : raqlTypeToQString(*func.out_record)));
           columns->setItem(c, 2, new QTableWidgetItem(isFactor ? "✓" : ""));
         }
         columns->resizeColumnsToContents();
 
         QLabel *sign{new QLabel(
-            tr("Signature: %1").arg(QString::fromStdString(func->signature)))};
+            tr("Signature: %1").arg(QString::fromStdString(func.signature)))};
         sign->setWordWrap(true);
         l->addWidget(sign);
       }
@@ -174,7 +174,8 @@ bool SourceInfoViewer::setValue(
     }
     readOnlyLayout->addSpacing(10);
     QStringList md5s;
-    for (auto const &s : info->md5s) md5s.append(QString::fromStdString(s));
+    for (std::string const &s : info.md5s)
+      md5s.append(QString::fromStdString(s));
     QString md5s_label{
         QString(tr(md5s.length() > 1 ? "For sources which MD5s are: %1"
                                      : "For source which MD5 is: %1")

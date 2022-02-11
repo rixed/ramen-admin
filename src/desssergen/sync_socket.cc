@@ -61,18 +61,18 @@ inline bool operator==(t const &a, t const &b) {
 inline bool operator!=(t const &a, t const &b) {
   return !operator==(a, b);
 }
-struct td68d92c546e96e190f81dbcb5e4b1574 : public std::tuple<
-  std::shared_ptr<::dessser::gen::sync_socket::t> ,
+struct tc5e6846e85f79c9786f90afd8b73dfb1 : public std::tuple<
+  ::dessser::gen::sync_socket::t,
   Pointer
 > {
   using tuple::tuple;
-  td68d92c546e96e190f81dbcb5e4b1574(std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::sync_socket::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tc5e6846e85f79c9786f90afd8b73dfb1(std::tuple<::dessser::gen::sync_socket::t, Pointer> p)
+    : std::tuple<::dessser::gen::sync_socket::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(td68d92c546e96e190f81dbcb5e4b1574 const &a, td68d92c546e96e190f81dbcb5e4b1574 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tc5e6846e85f79c9786f90afd8b73dfb1 const &a, tc5e6846e85f79c9786f90afd8b73dfb1 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(td68d92c546e96e190f81dbcb5e4b1574 const &a, td68d92c546e96e190f81dbcb5e4b1574 const &b) {
+inline bool operator!=(tc5e6846e85f79c9786f90afd8b73dfb1 const &a, tc5e6846e85f79c9786f90afd8b73dfb1 const &b) {
   return !operator==(a, b);
 }
 struct ta97bb48ed75bbda6173555873826c8c6 : public std::tuple<
@@ -142,33 +142,33 @@ inline bool operator!=(t859e6a4cc938643a1d59426a3bf7b15a const &a, t859e6a4cc938
             (seq (assert (eq (label-of (get-field "ip" (param 0))) (u16 1))) (write-u128 little-endian (identifier "ssum_dst_103") (get-alt "v6" (get-field "ip" (param 0)))))))
         (write-u16 little-endian (identifier "srec_dst_104") (get-field "port" (param 0)))))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> to_row_binary_init()
+static std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> fun0 { [&](std::shared_ptr<::dessser::gen::sync_socket::t>  p_0, Pointer p_1) {
-    ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_1 { (*p_0).ip };
+  std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> fun0 { [&](::dessser::gen::sync_socket::t p_0, Pointer p_1) {
+    ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_1 { p_0.ip };
     uint16_t id_2 { uint16_t(id_1.index()) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
     Pointer let_res_4;
     {
       Pointer ssum_dst_103 { id_3 };
       uint16_t id_5 { 0 };
-      ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_6 { (*p_0).ip };
+      ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_6 { p_0.ip };
       uint16_t id_7 { uint16_t(id_6.index()) };
       bool id_8 { bool(id_5 == id_7) };
       Pointer choose_res_9;
       if (id_8) {
-        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_10 { (*p_0).ip };
+        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_10 { p_0.ip };
         uint32_t id_11 { std::get<0 /* v4 */>(id_10) };
         Pointer id_12 { ssum_dst_103.writeU32Le(id_11) };
         choose_res_9 = id_12;
       } else {
-        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_13 { (*p_0).ip };
+        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_13 { p_0.ip };
         uint16_t id_14 { uint16_t(id_13.index()) };
         uint16_t id_15 { 1 };
         bool id_16 { bool(id_14 == id_15) };
         Void id_17 { ((void)(assert(id_16)), ::dessser::Void()) };
         (void)id_17;
-        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_18 { (*p_0).ip };
+        ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_18 { p_0.ip };
         uint128_t id_19 { std::get<1 /* v6 */>(id_18) };
         Pointer id_20 { ssum_dst_103.writeU128Le(id_19) };
         choose_res_9 = id_20;
@@ -178,7 +178,7 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Po
     Pointer let_res_21;
     {
       Pointer srec_dst_104 { let_res_4 };
-      uint16_t id_22 { (*p_0).port };
+      uint16_t id_22 { p_0.port };
       Pointer id_23 { srec_dst_104.writeU16Le(id_22) };
       let_res_21 = id_23;
     }
@@ -187,16 +187,16 @@ static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Po
    };
   return fun0;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> to_row_binary(to_row_binary_init());
+std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> to_row_binary(to_row_binary_init());
 
 /* 
     (fun ("{ip: Ip; port: U16}") (add (if (eq (u16 0) (label-of (get-field "ip" (param 0)))) (size 6) (seq (assert (eq (label-of (get-field "ip" (param 0))) (u16 1))) (size 18))) (size 2)))
  */
-static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of_row_binary_init()
+static std::function<Size(::dessser::gen::sync_socket::t const &)> sersize_of_row_binary_init()
 {
-  std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> fun24 { [&](std::shared_ptr<::dessser::gen::sync_socket::t>  p_0) {
+  std::function<Size(::dessser::gen::sync_socket::t const &)> fun24 { [&](::dessser::gen::sync_socket::t p_0) {
     uint16_t id_25 { 0 };
-    ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_26 { (*p_0).ip };
+    ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_26 { p_0.ip };
     uint16_t id_27 { uint16_t(id_26.index()) };
     bool id_28 { bool(id_25 == id_27) };
     Size choose_res_29;
@@ -204,7 +204,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> ser
       Size id_30 { 6UL };
       choose_res_29 = id_30;
     } else {
-      ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_31 { (*p_0).ip };
+      ::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a id_31 { p_0.ip };
       uint16_t id_32 { uint16_t(id_31.index()) };
       uint16_t id_33 { 1 };
       bool id_34 { bool(id_32 == id_33) };
@@ -220,7 +220,7 @@ static std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> ser
    };
   return fun24;
 }
-std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of_row_binary(sersize_of_row_binary_init());
+std::function<Size(::dessser::gen::sync_socket::t const &)> sersize_of_row_binary(sersize_of_row_binary_init());
 
 /* 
     (fun ("Ptr")
@@ -238,9 +238,9 @@ std::function<Size(std::shared_ptr<::dessser::gen::sync_socket::t> )> sersize_of
           (let-pair "du16_fst_91" "du16_snd_92" (read-u16 little-endian (identifier "drec_snd_89"))
             (make-tup (make-rec (string "port") (identifier "du16_fst_91") (string "ip") (identifier "drec_fst_88")) (identifier "du16_snd_92"))))))
  */
-static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> of_row_binary_init()
+static std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> fun39 { [&](Pointer p_0) {
+  std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> fun39 { [&](Pointer p_0) {
     ::dessser::gen::sync_socket::ta97bb48ed75bbda6173555873826c8c6 id_40 { p_0.readU16Le() };
     ::dessser::gen::sync_socket::ta97bb48ed75bbda6173555873826c8c6 letpair_res_41;
     {
@@ -265,7 +265,7 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
           {
             auto du32_fst_76 { std::get<0>(id_48) };
             auto du32_snd_77 { std::get<1>(id_48) };
-            std::function<uint32_t(uint32_t)> fun50 { [&](uint32_t p_0) {
+            std::function<uint32_t(uint32_t const )> fun50 { [&](uint32_t p_0) {
               return p_0;
             }
              };
@@ -285,7 +285,7 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
           {
             auto di128_fst_67 { std::get<0>(id_57) };
             auto di128_snd_68 { std::get<1>(id_57) };
-            std::function<uint128_t(uint128_t)> fun59 { [&](uint128_t p_0) {
+            std::function<uint128_t(uint128_t const )> fun59 { [&](uint128_t p_0) {
               return p_0;
             }
              };
@@ -304,7 +304,7 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
     {
       auto des_usr_type_fst_85 { std::get<0>(let_res_43) };
       auto des_usr_type_snd_86 { std::get<1>(let_res_43) };
-      std::function<::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a(::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a)> fun64 { [&](::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a p_0) {
+      std::function<::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a(::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a const &)> fun64 { [&](::dessser::gen::sync_socket::t690438e8d106ddec68c668ab00e5188a p_0) {
         return p_0;
       }
        };
@@ -312,20 +312,20 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
       ::dessser::gen::sync_socket::t1f9e0c0c8d7eb3b4c2d57ec0ad21851a id_66 { id_65, des_usr_type_snd_86 };
       letpair_res_63 = id_66;
     }
-    ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 let_res_67;
+    ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 let_res_67;
     {
       ::dessser::gen::sync_socket::t1f9e0c0c8d7eb3b4c2d57ec0ad21851a drec_87 { letpair_res_63 };
-      ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 letpair_res_68;
+      ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 letpair_res_68;
       {
         auto drec_fst_88 { std::get<0>(drec_87) };
         auto drec_snd_89 { std::get<1>(drec_87) };
         ::dessser::gen::sync_socket::ta97bb48ed75bbda6173555873826c8c6 id_69 { drec_snd_89.readU16Le() };
-        ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 letpair_res_70;
+        ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 letpair_res_70;
         {
           auto du16_fst_91 { std::get<0>(id_69) };
           auto du16_snd_92 { std::get<1>(id_69) };
-          std::shared_ptr<::dessser::gen::sync_socket::t>  id_71 { std::make_shared<::dessser::gen::sync_socket::t>(drec_fst_88, du16_fst_91) };
-          ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 id_72 { id_71, du16_snd_92 };
+          ::dessser::gen::sync_socket::t id_71 { drec_fst_88, du16_fst_91 };
+          ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 id_72 { id_71, du16_snd_92 };
           letpair_res_70 = id_72;
         }
         letpair_res_68 = letpair_res_70;
@@ -337,20 +337,20 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
    };
   return fun39;
 }
-std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> of_row_binary(of_row_binary_init());
+std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> of_row_binary(of_row_binary_init());
 
 /* 
     (fun ("Ptr") (let-pair "make_fst_97" "make_snd_98" (apply (identifier "of-row-binary") (param 0)) (make-tup (identifier "make_fst_97") (identifier "make_snd_98"))))
  */
-static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> wrap_of_row_binary_init()
+static std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> wrap_of_row_binary_init()
 {
-  std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> fun73 { [&](Pointer p_0) {
-    ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 id_74 { of_row_binary(p_0) };
-    ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 letpair_res_75;
+  std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> fun73 { [&](Pointer p_0) {
+    ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 id_74 { of_row_binary(p_0) };
+    ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 letpair_res_75;
     {
       auto make_fst_97 { std::get<0>(id_74) };
       auto make_snd_98 { std::get<1>(id_74) };
-      ::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574 id_76 { make_fst_97, make_snd_98 };
+      ::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1 id_76 { make_fst_97, make_snd_98 };
       letpair_res_75 = id_76;
     }
     return letpair_res_75;
@@ -358,21 +358,21 @@ static std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1
    };
   return fun73;
 }
-std::function<::dessser::gen::sync_socket::td68d92c546e96e190f81dbcb5e4b1574(Pointer)> wrap_of_row_binary(wrap_of_row_binary_init());
+std::function<::dessser::gen::sync_socket::tc5e6846e85f79c9786f90afd8b73dfb1(Pointer &)> wrap_of_row_binary(wrap_of_row_binary_init());
 
 /* 
     (fun ("{ip: Ip; port: U16}" "Ptr") (apply (identifier "to-row-binary") (param 0) (param 1)))
  */
-static std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> wrap_to_row_binary_init()
+static std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> wrap_to_row_binary_init()
 {
-  std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> fun77 { [&](std::shared_ptr<::dessser::gen::sync_socket::t>  p_0, Pointer p_1) {
+  std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> fun77 { [&](::dessser::gen::sync_socket::t p_0, Pointer p_1) {
     Pointer id_78 { to_row_binary(p_0, p_1) };
     return id_78;
   }
    };
   return fun77;
 }
-std::function<Pointer(std::shared_ptr<::dessser::gen::sync_socket::t> ,Pointer)> wrap_to_row_binary(wrap_to_row_binary_init());
+std::function<Pointer(::dessser::gen::sync_socket::t const &,Pointer &)> wrap_to_row_binary(wrap_to_row_binary_init());
 
 
 }

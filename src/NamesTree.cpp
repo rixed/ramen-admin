@@ -71,27 +71,27 @@ std::pair<std::string, std::string> NamesTree::pathOfIndex(
 void NamesTree::updateNames(dessser::gen::sync_key::t const &key,
                             KValue const &kv) {
   if (key.index() != dessser::gen::sync_key::PerSite) return;
-  std::shared_ptr<dessser::gen::sync_key::per_site const> per_site{
+  dessser::gen::sync_key::per_site const &per_site{
       std::get<dessser::gen::sync_key::PerSite>(key)};
-  std::string const &site_name{std::get<0>(*per_site)};
-  std::shared_ptr<dessser::gen::sync_key::per_site_data const> per_site_data{
-      std::get<1>(*per_site)};
-  if (per_site_data->index() != dessser::gen::sync_key::PerWorker) return;
-  std::shared_ptr<dessser::gen::sync_key::per_worker const> per_worker{
-      std::get<dessser::gen::sync_key::PerWorker>(*per_site_data)};
-  std::string const &fq_name{std::get<0>(*per_worker)};
-  std::shared_ptr<dessser::gen::sync_key::per_worker_data const>
-      per_worker_data{std::get<1>(*per_worker)};
-  if (per_worker_data->index() != dessser::gen::sync_key::Worker) return;
+  std::string const &site_name{std::get<0>(per_site)};
+  dessser::gen::sync_key::per_site_data const &per_site_data{
+      std::get<1>(per_site)};
+  if (per_site_data.index() != dessser::gen::sync_key::PerWorker) return;
+  dessser::gen::sync_key::per_worker const &per_worker{
+      std::get<dessser::gen::sync_key::PerWorker>(per_site_data)};
+  std::string const &fq_name{std::get<0>(per_worker)};
+  dessser::gen::sync_key::per_worker_data const &per_worker_data{
+      std::get<1>(per_worker)};
+  if (per_worker_data.index() != dessser::gen::sync_key::Worker) return;
 
   if (kv.val->index() != dessser::gen::sync_value::Worker) [[unlikely]] {
     qCritical() << "Not a worker!?";
     return;
   }
-  std::shared_ptr<dessser::gen::worker::t const> worker{
+  dessser::gen::worker::t const &worker{
       std::get<dessser::gen::sync_value::Worker>(*kv.val)};
 
-  if (worker->role.index() != dessser::gen::worker::Whole) return;
+  if (worker.role.index() != dessser::gen::worker::Whole) return;
 
   /* Get the site name, program name list and function name: */
 
@@ -128,7 +128,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key,
   dessser::gen::sync_key::t const infoKey{
       std::in_place_index<dessser::gen::sync_key::Sources>, src_path, "info"};
 
-  std::shared_ptr<dessser::gen::source_info::t const> sourceInfos;
+  dessser::gen::source_info::t const *sourceInfos{nullptr};
 
   kvs->lock.lock_shared();
   auto it{kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
@@ -136,8 +136,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key,
   if (it != kvs->map.end()) {
     std::shared_ptr<dessser::gen::sync_value::t const> v{it->second.val};
     if (v->index() == dessser::gen::sync_value::SourceInfo) [[likely]] {
-      sourceInfos = std::shared_ptr<dessser::gen::source_info::t const>(
-          std::get<dessser::gen::sync_value::SourceInfo>(*v));
+      sourceInfos = &std::get<dessser::gen::sync_value::SourceInfo>(*v);
     } else {
       qCritical() << "Not a SourceInfo!?";
     }
@@ -154,16 +153,15 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key,
     return;
   }
 
-  std::shared_ptr<dessser::gen::source_info::compiled_program> compiled{
+  dessser::gen::source_info::compiled_program const &compiled{
       std::get<dessser::gen::source_info::Compiled>(sourceInfos->detail)};
 
   /* In the sourceInfos all functions of that program could be found, but for
    * simplicity let's add only the one we came for: */
-  for (std::shared_ptr<dessser::gen::source_info::compiled_func> const &info :
-       compiled->funcs) {
-    if (info->name != function_name) continue;
+  for (dessser::gen::source_info::compiled_func const &info : compiled.funcs) {
+    if (info.name != function_name) continue;
 
-    unsigned const num_cols{numColumns(*info->out_record)};
+    unsigned const num_cols{numColumns(*info.out_record)};
     /* FIXME: Each column could have subcolumns and all should be inserted
      * hierarchically. */
     /* Some type info for the field (stored in the model as UserType+...
@@ -171,7 +169,7 @@ void NamesTree::updateNames(dessser::gen::sync_key::t const &key,
      * a factor, etc */
     for (unsigned i = 0; i < num_cols; i++) {
       QString const col{
-          QString::fromStdString(columnName(*info->out_record, i))};
+          QString::fromStdString(columnName(*info.out_record, i))};
       QStringList names(col);
       (void)findOrCreate(func, names, names.last());
     }

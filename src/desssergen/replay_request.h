@@ -44,21 +44,21 @@ inline std::ostream &operator<<(std::ostream &os, t const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t> const r) { os << *r; return os; }
 
-struct tf750688ed20e801cc15e75e4ce818858 : public std::tuple<
-  std::shared_ptr<::dessser::gen::replay_request::t> ,
+struct tcfdae0eebc6d2c4c070de31c29d5d722 : public std::tuple<
+  ::dessser::gen::replay_request::t,
   Pointer
 > {
   using tuple::tuple;
-  tf750688ed20e801cc15e75e4ce818858(std::tuple<std::shared_ptr<::dessser::gen::replay_request::t> , Pointer> p)
-    : std::tuple<std::shared_ptr<::dessser::gen::replay_request::t> , Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcfdae0eebc6d2c4c070de31c29d5d722(std::tuple<::dessser::gen::replay_request::t, Pointer> p)
+    : std::tuple<::dessser::gen::replay_request::t, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(tf750688ed20e801cc15e75e4ce818858 const &a, tf750688ed20e801cc15e75e4ce818858 const &b) {
-  return (*std::get<0>(a)) == (*std::get<0>(b)) && std::get<1>(a) == std::get<1>(b);
+inline bool operator==(tcfdae0eebc6d2c4c070de31c29d5d722 const &a, tcfdae0eebc6d2c4c070de31c29d5d722 const &b) {
+  return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(tf750688ed20e801cc15e75e4ce818858 const &a, tf750688ed20e801cc15e75e4ce818858 const &b) {
+inline bool operator!=(tcfdae0eebc6d2c4c070de31c29d5d722 const &a, tcfdae0eebc6d2c4c070de31c29d5d722 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, tf750688ed20e801cc15e75e4ce818858 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tcfdae0eebc6d2c4c070de31c29d5d722 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -66,18 +66,18 @@ inline std::ostream &operator<<(std::ostream &os, tf750688ed20e801cc15e75e4ce818
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tf750688ed20e801cc15e75e4ce818858> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tcfdae0eebc6d2c4c070de31c29d5d722> const t) { os << *t; return os; }
 
 /* ----------- */
 /* Definitions */
 /* ----------- */
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> to_row_binary;
-extern std::function<Size(std::shared_ptr<::dessser::gen::replay_request::t> )> sersize_of_row_binary;
-extern std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> of_row_binary;
-extern std::function<::dessser::gen::replay_request::tf750688ed20e801cc15e75e4ce818858(Pointer)> wrap_of_row_binary;
-extern std::function<Pointer(std::shared_ptr<::dessser::gen::replay_request::t> ,Pointer)> wrap_to_row_binary;
-typedef std::shared_ptr<t> t_ext;
-inline t Deref(t_ext x) { return *x; }
+extern std::function<Pointer(::dessser::gen::replay_request::t &,Pointer &)> to_row_binary;
+extern std::function<Size(::dessser::gen::replay_request::t &)> sersize_of_row_binary;
+extern std::function<::dessser::gen::replay_request::tcfdae0eebc6d2c4c070de31c29d5d722(Pointer &)> of_row_binary;
+extern std::function<::dessser::gen::replay_request::tcfdae0eebc6d2c4c070de31c29d5d722(Pointer &)> wrap_of_row_binary;
+extern std::function<Pointer(::dessser::gen::replay_request::t &,Pointer &)> wrap_to_row_binary;
+typedef t t_ext;
+inline t Deref(t_ext x) { return x; }
 
 }
 #endif

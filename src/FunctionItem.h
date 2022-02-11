@@ -86,7 +86,7 @@ class Function : public QObject, public GraphData {
   std::shared_ptr<dessser::gen::raql_type::t const> outType() const;
   // Returns nullptr if the info is not available yet
   std::shared_ptr<EventTime const> getTime() const;
-  std::shared_ptr<dessser::gen::event_time::t const> get_event_time() const;
+  std::optional<dessser::gen::event_time::t const> get_event_time() const;
   // Returns the pastData if possible:
   std::shared_ptr<PastData> getPast();
 
