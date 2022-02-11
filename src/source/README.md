@@ -8,6 +8,8 @@ Members of "source/"
   Makes use of an internal NameTreeView to select the field name on which to
   alert.
 
+- PivotEditor: the AtomicWidget editor for values of type Pivot, still TBD.
+
 - FilterEditor: QWidget to edit the alert "simple-filter" values. Composed of a
   lhsEdit and a rhsEdit (QLineEdit) and an opEdit (QComboBox).
   Uses a field name completer for the left-hand-side.

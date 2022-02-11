@@ -273,6 +273,7 @@ HEADERS += \
   processes/ProcessesWin.h \
   source/FilterEditor.h \
   source/AlertEditor.h \
+  source/PivotEditor.h \
   source/SourceCloneDialog.h \
   source/SourceEditForm.h \
   source/SourceEdit.h \
@@ -447,6 +448,7 @@ SOURCES += \
   processes/ProcessesWin.cpp \
   source/FilterEditor.cpp \
   source/AlertEditor.cpp \
+  source/PivotEditor.cpp \
   source/SourceCloneDialog.cpp \
   source/SourceEditForm.cpp \
   source/SourceEdit.cpp \

@@ -8,6 +8,7 @@
 #include "ConfChange.h"
 
 class AlertEditor;
+class PivotEditor;
 class AtomicWidget;
 class KTextEdit;
 struct KValue;
@@ -49,6 +50,9 @@ class SourceEdit : public QWidget {
   /* The editor for alert sources: */
   AlertEditor *alertEditor;
 
+  /* The editor for pivot sources: */
+  PivotEditor *pivotEditor;
+
   /* The editor for ramen language sources: */
   KTextEdit *textEditor;
 
@@ -63,6 +67,7 @@ class SourceEdit : public QWidget {
 
   int textEditorIndex;
   int alertEditorIndex;
+  int pivotEditorIndex;
   int infoEditorIndex;
 
   QWidget *errorsBox;         // Hide or show depending on presence of errors
@@ -87,7 +92,7 @@ class SourceEdit : public QWidget {
   void setSrcPath(std::string const &);
 
   /* Display the editor corresponding to the given language index (either
-   * textEditorIndex or alertEditorIndex): */
+   * textEditorIndex, alertEditorIndex, pivotEditorIndex...): */
   void setLanguage(int index);
 
   void disableLanguageSwitch(bool);

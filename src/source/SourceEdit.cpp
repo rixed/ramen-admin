@@ -19,6 +19,7 @@
 #include "misc.h"
 #include "misc_dessser.h"
 #include "source/AlertEditor.h"
+#include "source/PivotEditor.h"
 #include "source/SourceInfoViewer.h"
 
 static constexpr bool verbose{false};
@@ -41,6 +42,14 @@ SourceEdit::SourceEdit(QWidget *parent) : QWidget(parent) {
    * extensionsCombo: */
   alertEditorIndex = stackedLayout->addWidget(alertEditor);
   extensionsCombo->addItem(tr("Simple Alert"), "alert");
+
+  pivotEditor = new PivotEditor;
+  pivotEditor->setObjectName("pivotEditor");
+  connect(pivotEditor, &PivotEditor::inputChanged, this,
+          &SourceEdit::inputChanged);
+
+  pivotEditorIndex = stackedLayout->addWidget(pivotEditor);
+  extensionsCombo->addItem(tr("Simple Pivot"), "pivot");
 
   textEditor = new KTextEdit;
   textEditor->setObjectName("textEditor");
@@ -120,6 +129,8 @@ AtomicWidget const *SourceEdit::currentWidget() const {
     return textEditor;
   } else if (editorIndex == alertEditorIndex) {
     return alertEditor;
+  } else if (editorIndex == pivotEditorIndex) {
+    return pivotEditor;
   } else if (editorIndex == infoEditorIndex) {
     return infoEditor;
   }
@@ -260,6 +271,8 @@ void SourceEdit::setSrcPath(std::string const &path) {
 
   std::shared_ptr<dessser::gen::sync_key::t const> alertKey{
       keyOfSrcPath(path, "alert")};
+  std::shared_ptr<dessser::gen::sync_key::t const> pivotKey{
+      keyOfSrcPath(path, "pivot")};
   std::shared_ptr<dessser::gen::sync_key::t const> ramenKey{
       keyOfSrcPath(path, "ramen")};
   std::shared_ptr<dessser::gen::sync_key::t const> infoKey{
@@ -303,7 +316,21 @@ void SourceEdit::setSrcPath(std::string const &path) {
     setLanguageKey(alertEditorIndex, alertEditor, nullptr);
   }
 
-  // Then look for the ramen source that is the second best option:
+  // Then look for the pivot source:
+  it = kvs->map.find(pivotKey);
+  if (it != kvs->map.end() &&
+      /* Skip Null values that are created as placeholder during compilation:
+       */
+      !isNull(*it->second.val)) {
+    if (verbose) qDebug() << "SourceEdit::setSrcPath: found a pivot";
+    setLanguageKey(textEditorIndex, pivotEditor, pivotKey);
+    numSources++;
+    compete_latest(it->second.mtime, it->second.uid, pivotEditorIndex);
+  } else {
+    setLanguageKey(pivotEditorIndex, pivotEditor, nullptr);
+  }
+
+  // Then look for the ramen source:
   it = kvs->map.find(ramenKey);
   if (it != kvs->map.end() &&
       /* Skip Null values that are created as placeholder during compilation:
@@ -336,6 +363,8 @@ void SourceEdit::setSrcPath(std::string const &path) {
   }
 
   extensionSwitcher->setVisible(numSources > 1);
+
+  Q_ASSERT(latest_index >= 0);
   setLanguage(latest_index);
 
   resetError(kv);
