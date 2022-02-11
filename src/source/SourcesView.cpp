@@ -220,6 +220,8 @@ void SourcesView::hideEditor(QModelIndex const &parent, int first, int last) {
 
       if (editorForm && file->srcPath == editorForm->codeEdit->srcPath) {
         hideFile();
+        // Makes the editor read-only, which will re-enable the SourcesTreeView
+        editorForm->setEnabled(false);
       }
     }
   }
