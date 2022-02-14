@@ -401,7 +401,7 @@ void TargetConfigEntryEditor::resetParams() {
       baseName.toStdString(), "info"};
 
   kvs->lock.lock_shared();
-  dessser::gen::source_info::t const *info;
+  dessser::gen::source_info::t const *info{nullptr};
   auto it{kvs->map.find(std::shared_ptr<dessser::gen::sync_key::t const>(
       &infoKey, /* No del */ [](dessser::gen::sync_key::t const *) {}))};
   if (it != kvs->map.end()) {
