@@ -14,35 +14,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // UDP
-  Void // TCP
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
-};
-
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // UDP
-    case 1: return std::get<1>(a) == std::get<1>(b); // TCP
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t {
+enum t {
   UDP,
   TCP,
 };
 
+constexpr size_t t_size { 2 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "UDP" << std::get<0>(v); break;
-    case 1: os << "TCP" << std::get<1>(v); break;
+  switch (v) {
+    case UDP: os << "UDP"; break;
+    case TCP: os << "TCP"; break;
+    default: assert(false); break;
   }
   return os;
 }

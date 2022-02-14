@@ -16,50 +16,30 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t92d550ed37bacecb946618f8c58e8de4 : public std::variant<
-  Void, // Program
-  Void, // Site
-  Void // Global
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 3 };
-};
-
-inline bool operator==(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Program
-    case 1: return std::get<1>(a) == std::get<1>(b); // Site
-    case 2: return std::get<2>(a) == std::get<2>(b); // Global
-  };
-  return false;
-}
-inline bool operator!=(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t92d550ed37bacecb946618f8c58e8de4 {
+enum t54b6b844175be8bcdfc38eae0dd1a139 {
   Program,
   Site,
   Global,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t92d550ed37bacecb946618f8c58e8de4 const &v) {
-  switch (v.index()) {
-    case 0: os << "Program" << std::get<0>(v); break;
-    case 1: os << "Site" << std::get<1>(v); break;
-    case 2: os << "Global" << std::get<2>(v); break;
+constexpr size_t t54b6b844175be8bcdfc38eae0dd1a139_size { 3 };
+inline std::ostream &operator<<(std::ostream &os, t54b6b844175be8bcdfc38eae0dd1a139 const &v) {
+  switch (v) {
+    case Program: os << "Program"; break;
+    case Site: os << "Site"; break;
+    case Global: os << "Global"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t92d550ed37bacecb946618f8c58e8de4> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t54b6b844175be8bcdfc38eae0dd1a139> const v) { os << *v; return os; }
 
 struct t {
-  ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope;
+  ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 scope;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
-  t(::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_) : scope(scope_), name(name_), typ(typ_) {}
+  t(::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 scope_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_) : scope(scope_), name(name_), typ(typ_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {

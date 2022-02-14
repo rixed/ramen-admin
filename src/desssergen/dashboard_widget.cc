@@ -29,30 +29,14 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct representation : public std::variant<
-  Void, // Unused
-  Void, // Independent
-  Void, // Stacked
-  Void // StackCentered
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 4 };
+enum representation {
+  Unused,
+  Independent,
+  Stacked,
+  StackCentered,
 };
 
-inline bool operator==(representation const &a, representation const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Unused
-    case 1: return std::get<1>(a) == std::get<1>(b); // Independent
-    case 2: return std::get<2>(a) == std::get<2>(b); // Stacked
-    case 3: return std::get<3>(a) == std::get<3>(b); // StackCentered
-  };
-  return false;
-}
-inline bool operator!=(representation const &a, representation const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t representation_size { 4 };
 struct field {
   double opacity;
   uint32_t color;
@@ -84,26 +68,12 @@ inline bool operator==(source const &a, source const &b) {
 inline bool operator!=(source const &a, source const &b) {
   return !operator==(a, b);
 }
-struct scale : public std::variant<
-  Void, // Linear
-  Void // Logarithmic
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
+enum scale {
+  Linear,
+  Logarithmic,
 };
 
-inline bool operator==(scale const &a, scale const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Linear
-    case 1: return std::get<1>(a) == std::get<1>(b); // Logarithmic
-  };
-  return false;
-}
-inline bool operator!=(scale const &a, scale const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t scale_size { 2 };
 struct axis {
   bool left;
   bool force_zero;
@@ -118,24 +88,11 @@ inline bool operator==(axis const &a, axis const &b) {
 inline bool operator!=(axis const &a, axis const &b) {
   return !operator==(a, b);
 }
-struct type : public std::variant<
-  Void // Plot
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 1 };
+enum type {
+  Plot,
 };
 
-inline bool operator==(type const &a, type const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Plot
-  };
-  return false;
-}
-inline bool operator!=(type const &a, type const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t type_size { 1 };
 struct chart {
   std::string title;
   ::dessser::gen::dashboard_widget::type type;
@@ -519,33 +476,33 @@ inline bool operator!=(t02960804d32fdda6972311266df50308 const &a, t02960804d32f
 static std::function<Pointer(::dessser::gen::dashboard_widget::representation const &,Pointer &)> representation_to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::dashboard_widget::representation const &,Pointer &)> fun0 { [&](::dessser::gen::dashboard_widget::representation p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+    uint16_t id_1 { uint16_t(p_0) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_384 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_384;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0.index()) };
+        uint16_t id_9 { uint16_t(p_0) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_384;
         } else {
           uint16_t id_12 { 2 };
-          uint16_t id_13 { uint16_t(p_0.index()) };
+          uint16_t id_13 { uint16_t(p_0) };
           bool id_14 { bool(id_12 == id_13) };
           Pointer choose_res_15;
           if (id_14) {
             choose_res_15 = ssum_dst_384;
           } else {
-            uint16_t id_16 { uint16_t(p_0.index()) };
+            uint16_t id_16 { uint16_t(p_0) };
             uint16_t id_17 { 3 };
             bool id_18 { bool(id_16 == id_17) };
             Void id_19 { ((void)(assert(id_18)), ::dessser::Void()) };
@@ -1025,19 +982,19 @@ std::function<Pointer(::dessser::gen::dashboard_widget::source &,Pointer &)> sou
 static std::function<Pointer(::dessser::gen::dashboard_widget::scale const &,Pointer &)> scale_to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::dashboard_widget::scale const &,Pointer &)> fun233 { [&](::dessser::gen::dashboard_widget::scale p_0, Pointer p_1) {
-    uint16_t id_234 { uint16_t(p_0.index()) };
+    uint16_t id_234 { uint16_t(p_0) };
     Pointer id_235 { p_1.writeU16Le(id_234) };
     Pointer let_res_236;
     {
       Pointer ssum_dst_380 { id_235 };
       uint16_t id_237 { 0 };
-      uint16_t id_238 { uint16_t(p_0.index()) };
+      uint16_t id_238 { uint16_t(p_0) };
       bool id_239 { bool(id_237 == id_238) };
       Pointer choose_res_240;
       if (id_239) {
         choose_res_240 = ssum_dst_380;
       } else {
-        uint16_t id_241 { uint16_t(p_0.index()) };
+        uint16_t id_241 { uint16_t(p_0) };
         uint16_t id_242 { 1 };
         bool id_243 { bool(id_241 == id_242) };
         Void id_244 { ((void)(assert(id_243)), ::dessser::Void()) };
@@ -1092,12 +1049,12 @@ std::function<Pointer(::dessser::gen::dashboard_widget::axis const &,Pointer &)>
 static std::function<Pointer(::dessser::gen::dashboard_widget::type const &,Pointer &)> type_to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::dashboard_widget::type const &,Pointer &)> fun256 { [&](::dessser::gen::dashboard_widget::type p_0, Pointer p_1) {
-    uint16_t id_257 { uint16_t(p_0.index()) };
+    uint16_t id_257 { uint16_t(p_0) };
     Pointer id_258 { p_1.writeU16Le(id_257) };
     Pointer let_res_259;
     {
       Pointer ssum_dst_378 { id_258 };
-      uint16_t id_260 { uint16_t(p_0.index()) };
+      uint16_t id_260 { uint16_t(p_0) };
       uint16_t id_261 { 0 };
       bool id_262 { bool(id_260 == id_261) };
       Void id_263 { ((void)(assert(id_262)), ::dessser::Void()) };
@@ -1562,7 +1519,7 @@ static std::function<Size(::dessser::gen::dashboard_widget::representation const
 {
   std::function<Size(::dessser::gen::dashboard_widget::representation const &)> fun476 { [&](::dessser::gen::dashboard_widget::representation p_0) {
     uint16_t id_477 { 0 };
-    uint16_t id_478 { uint16_t(p_0.index()) };
+    uint16_t id_478 { uint16_t(p_0) };
     bool id_479 { bool(id_477 == id_478) };
     Size choose_res_480;
     if (id_479) {
@@ -1570,7 +1527,7 @@ static std::function<Size(::dessser::gen::dashboard_widget::representation const
       choose_res_480 = id_481;
     } else {
       uint16_t id_482 { 1 };
-      uint16_t id_483 { uint16_t(p_0.index()) };
+      uint16_t id_483 { uint16_t(p_0) };
       bool id_484 { bool(id_482 == id_483) };
       Size choose_res_485;
       if (id_484) {
@@ -1578,14 +1535,14 @@ static std::function<Size(::dessser::gen::dashboard_widget::representation const
         choose_res_485 = id_486;
       } else {
         uint16_t id_487 { 2 };
-        uint16_t id_488 { uint16_t(p_0.index()) };
+        uint16_t id_488 { uint16_t(p_0) };
         bool id_489 { bool(id_487 == id_488) };
         Size choose_res_490;
         if (id_489) {
           Size id_491 { 2UL };
           choose_res_490 = id_491;
         } else {
-          uint16_t id_492 { uint16_t(p_0.index()) };
+          uint16_t id_492 { uint16_t(p_0) };
           uint16_t id_493 { 3 };
           bool id_494 { bool(id_492 == id_493) };
           Void id_495 { ((void)(assert(id_494)), ::dessser::Void()) };
@@ -1979,14 +1936,14 @@ static std::function<Size(::dessser::gen::dashboard_widget::scale const &)> scal
 {
   std::function<Size(::dessser::gen::dashboard_widget::scale const &)> fun675 { [&](::dessser::gen::dashboard_widget::scale p_0) {
     uint16_t id_676 { 0 };
-    uint16_t id_677 { uint16_t(p_0.index()) };
+    uint16_t id_677 { uint16_t(p_0) };
     bool id_678 { bool(id_676 == id_677) };
     Size choose_res_679;
     if (id_678) {
       Size id_680 { 2UL };
       choose_res_679 = id_680;
     } else {
-      uint16_t id_681 { uint16_t(p_0.index()) };
+      uint16_t id_681 { uint16_t(p_0) };
       uint16_t id_682 { 1 };
       bool id_683 { bool(id_681 == id_682) };
       Void id_684 { ((void)(assert(id_683)), ::dessser::Void()) };
@@ -2024,7 +1981,7 @@ std::function<Size(::dessser::gen::dashboard_widget::axis const &)> axis_sersize
 static std::function<Size(::dessser::gen::dashboard_widget::type const &)> type_sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::dashboard_widget::type const &)> fun691 { [&](::dessser::gen::dashboard_widget::type p_0) {
-    uint16_t id_692 { uint16_t(p_0.index()) };
+    uint16_t id_692 { uint16_t(p_0) };
     uint16_t id_693 { 0 };
     bool id_694 { bool(id_692 == id_693) };
     Void id_695 { ((void)(assert(id_694)), ::dessser::Void()) };
@@ -2448,7 +2405,7 @@ static std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35
         ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_891;
         if (id_890) {
           (void)::dessser::Void();
-          ::dessser::gen::dashboard_widget::representation id_892 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::representation id_892 { Unused };
           ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_893 { id_892, dsum1_snd_107 };
           choose_res_891 = id_893;
         } else {
@@ -2457,7 +2414,7 @@ static std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35
           ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_896;
           if (id_895) {
             (void)::dessser::Void();
-            ::dessser::gen::dashboard_widget::representation id_897 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::dashboard_widget::representation id_897 { Independent };
             ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_898 { id_897, dsum1_snd_107 };
             choose_res_896 = id_898;
           } else {
@@ -2466,7 +2423,7 @@ static std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35
             ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 choose_res_901;
             if (id_900) {
               (void)::dessser::Void();
-              ::dessser::gen::dashboard_widget::representation id_902 { std::in_place_index<2>, ::dessser::Void() };
+              ::dessser::gen::dashboard_widget::representation id_902 { Stacked };
               ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_903 { id_902, dsum1_snd_107 };
               choose_res_901 = id_903;
             } else {
@@ -2475,7 +2432,7 @@ static std::function<::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35
               Void id_906 { ((void)(assert(id_905)), ::dessser::Void()) };
               (void)id_906;
               (void)::dessser::Void();
-              ::dessser::gen::dashboard_widget::representation id_907 { std::in_place_index<3>, ::dessser::Void() };
+              ::dessser::gen::dashboard_widget::representation id_907 { StackCentered };
               ::dessser::gen::dashboard_widget::tc1bf32b9478802aec66a4e35731c20e3 id_908 { id_907, dsum1_snd_107 };
               choose_res_901 = id_908;
             }
@@ -3276,7 +3233,7 @@ static std::function<::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d36844
         ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 choose_res_1189;
         if (id_1188) {
           (void)::dessser::Void();
-          ::dessser::gen::dashboard_widget::scale id_1190 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::scale id_1190 { Linear };
           ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 id_1191 { id_1190, dsum1_snd_77 };
           choose_res_1189 = id_1191;
         } else {
@@ -3285,7 +3242,7 @@ static std::function<::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d36844
           Void id_1194 { ((void)(assert(id_1193)), ::dessser::Void()) };
           (void)id_1194;
           (void)::dessser::Void();
-          ::dessser::gen::dashboard_widget::scale id_1195 { std::in_place_index<1>, ::dessser::Void() };
+          ::dessser::gen::dashboard_widget::scale id_1195 { Logarithmic };
           ::dessser::gen::dashboard_widget::te827b27d5f16cf2c14d368442731b974 id_1196 { id_1195, dsum1_snd_77 };
           choose_res_1189 = id_1196;
         }
@@ -3400,7 +3357,7 @@ static std::function<::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e
         Void id_1226 { ((void)(assert(id_1225)), ::dessser::Void()) };
         (void)id_1226;
         (void)::dessser::Void();
-        ::dessser::gen::dashboard_widget::type id_1227 { std::in_place_index<0>, ::dessser::Void() };
+        ::dessser::gen::dashboard_widget::type id_1227 { Plot };
         ::dessser::gen::dashboard_widget::td081d579116db2384d0a1d4e0dd44fc6 id_1228 { id_1227, dsum1_snd_65 };
         letpair_res_1223 = id_1228;
       }

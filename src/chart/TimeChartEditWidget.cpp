@@ -196,8 +196,7 @@ void TimeChartEditWidget::iterFields(
     dessser::gen::dashboard_widget::source const &source{
         funcEditor->model->source};
     for (dessser::gen::dashboard_widget::field const &field : source.fields) {
-      if (field.representation.index() ==
-          dessser::gen::dashboard_widget::Unused)
+      if (field.representation == dessser::gen::dashboard_widget::Unused)
         continue;
       cb(source.name.site, source.name.program, source.name.function, field);
     }

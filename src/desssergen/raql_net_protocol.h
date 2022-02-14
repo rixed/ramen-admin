@@ -14,39 +14,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // Collectd
-  Void, // NetflowV5
-  Void // Graphite
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 3 };
-};
-
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
-    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
-    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t {
+enum t {
   Collectd,
   NetflowV5,
   Graphite,
 };
 
+constexpr size_t t_size { 3 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "Collectd" << std::get<0>(v); break;
-    case 1: os << "NetflowV5" << std::get<1>(v); break;
-    case 2: os << "Graphite" << std::get<2>(v); break;
+  switch (v) {
+    case Collectd: os << "Collectd"; break;
+    case NetflowV5: os << "NetflowV5"; break;
+    case Graphite: os << "Graphite"; break;
+    default: assert(false); break;
   }
   return os;
 }

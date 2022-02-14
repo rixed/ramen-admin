@@ -417,7 +417,7 @@ class ParsedKey {
                     QString::fromStdString(std::get<0>(per_inst));
                 auto const &per_inst_prop{std::get<1>(per_inst)};
                 valid = true;
-                switch (per_inst_prop.index()) {
+                switch (per_inst_prop) {
                   case dessser::gen::sync_key::StateFile:
                     property = ParsedKey::StateFile;
                     break;

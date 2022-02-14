@@ -36,36 +36,17 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct dialog_key : public std::variant<
-  Void, // NumDeliveryAttempts
-  Void, // FirstDeliveryAttempt
-  Void, // LastDeliveryAttempt
-  Void, // NextScheduled
-  Void, // NextSend
-  Void, // DeliveryStatus
-  Void // Ack
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 7 };
+enum dialog_key {
+  NumDeliveryAttempts,
+  FirstDeliveryAttempt,
+  LastDeliveryAttempt,
+  NextScheduled,
+  NextSend,
+  DeliveryStatus,
+  Ack,
 };
 
-inline bool operator==(dialog_key const &a, dialog_key const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // NumDeliveryAttempts
-    case 1: return std::get<1>(a) == std::get<1>(b); // FirstDeliveryAttempt
-    case 2: return std::get<2>(a) == std::get<2>(b); // LastDeliveryAttempt
-    case 3: return std::get<3>(a) == std::get<3>(b); // NextScheduled
-    case 4: return std::get<4>(a) == std::get<4>(b); // NextSend
-    case 5: return std::get<5>(a) == std::get<5>(b); // DeliveryStatus
-    case 6: return std::get<6>(a) == std::get<6>(b); // Ack
-  };
-  return false;
-}
-inline bool operator!=(dialog_key const &a, dialog_key const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t dialog_key_size { 7 };
 struct t0e35f6d3419a3939b7cd57375b12fe4d : public std::tuple<
   std::string,
   ::dessser::gen::sync_key::dialog_key
@@ -198,48 +179,28 @@ inline bool operator==(per_tail const &a, per_tail const &b) {
 inline bool operator!=(per_tail const &a, per_tail const &b) {
   return !operator==(a, b);
 }
-struct t62147b4d97ca22ce48402f8d7a47b9c0 : public std::variant<
-  Void, // StateFile
-  Void, // InputRingFile
-  Void, // Pid
-  Void, // LastKilled
-  Void, // LastExit
-  Void, // LastExitStatus
-  Void, // SuccessiveFailures
-  Void // QuarantineUntil
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 8 };
+enum t3bfefd186ceadc684ef77d31d23d7c52 {
+  StateFile,
+  InputRingFile,
+  Pid,
+  LastKilled,
+  LastExit,
+  LastExitStatus,
+  SuccessiveFailures,
+  QuarantineUntil,
 };
 
-inline bool operator==(t62147b4d97ca22ce48402f8d7a47b9c0 const &a, t62147b4d97ca22ce48402f8d7a47b9c0 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // StateFile
-    case 1: return std::get<1>(a) == std::get<1>(b); // InputRingFile
-    case 2: return std::get<2>(a) == std::get<2>(b); // Pid
-    case 3: return std::get<3>(a) == std::get<3>(b); // LastKilled
-    case 4: return std::get<4>(a) == std::get<4>(b); // LastExit
-    case 5: return std::get<5>(a) == std::get<5>(b); // LastExitStatus
-    case 6: return std::get<6>(a) == std::get<6>(b); // SuccessiveFailures
-    case 7: return std::get<7>(a) == std::get<7>(b); // QuarantineUntil
-  };
-  return false;
-}
-inline bool operator!=(t62147b4d97ca22ce48402f8d7a47b9c0 const &a, t62147b4d97ca22ce48402f8d7a47b9c0 const &b) {
-  return !operator==(a, b);
-}
-struct ta7e4a6f84fc41fdc68e99605bbb0a0c8 : public std::tuple<
+constexpr size_t t3bfefd186ceadc684ef77d31d23d7c52_size { 8 };
+struct t5d790125bd8085672473297d0e9c081f : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0
+  ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52
 > {
   using tuple::tuple;
 };
-inline bool operator==(ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &a, ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &b) {
+inline bool operator==(t5d790125bd8085672473297d0e9c081f const &a, t5d790125bd8085672473297d0e9c081f const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &a, ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &b) {
+inline bool operator!=(t5d790125bd8085672473297d0e9c081f const &a, t5d790125bd8085672473297d0e9c081f const &b) {
   return !operator==(a, b);
 }
 struct per_worker_data : public std::variant<
@@ -249,7 +210,7 @@ struct per_worker_data : public std::variant<
   Void, // NumArcBytes
   Void, // AllocedArcBytes
   Void, // Worker
-  ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8, // PerInstance
+  ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f, // PerInstance
   uint32_t, // PerReplayer
   Void // OutputSpecs
 > {
@@ -288,73 +249,46 @@ inline bool operator==(per_worker const &a, per_worker const &b) {
 inline bool operator!=(per_worker const &a, per_worker const &b) {
   return !operator==(a, b);
 }
-struct tcc9598dfd3f6ae835fa2904058bd9af9 : public std::variant<
-  Void, // Host
-  Void // Port
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
+enum tb5053d0003d1688225c0dc91bd1eddad {
+  Host,
+  Port,
 };
 
-inline bool operator==(tcc9598dfd3f6ae835fa2904058bd9af9 const &a, tcc9598dfd3f6ae835fa2904058bd9af9 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Host
-    case 1: return std::get<1>(a) == std::get<1>(b); // Port
-  };
-  return false;
-}
-inline bool operator!=(tcc9598dfd3f6ae835fa2904058bd9af9 const &a, tcc9598dfd3f6ae835fa2904058bd9af9 const &b) {
-  return !operator==(a, b);
-}
-struct t8b473b477d9037c968f39934f3815b98 : public std::tuple<
+constexpr size_t tb5053d0003d1688225c0dc91bd1eddad_size { 2 };
+struct tce3ced3565173b22d1e7d8ac72d2847a : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9
+  ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad
 > {
   using tuple::tuple;
 };
-inline bool operator==(t8b473b477d9037c968f39934f3815b98 const &a, t8b473b477d9037c968f39934f3815b98 const &b) {
+inline bool operator==(tce3ced3565173b22d1e7d8ac72d2847a const &a, tce3ced3565173b22d1e7d8ac72d2847a const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t8b473b477d9037c968f39934f3815b98 const &a, t8b473b477d9037c968f39934f3815b98 const &b) {
+inline bool operator!=(tce3ced3565173b22d1e7d8ac72d2847a const &a, tce3ced3565173b22d1e7d8ac72d2847a const &b) {
   return !operator==(a, b);
 }
-struct t64d562ea504a9ce27a59b90c4e554a51 : public std::variant<
-  Void // Executable
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 1 };
+enum t69db7ba57a1a41136c9cf71027ecff6d {
+  Executable,
 };
 
-inline bool operator==(t64d562ea504a9ce27a59b90c4e554a51 const &a, t64d562ea504a9ce27a59b90c4e554a51 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Executable
-  };
-  return false;
-}
-inline bool operator!=(t64d562ea504a9ce27a59b90c4e554a51 const &a, t64d562ea504a9ce27a59b90c4e554a51 const &b) {
-  return !operator==(a, b);
-}
-struct t85827d1984b82a47867ad2208bc45f28 : public std::tuple<
+constexpr size_t t69db7ba57a1a41136c9cf71027ecff6d_size { 1 };
+struct tec4f96bd3eb49dea75f73acefb527ab5 : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51
+  ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d
 > {
   using tuple::tuple;
 };
-inline bool operator==(t85827d1984b82a47867ad2208bc45f28 const &a, t85827d1984b82a47867ad2208bc45f28 const &b) {
+inline bool operator==(tec4f96bd3eb49dea75f73acefb527ab5 const &a, tec4f96bd3eb49dea75f73acefb527ab5 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t85827d1984b82a47867ad2208bc45f28 const &a, t85827d1984b82a47867ad2208bc45f28 const &b) {
+inline bool operator!=(tec4f96bd3eb49dea75f73acefb527ab5 const &a, tec4f96bd3eb49dea75f73acefb527ab5 const &b) {
   return !operator==(a, b);
 }
 struct per_site_data : public std::variant<
   Void, // IsMaster
-  ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98, // PerService
+  ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a, // PerService
   ::dessser::gen::sync_key::per_worker, // PerWorker
-  ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 // PerProgram
+  ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 // PerProgram
 > {
   using variant::variant;
   using variant::operator=;
@@ -751,18 +685,18 @@ inline bool operator==(t5c90cea3f3a08b18ff7f2236b4f968fc const &a, t5c90cea3f3a0
 inline bool operator!=(t5c90cea3f3a08b18ff7f2236b4f968fc const &a, t5c90cea3f3a08b18ff7f2236b4f968fc const &b) {
   return !operator==(a, b);
 }
-struct t4cdccf3979a446cc6c30bc2b6ecc87ae : public std::tuple<
-  ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0,
+struct t99c2105410eb17e555280229a27ad913 : public std::tuple<
+  ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52,
   Pointer
 > {
   using tuple::tuple;
-  t4cdccf3979a446cc6c30bc2b6ecc87ae(std::tuple<::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  t99c2105410eb17e555280229a27ad913(std::tuple<::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52, Pointer> p)
+    : std::tuple<::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t4cdccf3979a446cc6c30bc2b6ecc87ae const &a, t4cdccf3979a446cc6c30bc2b6ecc87ae const &b) {
+inline bool operator==(t99c2105410eb17e555280229a27ad913 const &a, t99c2105410eb17e555280229a27ad913 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t4cdccf3979a446cc6c30bc2b6ecc87ae const &a, t4cdccf3979a446cc6c30bc2b6ecc87ae const &b) {
+inline bool operator!=(t99c2105410eb17e555280229a27ad913 const &a, t99c2105410eb17e555280229a27ad913 const &b) {
   return !operator==(a, b);
 }
 struct t1f40308c4d529d3aab5f7f6d77e7f092 : public std::tuple<
@@ -807,18 +741,18 @@ inline bool operator==(te4133d682331ecfabfc7bd76e1489530 const &a, te4133d682331
 inline bool operator!=(te4133d682331ecfabfc7bd76e1489530 const &a, te4133d682331ecfabfc7bd76e1489530 const &b) {
   return !operator==(a, b);
 }
-struct t8f0858866d1e27d5fa38c6941e6365f2 : public std::tuple<
-  ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9,
+struct ta9f9ceab16835b8c1c72622b75b4cdfd : public std::tuple<
+  ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad,
   Pointer
 > {
   using tuple::tuple;
-  t8f0858866d1e27d5fa38c6941e6365f2(std::tuple<::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9, Pointer> p)
-    : std::tuple<::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  ta9f9ceab16835b8c1c72622b75b4cdfd(std::tuple<::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad, Pointer> p)
+    : std::tuple<::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t8f0858866d1e27d5fa38c6941e6365f2 const &a, t8f0858866d1e27d5fa38c6941e6365f2 const &b) {
+inline bool operator==(ta9f9ceab16835b8c1c72622b75b4cdfd const &a, ta9f9ceab16835b8c1c72622b75b4cdfd const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t8f0858866d1e27d5fa38c6941e6365f2 const &a, t8f0858866d1e27d5fa38c6941e6365f2 const &b) {
+inline bool operator!=(ta9f9ceab16835b8c1c72622b75b4cdfd const &a, ta9f9ceab16835b8c1c72622b75b4cdfd const &b) {
   return !operator==(a, b);
 }
 struct t46884d5a883114c46d32db813b52f29d : public std::tuple<
@@ -963,54 +897,54 @@ inline bool operator!=(struct per_dash_key const &, struct per_dash_key const &)
 static std::function<Pointer(::dessser::gen::sync_key::dialog_key const &,Pointer &)> dialog_key_to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::sync_key::dialog_key const &,Pointer &)> fun0 { [&](::dessser::gen::sync_key::dialog_key p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+    uint16_t id_1 { uint16_t(p_0) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_763 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_763;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0.index()) };
+        uint16_t id_9 { uint16_t(p_0) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_763;
         } else {
           uint16_t id_12 { 2 };
-          uint16_t id_13 { uint16_t(p_0.index()) };
+          uint16_t id_13 { uint16_t(p_0) };
           bool id_14 { bool(id_12 == id_13) };
           Pointer choose_res_15;
           if (id_14) {
             choose_res_15 = ssum_dst_763;
           } else {
             uint16_t id_16 { 3 };
-            uint16_t id_17 { uint16_t(p_0.index()) };
+            uint16_t id_17 { uint16_t(p_0) };
             bool id_18 { bool(id_16 == id_17) };
             Pointer choose_res_19;
             if (id_18) {
               choose_res_19 = ssum_dst_763;
             } else {
               uint16_t id_20 { 4 };
-              uint16_t id_21 { uint16_t(p_0.index()) };
+              uint16_t id_21 { uint16_t(p_0) };
               bool id_22 { bool(id_20 == id_21) };
               Pointer choose_res_23;
               if (id_22) {
                 choose_res_23 = ssum_dst_763;
               } else {
                 uint16_t id_24 { 5 };
-                uint16_t id_25 { uint16_t(p_0.index()) };
+                uint16_t id_25 { uint16_t(p_0) };
                 bool id_26 { bool(id_24 == id_25) };
                 Pointer choose_res_27;
                 if (id_26) {
                   choose_res_27 = ssum_dst_763;
                 } else {
-                  uint16_t id_28 { uint16_t(p_0.index()) };
+                  uint16_t id_28 { uint16_t(p_0) };
                   uint16_t id_29 { 6 };
                   bool id_30 { bool(id_28 == id_29) };
                   Void id_31 { ((void)(assert(id_30)), ::dessser::Void()) };
@@ -1763,7 +1697,7 @@ static std::function<Pointer(::dessser::gen::sync_key::per_worker_data const &,P
                     bool id_352 { bool(id_351 == label1_725) };
                     Pointer choose_res_353;
                     if (id_352) {
-                      ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_354 { std::get<6 /* PerInstance */>(p_0) };
+                      ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_354 { std::get<6 /* PerInstance */>(p_0) };
                       std::string id_355 { std::get<0>(id_354) };
                       uint32_t id_356 { (uint32_t)id_355.size() };
                       Vec<1, uint32_t> id_357 {  id_356  };
@@ -1823,16 +1757,16 @@ static std::function<Pointer(::dessser::gen::sync_key::per_worker_data const &,P
                         }
                         let_res_358 = let_res_360;
                       }
-                      ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_392 { std::get<6 /* PerInstance */>(p_0) };
+                      ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_392 { std::get<6 /* PerInstance */>(p_0) };
                       std::string id_393 { std::get<0>(id_392) };
                       Bytes id_394 { id_393 };
                       Pointer id_395 { let_res_358.writeBytes(id_394) };
                       Pointer let_res_396;
                       {
                         Pointer stup_dst_729 { id_395 };
-                        ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_397 { std::get<6 /* PerInstance */>(p_0) };
-                        ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_398 { std::get<1>(id_397) };
-                        uint16_t id_399 { uint16_t(id_398.index()) };
+                        ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_397 { std::get<6 /* PerInstance */>(p_0) };
+                        ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_398 { std::get<1>(id_397) };
+                        uint16_t id_399 { uint16_t(id_398) };
                         Pointer let_res_400;
                         {
                           uint16_t label1_730 { id_399 };
@@ -2036,7 +1970,7 @@ static std::function<Pointer(::dessser::gen::sync_key::per_site_data &,Pointer &
         bool id_452 { bool(id_450 == id_451) };
         Pointer choose_res_453;
         if (id_452) {
-          ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_454 { std::get<1 /* PerService */>(p_0) };
+          ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_454 { std::get<1 /* PerService */>(p_0) };
           std::string id_455 { std::get<0>(id_454) };
           uint32_t id_456 { (uint32_t)id_455.size() };
           Vec<1, uint32_t> id_457 {  id_456  };
@@ -2096,32 +2030,32 @@ static std::function<Pointer(::dessser::gen::sync_key::per_site_data &,Pointer &
             }
             let_res_458 = let_res_460;
           }
-          ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_492 { std::get<1 /* PerService */>(p_0) };
+          ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_492 { std::get<1 /* PerService */>(p_0) };
           std::string id_493 { std::get<0>(id_492) };
           Bytes id_494 { id_493 };
           Pointer id_495 { let_res_458.writeBytes(id_494) };
           Pointer let_res_496;
           {
             Pointer stup_dst_742 { id_495 };
-            ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_497 { std::get<1 /* PerService */>(p_0) };
-            ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_498 { std::get<1>(id_497) };
-            uint16_t id_499 { uint16_t(id_498.index()) };
+            ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_497 { std::get<1 /* PerService */>(p_0) };
+            ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_498 { std::get<1>(id_497) };
+            uint16_t id_499 { uint16_t(id_498) };
             Pointer id_500 { stup_dst_742.writeU16Le(id_499) };
             Pointer let_res_501;
             {
               Pointer ssum_dst_744 { id_500 };
               uint16_t id_502 { 0 };
-              ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_503 { std::get<1 /* PerService */>(p_0) };
-              ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_504 { std::get<1>(id_503) };
-              uint16_t id_505 { uint16_t(id_504.index()) };
+              ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_503 { std::get<1 /* PerService */>(p_0) };
+              ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_504 { std::get<1>(id_503) };
+              uint16_t id_505 { uint16_t(id_504) };
               bool id_506 { bool(id_502 == id_505) };
               Pointer choose_res_507;
               if (id_506) {
                 choose_res_507 = ssum_dst_744;
               } else {
-                ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_508 { std::get<1 /* PerService */>(p_0) };
-                ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_509 { std::get<1>(id_508) };
-                uint16_t id_510 { uint16_t(id_509.index()) };
+                ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_508 { std::get<1 /* PerService */>(p_0) };
+                ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_509 { std::get<1>(id_508) };
+                uint16_t id_510 { uint16_t(id_509) };
                 uint16_t id_511 { 1 };
                 bool id_512 { bool(id_510 == id_511) };
                 Void id_513 { ((void)(assert(id_512)), ::dessser::Void()) };
@@ -2148,7 +2082,7 @@ static std::function<Pointer(::dessser::gen::sync_key::per_site_data &,Pointer &
             bool id_522 { bool(id_520 == id_521) };
             Void id_523 { ((void)(assert(id_522)), ::dessser::Void()) };
             (void)id_523;
-            ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_524 { std::get<3 /* PerProgram */>(p_0) };
+            ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_524 { std::get<3 /* PerProgram */>(p_0) };
             std::string id_525 { std::get<0>(id_524) };
             uint32_t id_526 { (uint32_t)id_525.size() };
             Vec<1, uint32_t> id_527 {  id_526  };
@@ -2208,23 +2142,23 @@ static std::function<Pointer(::dessser::gen::sync_key::per_site_data &,Pointer &
               }
               let_res_528 = let_res_530;
             }
-            ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_562 { std::get<3 /* PerProgram */>(p_0) };
+            ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_562 { std::get<3 /* PerProgram */>(p_0) };
             std::string id_563 { std::get<0>(id_562) };
             Bytes id_564 { id_563 };
             Pointer id_565 { let_res_528.writeBytes(id_564) };
             Pointer let_res_566;
             {
               Pointer stup_dst_737 { id_565 };
-              ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_567 { std::get<3 /* PerProgram */>(p_0) };
-              ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51 id_568 { std::get<1>(id_567) };
-              uint16_t id_569 { uint16_t(id_568.index()) };
+              ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_567 { std::get<3 /* PerProgram */>(p_0) };
+              ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d id_568 { std::get<1>(id_567) };
+              uint16_t id_569 { uint16_t(id_568) };
               Pointer id_570 { stup_dst_737.writeU16Le(id_569) };
               Pointer let_res_571;
               {
                 Pointer ssum_dst_739 { id_570 };
-                ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_572 { std::get<3 /* PerProgram */>(p_0) };
-                ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51 id_573 { std::get<1>(id_572) };
-                uint16_t id_574 { uint16_t(id_573.index()) };
+                ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_572 { std::get<3 /* PerProgram */>(p_0) };
+                ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d id_573 { std::get<1>(id_572) };
+                uint16_t id_574 { uint16_t(id_573) };
                 uint16_t id_575 { 0 };
                 bool id_576 { bool(id_574 == id_575) };
                 Void id_577 { ((void)(assert(id_576)), ::dessser::Void()) };
@@ -3079,7 +3013,7 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
 {
   std::function<Size(::dessser::gen::sync_key::dialog_key const &)> fun965 { [&](::dessser::gen::sync_key::dialog_key p_0) {
     uint16_t id_966 { 0 };
-    uint16_t id_967 { uint16_t(p_0.index()) };
+    uint16_t id_967 { uint16_t(p_0) };
     bool id_968 { bool(id_966 == id_967) };
     Size choose_res_969;
     if (id_968) {
@@ -3087,7 +3021,7 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
       choose_res_969 = id_970;
     } else {
       uint16_t id_971 { 1 };
-      uint16_t id_972 { uint16_t(p_0.index()) };
+      uint16_t id_972 { uint16_t(p_0) };
       bool id_973 { bool(id_971 == id_972) };
       Size choose_res_974;
       if (id_973) {
@@ -3095,7 +3029,7 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
         choose_res_974 = id_975;
       } else {
         uint16_t id_976 { 2 };
-        uint16_t id_977 { uint16_t(p_0.index()) };
+        uint16_t id_977 { uint16_t(p_0) };
         bool id_978 { bool(id_976 == id_977) };
         Size choose_res_979;
         if (id_978) {
@@ -3103,7 +3037,7 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
           choose_res_979 = id_980;
         } else {
           uint16_t id_981 { 3 };
-          uint16_t id_982 { uint16_t(p_0.index()) };
+          uint16_t id_982 { uint16_t(p_0) };
           bool id_983 { bool(id_981 == id_982) };
           Size choose_res_984;
           if (id_983) {
@@ -3111,7 +3045,7 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
             choose_res_984 = id_985;
           } else {
             uint16_t id_986 { 4 };
-            uint16_t id_987 { uint16_t(p_0.index()) };
+            uint16_t id_987 { uint16_t(p_0) };
             bool id_988 { bool(id_986 == id_987) };
             Size choose_res_989;
             if (id_988) {
@@ -3119,14 +3053,14 @@ static std::function<Size(::dessser::gen::sync_key::dialog_key const &)> dialog_
               choose_res_989 = id_990;
             } else {
               uint16_t id_991 { 5 };
-              uint16_t id_992 { uint16_t(p_0.index()) };
+              uint16_t id_992 { uint16_t(p_0) };
               bool id_993 { bool(id_991 == id_992) };
               Size choose_res_994;
               if (id_993) {
                 Size id_995 { 2UL };
                 choose_res_994 = id_995;
               } else {
-                uint16_t id_996 { uint16_t(p_0.index()) };
+                uint16_t id_996 { uint16_t(p_0) };
                 uint16_t id_997 { 6 };
                 bool id_998 { bool(id_996 == id_997) };
                 Void id_999 { ((void)(assert(id_998)), ::dessser::Void()) };
@@ -3721,7 +3655,7 @@ static std::function<Size(::dessser::gen::sync_key::per_worker_data const &)> pe
                 Size choose_res_1265;
                 if (id_1264) {
                   Size id_1266 { 2UL };
-                  ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_1267 { std::get<6 /* PerInstance */>(p_0) };
+                  ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_1267 { std::get<6 /* PerInstance */>(p_0) };
                   std::string id_1268 { std::get<0>(id_1267) };
                   uint32_t id_1269 { (uint32_t)id_1268.size() };
                   Vec<1, uint32_t> id_1270 {  id_1269  };
@@ -3761,7 +3695,7 @@ static std::function<Size(::dessser::gen::sync_key::per_worker_data const &)> pe
                     }
                     let_res_1271 = let_res_1274;
                   }
-                  ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_1292 { std::get<6 /* PerInstance */>(p_0) };
+                  ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_1292 { std::get<6 /* PerInstance */>(p_0) };
                   std::string id_1293 { std::get<0>(id_1292) };
                   uint32_t id_1294 { (uint32_t)id_1293.size() };
                   Size id_1295 { Size(id_1294) };
@@ -3770,9 +3704,9 @@ static std::function<Size(::dessser::gen::sync_key::per_worker_data const &)> pe
                   Size let_res_1298;
                   {
                     Size sz_647 { id_1297 };
-                    ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_1299 { std::get<6 /* PerInstance */>(p_0) };
-                    ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_1300 { std::get<1>(id_1299) };
-                    uint16_t id_1301 { uint16_t(id_1300.index()) };
+                    ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_1299 { std::get<6 /* PerInstance */>(p_0) };
+                    ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_1300 { std::get<1>(id_1299) };
+                    uint16_t id_1301 { uint16_t(id_1300) };
                     Size let_res_1302;
                     {
                       uint16_t label2_648 { id_1301 };
@@ -3967,7 +3901,7 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
       Size choose_res_1370;
       if (id_1369) {
         Size id_1371 { 2UL };
-        ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_1372 { std::get<1 /* PerService */>(p_0) };
+        ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_1372 { std::get<1 /* PerService */>(p_0) };
         std::string id_1373 { std::get<0>(id_1372) };
         uint32_t id_1374 { (uint32_t)id_1373.size() };
         Vec<1, uint32_t> id_1375 {  id_1374  };
@@ -4007,7 +3941,7 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
           }
           let_res_1376 = let_res_1379;
         }
-        ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_1397 { std::get<1 /* PerService */>(p_0) };
+        ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_1397 { std::get<1 /* PerService */>(p_0) };
         std::string id_1398 { std::get<0>(id_1397) };
         uint32_t id_1399 { (uint32_t)id_1398.size() };
         Size id_1400 { Size(id_1399) };
@@ -4017,9 +3951,9 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
         {
           Size sz_662 { id_1402 };
           uint16_t id_1404 { 0 };
-          ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_1405 { std::get<1 /* PerService */>(p_0) };
-          ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_1406 { std::get<1>(id_1405) };
-          uint16_t id_1407 { uint16_t(id_1406.index()) };
+          ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_1405 { std::get<1 /* PerService */>(p_0) };
+          ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_1406 { std::get<1>(id_1405) };
+          uint16_t id_1407 { uint16_t(id_1406) };
           bool id_1408 { bool(id_1404 == id_1407) };
           Size choose_res_1409;
           if (id_1408) {
@@ -4027,9 +3961,9 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
             Size id_1411 { Size(sz_662 + id_1410) };
             choose_res_1409 = id_1411;
           } else {
-            ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_1412 { std::get<1 /* PerService */>(p_0) };
-            ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_1413 { std::get<1>(id_1412) };
-            uint16_t id_1414 { uint16_t(id_1413.index()) };
+            ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_1412 { std::get<1 /* PerService */>(p_0) };
+            ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_1413 { std::get<1>(id_1412) };
+            uint16_t id_1414 { uint16_t(id_1413) };
             uint16_t id_1415 { 1 };
             bool id_1416 { bool(id_1414 == id_1415) };
             Void id_1417 { ((void)(assert(id_1416)), ::dessser::Void()) };
@@ -4059,7 +3993,7 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
           Void id_1431 { ((void)(assert(id_1430)), ::dessser::Void()) };
           (void)id_1431;
           Size id_1432 { 2UL };
-          ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_1433 { std::get<3 /* PerProgram */>(p_0) };
+          ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_1433 { std::get<3 /* PerProgram */>(p_0) };
           std::string id_1434 { std::get<0>(id_1433) };
           uint32_t id_1435 { (uint32_t)id_1434.size() };
           Vec<1, uint32_t> id_1436 {  id_1435  };
@@ -4099,7 +4033,7 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
             }
             let_res_1437 = let_res_1440;
           }
-          ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_1458 { std::get<3 /* PerProgram */>(p_0) };
+          ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_1458 { std::get<3 /* PerProgram */>(p_0) };
           std::string id_1459 { std::get<0>(id_1458) };
           uint32_t id_1460 { (uint32_t)id_1459.size() };
           Size id_1461 { Size(id_1460) };
@@ -4108,9 +4042,9 @@ static std::function<Size(::dessser::gen::sync_key::per_site_data &)> per_site_d
           Size let_res_1464;
           {
             Size sz_656 { id_1463 };
-            ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_1465 { std::get<3 /* PerProgram */>(p_0) };
-            ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51 id_1466 { std::get<1>(id_1465) };
-            uint16_t id_1467 { uint16_t(id_1466.index()) };
+            ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_1465 { std::get<3 /* PerProgram */>(p_0) };
+            ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d id_1466 { std::get<1>(id_1465) };
+            uint16_t id_1467 { uint16_t(id_1466) };
             uint16_t id_1468 { 0 };
             bool id_1469 { bool(id_1467 == id_1468) };
             Void id_1470 { ((void)(assert(id_1469)), ::dessser::Void()) };
@@ -4862,7 +4796,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
         ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1824;
         if (id_1823) {
           (void)::dessser::Void();
-          ::dessser::gen::sync_key::dialog_key id_1825 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::sync_key::dialog_key id_1825 { NumDeliveryAttempts };
           ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1826 { id_1825, dsum1_snd_362 };
           choose_res_1824 = id_1826;
         } else {
@@ -4871,7 +4805,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
           ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1829;
           if (id_1828) {
             (void)::dessser::Void();
-            ::dessser::gen::sync_key::dialog_key id_1830 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::sync_key::dialog_key id_1830 { FirstDeliveryAttempt };
             ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1831 { id_1830, dsum1_snd_362 };
             choose_res_1829 = id_1831;
           } else {
@@ -4880,7 +4814,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
             ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1834;
             if (id_1833) {
               (void)::dessser::Void();
-              ::dessser::gen::sync_key::dialog_key id_1835 { std::in_place_index<2>, ::dessser::Void() };
+              ::dessser::gen::sync_key::dialog_key id_1835 { LastDeliveryAttempt };
               ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1836 { id_1835, dsum1_snd_362 };
               choose_res_1834 = id_1836;
             } else {
@@ -4889,7 +4823,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
               ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1839;
               if (id_1838) {
                 (void)::dessser::Void();
-                ::dessser::gen::sync_key::dialog_key id_1840 { std::in_place_index<3>, ::dessser::Void() };
+                ::dessser::gen::sync_key::dialog_key id_1840 { NextScheduled };
                 ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1841 { id_1840, dsum1_snd_362 };
                 choose_res_1839 = id_1841;
               } else {
@@ -4898,7 +4832,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
                 ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1844;
                 if (id_1843) {
                   (void)::dessser::Void();
-                  ::dessser::gen::sync_key::dialog_key id_1845 { std::in_place_index<4>, ::dessser::Void() };
+                  ::dessser::gen::sync_key::dialog_key id_1845 { NextSend };
                   ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1846 { id_1845, dsum1_snd_362 };
                   choose_res_1844 = id_1846;
                 } else {
@@ -4907,7 +4841,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
                   ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 choose_res_1849;
                   if (id_1848) {
                     (void)::dessser::Void();
-                    ::dessser::gen::sync_key::dialog_key id_1850 { std::in_place_index<5>, ::dessser::Void() };
+                    ::dessser::gen::sync_key::dialog_key id_1850 { DeliveryStatus };
                     ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1851 { id_1850, dsum1_snd_362 };
                     choose_res_1849 = id_1851;
                   } else {
@@ -4916,7 +4850,7 @@ static std::function<::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25
                     Void id_1854 { ((void)(assert(id_1853)), ::dessser::Void()) };
                     (void)id_1854;
                     (void)::dessser::Void();
-                    ::dessser::gen::sync_key::dialog_key id_1855 { std::in_place_index<6>, ::dessser::Void() };
+                    ::dessser::gen::sync_key::dialog_key id_1855 { Ack };
                     ::dessser::gen::sync_key::t0f2a9fd478dd335e4b2f4a474357fd25 id_1856 { id_1855, dsum1_snd_362 };
                     choose_res_1849 = id_1856;
                   }
@@ -6178,74 +6112,74 @@ static std::function<::dessser::gen::sync_key::t5c90cea3f3a08b18ff7f2236b4f968fc
                             ::dessser::gen::sync_key::ta97bb48ed75bbda6173555873826c8c6 id_2298 { du16_fst_91, du16_snd_92 };
                             letpair_res_2297 = id_2298;
                           }
-                          ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae let_res_2299;
+                          ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 let_res_2299;
                           {
                             ::dessser::gen::sync_key::ta97bb48ed75bbda6173555873826c8c6 dsum1_96 { letpair_res_2297 };
-                            ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae letpair_res_2300;
+                            ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 letpair_res_2300;
                             {
                               auto dsum1_fst_97 { std::get<0>(dsum1_96) };
                               auto dsum1_snd_98 { std::get<1>(dsum1_96) };
                               uint16_t id_2301 { 0 };
                               bool id_2302 { bool(id_2301 == dsum1_fst_97) };
-                              ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2303;
+                              ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2303;
                               if (id_2302) {
                                 (void)::dessser::Void();
-                                ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2304 { std::in_place_index<0>, ::dessser::Void() };
-                                ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2305 { id_2304, dsum1_snd_98 };
+                                ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2304 { StateFile };
+                                ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2305 { id_2304, dsum1_snd_98 };
                                 choose_res_2303 = id_2305;
                               } else {
                                 uint16_t id_2306 { 1 };
                                 bool id_2307 { bool(id_2306 == dsum1_fst_97) };
-                                ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2308;
+                                ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2308;
                                 if (id_2307) {
                                   (void)::dessser::Void();
-                                  ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2309 { std::in_place_index<1>, ::dessser::Void() };
-                                  ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2310 { id_2309, dsum1_snd_98 };
+                                  ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2309 { InputRingFile };
+                                  ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2310 { id_2309, dsum1_snd_98 };
                                   choose_res_2308 = id_2310;
                                 } else {
                                   uint16_t id_2311 { 2 };
                                   bool id_2312 { bool(id_2311 == dsum1_fst_97) };
-                                  ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2313;
+                                  ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2313;
                                   if (id_2312) {
                                     (void)::dessser::Void();
-                                    ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2314 { std::in_place_index<2>, ::dessser::Void() };
-                                    ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2315 { id_2314, dsum1_snd_98 };
+                                    ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2314 { Pid };
+                                    ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2315 { id_2314, dsum1_snd_98 };
                                     choose_res_2313 = id_2315;
                                   } else {
                                     uint16_t id_2316 { 3 };
                                     bool id_2317 { bool(id_2316 == dsum1_fst_97) };
-                                    ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2318;
+                                    ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2318;
                                     if (id_2317) {
                                       (void)::dessser::Void();
-                                      ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2319 { std::in_place_index<3>, ::dessser::Void() };
-                                      ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2320 { id_2319, dsum1_snd_98 };
+                                      ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2319 { LastKilled };
+                                      ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2320 { id_2319, dsum1_snd_98 };
                                       choose_res_2318 = id_2320;
                                     } else {
                                       uint16_t id_2321 { 4 };
                                       bool id_2322 { bool(id_2321 == dsum1_fst_97) };
-                                      ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2323;
+                                      ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2323;
                                       if (id_2322) {
                                         (void)::dessser::Void();
-                                        ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2324 { std::in_place_index<4>, ::dessser::Void() };
-                                        ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2325 { id_2324, dsum1_snd_98 };
+                                        ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2324 { LastExit };
+                                        ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2325 { id_2324, dsum1_snd_98 };
                                         choose_res_2323 = id_2325;
                                       } else {
                                         uint16_t id_2326 { 5 };
                                         bool id_2327 { bool(id_2326 == dsum1_fst_97) };
-                                        ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2328;
+                                        ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2328;
                                         if (id_2327) {
                                           (void)::dessser::Void();
-                                          ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2329 { std::in_place_index<5>, ::dessser::Void() };
-                                          ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2330 { id_2329, dsum1_snd_98 };
+                                          ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2329 { LastExitStatus };
+                                          ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2330 { id_2329, dsum1_snd_98 };
                                           choose_res_2328 = id_2330;
                                         } else {
                                           uint16_t id_2331 { 6 };
                                           bool id_2332 { bool(id_2331 == dsum1_fst_97) };
-                                          ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae choose_res_2333;
+                                          ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 choose_res_2333;
                                           if (id_2332) {
                                             (void)::dessser::Void();
-                                            ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2334 { std::in_place_index<6>, ::dessser::Void() };
-                                            ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2335 { id_2334, dsum1_snd_98 };
+                                            ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2334 { SuccessiveFailures };
+                                            ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2335 { id_2334, dsum1_snd_98 };
                                             choose_res_2333 = id_2335;
                                           } else {
                                             uint16_t id_2336 { 7 };
@@ -6253,8 +6187,8 @@ static std::function<::dessser::gen::sync_key::t5c90cea3f3a08b18ff7f2236b4f968fc
                                             Void id_2338 { ((void)(assert(id_2337)), ::dessser::Void()) };
                                             (void)id_2338;
                                             (void)::dessser::Void();
-                                            ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0 id_2339 { std::in_place_index<7>, ::dessser::Void() };
-                                            ::dessser::gen::sync_key::t4cdccf3979a446cc6c30bc2b6ecc87ae id_2340 { id_2339, dsum1_snd_98 };
+                                            ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52 id_2339 { QuarantineUntil };
+                                            ::dessser::gen::sync_key::t99c2105410eb17e555280229a27ad913 id_2340 { id_2339, dsum1_snd_98 };
                                             choose_res_2333 = id_2340;
                                           }
                                           choose_res_2328 = choose_res_2333;
@@ -6277,7 +6211,7 @@ static std::function<::dessser::gen::sync_key::t5c90cea3f3a08b18ff7f2236b4f968fc
                           {
                             auto dtup_fst_124 { std::get<0>(let_res_2299) };
                             auto dtup_snd_125 { std::get<1>(let_res_2299) };
-                            ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8 id_2342 { dtup_fst_88, dtup_fst_124 };
+                            ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f id_2342 { dtup_fst_88, dtup_fst_124 };
                             ::dessser::gen::sync_key::per_worker_data id_2343 { std::in_place_index<6>, id_2342 };
                             ::dessser::gen::sync_key::t5c90cea3f3a08b18ff7f2236b4f968fc id_2344 { id_2343, dtup_snd_125 };
                             letpair_res_2341 = id_2344;
@@ -6589,20 +6523,20 @@ static std::function<::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530
                   ::dessser::gen::sync_key::ta97bb48ed75bbda6173555873826c8c6 id_2431 { du16_fst_214, du16_snd_215 };
                   letpair_res_2430 = id_2431;
                 }
-                ::dessser::gen::sync_key::t8f0858866d1e27d5fa38c6941e6365f2 let_res_2432;
+                ::dessser::gen::sync_key::ta9f9ceab16835b8c1c72622b75b4cdfd let_res_2432;
                 {
                   ::dessser::gen::sync_key::ta97bb48ed75bbda6173555873826c8c6 dsum1_219 { letpair_res_2430 };
-                  ::dessser::gen::sync_key::t8f0858866d1e27d5fa38c6941e6365f2 letpair_res_2433;
+                  ::dessser::gen::sync_key::ta9f9ceab16835b8c1c72622b75b4cdfd letpair_res_2433;
                   {
                     auto dsum1_fst_220 { std::get<0>(dsum1_219) };
                     auto dsum1_snd_221 { std::get<1>(dsum1_219) };
                     uint16_t id_2434 { 0 };
                     bool id_2435 { bool(id_2434 == dsum1_fst_220) };
-                    ::dessser::gen::sync_key::t8f0858866d1e27d5fa38c6941e6365f2 choose_res_2436;
+                    ::dessser::gen::sync_key::ta9f9ceab16835b8c1c72622b75b4cdfd choose_res_2436;
                     if (id_2435) {
                       (void)::dessser::Void();
-                      ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_2437 { std::in_place_index<0>, ::dessser::Void() };
-                      ::dessser::gen::sync_key::t8f0858866d1e27d5fa38c6941e6365f2 id_2438 { id_2437, dsum1_snd_221 };
+                      ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_2437 { Host };
+                      ::dessser::gen::sync_key::ta9f9ceab16835b8c1c72622b75b4cdfd id_2438 { id_2437, dsum1_snd_221 };
                       choose_res_2436 = id_2438;
                     } else {
                       uint16_t id_2439 { 1 };
@@ -6610,8 +6544,8 @@ static std::function<::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530
                       Void id_2441 { ((void)(assert(id_2440)), ::dessser::Void()) };
                       (void)id_2441;
                       (void)::dessser::Void();
-                      ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9 id_2442 { std::in_place_index<1>, ::dessser::Void() };
-                      ::dessser::gen::sync_key::t8f0858866d1e27d5fa38c6941e6365f2 id_2443 { id_2442, dsum1_snd_221 };
+                      ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad id_2442 { Port };
+                      ::dessser::gen::sync_key::ta9f9ceab16835b8c1c72622b75b4cdfd id_2443 { id_2442, dsum1_snd_221 };
                       choose_res_2436 = id_2443;
                     }
                     letpair_res_2433 = choose_res_2436;
@@ -6622,7 +6556,7 @@ static std::function<::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530
                 {
                   auto dtup_fst_229 { std::get<0>(let_res_2432) };
                   auto dtup_snd_230 { std::get<1>(let_res_2432) };
-                  ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98 id_2445 { dtup_fst_211, dtup_fst_229 };
+                  ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a id_2445 { dtup_fst_211, dtup_fst_229 };
                   ::dessser::gen::sync_key::per_site_data id_2446 { std::in_place_index<1>, id_2445 };
                   ::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530 id_2447 { id_2446, dtup_snd_230 };
                   letpair_res_2444 = id_2447;
@@ -6771,8 +6705,8 @@ static std::function<::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530
                       Void id_2514 { ((void)(assert(id_2513)), ::dessser::Void()) };
                       (void)id_2514;
                       (void)::dessser::Void();
-                      ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51 id_2515 { std::in_place_index<0>, ::dessser::Void() };
-                      ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 id_2516 { dtup_fst_175, id_2515 };
+                      ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d id_2515 { Executable };
+                      ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 id_2516 { dtup_fst_175, id_2515 };
                       ::dessser::gen::sync_key::per_site_data id_2517 { std::in_place_index<3>, id_2516 };
                       ::dessser::gen::sync_key::te4133d682331ecfabfc7bd76e1489530 id_2518 { id_2517, dsum1_snd_185 };
                       letpair_res_2511 = id_2518;

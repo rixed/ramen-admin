@@ -14,35 +14,7 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // StartToBeSent
-  Void, // StartToBeSentThenStopped
-  Void, // StartSent
-  Void, // StartAcked
-  Void, // StopToBeSent
-  Void // StopSent
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 6 };
-};
-
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // StartToBeSent
-    case 1: return std::get<1>(a) == std::get<1>(b); // StartToBeSentThenStopped
-    case 2: return std::get<2>(a) == std::get<2>(b); // StartSent
-    case 3: return std::get<3>(a) == std::get<3>(b); // StartAcked
-    case 4: return std::get<4>(a) == std::get<4>(b); // StopToBeSent
-    case 5: return std::get<5>(a) == std::get<5>(b); // StopSent
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t {
+enum t {
   StartToBeSent,
   StartToBeSentThenStopped,
   StartSent,
@@ -51,14 +23,16 @@ enum Constr_t {
   StopSent,
 };
 
+constexpr size_t t_size { 6 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "StartToBeSent" << std::get<0>(v); break;
-    case 1: os << "StartToBeSentThenStopped" << std::get<1>(v); break;
-    case 2: os << "StartSent" << std::get<2>(v); break;
-    case 3: os << "StartAcked" << std::get<3>(v); break;
-    case 4: os << "StopToBeSent" << std::get<4>(v); break;
-    case 5: os << "StopSent" << std::get<5>(v); break;
+  switch (v) {
+    case StartToBeSent: os << "StartToBeSent"; break;
+    case StartToBeSentThenStopped: os << "StartToBeSentThenStopped"; break;
+    case StartSent: os << "StartSent"; break;
+    case StartAcked: os << "StartAcked"; break;
+    case StopToBeSent: os << "StopToBeSent"; break;
+    case StopSent: os << "StopSent"; break;
+    default: assert(false); break;
   }
   return os;
 }

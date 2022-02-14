@@ -44,7 +44,7 @@ std::shared_ptr<dessser::gen::sync_key::t const> const targetConfig{
         dessser::Void())};
 
 dessser::gen::dashboard_widget::type const chartPlotType{
-    std::in_place_index<dessser::gen::dashboard_widget::Plot>, dessser::Void()};
+    dessser::gen::dashboard_widget::Plot};
 
 bool isScalar(dessser::gen::raql_type::t const &t) {
   switch (t.type.index()) {
@@ -114,8 +114,7 @@ std::shared_ptr<dessser::gen::sync_value::t> newDashboardChart(
   dessser::gen::dashboard_widget::axis axis{
       true, false,
       dessser::gen::dashboard_widget::scale{
-          std::in_place_index<dessser::gen::dashboard_widget::Linear>,
-          dessser::Void()}};
+          dessser::gen::dashboard_widget::Linear}};
 
   dessser::Arr<dessser::gen::dashboard_widget::axis> axes{axis};
 
@@ -425,7 +424,7 @@ static QString toQStringSpecKey(dessser::gen::raql_value::t const &v,
                       std::get<dessser::gen::sync_key::PerInstance>(
                           per_work_data)};
                   auto const &per_inst_key{std::get<1>(per_inst)};
-                  switch (per_inst_key.index()) {
+                  switch (per_inst_key) {
                     case dessser::gen::sync_key::LastKilled:
                     case dessser::gen::sync_key::LastExit:
                     case dessser::gen::sync_key::QuarantineUntil:
@@ -455,7 +454,7 @@ static QString toQStringSpecKey(dessser::gen::raql_value::t const &v,
                   std::get<dessser::gen::sync_key::Dialogs>(per_inc_key)};
               dessser::gen::sync_key::dialog_key const &per_diag_key{
                   std::get<1>(per_diag)};
-              switch (per_diag_key.index()) {
+              switch (per_diag_key) {
                 case dessser::gen::sync_key::FirstDeliveryAttempt:
                 case dessser::gen::sync_key::LastDeliveryAttempt:
                 case dessser::gen::sync_key::NextScheduled:

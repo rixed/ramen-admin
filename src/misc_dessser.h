@@ -11,6 +11,8 @@
 #include <utility>
 
 // Has to be included because uses a typedef for t:
+#include "desssergen/dashboard_widget.h"
+#include "desssergen/sync_key.h"
 #include "desssergen/time_range.h"
 
 namespace dessser {
@@ -18,10 +20,6 @@ namespace gen {
 namespace alerting_log {
 struct t;
 }
-namespace dashboard_widget {
-struct chart;
-struct type;
-}  // namespace dashboard_widget
 namespace fq_function_name {
 struct t;
 }
@@ -65,11 +63,6 @@ struct t;
 namespace sync_socket {
 struct t;
 }
-namespace sync_key {
-struct dialog_key;
-struct incident_key;
-struct t;
-}  // namespace sync_key
 namespace sync_value {
 struct t;
 }

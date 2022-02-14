@@ -47,8 +47,7 @@ void NotifTimeLine::paintTick(dessser::gen::alerting_log::t const &log,
 
   switch (log.index()) {
     case dessser::gen::alerting_log::NewNotification:
-      switch (
-          std::get<dessser::gen::alerting_log::NewNotification>(log).index()) {
+      switch (std::get<dessser::gen::alerting_log::NewNotification>(log)) {
         case dessser::gen::alerting_log::Duplicate:
           painter->setPen(thick);
           painter->drawLine(x0, y0, x0, y1);
@@ -177,8 +176,7 @@ void NotifTimeLine::paintEvent(QPaintEvent *event) {
 
       switch (log->index()) {
         case dessser::gen::alerting_log::NewNotification:
-          switch (std::get<dessser::gen::alerting_log::NewNotification>(*log)
-                      .index()) {
+          switch (std::get<dessser::gen::alerting_log::NewNotification>(*log)) {
             case dessser::gen::alerting_log::Duplicate:
               painter.setBrush(Qt::white);
               break;

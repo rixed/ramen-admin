@@ -168,7 +168,7 @@ double TimeChart::VofY(qreal y, qreal min, qreal max, bool log,
 static std::pair<bool, int> get_log_base(
     std::shared_ptr<dessser::gen::dashboard_widget::axis const> const &conf) {
   if (conf) {
-    switch (conf->scale.index()) {
+    switch (conf->scale) {
       case dessser::gen::dashboard_widget::Linear:
         break;  // default
       case dessser::gen::dashboard_widget::Logarithmic:
@@ -711,7 +711,7 @@ void TimeChart::paintEvent(QPaintEvent *event) {
         PerFunctionResults &res{it->second};
 
         size_t const factorValues{res.addFactors(field.factors)};
-        switch (field.representation.index()) {
+        switch (field.representation) {
           case dessser::gen::dashboard_widget::Unused:
             break;  // Well tried!
           case dessser::gen::dashboard_widget::Independent:

@@ -14,35 +14,17 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // reset
-  Void // never
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
-};
-
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // reset
-    case 1: return std::get<1>(a) == std::get<1>(b); // never
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t {
+enum t {
   reset,
   never,
 };
 
+constexpr size_t t_size { 2 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "reset" << std::get<0>(v); break;
-    case 1: os << "never" << std::get<1>(v); break;
+  switch (v) {
+    case reset: os << "reset"; break;
+    case never: os << "never"; break;
+    default: assert(false); break;
   }
   return os;
 }

@@ -15,44 +15,26 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t5ea188408f7fe865526a4b1d67aef6a3 : public std::variant<
-  Void, // OutputField
-  Void // Parameter
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
-};
-
-inline bool operator==(t5ea188408f7fe865526a4b1d67aef6a3 const &a, t5ea188408f7fe865526a4b1d67aef6a3 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // OutputField
-    case 1: return std::get<1>(a) == std::get<1>(b); // Parameter
-  };
-  return false;
-}
-inline bool operator!=(t5ea188408f7fe865526a4b1d67aef6a3 const &a, t5ea188408f7fe865526a4b1d67aef6a3 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t5ea188408f7fe865526a4b1d67aef6a3 {
+enum t168aeaddd2d2bd1c09c4d0fcc52d226f {
   OutputField,
   Parameter,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t5ea188408f7fe865526a4b1d67aef6a3 const &v) {
-  switch (v.index()) {
-    case 0: os << "OutputField" << std::get<0>(v); break;
-    case 1: os << "Parameter" << std::get<1>(v); break;
+constexpr size_t t168aeaddd2d2bd1c09c4d0fcc52d226f_size { 2 };
+inline std::ostream &operator<<(std::ostream &os, t168aeaddd2d2bd1c09c4d0fcc52d226f const &v) {
+  switch (v) {
+    case OutputField: os << "OutputField"; break;
+    case Parameter: os << "Parameter"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5ea188408f7fe865526a4b1d67aef6a3> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t168aeaddd2d2bd1c09c4d0fcc52d226f> const v) { os << *v; return os; }
 
 struct t : public std::tuple<
   dessser::gen::field_name::t_ext,
-  ::dessser::gen::event_time_field::t5ea188408f7fe865526a4b1d67aef6a3,
+  ::dessser::gen::event_time_field::t168aeaddd2d2bd1c09c4d0fcc52d226f,
   double
 > {
   using tuple::tuple;

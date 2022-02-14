@@ -7,6 +7,8 @@
 #include <optional>
 #include <string>
 
+#include "desssergen/sync_key.h"
+
 namespace dessser {
 namespace gen {
 namespace alerting_log {
@@ -15,11 +17,6 @@ struct t;
 namespace alerting_notification {
 struct t;
 }
-namespace sync_key {
-struct t;
-struct incident_key;
-struct dialog_key;
-}  // namespace sync_key
 namespace sync_value {
 struct t;
 }

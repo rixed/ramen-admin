@@ -94,8 +94,7 @@ QString alertingLogToQString(dessser::gen::alerting_log::t const &log) {
   switch (log.index()) {
     case dessser::gen::alerting_log::NewNotification: {
       QString ret{TR("New notification received, %1")};
-      switch (
-          std::get<dessser::gen::alerting_log::NewNotification>(log).index()) {
+      switch (std::get<dessser::gen::alerting_log::NewNotification>(log)) {
         case dessser::gen::alerting_log::Duplicate:
           return ret.arg(TR("duplicate"));
         case dessser::gen::alerting_log::Inhibited:
@@ -105,7 +104,7 @@ QString alertingLogToQString(dessser::gen::alerting_log::t const &log) {
         case dessser::gen::alerting_log::StartEscalation:
           return ret.arg(TR("started escalation"));
         default:
-          qFatal("alertingLogToQString: invalid NewNotification index");
+          qFatal("alertingLogToQString: invalid NewNotification");
       }
     } break;
     case dessser::gen::alerting_log::Outcry:

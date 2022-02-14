@@ -55,13 +55,14 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       std::string const &service_name{std::get<0>(service)};
       auto const &service_data{std::get<1>(service)};
       ret = ret << "PerService" << QString::fromStdString(service_name);
-      switch (service_data.index()) {
+      switch (service_data) {
         case Host:
           return ret << "Host";
         case Port:
           return ret << "Port";
         default:
           qFatal("Invalid service_data");
+          return ret << "INVALID";
       }
     }
     case PerWorker: {
@@ -90,7 +91,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
           std::string const &instance_name{std::get<0>(instance)};
           auto const &instance_data{std::get<1>(instance)};
           ret = ret << "PerInstance" << QString::fromStdString(instance_name);
-          switch (instance_data.index()) {
+          switch (instance_data) {
             case StateFile:
               return ret << "StateFile";
             case InputRingFile:
@@ -109,6 +110,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
               return ret << "QuarantineUntil";
             default:
               qFatal("Invalid instance_data");
+              return ret << "INVALID";
           }
         }
         case PerReplayer:
@@ -118,6 +120,7 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
           return ret << "OutputSpecs";
         default:
           qFatal("Invalid worker_data");
+          return ret << "INVALID";
       }
     }
     case PerProgram: {
@@ -127,15 +130,17 @@ static QStringList treeNamesOfPerSiteKey(dessser::gen::sync_key::t const &k) {
       ret = ret << "PerProgram"
                 << QString::fromStdString(program_name)
                        .split('/', Qt::SkipEmptyParts);
-      switch (program_data.index()) {
+      switch (program_data) {
         case Executable:
           return ret << "Executable";
         default:
           qFatal("Invalid program_data");
+          return ret << "INVALID";
       }
     }
     default:
       qFatal("Invalid data.index");
+      return ret << "INVALID";
   }
 }
 
@@ -270,7 +275,7 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
                        .split('/', Qt::SkipEmptyParts);
       dessser::gen::sync_key::dialog_key const &dialog_data{
           std::get<1>(dialogs)};
-      switch (dialog_data.index()) {
+      switch (dialog_data) {
         case NumDeliveryAttempts:
           return ret << "NumDeliveryAttempts";
         case FirstDeliveryAttempt:
@@ -287,6 +292,7 @@ static QStringList treeNamesOfIncidentsKey(dessser::gen::sync_key::t const &k) {
           return ret << "Ack";
         default:
           qFatal("Invalid dialog_data");
+          return ret << "INVALID";
       }
     }
     case Journal: {

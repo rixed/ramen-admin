@@ -15,43 +15,21 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct representation : public std::variant<
-  Void, // Unused
-  Void, // Independent
-  Void, // Stacked
-  Void // StackCentered
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 4 };
-};
-
-inline bool operator==(representation const &a, representation const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Unused
-    case 1: return std::get<1>(a) == std::get<1>(b); // Independent
-    case 2: return std::get<2>(a) == std::get<2>(b); // Stacked
-    case 3: return std::get<3>(a) == std::get<3>(b); // StackCentered
-  };
-  return false;
-}
-inline bool operator!=(representation const &a, representation const &b) {
-  return !operator==(a, b);
-}
-enum Constr_representation {
+enum representation {
   Unused,
   Independent,
   Stacked,
   StackCentered,
 };
 
+constexpr size_t representation_size { 4 };
 inline std::ostream &operator<<(std::ostream &os, representation const &v) {
-  switch (v.index()) {
-    case 0: os << "Unused" << std::get<0>(v); break;
-    case 1: os << "Independent" << std::get<1>(v); break;
-    case 2: os << "Stacked" << std::get<2>(v); break;
-    case 3: os << "StackCentered" << std::get<3>(v); break;
+  switch (v) {
+    case Unused: os << "Unused"; break;
+    case Independent: os << "Independent"; break;
+    case Stacked: os << "Stacked"; break;
+    case StackCentered: os << "StackCentered"; break;
+    default: assert(false); break;
   }
   return os;
 }
@@ -112,35 +90,17 @@ inline std::ostream &operator<<(std::ostream &os, source const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<source> const r) { os << *r; return os; }
 
-struct scale : public std::variant<
-  Void, // Linear
-  Void // Logarithmic
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
-};
-
-inline bool operator==(scale const &a, scale const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Linear
-    case 1: return std::get<1>(a) == std::get<1>(b); // Logarithmic
-  };
-  return false;
-}
-inline bool operator!=(scale const &a, scale const &b) {
-  return !operator==(a, b);
-}
-enum Constr_scale {
+enum scale {
   Linear,
   Logarithmic,
 };
 
+constexpr size_t scale_size { 2 };
 inline std::ostream &operator<<(std::ostream &os, scale const &v) {
-  switch (v.index()) {
-    case 0: os << "Linear" << std::get<0>(v); break;
-    case 1: os << "Logarithmic" << std::get<1>(v); break;
+  switch (v) {
+    case Linear: os << "Linear"; break;
+    case Logarithmic: os << "Logarithmic"; break;
+    default: assert(false); break;
   }
   return os;
 }
@@ -171,31 +131,15 @@ inline std::ostream &operator<<(std::ostream &os, axis const &r) {
 }
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<axis> const r) { os << *r; return os; }
 
-struct type : public std::variant<
-  Void // Plot
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 1 };
-};
-
-inline bool operator==(type const &a, type const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Plot
-  };
-  return false;
-}
-inline bool operator!=(type const &a, type const &b) {
-  return !operator==(a, b);
-}
-enum Constr_type {
+enum type {
   Plot,
 };
 
+constexpr size_t type_size { 1 };
 inline std::ostream &operator<<(std::ostream &os, type const &v) {
-  switch (v.index()) {
-    case 0: os << "Plot" << std::get<0>(v); break;
+  switch (v) {
+    case Plot: os << "Plot"; break;
+    default: assert(false); break;
   }
   return os;
 }

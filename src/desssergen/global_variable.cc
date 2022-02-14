@@ -30,33 +30,18 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t92d550ed37bacecb946618f8c58e8de4 : public std::variant<
-  Void, // Program
-  Void, // Site
-  Void // Global
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 3 };
+enum t54b6b844175be8bcdfc38eae0dd1a139 {
+  Program,
+  Site,
+  Global,
 };
 
-inline bool operator==(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Program
-    case 1: return std::get<1>(a) == std::get<1>(b); // Site
-    case 2: return std::get<2>(a) == std::get<2>(b); // Global
-  };
-  return false;
-}
-inline bool operator!=(t92d550ed37bacecb946618f8c58e8de4 const &a, t92d550ed37bacecb946618f8c58e8de4 const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t t54b6b844175be8bcdfc38eae0dd1a139_size { 3 };
 struct t {
-  ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope;
+  ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 scope;
   dessser::gen::field_name::t_ext name;
   dessser::gen::raql_type::t_ext typ;
-  t(::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 scope_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_) : scope(scope_), name(name_), typ(typ_) {}
+  t(::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 scope_, dessser::gen::field_name::t_ext name_, dessser::gen::raql_type::t_ext typ_) : scope(scope_), name(name_), typ(typ_) {}
   t() = default;
 };
 inline bool operator==(t const &a, t const &b) {
@@ -94,18 +79,18 @@ inline bool operator==(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75bbda6173555873826c8c6 const &b) {
   return !operator==(a, b);
 }
-struct t0ada32134f64de64018f187b88e38ff4 : public std::tuple<
-  ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4,
+struct tcb5a2028a026de335727b68454048f2c : public std::tuple<
+  ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139,
   Pointer
 > {
   using tuple::tuple;
-  t0ada32134f64de64018f187b88e38ff4(std::tuple<::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4, Pointer> p)
-    : std::tuple<::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4, Pointer>(std::get<0>(p), std::get<1>(p)) {}
+  tcb5a2028a026de335727b68454048f2c(std::tuple<::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139, Pointer> p)
+    : std::tuple<::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139, Pointer>(std::get<0>(p), std::get<1>(p)) {}
 };
-inline bool operator==(t0ada32134f64de64018f187b88e38ff4 const &a, t0ada32134f64de64018f187b88e38ff4 const &b) {
+inline bool operator==(tcb5a2028a026de335727b68454048f2c const &a, tcb5a2028a026de335727b68454048f2c const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t0ada32134f64de64018f187b88e38ff4 const &a, t0ada32134f64de64018f187b88e38ff4 const &b) {
+inline bool operator!=(tcb5a2028a026de335727b68454048f2c const &a, tcb5a2028a026de335727b68454048f2c const &b) {
   return !operator==(a, b);
 }
 struct t18cecf882d7ac80cef37dfe6b22279d4 : public std::tuple<
@@ -152,30 +137,30 @@ inline bool operator!=(t101502ffd7fb38beafe4b49259f92ba1 const &a, t101502ffd7fb
 static std::function<Pointer(::dessser::gen::global_variable::t &,Pointer &)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::global_variable::t &,Pointer &)> fun0 { [&](::dessser::gen::global_variable::t p_0, Pointer p_1) {
-    ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_1 { p_0.scope };
-    uint16_t id_2 { uint16_t(id_1.index()) };
+    ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_1 { p_0.scope };
+    uint16_t id_2 { uint16_t(id_1) };
     Pointer id_3 { p_1.writeU16Le(id_2) };
     Pointer let_res_4;
     {
       Pointer ssum_dst_92 { id_3 };
       uint16_t id_5 { 0 };
-      ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_6 { p_0.scope };
-      uint16_t id_7 { uint16_t(id_6.index()) };
+      ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_6 { p_0.scope };
+      uint16_t id_7 { uint16_t(id_6) };
       bool id_8 { bool(id_5 == id_7) };
       Pointer choose_res_9;
       if (id_8) {
         choose_res_9 = ssum_dst_92;
       } else {
         uint16_t id_10 { 1 };
-        ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_11 { p_0.scope };
-        uint16_t id_12 { uint16_t(id_11.index()) };
+        ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_11 { p_0.scope };
+        uint16_t id_12 { uint16_t(id_11) };
         bool id_13 { bool(id_10 == id_12) };
         Pointer choose_res_14;
         if (id_13) {
           choose_res_14 = ssum_dst_92;
         } else {
-          ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_15 { p_0.scope };
-          uint16_t id_16 { uint16_t(id_15.index()) };
+          ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_15 { p_0.scope };
+          uint16_t id_16 { uint16_t(id_15) };
           uint16_t id_17 { 2 };
           bool id_18 { bool(id_16 == id_17) };
           Void id_19 { ((void)(assert(id_18)), ::dessser::Void()) };
@@ -221,8 +206,8 @@ static std::function<Size(::dessser::gen::global_variable::t &)> sersize_of_row_
 {
   std::function<Size(::dessser::gen::global_variable::t &)> fun28 { [&](::dessser::gen::global_variable::t p_0) {
     uint16_t id_29 { 0 };
-    ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_30 { p_0.scope };
-    uint16_t id_31 { uint16_t(id_30.index()) };
+    ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_30 { p_0.scope };
+    uint16_t id_31 { uint16_t(id_30) };
     bool id_32 { bool(id_29 == id_31) };
     Size choose_res_33;
     if (id_32) {
@@ -230,16 +215,16 @@ static std::function<Size(::dessser::gen::global_variable::t &)> sersize_of_row_
       choose_res_33 = id_34;
     } else {
       uint16_t id_35 { 1 };
-      ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_36 { p_0.scope };
-      uint16_t id_37 { uint16_t(id_36.index()) };
+      ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_36 { p_0.scope };
+      uint16_t id_37 { uint16_t(id_36) };
       bool id_38 { bool(id_35 == id_37) };
       Size choose_res_39;
       if (id_38) {
         Size id_40 { 2UL };
         choose_res_39 = id_40;
       } else {
-        ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_41 { p_0.scope };
-        uint16_t id_42 { uint16_t(id_41.index()) };
+        ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_41 { p_0.scope };
+        uint16_t id_42 { uint16_t(id_41) };
         uint16_t id_43 { 2 };
         bool id_44 { bool(id_42 == id_43) };
         Void id_45 { ((void)(assert(id_44)), ::dessser::Void()) };
@@ -299,29 +284,29 @@ static std::function<::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8f
       ::dessser::gen::global_variable::ta97bb48ed75bbda6173555873826c8c6 id_60 { du16_fst_58, du16_snd_59 };
       letpair_res_59 = id_60;
     }
-    ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 let_res_61;
+    ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c let_res_61;
     {
       ::dessser::gen::global_variable::ta97bb48ed75bbda6173555873826c8c6 dsum1_63 { letpair_res_59 };
-      ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 letpair_res_62;
+      ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c letpair_res_62;
       {
         auto dsum1_fst_64 { std::get<0>(dsum1_63) };
         auto dsum1_snd_65 { std::get<1>(dsum1_63) };
         uint16_t id_63 { 0 };
         bool id_64 { bool(id_63 == dsum1_fst_64) };
-        ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 choose_res_65;
+        ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c choose_res_65;
         if (id_64) {
           (void)::dessser::Void();
-          ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_66 { std::in_place_index<0>, ::dessser::Void() };
-          ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_67 { id_66, dsum1_snd_65 };
+          ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_66 { Program };
+          ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c id_67 { id_66, dsum1_snd_65 };
           choose_res_65 = id_67;
         } else {
           uint16_t id_68 { 1 };
           bool id_69 { bool(id_68 == dsum1_fst_64) };
-          ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 choose_res_70;
+          ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c choose_res_70;
           if (id_69) {
             (void)::dessser::Void();
-            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_71 { std::in_place_index<1>, ::dessser::Void() };
-            ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_72 { id_71, dsum1_snd_65 };
+            ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_71 { Site };
+            ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c id_72 { id_71, dsum1_snd_65 };
             choose_res_70 = id_72;
           } else {
             uint16_t id_73 { 2 };
@@ -329,8 +314,8 @@ static std::function<::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8f
             Void id_75 { ((void)(assert(id_74)), ::dessser::Void()) };
             (void)id_75;
             (void)::dessser::Void();
-            ::dessser::gen::global_variable::t92d550ed37bacecb946618f8c58e8de4 id_76 { std::in_place_index<2>, ::dessser::Void() };
-            ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 id_77 { id_76, dsum1_snd_65 };
+            ::dessser::gen::global_variable::t54b6b844175be8bcdfc38eae0dd1a139 id_76 { Global };
+            ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c id_77 { id_76, dsum1_snd_65 };
             choose_res_70 = id_77;
           }
           choose_res_65 = choose_res_70;
@@ -341,7 +326,7 @@ static std::function<::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8f
     }
     ::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8fcedbcc6 let_res_78;
     {
-      ::dessser::gen::global_variable::t0ada32134f64de64018f187b88e38ff4 drec_75 { let_res_61 };
+      ::dessser::gen::global_variable::tcb5a2028a026de335727b68454048f2c drec_75 { let_res_61 };
       ::dessser::gen::global_variable::tc84f2fcbb1d2467c59aba5c8fcedbcc6 letpair_res_79;
       {
         auto drec_fst_76 { std::get<0>(drec_75) };

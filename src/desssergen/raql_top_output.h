@@ -14,39 +14,19 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // Membership
-  Void, // Rank
-  Void // List
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 3 };
-};
-
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Membership
-    case 1: return std::get<1>(a) == std::get<1>(b); // Rank
-    case 2: return std::get<2>(a) == std::get<2>(b); // List
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t {
+enum t {
   Membership,
   Rank,
   List,
 };
 
+constexpr size_t t_size { 3 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
-  switch (v.index()) {
-    case 0: os << "Membership" << std::get<0>(v); break;
-    case 1: os << "Rank" << std::get<1>(v); break;
-    case 2: os << "List" << std::get<2>(v); break;
+  switch (v) {
+    case Membership: os << "Membership"; break;
+    case Rank: os << "Rank"; break;
+    case List: os << "List"; break;
+    default: assert(false); break;
   }
   return os;
 }

@@ -51,8 +51,7 @@ static dessser::gen::dashboard_widget::field makeField(
     std::string const &program, std::string const &function,
     std::string const &field) {
   dessser::gen::dashboard_widget::representation representation{
-      std::in_place_index<dessser::gen::dashboard_widget::Unused>,
-      dessser::Void()};
+      dessser::gen::dashboard_widget::Unused};
 
   QString const full_name{QString::fromStdString(program) + "/" +
                           QString::fromStdString(function) + "/" +
@@ -114,7 +113,7 @@ QVariant TimeChartFunctionFieldsModel::data(QModelIndex const &index,
 
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:
-      return (uint)field.representation.index();
+      return (uint)field.representation;
 
     case ColFactors:
       if (role == Qt::DisplayRole) {
@@ -188,34 +187,20 @@ bool TimeChartFunctionFieldsModel::setData(QModelIndex const &index,
 
   dessser::gen::dashboard_widget::field *field{findFieldConfiguration(row)};
 
-  // Required to assign variants:
-  static dessser::gen::dashboard_widget::representation const reprUnused{
-      std::in_place_index<dessser::gen::dashboard_widget::Unused>,
-      dessser::Void()};
-  static dessser::gen::dashboard_widget::representation const reprIndependent{
-      std::in_place_index<dessser::gen::dashboard_widget::Independent>,
-      dessser::Void()};
-  static dessser::gen::dashboard_widget::representation const reprStacked{
-      std::in_place_index<dessser::gen::dashboard_widget::Stacked>,
-      dessser::Void()};
-  static dessser::gen::dashboard_widget::representation const reprStackCentered{
-      std::in_place_index<dessser::gen::dashboard_widget::StackCentered>,
-      dessser::Void()};
-
   switch (static_cast<Columns>(col)) {
     case ColRepresentation:
       switch (value.toInt()) {
         case 0:
-          field->representation = reprUnused;
+          field->representation = dessser::gen::dashboard_widget::Unused;
           break;
         case 1:
-          field->representation = reprIndependent;
+          field->representation = dessser::gen::dashboard_widget::Independent;
           break;
         case 2:
-          field->representation = reprStacked;
+          field->representation = dessser::gen::dashboard_widget::Stacked;
           break;
         case 3:
-          field->representation = reprStackCentered;
+          field->representation = dessser::gen::dashboard_widget::StackCentered;
           break;
         default:
           qFatal("TimeChartFunctionFieldsModel::setData: invalid column");
@@ -348,7 +333,7 @@ void TimeChartFunctionFieldsModel::checkSource(QString const &oldSign,
 
 bool TimeChartFunctionFieldsModel::hasSelection() const {
   for (dessser::gen::dashboard_widget::field const &field : source.fields) {
-    if (field.representation.index() != dessser::gen::dashboard_widget::Unused)
+    if (field.representation != dessser::gen::dashboard_widget::Unused)
       return true;
   }
 

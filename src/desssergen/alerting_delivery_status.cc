@@ -28,34 +28,16 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // StartToBeSent
-  Void, // StartToBeSentThenStopped
-  Void, // StartSent
-  Void, // StartAcked
-  Void, // StopToBeSent
-  Void // StopSent
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 6 };
+enum t {
+  StartToBeSent,
+  StartToBeSentThenStopped,
+  StartSent,
+  StartAcked,
+  StopToBeSent,
+  StopSent,
 };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // StartToBeSent
-    case 1: return std::get<1>(a) == std::get<1>(b); // StartToBeSentThenStopped
-    case 2: return std::get<2>(a) == std::get<2>(b); // StartSent
-    case 3: return std::get<3>(a) == std::get<3>(b); // StartAcked
-    case 4: return std::get<4>(a) == std::get<4>(b); // StopToBeSent
-    case 5: return std::get<5>(a) == std::get<5>(b); // StopSent
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t t_size { 6 };
 struct t3a70e06bd973b675ad23916a4f0f5e29 : public std::tuple<
   ::dessser::gen::alerting_delivery_status::t,
   Pointer
@@ -98,47 +80,47 @@ inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 static std::function<Pointer(::dessser::gen::alerting_delivery_status::t const &,Pointer &)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::alerting_delivery_status::t const &,Pointer &)> fun0 { [&](::dessser::gen::alerting_delivery_status::t p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+    uint16_t id_1 { uint16_t(p_0) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_89 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_89;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0.index()) };
+        uint16_t id_9 { uint16_t(p_0) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_89;
         } else {
           uint16_t id_12 { 2 };
-          uint16_t id_13 { uint16_t(p_0.index()) };
+          uint16_t id_13 { uint16_t(p_0) };
           bool id_14 { bool(id_12 == id_13) };
           Pointer choose_res_15;
           if (id_14) {
             choose_res_15 = ssum_dst_89;
           } else {
             uint16_t id_16 { 3 };
-            uint16_t id_17 { uint16_t(p_0.index()) };
+            uint16_t id_17 { uint16_t(p_0) };
             bool id_18 { bool(id_16 == id_17) };
             Pointer choose_res_19;
             if (id_18) {
               choose_res_19 = ssum_dst_89;
             } else {
               uint16_t id_20 { 4 };
-              uint16_t id_21 { uint16_t(p_0.index()) };
+              uint16_t id_21 { uint16_t(p_0) };
               bool id_22 { bool(id_20 == id_21) };
               Pointer choose_res_23;
               if (id_22) {
                 choose_res_23 = ssum_dst_89;
               } else {
-                uint16_t id_24 { uint16_t(p_0.index()) };
+                uint16_t id_24 { uint16_t(p_0) };
                 uint16_t id_25 { 5 };
                 bool id_26 { bool(id_24 == id_25) };
                 Void id_27 { ((void)(assert(id_26)), ::dessser::Void()) };
@@ -172,7 +154,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> 
 {
   std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> fun28 { [&](::dessser::gen::alerting_delivery_status::t p_0) {
     uint16_t id_29 { 0 };
-    uint16_t id_30 { uint16_t(p_0.index()) };
+    uint16_t id_30 { uint16_t(p_0) };
     bool id_31 { bool(id_29 == id_30) };
     Size choose_res_32;
     if (id_31) {
@@ -180,7 +162,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> 
       choose_res_32 = id_33;
     } else {
       uint16_t id_34 { 1 };
-      uint16_t id_35 { uint16_t(p_0.index()) };
+      uint16_t id_35 { uint16_t(p_0) };
       bool id_36 { bool(id_34 == id_35) };
       Size choose_res_37;
       if (id_36) {
@@ -188,7 +170,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> 
         choose_res_37 = id_38;
       } else {
         uint16_t id_39 { 2 };
-        uint16_t id_40 { uint16_t(p_0.index()) };
+        uint16_t id_40 { uint16_t(p_0) };
         bool id_41 { bool(id_39 == id_40) };
         Size choose_res_42;
         if (id_41) {
@@ -196,7 +178,7 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> 
           choose_res_42 = id_43;
         } else {
           uint16_t id_44 { 3 };
-          uint16_t id_45 { uint16_t(p_0.index()) };
+          uint16_t id_45 { uint16_t(p_0) };
           bool id_46 { bool(id_44 == id_45) };
           Size choose_res_47;
           if (id_46) {
@@ -204,14 +186,14 @@ static std::function<Size(::dessser::gen::alerting_delivery_status::t const &)> 
             choose_res_47 = id_48;
           } else {
             uint16_t id_49 { 4 };
-            uint16_t id_50 { uint16_t(p_0.index()) };
+            uint16_t id_50 { uint16_t(p_0) };
             bool id_51 { bool(id_49 == id_50) };
             Size choose_res_52;
             if (id_51) {
               Size id_53 { 2UL };
               choose_res_52 = id_53;
             } else {
-              uint16_t id_54 { uint16_t(p_0.index()) };
+              uint16_t id_54 { uint16_t(p_0) };
               uint16_t id_55 { 5 };
               bool id_56 { bool(id_54 == id_55) };
               Void id_57 { ((void)(assert(id_56)), ::dessser::Void()) };
@@ -274,7 +256,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
         ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 choose_res_67;
         if (id_66) {
           (void)::dessser::Void();
-          ::dessser::gen::alerting_delivery_status::t id_68 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::alerting_delivery_status::t id_68 { StartToBeSent };
           ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_69 { id_68, dsum1_snd_65 };
           choose_res_67 = id_69;
         } else {
@@ -283,7 +265,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
           ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 choose_res_72;
           if (id_71) {
             (void)::dessser::Void();
-            ::dessser::gen::alerting_delivery_status::t id_73 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::alerting_delivery_status::t id_73 { StartToBeSentThenStopped };
             ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_74 { id_73, dsum1_snd_65 };
             choose_res_72 = id_74;
           } else {
@@ -292,7 +274,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
             ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 choose_res_77;
             if (id_76) {
               (void)::dessser::Void();
-              ::dessser::gen::alerting_delivery_status::t id_78 { std::in_place_index<2>, ::dessser::Void() };
+              ::dessser::gen::alerting_delivery_status::t id_78 { StartSent };
               ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_79 { id_78, dsum1_snd_65 };
               choose_res_77 = id_79;
             } else {
@@ -301,7 +283,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
               ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 choose_res_82;
               if (id_81) {
                 (void)::dessser::Void();
-                ::dessser::gen::alerting_delivery_status::t id_83 { std::in_place_index<3>, ::dessser::Void() };
+                ::dessser::gen::alerting_delivery_status::t id_83 { StartAcked };
                 ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_84 { id_83, dsum1_snd_65 };
                 choose_res_82 = id_84;
               } else {
@@ -310,7 +292,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
                 ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 choose_res_87;
                 if (id_86) {
                   (void)::dessser::Void();
-                  ::dessser::gen::alerting_delivery_status::t id_88 { std::in_place_index<4>, ::dessser::Void() };
+                  ::dessser::gen::alerting_delivery_status::t id_88 { StopToBeSent };
                   ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_89 { id_88, dsum1_snd_65 };
                   choose_res_87 = id_89;
                 } else {
@@ -319,7 +301,7 @@ static std::function<::dessser::gen::alerting_delivery_status::t3a70e06bd973b675
                   Void id_92 { ((void)(assert(id_91)), ::dessser::Void()) };
                   (void)id_92;
                   (void)::dessser::Void();
-                  ::dessser::gen::alerting_delivery_status::t id_93 { std::in_place_index<5>, ::dessser::Void() };
+                  ::dessser::gen::alerting_delivery_status::t id_93 { StopSent };
                   ::dessser::gen::alerting_delivery_status::t3a70e06bd973b675ad23916a4f0f5e29 id_94 { id_93, dsum1_snd_65 };
                   choose_res_87 = id_94;
                 }

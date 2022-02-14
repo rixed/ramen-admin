@@ -22,37 +22,7 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct dialog_key : public std::variant<
-  Void, // NumDeliveryAttempts
-  Void, // FirstDeliveryAttempt
-  Void, // LastDeliveryAttempt
-  Void, // NextScheduled
-  Void, // NextSend
-  Void, // DeliveryStatus
-  Void // Ack
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 7 };
-};
-
-inline bool operator==(dialog_key const &a, dialog_key const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // NumDeliveryAttempts
-    case 1: return std::get<1>(a) == std::get<1>(b); // FirstDeliveryAttempt
-    case 2: return std::get<2>(a) == std::get<2>(b); // LastDeliveryAttempt
-    case 3: return std::get<3>(a) == std::get<3>(b); // NextScheduled
-    case 4: return std::get<4>(a) == std::get<4>(b); // NextSend
-    case 5: return std::get<5>(a) == std::get<5>(b); // DeliveryStatus
-    case 6: return std::get<6>(a) == std::get<6>(b); // Ack
-  };
-  return false;
-}
-inline bool operator!=(dialog_key const &a, dialog_key const &b) {
-  return !operator==(a, b);
-}
-enum Constr_dialog_key {
+enum dialog_key {
   NumDeliveryAttempts,
   FirstDeliveryAttempt,
   LastDeliveryAttempt,
@@ -62,15 +32,17 @@ enum Constr_dialog_key {
   Ack,
 };
 
+constexpr size_t dialog_key_size { 7 };
 inline std::ostream &operator<<(std::ostream &os, dialog_key const &v) {
-  switch (v.index()) {
-    case 0: os << "NumDeliveryAttempts" << std::get<0>(v); break;
-    case 1: os << "FirstDeliveryAttempt" << std::get<1>(v); break;
-    case 2: os << "LastDeliveryAttempt" << std::get<2>(v); break;
-    case 3: os << "NextScheduled" << std::get<3>(v); break;
-    case 4: os << "NextSend" << std::get<4>(v); break;
-    case 5: os << "DeliveryStatus" << std::get<5>(v); break;
-    case 6: os << "Ack" << std::get<6>(v); break;
+  switch (v) {
+    case NumDeliveryAttempts: os << "NumDeliveryAttempts"; break;
+    case FirstDeliveryAttempt: os << "FirstDeliveryAttempt"; break;
+    case LastDeliveryAttempt: os << "LastDeliveryAttempt"; break;
+    case NextScheduled: os << "NextScheduled"; break;
+    case NextSend: os << "NextSend"; break;
+    case DeliveryStatus: os << "DeliveryStatus"; break;
+    case Ack: os << "Ack"; break;
+    default: assert(false); break;
   }
   return os;
 }
@@ -312,39 +284,7 @@ inline std::ostream &operator<<(std::ostream &os, per_tail const &v) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<per_tail> const v) { os << *v; return os; }
 
-struct t62147b4d97ca22ce48402f8d7a47b9c0 : public std::variant<
-  Void, // StateFile
-  Void, // InputRingFile
-  Void, // Pid
-  Void, // LastKilled
-  Void, // LastExit
-  Void, // LastExitStatus
-  Void, // SuccessiveFailures
-  Void // QuarantineUntil
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 8 };
-};
-
-inline bool operator==(t62147b4d97ca22ce48402f8d7a47b9c0 const &a, t62147b4d97ca22ce48402f8d7a47b9c0 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // StateFile
-    case 1: return std::get<1>(a) == std::get<1>(b); // InputRingFile
-    case 2: return std::get<2>(a) == std::get<2>(b); // Pid
-    case 3: return std::get<3>(a) == std::get<3>(b); // LastKilled
-    case 4: return std::get<4>(a) == std::get<4>(b); // LastExit
-    case 5: return std::get<5>(a) == std::get<5>(b); // LastExitStatus
-    case 6: return std::get<6>(a) == std::get<6>(b); // SuccessiveFailures
-    case 7: return std::get<7>(a) == std::get<7>(b); // QuarantineUntil
-  };
-  return false;
-}
-inline bool operator!=(t62147b4d97ca22ce48402f8d7a47b9c0 const &a, t62147b4d97ca22ce48402f8d7a47b9c0 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t62147b4d97ca22ce48402f8d7a47b9c0 {
+enum t3bfefd186ceadc684ef77d31d23d7c52 {
   StateFile,
   InputRingFile,
   Pid,
@@ -355,35 +295,37 @@ enum Constr_t62147b4d97ca22ce48402f8d7a47b9c0 {
   QuarantineUntil,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t62147b4d97ca22ce48402f8d7a47b9c0 const &v) {
-  switch (v.index()) {
-    case 0: os << "StateFile" << std::get<0>(v); break;
-    case 1: os << "InputRingFile" << std::get<1>(v); break;
-    case 2: os << "Pid" << std::get<2>(v); break;
-    case 3: os << "LastKilled" << std::get<3>(v); break;
-    case 4: os << "LastExit" << std::get<4>(v); break;
-    case 5: os << "LastExitStatus" << std::get<5>(v); break;
-    case 6: os << "SuccessiveFailures" << std::get<6>(v); break;
-    case 7: os << "QuarantineUntil" << std::get<7>(v); break;
+constexpr size_t t3bfefd186ceadc684ef77d31d23d7c52_size { 8 };
+inline std::ostream &operator<<(std::ostream &os, t3bfefd186ceadc684ef77d31d23d7c52 const &v) {
+  switch (v) {
+    case StateFile: os << "StateFile"; break;
+    case InputRingFile: os << "InputRingFile"; break;
+    case Pid: os << "Pid"; break;
+    case LastKilled: os << "LastKilled"; break;
+    case LastExit: os << "LastExit"; break;
+    case LastExitStatus: os << "LastExitStatus"; break;
+    case SuccessiveFailures: os << "SuccessiveFailures"; break;
+    case QuarantineUntil: os << "QuarantineUntil"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t62147b4d97ca22ce48402f8d7a47b9c0> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t3bfefd186ceadc684ef77d31d23d7c52> const v) { os << *v; return os; }
 
-struct ta7e4a6f84fc41fdc68e99605bbb0a0c8 : public std::tuple<
+struct t5d790125bd8085672473297d0e9c081f : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::t62147b4d97ca22ce48402f8d7a47b9c0
+  ::dessser::gen::sync_key::t3bfefd186ceadc684ef77d31d23d7c52
 > {
   using tuple::tuple;
 };
-inline bool operator==(ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &a, ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &b) {
+inline bool operator==(t5d790125bd8085672473297d0e9c081f const &a, t5d790125bd8085672473297d0e9c081f const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &a, ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &b) {
+inline bool operator!=(t5d790125bd8085672473297d0e9c081f const &a, t5d790125bd8085672473297d0e9c081f const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, ta7e4a6f84fc41fdc68e99605bbb0a0c8 const &t) {
+inline std::ostream &operator<<(std::ostream &os, t5d790125bd8085672473297d0e9c081f const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -391,7 +333,7 @@ inline std::ostream &operator<<(std::ostream &os, ta7e4a6f84fc41fdc68e99605bbb0a
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<ta7e4a6f84fc41fdc68e99605bbb0a0c8> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t5d790125bd8085672473297d0e9c081f> const t) { os << *t; return os; }
 
 struct per_worker_data : public std::variant<
   Void, // RuntimeStats
@@ -400,7 +342,7 @@ struct per_worker_data : public std::variant<
   Void, // NumArcBytes
   Void, // AllocedArcBytes
   Void, // Worker
-  ::dessser::gen::sync_key::ta7e4a6f84fc41fdc68e99605bbb0a0c8, // PerInstance
+  ::dessser::gen::sync_key::t5d790125bd8085672473297d0e9c081f, // PerInstance
   uint32_t, // PerReplayer
   Void // OutputSpecs
 > {
@@ -478,54 +420,36 @@ inline std::ostream &operator<<(std::ostream &os, per_worker const &t) {
 
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<per_worker> const t) { os << *t; return os; }
 
-struct tcc9598dfd3f6ae835fa2904058bd9af9 : public std::variant<
-  Void, // Host
-  Void // Port
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 2 };
-};
-
-inline bool operator==(tcc9598dfd3f6ae835fa2904058bd9af9 const &a, tcc9598dfd3f6ae835fa2904058bd9af9 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Host
-    case 1: return std::get<1>(a) == std::get<1>(b); // Port
-  };
-  return false;
-}
-inline bool operator!=(tcc9598dfd3f6ae835fa2904058bd9af9 const &a, tcc9598dfd3f6ae835fa2904058bd9af9 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_tcc9598dfd3f6ae835fa2904058bd9af9 {
+enum tb5053d0003d1688225c0dc91bd1eddad {
   Host,
   Port,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tcc9598dfd3f6ae835fa2904058bd9af9 const &v) {
-  switch (v.index()) {
-    case 0: os << "Host" << std::get<0>(v); break;
-    case 1: os << "Port" << std::get<1>(v); break;
+constexpr size_t tb5053d0003d1688225c0dc91bd1eddad_size { 2 };
+inline std::ostream &operator<<(std::ostream &os, tb5053d0003d1688225c0dc91bd1eddad const &v) {
+  switch (v) {
+    case Host: os << "Host"; break;
+    case Port: os << "Port"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tcc9598dfd3f6ae835fa2904058bd9af9> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tb5053d0003d1688225c0dc91bd1eddad> const v) { os << *v; return os; }
 
-struct t8b473b477d9037c968f39934f3815b98 : public std::tuple<
+struct tce3ced3565173b22d1e7d8ac72d2847a : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::tcc9598dfd3f6ae835fa2904058bd9af9
+  ::dessser::gen::sync_key::tb5053d0003d1688225c0dc91bd1eddad
 > {
   using tuple::tuple;
 };
-inline bool operator==(t8b473b477d9037c968f39934f3815b98 const &a, t8b473b477d9037c968f39934f3815b98 const &b) {
+inline bool operator==(tce3ced3565173b22d1e7d8ac72d2847a const &a, tce3ced3565173b22d1e7d8ac72d2847a const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t8b473b477d9037c968f39934f3815b98 const &a, t8b473b477d9037c968f39934f3815b98 const &b) {
+inline bool operator!=(tce3ced3565173b22d1e7d8ac72d2847a const &a, tce3ced3565173b22d1e7d8ac72d2847a const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t8b473b477d9037c968f39934f3815b98 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tce3ced3565173b22d1e7d8ac72d2847a const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -533,52 +457,36 @@ inline std::ostream &operator<<(std::ostream &os, t8b473b477d9037c968f39934f3815
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t8b473b477d9037c968f39934f3815b98> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tce3ced3565173b22d1e7d8ac72d2847a> const t) { os << *t; return os; }
 
-struct t64d562ea504a9ce27a59b90c4e554a51 : public std::variant<
-  Void // Executable
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 1 };
-};
-
-inline bool operator==(t64d562ea504a9ce27a59b90c4e554a51 const &a, t64d562ea504a9ce27a59b90c4e554a51 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Executable
-  };
-  return false;
-}
-inline bool operator!=(t64d562ea504a9ce27a59b90c4e554a51 const &a, t64d562ea504a9ce27a59b90c4e554a51 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_t64d562ea504a9ce27a59b90c4e554a51 {
+enum t69db7ba57a1a41136c9cf71027ecff6d {
   Executable,
 };
 
-inline std::ostream &operator<<(std::ostream &os, t64d562ea504a9ce27a59b90c4e554a51 const &v) {
-  switch (v.index()) {
-    case 0: os << "Executable" << std::get<0>(v); break;
+constexpr size_t t69db7ba57a1a41136c9cf71027ecff6d_size { 1 };
+inline std::ostream &operator<<(std::ostream &os, t69db7ba57a1a41136c9cf71027ecff6d const &v) {
+  switch (v) {
+    case Executable: os << "Executable"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t64d562ea504a9ce27a59b90c4e554a51> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t69db7ba57a1a41136c9cf71027ecff6d> const v) { os << *v; return os; }
 
-struct t85827d1984b82a47867ad2208bc45f28 : public std::tuple<
+struct tec4f96bd3eb49dea75f73acefb527ab5 : public std::tuple<
   std::string,
-  ::dessser::gen::sync_key::t64d562ea504a9ce27a59b90c4e554a51
+  ::dessser::gen::sync_key::t69db7ba57a1a41136c9cf71027ecff6d
 > {
   using tuple::tuple;
 };
-inline bool operator==(t85827d1984b82a47867ad2208bc45f28 const &a, t85827d1984b82a47867ad2208bc45f28 const &b) {
+inline bool operator==(tec4f96bd3eb49dea75f73acefb527ab5 const &a, tec4f96bd3eb49dea75f73acefb527ab5 const &b) {
   return std::get<0>(a) == std::get<0>(b) && std::get<1>(a) == std::get<1>(b);
 }
-inline bool operator!=(t85827d1984b82a47867ad2208bc45f28 const &a, t85827d1984b82a47867ad2208bc45f28 const &b) {
+inline bool operator!=(tec4f96bd3eb49dea75f73acefb527ab5 const &a, tec4f96bd3eb49dea75f73acefb527ab5 const &b) {
   return !operator==(a, b);
 }
-inline std::ostream &operator<<(std::ostream &os, t85827d1984b82a47867ad2208bc45f28 const &t) {
+inline std::ostream &operator<<(std::ostream &os, tec4f96bd3eb49dea75f73acefb527ab5 const &t) {
   os << '<';
   os << std::get<0>(t) << ", ";
   os << std::get<1>(t);
@@ -586,13 +494,13 @@ inline std::ostream &operator<<(std::ostream &os, t85827d1984b82a47867ad2208bc45
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t85827d1984b82a47867ad2208bc45f28> const t) { os << *t; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tec4f96bd3eb49dea75f73acefb527ab5> const t) { os << *t; return os; }
 
 struct per_site_data : public std::variant<
   Void, // IsMaster
-  ::dessser::gen::sync_key::t8b473b477d9037c968f39934f3815b98, // PerService
+  ::dessser::gen::sync_key::tce3ced3565173b22d1e7d8ac72d2847a, // PerService
   ::dessser::gen::sync_key::per_worker, // PerWorker
-  ::dessser::gen::sync_key::t85827d1984b82a47867ad2208bc45f28 // PerProgram
+  ::dessser::gen::sync_key::tec4f96bd3eb49dea75f73acefb527ab5 // PerProgram
 > {
   using variant::variant;
   using variant::operator=;

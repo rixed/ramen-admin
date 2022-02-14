@@ -28,48 +28,23 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // Unknown
-  Void, // In
-  Void, // GroupState
-  Void, // GlobalState
-  Void, // OutPrevious
-  Void, // Out
-  Void, // SortFirst
-  Void, // SortSmallest
-  Void, // SortGreatest
-  Void, // Param
-  Void, // Env
-  Void, // Record
-  Void // GlobalVar
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 13 };
+enum t {
+  Unknown,
+  In,
+  GroupState,
+  GlobalState,
+  OutPrevious,
+  Out,
+  SortFirst,
+  SortSmallest,
+  SortGreatest,
+  Param,
+  Env,
+  Record,
+  GlobalVar,
 };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Unknown
-    case 1: return std::get<1>(a) == std::get<1>(b); // In
-    case 2: return std::get<2>(a) == std::get<2>(b); // GroupState
-    case 3: return std::get<3>(a) == std::get<3>(b); // GlobalState
-    case 4: return std::get<4>(a) == std::get<4>(b); // OutPrevious
-    case 5: return std::get<5>(a) == std::get<5>(b); // Out
-    case 6: return std::get<6>(a) == std::get<6>(b); // SortFirst
-    case 7: return std::get<7>(a) == std::get<7>(b); // SortSmallest
-    case 8: return std::get<8>(a) == std::get<8>(b); // SortGreatest
-    case 9: return std::get<9>(a) == std::get<9>(b); // Param
-    case 10: return std::get<10>(a) == std::get<10>(b); // Env
-    case 11: return std::get<11>(a) == std::get<11>(b); // Record
-    case 12: return std::get<12>(a) == std::get<12>(b); // GlobalVar
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t t_size { 13 };
 struct t40df163e80e2c56cfae759a1807c4d79 : public std::tuple<
   ::dessser::gen::raql_variable::t,
   Pointer
@@ -123,7 +98,7 @@ inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 static std::function<Pointer(::dessser::gen::raql_variable::t const &,Pointer &)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_variable::t const &,Pointer &)> fun0 { [&](::dessser::gen::raql_variable::t p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+    uint16_t id_1 { uint16_t(p_0) };
     Pointer let_res_2;
     {
       uint16_t label1_109 { id_1 };
@@ -260,7 +235,7 @@ std::function<Pointer(::dessser::gen::raql_variable::t const &,Pointer &)> to_ro
 static std::function<Size(::dessser::gen::raql_variable::t const &)> sersize_of_row_binary_init()
 {
   std::function<Size(::dessser::gen::raql_variable::t const &)> fun44 { [&](::dessser::gen::raql_variable::t p_0) {
-    uint16_t id_45 { uint16_t(p_0.index()) };
+    uint16_t id_45 { uint16_t(p_0) };
     Size let_res_46;
     {
       uint16_t label2_108 { id_45 };
@@ -466,7 +441,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
         ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_107;
         if (id_106) {
           (void)::dessser::Void();
-          ::dessser::gen::raql_variable::t id_108 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::raql_variable::t id_108 { Unknown };
           ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_109 { id_108, dsum1_snd_65 };
           choose_res_107 = id_109;
         } else {
@@ -475,7 +450,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
           ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_112;
           if (id_111) {
             (void)::dessser::Void();
-            ::dessser::gen::raql_variable::t id_113 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::raql_variable::t id_113 { In };
             ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_114 { id_113, dsum1_snd_65 };
             choose_res_112 = id_114;
           } else {
@@ -484,7 +459,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
             ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_117;
             if (id_116) {
               (void)::dessser::Void();
-              ::dessser::gen::raql_variable::t id_118 { std::in_place_index<2>, ::dessser::Void() };
+              ::dessser::gen::raql_variable::t id_118 { GroupState };
               ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_119 { id_118, dsum1_snd_65 };
               choose_res_117 = id_119;
             } else {
@@ -493,7 +468,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
               ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_122;
               if (id_121) {
                 (void)::dessser::Void();
-                ::dessser::gen::raql_variable::t id_123 { std::in_place_index<3>, ::dessser::Void() };
+                ::dessser::gen::raql_variable::t id_123 { GlobalState };
                 ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_124 { id_123, dsum1_snd_65 };
                 choose_res_122 = id_124;
               } else {
@@ -502,7 +477,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                 ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_127;
                 if (id_126) {
                   (void)::dessser::Void();
-                  ::dessser::gen::raql_variable::t id_128 { std::in_place_index<4>, ::dessser::Void() };
+                  ::dessser::gen::raql_variable::t id_128 { OutPrevious };
                   ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_129 { id_128, dsum1_snd_65 };
                   choose_res_127 = id_129;
                 } else {
@@ -511,7 +486,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                   ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_132;
                   if (id_131) {
                     (void)::dessser::Void();
-                    ::dessser::gen::raql_variable::t id_133 { std::in_place_index<5>, ::dessser::Void() };
+                    ::dessser::gen::raql_variable::t id_133 { Out };
                     ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_134 { id_133, dsum1_snd_65 };
                     choose_res_132 = id_134;
                   } else {
@@ -520,7 +495,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                     ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_137;
                     if (id_136) {
                       (void)::dessser::Void();
-                      ::dessser::gen::raql_variable::t id_138 { std::in_place_index<6>, ::dessser::Void() };
+                      ::dessser::gen::raql_variable::t id_138 { SortFirst };
                       ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_139 { id_138, dsum1_snd_65 };
                       choose_res_137 = id_139;
                     } else {
@@ -529,7 +504,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                       ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_142;
                       if (id_141) {
                         (void)::dessser::Void();
-                        ::dessser::gen::raql_variable::t id_143 { std::in_place_index<7>, ::dessser::Void() };
+                        ::dessser::gen::raql_variable::t id_143 { SortSmallest };
                         ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_144 { id_143, dsum1_snd_65 };
                         choose_res_142 = id_144;
                       } else {
@@ -538,7 +513,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                         ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_147;
                         if (id_146) {
                           (void)::dessser::Void();
-                          ::dessser::gen::raql_variable::t id_148 { std::in_place_index<8>, ::dessser::Void() };
+                          ::dessser::gen::raql_variable::t id_148 { SortGreatest };
                           ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_149 { id_148, dsum1_snd_65 };
                           choose_res_147 = id_149;
                         } else {
@@ -547,7 +522,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                           ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_152;
                           if (id_151) {
                             (void)::dessser::Void();
-                            ::dessser::gen::raql_variable::t id_153 { std::in_place_index<9>, ::dessser::Void() };
+                            ::dessser::gen::raql_variable::t id_153 { Param };
                             ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_154 { id_153, dsum1_snd_65 };
                             choose_res_152 = id_154;
                           } else {
@@ -556,7 +531,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                             ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_157;
                             if (id_156) {
                               (void)::dessser::Void();
-                              ::dessser::gen::raql_variable::t id_158 { std::in_place_index<10>, ::dessser::Void() };
+                              ::dessser::gen::raql_variable::t id_158 { Env };
                               ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_159 { id_158, dsum1_snd_65 };
                               choose_res_157 = id_159;
                             } else {
@@ -565,7 +540,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                               ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 choose_res_162;
                               if (id_161) {
                                 (void)::dessser::Void();
-                                ::dessser::gen::raql_variable::t id_163 { std::in_place_index<11>, ::dessser::Void() };
+                                ::dessser::gen::raql_variable::t id_163 { Record };
                                 ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_164 { id_163, dsum1_snd_65 };
                                 choose_res_162 = id_164;
                               } else {
@@ -574,7 +549,7 @@ static std::function<::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807
                                 Void id_167 { ((void)(assert(id_166)), ::dessser::Void()) };
                                 (void)id_167;
                                 (void)::dessser::Void();
-                                ::dessser::gen::raql_variable::t id_168 { std::in_place_index<12>, ::dessser::Void() };
+                                ::dessser::gen::raql_variable::t id_168 { GlobalVar };
                                 ::dessser::gen::raql_variable::t40df163e80e2c56cfae759a1807c4d79 id_169 { id_168, dsum1_snd_65 };
                                 choose_res_162 = id_169;
                               }

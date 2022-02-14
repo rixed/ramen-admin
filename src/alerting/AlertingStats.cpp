@@ -62,7 +62,7 @@ void AlertingStats::updateStats() {
 
   int numFiringIncidents{0};
   int numIncidents{0};
-  int numDialogs[dessser::gen::alerting_delivery_status::t::size]{0};
+  int numDialogs[dessser::gen::alerting_delivery_status::t_size]{0};
   double lastNotification{0.};
   double oldestNotification{std::numeric_limits<double>::max()};
   double lastDeliveryAttempt{0.};
@@ -115,42 +115,37 @@ void AlertingStats::updateStats() {
                              &nextSend,
                              &incidentId](std::string const &dialogId) {
       std::shared_ptr<dessser::gen::sync_value::t const> deliveryStatus_v{
-          getDialog(
-              incidentId, dialogId,
-              std::make_shared<dessser::gen::sync_key::dialog_key>(
-                  std::in_place_index<dessser::gen::sync_key::DeliveryStatus>,
-                  dessser::Void()))};
+          getDialog(incidentId, dialogId,
+                    std::make_shared<dessser::gen::sync_key::dialog_key>(
+                        dessser::gen::sync_key::DeliveryStatus))};
       if (deliveryStatus_v && deliveryStatus_v->index() ==
                                   dessser::gen::sync_value::DeliveryStatus) {
         dessser::gen::alerting_delivery_status::t const &deliveryStatus{
             std::get<dessser::gen::sync_value::DeliveryStatus>(
                 *deliveryStatus_v)};
-        Q_ASSERT(deliveryStatus.index() < SIZEOF_ARRAY(numDialogs));
-        numDialogs[deliveryStatus.index()]++;
+        Q_ASSERT(deliveryStatus < SIZEOF_ARRAY(numDialogs));
+        numDialogs[deliveryStatus]++;
       }
 
-      std::optional<double> const lastDelivAttempt{getDialogDate(
-          incidentId, dialogId,
-          std::make_shared<dessser::gen::sync_key::dialog_key>(
-              std::in_place_index<dessser::gen::sync_key::LastDeliveryAttempt>,
-              dessser::Void()))};
+      std::optional<double> const lastDelivAttempt{
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                            dessser::gen::sync_key::LastDeliveryAttempt))};
       if (lastDelivAttempt)
         lastDeliveryAttempt =
             std::max<double>(lastDeliveryAttempt, *lastDelivAttempt);
 
-      std::optional<double> const nextSched{getDialogDate(
-          incidentId, dialogId,
-          std::make_shared<dessser::gen::sync_key::dialog_key>(
-              std::in_place_index<dessser::gen::sync_key::NextScheduled>,
-              dessser::Void()))};
+      std::optional<double> const nextSched{
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                            dessser::gen::sync_key::NextScheduled))};
       if (nextSched)
         nextSchedule = std::min<double>(nextSchedule, *lastDelivAttempt);
 
-      std::optional<double> const nextSnd{getDialogDate(
-          incidentId, dialogId,
-          std::make_shared<dessser::gen::sync_key::dialog_key>(
-              std::in_place_index<dessser::gen::sync_key::NextSend>,
-              dessser::Void()))};
+      std::optional<double> const nextSnd{
+          getDialogDate(incidentId, dialogId,
+                        std::make_shared<dessser::gen::sync_key::dialog_key>(
+                            dessser::gen::sync_key::NextSend))};
       if (nextSnd) nextSend = std::min<double>(nextSend, *nextSnd);
     });
   });

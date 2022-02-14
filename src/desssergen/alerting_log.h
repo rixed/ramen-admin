@@ -14,48 +14,26 @@ using dessser::operator<<;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct tc97f0c1bbabddd4db874c961cd5609d9 : public std::variant<
-  Void, // Duplicate
-  Void, // Inhibited
-  Void, // STFU
-  Void // StartEscalation
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 4 };
-};
-
-inline bool operator==(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabddd4db874c961cd5609d9 const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Duplicate
-    case 1: return std::get<1>(a) == std::get<1>(b); // Inhibited
-    case 2: return std::get<2>(a) == std::get<2>(b); // STFU
-    case 3: return std::get<3>(a) == std::get<3>(b); // StartEscalation
-  };
-  return false;
-}
-inline bool operator!=(tc97f0c1bbabddd4db874c961cd5609d9 const &a, tc97f0c1bbabddd4db874c961cd5609d9 const &b) {
-  return !operator==(a, b);
-}
-enum Constr_tc97f0c1bbabddd4db874c961cd5609d9 {
+enum t2d75affd5744be0a81c3438e7bd0f519 {
   Duplicate,
   Inhibited,
   STFU,
   StartEscalation,
 };
 
-inline std::ostream &operator<<(std::ostream &os, tc97f0c1bbabddd4db874c961cd5609d9 const &v) {
-  switch (v.index()) {
-    case 0: os << "Duplicate" << std::get<0>(v); break;
-    case 1: os << "Inhibited" << std::get<1>(v); break;
-    case 2: os << "STFU" << std::get<2>(v); break;
-    case 3: os << "StartEscalation" << std::get<3>(v); break;
+constexpr size_t t2d75affd5744be0a81c3438e7bd0f519_size { 4 };
+inline std::ostream &operator<<(std::ostream &os, t2d75affd5744be0a81c3438e7bd0f519 const &v) {
+  switch (v) {
+    case Duplicate: os << "Duplicate"; break;
+    case Inhibited: os << "Inhibited"; break;
+    case STFU: os << "STFU"; break;
+    case StartEscalation: os << "StartEscalation"; break;
+    default: assert(false); break;
   }
   return os;
 }
 
-inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<tc97f0c1bbabddd4db874c961cd5609d9> const v) { os << *v; return os; }
+inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t2d75affd5744be0a81c3438e7bd0f519> const v) { os << *v; return os; }
 
 struct t62aae75ed55c9c452157e890cb77faf5 : public std::tuple<
   std::string,
@@ -119,7 +97,7 @@ inline std::ostream &operator<<(std::ostream &os, t2f07d8351fa62306ecaa96746ccc3
 inline std::ostream &operator<<(std::ostream &os, std::shared_ptr<t2f07d8351fa62306ecaa96746ccc3d68> const v) { os << *v; return os; }
 
 struct t : public std::variant<
-  ::dessser::gen::alerting_log::tc97f0c1bbabddd4db874c961cd5609d9, // NewNotification
+  ::dessser::gen::alerting_log::t2d75affd5744be0a81c3438e7bd0f519, // NewNotification
   ::dessser::gen::alerting_log::t62aae75ed55c9c452157e890cb77faf5, // Outcry
   std::string, // Ack
   ::dessser::gen::alerting_log::t2f07d8351fa62306ecaa96746ccc3d68, // Stop

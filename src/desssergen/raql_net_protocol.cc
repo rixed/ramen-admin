@@ -28,28 +28,13 @@ std::default_random_engine _random_engine_;
 /* ------------ */
 /* Declarations */
 /* ------------ */
-struct t : public std::variant<
-  Void, // Collectd
-  Void, // NetflowV5
-  Void // Graphite
-> {
-  using variant::variant;
-  using variant::operator=;
-  static constexpr size_t size { 3 };
+enum t {
+  Collectd,
+  NetflowV5,
+  Graphite,
 };
 
-inline bool operator==(t const &a, t const &b) {
-  if (a.index() != b.index()) return false;
-  switch (a.index()) {
-    case 0: return std::get<0>(a) == std::get<0>(b); // Collectd
-    case 1: return std::get<1>(a) == std::get<1>(b); // NetflowV5
-    case 2: return std::get<2>(a) == std::get<2>(b); // Graphite
-  };
-  return false;
-}
-inline bool operator!=(t const &a, t const &b) {
-  return !operator==(a, b);
-}
+constexpr size_t t_size { 3 };
 struct t55bea3e51aa79e08de131e8d87a06294 : public std::tuple<
   ::dessser::gen::raql_net_protocol::t,
   Pointer
@@ -89,26 +74,26 @@ inline bool operator!=(ta97bb48ed75bbda6173555873826c8c6 const &a, ta97bb48ed75b
 static std::function<Pointer(::dessser::gen::raql_net_protocol::t const &,Pointer &)> to_row_binary_init()
 {
   std::function<Pointer(::dessser::gen::raql_net_protocol::t const &,Pointer &)> fun0 { [&](::dessser::gen::raql_net_protocol::t p_0, Pointer p_1) {
-    uint16_t id_1 { uint16_t(p_0.index()) };
+    uint16_t id_1 { uint16_t(p_0) };
     Pointer id_2 { p_1.writeU16Le(id_1) };
     Pointer let_res_3;
     {
       Pointer ssum_dst_80 { id_2 };
       uint16_t id_4 { 0 };
-      uint16_t id_5 { uint16_t(p_0.index()) };
+      uint16_t id_5 { uint16_t(p_0) };
       bool id_6 { bool(id_4 == id_5) };
       Pointer choose_res_7;
       if (id_6) {
         choose_res_7 = ssum_dst_80;
       } else {
         uint16_t id_8 { 1 };
-        uint16_t id_9 { uint16_t(p_0.index()) };
+        uint16_t id_9 { uint16_t(p_0) };
         bool id_10 { bool(id_8 == id_9) };
         Pointer choose_res_11;
         if (id_10) {
           choose_res_11 = ssum_dst_80;
         } else {
-          uint16_t id_12 { uint16_t(p_0.index()) };
+          uint16_t id_12 { uint16_t(p_0) };
           uint16_t id_13 { 2 };
           bool id_14 { bool(id_12 == id_13) };
           Void id_15 { ((void)(assert(id_14)), ::dessser::Void()) };
@@ -133,7 +118,7 @@ static std::function<Size(::dessser::gen::raql_net_protocol::t const &)> sersize
 {
   std::function<Size(::dessser::gen::raql_net_protocol::t const &)> fun16 { [&](::dessser::gen::raql_net_protocol::t p_0) {
     uint16_t id_17 { 0 };
-    uint16_t id_18 { uint16_t(p_0.index()) };
+    uint16_t id_18 { uint16_t(p_0) };
     bool id_19 { bool(id_17 == id_18) };
     Size choose_res_20;
     if (id_19) {
@@ -141,14 +126,14 @@ static std::function<Size(::dessser::gen::raql_net_protocol::t const &)> sersize
       choose_res_20 = id_21;
     } else {
       uint16_t id_22 { 1 };
-      uint16_t id_23 { uint16_t(p_0.index()) };
+      uint16_t id_23 { uint16_t(p_0) };
       bool id_24 { bool(id_22 == id_23) };
       Size choose_res_25;
       if (id_24) {
         Size id_26 { 2UL };
         choose_res_25 = id_26;
       } else {
-        uint16_t id_27 { uint16_t(p_0.index()) };
+        uint16_t id_27 { uint16_t(p_0) };
         uint16_t id_28 { 2 };
         bool id_29 { bool(id_27 == id_28) };
         Void id_30 { ((void)(assert(id_29)), ::dessser::Void()) };
@@ -196,7 +181,7 @@ static std::function<::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8
         ::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8d87a06294 choose_res_40;
         if (id_39) {
           (void)::dessser::Void();
-          ::dessser::gen::raql_net_protocol::t id_41 { std::in_place_index<0>, ::dessser::Void() };
+          ::dessser::gen::raql_net_protocol::t id_41 { Collectd };
           ::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8d87a06294 id_42 { id_41, dsum1_snd_65 };
           choose_res_40 = id_42;
         } else {
@@ -205,7 +190,7 @@ static std::function<::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8
           ::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8d87a06294 choose_res_45;
           if (id_44) {
             (void)::dessser::Void();
-            ::dessser::gen::raql_net_protocol::t id_46 { std::in_place_index<1>, ::dessser::Void() };
+            ::dessser::gen::raql_net_protocol::t id_46 { NetflowV5 };
             ::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8d87a06294 id_47 { id_46, dsum1_snd_65 };
             choose_res_45 = id_47;
           } else {
@@ -214,7 +199,7 @@ static std::function<::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8
             Void id_50 { ((void)(assert(id_49)), ::dessser::Void()) };
             (void)id_50;
             (void)::dessser::Void();
-            ::dessser::gen::raql_net_protocol::t id_51 { std::in_place_index<2>, ::dessser::Void() };
+            ::dessser::gen::raql_net_protocol::t id_51 { Graphite };
             ::dessser::gen::raql_net_protocol::t55bea3e51aa79e08de131e8d87a06294 id_52 { id_51, dsum1_snd_65 };
             choose_res_45 = id_52;
           }
