@@ -179,7 +179,26 @@ class TimeChart : public AbstractTimeLine {
 
     Dot(QPointF const &pos_, QColor const &color_, QString const &label_)
         : pos(pos_), color(color_), label(label_) {}
-    void paint(QPainter &, qreal) const;
+
+    void paint(QPainter &) const;
+  };
+
+  /* A box displaying the labels (and values) of hovered values. There are
+   * actually two potential legend boxes, when close to the viewport borders. */
+  struct Legend {
+    std::vector<std::pair<Dot const *, QRectF>> dots;
+    /* The size of the legend box, ie the sum of the metrics height and the max
+     * of metrics width: */
+    QSizeF size;
+    /* The min or max X coordinate of all dots: */
+    std::optional<qreal> xAnchor;
+    bool leftJustify;
+
+    Legend(size_t max_dots, bool left_justify);
+
+    void add(Dot *, QRectF const &);
+
+    void paint(QPainter &, QColor const &bgcolor);
   };
 
   void paintGrid(Axis const &);

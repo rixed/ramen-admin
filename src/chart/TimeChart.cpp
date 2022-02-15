@@ -12,7 +12,9 @@
 #include <QPointF>
 #include <QSizePolicy>
 #include <QStaticText>
+#include <algorithm>
 #include <cmath>
+#include <functional>
 #include <limits>
 #include <mutex>
 #include <optional>
@@ -43,6 +45,13 @@ static constexpr int metaFontHeight{18};
 /* Leave that many pixels above and below a chart to leave some room to draw dot
  * labels: */
 static constexpr int plotVerticalMargin{1 + dotLabelHeight / 2};
+/* Radius of an hovered dot: */
+// TODO: radius and font larger if the axis is focused?
+static constexpr int dotRadius{5};
+/* Blank space between the hovered dots and the legend: */
+static constexpr int legendToDots{dotRadius + 40};
+/* Internal margin in the legend box */
+static constexpr int legendMargin{10};
 
 TimeChart::TimeChart(TimeChartEditWidget *editWidget_, QWidget *parent)
     : AbstractTimeLine(defaultBeginOftime, defaultEndOfTime, true, true,
@@ -381,7 +390,7 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
   /* Save the set of dots that are going to be drawn over all this at the
    * end: */
   std::vector<Dot> dots;
-  dots.reserve(20);
+  dots.reserve(10);
 
   // Draw each independent fields
   for (Line const &line : axis.independent) {
@@ -600,12 +609,27 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
   drawStacked(axis.stackCentered, true);
 
   /* Finally, draw all dots on top of this: */
-  // TODO: radius and font larger if the axis is focused?
   QFont font{painter.font()};
   font.setPixelSize(dotLabelHeight);
   painter.setFont(font);
-  static constexpr qreal radius{5.};
-  for (Dot const &dot : dots) dot.paint(painter, radius);
+  /* First step is to layout the labels, which can be moved on the left side of
+   * the dot to avoid being clipped by the viewport, and can then be moved
+   * vertically to avoid overwrites: */
+  Legend left_legend{dots.size(), false};
+  Legend right_legend{dots.size(), true};
+  QFontMetricsF const font_metrics{font};
+  for (size_t i = 0; i < dots.size(); i++) {
+    QRectF const label_metrics{font_metrics.boundingRect(dots[i].label)};
+    (dots[i].pos.x() + legendToDots + label_metrics.width() <=
+             painter.viewport().width()
+         ? right_legend
+         : left_legend)
+        .add(&dots[i], label_metrics);
+  }
+  for (Dot const &dot : dots) dot.paint(painter);
+  QColor const bg_color{palette().color(QWidget::backgroundRole())};
+  left_legend.paint(painter, bg_color);
+  right_legend.paint(painter, bg_color);
 }
 
 static int getFieldNum(std::shared_ptr<Function const> func,
@@ -1069,7 +1093,7 @@ bool TimeChart::Axis::hasEventTime() const {
   return true;
 }
 
-void TimeChart::Dot::paint(QPainter &painter, qreal radius) const {
+void TimeChart::Dot::paint(QPainter &painter) const {
   QFontMetricsF const font_metrics{painter.font()};
   QRectF const text_metrics{font_metrics.boundingRect(label)};
 
@@ -1077,16 +1101,88 @@ void TimeChart::Dot::paint(QPainter &painter, qreal radius) const {
   pen.setColor(color);
   pen.setWidth(2);
   painter.setPen(pen);
-  painter.drawEllipse(pos, radius, radius);
-  painter.setPen(color.darker(300));
-  QPointF const label_offset{
-      (pos.x() + 2 * radius + text_metrics.width() <= painter.viewport().width()
-           ?
-           // Draw label at right:
-           QPointF(2 * radius, text_metrics.height() / 2)
-           :
-           // Draw label at left:
-           QPointF(-(2 * radius + text_metrics.width()),
-                   text_metrics.height() / 2))};
-  painter.drawText(pos + label_offset, label);
+  painter.drawEllipse(pos, dotRadius, dotRadius);
+}
+
+TimeChart::Legend::Legend(size_t max_dots, bool left_justify)
+    : leftJustify(left_justify) {
+  dots.reserve(max_dots);
+}
+
+void TimeChart::Legend::add(Dot *dot, QRectF const &metrics) {
+  dots.emplace_back(dot, metrics);
+
+  size.setHeight(size.height() + metrics.height());
+  size.setWidth(std::max(size.width(), metrics.width()));
+
+  if (xAnchor) {
+    xAnchor = leftJustify ? std::max(*xAnchor, dot->pos.x())
+                          : std::min(*xAnchor, dot->pos.x());
+  } else {
+    xAnchor = dot->pos.x();
+  }
+}
+
+void TimeChart::Legend::paint(QPainter &painter, QColor const &bg_color) {
+  if (!xAnchor) return;
+  Q_ASSERT(dots.size() > 0);
+
+  /* First, draw the frame: */
+  qreal top_y{0.};
+  for (auto const &p : dots) top_y += p.first->pos.y();
+  top_y /= dots.size();
+  top_y -= size.height() / 2;
+  if (top_y + size.height() > painter.viewport().height())
+    top_y = painter.viewport().height() - size.height();
+  if (top_y < 0) top_y = 0;
+
+  QPointF const orig{leftJustify ? *xAnchor + legendToDots
+                                 : *xAnchor - legendToDots - size.width(),
+                     top_y};
+  QRectF const frame{orig, size};
+  QRectF const frame_with_margins{frame + QMarginsF(legendMargin, legendMargin,
+                                                    legendMargin,
+                                                    legendMargin)};
+  QColor frame_color{bg_color};
+  frame_color.setAlpha(120);
+  painter.setBrush(frame_color);
+  painter.setPen(Qt::NoPen);
+  painter.drawRect(frame_with_margins);
+
+  /* Order the dots by Y coordinate: */
+  std::sort(dots.begin(), dots.end(),
+            [](std::pair<Dot const *, QRectF> const &p1,
+               std::pair<Dot const *, QRectF> const &p2) {
+              return p1.first->pos.y() < p2.first->pos.y();
+            });
+
+  /* Draw the legend: */
+  painter.setBrush(Qt::NoBrush);
+  qreal y_offset{0.};
+  for (auto const &p : dots) {
+    Dot const *dot{p.first};
+    QRectF const &metrics{p.second};
+
+    QPen pen{dot->color};
+    painter.setPen(pen);
+    y_offset += metrics.height();
+    QPointF const pos{
+        leftJustify ? frame.left() : frame.right() - metrics.width(),
+        frame.top() + y_offset};
+    painter.drawText(pos, dot->label);
+
+    qreal const mid_y{frame.top() + y_offset -
+                      metrics.height() / 3 /* works better than height/2 */};
+    QPainterPath path{QPointF(
+        leftJustify ? frame_with_margins.left() : frame_with_margins.right(),
+        mid_y)};
+    path.cubicTo(
+        QPointF(leftJustify ? frame_with_margins.left() - legendToDots / 2
+                            : frame_with_margins.right() + legendToDots / 2,
+                mid_y),
+        dot->pos +
+            QPointF(leftJustify ? legendToDots / 2 : -legendToDots / 2, 0),
+        dot->pos + QPointF(leftJustify ? dotRadius / 2 : -dotRadius / 2, 0));
+    painter.drawPath(path);
+  }
 }
