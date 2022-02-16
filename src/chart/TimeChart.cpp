@@ -887,11 +887,13 @@ void TimeChart::paintEvent(QPaintEvent *event) {
     }
   }
 
-  /* If no axis is focused, focus the first left and right ones: */
-  if (!focusedAxis[Left]) focusedAxis[Left] = editWidget->firstAxisOnSide(true);
-  if (!focusedAxis[Right])
+  /* If the focused axis does not exist any longer, of if no axis is focused,
+   * then focus the first left and right ones: */
+  if (!focusedAxis[Left] || *focusedAxis[Left] >= numAxes)
+    focusedAxis[Left] = editWidget->firstAxisOnSide(true);
+  if (!focusedAxis[Right] || *focusedAxis[Right] >= numAxes)
     focusedAxis[Right] = editWidget->firstAxisOnSide(false);
-  if (!focusedGridAxis)
+  if (!focusedGridAxis || *focusedGridAxis >= numAxes)
     focusedGridAxis =
         focusedAxis[Left] ? focusedAxis[Left] : focusedAxis[Right];
 
