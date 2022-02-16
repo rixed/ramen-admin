@@ -235,6 +235,7 @@ HEADERS += \
   TreeComboBox.h \
   Automaton.h \
   FixedTableView.h \
+  FixedWidthToolBox.h \
   colorOfString.h \
   ColorDelegate.h \
   IconSelector.h \
@@ -410,6 +411,7 @@ SOURCES += \
   TreeComboBox.cpp \
   Automaton.cpp \
   FixedTableView.cpp \
+  FixedWidthToolBox.cpp \
   colorOfString.cpp \
   ColorDelegate.cpp \
   IconSelector.cpp \

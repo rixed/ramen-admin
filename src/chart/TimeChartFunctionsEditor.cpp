@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <algorithm>
 
+#include "FixedWidthToolBox.h"
 #include "FunctionItem.h"
 #include "FunctionSelector.h"
 #include "GraphModel.h"
@@ -20,8 +21,10 @@ static constexpr bool verbose{false};
 
 TimeChartFunctionsEditor::TimeChartFunctionsEditor(QWidget *parent)
     : QWidget(parent) {
-  functions = new QToolBox(this);
-  functions->setSizePolicy(QSizePolicy::Maximum, QSizePolicy::Minimum);
+  functions = new FixedWidthToolBox(this);
+  functions->setSizePolicy(
+      /* horiz: no need for more */ QSizePolicy::Maximum,
+      /* vert: don't go below sizeHint */ QSizePolicy::MinimumExpanding);
 
   // TODO: a globalGraphModelWithoutTopHalves
   GraphModel *graph{GraphModel::globalGraphModel};

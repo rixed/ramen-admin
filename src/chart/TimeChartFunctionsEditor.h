@@ -8,6 +8,7 @@ class Function;
 class FunctionSelector;
 class QToolBox;
 class TimeChartFunctionEditor;
+class FixedWidthToolBox;
 
 namespace dessser {
 namespace gen {
@@ -29,7 +30,7 @@ class TimeChartFunctionsEditor : public QWidget {
                   std::string const &function, bool customizable);
 
  public:
-  QToolBox *functions;
+  FixedWidthToolBox *functions;
   FunctionSelector *functionSelector;
 
   TimeChartFunctionsEditor(QWidget *parent = nullptr);

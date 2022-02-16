@@ -8,9 +8,9 @@
 #include <QPushButton>
 #include <QRadioButton>
 #include <QTabWidget>
-#include <QToolBox>
 #include <QVBoxLayout>
 
+#include "FixedWidthToolBox.h"
 #include "chart/TimeChartAxisEditor.h"
 #include "chart/TimeChartFunctionEditor.h"
 #include "chart/TimeChartFunctionFieldsModel.h"
