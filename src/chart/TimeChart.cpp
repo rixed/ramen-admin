@@ -618,13 +618,17 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
   Legend left_legend{dots.size(), false};
   Legend right_legend{dots.size(), true};
   QFontMetricsF const font_metrics{font};
+  bool lastLeft{false};
   for (size_t i = 0; i < dots.size(); i++) {
     QRectF const label_metrics{font_metrics.boundingRect(dots[i].label)};
-    (dots[i].pos.x() + legendToDots + label_metrics.width() <=
-             painter.viewport().width()
-         ? right_legend
-         : left_legend)
-        .add(&dots[i], label_metrics);
+    /* Invert lastLeft if that fits, so that we alternate between right and
+     * left legend frames: */
+    if ((lastLeft && dots[i].pos.x() + legendToDots + label_metrics.width() <=
+                         painter.viewport().width()) ||
+        (!lastLeft &&
+         dots[i].pos.x() - legendToDots - label_metrics.width() >= 0))
+      lastLeft = !lastLeft;
+    (lastLeft ? left_legend : right_legend).add(&dots[i], label_metrics);
   }
   for (Dot const &dot : dots) dot.paint(painter);
   QColor const bg_color{palette().color(QWidget::backgroundRole())};
@@ -1128,7 +1132,7 @@ void TimeChart::Legend::paint(QPainter &painter, QColor const &bg_color) {
   if (!xAnchor) return;
   Q_ASSERT(dots.size() > 0);
 
-  /* First, draw the frame: */
+  /* First, draw the frame, aiming at the average dots' Y position: */
   qreal top_y{0.};
   for (auto const &p : dots) top_y += p.first->pos.y();
   top_y /= dots.size();
@@ -1150,6 +1154,8 @@ void TimeChart::Legend::paint(QPainter &painter, QColor const &bg_color) {
   painter.setPen(Qt::NoPen);
   painter.drawRect(frame_with_margins);
 
+  int const descent{QFontMetrics{painter.font()}.descent()};
+
   /* Order the dots by Y coordinate: */
   std::sort(dots.begin(), dots.end(),
             [](std::pair<Dot const *, QRectF> const &p1,
@@ -1164,14 +1170,16 @@ void TimeChart::Legend::paint(QPainter &painter, QColor const &bg_color) {
     Dot const *dot{p.first};
     QRectF const &metrics{p.second};
 
-    QPen pen{dot->color};
-    painter.setPen(pen);
+    QColor c{dot->color};
+    painter.setPen(c);
     y_offset += metrics.height();
     QPointF const pos{
         leftJustify ? frame.left() : frame.right() - metrics.width(),
-        frame.top() + y_offset};
+        frame.top() + y_offset - descent};
     painter.drawText(pos, dot->label);
 
+    c.setAlpha(100);
+    painter.setPen(c);
     qreal const mid_y{frame.top() + y_offset -
                       metrics.height() / 3 /* works better than height/2 */};
     QPainterPath path{QPointF(
