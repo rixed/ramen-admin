@@ -19,7 +19,8 @@ enum t {
   In,
   GroupState,
   GlobalState,
-  OutPrevious,
+  GlobalLastOut,
+  LocalLastOut,
   Out,
   SortFirst,
   SortSmallest,
@@ -30,14 +31,15 @@ enum t {
   GlobalVar,
 };
 
-constexpr size_t t_size { 13 };
+constexpr size_t t_size { 14 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v) {
     case Unknown: os << "Unknown"; break;
     case In: os << "In"; break;
     case GroupState: os << "GroupState"; break;
     case GlobalState: os << "GlobalState"; break;
-    case OutPrevious: os << "OutPrevious"; break;
+    case GlobalLastOut: os << "GlobalLastOut"; break;
+    case LocalLastOut: os << "LocalLastOut"; break;
     case Out: os << "Out"; break;
     case SortFirst: os << "SortFirst"; break;
     case SortSmallest: os << "SortSmallest"; break;
