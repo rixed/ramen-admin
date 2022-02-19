@@ -135,9 +135,9 @@ class TimeChart : public AbstractTimeLine {
 
   struct Axis {
     /* Each axis has 3 distinct, possibly empty sets of plots:
-     * - a set of stack plot (one stack per function);
-     * - a set of stack-centered plot (one per function);
-     * - a set of independent fields. */
+     * - a set of stack plot (resulting in a single stack per axis);
+     * - a set of stack-centered plot (resulting in a single stack);
+     * - a set of independent fields (resulting in as many plots as lines). */
     std::vector<Line> stacked;
     std::vector<Line> stackCentered;
     std::vector<Line> independent;

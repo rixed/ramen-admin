@@ -11,6 +11,8 @@
 #include "chart/TimeChartEditWidget.h"
 #include "desssergen/dashboard_widget.h"
 
+static constexpr bool verbose{false};
+
 TimeChartOptionsEditor::TimeChartOptionsEditor(TimeChartEditWidget *editWidget_,
                                                QWidget *parent)
     : QWidget(parent), editWidget(editWidget_) {
@@ -56,7 +58,7 @@ bool TimeChartOptionsEditor::setValue(
       t_idx++;
       c_idx++;
     } else if (c_idx >= conf->axes.size()) {
-      qDebug() << "Removing a tab";
+      if (verbose) qDebug() << "Removing a tab";
       axes->removeTab(t_idx);
     } else {
       TimeChartAxisEditor *e{

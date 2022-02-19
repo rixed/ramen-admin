@@ -57,7 +57,7 @@ static dessser::gen::dashboard_widget::field makeField(
                           QString::fromStdString(function) + "/" +
                           QString::fromStdString(field)};
 
-  QColor c{colorOfString(full_name)};
+  QColor c{colorOfString(full_name, 0.2)};
 
   dessser::Arr<std::string> factors;
 

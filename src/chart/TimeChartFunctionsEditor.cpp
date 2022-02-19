@@ -29,14 +29,14 @@ TimeChartFunctionsEditor::TimeChartFunctionsEditor(QWidget *parent)
   // TODO: a globalGraphModelWithoutTopHalves
   GraphModel *graph{GraphModel::globalGraphModel};
   functionSelector = new FunctionSelector(graph);
-  QPushButton *addButton = new QPushButton(tr("Add"));
+  QPushButton *addButton{new QPushButton(tr("Add"))};
   connect(addButton, &QPushButton::clicked, this,
           &TimeChartFunctionsEditor::addCurrentFunction);
 
-  QHBoxLayout *fsLayout = new QHBoxLayout;
+  QHBoxLayout *fsLayout{new QHBoxLayout};
   fsLayout->addWidget(functionSelector, 1);
   fsLayout->addWidget(addButton, 0);
-  QVBoxLayout *layout = new QVBoxLayout;
+  QVBoxLayout *layout{new QVBoxLayout};
   layout->addWidget(functions);
   layout->addLayout(fsLayout);
   setLayout(layout);

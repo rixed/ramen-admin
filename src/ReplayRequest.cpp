@@ -23,7 +23,7 @@
 
 static constexpr bool verbose{false};
 
-static std::chrono::milliseconds const batchReplaysForMs{2000};
+static constexpr std::chrono::milliseconds batchReplaysForMs{2000};
 
 static unsigned respKeySeq;
 static std::mutex respKeySeqLock;

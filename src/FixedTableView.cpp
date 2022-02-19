@@ -10,8 +10,8 @@ FixedTableView::FixedTableView(QWidget *parent) : QTableView(parent) {
 }
 
 QSize FixedTableView::sizeHint() const {
-  QHeaderView const *vHeader = verticalHeader();
-  QHeaderView const *hHeader = horizontalHeader();
+  QHeaderView const *vHeader{verticalHeader()};
+  QHeaderView const *hHeader{horizontalHeader()};
   int const frame{frameWidth()};
   QMargins const m{contentsMargins()};
   return QSize(frame + m.left() + hHeader->length() +

@@ -493,8 +493,8 @@ void TimeChart::paintAxis(Axis const &axis, double const now) {
         qreal lastOffs[numValues];
         for (size_t l = 0; l < numValues; l++) lastOffs[l] = zeroY;
         qreal lastX{0};
-        // Best distance so far from m_currentTime and location where it
-        // happened:
+        /* Best distance so far from m_currentTime and location where it
+         * happened: */
         std::optional<double> best_dt;
         std::optional<std::tuple<double, qreal, QString, QColor>>
             closest_ys[numValues];
@@ -983,9 +983,8 @@ void TimeChart::Axis::iterTime(
 
   if (0 == numValues) return;
 
-  std::vector<std::tuple<std::optional<qreal>, QString, QColor>>
-      values(  // Not list-init
-          numValues, std::make_tuple(std::nullopt, QString(), QColor()));
+  std::vector<std::tuple<std::optional<qreal>, QString, QColor>> values{
+      numValues};
 
   size_t num_tuples[1 + numValues];  // 1+ to satisfies clang-tidy
 
