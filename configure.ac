@@ -15,7 +15,7 @@ CXXFLAGS="$CFLAGS -std=c++17"
 AC_ARG_WITH([ramen],
   AC_HELP_STRING([--with-ramen], [Where to find ramen source *.type files]),
   [],
-  [with_ramen=../ramen/src])
+  [with_ramen=../ramen])
 AC_SUBST(RAMEN_SRC, [$with_ramen])
 
 AC_ARG_WITH([dessser],

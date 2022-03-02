@@ -29,6 +29,7 @@ class ServerInfoWin;
 class SourcesWin;
 class StorageWin;
 class AlertingWin;
+class HelpWin;
 
 /* We need some slots to open the windows from various places, therefore
  * we need a Q_OBJECT.
@@ -47,7 +48,7 @@ struct t;
 class Menu : public QObject {
   Q_OBJECT
 
-  QMenu *fileMenu, *windowMenu, *dashboardMenu, *alertMenu;
+  QMenu *fileMenu, *windowMenu, *dashboardMenu, *alertMenu, *helpMenu;
 
   void populateMenu(bool, bool);
   void showSomething();
@@ -76,6 +77,7 @@ class Menu : public QObject {
   static LoginWin *loginWin;
   static LoggerWin *loggerWin;
   static AlertingWin *alertingWin;
+  static HelpWin *helpWin;
 
   static void initDialogs(QString const &srvUrl);
   static void initLoginWin(QString const &configDir);
@@ -99,6 +101,7 @@ class Menu : public QObject {
   static void openOperationsWin();
   static void openLoginWin();
   static void openLoggerWin();
+  static void openHelpWin();
   static void prepareQuit();
   static void openDashboard(std::string const &);
   static ConfClient *getClient();

@@ -12,6 +12,7 @@
 
 #include "AboutDialog.h"
 #include "ConfClient.h"
+#include "HelpWin.h"
 #include "LoggerView.h"
 #include "LoggerWin.h"
 #include "LoginWin.h"
@@ -49,6 +50,7 @@ OperationsWin *Menu::operationsWin;
 LoginWin *Menu::loginWin;
 LoggerWin *Menu::loggerWin;
 AlertingWin *Menu::alertingWin;
+HelpWin *Menu::helpWin;
 
 QString const Menu::commandKey{
 /* Assuming compilation time OS == runtime OS: */
@@ -124,6 +126,7 @@ void Menu::deleteDialogs() {
   // delLater is never when we quit the app:
   if (loggerWin) loggerWin->loggerView->flush();
   danceOfDelLater<LoggerWin>(&loggerWin);
+  danceOfDelLater<HelpWin>(&helpWin);
 }
 
 /* This function can be called either once (with basic and extended) or twice
@@ -209,12 +212,6 @@ void Menu::populateMenu(bool basic, bool extended) {
     windowMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Log messages…"), this,
         &Menu::openLoggerWin);
-
-    /* An "About" entry added in any menu (but not directly in the top
-     * menubar) will be moved into the automatic application menu in MacOs:
-     */
-    windowMenu->addAction(QCoreApplication::translate("QMenuBar", "About"),
-                          this, &Menu::openAboutDialog);
   }
 
   if (extended) {
@@ -251,6 +248,23 @@ void Menu::populateMenu(bool basic, bool extended) {
     windowMenu->addAction(
         QCoreApplication::translate("QMenuBar", "Completable Names…"), this,
         &Menu::openNamesTreeWin);
+  }
+
+  /* Help menu comes last: */
+  if (basic) {
+    /* The Help menu entry */
+    helpMenu =
+        menuBar->addMenu(QCoreApplication::translate("QMenuBar", "&Help"));
+
+    /* The internal help browser */
+    helpMenu->addAction(QCoreApplication::translate("QMenuBar", "Help"), this,
+                        &Menu::openHelpWin);
+
+    /* An "About" entry added in any menu (but not directly in the top
+     * menubar) will be moved into the automatic application menu in MacOs:
+     */
+    helpMenu->addAction(QCoreApplication::translate("QMenuBar", "About"), this,
+                        &Menu::openAboutDialog);
   }
 }
 
@@ -331,6 +345,11 @@ void Menu::openLoginWin() {
 void Menu::openLoggerWin() {
   if (!loggerWin) loggerWin = new LoggerWin;
   showRaised(loggerWin);
+}
+
+void Menu::openHelpWin() {
+  if (!helpWin) helpWin = new HelpWin;
+  showRaised(helpWin);
 }
 
 void Menu::prepareQuit() {

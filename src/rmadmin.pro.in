@@ -164,6 +164,7 @@ HEADERS += \
   SavedWindow.h \
   Resources.h \
   AboutDialog.h \
+  HelpWin.h \
   Logger.h \
   LogModel.h \
   LoggerView.h \
@@ -340,6 +341,7 @@ SOURCES += \
   SavedWindow.cpp \
   Resources.cpp \
   AboutDialog.cpp \
+  HelpWin.cpp \
   Logger.cpp \
   LogModel.cpp \
   LoggerView.cpp \
@@ -501,7 +503,7 @@ SOURCES += \
   stream/GraphView.cpp \
   main.cpp
 
-RESOURCES = resources.qrc
+RESOURCES = resources.qrc doc/doc.qrc
 
 # For some reasons the compiler qmake selected might not look into the same
 # locations than the compiler used by autoconf to locate libs:

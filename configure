@@ -2363,7 +2363,7 @@ CXXFLAGS="$CFLAGS -std=c++17"
 if test "${with_ramen+set}" = set; then :
   withval=$with_ramen;
 else
-  with_ramen=../ramen/src
+  with_ramen=../ramen
 fi
 
 RAMEN_SRC=$with_ramen

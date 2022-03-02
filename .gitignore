@@ -244,3 +244,4 @@ src/desssergen/*.type
 clazy-build
 tidy-build
 format
+src/doc/doc.qrc

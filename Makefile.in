@@ -109,44 +109,44 @@ src/desssergen/.created:
 # we use the _wire types directly as the type.
 # (Note: cp rather than ln because 1. timestamps need to be greater and
 # 2. might not be the same FS)
-src/desssergen/team_name.type: $(RAMEN_SRC)/team_name_wire.type src/desssergen/.created
+src/desssergen/team_name.type: $(RAMEN_SRC)/src/team_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/field_name.type: $(RAMEN_SRC)/field_name_wire.type src/desssergen/.created
+src/desssergen/field_name.type: $(RAMEN_SRC)/src/field_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/function_name.type: $(RAMEN_SRC)/function_name_wire.type src/desssergen/.created
+src/desssergen/function_name.type: $(RAMEN_SRC)/src/function_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/program_name.type: $(RAMEN_SRC)/program_name_wire.type src/desssergen/.created
+src/desssergen/program_name.type: $(RAMEN_SRC)/src/program_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/fq_name.type: $(RAMEN_SRC)/fq_name_wire.type src/desssergen/.created
+src/desssergen/fq_name.type: $(RAMEN_SRC)/src/fq_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/site_name.type: $(RAMEN_SRC)/site_name_wire.type src/desssergen/.created
+src/desssergen/site_name.type: $(RAMEN_SRC)/src/site_name_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/file_path.type: $(RAMEN_SRC)/file_path_wire.type src/desssergen/.created
+src/desssergen/file_path.type: $(RAMEN_SRC)/src/file_path_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/src_path.type: $(RAMEN_SRC)/src_path_wire.type src/desssergen/.created
+src/desssergen/src_path.type: $(RAMEN_SRC)/src/src_path_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/fieldmask.type: $(RAMEN_SRC)/fieldmask_wire.type src/desssergen/.created
+src/desssergen/fieldmask.type: $(RAMEN_SRC)/src/fieldmask_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/raql_type.type: $(RAMEN_SRC)/raql_type_wire.type src/desssergen/.created
+src/desssergen/raql_type.type: $(RAMEN_SRC)/src/raql_type_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/raql_value.type: $(RAMEN_SRC)/raql_value_wire.type src/desssergen/.created
+src/desssergen/raql_value.type: $(RAMEN_SRC)/src/raql_value_wire.type src/desssergen/.created
 	cp $< $@
 
-src/desssergen/output_specs.type: $(RAMEN_SRC)/output_specs_wire.type src/desssergen/.created
+src/desssergen/output_specs.type: $(RAMEN_SRC)/src/output_specs_wire.type src/desssergen/.created
 	cp $< $@
 
 # Others are copied
-src/desssergen/%.type: $(RAMEN_SRC)/%.type src/desssergen/.created
+src/desssergen/%.type: $(RAMEN_SRC)/src/%.type src/desssergen/.created
 	cp $< $@
 
 ifeq ($(shell uname),Darwin)
@@ -187,7 +187,8 @@ src/RmAdmin: \
 		src/rmadmin.pro \
 		$(MANUAL_CPP_SOURCES) \
 		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
-		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h)))
+		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h))) \
+		src/doc/doc.qrc
 	@echo 'Generating RmAdmin $@'
 	cd src && @QMAKE@ $(QMAKE_EXTRA)
 	$(MAKE) -C src
@@ -196,6 +197,21 @@ src/RmAdmin: \
 	  echo 'exec ./src/RmAdmin.app/Contents/MacOS/RmAdmin' >> $@ ;\
 	  chmod a+x $@ ;\
 	fi
+
+src/doc/add.html: $(wildcard $(RAMEN_SRC)/site/raql/*.html)
+	cp $^ src/doc
+
+src/doc/toc.html: $(RAMEN_SRC)/doc/raql/toc.html
+	cp $^ src/doc
+
+$(RAMEN_SRC)/doc/doc.qrc: $(wildcard src/doc/*.html) src/doc/toc.html
+	$(MAKE) -C $(RAMEN_SRC) doc/doc.qrc
+
+$(RAMEN_SRC)/doc/raql/toc.html:
+	$(MAKE) -C $(RAMEN_SRC) doc/raql/toc.html
+
+src/doc/doc.qrc: $(RAMEN_SRC)/doc/doc.qrc
+	cp $< $@
 
 # This ico file is used for Windows app icon and internally by RmAdmin (in the about window):
 src/rmadmin.ico: src/icon.png
