@@ -30,7 +30,6 @@ enum t {
   Record,
   GlobalVar,
 };
-
 constexpr size_t t_size { 14 };
 inline std::ostream &operator<<(std::ostream &os, t const &v) {
   switch (v) {

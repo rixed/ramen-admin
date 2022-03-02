@@ -44,7 +44,6 @@ enum t {
   Record,
   GlobalVar,
 };
-
 constexpr size_t t_size { 14 };
 struct t40df163e80e2c56cfae759a1807c4d79 : public std::tuple<
   ::dessser::gen::raql_variable::t,
