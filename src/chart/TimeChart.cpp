@@ -59,6 +59,7 @@ TimeChart::TimeChart(TimeChartEditWidget *editWidget_, QWidget *parent)
       editWidget(editWidget_) {
   setMinimumSize(tickLabelWidth * 2 + minPlotWidth + 2 * plotVerticalMargin,
                  tickLabelHeight * 5);
+  setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 
   /* Connect to signals from the editWidget:
    * - for axis, a signal when any axis config is changed

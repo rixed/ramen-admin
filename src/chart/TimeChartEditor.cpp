@@ -42,6 +42,7 @@ TimeChartEditor::TimeChartEditor(QPushButton *submitButton,
   timeLinesLayout->addWidget(chart, 1);
   timeLinesLayout->addWidget(timeLine, 0);
   timeLinesLayout->setSpacing(0);
+  timeLinesLayout->setContentsMargins(0, 0, 0, 0);
   timeLines = new QWidget(this);
   timeLines->setObjectName("timeLines");
   timeLines->setLayout(timeLinesLayout);
