@@ -90,12 +90,15 @@ class Function : public QObject, public GraphData {
   // Returns the pastData if possible:
   std::shared_ptr<PastData> getPast();
 
+  /* Return the previous/next time present in the data.
+   * Used to extend the time range when drawing charts */
+  std::optional<double> previousTime(double) const;
+  std::optional<double> nextTime(double) const;
+
   /* Iterate over all tuples over the time range, be them in pastData or the
-   * tailModel. Also request for missing past data.
-   * if onePast is true, include one point before/after the range given
-   * (useful to draw line plots) */
+   * tailModel. Also request for missing past data. */
   void iterValues(
-      double since, double until, bool onePast, std::vector<int> const &columns,
+      double since, double until, std::vector<int> const &columns,
       /* TODO: document the lifespan on those pointers to raql_value. Is
        * it safe to store? If not, shouldn't they be shared_ptr? */
       std::function<void(double,

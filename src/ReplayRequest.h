@@ -63,6 +63,7 @@ class ReplayRequest : public QObject {
 
   static QString const qstringOfStatus(ReplayRequest::Status const);
 
+  /* from the request, generally not equal to min/max times of tuples: */
   double since, until;
 
   /* Where the results are stored (in event time order) */

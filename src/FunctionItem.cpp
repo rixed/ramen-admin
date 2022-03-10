@@ -213,8 +213,108 @@ std::shared_ptr<PastData> Function::getPast() {
   return pastData;
 }
 
+std::optional<double> Function::previousTime(double t) const {
+  std::optional<double> best;
+
+  if (pastData) {
+    for (ReplayRequest &c : pastData->replayRequests) {
+      std::lock_guard<std::mutex> guard{c.lock};
+
+      if (c.tuples.empty()) continue;
+      double const t0{c.tuples.cbegin()->first};
+      if (!std::isnan(t0) && t0 >= t) break; // replays are ordered by time
+      double const t1{c.tuples.crbegin()->first};
+      if (!std::isnan(t1) && t1 < t) {
+        best = t1;
+        continue;
+      }
+      for (std::pair<double const,
+                     std::shared_ptr<dessser::gen::raql_value::t const> > const
+               &tuple : c.tuples) {
+        double const t_{tuple.first};
+        if (std::isnan(t_)) continue;
+        if (t_ < t) best = t_;
+        else break; // replays are ordered by time
+      }
+    }
+  }
+
+  // FIXME: lock the tailModel to prevent points being added while it's iterated
+  if (tailModel) {
+    if (! tailModel->order.empty()) {
+      double const t0{tailModel->order.cbegin()->first};
+      if (!std::isnan(t0) && t0 < t) {
+        double const t1{tailModel->order.crbegin()->first};
+        if (!std::isnan(t1) && t1 < t) {
+          if (!best || *best < t1) best = t1;
+        } else {
+          for (std::pair<double const, size_t> const &ordered : tailModel->order) {
+            double const t_{ordered.first};
+            if (std::isnan(t_)) continue;
+            if (t_ >= t) break;
+            if (!best || *best < t_) best = t_;
+          }
+        }
+      }
+    }
+  }
+
+  return best;
+}
+
+std::optional<double> Function::nextTime(double t) const {
+  std::optional<double> best;
+
+  // FIXME: lock the tailModel to prevent points being added while it's iterated
+  if (tailModel) {
+    if (! tailModel->order.empty()) {
+      double const t1{tailModel->order.crbegin()->first};
+      if (!std::isnan(t1) && t1 > t) {
+        double const t0{tailModel->order.cbegin()->first};
+        if (!std::isnan(t0) && t0 > t) {
+          if (!best || *best > t0) best = t0;
+        } else {
+          for (auto it = tailModel->order.crbegin() ;
+               it != tailModel->order.crend() ; it++) {
+            double const t_{it->first};
+            if (std::isnan(t_)) continue;
+            if (t_ < t) break;
+            if (!best || *best > t_) best = t_;
+          }
+        }
+      }
+    }
+  }
+
+  if (pastData) {
+    for (auto c = pastData->replayRequests.rbegin();
+         c != pastData->replayRequests.rend(); c++) {
+      std::lock_guard<std::mutex> guard{c->lock};
+
+      if (c->tuples.empty()) continue;
+      double const t1{c->tuples.crbegin()->first};
+      if (!std::isnan(t1) && t1 <= t) break; // replays are ordered by time
+      double const t0{c->tuples.cbegin()->first};
+      if (!std::isnan(t0) && t0 > t) {
+        if (! best || *best > t0) best = t0;
+        continue;
+      }
+      for (auto tuple = c->tuples.crbegin();
+           tuple != c->tuples.crend(); tuple++) {
+        double const t_{tuple->first};
+        if (std::isnan(t_)) continue;
+        if (t_ > t) {
+          if (!best || *best > t_) best = t_;
+        } else break; // replays are ordered by time
+      }
+    }
+  }
+
+  return best;
+}
+
 void Function::iterValues(
-    double since, double until, bool onePast, std::vector<int> const &columns,
+    double since, double until, std::vector<int> const &columns,
     std::function<void(
         double,
         std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > const)>
@@ -240,30 +340,10 @@ void Function::iterValues(
     qDebug() << qSetRealNumberPrecision(13) << "Function::iterValues since"
              << since << "until" << until;
 
-  // We need the last tuple from PastData when we start drawing the tail:
-  double lastTime;
-  std::shared_ptr<dessser::gen::raql_value::t const> last;
-  pastData->iterTuples(
-      since, until, onePast,
-      [&cb, &columns, &last, &lastTime](
-          double time,
-          std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
-        Q_ASSERT(!last || lastTime <= time);
-        lastTime = time;
-        last = tuple;
-        std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > v;
-        v.reserve(columns.size());
-        for (unsigned column : columns) {
-          v.push_back(columnValue(*tuple, column));
-        }
-        cb(time, v);
-      });
-
-  /* Then for tail data: */
-
+  // A function to build the vector of requested values and call [cb]:
   std::function<void(double,
                      std::shared_ptr<dessser::gen::raql_value::t const>)>
-      sendTuple([&cb, &columns](
+      send_tuple([&cb, &columns](
                     double time,
                     std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
         std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > v;
@@ -273,33 +353,23 @@ void Function::iterValues(
         cb(time, v);
       });
 
+  pastData->iterTuples(since, until, send_tuple);
+
+  /* Then for tail data: */
+
   // FIXME: lock the tailModel to prevent points being added while we iterate
   for (std::pair<double const, size_t> const &ordered : tailModel->order) {
+    double const time{ordered.first};
     std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const> > const
         &tuple(tailModel->tuples[ordered.second]);
-    Q_ASSERT(ordered.first == tuple.first);
+    Q_ASSERT(time == tuple.first);
 
-    /* Despite we never request past data after the oldest tail, it can
-     * happen that past data overlap with the tail, because tail is just
-     * cached or because past data is requested even before we received the
-     * first tail tuple. In this case we favor past data and skip the tail
-     * tuples: */
-    if (last && lastTime > tuple.first) continue;
-
-    if (tuple.first < since) {
-      if (onePast) {
-        lastTime = tuple.first;
-        last = tuple.second;
+    if (time >= since) {
+      if (time <= until) {
+        send_tuple(time, tuple.second);
+      } else {
+        break;
       }
-    } else if (tuple.first < until) {
-      if (last) {
-        sendTuple(lastTime, last);
-        last = nullptr;
-      }
-      sendTuple(tuple.first, tuple.second);
-    } else {
-      if (onePast) sendTuple(tuple.first, tuple.second);
-      break;
     }
   }
 }

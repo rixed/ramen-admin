@@ -786,8 +786,16 @@ void TimeChart::paintEvent(QPaintEvent *event) {
                          << " between " << stringOfDate(m_viewPort.first)
                          << " and " << stringOfDate(m_viewPort.second);
 
+    /* In order to be able to draw the chart properly we must extend the
+     * requested time range (note that for stacked charts it is not enough to
+     * ask for just one more point; All points from the previous/next time
+     * steps are needed. */
+    double const since_{m_viewPort.first};
+    double const since{res.func->previousTime(since_).value_or(since_)};
+    double const until_{m_viewPort.second};
+    double const until{res.func->nextTime(until_).value_or(until_)};
     res.func->iterValues(
-        m_viewPort.first, m_viewPort.second, true, res.columns,
+        since, until, res.columns,
         [&res](double time,
                std::vector<std::shared_ptr<
                    dessser::gen::raql_value::t const>> const values) {

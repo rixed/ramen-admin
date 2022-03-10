@@ -209,39 +209,28 @@ bool PastData::request(double since, double until, bool canPostpone) {
 }
 
 void PastData::iterTuples(
-    double since, double until, bool onePast,
+    double since, double until,
     std::function<void(double,
                        std::shared_ptr<dessser::gen::raql_value::t const>)>
         cb) {
-  double lastTime;
-  std::shared_ptr<dessser::gen::raql_value::t const> last;
-
   check();
 
   for (ReplayRequest &c : replayRequests) {
     std::lock_guard<std::mutex> guard{c.lock};
 
-    if (c.since >= until) break;
-    if (c.until <= since) continue;
+    if (c.since > until) break;
+    if (c.until < since) continue;
 
     for (std::pair<double const,
                    std::shared_ptr<dessser::gen::raql_value::t const> > const
              &tuple : c.tuples) {
-      if (tuple.first < since) {
-        if (onePast) {
-          lastTime = tuple.first;
-          last = tuple.second;
+      double const time{tuple.first};
+      if (time >= since) {
+        if (time <= until) {
+          cb(time, tuple.second);
+        } else {
+          return;
         }
-      } else if (tuple.first < until) {
-        if (last) {
-          Q_ASSERT(lastTime <= tuple.first);
-          cb(lastTime, last);
-          last = nullptr;
-        }
-        cb(tuple.first, tuple.second);
-      } else {
-        if (onePast) cb(tuple.first, tuple.second);
-        return;
       }
     }
   }

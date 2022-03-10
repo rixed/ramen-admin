@@ -83,10 +83,8 @@ class PastData : public QObject {
   /* Returns true if the query can either be sent or postponed: */
   bool request(double since, double until, bool canPostpone = true);
 
-  /* If onePast, also include the points before/after the requested time
-   * range: */
   void iterTuples(
-      double since, double until, bool onePast,
+      double since, double until,
       std::function<void(double,
                          std::shared_ptr<dessser::gen::raql_value::t const>)>);
 
