@@ -996,8 +996,8 @@ void TimeChart::Axis::iterTime(
 
   if (0 == numValues) return;
 
-  std::vector<std::tuple<std::optional<qreal>, QString, QColor>> values{
-      numValues};
+  std::vector<std::tuple<std::optional<qreal>, QString, QColor>> values(
+      numValues);
 
   size_t num_tuples[1 + numValues];  // 1+ to satisfies clang-tidy
 
@@ -1158,7 +1158,7 @@ void TimeChart::Legend::paint(QPainter &painter, QColor const &bg_color) {
                                                     legendMargin,
                                                     legendMargin)};
   QColor frame_color{bg_color};
-  frame_color.setAlpha(120);
+  frame_color.setAlpha(180);
   painter.setBrush(frame_color);
   painter.setPen(Qt::NoPen);
   painter.drawRect(frame_with_margins);
