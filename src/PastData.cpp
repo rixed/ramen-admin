@@ -236,6 +236,29 @@ void PastData::iterTuples(
   }
 }
 
+std::pair<double, double> PastData::range() const
+{
+  double t1{0.}, t2{0.};
+
+  // Look for the first non empty replayRequest:
+  for (ReplayRequest const &c : replayRequests) {
+    std::lock_guard<std::mutex> guard(c.lock);
+    if (c.tuples.empty()) continue;
+    t1 = c.tuples.cbegin()->first;
+    break;
+  }
+
+  // Look for the last non empty replayRequests:
+  for (auto c = replayRequests.crbegin();
+       c != replayRequests.crend(); c++) {
+    std::lock_guard<std::mutex> guard(c->lock);
+    if (c->tuples.empty()) continue;
+    t2 = c->tuples.cend()->first;
+  }
+
+  return std::make_pair(t1, t2);
+}
+
 void PastData::replayEnded() {
   decInFlight();
 

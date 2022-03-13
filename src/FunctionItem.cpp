@@ -355,11 +355,19 @@ void Function::iterValues(
 
   pastData->iterTuples(since, until, send_tuple);
 
-  /* Then for tail data: */
+  /* Then for tail data.
+   * Start by getting the time range of the pastdata to avoid override: */
+  std::pair <double, double> const past_data_range{pastData->range()};
 
   // FIXME: lock the tailModel to prevent points being added while we iterate
   for (std::pair<double const, size_t> const &ordered : tailModel->order) {
     double const time{ordered.first};
+    if (time >= past_data_range.first && time <= past_data_range.second) {
+      if (verbose)
+        qDebug() << "Skipping tail time" << stringOfDate(time)
+                 << "already in Pastdata";
+      continue;
+    }
     std::pair<double, std::shared_ptr<dessser::gen::raql_value::t const> > const
         &tuple(tailModel->tuples[ordered.second]);
     Q_ASSERT(time == tuple.first);

@@ -48,7 +48,7 @@ class ReplayRequest : public QObject {
 
  public:
   // Protects status, since, until and tuples:
-  std::mutex lock;
+  mutable std::mutex lock;
 
   std::time_t started;  // When the query was sent (for timeout)
 

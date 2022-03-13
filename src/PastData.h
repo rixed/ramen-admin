@@ -72,6 +72,8 @@ class PastData : public QObject {
 
   std::shared_ptr<EventTime const> eventTime;
 
+  /* If set, this is where the tail starts. No replay queries must go beyond
+   * this point. */
   double maxTime = NAN;
 
   PastData(std::string const &site, std::string const &program,
@@ -87,6 +89,11 @@ class PastData : public QObject {
       double since, double until,
       std::function<void(double,
                          std::shared_ptr<dessser::gen::raql_value::t const>)>);
+
+  /* Returns the time range covered by all received values.
+   * Returns a range of 0 width if there are no values yet. */
+  // FIXME: ask for a lock on replayRequests
+  std::pair<double, double> range() const;
 
  protected slots:
   void replayEnded();
