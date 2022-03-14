@@ -323,7 +323,18 @@ HEADERS += \
   ProgramPartItem.h \
   SiteItem.h \
   stream/layout.h \
-  stream/GraphView.h
+  stream/GraphView.h \
+  omni/OmniTreeItem.h \
+  omni/OmniTreePath.h \
+  omni/OmniTreeSource.h \
+  omni/OmniTreeSchema.h \
+  omni/OmniTreeFunction.h \
+  omni/OmniTreeWorker.h \
+  omni/OmniTreeStats.h \
+  omni/OmniTreeProcess.h \
+  omni/OmniTreeOutput.h \
+  omni/OmniTreeModel.h \
+  omni/OmniTreeWidget.h
 
 SOURCES += \
   $$SOURCES_DESSSERC_GEN \
@@ -501,6 +512,17 @@ SOURCES += \
   SiteItem.cpp \
   stream/layout.cpp \
   stream/GraphView.cpp \
+  omni/OmniTreeItem.cpp \
+  omni/OmniTreePath.cpp \
+  omni/OmniTreeSource.cpp \
+  omni/OmniTreeSchema.cpp \
+  omni/OmniTreeFunction.cpp \
+  omni/OmniTreeWorker.cpp \
+  omni/OmniTreeStats.cpp \
+  omni/OmniTreeProcess.cpp \
+  omni/OmniTreeOutput.cpp \
+  omni/OmniTreeModel.cpp \
+  omni/OmniTreeWidget.cpp \
   main.cpp
 
 RESOURCES = resources.qrc doc/doc.qrc

@@ -236,8 +236,7 @@ void PastData::iterTuples(
   }
 }
 
-std::pair<double, double> PastData::range() const
-{
+std::pair<double, double> PastData::range() const {
   double t1{0.}, t2{0.};
 
   // Look for the first non empty replayRequest:
@@ -249,8 +248,7 @@ std::pair<double, double> PastData::range() const
   }
 
   // Look for the last non empty replayRequests:
-  for (auto c = replayRequests.crbegin();
-       c != replayRequests.crend(); c++) {
+  for (auto c = replayRequests.crbegin(); c != replayRequests.crend(); c++) {
     std::lock_guard<std::mutex> guard(c->lock);
     if (c->tuples.empty()) continue;
     t2 = c->tuples.cend()->first;

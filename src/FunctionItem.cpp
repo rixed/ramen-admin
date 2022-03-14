@@ -222,7 +222,7 @@ std::optional<double> Function::previousTime(double t) const {
 
       if (c.tuples.empty()) continue;
       double const t0{c.tuples.cbegin()->first};
-      if (!std::isnan(t0) && t0 >= t) break; // replays are ordered by time
+      if (!std::isnan(t0) && t0 >= t) break;  // replays are ordered by time
       double const t1{c.tuples.crbegin()->first};
       if (!std::isnan(t1) && t1 < t) {
         best = t1;
@@ -233,22 +233,25 @@ std::optional<double> Function::previousTime(double t) const {
                &tuple : c.tuples) {
         double const t_{tuple.first};
         if (std::isnan(t_)) continue;
-        if (t_ < t) best = t_;
-        else break; // replays are ordered by time
+        if (t_ < t)
+          best = t_;
+        else
+          break;  // replays are ordered by time
       }
     }
   }
 
   // FIXME: lock the tailModel to prevent points being added while it's iterated
   if (tailModel) {
-    if (! tailModel->order.empty()) {
+    if (!tailModel->order.empty()) {
       double const t0{tailModel->order.cbegin()->first};
       if (!std::isnan(t0) && t0 < t) {
         double const t1{tailModel->order.crbegin()->first};
         if (!std::isnan(t1) && t1 < t) {
           if (!best || *best < t1) best = t1;
         } else {
-          for (std::pair<double const, size_t> const &ordered : tailModel->order) {
+          for (std::pair<double const, size_t> const &ordered :
+               tailModel->order) {
             double const t_{ordered.first};
             if (std::isnan(t_)) continue;
             if (t_ >= t) break;
@@ -267,15 +270,15 @@ std::optional<double> Function::nextTime(double t) const {
 
   // FIXME: lock the tailModel to prevent points being added while it's iterated
   if (tailModel) {
-    if (! tailModel->order.empty()) {
+    if (!tailModel->order.empty()) {
       double const t1{tailModel->order.crbegin()->first};
       if (!std::isnan(t1) && t1 > t) {
         double const t0{tailModel->order.cbegin()->first};
         if (!std::isnan(t0) && t0 > t) {
           if (!best || *best > t0) best = t0;
         } else {
-          for (auto it = tailModel->order.crbegin() ;
-               it != tailModel->order.crend() ; it++) {
+          for (auto it = tailModel->order.crbegin();
+               it != tailModel->order.crend(); it++) {
             double const t_{it->first};
             if (std::isnan(t_)) continue;
             if (t_ < t) break;
@@ -293,19 +296,20 @@ std::optional<double> Function::nextTime(double t) const {
 
       if (c->tuples.empty()) continue;
       double const t1{c->tuples.crbegin()->first};
-      if (!std::isnan(t1) && t1 <= t) break; // replays are ordered by time
+      if (!std::isnan(t1) && t1 <= t) break;  // replays are ordered by time
       double const t0{c->tuples.cbegin()->first};
       if (!std::isnan(t0) && t0 > t) {
-        if (! best || *best > t0) best = t0;
+        if (!best || *best > t0) best = t0;
         continue;
       }
-      for (auto tuple = c->tuples.crbegin();
-           tuple != c->tuples.crend(); tuple++) {
+      for (auto tuple = c->tuples.crbegin(); tuple != c->tuples.crend();
+           tuple++) {
         double const t_{tuple->first};
         if (std::isnan(t_)) continue;
         if (t_ > t) {
           if (!best || *best > t_) best = t_;
-        } else break; // replays are ordered by time
+        } else
+          break;  // replays are ordered by time
       }
     }
   }
@@ -344,8 +348,8 @@ void Function::iterValues(
   std::function<void(double,
                      std::shared_ptr<dessser::gen::raql_value::t const>)>
       send_tuple([&cb, &columns](
-                    double time,
-                    std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
+                     double time,
+                     std::shared_ptr<dessser::gen::raql_value::t const> tuple) {
         std::vector<std::shared_ptr<dessser::gen::raql_value::t const> > v;
         v.reserve(columns.size());
         for (unsigned column : columns)
@@ -357,7 +361,7 @@ void Function::iterValues(
 
   /* Then for tail data.
    * Start by getting the time range of the pastdata to avoid override: */
-  std::pair <double, double> const past_data_range{pastData->range()};
+  std::pair<double, double> const past_data_range{pastData->range()};
 
   // FIXME: lock the tailModel to prevent points being added while we iterate
   for (std::pair<double const, size_t> const &ordered : tailModel->order) {

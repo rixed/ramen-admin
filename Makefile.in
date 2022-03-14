@@ -179,7 +179,9 @@ MANUAL_CPP_SOURCES = \
   $(wildcard src/target_config/*.cpp) \
   $(wildcard src/target_config/*.h) \
   $(wildcard src/raw/*.cpp) \
-  $(wildcard src/raw/*.h)
+  $(wildcard src/raw/*.h) \
+  $(wildcard src/omni/*.cpp) \
+  $(wildcard src/omni/*.h)
 
 src/RmAdmin: \
 		src/rmadmin.ico \
