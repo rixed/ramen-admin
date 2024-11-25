@@ -1,0 +1,455 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Functions</title>
+  </head>
+<body>
+<h1>Functions</h1>
+
+<h3>Read</h3>
+
+<h4>From files</h4>
+
+<p>The simplest way to ingest values may be to read them from a CSV files. The <code>READ</code> operation does just that, reading a set of files and then waiting for more files to appear.</p>
+
+<p>Its syntax is:</p>
+
+<pre>
+  READ FROM FILES "file_pattern"
+    [ PREPROCESS WITH "preprocessor" ]
+    [ THEN DELETE [ IF condition ] ]
+  AS CSV
+    [ SEPARATOR "separator" ]
+    [ NULL "null_character_sequence" ]
+    [ [ NO ] QUOTES ]
+    [ ESCAPE WITH "escapement_character_sequence" ]
+    [ VECTORS OF CHARS AS [ STRING | VECTOR ] ]
+    [ CLICKHOUSE SYNTAX ]
+    (
+      first_field_name first_field_type [ [ NOT ] NULL ],
+      second_field_name second_field_type [ [ NOT ] NULL ],
+      ...
+    )
+</pre>
+
+<p>If <code>THEN DELETE</code> is specified then files will be deleted as soon they have been read.</p>
+
+<p>The <code>file_pattern</code>, which must be quoted, is a file name that can use the star character ("*") as a wildcard matching any possible substring. This wildcard can only appear in the file name section of the path and not in any directory, though.</p>
+
+<p>In case a preprocessor is given then it must accept the file content in its standard input and outputs the actual CSV in its standard output.</p>
+
+<p>The CSV will then be read line by line, and a tuple formed from a line by splitting that line according to the delimiter (the one provided or the default coma (",")). The rules to parse each individual data types in the CSV are the same as to parse them as literal values in the function operation code.  In case a line fails to parse it will be discarded.</p>
+
+<p>The CSV reader cannot parse headers.  CSV field values can be double-quoted to escape the CSV separator from that value.</p>
+
+<p>If a value is equal to the string passed as NULL (the empty string by default) then the value will be assumed to be NULL.</p>
+
+<p>Field names must be valid identifiers (aka string made of letters, underscores and digits but as the first character).</p>
+
+<p>Examples:</p>
+
+<pre>
+  READ FROM FILE "/tmp/test.csv" SEPARATOR "\t" NULL "&lt;NULL&gt;"
+  AS CSV (
+    first_name string,
+    last_name string?,
+    year_of_birth u16,
+    year_of_death u16
+  )
+</pre>
+
+<pre>
+  READ FROM FILES "/tmp/test/*.csv" || (IF param.compression THEN ".gz" ELSE "")
+    PREPROCESSOR WITH (IF param.compression THEN "zcat" ELSE "")
+    THEN DELETE IF param.do_delete
+  AS CSV (
+    first_name string?,
+    last_name string
+  )
+</pre>
+
+<p>It is also possible to read from binary files in ClickHouse binary format, which is more efficient. Then instead of <code>CSV</code> the format is called <code>ROWBINARY</code> and the format specification in between parentheses must be given in Clickhouse's specific "NameAndType" format.</p>
+
+<p>Example:</p>
+
+<pre>
+  READ FROM
+    FILES "/tmp/data.chb" THEN DELETE
+    AS ROWBINARY (
+columns format version: 1
+2 columns:
+`first_name` Nullable(String)
+`last_name ` String
+);
+</pre>
+
+<h4>From Kafka</h4>
+
+<p>It is also possible to read data from <em>Kafka</em>. Then, instead of the <code>FILE</code> specification, one enters a <code>KAFKA</code> specification, like so:</p>
+
+<pre>
+  READ FROM KAFKA
+    TOPIC "the_topic_name"
+    [ PARTITIONS [1;2;3;...] ]
+    [ WITH OPTIONS
+        "metadata.broker.list" = "localhost:9092",
+        "max.partition.fetch.bytes" = 1000000,
+        "group.id" = "kafka_group" ]
+    AS ...
+</pre>
+
+<p>The options are transmitted verbatim to the Kafka client library <a href="https://github.com/edenhill/librdkafka">rdkafka</a>, refers to its documentation for more details.</p>
+
+<h3>Yield</h3>
+
+<p>If you just want a constant expression to supply data to its child functions you can use the yield expression. This is useful to build a periodic clock, or for tests.</p>
+
+<p>Examples:</p>
+
+<pre>
+  YIELD sum globally 1 % 10 AS count
+</pre>
+
+<pre>
+  YIELD 1 AS tick EVERY 10 MILLISECONDS
+</pre>
+
+<p>Yield merely produces an infinite stream of values. If no <code>every</code> clause is specified, then it will do so as fast as the downstream functions can consume them. With an <code>every</code> clause, it will output one tuple at that pace (useful for clocks).</p>
+
+<p>Syntax:</p>
+
+<pre>
+  YIELD expression1 AS name1, expression2 AS name2, expression3 AS name3... [ EVERY duration ]
+</pre>
+
+<h3>Select</h3>
+
+<p>The select operation is the meat of Ramen operation. It performs filtering, sorting, aggregation, windowing and projection. As each of those processes are optional let's visit each of them separately before looking at the big picture.</p>
+
+<h4>Receiving values from parents - the <em>from</em> clause</h4>
+
+<p>Apart for the few functions receiving their input from external sources, most functions receive them from other functions.</p>
+
+<p>The name of those functions are listed after the <code>FROM</code> keyword.</p>
+
+<p>Those names can be either relative to the present program or absolute.</p>
+
+<p>If only a function name is supplied (without a program name) then the function must be defined elsewhere in the same program. Otherwise, the source name must start with a program name. If that program name starts with <code>../</code> then it is taken relative to the current program. Otherwise, it is taken as the full name of the program.</p>
+
+<p>Examples:</p>
+
+<ul>
+<li><code>minutely_average</code>: another function in the same program;</li>
+<li><code>monitoring/hosts/httpd_stats</code>: function <code>httpd_stats</code> from the <code>monitoring/hosts</code> program;</li>
+<li><code>../../csv/tcp</code>: function <code>tcp</code> from the program which name relative to the current one is <code>../../csv</code>.</li>
+</ul>
+
+<p>Notice that contrary to unix file system names, Ramen program names do not start with a slash (<code>/</code>). The slash character only special function is to allow relative names.</p>
+
+<h4>Filtering - the <em>where</em> clause</h4>
+
+<p>If all you want is to select incoming values matching some conditions, all you need is a filter. For instance, if you have a source of persons and want to filter only men older than 40, you could create an operation consisting of a single <code>where</code> clause, such as:</p>
+
+<pre>
+  WHERE is_male AND age &gt; 40 FROM source
+</pre>
+
+<p>As is evidenced above, the syntax of the <code>where</code> clause is as simple as:</p>
+
+<pre>
+  WHERE condition FROM source
+</pre>
+
+<p>Notice that the clauses order within an operation generally doesn't matter so this would be equally valid:</p>
+
+<pre>
+  FROM source WHERE condition
+</pre>
+
+<p>The condition can be any expression which type is a non-nullable boolean.</p>
+
+<p>NOTE: The default <code>where</code> clause is <code>WHERE true</code>.</p>
+
+<h4>Joining sources - the <em>merge</em> clause</h4>
+
+<p>When selecting from several operation (as in <code>FROM operation1, operation2, ...</code>) the output of all those parent operations will be mixed together.  As parents will typically run simultaneously it is quite unpredictable how their output will mix.  Sometime, we'd like to synchronize those inputs though.</p>
+
+<p>It is easy and cheap to merge sort those outputs according to some fields, and the <code>merge</code> clause does exactly that. For instance:</p>
+
+<pre>
+  SELECT * FROM source1, source2, source3 MERGE ON timestamp
+</pre>
+
+<p>In case some parents are producing values at a much lower pace than the others, they might slow down the pipeline significantly. Indeed, after each tuple is merged in Ramen will have to wait for the next tuple of the slow source in order to select the smallest one.</p>
+
+<p>In that case, you might prefer not to wait longer than a specified timeout, and then exclude the slow parent from the merge sort until it starts emitting values again. You can to that with the <code>TIMEOUT</code> clause:</p>
+
+<pre>
+  SELECT * FROM parent1, parent2 MERGE ON field1, field2 TIMEOUT AFTER 3 SECONDS
+</pre>
+
+<p>Whenever the timed-out parent emits a tuple again it will be injected into the merge sort, with the consequence that in that case the produced values might not all be ordered according to the given fields.</p>
+
+<p>The <code>merge</code> clause syntax is:</p>
+
+<pre>
+  MERGE ON expression1, expression2, ... [ TIMEOUT AFTER duration ]
+</pre>
+
+<h4>Sorting - the <em>sort</em> clause</h4>
+
+<p>Contrary to SQL, in Ramen sorts the query input not its output. This is because in SQL <code>ORDER BY</code> is mostly a way to present the data to the user, while in Ramen <code>SORT</code> is used to enforce some ordering required by the aggregation operations or the windowing.  Also, on a persistent query you do not necessarily know what the output of an operation will be used for, but you know if and how the operation itself needs its input to be sorted.</p>
+
+<p>Of course, since the operations never end the sort cannot wait for all the inputs before sorting. The best we can do is to wait for some entries to arrive, and then take the smaller of those, then wait for the next one to arrive, and so on, thus sorting a sliding window.</p>
+
+<p>The maximum length of this sliding window must be specified with a constant integer: <code>SORT LAST 42</code> for instance. It is also possible to specify a condition on that window (as an expression) that, if true, will process the next smallest tuple available, so that this sliding window is not necessarily of fixed length. For instance: <code>SORT LAST 42 OR UNTIL AGE(creation_time) &gt; 60</code> would buffer at most 42 values, but would also process one after reception of a tuple which <code>creation_time</code> is older than 60 seconds.</p>
+
+<p>Finally, it must also be specified according to what expression (or list of expressions) the values must be ordered: <code>SORT LAST 42 BY creation_time</code>.</p>
+
+<p>The complete <code>sort</code> clause is therefore:</p>
+
+<pre>
+  SORT LAST n [ OR UNTIL expression1 ] BY expression2, expression3, ...
+</pre>
+
+<h4>Projection - the <em>select</em> clause</h4>
+
+<p>To follow up on previous example, maybe you are just interested in the persons name and age. So now you could create this operation to select only those:</p>
+
+<pre>
+  SELECT name, age FROM source
+</pre>
+
+<p>Instead of mere field names you can write more interesting expressions:</p>
+
+<pre>
+  SELECT (IF is_male THEN "Mr. " ELSE "Ms. ") + name AS name,
+         age date_of_birth as age_in_seconds
+  FROM source
+</pre>
+
+<p>The general syntax of the <code>select</code> clause is:</p>
+
+<pre>
+  SELECT expression1 AS name1, expression2 AS name2, ...
+</pre>
+
+<p>You can also replace _one_ expression anywhere in this list by a star (<code>*</code>).  All fields from the input which are not already present in the list will be copied over to the output. What is meant here by "being present" is: having the same field name and a compatible type. Since field names must be unique, this is an error if an expression of an incompatible type is aliased to the same name of an input type together with the star field selector.</p>
+
+<p>NOTE: The default <code>select</code> clause is: <code>SELECT *</code>.</p>
+
+<h4>Aggregation</h4>
+
+<p>Some functions that might be used in the <code>SELECT</code> build their result from several input values, and output a result only when some condition is met. Aggregation functions are a special case of stateful functions.  Stateful functions are functions that needs to maintain an internal state in order to be able to output a result. A simple example is the <code>lag</code> function, which merely output the past value for every new value.</p>
+
+<p>The internal state of those functions can be either global to the whole operation, or specific to a group, which is the default. A group is a set of input tuple sharing something in common. For instance, all persons with the same age and sex. Let's take an example, and compute the average salary per sex and age. <code>avg</code> is the archetypal aggregation function.</p>
+
+<pre>
+  SELECT avg salary FROM employee GROUP BY age, is_male
+</pre>
+
+<p>What happens here for each incoming tuple:</p>
+
+<ol>
+<li>Extract the fields age and is_male and makes it the <code>key</code> of this tuple;</li>
+<li>Look for the group for this key.
+    <ul>
+    <li>If not found, create a new group made only of this tuple. Initialize its average salary with this employee's salary;</li>
+    <li>If found, add this salary to the average computation.</li>
+    </ul></li>
+</ol>
+
+<p>The <code>group-by</code> clause in itself is very simple: it consists merely on a list of expressions building a key from any input tuple:</p>
+
+<pre>
+  GROUP BY expression1, expression2, ...
+</pre>
+
+<p>You can mix stateful functions drawing their state from the group the tuple under consideration belongs to, with stateful functions having a global state.  Where a stateful function draws its state from depends on the presence or absence of the <code>globally</code> modifier to the function name. For instance, let's also compute the global average salary:</p>
+
+<pre>
+  SELECT avg salary, avg globally salary AS global_avg_salary
+  FROM employee GROUP BY age, is_male
+</pre>
+
+<p>Each time the operation will output a result, it will have the average (so far) for the group that is output (automatically named <code>avg_salary</code> since no better name was provided) and the average (so far) globally (named explicitly <code>global_avg_salary</code>).</p>
+
+<p>Contrary to SQL, it is not an error to select a value from the input tuple with no aggregation function specified. The output tuple will then just use the current input tuple to get the value (similarly to what the <code>last</code> aggregation function would do).</p>
+
+<p>This is also what happens if you use the <code>*</code> (star) designation in the <code>select</code> clause. So for instance:</p>
+
+<pre>
+  SELECT avg salary, *
+  FROM employee GROUP BY age, is_male
+</pre>
+
+<p>...would output records made of the average value of the input field <code>salary</code> and all the fields of input records, using the last encountered values.</p>
+
+<p>NOTE: The default <code>group-by</code> clause is: nothing! All incoming records will be assigned to the same and only group, then.</p>
+
+<p>Hopefully all is clear so far. Now the question that's still to be addressed is: When does the operation output a result? That is controlled by the <code>commit</code> clause.</p>
+
+<h4>Windowing: the <em>commit</em> clause</h4>
+
+<p>Windowing is a major difference with SQL, which stops aggregating values when it has processed all the input. Since stream processors model an unbounded stream of inputs one has to give this extra piece of information.</p>
+
+<p>Conceptually, each time a tuple is received Ramen will consider each group one by one and evaluate the <code>COMMIT</code> condition to see if an output should be emitted.</p>
+
+<p>Obviously, Ramen tries very hard *not* to actually do this as it would be unbearably slow when the number of groups is large. Instead, it will consider only the groups for which the condition might have changed ; usually, that means only the group which current tuple belongs to.</p>
+
+<p>So, the syntax of the <code>commit</code> clause is simple:</p>
+
+<pre>
+  COMMIT AFTER condition
+</pre>
+
+<p>...where, once again, condition can be any expression which type is a non-nullable boolean.</p>
+
+<p>NOTE: The default <code>commit</code> clause is: <code>true</code>, to commit every selected incoming values.</p>
+
+<p>The next and final step to consider is: when a tuple is output, what to do with the group? The simplest and more sensible thing to do is to delete it so that a fresh new one will be created if we ever met the same key.</p>
+
+<p>Indeed, the above syntax is actually a shorthand for:</p>
+
+<pre>
+  COMMIT AND FLUSH AFTER condition
+</pre>
+
+<p>This additional <code>AND FLUSH</code> means exactly that: when the condition is true, commit the tuple _and_ delete (flush) the group.</p>
+
+<p>If this is the default, what's the alternative? It is to keep the group as-is and resume aggregation without changing the group in any way, with <code>KEEP</code>.</p>
+
+<p>A last convenient feature is that instead of committing the tuple after a condition becomes true, it is possible to commit it <em>before</em> the condition turns true. In practice, that means to commit the tuple that would have been committed the previous time that group received an input (and maybe also flush the group) before adding the new value that made the condition true.</p>
+
+<p>So the syntax for the <code>commit</code> clause that has been given in the previous section should really have been:</p>
+
+<pre>
+  COMMIT [ AND ( FLUSH | KEEP ) ] ] ( AFTER | BEFORE ) condition
+</pre>
+
+<p>So, as an example, suppose we want a preview of the average salaries emitted every time we added 10 persons in any aggregation group:</p>
+
+<pre>
+  SELECT avg salary, avg globally salary AS global_avg_salary
+  FROM employee GROUP BY age, is_male
+  COMMIT AND KEEP ALL AFTER (SUM 1) % 10 = 0
+</pre>
+
+
+<h4>Outputting: How Values Are Sent To Child Functions</h4>
+
+<p>When Ramen commits a tuple, what tuple exactly is it?</p>
+
+<p>The output tuple is the one that is created by the <code>select</code> clause, with no more and no less fields. The types of those fields is obviously heavily influenced by the type of the input tuple. This type itself comes mostly from the output type of the parent operations. Therefore changing an ancestor operation might change the output type of an unmodified operation.</p>
+
+<p>The output tuple is then sent to each of the children operations, before a new input tuple is read. No batching takes place in the operations, although batching does take place in the communication in between them (the ring-buffers).  Indeed, when an operation has no tuple to read it _sleeps_ for a dynamic duration that is supposed to leave enough time for N values to arrive, so that next time the operation is run by the operating system there are, in average, N values waiting.  This behavior is designed to be efficient (minimizing syscalls when busy and avoiding trashing the cache), but offers no guaranteed batching. If a computation requires batches then those batches have to be computed using windowing, as described above.</p>
+
+<h4>Outputting: Notifying External Tools</h4>
+
+<p>Ramen is designed to do alerting, that is to receive a lot of information, to analyze and triage it, and eventually to send some output result to some external program. By design, there is a huge asymmetry between input and output: Ramen receives large amount of data and produces very little of it.  This explains why the mechanisms for receiving values are designed to be efficient while mechanisms for sending values outside are rather designed to be convenient.</p>
+
+<p>In addition (or instead) of committing a tuple, Ramen can output a notification, which is a very special type of tuple. While output values are destined to be read by children workers, notifications are destined to be read by the alerter daemon and processed according to the alerter configuration, maybe resulting in an alert or some other kind of external trigger.</p>
+
+<p>A notification tuple has a name (that will be used by the alerter to route the notification) and some parameters supposed to give some more information about the alert.</p>
+
+<p>So for example, given a stream of people with both a name and a location, we could send a notification each time a person named "Waldo" is spotted:</p>
+
+<pre>
+  FROM employee
+  SELECT age, gender, salary
+  -- The notification with its name:
+  NOTIFY "Waldo Spotted" WHEN name = "Waldo"
+</pre>
+
+<p>NOTE: Notice here the <code>NOTIFY</code> clause replaces the <code>COMMIT</code> clause altogether.</p>
+
+<p>This works because the default <code>select</code> clause is <code>SELECT *</code> and <code>WHEN</code> is an alias for <code>WHERE</code>.</p>
+
+<h4>Timeseries and Event Times</h4>
+
+<p>In order to retrieve <a href="/glossary.html#Timeseries">time series</a> from output values it is necessary to provide information about what time should be associated with each tuple.</p>
+
+<p>Similarly, some functions need to know which time is associated with each value 9such as <code>TOP</code> or <code>REMEMBER</code>).</p>
+
+<p>Although it is convenient at time to be able to mix events which time is specified in various ways, it would nonetheless be tedious to compute the timestamp of every event every time this is required.</p>
+
+<p>This is why how to compute the start and stop time of events is part of every function definitions, so that Ramen can compute it whenever it is needed.</p>
+
+<p>This is the general format of this <em>event-time</em> clause:</p>
+
+<pre>
+  EVENT STARTING AT identifier [ * scale ]
+      [ ( WITH DURATION ( identifier [ * scale ] | constant ) |
+          AND STOPPING AT identifier [ * scale ] ) ]
+</pre>
+
+<p>Contrary to most stream processing tools, events have not only a time but a duration, that can be specified either as an actual length or as an ending time. This is because Ramen has been originally designed to accommodate call records.</p>
+
+<p>In the above, <code>identifier</code> represent the name of an output field where the event time (or duration) is to be found. <code>scale</code> must be a number and the field it applies to will be multiplied by this number to obtain seconds (either to build a time as a <span style="font-variant: small-caps">UNIX</span> timestamp or to obtain a duration).  <code>constant</code> is a constant number of seconds representing the duration of the event, if it's known and constant.</p>
+
+<p>Notice that Ramen tries hard to inherit event time clauses from parents to children so they do not have to be specified over and over again.</p>
+
+<p>As a further simplification, if no event-time clause is present but the function outputs a field named <code>start</code> then it will be assumed it contains the timestamp of the event start time; and similarly for a field names <code>stop</code>.</p>
+
+<p>With all these information, the <a href="man/timeseries.html">timeseries</a> command will be able to produce accurate results.</p>
+
+<p>For instance if we had minutely metric collection from sensors with a field "time" in milliseconds we could write:</p>
+
+<pre>
+  SELECT whatever FROM sensors WHERE some_condition
+  EVENT STARTING AT time * 0.001 WITH DURATION 30
+</pre>
+
+<h4>The Complete Picture</h4>
+
+<p>We are now able to give the full syntax and semantic of the <code>Group By</code> operation:</p>
+
+<pre>
+  [ SELECT expression1 AS name1, expression2 AS name2, ... ]
+  [ ( WHERE | WHEN ) condition ]
+  FROM source1, source2, ...
+  [ GROUP BY expression1, expression2, ... ]
+  [ [ COMMIT ],
+    [ NOTIFY name ],
+    [ ( FLUSH | KEEP ) ]
+    ( AFTER | BEFORE ) condition ]
+  [ EVENT STARTING AT identifier [ * scale ]
+     [ ( WITH DURATION ( identifier [ * scale ] | constant ) |
+         AND STOPPING AT identifier [ * scale ] ) ] ]
+</pre>
+
+<p>Each of those clauses can be specified in any order and can be omitted but for the <code>from</code> clause.</p>
+
+<p>The semantic is:</p>
+
+<p>For each input tuple,</p>
+<ol>
+<li>compute the key;</li>
+<li>retrieve or create the group in charge of that key;</li>
+<li>evaluate the <code>where</code> clause:
+  <ul>
+  <li>if it is false:
+    <ol>
+    <li>skip that input;</li>
+    <li>discard the new aggregate that might have been created.</li>
+    </ol></li>
+  <li>if it is true:
+    <ol>
+    <li>accumulates that input into that aggregate (actual meaning depending on what functions are used in the operation);</li>
+    <li>compute the current output-tuple;</li>
+    <li>evaluates the <code>commit</code> clause:
+      <ul>
+      <li>if it is true:
+        <ol>
+        <li>send the output tuple to all children;</li>
+        <li>also maybe store it on disc;</li>
+        <li>unless <code>KEEP</code>, delete this group.</li>
+        </ol></li>
+      </ul></li>
+    <li>consider the commit condition of other groups if they depend in the last input tuple.</li>
+    </ol></li>
+  </ul></li>
+</ol>
+
+</body>
+</html>

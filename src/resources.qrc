@@ -24,7 +24,7 @@
     <file>pix/stackedChart.svg</file>
     <file>pix/stackCenteredChart.svg</file>
     <!-- also some static manual pages -->
-    <file>doc/raql_toc.html</file>
+    <file>doc/toc.html</file>
     <file>doc/raql_basics.html</file>
     <file>doc/raql_values.html</file>
     <file>doc/raql_exprs.html</file>

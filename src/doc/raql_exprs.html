@@ -1,0 +1,278 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Functions</title>
+  </head>
+<body>
+<h1>Expressions</h1>
+
+<h3>Literal values</h3>
+
+<p>Any literal value (as described in the previous section) is a valid expression.</p>
+
+<a name="record-field-names">
+<h3>Record field names</h3>
+</a>
+
+<p>In addition to literal values one can refer to a record field. Which records are available depends on the <a href="/glossary.html#Clause">clause</a> but the general syntax is: <code>record.field_name</code>.</p>
+
+<p>The prefix (before the dot) can be omitted in many cases; if so, the field is understood to refer to the "in" record (the input record).</p>
+
+<p>Here is a list of all possible records, in order of appearance in the data flow:</p>
+
+<a name="input-value">
+<h4>Input value</h4>
+</a>
+
+<p>The value that has been received as input.  Its name is <code>in</code> and that's also the default when a record name is omitted.</p>
+
+<p>You can use the <code>in</code> value in all clauses as long as there is an input.  When used in a <code>commit</code> clause, it refers to the last received value.</p>
+
+<a name="output-value">
+<h4>Output value</h4>
+</a>
+
+<p>The value that is going to be output (if the <code>COMMIT</code> condition holds <code>true</code>).  Its name is <code>out</code>.  The only places where it can be used is in the commit clause.</p>
+
+<p>It is also possible to refer to fields from the out record in <code>select</code> clauses which creates the out value, but only if the referred fields has been defined earlier. So for instance this is valid:</p>
+
+<pre>
+  SELECT
+    sum payload AS total,
+    end - start AS duration,
+    total / duration AS bps
+</pre>
+
+<p>...where we both define and reuse the fields <code>total</code> and <code>duration</code>. Notice that here the name of the record has been eluded -- despite "in" being the default value, on some conditions it is OK to leave out the "out" prefix as well.  This would be an equivalent, more explicit statement:</p>
+
+<pre>
+  SELECT
+    sum in.payload AS total,
+    in.end - in.start AS duration,
+    out.total / out.duration AS bps
+</pre>
+
+<p>It is important to keep in mind that the input and output values have different types (in general).</p>
+
+<a name="local-last-out">
+<h4>Previous output value</h4>
+</a>
+
+<p>Named <code>previous</code>, refers to the last output value for this group.</p>
+
+<p>Can be used in <code>select</code>, <code>where</code> and <code>commit</code> clauses.</p>
+
+<p>Notice that refering to this value in an expression has some runtime cost in term
+of memory, since group state must be kept in memory after the group value has been
+committed. So take care not to use this when grouping on potentially large dimension
+key spaces.</p>
+
+<p>When no values have been output yet, any field read from <code>previous</code> is just NULL. Therefore, using <code>previous</code> makes it mandatory to always test for NULL.</p>
+
+<p>Technically, the <code>previous</code> value has the same type as the <code>out</code> value with all fields nullable.</p>
+
+<p>The other name of the <code>previous</code> value is <code>local_last</code>, to contrast it with the next special value.</p>
+
+<a name="global-last-out">
+<h4>Previous output value (globally)</h4>
+</a>
+
+<p>Named <code>global_last</code>, this value is similar to <code>previous</code> aka <code>local_last</code> but it holds the last value that's been output from any aggregation group, ie. regardless of the key.</p>
+
+<p>It therefore has the same type as <code>local_last</code>.
+
+<p>Unlike <code>local_last</code>, <code>global_last</code> incurs no runtime penalty.</p>
+
+<a name="param-record">
+<h4>Parameters</h4>
+</a>
+
+<p>In addition to the values read from parent operations, an operation also receive some constant parameters that can be used to customize the behavior of a compiled <a href="/glossary.html#Program">program</a>. See the <a href="#programs">section about defining programs</a> below.</p>
+
+<p>Such parameters can be accessed unambiguously by prefixing them with the value name <code>param</code>.</p>
+
+<p>There is no restriction as to where this record can be used.</p>
+
+<a name="environment-record">
+<h4>Environment</h4>
+</a>
+
+<p>A RaQL program can also access its environment (as in the UNIX environment variables). Environment variables can be read from the <code>env</code> record.</p>
+
+<p>Any field's value from that record is a nullable string, that will indeed be NULL whenever the environment variable is not defined.</p>
+
+<p>There is no restriction as to where this record can be used.</p>
+
+<h3>Conditionals</h3>
+
+<p>Conditional expressions can appear anywhere an expression can.  Conditions are evaluated from left to right. Contrary to programming languages but like in SQL language, evaluation of alternatives do not stop as soon as the consequent is determined; in particular <em>the state of stateful functions will be updated even in non-taken branches</em>.</p>
+
+<h4>CASE Expressions</h4>
+
+<p>The only real conditional is the <em>case expression</em>. Other forms of conditionals are just syntactic sugar for it. Its general syntax is:</p>
+
+<pre>
+  CASE
+    WHEN cond1 THEN cons1
+    WHEN cond2 THEN cons2
+    ...
+    ELSE alt
+  END
+</pre>
+
+<p>...where you can have as many <code>when</code> clauses as you want, including 0, and the <code>else</code> clause is optional.</p>
+
+<p>Every conditions must be of type bool. Consequents can have any type as long as they have all the same. That is also the type of the result of the CASE expression.</p>
+
+<p>Regarding nullability: if there are no <em>else branch</em>, or if any of the condition or consequent is nullable, then the result is nullable. Otherwise it is not.</p>
+
+<h4>Variants</h4>
+
+<p><code>IF cond THEN cons</code> or <code>IF(cond, cons)</code>: simple variant that produce either <code>cons</code> (if <code>cond</code> is true) or <code>NULL</code>.</p>
+
+<p>`IF cond THEN cons ELSE alt<code> or </code>IF(cond, cons, alt)`: same as above but with an ELSE branch.</p>
+
+<h3>Operators</h3>
+
+<p>Predefined operators can be applied to expressions to form more complex expressions.</p>
+
+<p>You can use parentheses to group expressions.  A <a href="#table-of-precedence">table of precedence</a> is given at the end of this section.</p>
+
+<p>There is no way to define your own operator, short of adding them directly into Ramen source code.</p>
+
+<h4>Operator States</h4>
+
+<p>Most operators are stateless but some are stateful. Most stateful operators can also behave as stateless operator when passed a sequence of values. Many operators will aggregate values into a set in a certain way, and can thus be used as operands to other aggregate operators.</p>
+
+<p>For instance you can write: <code>SELECT AVG v</code> to get the average value of all input values of <code>v</code>, or <code>SELECT AVG SAMPLE 100 v</code> to get the average value of a random set of 100 values of <code>v</code>. In the later case, <code>AVG</code> does not really perform any aggregation but <code>SAMPLE</code> does.</p>
+
+<p>for every stateful operator that actually perform an aggregation, one can pick
+between two possible lifespans for the operators state: local to the current aggregation group, which is the default whenever an explicit group-by clause is present, or global (a single state for every groups). Thus it is possible to compute simultaneously an aggregate over all values with the same key and all values regardless of the key, such as in this example:</p>
+
+<pre>
+  SELECT AVG LOCALLY x AS local_avg,
+         AVG GLOBALLY x AS global_avg,
+         local_avg &lt; global_avg / 2 AS something_is_wrong
+  GROUP BY some_key;
+</pre>
+
+<p>Additionally, in some very rare cases it might be necessary to explicitly ask for the aggregate operator to operate over a given set of values, which can be enforced with the "IMMEDIATELY" keyword, such as in: <code>SELECT AVG IMMEDIATELY SAMPLE 100 x</code>.</p>
+
+<h4>Aggregates and NULLs</h4>
+
+<p>By default, aggregate functions will skip over NULL values. Consequently, aggregating nullable values result in a nullable result (since all input might be NULL).</p>
+
+<p>To configure that behavior, two keywords can be added right after the operator's name: <code>SKIP NULLS</code> (the default) and <code>KEEP NULLS</code>.</p>
+
+<a name="Operators">
+<h4>Operators</h4>
+</a>
+<div id="operator-manual">
+
+
+<div id="operator-index">
+<h5>Boolean operators</h5>
+
+<ul>
+<li><a href="raql/not.html" target="expr-manual">Not</a></li><li><a href="raql/and.html" target="expr-manual">And</a></li><li><a href="raql/or.html" target="expr-manual">Or</a></li><li><a href="raql/equality.html" target="expr-manual">Equality</a></li><li><a href="raql/comparison.html" target="expr-manual">Comparison</a></li><li><a href="raql/strict-comparison.html" target="expr-manual">Strict-comparison</a></li><li><a href="raql/aggrand.html" target="expr-manual">Aggrand</a></li><li><a href="raql/aggror.html" target="expr-manual">Aggror</a></li></ul>
+
+<h5>Arithmetic operators</h5>
+
+<ul>
+<li><a href="raql/add.html" target="expr-manual">Add</a></li><li><a href="raql/sub.html" target="expr-manual">Sub</a></li><li><a href="raql/neg.html" target="expr-manual">Neg</a></li><li><a href="raql/mul.html" target="expr-manual">Mul</a></li><li><a href="raql/div.html" target="expr-manual">Div</a></li><li><a href="raql/idiv.html" target="expr-manual">Idiv</a></li><li><a href="raql/mod.html" target="expr-manual">Mod</a></li><li><a href="raql/pow.html" target="expr-manual">Pow</a></li><li><a href="raql/abs.html" target="expr-manual">Abs</a></li><li><a href="raql/reldiff.html" target="expr-manual">Reldiff</a></li><li><a href="raql/ceil.html" target="expr-manual">Ceil</a></li><li><a href="raql/floor.html" target="expr-manual">Floor</a></li><li><a href="raql/round.html" target="expr-manual">Round</a></li><li><a href="raql/truncate.html" target="expr-manual">Truncate</a></li><li><a href="raql/aggrsum.html" target="expr-manual">Aggrsum</a></li><li><a href="raql/aggravg.html" target="expr-manual">Aggravg</a></li></ul>
+
+<h5>Trigonometric functions</h5>
+
+<ul>
+<li><a href="raql/pi.html" target="expr-manual">Pi</a></li><li><a href="raql/cos.html" target="expr-manual">Cos</a></li><li><a href="raql/sin.html" target="expr-manual">Sin</a></li><li><a href="raql/tan.html" target="expr-manual">Tan</a></li><li><a href="raql/acos.html" target="expr-manual">Acos</a></li><li><a href="raql/asin.html" target="expr-manual">Asin</a></li><li><a href="raql/atan.html" target="expr-manual">Atan</a></li><li><a href="raql/cosh.html" target="expr-manual">Cosh</a></li><li><a href="raql/sinh.html" target="expr-manual">Sinh</a></li><li><a href="raql/tanh.html" target="expr-manual">Tanh</a></li></ul>
+
+<h5>Arithmetic functions</h5>
+
+<ul>
+<li><a href="raql/exp.html" target="expr-manual">Exp</a></li><li><a href="raql/log.html" target="expr-manual">Log</a></li><li><a href="raql/log10.html" target="expr-manual">Log10</a></li><li><a href="raql/sqrt.html" target="expr-manual">Sqrt</a></li><li><a href="raql/sq.html" target="expr-manual">Sq</a></li></ul>
+
+<h5>Smoothing</h5>
+
+<ul>
+<li><a href="raql/smooth.html" target="expr-manual">Smooth</a></li><li><a href="raql/moveavg.html" target="expr-manual">Moveavg</a></li></ul>
+
+<h5>Value selection operators</h5>
+
+<ul>
+<li><a href="raql/min.html" target="expr-manual">Min</a></li><li><a href="raql/max.html" target="expr-manual">Max</a></li><li><a href="raql/aggrmin.html" target="expr-manual">Aggrmin</a></li><li><a href="raql/aggrmax.html" target="expr-manual">Aggrmax</a></li><li><a href="raql/aggrfirst.html" target="expr-manual">Aggrfirst</a></li><li><a href="raql/aggrlast.html" target="expr-manual">Aggrlast</a></li><li><a href="raql/largest.html" target="expr-manual">Largest</a></li><li><a href="raql/one-out-of.html" target="expr-manual">One-out-of</a></li><li><a href="raql/once-every.html" target="expr-manual">Once-every</a></li><li><a href="raql/lag.html" target="expr-manual">Lag</a></li></ul>
+
+<h5>Grouping/Sketching functions</h5>
+
+<ul>
+<li><a href="raql/top.html" target="expr-manual">Top</a></li><li><a href="raql/group.html" target="expr-manual">Group</a></li><li><a href="raql/sample.html" target="expr-manual">Sample</a></li><li><a href="raql/past.html" target="expr-manual">Past</a></li><li><a href="raql/percentile.html" target="expr-manual">Percentile</a></li><li><a href="raql/aggrhistogram.html" target="expr-manual">Aggrhistogram</a></li><li><a href="raql/count.html" target="expr-manual">Count</a></li><li><a href="raql/distinct.html" target="expr-manual">Distinct</a></li><li><a href="raql/fit.html" target="expr-manual">Fit</a></li></ul>
+
+<h5>Bit-wise operators</h5>
+
+<ul>
+<li><a href="raql/bit-and.html" target="expr-manual">Bit-and</a></li><li><a href="raql/bit-or.html" target="expr-manual">Bit-or</a></li><li><a href="raql/bit-xor.html" target="expr-manual">Bit-xor</a></li><li><a href="raql/bit-shift.html" target="expr-manual">Bit-shift</a></li><li><a href="raql/aggrbitand.html" target="expr-manual">Aggrbitand</a></li><li><a href="raql/aggrbitor.html" target="expr-manual">Aggrbitor</a></li><li><a href="raql/aggrbitxor.html" target="expr-manual">Aggrbitxor</a></li></ul>
+
+<h5>String related operators</h5>
+
+<ul>
+<li><a href="raql/length.html" target="expr-manual">Length</a></li><li><a href="raql/lower.html" target="expr-manual">Lower</a></li><li><a href="raql/upper.html" target="expr-manual">Upper</a></li><li><a href="raql/like.html" target="expr-manual">Like</a></li><li><a href="raql/index.html" target="expr-manual">Index</a></li><li><a href="raql/basename.html" target="expr-manual">Basename</a></li><li><a href="raql/concat.html" target="expr-manual">Concat</a></li><li><a href="raql/startswith.html" target="expr-manual">Startswith</a></li><li><a href="raql/endswith.html" target="expr-manual">Endswith</a></li><li><a href="raql/substring.html" target="expr-manual">Substring</a></li><li><a href="raql/split.html" target="expr-manual">Split</a></li><li><a href="raql/in.html" target="expr-manual">In</a></li></ul>
+
+<h5>Time related operators</h5>
+
+<ul>
+<li><a href="raql/now.html" target="expr-manual">Now</a></li><li><a href="raql/age.html" target="expr-manual">Age</a></li><li><a href="raql/parse_time.html" target="expr-manual">Parse_time</a></li><li><a href="raql/format_time.html" target="expr-manual">Format_time</a></li></ul>
+
+<h5>Networking related operators</h5>
+
+<ul>
+<li><a href="raql/countrycode.html" target="expr-manual">Countrycode</a></li><li><a href="raql/ipfamily.html" target="expr-manual">Ipfamily</a></li><li><a href="raql/in.html" target="expr-manual">In</a></li></ul>
+
+<h5>NULLs and conversions related operators</h5>
+
+<ul>
+<li><a href="raql/force.html" target="expr-manual">Force</a></li><li><a href="raql/is-null.html" target="expr-manual">Is-null</a></li><li><a href="raql/coalesce.html" target="expr-manual">Coalesce</a></li><li><a href="raql/cast.html" target="expr-manual">Cast</a></li><li><a href="raql/peek.html" target="expr-manual">Peek</a></li><li><a href="raql/uuid_of_u128.html" target="expr-manual">Uuid_of_u128</a></li><li><a href="raql/chr.html" target="expr-manual">Chr</a></li></ul>
+
+<h5>Miscellaneous operators</h5>
+
+<ul>
+<li><a href="raql/hysteresis.html" target="expr-manual">Hysteresis</a></li><li><a href="raql/hash.html" target="expr-manual">Hash</a></li><li><a href="raql/random.html" target="expr-manual">Random</a></li><li><a href="raql/in.html" target="expr-manual">In</a></li><li><a href="raql/remember.html" target="expr-manual">Remember</a></li></ul>
+
+</div>  <!-- operator-index -->
+<iframe id="operator-iframe" name="expr-manual" src="doc_placeholder.html"></iframe>
+</div>  <!-- operator-manual -->
+
+<a name="table-of-precedence">
+<h3>Operator precedence</h3>
+</a>
+
+<p>From higher precedence to lower precedence:</p>
+
+<table>
+<caption>Operator precedence</caption>
+<tr>
+  <th>Operator</th><th>Associativity</th>
+</tr><tr>
+  <td>functions</td>
+  <td>left to right</td>
+</tr><tr>
+  <td><code>not</code>, <code>is null</code>, <code>is not null</code></td>
+  <td>left to right</td>
+</tr><tr>
+  <td><code>^</code></td>
+  <td>right tot left</td>
+</tr><tr>
+  <td><code>*</code>, <code>//</code>, <code>/</code>, <code>%</code></td>
+  <td>left to right</td>
+</tr><tr>
+  <td><code>+</code>, <code>-</code></td>
+  <td>left to right</td>
+</tr><tr>
+  <td><code>&gt;</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>=</code>, <code>&lt;&gt;</code>, <code>!=</code></td>
+  <td>left to right</td>
+</tr><tr>
+  <td><code>or</code>, <code>and</code></td>
+  <td>left to right</td>
+</tr>
+</table>
+
+</body>
+</html>

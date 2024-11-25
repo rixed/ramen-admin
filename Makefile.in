@@ -183,6 +183,8 @@ MANUAL_CPP_SOURCES = \
   $(wildcard src/omni/*.cpp) \
   $(wildcard src/omni/*.h)
 
+HTML_DOC_PAGES = $(foreach page,$(notdir $(wildcard $(RAMEN_SRC)/site/raql/*.html)),src/doc/$(page))
+
 src/RmAdmin: \
 		src/rmadmin.ico \
 		$(EXTRA_ICON_FILES) \
@@ -190,7 +192,8 @@ src/RmAdmin: \
 		$(MANUAL_CPP_SOURCES) \
 		$(addprefix src/desssergen/, $(filter %.cc, $(TYPE_SOURCES:.type=.cc))) \
 		$(addprefix src/desssergen/, $(filter %.h, $(TYPE_SOURCES:.type=.h))) \
-		src/doc/doc.qrc
+		src/doc/doc.qrc \
+		$(HTML_DOC_PAGES)
 	@echo 'Generating RmAdmin $@'
 	cd src && @QMAKE@ $(QMAKE_EXTRA)
 	$(MAKE) -C src
@@ -200,9 +203,6 @@ src/RmAdmin: \
 	  chmod a+x $@ ;\
 	fi
 
-src/doc/add.html: $(wildcard $(RAMEN_SRC)/site/raql/*.html)
-	cp $^ src/doc
-
 src/doc/toc.html: $(RAMEN_SRC)/doc/raql/toc.html
 	cp $^ src/doc
 
@@ -211,6 +211,9 @@ $(RAMEN_SRC)/doc/doc.qrc: $(wildcard src/doc/*.html) src/doc/toc.html
 
 $(RAMEN_SRC)/doc/raql/toc.html:
 	$(MAKE) -C $(RAMEN_SRC) doc/raql/toc.html
+
+src/doc/%.html: $(RAMEN_SRC)/site/raql/%.html
+	cp $^ src/doc
 
 src/doc/doc.qrc: $(RAMEN_SRC)/doc/doc.qrc
 	cp $< $@
